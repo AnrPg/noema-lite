@@ -1,0 +1,43 @@
+{
+ "_doc": "Source registry for this subject. Order = chronological (last = newest). Maps chapter files and patch files to the source they came from. Items may carry an explicit 'src' that overrides inheritance.",
+ "sources": [
+  {
+   "id": "part1",
+   "title": "Databricks — Part 1",
+   "subtitle": "Prerequisites, platform tour, Delta Lake, compute, mastery roadmap",
+   "pages": "1–402",
+   "file": "sources/part1_pages_1-402.pdf",
+   "added": "2026-10-06",
+   "emoji": "📘"
+  },
+  {
+   "id": "part2",
+   "title": "Databricks — Part 2",
+   "subtitle": "Unity Catalog, data ingestion (COPY INTO, Auto Loader), Structured Streaming",
+   "pages": "403–569",
+   "file": "sources/part2_pages_403-569.pdf",
+   "added": "2026-10-06",
+   "emoji": "📗"
+  }
+ ],
+ "chapters": {
+  "ch01": "part1",
+  "ch02": "part1",
+  "ch03": "part1",
+  "ch04": "part1",
+  "ch05": "part1",
+  "ch06": "part1",
+  "ch07": "part1",
+  "ch08": "part1",
+  "ch09": "part1",
+  "ch10": "part1",
+  "ch11": "part2",
+  "ch12": "part2",
+  "ch13": "part2"
+ },
+ "patches": {
+  "ch11_links.json": "part2",
+  "ch12_links.json": "part2",
+  "ch13_links.json": "part2"
+ }
+}

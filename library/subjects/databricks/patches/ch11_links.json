@@ -1,0 +1,345 @@
+{
+ "patches": [
+  {
+   "chapter": "ch01",
+   "section": "ch01-s09",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → the full UC hierarchy",
+     "text": "Metastore → catalog → schema → object, managed vs external storage, and why UC governs metadata but never stores the bytes are now covered in depth — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch03",
+   "section": "ch03-s02",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → principals in production",
+     "text": "New: provision principals at the **account level**, and give **production ownership and write access** to groups / service principals, never personal users — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch03",
+   "section": "ch03-s03",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → inheritance, REVOKE, ownership, MANAGE, BROWSE",
+     "text": "Grants on a schema/catalog **flow down** to children (including future tables), so a table-level `REVOKE` can leave access in place. Ownership, MANAGE, BROWSE and SHOW GRANTS are covered too — see Chapter 11: Unity Catalog Mastery."
+    }
+   ],
+   "appendExercises": [
+    {
+     "id": "ch03-e703",
+     "type": "tf",
+     "section": "ch03-s03",
+     "difficulty": 2,
+     "tags": [
+      "pitfall",
+      "exam"
+     ],
+     "quick": false,
+     "q": "After `REVOKE SELECT ON TABLE company.finance.transactions FROM analysts`, analysts are guaranteed to lose read access to that table.",
+     "answer": false,
+     "explain": "False. If `SELECT` was also granted on the parent **schema** or **catalog**, the table inherits it and access remains. Always run SHOW GRANTS on the schema and catalog too (Chapter 11, Case 3)."
+    }
+   ],
+   "appendPitfalls": [
+    {
+     "title": "REVOKE on a table ≠ access gone",
+     "text": "Inherited SELECT on the schema or catalog keeps the table readable after a table-level REVOKE.",
+     "fix": "SHOW GRANTS on schema and catalog; restructure where SELECT is granted."
+    }
+   ],
+   "appendFlashcards": [
+    {
+     "q": "Why can a user still read a table after REVOKE SELECT ON TABLE?",
+     "a": "An inherited SELECT on the parent schema or catalog.",
+     "section": "ch03-s03"
+    }
+   ]
+  },
+  {
+   "chapter": "ch03",
+   "section": "ch03-s04",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → the 8-layer PERMISSION_DENIED algorithm",
+     "text": "The full algorithm puts **identity first** and adds three layers this checklist lacks: **workspace binding**, **external storage** (location / credential / cloud IAM) and **UC-compatible compute**. Mnemonic: *I Bet Cats Sit On Fluffy Silk Cushions* — see Chapter 11: Unity Catalog Mastery."
+    }
+   ],
+   "appendExercises": [
+    {
+     "id": "ch03-e701",
+     "type": "mcq",
+     "section": "ch03-s04",
+     "difficulty": 2,
+     "tags": [
+      "debug",
+      "exam"
+     ],
+     "quick": false,
+     "q": "The Phase-3 permission algorithm extends this section's checklist. Which layers does it ADD? (choose all)",
+     "options": [
+      "Workspace / catalog binding",
+      "External-storage permissions (external location, credential, cloud IAM)",
+      "UC-compatible compute",
+      "USE SCHEMA",
+      "Row filters / column masks"
+     ],
+     "answer": [
+      0,
+      1,
+      2
+     ],
+     "multi": true,
+     "why": [
+      "Added — grants can't override a missing binding.",
+      "Added — matters for external tables/volumes.",
+      "Added — correct grants on legacy compute still fail.",
+      "Already in the checklist.",
+      "Already in the checklist."
+     ],
+     "explain": "Full order: Identity → Binding → USE CATALOG → USE SCHEMA → Object → Fine-grained → Storage → Compute. Binding, storage and compute are the new layers; identity also moves to the front, because every grant is evaluated for the executing principal."
+    },
+    {
+     "id": "ch03-e702",
+     "type": "order",
+     "section": "ch03-s04",
+     "difficulty": 2,
+     "tags": [
+      "debug"
+     ],
+     "quick": false,
+     "q": "Put the 8 layers of the full PERMISSION_DENIED algorithm in order.",
+     "items": [
+      "Which principal actually executes?",
+      "Workspace / catalog binding",
+      "USE CATALOG",
+      "USE SCHEMA",
+      "Object privilege (SELECT …)",
+      "Row filter / column mask / ABAC",
+      "External storage (if relevant)",
+      "UC-compatible compute"
+     ],
+     "explain": "I Bet Cats Sit On Fluffy Silk Cushions: Identity, Binding, Catalog, Schema, Object, Fine-grained, Storage, Compute."
+    }
+   ],
+   "appendFlashcards": [
+    {
+     "q": "Full PERMISSION_DENIED mnemonic?",
+     "a": "I Bet Cats Sit On Fluffy Silk Cushions — Identity, Binding, Catalog, Schema, Object, Fine-grained, Storage, Compute.",
+     "section": "ch03-s04"
+    }
+   ]
+  },
+  {
+   "chapter": "ch03",
+   "section": "ch03-s05",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Level-up → ALL PRIVILEGES is not everything",
+     "text": "`ALL PRIVILEGES` **excludes MANAGE, EXTERNAL USE LOCATION and EXTERNAL USE SCHEMA**, and it is **evaluated dynamically** (new privileges are added automatically) — one more reason for restraint — see Chapter 11: Unity Catalog Mastery."
+    }
+   ],
+   "appendExercises": [
+    {
+     "id": "ch03-e704",
+     "type": "tf",
+     "section": "ch03-s05",
+     "difficulty": 2,
+     "tags": [
+      "exam",
+      "pitfall"
+     ],
+     "quick": false,
+     "q": "`ALL PRIVILEGES` is a fixed list that includes MANAGE.",
+     "answer": false,
+     "explain": "False twice: MANAGE (plus EXTERNAL USE LOCATION / EXTERNAL USE SCHEMA) is excluded, and ALL PRIVILEGES is evaluated dynamically, so it silently grows when new applicable privileges appear."
+    }
+   ],
+   "appendFlashcards": [
+    {
+     "q": "What does ALL PRIVILEGES exclude?",
+     "a": "MANAGE, EXTERNAL USE LOCATION, EXTERNAL USE SCHEMA.",
+     "section": "ch03-s05"
+    }
+   ]
+  },
+  {
+   "chapter": "ch04",
+   "section": "ch04-s02",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → workspace ≠ metastore",
+     "text": "Usually **one metastore per region**; many workspaces attach to it and share governance. A notebook lives in a workspace, but `prod.sales.orders` is registered in the metastore — see Chapter 11: Unity Catalog Mastery."
+    }
+   ],
+   "appendExercises": [
+    {
+     "id": "ch04-e701",
+     "type": "tf",
+     "section": "ch04-s02",
+     "difficulty": 1,
+     "tags": [
+      "exam"
+     ],
+     "quick": false,
+     "q": "A table created from workspace A can be queried from workspace B in the same region, if both use the same metastore, the principal has the grants and no workspace binding blocks it.",
+     "answer": true,
+     "explain": "True. Tables are registered in the regional **metastore**, not in a workspace. Same metastore + grants + no blocking binding = access from any attached workspace."
+    }
+   ],
+   "appendFlashcards": [
+    {
+     "q": "Typical number of UC metastores per region?",
+     "a": "One, shared by the region's workspaces.",
+     "section": "ch04-s02"
+    }
+   ]
+  },
+  {
+   "chapter": "ch04",
+   "section": "ch04-s12",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Level-up → Catalog Explorer as governance UI",
+     "text": "Per object you can see schema, details, **permissions, history, lineage, tags, dependencies**; BROWSE lets users discover objects without data access — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch04",
+   "section": "ch04-s13",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → catalog.schema.object",
+     "text": "The third name can be a table, view, **volume, function, model**, materialized view or streaming table — so the general form is `catalog.schema.object`. Catalog/schema design and creation privileges are covered — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch04",
+   "section": "ch04-s14",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Level-up → six permission-debugging cases",
+     "text": "Wrong identity, SELECT without USE SCHEMA, revoked-but-inherited, external-storage failures, volume READ/WRITE VOLUME and masked values each get a playbook — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch07",
+   "section": "ch07-s06",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → access mode = UC compatibility",
+     "text": "Classic compute in **Standard or Dedicated** access mode, serverless and Databricks SQL can access Unity Catalog. **Correct permissions + wrong legacy compute = still failure** — see Chapter 11: Unity Catalog Mastery."
+    }
+   ],
+   "appendExercises": [
+    {
+     "id": "ch07-e701",
+     "type": "tf",
+     "section": "ch07-s06",
+     "difficulty": 1,
+     "tags": [
+      "pitfall"
+     ],
+     "quick": false,
+     "q": "If a user's Unity Catalog grants are correct, the query works on any cluster, whatever its configuration.",
+     "answer": false,
+     "explain": "False. The compute must be UC-compatible (Standard/Dedicated classic, serverless, SQL warehouse). A legacy configuration fails even with perfect grants — layer 8 of the permission algorithm."
+    }
+   ],
+   "appendFlashcards": [
+    {
+     "q": "Which compute can access Unity Catalog?",
+     "a": "Classic Standard/Dedicated access mode, serverless, Databricks SQL.",
+     "section": "ch07-s06"
+    }
+   ]
+  },
+  {
+   "chapter": "ch08",
+   "section": "ch08-s12",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Level-up → what Gate 2 really contains",
+     "text": "\"Unity Catalog\" in Gate 2 is itself a chain: workspace binding → USE CATALOG → USE SCHEMA → object privilege → row filters / masks / ABAC → external storage — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch08",
+   "section": "ch08-s13",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Level-up → run-as = Case 1",
+     "text": "\"Notebook works, job/pipeline fails\" is Debugging Case 1 (wrong identity). The production example `gold_pipeline_sp` gets read-Silver + write-Gold grants only — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch05",
+   "section": "ch05-s12",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Level-up → Unity Catalog in depth is here",
+     "text": "The promised deep dive (catalog.schema.object, managed vs external, volumes, external locations, grants, PERMISSION_DENIED debugging) is now written — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch06",
+   "section": "ch06-s14",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Level-up → Phase 3 is now a full chapter",
+     "text": "Every item of this \"what's next\" list — metastore to PERMISSION_DENIED debugging — is taught and tested — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  },
+  {
+   "chapter": "ch10",
+   "section": "ch10-s07",
+   "appendBlocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Level-up → the full Phase 3",
+     "text": "This preview is now a full chapter: 16 sections, the 8-layer algorithm (identity first, plus binding, fine-grained policies, storage and compute), six debugging cases and the Phase-3 big test — see Chapter 11: Unity Catalog Mastery."
+    }
+   ]
+  }
+ ]
+}

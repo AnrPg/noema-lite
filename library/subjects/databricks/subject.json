@@ -1,0 +1,27 @@
+{
+ "id": "databricks",
+ "title": "Databricks",
+ "appTitle": "Databricks Quest",
+ "emoji": "🧱",
+ "group": "data-cloud",
+ "description": "Lakehouse platform, Delta Lake, compute, Unity Catalog, ingestion and Structured Streaming — exam-ready and project-ready.",
+ "language": "en",
+ "owner": null,
+ "features": { "math": false, "code": true },
+ "hero": {
+  "headline": "Master **Databricks**, one bite at a time.",
+  "mantra": "**Spark computes. Storage persists. Delta gives stored files table semantics. Unity Catalog governs the objects.** Databricks integrates the pieces into one platform."
+ },
+ "searchExamples": "VACUUM, widgets, Dedicated, CDC",
+ "tutor": {
+  "name": "Brick",
+  "avatar": "🦉",
+  "domain": "Databricks",
+  "prior": "They already know Spark fundamentals (execution hierarchy, partitions, shuffle, Catalyst/AQE, joins, Spark UI) and are preparing for the Databricks Data Engineer exams while building real projects.",
+  "examples": "Concrete e-shop examples (orders, customers).",
+  "interviewer": "a senior interviewer hiring a Databricks Data Engineer",
+  "simulation": "a failing job, PERMISSION_DENIED, missing rows, duplicates, slow query, OOM, MERGE error, wrong compute, stuck stream",
+  "terminology": "\"Unity Catalog\", \"Auto Loader\", \"MERGE INTO\", \"Deletion Vectors\", \"Watermarks\"",
+  "examinerRole": "Databricks examiner"
+ }
+}

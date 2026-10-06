@@ -1,0 +1,4391 @@
+{
+ "id": "ch06",
+ "num": 6,
+ "title": "Delta Table Engineering & Optimization",
+ "subtitle": "Writes, overwrite semantics, schemas and physical layout in production",
+ "emoji": "🛠️",
+ "sourcePages": "358–402 (+ 157–168 schema & OPTIMIZE parts)",
+ "mantra": "Write explicitly (create, append, replace a slice), evolve schemas locally, and keep files few, big and clustered on what you filter.",
+ "objectives": [
+  "You can create Delta tables with CREATE, CREATE OR REPLACE, CTAS, LIKE and the PySpark writeTo()/saveAsTable() APIs.",
+  "You can choose between append, full overwrite, REPLACE WHERE and REPLACE USING, and design idempotent writes.",
+  "You can explain schema enforcement, per-write evolution (mergeSchema / WITH SCHEMA EVOLUTION), overwriteSchema and type widening.",
+  "You can inspect tables with DESCRIBE TABLE / DETAIL / HISTORY and diagnose small files and failed data skipping.",
+  "You can apply OPTIMIZE, liquid clustering (CLUSTER BY, OPTIMIZE FULL) and predictive optimization correctly.",
+  "You can run the 5 Delta debugging workflows and follow the 13 best practices."
+ ],
+ "sections": [
+  {
+   "id": "ch06-s01",
+   "title": "Creating Delta Tables in SQL",
+   "hook": "CREATE vs CREATE OR REPLACE is the difference between 'safe' and 'I just wiped prod'.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Phase 2 goal: move from 'I understand Delta internals' to '**I can use Delta correctly in production**' — syntax, APIs, patterns, optimization."
+    },
+    {
+     "t": "diagram",
+     "text": "PHASE 2 — DELTA LAKE IN PRACTICE\n1. Table creation + writes\n2. UPDATE / DELETE / MERGE\n3. Write modes + overwrite semantics\n4. Schema enforcement / evolution / type widening\n5. History / time travel / restore / vacuum\n6. Physical optimization: small files, OPTIMIZE,\n   data skipping, file stats, deletion vectors,\n   liquid clustering, predictive optimization",
+     "caption": "Roadmap (internals of DML/MERGE/history live in Chapter 5)"
+    },
+    {
+     "t": "p",
+     "text": "In Databricks, tables are **Delta by default** unless you ask for another format. Databricks recommends **Unity Catalog managed Delta tables** for most workloads."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE TABLE ecommerce.bronze.orders_raw (\n  order_id    BIGINT,\n  customer_id BIGINT,\n  amount      DECIMAL(10,2),\n  status      STRING,\n  order_ts    TIMESTAMP\n);            -- Delta by default",
+     "caption": "Project: catalog ecommerce · schema bronze · table orders_raw"
+    },
+    {
+     "t": "p",
+     "text": "`USING DELTA` is optional today, but useful when teaching or when you want to be **absolutely explicit**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Statement",
+      "If table exists",
+      "Typical use"
+     ],
+     "rows": [
+      [
+       "`CREATE TABLE t (...)`",
+       "Fails (table already exists)",
+       "Safe default"
+      ],
+      [
+       "`CREATE TABLE IF NOT EXISTS t (...)`",
+       "Does nothing",
+       "Idempotent setup scripts"
+      ],
+      [
+       "`CREATE OR REPLACE TABLE t (...)`",
+       "**Replaces** definition/state",
+       "Dev; deliberate rebuilds"
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "CREATE OR REPLACE in production",
+     "text": "Handy in development, dangerous in production if not used consciously: it replaces the existing table definition and its current state. (On Delta the replace is a new version, so history survives — but downstream consumers instantly see the new state.)"
+    },
+    {
+     "t": "p",
+     "text": "**CTAS — CREATE TABLE AS SELECT.** You don't declare a schema; it is **derived from the query**. Databricks uses this pattern even in its official Delta tutorials."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE OR REPLACE TABLE ecommerce.silver.orders AS\nSELECT\n  CAST(order_id AS BIGINT)       AS order_id,\n  customer_id,\n  CAST(amount AS DECIMAL(10,2))  AS amount,\n  UPPER(status)                  AS status,\n  order_ts\nFROM ecommerce.bronze.orders_raw;",
+     "caption": "CTAS: Bronze → Silver with casts and cleanup"
+    },
+    {
+     "t": "p",
+     "text": "**CREATE TABLE LIKE** copies the table **definition/metadata, not the data** — an empty table with the same structure."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE TABLE ecommerce.silver.orders_test\nLIKE ecommerce.silver.orders;"
+    },
+    {
+     "t": "list",
+     "items": [
+      "dev → test copies",
+      "prod-like staging tables",
+      "schema cloning",
+      "migration testing"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "reveal",
+     "label": "Exercise 1 — think first: you want an empty table with the same schema as `prod.silver.customers`, no data. What do you write?",
+     "text": "`CREATE TABLE dev.silver.customers LIKE prod.silver.customers;`"
+    }
+   ]
+  },
+  {
+   "id": "ch06-s02",
+   "title": "Creating & Writing from PySpark",
+   "hook": "Two writer APIs, one positional trap: know writeTo(), saveAsTable() and why insertInto() bites.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The modern recommended API is **DataFrameWriterV2**: `df.writeTo(...)`."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df.writeTo(\"ecommerce.bronze.orders_raw\").create()\ndf.writeTo(\"ecommerce.bronze.orders_raw\").createOrReplace()\ndf.writeTo(\"ecommerce.silver.orders\").append()\n\n(df.writeTo(\"ecommerce.bronze.orders_raw\")\n   .using(\"delta\")\n   .createOrReplace())",
+     "caption": "writeTo() — V2 API"
+    },
+    {
+     "t": "p",
+     "text": "The classic API is still everywhere: `df.write…saveAsTable(...)`."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df.write.saveAsTable(\"ecommerce.bronze.orders_raw\")\n\n(df.write\n   .mode(\"overwrite\")\n   .saveAsTable(\"ecommerce.bronze.orders_raw\"))",
+     "caption": "saveAsTable() — classic DataFrameWriter"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "saveAsTable() (classic)",
+       "points": [
+        "Simple, very widespread",
+        "Behaviour driven by `.mode(...)`",
+        "You'll see it in most existing code"
+       ]
+      },
+      {
+       "title": "writeTo() (V2)",
+       "points": [
+        "Clear create / replace / append semantics",
+        "Better partitioning support",
+        "Table properties & clustering support",
+        "Conditional overwrite features"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Know both",
+     "text": "For new code prefer `writeTo()` where practical — but read and maintain `saveAsTable()` code fluently."
+    },
+    {
+     "t": "p",
+     "text": "**insertInto() — important trap.** `df.write.insertInto(\"ecommerce.silver.orders\")` requires a compatible schema, but it matches columns **by position, not by name**."
+    },
+    {
+     "t": "diagram",
+     "text": "target:     id BIGINT | name STRING\nDataFrame:  name      | id\n              │          │\ninsertInto -> col1 -> id,  col2 -> name   (positional!)\nif types can be coerced -> silently WRONG mapping"
+    },
+    {
+     "t": "reveal",
+     "label": "Exercise 2 — think first: target (id BIGINT, name STRING), DataFrame columns (name, id). Which API is more dangerous?",
+     "text": "`insertInto(...)` — it uses **position-based** resolution, so `name` lands in `id` (or fails only if the cast is impossible). Name-based APIs (`saveAsTable` append, `writeTo().append()`) avoid this."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Positional resolution",
+     "text": "If types allow coercion, `insertInto` can write values into the wrong columns without any error. Reorder with `df.select(target_cols)` or use a name-based API."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when values land in the wrong columns",
+     "questions": [
+      "Did I write with insertInto (positional) instead of a name-based API?",
+      "Does the DataFrame column order match the target column order?",
+      "Could the types be coerced silently (e.g. numbers into strings)?",
+      "Which version introduced the bad rows, so I can RESTORE or fix them?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch06-s03",
+   "title": "INSERT, INSERT OVERWRITE & TRUNCATE",
+   "hook": "INTO adds, OVERWRITE replaces, TRUNCATE empties, DROP deletes the object — four verbs, four outcomes.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "INSERT INTO ecommerce.silver.orders VALUES\n  (1001, 51, 29.90, 'NEW', current_timestamp()),\n  (1002, 92, 55.00, 'NEW', current_timestamp());",
+     "caption": "INSERT INTO = add rows"
+    },
+    {
+     "t": "p",
+     "text": "**INSERT INTO** is **additive**: it adds rows and never replaces existing ones (the docs say so explicitly)."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "INSERT INTO ecommerce.silver.orders\nSELECT order_id, customer_id, amount, status, order_ts\nFROM ecommerce.bronze.orders_raw\nWHERE ingestion_date = current_date();",
+     "caption": "INSERT INTO … SELECT — the everyday batch ETL pattern"
+    },
+    {
+     "t": "p",
+     "text": "**INSERT OVERWRITE** does not append: it **overwrites the target scope**. Without a partition/predicate restriction it can replace the **entire** table contents."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "INSERT OVERWRITE TABLE ecommerce.silver.orders\nSELECT * FROM staging.orders;"
+    },
+    {
+     "t": "diagram",
+     "text": "INSERT INTO       = additive    (existing + new)\nINSERT OVERWRITE  = replacement (target scope := new)"
+    },
+    {
+     "t": "p",
+     "text": "**TRUNCATE TABLE** empties a table: schema and table object remain, rows are removed."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "TRUNCATE TABLE ecommerce.bronze.orders_raw;"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "TRUNCATE TABLE",
+       "points": [
+        "schema remains",
+        "table object remains",
+        "rows removed"
+       ]
+      },
+      {
+       "title": "DROP TABLE",
+       "points": [
+        "removes the table object itself",
+        "schema/definition gone from the catalog"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "INTO vs OVERWRITE",
+     "text": "Q: difference between INSERT INTO and INSERT OVERWRITE? A: INTO **adds** rows; OVERWRITE **replaces the target scope**."
+    }
+   ]
+  },
+  {
+   "id": "ch06-s04",
+   "title": "Append vs Overwrite & Idempotency",
+   "hook": "A retry should never double your revenue — design writes that are safe to run twice.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df.write.mode(\"append\").saveAsTable(\"ecommerce.silver.orders\")\ndf.writeTo(\"ecommerce.silver.orders\").append()",
+     "caption": "append: existing rows + new rows"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df.write.mode(\"overwrite\").saveAsTable(\"ecommerce.silver.orders\")",
+     "caption": "overwrite: can replace the WHOLE table"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Mode",
+      "Good when…"
+     ],
+     "rows": [
+      [
+       "append",
+       "Data are **genuinely new**, no overlap with existing rows"
+      ],
+      [
+       "full overwrite",
+       "The target should **exactly equal** this new DataFrame"
+      ]
+     ],
+     "caption": "Daily file 2026-09-27 orders: which mode?"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "The overwrite trap",
+     "text": "Table holds **3 years** of data. Your DataFrame holds **only yesterday**. `df.write.mode(\"overwrite\").saveAsTable(...)` → the other 3 years vanish from the logical state. One of the most classic production mistakes."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a table suddenly lost most of its rows after a write",
+     "questions": [
+      "Was the last write mode overwrite (DESCRIBE HISTORY → operationParameters)?",
+      "Did the DataFrame contain only a subset (e.g. only yesterday)?",
+      "Which version was the last good one, and are its files still within retention?",
+      "Should this write have been append, MERGE or REPLACE WHERE instead?"
+     ]
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: when exactly is a full overwrite dangerous?",
+     "text": "When the DataFrame contains only a **subset** of what the table should contain."
+    },
+    {
+     "t": "p",
+     "text": "**Idempotent** = running the same operation a second time with the same input does **not change** the final state again. Critical when a job **retries**."
+    },
+    {
+     "t": "diagram",
+     "text": "source: id=5, status='PAID'\nMERGE run 1: updates id=5 -> PAID\nMERGE run 2: updates id=5 -> PAID   (same final state)\n=> idempotent"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "UPDATE orders\nSET amount = amount + 10\nWHERE id = 5;\n-- run twice: +10, +10  => +20 total  => NOT idempotent"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Idempotent",
+       "points": [
+        "MERGE that sets values from source (`t.status = s.status`)",
+        "Full overwrite with the same complete DataFrame",
+        "REPLACE WHERE for one date with the same data"
+       ]
+      },
+      {
+       "title": "Not idempotent",
+       "points": [
+        "`amount = amount + 10`",
+        "Blind append of the same batch twice (duplicates)",
+        "Counters/increments"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Use MERGE for idempotent upserts",
+     "text": "MERGE that **sets** target values from a deduplicated source converges to the same state on every retry."
+    }
+   ]
+  },
+  {
+   "id": "ch06-s05",
+   "title": "Selective Overwrite: REPLACE WHERE & REPLACE USING",
+   "hook": "Replace exactly one day (or one country) and leave everything else untouched.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You want to replace only `date = 2026-09-27`. Today there are better options than the legacy `partitionOverwriteMode`: Databricks recommends **REPLACE WHERE** or **REPLACE USING** for new workloads."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "INSERT INTO ecommerce.silver.orders\nREPLACE WHERE order_date = DATE'2026-09-27'\nSELECT * FROM ecommerce.staging.orders_daily;",
+     "caption": "REPLACE WHERE: explicit predicate"
+    },
+    {
+     "t": "diagram",
+     "text": "replace rows matching the predicate\nleave everything else untouched"
+    },
+    {
+     "t": "p",
+     "text": "REPLACE WHERE is supported on **all compute types**."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "INSERT INTO ecommerce.silver.orders\nREPLACE USING (order_date)\nSELECT * FROM ecommerce.staging.orders_daily;",
+     "caption": "REPLACE USING: dynamic overwrite by key columns"
+    },
+    {
+     "t": "p",
+     "text": "**REPLACE USING** replaces target rows whose values in the listed key columns match those in the **incoming** dataset. It's the recommended replacement for legacy dynamic partition overwrite. (The source also lists `REPLACE ON` as a further per-use-case variant.)"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "(df.write\n   .mode(\"overwrite\")\n   .option(\"partitionOverwriteMode\", \"dynamic\")\n   .saveAsTable(\"ecommerce.silver.orders\"))",
+     "caption": "Legacy: dynamic partition overwrite"
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Legacy",
+     "text": "`partitionOverwriteMode = dynamic` is still supported in some contexts but is legacy, not preferred for new workloads, and has compute limitations."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Dynamic overwrite with a stray key",
+     "text": "Incoming data meant for `2026-09-27` accidentally contains one row with `order_date = 2024-01-01`. Dynamic overwrite (and REPLACE USING) will replace the **whole 2024-01-01 slice** with that single row. Always **validate the incoming key/partition domain** before writing."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "REPLACE WHERE",
+       "points": [
+        "You state the predicate explicitly",
+        "Replaces exactly that slice",
+        "Stray rows outside the predicate → write fails instead of silently replacing"
+       ]
+      },
+      {
+       "title": "REPLACE USING / dynamic",
+       "points": [
+        "Slices derived from incoming data",
+        "Convenient for many keys",
+        "Stray keys replace unintended slices"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "reveal",
+     "label": "Exercise 4 — think first: replace only `country='GR'`, keep DE/FR unchanged. Better than full overwrite?",
+     "text": "Selective overwrite: `INSERT INTO t REPLACE WHERE country = 'GR' SELECT …`."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself before any overwrite",
+     "questions": [
+      "Does my DataFrame contain the whole table, or only a subset?",
+      "Which slice (date/country) am I really trying to replace?",
+      "Have I validated the distinct key values in the incoming data?",
+      "Would REPLACE WHERE with an explicit predicate be safer here?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch06-s06",
+   "title": "Schema Enforcement & Safe Casting",
+   "hook": "Schema enforcement is a seatbelt, not a nuisance — it stops bad producers before the CEO dashboard.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Target has `id BIGINT, amount DECIMAL(10,2)`. A DataFrame arrives with `amount STRUCT<foo:INT>`. Default expectation: **the write fails**."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Bad producer",
+      "Silent corruption",
+      "Silver",
+      "Gold",
+      "CEO dashboard"
+     ],
+     "caption": "What schema enforcement prevents"
+    },
+    {
+     "t": "p",
+     "text": "Delta performs **schema validation on write**, using the schema stored in the transaction-log metadata."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Columns must exist in the target",
+      "Types must match or be **safely castable**"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "table",
+     "head": [
+      "Target",
+      "Incoming",
+      "Result"
+     ],
+     "rows": [
+      [
+       "amount BIGINT",
+       "amount INT",
+       "OK — safe cast"
+      ],
+      [
+       "amount BIGINT",
+       "amount STRUCT<…>",
+       "Fails — no safe cast"
+      ],
+      [
+       "amount DECIMAL(10,2)",
+       "amount STRUCT<foo:INT>",
+       "Fails"
+      ],
+      [
+       "id, name",
+       "id, name, email",
+       "Fails unless evolution is allowed (next section)"
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Enforcement vs evolution",
+     "text": "**Enforcement** rejects incompatible data. **Evolution** allows specific, controlled schema changes."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Best practice",
+     "text": "Use schema enforcement as **protection**, not as a nuisance to disable."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a write fails with a schema mismatch",
+     "questions": [
+      "What does DESCRIBE TABLE say vs df.printSchema()?",
+      "Is it a new column, a different type, or a renamed column?",
+      "Is the change intentional evolution — or a bug in the source?",
+      "If intentional: can I evolve explicitly and locally (mergeSchema / WITH SCHEMA EVOLUTION / ALTER TABLE)?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch06-s07",
+   "title": "Schema Evolution: mergeSchema, autoMerge, overwriteSchema, ALTER",
+   "hook": "Let intentional changes in, keep accidental ones out — and make it explicit which write may change the schema.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Yesterday the source had `customer_id, name, city`. Today it also has `segment`. `source_df.write.mode(\"append\").saveAsTable(...)` **fails**."
+    },
+    {
+     "t": "p",
+     "text": "Don't immediately enable a global setting. **First ask: is `segment` an intentional addition?** If yes, allow evolution **for this write only**:"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "(source_df.write\n   .option(\"mergeSchema\", \"true\")\n   .mode(\"append\")\n   .saveAsTable(\"prod.silver.customers\"))",
+     "caption": "Per-write schema evolution"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "spark.conf.set(\n    \"spark.databricks.delta.schema.autoMerge.enabled\", \"true\"\n)   # session-wide: every later write may evolve schemas!",
+     "caption": "Global autoMerge — not preferred for production"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "mergeSchema (per write)",
+       "points": [
+        "Localized and explicit",
+        "Clear which write may change the schema",
+        "Recommended"
+       ]
+      },
+      {
+       "title": "autoMerge (session-wide)",
+       "points": [
+        "Many unrelated writes may evolve schemas",
+        "Hard to tell which operation was allowed to",
+        "Avoid in production"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Modern **SQL syntax** for evolution scoped to one statement:"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "MERGE WITH SCHEMA EVOLUTION INTO target t\nUSING source s\nON t.id = s.id\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;\n\n-- DBR 18.1+\nINSERT WITH SCHEMA EVOLUTION INTO target\nSELECT * FROM source;"
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Know both",
+     "text": "For 2026 certification/real projects, know the new `WITH SCHEMA EVOLUTION` syntax **and** `.option(\"mergeSchema\", \"true\")` — you'll see the latter everywhere."
+    },
+    {
+     "t": "p",
+     "text": "**overwriteSchema is different.** It means: overwrite the data **and replace the schema/partitioning**."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "(df.write\n   .mode(\"overwrite\")\n   .option(\"overwriteSchema\", \"true\")\n   .saveAsTable(\"ecommerce.silver.orders\"))"
+    },
+    {
+     "t": "diagram",
+     "text": "mergeSchema      -> evolve / add compatible schema changes\noverwriteSchema  -> replace table schema during overwrite"
+    },
+    {
+     "t": "p",
+     "text": "**Manual evolution** — when the change is intentional, change the schema explicitly with `ALTER TABLE`:"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "ALTER TABLE prod.silver.customers ADD COLUMNS (email STRING);\nALTER TABLE ecommerce.silver.orders ADD COLUMN source_system STRING;\nALTER TABLE prod.silver.customers RENAME COLUMN name TO full_name;\nALTER TABLE prod.silver.customers DROP COLUMN obsolete_field;\nALTER TABLE ecommerce.silver.orders\n  SET TBLPROPERTIES ('delta.enableDeletionVectors' = 'true');",
+     "caption": "ALTER TABLE: metadata, schema and properties"
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Column mapping",
+     "text": "Metadata-only **RENAME COLUMN** and **DROP COLUMN** require **column mapping** support on the table."
+    }
+   ]
+  },
+  {
+   "id": "ch06-s08",
+   "title": "Type Widening & Schema Changes Under Concurrency",
+   "hook": "INT → BIGINT is growth; INT → STRING is a different meaning — and every schema change is a metadata commit that can collide.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "`quantity INT` grows so much you need `quantity BIGINT`. That is **type widening** — a move to a compatible, wider type. Delta supports it as a **table feature** (now GA)."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "ALTER TABLE ecommerce.silver.orders\nSET TBLPROPERTIES ('delta.enableTypeWidening' = 'true');\n\nALTER TABLE ecommerce.silver.orders\nALTER COLUMN quantity TYPE BIGINT;"
+    },
+    {
+     "t": "table",
+     "head": [
+      "From",
+      "Can widen to"
+     ],
+     "rows": [
+      [
+       "BYTE",
+       "SHORT / INT / BIGINT / DECIMAL / DOUBLE"
+      ],
+      [
+       "SHORT",
+       "INT / BIGINT / DECIMAL / DOUBLE"
+      ],
+      [
+       "INT",
+       "BIGINT / DECIMAL / DOUBLE"
+      ],
+      [
+       "FLOAT",
+       "DOUBLE"
+      ]
+     ],
+     "caption": "Supported widenings (no rewrite of underlying data files)"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Widening ≠ arbitrary cast",
+     "text": "`INT → BIGINT` is widening. `INT → STRING` or `STRING → STRUCT` are **not** — they change meaning. Type evolution does not mean 'any type to any other type'."
+    },
+    {
+     "t": "p",
+     "text": "Supported widening changes happen **without rewriting** the underlying data files."
+    },
+    {
+     "t": "p",
+     "text": "Now the production caveat: **schema changes are metadata changes**, and metadata changes **conflict with concurrent writes**."
+    },
+    {
+     "t": "diagram",
+     "text": "11:59  production streaming pipeline running\n12:00  ALTER TABLE ... ADD COLUMNS ...\n12:00  writer fails  (MetadataChangedException)",
+     "caption": "Not necessarily a bug — expected concurrency semantics"
+    },
+    {
+     "t": "p",
+     "text": "Databricks recommends **coordinating schema updates**: they can make concurrent writes fail and can also **stop streams** reading the table until they are restarted."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a writer fails right after a schema change",
+     "questions": [
+      "Did someone run ALTER TABLE or a schema-evolving write at that time (DESCRIBE HISTORY)?",
+      "Is the error MetadataChangedException?",
+      "Are streaming readers of this table now stopped and needing a restart?",
+      "Can schema changes be scheduled/coordinated with the pipelines that write this table?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch06-s09",
+   "title": "DESCRIBE DETAIL & Inspecting Tables",
+   "hook": "Three DESCRIBEs, three questions: what columns? what versions? what files?",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "DESCRIBE DETAIL ecommerce.silver.orders;"
+    },
+    {
+     "t": "p",
+     "text": "Returns **one row** of table-level metadata — a top debugging command."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "format",
+       "def": "e.g. delta"
+      },
+      {
+       "term": "location",
+       "def": "Where the files live"
+      },
+      {
+       "term": "sizeInBytes",
+       "def": "Current table size (current snapshot)"
+      },
+      {
+       "term": "numFiles",
+       "def": "Number of files in the current snapshot"
+      },
+      {
+       "term": "partitionColumns / clusteringColumns",
+       "def": "Layout keys"
+      },
+      {
+       "term": "properties / table features",
+       "def": "e.g. deletion vectors, type widening"
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Command",
+      "Answers"
+     ],
+     "rows": [
+      [
+       "DESCRIBE TABLE t",
+       "Which columns and types? (compare with `df.printSchema()`)"
+      ],
+      [
+       "DESCRIBE HISTORY t",
+       "Which versions/operations, by whom, with what metrics? (Chapter 5)"
+      ],
+      [
+       "DESCRIBE DETAIL t",
+       "Format, location, size, number of files, partitioning, properties/features"
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "debug",
+     "title": "Average file size",
+     "text": "`sizeInBytes / numFiles` = average file size. Hundreds of thousands of files with a tiny average size → small-file pressure."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: storage costs doubled but DESCRIBE DETAIL `sizeInBytes` didn't. Why?",
+     "text": "DETAIL reports the **current snapshot**. Old unreferenced files kept for history/time travel aren't counted — check VACUUM/retention (Chapter 5)."
+    }
+   ]
+  },
+  {
+   "id": "ch06-s10",
+   "title": "OPTIMIZE & the Small-File Problem",
+   "hook": "10 GB in 10 files flies; 10 GB in 100,000 files crawls — same bytes, different file count.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Writes often produce files of 10 MB, 12 MB, 8 MB… thousands of **small Parquet files**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Option",
+      "Layout",
+      "Effect"
+     ],
+     "rows": [
+      [
+       "A",
+       "10 files × 1 GB",
+       "Few file opens, healthy tasks"
+      ],
+      [
+       "B",
+       "100,000 files × 100 KB",
+       "Huge metadata/file-open overhead, many tiny Spark tasks, inefficient scheduling, poor scan efficiency"
+      ]
+     ],
+     "caption": "Same 10 GB dataset"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Look at file distribution, not just total bytes",
+     "text": "Health = **number and size distribution of files**, not only total size."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "OPTIMIZE ecommerce.silver.orders;"
+    },
+    {
+     "t": "p",
+     "text": "**OPTIMIZE** improves physical layout. Without clustering/Z-order semantics it does **bin packing**: compacting small files into more balanced sizes (e.g. 50,000 × 1 MB → far fewer, larger files)."
+    },
+    {
+     "t": "diagram",
+     "text": "A B C D E F      many small files\n     │  OPTIMIZE\n     ▼\n   X   Y         fewer, larger files\n\nlog: REMOVE A..F, ADD X, ADD Y   (dataChange = false)"
+    },
+    {
+     "t": "p",
+     "text": "The logical data doesn't change. The `dataChange` flag in the protocol marks the commit as **rearrangement**, not a logical record change (e.g. streaming readers don't treat it as new data)."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "OPTIMIZE",
+       "points": [
+        "Rewrites/reorganizes **active** data files",
+        "Layout & performance",
+        "Creates new files + a new version"
+       ]
+      },
+      {
+       "title": "VACUUM",
+       "points": [
+        "Physically **deletes old unreferenced** files",
+        "Garbage collection / storage",
+        "Doesn't change the current snapshot"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Classic confusion",
+     "text": "OPTIMIZE ≠ VACUUM. After OPTIMIZE, the old small files are still on storage until VACUUM removes them past retention."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when storage 'exploded'",
+     "questions": [
+      "What do numFiles and sizeInBytes say in DESCRIBE DETAIL?",
+      "Is the average file size tiny (hundreds of thousands of files)?",
+      "Which writes produce so many small files (frequent small appends, streaming)?",
+      "Has OPTIMIZE run — and has VACUUM cleaned up the replaced files after retention?",
+      "Is predictive optimization enabled for this UC managed table?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch06-s11",
+   "title": "Data Skipping & File Statistics",
+   "hook": "The fastest file to read is the one you never open.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Delta stores **file-level statistics** in the log's `add` actions:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "min values per column",
+      "max values per column",
+      "null counts",
+      "row count"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "diagram",
+     "text": "file A: customer_id min=1    max=1000\nfile B: customer_id min=1001 max=2000\nfile C: customer_id min=2001 max=3000\n\nWHERE customer_id = 2500\n  A -> cannot contain 2500 -> skip\n  B -> cannot contain 2500 -> skip\n  C -> may contain 2500    -> read",
+     "caption": "Data skipping"
+    },
+    {
+     "t": "p",
+     "text": "**Data skipping** = using file statistics so files that cannot contain matching rows are not read. Stats also help pruning and query planning."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Skipping needs a good layout",
+     "text": "If every file holds customer_ids 1…3000 (min=1, max=3000), no file can be skipped. Stats only help when values are **clustered** into narrow ranges per file."
+    },
+    {
+     "t": "p",
+     "text": "Predictive optimization also **collects statistics** on Unity Catalog managed tables."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: `WHERE customer_id = 1234` still scans most of the table. What could be wrong?",
+     "text": "Files hold wide, overlapping customer_id ranges (bad layout/no clustering), stats missing for that column, or the filter isn't selective. Consider liquid clustering on `customer_id`."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a selective query scans too much",
+     "questions": [
+      "How is the table laid out — partitioned, clustered, or neither?",
+      "Is the table clustered on the column I filter by?",
+      "Are statistics collected for that column?",
+      "Is the filter actually selective?",
+      "Is data skipping kicking in (files read vs total files)?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch06-s12",
+   "title": "Liquid Clustering",
+   "hook": "Partition + ZORDER locked you in; liquid clustering lets the layout follow your queries.",
+   "blocks": [
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Old way",
+       "points": [
+        "`partitionBy(date)`",
+        "+ maybe `ZORDER BY customer_id`",
+        "Static physical design decision"
+       ]
+      },
+      {
+       "title": "Liquid clustering",
+       "points": [
+        "`CLUSTER BY (customer_id)`",
+        "Keys can change as query patterns change",
+        "Applied incrementally"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Databricks describes **liquid clustering** as the layout technique that replaces traditional partitioning and ZORDER for many use cases, and recommends it for new Delta tables."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "ALTER TABLE ecommerce.silver.orders\nCLUSTER BY (customer_id);\n\nOPTIMIZE ecommerce.silver.orders;        -- incremental clustering\nOPTIMIZE ecommerce.silver.orders FULL;   -- recluster ALL existing data"
+    },
+    {
+     "t": "p",
+     "text": "Setting `CLUSTER BY` doesn't rewrite old data on its own. Plain `OPTIMIZE` clusters incrementally; to apply clustering to **existing** data, run `OPTIMIZE … FULL`."
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Why 'liquid'?",
+     "text": "A static `partitionBy(country)` is concrete poured into the table's design. Liquid clustering is a shape you can change: new keys without an immediate rewrite of all historical data."
+    },
+    {
+     "t": "p",
+     "text": "**When does it make sense?** Columns used often in **filters**, **joins** and **selective lookups**, with enough **cardinality** that physical ordering helps — e.g. `CLUSTER BY (customer_id)` when you often run `WHERE customer_id = ?`."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Bonus: concurrency",
+     "text": "Liquid-clustered tables also benefit from row-level concurrency (Chapter 5)."
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Not combined with partitioning/ZORDER",
+     "text": "Liquid clustering replaces partitioning and ZORDER on a table — you don't stack them."
+    }
+   ]
+  },
+  {
+   "id": "ch06-s13",
+   "title": "Predictive Optimization",
+   "hook": "Let Databricks schedule maintenance — but you still need to know why a table is slow.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "For **Unity Catalog managed tables**, **predictive optimization** lets Databricks run maintenance automatically and decide which tables benefit."
+    },
+    {
+     "t": "list",
+     "items": [
+      "OPTIMIZE",
+      "VACUUM",
+      "ANALYZE (statistics)"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Without",
+       "points": [
+        "You schedule OPTIMIZE every Sunday",
+        "VACUUM every Monday",
+        "ANALYZE every…"
+       ]
+      },
+      {
+       "title": "With predictive optimization",
+       "points": [
+        "Databricks monitors tables",
+        "Decides if maintenance is needed",
+        "Runs it when useful"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Automation ≠ understanding",
+     "text": "Predictive optimization does **not** mean you don't need to understand optimization. In debugging you must still know why files are small, why skipping doesn't work, why a clustering key is bad, why a scan is huge."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Best practice",
+     "text": "Enable predictive optimization for Unity Catalog managed tables where supported."
+    }
+   ]
+  },
+  {
+   "id": "ch06-s14",
+   "title": "Production Project, Debug Workflows & Best Practices",
+   "hook": "Glue it all together: the e-shop pipeline, the 5 debug workflows, 13 rules and a 20-step drill.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE TABLE ecommerce.bronze.orders_raw (\n  order_id BIGINT, customer_id BIGINT, amount DECIMAL(10,2),\n  status STRING, order_ts TIMESTAMP, ingestion_ts TIMESTAMP\n);\n\nCREATE TABLE ecommerce.silver.orders (\n  order_id BIGINT, customer_id BIGINT, amount DECIMAL(10,2),\n  status STRING, order_ts TIMESTAMP, updated_at TIMESTAMP\n);\n\nCREATE OR REPLACE TABLE ecommerce.staging.orders_updates AS\nSELECT * FROM VALUES\n  (1001L, 51L, 29.90D, 'PAID'),\n  (1003L, 92L, 44.50D, 'NEW')\nAS t(order_id, customer_id, amount, status);",
+     "caption": "Bronze, Silver, staging"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "MERGE INTO ecommerce.silver.orders AS t\nUSING ecommerce.staging.orders_updates AS s\nON t.order_id = s.order_id\nWHEN MATCHED THEN UPDATE SET\n  t.customer_id = s.customer_id,\n  t.amount      = s.amount,\n  t.status      = s.status,\n  t.updated_at  = current_timestamp()\nWHEN NOT MATCHED THEN INSERT\n  (order_id, customer_id, amount, status, updated_at)\nVALUES\n  (s.order_id, s.customer_id, s.amount, s.status, current_timestamp());",
+     "caption": "Idempotent MERGE: re-running gives the same business state"
+    },
+    {
+     "t": "table",
+     "head": [
+      "#",
+      "Symptom",
+      "First command",
+      "Look for"
+     ],
+     "rows": [
+      [
+       "1",
+       "MERGE fails (multiple source rows matched)",
+       "`GROUP BY key HAVING COUNT(*) > 1`",
+       "Ordering field → dedup (Ch.5)"
+      ],
+      [
+       "2",
+       "Write fails: schema mismatch",
+       "`DESCRIBE TABLE` vs `df.printSchema()`",
+       "New column? type? rename? intentional?"
+      ],
+      [
+       "3",
+       "Storage exploded",
+       "`DESCRIBE DETAIL`",
+       "numFiles, sizeInBytes → small files"
+      ],
+      [
+       "4",
+       "Query scans too much",
+       "Inspect layout/stats",
+       "Clustering, stats, selectivity, skipping"
+      ],
+      [
+       "5",
+       "Someone broke data",
+       "`DESCRIBE HISTORY`",
+       "Bad version → time travel → RESTORE (Ch.5)"
+      ]
+     ],
+     "caption": "The 5 debugging workflows at a glance"
+    },
+    {
+     "t": "callout",
+     "kind": "debug",
+     "title": "Workflow 2 rule",
+     "text": "Do **not** blindly enable `mergeSchema` — first decide whether the change is intentional evolution or a source bug."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Prefer Unity Catalog managed Delta tables unless you have a reason not to.",
+      "Prefer `writeTo()`/V2 semantics for modern table creation where practical.",
+      "Use MERGE for idempotent upserts.",
+      "Deduplicate the source before MERGE.",
+      "Avoid blind full overwrite.",
+      "Prefer REPLACE WHERE / REPLACE USING over legacy dynamic partition overwrite for new workloads.",
+      "Use schema enforcement as protection, not nuisance.",
+      "Enable schema evolution explicitly and locally when possible.",
+      "Use DESCRIBE HISTORY and time travel for debugging.",
+      "Do not treat time travel as long-term backup.",
+      "Understand OPTIMIZE vs VACUUM.",
+      "Prefer liquid clustering for many modern layout cases instead of static partitions.",
+      "Enable predictive optimization for UC managed tables where supported."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "**Practical assignment** — build `ecommerce.bronze.orders_raw`, `ecommerce.staging.orders_updates`, `ecommerce.silver.orders` and do, in order:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "CREATE TABLE",
+      "INSERT initial rows",
+      "Append new rows",
+      "UPDATE one row",
+      "DELETE one row",
+      "MERGE updates + inserts",
+      "Intentionally duplicate a source key",
+      "Deduplicate with ROW_NUMBER",
+      "Run MERGE again to prove idempotency",
+      "Add a new column with mergeSchema",
+      "DESCRIBE DETAIL",
+      "DESCRIBE HISTORY",
+      "Query VERSION AS OF",
+      "RESTORE",
+      "Create many small files",
+      "OPTIMIZE",
+      "Inspect numFiles before/after",
+      "Enable clustering",
+      "OPTIMIZE FULL",
+      "Inspect behaviour/history"
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "**What's next:** Phase 3 — Unity Catalog mastery: metastore → catalog → schema → managed/external tables → volumes → credentials/external locations → grants → service principals → row filters/masks → lineage → `PERMISSION_DENIED` debugging."
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch06-d01",
+   "title": "Write fails: schema mismatch",
+   "section": "ch06-s07",
+   "symptom": "Append/MERGE that worked yesterday fails today with a schema mismatch error (e.g. new column `segment`).",
+   "askYourself": [
+    "What does DESCRIBE TABLE show vs df.printSchema()?",
+    "Is it a new column, a different type, or a renamed column?",
+    "Is this intentional evolution or a source bug?",
+    "If intentional, can I evolve explicitly and locally (mergeSchema / WITH SCHEMA EVOLUTION / ALTER TABLE)?",
+    "Is it a widening (INT → BIGINT) that needs type widening rather than a cast?"
+   ],
+   "steps": [
+    {
+     "do": "Compare schemas",
+     "why": "Find the exact difference",
+     "code": "DESCRIBE TABLE ecommerce.silver.orders;\n-- vs df.printSchema()"
+    },
+    {
+     "do": "Classify the change",
+     "why": "New column / type / rename lead to different fixes"
+    },
+    {
+     "do": "Confirm intent with the producer",
+     "why": "Don't bake source bugs into Silver"
+    },
+    {
+     "do": "Evolve explicitly",
+     "why": "Local evolution keeps other writes protected",
+     "code": "(source_df.write.option(\"mergeSchema\", \"true\")\n   .mode(\"append\").saveAsTable(\"prod.silver.customers\"))"
+    }
+   ],
+   "rootCauses": [
+    "Producer added a column",
+    "Producer changed a type",
+    "Column renamed upstream",
+    "Upstream bug"
+   ],
+   "fix": "Never blindly enable mergeSchema or global autoMerge; evolve per write or via ALTER TABLE once the change is confirmed intentional.",
+   "mnemonic": "3C + E: Compare, Classify, Confirm — then Evolve"
+  },
+  {
+   "id": "ch06-d02",
+   "title": "Storage exploded",
+   "section": "ch06-s10",
+   "symptom": "Storage and/or query time grew sharply; listing the table is slow.",
+   "askYourself": [
+    "What do numFiles and sizeInBytes say in DESCRIBE DETAIL?",
+    "Is the average file size tiny (small-file pressure)?",
+    "Which writes produce many small files?",
+    "Has OPTIMIZE run — and VACUUM afterwards, past retention?",
+    "Is predictive optimization enabled for this UC managed table?",
+    "Is the growth actually old history files (not counted in DETAIL)?"
+   ],
+   "steps": [
+    {
+     "do": "DESCRIBE DETAIL",
+     "why": "numFiles, sizeInBytes → average file size",
+     "code": "DESCRIBE DETAIL ecommerce.silver.orders;"
+    },
+    {
+     "do": "Compact",
+     "why": "Bin-pack small files",
+     "code": "OPTIMIZE ecommerce.silver.orders;"
+    },
+    {
+     "do": "Clean up after retention",
+     "why": "Remove replaced files",
+     "code": "VACUUM ecommerce.silver.orders;"
+    },
+    {
+     "do": "Automate",
+     "why": "Let PO maintain UC managed tables"
+    }
+   ],
+   "rootCauses": [
+    "Frequent tiny appends/streaming micro-batches",
+    "No compaction",
+    "No VACUUM after rewrites"
+   ],
+   "fix": "OPTIMIZE (or predictive optimization), VACUUM after retention, and fix writers that produce tiny files.",
+   "mnemonic": "DETAIL → Divide (size/files) → OPTIMIZE → VACUUM"
+  },
+  {
+   "id": "ch06-d03",
+   "title": "Query scans too much",
+   "section": "ch06-s11",
+   "symptom": "`WHERE customer_id = 1234` still reads most of the table's files.",
+   "askYourself": [
+    "How is the table laid out (partitioned, clustered, neither)?",
+    "Is it clustered on the column I filter by?",
+    "Are statistics collected for that column?",
+    "Is the filter actually selective?",
+    "Is data skipping pruning files at all?"
+   ],
+   "steps": [
+    {
+     "do": "Check DESCRIBE DETAIL partition/clustering columns",
+     "why": "Know the current layout",
+     "code": "DESCRIBE DETAIL ecommerce.silver.orders;"
+    },
+    {
+     "do": "Cluster on the filter column",
+     "why": "Narrow per-file ranges enable skipping",
+     "code": "ALTER TABLE ecommerce.silver.orders CLUSTER BY (customer_id);\nOPTIMIZE ecommerce.silver.orders FULL;"
+    }
+   ],
+   "rootCauses": [
+    "No clustering on filter column",
+    "Overlapping min/max ranges",
+    "Missing stats",
+    "Unselective filter"
+   ],
+   "fix": "Liquid clustering on the frequently filtered/joined column, then OPTIMIZE FULL; keep stats current (predictive optimization/ANALYZE).",
+   "mnemonic": "L-C-S-S-S: Layout, Clustering, Stats, Selectivity, Skipping"
+  },
+  {
+   "id": "ch06-d04",
+   "title": "Writer fails right after a schema change (MetadataChangedException)",
+   "section": "ch06-s08",
+   "symptom": "A streaming/batch writer fails with `MetadataChangedException` at the moment someone ran ALTER TABLE; streams reading the table stop.",
+   "askYourself": [
+    "Did someone run ALTER TABLE or a schema-evolving write at that time (DESCRIBE HISTORY)?",
+    "Is the error MetadataChangedException?",
+    "Are streaming readers now stopped and needing a restart?",
+    "Can schema changes be coordinated with the pipelines that write this table?"
+   ],
+   "steps": [
+    {
+     "do": "DESCRIBE HISTORY",
+     "why": "Find the concurrent metadata change",
+     "code": "DESCRIBE HISTORY prod.silver.orders;"
+    },
+    {
+     "do": "Restart affected writers/streams",
+     "why": "They must pick up the new metadata"
+    },
+    {
+     "do": "Agree on a change process",
+     "why": "Coordinate schema updates"
+    }
+   ],
+   "rootCauses": [
+    "Concurrent ALTER TABLE",
+    "Schema-evolving write in another job"
+   ],
+   "fix": "Treat it as expected concurrency semantics: retry/restart, and coordinate future schema changes.",
+   "mnemonic": "Schema change = metadata commit = conflict"
+  },
+  {
+   "id": "ch06-d05",
+   "title": "Table lost most of its rows after a write",
+   "section": "ch06-s04",
+   "symptom": "A table with years of data now only contains the latest batch.",
+   "askYourself": [
+    "Was the last write mode overwrite (DESCRIBE HISTORY → operationParameters)?",
+    "Did the DataFrame contain only a subset?",
+    "Which version was the last good one, and are its files still within retention?",
+    "Should this job use append, MERGE or REPLACE WHERE instead?"
+   ],
+   "steps": [
+    {
+     "do": "DESCRIBE HISTORY",
+     "why": "Find the overwrite",
+     "code": "DESCRIBE HISTORY ecommerce.silver.orders;"
+    },
+    {
+     "do": "RESTORE",
+     "why": "Bring back the last good state as a new version",
+     "code": "RESTORE TABLE ecommerce.silver.orders TO VERSION AS OF 309;"
+    },
+    {
+     "do": "Fix the job's write semantics",
+     "why": "Prevent recurrence"
+    }
+   ],
+   "rootCauses": [
+    "Full overwrite with a subset DataFrame",
+    "INSERT OVERWRITE without predicate"
+   ],
+   "fix": "RESTORE, then switch the job to append / MERGE / REPLACE WHERE.",
+   "mnemonic": "Subset + overwrite = loss"
+  },
+  {
+   "id": "ch06-d06",
+   "title": "Dynamic overwrite replaced an unexpected slice",
+   "section": "ch06-s05",
+   "symptom": "After a 'one-day' dynamic overwrite, a different date's data shrank to a few rows.",
+   "askYourself": [
+    "Which keys/partitions did the incoming data actually contain (SELECT DISTINCT)?",
+    "Did a stray row carry an unexpected date?",
+    "Which version changed the slice (history + time travel)?",
+    "Would REPLACE WHERE with an explicit predicate have failed safely?"
+   ],
+   "steps": [
+    {
+     "do": "Inspect incoming key domain",
+     "why": "Find stray keys",
+     "code": "SELECT DISTINCT order_date FROM ecommerce.staging.orders_daily;"
+    },
+    {
+     "do": "Compare versions for the damaged slice",
+     "why": "Confirm the culprit write"
+    },
+    {
+     "do": "Restore/repair and switch to REPLACE WHERE",
+     "why": "Explicit predicate validates rows"
+    }
+   ],
+   "rootCauses": [
+    "Data-derived overwrite with stray keys",
+    "No validation of incoming domain"
+   ],
+   "fix": "Validate the incoming domain; prefer explicit REPLACE WHERE; repair with RESTORE or re-load of the slice.",
+   "mnemonic": "Validate the domain before you replace"
+  },
+  {
+   "id": "ch06-d07",
+   "title": "Values landed in the wrong columns",
+   "section": "ch06-s02",
+   "symptom": "After a load, `id` contains names (or numbers appear in a text column); no error was raised.",
+   "askYourself": [
+    "Did I write with insertInto (positional)?",
+    "Does the DataFrame column order match the target?",
+    "Could types be coerced silently?",
+    "Which version introduced the bad rows?"
+   ],
+   "steps": [
+    {
+     "do": "Check the writing code",
+     "why": "Spot positional APIs"
+    },
+    {
+     "do": "Compare DataFrame column order vs DESCRIBE TABLE",
+     "why": "Confirm mismatch"
+    },
+    {
+     "do": "Fix code: select columns in target order or use a name-based API",
+     "why": "Prevent recurrence",
+     "code": "df.writeTo('ecommerce.silver.customers').append()"
+    },
+    {
+     "do": "RESTORE or repair affected version",
+     "why": "Clean data"
+    }
+   ],
+   "rootCauses": [
+    "insertInto positional resolution"
+   ],
+   "fix": "Use name-based writers (writeTo().append(), saveAsTable append) or reorder columns explicitly.",
+   "mnemonic": "insertInto = position, not name"
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "CREATE OR REPLACE in production",
+   "text": "Replaces definition/state of an existing table.",
+   "fix": "Use CREATE TABLE / IF NOT EXISTS unless a rebuild is intended."
+  },
+  {
+   "title": "insertInto is positional",
+   "text": "Columns matched by position; silent wrong mapping if coercible.",
+   "fix": "Use writeTo().append()/saveAsTable or reorder columns."
+  },
+  {
+   "title": "INSERT OVERWRITE without predicate",
+   "text": "Replaces the entire table.",
+   "fix": "Use INSERT INTO or REPLACE WHERE."
+  },
+  {
+   "title": "Full overwrite with a subset",
+   "text": "3 years → 1 day.",
+   "fix": "Append / MERGE / REPLACE WHERE."
+  },
+  {
+   "title": "Non-idempotent writes",
+   "text": "amount = amount + 10 or blind appends double-apply on retry.",
+   "fix": "MERGE that sets values from a deduplicated source."
+  },
+  {
+   "title": "Legacy dynamic partition overwrite",
+   "text": "Legacy, compute limitations, stray keys replace slices.",
+   "fix": "REPLACE WHERE / REPLACE USING; validate the key domain."
+  },
+  {
+   "title": "Disabling enforcement mentally",
+   "text": "Treating schema errors as a nuisance.",
+   "fix": "Investigate: intentional evolution or source bug?"
+  },
+  {
+   "title": "Global autoMerge",
+   "text": "Every write in the session can evolve schemas.",
+   "fix": "Per-write mergeSchema / WITH SCHEMA EVOLUTION."
+  },
+  {
+   "title": "mergeSchema ≠ overwriteSchema",
+   "text": "overwriteSchema replaces schema/partitioning on overwrite.",
+   "fix": "Pick the tool by intent."
+  },
+  {
+   "title": "Rename/drop without column mapping",
+   "text": "Metadata-only rename/drop needs column mapping.",
+   "fix": "Enable column mapping first."
+  },
+  {
+   "title": "Widening ≠ arbitrary cast",
+   "text": "INT → STRING / STRING → STRUCT aren't widening.",
+   "fix": "Use type widening only for supported wider types."
+  },
+  {
+   "title": "Uncoordinated schema changes",
+   "text": "ALTER during writes → MetadataChangedException; streams stop.",
+   "fix": "Coordinate schema changes and restart streams."
+  },
+  {
+   "title": "OPTIMIZE ≠ VACUUM",
+   "text": "OPTIMIZE rewrites active files; VACUUM deletes old ones.",
+   "fix": "Run both for their own purpose."
+  },
+  {
+   "title": "Judging health by total bytes",
+   "text": "File count/size distribution matters.",
+   "fix": "Check numFiles and average size in DESCRIBE DETAIL."
+  },
+  {
+   "title": "Expecting immediate rewrite from CLUSTER BY",
+   "text": "Changing keys doesn't recluster existing data.",
+   "fix": "OPTIMIZE FULL to recluster everything."
+  },
+  {
+   "title": "Automation replaces understanding",
+   "text": "Predictive optimization doesn't debug layouts for you.",
+   "fix": "Still learn small files, skipping, clustering."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "Default table format on Databricks?",
+   "a": "Delta (USING DELTA optional).",
+   "section": "ch06-s01"
+  },
+  {
+   "q": "Recommended table type for most workloads?",
+   "a": "Unity Catalog managed Delta tables.",
+   "section": "ch06-s01"
+  },
+  {
+   "q": "CREATE TABLE when table exists?",
+   "a": "Fails (use IF NOT EXISTS to no-op, OR REPLACE to replace).",
+   "section": "ch06-s01"
+  },
+  {
+   "q": "CTAS schema source?",
+   "a": "Derived from the SELECT query.",
+   "section": "ch06-s01"
+  },
+  {
+   "q": "CREATE TABLE b LIKE a copies?",
+   "a": "Definition/metadata only, no data.",
+   "section": "ch06-s01"
+  },
+  {
+   "q": "V2 writer API?",
+   "a": "`df.writeTo(t).create() / createOrReplace() / append()`.",
+   "section": "ch06-s02"
+  },
+  {
+   "q": "writeTo advantages?",
+   "a": "Clear create/replace semantics, partitioning, table properties, clustering, conditional overwrite.",
+   "section": "ch06-s02"
+  },
+  {
+   "q": "insertInto resolves columns by?",
+   "a": "Position, not name.",
+   "section": "ch06-s02"
+  },
+  {
+   "q": "INSERT INTO vs INSERT OVERWRITE?",
+   "a": "INTO adds rows; OVERWRITE replaces the target scope.",
+   "section": "ch06-s03"
+  },
+  {
+   "q": "TRUNCATE vs DROP?",
+   "a": "TRUNCATE removes rows (table + schema stay); DROP removes the table object.",
+   "section": "ch06-s03"
+  },
+  {
+   "q": "When append?",
+   "a": "Rows are genuinely new, no overlap.",
+   "section": "ch06-s04"
+  },
+  {
+   "q": "When full overwrite?",
+   "a": "Target should exactly equal the new DataFrame.",
+   "section": "ch06-s04"
+  },
+  {
+   "q": "Idempotent operation?",
+   "a": "Re-running with same input doesn't change final state again.",
+   "section": "ch06-s04"
+  },
+  {
+   "q": "Non-idempotent example?",
+   "a": "`UPDATE … SET amount = amount + 10` (twice → +20).",
+   "section": "ch06-s04"
+  },
+  {
+   "q": "REPLACE WHERE syntax?",
+   "a": "`INSERT INTO t REPLACE WHERE pred SELECT …`.",
+   "section": "ch06-s05"
+  },
+  {
+   "q": "REPLACE USING does?",
+   "a": "Replaces target rows matching incoming values of the listed key columns (dynamic overwrite).",
+   "section": "ch06-s05"
+  },
+  {
+   "q": "Legacy dynamic overwrite option?",
+   "a": "`.option('partitionOverwriteMode','dynamic')` with mode overwrite.",
+   "section": "ch06-s05"
+  },
+  {
+   "q": "Dynamic overwrite risk?",
+   "a": "A stray key in the data replaces that whole slice — validate the domain.",
+   "section": "ch06-s05"
+  },
+  {
+   "q": "Schema enforcement rules?",
+   "a": "Columns must exist; types must match or be safely castable.",
+   "section": "ch06-s06"
+  },
+  {
+   "q": "INT into BIGINT column?",
+   "a": "OK — safe cast.",
+   "section": "ch06-s06"
+  },
+  {
+   "q": "Per-write evolution option?",
+   "a": "`.option('mergeSchema','true')`.",
+   "section": "ch06-s07"
+  },
+  {
+   "q": "Global evolution config?",
+   "a": "`spark.databricks.delta.schema.autoMerge.enabled` — avoid in production.",
+   "section": "ch06-s07"
+  },
+  {
+   "q": "SQL evolution syntax?",
+   "a": "`MERGE WITH SCHEMA EVOLUTION INTO …`; `INSERT WITH SCHEMA EVOLUTION INTO …` (DBR 18.1+).",
+   "section": "ch06-s07"
+  },
+  {
+   "q": "overwriteSchema does?",
+   "a": "Replaces schema/partitioning during overwrite.",
+   "section": "ch06-s07"
+  },
+  {
+   "q": "Rename/drop column requires?",
+   "a": "Column mapping (for metadata-only changes).",
+   "section": "ch06-s07"
+  },
+  {
+   "q": "Enable type widening?",
+   "a": "`'delta.enableTypeWidening' = 'true'` then `ALTER COLUMN c TYPE BIGINT`.",
+   "section": "ch06-s08"
+  },
+  {
+   "q": "INT can widen to?",
+   "a": "BIGINT, DECIMAL, DOUBLE.",
+   "section": "ch06-s08"
+  },
+  {
+   "q": "Does supported widening rewrite files?",
+   "a": "No.",
+   "section": "ch06-s08"
+  },
+  {
+   "q": "Schema change during writes →?",
+   "a": "MetadataChangedException for concurrent writers; streams may stop.",
+   "section": "ch06-s08"
+  },
+  {
+   "q": "DESCRIBE DETAIL key fields?",
+   "a": "format, location, sizeInBytes, numFiles, partition/clustering cols, properties/features.",
+   "section": "ch06-s09"
+  },
+  {
+   "q": "Average file size formula?",
+   "a": "sizeInBytes / numFiles.",
+   "section": "ch06-s09"
+  },
+  {
+   "q": "Small-file problem costs?",
+   "a": "Metadata, file listing/open, task scheduling, poor scan efficiency.",
+   "section": "ch06-s10"
+  },
+  {
+   "q": "Plain OPTIMIZE does?",
+   "a": "Bin packing: compacts small files into balanced larger files.",
+   "section": "ch06-s10"
+  },
+  {
+   "q": "OPTIMIZE vs VACUUM?",
+   "a": "OPTIMIZE reorganizes active files; VACUUM deletes expired unreferenced files.",
+   "section": "ch06-s10"
+  },
+  {
+   "q": "dataChange=false means?",
+   "a": "Commit rearranges data without logical record change.",
+   "section": "ch06-s10"
+  },
+  {
+   "q": "Data skipping?",
+   "a": "Using file stats to skip files that can't contain matching rows.",
+   "section": "ch06-s11"
+  },
+  {
+   "q": "File stats stored?",
+   "a": "min, max, null counts, row count.",
+   "section": "ch06-s11"
+  },
+  {
+   "q": "Liquid clustering syntax?",
+   "a": "`ALTER TABLE t CLUSTER BY (col)`; `OPTIMIZE t FULL` for existing data.",
+   "section": "ch06-s12"
+  },
+  {
+   "q": "Good clustering key?",
+   "a": "Frequently filtered/joined, selective lookups, enough cardinality.",
+   "section": "ch06-s12"
+  },
+  {
+   "q": "Why 'liquid'?",
+   "a": "Keys can change without immediate rewrite of historical layout; incremental.",
+   "section": "ch06-s12"
+  },
+  {
+   "q": "Predictive optimization runs?",
+   "a": "OPTIMIZE, VACUUM, ANALYZE on UC managed tables when useful.",
+   "section": "ch06-s13"
+  },
+  {
+   "q": "5 debug workflows?",
+   "a": "MERGE fails; schema mismatch; storage exploded; scans too much; someone broke data.",
+   "section": "ch06-s14"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch06-e001",
+   "type": "tf",
+   "section": "ch06-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "`CREATE TABLE ecommerce.bronze.orders_raw (...)` silently replaces the table if it already exists.",
+   "answer": false,
+   "explain": "Plain `CREATE TABLE` usually **fails** when the table exists. Replacement needs `CREATE OR REPLACE TABLE`; no-op-if-exists needs `CREATE TABLE IF NOT EXISTS`."
+  },
+  {
+   "id": "ch06-e002",
+   "type": "mcq",
+   "section": "ch06-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "syntax"
+   ],
+   "quick": true,
+   "q": "In a CTAS (`CREATE TABLE … AS SELECT`), where does the table's schema come from?",
+   "options": [
+    "You must declare it in parentheses first",
+    "It is derived from the SELECT query",
+    "It is copied from the source table's DDL",
+    "Delta infers it later on first read"
+   ],
+   "answer": 1,
+   "why": [
+    "Not in CTAS.",
+    "Correct.",
+    "Only CREATE TABLE LIKE copies a definition.",
+    "Schema is fixed at creation."
+   ],
+   "explain": "CTAS derives column names and types from the query — that's why you use CAST/aliases in the SELECT to control the resulting schema."
+  },
+  {
+   "id": "ch06-e003",
+   "type": "write",
+   "section": "ch06-s01",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Exercise 1: create an **empty** table `dev.silver.customers` with the same schema as `prod.silver.customers` — no data.",
+   "solution": "CREATE TABLE dev.silver.customers\nLIKE prod.silver.customers;",
+   "keywords": [
+    "create table dev.silver.customers",
+    "like prod.silver.customers"
+   ],
+   "lang": "sql",
+   "explain": "`CREATE TABLE … LIKE …` copies the definition/metadata, not the rows. Great for dev/test, prod-like staging, schema cloning and migration testing."
+  },
+  {
+   "id": "ch06-e004",
+   "type": "tf",
+   "section": "ch06-s01",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "In Databricks you must write `USING DELTA` or the table will be created as Parquet.",
+   "answer": false,
+   "explain": "Delta is the default table format on Databricks. `USING DELTA` is optional — useful only for explicitness."
+  },
+  {
+   "id": "ch06-e005",
+   "type": "bucket",
+   "section": "ch06-s01",
+   "difficulty": 2,
+   "tags": [
+    "compare",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "The table already exists. What does each statement do?",
+   "buckets": [
+    "Fails",
+    "No-op",
+    "Replaces definition/state"
+   ],
+   "items": [
+    {
+     "text": "CREATE TABLE t (...)",
+     "bucket": 0
+    },
+    {
+     "text": "CREATE TABLE IF NOT EXISTS t (...)",
+     "bucket": 1
+    },
+    {
+     "text": "CREATE OR REPLACE TABLE t (...)",
+     "bucket": 2
+    },
+    {
+     "text": "CREATE OR REPLACE TABLE t AS SELECT …",
+     "bucket": 2
+    },
+    {
+     "text": "CREATE TABLE t AS SELECT … (CTAS without OR REPLACE)",
+     "bucket": 0
+    }
+   ],
+   "explain": "Only OR REPLACE replaces; IF NOT EXISTS skips; plain CREATE (including plain CTAS) fails on an existing table. In production, OR REPLACE must be a conscious choice."
+  },
+  {
+   "id": "ch06-e006",
+   "type": "write",
+   "section": "ch06-s01",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "CTAS: create/replace `ecommerce.silver.orders` from `ecommerce.bronze.orders_raw`, casting `order_id` to BIGINT and `amount` to DECIMAL(10,2), upper-casing `status`, keeping `customer_id` and `order_ts`.",
+   "solution": "CREATE OR REPLACE TABLE ecommerce.silver.orders AS\nSELECT\n  CAST(order_id AS BIGINT) AS order_id,\n  customer_id,\n  CAST(amount AS DECIMAL(10,2)) AS amount,\n  UPPER(status) AS status,\n  order_ts\nFROM ecommerce.bronze.orders_raw;",
+   "keywords": [
+    "create or replace table ecommerce.silver.orders as",
+    "cast(order_id as bigint)",
+    "decimal(10,2)",
+    "upper(status)",
+    "from ecommerce.bronze.orders_raw"
+   ],
+   "lang": "sql",
+   "explain": "The SELECT defines the Silver schema; casts make types explicit instead of relying on whatever Bronze had."
+  },
+  {
+   "id": "ch06-e007",
+   "type": "odd",
+   "section": "ch06-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which statement copies data rows into the new table?",
+   "options": [
+    "`CREATE TABLE b LIKE a`",
+    "`CREATE TABLE b (id BIGINT)`",
+    "`CREATE TABLE IF NOT EXISTS b (id BIGINT)`",
+    "`CREATE TABLE b AS SELECT * FROM a`"
+   ],
+   "answer": 3,
+   "explain": "Only CTAS materializes query results. LIKE copies structure only; the others define an empty schema."
+  },
+  {
+   "id": "ch06-e008",
+   "type": "mcq",
+   "section": "ch06-s02",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Exercise 2: target `(id BIGINT, name STRING)`; DataFrame columns `(name, id)`. Which API is the most dangerous here?",
+   "options": [
+    "`df.writeTo(t).append()`",
+    "`df.write.mode('append').saveAsTable(t)`",
+    "`df.write.insertInto(t)`",
+    "`MERGE INTO` with explicit columns"
+   ],
+   "answer": 2,
+   "why": [
+    "Name-based.",
+    "Name-based for Delta tables.",
+    "Correct: position-based.",
+    "Explicit mapping by name."
+   ],
+   "explain": "`insertInto` resolves columns **by position**, so `name` goes into `id`. If types can be coerced it silently writes wrong data; otherwise it fails."
+  },
+  {
+   "id": "ch06-e009",
+   "type": "tf",
+   "section": "ch06-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "`df.writeTo(...)` is the DataFrameWriterV2 API, which Databricks recommends for many modern table writes.",
+   "answer": true,
+   "explain": "writeTo() = V2: clearer create/replace semantics, better partitioning, table properties, clustering and conditional overwrite support."
+  },
+  {
+   "id": "ch06-e010",
+   "type": "match",
+   "section": "ch06-s02",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Match each call to its effect.",
+   "pairs": [
+    [
+     "df.writeTo(t).create()",
+     "Create new table; fail if it exists"
+    ],
+    [
+     "df.writeTo(t).createOrReplace()",
+     "Create or replace the table"
+    ],
+    [
+     "df.writeTo(t).append()",
+     "Add rows to existing table"
+    ],
+    [
+     "df.write.mode('overwrite').saveAsTable(t)",
+     "Classic API: replace table contents"
+    ],
+    [
+     "df.write.insertInto(t)",
+     "Insert by column position"
+    ]
+   ],
+   "explain": "V2 methods name the intent directly; the classic API encodes it in `.mode()`; insertInto is positional."
+  },
+  {
+   "id": "ch06-e011",
+   "type": "spotbug",
+   "section": "ch06-s02",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "Target `ecommerce.silver.customers` has columns `(id, name)`. Which line causes silently swapped values?",
+   "lines": [
+    "df = spark.table('staging.customers_raw').select('name', 'id')",
+    "df = df.dropDuplicates(['id'])",
+    "df.write.insertInto('ecommerce.silver.customers')",
+    "spark.table('ecommerce.silver.customers').show()"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "df.select('id', 'name').write.insertInto('ecommerce.silver.customers')\n# or: df.writeTo('ecommerce.silver.customers').append()",
+   "explain": "insertInto maps by position: DataFrame column 1 (`name`) → target column 1 (`id`). Either reorder to match the target, or use a name-based API."
+  },
+  {
+   "id": "ch06-e012",
+   "type": "cloze",
+   "section": "ch06-s02",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Create or replace a Delta table with the V2 API.",
+   "text": "(df.[[writeTo]](\"ecommerce.bronze.orders_raw\")\n   .[[using]](\"delta\")\n   .[[createOrReplace]]())",
+   "bank": [
+    "saveAsTable",
+    "mode",
+    "insertInto",
+    "format"
+   ],
+   "asCode": true,
+   "explain": "writeTo(name) → using(format) → createOrReplace(). `.create()` would fail if the table existed; `.append()` adds rows."
+  },
+  {
+   "id": "ch06-e013",
+   "type": "mcq",
+   "section": "ch06-s02",
+   "difficulty": 2,
+   "tags": [
+    "compare",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Difference between `saveAsTable(...)` and `writeTo(...)`?",
+   "options": [
+    "They are identical aliases",
+    "saveAsTable is the older DataFrameWriter API; writeTo is DataFrameWriterV2 with more explicit create/replace/partitioning/table semantics",
+    "writeTo only works for Parquet",
+    "saveAsTable can't overwrite"
+   ],
+   "answer": 1,
+   "explain": "Both write tables. V2 makes intent explicit (create, createOrReplace, append, overwrite…) and supports properties/clustering better; the classic API relies on `.mode()`."
+  },
+  {
+   "id": "ch06-e014",
+   "type": "write",
+   "section": "ch06-s02",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Append `df` to `ecommerce.silver.orders` using the V2 API.",
+   "solution": "df.writeTo(\"ecommerce.silver.orders\").append()",
+   "keywords": [
+    "writeto(",
+    "ecommerce.silver.orders",
+    ".append()"
+   ],
+   "lang": "python",
+   "explain": "V2 append is name-based and explicit. Classic equivalent: `df.write.mode('append').saveAsTable(...)`."
+  },
+  {
+   "id": "ch06-e015",
+   "type": "mcq",
+   "section": "ch06-s03",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Difference between `INSERT INTO` and `INSERT OVERWRITE`?",
+   "options": [
+    "None on Delta",
+    "INTO adds rows; OVERWRITE replaces the target scope",
+    "INTO replaces; OVERWRITE appends",
+    "OVERWRITE only changes the schema"
+   ],
+   "answer": 1,
+   "explain": "INTO is additive. OVERWRITE replaces the target scope — without restriction, the entire table contents."
+  },
+  {
+   "id": "ch06-e016",
+   "type": "tf",
+   "section": "ch06-s03",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "`TRUNCATE TABLE` removes the table object from the catalog.",
+   "answer": false,
+   "explain": "TRUNCATE removes rows; schema and table object remain. `DROP TABLE` removes the table object."
+  },
+  {
+   "id": "ch06-e017",
+   "type": "calc",
+   "section": "ch06-s03",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "`ecommerce.silver.orders` has 1,000 rows. You run `INSERT OVERWRITE TABLE ecommerce.silver.orders SELECT * FROM staging.orders` where staging has 200 rows (no partition restriction). How many rows does the table have now?",
+   "answer": 200,
+   "tolerance": 0,
+   "unit": "rows",
+   "explain": "INSERT OVERWRITE replaced the whole target scope with the 200 staging rows. With `INSERT INTO` it would have been 1,200."
+  },
+  {
+   "id": "ch06-e018",
+   "type": "cloze",
+   "section": "ch06-s03",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Daily batch ETL: copy today's Bronze rows into Silver.",
+   "text": "INSERT [[INTO]] ecommerce.silver.orders\n[[SELECT]] order_id, customer_id, amount, status, order_ts\nFROM ecommerce.bronze.orders_raw\nWHERE ingestion_date = [[current_date()]];",
+   "bank": [
+    "OVERWRITE",
+    "VALUES",
+    "now"
+   ],
+   "asCode": true,
+   "explain": "INSERT INTO … SELECT is the bread-and-butter additive load. Using OVERWRITE here would wipe all previous days."
+  },
+  {
+   "id": "ch06-e019",
+   "type": "bucket",
+   "section": "ch06-s03",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "TRUNCATE TABLE or DROP TABLE?",
+   "buckets": [
+    "TRUNCATE TABLE",
+    "DROP TABLE"
+   ],
+   "items": [
+    {
+     "text": "Schema remains",
+     "bucket": 0
+    },
+    {
+     "text": "Table object removed",
+     "bucket": 1
+    },
+    {
+     "text": "All rows removed, table still queryable",
+     "bucket": 0
+    },
+    {
+     "text": "Table no longer appears in SHOW TABLES",
+     "bucket": 1
+    },
+    {
+     "text": "You can INSERT into it immediately afterwards",
+     "bucket": 0
+    }
+   ],
+   "explain": "TRUNCATE empties; DROP deletes the object (and its definition)."
+  },
+  {
+   "id": "ch06-e020",
+   "type": "odd",
+   "section": "ch06-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which statement does NOT keep existing rows?",
+   "options": [
+    "`INSERT INTO t VALUES (...)`",
+    "`INSERT INTO t SELECT …`",
+    "`df.writeTo(t).append()`",
+    "`INSERT OVERWRITE TABLE t SELECT …`"
+   ],
+   "answer": 3,
+   "explain": "The first three are additive; INSERT OVERWRITE replaces the target scope."
+  },
+  {
+   "id": "ch06-e021",
+   "type": "mcq",
+   "section": "ch06-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "When do you use append?",
+   "options": [
+    "When the incoming rows are genuinely additive and don't replace existing state",
+    "Whenever a job might retry",
+    "When the target should exactly equal the DataFrame",
+    "When fixing yesterday's wrong data"
+   ],
+   "answer": 0,
+   "explain": "Append = existing + new rows, no overlap. If rows overlap or correct existing state, you need MERGE/REPLACE WHERE; 'exactly equal' is full overwrite."
+  },
+  {
+   "id": "ch06-e022",
+   "type": "tf",
+   "section": "ch06-s04",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A full overwrite is dangerous when the DataFrame contains only a subset of the table (e.g. only yesterday).",
+   "answer": true,
+   "explain": "Overwrite replaces the logical state with the DataFrame: 3 years of data become 1 day. One of the most classic production mistakes."
+  },
+  {
+   "id": "ch06-e023",
+   "type": "calc",
+   "section": "ch06-s04",
+   "difficulty": 2,
+   "tags": [
+    "calc",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Order id=5 has `amount = 100`. A job runs `UPDATE orders SET amount = amount + 10 WHERE id = 5`, fails after committing, and is retried once. What is the amount now?",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "",
+   "explain": "+10 and +10 → 120. The statement is **not idempotent**: repeating it keeps changing the state. A MERGE that sets `amount = s.amount` would give the same result on every retry."
+  },
+  {
+   "id": "ch06-e024",
+   "type": "bucket",
+   "section": "ch06-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Idempotent (safe to re-run) or not?",
+   "buckets": [
+    "Idempotent",
+    "Not idempotent"
+   ],
+   "items": [
+    {
+     "text": "MERGE setting t.status = s.status from a deduplicated source",
+     "bucket": 0
+    },
+    {
+     "text": "UPDATE … SET amount = amount + 10",
+     "bucket": 1
+    },
+    {
+     "text": "Appending the same daily batch twice",
+     "bucket": 1
+    },
+    {
+     "text": "REPLACE WHERE order_date = '2026-09-27' with the same data",
+     "bucket": 0
+    },
+    {
+     "text": "Full overwrite with the same complete DataFrame",
+     "bucket": 0
+    },
+    {
+     "text": "Incrementing a counter column",
+     "bucket": 1
+    }
+   ],
+   "explain": "Idempotent writes **set** a final state; non-idempotent ones **add to** the current state (increments, blind appends)."
+  },
+  {
+   "id": "ch06-e025",
+   "type": "scenario",
+   "section": "ch06-s04",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Monday morning: `ecommerce.silver.orders` (3 years of data) now holds only Sunday's orders.",
+   "steps": [
+    {
+     "prompt": "First move?",
+     "options": [
+      {
+       "text": "DESCRIBE HISTORY to find the last write and its operationParameters (mode)",
+       "ok": true,
+       "fb": "History reveals a WRITE with mode Overwrite — the smoking gun."
+      },
+      {
+       "text": "Re-run all ingestion jobs for 3 years",
+       "ok": false,
+       "fb": "Slow and unnecessary while history still has the good version."
+      },
+      {
+       "text": "VACUUM to clean up",
+       "ok": false,
+       "fb": "Would destroy the old files you need to recover!"
+      }
+     ]
+    },
+    {
+     "prompt": "History: v310 = WRITE mode=Overwrite by the daily job. Recovery?",
+     "options": [
+      {
+       "text": "RESTORE TABLE … TO VERSION AS OF 309 (files still within retention)",
+       "ok": true,
+       "fb": "Creates v311 equal to the good state."
+      },
+      {
+       "text": "Time travel only — SELECT VERSION AS OF 309 fixes it",
+       "ok": false,
+       "fb": "Time travel reads; it doesn't make the state current."
+      },
+      {
+       "text": "Delete the v310 commit file",
+       "ok": false,
+       "fb": "Never hand-edit the log."
+      }
+     ]
+    },
+    {
+     "prompt": "Prevention?",
+     "options": [
+      {
+       "text": "Change the daily job to append / MERGE / REPLACE WHERE order_date = <day>",
+       "ok": true,
+       "fb": "Never full-overwrite with a subset."
+      },
+      {
+       "text": "Keep overwrite but run it at night",
+       "ok": false,
+       "fb": "Timing doesn't change semantics."
+      },
+      {
+       "text": "Enable autoMerge",
+       "ok": false,
+       "fb": "Schema setting, unrelated."
+      }
+     ]
+    }
+   ],
+   "explain": "Overwrite with a subset = data loss in the current state. Recover with RESTORE, prevent with append/MERGE/selective overwrite."
+  },
+  {
+   "id": "ch06-e026",
+   "type": "free",
+   "section": "ch06-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "interview"
+   ],
+   "quick": false,
+   "q": "What does it mean that a MERGE is idempotent, and why does it matter for production jobs?",
+   "model": "Idempotent means that running the same operation again with the same input does not change the final logical state any further. A MERGE that sets target columns from a deduplicated source (e.g. id=5 → status 'PAID') gives the same table no matter how many times it runs. That matters because jobs retry after failures: a retry must not double-apply changes like `amount = amount + 10` or duplicate appended rows.",
+   "rubric": [
+    "Same input re-run → same final state",
+    "MERGE sets values (not increments)",
+    "Retries are common in production",
+    "Contrast with non-idempotent increments/appends"
+   ],
+   "explain": "Mention **retries** and give a non-idempotent counter-example."
+  },
+  {
+   "id": "ch06-e027",
+   "type": "mcq",
+   "section": "ch06-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Daily file for 2026-09-27 may be re-delivered with corrections later that day. Which write is the best fit?",
+   "options": [
+    "Append",
+    "Full overwrite of the table",
+    "Selective overwrite of that day (REPLACE WHERE) or MERGE on the key",
+    "INSERT OVERWRITE without predicate"
+   ],
+   "answer": 2,
+   "explain": "Data overlap with existing rows, so plain append would duplicate; full overwrite would wipe other days. Replace that day's slice or MERGE by key — both idempotent."
+  },
+  {
+   "id": "ch06-e028",
+   "type": "write",
+   "section": "ch06-s05",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Exercise 4: replace only `country = 'GR'` rows of `sales.orders` with `staging.orders_gr`, keeping DE/FR unchanged.",
+   "solution": "INSERT INTO sales.orders\nREPLACE WHERE country = 'GR'\nSELECT * FROM staging.orders_gr;",
+   "keywords": [
+    "insert into sales.orders",
+    "replace where country = 'gr'",
+    "select"
+   ],
+   "lang": "sql",
+   "explain": "REPLACE WHERE replaces exactly the rows matching the predicate and leaves everything else untouched — far safer than a full overwrite."
+  },
+  {
+   "id": "ch06-e029",
+   "type": "cloze",
+   "section": "ch06-s05",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Dynamic overwrite, modern style.",
+   "text": "INSERT INTO ecommerce.silver.orders\n[[REPLACE USING]] (order_date)\nSELECT * FROM ecommerce.staging.orders_daily;",
+   "bank": [
+    "REPLACE WHERE",
+    "OVERWRITE PARTITION",
+    "MERGE USING"
+   ],
+   "asCode": true,
+   "explain": "REPLACE USING (cols) replaces target rows whose key-column values appear in the incoming data. Recommended over legacy partitionOverwriteMode=dynamic."
+  },
+  {
+   "id": "ch06-e030",
+   "type": "mcq",
+   "section": "ch06-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Which pattern does Databricks recommend for selective overwrite in new workloads?",
+   "options": [
+    "`partitionOverwriteMode = dynamic`",
+    "`REPLACE WHERE` / `REPLACE USING` (or `REPLACE ON`) depending on use case",
+    "Full overwrite then re-append old data",
+    "DELETE then INSERT in two jobs"
+   ],
+   "answer": 1,
+   "explain": "The modern INSERT … REPLACE variants are atomic and explicit. Dynamic partition overwrite is legacy with compute limitations; DELETE + INSERT in two jobs isn't atomic."
+  },
+  {
+   "id": "ch06-e031",
+   "type": "tf",
+   "section": "ch06-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "`.option(\"partitionOverwriteMode\", \"dynamic\")` is the preferred choice for new workloads.",
+   "answer": false,
+   "explain": "It's legacy: still supported in some contexts, has compute limitations, and Databricks recommends REPLACE WHERE / REPLACE USING instead."
+  },
+  {
+   "id": "ch06-e032",
+   "type": "scenario",
+   "section": "ch06-s05",
+   "difficulty": 3,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "You ran a dynamic overwrite for 2026-09-27. Next day, analysts report that all of **2024-01-01**'s orders are gone except one row.",
+   "steps": [
+    {
+     "prompt": "What likely happened?",
+     "options": [
+      {
+       "text": "The incoming data contained a stray row with order_date = 2024-01-01, so that whole slice was replaced",
+       "ok": true,
+       "fb": "Dynamic overwrite replaces every key present in the incoming data."
+      },
+      {
+       "text": "VACUUM deleted 2024 files",
+       "ok": false,
+       "fb": "VACUUM doesn't change the current snapshot."
+      },
+      {
+       "text": "A concurrency conflict dropped rows",
+       "ok": false,
+       "fb": "Conflicts fail transactions; they don't drop rows."
+      }
+     ]
+    },
+    {
+     "prompt": "How do you confirm?",
+     "options": [
+      {
+       "text": "DESCRIBE HISTORY + time-travel compare the 2024-01-01 slice before/after the write",
+       "ok": true,
+       "fb": "Shows the slice shrank in that exact version."
+      },
+      {
+       "text": "DESCRIBE DETAIL",
+       "ok": false,
+       "fb": "Gives current size/files, not per-slice changes."
+      },
+      {
+       "text": "Check cluster logs only",
+       "ok": false,
+       "fb": "The data evidence is in history."
+      }
+     ]
+    },
+    {
+     "prompt": "Prevention for next time?",
+     "options": [
+      {
+       "text": "Validate the incoming key domain (e.g. SELECT DISTINCT order_date) before writing, or use REPLACE WHERE with an explicit predicate",
+       "ok": true,
+       "fb": "REPLACE WHERE fails if rows violate the predicate."
+      },
+      {
+       "text": "Switch to full overwrite",
+       "ok": false,
+       "fb": "Even worse."
+      },
+      {
+       "text": "Increase VACUUM retention",
+       "ok": false,
+       "fb": "Helps recovery, not prevention."
+      }
+     ]
+    }
+   ],
+   "explain": "Always validate the incoming key/partition domain; explicit predicates are safer than data-derived slices."
+  },
+  {
+   "id": "ch06-e033",
+   "type": "spotbug",
+   "section": "ch06-s05",
+   "difficulty": 2,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A job should only replace 2026-09-27 in a 3-year table. Which line is the bug?",
+   "lines": [
+    "daily = spark.table('ecommerce.staging.orders_daily')",
+    "daily = daily.filter(\"order_date = '2026-09-27'\")",
+    "daily.write.mode('overwrite').saveAsTable('ecommerce.silver.orders')",
+    "print('done')"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "(daily.write.mode(\"overwrite\")\n     .option(\"replaceWhere\", \"order_date = '2026-09-27'\")\n     .saveAsTable(\"ecommerce.silver.orders\"))\n# or SQL: INSERT INTO ecommerce.silver.orders REPLACE WHERE order_date = DATE'2026-09-27' SELECT ...",
+   "explain": "A plain overwrite replaces the **whole** table with one day. Restrict it with a replaceWhere predicate (the DataFrame form of REPLACE WHERE)."
+  },
+  {
+   "id": "ch06-e034",
+   "type": "order",
+   "section": "ch06-s05",
+   "difficulty": 2,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Order a safe selective-overwrite routine.",
+   "items": [
+    "Decide which slice to replace (e.g. order_date = 2026-09-27)",
+    "Validate the incoming key domain (SELECT DISTINCT order_date)",
+    "INSERT INTO … REPLACE WHERE <slice predicate> SELECT …",
+    "Check DESCRIBE HISTORY metrics for the new version"
+   ],
+   "explain": "Decide → validate → replace explicitly → verify. Validation catches stray keys before they replace unintended slices."
+  },
+  {
+   "id": "ch06-e035",
+   "type": "mcq",
+   "section": "ch06-s05",
+   "difficulty": 3,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Incoming data accidentally includes one row outside the intended date. Which option protects you best?",
+   "options": [
+    "REPLACE USING (order_date)",
+    "partitionOverwriteMode = dynamic",
+    "REPLACE WHERE order_date = DATE'2026-09-27'",
+    "Full overwrite"
+   ],
+   "answer": 2,
+   "explain": "REPLACE WHERE states the slice explicitly and validates that written rows match the predicate, so the stray row makes the write fail instead of wiping another slice. Data-derived dynamic options replace whatever keys arrive."
+  },
+  {
+   "id": "ch06-e036",
+   "type": "mcq",
+   "section": "ch06-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "What is schema enforcement?",
+   "options": [
+    "Automatically adding new columns",
+    "Validation on write that incoming columns/types are compatible with the target schema",
+    "Casting everything to STRING",
+    "Locking the schema forever"
+   ],
+   "answer": 1,
+   "explain": "Enforcement rejects incompatible writes (missing/unknown columns, unsafe types) using the schema stored in the log metadata."
+  },
+  {
+   "id": "ch06-e037",
+   "type": "tf",
+   "section": "ch06-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Writing `amount INT` into a target column `amount BIGINT` can succeed through a safe cast.",
+   "answer": true,
+   "explain": "INT → BIGINT is safely castable. A complex STRUCT into BIGINT is not."
+  },
+  {
+   "id": "ch06-e038",
+   "type": "bucket",
+   "section": "ch06-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Default behaviour (no evolution enabled): accepted or rejected?",
+   "buckets": [
+    "Accepted",
+    "Rejected"
+   ],
+   "items": [
+    {
+     "text": "INT into BIGINT column",
+     "bucket": 0
+    },
+    {
+     "text": "STRUCT<foo:INT> into DECIMAL(10,2) column",
+     "bucket": 1
+    },
+    {
+     "text": "Extra column `email` not in target",
+     "bucket": 1
+    },
+    {
+     "text": "Exactly matching columns and types",
+     "bucket": 0
+    },
+    {
+     "text": "STRUCT into BIGINT column",
+     "bucket": 1
+    }
+   ],
+   "explain": "Columns must exist and types must match or be safely castable. New columns need explicit evolution."
+  },
+  {
+   "id": "ch06-e039",
+   "type": "mcq",
+   "section": "ch06-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which rules does Delta check on write? (choose all)",
+   "options": [
+    "Columns must exist in the target",
+    "Types must match or be safely castable",
+    "Column order must match exactly for saveAsTable",
+    "Row count must not decrease"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "multi": true,
+   "explain": "Schema validation is about column existence and type compatibility. Column order matters only for positional APIs like insertInto; row counts aren't validated."
+  },
+  {
+   "id": "ch06-e040",
+   "type": "free",
+   "section": "ch06-s06",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "interview"
+   ],
+   "quick": false,
+   "q": "Difference between schema enforcement and schema evolution?",
+   "model": "Schema enforcement validates every write against the target schema and rejects incompatible data, protecting downstream tables from silent corruption. Schema evolution is a controlled, explicit change of the target schema so it can accept intentional structural changes, such as a new column, via mergeSchema, WITH SCHEMA EVOLUTION or ALTER TABLE.",
+   "rubric": [
+    "Enforcement rejects incompatible data",
+    "Evolution = controlled schema change",
+    "Evolution must be explicit/intentional",
+    "Examples of mechanisms"
+   ],
+   "explain": "One protects, the other permits — explicitly."
+  },
+  {
+   "id": "ch06-e041",
+   "type": "odd",
+   "section": "ch06-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which one is NOT a goal of schema enforcement?",
+   "options": [
+    "Stop a bad producer before it corrupts Silver/Gold",
+    "Reject a STRUCT arriving in a DECIMAL column",
+    "Automatically add every new column a source sends",
+    "Use the schema stored in the transaction log for validation"
+   ],
+   "answer": 2,
+   "explain": "Adding columns is evolution — opt-in and explicit. Enforcement's job is to reject."
+  },
+  {
+   "id": "ch06-e042",
+   "type": "mcq",
+   "section": "ch06-s07",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Why is a global `spark.databricks.delta.schema.autoMerge.enabled = true` not the preferred production approach?",
+   "options": [
+    "It's slower",
+    "It lets many unrelated writes evolve schemas and hides which operation was allowed to",
+    "It's deprecated and removed",
+    "It only works with Parquet"
+   ],
+   "answer": 1,
+   "explain": "Session-wide evolution affects every subsequent write. Per-write `mergeSchema` or `WITH SCHEMA EVOLUTION` keeps the permission local and explicit."
+  },
+  {
+   "id": "ch06-e043",
+   "type": "tf",
+   "section": "ch06-s07",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "`mergeSchema` and `overwriteSchema` do the same thing.",
+   "answer": false,
+   "explain": "mergeSchema evolves/adds compatible changes during a write; overwriteSchema replaces the table schema (and partitioning) during an overwrite."
+  },
+  {
+   "id": "ch06-e044",
+   "type": "write",
+   "section": "ch06-s07",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Append `source_df` to `prod.silver.customers`, allowing schema evolution for this write only.",
+   "solution": "(source_df.write\n   .option(\"mergeSchema\", \"true\")\n   .mode(\"append\")\n   .saveAsTable(\"prod.silver.customers\"))",
+   "keywords": [
+    "option(\"mergeschema\", \"true\")",
+    "mode(\"append\")",
+    "saveastable(\"prod.silver.customers\")"
+   ],
+   "lang": "python",
+   "explain": "Per-write evolution: only this write may add `segment`. The rest of the session stays protected by enforcement."
+  },
+  {
+   "id": "ch06-e045",
+   "type": "cloze",
+   "section": "ch06-s07",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "MERGE that may evolve the schema for this operation only.",
+   "text": "MERGE [[WITH SCHEMA EVOLUTION]] INTO target t\nUSING source s\nON t.id = s.id\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;",
+   "bank": [
+    "WITH MERGESCHEMA",
+    "AUTO MERGE",
+    "OVERWRITE SCHEMA"
+   ],
+   "asCode": true,
+   "explain": "`MERGE WITH SCHEMA EVOLUTION INTO` scopes evolution to that statement — the SQL counterpart of per-write mergeSchema."
+  },
+  {
+   "id": "ch06-e046",
+   "type": "spotbug",
+   "section": "ch06-s07",
+   "difficulty": 2,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A notebook fixing a failing append. Which line is the anti-pattern?",
+   "lines": [
+    "# source added column 'segment'",
+    "spark.conf.set('spark.databricks.delta.schema.autoMerge.enabled', 'true')",
+    "source_df.write.mode('append').saveAsTable('prod.silver.customers')",
+    "other_df.write.mode('append').saveAsTable('prod.gold.kpis')"
+   ],
+   "bugs": [
+    1
+   ],
+   "fix": "source_df.write.option('mergeSchema', 'true').mode('append').saveAsTable('prod.silver.customers')",
+   "explain": "The global setting also lets `other_df`'s write (and every later one) evolve schemas silently. Scope evolution to the one write that needs it — after confirming the new column is intentional."
+  },
+  {
+   "id": "ch06-e047",
+   "type": "scenario",
+   "section": "ch06-s07",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Today's append to `prod.silver.customers` fails with a schema mismatch. Yesterday it worked.",
+   "steps": [
+    {
+     "prompt": "First step?",
+     "options": [
+      {
+       "text": "Compare DESCRIBE TABLE with df.printSchema()",
+       "ok": true,
+       "fb": "See exactly which column/type differs."
+      },
+      {
+       "text": "Enable mergeSchema and re-run",
+       "ok": false,
+       "fb": "Blindly evolving can bake a source bug into Silver."
+      },
+      {
+       "text": "Drop the target and recreate it from the DataFrame",
+       "ok": false,
+       "fb": "Destroys data and history."
+      }
+     ],
+     "code": "DESCRIBE TABLE prod.silver.customers;\n-- vs\ndf.printSchema()"
+    },
+    {
+     "prompt": "The DataFrame has a new column `segment STRING`. Next question?",
+     "options": [
+      {
+       "text": "Is `segment` an intentional addition, or a source bug?",
+       "ok": true,
+       "fb": "Intentional evolution vs bug is the key decision."
+      },
+      {
+       "text": "Which cluster ran the job?",
+       "ok": false,
+       "fb": "Irrelevant to schema."
+      },
+      {
+       "text": "How many files does the table have?",
+       "ok": false,
+       "fb": "Irrelevant here."
+      }
+     ]
+    },
+    {
+     "prompt": "Product confirms `segment` is intentional. Fix?",
+     "options": [
+      {
+       "text": "Per-write .option('mergeSchema','true') (or ALTER TABLE ADD COLUMNS segment STRING)",
+       "ok": true,
+       "fb": "Local, explicit evolution."
+      },
+      {
+       "text": "Set autoMerge globally for the cluster",
+       "ok": false,
+       "fb": "Too broad: unrelated writes could evolve too."
+      },
+      {
+       "text": "Use overwriteSchema with append",
+       "ok": false,
+       "fb": "overwriteSchema replaces schema on overwrite — wrong tool."
+      }
+     ]
+    }
+   ],
+   "explain": "DESCRIBE TABLE vs printSchema → new column/type/rename? → intentional? → explicit local evolution. Never blind mergeSchema."
+  },
+  {
+   "id": "ch06-e048",
+   "type": "match",
+   "section": "ch06-s07",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Match each tool to its effect.",
+   "pairs": [
+    [
+     "option('mergeSchema','true')",
+     "Evolve schema for this write"
+    ],
+    [
+     "autoMerge.enabled = true",
+     "Evolve schema for all writes in the session"
+    ],
+    [
+     "option('overwriteSchema','true')",
+     "Replace schema/partitioning during overwrite"
+    ],
+    [
+     "ALTER TABLE … ADD COLUMNS",
+     "Manual, explicit schema change"
+    ],
+    [
+     "INSERT WITH SCHEMA EVOLUTION INTO",
+     "SQL insert that may evolve schema (DBR 18.1+)"
+    ]
+   ],
+   "explain": "Know the scope of each: per write, per session, replace, manual DDL, per SQL statement."
+  },
+  {
+   "id": "ch06-e049",
+   "type": "write",
+   "section": "ch06-s07",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Manual evolution on `prod.silver.customers`: add `email STRING`, then rename `name` to `full_name`.",
+   "solution": "ALTER TABLE prod.silver.customers ADD COLUMNS (email STRING);\nALTER TABLE prod.silver.customers RENAME COLUMN name TO full_name;",
+   "keywords": [
+    "add columns (email string)",
+    "rename column name to full_name"
+   ],
+   "lang": "sql",
+   "explain": "ALTER TABLE makes intentional changes explicit. Metadata-only rename (and drop) requires column mapping on the table."
+  },
+  {
+   "id": "ch06-e050",
+   "type": "tf",
+   "section": "ch06-s07",
+   "difficulty": 3,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Metadata-only `RENAME COLUMN` and `DROP COLUMN` on Delta require column mapping support.",
+   "answer": true,
+   "explain": "Without column mapping, Delta identifies columns by name in the Parquet files, so renames/drops can't be metadata-only."
+  },
+  {
+   "id": "ch06-e051",
+   "type": "mcq",
+   "section": "ch06-s07",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which statement needs DBR 18.1+ according to the course?",
+   "options": [
+    "`MERGE WITH SCHEMA EVOLUTION INTO …`",
+    "`INSERT WITH SCHEMA EVOLUTION INTO … SELECT …`",
+    "`.option('mergeSchema','true')`",
+    "`ALTER TABLE … ADD COLUMNS`"
+   ],
+   "answer": 1,
+   "explain": "INSERT WITH SCHEMA EVOLUTION is the newest form (DBR 18.1+). MERGE WITH SCHEMA EVOLUTION, mergeSchema and ALTER have been around longer."
+  },
+  {
+   "id": "ch06-e052",
+   "type": "mcq",
+   "section": "ch06-s08",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "What is type widening?",
+   "options": [
+    "Any type change, e.g. INT → STRING",
+    "A compatible move to a wider type, e.g. INT → BIGINT or FLOAT → DOUBLE, without rewriting data files for supported cases",
+    "Adding new columns",
+    "Increasing the number of partitions"
+   ],
+   "answer": 1,
+   "explain": "Widening keeps meaning and only expands range/precision. INT → STRING changes semantics and isn't widening."
+  },
+  {
+   "id": "ch06-e053",
+   "type": "tf",
+   "section": "ch06-s08",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "`STRING → STRUCT` is a supported type widening.",
+   "answer": false,
+   "explain": "Widening ≠ arbitrary cast. STRING → STRUCT changes the data's meaning entirely; type evolution doesn't mean 'any type to any type'."
+  },
+  {
+   "id": "ch06-e054",
+   "type": "write",
+   "section": "ch06-s08",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Enable type widening on `ecommerce.silver.orders` and widen `quantity` to BIGINT.",
+   "solution": "ALTER TABLE ecommerce.silver.orders\nSET TBLPROPERTIES ('delta.enableTypeWidening' = 'true');\n\nALTER TABLE ecommerce.silver.orders\nALTER COLUMN quantity TYPE BIGINT;",
+   "keywords": [
+    "delta.enableTypeWidening",
+    "alter column quantity type bigint"
+   ],
+   "lang": "sql",
+   "explain": "Type widening is a table feature: enable it, then widen. Supported changes don't rewrite the underlying Parquet files."
+  },
+  {
+   "id": "ch06-e055",
+   "type": "bucket",
+   "section": "ch06-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Supported widening or not?",
+   "buckets": [
+    "Supported widening",
+    "Not widening"
+   ],
+   "items": [
+    {
+     "text": "INT → BIGINT",
+     "bucket": 0
+    },
+    {
+     "text": "FLOAT → DOUBLE",
+     "bucket": 0
+    },
+    {
+     "text": "SHORT → INT",
+     "bucket": 0
+    },
+    {
+     "text": "BYTE → DECIMAL",
+     "bucket": 0
+    },
+    {
+     "text": "INT → STRING",
+     "bucket": 1
+    },
+    {
+     "text": "BIGINT → INT",
+     "bucket": 1
+    },
+    {
+     "text": "STRING → STRUCT",
+     "bucket": 1
+    }
+   ],
+   "explain": "Widening goes to a wider compatible numeric type. Narrowing (BIGINT → INT) loses range; INT → STRING / STRING → STRUCT change meaning."
+  },
+  {
+   "id": "ch06-e056",
+   "type": "scenario",
+   "section": "ch06-s08",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "12:00 — a streaming pipeline writing to `prod.silver.orders` fails with `MetadataChangedException`. At 12:00 a colleague ran `ALTER TABLE prod.silver.orders ADD COLUMNS (channel STRING)`.",
+   "steps": [
+    {
+     "prompt": "Is this a Delta bug?",
+     "options": [
+      {
+       "text": "No — schema changes are metadata commits that conflict with concurrent writes",
+       "ok": true,
+       "fb": "Expected optimistic-concurrency semantics."
+      },
+      {
+       "text": "Yes — the table is corrupted",
+       "ok": false,
+       "fb": "Concurrency exceptions prevent corruption."
+      },
+      {
+       "text": "Yes — streaming doesn't support Delta",
+       "ok": false,
+       "fb": "It does; it just reacts to schema changes."
+      }
+     ]
+    },
+    {
+     "prompt": "What else should you expect?",
+     "options": [
+      {
+       "text": "Streams reading the table may stop until restarted",
+       "ok": true,
+       "fb": "Schema changes can halt streaming readers too."
+      },
+      {
+       "text": "All old versions are deleted",
+       "ok": false,
+       "fb": "Nothing like that happens."
+      },
+      {
+       "text": "The column is silently dropped",
+       "ok": false,
+       "fb": "The ALTER committed fine."
+      }
+     ]
+    },
+    {
+     "prompt": "Process fix?",
+     "options": [
+      {
+       "text": "Coordinate schema changes with pipeline owners (maintenance window), then restart affected streams",
+       "ok": true,
+       "fb": "Databricks recommends coordinating schema updates."
+      },
+      {
+       "text": "Disable the transaction log during ALTERs",
+       "ok": false,
+       "fb": "Not a thing."
+      },
+      {
+       "text": "Enable autoMerge globally so ALTERs aren't needed",
+       "ok": false,
+       "fb": "Trades a coordination problem for uncontrolled evolution."
+      }
+     ]
+    }
+   ],
+   "explain": "Schema change = metadata change → conflicts with concurrent writers and can stop streams. Coordinate it."
+  },
+  {
+   "id": "ch06-e057",
+   "type": "tf",
+   "section": "ch06-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Supported type-widening changes rewrite all the table's Parquet files.",
+   "answer": false,
+   "explain": "Supported widening is metadata-level: the underlying data files are not rewritten — readers upcast values on read."
+  },
+  {
+   "id": "ch06-e058",
+   "type": "order",
+   "section": "ch06-s08",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Order the steps to widen `quantity` from INT to BIGINT safely in production.",
+   "items": [
+    "Coordinate the change with pipelines writing the table",
+    "ALTER TABLE … SET TBLPROPERTIES ('delta.enableTypeWidening' = 'true')",
+    "ALTER TABLE … ALTER COLUMN quantity TYPE BIGINT",
+    "Restart streams that read the table if they stopped"
+   ],
+   "explain": "Schema changes are metadata commits that conflict with concurrent writes — coordinate first, enable the feature, widen, then restart affected streams."
+  },
+  {
+   "id": "ch06-e059",
+   "type": "mcq",
+   "section": "ch06-s09",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "What does `DESCRIBE DETAIL` show?",
+   "options": [
+    "Every version with its operation",
+    "Current table-level metadata: format, location, numFiles, sizeInBytes, partitioning, properties/features",
+    "Column names only",
+    "Running queries"
+   ],
+   "answer": 1,
+   "explain": "DETAIL = one row of current table metadata. Versions → DESCRIBE HISTORY; columns → DESCRIBE TABLE."
+  },
+  {
+   "id": "ch06-e060",
+   "type": "match",
+   "section": "ch06-s09",
+   "difficulty": 1,
+   "tags": [
+    "compare"
+   ],
+   "quick": true,
+   "q": "Which command answers which question?",
+   "pairs": [
+    [
+     "DESCRIBE TABLE",
+     "Which columns and types?"
+    ],
+    [
+     "DESCRIBE HISTORY",
+     "Who changed what, when?"
+    ],
+    [
+     "DESCRIBE DETAIL",
+     "How many files and bytes?"
+    ],
+    [
+     "df.printSchema()",
+     "What schema does my DataFrame have?"
+    ]
+   ],
+   "explain": "Schema-mismatch debugging pairs DESCRIBE TABLE with printSchema; storage debugging uses DETAIL; data-change debugging uses HISTORY."
+  },
+  {
+   "id": "ch06-e061",
+   "type": "calc",
+   "section": "ch06-s09",
+   "difficulty": 2,
+   "tags": [
+    "calc",
+    "debug"
+   ],
+   "quick": false,
+   "q": "DESCRIBE DETAIL shows `sizeInBytes` = 20 GB and `numFiles` = 200,000. What's the average file size in **KB**? (use 1 GB = 1,000,000 KB)",
+   "answer": 100,
+   "tolerance": 0,
+   "unit": "KB",
+   "explain": "20,000,000 KB / 200,000 = 100 KB per file — classic small-file pressure. Healthy Delta files are typically in the hundreds of MB to ~1 GB range."
+  },
+  {
+   "id": "ch06-e062",
+   "type": "tf",
+   "section": "ch06-s09",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "`DESCRIBE DETAIL` returns one row with table-level metadata.",
+   "answer": true,
+   "explain": "One row: format, location, size, numFiles, partition/clustering columns, properties, features…"
+  },
+  {
+   "id": "ch06-e063",
+   "type": "odd",
+   "section": "ch06-s09",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which field does NOT come from DESCRIBE DETAIL?",
+   "options": [
+    "numFiles",
+    "sizeInBytes",
+    "operationMetrics",
+    "location"
+   ],
+   "answer": 2,
+   "explain": "operationMetrics is per-version info from DESCRIBE HISTORY."
+  },
+  {
+   "id": "ch06-e064",
+   "type": "mcq",
+   "section": "ch06-s09",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Cloud bill for the table's storage doubled, but `DESCRIBE DETAIL` `sizeInBytes` stayed flat. Most likely explanation?",
+   "options": [
+    "DETAIL is broken",
+    "DETAIL measures the current snapshot; old unreferenced files (history) aren't counted — check VACUUM/retention",
+    "The table switched to Parquet",
+    "Deletion vectors doubled the size"
+   ],
+   "answer": 1,
+   "explain": "Removed files still occupy storage until VACUUM. DETAIL reports the current snapshot only, so history-driven storage growth is invisible there."
+  },
+  {
+   "id": "ch06-e065",
+   "type": "mcq",
+   "section": "ch06-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "What is the small-file problem?",
+   "options": [
+    "Files under 1 GB can't be read",
+    "Too many small physical files create metadata, file-open and task-scheduling overhead",
+    "Parquet compresses small files badly",
+    "Small files break ACID"
+   ],
+   "answer": 1,
+   "explain": "Total bytes may be fine; the number of files kills performance: listing, metadata, many tiny tasks, poor scan efficiency."
+  },
+  {
+   "id": "ch06-e066",
+   "type": "tf",
+   "section": "ch06-s10",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "OPTIMIZE physically deletes old unreferenced files from storage.",
+   "answer": false,
+   "explain": "OPTIMIZE rewrites active files into a better layout (new version). Deleting old unreferenced files is VACUUM's job, after retention."
+  },
+  {
+   "id": "ch06-e067",
+   "type": "calc",
+   "section": "ch06-s10",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "A 10 GB dataset is stored as files of 100 KB each. How many files is that? (1 GB = 1,000,000 KB)",
+   "answer": 100000,
+   "tolerance": 0,
+   "unit": "files",
+   "explain": "10,000,000 KB / 100 KB = 100,000 files — option B from the lesson, versus 10 × 1 GB in option A. Same bytes, vastly more overhead."
+  },
+  {
+   "id": "ch06-e068",
+   "type": "mcq",
+   "section": "ch06-s10",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Without clustering/Z-order, what does `OPTIMIZE` do?",
+   "options": [
+    "Bin packing: compacts small files into more balanced, larger files",
+    "Sorts all data by primary key",
+    "Deletes duplicates",
+    "Collects statistics only"
+   ],
+   "answer": 0,
+   "explain": "Plain OPTIMIZE = bin packing. With liquid clustering it also organizes data by the clustering keys."
+  },
+  {
+   "id": "ch06-e069",
+   "type": "bucket",
+   "section": "ch06-s10",
+   "difficulty": 2,
+   "tags": [
+    "compare",
+    "exam"
+   ],
+   "quick": false,
+   "q": "OPTIMIZE or VACUUM?",
+   "buckets": [
+    "OPTIMIZE",
+    "VACUUM"
+   ],
+   "items": [
+    {
+     "text": "Rewrites active data files",
+     "bucket": 0
+    },
+    {
+     "text": "Deletes old unreferenced files",
+     "bucket": 1
+    },
+    {
+     "text": "Fixes small-file pressure",
+     "bucket": 0
+    },
+    {
+     "text": "Reduces storage after DELETEs (after retention)",
+     "bucket": 1
+    },
+    {
+     "text": "Commits REMOVE/ADD with dataChange=false",
+     "bucket": 0
+    },
+    {
+     "text": "Garbage collection",
+     "bucket": 1
+    }
+   ],
+   "explain": "OPTIMIZE = layout/performance; VACUUM = physical cleanup. Often run together: OPTIMIZE, then later VACUUM removes the replaced small files."
+  },
+  {
+   "id": "ch06-e070",
+   "type": "scenario",
+   "section": "ch06-s10",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "`ecommerce.silver.orders` storage and query times exploded after a streaming job went live.",
+   "steps": [
+    {
+     "prompt": "First command?",
+     "options": [
+      {
+       "text": "DESCRIBE DETAIL ecommerce.silver.orders",
+       "ok": true,
+       "fb": "numFiles and sizeInBytes reveal file count and average size."
+      },
+      {
+       "text": "DESCRIBE HISTORY only",
+       "ok": false,
+       "fb": "Useful later, but file counts come from DETAIL."
+      },
+      {
+       "text": "VACUUM RETAIN 0 HOURS",
+       "ok": false,
+       "fb": "Dangerous and doesn't fix layout."
+      }
+     ],
+     "code": "DESCRIBE DETAIL ecommerce.silver.orders;"
+    },
+    {
+     "prompt": "numFiles = 450,000, average ~50 KB. Diagnosis?",
+     "options": [
+      {
+       "text": "Small-file pressure from frequent tiny writes",
+       "ok": true,
+       "fb": "Hundreds of thousands of tiny files = classic small-file problem."
+      },
+      {
+       "text": "Data skew",
+       "ok": false,
+       "fb": "Skew is uneven partition sizes, not tiny files."
+      },
+      {
+       "text": "Schema mismatch",
+       "ok": false,
+       "fb": "Unrelated."
+      }
+     ]
+    },
+    {
+     "prompt": "Fix?",
+     "options": [
+      {
+       "text": "Run OPTIMIZE (or enable predictive optimization), then VACUUM after retention to drop replaced files",
+       "ok": true,
+       "fb": "Compaction + later cleanup."
+      },
+      {
+       "text": "Only VACUUM",
+       "ok": false,
+       "fb": "VACUUM doesn't compact active files."
+      },
+      {
+       "text": "Increase driver memory",
+       "ok": false,
+       "fb": "Doesn't change file layout."
+      }
+     ]
+    }
+   ],
+   "explain": "DETAIL → numFiles/sizeInBytes → small files → OPTIMIZE (+ predictive optimization) and VACUUM later."
+  },
+  {
+   "id": "ch06-e071",
+   "type": "tf",
+   "section": "ch06-s10",
+   "difficulty": 3,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "After OPTIMIZE, the commit can use `dataChange = false` because the data was rearranged, not logically changed.",
+   "answer": true,
+   "explain": "The protocol's dataChange flag distinguishes rearrangement (compaction) from real record changes — e.g. so streaming readers don't reprocess compacted files as new data."
+  },
+  {
+   "id": "ch06-e072",
+   "type": "calc",
+   "section": "ch06-s11",
+   "difficulty": 1,
+   "tags": [
+    "calc",
+    "concept"
+   ],
+   "quick": true,
+   "q": "Stats: file A customer_id 1–1000, file B 1001–2000, file C 2001–3000. Query: `WHERE customer_id = 2500`. How many files must be read?",
+   "answer": 1,
+   "tolerance": 0,
+   "unit": "files",
+   "explain": "Only C's min/max range can contain 2500. A and B are skipped without being opened — that's data skipping."
+  },
+  {
+   "id": "ch06-e073",
+   "type": "mcq",
+   "section": "ch06-s11",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "What is data skipping?",
+   "options": [
+    "Skipping corrupted files",
+    "Using file statistics so files that cannot contain matching rows are not read",
+    "Sampling 10% of the data",
+    "Skipping VACUUM"
+   ],
+   "answer": 1,
+   "explain": "Min/max (and null count) stats per file let the engine prove a file can't match the predicate."
+  },
+  {
+   "id": "ch06-e074",
+   "type": "mcq",
+   "section": "ch06-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which file-level statistics does Delta typically store? (choose all)",
+   "options": [
+    "min values",
+    "max values",
+    "null counts",
+    "row count",
+    "average query latency"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "multi": true,
+   "explain": "These stats live in the add actions and drive pruning, skipping and planning. Query latency is not file metadata."
+  },
+  {
+   "id": "ch06-e075",
+   "type": "tf",
+   "section": "ch06-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "If every file contains customer_ids from 1 to 3000, min/max statistics can still skip most files for `customer_id = 2500`.",
+   "answer": false,
+   "explain": "Each file's range [1, 3000] contains 2500, so no file can be skipped. Skipping needs a layout where values are clustered into narrow per-file ranges."
+  },
+  {
+   "id": "ch06-e076",
+   "type": "scenario",
+   "section": "ch06-s11",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "`SELECT * FROM ecommerce.silver.orders WHERE customer_id = 1234` still scans most of the table.",
+   "steps": [
+    {
+     "prompt": "What do you investigate first?",
+     "options": [
+      {
+       "text": "Table layout and clustering: is data organized by customer_id?",
+       "ok": true,
+       "fb": "Without clustering, every file spans many customers."
+      },
+      {
+       "text": "Driver memory",
+       "ok": false,
+       "fb": "Scan volume isn't a memory setting."
+      },
+      {
+       "text": "Schema enforcement",
+       "ok": false,
+       "fb": "Unrelated."
+      }
+     ]
+    },
+    {
+     "prompt": "Layout: partitioned by order_date, no clustering. Stats exist but every file spans the full customer_id range. Also check?",
+     "options": [
+      {
+       "text": "Filter selectivity and whether data skipping actually prunes files",
+       "ok": true,
+       "fb": "Confirms skipping is ineffective due to layout."
+      },
+      {
+       "text": "Whether VACUUM ran",
+       "ok": false,
+       "fb": "VACUUM doesn't affect current file ranges."
+      },
+      {
+       "text": "insertInto usage",
+       "ok": false,
+       "fb": "Unrelated."
+      }
+     ]
+    },
+    {
+     "prompt": "Fix?",
+     "options": [
+      {
+       "text": "Consider liquid clustering on customer_id, then OPTIMIZE (FULL for existing data)",
+       "ok": true,
+       "fb": "Clusters values into narrow ranges so skipping works."
+      },
+      {
+       "text": "Add more workers",
+       "ok": false,
+       "fb": "Scans the same data faster but more expensively."
+      },
+      {
+       "text": "Partition by customer_id",
+       "ok": false,
+       "fb": "High-cardinality partitioning creates huge numbers of tiny partitions — liquid clustering is the modern answer."
+      }
+     ]
+    }
+   ],
+   "explain": "Layout → clustering → stats → selectivity → skipping. Liquid clustering on the filter column is often the fix."
+  },
+  {
+   "id": "ch06-e077",
+   "type": "free",
+   "section": "ch06-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Explain why data skipping can fail even though Delta collects min/max statistics.",
+   "model": "Statistics only help if each file holds a narrow range of the filtered column. If data was written in arrival order, every file may contain nearly the full range of customer_id, so for any value every file's min/max range overlaps and nothing can be skipped. Missing statistics for that column or a non-selective filter also defeat skipping. Clustering the data on the filter column fixes the ranges.",
+   "rubric": [
+    "Stats help only with narrow per-file ranges",
+    "Overlapping ranges → nothing skipped",
+    "Missing stats / low selectivity",
+    "Clustering as fix"
+   ],
+   "explain": "Link stats to physical layout."
+  },
+  {
+   "id": "ch06-e078",
+   "type": "mcq",
+   "section": "ch06-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "compare"
+   ],
+   "quick": true,
+   "q": "Why is liquid clustering different from static partitioning?",
+   "options": [
+    "It stores data in JSON",
+    "Clustering keys can evolve without immediately redesigning/rewriting the historical layout, and clustering is applied incrementally",
+    "It requires ZORDER on every column",
+    "It only works on external tables"
+   ],
+   "answer": 1,
+   "explain": "Partitioning is a fixed physical design; liquid clustering is adaptable and incremental."
+  },
+  {
+   "id": "ch06-e079",
+   "type": "cloze",
+   "section": "ch06-s12",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Cluster the orders table by customer and recluster existing data.",
+   "text": "ALTER TABLE ecommerce.silver.orders\n[[CLUSTER BY]] (customer_id);\n\nOPTIMIZE ecommerce.silver.orders [[FULL]];",
+   "bank": [
+    "PARTITIONED BY",
+    "ZORDER BY",
+    "ALL"
+   ],
+   "asCode": true,
+   "explain": "ALTER … CLUSTER BY sets the keys; OPTIMIZE … FULL applies clustering to all existing data (plain OPTIMIZE clusters incrementally)."
+  },
+  {
+   "id": "ch06-e080",
+   "type": "tf",
+   "section": "ch06-s12",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Running `ALTER TABLE … CLUSTER BY (customer_id)` immediately rewrites all historical data.",
+   "answer": false,
+   "explain": "Changing keys doesn't force an immediate rewrite. New writes/OPTIMIZE apply clustering incrementally; OPTIMIZE FULL reclusters everything."
+  },
+  {
+   "id": "ch06-e081",
+   "type": "mcq",
+   "section": "ch06-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which column is the best liquid-clustering candidate for an orders table queried mostly with `WHERE customer_id = ?` and joined to customers?",
+   "options": [
+    "`status` (4 distinct values)",
+    "`customer_id`",
+    "`amount`",
+    "`ingestion_ts` (never filtered)"
+   ],
+   "answer": 1,
+   "explain": "Good keys are used in filters/joins/selective lookups and have enough cardinality for layout to help. status has too few values; never-filtered columns don't help."
+  },
+  {
+   "id": "ch06-e082",
+   "type": "odd",
+   "section": "ch06-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which is NOT a typical reason to choose a clustering key?",
+   "options": [
+    "Frequently used in filters",
+    "Used in joins",
+    "Selective lookups on it",
+    "It has only 2 distinct values"
+   ],
+   "answer": 3,
+   "explain": "Very low cardinality gives physical ordering little to work with."
+  },
+  {
+   "id": "ch06-e083",
+   "type": "write",
+   "section": "ch06-s12",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Assignment steps 18–19: enable clustering on `ecommerce.silver.orders` by `customer_id`, then cluster all existing data.",
+   "solution": "ALTER TABLE ecommerce.silver.orders CLUSTER BY (customer_id);\nOPTIMIZE ecommerce.silver.orders FULL;",
+   "keywords": [
+    "cluster by (customer_id)",
+    "optimize ecommerce.silver.orders full"
+   ],
+   "lang": "sql",
+   "explain": "CLUSTER BY sets keys; OPTIMIZE FULL rewrites existing data accordingly. Afterwards compare DESCRIBE HISTORY/DETAIL."
+  },
+  {
+   "id": "ch06-e084",
+   "type": "mcq",
+   "section": "ch06-s12",
+   "difficulty": 3,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which statements about liquid clustering are true? (choose all)",
+   "options": [
+    "Databricks recommends it for many new Delta tables instead of partitioning + ZORDER",
+    "Clustering keys can change as query patterns change",
+    "Liquid-clustered tables also use row-level concurrency",
+    "You should combine it with partitionBy on the same keys for best results"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "multi": true,
+   "explain": "Liquid clustering replaces partitioning/ZORDER rather than stacking on top of them."
+  },
+  {
+   "id": "ch06-e085",
+   "type": "mcq",
+   "section": "ch06-s13",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Which maintenance operations can predictive optimization run automatically? (choose all)",
+   "options": [
+    "OPTIMIZE",
+    "VACUUM",
+    "ANALYZE",
+    "RESTORE",
+    "MERGE"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "multi": true,
+   "explain": "PO handles maintenance: compaction/clustering, cleanup, statistics. RESTORE and MERGE are data operations you decide."
+  },
+  {
+   "id": "ch06-e086",
+   "type": "tf",
+   "section": "ch06-s13",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "With predictive optimization enabled you no longer need to understand optimization.",
+   "answer": false,
+   "explain": "Automation doesn't replace engineering understanding: you still debug small files, failed skipping, bad clustering keys and huge scans."
+  },
+  {
+   "id": "ch06-e087",
+   "type": "mcq",
+   "section": "ch06-s13",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Predictive optimization is recommended for which tables?",
+   "options": [
+    "Any Parquet folder",
+    "Unity Catalog managed tables",
+    "Only external tables",
+    "Only streaming tables"
+   ],
+   "answer": 1,
+   "explain": "Databricks recommends PO for UC managed tables — it monitors and maintains them, and also collects statistics."
+  },
+  {
+   "id": "ch06-e088",
+   "type": "bucket",
+   "section": "ch06-s13",
+   "difficulty": 1,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Manual maintenance or predictive optimization?",
+   "buckets": [
+    "Manual",
+    "Predictive optimization"
+   ],
+   "items": [
+    {
+     "text": "You schedule OPTIMIZE every Sunday",
+     "bucket": 0
+    },
+    {
+     "text": "Databricks decides which tables benefit",
+     "bucket": 1
+    },
+    {
+     "text": "You schedule VACUUM every Monday",
+     "bucket": 0
+    },
+    {
+     "text": "Maintenance runs when useful",
+     "bucket": 1
+    },
+    {
+     "text": "Collects statistics on UC managed tables",
+     "bucket": 1
+    }
+   ],
+   "explain": "PO turns calendar-driven maintenance into need-driven maintenance."
+  },
+  {
+   "id": "ch06-e089",
+   "type": "free",
+   "section": "ch06-s13",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "A teammate says: \"We enabled predictive optimization, so performance tuning is solved.\" Respond.",
+   "model": "Predictive optimization automates maintenance on UC managed tables — it runs OPTIMIZE, VACUUM and ANALYZE when it judges they help. But it doesn't choose the right clustering keys for our queries, doesn't fix a pipeline that writes millions of tiny files, and doesn't explain why a query scans everything. We still need to understand small files, data skipping, statistics and layout to debug and design tables.",
+   "rubric": [
+    "PO = automated OPTIMIZE/VACUUM/ANALYZE on UC managed tables",
+    "Doesn't replace understanding",
+    "Examples: clustering keys, small files, skipping, huge scans"
+   ],
+   "explain": "Balance: appreciate automation, keep ownership."
+  },
+  {
+   "id": "ch06-e090",
+   "type": "match",
+   "section": "ch06-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Match each debugging workflow to its first command.",
+   "pairs": [
+    [
+     "MERGE fails: multiple source rows matched",
+     "GROUP BY key HAVING COUNT(*) > 1"
+    ],
+    [
+     "Write fails: schema mismatch",
+     "DESCRIBE TABLE vs df.printSchema()"
+    ],
+    [
+     "Storage exploded",
+     "DESCRIBE DETAIL (numFiles, sizeInBytes)"
+    ],
+    [
+     "Query scans too much",
+     "Inspect layout, clustering, stats, skipping"
+    ],
+    [
+     "Someone broke data",
+     "DESCRIBE HISTORY"
+    ]
+   ],
+   "explain": "Five workflows, five entry points. Memorize the pairs — they are the first 30 seconds of every Delta incident."
+  },
+  {
+   "id": "ch06-e091",
+   "type": "mcq",
+   "section": "ch06-s14",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Which is NOT one of the Phase 2 best practices?",
+   "options": [
+    "Deduplicate source before MERGE",
+    "Enable schema evolution explicitly and locally",
+    "Use time travel as long-term backup",
+    "Prefer liquid clustering over static partitions for many cases"
+   ],
+   "answer": 2,
+   "explain": "Rule 10 says the opposite: do NOT treat time travel as long-term backup."
+  },
+  {
+   "id": "ch06-e092",
+   "type": "order",
+   "section": "ch06-s14",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the first part of the practical assignment.",
+   "items": [
+    "CREATE TABLE",
+    "INSERT initial rows",
+    "Append new rows",
+    "UPDATE one row",
+    "DELETE one row",
+    "MERGE updates + inserts",
+    "Intentionally duplicate a source key",
+    "Deduplicate with ROW_NUMBER",
+    "Run MERGE again to prove idempotency"
+   ],
+   "explain": "Steps 1–9: build up writes, DML, then break and fix MERGE and prove idempotency."
+  },
+  {
+   "id": "ch06-e093",
+   "type": "order",
+   "section": "ch06-s14",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the second part of the practical assignment.",
+   "items": [
+    "Add a new column with mergeSchema",
+    "DESCRIBE DETAIL / DESCRIBE HISTORY",
+    "Query VERSION AS OF",
+    "RESTORE",
+    "Create many small files",
+    "OPTIMIZE and inspect numFiles before/after",
+    "Enable clustering",
+    "OPTIMIZE FULL",
+    "Inspect behaviour/history"
+   ],
+   "explain": "Steps 10–20: schema evolution, inspection, time travel/restore, then small files → OPTIMIZE → clustering → OPTIMIZE FULL."
+  },
+  {
+   "id": "ch06-e094",
+   "type": "bucket",
+   "section": "ch06-s14",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Best practice or anti-pattern?",
+   "buckets": [
+    "Best practice",
+    "Anti-pattern"
+   ],
+   "items": [
+    {
+     "text": "Prefer UC managed Delta tables",
+     "bucket": 0
+    },
+    {
+     "text": "Blind full overwrite with a daily DataFrame",
+     "bucket": 1
+    },
+    {
+     "text": "Prefer REPLACE WHERE / REPLACE USING over dynamic partition overwrite",
+     "bucket": 0
+    },
+    {
+     "text": "Global autoMerge for the whole cluster",
+     "bucket": 1
+    },
+    {
+     "text": "Use MERGE for idempotent upserts",
+     "bucket": 0
+    },
+    {
+     "text": "Treat time travel as backup",
+     "bucket": 1
+    },
+    {
+     "text": "Enable predictive optimization on UC managed tables",
+     "bucket": 0
+    },
+    {
+     "text": "Design everything around static partitions",
+     "bucket": 1
+    }
+   ],
+   "explain": "The 13 rules reduce to: explicit, local, idempotent, and let the platform maintain layout — while you understand it."
+  },
+  {
+   "id": "ch06-e095",
+   "type": "write",
+   "section": "ch06-s14",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write the project's idempotent MERGE: target `ecommerce.silver.orders`, source `ecommerce.staging.orders_updates` on `order_id`; on match set customer_id, amount, status, `updated_at = current_timestamp()`; otherwise insert those columns.",
+   "solution": "MERGE INTO ecommerce.silver.orders AS t\nUSING ecommerce.staging.orders_updates AS s\nON t.order_id = s.order_id\nWHEN MATCHED THEN UPDATE SET\n  t.customer_id = s.customer_id,\n  t.amount = s.amount,\n  t.status = s.status,\n  t.updated_at = current_timestamp()\nWHEN NOT MATCHED THEN INSERT (order_id, customer_id, amount, status, updated_at)\nVALUES (s.order_id, s.customer_id, s.amount, s.status, current_timestamp());",
+   "keywords": [
+    "merge into ecommerce.silver.orders",
+    "on t.order_id = s.order_id",
+    "when matched then update set",
+    "t.updated_at = current_timestamp()",
+    "when not matched then insert"
+   ],
+   "lang": "sql",
+   "explain": "It **sets** values from the source, so re-running yields the same business state (only `updated_at` refreshes). That's what makes retries safe."
+  },
+  {
+   "id": "ch06-e096",
+   "type": "order",
+   "section": "ch06-s14",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the schema-mismatch workflow.",
+   "items": [
+    "Write fails",
+    "DESCRIBE TABLE on the target",
+    "Compare with df.printSchema()",
+    "Classify: new column / different type / rename",
+    "Decide: intentional evolution or source bug?",
+    "Evolve explicitly (mergeSchema / ALTER) or fix the source"
+   ],
+   "explain": "Workflow 2. The decision point is 'intentional or bug?' — never blindly enable mergeSchema."
+  },
+  {
+   "id": "ch06-e097",
+   "type": "tf",
+   "section": "ch06-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "In the 'someone broke data' workflow, RESTORE comes before DESCRIBE HISTORY.",
+   "answer": false,
+   "explain": "History first (find the bad version), time travel to confirm the last good one, then RESTORE if needed."
+  },
+  {
+   "id": "ch06-e098",
+   "type": "mcq",
+   "section": "ch06-s14",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why does the project MERGE count as idempotent even though it sets `updated_at = current_timestamp()`?",
+   "options": [
+    "It isn't idempotent at all",
+    "Business columns are set from the source, so re-runs converge to the same logical state; only the audit timestamp refreshes",
+    "current_timestamp() is constant forever",
+    "MERGE is always idempotent regardless of SET expressions"
+   ],
+   "answer": 1,
+   "explain": "Idempotency is about the final logical/business state. An audit timestamp changing is acceptable; `amount = amount + 10` would not be. A MERGE with increments is not idempotent."
+  },
+  {
+   "id": "ch06-e099",
+   "type": "tf",
+   "section": "ch06-s05",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "According to the course, `REPLACE WHERE` is supported on all compute types, while legacy dynamic partition overwrite has compute limitations.",
+   "answer": true,
+   "explain": "One more reason to prefer REPLACE WHERE / REPLACE USING for new workloads: no compute-type restrictions, explicit semantics, atomic replacement."
+  },
+  {
+   "id": "ch06-e100",
+   "type": "cloze",
+   "section": "ch06-s07",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Overwrite the table AND replace its schema (deliberately).",
+   "text": "(df.write\n   .mode(\"[[overwrite]]\")\n   .option(\"[[overwriteSchema]]\", \"true\")\n   .saveAsTable(\"ecommerce.silver.orders\"))",
+   "bank": [
+    "append",
+    "mergeSchema",
+    "replaceWhere"
+   ],
+   "asCode": true,
+   "explain": "overwriteSchema only makes sense with overwrite mode: it replaces data and schema/partitioning. To just add a column during append, use mergeSchema instead."
+  },
+  {
+   "id": "ch06-e101",
+   "type": "spotbug",
+   "section": "ch06-s07",
+   "difficulty": 3,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Goal: append today's rows and accept the new `segment` column. Which line is wrong?",
+   "lines": [
+    "(source_df.write",
+    "   .mode('overwrite')",
+    "   .option('overwriteSchema', 'true')",
+    "   .saveAsTable('prod.silver.customers'))"
+   ],
+   "bugs": [
+    1,
+    2
+   ],
+   "fix": "(source_df.write\n   .mode('append')\n   .option('mergeSchema', 'true')\n   .saveAsTable('prod.silver.customers'))",
+   "explain": "overwrite + overwriteSchema replaces the whole table (data and schema) with today's rows. Appending with an extra column needs mode append + mergeSchema."
+  },
+  {
+   "id": "ch06-e102",
+   "type": "spotbug",
+   "section": "ch06-s12",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Goal: cluster the existing orders by customer_id. Which line won't do what the comment claims?",
+   "lines": [
+    "ALTER TABLE ecommerce.silver.orders CLUSTER BY (customer_id);",
+    "-- now ALL historical data is clustered by customer_id",
+    "SELECT * FROM ecommerce.silver.orders WHERE customer_id = 1234;"
+   ],
+   "bugs": [
+    1
+   ],
+   "fix": "ALTER TABLE ecommerce.silver.orders CLUSTER BY (customer_id);\nOPTIMIZE ecommerce.silver.orders FULL;  -- recluster existing data",
+   "explain": "Setting CLUSTER BY doesn't rewrite historical data. Run OPTIMIZE … FULL to apply clustering to all existing records (plain OPTIMIZE is incremental)."
+  },
+  {
+   "id": "ch06-e103",
+   "type": "cloze",
+   "section": "ch06-s09",
+   "difficulty": 1,
+   "tags": [
+    "syntax",
+    "debug"
+   ],
+   "quick": false,
+   "q": "Storage debugging: fill in the command and the two fields you read first.",
+   "text": "DESCRIBE [[DETAIL]] ecommerce.silver.orders;\n-- look at: [[numFiles]] and [[sizeInBytes]]",
+   "bank": [
+    "HISTORY",
+    "TABLE",
+    "operationMetrics",
+    "version"
+   ],
+   "asCode": true,
+   "explain": "DESCRIBE DETAIL gives one row of table-level metadata; numFiles and sizeInBytes reveal small-file pressure (average file size)."
+  },
+  {
+   "id": "ch06-e104",
+   "type": "cloze",
+   "section": "ch06-s10",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Compact small files.",
+   "text": "[[OPTIMIZE]] ecommerce.silver.orders;",
+   "bank": [
+    "VACUUM",
+    "ANALYZE",
+    "REORG"
+   ],
+   "asCode": true,
+   "explain": "OPTIMIZE bin-packs small files into larger ones (and clusters if keys are set). VACUUM would only delete old unreferenced files."
+  },
+  {
+   "id": "ch06-e105",
+   "type": "scenario",
+   "section": "ch06-s02",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "After yesterday's load, `ecommerce.silver.customers.id` contains values like 'Maria' cast weirdly / NULLs, and `name` contains numbers. No job failed.",
+   "steps": [
+    {
+     "prompt": "First suspicion?",
+     "options": [
+      {
+       "text": "The load used a positional writer (insertInto) with a different column order",
+       "ok": true,
+       "fb": "Silent swaps without errors are the signature of positional resolution."
+      },
+      {
+       "text": "Schema enforcement is broken",
+       "ok": false,
+       "fb": "Enforcement checks types/columns, not intended mapping by position."
+      },
+      {
+       "text": "VACUUM corrupted the data",
+       "ok": false,
+       "fb": "VACUUM doesn't change current data."
+      }
+     ]
+    },
+    {
+     "prompt": "The code: df.select('name','id').write.insertInto(target). Fix?",
+     "options": [
+      {
+       "text": "Use df.writeTo(target).append() (name-based) or select columns in target order",
+       "ok": true,
+       "fb": "Removes the positional dependency."
+      },
+      {
+       "text": "Add mergeSchema",
+       "ok": false,
+       "fb": "Schema evolution doesn't fix mapping."
+      },
+      {
+       "text": "Switch to overwrite mode",
+       "ok": false,
+       "fb": "Would wipe the table and still swap columns."
+      }
+     ]
+    },
+    {
+     "prompt": "And the bad rows already written?",
+     "options": [
+      {
+       "text": "Find the bad version in DESCRIBE HISTORY and RESTORE (or repair) it",
+       "ok": true,
+       "fb": "History pinpoints the load; RESTORE repairs."
+      },
+      {
+       "text": "Ignore them",
+       "ok": false,
+       "fb": "Silent corruption propagates to Gold."
+      },
+      {
+       "text": "Delete the _delta_log commit",
+       "ok": false,
+       "fb": "Never hand-edit the log."
+      }
+     ]
+    }
+   ],
+   "explain": "Positional writes swap columns silently when types can be coerced. Use name-based APIs."
+  },
+  {
+   "id": "ch06-e106",
+   "type": "order",
+   "section": "ch06-s02",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Values landed in the wrong columns. Order the investigation.",
+   "items": [
+    "Check whether the writer used insertInto (positional)",
+    "Compare DataFrame column order with DESCRIBE TABLE",
+    "Fix code: name-based API or reorder columns",
+    "RESTORE or repair the version that introduced bad rows"
+   ],
+   "explain": "Identify the positional API, prove the order mismatch, fix the code, then repair the data."
+  },
+  {
+   "id": "ch06-e107",
+   "type": "order",
+   "section": "ch06-s04",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A table lost years of rows after a daily job. Order your response.",
+   "items": [
+    "DESCRIBE HISTORY: find the WRITE with mode Overwrite",
+    "Confirm the DataFrame contained only a subset",
+    "RESTORE the last good version (within retention)",
+    "Change the job to append / MERGE / REPLACE WHERE"
+   ],
+   "explain": "Locate, confirm, recover, prevent."
+  },
+  {
+   "id": "ch06-e108",
+   "type": "order",
+   "section": "ch06-s08",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A writer fails with MetadataChangedException right after an ALTER TABLE. Order the response.",
+   "items": [
+    "DESCRIBE HISTORY: find the concurrent ALTER / schema-evolving write",
+    "Confirm the error is MetadataChangedException",
+    "Restart the failed writer and any stopped streams",
+    "Agree a coordination process for future schema changes"
+   ],
+   "explain": "It's expected concurrency semantics: identify the change, restart, and coordinate next time."
+  },
+  {
+   "id": "ch06-e109",
+   "type": "order",
+   "section": "ch06-s10",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Storage exploded. Order the workflow.",
+   "items": [
+    "DESCRIBE DETAIL: read numFiles and sizeInBytes",
+    "Compute average file size",
+    "Identify writers producing tiny files",
+    "OPTIMIZE (or enable predictive optimization)",
+    "VACUUM after retention to remove replaced files"
+   ],
+   "explain": "Measure, diagnose small-file pressure, find the cause, compact, then clean up."
+  },
+  {
+   "id": "ch06-e110",
+   "type": "order",
+   "section": "ch06-s11",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A selective query scans too much. Order the checks.",
+   "items": [
+    "Table layout (partitioned / clustered?)",
+    "Clustering on the filter column?",
+    "Statistics collected for that column?",
+    "Filter selectivity",
+    "Is data skipping pruning files?"
+   ],
+   "explain": "Workflow 4: layout → clustering → stats → selectivity → skipping; often the fix is liquid clustering on the filter column."
+  }
+ ]
+}

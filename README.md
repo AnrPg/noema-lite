@@ -1,0 +1,67 @@
+# ◆ Learning Quest
+
+A subject-agnostic study app: **structured theory**, a **Socratic AI tutor** (Gemini), **12 types of interactive exercises**,
+debug/diagnosis drills, spaced-repetition flashcards, lightning rounds and boss battles — for *any* subject.
+The engine knows nothing about the content; each subject is a **pack** generated from your sources.
+
+## Open it
+* **On this Mac:** double-click `index.html` (Chrome recommended). Works offline except for the AI tutor and fonts.
+* **Anywhere:** the website built from this repo (see `cloud/README.md`), with a cloud account that syncs your progress.
+* **One file:** `python3 tools/build.py bundle` → `dist/learning-quest.html` (all subjects inlined; e.g. for a phone).
+
+## Repository map
+```
+index.html                 entry point (loads config → registry → loader → one subject pack → engine)
+config.js                  public settings (Supabase URL + anon key go here); config.local.js = private, git-ignored
+engine/
+  loader.js                profiles, subject picker, pack loading, namespaced storage, backups, restore points
+  cloud.js                 Supabase adapter (auth, sync, snapshots, private storage) — dependency-free
+  src/*.js, src/*.css      the study engine source  →  engine.js / engine.css (GENERATED)
+  vendor/                  marked, DOMPurify, KaTeX
+library/
+  groups.json              groups of the subject picker
+  subjects/<id>/           shared subjects (subject.json, sources.json, sources/*.pdf, chapters/, patches/, coverage/)
+  registry.js              GENERATED catalogue
+accounts/<profile>/
+  account.json             local profile seed (name, emoji, "about me" for the tutor)
+  backups/                 suggested target for the app's automatic folder backups
+  packs/<id>/              PRIVATE subjects of this profile (never published to the website)
+tools/                     build, validate, new_subject, source_text, db_sync, db_restore, CONTENT_SPEC.md
+cloud/                     supabase.sql (schema + row-level security) and the setup guide
+data/learning-quest.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
+tests/                     end-to-end tests (Playwright) incl. a Supabase emulator
+```
+
+## Everyday commands
+```bash
+python3 tools/build.py                  # validate + rebuild engine, packs, registry
+python3 tools/build.py site bundle      # + website folder (dist/site) + single-file app
+python3 tools/db_sync.py                # refresh the SQLite backup database (versioned copy of every file + all content + profile backups)
+python3 tools/db_restore.py list        # what the database holds; restore files/subjects/packs/backups into a NEW folder
+```
+
+## Adding a subject (through Claude)
+1. Give Claude the sources (PDFs, links, notes) + subject name, group, goal (exam / understanding / project) and language.
+2. Claude scaffolds it (`tools/new_subject.py`), reads every page, writes chapters per `tools/CONTENT_SPEC.md`, validates, builds and tests.
+3. The new subject appears as a chip in the picker. New sources for an existing subject are merged **additively** (patches) — your progress is never lost.
+
+## Profiles, privacy & data
+* Each **profile** (local) or **cloud account** has its own subjects, progress, flashcard schedules, tutor conversations, settings and backups.
+  Local storage keys are namespaced `lq1:<profile>:a:*` (account) and `lq1:<profile>:s:<subject>:*` (per subject).
+* Cloud data is protected by Postgres **row-level security**: a user can only ever read/write their own rows and files.
+* A local PIN is a privacy curtain on a shared computer, not encryption.
+
+## Backups — four layers
+| Layer | What | Where |
+|---|---|---|
+| Restore points | automatic before every restore/reset (last 12) | browser (IndexedDB) |
+| Backup files | “Download backup” or automatic every 5 min to a folder (Chrome/Edge) | `accounts/<profile>/backups/` |
+| Git | full history of engine + all subject sources | GitHub (private repo) |
+| Database | `data/learning-quest.db`: every file version + content + profile backups | this Mac + uploaded to the cloud |
+| Cloud | live sync + daily snapshots (30 kept) + private files | Supabase |
+
+## Γρήγορος οδηγός (Ελληνικά)
+* Άνοιγμα: διπλό κλικ στο `index.html` (Chrome). Διαλέγεις προφίλ και μάθημα από τα chips.
+* Νέο μάθημα: δίνεις τις πηγές στον Claude· εκείνος φτιάχνει το πακέτο εδώ μέσα.
+* Αντίγραφα ασφαλείας: μενού λογαριασμού (το emoji πάνω δεξιά) → 💾 Backup & restore.
+* Cloud & πρόσβαση από παντού: δες `cloud/README.md`.

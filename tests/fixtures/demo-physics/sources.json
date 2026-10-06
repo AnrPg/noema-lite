@@ -1,0 +1,1 @@
+{ "sources": [ { "id": "s1", "title": "Fixture source", "pages": "1-1" } ], "chapters": { "ch01": "s1" }, "patches": {} }

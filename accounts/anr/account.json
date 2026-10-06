@@ -1,0 +1,9 @@
+{
+ "id": "anr",
+ "name": "ANR",
+ "emoji": "🦉",
+ "email": "stergios.gr95@gmail.com",
+ "learner": "The learner (ANR) is an adult with ADHD who learns best when challenged, tested and given tightly structured, co-located information.",
+ "subjects": "*",
+ "_doc": "Local profile seed. 'subjects': \"*\" = every shared subject; or a list of subject ids. Private packs for this account live in accounts/anr/packs/<subject>/ (never published to the website)."
+}

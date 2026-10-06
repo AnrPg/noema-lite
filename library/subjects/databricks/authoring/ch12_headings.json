@@ -1,0 +1,518 @@
+[
+[
+"§1",
+"What ingestion means"
+],
+[
+"§2",
+"A real scenario: order files every 5 minutes"
+],
+[
+"§3",
+"spark.read"
+],
+[
+"§4",
+"CSV and the header option"
+],
+[
+"§5",
+"Delimiter"
+],
+[
+"§6",
+"Common CSV options"
+],
+[
+"§7",
+"Schema inference"
+],
+[
+"§8",
+"Why schema inference has a cost"
+],
+[
+"§9",
+"Explicit schema (StructType)"
+],
+[
+"§10",
+"DDL schema syntax"
+],
+[
+"§11",
+"Explicit schema vs inference"
+],
+[
+"§12",
+"Schema inference bug example"
+],
+[
+"§13",
+"JSON (nested structure)"
+],
+[
+"§14",
+"Parquet"
+],
+[
+"§15",
+"CSV vs JSON vs Parquet"
+],
+[
+"§16",
+"read_files()"
+],
+[
+"§17",
+"Where read_files is used"
+],
+[
+"§18",
+"Metadata columns"
+],
+[
+"§19",
+"First big problem with plain spark.read (re-reads everything)"
+],
+[
+"§20",
+"Naive solution: filter by filename/date"
+],
+[
+"§21",
+"COPY INTO"
+],
+[
+"§22",
+"What idempotent means here"
+],
+[
+"§23",
+"Important subtlety: changed file still skipped"
+],
+[
+"§24",
+"COPY INTO target (Delta)"
+],
+[
+"§25",
+"CSV COPY INTO"
+],
+[
+"§26",
+"PATTERN"
+],
+[
+"§27",
+"FILES"
+],
+[
+"§28",
+"VALIDATE"
+],
+[
+"§29",
+"COPY INTO transformation"
+],
+[
+"§30",
+"COPY INTO schema inference & mergeSchema (FORMAT_OPTIONS vs COPY_OPTIONS)"
+],
+[
+"§31",
+"COPY INTO vs Auto Loader (scale)"
+],
+[
+"§32",
+"Auto Loader — what problem it solves"
+],
+[
+"§33",
+"Auto Loader syntax (cloudFiles)"
+],
+[
+"§34",
+"Why readStream"
+],
+[
+"§35",
+"Full basic Auto Loader"
+],
+[
+"§36",
+"Two state locations"
+],
+[
+"§37",
+"schemaLocation"
+],
+[
+"§38",
+"Checkpoint"
+],
+[
+"§39",
+"schemaLocation vs checkpoint"
+],
+[
+"§40",
+"Restart example"
+],
+[
+"§41",
+"Why checkpoints must be persistent"
+],
+[
+"§42",
+"File discovery"
+],
+[
+"§43",
+"Directory listing"
+],
+[
+"§44",
+"File notification / managed file events"
+],
+[
+"§45",
+"Auto Loader file formats"
+],
+[
+"§46",
+"Auto Loader infers STRING by default (JSON/CSV/XML)"
+],
+[
+"§47",
+"Example: Spark vs Auto Loader inference"
+],
+[
+"§48",
+"cloudFiles.inferColumnTypes"
+],
+[
+"§49",
+"Why Bronze often prefers strings"
+],
+[
+"§50",
+"Initial schema inference sample (50 GB / 1000 files)"
+],
+[
+"§51",
+"Schema hints"
+],
+[
+"§52",
+"Nuance about hints (typed formats, hint != cast)"
+],
+[
+"§53",
+"Schema evolution"
+],
+[
+"§54",
+"Why schema evolution can stop a stream"
+],
+[
+"§55",
+"Rescued data"
+],
+[
+"§56",
+"Conceptual rescued row"
+],
+[
+"§57",
+"Why rescued data is valuable"
+],
+[
+"§58",
+"Bronze architecture pattern"
+],
+[
+"§59",
+"Quarantine pattern"
+],
+[
+"§60",
+"Explicit schema with Auto Loader"
+],
+[
+"§61",
+"schemaLocation still useful?"
+],
+[
+"§62",
+"Exactly-once semantics — be careful"
+],
+[
+"§63",
+"Auto Loader tracks files, not business entities"
+],
+[
+"§64",
+"Auto Loader + Bronze + MERGE"
+],
+[
+"§65",
+"AvailableNow pattern"
+],
+[
+"§66",
+"COPY INTO vs Auto Loader mental model"
+],
+[
+"§67",
+"When to use COPY INTO"
+],
+[
+"§68",
+"When to use Auto Loader"
+],
+[
+"§69",
+"Misconception: Auto Loader = faster spark.read"
+],
+[
+"§70",
+"Misconception: Auto Loader turns files into Kafka"
+],
+[
+"§71",
+"Production example — Bronze ingestion"
+],
+[
+"§72",
+"What happens internally (initial run / next run)"
+],
+[
+"§73",
+"What if checkpoint is deleted?"
+],
+[
+"§74",
+"Checkpoint path reuse"
+],
+[
+"§75",
+"Changing source with same checkpoint"
+],
+[
+"§76",
+"Debugging case: new files exist but no rows appear"
+],
+[
+"§77",
+"Debugging case: file accidentally overwritten"
+],
+[
+"§78",
+"Best practice: immutable source files"
+],
+[
+"§79",
+"Debugging case: schema suddenly changes"
+],
+[
+"§80",
+"Debugging case: new column missing"
+],
+[
+"§81",
+"Debugging case: duplicated business IDs"
+],
+[
+"§82",
+"Debugging case: malformed CSV"
+],
+[
+"§83",
+"Source file metadata as audit evidence"
+],
+[
+"§84",
+"Ingestion != transformation"
+],
+[
+"§85",
+"read_files + streaming tables preview"
+],
+[
+"§86",
+"Production architecture"
+],
+[
+"§87",
+"Practical lab — CSV ingestion"
+],
+[
+"§88",
+"Practical lab — plain batch load (run twice)"
+],
+[
+"§89",
+"Practical lab — COPY INTO (run twice)"
+],
+[
+"§90",
+"Practical lab — validate first"
+],
+[
+"§91",
+"Practical lab — Auto Loader"
+],
+[
+"§92",
+"Practical lab — schema evolution experiment"
+],
+[
+"§93",
+"Practical lab — bad data"
+],
+[
+"§94",
+"COPY INTO vs Auto Loader vs spark.read comparison table"
+],
+[
+"§95",
+"Exam trap: millions of files continuously"
+],
+[
+"§96",
+"Exam trap: rerun COPY INTO on same directory"
+],
+[
+"§97",
+"Exam trap: what schemaLocation stores"
+],
+[
+"§98",
+"Exam trap: Auto Loader default string inference"
+],
+[
+"§99",
+"Engineering Q: why explicit schema in production"
+],
+[
+"§100",
+"Engineering Q: why not Auto Loader directly into Silver"
+],
+[
+"§101",
+"Engineering Q: what exactly does checkpoint protect"
+],
+[
+"§102",
+"Engineering Q: why file-level exactly-once != no duplicate business rows"
+],
+[
+"§103",
+"Big test — Phase 4 (see Q1–Q25)"
+],
+[
+"Q1",
+"spark.read vs Auto Loader"
+],
+[
+"Q2",
+"Why explicit schema"
+],
+[
+"Q3",
+"spark.read over the same whole directory every day"
+],
+[
+"Q4",
+"What COPY INTO remembers"
+],
+[
+"Q5",
+"Does COPY INTO reload a changed file"
+],
+[
+"Q6",
+"What is PATTERN"
+],
+[
+"Q7",
+"What is VALIDATE"
+],
+[
+"Q8",
+"When Auto Loader beats COPY INTO"
+],
+[
+"Q9",
+"What cloudFiles means"
+],
+[
+"Q10",
+"Why readStream for file ingestion"
+],
+[
+"Q11",
+"What schemaLocation is"
+],
+[
+"Q12",
+"What checkpointLocation is"
+],
+[
+"Q13",
+"Are they the same"
+],
+[
+"Q14",
+"If checkpoint disappears"
+],
+[
+"Q15",
+"Why checkpoints must be persistent"
+],
+[
+"Q16",
+"Why not share one checkpoint"
+],
+[
+"Q17",
+"Default CSV/JSON type inference in Auto Loader"
+],
+[
+"Q18",
+"Default inference sample size"
+],
+[
+"Q19",
+"What rescued data is"
+],
+[
+"Q20",
+"Why rescued data is useful"
+],
+[
+"Q21",
+"Exactly-once file ingestion vs duplicate customer_id"
+],
+[
+"Q22",
+"Where business-key dedup happens"
+],
+[
+"Q23",
+"Best file-ingestion architecture"
+],
+[
+"Q24",
+"Why immutable files"
+],
+[
+"Q25",
+"FORMAT_OPTIONS vs COPY_OPTIONS mergeSchema"
+],
+[
+"PA",
+"Production assignment (15-step Auto Loader experiment)"
+]
+]

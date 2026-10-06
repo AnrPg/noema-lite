@@ -1,0 +1,119 @@
+{
+ "id": "ch01",
+ "num": 1,
+ "title": "Energy",
+ "subtitle": "Kinetic energy",
+ "emoji": "⚡",
+ "sourcePages": "1",
+ "mantra": "Kinetic energy is $\\tfrac12 mv^2$.",
+ "objectives": [
+  "Compute kinetic energy"
+ ],
+ "sections": [
+  {
+   "id": "ch01-s01",
+   "title": "Kinetic energy",
+   "hook": "Why $v^2$?",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Kinetic energy is $E_k = \\tfrac{1}{2} m v^2$."
+    },
+    {
+     "t": "p",
+     "text": "Display: $$E = mc^2$$"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Units",
+     "text": "Joule = $\\mathrm{kg\\,m^2/s^2}$"
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch01-d01",
+   "title": "Energy not conserved?",
+   "section": "ch01-s01",
+   "symptom": "Measured energy drops.",
+   "askYourself": [
+    "Is friction present?",
+    "Is the system closed?",
+    "Are units consistent?"
+   ],
+   "steps": [
+    {
+     "do": "Check friction",
+     "why": "Heat loss"
+    }
+   ],
+   "rootCauses": [
+    "Friction"
+   ],
+   "fix": "Account for heat."
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "Squared velocity",
+   "text": "Doubling $v$ quadruples $E_k$.",
+   "fix": "Square it."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "Formula for $E_k$?",
+   "a": "$\\tfrac12 mv^2$",
+   "section": "ch01-s01"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch01-e001",
+   "type": "calc",
+   "section": "ch01-s01",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "$m=2$ kg, $v=3$ m/s. $E_k$ in J?",
+   "answer": 9,
+   "tolerance": 0,
+   "unit": "J",
+   "explain": "$\\tfrac12\\cdot 2\\cdot 9 = 9$"
+  },
+  {
+   "id": "ch01-e002",
+   "type": "tf",
+   "section": "ch01-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Doubling $v$ doubles $E_k$.",
+   "answer": false,
+   "explain": "It quadruples."
+  },
+  {
+   "id": "ch01-e003",
+   "type": "mcq",
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "q": "Unit of energy?",
+   "options": [
+    "J",
+    "W",
+    "N"
+   ],
+   "answer": 0,
+   "explain": "Joule."
+  }
+ ]
+}

@@ -1,0 +1,142 @@
+/* End-to-end tests for Learning Quest (Playwright + Chromium).
+   Usage: node tests/e2e.js <prepared-repo-dir>
+   The repo dir must contain a build with the demo-physics fixture (see tests/run_e2e.sh). */
+const { chromium } = require(process.env.PW || 'playwright');
+const path = require('path'), fs = require('fs');
+const { start } = require('./mock_supabase');
+const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
+const SHOTS = process.env.SHOTS || '/tmp/lq_shots'; fs.mkdirSync(SHOTS, { recursive: true });
+let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/fonts\.g|ERR_FILE_NOT_FOUND|net::ERR|404|Failed to load resource/.test(m.text())) bag.push(m.text()); }); }
+
+(async () => {
+  const browser = await chromium.launch();
+  /* ======================= A. LOCAL (file://) ======================= */
+  console.log('A. local mode (file://)');
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true });
+  const page = await ctx.newPage(); const E = []; errs(page, E);
+  const url = 'file://' + ROOT + '/index.html';
+  await page.goto(url);
+  // seed legacy single-file-app data, then reload
+  await page.evaluate(() => { localStorage.clear(); localStorage.setItem('dbquest_v1', JSON.stringify({ xp: 50, xpDay: { '2026-10-06': 50 }, streak: 3, lastDay: '2026-10-06', read: { 'ch01-s01': true }, res: { 'ch01-e001': { n: 1, ok: 1, last: true }, 'ch01-e002': { n: 1, ok: 0, last: false } }, pb: {}, fc: {}, boss: {}, last: 'ch01-s01', settings: { apiKey: 'LEGACYKEY', theme: 'auto', goal: 120, sound: true, chunk: true, models: [], model: '' } })); localStorage.setItem('dbquest_convos_v1', JSON.stringify([{ id: 'cv_x', created: 1, updated: 2, mode: 'socratic', ctx: null, title: 'Old Chat', msgs: [{ role: 'user', text: 'hi' }, { role: 'model', text: 'hello' }] }])); });
+  await page.reload(); await wait(900);
+  const chips = await page.$$eval('.lq-chip', c => c.map(x => x.textContent));
+  ok(chips.length === 3 && chips.some(c => c.includes('Demo Physics')) && chips.some(c => c.includes('🔒')), 'subject picker lists library + private subjects: ' + chips.join(' | '));
+  ok(await page.$$eval('.lq-grouphead', g => g.length) >= 2, 'subjects are grouped');
+  await page.screenshot({ path: SHOTS + '/a1_picker.png' });
+  await page.click('.lq-chip:has-text("Databricks")'); await wait(1500);
+  ok(await page.evaluate(() => S.xp === 50 && Object.keys(S.res).length === 2 && S.settings.apiKey === 'LEGACYKEY'), 'legacy progress migrated into anr/databricks');
+  ok(await page.evaluate(() => CV.list.length === 1 && CV.list[0].title === 'Old Chat'), 'legacy conversations migrated');
+  ok(await page.evaluate(() => LQ.stats.get().xp === 50 && LQ.stats.streakNow() >= 0), 'account-level stats seeded');
+  ok(await page.evaluate(() => !!localStorage.getItem('lq1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1')), 'namespaced keys written, legacy keys kept (nothing deleted)');
+  // regression: every section renders, every exercise accepts its correct answer
+  const reg = await page.evaluate(() => {
+    const fails = []; S.settings.chunk = false;
+    for (const c of COURSE) { for (const s of c.sections) { try { location.hash = '#/s/' + s.id; route(); } catch (e) { fails.push(s.id + e.message); } } }
+    let n = 0; for (const ex of ALL_EX) { try { const card = exerciseCard(ex, { noXP: true }); document.body.append(card); card.remove(); n++; } catch (e) { fails.push(ex.id + e.message); } }
+    S.settings.chunk = true; return { fails, n };
+  });
+  ok(!reg.fails.length && reg.n === 1644, `regression: ${reg.n} exercises & all sections render`);
+  await page.evaluate(() => { location.hash = '#/'; }); await wait(500);
+  await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
+  // account menu tabs
+  for (const t of ['profile', 'subjects', 'backup', 'cloud']) { await page.evaluate(t => { $('.modal')?.remove(); openAccountMenu(t); }, t); await wait(350); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
+  ok(await page.$$eval('.modal .tabs button', b => b.length) === 4, 'account menu has 4 tabs');
+  await page.evaluate(() => $('.modal')?.remove());
+  // switch subject → math subject
+  await page.evaluate(() => LQ.switchTo('anr', 'demo-physics')); await wait(1800);
+  ok(await page.evaluate(() => SUBJ.id === 'demo-physics' && S.xp === 0), 'switched to Demo Physics with separate progress');
+  ok(await page.$$eval('.katex', k => k.length) > 0, 'math rendered with KaTeX on home');
+  await page.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(700);
+  ok(await page.$$eval('.katex-display', k => k.length) > 0, 'display math rendered in a section');
+  ok(await page.evaluate(() => TN === 'Ada' && MODES.socratic.sys.includes('physics')), 'tutor persona comes from subject.json');
+  await page.screenshot({ path: SHOTS + '/a4_physics_section.png', fullPage: true });
+  const xpOk = await page.evaluate(() => { const a = LQ.stats.get(); addXP(10); flushSave(); const b = LQ.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
+  ok(xpOk, 'XP counted per subject and in the account total');
+  // new profile: full isolation
+  await page.evaluate(() => { LQ.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); LQ.switchTo('maria', 'databricks'); }); await wait(1800);
+  ok(await page.evaluate(() => ACCOUNT.id === 'maria' && S.xp === 0 && Object.keys(S.res).length === 0 && CV.list.length === 0 && S.settings.apiKey !== 'LEGACYKEY'), 'profile Maria is isolated (progress, conversations, API key)');
+  ok(await page.evaluate(async () => !(await LQ.subjectsFor('maria')).some(s => s.id === 'secret-notes')), 'private subject of ANR is not visible to Maria');
+  // backup → restore
+  const backupOk = await page.evaluate(async () => {
+    const b = await LQ.backup.collect('anr'); if (!b.data['s:databricks:state'] || b.data['a:settings'].includes('LEGACYKEY')) return 'bad backup ' + Object.keys(b.data).join(',');
+    await LQ.backup.apply(b, 'maria', 'replace');
+    const st = JSON.parse(localStorage.getItem('lq1:maria:s:databricks:state')); const pts = await LQ.backup.listRestorePoints('maria');
+    const src = JSON.parse(localStorage.getItem('lq1:anr:s:databricks:state'));
+    return st.xp === src.xp && JSON.stringify(st.res) === JSON.stringify(src.res) && pts.length >= 1 ? 'ok' : 'bad restore ' + JSON.stringify({ xp: st.xp, pts: pts.length });
+  });
+  ok(backupOk === 'ok', backupOk + ' — backup of ANR restored into Maria (+ restore point created, API key excluded)');
+  const [dl] = await Promise.all([page.waitForEvent('download'), page.evaluate(async () => LQ.backup.download(await LQ.backup.collect('anr')))]);
+  ok(/^lq-backup_anr_\d{4}-\d\d-\d\d_\d{4}\.json$/.test(dl.suggestedFilename()), 'backup download: ' + dl.suggestedFilename());
+  const legacyOk = await page.evaluate(() => { try { const b = LQ.backup.validate({ xp: 5, res: { a: { ok: 1 } }, settings: { theme: 'dark' } }); return !!b.data['s:databricks:state']; } catch (e) { return false; } });
+  ok(legacyOk, 'old single-file “Export progress” files are accepted for restore');
+  // import a pack file
+  const packJSON = fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8').replace('"id":"demo-physics"', '"id":"demo-imported"').replace('"title":"Demo Physics"', '"title":"Imported Demo"');
+  const imp = await page.evaluate(async txt => { const f = new File([txt], 'x.lqpack.json', { type: 'application/json' }); const s = await LQ.importPackFile('maria', f); return (await LQ.subjectsFor('maria')).some(x => x.id === 'demo-imported') && s.title; }, packJSON);
+  ok(imp === 'Imported Demo', 'subject pack import (per profile)');
+  await page.evaluate(() => LQ.switchTo('maria', 'demo-imported')); await wait(1600);
+  ok(await page.evaluate(() => SUBJ.id === 'demo-imported' && COURSE.length === 1), 'imported pack opens from IndexedDB');
+  // account picker overlay renders
+  await page.evaluate(() => { LQ.openAccountPicker(); }); await wait(400);
+  ok(await page.$$eval('.lq-acc', a => a.length) >= 3, 'profile picker shows profiles + “New profile”');
+  await page.screenshot({ path: SHOTS + '/a5_profiles.png' });
+  ok(!E.length, 'no console errors in local mode ' + (E.length ? JSON.stringify(E.slice(0, 5)) : ''));
+  await ctx.close();
+
+  /* ======================= B. CLOUD (http + mocked Supabase) ======================= */
+  console.log('B. cloud mode (mock Supabase)');
+  const cfg = `window.LQ_CONFIG = { appName: 'Learning Quest', supabaseUrl: 'http://localhost:54329', supabaseAnonKey: 'anon-test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
+  const srv = await start({ port: 54329, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
+  const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
+  await pA.goto('http://localhost:54329/'); await wait(900);
+  ok(await pA.$$eval('.lq-acc', a => a.length) === 1 && !!(await pA.$('text=Sign in / create a cloud account')), 'hosted site: no local seeds exposed, cloud sign-in offered');
+  await pA.click('text=Sign in / create a cloud account'); await wait(300);
+  await pA.click('text=No account yet? Create one'); await wait(200);
+  await pA.fill('input[placeholder="Display name"]', 'ANR Cloud'); await pA.fill('input[type=email]', 'anr@example.com'); await pA.fill('input[type=password]', 'secret123');
+  await pA.screenshot({ path: SHOTS + '/b1_signup.png' });
+  await pA.click('button:has-text("Create account")'); await wait(900);
+  ok(await pA.$$eval('.lq-chip', c => c.length) === 2, 'cloud account sees shared subjects only (no private ones)');
+  await pA.click('.lq-chip:has-text("Databricks")'); await wait(1600);
+  await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; flushSave(); });
+  await wait(3800);
+  const kvA = srv.state.kv[Object.keys(srv.state.users)[0]] || {};
+  ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (lq_kv)');
+  ok(srv.state.snaps.length >= 1, 'daily auto-snapshot created');
+  ok(await pA.$eval('#syncdot', d => d.className.includes('ok')), 'sync indicator shows synced');
+  await pA.evaluate(() => openAccountMenu('cloud')); await wait(600); await pA.screenshot({ path: SHOTS + '/b2_cloud_menu.png' });
+  // pack upload to private storage
+  await pA.evaluate(async txt => { const f = new File([txt], 'p.json', { type: 'application/json' }); await LQ.importPackFile(ACCOUNT.id, f); }, packJSON); await wait(4000);
+  ok(Object.keys(srv.state.files).some(k => k.endsWith('packs/demo-imported.json')), 'imported pack stored in private cloud storage');
+  // device B
+  const devB = await browser.newContext({ viewport: { width: 390, height: 844 } }); const pB = await devB.newPage(); const EB = []; errs(pB, EB);
+  await pB.goto('http://localhost:54329/'); await wait(800);
+  await pB.click('text=Sign in / create a cloud account'); await wait(300);
+  await pB.fill('input[type=email]', 'anr@example.com'); await pB.fill('input[type=password]', 'secret123'); await pB.click('button:has-text("Sign in")'); await wait(1200);
+  const chipsB = await pB.$$eval('.lq-chip', c => c.map(x => x.textContent));
+  ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
+  await pB.click('.lq-chip:has-text("Databricks")'); await wait(1600);
+  ok(await pB.evaluate(() => !!S.res['ch01-e001'] && S.settings.apiKey === 'CLOUDKEY' && LQ.stats.get().xp >= 12), 'device B pulled progress, settings and stats');
+  await pB.screenshot({ path: SHOTS + '/b3_deviceB_mobile.png' });
+  await pB.evaluate(() => LQ.switchTo(ACCOUNT.id, 'demo-imported')); await wait(1800);
+  ok(await pB.evaluate(() => SUBJ.id === 'demo-imported'), 'device B downloads the private pack from cloud storage');
+  // isolation: a second user sees nothing of the first
+  const devC = await browser.newContext(); const pC = await devC.newPage();
+  await pC.goto('http://localhost:54329/'); await wait(700); await pC.click('text=Sign in / create a cloud account'); await pC.click('text=No account yet? Create one');
+  await pC.fill('input[placeholder="Display name"]', 'Eve'); await pC.fill('input[type=email]', 'eve@example.com'); await pC.fill('input[type=password]', 'secret123'); await pC.click('button:has-text("Create account")'); await wait(900);
+  ok(!(await pC.$$eval('.lq-chip', c => c.map(x => x.textContent))).some(c => c.includes('Imported')), 'another user cannot see ANR’s private pack');
+  await pC.click('.lq-chip:has-text("Databricks")'); await wait(1500);
+  ok(await pC.evaluate(() => !S.res['ch01-e001'] && S.settings.apiKey !== 'CLOUDKEY'), 'another user gets none of ANR’s progress or key');
+  ok(!EA.length && !EB.length, 'no console errors in cloud mode ' + JSON.stringify([...EA, ...EB].slice(0, 5)));
+  await devA.close(); await devB.close(); await devC.close(); srv.close();
+
+  /* ======================= C. single-file bundle ======================= */
+  console.log('C. single-file bundle');
+  const pD = await browser.newPage(); const ED = []; errs(pD, ED);
+  await pD.goto('file://' + ROOT + '/dist/learning-quest.html'); await wait(900);
+  await pD.click('.lq-chip:has-text("Databricks")'); await wait(1600);
+  ok(await pD.evaluate(() => Object.keys(SEC).length === 184), 'bundle loads the Databricks pack inline');
+  ok(!ED.length, 'no console errors in bundle ' + JSON.stringify(ED.slice(0, 3)));
+  await browser.close();
+  console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);
+})();

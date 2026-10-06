@@ -1,0 +1,5136 @@
+{
+ "id": "ch04",
+ "num": 4,
+ "title": "Databricks Platform Tour",
+ "subtitle": "Account, workspace, planes, compute, runtime, Photon, notebooks, widgets, catalogs — and first debugging",
+ "emoji": "🧭",
+ "sourcePages": "76–131",
+ "mantra": "Workspace is where you work, compute is what works, DBR is the software on it, Photon makes it fast, Unity Catalog names and guards the data — debug by finding the layer first.",
+ "objectives": [
+  "You can explain Databricks as a platform (not 'managed Spark') and separate account vs workspace and control vs compute plane.",
+  "You can choose between serverless, classic all-purpose, jobs compute and SQL warehouses for a given workload.",
+  "You can explain Databricks Runtime, LTS, Runtime ML and Photon — and why Photon needs no code changes.",
+  "You can write notebook code mixing Python and SQL: spark.table, spark.sql, display, magic commands and _sqldf.",
+  "You can parameterize notebooks with dbutils.widgets and modern :param / IDENTIFIER() SQL syntax.",
+  "You can explore and create catalogs, schemas and Delta tables with SHOW/DESCRIBE/CREATE/INSERT and fully qualified names.",
+  "You can debug by layer: not attached, TABLE_OR_VIEW_NOT_FOUND, INSUFFICIENT_PRIVILEGES, ModuleNotFoundError, slow queries."
+ ],
+ "sections": [
+  {
+   "id": "ch04-s01",
+   "title": "What Databricks Actually Is",
+   "hook": "If you think \"Databricks = managed Spark\", every product name will feel random.",
+   "blocks": [
+    {
+     "t": "reveal",
+     "label": "Think first: Workspace, Serverless, Compute, SQL Warehouse, Databricks Runtime, Photon, Notebook, Unity Catalog — 8 unrelated products?",
+     "text": "No. They are **layers of one model**: where you work (workspace, notebook), what executes (compute: serverless/classic/SQL warehouse), the software on the machines (Runtime), the fast engine (Photon), and who may touch what (Unity Catalog). This chapter builds that model."
+    },
+    {
+     "t": "p",
+     "text": "The most dangerous oversimplification is **Databricks = managed Spark**. Historically that was close to the truth. Today it is not."
+    },
+    {
+     "t": "p",
+     "text": "Databricks is a **unified data/AI platform**: data engineering, analytics, AI/ML, governance and deployment in one environment. **Apache Spark** is still the central *execution technology* inside it."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Delta Lake** — the table format",
+      "**Unity Catalog** — governance",
+      "**SQL warehouses** — SQL compute",
+      "**Lakeflow** — pipelines/ingestion",
+      "**Serverless compute**",
+      "**Photon** — vectorized engine",
+      "ML/AI services, orchestration (Jobs), DevOps tooling"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "diagram",
+     "text": "┌──────────────────── DATABRICKS ────────────────────┐\n│   Notebooks        SQL Editor        Jobs          │\n│       └────────────────┼────────────────┘          │\n│                        ▼                           │\n│              COMPUTE  (Spark / Photon)             │\n│                        ▼                           │\n│              Delta / other data                    │\n│                        ▼                           │\n│              Cloud storage                         │\n│                                                    │\n│   Unity Catalog governs all of these assets        │\n└────────────────────────────────────────────────────┘",
+     "caption": "Interfaces on top, compute in the middle, data at the bottom, governance across everything."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Spark",
+       "points": [
+        "Mainly an **execution engine**",
+        "Runs transformations, SQL, joins, aggregations",
+        "One technology inside Databricks"
+       ]
+      },
+      {
+       "title": "Databricks",
+       "points": [
+        "A whole **data/AI platform**",
+        "UI, governance, compute management, orchestration, SQL, ML",
+        "Uses Spark (and Photon) to execute work"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Engine vs car",
+     "text": "Spark is the **engine**. Databricks is the whole car: engine, dashboard, keys and locks (governance), navigation (orchestration) and the garage that maintains it."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Classic trap",
+     "text": "Spark is **not** a cloud provider and **not** a file format. Databricks and Spark are **not** synonyms: Spark is one of the core execution technologies *inside* Databricks."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s02",
+   "title": "Account vs Workspace",
+   "hook": "The first boundary every exam and every admin conversation starts with.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Imagine a company, **ACME Corporation**, buys Databricks. At the very top sits the **Databricks account** — the organization-level boundary."
+    },
+    {
+     "t": "p",
+     "text": "At **account level** you manage users, groups and service principals, workspaces, Unity Catalog metastores, billing and account-level policies. One account can contain **many workspaces**."
+    },
+    {
+     "t": "diagram",
+     "text": "DATABRICKS ACCOUNT  (organization level)\n│\n├── identities (users, groups, service principals)\n├── billing\n├── account policies\n├── Unity Catalog configuration (metastores)\n│\n├── Workspace A\n├── Workspace B\n└── Workspace C",
+     "caption": "One account → many workspaces."
+    },
+    {
+     "t": "p",
+     "text": "A **workspace** is the operational/collaboration environment where users actually work. Databricks describes it as the environment where workloads such as ingestion, interactive analysis, scheduled jobs and ML training run."
+    },
+    {
+     "t": "list",
+     "items": [
+      "notebooks",
+      "files",
+      "Git folders",
+      "jobs",
+      "pipelines",
+      "SQL queries",
+      "dashboards",
+      "compute",
+      "Catalog Explorer"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "ACME might have one account with three workspaces: `analytics-prod`, `engineering-dev`, `research`."
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Azure tenant mental model",
+     "text": "**Azure tenant** ≈ organization-wide level; **Databricks account** ≈ organization-wide Databricks level; **workspace** ≈ a specific environment where teams and workloads operate. Not a perfect 1:1 mapping, but a useful mental model."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Data engineer (daily life)",
+       "points": [
+        "Opens `https://....databricks....`",
+        "Sees Workspace, Catalog, Jobs & Pipelines, Compute, SQL…",
+        "Lives mostly in the **workspace**"
+       ]
+      },
+      {
+       "title": "Admin (account level)",
+       "points": [
+        "Create workspace",
+        "Configure SSO",
+        "Add account group",
+        "Manage billing"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Operation",
+      "Where it most likely happens"
+     ],
+     "rows": [
+      [
+       "Create a notebook",
+       "Workspace"
+      ],
+      [
+       "Create an organization-wide identity",
+       "Account-level administration"
+      ],
+      [
+       "Run a Spark query",
+       "Workspace workload, executed on compute"
+      ],
+      [
+       "Create a second workspace",
+       "Account level"
+      ]
+     ],
+     "caption": "Source exercise 2 — memorize the pattern, not the rows."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Which is higher?",
+     "text": "The **account** is the higher organizational object. A workspace never contains an account; an account contains workspaces."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s03",
+   "title": "Control Plane vs Compute Plane",
+   "hook": "Knowing which plane does what tells you where to look when something breaks.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Databricks architecture explicitly separates two planes: the **control plane** and the **compute plane**."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "CONTROL PLANE — \"manages and coordinates\"",
+       "points": [
+        "Databricks-managed backend services",
+        "Web UI (the web app lives here)",
+        "APIs",
+        "Workspace metadata",
+        "Job orchestration metadata",
+        "Configuration, platform coordination"
+       ]
+      },
+      {
+       "title": "COMPUTE PLANE — \"does the work\"",
+       "points": [
+        "Actual data processing",
+        "Spark transformations",
+        "SQL execution",
+        "Joins, aggregations",
+        "ML computation"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Restaurant",
+     "text": "The **control plane** is the front desk and manager: takes the order, schedules the kitchen, keeps the books. The **compute plane** is the kitchen where the food (your data) is actually cooked."
+    },
+    {
+     "t": "p",
+     "text": "Follow one command. In a notebook you write:"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df.groupBy(\"country\").sum(\"amount\").show()"
+    },
+    {
+     "t": "diagram",
+     "text": "Browser\n   │\n   ▼\nDatabricks control services   (control plane)\n   │  schedule / coordinate execution\n   ▼\nCompute plane\n   ├── Driver / Spark session\n   ├── Workers\n   └── Photon / Spark execution\n   │\n   ▼\nData storage",
+     "caption": "The path of one notebook command."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Who actually runs groupBy?",
+     "text": "Your **browser does not** run the groupBy. The **control plane is not** where the Spark workload runs. The computation happens in the **compute plane**."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: Browser → Databricks UI → Spark query → ADLS. Which two planes are involved?",
+     "text": "The UI / platform coordination belongs to the **control plane**; the Spark computation happens in the **compute plane** (which then reads the data in ADLS storage)."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s04",
+   "title": "Classic vs Serverless Compute",
+   "hook": "Two compute planes, one fundamental trade-off: control vs convenience.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Today there are two main kinds of compute plane: the **classic compute plane** and the **serverless compute plane**. Databricks documentation separates them explicitly."
+    },
+    {
+     "t": "p",
+     "text": "With **classic compute** you create and configure the resources yourself — a driver VM plus worker VMs — and choose many infrastructure characteristics."
+    },
+    {
+     "t": "diagram",
+     "text": "Your cloud environment  (e.g. YOUR AWS account)\n│\n├── Driver VM\n├── Worker VM\n├── Worker VM\n└── Worker VM",
+     "caption": "Classic: resources live in the customer's cloud account (AWS; similar on Azure/GCP)."
+    },
+    {
+     "t": "p",
+     "text": "Classic = **more control**, but also **more operational responsibility**."
+    },
+    {
+     "t": "p",
+     "text": "With **serverless** you say \"I want compute to run this workload\" — not \"give me 1 driver with X RAM and 8 workers of this VM type\". Databricks takes over most of the provisioning and scaling."
+    },
+    {
+     "t": "diagram",
+     "text": "YOU: run notebook\n        │\n        ▼\nDatabricks\n  ├── allocates compute\n  ├── scales it\n  ├── manages the runtime\n  └── tears down / scales resources as appropriate"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Current recommendation",
+     "text": "Databricks today recommends **serverless compute for most interactive and automated workloads**, when it is available and supports your requirements."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Serverless ≠ \"no servers\"",
+     "text": "Of course there are servers, CPUs and RAM. **Serverless** means *you* don't manage the underlying server infrastructure the same way — the **abstraction boundary moved**."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "SERVERLESS",
+       "points": [
+        "Less infrastructure to manage",
+        "Fast provisioning",
+        "Automatic scaling",
+        "Platform optimizations"
+       ]
+      },
+      {
+       "title": "CLASSIC",
+       "points": [
+        "More control",
+        "Custom configuration",
+        "Special API / runtime / network needs"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Not \"serverless good, classic useless\"",
+     "text": "Some workloads **still need classic**. Serverless is a default recommendation, not a verdict that classic is obsolete."
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Serverless limitations (current)",
+     "text": "Serverless compute **does not support R**, **does not support Spark RDD APIs**, and is built on **Spark Connect** APIs. Old code like `spark.sparkContext.parallelize([1,2,3])` should not be assumed to work in a serverless notebook."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "rdd = spark.sparkContext.parallelize([1, 2, 3])   # RDD API → needs classic compute",
+     "caption": "Don't assume this runs on serverless."
+    },
+    {
+     "t": "p",
+     "text": "**\"Cluster\" vs \"compute\"**: older tutorials say *cluster* everywhere; today's UI/docs prefer the broader word **compute**. Classic Spark compute still has the familiar shape:"
+    },
+    {
+     "t": "diagram",
+     "text": "            DRIVER\n              │\n     ┌────────┼────────┐\n     ▼        ▼        ▼\n  worker   worker   worker\n\njob → stage → task → partition",
+     "caption": "Everything you know from Spark still applies on classic compute."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s05",
+   "title": "Compute Types at a Glance: All-Purpose, Jobs, SQL Warehouse",
+   "hook": "There is no \"the Databricks cluster\" — there are compute types for different workload shapes.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**All-purpose compute** (classic) is used mostly for **interactive development**: several notebooks can attach to the same compute."
+    },
+    {
+     "t": "diagram",
+     "text": "Notebook A ─┐\nNotebook B ─┼──► All-purpose compute\nNotebook C ─┘",
+     "caption": "Good for development, interactive exploration, debugging."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "All-purpose for automated jobs?",
+     "text": "All-purpose compute is **not** Databricks' first recommendation for automated Jobs. For jobs it recommends **serverless** in most cases, or **classic jobs compute** when you need custom cluster characteristics."
+    },
+    {
+     "t": "p",
+     "text": "**Jobs compute**: a pipeline runs at 02:00 (ingest → transform → aggregate). You don't need an interactive cluster open all day — compute exists for the job."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Job starts",
+      "Compute available / provisioned",
+      "Tasks run",
+      "Workload finishes"
+     ],
+     "caption": "Jobs compute lifecycle"
+    },
+    {
+     "t": "p",
+     "text": "Deeper later (Jobs chapters): serverless jobs, classic jobs compute, shared job compute, task-level compute."
+    },
+    {
+     "t": "p",
+     "text": "A **SQL warehouse** is a compute resource **optimized for SQL analytics**, used by the SQL editor, dashboards, BI tools and other SQL workloads."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT country, SUM(revenue)\nFROM prod.gold.sales\nGROUP BY country;",
+     "caption": "A typical query a SQL warehouse executes."
+    },
+    {
+     "t": "diagram",
+     "text": "Power BI ─────┐\n              │\nSQL Editor ───┼──► SQL Warehouse ───► tables\n              │\nDashboard ────┘"
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "SQL warehouse ≠ database",
+     "text": "Here **warehouse** means a **compute resource**, not the place where tables are stored. Tables keep their own data/storage layer; the warehouse only **executes queries**."
+    },
+    {
+     "t": "p",
+     "text": "SQL warehouse types today: **Serverless**, **Pro**, **Classic**. There is also **Lakehouse Real-Time** (Beta) for specific low-latency/high-concurrency cases. For most SQL analytics, Databricks recommends a **serverless SQL warehouse** when available."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Workload",
+      "Likely compute"
+     ],
+     "rows": [
+      [
+       "Notebook: `spark.read.table(\"prod.sales.orders\")`",
+       "Serverless notebook compute or classic all-purpose compute"
+      ],
+      [
+       "SQL dashboard: `SELECT COUNT(*) FROM prod.sales.orders`",
+       "SQL warehouse"
+      ],
+      [
+       "Scheduled Python ETL",
+       "Serverless jobs compute or classic jobs compute"
+      ]
+     ],
+     "caption": "Different compute types for different workload shapes."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Interactive Python/DataFrames → Serverless notebook compute",
+      "Interactive SQL / BI → Serverless SQL warehouse",
+      "Automated Python/SQL job → Serverless Jobs",
+      "Custom cluster config / unsupported feature → Classic",
+      "RDD / R requirement → Classic"
+     ],
+     "caption": "Compute-selection mental model (interview/exam)"
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "Why a SQL warehouse instead of general Spark compute?",
+     "text": "*A SQL warehouse is purpose-built for SQL analytics and BI workloads and provides SQL-oriented performance, concurrency and scaling capabilities, whereas general notebook or classic compute is suited to broader Spark and programmatic workloads.*"
+    }
+   ]
+  },
+  {
+   "id": "ch04-s06",
+   "title": "Databricks Runtime (DBR), LTS and Runtime ML",
+   "hook": "Hardware alone runs nothing: the Runtime is the software that makes compute behave a certain way.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You have a compute machine. Hardware alone is not enough — you need a **software environment**: Spark, Python, Scala, JVM, Delta libraries, Databricks integrations, optimized libraries, system dependencies."
+    },
+    {
+     "t": "p",
+     "text": "Databricks packages a **tested software stack** called the **Databricks Runtime (DBR)**."
+    },
+    {
+     "t": "diagram",
+     "text": "Compute VM            (hardware / infrastructure)\n│\n└── Databricks Runtime  (software)\n      ├── Apache Spark\n      ├── Delta support\n      ├── Python environment\n      ├── libraries\n      ├── Databricks optimizations\n      └── integrations"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "VM ≠ DBR",
+     "text": "**VM / compute resources** = hardware/infrastructure abstraction. **DBR** = software runtime environment. Same VM type + different DBR can behave differently."
+    },
+    {
+     "t": "p",
+     "text": "You will see versions like `17.3 LTS`, `18.x`, `19 Beta`. (In June 2026 the source reports DBR 19 Beta on Spark 4.2.0, with LTS lines like 17.3 and 16.4 still getting maintenance.) **Don't memorize numbers** — understand the consequence:"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Different DBR",
+      "different Spark version",
+      "different Python / packages",
+      "different capabilities & bug fixes",
+      "different behavior"
+     ]
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "LTS",
+       "def": "**Long-Term Support** runtime. Preferred in production when you want stability, predictable maintenance and less frequent migration instead of chasing every new release."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Runtime debugging story**: DEV runs DBR 18.x, PROD runs DBR 17.3 LTS. `some_new_api(...)` works in dev but raises `AttributeError` in prod. Likely root cause: **runtime version mismatch**."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "code",
+      "+ runtime",
+      "+ libraries",
+      "+ configuration"
+     ],
+     "caption": "Production debugging is never just \"does the Python code have a bug?\""
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when code works in DEV but fails in PROD",
+     "questions": [
+      "Which DBR version runs in DEV, and which in PROD?",
+      "Does the failing API/library exist in the older runtime?",
+      "Are the Python libraries/versions the same in both environments?",
+      "Is the configuration (compute, settings) the same?"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Databricks Runtime for Machine Learning (DBR ML)** adds prebuilt ML/DL infrastructure and common ML libraries so you don't build the whole environment yourself."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Standard DBR",
+      "+ ML libraries",
+      "+ ML/DL infrastructure",
+      "= DBR ML"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch04-s07",
+   "title": "Photon: The Vectorized Engine Under Your Code",
+   "hook": "Faster SQL/DataFrames without rewriting a single line.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Spark** is an execution framework / engine ecosystem. **Photon** is the **Databricks-native vectorized query engine**, designed to accelerate SQL and DataFrame workloads."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "What Photon is NOT",
+     "text": "Photon is **not** another programming language, **not** a database and **not** a storage format."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Without Photon",
+       "points": [
+        "SQL / DataFrame",
+        "↓ Spark plan",
+        "↓ Spark/JVM execution"
+       ]
+      },
+      {
+       "title": "With Photon (supported ops)",
+       "points": [
+        "SQL / DataFrame",
+        "↓ query plan",
+        "↓ Photon-native execution"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "The key point: you write the **same SQL/DataFrame code**. The optimization happens **beneath the API abstraction**."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "result = (\n    spark.table(\"prod.sales.orders\")\n    .groupBy(\"country\")\n    .sum(\"amount\")\n)\n# NOT: photon.groupBy(...)  ← no such API"
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: why would processing a batch of values be faster than one row at a time?",
+     "text": "Row-at-a-time pays per-row overhead (row 1 → process, row 2 → process…). **Vectorized** processing works on a batch `[v1 v2 v3 v4 …]` at once, exploiting CPU characteristics — less overhead, better CPU efficiency. (C++/SIMD internals come in the performance chapter.)"
+    },
+    {
+     "t": "diagram",
+     "text": "Row-at-a-time:   row1 → process\n                 row2 → process\n                 row3 → process\n\nVectorized:      [v1 v2 v3 v4 ...] → operate on the whole batch"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Where Photon is on",
+     "text": "Photon is **enabled on serverless compute and SQL warehouses**. On **classic** compute it is also available and usually enabled by default through the corresponding configuration."
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "What is Photon?",
+     "text": "*Photon is Databricks' native vectorized execution engine that accelerates supported SQL and DataFrame operations underneath the existing APIs, so applications generally do not need a separate Photon-specific programming model.*"
+    }
+   ]
+  },
+  {
+   "id": "ch04-s08",
+   "title": "Notebooks: Cells, Compute Attachment, display() vs show()",
+   "hook": "A notebook is a document — it does nothing until it is attached to compute.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A Databricks **notebook** is an interactive document made of **cells** — e.g. Cell 1 Python, Cell 2 SQL, Cell 3 Markdown, Cell 4 Python. Notebooks support **Python, SQL, Scala and R**, depending on the compute/runtime."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "The notebook alone executes nothing",
+     "text": "A notebook is a code/document **artifact**. Even `print(\"hello\")` needs an **active execution session** on compute."
+    },
+    {
+     "t": "diagram",
+     "text": "Notebook\n   │  attach / connect\n   ▼\nCompute\n   │\n   ▼\nexecution"
+    },
+    {
+     "t": "p",
+     "text": "In **Unity Catalog-enabled workspaces**, Databricks can **auto-attach** a new notebook to **serverless compute** when you run a cell without having chosen other compute."
+    },
+    {
+     "t": "p",
+     "text": "Your first real notebook cell:"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "data = [\n    (1, \"Athens\", 120.0),\n    (2, \"Volos\", 80.0),\n    (3, \"Athens\", 50.0),\n    (4, \"Patras\", 200.0),\n    (5, \"Athens\", 30.0),\n]\n\ndf = spark.createDataFrame(\n    data,\n    [\"order_id\", \"city\", \"amount\"]\n)\n\ndisplay(df)"
+    },
+    {
+     "t": "p",
+     "text": "You never created `spark` — in a Databricks notebook a ready-made **Spark session** exists on supported compute."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Python list",
+      "spark.createDataFrame()",
+      "Spark DataFrame"
+     ],
+     "caption": "Inferred schema: order_id: long · city: string · amount: double"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "df.show()",
+       "points": [
+        "**Spark API** (core PySpark)",
+        "Text-oriented output",
+        "Works anywhere Spark runs"
+       ]
+      },
+      {
+       "title": "display(df)",
+       "points": [
+        "**Databricks notebook/platform helper**",
+        "Richer rendering, easy table/visualizations",
+        "Not a core PySpark DataFrame method"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Porting code out of Databricks",
+     "text": "`display()` is a notebook convenience. If you move code outside Databricks (plain PySpark, a library, a test), `display` won't exist — use Spark APIs such as `df.show()`."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s09",
+   "title": "Transformations, Physical Plans and Lazy Evaluation",
+   "hook": "Databricks doesn't hide your Spark knowledge — it leans on it.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "from pyspark.sql import functions as F\n\ncity_sales = (\n    df\n    .groupBy(\"city\")\n    .agg(\n        F.sum(\"amount\").alias(\"total_sales\"),\n        F.count(\"*\").alias(\"orders\")\n    )\n    .orderBy(F.desc(\"total_sales\"))\n)\n\ndisplay(city_sales)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "city",
+      "total_sales",
+      "orders"
+     ],
+     "rows": [
+      [
+       "Athens",
+       "200.0",
+       "3"
+      ],
+      [
+       "Patras",
+       "200.0",
+       "1"
+      ],
+      [
+       "Volos",
+       "80.0",
+       "1"
+      ]
+     ],
+     "caption": "Athens = 120 + 50 + 30. (Athens and Patras tie at 200.0, so their relative order is not guaranteed.)"
+    },
+    {
+     "t": "p",
+     "text": "`groupBy(\"city\")` most likely needs a **shuffle**, so that all rows with the same city key end up in the same downstream partition."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "city_sales.explain(\"formatted\")\n# or\ncity_sales.explain(\"extended\")",
+     "caption": "See the physical plan."
+    },
+    {
+     "t": "diagram",
+     "text": "HashAggregate   (final)\nExchange        ← redistribution / shuffle boundary\nHashAggregate   (partial, per partition)\nSort",
+     "caption": "Operators you will typically see for groupBy + orderBy."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Exchange = shuffle",
+     "text": "In a physical plan, **Exchange** is usually where you see a redistribution/shuffle boundary."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: why does `df.filter(F.col(\"amount\") > 100)` usually need no shuffle, while `df.groupBy(\"city\").sum(\"amount\")` probably does?",
+     "text": "A **filter** can be decided independently inside each existing partition (partition 1 → filter locally, partition 2 → filter locally…). For **groupBy(\"city\")**, all rows with `city = Athens` must be combined logically even if they started in different partitions → **redistribution/shuffle**."
+    },
+    {
+     "t": "p",
+     "text": "**What really happens when you press Run** (interview level):"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Notebook cell",
+      "Python runs in active compute session",
+      "Spark builds logical transformations",
+      "Action/display needs a result",
+      "Catalyst analysis & optimization",
+      "Physical execution plan",
+      "Spark / Photon execution",
+      "Tasks process partitions (scan, filter, shuffle for groupBy)"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Lazy evaluation remains**: `orders = spark.table(...)`, `x = orders.filter(...)`, `y = x.groupBy(...).sum(...)` only **describe** computation."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "display(y)      # action\ny.count()       # action\ny.write...      # action",
+     "caption": "These force evaluation. Databricks doesn't change this basic Spark logic."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "filter() ≠ processed",
+     "text": "After `df.filter(...)` no data has necessarily been processed yet: the transformation only extends the plan. Execution happens when an action/result is requested."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s10",
+   "title": "Magic Commands, spark.table(), spark.sql() and _sqldf",
+   "hook": "One notebook, several languages — and they all meet at the same tables.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Say the notebook's **default language is Python**. A cell starting with **`%sql`** means: *interpret this cell as SQL*."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Magic",
+      "What the cell becomes"
+     ],
+     "rows": [
+      [
+       "`%python`",
+       "Python cell"
+      ],
+      [
+       "`%sql`",
+       "SQL cell"
+      ],
+      [
+       "`%scala`",
+       "Scala cell"
+      ],
+      [
+       "`%r`",
+       "R cell"
+      ],
+      [
+       "`%md`",
+       "Markdown (documentation) cell"
+      ],
+      [
+       "`%pip`",
+       "Install notebook-scoped Python libraries"
+      ]
+     ],
+     "caption": "Magic commands listed in the source."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "%python\nx = 5\nprint(x * 2)"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "%sql\nSELECT current_timestamp() AS now;"
+    },
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "%md\n# Sales Analysis\nThis is the daily sales notebook."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "%pip install requests"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "%pip is notebook-scoped",
+     "text": "`%pip` installs **notebook-scoped** Python libraries (scoped to the notebook/session context). Don't assume it is a permanent installation for the whole workspace."
+    },
+    {
+     "t": "p",
+     "text": "**SQL and Python in the same flow**: both of these can point to the same logical table `main.sales.orders`."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Python",
+       "points": [
+        "`orders = spark.table(\"main.sales.orders\")`",
+        "`display(orders)`"
+       ]
+      },
+      {
+       "title": "SQL",
+       "points": [
+        "`%sql`",
+        "`SELECT * FROM main.sales.orders;`"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "flow",
+     "items": [
+      "UC name prod.silver.orders",
+      "resolve metadata",
+      "table",
+      "Spark DataFrame"
+     ],
+     "caption": "spark.table(\"catalog.schema.table\")"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df = spark.sql(\"\"\"\n    SELECT country, SUM(amount) AS revenue\n    FROM prod.silver.orders\n    GROUP BY country\n\"\"\")\ndisplay(df)",
+     "caption": "spark.sql() returns a DataFrame: SQL statement → Spark SQL → DataFrame."
+    },
+    {
+     "t": "p",
+     "text": "**`_sqldf`**: in supported notebook environments, the result of a `%sql` cell becomes available to **subsequent Python** code as `_sqldf`."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "%sql\nSELECT * FROM prod.silver.orders WHERE amount > 100;"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "display(_sqldf)   # next Python cell: result of the SQL cell above"
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Interactive only",
+     "text": "`_sqldf` is a handy interactive feature. **Don't build production architecture on it** — use `spark.sql()` / `spark.table()` and named DataFrames."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s11",
+   "title": "Widgets and SQL Parameters (:param, IDENTIFIER)",
+   "hook": "Stop editing code to change a country — parameterize the notebook.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You want the notebook to run for different countries. **Bad**: `country = \"GR\"` and edit the code by hand each time."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "dbutils.widgets.dropdown(\n    \"country\",          # name\n    \"GR\",               # default value\n    [\"GR\", \"DE\", \"FR\"], # choices\n    \"Country\"           # label shown in the UI\n)\n\ncountry = dbutils.widgets.get(\"country\")\n\nfiltered = (\n    spark.table(\"prod.silver.orders\")\n    .filter(F.col(\"country\") == country)\n)\ndisplay(filtered)",
+     "caption": "Create → read → use."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Create widget (dbutils.widgets.dropdown/text)",
+      "Read it (dbutils.widgets.get)",
+      "Use the value in filter/SQL",
+      "display()"
+     ]
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Widgets",
+       "def": "Notebook input controls for **parameterized notebooks/dashboards**. Types include **text**, **dropdown**, **combobox** (and others, e.g. multiselect)."
+      },
+      {
+       "term": "dbutils.widgets.get(name)",
+       "def": "Returns the widget's current value (as a string) to Python code."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Modern SQL parameter markers** use **`:parameter`** — not the older **`${parameter}`**, which is **deprecated for DBR 15.2+**."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "dbutils.widgets.text(\"country\", \"GR\")",
+     "caption": "Python cell"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "%sql\nSELECT *\nFROM prod.silver.orders\nWHERE country = :country;",
+     "caption": "SQL cell — modern parameter marker"
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": ":country, not ${country}",
+     "text": "Learn today's syntax, not old tutorials: `:country` is current; `${country}` is legacy/deprecated."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: a widget holds `table = orders`. Why can't you just write `SELECT * FROM :table`?",
+     "text": "A **parameter value** and a **SQL identifier** are different semantic categories. `WHERE country = :country` inserts a *value*; `FROM ...` needs an *identifier* (an object name). Use **`IDENTIFIER(:table_name)`** for parameterized object names."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT *\nFROM IDENTIFIER(:table_name);"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Value vs identifier",
+     "text": "Parameter markers stand for **values**. For table/column/schema names use **`IDENTIFIER()`**. Literal vs identifier vs parameter vs expression is a frequent source of SQL bugs (covered in depth later)."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s12",
+   "title": "Catalog Explorer, SHOW/DESCRIBE and Your First Delta Table",
+   "hook": "Find data by clicking, confirm it by SQL — then create a real table.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "On the left of the workspace you'll find **Catalog / Catalog Explorer**: discovery of Unity Catalog objects."
+    },
+    {
+     "t": "diagram",
+     "text": "catalog\n  └── schema\n        ├── tables\n        ├── views\n        ├── volumes\n        ├── functions\n        └── models ...\n\nprod\n├── bronze\n│   └── raw_orders\n├── silver\n│   └── orders\n└── gold\n    └── daily_sales"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Discovery needs privileges",
+     "text": "Catalog Explorer requires suitable privileges such as **BROWSE** and/or the corresponding **data access privileges** to see objects."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SHOW CATALOGS;\nSHOW SCHEMAS IN prod;\nSHOW TABLES IN prod.silver;\nDESCRIBE TABLE prod.silver.orders;\nDESCRIBE DETAIL prod.silver.orders;",
+     "caption": "Drill down level by level. These become your basic debugging tools."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "DESCRIBE TABLE",
+       "def": "Shows the table's columns and data types."
+      },
+      {
+       "term": "DESCRIBE DETAIL",
+       "def": "Shows table-level details (format, location, size, number of files…)."
+      }
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE SCHEMA IF NOT EXISTS dev_training.sales;",
+     "caption": "Catalog dev_training, schema sales."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE TABLE dev_training.sales.orders (\n  order_id    BIGINT,\n  customer_id BIGINT,\n  amount      DECIMAL(10,2),\n  country     STRING,\n  order_ts    TIMESTAMP\n)\nUSING DELTA;"
+    },
+    {
+     "t": "diagram",
+     "text": "Unity Catalog\n   │  name / metadata / permissions\n   ▼\ndev_training.sales.orders\n   │  table format\n   ▼\nDelta\n   │  files + transaction state\n   ▼\nstorage",
+     "caption": "Connect the layers: UC names & governs, Delta formats, storage holds bytes."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "INSERT INTO dev_training.sales.orders\nVALUES\n  (1, 101, 20.50, 'GR', CURRENT_TIMESTAMP()),\n  (2, 102, 90.00, 'DE', CURRENT_TIMESTAMP()),\n  (3, 103, 15.25, 'GR', CURRENT_TIMESTAMP());\n\nSELECT * FROM dev_training.sales.orders;",
+     "caption": "A real table workflow — not a toy DataFrame living only in RAM."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "orders = spark.table(\"dev_training.sales.orders\")\n\ngreek_orders = orders.filter(F.col(\"country\") == \"GR\")\ndisplay(greek_orders)\n\n(orders\n  .groupBy(\"country\")\n  .agg(F.sum(\"amount\").alias(\"revenue\"))\n  .display())          # if .display() isn't supported, use display(...)",
+     "caption": "The same table from Python."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Compute lifetime ≠ data lifetime",
+     "text": "If compute stops, your Delta table is **not** lost — it lives in persistent storage. Compute can come and go; data persists."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s13",
+   "title": "Namespaces and Fully Qualified Names",
+   "hook": "`orders` might silently mean dev — `prod.silver.orders` can't.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "`prod.silver.orders` is a **Unity Catalog three-level namespace**: **catalog.schema.table**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "Level"
+     ],
+     "rows": [
+      [
+       "`prod`",
+       "catalog"
+      ],
+      [
+       "`silver`",
+       "schema"
+      ],
+      [
+       "`orders`",
+       "object / table"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Good production habit: write **`catalog.schema.table`** instead of just `orders`."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: your current context is `dev.sales` and you run `SELECT * FROM orders;`. What do you read?",
+     "text": "You read **`dev.sales.orders`** — while you may have believed you were reading `prod.sales.orders`. No error, just the wrong data. Very dangerous."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT current_catalog();\nSELECT current_schema();",
+     "caption": "Check the current namespace."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "USE CATALOG prod;\nUSE SCHEMA silver;\n\nSELECT * FROM orders;   -- now resolves to prod.silver.orders"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Unqualified names resolve against the current context",
+     "text": "A short name is resolved using the **current catalog and schema**. For production transformations prefer the fully qualified `prod.silver.orders`."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself before running a query with a short table name",
+     "questions": [
+      "What are current_catalog() and current_schema() right now?",
+      "Could the same table name exist in dev and prod?",
+      "Would a fully qualified name remove any doubt?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch04-s14",
+   "title": "Debugging by Layer: Cases A–D",
+   "hook": "Find the failing layer first — don't jump to shuffles when the notebook isn't even attached.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **notebook cell is stuck**. Don't start by inspecting Spark shuffle. First decide **which layer** the failure is in."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Compute attached?",
+      "Compute running?",
+      "Session healthy?",
+      "Code parsed?",
+      "Table exists?",
+      "Permission?",
+      "Query plan?",
+      "Runtime execution?"
+     ],
+     "caption": "The layer ladder — top to bottom."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Case",
+      "Symptom",
+      "Layer",
+      "First move"
+     ],
+     "rows": [
+      [
+       "A",
+       "notebook not attached",
+       "Execution environment (not Spark code)",
+       "Attach / start compute"
+      ],
+      [
+       "B",
+       "`TABLE_OR_VIEW_NOT_FOUND`",
+       "Naming / namespace",
+       "`SHOW TABLES IN prod.silver;`"
+      ],
+      [
+       "C",
+       "`INSUFFICIENT_PRIVILEGES`",
+       "Governance / authorization",
+       "Which principal? USE CATALOG / USE SCHEMA / SELECT?"
+      ],
+      [
+       "D",
+       "`ModuleNotFoundError`",
+       "Runtime / environment / dependency",
+       "`%pip install` (notebook) or managed deps (prod)"
+      ]
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "spark.table(\"prod.silver.ordres\")   # → TABLE_OR_VIEW_NOT_FOUND",
+     "caption": "Case B: typo 'ordres' instead of 'orders' — or wrong catalog/schema."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself on TABLE_OR_VIEW_NOT_FOUND",
+     "questions": [
+      "Does SHOW TABLES IN <catalog>.<schema> list the table?",
+      "Did I spell the table name exactly (ordres vs orders)?",
+      "Am I in the catalog/schema I think I am?",
+      "Did I use a fully qualified name?"
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT * FROM prod.finance.transactions;  -- → INSUFFICIENT_PRIVILEGES",
+     "caption": "Case C"
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself on INSUFFICIENT_PRIVILEGES / PERMISSION_DENIED",
+     "questions": [
+      "Which principal am I (or is the job running as)?",
+      "Do I have USE CATALOG on the catalog?",
+      "Do I have USE SCHEMA on the schema?",
+      "Do I have SELECT on the table?"
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Wrong layer, wrong tool",
+     "text": "A permission error is a **governance** problem — you don't look at Spark partitions. A `ModuleNotFoundError` is an **environment** problem — not a data problem."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "import some_library        # ModuleNotFoundError\n%pip install some-library   # notebook fix",
+     "caption": "Case D. In production, manage dependencies systematically, not with ad-hoc %pip."
+    },
+    {
+     "t": "callout",
+     "kind": "debug",
+     "title": "Works when I run it, fails as a scheduled job",
+     "text": "Notebook works for you, but the scheduled job gets `PERMISSION_DENIED`. First serious hypothesis: a **different execution identity/principal** runs the job."
+    },
+    {
+     "t": "callout",
+     "kind": "debug",
+     "title": "Works in DEV, ModuleNotFoundError in PROD",
+     "text": "Check early: (1) the **Databricks Runtime version**, (2) the **Python/library environment**."
+    }
+   ]
+  },
+  {
+   "id": "ch04-s15",
+   "title": "Slow Queries: Case E and the Debugging Tree",
+   "hook": "\"It's slow, get a bigger cluster\" is a guess, not a diagnosis.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Case E — the query runs but is slow.** *Now* you start looking at Spark."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Physical plan",
+      "Spark UI",
+      "tasks",
+      "shuffle",
+      "skew",
+      "spill",
+      "input bytes",
+      "partition counts",
+      "join strategy"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Slow ≠ small cluster",
+     "text": "A slow query does **not** automatically mean the cluster is too small. That habit should disappear from day one."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "result = (\n    spark.table(\"prod.silver.orders\")\n    .join(spark.table(\"prod.silver.customers\"), \"customer_id\")\n    .groupBy(\"country\")\n    .agg(F.sum(\"amount\"))\n)\ndisplay(result)     # runs for 40 minutes",
+     "caption": "A real debugging case."
+    },
+    {
+     "t": "diagram",
+     "text": "Is compute actually healthy?\n            │\n            ▼\nHow much input data?\n            │\n            ▼\nWhat physical join?\n     ┌──────┴──────┐\n     ▼             ▼\n   BHJ?          SMJ?\n     │             │\n     ▼             ▼\n reasonable?   huge shuffle?\n                   │\n                   ▼\n                 skew?\n                   │\n                   ▼\n             spill to disk?\n                   │\n                   ▼\n         tiny files / bad layout?",
+     "caption": "BHJ = broadcast hash join, SMJ = sort-merge join. Real Spark UI examples come later."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: a junior says \"we need a bigger cluster\". What's wrong with that reasoning?",
+     "text": "No **root cause** has been identified. It could be skew, a wrong join, a huge shuffle, spill, poor table layout, small files, an unnecessary scan, a bad query, insufficient statistics — or a genuine compute bottleneck. Cluster sizing is only **one** possibility."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a query is slow",
+     "questions": [
+      "Is the compute actually healthy?",
+      "How much input data am I really reading?",
+      "Which physical join did Spark pick (BHJ or SMJ)?",
+      "Is there a huge shuffle (Exchange)?",
+      "Is the data skewed?",
+      "Are tasks spilling to disk?",
+      "Are there tiny files or a bad table layout?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch04-s16",
+   "title": "Mini-Project, Mental Buckets and Recap",
+   "hook": "Put it all together in one parameterized notebook — then sort every term into the right bucket.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE TABLE IF NOT EXISTS dev_training.sales.orders (\n  order_id    BIGINT,\n  customer_id BIGINT,\n  city        STRING,\n  amount      DECIMAL(10,2),\n  order_date  DATE\n) USING DELTA;\n\nINSERT INTO dev_training.sales.orders VALUES\n (1, 101, 'Athens', 100.00, DATE'2026-09-10'),\n (2, 102, 'Volos',   80.00, DATE'2026-09-10'),\n (3, 101, 'Athens',  30.00, DATE'2026-09-11'),\n (4, 103, 'Patras', 150.00, DATE'2026-09-11'),\n (5, 104, 'Athens', 200.00, DATE'2026-09-12'),\n (6, 102, 'Volos',   40.00, DATE'2026-09-12');",
+     "caption": "Setup (works on Free / normal workspaces, depending on your access)."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "-- Task A: revenue per city\nSELECT city, SUM(amount) AS revenue\nFROM dev_training.sales.orders\nGROUP BY city\nORDER BY revenue DESC;"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "# Task B: same in PySpark\nfrom pyspark.sql import functions as F\norders = spark.table(\"dev_training.sales.orders\")\ncity_revenue = (\n    orders.groupBy(\"city\")\n    .agg(F.sum(\"amount\").alias(\"revenue\"))\n    .orderBy(F.desc(\"revenue\"))\n)\ndisplay(city_revenue)\n\n# Task C: physical plan → look for Exchange and Aggregate\ncity_revenue.explain(\"formatted\")"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "# Task D: parameter\ndbutils.widgets.dropdown(\"city\", \"Athens\", [\"Athens\", \"Volos\", \"Patras\"])\ncity = dbutils.widgets.get(\"city\")\nresult = (\n    spark.table(\"dev_training.sales.orders\")\n    .filter(F.col(\"city\") == city)\n)\ndisplay(result)"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "%sql\n-- Task E: SQL version with the modern marker\nSELECT *\nFROM dev_training.sales.orders\nWHERE city = :city;"
+    },
+    {
+     "t": "table",
+     "head": [
+      "When you see…",
+      "Think…"
+     ],
+     "rows": [
+      [
+       "`spark.table(...)`",
+       "Spark API"
+      ],
+      [
+       "`display(...)`",
+       "Databricks notebook convenience"
+      ],
+      [
+       "`prod.silver.orders`",
+       "Unity Catalog namespace"
+      ],
+      [
+       "Serverless",
+       "Databricks-managed compute infrastructure"
+      ],
+      [
+       "SQL Warehouse",
+       "SQL-optimized compute"
+      ],
+      [
+       "Photon",
+       "Vectorized native execution engine"
+      ],
+      [
+       "DBR 17.3",
+       "Software/runtime environment"
+      ]
+     ],
+     "caption": "Not everything goes into one mental bucket called \"Databricks stuff\"."
+    },
+    {
+     "t": "diagram",
+     "text": "ACCOUNT\n  └── WORKSPACE\n        ├── Notebook\n        ├── SQL Editor\n        ├── Jobs\n        └── Pipelines\n              │\n              ▼\n           COMPUTE\n        ┌─────┴─────┐\n   Serverless    Classic\n        └─────┬─────┘\n       Spark / Photon\n              │\n              ▼\n        Delta Tables\n              │\n              ▼\n      Persistent Storage",
+     "caption": "Your first Databricks execution model."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Python you now know",
+       "points": [
+        "`spark.table(...)`",
+        "`spark.sql(...)`",
+        "`df.explain(...)`",
+        "`display(...)`",
+        "`dbutils.widgets...`"
+       ]
+      },
+      {
+       "title": "SQL you now know",
+       "points": [
+        "`SHOW CATALOGS / SCHEMAS / TABLES`",
+        "`CREATE SCHEMA`",
+        "`CREATE TABLE ... USING DELTA`",
+        "`INSERT INTO`, `SELECT`",
+        "`USE CATALOG`, `USE SCHEMA`"
+       ]
+      },
+      {
+       "title": "Notebook constructs",
+       "points": [
+        "`%python`",
+        "`%sql`",
+        "`%md`",
+        "`%pip`"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "Workspace vs compute",
+     "text": "*A workspace is the collaborative and operational environment that contains development, orchestration, governance and analytics interfaces, whereas compute is the execution infrastructure used to actually process workloads submitted from those interfaces.*"
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch04-d01",
+   "title": "Notebook cell stuck or won't run",
+   "section": "ch04-s14",
+   "symptom": "You press Run and the cell hangs, does nothing, or the notebook says it is not attached.",
+   "askYourself": [
+    "Is the notebook attached to any compute at all?",
+    "Is that compute actually running?",
+    "Is the session healthy?",
+    "Did my code even parse?",
+    "Does the table I reference exist?",
+    "Do I have permission on it?",
+    "What does the query plan look like?",
+    "Is the problem in runtime execution itself?"
+   ],
+   "steps": [
+    {
+     "do": "Check the compute selector at the top of the notebook; attach to serverless or start the compute.",
+     "why": "A notebook is only an artifact — without a session nothing executes (Case A)."
+    },
+    {
+     "do": "Re-run a trivial cell such as print(\"hello\").",
+     "why": "Separates environment problems from code problems.",
+     "code": "print(\"hello\")"
+    },
+    {
+     "do": "Only if the environment is fine, check names (SHOW TABLES) and permissions.",
+     "why": "Next layers on the ladder: data/naming, then governance."
+    },
+    {
+     "do": "Only then inspect the physical plan / Spark UI.",
+     "why": "Shuffle and skew analysis is the last layer, not the first."
+    }
+   ],
+   "rootCauses": [
+    "Notebook not attached to compute",
+    "Compute stopped / starting",
+    "Unhealthy session",
+    "Errors in later layers (names, permissions, plan)"
+   ],
+   "fix": "Locate the failing layer top-down; for 'not attached' simply attach/start compute and re-run.",
+   "mnemonic": "Outside-in: Attach → Run → Session → Parse → Table → Permission → Plan → Execution"
+  },
+  {
+   "id": "ch04-d02",
+   "title": "TABLE_OR_VIEW_NOT_FOUND",
+   "section": "ch04-s14",
+   "symptom": "`spark.table(\"prod.silver.ordres\")` or a SQL query fails with TABLE_OR_VIEW_NOT_FOUND.",
+   "askYourself": [
+    "Does SHOW TABLES IN <catalog>.<schema> list this table?",
+    "Did I spell the name exactly right (ordres vs orders)?",
+    "Am I in the catalog/schema I think I am?",
+    "Did I use a fully qualified catalog.schema.table name?",
+    "Can I even see the catalog/schema (privileges)?"
+   ],
+   "steps": [
+    {
+     "do": "List the tables in the schema.",
+     "why": "Confirms what actually exists.",
+     "code": "SHOW TABLES IN prod.silver;"
+    },
+    {
+     "do": "Compare the spelling character by character.",
+     "why": "Typos are the most common cause."
+    },
+    {
+     "do": "Check the current namespace.",
+     "why": "Short names resolve against the current catalog/schema.",
+     "code": "SELECT current_catalog();\nSELECT current_schema();"
+    },
+    {
+     "do": "Walk up: SHOW SCHEMAS IN prod; SHOW CATALOGS;",
+     "why": "The table may live in another schema/catalog."
+    },
+    {
+     "do": "Rewrite with the fully qualified name and re-run.",
+     "why": "Removes namespace ambiguity.",
+     "code": "spark.table(\"prod.silver.orders\")"
+    }
+   ],
+   "rootCauses": [
+    "Typo in table name",
+    "Wrong catalog or schema",
+    "Unqualified name resolved in the wrong context"
+   ],
+   "fix": "Correct the name and use catalog.schema.table.",
+   "mnemonic": "SHOW → Spell → Scope → Qualify"
+  },
+  {
+   "id": "ch04-d03",
+   "title": "INSUFFICIENT_PRIVILEGES / PERMISSION_DENIED",
+   "section": "ch04-s14",
+   "symptom": "`SELECT * FROM prod.finance.transactions` fails with INSUFFICIENT_PRIVILEGES — or a notebook that works for you fails as a scheduled job with PERMISSION_DENIED.",
+   "askYourself": [
+    "Which principal am I — or which identity is the job running as?",
+    "Is the job running as a different identity than me?",
+    "Do I (does it) have USE CATALOG on the catalog?",
+    "Do I (does it) have USE SCHEMA on the schema?",
+    "Do I (does it) have SELECT on the table?"
+   ],
+   "steps": [
+    {
+     "do": "Identify the executing principal (you vs the job's identity).",
+     "why": "Works-for-me / fails-as-job almost always means a different principal."
+    },
+    {
+     "do": "Check USE CATALOG on the catalog.",
+     "why": "Outer privilege in the chain."
+    },
+    {
+     "do": "Check USE SCHEMA on the schema.",
+     "why": "Middle privilege in the chain."
+    },
+    {
+     "do": "Check SELECT on the table.",
+     "why": "The actual data access privilege."
+    }
+   ],
+   "rootCauses": [
+    "Different execution identity/principal",
+    "Missing USE CATALOG",
+    "Missing USE SCHEMA",
+    "Missing SELECT"
+   ],
+   "fix": "Grant the missing privileges to the right principal (or run the job as an identity that has them). Do not look at Spark partitions — this is the governance layer.",
+   "mnemonic": "WHO, then Catalog → Schema → Select"
+  },
+  {
+   "id": "ch04-d04",
+   "title": "Works in DEV, fails in PROD (AttributeError / ModuleNotFoundError)",
+   "section": "ch04-s06",
+   "symptom": "Code runs on DEV (e.g. DBR 18.x) but PROD (e.g. DBR 17.3 LTS) raises AttributeError or ModuleNotFoundError.",
+   "askYourself": [
+    "Which DBR version runs in DEV and which in PROD?",
+    "Does this API exist in the older runtime?",
+    "Are the Python libraries and their versions the same?",
+    "Was the library installed only notebook-scoped with %pip in DEV?",
+    "Is the compute configuration the same?"
+   ],
+   "steps": [
+    {
+     "do": "Read the exact error and the failing call/import.",
+     "why": "AttributeError → API missing; ModuleNotFoundError → library missing."
+    },
+    {
+     "do": "Compare the DBR versions of both environments.",
+     "why": "Different DBR = different Spark/Python/packages/capabilities."
+    },
+    {
+     "do": "Compare installed libraries.",
+     "why": "`%pip` is notebook-scoped; PROD may not have the package.",
+     "code": "%pip install some-library   # notebook only"
+    },
+    {
+     "do": "Compare configuration, then align runtime/dependencies.",
+     "why": "Production needs systematic dependency management, not ad-hoc installs."
+    }
+   ],
+   "rootCauses": [
+    "Runtime version mismatch",
+    "Missing/different Python libraries",
+    "Configuration differences"
+   ],
+   "fix": "Align DBR versions and manage dependencies systematically (or avoid APIs not present in the PROD runtime).",
+   "mnemonic": "Code + Runtime + Libraries + Config"
+  },
+  {
+   "id": "ch04-d05",
+   "title": "Query runs but is slow",
+   "section": "ch04-s15",
+   "symptom": "A join + groupBy query (orders ⋈ customers → groupBy country) runs for 40 minutes.",
+   "askYourself": [
+    "Is the compute actually healthy?",
+    "How much input data am I reading?",
+    "Which physical join did Spark choose — BHJ or SMJ?",
+    "Is there a huge shuffle (Exchange)?",
+    "Is the data skewed?",
+    "Are tasks spilling to disk?",
+    "Are there tiny files or a bad table layout?"
+   ],
+   "steps": [
+    {
+     "do": "Rule out compute health problems.",
+     "why": "Environment first."
+    },
+    {
+     "do": "Check input bytes and scans.",
+     "why": "Unnecessary scans are a common hidden cost."
+    },
+    {
+     "do": "Read the physical plan for the join strategy.",
+     "why": "BHJ is usually reasonable; SMJ implies a shuffle.",
+     "code": "result.explain(\"formatted\")"
+    },
+    {
+     "do": "In the Spark UI look at shuffle size, task durations (skew) and spill.",
+     "why": "One very slow task = skew; spill = memory pressure."
+    },
+    {
+     "do": "Check file sizes/layout.",
+     "why": "Tiny files or poor layout slow scans."
+    }
+   ],
+   "rootCauses": [
+    "Skew",
+    "Wrong join strategy",
+    "Huge shuffle",
+    "Spill",
+    "Poor table layout / small files",
+    "Unnecessary scan",
+    "Bad query",
+    "Insufficient statistics",
+    "Genuine compute bottleneck"
+   ],
+   "fix": "Fix the identified root cause; resize compute only if evidence shows a compute bottleneck.",
+   "mnemonic": "Slow ≠ small: Health → Input → Join → Shuffle → Skew → Spill → Files"
+  },
+  {
+   "id": "ch04-d06",
+   "title": "Query succeeds but returns the wrong data (wrong namespace)",
+   "section": "ch04-s13",
+   "symptom": "`SELECT * FROM orders` runs without error, but the numbers don't match production.",
+   "askYourself": [
+    "What are current_catalog() and current_schema() right now?",
+    "Could a table with the same name exist in dev and prod?",
+    "Did I use a fully qualified name?",
+    "Did a previous USE CATALOG/USE SCHEMA change my context?"
+   ],
+   "steps": [
+    {
+     "do": "Check the current namespace.",
+     "why": "Short names resolve against it.",
+     "code": "SELECT current_catalog();\nSELECT current_schema();"
+    },
+    {
+     "do": "Compare it with the intended environment.",
+     "why": "dev.sales.orders vs prod.sales.orders."
+    },
+    {
+     "do": "Rewrite with catalog.schema.table.",
+     "why": "Eliminates ambiguity.",
+     "code": "SELECT * FROM prod.sales.orders;"
+    }
+   ],
+   "rootCauses": [
+    "Unqualified name resolved in the wrong catalog/schema"
+   ],
+   "fix": "Use fully qualified names in production transformations (or set USE CATALOG/USE SCHEMA explicitly).",
+   "mnemonic": "No error ≠ right table"
+  },
+  {
+   "id": "ch04-d07",
+   "title": "Legacy RDD / R code fails on serverless",
+   "section": "ch04-s04",
+   "symptom": "`spark.sparkContext.parallelize([1,2,3])` (or R code) fails in a serverless notebook.",
+   "askYourself": [
+    "Is this notebook running on serverless compute?",
+    "Does the failing line use RDD APIs / sparkContext or R?",
+    "Can I express it with the DataFrame API instead?",
+    "Do I truly need classic compute for this workload?"
+   ],
+   "steps": [
+    {
+     "do": "Identify the failing construct.",
+     "why": "Serverless doesn't support RDD APIs or R; it's built on Spark Connect."
+    },
+    {
+     "do": "Confirm the compute type.",
+     "why": "The same code may work on classic compute."
+    },
+    {
+     "do": "Rewrite with DataFrames, or move the workload to classic compute.",
+     "why": "Both are valid; DataFrames keep you on the recommended path.",
+     "code": "df = spark.createDataFrame([(1,), (2,), (3,)], [\"n\"])"
+    }
+   ],
+   "rootCauses": [
+    "Serverless limitation: no RDD APIs",
+    "Serverless limitation: no R"
+   ],
+   "fix": "Modernize to DataFrame API or choose classic compute when RDD/R is required.",
+   "mnemonic": "RDD or R → classic"
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "Databricks = managed Spark",
+   "text": "Treating Databricks as just hosted Spark hides Delta, Unity Catalog, SQL warehouses, Lakeflow, Photon, serverless and more.",
+   "fix": "Think platform (interfaces, compute, runtime, engine, governance) with Spark as the core engine."
+  },
+  {
+   "title": "Confusing account and workspace",
+   "text": "The workspace is what you see daily, so people think it's the top level.",
+   "fix": "Account = org level (identities, billing, policies, metastores, workspaces); workspace = collaboration environment."
+  },
+  {
+   "title": "Thinking the control plane runs your Spark job",
+   "text": "The UI and coordination live in the control plane, but the browser/control plane don't do the groupBy.",
+   "fix": "Data processing happens in the compute plane."
+  },
+  {
+   "title": "Serverless = no servers",
+   "text": "There are still machines, CPUs and RAM.",
+   "fix": "Serverless means Databricks manages provisioning and scaling — the abstraction boundary moved."
+  },
+  {
+   "title": "Serverless good, classic useless",
+   "text": "Some workloads still need classic compute.",
+   "fix": "Pick classic for R, RDD APIs or custom infra/network/runtime needs."
+  },
+  {
+   "title": "Assuming RDD code runs on serverless",
+   "text": "`spark.sparkContext.parallelize` and R aren't supported on serverless (Spark Connect).",
+   "fix": "Use the DataFrame API or classic compute."
+  },
+  {
+   "title": "Using all-purpose compute for automated jobs",
+   "text": "All-purpose compute is meant for interactive development.",
+   "fix": "Use serverless jobs (default) or classic jobs compute for custom needs."
+  },
+  {
+   "title": "SQL warehouse = database",
+   "text": "A SQL warehouse doesn't store tables.",
+   "fix": "It's SQL-optimized compute; tables live in storage."
+  },
+  {
+   "title": "\"The Databricks cluster\"",
+   "text": "There isn't one cluster for everything.",
+   "fix": "Choose compute by workload shape: notebook, SQL/BI, jobs, classic special cases."
+  },
+  {
+   "title": "DBR = VM",
+   "text": "Mixing hardware and software layers.",
+   "fix": "VM = infrastructure; DBR = software runtime stack."
+  },
+  {
+   "title": "Ignoring runtime mismatches",
+   "text": "Code works in DEV (DBR 18.x) but fails in PROD (17.3 LTS) with AttributeError.",
+   "fix": "Debug code + runtime + libraries + configuration together."
+  },
+  {
+   "title": "Photon misconceptions",
+   "text": "Believing Photon is a language, database or storage format, or needs special code.",
+   "fix": "Photon is a vectorized engine under the existing SQL/DataFrame APIs."
+  },
+  {
+   "title": "Notebook runs without compute",
+   "text": "A notebook is just a document/artifact.",
+   "fix": "Attach it to compute (UC workspaces can auto-attach serverless)."
+  },
+  {
+   "title": "display() in portable code",
+   "text": "`display()` is a Databricks notebook helper, not PySpark.",
+   "fix": "Use `df.show()` or other Spark APIs in code that runs outside Databricks."
+  },
+  {
+   "title": "%pip is a permanent install",
+   "text": "`%pip` installs notebook-scoped libraries only.",
+   "fix": "Manage production dependencies systematically."
+  },
+  {
+   "title": "Building production on _sqldf",
+   "text": "`_sqldf` is an interactive convenience.",
+   "fix": "Use `spark.sql()`/named DataFrames in production code."
+  },
+  {
+   "title": "Using ${param}",
+   "text": "Legacy parameter syntax, deprecated for DBR 15.2+.",
+   "fix": "Use `:param` markers."
+  },
+  {
+   "title": "FROM :table",
+   "text": "Parameter markers stand for values, not identifiers.",
+   "fix": "Use `IDENTIFIER(:table_name)` for dynamic object names."
+  },
+  {
+   "title": "Unqualified table names",
+   "text": "`orders` resolves against the current catalog/schema and can silently read dev.",
+   "fix": "Use catalog.schema.table in production; check current_catalog()/current_schema()."
+  },
+  {
+   "title": "Debugging the wrong layer",
+   "text": "Jumping to shuffles when the notebook isn't attached, or to partitions on a permission error.",
+   "fix": "Walk the layer ladder top-down."
+  },
+  {
+   "title": "Slow query → bigger cluster",
+   "text": "Scaling without a root cause.",
+   "fix": "Check plan, Spark UI, join strategy, shuffle, skew, spill, file layout first."
+  },
+  {
+   "title": "Compute stopped = data lost",
+   "text": "Confusing compute lifetime with data lifetime.",
+   "fix": "Delta tables live in persistent storage."
+  },
+  {
+   "title": "Transformation = processed",
+   "text": "Lazy evaluation: `filter` only extends the plan.",
+   "fix": "Execution happens on actions (display, count, write)."
+  },
+  {
+   "title": "Works for me, fails as job",
+   "text": "The job may run as a different principal.",
+   "fix": "Check the job identity's USE CATALOG / USE SCHEMA / SELECT."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "Is Databricks just managed Spark?",
+   "a": "No — a unified data/AI platform; Spark is its core execution engine.",
+   "section": "ch04-s01"
+  },
+  {
+   "q": "Account vs workspace: which is higher?",
+   "a": "Account (org-level); it contains many workspaces.",
+   "section": "ch04-s02"
+  },
+  {
+   "q": "What is managed at account level?",
+   "a": "Users/groups/service principals, workspaces, UC metastores, billing, account policies.",
+   "section": "ch04-s02"
+  },
+  {
+   "q": "What lives in a workspace?",
+   "a": "Notebooks, files, Git folders, jobs, pipelines, SQL queries, dashboards, compute, Catalog Explorer.",
+   "section": "ch04-s02"
+  },
+  {
+   "q": "Control plane does…?",
+   "a": "Manages & coordinates: web UI, APIs, workspace metadata, job orchestration metadata, configuration.",
+   "section": "ch04-s03"
+  },
+  {
+   "q": "Compute plane does…?",
+   "a": "The actual data processing: Spark transformations, SQL, joins, aggregations, ML.",
+   "section": "ch04-s03"
+  },
+  {
+   "q": "Classic compute resources live where (AWS)?",
+   "a": "In the customer's cloud (AWS) account.",
+   "section": "ch04-s04"
+  },
+  {
+   "q": "Serverless means…?",
+   "a": "Databricks manages provisioning/scaling — servers still exist; the abstraction boundary moved.",
+   "section": "ch04-s04"
+  },
+  {
+   "q": "Two things serverless doesn't support today",
+   "a": "R and Spark RDD APIs (it's built on Spark Connect).",
+   "section": "ch04-s04"
+  },
+  {
+   "q": "Default recommendation for most interactive/automated workloads?",
+   "a": "Serverless compute, if available and supported.",
+   "section": "ch04-s04"
+  },
+  {
+   "q": "All-purpose compute is for…?",
+   "a": "Interactive development, exploration, debugging — not the first choice for automated jobs.",
+   "section": "ch04-s05"
+  },
+  {
+   "q": "SQL warehouse is…?",
+   "a": "Compute optimized for SQL analytics/BI — NOT a database/storage.",
+   "section": "ch04-s05"
+  },
+  {
+   "q": "SQL warehouse types",
+   "a": "Serverless, Pro, Classic (+ Lakehouse Real-Time in Beta).",
+   "section": "ch04-s05"
+  },
+  {
+   "q": "Power BI queries → which compute?",
+   "a": "Usually a serverless SQL warehouse.",
+   "section": "ch04-s05"
+  },
+  {
+   "q": "Need RDD or R → which compute?",
+   "a": "Classic compute.",
+   "section": "ch04-s05"
+  },
+  {
+   "q": "What is DBR?",
+   "a": "Databricks Runtime: tested software stack (Spark, Python, Delta, libs, optimizations) on the compute.",
+   "section": "ch04-s06"
+  },
+  {
+   "q": "LTS means?",
+   "a": "Long-Term Support — stable, predictable maintenance, less frequent migration.",
+   "section": "ch04-s06"
+  },
+  {
+   "q": "DBR ML =",
+   "a": "Standard DBR + ML libraries + ML/DL infrastructure.",
+   "section": "ch04-s06"
+  },
+  {
+   "q": "AttributeError only in PROD — first suspect?",
+   "a": "Runtime version mismatch (e.g. 18.x dev vs 17.3 LTS prod).",
+   "section": "ch04-s06"
+  },
+  {
+   "q": "What is Photon?",
+   "a": "Databricks-native vectorized query engine accelerating SQL/DataFrame workloads under existing APIs.",
+   "section": "ch04-s07"
+  },
+  {
+   "q": "Do you write Photon-specific code?",
+   "a": "No — same SQL/DataFrame code.",
+   "section": "ch04-s07"
+  },
+  {
+   "q": "Where is Photon enabled?",
+   "a": "Serverless & SQL warehouses; available (usually default) on classic.",
+   "section": "ch04-s07"
+  },
+  {
+   "q": "Can a notebook run without compute?",
+   "a": "No — it's an artifact; it needs an execution session.",
+   "section": "ch04-s08"
+  },
+  {
+   "q": "display(df) vs df.show()",
+   "a": "display = Databricks notebook helper (rich); show = portable Spark API (text).",
+   "section": "ch04-s08"
+  },
+  {
+   "q": "What does Exchange in a plan mean?",
+   "a": "A shuffle / redistribution boundary.",
+   "section": "ch04-s09"
+  },
+  {
+   "q": "Why does groupBy shuffle but filter not?",
+   "a": "Filter works per partition; groupBy must bring same keys together.",
+   "section": "ch04-s09"
+  },
+  {
+   "q": "Name 3 actions",
+   "a": "display(), count(), write.",
+   "section": "ch04-s09"
+  },
+  {
+   "q": "Magic commands in the source",
+   "a": "%python, %sql, %scala, %r, %md, %pip.",
+   "section": "ch04-s10"
+  },
+  {
+   "q": "Scope of %pip install?",
+   "a": "Notebook-scoped (notebook/session), not workspace-wide.",
+   "section": "ch04-s10"
+  },
+  {
+   "q": "spark.sql(...) returns?",
+   "a": "A DataFrame.",
+   "section": "ch04-s10"
+  },
+  {
+   "q": "What is _sqldf?",
+   "a": "The previous %sql cell's result exposed to later Python — interactive use only.",
+   "section": "ch04-s10"
+  },
+  {
+   "q": "Read a widget value",
+   "a": "dbutils.widgets.get(\"name\")",
+   "section": "ch04-s11"
+  },
+  {
+   "q": "dropdown widget argument order",
+   "a": "name, default value, choices, label.",
+   "section": "ch04-s11"
+  },
+  {
+   "q": "Modern SQL parameter marker",
+   "a": ":param (not ${param}, deprecated for DBR 15.2+).",
+   "section": "ch04-s11"
+  },
+  {
+   "q": "Dynamic table name in SQL",
+   "a": "FROM IDENTIFIER(:table_name)",
+   "section": "ch04-s11"
+  },
+  {
+   "q": "Catalog Explorer needs which privilege to discover objects?",
+   "a": "BROWSE and/or data access privileges.",
+   "section": "ch04-s12"
+  },
+  {
+   "q": "DESCRIBE TABLE vs DESCRIBE DETAIL",
+   "a": "Columns/types vs table-level details (format, location, size, files).",
+   "section": "ch04-s12"
+  },
+  {
+   "q": "Compute stops — is the Delta table lost?",
+   "a": "No: compute lifetime ≠ data lifetime.",
+   "section": "ch04-s12"
+  },
+  {
+   "q": "prod.silver.orders parts",
+   "a": "catalog.schema.table.",
+   "section": "ch04-s13"
+  },
+  {
+   "q": "How to check the current namespace?",
+   "a": "SELECT current_catalog(); SELECT current_schema();",
+   "section": "ch04-s13"
+  },
+  {
+   "q": "TABLE_OR_VIEW_NOT_FOUND — first command?",
+   "a": "SHOW TABLES IN <catalog>.<schema>;",
+   "section": "ch04-s14"
+  },
+  {
+   "q": "INSUFFICIENT_PRIVILEGES — 4 questions",
+   "a": "Which principal? USE CATALOG? USE SCHEMA? SELECT?",
+   "section": "ch04-s14"
+  },
+  {
+   "q": "Works for me, job gets PERMISSION_DENIED",
+   "a": "Different execution identity/principal.",
+   "section": "ch04-s14"
+  },
+  {
+   "q": "ModuleNotFoundError DEV vs PROD — check?",
+   "a": "DBR version and Python/library environment.",
+   "section": "ch04-s14"
+  },
+  {
+   "q": "Slow query — first rule",
+   "a": "Slow ≠ small cluster; find the root cause (plan, Spark UI, skew, spill, join, layout).",
+   "section": "ch04-s15"
+  },
+  {
+   "q": "BHJ / SMJ",
+   "a": "Broadcast hash join / sort-merge join.",
+   "section": "ch04-s15"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch04-e001",
+   "type": "mcq",
+   "section": "ch04-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Source Exercise 1 — which statement is correct?",
+   "options": [
+    "Databricks and Spark are synonyms.",
+    "Spark is one of the core execution technologies inside Databricks.",
+    "Databricks is a file format.",
+    "Spark is a cloud provider."
+   ],
+   "answer": 1,
+   "why": [
+    "Databricks is a whole platform (UI, governance, SQL, orchestration…); Spark is one engine inside it.",
+    "Correct: Spark remains the central execution technology inside the platform.",
+    "Delta is the table format; Databricks is a platform.",
+    "AWS/Azure/GCP are cloud providers; Spark is an execution engine."
+   ],
+   "explain": "Spark is an **execution engine**; Databricks is a **data/AI platform** that uses Spark (and Photon) to execute work. The tempting option A is the historical 'managed Spark' view, which is now an oversimplification."
+  },
+  {
+   "id": "ch04-e002",
+   "type": "tf",
+   "section": "ch04-s01",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "concept"
+   ],
+   "quick": true,
+   "q": "\"Databricks = managed Spark\" is an accurate description of today's Databricks platform.",
+   "answer": false,
+   "explain": "Historically this was close; today it is the **most dangerous oversimplification**. Databricks also includes Delta Lake, Unity Catalog, SQL warehouses, Lakeflow, serverless compute, Photon, ML/AI services, orchestration and DevOps tooling — Spark is just the core execution technology."
+  },
+  {
+   "id": "ch04-e003",
+   "type": "match",
+   "section": "ch04-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each platform component to its role.",
+   "pairs": [
+    [
+     "Delta Lake",
+     "Table format"
+    ],
+    [
+     "Unity Catalog",
+     "Governance of data & AI assets"
+    ],
+    [
+     "SQL warehouse",
+     "Compute for SQL analytics"
+    ],
+    [
+     "Photon",
+     "Vectorized query engine"
+    ],
+    [
+     "Lakeflow",
+     "Pipelines / ingestion"
+    ]
+   ],
+   "explain": "These are the pieces that make Databricks a **platform** rather than 'just Spark'. Keeping each in its own bucket (format, governance, compute, engine, pipelines) is the whole point of this chapter."
+  },
+  {
+   "id": "ch04-e004",
+   "type": "odd",
+   "section": "ch04-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "compare"
+   ],
+   "quick": false,
+   "q": "Which one doesn't belong?",
+   "options": [
+    "Apache Spark",
+    "Photon",
+    "SQL warehouse",
+    "Unity Catalog"
+   ],
+   "answer": 3,
+   "explain": "Spark and Photon are execution engines and a SQL warehouse is compute — all three **execute** work. **Unity Catalog** governs assets (names, metadata, permissions); it doesn't run queries."
+  },
+  {
+   "id": "ch04-e005",
+   "type": "free",
+   "section": "ch04-s01",
+   "difficulty": 2,
+   "tags": [
+    "interview",
+    "concept"
+   ],
+   "quick": false,
+   "q": "In your own words: why is \"Databricks is just managed Spark\" an oversimplification, and what role does Spark still play?",
+   "model": "Spark is still the central execution engine, but Databricks today is a unified data/AI platform: it adds Delta Lake (table format), Unity Catalog (governance), SQL warehouses (SQL compute), Lakeflow (pipelines), serverless compute, Photon (vectorized engine), ML/AI services, orchestration and DevOps tooling. So Spark is one technology inside the platform, not the platform itself.",
+   "rubric": [
+    "Spark = execution engine still central",
+    "Databricks = unified platform (engineering, analytics, AI, governance, deployment)",
+    "Names at least 3 non-Spark components (Delta, UC, SQL warehouses, Photon, Lakeflow, serverless…)"
+   ],
+   "explain": "A strong answer contrasts **engine** vs **platform** and lists concrete components beyond Spark."
+  },
+  {
+   "id": "ch04-e006",
+   "type": "bucket",
+   "section": "ch04-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Source Exercise 2 (extended) — where does each operation most likely happen?",
+   "buckets": [
+    "Account level",
+    "Workspace"
+   ],
+   "items": [
+    {
+     "text": "Create a notebook",
+     "bucket": 1
+    },
+    {
+     "text": "Create an organization-wide identity",
+     "bucket": 0
+    },
+    {
+     "text": "Run a Spark query",
+     "bucket": 1
+    },
+    {
+     "text": "Create a second workspace",
+     "bucket": 0
+    },
+    {
+     "text": "Configure SSO",
+     "bucket": 0
+    },
+    {
+     "text": "Manage billing",
+     "bucket": 0
+    },
+    {
+     "text": "Open Catalog Explorer",
+     "bucket": 1
+    },
+    {
+     "text": "Add an account group",
+     "bucket": 0
+    },
+    {
+     "text": "Schedule a job",
+     "bucket": 1
+    }
+   ],
+   "explain": "The **account** is the org-level boundary: identities, billing, policies, UC metastores, workspace creation. The **workspace** is where daily work happens: notebooks, jobs, queries, Catalog Explorer — and a Spark query is a workspace workload executed on compute."
+  },
+  {
+   "id": "ch04-e007",
+   "type": "mcq",
+   "section": "ch04-s02",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "concept"
+   ],
+   "quick": true,
+   "q": "Test Q1 — which is the higher organizational object?",
+   "options": [
+    "Workspace",
+    "Account",
+    "Notebook",
+    "Compute"
+   ],
+   "answer": 1,
+   "why": [
+    "A workspace lives inside an account.",
+    "Correct: one account can contain many workspaces.",
+    "A notebook lives inside a workspace.",
+    "Compute is execution infrastructure used from a workspace."
+   ],
+   "explain": "The **account** sits at the top; it contains workspaces. The trap is thinking the workspace (what you see every day) is the top level."
+  },
+  {
+   "id": "ch04-e008",
+   "type": "tf",
+   "section": "ch04-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "A single Databricks account can contain multiple workspaces.",
+   "answer": true,
+   "explain": "Yes — e.g. ACME's one account can hold `analytics-prod`, `engineering-dev` and `research`. The reverse (one workspace containing accounts) is never true."
+  },
+  {
+   "id": "ch04-e009",
+   "type": "mcq",
+   "section": "ch04-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "ACME's Databricks setup shows `analytics-prod`, `engineering-dev` and `research` under one account. What are they?",
+   "options": [
+    "Three accounts",
+    "Three workspaces in one account",
+    "Three catalogs in one metastore",
+    "Three clusters"
+   ],
+   "answer": 1,
+   "why": [
+    "There is one account (the org boundary).",
+    "Correct: environments where teams and workloads operate.",
+    "Catalogs are data namespaces, not team environments.",
+    "Clusters are compute, not environments."
+   ],
+   "explain": "Separate team/environment spaces like prod/dev/research are typically **workspaces** under a single **account**. Catalogs are data namespaces and clusters are compute — different layers."
+  },
+  {
+   "id": "ch04-e010",
+   "type": "cloze",
+   "section": "ch04-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Fill in the levels.",
+   "text": "The [[account]] is the organization-level boundary where you manage identities, billing and workspaces. The [[workspace]] is the collaboration environment containing notebooks, jobs, dashboards and Catalog Explorer.",
+   "bank": [
+    "catalog",
+    "cluster",
+    "metastore"
+   ],
+   "explain": "Account = org-wide administration; workspace = where users work. Catalog, cluster and metastore belong to other layers (data namespace, compute, UC configuration)."
+  },
+  {
+   "id": "ch04-e011",
+   "type": "tf",
+   "section": "ch04-s02",
+   "difficulty": 2,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "The analogy \"Azure tenant ≈ Databricks account, workspace ≈ a specific team environment\" is an exact one-to-one mapping.",
+   "answer": false,
+   "explain": "The source explicitly says it is **not** an exact mapping — just a useful mental model for the org-wide vs environment-level distinction."
+  },
+  {
+   "id": "ch04-e012",
+   "type": "bucket",
+   "section": "ch04-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Sort each item into the plane it belongs to.",
+   "buckets": [
+    "Control plane",
+    "Compute plane"
+   ],
+   "items": [
+    {
+     "text": "Web UI",
+     "bucket": 0
+    },
+    {
+     "text": "APIs",
+     "bucket": 0
+    },
+    {
+     "text": "Workspace metadata",
+     "bucket": 0
+    },
+    {
+     "text": "Job orchestration metadata",
+     "bucket": 0
+    },
+    {
+     "text": "Spark transformations",
+     "bucket": 1
+    },
+    {
+     "text": "SQL execution",
+     "bucket": 1
+    },
+    {
+     "text": "Joins and aggregations",
+     "bucket": 1
+    },
+    {
+     "text": "ML computation",
+     "bucket": 1
+    },
+    {
+     "text": "Platform configuration",
+     "bucket": 0
+    }
+   ],
+   "explain": "The **control plane** 'manages and coordinates' (UI, APIs, metadata, configuration). The **compute plane** does the actual data processing (Spark, SQL, joins, ML)."
+  },
+  {
+   "id": "ch04-e013",
+   "type": "mcq",
+   "section": "ch04-s03",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q2 — where does the real data processing happen?",
+   "options": [
+    "In the control plane",
+    "In the compute plane",
+    "In your browser",
+    "In Unity Catalog"
+   ],
+   "answer": 1,
+   "why": [
+    "The control plane coordinates; it doesn't run the Spark workload.",
+    "Correct.",
+    "The browser only shows the UI.",
+    "UC governs; it doesn't process data."
+   ],
+   "explain": "Data processing (transformations, SQL, joins, aggregations, ML) runs on compute resources in the **compute plane**."
+  },
+  {
+   "id": "ch04-e014",
+   "type": "mcq",
+   "section": "ch04-s03",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q3 — the Databricks web UI conceptually belongs to…",
+   "options": [
+    "the control plane",
+    "the compute plane",
+    "the storage layer"
+   ],
+   "answer": 0,
+   "explain": "The web application lives in the **control plane**, together with APIs, metadata and orchestration. The compute plane is where data is processed."
+  },
+  {
+   "id": "ch04-e015",
+   "type": "tf",
+   "section": "ch04-s03",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "When you run `df.groupBy(\"country\").sum(\"amount\").show()` in a notebook, your browser performs the aggregation.",
+   "answer": false,
+   "explain": "The browser only sends the command. The control plane coordinates, and the **compute plane** (driver + workers, Spark/Photon) executes the groupBy against storage."
+  },
+  {
+   "id": "ch04-e016",
+   "type": "order",
+   "section": "ch04-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the path of a notebook command from your keyboard to the data.",
+   "items": [
+    "Browser",
+    "Databricks control services (schedule/coordinate)",
+    "Compute plane: driver / Spark session",
+    "Workers run Spark/Photon execution",
+    "Data storage"
+   ],
+   "explain": "Browser → control plane coordinates → compute plane executes (driver plans, workers run tasks) → data is read from/written to storage."
+  },
+  {
+   "id": "ch04-e017",
+   "type": "mcq",
+   "section": "ch04-s03",
+   "difficulty": 3,
+   "tags": [
+    "exam",
+    "interview"
+   ],
+   "quick": false,
+   "q": "Test Q21 (hard) — `Browser → Databricks UI → Spark query → ADLS`. Which two planes take part, and how?",
+   "options": [
+    "Control plane for UI/coordination; compute plane for the Spark computation",
+    "Compute plane for the UI; control plane for the Spark computation",
+    "Only the control plane — ADLS is part of it",
+    "Only the compute plane — the UI runs on the driver"
+   ],
+   "answer": 0,
+   "why": [
+    "Correct.",
+    "Exactly reversed.",
+    "ADLS is storage; the Spark computation still needs the compute plane.",
+    "The UI is a control-plane web app, not something running on the driver."
+   ],
+   "explain": "UI and platform coordination = **control plane**; Spark computation = **compute plane**, which then reads data in ADLS storage."
+  },
+  {
+   "id": "ch04-e018",
+   "type": "mcq",
+   "section": "ch04-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Source Exercise 3 — interactive Python notebook with `spark.read.table(...)`, DataFrame transformations and SQL; no special infrastructure requirement. What does Databricks generally recommend today?",
+   "options": [
+    "Classic all-purpose compute",
+    "Serverless compute (if available and the workload is supported)",
+    "A SQL warehouse",
+    "Classic jobs compute"
+   ],
+   "answer": 1,
+   "why": [
+    "Fine but not the default recommendation without special needs.",
+    "Correct.",
+    "SQL warehouses serve SQL/BI, not Python notebooks.",
+    "Jobs compute is for automated jobs, not interactive work."
+   ],
+   "explain": "Databricks recommends **serverless** for most interactive and automated workloads when available and supported. Classic is for special requirements (R, RDDs, custom config)."
+  },
+  {
+   "id": "ch04-e019",
+   "type": "tf",
+   "section": "ch04-s04",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q4 — \"Serverless\" means there are no servers involved.",
+   "answer": false,
+   "explain": "There are still CPUs, RAM and machines. Serverless means **Databricks manages** the provisioning/infrastructure for you — the abstraction boundary moved."
+  },
+  {
+   "id": "ch04-e020",
+   "type": "mcq",
+   "section": "ch04-s04",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "compare"
+   ],
+   "quick": false,
+   "q": "Test Q5 — valid reasons to choose classic instead of serverless (select all).",
+   "options": [
+    "You need R",
+    "You use Spark RDD APIs",
+    "Custom infrastructure/network/runtime requirements",
+    "Serverless cannot run SQL",
+    "Classic is always faster"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "multi": true,
+   "why": [
+    "Correct: serverless doesn't support R today.",
+    "Correct: no RDD APIs on serverless (Spark Connect based).",
+    "Correct: classic gives custom configuration.",
+    "False: serverless runs SQL fine.",
+    "False: no such rule."
+   ],
+   "explain": "Choose classic when you need capabilities/config serverless lacks: **R**, **RDD APIs**, or custom infra/network/runtime needs. 'Serverless = good, classic = useless' is wrong both ways."
+  },
+  {
+   "id": "ch04-e021",
+   "type": "spotbug",
+   "section": "ch04-s04",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "This notebook runs on **serverless** compute. Which line should you not expect to work?",
+   "lines": [
+    "df = spark.read.table(\"prod.sales.orders\")",
+    "rdd = spark.sparkContext.parallelize([1, 2, 3])",
+    "big = df.filter(df.amount > 100)",
+    "display(big)"
+   ],
+   "bugs": [
+    1
+   ],
+   "fix": "Use the DataFrame API instead (e.g. `spark.createDataFrame([(1,),(2,),(3,)], [\"n\"])`) or run the notebook on classic compute if RDDs are truly required.",
+   "explain": "Serverless is built on **Spark Connect** and does **not support RDD APIs** (`sparkContext`). DataFrame reads, filters and `display` are fine."
+  },
+  {
+   "id": "ch04-e022",
+   "type": "bucket",
+   "section": "ch04-s04",
+   "difficulty": 1,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Serverless or classic? Sort each characteristic.",
+   "buckets": [
+    "Serverless",
+    "Classic"
+   ],
+   "items": [
+    {
+     "text": "Less infrastructure to manage",
+     "bucket": 0
+    },
+    {
+     "text": "Fast provisioning",
+     "bucket": 0
+    },
+    {
+     "text": "Automatic scaling",
+     "bucket": 0
+    },
+    {
+     "text": "You pick driver/worker VM types",
+     "bucket": 1
+    },
+    {
+     "text": "Custom network/runtime needs",
+     "bucket": 1
+    },
+    {
+     "text": "Supports RDD APIs and R",
+     "bucket": 1
+    },
+    {
+     "text": "More operational responsibility",
+     "bucket": 1
+    },
+    {
+     "text": "Platform optimizations handled for you",
+     "bucket": 0
+    }
+   ],
+   "explain": "The trade-off: serverless = less to manage, fast, auto-scaling; classic = more control and custom config, but more responsibility."
+  },
+  {
+   "id": "ch04-e023",
+   "type": "tf",
+   "section": "ch04-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "On AWS, classic compute resources (driver and worker VMs) live in the customer's AWS account.",
+   "answer": true,
+   "explain": "Yes — with classic compute the VMs run in **your** cloud environment (similar architectures exist on Azure and GCP). With serverless, Databricks manages the compute."
+  },
+  {
+   "id": "ch04-e024",
+   "type": "scenario",
+   "section": "ch04-s04",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A colleague moves an old Spark notebook to a new serverless notebook. A cell fails at `spark.sparkContext.parallelize(...)`.",
+   "steps": [
+    {
+     "prompt": "What do you suspect first?",
+     "options": [
+      {
+       "text": "The serverless limitation: no RDD APIs",
+       "ok": true,
+       "fb": "Right — serverless is Spark Connect-based and doesn't support RDD APIs."
+      },
+      {
+       "text": "The cluster is too small",
+       "ok": false,
+       "fb": "Size doesn't make an unsupported API appear."
+      },
+      {
+       "text": "The table doesn't exist",
+       "ok": false,
+       "fb": "There is no table read on this line."
+      },
+      {
+       "text": "Photon is disabled",
+       "ok": false,
+       "fb": "Photon has nothing to do with RDD API availability."
+      }
+     ]
+    },
+    {
+     "prompt": "What's the best fix?",
+     "options": [
+      {
+       "text": "Rewrite with the DataFrame API, or run on classic compute if RDDs are truly needed",
+       "ok": true,
+       "fb": "Both are valid; DataFrames keep you on the recommended serverless path."
+      },
+      {
+       "text": "Add %pip install pyspark",
+       "ok": false,
+       "fb": "The library is there; the API isn't supported on serverless."
+      },
+      {
+       "text": "Switch to a SQL warehouse",
+       "ok": false,
+       "fb": "SQL warehouses run SQL, not Python RDD code."
+      },
+      {
+       "text": "Retry the cell a few times",
+       "ok": false,
+       "fb": "It's not transient — it's an unsupported API."
+      }
+     ]
+    }
+   ],
+   "explain": "Serverless doesn't support R or RDD APIs. Either modernize to DataFrames or pick classic compute."
+  },
+  {
+   "id": "ch04-e025",
+   "type": "odd",
+   "section": "ch04-s04",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which one is NOT a current serverless limitation?",
+   "options": [
+    "R language",
+    "Spark RDD APIs",
+    "`spark.sparkContext.parallelize(...)`",
+    "DataFrame `groupBy().agg()`"
+   ],
+   "answer": 3,
+   "explain": "R and RDD APIs (including `sparkContext.parallelize`) aren't supported on serverless. **DataFrame** operations are exactly what serverless (Spark Connect) supports."
+  },
+  {
+   "id": "ch04-e026",
+   "type": "order",
+   "section": "ch04-s04",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the steps to handle legacy code failing on serverless.",
+   "items": [
+    "Identify the failing line (e.g. uses sparkContext / RDD or R)",
+    "Confirm the notebook is running on serverless compute",
+    "Decide: rewrite with DataFrame API, or move to classic compute",
+    "Re-run and verify results"
+   ],
+   "explain": "Locate the failing construct, confirm the compute type, then choose between modernizing the code and choosing classic compute."
+  },
+  {
+   "id": "ch04-e027",
+   "type": "tf",
+   "section": "ch04-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Today's UI and docs mostly say \"compute\" where older tutorials said \"cluster\", but classic Spark compute still has a driver and workers.",
+   "answer": true,
+   "explain": "'Compute' is the broader modern term. Classic compute still follows driver → workers, and job → stage → task → partition logic applies."
+  },
+  {
+   "id": "ch04-e028",
+   "type": "match",
+   "section": "ch04-s05",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Compute-selection mental model — match the workload to the generally preferred compute.",
+   "pairs": [
+    [
+     "Interactive Python/DataFrames",
+     "Serverless notebook compute"
+    ],
+    [
+     "Interactive SQL / BI (Power BI)",
+     "Serverless SQL warehouse"
+    ],
+    [
+     "Automated Python/SQL job",
+     "Serverless jobs compute"
+    ],
+    [
+     "Needs RDD APIs or R",
+     "Classic compute"
+    ]
+   ],
+   "explain": "This is the current Databricks recommendation pattern: serverless where possible, the SQL warehouse for SQL/BI, and classic when you need unsupported features or custom config."
+  },
+  {
+   "id": "ch04-e029",
+   "type": "tf",
+   "section": "ch04-s05",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A SQL warehouse is where your tables' data is physically stored.",
+   "answer": false,
+   "explain": "Classic exam/interview trap. A SQL warehouse is **compute** that executes queries; tables keep their own storage layer (Delta files in cloud storage)."
+  },
+  {
+   "id": "ch04-e030",
+   "type": "mcq",
+   "section": "ch04-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q7 — which compute would you typically use for Power BI SQL queries?",
+   "options": [
+    "Serverless SQL warehouse",
+    "Classic all-purpose compute",
+    "Serverless notebook compute",
+    "Classic jobs compute"
+   ],
+   "answer": 0,
+   "explain": "BI tools send SQL to a **SQL warehouse** — usually **serverless** when available. Notebook/all-purpose compute is for programmatic work."
+  },
+  {
+   "id": "ch04-e031",
+   "type": "mcq",
+   "section": "ch04-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q8 — what is a SQL warehouse?",
+   "options": [
+    "Compute optimized for SQL workloads",
+    "The physical storage of tables",
+    "A schema inside a catalog",
+    "A BI dashboard"
+   ],
+   "answer": 0,
+   "why": [
+    "Correct.",
+    "Storage is a separate layer.",
+    "That's a schema (namespace).",
+    "Dashboards *use* a warehouse."
+   ],
+   "explain": "A SQL warehouse is **SQL-optimized compute** used by the SQL editor, dashboards and BI tools — not storage."
+  },
+  {
+   "id": "ch04-e032",
+   "type": "mcq",
+   "section": "ch04-s05",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which is NOT a SQL warehouse type?",
+   "options": [
+    "Serverless",
+    "Pro",
+    "Classic",
+    "Photon"
+   ],
+   "answer": 3,
+   "explain": "Warehouse types are **Serverless, Pro, Classic** (plus Lakehouse Real-Time in Beta for low-latency/high-concurrency). **Photon** is an execution engine that runs inside warehouses."
+  },
+  {
+   "id": "ch04-e033",
+   "type": "tf",
+   "section": "ch04-s05",
+   "difficulty": 2,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Databricks' first recommendation for automated jobs is classic all-purpose compute.",
+   "answer": false,
+   "explain": "All-purpose compute is for interactive development. For jobs Databricks recommends **serverless** in most cases, or **classic jobs compute** when you need custom cluster characteristics."
+  },
+  {
+   "id": "ch04-e034",
+   "type": "order",
+   "section": "ch04-s05",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "A nightly 02:00 pipeline runs on jobs compute. Order its lifecycle.",
+   "items": [
+    "Job starts",
+    "Compute available / provisioned",
+    "Tasks run (ingest → transform → aggregate)",
+    "Workload finishes"
+   ],
+   "explain": "Jobs compute exists for the job — no interactive cluster sitting open all day."
+  },
+  {
+   "id": "ch04-e035",
+   "type": "mcq",
+   "section": "ch04-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q6 — default recommendation for an interactive Python/DataFrame notebook?",
+   "options": [
+    "Serverless notebook compute (if supported)",
+    "SQL warehouse",
+    "Classic jobs compute",
+    "Lakehouse Real-Time"
+   ],
+   "answer": 0,
+   "explain": "Interactive Python/DataFrames → **serverless notebook compute** generally preferred. SQL warehouses serve SQL/BI; jobs compute serves automation."
+  },
+  {
+   "id": "ch04-e036",
+   "type": "free",
+   "section": "ch04-s05",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Interview Q28: \"Why would you choose a SQL warehouse instead of general-purpose Spark compute?\"",
+   "model": "A SQL warehouse is purpose-built for SQL analytics and BI workloads and provides SQL-oriented performance, concurrency and scaling capabilities, whereas general notebook or classic compute is suited to broader Spark and programmatic workloads.",
+   "rubric": [
+    "Purpose-built for SQL analytics / BI",
+    "SQL-oriented performance, concurrency, scaling",
+    "General compute suits broader Spark/programmatic workloads"
+   ],
+   "explain": "Hit the three axes: purpose (SQL/BI), properties (performance, concurrency, scaling) and contrast (programmatic Spark work)."
+  },
+  {
+   "id": "ch04-e037",
+   "type": "odd",
+   "section": "ch04-s05",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Which one doesn't belong with the others?",
+   "options": [
+    "Serverless notebook compute",
+    "SQL warehouse",
+    "Classic jobs compute",
+    "Databricks Runtime 17.3 LTS"
+   ],
+   "answer": 3,
+   "explain": "The first three are **compute** types. **DBR 17.3 LTS** is the software/runtime environment that runs *on* compute."
+  },
+  {
+   "id": "ch04-e038",
+   "type": "mcq",
+   "section": "ch04-s06",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q9 — what is the Databricks Runtime?",
+   "options": [
+    "The software/runtime stack (Spark + Databricks-integrated libraries and dependencies) the workload runs on",
+    "The VM type of the driver",
+    "A SQL warehouse size",
+    "The Unity Catalog metastore"
+   ],
+   "answer": 0,
+   "explain": "DBR is a **tested software stack**: Spark, Python, JVM, Delta support, libraries, optimizations, integrations. The VM is hardware; DBR is software."
+  },
+  {
+   "id": "ch04-e039",
+   "type": "tf",
+   "section": "ch04-s06",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Test Q10 — DBR and the VM are the same thing.",
+   "answer": false,
+   "explain": "**VM/compute resources** = hardware/infrastructure abstraction; **DBR** = software runtime environment installed on it."
+  },
+  {
+   "id": "ch04-e040",
+   "type": "scenario",
+   "section": "ch04-s06",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "DEV compute runs DBR 18.x, PROD runs DBR 17.3 LTS. `some_new_api(...)` works in DEV but PROD raises `AttributeError`.",
+   "steps": [
+    {
+     "prompt": "What's your first hypothesis?",
+     "options": [
+      {
+       "text": "Runtime version mismatch: the API doesn't exist in 17.3",
+       "ok": true,
+       "fb": "Different DBR = different Spark/Python/packages = different capabilities."
+      },
+      {
+       "text": "The PROD cluster is too small",
+       "ok": false,
+       "fb": "Size doesn't remove attributes from an API."
+      },
+      {
+       "text": "A typo in the table name",
+       "ok": false,
+       "fb": "That would be TABLE_OR_VIEW_NOT_FOUND, not AttributeError."
+      },
+      {
+       "text": "Missing SELECT permission",
+       "ok": false,
+       "fb": "Permissions give INSUFFICIENT_PRIVILEGES, not AttributeError."
+      }
+     ]
+    },
+    {
+     "prompt": "Which comparison do you make?",
+     "options": [
+      {
+       "text": "Compare DBR versions, libraries and configuration across DEV and PROD",
+       "ok": true,
+       "fb": "Production debugging = code + runtime + libraries + configuration."
+      },
+      {
+       "text": "Compare row counts of the tables",
+       "ok": false,
+       "fb": "This is an environment failure, not a data issue."
+      },
+      {
+       "text": "Compare Photon settings",
+       "ok": false,
+       "fb": "Photon doesn't add or remove Python attributes."
+      }
+     ]
+    }
+   ],
+   "explain": "When code behaves differently across environments, align the **runtime, libraries and configuration** before suspecting the code."
+  },
+  {
+   "id": "ch04-e041",
+   "type": "order",
+   "section": "ch04-s06",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the investigation of \"works in DEV, AttributeError in PROD\".",
+   "items": [
+    "Read the exact error and the failing call",
+    "Compare DBR versions in DEV vs PROD",
+    "Compare Python/library versions",
+    "Compare compute configuration",
+    "Align the runtime (or avoid the newer API) and re-test"
+   ],
+   "explain": "Start from the error, then walk the environment layers: runtime → libraries → configuration, and fix by aligning environments."
+  },
+  {
+   "id": "ch04-e042",
+   "type": "cloze",
+   "section": "ch04-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Fill in the runtime terms.",
+   "text": "LTS stands for [[Long-Term Support]]. For production, LTS is often preferred for stability, predictable maintenance and less frequent [[migration|migrations]]. DBR ML = standard DBR + [[ML libraries|machine learning libraries]] + ML/DL infrastructure.",
+   "explain": "LTS runtimes trade newest features for stability; DBR ML saves you from building an ML environment yourself."
+  },
+  {
+   "id": "ch04-e043",
+   "type": "mcq",
+   "section": "ch04-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "What can change when you switch DBR version? (select all)",
+   "options": [
+    "Spark version",
+    "Python packages",
+    "Capabilities and bug fixes",
+    "Behavior of the same code",
+    "The data stored in your Delta tables"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "multi": true,
+   "explain": "Different DBR → different Spark, packages, capabilities, bug fixes and behavior. Your **stored data** doesn't change just because the runtime changed."
+  },
+  {
+   "id": "ch04-e044",
+   "type": "match",
+   "section": "ch04-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the term to what it is.",
+   "pairs": [
+    [
+     "VM",
+     "Hardware / infrastructure"
+    ],
+    [
+     "DBR",
+     "Tested software stack incl. Spark"
+    ],
+    [
+     "LTS",
+     "Long-Term Support runtime line"
+    ],
+    [
+     "DBR ML",
+     "DBR + ML libraries + ML/DL infrastructure"
+    ]
+   ],
+   "explain": "Keep hardware (VM) separate from software (DBR), and know the two DBR flavors that matter now: LTS for stability, ML for prebuilt ML tooling."
+  },
+  {
+   "id": "ch04-e045",
+   "type": "free",
+   "section": "ch04-s06",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why is production debugging \"code + runtime + libraries + configuration\" and not just \"does the Python code have a bug?\"",
+   "model": "The same code can behave differently depending on the Databricks Runtime (Spark/Python versions, available APIs), the installed libraries and the configuration. A failure in PROD may come from a runtime mismatch (e.g. DBR 18.x in dev vs 17.3 LTS in prod) or a missing library, even if the code is correct.",
+   "rubric": [
+    "Same code, different environment → different behavior",
+    "Mentions runtime version differences",
+    "Mentions libraries/configuration",
+    "Example such as AttributeError from version mismatch"
+   ],
+   "explain": "The point is to widen your search space from 'my code' to the whole execution environment."
+  },
+  {
+   "id": "ch04-e046",
+   "type": "tf",
+   "section": "ch04-s07",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Source Exercise 4 — to use Photon you must rewrite `df.groupBy(\"customer_id\").sum(\"amount\")` with a Photon-specific API.",
+   "answer": false,
+   "explain": "No. The same DataFrame/SQL abstraction can execute through Photon for supported operations — optimization happens **beneath** the API."
+  },
+  {
+   "id": "ch04-e047",
+   "type": "odd",
+   "section": "ch04-s07",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "concept"
+   ],
+   "quick": true,
+   "q": "Photon IS one of these — which one?",
+   "options": [
+    "A programming language",
+    "A database",
+    "A storage format",
+    "A vectorized query engine"
+   ],
+   "answer": 3,
+   "explain": "Photon is a **Databricks-native vectorized query engine**. It is not a language, not a database and not a storage format — the three classic misconceptions."
+  },
+  {
+   "id": "ch04-e048",
+   "type": "mcq",
+   "section": "ch04-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Where is Photon available?",
+   "options": [
+    "Only on SQL warehouses",
+    "Enabled on serverless compute and SQL warehouses; also available (usually on by default) on classic compute",
+    "Only on classic compute with a special Photon library",
+    "Only when you import the photon module"
+   ],
+   "answer": 1,
+   "explain": "Photon is **enabled on serverless and SQL warehouses**, and on classic compute it's available and usually enabled by default via configuration. There is no module to import."
+  },
+  {
+   "id": "ch04-e049",
+   "type": "spotbug",
+   "section": "ch04-s07",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Someone tried to 'turn on Photon' in code. Which line is wrong?",
+   "lines": [
+    "from pyspark.sql import functions as F",
+    "orders = spark.table(\"prod.sales.orders\")",
+    "result = photon.groupBy(orders, \"country\").sum(\"amount\")",
+    "display(result)"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "result = orders.groupBy(\"country\").sum(\"amount\")",
+   "explain": "There is no `photon.groupBy` API. You write normal DataFrame/SQL code and Photon accelerates supported operations underneath."
+  },
+  {
+   "id": "ch04-e050",
+   "type": "free",
+   "section": "ch04-s07",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Interview Q29: \"What is Photon?\"",
+   "model": "Photon is Databricks' native vectorized execution engine that accelerates supported SQL and DataFrame operations underneath the existing APIs, so applications generally do not need a separate Photon-specific programming model.",
+   "rubric": [
+    "Native/Databricks vectorized engine",
+    "Accelerates supported SQL & DataFrame ops",
+    "Works under existing APIs — no special code"
+   ],
+   "explain": "Nail the three points: what (vectorized native engine), for what (SQL/DataFrames), how you use it (you don't change code)."
+  },
+  {
+   "id": "ch04-e051",
+   "type": "mcq",
+   "section": "ch04-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why can vectorized processing be faster than row-at-a-time?",
+   "options": [
+    "It processes batches of values at once, reducing per-row overhead and using CPU characteristics better",
+    "It skips rows that don't match",
+    "It stores data in a different file format",
+    "It uses more workers"
+   ],
+   "answer": 0,
+   "explain": "Vectorized execution operates on **batches** (`[v1 v2 v3 …]`) instead of one row at a time, cutting overhead and improving CPU efficiency. It is not a storage format and doesn't change cluster size."
+  },
+  {
+   "id": "ch04-e052",
+   "type": "cloze",
+   "section": "ch04-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the definition.",
+   "text": "Photon is a Databricks-native [[vectorized]] query engine that accelerates [[SQL]] and [[DataFrame]] workloads, while Spark is the broader execution framework.",
+   "bank": [
+    "row-based",
+    "RDD",
+    "storage"
+   ],
+   "explain": "Vectorized + SQL/DataFrame is the core of the definition. RDD workloads are not what Photon targets."
+  },
+  {
+   "id": "ch04-e053",
+   "type": "tf",
+   "section": "ch04-s08",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Test Q19 — a notebook that exists but is not attached to any compute can still execute a Spark workload.",
+   "answer": false,
+   "explain": "A notebook is an artifact/interface. It needs an **execution compute/session** — even `print(\"hello\")` needs one."
+  },
+  {
+   "id": "ch04-e054",
+   "type": "bucket",
+   "section": "ch04-s08",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "compare",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Spark API or Databricks notebook/platform helper?",
+   "buckets": [
+    "Spark API (portable)",
+    "Databricks notebook helper"
+   ],
+   "items": [
+    {
+     "text": "df.show()",
+     "bucket": 0
+    },
+    {
+     "text": "display(df)",
+     "bucket": 1
+    },
+    {
+     "text": "spark.createDataFrame(...)",
+     "bucket": 0
+    },
+    {
+     "text": "df.groupBy(...).agg(...)",
+     "bucket": 0
+    },
+    {
+     "text": "dbutils.widgets.get(...)",
+     "bucket": 1
+    },
+    {
+     "text": "df.explain(\"formatted\")",
+     "bucket": 0
+    },
+    {
+     "text": "_sqldf",
+     "bucket": 1
+    },
+    {
+     "text": "spark.table(...)",
+     "bucket": 0
+    }
+   ],
+   "explain": "Spark APIs work anywhere Spark runs. `display`, `dbutils` and `_sqldf` are **notebook/platform conveniences** — they break if you port code outside Databricks."
+  },
+  {
+   "id": "ch04-e055",
+   "type": "mcq",
+   "section": "ch04-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "`spark.createDataFrame([(1, \"Athens\", 120.0), …], [\"order_id\", \"city\", \"amount\"])` — which schema is inferred?",
+   "options": [
+    "order_id: long, city: string, amount: double",
+    "order_id: int, city: string, amount: float",
+    "order_id: string, city: string, amount: string",
+    "order_id: long, city: string, amount: decimal(10,2)"
+   ],
+   "answer": 0,
+   "explain": "Python ints become **long** and Python floats become **double**. DECIMAL only appears when you declare it (as in a SQL table definition)."
+  },
+  {
+   "id": "ch04-e056",
+   "type": "write",
+   "section": "ch04-s08",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Create a Spark DataFrame `df` from the list `data` with columns `order_id`, `city`, `amount`, and render it with the Databricks notebook helper.",
+   "solution": "df = spark.createDataFrame(\n    data,\n    [\"order_id\", \"city\", \"amount\"]\n)\ndisplay(df)",
+   "keywords": [
+    "spark.createDataFrame",
+    "order_id",
+    "city",
+    "amount",
+    "display(df)"
+   ],
+   "lang": "python",
+   "explain": "In a Databricks notebook `spark` already exists. `display(df)` gives rich rendering; `df.show()` would be the portable Spark alternative."
+  },
+  {
+   "id": "ch04-e057",
+   "type": "spotbug",
+   "section": "ch04-s08",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "This script will run as a **plain PySpark job outside Databricks**. Which line will fail?",
+   "lines": [
+    "from pyspark.sql import SparkSession",
+    "spark = SparkSession.builder.getOrCreate()",
+    "df = spark.createDataFrame([(1, \"Athens\", 120.0)], [\"order_id\", \"city\", \"amount\"])",
+    "display(df)"
+   ],
+   "bugs": [
+    3
+   ],
+   "fix": "df.show()",
+   "explain": "`display()` is a **Databricks notebook helper**, not a PySpark method. Outside Databricks use `df.show()`. (Outside Databricks you *do* need to build the SparkSession, as lines 0–1 do.)"
+  },
+  {
+   "id": "ch04-e058",
+   "type": "mcq",
+   "section": "ch04-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "In a Unity Catalog-enabled workspace you open a brand-new notebook and run a cell without choosing compute. What can happen?",
+   "options": [
+    "Databricks can automatically attach it to serverless compute",
+    "The cell runs in your browser",
+    "The cell silently does nothing forever",
+    "A SQL warehouse is created for it"
+   ],
+   "answer": 0,
+   "explain": "Current Databricks can **auto-attach** new notebooks to **serverless compute** in UC-enabled workspaces. Code never runs in the browser."
+  },
+  {
+   "id": "ch04-e059",
+   "type": "tf",
+   "section": "ch04-s08",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "In a Databricks notebook you must create `spark` yourself with `SparkSession.builder` before using it.",
+   "answer": false,
+   "explain": "A ready-made Spark session (`spark`) is provided on supported compute. You only build it yourself outside Databricks."
+  },
+  {
+   "id": "ch04-e060",
+   "type": "calc",
+   "section": "ch04-s09",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "Orders: (1, Athens, 120.0), (2, Volos, 80.0), (3, Athens, 50.0), (4, Patras, 200.0), (5, Athens, 30.0). What is `total_sales` for Athens?",
+   "answer": 200,
+   "tolerance": 0,
+   "unit": "",
+   "explain": "120 + 50 + 30 = **200.0**, from 3 orders. Note Patras also has 200.0, so in `orderBy(desc(\"total_sales\"))` Athens and Patras tie and their order isn't guaranteed."
+  },
+  {
+   "id": "ch04-e061",
+   "type": "mcq",
+   "section": "ch04-s09",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Source Exercise 5 — why does `df.filter(F.col(\"amount\") > 100)` usually need no shuffle, while `df.groupBy(\"city\").sum(\"amount\")` probably does?",
+   "options": [
+    "Filter is decided independently within each partition; groupBy must bring all rows of the same city together across partitions",
+    "Filter runs on the driver; groupBy runs on workers",
+    "Filter uses Photon; groupBy doesn't",
+    "groupBy writes to disk; filter doesn't"
+   ],
+   "answer": 0,
+   "explain": "Each partition can filter **locally**. But rows with `city = Athens` may sit in several partitions and must be combined logically → **redistribution/shuffle**."
+  },
+  {
+   "id": "ch04-e062",
+   "type": "order",
+   "section": "ch04-s09",
+   "difficulty": 2,
+   "tags": [
+    "interview",
+    "concept"
+   ],
+   "quick": false,
+   "q": "What happens when you press Run on a cell with transformations + `display(result)`? Put the steps in order.",
+   "items": [
+    "Python code executes in the active compute session",
+    "Spark builds logical DataFrame transformations",
+    "display() requires a result (action)",
+    "Catalyst analysis and optimization",
+    "Physical execution plan",
+    "Spark/Photon execution: tasks process partitions (scan, filter, shuffle)"
+   ],
+   "explain": "Not just 'Python runs': code builds a lazy plan, an action triggers Catalyst optimization, a physical plan is chosen, and Spark/Photon tasks process partitions."
+  },
+  {
+   "id": "ch04-e063",
+   "type": "mcq",
+   "section": "ch04-s09",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which of these trigger actual evaluation? (select all)",
+   "options": [
+    "display(y)",
+    "y.count()",
+    "y.write...",
+    "x = orders.filter(...)",
+    "y = x.groupBy(...).sum(...)"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "multi": true,
+   "explain": "`display`, `count` and `write` are **actions** needing a result. `filter` and `groupBy().sum()` are **transformations** that only describe computation (lazy evaluation)."
+  },
+  {
+   "id": "ch04-e064",
+   "type": "cloze",
+   "section": "ch04-s09",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Complete the code to print the physical plan in the readable format, and name the shuffle operator.",
+   "text": "city_sales.[[explain]](\"[[formatted|extended]]\")\n# shuffle boundary operator in the plan: [[Exchange]]",
+   "asCode": true,
+   "explain": "`explain(\"formatted\")` (or `\"extended\"`) shows the plan. **Exchange** marks redistribution/shuffle; you'll also see HashAggregate and Sort."
+  },
+  {
+   "id": "ch04-e065",
+   "type": "mcq",
+   "section": "ch04-s09",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q26 — `spark.table(\"orders\").groupBy(\"customer_id\").sum(\"amount\")` shows **Exchange** in the plan. What does that most likely mean?",
+   "options": [
+    "Data redistribution/shuffle is required for the aggregation",
+    "Data is being exchanged with the control plane",
+    "Photon is disabled",
+    "The table is being copied to a new location"
+   ],
+   "answer": 0,
+   "explain": "Exchange = **shuffle**: rows with the same `customer_id` must meet in the same partition. This is your Spark knowledge applied directly in Databricks."
+  },
+  {
+   "id": "ch04-e066",
+   "type": "tf",
+   "section": "ch04-s09",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Test Q20 — once `df.filter(...)` has run in a cell, the data has already been filtered.",
+   "answer": false,
+   "explain": "Because of **lazy evaluation**, the filter only adds to the computation plan. Execution happens when an action/result is requested (display, count, write)."
+  },
+  {
+   "id": "ch04-e067",
+   "type": "calc",
+   "section": "ch04-s09",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "How many rows will `city_sales` (groupBy city over the 5 orders in Athens/Volos/Patras) contain?",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "rows",
+   "explain": "One row per distinct city: Athens, Patras, Volos → **3** rows. groupBy collapses the 5 orders into 3 groups."
+  },
+  {
+   "id": "ch04-e068",
+   "type": "write",
+   "section": "ch04-s09",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write `city_sales`: group `df` by `city`, compute `total_sales` (sum of amount) and `orders` (count of rows), sorted by `total_sales` descending.",
+   "solution": "from pyspark.sql import functions as F\n\ncity_sales = (\n    df\n    .groupBy(\"city\")\n    .agg(\n        F.sum(\"amount\").alias(\"total_sales\"),\n        F.count(\"*\").alias(\"orders\")\n    )\n    .orderBy(F.desc(\"total_sales\"))\n)",
+   "keywords": [
+    "groupBy(\"city\")",
+    ".agg(",
+    "F.sum(\"amount\")",
+    "alias(\"total_sales\")",
+    "F.count(\"*\")",
+    "orderBy",
+    "F.desc"
+   ],
+   "lang": "python",
+   "explain": "`agg` with aliased `F.sum`/`F.count`, then `orderBy(F.desc(...))`. Expect HashAggregate + Exchange in the plan."
+  },
+  {
+   "id": "ch04-e069",
+   "type": "free",
+   "section": "ch04-s09",
+   "difficulty": 3,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Interview: explain what really happens between pressing Run and seeing a table from `display(result)`.",
+   "model": "The cell's Python runs in the active compute session. The DataFrame calls build a lazy logical plan; nothing is processed yet. display() is an action, so Spark runs Catalyst analysis/optimization, picks a physical plan, and Spark/Photon executes it as tasks over partitions — scanning, filtering, and shuffling for the groupBy — and returns the result to the notebook.",
+   "rubric": [
+    "Runs in compute session, not browser",
+    "Transformations are lazy",
+    "Action triggers Catalyst optimization",
+    "Physical plan executed by Spark/Photon tasks over partitions",
+    "Mentions shuffle for groupBy"
+   ],
+   "explain": "The interview-level answer connects notebook → lazy plan → action → Catalyst → physical plan → distributed tasks."
+  },
+  {
+   "id": "ch04-e070",
+   "type": "match",
+   "section": "ch04-s10",
+   "difficulty": 1,
+   "tags": [
+    "syntax",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q15/Q16 (extended) — match each magic command to what it does.",
+   "pairs": [
+    [
+     "%sql",
+     "Run this cell as SQL"
+    ],
+    [
+     "%md",
+     "Render this cell as Markdown"
+    ],
+    [
+     "%pip",
+     "Manage notebook-scoped Python packages"
+    ],
+    [
+     "%python",
+     "Run this cell as Python"
+    ],
+    [
+     "%scala",
+     "Run this cell as Scala"
+    ]
+   ],
+   "explain": "Magic commands switch how **one cell** is interpreted (`%python`, `%sql`, `%scala`, `%r`, `%md`) or manage notebook-scoped libraries (`%pip`)."
+  },
+  {
+   "id": "ch04-e071",
+   "type": "tf",
+   "section": "ch04-s10",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "`%pip install requests` permanently installs `requests` for every notebook in the workspace.",
+   "answer": false,
+   "explain": "`%pip` installs **notebook-scoped** libraries tied to the notebook/session context — not a permanent workspace-wide installation."
+  },
+  {
+   "id": "ch04-e072",
+   "type": "spotbug",
+   "section": "ch04-s10",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "debug"
+   ],
+   "quick": false,
+   "q": "A cell in a Python-default notebook should run this query as SQL, but it fails with a Python SyntaxError. Which line is wrong?",
+   "lines": [
+    "%python",
+    "SELECT city, SUM(amount) AS revenue",
+    "FROM prod.silver.orders",
+    "GROUP BY city;"
+   ],
+   "bugs": [
+    0
+   ],
+   "fix": "%sql\nSELECT city, SUM(amount) AS revenue\nFROM prod.silver.orders\nGROUP BY city;",
+   "explain": "The magic `%python` tells the notebook to parse SQL text as Python. Start the cell with **`%sql`** so it's interpreted as SQL."
+  },
+  {
+   "id": "ch04-e073",
+   "type": "mcq",
+   "section": "ch04-s10",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q13 — what does `spark.table(\"prod.silver.orders\")` do?",
+   "options": [
+    "Creates a Spark DataFrame that refers to that table object",
+    "Copies the whole table into driver memory",
+    "Creates a new empty table",
+    "Opens the table in Catalog Explorer"
+   ],
+   "answer": 0,
+   "explain": "It resolves the UC name's metadata and returns a **DataFrame** pointing at the table. Thanks to lazy evaluation, nothing is read until an action runs."
+  },
+  {
+   "id": "ch04-e074",
+   "type": "mcq",
+   "section": "ch04-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "What does `spark.sql(\"SELECT country, SUM(amount) AS revenue FROM prod.silver.orders GROUP BY country\")` return?",
+   "options": [
+    "A DataFrame",
+    "A Python list of rows",
+    "A printed text table",
+    "Nothing — it only runs the query"
+   ],
+   "answer": 0,
+   "explain": "SQL statement → Spark SQL → **DataFrame**. You can keep transforming it or `display()` it."
+  },
+  {
+   "id": "ch04-e075",
+   "type": "write",
+   "section": "ch04-s10",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "From Python, run SQL that computes revenue per country from `prod.silver.orders` into DataFrame `df`, then display it.",
+   "solution": "df = spark.sql(\"\"\"\n    SELECT country, SUM(amount) AS revenue\n    FROM prod.silver.orders\n    GROUP BY country\n\"\"\")\ndisplay(df)",
+   "keywords": [
+    "spark.sql(",
+    "SUM(amount) AS revenue",
+    "FROM prod.silver.orders",
+    "GROUP BY country",
+    "display(df)"
+   ],
+   "lang": "python",
+   "explain": "`spark.sql` lets you write SQL while staying in Python and getting a DataFrame back."
+  },
+  {
+   "id": "ch04-e076",
+   "type": "mcq",
+   "section": "ch04-s10",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "concept"
+   ],
+   "quick": false,
+   "q": "What is `_sqldf`, and how should you use it?",
+   "options": [
+    "The result of the previous SQL cell exposed to subsequent Python; a handy interactive feature, not a basis for production design",
+    "A built-in table listing all SQL queries; ideal for production auditing",
+    "A function that converts a DataFrame to SQL",
+    "The SQL warehouse's default DataFrame"
+   ],
+   "answer": 0,
+   "explain": "In supported notebook environments, a `%sql` cell's result becomes `_sqldf` for later Python cells. Great for exploration — but use `spark.sql()`/named DataFrames in production."
+  },
+  {
+   "id": "ch04-e077",
+   "type": "cloze",
+   "section": "ch04-s10",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Complete the two cells so a SQL result is reused in Python.",
+   "text": "%[[sql]]\nSELECT * FROM prod.silver.orders WHERE amount > 100;\n\n# next cell (Python)\ndisplay([[_sqldf]])",
+   "asCode": true,
+   "explain": "`%sql` makes the cell SQL; its result is exposed to later Python as `_sqldf` in supported environments."
+  },
+  {
+   "id": "ch04-e078",
+   "type": "tf",
+   "section": "ch04-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "`spark.table(\"main.sales.orders\")` in Python and `%sql SELECT * FROM main.sales.orders` can lead to the same logical table.",
+   "answer": true,
+   "explain": "Both resolve the same Unity Catalog name. Python and SQL are just two front doors to the same table."
+  },
+  {
+   "id": "ch04-e079",
+   "type": "cloze",
+   "section": "ch04-s11",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Complete the dropdown widget and read its value.",
+   "text": "dbutils.widgets.[[dropdown]](\n    \"country\",\n    \"GR\",\n    [\"GR\", \"DE\", \"FR\"],\n    \"Country\"\n)\ncountry = dbutils.widgets.[[get]](\"country\")",
+   "asCode": true,
+   "bank": [
+    "text",
+    "set",
+    "read"
+   ],
+   "explain": "`dropdown(name, default, choices, label)` creates the control; `dbutils.widgets.get(name)` returns its current value."
+  },
+  {
+   "id": "ch04-e080",
+   "type": "mcq",
+   "section": "ch04-s11",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Test Q17 — which is today's SQL parameter marker syntax for a widget named `country`?",
+   "options": [
+    ":country",
+    "${country}",
+    "@country",
+    "{{country}}"
+   ],
+   "answer": 0,
+   "why": [
+    "Correct: modern parameter marker.",
+    "Legacy; deprecated for DBR 15.2+.",
+    "Not Databricks parameter syntax here.",
+    "Not this syntax."
+   ],
+   "explain": "Use **`:country`**. `${country}` is the older syntax, deprecated for DBR 15.2+ — learn today's syntax, not old tutorials."
+  },
+  {
+   "id": "ch04-e081",
+   "type": "spotbug",
+   "section": "ch04-s11",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Which line uses deprecated syntax?",
+   "lines": [
+    "# Python cell: dbutils.widgets.text(\"country\", \"GR\")",
+    "%sql",
+    "SELECT *",
+    "FROM prod.silver.orders",
+    "WHERE country = '${country}';"
+   ],
+   "bugs": [
+    4
+   ],
+   "fix": "WHERE country = :country;",
+   "explain": "`${country}` is legacy/deprecated (DBR 15.2+). The modern parameter marker is `:country`."
+  },
+  {
+   "id": "ch04-e082",
+   "type": "spotbug",
+   "section": "ch04-s11",
+   "difficulty": 3,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A widget holds a table name. Which line is wrong?",
+   "lines": [
+    "dbutils.widgets.text(\"table_name\", \"prod.silver.orders\")",
+    "%sql",
+    "SELECT *",
+    "FROM :table_name;"
+   ],
+   "bugs": [
+    3
+   ],
+   "fix": "FROM IDENTIFIER(:table_name);",
+   "explain": "A parameter marker stands for a **value**; after `FROM` SQL needs an **identifier**. Wrap it: `IDENTIFIER(:table_name)`."
+  },
+  {
+   "id": "ch04-e083",
+   "type": "mcq",
+   "section": "ch04-s11",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q18 — why isn't `FROM :table` treated like `WHERE country = :country`?",
+   "options": [
+    "`FROM` needs a SQL identifier (object name), while `WHERE country = :country` takes a parameter value",
+    "Parameters only work in Python cells",
+    "`:table` is reserved syntax for temporary views",
+    "Widgets can't hold strings"
+   ],
+   "answer": 0,
+   "explain": "Identifier vs value are different semantic categories. For dynamic object names use `IDENTIFIER()`."
+  },
+  {
+   "id": "ch04-e084",
+   "type": "write",
+   "section": "ch04-s11",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Create a text widget `country` with default `GR` (Python), then write the SQL cell that filters `prod.silver.orders` with the modern parameter marker.",
+   "solution": "dbutils.widgets.text(\"country\", \"GR\")\n\n%sql\nSELECT *\nFROM prod.silver.orders\nWHERE country = :country;",
+   "keywords": [
+    "dbutils.widgets.text",
+    "\"country\"",
+    "%sql",
+    "where country = :country"
+   ],
+   "lang": "python",
+   "explain": "Create the widget once, then reference it in SQL with `:country` (not `${country}`)."
+  },
+  {
+   "id": "ch04-e085",
+   "type": "order",
+   "section": "ch04-s11",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Order the parameterized-notebook pattern.",
+   "items": [
+    "Create the widget (dbutils.widgets.dropdown)",
+    "Read the value (dbutils.widgets.get)",
+    "Use the value in a filter",
+    "Render with display()"
+   ],
+   "explain": "Create → get → use → display. Users then change the widget instead of editing code."
+  },
+  {
+   "id": "ch04-e086",
+   "type": "bucket",
+   "section": "ch04-s11",
+   "difficulty": 3,
+   "tags": [
+    "pitfall",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Can a plain parameter marker (`:p`) go there, or do you need `IDENTIFIER(:p)`?",
+   "buckets": [
+    "Plain value marker :p",
+    "Needs IDENTIFIER(:p)"
+   ],
+   "items": [
+    {
+     "text": "WHERE country = ?",
+     "bucket": 0
+    },
+    {
+     "text": "FROM ? (table name)",
+     "bucket": 1
+    },
+    {
+     "text": "WHERE amount > ?",
+     "bucket": 0
+    },
+    {
+     "text": "SELECT ? FROM t (column name)",
+     "bucket": 1
+    },
+    {
+     "text": "WHERE order_date = ?",
+     "bucket": 0
+    },
+    {
+     "text": "Catalog/schema name in a qualified name",
+     "bucket": 1
+    }
+   ],
+   "explain": "Values (strings, numbers, dates) use plain markers. Anything that is an **object name** (table, column, schema) is an identifier → `IDENTIFIER()`."
+  },
+  {
+   "id": "ch04-e087",
+   "type": "tf",
+   "section": "ch04-s11",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "The `${param}` syntax is deprecated for DBR 15.2 and above.",
+   "answer": true,
+   "explain": "Correct. Modern SQL uses parameter markers like `:param`."
+  },
+  {
+   "id": "ch04-e088",
+   "type": "free",
+   "section": "ch04-s11",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why are widgets better than writing `country = \"GR\"` at the top of the notebook?",
+   "model": "Hardcoding means editing code every time you need another country, which is error-prone and not reusable. Widgets turn the notebook into a parameterized notebook/dashboard: the value is chosen in the UI (or passed in), read with dbutils.widgets.get, and the code stays unchanged.",
+   "rubric": [
+    "Avoids editing code for each run",
+    "Parameterized/reusable notebook",
+    "Value read via dbutils.widgets.get"
+   ],
+   "explain": "Widgets separate **inputs** from **logic** — the first step toward reusable, schedulable notebooks."
+  },
+  {
+   "id": "ch04-e089",
+   "type": "order",
+   "section": "ch04-s12",
+   "difficulty": 1,
+   "tags": [
+    "syntax",
+    "debug"
+   ],
+   "quick": true,
+   "q": "Order the SQL drill-down from the top of the namespace to one table's details.",
+   "items": [
+    "SHOW CATALOGS;",
+    "SHOW SCHEMAS IN prod;",
+    "SHOW TABLES IN prod.silver;",
+    "DESCRIBE TABLE prod.silver.orders;",
+    "DESCRIBE DETAIL prod.silver.orders;"
+   ],
+   "explain": "Catalog → schema → table → columns → table-level details. This drill-down is your basic debugging toolkit."
+  },
+  {
+   "id": "ch04-e090",
+   "type": "cloze",
+   "section": "ch04-s12",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Complete the exploration commands.",
+   "text": "SHOW [[CATALOGS]];\nSHOW [[SCHEMAS]] IN prod;\nSHOW [[TABLES]] IN prod.silver;\nDESCRIBE [[DETAIL]] prod.silver.orders;",
+   "asCode": true,
+   "bank": [
+    "VIEWS",
+    "COLUMNS"
+   ],
+   "explain": "SHOW CATALOGS / SCHEMAS IN catalog / TABLES IN catalog.schema, and DESCRIBE DETAIL for table-level info (format, location, size)."
+  },
+  {
+   "id": "ch04-e091",
+   "type": "write",
+   "section": "ch04-s12",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Create the schema `dev_training.sales` only if missing, then a Delta table `orders` with order_id BIGINT, customer_id BIGINT, amount DECIMAL(10,2), country STRING, order_ts TIMESTAMP.",
+   "solution": "CREATE SCHEMA IF NOT EXISTS dev_training.sales;\n\nCREATE TABLE dev_training.sales.orders (\n  order_id BIGINT,\n  customer_id BIGINT,\n  amount DECIMAL(10,2),\n  country STRING,\n  order_ts TIMESTAMP\n)\nUSING DELTA;",
+   "keywords": [
+    "create schema if not exists dev_training.sales",
+    "create table dev_training.sales.orders",
+    "decimal(10,2)",
+    "timestamp",
+    "using delta"
+   ],
+   "lang": "sql",
+   "explain": "Schema first (catalog.schema), then the table with a fully qualified name and `USING DELTA`."
+  },
+  {
+   "id": "ch04-e092",
+   "type": "spotbug",
+   "section": "ch04-s12",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "debug"
+   ],
+   "quick": false,
+   "q": "The table has 5 columns (order_id, customer_id, amount, country, order_ts). Which line breaks the INSERT?",
+   "lines": [
+    "INSERT INTO dev_training.sales.orders",
+    "VALUES",
+    "  (1, 101, 20.50, 'GR', CURRENT_TIMESTAMP()),",
+    "  (2, 102, 90.00, CURRENT_TIMESTAMP()),",
+    "  (3, 103, 15.25, 'GR', CURRENT_TIMESTAMP());"
+   ],
+   "bugs": [
+    3
+   ],
+   "fix": "  (2, 102, 90.00, 'DE', CURRENT_TIMESTAMP()),",
+   "explain": "Row 2 has only 4 values — the `country` value is missing. Every VALUES row must match the table's column count and order."
+  },
+  {
+   "id": "ch04-e093",
+   "type": "tf",
+   "section": "ch04-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Test Q22 — the compute stopped, so your Delta table is gone.",
+   "answer": false,
+   "explain": "**Compute lifetime ≠ data lifetime.** The Delta table lives in persistent storage; compute can stop and start without affecting it."
+  },
+  {
+   "id": "ch04-e094",
+   "type": "mcq",
+   "section": "ch04-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A colleague can't see the `prod` catalog in Catalog Explorer, but you can. Most likely reason?",
+   "options": [
+    "They lack privileges such as BROWSE or the corresponding data access privileges",
+    "Their compute is too small",
+    "Catalog Explorer only shows the creator's objects",
+    "Photon is disabled for them"
+   ],
+   "answer": 0,
+   "explain": "Catalog Explorer discovery is **governed**: you need privileges like **BROWSE** and/or data access privileges. Compute size and Photon are irrelevant to visibility."
+  },
+  {
+   "id": "ch04-e095",
+   "type": "match",
+   "section": "ch04-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each layer to its job for `dev_training.sales.orders`.",
+   "pairs": [
+    [
+     "Unity Catalog",
+     "Name, metadata, permissions"
+    ],
+    [
+     "Delta",
+     "Table format: files + transaction state"
+    ],
+    [
+     "Storage",
+     "Where the bytes persist"
+    ],
+    [
+     "Compute",
+     "Executes the queries"
+    ]
+   ],
+   "explain": "UC names and governs, Delta formats, storage persists, compute executes — four separate layers."
+  },
+  {
+   "id": "ch04-e096",
+   "type": "mcq",
+   "section": "ch04-s12",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "You want table-level information such as format, location and number of files. Which command?",
+   "options": [
+    "DESCRIBE DETAIL prod.silver.orders;",
+    "DESCRIBE TABLE prod.silver.orders;",
+    "SHOW TABLES IN prod.silver;",
+    "SHOW SCHEMAS IN prod;"
+   ],
+   "answer": 0,
+   "explain": "`DESCRIBE DETAIL` gives table-level details; `DESCRIBE TABLE` gives columns and types; SHOW commands list objects."
+  },
+  {
+   "id": "ch04-e097",
+   "type": "match",
+   "section": "ch04-s13",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q14 — what is each part of `prod.silver.orders`?",
+   "pairs": [
+    [
+     "prod",
+     "catalog"
+    ],
+    [
+     "silver",
+     "schema"
+    ],
+    [
+     "orders",
+     "table / object"
+    ]
+   ],
+   "explain": "Unity Catalog's three-level namespace: **catalog.schema.table**."
+  },
+  {
+   "id": "ch04-e098",
+   "type": "mcq",
+   "section": "ch04-s13",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Current context is `dev.sales`. You run `SELECT * FROM orders;` believing you read production. What do you actually read?",
+   "options": [
+    "dev.sales.orders",
+    "prod.sales.orders",
+    "An error: the name is ambiguous",
+    "main.default.orders"
+   ],
+   "answer": 0,
+   "explain": "Short names resolve against the **current catalog and schema** → `dev.sales.orders`. No error — just silently wrong data. Use fully qualified names."
+  },
+  {
+   "id": "ch04-e099",
+   "type": "scenario",
+   "section": "ch04-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Your notebook's revenue numbers are far lower than finance's report. The query is `SELECT SUM(amount) FROM orders;` and it runs without errors.",
+   "steps": [
+    {
+     "prompt": "What do you check first?",
+     "options": [
+      {
+       "text": "SELECT current_catalog(), current_schema()",
+       "ok": true,
+       "fb": "The unqualified name may be resolving to a different catalog/schema."
+      },
+      {
+       "text": "Increase the cluster size",
+       "ok": false,
+       "fb": "Wrong numbers aren't a performance problem."
+      },
+      {
+       "text": "Check Photon is enabled",
+       "ok": false,
+       "fb": "Photon changes speed, not results."
+      },
+      {
+       "text": "Reinstall libraries with %pip",
+       "ok": false,
+       "fb": "No dependency error here."
+      }
+     ]
+    },
+    {
+     "prompt": "It returns `dev` / `sales`. What now?",
+     "options": [
+      {
+       "text": "Rewrite with the fully qualified name prod.sales.orders (or USE CATALOG/USE SCHEMA explicitly)",
+       "ok": true,
+       "fb": "Fully qualified names remove the ambiguity."
+      },
+      {
+       "text": "Delete dev.sales.orders",
+       "ok": false,
+       "fb": "Destructive and doesn't fix the habit."
+      },
+      {
+       "text": "Run the same query again",
+       "ok": false,
+       "fb": "Same context → same wrong table."
+      }
+     ]
+    }
+   ],
+   "explain": "Silent wrong-namespace reads are dangerous because nothing errors. Check the current namespace and fully qualify production queries."
+  },
+  {
+   "id": "ch04-e100",
+   "type": "order",
+   "section": "ch04-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the steps when you suspect a short table name hit the wrong environment.",
+   "items": [
+    "Notice results look wrong (no error raised)",
+    "Run SELECT current_catalog() and current_schema()",
+    "Compare with the intended catalog.schema",
+    "Rewrite using catalog.schema.table",
+    "Re-run and compare results"
+   ],
+   "explain": "Confirm the current namespace, compare with intent, and fix by fully qualifying."
+  },
+  {
+   "id": "ch04-e101",
+   "type": "cloze",
+   "section": "ch04-s13",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Check and set the namespace.",
+   "text": "SELECT [[current_catalog]]();\nSELECT [[current_schema]]();\nUSE [[CATALOG]] prod;\nUSE [[SCHEMA]] silver;",
+   "asCode": true,
+   "explain": "`current_catalog()`/`current_schema()` reveal the context; `USE CATALOG`/`USE SCHEMA` set it."
+  },
+  {
+   "id": "ch04-e102",
+   "type": "tf",
+   "section": "ch04-s13",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "An unqualified table name like `orders` is always resolved in the `prod` catalog.",
+   "answer": false,
+   "explain": "It's resolved against the **current** catalog and schema, whatever they are. That's why production code should use `catalog.schema.table`."
+  },
+  {
+   "id": "ch04-e103",
+   "type": "write",
+   "section": "ch04-s13",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Set the context to catalog `prod` and schema `silver`, then select all rows from `orders` using the short name.",
+   "solution": "USE CATALOG prod;\nUSE SCHEMA silver;\n\nSELECT *\nFROM orders;",
+   "keywords": [
+    "use catalog prod",
+    "use schema silver",
+    "from orders"
+   ],
+   "lang": "sql",
+   "explain": "After `USE CATALOG`/`USE SCHEMA`, `orders` resolves to `prod.silver.orders`. For production transformations, the fully qualified name is still safer."
+  },
+  {
+   "id": "ch04-e104",
+   "type": "scenario",
+   "section": "ch04-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": true,
+   "q": "`spark.table(\"prod.silver.ordres\")` fails with `TABLE_OR_VIEW_NOT_FOUND`.",
+   "code": "spark.table(\"prod.silver.ordres\")",
+   "steps": [
+    {
+     "prompt": "First thing to run?",
+     "options": [
+      {
+       "text": "SHOW TABLES IN prod.silver;",
+       "ok": true,
+       "fb": "List what actually exists in that schema."
+      },
+      {
+       "text": "Open the Spark UI and inspect shuffles",
+       "ok": false,
+       "fb": "Wrong layer — the plan never ran; the name didn't resolve."
+      },
+      {
+       "text": "Increase cluster size",
+       "ok": false,
+       "fb": "Compute size can't create a missing name."
+      },
+      {
+       "text": "%pip install the table",
+       "ok": false,
+       "fb": "Tables aren't packages."
+      }
+     ]
+    },
+    {
+     "prompt": "The list shows `orders`. Conclusion?",
+     "options": [
+      {
+       "text": "Typo: ordres → orders",
+       "ok": true,
+       "fb": "Fix the name and re-run."
+      },
+      {
+       "text": "Permission problem",
+       "ok": false,
+       "fb": "Permission errors look like INSUFFICIENT_PRIVILEGES."
+      },
+      {
+       "text": "Runtime mismatch",
+       "ok": false,
+       "fb": "Runtime issues show up as AttributeError/ModuleNotFoundError."
+      }
+     ]
+    },
+    {
+     "prompt": "If `orders` had NOT been listed there, what would you check next?",
+     "options": [
+      {
+       "text": "Whether I'm in the wrong catalog/schema (current_catalog(), current_schema(), SHOW SCHEMAS)",
+       "ok": true,
+       "fb": "The table may live elsewhere."
+      },
+      {
+       "text": "Restart the compute",
+       "ok": false,
+       "fb": "Doesn't change where tables live."
+      },
+      {
+       "text": "Enable Photon",
+       "ok": false,
+       "fb": "Irrelevant to name resolution."
+      }
+     ]
+    }
+   ],
+   "explain": "TABLE_OR_VIEW_NOT_FOUND is a **naming/namespace** problem: typo or wrong catalog/schema. Use SHOW TABLES/SCHEMAS before touching Spark internals."
+  },
+  {
+   "id": "ch04-e105",
+   "type": "order",
+   "section": "ch04-s14",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A notebook cell is stuck/failing. Order the layer ladder (top to bottom).",
+   "items": [
+    "Compute attached?",
+    "Compute running?",
+    "Session healthy?",
+    "Code parsed?",
+    "Table exists?",
+    "Permission?",
+    "Query plan?",
+    "Runtime execution?"
+   ],
+   "explain": "Find the failing **layer** first: environment → code → data/naming → governance → plan → execution. Don't jump to shuffle analysis when the notebook isn't even attached."
+  },
+  {
+   "id": "ch04-e106",
+   "type": "bucket",
+   "section": "ch04-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Which layer does each symptom point to?",
+   "buckets": [
+    "Execution environment",
+    "Naming / namespace",
+    "Governance / authorization",
+    "Runtime / dependencies"
+   ],
+   "items": [
+    {
+     "text": "notebook not attached",
+     "bucket": 0
+    },
+    {
+     "text": "TABLE_OR_VIEW_NOT_FOUND",
+     "bucket": 1
+    },
+    {
+     "text": "INSUFFICIENT_PRIVILEGES",
+     "bucket": 2
+    },
+    {
+     "text": "ModuleNotFoundError",
+     "bucket": 3
+    },
+    {
+     "text": "Typo 'ordres' in a table name",
+     "bucket": 1
+    },
+    {
+     "text": "Scheduled job gets PERMISSION_DENIED",
+     "bucket": 2
+    },
+    {
+     "text": "AttributeError only on the older DBR",
+     "bucket": 3
+    },
+    {
+     "text": "Compute not running",
+     "bucket": 0
+    }
+   ],
+   "explain": "Classify before you fix: Case A environment, Case B naming, Case C governance, Case D runtime/dependency."
+  },
+  {
+   "id": "ch04-e107",
+   "type": "scenario",
+   "section": "ch04-s14",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q25 — the notebook works when **you** run it, but the scheduled job fails with `PERMISSION_DENIED`.",
+   "steps": [
+    {
+     "prompt": "First serious hypothesis?",
+     "options": [
+      {
+       "text": "The job runs as a different execution identity/principal",
+       "ok": true,
+       "fb": "Same code, different principal → different privileges."
+      },
+      {
+       "text": "The job's cluster is too small",
+       "ok": false,
+       "fb": "Size doesn't cause permission errors."
+      },
+      {
+       "text": "The table was deleted",
+       "ok": false,
+       "fb": "Then you'd see TABLE_OR_VIEW_NOT_FOUND, and it works for you."
+      },
+      {
+       "text": "Photon is off on job compute",
+       "ok": false,
+       "fb": "Photon doesn't affect authorization."
+      }
+     ]
+    },
+    {
+     "prompt": "What do you verify for that principal?",
+     "options": [
+      {
+       "text": "USE CATALOG, USE SCHEMA and SELECT on the objects",
+       "ok": true,
+       "fb": "The full privilege chain must exist for the job's principal."
+      },
+      {
+       "text": "Spark partition counts",
+       "ok": false,
+       "fb": "Wrong layer — this is governance."
+      },
+      {
+       "text": "The DBR version",
+       "ok": false,
+       "fb": "Runtime doesn't grant permissions."
+      }
+     ]
+    }
+   ],
+   "explain": "When it works for you but not for the job, compare **who** runs it. Then check the privilege chain for that principal."
+  },
+  {
+   "id": "ch04-e108",
+   "type": "order",
+   "section": "ch04-s14",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Case C — order the questions for `INSUFFICIENT_PRIVILEGES` on `SELECT * FROM prod.finance.transactions`.",
+   "items": [
+    "Which principal am I (or is the job running as)?",
+    "Do I have USE CATALOG on prod?",
+    "Do I have USE SCHEMA on prod.finance?",
+    "Do I have SELECT on the table?"
+   ],
+   "explain": "Identity first, then the chain from outer to inner: catalog → schema → table. This is the governance layer — not Spark partitions."
+  },
+  {
+   "id": "ch04-e109",
+   "type": "mcq",
+   "section": "ch04-s14",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Test Q24 — notebook works in DEV but PROD shows `ModuleNotFoundError`. Which two categories do you check early? (select all that apply)",
+   "options": [
+    "Databricks Runtime version",
+    "Python/library environment",
+    "Unity Catalog grants",
+    "Spark shuffle partitions"
+   ],
+   "answer": [
+    0,
+    1
+   ],
+   "multi": true,
+   "explain": "ModuleNotFoundError is a **runtime/environment/dependency** issue: compare DBR versions and the installed Python libraries. Grants and shuffles belong to other layers."
+  },
+  {
+   "id": "ch04-e110",
+   "type": "spotbug",
+   "section": "ch04-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "This cell raises `TABLE_OR_VIEW_NOT_FOUND`. Which line?",
+   "lines": [
+    "from pyspark.sql import functions as F",
+    "orders = spark.table(\"prod.silver.ordres\")",
+    "big = orders.filter(F.col(\"amount\") > 100)",
+    "display(big)"
+   ],
+   "bugs": [
+    1
+   ],
+   "fix": "orders = spark.table(\"prod.silver.orders\")",
+   "explain": "`ordres` is a typo for `orders`. `SHOW TABLES IN prod.silver;` would have revealed it immediately."
+  },
+  {
+   "id": "ch04-e111",
+   "type": "scenario",
+   "section": "ch04-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Case A — you click Run and nothing executes; the notebook header says it's not attached.",
+   "steps": [
+    {
+     "prompt": "Which layer is this?",
+     "options": [
+      {
+       "text": "Execution environment",
+       "ok": true,
+       "fb": "No compute session → nothing can run."
+      },
+      {
+       "text": "Spark code bug",
+       "ok": false,
+       "fb": "The code never even reached Spark."
+      },
+      {
+       "text": "Governance",
+       "ok": false,
+       "fb": "No permission error was raised."
+      },
+      {
+       "text": "Data layout",
+       "ok": false,
+       "fb": "No data has been read."
+      }
+     ]
+    },
+    {
+     "prompt": "What do you do?",
+     "options": [
+      {
+       "text": "Attach to compute (e.g. serverless) / start the compute, then re-run",
+       "ok": true,
+       "fb": "Give the notebook an execution session."
+      },
+      {
+       "text": "Rewrite the groupBy",
+       "ok": false,
+       "fb": "Code isn't the problem."
+      },
+      {
+       "text": "Run OPTIMIZE on the table",
+       "ok": false,
+       "fb": "Table layout is irrelevant here."
+      }
+     ]
+    }
+   ],
+   "explain": "A notebook is just an artifact. 'Not attached' is an environment problem — fix the compute, not the code."
+  },
+  {
+   "id": "ch04-e112",
+   "type": "mcq",
+   "section": "ch04-s14",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "You get `INSUFFICIENT_PRIVILEGES`. Which of these should you NOT spend time on?",
+   "options": [
+    "Spark partition counts",
+    "Which principal you are",
+    "USE CATALOG / USE SCHEMA grants",
+    "SELECT on the table"
+   ],
+   "answer": 0,
+   "explain": "Permission errors live in the **governance/authorization** layer. Spark partitions are an execution-layer concern and won't explain a denied access."
+  },
+  {
+   "id": "ch04-e113",
+   "type": "tf",
+   "section": "ch04-s14",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "`ModuleNotFoundError` most likely indicates a data problem in your tables.",
+   "answer": false,
+   "explain": "It's a **runtime/environment/dependency** problem. In a notebook `%pip install some-library` may help; in production manage dependencies systematically."
+  },
+  {
+   "id": "ch04-e114",
+   "type": "free",
+   "section": "ch04-s15",
+   "difficulty": 2,
+   "tags": [
+    "interview",
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q23 — a query is slow and a junior engineer says \"we need a bigger cluster\". What's wrong with that reasoning?",
+   "model": "No root cause has been identified. The slowness could come from skew, a wrong join strategy, a huge shuffle, spill to disk, poor table layout, small files, an unnecessary scan, a badly written query or insufficient statistics — or a real compute bottleneck. Cluster sizing is only one possibility, so you first inspect the physical plan and Spark UI.",
+   "rubric": [
+    "Root cause not identified",
+    "Lists several alternatives (skew, join, shuffle, spill, layout/small files, scan, statistics)",
+    "Cluster size is only one possibility",
+    "Investigate plan/Spark UI first"
+   ],
+   "explain": "Slow ≠ small cluster. Diagnose before you scale."
+  },
+  {
+   "id": "ch04-e115",
+   "type": "order",
+   "section": "ch04-s15",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Order the debugging tree for a 40-minute join + groupBy query.",
+   "items": [
+    "Is compute actually healthy?",
+    "How much input data?",
+    "What physical join (BHJ or SMJ)?",
+    "Huge shuffle?",
+    "Skew?",
+    "Spill to disk?",
+    "Tiny files / bad layout?"
+   ],
+   "explain": "Health → input size → join strategy → shuffle → skew → spill → file layout. Each step narrows the cause before you touch cluster size."
+  },
+  {
+   "id": "ch04-e116",
+   "type": "scenario",
+   "section": "ch04-s15",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "`orders JOIN customers ON customer_id`, then `groupBy(\"country\")`, runs for 40 minutes.",
+   "steps": [
+    {
+     "prompt": "Before anything else?",
+     "options": [
+      {
+       "text": "Confirm the compute is actually healthy",
+       "ok": true,
+       "fb": "Rule out the environment layer first."
+      },
+      {
+       "text": "Double the workers",
+       "ok": false,
+       "fb": "That's guessing without a root cause."
+      },
+      {
+       "text": "Rewrite in Scala",
+       "ok": false,
+       "fb": "Language isn't the issue."
+      }
+     ]
+    },
+    {
+     "prompt": "Compute is fine. Next?",
+     "options": [
+      {
+       "text": "Check input size and which physical join was chosen (BHJ vs SMJ) in the plan",
+       "ok": true,
+       "fb": "Input volume and join strategy are the biggest levers."
+      },
+      {
+       "text": "Check UC permissions",
+       "ok": false,
+       "fb": "The query runs — permissions are fine."
+      },
+      {
+       "text": "Reinstall libraries",
+       "ok": false,
+       "fb": "No dependency error."
+      }
+     ]
+    },
+    {
+     "prompt": "It's a sort-merge join with a huge shuffle. One task runs far longer than the rest. Suspect?",
+     "options": [
+      {
+       "text": "Skew — some customer_id/country keys are much bigger",
+       "ok": true,
+       "fb": "One slow task among many fast ones is the classic skew signal."
+      },
+      {
+       "text": "Typo in the table name",
+       "ok": false,
+       "fb": "Then it wouldn't run at all."
+      },
+      {
+       "text": "Photon is a database",
+       "ok": false,
+       "fb": "Photon is an engine, and this doesn't explain one slow task."
+      }
+     ]
+    }
+   ],
+   "explain": "Walk the tree: healthy compute → input size → join type → shuffle → skew → spill → file layout. Evidence before resources."
+  },
+  {
+   "id": "ch04-e117",
+   "type": "mcq",
+   "section": "ch04-s15",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Case E (query runs but is slow) — what do you inspect? (select all)",
+   "options": [
+    "Physical plan",
+    "Spark UI tasks",
+    "Skew and spill",
+    "Join strategy and partition counts",
+    "USE CATALOG privileges",
+    "%pip packages"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "multi": true,
+   "explain": "Only now do you open Spark: plan, Spark UI, tasks, shuffle, skew, spill, input bytes, partition counts, join strategy. Privileges and packages belong to other layers — the query already runs."
+  },
+  {
+   "id": "ch04-e118",
+   "type": "tf",
+   "section": "ch04-s15",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "A slow query automatically means the cluster is too small.",
+   "answer": false,
+   "explain": "Slow ≠ small cluster. Skew, joins, shuffles, spill, small files or bad queries are just as likely. Find the root cause first."
+  },
+  {
+   "id": "ch04-e119",
+   "type": "odd",
+   "section": "ch04-s15",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Which one is NOT a typical cause of a slow (but running) query?",
+   "options": [
+    "Huge shuffle",
+    "Data skew",
+    "Spill to disk",
+    "INSUFFICIENT_PRIVILEGES"
+   ],
+   "answer": 3,
+   "explain": "Shuffle, skew and spill are performance causes. `INSUFFICIENT_PRIVILEGES` stops the query from running at all — a governance error, not slowness."
+  },
+  {
+   "id": "ch04-e120",
+   "type": "calc",
+   "section": "ch04-s16",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "Mini-project data: Athens 100.00, Volos 80.00, Athens 30.00, Patras 150.00, Athens 200.00, Volos 40.00. What revenue does Task A return for Athens?",
+   "answer": 330,
+   "tolerance": 0,
+   "unit": "",
+   "explain": "100 + 30 + 200 = **330.00**. Full Task A result (ORDER BY revenue DESC): Athens 330, Patras 150, Volos 120."
+  },
+  {
+   "id": "ch04-e121",
+   "type": "match",
+   "section": "ch04-s16",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "When you see it, think it — match each term to its mental bucket.",
+   "pairs": [
+    [
+     "spark.table(...)",
+     "Spark API"
+    ],
+    [
+     "display(...)",
+     "Databricks notebook convenience"
+    ],
+    [
+     "prod.silver.orders",
+     "Unity Catalog namespace"
+    ],
+    [
+     "Serverless",
+     "Databricks-managed compute infrastructure"
+    ],
+    [
+     "Photon",
+     "Vectorized native execution engine"
+    ],
+    [
+     "DBR 17.3",
+     "Software/runtime environment"
+    ]
+   ],
+   "explain": "Not everything belongs in a bucket called 'Databricks stuff'. Each term has a precise layer: API, helper, namespace, infrastructure, engine, runtime. (SQL Warehouse → SQL-optimized compute.)"
+  },
+  {
+   "id": "ch04-e122",
+   "type": "write",
+   "section": "ch04-s16",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Task A — SQL: revenue per city from `dev_training.sales.orders`, highest first.",
+   "solution": "SELECT\n  city,\n  SUM(amount) AS revenue\nFROM dev_training.sales.orders\nGROUP BY city\nORDER BY revenue DESC;",
+   "keywords": [
+    "sum(amount) as revenue",
+    "from dev_training.sales.orders",
+    "group by city",
+    "order by revenue desc"
+   ],
+   "lang": "sql",
+   "explain": "Aggregate with SUM, group by city, sort descending by the alias."
+  },
+  {
+   "id": "ch04-e123",
+   "type": "write",
+   "section": "ch04-s16",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Task B — PySpark: the same result as Task A in a DataFrame `city_revenue`, displayed.",
+   "solution": "from pyspark.sql import functions as F\n\norders = spark.table(\"dev_training.sales.orders\")\ncity_revenue = (\n    orders\n    .groupBy(\"city\")\n    .agg(F.sum(\"amount\").alias(\"revenue\"))\n    .orderBy(F.desc(\"revenue\"))\n)\ndisplay(city_revenue)",
+   "keywords": [
+    "spark.table(\"dev_training.sales.orders\")",
+    "groupBy(\"city\")",
+    "F.sum(\"amount\").alias(\"revenue\")",
+    "orderBy(F.desc(\"revenue\"))",
+    "display(city_revenue)"
+   ],
+   "lang": "python",
+   "explain": "Same logic, DataFrame API: `spark.table` → `groupBy` → `agg(F.sum().alias())` → `orderBy(F.desc())`."
+  },
+  {
+   "id": "ch04-e124",
+   "type": "cloze",
+   "section": "ch04-s16",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Task D — complete the parameterized filter.",
+   "text": "dbutils.widgets.[[dropdown]](\"city\", \"Athens\", [\"Athens\", \"Volos\", \"Patras\"])\ncity = dbutils.widgets.[[get]](\"city\")\nresult = (\n    spark.[[table]](\"dev_training.sales.orders\")\n    .filter(F.col(\"city\") == [[city]])\n)\ndisplay(result)",
+   "asCode": true,
+   "explain": "Create the dropdown, read it with `get`, read the table with `spark.table`, and compare the column to the Python variable `city`."
+  },
+  {
+   "id": "ch04-e125",
+   "type": "mcq",
+   "section": "ch04-s16",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Task C — after `city_revenue.explain(\"formatted\")`, which operators should you look for, and why?",
+   "options": [
+    "Exchange and Aggregate — GROUP BY city must bring rows with the same city together",
+    "Filter and Project — they cause the shuffle",
+    "BroadcastHashJoin — every groupBy is a join",
+    "Photon and Delta — they show the table format"
+   ],
+   "answer": 0,
+   "explain": "GROUP BY needs a **shuffle** (Exchange) so same-city rows meet, and **(Hash)Aggregate** operators compute partial and final sums."
+  },
+  {
+   "id": "ch04-e126",
+   "type": "free",
+   "section": "ch04-s16",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Interview Q27: \"What is the difference between a Databricks workspace and compute?\"",
+   "model": "A workspace is the collaborative and operational environment that contains development, orchestration, governance and analytics interfaces, whereas compute is the execution infrastructure used to actually process workloads submitted from those interfaces.",
+   "rubric": [
+    "Workspace = collaborative/operational environment with interfaces",
+    "Compute = execution infrastructure",
+    "Workloads are submitted from the workspace and processed on compute"
+   ],
+   "explain": "Interfaces vs execution: the workspace is where you work; compute is what does the work."
+  },
+  {
+   "id": "ch04-e127",
+   "type": "calc",
+   "section": "ch04-s16",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "Task D with the default widget value (`Athens`): how many rows does `display(result)` show?",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "rows",
+   "explain": "Athens appears in orders 1, 3 and 5 → **3** rows. The widget default is the second argument of `dropdown`."
+  },
+  {
+   "id": "ch04-e128",
+   "type": "tf",
+   "section": "ch04-s16",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Task E — the recommended SQL version is `SELECT * FROM dev_training.sales.orders WHERE city = '${city}';`",
+   "answer": false,
+   "explain": "Use the modern marker: `WHERE city = :city`. `${city}` is legacy/deprecated syntax."
+  },
+  {
+   "id": "ch04-e129",
+   "type": "odd",
+   "section": "ch04-s16",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "compare"
+   ],
+   "quick": false,
+   "q": "Which one doesn't belong?",
+   "options": [
+    "display(df)",
+    "dbutils.widgets.get(\"city\")",
+    "_sqldf",
+    "df.groupBy(\"city\")"
+   ],
+   "answer": 3,
+   "explain": "`display`, `dbutils` and `_sqldf` are **Databricks notebook conveniences**. `df.groupBy` is a portable **Spark API**."
+  },
+  {
+   "id": "ch04-e130",
+   "type": "order",
+   "section": "ch04-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Order your moves for `TABLE_OR_VIEW_NOT_FOUND` on `spark.table(\"prod.silver.ordres\")`.",
+   "items": [
+    "Run SHOW TABLES IN prod.silver;",
+    "Compare the spelling (ordres vs orders)",
+    "Check current_catalog() / current_schema() and SHOW SCHEMAS if the table isn't there",
+    "Rewrite with the correct fully qualified name and re-run"
+   ],
+   "explain": "SHOW → spell → scope → qualify. All of this is the naming layer — no Spark UI needed."
+  }
+ ]
+}

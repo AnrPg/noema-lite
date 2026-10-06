@@ -1,0 +1,4332 @@
+{
+ "id": "ch05",
+ "num": 5,
+ "title": "Delta Lake Internals",
+ "subtitle": "How SQL commands become files + transaction-log commits",
+ "emoji": "🔺",
+ "sourcePages": "132–179, 358–402 (internals parts)",
+ "mantra": "Every Delta write = read a snapshot, write new files (or deletion vectors), validate optimistically, and commit one atomic log version.",
+ "objectives": [
+  "You can replay a Delta log in your head and say which files form any snapshot.",
+  "You can explain how UPDATE/DELETE become file rewrites or deletion vectors.",
+  "You can use DESCRIBE HISTORY, time travel and RESTORE to investigate and repair bad data.",
+  "You can explain why time travel is not a backup and how VACUUM retention affects it.",
+  "You can write correct MERGE statements (SQL + Python), including NOT MATCHED BY SOURCE, and deduplicate CDC sources.",
+  "You can explain optimistic concurrency, isolation levels and row-level concurrency.",
+  "You can debug MERGE failures, concurrency exceptions, 'storage didn't shrink' and 'time travel broke'."
+ ],
+ "sections": [
+  {
+   "id": "ch05-s01",
+   "title": "Anatomy of a Delta Table",
+   "hook": "A Delta table is not 'a folder of Parquet files' — it is whatever the transaction log says it is.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Zoom in on the bottom of the Databricks stack. Today we open the **Delta table** box and look at files and commits."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Notebook / SQL / Job",
+      "Compute",
+      "Spark / Photon",
+      "Delta tables",
+      "Cloud storage"
+     ],
+     "caption": "The stack from the previous chapter — we now open 'Delta tables'"
+    },
+    {
+     "t": "p",
+     "text": "Goal: when you see a `MERGE`, an `UPDATE`, a concurrency error or a `VACUUM`, you can **predict** what happens to the data files and to `_delta_log`. Not just recite 'Delta = Parquet + log'."
+    },
+    {
+     "t": "p",
+     "text": "**Delta Lake** is the default table format in Databricks. It extends Parquet data files with a **versioned transaction log**, which gives ACID semantics, metadata management, batch/streaming interoperability and table versioning."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE TABLE dev_training.sales.orders (\n  order_id    BIGINT,\n  customer_id BIGINT,\n  amount      DECIMAL(10,2),\n  status      STRING\n)\nUSING DELTA;",
+     "caption": "A plain e-shop orders table"
+    },
+    {
+     "t": "diagram",
+     "text": "orders/\n├── part-00000-....parquet      <- columnar data\n├── part-00001-....parquet\n├── part-00002-....parquet\n└── _delta_log/                 <- versioned table state\n    ├── 00000000000000000000.json   (version 0)\n    ├── 00000000000000000001.json   (version 1)\n    ├── 00000000000000000002.json   (version 2)\n    └── ...",
+     "caption": "What the storage layer conceptually holds"
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "part-*.parquet",
+       "def": "The **data files**: real rows, stored column by column (Parquet)."
+      },
+      {
+       "term": "_delta_log/",
+       "def": "Folder holding the **versioned state** of the table: one JSON commit file per version."
+      },
+      {
+       "term": "Commit file",
+       "def": "A JSON file named with a **20-digit zero-padded** version number, e.g. `00000000000000000003.json`."
+      },
+      {
+       "term": "Version",
+       "def": "Each normal commit creates a new **atomic** version with a monotonically increasing number: 0, 1, 2, 3…"
+      },
+      {
+       "term": "Action",
+       "def": "One entry inside a commit (e.g. `add`, `remove`). A commit = an atomic set of actions that turns the previous snapshot into the next."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Example: `CREATE TABLE` was version 0. Now you insert two orders:"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "INSERT INTO dev_training.sales.orders VALUES\n  (1, 101, 20.00, 'NEW'),\n  (2, 102, 30.00, 'NEW');"
+    },
+    {
+     "t": "diagram",
+     "text": "part-A.parquet\norder_id | customer_id | amount | status\n---------+-------------+--------+-------\n       1 |         101 |  20.00 | NEW\n       2 |         102 |  30.00 | NEW\n\n_delta_log/00000000000000000001.json\n  version 1:  ADD part-A.parquet",
+     "caption": "One INSERT -> one new data file + one commit"
+    },
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "{\n  \"add\": {\n    \"path\": \"part-A.parquet\",\n    \"size\": 12345,\n    \"dataChange\": true\n  }\n}",
+     "caption": "Very simplified add action (real JSON is richer)"
+    },
+    {
+     "t": "p",
+     "text": "A real `add` action can also carry **partition values**, **modification time** and **file-level statistics** (record count, min/max per column). Those stats power data skipping (Chapter 6)."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "The first big idea",
+     "text": "The table is **the set of logical files that the transaction log says belong to the current snapshot** — not every `.parquet` file sitting in the folder.\n`physical storage ≠ logical current table state`"
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: storage has A.parquet, B.parquet, C.parquet but the current snapshot lists only A and C. Is B part of the table?",
+     "text": "**No.** B may be an old file still needed for time travel, or one waiting to be cleaned up by `VACUUM`. A `SELECT` on the current version never reads it."
+    },
+    {
+     "t": "diagram",
+     "text": "  Parquet files\n+ optional deletion vectors\n+ _delta_log versions (JSON commits)\n+ checkpoints\n---------------------------------\n= Delta table state",
+     "caption": "Storage-side formula to make instinctive"
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "\"Parquet already stores data, so why do I need Delta?\"",
+     "text": "Parquet defines a **columnar file format**, but it does not define **transactional table state across many files**. Delta adds a versioned transaction log, atomic commits, snapshot isolation, schema enforcement/evolution, DML (`MERGE`/`UPDATE`/`DELETE`), concurrency control, history/time travel and physical optimization features over those files."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s02",
+   "title": "Snapshots, ADD/REMOVE & Checkpoints",
+   "hook": "A snapshot is just the result of replaying the log — once you can replay it in your head, Delta stops being magic.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **snapshot** is the table as of one version. You get it by **replaying** the log actions from the start (or from a checkpoint)."
+    },
+    {
+     "t": "diagram",
+     "text": "v0:  ADD A, ADD B        -> {A, B}\nv1:  REMOVE A, ADD C     -> {B, C}\nv2:  ADD D               -> {B, C, D}",
+     "caption": "Replay the log to compute each snapshot"
+    },
+    {
+     "t": "p",
+     "text": "So `SELECT * FROM t VERSION AS OF 2` must read exactly **{B, C, D}** — the files of that snapshot, not whatever is current today."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "MVCC",
+     "text": "Delta uses **MVCC (multi-version concurrency control)**: every reader picks one consistent snapshot through the transaction log and reads only its files."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "ADD file",
+       "points": [
+        "This logical file now **participates** in the snapshot.",
+        "Written by INSERT, UPDATE, MERGE, OPTIMIZE…"
+       ]
+      },
+      {
+       "title": "REMOVE file",
+       "points": [
+        "This file **no longer participates** in the current snapshot.",
+        "Is **NOT** `rm file` — the bytes stay on storage.",
+        "Kept as a **tombstone** for a while."
+       ]
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Why keep removed files around? So that **older snapshots** and **concurrent readers** that started earlier keep working. Physical deletion happens later, typically via **VACUUM**."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Snapshot isolation for readers that started before the change",
+      "Concurrent readers still mid-query",
+      "Time travel to older versions",
+      "Recovery / history semantics — until retention expires and cleanup runs"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Library catalogue",
+     "text": "The data files are books on the shelves; the log is the **catalogue**. 'REMOVE' crosses a book out of the catalogue — the book stays on the shelf until the cleaner (VACUUM) comes."
+    },
+    {
+     "t": "p",
+     "text": "**Problem:** a table with 1,000,000 commits. If every reader replayed v0 → v1 → … → v1,000,000, query planning would be painfully slow."
+    },
+    {
+     "t": "diagram",
+     "text": "v0.json  v1.json ... v100.checkpoint  v101.json  v102.json  v103.json\n                          │              │          │          │\nsnapshot v103 = load checkpoint v100 + replay 101 + 102 + 103\n(NOT replay 0 → 103)",
+     "caption": "Checkpoints summarize the log up to a version"
+    },
+    {
+     "t": "p",
+     "text": "A **checkpoint** stores a summary of table state up to some version in **Parquet-based** structures. **Checkpoint V2** is designed for better scalability and concurrency on large / frequently updated tables."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Don't rely on checkpoint frequency",
+     "text": "The exact checkpoint interval is an **implementation/performance detail** that Databricks may adjust. Application code must never assume 'a checkpoint every exactly N commits'."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Never hand-edit `_delta_log`",
+     "text": "Do not edit `00000000000000000152.json` or delete transaction files to 'fix' a table. The log **is** the transactional protocol. Use supported commands: `UPDATE`, `DELETE`, `MERGE`, `RESTORE`, `ALTER TABLE`, `VACUUM`, `OPTIMIZE` and the supported APIs."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a file exists but a query doesn't read it",
+     "questions": [
+      "Is this file referenced by the current snapshot, or only by older versions?",
+      "Was it removed by an UPDATE/DELETE/MERGE/OPTIMIZE commit (tombstone)?",
+      "Is it just waiting for VACUUM after the retention window?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch05-s03",
+   "title": "UPDATE & DELETE: Copy-on-Write",
+   "hook": "Object storage has no 'database pages' — so how can a row change? By swapping files atomically.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Delta supports SQL DML. Logically an `UPDATE` means:"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Find matching rows",
+      "Change current table state",
+      "Commit a new Delta version"
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "UPDATE dev_training.sales.orders\nSET status = 'SHIPPED'\nWHERE order_id = 2;"
+    },
+    {
+     "t": "reveal",
+     "label": "Before you read on: why can't Delta just open the Parquet file and change the bytes of row 2?",
+     "text": "Parquet files are **immutable**, compressed, columnar blobs on object storage. Changing one value in place is not supported — and readers using the old snapshot still need the old file."
+    },
+    {
+     "t": "p",
+     "text": "The classic Delta mechanism is **copy-on-write**: write a new file containing the changed row plus the untouched rows, then swap files in one commit."
+    },
+    {
+     "t": "diagram",
+     "text": "A.parquet (old)          B.parquet (new)\n1 | 20 | NEW             1 | 20 | NEW\n2 | 30 | NEW      ==>    2 | 30 | SHIPPED\n3 | 40 | NEW             3 | 40 | NEW\n\ncommit:  REMOVE A  +  ADD B\nbefore: snapshot -> A      after: snapshot -> B",
+     "caption": "UPDATE via file rewrite (the first mental model)"
+    },
+    {
+     "t": "p",
+     "text": "A more realistic **conditional update** from the e-shop: late shipments get a 5% discount."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "UPDATE ecommerce.silver.orders\nSET\n  status = 'LATE',\n  amount = amount * 0.95\nWHERE status = 'SHIPPING'\n  AND order_ts < current_timestamp() - INTERVAL 7 DAYS;"
+    },
+    {
+     "t": "p",
+     "text": "**DELETE** is just as simple. With a predicate, or without one — which logically deletes **all rows** (the table itself stays)."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "DELETE FROM dev_training.sales.orders\nWHERE status = 'CANCELLED';\n\n-- no WHERE: logically removes every row\nDELETE FROM dev_training.sales.orders;"
+    },
+    {
+     "t": "p",
+     "text": "`DELETE` on Delta supports fairly complex predicates and subqueries (with some limitations)."
+    },
+    {
+     "t": "diagram",
+     "text": "before            after\n1 NEW             1 NEW\n2 CANCELLED  ==>  3 SHIPPED\n3 SHIPPED",
+     "caption": "State changes atomically"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Atomic = no half states",
+     "text": "No reader may ever see 'half old + half new'. A reader sees the whole old snapshot or the whole new one."
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Logical removal ≠ physical removal",
+     "text": "After `DELETE`, the old files can stay on storage (history/time travel) until `VACUUM` runs."
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "Why UPDATE/DELETE matter in a lakehouse",
+     "text": "On plain Parquet folders, mutation semantics are hard. With Delta, `UPDATE`, `DELETE` and `MERGE` are **transactional** operations — that's why we say Delta gives **database-like table semantics on object storage**."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s04",
+   "title": "Deletion Vectors",
+   "hook": "Rewriting a 1 GB file to delete one row is absurd — deletion vectors fix that.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Picture a huge Parquet file: **1 GB, 2,000,000 rows**. You want to delete **1 row**. The naïve copy-on-write model does:"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Read huge file",
+      "Rewrite almost all of it",
+      "REMOVE old file",
+      "ADD replacement file"
+     ],
+     "caption": "Very expensive for one row"
+    },
+    {
+     "t": "p",
+     "text": "Databricks has **deletion vectors (DV)**: instead of immediately rewriting the file, Delta records *which rows* are logically deleted."
+    },
+    {
+     "t": "diagram",
+     "text": "A.parquet  +  DV: \"row 72832 is logically deleted\"\n\nread A  ->  apply deletion vector  ->  don't return row 72832",
+     "caption": "Merge-on-read: the file stays, a small marker hides rows"
+    },
+    {
+     "t": "p",
+     "text": "DVs can speed up **DELETE, UPDATE and MERGE**. For an `UPDATE`, the old row version is marked deleted in the DV and the new row version is written to a small **supplemental data file**."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Without DV",
+       "points": [
+        "delete one row",
+        "→ rewrite the whole Parquet file",
+        "expensive write, simple read"
+       ]
+      },
+      {
+       "title": "With DV",
+       "points": [
+        "data file remains",
+        "+ metadata marks the row as deleted",
+        "cheap write; reads apply the DV"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "So we correct our mental model. 'UPDATE one row → always rewrite the whole file' is **no longer generally true**:"
+    },
+    {
+     "t": "diagram",
+     "text": "logical table change\n        │\nDelta chooses an implementation\n        ├── file rewrite (copy-on-write)\n        └── deletion vector + supplemental data\n(depends on table features / runtime / engine)"
+    },
+    {
+     "t": "p",
+     "text": "DVs must be **enabled on the table**. Databricks recommends them unless you have a compatibility constraint with older clients."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "ALTER TABLE dev_training.sales.orders\nSET TBLPROPERTIES (\n  'delta.enableDeletionVectors' = true\n);"
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Table features upgrade the protocol",
+     "text": "Enabling table features (like DVs) can **upgrade the Delta protocol** and make the table incompatible with older Delta clients/readers."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: a 3 GB Parquet file, you delete 2 rows. Why is a DV much cheaper than an immediate rewrite?",
+     "text": "The engine just records that those 2 rows are logically deleted. It does **not** rewrite the other millions of rows of the 3 GB file right now."
+    },
+    {
+     "t": "p",
+     "text": "Physically purging DV-soft-deleted data needs two steps: rewrite the affected files, then clean up the old ones after retention."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "REORG TABLE dev_training.sales.orders APPLY (PURGE);\n-- ...after the required retention period:\nVACUUM dev_training.sales.orders;",
+     "caption": "Physical purge of soft-deleted rows"
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "DVs also help concurrency",
+     "text": "Because a row change doesn't always need a full file rewrite, two writers touching **different rows of the same file** can avoid conflicts (row-level concurrency, section 11)."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s05",
+   "title": "DESCRIBE HISTORY & Time Travel",
+   "hook": "'The data broke around noon' — history + time travel turn that panic into a 3-query investigation.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**DESCRIBE HISTORY** is your first Delta debugging tool. It lists table versions in **reverse chronological order** with operation metadata."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "DESCRIBE HISTORY dev_training.sales.orders;"
+    },
+    {
+     "t": "table",
+     "head": [
+      "version",
+      "timestamp",
+      "operation"
+     ],
+     "rows": [
+      [
+       "8",
+       "12:30",
+       "MERGE"
+      ],
+      [
+       "7",
+       "12:10",
+       "UPDATE"
+      ],
+      [
+       "6",
+       "11:00",
+       "WRITE"
+      ],
+      [
+       "5",
+       "10:00",
+       "DELETE"
+      ]
+     ],
+     "caption": "Conceptual output (newest first)"
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "version / timestamp",
+       "def": "Which commit, and when."
+      },
+      {
+       "term": "user",
+       "def": "Who (or which identity) ran it."
+      },
+      {
+       "term": "operation",
+       "def": "WRITE, MERGE, UPDATE, DELETE, RESTORE, OPTIMIZE…"
+      },
+      {
+       "term": "operationParameters",
+       "def": "e.g. the MERGE predicate, write mode."
+      },
+      {
+       "term": "operationMetrics",
+       "def": "e.g. rows inserted/updated/deleted, files added/removed."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "History retention (the log) is **30 days by default** (`delta.logRetentionDuration`)."
+    },
+    {
+     "t": "callout",
+     "kind": "debug",
+     "title": "Don't start by guessing",
+     "text": "Someone says 'data broke around 12'. Run `DESCRIBE HISTORY` and look for: **which operation** changed the table, **who**, **when**, **what metrics** it had."
+    },
+    {
+     "t": "p",
+     "text": "**Time travel** reads an older snapshot. It never changes the current table."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT * FROM dev_training.sales.orders VERSION AS OF 5;\n\nSELECT * FROM dev_training.sales.orders\nTIMESTAMP AS OF '2026-09-15 10:00:00';"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "old_df = (\n    spark.read\n         .option(\"versionAsOf\", 121)\n         .table(\"ecommerce.silver.orders\")\n)\n# by time instead: .option(\"timestampAsOf\", \"2026-09-26 10:00:00\")\n# path-based equivalents exist where appropriate",
+     "caption": "Time travel from PySpark"
+    },
+    {
+     "t": "p",
+     "text": "Real debugging workflow — 'today `customer_id` became null':"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT * FROM prod.silver.orders VERSION AS OF 124;  -- looks right\nSELECT * FROM prod.silver.orders VERSION AS OF 125;  -- broken!\nDESCRIBE HISTORY prod.silver.orders;  -- which operation made v125?"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "DESCRIBE HISTORY",
+      "Compare good vs bad version",
+      "Find the operation that created the bad version",
+      "Fix or RESTORE"
+     ],
+     "caption": "History-driven debugging"
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when 'someone broke the data'",
+     "questions": [
+      "When was the data last known to be correct?",
+      "Which version(s) were committed between 'good' and 'bad' in DESCRIBE HISTORY?",
+      "What operation, by which user/job, created the first bad version — and what do its operationMetrics say?",
+      "If I time-travel to the previous version, is the data correct there?",
+      "Do I fix forward, or RESTORE to the last good version?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch05-s06",
+   "title": "RESTORE & Why Time Travel Is Not a Backup",
+   "hook": "RESTORE rolls the table forward to an old state — and history has an expiry date.",
+   "blocks": [
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Time travel",
+       "points": [
+        "`SELECT … VERSION AS OF n`",
+        "**Reads** an old snapshot",
+        "Current table unchanged",
+        "No new version"
+       ]
+      },
+      {
+       "title": "RESTORE",
+       "points": [
+        "`RESTORE TABLE … TO VERSION AS OF n`",
+        "Makes an old state **current again**",
+        "Creates a **new** version",
+        "Logged in history as RESTORE"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "RESTORE TABLE prod.silver.orders TO VERSION AS OF 124;\n\nRESTORE TABLE prod.silver.orders\nTO TIMESTAMP AS OF '2026-09-15 10:00:00';"
+    },
+    {
+     "t": "diagram",
+     "text": "v124  good\nv125  bad\nv126  RESTORE  (state equivalent to v124)",
+     "caption": "RESTORE does not delete history — it appends"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "History stays history",
+     "text": "Restoring v124 while current is v125 does **not** delete v125. A new transaction (v126) is committed whose state equals v124. Restore to v7 from v10 → you get **v11**."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: why is it GOOD that RESTORE appends a version instead of deleting the bad ones?",
+     "text": "You keep a full audit trail (who restored, when) and you can still inspect — or even return to — the 'bad' versions while investigating."
+    },
+    {
+     "t": "p",
+     "text": "Now the classic exam/interview trap: **time travel is not a backup**. Databricks says explicitly not to use table history as a long-term backup strategy."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Retention",
+      "Default",
+      "Controls"
+     ],
+     "rows": [
+      [
+       "Deleted data files (VACUUM threshold)",
+       "7 days",
+       "`delta.deletedFileRetentionDuration`"
+      ],
+      [
+       "Transaction-log history",
+       "30 days",
+       "`delta.logRetentionDuration`"
+      ]
+     ],
+     "caption": "Two different clocks"
+    },
+    {
+     "t": "p",
+     "text": "To time travel to version N you need **both** the log entries of N **and** the data files of N. VACUUM can delete the files even while the history entry is still visible."
+    },
+    {
+     "t": "diagram",
+     "text": "history metadata exists\n         ≠\nall old data files still exist"
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Trap: 'Delta history = backup'",
+     "text": "False. Retention and VACUUM limit history/time travel. For real backups use a proper backup/replication strategy (e.g. deep copies to another location)."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s07",
+   "title": "VACUUM: Physical Garbage Collection",
+   "hook": "DELETE makes rows disappear from queries; VACUUM makes bytes disappear from storage.",
+   "blocks": [
+    {
+     "t": "diagram",
+     "text": "v0 -> {A, B}\nv1 -> {B, C}\nv2 -> {C, D}       current snapshot = {C, D}\nphysically on storage: A  B  C  D",
+     "caption": "Why old files pile up"
+    },
+    {
+     "t": "p",
+     "text": "A and B may still be needed for older snapshots. After the retention interval, **VACUUM** removes files that are no longer referenced by any version inside the retention window."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "VACUUM dev_training.sales.orders;                  -- default 7 days\nVACUUM dev_training.sales.orders RETAIN 168 HOURS; -- 168 h = 7 days"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "VACUUM",
+       "points": [
+        "garbage collection",
+        "physically deletes old **unreferenced** files",
+        "no new data layout"
+       ]
+      },
+      {
+       "title": "NOT VACUUM's job",
+       "points": [
+        "compacting small files → that is **OPTIMIZE** (Chapter 6)",
+        "making queries faster",
+        "changing the current snapshot"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Never `VACUUM … RETAIN 0 HOURS` blindly",
+     "text": "Deleting old/uncommitted files too early can break **time travel**, **long-running readers**, **long-running writers** (whose not-yet-committed files look 'unreferenced') and **recovery**. Databricks recommends at least 7 days and has a safety check (`spark.databricks.delta.retentionDurationCheck.enabled`) that blocks dangerously short retention."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Red flag answer",
+     "text": "\"I want to save storage, so `VACUUM RETAIN 0 HOURS` every hour.\" → always wrong in an exam."
+    },
+    {
+     "t": "p",
+     "text": "**Production bug: DELETE worked, storage didn't shrink.** A 10 TB table; you delete everything before 2020. Queries no longer return those rows, yet storage stays near 10 TB."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "DELETE FROM orders WHERE event_date < DATE'2020-01-01';"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Logical delete ≠ immediate physical file deletion.",
+      "Old files are kept for snapshots/time travel.",
+      "With DVs, the **original file may still be the current physical input**, with the deleted rows merely masked.",
+      "Physical purge: `REORG TABLE … APPLY (PURGE)`, then `VACUUM` once the retention has passed."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when storage didn't shrink after DELETE",
+     "questions": [
+      "Is this actually a bug, or just logical vs physical deletion?",
+      "Are deletion vectors enabled, so rows are only masked inside still-current files?",
+      "Has VACUUM run since the delete — and has the retention window passed?",
+      "Do I need REORG TABLE … APPLY (PURGE) before VACUUM?"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Production bug: time travel stopped working.** Yesterday `SELECT * FROM orders VERSION AS OF 80` worked; today it fails."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when an old version is no longer queryable",
+     "questions": [
+      "What does DESCRIBE HISTORY show — did a VACUUM run?",
+      "With which retention?",
+      "Do the data files of v80 still exist, or only its history entry?"
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "History entry ≠ queryable version",
+     "text": "VACUUM can remove physical files required by older versions, so a visible history entry doesn't guarantee that version is still readable."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s08",
+   "title": "MERGE Fundamentals",
+   "hook": "MERGE is the most important Delta command for a data engineer: one atomic statement for insert + update + delete.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Target `prod.silver.customers` holds Maria/Athens, John/Patras, Anna/Volos. A source batch arrives: John moved to Athens, George (id 4) is new."
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "id",
+      "name",
+      "city",
+      "→ action"
+     ],
+     "rows": [
+      [
+       "target",
+       "1",
+       "Maria",
+       "Athens",
+       "untouched"
+      ],
+      [
+       "target",
+       "2",
+       "John",
+       "Patras",
+       "UPDATE to Athens"
+      ],
+      [
+       "target",
+       "3",
+       "Anna",
+       "Volos",
+       "untouched"
+      ],
+      [
+       "source",
+       "2",
+       "John",
+       "Athens",
+       "matches id 2"
+      ],
+      [
+       "source",
+       "4",
+       "George",
+       "Larisa",
+       "INSERT"
+      ]
+     ],
+     "caption": "UPDATE + INSERT = upsert"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "MERGE INTO prod.silver.customers AS target\nUSING staging.customer_updates AS source\nON target.id = source.id\nWHEN MATCHED THEN\n  UPDATE SET\n    target.name = source.name,\n    target.city = source.city\nWHEN NOT MATCHED THEN\n  INSERT (id, name, city)\n  VALUES (source.id, source.name, source.city);",
+     "caption": "Basic upsert"
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "TARGET",
+       "def": "The real table I want to change."
+      },
+      {
+       "term": "SOURCE",
+       "def": "The new data."
+      },
+      {
+       "term": "ON",
+       "def": "When a source row and a target row are considered **the same entity**."
+      }
+     ]
+    },
+    {
+     "t": "diagram",
+     "text": "              source row\n                  │\n   does target contain a matching key?\n        ┌─────────┴─────────┐\n       YES                  NO\n        │                   │\n  WHEN MATCHED        WHEN NOT MATCHED\n(UPDATE / DELETE)        (INSERT)\n\ntarget row with NO matching source row\n                  │\n      WHEN NOT MATCHED BY SOURCE\n          (UPDATE / DELETE)",
+     "caption": "MERGE as a Venn diagram: 3 cases"
+    },
+    {
+     "t": "p",
+     "text": "**WHEN NOT MATCHED BY SOURCE**: the target row exists but the source doesn't have it. Target {1,2,3,4}, source {1,2,4} → row 3. Allowed actions: **UPDATE or DELETE** (never INSERT — there's no source row to insert)."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "MERGE INTO target t\nUSING source s\nON t.id = s.id\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *\nWHEN NOT MATCHED BY SOURCE THEN DELETE;",
+     "caption": "Full sync against an authoritative snapshot"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "NOT MATCHED BY SOURCE + incremental source = disaster",
+     "text": "If the source is only **'today's changed records'** (not a full authoritative snapshot), `WHEN NOT MATCHED BY SOURCE THEN DELETE` deletes almost the **entire** target. Know the **semantics of your source**, not just the syntax."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when rows vanished after a MERGE",
+     "questions": [
+      "Does the MERGE contain WHEN NOT MATCHED BY SOURCE THEN DELETE?",
+      "Is the source a full authoritative snapshot, or only today's changes?",
+      "What do the MERGE's operationMetrics in DESCRIBE HISTORY say about deleted rows?",
+      "Which version is the last good one to RESTORE?"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "`UPDATE SET *` / `INSERT *` are handy when source and target schemas are compatible:"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "MERGE INTO target t\nUSING source s\nON t.id = s.id\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;"
+    },
+    {
+     "t": "p",
+     "text": "In production you often prefer **explicit mapping**, so you know exactly which columns change (and can add audit columns):"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "UPDATE SET\n  t.name       = s.name,\n  t.city       = s.city,\n  t.updated_at = current_timestamp()"
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "Why MERGE matters for CDC",
+     "text": "A change feed usually contains inserts, updates and deletes for existing entities. `MERGE` applies all of them to the target **atomically** in one transaction — a Delta-only DML for insert/update/delete based on matching conditions."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s09",
+   "title": "MERGE in Practice: Duplicates, Dedup, Python",
+   "hook": "The #1 MERGE failure in production is a duplicated key in the source — learn to spot and fix it in seconds.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Hands-on first. Build this and run it — then look at `DESCRIBE HISTORY` and you'll see a **MERGE** version."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE TABLE IF NOT EXISTS dev_training.silver.customers (\n  customer_id BIGINT, name STRING, city STRING, updated_at TIMESTAMP\n) USING DELTA;\n\nINSERT INTO dev_training.silver.customers VALUES\n  (1, 'Maria', 'Athens', current_timestamp()),\n  (2, 'John',  'Patras', current_timestamp()),\n  (3, 'Anna',  'Volos',  current_timestamp());\n\nCREATE OR REPLACE TABLE dev_training.staging.customer_updates AS\nSELECT * FROM VALUES\n  (2L, 'John',   'Athens'),\n  (4L, 'George', 'Larisa')\nAS t(customer_id, name, city);\n\nMERGE INTO dev_training.silver.customers AS t\nUSING dev_training.staging.customer_updates AS s\nON t.customer_id = s.customer_id\nWHEN MATCHED THEN UPDATE SET\n  t.name = s.name, t.city = s.city, t.updated_at = current_timestamp()\nWHEN NOT MATCHED THEN INSERT (customer_id, name, city, updated_at)\n  VALUES (s.customer_id, s.name, s.city, current_timestamp());\n\nDESCRIBE HISTORY dev_training.silver.customers;",
+     "caption": "Result: 1 Maria Athens · 2 John Athens · 3 Anna Volos · 4 George Larisa"
+    },
+    {
+     "t": "p",
+     "text": "**The duplicate-match problem.** Target has id=7. The source has id=7/Athens **and** id=7/Volos. Which city should win?"
+    },
+    {
+     "t": "diagram",
+     "text": "source: id=7 city=Athens seq=10\n        id=7 city=Volos  seq=11      target: id=7\nMERGE ... ON target.id = source.id WHEN MATCHED THEN UPDATE\n-> Athens? Volos?  ambiguous -> FAIL"
+    },
+    {
+     "t": "p",
+     "text": "There is no single answer, so the MERGE fails with a **multiple source rows matched** error (`DELTA_MULTIPLE_SOURCE_ROW_MATCHING_TARGET_ROW_IN_MERGE`). Databricks requires you to **preprocess the source** so no ambiguous matches exist."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Runtime detail",
+     "text": "From **DBR 16.0+**, duplicate-match detection considers the `ON` condition **and** the relevant `WHEN MATCHED` conditions. **15.4 LTS and below** used only the `ON` condition."
+    },
+    {
+     "t": "p",
+     "text": "Fix: keep only the **latest** change per key with a window function (CDC + window functions + MERGE in one real pattern)."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "WITH ranked AS (\n  SELECT *,\n         ROW_NUMBER() OVER (\n           PARTITION BY id\n           ORDER BY seq DESC\n         ) AS rn\n  FROM staging.customer_changes\n)\nSELECT * FROM ranked WHERE rn = 1;   -- then MERGE using this",
+     "caption": "SQL dedup: latest event per key"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "from pyspark.sql import functions as F\nfrom pyspark.sql.window import Window\n\nw = Window.partitionBy(\"customer_id\").orderBy(F.col(\"sequence_number\").desc())\n\nlatest = (\n    source_df\n      .withColumn(\"rn\", F.row_number().over(w))\n      .filter(F.col(\"rn\") == 1)\n      .drop(\"rn\")\n)",
+     "caption": "PySpark dedup"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Is target key unique?",
+      "Does source contain duplicates?",
+      "Which source row is latest?",
+      "Is there a sequence / updated_at?",
+      "Deduplicate",
+      "MERGE"
+     ],
+     "caption": "Debug sequence for a failing MERGE"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT order_id, COUNT(*)\nFROM ecommerce.staging.orders_updates\nGROUP BY order_id\nHAVING COUNT(*) > 1;",
+     "caption": "Find the duplicated keys"
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when MERGE says 'multiple source rows matched'",
+     "questions": [
+      "Is the target key really unique?",
+      "Does my source contain duplicate keys?",
+      "Which source row is the latest for each key?",
+      "Do I have a deterministic ordering field (event_sequence / updated_at / version)?",
+      "Did I deduplicate before the MERGE?"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Typical ordering fields: `event_sequence`, `updated_at`, `version`."
+    },
+    {
+     "t": "p",
+     "text": "**MERGE in Python** — the classic Delta API (same matching model as SQL):"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "from delta.tables import DeltaTable\n\ntarget = DeltaTable.forName(spark, \"prod.silver.customers\")\nsource = spark.table(\"staging.customer_updates\")\n\n(\n    target.alias(\"t\")\n      .merge(source.alias(\"s\"), \"t.id = s.id\")\n      .whenMatchedUpdate(set={\"name\": \"s.name\", \"city\": \"s.city\"})\n      .whenNotMatchedInsert(values={\n          \"id\": \"s.id\", \"name\": \"s.name\", \"city\": \"s.city\"})\n      .execute()\n)"
+    },
+    {
+     "t": "p",
+     "text": "Modern PySpark/Databricks also offers a DataFrame `mergeInto()` API — but master SQL `MERGE` and `DeltaTable` first: they're everywhere in existing production code."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "No `UPDATE … FROM … JOIN`",
+     "text": "Coming from PostgreSQL/SQL Server you may write `UPDATE target SET … FROM source WHERE …`. **Databricks SQL does not support this pattern.** To update from another relation, use `MERGE INTO`."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s10",
+   "title": "Optimistic Concurrency Control",
+   "hook": "Two jobs, one table, no locks — and yet no corruption. Here's the trick.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Jobs A and B start together on a table at **v50**. A wants to update customer 10, B wants to update customer 20. Both read snapshot v50."
+    },
+    {
+     "t": "p",
+     "text": "Delta does **not** necessarily take a pessimistic lock ('lock the entire table, everyone wait'). It uses **optimistic concurrency control**:"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "READ: consistent snapshot",
+      "WRITE: prepare candidate files",
+      "VALIDATE: did a conflicting commit happen?",
+      "COMMIT: new atomic version, or fail/retry"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Why 'optimistic'?** The system assumes most concurrent transactions probably won't conflict. It lets A and B both work, and only at commit time asks: *can both results coexist consistently?* Yes → commit. No → conflict."
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Google Docs vs a library book",
+     "text": "Pessimistic = only one person can borrow the book. Optimistic = everyone edits their copy; at 'save' time the system checks whether edits collide."
+    },
+    {
+     "t": "p",
+     "text": "**Atomic version creation**: current = v50. A commits first → **v51**. B (based on v50) must now check: *what changed from v50 → v51, and does it affect rows/files I read or change?*"
+    },
+    {
+     "t": "diagram",
+     "text": "v50 ──► A commits ──► v51\n │\n └─ B (read v50) validates v50→v51\n        ├─ no conflict ──► commits v52\n        └─ conflict    ──► transaction FAILS\n                           (table not corrupted)"
+    },
+    {
+     "t": "p",
+     "text": "Put together, every Delta write follows the same skeleton:"
+    },
+    {
+     "t": "diagram",
+     "text": "      CURRENT SNAPSHOT\n             │\n       READ / ANALYZE\n             │\nprepare data-file changes (files / DVs)\n             │\n   optimistic validation\n      ┌──────┴──────┐\n  conflict?        safe?\n      │              │\n    FAIL       ATOMIC COMMIT\n                     │\n                NEW VERSION\n                     │\n                NEW SNAPSHOT",
+     "caption": "The mental model for every Delta write"
+    },
+    {
+     "t": "p",
+     "text": "When you read `MERGE INTO prod.silver.customers …` don't think only 'update/insert'. See the whole pipeline:"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Source rows",
+      "Matching (ON)",
+      "Read target snapshot",
+      "Determine changed rows/files",
+      "Write new data / DVs",
+      "Optimistic conflict validation",
+      "Atomic log commit",
+      "New version",
+      "New consistent snapshot"
+     ],
+     "caption": "A MERGE, end to end"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Data engineer level",
+     "text": "Once this pipeline is instinctive, most Delta concepts stop being memorization."
+    }
+   ]
+  },
+  {
+   "id": "ch05-s11",
+   "title": "Isolation Levels & Row-Level Concurrency",
+   "hook": "Which conflicts are real and which are just 'same file, different row'?",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Delta on Databricks supports two **isolation levels** for writes:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Level",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "WriteSerializable (default)",
+       "Writes are serializable; weaker than Serializable but allows more concurrency."
+      ],
+      [
+       "Serializable",
+       "Strongest: the outcome of concurrent reads **and** writes must be explainable by a fully serial order."
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Reads** use **snapshot isolation** — every reader sees one consistent version."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "ALTER TABLE my_table\nSET TBLPROPERTIES ('delta.isolationLevel' = 'Serializable');"
+    },
+    {
+     "t": "diagram",
+     "text": "readers         -> consistent snapshots\nwriters         -> optimistic validation\ndefault writes  -> WriteSerializable",
+     "caption": "Memorize this trio (not the full conflict matrix)"
+    },
+    {
+     "t": "p",
+     "text": "**Row-level concurrency.** Older behaviour: A updates row 1 in file X, B updates row 9000 in the same file X → they could **conflict** because both touched file X."
+    },
+    {
+     "t": "p",
+     "text": "With **row-level concurrency + deletion vectors**, Databricks detects conflicts at **row** granularity, so A and B can both succeed even though their rows share a physical file."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Supported Databricks Runtime",
+      "Deletion vectors enabled",
+      "Unpartitioned tables — liquid-clustered tables also use this architecture"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Same row still conflicts",
+     "text": "Job A: `UPDATE customers SET status='A' WHERE id=10`; Job B: `… status='B' WHERE id=10`. That's a **real logical conflict**: one commits, the other fails or is serialized safely — never random corruption."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Different rows, same file",
+       "points": [
+        "Old: possible conflict (file-level)",
+        "Now: can coexist with DVs + row-level concurrency"
+       ]
+      },
+      {
+       "title": "Same row",
+       "points": [
+        "Always a real conflict",
+        "One commit wins, the other fails/retries"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch05-s12",
+   "title": "Concurrency Errors & Debugging",
+   "hook": "A concurrency exception means Delta protected you — your job is to find out from whom.",
+   "blocks": [
+    {
+     "t": "table",
+     "head": [
+      "Error",
+      "What it usually means"
+     ],
+     "rows": [
+      [
+       "DELTA_CONCURRENT_WRITE",
+       "A concurrent transaction wrote new data after your transaction read the table."
+      ],
+      [
+       "ConcurrentAppendException (DELTA_CONCURRENT_APPEND)",
+       "Another operation added files to the data/partition your operation read."
+      ],
+      [
+       "ConcurrentDeleteReadException (DELTA_CONCURRENT_DELETE_READ)",
+       "Another operation deleted/rewrote a file your operation read."
+      ],
+      [
+       "MetadataChangedException",
+       "A concurrent operation changed table metadata (e.g. `ALTER TABLE`, schema-evolving write)."
+      ],
+      [
+       "ProtocolChangedException",
+       "The table protocol changed concurrently (e.g. table feature upgrade, concurrent create/replace)."
+      ],
+      [
+       "ConcurrentTransactionException",
+       "Two writers with the same transaction identity (e.g. two streams sharing one checkpoint) collided."
+      ]
+     ],
+     "caption": "Concurrency errors you will meet"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Not corruption",
+     "text": "These errors do **not** mean 'the Delta table is corrupted'. They usually mean **the optimistic concurrency system prevented an unsafe commit**. Databricks suggests **retry logic** for legitimate transient conflicts — after **re-reading fresh state**."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Bad response",
+       "points": [
+        "'Run it again until it works.'"
+       ]
+      },
+      {
+       "title": "Engineer response",
+       "points": [
+        "Who else wrote?",
+        "What did both read?",
+        "Can I narrow the scope?",
+        "Is a schema change running?",
+        "Then decide on retry."
+       ]
+      }
+     ]
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a MERGE fails with DELTA_CONCURRENT_WRITE",
+     "questions": [
+      "What other writer touched this table at the same time (DESCRIBE HISTORY)?",
+      "What rows/files/partitions did both operations read?",
+      "Are my predicates too broad?",
+      "Can I narrow the MERGE condition (e.g. add a date bound)?",
+      "Is a schema ALTER happening concurrently?",
+      "Are deletion vectors / row-level concurrency available on this table?",
+      "Should the application retry after re-reading fresh state?"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "`MERGE … ON t.id = s.id` on a huge table can have a **broad read scope**. If it is semantically correct, add a physical/time bound:"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "MERGE INTO prod.silver.orders t\nUSING daily_updates s\nON t.id = s.id\n   AND t.event_date = DATE'2026-09-16'\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;",
+     "caption": "Narrower ON = smaller scan AND smaller conflict domain"
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Only if semantically correct",
+     "text": "Adding `t.event_date = …` is valid only if matching target rows really live on that date. Otherwise you'd insert duplicates for rows from other dates."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Schema changes are metadata changes",
+     "text": "An `ALTER TABLE` at 12:00 while a pipeline writes can fail that writer with `MetadataChangedException` — expected semantics, not a bug. Full story in Chapter 6."
+    },
+    {
+     "t": "p",
+     "text": "**What's next:** Unity Catalog in depth — `catalog.schema.object`, managed vs external tables, volumes, external locations, grants, and real `PERMISSION_DENIED` debugging."
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch05-d01",
+   "title": "MERGE fails: multiple source rows matched",
+   "section": "ch05-s09",
+   "symptom": "MERGE aborts with `DELTA_MULTIPLE_SOURCE_ROW_MATCHING_TARGET_ROW_IN_MERGE` (\"multiple source rows matched target row\").",
+   "askYourself": [
+    "Is the target key really unique?",
+    "Does my source contain duplicate keys (GROUP BY … HAVING COUNT(*) > 1)?",
+    "Which source row is the latest for each key?",
+    "Do I have a deterministic ordering field (event_sequence / updated_at / version)?",
+    "Did I deduplicate before the MERGE, and does my ON (+ WHEN MATCHED conditions on DBR 16+) still allow multiple matches?"
+   ],
+   "steps": [
+    {
+     "do": "Count duplicate keys in the source",
+     "why": "Confirms the ambiguity and shows which keys",
+     "code": "SELECT order_id, COUNT(*)\nFROM ecommerce.staging.orders_updates\nGROUP BY order_id\nHAVING COUNT(*) > 1;"
+    },
+    {
+     "do": "Pick the ordering field",
+     "why": "Makes the choice deterministic and retry-safe"
+    },
+    {
+     "do": "Deduplicate with ROW_NUMBER",
+     "why": "Keep exactly one latest row per key",
+     "code": "ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY event_sequence DESC) AS rn  -- keep rn = 1"
+    },
+    {
+     "do": "Re-run MERGE using the deduplicated source",
+     "why": "No ambiguity → MERGE succeeds"
+    }
+   ],
+   "rootCauses": [
+    "CDC feed delivers several events per key in one batch",
+    "Source join fan-out created duplicates",
+    "Target key not unique"
+   ],
+   "fix": "Deduplicate the source by business key with a deterministic ordering field (ROW_NUMBER … rn = 1), then MERGE.",
+   "mnemonic": "U-D-L-O-D-M: Unique? Dupes? Latest? Ordering field? Dedup! Merge!"
+  },
+  {
+   "id": "ch05-d02",
+   "title": "Someone broke the data",
+   "section": "ch05-s05",
+   "symptom": "Data was correct at 09:00, wrong at 11:00 (e.g. `customer_id` suddenly NULL); corruption shows up in some version vN.",
+   "askYourself": [
+    "When was the data last known to be correct?",
+    "Which versions were committed between good and bad (DESCRIBE HISTORY)?",
+    "If I time-travel to the previous version, is it correct?",
+    "Which operation, user/job and operationMetrics created the first bad version?",
+    "Should I fix forward, or RESTORE to the last good version — and are its files still there?"
+   ],
+   "steps": [
+    {
+     "do": "DESCRIBE HISTORY",
+     "why": "Lists versions, operations, users, metrics newest first",
+     "code": "DESCRIBE HISTORY prod.silver.orders;"
+    },
+    {
+     "do": "Compare good vs bad with time travel",
+     "why": "Pinpoints the exact version that broke",
+     "code": "SELECT * FROM prod.silver.orders VERSION AS OF 124;\nSELECT * FROM prod.silver.orders VERSION AS OF 125;"
+    },
+    {
+     "do": "Inspect the guilty operation",
+     "why": "Root cause: which job/user, which predicate"
+    },
+    {
+     "do": "Repair",
+     "why": "RESTORE creates a new version equal to the good one",
+     "code": "RESTORE TABLE prod.silver.orders TO VERSION AS OF 124;"
+    }
+   ],
+   "rootCauses": [
+    "Buggy job/UPDATE/MERGE",
+    "Wrong source data merged",
+    "Manual change by a user"
+   ],
+   "fix": "Fix the job, then fix forward or `RESTORE TABLE … TO VERSION AS OF <good>` (new version, history kept).",
+   "mnemonic": "H-C-B-R: History, Compare, Blame, Restore"
+  },
+  {
+   "id": "ch05-d03",
+   "title": "DELETE worked but storage didn't shrink",
+   "section": "ch05-s07",
+   "symptom": "`DELETE` succeeded, queries don't return the rows, but cloud storage usage is unchanged (e.g. still ~10 TB).",
+   "askYourself": [
+    "Is this really a bug, or logical vs physical deletion?",
+    "Are old files simply retained for snapshots/time travel?",
+    "Are deletion vectors enabled, so rows are only masked inside still-current files?",
+    "Has VACUUM run since, and has the retention window passed?",
+    "Do I need REORG TABLE … APPLY (PURGE) first?"
+   ],
+   "steps": [
+    {
+     "do": "Check history and table properties",
+     "why": "See DELETE/VACUUM operations and whether DVs are on",
+     "code": "DESCRIBE HISTORY orders;"
+    },
+    {
+     "do": "Purge DV-masked rows",
+     "why": "Rewrites files without soft-deleted rows",
+     "code": "REORG TABLE orders APPLY (PURGE);"
+    },
+    {
+     "do": "VACUUM after retention",
+     "why": "Physically removes unreferenced old files",
+     "code": "VACUUM orders;"
+    }
+   ],
+   "rootCauses": [
+    "Logical delete ≠ physical deletion",
+    "Files retained for time travel",
+    "DV soft-deletes keep original files current"
+   ],
+   "fix": "REORG TABLE … APPLY (PURGE), then VACUUM once retention has passed. Never shortcut with RETAIN 0 HOURS.",
+   "mnemonic": "Logical ≠ Physical: PURGE then VACUUM"
+  },
+  {
+   "id": "ch05-d04",
+   "title": "Time travel to an old version stopped working",
+   "section": "ch05-s07",
+   "symptom": "Yesterday `SELECT * FROM orders VERSION AS OF 80` worked; today it errors (files not found).",
+   "askYourself": [
+    "What does DESCRIBE HISTORY show — did a VACUUM run?",
+    "With which retention?",
+    "Do the data files of v80 still exist, or only its history entry?",
+    "Is v80 still inside the 30-day log retention?"
+   ],
+   "steps": [
+    {
+     "do": "DESCRIBE HISTORY orders",
+     "why": "Find a VACUUM operation and its parameters",
+     "code": "DESCRIBE HISTORY orders;"
+    },
+    {
+     "do": "Compare v80's age with retention settings",
+     "why": "7-day file retention vs 30-day log retention"
+    }
+   ],
+   "rootCauses": [
+    "VACUUM removed files needed by v80",
+    "Version older than retention",
+    "Short custom retention"
+   ],
+   "fix": "Accept that time travel isn't a backup; keep ≥7 days retention and use a real backup strategy for long-term recovery.",
+   "mnemonic": "History entry ≠ files exist"
+  },
+  {
+   "id": "ch05-d05",
+   "title": "Concurrent write conflict (DELTA_CONCURRENT_WRITE)",
+   "section": "ch05-s12",
+   "symptom": "MERGE/UPDATE fails with `DELTA_CONCURRENT_WRITE`, `ConcurrentAppendException`, `ConcurrentDeleteReadException`, `MetadataChangedException`…",
+   "askYourself": [
+    "What other writer touched this table at the same time?",
+    "What rows/files/partitions did both operations read?",
+    "Are my predicates too broad?",
+    "Can I narrow the MERGE condition (e.g. a date bound)?",
+    "Is a schema ALTER happening concurrently?",
+    "Are deletion vectors / row-level concurrency available?",
+    "Should the application retry after re-reading fresh state?"
+   ],
+   "steps": [
+    {
+     "do": "DESCRIBE HISTORY around the failure time",
+     "why": "Identify the competing transaction",
+     "code": "DESCRIBE HISTORY prod.silver.orders;"
+    },
+    {
+     "do": "Narrow the read scope if semantically correct",
+     "why": "Smaller scan, smaller conflict domain",
+     "code": "ON t.id = s.id AND t.event_date = DATE'2026-09-16'"
+    },
+    {
+     "do": "Enable DVs / row-level concurrency where possible",
+     "why": "Different-row changes stop conflicting",
+     "code": "ALTER TABLE t SET TBLPROPERTIES ('delta.enableDeletionVectors' = true);"
+    },
+    {
+     "do": "Add retry-on-fresh-state for transient conflicts",
+     "why": "Legitimate conflicts resolve on retry"
+    }
+   ],
+   "rootCauses": [
+    "Two jobs writing overlapping data",
+    "Over-broad MERGE predicates",
+    "Concurrent schema change",
+    "File-level conflicts without DVs"
+   ],
+   "fix": "Coordinate writers, narrow scopes, enable DV/RLC, retry after re-reading — never blind 'run until it works'.",
+   "mnemonic": "Who-What-Wide-Schema-Rows-Retry"
+  },
+  {
+   "id": "ch05-d06",
+   "title": "Rows vanished after a MERGE",
+   "section": "ch05-s08",
+   "symptom": "After a routine MERGE, most of the target table is gone; DESCRIBE HISTORY shows a MERGE with huge `numTargetRowsDeleted`.",
+   "askYourself": [
+    "Does the MERGE have WHEN NOT MATCHED BY SOURCE THEN DELETE?",
+    "Is the source a full authoritative snapshot or just today's changes?",
+    "What do the MERGE's operationMetrics show (rows deleted)?",
+    "Which version was the last good one to RESTORE?"
+   ],
+   "steps": [
+    {
+     "do": "DESCRIBE HISTORY",
+     "why": "Find the MERGE and its delete metrics",
+     "code": "DESCRIBE HISTORY prod.silver.customers;"
+    },
+    {
+     "do": "RESTORE the last good version",
+     "why": "New version equal to pre-MERGE state",
+     "code": "RESTORE TABLE prod.silver.customers TO VERSION AS OF 41;"
+    },
+    {
+     "do": "Remove/condition the clause",
+     "why": "Only use NOT MATCHED BY SOURCE with authoritative snapshots"
+    }
+   ],
+   "rootCauses": [
+    "NOT MATCHED BY SOURCE DELETE with an incremental source"
+   ],
+   "fix": "Restore, then drop the clause (or bound it with a condition) unless the source is a complete snapshot.",
+   "mnemonic": "Absent ≠ deleted"
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "Physical files ≠ table",
+   "text": "Counting/reading .parquet files in the folder includes removed files.",
+   "fix": "Trust the snapshot in `_delta_log`; query through the table."
+  },
+  {
+   "title": "REMOVE is not rm",
+   "text": "A remove action only drops the file from the snapshot.",
+   "fix": "Expect files to remain until VACUUM after retention."
+  },
+  {
+   "title": "Relying on checkpoint frequency",
+   "text": "Checkpoint interval is an implementation detail.",
+   "fix": "Never code against 'every N commits'."
+  },
+  {
+   "title": "Hand-editing _delta_log",
+   "text": "Editing/deleting commit JSONs breaks the protocol.",
+   "fix": "Use RESTORE, UPDATE, DELETE, MERGE, ALTER, VACUUM, OPTIMIZE."
+  },
+  {
+   "title": "'UPDATE always rewrites the whole file'",
+   "text": "Outdated with deletion vectors.",
+   "fix": "Delta chooses rewrite or DV + supplemental data."
+  },
+  {
+   "title": "Table features break old clients",
+   "text": "Enabling DVs etc. can upgrade the protocol.",
+   "fix": "Check reader compatibility before enabling."
+  },
+  {
+   "title": "Time travel ≠ backup",
+   "text": "7-day file retention and 30-day log retention limit history.",
+   "fix": "Use a real backup strategy."
+  },
+  {
+   "title": "RESTORE deletes history?",
+   "text": "No — it appends a new version.",
+   "fix": "Expect vN+1 equal to the restored state."
+  },
+  {
+   "title": "VACUUM ≠ OPTIMIZE",
+   "text": "VACUUM deletes old unreferenced files; it doesn't compact.",
+   "fix": "Use OPTIMIZE for layout, VACUUM for cleanup."
+  },
+  {
+   "title": "VACUUM RETAIN 0 HOURS",
+   "text": "Breaks time travel, long-running readers/writers, recovery.",
+   "fix": "Keep ≥ 7 days and the safety check enabled."
+  },
+  {
+   "title": "Storage didn't shrink after DELETE",
+   "text": "Logical delete ≠ physical deletion (DVs mask rows).",
+   "fix": "REORG … APPLY (PURGE) then VACUUM."
+  },
+  {
+   "title": "NOT MATCHED BY SOURCE DELETE on incremental source",
+   "text": "Deletes everything not in today's batch.",
+   "fix": "Only with authoritative full snapshots."
+  },
+  {
+   "title": "Duplicate keys in MERGE source",
+   "text": "Ambiguous match → MERGE fails.",
+   "fix": "Dedup with ROW_NUMBER by ordering field."
+  },
+  {
+   "title": "UPDATE … FROM … JOIN",
+   "text": "Not supported in Databricks SQL.",
+   "fix": "Use MERGE INTO."
+  },
+  {
+   "title": "'Run it again until it works'",
+   "text": "Hides real concurrency causes.",
+   "fix": "Investigate writers/scope; retry only after fresh read."
+  },
+  {
+   "title": "Concurrency error = corruption?",
+   "text": "No — it's protection against an unsafe commit.",
+   "fix": "Find the competing writer."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "Delta = ?",
+   "a": "Parquet data files + versioned transaction log (`_delta_log`) → ACID table semantics.",
+   "section": "ch05-s01"
+  },
+  {
+   "q": "Commit file name format?",
+   "a": "20-digit zero-padded version + .json, e.g. `00000000000000000003.json`.",
+   "section": "ch05-s01"
+  },
+  {
+   "q": "What is the 'table' in Delta?",
+   "a": "The set of logical files the log says belong to the current snapshot.",
+   "section": "ch05-s01"
+  },
+  {
+   "q": "50 physical files, snapshot lists 37 → current files?",
+   "a": "37.",
+   "section": "ch05-s01"
+  },
+  {
+   "q": "What can an `add` action contain?",
+   "a": "path, size, dataChange, partition values, modification time, file stats (numRecords, min/max).",
+   "section": "ch05-s01"
+  },
+  {
+   "q": "What is a snapshot?",
+   "a": "Table state at a version = replay of log actions (from a checkpoint).",
+   "section": "ch05-s02"
+  },
+  {
+   "q": "MVCC in Delta?",
+   "a": "Readers pick one consistent snapshot via the log; writers create new versions.",
+   "section": "ch05-s02"
+  },
+  {
+   "q": "Does REMOVE delete the file?",
+   "a": "No — tombstone; physical deletion later via VACUUM.",
+   "section": "ch05-s02"
+  },
+  {
+   "q": "Checkpoint purpose?",
+   "a": "Parquet-based summary of state so readers don't replay from v0.",
+   "section": "ch05-s02"
+  },
+  {
+   "q": "Checkpoint V2?",
+   "a": "Newer checkpoint design for scalability/concurrency on large, frequently updated tables.",
+   "section": "ch05-s02"
+  },
+  {
+   "q": "Classic UPDATE mechanism?",
+   "a": "Copy-on-write: write new file B, commit REMOVE A + ADD B.",
+   "section": "ch05-s03"
+  },
+  {
+   "q": "DELETE without WHERE?",
+   "a": "Logically deletes all rows; table object stays.",
+   "section": "ch05-s03"
+  },
+  {
+   "q": "Deletion vector?",
+   "a": "Metadata marking specific rows of a file as deleted, avoiding immediate rewrite.",
+   "section": "ch05-s04"
+  },
+  {
+   "q": "Which ops do DVs speed up?",
+   "a": "DELETE, UPDATE, MERGE.",
+   "section": "ch05-s04"
+  },
+  {
+   "q": "Enable DVs?",
+   "a": "`ALTER TABLE t SET TBLPROPERTIES ('delta.enableDeletionVectors' = true)`.",
+   "section": "ch05-s04"
+  },
+  {
+   "q": "Physically purge DV-deleted rows?",
+   "a": "`REORG TABLE t APPLY (PURGE)` then `VACUUM` after retention.",
+   "section": "ch05-s04"
+  },
+  {
+   "q": "DESCRIBE HISTORY order & content?",
+   "a": "Newest first: version, timestamp, user, operation, operationParameters, operationMetrics.",
+   "section": "ch05-s05"
+  },
+  {
+   "q": "Time travel SQL?",
+   "a": "`SELECT … FROM t VERSION AS OF n` / `TIMESTAMP AS OF '…'`.",
+   "section": "ch05-s05"
+  },
+  {
+   "q": "Time travel PySpark?",
+   "a": "`spark.read.option('versionAsOf', n).table('t')` (or timestampAsOf).",
+   "section": "ch05-s05"
+  },
+  {
+   "q": "Default log retention?",
+   "a": "30 days (`delta.logRetentionDuration`).",
+   "section": "ch05-s05"
+  },
+  {
+   "q": "RESTORE vs time travel?",
+   "a": "Time travel reads old snapshot; RESTORE makes it current via a NEW version.",
+   "section": "ch05-s06"
+  },
+  {
+   "q": "Current v10, RESTORE to v7 → ?",
+   "a": "v11 (state = v7); v8–v10 remain in history.",
+   "section": "ch05-s06"
+  },
+  {
+   "q": "Is time travel a backup?",
+   "a": "No — finite retention + VACUUM.",
+   "section": "ch05-s06"
+  },
+  {
+   "q": "VACUUM default retention?",
+   "a": "7 days = RETAIN 168 HOURS.",
+   "section": "ch05-s07"
+  },
+  {
+   "q": "VACUUM does what?",
+   "a": "Physically deletes old unreferenced files beyond retention (garbage collection).",
+   "section": "ch05-s07"
+  },
+  {
+   "q": "Why not RETAIN 0 HOURS?",
+   "a": "Breaks time travel, long-running readers/writers, recovery; safety check blocks it.",
+   "section": "ch05-s07"
+  },
+  {
+   "q": "DELETE done, storage same — why?",
+   "a": "Logical ≠ physical; files kept for history; DVs mask rows in current files.",
+   "section": "ch05-s07"
+  },
+  {
+   "q": "WHEN NOT MATCHED BY SOURCE allows?",
+   "a": "UPDATE or DELETE (not INSERT).",
+   "section": "ch05-s08"
+  },
+  {
+   "q": "Danger of NOT MATCHED BY SOURCE DELETE?",
+   "a": "With an incremental source it deletes legit rows missing from the batch.",
+   "section": "ch05-s08"
+  },
+  {
+   "q": "MERGE's three cases?",
+   "a": "MATCHED (both), NOT MATCHED (source only), NOT MATCHED BY SOURCE (target only).",
+   "section": "ch05-s08"
+  },
+  {
+   "q": "MERGE error with duplicate source keys?",
+   "a": "Multiple source rows matched the same target row → ambiguous → fail.",
+   "section": "ch05-s09"
+  },
+  {
+   "q": "Dedup pattern?",
+   "a": "ROW_NUMBER() OVER (PARTITION BY key ORDER BY seq DESC), keep rn = 1.",
+   "section": "ch05-s09"
+  },
+  {
+   "q": "DBR 16.0+ duplicate-match rule?",
+   "a": "Considers ON + relevant WHEN MATCHED conditions (≤15.4 LTS: ON only).",
+   "section": "ch05-s09"
+  },
+  {
+   "q": "UPDATE … FROM … JOIN on Databricks?",
+   "a": "Not supported → use MERGE INTO.",
+   "section": "ch05-s09"
+  },
+  {
+   "q": "Python MERGE entry point?",
+   "a": "`DeltaTable.forName(spark, name).alias('t').merge(src.alias('s'), cond)…execute()`.",
+   "section": "ch05-s09"
+  },
+  {
+   "q": "OCC phases?",
+   "a": "READ → WRITE → VALIDATE → COMMIT.",
+   "section": "ch05-s10"
+  },
+  {
+   "q": "Why 'optimistic'?",
+   "a": "Assumes no conflict; checks only at commit.",
+   "section": "ch05-s10"
+  },
+  {
+   "q": "Default write isolation?",
+   "a": "WriteSerializable (reads: snapshot isolation).",
+   "section": "ch05-s11"
+  },
+  {
+   "q": "Different rows, same file — conflict?",
+   "a": "Not necessarily: DVs + row-level concurrency let them coexist.",
+   "section": "ch05-s11"
+  },
+  {
+   "q": "Same row by two writers?",
+   "a": "Real conflict: one commits, other fails/serializes.",
+   "section": "ch05-s11"
+  },
+  {
+   "q": "MetadataChangedException cause?",
+   "a": "Concurrent metadata change: ALTER TABLE or schema-evolving write.",
+   "section": "ch05-s12"
+  },
+  {
+   "q": "Concurrency exception = corrupted table?",
+   "a": "No — OCC prevented an unsafe commit.",
+   "section": "ch05-s12"
+  },
+  {
+   "q": "How to shrink conflict domain of a MERGE?",
+   "a": "Narrow ON with a semantically correct bound (e.g. event_date).",
+   "section": "ch05-s12"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch05-e001",
+   "type": "tf",
+   "section": "ch05-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A Delta table consists of every `.parquet` file that physically exists in the table's folder.",
+   "answer": false,
+   "explain": "The table is the set of **logical** files that the transaction log references in the current snapshot. Old files (removed by UPDATE/DELETE/OPTIMIZE) can still sit in the folder for time travel or until VACUUM — they are not part of the current table."
+  },
+  {
+   "id": "ch05-e002",
+   "type": "calc",
+   "section": "ch05-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A Delta table folder physically holds **50** Parquet files. The current snapshot in `_delta_log` references **37** of them. How many files are logically part of the current table?",
+   "answer": 37,
+   "tolerance": 0,
+   "unit": "files",
+   "explain": "**37.** Physical existence does not imply current logical membership. The other 13 are typically tombstoned files kept for older snapshots/time travel or waiting for VACUUM."
+  },
+  {
+   "id": "ch05-e003",
+   "type": "mcq",
+   "section": "ch05-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Which filename is a valid Delta commit file for **version 3**?",
+   "options": [
+    "`3.json`",
+    "`00000000000000000003.json`",
+    "`v3.parquet`",
+    "`commit-0003.log`"
+   ],
+   "answer": 1,
+   "why": [
+    "Not zero-padded.",
+    "Correct: 20 digits, zero-padded, JSON.",
+    "Commits are JSON; Parquet is used for data files and checkpoints.",
+    "Invented naming."
+   ],
+   "explain": "Commit files use **20-digit zero-padded** version numbers with a `.json` extension. Zero padding keeps lexical order = version order when listing the folder."
+  },
+  {
+   "id": "ch05-e004",
+   "type": "mcq",
+   "section": "ch05-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Storage contains `A.parquet`, `B.parquet`, `C.parquet`; the current snapshot lists only A and C. What is the **most likely** reason B still exists?",
+   "options": [
+    "B is corrupted and Delta skips it",
+    "B is an old file kept for time travel / not yet removed by VACUUM",
+    "B is a checkpoint file",
+    "B is a staging file Spark forgot to delete, so the table is broken"
+   ],
+   "answer": 1,
+   "why": [
+    "Delta doesn't skip files because of corruption; it reads exactly what the snapshot lists.",
+    "Correct.",
+    "Checkpoints live inside `_delta_log`, not as data files.",
+    "Unreferenced files are expected; the table is fine."
+   ],
+   "explain": "B was probably removed logically by an earlier commit (REMOVE action) and is retained for older snapshots until VACUUM cleans it up after the retention window. This is normal, not corruption."
+  },
+  {
+   "id": "ch05-e005",
+   "type": "mcq",
+   "section": "ch05-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which information can a real `add` action in the transaction log carry? (choose all)",
+   "options": [
+    "File path and size",
+    "`dataChange` flag",
+    "Partition values and modification time",
+    "File-level statistics (record count, min/max)",
+    "The full row data of the file"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "multi": true,
+   "explain": "An `add` action describes a file: path, size, `dataChange`, partition values, modification time and per-file statistics. The rows themselves live only in the Parquet file — the log stores metadata, not data."
+  },
+  {
+   "id": "ch05-e006",
+   "type": "bucket",
+   "section": "ch05-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Where does each thing live?",
+   "buckets": [
+    "Parquet data files",
+    "_delta_log/"
+   ],
+   "items": [
+    {
+     "text": "Actual column values of orders",
+     "bucket": 0
+    },
+    {
+     "text": "JSON commit per version",
+     "bucket": 1
+    },
+    {
+     "text": "Columnar compressed rows",
+     "bucket": 0
+    },
+    {
+     "text": "ADD / REMOVE actions",
+     "bucket": 1
+    },
+    {
+     "text": "Checkpoint summaries of table state",
+     "bucket": 1
+    },
+    {
+     "text": "Table version history",
+     "bucket": 1
+    }
+   ],
+   "explain": "Parquet files hold the **data**; `_delta_log` holds the **versioned state**: commit JSONs with actions, plus checkpoints. Checkpoints are Parquet-based but they live in the log folder and summarize metadata, not business rows."
+  },
+  {
+   "id": "ch05-e007",
+   "type": "cloze",
+   "section": "ch05-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the storage-side formula of a Delta table.",
+   "text": "Parquet files + optional [[deletion vectors|DVs|deletion vector]] + _delta_log [[versions|commits]] + [[checkpoints|checkpoint]] = Delta table state",
+   "bank": [
+    "indexes",
+    "locks",
+    "partitions"
+   ],
+   "explain": "The table state is assembled from the data files, any deletion vectors that mask rows, the versioned commits and the checkpoints that summarize them. If you can rebuild this in your head, MERGE/VACUUM/concurrency become predictable."
+  },
+  {
+   "id": "ch05-e008",
+   "type": "free",
+   "section": "ch05-s01",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Interview: **\"Parquet already stores data, so why do I need Delta?\"** Answer in 3–4 sentences.",
+   "model": "Parquet defines how columnar data is stored in individual files, but it doesn't define transactional table state across many files. Delta adds a versioned transaction log on top of those files, giving atomic (ACID) commits and snapshot isolation. That enables DML such as MERGE/UPDATE/DELETE, schema enforcement and evolution, concurrency control, history and time travel, plus physical optimization features like OPTIMIZE, data skipping and clustering.",
+   "rubric": [
+    "Parquet = file format, not table state across files",
+    "Versioned transaction log",
+    "ACID / atomic commits + snapshot isolation",
+    "DML: MERGE/UPDATE/DELETE",
+    "Schema enforcement/evolution, time travel, concurrency control, optimization"
+   ],
+   "explain": "Strong answers contrast **file format** vs **table semantics**. Mentioning only 'Delta is faster' misses the point: the core value is the transaction log and everything it enables."
+  },
+  {
+   "id": "ch05-e009",
+   "type": "mcq",
+   "section": "ch05-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "calc"
+   ],
+   "quick": true,
+   "q": "Replay this log. Which files form the snapshot of **version 2**?",
+   "code": "v0: ADD A, ADD B\nv1: REMOVE A, ADD C\nv2: ADD D",
+   "options": [
+    "{A, B, C, D}",
+    "{B, C, D}",
+    "{C, D}",
+    "{A, C, D}"
+   ],
+   "answer": 1,
+   "why": [
+    "Includes A, which was removed in v1.",
+    "Correct replay.",
+    "B was never removed.",
+    "A was removed; B was not."
+   ],
+   "explain": "v0 → {A, B}; v1 removes A and adds C → {B, C}; v2 adds D → {B, C, D}. A is still on storage but not in the snapshot."
+  },
+  {
+   "id": "ch05-e010",
+   "type": "tf",
+   "section": "ch05-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A `remove` action in the Delta log means the file is immediately deleted from cloud storage (`rm`).",
+   "answer": false,
+   "explain": "`remove` only means the file **no longer participates** in the snapshot. It is kept as a tombstone so older snapshots and concurrent readers still work; physical deletion happens later via VACUUM."
+  },
+  {
+   "id": "ch05-e011",
+   "type": "order",
+   "section": "ch05-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the steps a reader uses to build the snapshot of **v103** when a checkpoint exists at v100.",
+   "items": [
+    "Load checkpoint v100",
+    "Replay v101.json",
+    "Replay v102.json",
+    "Replay v103.json"
+   ],
+   "explain": "Readers start from the latest checkpoint at or before the target version and replay only the JSON commits after it. Replaying from v0 would make planning expensive on tables with thousands of commits."
+  },
+  {
+   "id": "ch05-e012",
+   "type": "mcq",
+   "section": "ch05-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why does Delta keep old (removed) data files around for a while? (choose all)",
+   "options": [
+    "Snapshot isolation for readers that started earlier",
+    "Concurrent readers mid-query",
+    "Time travel to older versions",
+    "To make current queries faster",
+    "Recovery/history semantics until retention + cleanup"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "multi": true,
+   "explain": "Old files serve older snapshots: in-flight readers, time travel and recovery. They do **not** speed up current queries — current queries never read them."
+  },
+  {
+   "id": "ch05-e013",
+   "type": "mcq",
+   "section": "ch05-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "What does a Delta **checkpoint** do?",
+   "options": [
+    "Physically deletes old files",
+    "Stores a summarized table state so readers don't replay the log from version 0",
+    "Locks the table during writes",
+    "Compacts small data files"
+   ],
+   "answer": 1,
+   "why": [
+    "That's VACUUM.",
+    "Correct.",
+    "Delta uses optimistic concurrency, no table lock.",
+    "That's OPTIMIZE."
+   ],
+   "explain": "A checkpoint summarizes the log up to a version in Parquet-based structures. Deleting files is VACUUM; compaction is OPTIMIZE; Delta doesn't lock the table for writes."
+  },
+  {
+   "id": "ch05-e014",
+   "type": "tf",
+   "section": "ch05-s02",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Your application can safely assume Delta writes a checkpoint every exactly N commits.",
+   "answer": false,
+   "explain": "Checkpoint frequency is an implementation/performance detail and Databricks may adjust it (Checkpoint V2 even changes the structure). Code that depends on a fixed interval is fragile."
+  },
+  {
+   "id": "ch05-e015",
+   "type": "spotbug",
+   "section": "ch05-s02",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "A runbook to 'undo' a bad commit. Which line is the dangerous one?",
+   "lines": [
+    "-- bad data appeared in version 152",
+    "DESCRIBE HISTORY prod.silver.orders;",
+    "%sh rm /mnt/lake/orders/_delta_log/00000000000000000152.json",
+    "SELECT * FROM prod.silver.orders VERSION AS OF 151;"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "RESTORE TABLE prod.silver.orders TO VERSION AS OF 151;",
+   "explain": "Never edit or delete files in `_delta_log` — the log is the transactional protocol and hand edits can corrupt the table for every reader/writer. Use the supported `RESTORE` operation, which appends a new version equivalent to v151."
+  },
+  {
+   "id": "ch05-e016",
+   "type": "odd",
+   "section": "ch05-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Which is NOT a supported way to change a Delta table's state?",
+   "options": [
+    "`RESTORE TABLE … TO VERSION AS OF 5`",
+    "`VACUUM t`",
+    "Editing `00000000000000000152.json` by hand",
+    "`ALTER TABLE t SET TBLPROPERTIES (…)`"
+   ],
+   "answer": 2,
+   "explain": "UPDATE, DELETE, MERGE, RESTORE, ALTER TABLE, VACUUM, OPTIMIZE and supported APIs are the legit tools. Hand-editing the log bypasses the protocol."
+  },
+  {
+   "id": "ch05-e017",
+   "type": "tf",
+   "section": "ch05-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A Delta `UPDATE` opens the existing Parquet file and edits the changed bytes in place.",
+   "answer": false,
+   "explain": "Parquet files are immutable. Delta writes new data (rewritten file or supplemental file + DV) and commits the swap atomically. Old snapshots still point at the untouched old file."
+  },
+  {
+   "id": "ch05-e018",
+   "type": "mcq",
+   "section": "ch05-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "File A holds 3 rows; you update row 2 using classic copy-on-write. Which commit is written?",
+   "options": [
+    "`UPDATE A row 2`",
+    "`REMOVE A` + `ADD B` (B = all 3 rows, row 2 changed)",
+    "`ADD B` (B = only row 2)",
+    "`REMOVE A` only"
+   ],
+   "answer": 1,
+   "why": [
+    "There's no in-place row action in the log.",
+    "Correct.",
+    "Old row 2 would still be visible in A → duplicate.",
+    "Rows 1 and 3 would vanish."
+   ],
+   "explain": "Copy-on-write rewrites the file: B contains rows 1 and 3 unchanged plus the new row 2, and the commit atomically removes A and adds B. Adding only row 2 would leave the old row 2 visible in A."
+  },
+  {
+   "id": "ch05-e019",
+   "type": "write",
+   "section": "ch05-s03",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write the conditional update: orders in status `SHIPPING` older than 7 days become `LATE` and get a 5% discount on `amount`. Table: `ecommerce.silver.orders` (cols `status`, `amount`, `order_ts`).",
+   "solution": "UPDATE ecommerce.silver.orders\nSET status = 'LATE',\n    amount = amount * 0.95\nWHERE status = 'SHIPPING'\n  AND order_ts < current_timestamp() - INTERVAL 7 DAYS;",
+   "keywords": [
+    "update ecommerce.silver.orders",
+    "set",
+    "amount * 0.95",
+    "where",
+    "interval 7 days"
+   ],
+   "lang": "sql",
+   "explain": "One `UPDATE` can set several columns. The time predicate uses `current_timestamp() - INTERVAL 7 DAYS`. Delta then decides the physical implementation (rewrite or DV) and commits a new version."
+  },
+  {
+   "id": "ch05-e020",
+   "type": "write",
+   "section": "ch05-s03",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Delete all cancelled orders from `dev_training.sales.orders`.",
+   "solution": "DELETE FROM dev_training.sales.orders\nWHERE status = 'CANCELLED';",
+   "keywords": [
+    "delete from dev_training.sales.orders",
+    "where status = 'cancelled'"
+   ],
+   "lang": "sql",
+   "explain": "`DELETE FROM … WHERE …` removes rows logically and commits a new version. The files may remain physically until VACUUM."
+  },
+  {
+   "id": "ch05-e021",
+   "type": "tf",
+   "section": "ch05-s03",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "`DELETE FROM dev_training.sales.orders;` (no WHERE) drops the table object.",
+   "answer": false,
+   "explain": "Without WHERE it logically deletes **all rows**, but the table object, schema and history remain. Dropping the object is `DROP TABLE`."
+  },
+  {
+   "id": "ch05-e022",
+   "type": "mcq",
+   "section": "ch05-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "A long `SELECT` is running while a `DELETE` commits on the same Delta table. What can the reader see?",
+   "options": [
+    "A mix: some deleted rows, some not",
+    "Either the full old snapshot or the full new snapshot — never half",
+    "An error, because the table is locked",
+    "Random results until VACUUM runs"
+   ],
+   "answer": 1,
+   "explain": "Commits are atomic and readers use snapshot isolation: a reader is pinned to one version for its whole query. 'Half old + half new' is exactly what Delta guarantees never happens."
+  },
+  {
+   "id": "ch05-e023",
+   "type": "cloze",
+   "section": "ch05-s03",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Fill in the UPDATE.",
+   "text": "[[UPDATE]] dev_training.sales.orders\n[[SET]] status = 'SHIPPED'\n[[WHERE]] order_id = 2;",
+   "bank": [
+    "MERGE",
+    "VALUES",
+    "FROM"
+   ],
+   "asCode": true,
+   "explain": "Standard SQL DML. On Delta it results in a new table version; the old version stays readable via time travel."
+  },
+  {
+   "id": "ch05-e024",
+   "type": "free",
+   "section": "ch05-s03",
+   "difficulty": 2,
+   "tags": [
+    "interview",
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why do we say Delta gives 'database-like table semantics on object storage'? Use UPDATE/DELETE as your example.",
+   "model": "On a plain Parquet folder you can't safely change a row: you'd have to rewrite files by hand and readers could see half-written states. Delta turns UPDATE, DELETE and MERGE into transactional operations: it writes new files (or deletion vectors) and atomically commits a new version in the log, so readers always see a consistent snapshot. That's the kind of mutation guarantee you'd expect from a database, on top of cheap object storage.",
+   "rubric": [
+    "Plain Parquet: mutation is hard/unsafe",
+    "Delta DML is transactional",
+    "New files/DVs + atomic log commit",
+    "Readers see consistent snapshots"
+   ],
+   "explain": "The key is **transactional mutation**. Answers that just list commands miss why they're safe: the atomic commit to the log."
+  },
+  {
+   "id": "ch05-e025",
+   "type": "mcq",
+   "section": "ch05-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "A 3 GB Parquet file; you delete 2 rows. Why can a deletion vector be much cheaper than an immediate file rewrite?",
+   "options": [
+    "DVs compress the file",
+    "Delta records that 2 rows are logically deleted without rewriting the millions of remaining rows now",
+    "DVs delete the rows from cloud storage directly",
+    "DVs skip writing to the transaction log"
+   ],
+   "answer": 1,
+   "why": [
+    "DVs don't compress.",
+    "Correct.",
+    "Nothing is physically deleted — rows are masked.",
+    "Every change is still a log commit."
+   ],
+   "explain": "A DV is a small marker of deleted row positions. The expensive rewrite of the 3 GB file is avoided (or deferred, e.g. to OPTIMIZE/REORG). The commit still goes through the log."
+  },
+  {
+   "id": "ch05-e026",
+   "type": "order",
+   "section": "ch05-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Order what a reader does on a table whose file has a deletion vector.",
+   "items": [
+    "Read the snapshot from the log",
+    "Read data file A.parquet",
+    "Apply the deletion vector",
+    "Return rows not marked deleted"
+   ],
+   "explain": "The reader combines the underlying data file with the DV state and never returns logically deleted rows. That's why reads pay a small cost while writes become cheap."
+  },
+  {
+   "id": "ch05-e027",
+   "type": "tf",
+   "section": "ch05-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "With deletion vectors, an `UPDATE` can mark the old row version as deleted and write the new row version into a small supplemental data file.",
+   "answer": true,
+   "explain": "That's exactly how DVs accelerate UPDATE (and MERGE): mark old row in the DV, write only the new row version, instead of rewriting the full file."
+  },
+  {
+   "id": "ch05-e028",
+   "type": "write",
+   "section": "ch05-s04",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Enable deletion vectors on `dev_training.sales.orders`.",
+   "solution": "ALTER TABLE dev_training.sales.orders\nSET TBLPROPERTIES ('delta.enableDeletionVectors' = true);",
+   "keywords": [
+    "alter table dev_training.sales.orders",
+    "set tblproperties",
+    "delta.enableDeletionVectors"
+   ],
+   "lang": "sql",
+   "explain": "DVs are a table feature set via a table property. Databricks recommends them unless older clients must still read the table."
+  },
+  {
+   "id": "ch05-e029",
+   "type": "mcq",
+   "section": "ch05-s04",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "What is the main risk when enabling a table feature such as deletion vectors?",
+   "options": [
+    "It deletes table history",
+    "It can upgrade the Delta protocol, making the table unreadable by older Delta clients",
+    "It disables time travel",
+    "It turns the table into a Parquet table"
+   ],
+   "answer": 1,
+   "explain": "Table features may raise the minimum reader/writer protocol versions. Old engines/clients that don't support the feature can no longer read/write the table — check compatibility first."
+  },
+  {
+   "id": "ch05-e030",
+   "type": "tf",
+   "section": "ch05-s04",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "In modern Databricks, updating one row **always** rewrites the whole Parquet file.",
+   "answer": false,
+   "explain": "That was the first mental model, but with deletion vectors Delta can choose between file rewrite and DV + supplemental data, depending on table features/runtime/engine."
+  },
+  {
+   "id": "ch05-e031",
+   "type": "cloze",
+   "section": "ch05-s04",
+   "difficulty": 3,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Physically purge rows soft-deleted via deletion vectors.",
+   "text": "[[REORG]] TABLE dev_training.sales.orders APPLY ([[PURGE]]);\n-- after the retention period has passed:\n[[VACUUM]] dev_training.sales.orders;",
+   "bank": [
+    "OPTIMIZE",
+    "RESTORE",
+    "TRUNCATE"
+   ],
+   "asCode": true,
+   "explain": "REORG … APPLY (PURGE) rewrites files so soft-deleted rows are physically gone from current files; VACUUM later removes the old files once they're beyond retention. Either step alone isn't enough."
+  },
+  {
+   "id": "ch05-e032",
+   "type": "match",
+   "section": "ch05-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each DV situation to what happens.",
+   "pairs": [
+    [
+     "DELETE 1 row with DVs on",
+     "Row marked deleted in a DV; file kept"
+    ],
+    [
+     "Reading a file with a DV",
+     "File + DV combined; masked rows skipped"
+    ],
+    [
+     "UPDATE 1 row with DVs on",
+     "Old row masked + new row in supplemental file"
+    ],
+    [
+     "REORG TABLE … APPLY (PURGE)",
+     "Files rewritten without soft-deleted rows"
+    ]
+   ],
+   "explain": "DVs make writes cheap by deferring rewrites; reads apply the DV; PURGE finally materializes the deletion physically."
+  },
+  {
+   "id": "ch05-e033",
+   "type": "cloze",
+   "section": "ch05-s05",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Read two old snapshots.",
+   "text": "SELECT * FROM dev_training.sales.orders [[VERSION AS OF]] 5;\nSELECT * FROM dev_training.sales.orders [[TIMESTAMP AS OF]] '2026-09-15 10:00:00';",
+   "bank": [
+    "RESTORE TO",
+    "AS OF VERSION",
+    "SNAPSHOT"
+   ],
+   "asCode": true,
+   "explain": "Time travel by version number or by timestamp. Neither changes the current table."
+  },
+  {
+   "id": "ch05-e034",
+   "type": "mcq",
+   "section": "ch05-s05",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "What does `DESCRIBE HISTORY t` return?",
+   "options": [
+    "The current schema",
+    "Table versions in reverse chronological order with timestamp, user, operation, parameters and metrics",
+    "The list of Parquet files",
+    "Only the last 10 queries run on the table"
+   ],
+   "answer": 1,
+   "why": [
+    "That's DESCRIBE TABLE.",
+    "Correct.",
+    "File-level info isn't listed; DESCRIBE DETAIL gives counts.",
+    "It lists writes (commits), not SELECT queries."
+   ],
+   "explain": "History is versioned provenance per write: version, timestamp, user, operation, operationParameters, operationMetrics… newest first. Schema → DESCRIBE TABLE; files/size → DESCRIBE DETAIL."
+  },
+  {
+   "id": "ch05-e035",
+   "type": "write",
+   "section": "ch05-s05",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "PySpark: load `ecommerce.silver.orders` as it was at version 121 into `old_df`.",
+   "solution": "old_df = (\n    spark.read\n         .option(\"versionAsOf\", 121)\n         .table(\"ecommerce.silver.orders\")\n)",
+   "keywords": [
+    "spark.read",
+    "versionAsOf",
+    "121",
+    ".table("
+   ],
+   "lang": "python",
+   "explain": "The reader option `versionAsOf` (or `timestampAsOf`) selects the snapshot. It's the DataFrame equivalent of `VERSION AS OF`."
+  },
+  {
+   "id": "ch05-e036",
+   "type": "tf",
+   "section": "ch05-s05",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "`SELECT * FROM orders VERSION AS OF 5` makes version 5 the current version of the table.",
+   "answer": false,
+   "explain": "Time travel is read-only: it reads an older snapshot. Making an old state current again is `RESTORE`, which creates a new version."
+  },
+  {
+   "id": "ch05-e037",
+   "type": "mcq",
+   "section": "ch05-s05",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "What is the default transaction-log history retention?",
+   "options": [
+    "7 days",
+    "30 days",
+    "90 days",
+    "Forever"
+   ],
+   "answer": 1,
+   "why": [
+    "That's the VACUUM data-file threshold.",
+    "Correct.",
+    "Not a Delta default.",
+    "History is finite — that's why it isn't a backup."
+   ],
+   "explain": "Log history defaults to **30 days** (`delta.logRetentionDuration`). Don't confuse with the **7-day** deleted-file retention used by VACUUM."
+  },
+  {
+   "id": "ch05-e038",
+   "type": "scenario",
+   "section": "ch05-s05",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A stakeholder: \"Today `customer_id` in `prod.silver.orders` became NULL for many rows.\"",
+   "steps": [
+    {
+     "prompt": "What do you do first?",
+     "options": [
+      {
+       "text": "Run DESCRIBE HISTORY prod.silver.orders to see recent operations",
+       "ok": true,
+       "fb": "Right: don't guess — history shows which operations ran, when and by whom."
+      },
+      {
+       "text": "Re-run yesterday's pipeline to overwrite the table",
+       "ok": false,
+       "fb": "You'd change the table before understanding what broke it, and maybe re-break it."
+      },
+      {
+       "text": "Run VACUUM to clean up bad files",
+       "ok": false,
+       "fb": "VACUUM can destroy the old files you need for comparison and recovery!"
+      }
+     ]
+    },
+    {
+     "prompt": "History shows v124 (MERGE 09:00) and v125 (UPDATE 11:00). How do you pinpoint the bad version?",
+     "options": [
+      {
+       "text": "Time-travel: compare VERSION AS OF 124 vs VERSION AS OF 125",
+       "ok": true,
+       "fb": "Comparing snapshots shows v124 correct and v125 broken."
+      },
+      {
+       "text": "Read the Parquet files directly from storage",
+       "ok": false,
+       "fb": "Physical files include removed ones; you'd mix snapshots."
+      },
+      {
+       "text": "Look at DESCRIBE DETAIL",
+       "ok": false,
+       "fb": "DETAIL gives current table-level metadata, not per-version contents."
+      }
+     ],
+     "code": "SELECT * FROM prod.silver.orders VERSION AS OF 124;\nSELECT * FROM prod.silver.orders VERSION AS OF 125;"
+    },
+    {
+     "prompt": "v125 is the culprit (an UPDATE from a buggy job). Next?",
+     "options": [
+      {
+       "text": "Inspect v125's operation, user and operationMetrics, then fix the job and decide fix-forward vs RESTORE TABLE … TO VERSION AS OF 124",
+       "ok": true,
+       "fb": "Correct: find root cause, then repair data safely."
+      },
+      {
+       "text": "Delete 00000000000000000125.json from _delta_log",
+       "ok": false,
+       "fb": "Never hand-edit the log."
+      },
+      {
+       "text": "Do nothing; time travel is a backup anyway",
+       "ok": false,
+       "fb": "History expires and VACUUM can remove files."
+      }
+     ]
+    }
+   ],
+   "explain": "History → compare versions with time travel → identify the operation → fix or RESTORE. That is the real Delta debugging workflow."
+  },
+  {
+   "id": "ch05-e039",
+   "type": "order",
+   "section": "ch05-s05",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A pipeline corrupted data and it showed up in v101. Order your actions.",
+   "items": [
+    "Run DESCRIBE HISTORY",
+    "Time-travel and compare v100 vs v101",
+    "Identify the operation/job that created v101",
+    "Decide: fix forward or RESTORE to v100"
+   ],
+   "explain": "This is the test answer for 'corrupted pipeline at v101': history, compare, locate operation, then repair. Restoring first without understanding risks repeating the bug on the next run."
+  },
+  {
+   "id": "ch05-e040",
+   "type": "spotbug",
+   "section": "ch05-s05",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Which line has invalid time-travel syntax?",
+   "lines": [
+    "SELECT *",
+    "FROM ecommerce.silver.orders",
+    "AS OF VERSION 121",
+    "WHERE status = 'PAID';"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "SELECT *\nFROM ecommerce.silver.orders VERSION AS OF 121\nWHERE status = 'PAID';",
+   "explain": "The syntax is `table_name VERSION AS OF n` (or `TIMESTAMP AS OF '…'`), placed right after the table name. `AS OF VERSION` is not valid Databricks SQL."
+  },
+  {
+   "id": "ch05-e041",
+   "type": "calc",
+   "section": "ch05-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Current version is **v10**. You run `RESTORE TABLE t TO VERSION AS OF 7`. What version number does the table have afterwards?",
+   "answer": 11,
+   "tolerance": 0,
+   "unit": "version",
+   "explain": "RESTORE is a new transaction appended to history: v11 with state equivalent to v7. Versions 8–10 are not deleted."
+  },
+  {
+   "id": "ch05-e042",
+   "type": "tf",
+   "section": "ch05-s06",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Restoring to v7 while current is v10 deletes versions 8–10 from the history.",
+   "answer": false,
+   "explain": "History stays history. RESTORE commits a new version (v11) whose state equals v7; you can still inspect v8–v10 (as long as retention allows)."
+  },
+  {
+   "id": "ch05-e043",
+   "type": "bucket",
+   "section": "ch05-s06",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Time travel or RESTORE?",
+   "buckets": [
+    "Time travel (VERSION AS OF)",
+    "RESTORE"
+   ],
+   "items": [
+    {
+     "text": "Reads an old snapshot",
+     "bucket": 0
+    },
+    {
+     "text": "Creates a new table version",
+     "bucket": 1
+    },
+    {
+     "text": "Current table state unchanged",
+     "bucket": 0
+    },
+    {
+     "text": "Old state becomes current again",
+     "bucket": 1
+    },
+    {
+     "text": "Shows up as an operation in DESCRIBE HISTORY",
+     "bucket": 1
+    },
+    {
+     "text": "Works in a plain SELECT",
+     "bucket": 0
+    }
+   ],
+   "explain": "Time travel = read only. RESTORE = a write that makes an old state current, committed as a new version and visible in history."
+  },
+  {
+   "id": "ch05-e044",
+   "type": "write",
+   "section": "ch05-s06",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Restore `prod.silver.orders` to how it was at `2026-09-15 10:00:00`.",
+   "solution": "RESTORE TABLE prod.silver.orders\nTO TIMESTAMP AS OF '2026-09-15 10:00:00';",
+   "keywords": [
+    "restore table prod.silver.orders",
+    "to timestamp as of"
+   ],
+   "lang": "sql",
+   "explain": "RESTORE accepts `TO VERSION AS OF n` or `TO TIMESTAMP AS OF '…'`. It fails if the files for that version were vacuumed."
+  },
+  {
+   "id": "ch05-e045",
+   "type": "tf",
+   "section": "ch05-s06",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Delta table history is a long-term backup system.",
+   "answer": false,
+   "explain": "No. Default 7-day deleted-file retention (VACUUM) and 30-day log retention limit time travel. Databricks explicitly says not to use history as a long-term backup strategy."
+  },
+  {
+   "id": "ch05-e046",
+   "type": "mcq",
+   "section": "ch05-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "To successfully time travel to version N, what must still exist?",
+   "options": [
+    "Only the history entry for N",
+    "Only the data files for N",
+    "Both the log history for N and the data files of N",
+    "Only the latest checkpoint"
+   ],
+   "answer": 2,
+   "why": [
+    "Metadata alone can't return rows.",
+    "Without the log you don't know which files form N.",
+    "Correct.",
+    "A checkpoint summarizes state but not the old data files."
+   ],
+   "explain": "You need the log (to know which files form N) **and** the files themselves. VACUUM may delete files while the history entry is still listed — the classic 'history exists but query fails' case."
+  },
+  {
+   "id": "ch05-e047",
+   "type": "match",
+   "section": "ch05-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each retention fact.",
+   "pairs": [
+    [
+     "VACUUM deleted-file threshold (default)",
+     "7 days"
+    ],
+    [
+     "Transaction-log history (default)",
+     "30 days"
+    ],
+    [
+     "RETAIN 168 HOURS",
+     "Same as the 7-day default"
+    ],
+    [
+     "Time travel to a vacuumed version",
+     "Fails: data files gone"
+    ]
+   ],
+   "explain": "Two different clocks: 7 days for data files, 30 days for log history. 168 h = 7 × 24."
+  },
+  {
+   "id": "ch05-e048",
+   "type": "calc",
+   "section": "ch05-s07",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "`VACUUM t RETAIN 168 HOURS` keeps how many **days** of removed files?",
+   "answer": 7,
+   "tolerance": 0,
+   "unit": "days",
+   "explain": "168 / 24 = 7 days — exactly the Databricks default and recommended minimum."
+  },
+  {
+   "id": "ch05-e049",
+   "type": "tf",
+   "section": "ch05-s07",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "VACUUM speeds up queries by compacting small files into bigger ones.",
+   "answer": false,
+   "explain": "VACUUM = garbage collection of old unreferenced files. Compaction/layout is OPTIMIZE. Confusing them is a very common exam trap."
+  },
+  {
+   "id": "ch05-e050",
+   "type": "mcq",
+   "section": "ch05-s07",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A colleague proposes: \"To save storage, run `VACUUM t RETAIN 0 HOURS` every hour.\" What can break? (choose all)",
+   "options": [
+    "Time travel",
+    "Long-running readers",
+    "Long-running writers whose uncommitted files look unreferenced",
+    "Recovery assumptions",
+    "Schema enforcement"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "multi": true,
+   "explain": "Zero retention deletes files that older snapshots, in-flight queries and in-flight writers still need. Databricks recommends ≥7 days and has a safety check that blocks short retention. Schema enforcement is unrelated."
+  },
+  {
+   "id": "ch05-e051",
+   "type": "mcq",
+   "section": "ch05-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Log: v0 → {A,B}, v1 → {B,C}, v2 → {C,D}. After the retention window passes, which files can VACUUM eventually remove?",
+   "options": [
+    "C and D",
+    "A and B",
+    "A only",
+    "None — VACUUM never deletes data files"
+   ],
+   "answer": 1,
+   "explain": "Current snapshot is {C, D}. A and B are referenced only by older versions; once those versions fall outside retention, VACUUM can delete them."
+  },
+  {
+   "id": "ch05-e052",
+   "type": "scenario",
+   "section": "ch05-s07",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A 10 TB `orders` table. You ran `DELETE FROM orders WHERE event_date < DATE'2020-01-01'`. Queries no longer return those rows, but storage is still ~10 TB.",
+   "steps": [
+    {
+     "prompt": "First reaction?",
+     "options": [
+      {
+       "text": "Recognize logical delete ≠ physical deletion; this is not necessarily a bug",
+       "ok": true,
+       "fb": "Correct: old files are kept for snapshots/time travel."
+      },
+      {
+       "text": "Open a P1: Delta failed to delete",
+       "ok": false,
+       "fb": "The DELETE worked logically — check the physical side first."
+      },
+      {
+       "text": "Re-run the DELETE until storage drops",
+       "ok": false,
+       "fb": "Re-running deletes nothing new and adds versions."
+      }
+     ]
+    },
+    {
+     "prompt": "DVs are enabled on the table. What does that imply?",
+     "options": [
+      {
+       "text": "Original files may still be current physical inputs, with deleted rows only masked",
+       "ok": true,
+       "fb": "Right: soft-deleted rows sit inside still-referenced files."
+      },
+      {
+       "text": "DVs physically delete rows immediately",
+       "ok": false,
+       "fb": "DVs mask rows; they don't purge."
+      },
+      {
+       "text": "DVs mean VACUUM alone will free the space",
+       "ok": false,
+       "fb": "VACUUM only removes unreferenced files; masked rows are inside referenced files."
+      }
+     ]
+    },
+    {
+     "prompt": "How do you actually free the space?",
+     "options": [
+      {
+       "text": "REORG TABLE orders APPLY (PURGE), then VACUUM after retention",
+       "ok": true,
+       "fb": "PURGE rewrites files without masked rows; VACUUM later deletes the old ones."
+      },
+      {
+       "text": "VACUUM orders RETAIN 0 HOURS",
+       "ok": false,
+       "fb": "Dangerous and still doesn't purge DV-masked rows."
+      },
+      {
+       "text": "OPTIMIZE orders and stop",
+       "ok": false,
+       "fb": "Rewritten files help, but old files stay until VACUUM."
+      }
+     ]
+    }
+   ],
+   "explain": "Two layers: logical state (DELETE) vs physical garbage collection (REORG PURGE + VACUUM). Not a contradiction."
+  },
+  {
+   "id": "ch05-e053",
+   "type": "scenario",
+   "section": "ch05-s07",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Yesterday `SELECT * FROM orders VERSION AS OF 80` worked. Today it fails.",
+   "steps": [
+    {
+     "prompt": "First thing you check?",
+     "options": [
+      {
+       "text": "DESCRIBE HISTORY orders — did a VACUUM run?",
+       "ok": true,
+       "fb": "Yes: history reveals maintenance operations and their timing."
+      },
+      {
+       "text": "Increase cluster size",
+       "ok": false,
+       "fb": "Not a compute problem."
+      },
+      {
+       "text": "Re-create the table from scratch",
+       "ok": false,
+       "fb": "Destroys evidence and history."
+      }
+     ]
+    },
+    {
+     "prompt": "History shows `VACUUM` ran last night. What next?",
+     "options": [
+      {
+       "text": "Check its retention and whether v80's data files still exist",
+       "ok": true,
+       "fb": "A history entry for v80 doesn't guarantee its files survived."
+      },
+      {
+       "text": "Assume the log is corrupted and delete it",
+       "ok": false,
+       "fb": "Never touch the log by hand."
+      },
+      {
+       "text": "Run RESTORE TO VERSION AS OF 80",
+       "ok": false,
+       "fb": "RESTORE needs the same files — it would fail too."
+      }
+     ]
+    }
+   ],
+   "explain": "VACUUM can remove the physical files older versions need. History entries alone don't make a version queryable — another reason time travel isn't a backup."
+  },
+  {
+   "id": "ch05-e054",
+   "type": "order",
+   "section": "ch05-s07",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Order the steps to physically get rid of rows soft-deleted with deletion vectors.",
+   "items": [
+    "DELETE FROM … WHERE … (rows masked by DV)",
+    "REORG TABLE … APPLY (PURGE)",
+    "Wait until the retention period has passed",
+    "VACUUM …"
+   ],
+   "explain": "DELETE is logical; PURGE rewrites files so the rows are physically gone from current files; after retention, VACUUM deletes the old files from storage."
+  },
+  {
+   "id": "ch05-e055",
+   "type": "spotbug",
+   "section": "ch05-s07",
+   "difficulty": 3,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "A nightly 'storage saver' job. Which lines are dangerous?",
+   "lines": [
+    "# nightly maintenance",
+    "spark.conf.set('spark.databricks.delta.retentionDurationCheck.enabled', 'false')",
+    "spark.sql('VACUUM prod.silver.orders RETAIN 0 HOURS')",
+    "spark.sql('DESCRIBE HISTORY prod.silver.orders').show()"
+   ],
+   "bugs": [
+    1,
+    2
+   ],
+   "fix": "spark.sql('VACUUM prod.silver.orders')  # default 7 days\n# or RETAIN 168 HOURS; keep the safety check enabled",
+   "explain": "Line 1 disables the safety check that exists precisely to block short retention, and line 2 deletes every unreferenced file immediately — breaking time travel, long-running readers/writers and recovery. Keep ≥7 days."
+  },
+  {
+   "id": "ch05-e056",
+   "type": "cloze",
+   "section": "ch05-s07",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Default retention values.",
+   "text": "VACUUM keeps deleted data files for [[7]] days by default, while transaction-log history is kept for [[30]] days.",
+   "bank": [
+    "1",
+    "14",
+    "90",
+    "365"
+   ],
+   "explain": "Two different clocks. You need both the log entry and the files to time travel, so the effective window is usually the 7-day file retention."
+  },
+  {
+   "id": "ch05-e057",
+   "type": "mcq",
+   "section": "ch05-s08",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "In `MERGE`, what does **WHEN MATCHED** mean?",
+   "options": [
+    "A target row has no source row",
+    "A source row found a target row that satisfies the ON condition",
+    "The source and target schemas match",
+    "The row was already merged earlier"
+   ],
+   "answer": 1,
+   "explain": "WHEN MATCHED = source row ↔ target row pair via ON. Typically UPDATE (or DELETE). 'Target row with no source row' is NOT MATCHED BY SOURCE."
+  },
+  {
+   "id": "ch05-e058",
+   "type": "match",
+   "section": "ch05-s08",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Match each MERGE clause to its meaning.",
+   "pairs": [
+    [
+     "ON",
+     "When source and target rows are the same entity"
+    ],
+    [
+     "WHEN MATCHED",
+     "Source row has a matching target row"
+    ],
+    [
+     "WHEN NOT MATCHED",
+     "Source row has no target row (usually INSERT)"
+    ],
+    [
+     "WHEN NOT MATCHED BY SOURCE",
+     "Target row has no source row (UPDATE/DELETE)"
+    ]
+   ],
+   "explain": "Three cases of the Venn diagram plus the ON condition that defines 'same entity'."
+  },
+  {
+   "id": "ch05-e059",
+   "type": "write",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write an upsert: target `prod.silver.customers` (id, name, city), source `staging.customer_updates`. Update name/city on match, insert otherwise. Use explicit columns.",
+   "solution": "MERGE INTO prod.silver.customers AS t\nUSING staging.customer_updates AS s\nON t.id = s.id\nWHEN MATCHED THEN\n  UPDATE SET t.name = s.name, t.city = s.city\nWHEN NOT MATCHED THEN\n  INSERT (id, name, city) VALUES (s.id, s.name, s.city);",
+   "keywords": [
+    "merge into prod.silver.customers",
+    "using staging.customer_updates",
+    "on t.id = s.id",
+    "when matched then",
+    "update set",
+    "when not matched then",
+    "insert"
+   ],
+   "lang": "sql",
+   "explain": "Read it like a compiler: TARGET, SOURCE, ON (entity identity), then the action per case. This is the canonical upsert."
+  },
+  {
+   "id": "ch05-e060",
+   "type": "tf",
+   "section": "ch05-s08",
+   "difficulty": 1,
+   "tags": [
+    "syntax",
+    "exam"
+   ],
+   "quick": false,
+   "q": "`WHEN NOT MATCHED BY SOURCE THEN INSERT *` is valid MERGE syntax.",
+   "answer": false,
+   "explain": "NOT MATCHED BY SOURCE supports only **UPDATE or DELETE** — there is no source row whose values could be inserted."
+  },
+  {
+   "id": "ch05-e061",
+   "type": "mcq",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Your source contains only **today's changed records**. You add `WHEN NOT MATCHED BY SOURCE THEN DELETE`. What happens?",
+   "options": [
+    "Only today's deleted records are removed",
+    "Every target row not in today's batch is deleted — possibly almost the entire table",
+    "Nothing; the clause is ignored for incremental sources",
+    "The MERGE fails with a syntax error"
+   ],
+   "answer": 1,
+   "why": [
+    "Delta can't know which rows are 'deleted today' — absence = delete.",
+    "Correct.",
+    "Delta doesn't know your source semantics.",
+    "The syntax is valid."
+   ],
+   "explain": "The clause treats the source as **authoritative**: anything missing from it is deleted. Use it only when the source is a complete snapshot."
+  },
+  {
+   "id": "ch05-e062",
+   "type": "cloze",
+   "section": "ch05-s08",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Complete a full sync against an authoritative snapshot.",
+   "text": "MERGE INTO target t\nUSING source s\nON t.id = s.id\nWHEN MATCHED THEN UPDATE SET [[*]]\nWHEN NOT MATCHED THEN [[INSERT]] *\nWHEN NOT MATCHED BY [[SOURCE]] THEN [[DELETE]];",
+   "bank": [
+    "TARGET",
+    "VALUES",
+    "ALL"
+   ],
+   "asCode": true,
+   "explain": "`UPDATE SET *` and `INSERT *` map columns by name when schemas are compatible; NOT MATCHED BY SOURCE … DELETE removes target rows absent from the snapshot."
+  },
+  {
+   "id": "ch05-e063",
+   "type": "mcq",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why might production code prefer explicit `UPDATE SET t.name = s.name, …` over `UPDATE SET *`?",
+   "options": [
+    "`SET *` is not supported on Delta",
+    "Explicit mapping shows exactly which columns change and lets you add audit columns like `updated_at`",
+    "Explicit mapping is always faster",
+    "`SET *` deletes unmapped columns"
+   ],
+   "answer": 1,
+   "explain": "Explicit mapping is about control and readability: you know precisely what's touched, and you can add `t.updated_at = current_timestamp()`. `SET *` works when schemas are compatible."
+  },
+  {
+   "id": "ch05-e064",
+   "type": "free",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Why is MERGE especially important for CDC (change data capture)?",
+   "model": "A change feed typically contains inserts, updates and deletes for entities that already exist in the target. MERGE matches each change to the target by key and applies insert/update/delete in one atomic transaction, so the target stays a consistent mirror of the source state. Without it you'd need several separate statements with intermediate inconsistent states.",
+   "rubric": [
+    "CDC = inserts + updates + deletes for existing entities",
+    "MERGE matches by key",
+    "Applies all actions atomically in one commit"
+   ],
+   "explain": "The answer combines **mixed change types** and **atomicity**."
+  },
+  {
+   "id": "ch05-e065",
+   "type": "bucket",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Target ids {1,2,3,4}; source ids {1,2,5}. Which MERGE case does each id fall into?",
+   "buckets": [
+    "WHEN MATCHED",
+    "WHEN NOT MATCHED",
+    "WHEN NOT MATCHED BY SOURCE"
+   ],
+   "items": [
+    {
+     "text": "id 1",
+     "bucket": 0
+    },
+    {
+     "text": "id 2",
+     "bucket": 0
+    },
+    {
+     "text": "id 5",
+     "bucket": 1
+    },
+    {
+     "text": "id 3",
+     "bucket": 2
+    },
+    {
+     "text": "id 4",
+     "bucket": 2
+    }
+   ],
+   "explain": "In both → MATCHED; only in source → NOT MATCHED (insert); only in target → NOT MATCHED BY SOURCE (update/delete)."
+  },
+  {
+   "id": "ch05-e066",
+   "type": "calc",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "Target ids {1,2,3,4}; source ids {1,2,4,5}. You run MERGE with WHEN MATCHED UPDATE, WHEN NOT MATCHED INSERT, WHEN NOT MATCHED BY SOURCE DELETE. How many rows does the target have afterwards?",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "rows",
+   "explain": "1,2,4 matched → updated; 5 inserted; 3 deleted (not in source). Result {1,2,4,5} = 4 rows — the target now mirrors the source exactly."
+  },
+  {
+   "id": "ch05-e067",
+   "type": "mcq",
+   "section": "ch05-s09",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "debug"
+   ],
+   "quick": true,
+   "q": "The source has **two rows with the same business key** that both match the same target row in an UPDATE. What do you do?",
+   "options": [
+    "Nothing; Delta picks the last one",
+    "Deduplicate/rank the source first so the choice is deterministic",
+    "Switch to INSERT OVERWRITE",
+    "Disable the duplicate check"
+   ],
+   "answer": 1,
+   "why": [
+    "Delta does not pick silently — it errors.",
+    "Correct.",
+    "Overwrite changes semantics completely.",
+    "There's no such switch; ambiguity must be resolved."
+   ],
+   "explain": "Multiple matches make the intended final value ambiguous, so MERGE fails. Rank by a deterministic ordering field (sequence/updated_at/version) and keep one row per key."
+  },
+  {
+   "id": "ch05-e068",
+   "type": "cloze",
+   "section": "ch05-s09",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Keep only the latest CDC event per key.",
+   "text": "WITH ranked AS (\n  SELECT *,\n         [[ROW_NUMBER]]() OVER (\n           [[PARTITION BY]] id\n           ORDER BY seq [[DESC]]\n         ) AS rn\n  FROM staging.customer_changes\n)\nSELECT * FROM ranked WHERE rn = [[1]];",
+   "bank": [
+    "RANK",
+    "GROUP BY",
+    "ASC",
+    "0"
+   ],
+   "asCode": true,
+   "explain": "PARTITION BY the business key, ORDER BY the sequence descending, keep rn = 1 → one latest row per key. RANK() could keep ties; ROW_NUMBER() guarantees one."
+  },
+  {
+   "id": "ch05-e069",
+   "type": "write",
+   "section": "ch05-s09",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "PySpark: from `source_df`, keep only the latest row per `customer_id` by `sequence_number`, result in `latest` (drop helper column).",
+   "solution": "from pyspark.sql import functions as F\nfrom pyspark.sql.window import Window\n\nw = Window.partitionBy(\"customer_id\").orderBy(F.col(\"sequence_number\").desc())\nlatest = (source_df\n          .withColumn(\"rn\", F.row_number().over(w))\n          .filter(F.col(\"rn\") == 1)\n          .drop(\"rn\"))",
+   "keywords": [
+    "Window.partitionBy(\"customer_id\")",
+    ".desc()",
+    "row_number()",
+    "filter",
+    "== 1",
+    "drop(\"rn\")"
+   ],
+   "lang": "python",
+   "explain": "Same pattern as SQL: a window per key ordered newest first, row_number, keep 1. This is a real data-engineering pattern, not a toy window exercise."
+  },
+  {
+   "id": "ch05-e070",
+   "type": "order",
+   "section": "ch05-s09",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "MERGE on `customer_id` fails. Order the debug sequence.",
+   "items": [
+    "Is the target key unique?",
+    "Does the source contain duplicates?",
+    "Which source row is the latest?",
+    "Is there an event sequence / updated_at?",
+    "Deduplicate",
+    "Run the MERGE"
+   ],
+   "explain": "Check uniqueness on both sides, then find a deterministic ordering field, dedup, and only then merge. Skipping the ordering-field question leads to arbitrary picks."
+  },
+  {
+   "id": "ch05-e071",
+   "type": "tf",
+   "section": "ch05-s09",
+   "difficulty": 3,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "On DBR 16.0+, MERGE duplicate-match detection considers both the ON condition and relevant WHEN MATCHED conditions, while 15.4 LTS and below used only ON.",
+   "answer": true,
+   "explain": "Correct runtime detail: newer runtimes can avoid false 'multiple matches' errors when WHEN MATCHED conditions make only one source row applicable."
+  },
+  {
+   "id": "ch05-e072",
+   "type": "spotbug",
+   "section": "ch05-s09",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "A PostgreSQL developer wrote this for Databricks SQL. Which line is the problem?",
+   "lines": [
+    "UPDATE prod.silver.customers c",
+    "SET city = u.city",
+    "FROM staging.customer_updates u",
+    "WHERE c.id = u.id;"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "MERGE INTO prod.silver.customers c\nUSING staging.customer_updates u\nON c.id = u.id\nWHEN MATCHED THEN UPDATE SET c.city = u.city;",
+   "explain": "Databricks SQL does not support the `UPDATE … FROM …` (join-update) pattern. To update from another relation, use `MERGE INTO … WHEN MATCHED THEN UPDATE`."
+  },
+  {
+   "id": "ch05-e073",
+   "type": "write",
+   "section": "ch05-s09",
+   "difficulty": 3,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Python: upsert `staging.customer_updates` into `prod.silver.customers` on `id` using the `DeltaTable` API (update name, city; insert id, name, city).",
+   "solution": "from delta.tables import DeltaTable\n\ntarget = DeltaTable.forName(spark, \"prod.silver.customers\")\nsource = spark.table(\"staging.customer_updates\")\n\n(target.alias(\"t\")\n   .merge(source.alias(\"s\"), \"t.id = s.id\")\n   .whenMatchedUpdate(set={\"name\": \"s.name\", \"city\": \"s.city\"})\n   .whenNotMatchedInsert(values={\"id\": \"s.id\", \"name\": \"s.name\", \"city\": \"s.city\"})\n   .execute())",
+   "keywords": [
+    "DeltaTable.forName",
+    ".merge(",
+    "t.id = s.id",
+    "whenMatchedUpdate",
+    "whenNotMatchedInsert",
+    ".execute()"
+   ],
+   "lang": "python",
+   "explain": "The DeltaTable builder mirrors SQL MERGE: alias target/source, merge condition, clause builders, then `.execute()` — forgetting `execute()` means nothing runs."
+  },
+  {
+   "id": "ch05-e074",
+   "type": "scenario",
+   "section": "ch05-s09",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Nightly MERGE into `ecommerce.silver.orders` fails: *multiple source rows matched target row*.",
+   "steps": [
+    {
+     "prompt": "What do you query first?",
+     "options": [
+      {
+       "text": "GROUP BY order_id HAVING COUNT(*) > 1 on the staging table",
+       "ok": true,
+       "fb": "Finds which keys are duplicated in the source."
+      },
+      {
+       "text": "DESCRIBE DETAIL on the target",
+       "ok": false,
+       "fb": "File counts won't reveal duplicate keys."
+      },
+      {
+       "text": "VACUUM the target",
+       "ok": false,
+       "fb": "Irrelevant and risky."
+      }
+     ],
+     "code": "SELECT order_id, COUNT(*)\nFROM ecommerce.staging.orders_updates\nGROUP BY order_id\nHAVING COUNT(*) > 1;"
+    },
+    {
+     "prompt": "order_id 1001 appears twice (two CDC events). What do you need to decide which wins?",
+     "options": [
+      {
+       "text": "A deterministic ordering field such as event_sequence, updated_at or version",
+       "ok": true,
+       "fb": "That's what makes the pick reproducible."
+      },
+      {
+       "text": "Pick whichever Spark returns first",
+       "ok": false,
+       "fb": "Non-deterministic — results may change on retry."
+      },
+      {
+       "text": "Average the two amounts",
+       "ok": false,
+       "fb": "Invents data that never existed."
+      }
+     ]
+    },
+    {
+     "prompt": "Final fix?",
+     "options": [
+      {
+       "text": "ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY event_sequence DESC), keep rn = 1, then MERGE",
+       "ok": true,
+       "fb": "Dedup, then merge the clean source."
+      },
+      {
+       "text": "Add WHEN NOT MATCHED BY SOURCE THEN DELETE",
+       "ok": false,
+       "fb": "Unrelated, and dangerous for an incremental source."
+      },
+      {
+       "text": "Switch to append mode",
+       "ok": false,
+       "fb": "Creates duplicates in the target instead."
+      }
+     ]
+    }
+   ],
+   "explain": "Find duplicates → find ordering field → dedup → merge."
+  },
+  {
+   "id": "ch05-e075",
+   "type": "mcq",
+   "section": "ch05-s09",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Source has `id=10 version=1 amount=100` and `id=10 version=2 amount=120`. Before MERGE you…",
+   "options": [
+    "Keep both; MERGE handles it",
+    "Rank by business key ordered by `version DESC` and keep rn = 1 (amount 120)",
+    "Keep the lower version",
+    "SUM the amounts → 220"
+   ],
+   "answer": 1,
+   "explain": "Deduplicate by business key with a deterministic ordering field. The newest version (2, amount 120) represents the latest state."
+  },
+  {
+   "id": "ch05-e076",
+   "type": "write",
+   "section": "ch05-s09",
+   "difficulty": 1,
+   "tags": [
+    "syntax",
+    "debug"
+   ],
+   "quick": false,
+   "q": "Write the query that finds duplicated `order_id`s in `ecommerce.staging.orders_updates`.",
+   "solution": "SELECT order_id, COUNT(*)\nFROM ecommerce.staging.orders_updates\nGROUP BY order_id\nHAVING COUNT(*) > 1;",
+   "keywords": [
+    "group by order_id",
+    "having count(*) > 1"
+   ],
+   "lang": "sql",
+   "explain": "The first query in the 'merge fails' workflow. `HAVING` filters groups after aggregation — WHERE can't reference COUNT(*)."
+  },
+  {
+   "id": "ch05-e077",
+   "type": "order",
+   "section": "ch05-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Order the phases of optimistic concurrency control.",
+   "items": [
+    "READ: consistent snapshot",
+    "WRITE: prepare candidate output",
+    "VALIDATE: check for conflicting commits",
+    "COMMIT: new atomic version (or fail)"
+   ],
+   "explain": "Databricks describes exactly read → write → validate-and-commit. Validation happens at the end, which is what makes it 'optimistic'."
+  },
+  {
+   "id": "ch05-e078",
+   "type": "tf",
+   "section": "ch05-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Delta locks the entire table pessimistically so that concurrent writers wait for each other.",
+   "answer": false,
+   "explain": "Delta uses optimistic concurrency: writers work in parallel on a snapshot and conflicts are checked at commit time."
+  },
+  {
+   "id": "ch05-e079",
+   "type": "mcq",
+   "section": "ch05-s10",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "interview"
+   ],
+   "quick": false,
+   "q": "Why is it called **optimistic** concurrency control?",
+   "options": [
+    "It always succeeds",
+    "It assumes most concurrent transactions won't conflict and checks only at validation/commit",
+    "It retries automatically forever",
+    "It optimistically skips validation for small writes"
+   ],
+   "answer": 1,
+   "explain": "It bets on 'no conflict', lets everyone work, then validates. If the bet fails, one transaction fails — the table stays consistent."
+  },
+  {
+   "id": "ch05-e080",
+   "type": "mcq",
+   "section": "ch05-s10",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Table at v50. A and B both read v50. A commits v51. B's changes don't conflict with A's. What happens to B?",
+   "options": [
+    "B fails because it read an old version",
+    "B validates v50→v51, finds no conflict and commits v52",
+    "B overwrites v51",
+    "B waits for a lock"
+   ],
+   "answer": 1,
+   "explain": "Reading an older version isn't itself a failure: B checks what changed since its snapshot. No conflict → it commits as the next version, v52."
+  },
+  {
+   "id": "ch05-e081",
+   "type": "order",
+   "section": "ch05-s10",
+   "difficulty": 3,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the life of a MERGE as you should picture it.",
+   "items": [
+    "Source rows matched via ON",
+    "Read target snapshot",
+    "Determine changed rows/files",
+    "Write new data / deletion vectors",
+    "Optimistic conflict validation",
+    "Atomic transaction-log commit",
+    "New version → new consistent snapshot"
+   ],
+   "explain": "This is the 'data engineer' level view of MERGE: matching, file-level changes, validation, atomic commit. Seeing only 'update/insert' hides where failures and costs come from."
+  },
+  {
+   "id": "ch05-e082",
+   "type": "free",
+   "section": "ch05-s10",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Explain optimistic concurrency control in Delta in your own words.",
+   "model": "Each transaction reads a consistent snapshot of the table and prepares its new files without locking the whole table. At commit time Delta checks which commits happened since that snapshot and whether they conflict with what this transaction read or changed. If it's safe, the commit becomes a new atomic version; if not, the transaction fails (and can retry on fresh state) instead of corrupting the table.",
+   "rubric": [
+    "Works on a snapshot, no pessimistic table lock",
+    "Validation at commit against concurrent commits",
+    "Safe → new atomic version",
+    "Conflict → fail/retry, no corruption"
+   ],
+   "explain": "Hit the four phases and the 'fail instead of corrupt' guarantee."
+  },
+  {
+   "id": "ch05-e083",
+   "type": "calc",
+   "section": "ch05-s10",
+   "difficulty": 2,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "Table at v50. Jobs A, B, C all read v50. A commits first. B validates — no conflict — and commits. C validates — conflicts with A — and fails. What is the latest table version?",
+   "answer": 52,
+   "tolerance": 0,
+   "unit": "version",
+   "explain": "A → v51, B → v52, C fails and creates no version. Failed transactions never produce versions."
+  },
+  {
+   "id": "ch05-e084",
+   "type": "mcq",
+   "section": "ch05-s11",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "What is the default isolation level for Delta writes on Databricks?",
+   "options": [
+    "Serializable",
+    "WriteSerializable",
+    "Read Committed",
+    "Snapshot"
+   ],
+   "answer": 1,
+   "why": [
+    "Stronger, opt-in.",
+    "Correct.",
+    "Not a Delta level.",
+    "Snapshot isolation describes reads, not the write level."
+   ],
+   "explain": "Default writes: **WriteSerializable**. Reads use snapshot isolation. Serializable is the stronger, opt-in level."
+  },
+  {
+   "id": "ch05-e085",
+   "type": "tf",
+   "section": "ch05-s11",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "concept"
+   ],
+   "quick": true,
+   "q": "If jobs A and B change **different rows** of the **same** Parquet file, they must conflict.",
+   "answer": false,
+   "explain": "Not anymore: with deletion vectors and row-level concurrency they can coexist, as long as they don't change the same row and the requirements are met."
+  },
+  {
+   "id": "ch05-e086",
+   "type": "mcq",
+   "section": "ch05-s11",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "A: `UPDATE customers SET status='A' WHERE id=10`; B concurrently: `… status='B' WHERE id=10`. What do you expect?",
+   "options": [
+    "Both succeed; last writer wins silently",
+    "A real write conflict: one commits, the other fails or is serialized safely",
+    "Random corruption of row 10",
+    "Both fail"
+   ],
+   "answer": 1,
+   "explain": "Same-row modifications still conflict even with row-level concurrency. Optimistic validation guarantees one wins and the other fails — never inconsistent state."
+  },
+  {
+   "id": "ch05-e087",
+   "type": "write",
+   "section": "ch05-s11",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Set the isolation level of `my_table` to Serializable.",
+   "solution": "ALTER TABLE my_table\nSET TBLPROPERTIES ('delta.isolationLevel' = 'Serializable');",
+   "keywords": [
+    "alter table my_table",
+    "set tblproperties",
+    "delta.isolationLevel",
+    "serializable"
+   ],
+   "lang": "sql",
+   "explain": "Isolation level is a table property. Serializable is stricter (reads + writes explainable by a serial order) and may cause more conflicts."
+  },
+  {
+   "id": "ch05-e088",
+   "type": "match",
+   "section": "ch05-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the concurrency concept.",
+   "pairs": [
+    [
+     "Readers",
+     "Consistent snapshots (snapshot isolation)"
+    ],
+    [
+     "Writers",
+     "Optimistic validation at commit"
+    ],
+    [
+     "Default write isolation",
+     "WriteSerializable"
+    ],
+    [
+     "Strongest isolation",
+     "Serializable"
+    ],
+    [
+     "Different rows, same file",
+     "Can coexist with DVs + row-level concurrency"
+    ]
+   ],
+   "explain": "The memorization trio plus the row-level concurrency rule."
+  },
+  {
+   "id": "ch05-e089",
+   "type": "mcq",
+   "section": "ch05-s11",
+   "difficulty": 3,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which conditions enable row-level concurrency on Databricks? (choose all)",
+   "options": [
+    "Deletion vectors enabled",
+    "Supported Databricks Runtime",
+    "Unpartitioned table (or liquid-clustered table)",
+    "Isolation level set to Serializable",
+    "ZORDER applied"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "multi": true,
+   "explain": "Row-level concurrency relies on DVs and works for unpartitioned tables on supported runtimes; liquid-clustered tables also use this architecture. Isolation level and ZORDER are not prerequisites."
+  },
+  {
+   "id": "ch05-e090",
+   "type": "odd",
+   "section": "ch05-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which one does NOT belong to Delta's isolation vocabulary on Databricks?",
+   "options": [
+    "WriteSerializable",
+    "Serializable",
+    "Snapshot isolation for reads",
+    "Read Uncommitted"
+   ],
+   "answer": 3,
+   "explain": "Delta writes use WriteSerializable (default) or Serializable; reads use snapshot isolation. Delta never exposes uncommitted data — that's the whole point of atomic commits."
+  },
+  {
+   "id": "ch05-e091",
+   "type": "mcq",
+   "section": "ch05-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "debug"
+   ],
+   "quick": true,
+   "q": "Your write fails with `ConcurrentAppendException`. What does this usually mean?",
+   "options": [
+    "The Delta table is corrupted",
+    "The optimistic concurrency system prevented an unsafe commit because another operation added files your operation depended on",
+    "Cluster ran out of memory",
+    "Schema mismatch"
+   ],
+   "answer": 1,
+   "explain": "Concurrency exceptions signal protection, not corruption. Investigate the competing writer; retry after re-reading fresh state if the conflict is transient."
+  },
+  {
+   "id": "ch05-e092",
+   "type": "match",
+   "section": "ch05-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Match each exception to its likely cause.",
+   "pairs": [
+    [
+     "MetadataChangedException",
+     "Concurrent ALTER TABLE / schema-evolving write"
+    ],
+    [
+     "ConcurrentAppendException",
+     "Another writer added files in the data you read"
+    ],
+    [
+     "ConcurrentDeleteReadException",
+     "Another writer deleted/rewrote a file you read"
+    ],
+    [
+     "ProtocolChangedException",
+     "Table protocol/features upgraded concurrently"
+    ],
+    [
+     "ConcurrentTransactionException",
+     "Two writers share one transaction identity (e.g. stream checkpoint)"
+    ]
+   ],
+   "explain": "Learn the cause behind each name: it tells you which *other* operation to look for in DESCRIBE HISTORY."
+  },
+  {
+   "id": "ch05-e093",
+   "type": "scenario",
+   "section": "ch05-s12",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Your daily `MERGE INTO prod.silver.orders … ON t.id = s.id` fails with `DELTA_CONCURRENT_WRITE`.",
+   "steps": [
+    {
+     "prompt": "What's your first move?",
+     "options": [
+      {
+       "text": "Find what other writer touched the table at the same time (DESCRIBE HISTORY)",
+       "ok": true,
+       "fb": "Identify the competing transaction first."
+      },
+      {
+       "text": "Wrap it in a loop: run again until it works",
+       "ok": false,
+       "fb": "Hides the cause; may hammer the table and never converge."
+      },
+      {
+       "text": "Drop and recreate the table",
+       "ok": false,
+       "fb": "Destroys data/history; the table isn't corrupted."
+      }
+     ]
+    },
+    {
+     "prompt": "History shows a backfill job running MERGE on the same table. Both MERGEs scan the whole table. What helps?",
+     "options": [
+      {
+       "text": "Narrow the MERGE condition if semantically correct, e.g. AND t.event_date = DATE'2026-09-16'",
+       "ok": true,
+       "fb": "Smaller read scope = smaller scan and smaller conflict domain."
+      },
+      {
+       "text": "Switch both to INSERT OVERWRITE",
+       "ok": false,
+       "fb": "Changes semantics and still conflicts."
+      },
+      {
+       "text": "Lower the cluster size",
+       "ok": false,
+       "fb": "Concurrency conflicts aren't a compute problem."
+      }
+     ]
+    },
+    {
+     "prompt": "Anything else to check?",
+     "options": [
+      {
+       "text": "Whether DVs/row-level concurrency are enabled, whether a schema ALTER runs concurrently, and add retry-after-fresh-read for transient conflicts",
+       "ok": true,
+       "fb": "Covers the remaining causes and a safe retry policy."
+      },
+      {
+       "text": "Set VACUUM RETAIN 0 HOURS",
+       "ok": false,
+       "fb": "Unrelated and dangerous."
+      },
+      {
+       "text": "Disable the transaction log",
+       "ok": false,
+       "fb": "Impossible and nonsensical."
+      }
+     ]
+    }
+   ],
+   "explain": "Concurrency debugging = who else wrote, what did both read, can scope be narrowed, schema changes?, DV/RLC available?, then retry policy."
+  },
+  {
+   "id": "ch05-e094",
+   "type": "order",
+   "section": "ch05-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the concurrency debugging questions (playbook order).",
+   "items": [
+    "What other writer touched this table?",
+    "What rows/files/partitions did both operations read?",
+    "Are predicates too broad / can I narrow the MERGE condition?",
+    "Is a schema ALTER happening concurrently?",
+    "Are deletion vectors / row-level concurrency available?",
+    "Should the application retry after re-reading fresh state?"
+   ],
+   "explain": "From cause (who/what) to scope (predicates) to special causes (schema) to platform features (DV/RLC) and finally the retry policy. Retrying first is the 'bad response'."
+  },
+  {
+   "id": "ch05-e095",
+   "type": "write",
+   "section": "ch05-s12",
+   "difficulty": 3,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Rewrite the MERGE so its ON condition is bounded to `event_date = DATE'2026-09-16'` (target `prod.silver.orders` t, source `daily_updates` s, key `id`, use `SET *`/`INSERT *`).",
+   "solution": "MERGE INTO prod.silver.orders t\nUSING daily_updates s\nON t.id = s.id\n   AND t.event_date = DATE'2026-09-16'\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;",
+   "keywords": [
+    "merge into prod.silver.orders",
+    "on t.id = s.id",
+    "and t.event_date = date'2026-09-16'",
+    "update set *",
+    "insert *"
+   ],
+   "lang": "sql",
+   "explain": "The extra bound reduces both the scan and the conflict domain — valid only if matching target rows really live on that date, otherwise rows from other dates would be inserted as duplicates."
+  },
+  {
+   "id": "ch05-e096",
+   "type": "tf",
+   "section": "ch05-s12",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "The right response to a concurrency exception is to re-run the job until it succeeds.",
+   "answer": false,
+   "explain": "That's the 'bad response'. First understand who else wrote and why the scopes overlap. Retry logic is fine for legitimate transient conflicts — after re-reading fresh state."
+  },
+  {
+   "id": "ch05-e097",
+   "type": "mcq",
+   "section": "ch05-s12",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "debug"
+   ],
+   "quick": false,
+   "q": "`MetadataChangedException` during a write. What probably happened?",
+   "options": [
+    "Disk full on a worker",
+    "A concurrent operation changed the table metadata, e.g. ALTER TABLE or a schema-evolving write",
+    "Your SELECT used the wrong version",
+    "VACUUM deleted a data file"
+   ],
+   "answer": 1,
+   "explain": "Schema changes are metadata changes and conflict with concurrent writes (they can also stop streams reading the table until restart). Coordinate schema updates."
+  },
+  {
+   "id": "ch05-e098",
+   "type": "bucket",
+   "section": "ch05-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "debug"
+   ],
+   "quick": false,
+   "q": "Will these two concurrent operations necessarily conflict (assume DVs + row-level concurrency enabled, unpartitioned table)?",
+   "buckets": [
+    "Real conflict expected",
+    "Can usually coexist"
+   ],
+   "items": [
+    {
+     "text": "Both UPDATE row id=10",
+     "bucket": 0
+    },
+    {
+     "text": "A updates row 1, B updates row 9000 of the same file",
+     "bucket": 1
+    },
+    {
+     "text": "A runs ALTER TABLE ADD COLUMNS while B writes",
+     "bucket": 0
+    },
+    {
+     "text": "A deletes a file that B's MERGE read",
+     "bucket": 0
+    },
+    {
+     "text": "Two blind INSERT appends",
+     "bucket": 1
+    }
+   ],
+   "explain": "Same-row changes, metadata changes and deletes of files you read are real conflicts. Different rows (with RLC) and blind appends usually coexist."
+  },
+  {
+   "id": "ch05-e099",
+   "type": "mcq",
+   "section": "ch05-s08",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "concept"
+   ],
+   "quick": false,
+   "q": "What is `MERGE`?",
+   "options": [
+    "A command that combines two tables into a new table",
+    "An atomic source-to-target operation that can update, insert and delete target rows based on matching conditions",
+    "A way to merge small files",
+    "A schema-evolution command"
+   ],
+   "answer": 1,
+   "why": [
+    "It changes an existing target, it doesn't build a new table.",
+    "Correct.",
+    "That's OPTIMIZE.",
+    "That's mergeSchema / WITH SCHEMA EVOLUTION."
+   ],
+   "explain": "MERGE matches source rows to target rows with an ON condition and applies UPDATE/INSERT/DELETE per case, all in one transaction (one new version). File compaction is OPTIMIZE; schema merging is mergeSchema."
+  },
+  {
+   "id": "ch05-e100",
+   "type": "tf",
+   "section": "ch05-s02",
+   "difficulty": 3,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Checkpoint V2 is a newer checkpoint design aimed at better scalability and concurrency for large or frequently updated tables.",
+   "answer": true,
+   "explain": "Checkpoints summarize log state in Parquet-based structures; V2 improves how that works at scale. You still shouldn't depend on when checkpoints are written."
+  },
+  {
+   "id": "ch05-e101",
+   "type": "tf",
+   "section": "ch05-s09",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Besides SQL MERGE and `DeltaTable.merge`, modern PySpark/Databricks also has a DataFrame `mergeInto()` API — all implement the same source-target matching model.",
+   "answer": true,
+   "explain": "Different APIs, same semantics: ON condition + matched / not matched / not matched by source clauses. Learn SQL MERGE and DeltaTable first — they dominate existing production code."
+  },
+  {
+   "id": "ch05-e102",
+   "type": "cloze",
+   "section": "ch05-s09",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Complete the Python MERGE.",
+   "text": "from delta.tables import [[DeltaTable]]\n\ntarget = DeltaTable.[[forName]](spark, \"prod.silver.customers\")\n(target.alias(\"t\")\n   .[[merge]](source.alias(\"s\"), \"t.id = s.id\")\n   .[[whenMatchedUpdate]](set={\"name\": \"s.name\", \"city\": \"s.city\"})\n   .[[whenNotMatchedInsert]](values={\"id\": \"s.id\", \"name\": \"s.name\", \"city\": \"s.city\"})\n   .[[execute]]())",
+   "bank": [
+    "forPath",
+    "join",
+    "whenMatchedInsert",
+    "collect"
+   ],
+   "asCode": true,
+   "explain": "forName loads the table by catalog name; merge(source, condition) starts the builder; whenMatchedUpdate/whenNotMatchedInsert mirror WHEN MATCHED / WHEN NOT MATCHED; execute() runs it."
+  },
+  {
+   "id": "ch05-e103",
+   "type": "spotbug",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "The source `staging.customer_changes_today` holds only today's changed customers. Which line will cause data loss?",
+   "lines": [
+    "MERGE INTO prod.silver.customers t",
+    "USING staging.customer_changes_today s",
+    "ON t.id = s.id",
+    "WHEN MATCHED THEN UPDATE SET *",
+    "WHEN NOT MATCHED THEN INSERT *",
+    "WHEN NOT MATCHED BY SOURCE THEN DELETE;"
+   ],
+   "bugs": [
+    5
+   ],
+   "fix": "MERGE INTO prod.silver.customers t\nUSING staging.customer_changes_today s\nON t.id = s.id\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;",
+   "explain": "With an incremental source, every customer not changed today is 'not matched by source' and gets deleted. Only use that clause when the source is a full authoritative snapshot."
+  },
+  {
+   "id": "ch05-e104",
+   "type": "spotbug",
+   "section": "ch05-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A colleague's 'mental model' notes for an UPDATE of row 2 in file A (rows 1–3). Which line is wrong?",
+   "lines": [
+    "1. Find files containing order_id = 2 (file A)",
+    "2. Open A.parquet and overwrite row 2's bytes in place",
+    "3. Commit to _delta_log as a new version",
+    "4. Old snapshots still see the old row 2"
+   ],
+   "bugs": [
+    1
+   ],
+   "fix": "2. Write a new file B (rows 1, 3 unchanged + new row 2) — or a DV + supplemental file — then commit REMOVE A + ADD B",
+   "explain": "Parquet files are immutable. Delta writes new data (copy-on-write rewrite or deletion vector + supplemental file) and swaps it in atomically; that's also why old snapshots still work."
+  },
+  {
+   "id": "ch05-e105",
+   "type": "cloze",
+   "section": "ch05-s10",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Optimistic concurrency in one sentence.",
+   "text": "Each writer [[reads]] a consistent snapshot, [[writes]] candidate files without locking, then [[validates]] against commits made since its snapshot and either [[commits]] a new atomic version or fails.",
+   "bank": [
+    "locks",
+    "vacuums",
+    "merges"
+   ],
+   "explain": "READ → WRITE → VALIDATE → COMMIT. Conflicts are detected at the end, not prevented with locks up front."
+  },
+  {
+   "id": "ch05-e106",
+   "type": "order",
+   "section": "ch05-s07",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "`VERSION AS OF 80` worked yesterday and fails today. Order your investigation.",
+   "items": [
+    "Run DESCRIBE HISTORY on the table",
+    "Check whether a VACUUM ran and with which retention",
+    "Check whether v80's data files still exist (not just its history entry)",
+    "Conclude: time travel isn't a backup — rely on a real backup for older states"
+   ],
+   "explain": "History first, then the VACUUM and its retention, then the physical files. A history entry alone never proves a version is still queryable."
+  },
+  {
+   "id": "ch05-e107",
+   "type": "scenario",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "After the nightly MERGE into `prod.silver.customers`, the table dropped from 2 million rows to 3,000.",
+   "steps": [
+    {
+     "prompt": "What do you look at first?",
+     "options": [
+      {
+       "text": "DESCRIBE HISTORY: the MERGE's operationMetrics (numTargetRowsDeleted)",
+       "ok": true,
+       "fb": "Confirms the MERGE deleted rows and how many."
+      },
+      {
+       "text": "DESCRIBE DETAIL numFiles",
+       "ok": false,
+       "fb": "File counts don't explain logical row loss."
+      },
+      {
+       "text": "Cluster event log",
+       "ok": false,
+       "fb": "Data loss is a logic issue, visible in history."
+      }
+     ]
+    },
+    {
+     "prompt": "The MERGE has WHEN NOT MATCHED BY SOURCE THEN DELETE. The source is 'today's changed customers'. Diagnosis?",
+     "options": [
+      {
+       "text": "The clause treated the incremental batch as authoritative and deleted every customer not in it",
+       "ok": true,
+       "fb": "Exactly the documented danger."
+      },
+      {
+       "text": "A concurrency conflict deleted rows",
+       "ok": false,
+       "fb": "Conflicts fail transactions, they don't delete rows."
+      },
+      {
+       "text": "VACUUM removed the rows",
+       "ok": false,
+       "fb": "VACUUM never changes the current snapshot."
+      }
+     ]
+    },
+    {
+     "prompt": "Fix?",
+     "options": [
+      {
+       "text": "RESTORE to the pre-MERGE version, then remove the clause (keep it only for full snapshots)",
+       "ok": true,
+       "fb": "Repair data, then fix semantics."
+      },
+      {
+       "text": "Re-run the MERGE twice",
+       "ok": false,
+       "fb": "Same result again."
+      },
+      {
+       "text": "Switch the source to INSERT OVERWRITE",
+       "ok": false,
+       "fb": "Another way to lose data."
+      }
+     ]
+    }
+   ],
+   "explain": "NOT MATCHED BY SOURCE DELETE is only safe with a full authoritative snapshot as source."
+  },
+  {
+   "id": "ch05-e108",
+   "type": "order",
+   "section": "ch05-s08",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Rows vanished after a MERGE. Order the response.",
+   "items": [
+    "Check the MERGE for WHEN NOT MATCHED BY SOURCE THEN DELETE",
+    "Determine whether the source is a full snapshot or incremental",
+    "Read the MERGE's operationMetrics in DESCRIBE HISTORY",
+    "RESTORE the last good version",
+    "Remove or condition the clause"
+   ],
+   "explain": "Find the clause, confirm the source semantics, quantify via metrics, restore, then fix the code so it can't recur."
+  }
+ ]
+}

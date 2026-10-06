@@ -1,0 +1,8 @@
+# Netlify: builds the public website from this repo on every push.
+# The published folder (dist/site) contains ONLY the app + shared subject packs:
+# no PDFs, no private packs, no account backups, no database, no config.local.js.
+[build]
+  command = "python3 tools/build.py site --no-validate"
+  publish = "dist/site"
+[build.environment]
+  PYTHON_VERSION = "3.11"

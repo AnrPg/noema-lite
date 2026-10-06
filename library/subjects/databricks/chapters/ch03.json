@@ -1,0 +1,3745 @@
+{
+ "id": "ch03",
+ "num": 3,
+ "title": "Identity, Governance & Shipping Code",
+ "subtitle": "Principals, securables, privileges, dev→staging→prod, Git, CI/CD, IaC, Bundles — and the three classic debugging cases",
+ "emoji": "🔐",
+ "sourcePages": "52–76",
+ "mantra": "Know WHO is running, WHAT it may touch and HOW the code reached prod — then debug by finding the first layer where reality diverges from what you expected.",
+ "objectives": [
+  "You can separate authentication from authorization and name the three principal types.",
+  "You can read a GRANT statement word by word and list every privilege needed to SELECT from catalog.schema.table.",
+  "You can debug PERMISSION_DENIED in the right order — ending with 'which identity is ACTUALLY running?'.",
+  "You can explain least privilege and why ALL PRIVILEGES for everybody is a bad fix.",
+  "You can describe dev → test/staging → prod, Git flow, CI, CD and Infrastructure as Code (Declarative Automation Bundles, formerly Asset Bundles).",
+  "You can run the three classic debugging playbooks: no new data, duplicate records, works in dev / fails in prod.",
+  "You can map the whole platform: Lakeflow/Spark, Unity Catalog, Git/CI/CD, Bundles, Delta + cloud storage."
+ ],
+ "sections": [
+  {
+   "id": "ch03-s01",
+   "title": "Authentication vs Authorization",
+   "hook": "'Who are you?' and 'What may you do?' are two different questions — and two different failure modes.",
+   "blocks": [
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Authentication",
+       "points": [
+        "Question: **Who are you?**",
+        "`nikos@company.com` logs in",
+        "System proves: this really is Nikos"
+       ]
+      },
+      {
+       "title": "Authorization",
+       "points": [
+        "Question: **What are you allowed to do?**",
+        "Checked after identity is known",
+        "E.g. SELECT yes, DELETE no"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Action by Nikos",
+      "Allowed?"
+     ],
+     "rows": [
+      [
+       "SELECT customers",
+       "YES"
+      ],
+      [
+       "DELETE customers",
+       "NO"
+      ],
+      [
+       "CREATE TABLE",
+       "NO"
+      ]
+     ],
+     "caption": "Authorization = a list of allowed actions for a known identity"
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Hotel analogy",
+     "text": "Reception checks your passport — **authentication**. Your key card then opens only your room and the gym, not the kitchen — **authorization**."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Order matters",
+     "text": "Authorization only makes sense after authentication: first the system knows WHO, then it decides WHAT that identity may do."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: Nikos logs in successfully but gets an error when running DELETE. Authentication or authorization problem?",
+     "text": "**Authorization.** Login worked, so his identity was proven; the system simply doesn't allow that identity to delete."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s02",
+   "title": "Principals: User, Group, Service Principal",
+   "hook": "Every grant goes TO a principal — pick the right kind and half of your security problems disappear.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **principal** is an identity to which permissions can be given. Unity Catalog grants privileges to principals on securable objects."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "User",
+       "def": "A human, e.g. `nikos@company.com`."
+      },
+      {
+       "term": "Group",
+       "def": "A set of principals, e.g. `data_engineers` = Nikos, Maria, John."
+      },
+      {
+       "term": "Service principal",
+       "def": "A machine identity for automation, e.g. `orders-etl-prod`."
+      }
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "-- painful: one grant per person\nGRANT ... TO Nikos;\nGRANT ... TO Maria;\nGRANT ... TO John;\n\n-- better: grant to the group, manage membership\nGRANT ... TO `data_engineers`;",
+     "caption": "Grant to groups, not individuals"
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Groups over individuals",
+     "text": "Databricks recommends managing access through **groups** instead of individual users wherever possible. Then onboarding/offboarding = changing group membership."
+    },
+    {
+     "t": "p",
+     "text": "A production job runs **every night at 02:00**. Ideally it should **not** 'run as Nikos'. What if Nikos leaves the company and his account is disabled? The job breaks."
+    },
+    {
+     "t": "diagram",
+     "text": "human       ──►  user identity       (nikos@company.com)\nautomation  ──►  service principal   (orders-etl-prod)",
+     "caption": "Humans use users; automation uses service principals"
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "Why service principals for production?",
+     "text": "A production workload needs a **stable machine identity** independent of the lifecycle and permissions of one specific employee. We'll use this again with Jobs and CI/CD."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s03",
+   "title": "Securable Objects, Privileges & GRANT Grammar",
+   "hook": "Read GRANT like a sentence: give WHAT right, ON which object, TO whom.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **securable object** is anything whose permissions you can control: catalog, schema, table, volume, function, …"
+    },
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "catalog:  company\nschema:   company.finance\ntable:    company.finance.payroll",
+     "caption": "Securables at three levels"
+    },
+    {
+     "t": "p",
+     "text": "A **privilege** is the action a principal is allowed to perform on a securable object."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "GRANT SELECT\nON TABLE company.finance.transactions\nTO `analysts`;"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Word",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "GRANT",
+       "give"
+      ],
+      [
+       "SELECT",
+       "the read permission (the privilege)"
+      ],
+      [
+       "ON TABLE …",
+       "on this securable object"
+      ],
+      [
+       "TO analysts",
+       "to this principal (here a group)"
+      ]
+     ],
+     "caption": "Parse it grammatically instead of memorizing it"
+    },
+    {
+     "t": "p",
+     "text": "To SELECT from `company.finance.transactions` you conceptually walk the path **company → finance → transactions**, so permissions usually include the containers too:"
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "GRANT USE CATALOG ON CATALOG company TO `analysts`;\nGRANT USE SCHEMA  ON SCHEMA  company.finance TO `analysts`;\nGRANT SELECT      ON TABLE   company.finance.transactions TO `analysts`;",
+     "caption": "The full path for a read"
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "SELECT alone is not enough",
+     "text": "Having SELECT on a table but **not USE CATALOG** (or USE SCHEMA) can still produce a permission problem: access passes through the catalog/schema hierarchy."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Coming later",
+     "text": "Privilege inheritance and the exact Unity Catalog semantics come in the Unity Catalog chapter."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Securable object",
+       "def": "A governed object on which permissions can be granted (catalog, schema, table, volume, function…)."
+      },
+      {
+       "term": "Privilege",
+       "def": "An action a principal may perform on a securable (SELECT, USE CATALOG, USE SCHEMA…)."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch03-s04",
+   "title": "Debugging PERMISSION_DENIED",
+   "hook": "'Give me admin' is not debugging. Walk the path — and check WHO is really running.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "SELECT *\nFROM prod.finance.transactions;\n\n-- Error: PERMISSION_DENIED"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Bad debugging",
+       "points": [
+        "\"Just give me admin\"",
+        "Fixes the symptom, breaks least privilege",
+        "You learn nothing about the cause"
+       ]
+      },
+      {
+       "title": "Good debugging",
+       "points": [
+        "Walk the access path step by step",
+        "Check the identity that actually runs",
+        "Grant only the missing privilege"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Workspace access?",
+      "USE CATALOG prod?",
+      "USE SCHEMA finance?",
+      "SELECT on table?",
+      "Row filters / masks / policies?",
+      "Which identity is ACTUALLY running?"
+     ],
+     "caption": "The permission-debugging chain"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "The last question is the critical one",
+     "text": "**You** may have SELECT. But the Job may run as `orders-prod-service-principal` — and that identity may not."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when you see PERMISSION_DENIED",
+     "questions": [
+      "Can this principal access the workspace at all?",
+      "Does it have USE CATALOG on the catalog (prod)?",
+      "Does it have USE SCHEMA on the schema (finance)?",
+      "Does it have SELECT on the table itself?",
+      "Are row filters, column masks or other policies limiting it?",
+      "Which identity is ACTUALLY running this — me, or a job's service principal?"
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "'It works for me' proves nothing",
+     "text": "Your own successful query only proves YOUR identity has the privileges. Always check the run identity of the job."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s05",
+   "title": "Least Privilege",
+   "hook": "Give exactly what's needed — because every extra privilege is an extra way to break production.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Least privilege**: give only the permissions that are necessary."
+    },
+    {
+     "t": "p",
+     "text": "If an analyst needs `SELECT`, you do **not** give `ALL PRIVILEGES` 'so they can work more easily'."
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Powerful privileges",
+     "text": "Databricks specifically warns to use powerful privileges such as **ALL PRIVILEGES**, **MANAGE** and **ownership** sparingly."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Violates least privilege",
+      "Increases the **blast radius** (how much damage one mistake or compromised identity can do)",
+      "Risk of accidental or destructive actions",
+      "Security exposure"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Blast radius",
+       "def": "How much can be damaged if one identity makes a mistake or is compromised."
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "'Give ALL PRIVILEGES to everybody'",
+     "text": "It makes the error disappear today and creates a much bigger incident tomorrow."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: an analyst needs to read gold.daily_sales. What exactly do they need?",
+     "text": "USE CATALOG on the catalog, USE SCHEMA on the schema, SELECT on the table — nothing more (no MODIFY, no ALL PRIVILEGES, no ownership)."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s06",
+   "title": "Dev → Test/Staging → Prod",
+   "hook": "Never debug on the CEO's dashboard. Environments let you break things safely.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You have `prod.gold.monthly_revenue` feeding the **CEO dashboard**. You want to try `.filter(col(\"country\") != \"GR\")` for debugging. Do you edit the production notebook and press **Run All**? **No.** You want **environment isolation**."
+    },
+    {
+     "t": "diagram",
+     "text": "DEV\n │  code changes\n ▼\nTEST / STAGING\n │  validation\n ▼\nPROD"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "DEV",
+       "points": [
+        "Developer works here",
+        "May break things, experiment, debug",
+        "Sample data",
+        "e.g. `dev_nikos.silver.orders`"
+       ]
+      },
+      {
+       "title": "TEST / STAGING",
+       "points": [
+        "Closer to production",
+        "Checks permissions, dependencies, configuration",
+        "Integration, data quality, deployment",
+        "No impact on real consumers"
+       ]
+      },
+      {
+       "title": "PROD",
+       "points": [
+        "Real workloads run",
+        "Controlled deployments, stable configs",
+        "Monitoring, restricted permissions",
+        "Reproducibility"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Notebook in browser",
+      "edit production code manually",
+      "Run All"
+     ],
+     "caption": "The big mistake — not a serious deployment model"
+    },
+    {
+     "t": "ask",
+     "title": "Questions you CAN'T answer after a manual prod edit",
+     "questions": [
+      "Which version is running?",
+      "Who changed it?",
+      "When?",
+      "What changed?",
+      "How do I go back to the previous version?",
+      "Did this same code pass tests?"
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Manual production edits",
+     "text": "You lose reproducibility, controlled review/testing, reliable version history and repeatable deployment."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s07",
+   "title": "Source Control with Git",
+   "hook": "The source of truth is the repository — not 'that notebook Nikos has in his workspace'.",
+   "blocks": [
+    {
+     "t": "flow",
+     "items": [
+      "developer",
+      "branch",
+      "commit",
+      "pull request",
+      "review",
+      "main"
+     ],
+     "caption": "Typical Git flow"
+    },
+    {
+     "t": "p",
+     "text": "The **source of truth** for code becomes the **Git repository** — not *\"that notebook Nikos has in the workspace\"*."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Branch",
+       "def": "An isolated line of work for one change."
+      },
+      {
+       "term": "Commit",
+       "def": "A recorded snapshot of changes with author and time."
+      },
+      {
+       "term": "Pull request (PR)",
+       "def": "A request to merge a branch, where the change is reviewed (and tested)."
+      },
+      {
+       "term": "main",
+       "def": "The shared branch that represents accepted code."
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "What Git gives you",
+     "text": "Version history, who/what/when for every change, review before merge, and an easy way back to previous versions — the answers to the 'manual edit' questions."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: which of the six 'manual edit' questions does Git answer?",
+     "text": "Which version, who, when, what changed and how to go back. 'Did it pass tests?' needs CI on top of Git."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s08",
+   "title": "CI and CD",
+   "hook": "Machines check every change (CI) and ship validated changes the same way every time (CD).",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**CI — Continuous Integration.** You `git push`; the system automatically runs:"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "lint",
+      "unit tests",
+      "integration tests",
+      "configuration validation",
+      "build"
+     ],
+     "caption": "A CI pipeline"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "CI gate",
+     "text": "If anything fails: **don't merge / don't deploy.**"
+    },
+    {
+     "t": "p",
+     "text": "**CD** can mean **Continuous Delivery** or **Continuous Deployment** depending on the process. The core idea: validated artifact/code → automated, controlled deployment → target environment."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "main branch",
+      "tests",
+      "deploy staging",
+      "integration tests",
+      "deploy production"
+     ],
+     "caption": "A CD pipeline"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "CI",
+       "points": [
+        "Automatic integration / validation / testing of code changes",
+        "Runs on push / PR",
+        "Output: pass/fail + build"
+       ]
+      },
+      {
+       "title": "CD",
+       "points": [
+        "Controlled delivery/deployment of validated changes",
+        "To staging, then production",
+        "Output: deployed environment"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Two meanings of CD",
+     "text": "Continuous **Delivery** (ready to deploy, often with an approval) vs Continuous **Deployment** (deployed automatically). Either way: validated code → automated, controlled deployment."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s09",
+   "title": "Infrastructure as Code & Declarative Automation Bundles",
+   "hook": "If a Job exists only as UI clicks, nobody can review it, version it or recreate it.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A Job needs: task A, task B, schedule, compute, parameters, permissions. You *can* create all of it manually in the UI — but in production it's often better to **declare it as code/configuration**."
+    },
+    {
+     "t": "code",
+     "lang": "yaml",
+     "code": "job:\n  name: orders_pipeline\n  schedule:\n    ...\n  tasks:\n    - ingest\n    - transform",
+     "caption": "Conceptual job definition (not real syntax yet)"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Can live in Git",
+      "Can be reviewed",
+      "Has version history",
+      "Can be reproduced",
+      "Can be deployed automatically"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "This is the philosophy of **Infrastructure as Code / configuration as code**."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Naming: Declarative Automation Bundles = Databricks Asset Bundles",
+     "text": "The tool you'll learn later is called **Declarative Automation Bundles**; it was formerly called **Databricks Asset Bundles**. Tutorials saying 'Asset Bundles' mean the same concept."
+    },
+    {
+     "t": "p",
+     "text": "Databricks recommends bundles as the main approach for CI/CD and IaC-style deployment of Databricks projects. A bundle can describe **jobs, pipelines, source files, tests and target environments**. The central file is usually **`databricks.yml`**."
+    },
+    {
+     "t": "code",
+     "lang": "yaml",
+     "code": "targets:\n  dev:\n    mode: development\n  prod:\n    mode: production",
+     "caption": "databricks.yml targets with the two deployment modes"
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Don't memorize yet",
+     "text": "We'll learn bundle syntax line by line in the Bundles chapter. For now: bundle = project + resources + targets, as code."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s10",
+   "title": "The Whole Platform at a Glance (and 2026 Naming)",
+   "hook": "One mental model for the entire data-engineering platform — plus a decoder ring for old names.",
+   "blocks": [
+    {
+     "t": "diagram",
+     "text": "PostgreSQL\n    │  CDC\n    ▼\n┌──────────────┐\n│    BRONZE    │  raw changes\n└──────┬───────┘\n       │  AUTO CDC · validation · cleaning\n       ▼\n┌──────────────┐\n│    SILVER    │  customers · orders · products\n└──────┬───────┘\n       │  aggregation\n       ▼\n┌──────────────┐\n│     GOLD     │\n└──────────────┘",
+     "caption": "The e-commerce data flow"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Concern",
+      "What handles it"
+     ],
+     "rows": [
+      [
+       "Execution",
+       "Lakeflow / Spark → processing"
+      ],
+      [
+       "Governance",
+       "Unity Catalog → who? what object? what privilege?"
+      ],
+      [
+       "Development",
+       "Git → DEV → tests → STAGING → PROD"
+      ],
+      [
+       "Deployment",
+       "Declarative Automation Bundle + CI/CD system"
+      ],
+      [
+       "Storage",
+       "Delta tables → cloud object storage"
+      ]
+     ],
+     "caption": "Add these layers around the data flow"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "A correct mental model",
+     "text": "This is already a fairly accurate mental model of the entire Databricks data-engineering platform."
+    },
+    {
+     "t": "p",
+     "text": "**2026 naming:** you'll meet tutorials using different names for the pipeline product:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Delta Live Tables",
+      "DLT",
+      "Lakeflow Declarative Pipelines",
+      "Spark Declarative Pipelines",
+      "Lakeflow pipelines"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "In current docs, **Lakeflow pipelines** build on **Apache Spark Declarative Pipelines (SDP)** and support **batch and streaming** pipelines in **SQL/Python**, with **automatic dependency orchestration** and **incremental processing**."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Old names still matter",
+     "text": "You'll learn today's syntax, but old names remain important for older tutorials, Stack Overflow, older exams and existing production systems."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s11",
+   "title": "Debugging Case 1: No New Data Appears",
+   "hook": "Source has today's data, Gold doesn't. Walk the pipeline — don't blame the platform.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Pipeline: **source files → bronze → silver → gold**. The source has today's data. **Gold doesn't.**"
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Don't say 'Databricks bug'",
+     "text": "Think in pipeline terms and check each layer in order."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Source: new files exist?",
+      "Bronze: ingested?",
+      "Checkpoint: advanced?",
+      "Silver: rows rejected?",
+      "Schema: changed?",
+      "CDC: sequence/key correct?",
+      "Gold: refresh/job ran?"
+     ],
+     "caption": "The layer-by-layer check"
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when new data doesn't show up",
+     "questions": [
+      "Source: do the new files/events really exist?",
+      "Bronze: were they ingested?",
+      "Checkpoint: did it advance?",
+      "Silver: did the transformation reject (filter/quarantine) the rows?",
+      "Schema: did it change and block the write?",
+      "CDC: are sequence and key correct?",
+      "Gold: did the refresh/job actually run?"
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "The golden rule of this course",
+     "text": "**Find the first layer at which reality diverges from what you expected.** Everything upstream of it is fine; the bug lives at that boundary."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Observation",
+      "Where to debug"
+     ],
+     "rows": [
+      [
+       "Kafka has event 500, Bronze doesn't",
+       "Source → Bronze (ingestion, checkpoint)"
+      ],
+      [
+       "Bronze has event 500, Silver doesn't",
+       "Bronze → Silver (validation, schema, CDC, dedup)"
+      ],
+      [
+       "Silver has it, Gold doesn't",
+       "Silver → Gold (aggregation, refresh / job run)"
+      ]
+     ]
+    },
+    {
+     "t": "reveal",
+     "label": "Think first (test Q25): Kafka → Bronze → Silver → Gold. Kafka has event 500. Bronze has event 500. Silver doesn't. Where do you start?",
+     "text": "At the **Bronze → Silver boundary** — you've already proven the event reached Bronze, so source and ingestion are fine."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s12",
+   "title": "Debugging Case 2: Duplicate Records",
+   "hook": "'I have duplicates' is a symptom, not a root cause — there are at least seven very different causes.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "order 123\norder 123",
+     "caption": "The symptom"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Possible cause",
+      "Where it lives / what to check"
+     ],
+     "rows": [
+      [
+       "Source produced a duplicate",
+       "Source: does the source itself contain order 123 twice?"
+      ],
+      [
+       "File ingested twice",
+       "Source → Bronze: was the same file loaded twice?"
+      ],
+      [
+       "Checkpoint reset",
+       "Streaming: was the checkpoint deleted/reset/moved?"
+      ],
+      [
+       "Retry semantics",
+       "Job: did a retry re-write data that was already written?"
+      ],
+      [
+       "CDC key incorrect",
+       "Silver: is the key really unique per entity?"
+      ],
+      [
+       "Deduplication missing",
+       "Silver: is there a dedup step at all?"
+      ],
+      [
+       "MERGE condition incorrect",
+       "Silver/Gold: does the MERGE ON clause match existing rows?"
+      ]
+     ],
+     "caption": "Seven very different root causes"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Symptom ≠ root cause",
+     "text": "\"I have duplicates\" is **not** a root cause. It's a symptom. Your job is to find which mechanism created the second copy."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when you see duplicate records",
+     "questions": [
+      "Does the source itself contain the duplicate?",
+      "Was the same file/batch ingested twice into Bronze?",
+      "Was a streaming checkpoint reset or moved?",
+      "Did a job retry re-write data it had already written?",
+      "Is the CDC/business key I use really unique?",
+      "Does my Silver logic deduplicate at all?",
+      "Is my MERGE condition matching on the right key?"
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "-- BUG: matching on a changing column means updates never match\nMERGE INTO silver.orders t\nUSING updates s\nON t.order_id = s.order_id AND t.updated_at = s.updated_at\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;",
+     "caption": "An incorrect MERGE condition that inserts a second order 123"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Deduplicating blindly",
+     "text": "Adding `DISTINCT` everywhere may hide the symptom while the real cause (e.g. a reset checkpoint or wrong MERGE key) keeps producing bad data."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s13",
+   "title": "Debugging Case 3: Works in Dev, Fails in Prod",
+   "hook": "Perfect code can still fail — because prod is a different execution environment.",
+   "blocks": [
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "DEV   → success\nPROD  → PERMISSION_DENIED"
+    },
+    {
+     "t": "p",
+     "text": "The code may be perfect. What can differ between environments:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Group",
+      "What may differ"
+     ],
+     "rows": [
+      [
+       "WHO runs it",
+       "identity"
+      ],
+      [
+       "WHAT it may touch",
+       "permissions · catalog · schema · storage credential"
+      ],
+      [
+       "HOW it's configured",
+       "configuration · secret"
+      ],
+      [
+       "WHERE it runs",
+       "compute · runtime"
+      ]
+     ],
+     "caption": "Nine differences, grouped WHO → WHAT → HOW → WHERE"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Not just the traceback",
+     "text": "Production debugging isn't just reading the Python traceback. You must understand the **whole execution environment**."
+    },
+    {
+     "t": "callout",
+     "kind": "debug",
+     "title": "Works when I run it, fails when scheduled (test Q26)",
+     "text": "One of the first things to check: the **run identity**. You may have the permissions while the scheduled execution identity does not."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when it works in dev but fails in prod",
+     "questions": [
+      "Which identity runs it in prod — and is it the same one that ran it in dev?",
+      "Does that identity have the needed permissions in prod?",
+      "Am I pointing at the right catalog and schema for prod (not dev_…)?",
+      "Does prod use a storage credential this identity can use?",
+      "Is the prod configuration (parameters, paths) different?",
+      "Do the secrets exist in prod and can this identity read them?",
+      "Is the compute different (type, access mode, size)?",
+      "Is the runtime version different?"
+     ]
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "DEV run",
+       "points": [
+        "You (user identity)",
+        "dev_ catalog/schema",
+        "Your personal config & secrets",
+        "Your interactive compute/runtime"
+       ]
+      },
+      {
+       "title": "PROD run",
+       "points": [
+        "Service principal / run-as identity",
+        "prod catalog/schema",
+        "Prod config & secrets",
+        "Job compute, possibly another runtime"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Assuming the code is the problem",
+     "text": "When only the environment changed, the code is the least likely suspect. Compare environments before rewriting code."
+    }
+   ]
+  },
+  {
+   "id": "ch03-s14",
+   "title": "The Debugging Mindset & What Comes Next",
+   "hook": "One rule to carry into every Databricks topic, and the map of where we go next.",
+   "blocks": [
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "One rule for all debugging",
+     "text": "Find the **first layer where reality diverges** from what you expected. Symptoms (missing data, duplicates, PERMISSION_DENIED) are not root causes."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Debugging case",
+      "First move"
+     ],
+     "rows": [
+      [
+       "No new data",
+       "Walk Source → Bronze → checkpoint → Silver → schema → CDC → Gold"
+      ],
+      [
+       "Duplicates",
+       "Treat as symptom; find where the second copy first appears"
+      ],
+      [
+       "Works in dev, fails in prod",
+       "Compare environments, starting with identity"
+      ],
+      [
+       "PERMISSION_DENIED",
+       "Walk workspace → catalog → schema → table → policies → run identity"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "With these prerequisites you can start Databricks itself without memorizing product names you don't understand."
+    },
+    {
+     "t": "diagram",
+     "text": "DATABRICKS — PART 1\n├── what Databricks really is\n├── account vs workspace\n├── control plane vs compute plane\n├── workspace UI\n├── serverless vs classic compute\n├── clusters / compute\n├── SQL warehouses\n├── Databricks Runtime\n├── Photon\n├── notebooks\n├── catalogs / schemas / tables in the UI\n├── how a notebook really executes\n├── first real exercise\n└── debugging failing compute/notebooks/queries",
+     "caption": "Next: Databricks Part 1"
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Delta Lake",
+      "Unity Catalog",
+      "Ingestion / Auto Loader",
+      "Lakeflow",
+      "Jobs",
+      "Databricks SQL",
+      "Performance / Spark UI",
+      "Bundles / CI-CD",
+      "Security & projects"
+     ],
+     "caption": "The learning path after Part 1 (then production projects and certification drills)"
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch03-d01",
+   "title": "PERMISSION_DENIED on SELECT",
+   "section": "ch03-s04",
+   "symptom": "`SELECT * FROM prod.finance.transactions` fails with `PERMISSION_DENIED`.",
+   "askYourself": [
+    "Can this principal access the workspace at all?",
+    "Does it have USE CATALOG on prod?",
+    "Does it have USE SCHEMA on prod.finance?",
+    "Does it have SELECT on the table?",
+    "Are row filters, column masks or other policies in play?",
+    "Which identity is ACTUALLY running this — me or a job's service principal?"
+   ],
+   "steps": [
+    {
+     "do": "Identify the executing identity (user vs job run-as / service principal)",
+     "why": "Your privileges don't transfer to other identities."
+    },
+    {
+     "do": "Check the privilege path for that identity",
+     "why": "USE CATALOG → USE SCHEMA → SELECT.",
+     "code": "SHOW GRANTS ON CATALOG prod;\nSHOW GRANTS ON SCHEMA prod.finance;\nSHOW GRANTS ON TABLE prod.finance.transactions;"
+    },
+    {
+     "do": "Check fine-grained policies (row filters / masks)",
+     "why": "They can restrict even with SELECT."
+    },
+    {
+     "do": "Grant only the missing privilege, ideally to a group or the service principal",
+     "why": "Least privilege — never 'give me admin'."
+    }
+   ],
+   "rootCauses": [
+    "Missing USE CATALOG / USE SCHEMA",
+    "Missing SELECT",
+    "Job runs as a different identity without grants",
+    "Policies (row filters/masks)"
+   ],
+   "fix": "Grant exactly the missing privilege to the identity that actually runs the workload.",
+   "mnemonic": "Workspace → Catalog → Schema → Table → Policies → WHO? (W-C-S-T-P-Who)"
+  },
+  {
+   "id": "ch03-d02",
+   "title": "No new data appears in Gold",
+   "section": "ch03-s11",
+   "symptom": "The source has today's data, but Gold doesn't.",
+   "askYourself": [
+    "Source: do the new files/events really exist?",
+    "Bronze: were they ingested?",
+    "Checkpoint: did it advance?",
+    "Silver: did the transformation reject the rows?",
+    "Schema: did it change?",
+    "CDC: are sequence and key correct?",
+    "Gold: did the refresh/job run?"
+   ],
+   "steps": [
+    {
+     "do": "Confirm new data at the source",
+     "why": "Rules out 'nothing arrived'."
+    },
+    {
+     "do": "Count today's rows in Bronze",
+     "why": "Splits ingestion problems from transformation problems."
+    },
+    {
+     "do": "Inspect the stream checkpoint progress",
+     "why": "A stuck checkpoint means nothing new is read."
+    },
+    {
+     "do": "Look for rejected/quarantined rows and schema errors in Silver",
+     "why": "Validation or schema mismatch can drop the rows."
+    },
+    {
+     "do": "Verify CDC sequence/key logic",
+     "why": "Wrong ordering or keys can hide changes."
+    },
+    {
+     "do": "Check the Gold job/refresh run history",
+     "why": "Maybe Gold simply didn't refresh."
+    }
+   ],
+   "rootCauses": [
+    "Files never arrived",
+    "Ingestion didn't run",
+    "Checkpoint stuck",
+    "Rows rejected by validation",
+    "Schema change blocked writes",
+    "CDC key/sequence wrong",
+    "Gold refresh/job didn't run"
+   ],
+   "fix": "Fix the first layer where reality diverges, then let the downstream layers catch up (or rerun them).",
+   "mnemonic": "Source · Bronze · Checkpoint · Silver · Schema · CDC · Gold — 'Some Big Cats Sleep Soundly Chasing Geese'"
+  },
+  {
+   "id": "ch03-d03",
+   "title": "Duplicate records",
+   "section": "ch03-s12",
+   "symptom": "The same record appears twice (e.g. order 123 twice) in Silver or Gold.",
+   "askYourself": [
+    "Does the source itself contain the duplicate?",
+    "Was the same file ingested twice?",
+    "Was a checkpoint reset?",
+    "Did a retry re-write data already written?",
+    "Is the CDC key correct and unique?",
+    "Is deduplication missing?",
+    "Is the MERGE condition correct?"
+   ],
+   "steps": [
+    {
+     "do": "Find the first layer where the duplicate appears (source, Bronze, Silver)",
+     "why": "Separates upstream from logic causes."
+    },
+    {
+     "do": "For Bronze duplicates: check ingestion history and checkpoint",
+     "why": "File-twice or reset checkpoint."
+    },
+    {
+     "do": "Check job run history for retries",
+     "why": "Non-idempotent writes duplicate data on retry."
+    },
+    {
+     "do": "Review CDC key, dedup step and MERGE ON clause",
+     "why": "Logic causes in Silver.",
+     "code": "MERGE INTO silver.orders t\nUSING updates s\nON t.order_id = s.order_id\n..."
+    }
+   ],
+   "rootCauses": [
+    "Source produced duplicate",
+    "File ingested twice",
+    "Checkpoint reset",
+    "Retry semantics",
+    "CDC key incorrect",
+    "Deduplication missing",
+    "MERGE condition incorrect"
+   ],
+   "fix": "Fix the mechanism that created the second copy, then clean existing duplicates (e.g. dedup in Silver). Never just hide them with DISTINCT.",
+   "mnemonic": "'Some Files Can Repeat; Keys, Dedup, MERGE' (S-F-C-R-K-D-M)"
+  },
+  {
+   "id": "ch03-d04",
+   "title": "Works in dev, fails in prod",
+   "section": "ch03-s13",
+   "symptom": "DEV: success. PROD: PERMISSION_DENIED (or another failure) with identical code.",
+   "askYourself": [
+    "Which identity runs it in prod, and is it the same as in dev?",
+    "Does that identity have the needed permissions in prod?",
+    "Am I using the right prod catalog?",
+    "Am I using the right prod schema?",
+    "Is there a storage credential this identity can use?",
+    "Is the prod configuration different?",
+    "Do the needed secrets exist in prod?",
+    "Is the compute different?",
+    "Is the runtime different?"
+   ],
+   "steps": [
+    {
+     "do": "Compare run identity between dev and prod",
+     "why": "Most common difference."
+    },
+    {
+     "do": "Check privileges and object names in prod",
+     "why": "Catalog/schema names and grants differ per environment."
+    },
+    {
+     "do": "Diff configuration and secrets between targets",
+     "why": "Parameters, paths, credentials."
+    },
+    {
+     "do": "Compare compute type and runtime version",
+     "why": "Behaviour can differ by environment."
+    }
+   ],
+   "rootCauses": [
+    "Different identity",
+    "Missing permissions",
+    "Wrong catalog/schema",
+    "Missing storage credential",
+    "Different configuration",
+    "Missing secret",
+    "Different compute",
+    "Different runtime"
+   ],
+   "fix": "Make environments differ only in deliberate, declared ways (bundle targets), and grant the prod identity exactly what it needs.",
+   "mnemonic": "WHO → WHAT → HOW → WHERE (identity → permissions/catalog/schema/credential → config/secret → compute/runtime)"
+  },
+  {
+   "id": "ch03-d05",
+   "title": "Works when I run it, fails when scheduled",
+   "section": "ch03-s13",
+   "symptom": "A pipeline succeeds when run manually but fails when the scheduled job runs it.",
+   "askYourself": [
+    "Which identity does the scheduled run use?",
+    "Is it the same identity as my manual run?",
+    "Does the scheduled identity have USE CATALOG, USE SCHEMA and SELECT/MODIFY where needed?",
+    "Does it differ in configuration, secrets or compute from my manual run?"
+   ],
+   "steps": [
+    {
+     "do": "Open the job settings and read the run-as identity",
+     "why": "Manual runs use you; scheduled runs may not."
+    },
+    {
+     "do": "Check that identity's grants along the path",
+     "why": "Find the specific missing privilege."
+    },
+    {
+     "do": "Grant the minimal privilege and re-run",
+     "why": "Least privilege."
+    }
+   ],
+   "rootCauses": [
+    "Scheduled identity lacks privileges",
+    "Job configured with different parameters/secrets"
+   ],
+   "fix": "Check run identity first; grant the scheduled identity exactly what it needs.",
+   "mnemonic": "Me ≠ the job."
+  },
+  {
+   "id": "ch03-d06",
+   "title": "Nobody knows what is running in production",
+   "section": "ch03-s06",
+   "symptom": "Prod output changed overnight; someone edited the production notebook manually and pressed Run All.",
+   "askYourself": [
+    "Which version is running?",
+    "Who changed it?",
+    "When?",
+    "What changed?",
+    "How do I return to the previous version?",
+    "Did this same code pass tests?"
+   ],
+   "steps": [
+    {
+     "do": "Try to reconstruct the change from notebook history / colleagues",
+     "why": "Without Git, evidence is weak."
+    },
+    {
+     "do": "Restore known-good code",
+     "why": "Stop the damage."
+    },
+    {
+     "do": "Move the code into Git with review, CI and CD via bundles",
+     "why": "Make the six questions answerable next time."
+    }
+   ],
+   "rootCauses": [
+    "Manual edits in production",
+    "No source control",
+    "No CI/CD or environment isolation"
+   ],
+   "fix": "Dev → staging → prod with Git, CI and CD (bundles). Never edit production by hand.",
+   "mnemonic": "Which · Who · When · What · Way back · Tested? (6 Ws)"
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "Confusing authentication with authorization",
+   "text": "PERMISSION_DENIED after login is about permissions, not identity proof.",
+   "fix": "Ask: who are you? vs what may you do?"
+  },
+  {
+   "title": "Granting to individuals",
+   "text": "Per-user grants become unmanageable.",
+   "fix": "Grant to groups and manage membership."
+  },
+  {
+   "title": "Production jobs running as a person",
+   "text": "When the person leaves or changes role, prod breaks.",
+   "fix": "Use a service principal."
+  },
+  {
+   "title": "SELECT without USE CATALOG / USE SCHEMA",
+   "text": "Access passes through the catalog/schema hierarchy.",
+   "fix": "Grant the whole path."
+  },
+  {
+   "title": "'Give me admin' debugging",
+   "text": "Hides the cause and violates least privilege.",
+   "fix": "Walk the privilege path and check run identity."
+  },
+  {
+   "title": "'It works for me'",
+   "text": "Your identity's privileges don't apply to the job's identity.",
+   "fix": "Check which identity is ACTUALLY running."
+  },
+  {
+   "title": "ALL PRIVILEGES for everybody",
+   "text": "Larger blast radius, accidental/destructive actions, security exposure.",
+   "fix": "Least privilege; use ALL PRIVILEGES/MANAGE/ownership sparingly."
+  },
+  {
+   "title": "Editing production notebooks manually",
+   "text": "No reproducibility, review, version history or repeatable deployment.",
+   "fix": "Dev → staging → prod via Git + CI/CD."
+  },
+  {
+   "title": "Treating a workspace notebook as source of truth",
+   "text": "No reliable history or review.",
+   "fix": "The Git repository is the source of truth."
+  },
+  {
+   "title": "Merging despite failing CI",
+   "text": "Untested code reaches prod.",
+   "fix": "CI failure blocks merge/deploy."
+  },
+  {
+   "title": "Thinking Asset Bundles and Declarative Automation Bundles differ",
+   "text": "It's a rename.",
+   "fix": "Same tool, new name."
+  },
+  {
+   "title": "Thinking DLT is unrelated to Lakeflow pipelines",
+   "text": "Old names persist in tutorials, exams and prod systems.",
+   "fix": "Map DLT → Lakeflow Declarative Pipelines → Lakeflow pipelines (SDP)."
+  },
+  {
+   "title": "Blaming 'a Databricks bug'",
+   "text": "Skips systematic debugging.",
+   "fix": "Find the first layer where reality diverges."
+  },
+  {
+   "title": "Treating duplicates as a root cause",
+   "text": "DISTINCT hides the mechanism.",
+   "fix": "Trace the second copy to one of the seven causes."
+  },
+  {
+   "title": "Assuming dev success means prod code bug",
+   "text": "Environments differ in nine ways.",
+   "fix": "Compare WHO → WHAT → HOW → WHERE."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "Authentication vs authorization?",
+   "a": "Authentication: who are you? Authorization: what are you allowed to do?",
+   "section": "ch03-s01"
+  },
+  {
+   "q": "What is a principal?",
+   "a": "An identity privileges can be granted to: user, group or service principal.",
+   "section": "ch03-s02"
+  },
+  {
+   "q": "User / group / service principal examples?",
+   "a": "nikos@company.com / data_engineers / orders-etl-prod",
+   "section": "ch03-s02"
+  },
+  {
+   "q": "Why grant to groups?",
+   "a": "Manage access via membership instead of many per-user grants (Databricks recommendation).",
+   "section": "ch03-s02"
+  },
+  {
+   "q": "Why service principals for prod jobs?",
+   "a": "Stable machine identity independent of an employee's lifecycle and permissions.",
+   "section": "ch03-s02"
+  },
+  {
+   "q": "Securable object?",
+   "a": "A governed object permissions can be granted on (catalog, schema, table, volume, function…).",
+   "section": "ch03-s03"
+  },
+  {
+   "q": "Privilege?",
+   "a": "An action a principal may perform on a securable object.",
+   "section": "ch03-s03"
+  },
+  {
+   "q": "Parse GRANT SELECT ON TABLE t TO `analysts`.",
+   "a": "GRANT = give · SELECT = read privilege · ON TABLE t = securable · TO analysts = principal.",
+   "section": "ch03-s03"
+  },
+  {
+   "q": "Privileges needed to read company.finance.transactions?",
+   "a": "USE CATALOG on company, USE SCHEMA on company.finance, SELECT on the table.",
+   "section": "ch03-s03"
+  },
+  {
+   "q": "SELECT on table but no USE CATALOG — problem?",
+   "a": "Yes, access passes through the catalog/schema hierarchy.",
+   "section": "ch03-s03"
+  },
+  {
+   "q": "PERMISSION_DENIED checklist?",
+   "a": "Workspace → USE CATALOG → USE SCHEMA → SELECT → row filters/masks/policies → which identity is ACTUALLY running?",
+   "section": "ch03-s04"
+  },
+  {
+   "q": "Least privilege?",
+   "a": "Give only the permissions that are necessary.",
+   "section": "ch03-s05"
+  },
+  {
+   "q": "Privileges to use sparingly?",
+   "a": "ALL PRIVILEGES, MANAGE, ownership.",
+   "section": "ch03-s05"
+  },
+  {
+   "q": "Why not ALL PRIVILEGES for everyone?",
+   "a": "Violates least privilege, bigger blast radius, accidental/destructive actions, security exposure.",
+   "section": "ch03-s05"
+  },
+  {
+   "q": "Role of TEST/STAGING?",
+   "a": "Production-like validation of permissions, dependencies, config, integration, data quality, deployment — without real consumers.",
+   "section": "ch03-s06"
+  },
+  {
+   "q": "Six questions a manual prod edit can't answer?",
+   "a": "Which version? Who? When? What changed? How to go back? Did it pass tests?",
+   "section": "ch03-s06"
+  },
+  {
+   "q": "Git flow?",
+   "a": "developer → branch → commit → pull request → review → main.",
+   "section": "ch03-s07"
+  },
+  {
+   "q": "Source of truth for code?",
+   "a": "The Git repository — not a notebook in someone's workspace.",
+   "section": "ch03-s07"
+  },
+  {
+   "q": "CI?",
+   "a": "Automatic integration/validation/testing on push: lint → unit → integration → config validation → build; fail = no merge/deploy.",
+   "section": "ch03-s08"
+  },
+  {
+   "q": "CD?",
+   "a": "Controlled delivery/deployment of validated changes: main → tests → staging → integration tests → prod.",
+   "section": "ch03-s08"
+  },
+  {
+   "q": "Benefits of Job config in YAML/Git?",
+   "a": "Version control, review, reproducibility, automation, repeatable deployments, env-specific config.",
+   "section": "ch03-s09"
+  },
+  {
+   "q": "Declarative Automation Bundles — old name?",
+   "a": "Databricks Asset Bundles. Central file: databricks.yml.",
+   "section": "ch03-s09"
+  },
+  {
+   "q": "Bundle deployment modes?",
+   "a": "development and production (e.g. targets dev / prod).",
+   "section": "ch03-s09"
+  },
+  {
+   "q": "Old names of Lakeflow pipelines?",
+   "a": "Delta Live Tables (DLT), Lakeflow Declarative Pipelines; built on Apache Spark Declarative Pipelines (SDP).",
+   "section": "ch03-s10"
+  },
+  {
+   "q": "No new data in Gold — check order?",
+   "a": "Source → Bronze → checkpoint → Silver rejects → schema → CDC → Gold refresh.",
+   "section": "ch03-s11"
+  },
+  {
+   "q": "Course-wide debugging rule?",
+   "a": "Find the first layer where reality diverges from expectation.",
+   "section": "ch03-s11"
+  },
+  {
+   "q": "Kafka & Bronze have event 500, Silver doesn't → ?",
+   "a": "Debug the Bronze → Silver boundary.",
+   "section": "ch03-s11"
+  },
+  {
+   "q": "Seven duplicate causes?",
+   "a": "Source duplicate, file ingested twice, checkpoint reset, retry semantics, CDC key incorrect, dedup missing, MERGE condition incorrect.",
+   "section": "ch03-s12"
+  },
+  {
+   "q": "Nine dev-vs-prod differences?",
+   "a": "identity, permissions, catalog, schema, storage credential, configuration, secret, compute, runtime.",
+   "section": "ch03-s13"
+  },
+  {
+   "q": "Works manually, fails scheduled → first check?",
+   "a": "The scheduled run identity.",
+   "section": "ch03-s13"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch03-e001",
+   "type": "free",
+   "section": "ch03-s01",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "interview"
+   ],
+   "quick": true,
+   "q": "Test Q14: What is the difference between authentication and authorization?",
+   "model": "Authentication answers 'who are you?' — it proves an identity, e.g. that the login really is nikos@company.com. Authorization answers 'what are you allowed to do?' — e.g. Nikos may SELECT customers but not DELETE or CREATE TABLE.",
+   "rubric": [
+    "authentication = who are you / prove identity",
+    "authorization = what are you allowed to do",
+    "example"
+   ],
+   "explain": "Official answer: Authentication — who are you? Authorization — what are you allowed to do?"
+  },
+  {
+   "id": "ch03-e002",
+   "type": "bucket",
+   "section": "ch03-s01",
+   "difficulty": 1,
+   "tags": [
+    "compare"
+   ],
+   "quick": true,
+   "q": "Authentication or authorization?",
+   "buckets": [
+    "Authentication",
+    "Authorization"
+   ],
+   "items": [
+    {
+     "text": "Logging in as nikos@company.com",
+     "bucket": 0
+    },
+    {
+     "text": "Checking whether Nikos may DELETE customers",
+     "bucket": 1
+    },
+    {
+     "text": "Proving the caller really is the service principal orders-etl-prod",
+     "bucket": 0
+    },
+    {
+     "text": "GRANT SELECT ON TABLE ... TO analysts",
+     "bucket": 1
+    },
+    {
+     "text": "A login fails because of a wrong password/token",
+     "bucket": 0
+    },
+    {
+     "text": "PERMISSION_DENIED on a SELECT after a successful login",
+     "bucket": 1
+    }
+   ],
+   "explain": "Authentication = establishing identity (login, token). Authorization = permissions of that identity (grants, PERMISSION_DENIED)."
+  },
+  {
+   "id": "ch03-e003",
+   "type": "tf",
+   "section": "ch03-s01",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "PERMISSION_DENIED after you have successfully logged in is an authentication problem.",
+   "answer": false,
+   "explain": "You are already authenticated (the system knows who you are). PERMISSION_DENIED means that identity lacks a privilege — an authorization problem."
+  },
+  {
+   "id": "ch03-e004",
+   "type": "cloze",
+   "section": "ch03-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the two questions.",
+   "text": "Authentication asks: [[who are you|who are you?]] — Authorization asks: [[what are you allowed to do|what are you allowed to do?|what may you do]]",
+   "bank": [
+    "where are you",
+    "how fast are you"
+   ],
+   "explain": "Two separate checks: identity first, then permissions for that identity."
+  },
+  {
+   "id": "ch03-e005",
+   "type": "odd",
+   "section": "ch03-s01",
+   "difficulty": 1,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Which one is NOT an authorization decision?",
+   "options": [
+    "Nikos may SELECT customers",
+    "Nikos may not DELETE customers",
+    "Nikos may not CREATE TABLE",
+    "Nikos proves his identity at login"
+   ],
+   "answer": 3,
+   "explain": "Proving identity at login is authentication; the other three are permissions granted (or not) to that identity."
+  },
+  {
+   "id": "ch03-e006",
+   "type": "free",
+   "section": "ch03-s02",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q15: What is a principal?",
+   "model": "An identity to which privileges can be assigned — for example a user, a group or a service principal.",
+   "rubric": [
+    "identity",
+    "privileges/permissions can be granted to it",
+    "user / group / service principal"
+   ],
+   "explain": "Official answer: an identity to which privileges can be assigned, e.g. user, group or service principal."
+  },
+  {
+   "id": "ch03-e007",
+   "type": "mcq",
+   "section": "ch03-s02",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "interview"
+   ],
+   "quick": true,
+   "q": "Test Q16: Why should a production job usually run as a service principal instead of a developer's personal account?",
+   "options": [
+    "Service principals run queries faster",
+    "Production needs a stable machine identity independent of one employee's lifecycle and permissions",
+    "Personal accounts cannot run jobs on a schedule",
+    "Service principals automatically get ALL PRIVILEGES"
+   ],
+   "answer": 1,
+   "why": [
+    "Identity doesn't affect query speed.",
+    "Correct.",
+    "They can — that's exactly the risk.",
+    "No! Service principals should also follow least privilege."
+   ],
+   "explain": "If the job runs as Nikos and Nikos leaves (account disabled) or his permissions change, production breaks. A service principal like `orders-etl-prod` is owned by the system, not a person."
+  },
+  {
+   "id": "ch03-e008",
+   "type": "match",
+   "section": "ch03-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each example to its principal type.",
+   "pairs": [
+    [
+     "nikos@company.com",
+     "User"
+    ],
+    [
+     "data_engineers",
+     "Group"
+    ],
+    [
+     "orders-etl-prod",
+     "Service principal"
+    ]
+   ],
+   "explain": "Users = humans, groups = sets of principals, service principals = machine identities for automation."
+  },
+  {
+   "id": "ch03-e009",
+   "type": "odd",
+   "section": "ch03-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which one is NOT a principal?",
+   "options": [
+    "nikos@company.com",
+    "data_engineers",
+    "orders-etl-prod",
+    "company.finance.payroll"
+   ],
+   "answer": 3,
+   "explain": "`company.finance.payroll` is a table — a securable object you grant ON. The other three are identities you grant TO."
+  },
+  {
+   "id": "ch03-e010",
+   "type": "scenario",
+   "section": "ch03-s02",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "The nightly `orders` job has run fine for a year. Today it fails at 02:00. Yesterday Nikos — the engineer who created it — left the company.",
+   "steps": [
+    {
+     "prompt": "What is your first hypothesis?",
+     "options": [
+      {
+       "text": "The job runs as Nikos's user identity, which was just disabled",
+       "ok": true,
+       "fb": "Right — a classic reason to use service principals for production."
+      },
+      {
+       "text": "The data volume suddenly grew",
+       "ok": false,
+       "fb": "Possible in general, but the timing with Nikos leaving is the strong clue."
+      },
+      {
+       "text": "Spark has a bug",
+       "ok": false,
+       "fb": "Don't blame the platform before checking the identity."
+      }
+     ]
+    },
+    {
+     "prompt": "Confirmed: 'Run as' = nikos@company.com. What is the durable fix?",
+     "options": [
+      {
+       "text": "Run the job as a service principal (e.g. orders-etl-prod) with only the privileges it needs",
+       "ok": true,
+       "fb": "Stable machine identity + least privilege."
+      },
+      {
+       "text": "Run it as another engineer's account",
+       "ok": false,
+       "fb": "Same problem again when that person leaves or changes role."
+      },
+      {
+       "text": "Re-enable Nikos's account forever",
+       "ok": false,
+       "fb": "Keeps a departed employee's identity alive — a security risk."
+      }
+     ]
+    }
+   ],
+   "explain": "Human → user identity; automation → service principal."
+  },
+  {
+   "id": "ch03-e011",
+   "type": "write",
+   "section": "ch03-s02",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Grant the group `data_engineers` SELECT on table `company.silver.orders` (one statement).",
+   "solution": "GRANT SELECT ON TABLE company.silver.orders TO `data_engineers`;",
+   "keywords": [
+    "grant select",
+    "on table company.silver.orders",
+    "to `data_engineers`"
+   ],
+   "lang": "sql",
+   "explain": "Granting to a group means you manage access by membership; backticks are used around principal names in Databricks SQL."
+  },
+  {
+   "id": "ch03-e012",
+   "type": "calc",
+   "section": "ch03-s02",
+   "difficulty": 1,
+   "tags": [
+    "calc",
+    "concept"
+   ],
+   "quick": false,
+   "q": "Nikos, Maria and John each need the same 4 privileges. How many GRANT statements do you write if you grant per user (instead of 4 grants to `data_engineers`)?",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "statements",
+   "explain": "3 users × 4 privileges = 12 statements, versus 4 when granting to the group — and with the group, onboarding a 4th engineer needs 0 new grants, just a membership change."
+  },
+  {
+   "id": "ch03-e013",
+   "type": "tf",
+   "section": "ch03-s02",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Databricks recommends granting privileges to individual users rather than groups wherever possible.",
+   "answer": false,
+   "explain": "The recommendation is the opposite: manage access through groups where possible, and manage membership."
+  },
+  {
+   "id": "ch03-e014",
+   "type": "free",
+   "section": "ch03-s03",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q17: What is a securable object?",
+   "model": "A governed object on which permissions can be granted — e.g. a catalog, schema, table, volume or function.",
+   "rubric": [
+    "governed object",
+    "permissions can be granted on it",
+    "examples: catalog/schema/table/volume/function"
+   ],
+   "explain": "Official answer: a governed object on which permissions can be granted."
+  },
+  {
+   "id": "ch03-e015",
+   "type": "match",
+   "section": "ch03-s03",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Test Q18: Explain `GRANT SELECT ON TABLE prod.finance.transactions TO analysts;` word by word — match each part to its meaning.",
+   "pairs": [
+    [
+     "GRANT",
+     "give"
+    ],
+    [
+     "SELECT",
+     "the read permission"
+    ],
+    [
+     "ON TABLE prod.finance.transactions",
+     "on this table (securable)"
+    ],
+    [
+     "TO `analysts`",
+     "to this principal / group"
+    ]
+   ],
+   "explain": "GRANT = give, SELECT = privilege, ON TABLE … = securable, TO … = principal. Reading it as a sentence prevents mechanical memorization."
+  },
+  {
+   "id": "ch03-e016",
+   "type": "mcq",
+   "section": "ch03-s03",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Test Q19: A group has SELECT on a table but NOT USE CATALOG on its catalog. Can there be a permission problem?",
+   "options": [
+    "No — SELECT on the table is all you need",
+    "Yes — access passes through the catalog/schema hierarchy",
+    "Only if the table is a view",
+    "Only for service principals"
+   ],
+   "answer": 1,
+   "explain": "To reach `catalog.schema.table` the principal also needs USE CATALOG on the catalog and USE SCHEMA on the schema. Missing either blocks the read."
+  },
+  {
+   "id": "ch03-e017",
+   "type": "write",
+   "section": "ch03-s03",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Write the three GRANT statements that let group `analysts` read `company.finance.transactions`.",
+   "solution": "GRANT USE CATALOG ON CATALOG company TO `analysts`;\nGRANT USE SCHEMA ON SCHEMA company.finance TO `analysts`;\nGRANT SELECT ON TABLE company.finance.transactions TO `analysts`;",
+   "keywords": [
+    "use catalog on catalog company",
+    "use schema on schema company.finance",
+    "select on table company.finance.transactions",
+    "to `analysts`"
+   ],
+   "lang": "sql",
+   "explain": "Walk the path: catalog → schema → table. Each level needs its own privilege."
+  },
+  {
+   "id": "ch03-e018",
+   "type": "calc",
+   "section": "ch03-s03",
+   "difficulty": 1,
+   "tags": [
+    "calc",
+    "exam"
+   ],
+   "quick": false,
+   "q": "A brand-new group has no privileges at all. What is the minimum number of GRANT statements so it can SELECT from one table `prod.finance.transactions` (as taught in the lesson)?",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "grants",
+   "explain": "USE CATALOG on prod, USE SCHEMA on prod.finance, SELECT on the table — one per level of the three-level name."
+  },
+  {
+   "id": "ch03-e019",
+   "type": "order",
+   "section": "ch03-s03",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Order the grants along the access path (outer container first).",
+   "items": [
+    "USE CATALOG on company",
+    "USE SCHEMA on company.finance",
+    "SELECT on company.finance.transactions"
+   ],
+   "explain": "The path goes company → finance → transactions; the outer containers must be usable before the table can be read."
+  },
+  {
+   "id": "ch03-e020",
+   "type": "bucket",
+   "section": "ch03-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Principal, securable object or privilege?",
+   "buckets": [
+    "Principal",
+    "Securable object",
+    "Privilege"
+   ],
+   "items": [
+    {
+     "text": "`analysts`",
+     "bucket": 0
+    },
+    {
+     "text": "orders-etl-prod",
+     "bucket": 0
+    },
+    {
+     "text": "company.finance",
+     "bucket": 1
+    },
+    {
+     "text": "a volume",
+     "bucket": 1
+    },
+    {
+     "text": "SELECT",
+     "bucket": 2
+    },
+    {
+     "text": "USE CATALOG",
+     "bucket": 2
+    },
+    {
+     "text": "company.finance.payroll",
+     "bucket": 1
+    },
+    {
+     "text": "USE SCHEMA",
+     "bucket": 2
+    }
+   ],
+   "explain": "Principal = WHO (TO …); securable = WHAT object (ON …); privilege = WHICH action (GRANT …)."
+  },
+  {
+   "id": "ch03-e021",
+   "type": "spotbug",
+   "section": "ch03-s03",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "debug"
+   ],
+   "quick": false,
+   "q": "This script should let `analysts` read `company.finance.transactions`. Click the buggy lines.",
+   "lines": [
+    "GRANT USE CATALOG ON CATALOG company TO `analysts`;",
+    "GRANT USE SCHEMA ON TABLE company.finance TO `analysts`;",
+    "GRANT SELECT ON TABLE company.finance TO `analysts`;"
+   ],
+   "bugs": [
+    1,
+    2
+   ],
+   "fix": "GRANT USE SCHEMA ON SCHEMA company.finance TO `analysts`;\nGRANT SELECT ON TABLE company.finance.transactions TO `analysts`;",
+   "explain": "USE SCHEMA is granted ON SCHEMA (not ON TABLE), and SELECT needs the full three-level table name — `company.finance` is a schema, not a table."
+  },
+  {
+   "id": "ch03-e022",
+   "type": "order",
+   "section": "ch03-s04",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Order the PERMISSION_DENIED checks exactly as taught.",
+   "items": [
+    "Can the principal access the workspace?",
+    "Can it USE CATALOG prod?",
+    "Can it USE SCHEMA finance?",
+    "Does it have SELECT on the table?",
+    "Are there row filters / masks / policies?",
+    "Which identity is ACTUALLY running?"
+   ],
+   "explain": "Walk from the outside in (workspace → catalog → schema → table → fine-grained policies), and never forget the run identity, which is often the real cause."
+  },
+  {
+   "id": "ch03-e023",
+   "type": "tf",
+   "section": "ch03-s04",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": true,
+   "q": "If my own SELECT on a table works, a scheduled job that reads the same table cannot get PERMISSION_DENIED.",
+   "answer": false,
+   "explain": "The job may run as a different identity (e.g. a service principal) with different privileges. 'Which identity is actually running?' is the critical check."
+  },
+  {
+   "id": "ch03-e024",
+   "type": "scenario",
+   "section": "ch03-s04",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "`SELECT * FROM prod.finance.transactions` works in your notebook, but the nightly Job fails with `PERMISSION_DENIED`.",
+   "steps": [
+    {
+     "prompt": "What do you check first?",
+     "options": [
+      {
+       "text": "Which identity the Job actually runs as",
+       "ok": true,
+       "fb": "Your success proves only your privileges; the job's identity is the prime suspect."
+      },
+      {
+       "text": "Ask an admin for ALL PRIVILEGES on prod",
+       "ok": false,
+       "fb": "That's the 'give me admin' anti-pattern."
+      },
+      {
+       "text": "Rewrite the query in Python",
+       "ok": false,
+       "fb": "Language doesn't change permissions."
+      }
+     ]
+    },
+    {
+     "prompt": "It runs as `orders-prod-service-principal`. Which privileges must you verify for it?",
+     "options": [
+      {
+       "text": "USE CATALOG on prod, USE SCHEMA on prod.finance, SELECT on the table (plus any row filters/masks)",
+       "ok": true,
+       "fb": "That's the full path for a read."
+      },
+      {
+       "text": "Only SELECT on the table",
+       "ok": false,
+       "fb": "Without USE CATALOG / USE SCHEMA the read still fails."
+      },
+      {
+       "text": "MANAGE on the catalog",
+       "ok": false,
+       "fb": "Far more than needed — violates least privilege."
+      }
+     ]
+    },
+    {
+     "prompt": "It lacks USE SCHEMA on prod.finance. Fix?",
+     "options": [
+      {
+       "text": "GRANT USE SCHEMA ON SCHEMA prod.finance TO the service principal",
+       "ok": true,
+       "fb": "Grant exactly the missing privilege."
+      },
+      {
+       "text": "Make the service principal a workspace admin",
+       "ok": false,
+       "fb": "Huge blast radius for a one-privilege problem."
+      },
+      {
+       "text": "Run the job as your own user",
+       "ok": false,
+       "fb": "Ties production to a person — the exact thing service principals avoid."
+      }
+     ]
+    }
+   ],
+   "explain": "Path + identity: workspace → catalog → schema → table → policies → who is ACTUALLY running."
+  },
+  {
+   "id": "ch03-e025",
+   "type": "cloze",
+   "section": "ch03-s04",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Complete the permission-debugging chain.",
+   "text": "workspace access → USE [[CATALOG]] → USE [[SCHEMA]] → [[SELECT]] on table → row filters / masks / policies → which [[identity]] is ACTUALLY running?",
+   "bank": [
+    "ADMIN",
+    "CLUSTER",
+    "MANAGE"
+   ],
+   "explain": "Outer containers first, then the table, then fine-grained policies, and finally the run identity — the check that most often explains 'works for me, fails in the job'."
+  },
+  {
+   "id": "ch03-e026",
+   "type": "mcq",
+   "section": "ch03-s04",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Which response to PERMISSION_DENIED is the 'bad debugging' the lesson warns about?",
+   "options": [
+    "Checking USE CATALOG on the catalog",
+    "Checking which identity runs the job",
+    "Asking for admin rights so it 'just works'",
+    "Checking row filters and masks"
+   ],
+   "answer": 2,
+   "explain": "Requesting admin hides the cause and breaks least privilege. The other three are steps of the correct debugging chain."
+  },
+  {
+   "id": "ch03-e027",
+   "type": "free",
+   "section": "ch03-s04",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "interview"
+   ],
+   "quick": false,
+   "q": "Explain why 'Which identity is ACTUALLY running?' is the most important PERMISSION_DENIED question.",
+   "model": "Because permissions belong to identities. When I test interactively my user identity runs the query, but a scheduled job usually runs as another identity, often a service principal like orders-prod-service-principal. My grants don't apply to it, so the job can fail even though the same query works for me.",
+   "rubric": [
+    "permissions are per identity",
+    "interactive = my user; job = service principal / run-as",
+    "my privileges don't transfer"
+   ],
+   "explain": "This single check explains most 'works for me, fails in the job' permission incidents."
+  },
+  {
+   "id": "ch03-e028",
+   "type": "odd",
+   "section": "ch03-s04",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Which is NOT part of the PERMISSION_DENIED checklist?",
+   "options": [
+    "USE CATALOG on the catalog",
+    "SELECT on the table",
+    "Run identity",
+    "Number of shuffle partitions"
+   ],
+   "answer": 3,
+   "explain": "Shuffle partitions affect performance, never permissions. The other three are steps of the permission chain."
+  },
+  {
+   "id": "ch03-e029",
+   "type": "free",
+   "section": "ch03-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "interview"
+   ],
+   "quick": true,
+   "q": "Test Q20: Why is 'give ALL PRIVILEGES to everybody' a bad solution to permission errors?",
+   "model": "It violates least privilege, increases the blast radius, raises the risk of accidental or destructive actions, and increases security exposure. It also hides the real missing privilege instead of fixing it.",
+   "rubric": [
+    "violates least privilege",
+    "bigger blast radius",
+    "accidental/destructive actions",
+    "security exposure"
+   ],
+   "explain": "Official answer: violates least privilege, increases blast radius, risk of accidental/destructive actions and security exposure."
+  },
+  {
+   "id": "ch03-e030",
+   "type": "mcq",
+   "section": "ch03-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "An analyst only needs to read one table. Which grant set follows least privilege?",
+   "options": [
+    "ALL PRIVILEGES on the catalog",
+    "USE CATALOG + USE SCHEMA + SELECT on the table",
+    "Ownership of the table",
+    "MANAGE on the schema"
+   ],
+   "answer": 1,
+   "explain": "Grant exactly the read path. ALL PRIVILEGES, MANAGE and ownership are powerful privileges Databricks says to use sparingly."
+  },
+  {
+   "id": "ch03-e031",
+   "type": "mcq",
+   "section": "ch03-s05",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Select ALL the consequences of over-granting privileges.",
+   "options": [
+    "Larger blast radius",
+    "Risk of accidental destructive actions",
+    "Higher security exposure",
+    "Faster queries"
+   ],
+   "answer": [
+    0,
+    1,
+    2
+   ],
+   "multi": true,
+   "explain": "Over-granting has only downsides for safety; privileges don't change performance."
+  },
+  {
+   "id": "ch03-e032",
+   "type": "tf",
+   "section": "ch03-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "ALL PRIVILEGES, MANAGE and ownership should be used sparingly.",
+   "answer": true,
+   "explain": "Databricks explicitly warns about these powerful privileges; they should be reserved for the few identities that truly administer objects."
+  },
+  {
+   "id": "ch03-e033",
+   "type": "odd",
+   "section": "ch03-s05",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Which grant does NOT fit 'least privilege for a read-only analyst'?",
+   "options": [
+    "USE CATALOG",
+    "USE SCHEMA",
+    "SELECT",
+    "ALL PRIVILEGES"
+   ],
+   "answer": 3,
+   "explain": "ALL PRIVILEGES includes writes and more — far beyond read-only needs."
+  },
+  {
+   "id": "ch03-e034",
+   "type": "free",
+   "section": "ch03-s06",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "interview"
+   ],
+   "quick": true,
+   "q": "Test Q21: Why shouldn't you edit a production notebook manually?",
+   "model": "Because you lose reproducibility, controlled review and testing, reliable version history and repeatable deployment. Afterwards nobody can reliably say which version runs, who changed what and when, how to roll back, or whether that code passed tests.",
+   "rubric": [
+    "reproducibility",
+    "review / testing",
+    "version history",
+    "repeatable deployment / rollback"
+   ],
+   "explain": "Official answer: you lose reproducibility, controlled review/testing, reliable version history and repeatable deployment."
+  },
+  {
+   "id": "ch03-e035",
+   "type": "bucket",
+   "section": "ch03-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which environment is this typical of?",
+   "buckets": [
+    "DEV",
+    "TEST / STAGING",
+    "PROD"
+   ],
+   "items": [
+    {
+     "text": "Experimenting with sample data",
+     "bucket": 0
+    },
+    {
+     "text": "Validating permissions, dependencies and configuration before release",
+     "bucket": 1
+    },
+    {
+     "text": "CEO dashboard reads from here",
+     "bucket": 2
+    },
+    {
+     "text": "`dev_nikos.silver.orders`",
+     "bucket": 0
+    },
+    {
+     "text": "Integration and data-quality checks without affecting real consumers",
+     "bucket": 1
+    },
+    {
+     "text": "Restricted permissions, monitoring, stable configs",
+     "bucket": 2
+    },
+    {
+     "text": "It's fine to break things here",
+     "bucket": 0
+    }
+   ],
+   "explain": "DEV = freedom to break; STAGING = production-like validation without real consumers; PROD = controlled, monitored, restricted."
+  },
+  {
+   "id": "ch03-e036",
+   "type": "order",
+   "section": "ch03-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the path a code change should take.",
+   "items": [
+    "DEV (code changes)",
+    "TEST / STAGING (validation)",
+    "PROD"
+   ],
+   "explain": "Changes are developed in DEV, validated in a production-like STAGING environment, and only then reach PROD."
+  },
+  {
+   "id": "ch03-e037",
+   "type": "tf",
+   "section": "ch03-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Test/staging is where you validate permissions, dependencies, configuration, integration, data quality and deployment without affecting real consumers.",
+   "answer": true,
+   "explain": "That is exactly the role of staging: be close to prod, but isolated from real consumers."
+  },
+  {
+   "id": "ch03-e038",
+   "type": "scenario",
+   "section": "ch03-s06",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "The CEO's monthly revenue numbers changed overnight. A colleague says: 'I just tested a filter in the prod notebook and pressed Run All.'",
+   "steps": [
+    {
+     "prompt": "What's the first problem you face?",
+     "options": [
+      {
+       "text": "You can't reliably tell which version ran, what changed, or how to roll back",
+       "ok": true,
+       "fb": "Manual edits leave no reliable version history or review trail."
+      },
+      {
+       "text": "The cluster is too small",
+       "ok": false,
+       "fb": "Compute size is not the issue here."
+      },
+      {
+       "text": "Unity Catalog is down",
+       "ok": false,
+       "fb": "Nothing points to governance."
+      }
+     ]
+    },
+    {
+     "prompt": "What should the process have been?",
+     "options": [
+      {
+       "text": "Change code in DEV, commit to Git, review, test in STAGING, deploy to PROD automatically",
+       "ok": true,
+       "fb": "Environment isolation + source control + CI/CD."
+      },
+      {
+       "text": "Edit prod but warn the CEO first",
+       "ok": false,
+       "fb": "Still no review, tests or reproducibility."
+      },
+      {
+       "text": "Copy the prod notebook and edit the copy in prod",
+       "ok": false,
+       "fb": "Still running untested code against prod data."
+      }
+     ]
+    }
+   ],
+   "explain": "Production changes must be reproducible, reviewed, tested and reversible."
+  },
+  {
+   "id": "ch03-e039",
+   "type": "order",
+   "section": "ch03-s06",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A manual prod edit broke a dashboard. Order the questions you'd need answered (the lesson's list).",
+   "items": [
+    "Which version is running?",
+    "Who changed it?",
+    "When?",
+    "What changed?",
+    "How do I return to the previous version?",
+    "Did the same code pass tests?"
+   ],
+   "explain": "These six questions are exactly what Git + CI/CD answer reliably — and what manual edits make unanswerable."
+  },
+  {
+   "id": "ch03-e040",
+   "type": "order",
+   "section": "ch03-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Order the Git flow.",
+   "items": [
+    "developer",
+    "branch",
+    "commit",
+    "pull request",
+    "review",
+    "main"
+   ],
+   "explain": "Work happens on a branch, is recorded in commits, proposed via a pull request, reviewed, and only then merged into main."
+  },
+  {
+   "id": "ch03-e041",
+   "type": "mcq",
+   "section": "ch03-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "What is the source of truth for production code in a mature setup?",
+   "options": [
+    "The notebook in Nikos's workspace",
+    "The Git repository",
+    "The latest cluster log",
+    "The CEO dashboard"
+   ],
+   "answer": 1,
+   "explain": "Code lives and is versioned in Git; workspaces get their code from it. A personal workspace notebook has no reliable history or review."
+  },
+  {
+   "id": "ch03-e042",
+   "type": "match",
+   "section": "ch03-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each Git term to its role.",
+   "pairs": [
+    [
+     "branch",
+     "isolated line of work for a change"
+    ],
+    [
+     "commit",
+     "recorded snapshot of changes"
+    ],
+    [
+     "pull request",
+     "proposal to merge, where review happens"
+    ],
+    [
+     "main",
+     "shared branch of accepted code"
+    ]
+   ],
+   "explain": "Together these give versioning, traceability and review before code reaches production."
+  },
+  {
+   "id": "ch03-e043",
+   "type": "tf",
+   "section": "ch03-s07",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Using Git alone already guarantees that the code passed tests.",
+   "answer": false,
+   "explain": "Git gives history and review. Automatic testing of each change is CI (Continuous Integration), built on top of Git."
+  },
+  {
+   "id": "ch03-e044",
+   "type": "free",
+   "section": "ch03-s08",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q22: What is CI?",
+   "model": "Automatic integration, validation and testing of code changes — e.g. lint, unit tests, integration tests, configuration validation and build on every push; if anything fails, you don't merge or deploy.",
+   "rubric": [
+    "automatic",
+    "integration / validation / testing of code changes",
+    "fail → no merge/deploy"
+   ],
+   "explain": "Official answer: automatic integration/validation/testing of code changes."
+  },
+  {
+   "id": "ch03-e045",
+   "type": "free",
+   "section": "ch03-s08",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q23: What is CD?",
+   "model": "Controlled delivery or deployment of validated changes to the target environments, e.g. main → tests → deploy staging → integration tests → deploy production.",
+   "rubric": [
+    "controlled delivery/deployment",
+    "validated changes",
+    "target environments (staging, prod)"
+   ],
+   "explain": "Official answer: controlled delivery/deployment of the validated changes to the target environments."
+  },
+  {
+   "id": "ch03-e046",
+   "type": "order",
+   "section": "ch03-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the CI pipeline from the lesson.",
+   "items": [
+    "lint",
+    "unit tests",
+    "integration tests",
+    "configuration validation",
+    "build"
+   ],
+   "explain": "Cheap, fast checks first (lint, unit tests), slower ones later (integration, config validation), and build at the end."
+  },
+  {
+   "id": "ch03-e047",
+   "type": "order",
+   "section": "ch03-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the CD pipeline from the lesson.",
+   "items": [
+    "main branch",
+    "tests",
+    "deploy staging",
+    "integration tests",
+    "deploy production"
+   ],
+   "explain": "Validated code moves to staging, is integration-tested there, and only then is deployed to production."
+  },
+  {
+   "id": "ch03-e048",
+   "type": "mcq",
+   "section": "ch03-s08",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "CI fails on the integration tests for your pull request. What should happen?",
+   "options": [
+    "Merge anyway and fix in prod",
+    "Do not merge / deploy",
+    "Deploy to prod but not staging",
+    "Disable the failing test"
+   ],
+   "answer": 1,
+   "explain": "CI is a gate: a failing check blocks merge and deploy. Disabling tests or 'fixing in prod' defeats its purpose."
+  },
+  {
+   "id": "ch03-e049",
+   "type": "tf",
+   "section": "ch03-s08",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "CD always means fully automatic deployment to production with no human approval.",
+   "answer": false,
+   "explain": "CD can mean Continuous Delivery or Continuous Deployment depending on the process; the shared idea is automated, controlled deployment of validated code."
+  },
+  {
+   "id": "ch03-e050",
+   "type": "bucket",
+   "section": "ch03-s08",
+   "difficulty": 1,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "CI or CD?",
+   "buckets": [
+    "CI",
+    "CD"
+   ],
+   "items": [
+    {
+     "text": "Run lint and unit tests on every push",
+     "bucket": 0
+    },
+    {
+     "text": "Deploy to staging after merge to main",
+     "bucket": 1
+    },
+    {
+     "text": "Validate configuration before merge",
+     "bucket": 0
+    },
+    {
+     "text": "Promote the validated version to production",
+     "bucket": 1
+    },
+    {
+     "text": "Build the artifact",
+     "bucket": 0
+    }
+   ],
+   "explain": "CI validates the change; CD ships the validated change to environments."
+  },
+  {
+   "id": "ch03-e051",
+   "type": "mcq",
+   "section": "ch03-s09",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Test Q24: What do we gain when a Job's definition lives in YAML/Git instead of only UI clicks? Select ALL that apply.",
+   "options": [
+    "Version control",
+    "Review",
+    "Reproducibility",
+    "Automation / repeatable deployments",
+    "Environment-specific configuration",
+    "Faster Spark execution"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "multi": true,
+   "explain": "Official answer: version control, review, reproducibility, automation, repeatable deployments, environment-specific configuration. Configuration as code doesn't make Spark itself faster."
+  },
+  {
+   "id": "ch03-e052",
+   "type": "tf",
+   "section": "ch03-s09",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "'Databricks Asset Bundles' and 'Declarative Automation Bundles' are two completely different concepts.",
+   "answer": false,
+   "explain": "Declarative Automation Bundles is the current name; Databricks Asset Bundles was the earlier name of the same tool."
+  },
+  {
+   "id": "ch03-e053",
+   "type": "cloze",
+   "section": "ch03-s09",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Complete the bundle targets in `databricks.yml`.",
+   "text": "targets:\n  dev:\n    mode: [[development]]\n  prod:\n    mode: [[production]]",
+   "bank": [
+    "staging",
+    "debug",
+    "release"
+   ],
+   "asCode": true,
+   "explain": "Databricks explicitly supports `development` and `production` deployment modes for bundle targets."
+  },
+  {
+   "id": "ch03-e054",
+   "type": "write",
+   "section": "ch03-s09",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write the `targets` section of a `databricks.yml` with a `dev` target in development mode and a `prod` target in production mode.",
+   "solution": "targets:\n  dev:\n    mode: development\n  prod:\n    mode: production",
+   "keywords": [
+    "targets:",
+    "dev:",
+    "mode: development",
+    "prod:",
+    "mode: production"
+   ],
+   "lang": "yaml",
+   "explain": "Targets are the environments a bundle deploys to; each declares its mode. Exact further syntax comes in the Bundles chapter."
+  },
+  {
+   "id": "ch03-e055",
+   "type": "spotbug",
+   "section": "ch03-s09",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "A teammate summarized bundles. Click the WRONG statements.",
+   "lines": [
+    "A bundle can describe jobs, pipelines, source files, tests and target environments.",
+    "The central configuration file is usually databricks.yml.",
+    "Bundles are a different technology from the old Databricks Asset Bundles.",
+    "Targets can use the modes development and production.",
+    "Bundles are meant only for one-off manual deployments from the UI."
+   ],
+   "bugs": [
+    2,
+    4
+   ],
+   "fix": "Declarative Automation Bundles are the renamed Databricks Asset Bundles (same concept).\nBundles are the recommended basis for CI/CD and IaC-style, automated, repeatable deployments.",
+   "explain": "Bundles = renamed Asset Bundles, designed for automated CI/CD deployment — the opposite of manual UI clicks."
+  },
+  {
+   "id": "ch03-e056",
+   "type": "free",
+   "section": "ch03-s09",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Explain Infrastructure as Code to a teammate who builds all Jobs by clicking in the UI.",
+   "model": "Instead of creating the job's tasks, schedule, compute, parameters and permissions by hand, you declare them in a configuration file (e.g. YAML in a bundle). That file lives in Git, gets reviewed, has version history, can recreate the same job anywhere, and can be deployed automatically to dev, staging and prod by CI/CD.",
+   "rubric": [
+    "declare job/infrastructure as code/config",
+    "in Git: review + version history",
+    "reproducible",
+    "automated deployment per environment"
+   ],
+   "explain": "The point isn't YAML itself — it's that configuration gets the same safety net as code."
+  },
+  {
+   "id": "ch03-e057",
+   "type": "match",
+   "section": "ch03-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match each platform concern to what handles it.",
+   "pairs": [
+    [
+     "Execution",
+     "Lakeflow / Spark"
+    ],
+    [
+     "Governance",
+     "Unity Catalog"
+    ],
+    [
+     "Deployment",
+     "Bundles + CI/CD"
+    ],
+    [
+     "Storage",
+     "Delta tables on cloud object storage"
+    ],
+    [
+     "Development",
+     "Git → DEV → tests → STAGING → PROD"
+    ]
+   ],
+   "explain": "Keeping these five concerns separate is what makes debugging possible: each failure usually lives in one of them."
+  },
+  {
+   "id": "ch03-e058",
+   "type": "odd",
+   "section": "ch03-s10",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Which name is NOT a (past or present) name for Databricks' declarative pipeline product?",
+   "options": [
+    "Delta Live Tables (DLT)",
+    "Lakeflow Declarative Pipelines",
+    "Spark Declarative Pipelines",
+    "Declarative Automation Bundles"
+   ],
+   "answer": 3,
+   "explain": "Bundles are the deployment/IaC tool (formerly Asset Bundles). The other three are names along the DLT → Lakeflow pipelines evolution."
+  },
+  {
+   "id": "ch03-e059",
+   "type": "mcq",
+   "section": "ch03-s10",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "According to current docs, what do Lakeflow pipelines build on?",
+   "options": [
+    "Apache Spark Declarative Pipelines (SDP)",
+    "Apache Kafka Streams",
+    "Databricks Asset Bundles",
+    "Unity Catalog lineage"
+   ],
+   "answer": 0,
+   "explain": "Lakeflow pipelines build on Apache Spark Declarative Pipelines and support batch + streaming in SQL/Python with automatic dependency orchestration and incremental processing."
+  },
+  {
+   "id": "ch03-e060",
+   "type": "mcq",
+   "section": "ch03-s10",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which capabilities does the lesson attribute to Lakeflow pipelines? Select ALL.",
+   "options": [
+    "Batch and streaming pipelines",
+    "SQL and Python",
+    "Automatic dependency orchestration",
+    "Incremental processing",
+    "Granting Unity Catalog privileges"
+   ],
+   "answer": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "multi": true,
+   "explain": "Governance (grants) is Unity Catalog's job, not the pipeline engine's."
+  },
+  {
+   "id": "ch03-e061",
+   "type": "tf",
+   "section": "ch03-s10",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "A tutorial about 'Delta Live Tables' is about a totally unrelated product from Lakeflow pipelines.",
+   "answer": false,
+   "explain": "DLT is an older name in the same lineage: DLT → Lakeflow Declarative Pipelines → Lakeflow pipelines on Spark Declarative Pipelines."
+  },
+  {
+   "id": "ch03-e062",
+   "type": "bucket",
+   "section": "ch03-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which layer of the platform does each item belong to?",
+   "buckets": [
+    "Execution",
+    "Governance",
+    "Deployment",
+    "Storage"
+   ],
+   "items": [
+    {
+     "text": "Spark / Lakeflow processing",
+     "bucket": 0
+    },
+    {
+     "text": "GRANT SELECT to analysts",
+     "bucket": 1
+    },
+    {
+     "text": "databricks.yml targets",
+     "bucket": 2
+    },
+    {
+     "text": "Delta tables on cloud object storage",
+     "bucket": 3
+    },
+    {
+     "text": "CI/CD system deploying to prod",
+     "bucket": 2
+    },
+    {
+     "text": "'who / what object / what privilege'",
+     "bucket": 1
+    }
+   ],
+   "explain": "Execution computes, governance controls access, deployment ships code/config, storage keeps the data."
+  },
+  {
+   "id": "ch03-e063",
+   "type": "order",
+   "section": "ch03-s11",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Order the 'no new data' checks exactly as taught.",
+   "items": [
+    "Source: do the new files exist?",
+    "Bronze: ingested?",
+    "Checkpoint: advanced?",
+    "Silver: rows rejected by transformation?",
+    "Schema: changed?",
+    "CDC: sequence/key correct?",
+    "Gold: refresh/job ran?"
+   ],
+   "explain": "Follow the data from source to Gold. The first check that fails is the layer where reality diverges — that's where the bug lives."
+  },
+  {
+   "id": "ch03-e064",
+   "type": "mcq",
+   "section": "ch03-s11",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "debug"
+   ],
+   "quick": true,
+   "q": "Test Q25: Kafka has event 500, Bronze has event 500, Silver does not. Where do you start debugging?",
+   "options": [
+    "Kafka producer",
+    "Source → Bronze ingestion",
+    "The Bronze → Silver boundary",
+    "The Gold dashboard"
+   ],
+   "answer": 2,
+   "why": [
+    "Kafka has the event — the producer is fine.",
+    "Bronze has the event — ingestion is fine.",
+    "Correct: first layer where reality diverges.",
+    "Gold is downstream of the problem."
+   ],
+   "explain": "The event is proven to be in Bronze, so everything up to Bronze works. The first divergence is Bronze → Silver (validation, schema, CDC, dedup, filters)."
+  },
+  {
+   "id": "ch03-e065",
+   "type": "scenario",
+   "section": "ch03-s11",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Source has today's files; Gold shows nothing for today.",
+   "steps": [
+    {
+     "prompt": "Where do you start?",
+     "options": [
+      {
+       "text": "At the source: confirm the new files really exist",
+       "ok": true,
+       "fb": "Start at the beginning and walk forward."
+      },
+      {
+       "text": "Open a ticket: Databricks bug",
+       "ok": false,
+       "fb": "Never the first hypothesis."
+      },
+      {
+       "text": "Rebuild Gold from scratch",
+       "ok": false,
+       "fb": "You don't know yet where data stops."
+      }
+     ]
+    },
+    {
+     "prompt": "Files exist, but Bronze has no rows for today. What next?",
+     "options": [
+      {
+       "text": "Check whether ingestion ran and whether the checkpoint advanced",
+       "ok": true,
+       "fb": "Data stops at Source → Bronze: ingestion + checkpoint are the suspects."
+      },
+      {
+       "text": "Check Silver's dedup logic",
+       "ok": false,
+       "fb": "Silver can't process rows Bronze never received."
+      },
+      {
+       "text": "Check Gold refresh",
+       "ok": false,
+       "fb": "Too far downstream."
+      }
+     ]
+    },
+    {
+     "prompt": "Alternate timeline: Bronze AND Silver have today's rows, Gold doesn't. Suspect?",
+     "options": [
+      {
+       "text": "Gold refresh/job didn't run (or its aggregation filtered the rows)",
+       "ok": true,
+       "fb": "First divergence is Silver → Gold."
+      },
+      {
+       "text": "The checkpoint",
+       "ok": false,
+       "fb": "Ingestion is proven fine — Bronze and Silver have the data."
+      },
+      {
+       "text": "Schema at source",
+       "ok": false,
+       "fb": "Rows already flowed through Silver."
+      }
+     ]
+    }
+   ],
+   "explain": "Find the first layer where reality diverges from expectation."
+  },
+  {
+   "id": "ch03-e066",
+   "type": "scenario",
+   "section": "ch03-s11",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Bronze has today's rows; Silver doesn't. The Silver job ran successfully.",
+   "steps": [
+    {
+     "prompt": "Which group of causes lives at the Bronze → Silver boundary?",
+     "options": [
+      {
+       "text": "Rows rejected by validation, a schema change, wrong CDC sequence/key",
+       "ok": true,
+       "fb": "These are exactly the Silver, Schema and CDC checks."
+      },
+      {
+       "text": "Source files missing",
+       "ok": false,
+       "fb": "Bronze already has them."
+      },
+      {
+       "text": "Gold refresh schedule",
+       "ok": false,
+       "fb": "Gold is after Silver."
+      }
+     ]
+    },
+    {
+     "prompt": "You find a new quarantine table full of today's rows with 'amount is not DECIMAL'. Meaning?",
+     "options": [
+      {
+       "text": "The Silver transformation rejected them — investigate the schema/type change upstream",
+       "ok": true,
+       "fb": "Rejected rows + type complaint → follow the schema-mismatch decision tree."
+      },
+      {
+       "text": "Delete the quarantine table and rerun",
+       "ok": false,
+       "fb": "That hides the evidence and loses data."
+      },
+      {
+       "text": "The checkpoint is broken",
+       "ok": false,
+       "fb": "Rows were ingested — the checkpoint did its job."
+      }
+     ]
+    }
+   ],
+   "explain": "'Silver: rejected rows?' and 'Schema: changed?' are consecutive checks for a reason."
+  },
+  {
+   "id": "ch03-e067",
+   "type": "tf",
+   "section": "ch03-s11",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "When Gold lacks today's data, the efficient approach is to start checking at Gold and work backwards randomly.",
+   "answer": false,
+   "explain": "Walk the pipeline systematically and find the FIRST layer where data diverges from expectation. Starting at the source (or bisecting with evidence like 'Bronze has event 500') prevents guessing."
+  },
+  {
+   "id": "ch03-e068",
+   "type": "free",
+   "section": "ch03-s11",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "interview"
+   ],
+   "quick": false,
+   "q": "State the course's general debugging principle and apply it to: 'Kafka has event 500, Bronze has it, Silver doesn't'.",
+   "model": "Find the first layer at which reality diverges from what you expected. Kafka and Bronze both have event 500, so source and ingestion work; Silver doesn't, so the first divergence is Bronze → Silver — I investigate validation/rejected rows, schema changes and CDC key/sequence there.",
+   "rubric": [
+    "first layer where reality diverges",
+    "Bronze has it → ingestion fine",
+    "debug the Bronze → Silver boundary"
+   ],
+   "explain": "The principle turns a vague 'data is missing' into one specific boundary to inspect."
+  },
+  {
+   "id": "ch03-e069",
+   "type": "tf",
+   "section": "ch03-s12",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "'We have duplicates' is a root cause.",
+   "answer": false,
+   "explain": "It's a symptom. Causes range from the source producing duplicates to a wrong MERGE condition — each needs a different fix."
+  },
+  {
+   "id": "ch03-e070",
+   "type": "cloze",
+   "section": "ch03-s12",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Complete the key sentence.",
+   "text": "\"I have duplicates\" is not a [[root cause]]. It is a [[symptom]].",
+   "bank": [
+    "feature",
+    "solution"
+   ],
+   "explain": "Seven different mechanisms can produce the same duplicate symptom; each needs a different fix."
+  },
+  {
+   "id": "ch03-e071",
+   "type": "mcq",
+   "section": "ch03-s12",
+   "difficulty": 1,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Which of these is NOT one of the seven duplicate causes listed in the lesson?",
+   "options": [
+    "Checkpoint reset",
+    "MERGE condition incorrect",
+    "Too few shuffle partitions",
+    "File ingested twice"
+   ],
+   "answer": 2,
+   "explain": "Shuffle partition count affects performance, not row multiplicity. The listed causes: source duplicate, file ingested twice, checkpoint reset, retry semantics, CDC key incorrect, dedup missing, MERGE condition incorrect."
+  },
+  {
+   "id": "ch03-e072",
+   "type": "bucket",
+   "section": "ch03-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Where does each duplicate cause live?",
+   "buckets": [
+    "Source / ingestion",
+    "Streaming / job execution",
+    "Silver logic"
+   ],
+   "items": [
+    {
+     "text": "Source produced the duplicate",
+     "bucket": 0
+    },
+    {
+     "text": "Same file ingested twice",
+     "bucket": 0
+    },
+    {
+     "text": "Checkpoint reset",
+     "bucket": 1
+    },
+    {
+     "text": "Retry re-wrote already written data",
+     "bucket": 1
+    },
+    {
+     "text": "CDC key not unique",
+     "bucket": 2
+    },
+    {
+     "text": "No deduplication step",
+     "bucket": 2
+    },
+    {
+     "text": "Wrong MERGE condition",
+     "bucket": 2
+    }
+   ],
+   "explain": "Locating the cause by layer tells you where to look first and which fix applies."
+  },
+  {
+   "id": "ch03-e073",
+   "type": "scenario",
+   "section": "ch03-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Silver `orders` contains order 123 twice.",
+   "steps": [
+    {
+     "prompt": "First question?",
+     "options": [
+      {
+       "text": "Does Bronze (the raw source data) already contain order 123 twice?",
+       "ok": true,
+       "fb": "This splits upstream causes from Silver-logic causes."
+      },
+      {
+       "text": "Add SELECT DISTINCT to Gold",
+       "ok": false,
+       "fb": "Hides the symptom without finding the mechanism."
+      },
+      {
+       "text": "Increase cluster size",
+       "ok": false,
+       "fb": "Duplicates aren't a capacity issue."
+      }
+     ]
+    },
+    {
+     "prompt": "Bronze has order 123 twice, from two different files with the same content. Next?",
+     "options": [
+      {
+       "text": "Check whether the same file was ingested twice or the checkpoint was reset",
+       "ok": true,
+       "fb": "Same content in two loads → ingestion/checkpoint suspects."
+      },
+      {
+       "text": "Check the Gold refresh",
+       "ok": false,
+       "fb": "Gold is downstream."
+      },
+      {
+       "text": "Check schema evolution",
+       "ok": false,
+       "fb": "Schema doesn't duplicate rows."
+      }
+     ]
+    },
+    {
+     "prompt": "Other timeline: Bronze has order 123 once (an insert) and once more as an update; Silver has 2 rows. Suspect?",
+     "options": [
+      {
+       "text": "The MERGE condition or CDC key is wrong, so the update was inserted instead of matched",
+       "ok": true,
+       "fb": "Update not matched → WHEN NOT MATCHED THEN INSERT → duplicate."
+      },
+      {
+       "text": "Source produced a duplicate",
+       "ok": false,
+       "fb": "The source sent an insert + an update, which is valid."
+      },
+      {
+       "text": "Checkpoint reset",
+       "ok": false,
+       "fb": "Bronze shows no replay."
+      }
+     ]
+    }
+   ],
+   "explain": "Duplicates are a symptom; trace them to the mechanism."
+  },
+  {
+   "id": "ch03-e074",
+   "type": "order",
+   "section": "ch03-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order a sensible duplicate investigation (upstream first).",
+   "items": [
+    "Does the source itself contain the duplicate?",
+    "Was the same file ingested twice into Bronze?",
+    "Was the checkpoint reset, or did a retry re-write data?",
+    "Is the CDC/business key correct and unique?",
+    "Does Silver deduplicate, and is the MERGE condition right?"
+   ],
+   "explain": "Upstream checks first: if Bronze already holds the duplicate, Silver logic isn't the origin (though missing dedup may fail to remove it)."
+  },
+  {
+   "id": "ch03-e075",
+   "type": "spotbug",
+   "section": "ch03-s12",
+   "difficulty": 3,
+   "tags": [
+    "debug",
+    "syntax"
+   ],
+   "quick": false,
+   "q": "This MERGE keeps creating a second row for order 123 whenever the order is updated. Click the buggy line.",
+   "lines": [
+    "MERGE INTO silver.orders t",
+    "USING updates s",
+    "ON t.order_id = s.order_id AND t.updated_at = s.updated_at",
+    "WHEN MATCHED THEN UPDATE SET *",
+    "WHEN NOT MATCHED THEN INSERT *;"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "ON t.order_id = s.order_id",
+   "explain": "An update carries a new `updated_at`, so `t.updated_at = s.updated_at` never matches the existing row; it falls into WHEN NOT MATCHED and gets inserted again. Match on the business key only."
+  },
+  {
+   "id": "ch03-e076",
+   "type": "free",
+   "section": "ch03-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "interview"
+   ],
+   "quick": false,
+   "q": "Your manager says: 'Just add DISTINCT and close the duplicates ticket.' Respond professionally.",
+   "model": "Duplicates are a symptom, not a root cause. DISTINCT might hide them in one query but the mechanism — e.g. a file ingested twice, a reset checkpoint, a retry, a wrong CDC key or MERGE condition, or missing dedup — will keep producing bad data and affect other consumers. Let me first find where the second copy appears (source, Bronze, Silver) and fix that mechanism; then we add proper dedup in Silver if needed.",
+   "rubric": [
+    "symptom not root cause",
+    "DISTINCT hides the problem",
+    "name possible mechanisms",
+    "find where the duplicate first appears",
+    "fix mechanism / proper Silver dedup"
+   ],
+   "explain": "Good answers redirect from the symptom to the first layer where the duplicate appears."
+  },
+  {
+   "id": "ch03-e077",
+   "type": "mcq",
+   "section": "ch03-s13",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "debug"
+   ],
+   "quick": true,
+   "q": "Test Q26: A pipeline runs correctly when YOU run it but fails when it runs scheduled. One of the first things to check?",
+   "options": [
+    "The Python traceback line numbers",
+    "The run identity of the scheduled execution",
+    "Whether Photon is enabled",
+    "The number of files in Bronze"
+   ],
+   "answer": 1,
+   "explain": "You may have the permissions, but the scheduled execution identity (often a service principal) may not. Identity is the classic difference between manual and scheduled runs."
+  },
+  {
+   "id": "ch03-e078",
+   "type": "bucket",
+   "section": "ch03-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Group the nine dev-vs-prod differences.",
+   "buckets": [
+    "WHO",
+    "WHAT it may touch",
+    "HOW it's configured",
+    "WHERE it runs"
+   ],
+   "items": [
+    {
+     "text": "identity",
+     "bucket": 0
+    },
+    {
+     "text": "permissions",
+     "bucket": 1
+    },
+    {
+     "text": "catalog",
+     "bucket": 1
+    },
+    {
+     "text": "schema",
+     "bucket": 1
+    },
+    {
+     "text": "storage credential",
+     "bucket": 1
+    },
+    {
+     "text": "configuration",
+     "bucket": 2
+    },
+    {
+     "text": "secret",
+     "bucket": 2
+    },
+    {
+     "text": "compute",
+     "bucket": 3
+    },
+    {
+     "text": "runtime",
+     "bucket": 3
+    }
+   ],
+   "explain": "WHO → WHAT → HOW → WHERE is a compact way to remember all nine items from the lesson."
+  },
+  {
+   "id": "ch03-e079",
+   "type": "scenario",
+   "section": "ch03-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "A job works in DEV. In PROD it fails with `PERMISSION_DENIED`. The code is identical.",
+   "steps": [
+    {
+     "prompt": "What do you check first?",
+     "options": [
+      {
+       "text": "The identity running in prod vs dev",
+       "ok": true,
+       "fb": "WHO first — permissions belong to identities."
+      },
+      {
+       "text": "Rewrite the code",
+       "ok": false,
+       "fb": "Identical code succeeded in dev; the environment differs."
+      },
+      {
+       "text": "Upgrade the runtime",
+       "ok": false,
+       "fb": "PERMISSION_DENIED points at identity/permissions, not runtime."
+      }
+     ]
+    },
+    {
+     "prompt": "Prod runs as a service principal. What next?",
+     "options": [
+      {
+       "text": "Verify its privileges along the path in the PROD catalog/schema (and storage credential if it touches external storage)",
+       "ok": true,
+       "fb": "WHAT it may touch in prod."
+      },
+      {
+       "text": "Give it ALL PRIVILEGES",
+       "ok": false,
+       "fb": "Violates least privilege."
+      },
+      {
+       "text": "Switch prod to run as your user",
+       "ok": false,
+       "fb": "Ties production to a person."
+      }
+     ]
+    },
+    {
+     "prompt": "Privileges look right. The code reads a table name from a parameter. What else could differ?",
+     "options": [
+      {
+       "text": "Configuration: the prod parameter may point at a different catalog/schema (e.g. still dev_…)",
+       "ok": true,
+       "fb": "HOW it's configured — config, then secrets."
+      },
+      {
+       "text": "Shuffle partitions",
+       "ok": false,
+       "fb": "Performance setting, not a permission cause."
+      },
+      {
+       "text": "Nothing else can differ",
+       "ok": false,
+       "fb": "Config, secrets, compute and runtime can all differ."
+      }
+     ]
+    }
+   ],
+   "explain": "Dev and prod differ in identity, permissions, catalog, schema, storage credential, configuration, secret, compute and runtime."
+  },
+  {
+   "id": "ch03-e080",
+   "type": "order",
+   "section": "ch03-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the dev-vs-prod checks using the WHO → WHAT → HOW → WHERE grouping.",
+   "items": [
+    "Identity (who runs it)",
+    "Permissions, catalog, schema, storage credential",
+    "Configuration and secrets",
+    "Compute and runtime"
+   ],
+   "explain": "Start with identity because it changes everything downstream; then what that identity may access; then configuration; finally the compute environment."
+  },
+  {
+   "id": "ch03-e081",
+   "type": "scenario",
+   "section": "ch03-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "A notebook succeeds when you click Run, but the same notebook as a scheduled Job fails every night.",
+   "steps": [
+    {
+     "prompt": "What's one of the first things to check?",
+     "options": [
+      {
+       "text": "Under which identity the scheduled run executes",
+       "ok": true,
+       "fb": "Official answer: run identity."
+      },
+      {
+       "text": "Whether the notebook has too many cells",
+       "ok": false,
+       "fb": "Cell count isn't a failure cause."
+      },
+      {
+       "text": "Whether the schedule time is correct",
+       "ok": false,
+       "fb": "It runs — and fails — so scheduling works."
+      }
+     ]
+    },
+    {
+     "prompt": "The job runs as a service principal that lacks SELECT on one table. Fix?",
+     "options": [
+      {
+       "text": "Grant that specific privilege (and the USE CATALOG/USE SCHEMA path) to the service principal",
+       "ok": true,
+       "fb": "Least-privilege fix for the actual gap."
+      },
+      {
+       "text": "Change 'Run as' to your own user",
+       "ok": false,
+       "fb": "Works until you leave or your permissions change."
+      },
+      {
+       "text": "Give the service principal MANAGE on the catalog",
+       "ok": false,
+       "fb": "Far too broad."
+      }
+     ]
+    }
+   ],
+   "explain": "Manual vs scheduled differ mainly in identity."
+  },
+  {
+   "id": "ch03-e082",
+   "type": "order",
+   "section": "ch03-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Your notebook works manually but fails as a scheduled job. Order the checks.",
+   "items": [
+    "Find the job's run identity",
+    "Compare it with the identity used in the manual run",
+    "Check that identity's privileges along the catalog → schema → table path",
+    "Grant only the missing privilege",
+    "Re-run the scheduled job"
+   ],
+   "explain": "Identity first, then the privilege path, then a least-privilege fix, then verify."
+  },
+  {
+   "id": "ch03-e083",
+   "type": "tf",
+   "section": "ch03-s13",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "debug"
+   ],
+   "quick": false,
+   "q": "If code works in dev, a failure in prod must be caused by a bug in the code.",
+   "answer": false,
+   "explain": "The code may be perfect; identity, permissions, catalog, schema, storage credential, configuration, secrets, compute or runtime may differ."
+  },
+  {
+   "id": "ch03-e084",
+   "type": "odd",
+   "section": "ch03-s13",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Which one is NOT among the dev-vs-prod differences listed in the lesson?",
+   "options": [
+    "storage credential",
+    "secret",
+    "runtime",
+    "the developer's keyboard layout"
+   ],
+   "answer": 3,
+   "explain": "The nine: identity, permissions, catalog, schema, storage credential, configuration, secret, compute, runtime."
+  },
+  {
+   "id": "ch03-e085",
+   "type": "match",
+   "section": "ch03-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Match each symptom to its first move.",
+   "pairs": [
+    [
+     "No new data in Gold",
+     "Walk the layers from the source"
+    ],
+    [
+     "Duplicate records",
+     "Find where the second copy first appears"
+    ],
+    [
+     "Works in dev, fails in prod",
+     "Compare environments, starting with identity"
+    ],
+    [
+     "PERMISSION_DENIED",
+     "Walk the privilege path, then check run identity"
+    ]
+   ],
+   "explain": "All four apply the same principle: find the first point where reality diverges from expectation."
+  },
+  {
+   "id": "ch03-e086",
+   "type": "tf",
+   "section": "ch03-s14",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Every symptom (missing data, duplicates, PERMISSION_DENIED) is itself a root cause you can fix directly.",
+   "answer": false,
+   "explain": "They are symptoms. The course's rule: find the first layer where reality diverges, and the mechanism there is the root cause."
+  },
+  {
+   "id": "ch03-e087",
+   "type": "order",
+   "section": "ch03-s14",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the learning path that follows the prerequisites.",
+   "items": [
+    "Databricks Part 1 (platform, compute, notebooks)",
+    "Delta Lake",
+    "Unity Catalog",
+    "Ingestion / Auto Loader",
+    "Lakeflow",
+    "Jobs",
+    "Databricks SQL",
+    "Performance / Spark UI"
+   ],
+   "explain": "The roadmap goes from the platform itself to storage (Delta), governance (UC), ingestion, pipelines, orchestration, SQL, performance and then Bundles/CI-CD, security, production projects and certification drills."
+  },
+  {
+   "id": "ch03-e088",
+   "type": "mcq",
+   "section": "ch03-s14",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which topic is part of 'Databricks — Part 1' in the roadmap?",
+   "options": [
+    "Control plane vs compute plane",
+    "AUTO CDC syntax",
+    "Bundle targets",
+    "Row filters and masks"
+   ],
+   "answer": 0,
+   "explain": "Part 1 covers the platform basics: account vs workspace, control vs compute plane, compute types, SQL warehouses, Runtime, Photon, notebooks and first debugging."
+  }
+ ]
+}

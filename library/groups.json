@@ -1,0 +1,15 @@
+{
+ "_doc": "Groups shown on the subject picker, in this order. A subject's subject.json 'group' must match an id here (unknown ids fall into 'other').",
+ "groups": [
+  { "id": "data-cloud", "title": "Data & Cloud Engineering", "emoji": "☁️" },
+  { "id": "ai-cs", "title": "AI & Computer Science", "emoji": "🤖" },
+  { "id": "life-sciences", "title": "Life Sciences", "emoji": "🧬" },
+  { "id": "physics", "title": "Physics & Medical Physics", "emoji": "⚛️" },
+  { "id": "chemistry", "title": "Chemistry", "emoji": "⚗️" },
+  { "id": "math", "title": "Mathematics & Statistics", "emoji": "📐" },
+  { "id": "social-sciences", "title": "Social Sciences & Philosophy", "emoji": "🏛️" },
+  { "id": "economics", "title": "Economics & Business", "emoji": "📈" },
+  { "id": "languages", "title": "Languages", "emoji": "🗣️" },
+  { "id": "other", "title": "Other", "emoji": "✨" }
+ ]
+}

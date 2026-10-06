@@ -1,0 +1,3719 @@
+{
+ "id": "ch07",
+ "num": 7,
+ "title": "Compute Landscape: Every Compute & Every Axis",
+ "subtitle": "Serverless vs classic, all-purpose vs jobs, access modes, SQL warehouses — as axes, not a flat list",
+ "emoji": "🧭",
+ "sourcePages": "179–216",
+ "mantra": "First ask WHAT you run, then WHO manages the machines, and only then turn the knobs.",
+ "objectives": [
+  "You can explain compute as a configuration vector and name the axis behind any setting.",
+  "You can draw the Workload × Infrastructure matrix and name all 10 compute types.",
+  "You can distinguish all-purpose vs jobs lifecycles and Standard vs Dedicated access mode.",
+  "You can tell Standard access mode from Standard performance mode and explain serverless performance modes.",
+  "You can compare Serverless / Pro / Classic SQL warehouses and know a notebook on a warehouse runs only SQL/Markdown.",
+  "You can choose the right compute for a workload with the one decision diagram.",
+  "You can debug 'missing field on serverless', 'unpredictable prod job' and 'unsupported language' situations."
+ ],
+ "sections": [
+  {
+   "id": "ch07-s01",
+   "title": "Compute = a Configuration Vector",
+   "hook": "Serverless, Classic, All-purpose, Photon… are not 20 rival products — they are settings of ONE thing.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Your code is just text. `spark.table(\"prod.sales.orders\").groupBy(\"country\").sum(\"amount\")` computes nothing until it gets real resources."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df = spark.table(\"prod.sales.orders\")\ndf.groupBy(\"country\").sum(\"amount\").display()",
+     "caption": "Code alone does no computation"
+    },
+    {
+     "t": "p",
+     "text": "Those resources are **CPU, RAM, network, possibly GPU, a Spark driver and Spark executors**. Databricks calls the whole bundle **compute**."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: Serverless, Classic, All-purpose, Jobs, Standard, Dedicated, Single-node, Autoscaling, GPU, Photon… how many *compute types* is that?",
+     "text": "Almost none of them are types. Most are **different characteristics of the same compute** — like colour, engine and gearbox are characteristics of one car, not competing cars."
+    },
+    {
+     "t": "p",
+     "text": "You will meet all these words: Serverless, Classic, All-purpose, Jobs, Pipeline, Standard, Dedicated, Single-node, Multi-node, Fixed-size, Autoscaling, CPU, GPU, Photon, non-Photon, SQL Serverless, SQL Pro, SQL Classic."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "One compute, many axes",
+     "text": "A single compute can be **Classic + All-purpose + Standard access + Multi-node + Autoscaling + CPU + Photon + DBR 17.3 LTS**. That whole list is ONE compute configuration."
+    },
+    {
+     "t": "diagram",
+     "text": "Compute = (\n  workload purpose,      e.g. interactive\n  infrastructure model,  e.g. classic\n  access mode,           e.g. standard\n  topology,              e.g. multi-node\n  scaling,               e.g. autoscaling\n  hardware,              e.g. CPU\n  runtime,               e.g. DBR 17.3\n  execution engine       e.g. Photon\n)",
+     "caption": "Think of compute as a vector of 8 axes"
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Ordering a car",
+     "text": "\"Diesel\", \"automatic\" and \"red\" are not three cars. They are three answers to three different questions about ONE car. Same with \"classic\", \"all-purpose\" and \"Photon\"."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Flat-list thinking",
+     "text": "Reading the compute page as a flat list of 12+ competing products is the root of most confusion. Always ask: *which axis does this word belong to?*"
+    }
+   ]
+  },
+  {
+   "id": "ch07-s02",
+   "title": "Axis 1 & 2: Purpose vs Infrastructure",
+   "hook": "\"What do I want to do?\" and \"Who manages the machines?\" are two completely different questions.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Axis 1 — workload purpose** answers: *what do I want to do?* There are four basic categories."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Workload",
+      "What it means"
+     ],
+     "rows": [
+      [
+       "Interactive",
+       "I sit in a notebook and run cells"
+      ],
+      [
+       "Job",
+       "Code runs automatically / on a schedule"
+      ],
+      [
+       "Pipeline",
+       "A Lakeflow declarative data pipeline"
+      ],
+      [
+       "SQL",
+       "SQL analytics, dashboards, BI"
+      ]
+     ],
+     "caption": "Axis 1 — purpose"
+    },
+    {
+     "t": "p",
+     "text": "**Axis 2 — infrastructure model** answers: *who manages the machines?* Two options: **Serverless** or **Classic**."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Serverless",
+       "points": [
+        "You say: \"run the workload\"",
+        "Databricks manages machines, instance types, scaling, server-side runtime, infrastructure lifecycle",
+        "You do NOT define 1 driver, 8 workers, m5.4xlarge, DBR X, min 2 / max 10",
+        "Infrastructure is Databricks-managed"
+       ]
+      },
+      {
+       "title": "Classic",
+       "points": [
+        "You (or a compute policy) define much more",
+        "VM type, driver, workers, runtime, autoscaling, access mode, Photon, spot instances…",
+        "Classic all-purpose, jobs and pipeline compute are resources YOU create and configure",
+        "They run in the customer's cloud account/environment"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Different axes",
+     "text": "Purpose (interactive/job/pipeline/SQL) is a completely different axis from serverless/classic. Every purpose has to be combined with an infrastructure model."
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "Taxi vs your own car",
+     "text": "Serverless = taxi: you give the destination, the company handles the vehicle. Classic = your own car: you choose the model, engine, tyres and you pay for parking while it sits idle."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: a cluster with `m5.4xlarge` workers, 2–10 autoscaling and DBR 17.3 LTS — serverless or classic?",
+     "text": "**Classic.** Picking VM types, worker counts and a DBR version are exactly the decisions serverless takes away from you."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s03",
+   "title": "The Workload × Infrastructure Matrix",
+   "hook": "The first map to memorise: every workload has a serverless and a classic flavour — with different product names.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**All-purpose does NOT mean non-serverless.** It roughly means: *reusable interactive classic Spark compute* — the thing you attach notebooks to while experimenting."
+    },
+    {
+     "t": "diagram",
+     "text": "09:00 Nikos opens notebook\n  ↓ attaches notebook to cluster\n09:10 run cell\n09:30 another cell\n10:20 debugging\n11:00 another notebook attaches",
+     "caption": "All-purpose = a reusable resource that lives across sessions"
+    },
+    {
+     "t": "p",
+     "text": "Is there a *serverless all-purpose*? Conceptually yes (interactive + serverless), but Databricks does not call it that. It is named **Serverless compute for notebooks**."
+    },
+    {
+     "t": "diagram",
+     "text": "INTERACTIVE COMPUTE\n├── Serverless → Serverless notebook compute\n└── Classic    → Classic all-purpose compute\n\nAUTOMATED WORKLOAD\n├── Serverless → Serverless Jobs compute\n└── Classic    → Classic Jobs compute\n\nLAKEFLOW PIPELINE\n├── Serverless → Serverless pipeline compute\n└── Classic    → Classic pipeline compute",
+     "caption": "Same split, three times"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Purpose",
+      "Serverless",
+      "Classic"
+     ],
+     "rows": [
+      [
+       "Interactive notebook",
+       "Serverless notebook compute",
+       "All-purpose compute"
+      ],
+      [
+       "Automated job",
+       "Serverless Jobs compute",
+       "Jobs compute"
+      ],
+      [
+       "Lakeflow pipeline",
+       "Serverless pipeline",
+       "Classic pipeline"
+      ],
+      [
+       "SQL / BI",
+       "Serverless SQL warehouse",
+       "Pro / Classic SQL warehouse"
+      ]
+     ],
+     "caption": "THE matrix to memorise: Workload × Infrastructure"
+    },
+    {
+     "t": "p",
+     "text": "Databricks today recommends **serverless** for most new notebook, job and pipeline workloads."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Different axes — but a constrained matrix",
+     "text": "There is no UI with \"Purpose: ☑ all-purpose\" + \"Infrastructure: ☑ serverless\" that produces a \"serverless all-purpose cluster\". interactive + classic is *named* classic all-purpose compute; interactive + serverless is *named* serverless notebook compute. Think **constrained matrix**, not a free Cartesian product."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "\"Serverless is the opposite of all-purpose\"",
+     "text": "Wrong level. The opposite of serverless is **classic**. All-purpose describes the interactive/reusable *lifecycle* of a classic compute."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s04",
+   "title": "The Full Compute Family Tree",
+   "hook": "Ten compute types to master — six Spark/general, four SQL — arranged as a tree, not a flat list.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "For data engineering and analytics you need these **Spark/general compute** types:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Serverless notebook compute",
+      "Classic all-purpose compute",
+      "Serverless Jobs compute",
+      "Classic Jobs compute",
+      "Serverless Lakeflow pipeline compute",
+      "Classic Lakeflow pipeline compute"
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "The official docs split serverless into **notebooks, jobs and pipelines**, while classic covers **all-purpose, jobs and pipeline** resources."
+    },
+    {
+     "t": "p",
+     "text": "**SQL compute is a separate family** — SQL Warehouses: (7) Serverless SQL Warehouse, (8) Pro SQL Warehouse, (9) Classic SQL Warehouse, and now (10) **Lakehouse Real-Time SQL Warehouse [Beta]** for very low-latency / high-concurrency read workloads."
+    },
+    {
+     "t": "diagram",
+     "text": "DATABRICKS COMPUTE\n├── General Spark compute\n│   ├── Interactive\n│   │   ├── Serverless notebook\n│   │   └── Classic all-purpose\n│   ├── Automated\n│   │   ├── Serverless Jobs\n│   │   └── Classic Jobs\n│   └── Lakeflow pipelines\n│       ├── Serverless pipeline\n│       └── Classic pipeline\n└── SQL Compute\n    ├── Serverless SQL Warehouse\n    ├── Pro SQL Warehouse\n    ├── Classic SQL Warehouse\n    └── Lakehouse Real-Time [Beta]",
+     "caption": "A far better mental model than a flat list of 10"
+    },
+    {
+     "t": "p",
+     "text": "Other products also run on serverless infrastructure — **model serving, data-quality monitoring, predictive optimization** — but they are managed from separate product surfaces. Don't put them in the same bucket yet."
+    },
+    {
+     "t": "p",
+     "text": "There is also **AI Runtime** (Preview) for serverless GPU / deep-learning workloads."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "What to master first",
+     "text": "As a data engineer, master the 9–10 compute types above first. Model serving, AI Runtime etc. come later."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s05",
+   "title": "All-purpose vs Jobs: Two Lifecycles",
+   "hook": "All-purpose lives on between your cells; Jobs compute is born with the run and dies with it.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**All-purpose, concretely:** you create `my-dev-cluster` with Runtime 17.3 LTS, 2–8 workers, autoscaling ON, Standard access."
+    },
+    {
+     "t": "diagram",
+     "text": "Notebook A ─┐\nNotebook B ─┼──► my-dev-cluster\nNotebook C ─┘",
+     "caption": "Many notebooks share one reusable cluster"
+    },
+    {
+     "t": "p",
+     "text": "The cluster exists independently of any specific job. You run `spark.read.table(...)`, pause 10 minutes, run another command, debug… That is **all-purpose**: a reusable classic resource not created for one automated run."
+    },
+    {
+     "t": "p",
+     "text": "**Jobs compute:** a job runs Bronze → Silver at 02:00. You don't need a cluster sitting open at 08:00, 12:00, 18:00."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "JOB START",
+      "compute starts",
+      "run pipeline",
+      "job ends",
+      "compute goes away"
+     ],
+     "caption": "Jobs compute lifecycle"
+    },
+    {
+     "t": "p",
+     "text": "In **Classic Jobs Compute** you define the cluster configuration; in **Serverless Jobs** Databricks manages it."
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Job on all-purpose? Technically yes",
+     "text": "Many job task types *can* run on a classic all-purpose cluster, but Databricks does NOT recommend it for production — it prefers serverless jobs or classic jobs compute."
+    },
+    {
+     "t": "diagram",
+     "text": "my-dev-cluster (all-purpose)\n├── Developer A: running a query\n├── Developer B: debugging\n└── Job C: production ETL\n      → all compete for CPU, RAM,\n        executors, shuffle bandwidth",
+     "caption": "Why production jobs suffer on shared all-purpose"
+    },
+    {
+     "t": "p",
+     "text": "One developer can destroy the **performance predictability** of the production job."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "The name is misleading",
+     "text": "**All-purpose ≠ \"can do / best for all workloads\".** It means *generic reusable interactive compute*."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s06",
+   "title": "Access Mode: Standard vs Dedicated",
+   "hook": "Who may use this classic compute, and how are users isolated?",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Access mode** is the next axis. It applies mainly to **classic all-purpose and jobs** compute: **Standard** vs **Dedicated**."
+    },
+    {
+     "t": "diagram",
+     "text": "Classic cluster (Standard access)\n┌────────────────────────┐\n│  Nikos workload        │\n│  Maria workload        │\n│  John workload         │\n└────────────────────────┘\nmany users, workload isolation",
+     "caption": "Standard = shared with isolation"
+    },
+    {
+     "t": "p",
+     "text": "**Standard**: many users can use the same compute with workload isolation. Databricks recommends Standard for **most classic workloads**."
+    },
+    {
+     "t": "p",
+     "text": "**Dedicated**: the compute is assigned to **one user or a specific group** and is not general shared compute. Used when workloads/features need a more direct environment — e.g. some **ML / GPU / R** scenarios."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Lifecycle",
+      "Standard",
+      "Dedicated"
+     ],
+     "rows": [
+      [
+       "All-purpose",
+       "✅",
+       "✅"
+      ],
+      [
+       "Jobs",
+       "✅",
+       "✅"
+      ],
+      [
+       "Pipeline",
+       "own pipeline configuration model",
+       "own pipeline configuration model"
+      ]
+     ],
+     "caption": "Classic compute matrix — a real second axis"
+    },
+    {
+     "t": "p",
+     "text": "So valid combos include Classic + All-purpose + Standard, Classic + All-purpose + Dedicated, Classic + Jobs + Standard, Classic + Jobs + Dedicated."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: does serverless have the Standard/Dedicated dropdown?",
+     "text": "**No, not in the same way.** You don't create a cluster, so you never write `Access mode = Dedicated`, `Workers = 8`. Those are platform-managed choices. E.g. **serverless Jobs uses Standard access-mode semantics** and requires a workload compatible with Standard compute."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Terminology trap: \"standard compute\"",
+     "text": "\"Standard compute\" does NOT mean normal/basic compute. Today it means **classic compute configured with Standard access mode**. Likewise **\"Dedicated compute\" = classic compute configured with Dedicated access mode**."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Standard/Dedicated is not universal",
+     "text": "SQL warehouses and serverless don't expose this selector. It is a **classic compute** concept."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s07",
+   "title": "Topology, Scaling & Hardware",
+   "hook": "Single vs multi-node, fixed vs autoscaling, CPU vs GPU — three more independent knobs.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Single-node vs Multi-node** is a classic compute setting."
+    },
+    {
+     "t": "diagram",
+     "text": "MULTI-NODE                 SINGLE-NODE\n      DRIVER              ┌───────────────────┐\n        │                 │ DRIVER + executor │\n  ┌─────┼─────┐           │ same machine      │\n  ▼     ▼     ▼           └───────────────────┘\nWORKER WORKER WORKER      no separate worker VMs\ndistributed Spark",
+     "caption": "Topology axis"
+    },
+    {
+     "t": "p",
+     "text": "Single-node is for **small data, non-distributed libraries, certain ML workloads, development** — not large distributed Spark processing."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Fixed size",
+       "points": [
+        "`workers = 4`",
+        "4 workers all the time"
+       ]
+      },
+      {
+       "title": "Autoscaling",
+       "points": [
+        "`min workers = 2`, `max workers = 10`",
+        "low load 2 → medium 5 → heavy 10 → later 3",
+        "Databricks adds/removes workers within YOUR bounds"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Classic autoscaling",
+       "points": [
+        "YOU: min = 2, max = 10, worker type = X",
+        "Databricks: chooses a number between 2 and 10"
+       ]
+      },
+      {
+       "title": "Serverless",
+       "points": [
+        "YOU: run my workload",
+        "Databricks: handles resource selection AND scaling"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Autoscaling ≠ serverless",
+     "text": "Classic compute can perfectly well autoscale. Autoscaling is a scaling axis, serverless is an infrastructure axis."
+    },
+    {
+     "t": "p",
+     "text": "**CPU vs GPU:** classic compute can use CPU instances or **GPU instances** (deep learning). GPU classic compute uses the **ML runtime**, and **Photon is not supported on GPU instance types**."
+    },
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "Classic + All-purpose + Dedicated + GPU + DBR ML",
+     "caption": "A perfectly sensible configuration"
+    },
+    {
+     "t": "p",
+     "text": "Since 2026 **AI Runtime** (Public Preview) brings **serverless GPU** infrastructure for deep learning. So GPU and serverless are not opposites — again, different axes."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Constraint between axes",
+     "text": "GPU + Photon on classic GPU compute ❌. Not every combination of axis values is allowed."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s08",
+   "title": "Runtime & Photon as Axes",
+   "hook": "DBR is software, Photon is an execution engine — neither is a compute family.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "On classic compute you pick a **Databricks Runtime (DBR)** such as `DBR 17.3 LTS` or a `DBR ML` variant. That is a **software stack**, not hardware."
+    },
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "AWS VM:  m5.xlarge      <- hardware\nsoftware: DBR 17.3 LTS  <- runtime",
+     "caption": "Hardware and runtime are separate choices"
+    },
+    {
+     "t": "p",
+     "text": "The runtime includes **Spark plus Databricks software/libraries**."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Classic",
+       "points": [
+        "\"I choose the DBR\"",
+        "e.g. DBR 17.3 LTS"
+       ]
+      },
+      {
+       "title": "Serverless",
+       "points": [
+        "\"Databricks manages the server runtime\"",
+        "No traditional DBR version picker",
+        "Databricks upgrades the server-side runtime; **serverless environment versions** give application compatibility"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Photon** on classic CPU compute: **ON or OFF** — your choice. On **serverless**: Photon enabled, managed by Databricks. **SQL warehouses** also use Photon."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Photon is an axis, not a family",
+     "text": "There is no \"Photon compute\" product. Photon is a setting (engine) that sits on top of a compute."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "\"Which DBR for my serverless job?\"",
+     "text": "Usually the wrong question: on serverless you don't pin a traditional DBR version."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s09",
+   "title": "The Classic Matrix & What Serverless Removes",
+   "hook": "Classic = a dozen knobs; serverless = \"here is my workload, run it\".",
+   "blocks": [
+    {
+     "t": "table",
+     "head": [
+      "Axis",
+      "Options (classic all-purpose / jobs)"
+     ],
+     "rows": [
+      [
+       "Purpose",
+       "All-purpose / Jobs"
+      ],
+      [
+       "Infrastructure",
+       "Classic"
+      ],
+      [
+       "Access",
+       "Standard / Dedicated"
+      ],
+      [
+       "Nodes",
+       "Single / Multi"
+      ],
+      [
+       "Scale",
+       "Fixed / Autoscaling"
+      ],
+      [
+       "Hardware",
+       "CPU / GPU"
+      ],
+      [
+       "Worker type",
+       "memory / compute / general purpose etc."
+      ],
+      [
+       "Driver type",
+       "same as worker or different"
+      ],
+      [
+       "Runtime",
+       "DBR version / DBR ML"
+      ],
+      [
+       "Photon",
+       "On / Off, where supported"
+      ],
+      [
+       "Instances",
+       "On-demand / Spot workers"
+      ],
+      [
+       "Pool",
+       "Pool / direct provisioning"
+      ],
+      [
+       "Termination",
+       "manual / auto-terminate"
+      ]
+     ],
+     "caption": "The big classic matrix"
+    },
+    {
+     "t": "p",
+     "text": "**Example 1 — interactive ETL development:** All-purpose · Classic · Standard · DBR 17.3 LTS · Photon ON · Multi-node · general-purpose worker · 2 → 8 workers · general-purpose driver. That is **one classic all-purpose compute with 9 configuration choices**, not 10 computes."
+    },
+    {
+     "t": "p",
+     "text": "**Example 2 — production scheduled ETL:** Jobs · Classic · Standard · DBR 17.3 LTS · Photon ON · Multi-node · autoscaling 4 → 20 workers → a **Classic Jobs Compute** with specific parameters."
+    },
+    {
+     "t": "p",
+     "text": "**Serverless equivalent:** Purpose = Jobs, Infrastructure = Serverless. Now you do NOT choose driver VM, worker VM, 2–20 workers, DBR 17.3, spot or pool. **Autoscaling and Photon are enabled automatically** in serverless Jobs."
+    },
+    {
+     "t": "p",
+     "text": "Order of decisions: first decide *Classic all-purpose* or *Classic Jobs*; **only then** go into Standard/Dedicated, Single/Multi, DBR, CPU/GPU, worker type, driver type, Fixed/Autoscaling, Photon, Spot, Pools, auto termination."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Classic — you answer",
+       "points": [
+        "Which VMs? How many?",
+        "Which driver? Which workers?",
+        "Which runtime?",
+        "Autoscale from where to where?",
+        "Photon? Spot? Pool?"
+       ]
+      },
+      {
+       "title": "Serverless — you answer",
+       "points": [
+        "\"Here is my workload. Run it.\"",
+        "Far fewer infrastructure choices"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Not supported on serverless",
+     "text": "Serverless does NOT support **compute policies, instance pools, compute-scoped init scripts, compute-scoped libraries**, or most **Spark cluster configurations** — these infrastructure concerns are platform-managed."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Classic = 'large matrix', Serverless = 'matrix disappears'",
+     "text": "That disappearance is the whole point of serverless."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s10",
+   "title": "Serverless Performance Modes",
+   "hook": "Serverless still has a knob — speed vs cost — and its name collides with an access mode.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "For serverless **Jobs and Pipelines** there is a **performance mode**: **Performance Optimized** vs **Standard**."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Performance Optimized",
+       "points": [
+        "faster startup",
+        "more latency-sensitive"
+       ]
+      },
+      {
+       "title": "Standard (performance)",
+       "points": [
+        "slower startup",
+        "lower cost",
+        "batch-friendly"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Serverless workload",
+      "Performance optimized",
+      "Standard"
+     ],
+     "rows": [
+      [
+       "Notebook",
+       "✅",
+       "❌"
+      ],
+      [
+       "Job",
+       "✅",
+       "✅"
+      ],
+      [
+       "Pipeline",
+       "✅",
+       "✅"
+      ]
+     ],
+     "caption": "Serverless matrix — notebooks use a performance-oriented interactive mode"
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Standard access ≠ Standard performance",
+     "text": "**Standard access mode** = security/isolation concept for classic compute (who may use it, how users are isolated). **Standard performance mode** = serverless cost/latency concept (lower cost or faster startup?). Nothing in common except the English word."
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Standard ACCESS mode",
+       "points": [
+        "Classic compute",
+        "Who may use this compute?",
+        "How are users isolated?"
+       ]
+      },
+      {
+       "title": "Standard PERFORMANCE mode",
+       "points": [
+        "Serverless Jobs / Pipelines",
+        "Lower cost or faster startup?",
+        "Not available for notebooks"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: a nightly 02:00 batch ETL with no SLA on start time — which serverless performance mode?",
+     "text": "**Standard** performance mode: slower startup doesn't matter at 02:00, and it costs less."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s11",
+   "title": "SQL Warehouses: Serverless, Pro, Classic",
+   "hook": "The SQL family is its own branch — with its own feature ladder.",
+   "blocks": [
+    {
+     "t": "diagram",
+     "text": "SQL WAREHOUSE\n├── Serverless\n├── Pro\n└── Classic",
+     "caption": "A different branch from Spark/general compute"
+    },
+    {
+     "t": "p",
+     "text": "**All** current warehouse types support **Photon**. **Serverless** additionally has **Predictive IO + Intelligent Workload Management**. **Pro** has Photon + Predictive IO. **Classic** has Photon only."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Feature",
+      "Serverless",
+      "Pro",
+      "Classic"
+     ],
+     "rows": [
+      [
+       "Photon",
+       "✅",
+       "✅",
+       "✅"
+      ],
+      [
+       "Predictive IO",
+       "✅",
+       "✅",
+       "❌"
+      ],
+      [
+       "Intelligent Workload Management",
+       "✅",
+       "❌",
+       "❌"
+      ],
+      [
+       "Databricks-managed serverless infra",
+       "✅",
+       "❌",
+       "❌"
+      ],
+      [
+       "Custom networking flexibility",
+       "limited / different",
+       "✅",
+       "✅"
+      ],
+      [
+       "Recommended default",
+       "✅",
+       "special cases",
+       "fallback / basic"
+      ]
+     ],
+     "caption": "SQL warehouse matrix"
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Feature ladder mnemonic",
+     "text": "**Classic = P**, **Pro = P + P**, **Serverless = P + P + I**: Photon → + Predictive IO → + Intelligent Workload Management."
+    },
+    {
+     "t": "p",
+     "text": "Can a **notebook attach to a SQL warehouse**? Yes — but it can only run **SQL and Markdown** cells, not Python/R."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "-- works in a notebook attached to a SQL warehouse\nSELECT COUNT(*)\nFROM prod.sales.orders;",
+     "caption": "✅ SQL cell"
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "# fails in a notebook attached ONLY to a SQL warehouse\nfrom pyspark.sql import functions as F",
+     "caption": "❌ Python cell"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Python on a SQL warehouse",
+     "text": "A notebook attached exclusively to a SQL warehouse cannot run Python cells. Attach to serverless notebook compute or all-purpose for PySpark."
+    }
+   ]
+  },
+  {
+   "id": "ch07-s12",
+   "title": "Choosing Compute: The One Decision Diagram",
+   "hook": "First question: what is my workload? Second: do I need custom infra? Only then: parameters.",
+   "blocks": [
+    {
+     "t": "table",
+     "head": [
+      "I want to…",
+      "Best default",
+      "Other options"
+     ],
+     "rows": [
+      [
+       "Interactive Python/PySpark notebook",
+       "Serverless notebook",
+       "Classic all-purpose"
+      ],
+      [
+       "Interactive SQL notebook",
+       "Serverless compute or serverless SQL warehouse",
+       "Pro/classic warehouse, all-purpose"
+      ],
+      [
+       "Scheduled Python notebook",
+       "Serverless Jobs",
+       "Classic Jobs"
+      ],
+      [
+       "Python script job",
+       "Serverless Jobs",
+       "Classic Jobs"
+      ],
+      [
+       "Python wheel",
+       "Serverless Jobs",
+       "Classic Jobs"
+      ],
+      [
+       "JAR",
+       "Classic Jobs in some cases / serverless support per task",
+       "Classic"
+      ],
+      [
+       "spark-submit",
+       "Classic Jobs",
+       "—"
+      ],
+      [
+       "SQL Job task",
+       "Serverless SQL Warehouse",
+       "Pro SQL Warehouse"
+      ],
+      [
+       "dbt",
+       "Serverless SQL Warehouse",
+       "Pro"
+      ],
+      [
+       "Lakeflow pipeline",
+       "Serverless pipeline",
+       "Classic pipeline"
+      ],
+      [
+       "BI / dashboard",
+       "Serverless SQL Warehouse",
+       "Pro / Classic warehouse"
+      ]
+     ],
+     "caption": "Usage matrix (mirrors Databricks' task-support matrix)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Family",
+      "SL/Classic",
+      "Access cfg?",
+      "Nodes cfg?",
+      "DBR cfg?",
+      "Autoscale cfg?"
+     ],
+     "rows": [
+      [
+       "Serverless notebook",
+       "Serverless",
+       "❌",
+       "❌",
+       "❌ (no traditional DBR)",
+       "❌ infra managed"
+      ],
+      [
+       "All-purpose",
+       "Classic",
+       "✅",
+       "✅",
+       "✅",
+       "✅"
+      ],
+      [
+       "Serverless Jobs",
+       "Serverless",
+       "❌",
+       "❌",
+       "❌ (no traditional DBR)",
+       "❌ infra managed"
+      ],
+      [
+       "Classic Jobs",
+       "Classic",
+       "✅",
+       "✅",
+       "✅",
+       "✅"
+      ],
+      [
+       "Serverless pipeline",
+       "Serverless",
+       "managed",
+       "❌",
+       "managed",
+       "managed"
+      ],
+      [
+       "Classic pipeline",
+       "Classic",
+       "pipeline-specific",
+       "✅",
+       "✅",
+       "✅"
+      ],
+      [
+       "Serverless SQL WH",
+       "Serverless",
+       "SQL security model",
+       "managed",
+       "managed",
+       "managed"
+      ],
+      [
+       "Pro SQL WH",
+       "non-serverless",
+       "warehouse model",
+       "abstracted",
+       "Databricks SQL runtime",
+       "warehouse autoscale"
+      ],
+      [
+       "Classic SQL WH",
+       "non-serverless",
+       "warehouse model",
+       "abstracted",
+       "Databricks SQL runtime",
+       "warehouse autoscale"
+      ]
+     ],
+     "caption": "\"All possible combinations\" in one useful matrix"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Constraints between axes",
+     "text": "If you choose serverless, many axes are managed by Databricks (no worker type, no pool…). And on classic GPU compute, GPU + Photon is not possible. The axes are real but **constrained**."
+    },
+    {
+     "t": "diagram",
+     "text": "              DATABRICKS COMPUTE\n                     │\n     FIRST QUESTION: What is my workload?\n                     │\n  ┌────────────┬─────┴──────┬────────────┐\nINTERACTIVE   JOB        PIPELINE       SQL\n  │            │            │            │\nchoose infra choose infra choose infra  SQL WH\n ┌─┴─┐        ┌─┴─┐        ┌─┴─┐      ┌──┼───┐\n S   C        S   C        S   C      S Pro  C\n     │\n ALL-PURPOSE → configure: Standard/Dedicated,\n   Single/Multi, Fixed/Autoscale, CPU/GPU,\n   DBR, Photon\nS = Serverless   C = Classic",
+     "caption": "The ONE diagram to remember"
+    },
+    {
+     "t": "p",
+     "text": "**Example A:** \"Explore 500 GB of customer transactions.\" Step 1: interactive (I'll try commands). Step 2: custom infra? No → **Serverless notebook compute**. Done — no worker VMs to decide."
+    },
+    {
+     "t": "p",
+     "text": "**Example B:** \"Run ETL every night at 2 a.m.\" automated + no special infra → **Serverless Jobs**."
+    },
+    {
+     "t": "p",
+     "text": "**Example C:** nightly ETL using a **custom Spark JAR and low-level Spark functionality** not supported on serverless → automated + classic required → **Classic Jobs Compute**, then choose DBR, workers, autoscaling, access mode, Photon…"
+    },
+    {
+     "t": "p",
+     "text": "**Example D:** 100 analysts run SQL from **Power BI**. Not an all-purpose cluster! SQL/BI → SQL Warehouse → usually **Serverless SQL Warehouse** (recommended today for BI, SQL ETL and exploratory analytics)."
+    },
+    {
+     "t": "p",
+     "text": "**Example E:** \"I want an **R** notebook.\" Serverless notebooks don't support **R** (the source also lists Scala and **RDD APIs** as unsupported). Interactive + unsupported serverless feature → **Classic all-purpose**, possibly **Dedicated**."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when choosing compute",
+     "questions": [
+      "Am I sitting and trying commands (interactive), scheduling something (job), building a declarative pipeline, or serving SQL/BI?",
+      "Do I need anything serverless doesn't support (R, RDD APIs, custom JAR/low-level Spark, init scripts, pools, specific Spark configs)?",
+      "If not — why wouldn't I use serverless?",
+      "If classic: have I decided all-purpose vs jobs BEFORE touching the parameters?",
+      "Is this SQL/BI? Then why am I looking at Spark clusters instead of a SQL warehouse?"
+     ]
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch07-d01",
+   "title": "My R / RDD notebook fails on serverless",
+   "section": "ch07-s12",
+   "symptom": "A notebook using R (or RDD APIs) fails or the language isn't available when attached to serverless notebook compute.",
+   "askYourself": [
+    "Is this notebook running on serverless notebook compute?",
+    "Does my code use something serverless notebooks don't support (R, RDD APIs; the source also lists Scala)?",
+    "Can I rewrite it with DataFrame/SQL APIs that serverless supports?",
+    "If not, do I need classic all-purpose — and does the workload need Dedicated access?"
+   ],
+   "steps": [
+    {
+     "do": "Check which compute the notebook is attached to.",
+     "why": "Serverless notebook compute has language/API limits."
+    },
+    {
+     "do": "Identify the unsupported feature (R, RDD).",
+     "why": "Decides whether a rewrite or a compute change is needed."
+    },
+    {
+     "do": "Attach to a classic all-purpose cluster (Dedicated if required).",
+     "why": "Interactive + unsupported serverless feature → classic all-purpose."
+    }
+   ],
+   "rootCauses": [
+    "Serverless notebooks don't support R or RDD APIs.",
+    "Workload needs a direct/dedicated environment."
+   ],
+   "fix": "Use classic all-purpose compute (possibly Dedicated access) for R/RDD development, or rewrite to DataFrame/SQL to stay on serverless.",
+   "mnemonic": "Serverless says 'R? Arrr, no.'"
+  },
+  {
+   "id": "ch07-d02",
+   "title": "I can't find worker type / pool / init script fields on my serverless job",
+   "section": "ch07-s09",
+   "symptom": "You try to set worker type, min/max workers, an instance pool, a compute policy or a compute-scoped init script on serverless Jobs and the fields don't exist.",
+   "askYourself": [
+    "Am I on serverless or classic?",
+    "Is the setting I want an infrastructure concern (VMs, counts, pools, init scripts, policies, Spark cluster configs)?",
+    "Does my workload truly need that setting, or was I copying a classic habit?",
+    "If it truly needs it, should this be Classic Jobs compute?"
+   ],
+   "steps": [
+    {
+     "do": "Confirm the job's compute is serverless.",
+     "why": "Serverless hides the infrastructure envelope by design."
+    },
+    {
+     "do": "Check whether the requirement is real (e.g. custom JAR/low-level Spark).",
+     "why": "Most workloads don't need these knobs."
+    },
+    {
+     "do": "If required, switch the task to Classic Jobs compute and configure there.",
+     "why": "Classic exposes VM type, workers, pools, init scripts, policies."
+    }
+   ],
+   "rootCauses": [
+    "Serverless doesn't support compute policies, instance pools, compute-scoped init scripts, compute-scoped libraries or most Spark cluster configs.",
+    "Applying classic thinking to serverless."
+   ],
+   "fix": "Let serverless manage infrastructure; if a classic-only feature is required, use Classic Jobs compute.",
+   "mnemonic": "No PIPS on serverless: Policies, Init scripts, Pools, Spark confs."
+  },
+  {
+   "id": "ch07-d03",
+   "title": "Production job runtime is unpredictable",
+   "section": "ch07-s05",
+   "symptom": "A scheduled production ETL takes 20 min some nights and 90 min others; it runs on a shared all-purpose cluster.",
+   "askYourself": [
+    "Which compute does this job run on — all-purpose, classic jobs or serverless jobs?",
+    "Who else is attached to that cluster at the same time?",
+    "Are developers' notebooks competing for CPU, RAM, executors, shuffle bandwidth?",
+    "Is this one of the limited exceptions (iterative job testing, very short frequent jobs) — or real production?",
+    "Can I move it to serverless Jobs or classic Jobs compute?"
+   ],
+   "steps": [
+    {
+     "do": "Look at the job's compute setting.",
+     "why": "All-purpose is shared and interactive by design."
+    },
+    {
+     "do": "Check other activity on that cluster during the run.",
+     "why": "Contention explains run-to-run variance."
+    },
+    {
+     "do": "Switch the job to serverless Jobs (or classic Jobs compute).",
+     "why": "Jobs compute's lifecycle is tied to the run — isolated and predictable."
+    }
+   ],
+   "rootCauses": [
+    "Resource contention on shared all-purpose compute.",
+    "Using all-purpose for production against Databricks' recommendation."
+   ],
+   "fix": "Run production jobs on serverless Jobs or classic Jobs compute.",
+   "mnemonic": "Prod gets its own room."
+  },
+  {
+   "id": "ch07-d04",
+   "title": "Python cell fails in a notebook attached to a SQL warehouse",
+   "section": "ch07-s11",
+   "symptom": "SQL cells run fine, but `from pyspark.sql import functions as F` fails in the same notebook.",
+   "askYourself": [
+    "What is this notebook attached to — a SQL warehouse or Spark compute?",
+    "Which cell languages does a SQL warehouse run (SQL + Markdown only)?",
+    "Can this logic be expressed in SQL instead?",
+    "If I need Python, should I attach serverless notebook compute or all-purpose?"
+   ],
+   "steps": [
+    {
+     "do": "Check the attached compute in the notebook header.",
+     "why": "Warehouses only run SQL and Markdown."
+    },
+    {
+     "do": "Rewrite in SQL or re-attach to Spark compute.",
+     "why": "PySpark needs Spark/general compute."
+    }
+   ],
+   "rootCauses": [
+    "Notebook attached exclusively to a SQL warehouse."
+   ],
+   "fix": "Attach the notebook to serverless notebook compute (or classic all-purpose) for Python, or keep SQL-only cells on the warehouse."
+  },
+  {
+   "id": "ch07-d05",
+   "title": "Serverless job/pipeline starts too slowly (or costs more than expected)",
+   "section": "ch07-s10",
+   "symptom": "A serverless job or pipeline has slow startup that breaks an SLA — or a batch job is more expensive than needed.",
+   "askYourself": [
+    "Is this a serverless Job/pipeline or a notebook (notebooks have no Standard performance mode)?",
+    "Which performance mode is set: Standard or Performance Optimized?",
+    "Does this workload need fast startup (latency-sensitive) or is it batch with slack?",
+    "Am I confusing performance mode with Standard ACCESS mode?"
+   ],
+   "steps": [
+    {
+     "do": "Open the job/pipeline settings and read the performance mode.",
+     "why": "It's the serverless cost/startup knob."
+    },
+    {
+     "do": "Latency-sensitive → Performance Optimized; batch with slack → Standard.",
+     "why": "Standard = slower startup, lower cost."
+    }
+   ],
+   "rootCauses": [
+    "Standard performance mode on a latency-sensitive workload.",
+    "Performance Optimized on a relaxed batch workload (paying for speed you don't need)."
+   ],
+   "fix": "Match the performance mode to the SLA: Performance Optimized for fast startup, Standard for cheaper batch.",
+   "mnemonic": "Fast or cheap — pick the mode."
+  },
+  {
+   "id": "ch07-d06",
+   "title": "Photon option unavailable on my GPU cluster",
+   "section": "ch07-s07",
+   "symptom": "On a classic GPU cluster with DBR ML, Photon can't be enabled.",
+   "askYourself": [
+    "Is this classic compute on GPU instance types?",
+    "Do I actually need Photon (SQL/DataFrame engine) or the GPU (deep learning)?",
+    "Should SQL/ETL parts run on a separate CPU compute with Photon?"
+   ],
+   "steps": [
+    {
+     "do": "Confirm the instance type is GPU.",
+     "why": "Photon isn't supported on GPU instance types."
+    },
+    {
+     "do": "Split workloads: GPU compute for DL, CPU + Photon for ETL.",
+     "why": "Different axes, different needs."
+    }
+   ],
+   "rootCauses": [
+    "Axis constraint: GPU + Photon is not allowed on classic GPU compute."
+   ],
+   "fix": "Accept no Photon on GPU compute, or run SQL/ETL on CPU compute with Photon."
+  },
+  {
+   "id": "ch07-d07",
+   "title": "Workload fails on serverless Jobs but worked on my Dedicated cluster",
+   "section": "ch07-s06",
+   "symptom": "Code that ran on a classic Dedicated cluster fails after moving the task to serverless Jobs.",
+   "askYourself": [
+    "Does serverless Jobs use Standard access-mode semantics?",
+    "Was my code relying on something only Dedicated (single-user/direct) environments allow?",
+    "Is the failing feature in the serverless-unsupported list (R, RDD, init scripts, Spark configs)?",
+    "Should this task stay on classic Jobs compute with Dedicated access?"
+   ],
+   "steps": [
+    {
+     "do": "Read the error and identify the feature used.",
+     "why": "Serverless Jobs requires Standard-compatible workloads."
+    },
+    {
+     "do": "Refactor to Standard-compatible APIs, or keep classic Jobs + Dedicated.",
+     "why": "Only classic exposes Dedicated."
+    }
+   ],
+   "rootCauses": [
+    "Serverless Jobs = Standard access semantics; Dedicated-only features fail."
+   ],
+   "fix": "Make the workload Standard-compatible or run it on classic Jobs compute with Dedicated access."
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "Serverless is the opposite of all-purpose",
+   "text": "They live on different axes: serverless/classic is infrastructure, all-purpose/jobs is lifecycle/purpose.",
+   "fix": "Opposite of serverless = classic. Classic interactive = all-purpose."
+  },
+  {
+   "title": "Looking for a 'serverless all-purpose cluster'",
+   "text": "Interactive + serverless is named serverless notebook compute; the matrix is constrained.",
+   "fix": "Use the Workload × Infrastructure matrix names."
+  },
+  {
+   "title": "All-purpose = best for everything",
+   "text": "The name is misleading: it means generic reusable interactive compute.",
+   "fix": "Use Jobs compute (serverless or classic) for production jobs."
+  },
+  {
+   "title": "Production jobs on shared all-purpose",
+   "text": "Developers compete with the job for CPU, RAM, executors, shuffle bandwidth — no predictability.",
+   "fix": "Serverless Jobs or classic Jobs compute."
+  },
+  {
+   "title": "Autoscaling = serverless",
+   "text": "Classic compute autoscales between min and max that YOU set.",
+   "fix": "Autoscaling is a scaling axis; serverless is an infrastructure axis."
+  },
+  {
+   "title": "Standard access vs Standard performance",
+   "text": "Same word, unrelated concepts: security/isolation vs serverless cost/startup.",
+   "fix": "Ask: classic security question or serverless speed/cost question?"
+  },
+  {
+   "title": "'Standard compute' = basic compute",
+   "text": "It means classic compute with Standard access mode.",
+   "fix": "Read 'standard/dedicated compute' as access-mode names."
+  },
+  {
+   "title": "Expecting a Standard/Dedicated dropdown on serverless",
+   "text": "Serverless hides it; serverless Jobs uses Standard semantics.",
+   "fix": "Need Dedicated → classic compute."
+  },
+  {
+   "title": "Setting worker type / min-max / pools on serverless",
+   "text": "Serverless manages infrastructure and doesn't support pools, policies, compute-scoped init scripts/libraries, most Spark configs.",
+   "fix": "Let it go, or use classic if truly required."
+  },
+  {
+   "title": "Photon on GPU classic compute",
+   "text": "Photon isn't supported on GPU instance types.",
+   "fix": "GPU for DL; CPU + Photon for ETL/SQL."
+  },
+  {
+   "title": "Python cells on a SQL warehouse",
+   "text": "Notebooks on a SQL warehouse run only SQL and Markdown.",
+   "fix": "Attach to serverless notebook or all-purpose for Python."
+  },
+  {
+   "title": "R on serverless notebooks",
+   "text": "Serverless notebooks don't support R (nor RDD APIs).",
+   "fix": "Classic all-purpose, possibly Dedicated."
+  },
+  {
+   "title": "Standard performance mode for notebooks",
+   "text": "Notebooks only use the performance-oriented interactive mode.",
+   "fix": "Standard performance mode is for serverless Jobs/pipelines."
+  },
+  {
+   "title": "All-purpose cluster for BI",
+   "text": "Power BI / dashboards are a SQL/BI workload.",
+   "fix": "Serverless SQL Warehouse."
+  },
+  {
+   "title": "Pinning a DBR on serverless",
+   "text": "Serverless manages the server runtime; you choose environment versions instead.",
+   "fix": "Pin DBR only on classic."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "What is 'compute' in Databricks?",
+   "a": "The resources used to execute a workload: CPU, RAM, network, possibly GPU, Spark driver and executors.",
+   "section": "ch07-s01"
+  },
+  {
+   "q": "Name the 8 axes of the compute configuration vector.",
+   "a": "Purpose, infrastructure, access mode, topology, scaling, hardware, runtime, execution engine.",
+   "section": "ch07-s01"
+  },
+  {
+   "q": "Axis 1 values?",
+   "a": "Interactive, Job, Pipeline, SQL.",
+   "section": "ch07-s02"
+  },
+  {
+   "q": "Axis 2 values?",
+   "a": "Serverless vs Classic — who manages the machines.",
+   "section": "ch07-s02"
+  },
+  {
+   "q": "Where do classic computes run?",
+   "a": "In the customer's cloud account/environment.",
+   "section": "ch07-s02"
+  },
+  {
+   "q": "Interactive + serverless is called…",
+   "a": "Serverless compute for notebooks (serverless notebook compute).",
+   "section": "ch07-s03"
+  },
+  {
+   "q": "Interactive + classic is called…",
+   "a": "Classic all-purpose compute.",
+   "section": "ch07-s03"
+  },
+  {
+   "q": "Opposite of serverless?",
+   "a": "Classic (not all-purpose).",
+   "section": "ch07-s03"
+  },
+  {
+   "q": "Why 'constrained matrix'?",
+   "a": "Axes are conceptually independent, but only certain named products exist (no 'serverless all-purpose').",
+   "section": "ch07-s03"
+  },
+  {
+   "q": "The 6 Spark/general compute types?",
+   "a": "Serverless notebook, classic all-purpose, serverless Jobs, classic Jobs, serverless pipeline, classic pipeline.",
+   "section": "ch07-s04"
+  },
+  {
+   "q": "The 4 SQL warehouse types?",
+   "a": "Serverless, Pro, Classic, Lakehouse Real-Time [Beta].",
+   "section": "ch07-s04"
+  },
+  {
+   "q": "Lakehouse Real-Time SQL Warehouse is for…",
+   "a": "Very low-latency / high-concurrency read workloads (Beta).",
+   "section": "ch07-s04"
+  },
+  {
+   "q": "AI Runtime?",
+   "a": "Serverless GPU infrastructure for deep learning (Preview).",
+   "section": "ch07-s04"
+  },
+  {
+   "q": "Jobs compute lifecycle?",
+   "a": "Job start → compute starts → run → job ends → compute goes away.",
+   "section": "ch07-s05"
+  },
+  {
+   "q": "Can a job run on all-purpose?",
+   "a": "Technically yes for many task types, but not recommended for production.",
+   "section": "ch07-s05"
+  },
+  {
+   "q": "Standard access mode?",
+   "a": "Many users share classic compute with workload isolation; recommended for most classic workloads.",
+   "section": "ch07-s06"
+  },
+  {
+   "q": "Dedicated access mode?",
+   "a": "Compute assigned to one user or group; for some ML/GPU/R scenarios.",
+   "section": "ch07-s06"
+  },
+  {
+   "q": "'Standard compute' means…",
+   "a": "Classic compute configured with Standard access mode.",
+   "section": "ch07-s06"
+  },
+  {
+   "q": "Serverless Jobs access semantics?",
+   "a": "Standard access-mode semantics; workload must be Standard-compatible.",
+   "section": "ch07-s06"
+  },
+  {
+   "q": "Single-node is for…",
+   "a": "Small data, non-distributed libraries, certain ML, development.",
+   "section": "ch07-s07"
+  },
+  {
+   "q": "Autoscaling vs serverless?",
+   "a": "Different axes; classic can autoscale within your min/max.",
+   "section": "ch07-s07"
+  },
+  {
+   "q": "Photon on GPU classic compute?",
+   "a": "Not supported.",
+   "section": "ch07-s07"
+  },
+  {
+   "q": "Classic vs serverless runtime?",
+   "a": "Classic: you choose the DBR. Serverless: Databricks manages the runtime; you get environment versions.",
+   "section": "ch07-s08"
+  },
+  {
+   "q": "Photon on serverless?",
+   "a": "Enabled and managed by Databricks.",
+   "section": "ch07-s08"
+  },
+  {
+   "q": "4 things serverless doesn't support (infra)?",
+   "a": "Compute policies, instance pools, compute-scoped init scripts, compute-scoped libraries (and most Spark cluster configs).",
+   "section": "ch07-s09"
+  },
+  {
+   "q": "What's automatic on serverless Jobs?",
+   "a": "Autoscaling and Photon.",
+   "section": "ch07-s09"
+  },
+  {
+   "q": "Serverless performance modes?",
+   "a": "Performance Optimized (fast startup) vs Standard (slower startup, lower cost, batch).",
+   "section": "ch07-s10"
+  },
+  {
+   "q": "Which serverless workload lacks Standard performance mode?",
+   "a": "Notebooks.",
+   "section": "ch07-s10"
+  },
+  {
+   "q": "Standard access vs Standard performance?",
+   "a": "Security/isolation (classic) vs cost/startup trade-off (serverless). Unrelated.",
+   "section": "ch07-s10"
+  },
+  {
+   "q": "SQL warehouse features ladder?",
+   "a": "Classic: Photon. Pro: + Predictive IO. Serverless: + Intelligent Workload Management.",
+   "section": "ch07-s11"
+  },
+  {
+   "q": "Notebook on a SQL warehouse can run…",
+   "a": "SQL and Markdown only.",
+   "section": "ch07-s11"
+  },
+  {
+   "q": "Best default for Power BI?",
+   "a": "Serverless SQL Warehouse.",
+   "section": "ch07-s12"
+  },
+  {
+   "q": "Best default for spark-submit?",
+   "a": "Classic Jobs.",
+   "section": "ch07-s12"
+  },
+  {
+   "q": "Best default for dbt?",
+   "a": "Serverless SQL Warehouse (alt: Pro).",
+   "section": "ch07-s12"
+  },
+  {
+   "q": "First question in the decision diagram?",
+   "a": "What is my workload?",
+   "section": "ch07-s12"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch07-e001",
+   "type": "mcq",
+   "section": "ch07-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which list best describes what **compute** means in Databricks?",
+   "options": [
+    "The notebook and its code",
+    "CPU, RAM, network, possibly GPU, a Spark driver and Spark executors used to run the workload",
+    "The Delta tables your query reads",
+    "The Unity Catalog metastore"
+   ],
+   "answer": 1,
+   "why": [
+    "Code needs compute to run; it isn't compute.",
+    "Correct — the bundle of execution resources.",
+    "Tables are data, stored outside compute.",
+    "The metastore holds metadata, not execution resources."
+   ],
+   "explain": "Compute is the set of real resources Databricks uses to execute a workload. Code alone is just text and does no computation; tables and metastores are data/metadata, not the execution resources."
+  },
+  {
+   "id": "ch07-e002",
+   "type": "tf",
+   "section": "ch07-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Serverless, Classic, All-purpose, Jobs, Standard, Dedicated, Photon and GPU are twelve-ish competing compute types you pick one of.",
+   "answer": false,
+   "explain": "Most of these words are **characteristics (axes) of the same compute**. One compute can be Classic + All-purpose + Standard + Multi-node + Autoscaling + CPU + Photon + DBR 17.3 LTS at the same time."
+  },
+  {
+   "id": "ch07-e003",
+   "type": "match",
+   "section": "ch07-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match each value to the axis it belongs to.",
+   "pairs": [
+    [
+     "Interactive",
+     "Workload purpose"
+    ],
+    [
+     "Classic",
+     "Infrastructure model"
+    ],
+    [
+     "Standard",
+     "Access mode"
+    ],
+    [
+     "Multi-node",
+     "Topology"
+    ],
+    [
+     "DBR 17.3",
+     "Runtime"
+    ],
+    [
+     "Photon",
+     "Execution engine"
+    ]
+   ],
+   "explain": "This is the configuration vector: purpose, infrastructure, access, topology, scaling, hardware, runtime, engine. Each word answers a different question about the SAME compute."
+  },
+  {
+   "id": "ch07-e004",
+   "type": "cloze",
+   "section": "ch07-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the configuration vector.",
+   "text": "Compute = (workload [[purpose]], [[infrastructure]] model, [[access]] mode, topology, [[scaling]], hardware, [[runtime]], execution [[engine]])",
+   "bank": [
+    "cluster",
+    "catalog",
+    "storage"
+   ],
+   "explain": "The eight axes: purpose, infrastructure, access mode, topology, scaling, hardware, runtime, execution engine. Learning which axis each UI option belongs to removes most confusion."
+  },
+  {
+   "id": "ch07-e005",
+   "type": "free",
+   "section": "ch07-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "interview"
+   ],
+   "quick": false,
+   "q": "In your own words: why is it wrong to think of the Databricks compute page as a flat list of compute types?",
+   "model": "Because most terms are values on different axes of one compute configuration. Serverless/classic is about who manages infrastructure, all-purpose/jobs about lifecycle/purpose, Standard/Dedicated about access, Photon about the execution engine, DBR about software. One compute combines one value from each axis, so 'Classic + All-purpose + Standard + Photon' is one compute, not four.",
+   "rubric": [
+    "Most terms are axes/characteristics, not types",
+    "Names at least 3 axes correctly",
+    "One compute = one value per axis (configuration vector)"
+   ],
+   "explain": "A flat list hides that the words answer different questions. Thinking in axes lets you read any configuration as a vector of choices."
+  },
+  {
+   "id": "ch07-e006",
+   "type": "odd",
+   "section": "ch07-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which one is NOT a characteristic/axis value of a single compute configuration?",
+   "options": [
+    "Autoscaling",
+    "Photon",
+    "prod.sales.orders",
+    "Standard access"
+   ],
+   "answer": 2,
+   "explain": "`prod.sales.orders` is a table (data), not a compute setting. Autoscaling (scaling), Photon (engine) and Standard (access mode) are all axis values of one compute."
+  },
+  {
+   "id": "ch07-e007",
+   "type": "bucket",
+   "section": "ch07-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "compare"
+   ],
+   "quick": true,
+   "q": "Sort: which axis does each phrase answer?",
+   "buckets": [
+    "Axis 1: What do I want to do?",
+    "Axis 2: Who manages the machines?"
+   ],
+   "items": [
+    {
+     "text": "Interactive development",
+     "bucket": 0
+    },
+    {
+     "text": "Automated job",
+     "bucket": 0
+    },
+    {
+     "text": "Lakeflow pipeline",
+     "bucket": 0
+    },
+    {
+     "text": "SQL / BI",
+     "bucket": 0
+    },
+    {
+     "text": "Serverless",
+     "bucket": 1
+    },
+    {
+     "text": "Classic",
+     "bucket": 1
+    }
+   ],
+   "explain": "Purpose (interactive / job / pipeline / SQL) is one axis; infrastructure model (serverless / classic) is a completely different axis."
+  },
+  {
+   "id": "ch07-e008",
+   "type": "mcq",
+   "section": "ch07-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "On **serverless** compute, which of these do you still decide yourself?",
+   "options": [
+    "Worker VM type m5.4xlarge",
+    "min workers 2 / max workers 10",
+    "The workload to run",
+    "The DBR version 17.3"
+   ],
+   "answer": 2,
+   "why": [
+    "Instance types are managed by Databricks.",
+    "Scaling is managed by Databricks.",
+    "Correct — the workload is yours.",
+    "Server-side runtime is managed by Databricks."
+   ],
+   "explain": "With serverless you say 'run the workload' and Databricks manages machines, instance types, scaling, server-side runtime and lifecycle. VM types, worker counts and DBR pinning are classic decisions."
+  },
+  {
+   "id": "ch07-e009",
+   "type": "tf",
+   "section": "ch07-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Classic all-purpose, jobs and pipeline compute run in the customer's cloud account/environment and are resources you create and configure.",
+   "answer": true,
+   "explain": "That is the classic model: you (or a compute policy) define VM type, driver, workers, runtime, autoscaling, access mode, Photon, spot instances, etc., and the VMs live in your cloud account."
+  },
+  {
+   "id": "ch07-e010",
+   "type": "bucket",
+   "section": "ch07-s02",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Who decides it? Sort each item.",
+   "buckets": [
+    "You decide (classic)",
+    "Databricks manages (serverless)"
+   ],
+   "items": [
+    {
+     "text": "VM type for workers",
+     "bucket": 0
+    },
+    {
+     "text": "Spot instances",
+     "bucket": 0
+    },
+    {
+     "text": "Access mode",
+     "bucket": 0
+    },
+    {
+     "text": "Infrastructure lifecycle (serverless)",
+     "bucket": 1
+    },
+    {
+     "text": "Instance types (serverless)",
+     "bucket": 1
+    },
+    {
+     "text": "Scaling (serverless)",
+     "bucket": 1
+    },
+    {
+     "text": "Number of workers (classic)",
+     "bucket": 0
+    }
+   ],
+   "explain": "In classic you configure the infrastructure envelope; in serverless the infrastructure (machines, instance types, scaling, runtime server side, lifecycle) is Databricks-managed."
+  },
+  {
+   "id": "ch07-e011",
+   "type": "free",
+   "section": "ch07-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Explain serverless vs classic with an everyday analogy.",
+   "model": "Serverless is like a taxi: you give the destination (your workload) and the company handles the vehicle, maintenance and scaling. Classic is like owning a car: you choose the model (VM type), how many (workers), the engine (runtime/Photon), and you pay while it sits idle.",
+   "rubric": [
+    "Serverless: you specify the workload only",
+    "Classic: you choose infrastructure details",
+    "Mentions who manages lifecycle/cost of idle"
+   ],
+   "explain": "Any analogy works if it separates 'what I want done' from 'who owns and configures the machines'."
+  },
+  {
+   "id": "ch07-e012",
+   "type": "mcq",
+   "section": "ch07-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "What is the **classic** equivalent of **serverless notebook compute**?",
+   "options": [
+    "Classic Jobs compute",
+    "Classic all-purpose compute",
+    "Pro SQL warehouse",
+    "Classic pipeline compute"
+   ],
+   "answer": 1,
+   "explain": "Interactive + serverless = serverless notebook compute; interactive + classic = classic all-purpose compute. Jobs compute is for automated runs, warehouses for SQL."
+  },
+  {
+   "id": "ch07-e013",
+   "type": "mcq",
+   "section": "ch07-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "What is the classic equivalent of **serverless Jobs compute**?",
+   "options": [
+    "Classic all-purpose compute",
+    "Classic Jobs compute",
+    "Serverless pipeline",
+    "Classic SQL warehouse"
+   ],
+   "answer": 1,
+   "explain": "Automated workload: serverless → Serverless Jobs compute, classic → Classic Jobs compute. All-purpose is the interactive classic flavour."
+  },
+  {
+   "id": "ch07-e014",
+   "type": "tf",
+   "section": "ch07-s03",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Serverless is the opposite of all-purpose.",
+   "answer": false,
+   "explain": "Different levels. The infrastructure opposite of serverless is **classic**. All-purpose describes an interactive/reusable classic workload lifecycle."
+  },
+  {
+   "id": "ch07-e015",
+   "type": "match",
+   "section": "ch07-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the Workload × Infrastructure matrix: match each (purpose + infra) to its product name.",
+   "pairs": [
+    [
+     "Interactive + Serverless",
+     "Serverless notebook compute"
+    ],
+    [
+     "Interactive + Classic",
+     "All-purpose compute"
+    ],
+    [
+     "Automated + Serverless",
+     "Serverless Jobs compute"
+    ],
+    [
+     "Automated + Classic",
+     "Jobs compute"
+    ],
+    [
+     "Lakeflow pipeline + Classic",
+     "Classic pipeline"
+    ],
+    [
+     "SQL/BI + Serverless",
+     "Serverless SQL warehouse"
+    ]
+   ],
+   "explain": "This matrix is the first map to memorise. Notice that the interactive/serverless product is NOT called 'serverless all-purpose'."
+  },
+  {
+   "id": "ch07-e016",
+   "type": "tf",
+   "section": "ch07-s03",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "In the UI you can tick 'Purpose: all-purpose' and 'Infrastructure: serverless' to create a serverless all-purpose cluster.",
+   "answer": false,
+   "explain": "There is no such pair of dropdowns. Interactive + serverless is the product **serverless notebook compute**. Purpose and infrastructure are different axes conceptually, but the matrix is constrained, not a free Cartesian product."
+  },
+  {
+   "id": "ch07-e017",
+   "type": "cloze",
+   "section": "ch07-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Fill in the product names.",
+   "text": "INTERACTIVE → Serverless: [[Serverless notebook compute|serverless compute for notebooks|serverless notebook]] / Classic: [[Classic all-purpose compute|all-purpose compute|all-purpose]]",
+   "explain": "Databricks names the serverless interactive option 'Serverless compute for notebooks'; the classic one is all-purpose compute."
+  },
+  {
+   "id": "ch07-e018",
+   "type": "mcq",
+   "section": "ch07-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "What does **all-purpose** actually mean?",
+   "options": [
+    "Non-serverless",
+    "Best for every workload",
+    "Reusable interactive classic Spark compute you attach notebooks to",
+    "A cluster that can run SQL warehouses"
+   ],
+   "answer": 2,
+   "why": [
+    "Classic is the opposite of serverless; all-purpose is a lifecycle.",
+    "The name misleads — it's not the best choice for all.",
+    "Correct.",
+    "Warehouses are a separate family."
+   ],
+   "explain": "All-purpose is a lifecycle concept: a reusable classic resource that lives across interactive sessions. It is not a synonym of 'non-serverless' and not 'best for everything'."
+  },
+  {
+   "id": "ch07-e019",
+   "type": "calc",
+   "section": "ch07-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "How many **Spark/general** compute types (serverless + classic flavours of interactive, automated and pipeline) are in the list?",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "types",
+   "explain": "Interactive, automated and pipeline × serverless/classic = 3 × 2 = 6: serverless notebook, classic all-purpose, serverless jobs, classic jobs, serverless pipeline, classic pipeline."
+  },
+  {
+   "id": "ch07-e020",
+   "type": "calc",
+   "section": "ch07-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "How many SQL warehouse types are listed, counting the Beta one?",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "warehouse types",
+   "explain": "Serverless, Pro, Classic, plus Lakehouse Real-Time SQL Warehouse [Beta] for very low-latency/high-concurrency reads = 4. Together with the 6 Spark types that's the 10 compute types to master."
+  },
+  {
+   "id": "ch07-e021",
+   "type": "bucket",
+   "section": "ch07-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Put each compute type into its family.",
+   "buckets": [
+    "General Spark compute",
+    "SQL compute"
+   ],
+   "items": [
+    {
+     "text": "Serverless notebook",
+     "bucket": 0
+    },
+    {
+     "text": "Classic Jobs",
+     "bucket": 0
+    },
+    {
+     "text": "Serverless pipeline",
+     "bucket": 0
+    },
+    {
+     "text": "Pro SQL Warehouse",
+     "bucket": 1
+    },
+    {
+     "text": "Lakehouse Real-Time [Beta]",
+     "bucket": 1
+    },
+    {
+     "text": "Classic all-purpose",
+     "bucket": 0
+    },
+    {
+     "text": "Classic SQL Warehouse",
+     "bucket": 1
+    }
+   ],
+   "explain": "SQL warehouses are a separate family from the six Spark/general compute types."
+  },
+  {
+   "id": "ch07-e022",
+   "type": "odd",
+   "section": "ch07-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which one should NOT be put in the same bucket as the core data-engineering compute types (yet)?",
+   "options": [
+    "Serverless Jobs",
+    "Model serving",
+    "Classic pipeline",
+    "Serverless SQL Warehouse"
+   ],
+   "answer": 1,
+   "explain": "Model serving (like data-quality monitoring and predictive optimization) uses serverless infrastructure but is managed from a separate product surface. The other three are core compute types."
+  },
+  {
+   "id": "ch07-e023",
+   "type": "mcq",
+   "section": "ch07-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "What is the **Lakehouse Real-Time SQL Warehouse [Beta]** for?",
+   "options": [
+    "GPU deep learning",
+    "Very low-latency / high-concurrency read workloads",
+    "Running R notebooks",
+    "Streaming ingestion with Auto Loader"
+   ],
+   "answer": 1,
+   "explain": "It is a new SQL warehouse type for particularly low-latency, high-concurrency reads. Serverless GPU deep learning is AI Runtime."
+  },
+  {
+   "id": "ch07-e024",
+   "type": "tf",
+   "section": "ch07-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "AI Runtime (Preview) provides serverless GPU infrastructure for deep-learning workloads.",
+   "answer": true,
+   "explain": "AI Runtime brings serverless GPU — which proves GPU and serverless are not opposite concepts."
+  },
+  {
+   "id": "ch07-e025",
+   "type": "order",
+   "section": "ch07-s05",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Order the **Jobs compute** lifecycle.",
+   "items": [
+    "Job start",
+    "Compute starts",
+    "Run pipeline",
+    "Job ends",
+    "Compute goes away"
+   ],
+   "explain": "Jobs compute is born with the run and terminates with it — no cluster sitting open at 08:00, 12:00, 18:00 for a 02:00 job."
+  },
+  {
+   "id": "ch07-e026",
+   "type": "tf",
+   "section": "ch07-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "A job task can never run on a classic all-purpose cluster.",
+   "answer": false,
+   "explain": "Technically many job task types can use all-purpose compute. Databricks just doesn't recommend it for production — it prefers serverless jobs or classic jobs compute."
+  },
+  {
+   "id": "ch07-e027",
+   "type": "mcq",
+   "section": "ch07-s05",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Why does Databricks discourage running production ETL on a shared all-purpose cluster?",
+   "options": [
+    "All-purpose can't read Delta tables",
+    "Developers' queries compete with the job for CPU, RAM, executors and shuffle bandwidth, killing predictability",
+    "All-purpose clusters can't autoscale",
+    "Jobs can't be scheduled on all-purpose"
+   ],
+   "answer": 1,
+   "why": [
+    "False — it reads Delta fine.",
+    "Correct.",
+    "False — classic all-purpose can autoscale.",
+    "Technically jobs can use it."
+   ],
+   "explain": "Shared resources mean a developer's heavy query can destroy the performance predictability of the production job. All-purpose can read Delta and can autoscale — those distractors are false."
+  },
+  {
+   "id": "ch07-e028",
+   "type": "tf",
+   "section": "ch07-s05",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "'All-purpose' means it is the best choice for all workloads.",
+   "answer": false,
+   "explain": "The name is misleading. It means generic reusable interactive compute, not 'optimal for everything'."
+  },
+  {
+   "id": "ch07-e029",
+   "type": "bucket",
+   "section": "ch07-s05",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "All-purpose or Jobs compute?",
+   "buckets": [
+    "Classic all-purpose",
+    "Classic Jobs compute"
+   ],
+   "items": [
+    {
+     "text": "Exists independently of any specific job",
+     "bucket": 0
+    },
+    {
+     "text": "Starts when the job starts",
+     "bucket": 1
+    },
+    {
+     "text": "Several notebooks attach to it",
+     "bucket": 0
+    },
+    {
+     "text": "Terminates when the run completes",
+     "bucket": 1
+    },
+    {
+     "text": "Pause 10 min, then run another cell",
+     "bucket": 0
+    },
+    {
+     "text": "02:00 Bronze → Silver scheduled run",
+     "bucket": 1
+    }
+   ],
+   "explain": "All-purpose is a reusable interactive resource; Jobs compute's lifecycle is tied to the run."
+  },
+  {
+   "id": "ch07-e030",
+   "type": "scenario",
+   "section": "ch07-s05",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Your nightly production ETL runs on `my-dev-cluster` (shared all-purpose). Run times vary wildly: 20 minutes some nights, 90 minutes others.",
+   "steps": [
+    {
+     "prompt": "What do you suspect first?",
+     "options": [
+      {
+       "text": "Resource contention: other users/notebooks share the cluster",
+       "ok": true,
+       "fb": "Yes — on all-purpose, developers and the job compete for CPU, RAM, executors and shuffle bandwidth."
+      },
+      {
+       "text": "The Delta table is corrupt",
+       "ok": false,
+       "fb": "Nothing points to corruption; variable runtime on a shared cluster points to contention."
+      },
+      {
+       "text": "Photon is broken",
+       "ok": false,
+       "fb": "Photon doesn't cause night-to-night variance tied to other users."
+      }
+     ]
+    },
+    {
+     "prompt": "What's the recommended fix?",
+     "options": [
+      {
+       "text": "Move the job to serverless Jobs (or classic Jobs compute)",
+       "ok": true,
+       "fb": "Correct — jobs compute gives the run its own lifecycle and isolated resources."
+      },
+      {
+       "text": "Ask developers to stop working at night forever",
+       "ok": false,
+       "fb": "Fragile and doesn't fix billing/idle issues; use the intended compute."
+      },
+      {
+       "text": "Make the all-purpose cluster Dedicated to the job",
+       "ok": false,
+       "fb": "That still keeps an always-on interactive cluster; Jobs compute is the operational model."
+      }
+     ]
+    }
+   ],
+   "explain": "All-purpose = interactive by design. Production jobs belong on serverless Jobs or classic Jobs compute for predictable performance."
+  },
+  {
+   "id": "ch07-e031",
+   "type": "mcq",
+   "section": "ch07-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which access mode does Databricks recommend for **most classic workloads**?",
+   "options": [
+    "Dedicated",
+    "Standard",
+    "No isolation shared",
+    "Single user legacy"
+   ],
+   "answer": 1,
+   "explain": "Standard: many users share the compute with workload isolation. Dedicated is for one user/group when features need a more direct environment (some ML/GPU/R)."
+  },
+  {
+   "id": "ch07-e032",
+   "type": "tf",
+   "section": "ch07-s06",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "When someone says \"standard compute\" in today's Databricks terminology, they mean a basic/normal cluster.",
+   "answer": false,
+   "explain": "\"Standard compute\" = classic compute configured with **Standard access mode**. \"Dedicated compute\" = classic compute configured with Dedicated access mode."
+  },
+  {
+   "id": "ch07-e033",
+   "type": "tf",
+   "section": "ch07-s06",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "A classic all-purpose compute can be either Standard or Dedicated.",
+   "answer": true,
+   "explain": "Yes — Standard/Dedicated are explicit access-mode options for both classic all-purpose and classic jobs compute."
+  },
+  {
+   "id": "ch07-e034",
+   "type": "mcq",
+   "section": "ch07-s06",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Does **serverless Jobs** have a Standard/Dedicated dropdown?",
+   "options": [
+    "Yes, Dedicated by default",
+    "Yes, Standard by default and you can switch",
+    "No — the platform manages it; serverless Jobs uses Standard access-mode semantics and needs Standard-compatible workloads",
+    "No — serverless has no security at all"
+   ],
+   "answer": 2,
+   "why": [
+    "There's no selector.",
+    "There's no selector to switch.",
+    "Correct.",
+    "Serverless has access management, just not this selector."
+   ],
+   "explain": "In serverless you don't create a cluster or set access mode/workers. Serverless Jobs uses Standard access semantics, so workloads must be compatible with Standard compute."
+  },
+  {
+   "id": "ch07-e035",
+   "type": "match",
+   "section": "ch07-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the classic-compute matrix cell to its value.",
+   "pairs": [
+    [
+     "All-purpose × Standard",
+     "✅ supported"
+    ],
+    [
+     "Jobs × Dedicated",
+     "✅ also supported"
+    ],
+    [
+     "Pipeline × Standard/Dedicated",
+     "own pipeline configuration model"
+    ],
+    [
+     "Serverless Jobs × access dropdown",
+     "not exposed — Standard semantics"
+    ]
+   ],
+   "explain": "Standard/Dedicated is explicit for all-purpose and jobs compute; pipelines have their own configuration model; serverless hides the selector."
+  },
+  {
+   "id": "ch07-e036",
+   "type": "odd",
+   "section": "ch07-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which scenario is the odd one out (doesn't point to Dedicated access)?",
+   "options": [
+    "R development needing a direct environment",
+    "Some GPU ML workloads",
+    "A compute assigned to a single data scientist group",
+    "20 analysts sharing a cluster with workload isolation"
+   ],
+   "answer": 3,
+   "explain": "Many users sharing with isolation is **Standard**. Dedicated is assigned to one user/group and used for some ML/GPU/R scenarios."
+  },
+  {
+   "id": "ch07-e037",
+   "type": "tf",
+   "section": "ch07-s07",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Autoscaling means serverless.",
+   "answer": false,
+   "explain": "Classic compute can autoscale perfectly well (you set min/max; Databricks picks a number between). Autoscaling ≠ serverless."
+  },
+  {
+   "id": "ch07-e038",
+   "type": "calc",
+   "section": "ch07-s07",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "A **fixed-size** classic cluster has `workers = 4`. During a heavy spike, how many workers does it have?",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "workers",
+   "explain": "Fixed means fixed: 4 workers all the time. Only autoscaling clusters move between min and max."
+  },
+  {
+   "id": "ch07-e039",
+   "type": "calc",
+   "section": "ch07-s07",
+   "difficulty": 2,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "An autoscaling classic cluster has min 2, max 10 workers. What is the most workers it can reach under the heaviest load?",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "workers",
+   "explain": "Databricks adds/removes workers but only inside the bounds YOU set: 2–10. It will never go to 11 on its own."
+  },
+  {
+   "id": "ch07-e040",
+   "type": "bucket",
+   "section": "ch07-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Single-node or multi-node?",
+   "buckets": [
+    "Single-node",
+    "Multi-node"
+   ],
+   "items": [
+    {
+     "text": "Small data",
+     "bucket": 0
+    },
+    {
+     "text": "Non-distributed libraries",
+     "bucket": 0
+    },
+    {
+     "text": "Large distributed Spark processing",
+     "bucket": 1
+    },
+    {
+     "text": "Driver + separate worker VMs",
+     "bucket": 1
+    },
+    {
+     "text": "Driver acts as executor on the same machine",
+     "bucket": 0
+    },
+    {
+     "text": "Development / certain ML workloads",
+     "bucket": 0
+    }
+   ],
+   "explain": "Single-node has no separate worker VMs — fine for small data, dev, non-distributed libraries and some ML, not for large distributed Spark."
+  },
+  {
+   "id": "ch07-e041",
+   "type": "spotbug",
+   "section": "ch07-s07",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "This classic compute spec has an invalid combination. Click the bad line.",
+   "lines": [
+    "Infrastructure: Classic",
+    "Purpose: All-purpose",
+    "Access mode: Dedicated",
+    "Hardware: GPU instances",
+    "Runtime: DBR ML",
+    "Photon: ON"
+   ],
+   "bugs": [
+    5
+   ],
+   "fix": "Photon: OFF (Photon is not supported on GPU instance types)",
+   "explain": "Classic GPU compute uses the ML runtime and Photon is not supported on GPU instance types. Classic + All-purpose + Dedicated + GPU + DBR ML is otherwise a perfectly sensible config."
+  },
+  {
+   "id": "ch07-e042",
+   "type": "tf",
+   "section": "ch07-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "GPU and serverless are opposite concepts: if you need GPU you must use classic.",
+   "answer": false,
+   "explain": "AI Runtime (Public Preview, 2026) brings serverless GPU infrastructure for deep learning. GPU (hardware) and serverless (infrastructure model) are different axes."
+  },
+  {
+   "id": "ch07-e043",
+   "type": "cloze",
+   "section": "ch07-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the comparison.",
+   "text": "Classic autoscaling: YOU set [[min]] = 2 and [[max]] = 10 and the worker type; Databricks chooses a number between them. Serverless: YOU say \"run my [[workload]]\" and Databricks handles resource selection and [[scaling]].",
+   "bank": [
+    "driver",
+    "pool",
+    "Photon"
+   ],
+   "explain": "The difference is who owns the bounds and resource choice. Classic autoscaling is still you configuring infrastructure."
+  },
+  {
+   "id": "ch07-e044",
+   "type": "mcq",
+   "section": "ch07-s08",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "On classic compute, choosing `DBR 17.3 LTS` selects…",
+   "options": [
+    "The VM hardware",
+    "The software stack (Spark + Databricks software/libraries)",
+    "The access mode",
+    "The number of workers"
+   ],
+   "answer": 1,
+   "explain": "The runtime is software, not hardware. `m5.xlarge` would be the hardware choice."
+  },
+  {
+   "id": "ch07-e045",
+   "type": "tf",
+   "section": "ch07-s08",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "On serverless compute you pick a traditional DBR version like `DBR 17.3` from a dropdown.",
+   "answer": false,
+   "explain": "Databricks upgrades the server-side runtime itself and uses **serverless environment versions** for application compatibility. 'Classic: I choose the DBR; serverless: Databricks manages the server runtime.'"
+  },
+  {
+   "id": "ch07-e046",
+   "type": "bucket",
+   "section": "ch07-s08",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Who decides Photon?",
+   "buckets": [
+    "You choose ON/OFF",
+    "Always on / managed"
+   ],
+   "items": [
+    {
+     "text": "Classic all-purpose (CPU)",
+     "bucket": 0
+    },
+    {
+     "text": "Classic Jobs (CPU)",
+     "bucket": 0
+    },
+    {
+     "text": "Serverless notebook",
+     "bucket": 1
+    },
+    {
+     "text": "Serverless Jobs",
+     "bucket": 1
+    },
+    {
+     "text": "SQL warehouses",
+     "bucket": 1
+    }
+   ],
+   "explain": "On classic CPU compute Photon is a toggle; on serverless it is enabled and managed; SQL warehouses also use Photon."
+  },
+  {
+   "id": "ch07-e047",
+   "type": "odd",
+   "section": "ch07-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which one is a compute *family* rather than an axis value?",
+   "options": [
+    "Photon",
+    "DBR 17.3 LTS",
+    "SQL Warehouse",
+    "Autoscaling"
+   ],
+   "answer": 2,
+   "explain": "SQL Warehouse is a compute family. Photon (engine), DBR (runtime) and autoscaling (scaling) are axes/settings on a compute."
+  },
+  {
+   "id": "ch07-e048",
+   "type": "free",
+   "section": "ch07-s08",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Explain why 'AWS VM m5.xlarge' and 'DBR 17.3 LTS' are not alternatives to each other.",
+   "model": "They live on different axes: m5.xlarge is hardware (the machine), DBR 17.3 LTS is the software stack installed on it (Spark + Databricks software/libraries). A classic compute needs both: a VM type and a runtime.",
+   "rubric": [
+    "Hardware vs software",
+    "Both are chosen together on classic",
+    "Runtime includes Spark + Databricks libraries"
+   ],
+   "explain": "Every classic config answers 'which machine?' and 'which software on it?' separately."
+  },
+  {
+   "id": "ch07-e049",
+   "type": "mcq",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Which of these is NOT supported on serverless compute?",
+   "options": [
+    "Running a scheduled Python notebook",
+    "Instance pools and compute-scoped init scripts",
+    "Photon",
+    "Autoscaling"
+   ],
+   "answer": 1,
+   "why": [
+    "Supported — serverless Jobs.",
+    "Correct.",
+    "Photon is enabled automatically.",
+    "Autoscaling is automatic/managed."
+   ],
+   "explain": "Serverless doesn't support compute policies, instance pools, compute-scoped init scripts, compute-scoped libraries or most Spark cluster configs — they're platform-managed. Photon and autoscaling are automatic on serverless Jobs."
+  },
+  {
+   "id": "ch07-e050",
+   "type": "spotbug",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A colleague wrote this **serverless Jobs** spec. Which lines are impossible?",
+   "lines": [
+    "Purpose: Jobs",
+    "Infrastructure: Serverless",
+    "Worker type: m5.4xlarge",
+    "Workers: 2-20 (autoscaling)",
+    "Performance mode: Standard"
+   ],
+   "bugs": [
+    2,
+    3
+   ],
+   "fix": "Purpose: Jobs\nInfrastructure: Serverless\nPerformance mode: Standard",
+   "explain": "Worker type and min/max workers are infrastructure configuration that serverless manages for you. Performance mode (Standard vs Performance Optimized) IS a valid serverless Jobs setting."
+  },
+  {
+   "id": "ch07-e051",
+   "type": "tf",
+   "section": "ch07-s09",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Classic + Jobs + Standard + Multi-node + Autoscaling + Photon is a valid configuration.",
+   "answer": true,
+   "explain": "Completely sensible: a classic jobs compute with Standard access, several workers, autoscaling and Photon."
+  },
+  {
+   "id": "ch07-e052",
+   "type": "calc",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "Example 1 (interactive ETL development) lists: Purpose, Infrastructure, Access mode, Runtime, Photon, Topology, Worker, Scaling, Driver. How many **computes** does it describe?",
+   "answer": 1,
+   "tolerance": 0,
+   "unit": "compute",
+   "explain": "One classic all-purpose compute with 9 configuration choices — not 9 or 10 computes."
+  },
+  {
+   "id": "ch07-e053",
+   "type": "order",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the decision process for a classic compute.",
+   "items": [
+    "Decide workload purpose (interactive / job / pipeline / SQL)",
+    "Decide infrastructure (serverless vs classic)",
+    "Land on the product (e.g. Classic Jobs)",
+    "Then set parameters: access mode, nodes, DBR, worker/driver type, scaling, Photon, spot, pools, termination"
+   ],
+   "explain": "Parameters come LAST. Only after you've chosen 'classic all-purpose' or 'classic Jobs' do Standard/Dedicated, DBR, workers etc. become relevant."
+  },
+  {
+   "id": "ch07-e054",
+   "type": "match",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the classic matrix axis to its options.",
+   "pairs": [
+    [
+     "Instances",
+     "On-demand / Spot workers"
+    ],
+    [
+     "Pool",
+     "Pool / direct provisioning"
+    ],
+    [
+     "Termination",
+     "manual / auto-terminate"
+    ],
+    [
+     "Driver type",
+     "same as worker or different"
+    ],
+    [
+     "Worker type",
+     "memory / compute / general purpose"
+    ],
+    [
+     "Scale",
+     "Fixed / Autoscaling"
+    ]
+   ],
+   "explain": "These are classic all-purpose/jobs configuration settings — the ones serverless removes."
+  },
+  {
+   "id": "ch07-e055",
+   "type": "write",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write the axis-by-axis spec (one `Axis: value` per line) for a **production scheduled ETL on classic jobs compute**: Standard access, DBR 17.3 LTS, Photon on, multi-node, autoscaling 4 → 20 workers.",
+   "solution": "Purpose: Jobs\nInfrastructure: Classic\nAccess: Standard\nRuntime: DBR 17.3 LTS\nPhoton: ON\nTopology: Multi-node\nAutoscaling: 4 -> 20 workers",
+   "keywords": [
+    "Jobs",
+    "Classic",
+    "Standard",
+    "17.3 LTS",
+    "Photon",
+    "Multi-node",
+    "4 -> 20"
+   ],
+   "lang": "text",
+   "explain": "This is exactly the source's example 2 — one Classic Jobs Compute with specific parameters. LTS suits production; autoscaling bounds are yours on classic."
+  },
+  {
+   "id": "ch07-e056",
+   "type": "write",
+   "section": "ch07-s09",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Now write the **serverless equivalent** of that ETL spec (only the lines you still choose; one `Axis: value` per line).",
+   "solution": "Purpose: Jobs\nInfrastructure: Serverless",
+   "keywords": [
+    "Purpose: Jobs",
+    "Infrastructure: Serverless"
+   ],
+   "lang": "text",
+   "explain": "Driver VM, worker VM, 2–20 workers, DBR 17.3, spot and pool all disappear. Autoscaling and Photon are enabled automatically on serverless Jobs."
+  },
+  {
+   "id": "ch07-e057",
+   "type": "mcq",
+   "section": "ch07-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which serverless workload does NOT offer **Standard performance mode**?",
+   "options": [
+    "Jobs",
+    "Lakeflow pipelines",
+    "Notebooks",
+    "All of them offer it"
+   ],
+   "answer": 2,
+   "explain": "Standard performance mode exists for serverless Jobs and pipelines; notebooks use a performance-oriented interactive mode."
+  },
+  {
+   "id": "ch07-e058",
+   "type": "tf",
+   "section": "ch07-s10",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "Standard access mode and Standard performance mode are the same setting seen from two screens.",
+   "answer": false,
+   "explain": "No relation besides the English word. Standard **access** = security/isolation on classic compute. Standard **performance** = serverless cost vs startup trade-off."
+  },
+  {
+   "id": "ch07-e059",
+   "type": "bucket",
+   "section": "ch07-s10",
+   "difficulty": 2,
+   "tags": [
+    "compare",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which 'Standard' is this about?",
+   "buckets": [
+    "Standard ACCESS mode",
+    "Standard PERFORMANCE mode"
+   ],
+   "items": [
+    {
+     "text": "Who may use this classic compute?",
+     "bucket": 0
+    },
+    {
+     "text": "How are users isolated?",
+     "bucket": 0
+    },
+    {
+     "text": "Lower cost vs faster startup",
+     "bucket": 1
+    },
+    {
+     "text": "Serverless Jobs / pipelines",
+     "bucket": 1
+    },
+    {
+     "text": "Classic all-purpose/jobs",
+     "bucket": 0
+    },
+    {
+     "text": "Batch-friendly, slower startup",
+     "bucket": 1
+    }
+   ],
+   "explain": "Same word, two unrelated concepts — a classic source of confusion and a likely exam trap."
+  },
+  {
+   "id": "ch07-e060",
+   "type": "match",
+   "section": "ch07-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each serverless performance mode to its trait.",
+   "pairs": [
+    [
+     "Performance Optimized",
+     "faster startup, latency-sensitive"
+    ],
+    [
+     "Standard",
+     "slower startup, lower cost, batch-friendly"
+    ],
+    [
+     "Notebook mode",
+     "performance-oriented interactive only"
+    ]
+   ],
+   "explain": "For nightly batch with no start-time SLA, Standard performance mode saves money."
+  },
+  {
+   "id": "ch07-e061",
+   "type": "scenario",
+   "section": "ch07-s10",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Your serverless nightly job is cheap but finance's dashboard SLA was just moved earlier, and the job now starts too slowly to finish in time.",
+   "steps": [
+    {
+     "prompt": "What setting do you look at first?",
+     "options": [
+      {
+       "text": "The serverless performance mode (Standard vs Performance Optimized)",
+       "ok": true,
+       "fb": "Right — Standard mode trades slower startup for lower cost."
+      },
+      {
+       "text": "The access mode (Standard vs Dedicated)",
+       "ok": false,
+       "fb": "Access mode is security/isolation, and serverless doesn't expose it."
+      },
+      {
+       "text": "The worker type",
+       "ok": false,
+       "fb": "Serverless doesn't let you pick worker types."
+      }
+     ]
+    },
+    {
+     "prompt": "What change fits the new SLA?",
+     "options": [
+      {
+       "text": "Switch the job to Performance Optimized",
+       "ok": true,
+       "fb": "Faster startup, more latency-sensitive — at higher cost."
+      },
+      {
+       "text": "Move the job to a notebook on Standard performance",
+       "ok": false,
+       "fb": "Notebooks don't even have Standard performance mode."
+      },
+      {
+       "text": "Add an instance pool",
+       "ok": false,
+       "fb": "Pools aren't supported on serverless."
+      }
+     ]
+    }
+   ],
+   "explain": "Performance mode is THE serverless knob for start-up latency vs cost. Don't confuse it with Standard access mode."
+  },
+  {
+   "id": "ch07-e062",
+   "type": "mcq",
+   "section": "ch07-s11",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which SQL warehouse type has Photon + Predictive IO but NOT Intelligent Workload Management?",
+   "options": [
+    "Serverless",
+    "Pro",
+    "Classic",
+    "Lakehouse Real-Time"
+   ],
+   "answer": 1,
+   "explain": "Classic = Photon; Pro = Photon + Predictive IO; Serverless = Photon + Predictive IO + Intelligent Workload Management."
+  },
+  {
+   "id": "ch07-e063",
+   "type": "tf",
+   "section": "ch07-s11",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": true,
+   "q": "A notebook attached only to a SQL warehouse can run `from pyspark.sql import functions as F`.",
+   "answer": false,
+   "explain": "A notebook on a SQL warehouse can run SQL and Markdown cells only — not Python/R. Use serverless notebook compute or all-purpose for PySpark."
+  },
+  {
+   "id": "ch07-e064",
+   "type": "match",
+   "section": "ch07-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the SQL warehouse matrix row to its correct 'Classic' column value.",
+   "pairs": [
+    [
+     "Photon",
+     "✅"
+    ],
+    [
+     "Predictive IO",
+     "❌"
+    ],
+    [
+     "Recommended default",
+     "fallback/basic"
+    ],
+    [
+     "Custom networking flexibility",
+     "✅ (flexible)"
+    ]
+   ],
+   "explain": "Classic warehouses have Photon but neither Predictive IO nor IWM, keep custom networking flexibility, and are the fallback/basic option. Serverless is the recommended default."
+  },
+  {
+   "id": "ch07-e065",
+   "type": "spotbug",
+   "section": "ch07-s11",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Notebook attached to `analytics-wh` (a SQL warehouse). Which cell will fail?",
+   "lines": [
+    "%md ## Orders report",
+    "SELECT COUNT(*) FROM prod.sales.orders;",
+    "%python",
+    "from pyspark.sql import functions as F",
+    "SELECT country, SUM(amount) FROM prod.sales.orders GROUP BY country;"
+   ],
+   "bugs": [
+    2,
+    3
+   ],
+   "fix": "Remove the Python cell, or attach the notebook to serverless notebook compute / all-purpose compute to run PySpark.",
+   "explain": "SQL warehouses only execute SQL and Markdown in notebooks. The Python cell fails; the Markdown and SQL cells work."
+  },
+  {
+   "id": "ch07-e066",
+   "type": "write",
+   "section": "ch07-s11",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write a query you CAN run in a notebook attached to a SQL warehouse: total `amount` per `country` from `prod.sales.orders`.",
+   "solution": "SELECT country, SUM(amount) AS total_amount\nFROM prod.sales.orders\nGROUP BY country;",
+   "keywords": [
+    "select",
+    "sum(amount)",
+    "from prod.sales.orders",
+    "group by country"
+   ],
+   "lang": "sql",
+   "explain": "SQL cells run on a SQL warehouse; the same logic in PySpark (`groupBy(...).sum(...)`) would need Spark compute."
+  },
+  {
+   "id": "ch07-e067",
+   "type": "order",
+   "section": "ch07-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the warehouse types from FEWEST to MOST features (Photon / Predictive IO / IWM).",
+   "items": [
+    "Classic (Photon)",
+    "Pro (Photon + Predictive IO)",
+    "Serverless (Photon + Predictive IO + IWM)"
+   ],
+   "explain": "Each step up adds one: Predictive IO at Pro, Intelligent Workload Management at Serverless."
+  },
+  {
+   "id": "ch07-e068",
+   "type": "tf",
+   "section": "ch07-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "All current SQL warehouse types support Photon.",
+   "answer": true,
+   "explain": "Serverless, Pro and Classic all have Photon; they differ in Predictive IO and Intelligent Workload Management."
+  },
+  {
+   "id": "ch07-e069",
+   "type": "mcq",
+   "section": "ch07-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "100 analysts run SQL from **Power BI**. What do you start with?",
+   "options": [
+    "A big classic all-purpose cluster",
+    "Serverless SQL Warehouse",
+    "Serverless Jobs",
+    "Classic pipeline"
+   ],
+   "answer": 1,
+   "explain": "SQL/BI workload → SQL warehouse → usually Serverless SQL Warehouse, recommended today for BI, SQL ETL and exploratory analytics."
+  },
+  {
+   "id": "ch07-e070",
+   "type": "mcq",
+   "section": "ch07-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "You want to develop in **R** interactively. Which compute?",
+   "options": [
+    "Serverless notebook compute",
+    "Classic all-purpose (possibly Dedicated)",
+    "Serverless SQL warehouse",
+    "Serverless Jobs"
+   ],
+   "answer": 1,
+   "explain": "Serverless notebooks don't support R. Interactive + unsupported serverless feature → classic all-purpose, possibly Dedicated depending on the workload."
+  },
+  {
+   "id": "ch07-e071",
+   "type": "mcq",
+   "section": "ch07-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Interactive PySpark exploration of 500 GB, no special requirements?",
+   "options": [
+    "Serverless notebook compute",
+    "Classic Jobs",
+    "Pro SQL warehouse",
+    "Classic pipeline"
+   ],
+   "answer": 0,
+   "explain": "Step 1: interactive. Step 2: no custom infra → serverless notebook compute. No worker VMs to decide."
+  },
+  {
+   "id": "ch07-e072",
+   "type": "mcq",
+   "section": "ch07-s12",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Nightly ETL uses a **custom Spark JAR and low-level Spark functionality** that serverless doesn't support. Which compute?",
+   "options": [
+    "Serverless Jobs",
+    "Classic Jobs compute",
+    "Serverless notebook",
+    "Serverless SQL warehouse"
+   ],
+   "answer": 1,
+   "explain": "Automated + classic required → Classic Jobs Compute, then choose DBR, workers, autoscaling, access mode, Photon. Without that constraint, serverless Jobs would be the default."
+  },
+  {
+   "id": "ch07-e073",
+   "type": "match",
+   "section": "ch07-s12",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Match the task to its best default compute (usage matrix).",
+   "pairs": [
+    [
+     "Scheduled Python notebook",
+     "Serverless Jobs"
+    ],
+    [
+     "spark-submit",
+     "Classic Jobs"
+    ],
+    [
+     "dbt",
+     "Serverless SQL Warehouse"
+    ],
+    [
+     "Lakeflow pipeline",
+     "Serverless pipeline"
+    ],
+    [
+     "Interactive PySpark notebook",
+     "Serverless notebook"
+    ]
+   ],
+   "explain": "The usage matrix mirrors Databricks' task-support matrix: serverless defaults everywhere except where a classic-only feature (spark-submit) is needed; SQL-shaped tasks go to warehouses."
+  },
+  {
+   "id": "ch07-e074",
+   "type": "order",
+   "section": "ch07-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the questions in the decision diagram.",
+   "items": [
+    "What is my workload? (interactive / job / pipeline / SQL)",
+    "Do I need custom infra or an unsupported serverless feature?",
+    "Pick the product (e.g. serverless notebook vs classic all-purpose)",
+    "If classic: configure Standard/Dedicated, Single/Multi, Fixed/Autoscale, CPU/GPU, DBR, Photon"
+   ],
+   "explain": "Workload first, infrastructure second, parameters last. Once this is clear, Compute → Create compute stops looking like dozens of unrelated checkboxes."
+  },
+  {
+   "id": "ch07-e075",
+   "type": "bucket",
+   "section": "ch07-s12",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Serverless or classic required?",
+   "buckets": [
+    "Serverless is fine",
+    "Classic required"
+   ],
+   "items": [
+    {
+     "text": "Nightly 2 a.m. ETL in Python, nothing special",
+     "bucket": 0
+    },
+    {
+     "text": "Interactive R notebook",
+     "bucket": 1
+    },
+    {
+     "text": "RDD API code",
+     "bucket": 1
+    },
+    {
+     "text": "Custom JAR with low-level Spark features",
+     "bucket": 1
+    },
+    {
+     "text": "Exploring a 500 GB table in PySpark",
+     "bucket": 0
+    },
+    {
+     "text": "spark-submit task",
+     "bucket": 1
+    }
+   ],
+   "explain": "Default to serverless; fall back to classic only for unsupported features (R, RDD APIs, spark-submit, custom low-level JARs…)."
+  },
+  {
+   "id": "ch07-e076",
+   "type": "scenario",
+   "section": "ch07-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug",
+    "exam"
+   ],
+   "quick": false,
+   "q": "A teammate says: \"I need interactive compute, so I'll create a serverless all-purpose cluster with Dedicated access, 2–8 workers and DBR 17.3.\"",
+   "steps": [
+    {
+     "prompt": "What's wrong in the first part?",
+     "options": [
+      {
+       "text": "There is no 'serverless all-purpose cluster' — interactive + serverless is serverless notebook compute",
+       "ok": true,
+       "fb": "Correct — interactive + classic is all-purpose; interactive + serverless is a differently named product."
+      },
+      {
+       "text": "Nothing — that product exists",
+       "ok": false,
+       "fb": "It doesn't exist under that name; the matrix is constrained."
+      },
+      {
+       "text": "All-purpose can't be interactive",
+       "ok": false,
+       "fb": "All-purpose is interactive by design."
+      }
+     ]
+    },
+    {
+     "prompt": "If they really need Dedicated, 2–8 workers and DBR 17.3, what do they need?",
+     "options": [
+      {
+       "text": "Classic all-purpose compute",
+       "ok": true,
+       "fb": "Those are all classic infrastructure knobs."
+      },
+      {
+       "text": "Serverless notebook with a Dedicated toggle",
+       "ok": false,
+       "fb": "Serverless has no access-mode, worker or DBR selector."
+      },
+      {
+       "text": "Serverless SQL warehouse",
+       "ok": false,
+       "fb": "Warehouses don't have Standard/Dedicated or DBR selectors either."
+      }
+     ]
+    }
+   ],
+   "explain": "Purpose and infrastructure are different axes, but the matrix is constrained: classic exposes the knobs; serverless hides them."
+  },
+  {
+   "id": "ch07-e077",
+   "type": "tf",
+   "section": "ch07-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "In the 'all combinations' matrix, Classic Jobs lets you configure access mode, nodes, DBR and autoscaling, while Serverless Jobs exposes none of them.",
+   "answer": true,
+   "explain": "Classic Jobs: ✅ ✅ ✅ ✅. Serverless Jobs: ❌ access, ❌ nodes, ❌ traditional DBR, ❌ autoscaling (infra managed)."
+  },
+  {
+   "id": "ch07-e078",
+   "type": "mcq",
+   "section": "ch07-s12",
+   "difficulty": 3,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "In the 'all combinations' matrix, how are DBR and autoscaling described for **Pro/Classic SQL warehouses**?",
+   "options": [
+    "You pick a DBR; min/max workers",
+    "Databricks SQL runtime; warehouse autoscale",
+    "Serverless managed; no scaling",
+    "Pipeline channel; vertical scaling"
+   ],
+   "answer": 1,
+   "explain": "Non-serverless warehouses use the Databricks SQL runtime (no DBR selector) and scale as warehouses (warehouse autoscale), with access via the warehouse model. Nodes are abstracted."
+  },
+  {
+   "id": "ch07-e079",
+   "type": "free",
+   "section": "ch07-s12",
+   "difficulty": 2,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Interview question: \"Walk me through how you would choose compute for a new workload in Databricks.\"",
+   "model": "First I identify the workload: interactive development, an automated job, a Lakeflow pipeline or SQL/BI. SQL/BI goes to a SQL warehouse, usually serverless. For the others I ask whether I need anything serverless doesn't support (R, RDD APIs, custom JAR/low-level Spark, init scripts, pools, specific Spark configs). If not, I pick serverless notebook / serverless Jobs / serverless pipeline. If I do, I choose the classic equivalent (all-purpose, Jobs compute, classic pipeline) and only then configure access mode, nodes, DBR, worker/driver types, scaling, Photon, spot, pools and termination.",
+   "rubric": [
+    "Workload first",
+    "SQL/BI → SQL warehouse",
+    "Serverless default unless unsupported feature",
+    "Classic equivalents named correctly",
+    "Parameters last"
+   ],
+   "explain": "This is the decision diagram in prose: workload → infrastructure → parameters."
+  },
+  {
+   "id": "ch07-e080",
+   "type": "cloze",
+   "section": "ch07-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Complete the quiz answers.",
+   "text": "Interactive PySpark without special needs → [[serverless notebook compute|serverless notebook]]. Scheduled PySpark production ETL → [[serverless jobs]] if supported, otherwise [[classic jobs|classic jobs compute]]. Power BI → usually [[serverless sql warehouse]].",
+   "explain": "These four answers cover most real-life compute choices."
+  },
+  {
+   "id": "ch07-e081",
+   "type": "cloze",
+   "section": "ch07-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the access-mode definitions.",
+   "text": "Access mode is an axis mainly for classic [[all-purpose]] and [[jobs]] compute. [[Standard]]: many users share the compute with workload isolation. [[Dedicated]]: assigned to one user or group.",
+   "bank": [
+    "serverless",
+    "SQL warehouse",
+    "Photon"
+   ],
+   "explain": "Standard/Dedicated is the classic access-mode axis; serverless and SQL warehouses don't expose it."
+  },
+  {
+   "id": "ch07-e082",
+   "type": "scenario",
+   "section": "ch07-s06",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A task that ran fine on a classic **Dedicated** cluster fails after you move it to **serverless Jobs**.",
+   "steps": [
+    {
+     "prompt": "What do you ask yourself first?",
+     "options": [
+      {
+       "text": "Does serverless Jobs use Standard access semantics that my code isn't compatible with?",
+       "ok": true,
+       "fb": "Yes — serverless Jobs requires Standard-compatible workloads."
+      },
+      {
+       "text": "Did serverless forget to enable Photon?",
+       "ok": false,
+       "fb": "Photon is automatic on serverless Jobs and wouldn't break compatibility."
+      },
+      {
+       "text": "Is the serverless worker type too small?",
+       "ok": false,
+       "fb": "You can't choose worker types on serverless; that isn't the lever."
+      }
+     ]
+    },
+    {
+     "prompt": "The code relies on a Dedicated-only feature and can't be refactored now. What do you do?",
+     "options": [
+      {
+       "text": "Run it on classic Jobs compute with Dedicated access",
+       "ok": true,
+       "fb": "Only classic exposes Dedicated access mode."
+      },
+      {
+       "text": "Set Access mode = Dedicated in the serverless job",
+       "ok": false,
+       "fb": "Serverless has no such dropdown."
+      },
+      {
+       "text": "Run it on a SQL warehouse",
+       "ok": false,
+       "fb": "Warehouses have no Dedicated mode and don't run arbitrary Spark code."
+      }
+     ]
+    }
+   ],
+   "explain": "Serverless Jobs = Standard access semantics. Dedicated-only workloads stay on classic."
+  },
+  {
+   "id": "ch07-e083",
+   "type": "order",
+   "section": "ch07-s05",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the debug steps for an unpredictable production job.",
+   "items": [
+    "Check which compute the job runs on",
+    "Check who else is attached to that cluster during the run",
+    "Confirm contention for CPU/RAM/executors/shuffle",
+    "Move the job to serverless Jobs or classic Jobs compute"
+   ],
+   "explain": "Compute first, then contention evidence, then move to the intended operational compute."
+  },
+  {
+   "id": "ch07-e084",
+   "type": "scenario",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "You migrate a classic job to serverless Jobs and can't find where to set the instance pool, the init script and `min_workers`.",
+   "steps": [
+    {
+     "prompt": "What is the most likely explanation?",
+     "options": [
+      {
+       "text": "Serverless doesn't support pools, compute-scoped init scripts or worker counts — they're platform-managed",
+       "ok": true,
+       "fb": "Exactly; the infrastructure matrix disappears on serverless."
+      },
+      {
+       "text": "You lack CAN MANAGE on the job",
+       "ok": false,
+       "fb": "Permissions don't hide these fields; they simply don't exist on serverless."
+      },
+      {
+       "text": "The fields are under Advanced → Spark config",
+       "ok": false,
+       "fb": "Most Spark cluster configs are also not supported on serverless."
+      }
+     ]
+    },
+    {
+     "prompt": "The init script installs a native library the job truly needs. Next step?",
+     "options": [
+      {
+       "text": "Run this task on Classic Jobs compute",
+       "ok": true,
+       "fb": "Classic exposes init scripts, pools and worker settings."
+      },
+      {
+       "text": "Add the init script to the serverless notebook instead",
+       "ok": false,
+       "fb": "Compute-scoped init scripts aren't supported on serverless anywhere."
+      },
+      {
+       "text": "Use a bigger serverless performance mode",
+       "ok": false,
+       "fb": "Performance mode affects startup/cost, not native installs."
+      }
+     ]
+    }
+   ],
+   "explain": "Serverless removes policies, pools, compute-scoped init scripts/libraries and most Spark configs. Truly required → classic."
+  },
+  {
+   "id": "ch07-e085",
+   "type": "order",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the 'missing field on serverless' playbook.",
+   "items": [
+    "Am I on serverless or classic?",
+    "Is the setting an infrastructure concern (VMs, counts, pools, init scripts, policies)?",
+    "Do I truly need it or is it a classic habit?",
+    "If truly needed, switch the task to Classic Jobs compute"
+   ],
+   "explain": "Identify the compute, classify the setting, challenge the need, then switch only if required."
+  },
+  {
+   "id": "ch07-e086",
+   "type": "scenario",
+   "section": "ch07-s11",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "In a notebook, `SELECT COUNT(*) FROM prod.sales.orders` works but the next cell `from pyspark.sql import functions as F` errors.",
+   "steps": [
+    {
+     "prompt": "What do you check first?",
+     "options": [
+      {
+       "text": "What compute the notebook is attached to",
+       "ok": true,
+       "fb": "If it's a SQL warehouse, only SQL and Markdown run."
+      },
+      {
+       "text": "Whether `prod.sales.orders` exists",
+       "ok": false,
+       "fb": "The SQL cell already worked; the table is fine."
+      },
+      {
+       "text": "Whether Photon is enabled",
+       "ok": false,
+       "fb": "Photon doesn't control which languages run."
+      }
+     ]
+    },
+    {
+     "prompt": "It's attached to `analytics-wh`. Fix?",
+     "options": [
+      {
+       "text": "Attach to serverless notebook compute (or all-purpose) for the Python cells",
+       "ok": true,
+       "fb": "Python/PySpark needs Spark compute."
+      },
+      {
+       "text": "Upgrade the warehouse from Pro to Serverless",
+       "ok": false,
+       "fb": "No warehouse type runs Python notebook cells."
+      },
+      {
+       "text": "Grant CAN MANAGE on the warehouse",
+       "ok": false,
+       "fb": "It's not a permission problem."
+      }
+     ]
+    }
+   ],
+   "explain": "Notebooks on SQL warehouses run SQL + Markdown only."
+  },
+  {
+   "id": "ch07-e087",
+   "type": "order",
+   "section": "ch07-s10",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the questions for a serverless job with a startup-latency problem.",
+   "items": [
+    "Is it a serverless Job/pipeline (not a notebook)?",
+    "Which performance mode is set?",
+    "Does the workload need fast startup or is it relaxed batch?",
+    "Switch to Performance Optimized (or Standard for cheaper batch)"
+   ],
+   "explain": "Identify, read the mode, match it to the SLA, then switch."
+  },
+  {
+   "id": "ch07-e088",
+   "type": "scenario",
+   "section": "ch07-s12",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A data scientist's R notebook won't run on serverless notebook compute.",
+   "steps": [
+    {
+     "prompt": "First question?",
+     "options": [
+      {
+       "text": "Does serverless notebook compute support R?",
+       "ok": true,
+       "fb": "It doesn't — R (and RDD APIs) are unsupported on serverless notebooks."
+      },
+      {
+       "text": "Is the cluster's DBR too old?",
+       "ok": false,
+       "fb": "Serverless has no user-chosen DBR."
+      },
+      {
+       "text": "Is the SQL warehouse stopped?",
+       "ok": false,
+       "fb": "Not relevant to a serverless notebook."
+      }
+     ]
+    },
+    {
+     "prompt": "Best compute for this R development?",
+     "options": [
+      {
+       "text": "Classic all-purpose, possibly Dedicated",
+       "ok": true,
+       "fb": "Interactive + unsupported serverless feature → classic all-purpose."
+      },
+      {
+       "text": "Serverless Jobs",
+       "ok": false,
+       "fb": "Still serverless, and not interactive."
+      },
+      {
+       "text": "Pro SQL warehouse",
+       "ok": false,
+       "fb": "Warehouses run SQL only."
+      }
+     ]
+    }
+   ],
+   "explain": "Interactive + unsupported serverless feature → classic all-purpose (maybe Dedicated)."
+  },
+  {
+   "id": "ch07-e089",
+   "type": "scenario",
+   "section": "ch07-s07",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "You configure a classic all-purpose cluster with GPU instances and DBR ML and notice the Photon toggle can't be turned on.",
+   "steps": [
+    {
+     "prompt": "Why?",
+     "options": [
+      {
+       "text": "Photon isn't supported on GPU instance types",
+       "ok": true,
+       "fb": "Axis constraint: GPU + Photon ❌ on classic."
+      },
+      {
+       "text": "You need Dedicated access for Photon",
+       "ok": false,
+       "fb": "Photon has nothing to do with access mode."
+      },
+      {
+       "text": "DBR ML is too old",
+       "ok": false,
+       "fb": "It's the GPU instance type, not the runtime version."
+      }
+     ]
+    },
+    {
+     "prompt": "The team also runs heavy SQL ETL in the same notebook. Best approach?",
+     "options": [
+      {
+       "text": "Run the SQL/ETL on a CPU compute with Photon; keep GPU compute for deep learning",
+       "ok": true,
+       "fb": "Different axes, different needs."
+      },
+      {
+       "text": "Force Photon via Spark config",
+       "ok": false,
+       "fb": "Not supported — don't fight the constraint."
+      },
+      {
+       "text": "Switch to single-node",
+       "ok": false,
+       "fb": "Topology doesn't unlock Photon on GPU."
+      }
+     ]
+    }
+   ],
+   "explain": "Not all axis combinations are valid: GPU + Photon on classic GPU compute is the classic example."
+  },
+  {
+   "id": "ch07-e090",
+   "type": "cloze",
+   "section": "ch07-s09",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Complete the list of things serverless does NOT support.",
+   "text": "Serverless does not support compute [[policies]], instance [[pools]], compute-scoped [[init scripts]], compute-scoped [[libraries]] or most Spark cluster [[configurations|configs]].",
+   "bank": [
+    "Photon",
+    "autoscaling",
+    "notebooks"
+   ],
+   "explain": "These are infrastructure-level concerns that the platform manages on serverless."
+  }
+ ]
+}

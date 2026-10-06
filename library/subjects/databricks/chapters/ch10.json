@@ -1,0 +1,6039 @@
+{
+ "id": "ch10",
+ "num": 10,
+ "title": "The Mastery Roadmap",
+ "subtitle": "PREVIEW — a map of everything ahead: 10 phases, the 17-question lesson blueprint, 4 interfaces",
+ "emoji": "🗺️",
+ "sourcePages": "271–306 (+ teasers p178–179, p400–402)",
+ "mantra": "Learn Databricks in dependency order — compute up to CI/CD — and attack every feature with the same 17 questions.",
+ "objectives": [
+  "You can list the 10 phases in dependency order and explain why compute comes first.",
+  "You can recite the 17-question lesson blueprint and use it to learn any new feature.",
+  "You can sort any command or setting into SQL, PySpark, platform config or CLI.",
+  "You can give a crisp 1–2 line definition of every term the roadmap mentions (Auto Loader, AQE, ABAC, Bundles…).",
+  "You can walk the PERMISSION_DENIED, task-failed and slow-job debugging chains in order.",
+  "You can answer both certification-style and engineering-style (skew) questions."
+ ],
+ "sections": [
+  {
+   "id": "ch10-s01",
+   "title": "The New Course Contract & Ground Already Covered",
+   "hook": "From here on every lesson = theory AND real syntax. First, take stock of what you already own.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The learner asked: *continue teaching Databricks in depth — what's the plan?* and insisted on learning **both theory/best practices AND syntax/practical use** of the platform."
+    },
+    {
+     "t": "p",
+     "text": "The tutor's answer: stop teaching **one concept at a time**, cut off from the real Databricks. Instead, build the whole platform as if preparing for a job, real projects and certification **at the same time**."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "The contract for every phase",
+     "text": "Each unit must do **both**: theory / architecture / best practices **plus** real UI, SQL, PySpark, CLI/YAML syntax, debugging and exercises."
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "Why this matches the exam",
+     "text": "The current **Data Engineer Associate** exam no longer tests only transformations. It also covers architecture, compute, Delta/Unity Catalog, ingestion, orchestration, Spark troubleshooting and deployment concepts."
+    },
+    {
+     "t": "diagram",
+     "text": "FOUNDATIONS (done)\n├── Spark execution foundations\n├── partitions / shuffle\n├── joins / physical plans\n├── batch / streaming / incremental\n├── CDC\n├── schema evolution\n├── medallion architecture\n└── Databricks fundamentals\n    ├── account / workspace\n    ├── control vs compute plane\n    ├── serverless vs classic\n    ├── all-purpose / jobs / pipelines\n    ├── SQL warehouses\n    ├── DBR / runtime\n    ├── Photon\n    ├── driver / workers\n    ├── pools\n    ├── autoscaling\n    └── compute access",
+     "caption": "What is already covered before the roadmap starts"
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Control plane",
+       "def": "The Databricks-managed backend: web app, notebooks, job scheduler, cluster manager, Unity Catalog services."
+      },
+      {
+       "term": "Compute plane",
+       "def": "Where your data is actually processed — VMs in your cloud account (classic) or in Databricks' account (serverless)."
+      },
+      {
+       "term": "Serverless vs classic",
+       "def": "Serverless: you specify the workload, Databricks manages the infrastructure. Classic: you configure the VMs (sizes, workers, runtime) yourself."
+      },
+      {
+       "term": "All-purpose / jobs / pipelines compute",
+       "def": "Interactive cluster for notebooks / ephemeral cluster for one job run / compute that runs a declarative pipeline."
+      },
+      {
+       "term": "SQL warehouse",
+       "def": "Compute dedicated to SQL and BI queries (Databricks SQL)."
+      },
+      {
+       "term": "DBR (Databricks Runtime)",
+       "def": "The versioned software image on the cluster: Spark + Delta + libraries + OS."
+      },
+      {
+       "term": "Photon",
+       "def": "Databricks' native vectorized (C++) query engine that speeds up SQL/DataFrame operations."
+      },
+      {
+       "term": "Pool",
+       "def": "A set of idle, ready-to-use VM instances that cuts cluster start and autoscaling time."
+      },
+      {
+       "term": "Compute access (access mode)",
+       "def": "Who may use the compute and how it isolates users — e.g. **Standard** (shared) or **Dedicated** (single user/group)."
+      }
+     ]
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: why does the tutor insist on showing real configs and source files from now on?",
+     "text": "Because two lessons about a tool without ever seeing one **real configuration or source file** are useless for a job. Knowing names is not knowing the platform."
+    },
+    {
+     "t": "p",
+     "text": "The roadmap below has **10 phases**, a project that grows with you, a fixed **lesson blueprint**, and **four interfaces** learned in parallel."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s02",
+   "title": "Dependency Order: The 10-Phase Map",
+   "hook": "Learn layers in the order they depend on each other — not in the order of the sidebar menu.",
+   "blocks": [
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "What we will NOT do",
+     "text": "We will **not** blindly follow the workspace menu order (Workspace → Catalog → Compute → Jobs → SQL …). That order is good for a **product tour**, not for learning."
+    },
+    {
+     "t": "p",
+     "text": "Instead the plan follows **dependency order**: each next layer needs the previous one."
+    },
+    {
+     "t": "diagram",
+     "text": " 1 Compute\n   ↓\n 2 Delta Lake\n   ↓\n 3 Unity Catalog\n   ↓\n 4 Ingestion\n   ↓\n 5 Structured Streaming\n   ↓\n 6 Declarative Pipelines\n   ↓\n 7 Jobs\n   ↓\n 8 Databricks SQL\n   ↓\n 9 Performance & Debugging\n   ↓\n10 Production CI/CD",
+     "caption": "Learning order = dependency order"
+    },
+    {
+     "t": "table",
+     "head": [
+      "#",
+      "Phase",
+      "Goal (one line)"
+     ],
+     "rows": [
+      [
+       "1",
+       "Compute Mastery",
+       "Configure, reason about, troubleshoot and optimize real Spark workloads."
+      ],
+      [
+       "2",
+       "Delta Lake in Practice",
+       "Move from Delta internals to using Delta correctly in production."
+      ],
+      [
+       "3",
+       "Unity Catalog Mastery",
+       "Storage, namespace, governance, identities and permissions as ONE system."
+      ],
+      [
+       "4",
+       "Data Ingestion",
+       "Ingest files/external sources correctly, incrementally, reproducibly."
+      ],
+      [
+       "5",
+       "Structured Streaming",
+       "Streaming from execution model to production reliability."
+      ],
+      [
+       "6",
+       "Lakeflow Spark Declarative Pipelines",
+       "Production declarative pipelines with current syntax."
+      ],
+      [
+       "7",
+       "Lakeflow Jobs & Orchestration",
+       "Orchestrate production workflows reliably."
+      ],
+      [
+       "8",
+       "Databricks SQL",
+       "SQL analytics & BI compute — not a black box."
+      ],
+      [
+       "9",
+       "Performance & Debugging",
+       "Diagnose slowdowns with evidence, not by blindly scaling."
+      ],
+      [
+       "10",
+       "Production Eng., CLI, CI/CD",
+       "Operate Databricks as a production software platform."
+      ]
+     ],
+     "caption": "The 10 phases and their stated goals"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Menu order (product tour)",
+       "points": [
+        "Workspace → Catalog → Compute → Jobs → SQL …",
+        "Shows where buttons are",
+        "Concepts appear before what they depend on"
+       ]
+      },
+      {
+       "title": "Dependency order (learning)",
+       "points": [
+        "Compute → Delta → UC → … → CI/CD",
+        "Each layer builds on the previous",
+        "You can explain *why*, not just *where*"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: why does compute come BEFORE Delta?",
+     "text": "Every Delta command (MERGE, OPTIMIZE, a streaming write) finally runs as **Spark tasks on compute**. To reason about why a MERGE is slow, why OPTIMIZE costs what it costs or why a write creates small files, you need cores, task slots, partitions, shuffle and memory first."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "The plan as a file",
+     "text": "The tutor exported the whole roadmap as `databricks_mastery_phased_plan.md` — Markdown so it works as a syllabus in Obsidian or Git. The roadmap's audience: technical interviews, certifications, real-world DE projects, production debugging, platform operations, CI/CD and deployment."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s03",
+   "title": "The 17-Question Lesson Blueprint",
+   "hook": "One fixed route through every topic — so information never feels scattered again.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The learner had struggled with **slides and scattered information**. Fix: every lesson follows roughly the **same route**, a standard structure of questions."
+    },
+    {
+     "t": "list",
+     "items": [
+      "What problem are we solving?",
+      "How would we solve it without Databricks?",
+      "Which Databricks component solves it?",
+      "How does it work internally?",
+      "Where does it sit in the architecture?",
+      "How do I use it in the UI?",
+      "What is the real syntax?",
+      "What does a production example look like?",
+      "What alternatives exist?",
+      "When should I NOT use it?",
+      "Best practices",
+      "Common mistakes",
+      "Debugging workflow",
+      "Certification traps",
+      "Exercises",
+      "Full solutions",
+      "Mini-project extension"
+     ],
+     "ordered": true
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Questions 6–8 get special weight",
+     "text": "**6. UI, 7. real syntax, 8. production example.** The learner had rightly complained that two lessons on a tool without a single real configuration or source file are useless."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Block",
+      "Questions",
+      "Purpose"
+     ],
+     "rows": [
+      [
+       "WHY",
+       "1–3",
+       "Problem → life without Databricks → which component"
+      ],
+      [
+       "HOW",
+       "4–5",
+       "Internals and place in the architecture"
+      ],
+      [
+       "USE",
+       "6–8",
+       "UI, real syntax, production example"
+      ],
+      [
+       "JUDGE",
+       "9–12",
+       "Alternatives, when NOT to use, best practices, common mistakes"
+      ],
+      [
+       "BREAK",
+       "13–14",
+       "Debugging workflow, certification traps"
+      ],
+      [
+       "PROVE",
+       "15–17",
+       "Exercises, full solutions, mini-project extension"
+      ]
+     ],
+     "caption": "Group the 17 into 6 blocks to memorize them"
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "13 vs 17",
+     "text": "In the chat the tutor first listed **13** steps (ending at *Debugging*). The exported plan adds **14 Certification traps, 15 Exercises, 16 Full solutions, 17 Mini-project extension**."
+    },
+    {
+     "t": "callout",
+     "kind": "analogy",
+     "title": "A pilot's checklist",
+     "text": "Like a pre-flight checklist, the 17 questions stop you from skipping the boring-but-critical parts — especially *When should I NOT use it?* and *Debugging*."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: why ask “How would we solve it without Databricks?”",
+     "text": "It exposes the **real problem** and shows exactly what the Databricks component abstracts away (e.g. without Auto Loader you'd track processed file names yourself). Once you see the manual version, the feature's design and its failure modes make sense."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when you meet ANY new Databricks feature",
+     "questions": [
+      "What problem does this solve, in one sentence?",
+      "How would I do it by hand without Databricks?",
+      "Where does it sit: control plane, compute, storage, catalog?",
+      "Have I seen it in the UI AND written its real syntax?",
+      "When would I deliberately NOT use it?",
+      "How does it fail, and where would I look first?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-s04",
+   "title": "Four Interfaces in Parallel & the Growing Project",
+   "hook": "SQL, PySpark, platform config and CLI — plus one e-commerce lakehouse that grows with every phase.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Syntax will **not** be limited to PySpark. Four interfaces are learned **in parallel**."
+    },
+    {
+     "t": "diagram",
+     "text": "SQL\n├── CREATE / ALTER / MERGE\n├── COPY INTO / GRANT / REVOKE\n└── Delta DML, Unity Catalog SQL\nPySpark\n├── DataFrame API\n├── read/write APIs\n├── streaming APIs\n└── Delta APIs\nPlatform / config\n├── compute configuration\n├── Jobs\n├── Pipelines\n└── Bundles YAML\nCLI / external development\n├── databricks ...\n├── Git\n├── Databricks Connect\n└── deployment workflows",
+     "caption": "The four interfaces"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Interface",
+      "Typical examples",
+      "Where you write it"
+     ],
+     "rows": [
+      [
+       "SQL",
+       "`CREATE`, `ALTER`, `MERGE`, `COPY INTO`, `GRANT`, `REVOKE`",
+       "SQL editor, notebook SQL cells, pipeline .sql files"
+      ],
+      [
+       "PySpark",
+       "`spark.read`, `df.write`, `spark.readStream`, `DeltaTable`",
+       "Notebooks, Python files, pipelines"
+      ],
+      [
+       "Platform / config",
+       "Compute settings, Jobs, Pipelines, Bundles YAML",
+       "UI forms or `databricks.yml`"
+      ],
+      [
+       "CLI / external dev",
+       "`databricks bundle deploy`, Git, Databricks Connect",
+       "Terminal, IDE, CI system"
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "UI ↔ object mapping",
+     "text": "Wherever there is a UI, the tutor will also explain: **where do I click in the workspace, and which Databricks object does what I see correspond to?**"
+    },
+    {
+     "t": "p",
+     "text": "Instead of a separate **toy example** per lesson (which loses the big picture), one **production-style project** grows with you."
+    },
+    {
+     "t": "diagram",
+     "text": "E-COMMERCE LAKEHOUSE\nsources/\n├── customers CDC\n├── orders JSON\n├── products CSV\n└── events stream\n      ↓\nBRONZE: customers_raw, orders_raw,\n        products_raw, events_raw\n      ↓\nSILVER: customers, orders,\n        products, events\n      ↓\nGOLD:   daily_revenue, customer_360,\n        product_performance,\n        conversion_metrics",
+     "caption": "The ongoing project"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Auto Loader",
+      "CDC",
+      "`MERGE`",
+      "Lakeflow pipelines",
+      "Data-quality checks",
+      "Unity Catalog security",
+      "Jobs",
+      "SQL dashboards",
+      "Performance tuning",
+      "CI/CD",
+      "Service principals",
+      "Dev/prod environments"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "The end goal",
+     "text": "At the end you won't just have *seen* Databricks concepts — you'll know **how they connect into one production system**."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s05",
+   "title": "Phase 1 — Compute Mastery (Preview)",
+   "hook": "Read a cluster config and predict what it means for a real Spark job.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** understand compute deeply enough to configure, reason about, troubleshoot and optimize real Spark workloads — understand **every field**, not just the names."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Official compute split",
+     "text": "Databricks officially splits compute into **serverless**, **classic** and **SQL warehouses**. Classic compute includes **all-purpose**, **jobs** and **Lakeflow pipeline** resources."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Driver",
+       "def": "The node running your program's main process: builds the plan, schedules tasks, collects results."
+      },
+      {
+       "term": "Worker",
+       "def": "A VM that hosts an executor and does the actual data processing."
+      },
+      {
+       "term": "Executor",
+       "def": "The JVM process on a worker that runs tasks and holds cached/shuffle data."
+      },
+      {
+       "term": "Cores",
+       "def": "CPU cores; each executor core runs one task at a time."
+      },
+      {
+       "term": "Executor memory",
+       "def": "The JVM heap of the executor, used for execution (joins, aggregations, sorts) and storage (cache)."
+      },
+      {
+       "term": "Task slot",
+       "def": "One executor core = one slot = one task running concurrently."
+      },
+      {
+       "term": "Partition",
+       "def": "A chunk of data; one task processes one partition."
+      },
+      {
+       "term": "Worker / driver type",
+       "def": "The VM instance type (cores, RAM, disk) chosen for workers / for the driver."
+      },
+      {
+       "term": "Autoscaling",
+       "def": "Databricks adds/removes workers between a min and max based on load."
+      },
+      {
+       "term": "Pools",
+       "def": "Pre-warmed idle instances that make clusters start and scale faster."
+      },
+      {
+       "term": "Spot vs on-demand",
+       "def": "Spot: cheap spare capacity that can be reclaimed. On-demand: full price, not reclaimed."
+      },
+      {
+       "term": "Compute policies",
+       "def": "Admin rules that restrict/preset which compute settings users may choose (and cost limits)."
+      },
+      {
+       "term": "Access modes",
+       "def": "Isolation/sharing model — **Standard** (multi-user, shared) or **Dedicated** (single user or group)."
+      },
+      {
+       "term": "Termination / auto-termination",
+       "def": "Stopping the cluster; auto-termination stops it after N idle minutes to save cost."
+      }
+     ]
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "What serverless abstracts away",
+       "def": "VM types, worker counts, spot/on-demand, runtime image and cluster startup — Databricks manages them."
+      },
+      {
+       "term": "What remains configurable",
+       "def": "Mainly your code, the **environment** (environment version + Python dependencies) and a few job/notebook settings."
+      },
+      {
+       "term": "Serverless notebooks / jobs / pipelines",
+       "def": "The same workloads run on Databricks-managed, fast-starting compute."
+      },
+      {
+       "term": "Limitations",
+       "def": "Some features/configs available on classic (custom Spark configs, init scripts, specific instance types…) are not available."
+      }
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "Driver:  16 cores / 64 GB\nWorkers: 8 cores / 32 GB\nWorkers: min 2, max 10\nDBR:     18 LTS\nPhoton:  enabled\nAccess mode: Standard",
+     "caption": "Practice config from the plan"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Total available cores",
+      "Approximate task parallelism",
+      "Where executor memory lives",
+      "Effect of 2 vs 10 workers",
+      "Shuffle behavior",
+      "Where spill happens",
+      "When the driver OOMs",
+      "When an executor OOMs",
+      "Spark UI interpretation"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: with workers min 2 / max 10, 8 cores each, how many tasks can run at once?",
+     "text": "Only **worker** cores run tasks: 2 × 8 = **16** slots at minimum, 10 × 8 = **80** at maximum. The driver's 16 cores schedule work; they do not add task slots."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Don't count the driver",
+     "text": "A classic mistake in parallelism math is adding driver cores to the task slots. Tasks run on **executors on workers**."
+    },
+    {
+     "t": "p",
+     "text": "**Immediate next lesson — Compute Part 3: From VM to Spark Task.** Config: driver + 4 workers, 8 cores and 32 GB RAM per worker, DBR 18 LTS, Photon enabled, autoscale 2–8."
+    },
+    {
+     "t": "list",
+     "items": [
+      "What process runs on the driver? On a worker?",
+      "What exactly is an executor? One or many per worker?",
+      "What is an executor core, and how does a core relate to a Spark task?",
+      "With 4 × 8 cores, how many tasks run concurrently?",
+      "What happens with 1,000 partitions? With only 4?",
+      "Where is the executor heap? What is memory overhead?",
+      "What happens during shuffle? What is written to local disk? Where does spill occur?",
+      "What changes when autoscaling 2 → 8 workers? What changes with Photon?",
+      "Which details disappear from user management in serverless?",
+      "How do these show up in the Spark UI (Executor/Stage/Task views)?"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Too few partitions",
+     "text": "With fewer partitions than task slots, cores sit idle no matter how big the cluster is."
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: 4 workers × 8 cores, a stage with 1,000 partitions vs 4 partitions?",
+     "text": "32 slots. 1,000 partitions → tasks run in about ⌈1000/32⌉ = **32 waves**. 4 partitions → only **4 tasks**, so 28 cores sit **idle** — too few partitions waste the cluster."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s06",
+   "title": "Phase 2 — Delta Lake in Practice (Preview)",
+   "hook": "You know Parquet + _delta_log + snapshots. Now you'll actually USE Delta in production.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Already understood:** Parquet + `_delta_log` + snapshots + MVCC + ADD/REMOVE actions. **Goal now:** use Delta **correctly in production**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "SQL",
+      "What it does (1 line)"
+     ],
+     "rows": [
+      [
+       "`CREATE TABLE`",
+       "Create a (Delta) table — schema, location/managed, properties."
+      ],
+      [
+       "`INSERT`",
+       "Append (or `INSERT OVERWRITE`) rows."
+      ],
+      [
+       "`UPDATE` / `DELETE`",
+       "Change / remove rows matching a predicate (new table version)."
+      ],
+      [
+       "`MERGE`",
+       "Upsert: match source to target and update/insert/delete in one atomic commit."
+      ],
+      [
+       "`TRUNCATE`",
+       "Remove all rows, keep the table definition."
+      ],
+      [
+       "`ALTER TABLE`",
+       "Change schema/properties: add columns, set properties, clustering…"
+      ],
+      [
+       "`DESCRIBE DETAIL`",
+       "Current table-level metadata: format, location, numFiles, size, features."
+      ],
+      [
+       "`DESCRIBE HISTORY`",
+       "Per-version provenance: version, timestamp, user, operation, metrics."
+      ],
+      [
+       "`RESTORE`",
+       "Create a NEW current version whose state equals an old version."
+      ],
+      [
+       "`VACUUM`",
+       "Physically delete unreferenced files older than the retention period."
+      ],
+      [
+       "`OPTIMIZE`",
+       "Compact small files / re-layout active files."
+      ]
+     ],
+     "caption": "Phase 2 SQL syntax"
+    },
+    {
+     "t": "table",
+     "head": [
+      "PySpark / Delta API",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "`spark.read.table(...)`",
+       "Read a catalog table as a DataFrame."
+      ],
+      [
+       "`df.write`",
+       "DataFrameWriter (v1): `.mode(...)`, `.format(...)`, `.save/.saveAsTable`."
+      ],
+      [
+       "`df.writeTo(...)`",
+       "DataFrameWriterV2: `.append()`, `.overwritePartitions()`, `.createOrReplace()`."
+      ],
+      [
+       "`saveAsTable(...)`",
+       "Write the DataFrame as a named table (columns matched by **name** on append)."
+      ],
+      [
+       "`insertInto(...)`",
+       "Insert into an existing table — columns matched by **position**."
+      ],
+      [
+       "`DeltaTable.forName(...)`",
+       "Get a DeltaTable object for programmatic DML."
+      ],
+      [
+       "`.merge(...)` / `.update(...)` / `.delete(...)`",
+       "MERGE / UPDATE / DELETE via the Python API."
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "insertInto is positional",
+     "text": "`insertInto` maps columns **by position**, not by name. If the DataFrame's column order differs from the table's, values silently land in the wrong columns (or fail on type)."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Append vs overwrite",
+       "def": "Append adds rows; overwrite replaces the table's (or a partition's) contents."
+      },
+      {
+       "term": "Dynamic overwrite",
+       "def": "Overwrite only the partitions present in the incoming data (`partitionOverwriteMode=dynamic`), leaving others untouched."
+      },
+      {
+       "term": "Idempotent MERGE",
+       "def": "A MERGE you can re-run on the same input without creating duplicates or double-applying changes."
+      },
+      {
+       "term": "CDC",
+       "def": "Change Data Capture: a feed of inserts/updates/deletes to apply to a target."
+      },
+      {
+       "term": "Deduplication",
+       "def": "Keep one row per key (e.g. `ROW_NUMBER()` over key ordered by timestamp)."
+      },
+      {
+       "term": "Late-arriving data",
+       "def": "Records that arrive after newer records for the same key/time — must not overwrite newer state."
+      },
+      {
+       "term": "Schema enforcement",
+       "def": "Delta rejects writes whose schema doesn't match the table."
+      },
+      {
+       "term": "Schema evolution",
+       "def": "Explicitly allow new columns to be added on write (e.g. `mergeSchema`)."
+      },
+      {
+       "term": "Type widening",
+       "def": "Change a column to a wider type (e.g. INT → BIGINT) without rewriting data files."
+      },
+      {
+       "term": "Time travel",
+       "def": "Query an older snapshot: `VERSION AS OF` / `TIMESTAMP AS OF`."
+      },
+      {
+       "term": "Deletion vectors",
+       "def": "Mark rows as deleted/changed in a side file instead of rewriting the whole Parquet file immediately."
+      }
+     ]
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Small files",
+       "def": "Too many tiny files → metadata, file-open and task-scheduling overhead."
+      },
+      {
+       "term": "OPTIMIZE",
+       "def": "Compacts small files into larger ones (and applies clustering)."
+      },
+      {
+       "term": "Data skipping",
+       "def": "Uses per-file statistics to skip files that cannot contain matching rows."
+      },
+      {
+       "term": "File statistics",
+       "def": "Min/max/null counts per column stored in the Delta log for each file."
+      },
+      {
+       "term": "Liquid Clustering",
+       "def": "Flexible, incremental data layout by clustering keys (`CLUSTER BY`) — keys can change without a full rewrite; replaces static partitioning/Z-order."
+      },
+      {
+       "term": "Predictive optimization",
+       "def": "For Unity Catalog managed tables, Databricks automatically runs OPTIMIZE / VACUUM / ANALYZE when it judges they're needed."
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "OPTIMIZE ≠ VACUUM",
+     "text": "**OPTIMIZE** reorganizes active files/layout. **VACUUM** physically deletes expired, unreferenced files. History is not a backup — VACUUM and retention remove old files."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s07",
+   "title": "Phase 3 — Unity Catalog Mastery (Preview)",
+   "hook": "Much more than catalog.schema.table: storage → namespace → identities → permissions as ONE system.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** understand storage, namespace, governance, identities and permissions as **one coherent system**, built from storage upward."
+    },
+    {
+     "t": "diagram",
+     "text": "Cloud storage (s3://, abfss://, gs://)\n      ↑\nExternal location  (path + credential)\n      ↑\nStorage credential (cloud IAM identity)\n\nUnity Catalog\n└── Metastore\n    └── Catalog\n        └── Schema\n            ├── Managed table\n            ├── External table\n            ├── Volume\n            ├── View\n            ├── Materialized view\n            ├── Function\n            └── Model",
+     "caption": "Storage and namespace model"
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Metastore",
+       "def": "Top-level UC container (one per region) holding all catalogs and their permissions."
+      },
+      {
+       "term": "Catalog",
+       "def": "First level of the 3-level namespace `catalog.schema.object` (e.g. `prod`)."
+      },
+      {
+       "term": "Schema",
+       "def": "Second level (database) inside a catalog, e.g. `prod.silver`."
+      },
+      {
+       "term": "Managed table",
+       "def": "UC manages both metadata AND the data files' lifecycle (DROP deletes data)."
+      },
+      {
+       "term": "External table",
+       "def": "UC manages metadata; data lives at a path you control (DROP keeps the files)."
+      },
+      {
+       "term": "Volume",
+       "def": "UC object governing **non-tabular files** (CSV, images…), path `/Volumes/catalog/schema/volume/`."
+      },
+      {
+       "term": "View / Materialized view",
+       "def": "Saved query / saved query whose results are precomputed and refreshed."
+      },
+      {
+       "term": "Function",
+       "def": "A UDF registered in a schema (also used for row filters and column masks)."
+      },
+      {
+       "term": "Model",
+       "def": "A registered ML model governed by UC."
+      },
+      {
+       "term": "Storage credential",
+       "def": "UC object wrapping a cloud identity (IAM role / managed identity) allowed to access storage."
+      },
+      {
+       "term": "External location",
+       "def": "A cloud storage path + the storage credential used to access it, governed with grants."
+      }
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE CATALOG ...;  CREATE SCHEMA ...;\nCREATE TABLE ...;    CREATE VOLUME ...;\n\nGRANT USE CATALOG ON CATALOG prod TO `data-engineers`;\nGRANT USE SCHEMA ON SCHEMA prod.silver TO `data-engineers`;\nGRANT SELECT ON TABLE prod.silver.orders TO `analysts`;\n\nREVOKE ... ;  SHOW GRANTS ON TABLE prod.silver.orders;",
+     "caption": "Phase 3 SQL syntax"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Three keys to read one table",
+     "text": "To `SELECT` from `prod.silver.orders` a principal needs **USE CATALOG** on `prod`, **USE SCHEMA** on `prod.silver` and **SELECT** on the table (or inherit them from a higher level)."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Users / groups",
+       "def": "Human identities; groups bundle them so you grant once to a team."
+      },
+      {
+       "term": "Service principal",
+       "def": "A non-human identity for automation — jobs, pipelines, CI/CD deployments."
+      },
+      {
+       "term": "Ownership",
+       "def": "Each securable has one owner who has all privileges on it and can grant them."
+      },
+      {
+       "term": "Privilege inheritance",
+       "def": "A grant on a catalog or schema flows down to all objects inside it."
+      },
+      {
+       "term": "Least privilege",
+       "def": "Grant only the minimum privileges needed for the task."
+      },
+      {
+       "term": "Row filter",
+       "def": "A UDF attached to a table that decides which rows each user may see."
+      },
+      {
+       "term": "Column mask",
+       "def": "A UDF attached to a column that returns a masked value (e.g. `***`) for unauthorized users."
+      },
+      {
+       "term": "ABAC",
+       "def": "Attribute-based access control: policies driven by governed **tags** (e.g. `pii`) apply filters/masks at scale."
+      },
+      {
+       "term": "Lineage",
+       "def": "UC automatically records which tables/columns were read to produce which others."
+      },
+      {
+       "term": "Audit / governance",
+       "def": "Logs of who accessed/changed what (e.g. audit logs, system tables)."
+      },
+      {
+       "term": "Delta Sharing",
+       "def": "Open protocol to share live data securely with other organizations/platforms."
+      },
+      {
+       "term": "Lakehouse Federation",
+       "def": "Query external databases (e.g. PostgreSQL, Snowflake) through UC foreign catalogs without ingesting the data."
+      }
+     ]
+    },
+    {
+     "t": "flow",
+     "items": [
+      "PERMISSION_DENIED",
+      "Who am I?",
+      "Which principal runs the job?",
+      "USE CATALOG?",
+      "USE SCHEMA?",
+      "SELECT / MODIFY?",
+      "Ownership?",
+      "Storage credential?"
+     ],
+     "caption": "Permission-debugging chain"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "It works for me, it fails in the job",
+     "text": "A job may run as a **different principal** (job owner or a service principal) than you. Your notebook succeeding proves nothing about the job's identity."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself on PERMISSION_DENIED",
+     "questions": [
+      "Who am I right now (`current_user()`)?",
+      "Which principal is the job/pipeline actually running as?",
+      "Does that principal have USE CATALOG on the catalog?",
+      "Does it have USE SCHEMA on the schema?",
+      "Does it have SELECT (read) or MODIFY (write) on the object?",
+      "Is ownership involved (e.g. ALTER/DROP needs owner)?",
+      "For paths/external data: is the storage credential / external location granted?"
+     ]
+    },
+    {
+     "t": "diagram",
+     "text": "metastore → catalog → schema\n→ managed / external tables → volumes\n→ storage credentials / external locations\n→ grants / ownership → service principals\n→ row filters / masks / ABAC → lineage\n→ systematic PERMISSION_DENIED debugging",
+     "caption": "Phase 3 teaching order (teaser at the end of Phase 2)"
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Earlier teaser (end of Delta Part 2)",
+     "text": "The Part 3 teaser listed: `catalog.schema.object`, managed vs external tables, **managed storage**, volumes, external locations, storage credentials, ownership, `USE CATALOG`, `USE SCHEMA`, `SELECT`, `MODIFY`, privilege inheritance, service principals, row filters, column masks, lineage and, above all, real PERMISSION_DENIED debugging scenarios."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s08",
+   "title": "Phase 4 — Data Ingestion (Preview)",
+   "hook": "From spark.read to COPY INTO to Auto Loader — and breaking pipelines on purpose.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** ingest files and external sources **correctly, incrementally and reproducibly**. Start simple, end with Auto Loader in depth."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "df = (\n    spark.read\n        .format(\"csv\")\n        .option(\"header\", True)\n        .schema(schema)\n        .load(path)\n)\n\nspark.read.json(...)\nspark.read.parquet(...)",
+     "caption": "Core batch reads"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Explicit schema",
+       "points": [
+        "You pass `.schema(schema)`",
+        "No extra pass over the data",
+        "Wrong-typed data becomes null/fails predictably",
+        "Best for production"
+       ]
+      },
+      {
+       "title": "Schema inference",
+       "points": [
+        "Spark samples/scans the files to guess types",
+        "Extra read cost on CSV/JSON",
+        "Types may change between runs",
+        "Fine for exploration"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "`COPY INTO`",
+       "def": "SQL command that loads files from a location into a Delta table **idempotently** — already-loaded files are skipped on re-run."
+      },
+      {
+       "term": "Auto Loader",
+       "def": "Incremental file ingestion as a stream: processes only new files that land in a directory."
+      },
+      {
+       "term": "`cloudFiles`",
+       "def": "The source format name for Auto Loader: `spark.readStream.format(\"cloudFiles\")`."
+      },
+      {
+       "term": "File discovery",
+       "def": "How Auto Loader finds new files: directory listing or file notification."
+      },
+      {
+       "term": "Directory listing",
+       "def": "Default mode: lists the input directory to find new files."
+      },
+      {
+       "term": "File notification",
+       "def": "Uses cloud storage events/queues to learn about new files — scales to huge directories."
+      },
+      {
+       "term": "Checkpoint",
+       "def": "Stores which files/offsets were already processed so a restart continues exactly where it stopped."
+      },
+      {
+       "term": "`schemaLocation`",
+       "def": "`cloudFiles.schemaLocation`: where Auto Loader stores the inferred schema and its evolution."
+      },
+      {
+       "term": "Schema inference",
+       "def": "Auto Loader infers the schema from sampled files (JSON/CSV columns default to STRING unless type inference is on)."
+      },
+      {
+       "term": "Schema hints",
+       "def": "`cloudFiles.schemaHints`: force specific types for some columns, e.g. `amount DECIMAL(10,2)`."
+      },
+      {
+       "term": "Schema evolution",
+       "def": "When new columns appear, Auto Loader updates the schema (default: stop the stream, restart with new columns)."
+      },
+      {
+       "term": "Rescued data column",
+       "def": "`_rescued_data`: captures values that don't fit the schema instead of losing them."
+      },
+      {
+       "term": "Duplicate prevention / incremental semantics",
+       "def": "Checkpointed file tracking means each file is ingested once — \"exactly-once-ish\" as long as the checkpoint is intact."
+      }
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "(\n    spark.readStream\n        .format(\"cloudFiles\")\n        .option(\"cloudFiles.format\", \"json\")\n        .option(\"cloudFiles.schemaLocation\", schema_path)\n        .load(source_path)\n)",
+     "caption": "Auto Loader skeleton"
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "COPY INTO",
+       "points": [
+        "SQL command, batch-style",
+        "Idempotent: skips loaded files",
+        "Good for thousands of files / scheduled loads"
+       ]
+      },
+      {
+       "title": "Auto Loader",
+       "points": [
+        "Structured Streaming source (`cloudFiles`)",
+        "Checkpoint + schemaLocation",
+        "Scales to millions of files, schema evolution, rescued data"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "\"Exactly-once-ish\"",
+     "text": "Exactly-once ingestion depends on the **checkpoint**. Delete or change it and Auto Loader treats every file as new → **duplicates**."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Build ingestion pipelines",
+      "Intentionally break them",
+      "Diagnose missing files",
+      "Diagnose duplicate files",
+      "Diagnose schema drift",
+      "Diagnose malformed rows"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when ingestion looks wrong",
+     "questions": [
+      "Is it missing, duplicated, drifted or malformed data?",
+      "Did the files actually land in the path the stream reads?",
+      "Was the checkpoint deleted, moved or shared between two streams?",
+      "Did the source schema change (new/renamed columns)?",
+      "Is anything sitting in `_rescued_data`?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-s09",
+   "title": "Phase 5 — Structured Streaming (Preview)",
+   "hook": "From micro-batches to production reliability — and why exactly-once is subtle.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** understand streaming from the **execution model** to **production reliability**, back in Spark but inside Databricks."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "code": "query = (\n    events\n        .writeStream\n        .format(\"delta\")\n        .option(\"checkpointLocation\", checkpoint)\n        .trigger(processingTime=\"30 seconds\")\n        .toTable(\"bronze.events\")\n)",
+     "caption": "Core syntax: spark.readStream … .writeStream"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Line",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "`.writeStream`",
+       "Turns the streaming DataFrame into a continuously running query."
+      ],
+      [
+       "`.format(\"delta\")`",
+       "Sink is a Delta table (transactional → supports exactly-once)."
+      ],
+      [
+       "`checkpointLocation`",
+       "Where offsets, commits and state are stored for recovery."
+      ],
+      [
+       "`.trigger(processingTime=\"30 seconds\")`",
+       "Start a micro-batch every 30 seconds."
+      ],
+      [
+       "`.toTable(\"bronze.events\")`",
+       "Start the query writing into that table; returns a StreamingQuery."
+      ]
+     ]
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Micro-batch",
+       "def": "The stream is processed as a series of small batch jobs."
+      },
+      {
+       "term": "Checkpoint",
+       "def": "Durable record of progress (offsets, commits, state) used on restart."
+      },
+      {
+       "term": "Offset",
+       "def": "Position in the source up to which data has been read."
+      },
+      {
+       "term": "State",
+       "def": "Data kept across micro-batches for aggregations, dedup, joins (in the state store)."
+      },
+      {
+       "term": "Watermark",
+       "def": "`withWatermark(col, delay)`: how late data may arrive before state for old windows is dropped."
+      },
+      {
+       "term": "Event time vs processing time",
+       "def": "When the event happened (column in data) vs when Spark processes it."
+      },
+      {
+       "term": "Late data",
+       "def": "Events arriving after newer events; beyond the watermark they may be ignored."
+      },
+      {
+       "term": "Stateless vs stateful",
+       "def": "Row-by-row ops (filter, select) vs ops that remember (aggregations, dedup, stream joins)."
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Output mode",
+      "What is written each trigger"
+     ],
+     "rows": [
+      [
+       "append",
+       "Only new rows that are final (won't change again)."
+      ],
+      [
+       "update",
+       "Only rows that changed since the last trigger."
+      ],
+      [
+       "complete",
+       "The whole result table every trigger (aggregations)."
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Why exactly-once is subtle",
+     "text": "End-to-end exactly-once needs a **replayable source + checkpoint + idempotent/transactional sink**. You can still create duplicates: deleting/changing the checkpoint, two queries writing the same table, non-idempotent `foreachBatch` logic, or duplicates already in the source."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Duplicate scenarios",
+      "Restart behavior",
+      "State-store debugging"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "reveal",
+     "label": "Think first: you restart a stream with a NEW checkpoint path on the same source. What happens?",
+     "text": "The new query has no memory of processed offsets/files, so it starts from the beginning (or from the configured starting point) and **reprocesses data → duplicates** in an append sink."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s10",
+   "title": "Phase 6 — Lakeflow Spark Declarative Pipelines (Preview)",
+   "hook": "Declare tables; let the engine build the DAG, run incrementally and enforce quality.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** build production declarative pipelines with **current** Databricks syntax and concepts — while still recognizing older terminology."
+    },
+    {
+     "t": "diagram",
+     "text": "Delta Live Tables (DLT)\n        ↓\nLakeflow Declarative Pipelines\n        ↓\n(Lakeflow) Spark Declarative Pipelines",
+     "caption": "Same product line, renamed twice"
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Recognize legacy tutorials",
+     "text": "Older material says **DLT**, `import dlt`, `APPLY CHANGES INTO` or the `LIVE.` prefix. The current names are Lakeflow Spark Declarative Pipelines and `AUTO CDC`. Learn the current form; recognize the old."
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE OR REFRESH STREAMING TABLE bronze_orders\nAS\nSELECT *\nFROM STREAM read_files(...);",
+     "caption": "SQL-style pipeline source"
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "`read_files`",
+       "def": "SQL table-valued function that reads files from a path; with `STREAM` it ingests incrementally (Auto Loader)."
+      },
+      {
+       "term": "Streaming table",
+       "def": "Delta table fed by a streaming query; each new input row is processed once (append-style, incremental)."
+      },
+      {
+       "term": "Materialized view",
+       "def": "Table whose content is the precomputed result of a query, refreshed (incrementally when possible)."
+      },
+      {
+       "term": "Temporary view",
+       "def": "Intermediate dataset inside the pipeline, not published to the catalog."
+      },
+      {
+       "term": "Dependencies / DAG generation",
+       "def": "The engine reads which datasets each query references and builds the execution graph automatically."
+      },
+      {
+       "term": "Incremental computation",
+       "def": "Process only new/changed data instead of recomputing everything."
+      },
+      {
+       "term": "Expectations",
+       "def": "Data-quality rules on a dataset: `CONSTRAINT c EXPECT (cond)` with action warn (default), `DROP ROW` or `FAIL UPDATE`."
+      },
+      {
+       "term": "`AUTO CDC`",
+       "def": "Declarative CDC apply (formerly `APPLY CHANGES`): orders changes by a sequence column and applies upserts/deletes."
+      },
+      {
+       "term": "SCD Type 1",
+       "def": "Overwrite the old value — keep only current state."
+      },
+      {
+       "term": "SCD Type 2",
+       "def": "Keep history: close the old row (`__END_AT`) and insert a new version."
+      },
+      {
+       "term": "Serverless vs classic pipeline compute",
+       "def": "Databricks-managed compute vs a pipeline cluster you configure."
+      },
+      {
+       "term": "Pipeline parameters",
+       "def": "Key-value settings of the pipeline referenced from source code (e.g. catalog name per env)."
+      },
+      {
+       "term": "Event log",
+       "def": "The pipeline's log of events — progress, data-quality metrics, lineage, errors — queryable as a table."
+      },
+      {
+       "term": "Pipeline monitoring / debugging",
+       "def": "Pipeline UI graph + event log to find failing flows, dropped rows and slow updates."
+      }
+     ]
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Streaming table",
+       "points": [
+        "Input: append-only/streaming source",
+        "Each row processed once",
+        "Ideal for bronze ingestion"
+       ]
+      },
+      {
+       "title": "Materialized view",
+       "points": [
+        "Input: any query (joins, aggregations)",
+        "Result kept correct on refresh",
+        "Ideal for silver/gold aggregates"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "sql",
+     "code": "CREATE OR REFRESH STREAMING TABLE silver_orders (\n  CONSTRAINT valid_id EXPECT (order_id IS NOT NULL)\n    ON VIOLATION DROP ROW\n)\nAS SELECT * FROM STREAM(bronze_orders);",
+     "caption": "An expectation (illustration)"
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Forgetting STREAM",
+     "text": "A streaming table must read a **streaming** source: `FROM STREAM read_files(...)` or `FROM STREAM(table)`. Without `STREAM` it's a batch query and the definition fails."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s11",
+   "title": "Phase 7 — Lakeflow Jobs & Orchestration (Preview)",
+   "hook": "How everything before becomes a reliable production workflow.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** orchestrate production workflows reliably — via the **UI and declarative configuration**."
+    },
+    {
+     "t": "diagram",
+     "text": "        ingest\n          │\n          ▼\n        bronze\n          │\n     ┌────┴────┐\n     ▼         ▼\n customers   orders\n     │         │\n     └────┬────┘\n          ▼\n         gold\n          │\n          ▼\n    quality check",
+     "caption": "A real job DAG (customers and orders run in parallel)"
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Job",
+       "def": "The orchestrated workflow definition (tasks + schedule + settings)."
+      },
+      {
+       "term": "Task",
+       "def": "One unit of work in a job: notebook, Python, SQL, pipeline, run-job…"
+      },
+      {
+       "term": "Run",
+       "def": "One execution of a job (each task gets a task run)."
+      },
+      {
+       "term": "Task dependency",
+       "def": "`depends_on`: a task starts only after its upstream tasks finish."
+      },
+      {
+       "term": "Parameters",
+       "def": "Job/task inputs (key-value) passed to the code."
+      },
+      {
+       "term": "Dynamic value references",
+       "def": "Placeholders like `{{job.run_id}}` or `{{job.start_time.iso_date}}` resolved at run time."
+      },
+      {
+       "term": "Retries / timeouts",
+       "def": "Re-run a failed task N times / fail a task that runs too long."
+      },
+      {
+       "term": "Notifications",
+       "def": "Email/webhook alerts on start, success, failure, duration."
+      },
+      {
+       "term": "If/else",
+       "def": "Condition task that branches the DAG based on a value."
+      },
+      {
+       "term": "For-each",
+       "def": "Runs a nested task once per item of a list."
+      },
+      {
+       "term": "Run-job task",
+       "def": "A task that triggers another job."
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Trigger",
+      "Starts a run when…"
+     ],
+     "rows": [
+      [
+       "Schedule",
+       "a cron-style time arrives (e.g. daily 02:00)."
+      ],
+      [
+       "Continuous",
+       "always — a new run starts as soon as the previous ends."
+      ],
+      [
+       "File arrival",
+       "new files land in a monitored storage location."
+      ],
+      [
+       "Table update",
+       "a monitored source table is updated."
+      ]
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Compute choice",
+      "What it is"
+     ],
+     "rows": [
+      [
+       "Serverless job compute",
+       "Databricks-managed; no infra to configure."
+      ],
+      [
+       "Classic job compute / new job cluster",
+       "A cluster created for the run and terminated after."
+      ],
+      [
+       "Shared job cluster",
+       "One job cluster reused by several tasks of the same job."
+      ],
+      [
+       "Existing all-purpose compute",
+       "Reuse an interactive cluster — convenient for dev, pricier and less isolated for prod."
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Prod jobs on all-purpose compute",
+     "text": "Interactive clusters are pricier, shared and less isolated — and they hide missing job dependencies (\"works on my cluster\"). Use serverless job compute or job clusters and declare libraries in the job."
+    },
+    {
+     "t": "flow",
+     "items": [
+      "Task failed",
+      "Upstream?",
+      "Compute?",
+      "Runtime?",
+      "Library?",
+      "Permissions?",
+      "Parameter?",
+      "Data?",
+      "Spark execution?"
+     ],
+     "caption": "Debugging model"
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a task fails",
+     "questions": [
+      "Did an upstream task fail or produce bad output?",
+      "Did the compute start (quota, policy, spot loss)?",
+      "Is it a runtime/DBR version issue?",
+      "Is a library missing or conflicting?",
+      "Does the run-as identity have permissions?",
+      "Was a parameter missing or wrong?",
+      "Is the input data unexpected (empty, schema drift)?",
+      "Is it a Spark execution error (OOM, skew, timeout)?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-s12",
+   "title": "Phase 8 — Databricks SQL (Preview)",
+   "hook": "SQL warehouses are not a black box ‘for BI’ — you'll size, profile and tune them.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** master SQL analytics and BI compute rather than treating SQL warehouses as a black box."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "SQL Editor",
+       "def": "Workspace UI to write and run SQL against a warehouse."
+      },
+      {
+       "term": "Queries",
+       "def": "Saved SQL statements you can reuse, schedule and share."
+      },
+      {
+       "term": "Query history",
+       "def": "List of past queries with status, duration, user and warehouse."
+      },
+      {
+       "term": "Query profile",
+       "def": "Visual per-operator breakdown of a query's execution — the DBSQL debugging tool."
+      },
+      {
+       "term": "SQL warehouse",
+       "def": "Compute for SQL: **Serverless**, **Pro** or **Classic**."
+      },
+      {
+       "term": "Warehouse size",
+       "def": "T-shirt size (2X-Small … 4X-Large) of each cluster → speed of individual queries."
+      },
+      {
+       "term": "Min/max clusters",
+       "def": "How many clusters the warehouse scales across → concurrency (many users)."
+      },
+      {
+       "term": "Autoscaling / auto-stop",
+       "def": "Adds clusters under load / stops the warehouse after idle minutes."
+      },
+      {
+       "term": "AI/BI dashboards",
+       "def": "Databricks' native dashboards built on SQL datasets."
+      },
+      {
+       "term": "Alerts",
+       "def": "Scheduled query + condition that sends a notification when met."
+      },
+      {
+       "term": "Materialized views / streaming tables",
+       "def": "Also creatable in DBSQL, refreshed on schedule."
+      },
+      {
+       "term": "Statement Execution API",
+       "def": "REST API to run SQL on a warehouse from any application."
+      },
+      {
+       "term": "JDBC / ODBC",
+       "def": "Standard drivers for external tools — e.g. **Power BI**, **Tableau** connectivity."
+      }
+     ]
+    },
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Serverless warehouse",
+       "points": [
+        "Databricks-managed compute",
+        "Starts in seconds",
+        "Recommended default"
+       ]
+      },
+      {
+       "title": "Pro / Classic warehouse",
+       "points": [
+        "Compute runs in your cloud account",
+        "Slower start",
+        "Classic has fewer performance features than Pro"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Wrong warehouse knob",
+     "text": "Raising **size** doesn't fix queueing, and raising **max clusters** doesn't fix one heavy query."
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Size vs clusters",
+     "text": "**Size** makes each query faster (bigger cluster). **Max clusters** lets more queries run at once (concurrency). Queries *queueing* → raise max clusters; one *heavy* query slow → bigger size or tune the query."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "SQL performance tuning",
+     "text": "Phase 8 ends with SQL performance tuning — start from the **query profile**, not by guessing."
+    }
+   ]
+  },
+  {
+   "id": "ch10-s13",
+   "title": "Phase 9 — Performance & Debugging (Preview)",
+   "hook": "\"Job went from 8 to 42 minutes\" — evidence, not a bigger cluster.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "One of the most important units for **interviews and real work**. Driven by real **symptom** cases."
+    },
+    {
+     "t": "code",
+     "lang": "text",
+     "code": "Job used to take 8 min.\nNow takes 42 min.",
+     "caption": "Example case"
+    },
+    {
+     "t": "callout",
+     "kind": "warn",
+     "title": "Not: \"use a bigger cluster\"",
+     "text": "**Goal:** diagnose slowdowns using **evidence** instead of blindly scaling compute."
+    },
+    {
+     "t": "diagram",
+     "text": "Query slow\n   ↓\nSpark UI\n   ↓\nFind slow stage\n   ↓\nFind slow tasks\n   ↓\nCompare task distribution\n   ↓\nSkew? Shuffle? Spill? I/O?\nJoin? GC? Small files?",
+     "caption": "Investigation process"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Spark UI metric",
+      "What it tells you"
+     ],
+     "rows": [
+      [
+       "Jobs / Stages / Tasks",
+       "Hierarchy: action → stages split at shuffles → one task per partition."
+      ],
+      [
+       "Input size",
+       "Bytes read from the source by the stage/task."
+      ],
+      [
+       "Output size",
+       "Bytes written to the sink."
+      ],
+      [
+       "Shuffle write",
+       "Bytes written by map-side tasks for the next stage."
+      ],
+      [
+       "Shuffle read",
+       "Bytes fetched by reduce-side tasks — uneven = skew."
+      ],
+      [
+       "Spill (memory)",
+       "Size (in memory, deserialized) of data that had to be spilled."
+      ],
+      [
+       "Spill (disk)",
+       "Size of that spilled data on disk (serialized) — any spill = memory pressure."
+      ],
+      [
+       "GC time",
+       "Time the JVM paused for garbage collection — high → memory pressure."
+      ],
+      [
+       "Task duration",
+       "Compare min/median/max — a long tail = skew or stragglers."
+      ],
+      [
+       "Records",
+       "Rows read/written per task — reveals uneven partitions."
+      ]
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Plan operator",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "`Exchange`",
+       "A shuffle (or broadcast) — data redistributed; stage boundary."
+      ],
+      [
+       "`BroadcastHashJoin`",
+       "Small side copied to every executor; big side not shuffled."
+      ],
+      [
+       "`SortMergeJoin`",
+       "Both sides shuffled by key, sorted, then merged — the large-large join."
+      ],
+      [
+       "`HashAggregate`",
+       "Aggregation with a hash map (often partial → Exchange → final)."
+      ],
+      [
+       "`Scan`",
+       "Reading the source; shows pushed filters / files read."
+      ],
+      [
+       "`Filter`",
+       "Row predicate applied to the data."
+      ],
+      [
+       "Whole-stage codegen",
+       "`WholeStageCodegen` / `*(n)`: fuses several operators into one generated function."
+      ],
+      [
+       "Photon operators",
+       "`Photon...` nodes run in the Photon engine; non-Photon nodes show fallbacks."
+      ]
+     ]
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Data skew",
+       "def": "A few keys/partitions hold far more data than others → a few very slow tasks."
+      },
+      {
+       "term": "Salting",
+       "def": "Append a random suffix to a hot key to spread it across many partitions."
+      },
+      {
+       "term": "Broadcasting",
+       "def": "Send a small table to all executors to avoid shuffling the big one."
+      },
+      {
+       "term": "AQE",
+       "def": "Adaptive Query Execution: re-optimizes at runtime — coalesces shuffle partitions, switches join strategy, splits skewed partitions."
+      },
+      {
+       "term": "Partition tuning",
+       "def": "Choose a sensible number/size of partitions (e.g. `spark.sql.shuffle.partitions`)."
+      },
+      {
+       "term": "`repartition` vs `coalesce`",
+       "def": "repartition = full shuffle to N partitions (up or down); coalesce = merge partitions without full shuffle (down only)."
+      },
+      {
+       "term": "Small file problem / file compaction",
+       "def": "Many tiny files slow reads; compaction (`OPTIMIZE`) merges them."
+      },
+      {
+       "term": "Data skipping / Liquid Clustering",
+       "def": "Skip irrelevant files via stats; cluster data so skipping works well."
+      },
+      {
+       "term": "Driver OOM",
+       "def": "Driver runs out of memory — e.g. `collect()`/`toPandas()` of big data, huge broadcast, too much metadata."
+      },
+      {
+       "term": "Executor OOM",
+       "def": "An executor runs out of memory — e.g. a giant skewed partition, oversized partitions."
+      },
+      {
+       "term": "GC pressure / spill",
+       "def": "Memory too tight: lots of GC time, data spilled to disk."
+      }
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Bound by",
+      "Typical evidence"
+     ],
+     "rows": [
+      [
+       "CPU-bound",
+       "Cores busy, little spill/IO wait; heavy UDFs, decompression, complex expressions."
+      ],
+      [
+       "Memory-bound",
+       "Spill, high GC time, OOMs."
+      ],
+      [
+       "I/O-bound",
+       "Time dominated by reading/writing storage or shuffle fetch; many small files."
+      ]
+     ]
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself when a job got slower",
+     "questions": [
+      "What changed: data volume, code, cluster, runtime?",
+      "Which stage got slow?",
+      "Inside that stage, are ALL tasks slow or only a few?",
+      "Is shuffle read/write much bigger than before?",
+      "Is there spill or high GC time?",
+      "Is the join strategy what I expected (broadcast vs sort-merge)?",
+      "Did the number/size of input files explode (small files)?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-s14",
+   "title": "Phase 10 — Production Engineering, CLI & CI/CD (Preview)",
+   "hook": "Not a developer who only knows how to press ‘Run All’.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Goal:** move beyond notebooks and operate Databricks as a **production software platform**."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Databricks CLI",
+       "def": "Command-line tool (`databricks ...`) to manage workspace objects, jobs, bundles, etc."
+      },
+      {
+       "term": "Git integration / Git folders",
+       "def": "Clone a Git repo into the workspace and commit/pull/branch from there (formerly *Repos*)."
+      },
+      {
+       "term": "Workspace files",
+       "def": "Non-notebook files (`.py`, `.yml`, `.json`) stored in the workspace."
+      },
+      {
+       "term": "Python modules",
+       "def": "Reusable `.py` code imported by notebooks/jobs instead of copy-paste."
+      },
+      {
+       "term": "Python wheels",
+       "def": "Packaged library (`.whl`) installed on compute."
+      },
+      {
+       "term": "Dependency management",
+       "def": "Pinning libraries per cluster/job/serverless environment for reproducible runs."
+      },
+      {
+       "term": "Databricks Connect",
+       "def": "Run Spark code from your local IDE against remote Databricks compute."
+      },
+      {
+       "term": "IDE workflows",
+       "def": "Develop locally (e.g. VS Code), test, then deploy."
+      }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Declarative Automation Bundles",
+     "text": "Per the source, the **current name of the former Databricks Asset Bundles (DABs)**. You describe jobs, pipelines, source files, deployment targets and other resources as **version-controlled configuration**, then validate and deploy via CI/CD."
+    },
+    {
+     "t": "code",
+     "lang": "yaml",
+     "code": "bundle:\n  name: orders_project\n\nresources:\n  jobs:\n    orders_job:          # resource KEY\n      name: orders-job   # display name\n      tasks:\n        ...\n\ntargets:\n  dev:\n    mode: development\n  prod:\n    mode: production",
+     "caption": "databricks.yml — the primary bundle file (YAML)"
+    },
+    {
+     "t": "code",
+     "lang": "bash",
+     "code": "databricks bundle validate\ndatabricks bundle deploy -t dev\ndatabricks bundle run orders_job -t dev",
+     "caption": "Bundle commands"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Command",
+      "Does"
+     ],
+     "rows": [
+      [
+       "`bundle validate`",
+       "Checks the bundle configuration for errors before deploying."
+      ],
+      [
+       "`bundle deploy -t dev`",
+       "Uploads files and creates/updates resources in the `dev` target."
+      ],
+      [
+       "`bundle run orders_job -t dev`",
+       "Runs the deployed resource identified by its **key** in the `dev` target."
+      ]
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Key, not display name",
+     "text": "`bundle run` takes the resource **key** (`orders_job`), not the job's display `name` (`orders-job`)."
+    },
+    {
+     "t": "callout",
+     "kind": "tip",
+     "title": "Target modes",
+     "text": "`mode: development` deploys per-user copies (names prefixed with `[dev user]`, schedules paused). `mode: production` is for the real deployment, ideally run as a **service principal**."
+    },
+    {
+     "t": "callout",
+     "kind": "pitfall",
+     "title": "Personal identity in CI/CD",
+     "text": "Deploying or running production with a person's token is risky and breaks when people leave or change roles. Use a **service principal** as the deployment identity."
+    },
+    {
+     "t": "terms",
+     "items": [
+      {
+       "term": "Git branching",
+       "def": "Feature branches → PR → main; deployments come from tracked commits."
+      },
+      {
+       "term": "Validation / testing",
+       "def": "Run `bundle validate` + unit/integration tests in CI before deploy."
+      },
+      {
+       "term": "Environment-specific configuration",
+       "def": "Per-target settings (catalog, cluster size, schedule) in the bundle."
+      },
+      {
+       "term": "Dev / test / prod",
+       "def": "Separate environments; promote the same code through them."
+      },
+      {
+       "term": "Service principals / deployment identities",
+       "def": "Prod deploys and runs under a non-human identity, not a person's account."
+      },
+      {
+       "term": "Reproducible deployments / rollbacks",
+       "def": "Same commit → same deployment; roll back by redeploying a previous version."
+      },
+      {
+       "term": "Secrets / configuration",
+       "def": "Credentials kept in secret scopes, never hard-coded."
+      },
+      {
+       "term": "Production release workflow",
+       "def": "Branch → CI validate/test → deploy to test → approve → deploy to prod."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-s15",
+   "title": "Assessment Strategy: Certification vs Engineering Questions",
+   "hook": "Two kinds of questions — the second kind is what makes you genuinely good.",
+   "blocks": [
+    {
+     "t": "compare",
+     "items": [
+      {
+       "title": "Certification-style",
+       "points": [
+        "Pick the right product/feature",
+        "Short scenario → one correct choice",
+        "e.g. which compute for a scheduled job?"
+       ]
+      },
+      {
+       "title": "Engineering-style",
+       "points": [
+        "Read symptoms and numbers",
+        "Form a hypothesis, prove it with evidence",
+        "Propose fixes"
+       ]
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Certification example:** *You need to run a scheduled PySpark workload without managing infrastructure. Which compute should you use?* → **Serverless Jobs** (serverless job compute)."
+    },
+    {
+     "t": "p",
+     "text": "**Engineering example:** *A 2 TB ETL job went from 12 to 45 minutes. One stage has 1,000 tasks; 997 finish in 20 seconds, 3 run for 15 minutes while spilling 80 GB each.*"
+    },
+    {
+     "t": "diagram",
+     "text": "task duration\n 15 min │                     ███ ← 3 tasks\n        │                     ███   80 GB spill\n        │                     ███   each\n 20 s   │████████████████████ ███\n        └───────────────────────────\n          997 tasks            3",
+     "caption": "Long-tail task distribution = skew signature"
+    },
+    {
+     "t": "callout",
+     "kind": "key",
+     "title": "Expected reasoning",
+     "text": "**Likely data skew.** Then know *why*, *how to prove it in the Spark UI* and *which fixes exist*."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Spark UI",
+      "Task-duration distribution",
+      "Shuffle read/write",
+      "Spill",
+      "Partition sizes",
+      "Join/grouping keys",
+      "Physical plan"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "callout",
+     "kind": "interview",
+     "title": "How to answer",
+     "text": "Name the hypothesis (skew), show the evidence (median ≈ 20 s vs max ≈ 15 min, shuffle read and spill concentrated in 3 tasks), find the hot key (e.g. one huge customer or NULLs), then fixes: AQE skew-join handling, salting, broadcasting the small side, handling hot keys/NULLs separately."
+    },
+    {
+     "t": "ask",
+     "title": "Ask yourself on a straggler stage",
+     "questions": [
+      "Are only a few tasks slow while most are fast?",
+      "Do those tasks read far more shuffle data/records?",
+      "Are they the ones spilling?",
+      "Which join or groupBy key feeds that stage?",
+      "Is one key value (or NULL) dominating?",
+      "Does the plan show a SortMergeJoin that could be broadcast?"
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "exam",
+     "title": "More hardware ≠ fix for skew",
+     "text": "Adding workers doesn't help: the 3 huge partitions are still processed by 3 single tasks."
+    }
+   ]
+  }
+ ],
+ "debug": [
+  {
+   "id": "ch10-d01",
+   "title": "How to learn ANY new Databricks feature (the 17 questions)",
+   "section": "ch10-s03",
+   "symptom": "You meet a new feature (Auto Loader, AUTO CDC, Bundles…) and the information feels scattered: you know names and slides but couldn't build or debug it.",
+   "askYourself": [
+    "What problem are we solving?",
+    "How would I solve it without Databricks?",
+    "Which Databricks component solves it?",
+    "How does it work internally?",
+    "Where does it sit in the architecture?",
+    "How do I use it in the UI?",
+    "What is the real syntax?",
+    "What does a production example look like?",
+    "What alternatives exist?",
+    "When should I NOT use it?",
+    "What are the best practices?",
+    "What are the common mistakes?",
+    "What is the debugging workflow?",
+    "What are the certification traps?",
+    "Have I done the exercises?",
+    "Have I checked the full solutions?",
+    "How do I extend the mini-project with it?"
+   ],
+   "steps": [
+    {
+     "do": "WHY (1–3): write one sentence for the problem and sketch the manual, non-Databricks solution.",
+     "why": "Anchors the feature to a real need and shows what it automates."
+    },
+    {
+     "do": "HOW (4–5): draw where it runs (control plane, compute, storage, catalog) and its internal state.",
+     "why": "Internals explain behavior and failure modes."
+    },
+    {
+     "do": "USE (6–8): find it in the UI, write the real syntax, read a production example.",
+     "why": "The tutor insists most on 6–8: no lesson without a real config or source file."
+    },
+    {
+     "do": "JUDGE (9–12): list alternatives, when NOT to use, best practices, common mistakes.",
+     "why": "Knowing the boundary of a tool is what interviews test."
+    },
+    {
+     "do": "BREAK (13–14): break it on purpose, write the ordered debug checklist, note exam traps.",
+     "why": "Debugging is top priority for real work."
+    },
+    {
+     "do": "PROVE (15–17): do exercises, compare with full solutions, add it to the e-commerce lakehouse.",
+     "why": "The growing project ties every feature into one system."
+    }
+   ],
+   "rootCauses": [
+    "Learning from scattered slides",
+    "Learning names without real syntax/config",
+    "Skipping ‘when NOT to use’ and debugging"
+   ],
+   "fix": "Walk the 17 questions in order, with special weight on 6–8 (UI, syntax, production example) and 13 (debugging).",
+   "mnemonic": "WHY → HOW → USE → JUDGE → BREAK → PROVE"
+  },
+  {
+   "id": "ch10-d02",
+   "title": "PERMISSION_DENIED on a Unity Catalog object",
+   "section": "ch10-s07",
+   "symptom": "A query or job fails with `PERMISSION_DENIED` (e.g. reading `prod.silver.orders`), often while the same code works for you interactively.",
+   "askYourself": [
+    "Who am I right now?",
+    "Which principal is the job/pipeline actually running as?",
+    "Does that principal have USE CATALOG on the catalog?",
+    "Does it have USE SCHEMA on the schema?",
+    "Does it have SELECT (read) or MODIFY (write) on the object?",
+    "Does the operation need ownership (ALTER, DROP, grant)?",
+    "For path-based/external data: is the storage credential / external location granted?"
+   ],
+   "steps": [
+    {
+     "do": "Check your own identity.",
+     "why": "Confirms who you are testing as.",
+     "code": "SELECT current_user();"
+    },
+    {
+     "do": "Check the job's run-as identity in the job settings.",
+     "why": "Jobs may run as the owner or a service principal, not you."
+    },
+    {
+     "do": "Show grants top-down: catalog → schema → table.",
+     "why": "SELECT alone is useless without USE CATALOG + USE SCHEMA.",
+     "code": "SHOW GRANTS ON CATALOG prod;\nSHOW GRANTS ON SCHEMA prod.silver;\nSHOW GRANTS ON TABLE prod.silver.orders;"
+    },
+    {
+     "do": "Check ownership if the operation is ALTER/DROP.",
+     "why": "Some operations require being the owner."
+    },
+    {
+     "do": "For external paths check the external location and storage credential grants.",
+     "why": "Data access to cloud paths goes through them."
+    },
+    {
+     "do": "Grant the minimal missing privilege.",
+     "why": "Least privilege.",
+     "code": "GRANT USE SCHEMA ON SCHEMA prod.silver TO `sp-etl`;"
+    }
+   ],
+   "rootCauses": [
+    "Job runs as a different principal",
+    "Missing USE CATALOG or USE SCHEMA",
+    "Missing SELECT/MODIFY",
+    "Operation requires ownership",
+    "Missing grant on external location/storage credential"
+   ],
+   "fix": "Identify the real principal, walk USE CATALOG → USE SCHEMA → SELECT/MODIFY → ownership → storage credential, and grant only the missing privilege (preferably to a group or service principal).",
+   "mnemonic": "WHO → WHICH → CATALOG → SCHEMA → OBJECT → OWNER → STORAGE"
+  },
+  {
+   "id": "ch10-d03",
+   "title": "A Lakeflow Job task failed",
+   "section": "ch10-s11",
+   "symptom": "A job run is red: one task failed (e.g. `gold`), downstream tasks were skipped.",
+   "askYourself": [
+    "Did an upstream task fail or produce bad output?",
+    "Did the compute start correctly?",
+    "Is it a runtime (DBR) issue?",
+    "Is a library missing or conflicting?",
+    "Does the run-as identity have the permissions?",
+    "Was a parameter missing or wrong?",
+    "Is the input data unexpected?",
+    "Is it a Spark execution problem (OOM, skew, timeout)?"
+   ],
+   "steps": [
+    {
+     "do": "Open the failed run and the task's error output.",
+     "why": "The error class usually points to one bucket."
+    },
+    {
+     "do": "Check upstream task runs and their outputs.",
+     "why": "Many failures are just propagated bad inputs."
+    },
+    {
+     "do": "Check cluster events / compute start, runtime version and libraries.",
+     "why": "Infra and dependency issues are cheap to rule out."
+    },
+    {
+     "do": "Check the run-as principal and grants.",
+     "why": "Jobs often run as a different identity."
+    },
+    {
+     "do": "Check resolved parameters and input data.",
+     "why": "Wrong date parameter or schema drift breaks code."
+    },
+    {
+     "do": "Only then open the Spark UI for execution issues.",
+     "why": "Deepest, most expensive check last."
+    }
+   ],
+   "rootCauses": [
+    "Upstream failure",
+    "Compute start failure",
+    "Runtime incompatibility",
+    "Missing library",
+    "Permissions",
+    "Bad parameter",
+    "Unexpected data",
+    "Spark execution (OOM/skew)"
+   ],
+   "fix": "Walk the model in order; fix the specific bucket (e.g. declare the library in the job environment, grant the principal, correct the parameter) and repair-run the failed tasks.",
+   "mnemonic": "Up-Comp-Run-Lib · Perm-Param-Data-Spark"
+  },
+  {
+   "id": "ch10-d04",
+   "title": "Job got slow: 8 min → 42 min",
+   "section": "ch10-s13",
+   "symptom": "A job that used to take 8 minutes now takes 42; nothing obviously failed.",
+   "askYourself": [
+    "What changed: data volume, code, cluster, runtime?",
+    "Which stage became slow?",
+    "Are all tasks in that stage slow, or only a few?",
+    "Did shuffle read/write grow?",
+    "Is there spill (memory/disk) or high GC time?",
+    "Did the join strategy change (BroadcastHashJoin → SortMergeJoin)?",
+    "Is it I/O: many small files or a huge scan?"
+   ],
+   "steps": [
+    {
+     "do": "Open the Spark UI and sort stages by duration.",
+     "why": "Find where the time went."
+    },
+    {
+     "do": "Inside the slow stage, read summary metrics (min/median/max).",
+     "why": "Uniform vs long-tail distribution separates volume/plan issues from skew."
+    },
+    {
+     "do": "Check shuffle read/write, spill and GC time.",
+     "why": "Reveals shuffle growth and memory pressure."
+    },
+    {
+     "do": "Read the physical plan (Exchange, join type, Scan).",
+     "why": "Plan changes explain sudden slowdowns."
+    },
+    {
+     "do": "Check input file counts/sizes.",
+     "why": "Small files make jobs I/O-bound."
+    },
+    {
+     "do": "Apply the targeted fix (AQE, broadcast, salting, compaction, partition tuning).",
+     "why": "Evidence-driven instead of blind scaling."
+    }
+   ],
+   "rootCauses": [
+    "Data skew",
+    "Shuffle growth",
+    "Spill / GC pressure",
+    "Join strategy changed",
+    "Small files / I/O",
+    "Too few or too many partitions"
+   ],
+   "fix": "Locate stage → tasks → distribution, confirm the hypothesis with metrics and the plan, and fix the cause rather than adding hardware.",
+   "mnemonic": "Stage → Tasks → Spread → (Skew Shuffle Spill IO Join GC Files)"
+  },
+  {
+   "id": "ch10-d05",
+   "title": "Spark UI checklist: a few straggler tasks (skew)",
+   "section": "ch10-s15",
+   "symptom": "1,000 tasks: 997 finish in ~20 s, 3 run for 15 minutes and spill 80 GB each; the job went from 12 to 45 minutes.",
+   "askYourself": [
+    "Are only a few tasks slow while most are fast?",
+    "Do the slow tasks read far more shuffle data and records?",
+    "Are the slow tasks the ones spilling?",
+    "Is GC time high only on those tasks?",
+    "Which join or grouping key feeds this stage?",
+    "Does one key value (or NULL) dominate?",
+    "Does the physical plan show a SortMergeJoin that could be a broadcast?"
+   ],
+   "steps": [
+    {
+     "do": "Stage page → Summary metrics: compare median vs max duration.",
+     "why": "Max ≫ median = long tail."
+    },
+    {
+     "do": "Compare shuffle read size / records per task.",
+     "why": "Uneven shuffle read proves uneven partitions."
+    },
+    {
+     "do": "Check spill (memory/disk) and GC time per task.",
+     "why": "Huge partitions don't fit in execution memory."
+    },
+    {
+     "do": "Count rows per key on the join/group key.",
+     "why": "Finds the hot key.",
+     "code": "df.groupBy(\"customer_id\").count().orderBy(F.desc(\"count\")).show(10)"
+    },
+    {
+     "do": "Read the physical plan for the join strategy.",
+     "why": "Broadcasting the small side removes the shuffle of the big side."
+    },
+    {
+     "do": "Fix: AQE skew join, salting, broadcast, or separate hot-key/NULL handling.",
+     "why": "Redistributes the work."
+    }
+   ],
+   "rootCauses": [
+    "Hot key (one customer/product dominating)",
+    "Many NULL join keys",
+    "Shuffle join where broadcast is possible"
+   ],
+   "fix": "Prove skew from task-duration distribution, shuffle read and spill, find the hot key, then use AQE skew handling, salting or broadcasting — not more workers.",
+   "mnemonic": "Tail · Shuffle · Spill · Key · Plan"
+  },
+  {
+   "id": "ch10-d06",
+   "title": "Ingestion broke: missing, duplicate, drifted or malformed data",
+   "section": "ch10-s08",
+   "symptom": "Bronze has missing rows, every row twice, new columns not appearing, or garbage values after an Auto Loader / COPY INTO load.",
+   "askYourself": [
+    "Which symptom is it: missing, duplicate, schema drift or malformed rows?",
+    "Did the files really land in the path the stream reads?",
+    "Was the checkpoint deleted, moved, or shared between two streams?",
+    "Did the source schema change (new/renamed/retyped columns)?",
+    "Is anything sitting in `_rescued_data`?",
+    "Am I using an explicit schema or inference/hints?"
+   ],
+   "steps": [
+    {
+     "do": "Classify the symptom and find affected files/rows.",
+     "why": "Each symptom has a different root cause."
+    },
+    {
+     "do": "List the source path and compare with what was ingested.",
+     "why": "Missing data is often files in the wrong place."
+    },
+    {
+     "do": "Verify checkpointLocation is unchanged and unique per stream.",
+     "why": "A new/shared checkpoint causes re-ingestion → duplicates."
+    },
+    {
+     "do": "Inspect the schema in schemaLocation and the stream's schema-evolution behavior.",
+     "why": "New columns stop the stream until restart (default mode)."
+    },
+    {
+     "do": "Query rows where `_rescued_data IS NOT NULL`.",
+     "why": "Shows values that didn't fit the schema."
+    }
+   ],
+   "rootCauses": [
+    "Files in the wrong path",
+    "Checkpoint deleted/changed/shared",
+    "Schema drift",
+    "Malformed rows / type mismatches"
+   ],
+   "fix": "Keep one stable checkpoint per stream, use schemaLocation + hints (or explicit schema), monitor `_rescued_data`, and repair data with dedup or RESTORE.",
+   "mnemonic": "Path · Checkpoint · Schema · Rescued"
+  },
+  {
+   "id": "ch10-d07",
+   "title": "Duplicates in a streaming target after restart",
+   "section": "ch10-s09",
+   "symptom": "After a restart or failure, a streaming Delta table contains duplicate events.",
+   "askYourself": [
+    "Did the checkpoint location change or get deleted?",
+    "Is another query writing to the same target?",
+    "Is my foreachBatch logic idempotent?",
+    "Did the source itself deliver duplicates?",
+    "Do I need dedup with a watermark?"
+   ],
+   "steps": [
+    {
+     "do": "Compare the checkpointLocation before and after the restart.",
+     "why": "A new checkpoint restarts from the beginning."
+    },
+    {
+     "do": "Check DESCRIBE HISTORY on the target for unexpected writers.",
+     "why": "Two queries with different checkpoints double-write.",
+     "code": "DESCRIBE HISTORY bronze.events;"
+    },
+    {
+     "do": "Review foreachBatch code for plain INSERTs.",
+     "why": "Retried batches re-run non-idempotent writes; use MERGE on a key."
+    },
+    {
+     "do": "Check the source for duplicates and add dedup (with watermark) if needed.",
+     "why": "Exactly-once can't remove duplicates already in the source."
+    }
+   ],
+   "rootCauses": [
+    "Checkpoint changed/deleted",
+    "Multiple writers",
+    "Non-idempotent foreachBatch",
+    "Duplicates in source"
+   ],
+   "fix": "Keep one stable checkpoint per query, make custom writes idempotent (MERGE), dedup with a watermark when the source can duplicate, and clean up with dedup/RESTORE.",
+   "mnemonic": "Checkpoint · Writers · Idempotent · Source"
+  }
+ ],
+ "pitfalls": [
+  {
+   "title": "Following the menu instead of dependencies",
+   "text": "Learning in workspace-menu order presents concepts before their prerequisites.",
+   "fix": "Follow dependency order: Compute → Delta → UC → Ingestion → Streaming → Pipelines → Jobs → SQL → Performance → CI/CD."
+  },
+  {
+   "title": "Names without syntax",
+   "text": "Two lessons on a tool without seeing a real config or source file leave you unable to use it.",
+   "fix": "Always cover lesson questions 6–8: UI, real syntax, production example."
+  },
+  {
+   "title": "Counting driver cores as task slots",
+   "text": "Only executor cores on workers run tasks; adding the driver's cores overestimates parallelism.",
+   "fix": "Task slots ≈ workers × cores per worker."
+  },
+  {
+   "title": "Too few partitions",
+   "text": "4 partitions on 32 cores leave 28 cores idle.",
+   "fix": "Have at least as many (similar-size) partitions as task slots; usually several times more."
+  },
+  {
+   "title": "insertInto is positional",
+   "text": "`insertInto` maps columns by position; a different column order silently corrupts data.",
+   "fix": "Select columns in table order or use `saveAsTable`/`writeTo`, which resolve by name."
+  },
+  {
+   "title": "OPTIMIZE vs VACUUM confusion",
+   "text": "OPTIMIZE re-lays out active files; VACUUM deletes unreferenced files physically.",
+   "fix": "Compaction → OPTIMIZE; storage cleanup → VACUUM (mind the retention)."
+  },
+  {
+   "title": "SELECT alone is not enough",
+   "text": "Without USE CATALOG and USE SCHEMA the table is unreachable even with SELECT.",
+   "fix": "Grant USE CATALOG + USE SCHEMA + SELECT (or inherit from above)."
+  },
+  {
+   "title": "‘It works for me’ ≠ the job has access",
+   "text": "Jobs can run as the owner or a service principal with different grants.",
+   "fix": "Always check the job's run-as principal first."
+  },
+  {
+   "title": "Changing/deleting a checkpoint",
+   "text": "Auto Loader and streams lose their memory of processed data → full re-ingestion and duplicates.",
+   "fix": "Treat checkpoint paths as fixed, one per stream."
+  },
+  {
+   "title": "Batch Auto Loader read",
+   "text": "`spark.read.format(\"cloudFiles\")` is wrong: Auto Loader is a streaming source.",
+   "fix": "Use `spark.readStream.format(\"cloudFiles\")`."
+  },
+  {
+   "title": "Believing exactly-once means no duplicates",
+   "text": "Duplicates still arise from new checkpoints, multiple writers, non-idempotent foreachBatch or a duplicating source.",
+   "fix": "Stable checkpoints, idempotent writes (MERGE), dedup with watermark."
+  },
+  {
+   "title": "Streaming table without STREAM",
+   "text": "`FROM read_files(...)` without STREAM is a batch query and can't define a streaming table.",
+   "fix": "Write `FROM STREAM read_files(...)` / `FROM STREAM(table)`."
+  },
+  {
+   "title": "Legacy names confusion",
+   "text": "DLT, Lakeflow Declarative Pipelines and Spark Declarative Pipelines are the same product line; APPLY CHANGES is now AUTO CDC.",
+   "fix": "Learn the current names, recognize the old ones in tutorials."
+  },
+  {
+   "title": "Production jobs on all-purpose compute",
+   "text": "Interactive clusters are pricier and less isolated, and hide missing job dependencies.",
+   "fix": "Use serverless job compute or job clusters; declare libraries in the job."
+  },
+  {
+   "title": "Wrong warehouse knob",
+   "text": "Bigger size doesn't fix queueing; more clusters doesn't fix one heavy query.",
+   "fix": "Queueing → max clusters; one slow query → query profile, size, layout."
+  },
+  {
+   "title": "Scaling blindly",
+   "text": "Adding workers doesn't fix skew: a huge partition is still one task.",
+   "fix": "Spark UI → slow stage → task distribution → targeted fix (AQE, salting, broadcast)."
+  },
+  {
+   "title": "bundle run with the display name",
+   "text": "`databricks bundle run orders-job` uses the job's name instead of its resource key.",
+   "fix": "`databricks bundle run orders_job -t dev`."
+  },
+  {
+   "title": "Deploying prod with a personal identity",
+   "text": "Personal credentials in CI/CD are risky and break when people leave.",
+   "fix": "Deploy and run production as a service principal."
+  }
+ ],
+ "flashcards": [
+  {
+   "q": "What does every phase of the new course combine?",
+   "a": "Theory/architecture/best practices + real UI, SQL, PySpark, CLI/YAML syntax, debugging and exercises.",
+   "section": "ch10-s01"
+  },
+  {
+   "q": "What does the current DE Associate exam cover besides transformations?",
+   "a": "Architecture, compute, Delta/UC, ingestion, orchestration, Spark troubleshooting, deployment concepts.",
+   "section": "ch10-s01"
+  },
+  {
+   "q": "Why not learn in menu order?",
+   "a": "It's a product tour; learning needs dependency order — each layer needs the previous one.",
+   "section": "ch10-s02"
+  },
+  {
+   "q": "The 10 phases in order?",
+   "a": "Compute → Delta → Unity Catalog → Ingestion → Structured Streaming → Declarative Pipelines → Jobs → Databricks SQL → Performance & Debugging → Production CI/CD.",
+   "section": "ch10-s02"
+  },
+  {
+   "q": "Why compute before Delta?",
+   "a": "Every Delta operation runs as Spark tasks on compute; cores, partitions, shuffle and memory explain Delta's cost and failures.",
+   "section": "ch10-s02"
+  },
+  {
+   "q": "Lesson blueprint in 6 blocks?",
+   "a": "WHY (1–3) → HOW (4–5) → USE (6–8) → JUDGE (9–12) → BREAK (13–14) → PROVE (15–17).",
+   "section": "ch10-s03"
+  },
+  {
+   "q": "Which lesson questions get special weight?",
+   "a": "6–8: UI, real syntax, production example.",
+   "section": "ch10-s03"
+  },
+  {
+   "q": "Questions 14–17 of the blueprint?",
+   "a": "Certification traps, Exercises, Full solutions, Mini-project extension.",
+   "section": "ch10-s03"
+  },
+  {
+   "q": "The four interfaces learned in parallel?",
+   "a": "SQL, PySpark, Platform/config (compute, Jobs, Pipelines, Bundles YAML), CLI/external dev (databricks …, Git, Databricks Connect).",
+   "section": "ch10-s04"
+  },
+  {
+   "q": "The project's four sources?",
+   "a": "customers CDC, orders JSON, products CSV, events stream.",
+   "section": "ch10-s04"
+  },
+  {
+   "q": "The project's gold tables?",
+   "a": "daily_revenue, customer_360, product_performance, conversion_metrics.",
+   "section": "ch10-s04"
+  },
+  {
+   "q": "Official compute categories?",
+   "a": "Serverless, classic (all-purpose, jobs, Lakeflow pipelines), SQL warehouses.",
+   "section": "ch10-s05"
+  },
+  {
+   "q": "Task slots with 4 workers × 8 cores?",
+   "a": "32 (driver cores don't count).",
+   "section": "ch10-s05"
+  },
+  {
+   "q": "Workers 8 cores, min 2 / max 10 → slots?",
+   "a": "16 at minimum, 80 at maximum.",
+   "section": "ch10-s05"
+  },
+  {
+   "q": "4 partitions on 32 slots?",
+   "a": "Only 4 tasks; 28 cores idle.",
+   "section": "ch10-s05"
+  },
+  {
+   "q": "What does serverless abstract away?",
+   "a": "VM types, worker counts, spot/on-demand, pools, runtime image/startup; you keep code + environment dependencies.",
+   "section": "ch10-s05"
+  },
+  {
+   "q": "DESCRIBE DETAIL vs DESCRIBE HISTORY?",
+   "a": "DETAIL = current table metadata (format, location, numFiles, size); HISTORY = per-version operations/metrics.",
+   "section": "ch10-s06"
+  },
+  {
+   "q": "insertInto vs saveAsTable column matching?",
+   "a": "insertInto = by position; saveAsTable (append) / writeTo = by name.",
+   "section": "ch10-s06"
+  },
+  {
+   "q": "Dynamic overwrite?",
+   "a": "Overwrite only the partitions present in the incoming data.",
+   "section": "ch10-s06"
+  },
+  {
+   "q": "Type widening?",
+   "a": "Change a column to a wider type (INT → BIGINT) without rewriting data files.",
+   "section": "ch10-s06"
+  },
+  {
+   "q": "Predictive optimization?",
+   "a": "Automatic OPTIMIZE/VACUUM/ANALYZE for UC managed tables.",
+   "section": "ch10-s06"
+  },
+  {
+   "q": "UC hierarchy?",
+   "a": "Metastore → catalog → schema → tables/views/volumes/functions/models.",
+   "section": "ch10-s07"
+  },
+  {
+   "q": "Storage credential vs external location?",
+   "a": "Credential = cloud IAM identity; external location = cloud path + credential.",
+   "section": "ch10-s07"
+  },
+  {
+   "q": "Privileges to read prod.silver.orders?",
+   "a": "USE CATALOG prod + USE SCHEMA prod.silver + SELECT on the table.",
+   "section": "ch10-s07"
+  },
+  {
+   "q": "PERMISSION_DENIED chain?",
+   "a": "Who am I → job principal → USE CATALOG → USE SCHEMA → SELECT/MODIFY → ownership → storage credential.",
+   "section": "ch10-s07"
+  },
+  {
+   "q": "Row filter vs column mask vs ABAC?",
+   "a": "Filter hides rows; mask hides column values; ABAC applies them via tag-driven policies at scale.",
+   "section": "ch10-s07"
+  },
+  {
+   "q": "Delta Sharing vs Lakehouse Federation?",
+   "a": "Sharing = give your data to others; Federation = query external databases in place.",
+   "section": "ch10-s07"
+  },
+  {
+   "q": "COPY INTO in one line?",
+   "a": "Idempotent SQL load of files into a Delta table; skips already-loaded files.",
+   "section": "ch10-s08"
+  },
+  {
+   "q": "Auto Loader in one line?",
+   "a": "`spark.readStream.format(\"cloudFiles\")` — checkpointed incremental ingestion of new files.",
+   "section": "ch10-s08"
+  },
+  {
+   "q": "Directory listing vs file notification?",
+   "a": "Listing scans the path (default); notification uses cloud events/queues for huge directories.",
+   "section": "ch10-s08"
+  },
+  {
+   "q": "_rescued_data?",
+   "a": "Column capturing values that don't fit the schema.",
+   "section": "ch10-s08"
+  },
+  {
+   "q": "Three output modes?",
+   "a": "append (new final rows), update (changed rows), complete (whole result).",
+   "section": "ch10-s09"
+  },
+  {
+   "q": "Exactly-once needs?",
+   "a": "Replayable source + checkpoint + idempotent/transactional sink.",
+   "section": "ch10-s09"
+  },
+  {
+   "q": "Pipeline naming history?",
+   "a": "Delta Live Tables → Lakeflow Declarative Pipelines → Spark Declarative Pipelines.",
+   "section": "ch10-s10"
+  },
+  {
+   "q": "Streaming table vs materialized view?",
+   "a": "ST: each input row processed once (append sources, bronze). MV: precomputed query result kept correct (aggregates).",
+   "section": "ch10-s10"
+  },
+  {
+   "q": "Expectation actions?",
+   "a": "Warn/keep (default), ON VIOLATION DROP ROW, ON VIOLATION FAIL UPDATE.",
+   "section": "ch10-s10"
+  },
+  {
+   "q": "AUTO CDC?",
+   "a": "Declarative CDC apply (formerly APPLY CHANGES) supporting SCD1 and SCD2.",
+   "section": "ch10-s10"
+  },
+  {
+   "q": "Four job trigger types?",
+   "a": "Schedule, continuous, file arrival, table update.",
+   "section": "ch10-s11"
+  },
+  {
+   "q": "Task-failed debugging model?",
+   "a": "Upstream → compute → runtime → library → permissions → parameter → data → Spark execution.",
+   "section": "ch10-s11"
+  },
+  {
+   "q": "Warehouse size vs max clusters?",
+   "a": "Size = speed of each query; max clusters = concurrency.",
+   "section": "ch10-s12"
+  },
+  {
+   "q": "Slow-query investigation?",
+   "a": "Spark UI → slow stage → slow tasks → compare distribution → skew/shuffle/spill/IO/join/GC/small files.",
+   "section": "ch10-s13"
+  },
+  {
+   "q": "Exchange in a plan?",
+   "a": "A shuffle/redistribution of data — a stage boundary.",
+   "section": "ch10-s13"
+  },
+  {
+   "q": "repartition vs coalesce?",
+   "a": "repartition = full shuffle, up or down; coalesce = merge without full shuffle, down only.",
+   "section": "ch10-s13"
+  },
+  {
+   "q": "Primary bundle file and the 3 commands?",
+   "a": "databricks.yml; bundle validate, bundle deploy -t dev, bundle run orders_job -t dev.",
+   "section": "ch10-s14"
+  },
+  {
+   "q": "Old name of Declarative Automation Bundles?",
+   "a": "Databricks Asset Bundles (DABs).",
+   "section": "ch10-s14"
+  },
+  {
+   "q": "Scheduled PySpark, no infra management?",
+   "a": "Serverless Jobs (serverless job compute).",
+   "section": "ch10-s15"
+  },
+  {
+   "q": "997 tasks 20 s, 3 tasks 15 min + 80 GB spill?",
+   "a": "Likely data skew — verify via task distribution, shuffle read/write, spill, partition sizes, keys, plan.",
+   "section": "ch10-s15"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ch10-e001",
+   "type": "mcq",
+   "section": "ch10-s01",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "What is the new contract for every phase of the course?",
+   "explain": "Every unit must combine theory/architecture/best practices with real UI, SQL, PySpark, CLI/YAML syntax, debugging and exercises. The tutor explicitly dropped the isolated ‘one concept at a time’ style because it stayed cut off from the real platform.",
+   "options": [
+    "Theory first; syntax only in a final project",
+    "Both theory/best practices AND real UI/SQL/PySpark/CLI syntax, debugging and exercises",
+    "Only certification-style multiple choice drills",
+    "Only hands-on notebooks without architecture"
+   ],
+   "answer": 1,
+   "why": [
+    "Syntax is not postponed — it's in every lesson.",
+    "Correct: both, in every phase.",
+    "Exams are one goal among job and projects.",
+    "Architecture and best practices are mandatory too."
+   ]
+  },
+  {
+   "id": "ch10-e002",
+   "type": "tf",
+   "section": "ch10-s01",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "The current Databricks Data Engineer Associate exam mainly tests DataFrame transformations; deployment and troubleshooting are out of scope.",
+   "explain": "False. The source stresses the exam now covers architecture, compute, Delta/Unity Catalog, ingestion, orchestration, Spark troubleshooting and deployment concepts — not only transformations. That's exactly why the plan covers all of them.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e003",
+   "type": "bucket",
+   "section": "ch10-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Sort these already-covered topics into the two groups of the ‘Already covered’ map.",
+   "explain": "Foundations are engine/data-modeling ideas (Spark execution, partitions, shuffle, CDC, schema evolution, medallion). Databricks fundamentals are platform concepts (control vs compute plane, Photon, pools, SQL warehouses, access). Keeping the split clear tells you whether a question is about Spark itself or about the Databricks platform.",
+   "buckets": [
+    "Foundations",
+    "Databricks fundamentals"
+   ],
+   "items": [
+    {
+     "text": "partitions / shuffle",
+     "bucket": 0
+    },
+    {
+     "text": "CDC",
+     "bucket": 0
+    },
+    {
+     "text": "medallion architecture",
+     "bucket": 0
+    },
+    {
+     "text": "schema evolution",
+     "bucket": 0
+    },
+    {
+     "text": "joins / physical plans",
+     "bucket": 0
+    },
+    {
+     "text": "control vs compute plane",
+     "bucket": 1
+    },
+    {
+     "text": "Photon",
+     "bucket": 1
+    },
+    {
+     "text": "pools",
+     "bucket": 1
+    },
+    {
+     "text": "SQL warehouses",
+     "bucket": 1
+    },
+    {
+     "text": "compute access",
+     "bucket": 1
+    }
+   ]
+  },
+  {
+   "id": "ch10-e004",
+   "type": "match",
+   "section": "ch10-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match each already-covered fundamental to its one-line definition.",
+   "explain": "The control plane is Databricks' managed backend; the compute plane is where data is processed. DBR is the software image, Photon the vectorized engine, and pools are pre-warmed VMs that shorten start-up. These terms reappear in Phase 1 in much more depth.",
+   "pairs": [
+    [
+     "Control plane",
+     "Databricks-managed backend: UI, scheduler, cluster manager"
+    ],
+    [
+     "Compute plane",
+     "Where your data is actually processed"
+    ],
+    [
+     "DBR",
+     "Versioned image: Spark + Delta + libraries + OS"
+    ],
+    [
+     "Photon",
+     "Native vectorized C++ query engine"
+    ],
+    [
+     "Pool",
+     "Pre-warmed idle VMs for faster cluster start"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e005",
+   "type": "odd",
+   "section": "ch10-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which item was NOT already covered before the roadmap started?",
+   "explain": "Row filters/column masks belong to Phase 3 (Unity Catalog governance) and are still ahead. Photon, pools and autoscaling were all part of the Databricks fundamentals already taught.",
+   "options": [
+    "Photon",
+    "Pools",
+    "Row filters and column masks",
+    "Autoscaling"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "ch10-e006",
+   "type": "order",
+   "section": "ch10-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Put the FIRST five phases of the roadmap in dependency order.",
+   "explain": "Compute comes first because everything runs on it; Delta is the storage format; Unity Catalog governs those tables; ingestion loads data into governed tables; streaming generalizes ingestion into continuous processing. Each layer needs the previous one.",
+   "items": [
+    "Compute",
+    "Delta Lake",
+    "Unity Catalog",
+    "Ingestion",
+    "Structured Streaming"
+   ]
+  },
+  {
+   "id": "ch10-e007",
+   "type": "order",
+   "section": "ch10-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Put the LAST five phases of the roadmap in order.",
+   "explain": "Declarative pipelines build on streaming; Jobs orchestrate pipelines and notebooks; Databricks SQL serves the results; performance & debugging needs all prior layers; production CI/CD packages everything for deployment.",
+   "items": [
+    "Declarative Pipelines",
+    "Jobs",
+    "Databricks SQL",
+    "Performance and Debugging",
+    "Production CI/CD"
+   ]
+  },
+  {
+   "id": "ch10-e008",
+   "type": "free",
+   "section": "ch10-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "interview"
+   ],
+   "quick": false,
+   "q": "Explain in your own words why the plan puts **compute before Delta**.",
+   "explain": "A good answer links Delta operations to their execution on compute and to dependency order.",
+   "model": "Every Delta operation — MERGE, OPTIMIZE, a streaming write — is finally executed as Spark tasks on a driver and executors. To understand why a MERGE shuffles, why OPTIMIZE takes time, why a write creates many small files or why something OOMs, I need cores, task slots, partitions, memory and shuffle first. The plan follows dependency order: each layer needs the previous one, and compute is the bottom layer.",
+   "rubric": [
+    "Delta commands run as Spark tasks on compute",
+    "Mentions cores/tasks/partitions/shuffle/memory as prerequisites",
+    "Explains performance/cost of Delta ops depends on compute",
+    "Names dependency order (each layer needs the previous)"
+   ]
+  },
+  {
+   "id": "ch10-e009",
+   "type": "mcq",
+   "section": "ch10-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Why does the plan refuse to follow the workspace menu order (Workspace → Catalog → Compute → Jobs → SQL)?",
+   "explain": "Menu order is good for a product tour, not for learning — it presents concepts before what they depend on. Dependency order lets you explain why things work, not just where buttons are.",
+   "options": [
+    "The menu changes too often",
+    "Menu order is a product tour; learning needs dependency order",
+    "The menu hides Unity Catalog",
+    "The exam follows reverse menu order"
+   ],
+   "answer": 1,
+   "why": [
+    "Not the stated reason.",
+    "Correct — the exact reasoning in the source.",
+    "UC is visible in the menu (Catalog).",
+    "Nothing like this is stated."
+   ]
+  },
+  {
+   "id": "ch10-e010",
+   "type": "tf",
+   "section": "ch10-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "In the roadmap, Jobs (orchestration) comes before Declarative Pipelines.",
+   "explain": "False. Pipelines are Phase 6 and Jobs are Phase 7: you first learn to build pipelines, then how to orchestrate them (and notebooks, SQL…) in production workflows.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e011",
+   "type": "match",
+   "section": "ch10-s02",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the phase number to its topic.",
+   "explain": "1 Compute, 2 Delta, 3 Unity Catalog, 4 Ingestion, 5 Streaming, 6 Declarative Pipelines, 7 Jobs, 8 Databricks SQL, 9 Performance & Debugging, 10 Production/CI-CD. Knowing the numbers helps you navigate the plan file.",
+   "pairs": [
+    [
+     "Phase 3",
+     "Unity Catalog Mastery"
+    ],
+    [
+     "Phase 4",
+     "Data Ingestion"
+    ],
+    [
+     "Phase 6",
+     "Lakeflow Spark Declarative Pipelines"
+    ],
+    [
+     "Phase 8",
+     "Databricks SQL"
+    ],
+    [
+     "Phase 9",
+     "Performance and Debugging"
+    ],
+    [
+     "Phase 10",
+     "Production Engineering, CLI, and CI/CD"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e012",
+   "type": "cloze",
+   "section": "ch10-s02",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Complete the principle behind the learning order.",
+   "explain": "The curriculum follows dependency order rather than the Databricks menu layout, because each next layer needs the previous one. The menu order would be a product tour.",
+   "text": "The curriculum follows [[dependency]] order rather than the Databricks [[menu]] layout: each next layer needs the [[previous]] one. The first phase is [[Compute]].",
+   "bank": [
+    "alphabetical",
+    "exam",
+    "next",
+    "Delta"
+   ]
+  },
+  {
+   "id": "ch10-e013",
+   "type": "order",
+   "section": "ch10-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Order the first 8 questions of the standard lesson structure.",
+   "explain": "The route goes from WHY (problem, without Databricks, which component) to HOW (internals, architecture) to USE (UI, syntax, production example). Starting from the problem keeps features anchored to what they solve.",
+   "items": [
+    "What problem are we solving?",
+    "How would we solve it without Databricks?",
+    "Which Databricks component solves it?",
+    "How does it work internally?",
+    "Where does it sit in the architecture?",
+    "How do I use it in the UI?",
+    "What is the real syntax?",
+    "What does a production example look like?"
+   ]
+  },
+  {
+   "id": "ch10-e014",
+   "type": "order",
+   "section": "ch10-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order questions 9–17 of the standard lesson structure.",
+   "explain": "After USE comes JUDGE (alternatives, when not, best practices, common mistakes), then BREAK (debugging, certification traps), then PROVE (exercises, full solutions, mini-project). Debugging comes after you know the common mistakes.",
+   "items": [
+    "What alternatives exist?",
+    "When should I not use it?",
+    "Best practices",
+    "Common mistakes",
+    "Debugging workflow",
+    "Certification traps",
+    "Exercises",
+    "Full solutions",
+    "Mini-project extension"
+   ]
+  },
+  {
+   "id": "ch10-e015",
+   "type": "mcq",
+   "section": "ch10-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which questions of the lesson structure does the tutor say he will insist on most?",
+   "explain": "6–8: UI, real syntax and a production example. The learner had complained that two lessons on a tool without seeing a single real configuration or source file were useless.",
+   "options": [
+    "1–3 (problem framing)",
+    "6–8 (UI, real syntax, production example)",
+    "9–10 (alternatives, when not to use)",
+    "15–17 (exercises, solutions, mini-project)"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "ch10-e016",
+   "type": "cloze",
+   "section": "ch10-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Fill in the lesson-structure blocks.",
+   "explain": "Questions 1–3 frame the problem, 6–8 are the practical core, 13 is the debugging workflow and 17 extends the ongoing project. Remember the six blocks WHY-HOW-USE-JUDGE-BREAK-PROVE.",
+   "text": "Question 1 asks what [[problem]] we are solving; question 2 asks how we would solve it [[without Databricks]]; question 10 asks when we should [[not]] use it; question 13 is the [[debugging]] workflow; question 17 is the [[mini-project]] extension.",
+   "bank": [
+    "syntax",
+    "always",
+    "pricing",
+    "UI"
+   ]
+  },
+  {
+   "id": "ch10-e017",
+   "type": "tf",
+   "section": "ch10-s03",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "The standard lesson structure starts with the real syntax so you can try things immediately.",
+   "explain": "False. It starts with *What problem are we solving?* and *How would we solve it without Databricks?*. Syntax is question 7 — after you know what the component is and where it sits.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e018",
+   "type": "scenario",
+   "section": "ch10-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "debug"
+   ],
+   "quick": false,
+   "q": "You apply the 17-question structure to a feature you have never studied: **Auto Loader**.",
+   "steps": [
+    {
+     "prompt": "Question 1 — what problem are we solving?",
+     "options": [
+      {
+       "text": "Ingest only the NEW files that keep landing in cloud storage, without reprocessing old ones",
+       "ok": true,
+       "fb": "Right — incremental file ingestion is the core problem."
+      },
+      {
+       "text": "Making queries on gold tables faster",
+       "ok": false,
+       "fb": "That's a performance/layout concern, not what Auto Loader solves."
+      },
+      {
+       "text": "Granting analysts access to tables",
+       "ok": false,
+       "fb": "That's Unity Catalog's job."
+      }
+     ]
+    },
+    {
+     "prompt": "Question 2 — how would you solve it without Databricks?",
+     "options": [
+      {
+       "text": "Keep my own table of processed file names and run a cron script that lists the folder and loads unseen files",
+       "ok": true,
+       "fb": "Exactly — and this shows what Auto Loader automates: discovery + state (checkpoint) + schema handling."
+      },
+      {
+       "text": "Reload the entire folder every run and overwrite the table",
+       "ok": false,
+       "fb": "That works but re-reads everything; it's the inefficiency Auto Loader removes."
+      },
+      {
+       "text": "It can't be done without Databricks",
+       "ok": false,
+       "fb": "It can — the manual version exposes the real mechanics."
+      }
+     ]
+    },
+    {
+     "prompt": "Question 10 — when should you NOT use it?",
+     "options": [
+      {
+       "text": "For a one-off load of a few known files, where a plain `spark.read` or `COPY INTO` is simpler",
+       "ok": true,
+       "fb": "Correct — ‘when NOT to use’ forces you to know the alternatives (question 9)."
+      },
+      {
+       "text": "Never — Auto Loader is always the best choice",
+       "ok": false,
+       "fb": "Every tool has a ‘when not’; skipping question 10 is a classic gap."
+      },
+      {
+       "text": "Whenever the data is JSON",
+       "ok": false,
+       "fb": "JSON is a supported `cloudFiles.format`."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e019",
+   "type": "free",
+   "section": "ch10-s03",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Why is question 2 — *How would we solve it without Databricks?* — valuable?",
+   "explain": "Look for: reveals the real problem, shows what the component abstracts, helps with failure modes/alternatives.",
+   "model": "Doing it by hand exposes the actual problem and the moving parts (state, scheduling, schema handling). Then I can see exactly what the Databricks component automates and why it's designed that way, which also tells me how it can fail and what the alternatives are.",
+   "rubric": [
+    "Exposes the real underlying problem",
+    "Shows what the component abstracts/automates",
+    "Helps understand design, failure modes or alternatives"
+   ]
+  },
+  {
+   "id": "ch10-e020",
+   "type": "scenario",
+   "section": "ch10-s03",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Lesson question **13. Debugging workflow** in action: you just learned Jobs and your first job task fails with a vague error.",
+   "steps": [
+    {
+     "prompt": "What mindset does question 13 ask for first?",
+     "options": [
+      {
+       "text": "A systematic, ordered checklist of where the failure can come from",
+       "ok": true,
+       "fb": "Yes — every lesson ends with an ordered debugging model (e.g. upstream → compute → runtime → …)."
+      },
+      {
+       "text": "Re-run until it passes",
+       "ok": false,
+       "fb": "Retries hide the cause; they're a setting, not a diagnosis."
+      },
+      {
+       "text": "Increase the cluster size",
+       "ok": false,
+       "fb": "That's the ‘blind scaling’ the plan explicitly rejects."
+      }
+     ]
+    },
+    {
+     "prompt": "The upstream task succeeded and compute started fine. Next?",
+     "options": [
+      {
+       "text": "Continue down the list: runtime → library → permissions → parameter → data → Spark execution",
+       "ok": true,
+       "fb": "Right — keep walking the model instead of jumping to a favorite guess."
+      },
+      {
+       "text": "Assume it's Spark skew",
+       "ok": false,
+       "fb": "Skew is the last bucket (Spark execution); check cheaper causes first."
+      },
+      {
+       "text": "Delete the job and recreate it",
+       "ok": false,
+       "fb": "Destroys evidence (run history) without explaining anything."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e021",
+   "type": "bucket",
+   "section": "ch10-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Which of the four interfaces does each item belong to?",
+   "explain": "SQL covers DDL/DML and governance statements; PySpark covers DataFrame, read/write, streaming and Delta APIs; platform config covers compute, Jobs, Pipelines and Bundles YAML; CLI/external covers `databricks …` commands, Git and Databricks Connect.",
+   "buckets": [
+    "SQL",
+    "PySpark",
+    "Platform / config",
+    "CLI / external dev"
+   ],
+   "items": [
+    {
+     "text": "GRANT SELECT ON TABLE …",
+     "bucket": 0
+    },
+    {
+     "text": "COPY INTO …",
+     "bucket": 0
+    },
+    {
+     "text": "DeltaTable.forName(…)",
+     "bucket": 1
+    },
+    {
+     "text": "spark.readStream",
+     "bucket": 1
+    },
+    {
+     "text": "databricks.yml resources",
+     "bucket": 2
+    },
+    {
+     "text": "worker type & autoscaling settings",
+     "bucket": 2
+    },
+    {
+     "text": "databricks bundle deploy -t dev",
+     "bucket": 3
+    },
+    {
+     "text": "Databricks Connect from VS Code",
+     "bucket": 3
+    },
+    {
+     "text": "MERGE INTO …",
+     "bucket": 0
+    },
+    {
+     "text": "Job task dependencies",
+     "bucket": 2
+    }
+   ]
+  },
+  {
+   "id": "ch10-e022",
+   "type": "bucket",
+   "section": "ch10-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Second round — interface for each item.",
+   "explain": "REVOKE and Delta DML are SQL; read/write and streaming APIs are PySpark; pipeline settings and Bundles YAML are platform configuration; Git and deployment workflows are CLI/external development.",
+   "buckets": [
+    "SQL",
+    "PySpark",
+    "Platform / config",
+    "CLI / external dev"
+   ],
+   "items": [
+    {
+     "text": "REVOKE",
+     "bucket": 0
+    },
+    {
+     "text": "UPDATE / DELETE (Delta DML)",
+     "bucket": 0
+    },
+    {
+     "text": "df.writeTo(…)",
+     "bucket": 1
+    },
+    {
+     "text": ".writeStream",
+     "bucket": 1
+    },
+    {
+     "text": "Pipeline settings",
+     "bucket": 2
+    },
+    {
+     "text": "Bundles YAML targets",
+     "bucket": 2
+    },
+    {
+     "text": "Git",
+     "bucket": 3
+    },
+    {
+     "text": "Deployment workflows",
+     "bucket": 3
+    }
+   ]
+  },
+  {
+   "id": "ch10-e023",
+   "type": "bucket",
+   "section": "ch10-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Place each table/source of the e-commerce lakehouse in its layer.",
+   "explain": "Sources are raw feeds (customers CDC, orders JSON, products CSV, events stream). Bronze keeps raw copies (`*_raw`), silver holds cleaned entities, gold holds business aggregates like `daily_revenue` and `customer_360`.",
+   "buckets": [
+    "sources",
+    "BRONZE",
+    "SILVER",
+    "GOLD"
+   ],
+   "items": [
+    {
+     "text": "orders JSON",
+     "bucket": 0
+    },
+    {
+     "text": "events stream",
+     "bucket": 0
+    },
+    {
+     "text": "customers_raw",
+     "bucket": 1
+    },
+    {
+     "text": "products_raw",
+     "bucket": 1
+    },
+    {
+     "text": "customers",
+     "bucket": 2
+    },
+    {
+     "text": "events",
+     "bucket": 2
+    },
+    {
+     "text": "daily_revenue",
+     "bucket": 3
+    },
+    {
+     "text": "customer_360",
+     "bucket": 3
+    },
+    {
+     "text": "conversion_metrics",
+     "bucket": 3
+    },
+    {
+     "text": "product_performance",
+     "bucket": 3
+    }
+   ]
+  },
+  {
+   "id": "ch10-e024",
+   "type": "tf",
+   "section": "ch10-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "The plan uses a separate toy example in each lesson so that topics don't interfere with each other.",
+   "explain": "False. Separate toy examples make you lose the big picture. The plan builds ONE production-style project (an e-commerce lakehouse) that grows with every phase.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e025",
+   "type": "mcq",
+   "section": "ch10-s04",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "In the project, which source arrives as a CDC feed?",
+   "explain": "Customers arrive as CDC (inserts/updates/deletes), orders as JSON files, products as CSV and events as a stream. CDC is where MERGE and AUTO CDC will be practiced.",
+   "options": [
+    "customers",
+    "orders",
+    "products",
+    "events"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "ch10-e026",
+   "type": "odd",
+   "section": "ch10-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Three of these are listed under ‘Platform / configuration’. Which one is not?",
+   "explain": "Jobs, Pipelines and Bundles YAML are platform configuration. The DataFrame API is a PySpark interface.",
+   "options": [
+    "Jobs",
+    "Pipelines",
+    "Bundles YAML",
+    "DataFrame API"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "ch10-e027",
+   "type": "match",
+   "section": "ch10-s04",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the source feed to its format in the project.",
+   "explain": "Each source deliberately uses a different shape so the course can practice CDC, JSON/CSV file ingestion and streaming on one project.",
+   "pairs": [
+    [
+     "customers",
+     "CDC"
+    ],
+    [
+     "orders",
+     "JSON"
+    ],
+    [
+     "products",
+     "CSV"
+    ],
+    [
+     "events",
+     "stream"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e028",
+   "type": "calc",
+   "section": "ch10-s05",
+   "difficulty": 1,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "Compute Part 3 config: 4 workers × 8 cores each (plus a driver). Roughly how many Spark tasks can run concurrently?",
+   "explain": "Task slots = worker cores = 4 × 8 = 32 (one task per executor core). The driver schedules tasks but does not run them, so its cores are not counted.",
+   "answer": 32,
+   "tolerance": 0,
+   "unit": "tasks"
+  },
+  {
+   "id": "ch10-e029",
+   "type": "calc",
+   "section": "ch10-s05",
+   "difficulty": 2,
+   "tags": [
+    "calc",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Phase 1 practice config: driver 16 cores; workers 8 cores each, min 2, max 10. What is the MAXIMUM number of concurrent task slots?",
+   "explain": "Only worker cores count: 10 × 8 = 80. Adding the driver's 16 (= 96) is the classic trap. At minimum scale you'd have 2 × 8 = 16 slots.",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "task slots"
+  },
+  {
+   "id": "ch10-e030",
+   "type": "calc",
+   "section": "ch10-s05",
+   "difficulty": 2,
+   "tags": [
+    "calc"
+   ],
+   "quick": false,
+   "q": "With 32 task slots, a stage has 1,000 partitions of similar size. About how many ‘waves’ of tasks are needed?",
+   "explain": "Each wave runs up to 32 tasks: 1000 / 32 = 31.25, so 32 waves (the last one partial). Many partitions keep all cores busy; too few would leave cores idle.",
+   "answer": 32,
+   "tolerance": 1,
+   "unit": "waves"
+  },
+  {
+   "id": "ch10-e031",
+   "type": "tf",
+   "section": "ch10-s05",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "With a 16-core driver and 2 workers of 8 cores, the cluster can run 32 tasks in parallel.",
+   "explain": "False. Tasks run on executors on the workers: 2 × 8 = 16 slots. The driver's cores coordinate (planning, scheduling, collecting results) and don't add task slots.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e032",
+   "type": "mcq",
+   "section": "ch10-s05",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "calc"
+   ],
+   "quick": false,
+   "q": "4 workers × 8 cores, but the stage has only 4 partitions. What happens?",
+   "explain": "One task per partition → only 4 tasks, so 28 of 32 cores sit idle. Too few partitions waste the cluster no matter how big it is — that's why partition count is part of compute mastery.",
+   "options": [
+    "32 tasks run, each with 1/8 of a partition",
+    "4 tasks run; 28 cores sit idle",
+    "Spark automatically splits into 32 partitions always",
+    "The job fails"
+   ],
+   "answer": 1,
+   "why": [
+    "A partition is not split across tasks automatically.",
+    "Correct.",
+    "Spark does not always repartition to match cores.",
+    "Nothing fails; it's just inefficient."
+   ]
+  },
+  {
+   "id": "ch10-e033",
+   "type": "match",
+   "section": "ch10-s05",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the classic compute term to its definition.",
+   "explain": "A task slot is one executor core. Pools keep warm VMs; policies restrict settings; spot instances are cheap but reclaimable; auto-termination stops idle clusters to save money.",
+   "pairs": [
+    [
+     "Task slot",
+     "One executor core = one concurrently running task"
+    ],
+    [
+     "Pool",
+     "Pre-warmed idle instances to start/scale faster"
+    ],
+    [
+     "Compute policy",
+     "Admin rules restricting allowed compute settings"
+    ],
+    [
+     "Spot instance",
+     "Cheap spare capacity that can be reclaimed"
+    ],
+    [
+     "Auto-termination",
+     "Stops the cluster after N idle minutes"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e034",
+   "type": "bucket",
+   "section": "ch10-s05",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Serverless compute: is each item managed for you, or still something you configure?",
+   "explain": "Serverless abstracts the infrastructure envelope (instance types, worker counts, spot/on-demand, pools, driver size). You still own your code, the environment version and Python dependencies, and job/notebook parameters.",
+   "buckets": [
+    "Abstracted away by Databricks",
+    "Still yours to configure"
+   ],
+   "items": [
+    {
+     "text": "Worker instance type",
+     "bucket": 0
+    },
+    {
+     "text": "Number of workers / autoscale bounds",
+     "bucket": 0
+    },
+    {
+     "text": "Spot vs on-demand",
+     "bucket": 0
+    },
+    {
+     "text": "Pools",
+     "bucket": 0
+    },
+    {
+     "text": "Python dependencies (environment)",
+     "bucket": 1
+    },
+    {
+     "text": "Your notebook/job code",
+     "bucket": 1
+    },
+    {
+     "text": "Task parameters",
+     "bucket": 1
+    }
+   ]
+  },
+  {
+   "id": "ch10-e035",
+   "type": "odd",
+   "section": "ch10-s05",
+   "difficulty": 2,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Officially, classic compute includes three resource kinds. Which item is NOT one of them?",
+   "explain": "Databricks splits compute into serverless, classic and SQL warehouses; classic covers all-purpose, jobs and Lakeflow pipeline resources. SQL warehouses are their own category.",
+   "options": [
+    "All-purpose compute",
+    "Jobs compute",
+    "Lakeflow pipeline compute",
+    "SQL warehouse"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "ch10-e036",
+   "type": "cloze",
+   "section": "ch10-s05",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Complete the official compute taxonomy.",
+   "explain": "Three top-level categories: serverless, classic, SQL warehouses. Classic itself contains all-purpose, jobs and Lakeflow pipeline resources.",
+   "text": "Databricks officially splits compute into [[serverless]], [[classic]] and [[SQL warehouses]]; classic includes [[all-purpose]], jobs and Lakeflow pipeline resources.",
+   "bank": [
+    "pools",
+    "spot",
+    "Photon"
+   ]
+  },
+  {
+   "id": "ch10-e037",
+   "type": "match",
+   "section": "ch10-s06",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Match each Delta SQL command to what it does.",
+   "explain": "DESCRIBE DETAIL = current table metadata; DESCRIBE HISTORY = per-version provenance; RESTORE = new version with old state; VACUUM = physical delete of unreferenced files; OPTIMIZE = compaction/layout; TRUNCATE = remove all rows.",
+   "pairs": [
+    [
+     "DESCRIBE DETAIL",
+     "Current metadata: format, location, numFiles, size"
+    ],
+    [
+     "DESCRIBE HISTORY",
+     "Version, timestamp, user, operation, metrics"
+    ],
+    [
+     "RESTORE",
+     "New current version equal to an old state"
+    ],
+    [
+     "VACUUM",
+     "Physically delete expired unreferenced files"
+    ],
+    [
+     "OPTIMIZE",
+     "Compact small files / re-layout"
+    ],
+    [
+     "TRUNCATE",
+     "Remove all rows, keep the table"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e038",
+   "type": "bucket",
+   "section": "ch10-s06",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "SQL syntax or PySpark/Delta API?",
+   "explain": "Phase 2 teaches both sides: SQL statements (MERGE, ALTER TABLE, DESCRIBE HISTORY, VACUUM) and the Python APIs (writeTo, DeltaTable.forName, insertInto, saveAsTable).",
+   "buckets": [
+    "SQL",
+    "PySpark / Delta API"
+   ],
+   "items": [
+    {
+     "text": "MERGE",
+     "bucket": 0
+    },
+    {
+     "text": "ALTER TABLE",
+     "bucket": 0
+    },
+    {
+     "text": "DESCRIBE HISTORY",
+     "bucket": 0
+    },
+    {
+     "text": "VACUUM",
+     "bucket": 0
+    },
+    {
+     "text": "df.writeTo(...)",
+     "bucket": 1
+    },
+    {
+     "text": "DeltaTable.forName(...)",
+     "bucket": 1
+    },
+    {
+     "text": "insertInto(...)",
+     "bucket": 1
+    },
+    {
+     "text": "saveAsTable(...)",
+     "bucket": 1
+    }
+   ]
+  },
+  {
+   "id": "ch10-e039",
+   "type": "tf",
+   "section": "ch10-s06",
+   "difficulty": 2,
+   "tags": [
+    "pitfall",
+    "syntax"
+   ],
+   "quick": true,
+   "q": "`df.write.insertInto(\"prod.silver.orders\")` matches DataFrame columns to table columns by name.",
+   "explain": "False — `insertInto` is positional. If the DataFrame's column order differs, values silently go into the wrong columns (or fail on type mismatch). Select columns in table order or use `saveAsTable`/`writeTo` which resolve by name.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e040",
+   "type": "mcq",
+   "section": "ch10-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "A daily job rewrites yesterday's partition of a partitioned table. Which technique replaces only the partitions present in the new data?",
+   "explain": "Dynamic (partition) overwrite only replaces partitions that appear in the incoming DataFrame. A plain overwrite would wipe every other day's data; append would duplicate yesterday.",
+   "options": [
+    "Plain `mode(\"overwrite\")`",
+    "Dynamic overwrite (`partitionOverwriteMode=dynamic`)",
+    "`mode(\"append\")`",
+    "`VACUUM` then append"
+   ],
+   "answer": 1,
+   "why": [
+    "Static overwrite replaces the whole table.",
+    "Correct.",
+    "Re-running append creates duplicates.",
+    "VACUUM deletes unreferenced files; it doesn't replace data."
+   ]
+  },
+  {
+   "id": "ch10-e041",
+   "type": "match",
+   "section": "ch10-s06",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the Delta engineering topic to its definition.",
+   "explain": "Type widening changes a type to a wider one without rewrite; deletion vectors mark rows deleted without immediate rewrite; idempotent MERGE can be re-run safely; late-arriving data must not overwrite newer state; schema enforcement rejects mismatched writes.",
+   "pairs": [
+    [
+     "Type widening",
+     "INT → BIGINT without rewriting data files"
+    ],
+    [
+     "Deletion vectors",
+     "Mark rows deleted instead of rewriting the Parquet file"
+    ],
+    [
+     "Idempotent MERGE",
+     "Re-running the same input causes no duplicates"
+    ],
+    [
+     "Late-arriving data",
+     "Old events arriving after newer ones for the same key"
+    ],
+    [
+     "Schema enforcement",
+     "Writes with a mismatched schema are rejected"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e042",
+   "type": "odd",
+   "section": "ch10-s06",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which one is NOT a ‘physical optimization’ topic of Phase 2?",
+   "explain": "Small files, OPTIMIZE, data skipping, file statistics, liquid clustering and predictive optimization are physical layout topics. Time travel is an engineering/usage topic (querying old snapshots).",
+   "options": [
+    "Liquid Clustering",
+    "Data skipping",
+    "Time travel",
+    "Predictive optimization"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "ch10-e043",
+   "type": "write",
+   "section": "ch10-s06",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Using the Delta Python API, delete all rows with `status = 'test'` from `prod.silver.orders`.",
+   "explain": "`DeltaTable.forName(spark, name)` returns a DeltaTable object; `.delete(condition)` commits a DELETE as a new table version — the same result as SQL `DELETE FROM … WHERE …`.",
+   "solution": "from delta.tables import DeltaTable\n\norders = DeltaTable.forName(spark, \"prod.silver.orders\")\norders.delete(\"status = 'test'\")",
+   "keywords": [
+    "DeltaTable.forName",
+    ".delete(",
+    "prod.silver.orders"
+   ],
+   "lang": "python"
+  },
+  {
+   "id": "ch10-e044",
+   "type": "cloze",
+   "section": "ch10-s06",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": true,
+   "q": "OPTIMIZE vs VACUUM vs predictive optimization.",
+   "explain": "OPTIMIZE reorganizes active files; VACUUM physically deletes expired unreferenced files; predictive optimization runs OPTIMIZE/VACUUM/ANALYZE automatically for UC managed tables. Confusing OPTIMIZE and VACUUM is a common exam trap.",
+   "text": "[[OPTIMIZE]] compacts and re-lays out active files; [[VACUUM]] physically deletes expired, unreferenced files; predictive optimization runs them automatically for Unity Catalog [[managed]] tables.",
+   "bank": [
+    "RESTORE",
+    "external",
+    "TRUNCATE"
+   ]
+  },
+  {
+   "id": "ch10-e045",
+   "type": "order",
+   "section": "ch10-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Order the Unity Catalog namespace from the top down to a table.",
+   "explain": "Metastore (top container per region) → catalog → schema → table/view/volume/function/model. The 3-level name `catalog.schema.table` lives inside one metastore.",
+   "items": [
+    "Metastore",
+    "Catalog",
+    "Schema",
+    "Table"
+   ]
+  },
+  {
+   "id": "ch10-e046",
+   "type": "order",
+   "section": "ch10-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the topics as Phase 3 will teach them (teaser at the end of Phase 2).",
+   "explain": "Namespace first (catalog → schema → tables → volumes), then storage access (credentials/locations), then permissions (grants/ownership → service principals → fine-grained row filters/masks/ABAC), then lineage. Systematic PERMISSION_DENIED debugging ties it together.",
+   "items": [
+    "Catalog",
+    "Schema",
+    "Managed / external tables",
+    "Volumes",
+    "Storage credentials / external locations",
+    "Grants / ownership",
+    "Service principals",
+    "Row filters / masks / ABAC",
+    "Lineage"
+   ]
+  },
+  {
+   "id": "ch10-e047",
+   "type": "order",
+   "section": "ch10-s07",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Order the PERMISSION_DENIED debugging chain.",
+   "explain": "Start with identity (who am I, which principal runs the job), then walk the privileges top-down (USE CATALOG → USE SCHEMA → SELECT/MODIFY), then ownership, and finally storage credentials for path-based access.",
+   "items": [
+    "Who am I?",
+    "What principal is the job using?",
+    "USE CATALOG?",
+    "USE SCHEMA?",
+    "SELECT / MODIFY?",
+    "Ownership?",
+    "Storage credential?"
+   ]
+  },
+  {
+   "id": "ch10-e048",
+   "type": "write",
+   "section": "ch10-s07",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Write the three GRANTs that let group `analysts` read `prod.silver.orders` (nothing more).",
+   "explain": "Reading requires USE CATALOG on the catalog, USE SCHEMA on the schema and SELECT on the table. Granting only SELECT is the classic mistake — without the USE privileges the table is unreachable.",
+   "solution": "GRANT USE CATALOG ON CATALOG prod TO `analysts`;\nGRANT USE SCHEMA ON SCHEMA prod.silver TO `analysts`;\nGRANT SELECT ON TABLE prod.silver.orders TO `analysts`;",
+   "keywords": [
+    "GRANT USE CATALOG ON CATALOG prod",
+    "GRANT USE SCHEMA ON SCHEMA prod.silver",
+    "GRANT SELECT ON TABLE prod.silver.orders",
+    "`analysts`"
+   ],
+   "lang": "sql"
+  },
+  {
+   "id": "ch10-e049",
+   "type": "spotbug",
+   "section": "ch10-s07",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Click the buggy line in this grant script for `data-engineers`.",
+   "explain": "`USE CATALOG` is a catalog-level privilege; on a schema you grant `USE SCHEMA`. The securable type in `ON …` must match the privilege.",
+   "lines": [
+    "GRANT USE CATALOG ON CATALOG prod TO `data-engineers`;",
+    "GRANT USE CATALOG ON SCHEMA prod.silver TO `data-engineers`;",
+    "GRANT SELECT ON TABLE prod.silver.orders TO `data-engineers`;"
+   ],
+   "bugs": [
+    1
+   ],
+   "fix": "GRANT USE SCHEMA ON SCHEMA prod.silver TO `data-engineers`;"
+  },
+  {
+   "id": "ch10-e050",
+   "type": "match",
+   "section": "ch10-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the storage/namespace object to its definition.",
+   "explain": "Storage credential = cloud identity; external location = path + credential; volume = governed non-tabular files; managed table = UC owns data lifecycle; external table = data at your path; metastore = top-level container.",
+   "pairs": [
+    [
+     "Storage credential",
+     "Wraps a cloud IAM role / managed identity"
+    ],
+    [
+     "External location",
+     "Cloud path + the credential used to access it"
+    ],
+    [
+     "Volume",
+     "Governed non-tabular files under /Volumes/…"
+    ],
+    [
+     "Managed table",
+     "UC manages metadata AND data files; DROP deletes data"
+    ],
+    [
+     "External table",
+     "Data stays at your path; DROP keeps files"
+    ],
+    [
+     "Metastore",
+     "Top-level UC container per region"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e051",
+   "type": "match",
+   "section": "ch10-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the governance feature to its definition.",
+   "explain": "Row filters hide rows; column masks hide values; ABAC applies policies via tags at scale; lineage tracks data flow; Delta Sharing shares data externally; Lakehouse Federation queries external databases in place.",
+   "pairs": [
+    [
+     "Row filter",
+     "UDF deciding which rows a user sees"
+    ],
+    [
+     "Column mask",
+     "UDF returning a masked value for unauthorized users"
+    ],
+    [
+     "ABAC",
+     "Tag-driven policies applying filters/masks at scale"
+    ],
+    [
+     "Lineage",
+     "Automatic record of which tables/columns feed which"
+    ],
+    [
+     "Delta Sharing",
+     "Open protocol to share live data with other orgs"
+    ],
+    [
+     "Lakehouse Federation",
+     "Query external databases without ingesting them"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e052",
+   "type": "scenario",
+   "section": "ch10-s07",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "A scheduled job fails with `PERMISSION_DENIED` reading `prod.silver.orders`. When you run the same notebook yourself, it works.",
+   "steps": [
+    {
+     "prompt": "First question to ask?",
+     "options": [
+      {
+       "text": "Which principal is the job actually running as?",
+       "ok": true,
+       "fb": "Yes — your success proves only that YOU have access. The job may run as its owner or a service principal."
+      },
+      {
+       "text": "Is the cluster big enough?",
+       "ok": false,
+       "fb": "Permissions have nothing to do with cluster size."
+      },
+      {
+       "text": "Should I VACUUM the table?",
+       "ok": false,
+       "fb": "Unrelated to access control."
+      }
+     ]
+    },
+    {
+     "prompt": "The job runs as service principal `sp-etl`. `SHOW GRANTS` shows SELECT on the table for `sp-etl`. Next?",
+     "options": [
+      {
+       "text": "Check USE SCHEMA on `prod.silver` and USE CATALOG on `prod` for `sp-etl`",
+       "ok": true,
+       "fb": "Right — SELECT on the table is useless without the USE privileges on its parents."
+      },
+      {
+       "text": "Grant ALL PRIVILEGES on the metastore to be safe",
+       "ok": false,
+       "fb": "Violates least privilege and hides the real gap."
+      },
+      {
+       "text": "Conclude the error is a Databricks bug",
+       "ok": false,
+       "fb": "Walk the chain before blaming the platform."
+      }
+     ]
+    },
+    {
+     "prompt": "USE SCHEMA is missing. What's the least-privilege fix?",
+     "options": [
+      {
+       "text": "`GRANT USE SCHEMA ON SCHEMA prod.silver TO `sp-etl`` (and USE CATALOG if also missing)",
+       "ok": true,
+       "fb": "Minimal grant that closes exactly the gap."
+      },
+      {
+       "text": "Make `sp-etl` the owner of the catalog",
+       "ok": false,
+       "fb": "Ownership grants far more than needed."
+      },
+      {
+       "text": "Run the job as your personal user",
+       "ok": false,
+       "fb": "Production jobs should not depend on a person's account."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e053",
+   "type": "tf",
+   "section": "ch10-s07",
+   "difficulty": 1,
+   "tags": [
+    "exam",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Granting `SELECT` on a table is sufficient for a user to query it.",
+   "explain": "False. The user also needs `USE CATALOG` on the parent catalog and `USE SCHEMA` on the parent schema (directly or inherited). This is the most common Unity Catalog permission trap.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e054",
+   "type": "mcq",
+   "section": "ch10-s07",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which identity should a production job or CI/CD deployment run as?",
+   "explain": "Service principals are non-human identities meant for automation. Personal accounts break when people leave or change roles and violate least-privilege separation.",
+   "options": [
+    "The most senior engineer's user",
+    "A service principal",
+    "The workspace admin",
+    "Any user in the `analysts` group"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "ch10-e055",
+   "type": "odd",
+   "section": "ch10-s07",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which one is NOT a Unity Catalog securable object inside a schema?",
+   "explain": "Tables, volumes and functions live inside schemas and are governed by UC. A cluster pool is a compute resource, not a data object in the catalog hierarchy.",
+   "options": [
+    "Table",
+    "Volume",
+    "Function",
+    "Cluster pool"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "ch10-e056",
+   "type": "match",
+   "section": "ch10-s08",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match the Auto Loader term to its meaning.",
+   "explain": "`cloudFiles` is the source format; schemaLocation stores the inferred schema; schema hints force types; `_rescued_data` keeps non-conforming values; file notification uses cloud events instead of listing directories.",
+   "pairs": [
+    [
+     "cloudFiles",
+     "Auto Loader's source format name"
+    ],
+    [
+     "schemaLocation",
+     "Where the inferred schema and its evolution are stored"
+    ],
+    [
+     "Schema hints",
+     "Force types for specific columns"
+    ],
+    [
+     "Rescued data column",
+     "Captures values that don't fit the schema"
+    ],
+    [
+     "File notification",
+     "Discovers new files via cloud storage events/queues"
+    ],
+    [
+     "Directory listing",
+     "Default discovery: lists the input path"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e057",
+   "type": "mcq",
+   "section": "ch10-s08",
+   "difficulty": 2,
+   "tags": [
+    "compare",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which statement best contrasts COPY INTO and Auto Loader?",
+   "explain": "Both are idempotent at the file level. COPY INTO is a SQL batch command, good for thousands of files; Auto Loader is a streaming source with checkpoint, schema evolution and rescued data, built to scale to millions of files.",
+   "options": [
+    "COPY INTO reprocesses all files every run; Auto Loader doesn't",
+    "COPY INTO is an idempotent SQL load; Auto Loader is a checkpointed streaming source that scales to huge file volumes",
+    "Auto Loader only works with CSV",
+    "They are two names for the same feature"
+   ],
+   "answer": 1,
+   "why": [
+    "COPY INTO skips already-loaded files.",
+    "Correct.",
+    "Auto Loader supports JSON, CSV, Parquet, Avro…",
+    "Different features with different interfaces."
+   ]
+  },
+  {
+   "id": "ch10-e058",
+   "type": "spotbug",
+   "section": "ch10-s08",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Find the bug in this Auto Loader read.",
+   "explain": "Auto Loader is a Structured Streaming source: it must be started with `spark.readStream`, not batch `spark.read`. The rest (cloudFiles.format, schemaLocation, load) is fine.",
+   "lines": [
+    "df = (",
+    "    spark.read",
+    "        .format(\"cloudFiles\")",
+    "        .option(\"cloudFiles.format\", \"json\")",
+    "        .option(\"cloudFiles.schemaLocation\", schema_path)",
+    "        .load(source_path)",
+    ")"
+   ],
+   "bugs": [
+    1
+   ],
+   "fix": "    spark.readStream"
+  },
+  {
+   "id": "ch10-e059",
+   "type": "write",
+   "section": "ch10-s08",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write an Auto Loader read of JSON files from `source_path`, storing the schema at `schema_path`.",
+   "explain": "`readStream.format(\"cloudFiles\")` selects Auto Loader; `cloudFiles.format` names the file format; `cloudFiles.schemaLocation` is where the inferred schema is tracked between runs.",
+   "solution": "df = (\n    spark.readStream\n        .format(\"cloudFiles\")\n        .option(\"cloudFiles.format\", \"json\")\n        .option(\"cloudFiles.schemaLocation\", schema_path)\n        .load(source_path)\n)",
+   "keywords": [
+    "readStream",
+    "cloudFiles",
+    "cloudFiles.format",
+    "json",
+    "cloudFiles.schemaLocation",
+    ".load("
+   ],
+   "lang": "python"
+  },
+  {
+   "id": "ch10-e060",
+   "type": "scenario",
+   "section": "ch10-s08",
+   "difficulty": 3,
+   "tags": [
+    "debug",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "The bronze `orders_raw` table suddenly contains every order twice. Nothing changed in the source folder.",
+   "steps": [
+    {
+     "prompt": "What's your first hypothesis to check?",
+     "options": [
+      {
+       "text": "Was the Auto Loader checkpoint deleted, moved, or changed?",
+       "ok": true,
+       "fb": "Yes — the checkpoint is the memory of which files were processed. Without it every file looks new."
+      },
+      {
+       "text": "The cluster ran out of memory",
+       "ok": false,
+       "fb": "OOM would fail the run, not duplicate data."
+      },
+      {
+       "text": "Schema hints are wrong",
+       "ok": false,
+       "fb": "Hints affect types, not how many times files are read."
+      }
+     ]
+    },
+    {
+     "prompt": "Git history shows someone changed `checkpointLocation` to a new path last night. What happened?",
+     "options": [
+      {
+       "text": "The new checkpoint had no file state, so all existing files were ingested again",
+       "ok": true,
+       "fb": "Exactly — that's why ingestion is only ‘exactly-once-ish’."
+      },
+      {
+       "text": "Auto Loader merged both checkpoints",
+       "ok": false,
+       "fb": "Checkpoints are never merged."
+      },
+      {
+       "text": "Nothing — the checkpoint path doesn't matter",
+       "ok": false,
+       "fb": "It is the single most important piece of state."
+      }
+     ]
+    },
+    {
+     "prompt": "Best clean-up and prevention?",
+     "options": [
+      {
+       "text": "Deduplicate (or restore to the version before the bad run) and treat checkpoint paths as fixed, per-stream configuration",
+       "ok": true,
+       "fb": "Fix the data with DESCRIBE HISTORY/RESTORE or dedup, and never casually change or share checkpoints."
+      },
+      {
+       "text": "Delete the checkpoint again to reset",
+       "ok": false,
+       "fb": "That would re-ingest everything a third time."
+      },
+      {
+       "text": "Switch to schema inference",
+       "ok": false,
+       "fb": "Unrelated to duplicates."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e061",
+   "type": "tf",
+   "section": "ch10-s08",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Re-running the same `COPY INTO` over the same files loads those files a second time.",
+   "explain": "False. COPY INTO is idempotent: it tracks already-loaded files and skips them, so a re-run typically loads 0 new rows. (Only a force option would reload them.)",
+   "answer": false
+  },
+  {
+   "id": "ch10-e062",
+   "type": "tf",
+   "section": "ch10-s08",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Schema inference on CSV/JSON is free — Spark already knows the types without reading the data.",
+   "explain": "False. Inference requires an extra pass/sample over the data and the guessed types can change between runs. An explicit schema avoids that cost and makes production behavior predictable.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e063",
+   "type": "order",
+   "section": "ch10-s08",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order a sensible debug path for ‘rows are missing from bronze’.",
+   "explain": "First confirm the symptom, then whether the files are actually where the stream reads, then the stream's state (checkpoint), then schema/malformed rows that may have been rescued or dropped. Cheap facts before deep hypotheses.",
+   "items": [
+    "Confirm which rows/files are missing",
+    "Check the files actually landed in the path the stream reads",
+    "Check the checkpoint (already processed? wrong path?)",
+    "Check schema drift / `_rescued_data` for malformed rows"
+   ]
+  },
+  {
+   "id": "ch10-e064",
+   "type": "cloze",
+   "section": "ch10-s08",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Complete the Auto Loader skeleton.",
+   "explain": "Auto Loader = `readStream` + format `cloudFiles`; options are prefixed `cloudFiles.` (format, schemaLocation).",
+   "asCode": true,
+   "text": "spark.[[readStream]]\n  .format(\"[[cloudFiles]]\")\n  .option(\"cloudFiles.[[format]]\", \"json\")\n  .option(\"cloudFiles.[[schemaLocation]]\", schema_path)\n  .load(source_path)",
+   "bank": [
+    "read",
+    "delta",
+    "checkpointLocation",
+    "header"
+   ]
+  },
+  {
+   "id": "ch10-e065",
+   "type": "match",
+   "section": "ch10-s09",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match the streaming term to its meaning.",
+   "explain": "Micro-batches are small batch jobs; the checkpoint stores progress; offsets mark source position; state is kept across batches; the watermark bounds lateness and lets old state be dropped.",
+   "pairs": [
+    [
+     "Micro-batch",
+     "Stream processed as a series of small batch jobs"
+    ],
+    [
+     "Checkpoint",
+     "Durable progress: offsets, commits, state"
+    ],
+    [
+     "Offset",
+     "Source position read up to"
+    ],
+    [
+     "State",
+     "Data remembered across batches (aggregations, dedup)"
+    ],
+    [
+     "Watermark",
+     "Bound on lateness so old state can be dropped"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e066",
+   "type": "bucket",
+   "section": "ch10-s09",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Stateless or stateful transformation?",
+   "explain": "Stateless ops look at one row at a time (filter, select, withColumn). Stateful ops must remember data across micro-batches: aggregations, windowed counts, streaming dedup, stream-stream joins — they need state and usually a watermark.",
+   "buckets": [
+    "Stateless",
+    "Stateful"
+   ],
+   "items": [
+    {
+     "text": "filter(amount > 0)",
+     "bucket": 0
+    },
+    {
+     "text": "select / withColumn",
+     "bucket": 0
+    },
+    {
+     "text": "explode a JSON array",
+     "bucket": 0
+    },
+    {
+     "text": "groupBy(customer).count()",
+     "bucket": 1
+    },
+    {
+     "text": "window aggregation over 10 minutes",
+     "bucket": 1
+    },
+    {
+     "text": "dropDuplicates with watermark",
+     "bucket": 1
+    },
+    {
+     "text": "stream-stream join",
+     "bucket": 1
+    }
+   ]
+  },
+  {
+   "id": "ch10-e067",
+   "type": "mcq",
+   "section": "ch10-s09",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which output mode writes the ENTIRE result table on every trigger?",
+   "explain": "Complete mode rewrites the whole aggregated result each trigger. Append writes only new finalized rows; update writes only rows that changed.",
+   "options": [
+    "append",
+    "update",
+    "complete",
+    "overwrite"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "ch10-e068",
+   "type": "cloze",
+   "section": "ch10-s09",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Complete the streaming write from the plan.",
+   "explain": "The checkpoint is set via `checkpointLocation`, the trigger via `processingTime`, and `toTable` starts the query into the target table.",
+   "asCode": true,
+   "text": "query = (events\n  .[[writeStream]]\n  .format(\"delta\")\n  .option(\"[[checkpointLocation]]\", checkpoint)\n  .trigger([[processingTime]]=\"30 seconds\")\n  .[[toTable]](\"bronze.events\"))",
+   "bank": [
+    "write",
+    "schemaLocation",
+    "save",
+    "interval"
+   ]
+  },
+  {
+   "id": "ch10-e069",
+   "type": "tf",
+   "section": "ch10-s09",
+   "difficulty": 2,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Because Structured Streaming writing to Delta is exactly-once, duplicates in the target are impossible.",
+   "explain": "False — that's why the plan says exactly-once is subtle. Exactly-once holds for a given query + checkpoint + transactional sink. Changing/deleting the checkpoint, two queries writing the same table, non-idempotent `foreachBatch` logic or duplicates already in the source all produce duplicates.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e070",
+   "type": "scenario",
+   "section": "ch10-s09",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "After a restart, the streaming table `bronze.events` contains a block of duplicated events.",
+   "steps": [
+    {
+     "prompt": "What do you inspect first?",
+     "options": [
+      {
+       "text": "The checkpointLocation used before and after the restart",
+       "ok": true,
+       "fb": "Same checkpoint → resume from stored offsets; new checkpoint → reprocess from the start."
+      },
+      {
+       "text": "The trigger interval",
+       "ok": false,
+       "fb": "The interval changes batch frequency, not correctness."
+      },
+      {
+       "text": "The cluster's worker count",
+       "ok": false,
+       "fb": "Scale doesn't create duplicates."
+      }
+     ]
+    },
+    {
+     "prompt": "The checkpoint was unchanged. The query uses `foreachBatch` doing a plain INSERT into another table. Hypothesis?",
+     "options": [
+      {
+       "text": "A batch was retried after partial failure and the non-idempotent INSERT ran twice",
+       "ok": true,
+       "fb": "Correct — inside foreachBatch you must make writes idempotent (e.g. MERGE on a key)."
+      },
+      {
+       "text": "Watermarks always create duplicates",
+       "ok": false,
+       "fb": "Watermarks bound lateness; they don't duplicate data."
+      },
+      {
+       "text": "Delta is not transactional",
+       "ok": false,
+       "fb": "Delta is transactional; the problem is the custom write logic."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e071",
+   "type": "mcq",
+   "section": "ch10-s09",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "An order event is created at 10:00 on a phone but reaches Spark at 10:07. What is 10:00?",
+   "explain": "Event time is when the event happened (a column in the data); processing time is when Spark processes it. Windowing and watermarks should normally use event time so late arrivals land in the right window.",
+   "options": [
+    "Processing time",
+    "Event time",
+    "Watermark",
+    "Offset"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "ch10-e072",
+   "type": "order",
+   "section": "ch10-s09",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the questions for ‘duplicates appeared in a streaming target’.",
+   "explain": "Check the cheapest, most common cause first (checkpoint identity), then whether another writer exists, then custom write logic, then the source itself.",
+   "items": [
+    "Did the checkpoint location change or get deleted?",
+    "Is another query writing to the same target?",
+    "Is foreachBatch logic idempotent?",
+    "Did the source itself deliver duplicates?"
+   ]
+  },
+  {
+   "id": "ch10-e073",
+   "type": "order",
+   "section": "ch10-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": true,
+   "q": "Order the naming history of Databricks' declarative pipeline product.",
+   "explain": "Delta Live Tables (DLT) → Lakeflow Declarative Pipelines → (Lakeflow) Spark Declarative Pipelines. Same product line; the plan teaches the current form while making sure you recognize legacy tutorials.",
+   "items": [
+    "Delta Live Tables",
+    "Lakeflow Declarative Pipelines",
+    "Spark Declarative Pipelines"
+   ]
+  },
+  {
+   "id": "ch10-e074",
+   "type": "bucket",
+   "section": "ch10-s10",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Streaming table or materialized view?",
+   "explain": "Streaming tables process append-only/streaming input once per row — ideal for bronze ingestion with `STREAM read_files`. Materialized views keep the result of any query (joins, aggregations) correct on refresh — ideal for gold aggregates.",
+   "buckets": [
+    "Streaming table",
+    "Materialized view"
+   ],
+   "items": [
+    {
+     "text": "Bronze ingestion with STREAM read_files",
+     "bucket": 0
+    },
+    {
+     "text": "Each input row processed once",
+     "bucket": 0
+    },
+    {
+     "text": "Append-only event source",
+     "bucket": 0
+    },
+    {
+     "text": "daily_revenue aggregate",
+     "bucket": 1
+    },
+    {
+     "text": "Join of customers and orders kept correct",
+     "bucket": 1
+    },
+    {
+     "text": "Precomputed query result refreshed",
+     "bucket": 1
+    }
+   ]
+  },
+  {
+   "id": "ch10-e075",
+   "type": "spotbug",
+   "section": "ch10-s10",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "This pipeline definition fails. Which line is wrong?",
+   "explain": "A streaming table must be defined by a streaming query. `read_files(...)` without `STREAM` is a batch read; it should be `FROM STREAM read_files(...)`.",
+   "lines": [
+    "CREATE OR REFRESH STREAMING TABLE bronze_orders",
+    "AS",
+    "SELECT *",
+    "FROM read_files('/Volumes/shop/raw/orders', format => 'json');"
+   ],
+   "bugs": [
+    3
+   ],
+   "fix": "FROM STREAM read_files('/Volumes/shop/raw/orders', format => 'json');"
+  },
+  {
+   "id": "ch10-e076",
+   "type": "write",
+   "section": "ch10-s10",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write the SQL pipeline definition of a streaming table `bronze_orders` that incrementally reads files with `read_files(...)`.",
+   "explain": "`CREATE OR REFRESH STREAMING TABLE … AS SELECT * FROM STREAM read_files(...)` is the canonical bronze ingestion pattern; STREAM makes it incremental (Auto Loader under the hood).",
+   "solution": "CREATE OR REFRESH STREAMING TABLE bronze_orders\nAS\nSELECT *\nFROM STREAM read_files(...);",
+   "keywords": [
+    "create or refresh streaming table",
+    "bronze_orders",
+    "from stream read_files"
+   ],
+   "lang": "sql"
+  },
+  {
+   "id": "ch10-e077",
+   "type": "match",
+   "section": "ch10-s10",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the pipeline concept to its definition.",
+   "explain": "Expectations are data-quality rules; AUTO CDC applies change feeds; SCD1 overwrites; SCD2 keeps history; the event log records progress/quality/lineage; temporary views are intermediate and not published.",
+   "pairs": [
+    [
+     "Expectations",
+     "Data-quality rules: warn, DROP ROW or FAIL UPDATE"
+    ],
+    [
+     "AUTO CDC",
+     "Declarative apply of a change feed (formerly APPLY CHANGES)"
+    ],
+    [
+     "SCD Type 1",
+     "Overwrite old values, keep current state only"
+    ],
+    [
+     "SCD Type 2",
+     "Keep history with versioned rows"
+    ],
+    [
+     "Event log",
+     "Queryable record of progress, quality metrics, errors"
+    ],
+    [
+     "Temporary view",
+     "Intermediate dataset not published to the catalog"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e078",
+   "type": "tf",
+   "section": "ch10-s10",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "Delta Live Tables and Lakeflow Spark Declarative Pipelines are two unrelated products.",
+   "explain": "False. They are the same product line renamed: Delta Live Tables → Lakeflow Declarative Pipelines → Spark Declarative Pipelines. Old tutorials (DLT, `import dlt`, APPLY CHANGES) still describe the same concepts.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e079",
+   "type": "mcq",
+   "section": "ch10-s10",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "A customer moves from Athens to Thessaloniki. You must keep BOTH addresses with validity periods for historical reports. Which pattern?",
+   "explain": "SCD Type 2 keeps history by closing the old row and inserting a new version. SCD Type 1 would overwrite Athens with Thessaloniki and lose history. AUTO CDC supports both via its SCD type setting.",
+   "options": [
+    "SCD Type 1",
+    "SCD Type 2",
+    "Temporary view",
+    "Complete output mode"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "ch10-e080",
+   "type": "odd",
+   "section": "ch10-s10",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Which is NOT a dataset type you define in a declarative pipeline?",
+   "explain": "Streaming tables, materialized views and temporary views are pipeline datasets. A SQL warehouse is compute for Databricks SQL, not a dataset.",
+   "options": [
+    "Streaming table",
+    "Materialized view",
+    "Temporary view",
+    "SQL warehouse"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "ch10-e081",
+   "type": "cloze",
+   "section": "ch10-s10",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Complete the expectation that drops rows with a NULL order_id.",
+   "explain": "Expectations are declared as `CONSTRAINT name EXPECT (condition)`; `ON VIOLATION DROP ROW` drops bad rows (default is to keep and only record them; `FAIL UPDATE` stops the update). Violations are counted in the event log.",
+   "asCode": true,
+   "text": "CONSTRAINT valid_id [[EXPECT]] (order_id IS NOT NULL)\n  ON [[VIOLATION]] [[DROP ROW]]",
+   "bank": [
+    "CHECK",
+    "ERROR",
+    "DELETE"
+   ]
+  },
+  {
+   "id": "ch10-e082",
+   "type": "match",
+   "section": "ch10-s11",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match the job trigger to when it starts a run.",
+   "explain": "Schedules are time-based; continuous keeps one run always going; file-arrival reacts to new files in storage; table-update reacts to changes in monitored tables.",
+   "pairs": [
+    [
+     "Schedule",
+     "At a cron-style time"
+    ],
+    [
+     "Continuous",
+     "Immediately after the previous run ends"
+    ],
+    [
+     "File arrival",
+     "When new files land in a monitored location"
+    ],
+    [
+     "Table update",
+     "When a monitored source table changes"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e083",
+   "type": "order",
+   "section": "ch10-s11",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Order the tasks of the example job DAG (customers and orders run in parallel — treat them as one step).",
+   "explain": "ingest → bronze → (customers ‖ orders) → gold → quality check. gold depends on both silver tasks; the quality check runs last on the final outputs.",
+   "items": [
+    "ingest",
+    "bronze",
+    "customers + orders (parallel)",
+    "gold",
+    "quality check"
+   ]
+  },
+  {
+   "id": "ch10-e084",
+   "type": "order",
+   "section": "ch10-s11",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Order the ‘task failed’ debugging model.",
+   "explain": "Upstream first (cheapest), then infrastructure (compute, runtime, library), then identity (permissions), then inputs (parameters, data), and finally Spark execution itself.",
+   "items": [
+    "Upstream?",
+    "Compute?",
+    "Runtime?",
+    "Library?",
+    "Permissions?",
+    "Parameter?",
+    "Data?",
+    "Spark execution?"
+   ]
+  },
+  {
+   "id": "ch10-e085",
+   "type": "scenario",
+   "section": "ch10-s11",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Nightly job `orders_daily`: task `gold` fails with `ModuleNotFoundError: No module named 'holidays'`.",
+   "steps": [
+    {
+     "prompt": "Which bucket of the debugging model is this?",
+     "options": [
+      {
+       "text": "Library",
+       "ok": true,
+       "fb": "A missing Python module is a dependency/library problem."
+      },
+      {
+       "text": "Permissions",
+       "ok": false,
+       "fb": "A permission error would say PERMISSION_DENIED / access denied."
+      },
+      {
+       "text": "Data",
+       "ok": false,
+       "fb": "Data issues show up as schema/value errors, not missing modules."
+      }
+     ]
+    },
+    {
+     "prompt": "The task runs fine on your all-purpose cluster. Why does the job fail?",
+     "options": [
+      {
+       "text": "The job's compute (job cluster / serverless environment) doesn't have the library installed",
+       "ok": true,
+       "fb": "Each compute has its own libraries; your interactive cluster's packages don't follow the job."
+      },
+      {
+       "text": "The job runs an older Spark that can't import Python",
+       "ok": false,
+       "fb": "All runtimes run Python; it's the missing package."
+      },
+      {
+       "text": "Retries are disabled",
+       "ok": false,
+       "fb": "Retrying won't install the library."
+      }
+     ]
+    },
+    {
+     "prompt": "Best production fix?",
+     "options": [
+      {
+       "text": "Declare the dependency in the job's task libraries / serverless environment (ideally pinned, in the bundle)",
+       "ok": true,
+       "fb": "Reproducible: the dependency is part of the job definition."
+      },
+      {
+       "text": "Point the job at your all-purpose cluster",
+       "ok": false,
+       "fb": "Works by accident, costs more and isn't isolated or reproducible."
+      },
+      {
+       "text": "`pip install` inside the notebook manually once",
+       "ok": false,
+       "fb": "Manual one-off steps aren't reproducible."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e086",
+   "type": "bucket",
+   "section": "ch10-s11",
+   "difficulty": 2,
+   "tags": [
+    "compare"
+   ],
+   "quick": false,
+   "q": "Where does each job compute option sit?",
+   "explain": "Serverless job compute is Databricks-managed. New job clusters, shared job clusters and existing all-purpose clusters are classic compute you configure; only the job clusters are created for the run and terminated after.",
+   "buckets": [
+    "Serverless (managed)",
+    "Classic (you configure)"
+   ],
+   "items": [
+    {
+     "text": "Serverless job compute",
+     "bucket": 0
+    },
+    {
+     "text": "New job cluster",
+     "bucket": 1
+    },
+    {
+     "text": "Shared job cluster",
+     "bucket": 1
+    },
+    {
+     "text": "Existing all-purpose compute",
+     "bucket": 1
+    },
+    {
+     "text": "Classic job compute",
+     "bucket": 1
+    }
+   ]
+  },
+  {
+   "id": "ch10-e087",
+   "type": "match",
+   "section": "ch10-s11",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the Jobs concept to its definition.",
+   "explain": "A job is the definition, a task a unit of work, a run one execution; dynamic value references are resolved at run time; run-job triggers another job; for-each loops a nested task.",
+   "pairs": [
+    [
+     "Job",
+     "The orchestrated workflow definition"
+    ],
+    [
+     "Task",
+     "One unit of work inside a job"
+    ],
+    [
+     "Run",
+     "One execution of a job"
+    ],
+    [
+     "Dynamic value reference",
+     "Placeholder like {{job.run_id}} resolved at run time"
+    ],
+    [
+     "Run-job task",
+     "A task that triggers another job"
+    ],
+    [
+     "For-each",
+     "Runs a nested task once per list item"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e088",
+   "type": "tf",
+   "section": "ch10-s11",
+   "difficulty": 1,
+   "tags": [
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "Running production jobs on an existing all-purpose cluster is the recommended default.",
+   "explain": "False. All-purpose compute is meant for interactive work: it's pricier and shared/less isolated. Production jobs normally use serverless job compute or job clusters created per run.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e089",
+   "type": "match",
+   "section": "ch10-s12",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match the Databricks SQL feature to its purpose.",
+   "explain": "Query history lists past runs; the query profile breaks one query down by operator; alerts notify on conditions; AI/BI dashboards visualize; the Statement Execution API runs SQL over REST; JDBC/ODBC connect BI tools.",
+   "pairs": [
+    [
+     "Query history",
+     "List of past queries with duration and user"
+    ],
+    [
+     "Query profile",
+     "Per-operator execution breakdown of one query"
+    ],
+    [
+     "Alerts",
+     "Notify when a scheduled query meets a condition"
+    ],
+    [
+     "AI/BI dashboards",
+     "Native Databricks dashboards"
+    ],
+    [
+     "Statement Execution API",
+     "Run SQL on a warehouse via REST"
+    ],
+    [
+     "JDBC / ODBC",
+     "Drivers for Power BI / Tableau"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e090",
+   "type": "mcq",
+   "section": "ch10-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "At 9:00, 60 analysts open dashboards; each query is simple but many are QUEUED. What do you change on the SQL warehouse?",
+   "explain": "Queueing is a concurrency problem: raise max clusters so the warehouse scales out. A bigger size speeds up individual heavy queries but doesn't add parallel capacity as effectively.",
+   "options": [
+    "Increase warehouse size",
+    "Increase max clusters",
+    "Disable auto-stop",
+    "Switch to an all-purpose cluster"
+   ],
+   "answer": 1,
+   "why": [
+    "Size helps heavy single queries, not queueing.",
+    "Correct — scale out for concurrency.",
+    "Auto-stop only affects idle time.",
+    "All-purpose clusters aren't for BI serving."
+   ]
+  },
+  {
+   "id": "ch10-e091",
+   "type": "bucket",
+   "section": "ch10-s12",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Author, monitor/debug, or connect?",
+   "explain": "Authoring happens in the SQL editor, queries and dashboards; monitoring/debugging uses query history, query profile and alerts; external access goes through JDBC/ODBC, Power BI/Tableau and the Statement Execution API.",
+   "buckets": [
+    "Author",
+    "Monitor / debug",
+    "Connect externally"
+   ],
+   "items": [
+    {
+     "text": "SQL Editor",
+     "bucket": 0
+    },
+    {
+     "text": "AI/BI dashboards",
+     "bucket": 0
+    },
+    {
+     "text": "Query history",
+     "bucket": 1
+    },
+    {
+     "text": "Query profile",
+     "bucket": 1
+    },
+    {
+     "text": "Alerts",
+     "bucket": 1
+    },
+    {
+     "text": "JDBC / ODBC",
+     "bucket": 2
+    },
+    {
+     "text": "Statement Execution API",
+     "bucket": 2
+    },
+    {
+     "text": "Tableau connectivity",
+     "bucket": 2
+    }
+   ]
+  },
+  {
+   "id": "ch10-e092",
+   "type": "tf",
+   "section": "ch10-s12",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Auto-stop shuts the SQL warehouse down after a period of inactivity to save cost.",
+   "explain": "True. Auto-stop stops an idle warehouse after the configured minutes; the next query starts it again (fast for serverless).",
+   "answer": true
+  },
+  {
+   "id": "ch10-e093",
+   "type": "odd",
+   "section": "ch10-s12",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Which is NOT a SQL warehouse type?",
+   "explain": "SQL warehouses come as Serverless, Pro and Classic. All-purpose is a classic cluster type for notebooks, not a warehouse type.",
+   "options": [
+    "Serverless",
+    "Pro",
+    "Classic",
+    "All-purpose"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "ch10-e094",
+   "type": "scenario",
+   "section": "ch10-s12",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "One gold dashboard query takes 3 minutes; all others are fast and nothing is queued.",
+   "steps": [
+    {
+     "prompt": "Where do you look first?",
+     "options": [
+      {
+       "text": "The query profile of that query",
+       "ok": true,
+       "fb": "It shows which operator (scan, join, aggregate) eats the time and how much data is read."
+      },
+      {
+       "text": "Raise max clusters",
+       "ok": false,
+       "fb": "Nothing is queued — concurrency isn't the problem."
+      },
+      {
+       "text": "Recreate the dashboard",
+       "ok": false,
+       "fb": "The dashboard isn't the slow part; the query is."
+      }
+     ]
+    },
+    {
+     "prompt": "The profile shows a full scan of a huge table with most time in the Scan. Reasonable direction?",
+     "options": [
+      {
+       "text": "Improve data layout/skipping (clustering on filter columns) or precompute with a materialized view",
+       "ok": true,
+       "fb": "Less data read = faster; MVs precompute heavy aggregations."
+      },
+      {
+       "text": "Disable Photon",
+       "ok": false,
+       "fb": "Photon speeds up scans; disabling it slows things down."
+      },
+      {
+       "text": "Shorten auto-stop",
+       "ok": false,
+       "fb": "Auto-stop affects idle cost, not query speed."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e095",
+   "type": "order",
+   "section": "ch10-s13",
+   "difficulty": 1,
+   "tags": [
+    "debug"
+   ],
+   "quick": true,
+   "q": "Order the investigation process for ‘query slow’.",
+   "explain": "Go from coarse to fine: Spark UI → the slow stage → the slow tasks inside it → compare their distribution → then test hypotheses (skew, shuffle, spill, I/O, join, GC, small files). Never start with ‘bigger cluster’.",
+   "items": [
+    "Query slow",
+    "Open Spark UI",
+    "Find slow stage",
+    "Find slow tasks",
+    "Compare task distribution",
+    "Test hypotheses: skew / shuffle / spill / I/O / join / GC / small files"
+   ]
+  },
+  {
+   "id": "ch10-e096",
+   "type": "match",
+   "section": "ch10-s13",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match the physical-plan operator to its meaning.",
+   "explain": "Exchange = shuffle; BroadcastHashJoin = small side copied everywhere; SortMergeJoin = shuffle + sort + merge; HashAggregate = hash-based aggregation; WholeStageCodegen = fused generated code; Scan = reading the source.",
+   "pairs": [
+    [
+     "Exchange",
+     "Shuffle / redistribution of data (stage boundary)"
+    ],
+    [
+     "BroadcastHashJoin",
+     "Small side copied to every executor"
+    ],
+    [
+     "SortMergeJoin",
+     "Both sides shuffled by key, sorted, merged"
+    ],
+    [
+     "HashAggregate",
+     "Aggregation using a hash map"
+    ],
+    [
+     "WholeStageCodegen",
+     "Several operators fused into one generated function"
+    ],
+    [
+     "Scan",
+     "Reading the data source"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e097",
+   "type": "match",
+   "section": "ch10-s13",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "debug"
+   ],
+   "quick": false,
+   "q": "Match the Spark UI metric to what it tells you.",
+   "explain": "Shuffle write/read measure data moved between stages; spill (memory/disk) shows data that didn't fit; GC time shows JVM memory pressure. Uneven shuffle read across tasks is the classic skew signal.",
+   "pairs": [
+    [
+     "Shuffle write",
+     "Bytes written by map tasks for the next stage"
+    ],
+    [
+     "Shuffle read",
+     "Bytes fetched by reduce tasks"
+    ],
+    [
+     "Spill (memory)",
+     "In-memory size of data that had to be spilled"
+    ],
+    [
+     "Spill (disk)",
+     "On-disk size of spilled data"
+    ],
+    [
+     "GC time",
+     "Time paused for JVM garbage collection"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e098",
+   "type": "mcq",
+   "section": "ch10-s13",
+   "difficulty": 2,
+   "tags": [
+    "compare",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "You need to reduce 2,000 tiny output partitions to 50 before writing, as cheaply as possible. Which call?",
+   "explain": "`coalesce(50)` merges existing partitions without a full shuffle — cheap, down-only. `repartition(50)` does a full shuffle (useful to rebalance or increase), which costs more here.",
+   "options": [
+    "repartition(50)",
+    "coalesce(50)",
+    "repartition(5000)",
+    "AQE must be disabled first"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "ch10-e099",
+   "type": "bucket",
+   "section": "ch10-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Which bottleneck does each piece of evidence point to?",
+   "explain": "Spill, high GC and OOMs mean memory pressure. Long time reading storage, thousands of tiny files or slow shuffle fetch mean I/O-bound. Busy cores with heavy UDFs/expressions and no spill mean CPU-bound.",
+   "buckets": [
+    "CPU-bound",
+    "Memory-bound",
+    "I/O-bound"
+   ],
+   "items": [
+    {
+     "text": "Cores at 100%, heavy Python UDF, no spill",
+     "bucket": 0
+    },
+    {
+     "text": "Complex expressions/decompression dominate",
+     "bucket": 0
+    },
+    {
+     "text": "Large spill (disk)",
+     "bucket": 1
+    },
+    {
+     "text": "High GC time",
+     "bucket": 1
+    },
+    {
+     "text": "Executor OOM",
+     "bucket": 1
+    },
+    {
+     "text": "Thousands of tiny input files",
+     "bucket": 2
+    },
+    {
+     "text": "Time dominated by reading storage",
+     "bucket": 2
+    }
+   ]
+  },
+  {
+   "id": "ch10-e100",
+   "type": "tf",
+   "section": "ch10-s13",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "interview"
+   ],
+   "quick": true,
+   "q": "When a job slows from 8 to 42 minutes, the first step is to use a bigger cluster.",
+   "explain": "False. The plan explicitly rejects blind scaling: open the Spark UI, find the slow stage and tasks, compare distributions and test hypotheses. If it's skew, more nodes won't help at all.",
+   "answer": false
+  },
+  {
+   "id": "ch10-e101",
+   "type": "mcq",
+   "section": "ch10-s13",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "The DRIVER crashes with OutOfMemory right after `big_df.collect()`. Most likely cause?",
+   "explain": "`collect()` (and `toPandas()`) pulls all rows into the driver's memory — a classic driver OOM. Executor OOMs come from huge partitions/skew on workers, not from collecting results.",
+   "options": [
+    "A skewed partition on one executor",
+    "Collecting a large result to the driver",
+    "Too many shuffle partitions",
+    "Photon is enabled"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "ch10-e102",
+   "type": "match",
+   "section": "ch10-s13",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Match the performance technique to its definition.",
+   "explain": "Salting spreads hot keys; broadcasting avoids shuffling the big side; AQE re-optimizes at runtime; compaction fixes small files; data skipping avoids reading irrelevant files.",
+   "pairs": [
+    [
+     "Salting",
+     "Add a random suffix to a hot key to spread it"
+    ],
+    [
+     "Broadcasting",
+     "Send a small table to all executors"
+    ],
+    [
+     "AQE",
+     "Runtime re-optimization: coalesce, switch joins, split skew"
+    ],
+    [
+     "File compaction",
+     "Merge many small files into larger ones"
+    ],
+    [
+     "Data skipping",
+     "Use file stats to avoid reading files"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e103",
+   "type": "scenario",
+   "section": "ch10-s13",
+   "difficulty": 3,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Case from the plan: **Job used to take 8 min. Now takes 42 min.**",
+   "steps": [
+    {
+     "prompt": "First move?",
+     "options": [
+      {
+       "text": "Open the Spark UI and find which stage got slow",
+       "ok": true,
+       "fb": "Evidence first: locate the slow stage."
+      },
+      {
+       "text": "Double the workers",
+       "ok": false,
+       "fb": "Blind scaling; if it's skew it won't help."
+      },
+      {
+       "text": "Rewrite the job in SQL",
+       "ok": false,
+       "fb": "No evidence that the language is the issue."
+      }
+     ]
+    },
+    {
+     "prompt": "Stage 7 (a join) went from 1 to 35 minutes. Inside it?",
+     "options": [
+      {
+       "text": "Compare task metrics: min/median/max duration, shuffle read, spill per task",
+       "ok": true,
+       "fb": "The distribution tells skew vs uniform slowness."
+      },
+      {
+       "text": "Check the driver logs only",
+       "ok": false,
+       "fb": "The driver log rarely shows per-task imbalance."
+      },
+      {
+       "text": "Restart the cluster",
+       "ok": false,
+       "fb": "Destroys the UI evidence."
+      }
+     ]
+    },
+    {
+     "prompt": "All tasks are uniformly slower and shuffle read grew 5×; the plan shows SortMergeJoin where it used to be BroadcastHashJoin. Interpretation?",
+     "options": [
+      {
+       "text": "The dimension table grew past the broadcast threshold, so the join switched to a shuffle join",
+       "ok": true,
+       "fb": "Uniform slowdown + more shuffle + changed join strategy = data growth changed the plan; consider broadcast hints, filtering, or layout."
+      },
+      {
+       "text": "Classic data skew",
+       "ok": false,
+       "fb": "Skew shows a few slow tasks, not a uniform slowdown."
+      },
+      {
+       "text": "GC is broken",
+       "ok": false,
+       "fb": "No GC evidence was mentioned."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e104",
+   "type": "odd",
+   "section": "ch10-s13",
+   "difficulty": 1,
+   "tags": [
+    "concept"
+   ],
+   "quick": false,
+   "q": "Three are physical-plan operators. Which one is a Spark UI task metric instead?",
+   "explain": "Exchange, SortMergeJoin and HashAggregate appear in physical plans. GC time is a per-task metric shown in the Spark UI.",
+   "options": [
+    "Exchange",
+    "SortMergeJoin",
+    "HashAggregate",
+    "GC time"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "ch10-e105",
+   "type": "order",
+   "section": "ch10-s14",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": true,
+   "q": "Order the bundle commands for a first deployment to dev.",
+   "explain": "Validate the configuration, deploy the resources to the dev target, then run the deployed job by its resource key.",
+   "items": [
+    "databricks bundle validate",
+    "databricks bundle deploy -t dev",
+    "databricks bundle run orders_job -t dev"
+   ]
+  },
+  {
+   "id": "ch10-e106",
+   "type": "spotbug",
+   "section": "ch10-s14",
+   "difficulty": 2,
+   "tags": [
+    "syntax",
+    "pitfall"
+   ],
+   "quick": false,
+   "q": "The bundle defines `resources.jobs.orders_job` with `name: orders-job`. Which command is wrong?",
+   "explain": "`bundle run` takes the resource KEY (`orders_job`), not the display name (`orders-job`). Validate and deploy are correct.",
+   "lines": [
+    "databricks bundle validate",
+    "databricks bundle deploy -t dev",
+    "databricks bundle run orders-job -t dev"
+   ],
+   "bugs": [
+    2
+   ],
+   "fix": "databricks bundle run orders_job -t dev"
+  },
+  {
+   "id": "ch10-e107",
+   "type": "write",
+   "section": "ch10-s14",
+   "difficulty": 2,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Write the `targets` section of `databricks.yml` with a `dev` target in development mode and a `prod` target in production mode.",
+   "explain": "Targets define deployment environments; `mode: development` gives per-user, prefixed, paused deployments, while `mode: production` marks the real deployment (ideally run as a service principal).",
+   "solution": "targets:\n  dev:\n    mode: development\n  prod:\n    mode: production",
+   "keywords": [
+    "targets:",
+    "dev:",
+    "mode: development",
+    "prod:",
+    "mode: production"
+   ],
+   "lang": "yaml"
+  },
+  {
+   "id": "ch10-e108",
+   "type": "match",
+   "section": "ch10-s14",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "quick": true,
+   "q": "Match the developer-workflow tool to its definition.",
+   "explain": "The CLI drives Databricks from a terminal; Git folders bring repos into the workspace; workspace files hold non-notebook code/config; wheels package libraries; Databricks Connect runs local IDE code on remote compute.",
+   "pairs": [
+    [
+     "Databricks CLI",
+     "Terminal tool: `databricks …` commands"
+    ],
+    [
+     "Git folders",
+     "Git repo cloned into the workspace (formerly Repos)"
+    ],
+    [
+     "Workspace files",
+     "Non-notebook files (.py, .yml) in the workspace"
+    ],
+    [
+     "Python wheel",
+     "Packaged library (.whl) installed on compute"
+    ],
+    [
+     "Databricks Connect",
+     "Run local IDE Spark code on remote Databricks compute"
+    ]
+   ]
+  },
+  {
+   "id": "ch10-e109",
+   "type": "tf",
+   "section": "ch10-s14",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": false,
+   "q": "Per the source, Declarative Automation Bundles is the current name for what used to be called Databricks Asset Bundles.",
+   "explain": "True (per the source). Bundles describe jobs, pipelines, source files and deployment targets as version-controlled YAML (`databricks.yml`) and are deployed with `databricks bundle …`. Expect both names in docs and tutorials.",
+   "answer": true
+  },
+  {
+   "id": "ch10-e110",
+   "type": "cloze",
+   "section": "ch10-s14",
+   "difficulty": 1,
+   "tags": [
+    "syntax"
+   ],
+   "quick": false,
+   "q": "Complete the bundle basics.",
+   "explain": "The primary bundle file is `databricks.yml` (YAML). `-t` selects the target; `validate` checks configuration before deploying.",
+   "text": "The primary bundle file is [[databricks.yml]]. You check it with `databricks bundle [[validate]]`, deploy with `databricks bundle deploy [[-t]] dev`, and run a job with `databricks bundle [[run]] orders_job -t dev`.",
+   "bank": [
+    "bundle.json",
+    "start",
+    "--env"
+   ]
+  },
+  {
+   "id": "ch10-e111",
+   "type": "mcq",
+   "section": "ch10-s14",
+   "difficulty": 2,
+   "tags": [
+    "concept",
+    "exam"
+   ],
+   "quick": false,
+   "q": "Your CI pipeline deploys the bundle to prod. Which identity should it use?",
+   "explain": "A service principal: a non-human deployment identity with exactly the needed permissions. Personal credentials in CI are a security and continuity risk.",
+   "options": [
+    "A developer's personal access token",
+    "A service principal",
+    "The workspace admin account",
+    "No identity — bundles deploy anonymously"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "ch10-e112",
+   "type": "free",
+   "section": "ch10-s14",
+   "difficulty": 3,
+   "tags": [
+    "interview"
+   ],
+   "quick": false,
+   "q": "Interview: why define jobs and pipelines in a bundle instead of clicking them together in the UI?",
+   "explain": "Look for version control, review, reproducible multi-environment deploys, CI/CD, rollbacks, service-principal identity.",
+   "model": "With a bundle, jobs/pipelines/source files and targets are version-controlled configuration. Changes are reviewed in Git, validated and tested in CI, and deployed the same way to dev/test/prod with per-environment settings. Deployments are reproducible and can be rolled back by redeploying a previous commit, and production runs under a service principal instead of someone's account. Clicking in the UI is manual, unreviewed and hard to reproduce.",
+   "rubric": [
+    "Version control / code review",
+    "Reproducible deployments across dev/test/prod (targets)",
+    "CI/CD validation & testing",
+    "Rollback by redeploying a previous version",
+    "Service principal / deployment identity"
+   ]
+  },
+  {
+   "id": "ch10-e113",
+   "type": "mcq",
+   "section": "ch10-s15",
+   "difficulty": 1,
+   "tags": [
+    "exam"
+   ],
+   "quick": true,
+   "q": "You need to run a **scheduled PySpark workload without managing infrastructure**. Which compute?",
+   "explain": "Serverless jobs compute: scheduled (a job), PySpark, and Databricks manages the infrastructure. All-purpose is interactive; classic job clusters require you to configure VMs; a SQL warehouse runs SQL, not PySpark jobs.",
+   "options": [
+    "All-purpose cluster",
+    "Classic job cluster",
+    "Serverless Jobs",
+    "SQL warehouse"
+   ],
+   "answer": 2,
+   "why": [
+    "Interactive and you manage it.",
+    "Classic = you manage the VM configuration.",
+    "Correct.",
+    "Warehouses run SQL, not PySpark workloads."
+   ]
+  },
+  {
+   "id": "ch10-e114",
+   "type": "scenario",
+   "section": "ch10-s15",
+   "difficulty": 3,
+   "tags": [
+    "debug",
+    "interview"
+   ],
+   "quick": false,
+   "q": "A 2 TB ETL job went from 12 to 45 minutes. One stage has 1,000 tasks: 997 finish in 20 s, 3 run 15 min spilling 80 GB each.",
+   "steps": [
+    {
+     "prompt": "Most likely diagnosis?",
+     "options": [
+      {
+       "text": "Data skew — a few partitions hold far more data",
+       "ok": true,
+       "fb": "A long tail of a few huge tasks is the skew signature."
+      },
+      {
+       "text": "The cluster is too small",
+       "ok": false,
+       "fb": "997 tasks finish quickly; capacity is fine."
+      },
+      {
+       "text": "Too many small files",
+       "ok": false,
+       "fb": "Small files make many tasks slow-ish, not 3 extreme stragglers."
+      }
+     ]
+    },
+    {
+     "prompt": "How do you prove it in the Spark UI?",
+     "options": [
+      {
+       "text": "Stage summary metrics: median vs max duration, shuffle read/records and spill concentrated in the 3 tasks",
+       "ok": true,
+       "fb": "Evidence: max ≫ median and the same 3 tasks read far more shuffle data."
+      },
+      {
+       "text": "Check the job's total duration only",
+       "ok": false,
+       "fb": "Total duration can't distinguish skew from other causes."
+      },
+      {
+       "text": "Look at the notebook code formatting",
+       "ok": false,
+       "fb": "Not evidence."
+      }
+     ]
+    },
+    {
+     "prompt": "Then what?",
+     "options": [
+      {
+       "text": "Find the hot join/grouping key (e.g. NULL or one giant customer) and apply AQE skew handling, salting, or broadcasting the small side",
+       "ok": true,
+       "fb": "Fix the distribution, not the hardware."
+      },
+      {
+       "text": "Add 20 workers",
+       "ok": false,
+       "fb": "The 3 huge partitions still run as 3 single tasks."
+      },
+      {
+       "text": "Increase GC time",
+       "ok": false,
+       "fb": "GC time is a symptom metric, not a setting to raise."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch10-e115",
+   "type": "calc",
+   "section": "ch10-s15",
+   "difficulty": 2,
+   "tags": [
+    "calc"
+   ],
+   "quick": true,
+   "q": "In the 2 TB case, 3 straggler tasks each spill 80 GB. How many GB spill in total from those tasks?",
+   "explain": "3 × 80 GB = 240 GB of spill concentrated in 3 tasks out of 1,000 — further evidence that the data is unevenly distributed (skew), not that the whole cluster lacks memory.",
+   "answer": 240,
+   "tolerance": 0,
+   "unit": "GB"
+  },
+  {
+   "id": "ch10-e116",
+   "type": "bucket",
+   "section": "ch10-s15",
+   "difficulty": 2,
+   "tags": [
+    "exam",
+    "compare"
+   ],
+   "quick": false,
+   "q": "Certification-style or engineering-style question?",
+   "explain": "Certification-style questions ask you to pick the correct product/feature for a short scenario. Engineering-style questions give symptoms and numbers and expect hypothesis → evidence → fix.",
+   "buckets": [
+    "Certification-style",
+    "Engineering-style"
+   ],
+   "items": [
+    {
+     "text": "Which compute for a scheduled PySpark workload without infra management?",
+     "bucket": 0
+    },
+    {
+     "text": "Which command shows a table's version history?",
+     "bucket": 0
+    },
+    {
+     "text": "Which privilege is needed to access a schema?",
+     "bucket": 0
+    },
+    {
+     "text": "3 of 1,000 tasks take 15 min and spill 80 GB — investigate",
+     "bucket": 1
+    },
+    {
+     "text": "Job went from 8 to 42 minutes — what do you do?",
+     "bucket": 1
+    },
+    {
+     "text": "Bronze suddenly has every row twice — find the cause",
+     "bucket": 1
+    }
+   ]
+  },
+  {
+   "id": "ch10-e117",
+   "type": "order",
+   "section": "ch10-s15",
+   "difficulty": 2,
+   "tags": [
+    "debug"
+   ],
+   "quick": false,
+   "q": "Order the verification list the plan gives after hypothesizing skew.",
+   "explain": "Start in the Spark UI, look at the task-duration distribution, then shuffle read/write and spill per task, then partition sizes, then identify the join/grouping key, and confirm with the physical plan.",
+   "items": [
+    "Spark UI",
+    "Task-duration distribution",
+    "Shuffle read/write",
+    "Spill",
+    "Partition sizes",
+    "Join/grouping keys",
+    "Physical plan"
+   ]
+  },
+  {
+   "id": "ch10-e118",
+   "type": "free",
+   "section": "ch10-s15",
+   "difficulty": 3,
+   "tags": [
+    "interview",
+    "debug"
+   ],
+   "quick": false,
+   "q": "Answer the engineering-style question as in an interview: *3 of 1,000 tasks take 15 min and spill 80 GB each; the rest take 20 s. What is happening and how do you investigate?*",
+   "explain": "Look for: skew hypothesis, UI evidence, hot key, fixes, why scaling doesn't help.",
+   "model": "It's very likely data skew: a few partitions got far more data than the rest, so three tasks process huge partitions, run out of execution memory and spill. I'd confirm in the Spark UI stage view — median duration ~20 s vs max ~15 min, and those three tasks have much larger shuffle read/records and all the spill. Then I'd find the join or groupBy key feeding that stage and check its value distribution (often NULLs or one giant customer) and confirm the join type in the physical plan. Fixes: enable/tune AQE skew-join handling, salt the hot key, broadcast the small side, or handle the hot key/NULLs separately. Adding nodes wouldn't help, because the big partitions still run as single tasks.",
+   "rubric": [
+    "Hypothesis: data skew",
+    "Evidence: median vs max duration, shuffle read and spill per task in Spark UI",
+    "Find the hot key (join/grouping key, NULLs)",
+    "Fixes: AQE skew handling, salting, broadcast, separate hot-key handling",
+    "Explains why more hardware doesn't fix it"
+   ]
+  },
+  {
+   "id": "ch10-e119",
+   "type": "tf",
+   "section": "ch10-s15",
+   "difficulty": 1,
+   "tags": [
+    "pitfall",
+    "exam"
+   ],
+   "quick": false,
+   "q": "If 997 tasks finish in 20 s and 3 take 15 minutes, the cluster simply needs more workers.",
+   "explain": "False. The cluster handles 997 tasks quickly; the problem is 3 oversized partitions. More workers can't split a single task, so the stragglers stay slow — this is skew.",
+   "answer": false
+  }
+ ]
+}

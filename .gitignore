@@ -1,0 +1,12 @@
+# never commit secrets
+config.local.js
+.env
+# generated / large / machine-specific
+dist/
+data/*.db
+data/*.db-*
+*.tmp
+__pycache__/
+.DS_Store
+node_modules/
+_to_delete/
