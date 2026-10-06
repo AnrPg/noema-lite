@@ -43,6 +43,13 @@ const GUIDES = {
     '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
     '**Publish repository** → keep **Keep this code private** ticked.',
     'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
+  claude: { icon: '✨', title: 'Create a subject with Claude (your own Claude plan)', who: 'Everyone with a Claude account', steps: [
+    'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker).',
+    '**Once:** download the **noema-pack-builder** skill and upload it in Claude: **Customize → Skills → + → Upload a skill** (code execution on: Settings → Capabilities).',
+    `**Once, optional (cloud account):** in Claude **Customize → Connectors → + → Add custom connector** with the URL ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'}; sign in to noema-lite and approve.`,
+    'Open Claude, attach your PDFs / notes / images / links and paste the prompt from the app. Claude reads everything, adds pictures (from your sources, from the web and its own diagrams/graphs) and builds the pack.',
+    'With the connector the new subject appears in your picker; otherwise import the .json file Claude gives you (📥 Import subject pack).'],
+    notes: ['It uses YOUR Claude plan — noema-lite never sees your Claude login. Free works for small sources; big PDFs need Pro/Max.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
   friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
     `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
     'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',

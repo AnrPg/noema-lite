@@ -82,7 +82,7 @@ async function mockGemini(ctx) {
   ok(await page.evaluate(() => $$('.modal details.accsec[open]').length === 1), 'a section expands on click');
   await page.screenshot({ path: SHOTS + '/a3b_backup_expanded.png' });
   await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('help'); }); await wait(400);
-  ok(await page.$$eval('.modal details.accsec', d => d.length) === 7, 'help tab lists 7 setup guides');
+  ok(await page.$$eval('.modal details.accsec', d => d.length) === 8, 'help tab lists 8 setup guides');
   await page.screenshot({ path: SHOTS + '/a3c_help.png' });
   await page.evaluate(() => $('.modal')?.remove());
   // switch subject → math subject

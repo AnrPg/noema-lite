@@ -72,6 +72,7 @@ const ACC_VIEWS = {
         s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
         s.origin === 'imported' ? h('button', { class: 'iconbtn', title: 'Remove imported pack (progress is kept)', onclick: () => confirmBox(`Remove the imported pack “${s.title}”? Your progress in it is kept.`, async () => { await Noema.idb.del('packs', ACCOUNT.id + '|' + s.id); Noema.kv.del(Noema.kv.accountKey('packmeta:' + s.id)); toast('Removed'); }) }, '🗑️') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
+        h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
         h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn', onclick: () => { const p = Noema.pack; const b = new Blob([JSON.stringify(p)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `${SUBJ.id}.noema-pack.json` }); a.click(); } }, `⬇️ Export “${SUBJ.title}” pack`)));
   },

@@ -188,9 +188,15 @@
   async function getPack(acc, meta) {
     window.NOEMA_PACKS = window.NOEMA_PACKS || {};
     if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id];
-    if (meta.origin === 'imported') { const p = await IDB.get('packs', acc + '|' + meta.id); if (p) return p; }
+    let cached = null;
+    if (meta.origin === 'imported') {
+      cached = await IDB.get('packs', acc + '|' + meta.id);
+      const stale = cached && meta.version && cached.version && cached.version !== meta.version && window.NoemaCloud && NoemaCloud.session();
+      if (cached && !stale) return cached;     // a newer version exists in the cloud (e.g. Claude updated it) → download below
+    }
     if (meta.path) { await loadScript(meta.path); if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id]; }
     if (window.NoemaCloud && NoemaCloud.session()) { const p = await NoemaCloud.downloadPack(meta.id).catch(() => null); if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); return p; } }
+    if (cached) return cached;
     throw new Error(`The study pack for “${meta.title || meta.id}” could not be loaded.`);
   }
   async function ensureMath() {
@@ -294,11 +300,11 @@
               el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100); return el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
                 el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o' }, s.origin === 'private' ? '🔒' : '📥') : null, pct ? el('span', { class: 'p' }, pct + '%') : null); }))));
           });
-          if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Hand your sources to Claude to generate a subject pack, then import it here.')));
+          if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.')));
         };
         const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         box.append(brandHead('What do you want to study?', `${a.emoji || ''} ${a.name}`), q, list,
-          el('div', { class: 'row noema-ovfoot' }, imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, '👤 Switch profile'),
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide() }, '✨ Create with Claude'), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, '👤 Switch profile'),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, 'Close') : null));
         draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
       }, { closable });
@@ -314,6 +320,58 @@
     if (window.NoemaCloud && NoemaCloud.session() && acc === 'u_' + NoemaCloud.session().user.id) NoemaCloud.uploadPack(p).catch(e => console.warn(e));
     toastL(`📥 “${p.subject.title}” imported`);
     return { ...p.subject, origin: 'imported', counts: p.counts };
+  }
+
+  /* ---------------- Claude: skill + connector (docs/CLAUDE_CONNECTOR.md) ---------------- */
+  const SITE = (CFG.siteUrl || '').replace(/\/$/, '');
+  const MCP_URL = SITE ? SITE + '/mcp' : '';
+  const SKILL_URL = (location.protocol.startsWith('http') ? '' : SITE) + '/downloads/noema-pack-builder.zip';
+  const CLAUDE_PROMPT = 'Use the noema-pack-builder skill to create a noema-lite subject from the files I attach.\nSubject: …\nLanguage of the material: …\nMy goal: exam / understanding / project\nSave it to my noema-lite account with the connector if it is available.';
+  async function copyText(t, b) { try { await navigator.clipboard.writeText(t); if (b) { const o = b.textContent; b.textContent = '✓ Copied'; setTimeout(() => { b.textContent = o; }, 1600); } } catch (e) { window.prompt('Copy this:', t); } }
+  function claudeGuide() {
+    overlay((box, close) => {
+      box.append(brandHead('✨ Create a subject with Claude', 'Claude reads your PDFs, notes, images and links and builds the whole study pack — theory, exercises, pictures — with your own Claude plan.'),
+        el('ol', { class: 'noema-steps' },
+          el('li', {}, el('b', {}, 'Add the skill to your Claude — once. '), 'Download it; in Claude open ', el('i', {}, 'Customize → Skills → + → Upload a skill'), ' and choose the zip. (Code execution must be on: ', el('i', {}, 'Settings → Capabilities'), '.) ',
+            el('a', { class: 'btn small', href: SKILL_URL, download: 'noema-pack-builder.zip' }, '⬇️ Download the skill')),
+          MCP_URL ? el('li', {}, el('b', {}, 'Connect Claude to noema-lite — once, optional. '), 'Needs a ☁️ cloud account. In Claude: ', el('i', {}, 'Customize → Connectors → + → Add custom connector'), ', name ', el('b', {}, 'noema-lite'), ', URL ', el('code', {}, MCP_URL), ' ',
+            el('button', { class: 'btn small ghost', onclick: e => copyText(MCP_URL, e.currentTarget) }, '📋 Copy URL'), '. Claude then asks you to sign in to noema-lite and approve — finished subjects land in your picker by themselves.') : null,
+          el('li', {}, el('b', {}, 'Go. '), 'Open Claude, attach your sources and paste the prompt (fill in the dots). ',
+            el('button', { class: 'btn small ghost', onclick: e => copyText(CLAUDE_PROMPT, e.currentTarget) }, '📋 Copy the prompt'), ' ',
+            el('a', { class: 'btn small primary', href: 'https://claude.ai/new', target: '_blank', rel: 'noopener' }, '🚀 Open Claude')),
+          el('li', {}, el('b', {}, 'Study. '), 'With the connector the subject appears here (open the picker again). Without it, Claude gives you a .json file → ', el('b', {}, '📥 Import subject pack'), '.')),
+        el('p', { class: 'tiny' }, 'It runs on your own Claude account (Free works for small sources; big PDFs need Pro or Max). noema-lite never sees your Claude login, and Claude only gets the noema-lite connector’s tools: list your subjects and save study packs.'),
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+    });
+  }
+  /** Supabase OAuth 2.1 consent page for the Claude connector: <site>/oauth/consent?authorization_id=… */
+  async function connectClaude(authId) {
+    document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
+    const fail = msg => overlay(box => box.append(brandHead('Connect Claude', ''), el('p', {}, '⚠️ ' + msg), el('div', { class: 'row noema-ovfoot' }, el('a', { class: 'btn small', href: location.pathname }, 'Open noema-lite'))), { closable: false });
+    if (!window.NoemaCloud || !CFG.supabaseUrl) return fail('This noema-lite installation has no cloud accounts.');
+    if (!NoemaCloud.session()) await new Promise(res => overlay((box, close) => {
+      const intro = () => { box.innerHTML = ''; box.append(brandHead('🔗 Connect Claude', 'Sign in to the noema-lite account Claude should save your subjects to.'), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn primary', onclick: () => cloudForm(box, () => { close(); res(); }, intro) }, '☁️ Sign in'))); };
+      intro();
+    }, { closable: false }));
+    let det;
+    try { det = await NoemaCloud.oauthDetails(authId); } catch (e) { return fail('This connection request is invalid or has expired (' + e.message + '). Start again from Claude.'); }
+    if (det && det.redirect_url && !det.client) { location.assign(det.redirect_url); return; }
+    const who = NoemaCloud.session()?.user?.email || '';
+    const back = (() => { try { return new URL(det.redirect_uri || det.redirect_url || '').host; } catch (e) { return ''; } })();
+    overlay(box => {
+      const go = async (action, b) => {
+        b.disabled = true;
+        try { const r = await NoemaCloud.oauthConsent(authId, action); const to = r?.redirect_url || r?.redirect_to; if (to) location.assign(to); else box.append(el('p', {}, action === 'approve' ? '✅ Connected — go back to Claude.' : 'Cancelled.')); }
+        catch (e) { b.disabled = false; box.append(el('p', { class: 'tiny' }, '⚠️ ' + e.message)); }
+      };
+      box.append(brandHead('🔗 Connect Claude to noema-lite', who ? 'Signed in as ' + who : ''),
+        el('div', { class: 'noema-form' },
+          el('p', {}, el('b', {}, det?.client?.client_name || 'Claude'), ' wants to use your noema-lite account.'),
+          el('ul', { class: 'noema-consent' }, el('li', {}, '✅ list your subjects'), el('li', {}, '✅ create and update your private subject packs'),
+            el('li', {}, '🚫 it gets only the connector’s tools: no access to your conversations, progress or keys through them')),
+          back ? el('p', { class: 'tiny' }, 'After approving you return to ', el('b', {}, back), '.') : null,
+          el('div', { class: 'row' }, el('button', { class: 'btn', onclick: e => go('deny', e.currentTarget) }, 'Deny'), el('button', { class: 'btn primary', onclick: e => go('approve', e.currentTarget) }, 'Allow'))));
+    }, { closable: false });
   }
 
   /* ---------------- backups & restore ---------------- */
@@ -405,7 +463,7 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, overlay,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, overlay, claudeGuide,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
@@ -420,6 +478,7 @@
     migrateOldPrefix(); try { await migrateOldIDB(); } catch (e) { console.warn('[noema] old browser database not migrated', e); }
     if (CFG.supabaseUrl && (CFG.supabaseKey || CFG.supabaseAnonKey) && window.NoemaCloud) { try { await NoemaCloud.init(CFG); } catch (e) { console.warn('[Noema] cloud init failed', e); } }
     const url = new URLSearchParams(location.search);
+    if (url.get('authorization_id')) return connectClaude(url.get('authorization_id'));   // OAuth consent for the Claude connector
     const cur = jget(P + 'current', {});
     let acc = getAccount(url.get('account') || cur.acc);
     const accs = allAccounts();

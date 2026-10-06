@@ -38,6 +38,10 @@ Note: anyone who has the website address can open the shared study material (not
    ⚠️ Never share the **secret** key (`sb_secret_…` / service_role) or the **database password** — the app needs neither.
    If you ever pasted the database password somewhere: **Project Settings → Database → Reset database password**.
 
+### Optional: the Claude connector (users save subjects from their own Claude)
+Supabase → **Authentication → OAuth Server** → enable, turn on **dynamic client registration**, authorization path **`/oauth/consent`**.
+Details and checks: `docs/CLAUDE_CONNECTOR.md`.
+
 ## 3. Netlify (the website)
 1. https://app.netlify.com → sign up with GitHub.
 2. **Add new site → Import an existing project → GitHub** → authorise → pick `noema-lite`.

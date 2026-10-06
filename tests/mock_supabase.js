@@ -2,7 +2,7 @@
    Enforces per-user isolation like the RLS policies in cloud/supabase.sql. Also serves a static folder. */
 const http = require('http'), fs = require('fs'), path = require('path'), crypto = require('crypto');
 function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
-  const users = {}, tokens = {}, kv = {}, snaps = [], profiles = {}, files = {}; let snapId = 1;
+  const users = {}, tokens = {}, kv = {}, snaps = [], profiles = {}, files = {}, signed = {}; let snapId = 1;
   const json = (res, code, obj, extra = {}) => { res.writeHead(code, Object.assign({ 'Content-Type': 'application/json' }, cors, extra)); res.end(obj === undefined ? '' : JSON.stringify(obj)); };
   const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization,apikey,content-type,prefer,x-upsert', 'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS' };
   const session = u => { const at = crypto.randomUUID(), rt = crypto.randomUUID(); tokens[at] = u.id; tokens['r:' + rt] = u.id; return { access_token: at, refresh_token: rt, expires_in: 3600, token_type: 'bearer', user: { id: u.id, email: u.email, user_metadata: u.meta } }; };
@@ -13,6 +13,11 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       const u = new URL(req.url, 'http://x'); const p = u.pathname;
       if (req.method === 'OPTIONS') { res.writeHead(204, cors); return res.end(); }
       server.log.push(`${req.method} ${p}${u.search}`);
+      // ---- signed storage URLs (no apikey / Authorization needed: the token in the URL authorizes)
+      let sm;
+      if ((sm = p.match(/^\/storage\/v1\/object\/upload\/sign\/noema-private\/(.+)$/)) && req.method === 'PUT') { const k = decodeURIComponent(sm[1]); if (signed[u.searchParams.get('token')] !== 'up:' + k) return json(res, 400, { message: 'invalid signature' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
+      if ((sm = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'GET') { const k = decodeURIComponent(sm[1]); if (signed[u.searchParams.get('token')] !== 'dl:' + k || !files[k]) return json(res, 400, { message: 'invalid signature' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
+      if (p === '/oauth-callback') { server.state.callbacks.push(u.search); res.writeHead(200, { 'Content-Type': 'text/html' }); return res.end('<h1>back in Claude</h1>'); }
       const api = /^\/(auth|rest|storage)\/v1\//.test(p);
       if (api && !req.headers.apikey) return json(res, 401, { message: 'No API key found in request' });
       const authz = req.headers.authorization; if (api && authz && !tokens[authz.replace('Bearer ', '')]) return json(res, 401, { message: 'Invalid JWT' });
@@ -26,6 +31,15 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       if (p === '/auth/v1/logout' || p === '/auth/v1/recover') return json(res, 204);
       const uid = who(req);
       if (p.startsWith('/rest/v1/') || p.startsWith('/storage/v1/')) { if (!uid) return json(res, 401, { message: 'JWT required' }); }
+      if (p === '/auth/v1/user') { if (!uid) return json(res, 401, { msg: 'invalid JWT' }); const usr = users[uid]; return json(res, 200, { id: usr.id, email: usr.email, user_metadata: usr.meta }); }
+      let om;
+      if ((om = p.match(/^\/auth\/v1\/oauth\/authorizations\/([^/]+)(\/consent)?$/))) {
+        if (!uid) return json(res, 401, { msg: 'login required' });
+        const a = server.state.authz[om[1]]; if (!a) return json(res, 404, { msg: 'authorization not found' });
+        if (!om[2]) return json(res, 200, { authorization_id: om[1], redirect_uri: a.redirect_uri, client: { client_id: 'claude-dcr-1', client_name: 'Claude' }, user: { id: uid, email: users[uid].email }, scope: 'openid email profile' });
+        server.state.consents.push({ id: om[1], action: data.action, uid });
+        return json(res, 200, { redirect_url: a.redirect_uri + (data.action === 'approve' ? '?code=code-' + om[1] + '&state=s1' : '?error=access_denied&state=s1') });
+      }
       // ---- PostgREST subset
       if (p === '/rest/v1/noema_profiles') { (data || []).forEach(r => { if (r.user_id !== uid) return; profiles[uid] = r; }); return json(res, 201); }
       if (p === '/rest/v1/noema_kv') {
@@ -50,13 +64,16 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       }
       // ---- Storage subset
       let m;
-      if ((m = p.match(/^\/storage\/v1\/object\/list\/noema-private$/))) { const pre = data.prefix; return json(res, 200, Object.keys(files).filter(k => k.startsWith(pre)).map(k => ({ name: k.slice(pre.length) }))); }
+      if ((m = p.match(/^\/storage\/v1\/object\/list\/noema-private$/))) { const pre = data.prefix; return json(res, 200, Object.keys(files).filter(k => k.startsWith(pre)).map(k => ({ name: k.slice(pre.length), metadata: { size: files[k].data.length } }))); }
+      if ((m = p.match(/^\/storage\/v1\/object\/upload\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'rls' }); const t = crypto.randomUUID(); signed[t] = 'up:' + k; return json(res, 200, { url: `/object/upload/sign/noema-private/${k}?token=${t}`, token: t }); }
+      if ((m = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 400, { message: 'Object not found' }); const t = crypto.randomUUID(); signed[t] = 'dl:' + k; return json(res, 200, { signedURL: `/object/sign/noema-private/${k}?token=${t}` }); }
       if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
       if ((m = p.match(/^\/storage\/v1\/object\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
       // ---- static site
       if (staticDir) {
         if (configOverride && p === '/config.js') { res.writeHead(200, { 'Content-Type': 'application/javascript' }); return res.end(configOverride); }
-        let fp = path.join(staticDir, decodeURIComponent(p === '/' ? '/index.html' : p));
+        let fp = path.join(staticDir, decodeURIComponent(p.endsWith('/') ? p + 'index.html' : p));
+        if (fs.existsSync(fp) && fs.statSync(fp).isDirectory()) fp = path.join(fp, 'index.html');
         if (fp.startsWith(staticDir) && fs.existsSync(fp) && fs.statSync(fp).isFile()) {
           const ext = path.extname(fp); const types = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2' };
           res.writeHead(200, { 'Content-Type': types[ext] || 'application/octet-stream' }); return res.end(fs.readFileSync(fp));
@@ -65,7 +82,7 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {} };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [] };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

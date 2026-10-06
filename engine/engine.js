@@ -2537,6 +2537,7 @@ const ACC_VIEWS = {
         s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
         s.origin === 'imported' ? h('button', { class: 'iconbtn', title: 'Remove imported pack (progress is kept)', onclick: () => confirmBox(`Remove the imported pack “${s.title}”? Your progress in it is kept.`, async () => { await Noema.idb.del('packs', ACCOUNT.id + '|' + s.id); Noema.kv.del(Noema.kv.accountKey('packmeta:' + s.id)); toast('Removed'); }) }, '🗑️') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
+        h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
         h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn', onclick: () => { const p = Noema.pack; const b = new Blob([JSON.stringify(p)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `${SUBJ.id}.noema-pack.json` }); a.click(); } }, `⬇️ Export “${SUBJ.title}” pack`)));
   },
@@ -2701,6 +2702,13 @@ const GUIDES = {
     '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
     '**Publish repository** → keep **Keep this code private** ticked.',
     'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
+  claude: { icon: '✨', title: 'Create a subject with Claude (your own Claude plan)', who: 'Everyone with a Claude account', steps: [
+    'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker).',
+    '**Once:** download the **noema-pack-builder** skill and upload it in Claude: **Customize → Skills → + → Upload a skill** (code execution on: Settings → Capabilities).',
+    `**Once, optional (cloud account):** in Claude **Customize → Connectors → + → Add custom connector** with the URL ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'}; sign in to noema-lite and approve.`,
+    'Open Claude, attach your PDFs / notes / images / links and paste the prompt from the app. Claude reads everything, adds pictures (from your sources, from the web and its own diagrams/graphs) and builds the pack.',
+    'With the connector the new subject appears in your picker; otherwise import the .json file Claude gives you (📥 Import subject pack).'],
+    notes: ['It uses YOUR Claude plan — noema-lite never sees your Claude login. Free works for small sources; big PDFs need Pro/Max.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
   friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
     `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
     'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',

@@ -94,3 +94,9 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 .lessonchips{display:flex;flex-direction:column;gap:4px;margin-top:8px}
 .lessonchip{display:block;padding:6px 10px;border-radius:10px;background:linear-gradient(135deg,#fff3bf,#ffe3ec);color:#5c3c00;font-size:13px;font-weight:600}
 :root[data-theme="dark"] .lessonchip{background:#3d2f10;color:#ffe08a}
+/* Claude guide + connector consent (loader overlays) */
+.noema-steps{margin:6px 0 10px;padding-left:22px;display:grid;gap:12px;line-height:1.55}
+.noema-steps li::marker{font-weight:800;color:var(--violet)}
+.noema-steps .btn{margin:4px 2px 0 0}
+.noema-steps code{word-break:break-all}
+.noema-consent{margin:4px 0 8px;padding-left:20px;display:grid;gap:4px}

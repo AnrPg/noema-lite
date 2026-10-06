@@ -10,6 +10,7 @@ what to think about first, and status. Newest at the top.
 | TD-3 | Keyboard-only answering for hotspot / sequence pictures | 📋 known gap | 2026-10-06 |
 | TD-4 | Tutor that can *see* the picture (multimodal Gemini) | 💭 idea | 2026-10-06 |
 | TD-5 | Real Supabase sync tested only against the emulator | 📋 known gap | 2026-10-06 |
+| TD-6 | Claude connector: verify against the real Supabase OAuth server and claude.ai | 📋 known gap | 2026-10-06 |
 
 ---
 
@@ -48,3 +49,9 @@ Watch the token cost and keep the text version as the fallback.
 ### TD-5 · Real Supabase sync — 📋 known gap
 Sign-up, sync, snapshots and private storage pass against the local Supabase emulator
 (`tests/mock_supabase.js`). Verify once against the real project after the website deploy.
+
+### TD-6 · Claude connector on the real services — 📋 known gap
+`tests/connector.js` covers the protocol, tools, upload and consent against the emulator. Still to verify
+live: Supabase OAuth server settings (DCR, consent path, signing keys), Claude’s sign-in round trip, and
+that the claude.ai sandbox can `curl` the signed upload URL (Pro/Max have network access by default; if a
+plan blocks it, the skill falls back to `noema_save_pack` for small packs or the downloadable file).
