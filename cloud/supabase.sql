@@ -1,5 +1,5 @@
 -- =====================================================================================
--- Learning Quest — Supabase schema. Run ONCE in: Supabase dashboard → SQL Editor → New query → Run.
+-- noema-lite — Supabase schema. Run ONCE in: Supabase dashboard → SQL Editor → New query → Run.
 -- Multi-tenant by design: every row / file belongs to exactly one user (auth.uid()) and
 -- row-level security makes other users' data invisible and unwritable.
 -- Safe to re-run (idempotent).

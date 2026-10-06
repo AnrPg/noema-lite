@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build/refresh the SQLite backup database  data/learning-quest.db  from the repository.
+"""Build/refresh the SQLite backup database  data/noema-lite.db  from the repository.
 
 What it stores
   • file_versions / files : every source file (chapters, patches, sources.json, PDFs, account backups, engine sources, tools…)
@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lqlib import ROOT, LIB, ACC, rj, subject_dirs, load_subject, now_iso
 
 args = sys.argv[1:]
-DB = args[args.index('--db') + 1] if '--db' in args else os.path.join(ROOT, 'data', 'learning-quest.db')
+DB = args[args.index('--db') + 1] if '--db' in args else os.path.join(ROOT, 'data', 'noema-lite.db')
 BLOBS = '--no-blobs' not in args
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT);
@@ -120,7 +120,7 @@ def main():
         raw = open(f, 'rb').read()
         try: b = json.loads(raw)
         except Exception: continue
-        if b.get('format') != 'learning-quest-backup': continue
+        if b.get('format') not in ('noema-lite-backup', 'learning-quest-backup'): continue
         acc = b['account']['id']; h = sha(raw)
         cur.execute('INSERT OR IGNORE INTO backups VALUES (?,?,?,?,?,?)', (h, os.path.relpath(f, ROOT), acc, b.get('createdAt'), len(raw), raw.decode('utf-8')))
         if acc not in latest or (b.get('createdAt') or '') > (latest[acc][1].get('createdAt') or ''): latest[acc] = (os.path.relpath(f, ROOT), b)

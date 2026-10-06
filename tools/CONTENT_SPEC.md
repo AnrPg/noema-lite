@@ -1,4 +1,4 @@
-# Learning Quest — content specification (any subject)
+# noema-lite — content specification (any subject)
 
 This is the contract between the **study engine** (subject-agnostic) and a **subject pack**.
 Claude follows it when ingesting new sources; `tools/validate.py` enforces it; `tools/build.py` packs it.

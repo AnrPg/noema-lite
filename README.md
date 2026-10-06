@@ -1,4 +1,4 @@
-# ◆ Learning Quest
+# ◆ noema-lite
 
 A subject-agnostic study app: **structured theory**, a **Socratic AI tutor** (Gemini), **12 types of interactive exercises**,
 debug/diagnosis drills, spaced-repetition flashcards, lightning rounds and boss battles — for *any* subject.
@@ -7,7 +7,7 @@ The engine knows nothing about the content; each subject is a **pack** generated
 ## Open it
 * **On this Mac:** double-click `index.html` (Chrome recommended). Works offline except for the AI tutor and fonts.
 * **Anywhere:** the website built from this repo (see `cloud/README.md`), with a cloud account that syncs your progress.
-* **One file:** `python3 tools/build.py bundle` → `dist/learning-quest.html` (all subjects inlined; e.g. for a phone).
+* **One file:** `python3 tools/build.py bundle` → `dist/noema-lite.html` (all subjects inlined; e.g. for a phone).
 
 ## Repository map
 ```
@@ -28,7 +28,7 @@ accounts/<profile>/
   packs/<id>/              PRIVATE subjects of this profile (never published to the website)
 tools/                     build, validate, new_subject, source_text, db_sync, db_restore, CONTENT_SPEC.md
 cloud/                     supabase.sql (schema + row-level security) and the setup guide
-data/learning-quest.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
+data/noema-lite.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
 tests/                     end-to-end tests (Playwright) incl. a Supabase emulator
 ```
 
@@ -57,8 +57,15 @@ python3 tools/db_restore.py list        # what the database holds; restore files
 | Restore points | automatic before every restore/reset (last 12) | browser (IndexedDB) |
 | Backup files | “Download backup” or automatic every 5 min to a folder (Chrome/Edge) | `accounts/<profile>/backups/` |
 | Git | full history of engine + all subject sources | GitHub (private repo) |
-| Database | `data/learning-quest.db`: every file version + content + profile backups | this Mac + uploaded to the cloud |
+| Database | `data/noema-lite.db`: every file version + content + profile backups | this Mac + uploaded to the cloud |
 | Cloud | live sync + daily snapshots (30 kept) + private files | Supabase |
+
+## Naming
+The app is **noema-lite** (repository, folder, website, docs). Internal technical identifiers keep their original
+short prefix `lq` (browser storage keys `lq1:…`, the `LQ` JavaScript namespace, Supabase tables `lq_*`, bucket `lq-private`,
+pack format `lq-pack`, schema `lq.conversation/v1`, IndexedDB `learning-quest`) so that existing data, backups and
+cloud rows stay readable. Backup files written from now on use the format `noema-lite-backup`; older `learning-quest-backup`
+files are still accepted.
 
 ## Γρήγορος οδηγός (Ελληνικά)
 * Άνοιγμα: διπλό κλικ στο `index.html` (Chrome). Διαλέγεις προφίλ και μάθημα από τα chips.

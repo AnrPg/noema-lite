@@ -16,7 +16,7 @@ const GUIDES = {
     notes: ['The key is personal — don’t share it. Each friend uses their own (it is free with generous limits).', 'Without a key everything works except the tutor, AI grading and AI-generated questions.'] },
   backupFolder: { icon: '📁', title: 'Automatic backups to a folder (Google Drive / iCloud too)', who: 'Chrome, Edge or Brave on a computer', steps: [
     'Account menu (your emoji, top-right) → **💾 Backup & restore → 📁 Automatic backups** → **Choose backup folder**.',
-    `Pick your profile folder, e.g. **learning-quest/accounts/${ACCOUNT.id}** (any folder works). The app creates **backups/** and **conversations/** inside it.`,
+    `Pick your profile folder, e.g. **noema-lite/accounts/${ACCOUNT.id}** (any folder works). The app creates **backups/** and **conversations/** inside it.`,
     'From now on: a backup file every few minutes when something changed (and when you leave), and every AI conversation as **.json + .md** within ~20 seconds.',
     '**Off-site for free:** install **Google Drive for desktop** (https://www.google.com/drive/download/) and choose a folder inside **Google Drive → My Drive** — or a folder in **iCloud Drive**. Your backups then reach the cloud automatically.',
     'After a browser restart the browser may ask again: open the menu and click **Resume** once.'],
@@ -25,7 +25,7 @@ const GUIDES = {
     '**Restore points** (this device) are created automatically before every restore or reset — the quickest undo.',
     '**From a file:** 💾 Backup & restore → Restore from a backup file → choose **Replace** (exact copy), **Merge** (backup wins on conflicts) or **New profile** (side by side).',
     '**Cloud accounts:** ☁️ Cloud → Cloud snapshots → Restore (a snapshot of the current state is taken first).',
-    '**Everything (owner):** the SQLite database in learning-quest/data can recreate any file of any past version: `python3 tools/db_restore.py list`.'] },
+    '**Everything (owner):** the SQLite database in noema-lite/data can recreate any file of any past version: `python3 tools/db_restore.py list`.'] },
   cloudUser: { icon: '☁️', title: 'Use a cloud account (study from anywhere)', who: 'You and your friends', steps: [
     `Open the website${SITE_URL ? ' (' + SITE_URL + ')' : ''} on any device → **☁️ Sign in / create a cloud account**.`,
     'Create the account (email + password). If asked, confirm the email from your inbox, then sign in.',
@@ -40,7 +40,7 @@ const GUIDES = {
     'Full step-by-step guide with screenshots-level detail: **cloud/README.md** in the repository.'] },
   github: { icon: '🐙', title: 'Keep the repository on GitHub (owner)', who: 'Only the owner', steps: [
     'Install **GitHub Desktop** (https://desktop.github.com) and sign in.',
-    '**File → Add Local Repository** → choose Documents/MyApps/learning-quest.',
+    '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
     '**Publish repository** → keep **Keep this code private** ticked.',
     'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
   friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [

@@ -1,12 +1,12 @@
 /* =====================================================================================
-   Learning Quest — loader
+   noema-lite — loader
    Subject-agnostic bootstrap: accounts/profiles, subject picker, pack loading,
    namespaced storage (per account × subject), backups/restore points, cloud hook.
    The study engine (engine.js) is only started after a subject pack is in memory.
    ===================================================================================== */
 (function () {
   'use strict';
-  const CFG = Object.assign({ appName: 'Learning Quest', supabaseUrl: '', supabaseAnonKey: '', autoBackupMinutes: 5, askSubjectOnStart: true }, window.LQ_CONFIG || {});
+  const CFG = Object.assign({ appName: 'noema-lite', supabaseUrl: '', supabaseAnonKey: '', autoBackupMinutes: 5, askSubjectOnStart: true }, window.LQ_CONFIG || {});
   const LOCAL = window.LQ_CONFIG_LOCAL || {};            // config.local.js — never committed (e.g. a default Gemini key)
   const REG = window.LQ_REGISTRY || { groups: [], subjects: [], accounts: [] };
   const P = 'lq1:';
@@ -45,7 +45,7 @@
       if (this.db) return Promise.resolve(this.db);
       return new Promise((res, rej) => {
         if (!window.indexedDB) return rej(new Error('IndexedDB unavailable'));
-        const r = indexedDB.open('learning-quest', 2);
+        const r = indexedDB.open('learning-quest', 2)  /* internal store name kept so existing data stays readable */;
         r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
         r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error);
       });
@@ -262,7 +262,7 @@
           });
           if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Hand your sources to Claude to generate a subject pack, then import it here.')));
         };
-        const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.json,.lqpack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
+        const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.json,.lqpack,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         box.append(brandHead('What do you want to study?', `${a.emoji || ''} ${a.name}`), q, list,
           el('div', { class: 'row lq-ovfoot' }, imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { LQ.switchTo(na.id, null); } } }, '👤 Switch profile'),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, 'Close') : null));
@@ -272,7 +272,7 @@
   }
   async function importPackFile(acc, file) {
     const p = JSON.parse(await file.text());
-    if (p.format !== 'lq-pack' || !p.subject?.id || !Array.isArray(p.chapters)) throw new Error('This file is not a Learning Quest subject pack.');
+    if (p.format !== 'lq-pack' || !p.subject?.id || !Array.isArray(p.chapters)) throw new Error('This file is not a noema-lite subject pack.');
     p.counts = p.counts || countPack(p);
     await IDB.put('packs', acc + '|' + p.subject.id, p);
     KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null }));
@@ -289,19 +289,19 @@
       if (!includeSecrets && data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; data['a:settings'] = JSON.stringify(s); } catch (e) { } }
       const packs = (await importedPacks(acc)).map(p => ({ id: p.subject.id, pack: p }));
       const conversations = window.LQConvos ? await LQConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
-      return { format: 'learning-quest-backup', version: 2, conversationSchema: window.LQConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
+      return { format: 'noema-lite-backup', version: 2, conversationSchema: window.LQConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
         account: { id: a.id, name: a.name, emoji: a.emoji, kind: a.kind || 'local', email: a.email || null }, includesSecrets: !!includeSecrets, data, importedPacks: packs };
     },
-    fileName(acc) { return `lq-backup_${acc}_${stamp()}.json`; },
+    fileName(acc) { return `noema-lite-backup_${acc}_${stamp()}.json`; },
     download(obj) { jset(`${P}${obj.account.id}:meta:lastDownloadBackup`, Date.now()); const b = new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }); const u = URL.createObjectURL(b); const x = el('a', { href: u, download: this.fileName(obj.account.id) }); document.body.append(x); x.click(); x.remove(); setTimeout(() => URL.revokeObjectURL(u), 5000); },
     validate(obj) {
-      if (obj && obj.format === 'learning-quest-backup' && obj.data) return obj;
+      if (obj && (obj.format === 'noema-lite-backup' || obj.format === 'learning-quest-backup') && obj.data) return obj;
       // legacy single-file app export (Databricks Quest): {xp, res, read, settings, ...}
       if (obj && obj.res && obj.settings && typeof obj.xp === 'number') {
         const settings = obj.settings; const st = { ...obj }; delete st.settings; st.srcOn = settings.srcOn || null; delete settings.srcOn;
-        return { format: 'learning-quest-backup', version: 1, legacy: true, createdAt: new Date().toISOString(), account: { id: '?', name: 'legacy export' }, data: { 'a:settings': JSON.stringify(settings), 's:databricks:state': JSON.stringify(st) }, importedPacks: [] };
+        return { format: 'noema-lite-backup', version: 1, legacy: true, createdAt: new Date().toISOString(), account: { id: '?', name: 'legacy export' }, data: { 'a:settings': JSON.stringify(settings), 's:databricks:state': JSON.stringify(st) }, importedPacks: [] };
       }
-      throw new Error('Not a Learning Quest backup file.');
+      throw new Error('Not a noema-lite backup file.');
     },
     async restorePoint(acc, label) { const snap = await this.collect(acc, { includeSecrets: true }); const key = acc + '|' + Date.now(); await IDB.put('restore', key, { label, at: Date.now(), snap }); const all = (await IDB.entries('restore', acc + '|')).sort((x, y) => x[1].at - y[1].at); while (all.length > 12) { const [k] = all.shift(); await IDB.del('restore', k); } return key; },
     async listRestorePoints(acc) { try { return (await IDB.entries('restore', acc + '|')).map(([k, v]) => ({ key: k, label: v.label, at: v.at, size: JSON.stringify(v.snap).length })).sort((a, b) => b.at - a.at); } catch (e) { return []; } },
@@ -345,11 +345,11 @@
       if (!(await this.permitted(h))) { this.status = 'needs-permission'; return false; }
       const dirty = jget(`${P}${acc}:meta:dirty`, 0), last = jget(`${P}${acc}:meta:lastFolderBackup`, 0);
       if (!force && dirty <= last) return true;
-      // canonical folder layout:  <chosen>/backups/lq-backup_<acc>_<day>.json (+ _latest)   <chosen>/conversations/<subject>/<YYYY-MM>/<id>.json|.md
+      // canonical folder layout:  <chosen>/backups/noema-lite-backup_<acc>_<day>.json (+ _latest)   <chosen>/conversations/<subject>/<YYYY-MM>/<id>.json|.md
       const bdir = await h.getDirectoryHandle('backups', { create: true });
       const obj = await Backup.collect(acc);
       const day = new Date().toISOString().slice(0, 10);
-      for (const name of [`lq-backup_${acc}_${day}.json`, `lq-backup_${acc}_latest.json`]) {
+      for (const name of [`noema-lite-backup_${acc}_${day}.json`, `noema-lite-backup_${acc}_latest.json`]) {
         const fh = await bdir.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(JSON.stringify(obj, null, 1)); await w.close();
       }
       if (window.LQConvos) await LQConvos.writeToFolder(acc, h, { all: force && !jget(`${P}${acc}:meta:convosFolderSeeded`, 0) }).then(() => jset(`${P}${acc}:meta:convosFolderSeeded`, 1));

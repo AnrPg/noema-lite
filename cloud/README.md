@@ -16,12 +16,12 @@ Note: anyone who has the website address can open the shared study material (not
 ## 1. GitHub (private repository) — with GitHub Desktop
 1. Create a free account at https://github.com (skip if you have one).
 2. Install **GitHub Desktop**: https://desktop.github.com → sign in.
-3. *File → Add Local Repository…* → choose `Documents/MyApps/learning-quest` (Claude already initialised it and made the first commit).
+3. *File → Add Local Repository…* → choose `Documents/MyApps/noema-lite` (Claude already initialised it and made the first commit).
 4. Click **Publish repository** → keep **“Keep this code private”** ticked → Publish.
 5. From now on: when Claude has made changes, open GitHub Desktop → **Push origin**. (Claude commits; you push.)
 
 ## 2. Supabase (accounts + sync)
-1. https://supabase.com → *Start your project* → sign in with GitHub → **New project** (name `learning-quest`, region *Frankfurt (eu-central-1)*, generate a DB password and store it in your password manager).
+1. https://supabase.com → *Start your project* → sign in with GitHub → **New project** (name `noema-lite`, region *Frankfurt (eu-central-1)*, generate a DB password and store it in your password manager).
 2. When ready: left menu **SQL Editor** → *New query* → paste the whole content of `cloud/supabase.sql` → **Run** (“Success. No rows returned”).
 3. **Authentication → Sign In / Providers → Email**: enabled. (Optional for a personal app: turn off “Confirm email”.)
 4. **Project Settings → API**: copy the **Project URL** and the **anon public** key.
@@ -34,9 +34,9 @@ Note: anyone who has the website address can open the shared study material (not
 
 ## 3. Netlify (the website)
 1. https://app.netlify.com → sign up with GitHub.
-2. **Add new site → Import an existing project → GitHub** → authorise → pick `learning-quest`.
+2. **Add new site → Import an existing project → GitHub** → authorise → pick `noema-lite`.
 3. Netlify reads `netlify.toml` automatically (build `python3 tools/build.py site --no-validate`, publish `dist/site`) → **Deploy**.
-4. *Site configuration → Change site name* → e.g. `anr-learning-quest` → your app is at `https://anr-learning-quest.netlify.app`.
+4. *Site configuration → Change site name* → e.g. `noema-lite` → your app is at `https://noema-lite.netlify.app` (if the name is taken, e.g. `noema-lite-anr`).
 5. Back in Supabase: **Authentication → URL Configuration → Site URL** = that address (so confirmation/reset emails link back to it).
 
 ## 4. First sign-in & moving your local progress to the cloud
@@ -46,5 +46,5 @@ Note: anyone who has the website address can open the shared study material (not
 3. Your Gemini key: account menu → ⚙️ Settings once; it then syncs privately to all your devices.
 
 ## Database backup to the cloud
-`python3 tools/db_sync.py` refreshes `data/learning-quest.db`. Upload it from the app: account menu → ☁️ Cloud → **🗄️ Upload database backup**.
+`python3 tools/db_sync.py` refreshes `data/noema-lite.db`. Upload it from the app: account menu → ☁️ Cloud → **🗄️ Upload database backup**.
 It is stored privately at `lq-private/<your-user-id>/db/`.

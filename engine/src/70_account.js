@@ -72,8 +72,8 @@ const ACC_VIEWS = {
         s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => LQ.switchTo(ACCOUNT.id, s.id) }, 'Open'),
         s.origin === 'imported' ? h('button', { class: 'iconbtn', title: 'Remove imported pack (progress is kept)', onclick: () => confirmBox(`Remove the imported pack “${s.title}”? Your progress in it is kept.`, async () => { await LQ.idb.del('packs', ACCOUNT.id + '|' + s.id); LQ.kv.del(LQ.kv.accountKey('packmeta:' + s.id)); toast('Removed'); }) }, '🗑️') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
-        h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.lqpack', style: { display: 'none' }, onchange: async e => { try { const s = await LQ.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => LQ.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
-        h('button', { class: 'btn', onclick: () => { const p = LQ.pack; const b = new Blob([JSON.stringify(p)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `${SUBJ.id}.lqpack.json` }); a.click(); } }, `⬇️ Export “${SUBJ.title}” pack`)));
+        h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.lqpack,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await LQ.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => LQ.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
+        h('button', { class: 'btn', onclick: () => { const p = LQ.pack; const b = new Blob([JSON.stringify(p)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `${SUBJ.id}.noema-pack.json` }); a.click(); } }, `⬇️ Export “${SUBJ.title}” pack`)));
   },
 
   async backup(body) {

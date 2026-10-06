@@ -1,4 +1,4 @@
-/* End-to-end tests for Learning Quest (Playwright + Chromium).
+/* End-to-end tests for noema-lite (Playwright + Chromium).
    Usage: node tests/e2e.js <prepared-repo-dir>
    The repo dir must contain a build with the demo-physics fixture (see tests/run_e2e.sh). */
 const { chromium } = require(process.env.PW || 'playwright');
@@ -117,12 +117,12 @@ async function mockGemini(ctx) {
   });
   ok(backupOk === 'ok', backupOk + ' — backup of ANR restored into Maria (+ restore point created, API key excluded)');
   const [dl] = await Promise.all([page.waitForEvent('download'), page.evaluate(async () => LQ.backup.download(await LQ.backup.collect('anr')))]);
-  ok(/^lq-backup_anr_\d{4}-\d\d-\d\d_\d{4}\.json$/.test(dl.suggestedFilename()), 'backup download: ' + dl.suggestedFilename());
+  ok(/^noema-lite-backup_anr_\d{4}-\d\d-\d\d_\d{4}\.json$/.test(dl.suggestedFilename()), 'backup download: ' + dl.suggestedFilename());
   const legacyOk = await page.evaluate(() => { try { const b = LQ.backup.validate({ xp: 5, res: { a: { ok: 1 } }, settings: { theme: 'dark' } }); return !!b.data['s:databricks:state']; } catch (e) { return false; } });
   ok(legacyOk, 'old single-file “Export progress” files are accepted for restore');
   // import a pack file
   const packJSON = fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8').replace('"id":"demo-physics"', '"id":"demo-imported"').replace('"title":"Demo Physics"', '"title":"Imported Demo"');
-  const imp = await page.evaluate(async txt => { const f = new File([txt], 'x.lqpack.json', { type: 'application/json' }); const s = await LQ.importPackFile('maria', f); return (await LQ.subjectsFor('maria')).some(x => x.id === 'demo-imported') && s.title; }, packJSON);
+  const imp = await page.evaluate(async txt => { const f = new File([txt], 'x.noema-pack.json', { type: 'application/json' }); const s = await LQ.importPackFile('maria', f); return (await LQ.subjectsFor('maria')).some(x => x.id === 'demo-imported') && s.title; }, packJSON);
   ok(imp === 'Imported Demo', 'subject pack import (per profile)');
   await page.evaluate(() => LQ.switchTo('maria', 'demo-imported')); await wait(1600);
   ok(await page.evaluate(() => SUBJ.id === 'demo-imported' && COURSE.length === 1), 'imported pack opens from IndexedDB');
@@ -135,7 +135,7 @@ async function mockGemini(ctx) {
 
   /* ======================= B. CLOUD (http + mocked Supabase) ======================= */
   console.log('B. cloud mode (mock Supabase)');
-  const cfg = `window.LQ_CONFIG = { appName: 'Learning Quest', supabaseUrl: 'http://localhost:54329', supabaseAnonKey: 'anon-test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
+  const cfg = `window.LQ_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:54329', supabaseAnonKey: 'anon-test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
   const srv = await start({ port: 54329, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await mockGemini(devA); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
   await pA.goto('http://localhost:54329/'); await wait(900);
@@ -159,7 +159,7 @@ async function mockGemini(ctx) {
     const names = async (dir) => { const out = []; for await (const [n, hnd] of dir.entries()) out.push(hnd.kind === 'directory' ? { [n]: await names(hnd) } : n); return out; };
     return JSON.stringify(await names(d));
   });
-  ok(/backups/.test(fsLayout) && /lq-backup_u_.*_latest\.json/.test(fsLayout) && /conversations/.test(fsLayout) && /cv_[0-9a-z]+\.json/.test(fsLayout) && /cv_[0-9a-z]+\.md/.test(fsLayout) && /index\.json/.test(fsLayout), 'folder backup: backups/ + conversations/<subject>/<YYYY-MM>/<id>.json|.md + index.json');
+  ok(/backups/.test(fsLayout) && /noema-lite-backup_u_.*_latest\.json/.test(fsLayout) && /conversations/.test(fsLayout) && /cv_[0-9a-z]+\.json/.test(fsLayout) && /cv_[0-9a-z]+\.md/.test(fsLayout) && /index\.json/.test(fsLayout), 'folder backup: backups/ + conversations/<subject>/<YYYY-MM>/<id>.json|.md + index.json');
   console.log('     ' + fsLayout.slice(0, 220));
   const kvA = srv.state.kv[Object.keys(srv.state.users)[0]] || {};
   ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (lq_kv)');
@@ -195,7 +195,7 @@ async function mockGemini(ctx) {
   /* ======================= C. single-file bundle ======================= */
   console.log('C. single-file bundle');
   const pD = await browser.newPage(); const ED = []; errs(pD, ED);
-  await pD.goto('file://' + ROOT + '/dist/learning-quest.html'); await wait(900);
+  await pD.goto('file://' + ROOT + '/dist/noema-lite.html'); await wait(900);
   await pD.click('.lq-chip:has-text("Databricks")'); await wait(1600);
   ok(await pD.evaluate(() => Object.keys(SEC).length === 184), 'bundle loads the Databricks pack inline');
   ok(!ED.length, 'no console errors in bundle ' + JSON.stringify(ED.slice(0, 3)));

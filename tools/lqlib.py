@@ -1,4 +1,4 @@
-"""Shared helpers for Learning Quest tools (stdlib only — runs anywhere Python 3.8+ runs)."""
+"""Shared helpers for noema-lite tools (stdlib only — runs anywhere Python 3.8+ runs)."""
 import json, os, glob, hashlib, datetime
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))

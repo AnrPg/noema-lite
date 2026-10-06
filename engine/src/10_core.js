@@ -1,4 +1,4 @@
-/* ===================== Learning Quest engine — core (subject-agnostic) ===================== */
+/* ===================== noema-lite engine — core (subject-agnostic) ===================== */
 'use strict';
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = LQ.subject;                    // subject.json of the loaded pack

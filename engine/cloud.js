@@ -1,5 +1,5 @@
 /* =====================================================================================
-   Learning Quest — cloud adapter (Supabase: Auth + PostgREST + Storage), dependency-free.
+   noema-lite — cloud adapter (Supabase: Auth + PostgREST + Storage), dependency-free.
    Every row/object is owned by the signed-in user and protected by row-level security
    (see cloud/supabase.sql). The browser only ever holds the public "anon" key.
    Data model: lq_kv mirrors the local namespaced key/value store of a cloud account

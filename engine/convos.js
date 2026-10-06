@@ -1,5 +1,5 @@
 /* =====================================================================================
-   Learning Quest — canonical store for every LLM interaction ("conversations")
+   noema-lite — canonical store for every LLM interaction ("conversations")
    Schema: lq.conversation/v1  (see docs/CONVERSATIONS.md)
 
    One record = one thread with the AI: tutor chats (all modes) AND one-shot AI tasks
@@ -65,7 +65,7 @@
   const MODE_NAME = { socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };
   const fmt = s => { const d = new Date(s), p = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`; };
   function demote(text, minLevel) { let fence = false; return text.split('\n').map(l => { if (/^\s*(```|~~~)/.test(l)) fence = !fence; if (fence) return l; return l.replace(/^(#{1,6})\s+/, (m, hs) => '#'.repeat(Math.min(6, hs.length + minLevel - 1)) + ' '); }).join('\n'); }
-  function toMarkdown(rec, { level = 1, tutorName = 'Tutor', tutorAvatar = '🦉', appName = 'Learning Quest' } = {}) {
+  function toMarkdown(rec, { level = 1, tutorName = 'Tutor', tutorAvatar = '🦉', appName = 'noema-lite' } = {}) {
     const H = '#'.repeat(level), esc = s => String(s ?? '').replace(/\|/g, '\\|');
     const lines = [`${H} ${rec.title || (rec.context?.label ? rec.context.label : KIND_NAME[rec.kind])}`, '',
       '| | |', '|---|---|',

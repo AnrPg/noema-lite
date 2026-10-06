@@ -48,10 +48,10 @@ Roles are `user` / `assistant`. Content is Markdown (math as `$…$`). Older sha
 ## Where records live (same record everywhere)
 | Place | Location | When |
 |---|---|---|
-| Browser (primary) | IndexedDB `learning-quest` → store `convos`, key `<account>|<id>` | immediately |
+| Browser (primary) | IndexedDB `learning-quest` (internal name kept from the first version so no data is lost) → store `convos`, key `<account>|<id>` | immediately |
 | Backup folder (optional, Chrome/Edge) | `<chosen folder>/conversations/<subject>/<YYYY-MM>/<id>.json` + `<id>.md`, plus `conversations/index.json` | ~20 s after a change |
 | Cloud (cloud accounts) | Supabase table `lq_conversations` (one row per record, `record` = full JSON, row-level security) | ~3 s after a change |
-| Backup files & cloud snapshots | `conversations: [ …records… ]` in `learning-quest-backup` v2 | on backup |
+| Backup files & cloud snapshots | `conversations: [ …records… ]` in `noema-lite-backup` v2 (older files: `learning-quest-backup`) | on backup |
 | SQLite database | tables `conversations` + `messages` (`tools/db_sync.py`) | on sync |
 
 Recovery: any one of these places is enough to restore every conversation with its title, context,

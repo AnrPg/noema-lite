@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Restore from the SQLite backup database (data/learning-quest.db).
+"""Restore from the SQLite backup database (data/noema-lite.db).
 
   python3 tools/db_restore.py list                              # syncs, files, subjects, accounts, backups
   python3 tools/db_restore.py files --to DIR [--at ISO-TIME]    # recreate every file as it was at the latest sync (or at/before ISO-TIME)
@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lqlib import ROOT
 a = sys.argv[1:]
 opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d
-DB = opt('--db', os.path.join(ROOT, 'data', 'learning-quest.db'))
+DB = opt('--db', os.path.join(ROOT, 'data', 'noema-lite.db'))
 if not a or not os.path.exists(DB): print(__doc__); sys.exit(0 if not a else 1)
 _work = os.path.join(tempfile.mkdtemp(prefix='lqdb-'), 'r.db'); shutil.copyfile(DB, _work)   # read a copy (safe on synced/virtual folders)
 con = sqlite3.connect(_work); cur = con.cursor()

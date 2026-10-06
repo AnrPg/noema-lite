@@ -18,7 +18,7 @@ function topbar() {
     tick(); timerT = setInterval(tick, 1000);
   } }, '⏱️ Focus');
   return h('header', { class: 'topbar' },
-    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, LQ.config.appName || 'Learning Quest')),
+    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, LQ.config.appName || 'noema-lite')),
     h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => LQ.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
     timer,
