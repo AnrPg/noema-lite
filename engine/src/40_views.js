@@ -8,7 +8,7 @@ let timerT = null, timerEnd = 0;
 function renderTopStats() {
   const x = $('#xpchip'), s = $('#streakchip');
   if (x) x.textContent = `⭐ ${S.xp} XP`;
-  if (s) s.textContent = `🔥 ${LQ.stats.streakNow()}`;
+  if (s) s.textContent = `🔥 ${Noema.stats.streakNow()}`;
 }
 function topbar() {
   const timer = h('button', { class: 'chip timer hide-m', title: '15-minute focus sprint', onclick: () => {
@@ -18,8 +18,8 @@ function topbar() {
     tick(); timerT = setInterval(tick, 1000);
   } }, '⏱️ Focus');
   return h('header', { class: 'topbar' },
-    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, LQ.config.appName || 'noema-lite')),
-    h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => LQ.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
+    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
+    h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
     timer,
     h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: 'Day streak' }),
@@ -40,7 +40,7 @@ function animateRings(root) { requestAnimationFrame(() => requestAnimationFrame(
 function homeView() {
   setTutorContext(null);
   setAccent(document.body, null);
-  const xpToday = LQ.stats.todayXP();
+  const xpToday = Noema.stats.todayXP();
   const goal = h('div', { class: 'goalring' }, ring(xpToday / S.settings.goal, 120, 12, '#ff922b'), h('div', { class: 'lbl' }, h('b', {}, xpToday), h('small', { class: 'tiny' }, `/ ${S.settings.goal} XP today`)));
   const dueFc = countDueCards(), duePb = countDuePlaybooks(), wrong = mistakesList().length;
   const results = h('div', { class: 'results' });

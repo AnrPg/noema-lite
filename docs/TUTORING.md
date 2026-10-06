@@ -21,8 +21,8 @@ nested questions pile up, and the conversation never culminates in knowledge.
    open threads (tree, attempts/budget, focus), lessons so far, learner turn count, and computed **DIRECTIVES**
    (resolve now / don’t open new threads / converge / wrap up).
 2. The model ends every reply with a hidden control line:
-   `<lq-state>{"opened":[…],"resolved":[{"id","answer","lesson"}],"lesson":…,"focus":…,"verdict":…,"summary":…}</lq-state>`
-   — stripped from the display while streaming, parsed when complete, stored as `meta.lqState` on the message.
+   `<noema-state>{"opened":[…],"resolved":[{"id","answer","lesson"}],"lesson":…,"focus":…,"verdict":…,"summary":…}</noema-state>`
+   — stripped from the display while streaming, parsed when complete, stored as `meta.noemaState` on the message.
 3. The app merges it into `tutorState` (hard caps enforced even if the model misbehaves; resolving a parent closes its children;
    a missing control line triggers a reminder directive on the next turn).
 4. `tutorState` is saved with the conversation (IndexedDB, folder, cloud, backups, SQLite) and the lessons appear

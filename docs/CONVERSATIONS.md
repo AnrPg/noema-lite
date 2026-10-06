@@ -1,4 +1,4 @@
-# Conversations with the AI — canonical schema `lq.conversation/v1`
+# Conversations with the AI — canonical schema `noema.conversation/v1`
 
 Every interaction with the language model is stored as **one conversation record**:
 tutor chats in all modes *and* one-shot AI tasks (grading an explanation, reviewing code,
@@ -8,7 +8,7 @@ background**, the moment a message arrives — the ⬇️ buttons only make extr
 ## Record
 ```jsonc
 {
-  "schema": "lq.conversation/v1",
+  "schema": "noema.conversation/v1",
   "id": "cv_0mfx3k2a1b9q2kq",            // "cv_" + 10-char base36 epoch-ms + 6 random → globally unique AND sorts chronologically
   "account": { "id": "anr", "kind": "local" },          // or { "id": "u_<uuid>", "kind": "cloud" }
   "subject": { "id": "databricks", "title": "Databricks", "packVersion": "f419aea82e952106" },
@@ -40,7 +40,7 @@ background**, the moment a message arrives — the ⬇️ buttons only make extr
   "meta": { "titledAtMessage": 4 }       // optional, implementation details
 }
 ```
-Assistant messages of Socratic chats carry `meta.lqState` — the parsed control line the model emitted
+Assistant messages of Socratic chats carry `meta.noemaState` — the parsed control line the model emitted
 (`opened`, `resolved`, `focus`, `verdict`, `summary`); `tutorState` can always be rebuilt from these.
 User messages may carry `meta.directive` (`tellme` | `wrapup`).
 Roles are `user` / `assistant`. Content is Markdown (math as `$…$`). Older shapes are converted by `normalize()` in `engine/convos.js`.
@@ -48,10 +48,10 @@ Roles are `user` / `assistant`. Content is Markdown (math as `$…$`). Older sha
 ## Where records live (same record everywhere)
 | Place | Location | When |
 |---|---|---|
-| Browser (primary) | IndexedDB `learning-quest` (internal name kept from the first version so no data is lost) → store `convos`, key `<account>|<id>` | immediately |
+| Browser (primary) | IndexedDB `noema-lite` → store `convos`, key `<account>|<id>` | immediately |
 | Backup folder (optional, Chrome/Edge) | `<chosen folder>/conversations/<subject>/<YYYY-MM>/<id>.json` + `<id>.md`, plus `conversations/index.json` | ~20 s after a change |
-| Cloud (cloud accounts) | Supabase table `lq_conversations` (one row per record, `record` = full JSON, row-level security) | ~3 s after a change |
-| Backup files & cloud snapshots | `conversations: [ …records… ]` in `noema-lite-backup` v2 (older files: `learning-quest-backup`) | on backup |
+| Cloud (cloud accounts) | Supabase table `noema_conversations` (one row per record, `record` = full JSON, row-level security) | ~3 s after a change |
+| Backup files & cloud snapshots | `conversations: [ …records… ]` in `noema-lite-backup` v2 | on backup |
 | SQLite database | tables `conversations` + `messages` (`tools/db_sync.py`) | on sync |
 
 Recovery: any one of these places is enough to restore every conversation with its title, context,

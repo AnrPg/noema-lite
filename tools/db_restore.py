@@ -10,12 +10,12 @@ Always restores into a NEW directory/file — it never overwrites your working c
 """
 import os, sys, sqlite3, shutil, tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lqlib import ROOT
+from noema_lib import ROOT
 a = sys.argv[1:]
 opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d
 DB = opt('--db', os.path.join(ROOT, 'data', 'noema-lite.db'))
 if not a or not os.path.exists(DB): print(__doc__); sys.exit(0 if not a else 1)
-_work = os.path.join(tempfile.mkdtemp(prefix='lqdb-'), 'r.db'); shutil.copyfile(DB, _work)   # read a copy (safe on synced/virtual folders)
+_work = os.path.join(tempfile.mkdtemp(prefix='noemadb-'), 'r.db'); shutil.copyfile(DB, _work)   # read a copy (safe on synced/virtual folders)
 con = sqlite3.connect(_work); cur = con.cursor()
 def safe_dir(d):
     d = os.path.abspath(d)

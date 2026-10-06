@@ -4,7 +4,7 @@
 Uses `pdftotext` (poppler) when available, else pypdf. Strips repeated running headers/footers."""
 import os, sys, re, subprocess, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lqlib import find_subject, rj
+from noema_lib import find_subject, rj
 a = sys.argv[1:]
 if len(a) < 2: print(__doc__); sys.exit(1)
 sdir, _ = find_subject(a[0]); src = next(s for s in rj(os.path.join(sdir, 'sources.json'))['sources'] if s['id'] == a[1])

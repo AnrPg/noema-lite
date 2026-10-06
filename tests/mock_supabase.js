@@ -13,6 +13,9 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       const u = new URL(req.url, 'http://x'); const p = u.pathname;
       if (req.method === 'OPTIONS') { res.writeHead(204, cors); return res.end(); }
       server.log.push(`${req.method} ${p}${u.search}`);
+      const api = /^\/(auth|rest|storage)\/v1\//.test(p);
+      if (api && !req.headers.apikey) return json(res, 401, { message: 'No API key found in request' });
+      const authz = req.headers.authorization; if (api && authz && !tokens[authz.replace('Bearer ', '')]) return json(res, 401, { message: 'Invalid JWT' });
       // ---- auth
       if (p === '/auth/v1/signup') { if (Object.values(users).some(x => x.email === data.email)) return json(res, 422, { msg: 'User already registered' }); const usr = { id: crypto.randomUUID(), email: data.email, pw: data.password, meta: data.data || {} }; users[usr.id] = usr; return json(res, 200, session(usr)); }
       if (p === '/auth/v1/token') {
@@ -24,20 +27,20 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       const uid = who(req);
       if (p.startsWith('/rest/v1/') || p.startsWith('/storage/v1/')) { if (!uid) return json(res, 401, { message: 'JWT required' }); }
       // ---- PostgREST subset
-      if (p === '/rest/v1/lq_profiles') { (data || []).forEach(r => { if (r.user_id !== uid) return; profiles[uid] = r; }); return json(res, 201); }
-      if (p === '/rest/v1/lq_kv') {
+      if (p === '/rest/v1/noema_profiles') { (data || []).forEach(r => { if (r.user_id !== uid) return; profiles[uid] = r; }); return json(res, 201); }
+      if (p === '/rest/v1/noema_kv') {
         kv[uid] = kv[uid] || {};
         if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
         if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; } return json(res, 201); }
         if (req.method === 'DELETE') { const k = (u.searchParams.get('key') || '').replace(/^eq\./, ''); delete kv[uid][k]; return json(res, 204); }
       }
-      if (p === '/rest/v1/lq_conversations') {
+      if (p === '/rest/v1/noema_conversations') {
         server.state.convs[uid] = server.state.convs[uid] || {};
         if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'rls' }); server.state.convs[uid][r.id] = r; } return json(res, 201); }
         const gt = (u.searchParams.get('updated_at') || '').replace(/^gt\./, '');
         return json(res, 200, Object.values(server.state.convs[uid]).filter(r => !gt || r.updated_at > gt).sort((a, b) => a.updated_at < b.updated_at ? -1 : 1).map(r => ({ record: r.record, updated_at: r.updated_at })));
       }
-      if (p === '/rest/v1/lq_snapshots') {
+      if (p === '/rest/v1/noema_snapshots') {
         if (req.method === 'POST') { data.forEach(r => snaps.push({ id: snapId++, user_id: uid, label: r.label, data: r.data, size_bytes: r.size_bytes, created_at: new Date().toISOString() })); return json(res, 201); }
         const mine = snaps.filter(s => s.user_id === uid);
         const idf = (u.searchParams.get('id') || '').replace(/^eq\./, '');
@@ -47,9 +50,9 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       }
       // ---- Storage subset
       let m;
-      if ((m = p.match(/^\/storage\/v1\/object\/list\/lq-private$/))) { const pre = data.prefix; return json(res, 200, Object.keys(files).filter(k => k.startsWith(pre)).map(k => ({ name: k.slice(pre.length) }))); }
-      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/lq-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
-      if ((m = p.match(/^\/storage\/v1\/object\/lq-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'lq-private/' + k }); }
+      if ((m = p.match(/^\/storage\/v1\/object\/list\/noema-private$/))) { const pre = data.prefix; return json(res, 200, Object.keys(files).filter(k => k.startsWith(pre)).map(k => ({ name: k.slice(pre.length) }))); }
+      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
+      if ((m = p.match(/^\/storage\/v1\/object\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
       // ---- static site
       if (staticDir) {
         if (configOverride && p === '/config.js') { res.writeHead(200, { 'Content-Type': 'application/javascript' }); return res.end(configOverride); }

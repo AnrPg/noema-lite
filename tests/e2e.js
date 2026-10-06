@@ -5,7 +5,7 @@ const { chromium } = require(process.env.PW || 'playwright');
 const path = require('path'), fs = require('fs');
 const { start } = require('./mock_supabase');
 const ROOT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
-const SHOTS = process.env.SHOTS || '/tmp/lq_shots'; fs.mkdirSync(SHOTS, { recursive: true });
+const SHOTS = process.env.SHOTS || '/tmp/noema_shots'; fs.mkdirSync(SHOTS, { recursive: true });
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/fonts\.g|ERR_FILE_NOT_FOUND|net::ERR|404|Failed to load resource/.test(m.text())) bag.push(m.text()); }); }
@@ -38,31 +38,31 @@ async function mockGemini(ctx) {
   // seed legacy single-file-app data, then reload
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem('dbquest_v1', JSON.stringify({ xp: 50, xpDay: { '2026-10-06': 50 }, streak: 3, lastDay: '2026-10-06', read: { 'ch01-s01': true }, res: { 'ch01-e001': { n: 1, ok: 1, last: true }, 'ch01-e002': { n: 1, ok: 0, last: false } }, pb: {}, fc: {}, boss: {}, last: 'ch01-s01', settings: { apiKey: 'LEGACYKEY', theme: 'auto', goal: 120, sound: true, chunk: true, models: [], model: '' } })); localStorage.setItem('dbquest_convos_v1', JSON.stringify([{ id: 'cv_x', created: 1, updated: 2, mode: 'socratic', ctx: null, title: 'Old Chat', msgs: [{ role: 'user', text: 'hi' }, { role: 'model', text: 'hello' }] }])); });
   await page.reload(); await wait(900);
-  const chips = await page.$$eval('.lq-chip', c => c.map(x => x.textContent));
+  const chips = await page.$$eval('.noema-chip', c => c.map(x => x.textContent));
   ok(chips.length === 3 && chips.some(c => c.includes('Demo Physics')) && chips.some(c => c.includes('🔒')), 'subject picker lists library + private subjects: ' + chips.join(' | '));
-  ok(await page.$$eval('.lq-grouphead', g => g.length) >= 2, 'subjects are grouped');
+  ok(await page.$$eval('.noema-grouphead', g => g.length) >= 2, 'subjects are grouped');
   await page.screenshot({ path: SHOTS + '/a1_picker.png' });
-  await page.click('.lq-chip:has-text("Databricks")'); await wait(1500);
+  await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   ok(await page.evaluate(() => S.xp === 50 && Object.keys(S.res).length === 2 && S.settings.apiKey === 'LEGACYKEY'), 'legacy progress migrated into anr/databricks');
   ok(await page.evaluate(() => CV.list.length === 1 && CV.list[0].title === 'Old Chat'), 'legacy conversations migrated');
-  const canon = await page.evaluate(async () => { const l = await LQ.convos.list('anr'); return l.length === 1 && l[0].schema === 'lq.conversation/v1' && l[0].messages[1].role === 'assistant' && l[0].subject.id === 'databricks'; });
-  ok(canon, 'legacy conversation converted to canonical lq.conversation/v1 in IndexedDB');
+  const canon = await page.evaluate(async () => { const l = await Noema.convos.list('anr'); return l.length === 1 && l[0].schema === 'noema.conversation/v1' && l[0].messages[1].role === 'assistant' && l[0].subject.id === 'databricks'; });
+  ok(canon, 'legacy conversation converted to canonical noema.conversation/v1 in IndexedDB');
   // background persistence of a live tutor chat + one-shot AI grading
   await page.evaluate(() => { S.settings.apiKey = 'TESTKEY'; flushSave(); openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic'); });
   await page.evaluate(() => sendTutor('What is a deletion vector?')); await wait(1500);
   await page.evaluate(async () => { const ex = ALL_EX.find(e => e.type === 'free'); await aiGrade(ex, 'my answer'); const ex2 = ALL_EX.find(e => e.type === 'write'); await aiGrade(ex2, 'SELECT 1'); await aiQuestion(SEC['ch05-s04']); });
   await wait(800);
-  const recs = await page.evaluate(async () => (await LQ.convos.list('anr')).map(r => [r.kind, r.mode, r.context.type, r.context.id, r.messages.length, r.title]));
+  const recs = await page.evaluate(async () => (await Noema.convos.list('anr')).map(r => [r.kind, r.mode, r.context.type, r.context.id, r.messages.length, r.title]));
   ok(recs.some(r => r[0] === 'tutor' && r[2] === 'section' && r[3] === 'ch05-s04' && r[4] >= 2), 'tutor chat saved automatically with its context: ' + JSON.stringify(recs.find(r => r[0] === 'tutor' && r[3] === 'ch05-s04')));
   ok(['grading', 'code-review', 'question'].every(k => recs.some(r => r[0] === k)), 'AI grading, code review and generated question are saved as conversations');
   await page.screenshot({ path: SHOTS + '/a2b_tutor.png' });
   await page.evaluate(() => { T.showHistory = true; renderTutor(); }); await wait(300);
   await page.screenshot({ path: SHOTS + '/a2c_history.png' });
   await page.evaluate(() => closeTutor());
-  await page.reload(); await wait(900); await page.click('.lq-chip:has-text("Databricks")'); await wait(1500);
+  await page.reload(); await wait(900); await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   ok(await page.evaluate(() => CV.list.length >= 5 && CV.list.some(c => c.kind === 'tutor' && c.msgs.length >= 2)), 'conversations survive a reload (loaded from IndexedDB)');
-  ok(await page.evaluate(() => LQ.stats.get().xp === 50 && LQ.stats.streakNow() >= 0), 'account-level stats seeded');
-  ok(await page.evaluate(() => !!localStorage.getItem('lq1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1')), 'namespaced keys written, legacy keys kept (nothing deleted)');
+  ok(await page.evaluate(() => Noema.stats.get().xp === 50 && Noema.stats.streakNow() >= 0), 'account-level stats seeded');
+  ok(await page.evaluate(() => !!localStorage.getItem('noema1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1')), 'namespaced keys written, legacy keys kept (nothing deleted)');
   // regression: every section renders, every exercise accepts its correct answer
   const reg = await page.evaluate(() => {
     const fails = []; S.settings.chunk = false;
@@ -86,20 +86,20 @@ async function mockGemini(ctx) {
   await page.screenshot({ path: SHOTS + '/a3c_help.png' });
   await page.evaluate(() => $('.modal')?.remove());
   // switch subject → math subject
-  await page.evaluate(() => LQ.switchTo('anr', 'demo-physics')); await wait(1800);
+  await page.evaluate(() => Noema.switchTo('anr', 'demo-physics')); await wait(1800);
   ok(await page.evaluate(() => SUBJ.id === 'demo-physics' && S.xp === 0), 'switched to Demo Physics with separate progress');
   ok(await page.$$eval('.katex', k => k.length) > 0, 'math rendered with KaTeX on home');
   await page.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(700);
   ok(await page.$$eval('.katex-display', k => k.length) > 0, 'display math rendered in a section');
   ok(await page.evaluate(() => TN === 'Ada' && MODES.socratic.sys.includes('physics')), 'tutor persona comes from subject.json');
   await page.screenshot({ path: SHOTS + '/a4_physics_section.png', fullPage: true });
-  const xpOk = await page.evaluate(() => { const a = LQ.stats.get(); addXP(10); flushSave(); const b = LQ.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
+  const xpOk = await page.evaluate(() => { const a = Noema.stats.get(); addXP(10); flushSave(); const b = Noema.stats.get(); return b.xp - a.xp === 10 && b.bySubject['demo-physics'] - (a.bySubject['demo-physics'] || 0) === 10 && (b.bySubject['databricks'] || 0) === (a.bySubject['databricks'] || 0); });
   ok(xpOk, 'XP counted per subject and in the account total');
   // new profile: full isolation
-  await page.evaluate(() => { LQ.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); LQ.switchTo('maria', 'databricks'); }); await wait(1800);
+  await page.evaluate(() => { Noema.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); Noema.switchTo('maria', 'databricks'); }); await wait(1800);
   ok(await page.evaluate(() => ACCOUNT.id === 'maria' && S.xp === 0 && Object.keys(S.res).length === 0 && CV.list.length === 0 && S.settings.apiKey !== 'LEGACYKEY'), 'profile Maria is isolated (progress, conversations, API key)');
-  ok(await page.evaluate(async () => !(await LQ.subjectsFor('maria')).some(s => s.id === 'secret-notes')), 'private subject of ANR is not visible to Maria');
-  ok(await page.evaluate(async () => (await LQ.convos.list('maria')).length === 0 && CV.list.length === 0), 'Maria sees none of ANR’s conversations');
+  ok(await page.evaluate(async () => !(await Noema.subjectsFor('maria')).some(s => s.id === 'secret-notes')), 'private subject of ANR is not visible to Maria');
+  ok(await page.evaluate(async () => (await Noema.convos.list('maria')).length === 0 && CV.list.length === 0), 'Maria sees none of ANR’s conversations');
   await page.evaluate(() => { location.hash = '#/'; route(); }); await wait(500);
   ok(!!(await page.$('.setupbar')) && (await page.$$eval('.setuprow', r => r.length)) === 2, 'first-sessions setup banner (no key, no backups) on the home page');
   await page.screenshot({ path: SHOTS + '/a6_banner.png' });
@@ -107,87 +107,87 @@ async function mockGemini(ctx) {
   ok((await page.$$eval('.setuprow', r => r.length)) === 1, 'a banner item can be dismissed');
   // backup → restore
   const backupOk = await page.evaluate(async () => {
-    const b = await LQ.backup.collect('anr'); if (!b.data['s:databricks:state'] || b.data['a:settings'].includes('LEGACYKEY')) return 'bad backup ' + Object.keys(b.data).join(',');
-    await LQ.backup.apply(b, 'maria', 'replace');
-    const st = JSON.parse(localStorage.getItem('lq1:maria:s:databricks:state')); const pts = await LQ.backup.listRestorePoints('maria');
-    const src = JSON.parse(localStorage.getItem('lq1:anr:s:databricks:state'));
-    const nc = (await LQ.convos.list('maria')).length, na = (await LQ.convos.list('anr', { includeDeleted: true })).length;
+    const b = await Noema.backup.collect('anr'); if (!b.data['s:databricks:state'] || b.data['a:settings'].includes('LEGACYKEY')) return 'bad backup ' + Object.keys(b.data).join(',');
+    await Noema.backup.apply(b, 'maria', 'replace');
+    const st = JSON.parse(localStorage.getItem('noema1:maria:s:databricks:state')); const pts = await Noema.backup.listRestorePoints('maria');
+    const src = JSON.parse(localStorage.getItem('noema1:anr:s:databricks:state'));
+    const nc = (await Noema.convos.list('maria')).length, na = (await Noema.convos.list('anr', { includeDeleted: true })).length;
     if (nc !== na || b.conversations.length !== na) return 'conversations ' + nc + '/' + na;
     return st.xp === src.xp && JSON.stringify(st.res) === JSON.stringify(src.res) && pts.length >= 1 ? 'ok' : 'bad restore ' + JSON.stringify({ xp: st.xp, pts: pts.length });
   });
   ok(backupOk === 'ok', backupOk + ' — backup of ANR restored into Maria (+ restore point created, API key excluded)');
-  const [dl] = await Promise.all([page.waitForEvent('download'), page.evaluate(async () => LQ.backup.download(await LQ.backup.collect('anr')))]);
+  const [dl] = await Promise.all([page.waitForEvent('download'), page.evaluate(async () => Noema.backup.download(await Noema.backup.collect('anr')))]);
   ok(/^noema-lite-backup_anr_\d{4}-\d\d-\d\d_\d{4}\.json$/.test(dl.suggestedFilename()), 'backup download: ' + dl.suggestedFilename());
-  const legacyOk = await page.evaluate(() => { try { const b = LQ.backup.validate({ xp: 5, res: { a: { ok: 1 } }, settings: { theme: 'dark' } }); return !!b.data['s:databricks:state']; } catch (e) { return false; } });
+  const legacyOk = await page.evaluate(() => { try { const b = Noema.backup.validate({ xp: 5, res: { a: { ok: 1 } }, settings: { theme: 'dark' } }); return !!b.data['s:databricks:state']; } catch (e) { return false; } });
   ok(legacyOk, 'old single-file “Export progress” files are accepted for restore');
   // import a pack file
   const packJSON = fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8').replace('"id":"demo-physics"', '"id":"demo-imported"').replace('"title":"Demo Physics"', '"title":"Imported Demo"');
-  const imp = await page.evaluate(async txt => { const f = new File([txt], 'x.noema-pack.json', { type: 'application/json' }); const s = await LQ.importPackFile('maria', f); return (await LQ.subjectsFor('maria')).some(x => x.id === 'demo-imported') && s.title; }, packJSON);
+  const imp = await page.evaluate(async txt => { const f = new File([txt], 'x.noema-pack.json', { type: 'application/json' }); const s = await Noema.importPackFile('maria', f); return (await Noema.subjectsFor('maria')).some(x => x.id === 'demo-imported') && s.title; }, packJSON);
   ok(imp === 'Imported Demo', 'subject pack import (per profile)');
-  await page.evaluate(() => LQ.switchTo('maria', 'demo-imported')); await wait(1600);
+  await page.evaluate(() => Noema.switchTo('maria', 'demo-imported')); await wait(1600);
   ok(await page.evaluate(() => SUBJ.id === 'demo-imported' && COURSE.length === 1), 'imported pack opens from IndexedDB');
   // account picker overlay renders
-  await page.evaluate(() => { LQ.openAccountPicker(); }); await wait(400);
-  ok(await page.$$eval('.lq-acc', a => a.length) >= 3, 'profile picker shows profiles + “New profile”');
+  await page.evaluate(() => { Noema.openAccountPicker(); }); await wait(400);
+  ok(await page.$$eval('.noema-acc', a => a.length) >= 3, 'profile picker shows profiles + “New profile”');
   await page.screenshot({ path: SHOTS + '/a5_profiles.png' });
   ok(!E.length, 'no console errors in local mode ' + (E.length ? JSON.stringify(E.slice(0, 5)) : ''));
   await ctx.close();
 
   /* ======================= B. CLOUD (http + mocked Supabase) ======================= */
   console.log('B. cloud mode (mock Supabase)');
-  const cfg = `window.LQ_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:54329', supabaseAnonKey: 'anon-test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', supabaseUrl: 'http://localhost:54329', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
   const srv = await start({ port: 54329, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await mockGemini(devA); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
   await pA.goto('http://localhost:54329/'); await wait(900);
-  ok(await pA.$$eval('.lq-acc', a => a.length) === 1 && !!(await pA.$('text=Sign in / create a cloud account')), 'hosted site: no local seeds exposed, cloud sign-in offered');
+  ok(await pA.$$eval('.noema-acc', a => a.length) === 1 && !!(await pA.$('text=Sign in / create a cloud account')), 'hosted site: no local seeds exposed, cloud sign-in offered');
   await pA.click('text=Sign in / create a cloud account'); await wait(300);
   await pA.click('text=No account yet? Create one'); await wait(200);
   await pA.fill('input[placeholder="Display name"]', 'ANR Cloud'); await pA.fill('input[type=email]', 'anr@example.com'); await pA.fill('input[type=password]', 'secret123');
   await pA.screenshot({ path: SHOTS + '/b1_signup.png' });
   await pA.click('button:has-text("Create account")'); await wait(900);
-  ok(await pA.$$eval('.lq-chip', c => c.length) === 2, 'cloud account sees shared subjects only (no private ones)');
-  await pA.click('.lq-chip:has-text("Databricks")'); await wait(1600);
+  ok(await pA.$$eval('.noema-chip', c => c.length) === 2, 'cloud account sees shared subjects only (no private ones)');
+  await pA.click('.noema-chip:has-text("Databricks")'); await wait(1600);
   await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; flushSave(); });
   await pA.evaluate(() => { openTutor({ kind: 'chapter', id: 'ch05' }, 'quiz'); }); await pA.evaluate(() => sendTutor('quiz me')); await pA.evaluate(() => closeTutor());
   await wait(4200);
   const uidA = Object.keys(srv.state.users)[0];
-  ok(Object.values(srv.state.convs[uidA] || {}).some(r => r.kind === 'tutor' && r.mode === 'quiz' && r.record.schema === 'lq.conversation/v1'), 'conversation pushed to the cloud (lq_conversations)');
+  ok(Object.values(srv.state.convs[uidA] || {}).some(r => r.kind === 'tutor' && r.mode === 'quiz' && r.record.schema === 'noema.conversation/v1'), 'conversation pushed to the cloud (noema_conversations)');
   // folder auto-backup layout (OPFS stands in for a user-chosen folder)
   const fsLayout = await pA.evaluate(async () => {
     const root = await navigator.storage.getDirectory(); const d = await root.getDirectoryHandle('chosen', { create: true });
-    await LQ.idb.put('handles', 'dir|' + ACCOUNT.id, d); await LQ.autoBackup.run(ACCOUNT.id, true);
+    await Noema.idb.put('handles', 'dir|' + ACCOUNT.id, d); await Noema.autoBackup.run(ACCOUNT.id, true);
     const names = async (dir) => { const out = []; for await (const [n, hnd] of dir.entries()) out.push(hnd.kind === 'directory' ? { [n]: await names(hnd) } : n); return out; };
     return JSON.stringify(await names(d));
   });
   ok(/backups/.test(fsLayout) && /noema-lite-backup_u_.*_latest\.json/.test(fsLayout) && /conversations/.test(fsLayout) && /cv_[0-9a-z]+\.json/.test(fsLayout) && /cv_[0-9a-z]+\.md/.test(fsLayout) && /index\.json/.test(fsLayout), 'folder backup: backups/ + conversations/<subject>/<YYYY-MM>/<id>.json|.md + index.json');
   console.log('     ' + fsLayout.slice(0, 220));
   const kvA = srv.state.kv[Object.keys(srv.state.users)[0]] || {};
-  ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (lq_kv)');
+  ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (noema_kv)');
   ok(srv.state.snaps.length >= 1, 'daily auto-snapshot created');
   ok(await pA.$eval('#syncdot', d => d.className.includes('ok')), 'sync indicator shows synced');
   await pA.evaluate(() => openAccountMenu('cloud')); await wait(600); await pA.screenshot({ path: SHOTS + '/b2_cloud_menu.png' });
   // pack upload to private storage
-  await pA.evaluate(async txt => { const f = new File([txt], 'p.json', { type: 'application/json' }); await LQ.importPackFile(ACCOUNT.id, f); }, packJSON); await wait(4000);
+  await pA.evaluate(async txt => { const f = new File([txt], 'p.json', { type: 'application/json' }); await Noema.importPackFile(ACCOUNT.id, f); }, packJSON); await wait(4000);
   ok(Object.keys(srv.state.files).some(k => k.endsWith('packs/demo-imported.json')), 'imported pack stored in private cloud storage');
   // device B
   const devB = await browser.newContext({ viewport: { width: 390, height: 844 } }); const pB = await devB.newPage(); const EB = []; errs(pB, EB);
   await pB.goto('http://localhost:54329/'); await wait(800);
   await pB.click('text=Sign in / create a cloud account'); await wait(300);
   await pB.fill('input[type=email]', 'anr@example.com'); await pB.fill('input[type=password]', 'secret123'); await pB.click('button:has-text("Sign in")'); await wait(1200);
-  const chipsB = await pB.$$eval('.lq-chip', c => c.map(x => x.textContent));
+  const chipsB = await pB.$$eval('.noema-chip', c => c.map(x => x.textContent));
   ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
-  await pB.click('.lq-chip:has-text("Databricks")'); await wait(1600);
-  ok(await pB.evaluate(() => !!S.res['ch01-e001'] && S.settings.apiKey === 'CLOUDKEY' && LQ.stats.get().xp >= 12), 'device B pulled progress, settings and stats');
+  await pB.click('.noema-chip:has-text("Databricks")'); await wait(1600);
+  ok(await pB.evaluate(() => !!S.res['ch01-e001'] && S.settings.apiKey === 'CLOUDKEY' && Noema.stats.get().xp >= 12), 'device B pulled progress, settings and stats');
   ok(await pB.evaluate(() => CV.list.some(c => c.mode === 'quiz' && c.msgs.length >= 2)), 'device B has the conversation from device A');
   await pB.screenshot({ path: SHOTS + '/b3_deviceB_mobile.png' });
-  await pB.evaluate(() => LQ.switchTo(ACCOUNT.id, 'demo-imported')); await wait(1800);
+  await pB.evaluate(() => Noema.switchTo(ACCOUNT.id, 'demo-imported')); await wait(1800);
   ok(await pB.evaluate(() => SUBJ.id === 'demo-imported'), 'device B downloads the private pack from cloud storage');
   // isolation: a second user sees nothing of the first
   const devC = await browser.newContext(); const pC = await devC.newPage();
   await pC.goto('http://localhost:54329/'); await wait(700); await pC.click('text=Sign in / create a cloud account'); await pC.click('text=No account yet? Create one');
   await pC.fill('input[placeholder="Display name"]', 'Eve'); await pC.fill('input[type=email]', 'eve@example.com'); await pC.fill('input[type=password]', 'secret123'); await pC.click('button:has-text("Create account")'); await wait(900);
-  ok(!(await pC.$$eval('.lq-chip', c => c.map(x => x.textContent))).some(c => c.includes('Imported')), 'another user cannot see ANR’s private pack');
-  await pC.click('.lq-chip:has-text("Databricks")'); await wait(1500);
+  ok(!(await pC.$$eval('.noema-chip', c => c.map(x => x.textContent))).some(c => c.includes('Imported')), 'another user cannot see ANR’s private pack');
+  await pC.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   ok(await pC.evaluate(() => !S.res['ch01-e001'] && S.settings.apiKey !== 'CLOUDKEY'), 'another user gets none of ANR’s progress or key');
   ok(!EA.length && !EB.length, 'no console errors in cloud mode ' + JSON.stringify([...EA, ...EB].slice(0, 5)));
   await devA.close(); await devB.close(); await devC.close(); srv.close();
@@ -196,7 +196,7 @@ async function mockGemini(ctx) {
   console.log('C. single-file bundle');
   const pD = await browser.newPage(); const ED = []; errs(pD, ED);
   await pD.goto('file://' + ROOT + '/dist/noema-lite.html'); await wait(900);
-  await pD.click('.lq-chip:has-text("Databricks")'); await wait(1600);
+  await pD.click('.noema-chip:has-text("Databricks")'); await wait(1600);
   ok(await pD.evaluate(() => Object.keys(SEC).length === 184), 'bundle loads the Databricks pack inline');
   ok(!ED.length, 'no console errors in bundle ' + JSON.stringify(ED.slice(0, 3)));
   await browser.close();

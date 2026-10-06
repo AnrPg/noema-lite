@@ -4,7 +4,7 @@
 Creates library/subjects/<id>/ (or accounts/<profile>/packs/<id>/ with --private) with subject.json, sources.json and empty folders."""
 import os, sys, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lqlib import LIB, ACC, wj, rj
+from noema_lib import LIB, ACC, wj, rj
 a = sys.argv[1:]
 if len(a) < 2: print(__doc__); sys.exit(1)
 sid, title = a[0], a[1]

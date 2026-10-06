@@ -12,7 +12,7 @@ The engine knows nothing about the content; each subject is a **pack** generated
 ## Repository map
 ```
 index.html                 entry point (loads config → registry → loader → one subject pack → engine)
-config.js                  public settings (Supabase URL + anon key go here); config.local.js = private, git-ignored
+config.js                  public settings (Supabase URL + publishable key go here); config.local.js = private, git-ignored
 engine/
   loader.js                profiles, subject picker, pack loading, namespaced storage, backups, restore points
   cloud.js                 Supabase adapter (auth, sync, snapshots, private storage) — dependency-free
@@ -47,7 +47,7 @@ python3 tools/db_restore.py list        # what the database holds; restore files
 
 ## Profiles, privacy & data
 * Each **profile** (local) or **cloud account** has its own subjects, progress, flashcard schedules, tutor conversations, settings and backups.
-  Local storage keys are namespaced `lq1:<profile>:a:*` (account) and `lq1:<profile>:s:<subject>:*` (per subject).
+  Local storage keys are namespaced `noema1:<profile>:a:*` (account) and `noema1:<profile>:s:<subject>:*` (per subject).
 * Cloud data is protected by Postgres **row-level security**: a user can only ever read/write their own rows and files.
 * A local PIN is a privacy curtain on a shared computer, not encryption.
 
@@ -61,11 +61,10 @@ python3 tools/db_restore.py list        # what the database holds; restore files
 | Cloud | live sync + daily snapshots (30 kept) + private files | Supabase |
 
 ## Naming
-The app is **noema-lite** (repository, folder, website, docs). Internal technical identifiers keep their original
-short prefix `lq` (browser storage keys `lq1:…`, the `LQ` JavaScript namespace, Supabase tables `lq_*`, bucket `lq-private`,
-pack format `lq-pack`, schema `lq.conversation/v1`, IndexedDB `learning-quest`) so that existing data, backups and
-cloud rows stay readable. Backup files written from now on use the format `noema-lite-backup`; older `learning-quest-backup`
-files are still accepted.
+Everything is **noema-lite**: repository, folder, website, docs, browser storage (`noema1:…` keys, IndexedDB `noema-lite`),
+the `Noema` JavaScript namespace, Supabase tables `noema_*` and bucket `noema-private`, pack format `noema-pack`,
+backup format `noema-lite-backup`, conversation schema `noema.conversation/v1`.
+Data written by the app before it was renamed is copied over automatically on first start (see `LEGACY` in `engine/loader.js`).
 
 ## Γρήγορος οδηγός (Ελληνικά)
 * Άνοιγμα: διπλό κλικ στο `index.html` (Chrome). Διαλέγεις προφίλ και μάθημα από τα chips.

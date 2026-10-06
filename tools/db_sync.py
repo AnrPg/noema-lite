@@ -11,7 +11,7 @@ Usage:  python3 tools/db_sync.py [--db PATH] [--no-blobs]
 """
 import os, sys, glob, json, sqlite3, hashlib, subprocess, time, tempfile, shutil
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lqlib import ROOT, LIB, ACC, rj, subject_dirs, load_subject, now_iso
+from noema_lib import ROOT, LIB, ACC, rj, subject_dirs, load_subject, now_iso
 
 args = sys.argv[1:]
 DB = args[args.index('--db') + 1] if '--db' in args else os.path.join(ROOT, 'data', 'noema-lite.db')
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS accounts(id TEXT PRIMARY KEY, name TEXT, emoji TEXT, 
 CREATE TABLE IF NOT EXISTS backups(sha256 TEXT PRIMARY KEY, file TEXT, account_id TEXT, created_at TEXT, bytes INTEGER, json TEXT);
 CREATE TABLE IF NOT EXISTS user_kv(account_id TEXT, key TEXT, value TEXT, from_backup TEXT, PRIMARY KEY(account_id, key));
 CREATE TABLE IF NOT EXISTS progress(account_id TEXT, subject_id TEXT, subject_xp INTEGER, sections_read INTEGER, exercises_attempted INTEGER, exercises_solved INTEGER, last_section TEXT, PRIMARY KEY(account_id, subject_id));
--- conversations/messages: canonical lq.conversation/v1 (see docs/CONVERSATIONS.md); rebuilt on every sync
+-- conversations/messages: canonical noema.conversation/v1 (see docs/CONVERSATIONS.md); rebuilt on every sync
 DROP TABLE IF EXISTS conversations; DROP TABLE IF EXISTS messages;
 CREATE TABLE conversations(account_id TEXT, id TEXT, subject_id TEXT, kind TEXT, mode TEXT, title TEXT, title_source TEXT,
   context_type TEXT, context_id TEXT, context_label TEXT, model TEXT, created_at TEXT, updated_at TEXT, n_messages INTEGER,
@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS sync_log(at TEXT, action TEXT, detail TEXT);
 CREATE INDEX IF NOT EXISTS ix_ex_section ON exercises(subject_id, section_id);
 CREATE INDEX IF NOT EXISTS ix_blocks_text ON blocks(subject_id, type);
 """
+LEGACY_BACKUP_FORMATS = ('learning-quest-backup',)   # files written before the app was renamed noema-lite
 EXCLUDE_DIRS = {'.git', 'dist', 'data', 'node_modules', '__pycache__', '_to_delete'}
 GENERATED = ('pack.js', 'pack.json', 'engine.js', 'engine.css', 'registry.js')
 
@@ -75,7 +76,7 @@ def block_text(b):
 def main():
     os.makedirs(os.path.dirname(DB), exist_ok=True)
     # Work on a local temp copy: SQLite locking is unreliable on synced/network/virtual folders (iCloud, Dropbox, VMs).
-    work = os.path.join(tempfile.mkdtemp(prefix='lqdb-'), 'work.db')
+    work = os.path.join(tempfile.mkdtemp(prefix='noemadb-'), 'work.db')
     if os.path.exists(DB): shutil.copyfile(DB, work)
     con = sqlite3.connect(work); con.executescript(SCHEMA); cur = con.cursor(); ts = now_iso()
     # 1) content-addressed copy of every source file (versioned)
@@ -120,7 +121,7 @@ def main():
         raw = open(f, 'rb').read()
         try: b = json.loads(raw)
         except Exception: continue
-        if b.get('format') not in ('noema-lite-backup', 'learning-quest-backup'): continue
+        if b.get('format') not in ('noema-lite-backup',) + LEGACY_BACKUP_FORMATS: continue
         acc = b['account']['id']; h = sha(raw)
         cur.execute('INSERT OR IGNORE INTO backups VALUES (?,?,?,?,?,?)', (h, os.path.relpath(f, ROOT), acc, b.get('createdAt'), len(raw), raw.decode('utf-8')))
         if acc not in latest or (b.get('createdAt') or '') > (latest[acc][1].get('createdAt') or ''): latest[acc] = (os.path.relpath(f, ROOT), b)
@@ -146,7 +147,7 @@ def main():
                 for cv in convos:
                     iso = lambda ms: time.strftime('%Y-%m-%dT%H:%M:%S', time.gmtime((ms or 0) / 1000)) + 'Z'
                     if (acc, cv.get('id')) in convs: continue
-                    add_conv(acc, {'schema': 'lq.conversation/v1', 'id': cv.get('id'), 'subject': {'id': parts[1]}, 'kind': 'tutor', 'mode': cv.get('mode'), 'title': cv.get('title'),
+                    add_conv(acc, {'schema': 'noema.conversation/v1', 'id': cv.get('id'), 'subject': {'id': parts[1]}, 'kind': 'tutor', 'mode': cv.get('mode'), 'title': cv.get('title'),
                                    'context': {'type': (cv.get('ctx') or {}).get('kind', 'course'), 'id': (cv.get('ctx') or {}).get('id'), 'label': (cv.get('ctx') or {}).get('label')},
                                    'model': {'provider': 'google', 'name': cv.get('model')}, 'createdAt': iso(cv.get('created')), 'updatedAt': iso(cv.get('updated')), 'deleted': False,
                                    'messages': [{'seq': i, 'role': 'assistant' if m.get('role') == 'model' else m.get('role'), 'content': m.get('text', ''), 'createdAt': iso(m.get('t'))} for i, m in enumerate(cv.get('msgs', []))]}, 'legacy-kv')

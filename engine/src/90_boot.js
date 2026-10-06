@@ -1,4 +1,4 @@
-/* ===================== Boot (runs after every module is loaded; the loader has set LQ.subject / COURSE) ===================== */
+/* ===================== Boot (runs after every module is loaded; the loader has set Noema.subject / COURSE) ===================== */
 applySourceFilter();
 boot();
 wireSyncDot();

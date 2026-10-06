@@ -1,20 +1,20 @@
 /* =====================================================================================
    noema-lite — canonical store for every LLM interaction ("conversations")
-   Schema: lq.conversation/v1  (see docs/CONVERSATIONS.md)
+   Schema: noema.conversation/v1  (see docs/CONVERSATIONS.md)
 
    One record = one thread with the AI: tutor chats (all modes) AND one-shot AI tasks
    (grading an answer, reviewing code, generating a question, grading a debug checklist).
    Records are persisted automatically, in the background, to:
      1. IndexedDB  (store "convos", key "<account>|<id>")         — primary, no 5 MB limit
      2. the backup folder (if chosen): conversations/<subject>/<YYYY-MM>/<id>.json + .md + index.json
-     3. the cloud (cloud accounts): table lq_conversations (row-level security)
+     3. the cloud (cloud accounts): table noema_conversations (row-level security)
      4. every backup file / cloud snapshot / the SQLite database (tools/db_sync.py)
    Records are never hard-deleted by the app: deletion writes a tombstone (deleted:true, messages:[])
    so the deletion propagates to the folder and the cloud.
    ===================================================================================== */
 (function () {
   'use strict';
-  const SCHEMA = 'lq.conversation/v1';
+  const SCHEMA = 'noema.conversation/v1';
   const KINDS = ['tutor', 'grading', 'code-review', 'question', 'drill-grading'];
   const MODES = ['socratic', 'explain', 'quiz', 'interview', 'debug', null];
   const listeners = [];
@@ -83,10 +83,10 @@
   }
 
   /* ---------- storage ---------- */
-  const store = () => LQ.idb;
+  const store = () => Noema.idb;
   const key = (acc, id) => `${acc}|${id}`;
-  const dirtyKey = acc => `lq1:${acc}:meta:convoDirty`;
-  function markDirty(acc, id) { const d = LQ.jget(dirtyKey(acc), []); if (!d.includes(id)) { d.push(id); LQ.jset(dirtyKey(acc), d); } LQ.jset(`lq1:${acc}:meta:dirty`, Date.now()); }
+  const dirtyKey = acc => `noema1:${acc}:meta:convoDirty`;
+  function markDirty(acc, id) { const d = Noema.jget(dirtyKey(acc), []); if (!d.includes(id)) { d.push(id); Noema.jset(dirtyKey(acc), d); } Noema.jset(`noema1:${acc}:meta:dirty`, Date.now()); }
   const api = {
     SCHEMA, KINDS, newId, msgId, normalize, toMarkdown, KIND_NAME, MODE_NAME,
     onChange(f) { listeners.push(f); },
@@ -105,28 +105,28 @@
     },
     async remove(acc, id) { const r = await this.get(acc, id); if (!r) return; return this.put(acc, { ...r, deleted: true, messages: [] }); },
     async clear(acc) { for (const [k] of await store().entries('convos', acc + '|')) await store().del('convos', k); },
-    /** One-time import of conversations kept by older app versions in "lq1:<acc>:s:<subject>:convos". */
+    /** One-time import of conversations kept by older app versions in "noema1:<acc>:s:<subject>:convos". */
     async migrateLegacy(acc, subjects) {
-      const flag = `lq1:${acc}:meta:convosMigrated`;
-      const done = LQ.jget(flag, {});
+      const flag = `noema1:${acc}:meta:convosMigrated`;
+      const done = Noema.jget(flag, {});
       let n = 0;
-      for (const k of Object.keys(LQ.kv.accountData(acc))) {
+      for (const k of Object.keys(Noema.kv.accountData(acc))) {
         const m = k.match(/^s:([^:]+):convos$/); if (!m || done[m[1]]) continue;
         const sid = m[1]; let list = [];
-        try { list = JSON.parse(localStorage.getItem(`lq1:${acc}:${k}`) || '[]'); } catch (e) { }
+        try { list = JSON.parse(localStorage.getItem(`noema1:${acc}:${k}`) || '[]'); } catch (e) { }
         const meta = (subjects || []).find(s => s.id === sid) || { id: sid, title: sid };
         for (const cv of list) {
           if (!cv.msgs?.length) continue;
           const rec = normalize({ ...cv, kind: 'tutor' }, { account: { id: acc }, subject: { id: sid, title: meta.title } });
           if (!(await this.get(acc, rec.id))) { await this.put(acc, rec, { keepUpdatedAt: true }); n++; }
         }
-        done[sid] = Date.now(); LQ.jset(flag, done);
+        done[sid] = Date.now(); Noema.jset(flag, done);
       }
       return n;
     },
     /** Write dirty (or all) records to <dir>/conversations/<subject>/<YYYY-MM>/<id>.json|.md and refresh index.json */
     async writeToFolder(acc, dirHandle, { all = false } = {}) {
-      const ids = all ? (await this.list(acc, { includeDeleted: true })).map(r => r.id) : LQ.jget(dirtyKey(acc), []);
+      const ids = all ? (await this.list(acc, { includeDeleted: true })).map(r => r.id) : Noema.jget(dirtyKey(acc), []);
       if (!ids.length) return 0;
       const root = await dirHandle.getDirectoryHandle('conversations', { create: true });
       const wf = async (dir, name, text) => { const fh = await dir.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(text); await w.close(); };
@@ -137,15 +137,15 @@
         const mdir = await sdir.getDirectoryHandle(r.createdAt.slice(0, 7), { create: true });
         await wf(mdir, `${r.id}.json`, JSON.stringify(r, null, 1));
         if (r.deleted) { try { await mdir.removeEntry(`${r.id}.md`); } catch (e) { } }
-        else await wf(mdir, `${r.id}.md`, toMarkdown(r, { appName: LQ.config.appName }));
+        else await wf(mdir, `${r.id}.md`, toMarkdown(r, { appName: Noema.config.appName }));
         n++;
       }
       const all_ = await this.list(acc, { includeDeleted: true });
-      await wf(root, 'index.json', JSON.stringify({ schema: 'lq.conversation-index/v1', account: acc, generatedAt: iso(), count: all_.length,
+      await wf(root, 'index.json', JSON.stringify({ schema: 'noema.conversation-index/v1', account: acc, generatedAt: iso(), count: all_.length,
         conversations: all_.map(r => ({ id: r.id, subject: r.subject?.id || null, kind: r.kind, mode: r.mode, title: r.title, context: r.context?.label || null, createdAt: r.createdAt, updatedAt: r.updatedAt, messages: r.stats.messages, deleted: r.deleted, path: `${r.subject?.id || '_general'}/${r.createdAt.slice(0, 7)}/${r.id}.json` })) }, null, 1));
-      LQ.jset(dirtyKey(acc), LQ.jget(dirtyKey(acc), []).filter(x => !ids.includes(x)));
+      Noema.jset(dirtyKey(acc), Noema.jget(dirtyKey(acc), []).filter(x => !ids.includes(x)));
       return n;
     },
   };
-  window.LQConvos = api;
+  window.NoemaConvos = api;
 })();

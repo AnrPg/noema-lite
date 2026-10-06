@@ -6,7 +6,7 @@ function tip(text) {
 }
 document.addEventListener('click', () => $$('.tip.show').forEach(t => t.classList.remove('show')));
 
-const SITE_URL = LQ.config.siteUrl || '';
+const SITE_URL = Noema.config.siteUrl || '';
 const GUIDES = {
   gemini: { icon: '🔑', title: 'Get your free Gemini API key', who: 'Everyone who wants the AI tutor', steps: [
     'Open **Google AI Studio** → https://aistudio.google.com/apikey and sign in with your Google account.',
@@ -34,7 +34,7 @@ const GUIDES = {
     notes: ['Your data is private to your account (row-level security). A daily snapshot is kept for 30 days.'] },
   cloudOwner: { icon: '🛠️', title: 'Set up the cloud (owner, once)', who: 'Only the owner of this installation', steps: [
     '**Supabase** (accounts + sync): https://supabase.com → New project (region Frankfurt) → **SQL Editor** → run the whole file **cloud/supabase.sql**.',
-    'Supabase → **Project Settings → API**: copy the **Project URL** and the **anon public** key → put them in **config.js** (or give them to Claude). Never share the service_role key.',
+    'Supabase: the **Project URL** is `https://<project-ref>.supabase.co` (the ref is in your dashboard address) and the **publishable key** (`sb_publishable_…`) is under **Project Settings → API Keys** → put both in **config.js** (or give them to Claude). Never share the secret key or the database password.',
     '**Netlify** (website): https://app.netlify.com → Add new site → Import from GitHub → pick the repo → Deploy (settings come from netlify.toml).',
     'Supabase → **Authentication → URL Configuration → Site URL** = your Netlify address.',
     'Full step-by-step guide with screenshots-level detail: **cloud/README.md** in the repository.'] },
@@ -64,16 +64,16 @@ const guideBtn = (id, label) => h('button', { class: 'btn small ghost', onclick:
 /* ---------- setup status ---------- */
 function setupStatus() {
   const set = accountSettings();
-  const lastDl = LQ.jget(`lq1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
+  const lastDl = Noema.jget(`noema1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
   return {
     gemini: !!S.settings.apiKey,
-    protectedData: ACCOUNT.kind === 'cloud' || !!LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0) || Date.now() - lastDl < 14 * 864e5,
+    protectedData: ACCOUNT.kind === 'cloud' || !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0) || Date.now() - lastDl < 14 * 864e5,
     dismissed: set.dismissedSetup || {},
   };
 }
 /** Warning banner shown on the home page during the first sessions of a profile, only for things not set up yet. */
 function setupBanner() {
-  const sessions = LQ.jget(`lq1:${ACCOUNT.id}:meta:sessions`, 0);
+  const sessions = Noema.jget(`noema1:${ACCOUNT.id}:meta:sessions`, 0);
   if (sessions > 5) return null;
   const st = setupStatus();
   const items = [];

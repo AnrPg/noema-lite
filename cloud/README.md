@@ -22,15 +22,21 @@ Note: anyone who has the website address can open the shared study material (not
 
 ## 2. Supabase (accounts + sync)
 1. https://supabase.com → *Start your project* → sign in with GitHub → **New project** (name `noema-lite`, region *Frankfurt (eu-central-1)*, generate a DB password and store it in your password manager).
-2. When ready: left menu **SQL Editor** → *New query* → paste the whole content of `cloud/supabase.sql` → **Run** (“Success. No rows returned”).
+2. When ready: left menu **SQL Editor** → *New query* → paste the whole content of `cloud/supabase.sql` → **Run**.
+   The last result lists the 4 `noema_` tables with `rls_enabled = true`. The script is idempotent: run it again after every update of the file.
 3. **Authentication → Sign In / Providers → Email**: enabled. (Optional for a personal app: turn off “Confirm email”.)
-4. **Project Settings → API**: copy the **Project URL** and the **anon public** key.
-5. Give both to Claude (they are public by design) — or paste them into `config.js` yourself:
+4. The two values the app needs (both public by design):
+   * **Project URL** = `https://<project-ref>.supabase.co`. The project ref is the id in your dashboard address
+     (`supabase.com/dashboard/project/<project-ref>`) and in the database host `db.<project-ref>.supabase.co`.
+     It is also shown under **Project Settings → Data API** (or the **Connect** button at the top).
+   * **Publishable key** (`sb_publishable_…`): **Project Settings → API Keys**. (Older projects: the `anon` key — also works.)
+5. Put them into `config.js` (or give them to Claude):
    ```js
-   supabaseUrl: 'https://xxxxxxxx.supabase.co',
-   supabaseAnonKey: 'eyJhbGciOi…',
+   supabaseUrl: 'https://<project-ref>.supabase.co',
+   supabaseKey: 'sb_publishable_…',
    ```
-   ⚠️ Never share the `service_role` key or the database password.
+   ⚠️ Never share the **secret** key (`sb_secret_…` / service_role) or the **database password** — the app needs neither.
+   If you ever pasted the database password somewhere: **Project Settings → Database → Reset database password**.
 
 ## 3. Netlify (the website)
 1. https://app.netlify.com → sign up with GitHub.
@@ -47,4 +53,4 @@ Note: anyone who has the website address can open the shared study material (not
 
 ## Database backup to the cloud
 `python3 tools/db_sync.py` refreshes `data/noema-lite.db`. Upload it from the app: account menu → ☁️ Cloud → **🗄️ Upload database backup**.
-It is stored privately at `lq-private/<your-user-id>/db/`.
+It is stored privately at `noema-private/<your-user-id>/db/`.

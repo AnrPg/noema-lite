@@ -1,7 +1,7 @@
 /* ===================== Socratic elicitation threads: tracking, budgets, closure ===================== */
 /* Every question the tutor makes the learner work on is a THREAD. The app (not the model) owns the
    thread state: it counts the learner's attempts, enforces a budget, injects the state into every call
-   (TUTOR STATE) and parses the model's hidden <lq-state> control line to open/resolve threads.
+   (TUTOR STATE) and parses the model's hidden <noema-state> control line to open/resolve threads.
    A thread always ends with an authoritative ✅ Answer + 📌 Lesson; the session ends with 🎓 What you learned. */
 const THREAD_BUDGET = 3;        // learner attempts per thread before the tutor MUST give the answer
 const MAX_OPEN_THREADS = 2;     // main question + at most one nested sub-question
@@ -17,9 +17,9 @@ const usesThreads = mode => mode === 'socratic';
 
 /** Split the model reply into the visible text and the hidden control object. Works on partial streams too. */
 function splitControl(full) {
-  const i = full.indexOf('<lq-state');
+  const i = full.indexOf('<noema-state');
   if (i < 0) return { clean: full.trim(), control: null };
-  const m = full.slice(i).match(/<lq-state>([\s\S]*?)<\/lq-state>/);
+  const m = full.slice(i).match(/<noema-state>([\s\S]*?)<\/noema-state>/);
   let control = null;
   if (m) { try { control = JSON.parse(m[1].trim().replace(/^```(?:json)?|```$/g, '')); } catch (e) { control = null; } }
   return { clean: full.slice(0, i).trim(), control };
@@ -50,7 +50,7 @@ function tutorStateBlock(ts, directive) {
   if (open.length >= MAX_OPEN_THREADS && directive !== 'wrapup') dir.push(`${open.length} threads are open → do NOT open a new thread; answer any new question directly and briefly.`);
   if (ts.learnerTurns >= CONVERGE_AFTER && open.length && !directive) dir.push('This conversation is long → converge: resolve the open threads within this or the next reply and give the 🎓 summary.');
   if (!open.length && ts.lessons.length && !directive) dir.push('No thread is open → if the learner asked something new, decide afresh (direct answer or ONE new thread). If they just acknowledged, close with **🎓 What you learned:** instead of starting a new chain.');
-  if (ts.missingControl) dir.push('Your previous reply lacked the <lq-state> line — you MUST include it.');
+  if (ts.missingControl) dir.push('Your previous reply lacked the <noema-state> line — you MUST include it.');
   lines.push('DIRECTIVES:', ...(dir.length ? dir.map(d => '- ' + d) : ['- (none)']));
   lines.push(`Next new thread id: ${nextThreadId(ts)}.`);
   return lines.join('\n');
@@ -89,7 +89,7 @@ function applyControl(ts, control, seq) {
 /** Rebuild state from message metadata (for conversations stored before tutorState existed). */
 function rebuildThreadState(msgs) {
   const ts = newThreadState();
-  msgs.forEach((m, i) => { if (m.role === 'user') ts.learnerTurns++; else if (m.meta?.lqState) applyControl(ts, m.meta.lqState, i); });
+  msgs.forEach((m, i) => { if (m.role === 'user') ts.learnerTurns++; else if (m.meta?.noemaState) applyControl(ts, m.meta.noemaState, i); });
   return ts;
 }
 

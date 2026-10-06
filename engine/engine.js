@@ -4,11 +4,11 @@
 /* ===================== noema-lite engine — core (subject-agnostic) ===================== */
 'use strict';
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
-const SUBJ = LQ.subject;                    // subject.json of the loaded pack
-const ACCOUNT = LQ.account;                 // current profile / cloud account
+const SUBJ = Noema.subject;                    // subject.json of the loaded pack
+const ACCOUNT = Noema.account;                 // current profile / cloud account
 const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
 const APP_TITLE = SUBJ.appTitle || `${SUBJ.title} Quest`;
-const DEFAULT_KEY = LQ.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
+const DEFAULT_KEY = Noema.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
 const PALETTE = [
   ['#ff6b6b','#ffe7e7'],['#ff922b','#fff0e1'],['#f2a20c','#fff4d6'],['#40c057','#e4f7e8'],['#12b5a5','#ddf6f3'],
   ['#3b9cf6','#e1effe'],['#5c6cff','#e8eaff'],['#9254ff','#f0e7ff'],['#e64fa5','#fde6f3'],['#f0563d','#fde9e4'],['#2b8a3e','#e3f4e6'],['#1c7ed6','#dfeefc'],['#d9480f','#ffe8d9']];
@@ -135,15 +135,15 @@ function mdLite(s) {
 }
 
 /* ---------- state ---------- */
-/* State is namespaced: per-subject progress  → lq1:<account>:s:<subject>:state
-                        per-account settings  → lq1:<account>:a:settings   (API key, model, theme, goal…)
-                        XP / streak across all subjects → LQ.stats (lq1:<account>:a:stats)            */
-const STATE_KEY = LQ.kv.subjectKey('state'), SETTINGS_KEY = LQ.kv.accountKey('settings');
+/* State is namespaced: per-subject progress  → noema1:<account>:s:<subject>:state
+                        per-account settings  → noema1:<account>:a:settings   (API key, model, theme, goal…)
+                        XP / streak across all subjects → Noema.stats (noema1:<account>:a:stats)            */
+const STATE_KEY = Noema.kv.subjectKey('state'), SETTINGS_KEY = Noema.kv.accountKey('settings');
 const SETTINGS_DEFAULT = { apiKey: DEFAULT_KEY, model: '', models: [], theme: 'auto', sound: true, goal: 120, chunk: true };
 const S = (() => {
   let s = {}, g = {};
-  try { s = JSON.parse(LQ.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
-  try { g = JSON.parse(LQ.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
+  try { s = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
+  try { g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
   const st = Object.assign({ xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null }, s);
   st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null });
   delete st.srcOn; delete st.xpDay; delete st.streak; delete st.lastDay;
@@ -154,23 +154,23 @@ let saveT;
 function flushSave() {
   clearTimeout(saveT);
   const { settings, ...rest } = S; const { srcOn, ...glob } = settings;
-  LQ.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
-  let cur = {}; try { cur = JSON.parse(LQ.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
-  LQ.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
+  Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
+  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
+  Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
-function touchStreak() { LQ.stats.touchStreak(); }
+function touchStreak() { Noema.stats.touchStreak(); }
 function addXP(n, el) {
   if (n <= 0) return;
-  const before = LQ.stats.todayXP();
-  S.xp += n; LQ.stats.add(n); save();
+  const before = Noema.stats.todayXP();
+  S.xp += n; Noema.stats.add(n); save();
   renderTopStats();
   const r = el?.getBoundingClientRect?.();
   const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, `+${n} XP`);
   document.body.append(f); setTimeout(() => f.remove(), 1200);
-  if (before < S.settings.goal && LQ.stats.todayXP() >= S.settings.goal) { confetti(160); toast('🎯 Daily goal smashed!'); }
+  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { confetti(160); toast('🎯 Daily goal smashed!'); }
 }
 function record(ex, ok, firstTry = true) {
   const r = S.res[ex.id] || { n: 0, ok: 0 };
@@ -384,7 +384,7 @@ async function geminiJSON(prompt, system, schema) {
 /* ===================== Tutor ===================== */
 function learnerProfile() {
   let learner = '';
-  try { learner = JSON.parse(LQ.kv.get(LQ.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }
+  try { learner = JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }
   learner = learner || ACCOUNT.learner || `The learner (${ACCOUNT.name || 'the student'}) learns best when challenged, tested and given tightly structured, co-located information.`;
   return `${learner} ${TUTOR.prior || ''}`.trim();
 }
@@ -411,7 +411,7 @@ A thread = one question you are helping the learner work out. The app tracks eve
 7. Normal turns ≤ 140 words; resolutions and summaries may be longer. End with at most ONE question — or none when closing.
 
 MACHINE STATE — mandatory, hidden from the learner. End EVERY reply with exactly one line:
-<lq-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</lq-state>
+<noema-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</noema-state>
 Omit empty arrays. Use the "Next new thread id" from TUTOR STATE. Nothing may follow the closing tag.
 ${STYLE}` },
   explain: { label: '💡 Explain', sys: `You are "${TN}", a vivid, friendly ${TUTOR.domain} explainer. ${LEARNER}
@@ -491,7 +491,7 @@ function renderTutor() {
   hist.forEach(m => {
     if (m.hidden) return;
     const b = h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, md(m.text));
-    const res = m.meta?.lqState?.resolved || [];
+    const res = m.meta?.noemaState?.resolved || [];
     if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 <b>Saved to your lessons:</b> ' + fmt(r.lesson) }))));
     msgs.append(b);
   });
@@ -520,7 +520,7 @@ async function sendTutor(text, hidden = false, opts = {}) {
     const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(splitControl(t).clean || '…')); msgs.scrollTop = msgs.scrollHeight; } });
     const { clean, control } = splitControl(full);
     const msg = { role: 'model', text: clean || full, t: Date.now() };
-    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { lqState: control }; } if (got.length) toast(`📌 ${got.length} lesson${got.length > 1 ? 's' : ''} learned`); }
+    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { noemaState: control }; } if (got.length) toast(`📌 ${got.length} lesson${got.length > 1 ? 's' : ''} learned`); }
     hist.push(msg);
     persistConvo(key); maybeAutoTitle(key);
     touchStreak();
@@ -593,7 +593,7 @@ function openSettings() {
       h('div', { class: 'hr' }),
       h('div', { class: 'row' },
         h('button', { class: 'btn small', onclick: () => { close(); openAccountMenu('backup'); } }, '💾 Backup & restore…'),
-        h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await LQ.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`)),
+        h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`)),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '20px' } },
         h('button', { class: 'btn primary', onclick: () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; save(); applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔'); } }, 'Save')));
   });
@@ -958,7 +958,7 @@ let timerT = null, timerEnd = 0;
 function renderTopStats() {
   const x = $('#xpchip'), s = $('#streakchip');
   if (x) x.textContent = `⭐ ${S.xp} XP`;
-  if (s) s.textContent = `🔥 ${LQ.stats.streakNow()}`;
+  if (s) s.textContent = `🔥 ${Noema.stats.streakNow()}`;
 }
 function topbar() {
   const timer = h('button', { class: 'chip timer hide-m', title: '15-minute focus sprint', onclick: () => {
@@ -968,8 +968,8 @@ function topbar() {
     tick(); timerT = setInterval(tick, 1000);
   } }, '⏱️ Focus');
   return h('header', { class: 'topbar' },
-    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, LQ.config.appName || 'noema-lite')),
-    h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => LQ.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
+    h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
+    h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
     timer,
     h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: 'Day streak' }),
@@ -990,7 +990,7 @@ function animateRings(root) { requestAnimationFrame(() => requestAnimationFrame(
 function homeView() {
   setTutorContext(null);
   setAccent(document.body, null);
-  const xpToday = LQ.stats.todayXP();
+  const xpToday = Noema.stats.todayXP();
   const goal = h('div', { class: 'goalring' }, ring(xpToday / S.settings.goal, 120, 12, '#ff922b'), h('div', { class: 'lbl' }, h('b', {}, xpToday), h('small', { class: 'tiny' }, `/ ${S.settings.goal} XP today`)));
   const dueFc = countDueCards(), duePb = countDuePlaybooks(), wrong = mistakesList().length;
   const results = h('div', { class: 'results' });
@@ -1663,10 +1663,10 @@ function mdRich(s) {
   return wrap;
 }
 
-/* ---------- storage: canonical lq.conversation/v1 records (engine/convos.js), persisted in the background ---------- */
+/* ---------- storage: canonical noema.conversation/v1 records (engine/convos.js), persisted in the background ---------- */
 const CV = { list: [], byKey: {}, titling: new Set() };
 const ACC_REF = { id: ACCOUNT.id, kind: ACCOUNT.kind || 'local' };
-const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: LQ.pack?.version || null };
+const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: Noema.pack?.version || null };
 function fromRec(r) {     // canonical record → in-memory shape used by the UI
   return { id: r.id, kind: r.kind, mode: r.mode, created: Date.parse(r.createdAt), updated: Date.parse(r.updatedAt),
     ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label } : null,
@@ -1677,7 +1677,7 @@ function fromRec(r) {     // canonical record → in-memory shape used by the UI
 }
 function toRec(cv) {      // in-memory shape → canonical record
   const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : null;
-  return LQ.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
+  return Noema.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
     titleSource: cv.titleSource || (cv.titledLen >= 1e9 ? 'user' : cv.title ? 'ai' : 'none'),
     context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
     model: { provider: 'google', name: cv.model || S.settings.model || null },
@@ -1686,11 +1686,11 @@ function toRec(cv) {      // in-memory shape → canonical record
     tutorState: cv.tutorState || undefined,
     meta: cv.titledLen && cv.titledLen < 1e9 ? { titledAtMessage: cv.titledLen } : undefined }, { account: ACC_REF, subject: SUBJ_REF });
 }
-CV.list = (LQ.preloadedConvos || []).map(fromRec);
+CV.list = (Noema.preloadedConvos || []).map(fromRec);
 /** Persist one conversation now (IndexedDB → then folder + cloud in the background). Never blocks the UI. */
 function saveConvos(cv) {
   const targets = cv ? [cv] : CV.list;
-  targets.forEach(c => { if (c.msgs?.length) LQ.convos.put(ACCOUNT.id, { ...toRec(c), account: ACC_REF, subject: SUBJ_REF }).catch(e => console.warn('[LQ] conversation save failed', e)); });
+  targets.forEach(c => { if (c.msgs?.length) Noema.convos.put(ACCOUNT.id, { ...toRec(c), account: ACC_REF, subject: SUBJ_REF }).catch(e => console.warn('[Noema] conversation save failed', e)); });
   return true;
 }
 function ctxRecord() {
@@ -1702,7 +1702,7 @@ function persistConvo(key) {
   if (!hist || !hist.length) return;
   let cv = CV.byKey[key];
   if (!cv || cv.msgs !== hist) {
-    cv = { id: LQ.convos.newId(), kind: 'tutor', created: Date.now(), mode: T.mode, ctx: ctxRecord(), model: S.settings.model || '', title: null, msgs: hist };
+    cv = { id: Noema.convos.newId(), kind: 'tutor', created: Date.now(), mode: T.mode, ctx: ctxRecord(), model: S.settings.model || '', title: null, msgs: hist };
     CV.byKey[key] = cv; CV.list.push(cv);
   }
   cv.updated = Date.now(); cv.model = S.settings.model || cv.model;
@@ -1712,7 +1712,7 @@ function persistConvo(key) {
 /** Record a one-shot AI interaction (grading, code review, generated question, drill grading) as a canonical conversation. */
 function logAI(kind, { ctx = null, title = null, prompt, response }) {
   const t = Date.now();
-  const cv = { id: LQ.convos.newId(t), kind, mode: null, created: t, updated: t, ctx, model: S.settings.model || '', title, titleSource: title ? 'system' : 'none', titledLen: 1e9,
+  const cv = { id: Noema.convos.newId(t), kind, mode: null, created: t, updated: t, ctx, model: S.settings.model || '', title, titleSource: title ? 'system' : 'none', titledLen: 1e9,
     msgs: [{ role: 'user', text: prompt, t }, { role: 'model', text: response, t: Date.now() }] };
   CV.list.push(cv); saveConvos(cv);
   return cv;
@@ -1773,7 +1773,7 @@ function convoMarkdown(cv, level = 1) {
     `| **Last message** | ${fmtDate(cv.updated || cv.created)} |`,
     `| **Messages** | ${cv.msgs.length} |`,
     `| **Tutor** | ${TN} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
-    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${APP_TITLE} (${LQ.config.appName}) |`, '', '---', ''];
+    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${APP_TITLE} (${Noema.config.appName}) |`, '', '---', ''];
   const lessons = cv.tutorState?.lessons || [];
   if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
@@ -1832,7 +1832,7 @@ function openConvo(cv) {
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();
   T.hist[key] = cv.msgs; CV.byKey[key] = cv;
-  if (cv.tutorState) T.tstate[key] = cv.tutorState; else if (T.mode === 'socratic' && cv.msgs.some(m => m.meta?.lqState)) T.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs); else delete T.tstate[key];
+  if (cv.tutorState) T.tstate[key] = cv.tutorState; else if (T.mode === 'socratic' && cv.msgs.some(m => m.meta?.noemaState)) T.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs); else delete T.tstate[key];
   T.showHistory = false; renderTutor();
 }
 
@@ -1871,7 +1871,7 @@ function renderConvoHistory(box) {
         h('button', { class: 'iconbtn', title: 'Export .md', onclick: () => exportConvo(cv) }, '⬇️'),
         h('button', { class: 'iconbtn', title: 'Delete', onclick: e => {
           if (!confirmDel) { confirmDel = true; e.currentTarget.textContent = '❓'; e.currentTarget.title = 'Click again to delete'; return; }
-          CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } LQ.convos.remove(ACCOUNT.id, cv.id).catch(() => { }); renderTutor();
+          CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } Noema.convos.remove(ACCOUNT.id, cv.id).catch(() => { }); renderTutor();
         } }, '🗑️')));
     box.append(card);
   });
@@ -1881,7 +1881,7 @@ function renderConvoHistory(box) {
 /* ===================== Socratic elicitation threads: tracking, budgets, closure ===================== */
 /* Every question the tutor makes the learner work on is a THREAD. The app (not the model) owns the
    thread state: it counts the learner's attempts, enforces a budget, injects the state into every call
-   (TUTOR STATE) and parses the model's hidden <lq-state> control line to open/resolve threads.
+   (TUTOR STATE) and parses the model's hidden <noema-state> control line to open/resolve threads.
    A thread always ends with an authoritative ✅ Answer + 📌 Lesson; the session ends with 🎓 What you learned. */
 const THREAD_BUDGET = 3;        // learner attempts per thread before the tutor MUST give the answer
 const MAX_OPEN_THREADS = 2;     // main question + at most one nested sub-question
@@ -1897,9 +1897,9 @@ const usesThreads = mode => mode === 'socratic';
 
 /** Split the model reply into the visible text and the hidden control object. Works on partial streams too. */
 function splitControl(full) {
-  const i = full.indexOf('<lq-state');
+  const i = full.indexOf('<noema-state');
   if (i < 0) return { clean: full.trim(), control: null };
-  const m = full.slice(i).match(/<lq-state>([\s\S]*?)<\/lq-state>/);
+  const m = full.slice(i).match(/<noema-state>([\s\S]*?)<\/noema-state>/);
   let control = null;
   if (m) { try { control = JSON.parse(m[1].trim().replace(/^```(?:json)?|```$/g, '')); } catch (e) { control = null; } }
   return { clean: full.slice(0, i).trim(), control };
@@ -1930,7 +1930,7 @@ function tutorStateBlock(ts, directive) {
   if (open.length >= MAX_OPEN_THREADS && directive !== 'wrapup') dir.push(`${open.length} threads are open → do NOT open a new thread; answer any new question directly and briefly.`);
   if (ts.learnerTurns >= CONVERGE_AFTER && open.length && !directive) dir.push('This conversation is long → converge: resolve the open threads within this or the next reply and give the 🎓 summary.');
   if (!open.length && ts.lessons.length && !directive) dir.push('No thread is open → if the learner asked something new, decide afresh (direct answer or ONE new thread). If they just acknowledged, close with **🎓 What you learned:** instead of starting a new chain.');
-  if (ts.missingControl) dir.push('Your previous reply lacked the <lq-state> line — you MUST include it.');
+  if (ts.missingControl) dir.push('Your previous reply lacked the <noema-state> line — you MUST include it.');
   lines.push('DIRECTIVES:', ...(dir.length ? dir.map(d => '- ' + d) : ['- (none)']));
   lines.push(`Next new thread id: ${nextThreadId(ts)}.`);
   return lines.join('\n');
@@ -1969,7 +1969,7 @@ function applyControl(ts, control, seq) {
 /** Rebuild state from message metadata (for conversations stored before tutorState existed). */
 function rebuildThreadState(msgs) {
   const ts = newThreadState();
-  msgs.forEach((m, i) => { if (m.role === 'user') ts.learnerTurns++; else if (m.meta?.lqState) applyControl(ts, m.meta.lqState, i); });
+  msgs.forEach((m, i) => { if (m.role === 'user') ts.learnerTurns++; else if (m.meta?.noemaState) applyControl(ts, m.meta.noemaState, i); });
   return ts;
 }
 
@@ -2018,8 +2018,8 @@ function accSection(icon, title, { status = null, info = null, open = false, bod
 }
 const fmtBytes = n => n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B';
 const fmtWhen = t => t ? new Date(t).toLocaleString() : '—';
-function accountSettings() { try { return JSON.parse(LQ.kv.get(LQ.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
-function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); LQ.kv.set(LQ.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
+function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
+function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
 
 function openAccountMenu(tab = 'profile') {
   modal((box, close) => {
@@ -2028,10 +2028,10 @@ function openAccountMenu(tab = 'profile') {
     const tabs = h('div', { class: 'tabs' });
     const show = t => { tab = t; $$('button', tabs).forEach(b => b.classList.toggle('on', b.dataset.t === t)); body.innerHTML = ''; ACC_VIEWS[t](body, close); };
     ACC_TABS.forEach(([k, l]) => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, l)));
-    const st = LQ.stats.get();
+    const st = Noema.stats.get();
     box.append(h('div', { class: 'acchead' }, h('div', { class: 'accemo' }, ACCOUNT.emoji || '🙂'),
       h('div', { class: 'grow' }, h('h2', {}, ACCOUNT.name), h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? `☁️ Cloud account · ${ACCOUNT.email}` : '💻 Local profile on this device')),
-      h('div', { class: 'accstats' }, h('span', { class: 'chip xp' }, `⭐ ${st.xp} XP total`), h('span', { class: 'chip streak' }, `🔥 ${LQ.stats.streakNow()} day streak`)),
+      h('div', { class: 'accstats' }, h('span', { class: 'chip xp' }, `⭐ ${st.xp} XP total`), h('span', { class: 'chip streak' }, `🔥 ${Noema.stats.streakNow()} day streak`)),
       h('button', { class: 'iconbtn', onclick: close }, '✕')), tabs, body);
     show(tab);
   });
@@ -2043,92 +2043,92 @@ const ACC_VIEWS = {
     const name = h('input', { value: ACCOUNT.name, maxlength: 30 });
     const emoji = h('input', { value: ACCOUNT.emoji || '🙂', maxlength: 4, style: { width: '80px', textAlign: 'center', fontSize: '22px' } });
     const learner = h('textarea', { class: 'answer', style: { minHeight: '90px' }, placeholder: 'e.g. I have ADHD and learn best when challenged; I already know X; I prepare for exam Y…' }, set.learner || ACCOUNT.learner || '');
-    const ask = h('input', { type: 'checkbox', checked: set.askSubjectOnStart ?? LQ.config.askSubjectOnStart });
+    const ask = h('input', { type: 'checkbox', checked: set.askSubjectOnStart ?? Noema.config.askSubjectOnStart });
     const pin = h('input', { type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: ACCOUNT.pin ? 'New PIN (empty = keep)' : 'Optional PIN' });
-    const bySub = Object.entries(LQ.stats.get().bySubject || {}).sort((a, b) => b[1] - a[1]);
+    const bySub = Object.entries(Noema.stats.get().bySubject || {}).sort((a, b) => b[1] - a[1]);
     body.append(
       h('div', { class: 'row' }, h('div', { class: 'field grow' }, h('label', {}, 'Name'), name), h('div', { class: 'field' }, h('label', {}, 'Emoji'), emoji)),
       h('div', { class: 'field' }, h('label', {}, 'About me (the tutor adapts to this, in every subject) ', tip('Write how you learn, what you already know and your goal. It is added to every tutor conversation, in every subject. Stays private to this profile.')), learner),
       h('label', { class: 'row', style: { margin: '8px 0' } }, ask, 'Show the subject picker every time I open the app'),
-      ACCOUNT.kind === 'local' ? h('div', { class: 'field' }, h('label', {}, 'PIN (a privacy curtain on a shared device — not encryption)'), h('div', { class: 'row' }, pin, ACCOUNT.pin ? h('button', { class: 'btn small', onclick: () => { LQ.saveLocalAccount({ ...ACCOUNT, pin: null }); toast('PIN removed'); } }, 'Remove PIN') : null)) : null,
+      ACCOUNT.kind === 'local' ? h('div', { class: 'field' }, h('label', {}, 'PIN (a privacy curtain on a shared device — not encryption)'), h('div', { class: 'row' }, pin, ACCOUNT.pin ? h('button', { class: 'btn small', onclick: () => { Noema.saveLocalAccount({ ...ACCOUNT, pin: null }); toast('PIN removed'); } }, 'Remove PIN') : null)) : null,
       bySub.length ? h('div', { class: 'field' }, h('label', {}, 'XP by subject'), h('div', { class: 'row' }, ...bySub.map(([sid, xp]) => h('span', { class: 'pill' }, `${sid}: ${xp}`)))) : null,
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn primary', onclick: async () => {
           const patch = { name: name.value.trim() || ACCOUNT.name, emoji: emoji.value.trim() || ACCOUNT.emoji };
           putAccountSettings({ learner: learner.value.trim(), askSubjectOnStart: ask.checked });
-          if (ACCOUNT.kind === 'local') { const a = { ...ACCOUNT, ...patch }; if (pin.value) a.pin = await (async () => { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(a.id + ':' + pin.value)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); })(); LQ.saveLocalAccount(a); }
-          else { try { await LQCloud.saveProfile({ ...patch, learner: learner.value.trim() }); } catch (e) { toast('⚠️ ' + e.message); } }
+          if (ACCOUNT.kind === 'local') { const a = { ...ACCOUNT, ...patch }; if (pin.value) a.pin = await (async () => { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(a.id + ':' + pin.value)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); })(); Noema.saveLocalAccount(a); }
+          else { try { await NoemaCloud.saveProfile({ ...patch, learner: learner.value.trim() }); } catch (e) { toast('⚠️ ' + e.message); } }
           toast('Saved ✔ — reloading'); setTimeout(() => location.reload(), 600);
         } }, 'Save profile'),
-        h('button', { class: 'btn', onclick: () => { close(); LQ.openSubjectPicker(); } }, '📚 Switch subject'),
-        h('button', { class: 'btn', onclick: () => { close(); LQ.openAccountPicker(); } }, '👥 Switch profile')),
+        h('button', { class: 'btn', onclick: () => { close(); Noema.openSubjectPicker(); } }, '📚 Switch subject'),
+        h('button', { class: 'btn', onclick: () => { close(); Noema.openAccountPicker(); } }, '👥 Switch profile')),
       ACCOUNT.kind === 'local' ? h('div', { class: 'dangerzone' }, h('b', {}, 'Danger zone'),
         h('p', { class: 'tiny' }, 'Deleting removes this profile and all its data from this browser. A backup file is downloaded first.'),
         h('button', { class: 'btn small', onclick: () => confirmBox(`Delete profile “${ACCOUNT.name}” and all its data on this device?`, async () => {
-          LQ.backup.download(await LQ.backup.collect(ACCOUNT.id, { includeSecrets: false }));
-          LQ.wipeAccountData(ACCOUNT.id); LQ.removeLocalAccount(ACCOUNT.id); LQ.jset('lq1:current', {}); setTimeout(() => location.reload(), 800);
+          Noema.backup.download(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: false }));
+          Noema.wipeAccountData(ACCOUNT.id); Noema.removeLocalAccount(ACCOUNT.id); Noema.jset('noema1:current', {}); setTimeout(() => location.reload(), 800);
         }) }, '🗑️ Delete this profile')) : null);
   },
 
   async subjects(body) {
-    const list = await LQ.subjectsFor(ACCOUNT.id);
+    const list = await Noema.subjectsFor(ACCOUNT.id);
     const set = accountSettings(); const hidden = new Set(set.hiddenSubjects || []);
     body.append(h('p', { class: 'muted' }, 'Choose which subjects appear in your picker. Library subjects are shared; imported packs belong only to this profile.'),
       h('div', { class: 'sublist' }, ...list.map(s => h('div', { class: 'subrow' },
         h('label', { class: 'switch' }, h('input', { type: 'checkbox', checked: !hidden.has(s.id), onchange: e => { e.target.checked ? hidden.delete(s.id) : hidden.add(s.id); putAccountSettings({ hiddenSubjects: [...hidden] }); } }), h('i')),
         h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
         h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises`)),
-        s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => LQ.switchTo(ACCOUNT.id, s.id) }, 'Open'),
-        s.origin === 'imported' ? h('button', { class: 'iconbtn', title: 'Remove imported pack (progress is kept)', onclick: () => confirmBox(`Remove the imported pack “${s.title}”? Your progress in it is kept.`, async () => { await LQ.idb.del('packs', ACCOUNT.id + '|' + s.id); LQ.kv.del(LQ.kv.accountKey('packmeta:' + s.id)); toast('Removed'); }) }, '🗑️') : null))),
+        s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
+        s.origin === 'imported' ? h('button', { class: 'iconbtn', title: 'Remove imported pack (progress is kept)', onclick: () => confirmBox(`Remove the imported pack “${s.title}”? Your progress in it is kept.`, async () => { await Noema.idb.del('packs', ACCOUNT.id + '|' + s.id); Noema.kv.del(Noema.kv.accountKey('packmeta:' + s.id)); toast('Removed'); }) }, '🗑️') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
-        h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.lqpack,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await LQ.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => LQ.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
-        h('button', { class: 'btn', onclick: () => { const p = LQ.pack; const b = new Blob([JSON.stringify(p)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `${SUBJ.id}.noema-pack.json` }); a.click(); } }, `⬇️ Export “${SUBJ.title}” pack`)));
+        h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
+        h('button', { class: 'btn', onclick: () => { const p = Noema.pack; const b = new Blob([JSON.stringify(p)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `${SUBJ.id}.noema-pack.json` }); a.click(); } }, `⬇️ Export “${SUBJ.title}” pack`)));
   },
 
   async backup(body) {
     const inc = h('input', { type: 'checkbox' });
-    const fsSupported = LQ.autoBackup.supported();
+    const fsSupported = Noema.autoBackup.supported();
     const fsBox = h('div'); const rpBox = h('div');
-    const hd0 = fsSupported ? await LQ.autoBackup.handle(ACCOUNT.id) : null;
-    const ok0 = hd0 ? await LQ.autoBackup.permitted(hd0) : false;
+    const hd0 = fsSupported ? await Noema.autoBackup.handle(ACCOUNT.id) : null;
+    const ok0 = hd0 ? await Noema.autoBackup.permitted(hd0) : false;
     const drawFs = async () => {
       fsBox.innerHTML = '';
-      const hd = await LQ.autoBackup.handle(ACCOUNT.id);
+      const hd = await Noema.autoBackup.handle(ACCOUNT.id);
       if (!fsSupported) { fsBox.append(h('p', { class: 'tiny' }, 'This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.'), guideBtn('backupFolder', '📁 How folder backups work')); return; }
-      if (!hd) { fsBox.append(guideBody('backupFolder', { compact: true }), h('button', { class: 'btn primary', onclick: async () => { try { const n = await LQ.autoBackup.choose(ACCOUNT.id); toast(`✅ Auto-backup → ${n}`); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + e.message); } } }, '📁 Choose backup folder')); return; }
-      const ok = await LQ.autoBackup.permitted(hd);
+      if (!hd) { fsBox.append(guideBody('backupFolder', { compact: true }), h('button', { class: 'btn primary', onclick: async () => { try { const n = await Noema.autoBackup.choose(ACCOUNT.id); toast(`✅ Auto-backup → ${n}`); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + e.message); } } }, '📁 Choose backup folder')); return; }
+      const ok = await Noema.autoBackup.permitted(hd);
       fsBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (ok ? 'c' : 'warnpill') }, ok ? `✅ On → 📁 ${hd.name}` : `⏸️ Paused — permission needed for 📁 ${hd.name}`),
-        ok ? h('button', { class: 'btn small', onclick: async () => { await LQ.autoBackup.run(ACCOUNT.id, true); toast('💾 Backed up to folder'); drawFs(); } }, 'Back up now') : h('button', { class: 'btn small primary', onclick: async () => { if (await LQ.autoBackup.permitted(hd, true)) { LQ.autoBackup.start(ACCOUNT.id); await LQ.autoBackup.run(ACCOUNT.id, true); toast('✅ Auto-backup resumed'); } drawFs(); } }, 'Resume'),
-        h('button', { class: 'btn small ghost', onclick: async () => { await LQ.autoBackup.disable(ACCOUNT.id); drawFs(); } }, 'Turn off')),
-        h('div', { class: 'tiny', style: { marginTop: '6px' } }, `Last folder backup: ${fmtWhen(LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0))} · writes backups/ and conversations/ inside 📁 ${hd.name}`));
+        ok ? h('button', { class: 'btn small', onclick: async () => { await Noema.autoBackup.run(ACCOUNT.id, true); toast('💾 Backed up to folder'); drawFs(); } }, 'Back up now') : h('button', { class: 'btn small primary', onclick: async () => { if (await Noema.autoBackup.permitted(hd, true)) { Noema.autoBackup.start(ACCOUNT.id); await Noema.autoBackup.run(ACCOUNT.id, true); toast('✅ Auto-backup resumed'); } drawFs(); } }, 'Resume'),
+        h('button', { class: 'btn small ghost', onclick: async () => { await Noema.autoBackup.disable(ACCOUNT.id); drawFs(); } }, 'Turn off')),
+        h('div', { class: 'tiny', style: { marginTop: '6px' } }, `Last folder backup: ${fmtWhen(Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0))} · writes backups/ and conversations/ inside 📁 ${hd.name}`));
     };
     const drawRP = async () => {
       rpBox.innerHTML = '';
-      const pts = await LQ.backup.listRestorePoints(ACCOUNT.id);
+      const pts = await Noema.backup.listRestorePoints(ACCOUNT.id);
       if (!pts.length) { rpBox.append(h('p', { class: 'tiny' }, 'No restore points yet. One is created automatically before every restore or reset.')); return; }
       pts.forEach(p => rpBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, p.label), h('div', { class: 'tiny' }, `${fmtWhen(p.at)} · ${fmtBytes(p.size)}`)),
-        h('button', { class: 'btn small', onclick: async () => LQ.backup.download(await LQ.backup.getRestorePoint(p.key)) }, '⬇️'),
-        h('button', { class: 'btn small', onclick: () => confirmBox('Go back to this restore point? (your current state becomes a new restore point)', async () => { await LQ.backup.apply(await LQ.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); }) }, 'Restore'))));
+        h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await Noema.backup.getRestorePoint(p.key)) }, '⬇️'),
+        h('button', { class: 'btn small', onclick: () => confirmBox('Go back to this restore point? (your current state becomes a new restore point)', async () => { await Noema.backup.apply(await Noema.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); }) }, 'Restore'))));
     };
-    const pts0 = await LQ.backup.listRestorePoints(ACCOUNT.id);
-    const nConv = (await LQ.convos.list(ACCOUNT.id)).length;
-    const lastDl = LQ.jget(`lq1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
+    const pts0 = await Noema.backup.listRestorePoints(ACCOUNT.id);
+    const nConv = (await Noema.convos.list(ACCOUNT.id)).length;
+    const lastDl = Noema.jget(`noema1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
     body.append(
       h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, `Everything below is optional. ${nConv} AI conversation${nConv === 1 ? ' is' : 's are'} saved automatically in this browser${ACCOUNT.kind === 'cloud' ? ' and in your cloud account' : ''}.`),
       accSection('⬇️', 'Download a backup', { status: lastDl ? { ok: true, text: 'last ' + new Date(lastDl).toLocaleDateString() } : null,
         info: 'One JSON file with everything of this profile: progress in every subject, flashcard schedules, all AI conversations (canonical format), settings and imported packs. Keep it anywhere; restore it here or on another device.',
-        body: [h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); LQ.backup.download(await LQ.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 Download backup'), h('label', { class: 'row tiny' }, inc, 'include my Gemini API key', tip('Off by default so a backup file you share or store somewhere can’t leak your key.')))] }),
+        body: [h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); Noema.backup.download(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 Download backup'), h('label', { class: 'row tiny' }, inc, 'include my Gemini API key', tip('Off by default so a backup file you share or store somewhere can’t leak your key.')))] }),
       accSection('📁', 'Automatic backups to a folder', { status: !fsSupported ? { ok: false, text: 'not in this browser' } : hd0 ? (ok0 ? { ok: true, text: 'on' } : { ok: false, text: 'paused' }) : { ok: false, text: 'off' },
         info: 'Chrome/Edge can write into a folder you choose: a backup every few minutes + every AI conversation as .json and .md. Choose a folder inside Google Drive or iCloud Drive for an automatic off-site copy.', body: fsBox }),
       accSection('⬆️', 'Restore from a backup file', { info: 'Replace = exact copy of the backup. Merge = keep what you have, the backup wins where both have the same item. New profile = restore side by side without touching this profile. A restore point is created first, so you can always undo.',
         body: [h('p', { class: 'tiny' }, 'Also accepts the “Export progress” file of the old single-file Databricks Quest.'),
           h('label', { class: 'btn' }, '📂 Choose backup file…', h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
-            let obj; try { obj = LQ.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
+            let obj; try { obj = Noema.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
             modal((b, c2) => b.append(h('h3', {}, 'Restore backup'), h('p', { class: 'muted' }, `From “${obj.account.name}” · ${fmtWhen(obj.createdAt)} · ${Object.keys(obj.data).length} items · ${(obj.conversations || []).length} conversations`),
               h('div', { style: { display: 'grid', gap: '8px' } },
-                h('button', { class: 'btn primary', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
-                h('button', { class: 'btn', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
-                h('button', { class: 'btn', onclick: async () => { c2(); const base = (obj.account.name || 'Restored') + ' (restored)'; const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); LQ.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await LQ.backup.apply(obj, id, 'replace'); LQ.switchTo(id, null); } }, '➕ Restore as a new local profile'),
+                h('button', { class: 'btn primary', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
+                h('button', { class: 'btn', onclick: async () => { c2(); await Noema.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
+                h('button', { class: 'btn', onclick: async () => { c2(); const base = (obj.account.name || 'Restored') + ' (restored)'; const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); Noema.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await Noema.backup.apply(obj, id, 'replace'); Noema.switchTo(id, null); } }, '➕ Restore as a new local profile'),
                 h('button', { class: 'btn ghost', onclick: c2 }, 'Cancel'))));
           } })), guideBtn('restore', '♻️ How restoring works')] }),
       accSection('🕘', 'Restore points on this device', { status: { ok: true, text: String(pts0.length) }, info: 'Automatic safety copies kept in this browser (last 12): one is made before every restore, reset or profile copy.', body: rpBox }));
@@ -2136,48 +2136,48 @@ const ACC_VIEWS = {
   },
 
   async cloud(body, close) {
-    if (!LQ.config.supabaseUrl || !window.LQCloud) {
+    if (!Noema.config.supabaseUrl || !window.NoemaCloud) {
       body.append(h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '☁️'), h('b', { class: 't' }, 'Cloud sync is not set up for this installation yet'), h('div', {}, 'Optional. Without it, everything still works on this device; use folder backups to stay safe.')),
         accSection('🛠️', 'Set up the cloud (owner, once)', { open: true, body: guideBody('cloudOwner', { compact: true }) }),
         accSection('🐙', 'Keep the repository on GitHub', { body: guideBody('github', { compact: true }) }));
       return;
     }
-    const sess = LQCloud.session();
+    const sess = NoemaCloud.session();
     if (!sess) {
-      body.append(h('p', {}, 'Sign in to a cloud account to study from any device. Your data stays private to your account.'), h('button', { class: 'btn ai', onclick: () => { close(); LQ.openAccountPicker(); } }, '☁️ Sign in / create account'),
+      body.append(h('p', {}, 'Sign in to a cloud account to study from any device. Your data stays private to your account.'), h('button', { class: 'btn ai', onclick: () => { close(); Noema.openAccountPicker(); } }, '☁️ Sign in / create account'),
         accSection('☁️', 'How cloud accounts work', { body: guideBody('cloudUser', { compact: true }) }), accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
       return;
     }
     if (ACCOUNT.kind !== 'cloud') {
       body.append(h('p', {}, `You are signed in to the cloud as ${sess.user.email}, but you are using the local profile “${ACCOUNT.name}”.`),
-        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => LQ.switchTo('u_' + sess.user.id, SUBJ.id) }, 'Switch to my cloud account'),
+        h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => Noema.switchTo('u_' + sess.user.id, SUBJ.id) }, 'Switch to my cloud account'),
           h('button', { class: 'btn', onclick: () => confirmBox(`Copy all of “${ACCOUNT.name}” into your cloud account? (cloud data with the same keys is overwritten; a cloud snapshot is taken first)`, async () => {
-            const target = 'u_' + sess.user.id; await LQCloud.snapshot('Before copying local profile ' + ACCOUNT.name).catch(() => { });
-            await LQ.backup.apply(await LQ.backup.collect(ACCOUNT.id, { includeSecrets: true }), target, 'merge');
-            const keys = Object.keys(LQ.kv.accountData(target)); const mt = LQ.jget(`lq1:${target}:meta:mtime`, {}); keys.forEach(k => mt[k] = Date.now()); LQ.jset(`lq1:${target}:meta:mtime`, mt);
-            toast('Copied — switching to your cloud account'); LQ.switchTo(target, SUBJ.id);
+            const target = 'u_' + sess.user.id; await NoemaCloud.snapshot('Before copying local profile ' + ACCOUNT.name).catch(() => { });
+            await Noema.backup.apply(await Noema.backup.collect(ACCOUNT.id, { includeSecrets: true }), target, 'merge');
+            const keys = Object.keys(Noema.kv.accountData(target)); const mt = Noema.jget(`noema1:${target}:meta:mtime`, {}); keys.forEach(k => mt[k] = Date.now()); Noema.jset(`noema1:${target}:meta:mtime`, mt);
+            toast('Copied — switching to your cloud account'); Noema.switchTo(target, SUBJ.id);
           }) }, '⬆️ Copy this profile into my cloud account')));
       return;
     }
     const stBox = h('div');
-    const drawSt = () => { const s = LQCloud.status(); stBox.innerHTML = ''; stBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (s.error ? '' : 'c') }, s.error ? '⚠️ ' + s.error : s.syncing ? '🔄 Syncing…' : `✅ Synced ${s.lastSync ? new Date(s.lastSync).toLocaleTimeString() : ''}`), s.pending ? h('span', { class: 'pill' }, `${s.pending} change(s) waiting`) : null)); };
-    LQCloud.onStatus(drawSt); drawSt();
+    const drawSt = () => { const s = NoemaCloud.status(); stBox.innerHTML = ''; stBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (s.error ? '' : 'c') }, s.error ? '⚠️ ' + s.error : s.syncing ? '🔄 Syncing…' : `✅ Synced ${s.lastSync ? new Date(s.lastSync).toLocaleTimeString() : ''}`), s.pending ? h('span', { class: 'pill' }, `${s.pending} change(s) waiting`) : null)); };
+    NoemaCloud.onStatus(drawSt); drawSt();
     const snapBox = h('div');
     const drawSnaps = async () => {
       snapBox.innerHTML = '';
-      let list = []; try { list = await LQCloud.listSnapshots(); } catch (e) { snapBox.append(h('p', { class: 'tiny' }, '⚠️ ' + e.message)); return; }
+      let list = []; try { list = await NoemaCloud.listSnapshots(); } catch (e) { snapBox.append(h('p', { class: 'tiny' }, '⚠️ ' + e.message)); return; }
       if (!list.length) snapBox.append(h('p', { class: 'tiny' }, 'No snapshots yet.'));
       list.forEach(sn => snapBox.append(h('div', { class: 'subrow' }, h('div', { class: 'grow' }, h('b', {}, sn.label), h('div', { class: 'tiny' }, `${fmtWhen(sn.created_at)} · ${fmtBytes(sn.size_bytes || 0)}`)),
-        h('button', { class: 'btn small', onclick: async () => LQ.backup.download(await LQCloud.getSnapshot(sn.id)) }, '⬇️'),
-        h('button', { class: 'btn small', onclick: () => confirmBox('Restore your account to this snapshot? (a snapshot of the current state is taken first)', async () => { await LQCloud.snapshot('Before restoring a snapshot'); await LQ.backup.apply(await LQCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await LQCloud.push(ACCOUNT.id).catch(() => { }); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 900); }) }, 'Restore'),
-        h('button', { class: 'iconbtn', onclick: async () => { await LQCloud.deleteSnapshot(sn.id); drawSnaps(); } }, '🗑️'))));
+        h('button', { class: 'btn small', onclick: async () => Noema.backup.download(await NoemaCloud.getSnapshot(sn.id)) }, '⬇️'),
+        h('button', { class: 'btn small', onclick: () => confirmBox('Restore your account to this snapshot? (a snapshot of the current state is taken first)', async () => { await NoemaCloud.snapshot('Before restoring a snapshot'); await Noema.backup.apply(await NoemaCloud.getSnapshot(sn.id), ACCOUNT.id, 'replace'); await NoemaCloud.push(ACCOUNT.id).catch(() => { }); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 900); }) }, 'Restore'),
+        h('button', { class: 'iconbtn', onclick: async () => { await NoemaCloud.deleteSnapshot(sn.id); drawSnaps(); } }, '🗑️'))));
     };
     body.append(h('p', { class: 'tiny' }, `Signed in as ${sess.user.email}. Progress, conversations and settings sync automatically; a daily snapshot is kept (last 30).`), stBox,
       h('div', { class: 'row', style: { margin: '10px 0' } },
-        h('button', { class: 'btn', onclick: async () => { try { await LQCloud.push(ACCOUNT.id); const n = await LQCloud.pull(ACCOUNT.id); toast(n ? `Pulled ${n} change(s) — reloading` : 'Up to date ✔'); if (n) setTimeout(() => location.reload(), 800); } catch (e) { toast('⚠️ ' + e.message); } } }, '🔄 Sync now'),
-        h('button', { class: 'btn', onclick: async () => { try { await LQCloud.snapshot('Manual snapshot'); toast('📸 Snapshot saved'); drawSnaps(); } catch (e) { toast('⚠️ ' + e.message); } } }, '📸 Take snapshot'),
-        h('label', { class: 'btn' }, '🗄️ Upload database backup…', h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await LQCloud.uploadFile('db', e.target.files[0]); toast('☁️ Database backup uploaded'); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
-        h('button', { class: 'btn ghost', onclick: async () => { await LQCloud.push(ACCOUNT.id).catch(() => { }); await LQCloud.signOut(); LQ.jset('lq1:current', {}); location.reload(); } }, 'Sign out')),
+        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.push(ACCOUNT.id); const n = await NoemaCloud.pull(ACCOUNT.id); toast(n ? `Pulled ${n} change(s) — reloading` : 'Up to date ✔'); if (n) setTimeout(() => location.reload(), 800); } catch (e) { toast('⚠️ ' + e.message); } } }, '🔄 Sync now'),
+        h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot('Manual snapshot'); toast('📸 Snapshot saved'); drawSnaps(); } catch (e) { toast('⚠️ ' + e.message); } } }, '📸 Take snapshot'),
+        h('label', { class: 'btn' }, '🗄️ Upload database backup…', h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await NoemaCloud.uploadFile('db', e.target.files[0]); toast('☁️ Database backup uploaded'); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
+        h('button', { class: 'btn ghost', onclick: async () => { await NoemaCloud.push(ACCOUNT.id).catch(() => { }); await NoemaCloud.signOut(); Noema.jset('noema1:current', {}); location.reload(); } }, 'Sign out')),
       accSection('📸', 'Cloud snapshots', { open: true, info: 'Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.', body: snapBox }),
       accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
     drawSnaps();
@@ -2186,7 +2186,7 @@ const ACC_VIEWS = {
 
 ACC_VIEWS.help = function (body) {
   const st = setupStatus();
-  const state = { gemini: st.gemini, backupFolder: !!LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!LQ.config.supabaseUrl };
+  const state = { gemini: st.gemini, backupFolder: !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!Noema.config.supabaseUrl };
   body.append(h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, 'Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.'),
     ...Object.entries(GUIDES).map(([id, g]) => accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) })));
 };
@@ -2194,9 +2194,9 @@ ACC_VIEWS.help = function (body) {
 /* ---------- sync indicator ---------- */
 function wireSyncDot() {
   const dot = $('#syncdot'); if (!dot) return;
-  if (ACCOUNT.kind !== 'cloud' || !window.LQCloud) { dot.remove(); return; }
+  if (ACCOUNT.kind !== 'cloud' || !window.NoemaCloud) { dot.remove(); return; }
   const paint = s => { dot.className = 'syncdot ' + (s.error ? 'err' : s.syncing || s.pending ? 'busy' : 'ok'); dot.title = s.error ? 'Sync error: ' + s.error : s.syncing ? 'Syncing…' : s.pending ? 'Changes waiting to sync' : 'All changes synced'; };
-  LQCloud.onStatus(paint); paint(LQCloud.status());
+  NoemaCloud.onStatus(paint); paint(NoemaCloud.status());
 }
 
 /* ---- 75_help.js ---- */
@@ -2208,7 +2208,7 @@ function tip(text) {
 }
 document.addEventListener('click', () => $$('.tip.show').forEach(t => t.classList.remove('show')));
 
-const SITE_URL = LQ.config.siteUrl || '';
+const SITE_URL = Noema.config.siteUrl || '';
 const GUIDES = {
   gemini: { icon: '🔑', title: 'Get your free Gemini API key', who: 'Everyone who wants the AI tutor', steps: [
     'Open **Google AI Studio** → https://aistudio.google.com/apikey and sign in with your Google account.',
@@ -2236,7 +2236,7 @@ const GUIDES = {
     notes: ['Your data is private to your account (row-level security). A daily snapshot is kept for 30 days.'] },
   cloudOwner: { icon: '🛠️', title: 'Set up the cloud (owner, once)', who: 'Only the owner of this installation', steps: [
     '**Supabase** (accounts + sync): https://supabase.com → New project (region Frankfurt) → **SQL Editor** → run the whole file **cloud/supabase.sql**.',
-    'Supabase → **Project Settings → API**: copy the **Project URL** and the **anon public** key → put them in **config.js** (or give them to Claude). Never share the service_role key.',
+    'Supabase: the **Project URL** is `https://<project-ref>.supabase.co` (the ref is in your dashboard address) and the **publishable key** (`sb_publishable_…`) is under **Project Settings → API Keys** → put both in **config.js** (or give them to Claude). Never share the secret key or the database password.',
     '**Netlify** (website): https://app.netlify.com → Add new site → Import from GitHub → pick the repo → Deploy (settings come from netlify.toml).',
     'Supabase → **Authentication → URL Configuration → Site URL** = your Netlify address.',
     'Full step-by-step guide with screenshots-level detail: **cloud/README.md** in the repository.'] },
@@ -2266,16 +2266,16 @@ const guideBtn = (id, label) => h('button', { class: 'btn small ghost', onclick:
 /* ---------- setup status ---------- */
 function setupStatus() {
   const set = accountSettings();
-  const lastDl = LQ.jget(`lq1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
+  const lastDl = Noema.jget(`noema1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
   return {
     gemini: !!S.settings.apiKey,
-    protectedData: ACCOUNT.kind === 'cloud' || !!LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0) || Date.now() - lastDl < 14 * 864e5,
+    protectedData: ACCOUNT.kind === 'cloud' || !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0) || Date.now() - lastDl < 14 * 864e5,
     dismissed: set.dismissedSetup || {},
   };
 }
 /** Warning banner shown on the home page during the first sessions of a profile, only for things not set up yet. */
 function setupBanner() {
-  const sessions = LQ.jget(`lq1:${ACCOUNT.id}:meta:sessions`, 0);
+  const sessions = Noema.jget(`noema1:${ACCOUNT.id}:meta:sessions`, 0);
   if (sessions > 5) return null;
   const st = setupStatus();
   const items = [];
@@ -2313,7 +2313,7 @@ function watchMath() {
 }
 
 /* ---- 90_boot.js ---- */
-/* ===================== Boot (runs after every module is loaded; the loader has set LQ.subject / COURSE) ===================== */
+/* ===================== Boot (runs after every module is loaded; the loader has set Noema.subject / COURSE) ===================== */
 applySourceFilter();
 boot();
 wireSyncDot();

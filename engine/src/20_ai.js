@@ -112,7 +112,7 @@ async function geminiJSON(prompt, system, schema) {
 /* ===================== Tutor ===================== */
 function learnerProfile() {
   let learner = '';
-  try { learner = JSON.parse(LQ.kv.get(LQ.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }
+  try { learner = JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}').learner || ''; } catch (e) { }
   learner = learner || ACCOUNT.learner || `The learner (${ACCOUNT.name || 'the student'}) learns best when challenged, tested and given tightly structured, co-located information.`;
   return `${learner} ${TUTOR.prior || ''}`.trim();
 }
@@ -139,7 +139,7 @@ A thread = one question you are helping the learner work out. The app tracks eve
 7. Normal turns ≤ 140 words; resolutions and summaries may be longer. End with at most ONE question — or none when closing.
 
 MACHINE STATE — mandatory, hidden from the learner. End EVERY reply with exactly one line:
-<lq-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</lq-state>
+<noema-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</noema-state>
 Omit empty arrays. Use the "Next new thread id" from TUTOR STATE. Nothing may follow the closing tag.
 ${STYLE}` },
   explain: { label: '💡 Explain', sys: `You are "${TN}", a vivid, friendly ${TUTOR.domain} explainer. ${LEARNER}
@@ -219,7 +219,7 @@ function renderTutor() {
   hist.forEach(m => {
     if (m.hidden) return;
     const b = h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, md(m.text));
-    const res = m.meta?.lqState?.resolved || [];
+    const res = m.meta?.noemaState?.resolved || [];
     if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 <b>Saved to your lessons:</b> ' + fmt(r.lesson) }))));
     msgs.append(b);
   });
@@ -248,7 +248,7 @@ async function sendTutor(text, hidden = false, opts = {}) {
     const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(splitControl(t).clean || '…')); msgs.scrollTop = msgs.scrollHeight; } });
     const { clean, control } = splitControl(full);
     const msg = { role: 'model', text: clean || full, t: Date.now() };
-    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { lqState: control }; } if (got.length) toast(`📌 ${got.length} lesson${got.length > 1 ? 's' : ''} learned`); }
+    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { noemaState: control }; } if (got.length) toast(`📌 ${got.length} lesson${got.length > 1 ? 's' : ''} learned`); }
     hist.push(msg);
     persistConvo(key); maybeAutoTitle(key);
     touchStreak();
@@ -321,7 +321,7 @@ function openSettings() {
       h('div', { class: 'hr' }),
       h('div', { class: 'row' },
         h('button', { class: 'btn small', onclick: () => { close(); openAccountMenu('backup'); } }, '💾 Backup & restore…'),
-        h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await LQ.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`)),
+        h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`)),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '20px' } },
         h('button', { class: 'btn primary', onclick: () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; save(); applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔'); } }, 'Save')));
   });

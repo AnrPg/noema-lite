@@ -6,16 +6,16 @@
    ===================================================================================== */
 (function () {
   'use strict';
-  const CFG = Object.assign({ appName: 'noema-lite', supabaseUrl: '', supabaseAnonKey: '', autoBackupMinutes: 5, askSubjectOnStart: true }, window.LQ_CONFIG || {});
-  const LOCAL = window.LQ_CONFIG_LOCAL || {};            // config.local.js — never committed (e.g. a default Gemini key)
-  const REG = window.LQ_REGISTRY || { groups: [], subjects: [], accounts: [] };
-  const P = 'lq1:';
+  const CFG = Object.assign({ appName: 'noema-lite', supabaseUrl: '', supabaseKey: '', autoBackupMinutes: 5, askSubjectOnStart: true }, window.NOEMA_CONFIG || {});
+  const LOCAL = window.NOEMA_CONFIG_LOCAL || {};            // config.local.js — never committed (e.g. a default Gemini key)
+  const REG = window.NOEMA_REGISTRY || { groups: [], subjects: [], accounts: [] };
+  const P = 'noema1:';
   const VERSION = '1.0.0';
 
   /* ---------------- tiny utils ---------------- */
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { console.warn('[LQ] storage write failed', k, e); return false; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { console.warn('[Noema] storage write failed', k, e); return false; } },
     del(k) { try { localStorage.removeItem(k); } catch (e) { } },
     keys(prefix) { const out = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(prefix)) out.push(k); } } catch (e) { } return out; },
   };
@@ -45,7 +45,7 @@
       if (this.db) return Promise.resolve(this.db);
       return new Promise((res, rej) => {
         if (!window.indexedDB) return rej(new Error('IndexedDB unavailable'));
-        const r = indexedDB.open('learning-quest', 2)  /* internal store name kept so existing data stays readable */;
+        const r = indexedDB.open('noema-lite', 1);
         r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
         r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error);
       });
@@ -66,7 +66,7 @@
     return [...map.values()].filter(a => !removed.has(a.id));
   }
   function cloudAccount() {
-    const s = window.LQCloud && LQCloud.session();
+    const s = window.NoemaCloud && NoemaCloud.session();
     return s ? { id: 'u_' + s.user.id, kind: 'cloud', email: s.user.email, name: jget(P + 'u_' + s.user.id + ':a:profile', {}).name || (s.user.user_metadata?.name) || s.user.email.split('@')[0], emoji: jget(P + 'u_' + s.user.id + ':a:profile', {}).emoji || '☁️' } : null;
   }
   function allAccounts() { const c = cloudAccount(); return [...(c ? [c] : []), ...localAccounts()]; }
@@ -92,12 +92,39 @@
       jset(`${P}${acc}:meta:dirty`, Date.now());
       this.listeners.forEach(f => { try { f(key, acc); } catch (e) { } });
     },
-    accountData(acc) {   // every data key of an account, keyed by suffix (without "lq1:<acc>:")
+    accountData(acc) {   // every data key of an account, keyed by suffix (without "noema1:<acc>:")
       const pre = `${P}${acc}:`; const out = {};
       ls.keys(pre).forEach(k => { const suf = k.slice(pre.length); if (!suf.startsWith('meta:')) out[suf] = ls.get(k); });
       return out;
     },
   };
+
+  /* ---------------- LEGACY: data written before the app was renamed noema-lite ----------------
+     The ONLY place where the old names appear. Data is copied (never deleted) on first start. */
+  const LEGACY = { kvPrefix: 'lq1:', idbName: 'learning-quest', backupFormats: ['learning-quest-backup'], packFormats: ['lq-pack'], schema: 'lq.conversation/v1' };
+  function migrateOldPrefix() {
+    if (ls.get(P + 'migrated:prefix')) return;
+    const old = ls.keys(LEGACY.kvPrefix);
+    if (old.length && !ls.keys(P).length) old.forEach(k => ls.set(P + k.slice(LEGACY.kvPrefix.length), ls.get(k)));
+    ls.set(P + 'migrated:prefix', JSON.stringify({ at: Date.now(), keys: old.length }));
+  }
+  async function migrateOldIDB() {
+    if (ls.get(P + 'migrated:idb') || !window.indexedDB) return;
+    const oldDb = await new Promise(res => { let created = false; const r = indexedDB.open(LEGACY.idbName); r.onupgradeneeded = () => { created = true; r.transaction.abort(); }; r.onsuccess = () => res(created ? null : r.result); r.onerror = () => res(null); r.onblocked = () => res(null); });
+    if (oldDb) {
+      for (const store of ['packs', 'handles', 'restore', 'convos']) {
+        if (!oldDb.objectStoreNames.contains(store)) continue;
+        const rows = await new Promise(res => { const out = []; const c = oldDb.transaction(store).objectStore(store).openCursor(); c.onsuccess = () => { const x = c.result; if (!x) return res(out); out.push([x.key, x.value]); x.continue(); }; c.onerror = () => res(out); });
+        for (let [k, v] of rows) {
+          if (store === 'convos' && v) { v = { ...v, schema: window.NoemaConvos?.SCHEMA || 'noema.conversation/v1', messages: (v.messages || []).map(m => m.meta?.lqState ? { ...m, meta: { ...m.meta, noemaState: m.meta.lqState, lqState: undefined } } : m) }; }
+          if (store === 'packs' && v && LEGACY.packFormats.includes(v.format)) v = { ...v, format: 'noema-pack' };
+          if (!(await IDB.get(store, k))) await IDB.put(store, k, v);
+        }
+      }
+      oldDb.close();
+    }
+    ls.set(P + 'migrated:idb', String(Date.now()));
+  }
 
   /* ---------------- legacy migration (Databricks Quest v1–v3 single-file app) ---------------- */
   function migrateLegacy(acc, subj) {
@@ -113,7 +140,7 @@
       if (oldC) KV.set(KV.subjectKey('convos', subj, acc), oldC);
       ls.set(P + 'migrated:legacy', JSON.stringify({ acc, at: Date.now() }));
       setTimeout(() => toastL('✅ Your previous Databricks Quest progress was carried over'), 1500);
-    } catch (e) { console.warn('[LQ] legacy migration failed', e); }
+    } catch (e) { console.warn('[Noema] legacy migration failed', e); }
   }
 
   /* ---------------- account-level stats (XP / streak across all subjects) ---------------- */
@@ -152,29 +179,29 @@
   function loadScript(src) { return new Promise((res, rej) => { const s = el('script', { src }); s.onload = res; s.onerror = () => rej(new Error('Could not load ' + src)); document.head.append(s); }); }
   function loadCSS(href) { return new Promise(res => { const l = el('link', { rel: 'stylesheet', href }); l.onload = res; l.onerror = res; document.head.append(l); }); }
   async function getPack(acc, meta) {
-    window.LQ_PACKS = window.LQ_PACKS || {};
-    if (window.LQ_PACKS[meta.id]) return window.LQ_PACKS[meta.id];
+    window.NOEMA_PACKS = window.NOEMA_PACKS || {};
+    if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id];
     if (meta.origin === 'imported') { const p = await IDB.get('packs', acc + '|' + meta.id); if (p) return p; }
-    if (meta.path) { await loadScript(meta.path); if (window.LQ_PACKS[meta.id]) return window.LQ_PACKS[meta.id]; }
-    if (window.LQCloud && LQCloud.session()) { const p = await LQCloud.downloadPack(meta.id).catch(() => null); if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); return p; } }
+    if (meta.path) { await loadScript(meta.path); if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id]; }
+    if (window.NoemaCloud && NoemaCloud.session()) { const p = await NoemaCloud.downloadPack(meta.id).catch(() => null); if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); return p; } }
     throw new Error(`The study pack for “${meta.title || meta.id}” could not be loaded.`);
   }
   async function ensureMath() {
     if (window.katex && window.renderMathInElement) return;
-    const base = window.LQ_VENDOR_BASE || 'engine/vendor/';
+    const base = window.NOEMA_VENDOR_BASE || 'engine/vendor/';
     try { await loadCSS(base + 'katex/katex.min.css'); await loadScript(base + 'katex/katex.min.js'); await loadScript(base + 'katex/contrib/auto-render.min.js'); }
-    catch (e) { try { await loadCSS('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'); } catch (e2) { console.warn('[LQ] math rendering unavailable'); } }
+    catch (e) { try { await loadCSS('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'); await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'); } catch (e2) { console.warn('[Noema] math rendering unavailable'); } }
   }
 
   /* ---------------- overlays (account + subject pickers) ---------------- */
   function overlay(build, { closable = true } = {}) {
-    const o = el('div', { class: 'lq-overlay' }); const box = el('div', { class: 'lq-ovbox' }); o.append(box);
+    const o = el('div', { class: 'noema-overlay' }); const box = el('div', { class: 'noema-ovbox' }); o.append(box);
     const close = () => { o.classList.add('out'); setTimeout(() => o.remove(), 250); };
     if (closable) o.addEventListener('click', e => { if (e.target === o) close(); });
     build(box, close); document.body.append(o); return close;
   }
   function brandHead(title, sub) {
-    return el('div', { class: 'lq-ovhead' }, el('div', { class: 'logo' }, '◆'), el('div', {}, el('h1', {}, title), sub ? el('p', { class: 'muted' }, sub) : null));
+    return el('div', { class: 'noema-ovhead' }, el('div', { class: 'logo' }, '◆'), el('div', {}, el('h1', {}, title), sub ? el('p', { class: 'muted' }, sub) : null));
   }
   function pickAccount({ closable = false } = {}) {
     return new Promise(resolve => {
@@ -183,12 +210,12 @@
           box.innerHTML = '';
           const accs = allAccounts();
           box.append(brandHead(CFG.appName, 'Who is studying?'),
-            el('div', { class: 'lq-accgrid' }, ...accs.map((a, i) => el('button', { class: 'lq-acc', style: { animationDelay: i * 50 + 'ms' }, onclick: async () => {
+            el('div', { class: 'noema-accgrid' }, ...accs.map((a, i) => el('button', { class: 'noema-acc', style: { animationDelay: i * 50 + 'ms' }, onclick: async () => {
               if (a.pin) { const pin = await askPin(box, a); if (!pin) return; if ((await sha256(a.id + ':' + pin)) !== a.pin) { toastL('Wrong PIN'); return; } }
               close(); resolve(a);
-            } }, el('span', { class: 'lq-accemo' }, a.emoji || '🙂'), el('b', {}, a.name), el('small', {}, a.kind === 'cloud' ? '☁️ ' + a.email : (a.pin ? '🔒 local profile' : 'local profile')))),
-              el('button', { class: 'lq-acc add', onclick: () => newProfileForm(box, a => { saveLocalAccount(a); close(); resolve(getAccount(a.id)); }, draw) }, el('span', { class: 'lq-accemo' }, '➕'), el('b', {}, 'New profile'), el('small', {}, 'on this device'))),
-            CFG.supabaseUrl && window.LQCloud && !LQCloud.session() ? el('div', { class: 'lq-cloudrow' }, el('button', { class: 'btn ai', onclick: () => cloudForm(box, acc => { close(); resolve(acc); }, draw) }, '☁️ Sign in / create a cloud account'), el('span', { class: 'tiny' }, 'Study from any device — progress syncs automatically.')) : null);
+            } }, el('span', { class: 'noema-accemo' }, a.emoji || '🙂'), el('b', {}, a.name), el('small', {}, a.kind === 'cloud' ? '☁️ ' + a.email : (a.pin ? '🔒 local profile' : 'local profile')))),
+              el('button', { class: 'noema-acc add', onclick: () => newProfileForm(box, a => { saveLocalAccount(a); close(); resolve(getAccount(a.id)); }, draw) }, el('span', { class: 'noema-accemo' }, '➕'), el('b', {}, 'New profile'), el('small', {}, 'on this device'))),
+            CFG.supabaseUrl && window.NoemaCloud && !NoemaCloud.session() ? el('div', { class: 'noema-cloudrow' }, el('button', { class: 'btn ai', onclick: () => cloudForm(box, acc => { close(); resolve(acc); }, draw) }, '☁️ Sign in / create a cloud account'), el('span', { class: 'tiny' }, 'Study from any device — progress syncs automatically.')) : null);
         };
         draw();
       }, { closable });
@@ -196,19 +223,19 @@
   }
   function askPin(box, a) {
     return new Promise(res => {
-      const inp = el('input', { type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: 'PIN', class: 'lq-input', onkeydown: e => { if (e.key === 'Enter') { res(inp.value); f.remove(); } if (e.key === 'Escape') { res(null); f.remove(); } } });
-      const f = el('div', { class: 'lq-form pop' }, el('b', {}, `${a.emoji} ${a.name} — enter PIN`), inp, el('div', { class: 'row' }, el('button', { class: 'btn', onclick: () => { res(null); f.remove(); } }, 'Cancel'), el('button', { class: 'btn primary', onclick: () => { res(inp.value); f.remove(); } }, 'Unlock')));
+      const inp = el('input', { type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: 'PIN', class: 'noema-input', onkeydown: e => { if (e.key === 'Enter') { res(inp.value); f.remove(); } if (e.key === 'Escape') { res(null); f.remove(); } } });
+      const f = el('div', { class: 'noema-form pop' }, el('b', {}, `${a.emoji} ${a.name} — enter PIN`), inp, el('div', { class: 'row' }, el('button', { class: 'btn', onclick: () => { res(null); f.remove(); } }, 'Cancel'), el('button', { class: 'btn primary', onclick: () => { res(inp.value); f.remove(); } }, 'Unlock')));
       box.append(f); inp.focus();
     });
   }
   function newProfileForm(box, done, back) {
     const EMO = ['🦉', '🦊', '🐼', '🐯', '🦄', '🐙', '🌵', '🚀', '🎧', '📚', '🧪', '🧠'];
     let emoji = EMO[Math.random() * EMO.length | 0];
-    const name = el('input', { class: 'lq-input', placeholder: 'Name (e.g. Maria)', maxlength: 30 });
-    const pin = el('input', { class: 'lq-input', type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: 'Optional PIN (privacy curtain, not encryption)' });
-    const emos = el('div', { class: 'lq-emos' }, ...EMO.map(e => { const b = el('button', { class: 'lq-emo' + (e === emoji ? ' on' : ''), onclick: () => { emoji = e; [...emos.children].forEach(x => x.classList.toggle('on', x === b)); } }, e); return b; }));
+    const name = el('input', { class: 'noema-input', placeholder: 'Name (e.g. Maria)', maxlength: 30 });
+    const pin = el('input', { class: 'noema-input', type: 'password', inputmode: 'numeric', maxlength: 8, placeholder: 'Optional PIN (privacy curtain, not encryption)' });
+    const emos = el('div', { class: 'noema-emos' }, ...EMO.map(e => { const b = el('button', { class: 'noema-emo' + (e === emoji ? ' on' : ''), onclick: () => { emoji = e; [...emos.children].forEach(x => x.classList.toggle('on', x === b)); } }, e); return b; }));
     box.innerHTML = '';
-    box.append(brandHead('New profile', 'Each profile has its own subjects, progress, conversations, settings and backups.'), el('div', { class: 'lq-form' }, name, emos, pin,
+    box.append(brandHead('New profile', 'Each profile has its own subjects, progress, conversations, settings and backups.'), el('div', { class: 'noema-form' }, name, emos, pin,
       el('div', { class: 'row' }, el('button', { class: 'btn', onclick: back }, '← Back'), el('button', { class: 'btn primary', onclick: async () => {
         const n = name.value.trim(); if (!n) { name.focus(); return; }
         let id = slugify(n) || 'profile'; const taken = new Set(allAccounts().map(a => a.id)); let k = 2; const base = id; while (taken.has(id)) id = base + '-' + k++;
@@ -218,25 +245,25 @@
   }
   function cloudForm(box, done, back) {
     let mode = 'in';
-    const email = el('input', { class: 'lq-input', type: 'email', placeholder: 'Email', autocomplete: 'email' });
-    const pw = el('input', { class: 'lq-input', type: 'password', placeholder: 'Password (min 8 characters)', autocomplete: 'current-password' });
-    const nm = el('input', { class: 'lq-input', placeholder: 'Display name' });
+    const email = el('input', { class: 'noema-input', type: 'email', placeholder: 'Email', autocomplete: 'email' });
+    const pw = el('input', { class: 'noema-input', type: 'password', placeholder: 'Password (min 8 characters)', autocomplete: 'current-password' });
+    const nm = el('input', { class: 'noema-input', placeholder: 'Display name' });
     const msg = el('div', { class: 'tiny' });
     const draw = () => {
       box.innerHTML = '';
       box.append(brandHead(mode === 'in' ? 'Sign in' : 'Create cloud account', 'Your data is private to your account (row-level security).'),
-        el('div', { class: 'lq-form' }, mode === 'up' ? nm : null, email, pw, msg,
+        el('div', { class: 'noema-form' }, mode === 'up' ? nm : null, email, pw, msg,
           el('div', { class: 'row' }, el('button', { class: 'btn', onclick: back }, '← Back'),
             el('button', { class: 'btn primary', onclick: async e => {
               const b = e.currentTarget; b.disabled = true; msg.textContent = '…';
               try {
-                if (mode === 'in') { await LQCloud.signIn(email.value.trim(), pw.value); done(cloudAccount()); }
-                else { const r = await LQCloud.signUp(email.value.trim(), pw.value, nm.value.trim()); if (r.session) done(cloudAccount()); else { msg.textContent = '📧 Check your inbox to confirm the email, then sign in.'; mode = 'in'; setTimeout(draw, 2500); } }
+                if (mode === 'in') { await NoemaCloud.signIn(email.value.trim(), pw.value); done(cloudAccount()); }
+                else { const r = await NoemaCloud.signUp(email.value.trim(), pw.value, nm.value.trim()); if (r.session) done(cloudAccount()); else { msg.textContent = '📧 Check your inbox to confirm the email, then sign in.'; mode = 'in'; setTimeout(draw, 2500); } }
               } catch (er) { msg.textContent = '⚠️ ' + er.message; } finally { b.disabled = false; }
             } }, mode === 'in' ? 'Sign in' : 'Create account')),
           el('div', { class: 'row' },
             el('button', { class: 'tiny linkish', onclick: () => { mode = mode === 'in' ? 'up' : 'in'; draw(); } }, mode === 'in' ? 'No account yet? Create one' : 'Have an account? Sign in'),
-            mode === 'in' ? el('button', { class: 'tiny linkish', onclick: async () => { try { await LQCloud.recover(email.value.trim()); msg.textContent = '📧 Password-reset email sent.'; } catch (er) { msg.textContent = '⚠️ ' + er.message; } } }, 'Forgot password?') : null)));
+            mode === 'in' ? el('button', { class: 'tiny linkish', onclick: async () => { try { await NoemaCloud.recover(email.value.trim()); msg.textContent = '📧 Password-reset email sent.'; } catch (er) { msg.textContent = '⚠️ ' + er.message; } } }, 'Forgot password?') : null)));
       email.focus();
     };
     draw();
@@ -247,7 +274,7 @@
     const a = getAccount(acc) || { name: acc, emoji: '🙂' };
     return new Promise(resolve => {
       overlay((box, close) => {
-        const q = el('input', { class: 'lq-input lq-search', placeholder: '🔎 Search subjects…', oninput: () => draw() });
+        const q = el('input', { class: 'noema-input noema-search', placeholder: '🔎 Search subjects…', oninput: () => draw() });
         const list = el('div');
         const draw = () => {
           list.innerHTML = '';
@@ -256,15 +283,15 @@
           groups.forEach(g => {
             const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
             if (!items.length) return;
-            list.append(el('div', { class: 'lq-group' }, el('div', { class: 'lq-grouphead' }, `${g.emoji || ''} ${g.title}`),
-              el('div', { class: 'lq-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100); return el('button', { class: 'lq-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
+            list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
+              el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100); return el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
                 el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o' }, s.origin === 'private' ? '🔒' : '📥') : null, pct ? el('span', { class: 'p' }, pct + '%') : null); }))));
           });
           if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Hand your sources to Claude to generate a subject pack, then import it here.')));
         };
-        const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.json,.lqpack,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
+        const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         box.append(brandHead('What do you want to study?', `${a.emoji || ''} ${a.name}`), q, list,
-          el('div', { class: 'row lq-ovfoot' }, imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { LQ.switchTo(na.id, null); } } }, '👤 Switch profile'),
+          el('div', { class: 'row noema-ovfoot' }, imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, '👤 Switch profile'),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, 'Close') : null));
         draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
       }, { closable });
@@ -272,11 +299,12 @@
   }
   async function importPackFile(acc, file) {
     const p = JSON.parse(await file.text());
-    if (p.format !== 'lq-pack' || !p.subject?.id || !Array.isArray(p.chapters)) throw new Error('This file is not a noema-lite subject pack.');
+    if (LEGACY.packFormats.includes(p.format)) p.format = 'noema-pack';
+    if (p.format !== 'noema-pack' || !p.subject?.id || !Array.isArray(p.chapters)) throw new Error('This file is not a noema-lite subject pack.');
     p.counts = p.counts || countPack(p);
     await IDB.put('packs', acc + '|' + p.subject.id, p);
     KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null }));
-    if (window.LQCloud && LQCloud.session() && acc === 'u_' + LQCloud.session().user.id) LQCloud.uploadPack(p).catch(e => console.warn(e));
+    if (window.NoemaCloud && NoemaCloud.session() && acc === 'u_' + NoemaCloud.session().user.id) NoemaCloud.uploadPack(p).catch(e => console.warn(e));
     toastL(`📥 “${p.subject.title}” imported`);
     return { ...p.subject, origin: 'imported', counts: p.counts };
   }
@@ -288,14 +316,14 @@
       const data = KV.accountData(acc);
       if (!includeSecrets && data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; data['a:settings'] = JSON.stringify(s); } catch (e) { } }
       const packs = (await importedPacks(acc)).map(p => ({ id: p.subject.id, pack: p }));
-      const conversations = window.LQConvos ? await LQConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
-      return { format: 'noema-lite-backup', version: 2, conversationSchema: window.LQConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
+      const conversations = window.NoemaConvos ? await NoemaConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
+      return { format: 'noema-lite-backup', version: 2, conversationSchema: window.NoemaConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
         account: { id: a.id, name: a.name, emoji: a.emoji, kind: a.kind || 'local', email: a.email || null }, includesSecrets: !!includeSecrets, data, importedPacks: packs };
     },
     fileName(acc) { return `noema-lite-backup_${acc}_${stamp()}.json`; },
     download(obj) { jset(`${P}${obj.account.id}:meta:lastDownloadBackup`, Date.now()); const b = new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }); const u = URL.createObjectURL(b); const x = el('a', { href: u, download: this.fileName(obj.account.id) }); document.body.append(x); x.click(); x.remove(); setTimeout(() => URL.revokeObjectURL(u), 5000); },
     validate(obj) {
-      if (obj && (obj.format === 'noema-lite-backup' || obj.format === 'learning-quest-backup') && obj.data) return obj;
+      if (obj && (obj.format === 'noema-lite-backup' || LEGACY.backupFormats.includes(obj.format)) && obj.data) return obj;
       // legacy single-file app export (Databricks Quest): {xp, res, read, settings, ...}
       if (obj && obj.res && obj.settings && typeof obj.xp === 'number') {
         const settings = obj.settings; const st = { ...obj }; delete st.settings; st.srcOn = settings.srcOn || null; delete settings.srcOn;
@@ -318,10 +346,10 @@
         KV.set(pre + suf, typeof v === 'string' ? v : JSON.stringify(v));
       }
       for (const p of obj.importedPacks || []) await IDB.put('packs', targetAcc + '|' + p.id, p.pack);
-      if (window.LQConvos) {
-        if (mode === 'replace') await LQConvos.clear(targetAcc);
+      if (window.NoemaConvos) {
+        if (mode === 'replace') await NoemaConvos.clear(targetAcc);
         const a = getAccount(targetAcc) || { id: targetAcc };
-        for (const r of obj.conversations || []) await LQConvos.put(targetAcc, { ...r, account: { id: a.id, kind: a.kind || 'local' } }, { keepUpdatedAt: true });
+        for (const r of obj.conversations || []) await NoemaConvos.put(targetAcc, { ...r, account: { id: a.id, kind: a.kind || 'local' } }, { keepUpdatedAt: true });
         // v1 backups / legacy kv conversations are converted on next start (migrateLegacy)
         if (mode === 'replace') ls.del(`${P}${targetAcc}:meta:convosMigrated`);
       }
@@ -335,7 +363,7 @@
     timer: null, status: 'off', lastAt: null,
     async handle(acc) { try { return await IDB.get('handles', 'dir|' + acc); } catch (e) { return null; } },
     async choose(acc) {
-      const h = await window.showDirectoryPicker({ id: 'lq-backups', mode: 'readwrite' });
+      const h = await window.showDirectoryPicker({ id: 'noema-backups', mode: 'readwrite' });
       await IDB.put('handles', 'dir|' + acc, h); this.status = 'on'; await this.run(acc, true); this.start(acc); return h.name;
     },
     async disable(acc) { await IDB.del('handles', 'dir|' + acc); this.status = 'off'; clearInterval(this.timer); },
@@ -352,7 +380,7 @@
       for (const name of [`noema-lite-backup_${acc}_${day}.json`, `noema-lite-backup_${acc}_latest.json`]) {
         const fh = await bdir.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(JSON.stringify(obj, null, 1)); await w.close();
       }
-      if (window.LQConvos) await LQConvos.writeToFolder(acc, h, { all: force && !jget(`${P}${acc}:meta:convosFolderSeeded`, 0) }).then(() => jset(`${P}${acc}:meta:convosFolderSeeded`, 1));
+      if (window.NoemaConvos) await NoemaConvos.writeToFolder(acc, h, { all: force && !jget(`${P}${acc}:meta:convosFolderSeeded`, 0) }).then(() => jset(`${P}${acc}:meta:convosFolderSeeded`, 1));
       jset(`${P}${acc}:meta:lastFolderBackup`, Date.now()); this.lastAt = Date.now(); this.status = 'on'; return true;
     },
     async start(acc) {
@@ -361,35 +389,36 @@
       this.status = (await this.permitted(h)) ? 'on' : 'needs-permission';
       this.timer = setInterval(() => this.run(acc).catch(() => { }), Math.max(1, CFG.autoBackupMinutes) * 60e3);
       // conversations are written to the folder within ~20 s of any change (independently of the 5-minute backup)
-      if (window.LQConvos && !this._convoHook) { this._convoHook = true; let t; LQConvos.onChange(a => { if (a !== acc) return; clearTimeout(t); t = setTimeout(async () => { const hd = await this.handle(acc); if (hd && await this.permitted(hd)) LQConvos.writeToFolder(acc, hd).catch(e => console.warn('[LQ] convo folder write', e)); }, 20000); }); }
+      if (window.NoemaConvos && !this._convoHook) { this._convoHook = true; let t; NoemaConvos.onChange(a => { if (a !== acc) return; clearTimeout(t); t = setTimeout(async () => { const hd = await this.handle(acc); if (hd && await this.permitted(hd)) NoemaConvos.writeToFolder(acc, hd).catch(e => console.warn('[Noema] convo folder write', e)); }, 20000); }); }
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.run(acc).catch(() => { }); });
     },
   };
 
   /* ---------------- public API ---------------- */
-  const LQ = window.LQ = {
+  const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
-    account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.LQConvos || null, preloadedConvos: [],
+    account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, overlay,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
     switchTo(acc, subj) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); location.hash = ''; location.reload(); },
-    async openSubjectPicker() { const s = await pickSubject(LQ.account.id, { closable: true }); if (s && s.id !== LQ.subject.id) LQ.switchTo(LQ.account.id, s.id); },
-    async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== LQ.account.id) LQ.switchTo(a.id, null); },
+    async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s && s.id !== Noema.subject.id) Noema.switchTo(Noema.account.id, s.id); },
+    async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== Noema.account.id) Noema.switchTo(a.id, null); },
   };
 
   /* ---------------- boot ---------------- */
   async function start() {
-    document.body.classList.add('lq-booting');
-    if (CFG.supabaseUrl && CFG.supabaseAnonKey && window.LQCloud) { try { await LQCloud.init(CFG); } catch (e) { console.warn('[LQ] cloud init failed', e); } }
+    document.body.classList.add('noema-booting');
+    migrateOldPrefix(); try { await migrateOldIDB(); } catch (e) { console.warn('[noema] old browser database not migrated', e); }
+    if (CFG.supabaseUrl && (CFG.supabaseKey || CFG.supabaseAnonKey) && window.NoemaCloud) { try { await NoemaCloud.init(CFG); } catch (e) { console.warn('[Noema] cloud init failed', e); } }
     const url = new URLSearchParams(location.search);
     const cur = jget(P + 'current', {});
     let acc = getAccount(url.get('account') || cur.acc);
     const accs = allAccounts();
     if (!acc) acc = accs.length === 1 ? accs[0] : await pickAccount();
-    KV.acc = acc.id; LQ.account = acc;
-    if (acc.kind === 'cloud' && window.LQCloud) { try { await Promise.race([LQCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[LQ] cloud pull failed — using local cache', e); } }
+    KV.acc = acc.id; Noema.account = acc;
+    if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
     const subs = await subjectsFor(acc.id);
     let meta = subs.find(s => s.id === (url.get('subject') || (cur.acc === acc.id ? cur.subj : null)));
     const settings = jget(KV.accountKey('settings'), {});
@@ -397,27 +426,27 @@
     if (!meta || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
     if (!meta) return;
     KV.subj = meta.id;
-    LQ.setCurrent(acc.id, meta.id);
+    Noema.setCurrent(acc.id, meta.id);
     migrateLegacy(acc.id, meta.id);
     jset(`${P}${acc.id}:meta:sessions`, (jget(`${P}${acc.id}:meta:sessions`, 0) || 0) + 1);
-    if (window.LQConvos) {
-      try { await LQConvos.migrateLegacy(acc.id, subs); } catch (e) { console.warn('[LQ] conversation migration', e); }
-      if (acc.kind === 'cloud' && window.LQCloud) { try { await Promise.race([LQCloud.pullConvos(acc.id), new Promise(r => setTimeout(r, 5000))]); } catch (e) { console.warn('[LQ] conversation pull failed', e); } }
-      try { LQ.preloadedConvos = await LQConvos.list(acc.id, { subject: meta.id, includeDeleted: false }); } catch (e) { LQ.preloadedConvos = []; }
+    if (window.NoemaConvos) {
+      try { await NoemaConvos.migrateLegacy(acc.id, subs); } catch (e) { console.warn('[Noema] conversation migration', e); }
+      if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pullConvos(acc.id), new Promise(r => setTimeout(r, 5000))]); } catch (e) { console.warn('[Noema] conversation pull failed', e); } }
+      try { Noema.preloadedConvos = await NoemaConvos.list(acc.id, { subject: meta.id, includeDeleted: false }); } catch (e) { Noema.preloadedConvos = []; }
     }
     let pack;
-    try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => LQ.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
-    LQ.pack = pack; LQ.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject);
+    try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
+    Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject);
     window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
-    document.title = `${LQ.subject.title} · ${CFG.appName}`;
-    if (LQ.subject.features?.math) await ensureMath();
+    document.title = `${Noema.subject.title} · ${CFG.appName}`;
+    if (Noema.subject.features?.math) await ensureMath();
     // start the engine
-    const inline = document.getElementById('lq-engine-src');
+    const inline = document.getElementById('noema-engine-src');
     if (inline) { const s = document.createElement('script'); s.textContent = inline.textContent; document.body.append(s); }
-    else await loadScript((window.LQ_ENGINE_BASE || 'engine/') + 'engine.js');
-    document.body.classList.remove('lq-booting');
-    document.getElementById('lq-splash')?.remove();
-    if (window.LQCloud && acc.kind === 'cloud') LQCloud.startAutoSync(acc.id);
+    else await loadScript((window.NOEMA_ENGINE_BASE || 'engine/') + 'engine.js');
+    document.body.classList.remove('noema-booting');
+    document.getElementById('noema-splash')?.remove();
+    if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);
     AutoBackup.start(acc.id).catch(() => { });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();

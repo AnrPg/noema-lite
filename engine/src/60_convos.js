@@ -17,10 +17,10 @@ function mdRich(s) {
   return wrap;
 }
 
-/* ---------- storage: canonical lq.conversation/v1 records (engine/convos.js), persisted in the background ---------- */
+/* ---------- storage: canonical noema.conversation/v1 records (engine/convos.js), persisted in the background ---------- */
 const CV = { list: [], byKey: {}, titling: new Set() };
 const ACC_REF = { id: ACCOUNT.id, kind: ACCOUNT.kind || 'local' };
-const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: LQ.pack?.version || null };
+const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: Noema.pack?.version || null };
 function fromRec(r) {     // canonical record → in-memory shape used by the UI
   return { id: r.id, kind: r.kind, mode: r.mode, created: Date.parse(r.createdAt), updated: Date.parse(r.updatedAt),
     ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label } : null,
@@ -31,7 +31,7 @@ function fromRec(r) {     // canonical record → in-memory shape used by the UI
 }
 function toRec(cv) {      // in-memory shape → canonical record
   const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : null;
-  return LQ.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
+  return Noema.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
     titleSource: cv.titleSource || (cv.titledLen >= 1e9 ? 'user' : cv.title ? 'ai' : 'none'),
     context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
     model: { provider: 'google', name: cv.model || S.settings.model || null },
@@ -40,11 +40,11 @@ function toRec(cv) {      // in-memory shape → canonical record
     tutorState: cv.tutorState || undefined,
     meta: cv.titledLen && cv.titledLen < 1e9 ? { titledAtMessage: cv.titledLen } : undefined }, { account: ACC_REF, subject: SUBJ_REF });
 }
-CV.list = (LQ.preloadedConvos || []).map(fromRec);
+CV.list = (Noema.preloadedConvos || []).map(fromRec);
 /** Persist one conversation now (IndexedDB → then folder + cloud in the background). Never blocks the UI. */
 function saveConvos(cv) {
   const targets = cv ? [cv] : CV.list;
-  targets.forEach(c => { if (c.msgs?.length) LQ.convos.put(ACCOUNT.id, { ...toRec(c), account: ACC_REF, subject: SUBJ_REF }).catch(e => console.warn('[LQ] conversation save failed', e)); });
+  targets.forEach(c => { if (c.msgs?.length) Noema.convos.put(ACCOUNT.id, { ...toRec(c), account: ACC_REF, subject: SUBJ_REF }).catch(e => console.warn('[Noema] conversation save failed', e)); });
   return true;
 }
 function ctxRecord() {
@@ -56,7 +56,7 @@ function persistConvo(key) {
   if (!hist || !hist.length) return;
   let cv = CV.byKey[key];
   if (!cv || cv.msgs !== hist) {
-    cv = { id: LQ.convos.newId(), kind: 'tutor', created: Date.now(), mode: T.mode, ctx: ctxRecord(), model: S.settings.model || '', title: null, msgs: hist };
+    cv = { id: Noema.convos.newId(), kind: 'tutor', created: Date.now(), mode: T.mode, ctx: ctxRecord(), model: S.settings.model || '', title: null, msgs: hist };
     CV.byKey[key] = cv; CV.list.push(cv);
   }
   cv.updated = Date.now(); cv.model = S.settings.model || cv.model;
@@ -66,7 +66,7 @@ function persistConvo(key) {
 /** Record a one-shot AI interaction (grading, code review, generated question, drill grading) as a canonical conversation. */
 function logAI(kind, { ctx = null, title = null, prompt, response }) {
   const t = Date.now();
-  const cv = { id: LQ.convos.newId(t), kind, mode: null, created: t, updated: t, ctx, model: S.settings.model || '', title, titleSource: title ? 'system' : 'none', titledLen: 1e9,
+  const cv = { id: Noema.convos.newId(t), kind, mode: null, created: t, updated: t, ctx, model: S.settings.model || '', title, titleSource: title ? 'system' : 'none', titledLen: 1e9,
     msgs: [{ role: 'user', text: prompt, t }, { role: 'model', text: response, t: Date.now() }] };
   CV.list.push(cv); saveConvos(cv);
   return cv;
@@ -127,7 +127,7 @@ function convoMarkdown(cv, level = 1) {
     `| **Last message** | ${fmtDate(cv.updated || cv.created)} |`,
     `| **Messages** | ${cv.msgs.length} |`,
     `| **Tutor** | ${TN} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
-    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${APP_TITLE} (${LQ.config.appName}) |`, '', '---', ''];
+    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${APP_TITLE} (${Noema.config.appName}) |`, '', '---', ''];
   const lessons = cv.tutorState?.lessons || [];
   if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
@@ -186,7 +186,7 @@ function openConvo(cv) {
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();
   T.hist[key] = cv.msgs; CV.byKey[key] = cv;
-  if (cv.tutorState) T.tstate[key] = cv.tutorState; else if (T.mode === 'socratic' && cv.msgs.some(m => m.meta?.lqState)) T.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs); else delete T.tstate[key];
+  if (cv.tutorState) T.tstate[key] = cv.tutorState; else if (T.mode === 'socratic' && cv.msgs.some(m => m.meta?.noemaState)) T.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs); else delete T.tstate[key];
   T.showHistory = false; renderTutor();
 }
 
@@ -225,7 +225,7 @@ function renderConvoHistory(box) {
         h('button', { class: 'iconbtn', title: 'Export .md', onclick: () => exportConvo(cv) }, '⬇️'),
         h('button', { class: 'iconbtn', title: 'Delete', onclick: e => {
           if (!confirmDel) { confirmDel = true; e.currentTarget.textContent = '❓'; e.currentTarget.title = 'Click again to delete'; return; }
-          CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } LQ.convos.remove(ACCOUNT.id, cv.id).catch(() => { }); renderTutor();
+          CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } Noema.convos.remove(ACCOUNT.id, cv.id).catch(() => { }); renderTutor();
         } }, '🗑️')));
     box.append(card);
   });

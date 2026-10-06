@@ -1,11 +1,11 @@
 /* ===================== noema-lite engine — core (subject-agnostic) ===================== */
 'use strict';
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
-const SUBJ = LQ.subject;                    // subject.json of the loaded pack
-const ACCOUNT = LQ.account;                 // current profile / cloud account
+const SUBJ = Noema.subject;                    // subject.json of the loaded pack
+const ACCOUNT = Noema.account;                 // current profile / cloud account
 const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
 const APP_TITLE = SUBJ.appTitle || `${SUBJ.title} Quest`;
-const DEFAULT_KEY = LQ.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
+const DEFAULT_KEY = Noema.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
 const PALETTE = [
   ['#ff6b6b','#ffe7e7'],['#ff922b','#fff0e1'],['#f2a20c','#fff4d6'],['#40c057','#e4f7e8'],['#12b5a5','#ddf6f3'],
   ['#3b9cf6','#e1effe'],['#5c6cff','#e8eaff'],['#9254ff','#f0e7ff'],['#e64fa5','#fde6f3'],['#f0563d','#fde9e4'],['#2b8a3e','#e3f4e6'],['#1c7ed6','#dfeefc'],['#d9480f','#ffe8d9']];
@@ -132,15 +132,15 @@ function mdLite(s) {
 }
 
 /* ---------- state ---------- */
-/* State is namespaced: per-subject progress  → lq1:<account>:s:<subject>:state
-                        per-account settings  → lq1:<account>:a:settings   (API key, model, theme, goal…)
-                        XP / streak across all subjects → LQ.stats (lq1:<account>:a:stats)            */
-const STATE_KEY = LQ.kv.subjectKey('state'), SETTINGS_KEY = LQ.kv.accountKey('settings');
+/* State is namespaced: per-subject progress  → noema1:<account>:s:<subject>:state
+                        per-account settings  → noema1:<account>:a:settings   (API key, model, theme, goal…)
+                        XP / streak across all subjects → Noema.stats (noema1:<account>:a:stats)            */
+const STATE_KEY = Noema.kv.subjectKey('state'), SETTINGS_KEY = Noema.kv.accountKey('settings');
 const SETTINGS_DEFAULT = { apiKey: DEFAULT_KEY, model: '', models: [], theme: 'auto', sound: true, goal: 120, chunk: true };
 const S = (() => {
   let s = {}, g = {};
-  try { s = JSON.parse(LQ.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
-  try { g = JSON.parse(LQ.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
+  try { s = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
+  try { g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
   const st = Object.assign({ xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null }, s);
   st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null });
   delete st.srcOn; delete st.xpDay; delete st.streak; delete st.lastDay;
@@ -151,23 +151,23 @@ let saveT;
 function flushSave() {
   clearTimeout(saveT);
   const { settings, ...rest } = S; const { srcOn, ...glob } = settings;
-  LQ.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
-  let cur = {}; try { cur = JSON.parse(LQ.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
-  LQ.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
+  Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
+  let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
+  Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
-function touchStreak() { LQ.stats.touchStreak(); }
+function touchStreak() { Noema.stats.touchStreak(); }
 function addXP(n, el) {
   if (n <= 0) return;
-  const before = LQ.stats.todayXP();
-  S.xp += n; LQ.stats.add(n); save();
+  const before = Noema.stats.todayXP();
+  S.xp += n; Noema.stats.add(n); save();
   renderTopStats();
   const r = el?.getBoundingClientRect?.();
   const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, `+${n} XP`);
   document.body.append(f); setTimeout(() => f.remove(), 1200);
-  if (before < S.settings.goal && LQ.stats.todayXP() >= S.settings.goal) { confetti(160); toast('🎯 Daily goal smashed!'); }
+  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { confetti(160); toast('🎯 Daily goal smashed!'); }
 }
 function record(ex, ok, firstTry = true) {
   const r = S.res[ex.id] || { n: 0, ok: 0 };
