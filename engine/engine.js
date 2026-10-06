@@ -2203,10 +2203,10 @@ function wireSyncDot() {
 /* ===================== Help: ⓘ tooltips, setup guides, first-sessions setup banner ===================== */
 /** Small ⓘ that shows an explanation on hover / focus / tap. */
 function tip(text) {
-  const t = h('span', { class: 'tip', tabindex: '0', role: 'button', 'aria-label': 'More info', onclick: e => { e.stopPropagation(); e.preventDefault(); t.classList.toggle('show'); } }, 'i', h('span', { class: 'tipbox', html: fmt(text) }));
+  const t = h('span', { class: 'htip', tabindex: '0', role: 'button', 'aria-label': 'More info', onclick: e => { e.stopPropagation(); e.preventDefault(); t.classList.toggle('show'); } }, 'i', h('span', { class: 'htipbox', html: fmt(text) }));
   return t;
 }
-document.addEventListener('click', () => $$('.tip.show').forEach(t => t.classList.remove('show')));
+document.addEventListener('click', () => $$('.htip.show').forEach(t => t.classList.remove('show')));
 
 const SITE_URL = Noema.config.siteUrl || '';
 const GUIDES = {

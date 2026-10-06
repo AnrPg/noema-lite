@@ -149,6 +149,10 @@ async function mockGemini(ctx) {
   await pA.click('button:has-text("Create account")'); await wait(900);
   ok(await pA.$$eval('.noema-chip', c => c.length) === 2, 'cloud account sees shared subjects only (no private ones)');
   await pA.click('.noema-chip:has-text("Databricks")'); await wait(1600);
+  await pA.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(500);
+  { const sa = await pA.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(400); } }
+  const tipW = await pA.$$eval('main .callout.tip', els => els.map(e => ({ w: e.getBoundingClientRect().width, cur: getComputedStyle(e).cursor })));
+  ok(tipW.length > 0 && tipW.every(t => t.w > 300 && t.cur !== 'help'), 'tip callouts render full width (no clash with the ⓘ tooltip style)');
   await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; flushSave(); });
   await pA.evaluate(() => { openTutor({ kind: 'chapter', id: 'ch05' }, 'quiz'); }); await pA.evaluate(() => sendTutor('quiz me')); await pA.evaluate(() => closeTutor());
   await wait(4200);

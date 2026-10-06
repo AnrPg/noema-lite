@@ -58,10 +58,10 @@
 @media (max-width:720px){.topbar .hide-m{display:none}.topbar{overflow:hidden}.subjchip{padding:6px 10px;font-size:13px}}
 @media (max-width:440px){.topbar .hide-s{display:none}.subjchip .st{max-width:84px}.iconbtn.tutor{padding:0 10px}}
 /* ---------- help: tooltips, collapsible sections, guides, setup banner ---------- */
-.tip{position:relative;display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;border-radius:50%;font-size:11px;font-weight:800;font-style:italic;font-family:Georgia,serif;background:var(--bg2);color:var(--ink2);border:1px solid var(--line);cursor:help;vertical-align:middle;flex:none}
-.tip .tipbox{position:absolute;z-index:120;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);width:min(280px,72vw);padding:10px 12px;border-radius:12px;background:var(--ink);color:var(--bg);font:500 13px/1.45 var(--font);font-style:normal;text-align:left;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
-.tip .tipbox code{background:rgba(255,255,255,.15);color:inherit;border:none}
-.tip:hover .tipbox,.tip:focus .tipbox,.tip.show .tipbox{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.htip{position:relative;display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;border-radius:50%;font-size:11px;font-weight:800;font-style:italic;font-family:Georgia,serif;background:var(--bg2);color:var(--ink2);border:1px solid var(--line);cursor:help;vertical-align:middle;flex:none}
+.htip .htipbox{position:absolute;z-index:120;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);width:min(280px,72vw);padding:10px 12px;border-radius:12px;background:var(--ink);color:var(--bg);font:500 13px/1.45 var(--font);font-style:normal;text-align:left;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+.htip .htipbox code{background:rgba(255,255,255,.15);color:inherit;border:none}
+.htip:hover .htipbox,.htip:focus .htipbox,.htip.show .htipbox{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
 details.accsec{border:1px solid var(--line);border-radius:16px;background:var(--bg);margin-bottom:10px;overflow:visible}
 details.accsec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:13px 14px;font-weight:750;user-select:none}
 details.accsec>summary::-webkit-details-marker{display:none}
