@@ -1,4 +1,25 @@
-{ "id": "demo-physics", "title": "Demo Physics", "emoji": "⚛️", "group": "physics", "description": "Test fixture with math.", "language": "en",
-  "features": { "math": true, "code": false },
-  "hero": { "headline": "Learn **Physics** with $E = mc^2$", "mantra": "Energy is conserved: $$\\Delta E = W + Q$$" },
-  "tutor": { "name": "Ada", "avatar": "🧑‍🔬", "domain": "physics", "examples": "Use medical-imaging examples." } }
+{
+ "id": "demo-physics",
+ "title": "Demo Physics",
+ "emoji": "⚛️",
+ "group": "physics",
+ "description": "Test fixture with math.",
+ "language": "en",
+ "features": {
+  "math": true,
+  "code": false
+ },
+ "hero": {
+  "headline": "Learn **Physics** with $E = mc^2$",
+  "mantra": "Energy is conserved: $$\\Delta E = W + Q$$"
+ },
+ "tutor": {
+  "name": "Ada",
+  "avatar": "🧑‍🔬",
+  "domain": "physics",
+  "examples": "Use medical-imaging examples."
+ },
+ "authoring": {
+  "minVisualPerChapter": 3
+ }
+}

@@ -288,7 +288,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const actions = h('div', { class: 'actions' });
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, 'Check ✓');
   const nudge = h('span', { class: 'tiny' });
-  if (!w.selfDone && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
+  if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
   const hintBtn = h('button', { class: 'btn ghost small', onclick: () => askAIAbout(ex, null) }, `${TUTOR.avatar} Ask ${TN}`);
   actions.append(h('span', { class: 'grow' }), hintBtn);
   card.append(actions);
@@ -305,7 +305,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     checkBtn.remove(); nudge.remove();
     if (ok) { beep('ok'); card.classList.add('pop'); } else { beep('bad'); card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
     if (!ex._ai) record(ex, ok);
-    const xp = ok ? 4 + ex.difficulty * 4 : 1;
+    const xp = ok ? 4 + ex.difficulty * 4 + (w.bonus?.() || 0) : 1;
     if (!noXP) addXP(xp, card);
     const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne(['✅ Nailed it!', '✅ Correct!', '🎉 Yes!', '✅ Spot on!', '🔥 Exactly!']) : pickOne(['💡 Not quite — here’s the key', '🧠 Learning moment', '💡 Close — look at this'])), h('div', { html: fmt(ex.explain || '') }));
     if (!ok) exp.append(h('div', { class: 'row', style: { marginTop: '10px' } },
@@ -328,6 +328,7 @@ function exerciseAsText(ex) {
   if (ex.pairs) t += 'Pairs: ' + ex.pairs.map(p => p[0] + ' = ' + p[1]).join('; ') + '\n';
   if (ex.buckets) t += 'Buckets: ' + ex.items.map(i => i.text + ' → ' + ex.buckets[i.bucket]).join('; ') + '\n';
   if (ex.text) t += 'Text: ' + ex.text + '\n';
+  if (isVisual(ex)) t += visualAsText(ex);
   if (ex.lines) t += 'Code lines:\n' + ex.lines.join('\n') + '\nBug lines (0-based): ' + ex.bugs + '\nFix: ' + ex.fix + '\n';
   if (ex.type === 'calc') t += 'Answer: ' + ex.answer + ' ' + (ex.unit || '') + '\n';
   if (ex.steps) t += 'Steps: ' + ex.steps.map(s => s.prompt + ' [correct: ' + s.options.find(o => o.ok).text + ']').join(' | ') + '\n';

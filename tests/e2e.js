@@ -68,9 +68,9 @@ async function mockGemini(ctx) {
     const fails = []; S.settings.chunk = false;
     for (const c of COURSE) { for (const s of c.sections) { try { location.hash = '#/s/' + s.id; route(); } catch (e) { fails.push(s.id + e.message); } } }
     let n = 0; for (const ex of ALL_EX) { try { const card = exerciseCard(ex, { noXP: true }); document.body.append(card); card.remove(); n++; } catch (e) { fails.push(ex.id + e.message); } }
-    S.settings.chunk = true; return { fails, n };
+    S.settings.chunk = true; return { fails, n, total: ALL_EX.length, vis: ALL_EX.filter(isVisual).length };
   });
-  ok(!reg.fails.length && reg.n === 1644, `regression: ${reg.n} exercises & all sections render`);
+  ok(!reg.fails.length && reg.n === reg.total && reg.n >= 1644 + 53 && reg.vis >= 53, `regression: ${reg.n} exercises (${reg.vis} visual) & all sections render`);
   await page.evaluate(() => { location.hash = '#/'; }); await wait(500);
   await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
   // account menu tabs

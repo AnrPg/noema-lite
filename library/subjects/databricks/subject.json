@@ -7,7 +7,10 @@
  "description": "Lakehouse platform, Delta Lake, compute, Unity Catalog, ingestion and Structured Streaming — exam-ready and project-ready.",
  "language": "en",
  "owner": null,
- "features": { "math": false, "code": true },
+ "features": {
+  "math": false,
+  "code": true
+ },
  "hero": {
   "headline": "Master **Databricks**, one bite at a time.",
   "mantra": "**Spark computes. Storage persists. Delta gives stored files table semantics. Unity Catalog governs the objects.** Databricks integrates the pieces into one platform."
@@ -23,5 +26,8 @@
   "simulation": "a failing job, PERMISSION_DENIED, missing rows, duplicates, slow query, OOM, MERGE error, wrong compute, stuck stream",
   "terminology": "\"Unity Catalog\", \"Auto Loader\", \"MERGE INTO\", \"Deletion Vectors\", \"Watermarks\"",
   "examinerRole": "Databricks examiner"
+ },
+ "authoring": {
+  "minVisualPerChapter": 3
  }
 }

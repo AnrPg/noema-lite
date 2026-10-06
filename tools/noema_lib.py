@@ -67,3 +67,59 @@ def load_subject(sdir):
 
 def content_hash(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:16]
+
+# ---------------- media (docs/VISUAL.md — noema.media/v1) ----------------
+MIME = {'.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp'}
+
+def image_size(path):
+    """(w, h) of an svg/png/jpeg/webp file, or None — stdlib only."""
+    import re, struct
+    ext = os.path.splitext(path)[1].lower()
+    data = open(path, 'rb').read()
+    try:
+        if ext == '.svg':
+            t = data[:4000].decode('utf-8', 'ignore')
+            m = re.search(r'viewBox\s*=\s*"\s*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)\s*"', t)
+            if m: return float(m.group(1)), float(m.group(2))
+            mw, mh = re.search(r'\bwidth\s*=\s*"([\d.]+)', t), re.search(r'\bheight\s*=\s*"([\d.]+)', t)
+            return (float(mw.group(1)), float(mh.group(1))) if mw and mh else None
+        if ext == '.png': return struct.unpack('>II', data[16:24])
+        if ext == '.webp':
+            if data[12:16] == b'VP8X': return 1 + int.from_bytes(data[24:27], 'little'), 1 + int.from_bytes(data[27:30], 'little')
+            if data[12:16] == b'VP8L': b = data[21:25]; v = int.from_bytes(b, 'little'); return (v & 0x3FFF) + 1, ((v >> 14) & 0x3FFF) + 1
+            if data[12:16] == b'VP8 ': return struct.unpack('<HH', data[26:30])[0] & 0x3FFF, struct.unpack('<HH', data[26:30])[1] & 0x3FFF
+        if ext in ('.jpg', '.jpeg'):
+            i = 2
+            while i < len(data):
+                if data[i] != 0xFF: i += 1; continue
+                mk = data[i + 1]
+                if mk in (0xC0, 0xC1, 0xC2): h, w = struct.unpack('>HH', data[i + 5:i + 9]); return w, h
+                i += 2 + struct.unpack('>H', data[i + 2:i + 4])[0]
+    except Exception: return None
+    return None
+
+def load_media(sdir, embed=True):
+    """Return ({id: item}, report). Items carry mime, w, h and (embed=True) a data: URI."""
+    import base64
+    reg = rj(os.path.join(sdir, 'media', 'media.json'), {'format': 'noema.media/v1', 'items': []})
+    out, report = {}, []
+    if reg.get('format') != 'noema.media/v1': report.append('ERROR media.json: format must be "noema.media/v1"')
+    for it in reg.get('items', []):
+        mid = it.get('id', '?'); f = os.path.join(sdir, 'media', it.get('file', ''))
+        if mid in out: report.append(f'ERROR media {mid}: duplicate id'); continue
+        if not os.path.isfile(f): report.append(f'ERROR media {mid}: file {it.get("file")} not found'); continue
+        ext = os.path.splitext(f)[1].lower()
+        if ext not in MIME: report.append(f'ERROR media {mid}: unsupported file type {ext}'); continue
+        for k in ('alt', 'credit', 'license'):
+            if not str(it.get(k, '')).strip(): report.append(f'ERROR media {mid}: missing {k}')
+        size = os.path.getsize(f)
+        if ext != '.svg' and size > 400_000: report.append(f'WARN media {mid}: {size // 1024} KB (keep rasters ≤ 400 KB)')
+        wh = (it.get('w'), it.get('h')) if it.get('w') and it.get('h') else image_size(f)
+        if not wh: report.append(f'ERROR media {mid}: cannot detect the image size — add "w" and "h"'); continue
+        item = dict(it, mime=MIME[ext], w=wh[0], h=wh[1])
+        item.pop('file', None)
+        raw = open(f, 'rb').read()
+        item['sha'] = hashlib.sha256(raw).hexdigest()[:16]
+        if embed: item['data'] = f'data:{MIME[ext]};base64,' + base64.b64encode(raw).decode('ascii')
+        out[mid] = item
+    return out, report

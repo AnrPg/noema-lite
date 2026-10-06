@@ -9,3 +9,6 @@ sed -i 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physics"/
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
 node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
+node "$ROOT/tests/visual.js" "$T"
+python3 "$ROOT/tests/validate_visual.py"
+node "$ROOT/tests/visual_pack.js" "$T"

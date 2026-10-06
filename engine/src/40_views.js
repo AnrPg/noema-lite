@@ -144,6 +144,7 @@ function renderBlock(b, i) {
     case 'p': wrap.append(h('p', { html: fmt(b.text) })); break;
     case 'list': wrap.append(h(b.ordered ? 'ol' : 'ul', {}, ...b.items.map(x => h('li', { html: fmt(x) })))); break;
     case 'code': wrap.append(codeBlock(b.code, b.lang)); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
+    case 'figure': wrap.append(figureBlock(b)); break;
     case 'diagram': wrap.append(h('div', { class: 'diagram' }, b.text)); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
     case 'table': wrap.append(h('div', { class: 'tablewrap' }, h('table', {}, h('thead', {}, h('tr', {}, ...b.head.map(x => h('th', { html: fmt(x) })))), h('tbody', {}, ...b.rows.map(r => h('tr', {}, ...r.map(x => h('td', { html: fmt(x) })))))))); if (b.caption) wrap.append(h('div', { class: 'caption', html: fmt(b.caption) })); break;
     case 'callout': wrap.append(h('div', { class: 'callout ' + b.kind }, h('span', { class: 'ci' }, CALLOUT_IC[b.kind] || '💡'), b.title ? h('b', { class: 't', html: fmt(b.title) }) : null, h('div', { html: fmt(b.text) }))); break;

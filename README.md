@@ -20,13 +20,14 @@ engine/
   vendor/                  marked, DOMPurify, KaTeX
 library/
   groups.json              groups of the subject picker
-  subjects/<id>/           shared subjects (subject.json, sources.json, sources/*.pdf, chapters/, patches/, coverage/)
+  subjects/<id>/           shared subjects (subject.json, sources.json, sources/*.pdf, chapters/, patches/, media/, coverage/)
   registry.js              GENERATED catalogue
 accounts/<profile>/
   account.json             local profile seed (name, emoji, "about me" for the tutor)
   backups/                 suggested target for the app's automatic folder backups
   packs/<id>/              PRIVATE subjects of this profile (never published to the website)
-tools/                     build, validate, new_subject, source_text, db_sync, db_restore, CONTENT_SPEC.md
+tools/                     build, validate, new_subject, source_text, db_sync, db_restore, svgkit (diagrams), CONTENT_SPEC.md, schemas/
+docs/                      VISUAL.md (picture exercises — canonical schema), TUTORING.md, CONVERSATIONS.md, TECH_DEBT.md
 cloud/                     supabase.sql (schema + row-level security) and the setup guide
 data/noema-lite.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
 tests/                     end-to-end tests (Playwright) incl. a Supabase emulator
@@ -42,7 +43,7 @@ python3 tools/db_restore.py list        # what the database holds; restore files
 
 ## Adding a subject (through Claude)
 1. Give Claude the sources (PDFs, links, notes) + subject name, group, goal (exam / understanding / project) and language.
-2. Claude scaffolds it (`tools/new_subject.py`), reads every page, writes chapters per `tools/CONTENT_SPEC.md`, validates, builds and tests.
+2. Claude scaffolds it (`tools/new_subject.py`), reads every page, writes chapters per `tools/CONTENT_SPEC.md`, draws pictures and builds **several visual exercises per chapter** per `docs/VISUAL.md`, validates, builds and tests.
 3. The new subject appears as a chip in the picker. New sources for an existing subject are merged **additively** (patches) — your progress is never lost.
 
 ## Profiles, privacy & data

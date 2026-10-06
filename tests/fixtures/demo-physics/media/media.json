@@ -1,0 +1,106 @@
+{
+ "format": "noema.media/v1",
+ "items": [
+  {
+   "id": "power-station",
+   "file": "power-station.svg",
+   "alt": "Block diagram of a thermal power station: fuel, boiler, turbine, generator, grid, a sun and a cooling tower",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Energy changes form at every stage.",
+   "src": "s1",
+   "regions": [
+    {
+     "id": "fuel",
+     "shape": "rect",
+     "x": 30,
+     "y": 90,
+     "w": 130,
+     "h": 70,
+     "rx": 8,
+     "label": "Fuel",
+     "accept": [
+      "coal",
+      "gas"
+     ]
+    },
+    {
+     "id": "boiler",
+     "shape": "rect",
+     "x": 220,
+     "y": 90,
+     "w": 140,
+     "h": 70,
+     "rx": 8,
+     "label": "Boiler"
+    },
+    {
+     "id": "turbine",
+     "shape": "rect",
+     "x": 420,
+     "y": 90,
+     "w": 140,
+     "h": 70,
+     "rx": 8,
+     "label": "Turbine"
+    },
+    {
+     "id": "generator",
+     "shape": "rect",
+     "x": 620,
+     "y": 90,
+     "w": 150,
+     "h": 70,
+     "rx": 8,
+     "label": "Generator",
+     "accept": [
+      "dynamo"
+     ]
+    },
+    {
+     "id": "grid",
+     "shape": "rect",
+     "x": 300,
+     "y": 270,
+     "w": 160,
+     "h": 70,
+     "rx": 8,
+     "label": "Grid"
+    },
+    {
+     "id": "sun",
+     "shape": "circle",
+     "cx": 140,
+     "cy": 300,
+     "r": 55,
+     "label": "Sun",
+     "note": "Not part of the station."
+    },
+    {
+     "id": "tower",
+     "shape": "poly",
+     "points": [
+      [
+       560,
+       250
+      ],
+      [
+       760,
+       250
+      ],
+      [
+       720,
+       380
+      ],
+      [
+       600,
+       380
+      ]
+     ],
+     "label": "Cooling tower",
+     "q": "What gets rid of the waste heat?"
+    }
+   ]
+  }
+ ]
+}

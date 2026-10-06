@@ -1,0 +1,1648 @@
+{
+ "format": "noema.media/v1",
+ "items": [
+  {
+   "id": "dbx-autoloader",
+   "file": "dbx-autoloader.svg",
+   "alt": "Files land in orders_json/ in the landing zone; Auto Loader (readStream with format cloudFiles and cloudFiles.format json) discovers new files and passes micro-batches to writeStream (Delta), which commits into the Bronze table. The reader keeps the schema history in cloudFiles.schemaLocation (_schemas/); the writer keeps progress in checkpointLocation.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "schemaLocation = shape (read side). checkpointLocation = progress (write side).",
+   "src": "part2",
+   "regions": [
+    {
+     "id": "landing",
+     "shape": "rect",
+     "x": 24,
+     "y": 70,
+     "w": 180,
+     "h": 130,
+     "rx": 8,
+     "label": "Landing zone",
+     "note": "The source stays files; new files keep arriving."
+    },
+    {
+     "id": "reader",
+     "shape": "rect",
+     "x": 260,
+     "y": 80,
+     "w": 240,
+     "h": 110,
+     "rx": 8,
+     "label": "Auto Loader",
+     "note": "Incremental file discovery + remembered state + schema handling, on Structured Streaming.",
+     "q": "What discovers only the NEW files, on Structured Streaming?"
+    },
+    {
+     "id": "writer",
+     "shape": "rect",
+     "x": 560,
+     "y": 80,
+     "w": 210,
+     "h": 110,
+     "rx": 8,
+     "label": "writeStream",
+     "note": "The Delta sink: commit the transaction, THEN advance the checkpoint.",
+     "q": "Which side commits to Delta and THEN advances the progress?"
+    },
+    {
+     "id": "bronze",
+     "shape": "rect",
+     "x": 560,
+     "y": 380,
+     "w": 210,
+     "h": 100,
+     "rx": 8,
+     "label": "Bronze table",
+     "note": "Unity Catalog target table."
+    },
+    {
+     "id": "schemaloc",
+     "shape": "rect",
+     "x": 200,
+     "y": 270,
+     "w": 280,
+     "h": 110,
+     "rx": 8,
+     "label": "cloudFiles.schemaLocation",
+     "note": "“What SHAPE does the data have?” — set on the READ. Not progress!",
+     "q": "Where does Auto Loader keep the inferred schema and its history?"
+    },
+    {
+     "id": "ckpt",
+     "shape": "rect",
+     "x": 200,
+     "y": 400,
+     "w": 280,
+     "h": 100,
+     "rx": 8,
+     "label": "checkpointLocation",
+     "note": "“How FAR has this stream got?” — set on the WRITE. On durable storage, never /tmp.",
+     "q": "Where does the stream remember which files are already processed?"
+    }
+   ]
+  },
+  {
+   "id": "dbx-cicd",
+   "file": "dbx-cicd.svg",
+   "alt": "Top row: the CI pipeline run on every push (lint, unit tests, integration tests, configuration validation, build). Middle row: the CD flow (main branch, tests, deploy staging, integration tests, deploy production). Bottom: three environments DEV → TEST/STAGING → PROD.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "If CI fails: don’t merge, don’t deploy.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "lint",
+     "shape": "rect",
+     "x": 24,
+     "y": 96,
+     "w": 55.6,
+     "h": 28,
+     "rx": 8,
+     "label": "lint"
+    },
+    {
+     "id": "unit",
+     "shape": "rect",
+     "x": 101.6,
+     "y": 96,
+     "w": 106.0,
+     "h": 28,
+     "rx": 8,
+     "label": "unit tests"
+    },
+    {
+     "id": "integ",
+     "shape": "rect",
+     "x": 229.6,
+     "y": 96,
+     "w": 164.8,
+     "h": 28,
+     "rx": 8,
+     "label": "integration tests"
+    },
+    {
+     "id": "config",
+     "shape": "rect",
+     "x": 416.4,
+     "y": 96,
+     "w": 164.8,
+     "h": 28,
+     "rx": 8,
+     "label": "config validation"
+    },
+    {
+     "id": "build",
+     "shape": "rect",
+     "x": 603.2,
+     "y": 96,
+     "w": 64.0,
+     "h": 28,
+     "rx": 8,
+     "label": "build"
+    },
+    {
+     "id": "main",
+     "shape": "rect",
+     "x": 24,
+     "y": 202,
+     "w": 114.4,
+     "h": 28,
+     "rx": 8,
+     "label": "main branch"
+    },
+    {
+     "id": "tests",
+     "shape": "rect",
+     "x": 160.4,
+     "y": 202,
+     "w": 64.0,
+     "h": 28,
+     "rx": 8,
+     "label": "tests"
+    },
+    {
+     "id": "depstg",
+     "shape": "rect",
+     "x": 246.4,
+     "y": 202,
+     "w": 139.6,
+     "h": 28,
+     "rx": 8,
+     "label": "deploy staging"
+    },
+    {
+     "id": "integ2",
+     "shape": "rect",
+     "x": 408.0,
+     "y": 202,
+     "w": 164.8,
+     "h": 28,
+     "rx": 8,
+     "label": "integration tests"
+    },
+    {
+     "id": "depprod",
+     "shape": "rect",
+     "x": 594.8,
+     "y": 202,
+     "w": 164.8,
+     "h": 28,
+     "rx": 8,
+     "label": "deploy production"
+    },
+    {
+     "id": "dev",
+     "shape": "rect",
+     "x": 24,
+     "y": 300,
+     "w": 190,
+     "h": 120,
+     "rx": 8,
+     "label": "DEV",
+     "note": "Developers may break things here: dev_nikos.silver.orders."
+    },
+    {
+     "id": "stg",
+     "shape": "rect",
+     "x": 305,
+     "y": 300,
+     "w": 190,
+     "h": 120,
+     "rx": 8,
+     "label": "TEST / STAGING",
+     "note": "Checks permissions, dependencies, configuration, integration and data quality — without impacting real consumers."
+    },
+    {
+     "id": "prod",
+     "shape": "rect",
+     "x": 586,
+     "y": 300,
+     "w": 190,
+     "h": 120,
+     "rx": 8,
+     "label": "PROD",
+     "note": "Controlled deployments and stable configs only — never manual edits + Run All."
+    }
+   ]
+  },
+  {
+   "id": "dbx-cluster",
+   "file": "dbx-cluster.svg",
+   "alt": "A driver (SparkSession, plans, schedules tasks) above four workers. Each worker holds one executor with 8 cores (task slots) and a local disk.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Task slots = workers × cores (driver excluded). Waves ≈ tasks ÷ slots.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "driver",
+     "shape": "rect",
+     "x": 270,
+     "y": 60,
+     "w": 260,
+     "h": 80,
+     "rx": 8,
+     "label": "Driver",
+     "note": "Builds the plan, splits it into stages and tasks, schedules them, tracks executors. Does not process the partitions."
+    },
+    {
+     "id": "w1",
+     "shape": "rect",
+     "x": 32,
+     "y": 186,
+     "w": 95.6,
+     "h": 28,
+     "rx": 8,
+     "label": "Worker 1",
+     "note": "A worker VM. In Databricks classic: one executor per worker."
+    },
+    {
+     "id": "e1",
+     "shape": "rect",
+     "x": 32,
+     "y": 236,
+     "w": 152,
+     "h": 196,
+     "rx": 8,
+     "label": "Executor",
+     "note": "The JVM process that runs tasks — one per worker."
+    },
+    {
+     "id": "core1",
+     "shape": "rect",
+     "x": 44,
+     "y": 280,
+     "w": 28,
+     "h": 44,
+     "rx": 8,
+     "label": "Core = task slot",
+     "note": "One active task per core."
+    },
+    {
+     "id": "disk1",
+     "shape": "rect",
+     "x": 50,
+     "y": 446,
+     "w": 116,
+     "h": 62,
+     "rx": 8,
+     "label": "local disk",
+     "note": "Shuffle files and spill are written here — gone when the VM goes."
+    },
+    {
+     "id": "w2",
+     "shape": "rect",
+     "x": 228,
+     "y": 186,
+     "w": 95.6,
+     "h": 28,
+     "rx": 8,
+     "label": "Worker 2",
+     "note": "A worker VM. In Databricks classic: one executor per worker."
+    },
+    {
+     "id": "e2",
+     "shape": "rect",
+     "x": 228,
+     "y": 236,
+     "w": 152,
+     "h": 196,
+     "rx": 8,
+     "label": "Executor",
+     "note": "The JVM process that runs tasks — one per worker."
+    },
+    {
+     "id": "disk2",
+     "shape": "rect",
+     "x": 246,
+     "y": 446,
+     "w": 116,
+     "h": 62,
+     "rx": 8,
+     "label": "local disk",
+     "note": "Shuffle files and spill are written here — gone when the VM goes."
+    },
+    {
+     "id": "w3",
+     "shape": "rect",
+     "x": 424,
+     "y": 186,
+     "w": 95.6,
+     "h": 28,
+     "rx": 8,
+     "label": "Worker 3",
+     "note": "A worker VM. In Databricks classic: one executor per worker."
+    },
+    {
+     "id": "e3",
+     "shape": "rect",
+     "x": 424,
+     "y": 236,
+     "w": 152,
+     "h": 196,
+     "rx": 8,
+     "label": "Executor",
+     "note": "The JVM process that runs tasks — one per worker."
+    },
+    {
+     "id": "disk3",
+     "shape": "rect",
+     "x": 442,
+     "y": 446,
+     "w": 116,
+     "h": 62,
+     "rx": 8,
+     "label": "local disk",
+     "note": "Shuffle files and spill are written here — gone when the VM goes."
+    },
+    {
+     "id": "w4",
+     "shape": "rect",
+     "x": 620,
+     "y": 186,
+     "w": 95.6,
+     "h": 28,
+     "rx": 8,
+     "label": "Worker 4",
+     "note": "A worker VM. In Databricks classic: one executor per worker."
+    },
+    {
+     "id": "e4",
+     "shape": "rect",
+     "x": 620,
+     "y": 236,
+     "w": 152,
+     "h": 196,
+     "rx": 8,
+     "label": "Executor",
+     "note": "The JVM process that runs tasks — one per worker."
+    },
+    {
+     "id": "disk4",
+     "shape": "rect",
+     "x": 638,
+     "y": 446,
+     "w": 116,
+     "h": 62,
+     "rx": 8,
+     "label": "local disk",
+     "note": "Shuffle files and spill are written here — gone when the VM goes."
+    }
+   ]
+  },
+  {
+   "id": "dbx-compute-decision",
+   "file": "dbx-compute-decision.svg",
+   "alt": "Decision tree: first question \"What is my workload?\" with four branches — interactive, job, pipeline, SQL/BI. Each branch ends in a serverless option and a classic option: serverless notebook or all-purpose (classic); serverless jobs or classic jobs compute; serverless or classic pipeline; serverless, pro or classic SQL warehouse.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "First the workload, then the infrastructure.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "root",
+     "shape": "rect",
+     "x": 270,
+     "y": 60,
+     "w": 260,
+     "h": 54,
+     "rx": 8,
+     "label": "What is my workload?"
+    },
+    {
+     "id": "wint",
+     "shape": "rect",
+     "x": 30,
+     "y": 160,
+     "w": 160,
+     "h": 50,
+     "rx": 8,
+     "label": "INTERACTIVE"
+    },
+    {
+     "id": "wjob",
+     "shape": "rect",
+     "x": 225,
+     "y": 160,
+     "w": 160,
+     "h": 50,
+     "rx": 8,
+     "label": "JOB"
+    },
+    {
+     "id": "wpipe",
+     "shape": "rect",
+     "x": 420,
+     "y": 160,
+     "w": 160,
+     "h": 50,
+     "rx": 8,
+     "label": "PIPELINE"
+    },
+    {
+     "id": "wsql",
+     "shape": "rect",
+     "x": 615,
+     "y": 160,
+     "w": 160,
+     "h": 50,
+     "rx": 8,
+     "label": "SQL / BI"
+    },
+    {
+     "id": "lint_s",
+     "shape": "rect",
+     "x": 40,
+     "y": 270,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Serverless notebook"
+    },
+    {
+     "id": "lint_c",
+     "shape": "rect",
+     "x": 40,
+     "y": 342,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "All-purpose (classic)"
+    },
+    {
+     "id": "ljob_s",
+     "shape": "rect",
+     "x": 235,
+     "y": 270,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Serverless Jobs"
+    },
+    {
+     "id": "ljob_c",
+     "shape": "rect",
+     "x": 235,
+     "y": 342,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Classic Jobs compute"
+    },
+    {
+     "id": "lpipe_s",
+     "shape": "rect",
+     "x": 430,
+     "y": 270,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Serverless pipeline"
+    },
+    {
+     "id": "lpipe_c",
+     "shape": "rect",
+     "x": 430,
+     "y": 342,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Classic pipeline"
+    },
+    {
+     "id": "lsql_s",
+     "shape": "rect",
+     "x": 625,
+     "y": 270,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Serverless SQL WH"
+    },
+    {
+     "id": "lsql_p",
+     "shape": "rect",
+     "x": 625,
+     "y": 342,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Pro SQL WH"
+    },
+    {
+     "id": "lsql_c",
+     "shape": "rect",
+     "x": 625,
+     "y": 414,
+     "w": 140,
+     "h": 54,
+     "rx": 8,
+     "label": "Classic SQL WH"
+    }
+   ]
+  },
+  {
+   "id": "dbx-delta-layout",
+   "file": "dbx-delta-layout.svg",
+   "alt": "Folder orders/ with three Parquet data files and a deletion vector file, and the _delta_log/ folder with JSON commit files for version 0, 1, a checkpoint Parquet file at version 100, then JSON commits 101, 102 and 103.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "The table is the set of files the log says belong to the current snapshot — not every file in the folder.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "p0",
+     "shape": "rect",
+     "x": 70,
+     "y": 130,
+     "w": 220,
+     "h": 46,
+     "rx": 8,
+     "label": "part-00000-….parquet",
+     "note": "Data file: the real rows, column by column (Parquet).",
+     "q": "What kind of file holds the real rows?"
+    },
+    {
+     "id": "p1",
+     "shape": "rect",
+     "x": 70,
+     "y": 192,
+     "w": 220,
+     "h": 46,
+     "rx": 8,
+     "label": "part-00001-….parquet",
+     "note": "Data file: the real rows, column by column (Parquet).",
+     "q": "What kind of file holds the real rows?"
+    },
+    {
+     "id": "p2",
+     "shape": "rect",
+     "x": 70,
+     "y": 254,
+     "w": 220,
+     "h": 46,
+     "rx": 8,
+     "label": "part-00002-….parquet",
+     "note": "Data file: the real rows, column by column (Parquet).",
+     "q": "What kind of file holds the real rows?"
+    },
+    {
+     "id": "dv",
+     "shape": "rect",
+     "x": 70,
+     "y": 320,
+     "w": 220,
+     "h": 46,
+     "rx": 8,
+     "label": "deletion vector",
+     "note": "Marks deleted rows of a data file without rewriting it.",
+     "q": "What marks deleted rows without rewriting the data file?"
+    },
+    {
+     "id": "log",
+     "shape": "rect",
+     "x": 360,
+     "y": 60,
+     "w": 190,
+     "h": 46,
+     "rx": 8,
+     "label": "_delta_log/",
+     "note": "The versioned table state: one commit file per version (+ checkpoints).",
+     "q": "Which folder holds the versioned state of the table?"
+    },
+    {
+     "id": "j000",
+     "shape": "rect",
+     "x": 400,
+     "y": 130,
+     "w": 260,
+     "h": 46,
+     "rx": 8,
+     "label": "…00000.json",
+     "note": "Commit file of version 0: JSON actions (add / remove / metadata)."
+    },
+    {
+     "id": "j001",
+     "shape": "rect",
+     "x": 400,
+     "y": 192,
+     "w": 260,
+     "h": 46,
+     "rx": 8,
+     "label": "…00001.json",
+     "note": "Commit file of version 1: JSON actions (add / remove / metadata)."
+    },
+    {
+     "id": "j100c",
+     "shape": "rect",
+     "x": 400,
+     "y": 268,
+     "w": 260,
+     "h": 46,
+     "rx": 8,
+     "label": "…00100.checkpoint.parquet",
+     "note": "Checkpoint: a Parquet summary of the table state up to v100."
+    },
+    {
+     "id": "j101",
+     "shape": "rect",
+     "x": 400,
+     "y": 330,
+     "w": 260,
+     "h": 46,
+     "rx": 8,
+     "label": "…00101.json",
+     "note": "Commit file of version 101: JSON actions (add / remove / metadata)."
+    },
+    {
+     "id": "j102",
+     "shape": "rect",
+     "x": 400,
+     "y": 392,
+     "w": 260,
+     "h": 46,
+     "rx": 8,
+     "label": "…00102.json",
+     "note": "Commit file of version 102: JSON actions (add / remove / metadata)."
+    },
+    {
+     "id": "j103",
+     "shape": "rect",
+     "x": 400,
+     "y": 454,
+     "w": 260,
+     "h": 46,
+     "rx": 8,
+     "label": "…00103.json",
+     "note": "Commit file of version 103: JSON actions (add / remove / metadata)."
+    }
+   ]
+  },
+  {
+   "id": "dbx-layers",
+   "file": "dbx-layers.svg",
+   "alt": "Five stacked layers from top to bottom: your workload (Python, SQL, Spark, ML, pipelines); execution engine (Spark JVM and/or Photon); runtime (Databricks Runtime: Spark, Python, JVM, libraries); compute nodes (one driver and workers, each a VM); infrastructure (classic or serverless).",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "DBR, Photon, driver type, worker type and serverless are not alternatives on one level: each lives on its own layer.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "row-workload",
+     "shape": "rect",
+     "x": 30,
+     "y": 70,
+     "w": 740,
+     "h": 66,
+     "rx": 8,
+     "label": "Your Workload",
+     "note": "What you write."
+    },
+    {
+     "id": "n-workload",
+     "shape": "rect",
+     "x": 46,
+     "y": 87,
+     "w": 200,
+     "h": 28,
+     "rx": 8,
+     "label": "YOUR WORKLOAD",
+     "note": "What you write."
+    },
+    {
+     "id": "row-engine",
+     "shape": "rect",
+     "x": 30,
+     "y": 156,
+     "w": 740,
+     "h": 66,
+     "rx": 8,
+     "label": "Execution Engine",
+     "note": "What executes the plan: Spark (JVM) and/or the vectorized Photon engine."
+    },
+    {
+     "id": "n-engine",
+     "shape": "rect",
+     "x": 46,
+     "y": 173,
+     "w": 200,
+     "h": 28,
+     "rx": 8,
+     "label": "EXECUTION ENGINE",
+     "note": "What executes the plan: Spark (JVM) and/or the vectorized Photon engine."
+    },
+    {
+     "id": "row-runtime",
+     "shape": "rect",
+     "x": 30,
+     "y": 242,
+     "w": 740,
+     "h": 66,
+     "rx": 8,
+     "label": "Runtime",
+     "note": "The versioned environment (DBR, LTS, ML) your code runs in."
+    },
+    {
+     "id": "n-runtime",
+     "shape": "rect",
+     "x": 46,
+     "y": 259,
+     "w": 200,
+     "h": 28,
+     "rx": 8,
+     "label": "RUNTIME",
+     "note": "The versioned environment (DBR, LTS, ML) your code runs in."
+    },
+    {
+     "id": "row-nodes",
+     "shape": "rect",
+     "x": 30,
+     "y": 328,
+     "w": 740,
+     "h": 66,
+     "rx": 8,
+     "label": "Compute Nodes",
+     "note": "Driver type and worker type = VM shapes; autoscaling changes the worker count."
+    },
+    {
+     "id": "n-nodes",
+     "shape": "rect",
+     "x": 46,
+     "y": 345,
+     "w": 200,
+     "h": 28,
+     "rx": 8,
+     "label": "COMPUTE NODES",
+     "note": "Driver type and worker type = VM shapes; autoscaling changes the worker count."
+    },
+    {
+     "id": "row-infra",
+     "shape": "rect",
+     "x": 30,
+     "y": 414,
+     "w": 740,
+     "h": 66,
+     "rx": 8,
+     "label": "Infrastructure",
+     "note": "Who manages the machines: you (classic) or Databricks (serverless)."
+    },
+    {
+     "id": "n-infra",
+     "shape": "rect",
+     "x": 46,
+     "y": 431,
+     "w": 200,
+     "h": 28,
+     "rx": 8,
+     "label": "INFRASTRUCTURE",
+     "note": "Who manages the machines: you (classic) or Databricks (serverless)."
+    }
+   ]
+  },
+  {
+   "id": "dbx-medallion",
+   "file": "dbx-medallion.svg",
+   "alt": "PostgreSQL, Kafka and JSON files flow into BRONZE (raw); a cleaning step (parse, validate, deduplicate, apply CDC, cast types) builds SILVER (customers, orders, products); an aggregation step builds GOLD (daily sales, lifetime value) which feeds the CEO dashboard.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Bronze → Silver → Gold: progressively increasing data quality.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "pg",
+     "shape": "rect",
+     "x": 30,
+     "y": 80,
+     "w": 150,
+     "h": 46,
+     "rx": 8,
+     "label": "PostgreSQL"
+    },
+    {
+     "id": "kafka",
+     "shape": "rect",
+     "x": 30,
+     "y": 140,
+     "w": 150,
+     "h": 46,
+     "rx": 8,
+     "label": "Kafka"
+    },
+    {
+     "id": "json",
+     "shape": "rect",
+     "x": 30,
+     "y": 200,
+     "w": 150,
+     "h": 46,
+     "rx": 8,
+     "label": "JSON files"
+    },
+    {
+     "id": "bronze",
+     "shape": "rect",
+     "x": 290,
+     "y": 110,
+     "w": 220,
+     "h": 110,
+     "rx": 8,
+     "label": "BRONZE",
+     "note": "Keeps what the source sent (duplicates, nulls, bad formats) — for audit, reprocessing and debugging."
+    },
+    {
+     "id": "clean",
+     "shape": "rect",
+     "x": 250,
+     "y": 262,
+     "w": 300,
+     "h": 64,
+     "rx": 8,
+     "label": "parse · validate · deduplicate",
+     "note": "Silver is built by cleaning Bronze."
+    },
+    {
+     "id": "silver",
+     "shape": "rect",
+     "x": 290,
+     "y": 362,
+     "w": 220,
+     "h": 110,
+     "rx": 8,
+     "label": "SILVER",
+     "note": "Cleaned, validated, deduplicated, CDC applied: reusable datasets for analysts and data scientists."
+    },
+    {
+     "id": "agg",
+     "shape": "rect",
+     "x": 560,
+     "y": 395,
+     "w": 200,
+     "h": 46,
+     "rx": 8,
+     "label": "aggregate / model"
+    },
+    {
+     "id": "gold",
+     "shape": "rect",
+     "x": 560,
+     "y": 480,
+     "w": 200,
+     "h": 90,
+     "rx": 8,
+     "label": "GOLD",
+     "note": "Business-shaped aggregates and models for specific consumers."
+    },
+    {
+     "id": "bi",
+     "shape": "rect",
+     "x": 290,
+     "y": 500,
+     "w": 220,
+     "h": 60,
+     "rx": 8,
+     "label": "CEO dashboard / BI"
+    }
+   ]
+  },
+  {
+   "id": "dbx-one-diagram",
+   "file": "dbx-one-diagram.svg",
+   "alt": "Vertical stack: you write SQL or Python; the compute engine (Spark/Photon) reads and writes a Delta table (Parquet data files plus a transaction log), which physically lives in cloud storage. Unity Catalog on the side registers and governs the table under a catalog.schema.table name.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Spark computes. Storage persists. Delta gives files table semantics. Unity Catalog governs the objects.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "you",
+     "shape": "rect",
+     "x": 150,
+     "y": 60,
+     "w": 220,
+     "h": 56,
+     "rx": 8,
+     "label": "YOU",
+     "note": "You write SQL or Python in a notebook, query or job."
+    },
+    {
+     "id": "compute",
+     "shape": "rect",
+     "x": 130,
+     "y": 165,
+     "w": 260,
+     "h": 80,
+     "rx": 8,
+     "label": "Compute engine",
+     "note": "Runs the work. Ephemeral: it can terminate, the data stays.",
+     "q": "Which layer runs your code — and may disappear tonight?"
+    },
+    {
+     "id": "delta",
+     "shape": "rect",
+     "x": 130,
+     "y": 300,
+     "w": 260,
+     "h": 90,
+     "rx": 8,
+     "label": "Delta table",
+     "note": "The table format: Parquet files + a versioned log that says which files form the table.",
+     "q": "Which layer turns many files into one versioned table?"
+    },
+    {
+     "id": "storage",
+     "shape": "rect",
+     "x": 130,
+     "y": 440,
+     "w": 260,
+     "h": 100,
+     "rx": 8,
+     "label": "Cloud storage",
+     "note": "Where the bytes physically live (files + log). Persists after compute is gone.",
+     "q": "Where do the bytes physically live?"
+    },
+    {
+     "id": "uc",
+     "shape": "rect",
+     "x": 500,
+     "y": 300,
+     "w": 260,
+     "h": 90,
+     "rx": 8,
+     "label": "Unity Catalog",
+     "note": "Governance layer: the name catalog.schema.table and its permissions.",
+     "q": "Which layer gives the table its three-level name and its permissions?"
+    }
+   ]
+  },
+  {
+   "id": "dbx-phases",
+   "file": "dbx-phases.svg",
+   "alt": "Ten boxes in shuffled order: Jobs, Delta Lake, Performance & Debugging, Ingestion, Compute, Production CI/CD, Structured Streaming, Unity Catalog, Databricks SQL, Declarative Pipelines.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Dependency order: each next layer needs the previous one.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "p7",
+     "shape": "rect",
+     "x": 24,
+     "y": 80,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Jobs",
+     "note": "Phase 7: Lakeflow Jobs and orchestration."
+    },
+    {
+     "id": "p2",
+     "shape": "rect",
+     "x": 176,
+     "y": 80,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Delta Lake",
+     "note": "Phase 2: Delta in practice."
+    },
+    {
+     "id": "p9",
+     "shape": "rect",
+     "x": 328,
+     "y": 80,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Performance & Debugging",
+     "note": "Phase 9: performance and debugging."
+    },
+    {
+     "id": "p4",
+     "shape": "rect",
+     "x": 480,
+     "y": 80,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Ingestion",
+     "note": "Phase 4: files and external sources, incrementally."
+    },
+    {
+     "id": "p1",
+     "shape": "rect",
+     "x": 632,
+     "y": 80,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Compute",
+     "note": "Phase 1: everything finally runs as Spark tasks on compute."
+    },
+    {
+     "id": "p10",
+     "shape": "rect",
+     "x": 24,
+     "y": 190,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Production CI/CD",
+     "note": "Phase 10: production engineering, CLI and CI/CD."
+    },
+    {
+     "id": "p5",
+     "shape": "rect",
+     "x": 176,
+     "y": 190,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Structured Streaming",
+     "note": "Phase 5: streaming."
+    },
+    {
+     "id": "p3",
+     "shape": "rect",
+     "x": 328,
+     "y": 190,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Unity Catalog",
+     "note": "Phase 3: storage, namespace, governance, permissions."
+    },
+    {
+     "id": "p8",
+     "shape": "rect",
+     "x": 480,
+     "y": 190,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Databricks SQL",
+     "note": "Phase 8: Databricks SQL."
+    },
+    {
+     "id": "p6",
+     "shape": "rect",
+     "x": 632,
+     "y": 190,
+     "w": 140,
+     "h": 80,
+     "rx": 8,
+     "label": "Declarative Pipelines",
+     "note": "Phase 6: Lakeflow Spark Declarative Pipelines."
+    }
+   ]
+  },
+  {
+   "id": "dbx-planes",
+   "file": "dbx-planes.svg",
+   "alt": "Your browser sends a command to the control plane (web app, APIs, job orchestration, workspace metadata), which is Databricks-managed together with the serverless compute plane. The classic compute plane (driver VM and worker VMs) and the data storage are in your own cloud account; the control plane schedules work on the compute, the workers read and write storage.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "The control plane manages and coordinates; the compute plane does the work.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "browser",
+     "shape": "rect",
+     "x": 30,
+     "y": 70,
+     "w": 160,
+     "h": 56,
+     "rx": 8,
+     "label": "Your browser",
+     "note": "Shows the notebook. It does NOT run your groupBy."
+    },
+    {
+     "id": "acct",
+     "shape": "rect",
+     "x": 232,
+     "y": 56,
+     "w": 182.6,
+     "h": 28,
+     "rx": 8,
+     "label": "Databricks-managed"
+    },
+    {
+     "id": "cp",
+     "shape": "rect",
+     "x": 252,
+     "y": 96,
+     "w": 139.1,
+     "h": 28,
+     "rx": 8,
+     "label": "Control plane",
+     "note": "Web app, APIs, workspace + job metadata, orchestration: manages and coordinates. Your Spark work does not run here."
+    },
+    {
+     "id": "cp-area",
+     "shape": "rect",
+     "x": 240,
+     "y": 110,
+     "w": 290,
+     "h": 150,
+     "rx": 8,
+     "label": "Control plane",
+     "note": "Web app, APIs, workspace + job metadata, orchestration: manages and coordinates. Your Spark work does not run here."
+    },
+    {
+     "id": "sl",
+     "shape": "rect",
+     "x": 562,
+     "y": 96,
+     "w": 182.6,
+     "h": 28,
+     "rx": 8,
+     "label": "Serverless compute",
+     "note": "Serverless compute plane: Databricks allocates, scales and manages the compute for you."
+    },
+    {
+     "id": "sl-area",
+     "shape": "rect",
+     "x": 550,
+     "y": 110,
+     "w": 210,
+     "h": 150,
+     "rx": 8,
+     "label": "Serverless compute",
+     "note": "Serverless compute plane: Databricks allocates, scales and manages the compute for you."
+    },
+    {
+     "id": "slc",
+     "shape": "rect",
+     "x": 575,
+     "y": 150,
+     "w": 160,
+     "h": 80,
+     "rx": 8,
+     "label": "compute managed"
+    },
+    {
+     "id": "cust",
+     "shape": "rect",
+     "x": 32,
+     "y": 306,
+     "w": 182.6,
+     "h": 28,
+     "rx": 8,
+     "label": "Your cloud account"
+    },
+    {
+     "id": "cl",
+     "shape": "rect",
+     "x": 52,
+     "y": 346,
+     "w": 156.5,
+     "h": 28,
+     "rx": 8,
+     "label": "Classic compute",
+     "note": "Classic compute plane: driver + worker VMs that you configure, in your own cloud account."
+    },
+    {
+     "id": "cl-area",
+     "shape": "rect",
+     "x": 40,
+     "y": 360,
+     "w": 440,
+     "h": 200,
+     "rx": 8,
+     "label": "Classic compute",
+     "note": "Classic compute plane: driver + worker VMs that you configure, in your own cloud account."
+    },
+    {
+     "id": "driver",
+     "shape": "rect",
+     "x": 60,
+     "y": 400,
+     "w": 140,
+     "h": 60,
+     "rx": 8,
+     "label": "Driver VM",
+     "note": "Coordinates: plans and schedules tasks."
+    },
+    {
+     "id": "w1",
+     "shape": "rect",
+     "x": 220,
+     "y": 400,
+     "w": 115,
+     "h": 60,
+     "rx": 8,
+     "label": "Worker VM"
+    },
+    {
+     "id": "w2",
+     "shape": "rect",
+     "x": 345,
+     "y": 400,
+     "w": 115,
+     "h": 60,
+     "rx": 8,
+     "label": "Worker VM"
+    },
+    {
+     "id": "storage",
+     "shape": "rect",
+     "x": 540,
+     "y": 380,
+     "w": 200,
+     "h": 160,
+     "rx": 8,
+     "label": "Data storage",
+     "note": "Your data in your cloud storage."
+    }
+   ]
+  },
+  {
+   "id": "dbx-skipping",
+   "file": "dbx-skipping.svg",
+   "alt": "Four Parquet files with customer_id statistics: file A min 1 max 1000, file B min 1001 max 2000, file C min 2001 max 3000, and file D min 1 max 3000 (written before clustering).",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Stats help only when values are clustered into narrow ranges per file.",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "fa",
+     "shape": "rect",
+     "x": 30,
+     "y": 80,
+     "w": 170,
+     "h": 150,
+     "rx": 8,
+     "label": "File A",
+     "note": "customer_id min=1, max=1000."
+    },
+    {
+     "id": "fb",
+     "shape": "rect",
+     "x": 222,
+     "y": 80,
+     "w": 170,
+     "h": 150,
+     "rx": 8,
+     "label": "File B",
+     "note": "customer_id min=1001, max=2000."
+    },
+    {
+     "id": "fc",
+     "shape": "rect",
+     "x": 414,
+     "y": 80,
+     "w": 170,
+     "h": 150,
+     "rx": 8,
+     "label": "File C",
+     "note": "customer_id min=2001, max=3000."
+    },
+    {
+     "id": "fd",
+     "shape": "rect",
+     "x": 606,
+     "y": 80,
+     "w": 170,
+     "h": 150,
+     "rx": 8,
+     "label": "File D",
+     "note": "customer_id min=1, max=3000."
+    }
+   ]
+  },
+  {
+   "id": "dbx-stream-checkpoint",
+   "file": "dbx-stream-checkpoint.svg",
+   "alt": "A checkpoint folder with four entries: offsets/ (what range each micro-batch reads), commits/ (which micro-batches were written to the sink), state/ (state-store data of stateful operators) and metadata (the query identity).",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "One checkpoint ↔ one query. Never share it, never delete it casually.",
+   "src": "part2",
+   "regions": [
+    {
+     "id": "offsets",
+     "shape": "rect",
+     "x": 80,
+     "y": 140,
+     "w": 170,
+     "h": 50,
+     "rx": 8,
+     "label": "offsets/",
+     "note": "what range each micro-batch READS"
+    },
+    {
+     "id": "commits",
+     "shape": "rect",
+     "x": 80,
+     "y": 206,
+     "w": 170,
+     "h": 50,
+     "rx": 8,
+     "label": "commits/",
+     "note": "which micro-batches were WRITTEN to the sink"
+    },
+    {
+     "id": "state",
+     "shape": "rect",
+     "x": 80,
+     "y": 272,
+     "w": 170,
+     "h": 50,
+     "rx": 8,
+     "label": "state/",
+     "note": "state-store data of stateful operators"
+    },
+    {
+     "id": "metadata",
+     "shape": "rect",
+     "x": 80,
+     "y": 338,
+     "w": 170,
+     "h": 50,
+     "rx": 8,
+     "label": "metadata",
+     "note": "the query’s identity"
+    }
+   ]
+  },
+  {
+   "id": "dbx-uc-hierarchy",
+   "file": "dbx-uc-hierarchy.svg",
+   "alt": "Workspaces A, B and C attach to one regional metastore. The metastore holds catalogs dev, prod and sandbox; catalog prod holds schemas bronze, silver and gold; schema silver holds the table orders, the volume files_volume and the function normalize_email(). The three-level name is prod.silver.orders.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Metastore → catalog → schema → object. The workspace is not in the namespace.",
+   "src": "part2",
+   "regions": [
+    {
+     "id": "metastore",
+     "shape": "rect",
+     "x": 300,
+     "y": 64,
+     "w": 220,
+     "h": 56,
+     "rx": 8,
+     "label": "Metastore",
+     "note": "Top-level regional UC container for metadata and permissions."
+    },
+    {
+     "id": "wsa",
+     "shape": "rect",
+     "x": 24,
+     "y": 64,
+     "w": 150,
+     "h": 46,
+     "rx": 8,
+     "label": "Workspace A",
+     "note": "Where you WORK (notebooks, jobs, compute). Attached to the metastore — not part of catalog.schema.object."
+    },
+    {
+     "id": "wsb",
+     "shape": "rect",
+     "x": 24,
+     "y": 124,
+     "w": 150,
+     "h": 46,
+     "rx": 8,
+     "label": "Workspace B",
+     "note": "Where you WORK (notebooks, jobs, compute). Attached to the metastore — not part of catalog.schema.object."
+    },
+    {
+     "id": "wsc",
+     "shape": "rect",
+     "x": 24,
+     "y": 184,
+     "w": 150,
+     "h": 46,
+     "rx": 8,
+     "label": "Workspace C",
+     "note": "Where you WORK (notebooks, jobs, compute). Attached to the metastore — not part of catalog.schema.object."
+    },
+    {
+     "id": "cdev",
+     "shape": "rect",
+     "x": 200,
+     "y": 190,
+     "w": 140,
+     "h": 50,
+     "rx": 8,
+     "label": "dev",
+     "note": "Catalog: the primary unit of data isolation."
+    },
+    {
+     "id": "cprod",
+     "shape": "rect",
+     "x": 360,
+     "y": 190,
+     "w": 140,
+     "h": 50,
+     "rx": 8,
+     "label": "prod",
+     "note": "Catalog: the primary unit of data isolation."
+    },
+    {
+     "id": "csand",
+     "shape": "rect",
+     "x": 520,
+     "y": 190,
+     "w": 140,
+     "h": 50,
+     "rx": 8,
+     "label": "sandbox",
+     "note": "Catalog: the primary unit of data isolation."
+    },
+    {
+     "id": "sbronze",
+     "shape": "rect",
+     "x": 150,
+     "y": 300,
+     "w": 140,
+     "h": 50,
+     "rx": 8,
+     "label": "bronze",
+     "note": "Schema: a finer organisational / access-control layer inside a catalog."
+    },
+    {
+     "id": "ssilver",
+     "shape": "rect",
+     "x": 310,
+     "y": 300,
+     "w": 140,
+     "h": 50,
+     "rx": 8,
+     "label": "silver",
+     "note": "Schema: a finer organisational / access-control layer inside a catalog."
+    },
+    {
+     "id": "sgold",
+     "shape": "rect",
+     "x": 470,
+     "y": 300,
+     "w": 140,
+     "h": 50,
+     "rx": 8,
+     "label": "gold",
+     "note": "Schema: a finer organisational / access-control layer inside a catalog."
+    },
+    {
+     "id": "otab",
+     "shape": "rect",
+     "x": 60,
+     "y": 420,
+     "w": 200,
+     "h": 64,
+     "rx": 8,
+     "label": "orders",
+     "note": "An object registered in prod.silver: a table."
+    },
+    {
+     "id": "ovol",
+     "shape": "rect",
+     "x": 300,
+     "y": 420,
+     "w": 200,
+     "h": 64,
+     "rx": 8,
+     "label": "files_volume",
+     "note": "An object registered in prod.silver: a volume."
+    },
+    {
+     "id": "ofn",
+     "shape": "rect",
+     "x": 540,
+     "y": 420,
+     "w": 200,
+     "h": 64,
+     "rx": 8,
+     "label": "normalize_email()",
+     "note": "An object registered in prod.silver: a function."
+    }
+   ]
+  },
+  {
+   "id": "dbx-vacuum",
+   "file": "dbx-vacuum.svg",
+   "alt": "Versions: v0 has files A and B, v1 has B and C, v2 (current) has C and D. Physically on storage there are four files: A, B, C and D.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "VACUUM is physical garbage collection of files no longer referenced (after retention).",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "fa",
+     "shape": "rect",
+     "x": 240,
+     "y": 236,
+     "w": 100,
+     "h": 70,
+     "rx": 8,
+     "label": "A",
+     "note": "Not referenced by the current snapshot (only by old versions)."
+    },
+    {
+     "id": "fb",
+     "shape": "rect",
+     "x": 370,
+     "y": 236,
+     "w": 100,
+     "h": 70,
+     "rx": 8,
+     "label": "B",
+     "note": "Not referenced by the current snapshot (only by old versions)."
+    },
+    {
+     "id": "fc",
+     "shape": "rect",
+     "x": 500,
+     "y": 236,
+     "w": 100,
+     "h": 70,
+     "rx": 8,
+     "label": "C",
+     "note": "In the current snapshot."
+    },
+    {
+     "id": "fd",
+     "shape": "rect",
+     "x": 630,
+     "y": 236,
+     "w": 100,
+     "h": 70,
+     "rx": 8,
+     "label": "D",
+     "note": "In the current snapshot."
+    }
+   ]
+  },
+  {
+   "id": "dbx-watermark",
+   "file": "dbx-watermark.svg",
+   "alt": "An event-time axis from 10:00 to 10:25. The maximum event time seen so far is 10:20. Four newly arriving events have event times 10:03, 10:12, 10:17 and 10:19. The watermark delay is 5 minutes.",
+   "credit": "Drawn by noema-lite (original diagram)",
+   "license": "own",
+   "caption": "Watermark ≈ max event time seen − delay. Not a wall-clock timer, not a retention policy.",
+   "src": "part2",
+   "regions": [
+    {
+     "id": "wm",
+     "shape": "rect",
+     "x": 452.0,
+     "y": 140,
+     "w": 56,
+     "h": 100,
+     "rx": 8,
+     "label": "Watermark (delay 5 min) = 10:15",
+     "note": "10:20 − 5 min. Older events may be dropped; their window state can be finalised and evicted."
+    },
+    {
+     "id": "wm20",
+     "shape": "rect",
+     "x": 32.0,
+     "y": 140,
+     "w": 56,
+     "h": 100,
+     "rx": 8,
+     "label": "Watermark (delay 20 min) = 10:00",
+     "note": "10:20 − 20 min: events from 10:03 on are still accepted."
+    },
+    {
+     "id": "e03",
+     "shape": "circle",
+     "cx": 144.0,
+     "cy": 190,
+     "r": 18,
+     "label": "event 10:03",
+     "note": "older than the 10:15 watermark → too late, may be dropped"
+    },
+    {
+     "id": "e12",
+     "shape": "circle",
+     "cx": 396.0,
+     "cy": 190,
+     "r": 18,
+     "label": "event 10:12",
+     "note": "older than the 10:15 watermark → too late, may be dropped"
+    },
+    {
+     "id": "e17",
+     "shape": "circle",
+     "cx": 536.0,
+     "cy": 190,
+     "r": 18,
+     "label": "event 10:17",
+     "note": "newer than the watermark → still accepted"
+    },
+    {
+     "id": "e19",
+     "shape": "circle",
+     "cx": 592.0,
+     "cy": 190,
+     "r": 18,
+     "label": "event 10:19",
+     "note": "newer than the watermark → still accepted"
+    }
+   ]
+  }
+ ]
+}

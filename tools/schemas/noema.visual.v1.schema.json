@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noema-lite.netlify.app/schemas/noema.visual.v1.schema.json",
+  "title": "noema-lite visual content (noema.visual/v1)",
+  "description": "Canonical schema for the media registry (media/media.json), regions, visual exercises and the figure block. Human-readable spec: docs/VISUAL.md. Enforced by tools/validate.py.",
+  "type": "object",
+  "properties": {
+    "mediaRegistry": { "$ref": "#/$defs/mediaRegistry" },
+    "exercise": { "$ref": "#/$defs/visualExercise" },
+    "figure": { "$ref": "#/$defs/figureBlock" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$" },
+    "point": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+    "region": {
+      "type": "object",
+      "required": ["id", "shape"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "shape": { "enum": ["rect", "circle", "poly"] },
+        "x": { "type": "number" }, "y": { "type": "number" }, "w": { "type": "number", "exclusiveMinimum": 0 }, "h": { "type": "number", "exclusiveMinimum": 0 }, "rx": { "type": "number", "minimum": 0 },
+        "cx": { "type": "number" }, "cy": { "type": "number" }, "r": { "type": "number", "exclusiveMinimum": 0 },
+        "points": { "type": "array", "items": { "$ref": "#/$defs/point" }, "minItems": 3 },
+        "label": { "type": "string", "minLength": 1 },
+        "accept": { "type": "array", "items": { "type": "string" } },
+        "options": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+        "anchor": { "$ref": "#/$defs/point" },
+        "q": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "shape": { "const": "rect" } } }, "then": { "required": ["x", "y", "w", "h"] } },
+        { "if": { "properties": { "shape": { "const": "circle" } } }, "then": { "required": ["cx", "cy", "r"] } },
+        { "if": { "properties": { "shape": { "const": "poly" } } }, "then": { "required": ["points"] } }
+      ]
+    },
+    "mediaItem": {
+      "type": "object",
+      "required": ["id", "file", "alt", "credit", "license"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "file": { "type": "string", "pattern": "\\.(svg|png|jpe?g|webp)$" },
+        "alt": { "type": "string", "minLength": 8 },
+        "caption": { "type": "string" },
+        "credit": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 },
+        "src": { "type": "string" },
+        "w": { "type": "number", "exclusiveMinimum": 0 },
+        "h": { "type": "number", "exclusiveMinimum": 0 },
+        "regions": { "type": "array", "items": { "$ref": "#/$defs/region" } }
+      }
+    },
+    "mediaRegistry": {
+      "type": "object",
+      "required": ["format", "items"],
+      "properties": {
+        "format": { "const": "noema.media/v1" },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/mediaItem" } }
+      }
+    },
+    "visualExercise": {
+      "type": "object",
+      "required": ["id", "type", "section", "difficulty", "tags", "q", "explain", "media"],
+      "properties": {
+        "type": { "enum": ["img_hotspot", "img_sequence", "img_reveal", "img_drag", "img_label", "img_select", "img_occlusion"] },
+        "media": { "$ref": "#/$defs/id" },
+        "regions": { "type": "array", "items": { "$ref": "#/$defs/region" } },
+        "targets": { "type": "array", "items": { "$ref": "#/$defs/id" }, "minItems": 1 },
+        "answer": { "oneOf": [ { "type": "integer", "minimum": 0 }, { "type": "array", "items": { "oneOf": [ { "type": "integer", "minimum": 0 }, { "$ref": "#/$defs/id" } ] }, "minItems": 1 } ] },
+        "multi": { "type": "boolean" },
+        "maskLabels": { "type": "boolean" },
+        "any": { "type": "boolean" },
+        "mask": { "type": "boolean" },
+        "why": { "type": "object", "additionalProperties": { "type": "string" } },
+        "options": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+        "grid": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 8 }, "minItems": 2, "maxItems": 2 },
+        "start": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "distractors": { "type": "array", "items": { "type": "string" } },
+        "fuzzy": { "type": "boolean" },
+        "pass": { "type": "number", "minimum": 0, "maximum": 1 },
+        "order": { "enum": ["listed", "random"] }
+      },
+      "allOf": [
+        { "if": { "properties": { "type": { "enum": ["img_hotspot", "img_sequence"] } } }, "then": { "required": ["answer"] } },
+        { "if": { "properties": { "type": { "const": "img_reveal" } } }, "then": { "required": ["options", "answer"] } }
+      ]
+    },
+    "figureBlock": {
+      "type": "object",
+      "required": ["t", "media"],
+      "properties": {
+        "t": { "const": "figure" },
+        "media": { "$ref": "#/$defs/id" },
+        "caption": { "type": "string" },
+        "regions": { "type": "array", "items": { "$ref": "#/$defs/region" } },
+        "explore": { "type": "boolean" }
+      }
+    }
+  }
+}

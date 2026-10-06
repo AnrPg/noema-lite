@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Validate a chapter JSON file against SCHEMA.md. Usage: validate.py chNN.json"""
+"""Validate a chapter JSON file (tools/CONTENT_SPEC.md + docs/VISUAL.md).
+Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N]
+  --media       {id: {w, h, regions}} of the subject's pictures (build.py passes it) → checks references & coordinates
+  --min-visual  required visual exercises per chapter (from subject.json authoring.minVisualPerChapter)"""
 import json, re, sys
 from collections import Counter
 
@@ -9,10 +12,88 @@ def W(m): warns.append(m)
 
 BLOCKS = {"p":["text"],"list":["items"],"code":["code"],"diagram":["text"],"table":["head","rows"],
           "callout":["kind","text"],"compare":["items"],"flow":["items"],"reveal":["label","text"],
-          "ask":["questions"],"terms":["items"]}
+          "ask":["questions"],"terms":["items"],"figure":["media"]}
 KINDS = {"key","pitfall","tip","exam","warn","analogy","debug","interview"}
 TAGS = {"concept","syntax","pitfall","debug","exam","interview","calc","compare"}
-TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","scenario","free","write"}
+VTYPES = {"img_hotspot","img_sequence","img_reveal","img_drag","img_label","img_select","img_occlusion"}
+TYPES = {"mcq","tf","odd","order","match","bucket","cloze","spotbug","calc","scenario","free","write"} | VTYPES
+ARGS = sys.argv[1:]
+MEDIA = json.load(open(ARGS[ARGS.index("--media")+1], encoding="utf-8")) if "--media" in ARGS else None
+MIN_VISUAL = int(ARGS[ARGS.index("--min-visual")+1]) if "--min-visual" in ARGS else 0
+RID = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
+
+def check_regions(where, regions, IW=None, IH=None):
+    """Structural + bounds checks; returns {id: region}."""
+    out = {}
+    if not isinstance(regions, list): E(f"{where}: regions must be a list"); return out
+    for r in regions:
+        rid = r.get("id")
+        if not isinstance(rid, str) or not RID.match(rid): E(f"{where}: bad region id {rid!r}"); continue
+        if rid in out: E(f"{where}: duplicate region id {rid}")
+        out[rid] = r
+        sh = r.get("shape"); pts = []
+        if sh == "rect":
+            if not all(isinstance(r.get(k),(int,float)) for k in "xywh") or r["w"] <= 0 or r["h"] <= 0: E(f"{where}/{rid}: rect needs x,y,w>0,h>0"); continue
+            pts = [(r["x"], r["y"]), (r["x"]+r["w"], r["y"]+r["h"])]
+        elif sh == "circle":
+            if not all(isinstance(r.get(k),(int,float)) for k in ("cx","cy","r")) or r["r"] <= 0: E(f"{where}/{rid}: circle needs cx,cy,r>0"); continue
+            pts = [(r["cx"]-r["r"], r["cy"]-r["r"]), (r["cx"]+r["r"], r["cy"]+r["r"])]
+        elif sh == "poly":
+            P = r.get("points")
+            if not isinstance(P, list) or len(P) < 3 or not all(isinstance(q, list) and len(q) == 2 for q in P): E(f"{where}/{rid}: poly needs >=3 [x,y] points"); continue
+            pts = [tuple(q) for q in P]
+        else: E(f"{where}/{rid}: shape must be rect|circle|poly"); continue
+        if r.get("anchor") is not None: pts.append(tuple(r["anchor"]))
+        if IW and IH and any(x < -0.5 or y < -0.5 or x > IW+0.5 or y > IH+0.5 for x, y in pts): E(f"{where}/{rid}: region outside the {IW:g}x{IH:g} picture")
+        if "options" in r and (not isinstance(r["options"], list) or len(r["options"]) < 2): E(f"{where}/{rid}: options needs >=2 entries")
+    return out
+
+def check_visual(eid, e):
+    t = e["type"]; mid = e.get("media")
+    if not s(mid): E(f"{eid}: visual exercise needs media"); return
+    m = (MEDIA or {}).get(mid)
+    if MEDIA is not None and not m: E(f"{eid}: media '{mid}' not in media/media.json"); return
+    IW, IH = (m or {}).get("w"), (m or {}).get("h")
+    regions = e.get("regions", (m or {}).get("regions") if m else None)
+    if t == "img_reveal" and e.get("grid"):
+        g = e["grid"]
+        if not (isinstance(g, list) and len(g) == 2 and all(isinstance(x, int) and 1 <= x <= 8 for x in g)): E(f"{eid}: grid must be [cols, rows] (1-8)")
+        regions = regions or []
+    if regions is None:
+        if MEDIA is None: return          # cannot check without the registry
+        E(f"{eid}: no regions (neither in the exercise nor in media '{mid}')"); return
+    R = check_regions(eid, regions, IW, IH)
+    targets = e.get("targets") or list(R)
+    for x in targets:
+        if x not in R: E(f"{eid}: target '{x}' is not a region")
+    if t in ("img_hotspot", "img_sequence"):
+        a = e.get("answer")
+        if not isinstance(a, list) or not a: E(f"{eid}: answer must be a list of region ids"); return
+        for x in a:
+            if x not in R: E(f"{eid}: answer '{x}' is not a region")
+        if t == "img_sequence" and not (2 <= len(a) <= 9): E(f"{eid}: sequence needs 2-9 steps")
+        if t == "img_hotspot" and e.get("any") and len(a) < 2: W(f"{eid}: any:true with one answer region is the same as a normal hotspot")
+        if t == "img_sequence" and len(set(a)) != len(a): E(f"{eid}: sequence repeats a region")
+        for k in (e.get("why") or {}):
+            if k not in R: E(f"{eid}: why '{k}' is not a region")
+    if t == "img_reveal":
+        o = e.get("options", []); a = e.get("answer"); aa = a if isinstance(a, list) else [a]
+        if len(o) < 2: E(f"{eid}: reveal needs options")
+        if not all(isinstance(x, int) and 0 <= x < len(o) for x in aa): E(f"{eid}: bad answer index")
+        if isinstance(a, list) and len(a) > 1 and not e.get("multi"): E(f"{eid}: multiple answers need multi:true")
+        if not e.get("grid") and len(R) < 2: E(f"{eid}: reveal needs grid or >=2 tile regions")
+        for x in e.get("start", []):
+            if not e.get("grid") and x not in R: E(f"{eid}: start '{x}' is not a region")
+    if t in ("img_drag", "img_label", "img_select", "img_occlusion"):
+        labs = [R[x].get("label") for x in targets if x in R]
+        if not all(s(l) for l in labs): E(f"{eid}: every target needs a label")
+        elif len(set(l.strip().lower() for l in labs)) != len(labs) and t != "img_occlusion": W(f"{eid}: duplicate target labels")
+        if t == "img_select":
+            shared = set(labs) | set(e.get("distractors", []))
+            if len(shared) < 2: E(f"{eid}: select needs >=2 choices")
+            for x in targets:
+                if x in R and "options" in R[x] and R[x].get("label") not in R[x]["options"]: E(f"{eid}/{x}: options must include the label")
+        if "pass" in e and not (isinstance(e["pass"], (int, float)) and 0 <= e["pass"] <= 1): E(f"{eid}: pass must be 0-1")
 
 def s(x): return isinstance(x,str) and x.strip()!=""
 
@@ -47,6 +128,9 @@ def main(path):
             if t=="diagram":
                 for ln in b.get("text","").split("\n"):
                     if len(ln)>78: W(f"{sid} block {i}: diagram line >78 chars"); break
+            if t=="figure":
+                if MEDIA is not None and b.get("media") not in MEDIA: E(f"{sid} block {i}: figure media '{b.get('media')}' not in media/media.json")
+                elif "regions" in b: check_regions(f"{sid} block {i}", b["regions"], *(((MEDIA or {}).get(b.get("media")) or {}).get(k) for k in ("w", "h")))
             if t=="terms":
                 for it in b["items"]:
                     if not (s(it.get("term")) and s(it.get("def"))): E(f"{sid} block {i}: term needs term+def")
@@ -82,6 +166,7 @@ def main(path):
             if "why" in e and len(e["why"])!=len(o): E(f"{eid}: why length != options")
             if len(set(o))!=len(o): E(f"{eid}: duplicate options")
             if t=="odd" and len(o)!=4: W(f"{eid}: odd should have 4 options")
+        if t in VTYPES: check_visual(eid, e)
         if t=="tf" and not isinstance(e.get("answer"),bool): E(f"{eid}: tf answer must be bool")
         if t=="order":
             it=e.get("items",[])
@@ -136,15 +221,22 @@ def main(path):
     for sid in sids:
         if per_sec[sid]<3: W(f"{sid}: only {per_sec[sid]} exercises")
         if quick[sid]<2: W(f"{sid}: only {quick[sid]} quick exercises")
-    for t in TYPES:
+    for t in TYPES - VTYPES:
         if tc[t]<2: W(f"type '{t}' used {tc[t]}x (<2)")
+    nvis = sum(tc[t] for t in VTYPES); vkinds = sum(1 for t in VTYPES if tc[t])
+    nfig = sum(1 for sec in secs for b in sec.get("blocks", []) if b.get("t") == "figure")
+    if MIN_VISUAL:
+        if nvis < MIN_VISUAL: E(f"only {nvis} visual exercises (subject requires >= {MIN_VISUAL} per chapter, docs/VISUAL.md)")
+        if vkinds < 2: E(f"visual exercises use {vkinds} type(s); need >= 2 different visual types")
+        if nfig < 1: E("no 'figure' block in the chapter (docs/VISUAL.md)")
+    elif nvis < 3: W(f"only {nvis} visual exercises (docs/VISUAL.md asks for >= 3 per chapter)")
     risky = sum(1 for e in exs if set(e.get("tags",[]))&{"pitfall","debug","exam"})
     if exs and risky/len(exs)<0.3: W(f"only {risky}/{len(exs)} exercises tagged pitfall/debug/exam")
-    print(f"== {path}: {len(secs)} sections, {len(exs)} exercises, {len(ch.get('debug',[]))} playbooks, {len(ch.get('flashcards',[]))} flashcards, {len(ch.get('pitfalls',[]))} pitfalls")
+    print(f"== {path}: {len(secs)} sections, {len(exs)} exercises ({nvis} visual, {nfig} figures), {len(ch.get('debug',[]))} playbooks, {len(ch.get('flashcards',[]))} flashcards, {len(ch.get('pitfalls',[]))} pitfalls")
     print("   types:", dict(tc)); print("   tags:", dict(tagc))
     for m in errors: print("ERROR:", m)
     for m in warns: print("WARN:", m)
     print("OK" if not errors else f"{len(errors)} ERRORS")
     sys.exit(1 if errors else 0)
 
-main(sys.argv[1])
+main(ARGS[0])

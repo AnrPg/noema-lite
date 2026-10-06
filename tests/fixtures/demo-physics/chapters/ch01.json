@@ -28,6 +28,10 @@
      "kind": "key",
      "title": "Units",
      "text": "Joule = $\\mathrm{kg\\,m^2/s^2}$"
+    },
+    {
+     "t": "figure",
+     "media": "power-station"
     }
    ]
   }
@@ -114,6 +118,163 @@
    ],
    "answer": 0,
    "explain": "Joule."
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e101",
+   "type": "img_hotspot",
+   "q": "Where is **chemical energy** turned into heat?",
+   "answer": [
+    "boiler"
+   ],
+   "why": {
+    "turbine": "The turbine turns steam pressure into rotation — the heat was made earlier."
+   },
+   "explain": "The **boiler** burns the fuel.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e102",
+   "type": "img_hotspot",
+   "q": "Tap **both** round-ish or slanted shapes: the sun and the cooling tower.",
+   "answer": [
+    "sun",
+    "tower"
+   ],
+   "explain": "Circle + polygon regions.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e103",
+   "type": "img_sequence",
+   "q": "Trace the energy from the fuel to the grid.",
+   "targets": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator",
+    "grid"
+   ],
+   "answer": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator",
+    "grid"
+   ],
+   "explain": "Fuel → Boiler → Turbine → Generator → Grid.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e104",
+   "type": "img_drag",
+   "q": "Drag the labels onto the station.",
+   "targets": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator"
+   ],
+   "distractors": [
+    "Transformer"
+   ],
+   "explain": "Chemical → heat → rotation → electricity.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e105",
+   "type": "img_label",
+   "q": "Name the four stages.",
+   "targets": [
+    "fuel",
+    "boiler",
+    "turbine",
+    "generator"
+   ],
+   "explain": "Typos are tolerated.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e106",
+   "type": "img_select",
+   "q": "Pick the names.",
+   "targets": [
+    "boiler",
+    "turbine",
+    "grid"
+   ],
+   "distractors": [
+    "Reactor"
+   ],
+   "explain": "Dropdowns.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e107",
+   "type": "img_occlusion",
+   "q": "Recall the parts.",
+   "targets": [
+    "generator",
+    "tower"
+   ],
+   "explain": "Self-check recall.",
+   "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "id": "ch01-e108",
+   "type": "img_reveal",
+   "q": "What does this picture show?",
+   "grid": [
+    3,
+    2
+   ],
+   "options": [
+    "A power station",
+    "A car engine",
+    "A heart"
+   ],
+   "answer": 0,
+   "explain": "Boxes from fuel to grid.",
+   "media": "power-station"
   }
  ]
 }

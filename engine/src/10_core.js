@@ -181,7 +181,7 @@ function beep(kind) {
   if (!S.settings.sound) return;
   try {
     AC = AC || new (window.AudioContext || window.webkitAudioContext)();
-    const notes = kind === 'ok' ? [660, 880] : kind === 'win' ? [523, 659, 784, 1046] : [220, 180];
+    const notes = kind === 'ok' ? [660, 880] : kind === 'win' ? [523, 659, 784, 1046] : kind === 'tap' ? [540] : [220, 180];
     notes.forEach((f, i) => {
       const o = AC.createOscillator(), g = AC.createGain();
       o.type = kind === 'bad' ? 'triangle' : 'sine'; o.frequency.value = f;
@@ -257,6 +257,7 @@ function blockText(b) {
     case 'reveal': return `Q: ${b.label}\nA: ${b.text}`;
     case 'ask': return (b.title || 'Ask yourself') + ':\n' + b.questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
     case 'terms': return b.items.map(i => `${i.term}: ${i.def}`).join('\n');
+    case 'figure': return figureAsText(b);
   }
   return '';
 }

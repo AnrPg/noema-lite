@@ -9,7 +9,7 @@
 """
 import os, sys, glob, json, subprocess, tempfile, shutil
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, content_hash
+from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash
 
 ENGINE = os.path.join(ROOT, 'engine')
 args = sys.argv[1:]
@@ -22,13 +22,14 @@ def build_engine():
     wt(os.path.join(ENGINE, 'engine.css'), '/* noema-lite engine styles — GENERATED from engine/src/*.css. Do not edit. */\n' + css)
     print(f'engine: {len(js)//1024} KB js, {len(css)//1024} KB css')
 
-def validate(chapters, label):
+def validate(chapters, label, media=None, min_visual=0):
     if not VALIDATE: return True
     ok = True
     with tempfile.TemporaryDirectory() as td:
+        mp = os.path.join(td, '_media.json'); wj(mp, {k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in (media or {}).items()})
         for c in chapters:
             p = os.path.join(td, c['id'] + '.json'); wj(p, c)
-            r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'validate.py'), p], capture_output=True, text=True)
+            r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'validate.py'), p, '--media', mp, '--min-visual', str(min_visual)], capture_output=True, text=True)
             if r.returncode != 0:
                 ok = False; print(f'  ✗ {label}/{c["id"]}:\n' + '\n'.join('    ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')))
     return ok
@@ -37,14 +38,18 @@ def build_packs():
     metas = []; failed = []
     for sdir, owner in subject_dirs():
         meta, sources, chapters, report = load_subject(sdir)
-        errs = [r for r in report if r.startswith('ERROR')]
+        media, mrep = load_media(sdir)
+        for m in mrep:
+            if m.startswith('WARN'): print('  ' + m)
+        errs = [r for r in report + mrep if r.startswith('ERROR')]
         if errs: print('\n'.join(errs)); failed.append(meta['id']); continue
-        if not validate(chapters, meta['id']): failed.append(meta['id']); continue
+        if not validate(chapters, meta['id'], media, int((meta.get('authoring') or {}).get('minVisualPerChapter', 0))): failed.append(meta['id']); continue
         meta = dict(meta); meta['owner'] = owner
         counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in chapters), 'exercises': sum(len(c['exercises']) for c in chapters),
                   'playbooks': sum(len(c['debug']) for c in chapters), 'flashcards': sum(len(c['flashcards']) for c in chapters)}
-        pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'counts': counts, 'builtAt': now_iso()}
-        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters})
+        counts['visual'] = sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')); counts['media'] = len(media)
+        pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
+        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v['sha'] for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}})
         try:   # unchanged content → keep the previous build time so git sees no change
             prev = rj(os.path.join(sdir, 'pack.json'))
             if prev.get('version') == pack['version']: pack['builtAt'] = prev.get('builtAt', pack['builtAt'])
@@ -54,7 +59,7 @@ def build_packs():
         wt(os.path.join(sdir, 'pack.js'), f'/* GENERATED subject pack: {meta["id"]} — do not edit; edit chapters/*.json and run tools/build.py */\n(window.NOEMA_PACKS = window.NOEMA_PACKS || {{}})[{json.dumps(meta["id"])}] = ' + body.replace('</', '<\\/') + ';\n')
         rel = os.path.relpath(os.path.join(sdir, 'pack.js'), ROOT).replace(os.sep, '/')
         metas.append(dict({k: meta.get(k) for k in ('id', 'title', 'appTitle', 'emoji', 'group', 'description', 'language', 'features', 'owner')}, path=rel, counts=counts, version=pack['version']))
-        print(f'pack: {meta["id"]:<20} {"(private:" + owner + ")" if owner else "":<18} {counts["chapters"]} ch · {counts["sections"]} sec · {counts["exercises"]} ex · {len(body)//1024} KB')
+        print(f'pack: {meta["id"]:<20} {"(private:" + owner + ")" if owner else "":<18} {counts["chapters"]} ch · {counts["sections"]} sec · {counts["exercises"]} ex ({counts["visual"]} visual) · {counts["media"]} img · {len(body)//1024} KB')
     return metas, failed
 
 def build_registry(metas, public=False):
