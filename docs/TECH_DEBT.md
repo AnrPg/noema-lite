@@ -10,7 +10,7 @@ what to think about first, and status. Newest at the top.
 | TD-3 | Keyboard-only answering for hotspot / sequence pictures | ✅ closed 2026-10-07 | 2026-10-06 |
 | TD-4 | Tutor that can *see* the picture (multimodal Gemini) | 💭 idea | 2026-10-06 |
 | TD-5 | Real Supabase sync tested only against the emulator | ✅ closed 2026-10-07 | 2026-10-06 |
-| TD-6 | Claude connector: verify against the real Supabase OAuth server and claude.ai | 📋 known gap | 2026-10-06 |
+| TD-6 | Claude: verify the connector with claude.ai and way A with a real API key | 📋 known gap | 2026-10-06 |
 
 ---
 
@@ -73,3 +73,10 @@ One-time step after each change of `cloud/supabase.sql`: run it in the Supabase 
 live: Supabase OAuth server settings (DCR, consent path, signing keys), Claude’s sign-in round trip, and
 that the claude.ai sandbox can `curl` the signed upload URL (Pro/Max have network access by default; if a
 plan blocks it, the skill falls back to `noema_save_pack` for small packs or the downloadable file).
+
+**Status 2026-10-07:** checked live — `/mcp` deployed (405 on GET, 401 + resource metadata without a
+token), Supabase OAuth server on with dynamic client registration, PKCE S256. Still to do by hand: add the
+connector once in claude.ai and save one subject. **Way A** (✨ Create with Claude → *Here in noema-lite*) is
+tested against a scripted Claude API (`tests/claude_api.js`); run it once with a real API key and a small
+PDF: watch that the skill upload, PDFs in the container and the web-picture tool behave as in the test
+(the code falls back automatically if PDFs or web search are refused).

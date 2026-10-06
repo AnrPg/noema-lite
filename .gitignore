@@ -10,3 +10,5 @@ __pycache__/
 .DS_Store
 node_modules/
 _to_delete/
+# Finder / iCloud duplicates ("file 2.ext")
+* 2.*

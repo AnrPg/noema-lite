@@ -38,11 +38,14 @@ Icons on the subject chips: 🔒 only yours · 🤝 shared with you · 🌍 take
 - **Later** hides the banner for now; the request stays under 🔔.
 
 ## 5. 🌍 Explore
-- Cards show title, owner (📚 library or 👤 name), chapters · exercises · picture exercises.
-- **Hover** a card (computer): statistics, the numbered chapter list, sources with links, language, size,
-  licence note.
-- **Click / tap** a card: **ℹ️ View info** (the same information in a window) or **📚 Choose this subject to
-  study** (adds it to your subjects and opens it).
+- Cards show only the emoji and the title. **Click / tap a card = choose it**: it is added to your subjects
+  and opens.
+- The details appear in an info popup — **point at a card** with the mouse (or focus it with Tab); on a
+  phone or tablet **press and hold** the card (it opens from the bottom, with *📚 Study this subject*;
+  tap outside to close).
+- The popup: owner (📚 library or 👤 name), language, size, description, statistics (chapters, sections,
+  exercises, picture exercises, pictures, flashcards, debug playbooks), the **chapters as a numbered list**
+  in a fixed-size box that scrolls (its height follows the screen), sources with links, licence note.
 
 ## 6. How it is stored (for the curious)
 | Data | Where | Who can read |
