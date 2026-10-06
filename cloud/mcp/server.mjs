@@ -42,10 +42,11 @@ function checkPack(p, expectId) {
   if (!s.title) E.push('subject.title missing');
   const media = p?.media || {};
   for (const [mid, m] of Object.entries(media)) {
-    if (!/^data:image\//.test(m.data || '')) E.push(`media ${mid}: data must be a data:image/… URI`);
+    if (m.fetch === 'app' && !m.data) { if (!/^https?:\/\//.test(m.url || '')) E.push(`media ${mid}: a "fetch": "app" picture needs its image url`); }
+    else if (!/^data:image\//.test(m.data || '')) E.push(`media ${mid}: data must be a data:image/… URI`);
     if (!(m.w > 0 && m.h > 0)) E.push(`media ${mid}: w/h missing`);
     if (!m.alt) W.push(`media ${mid}: no alt text`);
-    if (m.origin === 'web' && !(m.url && m.license)) E.push(`media ${mid}: web picture needs url + license`);
+    if (m.origin === 'web' && !m.url) E.push(`media ${mid}: web picture needs its source url`);
   }
   const chapters = Array.isArray(p?.chapters) ? p.chapters : [];
   if (!chapters.length) E.push('no chapters');
@@ -84,6 +85,8 @@ const TOOLS = [
   { name: 'noema_whoami', description: 'Which noema-lite account is connected, and its private subject packs.', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_authoring_guide', description: 'The noema-lite content contract. READ IT before creating or changing a subject pack: workflow, chapter/section/exercise schema, visual exercises & pictures (sources, web, function graphs), quantities, pack format.',
     inputSchema: { type: 'object', properties: { part: { type: 'string', enum: ['workflow', 'content', 'visual', 'all'], description: 'Default: all' } } }, annotations: { readOnlyHint: true } },
+  { name: 'noema_get_toolkit', description: 'Use this when the noema-pack-builder skill is NOT installed: returns the download URL of the same toolkit (scripts: start_subject, pdf_text, extract_images, fetch_image, svgkit, make_pack, unpack + references) and the commands to unpack it in your sandbox. With it you work exactly as the skill describes.',
+    inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_list_subjects', description: 'Subjects available to this account: the shared library and the user’s own private packs (id, title, size, version).', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_get_pack_url', description: 'A temporary download URL for an existing pack (the user’s private pack, or a library pack) — use it to make ADDITIVE updates (never renumber ids: progress is keyed by them).',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] }, annotations: { readOnlyHint: true } },
@@ -94,6 +97,14 @@ const TOOLS = [
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
     inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' } }, required: ['pack_json'] } },
 ];
+
+/* ---------- prompts (claude.ai: “+” → noema-lite → Create a subject) ---------- */
+const PROMPTS = [{
+  name: 'create_subject', title: 'Create a noema-lite subject', description: 'Turn the files attached to this chat into a noema-lite subject pack and save it to your account.',
+  arguments: [{ name: 'title', description: 'Subject title, e.g. Human heart anatomy', required: true }, { name: 'language', description: 'Language of the material (en, el, …)', required: false }, { name: 'goal', description: 'exam / understanding / project', required: false }],
+  text: a => `Create a noema-lite subject pack from the sources attached to this chat${a.title ? ` — title: "${a.title}"` : ''}${a.language ? `, language: ${a.language}` : ''}${a.goal ? `, goal: ${a.goal}` : ''}.\n` +
+    `Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources, include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, validate with make_pack.py, and save the pack to my noema-lite account with the noema-lite tools. Do not ask me questions unless something essential is missing — choose sensible defaults.`,
+}];
 
 async function callTool(name, args, ctx) {
   const { token, user } = ctx; const uid = user.id; const base = `noema-private/${uid}/packs/`;
@@ -109,6 +120,10 @@ async function callTool(name, args, ctx) {
       const part = args?.part || 'all';
       const parts = { workflow: DOCS.workflow, content: DOCS.content, visual: DOCS.visual };
       return text(part === 'all' ? Object.values(parts).join('\n\n---\n\n') : parts[part] || DOCS.workflow);
+    }
+    case 'noema_get_toolkit': {
+      const zip = `${CFG.siteUrl.replace(/\/$/, '')}/downloads/noema-pack-builder.zip`;
+      return text(`The noema-pack-builder toolkit (same as the skill): ${zip}\n\nIn your sandbox:\ncurl -sSL -o /tmp/npb.zip "${zip}" && cd /tmp && unzip -oq npb.zip && ls /tmp/noema-pack-builder /tmp/noema-pack-builder/scripts\n\nThen follow /tmp/noema-pack-builder/SKILL.md (it is also returned by noema_authoring_guide part "workflow"); scripts are in /tmp/noema-pack-builder/scripts.\nIf the sandbox cannot download it: read noema_authoring_guide (all parts), write the pack JSON yourself (media as data: URIs, or web pictures as {"origin":"web","fetch":"app","url":<direct image url>,"w","h",…} which the app downloads) and save it with noema_save_pack.`);
     }
     case 'noema_list_subjects': {
       const list = await sb('/storage/v1/object/list/noema-private', token, { method: 'POST', body: { prefix: `${uid}/packs/`, limit: 1000 } }).catch(() => []);
@@ -164,8 +179,8 @@ async function handle(m, ctx) {
     switch (m.method) {
       case 'initialize': {
         const want = m.params?.protocolVersion;
-        return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
-          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, call noema_authoring_guide (or use the noema-pack-builder skill). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones).' });
+        return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false }, prompts: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
+          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones).' });
       }
       case 'notifications/initialized': case 'notifications/cancelled': return null;
       case 'ping': return ok({});
@@ -176,7 +191,12 @@ async function handle(m, ctx) {
         return ok(await callTool(t.name, m.params?.arguments || {}, ctx));
       }
       case 'resources/list': return ok({ resources: [] });
-      case 'prompts/list': return ok({ prompts: [] });
+      case 'prompts/list': return ok({ prompts: PROMPTS.map(({ name, title, description, arguments: a }) => ({ name, title, description, arguments: a })) });
+      case 'prompts/get': {
+        const pr = PROMPTS.find(x => x.name === m.params?.name);
+        if (!pr) return { jsonrpc: '2.0', id: m.id, error: { code: -32602, message: 'Unknown prompt: ' + m.params?.name } };
+        return ok({ description: pr.description, messages: [{ role: 'user', content: { type: 'text', text: pr.text(m.params?.arguments || {}) } }] });
+      }
       default: return isNote ? null : { jsonrpc: '2.0', id: m.id, error: { code: -32601, message: 'Method not found: ' + m.method } };
     }
   } catch (e) {

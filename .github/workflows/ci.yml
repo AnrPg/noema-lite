@@ -1,0 +1,61 @@
+# Proves the tools work on Windows, macOS and Linux, and runs the browser tests on Linux.
+# Runs only when code changes (not for content-only pushes), to keep GitHub Actions minutes low.
+name: ci
+on:
+  push:
+    branches: [main]
+    paths: ['tools/**', 'skill/**', 'engine/**', 'tests/**', 'cloud/mcp/**', 'cloud/img/**', 'cloud/supabase.sql', 'index.html', '.github/workflows/ci.yml']
+  workflow_dispatch: {}
+jobs:
+  tools:
+    name: tools · ${{ matrix.os }} · py${{ matrix.py }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        py: ['3.10', '3.12']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '${{ matrix.py }}' }
+      - run: python -m pip install pillow pymupdf pypdf pypdfium2
+      - name: build (validate everything, website, skill zip, connector)
+        run: python tools/build.py site skill
+      - name: validator & licence tests
+        run: python tests/validate_visual.py
+      - name: skill round trip (unpack the Databricks pack → rebuild → same version)
+        shell: python
+        run: |
+          import json, os, subprocess, sys, tempfile, zipfile
+          d = tempfile.mkdtemp(); zipfile.ZipFile('dist/noema-pack-builder.zip').extractall(d)
+          S = os.path.join(d, 'noema-pack-builder', 'scripts')
+          subprocess.run([sys.executable, os.path.join(S, 'unpack.py'), 'library/subjects/databricks/pack.json', os.path.join(d, 'w')], check=True)
+          subprocess.run([sys.executable, os.path.join(S, 'make_pack.py'), os.path.join(d, 'w', 'databricks'), os.path.join(d, 'out')], check=True)
+          a = json.load(open('library/subjects/databricks/pack.json', encoding='utf-8')); b = json.load(open(os.path.join(d, 'out', 'databricks.json'), encoding='utf-8'))
+          assert len(a['chapters']) == len(b['chapters']) and sum(len(c['exercises']) for c in a['chapters']) == sum(len(c['exercises']) for c in b['chapters']), 'round trip changed the pack'
+          print('round trip OK on', sys.platform)
+      - name: picture extraction without poppler (PyMuPDF path)
+        shell: python
+        run: |
+          import sys, os, tempfile; sys.path.insert(0, 'tools')
+          from PIL import Image
+          d = tempfile.mkdtemp(); pdf = os.path.join(d, 't.pdf'); Image.new('RGB', (900, 600), 'red').save(pdf)
+          import extract_images as E; E.have = lambda c: False
+          assert E.scan(pdf, os.path.join(d, 'scan')), 'no picture found'
+          E.crop(pdf, 1, 10, 10, 50, 50, os.path.join(d, 'c.png'), 120); print('extraction OK on', sys.platform)
+          E._has_pymupdf = lambda: False   # the pypdf + pypdfium2 path (what Claude's API sandbox has)
+          assert E.scan(pdf, os.path.join(d, 'scan2')), 'no picture found (pypdf)'
+          E.crop(pdf, 1, 10, 10, 50, 50, os.path.join(d, 'c2.png'), 120); print('pypdf/pypdfium2 extraction OK on', sys.platform)
+  browser:
+    name: browser tests (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: python -m pip install pillow && npm install --no-save playwright && npx playwright install --with-deps chromium
+      - run: bash tests/run_e2e.sh
+        env: { PW: '${{ github.workspace }}/node_modules/playwright' }

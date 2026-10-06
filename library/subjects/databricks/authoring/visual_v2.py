@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, '..', 'media')
 sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'tools'))
 from svgkit import write_registry
-SRC = json.load(open(os.path.join(HERE, '..', 'sources.json')))['chapters']
+SRC = json.load(open(os.path.join(HERE, '..', 'sources.json'), encoding='utf-8'))['chapters']
 UA = 'noema-lite/1.0 (+https://noema-lite.netlify.app; educational)'
 SPARK = 'https://raw.githubusercontent.com/apache/spark/master/docs/img/'
 CREDIT = 'Apache Spark documentation, The Apache Software Foundation'
@@ -106,7 +106,7 @@ save('spark-streaming-stats', im,
 ], 'webui-structured-streaming-detail.png', 'part2')
 
 write_registry(MEDIA, ITEMS)
-media = {it['id']: it for it in json.load(open(os.path.join(MEDIA, 'media.json')))['items']}
+media = {it['id']: it for it in json.load(open(os.path.join(MEDIA, 'media.json'), encoding='utf-8'))['items']}
 def regs_of(mid, relabel):
     import copy
     out = []

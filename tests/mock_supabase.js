@@ -2,7 +2,7 @@
    Enforces per-user isolation like the RLS policies in cloud/supabase.sql. Also serves a static folder. */
 const http = require('http'), fs = require('fs'), path = require('path'), crypto = require('crypto');
 function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
-  const users = {}, tokens = {}, kv = {}, snaps = [], profiles = {}, files = {}, signed = {}; let snapId = 1;
+  const users = {}, tokens = {}, kv = {}, snaps = [], profiles = {}, files = {}, signed = {}, pubFiles = {}, shrFiles = {}, pubPacks = [], shares = []; let snapId = 1;
   const json = (res, code, obj, extra = {}) => { res.writeHead(code, Object.assign({ 'Content-Type': 'application/json' }, cors, extra)); res.end(obj === undefined ? '' : JSON.stringify(obj)); };
   const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization,apikey,content-type,prefer,x-upsert', 'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS' };
   const session = u => { const at = crypto.randomUUID(), rt = crypto.randomUUID(); tokens[at] = u.id; tokens['r:' + rt] = u.id; return { access_token: at, refresh_token: rt, expires_in: 3600, token_type: 'bearer', user: { id: u.id, email: u.email, user_metadata: u.meta } }; };
@@ -19,7 +19,7 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       if ((sm = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'GET') { const k = decodeURIComponent(sm[1]); if (signed[u.searchParams.get('token')] !== 'dl:' + k || !files[k]) return json(res, 400, { message: 'invalid signature' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
       if (p === '/oauth-callback') { server.state.callbacks.push(u.search); res.writeHead(200, { 'Content-Type': 'text/html' }); return res.end('<h1>back in Claude</h1>'); }
       const api = /^\/(auth|rest|storage)\/v1\//.test(p);
-      if (api && !req.headers.apikey) return json(res, 401, { message: 'No API key found in request' });
+      if (api && !req.headers.apikey && !p.startsWith('/storage/v1/object/public/')) return  /* public bucket URLs work without a key, like <img src> */ json(res, 401, { message: 'No API key found in request' });
       const authz = req.headers.authorization; if (api && authz && !tokens[authz.replace('Bearer ', '')]) return json(res, 401, { message: 'Invalid JWT' });
       // ---- auth
       if (p === '/auth/v1/signup') { if (Object.values(users).some(x => x.email === data.email)) return json(res, 422, { msg: 'User already registered' }); const usr = { id: crypto.randomUUID(), email: data.email, pw: data.password, meta: data.data || {} }; users[usr.id] = usr; return json(res, 200, session(usr)); }
@@ -30,7 +30,27 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       }
       if (p === '/auth/v1/logout' || p === '/auth/v1/recover') return json(res, 204);
       const uid = who(req);
+      const q = k => (u.searchParams.get(k) || '').replace(/^(eq|gt)\./, '');
+      // ---- anonymous reads: public packs + public bucket
+      if (p === '/rest/v1/noema_public_packs' && req.method === 'GET') { const o = q('owner'); return json(res, 200, pubPacks.filter(r => !o || r.owner === o).slice().sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)); }
+      let pm;
+      if ((pm = p.match(/^\/storage\/v1\/object\/public\/noema-public\/(.+)$/))) { const k = decodeURIComponent(pm[1]); if (!pubFiles[k]) return json(res, 404, { message: 'not found' }); res.writeHead(200, Object.assign({ 'Content-Type': pubFiles[k].type }, cors)); return res.end(pubFiles[k].data); }
       if (p.startsWith('/rest/v1/') || p.startsWith('/storage/v1/')) { if (!uid) return json(res, 401, { message: 'JWT required' }); }
+      const myEmail = uid && users[uid].email.toLowerCase();
+      // ---- public packs (owner only writes)
+      if (p === '/rest/v1/noema_public_packs') {
+        if (req.method === 'POST') { for (const r of data) { if (r.owner !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); const i = pubPacks.findIndex(x => x.owner === r.owner && x.subject_id === r.subject_id); const row = Object.assign({ published_at: new Date().toISOString() }, i >= 0 ? pubPacks[i] : {}, r); if (i >= 0) pubPacks[i] = row; else pubPacks.push(row); } return json(res, 201); }
+        if (req.method === 'DELETE') { const i = pubPacks.findIndex(x => x.owner === uid && x.owner === q('owner') && x.subject_id === q('subject_id')); if (i >= 0) pubPacks.splice(i, 1); return json(res, 204); }
+      }
+      // ---- shares (sender / recipient rules as in cloud/supabase.sql)
+      if (p === '/rest/v1/noema_shares') {
+        const visible = shares.filter(x => x.from_user === uid || x.to_email === myEmail);
+        if (req.method === 'GET') return json(res, 200, visible.filter(x => (!q('to_email') || x.to_email === decodeURIComponent(q('to_email'))) && (!q('status') || x.status === q('status')) && (!q('from_user') || x.from_user === q('from_user')) && (!q('id') || x.id === q('id'))));
+        if (req.method === 'POST') { const out = []; for (const r of data) { if (r.from_user !== uid || (r.status && r.status !== 'pending') || r.to_email !== r.to_email.toLowerCase()) return json(res, 403, { message: 'new row violates row-level security policy' }); const row = Object.assign({ id: crypto.randomUUID(), status: 'pending', created_at: new Date().toISOString(), responded_at: null }, r); shares.push(row); out.push(row); } return json(res, 201, out); }
+        const row = visible.find(x => x.id === q('id'));
+        if (req.method === 'PATCH') { if (!row) return json(res, 204); const okR = row.to_email === myEmail && ['accepted', 'rejected'].includes(data.status); const okS = row.from_user === uid; if (!okR && !okS) return json(res, 403, { message: 'rls' }); Object.assign(row, data); return json(res, 204); }
+        if (req.method === 'DELETE') { if (row && row.from_user === uid) shares.splice(shares.indexOf(row), 1); return json(res, 204); }
+      }
       if (p === '/auth/v1/user') { if (!uid) return json(res, 401, { msg: 'invalid JWT' }); const usr = users[uid]; return json(res, 200, { id: usr.id, email: usr.email, user_metadata: usr.meta }); }
       let om;
       if ((om = p.match(/^\/auth\/v1\/oauth\/authorizations\/([^/]+)(\/consent)?$/))) {
@@ -44,18 +64,21 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       if (p === '/rest/v1/noema_profiles') { (data || []).forEach(r => { if (r.user_id !== uid) return; profiles[uid] = r; }); return json(res, 201); }
       if (p === '/rest/v1/noema_kv') {
         kv[uid] = kv[uid] || {};
-        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
+        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => !q('key') || key === decodeURIComponent(q('key'))).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
         if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; } return json(res, 201); }
-        if (req.method === 'DELETE') { const k = (u.searchParams.get('key') || '').replace(/^eq\./, ''); delete kv[uid][k]; return json(res, 204); }
+        if (req.method === 'DELETE') { const k = decodeURIComponent(q('key')); delete kv[uid][k]; return json(res, 204); }
       }
       if (p === '/rest/v1/noema_conversations') {
         server.state.convs[uid] = server.state.convs[uid] || {};
-        if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'rls' }); server.state.convs[uid][r.id] = r; } return json(res, 201); }
-        const gt = (u.searchParams.get('updated_at') || '').replace(/^gt\./, '');
-        return json(res, 200, Object.values(server.state.convs[uid]).filter(r => !gt || r.updated_at > gt).sort((a, b) => a.updated_at < b.updated_at ? -1 : 1).map(r => ({ record: r.record, updated_at: r.updated_at })));
+        if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'rls' }); server.state.convs[uid][r.id] = Object.assign({}, r, { synced_at: new Date(Date.now() + (server.state.seq = (server.state.seq || 0) + 1)).toISOString() }); } return json(res, 201); }
+        if (req.method === 'DELETE') { delete server.state.convs[uid][decodeURIComponent(q('id'))]; return json(res, 204); }
+        if (q('id')) return json(res, 200, Object.values(server.state.convs[uid]).filter(r => r.id === decodeURIComponent(q('id'))).map(r => ({ id: r.id, synced_at: r.synced_at })));
+        const col = /synced_at/.test(u.searchParams.get('order') || '') ? 'synced_at' : 'updated_at';
+        const gt = decodeURIComponent(q(col));
+        return json(res, 200, Object.values(server.state.convs[uid]).filter(r => !gt || r[col] > gt).sort((a, b) => a[col] < b[col] ? -1 : 1).map(r => ({ record: r.record, updated_at: r.updated_at, synced_at: r.synced_at })));
       }
       if (p === '/rest/v1/noema_snapshots') {
-        if (req.method === 'POST') { data.forEach(r => snaps.push({ id: snapId++, user_id: uid, label: r.label, data: r.data, size_bytes: r.size_bytes, created_at: new Date().toISOString() })); return json(res, 201); }
+        if (req.method === 'POST') { const rows = data.map(r => ({ id: snapId++, user_id: uid, label: r.label, data: r.data, size_bytes: r.size_bytes, created_at: new Date().toISOString() })); snaps.push(...rows); return json(res, 201, /representation/.test(req.headers.prefer || '') ? rows.map(({ data, ...x }) => x) : undefined); }
         const mine = snaps.filter(s => s.user_id === uid);
         const idf = (u.searchParams.get('id') || '').replace(/^eq\./, '');
         if (req.method === 'DELETE') { const i = snaps.findIndex(s => s.user_id === uid && String(s.id) === idf); if (i >= 0) snaps.splice(i, 1); return json(res, 204); }
@@ -64,25 +87,45 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       }
       // ---- Storage subset
       let m;
-      if ((m = p.match(/^\/storage\/v1\/object\/list\/noema-private$/))) { const pre = data.prefix; return json(res, 200, Object.keys(files).filter(k => k.startsWith(pre)).map(k => ({ name: k.slice(pre.length), metadata: { size: files[k].data.length } }))); }
+      if ((m = p.match(/^\/storage\/v1\/object\/list\/noema-private$/))) { const pre = data.prefix.replace(/\/+$/, '') + '/'; if (pre.split('/')[0] !== uid) return json(res, 200, []); return json(res, 200, Object.keys(files).filter(k => k.startsWith(pre) && !k.slice(pre.length).includes('/')).map(k => ({ name: k.slice(pre.length), metadata: { size: files[k].data.length } }))); }
+      if (p === '/storage/v1/object/list/noema-shared') return json(res, 200, []);
+      if ((m = p.match(/^\/storage\/v1\/object\/(noema-private|noema-public|noema-shared)$/)) && req.method === 'DELETE') {
+        for (const k of data.prefixes || []) {
+          if (m[1] === 'noema-private' && k.split('/')[0] === uid) delete files[k];
+          if (m[1] === 'noema-public' && k.split('/')[0] === uid) delete pubFiles[k];
+          if (m[1] === 'noema-shared') { const sh = shares.find(x => x.id + '.json' === k); if (sh && sh.from_user === uid) delete shrFiles[k]; }
+        }
+        return json(res, 200, []);
+      }
+      if ((m = p.match(/^\/storage\/v1\/object\/noema-public\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); pubFiles[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-public/' + k }); }
+      if ((m = p.match(/^\/storage\/v1\/object\/noema-shared\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); const sh = shares.find(x => x.id + '.json' === k); if (!sh || sh.from_user !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); shrFiles[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-shared/' + k }); }
+      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-shared\/(.+)$/))) { const k = decodeURIComponent(m[1]); const sh = shares.find(x => x.id + '.json' === k); if (!sh || !(sh.from_user === uid || sh.to_email === myEmail) || !shrFiles[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': shrFiles[k].type }, cors)); return res.end(shrFiles[k].data); }
       if ((m = p.match(/^\/storage\/v1\/object\/upload\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'rls' }); const t = crypto.randomUUID(); signed[t] = 'up:' + k; return json(res, 200, { url: `/object/upload/sign/noema-private/${k}?token=${t}`, token: t }); }
       if ((m = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 400, { message: 'Object not found' }); const t = crypto.randomUUID(); signed[t] = 'dl:' + k; return json(res, 200, { signedURL: `/object/sign/noema-private/${k}?token=${t}` }); }
       if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
       if ((m = p.match(/^\/storage\/v1\/object\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
+      // ---- /api/img: the picture fetcher Netlify function (cloud/img/proxy.mjs), run in-process; local hosts allowed in tests
+      if (p === '/api/img') {
+        globalThis.NOEMA_IMG_ALLOW_LOCAL = true;
+        return import(require('url').pathToFileURL(path.join(__dirname, '..', 'cloud', 'img', 'proxy.mjs')).href).then(async mod => {
+          const r = await mod.default(new Request('http://localhost:' + port + req.url, { headers: req.headers.origin ? { origin: req.headers.origin } : {} }));
+          const h = {}; r.headers.forEach((v, k) => { h[k] = v; }); res.writeHead(r.status, h); res.end(Buffer.from(await r.arrayBuffer()));
+        }).catch(e => json(res, 500, { message: e.message }));
+      }
       // ---- static site
       if (staticDir) {
         if (configOverride && p === '/config.js') { res.writeHead(200, { 'Content-Type': 'application/javascript' }); return res.end(configOverride); }
         let fp = path.join(staticDir, decodeURIComponent(p.endsWith('/') ? p + 'index.html' : p));
         if (fs.existsSync(fp) && fs.statSync(fp).isDirectory()) fp = path.join(fp, 'index.html');
         if (fp.startsWith(staticDir) && fs.existsSync(fp) && fs.statSync(fp).isFile()) {
-          const ext = path.extname(fp); const types = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2' };
+          const ext = path.extname(fp); const types = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.zip': 'application/zip' };
           res.writeHead(200, { 'Content-Type': types[ext] || 'application/octet-stream' }); return res.end(fs.readFileSync(fp));
         }
       }
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [] };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {}, authz: {}, consents: [], callbacks: [], pubFiles, shrFiles, pubPacks, shares };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

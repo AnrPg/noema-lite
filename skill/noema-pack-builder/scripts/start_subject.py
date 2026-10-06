@@ -3,7 +3,10 @@
   python3 start_subject.py WORKDIR SUBJECT_ID "Title" [--lang en] [--emoji 📘] [--group other] [--math] [--code]
 WORKDIR/<id>/ gets subject.json, sources.json, chapters/, patches/, media/media.json, sources/, coverage/."""
 import os, sys, json
-a = sys.argv[1:]
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
+a = [x.encode('utf-8', 'surrogateescape').decode('utf-8', 'replace') for x in sys.argv[1:]]   # non-UTF-8 terminals
 if len(a) < 3: print(__doc__); sys.exit(1)
 work, sid, title = a[0], a[1], a[2]
 opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d
@@ -17,6 +20,6 @@ json.dump({'id': sid, 'title': title, 'appTitle': f'{title} Quest', 'emoji': opt
            'authoring': {'minVisualPerChapter': 3, 'minExercisesPerPicture': 3},
            'tutor': {'name': 'Brick', 'avatar': '🦉', 'domain': title, 'prior': '', 'examples': '', 'interviewer': f'an examiner for {title}', 'simulation': '', 'terminology': '', 'examinerRole': f'{title} examiner'}},
           open(os.path.join(d, 'subject.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-json.dump({'sources': [], 'chapters': {}, 'patches': {}}, open(os.path.join(d, 'sources.json'), 'w'), indent=1)
-json.dump({'format': 'noema.media/v1', 'items': []}, open(os.path.join(d, 'media', 'media.json'), 'w'), indent=1)
+json.dump({'sources': [], 'chapters': {}, 'patches': {}}, open(os.path.join(d, 'sources.json'), 'w', encoding='utf-8'), indent=1)
+json.dump({'format': 'noema.media/v1', 'items': []}, open(os.path.join(d, 'media', 'media.json'), 'w', encoding='utf-8'), indent=1)
 print('created', d)

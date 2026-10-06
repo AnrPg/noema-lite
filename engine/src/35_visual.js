@@ -55,7 +55,7 @@ function vStage(ex, { regions } = {}) {
   const W = m.w, H = m.h;
   const regs = regions || vRegions(ex, m);
   const RG = Object.fromEntries(regs.map(r => [r.id, r]));
-  const img = h('img', { src: m.data, alt: m.alt || '', draggable: 'false', class: 'vx-img' });
+  const img = h('img', { src: m.data || m.url, referrerpolicy: 'no-referrer', alt: m.alt || '', draggable: 'false', class: 'vx-img' });
   const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, class: 'vx-svg', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const gOut = sv('g'), gMask = sv('g'), gTop = sv('g'); svg.append(gOut, gMask, gTop);
   const layer = h('div', { class: 'vx-layer' });
@@ -106,9 +106,30 @@ function vStage(ex, { regions } = {}) {
     const set = rid => shapes.forEach(e => e.classList.toggle('hl', e.dataset.rid === rid));
     stage.addEventListener('mousemove', ev => { const [x, y] = toImg(ev); set(hits(x, y, among)[0]?.id); });
     stage.addEventListener('mouseleave', () => set(null));
+    shapes.set = set;
     return shapes;
   }
-  return { m, W, H, regs, RG, el: wrap, hover, wrap, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
+  /** Keyboard answering (TD-3): arrows move a crosshair (Shift = fine steps), Enter/Space taps, Backspace undoes.
+      Keys are kept away from the card's global shortcuts while the picture has focus. */
+  function keyboard({ tap, undo, describe }) {
+    stage.tabIndex = 0; stage.setAttribute('role', 'application');
+    stage.setAttribute('aria-label', 'Picture. Arrow keys move the crosshair (Shift for small steps), Enter or Space taps, Backspace removes the last tap.');
+    const cross = h('span', { class: 'vx-cross', 'aria-hidden': 'true' }); layer.append(cross);
+    const live = h('span', { class: 'vx-sr', 'aria-live': 'polite' }); wrap.append(live);
+    let cx = W / 2, cy = H / 2, shown = false;
+    const say = t => { live.textContent = ''; setTimeout(() => { live.textContent = t; }, 20); };
+    const show = () => { Object.assign(cross.style, pos(cx, cy)); cross.classList.add('on'); shown = true; if (describe) say(describe(cx, cy)); };
+    stage.addEventListener('keydown', e => {
+      const k = e.key, f = e.shiftKey ? 0.01 : 0.04;
+      const mv = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[k];
+      if (mv) { e.preventDefault(); e.stopPropagation(); if (shown) { cx = Math.min(W, Math.max(0, cx + mv[0] * W * f)); cy = Math.min(H, Math.max(0, cy + mv[1] * H * f)); } show(); return; }
+      if (k === 'Enter' || k === ' ') { e.preventDefault(); e.stopPropagation(); if (!shown) return show(); const t = tap(cx, cy, true); if (t) say(t); return; }
+      if (k === 'Backspace' || k === 'Delete') { e.preventDefault(); e.stopPropagation(); const t = undo(); if (t) say(t); }
+    });
+    stage.addEventListener('blur', () => { cross.classList.remove('on'); shown = false; });
+    stage.addEventListener('mousedown', () => { cross.classList.remove('on'); shown = false; });
+  }
+  return { m, W, H, regs, RG, el: wrap, hover, keyboard, wrap, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.vx.full').forEach(w => w._exitFull?.()); });
 addEventListener('hashchange', () => $$('.vx.full').forEach(w => w._exitFull?.()));
@@ -165,18 +186,21 @@ R.img_hotspot = (ex, api) => {
   function drop(p) { p.el.remove(); pins.splice(pins.indexOf(p), 1); pins.forEach((q, i) => { if (multi) q.el.textContent = i + 1; }); }
   // Pins never catch the tap themselves (on a small picture they would cover the neighbouring part):
   // a tap within ~10 screen px of an existing pin removes that pin, anywhere else adds one.
-  st.stage.addEventListener('click', ev => {
-    if (api.locked()) return;
-    const sb = st.stage.getBoundingClientRect();
-    const near = pins.find(q => Math.hypot(sb.left + q.x / st.W * sb.width - ev.clientX, sb.top + q.y / st.H * sb.height - ev.clientY) <= 10);
-    if (near) { drop(near); beep('tap'); return; }
-    const [x, y] = st.toImg(ev);
+  function tapAt(x, y) {
+    if (api.locked()) return '';
+    const sb = st.stage.getBoundingClientRect(), sx = sb.width / st.W, sy = sb.height / st.H;
+    const near = pins.find(q => Math.hypot((q.x - x) * sx, (q.y - y) * sy) <= 10);
+    if (near) { drop(near); beep('tap'); return 'Pin removed.'; }
     if (!multi) pins.slice().forEach(drop);
     const p = { x, y };
     p.el = h('span', { class: 'vx-pick', style: st.pos(x, y) }, multi ? pins.length + 1 : '');
     pins.push(p); st.layer.append(p.el); beep('tap');
-  });
-  st.below.prepend(vHint(multi ? `Tap ${ans.length} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger.` : any ? 'Tap one right place on the picture (several are right) — then Check.' : 'Tap the right place on the picture — then Check.'));
+    return multi ? `Pin ${pins.length} of ${ans.length} placed.` : 'Pin placed. Press Tab to reach the Check button.';
+  }
+  st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
+  const where = (x, y) => `${['left', 'centre', 'right'][Math.min(2, Math.floor(3 * x / st.W))]} ${['top', 'middle', 'bottom'][Math.min(2, Math.floor(3 * y / st.H))]} (${Math.round(100 * x / st.W)}%, ${Math.round(100 * y / st.H)}%)`;
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !pins.length) return ''; drop(pins[pins.length - 1]); return 'Last pin removed.'; }, describe: where });
+  st.below.prepend(vHint(multi ? `Tap ${ans.length} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger. ⌨️ Tab to the picture, arrows + Enter.` : any ? 'Tap one right place on the picture (several are right) — then Check. ⌨️ arrows + Enter.' : 'Tap the right place on the picture — then Check. ⌨️ Tab to the picture, arrows move, Enter taps.'));
   return {
     el: st.el,
     check() {
@@ -203,7 +227,7 @@ R.img_sequence = (ex, api) => {
   const among = vTargets(ex, st.regs);
   const picks = [];
   st.stage.classList.add('vx-aim');
-  st.hover(among);
+  const hov = st.hover(among);
   const badges = {};
   function draw() {
     Object.values(badges).forEach(b => b.remove());
@@ -212,15 +236,19 @@ R.img_sequence = (ex, api) => {
     counter.textContent = `${picks.length} / ${ex.answer.length} steps`;
   }
   const counter = h('b', {});
-  st.stage.addEventListener('click', ev => {
-    if (api.locked()) return;
-    const [x, y] = st.toImg(ev); const r = st.hits(x, y, among)[0];
-    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return; }
+  function tapAt(x, y) {
+    if (api.locked()) return '';
+    const r = st.hits(x, y, among)[0];
+    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return 'No part here.'; }
     const i = picks.indexOf(r);
     if (i >= 0) picks.splice(i); else if (picks.length < ex.answer.length) { picks.push(r); beep('tap'); }
     draw();
-  });
-  st.below.prepend(h('div', { class: 'tiny vx-hint' }, 'Tap the parts in the right order. Tap a numbered part again to undo from there. · ', counter));
+    return i >= 0 ? `Removed from step ${i + 1} on.` : `Step ${picks.length}: ${r.label || r.id}.`;
+  }
+  st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !picks.length) return ''; picks.pop(); draw(); return 'Last step removed.'; },
+    describe: (x, y) => { const r = st.hits(x, y, among)[0]; hov.set(r?.id); return r ? (r.label || r.id) + (picks.includes(r) ? ` (step ${picks.indexOf(r) + 1})` : '') : 'No part here.'; } });
+  st.below.prepend(h('div', { class: 'tiny vx-hint' }, 'Tap the parts in the right order. Tap a numbered part again to undo from there. ⌨️ arrows + Enter, Backspace undoes. · ', counter));
   draw();
   return {
     el: st.el,
@@ -428,6 +456,10 @@ function figureBlock(b) {
       pinned = r && pinned !== r ? r : null;
       pinned ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on');
     });
+    st.keyboard({   // keyboard exploring: arrows move, the part under the crosshair is shown and announced; Enter peeks under a cover
+      tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return 'Uncovered: ' + (r.label || r.id); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : 'Nothing here.'; },
+      undo: () => '',
+      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
     const named = regs.filter(r => r.label && !/-area$/.test(r.id));
     let hidden = false;
     const hideBtn = h('button', { class: 'btn small ghost', onclick: () => { hidden = !hidden; named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; } }, '🙈 Hide labels');

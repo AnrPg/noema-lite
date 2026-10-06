@@ -21,13 +21,46 @@ function topbar() {
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
     h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
+    h('button', { class: 'chip explorechip', title: 'Explore: every public subject — info, statistics, study it', onclick: () => Noema.explore() }, '🌍', h('span', { class: 'hide-s' }, ' Explore')),
     timer,
     h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: 'Day streak' }),
     h('button', { class: 'iconbtn srcbtn', title: 'Sources', onclick: () => toggleSourcesDeck() }, '📚'),
     h('button', { class: 'iconbtn hide-m', title: 'Theme', onclick: () => { S.settings.theme = isDark() ? 'light' : 'dark'; save(); applyTheme(); route(); } }, '🌓'),
+    bellButton(),
     h('button', { class: 'iconbtn', title: 'Settings', onclick: openSettings }, '⚙️'),
     h('button', { class: 'iconbtn tutor', title: 'Open tutor', onclick: () => openTutor() }, TUTOR.avatar, h('span', {}, 'Tutor')),
     h('button', { class: 'acchip', title: `${ACCOUNT.name} — account, backup & sync`, onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
+}
+
+/* ---------- 🔔 notifications: subjects shared with me (bell + banner) ---------- */
+function bellButton() {
+  const badge = h('span', { class: 'bellbadge' });
+  const b = h('button', { class: 'iconbtn bell', id: 'bellbtn', title: 'Notifications', 'aria-label': 'Notifications', onclick: () => openNotes() }, '🔔', badge);
+  Noema.notes.on(list => { badge.textContent = list.length || ''; badge.style.display = list.length ? '' : 'none'; b.classList.toggle('has', !!list.length); });
+  return b;
+}
+function openNotes() {
+  modal((box, close) => {
+    const body = h('div');
+    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? 'Nothing new. 🎈' : 'Notifications need a ☁️ cloud account (Account menu → Cloud).')); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } }))); };
+    Noema.notes.on(draw);
+    box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 Notifications'), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
+  });
+}
+function shareBanner() {
+  const bar = h('div', { class: 'sharebar', role: 'status' });
+  let later = new Set();
+  const draw = list => {
+    const items = list.filter(x => !later.has(x.id)); bar.innerHTML = '';
+    bar.classList.toggle('on', !!items.length); if (!items.length) return;
+    const sh = items[0];
+    bar.append(h('span', { class: 'grow' }, '📬 ', h('b', {}, sh.from_name || sh.from_email), ' wants to share ', h('b', {}, `“${sh.title}”`), ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
+      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(`✅ “${s.title}” added to your subjects`); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, '✓ Accept'),
+      h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + er.message)); } }, '✕ Reject'),
+      h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
+  };
+  Noema.notes.on(draw);
+  return bar;
 }
 
 /* ---------- home ---------- */
@@ -513,7 +546,7 @@ document.addEventListener('keydown', e => {
 /* ---------- boot ---------- */
 function boot() {
   applyTheme();
-  document.body.append(topbar(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
+  document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
   renderTopStats();
   addEventListener('hashchange', route);
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());

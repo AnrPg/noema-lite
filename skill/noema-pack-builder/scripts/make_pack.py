@@ -3,6 +3,9 @@
   python3 make_pack.py SUBJECT_DIR [OUT_DIR]        → OUT_DIR/<id>.json   (default OUT_DIR: /mnt/user-data/outputs or .)
 Exit code 1 (and a list of errors) when anything is wrong — fix and run again. Never deliver a pack that fails."""
 import os, sys, json, subprocess, tempfile, datetime
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from noema_lib import load_subject, load_media, content_hash
@@ -21,9 +24,9 @@ used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['ty
 for m in media:
     if used[m] < per_pic: errs.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic}')
 with tempfile.TemporaryDirectory() as td:
-    mp = os.path.join(td, 'media.json'); json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in media.items()}, open(mp, 'w'))
+    mp = os.path.join(td, 'media.json'); json.dump({k: {'w': v['w'], 'h': v['h'], 'regions': v.get('regions')} for k, v in media.items()}, open(mp, 'w', encoding='utf-8'))
     for c in chapters:
-        p = os.path.join(td, c['id'] + '.json'); json.dump(c, open(p, 'w'), ensure_ascii=False)
+        p = os.path.join(td, c['id'] + '.json'); json.dump(c, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
         r = subprocess.run([sys.executable, os.path.join(HERE, 'validate.py'), p, '--media', mp, '--min-visual', str(min_vis)], capture_output=True, text=True)
         print(r.stdout.splitlines()[0] if r.stdout else c['id'])
         errs += [f'{c["id"]}: ' + l for l in r.stdout.splitlines() if l.startswith('ERROR')]
@@ -35,7 +38,7 @@ counts = {'chapters': len(chapters), 'sections': sum(len(c['sections']) for c in
 meta = dict(meta); meta['owner'] = None
 pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts,
         'builtAt': datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat(), 'builtWith': 'noema-pack-builder skill'}
-pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v['sha'] for k, v in media.items()}})
+pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}})
 os.makedirs(out_dir, exist_ok=True)
 out = os.path.join(out_dir, meta['id'] + '.json')
 with open(out, 'w', encoding='utf-8') as f: json.dump(pack, f, ensure_ascii=False, separators=(',', ':'))

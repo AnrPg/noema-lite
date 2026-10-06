@@ -4,9 +4,12 @@
 Creates library/subjects/<id>/ (or accounts/<profile>/packs/<id>/ with --private) with subject.json, sources.json, media/media.json and empty folders.
 Every chapter must then carry >= 3 visual exercises + a figure (docs/VISUAL.md)."""
 import os, sys, json
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from noema_lib import LIB, ACC, wj, rj
-a = sys.argv[1:]
+a = [x.encode('utf-8', 'surrogateescape').decode('utf-8', 'replace') for x in sys.argv[1:]]   # non-UTF-8 terminals
 if len(a) < 2: print(__doc__); sys.exit(1)
 sid, title = a[0], a[1]
 opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d

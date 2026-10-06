@@ -12,8 +12,11 @@
 * --crop (pixels of the original) keeps only the informative part; --scale upsamples small crops (Lanczos).
 """
 import os, sys, json, re, datetime, urllib.request, urllib.parse
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from noema_lib import ALLOWED_LICENSES, license_ok
+from noema_lib import license_open
 
 UA = 'noema-lite/1.0 (+https://noema-lite.netlify.app; educational)'
 
@@ -36,8 +39,9 @@ def main(a):
     opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d
     meta = {'file': url, 'author': opt('--author'), 'license': opt('--license'), 'page': opt('--page', url)}
     if 'commons.wikimedia.org/wiki/File:' in url: meta.update(commons(url))
-    if not meta['license'] or not license_ok(meta['license']): sys.exit(f'✗ license "{meta["license"]}" is not an open license we can reuse ({", ".join(ALLOWED_LICENSES)}). Pick another picture.')
-    if not meta['author']: sys.exit('✗ --author is required (who made the picture / who holds the copyright).')
+    meta['license'] = meta['license'] or 'All rights reserved (personal study use)'
+    meta['author'] = meta['author'] or 'see the source page'
+    if not license_open(meta['license']): print(f'ℹ️ licence "{meta["license"]}" is not open: fine for personal study, flagged "restricted" for sharing.')
     raw = get(meta['file'])
     ext = os.path.splitext(urllib.parse.urlparse(meta['file']).path)[1].lower() or '.png'
     if ext == '.jpeg': ext = '.jpg'
@@ -65,4 +69,4 @@ def main(a):
     json.dump(reg, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print(f'✓ {out} · {meta["license"]} · {meta["author"]}\n  now add "regions" to media.json (look at the picture first!) and write ≥ 3 exercises for it.')
 
-if __name__ == '__main__': main(sys.argv[1:])
+if __name__ == '__main__': main([x.encode('utf-8', 'surrogateescape').decode('utf-8', 'replace') for x in sys.argv[1:]])

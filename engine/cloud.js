@@ -23,7 +23,12 @@
     // Publishable keys (sb_publishable_…) are not JWTs: send them only as `apikey`; the Authorization header carries the user's session token.
     const bearer = auth && s ? s.access_token : (/^sb_/.test(KEY) ? null : KEY);
     const h = Object.assign({ apikey: KEY }, bearer ? { Authorization: 'Bearer ' + bearer } : {}, body !== undefined && !(body instanceof Blob) ? { 'Content-Type': 'application/json' } : {}, headers);
-    const r = await fetch(BASE + path, { method, headers: h, body: body === undefined ? undefined : (body instanceof Blob || typeof body === 'string' ? body : JSON.stringify(body)), keepalive });
+    const payload = body === undefined ? undefined : (body instanceof Blob || typeof body === 'string' ? body : JSON.stringify(body));
+    const size = payload == null ? 0 : (payload instanceof Blob ? payload.size : payload.length * 3);
+    if (keepalive && size > 60000) keepalive = false;      // browsers refuse keepalive bodies over 64 KB
+    let r;
+    try { r = await fetch(BASE + path, { method, headers: h, body: payload, keepalive }); }
+    catch (e) { const er = new Error('Network error — are you offline? (' + e.message + ')'); er.network = true; throw er; }
     if (raw) { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r; }
     const txt = await r.text(); let j = null; try { j = txt ? JSON.parse(txt) : null; } catch (e) { j = txt; }
     if (!r.ok) throw new Error(errMsg(j, r));
@@ -101,13 +106,15 @@
     /* ---------- conversations (canonical noema.conversation/v1 records, one row each) ---------- */
     async pullConvos(acc = accId()) {
       const mk = 'noema1:' + acc + ':meta:convoPulledAt'; const since = jget(mk, null);
-      const rows = await call('/rest/v1/noema_conversations?select=record,updated_at&order=updated_at.asc' + (since ? '&updated_at=gt.' + enc(since) : ''));
+      let col = 'synced_at', rows;
+      try { rows = await call(`/rest/v1/noema_conversations?select=record,updated_at,synced_at&order=synced_at.asc` + (since ? '&synced_at=gt.' + enc(since) : '')); }
+      catch (e) { if (!/synced_at/.test(e.message)) throw e; col = 'updated_at'; rows = await call('/rest/v1/noema_conversations?select=record,updated_at&order=updated_at.asc' + (since ? '&updated_at=gt.' + enc(since) : '')); }
       let n = 0, last = since;
       for (const row of rows || []) {
         const r = row.record; if (!r || !r.id) continue;
         const local = await NoemaConvos.get(acc, r.id);
         if (!local || Date.parse(r.updatedAt) > Date.parse(local.updatedAt)) { await NoemaConvos.put(acc, r, { silent: true, keepUpdatedAt: true }); n++; }
-        last = row.updated_at;
+        last = row[col] || row.updated_at;
       }
       if (last) jset(mk, last);
       return n;
@@ -143,10 +150,95 @@
     /* ---------- private storage: imported subject packs + database backups ---------- */
     async uploadObject(path, blob, type) { return call(`/storage/v1/object/noema-private/${uid()}/${path}`, { method: 'POST', body: blob, headers: { 'Content-Type': type, 'x-upsert': 'true' } }); },
     async downloadObject(path) { const r = await call(`/storage/v1/object/authenticated/noema-private/${uid()}/${path}`, { raw: true }); return r; },
-    async listObjects(prefix) { return call('/storage/v1/object/list/noema-private', { method: 'POST', body: { prefix: `${uid()}/${prefix}`, limit: 1000, sortBy: { column: 'name', order: 'asc' } } }); },
+    async listObjects(prefix) { return call('/storage/v1/object/list/noema-private', { method: 'POST', body: { prefix: `${uid()}/${prefix}`.replace(/\/+$/, ''), limit: 1000, offset: 0, sortBy: { column: 'name', order: 'asc' } } }); },
+    async deleteObjects(bucket, paths) { return call(`/storage/v1/object/${bucket}`, { method: 'DELETE', body: { prefixes: paths } }); },
     async uploadPack(p) { return this.uploadObject(`packs/${p.subject.id}.json`, new Blob([JSON.stringify(p)], { type: 'application/json' }), 'application/json'); },
     async downloadPack(id) { const r = await this.downloadObject(`packs/${id}.json`); return r.json(); },
     async listPacks() { return (await this.listObjects('packs/')).filter(o => o.name.endsWith('.json')).map(o => o.name.replace(/\.json$/, '')); },
+    /* ---------- sharing: public packs (everyone) and shares with one person (docs/SHARING.md) ---------- */
+    publicPackUrl(owner, id) { return `${BASE}/storage/v1/object/public/noema-public/${owner}/${id}.json`; },
+    async listPublic() { return call('/rest/v1/noema_public_packs?select=*&order=updated_at.desc', { auth: !!session() }); },
+    async publish(pack, meta) {
+      const id = pack.subject.id;
+      await call(`/storage/v1/object/noema-public/${uid()}/${id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } });
+      const row = { owner: uid(), subject_id: id, owner_name: meta.ownerName || null, title: pack.subject.title, emoji: pack.subject.emoji || null, description: pack.subject.description || null, language: pack.subject.language || null, meta, updated_at: new Date().toISOString() };
+      await call('/rest/v1/noema_public_packs?on_conflict=owner,subject_id', { method: 'POST', body: [row], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+    },
+    async unpublish(id) {
+      await call(`/rest/v1/noema_public_packs?owner=eq.${uid()}&subject_id=eq.${enc(id)}`, { method: 'DELETE' });
+      await this.deleteObjects('noema-public', [`${uid()}/${id}.json`]).catch(() => { });
+    },
+    async myPublished() { return call(`/rest/v1/noema_public_packs?select=subject_id,title,updated_at&owner=eq.${uid()}`); },
+    async shareWith(email, pack, meta, message) {
+      const to = String(email || '').trim().toLowerCase();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw new Error('Please type a valid e-mail address.');
+      if (to === (session()?.user?.email || '').toLowerCase()) throw new Error('That is your own e-mail address.');
+      const u = session().user;
+      const [row] = await call('/rest/v1/noema_shares', { method: 'POST', body: [{ from_user: uid(), from_email: u.email, from_name: meta.ownerName || u.user_metadata?.name || u.email, to_email: to, subject_id: pack.subject.id, title: pack.subject.title, meta, message: message || null }], headers: { Prefer: 'return=representation' } });
+      try { await call(`/storage/v1/object/noema-shared/${row.id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } }); }
+      catch (e) { await call(`/rest/v1/noema_shares?id=eq.${row.id}`, { method: 'DELETE' }).catch(() => { }); throw e; }
+      return row;
+    },
+    async incomingShares() { const me = (session()?.user?.email || '').toLowerCase(); if (!me) return []; return call(`/rest/v1/noema_shares?select=*&to_email=eq.${enc(me)}&status=eq.pending&order=created_at.desc`); },
+    async outgoingShares() { return call(`/rest/v1/noema_shares?select=id,to_email,subject_id,title,status,created_at,responded_at&from_user=eq.${uid()}&order=created_at.desc&limit=200`); },
+    async downloadShared(id) { const r = await call(`/storage/v1/object/authenticated/noema-shared/${id}.json`, { raw: true }); return r.json(); },
+    async answerShare(id, accept) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: accept ? 'accepted' : 'rejected', responded_at: new Date().toISOString() }, headers: { Prefer: 'return=minimal' } }); },
+    async revokeShare(id) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: 'revoked' }, headers: { Prefer: 'return=minimal' } }); await this.deleteObjects('noema-shared', [`${id}.json`]).catch(() => { }); },
+
+    /* ---------- 🩺 self-test against the REAL project with the signed-in account (cleans up after itself) ---------- */
+    async selfTest(onStep = () => { }) {
+      const out = [];
+      const hint = e => {
+        const m = String(e && e.message || e);
+        if (/PGRST205|Could not find the table|does not exist|Bucket not found|schema cache|synced_at/i.test(m)) return 'The database is older than this app: Supabase → SQL Editor → run the newest cloud/supabase.sql once.';
+        if (/JWT|401|Not signed in|invalid.*token|refresh/i.test(m)) return 'Your sign-in expired: sign out and sign in again.';
+        if (/row-level security|403|permission/i.test(m)) return 'Permission rule refused it: run the newest cloud/supabase.sql (it resets the rules).';
+        if (/Network|Failed to fetch|offline/i.test(m)) return 'No connection to Supabase: check the internet / config.js address.';
+        return 'Unexpected — copy this line and give it to Claude.';
+      };
+      const step = async (name, fn) => {
+        const t = Date.now(); onStep({ name, running: true });
+        try { const note = await fn(); const r = { name, ok: true, ms: Date.now() - t, note: note || '' }; out.push(r); onStep(r); }
+        catch (e) { const r = { name, ok: false, ms: Date.now() - t, error: String(e && e.message || e), hint: hint(e) }; out.push(r); onStep(r); }
+      };
+      const T = Date.now().toString(36), me = uid();
+      await step('Signed in, token refresh', async () => { const s = session(); if (!s) throw new Error('Not signed in'); const j = await call('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: s.refresh_token }, auth: false }); setSession(j); return s.user.email; });
+      await step('Profile', async () => { await call('/rest/v1/noema_profiles?select=user_id&limit=1'); });
+      await step('Progress sync (key/value)', async () => {
+        const key = 'meta:selftest-' + T;
+        await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: [{ user_id: me, key, value: T, updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+        const r = await call(`/rest/v1/noema_kv?select=value&key=eq.${enc(key)}`); if (r?.[0]?.value !== T) throw new Error('value did not come back');
+        await call(`/rest/v1/noema_kv?key=eq.${enc(key)}`, { method: 'DELETE' });
+      });
+      await step('Conversations', async () => {
+        const id = 'cv_selftest' + T, now = new Date().toISOString();
+        await call('/rest/v1/noema_conversations?on_conflict=user_id,id', { method: 'POST', body: [{ user_id: me, id, kind: 'tutor', created_at: now, updated_at: now, record: { id, selftest: true } }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+        const r = await call(`/rest/v1/noema_conversations?select=id,synced_at&id=eq.${enc(id)}`);
+        await call(`/rest/v1/noema_conversations?id=eq.${enc(id)}`, { method: 'DELETE' });
+        if (!r?.[0]) throw new Error('row did not come back'); if (!r[0].synced_at) throw new Error('column synced_at missing');
+      });
+      await step('Cloud snapshots', async () => {
+        const [row] = await call('/rest/v1/noema_snapshots', { method: 'POST', body: [{ user_id: me, label: 'self-test ' + T, data: { selftest: true }, size_bytes: 20 }], headers: { Prefer: 'return=representation' } });
+        await call('/rest/v1/noema_snapshots?id=eq.' + row.id, { method: 'DELETE' });
+      });
+      await step('Private files (packs, database)', async () => {
+        const path = `selftest/${T}.json`;
+        await this.uploadObject(path, new Blob([JSON.stringify({ T })], { type: 'application/json' }), 'application/json');
+        const list = await this.listObjects('selftest'); if (!(list || []).some(o => o.name === T + '.json')) throw new Error('uploaded file not listed');
+        const back = await (await this.downloadObject(path)).json(); if (back.T !== T) throw new Error('downloaded content differs');
+        await this.deleteObjects('noema-private', [`${me}/${path}`]);
+      });
+      await step('Public subjects (Explore)', async () => {
+        await call('/rest/v1/noema_public_packs?select=subject_id&limit=1');
+        const path = `${me}/selftest-${T}.json`;
+        await call(`/storage/v1/object/noema-public/${path}`, { method: 'POST', body: new Blob(['{"ok":1}'], { type: 'application/json' }), headers: { 'Content-Type': 'application/json' } });
+        const r = await fetch(`${BASE}/storage/v1/object/public/noema-public/${path}`); const ok = r.ok;
+        await this.deleteObjects('noema-public', [path]); if (!ok) throw new Error('public file not readable (bucket must be public)');
+      });
+      await step('Sharing with a person', async () => { await call('/rest/v1/noema_shares?select=id&limit=1'); await call('/storage/v1/object/list/noema-shared', { method: 'POST', body: { prefix: '', limit: 1 } }); });
+      return out;
+    },
+
     /* ---------- OAuth consent for the Claude connector (Supabase OAuth 2.1 server, docs/CLAUDE_CONNECTOR.md) ---------- */
     async oauthDetails(id) { return call('/auth/v1/oauth/authorizations/' + enc(id)); },
     async oauthConsent(id, action) { return call('/auth/v1/oauth/authorizations/' + enc(id) + '/consent', { method: 'POST', body: { action } }); },

@@ -9,7 +9,7 @@ from svgkit import write_registry
 
 items = {it['id']: it for it in V.build()}
 write_registry(V.MEDIA, list(items.values()))
-SRC = json.load(open(os.path.join(HERE, '..', 'sources.json')))['chapters']
+SRC = json.load(open(os.path.join(HERE, '..', 'sources.json'), encoding='utf-8'))['chapters']
 
 def regs(mid, relabel=None, accept=None):
     """Copy a picture's regions with exercise-specific labels (geometry stays identical)."""

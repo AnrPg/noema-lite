@@ -1,17 +1,20 @@
 """The validator must catch broken visual content (docs/VISUAL.md). Usage: python3 tests/validate_visual.py"""
 import json, os, subprocess, sys, tempfile, copy
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 FX = os.path.join(ROOT, 'tests', 'fixtures', 'demo-physics')
-ch = json.load(open(os.path.join(FX, 'chapters', 'ch01.json')))
+ch = json.load(open(os.path.join(FX, 'chapters', 'ch01.json'), encoding='utf-8'))
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
 from noema_lib import image_size
-media = {it['id']: dict(zip(('w', 'h'), image_size(os.path.join(FX, 'media', it['file']))), regions=it['regions']) for it in json.load(open(os.path.join(FX, 'media', 'media.json')))['items']}
+media = {it['id']: dict(zip(('w', 'h'), image_size(os.path.join(FX, 'media', it['file']))), regions=it['regions']) for it in json.load(open(os.path.join(FX, 'media', 'media.json'), encoding='utf-8'))['items']}
 fails = 0
 def run(c, expect, why, minv=3):
     global fails
     with tempfile.TemporaryDirectory() as td:
         p, m = os.path.join(td, 'ch01.json'), os.path.join(td, 'm.json')
-        json.dump(c, open(p, 'w')); json.dump(media, open(m, 'w'))
+        json.dump(c, open(p, 'w', encoding='utf-8')); json.dump(media, open(m, 'w', encoding='utf-8'))
         r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'validate.py'), p, '--media', m, '--min-visual', str(minv)], capture_output=True, text=True)
         hit = expect in r.stdout if expect else r.returncode == 0
         print(('  ✅ ' if hit else '  ❌ ') + why + ('' if hit else '\n' + r.stdout[-600:])); fails += not hit
@@ -36,18 +39,29 @@ def media_case(items, expect, why, sizes={}):
     global fails
     with tempfile.TemporaryDirectory() as td:
         os.makedirs(os.path.join(td, 'media'))
-        for it in items:
+        for it in [x for x in items if x.get('file')]:
             w, h = sizes.get(it['id'], (1200, 800)); Image.new('RGB', (w, h), 'white').save(os.path.join(td, 'media', it['file']))
-        json.dump({'format': 'noema.media/v1', 'items': items}, open(os.path.join(td, 'media', 'media.json'), 'w'))
+        json.dump({'format': 'noema.media/v1', 'items': items}, open(os.path.join(td, 'media', 'media.json'), 'w', encoding='utf-8'))
         _, rep = load_media(td)
         hit = any(expect in r for r in rep) if expect else not [r for r in rep if r.startswith('ERROR')]
         print(('  ✅ ' if hit else '  ❌ ') + why + ('' if hit else '  ' + str(rep))); fails += not hit
 web = lambda **k: dict({'id': 'p', 'file': 'p.png', 'origin': 'web', 'alt': 'A photo of something useful', 'credit': 'Jane Doe', 'license': 'CC BY-SA 4.0', 'url': 'https://commons.wikimedia.org/wiki/File:X.jpg', 'retrieved': '2026-10-06'}, **k)
 media_case([web()], None, 'web photo with url + open licence + 1200 px is accepted')
-media_case([web(license='CC BY-NC 4.0')], 'is not reusable', 'NonCommercial licence is rejected')
-media_case([web(license='All rights reserved')], 'is not reusable', 'unlicensed picture is rejected')
+media_case([web(license='CC BY-NC 4.0')], None, 'NonCommercial picture is accepted for personal study (source recorded)')
+media_case([web(license='All rights reserved')], None, '“All rights reserved” picture is accepted with its source')
+def restricted_flag(lic):
+    with tempfile.TemporaryDirectory() as td:
+        os.makedirs(os.path.join(td, 'media')); Image.new('RGB', (1200, 800)).save(os.path.join(td, 'media', 'p.png'))
+        json.dump({'format': 'noema.media/v1', 'items': [web(license=lic)]}, open(os.path.join(td, 'media', 'media.json'), 'w', encoding='utf-8')); return load_media(td)[0]['p'].get('restricted', False)
+ok_ = restricted_flag('CC BY-NC 4.0') and not restricted_flag('CC BY-SA 4.0'); print(('  ✅ ' if ok_ else '  ❌ ') + 'non-open licences are flagged “restricted” (the app warns before sharing)'); fails += not ok_
 media_case([web(url='')], 'needs "url"', 'web picture without its source page is rejected')
 media_case([web()], 'too small', 'low-resolution picture is rejected', sizes={'p': (500, 300)})
 media_case([web(lowResOk='flat diagram, large text')], None, 'lowResOk with a reason lets a small sharp diagram through', sizes={'p': (500, 300)})
 media_case([web(origin=None)], 'origin', 'raster without an origin is rejected')
+# "fetch": "app" web pictures (the app downloads them; used when the builder's sandbox has no internet)
+app = lambda **k: {kk: v for kk, v in {**web(), 'file': None, 'fetch': 'app', 'url': 'https://upload.wikimedia.org/x/Heart.jpg', 'w': 1600, 'h': 1200, **k}.items() if v is not None}
+media_case([app()], None, '"fetch": "app" web picture with url + size is accepted without a file')
+media_case([app(w=None)], 'w and h', '"fetch": "app" picture without its pixel size is rejected')
+media_case([app(url=None)], 'url', '"fetch": "app" picture without its image url is rejected')
+media_case([app(w=600, h=400)], 'too small', '"fetch": "app" picture below 800 px is rejected')
 print('\n' + (f'{fails} FAILED' if fails else 'ALL PASSED')); sys.exit(1 if fails else 0)

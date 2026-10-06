@@ -43,18 +43,18 @@ const GUIDES = {
     '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
     '**Publish repository** → keep **Keep this code private** ticked.',
     'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
-  claude: { icon: '✨', title: 'Create a subject with Claude (your own Claude plan)', who: 'Everyone with a Claude account', steps: [
-    'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker).',
-    '**Once:** download the **noema-pack-builder** skill and upload it in Claude: **Customize → Skills → + → Upload a skill** (code execution on: Settings → Capabilities).',
-    `**Once, optional (cloud account):** in Claude **Customize → Connectors → + → Add custom connector** with the URL ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'}; sign in to noema-lite and approve.`,
-    'Open Claude, attach your PDFs / notes / images / links and paste the prompt from the app. Claude reads everything, adds pictures (from your sources, from the web and its own diagrams/graphs) and builds the pack.',
-    'With the connector the new subject appears in your picker; otherwise import the .json file Claude gives you (📥 Import subject pack).'],
-    notes: ['It uses YOUR Claude plan — noema-lite never sees your Claude login. Free works for small sources; big PDFs need Pro/Max.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
+  claude: { icon: '✨', title: 'Create a subject with Claude', who: 'Everyone', steps: [
+    'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.',
+    '**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.',
+    `**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.`,
+    'Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.',
+    'Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.'],
+    notes: ['Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
   friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
     `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
     'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',
     'Each friend adds **their own free Gemini key** (guide: “Get your free Gemini API key”).',
-    'Want to give them a private subject? Account menu → 📚 Subjects → **⬇️ Export pack** → send the file → they use **📥 Import subject pack**.'],
+    'Want to give them one of your subjects? Subject picker → **🔗** on the subject → *Share with a person* (their e-mail) — they get a 🔔 and accept. Or **🌍 Make it public** so everybody finds it in Explore.'],
     notes: ['Supabase’s built-in email service sends only a few emails per hour: for more than a handful of friends, either turn off “Confirm email” (Authentication → Providers → Email) or connect your own SMTP.'] },
 };
 function guideBody(id, { compact = false } = {}) {

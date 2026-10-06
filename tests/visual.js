@@ -132,6 +132,32 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   await card(p, 'ch01-e108'); await p.keyboard.press('1'); await wait(150);
   ok(await result(p) !== 'open', 'reveal: keyboard 1–3 answers');
 
+  // keyboard only (TD-3): hotspot and sequence without a mouse
+  await card(p, 'ch01-e101');
+  await p.focus('#T .vx-stage');
+  const kbAt = async (tx, ty) => {      // walk the crosshair to an image point with arrow keys (4 % steps, Shift = 1 %)
+    for (let i = 0; i < 2; i++) await p.keyboard.press('ArrowRight');   // first press shows the crosshair at the centre
+    let [cx, cy] = await p.evaluate(() => { const c = document.querySelector('#T .vx-cross'); const st = document.querySelector('#T .vx-stage').getBoundingClientRect(); const r = c.getBoundingClientRect(); const vb = document.querySelector('#T .vx-svg').viewBox.baseVal; return [(r.left + r.width / 2 - st.left) / st.width * vb.width, (r.top + r.height / 2 - st.top) / st.height * vb.height]; });
+    const W = await p.evaluate(() => document.querySelector('#T .vx-svg').viewBox.baseVal.width), H = await p.evaluate(() => document.querySelector('#T .vx-svg').viewBox.baseVal.height);
+    const steps = (d, size) => { const big = Math.trunc(d / (size * 0.04)); const small = Math.round((d - big * size * 0.04) / (size * 0.01)); return [big, small]; };
+    const [bx, sx] = steps(tx - cx, W), [by, sy] = steps(ty - cy, H);
+    for (let i = 0; i < Math.abs(bx); i++) await p.keyboard.press(bx > 0 ? 'ArrowRight' : 'ArrowLeft');
+    for (let i = 0; i < Math.abs(sx); i++) await p.keyboard.press(sx > 0 ? 'Shift+ArrowRight' : 'Shift+ArrowLeft');
+    for (let i = 0; i < Math.abs(by); i++) await p.keyboard.press(by > 0 ? 'ArrowDown' : 'ArrowUp');
+    for (let i = 0; i < Math.abs(sy); i++) await p.keyboard.press(sy > 0 ? 'Shift+ArrowDown' : 'Shift+ArrowUp');
+  };
+  await kbAt(...C.boiler); await p.keyboard.press('Enter'); await wait(80);
+  ok(await p.$$eval('#T .vx-pick', x => x.length) === 1 && await result(p) === 'open', 'keyboard: Enter places a pin (and does not check the card by accident)');
+  ok(/Pin placed/.test(await p.$eval('#T .vx-sr', e => e.textContent)), 'keyboard: screen-reader message after a tap');
+  await p.keyboard.press('Backspace'); ok(await p.$$eval('#T .vx-pick', x => x.length) === 0, 'keyboard: Backspace removes the pin');
+  await p.keyboard.press('Enter'); await p.keyboard.press('Tab'); await p.keyboard.press('Enter'); await wait(150);
+  ok(await result(p) === 'ok', 'keyboard: Enter → Tab → Enter checks: correct');
+  await card(p, 'ch01-e103'); await p.focus('#T .vx-stage');
+  for (const k of ['fuel', 'boiler', 'turbine', 'generator', 'grid']) { await kbAt(...C[k]); await wait(30); await p.keyboard.press('Enter'); }
+  await wait(80); ok(/Step 5: Grid/.test(await p.$eval('#T .vx-sr', e => e.textContent)), 'keyboard: the part under the crosshair is announced');
+  await p.keyboard.press('Tab'); await p.keyboard.press('Enter'); await wait(150);
+  ok(await result(p) === 'ok', 'keyboard: the whole sequence answered with arrows + Enter');
+
   // function graph (svgkit.Plot): curve bands + a point
   await card(p, 'ch01-e109');
   const onCurve = await p.evaluate(() => { const m = MEDIA['ek-graph']; const r = m.regions.find(r => r.id === 'ek'); const n = r.points.length / 2; const a = r.points[Math.floor(n * 0.8)], b = r.points[r.points.length - 1 - Math.floor(n * 0.8)]; return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; });

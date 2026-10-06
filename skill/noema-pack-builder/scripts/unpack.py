@@ -4,6 +4,9 @@
 Existing chapters become the base files: never renumber or delete their ids — add new chapters (next chNN)
 or patches/*.json (appendBlocks / appendExercises …) so the learner keeps all progress."""
 import os, sys, json, base64, re
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 a = sys.argv[1:]
 if len(a) < 2: print(__doc__); sys.exit(1)
 p = json.load(open(a[0], encoding='utf-8'))
@@ -20,6 +23,8 @@ for c in p['chapters']:
 EXT = {'image/svg+xml': '.svg', 'image/png': '.png', 'image/jpeg': '.jpg', 'image/webp': '.webp'}
 items = []
 for mid, m in (p.get('media') or {}).items():
+    if not m.get('data'):    # a "fetch": "app" web picture (the app downloads it): keep url + size, no file
+        items.append({k: v for k, v in m.items() if k not in ('mime', 'sha')} | {'id': mid, 'fetch': 'app'}); continue
     mt = re.match(r'data:([^;,]+)(;base64)?,(.*)', m['data'], re.S)
     raw = base64.b64decode(mt.group(3)) if mt.group(2) else mt.group(3).encode()
     fn = mid + EXT.get(mt.group(1), '.bin'); open(os.path.join(d, 'media', fn), 'wb').write(raw)

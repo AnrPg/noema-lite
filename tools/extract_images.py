@@ -10,11 +10,24 @@
       → crops a region of a page (coordinates in % of the page, 0–100) at high resolution — use it for
         vector diagrams and figures; then register the file in media/media.json with origin "source".
 
-Needs poppler-utils (pdfimages, pdftoppm, pdfinfo) — or PyMuPDF (pip install pymupdf) as a fallback.
+Works with whichever PDF library is installed (tried in this order): poppler-utils (pdfimages, pdftoppm,
+pdfinfo) → PyMuPDF (pip install pymupdf) → pypdf + pypdfium2 (pip install pypdf pypdfium2; these two are
+preinstalled in Claude's code-execution sandbox).
 """
 import os, re, sys, shutil, subprocess, glob, html, struct
+def _pymupdf():
+    try: import pymupdf as m          # PyMuPDF ≥ 1.24
+    except ImportError: import fitz as m   # older PyMuPDF (raises ImportError if not installed)
+    return m
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 
 def have(cmd): return shutil.which(cmd) is not None
+NEED = 'Install one PDF library: poppler-utils (brew/apt install poppler), or pip install pymupdf, or pip install pypdf pypdfium2.'
+def _has_pymupdf():
+    try: _pymupdf(); return True
+    except ImportError: return False
 
 def png_size(p):
     with open(p, 'rb') as f: d = f.read(24)
@@ -45,9 +58,20 @@ def scan(pdf, out, min_side=200):
                 if min(w, h) < min_side: os.remove(f); continue
                 dst = os.path.join(out, f'img-{page:04d}-{len([x for x in found if x[0] == page]) + 1}.png'); os.replace(f, dst)
                 found.append((page, dst, w, h)); pages_with_figs.add(page)
+    elif not _has_pymupdf():
+        try: from pypdf import PdfReader
+        except ImportError: sys.exit(NEED)
+        for pno, pg in enumerate(PdfReader(pdf).pages, 1):
+            try: imgs = list(pg.images)
+            except Exception as e: print(f'p.{pno}: images not readable ({e})'); imgs = []
+            for k, im in enumerate(imgs, 1):
+                try: pil = im.image
+                except Exception: continue
+                if pil is None or min(pil.size) < min_side: continue
+                if pil.mode not in ('RGB', 'RGBA', 'L'): pil = pil.convert('RGB')
+                dst = os.path.join(out, f'img-{pno:04d}-{k}.png'); pil.save(dst); found.append((pno, dst, *pil.size)); pages_with_figs.add(pno)
     else:
-        try: import fitz
-        except ImportError: sys.exit('Install poppler-utils (pdfimages/pdftoppm) or PyMuPDF (pip install pymupdf).')
+        fitz = _pymupdf()
         doc = fitz.open(pdf)
         for pno, pg in enumerate(doc, 1):
             for k, im in enumerate(pg.get_images(full=True), 1):
@@ -58,10 +82,9 @@ def scan(pdf, out, min_side=200):
             if pg.get_drawings(): pages_with_figs.add(pno)
     # pages that contain vector drawings: detect with pdftotext? poppler has no direct API → render pages that had images,
     # plus every page when the PDF is short; Claude reviews the renders for vector diagrams worth cropping.
-    npages = int(re.search(r'Pages:\s+(\d+)', subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout).group(1)) if have('pdfinfo') else 0
+    npages = page_count(pdf)
     render = sorted(pages_with_figs) if npages > 60 else list(range(1, npages + 1))
-    for page in render:
-        if have('pdftoppm'): subprocess.run(['pdftoppm', '-png', '-r', '110', '-f', str(page), '-l', str(page), '-singlefile', pdf, os.path.join(out, 'pages', f'p-{page:04d}')], check=True)
+    for page in render: render_page(pdf, page, 110, os.path.join(out, 'pages', f'p-{page:04d}.png'))
     rows = ''.join(f'<figure><img src="{html.escape(os.path.relpath(p, out))}" loading="lazy"><figcaption>p.{pg} · {w}×{h}</figcaption></figure>' for pg, p, w, h in found)
     pages = ''.join(f'<figure><img src="pages/{html.escape(os.path.basename(p))}" loading="lazy"><figcaption>{html.escape(os.path.basename(p))}</figcaption></figure>' for p in sorted(glob.glob(os.path.join(out, 'pages', '*.png'))))
     with open(os.path.join(out, 'index.html'), 'w', encoding='utf-8') as f:
@@ -70,14 +93,37 @@ def scan(pdf, out, min_side=200):
     print(f'{len(found)} pictures ≥ {min_side}px on {len(pages_with_figs)} pages; {len(render)} page renders → {out}/index.html')
     return found
 
+def page_count(pdf):
+    if have('pdfinfo'):
+        m = re.search(r'Pages:\s+(\d+)', subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout)
+        if m: return int(m.group(1))
+    try:
+        fitz = _pymupdf(); return len(fitz.open(pdf))
+    except ImportError: pass
+    try:
+        from pypdf import PdfReader; return len(PdfReader(pdf).pages)
+    except ImportError: return 0
+
+def render_page(pdf, page, dpi, out_png):
+    """Render one page to PNG: poppler if installed (macOS: brew install poppler; Linux: apt install poppler-utils),
+    else PyMuPDF, else pypdfium2 (all pip-installable, the same on Windows, macOS and Linux)."""
+    if have('pdftoppm'):
+        subprocess.run(['pdftoppm', '-png', '-r', str(dpi), '-f', str(page), '-l', str(page), '-singlefile', pdf, out_png[:-4]], check=True); return
+    if _has_pymupdf(): _pymupdf().open(pdf)[page - 1].get_pixmap(dpi=dpi).save(out_png); return
+    try: import pypdfium2 as pdfium
+    except ImportError: sys.exit(NEED)
+    doc = pdfium.PdfDocument(pdf)
+    try: doc[page - 1].render(scale=dpi / 72).to_pil().save(out_png)
+    finally: doc.close()
+
 def crop(pdf, page, x, y, w, h, out, dpi=200):
-    tmp = out + '.page'
-    subprocess.run(['pdftoppm', '-png', '-r', str(dpi), '-f', str(page), '-l', str(page), '-singlefile', pdf, tmp], check=True)
+    tmp = out + '.page.png'
+    render_page(pdf, page, dpi, tmp)
     from PIL import Image
-    with Image.open(tmp + '.png') as im:
+    with Image.open(tmp) as im:
         W, H = im.size
         im.crop((round(W * x / 100), round(H * y / 100), round(W * (x + w) / 100), round(H * (y + h) / 100))).save(out, optimize=True)
-    os.remove(tmp + '.png'); print('→', out, size_of(out))
+    os.remove(tmp); print('→', out, size_of(out))
 
 if __name__ == '__main__':
     a = sys.argv[1:]

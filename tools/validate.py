@@ -4,6 +4,9 @@ Usage: validate.py chNN.json [--media media_meta.json] [--min-visual N]
   --media       {id: {w, h, regions}} of the subject's pictures (build.py passes it) → checks references & coordinates
   --min-visual  required visual exercises per chapter (from subject.json authoring.minVisualPerChapter)"""
 import json, re, sys
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 from collections import Counter
 
 errors, warns = [], []

@@ -70,6 +70,7 @@ const ACC_VIEWS = {
         h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
         h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises`)),
         s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
+        s.origin !== 'library' ? h('button', { class: 'iconbtn', title: 'Share or make public', onclick: () => Noema.share(s) }, '🔗') : null,
         s.origin === 'imported' ? h('button', { class: 'iconbtn', title: 'Remove imported pack (progress is kept)', onclick: () => confirmBox(`Remove the imported pack “${s.title}”? Your progress in it is kept.`, async () => { await Noema.idb.del('packs', ACCOUNT.id + '|' + s.id); Noema.kv.del(Noema.kv.accountKey('packmeta:' + s.id)); toast('Removed'); }) }, '🗑️') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
@@ -170,11 +171,31 @@ const ACC_VIEWS = {
         h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot('Manual snapshot'); toast('📸 Snapshot saved'); drawSnaps(); } catch (e) { toast('⚠️ ' + e.message); } } }, '📸 Take snapshot'),
         h('label', { class: 'btn' }, '🗄️ Upload database backup…', h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await NoemaCloud.uploadFile('db', e.target.files[0]); toast('☁️ Database backup uploaded'); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn ghost', onclick: async () => { await NoemaCloud.push(ACCOUNT.id).catch(() => { }); await NoemaCloud.signOut(); Noema.jset('noema1:current', {}); location.reload(); } }, 'Sign out')),
+      accSection('🩺', 'Check the cloud connection', { info: 'Runs a real round trip with your account — progress, conversations, snapshots, files, Explore, sharing — and cleans up after itself. Use it after updating the database or when something does not sync.', body: selfTestBox() }),
       accSection('📸', 'Cloud snapshots', { open: true, info: 'Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.', body: snapBox }),
       accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
     drawSnaps();
   },
 };
+
+function selfTestBox() {
+  const box = h('div');
+  const list = h('div', { class: 'selftest' });
+  const run = h('button', { class: 'btn primary', onclick: async () => {
+    run.disabled = true; list.innerHTML = ''; const rows = {};
+    const res = await NoemaCloud.selfTest(st => {
+      const r = rows[st.name] || (rows[st.name] = list.appendChild(h('div', { class: 'strow' })));
+      r.innerHTML = ''; r.className = 'strow ' + (st.running ? 'run' : st.ok ? 'ok' : 'bad');
+      r.append(h('span', { class: 'sti' }, st.running ? '⏳' : st.ok ? '✅' : '❌'), h('b', {}, st.name), st.ms != null ? h('span', { class: 'tiny' }, ` ${st.ms} ms ${st.note ? '· ' + st.note : ''}`) : null,
+        st.error ? h('div', { class: 'tiny' }, '⚠️ ' + st.error) : null, st.hint ? h('div', { class: 'tiny sthint' }, '👉 ' + st.hint) : null);
+    });
+    const bad = res.filter(r => !r.ok).length;
+    list.append(h('div', { class: 'fb ' + (bad ? 'bad' : 'ok') }, bad ? `${bad} check(s) failed — follow the 👉 hints.` : 'Everything works with the real cloud ✔'));
+    run.disabled = false;
+  } }, '🩺 Run the check');
+  box.append(h('p', { class: 'tiny' }, 'Takes a few seconds. Nothing of yours is changed: test data is deleted right away.'), run, list);
+  return box;
+}
 
 ACC_VIEWS.help = function (body) {
   const st = setupStatus();

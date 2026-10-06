@@ -104,3 +104,12 @@ a.vx-credit:hover{opacity:1;text-decoration:underline}
 .vx.full .vx-stage{max-width:none !important;width:min(100%,calc((100vh - 230px) * var(--ar,1.6)));min-width:min(100%,520px)}
 body.vx-noscroll{overflow:hidden}
 @media (max-width:560px){ .vx-input{width:110px} .vx-drop{min-width:70px} }
+
+/* keyboard answering (arrows + Enter) */
+.vx-stage:focus-visible{outline:3px solid var(--c);outline-offset:3px}
+.vx-cross{position:absolute;width:34px;height:34px;transform:translate(-50%,-50%);pointer-events:none !important;opacity:0;transition:opacity .12s;border-radius:50%;border:2px dashed var(--c);box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+.vx-cross::before,.vx-cross::after{content:'';position:absolute;background:var(--c)}
+.vx-cross::before{left:50%;top:-8px;bottom:-8px;width:2px;transform:translateX(-50%)}
+.vx-cross::after{top:50%;left:-8px;right:-8px;height:2px;transform:translateY(-50%)}
+.vx-cross.on{opacity:1}
+.vx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

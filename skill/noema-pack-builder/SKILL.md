@@ -13,7 +13,7 @@ tutor, 19 exercise types (7 of them on pictures), spaced repetition.
 - `references/CONTENT_SPEC.md` — subject, chapters, sections, blocks, exercises, playbooks, quantities, pedagogy.
 - `references/VISUAL.md` — pictures, regions, the 7 picture-exercise types, figures, picture sourcing & licences.
 
-Scripts live in `scripts/` next to this file (Python 3, standard library + Pillow; poppler or PyMuPDF for PDFs).
+Scripts live in `scripts/` next to this file (Python 3, standard library + Pillow; for PDFs any of poppler, PyMuPDF, or pypdf + pypdfium2).
 
 ## 0. Agree on the basics (one short message, then work)
 Subject title and id (`lowercase-with-hyphens`), language of the material (the tutor answers in it),
@@ -40,13 +40,16 @@ Record each source in `work/<id>/sources.json` (`sources`, and which chapter com
    Register them in `media/media.json` with `"origin": "source"`.
 2. **From the web — even if the sources have pictures**: search for high-quality, information-rich
    **photographs and diagrams** that add what the text lacks (anatomy plates, micrographs, real
-   apparatus, maps, real software screens…). Only open licences (CC0, public domain, CC BY, CC BY-SA,
-   Apache-2.0, MIT, US-government works — never NC/ND). Prefer Wikimedia Commons, OpenStax, NASA, NIH,
-   Smithsonian Open Access, open-source project docs. Download with
+   apparatus, maps, real software screens…). Any licence is fine for a personal pack **as long as the
+   source is recorded** (page url, author, licence text); non-open ones are flagged "restricted" and the app
+   warns before sharing. Prefer open sources when equally good (Wikimedia Commons, OpenStax, NASA, NIH,
+   Smithsonian Open Access, open-source docs). Download with
    `python3 scripts/fetch_image.py work/<id> <media-id> <URL> --alt "…" [--license … --author … --page …] [--crop X,Y,W,H]`
    (Commons file pages fill author + licence automatically). **Open every picture and check it**:
-   correct, relevant, sharp (≥ 800 px), labels agree with the sources. If the sandbox has no internet,
-   say so and continue with kinds 1 and 3.
+   correct, relevant, sharp (≥ 800 px), labels agree with the sources. If the sandbox has no internet
+   but you can see pictures some other way (web search, a `noema_web_image` tool), register them as
+   `"fetch": "app"` web pictures (direct image url + `w`/`h`, no file — VISUAL.md §6); the app downloads
+   them. Only if that is impossible too, say so and continue with kinds 1 and 3.
 3. **Drawings and function graphs**: redraw the sources' diagrams and flows, and plot functions
    (rates, kinetics, distributions, any f(x)) with `scripts/svgkit.py` (`Diagram`, `Plot`); it writes
    the SVG **and** its regions, so clickable parts always line up. Save with `d.save(media_dir, id, alt=…)`
@@ -71,6 +74,7 @@ python3 scripts/make_pack.py work/<id>          # → /mnt/user-data/outputs/<id
 Fix every error and run again. Never deliver a pack that fails.
 
 ## 6. Save it to the user's noema-lite account
+(Running inside the noema-lite app through the API? Then just copy the built pack to `$OUTPUT_DIR` — the app imports it.)
 - **With the noema-lite connector** (tools `noema_*` are available):
   `noema_start_upload(subject_id)` → run the returned `curl` command on the built file →
   `noema_finish_upload(subject_id)`. Small packs (≤ 1.5 MB) can use `noema_save_pack`.

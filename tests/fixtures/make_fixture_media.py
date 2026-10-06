@@ -1,5 +1,8 @@
 """Regenerates the demo-physics test picture (tests only)."""
 import os, sys
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'tools'))
 from svgkit import Diagram, write_registry
 d = Diagram(800, 420, title='A thermal power station')

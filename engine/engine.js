@@ -1007,7 +1007,7 @@ function vStage(ex, { regions } = {}) {
   const W = m.w, H = m.h;
   const regs = regions || vRegions(ex, m);
   const RG = Object.fromEntries(regs.map(r => [r.id, r]));
-  const img = h('img', { src: m.data, alt: m.alt || '', draggable: 'false', class: 'vx-img' });
+  const img = h('img', { src: m.data || m.url, referrerpolicy: 'no-referrer', alt: m.alt || '', draggable: 'false', class: 'vx-img' });
   const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, class: 'vx-svg', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const gOut = sv('g'), gMask = sv('g'), gTop = sv('g'); svg.append(gOut, gMask, gTop);
   const layer = h('div', { class: 'vx-layer' });
@@ -1058,9 +1058,30 @@ function vStage(ex, { regions } = {}) {
     const set = rid => shapes.forEach(e => e.classList.toggle('hl', e.dataset.rid === rid));
     stage.addEventListener('mousemove', ev => { const [x, y] = toImg(ev); set(hits(x, y, among)[0]?.id); });
     stage.addEventListener('mouseleave', () => set(null));
+    shapes.set = set;
     return shapes;
   }
-  return { m, W, H, regs, RG, el: wrap, hover, wrap, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
+  /** Keyboard answering (TD-3): arrows move a crosshair (Shift = fine steps), Enter/Space taps, Backspace undoes.
+      Keys are kept away from the card's global shortcuts while the picture has focus. */
+  function keyboard({ tap, undo, describe }) {
+    stage.tabIndex = 0; stage.setAttribute('role', 'application');
+    stage.setAttribute('aria-label', 'Picture. Arrow keys move the crosshair (Shift for small steps), Enter or Space taps, Backspace removes the last tap.');
+    const cross = h('span', { class: 'vx-cross', 'aria-hidden': 'true' }); layer.append(cross);
+    const live = h('span', { class: 'vx-sr', 'aria-live': 'polite' }); wrap.append(live);
+    let cx = W / 2, cy = H / 2, shown = false;
+    const say = t => { live.textContent = ''; setTimeout(() => { live.textContent = t; }, 20); };
+    const show = () => { Object.assign(cross.style, pos(cx, cy)); cross.classList.add('on'); shown = true; if (describe) say(describe(cx, cy)); };
+    stage.addEventListener('keydown', e => {
+      const k = e.key, f = e.shiftKey ? 0.01 : 0.04;
+      const mv = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[k];
+      if (mv) { e.preventDefault(); e.stopPropagation(); if (shown) { cx = Math.min(W, Math.max(0, cx + mv[0] * W * f)); cy = Math.min(H, Math.max(0, cy + mv[1] * H * f)); } show(); return; }
+      if (k === 'Enter' || k === ' ') { e.preventDefault(); e.stopPropagation(); if (!shown) return show(); const t = tap(cx, cy, true); if (t) say(t); return; }
+      if (k === 'Backspace' || k === 'Delete') { e.preventDefault(); e.stopPropagation(); const t = undo(); if (t) say(t); }
+    });
+    stage.addEventListener('blur', () => { cross.classList.remove('on'); shown = false; });
+    stage.addEventListener('mousedown', () => { cross.classList.remove('on'); shown = false; });
+  }
+  return { m, W, H, regs, RG, el: wrap, hover, keyboard, wrap, stage, svg, gTop, layer, below, pos, toImg, mask, masks, outline, tag, hits, compact, onLayout: f => { layouts.push(f); f(); }, relayout: layoutAll, setCrowded: () => { crowded = true; } };
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.vx.full').forEach(w => w._exitFull?.()); });
 addEventListener('hashchange', () => $$('.vx.full').forEach(w => w._exitFull?.()));
@@ -1117,18 +1138,21 @@ R.img_hotspot = (ex, api) => {
   function drop(p) { p.el.remove(); pins.splice(pins.indexOf(p), 1); pins.forEach((q, i) => { if (multi) q.el.textContent = i + 1; }); }
   // Pins never catch the tap themselves (on a small picture they would cover the neighbouring part):
   // a tap within ~10 screen px of an existing pin removes that pin, anywhere else adds one.
-  st.stage.addEventListener('click', ev => {
-    if (api.locked()) return;
-    const sb = st.stage.getBoundingClientRect();
-    const near = pins.find(q => Math.hypot(sb.left + q.x / st.W * sb.width - ev.clientX, sb.top + q.y / st.H * sb.height - ev.clientY) <= 10);
-    if (near) { drop(near); beep('tap'); return; }
-    const [x, y] = st.toImg(ev);
+  function tapAt(x, y) {
+    if (api.locked()) return '';
+    const sb = st.stage.getBoundingClientRect(), sx = sb.width / st.W, sy = sb.height / st.H;
+    const near = pins.find(q => Math.hypot((q.x - x) * sx, (q.y - y) * sy) <= 10);
+    if (near) { drop(near); beep('tap'); return 'Pin removed.'; }
     if (!multi) pins.slice().forEach(drop);
     const p = { x, y };
     p.el = h('span', { class: 'vx-pick', style: st.pos(x, y) }, multi ? pins.length + 1 : '');
     pins.push(p); st.layer.append(p.el); beep('tap');
-  });
-  st.below.prepend(vHint(multi ? `Tap ${ans.length} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger.` : any ? 'Tap one right place on the picture (several are right) — then Check.' : 'Tap the right place on the picture — then Check.'));
+    return multi ? `Pin ${pins.length} of ${ans.length} placed.` : 'Pin placed. Press Tab to reach the Check button.';
+  }
+  st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
+  const where = (x, y) => `${['left', 'centre', 'right'][Math.min(2, Math.floor(3 * x / st.W))]} ${['top', 'middle', 'bottom'][Math.min(2, Math.floor(3 * y / st.H))]} (${Math.round(100 * x / st.W)}%, ${Math.round(100 * y / st.H)}%)`;
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !pins.length) return ''; drop(pins[pins.length - 1]); return 'Last pin removed.'; }, describe: where });
+  st.below.prepend(vHint(multi ? `Tap ${ans.length} places on the picture (tap a pin again to remove it). Small picture? ⤢ makes it bigger. ⌨️ Tab to the picture, arrows + Enter.` : any ? 'Tap one right place on the picture (several are right) — then Check. ⌨️ arrows + Enter.' : 'Tap the right place on the picture — then Check. ⌨️ Tab to the picture, arrows move, Enter taps.'));
   return {
     el: st.el,
     check() {
@@ -1155,7 +1179,7 @@ R.img_sequence = (ex, api) => {
   const among = vTargets(ex, st.regs);
   const picks = [];
   st.stage.classList.add('vx-aim');
-  st.hover(among);
+  const hov = st.hover(among);
   const badges = {};
   function draw() {
     Object.values(badges).forEach(b => b.remove());
@@ -1164,15 +1188,19 @@ R.img_sequence = (ex, api) => {
     counter.textContent = `${picks.length} / ${ex.answer.length} steps`;
   }
   const counter = h('b', {});
-  st.stage.addEventListener('click', ev => {
-    if (api.locked()) return;
-    const [x, y] = st.toImg(ev); const r = st.hits(x, y, among)[0];
-    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return; }
+  function tapAt(x, y) {
+    if (api.locked()) return '';
+    const r = st.hits(x, y, among)[0];
+    if (!r) { st.stage.classList.remove('vx-miss'); void st.stage.offsetWidth; st.stage.classList.add('vx-miss'); return 'No part here.'; }
     const i = picks.indexOf(r);
     if (i >= 0) picks.splice(i); else if (picks.length < ex.answer.length) { picks.push(r); beep('tap'); }
     draw();
-  });
-  st.below.prepend(h('div', { class: 'tiny vx-hint' }, 'Tap the parts in the right order. Tap a numbered part again to undo from there. · ', counter));
+    return i >= 0 ? `Removed from step ${i + 1} on.` : `Step ${picks.length}: ${r.label || r.id}.`;
+  }
+  st.stage.addEventListener('click', ev => tapAt(...st.toImg(ev)));
+  st.keyboard({ tap: tapAt, undo: () => { if (api.locked() || !picks.length) return ''; picks.pop(); draw(); return 'Last step removed.'; },
+    describe: (x, y) => { const r = st.hits(x, y, among)[0]; hov.set(r?.id); return r ? (r.label || r.id) + (picks.includes(r) ? ` (step ${picks.indexOf(r) + 1})` : '') : 'No part here.'; } });
+  st.below.prepend(h('div', { class: 'tiny vx-hint' }, 'Tap the parts in the right order. Tap a numbered part again to undo from there. ⌨️ arrows + Enter, Backspace undoes. · ', counter));
   draw();
   return {
     el: st.el,
@@ -1380,6 +1408,10 @@ function figureBlock(b) {
       pinned = r && pinned !== r ? r : null;
       pinned ? showTip(r, ...rCenter(r)) : tipEl.classList.remove('on');
     });
+    st.keyboard({   // keyboard exploring: arrows move, the part under the crosshair is shown and announced; Enter peeks under a cover
+      tap: (x, y) => { const r = st.hits(x, y)[0]; const m = r && st.masks[r.id]; if (m && !m.classList.contains('off')) { m.classList.add('off'); return 'Uncovered: ' + (r.label || r.id); } return r ? (r.label || r.id) + (r.note ? '. ' + r.note : '') : 'Nothing here.'; },
+      undo: () => '',
+      describe: (x, y) => { const r = st.hits(x, y)[0]; if (r) showTip(r, ...rCenter(r)); else tipEl.classList.remove('on'); return r ? (r.label || r.id) : 'Nothing here.'; } });
     const named = regs.filter(r => r.label && !/-area$/.test(r.id));
     let hidden = false;
     const hideBtn = h('button', { class: 'btn small ghost', onclick: () => { hidden = !hidden; named.forEach(r => st.mask(r.id, hidden)); hideBtn.textContent = hidden ? '👀 Show labels' : '🙈 Hide labels'; } }, '🙈 Hide labels');
@@ -1426,13 +1458,46 @@ function topbar() {
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
     h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
+    h('button', { class: 'chip explorechip', title: 'Explore: every public subject — info, statistics, study it', onclick: () => Noema.explore() }, '🌍', h('span', { class: 'hide-s' }, ' Explore')),
     timer,
     h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: 'Day streak' }),
     h('button', { class: 'iconbtn srcbtn', title: 'Sources', onclick: () => toggleSourcesDeck() }, '📚'),
     h('button', { class: 'iconbtn hide-m', title: 'Theme', onclick: () => { S.settings.theme = isDark() ? 'light' : 'dark'; save(); applyTheme(); route(); } }, '🌓'),
+    bellButton(),
     h('button', { class: 'iconbtn', title: 'Settings', onclick: openSettings }, '⚙️'),
     h('button', { class: 'iconbtn tutor', title: 'Open tutor', onclick: () => openTutor() }, TUTOR.avatar, h('span', {}, 'Tutor')),
     h('button', { class: 'acchip', title: `${ACCOUNT.name} — account, backup & sync`, onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
+}
+
+/* ---------- 🔔 notifications: subjects shared with me (bell + banner) ---------- */
+function bellButton() {
+  const badge = h('span', { class: 'bellbadge' });
+  const b = h('button', { class: 'iconbtn bell', id: 'bellbtn', title: 'Notifications', 'aria-label': 'Notifications', onclick: () => openNotes() }, '🔔', badge);
+  Noema.notes.on(list => { badge.textContent = list.length || ''; badge.style.display = list.length ? '' : 'none'; b.classList.toggle('has', !!list.length); });
+  return b;
+}
+function openNotes() {
+  modal((box, close) => {
+    const body = h('div');
+    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? 'Nothing new. 🎈' : 'Notifications need a ☁️ cloud account (Account menu → Cloud).')); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } }))); };
+    Noema.notes.on(draw);
+    box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 Notifications'), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
+  });
+}
+function shareBanner() {
+  const bar = h('div', { class: 'sharebar', role: 'status' });
+  let later = new Set();
+  const draw = list => {
+    const items = list.filter(x => !later.has(x.id)); bar.innerHTML = '';
+    bar.classList.toggle('on', !!items.length); if (!items.length) return;
+    const sh = items[0];
+    bar.append(h('span', { class: 'grow' }, '📬 ', h('b', {}, sh.from_name || sh.from_email), ' wants to share ', h('b', {}, `“${sh.title}”`), ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
+      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(`✅ “${s.title}” added to your subjects`); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, '✓ Accept'),
+      h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + er.message)); } }, '✕ Reject'),
+      h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
+  };
+  Noema.notes.on(draw);
+  return bar;
 }
 
 /* ---------- home ---------- */
@@ -1918,7 +1983,7 @@ document.addEventListener('keydown', e => {
 /* ---------- boot ---------- */
 function boot() {
   applyTheme();
-  document.body.append(topbar(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
+  document.body.append(topbar(), shareBanner(), h('main'), h('div', { class: 'scrim', onclick: closeTutor }), h('aside', { class: 'drawer' }));
   renderTopStats();
   addEventListener('hashchange', route);
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => route());
@@ -2535,6 +2600,7 @@ const ACC_VIEWS = {
         h('span', { style: { fontSize: '22px' } }, s.emoji || '📘'),
         h('div', { class: 'grow' }, h('b', {}, s.title), h('div', { class: 'tiny' }, `${s.origin === 'library' ? 'Library' : s.origin === 'private' ? '🔒 Private (folder)' : '📥 Imported'} · ${s.counts?.chapters ?? '?'} chapters · ${s.counts?.exercises ?? '?'} exercises`)),
         s.id === SUBJ.id ? h('span', { class: 'pill c' }, 'open') : h('button', { class: 'btn small', onclick: () => Noema.switchTo(ACCOUNT.id, s.id) }, 'Open'),
+        s.origin !== 'library' ? h('button', { class: 'iconbtn', title: 'Share or make public', onclick: () => Noema.share(s) }, '🔗') : null,
         s.origin === 'imported' ? h('button', { class: 'iconbtn', title: 'Remove imported pack (progress is kept)', onclick: () => confirmBox(`Remove the imported pack “${s.title}”? Your progress in it is kept.`, async () => { await Noema.idb.del('packs', ACCOUNT.id + '|' + s.id); Noema.kv.del(Noema.kv.accountKey('packmeta:' + s.id)); toast('Removed'); }) }, '🗑️') : null))),
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
@@ -2635,11 +2701,31 @@ const ACC_VIEWS = {
         h('button', { class: 'btn', onclick: async () => { try { await NoemaCloud.snapshot('Manual snapshot'); toast('📸 Snapshot saved'); drawSnaps(); } catch (e) { toast('⚠️ ' + e.message); } } }, '📸 Take snapshot'),
         h('label', { class: 'btn' }, '🗄️ Upload database backup…', h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await NoemaCloud.uploadFile('db', e.target.files[0]); toast('☁️ Database backup uploaded'); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn ghost', onclick: async () => { await NoemaCloud.push(ACCOUNT.id).catch(() => { }); await NoemaCloud.signOut(); Noema.jset('noema1:current', {}); location.reload(); } }, 'Sign out')),
+      accSection('🩺', 'Check the cloud connection', { info: 'Runs a real round trip with your account — progress, conversations, snapshots, files, Explore, sharing — and cleans up after itself. Use it after updating the database or when something does not sync.', body: selfTestBox() }),
       accSection('📸', 'Cloud snapshots', { open: true, info: 'Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.', body: snapBox }),
       accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
     drawSnaps();
   },
 };
+
+function selfTestBox() {
+  const box = h('div');
+  const list = h('div', { class: 'selftest' });
+  const run = h('button', { class: 'btn primary', onclick: async () => {
+    run.disabled = true; list.innerHTML = ''; const rows = {};
+    const res = await NoemaCloud.selfTest(st => {
+      const r = rows[st.name] || (rows[st.name] = list.appendChild(h('div', { class: 'strow' })));
+      r.innerHTML = ''; r.className = 'strow ' + (st.running ? 'run' : st.ok ? 'ok' : 'bad');
+      r.append(h('span', { class: 'sti' }, st.running ? '⏳' : st.ok ? '✅' : '❌'), h('b', {}, st.name), st.ms != null ? h('span', { class: 'tiny' }, ` ${st.ms} ms ${st.note ? '· ' + st.note : ''}`) : null,
+        st.error ? h('div', { class: 'tiny' }, '⚠️ ' + st.error) : null, st.hint ? h('div', { class: 'tiny sthint' }, '👉 ' + st.hint) : null);
+    });
+    const bad = res.filter(r => !r.ok).length;
+    list.append(h('div', { class: 'fb ' + (bad ? 'bad' : 'ok') }, bad ? `${bad} check(s) failed — follow the 👉 hints.` : 'Everything works with the real cloud ✔'));
+    run.disabled = false;
+  } }, '🩺 Run the check');
+  box.append(h('p', { class: 'tiny' }, 'Takes a few seconds. Nothing of yours is changed: test data is deleted right away.'), run, list);
+  return box;
+}
 
 ACC_VIEWS.help = function (body) {
   const st = setupStatus();
@@ -2702,18 +2788,18 @@ const GUIDES = {
     '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
     '**Publish repository** → keep **Keep this code private** ticked.',
     'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
-  claude: { icon: '✨', title: 'Create a subject with Claude (your own Claude plan)', who: 'Everyone with a Claude account', steps: [
-    'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker).',
-    '**Once:** download the **noema-pack-builder** skill and upload it in Claude: **Customize → Skills → + → Upload a skill** (code execution on: Settings → Capabilities).',
-    `**Once, optional (cloud account):** in Claude **Customize → Connectors → + → Add custom connector** with the URL ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'}; sign in to noema-lite and approve.`,
-    'Open Claude, attach your PDFs / notes / images / links and paste the prompt from the app. Claude reads everything, adds pictures (from your sources, from the web and its own diagrams/graphs) and builds the pack.',
-    'With the connector the new subject appears in your picker; otherwise import the .json file Claude gives you (📥 Import subject pack).'],
-    notes: ['It uses YOUR Claude plan — noema-lite never sees your Claude login. Free works for small sources; big PDFs need Pro/Max.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
+  claude: { icon: '✨', title: 'Create a subject with Claude', who: 'Everyone', steps: [
+    'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.',
+    '**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.',
+    `**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.`,
+    'Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.',
+    'Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.'],
+    notes: ['Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
   friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
     `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
     'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',
     'Each friend adds **their own free Gemini key** (guide: “Get your free Gemini API key”).',
-    'Want to give them a private subject? Account menu → 📚 Subjects → **⬇️ Export pack** → send the file → they use **📥 Import subject pack**.'],
+    'Want to give them one of your subjects? Subject picker → **🔗** on the subject → *Share with a person* (their e-mail) — they get a 🔔 and accept. Or **🌍 Make it public** so everybody finds it in Explore.'],
     notes: ['Supabase’s built-in email service sends only a few emails per hour: for more than a handful of friends, either turn off “Confirm email” (Authentication → Providers → Email) or connect your own SMTP.'] },
 };
 function guideBody(id, { compact = false } = {}) {

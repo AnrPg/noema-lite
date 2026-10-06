@@ -119,7 +119,7 @@ Every time sources are turned into a subject pack (or added to one), the visual 
 | kind | what | how | `origin` |
 |---|---|---|---|
 | **Pictures from the sources** | every figure, photo, scan, chart, table-as-image and vector diagram inside the PDFs / files | `tools/extract_images.py scan SOURCE.pdf OUT/` (embedded images + page renders, contact sheet) → `crop` the useful ones at 200 dpi | `source` |
-| **Pictures from the web** | photographs **and** diagrams that add information the sources lack (anatomy plates, micrographs, real apparatus, maps, real software screenshots…) — even when the sources have no pictures at all | `tools/fetch_image.py` (Wikimedia Commons resolved automatically) | `web` |
+| **Pictures from the web** | photographs **and** diagrams that add information the sources lack (anatomy plates, micrographs, real apparatus, maps, real software screenshots…) — even when the sources have no pictures at all; any licence, source always recorded (§6) | `tools/fetch_image.py` (Wikimedia Commons resolved automatically) | `web` |
 | **Drawings & graphs we make** | clean redraws of the sources’ diagrams, process flows, timelines; **function graphs** (γραφικές παραστάσεις) whenever the subject has functions, rates, distributions, kinetics… | `tools/svgkit.py` — `Diagram` and `Plot` (curves, points, intervals → regions) | `drawn` / `plot` |
 
 Rules:
@@ -146,22 +146,40 @@ Rules:
 
 ## 6. Where web pictures may come from (licences)
 
-Only pictures we may reuse, always with author, licence and a link back (the app shows them under
-every picture). `tools/noema_lib.ALLOWED_LICENSES`: own, CC0, public domain, CC BY, CC BY-SA,
-Apache-2.0, MIT, BSD, OGL, U.S. Government works. **Never** NC (non-commercial), ND (no
-derivatives) or “all rights reserved” — e.g. vendor documentation screenshots are usually *not* reusable.
+noema-lite is a **personal study app**: you may use **any** picture you find — openly licensed or not —
+**as long as its source is recorded**: `url` (the page it came from), `credit` (author / owner) and
+`license` (what the page says, e.g. "CC BY-SA 4.0", "CC BY-NC 4.0", "All rights reserved"). The app shows
+this under every picture with a link back.
 
-Good places to look (check each file’s own licence):
+* **Open** licences (`tools/noema_lib.OPEN_LICENSES`: own, CC0, public domain, CC BY, CC BY-SA, Apache-2.0,
+  MIT, BSD, OGL, U.S. Government works) can be shared and published freely.
+* Everything else (NC, ND, all rights reserved, unknown) is marked **`restricted`** by the build: fine for
+  your own study; the app **warns** before you make such a pack public or share it with someone, because
+  redistributing it may need the owner’s permission (not legal advice).
+* Quality and information value still come first (§5): sharp, correct, relevant, ≥ 800 px.
+
+Good places to look:
 
 | subject area | sources |
 |---|---|
-| anatomy, medicine, biology | Wikimedia Commons (Gray’s Anatomy plates, public domain; many CC BY-SA diagrams), OpenStax Anatomy & Physiology / Biology figures (CC BY 4.0), Servier Medical Art (CC BY 4.0), NIH / NCI / CDC image libraries (U.S. public domain), Open-i |
-| physics, chemistry, earth & space | Wikimedia Commons, NASA (public domain), NOAA, USGS, OpenStax Physics / Chemistry (CC BY 4.0) |
-| geography, history, art | Wikimedia Commons, Library of Congress & Smithsonian Open Access (CC0), national archives |
-| software & data engineering | open-source project docs under Apache-2.0 / MIT (e.g. the Apache Spark docs images), own screenshots of open-source tools |
+| anatomy, medicine, biology | Wikimedia Commons (Gray’s Anatomy plates, many CC BY-SA diagrams), OpenStax (CC BY 4.0), Servier Medical Art (CC BY 4.0), NIH / NCI / CDC libraries, Open-i, textbook publishers’ figure pages (restricted) |
+| physics, chemistry, earth & space | Wikimedia Commons, NASA, NOAA, USGS, OpenStax, university lecture pages (often restricted) |
+| geography, history, art | Wikimedia Commons, Library of Congress, Smithsonian Open Access, museum collections |
+| software & data engineering | official docs and blogs (screenshots: usually restricted), open-source project docs (Apache-2.0 / MIT) |
 
 `media.json` for a web picture:
 ```json
 { "id": "heart-gray", "file": "heart-gray.jpg", "origin": "web", "alt": "…", "credit": "Henry Gray (Gray’s Anatomy, 1918)",
   "license": "Public domain", "url": "https://commons.wikimedia.org/wiki/File:Gray490.png", "retrieved": "2026-10-06", "regions": [ … ] }
+```
+
+**Web pictures the app downloads (`"fetch": "app"`).** When the builder's sandbox has no internet (✨ Create
+with Claude → *Here in noema-lite*, or a claude.ai plan without network access), the picture is not stored
+as a file: the entry has no `file` but the **direct image url** and its **pixel size**; noema-lite downloads
+and embeds it when the pack is imported (through `/api/img` if the host blocks browsers), and shows it from
+the web until then. Regions use the `w × h` coordinates.
+```json
+{ "id": "heart-front", "origin": "web", "fetch": "app", "url": "https://upload.wikimedia.org/…/Heart_anterior.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Heart_anterior.jpg", "retrieved": "2026-10-07", "w": 1600, "h": 1200,
+  "alt": "…", "credit": "…", "license": "CC BY-SA 4.0", "regions": [ … ] }
 ```

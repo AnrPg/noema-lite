@@ -2,7 +2,7 @@
 window.NOEMA_REGISTRY = {
  "format": "noema-registry",
  "v": 1,
- "builtAt": "2026-10-06T20:14:54+00:00",
+ "builtAt": "2026-10-06T21:47:37+00:00",
  "groups": [
   {
    "id": "data-cloud",
@@ -77,9 +77,117 @@ window.NOEMA_REGISTRY = {
     "playbooks": 106,
     "flashcards": 580,
     "visual": 71,
-    "media": 19
+    "media": 19,
+    "pictures": 19
    },
-   "version": "cc44939c9acaae9f"
+   "version": "cc44939c9acaae9f",
+   "chapters": [
+    {
+     "num": 1,
+     "title": "Foundations: Storage, Tables & Transactions",
+     "emoji": "🧱",
+     "sections": 12,
+     "exercises": 99
+    },
+    {
+     "num": 2,
+     "title": "Data Engineering Building Blocks",
+     "emoji": "🧱",
+     "sections": 11,
+     "exercises": 98
+    },
+    {
+     "num": 3,
+     "title": "Identity, Governance & Shipping Code",
+     "emoji": "🔐",
+     "sections": 14,
+     "exercises": 100
+    },
+    {
+     "num": 4,
+     "title": "Databricks Platform Tour",
+     "emoji": "🧭",
+     "sections": 16,
+     "exercises": 140
+    },
+    {
+     "num": 5,
+     "title": "Delta Lake Internals",
+     "emoji": "🔺",
+     "sections": 12,
+     "exercises": 116
+    },
+    {
+     "num": 6,
+     "title": "Delta Table Engineering & Optimization",
+     "emoji": "🛠️",
+     "sections": 14,
+     "exercises": 117
+    },
+    {
+     "num": 7,
+     "title": "Compute Landscape: Every Compute & Every Axis",
+     "emoji": "🧭",
+     "sections": 12,
+     "exercises": 95
+    },
+    {
+     "num": 8,
+     "title": "Compute Anatomy & Access Control",
+     "emoji": "⚙️",
+     "sections": 14,
+     "exercises": 132
+    },
+    {
+     "num": 9,
+     "title": "Compute Mastery: From VM to Task",
+     "emoji": "⚙️",
+     "sections": 16,
+     "exercises": 176
+    },
+    {
+     "num": 10,
+     "title": "The Mastery Roadmap",
+     "emoji": "🗺️",
+     "sections": 15,
+     "exercises": 128
+    },
+    {
+     "num": 11,
+     "title": "Unity Catalog Mastery",
+     "emoji": "🛡️",
+     "sections": 16,
+     "exercises": 173
+    },
+    {
+     "num": 12,
+     "title": "Data Ingestion: Files, COPY INTO & Auto Loader",
+     "emoji": "📥",
+     "sections": 16,
+     "exercises": 178
+    },
+    {
+     "num": 13,
+     "title": "Structured Streaming",
+     "emoji": "🌊",
+     "sections": 16,
+     "exercises": 163
+    }
+   ],
+   "sources": [
+    {
+     "title": "Databricks — Part 1",
+     "subtitle": "Prerequisites, platform tour, Delta Lake, compute, mastery roadmap",
+     "pages": "1–402",
+     "url": ""
+    },
+    {
+     "title": "Databricks — Part 2",
+     "subtitle": "Unity Catalog, data ingestion (COPY INTO, Auto Loader), Structured Streaming",
+     "pages": "403–569",
+     "url": ""
+    }
+   ]
   }
  ],
  "accounts": [

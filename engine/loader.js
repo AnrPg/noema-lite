@@ -170,7 +170,7 @@
     const allow = Array.isArray(a.subjects) ? new Set(a.subjects) : null;
     const list = (REG.subjects || []).filter(s => (!s.owner || s.owner === acc) && (!allow || allow.has(s.id) || s.owner === acc)).map(s => ({ ...s, origin: s.owner ? 'private' : 'library' }));
     const imported = await importedPacks(acc);
-    imported.forEach(p => { const m = p.subject; if (!list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version }); });
+    imported.forEach(p => { const m = p.subject; const extra = jget(KV.accountKey('packmeta:' + m.id, acc), null) || {}; if (!list.some(s => s.id === m.id)) list.push({ ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner }); });
     // imported packs known from synced metadata (e.g. imported on another device, stored in the cloud)
     ls.keys(`${P}${acc}:a:packmeta:`).forEach(k => { const m = jget(k, null); if (m && !list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported' }); });
     return list.map(s => ({ ...s, hidden: hidden.has(s.id) }));
@@ -185,6 +185,15 @@
   /* ---------------- pack loading ---------------- */
   function loadScript(src) { return new Promise((res, rej) => { const s = el('script', { src }); s.onload = res; s.onerror = () => rej(new Error('Could not load ' + src)); document.head.append(s); }); }
   function loadCSS(href) { return new Promise(res => { const l = el('link', { rel: 'stylesheet', href }); l.onload = res; l.onerror = res; document.head.append(l); }); }
+  /** "fetch": "app" web pictures (docs/VISUAL.md §6): download + embed once, so the subject also works offline.
+      Pictures that cannot be downloaded now stay as links (shown from the web) and are tried again next time. */
+  const needsPictures = p => Object.values(p?.media || {}).some(m => m.fetch === 'app' && !m.data);
+  async function embedWebPictures(acc, p, { wait = 20000 } = {}) {
+    if (!needsPictures(p) || !window.NoemaClaude) return p;
+    const job = NoemaClaude.fillWebPictures(p).then(r => { if (r.embedded) IDB.put('packs', acc + '|' + p.subject.id, p).catch(() => { }); });
+    await Promise.race([job, new Promise(r => setTimeout(r, wait))]).catch(() => { });
+    return p;
+  }
   async function getPack(acc, meta) {
     window.NOEMA_PACKS = window.NOEMA_PACKS || {};
     if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id];
@@ -192,10 +201,10 @@
     if (meta.origin === 'imported') {
       cached = await IDB.get('packs', acc + '|' + meta.id);
       const stale = cached && meta.version && cached.version && cached.version !== meta.version && window.NoemaCloud && NoemaCloud.session();
-      if (cached && !stale) return cached;     // a newer version exists in the cloud (e.g. Claude updated it) → download below
+      if (cached && !stale) { if (needsPictures(cached)) embedWebPictures(acc, cached, { wait: 0 }); return cached; }     // a newer version exists in the cloud (e.g. Claude updated it) → download below
     }
     if (meta.path) { await loadScript(meta.path); if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id]; }
-    if (window.NoemaCloud && NoemaCloud.session()) { const p = await NoemaCloud.downloadPack(meta.id).catch(() => null); if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); return p; } }
+    if (window.NoemaCloud && NoemaCloud.session()) { const p = await NoemaCloud.downloadPack(meta.id).catch(() => null); if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); return embedWebPictures(acc, p); } }
     if (cached) return cached;
     throw new Error(`The study pack for “${meta.title || meta.id}” could not be loaded.`);
   }
@@ -297,53 +306,445 @@
             const items = subs.filter(s => (groups.some(x => x.id === s.group) ? s.group : 'other') === g.id && (!term || (s.title + ' ' + (s.description || '')).toLowerCase().includes(term)));
             if (!items.length) return;
             list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
-              el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100); return el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
-                el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o' }, s.origin === 'private' ? '🔒' : '📥') : null, pct ? el('span', { class: 'p' }, pct + '%') : null); }))));
+              el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
+                const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
+                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
+                if (s.origin === 'library') return chip;
+                return el('span', { class: 'noema-chipwrap' }, chip, el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
           });
           if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.')));
         };
         const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
-        box.append(brandHead('What do you want to study?', `${a.emoji || ''} ${a.name}`), q, list,
-          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide() }, '✨ Create with Claude'), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, '👤 Switch profile'),
+        const reqs = el('div', { class: 'nx-reqs' });
+        Notes.on(pending => { reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, `📬 ${pending.length} subject(s) shared with you`), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
+        box.append(brandHead('What do you want to study?', `${a.emoji || ''} ${a.name}`), reqs, q, list,
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, '✨ Create with Claude'), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, '🌍 Explore'), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, '👤 Switch profile'),
             closable ? el('button', { class: 'btn small', onclick: () => { close(); resolve(null); } }, 'Close') : null));
         draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
       }, { closable });
     });
   }
   async function importPackFile(acc, file) {
-    const p = JSON.parse(await file.text());
+    let p; try { p = JSON.parse(await file.text()); } catch (e) { throw new Error('This file is not a noema-lite subject pack.'); }
+    const s = await importPack(acc, p);
+    toastL(`📥 “${s.title}” imported`);
+    return s;
+  }
+
+  /* ---------------- Sharing, Explore & notifications (docs/SHARING.md) ---------------- */
+  const fmtN = n => Number(n || 0).toLocaleString();
+  const nOf = (n, one, many = one + 's') => `${fmtN(n)} ${Number(n) === 1 ? one : many}`;
+  const isCloudAcc = acc => !!(window.NoemaCloud && NoemaCloud.session() && acc === 'u_' + NoemaCloud.session().user.id);
+  /** Everything another learner wants to know before choosing a subject (stored with public packs and shares). */
+  function packInfo(p, acc) {
+    const ch = p.chapters || [];
+    const media = p.media || {};
+    const exN = ch.reduce((a, c) => a + (c.exercises || []).length, 0);
+    return {
+      counts: { chapters: ch.length, sections: ch.reduce((a, c) => a + (c.sections || []).length, 0), exercises: exN,
+        visual: ch.reduce((a, c) => a + (c.exercises || []).filter(e => /^img_/.test(e.type)).length, 0), flashcards: ch.reduce((a, c) => a + (c.flashcards || []).length, 0),
+        playbooks: ch.reduce((a, c) => a + (c.debug || []).length, 0), pictures: Object.keys(media).length },
+      chapters: ch.map(c => ({ num: c.num, title: c.title, emoji: c.emoji || '', sections: (c.sections || []).length, exercises: (c.exercises || []).length })),
+      sources: ((p.sources && p.sources.sources) || []).map(s => ({ title: s.title, subtitle: s.subtitle || '', pages: s.pages || '', url: /^https?:/.test(s.url || '') ? s.url : (/^https?:/.test(s.file || '') ? s.file : '') })),
+      restricted: Object.values(media).filter(m => m.restricted).length,
+      language: p.subject.language || '', version: p.version || null, sizeKB: Math.round(JSON.stringify(p).length / 1024),
+      ownerName: (getAccount(acc) || {}).name || '', math: !!p.subject.features?.math, code: !!p.subject.features?.code,
+    };
+  }
+  /** A readable info card: stats, chapters (numbered list), sources (with links). */
+  /** The chapter list as Markdown (numbered), rendered and sanitised, in a fixed-height scroll box. */
+  const mdEsc = t => String(t || '').replace(/([\\`*_[\]<>#|])/g, '\\$1');
+  function chaptersBox(chs) {
+    const md = chs.map((ch, i) => `${i + 1}. ${ch.emoji ? ch.emoji + ' ' : ''}**${mdEsc(ch.title)}**${ch.sections || ch.exercises ? ` — *${nOf(ch.sections, 'section')} · ${nOf(ch.exercises, 'exercise')}*` : ''}`).join('\n');
+    const box = el('div', { class: 'nx-chapters', tabindex: '0', 'aria-label': 'Chapters' });
+    if (window.marked && window.DOMPurify) box.innerHTML = DOMPurify.sanitize(marked.parse(md));
+    else box.append(el('ol', {}, ...chs.map(ch => el('li', {}, (ch.emoji ? ch.emoji + ' ' : '') + ch.title))));
+    return box;
+  }
+  function infoCard(s, m) {
+    const c = (m && m.counts) || s.counts || {};
+    const stat = (v, l) => v ? el('div', { class: 'nx-stat' }, el('b', {}, fmtN(v)), el('span', {}, l)) : null;
+    return el('div', { class: 'nx-info' },
+      el('div', { class: 'nx-infohead' }, el('span', { class: 'nx-emo' }, s.emoji || '📘'), el('div', {}, el('h3', {}, s.title), el('div', { class: 'tiny' }, [s.owner_name || (m && m.ownerName) ? '👤 ' + (s.owner_name || m.ownerName) : '📚 noema-lite library', m && m.language || s.language ? '🗣️ ' + (m && m.language || s.language) : '', m && m.sizeKB ? `💾 ${fmtN(m.sizeKB)} KB` : ''].filter(Boolean).join(' · ')))),
+      s.description ? el('p', { class: 'nx-desc' }, s.description) : null,
+      el('div', { class: 'nx-stats' }, stat(c.chapters, 'chapters'), stat(c.sections, 'sections'), stat(c.exercises, 'exercises'), stat(c.visual, 'picture exercises'), stat(c.pictures || c.media, 'pictures'), stat(c.flashcards, 'flashcards'), stat(c.playbooks, 'debug playbooks')),
+      m && m.chapters && m.chapters.length ? el('div', {}, el('div', { class: 'nx-lbl' }, `📖 ${nOf(m.chapters.length, 'chapter')}`), chaptersBox(m.chapters)) : null,
+      m && m.sources && m.sources.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '📚 Sources'), el('ul', { class: 'nx-sources' }, ...m.sources.map(x => el('li', {}, x.url ? el('a', { href: x.url, target: '_blank', rel: 'noopener' }, x.title + ' ↗') : x.title, x.subtitle ? el('span', { class: 'tiny' }, ' — ' + x.subtitle) : null, x.pages ? el('span', { class: 'tiny' }, ` (pages ${x.pages})`) : null)))) : null,
+      m && m.restricted ? el('p', { class: 'tiny' }, `🔒 ${m.restricted} picture(s) are not openly licensed (personal study use).`) : null);
+  }
+  /** Turn a pack object into one of the account's subjects (local + cloud). */
+  async function importPack(acc, p, extra = {}) {
     if (LEGACY.packFormats.includes(p.format)) p.format = 'noema-pack';
     if (p.format !== 'noema-pack' || !p.subject?.id || !Array.isArray(p.chapters)) throw new Error('This file is not a noema-lite subject pack.');
     p.counts = p.counts || countPack(p);
+    await embedWebPictures(acc, p);
     await IDB.put('packs', acc + '|' + p.subject.id, p);
-    KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null }));
-    if (window.NoemaCloud && NoemaCloud.session() && acc === 'u_' + NoemaCloud.session().user.id) NoemaCloud.uploadPack(p).catch(e => console.warn(e));
-    toastL(`📥 “${p.subject.title}” imported`);
-    return { ...p.subject, origin: 'imported', counts: p.counts };
+    KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null, ...extra }));
+    if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
+    return { ...p.subject, origin: 'imported', counts: p.counts, ...extra };
   }
 
-  /* ---------------- Claude: skill + connector (docs/CLAUDE_CONNECTOR.md) ---------------- */
+  /* ---- 🔗 share dialog: public + with a person ---- */
+  async function shareDialog(acc, s) {
+    let pack; try { pack = await getPack(acc, s); } catch (e) { toastL('⚠️ ' + e.message, 4000); return; }
+    const meta = packInfo(pack, acc);
+    overlay((box, close) => {
+      const draw = async () => {
+        box.innerHTML = '';
+        box.append(brandHead(`🔗 Share “${s.title}”`, `${nOf(meta.counts.chapters, 'chapter')} · ${nOf(meta.counts.exercises, 'exercise')} · ${nOf(meta.counts.pictures, 'picture')}`));
+        if (!isCloudAcc(acc)) {
+          box.append(el('div', { class: 'noema-form' }, el('p', {}, '☁️ Sharing needs a cloud account (free). Sign in with one — or send the file instead:'),
+            el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => { const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(pack)], { type: 'application/json' })), download: s.id + '.json' }); a.click(); } }, '⬇️ Download the file to send'))),
+            el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+          return;
+        }
+        const warn = meta.restricted ? el('label', { class: 'nx-warn' }, el('input', { type: 'checkbox', id: 'nx-ack' }), ` ⚠️ ${meta.restricted} picture(s) in this subject are not openly licensed (fine for your own study). Sharing them may need the owners’ permission — I understand.`) : null;
+        const acked = () => !warn || warn.querySelector('input').checked;
+        const mine = await NoemaCloud.myPublished().catch(() => []);
+        const pub = (mine || []).find(r => r.subject_id === s.id);
+        const pubBox = el('div', { class: 'nx-sec' }, el('h4', {}, '🌍 Public', el('span', { class: 'nx-tip', title: 'Everyone who opens noema-lite can find it under 🌍 Explore, read its info and study it. You can withdraw it at any time.' }, 'ⓘ')),
+          el('p', { class: 'tiny' }, pub ? `Public since ${new Date(pub.updated_at).toLocaleDateString()} — visible to everyone in 🌍 Explore.` : 'Only you can see it now.'),
+          el('div', { class: 'row' }, pub
+            ? [el('button', { class: 'btn small', onclick: async e => { if (!acked()) return warn.classList.add('shake'); e.currentTarget.disabled = true; await NoemaCloud.publish(pack, meta); toastL('🌍 Updated'); draw(); } }, '🔄 Publish the newest version'),
+               el('button', { class: 'btn small ghost', onclick: async e => { e.currentTarget.disabled = true; await NoemaCloud.unpublish(s.id); toastL('Withdrawn'); draw(); } }, 'Withdraw')]
+            : el('button', { class: 'btn small primary', onclick: async e => { if (!acked()) { warn.classList.remove('shake'); void warn.offsetWidth; warn.classList.add('shake'); return; } const b = e.currentTarget; b.disabled = true; try { await NoemaCloud.publish(pack, meta); toastL('🌍 Public now'); draw(); } catch (er) { b.disabled = false; toastL('⚠️ ' + er.message, 5000); } } }, '🌍 Make it public')));
+        const email = el('input', { class: 'noema-input', type: 'email', placeholder: 'Their e-mail (the one they sign in with)' });
+        const msg = el('input', { class: 'noema-input', placeholder: 'Optional message, e.g. “for Friday’s exam”', maxlength: 200 });
+        const status = el('div', { class: 'tiny' });
+        const sent = el('div', { class: 'nx-sent' });
+        const personBox = el('div', { class: 'nx-sec' }, el('h4', {}, '👤 Share with a person', el('span', { class: 'nx-tip', title: 'They get a notification (🔔 and a banner) and choose Accept or Reject. After accepting it appears in their subjects. They need a noema-lite cloud account with this e-mail.' }, 'ⓘ')),
+          email, msg, el('div', { class: 'row' }, el('button', { class: 'btn small primary', onclick: async e => {
+            if (!acked()) { warn.classList.remove('shake'); void warn.offsetWidth; warn.classList.add('shake'); return; }
+            const b = e.currentTarget; b.disabled = true; status.textContent = 'Sending…';
+            try { await NoemaCloud.shareWith(email.value, pack, meta, msg.value.trim()); status.textContent = `✅ Sent to ${email.value.trim().toLowerCase()} — they will see it next time they open noema-lite.`; email.value = ''; msg.value = ''; drawSent(); }
+            catch (er) { status.textContent = '⚠️ ' + er.message; } finally { b.disabled = false; }
+          } }, '📨 Send')), status, sent);
+        const drawSent = async () => {
+          const rows = ((await NoemaCloud.outgoingShares().catch(() => [])) || []).filter(r => r.subject_id === s.id);
+          sent.innerHTML = ''; if (!rows.length) return;
+          sent.append(el('div', { class: 'nx-lbl' }, 'Sent'), ...rows.map(r => el('div', { class: 'nx-sentrow' }, el('span', { class: 'grow' }, r.to_email), el('span', { class: 'pill nx-st-' + r.status }, { pending: '⏳ waiting', accepted: '✅ accepted', rejected: '✖ rejected', revoked: '↩ withdrawn' }[r.status] || r.status),
+            r.status === 'pending' ? el('button', { class: 'btn small ghost', onclick: async () => { await NoemaCloud.revokeShare(r.id); drawSent(); } }, 'Withdraw') : null)));
+        };
+        box.append(warn, pubBox, personBox, el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+        drawSent();
+      };
+      draw();
+    });
+  }
+
+  /* ---- 🌍 Explore: every public subject (library + published by users) ---- */
+  async function explore(acc, { onChoose } = {}) {
+    const choose = onChoose || (s => Noema.switchTo(acc, s.id));
+    let pub = [];
+    try { if (window.NoemaCloud && CFG.supabaseUrl) pub = (await NoemaCloud.listPublic()) || []; } catch (e) { console.warn('[explore]', e.message); }
+    const mine = new Map((await subjectsFor(acc)).map(s => [s.id, s]));
+    const lib = (REG.subjects || []).filter(s => !s.owner).map(s => ({ kind: 'library', id: s.id, title: s.title, emoji: s.emoji, description: s.description, language: s.language, counts: s.counts, meta: { counts: s.counts, chapters: s.chapters, sources: s.sources, language: s.language } }));
+    const users = pub.map(r => ({ kind: 'public', id: r.subject_id, owner: r.owner, owner_name: r.owner_name, title: r.title, emoji: r.emoji, description: r.description, language: r.language, counts: r.meta?.counts || {}, meta: r.meta || {}, updated_at: r.updated_at }));
+    const all = [...lib, ...users];
+    const study = async s => {
+      if (s.kind === 'library') return choose(s);
+      const have = mine.get(s.id);
+      if (have && have.origin !== 'library' && (have.version || null) === (s.meta.version || null)) return choose(have);
+      toastL('⬇️ Getting “' + s.title + '”…');
+      const r = await fetch(NoemaCloud.publicPackUrl(s.owner, s.id)); if (!r.ok) throw new Error('Could not download it (' + r.status + ')');
+      const p = await r.json(); if (REG.subjects.some(x => x.id === p.subject.id)) p.subject.id = p.subject.id + '-' + slugify(s.owner_name || 'shared');
+      const added = await importPack(acc, p, { publicFrom: s.owner, publicOwner: s.owner_name || '' });
+      toastL(`📥 “${p.subject.title}” added to your subjects`); choose(added);
+    };
+    overlay((box, close) => {
+      const q = el('input', { class: 'noema-input noema-search', placeholder: '🔎 Search public subjects…', oninput: () => draw() });
+      const grid = el('div', { class: 'nx-grid' });
+      const tipCard = el('div', { class: 'nx-hover' });
+      const touch = matchMedia('(hover: none)').matches;
+      const pick = async s => { hideTip(); close(); try { await study(s); } catch (e) { toastL('⚠️ ' + e.message, 5000); } };
+      // details: hover (mouse), focus (keyboard), press-and-hold (touch screens) — a click / tap only chooses the subject
+      let tipTimer = null, tipFor = null;
+      const hideTip = () => { clearTimeout(tipTimer); tipCard.classList.remove('on', 'sheet'); tipFor = null; };
+      const showTip = (s, card, { sheet = false } = {}) => {
+        tipCard.innerHTML = ''; tipCard.append(infoCard(s, s.meta));
+        if (sheet) tipCard.append(el('div', { class: 'row nx-sheetfoot' }, el('button', { class: 'btn primary', onclick: () => pick(s) }, '📚 Study this subject'), el('button', { class: 'btn small', onclick: hideTip }, 'Close')));
+        if (!tipCard.isConnected) document.body.append(tipCard);
+        tipFor = s.id; tipCard.classList.toggle('sheet', sheet);
+        if (sheet) {   // touch: a bottom sheet; tapping outside closes it
+          tipCard.style.cssText = ''; tipCard.classList.add('on');
+          setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!tipCard.contains(ev.target)) { hideTip(); } if (!tipCard.classList.contains('sheet') || !tipCard.contains(ev.target)) document.removeEventListener('pointerdown', off, true); }, true), 0);
+          return;
+        }
+        // fixed to the window, so it is never clipped by the dialog; below the card, or above it when there is no room
+        const r = card.getBoundingClientRect(), w = Math.min(400, innerWidth - 16);
+        tipCard.style.width = w + 'px'; tipCard.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px'; tipCard.style.top = '0px';
+        const h = Math.min(tipCard.offsetHeight || 400, innerHeight - 16);
+        tipCard.style.top = (r.bottom + 6 + h <= innerHeight - 8 ? r.bottom + 6 : Math.max(8, r.top - 6 - h)) + 'px'; tipCard.classList.add('on');
+      };
+      const draw = () => {
+        grid.innerHTML = ''; const t = q.value.trim().toLowerCase();
+        const items = all.filter(s => !t || (s.title + ' ' + (s.description || '') + ' ' + (s.owner_name || '')).toLowerCase().includes(t));
+        if (!items.length) grid.append(el('p', { class: 'tiny' }, all.length ? 'Nothing matches.' : 'No public subjects yet.'));
+        items.forEach((s, i) => {
+          let held = false, pressT = null, startXY = null;
+          const card = el('button', { class: 'nx-card', type: 'button', 'aria-label': s.title + ' — choose to study', style: { animationDelay: i * 30 + 'ms' },
+            onclick: e => { if (held) { e.preventDefault(); held = false; return; } pick(s); },
+            onmouseenter: () => { if (touch) return; clearTimeout(tipTimer); tipTimer = setTimeout(() => showTip(s, card), 180); },
+            onmouseleave: e => { clearTimeout(tipTimer); if (!tipCard.contains(e.relatedTarget)) hideTip(); },
+            onfocus: () => { if (!touch) showTip(s, card); }, onblur: () => { if (tipFor === s.id && !tipCard.classList.contains('sheet')) hideTip(); },
+            onpointerdown: e => { if (e.pointerType === 'mouse') return; held = false; startXY = [e.clientX, e.clientY]; clearTimeout(pressT); pressT = setTimeout(() => { held = true; navigator.vibrate?.(15); showTip(s, card, { sheet: true }); }, 450); },
+            onpointermove: e => { if (startXY && Math.hypot(e.clientX - startXY[0], e.clientY - startXY[1]) > 10) clearTimeout(pressT); },
+            onpointerup: () => clearTimeout(pressT), onpointercancel: () => clearTimeout(pressT),
+            oncontextmenu: e => { if (touch || held) e.preventDefault(); } },
+            el('span', { class: 'nx-emo' }, s.emoji || '📘'), el('b', {}, s.title));
+          grid.append(card);
+        });
+      };
+      box.classList.add('nx-explore');
+      box.append(brandHead('🌍 Explore', matchMedia('(hover: none)').matches ? 'Subjects anyone can study. Tap a subject to study it · press and hold it for the details.' : 'Subjects anyone can study. Click a subject to study it · point at it for the details.'), q, grid,
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+      draw(); setTimeout(() => q.focus(), 200);
+      const iv = setInterval(() => { if (!box.isConnected) { tipCard.remove(); clearInterval(iv); } }, 300);
+      tipCard.addEventListener('mouseleave', e => { if (!tipCard.classList.contains('sheet') && !e.relatedTarget?.closest?.('.nx-card')) hideTip(); });
+    });
+  }
+
+  /* ---- 🔔 incoming shares: bell + banner (engine) and the picker ---- */
+  const Notes = {
+    pending: [], listeners: [], timer: null, acc: null,
+    on(f) { this.listeners.push(f); f(this.pending); },
+    emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
+    async refresh() { if (!this.acc || !isCloudAcc(this.acc)) return this.pending; try { this.pending = (await NoemaCloud.incomingShares()) || []; this.emit(); } catch (e) { console.warn('[notes]', e.message); } return this.pending; },
+    start(acc) {
+      this.acc = acc; if (!isCloudAcc(acc)) return;
+      this.refresh(); clearInterval(this.timer); this.timer = setInterval(() => this.refresh(), 120e3);
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') this.refresh(); });
+    },
+    async accept(sh) {
+      const p = await NoemaCloud.downloadShared(sh.id);
+      if ((REG.subjects || []).some(x => x.id === p.subject.id)) p.subject.id = p.subject.id + '-' + slugify(sh.from_name || 'shared');
+      const added = await importPack(this.acc, p, { sharedBy: sh.from_name || sh.from_email, sharedAt: new Date().toISOString() });
+      await NoemaCloud.answerShare(sh.id, true);
+      this.pending = this.pending.filter(x => x.id !== sh.id); this.emit();
+      return added;
+    },
+    async reject(sh) { await NoemaCloud.answerShare(sh.id, false); this.pending = this.pending.filter(x => x.id !== sh.id); this.emit(); },
+  };
+  /** One request as a row: who, what (info), Accept / Reject. */
+  function shareRow(sh, { onAccepted } = {}) {
+    const row = el('div', { class: 'nx-req' },
+      el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || sh.from_email}`), ` wants to share `, el('b', {}, `“${sh.title}”`), ' with you',
+        el('div', { class: 'tiny' }, `${nOf(sh.meta?.counts?.chapters, 'chapter')} · ${nOf(sh.meta?.counts?.exercises, 'exercise')}` + (sh.message ? ` · “${sh.message}”` : ''))),
+      el('button', { class: 'btn small ghost', title: 'Details', onclick: () => overlay((b, c) => b.append(infoCard({ title: sh.title, emoji: sh.meta?.emoji, owner_name: sh.from_name }, sh.meta), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: c }, 'Back')))) }, 'ℹ️'),
+      el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(`✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, '✓ Accept'),
+      el('button', { class: 'btn small', onclick: async () => { await Notes.reject(sh).catch(er => toastL('⚠️ ' + er.message)); toastL('Rejected'); } }, '✕ Reject'));
+    return row;
+  }
+
+  /* ---------------- Claude: two ways (docs/CLAUDE_CONNECTOR.md) ----------------
+     A. here in noema-lite with the learner's Claude API key (engine/claude.js) — never leave the app
+     B. in the Claude app / website with the learner's Claude plan + the noema-lite connector (+ optional skill) */
   const SITE = (CFG.siteUrl || '').replace(/\/$/, '');
   const MCP_URL = SITE ? SITE + '/mcp' : '';
   const SKILL_URL = (location.protocol.startsWith('http') ? '' : SITE) + '/downloads/noema-pack-builder.zip';
-  const CLAUDE_PROMPT = 'Use the noema-pack-builder skill to create a noema-lite subject from the files I attach.\nSubject: …\nLanguage of the material: …\nMy goal: exam / understanding / project\nSave it to my noema-lite account with the connector if it is available.';
-  async function copyText(t, b) { try { await navigator.clipboard.writeText(t); if (b) { const o = b.textContent; b.textContent = '✓ Copied'; setTimeout(() => { b.textContent = o; }, 1600); } } catch (e) { window.prompt('Copy this:', t); } }
-  function claudeGuide() {
+  const CLAUDE_PROMPT = 'Create a noema-lite subject pack from the files I attached.\nSubject title: …\nLanguage of the material: …\nMy goal: exam / understanding / project\nUse the noema-pack-builder skill if you have it; otherwise use the noema-lite connector (noema_get_toolkit + noema_authoring_guide). Save the finished pack to my noema-lite account.';
+  async function copyText(t, b) { try { await navigator.clipboard.writeText(t); if (b) { const o = b.textContent; b.textContent = '✓ Copied'; setTimeout(() => { b.textContent = o; }, 1600); } } catch (e) { prompt('Copy this:', t); } }
+  const GR = { α: 'a', β: 'v', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'i', θ: 'th', ι: 'i', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'x', ο: 'o', π: 'p', ρ: 'r', σ: 's', ς: 's', τ: 't', υ: 'y', φ: 'f', χ: 'ch', ψ: 'ps', ω: 'o' };
+  const slugId = t => slugify(String(t).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[α-ω]/g, c => GR[c] || '')) || 'subject-' + Date.now().toString(36);
+  /** ⓘ — a small info toggle that works with mouse, touch and keyboard. */
+  const tip = (...txt) => el('details', { class: 'cg-tip' }, el('summary', { title: 'More info', 'aria-label': 'More info' }, 'i'), el('div', { class: 'cg-tipbody' }, ...txt));
+  const ext = (href, label) => el('a', { class: 'btn small', href, target: '_blank', rel: 'noopener' }, label + ' ↗');
+  /** One numbered step: a bold title (+ ⓘ), then a numbered list of small actions. */
+  const step = (title, info, ...subs) => el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, title), info ? tip(info) : null),
+    subs.length ? el('ol', { class: 'cg-sub' }, ...subs.filter(Boolean).map(s => s.tagName === 'LI' ? s : el('li', {}, s))) : null);
+  const sub = (...kids) => el('li', {}, ...kids);
+  const plain = (...kids) => el('li', { class: 'cg-plain' }, ...kids);   // a form field inside a step (not numbered)
+
+  function claudeGuide(acc = KV.acc, { onDone } = {}) {
     overlay((box, close) => {
-      box.append(brandHead('✨ Create a subject with Claude', 'Claude reads your PDFs, notes, images and links and builds the whole study pack — theory, exercises, pictures — with your own Claude plan.'),
-        el('ol', { class: 'noema-steps' },
-          el('li', {}, el('b', {}, 'Add the skill to your Claude — once. '), 'Download it; in Claude open ', el('i', {}, 'Customize → Skills → + → Upload a skill'), ' and choose the zip. (Code execution must be on: ', el('i', {}, 'Settings → Capabilities'), '.) ',
-            el('a', { class: 'btn small', href: SKILL_URL, download: 'noema-pack-builder.zip' }, '⬇️ Download the skill')),
-          MCP_URL ? el('li', {}, el('b', {}, 'Connect Claude to noema-lite — once, optional. '), 'Needs a ☁️ cloud account. In Claude: ', el('i', {}, 'Customize → Connectors → + → Add custom connector'), ', name ', el('b', {}, 'noema-lite'), ', URL ', el('code', {}, MCP_URL), ' ',
-            el('button', { class: 'btn small ghost', onclick: e => copyText(MCP_URL, e.currentTarget) }, '📋 Copy URL'), '. Claude then asks you to sign in to noema-lite and approve — finished subjects land in your picker by themselves.') : null,
-          el('li', {}, el('b', {}, 'Go. '), 'Open Claude, attach your sources and paste the prompt (fill in the dots). ',
-            el('button', { class: 'btn small ghost', onclick: e => copyText(CLAUDE_PROMPT, e.currentTarget) }, '📋 Copy the prompt'), ' ',
-            el('a', { class: 'btn small primary', href: 'https://claude.ai/new', target: '_blank', rel: 'noopener' }, '🚀 Open Claude')),
-          el('li', {}, el('b', {}, 'Study. '), 'With the connector the subject appears here (open the picker again). Without it, Claude gives you a .json file → ', el('b', {}, '📥 Import subject pack'), '.')),
-        el('p', { class: 'tiny' }, 'It runs on your own Claude account (Free works for small sources; big PDFs need Pro or Max). noema-lite never sees your Claude login, and Claude only gets the noema-lite connector’s tools: list your subjects and save study packs.'),
-        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+      box.classList.add('cg-box');
+      const done = s => { close(); if (onDone) onDone(s); else Noema.switchTo(acc, s.id); };
+      const home = async () => {
+        box.innerHTML = '';
+        box.append(brandHead('✨ Create a subject with Claude', 'Claude reads your PDFs, notes, pictures and links and builds the whole course: theory, exercises, picture exercises and flashcards.'));
+        const unfinished = window.NoemaClaude ? (await NoemaClaude.jobs(acc)).filter(j => j.status !== 'done') : [];
+        if (unfinished.length) box.append(el('div', { class: 'cg-resume' }, el('b', {}, '⏳ Not finished yet'), ...unfinished.slice(0, 3).map(j => el('div', { class: 'cg-jobrow' },
+          el('span', {}, `“${j.title}” · ${new Date(j.created).toLocaleString()} · ≈ $${NoemaClaude.cost(j.usage, j.model).toFixed(2)}`),
+          el('button', { class: 'btn small primary', onclick: () => progress(j) }, 'Resume'),
+          el('button', { class: 'btn small ghost', onclick: async () => { if (confirm('Delete this unfinished subject? What Claude did so far is lost.')) { await NoemaClaude.deleteJob(j.id); home(); } } }, 'Delete')))));
+        box.append(el('p', { class: 'cg-q' }, 'How do you want to work with Claude?'),
+          el('div', { class: 'cg-choices' },
+            el('button', { class: 'cg-choice', onclick: wayA }, el('span', { class: 'cg-ico' }, '🏠'), el('b', {}, 'A. Here in noema-lite'),
+              el('ul', {}, el('li', {}, 'You never leave this app'), el('li', {}, 'Needs a Claude API key: you pay Anthropic per use (a few dollars per subject — you see the cost live and set a limit)'), el('li', {}, 'Simplest: everything happens on this page'))),
+            el('button', { class: 'cg-choice', onclick: wayB }, el('span', { class: 'cg-ico' }, '💬'), el('b', {}, 'B. In the Claude app or website'),
+              el('ul', {}, el('li', {}, 'Uses your Claude plan (Free, Pro or Max) — no extra cost'), el('li', {}, 'You chat with Claude there; the finished subject arrives here by itself'), el('li', {}, 'Best for very big sources (Pro / Max)')))),
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+      };
+      const back = () => el('button', { class: 'btn small ghost cg-back', onclick: home }, '← Back');
+
+      /* ---------- A: API key, inside the app ---------- */
+      function wayA() {
+        box.innerHTML = '';
+        const C = window.NoemaClaude;
+        if (!C) { box.append(back(), el('p', {}, 'This noema-lite installation has no Claude module.')); return; }
+        const key = el('input', { class: 'noema-input', type: 'password', placeholder: 'sk-ant-…', autocomplete: 'off', spellcheck: 'false', value: C.Key.get(acc) });
+        const remember = el('input', { type: 'checkbox' }); remember.checked = C.Key.remembered(acc) || !C.Key.get(acc);
+        const kstat = el('div', { class: 'tiny cg-kstat' });
+        const model = el('select', { class: 'noema-input' }); const modelRow = el('div', { class: 'cg-model', style: { display: 'none' } }, el('label', {}, 'Claude model ', model, tip('The default is the newest “Sonnet”: very good quality for its price. “Opus” is the strongest and costs more; “Haiku” is cheaper but writes weaker courses.')));
+        let keyOk = false;
+        const checkKey = async () => {
+          const k = key.value.trim(); keyOk = false; modelRow.style.display = 'none';
+          if (!C.Key.looksValid(k)) { kstat.textContent = '⚠️ That does not look like a Claude API key — it starts with sk-ant- and is long. Copy it again from the Console.'; kstat.className = 'tiny cg-kstat bad'; return false; }
+          kstat.textContent = '⏳ Checking…'; kstat.className = 'tiny cg-kstat';
+          try {
+            const ms = await C.models(k); if (!ms.length) throw new Error('no models available for this key');
+            model.innerHTML = ''; ms.forEach(m => model.append(el('option', { value: m.id }, m.name)));
+            model.value = jget(KV.accountKey('claudeModel', acc), null) && ms.some(m => m.id === jget(KV.accountKey('claudeModel', acc), null)) ? jget(KV.accountKey('claudeModel', acc), null) : C.defaultModel(ms);
+            C.Key.set(acc, k, remember.checked); keyOk = true; modelRow.style.display = '';
+            kstat.textContent = '✅ The key works.' + (remember.checked ? ' It is remembered on this device only (never sent to the noema-lite cloud).' : ' It is kept only until you close this tab.'); kstat.className = 'tiny cg-kstat ok';
+            return true;
+          } catch (e) { kstat.textContent = '❌ ' + e.message; kstat.className = 'tiny cg-kstat bad'; return false; }
+        };
+        const files = []; const flist = el('ul', { class: 'cg-files' });
+        const drawFiles = () => { flist.innerHTML = ''; files.forEach((f, i) => flist.append(el('li', {}, `📄 ${f.name} · ${(f.size / 1048576).toFixed(1)} MB `, el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name, onclick: () => { files.splice(i, 1); drawFiles(); } }, '✕')))); };
+        const pick = el('input', { type: 'file', multiple: true, accept: '.pdf,.png,.jpg,.jpeg,.webp,.gif,.txt,.md,.csv,.json,.docx,.pptx,.xlsx', style: { display: 'none' }, onchange: e => { for (const f of e.target.files) if (!files.some(x => x.name === f.name && x.size === f.size)) files.push(f); e.target.value = ''; drawFiles(); } });
+        const drop = el('label', { class: 'cg-drop', ondragover: e => { e.preventDefault(); drop.classList.add('on'); }, ondragleave: () => drop.classList.remove('on'),
+          ondrop: e => { e.preventDefault(); drop.classList.remove('on'); for (const f of e.dataTransfer.files) files.push(f); drawFiles(); } }, pick, '📂 Choose files', el('span', { class: 'tiny' }, ' or drag them here'));
+        const links = el('textarea', { class: 'noema-input', rows: 2, placeholder: 'Optional: web links, one per line' });
+        const title = el('input', { class: 'noema-input', placeholder: 'e.g. Human heart anatomy' });
+        const lang = el('select', { class: 'noema-input' }, ...[['', 'Same as the sources'], ['en', 'English'], ['el', 'Ελληνικά'], ['de', 'Deutsch'], ['fr', 'Français'], ['es', 'Español'], ['it', 'Italiano'], ['ru', 'Русский']].map(([v, t]) => el('option', { value: v }, t)));
+        const goal = el('select', { class: 'noema-input' }, ...[['exam', 'Pass an exam'], ['understanding', 'Understand it deeply'], ['project', 'Use it in a project / at work']].map(([v, t]) => el('option', { value: v }, t)));
+        const notes = el('textarea', { class: 'noema-input', rows: 2, placeholder: 'Optional: anything Claude should know (e.g. “focus on chapters 3–5”, “I am a beginner”)' });
+        const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', step: '1', value: String(jget(KV.accountKey('claudeBudget', acc), 15)) });
+        const err = el('div', { class: 'tiny cg-kstat bad' });
+        const go = el('button', { class: 'btn primary cg-go', onclick: async () => {
+          err.textContent = '';
+          if (!keyOk && !(await checkKey())) { err.textContent = '👆 Step 4: the key needs to work first.'; key.focus(); return; }
+          if (!files.length && !links.value.trim()) { err.textContent = '👆 Step 5: add at least one file or link.'; return; }
+          if (!title.value.trim()) { err.textContent = '👆 Step 6: give the subject a title.'; title.focus(); return; }
+          const b = Math.max(1, +budget.value || 15); jset(KV.accountKey('claudeBudget', acc), b); jset(KV.accountKey('claudeModel', acc), model.value);
+          let sid = slugId(title.value); if (REG.subjects.some(s => s.id === sid)) sid += '-mine';
+          go.disabled = true; go.textContent = '⏳ Preparing…';
+          const logs = el('div', { class: 'tiny' }); box.append(logs);
+          try {
+            const job = await C.create({ acc, key: key.value.trim(), model: model.value, title: title.value.trim(), subjectId: sid, language: lang.value, goal: goal.value, notes: notes.value.trim(),
+              links: links.value.split('\n').map(x => x.trim()).filter(x => /^https?:\/\//.test(x)), files, budget: b, onLog: t => { logs.textContent = t; } });
+            progress(job, { start: true });
+          } catch (e) { go.disabled = false; go.textContent = '🚀 Start'; err.textContent = '❌ ' + e.message; logs.remove(); }
+        } }, '🚀 Start');
+        box.append(back(), brandHead('🏠 Create it here in noema-lite', 'Follow the steps in order. Steps 1–3 are needed only the first time.'),
+          el('ol', { class: 'cg-steps' },
+            step('Create a Claude Console account', ['This is Anthropic’s account for the Claude API (Anthropic makes Claude). It is separate from a claude.ai chat plan: a Pro or Max subscription does ', el('b', {}, 'not'), ' include API credit.'],
+              sub('Open the Claude Console: ', ext('https://platform.claude.com/', 'platform.claude.com')),
+              sub('Click ', el('b', {}, 'Sign up'), ' and use your e-mail or your Google account.'),
+              sub('Open the e-mail Anthropic sends you and confirm it.'),
+              sub(el('span', { class: 'tiny' }, 'Already have an account? Skip to step 2.'))),
+            step('Add some credit', 'You pay only for what Claude actually uses. A typical subject costs a few dollars; very big PDFs cost more. noema-lite shows the estimated cost while Claude works and stops at the limit you set in step 7.',
+              sub('Open ', ext('https://platform.claude.com/settings/billing', 'Settings → Billing'), '.'),
+              sub('Buy credit — a small amount (for example $5–10) is enough to start.'),
+              sub('Recommended: set a monthly spending limit (in the Console: ', el('b', {}, 'Settings → Limits'), ').')),
+            step('Create an API key', 'The key is like a password that lets noema-lite ask Claude for you. Anyone who has it can spend your credit — do not send it to anybody. You can delete it in the Console at any time.',
+              sub('Open ', ext('https://platform.claude.com/settings/keys', 'Settings → API keys'), '.'),
+              sub('Click ', el('b', {}, 'Create key'), ', name it ', el('b', {}, 'noema-lite'), ', and confirm.'),
+              sub('Click ', el('b', {}, 'Copy'), '. The key starts with ', el('code', {}, 'sk-ant-'), ' and is shown only once.')),
+            step('Paste the key here', 'The key stays in this browser. It is never uploaded to the noema-lite cloud and is not part of backups.',
+              sub('Click in the box and paste the key (', el('kbd', {}, 'Ctrl'), ' + ', el('kbd', {}, 'V'), ' on Windows and Linux, ', el('kbd', {}, '⌘'), ' + ', el('kbd', {}, 'V'), ' on a Mac):', key),
+              sub('Click ', el('button', { class: 'btn small', onclick: checkKey }, '✔️ Check the key'), ' — a green ✅ means it works.'),
+              plain(el('label', { class: 'tiny' }, remember, ' Remember the key on this device (untick on a shared computer)')),
+              plain(kstat, modelRow)),
+            step('Add your sources', 'PDFs, pictures (photos, scans, slides), text files or Word documents. Claude reads everything and uses the pictures inside them for picture exercises. It also finds extra pictures on the web.',
+              sub('Click ', el('b', {}, 'Choose files'), ' and pick your files (hold ', el('kbd', {}, 'Ctrl'), ' / ', el('kbd', {}, '⌘'), ' to pick several), or drag them onto the box:', drop, flist),
+              sub('Optional: paste web pages to use as sources, one per line:', links)),
+            step('Describe the subject', 'Only the title is required. The language decides the language of the course and of the AI tutor.',
+              plain(el('label', { class: 'cg-field' }, 'Title', title)),
+              plain(el('label', { class: 'cg-field' }, 'Language', lang)),
+              plain(el('label', { class: 'cg-field' }, 'Your goal', goal)),
+              plain(el('label', { class: 'cg-field' }, 'Notes for Claude (optional)', notes))),
+            step('Start', 'Claude works for 10–60 minutes depending on the size of the sources. Keep this page open (you can use other tabs or apps). If the page closes, open ✨ Create with Claude again and press Resume — nothing is lost.',
+              sub('Choose a spending limit: ', el('label', { class: 'cg-inline' }, 'stop and ask me above $ ', budget), tip('An estimate based on the published prices; the exact amount is in the Console under Usage. When the limit is reached Claude pauses; you can raise it and continue.')),
+              sub('Press ', go, ' and watch Claude work.'), plain(err))),
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+        if (key.value) checkKey();
+      }
+
+      /* ---------- progress of an API job ---------- */
+      let ctl = null;
+      async function progress(job, { start = false } = {}) {
+        const C = window.NoemaClaude; box.innerHTML = '';
+        const status = el('div', { class: 'cg-status' }); const money = el('div', { class: 'tiny' }); const log = el('ol', { class: 'cg-log', 'aria-live': 'polite' });
+        const actions = el('div', { class: 'row' }); const ask = el('div', {});
+        const addLog = t => { if (!t) return; log.append(el('li', {}, t)); while (log.children.length > 80) log.firstChild.remove(); log.scrollTop = log.scrollHeight; };
+        (job.log || []).slice(-40).forEach(x => addLog(x.m));
+        const keyIn = el('input', { class: 'noema-input', type: 'password', placeholder: 'sk-ant-… (your Claude API key)' });
+        const getKey = () => C.Key.get(acc) || keyIn.value.trim();
+        const go = async fn => {
+          if (!getKey()) { status.textContent = '🔑 Paste your Claude API key to continue.'; actions.innerHTML = ''; actions.append(keyIn, el('button', { class: 'btn primary', onclick: () => { if (C.Key.looksValid(keyIn.value)) { C.Key.set(acc, keyIn.value, false); go(fn); } } }, 'Continue')); return; }
+          ctl = new AbortController(); paint(job);
+          const wl = await navigator.wakeLock?.request('screen').catch(() => null);
+          try { await fn(getKey(), { onLog: addLog, onUpdate: paint, signal: ctl.signal }); } finally { wl?.release?.(); ctl = null; paint(job); }
+        };
+        function paint(j) {
+          const running = !!ctl && j.status === 'running';
+          const usd = C.cost(j.usage, j.model), tok = ((j.usage.input || 0) + (j.usage.cacheRead || 0) + (j.usage.cacheWrite || 0) + (j.usage.output || 0));
+          money.textContent = `≈ $${usd.toFixed(2)} of your $${j.budget} limit · ${(tok / 1000).toFixed(0)}k tokens · ${j.turns || 0} steps · model ${j.model}`;
+          status.className = 'cg-status ' + j.status;
+          status.textContent = { starting: '⏳ Preparing…', running: running ? '🧠 Claude is working… keep this page open.' : '⏸️ Paused.', paused: '⏸️ ' + (j.error || 'Paused.'), question: '💬 Claude needs an answer:', budget: '💰 ' + j.error, error: '⚠️ ' + j.error, failed: '❌ ' + j.error, done: '✅ Your subject is ready!' }[j.status] || j.status;
+          actions.innerHTML = ''; ask.innerHTML = '';
+          if (running) actions.append(el('button', { class: 'btn', onclick: () => ctl?.abort() }, '⏹ Stop'));
+          else if (j.status === 'done') actions.append(el('button', { class: 'btn primary', onclick: async () => { try { const s = await importPack(acc, j.pack, { via: 'claude-api' }); await C.deleteJob(j.id); toastL(`📥 “${s.title}” added to your subjects`); done(s); } catch (e) { toastL('⚠️ ' + e.message, 5000); } } }, '📚 Open my new subject'));
+          else if (j.status === 'question') {
+            const ans = el('textarea', { class: 'noema-input', rows: 3, placeholder: 'Your answer (or just press Send: “continue and finish the pack”)' });
+            ask.append(el('div', { class: 'cg-claudesays' }, j.question), ans, el('button', { class: 'btn primary', onclick: () => go((k, o) => C.answer(j, k, ans.value.trim() || 'Continue and finish the pack.', o)) }, 'Send'));
+          } else if (j.status === 'budget') {
+            const nb = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(Math.ceil(j.budget * 1.5)) });
+            actions.append(el('label', { class: 'tiny' }, 'New limit $ ', nb), el('button', { class: 'btn primary', onclick: async () => { j.budget = Math.max(j.budget + 1, +nb.value || 0); await C.saveJob(j); go((k, o) => C.run(j, k, o)); } }, '▶ Continue'));
+          } else if (j.status !== 'failed') actions.append(el('button', { class: 'btn primary', onclick: () => go((k, o) => C.run(j, k, o)) }, '▶ Resume'));
+          if (!running && j.status !== 'done') actions.append(el('button', { class: 'btn small ghost', onclick: async () => { if (confirm('Delete this unfinished subject?')) { await C.deleteJob(j.id); home(); } } }, '🗑 Delete'));
+        }
+        box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { if (ctl && !confirm('Claude keeps working only while this window is open. Stop and go back?')) return; ctl?.abort(); home(); } }, '← Back'),
+          brandHead(`✨ “${job.title}”`, 'Made by Claude with your API key'), status, money, ask, actions,
+          el('details', { class: 'cg-logbox', open: true }, el('summary', {}, 'What Claude is doing'), log));
+        paint(job);
+        if (start || job.status === 'running') go((k, o) => C.run(job, k, o));
+      }
+
+      /* ---------- B: the Claude app / website + connector ---------- */
+      function wayB() {
+        box.innerHTML = '';
+        const cloud = window.NoemaCloud && NoemaCloud.session();
+        box.append(back(), brandHead('💬 Use the Claude app or website', 'Steps 1–4 are needed only the first time. Works the same on Windows, Mac, Linux, iPhone and Android.'),
+          el('ol', { class: 'cg-steps' },
+            step('Create a Claude account', 'The Free plan works for small sources (a few pages). For whole books or many PDFs use Pro or Max: they allow much longer work.',
+              sub('Open ', ext('https://claude.ai/', 'claude.ai'), ' — or install the Claude app for your computer or phone from ', ext('https://claude.ai/download', 'claude.ai/download'), '.'),
+              sub('Click ', el('b', {}, 'Sign up'), ' and use your e-mail or Google account.'),
+              sub(el('span', { class: 'tiny' }, 'Already have one? Go to step 2.'))),
+            step('Switch on “Code execution”', 'Claude needs it to run the noema-lite tools that check and build the course.',
+              sub('Open ', ext('https://claude.ai/settings/capabilities', 'Settings → Capabilities'), '.'),
+              sub('Turn on ', el('b', {}, 'Code execution and file creation'), '.')),
+            MCP_URL ? step('Connect noema-lite to Claude', ['Then Claude saves finished subjects straight into your noema-lite account. The address is the same for everybody, on every computer and phone: it is on the noema-lite website, not on your computer. On the Free plan you can add one connector.'],
+              cloud ? null : sub(el('span', { class: 'cg-warn' }, '☁️ You need a noema-lite cloud account for this: choose “Sign in / create a cloud account” when noema-lite asks who is studying (⚙️ → Cloud).')),
+              sub('In Claude open ', el('b', {}, 'Customize → Connectors'), '.'),
+              sub('Click ', el('b', {}, '+ Add'), ' → ', el('b', {}, 'Add custom connector'), '.'),
+              sub('Name: ', el('b', {}, 'noema-lite'), ' · URL: ', el('code', { class: 'cg-url' }, MCP_URL), ' ', el('button', { class: 'btn small', onclick: e => copyText(MCP_URL, e.currentTarget) }, '📋 Copy')),
+              sub('Leave ', el('i', {}, 'Advanced settings'), ' empty and click ', el('b', {}, 'Add'), '.'),
+              sub('Click ', el('b', {}, 'Connect'), ': a noema-lite page opens → sign in with your cloud account → ', el('b', {}, 'Allow'), '.')) : null,
+            step('Optional: add the skill', 'Not required: the connector already gives Claude the same instructions and tools. The skill only lets Claude start a little faster. Claude does not allow other websites to install skills into your account (a safety rule), so this one step is manual.',
+              sub(el('a', { class: 'btn small', href: SKILL_URL, download: 'noema-pack-builder.zip' }, '⬇️ Download the skill'), ' (a .zip file — do not unzip it).'),
+              sub('In Claude: ', el('b', {}, 'Customize → Skills'), ' → ', el('b', {}, '+'), ' → ', el('b', {}, 'Create skill'), ' → ', el('b', {}, 'Upload a skill'), ' → choose the zip.')),
+            step('Ask Claude', 'Big sources take 10–40 minutes. You can watch Claude work; keep the chat open until it says the subject is saved.',
+              sub(ext('https://claude.ai/new', 'Open a new chat')),
+              sub('Attach your PDFs and pictures with the ', el('b', {}, '+'), ' (or 📎) button.'),
+              sub('Either choose ', el('b', {}, '+ → noema-lite → Create a noema-lite subject'), ' and type the title, or paste this message and fill in the dots: ',
+                el('button', { class: 'btn small', onclick: e => copyText(CLAUDE_PROMPT, e.currentTarget) }, '📋 Copy the message')),
+              sub('Press Send.')),
+            step('Study', null,
+              sub('Open noema-lite → subject picker: the new subject is there with 🔒 (if not, close and reopen the picker).'),
+              sub('Without the connector Claude gives you a ', el('b', {}, '.json'), ' file: download it, then ', el('b', {}, '📥 Import subject pack'), ' in the subject picker.'))),
+          el('details', { class: 'cg-faq' }, el('summary', {}, '❓ Why can’t noema-lite add the skill to my Claude by itself?'),
+            el('p', {}, 'Claude does not let websites install things into your Claude account — that protects you. You do not need the skill anyway: with the connector Claude gets the instructions from noema-lite by itself. In way A (here in noema-lite) the app uploads the skill for you automatically, using your API key.')),
+          el('details', { class: 'cg-faq' }, el('summary', {}, '❓ Is the connector address the same on every computer?'),
+            el('p', {}, 'Yes: ', el('code', {}, MCP_URL || '(this installation has no website address)'), '. It points to the noema-lite website, so it is the same for every user and every device (Windows, Mac, Linux, phones).')),
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+      }
+      home();
     });
   }
+
   /** Supabase OAuth 2.1 consent page for the Claude connector: <site>/oauth/consent?authorization_id=… */
   async function connectClaude(authId) {
     document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
@@ -463,7 +864,8 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, overlay, claudeGuide,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, overlay, claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
+    share(s) { return shareDialog(Noema.account.id, s); }, explore() { return explore(Noema.account.id); }, infoCard, packInfo,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
@@ -485,6 +887,7 @@
     if (!acc) acc = accs.length === 1 ? accs[0] : await pickAccount();
     KV.acc = acc.id; Noema.account = acc;
     if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
+    Notes.start(acc.id);
     const subs = await subjectsFor(acc.id);
     let meta = subs.find(s => s.id === (url.get('subject') || (cur.acc === acc.id ? cur.subj : null)));
     const settings = jget(KV.accountKey('settings'), {});

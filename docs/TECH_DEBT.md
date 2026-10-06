@@ -7,9 +7,9 @@ what to think about first, and status. Newest at the top.
 |---|---|---|---|
 | TD-1 | Video exercises | 💭 to think about | 2026-10-06 |
 | TD-2 | Sound / audio exercises | 💭 to think about | 2026-10-06 |
-| TD-3 | Keyboard-only answering for hotspot / sequence pictures | 📋 known gap | 2026-10-06 |
+| TD-3 | Keyboard-only answering for hotspot / sequence pictures | ✅ closed 2026-10-07 | 2026-10-06 |
 | TD-4 | Tutor that can *see* the picture (multimodal Gemini) | 💭 idea | 2026-10-06 |
-| TD-5 | Real Supabase sync tested only against the emulator | 📋 known gap | 2026-10-06 |
+| TD-5 | Real Supabase sync tested only against the emulator | ✅ closed 2026-10-07 | 2026-10-06 |
 | TD-6 | Claude connector: verify against the real Supabase OAuth server and claude.ai | 📋 known gap | 2026-10-06 |
 
 ---
@@ -36,19 +36,37 @@ medicine (heart & lung sounds), music, birdsong.
 autoplay rules on phones (must start on a tap), recording the learner’s voice (microphone permission,
 privacy — never upload without consent), transcripts for accessibility and for the tutor.
 
-### TD-3 · Keyboard-only answering for picture exercises — 📋 known gap
-Drag (buttons + tap-to-place), label, select, reveal and occlusion work with the keyboard. **Hotspot**
-and **sequence** need a pointer: a keyboard mode could move a crosshair with the arrow keys, or list the
-parts as buttons for sequence (not for hotspot — the list would give the answer away).
+### TD-3 · Keyboard-only answering for picture exercises — ✅ closed 2026-10-07
+Every picture exercise now works without a mouse or touch screen (`vStage().keyboard()` in
+`engine/src/35_visual.js`):
+- **Tab** focuses the picture; a crosshair appears in the middle.
+- **Arrow keys** move it (4 % of the picture per press, **Shift** + arrow = 1 % for small parts).
+- **Enter / Space** taps at the crosshair (hotspot: places the pin; sequence: picks the next part;
+  figure: reveals the part). **Backspace** undoes the last tap.
+- A screen-reader live region says where the crosshair is and what was picked (“Step 2: Driver”) —
+  never the right answer, so the exercise is not given away.
+- Tested in `tests/visual.js` (hotspot and sequence answered with the keyboard only, Enter never checks the card by accident).
 
 ### TD-4 · Tutor that can see the picture — 💭 idea
 Today the tutor gets a text version (alt text, labelled parts, the answers). Gemini accepts images
 (PNG/JPEG/WebP — not SVG): rasterise the SVG through a canvas and send it with “Ask the tutor”.
 Watch the token cost and keep the text version as the fallback.
 
-### TD-5 · Real Supabase sync — 📋 known gap
-Sign-up, sync, snapshots and private storage pass against the local Supabase emulator
-(`tests/mock_supabase.js`). Verify once against the real project after the website deploy.
+### TD-5 · Real Supabase sync — ✅ closed 2026-10-07
+What was done so a mistake in the real project cannot go unnoticed:
+1. **The database rules are tested on a real PostgreSQL**, not only on the emulator:
+   `tests/sql_policies.py` installs `cloud/supabase.sql` twice (it must be re-runnable) and checks 22
+   row-level-security rules as three different users (own data, public subjects, shares, storage).
+2. **Sync no longer depends on device clocks**: conversations carry a server-set `synced_at`, so a late
+   push from an offline phone is never skipped by another device.
+3. **One-click live check in the app**: ⚙️ → Cloud → 🩺 *Check the cloud connection* runs 8 real round
+   trips (sign-in & token refresh, profile, progress sync, conversations, snapshots, private files,
+   public subjects, sharing), cleans up after itself and shows a 👉 fix for every failure.
+4. **The same check from a terminal** (macOS, Windows, Linux): `node tests/live_cloud.js` (anonymous:
+   tables and rules installed) and with `NOEMA_LIVE_EMAIL` / `NOEMA_LIVE_PASSWORD` the full round trip.
+5. Friendlier network errors, `keepalive` only for small bodies (browsers reject larger ones).
+
+One-time step after each change of `cloud/supabase.sql`: run it in the Supabase SQL editor, then 🩺.
 
 ### TD-6 · Claude connector on the real services — 📋 known gap
 `tests/connector.js` covers the protocol, tools, upload and consent against the emulator. Still to verify

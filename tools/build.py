@@ -9,6 +9,9 @@
   python3 tools/build.py --no-validate   # skip validation (faster)
 """
 import os, sys, glob, json, subprocess, tempfile, shutil, re, zipfile
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from noema_lib import ROOT, LIB, ACC, rj, wj, wt, now_iso, subject_dirs, load_subject, load_media, content_hash
 
@@ -56,7 +59,7 @@ def build_packs():
                   'playbooks': sum(len(c['debug']) for c in chapters), 'flashcards': sum(len(c['flashcards']) for c in chapters)}
         counts['visual'] = sum(1 for c in chapters for e in c['exercises'] if e['type'].startswith('img_')); counts['media'] = len(media)
         pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts, 'builtAt': now_iso()}
-        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v['sha'] for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}})
+        pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}, 'mm': {k: {x: y for x, y in v.items() if x != 'data'} for k, v in media.items()}})
         try:   # unchanged content → keep the previous build time so git sees no change
             prev = rj(os.path.join(sdir, 'pack.json'))
             if prev.get('version') == pack['version']: pack['builtAt'] = prev.get('builtAt', pack['builtAt'])
@@ -65,7 +68,9 @@ def build_packs():
         wt(os.path.join(sdir, 'pack.json'), body)
         wt(os.path.join(sdir, 'pack.js'), f'/* GENERATED subject pack: {meta["id"]} — do not edit; edit chapters/*.json and run tools/build.py */\n(window.NOEMA_PACKS = window.NOEMA_PACKS || {{}})[{json.dumps(meta["id"])}] = ' + body.replace('</', '<\\/') + ';\n')
         rel = os.path.relpath(os.path.join(sdir, 'pack.js'), ROOT).replace(os.sep, '/')
-        metas.append(dict({k: meta.get(k) for k in ('id', 'title', 'appTitle', 'emoji', 'group', 'description', 'language', 'features', 'owner')}, path=rel, counts=counts, version=pack['version']))
+        info = {'chapters': [{'num': c.get('num'), 'title': c['title'], 'emoji': c.get('emoji', ''), 'sections': len(c['sections']), 'exercises': len(c['exercises'])} for c in chapters],
+                'sources': [{'title': x.get('title', ''), 'subtitle': x.get('subtitle', ''), 'pages': x.get('pages', ''), 'url': x.get('url', '') if str(x.get('url', '')).startswith('http') else ''} for x in (sources or {}).get('sources', [])]}
+        metas.append(dict({k: meta.get(k) for k in ('id', 'title', 'appTitle', 'emoji', 'group', 'description', 'language', 'features', 'owner')}, path=rel, counts=dict(counts, pictures=len(media)), version=pack['version'], **info))
         print(f'pack: {meta["id"]:<20} {"(private:" + owner + ")" if owner else "":<18} {counts["chapters"]} ch · {counts["sections"]} sec · {counts["exercises"]} ex ({counts["visual"]} visual) · {counts["media"]} img · {len(body)//1024} KB')
     return metas, failed
 
@@ -89,7 +94,7 @@ def build_site(metas):
     html = '\n'.join(l for l in html.split('\n') if 'config.local.js' not in l)
     wt(os.path.join(out, 'index.html'), html)
     os.makedirs(os.path.join(out, 'engine'))
-    for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js', 'claude.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     for m in metas:
         if m.get('owner'): continue
@@ -101,6 +106,7 @@ def build_site(metas):
     wt(os.path.join(out, 'oauth', 'consent', 'index.html'), '<!doctype html><meta charset="utf-8"><title>noema-lite</title><script>location.replace("/" + location.search + "#/connect-claude")</script>')
     build_skill(os.path.join(out, 'downloads', 'noema-pack-builder.zip'))
     build_mcp_function(metas, os.path.join(ROOT, 'dist', 'functions'))
+    build_img_function(os.path.join(ROOT, 'dist', 'functions'))
     wt(os.path.join(out, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/engine/*\n  Cache-Control: public, max-age=300\n/library/*\n  Cache-Control: public, max-age=300\n')
     print('site →', os.path.relpath(out, ROOT))
 
@@ -134,6 +140,12 @@ def build_mcp_function(metas, out_dir):
     wt(os.path.join(out_dir, 'mcp.mjs'), code)
     print('mcp →', os.path.relpath(os.path.join(out_dir, 'mcp.mjs'), ROOT))
 
+def build_img_function(out_dir):
+    """dist/functions/img.mjs — /api/img, the picture fetcher for web pictures whose host blocks browsers (cloud/img/proxy.mjs)."""
+    code = open(os.path.join(ROOT, 'cloud', 'img', 'proxy.mjs'), encoding='utf-8').read()
+    wt(os.path.join(out_dir, 'img.mjs'), '/* GENERATED by tools/build.py from cloud/img/proxy.mjs — do not edit */\n' + code + '\nexport const config = { path: "/api/img" };\n')
+    print('img →', os.path.relpath(os.path.join(out_dir, 'img.mjs'), ROOT))
+
 def build_bundle(metas):
     sel = None
     if '--subjects' in args: sel = set(args[args.index('--subjects') + 1].split(','))
@@ -158,6 +170,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
 <script>{esc(rd("engine/convos.js"))}</script>
 <script>{esc(rd("engine/cloud.js"))}</script>
+<script>{esc(rd("engine/claude.js"))}</script>
 <script type="text/plain" id="noema-engine-src">{esc(rd("engine/engine.js"))}</script>
 <script>{esc(rd("engine/loader.js"))}</script>
 </body></html>'''

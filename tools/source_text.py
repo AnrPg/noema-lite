@@ -3,6 +3,9 @@
   python3 tools/source_text.py <subject-id> <source-id> [START END]
 Uses `pdftotext` (poppler) when available, else pypdf. Strips repeated running headers/footers."""
 import os, sys, re, subprocess, collections
+for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
+    try: _s.reconfigure(encoding='utf-8', errors='replace')
+    except Exception: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from noema_lib import find_subject, rj
 a = sys.argv[1:]
