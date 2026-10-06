@@ -139,6 +139,8 @@ async function mockGemini(ctx) {
   const srv = await start({ port: 54329, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await mockGemini(devA); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
   await pA.goto('http://localhost:54329/'); await wait(900);
+  ok(!(await pA.evaluate(() => /(^|\n)null(\n|$)/.test(document.body.innerText))), 'no stray "null" text in the profile picker');
+  ok(!(await pA.content()).includes('config.local.js'), 'website index.html does not reference config.local.js');
   ok(await pA.$$eval('.noema-acc', a => a.length) === 1 && !!(await pA.$('text=Sign in / create a cloud account')), 'hosted site: no local seeds exposed, cloud sign-in offered');
   await pA.click('text=Sign in / create a cloud account'); await wait(300);
   await pA.click('text=No account yet? Create one'); await wait(200);

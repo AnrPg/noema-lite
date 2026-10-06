@@ -12,6 +12,13 @@
   const P = 'noema1:';
   const VERSION = '1.0.0';
 
+  /* ---------------- DOM guard: optional UI parts are written as `cond ? node : null`; never render them as the text "null" ---------------- */
+  for (const proto of [Element.prototype, DocumentFragment.prototype]) for (const fn of ['append', 'prepend', 'before', 'after', 'replaceWith']) {
+    const orig = proto[fn]; if (!orig || orig.__noemaGuard) continue;
+    const guarded = function (...xs) { return orig.apply(this, xs.filter(x => x != null && x !== false)); };
+    guarded.__noemaGuard = true; proto[fn] = guarded;
+  }
+
   /* ---------------- tiny utils ---------------- */
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
