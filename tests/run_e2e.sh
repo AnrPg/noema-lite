@@ -8,3 +8,4 @@ mkdir -p "$T/accounts/anr/packs"; cp -r "$T/tests/fixtures/demo-physics" "$T/acc
 sed -i 's/"id": "demo-physics"/"id": "secret-notes"/; s/"title": "Demo Physics"/"title": "Secret Notes"/' "$T/accounts/anr/packs/secret-notes/subject.json"
 (cd "$T" && python3 tools/build.py site bundle >/dev/null)
 node "$ROOT/tests/e2e.js" "$T"
+node "$ROOT/tests/socratic.js" "$T"

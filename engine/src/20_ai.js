@@ -121,16 +121,26 @@ const LANG_NOTE = SUBJ.language && SUBJ.language !== 'en' ? ` Reply in the langu
 const STYLE = `Formatting: short turns (max ~120 words unless asked), markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".${LANG_NOTE}`;
 const TN = TUTOR.name;
 const MODES = {
-  socratic: { label: `${TUTOR.avatar} Socratic`, sys: `You are "${TN}", a Socratic ${TUTOR.domain} tutor. ${LEARNER}
-METHOD (strict):
-- Never lecture and never hand over the answer up front. Ask ONE focused question per turn.
-- Start by probing what the learner already believes about the topic (a prediction or a "why" question).
-- If the learner is right: confirm in one short line, then escalate (a "why", an edge case, an exam trap, or "what would you ask yourself first when diagnosing this?").
-- If partially right: name what is right, then ask a narrower hint-question aimed at the gap.
-- If wrong: do not just say "wrong" — offer a counter-example or a simpler sub-question that exposes the contradiction.
-- After 3 unsuccessful attempts on the same point, give a ≤3-sentence explanation, then a check question.
-- Every few turns, ask the learner to summarise in one sentence, or to list the questions they would ask themselves in a diagnostic scenario.
-- Always end your turn with exactly one question.
+  socratic: { label: `${TUTOR.avatar} Socratic`, sys: `You are "${TN}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
+
+HOW YOU WORK — "elicitation threads"
+A thread = one question you are helping the learner work out. The app tracks every thread (see TUTOR STATE below — it is authoritative).
+1. Each turn, decide: ANSWER DIRECTLY or ELICIT.
+   • Answer directly (no new thread) when it is a fact, definition, number, name or syntax; when the learner asks you to tell them or seems frustrated; when it is a side question; when they already tried twice; or when 2 threads are already open.
+   • Elicit (open ONE thread) only when the learner can plausibly reason it out in 1–3 short steps from what they know and the insight is worth the effort.
+2. Always react to the learner's last answer FIRST with an explicit verdict — "✅ Correct", "🟡 Partly right" or "❌ Not quite" — plus one sentence why. Never leave them unsure whether they were right.
+3. Keep at most 2 threads open (a sub-question may nest inside the main one). After a sub-thread is resolved, say "Back to: <parent question>".
+4. A thread ENDS when the learner gets it right, when its attempt budget is used (TUTOR STATE), or when they ask for the answer. Ending a thread = write
+   **✅ Answer:** the authoritative, complete answer (2–5 precise sentences, with the key example${SUBJ.features?.code ? ', code' : ''}${SUBJ.features?.math ? ', formula' : ''} if useful)
+   **📌 Lesson:** one memorable sentence.
+   Even when the learner was right, still give the ✅ Answer in full form so the knowledge is stated authoritatively.
+5. If the learner asks a NEW question while a thread is open: answer it directly and briefly (unless it is a true prerequisite → you may open a nested thread), then return to the open thread.
+6. When no thread is open and lessons exist, do NOT start a new chain on your own: close with **🎓 What you learned:** (bullets of the lessons) and offer one optional next step as a yes/no question.
+7. Normal turns ≤ 140 words; resolutions and summaries may be longer. End with at most ONE question — or none when closing.
+
+MACHINE STATE — mandatory, hidden from the learner. End EVERY reply with exactly one line:
+<lq-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</lq-state>
+Omit empty arrays. Use the "Next new thread id" from TUTOR STATE. Nothing may follow the closing tag.
 ${STYLE}` },
   explain: { label: '💡 Explain', sys: `You are "${TN}", a vivid, friendly ${TUTOR.domain} explainer. ${LEARNER}
 Explain the asked concept with: (1) a one-line core idea in bold, (2) an analogy, (3) a tiny concrete example${SUBJ.features?.code ? ' or code' : ''}${SUBJ.features?.math ? ' or worked formula' : ''}, (4) the #1 pitfall. Max ~170 words. Finish with ONE quick check question. ${STYLE}` },
@@ -184,7 +194,7 @@ function renderTutor() {
         h('div', { class: 'grow' }, h('b', {}, TN), h('div', { class: 'tiny' }, 'Your Gemini-powered tutor · ' + (S.settings.model || 'auto model'))),
         h('button', { class: 'iconbtn' + (T.showHistory ? ' on' : ''), title: 'Conversation history', onclick: () => { T.showHistory = !T.showHistory; renderTutor(); } }, '🕘'),
         h('button', { class: 'iconbtn', title: 'Export this conversation (.md)', onclick: () => exportConvo(currentConvo()) }, '⬇️'),
-        h('button', { class: 'iconbtn', title: 'New conversation', onclick: () => { T.hist[tutorCtxKey()] = []; renderTutor(); } }, '↺'),
+        h('button', { class: 'iconbtn', title: 'New conversation', onclick: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }, '↺'),
         h('button', { class: 'iconbtn', title: 'Close', onclick: closeTutor }, '✕')),
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
         T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null),
@@ -206,27 +216,43 @@ function renderTutor() {
           ['💡 Explain it differently', 'explain', `Explain the core idea of ${topic} differently from the notes.`],
         ].map(([l, m, msg]) => h('button', { onclick: () => { T.mode = m; renderTutor(); sendTutor(msg); } }, l))));
   }
-  hist.forEach(m => { if (!m.hidden) msgs.append(h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, m.role === 'user' ? md(m.text) : md(m.text))); });
+  hist.forEach(m => {
+    if (m.hidden) return;
+    const b = h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, md(m.text));
+    const res = m.meta?.lqState?.resolved || [];
+    if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 <b>Saved to your lessons:</b> ' + fmt(r.lesson) }))));
+    msgs.append(b);
+  });
+  const tb = threadTracker(tutorCtxKey(), hist.length); if (tb) msgs.before(tb);
   msgs.scrollTop = msgs.scrollHeight;
 }
-async function sendTutor(text, hidden = false) {
+async function sendTutor(text, hidden = false, opts = {}) {
   if (T.busy) return;
   const key = tutorCtxKey();
   const hist = T.hist[key] = T.hist[key] || [];
-  hist.push({ role: 'user', text, hidden: false, t: Date.now() });
+  const threaded = usesThreads(T.mode);
+  const ts = threaded ? threadStateFor(key) : null;
+  const directive = threaded ? noteLearnerTurn(ts, text, opts.directive) : (opts.directive || null);
+  hist.push({ role: 'user', text, hidden: false, t: Date.now(), ...(directive ? { meta: { directive } } : {}) });
   T.showHistory = false; persistConvo(key);
   renderTutor();
   const msgs = $('.drawer .msgs');
   const bubble = h('div', { class: 'msg ai' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i')));
   msgs.append(bubble); msgs.scrollTop = msgs.scrollHeight;
   T.busy = true;
-  const system = MODES[T.mode].sys + '\n\n' + tutorContextText();
+  let system = MODES[T.mode].sys + '\n\n' + tutorContextText();
+  if (threaded) system += '\n\n' + tutorStateBlock(ts, directive);
+  else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.';
   const contents = hist.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] }));
   try {
-    const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(t)); msgs.scrollTop = msgs.scrollHeight; } });
-    hist.push({ role: 'model', text: full, t: Date.now() });
+    const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(splitControl(t).clean || '…')); msgs.scrollTop = msgs.scrollHeight; } });
+    const { clean, control } = splitControl(full);
+    const msg = { role: 'model', text: clean || full, t: Date.now() };
+    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { lqState: control }; } if (got.length) toast(`📌 ${got.length} lesson${got.length > 1 ? 's' : ''} learned`); }
+    hist.push(msg);
     persistConvo(key); maybeAutoTitle(key);
     touchStreak();
+    renderTutor();
   } catch (e) {
     hist.pop(); persistConvo(key);
     bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + e.message), h('div', { class: 'row', style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ Settings'), /key/i.test(e.message) ? h('button', { class: 'btn small ghost', onclick: () => openGuide('gemini') }, '🔑 How to get a key') : null));

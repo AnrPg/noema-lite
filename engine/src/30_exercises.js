@@ -339,7 +339,7 @@ function exerciseAsText(ex) {
 }
 function askAIAbout(ex, mode) {
   const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex) };
-  T.hist[ex.id + '|' + (mode || 'socratic')] = [];
+  T.hist[ex.id + '|' + (mode || 'socratic')] = []; delete T.tstate[ex.id + '|' + (mode || 'socratic')];
   if (mode === 'explain') openTutor(ctx, 'explain', 'I just got this exercise wrong. Explain the key idea in a different way, then check me with one question.');
   else if (mode === 'socratic') openTutor(ctx, 'socratic', 'I got this exercise wrong. Don\'t give me the answer — guide me Socratically until I can explain why the correct answer is correct and why my instinct was a trap.');
   else openTutor(ctx, 'socratic', 'Give me a hint for this exercise as a guiding question — do not reveal the answer.');

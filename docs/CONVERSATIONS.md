@@ -30,9 +30,19 @@ background**, the moment a message arrives — the ⬇️ buttons only make extr
     { "seq": 0, "id": "m_0mfx3k2a1bx7k2", "role": "user",      "content": "markdown", "createdAt": "…" },
     { "seq": 1, "id": "m_0mfx3k2c9cq1zz", "role": "assistant", "content": "markdown", "createdAt": "…" }
   ],
+  "tutorState": {                        // Socratic mode only — the elicitation-thread tracker (see docs/TUTORING.md)
+    "v": 1, "focus": "t2", "learnerTurns": 5, "missingControl": 0, "wrapped": false,
+    "threads": [ { "id": "t1", "question": "Why is a DV cheaper than a rewrite?", "parent": null, "status": "resolved",
+                   "attempts": 2, "budget": 3, "openedAt": 1, "resolvedAt": 5, "how": "answered",
+                   "answer": "…authoritative answer…", "lesson": "…one-sentence lesson…" } ],
+    "lessons": [ { "text": "…", "thread": "t1", "question": "…", "at": 5 } ]
+  },
   "meta": { "titledAtMessage": 4 }       // optional, implementation details
 }
 ```
+Assistant messages of Socratic chats carry `meta.lqState` — the parsed control line the model emitted
+(`opened`, `resolved`, `focus`, `verdict`, `summary`); `tutorState` can always be rebuilt from these.
+User messages may carry `meta.directive` (`tellme` | `wrapup`).
 Roles are `user` / `assistant`. Content is Markdown (math as `$…$`). Older shapes are converted by `normalize()` in `engine/convos.js`.
 
 ## Where records live (same record everywhere)

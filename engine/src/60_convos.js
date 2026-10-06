@@ -26,7 +26,8 @@ function fromRec(r) {     // canonical record → in-memory shape used by the UI
     ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label } : null,
     model: r.model?.name || '', title: r.title, titleSource: r.titleSource,
     titledLen: r.titleSource === 'user' ? 1e9 : (r.meta?.titledAtMessage ?? (r.title ? r.messages.length : 0)),
-    msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt) })) };
+    msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt), ...(m.meta ? { meta: m.meta } : {}) })),
+    tutorState: r.tutorState || null };
 }
 function toRec(cv) {      // in-memory shape → canonical record
   const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : null;
@@ -35,7 +36,8 @@ function toRec(cv) {      // in-memory shape → canonical record
     context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
     model: { provider: 'google', name: cv.model || S.settings.model || null },
     createdAt: new Date(cv.created).toISOString(), updatedAt: new Date(cv.updated || Date.now()).toISOString(),
-    messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString() })),
+    messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString(), ...(m.meta ? { meta: m.meta } : {}) })),
+    tutorState: cv.tutorState || undefined,
     meta: cv.titledLen && cv.titledLen < 1e9 ? { titledAtMessage: cv.titledLen } : undefined }, { account: ACC_REF, subject: SUBJ_REF });
 }
 CV.list = (LQ.preloadedConvos || []).map(fromRec);
@@ -58,6 +60,7 @@ function persistConvo(key) {
     CV.byKey[key] = cv; CV.list.push(cv);
   }
   cv.updated = Date.now(); cv.model = S.settings.model || cv.model;
+  if (T.tstate[key]) cv.tutorState = T.tstate[key];
   saveConvos(cv);
 }
 /** Record a one-shot AI interaction (grading, code review, generated question, drill grading) as a canonical conversation. */
@@ -125,6 +128,8 @@ function convoMarkdown(cv, level = 1) {
     `| **Messages** | ${cv.msgs.length} |`,
     `| **Tutor** | ${TN} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
     `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${APP_TITLE} (${LQ.config.appName}) |`, '', '---', ''];
+  const lessons = cv.tutorState?.lessons || [];
+  if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
     const who = m.role === 'user' ? '🧑 You' : `${TUTOR.avatar} ${TN}`;
     lines.push(`${H}# ${who}${m.t ? ' · ' + fmtDate(m.t).slice(11) : ''}`, '', demoteHeadings(String(m.text).trim(), level + 2), '');
@@ -181,6 +186,7 @@ function openConvo(cv) {
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();
   T.hist[key] = cv.msgs; CV.byKey[key] = cv;
+  if (cv.tutorState) T.tstate[key] = cv.tutorState; else if (T.mode === 'socratic' && cv.msgs.some(m => m.meta?.lqState)) T.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs); else delete T.tstate[key];
   T.showHistory = false; renderTutor();
 }
 

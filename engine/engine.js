@@ -393,16 +393,26 @@ const LANG_NOTE = SUBJ.language && SUBJ.language !== 'en' ? ` Reply in the langu
 const STYLE = `Formatting: short turns (max ~120 words unless asked), markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".${LANG_NOTE}`;
 const TN = TUTOR.name;
 const MODES = {
-  socratic: { label: `${TUTOR.avatar} Socratic`, sys: `You are "${TN}", a Socratic ${TUTOR.domain} tutor. ${LEARNER}
-METHOD (strict):
-- Never lecture and never hand over the answer up front. Ask ONE focused question per turn.
-- Start by probing what the learner already believes about the topic (a prediction or a "why" question).
-- If the learner is right: confirm in one short line, then escalate (a "why", an edge case, an exam trap, or "what would you ask yourself first when diagnosing this?").
-- If partially right: name what is right, then ask a narrower hint-question aimed at the gap.
-- If wrong: do not just say "wrong" — offer a counter-example or a simpler sub-question that exposes the contradiction.
-- After 3 unsuccessful attempts on the same point, give a ≤3-sentence explanation, then a check question.
-- Every few turns, ask the learner to summarise in one sentence, or to list the questions they would ask themselves in a diagnostic scenario.
-- Always end your turn with exactly one question.
+  socratic: { label: `${TUTOR.avatar} Socratic`, sys: `You are "${TN}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
+
+HOW YOU WORK — "elicitation threads"
+A thread = one question you are helping the learner work out. The app tracks every thread (see TUTOR STATE below — it is authoritative).
+1. Each turn, decide: ANSWER DIRECTLY or ELICIT.
+   • Answer directly (no new thread) when it is a fact, definition, number, name or syntax; when the learner asks you to tell them or seems frustrated; when it is a side question; when they already tried twice; or when 2 threads are already open.
+   • Elicit (open ONE thread) only when the learner can plausibly reason it out in 1–3 short steps from what they know and the insight is worth the effort.
+2. Always react to the learner's last answer FIRST with an explicit verdict — "✅ Correct", "🟡 Partly right" or "❌ Not quite" — plus one sentence why. Never leave them unsure whether they were right.
+3. Keep at most 2 threads open (a sub-question may nest inside the main one). After a sub-thread is resolved, say "Back to: <parent question>".
+4. A thread ENDS when the learner gets it right, when its attempt budget is used (TUTOR STATE), or when they ask for the answer. Ending a thread = write
+   **✅ Answer:** the authoritative, complete answer (2–5 precise sentences, with the key example${SUBJ.features?.code ? ', code' : ''}${SUBJ.features?.math ? ', formula' : ''} if useful)
+   **📌 Lesson:** one memorable sentence.
+   Even when the learner was right, still give the ✅ Answer in full form so the knowledge is stated authoritatively.
+5. If the learner asks a NEW question while a thread is open: answer it directly and briefly (unless it is a true prerequisite → you may open a nested thread), then return to the open thread.
+6. When no thread is open and lessons exist, do NOT start a new chain on your own: close with **🎓 What you learned:** (bullets of the lessons) and offer one optional next step as a yes/no question.
+7. Normal turns ≤ 140 words; resolutions and summaries may be longer. End with at most ONE question — or none when closing.
+
+MACHINE STATE — mandatory, hidden from the learner. End EVERY reply with exactly one line:
+<lq-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</lq-state>
+Omit empty arrays. Use the "Next new thread id" from TUTOR STATE. Nothing may follow the closing tag.
 ${STYLE}` },
   explain: { label: '💡 Explain', sys: `You are "${TN}", a vivid, friendly ${TUTOR.domain} explainer. ${LEARNER}
 Explain the asked concept with: (1) a one-line core idea in bold, (2) an analogy, (3) a tiny concrete example${SUBJ.features?.code ? ' or code' : ''}${SUBJ.features?.math ? ' or worked formula' : ''}, (4) the #1 pitfall. Max ~170 words. Finish with ONE quick check question. ${STYLE}` },
@@ -456,7 +466,7 @@ function renderTutor() {
         h('div', { class: 'grow' }, h('b', {}, TN), h('div', { class: 'tiny' }, 'Your Gemini-powered tutor · ' + (S.settings.model || 'auto model'))),
         h('button', { class: 'iconbtn' + (T.showHistory ? ' on' : ''), title: 'Conversation history', onclick: () => { T.showHistory = !T.showHistory; renderTutor(); } }, '🕘'),
         h('button', { class: 'iconbtn', title: 'Export this conversation (.md)', onclick: () => exportConvo(currentConvo()) }, '⬇️'),
-        h('button', { class: 'iconbtn', title: 'New conversation', onclick: () => { T.hist[tutorCtxKey()] = []; renderTutor(); } }, '↺'),
+        h('button', { class: 'iconbtn', title: 'New conversation', onclick: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }, '↺'),
         h('button', { class: 'iconbtn', title: 'Close', onclick: closeTutor }, '✕')),
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
         T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null),
@@ -478,27 +488,43 @@ function renderTutor() {
           ['💡 Explain it differently', 'explain', `Explain the core idea of ${topic} differently from the notes.`],
         ].map(([l, m, msg]) => h('button', { onclick: () => { T.mode = m; renderTutor(); sendTutor(msg); } }, l))));
   }
-  hist.forEach(m => { if (!m.hidden) msgs.append(h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, m.role === 'user' ? md(m.text) : md(m.text))); });
+  hist.forEach(m => {
+    if (m.hidden) return;
+    const b = h('div', { class: 'msg ' + (m.role === 'user' ? 'me' : 'ai') }, md(m.text));
+    const res = m.meta?.lqState?.resolved || [];
+    if (m.role !== 'user' && res.some(r => r.lesson)) b.append(h('div', { class: 'lessonchips' }, ...res.filter(r => r.lesson).map(r => h('span', { class: 'lessonchip', html: '📌 <b>Saved to your lessons:</b> ' + fmt(r.lesson) }))));
+    msgs.append(b);
+  });
+  const tb = threadTracker(tutorCtxKey(), hist.length); if (tb) msgs.before(tb);
   msgs.scrollTop = msgs.scrollHeight;
 }
-async function sendTutor(text, hidden = false) {
+async function sendTutor(text, hidden = false, opts = {}) {
   if (T.busy) return;
   const key = tutorCtxKey();
   const hist = T.hist[key] = T.hist[key] || [];
-  hist.push({ role: 'user', text, hidden: false, t: Date.now() });
+  const threaded = usesThreads(T.mode);
+  const ts = threaded ? threadStateFor(key) : null;
+  const directive = threaded ? noteLearnerTurn(ts, text, opts.directive) : (opts.directive || null);
+  hist.push({ role: 'user', text, hidden: false, t: Date.now(), ...(directive ? { meta: { directive } } : {}) });
   T.showHistory = false; persistConvo(key);
   renderTutor();
   const msgs = $('.drawer .msgs');
   const bubble = h('div', { class: 'msg ai' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i')));
   msgs.append(bubble); msgs.scrollTop = msgs.scrollHeight;
   T.busy = true;
-  const system = MODES[T.mode].sys + '\n\n' + tutorContextText();
+  let system = MODES[T.mode].sys + '\n\n' + tutorContextText();
+  if (threaded) system += '\n\n' + tutorStateBlock(ts, directive);
+  else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.';
   const contents = hist.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] }));
   try {
-    const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(t)); msgs.scrollTop = msgs.scrollHeight; } });
-    hist.push({ role: 'model', text: full, t: Date.now() });
+    const full = await gemini({ system, contents, onChunk: t => { bubble.innerHTML = ''; bubble.append(md(splitControl(t).clean || '…')); msgs.scrollTop = msgs.scrollHeight; } });
+    const { clean, control } = splitControl(full);
+    const msg = { role: 'model', text: clean || full, t: Date.now() };
+    if (threaded) { if (control) { control._text = clean; } const got = applyControl(ts, control, hist.length); if (control) { delete control._text; msg.meta = { lqState: control }; } if (got.length) toast(`📌 ${got.length} lesson${got.length > 1 ? 's' : ''} learned`); }
+    hist.push(msg);
     persistConvo(key); maybeAutoTitle(key);
     touchStreak();
+    renderTutor();
   } catch (e) {
     hist.pop(); persistConvo(key);
     bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + e.message), h('div', { class: 'row', style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ Settings'), /key/i.test(e.message) ? h('button', { class: 'btn small ghost', onclick: () => openGuide('gemini') }, '🔑 How to get a key') : null));
@@ -915,7 +941,7 @@ function exerciseAsText(ex) {
 }
 function askAIAbout(ex, mode) {
   const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex) };
-  T.hist[ex.id + '|' + (mode || 'socratic')] = [];
+  T.hist[ex.id + '|' + (mode || 'socratic')] = []; delete T.tstate[ex.id + '|' + (mode || 'socratic')];
   if (mode === 'explain') openTutor(ctx, 'explain', 'I just got this exercise wrong. Explain the key idea in a different way, then check me with one question.');
   else if (mode === 'socratic') openTutor(ctx, 'socratic', 'I got this exercise wrong. Don\'t give me the answer — guide me Socratically until I can explain why the correct answer is correct and why my instinct was a trap.');
   else openTutor(ctx, 'socratic', 'Give me a hint for this exercise as a guiding question — do not reveal the answer.');
@@ -1646,7 +1672,8 @@ function fromRec(r) {     // canonical record → in-memory shape used by the UI
     ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label } : null,
     model: r.model?.name || '', title: r.title, titleSource: r.titleSource,
     titledLen: r.titleSource === 'user' ? 1e9 : (r.meta?.titledAtMessage ?? (r.title ? r.messages.length : 0)),
-    msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt) })) };
+    msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt), ...(m.meta ? { meta: m.meta } : {}) })),
+    tutorState: r.tutorState || null };
 }
 function toRec(cv) {      // in-memory shape → canonical record
   const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : null;
@@ -1655,7 +1682,8 @@ function toRec(cv) {      // in-memory shape → canonical record
     context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
     model: { provider: 'google', name: cv.model || S.settings.model || null },
     createdAt: new Date(cv.created).toISOString(), updatedAt: new Date(cv.updated || Date.now()).toISOString(),
-    messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString() })),
+    messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString(), ...(m.meta ? { meta: m.meta } : {}) })),
+    tutorState: cv.tutorState || undefined,
     meta: cv.titledLen && cv.titledLen < 1e9 ? { titledAtMessage: cv.titledLen } : undefined }, { account: ACC_REF, subject: SUBJ_REF });
 }
 CV.list = (LQ.preloadedConvos || []).map(fromRec);
@@ -1678,6 +1706,7 @@ function persistConvo(key) {
     CV.byKey[key] = cv; CV.list.push(cv);
   }
   cv.updated = Date.now(); cv.model = S.settings.model || cv.model;
+  if (T.tstate[key]) cv.tutorState = T.tstate[key];
   saveConvos(cv);
 }
 /** Record a one-shot AI interaction (grading, code review, generated question, drill grading) as a canonical conversation. */
@@ -1745,6 +1774,8 @@ function convoMarkdown(cv, level = 1) {
     `| **Messages** | ${cv.msgs.length} |`,
     `| **Tutor** | ${TN} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
     `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${APP_TITLE} (${LQ.config.appName}) |`, '', '---', ''];
+  const lessons = cv.tutorState?.lessons || [];
+  if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
     const who = m.role === 'user' ? '🧑 You' : `${TUTOR.avatar} ${TN}`;
     lines.push(`${H}# ${who}${m.t ? ' · ' + fmtDate(m.t).slice(11) : ''}`, '', demoteHeadings(String(m.text).trim(), level + 2), '');
@@ -1801,6 +1832,7 @@ function openConvo(cv) {
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();
   T.hist[key] = cv.msgs; CV.byKey[key] = cv;
+  if (cv.tutorState) T.tstate[key] = cv.tutorState; else if (T.mode === 'socratic' && cv.msgs.some(m => m.meta?.lqState)) T.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs); else delete T.tstate[key];
   T.showHistory = false; renderTutor();
 }
 
@@ -1843,6 +1875,135 @@ function renderConvoHistory(box) {
         } }, '🗑️')));
     box.append(card);
   });
+}
+
+/* ---- 65_threads.js ---- */
+/* ===================== Socratic elicitation threads: tracking, budgets, closure ===================== */
+/* Every question the tutor makes the learner work on is a THREAD. The app (not the model) owns the
+   thread state: it counts the learner's attempts, enforces a budget, injects the state into every call
+   (TUTOR STATE) and parses the model's hidden <lq-state> control line to open/resolve threads.
+   A thread always ends with an authoritative ✅ Answer + 📌 Lesson; the session ends with 🎓 What you learned. */
+const THREAD_BUDGET = 3;        // learner attempts per thread before the tutor MUST give the answer
+const MAX_OPEN_THREADS = 2;     // main question + at most one nested sub-question
+const CONVERGE_AFTER = 10;      // learner turns after which the tutor must start converging
+const TELL_ME_RE = /\b(just tell me|tell me the answer|give me the answer|i give up|no idea|i don'?t know|idk|what'?s the answer)\b|δεν ξέρω|πες μου|απάντησέ μου|δώσε μου την απάντηση/i;
+
+T.tstate = {};
+function newThreadState() { return { v: 1, threads: [], lessons: [], focus: null, learnerTurns: 0, missingControl: 0, wrapped: false }; }
+function threadStateFor(key, create = true) { if (!T.tstate[key] && create) T.tstate[key] = newThreadState(); return T.tstate[key]; }
+const openThreads = ts => ts.threads.filter(t => t.status === 'open');
+const nextThreadId = ts => 't' + (ts.threads.reduce((m, t) => Math.max(m, parseInt(String(t.id).slice(1)) || 0), 0) + 1);
+const usesThreads = mode => mode === 'socratic';
+
+/** Split the model reply into the visible text and the hidden control object. Works on partial streams too. */
+function splitControl(full) {
+  const i = full.indexOf('<lq-state');
+  if (i < 0) return { clean: full.trim(), control: null };
+  const m = full.slice(i).match(/<lq-state>([\s\S]*?)<\/lq-state>/);
+  let control = null;
+  if (m) { try { control = JSON.parse(m[1].trim().replace(/^```(?:json)?|```$/g, '')); } catch (e) { control = null; } }
+  return { clean: full.slice(0, i).trim(), control };
+}
+
+/** Learner sent a message: count an attempt on the focus thread and work out this turn's directive. */
+function noteLearnerTurn(ts, text, directive) {
+  ts.learnerTurns++;
+  if (!directive && TELL_ME_RE.test(text)) directive = 'tellme';
+  const f = ts.threads.find(t => t.id === ts.focus && t.status === 'open');
+  if (f && !directive) f.attempts = (f.attempts || 0) + 1;
+  return directive || null;
+}
+
+/** The TUTOR STATE block appended to the system prompt of every Socratic call. */
+function tutorStateBlock(ts, directive) {
+  const open = openThreads(ts);
+  const depth = t => { let d = 0, p = t; while (p && p.parent) { d++; p = ts.threads.find(x => x.id === p.parent); } return d; };
+  const lines = ['TUTOR STATE (authoritative — maintained by the app; follow it):', 'Open threads (outermost first):'];
+  if (!open.length) lines.push('  (none)');
+  open.forEach(t => lines.push(`  ${'  '.repeat(depth(t))}• ${t.id}${t.parent ? ` (inside ${t.parent})` : ''} "${t.question}" — learner attempts ${t.attempts || 0}/${t.budget || THREAD_BUDGET}${t.id === ts.focus ? '  ← FOCUS (the learner is answering this)' : ''}`));
+  lines.push(ts.lessons.length ? 'Lessons already given (do not repeat; build on them):\n' + ts.lessons.map((l, i) => `  ${i + 1}) ${l.text}`).join('\n') : 'Lessons already given: (none yet)');
+  lines.push(`Learner turns so far: ${ts.learnerTurns}.`);
+  const dir = [];
+  open.filter(t => (t.attempts || 0) >= (t.budget || THREAD_BUDGET)).forEach(t => dir.push(`Thread ${t.id} has used all its attempts → in THIS reply resolve it: **✅ Answer:** + **📌 Lesson:**. Do not ask about it again.`));
+  if (directive === 'tellme') dir.push('The learner asked for the answer → resolve the FOCUS thread (and its sub-threads) now with **✅ Answer:** + **📌 Lesson:**, then go back to the parent thread if one is still open.');
+  if (directive === 'wrapup') dir.push('WRAP UP NOW → resolve EVERY open thread (**✅ Answer:** + **📌 Lesson:** each), then give **🎓 What you learned:** (all lessons of this conversation as 3–7 bullets, authoritative and concrete) and one optional next step. Ask no new Socratic question; "opened" must be empty.');
+  if (open.length >= MAX_OPEN_THREADS && directive !== 'wrapup') dir.push(`${open.length} threads are open → do NOT open a new thread; answer any new question directly and briefly.`);
+  if (ts.learnerTurns >= CONVERGE_AFTER && open.length && !directive) dir.push('This conversation is long → converge: resolve the open threads within this or the next reply and give the 🎓 summary.');
+  if (!open.length && ts.lessons.length && !directive) dir.push('No thread is open → if the learner asked something new, decide afresh (direct answer or ONE new thread). If they just acknowledged, close with **🎓 What you learned:** instead of starting a new chain.');
+  if (ts.missingControl) dir.push('Your previous reply lacked the <lq-state> line — you MUST include it.');
+  lines.push('DIRECTIVES:', ...(dir.length ? dir.map(d => '- ' + d) : ['- (none)']));
+  lines.push(`Next new thread id: ${nextThreadId(ts)}.`);
+  return lines.join('\n');
+}
+
+/** Merge the model's control object into the state. Returns the lessons resolved in this turn. */
+function applyControl(ts, control, seq) {
+  if (!control || typeof control !== 'object') { ts.missingControl++; return []; }
+  ts.missingControl = 0;
+  const got = [];
+  (control.opened || []).forEach(o => {
+    if (!o || !o.question) return;
+    let id = o.id && !ts.threads.some(t => t.id === o.id) ? String(o.id) : nextThreadId(ts);
+    const parent = o.parent && ts.threads.some(t => t.id === o.parent && t.status === 'open') ? o.parent : null;
+    if (openThreads(ts).length >= MAX_OPEN_THREADS + 1) return;                 // hard cap even if the model ignores the rule
+    ts.threads.push({ id, question: String(o.question).slice(0, 300), parent, status: 'open', attempts: 0, budget: THREAD_BUDGET, openedAt: seq });
+  });
+  const resolve = (t, r, how) => {
+    t.status = 'resolved'; t.resolvedAt = seq; t.how = how; t.answer = r.answer ? String(r.answer) : (t.answer || ''); t.lesson = r.lesson ? String(r.lesson) : (t.lesson || '');
+    if (t.lesson && !ts.lessons.some(l => l.text === t.lesson)) { const l = { text: t.lesson, thread: t.id, question: t.question, at: seq }; ts.lessons.push(l); got.push(l); }
+    ts.threads.filter(c => c.parent === t.id && c.status === 'open').forEach(c => resolve(c, {}, 'closed-with-parent'));
+  };
+  (control.resolved || []).forEach(r => {
+    if (!r) return;
+    let t = ts.threads.find(x => x.id === r.id);
+    if (!t) { t = { id: r.id || nextThreadId(ts), question: r.question || '(answered directly)', parent: null, status: 'open', attempts: 0, budget: THREAD_BUDGET, openedAt: seq }; ts.threads.push(t); }
+    resolve(t, r, control.verdict === 'correct' ? 'learner-correct' : 'answered');
+  });
+  if (control.lesson && !ts.lessons.some(l => l.text === control.lesson)) { const l = { text: String(control.lesson), thread: null, question: null, at: seq }; ts.lessons.push(l); got.push(l); }
+  const open = openThreads(ts);
+  ts.focus = control.focus && open.some(t => t.id === control.focus) ? control.focus : (open.length ? open[open.length - 1].id : null);
+  if (control.summary || (!open.length && /🎓/.test(control._text || ''))) ts.wrapped = true;
+  return got;
+}
+
+/** Rebuild state from message metadata (for conversations stored before tutorState existed). */
+function rebuildThreadState(msgs) {
+  const ts = newThreadState();
+  msgs.forEach((m, i) => { if (m.role === 'user') ts.learnerTurns++; else if (m.meta?.lqState) applyControl(ts, m.meta.lqState, i); });
+  return ts;
+}
+
+/* ---------- UI: thread tracker inside the tutor drawer ---------- */
+function threadTracker(key, histLen) {
+  const ts = T.tstate[key];
+  const socr = usesThreads(T.mode);
+  if (!histLen) return null;
+  const open = ts ? openThreads(ts) : [];
+  const focus = ts && open.find(t => t.id === ts.focus);
+  const bar = h('div', { class: 'threadbar' });
+  const row = h('div', { class: 'tb-row' });
+  const add = (...xs) => xs.forEach(x => x && row.append(x));
+  if (socr && ts) {
+    add(h('span', { class: 'tb-ic' }, open.length ? '🧵' : '✅'),
+      h('div', { class: 'grow tb-txt' }, focus ? h('span', {}, h('b', {}, 'Working on: '), focus.question, ' ', h('span', { class: 'pill ' + ((focus.attempts || 0) >= (focus.budget || THREAD_BUDGET) - 1 ? 'warnpill' : '') }, `try ${Math.min((focus.attempts || 0) + 1, focus.budget || THREAD_BUDGET)}/${focus.budget || THREAD_BUDGET}`)) : h('span', {}, open.length ? `${open.length} open question(s)` : (ts.lessons.length ? 'All questions answered' : 'Ask anything — I’ll answer or guide you, then close with the answer'))),
+      ts.lessons.length ? h('button', { class: 'pill c tb-lessons', onclick: () => bar.classList.toggle('open') }, `📌 ${ts.lessons.length} lesson${ts.lessons.length > 1 ? 's' : ''}`) : null,
+      ts.threads.length ? h('button', { class: 'iconbtn tb-more', title: 'Show all threads', onclick: () => bar.classList.toggle('open') }, '▾') : null);
+  } else add(h('span', { class: 'tb-ic' }, '🎯'), h('div', { class: 'grow tb-txt tiny' }, 'Want the key takeaways of this conversation?'));
+  const actions = h('div', { class: 'tb-actions' },
+    socr && focus ? h('button', { class: 'btn small', onclick: () => sendTutor('Just tell me the answer, please.', false, { directive: 'tellme' }) }, '💡 Just tell me') : null,
+    histLen >= 2 ? h('button', { class: 'btn small primary', onclick: () => sendTutor('Let’s wrap up: give me the answers and what I learned.', false, { directive: 'wrapup' }) }, '🎓 Wrap up') : null);
+  bar.append(row);
+  if (actions.children.length) bar.append(actions);
+  if (ts && ts.threads.length) {
+    const tree = h('div', { class: 'tb-tree' });
+    const kids = p => ts.threads.filter(t => (t.parent || null) === p);
+    const draw = (t, d) => { tree.append(h('div', { class: 'tb-node ' + t.status, style: { paddingLeft: 8 + d * 16 + 'px' } }, h('span', {}, t.status === 'open' ? (t.id === ts.focus ? '👉' : '⏳') : '✅'), h('div', { class: 'grow' }, h('div', {}, t.question), t.lesson ? h('div', { class: 'tb-lesson', html: '📌 ' + fmt(t.lesson) }) : null))); kids(t.id).forEach(c => draw(c, d + 1)); };
+    kids(null).forEach(t => draw(t, 0));
+    const loose = ts.lessons.filter(l => !l.thread);
+    if (loose.length) tree.append(...loose.map(l => h('div', { class: 'tb-node resolved', style: { paddingLeft: '8px' } }, h('span', {}, '📌'), h('div', { class: 'grow tb-lesson', html: fmt(l.text) }))));
+    bar.append(tree);
+  }
+  return bar;
 }
 
 /* ---- 70_account.js ---- */

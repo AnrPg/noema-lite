@@ -53,6 +53,7 @@
       deleted: !!r.deleted,
       stats: { messages: msgs.length, userMessages: msgs.filter(m => m.role === 'user').length, chars: msgs.reduce((a, m) => a + m.content.length, 0) },
       messages: r.deleted ? [] : msgs,
+      ...(r.tutorState && !r.deleted ? { tutorState: r.tutorState } : {}),        // Socratic thread tracker: { threads[], lessons[], focus, learnerTurns }
       ...(r.meta ? { meta: r.meta } : {}),
     };
     if (r.titledLen != null && r.titledLen < 1e9) rec.meta = Object.assign({}, rec.meta, { titledAtMessage: r.titledLen });
@@ -75,6 +76,8 @@
       `| **Messages** | ${rec.stats.messages} |`, `| **Model** | ${esc(rec.model?.name || '—')} |`,
       `| **Id** | \`${rec.id}\` |`, `| **Source** | ${appName} |`, '', '---', ''];
     if (rec.deleted) lines.push('*This conversation was deleted.*');
+    const lessons = rec.tutorState?.lessons || [];
+    if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
     rec.messages.forEach(m => lines.push(`${H}# ${m.role === 'user' ? '🧑 You' : `${tutorAvatar} ${tutorName}`} · ${fmt(m.createdAt).slice(11)}`, '', demote(m.content.trim(), level + 2), ''));
     return lines.join('\n');
   }

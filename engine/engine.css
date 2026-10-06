@@ -555,3 +555,20 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 .setupbar{border-radius:18px;padding:10px 12px;margin:-6px 0 18px;background:linear-gradient(135deg,var(--warn-bg),color-mix(in srgb,#ff6b6b 10%,var(--card)));border:1px solid color-mix(in srgb,var(--warn) 40%,var(--line));animation:slideIn .4s}
 .setuprow{display:flex;align-items:center;gap:8px;padding:4px 0;font-weight:650;font-size:14.5px}
 .setuprow .iconbtn{width:30px;height:30px;font-size:13px}
+/* ---------- Socratic thread tracker ---------- */
+.threadbar{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--violet-bg) 60%,var(--card));padding:8px 14px;font-size:13.5px}
+.tb-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tb-ic{font-size:16px}
+.tb-txt{min-width:0;line-height:1.35}
+.tb-actions{display:flex;gap:6px;justify-content:flex-end;margin-top:6px}
+.tb-actions .btn{padding:5px 10px;font-size:12.5px;border-radius:10px}
+.tb-more{width:28px;height:28px;font-size:12px}
+.tb-lessons{cursor:pointer;border:none}
+.tb-tree{display:none;margin-top:8px;max-height:220px;overflow:auto;border-top:1px dashed var(--line);padding-top:6px}
+.threadbar.open .tb-tree{display:grid;gap:4px;animation:slideIn .25s}
+.tb-node{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:8px}
+.tb-node.open{background:var(--card)}
+.tb-lesson{color:var(--ink2);font-size:12.5px;margin-top:2px}
+.lessonchips{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.lessonchip{display:block;padding:6px 10px;border-radius:10px;background:linear-gradient(135deg,#fff3bf,#ffe3ec);color:#5c3c00;font-size:13px;font-weight:600}
+:root[data-theme="dark"] .lessonchip{background:#3d2f10;color:#ffe08a}
