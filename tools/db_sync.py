@@ -35,8 +35,14 @@ CREATE TABLE IF NOT EXISTS accounts(id TEXT PRIMARY KEY, name TEXT, emoji TEXT, 
 CREATE TABLE IF NOT EXISTS backups(sha256 TEXT PRIMARY KEY, file TEXT, account_id TEXT, created_at TEXT, bytes INTEGER, json TEXT);
 CREATE TABLE IF NOT EXISTS user_kv(account_id TEXT, key TEXT, value TEXT, from_backup TEXT, PRIMARY KEY(account_id, key));
 CREATE TABLE IF NOT EXISTS progress(account_id TEXT, subject_id TEXT, subject_xp INTEGER, sections_read INTEGER, exercises_attempted INTEGER, exercises_solved INTEGER, last_section TEXT, PRIMARY KEY(account_id, subject_id));
-CREATE TABLE IF NOT EXISTS conversations(account_id TEXT, subject_id TEXT, id TEXT, title TEXT, mode TEXT, context TEXT, created INTEGER, updated INTEGER, n_messages INTEGER, PRIMARY KEY(account_id, id));
-CREATE TABLE IF NOT EXISTS messages(account_id TEXT, conversation_id TEXT, ord INTEGER, role TEXT, text TEXT, t INTEGER, PRIMARY KEY(account_id, conversation_id, ord));
+-- conversations/messages: canonical lq.conversation/v1 (see docs/CONVERSATIONS.md); rebuilt on every sync
+DROP TABLE IF EXISTS conversations; DROP TABLE IF EXISTS messages;
+CREATE TABLE conversations(account_id TEXT, id TEXT, subject_id TEXT, kind TEXT, mode TEXT, title TEXT, title_source TEXT,
+  context_type TEXT, context_id TEXT, context_label TEXT, model TEXT, created_at TEXT, updated_at TEXT, n_messages INTEGER,
+  deleted INTEGER, origin TEXT, record_json TEXT, PRIMARY KEY(account_id, id));
+CREATE TABLE messages(account_id TEXT, conversation_id TEXT, seq INTEGER, id TEXT, role TEXT, content TEXT, created_at TEXT,
+  PRIMARY KEY(account_id, conversation_id, seq));
+CREATE INDEX IF NOT EXISTS ix_conv_subject ON conversations(account_id, subject_id, updated_at);
 CREATE TABLE IF NOT EXISTS sync_log(at TEXT, action TEXT, detail TEXT);
 CREATE INDEX IF NOT EXISTS ix_ex_section ON exercises(subject_id, section_id);
 CREATE INDEX IF NOT EXISTS ix_blocks_text ON blocks(subject_id, type);
@@ -101,7 +107,12 @@ def main():
             for k, f in enumerate(c['flashcards']): cur.execute('INSERT INTO flashcards VALUES (?,?,?,?,?,?,?)', (sid, c['id'], k, f.get('section'), f.get('q'), f.get('a'), f.get('src') or c.get('src')))
             for k, p in enumerate(c['pitfalls']): cur.execute('INSERT INTO pitfalls VALUES (?,?,?,?,?,?,?)', (sid, c['id'], k, p.get('title'), p.get('text'), p.get('fix'), p.get('src') or c.get('src')))
     # 3) accounts + backups (all backup files are kept; the newest per account feeds the state tables)
-    for t in ('accounts', 'user_kv', 'progress', 'conversations', 'messages'): cur.execute(f'DELETE FROM {t}')
+    for t in ('accounts', 'user_kv', 'progress'): cur.execute(f'DELETE FROM {t}')
+    convs = {}   # (account, id) -> (record, origin); newest updatedAt wins
+    def add_conv(acc, rec, origin):
+        if not isinstance(rec, dict) or not rec.get('id'): return
+        k = (acc, rec['id']); old = convs.get(k)
+        if old is None or (rec.get('updatedAt') or '') > (old[0].get('updatedAt') or ''): convs[k] = (rec, origin)
     latest = {}
     for f in sorted(glob.glob(os.path.join(ACC, '*', 'account.json'))):
         a = rj(f); cur.execute('INSERT OR REPLACE INTO accounts VALUES (?,?,?,?,?,?)', (a['id'], a.get('name'), a.get('emoji'), 'local', a.get('email'), json.dumps(a, ensure_ascii=False)))
@@ -113,6 +124,12 @@ def main():
         acc = b['account']['id']; h = sha(raw)
         cur.execute('INSERT OR IGNORE INTO backups VALUES (?,?,?,?,?,?)', (h, os.path.relpath(f, ROOT), acc, b.get('createdAt'), len(raw), raw.decode('utf-8')))
         if acc not in latest or (b.get('createdAt') or '') > (latest[acc][1].get('createdAt') or ''): latest[acc] = (os.path.relpath(f, ROOT), b)
+        for rec in b.get('conversations') or []: add_conv(acc, rec, 'backup:' + os.path.basename(f))
+    # canonical conversation files written by the app's folder auto-backup: accounts/<id>/conversations/<subject>/<YYYY-MM>/<cv_id>.json
+    for f in sorted(glob.glob(os.path.join(ACC, '*', 'conversations', '*', '*', 'cv_*.json'))):
+        try: rec = json.load(open(f, encoding='utf-8'))
+        except Exception: continue
+        add_conv(f.split(os.sep)[-5], rec, 'file')
         cur.execute('INSERT OR IGNORE INTO accounts VALUES (?,?,?,?,?,?)', (acc, b['account'].get('name'), b['account'].get('emoji'), b['account'].get('kind'), b['account'].get('email'), json.dumps(b['account'], ensure_ascii=False)))
     for acc, (fname, b) in latest.items():
         for key, val in b['data'].items():
@@ -123,15 +140,24 @@ def main():
                 except Exception: continue
                 res = st.get('res', {})
                 cur.execute('INSERT OR REPLACE INTO progress VALUES (?,?,?,?,?,?,?)', (acc, parts[1], st.get('xp', 0), len(st.get('read', {})), len(res), sum(1 for r in res.values() if r.get('ok', 0) > 0), st.get('last')))
-            if len(parts) == 3 and parts[0] == 's' and parts[2] == 'convos':
+            if len(parts) == 3 and parts[0] == 's' and parts[2] == 'convos':   # legacy (pre-v2) storage → canonical shape
                 try: convos = json.loads(val)
                 except Exception: continue
                 for cv in convos:
-                    cur.execute('INSERT OR REPLACE INTO conversations VALUES (?,?,?,?,?,?,?,?,?)', (acc, parts[1], cv.get('id'), cv.get('title'), cv.get('mode'), (cv.get('ctx') or {}).get('label'), cv.get('created'), cv.get('updated'), len(cv.get('msgs', []))))
-                    for k, m in enumerate(cv.get('msgs', [])): cur.execute('INSERT OR REPLACE INTO messages VALUES (?,?,?,?,?,?)', (acc, cv.get('id'), k, m.get('role'), m.get('text'), m.get('t')))
+                    iso = lambda ms: time.strftime('%Y-%m-%dT%H:%M:%S', time.gmtime((ms or 0) / 1000)) + 'Z'
+                    if (acc, cv.get('id')) in convs: continue
+                    add_conv(acc, {'schema': 'lq.conversation/v1', 'id': cv.get('id'), 'subject': {'id': parts[1]}, 'kind': 'tutor', 'mode': cv.get('mode'), 'title': cv.get('title'),
+                                   'context': {'type': (cv.get('ctx') or {}).get('kind', 'course'), 'id': (cv.get('ctx') or {}).get('id'), 'label': (cv.get('ctx') or {}).get('label')},
+                                   'model': {'provider': 'google', 'name': cv.get('model')}, 'createdAt': iso(cv.get('created')), 'updatedAt': iso(cv.get('updated')), 'deleted': False,
+                                   'messages': [{'seq': i, 'role': 'assistant' if m.get('role') == 'model' else m.get('role'), 'content': m.get('text', ''), 'createdAt': iso(m.get('t'))} for i, m in enumerate(cv.get('msgs', []))]}, 'legacy-kv')
+    for (acc, cid), (r, origin) in convs.items():
+        ctx = r.get('context') or {}; msgs = r.get('messages') or []
+        cur.execute('INSERT OR REPLACE INTO conversations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', (acc, cid, (r.get('subject') or {}).get('id'), r.get('kind'), r.get('mode'), r.get('title'), r.get('titleSource'),
+                    ctx.get('type'), ctx.get('id'), ctx.get('label'), (r.get('model') or {}).get('name'), r.get('createdAt'), r.get('updatedAt'), len(msgs), 1 if r.get('deleted') else 0, origin, json.dumps(r, ensure_ascii=False)))
+        for i, m in enumerate(msgs): cur.execute('INSERT OR REPLACE INTO messages VALUES (?,?,?,?,?,?,?)', (acc, cid, m.get('seq', i), m.get('id'), m.get('role'), m.get('content'), m.get('createdAt')))
     try: commit = subprocess.run(['git', '-C', ROOT, 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip()
     except Exception: commit = ''
-    for k, v in (('last_sync', ts), ('git_commit', commit), ('schema_version', '1')): cur.execute('INSERT OR REPLACE INTO meta VALUES (?,?)', (k, v))
+    for k, v in (('last_sync', ts), ('git_commit', commit), ('schema_version', '2')): cur.execute('INSERT OR REPLACE INTO meta VALUES (?,?)', (k, v))
     cur.execute('INSERT INTO sync_log VALUES (?,?,?)', (ts, 'sync', json.dumps({'new_file_versions': n_new, 'commit': commit})))
     con.commit()
     q = lambda s: cur.execute(s).fetchone()[0]

@@ -60,3 +60,27 @@ create policy "lq own files read"   on storage.objects for select to authenticat
 create policy "lq own files insert" on storage.objects for insert to authenticated with check (bucket_id = 'lq-private' and (storage.foldername(name))[1] = (select auth.uid())::text);
 create policy "lq own files update" on storage.objects for update to authenticated using      (bucket_id = 'lq-private' and (storage.foldername(name))[1] = (select auth.uid())::text);
 create policy "lq own files delete" on storage.objects for delete to authenticated using      (bucket_id = 'lq-private' and (storage.foldername(name))[1] = (select auth.uid())::text);
+
+-- =====================================================================================
+-- v2: conversations with the AI tutor and every other AI interaction, one canonical record per row
+-- (schema lq.conversation/v1 — see docs/CONVERSATIONS.md). Deletions are tombstones (deleted = true).
+-- =====================================================================================
+create table if not exists public.lq_conversations (
+  user_id       uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  id            text not null,                 -- cv_<time36><rand>, time-sortable
+  subject_id    text,
+  kind          text not null,                 -- tutor | grading | code-review | question | drill-grading
+  mode          text,                          -- socratic | explain | quiz | interview | debug (tutor only)
+  title         text,
+  context_label text,
+  message_count integer not null default 0,
+  deleted       boolean not null default false,
+  created_at    timestamptz not null,
+  updated_at    timestamptz not null,
+  record        jsonb not null,                -- the full canonical record (messages included)
+  primary key (user_id, id)
+);
+create index if not exists lq_conversations_user_updated on public.lq_conversations (user_id, updated_at);
+alter table public.lq_conversations enable row level security;
+drop policy if exists "own conversations" on public.lq_conversations;
+create policy "own conversations" on public.lq_conversations for all to authenticated using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));

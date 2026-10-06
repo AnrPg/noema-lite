@@ -501,7 +501,7 @@ async function sendTutor(text, hidden = false) {
     touchStreak();
   } catch (e) {
     hist.pop(); persistConvo(key);
-    bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + e.message), h('div', { style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ Settings')));
+    bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + e.message), h('div', { class: 'row', style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ Settings'), /key/i.test(e.message) ? h('button', { class: 'btn small ghost', onclick: () => openGuide('gemini') }, '🔑 How to get a key') : null));
   } finally { T.busy = false; }
 }
 
@@ -511,19 +511,35 @@ async function aiGrade(ex, answer) {
   const ref = ex.type === 'write' ? `Reference solution:\n${ex.solution}` : `Model answer:\n${ex.model}\nRubric key points:\n- ${(ex.rubric || []).join('\n- ')}`;
   const sec = SEC[ex.section];
   const prompt = `Grade the learner's answer to a ${TUTOR.domain} exercise.\nQuestion: ${ex.q}\n${ex.code ? 'Code shown:\n' + ex.code + '\n' : ''}${ref}\n\nLearner's answer:\n"""${answer}"""\n\nSection notes (ground truth):\n${sec ? sectionText(sec).slice(0, 6000) : ''}\n\nReturn JSON: score 0-100 (meaning, not wording; for code accept equivalent correct syntax), verdict (one short line), covered (rubric points hit), missing (points missed), mistakes (factual errors), feedback (2-4 sentences, encouraging, specific, end with a nudge question).`;
-  return geminiJSON(prompt, `You are a strict but kind ${TUTOR.examinerRole}. Output only JSON.`, schema);
+  const g = await geminiJSON(prompt, `You are a strict but kind ${TUTOR.examinerRole}. Output only JSON.`, schema);
+  try {
+    const sec = SEC[ex.section];
+    logAI(ex.type === 'write' ? 'code-review' : 'grading', {
+      ctx: { kind: 'exercise', id: ex.id, label: `${sec ? 'Ch' + sec._ch.num + ' · ' + sec.title + ' · ' : ''}${ex.id}` },
+      title: `${ex.type === 'write' ? 'Code review' : 'Grading'}: ${String(ex.q || '').replace(/[*`_]/g, '').slice(0, 70)}`,
+      prompt: `**Question:** ${ex.q}${ex.code ? '\n\n```\n' + ex.code + '\n```' : ''}\n\n**My answer:**\n\n${ex.type === 'write' ? '```\n' + answer + '\n```' : answer}`,
+      response: `**Score: ${g.score}/100** — ${g.verdict || ''}\n\n${g.covered?.length ? '✅ ' + g.covered.join(' · ') + '\n\n' : ''}${g.missing?.length ? '➕ Missing: ' + g.missing.join(' · ') + '\n\n' : ''}${g.mistakes?.length ? '❌ ' + g.mistakes.join(' · ') + '\n\n' : ''}${g.feedback || ''}` });
+  } catch (e) { }
+  return g;
 }
 async function aiQuestion(sec, kind = 'mcq') {
   const schema = { type: 'OBJECT', properties: { q: { type: 'STRING' }, code: { type: 'STRING' }, options: { type: 'ARRAY', items: { type: 'STRING' } }, answer: { type: 'INTEGER' }, why: { type: 'ARRAY', items: { type: 'STRING' } }, explain: { type: 'STRING' } }, required: ['q', 'options', 'answer', 'why', 'explain'] };
   const seen = shuffle(sec._ch.exercises.filter(e => e.section === sec.id)).slice(0, 6).map(e => '- ' + e.q).join('\n');
   const prompt = `Create ONE fresh, tricky multiple-choice question (4 options, exactly one correct) that tests deep understanding of this ${TUTOR.domain} section. Prefer a scenario, a prediction, a debugging decision or a certification trap. Avoid duplicating these existing questions:\n${seen}\n\nSECTION NOTES (only use facts from here):\n${sectionText(sec).slice(0, 9000)}\n\nJSON fields: q (inline markdown with **bold** and \`code\` allowed), code (optional snippet or empty string), options (4 strings), answer (0-3), why (4 short strings: why each option is right/wrong), explain (2-4 sentences that teach).`;
   const r = await geminiJSON(prompt, 'You write excellent exam questions. Output only JSON.', schema);
+  try { logAI('question', { ctx: { kind: 'section', id: sec.id, label: `Ch${sec._ch.num} · ${sec.title}` }, title: `AI question: ${String(r.q || '').replace(/[*`_]/g, '').slice(0, 70)}`,
+    prompt: `Generate a fresh, tricky question on “${sec.title}”.`,
+    response: `${r.q}${r.code ? '\n\n```\n' + r.code + '\n```' : ''}\n\n${(r.options || []).map((o, i) => `${i === (r.answer | 0) ? '✅' : '▫️'} ${String.fromCharCode(65 + i)}. ${o}${r.why?.[i] ? ' — *' + r.why[i] + '*' : ''}`).join('\n')}\n\n**Explanation:** ${r.explain || ''}` }); } catch (e) { }
   return { id: 'ai-' + Date.now(), type: 'mcq', section: sec.id, difficulty: 2, tags: ['concept'], q: r.q, code: r.code || undefined, options: r.options.slice(0, 4), answer: Math.max(0, Math.min(3, r.answer | 0)), why: (r.why || []).slice(0, 4), explain: r.explain, _ch: sec._ch, _ai: true };
 }
 async function aiDrillGrade(d, answer) {
   const schema = { type: 'OBJECT', properties: { score: { type: 'INTEGER' }, hit: { type: 'ARRAY', items: { type: 'INTEGER' } }, feedback: { type: 'STRING' } }, required: ['score', 'hit', 'feedback'] };
   const prompt = `A learner was shown this debugging symptom and listed the questions they would ask themselves.\nSymptom: ${d.symptom}\nCanonical ordered checklist:\n${d.askYourself.map((q, i) => `${i}. ${q}`).join('\n')}\n\nLearner wrote:\n"""${answer}"""\n\nReturn JSON: hit = indexes of checklist questions the learner covered (same meaning counts), score 0-100 (coverage + sensible order), feedback 2-3 sentences: what they nailed, the most important one they missed and why it matters.`;
-  return geminiJSON(prompt, 'You are a precise debugging coach. Output only JSON.', schema);
+  const g = await geminiJSON(prompt, 'You are a precise debugging coach. Output only JSON.', schema);
+  try { logAI('drill-grading', { ctx: { kind: 'playbook', id: d.id, label: d.title }, title: `Drill: ${d.title}`.slice(0, 90),
+    prompt: `**Symptom:** ${d.symptom}\n\n**The questions I would ask myself:**\n\n${answer}`,
+    response: `**Score: ${g.score}/100** — covered ${(g.hit || []).length}/${d.askYourself.length}\n\n${g.feedback || ''}\n\n**Canonical checklist:**\n${d.askYourself.map((q, i) => `${(g.hit || []).includes(i) ? '✅' : '▫️'} ${i + 1}. ${q}`).join('\n')}` }); } catch (e) { }
+  return g;
 }
 
 /* ---------- settings ---------- */
@@ -537,7 +553,8 @@ function openSettings() {
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
     b.append(h('h2', {}, '⚙️ Settings'),
-      h('div', { class: 'field' }, h('label', {}, 'Gemini API key'), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
+      !S.settings.apiKey ? h('div', { class: 'callout warn', style: { marginTop: '10px' } }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
+      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
       h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
         h('div', { class: 'row' },
           h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); status.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); status.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { status.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),
@@ -954,6 +971,7 @@ function homeView() {
   const search = h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), h('input', { placeholder: `Jump to any concept…${SUBJ.searchExamples ? ' (e.g. ' + SUBJ.searchExamples + ')' : ''}`, oninput: e => doSearch(e.target.value, results) }));
   const last = S.last && SEC[S.last];
   const v = view(
+    setupBanner(),
     h('section', { class: 'hero' },
       h('div', {},
         h('h1', { class: 'herohead', html: fmt(SUBJ.hero?.headline || `Master **${SUBJ.title}**, one bite at a time.`) }),
@@ -1619,17 +1637,33 @@ function mdRich(s) {
   return wrap;
 }
 
-/* ---------- storage (separate key, capped, quota-safe) ---------- */
-const CONVO_KEY = LQ.kv.subjectKey('convos');
-const CONVO_MAX = 100;
+/* ---------- storage: canonical lq.conversation/v1 records (engine/convos.js), persisted in the background ---------- */
 const CV = { list: [], byKey: {}, titling: new Set() };
-try { CV.list = JSON.parse(LQ.kv.get(CONVO_KEY) || '[]'); if (!Array.isArray(CV.list)) CV.list = []; } catch (e) { CV.list = []; }
-function saveConvos() {
-  let list = CV.list.filter(c => c.msgs && c.msgs.length).slice(-CONVO_MAX);
-  for (;;) {
-    if (LQ.kv.set(CONVO_KEY, JSON.stringify(list, (k, v) => k === 'hidden' ? undefined : v))) { CV.list = list; return true; }
-    if (list.length <= 1) return false; list = list.slice(1);   // storage full → drop oldest until it fits
-  }
+const ACC_REF = { id: ACCOUNT.id, kind: ACCOUNT.kind || 'local' };
+const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: LQ.pack?.version || null };
+function fromRec(r) {     // canonical record → in-memory shape used by the UI
+  return { id: r.id, kind: r.kind, mode: r.mode, created: Date.parse(r.createdAt), updated: Date.parse(r.updatedAt),
+    ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label } : null,
+    model: r.model?.name || '', title: r.title, titleSource: r.titleSource,
+    titledLen: r.titleSource === 'user' ? 1e9 : (r.meta?.titledAtMessage ?? (r.title ? r.messages.length : 0)),
+    msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt) })) };
+}
+function toRec(cv) {      // in-memory shape → canonical record
+  const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : null;
+  return LQ.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
+    titleSource: cv.titleSource || (cv.titledLen >= 1e9 ? 'user' : cv.title ? 'ai' : 'none'),
+    context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
+    model: { provider: 'google', name: cv.model || S.settings.model || null },
+    createdAt: new Date(cv.created).toISOString(), updatedAt: new Date(cv.updated || Date.now()).toISOString(),
+    messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString() })),
+    meta: cv.titledLen && cv.titledLen < 1e9 ? { titledAtMessage: cv.titledLen } : undefined }, { account: ACC_REF, subject: SUBJ_REF });
+}
+CV.list = (LQ.preloadedConvos || []).map(fromRec);
+/** Persist one conversation now (IndexedDB → then folder + cloud in the background). Never blocks the UI. */
+function saveConvos(cv) {
+  const targets = cv ? [cv] : CV.list;
+  targets.forEach(c => { if (c.msgs?.length) LQ.convos.put(ACCOUNT.id, { ...toRec(c), account: ACC_REF, subject: SUBJ_REF }).catch(e => console.warn('[LQ] conversation save failed', e)); });
+  return true;
 }
 function ctxRecord() {
   const c = T.ctx; if (!c) return null;
@@ -1640,11 +1674,19 @@ function persistConvo(key) {
   if (!hist || !hist.length) return;
   let cv = CV.byKey[key];
   if (!cv || cv.msgs !== hist) {
-    cv = { id: 'cv_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), created: Date.now(), mode: T.mode, ctx: ctxRecord(), model: S.settings.model || '', title: null, msgs: hist };
+    cv = { id: LQ.convos.newId(), kind: 'tutor', created: Date.now(), mode: T.mode, ctx: ctxRecord(), model: S.settings.model || '', title: null, msgs: hist };
     CV.byKey[key] = cv; CV.list.push(cv);
   }
   cv.updated = Date.now(); cv.model = S.settings.model || cv.model;
-  saveConvos();
+  saveConvos(cv);
+}
+/** Record a one-shot AI interaction (grading, code review, generated question, drill grading) as a canonical conversation. */
+function logAI(kind, { ctx = null, title = null, prompt, response }) {
+  const t = Date.now();
+  const cv = { id: LQ.convos.newId(t), kind, mode: null, created: t, updated: t, ctx, model: S.settings.model || '', title, titleSource: title ? 'system' : 'none', titledLen: 1e9,
+    msgs: [{ role: 'user', text: prompt, t }, { role: 'model', text: response, t: Date.now() }] };
+  CV.list.push(cv); saveConvos(cv);
+  return cv;
 }
 function currentConvo() {
   const key = tutorCtxKey(), cv = CV.byKey[key];
@@ -1662,6 +1704,7 @@ function fallbackTitle(cv) {
   return cleanTitle(`${topic}`) || `${SUBJ.title} Tutoring Session`;
 }
 const displayTitle = cv => cv.title || fallbackTitle(cv);
+const KIND_BADGE = { tutor: '', grading: '📝 grading', 'code-review': '⌨️ code review', question: '✨ AI question', 'drill-grading': '🔧 drill grading' };
 async function generateTitle(cv) {
   if (CV.titling.has(cv.id)) return cv.title;
   CV.titling.add(cv.id);
@@ -1674,7 +1717,7 @@ Reply with the title only.
 TRANSCRIPT:
 ${transcript}`;
     const t = cleanTitle(await gemini({ contents: [{ role: 'user', parts: [{ text: prompt }] }], temperature: 0.2 }));
-    if (t && t.split(' ').length <= 14) { cv.title = t; cv.titledLen = cv.msgs.length; saveConvos(); }
+    if (t && t.split(' ').length <= 14) { cv.title = t; cv.titleSource = 'ai'; cv.titledLen = cv.msgs.length; saveConvos(cv); }
   } catch (e) { /* keep fallback */ }
   finally { CV.titling.delete(cv.id); }
   if (T.open && T.showHistory) renderTutor();
@@ -1725,7 +1768,7 @@ async function exportConvo(cv) {
   if (!cv || !cv.msgs?.length) return toast('Nothing to export yet — start a conversation first 🙂');
   if (!cv.title || cv.msgs.length - (cv.titledLen || 0) >= 2) { toast('✨ Naming your conversation…', 1500); await generateTitle(cv); }
   const title = displayTitle(cv);
-  downloadText(`${fmtDate(cv.created, false)}_${slug(MODE_NAME[cv.mode] || cv.mode)}_${slug(title)}.md`, convoMarkdown(cv));
+  downloadText(`${fmtDate(cv.created, false)}_${slug(MODE_NAME[cv.mode] || cv.kind || 'conversation')}_${slug(title)}.md`, convoMarkdown(cv));
   toast('⬇️ Exported “' + title + '”');
 }
 function exportAllConvos() {
@@ -1755,23 +1798,26 @@ function openConvo(cv) {
     if (r.kind === 'exercise') { const e = findFull('exercise', r.id); ctx = e ? { kind: 'exercise', id: r.id, text: exerciseAsText(e) } : null; }
     else ctx = { kind: r.kind, id: r.id, label: r.label };
   }
-  T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : 'socratic';
+  T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();
   T.hist[key] = cv.msgs; CV.byKey[key] = cv;
   T.showHistory = false; renderTutor();
 }
 
 /* ---------- history panel (inside the tutor drawer) ---------- */
-let histQuery = '';
+let histQuery = '', histAllKinds = false;
 function renderConvoHistory(box) {
-  const all = CV.list.filter(c => c.msgs?.length).sort((a, b) => (b.updated || 0) - (a.updated || 0));
+  const everything = CV.list.filter(c => c.msgs?.length);
+  const all = everything.filter(c => histAllKinds || !c.kind || c.kind === 'tutor').sort((a, b) => (b.updated || 0) - (a.updated || 0));
+  const others = everything.length - everything.filter(c => !c.kind || c.kind === 'tutor').length;
   const q = histQuery.trim().toLowerCase();
   const list = q ? all.filter(c => (displayTitle(c) + ' ' + (c.ctx?.label || '') + ' ' + c.msgs.map(m => m.text).join(' ')).toLowerCase().includes(q)) : all;
   box.classList.add('histbox');
   box.append(h('div', { class: 'histhead' },
-    h('b', { class: 'grow' }, `🕘 Conversations (${all.length})`),
+    h('b', { class: 'grow' }, `🕘 Conversations (${all.length})`, tip('Every conversation with the tutor — and every AI grading, code review and generated question — is saved automatically in the background: in this browser, in your backup folder (if set) and in the cloud (cloud accounts). ⬇️ exports a readable Markdown copy on demand.')),
     all.length ? h('button', { class: 'btn small', onclick: exportAllConvos }, '⬇️ Export all') : null,
     h('button', { class: 'btn small primary', onclick: () => { T.showHistory = false; renderTutor(); } }, '← Chat')));
+  if (others) box.append(h('label', { class: 'row tiny', style: { margin: '2px 0 4px' } }, h('input', { type: 'checkbox', checked: histAllKinds, onchange: e => { histAllKinds = e.target.checked; renderTutor(); } }), `Also show ${others} AI grading / review / question record${others > 1 ? 's' : ''}`));
   if (all.length > 3) {
     const inp = h('input', { class: 'histsearch', placeholder: 'Search conversations…', value: histQuery, oninput: e => { histQuery = e.target.value; const pos = e.target.selectionStart; renderTutor(); const ni = $('.histsearch'); if (ni) { ni.focus(); ni.setSelectionRange(pos, pos); } } });
     box.append(inp);
@@ -1782,18 +1828,18 @@ function renderConvoHistory(box) {
     const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · naming…') : null);
     const card = h('div', { class: 'cvcard', style: { animationDelay: Math.min(i, 12) * 25 + 'ms' } },
       h('button', { class: 'cvmain', onclick: () => openConvo(cv) }, titleEl,
-        h('small', {}, `${MODES[cv.mode]?.label || cv.mode} · ${cv.ctx?.label || 'Whole course'}`),
+        h('small', {}, `${cv.kind && cv.kind !== 'tutor' ? KIND_BADGE[cv.kind] : (MODES[cv.mode]?.label || cv.mode)} · ${cv.ctx?.label || 'Whole course'}`),
         h('small', {}, `${fmtDate(cv.updated || cv.created)} · ${cv.msgs.length} messages`)),
       h('div', { class: 'cvactions' },
         h('button', { class: 'iconbtn', title: 'Rename', onclick: () => {
           const inp = h('input', { class: 'histsearch', value: displayTitle(cv), onkeydown: e => { if (e.key === 'Enter') done(); if (e.key === 'Escape') renderTutor(); }, onblur: () => done() });
-          const done = () => { const v = cleanTitle(inp.value); if (v) { cv.title = v; cv.titledLen = 1e9; saveConvos(); } renderTutor(); };
+          const done = () => { const v = cleanTitle(inp.value); if (v) { cv.title = v; cv.titleSource = 'user'; cv.titledLen = 1e9; saveConvos(cv); } renderTutor(); };
           titleEl.replaceWith(inp); inp.focus(); inp.select();
         } }, '✏️'),
         h('button', { class: 'iconbtn', title: 'Export .md', onclick: () => exportConvo(cv) }, '⬇️'),
         h('button', { class: 'iconbtn', title: 'Delete', onclick: e => {
           if (!confirmDel) { confirmDel = true; e.currentTarget.textContent = '❓'; e.currentTarget.title = 'Click again to delete'; return; }
-          CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } saveConvos(); renderTutor();
+          CV.list = CV.list.filter(x => x !== cv); for (const k in CV.byKey) if (CV.byKey[k] === cv) { delete CV.byKey[k]; delete T.hist[k]; } LQ.convos.remove(ACCOUNT.id, cv.id).catch(() => { }); renderTutor();
         } }, '🗑️')));
     box.append(card);
   });
@@ -1801,7 +1847,14 @@ function renderConvoHistory(box) {
 
 /* ---- 70_account.js ---- */
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = [['profile', '👤 Profile'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud']];
+const ACC_TABS = [['profile', '👤 Profile'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud'], ['help', '❓ Help']];
+/** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
+function accSection(icon, title, { status = null, info = null, open = false, body }) {
+  const d = h('details', { class: 'accsec', open: open || null },
+    h('summary', {}, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, `${icon} ${title}`), info ? tip(info) : null, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
+    h('div', { class: 'accsecbody' }, body));
+  return d;
+}
 const fmtBytes = n => n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B';
 const fmtWhen = t => t ? new Date(t).toLocaleString() : '—';
 function accountSettings() { try { return JSON.parse(LQ.kv.get(LQ.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
@@ -1834,7 +1887,7 @@ const ACC_VIEWS = {
     const bySub = Object.entries(LQ.stats.get().bySubject || {}).sort((a, b) => b[1] - a[1]);
     body.append(
       h('div', { class: 'row' }, h('div', { class: 'field grow' }, h('label', {}, 'Name'), name), h('div', { class: 'field' }, h('label', {}, 'Emoji'), emoji)),
-      h('div', { class: 'field' }, h('label', {}, 'About me (the tutor adapts to this, in every subject)'), learner),
+      h('div', { class: 'field' }, h('label', {}, 'About me (the tutor adapts to this, in every subject) ', tip('Write how you learn, what you already know and your goal. It is added to every tutor conversation, in every subject. Stays private to this profile.')), learner),
       h('label', { class: 'row', style: { margin: '8px 0' } }, ask, 'Show the subject picker every time I open the app'),
       ACCOUNT.kind === 'local' ? h('div', { class: 'field' }, h('label', {}, 'PIN (a privacy curtain on a shared device — not encryption)'), h('div', { class: 'row' }, pin, ACCOUNT.pin ? h('button', { class: 'btn small', onclick: () => { LQ.saveLocalAccount({ ...ACCOUNT, pin: null }); toast('PIN removed'); } }, 'Remove PIN') : null)) : null,
       bySub.length ? h('div', { class: 'field' }, h('label', {}, 'XP by subject'), h('div', { class: 'row' }, ...bySub.map(([sid, xp]) => h('span', { class: 'pill' }, `${sid}: ${xp}`)))) : null,
@@ -1874,19 +1927,20 @@ const ACC_VIEWS = {
   async backup(body) {
     const inc = h('input', { type: 'checkbox' });
     const fsSupported = LQ.autoBackup.supported();
-    const fsBox = h('div');
+    const fsBox = h('div'); const rpBox = h('div');
+    const hd0 = fsSupported ? await LQ.autoBackup.handle(ACCOUNT.id) : null;
+    const ok0 = hd0 ? await LQ.autoBackup.permitted(hd0) : false;
     const drawFs = async () => {
       fsBox.innerHTML = '';
       const hd = await LQ.autoBackup.handle(ACCOUNT.id);
-      if (!fsSupported) { fsBox.append(h('p', { class: 'tiny' }, 'Automatic folder backups need Chrome, Edge or Brave (File System Access API). In this browser use “Download backup”.')); return; }
-      if (!hd) { fsBox.append(h('p', { class: 'tiny' }, `Pick a folder once (suggested: learning-quest/accounts/${ACCOUNT.id}/backups). A backup is written there every ${LQ.config.autoBackupMinutes} minutes when something changed, and when you leave the app.`), h('button', { class: 'btn', onclick: async () => { try { const n = await LQ.autoBackup.choose(ACCOUNT.id); toast(`✅ Auto-backup → ${n}`); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + e.message); } } }, '📁 Choose backup folder')); return; }
+      if (!fsSupported) { fsBox.append(h('p', { class: 'tiny' }, 'This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.'), guideBtn('backupFolder', '📁 How folder backups work')); return; }
+      if (!hd) { fsBox.append(guideBody('backupFolder', { compact: true }), h('button', { class: 'btn primary', onclick: async () => { try { const n = await LQ.autoBackup.choose(ACCOUNT.id); toast(`✅ Auto-backup → ${n}`); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + e.message); } } }, '📁 Choose backup folder')); return; }
       const ok = await LQ.autoBackup.permitted(hd);
-      fsBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (ok ? 'c' : '') }, ok ? `✅ Auto-backup on → 📁 ${hd.name}` : `⏸️ Paused — permission needed for 📁 ${hd.name}`),
-        ok ? h('button', { class: 'btn small', onclick: async () => { await LQ.autoBackup.run(ACCOUNT.id, true); toast('💾 Backed up to folder'); } }, 'Back up now') : h('button', { class: 'btn small primary', onclick: async () => { if (await LQ.autoBackup.permitted(hd, true)) { LQ.autoBackup.start(ACCOUNT.id); await LQ.autoBackup.run(ACCOUNT.id, true); toast('✅ Auto-backup resumed'); } drawFs(); } }, 'Resume'),
+      fsBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (ok ? 'c' : 'warnpill') }, ok ? `✅ On → 📁 ${hd.name}` : `⏸️ Paused — permission needed for 📁 ${hd.name}`),
+        ok ? h('button', { class: 'btn small', onclick: async () => { await LQ.autoBackup.run(ACCOUNT.id, true); toast('💾 Backed up to folder'); drawFs(); } }, 'Back up now') : h('button', { class: 'btn small primary', onclick: async () => { if (await LQ.autoBackup.permitted(hd, true)) { LQ.autoBackup.start(ACCOUNT.id); await LQ.autoBackup.run(ACCOUNT.id, true); toast('✅ Auto-backup resumed'); } drawFs(); } }, 'Resume'),
         h('button', { class: 'btn small ghost', onclick: async () => { await LQ.autoBackup.disable(ACCOUNT.id); drawFs(); } }, 'Turn off')),
-        h('div', { class: 'tiny', style: { marginTop: '6px' } }, `Last folder backup: ${fmtWhen(LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0))}`));
+        h('div', { class: 'tiny', style: { marginTop: '6px' } }, `Last folder backup: ${fmtWhen(LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0))} · writes backups/ and conversations/ inside 📁 ${hd.name}`));
     };
-    const rpBox = h('div');
     const drawRP = async () => {
       rpBox.innerHTML = '';
       const pts = await LQ.backup.listRestorePoints(ACCOUNT.id);
@@ -1895,34 +1949,42 @@ const ACC_VIEWS = {
         h('button', { class: 'btn small', onclick: async () => LQ.backup.download(await LQ.backup.getRestorePoint(p.key)) }, '⬇️'),
         h('button', { class: 'btn small', onclick: () => confirmBox('Go back to this restore point? (your current state becomes a new restore point)', async () => { await LQ.backup.apply(await LQ.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); }) }, 'Restore'))));
     };
+    const pts0 = await LQ.backup.listRestorePoints(ACCOUNT.id);
+    const nConv = (await LQ.convos.list(ACCOUNT.id)).length;
+    const lastDl = LQ.jget(`lq1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
     body.append(
-      h('h3', {}, '⬇️ Download a backup'),
-      h('p', { class: 'tiny' }, 'One JSON file with everything of this profile: progress in every subject, flashcard schedules, tutor conversations, settings and imported packs.'),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); LQ.backup.download(await LQ.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 Download backup'), h('label', { class: 'row tiny' }, inc, 'include my Gemini API key')),
-      h('h3', { style: { marginTop: '22px' } }, '📁 Automatic backups to a folder'), fsBox,
-      h('h3', { style: { marginTop: '22px' } }, '⬆️ Restore from a backup file'),
-      h('p', { class: 'tiny' }, 'Also accepts the “Export progress” file of the old single-file Databricks Quest.'),
-      h('label', { class: 'btn' }, '📂 Choose backup file…', h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
-        let obj; try { obj = LQ.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
-        modal((b, c2) => b.append(h('h3', {}, 'Restore backup'), h('p', { class: 'muted' }, `From “${obj.account.name}” · ${fmtWhen(obj.createdAt)} · ${Object.keys(obj.data).length} items`),
-          h('div', { style: { display: 'grid', gap: '8px' } },
-            h('button', { class: 'btn primary', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
-            h('button', { class: 'btn', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
-            h('button', { class: 'btn', onclick: async () => { c2(); const base = (obj.account.name || 'Restored') + ' (restored)'; const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); LQ.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await LQ.backup.apply(obj, id, 'replace'); LQ.switchTo(id, null); } }, '➕ Restore as a new local profile'),
-            h('button', { class: 'btn ghost', onclick: c2 }, 'Cancel'))));
-      } })),
-      h('h3', { style: { marginTop: '22px' } }, '🕘 Restore points on this device'), rpBox);
+      h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, `Everything below is optional. ${nConv} AI conversation${nConv === 1 ? ' is' : 's are'} saved automatically in this browser${ACCOUNT.kind === 'cloud' ? ' and in your cloud account' : ''}.`),
+      accSection('⬇️', 'Download a backup', { status: lastDl ? { ok: true, text: 'last ' + new Date(lastDl).toLocaleDateString() } : null,
+        info: 'One JSON file with everything of this profile: progress in every subject, flashcard schedules, all AI conversations (canonical format), settings and imported packs. Keep it anywhere; restore it here or on another device.',
+        body: [h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); LQ.backup.download(await LQ.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 Download backup'), h('label', { class: 'row tiny' }, inc, 'include my Gemini API key', tip('Off by default so a backup file you share or store somewhere can’t leak your key.')))] }),
+      accSection('📁', 'Automatic backups to a folder', { status: !fsSupported ? { ok: false, text: 'not in this browser' } : hd0 ? (ok0 ? { ok: true, text: 'on' } : { ok: false, text: 'paused' }) : { ok: false, text: 'off' },
+        info: 'Chrome/Edge can write into a folder you choose: a backup every few minutes + every AI conversation as .json and .md. Choose a folder inside Google Drive or iCloud Drive for an automatic off-site copy.', body: fsBox }),
+      accSection('⬆️', 'Restore from a backup file', { info: 'Replace = exact copy of the backup. Merge = keep what you have, the backup wins where both have the same item. New profile = restore side by side without touching this profile. A restore point is created first, so you can always undo.',
+        body: [h('p', { class: 'tiny' }, 'Also accepts the “Export progress” file of the old single-file Databricks Quest.'),
+          h('label', { class: 'btn' }, '📂 Choose backup file…', h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
+            let obj; try { obj = LQ.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
+            modal((b, c2) => b.append(h('h3', {}, 'Restore backup'), h('p', { class: 'muted' }, `From “${obj.account.name}” · ${fmtWhen(obj.createdAt)} · ${Object.keys(obj.data).length} items · ${(obj.conversations || []).length} conversations`),
+              h('div', { style: { display: 'grid', gap: '8px' } },
+                h('button', { class: 'btn primary', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
+                h('button', { class: 'btn', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
+                h('button', { class: 'btn', onclick: async () => { c2(); const base = (obj.account.name || 'Restored') + ' (restored)'; const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); LQ.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await LQ.backup.apply(obj, id, 'replace'); LQ.switchTo(id, null); } }, '➕ Restore as a new local profile'),
+                h('button', { class: 'btn ghost', onclick: c2 }, 'Cancel'))));
+          } })), guideBtn('restore', '♻️ How restoring works')] }),
+      accSection('🕘', 'Restore points on this device', { status: { ok: true, text: String(pts0.length) }, info: 'Automatic safety copies kept in this browser (last 12): one is made before every restore, reset or profile copy.', body: rpBox }));
     drawFs(); drawRP();
   },
 
   async cloud(body, close) {
     if (!LQ.config.supabaseUrl || !window.LQCloud) {
-      body.append(h('p', {}, 'Cloud sync is not configured for this installation.'), h('p', { class: 'tiny' }, 'Add your Supabase project URL and anon key to config.js (see cloud/README.md). Then you can sign in from any device and your progress follows you.'));
+      body.append(h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '☁️'), h('b', { class: 't' }, 'Cloud sync is not set up for this installation yet'), h('div', {}, 'Optional. Without it, everything still works on this device; use folder backups to stay safe.')),
+        accSection('🛠️', 'Set up the cloud (owner, once)', { open: true, body: guideBody('cloudOwner', { compact: true }) }),
+        accSection('🐙', 'Keep the repository on GitHub', { body: guideBody('github', { compact: true }) }));
       return;
     }
     const sess = LQCloud.session();
     if (!sess) {
-      body.append(h('p', {}, 'Sign in to a cloud account to study from any device. Your data stays private to your account.'), h('button', { class: 'btn ai', onclick: () => { close(); LQ.openAccountPicker(); } }, '☁️ Sign in / create account'));
+      body.append(h('p', {}, 'Sign in to a cloud account to study from any device. Your data stays private to your account.'), h('button', { class: 'btn ai', onclick: () => { close(); LQ.openAccountPicker(); } }, '☁️ Sign in / create account'),
+        accSection('☁️', 'How cloud accounts work', { body: guideBody('cloudUser', { compact: true }) }), accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
       return;
     }
     if (ACCOUNT.kind !== 'cloud') {
@@ -1955,9 +2017,17 @@ const ACC_VIEWS = {
         h('button', { class: 'btn', onclick: async () => { try { await LQCloud.snapshot('Manual snapshot'); toast('📸 Snapshot saved'); drawSnaps(); } catch (e) { toast('⚠️ ' + e.message); } } }, '📸 Take snapshot'),
         h('label', { class: 'btn' }, '🗄️ Upload database backup…', h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await LQCloud.uploadFile('db', e.target.files[0]); toast('☁️ Database backup uploaded'); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn ghost', onclick: async () => { await LQCloud.push(ACCOUNT.id).catch(() => { }); await LQCloud.signOut(); LQ.jset('lq1:current', {}); location.reload(); } }, 'Sign out')),
-      h('h3', { style: { marginTop: '18px' } }, '📸 Cloud snapshots'), snapBox);
+      accSection('📸', 'Cloud snapshots', { open: true, info: 'Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.', body: snapBox }),
+      accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
     drawSnaps();
   },
+};
+
+ACC_VIEWS.help = function (body) {
+  const st = setupStatus();
+  const state = { gemini: st.gemini, backupFolder: !!LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!LQ.config.supabaseUrl };
+  body.append(h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, 'Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.'),
+    ...Object.entries(GUIDES).map(([id, g]) => accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) })));
 };
 
 /* ---------- sync indicator ---------- */
@@ -1966,6 +2036,97 @@ function wireSyncDot() {
   if (ACCOUNT.kind !== 'cloud' || !window.LQCloud) { dot.remove(); return; }
   const paint = s => { dot.className = 'syncdot ' + (s.error ? 'err' : s.syncing || s.pending ? 'busy' : 'ok'); dot.title = s.error ? 'Sync error: ' + s.error : s.syncing ? 'Syncing…' : s.pending ? 'Changes waiting to sync' : 'All changes synced'; };
   LQCloud.onStatus(paint); paint(LQCloud.status());
+}
+
+/* ---- 75_help.js ---- */
+/* ===================== Help: ⓘ tooltips, setup guides, first-sessions setup banner ===================== */
+/** Small ⓘ that shows an explanation on hover / focus / tap. */
+function tip(text) {
+  const t = h('span', { class: 'tip', tabindex: '0', role: 'button', 'aria-label': 'More info', onclick: e => { e.stopPropagation(); e.preventDefault(); t.classList.toggle('show'); } }, 'i', h('span', { class: 'tipbox', html: fmt(text) }));
+  return t;
+}
+document.addEventListener('click', () => $$('.tip.show').forEach(t => t.classList.remove('show')));
+
+const SITE_URL = LQ.config.siteUrl || '';
+const GUIDES = {
+  gemini: { icon: '🔑', title: 'Get your free Gemini API key', who: 'Everyone who wants the AI tutor', steps: [
+    'Open **Google AI Studio** → https://aistudio.google.com/apikey and sign in with your Google account.',
+    'Click **Create API key** (accept the terms if asked) and copy the key (it starts with `AIza…`).',
+    'In this app: **⚙️ Settings → Gemini API key** → paste → **🔍 Detect models** → **🧪 Test**. You should see “Brick is ready”.',
+    'Done. On a cloud account the key follows you privately to all your devices; on a local profile it stays in this browser.'],
+    notes: ['The key is personal — don’t share it. Each friend uses their own (it is free with generous limits).', 'Without a key everything works except the tutor, AI grading and AI-generated questions.'] },
+  backupFolder: { icon: '📁', title: 'Automatic backups to a folder (Google Drive / iCloud too)', who: 'Chrome, Edge or Brave on a computer', steps: [
+    'Account menu (your emoji, top-right) → **💾 Backup & restore → 📁 Automatic backups** → **Choose backup folder**.',
+    `Pick your profile folder, e.g. **learning-quest/accounts/${ACCOUNT.id}** (any folder works). The app creates **backups/** and **conversations/** inside it.`,
+    'From now on: a backup file every few minutes when something changed (and when you leave), and every AI conversation as **.json + .md** within ~20 seconds.',
+    '**Off-site for free:** install **Google Drive for desktop** (https://www.google.com/drive/download/) and choose a folder inside **Google Drive → My Drive** — or a folder in **iCloud Drive**. Your backups then reach the cloud automatically.',
+    'After a browser restart the browser may ask again: open the menu and click **Resume** once.'],
+    notes: ['Safari/Firefox can’t write to folders: use **Download backup** instead (or a cloud account).'] },
+  restore: { icon: '♻️', title: 'Restoring data', who: 'Everyone', steps: [
+    '**Restore points** (this device) are created automatically before every restore or reset — the quickest undo.',
+    '**From a file:** 💾 Backup & restore → Restore from a backup file → choose **Replace** (exact copy), **Merge** (backup wins on conflicts) or **New profile** (side by side).',
+    '**Cloud accounts:** ☁️ Cloud → Cloud snapshots → Restore (a snapshot of the current state is taken first).',
+    '**Everything (owner):** the SQLite database in learning-quest/data can recreate any file of any past version: `python3 tools/db_restore.py list`.'] },
+  cloudUser: { icon: '☁️', title: 'Use a cloud account (study from anywhere)', who: 'You and your friends', steps: [
+    `Open the website${SITE_URL ? ' (' + SITE_URL + ')' : ''} on any device → **☁️ Sign in / create a cloud account**.`,
+    'Create the account (email + password). If asked, confirm the email from your inbox, then sign in.',
+    'Add your Gemini key once (⚙️ Settings). Progress, flashcards, conversations and settings now sync automatically.',
+    'Already studied locally? In the local app: account menu → ☁️ Cloud → sign in → **⬆️ Copy this profile into my cloud account**.'],
+    notes: ['Your data is private to your account (row-level security). A daily snapshot is kept for 30 days.'] },
+  cloudOwner: { icon: '🛠️', title: 'Set up the cloud (owner, once)', who: 'Only the owner of this installation', steps: [
+    '**Supabase** (accounts + sync): https://supabase.com → New project (region Frankfurt) → **SQL Editor** → run the whole file **cloud/supabase.sql**.',
+    'Supabase → **Project Settings → API**: copy the **Project URL** and the **anon public** key → put them in **config.js** (or give them to Claude). Never share the service_role key.',
+    '**Netlify** (website): https://app.netlify.com → Add new site → Import from GitHub → pick the repo → Deploy (settings come from netlify.toml).',
+    'Supabase → **Authentication → URL Configuration → Site URL** = your Netlify address.',
+    'Full step-by-step guide with screenshots-level detail: **cloud/README.md** in the repository.'] },
+  github: { icon: '🐙', title: 'Keep the repository on GitHub (owner)', who: 'Only the owner', steps: [
+    'Install **GitHub Desktop** (https://desktop.github.com) and sign in.',
+    '**File → Add Local Repository** → choose Documents/MyApps/learning-quest.',
+    '**Publish repository** → keep **Keep this code private** ticked.',
+    'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
+  friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
+    `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
+    'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',
+    'Each friend adds **their own free Gemini key** (guide: “Get your free Gemini API key”).',
+    'Want to give them a private subject? Account menu → 📚 Subjects → **⬇️ Export pack** → send the file → they use **📥 Import subject pack**.'],
+    notes: ['Supabase’s built-in email service sends only a few emails per hour: for more than a handful of friends, either turn off “Confirm email” (Authentication → Providers → Email) or connect your own SMTP.'] },
+};
+function guideBody(id, { compact = false } = {}) {
+  const g = GUIDES[id]; if (!g) return h('div');
+  return h('div', { class: 'guide' },
+    compact ? null : h('div', { class: 'tiny' }, '👤 ' + g.who),
+    h('ol', { class: 'gsteps' }, ...g.steps.map(s => h('li', { html: linkify(fmt(s)) }))),
+    g.notes ? h('div', { class: 'gnotes' }, ...g.notes.map(n => h('div', { html: '💡 ' + linkify(fmt(n)) }))) : null);
+}
+const linkify = html => html.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+function openGuide(id) { const g = GUIDES[id]; if (!g) return; modal((b, close) => b.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, `${g.icon} ${g.title}`), h('button', { class: 'iconbtn', onclick: close }, '✕')), guideBody(id))); }
+const guideBtn = (id, label) => h('button', { class: 'btn small ghost', onclick: () => openGuide(id) }, label || `${GUIDES[id].icon} How?`);
+
+/* ---------- setup status ---------- */
+function setupStatus() {
+  const set = accountSettings();
+  const lastDl = LQ.jget(`lq1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
+  return {
+    gemini: !!S.settings.apiKey,
+    protectedData: ACCOUNT.kind === 'cloud' || !!LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0) || Date.now() - lastDl < 14 * 864e5,
+    dismissed: set.dismissedSetup || {},
+  };
+}
+/** Warning banner shown on the home page during the first sessions of a profile, only for things not set up yet. */
+function setupBanner() {
+  const sessions = LQ.jget(`lq1:${ACCOUNT.id}:meta:sessions`, 0);
+  if (sessions > 5) return null;
+  const st = setupStatus();
+  const items = [];
+  if (!st.gemini && !st.dismissed.gemini) items.push(['gemini', '🔑 The AI tutor is off: add your free Gemini key.', 'Set up']);
+  if (!st.protectedData && !st.dismissed.backup) items.push(['backup', '💾 Your progress lives only in this browser: turn on backups (folder, Google Drive or cloud).', 'Set up']);
+  if (!items.length) return null;
+  const box = h('div', { class: 'setupbar' });
+  items.forEach(([k, text, cta]) => box.append(h('div', { class: 'setuprow' }, h('span', { class: 'grow' }, text),
+    h('button', { class: 'btn small primary', onclick: () => k === 'gemini' ? openGuide('gemini') : openAccountMenu('backup') }, cta),
+    h('button', { class: 'iconbtn', title: 'Dismiss', onclick: () => { const d = setupStatus().dismissed; d[k] = Date.now(); putAccountSettings({ dismissedSetup: d }); route(); } }, '✕'))));
+  box.append(h('div', { class: 'tiny', style: { marginTop: '4px' } }, `Optional · shown during your first sessions (${sessions}/5) · `, h('button', { class: 'linkish tiny', onclick: () => openAccountMenu('help') }, 'all setup guides')));
+  return box;
 }
 
 /* ---- 80_math.js ---- */

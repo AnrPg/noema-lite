@@ -47,6 +47,7 @@ function homeView() {
   const search = h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), h('input', { placeholder: `Jump to any concept…${SUBJ.searchExamples ? ' (e.g. ' + SUBJ.searchExamples + ')' : ''}`, oninput: e => doSearch(e.target.value, results) }));
   const last = S.last && SEC[S.last];
   const v = view(
+    setupBanner(),
     h('section', { class: 'hero' },
       h('div', {},
         h('h1', { class: 'herohead', html: fmt(SUBJ.hero?.headline || `Master **${SUBJ.title}**, one bite at a time.`) }),

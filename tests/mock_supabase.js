@@ -31,6 +31,12 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
         if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; } return json(res, 201); }
         if (req.method === 'DELETE') { const k = (u.searchParams.get('key') || '').replace(/^eq\./, ''); delete kv[uid][k]; return json(res, 204); }
       }
+      if (p === '/rest/v1/lq_conversations') {
+        server.state.convs[uid] = server.state.convs[uid] || {};
+        if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'rls' }); server.state.convs[uid][r.id] = r; } return json(res, 201); }
+        const gt = (u.searchParams.get('updated_at') || '').replace(/^gt\./, '');
+        return json(res, 200, Object.values(server.state.convs[uid]).filter(r => !gt || r.updated_at > gt).sort((a, b) => a.updated_at < b.updated_at ? -1 : 1).map(r => ({ record: r.record, updated_at: r.updated_at })));
+      }
       if (p === '/rest/v1/lq_snapshots') {
         if (req.method === 'POST') { data.forEach(r => snaps.push({ id: snapId++, user_id: uid, label: r.label, data: r.data, size_bytes: r.size_bytes, created_at: new Date().toISOString() })); return json(res, 201); }
         const mine = snaps.filter(s => s.user_id === uid);
@@ -56,7 +62,7 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       json(res, 404, { message: 'not found ' + p });
     });
   });
-  server.log = []; server.state = { users, kv, snaps, files, profiles };
+  server.log = []; server.state = { users, kv, snaps, files, profiles, convs: {} };
   return new Promise(r => server.listen(port, () => r(server)));
 }
 module.exports = { start };

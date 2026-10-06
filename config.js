@@ -2,6 +2,7 @@
    Never put secrets here. The Supabase "anon" key is designed to be public: every table is protected by row-level security. */
 window.LQ_CONFIG = {
   appName: 'Learning Quest',
+  siteUrl: '',              // the website address once deployed (shown in the setup guides), e.g. 'https://anr-learning-quest.netlify.app'
   supabaseUrl: '',          // e.g. 'https://abcdefghijkl.supabase.co'   (see cloud/README.md)
   supabaseAnonKey: '',      // the project's anon/public key
   autoBackupMinutes: 5,     // folder auto-backup interval (Chrome/Edge)

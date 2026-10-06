@@ -69,7 +69,7 @@ def build_site(metas):
     os.makedirs(out)
     for f in ('index.html', 'config.js'): shutil.copy(os.path.join(ROOT, f), out)
     os.makedirs(os.path.join(out, 'engine'))
-    for f in ('engine.js', 'engine.css', 'loader.js', 'cloud.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     for m in metas:
         if m.get('owner'): continue
@@ -100,6 +100,7 @@ def build_bundle(metas):
 <script>{esc(build_registry(reg_metas))}</script>
 {packs}<script>{esc(rd("engine/vendor/marked.umd.js"))}</script>
 <script>{esc(rd("engine/vendor/purify.min.js"))}</script>
+<script>{esc(rd("engine/convos.js"))}</script>
 <script>{esc(rd("engine/cloud.js"))}</script>
 <script type="text/plain" id="lq-engine-src">{esc(rd("engine/engine.js"))}</script>
 <script>{esc(rd("engine/loader.js"))}</script>

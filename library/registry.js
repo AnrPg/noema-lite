@@ -2,7 +2,7 @@
 window.LQ_REGISTRY = {
  "format": "lq-registry",
  "v": 1,
- "builtAt": "2026-10-06T14:56:07+00:00",
+ "builtAt": "2026-10-06T15:14:34+00:00",
  "groups": [
   {
    "id": "data-cloud",

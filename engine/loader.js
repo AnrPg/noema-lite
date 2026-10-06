@@ -45,8 +45,8 @@
       if (this.db) return Promise.resolve(this.db);
       return new Promise((res, rej) => {
         if (!window.indexedDB) return rej(new Error('IndexedDB unavailable'));
-        const r = indexedDB.open('learning-quest', 1);
-        r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
+        const r = indexedDB.open('learning-quest', 2);
+        r.onupgradeneeded = () => { const d = r.result; ['packs', 'handles', 'restore', 'convos'].forEach(n => { if (!d.objectStoreNames.contains(n)) d.createObjectStore(n); }); };
         r.onsuccess = () => { this.db = r.result; res(this.db); }; r.onerror = () => rej(r.error);
       });
     },
@@ -288,11 +288,12 @@
       const data = KV.accountData(acc);
       if (!includeSecrets && data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; data['a:settings'] = JSON.stringify(s); } catch (e) { } }
       const packs = (await importedPacks(acc)).map(p => ({ id: p.subject.id, pack: p }));
-      return { format: 'learning-quest-backup', version: 1, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
+      const conversations = window.LQConvos ? await LQConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
+      return { format: 'learning-quest-backup', version: 2, conversationSchema: window.LQConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
         account: { id: a.id, name: a.name, emoji: a.emoji, kind: a.kind || 'local', email: a.email || null }, includesSecrets: !!includeSecrets, data, importedPacks: packs };
     },
     fileName(acc) { return `lq-backup_${acc}_${stamp()}.json`; },
-    download(obj) { const b = new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }); const u = URL.createObjectURL(b); const x = el('a', { href: u, download: this.fileName(obj.account.id) }); document.body.append(x); x.click(); x.remove(); setTimeout(() => URL.revokeObjectURL(u), 5000); },
+    download(obj) { jset(`${P}${obj.account.id}:meta:lastDownloadBackup`, Date.now()); const b = new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }); const u = URL.createObjectURL(b); const x = el('a', { href: u, download: this.fileName(obj.account.id) }); document.body.append(x); x.click(); x.remove(); setTimeout(() => URL.revokeObjectURL(u), 5000); },
     validate(obj) {
       if (obj && obj.format === 'learning-quest-backup' && obj.data) return obj;
       // legacy single-file app export (Databricks Quest): {xp, res, read, settings, ...}
@@ -317,6 +318,13 @@
         KV.set(pre + suf, typeof v === 'string' ? v : JSON.stringify(v));
       }
       for (const p of obj.importedPacks || []) await IDB.put('packs', targetAcc + '|' + p.id, p.pack);
+      if (window.LQConvos) {
+        if (mode === 'replace') await LQConvos.clear(targetAcc);
+        const a = getAccount(targetAcc) || { id: targetAcc };
+        for (const r of obj.conversations || []) await LQConvos.put(targetAcc, { ...r, account: { id: a.id, kind: a.kind || 'local' } }, { keepUpdatedAt: true });
+        // v1 backups / legacy kv conversations are converted on next start (migrateLegacy)
+        if (mode === 'replace') ls.del(`${P}${targetAcc}:meta:convosMigrated`);
+      }
       return true;
     },
   };
@@ -337,11 +345,14 @@
       if (!(await this.permitted(h))) { this.status = 'needs-permission'; return false; }
       const dirty = jget(`${P}${acc}:meta:dirty`, 0), last = jget(`${P}${acc}:meta:lastFolderBackup`, 0);
       if (!force && dirty <= last) return true;
+      // canonical folder layout:  <chosen>/backups/lq-backup_<acc>_<day>.json (+ _latest)   <chosen>/conversations/<subject>/<YYYY-MM>/<id>.json|.md
+      const bdir = await h.getDirectoryHandle('backups', { create: true });
       const obj = await Backup.collect(acc);
       const day = new Date().toISOString().slice(0, 10);
       for (const name of [`lq-backup_${acc}_${day}.json`, `lq-backup_${acc}_latest.json`]) {
-        const fh = await h.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(JSON.stringify(obj, null, 1)); await w.close();
+        const fh = await bdir.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(JSON.stringify(obj, null, 1)); await w.close();
       }
+      if (window.LQConvos) await LQConvos.writeToFolder(acc, h, { all: force && !jget(`${P}${acc}:meta:convosFolderSeeded`, 0) }).then(() => jset(`${P}${acc}:meta:convosFolderSeeded`, 1));
       jset(`${P}${acc}:meta:lastFolderBackup`, Date.now()); this.lastAt = Date.now(); this.status = 'on'; return true;
     },
     async start(acc) {
@@ -349,6 +360,8 @@
       const h = await this.handle(acc); if (!h) { this.status = 'off'; return; }
       this.status = (await this.permitted(h)) ? 'on' : 'needs-permission';
       this.timer = setInterval(() => this.run(acc).catch(() => { }), Math.max(1, CFG.autoBackupMinutes) * 60e3);
+      // conversations are written to the folder within ~20 s of any change (independently of the 5-minute backup)
+      if (window.LQConvos && !this._convoHook) { this._convoHook = true; let t; LQConvos.onChange(a => { if (a !== acc) return; clearTimeout(t); t = setTimeout(async () => { const hd = await this.handle(acc); if (hd && await this.permitted(hd)) LQConvos.writeToFolder(acc, hd).catch(e => console.warn('[LQ] convo folder write', e)); }, 20000); }); }
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.run(acc).catch(() => { }); });
     },
   };
@@ -356,7 +369,7 @@
   /* ---------------- public API ---------------- */
   const LQ = window.LQ = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
-    account: null, subject: null, pack: null, el, esc, jget, jset,
+    account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.LQConvos || null, preloadedConvos: [],
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, overlay,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
@@ -386,6 +399,12 @@
     KV.subj = meta.id;
     LQ.setCurrent(acc.id, meta.id);
     migrateLegacy(acc.id, meta.id);
+    jset(`${P}${acc.id}:meta:sessions`, (jget(`${P}${acc.id}:meta:sessions`, 0) || 0) + 1);
+    if (window.LQConvos) {
+      try { await LQConvos.migrateLegacy(acc.id, subs); } catch (e) { console.warn('[LQ] conversation migration', e); }
+      if (acc.kind === 'cloud' && window.LQCloud) { try { await Promise.race([LQCloud.pullConvos(acc.id), new Promise(r => setTimeout(r, 5000))]); } catch (e) { console.warn('[LQ] conversation pull failed', e); } }
+      try { LQ.preloadedConvos = await LQConvos.list(acc.id, { subject: meta.id, includeDeleted: false }); } catch (e) { LQ.preloadedConvos = []; }
+    }
     let pack;
     try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => LQ.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
     LQ.pack = pack; LQ.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject);

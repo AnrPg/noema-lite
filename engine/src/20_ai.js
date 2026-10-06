@@ -229,7 +229,7 @@ async function sendTutor(text, hidden = false) {
     touchStreak();
   } catch (e) {
     hist.pop(); persistConvo(key);
-    bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + e.message), h('div', { style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ Settings')));
+    bubble.className = 'msg err'; bubble.innerHTML = ''; bubble.append(md('⚠️ ' + e.message), h('div', { class: 'row', style: { marginTop: '8px' } }, h('button', { class: 'btn small', onclick: openSettings }, '⚙️ Settings'), /key/i.test(e.message) ? h('button', { class: 'btn small ghost', onclick: () => openGuide('gemini') }, '🔑 How to get a key') : null));
   } finally { T.busy = false; }
 }
 
@@ -239,19 +239,35 @@ async function aiGrade(ex, answer) {
   const ref = ex.type === 'write' ? `Reference solution:\n${ex.solution}` : `Model answer:\n${ex.model}\nRubric key points:\n- ${(ex.rubric || []).join('\n- ')}`;
   const sec = SEC[ex.section];
   const prompt = `Grade the learner's answer to a ${TUTOR.domain} exercise.\nQuestion: ${ex.q}\n${ex.code ? 'Code shown:\n' + ex.code + '\n' : ''}${ref}\n\nLearner's answer:\n"""${answer}"""\n\nSection notes (ground truth):\n${sec ? sectionText(sec).slice(0, 6000) : ''}\n\nReturn JSON: score 0-100 (meaning, not wording; for code accept equivalent correct syntax), verdict (one short line), covered (rubric points hit), missing (points missed), mistakes (factual errors), feedback (2-4 sentences, encouraging, specific, end with a nudge question).`;
-  return geminiJSON(prompt, `You are a strict but kind ${TUTOR.examinerRole}. Output only JSON.`, schema);
+  const g = await geminiJSON(prompt, `You are a strict but kind ${TUTOR.examinerRole}. Output only JSON.`, schema);
+  try {
+    const sec = SEC[ex.section];
+    logAI(ex.type === 'write' ? 'code-review' : 'grading', {
+      ctx: { kind: 'exercise', id: ex.id, label: `${sec ? 'Ch' + sec._ch.num + ' · ' + sec.title + ' · ' : ''}${ex.id}` },
+      title: `${ex.type === 'write' ? 'Code review' : 'Grading'}: ${String(ex.q || '').replace(/[*`_]/g, '').slice(0, 70)}`,
+      prompt: `**Question:** ${ex.q}${ex.code ? '\n\n```\n' + ex.code + '\n```' : ''}\n\n**My answer:**\n\n${ex.type === 'write' ? '```\n' + answer + '\n```' : answer}`,
+      response: `**Score: ${g.score}/100** — ${g.verdict || ''}\n\n${g.covered?.length ? '✅ ' + g.covered.join(' · ') + '\n\n' : ''}${g.missing?.length ? '➕ Missing: ' + g.missing.join(' · ') + '\n\n' : ''}${g.mistakes?.length ? '❌ ' + g.mistakes.join(' · ') + '\n\n' : ''}${g.feedback || ''}` });
+  } catch (e) { }
+  return g;
 }
 async function aiQuestion(sec, kind = 'mcq') {
   const schema = { type: 'OBJECT', properties: { q: { type: 'STRING' }, code: { type: 'STRING' }, options: { type: 'ARRAY', items: { type: 'STRING' } }, answer: { type: 'INTEGER' }, why: { type: 'ARRAY', items: { type: 'STRING' } }, explain: { type: 'STRING' } }, required: ['q', 'options', 'answer', 'why', 'explain'] };
   const seen = shuffle(sec._ch.exercises.filter(e => e.section === sec.id)).slice(0, 6).map(e => '- ' + e.q).join('\n');
   const prompt = `Create ONE fresh, tricky multiple-choice question (4 options, exactly one correct) that tests deep understanding of this ${TUTOR.domain} section. Prefer a scenario, a prediction, a debugging decision or a certification trap. Avoid duplicating these existing questions:\n${seen}\n\nSECTION NOTES (only use facts from here):\n${sectionText(sec).slice(0, 9000)}\n\nJSON fields: q (inline markdown with **bold** and \`code\` allowed), code (optional snippet or empty string), options (4 strings), answer (0-3), why (4 short strings: why each option is right/wrong), explain (2-4 sentences that teach).`;
   const r = await geminiJSON(prompt, 'You write excellent exam questions. Output only JSON.', schema);
+  try { logAI('question', { ctx: { kind: 'section', id: sec.id, label: `Ch${sec._ch.num} · ${sec.title}` }, title: `AI question: ${String(r.q || '').replace(/[*`_]/g, '').slice(0, 70)}`,
+    prompt: `Generate a fresh, tricky question on “${sec.title}”.`,
+    response: `${r.q}${r.code ? '\n\n```\n' + r.code + '\n```' : ''}\n\n${(r.options || []).map((o, i) => `${i === (r.answer | 0) ? '✅' : '▫️'} ${String.fromCharCode(65 + i)}. ${o}${r.why?.[i] ? ' — *' + r.why[i] + '*' : ''}`).join('\n')}\n\n**Explanation:** ${r.explain || ''}` }); } catch (e) { }
   return { id: 'ai-' + Date.now(), type: 'mcq', section: sec.id, difficulty: 2, tags: ['concept'], q: r.q, code: r.code || undefined, options: r.options.slice(0, 4), answer: Math.max(0, Math.min(3, r.answer | 0)), why: (r.why || []).slice(0, 4), explain: r.explain, _ch: sec._ch, _ai: true };
 }
 async function aiDrillGrade(d, answer) {
   const schema = { type: 'OBJECT', properties: { score: { type: 'INTEGER' }, hit: { type: 'ARRAY', items: { type: 'INTEGER' } }, feedback: { type: 'STRING' } }, required: ['score', 'hit', 'feedback'] };
   const prompt = `A learner was shown this debugging symptom and listed the questions they would ask themselves.\nSymptom: ${d.symptom}\nCanonical ordered checklist:\n${d.askYourself.map((q, i) => `${i}. ${q}`).join('\n')}\n\nLearner wrote:\n"""${answer}"""\n\nReturn JSON: hit = indexes of checklist questions the learner covered (same meaning counts), score 0-100 (coverage + sensible order), feedback 2-3 sentences: what they nailed, the most important one they missed and why it matters.`;
-  return geminiJSON(prompt, 'You are a precise debugging coach. Output only JSON.', schema);
+  const g = await geminiJSON(prompt, 'You are a precise debugging coach. Output only JSON.', schema);
+  try { logAI('drill-grading', { ctx: { kind: 'playbook', id: d.id, label: d.title }, title: `Drill: ${d.title}`.slice(0, 90),
+    prompt: `**Symptom:** ${d.symptom}\n\n**The questions I would ask myself:**\n\n${answer}`,
+    response: `**Score: ${g.score}/100** — covered ${(g.hit || []).length}/${d.askYourself.length}\n\n${g.feedback || ''}\n\n**Canonical checklist:**\n${d.askYourself.map((q, i) => `${(g.hit || []).includes(i) ? '✅' : '▫️'} ${i + 1}. ${q}`).join('\n')}` }); } catch (e) { }
+  return g;
 }
 
 /* ---------- settings ---------- */
@@ -265,7 +281,8 @@ function openSettings() {
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
     b.append(h('h2', {}, '⚙️ Settings'),
-      h('div', { class: 'field' }, h('label', {}, 'Gemini API key'), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
+      !S.settings.apiKey ? h('div', { class: 'callout warn', style: { marginTop: '10px' } }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
+      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
       h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
         h('div', { class: 'row' },
           h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); status.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); status.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { status.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),

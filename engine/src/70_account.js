@@ -1,5 +1,12 @@
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = [['profile', '👤 Profile'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud']];
+const ACC_TABS = [['profile', '👤 Profile'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud'], ['help', '❓ Help']];
+/** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
+function accSection(icon, title, { status = null, info = null, open = false, body }) {
+  const d = h('details', { class: 'accsec', open: open || null },
+    h('summary', {}, h('span', { class: 'chev' }, '▸'), h('span', { class: 'grow' }, `${icon} ${title}`), info ? tip(info) : null, status ? h('span', { class: 'pill ' + (status.ok ? 'c' : 'warnpill') }, status.text) : null),
+    h('div', { class: 'accsecbody' }, body));
+  return d;
+}
 const fmtBytes = n => n > 1e6 ? (n / 1e6).toFixed(1) + ' MB' : n > 1e3 ? Math.round(n / 1e3) + ' KB' : n + ' B';
 const fmtWhen = t => t ? new Date(t).toLocaleString() : '—';
 function accountSettings() { try { return JSON.parse(LQ.kv.get(LQ.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
@@ -32,7 +39,7 @@ const ACC_VIEWS = {
     const bySub = Object.entries(LQ.stats.get().bySubject || {}).sort((a, b) => b[1] - a[1]);
     body.append(
       h('div', { class: 'row' }, h('div', { class: 'field grow' }, h('label', {}, 'Name'), name), h('div', { class: 'field' }, h('label', {}, 'Emoji'), emoji)),
-      h('div', { class: 'field' }, h('label', {}, 'About me (the tutor adapts to this, in every subject)'), learner),
+      h('div', { class: 'field' }, h('label', {}, 'About me (the tutor adapts to this, in every subject) ', tip('Write how you learn, what you already know and your goal. It is added to every tutor conversation, in every subject. Stays private to this profile.')), learner),
       h('label', { class: 'row', style: { margin: '8px 0' } }, ask, 'Show the subject picker every time I open the app'),
       ACCOUNT.kind === 'local' ? h('div', { class: 'field' }, h('label', {}, 'PIN (a privacy curtain on a shared device — not encryption)'), h('div', { class: 'row' }, pin, ACCOUNT.pin ? h('button', { class: 'btn small', onclick: () => { LQ.saveLocalAccount({ ...ACCOUNT, pin: null }); toast('PIN removed'); } }, 'Remove PIN') : null)) : null,
       bySub.length ? h('div', { class: 'field' }, h('label', {}, 'XP by subject'), h('div', { class: 'row' }, ...bySub.map(([sid, xp]) => h('span', { class: 'pill' }, `${sid}: ${xp}`)))) : null,
@@ -72,19 +79,20 @@ const ACC_VIEWS = {
   async backup(body) {
     const inc = h('input', { type: 'checkbox' });
     const fsSupported = LQ.autoBackup.supported();
-    const fsBox = h('div');
+    const fsBox = h('div'); const rpBox = h('div');
+    const hd0 = fsSupported ? await LQ.autoBackup.handle(ACCOUNT.id) : null;
+    const ok0 = hd0 ? await LQ.autoBackup.permitted(hd0) : false;
     const drawFs = async () => {
       fsBox.innerHTML = '';
       const hd = await LQ.autoBackup.handle(ACCOUNT.id);
-      if (!fsSupported) { fsBox.append(h('p', { class: 'tiny' }, 'Automatic folder backups need Chrome, Edge or Brave (File System Access API). In this browser use “Download backup”.')); return; }
-      if (!hd) { fsBox.append(h('p', { class: 'tiny' }, `Pick a folder once (suggested: learning-quest/accounts/${ACCOUNT.id}/backups). A backup is written there every ${LQ.config.autoBackupMinutes} minutes when something changed, and when you leave the app.`), h('button', { class: 'btn', onclick: async () => { try { const n = await LQ.autoBackup.choose(ACCOUNT.id); toast(`✅ Auto-backup → ${n}`); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + e.message); } } }, '📁 Choose backup folder')); return; }
+      if (!fsSupported) { fsBox.append(h('p', { class: 'tiny' }, 'This browser cannot write to folders (needs Chrome, Edge or Brave). Use “Download backup”, or a cloud account.'), guideBtn('backupFolder', '📁 How folder backups work')); return; }
+      if (!hd) { fsBox.append(guideBody('backupFolder', { compact: true }), h('button', { class: 'btn primary', onclick: async () => { try { const n = await LQ.autoBackup.choose(ACCOUNT.id); toast(`✅ Auto-backup → ${n}`); drawFs(); } catch (e) { if (e.name !== 'AbortError') toast('⚠️ ' + e.message); } } }, '📁 Choose backup folder')); return; }
       const ok = await LQ.autoBackup.permitted(hd);
-      fsBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (ok ? 'c' : '') }, ok ? `✅ Auto-backup on → 📁 ${hd.name}` : `⏸️ Paused — permission needed for 📁 ${hd.name}`),
-        ok ? h('button', { class: 'btn small', onclick: async () => { await LQ.autoBackup.run(ACCOUNT.id, true); toast('💾 Backed up to folder'); } }, 'Back up now') : h('button', { class: 'btn small primary', onclick: async () => { if (await LQ.autoBackup.permitted(hd, true)) { LQ.autoBackup.start(ACCOUNT.id); await LQ.autoBackup.run(ACCOUNT.id, true); toast('✅ Auto-backup resumed'); } drawFs(); } }, 'Resume'),
+      fsBox.append(h('div', { class: 'row' }, h('span', { class: 'pill ' + (ok ? 'c' : 'warnpill') }, ok ? `✅ On → 📁 ${hd.name}` : `⏸️ Paused — permission needed for 📁 ${hd.name}`),
+        ok ? h('button', { class: 'btn small', onclick: async () => { await LQ.autoBackup.run(ACCOUNT.id, true); toast('💾 Backed up to folder'); drawFs(); } }, 'Back up now') : h('button', { class: 'btn small primary', onclick: async () => { if (await LQ.autoBackup.permitted(hd, true)) { LQ.autoBackup.start(ACCOUNT.id); await LQ.autoBackup.run(ACCOUNT.id, true); toast('✅ Auto-backup resumed'); } drawFs(); } }, 'Resume'),
         h('button', { class: 'btn small ghost', onclick: async () => { await LQ.autoBackup.disable(ACCOUNT.id); drawFs(); } }, 'Turn off')),
-        h('div', { class: 'tiny', style: { marginTop: '6px' } }, `Last folder backup: ${fmtWhen(LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0))}`));
+        h('div', { class: 'tiny', style: { marginTop: '6px' } }, `Last folder backup: ${fmtWhen(LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0))} · writes backups/ and conversations/ inside 📁 ${hd.name}`));
     };
-    const rpBox = h('div');
     const drawRP = async () => {
       rpBox.innerHTML = '';
       const pts = await LQ.backup.listRestorePoints(ACCOUNT.id);
@@ -93,34 +101,42 @@ const ACC_VIEWS = {
         h('button', { class: 'btn small', onclick: async () => LQ.backup.download(await LQ.backup.getRestorePoint(p.key)) }, '⬇️'),
         h('button', { class: 'btn small', onclick: () => confirmBox('Go back to this restore point? (your current state becomes a new restore point)', async () => { await LQ.backup.apply(await LQ.backup.getRestorePoint(p.key), ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); }) }, 'Restore'))));
     };
+    const pts0 = await LQ.backup.listRestorePoints(ACCOUNT.id);
+    const nConv = (await LQ.convos.list(ACCOUNT.id)).length;
+    const lastDl = LQ.jget(`lq1:${ACCOUNT.id}:meta:lastDownloadBackup`, 0);
     body.append(
-      h('h3', {}, '⬇️ Download a backup'),
-      h('p', { class: 'tiny' }, 'One JSON file with everything of this profile: progress in every subject, flashcard schedules, tutor conversations, settings and imported packs.'),
-      h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); LQ.backup.download(await LQ.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 Download backup'), h('label', { class: 'row tiny' }, inc, 'include my Gemini API key')),
-      h('h3', { style: { marginTop: '22px' } }, '📁 Automatic backups to a folder'), fsBox,
-      h('h3', { style: { marginTop: '22px' } }, '⬆️ Restore from a backup file'),
-      h('p', { class: 'tiny' }, 'Also accepts the “Export progress” file of the old single-file Databricks Quest.'),
-      h('label', { class: 'btn' }, '📂 Choose backup file…', h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
-        let obj; try { obj = LQ.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
-        modal((b, c2) => b.append(h('h3', {}, 'Restore backup'), h('p', { class: 'muted' }, `From “${obj.account.name}” · ${fmtWhen(obj.createdAt)} · ${Object.keys(obj.data).length} items`),
-          h('div', { style: { display: 'grid', gap: '8px' } },
-            h('button', { class: 'btn primary', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
-            h('button', { class: 'btn', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
-            h('button', { class: 'btn', onclick: async () => { c2(); const base = (obj.account.name || 'Restored') + ' (restored)'; const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); LQ.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await LQ.backup.apply(obj, id, 'replace'); LQ.switchTo(id, null); } }, '➕ Restore as a new local profile'),
-            h('button', { class: 'btn ghost', onclick: c2 }, 'Cancel'))));
-      } })),
-      h('h3', { style: { marginTop: '22px' } }, '🕘 Restore points on this device'), rpBox);
+      h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, `Everything below is optional. ${nConv} AI conversation${nConv === 1 ? ' is' : 's are'} saved automatically in this browser${ACCOUNT.kind === 'cloud' ? ' and in your cloud account' : ''}.`),
+      accSection('⬇️', 'Download a backup', { status: lastDl ? { ok: true, text: 'last ' + new Date(lastDl).toLocaleDateString() } : null,
+        info: 'One JSON file with everything of this profile: progress in every subject, flashcard schedules, all AI conversations (canonical format), settings and imported packs. Keep it anywhere; restore it here or on another device.',
+        body: [h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: async () => { flushSave(); LQ.backup.download(await LQ.backup.collect(ACCOUNT.id, { includeSecrets: inc.checked })); } }, '💾 Download backup'), h('label', { class: 'row tiny' }, inc, 'include my Gemini API key', tip('Off by default so a backup file you share or store somewhere can’t leak your key.')))] }),
+      accSection('📁', 'Automatic backups to a folder', { status: !fsSupported ? { ok: false, text: 'not in this browser' } : hd0 ? (ok0 ? { ok: true, text: 'on' } : { ok: false, text: 'paused' }) : { ok: false, text: 'off' },
+        info: 'Chrome/Edge can write into a folder you choose: a backup every few minutes + every AI conversation as .json and .md. Choose a folder inside Google Drive or iCloud Drive for an automatic off-site copy.', body: fsBox }),
+      accSection('⬆️', 'Restore from a backup file', { info: 'Replace = exact copy of the backup. Merge = keep what you have, the backup wins where both have the same item. New profile = restore side by side without touching this profile. A restore point is created first, so you can always undo.',
+        body: [h('p', { class: 'tiny' }, 'Also accepts the “Export progress” file of the old single-file Databricks Quest.'),
+          h('label', { class: 'btn' }, '📂 Choose backup file…', h('input', { type: 'file', accept: '.json', style: { display: 'none' }, onchange: async e => {
+            let obj; try { obj = LQ.backup.validate(JSON.parse(await e.target.files[0].text())); } catch (er) { toast('⚠️ ' + er.message, 4000); return; }
+            modal((b, c2) => b.append(h('h3', {}, 'Restore backup'), h('p', { class: 'muted' }, `From “${obj.account.name}” · ${fmtWhen(obj.createdAt)} · ${Object.keys(obj.data).length} items · ${(obj.conversations || []).length} conversations`),
+              h('div', { style: { display: 'grid', gap: '8px' } },
+                h('button', { class: 'btn primary', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'replace'); toast('Restored ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, `♻️ Replace ${ACCOUNT.name}'s data with it`),
+                h('button', { class: 'btn', onclick: async () => { c2(); await LQ.backup.apply(obj, ACCOUNT.id, 'merge'); toast('Merged ✔ — reloading'); setTimeout(() => location.reload(), 700); } }, '🔀 Merge into this profile (backup wins on conflicts)'),
+                h('button', { class: 'btn', onclick: async () => { c2(); const base = (obj.account.name || 'Restored') + ' (restored)'; const id = (base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'restored') + '-' + Date.now().toString(36).slice(-4); LQ.saveLocalAccount({ id, name: base, emoji: obj.account.emoji || '♻️', created: Date.now() }); await LQ.backup.apply(obj, id, 'replace'); LQ.switchTo(id, null); } }, '➕ Restore as a new local profile'),
+                h('button', { class: 'btn ghost', onclick: c2 }, 'Cancel'))));
+          } })), guideBtn('restore', '♻️ How restoring works')] }),
+      accSection('🕘', 'Restore points on this device', { status: { ok: true, text: String(pts0.length) }, info: 'Automatic safety copies kept in this browser (last 12): one is made before every restore, reset or profile copy.', body: rpBox }));
     drawFs(); drawRP();
   },
 
   async cloud(body, close) {
     if (!LQ.config.supabaseUrl || !window.LQCloud) {
-      body.append(h('p', {}, 'Cloud sync is not configured for this installation.'), h('p', { class: 'tiny' }, 'Add your Supabase project URL and anon key to config.js (see cloud/README.md). Then you can sign in from any device and your progress follows you.'));
+      body.append(h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '☁️'), h('b', { class: 't' }, 'Cloud sync is not set up for this installation yet'), h('div', {}, 'Optional. Without it, everything still works on this device; use folder backups to stay safe.')),
+        accSection('🛠️', 'Set up the cloud (owner, once)', { open: true, body: guideBody('cloudOwner', { compact: true }) }),
+        accSection('🐙', 'Keep the repository on GitHub', { body: guideBody('github', { compact: true }) }));
       return;
     }
     const sess = LQCloud.session();
     if (!sess) {
-      body.append(h('p', {}, 'Sign in to a cloud account to study from any device. Your data stays private to your account.'), h('button', { class: 'btn ai', onclick: () => { close(); LQ.openAccountPicker(); } }, '☁️ Sign in / create account'));
+      body.append(h('p', {}, 'Sign in to a cloud account to study from any device. Your data stays private to your account.'), h('button', { class: 'btn ai', onclick: () => { close(); LQ.openAccountPicker(); } }, '☁️ Sign in / create account'),
+        accSection('☁️', 'How cloud accounts work', { body: guideBody('cloudUser', { compact: true }) }), accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
       return;
     }
     if (ACCOUNT.kind !== 'cloud') {
@@ -153,9 +169,17 @@ const ACC_VIEWS = {
         h('button', { class: 'btn', onclick: async () => { try { await LQCloud.snapshot('Manual snapshot'); toast('📸 Snapshot saved'); drawSnaps(); } catch (e) { toast('⚠️ ' + e.message); } } }, '📸 Take snapshot'),
         h('label', { class: 'btn' }, '🗄️ Upload database backup…', h('input', { type: 'file', accept: '.db,.sqlite,.gz,.zip,.json', style: { display: 'none' }, onchange: async e => { try { await LQCloud.uploadFile('db', e.target.files[0]); toast('☁️ Database backup uploaded'); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
         h('button', { class: 'btn ghost', onclick: async () => { await LQCloud.push(ACCOUNT.id).catch(() => { }); await LQCloud.signOut(); LQ.jset('lq1:current', {}); location.reload(); } }, 'Sign out')),
-      h('h3', { style: { marginTop: '18px' } }, '📸 Cloud snapshots'), snapBox);
+      accSection('📸', 'Cloud snapshots', { open: true, info: 'Restore points of your whole account stored in the cloud: one automatic per day (last 30) + any you take manually.', body: snapBox }),
+      accSection('👥', 'Invite friends', { body: guideBody('friends', { compact: true }) }));
     drawSnaps();
   },
+};
+
+ACC_VIEWS.help = function (body) {
+  const st = setupStatus();
+  const state = { gemini: st.gemini, backupFolder: !!LQ.jget(`lq1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!LQ.config.supabaseUrl };
+  body.append(h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, 'Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.'),
+    ...Object.entries(GUIDES).map(([id, g]) => accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) })));
 };
 
 /* ---------- sync indicator ---------- */

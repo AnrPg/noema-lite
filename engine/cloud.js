@@ -9,11 +9,11 @@
   'use strict';
   const SKEY = 'lq1:cloud:session';
   let CFG = null, BASE = '', ANON = '';
-  const st = { syncing: false, lastSync: null, error: null, listeners: [], pending: new Set(), timer: null };
+  const st = { syncing: false, lastSync: null, error: null, listeners: [], pending: new Set(), convoPending: new Set(), timer: null, ctimer: null };
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
   const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
   const emit = () => st.listeners.forEach(f => { try { f(status()); } catch (e) { } });
-  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, pending: st.pending.size });
+  const status = () => ({ signedIn: !!session(), syncing: st.syncing, lastSync: st.lastSync, error: st.error, pending: st.pending.size + st.convoPending.size });
   function session() { return jget(SKEY, null); }
   function setSession(s) { if (s) { s.expires_at = s.expires_at || Math.floor(Date.now() / 1000) + (s.expires_in || 3600); jset(SKEY, { access_token: s.access_token, refresh_token: s.refresh_token, expires_at: s.expires_at, user: { id: s.user.id, email: s.user.email, user_metadata: s.user.user_metadata || {} } }); } else localStorage.removeItem(SKEY); }
   function errMsg(j, r) { return (j && (j.msg || j.message || j.error_description || j.error)) || `HTTP ${r.status}`; }
@@ -89,9 +89,35 @@
       if (!window.LQ) return;
       LQ.kv.listeners.push((key, a) => { if (a !== acc) return; st.pending.add(key.slice(('lq1:' + acc + ':').length)); clearTimeout(st.timer); st.timer = setTimeout(() => this.push(acc).catch(() => { }), 3000); emit(); });
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.push(acc, { keepalive: true }).catch(() => { }); else this.pull(acc).catch(() => { }); });
-      addEventListener('online', () => this.push(acc).catch(() => { }));
+      addEventListener('online', () => { this.push(acc).catch(() => { }); this.pushConvos(acc).catch(() => { }); });
+      if (window.LQConvos) LQConvos.onChange((a, r) => { if (a !== acc) return; st.convoPending.add(r.id); clearTimeout(st.ctimer); st.ctimer = setTimeout(() => this.pushConvos(acc).catch(() => { }), 2500); emit(); });
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.pushConvos(acc, { keepalive: true }).catch(() => { }); });
       this.push(acc).catch(() => { });
       this.autoSnapshot().catch(() => { });
+    },
+
+    /* ---------- conversations (canonical lq.conversation/v1 records, one row each) ---------- */
+    async pullConvos(acc = accId()) {
+      const mk = 'lq1:' + acc + ':meta:convoPulledAt'; const since = jget(mk, null);
+      const rows = await call('/rest/v1/lq_conversations?select=record,updated_at&order=updated_at.asc' + (since ? '&updated_at=gt.' + enc(since) : ''));
+      let n = 0, last = since;
+      for (const row of rows || []) {
+        const r = row.record; if (!r || !r.id) continue;
+        const local = await LQConvos.get(acc, r.id);
+        if (!local || Date.parse(r.updatedAt) > Date.parse(local.updatedAt)) { await LQConvos.put(acc, r, { silent: true, keepUpdatedAt: true }); n++; }
+        last = row.updated_at;
+      }
+      if (last) jset(mk, last);
+      return n;
+    },
+    async pushConvos(acc = accId(), { keepalive = false } = {}) {
+      const ids = [...st.convoPending]; if (!ids.length || !session()) return 0;
+      st.convoPending.clear();
+      const rows = [];
+      for (const id of ids) { const r = await LQConvos.get(acc, id); if (r) rows.push({ user_id: uid(), id: r.id, subject_id: r.subject?.id || null, kind: r.kind, mode: r.mode, title: r.title, context_label: r.context?.label || null, message_count: r.stats.messages, deleted: r.deleted, created_at: r.createdAt, updated_at: r.updatedAt, record: r }); }
+      st.syncing = true; emit();
+      try { for (let i = 0; i < rows.length; i += 20) await call('/rest/v1/lq_conversations?on_conflict=user_id,id', { method: 'POST', body: rows.slice(i, i + 20), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive }); st.lastSync = Date.now(); st.error = null; return rows.length; }
+      catch (e) { ids.forEach(i => st.convoPending.add(i)); st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
     },
 
     /* ---------- snapshots (cloud restore points of the whole account) ---------- */

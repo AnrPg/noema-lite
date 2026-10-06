@@ -10,11 +10,28 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
 const wait = ms => new Promise(r => setTimeout(r, ms));
 function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/fonts\.g|ERR_FILE_NOT_FOUND|net::ERR|404|Failed to load resource/.test(m.text())) bag.push(m.text()); }); }
 
+async function mockGemini(ctx) {
+  await ctx.route('**/generativelanguage.googleapis.com/**', async route => {
+    const url = route.request().url();
+    if (url.includes('/models?')) return route.fulfill({ json: { models: [{ name: 'models/gemini-3-flash-preview', supportedGenerationMethods: ['generateContent'] }] } });
+    const body = JSON.parse(route.request().postData() || '{}');
+    if (body.generationConfig?.responseMimeType === 'application/json') {
+      const sys = body.systemInstruction?.parts?.[0]?.text || '';
+      const obj = /exam questions/.test(sys) ? { q: 'AI **question**?', code: '', options: ['a', 'b', 'c', 'd'], answer: 1, why: ['w', 'r', 'w', 'w'], explain: 'Because.' } : /debugging coach/.test(sys) ? { score: 66, hit: [0], feedback: 'Good start.' } : { score: 80, verdict: 'Solid', covered: ['x'], missing: ['y'], mistakes: [], feedback: 'Nice.' };
+      return route.fulfill({ json: { candidates: [{ content: { parts: [{ text: JSON.stringify(obj) }] } }] } });
+    }
+    if (url.includes('streamGenerateContent')) return route.fulfill({ status: 200, headers: { 'content-type': 'text/event-stream' }, body: ['## Think\n\nWhat happens to **the log**?', ' Tell me.'].map(t => 'data: ' + JSON.stringify({ candidates: [{ content: { parts: [{ text: t }] } }] }) + '\n\n').join('') });
+    if (JSON.stringify(body).includes('Write the title')) return route.fulfill({ json: { candidates: [{ content: { parts: [{ text: 'Delta Log Basics' }] } }] } });
+    return route.fulfill({ json: { candidates: [{ content: { parts: [{ text: 'ok' }] } }] } });
+  });
+}
+
 (async () => {
   const browser = await chromium.launch();
   /* ======================= A. LOCAL (file://) ======================= */
   console.log('A. local mode (file://)');
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true });
+  await mockGemini(ctx);
   const page = await ctx.newPage(); const E = []; errs(page, E);
   const url = 'file://' + ROOT + '/index.html';
   await page.goto(url);
@@ -28,6 +45,22 @@ function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.m
   await page.click('.lq-chip:has-text("Databricks")'); await wait(1500);
   ok(await page.evaluate(() => S.xp === 50 && Object.keys(S.res).length === 2 && S.settings.apiKey === 'LEGACYKEY'), 'legacy progress migrated into anr/databricks');
   ok(await page.evaluate(() => CV.list.length === 1 && CV.list[0].title === 'Old Chat'), 'legacy conversations migrated');
+  const canon = await page.evaluate(async () => { const l = await LQ.convos.list('anr'); return l.length === 1 && l[0].schema === 'lq.conversation/v1' && l[0].messages[1].role === 'assistant' && l[0].subject.id === 'databricks'; });
+  ok(canon, 'legacy conversation converted to canonical lq.conversation/v1 in IndexedDB');
+  // background persistence of a live tutor chat + one-shot AI grading
+  await page.evaluate(() => { S.settings.apiKey = 'TESTKEY'; flushSave(); openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic'); });
+  await page.evaluate(() => sendTutor('What is a deletion vector?')); await wait(1500);
+  await page.evaluate(async () => { const ex = ALL_EX.find(e => e.type === 'free'); await aiGrade(ex, 'my answer'); const ex2 = ALL_EX.find(e => e.type === 'write'); await aiGrade(ex2, 'SELECT 1'); await aiQuestion(SEC['ch05-s04']); });
+  await wait(800);
+  const recs = await page.evaluate(async () => (await LQ.convos.list('anr')).map(r => [r.kind, r.mode, r.context.type, r.context.id, r.messages.length, r.title]));
+  ok(recs.some(r => r[0] === 'tutor' && r[2] === 'section' && r[3] === 'ch05-s04' && r[4] >= 2), 'tutor chat saved automatically with its context: ' + JSON.stringify(recs.find(r => r[0] === 'tutor' && r[3] === 'ch05-s04')));
+  ok(['grading', 'code-review', 'question'].every(k => recs.some(r => r[0] === k)), 'AI grading, code review and generated question are saved as conversations');
+  await page.screenshot({ path: SHOTS + '/a2b_tutor.png' });
+  await page.evaluate(() => { T.showHistory = true; renderTutor(); }); await wait(300);
+  await page.screenshot({ path: SHOTS + '/a2c_history.png' });
+  await page.evaluate(() => closeTutor());
+  await page.reload(); await wait(900); await page.click('.lq-chip:has-text("Databricks")'); await wait(1500);
+  ok(await page.evaluate(() => CV.list.length >= 5 && CV.list.some(c => c.kind === 'tutor' && c.msgs.length >= 2)), 'conversations survive a reload (loaded from IndexedDB)');
   ok(await page.evaluate(() => LQ.stats.get().xp === 50 && LQ.stats.streakNow() >= 0), 'account-level stats seeded');
   ok(await page.evaluate(() => !!localStorage.getItem('lq1:anr:s:databricks:state') && !!localStorage.getItem('dbquest_v1')), 'namespaced keys written, legacy keys kept (nothing deleted)');
   // regression: every section renders, every exercise accepts its correct answer
@@ -42,7 +75,15 @@ function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.m
   await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
   // account menu tabs
   for (const t of ['profile', 'subjects', 'backup', 'cloud']) { await page.evaluate(t => { $('.modal')?.remove(); openAccountMenu(t); }, t); await wait(350); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
-  ok(await page.$$eval('.modal .tabs button', b => b.length) === 4, 'account menu has 4 tabs');
+  ok(await page.$$eval('.modal .tabs button', b => b.length) === 5, 'account menu has 5 tabs (incl. Help)');
+  await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('backup'); }); await wait(500);
+  ok(await page.evaluate(() => $$('.modal details.accsec').length === 4 && $$('.modal details.accsec[open]').length === 0), 'backup & restore sections are collapsed by default');
+  await page.click('.modal details.accsec:nth-of-type(2) summary'); await wait(300);
+  ok(await page.evaluate(() => $$('.modal details.accsec[open]').length === 1), 'a section expands on click');
+  await page.screenshot({ path: SHOTS + '/a3b_backup_expanded.png' });
+  await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('help'); }); await wait(400);
+  ok(await page.$$eval('.modal details.accsec', d => d.length) === 7, 'help tab lists 7 setup guides');
+  await page.screenshot({ path: SHOTS + '/a3c_help.png' });
   await page.evaluate(() => $('.modal')?.remove());
   // switch subject → math subject
   await page.evaluate(() => LQ.switchTo('anr', 'demo-physics')); await wait(1800);
@@ -58,12 +99,20 @@ function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.m
   await page.evaluate(() => { LQ.saveLocalAccount({ id: 'maria', name: 'Maria', emoji: '🦊' }); LQ.switchTo('maria', 'databricks'); }); await wait(1800);
   ok(await page.evaluate(() => ACCOUNT.id === 'maria' && S.xp === 0 && Object.keys(S.res).length === 0 && CV.list.length === 0 && S.settings.apiKey !== 'LEGACYKEY'), 'profile Maria is isolated (progress, conversations, API key)');
   ok(await page.evaluate(async () => !(await LQ.subjectsFor('maria')).some(s => s.id === 'secret-notes')), 'private subject of ANR is not visible to Maria');
+  ok(await page.evaluate(async () => (await LQ.convos.list('maria')).length === 0 && CV.list.length === 0), 'Maria sees none of ANR’s conversations');
+  await page.evaluate(() => { location.hash = '#/'; route(); }); await wait(500);
+  ok(!!(await page.$('.setupbar')) && (await page.$$eval('.setuprow', r => r.length)) === 2, 'first-sessions setup banner (no key, no backups) on the home page');
+  await page.screenshot({ path: SHOTS + '/a6_banner.png' });
+  await page.click('.setuprow .iconbtn'); await wait(400);
+  ok((await page.$$eval('.setuprow', r => r.length)) === 1, 'a banner item can be dismissed');
   // backup → restore
   const backupOk = await page.evaluate(async () => {
     const b = await LQ.backup.collect('anr'); if (!b.data['s:databricks:state'] || b.data['a:settings'].includes('LEGACYKEY')) return 'bad backup ' + Object.keys(b.data).join(',');
     await LQ.backup.apply(b, 'maria', 'replace');
     const st = JSON.parse(localStorage.getItem('lq1:maria:s:databricks:state')); const pts = await LQ.backup.listRestorePoints('maria');
     const src = JSON.parse(localStorage.getItem('lq1:anr:s:databricks:state'));
+    const nc = (await LQ.convos.list('maria')).length, na = (await LQ.convos.list('anr', { includeDeleted: true })).length;
+    if (nc !== na || b.conversations.length !== na) return 'conversations ' + nc + '/' + na;
     return st.xp === src.xp && JSON.stringify(st.res) === JSON.stringify(src.res) && pts.length >= 1 ? 'ok' : 'bad restore ' + JSON.stringify({ xp: st.xp, pts: pts.length });
   });
   ok(backupOk === 'ok', backupOk + ' — backup of ANR restored into Maria (+ restore point created, API key excluded)');
@@ -88,7 +137,7 @@ function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.m
   console.log('B. cloud mode (mock Supabase)');
   const cfg = `window.LQ_CONFIG = { appName: 'Learning Quest', supabaseUrl: 'http://localhost:54329', supabaseAnonKey: 'anon-test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
   const srv = await start({ port: 54329, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
-  const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
+  const devA = await browser.newContext({ viewport: { width: 1280, height: 900 } }); await mockGemini(devA); const pA = await devA.newPage(); const EA = []; errs(pA, EA);
   await pA.goto('http://localhost:54329/'); await wait(900);
   ok(await pA.$$eval('.lq-acc', a => a.length) === 1 && !!(await pA.$('text=Sign in / create a cloud account')), 'hosted site: no local seeds exposed, cloud sign-in offered');
   await pA.click('text=Sign in / create a cloud account'); await wait(300);
@@ -99,7 +148,19 @@ function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.m
   ok(await pA.$$eval('.lq-chip', c => c.length) === 2, 'cloud account sees shared subjects only (no private ones)');
   await pA.click('.lq-chip:has-text("Databricks")'); await wait(1600);
   await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; flushSave(); });
-  await wait(3800);
+  await pA.evaluate(() => { openTutor({ kind: 'chapter', id: 'ch05' }, 'quiz'); }); await pA.evaluate(() => sendTutor('quiz me')); await pA.evaluate(() => closeTutor());
+  await wait(4200);
+  const uidA = Object.keys(srv.state.users)[0];
+  ok(Object.values(srv.state.convs[uidA] || {}).some(r => r.kind === 'tutor' && r.mode === 'quiz' && r.record.schema === 'lq.conversation/v1'), 'conversation pushed to the cloud (lq_conversations)');
+  // folder auto-backup layout (OPFS stands in for a user-chosen folder)
+  const fsLayout = await pA.evaluate(async () => {
+    const root = await navigator.storage.getDirectory(); const d = await root.getDirectoryHandle('chosen', { create: true });
+    await LQ.idb.put('handles', 'dir|' + ACCOUNT.id, d); await LQ.autoBackup.run(ACCOUNT.id, true);
+    const names = async (dir) => { const out = []; for await (const [n, hnd] of dir.entries()) out.push(hnd.kind === 'directory' ? { [n]: await names(hnd) } : n); return out; };
+    return JSON.stringify(await names(d));
+  });
+  ok(/backups/.test(fsLayout) && /lq-backup_u_.*_latest\.json/.test(fsLayout) && /conversations/.test(fsLayout) && /cv_[0-9a-z]+\.json/.test(fsLayout) && /cv_[0-9a-z]+\.md/.test(fsLayout) && /index\.json/.test(fsLayout), 'folder backup: backups/ + conversations/<subject>/<YYYY-MM>/<id>.json|.md + index.json');
+  console.log('     ' + fsLayout.slice(0, 220));
   const kvA = srv.state.kv[Object.keys(srv.state.users)[0]] || {};
   ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (lq_kv)');
   ok(srv.state.snaps.length >= 1, 'daily auto-snapshot created');
@@ -117,6 +178,7 @@ function errs(page, bag) { page.on('pageerror', e => bag.push('PAGEERROR ' + e.m
   ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
   await pB.click('.lq-chip:has-text("Databricks")'); await wait(1600);
   ok(await pB.evaluate(() => !!S.res['ch01-e001'] && S.settings.apiKey === 'CLOUDKEY' && LQ.stats.get().xp >= 12), 'device B pulled progress, settings and stats');
+  ok(await pB.evaluate(() => CV.list.some(c => c.mode === 'quiz' && c.msgs.length >= 2)), 'device B has the conversation from device A');
   await pB.screenshot({ path: SHOTS + '/b3_deviceB_mobile.png' });
   await pB.evaluate(() => LQ.switchTo(ACCOUNT.id, 'demo-imported')); await wait(1800);
   ok(await pB.evaluate(() => SUBJ.id === 'demo-imported'), 'device B downloads the private pack from cloud storage');
