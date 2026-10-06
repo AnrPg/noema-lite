@@ -45,6 +45,10 @@ def build_packs():
                   'playbooks': sum(len(c['debug']) for c in chapters), 'flashcards': sum(len(c['flashcards']) for c in chapters)}
         pack = {'format': 'lq-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'counts': counts, 'builtAt': now_iso()}
         pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters})
+        try:   # unchanged content → keep the previous build time so git sees no change
+            prev = rj(os.path.join(sdir, 'pack.json'))
+            if prev.get('version') == pack['version']: pack['builtAt'] = prev.get('builtAt', pack['builtAt'])
+        except Exception: pass
         body = json.dumps(pack, ensure_ascii=False, separators=(',', ':'))
         wt(os.path.join(sdir, 'pack.json'), body)
         wt(os.path.join(sdir, 'pack.js'), f'/* GENERATED subject pack: {meta["id"]} — do not edit; edit chapters/*.json and run tools/build.py */\n(window.LQ_PACKS = window.LQ_PACKS || {{}})[{json.dumps(meta["id"])}] = ' + body.replace('</', '<\\/') + ';\n')
