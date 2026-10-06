@@ -994,6 +994,12 @@ function labelMatch(r, val, fuzzy = true) {
   return { ok: false };
 }
 
+/** Attribution line: author · licence · link to the original (required by CC BY / Apache-2.0). */
+function vCredit(m) {
+  if (!m.credit) return null;
+  const txt = m.credit + (m.license && m.license !== 'own' ? ' · ' + m.license : '');
+  return /^https?:\/\//.test(m.url || '') ? h('a', { class: 'tiny vx-credit', href: m.url, target: '_blank', rel: 'noopener', title: 'Where this picture comes from' }, txt + ' ↗') : h('span', { class: 'tiny vx-credit' }, txt);
+}
 /* ---------- the stage: picture + SVG overlay + positioned controls ---------- */
 function vStage(ex, { regions } = {}) {
   const m = MEDIA[ex.media];
@@ -1005,11 +1011,11 @@ function vStage(ex, { regions } = {}) {
   const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, class: 'vx-svg', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
   const gOut = sv('g'), gMask = sv('g'), gTop = sv('g'); svg.append(gOut, gMask, gTop);
   const layer = h('div', { class: 'vx-layer' });
-  const stage = h('div', { class: 'vx-stage', style: { aspectRatio: `${W} / ${H}`, maxWidth: m.mime === 'image/svg+xml' ? '' : W + 'px' } }, img, svg, layer);
+  const stage = h('div', { class: 'vx-stage', style: { aspectRatio: `${W} / ${H}`, maxWidth: `min(${m.mime === 'image/svg+xml' ? '100%' : W + 'px'}, calc(76vh * ${(W / H).toFixed(4)}))` }   /* tall pictures fit on screen; ⤢ for more */ }, img, svg, layer);
   stage.style.setProperty('--ar', String(W / H));
   const below = h('div', { class: 'vx-below' });
   const zoomBtn = h('button', { class: 'iconbtn vx-zoom', title: 'Bigger picture (Esc to close)', 'aria-label': 'Toggle full screen picture', onclick: () => toggleFull() }, '⤢');
-  const wrap = h('div', { class: 'vx' }, h('div', { class: 'vx-tools' }, m.credit ? h('span', { class: 'tiny vx-credit' }, m.credit + (m.license && m.license !== 'own' ? ' · ' + m.license : '')) : null, h('span', { class: 'grow' }), zoomBtn), stage, below);
+  const wrap = h('div', { class: 'vx' }, h('div', { class: 'vx-tools' }, vCredit(m), h('span', { class: 'grow' }), zoomBtn), stage, below);
   // Full screen: the picture moves to <body> (an animated/transformed ancestor would otherwise trap position:fixed)
   // and comes back to its placeholder afterwards; the accent colours travel with it.
   let holder = null;

@@ -28,6 +28,7 @@
   "examinerRole": "Databricks examiner"
  },
  "authoring": {
-  "minVisualPerChapter": 3
+  "minVisualPerChapter": 3,
+  "minExercisesPerPicture": 3
  }
 }

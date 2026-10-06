@@ -32,6 +32,10 @@
     {
      "t": "figure",
      "media": "power-station"
+    },
+    {
+     "t": "figure",
+     "media": "ek-graph"
     }
    ]
   }
@@ -275,6 +279,58 @@
    "answer": 0,
    "explain": "Boxes from fuel to grid.",
    "media": "power-station"
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "media": "ek-graph",
+   "id": "ch01-e109",
+   "type": "img_hotspot",
+   "q": "Tap the curve that **quadruples** when the speed doubles.",
+   "answer": [
+    "ek"
+   ],
+   "why": {
+    "mom": "Momentum is linear in v: doubling v doubles p."
+   },
+   "explain": "Eₖ ∝ v²."
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "media": "ek-graph",
+   "id": "ch01-e110",
+   "type": "img_drag",
+   "q": "Which curve is which?",
+   "targets": [
+    "ek",
+    "mom"
+   ],
+   "distractors": [
+    "Potential energy (J)"
+   ],
+   "explain": "Parabola = energy, line = momentum."
+  },
+  {
+   "section": "ch01-s01",
+   "difficulty": 2,
+   "tags": [
+    "concept"
+   ],
+   "media": "ek-graph",
+   "id": "ch01-e111",
+   "type": "img_hotspot",
+   "q": "Tap the point where the ball has **9 J**.",
+   "answer": [
+    "v3"
+   ],
+   "explain": "½·2·3² = 9 J."
   }
  ]
 }

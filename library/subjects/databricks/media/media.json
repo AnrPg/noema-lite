@@ -1643,6 +1643,555 @@
      "note": "newer than the watermark → still accepted"
     }
    ]
+  },
+  {
+   "id": "spark-cluster-overview",
+   "file": "spark-cluster-overview.png",
+   "origin": "web",
+   "alt": "Apache Spark cluster overview: a driver program containing the SparkContext talks to a cluster manager and to two worker nodes; each worker node runs an executor with a cache and tasks.",
+   "caption": "Spark’s own picture of a cluster: the driver’s SparkContext, the cluster manager and executors on worker nodes.",
+   "credit": "Apache Spark documentation, The Apache Software Foundation",
+   "license": "Apache-2.0",
+   "url": "https://github.com/apache/spark/blob/master/docs/img/cluster-overview.png",
+   "retrieved": "2026-10-06",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "driver",
+     "shape": "rect",
+     "x": 28,
+     "y": 182,
+     "w": 284,
+     "h": 178,
+     "rx": 4,
+     "label": "Driver program",
+     "note": "Your main program; it holds the SparkContext and schedules the tasks."
+    },
+    {
+     "id": "lbl-driver",
+     "shape": "rect",
+     "x": 36,
+     "y": 186,
+     "w": 208,
+     "h": 36,
+     "rx": 4,
+     "label": "Driver program",
+     "note": "Your main program (the driver).",
+     "q": "Which process holds the SparkContext and schedules tasks?"
+    },
+    {
+     "id": "sc",
+     "shape": "rect",
+     "x": 48,
+     "y": 254,
+     "w": 244,
+     "h": 86,
+     "rx": 4,
+     "label": "SparkContext",
+     "note": "Coordinates the application: connects to the cluster manager, acquires executors, sends them code and tasks.",
+     "q": "Which object coordinates the whole application?"
+    },
+    {
+     "id": "cm",
+     "shape": "rect",
+     "x": 438,
+     "y": 238,
+     "w": 286,
+     "h": 118,
+     "rx": 4,
+     "label": "Cluster manager",
+     "note": "Allocates resources across applications (standalone, YARN, Kubernetes — in Databricks: managed by the platform).",
+     "q": "Who allocates the resources (the executors) to the application?"
+    },
+    {
+     "id": "worker1",
+     "shape": "rect",
+     "x": 846,
+     "y": 26,
+     "w": 312,
+     "h": 236,
+     "rx": 4,
+     "label": "Worker node",
+     "note": "A machine (in Databricks classic: a worker VM)."
+    },
+    {
+     "id": "lbl-worker1",
+     "shape": "rect",
+     "x": 854,
+     "y": 28,
+     "w": 168,
+     "h": 38,
+     "rx": 4,
+     "label": "Worker node",
+     "note": "A machine (in Databricks classic: a worker VM)."
+    },
+    {
+     "id": "exec1",
+     "shape": "rect",
+     "x": 866,
+     "y": 92,
+     "w": 274,
+     "h": 154,
+     "rx": 4,
+     "label": "Executor",
+     "note": "A process on a worker that runs tasks and stores data (cache) for the application."
+    },
+    {
+     "id": "lbl-exec1",
+     "shape": "rect",
+     "x": 872,
+     "y": 96,
+     "w": 132,
+     "h": 36,
+     "rx": 4,
+     "label": "Executor",
+     "note": "A process on a worker that runs tasks and stores data.",
+     "q": "Which process on a worker runs the tasks?"
+    },
+    {
+     "id": "cache1",
+     "shape": "rect",
+     "x": 1020,
+     "y": 94,
+     "w": 118,
+     "h": 58,
+     "rx": 4,
+     "label": "Cache",
+     "note": "Data the application persisted in executor memory (df.cache()).",
+     "q": "Where does df.cache() keep data?"
+    },
+    {
+     "id": "task1",
+     "shape": "rect",
+     "x": 884,
+     "y": 170,
+     "w": 110,
+     "h": 58,
+     "rx": 4,
+     "label": "Task",
+     "note": "The smallest unit of work: one task per partition of a stage."
+    },
+    {
+     "id": "task1b",
+     "shape": "rect",
+     "x": 1014,
+     "y": 170,
+     "w": 110,
+     "h": 58,
+     "rx": 4,
+     "label": "Task"
+    },
+    {
+     "id": "worker2",
+     "shape": "rect",
+     "x": 846,
+     "y": 308,
+     "w": 312,
+     "h": 238,
+     "rx": 4,
+     "label": "Worker node"
+    },
+    {
+     "id": "exec2",
+     "shape": "rect",
+     "x": 866,
+     "y": 374,
+     "w": 274,
+     "h": 154,
+     "rx": 4,
+     "label": "Executor"
+    },
+    {
+     "id": "cache2",
+     "shape": "rect",
+     "x": 1020,
+     "y": 376,
+     "w": 118,
+     "h": 60,
+     "rx": 4,
+     "label": "Cache"
+    },
+    {
+     "id": "task2a",
+     "shape": "rect",
+     "x": 884,
+     "y": 452,
+     "w": 110,
+     "h": 60,
+     "rx": 4,
+     "label": "Task"
+    },
+    {
+     "id": "task2b",
+     "shape": "rect",
+     "x": 1014,
+     "y": 452,
+     "w": 110,
+     "h": 60,
+     "rx": 4,
+     "label": "Task"
+    }
+   ]
+  },
+  {
+   "id": "spark-sql-plan",
+   "file": "spark-sql-plan.png",
+   "origin": "web",
+   "alt": "Spark UI, SQL tab, plan visualization: Scan ExistingRDD → Filter → BroadcastHashJoin (with Range → BroadcastExchange as the other side) → Project → HashAggregate → Exchange → AQEShuffleRead → HashAggregate → TakeOrderedAndProject → AdaptiveSparkPlan.",
+   "caption": "A real physical plan in the Spark UI (SQL / DataFrame tab).",
+   "credit": "Apache Spark documentation, The Apache Software Foundation",
+   "license": "Apache-2.0",
+   "url": "https://github.com/apache/spark/blob/master/docs/img/webui-sql-dag.png",
+   "retrieved": "2026-10-06",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "scan",
+     "shape": "rect",
+     "x": 124,
+     "y": 40,
+     "w": 186,
+     "h": 42,
+     "rx": 4,
+     "label": "Scan ExistingRDD",
+     "note": "Reads the input partitions."
+    },
+    {
+     "id": "range",
+     "shape": "rect",
+     "x": 444,
+     "y": 40,
+     "w": 84,
+     "h": 42,
+     "rx": 4,
+     "label": "Range"
+    },
+    {
+     "id": "filter",
+     "shape": "rect",
+     "x": 180,
+     "y": 182,
+     "w": 74,
+     "h": 42,
+     "rx": 4,
+     "label": "Filter",
+     "note": "Applied inside each partition — no shuffle needed."
+    },
+    {
+     "id": "bexch",
+     "shape": "rect",
+     "x": 384,
+     "y": 182,
+     "w": 204,
+     "h": 42,
+     "rx": 4,
+     "label": "BroadcastExchange",
+     "note": "The small side (Range, 100,000 rows) is broadcast to every executor."
+    },
+    {
+     "id": "bhj",
+     "shape": "rect",
+     "x": 140,
+     "y": 296,
+     "w": 196,
+     "h": 44,
+     "rx": 4,
+     "label": "BroadcastHashJoin",
+     "note": "Broadcast hash join: the big side is joined locally against the broadcast copy — no shuffle of the big side."
+    },
+    {
+     "id": "project",
+     "shape": "rect",
+     "x": 192,
+     "y": 410,
+     "w": 92,
+     "h": 44,
+     "rx": 4,
+     "label": "Project"
+    },
+    {
+     "id": "agg1",
+     "shape": "rect",
+     "x": 154,
+     "y": 492,
+     "w": 168,
+     "h": 44,
+     "rx": 4,
+     "label": "HashAggregate (partial)",
+     "note": "Partial aggregate: per partition, BEFORE the shuffle."
+    },
+    {
+     "id": "exchange",
+     "shape": "rect",
+     "x": 182,
+     "y": 636,
+     "w": 112,
+     "h": 42,
+     "rx": 4,
+     "label": "Exchange",
+     "note": "Exchange = the shuffle boundary: rows are redistributed by key across the network."
+    },
+    {
+     "id": "aqe",
+     "shape": "rect",
+     "x": 152,
+     "y": 718,
+     "w": 172,
+     "h": 44,
+     "rx": 4,
+     "label": "AQEShuffleRead",
+     "note": "Adaptive Query Execution reads the shuffle output and can coalesce/split partitions at runtime."
+    },
+    {
+     "id": "agg2",
+     "shape": "rect",
+     "x": 154,
+     "y": 828,
+     "w": 168,
+     "h": 44,
+     "rx": 4,
+     "label": "HashAggregate (final)",
+     "note": "Final aggregate: combines the partial results AFTER the shuffle."
+    },
+    {
+     "id": "take",
+     "shape": "rect",
+     "x": 118,
+     "y": 970,
+     "w": 240,
+     "h": 44,
+     "rx": 4,
+     "label": "TakeOrderedAndProject"
+    },
+    {
+     "id": "asp",
+     "shape": "rect",
+     "x": 138,
+     "y": 1054,
+     "w": 200,
+     "h": 42,
+     "rx": 4,
+     "label": "AdaptiveSparkPlan"
+    }
+   ]
+  },
+  {
+   "id": "spark-stage-page",
+   "file": "spark-stage-page.png",
+   "origin": "web",
+   "alt": "Spark UI stage detail page for Stage 0: header with duration, links for DAG visualization and additional metrics, a Summary Metrics table (min, 25th percentile, median, 75th percentile, max of duration and GC time), and a Tasks table with columns such as locality level, executor ID, host, duration, GC time and shuffle metrics. All five tasks ran on executor \"driver\".",
+   "caption": "The stage page: summary distributions first, task rows second.",
+   "credit": "Apache Spark documentation, The Apache Software Foundation",
+   "license": "Apache-2.0",
+   "url": "https://github.com/apache/spark/blob/master/docs/img/StagePage.png",
+   "retrieved": "2026-10-06",
+   "src": "part1",
+   "regions": [
+    {
+     "id": "summary",
+     "shape": "rect",
+     "x": 21.0,
+     "y": 373.0,
+     "w": 1237.0,
+     "h": 92.0,
+     "rx": 4,
+     "label": "Summary Metrics",
+     "note": "Min / 25th / median / 75th / max per metric: the quickest skew check (median vs max)."
+    },
+    {
+     "id": "tasks",
+     "shape": "rect",
+     "x": 21.0,
+     "y": 614.0,
+     "w": 1237.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Tasks table",
+     "note": "One row per task — fine for 5 tasks, unreadable for 2,000."
+    },
+    {
+     "id": "dag-link",
+     "shape": "rect",
+     "x": 10.0,
+     "y": 263.0,
+     "w": 145.0,
+     "h": 20.0,
+     "rx": 4,
+     "label": "DAG Visualization"
+    },
+    {
+     "id": "agg-exec",
+     "shape": "rect",
+     "x": 12.0,
+     "y": 481.0,
+     "w": 340.0,
+     "h": 24.0,
+     "rx": 4,
+     "label": "Aggregated Metrics by Executor"
+    },
+    {
+     "id": "header",
+     "shape": "rect",
+     "x": 8.0,
+     "y": 82.0,
+     "w": 440.0,
+     "h": 30.0,
+     "rx": 4,
+     "label": "Stage title"
+    },
+    {
+     "id": "c-locality",
+     "shape": "rect",
+     "x": 306.0,
+     "y": 614.0,
+     "w": 127.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Locality level",
+     "note": "How close the task ran to its data (PROCESS_LOCAL = in the same process)."
+    },
+    {
+     "id": "c-executor",
+     "shape": "rect",
+     "x": 433.0,
+     "y": 614.0,
+     "w": 92.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Executor ID",
+     "note": "Where each task ran. Here: “driver” — no separate executors."
+    },
+    {
+     "id": "c-host",
+     "shape": "rect",
+     "x": 525.0,
+     "y": 614.0,
+     "w": 120.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Host"
+    },
+    {
+     "id": "c-duration",
+     "shape": "rect",
+     "x": 786.0,
+     "y": 614.0,
+     "w": 91.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Duration",
+     "note": "How long each task took — compare across tasks for skew."
+    },
+    {
+     "id": "c-gc",
+     "shape": "rect",
+     "x": 877.0,
+     "y": 614.0,
+     "w": 61.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "GC Time"
+    },
+    {
+     "id": "c-fetchwait",
+     "shape": "rect",
+     "x": 938.0,
+     "y": 614.0,
+     "w": 83.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Shuffle Read Fetch Wait Time"
+    },
+    {
+     "id": "c-remote",
+     "shape": "rect",
+     "x": 1021.0,
+     "y": 614.0,
+     "w": 86.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Shuffle Remote Reads",
+     "note": "Bytes this task fetched from OTHER executors during the shuffle."
+    },
+    {
+     "id": "c-swrite",
+     "shape": "rect",
+     "x": 1107.0,
+     "y": 614.0,
+     "w": 81.0,
+     "h": 480.0,
+     "rx": 4,
+     "label": "Shuffle Write Time"
+    }
+   ]
+  },
+  {
+   "id": "spark-streaming-stats",
+   "file": "spark-streaming-stats.png",
+   "origin": "web",
+   "alt": "Spark UI Structured Streaming query statistics: timelines and histograms of Input Rate (records/sec, about 2), Process Rate (records/sec, about 2), Input Rows per batch and Batch Duration (about 3,000 ms), for a query that has completed 505 batches.",
+   "caption": "The streaming tab: is the query keeping up?",
+   "credit": "Apache Spark documentation, The Apache Software Foundation",
+   "license": "Apache-2.0",
+   "url": "https://github.com/apache/spark/blob/master/docs/img/webui-structured-streaming-detail.png",
+   "retrieved": "2026-10-06",
+   "src": "part2",
+   "regions": [
+    {
+     "id": "r-input",
+     "shape": "rect",
+     "x": 18.0,
+     "y": 323.0,
+     "w": 1573.0,
+     "h": 250.0,
+     "rx": 4,
+     "label": "Input Rate",
+     "note": "How fast data ARRIVES (records/sec)."
+    },
+    {
+     "id": "r-process",
+     "shape": "rect",
+     "x": 18.0,
+     "y": 573.0,
+     "w": 1573.0,
+     "h": 250.0,
+     "rx": 4,
+     "label": "Process Rate",
+     "note": "How fast the query PROCESSES it (records/sec)."
+    },
+    {
+     "id": "r-rows",
+     "shape": "rect",
+     "x": 18.0,
+     "y": 823.0,
+     "w": 1573.0,
+     "h": 250.0,
+     "rx": 4,
+     "label": "Input Rows",
+     "note": "Rows per micro-batch."
+    },
+    {
+     "id": "r-duration",
+     "shape": "rect",
+     "x": 18.0,
+     "y": 1073.0,
+     "w": 1573.0,
+     "h": 250.0,
+     "rx": 4,
+     "label": "Batch Duration",
+     "note": "How long each micro-batch takes — rising durations with stable input point at state growth."
+    },
+    {
+     "id": "summary-line",
+     "shape": "rect",
+     "x": 18.0,
+     "y": 78.0,
+     "w": 920.0,
+     "h": 26.0,
+     "rx": 4,
+     "label": "Running time & completed batches"
+    }
+   ]
   }
  ]
 }

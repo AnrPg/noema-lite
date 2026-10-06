@@ -27,6 +27,9 @@ library/subjects/<subject-id>/media/
     {
       "id": "heart-frontal",                   // [a-z0-9-]+, unique in the subject
       "file": "heart-frontal.svg",
+      "origin": "drawn",                       // drawn | plot | source | web  (§5)
+      "url": "https://…", "retrieved": "2026-10-06",   // REQUIRED for origin "web": the page it came from
+      "lowResOk": "reason",                    // optional: allow a raster < 800 px (small flat diagram)
       "alt": "Frontal section of the heart with the four chambers and the great vessels",   // REQUIRED, describes the picture
       "caption": "Blood enters the right atrium…",  // optional, shown under figures
       "credit": "Drawn by noema-lite",            // REQUIRED: who made it
@@ -108,19 +111,57 @@ Rules:
 Renders the picture inside a section. With regions it is **explorable**: hover / tap a part to
 see its label and note; **🙈 Hide labels** covers every part for an instant self-test.
 
-## 5. Authoring rules (every ingestion)
+## 5. Authoring rules (every ingestion) — mandatory
 
-1. Every chapter gets **≥ 1 `figure`** and **≥ 3 visual exercises using ≥ 2 different visual
-   types** (enforced when `subject.json` has `"authoring": {"minVisualPerChapter": 3}`, which
-   `tools/new_subject.py` sets by default). Prefer more: one well-made picture can serve 3–4
-   exercises of different types.
-2. Draw what the source shows or describes: structures, architectures, flows, timelines,
-   maps, apparatus, graphs. Faithful to the source; simplify, never invent.
-3. Pick the type by the skill: **where is it** → hotspot · **what is it** → drag / select /
-   label (easy → hard) · **in what order** → sequence · **can you infer from partial evidence**
-   → reveal · **long-term recall of many parts** → occlusion.
-4. Hotspot questions should require reasoning ("where is the data actually read from?"), not
-   just reading a label; use `maskLabels` when the labels would give the answer away.
-5. Accessibility: meaningful `alt`, readable label sizes (≥ 14 image units at 800 wide),
-   colour is never the only cue.
-6. Only use images you are allowed to: own drawings (svgkit), CC0 / CC BY with `credit`.
+Every time sources are turned into a subject pack (or added to one), the visual layer is built from
+**three kinds of pictures — all of them, not one**:
+
+| kind | what | how | `origin` |
+|---|---|---|---|
+| **Pictures from the sources** | every figure, photo, scan, chart, table-as-image and vector diagram inside the PDFs / files | `tools/extract_images.py scan SOURCE.pdf OUT/` (embedded images + page renders, contact sheet) → `crop` the useful ones at 200 dpi | `source` |
+| **Pictures from the web** | photographs **and** diagrams that add information the sources lack (anatomy plates, micrographs, real apparatus, maps, real software screenshots…) — even when the sources have no pictures at all | `tools/fetch_image.py` (Wikimedia Commons resolved automatically) | `web` |
+| **Drawings & graphs we make** | clean redraws of the sources’ diagrams, process flows, timelines; **function graphs** (γραφικές παραστάσεις) whenever the subject has functions, rates, distributions, kinetics… | `tools/svgkit.py` — `Diagram` and `Plot` (curves, points, intervals → regions) | `drawn` / `plot` |
+
+Rules:
+1. **Every picture carries several exercises** — ≥ 3, of ≥ 2 different visual types (e.g. drag the
+   names + hotspot a reasoning question + occlusion), plus a `figure` in the section that teaches it.
+   Enforced by `"authoring": {"minVisualPerChapter": 3, "minExercisesPerPicture": 3}`.
+2. Every chapter: ≥ 1 `figure` and ≥ 3 visual exercises of ≥ 2 visual types.
+3. **Information value first.** A picture earns its place only if it teaches something the text
+   alone does not (where things are, what they look like, how they connect, how a quantity behaves).
+   No decorative stock photos.
+4. **High quality.** Rasters ≥ 800 px on the long side (prefer ≥ 1200), sharp, readable labels, no
+   watermarks, no heavy JPEG artefacts; crop to the informative part. (`lowResOk: "reason"` only for
+   small flat diagrams that stay crisp.) Keep each file ≤ 600 KB (crop; PNG-256 for screenshots, JPEG q85 for photos).
+5. **Correct and relevant — verify before use.** Look at every picture yourself (open it), check
+   that it shows what the alt text says, that labels/numbers agree with the sources and with
+   authoritative references, and that it is about *this* topic at *this* level. Reject anything
+   doubtful. Region coordinates are checked by drawing them over the picture before publishing.
+6. Pick the exercise type by the skill: **where is it** → hotspot · **what is it** → drag / select /
+   label (easy → hard) · **in what order** → sequence · **infer from partial evidence** → reveal ·
+   **long-term recall of many parts** → occlusion. Hotspots should need reasoning (“where is the data
+   read from?”), not label-reading; use `maskLabels` when labels would give the answer away.
+7. Accessibility: meaningful `alt`, readable label sizes (≥ 14 image units at 800 wide), colour is
+   never the only cue.
+
+## 6. Where web pictures may come from (licences)
+
+Only pictures we may reuse, always with author, licence and a link back (the app shows them under
+every picture). `tools/noema_lib.ALLOWED_LICENSES`: own, CC0, public domain, CC BY, CC BY-SA,
+Apache-2.0, MIT, BSD, OGL, U.S. Government works. **Never** NC (non-commercial), ND (no
+derivatives) or “all rights reserved” — e.g. vendor documentation screenshots are usually *not* reusable.
+
+Good places to look (check each file’s own licence):
+
+| subject area | sources |
+|---|---|
+| anatomy, medicine, biology | Wikimedia Commons (Gray’s Anatomy plates, public domain; many CC BY-SA diagrams), OpenStax Anatomy & Physiology / Biology figures (CC BY 4.0), Servier Medical Art (CC BY 4.0), NIH / NCI / CDC image libraries (U.S. public domain), Open-i |
+| physics, chemistry, earth & space | Wikimedia Commons, NASA (public domain), NOAA, USGS, OpenStax Physics / Chemistry (CC BY 4.0) |
+| geography, history, art | Wikimedia Commons, Library of Congress & Smithsonian Open Access (CC0), national archives |
+| software & data engineering | open-source project docs under Apache-2.0 / MIT (e.g. the Apache Spark docs images), own screenshots of open-source tools |
+
+`media.json` for a web picture:
+```json
+{ "id": "heart-gray", "file": "heart-gray.jpg", "origin": "web", "alt": "…", "credit": "Henry Gray (Gray’s Anatomy, 1918)",
+  "license": "Public domain", "url": "https://commons.wikimedia.org/wiki/File:Gray490.png", "retrieved": "2026-10-06", "regions": [ … ] }
+```

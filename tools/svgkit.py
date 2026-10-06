@@ -156,7 +156,7 @@ class Diagram:
         os.makedirs(media_dir, exist_ok=True)
         with open(os.path.join(media_dir, mid + '.svg'), 'w', encoding='utf-8') as f: f.write(self.svg())
         regs = [r for r in self.regions if keep is None or r['id'] in keep]
-        item = {'id': mid, 'file': mid + '.svg', 'alt': alt, 'credit': credit, 'license': license}
+        item = {'id': mid, 'file': mid + '.svg', 'origin': 'plot' if isinstance(self, Plot) else 'drawn', 'alt': alt, 'credit': credit, 'license': license}
         if caption: item['caption'] = caption
         if src: item['src'] = src
         item['regions'] = regs
@@ -172,3 +172,101 @@ def write_registry(media_dir, items):
     reg['items'] = sorted(byid.values(), key=lambda it: it['id'])
     with open(p, 'w', encoding='utf-8') as f: json.dump(reg, f, ensure_ascii=False, indent=1)
     return p
+
+
+class Plot(Diagram):
+    """Function graphs (γραφικές παραστάσεις) with exact regions — e.g. "tap the maximum", "drag f, f′, f″ onto the curves".
+
+        p = Plot(800, 500, xr=(-1, 5), yr=(-2, 6), title='f(x) = x² − 4x + 3', xlabel='x', ylabel='y')
+        p.grid(); p.axes()
+        p.curve('f', lambda x: x*x - 4*x + 3, color='blue', label='f', note='the parabola')
+        p.point('vertex', 2, -1, label='Vertex (2, −1)', note='minimum: f′(2) = 0')
+        p.zone('roots', 0.5, 3.5, label='between the roots: f(x) < 0')     # an x-interval as a region
+    Data coordinates in, image coordinates out; every marked feature becomes a region.
+    """
+    CURVE = {'blue': '#3b82f6', 'red': '#e5484d', 'green': '#2f9e44', 'violet': '#7c5cff', 'orange': '#f08c00', 'teal': '#12a5a0', 'pink': '#d6336c', 'ink': '#343a40'}
+
+    def __init__(self, w, h, xr, yr, title=None, xlabel='x', ylabel='y', margin=(64, 30, 46, 54)):
+        super().__init__(w, h, title=title)
+        self.xr, self.yr = xr, yr
+        self.ml, self.mr, self.mb, self.mt = margin[0], margin[1], margin[2], margin[3] + (24 if title else 0)
+        self.xlabel, self.ylabel = xlabel, ylabel
+
+    def X(self, x): return self.ml + (x - self.xr[0]) / (self.xr[1] - self.xr[0]) * (self.w - self.ml - self.mr)
+    def Y(self, y): return self.h - self.mb - (y - self.yr[0]) / (self.yr[1] - self.yr[0]) * (self.h - self.mb - self.mt)
+
+    @staticmethod
+    def ticks(a, b, n=8):
+        span = b - a; raw = span / n; mag = 10 ** math.floor(math.log10(raw))
+        step = next(s * mag for s in (1, 2, 2.5, 5, 10) if s * mag >= raw)
+        t = math.ceil(a / step) * step; out = []
+        while t <= b + 1e-9: out.append(round(t, 10)); t += step
+        return out
+
+    def grid(self, color='#eef0f4'):
+        for x in self.ticks(*self.xr): self.parts.append(f'<line x1="{self.X(x):.1f}" y1="{self.Y(self.yr[0]):.1f}" x2="{self.X(x):.1f}" y2="{self.Y(self.yr[1]):.1f}" stroke="{color}" stroke-width="1"/>')
+        for y in self.ticks(*self.yr): self.parts.append(f'<line x1="{self.X(self.xr[0]):.1f}" y1="{self.Y(y):.1f}" x2="{self.X(self.xr[1]):.1f}" y2="{self.Y(y):.1f}" stroke="{color}" stroke-width="1"/>')
+
+    def axes(self, fmt=lambda v: f'{v:g}'):
+        x0 = min(max(0, self.xr[0]), self.xr[1]); y0 = min(max(0, self.yr[0]), self.yr[1])
+        self.line([(self.X(self.xr[0]), self.Y(y0)), (self.X(self.xr[1]) + 8, self.Y(y0))], color='#343a40', width=1.6)
+        self.line([(self.X(x0), self.Y(self.yr[0])), (self.X(x0), self.Y(self.yr[1]) - 8)], color='#343a40', width=1.6)
+        for x in self.ticks(*self.xr):
+            if abs(x - x0) < 1e-9: continue
+            self.parts.append(f'<line x1="{self.X(x):.1f}" y1="{self.Y(y0) - 4:.1f}" x2="{self.X(x):.1f}" y2="{self.Y(y0) + 4:.1f}" stroke="#343a40"/>')
+            self.text(self.X(x), self.Y(y0) + 17, fmt(x), size=13, anchor='middle', color='#5b6172')
+        for y in self.ticks(*self.yr):
+            if abs(y - y0) < 1e-9: continue
+            self.parts.append(f'<line x1="{self.X(x0) - 4:.1f}" y1="{self.Y(y):.1f}" x2="{self.X(x0) + 4:.1f}" y2="{self.Y(y):.1f}" stroke="#343a40"/>')
+            self.text(self.X(x0) - 8, self.Y(y), fmt(y), size=13, anchor='end', color='#5b6172')
+        self.text(self.X(self.xr[1]) + 2, self.Y(y0) - 14, self.xlabel, size=15, weight=700, anchor='end', italic=True)
+        self.text(self.X(x0) + 12, self.Y(self.yr[1]) + 2, self.ylabel, size=15, weight=700, italic=True)
+
+    def curve(self, rid, f, color='blue', label=None, note=None, q=None, n=400, xr=None, width=3, dashed=False, tag=None, tag_at=None):
+        """Plot y = f(x). The region is a band around the curve's visible points (good for hotspot / drag)."""
+        a, b = xr or self.xr; pts = []
+        for i in range(n + 1):
+            x = a + (b - a) * i / n
+            try: y = f(x)
+            except (ValueError, ZeroDivisionError): pts.append(None); continue
+            pts.append((x, y) if self.yr[0] - 1e9 < y < self.yr[1] + 1e9 else None)
+        col = self.CURVE.get(color, color); segs, cur = [], []
+        for p in pts:
+            if p is None or not (self.yr[0] <= p[1] <= self.yr[1]):
+                if len(cur) > 1: segs.append(cur)
+                cur = []
+            else: cur.append(p)
+        if len(cur) > 1: segs.append(cur)
+        for sg in segs:
+            d = 'M' + ' L'.join(f'{self.X(x):.1f},{self.Y(y):.1f}' for x, y in sg)
+            self.parts.append(f'<path d="{d}" fill="none" stroke="{col}" stroke-width="{width}" stroke-linecap="round"{DASH64 if dashed else ""}/>')
+        if tag and segs:
+            x, y = tag_at if tag_at else segs[-1][-1]
+            self.text(self.X(x) + 8, self.Y(y) - 12, tag, size=17, weight=800, color=col, italic=True)
+        if rid and segs:
+            # region: polygon band ±9 px around a thinned copy of the curve (precise enough to tell curves apart)
+            P = [(self.X(x), self.Y(y)) for sg in segs for x, y in sg[::max(1, len(sg) // 40)]]
+            up = [(px, py - 9) for px, py in P]; dn = [(px, py + 9) for px, py in reversed(P)]
+            r = {'id': rid, 'shape': 'poly', 'points': [[round(px, 1), round(py, 1)] for px, py in up + dn]}
+            if label: r['label'] = label
+            r.update({k: v for k, v in (('note', note), ('q', q)) if v})
+            if tag_at: r['anchor'] = [round(self.X(tag_at[0]), 1), round(self.Y(tag_at[1]), 1)]
+            self.regions.append(r)
+
+    def point(self, rid, x, y, label=None, note=None, q=None, color='ink', r=6, text=None):
+        col = self.CURVE.get(color, color)
+        self.parts.append(f'<circle cx="{self.X(x):.1f}" cy="{self.Y(y):.1f}" r="{r}" fill="{col}" stroke="#fff" stroke-width="2"/>')
+        if text: self.text(self.X(x) + 10, self.Y(y) - 14, text, size=14, weight=700, color=col)
+        if rid:
+            reg = {'id': rid, 'shape': 'circle', 'cx': round(self.X(x), 1), 'cy': round(self.Y(y), 1), 'r': 16}
+            if label: reg['label'] = label
+            reg.update({k: v for k, v in (('note', note), ('q', q)) if v})
+            self.regions.append(reg)
+
+    def zone(self, rid, x1, x2, label=None, note=None, q=None, shade=None):
+        """An x-interval (full plot height) — e.g. "tap where f is decreasing"."""
+        if shade: self.parts.append(f'<rect x="{self.X(x1):.1f}" y="{self.Y(self.yr[1]):.1f}" width="{self.X(x2) - self.X(x1):.1f}" height="{self.Y(self.yr[0]) - self.Y(self.yr[1]):.1f}" fill="{shade}" fill-opacity=".25"/>')
+        reg = {'id': rid, 'shape': 'rect', 'x': round(self.X(x1), 1), 'y': round(self.Y(self.yr[1]), 1), 'w': round(self.X(x2) - self.X(x1), 1), 'h': round(self.Y(self.yr[0]) - self.Y(self.yr[1]), 1), 'rx': 0}
+        if label: reg['label'] = label
+        reg.update({k: v for k, v in (('note', note), ('q', q)) if v})
+        self.regions.append(reg)

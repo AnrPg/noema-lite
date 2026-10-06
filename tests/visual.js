@@ -35,7 +35,7 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   /* ======================= desktop, mouse ======================= */
   console.log('— desktop (1280×900, mouse)');
   const { p, E } = await open(browser, { width: 1280, height: 900 });
-  ok(await p.evaluate(() => Object.keys(MEDIA).length === 1 && MEDIA['power-station'].data.startsWith('data:image/svg+xml')), 'picture embedded in the pack as a data URI');
+  ok(await p.evaluate(() => MEDIA['power-station'].data.startsWith('data:image/svg+xml') && MEDIA['ek-graph'].origin === 'plot'), 'picture embedded in the pack as a data URI');
 
   // hotspot single: the last tap wins; right answer
   await card(p, 'ch01-e101');
@@ -132,6 +132,18 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   await card(p, 'ch01-e108'); await p.keyboard.press('1'); await wait(150);
   ok(await result(p) !== 'open', 'reveal: keyboard 1–3 answers');
 
+  // function graph (svgkit.Plot): curve bands + a point
+  await card(p, 'ch01-e109');
+  const onCurve = await p.evaluate(() => { const m = MEDIA['ek-graph']; const r = m.regions.find(r => r.id === 'ek'); const n = r.points.length / 2; const a = r.points[Math.floor(n * 0.8)], b = r.points[r.points.length - 1 - Math.floor(n * 0.8)]; return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; });
+  await clickImg(p, ...onCurve); await check(p);
+  ok(await result(p) === 'ok', 'graph: tapping on the parabola selects the energy curve');
+  await card(p, 'ch01-e109');
+  const onLine = await p.evaluate(() => { const r = MEDIA['ek-graph'].regions.find(r => r.id === 'mom'); const n = r.points.length / 2; const a = r.points[Math.floor(n * 0.9)], b = r.points[r.points.length - 1 - Math.floor(n * 0.9)]; return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; });
+  await clickImg(p, ...onLine); await check(p);
+  ok(await result(p) === 'bad' && /doubling v doubles p/.test(await p.locator('#T').innerText()), 'graph: tapping the momentum line is wrong, with the reason');
+  await card(p, 'ch01-e110'); await p.click('#T .vx-bank .vx-chip:text-is("Kinetic energy (J)")'); await p.click('#T .vx-drop[data-k="0"]'); await p.click('#T .vx-bank .vx-chip:text-is("Momentum (kg·m/s)")'); await p.click('#T .vx-drop[data-k="1"]'); await check(p);
+  ok(await result(p) === 'ok', 'graph: drag the curve names onto the curves');
+
   // zoom
   await card(p, 'ch01-e104');
   await p.click('#T .vx-zoom'); await wait(200); await p.screenshot({ path: SHOTS + '/v0_zoom.png' });
@@ -147,14 +159,15 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   // figure in the theory (real route)
   await p.evaluate(() => { location.hash = '#/s/ch01-s01'; }); await wait(500);
   { const sa = await p.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(300); } }
-  ok(await p.$$eval('main .vx-fig img', x => x.length) === 1, 'figure block renders in the section');
-  const fsel = 'main .vx-fig .vx-stage'; await p.locator(fsel).scrollIntoViewIfNeeded(); await wait(200);
+  ok(await p.$$eval('main .vx-fig img', x => x.length) === 2, 'figure blocks render in the section (diagram + function graph)');
+  await p.evaluate(() => { document.querySelector('main .vx-fig').id = 'F1'; });
+  const fsel = '#F1 .vx-stage'; await p.locator(fsel).scrollIntoViewIfNeeded(); await wait(200);
   const [hx, hy] = await at(p, ...C.boiler, fsel); await p.mouse.move(hx, hy); await wait(150);
-  ok(await p.$eval('main .vx-tip', t => t.classList.contains('on') && /Boiler/.test(t.textContent)), 'figure: hovering a part shows its name');
-  await p.click('main .vx-fig button:has-text("Hide labels")'); await wait(150);
-  ok(await p.$$eval('main .vx-fig .vx-mask:not(.off)', x => x.length) >= 5, 'figure: 🙈 Hide labels covers the parts');
+  ok(await p.$eval('#F1 .vx-tip', t => t.classList.contains('on') && /Boiler/.test(t.textContent)), 'figure: hovering a part shows its name');
+  await p.click('#F1 button:has-text("Hide labels")'); await wait(150);
+  ok(await p.$$eval('#F1 .vx-mask:not(.off)', x => x.length) >= 5, 'figure: 🙈 Hide labels covers the parts');
   await p.mouse.click(hx, hy); await wait(100);
-  ok(await p.$$eval('main .vx-fig .vx-mask.off', x => x.length) === 1, 'figure: tapping a cover peeks under it');
+  ok(await p.$$eval('#F1 .vx-mask.off', x => x.length) === 1, 'figure: tapping a cover peeks under it');
   await p.screenshot({ path: SHOTS + '/v2_figure.png' });
   // practice tab lists the visual types as filters
   await p.evaluate(() => { location.hash = '#/practice/ch01'; }); await wait(500);

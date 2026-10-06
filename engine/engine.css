@@ -577,7 +577,9 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 /* ---------- visual exercises & figures (docs/VISUAL.md) ---------- */
 .vx{position:relative;margin:2px 0 6px}
 .vx-tools{display:flex;align-items:center;gap:8px;min-height:30px;margin-bottom:2px}
-.vx-credit{opacity:.75}
+.vx-credit{opacity:.75;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+a.vx-credit{text-decoration:none}
+a.vx-credit:hover{opacity:1;text-decoration:underline}
 .vx-zoom{font-size:16px}
 .vx-stage{position:relative;width:100%;margin:0 auto;background:#fff;border-radius:14px;border:1.5px solid var(--line);overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .vx-img{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}

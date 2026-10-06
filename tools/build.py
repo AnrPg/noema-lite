@@ -41,6 +41,12 @@ def build_packs():
         media, mrep = load_media(sdir)
         for m in mrep:
             if m.startswith('WARN'): print('  ' + m)
+        per_pic = int((meta.get('authoring') or {}).get('minExercisesPerPicture', 0))
+        if per_pic:   # docs/VISUAL.md §5: every picture carries several exercises
+            from collections import Counter
+            used = Counter(e.get('media') for c in chapters for e in c['exercises'] if e['type'].startswith('img_'))
+            for m in media:
+                if used[m] < per_pic: mrep.append(f'ERROR media {m}: used by {used[m]} exercise(s); every picture needs >= {per_pic} (authoring.minExercisesPerPicture)')
         errs = [r for r in report + mrep if r.startswith('ERROR')]
         if errs: print('\n'.join(errs)); failed.append(meta['id']); continue
         if not validate(chapters, meta['id'], media, int((meta.get('authoring') or {}).get('minVisualPerChapter', 0))): failed.append(meta['id']); continue
