@@ -68,8 +68,20 @@
       if (!m.alt) W.push(`media ${mid}: no alt text`);
       if (m.origin === 'web' && !m.url) E.push(`media ${mid}: web picture needs its source url`);
     }
+    const srcIds = new Set();
+    for (const x of (p?.sources?.sources || [])) {   // sources whose original file travels in the package (make_pack.py)
+      if (!x || !x.id) { E.push('a source without id'); continue; }
+      if (srcIds.has(x.id)) E.push(`duplicate source ${x.id}`); srcIds.add(x.id);
+      if (x.sha256 != null) {
+        if (!/^sources\/[^/].*/.test(String(x.file || '')) || String(x.file).split('/').includes('..')) E.push(`source ${x.id}: a packaged file must be "sources/<name>"`);
+        if (!/^[0-9a-f]{64}$/.test(String(x.sha256))) E.push(`source ${x.id}: sha256 is not a SHA-256 hex digest`);
+        if (!(x.size > 0 && x.size <= 52428800)) E.push(`source ${x.id}: size must be 1 byte … 50 MB`);
+      }
+      if (x.firstPage != null && !Number.isInteger(x.firstPage)) E.push(`source ${x.id}: firstPage must be a whole number`);
+    }
     const chapters = Array.isArray(p?.chapters) ? p.chapters : [];
     if (!chapters.length) E.push('no chapters');
+    for (const c of chapters) for (const r of (Array.isArray(c.sources) ? c.sources : [])) if (r && r.id && srcIds.size && !srcIds.has(r.id)) W.push(`${c.id}: cites unknown source "${r.id}"`);
     const exIds = new Set(), secIds = new Set(); let ex = 0, vis = 0, secN = 0;
     const used = {};
     for (const c of chapters) {

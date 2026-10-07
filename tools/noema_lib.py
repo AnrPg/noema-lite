@@ -159,3 +159,117 @@ def load_media(sdir, embed=True):
         if embed: item['data'] = f'data:{MIME[ext]};base64,' + base64.b64encode(raw).decode('ascii')
         out[mid] = item
     return out, report
+
+# ---------------- source files packaged with the pack (docs/SOURCES.md §3) ----------------
+SOURCE_FILE_MAX = 50 * 1024 * 1024        # the app's and the cloud bucket's limit per file
+def _mime(fn):
+    import mimetypes
+    ext = os.path.splitext(fn)[1].lower()
+    extra = {'.md': 'text/markdown', '.epub': 'application/epub+zip', '.ipynb': 'application/x-ipynb+json', '.heic': 'image/heic', '.heif': 'image/heif', '.eml': 'message/rfc822',
+             '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+             '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation', '.odt': 'application/vnd.oasis.opendocument.text', '.webp': 'image/webp'}
+    return extra.get(ext) or mimetypes.guess_type(fn)[0] or 'application/octet-stream'
+
+def pdf_page_count(path):
+    """Number of pages of a PDF (pdfinfo, pypdf or PyMuPDF), or None."""
+    import subprocess, re
+    try:
+        out = subprocess.run(['pdfinfo', path], capture_output=True, text=True, timeout=60).stdout
+        m = re.search(r'^Pages:\s+(\d+)', out, re.M)
+        if m: return int(m.group(1))
+    except Exception: pass
+    try:
+        from pypdf import PdfReader; return len(PdfReader(path).pages)
+    except Exception: pass
+    try:
+        try: import pymupdf as fitz
+        except ImportError: import fitz
+        return fitz.open(path).page_count
+    except Exception: return None
+
+def _first_page(txt):
+    import re
+    m = re.search(r'(?:σελ\.?|σσ\.|σ\.|pp?\.|pages?|S\.)\s*(\d{1,5})', str(txt or ''), re.I) or re.match(r'\s*(\d{1,5})\b', str(txt or ''))
+    return int(m.group(1)) if m else None
+
+def package_sources(sdir, sources, chapters, base_ids=()):
+    """Check the original files of the sources and describe them for the pack.
+    Every source with a local "file" (sources/<name>) must have that file in SDIR/sources/ (≤ 50 MB); every file in
+    SDIR/sources/ must belong to a source (so nothing the learner gave is left out — a split PDF = one source per part).
+    Returns (sources_json, files, errors, warnings); files = [(source_id, abs_path, 'sources/<name>')].
+    base_ids: sources of the previous version (unpacked from a .json without files) — their file is already in the
+    learner's account, so a missing file there is only a warning."""
+    import copy, hashlib as H
+    out = copy.deepcopy(sources or {'sources': [], 'chapters': {}, 'patches': {}})
+    errs, warns, files = [], [], []
+    sdir_src = os.path.join(sdir, 'sources')
+    used_paths = set(); ids = set()
+    cited = {}
+    for c in chapters:
+        for r in c.get('sources') or []:
+            if isinstance(r, dict) and r.get('id'): cited.setdefault(r['id'], []).append((c['id'], r.get('pages', '')))
+        if c.get('src'): cited.setdefault(c['src'], []).append((c['id'], ''))
+    for s in out.get('sources', []):
+        sid = s.get('id'); ids.add(sid)
+        if not sid: errs.append('ERROR sources.json: a source without "id"'); continue
+        f = str(s.get('file') or '').strip()
+        if not f or f.startswith(('http://', 'https://')):
+            for k in ('size', 'sha256', 'fileName', 'mime', 'pageCount'): s.pop(k, None)
+            continue
+        rel = f.replace('\\', '/').lstrip('./')
+        if not rel.startswith('sources/') or '..' in rel.split('/'):
+            if sid in base_ids:
+                warns.append(f'WARN source {sid}: "file" {f} is kept from the previous version (the learner already has it)'); [s.pop(k, None) for k in ('size', 'sha256')]; continue
+            errs.append(f'ERROR source {sid}: "file" must be "sources/<file name>" (the file inside {os.path.basename(sdir)}/sources/), not "{f}"'); continue
+        p = os.path.join(sdir, *rel.split('/'))
+        if not os.path.isfile(p):
+            if sid in base_ids:
+                warns.append(f'WARN source {sid}: {rel} is not in the folder — kept from the previous version (the learner already has it)')
+                for k in ('size', 'sha256'): s.pop(k, None)
+            else:
+                errs.append(f'ERROR source {sid}: its file {rel} is missing — copy the original (or the split part) into {os.path.basename(sdir)}/sources/')
+            continue
+        size = os.path.getsize(p)
+        if size > SOURCE_FILE_MAX: errs.append(f'ERROR source {sid}: {rel} is {size // 1048576} MB — the limit is 50 MB per file: split it with scripts/split_pdf.py and give each part its own source'); continue
+        if size == 0: errs.append(f'ERROR source {sid}: {rel} is empty'); continue
+        h = H.sha256()
+        with open(p, 'rb') as fh:
+            for chunk in iter(lambda: fh.read(1 << 20), b''): h.update(chunk)
+        s['file'] = rel; s['fileName'] = s.get('fileName') or os.path.basename(rel); s['size'] = size; s['sha256'] = h.hexdigest(); s['mime'] = _mime(rel)
+        used_paths.add(os.path.normcase(os.path.abspath(p))); files.append((sid, p, rel))
+        if rel.lower().endswith('.pdf'):
+            n = pdf_page_count(p)
+            if n:
+                s['pageCount'] = n
+                first = int(s.get('firstPage') or 1)
+                for ch, pg in cited.get(sid, []):
+                    fp = _first_page(pg)
+                    if fp is not None and not (first <= fp <= first + n - 1):
+                        warns.append(f'WARN {ch}: cites {sid} "{pg}" but {rel} has pages {first}–{first + n - 1}' + (' (set "firstPage" on a split part: the page number your citations use for its first page)' if first == 1 else ''))
+        if sid not in cited: warns.append(f'WARN source {sid}: no chapter uses it (add it to the chapters\' "sources")')
+    if os.path.isdir(sdir_src):
+        for root, _, fns in os.walk(sdir_src):
+            for fn in fns:
+                if fn.startswith('.'): continue
+                p = os.path.normcase(os.path.abspath(os.path.join(root, fn)))
+                if p not in used_paths:
+                    errs.append(f'ERROR {os.path.relpath(os.path.join(root, fn), sdir)}: no source in sources.json points to this file — every file the learner gave (or each part of a split PDF) needs its own source with "file": "sources/{fn}"; remove files that are not sources (e.g. the unsplit original when you use its parts)')
+    for ch, src in (out.get('chapters') or {}).items():
+        if src not in ids: errs.append(f'ERROR sources.json: chapter {ch} → unknown source "{src}"')
+    for c in chapters:
+        for r in c.get('sources') or []:
+            if isinstance(r, dict) and r.get('id') and r['id'] not in ids: errs.append(f'ERROR {c["id"]}: "sources" names unknown source "{r["id"]}"')
+    return out, files, errs, warns
+
+def write_bundle(path, pack, files):
+    """The package the app imports: a zip with pack.json + sources/<file> for every packaged source file."""
+    import zipfile
+    os.makedirs(os.path.dirname(os.path.abspath(path)) or '.', exist_ok=True)
+    tmp = path + '.tmp'
+    with zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as z:
+        z.writestr('pack.json', json.dumps(pack, ensure_ascii=False, separators=(',', ':')))
+        for sid, p, rel in files:
+            # PDFs / pictures / media are already compressed: store them (fast, no size gain lost)
+            comp = zipfile.ZIP_STORED if os.path.splitext(rel)[1].lower() in ('.pdf', '.png', '.jpg', '.jpeg', '.webp', '.zip', '.mp4', '.mp3', '.m4a', '.docx', '.pptx', '.xlsx', '.epub', '.heic') else zipfile.ZIP_DEFLATED
+            z.write(p, rel, compress_type=comp)
+    os.replace(tmp, path)

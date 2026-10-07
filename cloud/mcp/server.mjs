@@ -38,6 +38,55 @@ async function register(token, uid, p, counts) {
   const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, via: 'claude', updatedAt: new Date().toISOString() };
   await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key: 'a:packmeta:' + p.subject.id, value: JSON.stringify(meta), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 }
+/* ---------- the pack's own source files (make_pack.py packages them: file "sources/<name>" + size + sha256) ---------- */
+const packaged = p => ((p?.sources?.sources) || []).filter(x => x && x.sha256 && /^sources\//.test(String(x.file || '')));
+const extOf = name => ((String(name || '').toLowerCase().match(/\.([a-z0-9]{1,8})$/) || [])[1] || 'bin');
+const srcDir = (uid, sid, src) => `${uid}/sources/${sid}/${String(src).replace(/[^a-zA-Z0-9_-]/g, '_')}/`;   // = engine/srcfiles.js cloudPath
+/** Which packaged source files are in the account's storage with the right size → { ok: [...], missing: [...] } */
+async function sourceFileStatus(token, uid, sid, srcs) {
+  const out = { ok: [], missing: [] };
+  await Promise.all(srcs.map(async x => {
+    const want = 'file.' + extOf(x.fileName || x.file);
+    const list = await sb('/storage/v1/object/list/noema-private', token, { method: 'POST', body: { prefix: srcDir(uid, sid, x.id), limit: 100 } }).catch(() => []);
+    const hit = (list || []).find(o => o.name === want);
+    (hit && Number(hit.metadata?.size) === Number(x.size) ? out.ok : out.missing).push(x);
+  }));
+  return out;
+}
+async function uploadCommands(token, uid, sid, srcs) {
+  const lines = [];
+  for (const x of srcs) {
+    const path = srcDir(uid, sid, x.id) + 'file.' + extOf(x.fileName || x.file);
+    const r = await sb(`/storage/v1/object/upload/sign/noema-private/${path}`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
+    const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
+    lines.push(`# ${x.id} — ${x.fileName || x.file} (${(x.size / 1048576).toFixed(1)} MB)\ncurl -sS -X PUT -H "x-upsert: true" -H "Content-Type: ${x.mime || 'application/octet-stream'}" -H "apikey: ${CFG.supabaseKey}" --data-binary @"work/${sid}/${x.file}" "${u}"`);
+  }
+  return lines.join('\n\n');
+}
+/** Register the files in the learner's synced index (a:srcfiles:<subject>) so every device shows 👁 for them. */
+async function indexSourceFiles(token, uid, sid, srcs) {
+  if (!srcs.length) return;
+  const key = 'a:srcfiles:' + sid; const cur = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []);
+  let ix = {}; try { ix = JSON.parse(cur?.[0]?.value || '{}'); } catch (e) { }
+  const now = new Date().toISOString();
+  for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude' }; }
+  await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: now }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+}
+/** The pack is stored and valid: check its packaged files, then add it to the picker — or say which files to upload. */
+async function complete(token, uid, sid, p, res, fail, text) {
+  const need = packaged(p);
+  if (need.length) {
+    const st = await sourceFileStatus(token, uid, sid, need);
+    if (st.missing.length) {
+      return fail(`The pack is valid, but ${st.missing.length} of its ${need.length} source file(s) are not in the account yet: ${st.missing.map(x => x.id).join(', ')}.\n` +
+        `The learner must get exactly the files the pack was built from (each part of a split PDF), so the subject is NOT saved yet. Upload them — run in your sandbox, from the folder that contains work/ (adjust the paths if your files are elsewhere; they are also inside ${sid}.noema.zip):\n\n` +
+        await uploadCommands(token, uid, sid, st.missing) + `\n\nThen call noema_finish_upload with subject_id "${sid}" again.`);
+    }
+    await indexSourceFiles(token, uid, sid, need);
+  }
+  await register(token, uid, p, res.counts);
+  return text(summary(p, res) + (need.length ? `\n📎 ${need.length} source file(s) attached — the learner opens them with 👁 in 📚 Sources, at the cited pages.` : ''));
+}
 const summary = (p, r) => `✅ “${p.subject.title}” (${p.subject.id}) is in the noema-lite account: ${r.counts.chapters} chapters, ${r.counts.sections} sections, ${r.counts.exercises} exercises (${r.counts.visual} visual), ${r.counts.media} pictures.` +
   `\nIt appears in the subject picker the next time the app opens (or after tapping ☁️ → Sync now).` + (r.warnings.length ? `\n⚠️ Warnings:\n- ${r.warnings.slice(0, 20).join('\n- ')}` : '');
 
@@ -51,11 +100,11 @@ const TOOLS = [
   { name: 'noema_list_subjects', description: 'Subjects available to this account: the shared library and the user’s own private packs (id, title, size, version).', inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_get_pack_url', description: 'A temporary download URL for an existing pack (the user’s private pack, or a library pack) — use it to make ADDITIVE updates (never renumber ids: progress is keyed by them).',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] }, annotations: { readOnlyHint: true } },
-  { name: 'noema_start_upload', description: 'Step 1 of saving a pack built in your sandbox: returns a signed URL (valid 2 h) and the exact curl command to PUT the .json file to it. Then call noema_finish_upload.',
+  { name: 'noema_start_upload', description: 'Step 1 of saving a pack built in your sandbox: returns a signed URL (valid 2 h) and the exact curl command to PUT the pack (work/<id>/build/<id>.json, written by make_pack.py) to it. Then call noema_finish_upload — it also asks for the source files packaged with the pack.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'pack.subject.id' } }, required: ['subject_id'] } },
-  { name: 'noema_start_source_upload', description: 'Upload an ORIGINAL SOURCE FILE (the PDF, slides, document… the user gave you) so the learner can open it inside noema-lite (👁 preview, jump to the cited page). Call once per file-based source, with the source id used in sources.json; returns a signed URL + curl command. Do it before noema_finish_upload.',
+  { name: 'noema_start_source_upload', description: 'Upload ONE original source file (PDF, slides, document… or one part of a split PDF) so the learner can open it inside noema-lite (👁 preview, at the cited page). Normally not needed: noema_finish_upload gives the commands for every source file the pack contains. Use it to add or replace a single file; returns a signed URL + curl command.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, source_id: { type: 'string', description: 'the id in sources.json' }, filename: { type: 'string', description: 'original file name, e.g. ecb-ch5.pdf' } }, required: ['subject_id', 'source_id', 'filename'] } },
-  { name: 'noema_finish_upload', description: 'Step 2: checks the uploaded pack and adds it to the user’s subject picker. Returns errors to fix (then upload again) or a summary.',
+  { name: 'noema_finish_upload', description: 'Step 2: checks the uploaded pack and its source files (every file packaged by make_pack.py — each part of a split PDF — must be uploaded, with the right size) and adds it to the user’s subject picker. Returns errors to fix, the upload commands of missing source files (run them, then call it again), or a summary.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] } },
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
     inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' } }, required: ['pack_json'] } },
@@ -66,7 +115,7 @@ const PROMPTS = [{
   name: 'create_subject', title: 'Create a noema-lite subject', description: 'Turn the files attached to this chat into a noema-lite subject pack and save it to your account.',
   arguments: [{ name: 'title', description: 'Subject title, e.g. Human heart anatomy', required: true }, { name: 'language', description: 'Language of the material (en, el, …)', required: false }, { name: 'goal', description: 'exam / understanding / project', required: false }],
   text: a => `Create a noema-lite subject pack from the sources attached to this chat${a.title ? ` — title: "${a.title}"` : ''}${a.language ? `, language: ${a.language}` : ''}${a.goal ? `, goal: ${a.goal}` : ''}.\n` +
-    `Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources, include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, validate with make_pack.py, and save the pack to my noema-lite account with the noema-lite tools. Do not ask me questions unless something essential is missing — choose sensible defaults.`,
+    `Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources, include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, put every attached file in the package (if you split a PDF: its parts, each its own source, never the unsplit original too), validate with make_pack.py, and save the pack AND its source files to my noema-lite account with the noema-lite tools (noema_finish_upload asks for the files). Do not ask me questions unless something essential is missing — choose sensible defaults.`,
 }];
 
 async function callTool(name, args, ctx) {
@@ -107,7 +156,7 @@ async function callTool(name, args, ctx) {
       if ((CFG.library || []).some(s => s.id === sid)) return fail(`"${sid}" is a library subject id — use a new id (e.g. "${sid}-mine").`);
       const r = await sb(`/storage/v1/object/upload/sign/${base}${sid}.json`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
       const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
-      return text(`Upload URL (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @/path/to/${sid}.json "${u}"\n\nThen call noema_finish_upload with subject_id "${sid}". If the sandbox cannot reach the internet, give the user the .json file instead (they import it with 📥 Import subject pack).`);
+      return text(`Upload URL (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @work/${sid}/build/${sid}.json "${u}"\n\nThen call noema_finish_upload with subject_id "${sid}" (it gives you the upload commands for the pack's source files). If the sandbox cannot reach the internet, give the user the package ${sid}.noema.zip instead (they import it with 📥 Import subject pack — the source files come with it).`);
     }
     case 'noema_start_source_upload': {
       const src = String(args?.source_id || '').trim(), fname = String(args?.filename || '').trim().split(/[\\/]/).pop();
@@ -131,8 +180,7 @@ async function callTool(name, args, ctx) {
       catch (e) { return fail(`No uploaded file found for "${sid}" (${e.message.slice(0, 120)}). Run the curl command from noema_start_upload first.`); }
       const res = checkPack(p, sid);
       if (res.errors.length) return fail(`The pack has ${res.errors.length} error(s) — fix them, rebuild with make_pack.py and upload again:\n- ${res.errors.slice(0, 40).join('\n- ')}`);
-      await register(token, uid, p, res.counts);
-      return text(summary(p, res));
+      return complete(token, uid, sid, p, res, fail, text);
     }
     case 'noema_save_pack': {
       const raw = String(args?.pack_json || '');
@@ -142,8 +190,7 @@ async function callTool(name, args, ctx) {
       if (res.errors.length) return fail(`${res.errors.length} error(s):\n- ${res.errors.slice(0, 40).join('\n- ')}`);
       if ((CFG.library || []).some(s => s.id === p.subject.id)) return fail(`"${p.subject.id}" is a library subject id — use a new id.`);
       await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
-      await register(token, uid, p, res.counts);
-      return text(summary(p, res));
+      return complete(token, uid, p.subject.id, p, res, fail, text);
     }
   }
   return fail('Unknown tool ' + name);
@@ -158,7 +205,7 @@ async function handle(m, ctx) {
       case 'initialize': {
         const want = m.params?.protocolVersion;
         return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false }, prompts: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
-          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones).' });
+          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again.' });
       }
       case 'notifications/initialized': case 'notifications/cancelled': return null;
       case 'ping': return ok({});

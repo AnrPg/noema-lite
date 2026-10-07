@@ -101,6 +101,49 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   p.once('dialog', d => d.accept()); await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(3500);
   ok(!Object.keys(srv.state.files).includes(`${gia}/sources/kytt/ecb/file.pdf`) && !/ecb/.test(srv.state.kv[gia]?.['a:srcfiles:kytt']?.value || ''), 'removed from the cloud and the index');
 
+  console.log('— a package (.noema.zip): the pack + its source files, exactly as split');
+  const PK = path.join(ROOT, 'dist/site/testfiles/pkg'); const crypto = require('crypto');
+  execFileSync('python3', [path.join(ROOT, 'tests/fixtures/make_package.py'), path.join(ROOT, 'dist/site/downloads/noema-pack-builder.zip'), ROOT, PK], { stdio: 'inherit' });
+  const zipPack = JSON.parse(execFileSync('python3', ['-c', 'import zipfile,sys;sys.stdout.write(zipfile.ZipFile(sys.argv[1]).read("pack.json").decode())', path.join(PK, 'pkg-physics.noema.zip')]).toString());
+  await p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);
+  ok(/\.zip/.test(await p.getAttribute('label:has-text("Import subject pack") input[type=file]', 'accept')), '📥 Import accepts packages (.zip)');
+  await p.setInputFiles('label:has-text("Import subject pack") input[type=file]', path.join(PK, 'pkg-physics.noema.zip'));
+  const pkIdx = () => JSON.parse(srv.state.kv[gia]?.['a:srcfiles:pkg-physics']?.value || '{}');
+  ok(await until(() => Object.keys(pkIdx()).length === 3, 20000), 'the package is imported with its 3 source files: ' + Object.keys(pkIdx()).join(', '));
+  const want = Object.fromEntries(zipPack.sources.sources.map(x => [x.id, x]));
+  const stored = id => srv.state.files[`${gia}/sources/pkg-physics/${id}/file.${id === 'notes' ? 'md' : 'pdf'}`]?.data;
+  ok(['ecb-1', 'ecb-2', 'notes'].every(id => stored(id) && crypto.createHash('sha256').update(stored(id)).digest('hex') === want[id].sha256), 'every file is in the cloud byte-for-byte (SHA-256 = the one recorded by make_pack.py)');
+  ok(pkIdx()['notes'].name === 'σημειώσεις.md' && pkIdx()['ecb-2'].name === 'ecb_p13-30.pdf' && pkIdx()['ecb-2'].size === want['ecb-2'].size, 'the index keeps the original names (each part its own file)');
+  ok(await until(async () => await p.evaluate(() => SUBJ.id) === 'pkg-physics', 15000), 'the imported subject opens');
+  await p.evaluate(() => { location.hash = '#/ch/ch01'; }); await wait(700);
+  const pchips = await p.$$eval('.srcrefs .srcref', b => b.map(x => x.textContent));
+  ok(pchips.length === 3 && pchips.every(t => /👁/.test(t)), 'the chapter shows its three sources, all with 👁: ' + pchips.join(' | '));
+  await p.click('.srcref:has-text("14")');
+  ok(await until(() => p.locator('.vw-ov .vw-page canvas').count()), 'part 2 of the split book opens');
+  ok(await until(async () => await p.$eval('.vw-pgin', e => e.value) === '2'), 'at the right page: book σ. 14 = page 2 of the part that starts at page 13 (firstPage)');
+  ok(/\/\s*18/.test(await p.locator('.vw-ov').innerText()), 'the part has its own 18 pages (13–30)');
+  await p.screenshot({ path: SHOTS + '/s6_package_part.png' }); await p.keyboard.press('Escape'); await wait(200);
+  await p.click('.srcref:has-text("Σημ")'); ok(await until(async () => /Notes travel with the package/.test(await p.locator('.vw-ov').innerText())), 'the note (Markdown) from the package opens too'); await p.keyboard.press('Escape');
+  await p.evaluate(() => toggleSourcesDeck(true)); await wait(300);
+  ok(await p.locator('.srcdeck .srccard').count() === 3 && await p.locator('.srcdeck .srccard .srceye').count() === 3, '📚 Sources: one card per part, each with its file (👁)');
+  await p.click('.srcdeck .srccard:has-text("μέρος 2") .srcmain'); await wait(300);
+  const c2txt = await p.locator('.srcdeck .srccard:has-text("μέρος 2")').innerText();
+  ok(/ecb_p13-30\.pdf/.test(c2txt) && /Ch1/.test(c2txt) && /Preview/.test(c2txt), 'the card of part 2 shows its own file and the chapter that cites it');
+  await p.click('.srcdeck button[title="Close"]').catch(() => { });
+  // a damaged package: the good files are attached, the damaged one is not (and the learner is told)
+  await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-bad.noema.zip')).blob(); await Noema.importPackFile(Noema.account.id, new File([b], 'pkg-bad.noema.zip')); });
+  await wait(1500);
+  const badIdx = JSON.parse(await p.evaluate(() => localStorage.getItem(`noema1:${Noema.account.id}:a:srcfiles:pkg-bad`) || '{}'));
+  ok(!badIdx['ecb-1'] && badIdx['ecb-2'] && badIdx['notes'] && /missing or damaged: ecb-1/.test(await p.locator('body').innerText()), 'a damaged file (SHA-256 mismatch) is not attached and the learner is told which');
+  // a plain .json: imported, and the learner is told the files are in the package
+  await p.evaluate(async () => { const b = await (await fetch('/testfiles/pkg/pkg-physics.json')).text(); const pk = JSON.parse(b); pk.subject.id = 'pkg-json'; await Noema.importPackFile(Noema.account.id, new File([JSON.stringify(pk)], 'pkg-json.json', { type: 'application/json' })); });
+  ok(await until(async () => /not in this \.json — import the \.noema\.zip/.test(await p.locator('body').innerText()), 5000), 'importing only the .json says the 3 source files are in the .noema.zip package');
+  // ⬇️ export: a package again, with every attached file
+  const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 20000 }), p.evaluate(() => Noema.exportPackage(Noema.account.id, Noema.pack))]);
+  const dlp = path.join(PK, 'export.zip'); await dl.saveAs(dlp);
+  const ex = JSON.parse(execFileSync('python3', ['-c', 'import zipfile,sys,json,hashlib;z=zipfile.ZipFile(sys.argv[1]);p=json.loads(z.read("pack.json"));print(json.dumps({"names":sorted(z.namelist()),"ok":all(hashlib.sha256(z.read(s["file"])).hexdigest()==s["sha256"] for s in p["sources"]["sources"] if s.get("sha256")),"n":p["counts"]["sourceFiles"]}))', dlp]).toString());
+  ok(dl.suggestedFilename() === 'pkg-physics.noema.zip' && ex.n === 3 && ex.ok && ex.names.includes('sources/ecb_p13-30.pdf') && ex.names.includes('sources/σημειώσεις.md'), '⬇️ Export writes a package with every source file: ' + ex.names.join(', '));
+
   console.log('— subjects: rename, describe, hide, delete');
   await p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);
   await p.hover('.noema-chipwrap:has-text("Databricks")'); await p.click('.noema-chipwrap:has-text("Databricks") .noema-editbtn'); await wait(300);

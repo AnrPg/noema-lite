@@ -4,7 +4,9 @@ Your own subjects (made with Claude, imported, or shared with you) can be **made
 person**. Library subjects (Databricks…) are already available to everyone and have no share button.
 
 Sharing needs a **cloud account** (⚙️ → Cloud). On a local profile the 🔗 dialog offers the pack file to
-download instead, so you can send it any other way (the other person uses *📥 Import subject pack*).
+download instead — a package `<id>.noema.zip` with the subject **and its attached source files** — so you can send it
+any other way (the other person uses *📥 Import subject pack*). Public and person-to-person shares carry the subject
+only: your source files stay in your private storage.
 
 ## 1. Where the buttons are
 

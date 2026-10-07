@@ -80,6 +80,37 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(fb.isError && /section nope not found/.test(fb.content[0].text) && !srv.state.kv[uid]['a:packmeta:broken-pack'], 'a broken pack is refused with the list of errors');
   const small = JSON.parse(JSON.stringify(pack)); small.subject.id = 'tiny-inline'; small.subject.title = 'Tiny inline';
   ok(!(await tool('noema_save_pack', { pack_json: JSON.stringify(small) })).isError && srv.state.kv[uid]['a:packmeta:tiny-inline'], 'save_pack stores a small pack inline');
+
+  console.log('— a pack with its source files packaged (make_pack.py): every file must arrive');
+  const crypto = require('crypto');
+  const part = (n, len) => Buffer.concat([Buffer.from('%PDF-1.4 part ' + n + ' '), Buffer.alloc(len, n)]);
+  const F = { 'ecb-1': part(1, 3000), 'ecb-2': part(2, 5000) };
+  const pk = JSON.parse(JSON.stringify(pack)); pk.subject.id = 'packaged-physics'; pk.subject.title = 'Packaged physics';
+  pk.sources = { sources: [
+    { id: 'ecb-1', title: 'ECB part 1', file: 'sources/ecb_p1-12.pdf', fileName: 'ecb_p1-12.pdf', firstPage: 1, size: F['ecb-1'].length, sha256: crypto.createHash('sha256').update(F['ecb-1']).digest('hex'), mime: 'application/pdf' },
+    { id: 'ecb-2', title: 'ECB part 2', file: 'sources/ecb_p13-30.pdf', fileName: 'Βιβλίο μέρος 2.pdf', firstPage: 13, size: F['ecb-2'].length, sha256: crypto.createHash('sha256').update(F['ecb-2']).digest('hex'), mime: 'application/pdf' },
+    { id: 'web', title: 'A web page', url: 'https://example.org/x' }], chapters: { ch01: 'ecb-1' }, patches: {} };
+  const s3 = await tool('noema_start_upload', { subject_id: 'packaged-physics' });
+  ok(/work\/packaged-physics\/build\/packaged-physics\.json/.test(s3.content[0].text), 'start_upload points at the pack written by make_pack.py');
+  await fetch(s3.content[0].text.match(/https?:\/\/\S+token=\S+/)[0], { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(pk) });
+  const cmds = t => [...t.matchAll(/^# (\S+) — [^\n]*\ncurl [^\n]*--data-binary @"([^"]+)" "([^"]+)"/gm)].map(m => ({ id: m[1], local: m[2], url: m[3] }));
+  const f1 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' }); const c1 = cmds(f1.content[0].text);
+  ok(f1.isError && c1.length === 2 && c1[0].local === 'work/packaged-physics/sources/ecb_p1-12.pdf' && /Content-Type: application\/pdf/.test(f1.content[0].text) && !srv.state.kv[uid]['a:packmeta:packaged-physics'], 'finish_upload refuses to save while source files are missing and returns one upload command per file (not saved yet)');
+  const putF = (u, buf) => fetch(u, { method: 'PUT', headers: { 'x-upsert': 'true', apikey: 'k' }, body: buf });
+  await putF(c1.find(c => c.id === 'ecb-1').url, F['ecb-1']);
+  await putF(c1.find(c => c.id === 'ecb-2').url, F['ecb-2'].subarray(0, 100));   // a broken (short) upload
+  const f2 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' }); const c2 = cmds(f2.content[0].text);
+  ok(f2.isError && c2.length === 1 && c2[0].id === 'ecb-2', 'an uploaded file with the wrong size still counts as missing; the good one is accepted');
+  await putF(c2[0].url, F['ecb-2']);
+  const f3 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' });
+  const ix = JSON.parse(srv.state.kv[uid]?.['a:srcfiles:packaged-physics']?.value || '{}');
+  ok(!f3.isError && /📎 2 source file\(s\)/.test(f3.content[0].text) && srv.state.kv[uid]['a:packmeta:packaged-physics'], 'with every file uploaded the subject is saved: ' + f3.content[0].text.split('\n').pop());
+  ok(ix['ecb-1']?.size === F['ecb-1'].length && ix['ecb-2']?.name === 'Βιβλίο μέρος 2.pdf' && ix['ecb-2'].type === 'application/pdf' && ix['ecb-2'].cloud && !ix.web, 'the synced index lists each file (original name, type, size) → 👁 on every device');
+  ok(Buffer.compare(Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-2/file.pdf`].data), F['ecb-2']) === 0, 'the storage holds exactly the packaged file (same path as the app uses)');
+  const inl = JSON.parse(JSON.stringify(pk)); inl.subject.id = 'inline-with-files'; inl.subject.title = 'Inline with files';
+  const si = await tool('noema_save_pack', { pack_json: JSON.stringify(inl) });
+  ok(si.isError && cmds(si.content[0].text).length === 2 && !srv.state.kv[uid]['a:packmeta:inline-with-files'], 'save_pack applies the same file check');
+
   const ls = (await tool('noema_list_subjects', {})).content[0].text;
   ok(/databricks/.test(ls) && /physics-by-claude/.test(ls) && /tiny-inline/.test(ls), 'list_subjects shows library + private packs');
   const gu = (await tool('noema_get_pack_url', { subject_id: 'physics-by-claude' })).content[0].text.match(/https?:\/\/\S+token=\S+/)[0];

@@ -348,7 +348,7 @@
           });
           if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.')));
         };
-        const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
+        const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
         Notes.on(pending => { reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, `📬 ${pending.length} subject(s) shared with you`), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
         // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
@@ -362,11 +362,34 @@
       }, { closable });
     });
   }
+  /** 📥 Import: a package (<id>.noema.zip = pack + its source files) or a plain pack (.json). */
   async function importPackFile(acc, file) {
-    let p; try { p = JSON.parse(await file.text()); } catch (e) { throw new Error('This file is not a noema-lite subject pack.'); }
+    const SF = window.NoemaSrcFiles;
+    if (SF && await SF.isZip(file)) {
+      toastL('📦 Opening the package…', 1500);
+      const b = await SF.readBundle(file);
+      const s = await importPack(acc, b.pack);
+      const r = await SF.attachPackaged(acc, b.pack, b.file);
+      const miss = r.missing.length + r.bad.length;
+      toastL(`📥 “${s.title}” imported` + (r.attached.length ? ` with ${r.attached.length} source file(s) — 👁 open them in 📚 Sources` : '') + (miss ? ` · ⚠️ ${miss} source file(s) missing or damaged: ${[...r.missing, ...r.bad].join(', ')}` : ''), miss ? 6000 : 3500);
+      return s;
+    }
+    let p; try { p = JSON.parse(await file.text()); } catch (e) { throw new Error('This file is not a noema-lite subject pack or package.'); }
     const s = await importPack(acc, p);
-    toastL(`📥 “${s.title}” imported`);
+    const want = SF ? SF.packaged(p).filter(x => !SF.index(acc, p.subject.id)[x.id]) : [];
+    toastL(`📥 “${s.title}” imported` + (want.length ? ` · 📎 its ${want.length} source file(s) are not in this .json — import the .noema.zip package instead, or attach them in 📚 Sources` : ''), want.length ? 6500 : 2500);
     return s;
+  }
+  /** ⬇️ Save a subject as a package (pack + every attached source file). */
+  async function exportPackage(acc, pack) {
+    if (!window.NoemaSrcFiles) { const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(pack)], { type: 'application/json' })), download: pack.subject.id + '.json' }); a.click(); return; }
+    toastL('📦 Preparing the package…', 1500);
+    // the pack as stored (the open subject's object is extended by the engine): IndexedDB copy, or the library file
+    let clean = await IDB.get('packs', acc + '|' + pack.subject.id).catch(() => null);
+    if (!clean) { const m = (REG.subjects || []).find(x => x.id === pack.subject.id); if (m?.path) clean = await fetch(m.path.replace(/pack\.js$/, 'pack.json')).then(r => r.ok ? r.json() : null).catch(() => null); }
+    if (clean) pack = clean;
+    try { const n = await NoemaSrcFiles.downloadBundle(acc, pack); toastL(`⬇️ ${pack.subject.id}.noema.zip` + (n ? ` (with ${n} source file(s))` : ''), 3000); }
+    catch (e) { toastL('⚠️ ' + e.message, 4000); }
   }
 
   /* ---------------- Sharing, Explore & notifications (docs/SHARING.md) ---------------- */
@@ -432,7 +455,7 @@
         box.append(brandHead(`🔗 Share “${s.title}”`, `${nOf(meta.counts.chapters, 'chapter')} · ${nOf(meta.counts.exercises, 'exercise')} · ${nOf(meta.counts.pictures, 'picture')}`));
         if (!isCloudAcc(acc)) {
           box.append(el('div', { class: 'noema-form' }, el('p', {}, '☁️ Sharing needs a cloud account (free). Sign in with one — or send the file instead:'),
-            el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => { const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(pack)], { type: 'application/json' })), download: s.id + '.json' }); a.click(); } }, '⬇️ Download the file to send'))),
+            el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => exportPackage(acc, pack) }, '⬇️ Download the package to send'))),
             el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
           return;
         }
@@ -579,8 +602,24 @@
      B. in the Claude app / website with the learner's Claude plan + the noema-lite connector (+ optional skill) */
   const SITE = (CFG.siteUrl || '').replace(/\/$/, '');
   const MCP_URL = SITE ? SITE + '/mcp' : '';
+  /** After "Create with Claude": attach the source files — first the ones packaged by Claude (exact, checked), then
+      the learner's own uploads for any file-less source left (matched by name). */
+  async function attachJobFiles(acc, j) {
+    const SF = window.NoemaSrcFiles; const sid = j.pack.subject.id; let n = 0, bad = [];
+    if (j.bundleFiles && Object.keys(j.bundleFiles).length) {
+      const r = await SF.attachPackaged(acc, j.pack, path => j.bundleFiles[path] || null); n += r.attached.length; bad = [...r.missing, ...r.bad];
+    }
+    if (j.sourceBlobs?.length) {
+      const have = SF.index(acc, sid); const pk = new Set(SF.packaged(j.pack).map(x => x.id));
+      const pairs = SF.match((j.pack.sources?.sources || []).filter(s => !have[s.id] && !pk.has(s.id)), j.sourceBlobs);
+      for (const [src, f] of pairs) { await SF.put(acc, sid, src.id, f).then(() => n++).catch(e => console.warn('[source files]', e)); }
+    }
+    if (n) toastL(`📎 ${n} source file(s) attached — open them with 👁 in 📚 Sources`, 4000);
+    if (bad.length) toastL(`⚠️ ${bad.length} source file(s) of the package could not be attached: ${bad.join(', ')}`, 6000);
+    if (j.bundleFiles) { j.bundleFiles = null; window.NoemaClaude?.saveJob(j).catch(() => { }); }
+  }
   const SKILL_URL = (location.protocol.startsWith('http') ? '' : SITE) + '/downloads/noema-pack-builder.zip';
-  const CLAUDE_PROMPT = 'Create a noema-lite subject pack from the files I attached.\nSubject title: …\nLanguage of the material: …\nMy goal: exam / understanding / project\nUse the noema-pack-builder skill if you have it; otherwise use the noema-lite connector (noema_get_toolkit + noema_authoring_guide). Save the finished pack to my noema-lite account.';
+  const CLAUDE_PROMPT = 'Create a noema-lite subject pack from the files I attached.\nSubject title: …\nLanguage of the material: …\nMy goal: exam / understanding / project\nUse the noema-pack-builder skill if you have it; otherwise use the noema-lite connector (noema_get_toolkit + noema_authoring_guide). Include every file I attached in the package — if you split a PDF, its parts, each as its own source — and save it to my noema-lite account with its source files.';
   async function copyText(t, b) { try { await navigator.clipboard.writeText(t); if (b) { const o = b.textContent; b.textContent = '✓ Copied'; setTimeout(() => { b.textContent = o; }, 1600); } } catch (e) { prompt('Copy this:', t); } }
   const GR = { α: 'a', β: 'v', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'i', θ: 'th', ι: 'i', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'x', ο: 'o', π: 'p', ρ: 'r', σ: 's', ς: 's', τ: 't', υ: 'y', φ: 'f', χ: 'ch', ψ: 'ps', ω: 'o' };
   const slugId = t => slugify(String(t).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[α-ω]/g, c => GR[c] || '')) || 'subject-' + Date.now().toString(36);
@@ -725,7 +764,7 @@
           actions.innerHTML = ''; ask.innerHTML = '';
           if (running) actions.append(el('button', { class: 'btn', onclick: () => ctl?.abort() }, '⏹ Stop'));
           else if (j.status === 'done') actions.append(el('button', { class: 'btn primary', onclick: async () => { try { const s = await importPack(acc, j.pack, { via: 'claude-api' });
-            if (window.NoemaSrcFiles && j.sourceBlobs?.length) { const pairs = NoemaSrcFiles.match(j.pack.sources?.sources || [], j.sourceBlobs); for (const [src, f] of pairs) await NoemaSrcFiles.put(acc, j.pack.subject.id, src.id, f).catch(e => console.warn('[source files]', e)); if (pairs.length) toastL(`📎 ${pairs.length} source file(s) attached — open them with 👁 in 📚 Sources`, 4000); }
+            if (window.NoemaSrcFiles) await attachJobFiles(acc, j);
             await C.deleteJob(j.id); toastL(`📥 “${s.title}” added to your subjects`); done(s); } catch (e) { toastL('⚠️ ' + e.message, 5000); } } }, '📚 Open my new subject'));
           else if (j.status === 'question') {
             const ans = el('textarea', { class: 'noema-input', rows: 3, placeholder: 'Your answer (or just press Send: “continue and finish the pack”)' });
@@ -774,7 +813,7 @@
               sub('Press Send.')),
             step('Study', null,
               sub('Open noema-lite → subject picker: the new subject is there with 🔒 (if not, close and reopen the picker).'),
-              sub('Without the connector Claude gives you a ', el('b', {}, '.json'), ' file: download it, then ', el('b', {}, '📥 Import subject pack'), ' in the subject picker.'))),
+              sub('Without the connector Claude gives you a package ', el('b', {}, '<id>.noema.zip'), ' (the course + your source files): download it, then ', el('b', {}, '📥 Import subject pack'), ' in the subject picker.'))),
           el('details', { class: 'cg-faq' }, el('summary', {}, '❓ Why can’t noema-lite add the skill to my Claude by itself?'),
             el('p', {}, 'Claude does not let websites install things into your Claude account — that protects you. You do not need the skill anyway: with the connector Claude gets the instructions from noema-lite by itself. In way A (here in noema-lite) the app uploads the skill for you automatically, using your API key.')),
           el('details', { class: 'cg-faq' }, el('summary', {}, '❓ Is the connector address the same on every computer?'),
@@ -904,7 +943,7 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, overlay, claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),

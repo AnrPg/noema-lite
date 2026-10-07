@@ -245,5 +245,5 @@ window.NoemaViewer = (() => {
       ov.dataset.kind = kind; return { close, kind };
     } catch (e) { console.warn('[viewer]', e); fail('This file could not be shown (' + e.message + '). You can still download it.'); return { close, kind: 'error' }; }
   }
-  return { open, kindOf, LABEL, KINDS, youtube };
+  return { open, kindOf, LABEL, KINDS, youtube, loadZip: zip, jszip: () => script('viewer/jszip.min.js') };
 })();

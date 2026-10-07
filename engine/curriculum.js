@@ -557,7 +557,9 @@ window.NoemaCurriculum.Gen = (() => {
       if (!pack) return;
       pack.subject.id = pid; pack.curriculum = { id: c.id, node: nid };
       say('📥 Saving the subject (this device + cloud)…');
+      const files = pack._bundleFiles; delete pack._bundleFiles;
       await window.Noema.importPack(acc, pack, { curriculum: c.id, node: nid, curTitle: c.title });
+      if (files && window.NoemaSrcFiles) await NoemaSrcFiles.attachPackaged(acc, pack, path => files[path] || null).catch(e => console.warn('[source files]', e));
       const secs = pack.chapters.flatMap(ch => (ch.sections || []).map(s => s.id)); const exN = pack.chapters.reduce((a, ch) => a + (ch.exercises || []).length, 0);
       patchNode(c.id, nid, { status: 'ready', version: pack.version || null, sections: secs, exercises: exN, chapters: pack.chapters.length, generatedAt: new Date().toISOString(), error: null });
       say('✅ Ready'); window.Noema?.toast?.(`🧭 “${n.title}” is ready to study`);
@@ -577,7 +579,7 @@ window.NoemaCurriculum.Gen = (() => {
     }
     for (let answers = 0; ; answers++) {
       job = job.status === 'question' && answers < 3 ? await CL.answer(job, apiKey, 'Continue with sensible defaults and finish the pack (do not wait for me).', { onLog: say, signal: ctl.signal }) : await CL.run(job, apiKey, { onLog: say, signal: ctl.signal });
-      if (job.status === 'done') { const p = job.pack; await CL.deleteJob(job.id); return p; }
+      if (job.status === 'done') { const p = job.pack; if (job.bundleFiles && Object.keys(job.bundleFiles).length) p._bundleFiles = job.bundleFiles; await CL.deleteJob(job.id); return p; }
       if (job.status === 'question' && answers < 3) continue;
       if (job.status === 'budget') { patchNode(c.id, nid, { status: 'paused', error: job.error, budgetHit: true, cost: CL.cost(job.usage, job.model) }); say('💰 ' + job.error); return null; }
       throw Object.assign(new Error(job.error || 'Claude stopped without a pack'), { kind: job.status === 'paused' ? 'aborted' : 'api' });

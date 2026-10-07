@@ -35,7 +35,9 @@ function claudeApi() {
       if (/^\/v1\/skills\/skill_01noema(\/versions)?$/.test(p)) return J(res, 200, { id: 'skill_01noema', latest_version: '1' });
       if (p === '/v1/files' && req.method === 'POST') { const id = 'file_src_' + (Object.keys(A.files).length + 1); A.files[id] = { name: (buf.toString('latin1').match(/filename="([^"]+)"/) || [])[1] }; return J(res, 200, { id, type: 'file' }); }
       if (p === '/v1/files/file_out_1') return J(res, 200, { id: 'file_out_1', filename: 'heart-by-claude.json', size_bytes: 9000 });
-      if (p === '/v1/files/file_out_1/content') { res.writeHead(200, { 'content-type': 'application/octet-stream', ...cors }); return res.end(JSON.stringify(A.pack)); }
+      if (p === '/v1/files/file_out_1/content') { res.writeHead(200, { 'content-type': 'application/octet-stream', ...cors }); return res.end(JSON.stringify(A.jsonDecoy)); }
+      if (p === '/v1/files/file_out_2') return J(res, 200, { id: 'file_out_2', filename: 'heart-by-claude.noema.zip', size_bytes: A.zip.length });
+      if (p === '/v1/files/file_out_2/content') { res.writeHead(200, { 'content-type': 'application/octet-stream', ...cors }); return res.end(A.zip); }
       if (p === '/v1/messages') return messages(JSON.parse(buf.toString()), res, J);
       J(res, 404, { error: { type: 'not_found_error', message: 'no route ' + p } });
     });
@@ -53,7 +55,7 @@ function messages(body, res, J) {
     { type: 'tool_use', id: 'toolu_2', name: 'noema_web_image', input: { url: ABASE + '/img/no-cors.png' } },
     { type: 'tool_use', id: 'toolu_3', name: 'noema_web_image', input: { url: BASE + '/index.html' } }], 'tool_use');
   if (n === 3) return reply([{ type: 'text', text: 'Should the course follow the order of the PDF (A) or start from blood flow (B)?' }], 'end_turn');
-  if (n === 4) return reply([{ type: 'text', text: 'Building.' }, ...bash('python3 scripts/make_pack.py work/heart-by-claude /tmp/out && cp /tmp/out/heart-by-claude.json "$OUTPUT_DIR/"', ['file_out_1']), { type: 'text', text: 'Done: 1 chapter, 14 exercises.' }], 'end_turn');
+  if (n === 4) return reply([{ type: 'text', text: 'Building.' }, ...bash('python3 scripts/make_pack.py work/heart-by-claude /tmp/out && cp /tmp/out/heart-by-claude.noema.zip "$OUTPUT_DIR/"', ['file_out_1', 'file_out_2']), { type: 'text', text: 'Done: 1 chapter, 14 exercises.' }], 'end_turn');
   J(res, 500, { error: { type: 'api_error', message: 'unexpected call ' + n } });
 }
 
@@ -65,10 +67,17 @@ function messages(body, res, J) {
   // the pack Claude "builds": the demo fixture + two web pictures that the APP must download ("fetch": "app")
   const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
   fx.subject = { ...fx.subject, id: 'heart-by-claude', title: 'Heart by Claude', owner: null }; fx.version = 'hbc-1';
-  fx.sources = { sources: [{ id: 'book', title: 'Heart textbook', file: 'sources/heart.pdf', added: '2026-10-07', emoji: '📘' }, { id: 'pic', title: 'Valve photo', file: 'sources/valve.png', added: '2026-10-07', emoji: '🖼️' }], chapters: { ch01: 'book' }, patches: {} };
+  // Claude split heart.pdf into two parts and packaged them (make_pack.py): <id>.noema.zip = pack.json + sources/…
+  const crypto = require('crypto'); const JSZip = require(path.join(ROOT, 'engine/vendor/viewer/jszip.min.js'));
+  A.parts = { 'sources/heart_p1-10.pdf': Buffer.from('%PDF-1.4 part one ' + 'a'.repeat(900)), 'sources/heart_p11-20.pdf': Buffer.from('%PDF-1.4 part two ' + 'b'.repeat(1300)) };
+  const pkd = (id, title, file, firstPage) => ({ id, title, file, fileName: file.split('/').pop(), firstPage, size: A.parts[file].length, sha256: crypto.createHash('sha256').update(A.parts[file]).digest('hex'), mime: 'application/pdf', added: '2026-10-07', emoji: '📘' });
+  fx.sources = { sources: [pkd('book-1', 'Heart textbook, part 1', 'sources/heart_p1-10.pdf', 1), pkd('book-2', 'Heart textbook, part 2', 'sources/heart_p11-20.pdf', 11), { id: 'pic', title: 'Valve photo', added: '2026-10-07', emoji: '🖼️' }], chapters: { ch01: 'book-1' }, patches: {} };
   const first = Object.keys(fx.media)[0];
   fx.media[first] = { ...fx.media[first], data: undefined, fetch: 'app', origin: 'web', url: BASE + '/testimg/heart.png', page: 'https://commons.wikimedia.org/wiki/File:Heart.png', license: 'CC BY-SA 4.0', retrieved: '2026-10-07' };
   delete fx.media[first].data; A.pack = fx;
+  const z = new JSZip(); z.file('pack.json', JSON.stringify(fx)); for (const [k, v] of Object.entries(A.parts)) z.file(k, v);
+  A.zip = await z.generateAsync({ type: 'nodebuffer' });
+  A.jsonDecoy = { ...fx, version: 'hbc-json-only' };   // an older .json next to it: the package must win
 
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1250, height: 950 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000);
@@ -145,7 +154,12 @@ function messages(body, res, J) {
   ok(await p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart by Claude'), 'it opens as a new subject');
   ok(await p.evaluate(f => /^data:image\/png;base64,/.test(MEDIA[f]?.data || ''), first), '"fetch": "app" picture embedded (works offline)');
   ok(Object.keys(srv.state.files).some(k => k === `${dora}/packs/heart-by-claude.json`), 'and saved to the cloud account (all devices)');
-  ok(Object.keys(srv.state.files).includes(`${dora}/sources/heart-by-claude/book/file.pdf`) && Object.keys(srv.state.files).includes(`${dora}/sources/heart-by-claude/pic/file.png`), 'the files you gave Claude are attached to their sources (👁 preview on every device)');
+  const F = srv.state.files, sp = id => `${dora}/sources/heart-by-claude/${id}/file.pdf`;
+  ok(await p.evaluate(() => Noema.pack.version) === 'hbc-1', 'the package (.noema.zip) is imported, not the older .json next to it');
+  ok(F[sp('book-1')] && Buffer.compare(Buffer.from(F[sp('book-1')].data), A.parts['sources/heart_p1-10.pdf']) === 0 && F[sp('book-2')] && Buffer.compare(Buffer.from(F[sp('book-2')].data), A.parts['sources/heart_p11-20.pdf']) === 0, 'the two parts Claude split the PDF into are attached to their own sources, byte for byte (👁 on every device)');
+  ok(Object.keys(F).includes(`${dora}/sources/heart-by-claude/pic/file.png`), 'a source without a packaged file still gets the learner’s upload by name (valve.png)');
+  ok(!Object.keys(F).some(k => /heart-by-claude\/book\//.test(k)) && Object.keys(F).filter(k => k.includes('/sources/heart-by-claude/')).length === 3, 'the unsplit original is not attached next to its parts');
+  ok(/split|SKILL\.md §3b|work\/<id>\/sources/.test(m1.system[0].text) && /\.noema\.zip/.test(m1.system[0].text), 'Claude is told to package every uploaded file (or its parts) and to copy the .noema.zip');
   ok(!(await p.evaluate(() => NoemaClaude.jobs(Noema.account.id))).length, 'the finished job is cleaned up');
 
   console.log('— phone');

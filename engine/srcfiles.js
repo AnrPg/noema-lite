@@ -68,5 +68,68 @@ window.NoemaSrcFiles = (() => {
     if (left.size && left.size === fileSrcs.length) [...left].forEach((fi, k) => pairs.push([fileSrcs[k], files[fi]]));
     return pairs;
   }
-  return { put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX };
+
+  /* ---------- packages: <id>.noema.zip = pack.json + sources/<file> (docs/SOURCES.md §3) ---------- */
+  const loadZip = async buf => { if (!window.JSZip) { if (!window.NoemaViewer?.loadZip) throw new Error('The package reader is not available.'); return NoemaViewer.loadZip(buf); } return JSZip.loadAsync(buf); };
+  const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  async function sha256(blob) { if (!crypto?.subtle) return null; return hex(await crypto.subtle.digest('SHA-256', await blob.arrayBuffer())); }
+  /** Is this file a zip (a package)? */
+  async function isZip(file) { if (/\.zip$/i.test(file.name || '')) return true; const b = new Uint8Array(await file.slice(0, 4).arrayBuffer()); return b[0] === 0x50 && b[1] === 0x4b && b[2] === 0x03 && b[3] === 0x04; }
+  /** The sources of a pack whose original file travels with it (written by make_pack.py: file + size + sha256). */
+  const packaged = p => ((p?.sources?.sources) || []).filter(s => s && s.sha256 && /^sources\//.test(String(s.file || '')));
+  /** Read a package → { pack, file(path) → Blob|null }. */
+  async function readBundle(blob) {
+    let z; try { z = await loadZip(await blob.arrayBuffer()); } catch (e) { throw new Error('This file is not a noema-lite package (not a readable zip).'); }
+    const pj = z.file('pack.json') || Object.values(z.files).find(f => !f.dir && /(^|\/)pack\.json$/.test(f.name));
+    if (!pj) throw new Error('This zip is not a noema-lite package (no pack.json inside).');
+    let pack; try { pack = JSON.parse(await pj.async('string')); } catch (e) { throw new Error('pack.json inside the package is not valid: ' + e.message); }
+    const root = pj.name.replace(/pack\.json$/, '');
+    return { pack, file: async path => { const f = z.file(root + path); return f ? f.async('blob') : null; } };
+  }
+  /** Attach the packaged files of a pack (from a package, or from Claude's outputs) to its sources — each checked
+      against the size and SHA-256 recorded by make_pack.py, so exactly the files Claude used (and split) arrive. */
+  async function attachPackaged(acc, pack, fileOf, { onLog = () => { } } = {}) {
+    const res = { attached: [], missing: [], bad: [] };
+    for (const s of packaged(pack)) {
+      let blob = null; try { blob = await fileOf(s.file, s); } catch (e) { }
+      if (!blob) { res.missing.push(s.id); continue; }
+      if (s.size && blob.size !== s.size) { res.bad.push(s.id); onLog(`⚠️ ${s.file}: size differs from the pack — not attached`); continue; }
+      const sum = await sha256(blob).catch(() => null);
+      if (sum && sum !== s.sha256) { res.bad.push(s.id); onLog(`⚠️ ${s.file}: content differs from the pack — not attached`); continue; }
+      const name = s.fileName || String(s.file).split('/').pop();
+      const f = new File([blob], name, { type: s.mime || blob.type || '' });
+      try { await put(acc, pack.subject.id, s.id, f, { name }); res.attached.push(s.id); } catch (e) { res.bad.push(s.id); onLog('⚠️ ' + name + ': ' + e.message); }
+    }
+    return res;
+  }
+  /** A package of a subject: pack.json + every attached source file (also files attached by hand). */
+  async function makeBundle(acc, pack) {
+    if (!window.JSZip && window.NoemaViewer?.jszip) await NoemaViewer.jszip();
+    if (!window.JSZip) throw new Error('The package writer is not available.');
+    const seen = new WeakSet(); const p = JSON.parse(JSON.stringify(pack, (k, v) => { if (v && typeof v === 'object') { if (seen.has(v)) return undefined; seen.add(v); } return v; })); const z = new JSZip(); const used = new Set(); let n = 0;
+    for (const s of (p.sources?.sources || [])) {
+      const rec = await get(acc, p.subject.id, s.id).catch(() => null); if (!rec?.blob) continue;
+      let fn = String(rec.name || s.fileName || s.id).split(/[\\/]/).pop().replace(/[\u0000-\u001f<>:"|?*]/g, '_') || s.id; while (used.has(fn.toLowerCase())) fn = s.id + '-' + fn; used.add(fn.toLowerCase());
+      Object.assign(s, { file: 'sources/' + fn, fileName: rec.name || fn, size: rec.blob.size, mime: rec.type || rec.blob.type || '', sha256: await sha256(rec.blob) });
+      z.file('sources/' + fn, rec.blob, { createFolders: false, compression: /pdf|zip|image|video|audio|openxml|epub/.test(s.mime) ? 'STORE' : 'DEFLATE' }); n++;
+    }
+    p.counts = { ...(p.counts || {}), sourceFiles: n };
+    z.file('pack.json', JSON.stringify(p));
+    return { blob: await z.generateAsync({ type: 'blob', mimeType: 'application/zip' }), files: n };
+  }
+  /** Save a subject as a package file (download). */
+  async function downloadBundle(acc, pack) {
+    const { blob, files } = await makeBundle(acc, pack);
+    const u = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = u; a.download = pack.subject.id + '.noema.zip'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 10000);
+    return files;
+  }
+  /** The page of the FILE for a page the chapters cite: parts of a split PDF start at "firstPage" of the original. */
+  function filePage(s, page) {
+    const p = parseInt(page, 10); if (!p) return page || undefined;
+    const fp = parseInt(s?.firstPage, 10) || 1; let q = p - fp + 1;
+    if (q < 1) q = p >= 1 && (!s?.pageCount || p <= s.pageCount) && fp > 1 ? p : 1;   // already a page of the part
+    if (s?.pageCount && q > s.pageCount) q = s.pageCount;
+    return q;
+  }
+  return { put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX, isZip, packaged, readBundle, attachPackaged, makeBundle, downloadBundle, sha256, filePage };
 })();

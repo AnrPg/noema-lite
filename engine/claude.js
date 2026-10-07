@@ -178,15 +178,16 @@ window.NoemaClaude = (() => {
   const today = () => new Date().toISOString().slice(0, 10);
   const SYSTEM = (job = {}) => `You are building a noema-lite subject pack for the user, running inside the noema-lite app through the Claude API (the user is watching a progress screen; they are not technical).
 The noema-pack-builder skill is available in your code-execution container — follow its SKILL.md and both references completely (coverage, quality bar, ≥ 3 picture exercises per picture, all three kinds of pictures). Differences in THIS environment:
-${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.`}
+${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.
+   EVERY uploaded file goes into the package: copy it into work/<id>/sources/ (or, if you split a PDF, ONLY its parts — scripts/split_pdf.py) and give each file its own source in sources.json with "file": "sources/<name>" (SKILL.md §3b). make_pack.py refuses a source without its file and a file without its source.`}
 2. The sandbox has NO internet. For pictures from the web: use the web_search tool to find high-quality, information-rich photographs and diagrams (prefer Wikimedia Commons, OpenStax, NIH, NASA, open-source docs; any licence is fine for this personal app as long as the source is recorded), then call the noema_web_image tool with the DIRECT image file url (Wikimedia: the upload.wikimedia.org original file). You will see the picture and get its size. Register it in media/media.json WITHOUT a file:
    {"id": "…", "origin": "web", "fetch": "app", "url": "<direct image url>", "page": "<page it came from>", "retrieved": "${today()}", "w": W, "h": H, "alt": "…", "credit": "author / site", "license": "…"}
    The app downloads and embeds it when importing. Regions use the W×H pixel coordinates reported by the tool. You cannot open these pictures with Pillow, so place regions carefully from what you see (generous rectangles/circles).
 3. Do not ask the user anything unless something essential is missing — choose sensible defaults and say them in one line.
 4. Keep tool output short: print counts and summaries, never whole files or long JSON — every printed line costs the user money.
-5. Write chapters with Python scripts. Validate with make_pack.py until it has zero errors. Then copy the built pack to the output directory, in the same command:
-   python3 <skill>/scripts/make_pack.py work/<id> /tmp/out && cp /tmp/out/<id>.json "$OUTPUT_DIR/"
-   That file is imported into noema-lite automatically. Finish with a short summary for the user (chapters, exercises, picture exercises, pictures) in the language of the sources.
+5. Write chapters with Python scripts. Validate with make_pack.py until it has zero errors. Then copy the built PACKAGE to the output directory, in the same command:
+   python3 <skill>/scripts/make_pack.py work/<id> /tmp/out && cp /tmp/out/<id>.noema.zip "$OUTPUT_DIR/"
+   That package (the pack + every source file in work/<id>/sources/) is imported into noema-lite automatically, and its files open in the app at the cited pages. Finish with a short summary for the user (chapters, exercises, picture exercises, pictures) in the language of the sources.
 6. SKILL.md step 6 (connector / upload) does not apply here.`;
 
   /** Curriculum nodes (engine/curriculum.js) have no uploaded sources: Claude researches them. */
@@ -340,8 +341,24 @@ ${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded 
     return run(job, key, opts);
   }
   async function findPack(job, key, log) {
-    for (const id of [...new Set(job.outputIds)].reverse()) {
-      let meta; try { meta = await api(key, '/v1/files/' + id, { retries: 3 }); } catch (e) { continue; }
+    const metas = [];
+    for (const id of [...new Set(job.outputIds)].reverse()) { try { metas.push({ ...(await api(key, '/v1/files/' + id, { retries: 3 })), id }); } catch (e) { } }
+    // 1. the package (<id>.noema.zip: pack.json + the source files, exactly as Claude used / split them)
+    for (const meta of metas) {
+      if (!/\.zip$/i.test(meta.filename || '') || /noema-pack-builder/i.test(meta.filename)) continue;
+      try {
+        const r = await api(key, `/v1/files/${meta.id}/content`, { raw: true, retries: 3 }); const blob = await r.blob();
+        const b = await NoemaSrcFiles.readBundle(blob); const p = b.pack;
+        if (!(p?.subject?.id && Array.isArray(p.chapters) && p.chapters.length)) continue;
+        const files = {}; for (const s of NoemaSrcFiles.packaged(p)) { const f = await b.file(s.file); if (f) files[s.file] = f; }
+        job.bundleFiles = files;   // kept with the job (IndexedDB) until the pack is imported
+        log(`📦 Package received: ${meta.filename} (${(blob.size / 1048576).toFixed(1)} MB, ${Object.keys(files).length} source file(s))`);
+        await fillWebPictures(p, job.images, log); return p;
+      } catch (e) { log('⚠️ ' + meta.filename + ': ' + e.message); }
+    }
+    // 2. a plain pack (.json)
+    for (const meta of metas) {
+      const id = meta.id;
       if (!/\.json$/i.test(meta?.filename || '')) continue;
       try {
         const r = await api(key, `/v1/files/${id}/content`, { raw: true, retries: 3 }); const p = JSON.parse(await r.text());

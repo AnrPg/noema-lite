@@ -2053,7 +2053,7 @@ const REFS = {};
 /** [{ src, label, page, start, main }] for a chapter (memoised). */
 function chapterRefs(c) {
   if (REFS[c.id]) return REFS[c.id];
-  const out = []; const add = (src, label, main) => { if (!SRC_BY_ID[src]) return; const pm = String(label || '').match(PAGE_RE), tm = String(label || '').match(TIME_RE); const ex = out.find(r => r.src === src); if (ex) { if (label && !ex.label.includes(label)) ex.label = ex.label ? ex.label + ' · ' + label : label; ex.page = ex.page || (pm ? +pm[1] : null); ex.start = ex.start ?? (tm ? (+tm[1]) * (tm[3] ? 3600 : 60) + (+tm[2]) * (tm[3] ? 60 : 1) + (+(tm[3] || 0)) : null); ex.main = ex.main || main; return; } out.push({ src, label: label || '', page: pm ? +pm[1] : null, start: tm ? (+tm[1]) * (tm[3] ? 3600 : 60) + (+tm[2]) * (tm[3] ? 60 : 1) + (+(tm[3] || 0)) : null, main: !!main }); };
+  const out = []; const add = (src, label, main) => { if (!SRC_BY_ID[src]) return; const pm = String(label || '').match(PAGE_RE), tm = String(label || '').match(TIME_RE); const ex = out.find(r => r.src === src); if (ex) { if (label && !ex.label.includes(label)) ex.label = !ex.label || label.includes(ex.label) ? label : ex.label + ' · ' + label; ex.page = ex.page || (pm ? +pm[1] : null); ex.start = ex.start ?? (tm ? (+tm[1]) * (tm[3] ? 3600 : 60) + (+tm[2]) * (tm[3] ? 60 : 1) + (+(tm[3] || 0)) : null); ex.main = ex.main || main; return; } out.push({ src, label: label || '', page: pm ? +pm[1] : null, start: tm ? (+tm[1]) * (tm[3] ? 3600 : 60) + (+tm[2]) * (tm[3] ? 60 : 1) + (+(tm[3] || 0)) : null, main: !!main }); };
   if (Array.isArray(c.sources)) c.sources.forEach(r => add(r.id || r.src, r.pages || r.label || '', r.id === c.src));
   const segs = String(c.sourcePages || '').split(/\s+[·|;]\s+|\n|\s+\+\s+/).map(x => x.trim()).filter(Boolean);
   for (const seg of segs) {
@@ -2072,6 +2072,7 @@ function sourceChapters(srcId) { return FULL_COURSE.map(c => ({ c, ref: chapterR
 /* ---------- opening a source (👁 preview) ---------- */
 async function openSource(srcId, { page, start } = {}) {
   const s = SRC_BY_ID[srcId]; if (!s) return;
+  if (page && window.NoemaSrcFiles?.filePage) page = NoemaSrcFiles.filePage(s, page);   // a part of a split PDF starts at "firstPage" of the book
   const av = window.NoemaSrcFiles ? NoemaSrcFiles.available(ACCOUNT.id, SUBJ.id, s) : null;
   if (!av) { DECK.open = true; DECK.expanded[srcId] = true; renderSourcesDeck(); toast('📎 No file for this source yet — attach it in its card to preview it here.', 4500); return; }
   if (av.url && !av.meta) return NoemaViewer.open({ url: av.url, title: s.title, subtitle: s.subtitle, page, start });
@@ -2087,7 +2088,7 @@ function sourceChips(c) {
   return h('div', { class: 'srcrefs', 'aria-label': 'Sources of this chapter' }, h('span', { class: 'srcrefs-l' }, 'From'),
     ...refs.map(r => { const s = SRC_BY_ID[r.src]; const av = window.NoemaSrcFiles?.available(ACCOUNT.id, SUBJ.id, s);
       return h('button', { class: 'srcref' + (av ? ' can' : ''), title: `${s.title}${r.label ? '\n' + r.label : ''}\n${av ? '👁 Open the source' + (r.page ? ' at page ' + r.page : '') : 'Show the source card'}`, onclick: () => openSource(r.src, { page: r.page, start: r.start }) },
-        h('span', { class: 'e' }, s.emoji || '📘'), h('span', {}, short(r.label || s.short || s.title)), av ? h('span', { class: 'eye', 'aria-hidden': 'true' }, '👁') : null); }));
+        h('span', { class: 'e' }, s.emoji || '📘'), h('span', {}, short(r.label ? (s.short && !r.label.includes(s.short) ? s.short + ' ' + r.label : r.label) : s.short || s.title)), av ? h('span', { class: 'eye', 'aria-hidden': 'true' }, '👁') : null); }));
 }
 function newSources() { return SOURCES.filter(s => isNewSrc(s.id)).map(s => s.id); }
 function markSeen(ids) { S.seenSrc = S.seenSrc || {}; (ids || SOURCES.map(s => s.id)).forEach(id => S.seenSrc[id] = true); save(); }
@@ -2231,12 +2232,13 @@ function renderSourcesDeck() {
         h('button', { class: 'grow srcmain', onclick: () => { DECK.expanded[s.id] = !exp; renderSourcesDeck(); } },
           h('b', {}, s.title, isNewSrc(s.id) ? h('span', { class: 'newpill', style: { marginLeft: '6px' } }, '✨ new') : null),
           h('small', {}, `${s.subtitle || ''}${s.pages ? ' · ' + (/^\d/.test(s.pages) ? 'pp. ' : '') + s.pages : ''}`)),
+        fm || web ? h('button', { class: 'iconbtn srceye', title: '👁 Preview' + (fm ? ' ' + fm.name : ''), 'aria-label': 'Preview the source', onclick: () => openSource(s.id) }, '👁') : null,
         h('button', { class: 'iconbtn', onclick: () => { DECK.expanded[s.id] = !exp; renderSourcesDeck(); } }, h('span', { class: 'chev', style: { transform: exp ? 'rotate(90deg)' : '' } }, '▸'))),
       exp ? h('div', { class: 'srcbody' },
         h('div', { class: 'srcstats' }, ...[['🧱', x.newChapters.length, 'chapters'], ['📖', x.sections.size, 'sections'], ['➕', x.enriched.size, 'sections enriched'], ['🎯', x.exercises, 'exercises'], ['🔧', x.playbooks, 'drills'], ['🃏', x.cards, 'cards'], ['⚠️', x.pitfalls, 'traps']].filter(r => r[1]).map(([e, n, l]) => h('span', { class: 'pill' }, `${e} ${n} ${l}`))),
         h('div', { class: 'srcfile' }, fm ? [h('span', {}, `📎 ${fm.name} · ${fm.size > 1048576 ? (fm.size / 1048576).toFixed(1) + ' MB' : Math.round(fm.size / 1024) + ' KB'}`, fm.cloud ? '' : ' · on this device only'), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 Preview'), h('label', { class: 'btn small' }, '↻ Replace', pick), h('button', { class: 'btn small ghost', onclick: async () => { if (confirm('Remove the attached file of this source? (The course itself is not changed.)')) { await NoemaSrcFiles.remove(ACCOUNT.id, SUBJ.id, s.id); renderSourcesDeck(); route(); } } }, '🗑 Remove file')]
           : web ? [h('span', {}, '🌐 ', h('a', { href: web, target: '_blank', rel: 'noopener' }, web.replace(/^https?:\/\/(www\.)?/, '').slice(0, 60))), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 Preview'), h('label', { class: 'btn small' }, '📎 Attach a file instead', pick)]
-          : [h('span', { class: 'tiny' }, s.file ? `📄 ${String(s.file).split('/').pop()} — not attached yet` : 'No file attached'), h('label', { class: 'btn small primary' }, '📎 Attach the file', pick)]),
+          : [h('span', { class: 'tiny' }, s.sha256 ? `📦 ${s.fileName || String(s.file).split('/').pop()} came in the subject's package (.noema.zip) — import the package to get it, or attach it` : s.file ? `📄 ${String(s.file).split('/').pop()} — not attached yet` : 'No file attached'), h('label', { class: 'btn small primary' }, '📎 Attach the file', pick)]),
         h('div', { class: 'tiny', style: { margin: '6px 0' } }, `${s.pages ? (/^\d/.test(s.pages) ? 'Pages ' : '') + s.pages + ' · ' : ''}added ${s.added || '—'}`),
         chs.length ? h('div', { class: 'srcchs' }, ...chs.map(({ c, ref }) => h('button', { class: 'srcch' + (ref.main ? '' : ' also'), title: ref.label || '', onclick: () => { toggleSourcesDeck(false); go('#/ch/' + c.id); } }, `${c.emoji} Ch${c.num} · ${c.title}`, ref.label ? h('small', {}, ' — ' + (ref.label.length > 60 ? ref.label.slice(0, 58) + '…' : ref.label)) : null, ref.main ? null : h('small', {}, ' (also)')))) : h('div', { class: 'tiny' }, 'No chapter is mapped to this source.'),
         h('div', { class: 'row', style: { marginTop: '10px' } },
@@ -2690,7 +2692,7 @@ const ACC_VIEWS = {
       h('div', { class: 'row', style: { marginTop: '14px' } },
         h('button', { class: 'btn ai', onclick: () => Noema.claudeGuide() }, '✨ Create a subject with Claude'),
         h('label', { class: 'btn' }, '📥 Import subject pack…', h('input', { type: 'file', accept: '.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await Noema.importPackFile(ACCOUNT.id, e.target.files[0]); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 4000); } } })),
-        h('button', { class: 'btn', onclick: () => { const p = Noema.pack; const b = new Blob([JSON.stringify(p)], { type: 'application/json' }); const a = h('a', { href: URL.createObjectURL(b), download: `${SUBJ.id}.noema-pack.json` }); a.click(); } }, `⬇️ Export “${SUBJ.title}” pack`)));
+        h('button', { class: 'btn', onclick: () => Noema.exportPackage(ACCOUNT.id, Noema.pack) }, `⬇️ Export “${SUBJ.title}” (package with its source files)`)));
   },
 
   async backup(body) {

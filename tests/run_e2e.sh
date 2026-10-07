@@ -12,6 +12,7 @@ node "$ROOT/tests/e2e.js" "$T"
 node "$ROOT/tests/socratic.js" "$T"
 node "$ROOT/tests/visual.js" "$T"
 python3 "$ROOT/tests/validate_visual.py"
+(cd "$T" && python3 tests/package_sources.py)
 node "$ROOT/tests/connector.js" "$T"
 node "$ROOT/tests/visual_pack.js" "$T"
 node "$ROOT/tests/sharing.js" "$T"

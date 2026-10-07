@@ -31,7 +31,8 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
       pause_turn → resend (same container) · max_tokens → "Continue."
       tool_use noema_web_image → the APP downloads the picture (directly, or via /api/img),
                                  returns it as an image + its size
-      end_turn → a .json in $OUTPUT_DIR? → GET /v1/files/{id}/content → import
+      end_turn → <id>.noema.zip (or a .json) in $OUTPUT_DIR? → GET /v1/files/{id}/content
+                 → import the pack + attach its packaged source files (size + SHA-256 checked)
                  no pack → Claude's question is shown with an answer box
 ```
 
@@ -73,9 +74,12 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   The function holds **no secrets**.
 * Tools: `noema_whoami`, `noema_authoring_guide`, `noema_get_toolkit` (the scripts, when the skill is not
   installed), `noema_list_subjects`, `noema_get_pack_url`, `noema_start_upload` → `curl` →
-  `noema_finish_upload` (checks the pack, registers it so it appears on every device), `noema_save_pack`
-  (small packs inline). Prompt `create_subject` (claude.ai: **+ → noema-lite → Create a noema-lite subject**).
-* Without the connector: Claude hands over the `.json` → 📥 Import subject pack.
+  `noema_finish_upload` (checks the pack **and its source files**: every file make_pack.py packaged — each part of
+  a split PDF — must be in the account's storage with the recorded size; missing ones come back as ready `curl`
+  commands with signed URLs, and the subject is registered only when all are there, together with the synced file
+  index so every device shows 👁), `noema_save_pack` (small packs inline; same file check),
+  `noema_start_source_upload` (one extra file). Prompt `create_subject` (claude.ai: **+ → noema-lite → Create a noema-lite subject**).
+* Without the connector: Claude hands over the package `<id>.noema.zip` → 📥 Import subject pack (pack + source files).
 
 ## One-time setup (owner)
 

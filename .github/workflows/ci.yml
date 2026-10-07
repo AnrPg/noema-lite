@@ -32,9 +32,12 @@ jobs:
           S = os.path.join(d, 'noema-pack-builder', 'scripts')
           subprocess.run([sys.executable, os.path.join(S, 'unpack.py'), 'library/subjects/databricks/pack.json', os.path.join(d, 'w')], check=True)
           subprocess.run([sys.executable, os.path.join(S, 'make_pack.py'), os.path.join(d, 'w', 'databricks'), os.path.join(d, 'out')], check=True)
-          a = json.load(open('library/subjects/databricks/pack.json', encoding='utf-8')); b = json.load(open(os.path.join(d, 'out', 'databricks.json'), encoding='utf-8'))
+          a = json.load(open('library/subjects/databricks/pack.json', encoding='utf-8')); b = json.load(open(os.path.join(d, 'w', 'databricks', 'build', 'databricks.json'), encoding='utf-8'))
+          assert json.loads(zipfile.ZipFile(os.path.join(d, 'out', 'databricks.noema.zip')).read('pack.json'))['version'] == b['version'], 'package differs from the pack'
           assert len(a['chapters']) == len(b['chapters']) and sum(len(c['exercises']) for c in a['chapters']) == sum(len(c['exercises']) for c in b['chapters']), 'round trip changed the pack'
           print('round trip OK on', sys.platform)
+      - name: source files travel inside the package (split PDF → parts → .noema.zip → unpack)
+        run: python tests/package_sources.py
       - name: picture extraction without poppler (PyMuPDF path)
         shell: python
         run: |
@@ -56,6 +59,6 @@ jobs:
         with: { python-version: '3.12' }
       - uses: actions/setup-node@v4
         with: { node-version: '20' }
-      - run: python -m pip install pillow && npm install --no-save playwright && npx playwright install --with-deps chromium
+      - run: python -m pip install pillow pypdf reportlab python-docx openpyxl python-pptx && npm install --no-save playwright && npx playwright install --with-deps chromium
       - run: bash tests/run_e2e.sh
         env: { PW: '${{ github.workspace }}/node_modules/playwright' }

@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""Validate a subject folder and build its single-file pack for noema-lite.
-  python3 make_pack.py SUBJECT_DIR [OUT_DIR]        → OUT_DIR/<id>.json   (default OUT_DIR: /mnt/user-data/outputs or .)
+"""Validate a subject folder and build its package for noema-lite.
+  python3 make_pack.py SUBJECT_DIR [OUT_DIR]
+    → OUT_DIR/<id>.noema.zip   THE PACKAGE: pack.json + sources/<every original file>  (default OUT_DIR: /mnt/user-data/outputs or .)
+    → SUBJECT_DIR/build/<id>.json   the pack alone (for noema_start_upload / noema_save_pack)
+Every source with "file": "sources/<name>" must have that file in SUBJECT_DIR/sources/ (exactly the files the learner
+gave — or the parts of a split PDF, one source per part), and every file there must belong to a source.
 Exit code 1 (and a list of errors) when anything is wrong — fix and run again. Never deliver a pack that fails."""
 import os, sys, json, subprocess, tempfile, datetime
 for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux alike
@@ -8,15 +12,19 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     except Exception: pass
 from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from noema_lib import load_subject, load_media, content_hash
+from noema_lib import load_subject, load_media, content_hash, package_sources, write_bundle
 a = sys.argv[1:]
 if not a: print(__doc__); sys.exit(1)
 sdir = os.path.abspath(a[0])
 out_dir = a[1] if len(a) > 1 else ('/mnt/user-data/outputs' if os.path.isdir('/mnt/user-data/outputs') else '.')
 meta, sources, chapters, report = load_subject(sdir)
 media, mrep = load_media(sdir)
-errs = [r for r in report + mrep if r.startswith('ERROR')]
-for w in mrep:
+base_ids = ()
+try: base_ids = set(json.load(open(os.path.join(sdir, '.unpacked.json'), encoding='utf-8')).get('sourcesWithFiles') or [])
+except Exception: pass
+sources, files, ferrs, fwarns = package_sources(sdir, sources, chapters, base_ids)
+errs = [r for r in report + mrep if r.startswith('ERROR')] + ferrs
+for w in mrep + fwarns:
     if w.startswith('WARN'): print(w)
 auth = meta.get('authoring') or {}
 per_pic = int(auth.get('minExercisesPerPicture', 3)); min_vis = int(auth.get('minVisualPerChapter', 3))
@@ -39,7 +47,13 @@ meta = dict(meta); meta['owner'] = None
 pack = {'format': 'noema-pack', 'v': 1, 'subject': meta, 'sources': sources, 'chapters': chapters, 'media': media, 'counts': counts,
         'builtAt': datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat(), 'builtWith': 'noema-pack-builder skill'}
 pack['version'] = content_hash({'s': meta, 'src': sources, 'c': chapters, 'm': {k: v.get('sha') or v.get('url') for k, v in media.items()}})
+counts['sourceFiles'] = len(files)
+jout = os.path.join(sdir, 'build', meta['id'] + '.json'); os.makedirs(os.path.dirname(jout), exist_ok=True)
+with open(jout, 'w', encoding='utf-8') as f: json.dump(pack, f, ensure_ascii=False, separators=(',', ':'))
 os.makedirs(out_dir, exist_ok=True)
-out = os.path.join(out_dir, meta['id'] + '.json')
-with open(out, 'w', encoding='utf-8') as f: json.dump(pack, f, ensure_ascii=False, separators=(',', ':'))
-print(f'\n✓ {out}  ({os.path.getsize(out) // 1024} KB) · {counts["chapters"]} chapters · {counts["exercises"]} exercises ({counts["visual"]} visual) · {counts["media"]} pictures')
+out = os.path.join(out_dir, meta['id'] + '.noema.zip')
+write_bundle(out, pack, files)
+mb = lambda n: f'{n / 1048576:.1f} MB' if n >= 1048576 else f'{n // 1024} KB'
+print(f'\n✓ {out}  ({mb(os.path.getsize(out))}) · {counts["chapters"]} chapters · {counts["exercises"]} exercises ({counts["visual"]} visual) · {counts["media"]} pictures · {len(files)} source file(s)')
+for sid, p, rel in files: print(f'   📎 {sid}: {rel} ({mb(os.path.getsize(p))})')
+print(f'  pack alone (for the connector upload): {jout}')

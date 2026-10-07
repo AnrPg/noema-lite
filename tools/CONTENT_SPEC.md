@@ -36,13 +36,21 @@ The learner's personal profile ("About me") lives in the account, not in the sub
 
 ## sources.json
 ```json
-{ "sources": [ { "id": "part1", "title": "…", "short": "ECB 5", "subtitle": "…", "pages": "1–402", "file": "sources/part1.pdf", "url": "https://… (web sources)", "added": "YYYY-MM-DD", "emoji": "📘" } ],
+{ "sources": [ { "id": "part2", "title": "…", "short": "ECB 2", "subtitle": "…", "pages": "403–569", "file": "sources/ecb_p403-569.pdf", "firstPage": 403, "url": "https://… (web sources)", "added": "YYYY-MM-DD", "emoji": "📘" } ],
   "chapters": { "ch01": "part1" }, "patches": { "ch11_links.json": "part2" } }
 ```
 Every item inherits its chapter's source; patched-in items inherit the patch's source (or carry an explicit `"src"`).
 This powers the in-app Sources menu, "✨ what's new" and source filtering. One entry per file (each part of a split PDF is its
-own source), web page, video or conversation. The original files can be attached in the app (📎 in the source's card) or
-uploaded by Claude through the connector (`noema_start_source_upload`), so the learner opens them with 👁 at the cited page.
+own source), web page, video or conversation.
+
+**The original files travel with the pack.** A file-based source has `"file": "sources/<file name>"` and that file is in the
+subject's `sources/` folder — exactly the file the chapters were written from (for a split PDF: the part, never also the
+unsplit original). `make_pack.py` (skill) packages them into `<id>.noema.zip` (`pack.json` + `sources/…`) and records for each
+`fileName`, `size`, `sha256`, `mime` and, for PDFs, `pageCount`; it refuses a source without its file, a file without a source,
+and files over 50 MB (split them: `scripts/split_pdf.py`). `firstPage` (default 1) is the page number the chapters cite for the
+file's first page — a part that starts at page 403 of the book has `"firstPage": 403`, so "σ. 410" opens page 8 of the part.
+The app imports the package with its files (📥, "Create with Claude", or the connector's `noema_finish_upload`, which asks for
+every packaged file); files can also be attached later in the app (📎 in the source's card).
 
 ## Pedagogy rules (non-negotiable)
 1. **Coverage**: teach AND test every concept, number, caveat, trap, worked example and test question of the sources. Repeated material is taught once (best version). Every source exercise/test question becomes ≥1 exercise with its solution as the explanation.
