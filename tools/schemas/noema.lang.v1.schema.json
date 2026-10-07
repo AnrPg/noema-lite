@@ -1,0 +1,703 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "noema.lang.v1",
+ "title": "noema-lite language course (docs/LANGUAGES.md §4)",
+ "description": "Structure of the files of a language course. tools/validate_lang.py checks this AND the rules between files (forms of the sentences = paradigm cells, DAG, coverage of every concept in every language, pinyin, vowel marks, NFC…). Pick the definition by file: course.json → #/$defs/course, core/fields/*.json → field, core/nodes.json → nodes, core/functions/*.json → function, core/frames.json → frames, lang/<code>/language.json → language, lang/<code>/lexicon/<node>.json → lexicon, lang/<code>/grammar/<function>.json → grammar, lang/<code>/bank/*.json → bank.",
+ "$defs": {
+  "course": {
+   "type": "object",
+   "required": [
+    "format",
+    "id",
+    "title",
+    "explainLang",
+    "languages"
+   ],
+   "properties": {
+    "format": {
+     "const": "noema.langcourse/v1"
+    },
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+     "type": "string"
+    },
+    "explainLang": {
+     "type": "string",
+     "description": "language of all explanations, glosses and feedback (default en)"
+    },
+    "languages": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "defaults": {
+     "type": "object",
+     "properties": {
+      "depth": {
+       "type": "object",
+       "additionalProperties": {
+        "enum": [
+         1,
+         2,
+         3
+        ]
+       }
+      },
+      "batch": {
+       "type": "integer",
+       "minimum": 3
+      },
+      "dailyMinutes": {
+       "type": "integer"
+      }
+     }
+    },
+    "knownLanguages": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "languages the learner already speaks (bridges only)"
+    }
+   }
+  },
+  "field": {
+   "type": "object",
+   "required": [
+    "field",
+    "title",
+    "sources",
+    "concepts"
+   ],
+   "properties": {
+    "field": {
+     "type": "string"
+    },
+    "title": {
+     "type": "string"
+    },
+    "sources": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "subgroups": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "title"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "title": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "concepts": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "gloss",
+       "tier",
+       "rank"
+      ],
+      "properties": {
+       "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9_.-]+$"
+       },
+       "gloss": {
+        "type": "string"
+       },
+       "subgroup": {
+        "type": "string"
+       },
+       "tier": {
+        "enum": [
+         1,
+         2,
+         3
+        ]
+       },
+       "rank": {
+        "type": "integer",
+        "minimum": 1
+       },
+       "wikidata": {
+        "type": "string",
+        "pattern": "^Q[0-9]+$"
+       },
+       "media": {
+        "type": "string"
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   }
+  },
+  "nodes": {
+   "type": "object",
+   "required": [
+    "nodes"
+   ],
+   "properties": {
+    "nodes": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "kind",
+       "title",
+       "concepts",
+       "prereqs"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "kind": {
+        "enum": [
+         "core",
+         "field"
+        ]
+       },
+       "field": {
+        "type": "string"
+       },
+       "tier": {
+        "enum": [
+         1,
+         2,
+         3
+        ]
+       },
+       "title": {
+        "type": "string"
+       },
+       "concepts": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "minItems": 1
+       },
+       "prereqs": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "function": {
+   "type": "object",
+   "required": [
+    "id",
+    "title"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^fn\\."
+    },
+    "title": {
+     "type": "string"
+    },
+    "category": {
+     "type": "string"
+    },
+    "level": {
+     "type": "string"
+    },
+    "after": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "tags": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "frames": {
+   "type": "object",
+   "required": [
+    "frames"
+   ],
+   "properties": {
+    "frames": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "meaning"
+      ],
+      "properties": {
+       "id": {
+        "type": "string",
+        "pattern": "^fr\\."
+       },
+       "meaning": {
+        "type": "string"
+       },
+       "slots": {
+        "type": "object"
+       },
+       "absent": {
+        "type": "object",
+        "additionalProperties": {
+         "type": "string"
+        },
+        "description": "language → why the frame has no sentence"
+       }
+      }
+     }
+    }
+   }
+  },
+  "language": {
+   "type": "object",
+   "required": [
+    "code",
+    "name",
+    "script",
+    "dir",
+    "tokenJoin"
+   ],
+   "properties": {
+    "code": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "nativeName": {
+     "type": "string"
+    },
+    "script": {
+     "type": "string",
+     "description": "ISO 15924: Latn, Arab, Hebr, Hani, Deva, Cyrl…"
+    },
+    "dir": {
+     "enum": [
+      "ltr",
+      "rtl"
+     ]
+    },
+    "tokenJoin": {
+     "enum": [
+      "space",
+      "none"
+     ]
+    },
+    "capitalizeFirst": {
+     "type": "boolean"
+    },
+    "vowelMarks": {
+     "type": "boolean",
+     "description": "forms are stored fully vocalized (ar, he)"
+    },
+    "romanization": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "variants": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "extraTags": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "paradigmCells": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+      }
+     },
+     "description": "required cells per POS or POS.class"
+    },
+    "citationCells": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string",
+      "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+     },
+     "description": "the cell whose form is the lemma, per POS or POS.class"
+    }
+   }
+  },
+  "lexeme": {
+   "type": "object",
+   "required": [
+    "id",
+    "lemma",
+    "pos",
+    "senses",
+    "ref"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z]{2,3}:"
+    },
+    "lemma": {
+     "type": "string"
+    },
+    "pos": {
+     "enum": [
+      "NOUN",
+      "PROPN",
+      "VERB",
+      "AUX",
+      "ADJ",
+      "ADV",
+      "PRON",
+      "DET",
+      "ADP",
+      "CCONJ",
+      "SCONJ",
+      "NUM",
+      "PART",
+      "INTJ",
+      "CLF",
+      "X"
+     ]
+    },
+    "class": {
+     "type": "string"
+    },
+    "senses": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "role": {
+     "type": "string",
+     "description": "required when senses is empty"
+    },
+    "forms": {
+     "type": "object",
+     "propertyNames": {
+      "type": "string",
+      "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+     },
+     "additionalProperties": {
+      "type": "string"
+     }
+    },
+    "gender": {
+     "enum": [
+      "MASC",
+      "FEM",
+      "NEUT"
+     ]
+    },
+    "translit": {
+     "type": "string"
+    },
+    "root": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "prefix": {
+     "type": "boolean"
+    },
+    "trad": {
+     "type": "string"
+    },
+    "pinyin": {
+     "type": "string",
+     "description": "syllables separated by spaces, tone marks"
+    },
+    "measure": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "variants": {
+     "type": "array"
+    },
+    "ref": {
+     "type": "object",
+     "properties": {
+      "src": {
+       "type": "string"
+      },
+      "checked": {
+       "type": "string"
+      },
+      "override": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  },
+  "lexicon": {
+   "type": "object",
+   "required": [
+    "lexemes"
+   ],
+   "properties": {
+    "lexemes": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/lexeme"
+     }
+    },
+    "absent": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "concept",
+       "reason"
+      ],
+      "properties": {
+       "concept": {
+        "type": "string"
+       },
+       "reason": {
+        "type": "string"
+       },
+       "use": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   }
+  },
+  "grammar": {
+   "type": "object",
+   "required": [
+    "function",
+    "status",
+    "summary"
+   ],
+   "properties": {
+    "function": {
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "realized",
+      "periphrastic",
+      "absent"
+     ]
+    },
+    "summary": {
+     "type": "string"
+    },
+    "blocks": {
+     "type": "array"
+    },
+    "procedure": {
+     "type": "object",
+     "properties": {
+      "askYourself": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "steps": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "traps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "evidence": {
+     "type": "object",
+     "properties": {
+      "tags": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "lemmas": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "paradigmCells": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+     }
+    },
+    "needs": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "integer"
+     }
+    },
+    "generators": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "type"
+      ],
+      "properties": {
+       "type": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   }
+  },
+  "token": {
+   "type": "object",
+   "required": [
+    "t"
+   ],
+   "properties": {
+    "t": {
+     "type": "string"
+    },
+    "l": {
+     "type": "string"
+    },
+    "f": {
+     "type": "string",
+     "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
+    },
+    "p": {
+     "enum": [
+      true,
+      "open"
+     ]
+    },
+    "parts": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/token"
+     }
+    }
+   }
+  },
+  "bank": {
+   "type": "object",
+   "required": [
+    "sentences"
+   ],
+   "properties": {
+    "sentences": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "frame",
+       "text",
+       "tokens",
+       "functions",
+       "gloss"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "frame": {
+        "type": "string"
+       },
+       "text": {
+        "type": "string"
+       },
+       "tokens": {
+        "type": "array",
+        "items": {
+         "$ref": "#/$defs/token"
+        },
+        "minItems": 1
+       },
+       "functions": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "gloss": {
+        "type": "string"
+       },
+       "variantOf": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "variant": {
+        "type": "object"
+       },
+       "alts": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "level": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,10 @@
+{
+ "function": "fn.definite",
+ "status": "absent",
+ "summary": "Chinese has no articles. A bare noun is read from context; 一 + measure word introduces one new thing; 这/那 point to a known one.",
+ "traps": [
+  "Do not translate “the” word by word."
+ ],
+ "needs": {},
+ "generators": []
+}

@@ -1,0 +1,30 @@
+{
+ "code": "he",
+ "name": "Hebrew",
+ "nativeName": "עברית",
+ "script": "Hebr",
+ "dir": "rtl",
+ "tokenJoin": "space",
+ "capitalizeFirst": false,
+ "vowelMarks": true,
+ "romanization": "simple",
+ "citationCells": {
+  "NOUN": "N;SG;INDF",
+  "VERB": "V;PST;3;SG;MASC"
+ },
+ "paradigmCells": {
+  "NOUN": [
+   "N;SG;INDF",
+   "N;SG;DEF",
+   "N;PL;INDF",
+   "N;PL;DEF"
+  ],
+  "VERB": [
+   "V;PST;3;SG;MASC",
+   "V;PRS;SG;MASC",
+   "V;PRS;SG;FEM",
+   "V;PRS;PL;MASC",
+   "V;PRS;PL;FEM"
+  ]
+ }
+}

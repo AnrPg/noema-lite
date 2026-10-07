@@ -1,0 +1,92 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:jazar",
+   "lemma": "جَزَر",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.carrot"
+   ],
+   "gender": "MASC",
+   "root": "ج ز ر",
+   "unit": "جَزَرَة",
+   "translit": "jazar",
+   "forms": {
+    "N;NOM;COLL;INDF": "جَزَرٌ",
+    "N;NOM;COLL;DEF": "الْجَزَرُ",
+    "N;ACC;COLL;DEF": "الْجَزَرَ",
+    "N;NOM;SG;INDF": "جَزَرَةٌ",
+    "N;ACC;SG;INDF": "جَزَرَةً",
+    "N;NOM;SG;DEF": "الْجَزَرَةُ",
+    "N;ACC;SG;DEF": "الْجَزَرَةَ",
+    "N;NOM;PL;INDF": "جَزَرَاتٌ",
+    "N;NOM;PL;DEF": "الْجَزَرَاتُ",
+    "N;ACC;PL;DEF": "الْجَزَرَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "ar:basal",
+   "lemma": "بَصَل",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.onion"
+   ],
+   "gender": "MASC",
+   "root": "ب ص ل",
+   "unit": "بَصَلَة",
+   "translit": "baṣal",
+   "forms": {
+    "N;NOM;COLL;INDF": "بَصَلٌ",
+    "N;NOM;COLL;DEF": "الْبَصَلُ",
+    "N;ACC;COLL;DEF": "الْبَصَلَ",
+    "N;NOM;SG;INDF": "بَصَلَةٌ",
+    "N;ACC;SG;INDF": "بَصَلَةً",
+    "N;NOM;SG;DEF": "الْبَصَلَةُ",
+    "N;ACC;SG;DEF": "الْبَصَلَةَ",
+    "N;NOM;PL;INDF": "بَصَلَاتٌ",
+    "N;NOM;PL;DEF": "الْبَصَلَاتُ",
+    "N;ACC;PL;DEF": "الْبَصَلَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "ar:khiyar",
+   "lemma": "خِيَار",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.cucumber"
+   ],
+   "gender": "MASC",
+   "root": "خ ي ر",
+   "unit": "خِيَارَة",
+   "translit": "ḫiyār",
+   "forms": {
+    "N;NOM;COLL;INDF": "خِيَارٌ",
+    "N;NOM;COLL;DEF": "الْخِيَارُ",
+    "N;ACC;COLL;DEF": "الْخِيَارَ",
+    "N;NOM;SG;INDF": "خِيَارَةٌ",
+    "N;ACC;SG;INDF": "خِيَارَةً",
+    "N;NOM;SG;DEF": "الْخِيَارَةُ",
+    "N;ACC;SG;DEF": "الْخِيَارَةَ",
+    "N;NOM;PL;INDF": "خِيَارَاتٌ",
+    "N;NOM;PL;DEF": "الْخِيَارَاتُ",
+    "N;ACC;PL;DEF": "الْخِيَارَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  }
+ ],
+ "absent": []
+}

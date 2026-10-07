@@ -1,0 +1,10 @@
+{
+ "function": "fn.plural.noun",
+ "status": "absent",
+ "summary": "Chinese nouns do not change for number. Quantity is shown by numerals with measure words (三个洋葱), by context, or with 们 for groups of people.",
+ "traps": [
+  "Never add 们 to things: *洋葱们."
+ ],
+ "needs": {},
+ "generators": []
+}

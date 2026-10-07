@@ -6,9 +6,9 @@
 
 | Phase | What | Status |
 |---|---|---|
-| P0 | Spec, schemas, validator, mini fixture course | ⏳ next |
-| P1 | `langcore` runtime (pure JS): model, states, scheduler, gating, known sets, form index, script utilities | ⬜ |
-| P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ⬜ |
+| P0 | Spec, schemas, validator, mini fixture course | ✅ 2026-10-07 |
+| P1 | `langcore` runtime (pure JS): model, states, scheduler, gating, known sets, form index, script utilities | ✅ 2026-10-07 |
+| P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ⏳ next |
 | P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ⬜ |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
 | P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
@@ -197,7 +197,9 @@ Shape: a **core spine** of functional vocabulary (pronouns, be/have, ~80 core ve
 ```
 * Every concept of the node has a lexeme in the language **or** an `absent` entry (no word in common use, with what is said instead).
 * `forms` keys use UniMorph tags; the required cells per language and POS are defined in `language.json` (`paradigmCells`), and the validator checks completeness.
-* ar and he forms are stored **fully vocalized**; the unvocalized spelling is derived by stripping the marks.
+* ar and he forms are stored **fully vocalized**; the unvocalized spelling is derived by stripping the marks (he: unless the lexeme gives the full spelling, `plene`, for a form whose unvocalized spelling adds ו or י).
+* Words that attach to the next word (ar وَ, he וְ …) have `"prefix": true`; in a sentence they are a token with `parts` (§4.7).
+* Words without a shared concept (he אֶת, zh 个) have `"senses": []` and a `role` text; they belong to the node of their file.
 * `ref` records how the item was checked (§11); unchecked items fail the build unless `ref.override` gives a reason.
 * Language-specific fields: de `gender`, `plural`, `separable`, `aux` (haben/sein), `governs` (case frame); ar `root`, `pattern`, `verbForm` (I–X), `masdar`, `brokenPlural`, `diptote`; he `root`, `binyan`, `mishkal`, `construct`, `ktivMale`; zh `trad`, `pinyin`, `measure`, characters via `chars.json`.
 
@@ -253,7 +255,8 @@ Per language — `lang/<code>/grammar/<id>.json`:
 
 ## 5. Learner state
 
-### 5.1 Items (per course, language, concept) — two tracks
+### 5.1 Items (per course, language, word) — two tracks
+An item is one **word** (lexeme) of a language; a concept realized by two words is two items, and the concept's dot on a flag shows the best state of its words.
 Each item has an R track (recognition: see the word → meaning) and a P track (production: meaning → write the word), each with SM-2 state `{ due, ivl, ease, reps, lapses }`.
 
 ```
@@ -264,6 +267,8 @@ known_p ──(P ivl ≥ 21 d)──▶ mastered
 lapse in P: known_p/mastered ─▶ known_r      lapse in R: any ─▶ learning
 ```
 Using a word correctly inside a grammar or production exercise counts as a review of that track (so lanes reinforce each other).
+
+**States are never stored**: they are computed from the two tracks every time (`langcore.itemState`), so they cannot drift. SM-2: wrong → interval 1 day, streak 0; right → 1, 3, then interval × ease (2.5 at start, never below 1.3).
 
 ### 5.2 Nodes (per language)
 `locked → open → learning → known → mastered`.
@@ -434,12 +439,13 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 * `tools/lang_refcheck.py` (network, run by Claude while authoring): compares lexemes and paradigms with **Wiktionary data (kaikki.org)**, **CC-CEDICT** and **Unihan** (zh), **UniMorph** where available, **Make Me a Hanzi** (strokes/components); writes `ref` and a discrepancy report. **Unresolved discrepancies fail the build**; an intentional difference needs `ref.override` with a reason.
 * Images: Wikidata P18 / Commons via the existing picture library (`imglib`), recorded in `media.json`.
 * Sentences: Tatoeba (parallel sentences) may seed the bank, always re-annotated and validated.
-* Tests: unit tests for `langcore` (states, scheduler, gating, known sets, feasibility, selection, form index, segmentation, transliteration, vowel stripping, pinyin) + Playwright tests for every widget and view, with a hand-checked mini course (`tests/fixtures/lang-mini/`, 4 languages, ~16 concepts, 2 functions).
+* Tests: unit tests for `langcore` (states, scheduler, gating, known sets, feasibility, selection, form index, segmentation, transliteration, vowel stripping, pinyin) + Playwright tests for every widget and view, with a hand-checked mini course (`tests/fixtures/lang-mini/`, 4 languages, 11 concepts, 2 functions).
 
 ## 12. Code layout
 
 | File | Role |
 |---|---|
+| `tools/langlib.py`, `tests/fixtures/lang-vectors.json` | the shared helpers in Python (cells, vowel marks, pinyin, joining tokens) and the vectors both twins must pass |
 | `engine/langcore.js` | pure module (no DOM; also runs in Node and in the connector): loading the course packs, state machine, SM-2 two-track scheduler, gating, known sets, form index, tokenizer/segmenter, feasibility, bank selection, session planner, script utilities (strip marks, positional forms, pinyin numbers ↔ marks, transliteration) |
 | `engine/src/45_lang_views.js` | course home, lanes, flag card, field map, DAG view (reusing `curmap`), function pages, compare view |
 | `engine/src/46_lang.css` | language UI, RTL, fonts, keyboards |
@@ -448,19 +454,21 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 | `tools/validate_lang.py`, `tools/lang_refcheck.py`, `tools/schemas/noema.lang.v1.schema.json` | validation |
 | `tools/build.py` | builds `core.pack.js` / `<code>.pack.js`, registry entries `kind: "language"` |
 | `library/languages/<course-id>/` | the pilot course |
-| `tests/langcore.js`, `tests/lang_ui.js`, `tests/fixtures/lang-mini/` | tests |
+| `tests/langcore.js`, `tests/lang_validate.py`, `tests/lang_ui.js`, `tests/fixtures/lang-mini/` | tests |
 
 Existing subjects and curricula must keep working unchanged; the language part is additive.
 
 ## 13. Implementation plan (in this order)
 
 **P0 — Spec and validation**
-- JSON Schema; `validate_lang.py` with every check of §11; mini fixture course (ar, he, zh, de; ~16 concepts in 3 nodes; 2 functions; ~24 bank sentences — small enough to be checked by hand); negative fixtures (wrong form, missing cell, unknown lemma, cycle, missing language).
+- JSON Schema; `validate_lang.py` with every check of §11; mini fixture course (ar, he, zh, de; 11 concepts in 3 nodes; 2 functions; 27 bank sentences — small enough to be checked by hand); negative fixtures (wrong form, missing cell, unknown lemma, cycle, missing language).
 - ✔ Validator passes the fixture and rejects each broken variant with a clear message.
+- Done: `tools/validate_lang.py`, `tools/langlib.py`, `tools/schemas/noema.lang.v1.schema.json`, `tests/fixtures/lang-mini` (11 concepts, 3 nodes, 2 functions, 27 sentences), `tests/lang_validate.py` (vectors, schema, 24 kinds of mistakes). Hooking the validator into `tools/build.py` comes with the first course in `library/languages/` (P2), so `build.py` stays untouched until then.
 
 **P1 — `langcore` runtime**
 - Loading, two-track SM-2, item/node/function states, gating per language, known sets, form index with clitics, zh segmentation, feasibility, bank selection, session planner, script utilities.
 - ✔ `node tests/langcore.js`: deterministic tests for every rule of §5 and §7.
+- Done: `engine/langcore.js` (not loaded by the app yet) with 61 checks, incl. property tests over 200 random learners (sentences only use known words; no node opens before its prerequisites) and a round trip of every bank sentence through the tokenizer.
 
 **P2 — Pilot content v1** (written by Claude here, validated and ref-checked)
 - Explanations in English; core spine node 1–2 (~120 concepts) + `food.vegetables` tiers 1–3 (exhaustive, with images) in ar, he, zh, de; script modules (ar, he letters; zh characters of the included words); 3–4 functions (gender, plural, present tense / basic sentence, definiteness).
@@ -497,3 +505,4 @@ Working rules for every phase: read this file first; keep existing subjects unto
 ## 14. Changelog
 - 2026-10-07 — first version (decisions D1–D8, catalogue, model, exercise types, plan P0–P9).
 - 2026-10-07 — §0 development isolation (branch `languages` in its own worktree); the mini fixture made smaller so every form can be checked by hand.
+- 2026-10-07 — P0 and P1 done. Items are words, not concepts (§5.1); states are derived, never stored; `prefix`, `parts`, `senses: []` + `role`, `citationCells`, `plene` added to the model.

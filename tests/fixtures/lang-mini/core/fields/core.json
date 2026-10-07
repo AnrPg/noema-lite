@@ -1,0 +1,65 @@
+{
+ "field": "core",
+ "title": "Core words",
+ "subgroups": [
+  {
+   "id": "pron",
+   "title": "Personal pronouns"
+  },
+  {
+   "id": "verb",
+   "title": "Basic verbs"
+  },
+  {
+   "id": "func",
+   "title": "Function words"
+  }
+ ],
+ "sources": [
+  "Core spine of the course (docs/LANGUAGES.md §4.4)"
+ ],
+ "concepts": [
+  {
+   "id": "pron.he",
+   "gloss": "he",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "pron.she",
+   "gloss": "she",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "verb.eat",
+   "gloss": "to eat",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "det.def",
+   "gloss": "the (definite article)",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "det.indef",
+   "gloss": "a, an (indefinite article)",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "conj.and",
+   "gloss": "and",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 6
+  }
+ ]
+}

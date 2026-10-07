@@ -1,0 +1,125 @@
+{
+ "lexemes": [
+  {
+   "id": "de:er",
+   "lemma": "er",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "forms": {
+    "PRON;NOM": "er",
+    "PRON;ACC": "ihn",
+    "PRON;DAT": "ihm"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:sie",
+   "lemma": "sie",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "forms": {
+    "PRON;NOM": "sie",
+    "PRON;ACC": "sie",
+    "PRON;DAT": "ihr"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:essen",
+   "lemma": "essen",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "essen",
+    "V;PRS;1;SG": "esse",
+    "V;PRS;2;SG": "isst",
+    "V;PRS;3;SG": "isst",
+    "V;PRS;1;PL": "essen",
+    "V;PRS;2;PL": "esst",
+    "V;PRS;3;PL": "essen"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:der",
+   "lemma": "der",
+   "pos": "DET",
+   "class": "def",
+   "senses": [
+    "det.def"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "der",
+    "DET;NOM;SG;FEM": "die",
+    "DET;NOM;SG;NEUT": "das",
+    "DET;ACC;SG;MASC": "den",
+    "DET;ACC;SG;FEM": "die",
+    "DET;ACC;SG;NEUT": "das",
+    "DET;DAT;SG;MASC": "dem",
+    "DET;DAT;SG;FEM": "der",
+    "DET;DAT;SG;NEUT": "dem",
+    "DET;GEN;SG;MASC": "des",
+    "DET;GEN;SG;FEM": "der",
+    "DET;GEN;SG;NEUT": "des",
+    "DET;NOM;PL": "die",
+    "DET;ACC;PL": "die",
+    "DET;DAT;PL": "den",
+    "DET;GEN;PL": "der"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:ein",
+   "lemma": "ein",
+   "pos": "DET",
+   "class": "indef",
+   "senses": [
+    "det.indef"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "ein",
+    "DET;NOM;SG;FEM": "eine",
+    "DET;NOM;SG;NEUT": "ein",
+    "DET;ACC;SG;MASC": "einen",
+    "DET;ACC;SG;FEM": "eine",
+    "DET;ACC;SG;NEUT": "ein",
+    "DET;DAT;SG;MASC": "einem",
+    "DET;DAT;SG;FEM": "einer",
+    "DET;DAT;SG;NEUT": "einem",
+    "DET;GEN;SG;MASC": "eines",
+    "DET;GEN;SG;FEM": "einer",
+    "DET;GEN;SG;NEUT": "eines"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "de:und",
+   "lemma": "und",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ],
+ "absent": []
+}

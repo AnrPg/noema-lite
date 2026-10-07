@@ -1,0 +1,271 @@
+{
+ "sentences": [
+  {
+   "id": "de.s.001",
+   "frame": "fr.eat.def",
+   "text": "Sie isst die Karotte.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Karotte",
+     "l": "de:Karotte",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She eats the carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "de.s.002",
+   "frame": "fr.eat.indef",
+   "text": "Er isst eine Zwiebel.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Zwiebel",
+     "l": "de:Zwiebel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats an onion.",
+   "level": "A1"
+  },
+  {
+   "id": "de.s.003",
+   "frame": "fr.eat.generic",
+   "text": "Sie isst Gurken.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Gurken",
+     "l": "de:Gurke",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "de.s.004",
+   "frame": "fr.eat.and",
+   "text": "Er isst die Karotte und die Zwiebel.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Karotte",
+     "l": "de:Karotte",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Zwiebel",
+     "l": "de:Zwiebel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the carrot and the onion.",
+   "level": "A1"
+  },
+  {
+   "id": "de.s.005",
+   "frame": "fr.eat.def.pl",
+   "text": "Sie isst die Auberginen.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Auberginen",
+     "l": "de:Aubergine",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats the eggplants.",
+   "level": "A1"
+  },
+  {
+   "id": "de.s.006",
+   "frame": "fr.eat.def2",
+   "text": "Er isst den Kürbis.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Kürbis",
+     "l": "de:Kürbis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "de.s.007",
+   "frame": "fr.eat.def",
+   "text": "Sie isst die Karotten.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Karotten",
+     "l": "de:Karotte",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats the carrots.",
+   "level": "A1",
+   "variantOf": "de.s.001",
+   "variant": {
+    "Number": "PL"
+   }
+  }
+ ]
+}

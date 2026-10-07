@@ -1,0 +1,38 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:qiezi",
+   "lemma": "茄子",
+   "trad": "茄子",
+   "pinyin": "qié zi",
+   "pos": "NOUN",
+   "senses": [
+    "veg.eggplant"
+   ],
+   "ref": {
+    "src": "fixture"
+   },
+   "measure": [
+    "个",
+    "根"
+   ]
+  },
+  {
+   "id": "zh:nangua",
+   "lemma": "南瓜",
+   "trad": "南瓜",
+   "pinyin": "nán guā",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pumpkin"
+   ],
+   "ref": {
+    "src": "fixture"
+   },
+   "measure": [
+    "个"
+   ]
+  }
+ ],
+ "absent": []
+}

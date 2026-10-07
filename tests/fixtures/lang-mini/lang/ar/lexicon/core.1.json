@@ -1,0 +1,86 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:huwa",
+   "lemma": "هُوَ",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "translit": "huwa",
+   "forms": {
+    "PRON;NOM": "هُوَ"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "ar:hiya",
+   "lemma": "هِيَ",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "translit": "hiya",
+   "forms": {
+    "PRON;NOM": "هِيَ"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "ar:akala",
+   "lemma": "أَكَلَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "root": "ء ك ل",
+   "verbForm": "I",
+   "translit": "akala",
+   "forms": {
+    "V;PST;3;SG;MASC": "أَكَلَ",
+    "V;PRS;IND;1;SG": "آكُلُ",
+    "V;PRS;IND;2;SG;MASC": "تَأْكُلُ",
+    "V;PRS;IND;2;SG;FEM": "تَأْكُلِينَ",
+    "V;PRS;IND;3;SG;MASC": "يَأْكُلُ",
+    "V;PRS;IND;3;SG;FEM": "تَأْكُلُ",
+    "V;PRS;IND;1;PL": "نَأْكُلُ",
+    "V;PRS;IND;2;PL;MASC": "تَأْكُلُونَ",
+    "V;PRS;IND;2;PL;FEM": "تَأْكُلْنَ",
+    "V;PRS;IND;3;PL;MASC": "يَأْكُلُونَ",
+    "V;PRS;IND;3;PL;FEM": "يَأْكُلْنَ"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "ar:wa",
+   "lemma": "وَ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "prefix": true,
+   "translit": "wa",
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.def",
+   "reason": "No separate word: the definite article al- (ال) is part of the noun forms (DEF cells).",
+   "use": "الْ + noun"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "No indefinite article: an indefinite noun takes nunation (tanwīn, -un/-an/-in).",
+   "use": "noun with tanwīn"
+  }
+ ]
+}

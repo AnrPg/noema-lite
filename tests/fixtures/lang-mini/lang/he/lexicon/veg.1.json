@@ -1,0 +1,65 @@
+{
+ "lexemes": [
+  {
+   "id": "he:gezer",
+   "lemma": "גֶּזֶר",
+   "pos": "NOUN",
+   "senses": [
+    "veg.carrot"
+   ],
+   "gender": "MASC",
+   "translit": "gezer",
+   "forms": {
+    "N;SG;INDF": "גֶּזֶר",
+    "N;SG;DEF": "הַגֶּזֶר",
+    "N;PL;INDF": "גְּזָרִים",
+    "N;PL;DEF": "הַגְּזָרִים"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "he:batsal",
+   "lemma": "בָּצָל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.onion"
+   ],
+   "gender": "MASC",
+   "translit": "batsal",
+   "forms": {
+    "N;SG;INDF": "בָּצָל",
+    "N;SG;DEF": "הַבָּצָל",
+    "N;PL;INDF": "בְּצָלִים",
+    "N;PL;DEF": "הַבְּצָלִים"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "he:melafefon",
+   "lemma": "מְלָפְפוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cucumber"
+   ],
+   "gender": "MASC",
+   "translit": "melafefon",
+   "forms": {
+    "N;SG;INDF": "מְלָפְפוֹן",
+    "N;SG;DEF": "הַמְלָפְפוֹן",
+    "N;PL;INDF": "מְלָפְפוֹנִים",
+    "N;PL;DEF": "הַמְלָפְפוֹנִים"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  }
+ ],
+ "absent": []
+}

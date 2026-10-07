@@ -1,0 +1,92 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:ta.he",
+   "lemma": "他",
+   "trad": "他",
+   "pinyin": "tā",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:ta.she",
+   "lemma": "她",
+   "trad": "她",
+   "pinyin": "tā",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:chi",
+   "lemma": "吃",
+   "trad": "吃",
+   "pinyin": "chī",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:he",
+   "lemma": "和",
+   "trad": "和",
+   "pinyin": "hé",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:yi",
+   "lemma": "一",
+   "trad": "一",
+   "pinyin": "yī",
+   "pos": "NUM",
+   "senses": [],
+   "role": "the number one; with a measure word it plays the role of “a”",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "zh:ge",
+   "lemma": "个",
+   "trad": "個",
+   "pinyin": "gè",
+   "pos": "CLF",
+   "senses": [],
+   "role": "the general measure word",
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.def",
+   "reason": "Chinese has no articles; definiteness comes from context, word order or 这/那 (this/that).",
+   "use": "bare noun"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "No indefinite article; when needed, 一 + a measure word (一个 …).",
+   "use": "一 + measure word + noun"
+  }
+ ]
+}

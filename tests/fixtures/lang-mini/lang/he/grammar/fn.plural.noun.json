@@ -1,0 +1,36 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "summary": "Hebrew masculine nouns usually take -im (ים), feminine nouns -ot (וֹת); the vowels of the stem often change.",
+ "procedure": {
+  "askYourself": [
+   "Masculine or feminine?",
+   "Do the stem vowels shorten (גֶּזֶר → גְּזָרִים)?"
+  ]
+ },
+ "traps": [
+  "The ending does not always follow the gender (there are exceptions).",
+  "Feminine -at/-et nouns drop it: דְּלַעַת → דְּלָעוֹת."
+ ],
+ "evidence": {
+  "tags": [
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;PL;INDF"
+ ],
+ "needs": {
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;PL;INDF"
+   ],
+   "count": 8
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "summary": "Hebrew marks a definite noun with the prefix ha- (הַ); there is no indefinite article. A definite direct object takes אֶת.",
+ "procedure": {
+  "askYourself": [
+   "Is the noun specific (→ הַ)?",
+   "Is it the direct object and definite (→ אֶת before it)?"
+  ]
+ },
+ "traps": [
+  "Before ח with kamatz the article becomes הֶ: הֶחָצִיל.",
+  "No אֶת before an indefinite object: הוּא אוֹכֵל בָּצָל."
+ ],
+ "evidence": {
+  "tags": [
+   "DEF"
+  ]
+ },
+ "paradigmCells": [
+  "N;SG;DEF",
+  "N;SG;INDF"
+ ],
+ "needs": {
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;SG;DEF"
+   ],
+   "count": 8
+  }
+ ]
+}

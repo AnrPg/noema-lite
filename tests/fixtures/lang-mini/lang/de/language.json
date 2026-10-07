@@ -1,0 +1,76 @@
+{
+ "code": "de",
+ "name": "German",
+ "nativeName": "Deutsch",
+ "script": "Latn",
+ "dir": "ltr",
+ "tokenJoin": "space",
+ "capitalizeFirst": true,
+ "vowelMarks": false,
+ "romanization": null,
+ "citationCells": {
+  "NOUN": "N;NOM;SG",
+  "VERB": "V;NFIN",
+  "PRON": "PRON;NOM",
+  "DET.def": "DET;NOM;SG;MASC",
+  "DET.indef": "DET;NOM;SG;MASC"
+ },
+ "paradigmCells": {
+  "NOUN": [
+   "N;NOM;SG",
+   "N;ACC;SG",
+   "N;DAT;SG",
+   "N;GEN;SG",
+   "N;NOM;PL",
+   "N;ACC;PL",
+   "N;DAT;PL",
+   "N;GEN;PL"
+  ],
+  "VERB": [
+   "V;NFIN",
+   "V;PRS;1;SG",
+   "V;PRS;2;SG",
+   "V;PRS;3;SG",
+   "V;PRS;1;PL",
+   "V;PRS;2;PL",
+   "V;PRS;3;PL"
+  ],
+  "PRON": [
+   "PRON;NOM",
+   "PRON;ACC",
+   "PRON;DAT"
+  ],
+  "DET.def": [
+   "DET;NOM;SG;MASC",
+   "DET;NOM;SG;FEM",
+   "DET;NOM;SG;NEUT",
+   "DET;ACC;SG;MASC",
+   "DET;ACC;SG;FEM",
+   "DET;ACC;SG;NEUT",
+   "DET;DAT;SG;MASC",
+   "DET;DAT;SG;FEM",
+   "DET;DAT;SG;NEUT",
+   "DET;GEN;SG;MASC",
+   "DET;GEN;SG;FEM",
+   "DET;GEN;SG;NEUT",
+   "DET;NOM;PL",
+   "DET;ACC;PL",
+   "DET;DAT;PL",
+   "DET;GEN;PL"
+  ],
+  "DET.indef": [
+   "DET;NOM;SG;MASC",
+   "DET;NOM;SG;FEM",
+   "DET;NOM;SG;NEUT",
+   "DET;ACC;SG;MASC",
+   "DET;ACC;SG;FEM",
+   "DET;ACC;SG;NEUT",
+   "DET;DAT;SG;MASC",
+   "DET;DAT;SG;FEM",
+   "DET;DAT;SG;NEUT",
+   "DET;GEN;SG;MASC",
+   "DET;GEN;SG;FEM",
+   "DET;GEN;SG;NEUT"
+  ]
+ }
+}

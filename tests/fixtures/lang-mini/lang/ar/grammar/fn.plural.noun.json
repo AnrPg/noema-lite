@@ -1,0 +1,36 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "summary": "Arabic has singular, dual and plural; sound plurals (-ūn/-īn, -āt) and broken plurals. Most vegetables are collective nouns: جَزَر (carrots, as a kind); one piece is the unit noun جَزَرَة, counted pieces take -āt: جَزَرَات.",
+ "procedure": {
+  "askYourself": [
+   "Do I mean the vegetable in general (→ collective) or counted pieces (→ unit noun, plural -āt)?"
+  ]
+ },
+ "traps": [
+  "The sound feminine plural has -i (not -a) in the accusative: الْجَزَرَاتِ.",
+  "Non-human plurals take feminine singular agreement."
+ ],
+ "evidence": {
+  "tags": [
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;PL;INDF",
+  "N;NOM;PL;DEF"
+ ],
+ "needs": {
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;PL;INDF"
+   ],
+   "count": 8
+  }
+ ]
+}

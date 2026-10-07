@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""tools/validate_lang.py: the mini course passes, and every kind of mistake is caught with a clear message.
+Also checks tools/langlib.py against the shared vectors (tests/fixtures/lang-vectors.json).
+Usage: python3 tests/lang_validate.py"""
+import json, os, shutil, sys, tempfile, unicodedata
+HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
+sys.path.insert(0, os.path.join(ROOT, 'tools'))
+import langlib
+from validate_lang import validate
+MINI = os.path.join(HERE, 'fixtures', 'lang-mini')
+fails = 0
+class Raw(str): pass   # a mutation that returns Raw replaces the file text itself
+def ok(c, m):
+    global fails
+    print(('  ✅ ' if c else '  ❌ ') + m)
+    if not c: fails += 1
+
+# ---------- shared vectors ----------
+vec = json.load(open(os.path.join(HERE, 'fixtures', 'lang-vectors.json'), encoding='utf-8'))
+bad = [c for c in vec['canon'] if langlib.canon(c[0]) != c[1]]
+ok(not bad, f'canon: {len(vec["canon"])} vectors' + (f' — wrong: {bad}' if bad else ''))
+bad = [c for c in vec['strip'] if langlib.strip_marks(c[0], c[1]) != unicodedata.normalize('NFC', c[2])]
+ok(not bad, f'strip_marks: {len(vec["strip"])} vectors' + (f' — wrong: {bad}' if bad else ''))
+bad = [c for c in vec['pinyinValid'] if (not langlib.pinyin_syllable_errors(c[0])) != c[1]]
+ok(not bad, f'pinyin syllables: {len(vec["pinyinValid"])} vectors' + (f' — wrong: {[(c[0], langlib.pinyin_syllable_errors(c[0])) for c in bad]}' if bad else ''))
+bad = [c for c in vec['pinyinNumbers'] if langlib.pinyin_numbers_to_marks(c[0]) != c[1] or langlib.pinyin_marks_to_numbers(c[1]) != c[2]]
+ok(not bad, f'pinyin numbers ↔ marks: {len(vec["pinyinNumbers"])} vectors' + (f' — wrong: {bad}' if bad else ''))
+bad = [c for c in vec['join'] if langlib.join_tokens(c[0], c[1]) != c[2]]
+ok(not bad, f'join tokens: {len(vec["join"])} vectors' + (f' — wrong: {bad}' if bad else ''))
+
+# ---------- the mini course ----------
+v = validate(MINI)
+ok(not v.errors, 'the mini course is valid' + (f': {v.errors[:5]}' if v.errors else ''))
+
+# ---------- the JSON Schema agrees with the files (when the jsonschema package is installed) ----------
+try:
+    import jsonschema, glob
+    if not hasattr(jsonschema, 'Draft202012Validator'): raise ImportError('jsonschema too old for draft 2020-12')
+    sch = json.load(open(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json'), encoding='utf-8'))
+    kinds = [('course.json', 'course'), ('core/fields/*.json', 'field'), ('core/nodes.json', 'nodes'), ('core/functions/*.json', 'function'), ('core/frames.json', 'frames'),
+             ('lang/*/language.json', 'language'), ('lang/*/lexicon/*.json', 'lexicon'), ('lang/*/grammar/*.json', 'grammar'), ('lang/*/bank/*.json', 'bank')]
+    probs, n = [], 0
+    for pat, k in kinds:
+        for f in glob.glob(os.path.join(MINI, pat)):
+            n += 1
+            sub = {**sch, '$ref': f'#/$defs/{k}'}
+            for e in jsonschema.Draft202012Validator(sub).iter_errors(json.load(open(f, encoding='utf-8'))): probs.append(f'{os.path.relpath(f, MINI)}: {e.message}')
+    ok(not probs and n > 30, f'the JSON Schema accepts all {n} files of the mini course' + (f': {probs[:3]}' if probs else ''))
+except ImportError as e:
+    print(f'  ⏭  schema check skipped ({e})')
+
+def mutated(change):
+    d = tempfile.mkdtemp(prefix='lang-mini-'); dst = os.path.join(d, 'c'); shutil.copytree(MINI, dst)
+    def J(rel, fn=None):
+        p = os.path.join(dst, rel)
+        if fn is None: return p
+        with open(p, encoding='utf-8') as f: obj = json.load(f)
+        r = fn(obj)
+        with open(p, 'w', encoding='utf-8') as f: f.write(r if isinstance(r, Raw) else json.dumps(obj, ensure_ascii=False, indent=1))
+    change(J, dst)
+    v = validate(dst); shutil.rmtree(d); return v.errors
+
+def expect(name, change, needle):
+    errs = mutated(change)
+    hit = [e for e in errs if needle in e]
+    ok(bool(hit), f'{name} → “{hit[0] if hit else needle}”' + ('' if hit else f' (got {errs[:3]})'))
+
+def sent(lang, i): return lambda o: o['sentences'][i]
+def set_tok(lang, si, ti, **kw):
+    def f(o):
+        o['sentences'][si]['tokens'][ti].update(kw)
+    return f
+expect('wrong form in a sentence', lambda J, d: J('lang/de/bank/basic.json', set_tok('de', 0, 3, t='Karotten')), 'is not the N;ACC;SG form of de:Karotte')
+expect('cell missing from a paradigm', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0]['forms'].pop('N;GEN;PL')), 'missing cell N;GEN;PL')
+expect('unknown word in a sentence', lambda J, d: J('lang/de/bank/basic.json', set_tok('de', 0, 3, l='de:Tomate')), 'unknown lexeme “de:Tomate”')
+expect('cycle in the DAG', lambda J, d: J('core/nodes.json', lambda o: o['nodes'][0].update(prereqs=['veg.2'])), 'cycle:')
+expect('lexicon of a node missing in a language', lambda J, d: os.remove(J('lang/he/lexicon/veg.2.json')), 'lang/he/lexicon/veg.2.json: missing file')
+expect('text ≠ tokens', lambda J, d: J('lang/zh/bank/basic.json', lambda o: o['sentences'][0].update(text='她吃胡萝卜')), '≠ the tokens joined')
+expect('pinyin syllables ≠ characters', lambda J, d: J('lang/zh/lexicon/veg.1.json', lambda o: o['lexemes'][0].update(pinyin='hú luó')), '2 pinyin syllables for 3 characters')
+expect('tone mark on the wrong vowel', lambda J, d: J('lang/zh/lexicon/veg.1.json', lambda o: o['lexemes'][2].update(pinyin='huáng gūa')), 'the tone mark belongs on “a”')
+expect('Hebrew form without vowel marks', lambda J, d: J('lang/he/lexicon/veg.1.json', lambda o: o['lexemes'][0]['forms'].update({'N;PL;INDF': 'גזרים'})), 'has no vowel marks')
+expect('function listed without evidence', lambda J, d: J('lang/de/bank/basic.json', lambda o: o['sentences'][2]['functions'].append('fn.definite')), 'listed as fn.definite, but no word shows it')
+expect('function absent in the language', lambda J, d: J('lang/zh/bank/basic.json', lambda o: o['sentences'][0]['functions'].append('fn.plural.noun')), 'is absent in zh')
+expect('concept neither realized nor absent', lambda J, d: J('lang/ar/lexicon/core.1.json', lambda o: o['absent'].pop(0)), 'concept “det.def” has no word and is not marked absent')
+expect('text not in NFC', lambda J, d: J('lang/he/lexicon/veg.1.json', lambda o: Raw(json.dumps(o, ensure_ascii=False).replace(unicodedata.normalize('NFC', '\u05d1\u05bc\u05b8'), '\u05d1\u05bc\u05b8'))), 'not in Unicode NFC')
+expect('frame without a sentence in a language', lambda J, d: J('lang/he/bank/basic.json', lambda o: o.update(sentences=[s for s in o['sentences'] if s['frame'] != 'fr.eat.def2'])), 'frame “fr.eat.def2” has no sentence in he')
+expect('concept in two nodes', lambda J, d: J('core/nodes.json', lambda o: o['nodes'][2]['concepts'].append('veg.carrot')), 'is already in node')
+expect('lemma ≠ citation form', lambda J, d: J('lang/de/lexicon/core.1.json', lambda o: o['lexemes'][2].update(lemma='isst')), 'must be the V;NFIN form')
+expect('German noun without gender', lambda J, d: J('lang/de/lexicon/veg.2.json', lambda o: o['lexemes'][1].pop('gender')), 'gender is required')
+expect('Chinese noun without measure word', lambda J, d: J('lang/zh/lexicon/veg.2.json', lambda o: o['lexemes'][1].pop('measure')), 'needs its measure word')
+expect('parts that do not spell the token', lambda J, d: J('lang/he/bank/basic.json', lambda o: o['sentences'][3]['tokens'][4]['parts'][0].update(t='וּ')), 'the parts do not spell the token')
+expect('unknown tag in a cell', lambda J, d: J('lang/de/language.json', lambda o: o['paradigmCells']['VERB'].append('V;PRSNT;1;SG')), 'unknown tag “PRSNT”')
+expect('field without sources', lambda J, d: J('core/fields/food.vegetables.json', lambda o: o.pop('sources')), '“sources” is required')
+expect('variant of a missing sentence', lambda J, d: J('lang/ar/bank/basic.json', lambda o: o['sentences'][6].update(variantOf='ar.s.099')), 'variantOf “ar.s.099” does not exist')
+expect('capital letter only allowed at the start', lambda J, d: J('lang/de/bank/basic.json', set_tok('de', 3, 4, t='Und')), '“Und” is not the lemma form of de:und')
+
+expect('plene spelling with vowel marks', lambda J, d: J('lang/he/lexicon/veg.1.json', lambda o: o['lexemes'][0].update(plene={'N;SG;INDF': 'גֶּזֶר'})), 'must be written without vowel marks')
+print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

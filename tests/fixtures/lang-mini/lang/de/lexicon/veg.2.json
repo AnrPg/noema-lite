@@ -1,0 +1,51 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Aubergine",
+   "lemma": "Aubergine",
+   "pos": "NOUN",
+   "senses": [
+    "veg.eggplant"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Aubergine",
+    "N;ACC;SG": "Aubergine",
+    "N;DAT;SG": "Aubergine",
+    "N;GEN;SG": "Aubergine",
+    "N;NOM;PL": "Auberginen",
+    "N;ACC;PL": "Auberginen",
+    "N;DAT;PL": "Auberginen",
+    "N;GEN;PL": "Auberginen"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "de:Kürbis",
+   "lemma": "Kürbis",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pumpkin"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Kürbis",
+    "N;ACC;SG": "Kürbis",
+    "N;DAT;SG": "Kürbis",
+    "N;GEN;SG": "Kürbisses",
+    "N;NOM;PL": "Kürbisse",
+    "N;ACC;PL": "Kürbisse",
+    "N;DAT;PL": "Kürbissen",
+    "N;GEN;PL": "Kürbisse"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  }
+ ],
+ "absent": []
+}

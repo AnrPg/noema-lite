@@ -1,0 +1,37 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "summary": "German nouns form the plural with -e, -er, -(e)n, -s or an umlaut; learn the plural together with the noun. Most feminine nouns take -(e)n.",
+ "procedure": {
+  "askYourself": [
+   "What plural did I learn with this noun?",
+   "Dative plural: does it need an extra -n?"
+  ]
+ },
+ "traps": [
+  "Dative plural adds -n when possible: den Kürbissen.",
+  "-is → -isse: der Kürbis, die Kürbisse."
+ ],
+ "evidence": {
+  "tags": [
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;PL",
+  "N;DAT;PL"
+ ],
+ "needs": {
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;PL"
+   ],
+   "count": 8
+  }
+ ]
+}

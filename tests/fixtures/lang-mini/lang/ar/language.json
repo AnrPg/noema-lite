@@ -1,0 +1,45 @@
+{
+ "code": "ar",
+ "name": "Arabic",
+ "nativeName": "العربية",
+ "script": "Arab",
+ "dir": "rtl",
+ "tokenJoin": "space",
+ "capitalizeFirst": false,
+ "vowelMarks": true,
+ "romanization": "din31635",
+ "citationCells": {
+  "VERB": "V;PST;3;SG;MASC",
+  "PRON": "PRON;NOM"
+ },
+ "paradigmCells": {
+  "NOUN.collective": [
+   "N;NOM;COLL;INDF",
+   "N;NOM;COLL;DEF",
+   "N;ACC;COLL;DEF",
+   "N;NOM;SG;INDF",
+   "N;ACC;SG;INDF",
+   "N;NOM;SG;DEF",
+   "N;ACC;SG;DEF",
+   "N;NOM;PL;INDF",
+   "N;NOM;PL;DEF",
+   "N;ACC;PL;DEF"
+  ],
+  "VERB": [
+   "V;PST;3;SG;MASC",
+   "V;PRS;IND;1;SG",
+   "V;PRS;IND;2;SG;MASC",
+   "V;PRS;IND;2;SG;FEM",
+   "V;PRS;IND;3;SG;MASC",
+   "V;PRS;IND;3;SG;FEM",
+   "V;PRS;IND;1;PL",
+   "V;PRS;IND;2;PL;MASC",
+   "V;PRS;IND;2;PL;FEM",
+   "V;PRS;IND;3;PL;MASC",
+   "V;PRS;IND;3;PL;FEM"
+  ],
+  "PRON": [
+   "PRON;NOM"
+  ]
+ }
+}

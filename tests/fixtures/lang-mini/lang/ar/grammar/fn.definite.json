@@ -1,0 +1,38 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "summary": "Arabic marks a definite noun with the prefix al- (الْ) and an indefinite noun with nunation (tanwīn).",
+ "procedure": {
+  "askYourself": [
+   "Is the noun specific or generic (→ al-) or one of many (→ tanwīn)?",
+   "Did I drop the tanwīn after adding al-?"
+  ]
+ },
+ "traps": [
+  "Never al- and tanwīn together.",
+  "Generic statements use al-: هِيَ تَأْكُلُ الْخِيَارَ = she eats cucumbers (in general)."
+ ],
+ "evidence": {
+  "tags": [
+   "DEF"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;SG;DEF",
+  "N;NOM;SG;INDF"
+ ],
+ "needs": {
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;SG;DEF",
+    "N;NOM;SG;INDF"
+   ],
+   "count": 8
+  }
+ ]
+}

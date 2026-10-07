@@ -1,0 +1,36 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "summary": "German marks definiteness with articles: der/die/das (the) and ein/eine (a). The article also shows gender, number and case.",
+ "procedure": {
+  "askYourself": [
+   "Is the thing known/specific (→ der/die/das) or new/any (→ ein/eine)?",
+   "What is the gender of the noun?",
+   "Which case does its role in the sentence need?"
+  ]
+ },
+ "traps": [
+  "The article changes with the case: der Kürbis (subject) → den Kürbis (object).",
+  "There is no plural of ein: “Gurken” alone means “cucumbers”."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:der",
+   "de:ein"
+  ]
+ },
+ "paradigmCells": [
+  "DET;NOM;SG;MASC",
+  "DET;ACC;SG;MASC"
+ ],
+ "needs": {
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "count": 8
+  }
+ ]
+}

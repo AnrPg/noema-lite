@@ -1,0 +1,45 @@
+{
+ "lexemes": [
+  {
+   "id": "he:chatsil",
+   "lemma": "חָצִיל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.eggplant"
+   ],
+   "gender": "MASC",
+   "translit": "chatsil",
+   "forms": {
+    "N;SG;INDF": "חָצִיל",
+    "N;SG;DEF": "הֶחָצִיל",
+    "N;PL;INDF": "חֲצִילִים",
+    "N;PL;DEF": "הַחֲצִילִים"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "he:dlaat",
+   "lemma": "דְּלַעַת",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pumpkin"
+   ],
+   "gender": "FEM",
+   "translit": "dla'at",
+   "forms": {
+    "N;SG;INDF": "דְּלַעַת",
+    "N;SG;DEF": "הַדְּלַעַת",
+    "N;PL;INDF": "דְּלָעוֹת",
+    "N;PL;DEF": "הַדְּלָעוֹת"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  }
+ ],
+ "absent": []
+}

@@ -1,0 +1,84 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Karotte",
+   "lemma": "Karotte",
+   "pos": "NOUN",
+   "senses": [
+    "veg.carrot"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Karotte",
+    "N;ACC;SG": "Karotte",
+    "N;DAT;SG": "Karotte",
+    "N;GEN;SG": "Karotte",
+    "N;NOM;PL": "Karotten",
+    "N;ACC;PL": "Karotten",
+    "N;DAT;PL": "Karotten",
+    "N;GEN;PL": "Karotten"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   },
+   "variants": [
+    {
+     "lemma": "Möhre",
+     "region": "north"
+    },
+    {
+     "lemma": "Rüebli",
+     "region": "CH"
+    }
+   ]
+  },
+  {
+   "id": "de:Zwiebel",
+   "lemma": "Zwiebel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.onion"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Zwiebel",
+    "N;ACC;SG": "Zwiebel",
+    "N;DAT;SG": "Zwiebel",
+    "N;GEN;SG": "Zwiebel",
+    "N;NOM;PL": "Zwiebeln",
+    "N;ACC;PL": "Zwiebeln",
+    "N;DAT;PL": "Zwiebeln",
+    "N;GEN;PL": "Zwiebeln"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "de:Gurke",
+   "lemma": "Gurke",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cucumber"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Gurke",
+    "N;ACC;SG": "Gurke",
+    "N;DAT;SG": "Gurke",
+    "N;GEN;SG": "Gurke",
+    "N;NOM;PL": "Gurken",
+    "N;ACC;PL": "Gurken",
+    "N;DAT;PL": "Gurken",
+    "N;GEN;PL": "Gurken"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  }
+ ],
+ "absent": []
+}

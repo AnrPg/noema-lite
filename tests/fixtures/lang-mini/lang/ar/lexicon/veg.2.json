@@ -1,0 +1,63 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:badhinjan",
+   "lemma": "بَاذِنْجَان",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.eggplant"
+   ],
+   "gender": "MASC",
+   "root": null,
+   "unit": "بَاذِنْجَانَة",
+   "translit": "bāḏinǧān",
+   "forms": {
+    "N;NOM;COLL;INDF": "بَاذِنْجَانٌ",
+    "N;NOM;COLL;DEF": "الْبَاذِنْجَانُ",
+    "N;ACC;COLL;DEF": "الْبَاذِنْجَانَ",
+    "N;NOM;SG;INDF": "بَاذِنْجَانَةٌ",
+    "N;ACC;SG;INDF": "بَاذِنْجَانَةً",
+    "N;NOM;SG;DEF": "الْبَاذِنْجَانَةُ",
+    "N;ACC;SG;DEF": "الْبَاذِنْجَانَةَ",
+    "N;NOM;PL;INDF": "بَاذِنْجَانَاتٌ",
+    "N;NOM;PL;DEF": "الْبَاذِنْجَانَاتُ",
+    "N;ACC;PL;DEF": "الْبَاذِنْجَانَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  },
+  {
+   "id": "ar:qar",
+   "lemma": "قَرْع",
+   "pos": "NOUN",
+   "class": "collective",
+   "senses": [
+    "veg.pumpkin"
+   ],
+   "gender": "MASC",
+   "root": "ق ر ع",
+   "unit": "قَرْعَة",
+   "translit": "qarʿ",
+   "forms": {
+    "N;NOM;COLL;INDF": "قَرْعٌ",
+    "N;NOM;COLL;DEF": "الْقَرْعُ",
+    "N;ACC;COLL;DEF": "الْقَرْعَ",
+    "N;NOM;SG;INDF": "قَرْعَةٌ",
+    "N;ACC;SG;INDF": "قَرْعَةً",
+    "N;NOM;SG;DEF": "الْقَرْعَةُ",
+    "N;ACC;SG;DEF": "الْقَرْعَةَ",
+    "N;NOM;PL;INDF": "قَرْعَاتٌ",
+    "N;NOM;PL;DEF": "الْقَرْعَاتُ",
+    "N;ACC;PL;DEF": "الْقَرْعَاتِ"
+   },
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-07"
+   }
+  }
+ ],
+ "absent": []
+}

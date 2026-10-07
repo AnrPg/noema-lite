@@ -1,0 +1,256 @@
+{
+ "sentences": [
+  {
+   "id": "he.s.001",
+   "frame": "fr.eat.def",
+   "text": "הִיא אוֹכֶלֶת אֶת הַגֶּזֶר.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַגֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She eats the carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.002",
+   "frame": "fr.eat.indef",
+   "text": "הוּא אוֹכֵל בָּצָל.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "בָּצָל",
+     "l": "he:batsal",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He eats an onion.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.003",
+   "frame": "fr.eat.generic",
+   "text": "הִיא אוֹכֶלֶת מְלָפְפוֹנִים.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "מְלָפְפוֹנִים",
+     "l": "he:melafefon",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.004",
+   "frame": "fr.eat.and",
+   "text": "הוּא אוֹכֵל אֶת הַגֶּזֶר וְאֶת הַבָּצָל.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַגֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "וְאֶת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "אֶת",
+       "l": "he:et"
+      }
+     ]
+    },
+    {
+     "t": "הַבָּצָל",
+     "l": "he:batsal",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the carrot and the onion.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.005",
+   "frame": "fr.eat.def.pl",
+   "text": "הִיא אוֹכֶלֶת אֶת הַחֲצִילִים.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַחֲצִילִים",
+     "l": "he:chatsil",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats the eggplants.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.006",
+   "frame": "fr.eat.def2",
+   "text": "הוּא אוֹכֵל אֶת הַדְּלַעַת.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַדְּלַעַת",
+     "l": "he:dlaat",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.007",
+   "frame": "fr.eat.def",
+   "text": "הִיא אוֹכֶלֶת אֶת הַגְּזָרִים.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַגְּזָרִים",
+     "l": "he:gezer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "She eats the carrots.",
+   "level": "A1",
+   "variantOf": "he.s.001",
+   "variant": {
+    "Number": "PL"
+   }
+  }
+ ]
+}

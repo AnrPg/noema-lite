@@ -1,0 +1,86 @@
+{
+ "lexemes": [
+  {
+   "id": "he:hu",
+   "lemma": "הוּא",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "translit": "hu",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "he:hi",
+   "lemma": "הִיא",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "translit": "hi",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "he:akhal",
+   "lemma": "אָכַל",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "root": "א כ ל",
+   "binyan": "paal",
+   "translit": "akhal",
+   "forms": {
+    "V;PST;3;SG;MASC": "אָכַל",
+    "V;PRS;SG;MASC": "אוֹכֵל",
+    "V;PRS;SG;FEM": "אוֹכֶלֶת",
+    "V;PRS;PL;MASC": "אוֹכְלִים",
+    "V;PRS;PL;FEM": "אוֹכְלוֹת"
+   },
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "he:ve",
+   "lemma": "וְ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "prefix": true,
+   "translit": "ve",
+   "note": "וּ (u-) before ב, מ, פ and before a shva",
+   "ref": {
+    "src": "fixture"
+   }
+  },
+  {
+   "id": "he:et",
+   "lemma": "אֶת",
+   "pos": "ADP",
+   "senses": [],
+   "role": "marks a definite direct object (no English equivalent)",
+   "translit": "et",
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.def",
+   "reason": "No separate word: the definite article ha- (הַ) is part of the noun forms (DEF cells).",
+   "use": "הַ + noun"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "Hebrew has no indefinite article: the bare noun is indefinite.",
+   "use": "bare noun"
+  }
+ ]
+}

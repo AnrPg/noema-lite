@@ -1,0 +1,55 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:huluobo",
+   "lemma": "胡萝卜",
+   "trad": "胡蘿蔔",
+   "pinyin": "hú luó bo",
+   "pos": "NOUN",
+   "senses": [
+    "veg.carrot"
+   ],
+   "ref": {
+    "src": "fixture"
+   },
+   "measure": [
+    "根"
+   ]
+  },
+  {
+   "id": "zh:yangcong",
+   "lemma": "洋葱",
+   "trad": "洋蔥",
+   "pinyin": "yáng cōng",
+   "pos": "NOUN",
+   "senses": [
+    "veg.onion"
+   ],
+   "ref": {
+    "src": "fixture"
+   },
+   "measure": [
+    "个",
+    "颗"
+   ]
+  },
+  {
+   "id": "zh:huanggua",
+   "lemma": "黄瓜",
+   "trad": "黃瓜",
+   "pinyin": "huáng guā",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cucumber"
+   ],
+   "ref": {
+    "src": "fixture"
+   },
+   "measure": [
+    "根",
+    "条"
+   ]
+  }
+ ],
+ "absent": []
+}
