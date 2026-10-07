@@ -117,3 +117,6 @@ In noema-lite: ❓ Help → Set up Claude → **C** (⭐ recommended for curricu
 * `tests/curriculum_app.js` — way C: a curriculum built and planned by the connector as the learner's Claude (wrong
   answers sent back, the inbox, the app applying it), a step prepared and picked up, the learner's PDF by signed link and
   not uploaded twice, the by-hand path (copy / paste, step bundle, 📥 package), Set up Claude → C, phone.
+* `tests/pack_update.js` — a subject already on the device gets Claude's new version by itself: the synced
+  `a:packmeta` version wins over the cached copy (✨ on the chip), opening it or 🔄 Sync now downloads the new version,
+  and a failed download is reported (the saved copy keeps working) instead of silently showing the old one.
