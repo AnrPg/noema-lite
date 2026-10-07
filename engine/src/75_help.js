@@ -43,10 +43,11 @@ const GUIDES = {
     '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
     '**Publish repository** → keep **Keep this code private** ticked.',
     'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
-  claude: { icon: '✨', title: 'Set up Claude and create subjects (two ways)', who: 'Everyone', steps: [
+  claude: { icon: '✨', title: 'Set up Claude and create subjects (three ways)', who: 'Everyone', steps: [
     'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.',
     '**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.',
     `**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.`,
+    '**Way C — a whole curriculum with your Claude plan (⭐ recommended for curricula, usually the cheapest):** set up the connector as in way B, then in 🧭 Curricula choose **💬 Claude app** when you create or import a curriculum. Copy the one message noema-lite shows into a Claude chat: Claude builds the map, plans the chapters and prepares the queued steps; they appear on the map by themselves. No API cost — the bigger the curriculum, the bigger the saving.',
     'Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.',
     'Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.'],
     notes: ['Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },

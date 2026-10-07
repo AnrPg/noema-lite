@@ -103,6 +103,8 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   await p.click('button:has-text("New curriculum")'); await wait(300);
   await p.click('.cg-go'); await wait(150);
   ok(/goal topic/.test(await p.locator('.cg-kstat.bad').last().innerText()), 'Build without a goal → a friendly pointer');
+  ok(await p.locator('.cm-provider').inputValue() === 'claudeapp' && await p.locator('.cm-appinfo').isVisible(), 'a cloud account: the Claude app (your Claude plan) is preselected and explained');
+  await p.selectOption('.cm-provider', 'auto');
   await p.fill('input[placeholder^="sk-ant-… (Claude"]', KEY); await p.click('button:has-text("Use this key")');
   ok(await until(async () => /✅ Claude/.test(await p.locator('.cm-keys').first().innerText()), 5000), 'the Claude key is checked and kept on this device');
   await p.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference');
@@ -223,6 +225,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   const V = await signUp(browser, 'finn@example.com', 'Finn'); const q = V.p;
   await q.evaluate(() => { const k = `noema1:${Noema.account.id}:a:settings`; const s = JSON.parse(localStorage.getItem(k) || '{}'); s.apiKey = 'AIza-test-key'; localStorage.setItem(k, JSON.stringify(s)); });
   await q.click('.cm-mode:has-text("Curricula")'); await q.click('button:has-text("New curriculum")'); await wait(300);
+  await q.selectOption('.cm-provider', 'auto');
   ok(/✅ Gemini/.test(await q.locator('.cm-keys').first().innerText()) && /➖ Claude/.test(await q.locator('.cm-keys').first().innerText()), 'without a Claude key the Gemini key is used');
   await q.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference'); await q.selectOption('label:has-text("Depth") select', 'standard'); await q.selectOption('label:has-text("Prepare ahead") select', '1');
   A.slowPlan = 1200;

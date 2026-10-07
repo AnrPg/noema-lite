@@ -6,7 +6,14 @@
    /oauth/consent). Every call carries the user's own access token, so Supabase row-level security
    applies exactly as in the app — this function holds NO secret keys.
 
-   tools/build.py (site) prepends `const CFG = {…}; const DOCS = {…};` + engine/packcheck.js and writes dist/functions/mcp.mjs. */
+   Curricula (docs/CURRICULUM.md §7): the learner's Claude does the curriculum agents' work and prepares steps with the
+   learner's Claude plan — noema_curricula → noema_curriculum_task → (answer) noema_curriculum_submit / (step) the usual
+   upload. Tasks, checks and how an answer changes a curriculum come from the app's own code (engine/curriculum.js +
+   engine/curjobs.js, bundled), and answers go to an inbox (KV a:curin:…) that the app applies — never into the
+   curriculum record the app may be editing.
+
+   tools/build.py (site) prepends `const CFG = {…}; const DOCS = {…};` + engine/packcheck.js + the curriculum code
+   (engine/llm.js, curriculum.js, curjobs.js) and writes dist/functions/mcp.mjs. */
 
 const VERSION = '1.0.0';
 const PROTOCOLS = ['2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05'];
@@ -34,8 +41,8 @@ async function sb(path, token, { method = 'GET', body, headers = {}, raw = false
 /* ---------- pack checks: engine/packcheck.js (shared with the app), prepended by tools/build.py ---------- */
 const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId);
 
-async function register(token, uid, p, counts) {
-  const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, via: 'claude', updatedAt: new Date().toISOString() };
+async function register(token, uid, p, counts, extra = {}) {
+  const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, via: 'claude', updatedAt: new Date().toISOString(), ...extra };
   await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key: 'a:packmeta:' + p.subject.id, value: JSON.stringify(meta), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 }
 /* ---------- the pack's own source files (make_pack.py packages them: file "sources/<name>" + size + sha256) ---------- */
@@ -46,9 +53,10 @@ const chunksOf = x => (x.size > CHUNK() ? Math.ceil(x.size / CHUNK()) : 0);
 const partNames = (name, n) => (n ? Array.from({ length: n }, (_, i) => `${name}.p${String(i).padStart(3, '0')}`) : [name]);
 const srcDir = (uid, sid, src) => `${uid}/sources/${sid}/${String(src).replace(/[^a-zA-Z0-9_-]/g, '_')}/`;   // = engine/srcfiles.js cloudPath
 /** Which packaged source files are in the account's storage with the right size → { ok: [...], missing: [...] } */
-async function sourceFileStatus(token, uid, sid, srcs) {
+async function sourceFileStatus(token, uid, sid, srcs, known = new Map()) {
   const out = { ok: [], missing: [] };
   await Promise.all(srcs.map(async x => {
+    if (known.has(x.sha256)) { out.ok.push(x); return; }   // the learner's own file, already in the account (a curriculum's material)
     const want = partNames('file.' + extOf(x.fileName || x.file), chunksOf(x));
     const list = await sb('/storage/v1/object/list/noema-private', token, { method: 'POST', body: { prefix: srcDir(uid, sid, x.id), limit: 1000 } }).catch(() => []);
     const got = want.map(n => (list || []).find(o => o.name === n));
@@ -73,28 +81,88 @@ async function uploadCommands(token, uid, sid, srcs) {
   return lines.join('\n\n');
 }
 /** Register the files in the learner's synced index (a:srcfiles:<subject>) so every device shows 👁 for them. */
-async function indexSourceFiles(token, uid, sid, srcs) {
+async function indexSourceFiles(token, uid, sid, srcs, known = new Map()) {
   if (!srcs.length) return;
   const key = 'a:srcfiles:' + sid; const cur = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []);
   let ix = {}; try { ix = JSON.parse(cur?.[0]?.value || '{}'); } catch (e) { }
   const now = new Date().toISOString();
-  for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude', ...(chunksOf(x) ? { chunks: chunksOf(x) } : {}) }; }
+  for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); const ref = known.get(x.sha256); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude', ...(ref ? { ref } : chunksOf(x) ? { chunks: chunksOf(x) } : {}) }; }
   await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: now }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 }
 /** The pack is stored and valid: check its packaged files, then add it to the picker — or say which files to upload. */
 async function complete(token, uid, sid, p, res, fail, text) {
   const need = packaged(p);
+  const step = await findStep(token, sid).catch(() => null);   // a step of one of the learner's curricula?
+  const known = new Map(step ? Object.entries(step.c.files || {}).filter(([, f]) => f.sha256).map(([fid, f]) => [f.sha256, { subj: CUR().curStore(step.c.id), src: fid }]) : []);
   if (need.length) {
-    const st = await sourceFileStatus(token, uid, sid, need);
+    const st = await sourceFileStatus(token, uid, sid, need, known);
     if (st.missing.length) {
       return fail(`The pack is valid, but ${st.missing.length} of its ${need.length} source file(s) are not in the account yet: ${st.missing.map(x => x.id).join(', ')}.\n` +
         `The learner must get exactly the files the pack was built from (each part of a split PDF), so the subject is NOT saved yet. Upload them — run in your sandbox, from the folder that contains work/ (adjust the paths if your files are elsewhere; they are also inside ${sid}.noema.zip):\n\n` +
         await uploadCommands(token, uid, sid, st.missing) + `\n\nThen call noema_finish_upload with subject_id "${sid}" again.`);
     }
-    await indexSourceFiles(token, uid, sid, need);
+    await indexSourceFiles(token, uid, sid, need, known);
   }
-  await register(token, uid, p, res.counts);
-  return text(summary(p, res) + (need.length ? `\n📎 ${need.length} source file(s) attached — the learner opens them with 👁 in 📚 Sources, at the cited pages.` : ''));
+  await register(token, uid, p, res.counts, step ? { curriculum: step.c.id, node: step.nid, curTitle: step.c.title } : {});
+  let more = '';
+  if (step) {
+    await kvPut(token, uid, CJ().inboxKey(step.c.id), { v: 1, kind: 'step', nid: step.nid, packId: sid, version: p.version || null, at: new Date().toISOString(), via: 'claude-app' });
+    const left = CJ().work(await curState(token, step.c)).steps.length;
+    more = `\n🧭 This is the step “${step.c.nodes[step.nid].title}” of the curriculum “${step.c.title}”: it appears ready on the learner's map by itself (the app picks it up when it is open or next opened).` + (left ? `\n${left} more step(s) are queued — call noema_curriculum_task with curriculum_id "${step.c.id}" for the next one, if the learner asked for more.` : '');
+  }
+  return text(summary(p, res) + (need.length ? `\n📎 ${need.length} source file(s) attached — the learner opens them with 👁 in 📚 Sources, at the cited pages.` : '') + more);
+}
+
+/* ---------- curricula (the app's own code: engine/curriculum.js + engine/curjobs.js) ---------- */
+const CJ = () => globalThis.NoemaCurJobs, CUR = () => globalThis.NoemaCurriculum;
+const kvRows = async (token, like) => (await sb(`/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.${encodeURIComponent(like + '*')}`, token)) || [];
+const kvPut = (token, uid, key, value) => sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(value), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+async function curricula(token) {
+  const out = [];
+  for (const r of await kvRows(token, 'a:curriculum:')) { try { const c = JSON.parse(r.value); if (c?.format === 'noema.curriculum/v1' && c.nodes) out.push(c); } catch (e) { } }
+  return out.sort((a, b) => String(b.updated || '').localeCompare(String(a.updated || '')));
+}
+/** The curriculum as it will be once the app has applied the answers still waiting in the inbox. */
+async function curState(token, c) { return CJ().merged(c, await kvRows(token, `${CJ().IN}${c.id}:`)); }
+async function findStep(token, sid) {
+  const m = /^cur-([a-z0-9]{1,6})-/.exec(sid); if (!m) return null;
+  for (const r of await kvRows(token, 'a:curriculum:c' + m[1])) {
+    let c; try { c = JSON.parse(r.value); } catch (e) { continue; }
+    const nid = Object.keys(c.nodes || {}).find(id => CUR().packId(c, id) === sid); if (nid) return { c, nid };
+  }
+  return null;
+}
+function workLine(c) {
+  const w = CJ().work(c); const bits = [];
+  if (w.graph) bits.push(`its map is being built (next: ${w.graph === 'dag' ? 'agent 1, the map' : w.graph === 'audit' ? 'agent 1b, the prerequisite check' : 'agent 2, the goal in depth'})`);
+  if (w.toPlan.length) bits.push(`${w.toPlan.length} step(s) need their chapter plan`);
+  if (w.steps.length) bits.push(`${w.steps.length} step(s) queued to prepare: ${w.steps.slice(0, 5).map(id => '“' + c.nodes[id].title + '”').join(', ')}${w.steps.length > 5 ? '…' : ''}`);
+  const n = Object.keys(c.nodes).length, ready = Object.values(c.nodes).filter(x => x.pack?.status === 'ready').length;
+  return `- “${c.title || c.goal}” — curriculum_id ${c.id} · ${n} steps, ${ready} prepared · made with ${c.provider === 'claudeapp' ? 'the Claude app' : 'noema-lite (API key / Gemini)'}\n  ${bits.length ? 'To do: ' + bits.join('; ') : 'nothing waiting for you'}`;
+}
+/** How Claude gets one of the learner's files into its sandbox (signed links; big files are stored in parts). */
+async function downloadLines(token, uid, packId, downloads) {
+  const out = [], index = {};
+  for (const d of downloads) {
+    if (!index[d.store]) { const r = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent('a:srcfiles:' + d.store)}`, token).catch(() => []); try { index[d.store] = JSON.parse(r?.[0]?.value || '{}'); } catch (e) { index[d.store] = {}; } }
+    const meta = index[d.store][d.src];
+    const local = `work/${packId}/sources/${String(d.name).replace(/["$`\\]/g, '_')}`;
+    if (!meta?.cloud) { out.push(`- ${d.name}: ⚠️ not in the learner's cloud yet (it is uploaded when noema-lite is open on the device where it was added). Ask the learner to attach it to this chat, or build the step without it and say so.`); continue; }
+    const base = `${uid}/sources/${d.store}/${String(d.src).replace(/[^a-zA-Z0-9_-]/g, '_')}/file.${extOf(meta.name || d.name)}`;
+    const parts = partNames(base, meta.chunks || 0); const urls = [];
+    for (const pth of parts) { const r = await sb(`/storage/v1/object/sign/noema-private/${pth}`, token, { method: 'POST', body: { expiresIn: 7200 } }); urls.push(`${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.signedURL}`); }
+    out.push(`- ${d.name} (${((d.size || meta.size || 0) / 1048576).toFixed(1)} MB${d.pages ? `, ${d.pages} pages` : ''}):\n  mkdir -p "work/${packId}/sources"\n` + (urls.length === 1 ? `  curl -sSL -o "${local}" "${urls[0]}"` : urls.map((u, i) => `  curl -sSL -o "/tmp/noema-part.${String(i).padStart(3, '0')}" "${u}"`).join('\n') + `\n  cat /tmp/noema-part.* > "${local}" && rm /tmp/noema-part.*`));
+  }
+  out.push('(The links are valid for 2 hours. If your sandbox cannot reach them, ask the learner to attach the files to this chat.)');
+  return out;
+}
+async function pickCurriculum(token, id) {
+  const all = await curricula(token); if (!all.length) return { error: 'This account has no curriculum yet. In noema-lite: 🧭 Curricula → ➕ New curriculum or 📥 Import a map (choose “Claude app” as the AI).' };
+  if (id) { const c = all.find(x => x.id === id) || all.find(x => (x.title || x.goal || '').toLowerCase() === String(id).toLowerCase()); return c ? { c } : { error: `No curriculum “${id}”. The learner's curricula:\n${all.map(x => `- ${x.id}: “${x.title || x.goal}”`).join('\n')}` }; }
+  const states = await Promise.all(all.map(c => curState(token, c)));
+  const busy = states.filter(c => !CJ().work(c).done);
+  if (busy.length === 1) return { c: all.find(x => x.id === busy[0].id) };
+  return { error: `Which curriculum? Call again with curriculum_id:\n${states.map(workLine).join('\n')}` };
 }
 const summary = (p, r) => `✅ “${p.subject.title}” (${p.subject.id}) is in the noema-lite account: ${r.counts.chapters} chapters, ${r.counts.sections} sections, ${r.counts.exercises} exercises (${r.counts.visual} visual), ${r.counts.media} pictures.` +
   `\nIt appears in the subject picker the next time the app opens (or after tapping ☁️ → Sync now).` + (r.warnings.length ? `\n⚠️ Warnings:\n- ${r.warnings.slice(0, 20).join('\n- ')}` : '');
@@ -117,6 +185,12 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] } },
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
     inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' } }, required: ['pack_json'] } },
+  { name: 'noema_curricula', description: 'The learner\'s noema-lite curricula (maps of steps, each step becomes a subject) and what is waiting for you in each: building the map, planning the chapters of steps, preparing queued steps as subjects.',
+    inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
+  { name: 'noema_curriculum_task', description: 'The next piece of work on a curriculum, as complete instructions: an agent task of the map (answer with noema_curriculum_submit), a batch of chapter plans (same), or a step to prepare as a subject pack (build it with the noema-pack-builder workflow and save it with noema_start_upload/noema_finish_upload under the given subject_id). Call it again after each accepted answer or saved step.',
+    inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string', description: 'from noema_curricula (may be omitted when only one curriculum has work)' }, want: { type: 'string', enum: ['any', 'map', 'plan', 'step'], description: 'only this kind of work (default any: map first, then plans, then queued steps)' }, step: { type: 'string', description: 'prepare this step (id or title) even if it is not queued' } } } },
+  { name: 'noema_curriculum_submit', description: 'Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
+    inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string' }, task_id: { type: 'string', description: 'the task id given with the task (e.g. "dag", "plan:a,b,c")' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['curriculum_id', 'task_id', 'result_json'] } },
 ];
 
 /* ---------- prompts (claude.ai: “+” → noema-lite → Create a subject) ---------- */
@@ -125,6 +199,10 @@ const PROMPTS = [{
   arguments: [{ name: 'title', description: 'Subject title, e.g. Human heart anatomy', required: true }, { name: 'language', description: 'Language of the material (en, el, …)', required: false }, { name: 'goal', description: 'exam / understanding / project', required: false }],
   text: a => `Create a noema-lite subject pack from the sources attached to this chat${a.title ? ` — title: "${a.title}"` : ''}${a.language ? `, language: ${a.language}` : ''}${a.goal ? `, goal: ${a.goal}` : ''}.\n` +
     `Use the noema-pack-builder skill if you have it; otherwise call noema_get_toolkit and noema_authoring_guide first. Cover every detail of the sources, include all three kinds of pictures (from the sources, from the web, drawn diagrams / function graphs) with several picture exercises each, put every attached file in the package (if you split a PDF: its parts, each its own source, never the unsplit original too), validate with make_pack.py, and save the pack AND its source files to my noema-lite account with the noema-lite tools (noema_finish_upload asks for the files). Do not ask me questions unless something essential is missing — choose sensible defaults.`,
+}, {
+  name: 'curriculum_work', title: 'Work on my noema-lite curriculum', description: 'Build the map, plan the chapters and prepare the queued steps of a noema-lite curriculum — with your Claude plan.',
+  arguments: [{ name: 'curriculum', description: 'Its name or id (optional when only one curriculum has work)', required: false }, { name: 'steps', description: 'How many steps to prepare in this chat (default 1)', required: false }],
+  text: a => `Use the noema-lite connector to work on my noema-lite curriculum${a.curriculum ? ` “${a.curriculum}”` : ''}: build its map and plan the chapters of its steps if that is still open, then prepare ${+a.steps > 1 ? `the next ${+a.steps} queued steps, one after the other` : 'the next queued step'}.\nStart with noema_curricula, then call noema_curriculum_task${a.curriculum ? ` with that curriculum_id` : ''} and follow what it returns; after each accepted answer or saved step call it again. Do not ask me questions — choose sensible defaults.`,
 }];
 
 async function callTool(name, args, ctx) {
@@ -201,6 +279,36 @@ async function callTool(name, args, ctx) {
       await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
       return complete(token, uid, p.subject.id, p, res, fail, text);
     }
+    case 'noema_curricula': {
+      const all = await curricula(token);
+      if (!all.length) return text('No curriculum yet. In noema-lite: 🧭 Curricula → ➕ New curriculum or 📥 Import a map, and choose “Claude app (your Claude plan)”.');
+      const states = await Promise.all(all.map(c => curState(token, c)));
+      return text(`The learner's curricula:\n${states.map(workLine).join('\n')}\n\nCall noema_curriculum_task with a curriculum_id to get the next piece of work.`);
+    }
+    case 'noema_curriculum_task': {
+      const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return pk.error.startsWith('Which') ? text(pk.error) : fail(pk.error);
+      const c = await curState(token, pk.c);
+      const t = CJ().next(c, { want: args?.want || 'any', step: args?.step || '' });
+      if (t?.error) return fail(t.error);
+      if (!t) return text(`✅ Nothing is waiting in “${c.title || c.goal}”${args?.want && args.want !== 'any' ? ` (${args.want})` : ''}. ` + (CJ().isApp(c) ? 'Steps reach this queue when the learner opens them on the map (or the app queues the next ones ahead). ' : '') + 'To prepare a particular step anyway, call noema_curriculum_task with step = its title.');
+      if (t.kind !== 'step') return text(CJ().taskText(c, t, 'connector'));
+      const lines = t.downloads.length ? await downloadLines(token, uid, t.packId, t.downloads) : [];
+      return text(CJ().stepText(c, t, { mode: 'connector', fileLines: lines }));
+    }
+    case 'noema_curriculum_submit': {
+      const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return fail(pk.error);
+      const c = await curState(token, pk.c); const tid = String(args?.task_id || '').trim();
+      const t = CJ().byId(c, tid);
+      if (!t) return fail(`Task "${tid}" is not open any more (already answered, or the curriculum changed). Call noema_curriculum_task for the current one.`);
+      const raw = String(args?.result_json || '');
+      let data; try { data = globalThis.NoemaLLM.parseJSON(raw); } catch (e) { return fail('result_json is not valid JSON — send ONE JSON object (no prose around it).'); }
+      const errs = CJ().check(c, t, data);
+      if (errs.length) return fail(`Your answer has ${errs.length} problem(s) — fix ALL of them and call noema_curriculum_submit again with the complete corrected object:\n- ${errs.slice(0, 40).join('\n- ')}`);
+      await kvPut(token, uid, CJ().inboxKey(c.id), { v: 1, kind: t.kind, task: t.id, data, at: new Date().toISOString(), via: 'claude-app' });
+      const after = CJ().merged(c, [{ key: CJ().inboxKey(c.id, 'zzzz'), value: JSON.stringify({ kind: t.kind, task: t.id, data }) }]);
+      const w = CJ().work(after);
+      return text(`✅ Accepted (${t.title}). It reaches the learner's app by itself.\n` + (w.graph || w.toPlan.length ? `Next: call noema_curriculum_task with curriculum_id "${c.id}" — ${w.graph ? 'the next agent of the map' : `${w.toPlan.length} step(s) still need their chapter plan`}.` : w.steps.length ? `The map and all plans are done. ${w.steps.length} step(s) are queued to prepare — call noema_curriculum_task if the learner asked you to prepare steps.` : `The map and all chapter plans are done 🎉. Steps are prepared when the learner sends them to the Claude app from the map (or queues the next ones).`));
+    }
   }
   return fail('Unknown tool ' + name);
 }
@@ -214,7 +322,7 @@ async function handle(m, ctx) {
       case 'initialize': {
         const want = m.params?.protocolVersion;
         return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false }, prompts: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
-          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again.' });
+          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step.' });
       }
       case 'notifications/initialized': case 'notifications/cancelled': return null;
       case 'ping': return ok({});

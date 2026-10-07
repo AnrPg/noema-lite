@@ -210,7 +210,7 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-keys{display:grid;gap:6px;margin:6px 0}.cm-keyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .cm-stages{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}.cm-stages li{padding:8px 12px;border-radius:12px;background:var(--bg2)}.cm-stages li.now{background:var(--violet-bg);font-weight:700}.cm-stages li.done{background:var(--ok-bg)}
 .noema-overlay.cm-ov{padding:0}
-.noema-ovbox.cm-full{width:100vw;max-width:none;height:100dvh;max-height:none;border-radius:0;padding:0;display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr);overflow:clip;animation:none}
+.noema-ovbox.cm-full{width:100vw;max-width:none;height:100dvh;max-height:none;border-radius:0;padding:0;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:minmax(0,1fr);overflow:clip;animation:none}
 .cm-top{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .cm-title{flex:1;min-width:180px;display:grid}.cm-title b{font-size:17px;line-height:1.25}.cm-sum{font-size:12.5px;color:var(--ink2)}
 .cm-tools{display:flex;gap:6px;flex-wrap:wrap}
@@ -336,3 +336,19 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-guide{min-width:0}.cm-guide>*{min-width:0;max-width:100%}.cm-tree{max-width:100%}
 .cm-guide pre{white-space:pre;overflow-x:auto;overflow-wrap:normal;max-width:100%}
 .cm-guide code,.cm-guide pre,.cm-maptext{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+
+/* 💬 the Claude app (the learner's Claude plan) does curriculum work — engine/curjobs.js */
+.cm-appinfo{margin:8px 0;padding:10px 12px;border-radius:12px;background:var(--violet-bg)}.cm-appinfo p{margin:0 0 6px}.cm-appinfo ul{margin:0;padding-left:18px}
+.cm-apppanel{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.cm-appwait{padding:10px 12px;border-radius:12px;background:var(--violet-bg);font-size:14px}
+.cm-appsteps{margin:0}.cm-count{max-width:260px}
+.cm-paste{width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace}
+.cm-pasteout:empty{display:none}.cm-pasteout{margin-top:6px}
+.cm-appbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:var(--violet-bg);border-bottom:1px solid var(--line);font-size:14px}
+.cm-appbar:empty{padding:0;border:0}
+.cm-appq{background:var(--violet-bg);padding:8px 10px;border-radius:10px}
+.cm-otherways{margin-top:6px}
+.cg-badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:var(--warn-bg);color:var(--ink,inherit);font-size:12px;font-weight:700;white-space:nowrap}
+.cg-recommend{margin:6px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px}
+.cg-way-c>summary{border-left:4px solid var(--warn);padding-left:8px}
+.cg-choice-c{outline:2px solid var(--warn)}

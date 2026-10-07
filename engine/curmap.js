@@ -27,11 +27,12 @@ window.NoemaCurMap = (() => {
             return el('button', { class: 'cm-card', onclick: () => { close(); c.status === 'ready' ? map(acc, c.id, { onStudy }) : progress(acc, c, { onStudy }); } },
               el('div', { class: 'cm-cardtop' }, el('span', { class: 'cm-emo' }, '🧭'), el('b', {}, c.title || c.goal)),
               s ? el('div', { class: 'cm-bar' }, el('i', { style: { width: fmtPct(s.pct) } })) : null,
-              el('div', { class: 'tiny' }, s ? `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` : c.status === 'building' ? '⏳ being built…' : c.status === 'paused' ? '⏸️ paused — tap to continue' : '⚠️ stopped — tap to continue'));
+              el('div', { class: 'tiny' }, s ? `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (window.NoemaCurJobs && !J().work(c).done ? ' · 💬 waiting for your Claude app' : '') : c.status === 'waiting' ? '💬 waiting for your Claude app — tap' : c.status === 'building' ? '⏳ being built…' : c.status === 'paused' ? '⏸️ paused — tap to continue' : '⚠️ stopped — tap to continue'));
           })) : el('div', { class: 'empty' }, el('div', { class: 'e' }, '🧭'), el('p', {}, 'No curriculum yet. Tap ➕ New curriculum and type what you want to master.')),
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       };
       draw(); const off = C().onChange(() => { if (box.isConnected) draw(); else off(); });
+      window.NoemaCurJobs?.App.start(acc);
     });
   }
 
@@ -51,6 +52,83 @@ window.NoemaCurMap = (() => {
     };
     draw(); return wrap;
   }
+  /* ---------- 💬 the Claude app (the learner's Claude plan) — engine/curjobs.js ---------- */
+  const J = () => window.NoemaCurJobs;
+  const cloudOn = acc => !!(window.NoemaCloud?.session?.() && acc === 'u_' + window.NoemaCloud.session().user.id);
+  const copy = async (t, b) => { try { await navigator.clipboard.writeText(t); if (b) { const o = b.textContent; b.textContent = '✓ Copied'; setTimeout(() => { b.textContent = o; }, 1600); } } catch (e) { prompt('Copy this:', t); } };
+  /** The AI choice of a new / imported curriculum: the Claude app first (usually the cheapest), then the keys. */
+  function providerPick(acc, { what = 'builds the map and prepares the steps' } = {}) {
+    const sel = el('select', { class: 'noema-input cm-provider' }, el('option', { value: 'claudeapp' }, '💬 Claude app — with your Claude plan (recommended, usually cheaper)'), el('option', { value: 'auto' }, 'Automatic (Claude API key if it is here, else Gemini)'), el('option', { value: 'claude' }, 'Claude — API key'), el('option', { value: 'gemini' }, 'Gemini — free key'));
+    sel.value = cloudOn(acc) || !LLM().pick(acc, 'auto') ? 'claudeapp' : 'auto';
+    const keys = keysBox(acc);
+    const app = el('div', { class: 'cm-appinfo' },
+      el('p', {}, el('b', {}, '💬 Your own Claude does the work '), `(Claude app or claude.ai, with your Free / Pro / Max plan) — it ${what}; noema-lite only shows you what to paste into a Claude chat, and the results arrive here by themselves.`),
+      el('ul', { class: 'tiny' }, el('li', {}, 'Usually cheaper than an API key: no extra cost beyond your plan. The bigger the curriculum, the bigger the saving (an API key costs a few dollars per prepared step). Your plan has usage limits, so a big curriculum may take a few days.'),
+        el('li', {}, cloudOn(acc) ? '☁️ Cloud account: ✅ — Claude saves into it through the noema-lite connector.' : el('span', { class: 'cg-warn' }, '☁️ The connector needs a noema-lite cloud account (⚙️ → Cloud). Without it you can still copy each task into Claude and paste the answer back.')),
+        el('li', {}, 'First time? ', el('button', { class: 'linklike', onclick: e => { e.preventDefault(); setupClaude(acc); } }, 'Set up Claude (way C, 5 minutes)'), ' — the connector + code execution.')));
+    const sync = () => { const a = sel.value === 'claudeapp'; app.style.display = a ? '' : 'none'; keys.style.display = a ? 'none' : ''; };
+    sel.addEventListener('change', sync); sync();
+    return { sel, box: el('div', {}, el('label', { class: 'cg-field' }, 'Use', sel), app, keys) };
+  }
+  function setupClaude(acc) {
+    if (!window.Noema?.claudeSetupView) return;
+    overlay((b, close) => b.append(head('🤖 Set up Claude', 'Way C is the one for curricula with your Claude plan.'), window.Noema.claudeSetupView(acc, { open: 'C' }), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close'))));
+  }
+  /** What the Claude app still has to do for a curriculum, and how to get it done (with or without the connector). */
+  function appPanel(acc, cid, { onStudy, nid = null } = {}) {
+    J().App.start(acc);
+    const wrap = el('div', { class: 'cm-apppanel' });
+    let count = 1, pasteOut = null;
+    const draw = () => {
+      const c = C().get(acc, cid); if (!c) return; const w = J().work(c); wrap.innerHTML = '';
+      const todo = [w.graph ? `the map (${{ dag: 'agent 1 of 3', audit: 'agent 2 of 3', expand: 'agent 3 of 3' }[w.graph]})` : null, w.toPlan.length ? `the chapters of ${w.toPlan.length} step${w.toPlan.length > 1 ? 's' : ''}` : null, w.steps.length ? `${w.steps.length} step${w.steps.length > 1 ? 's' : ''} to prepare` : null].filter(Boolean);
+      const A = J().App; const ago = A.last ? Math.max(0, Math.round((Date.now() - A.last) / 1000)) : null;
+      const cnt = el('select', { class: 'noema-input cm-count', 'aria-label': 'Steps to prepare in one chat', onchange: e => { count = +e.target.value; } }, ...[1, 2, 3, 5].map(n => el('option', { value: n }, n === 1 ? '1 step per chat (recommended)' : `${n} steps in one chat`))); cnt.value = String(count);
+      wrap.append(el('div', { class: 'cm-appwait' }, w.done ? '✅ Nothing is waiting for your Claude app.' : el('span', {}, '💬 Waiting for your Claude app: ', el('b', {}, todo.join(' · ')))),
+        w.done ? null : el('ol', { class: 'cg-steps cm-appsteps' },
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Open a new chat in Claude'), tip('The Claude app (computer or phone) or claude.ai, with the noema-lite connector switched on (in the chat: + → Connectors). Only the first time: ❓ Set up Claude → C.')),
+            el('div', { class: 'row' }, el('a', { class: 'btn small', href: 'https://claude.ai/new', target: '_blank', rel: 'noopener' }, 'Open Claude ↗'), el('button', { class: 'btn small ghost', onclick: () => setupClaude(acc) }, 'First time? Set up Claude'))),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Paste this message and send it'), tip('Claude asks the connector for the next task, does it and saves the result into your account — the map, the chapter plans, then the queued steps. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.')),
+            w.steps.length > 1 ? el('label', { class: 'cg-field' }, 'Steps in this chat', cnt) : null,
+            el('div', { class: 'row' }, el('button', { class: 'btn primary cm-copymsg', onclick: e => copy(J().message(C().get(acc, cid), { count }), e.currentTarget) }, '📋 Copy the message for Claude'))),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Come back here')), el('p', { class: 'tiny' }, 'What Claude saves appears here by itself (checked when you return to this page, and every 20 seconds while something waits). ', A.error ? el('span', { class: 'cg-warn' }, '⚠️ ' + A.error + ' ') : null, ago != null ? `Last check: ${ago < 5 ? 'just now' : ago + ' s ago'}. ` : ''),
+            el('button', { class: 'btn small cm-checknow', onclick: async e => { e.currentTarget.disabled = true; const n = await A.poll(acc).catch(() => 0); toast(n ? `💬 ${n} result(s) from your Claude app` : '💬 Nothing new yet', 2500); draw(); } }, '⟳ Check now'))),
+        w.done ? null : manual(c, w));
+    };
+    const manual = (c, w) => {
+      const t = A0(); const box = el('details', { class: 'cg-faq cm-manual' }, el('summary', {}, 'No connector? Do it by hand'));
+      if (t) {
+        const ans = el('textarea', { class: 'noema-input cm-paste', rows: 4, placeholder: 'Paste Claude’s answer here (the JSON object)' });
+        const out = el('div', { class: 'tiny cm-pasteout' }); if (pasteOut) out.append(pasteOut);
+        box.append(el('p', { class: 'tiny' }, `Next task: ${t.title}. Copy it into any Claude chat, then paste Claude’s answer below — noema-lite checks it exactly like its own agents.`),
+          el('div', { class: 'row' }, el('button', { class: 'btn small cm-copytask', onclick: e => copy(t.text, e.currentTarget) }, '📋 Copy the task')), ans,
+          el('div', { class: 'row' }, el('button', { class: 'btn small primary cm-usepaste', onclick: () => {
+            const r = J().App.paste(acc, cid, t.id, ans.value);
+            if (r.errors) { const msg = `Your answer has these problems:\n- ${r.errors.slice(0, 30).join('\n- ')}\nFix ALL of them and send the complete corrected JSON object again.`; pasteOut = el('div', { class: 'cg-kstat bad' }, `⚠️ ${r.errors.length} problem(s): ${r.errors.slice(0, 3).join(' · ')}${r.errors.length > 3 ? ' …' : ''} `, el('button', { class: 'btn small', onclick: e => copy(msg, e.currentTarget) }, '📋 Copy the problems for Claude')); }
+            else pasteOut = el('div', { class: 'cg-kstat ok' }, '✓ Accepted' + r.line.replace(/^\s*✓?/, ' —'));
+            draw(); wrap.querySelector('.cm-manual')?.setAttribute('open', '');
+          } }, '✔ Use Claude’s answer')), out);
+      }
+      if (w.steps.length) {
+        const sid = nid && w.steps.includes(nid) ? nid : w.steps[0]; const n = c.nodes[sid];
+        box.append(el('p', { class: 'tiny' }, `Steps: download a step’s bundle (its task, your files and the toolkit), attach it to a Claude chat and ask Claude to follow TASK.md; then import the .noema.zip Claude gives you. Next step: “${n.title}”.`),
+          el('div', { class: 'row' }, el('button', { class: 'btn small cm-bundle', onclick: async e => { const b = e.currentTarget; b.disabled = true; try { const r = await J().App.bundle(acc, cid, sid); toast(`⬇️ ${r.name}` + (r.missing.length ? ` — ⚠️ not on this device: ${r.missing.join(', ')}` : ''), 4000); } catch (x) { toast('⚠️ ' + x.message, 4000); } b.disabled = false; } }, `⬇️ Bundle for “${n.title}”`),
+            importBtn(acc, cid, sid, draw)));
+      }
+      return box;
+    };
+    const A0 = () => J().App.copyTask(acc, cid);
+    draw(); const offA = C().onChange(() => { if (wrap.isConnected) draw(); else offA(); }); const offB = J().App.onChange(() => { if (wrap.isConnected) draw(); else offB(); });
+    return wrap;
+  }
+  /** 📥 The package Claude made for a step (.noema.zip / .json). */
+  function importBtn(acc, cid, nid, after) {
+    return el('label', { class: 'btn small cm-importpkg' }, '📥 Import its package', el('input', { type: 'file', accept: '.zip,.json', style: { display: 'none' }, onchange: async e => {
+      const f = e.target.files[0]; e.target.value = ''; if (!f) return; toast('📦 Importing…', 1500);
+      try { const r = await J().App.importPackage(acc, cid, nid, f); toast(`🧭 “${r.title}” is ready to study`, 3500); after?.(); } catch (x) { toast('⚠️ ' + x.message, 6000); }
+    } }));
+  }
+
   function create(acc, { onStudy } = {}) {
     overlay((box, close) => {
       box.classList.add('cg-box');
@@ -61,14 +139,14 @@ window.NoemaCurMap = (() => {
       const apps = el('select', { class: 'noema-input' }, el('option', { value: '2-4' }, '2–4 applications'), el('option', { value: '3-6' }, '3–6 applications'), el('option', { value: '5-8' }, '5–8 applications')); apps.value = '3-6';
       const scope = el('input', { class: 'noema-input', placeholder: 'Optional: scope, e.g. “for clinicians”, “exam: AWS SAA”, “focus on the mathematics”' });
       const constraints = el('textarea', { class: 'noema-input', rows: 2, placeholder: 'Optional: anything else the agents must respect' });
-      const provider = el('select', { class: 'noema-input' }, el('option', { value: 'auto' }, 'Automatic (Claude if its key is here, else Gemini)'), el('option', { value: 'claude' }, 'Claude'), el('option', { value: 'gemini' }, 'Gemini'));
+      const PP = providerPick(acc), provider = PP.sel;
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
       const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: '8' });
       const err = el('div', { class: 'tiny cg-kstat bad' });
       const go = el('button', { class: 'btn primary cg-go', onclick: () => {
         err.textContent = '';
         if (goal.value.trim().length < 3) { err.textContent = '👆 Type the goal topic first.'; goal.focus(); return; }
-        if (!LLM().pick(acc, provider.value)) { err.textContent = '👆 Add a Claude API key or a Gemini key first (above).'; return; }
+        if (provider.value !== 'claudeapp' && !LLM().pick(acc, provider.value)) { err.textContent = '👆 Add a Claude API key or a Gemini key first (above) — or choose the Claude app.'; return; }
         const [a1, a2] = apps.value.split('-').map(Number);
         const c = C().blank({ goal: goal.value, language: lang.value, learner: learner.value, depth: depth.value, apps: [a1, a2], scope: scope.value, constraints: constraints.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8) });
         C().save(acc, c); close(); progress(acc, c, { onStudy, start: true });
@@ -76,14 +154,14 @@ window.NoemaCurMap = (() => {
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'),
         head('➕ New curriculum', 'Four AI agents map what you need to learn: every prerequisite, the whole goal, and its applications.'),
         el('ol', { class: 'cg-steps' },
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI builds it?'), tip('The keys stay on this device. Building the map costs cents to about a dollar with Claude; each step is prepared later, a few at a time.')), keysBox(acc), el('label', { class: 'cg-field' }, 'Use', provider)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI builds it?'), tip(el('div', {}, el('p', {}, el('b', {}, '💬 Claude app (recommended): '), 'your own Claude — the Claude app or claude.ai with your Free / Pro / Max plan — runs the four agents and prepares the steps. noema-lite shows you one message to paste into a Claude chat; what Claude makes arrives here by itself (through the noema-lite connector), or you paste it back by hand. No cost beyond your plan — usually the cheapest way, especially for big curricula; your plan’s usage limits may spread the work over a few days.'), el('p', {}, el('b', {}, 'API key / Gemini: '), 'everything runs here while this page is open. The keys stay on this device. Building the map costs cents to about a dollar with a Claude API key, and each prepared step a few dollars; Gemini’s free key costs nothing but makes simpler subjects.')))), PP.box),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'What do you want to master?'), tip('One topic, as specific or as broad as you like. The agents find what you need before it (prerequisites) and where it is used (applications).')), goal,
             el('label', { class: 'cg-field' }, 'Language of the course', lang), el('label', { class: 'cg-field' }, 'Your starting point', learner)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'How big?'), tip('Depth decides how finely the goal itself is split. The prerequisites are always as complete as needed for your starting point.')),
             el('label', { class: 'cg-field' }, 'Depth', depth), el('label', { class: 'cg-field' }, 'Applications', apps),
             el('details', { class: 'cg-faq' }, el('summary', {}, 'More options'), el('label', { class: 'cg-field' }, 'Scope', scope), el('label', { class: 'cg-field' }, 'Requirements', constraints))),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Preparing the steps'), tip('Every step becomes a full subject, made from official sources. noema-lite prepares the next open steps in the background while the app is open, so they are ready when you get there.')),
-            el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude: stop and ask me when one step costs more than $', budget)),
+            el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch, tip('With the Claude app: how many of the next open steps wait in its queue, ready for you to paste the message into Claude.')), el('label', { class: 'cg-field' }, 'Claude API key: stop and ask me when one step costs more than $', budget)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Build')), go, err)),
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       setTimeout(() => goal.focus(), 200);
@@ -100,16 +178,21 @@ window.NoemaCurMap = (() => {
       const stages = el('ol', { class: 'cm-stages' }); const log = el('ol', { class: 'cg-log', 'aria-live': 'polite' }); const status = el('div', { class: 'cg-status' }); const actions = el('div', { class: 'row' }); const bar = el('div', { class: 'cm-bar' }, el('i', {}));
       const paint = () => {
         const SG = stagesOf(c); const i = SG.findIndex(s => s[0] === c.stage);
-        stages.innerHTML = ''; SG.forEach(([k, t], j) => stages.append(el('li', { class: c.stage === 'done' || j < i ? 'done' : j === i ? (ctl ? 'now' : 'wait') : '' }, (c.stage === 'done' || j < i ? '✅ ' : j === i && ctl ? '⏳ ' : '◻️ ') + t)));
+        stages.innerHTML = ''; SG.forEach(([k, t], j) => stages.append(el('li', { class: c.stage === 'done' || j < i ? 'done' : j === i ? (ctl ? 'now' : 'wait') : '' }, (c.stage === 'done' || j < i ? '✅ ' : j === i && ctl ? '⏳ ' : j === i && c.status === 'waiting' ? '💬 ' : '◻️ ') + t)));
         status.className = 'cg-status ' + c.status;
-        status.textContent = ctl ? '🧠 The agents are working — keep this page open (other tabs are fine).' : c.status === 'ready' ? '✅ Your curriculum is ready.' : c.status === 'failed' ? '⚠️ ' + (c.error || 'Stopped') : c.status === 'paused' ? '⏸️ Paused.' : '';
+        status.textContent = ctl ? '🧠 The agents are working — keep this page open (other tabs are fine).' : c.status === 'ready' ? '✅ Your curriculum is ready.' : c.status === 'waiting' ? '💬 Your Claude app builds the map — follow the steps below.' : c.status === 'failed' ? '⚠️ ' + (c.error || 'Stopped') : c.status === 'paused' ? '⏸️ Paused.' : '';
         actions.innerHTML = '';
-        if (ctl) actions.append(el('button', { class: 'btn', onclick: () => ctl.abort() }, '⏹ Stop'));
+        appBox.style.display = c.provider === 'claudeapp' && c.status === 'waiting' ? '' : 'none';
+        if (c.status === 'waiting') actions.append(el('button', { class: 'btn small', title: 'Use an API key or Gemini instead (everything runs here)', onclick: () => { const k = LLM().pick(acc, 'auto'); if (!k) { toast('Add a Claude API key or a Gemini key first (⚙️ Settings / ✨ Create with Claude).', 4000); return; } c = C().get(acc, c.id); c.provider = 'auto'; c.status = 'building'; C().save(acc, c); run(); } }, 'Use my API key here instead'), el('button', { class: 'btn small ghost', onclick: () => { if (confirm('Delete this curriculum?')) { C().remove(acc, c.id); close(); library(acc, { onStudy }); } } }, '🗑 Delete'));
+        else if (ctl) actions.append(el('button', { class: 'btn', onclick: () => ctl.abort() }, '⏹ Stop'));
         else if (c.status === 'ready') actions.append(el('button', { class: 'btn primary', onclick: () => { close(); map(acc, c.id, { onStudy }); } }, '🗺️ Open the map'));
         else actions.append(el('button', { class: 'btn primary', onclick: run }, '▶ Continue'), el('button', { class: 'btn small ghost', onclick: () => { if (confirm('Delete this curriculum?')) { C().remove(acc, c.id); close(); library(acc, { onStudy }); } } }, '🗑 Delete'));
       };
       const add = m => { log.append(el('li', {}, m)); while (log.children.length > 120) log.firstChild.remove(); log.scrollTop = log.scrollHeight; };
       (c.log || []).slice(-30).forEach(x => add(x.m));
+      const appBox = c.provider === 'claudeapp' ? appPanel(acc, c.id, { onStudy }) : el('div');
+      let seen = (c.log || []).length;
+      const offW = C().onChange((a, cur) => { if (!box.isConnected) { offW(); return; } if (cur?.id !== c.id || ctl) return; c = cur; (c.log || []).slice(seen).forEach(x => add(x.m)); seen = (c.log || []).length; paint(); });
       async function run() {
         ctl = new AbortController(); paint();
         const wl = await navigator.wakeLock?.request('screen').catch(() => null);
@@ -118,10 +201,11 @@ window.NoemaCurMap = (() => {
         if (c.status === 'ready') { G().kick(); }
       }
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { if (ctl && !confirm('The agents work only while this window is open. Stop?')) return; ctl?.abort(); close(); library(acc, { onStudy }); } }, '← Curricula'),
-        head(`🧭 “${c.title || c.goal}”`, c.imported ? `${C().LANG[c.language] || c.language} · your map, ${Object.keys(c.nodes).length} steps · ${c.learner || 'from the basics'}` : `${C().LANG[c.language] || c.language} · ${c.depth} · ${c.learner || 'from the basics'}`), stages, bar, status, actions,
+        head(`🧭 “${c.title || c.goal}”`, c.imported ? `${C().LANG[c.language] || c.language} · your map, ${Object.keys(c.nodes).length} steps · ${c.learner || 'from the basics'}` : `${C().LANG[c.language] || c.language} · ${c.depth} · ${c.learner || 'from the basics'}`), stages, bar, status, appBox, actions,
         el('details', { class: 'cg-logbox', open: true }, el('summary', {}, 'What the agents are doing'), log));
       paint(); if (start || c.status === 'building') run();
     }, { closable: false });
+    window.NoemaCurJobs?.App.start(acc);
   }
 
 
@@ -191,21 +275,21 @@ window.NoemaCurMap = (() => {
       const save = () => { err.textContent = ''; const r = n ? E.update(acc, cid, id, collect()) : null; if (r?.error) { err.textContent = '⚠️ ' + r.error; return false; } return true; };
       const replan = el('button', { class: 'btn small', disabled: locked, onclick: async () => {
         if (n && !save()) return; busy.textContent = '⏳ The AI is planning the chapters…'; replan.disabled = true;
-        try { await E.plan(acc, cid, [id], { instruction: instr.value.trim() }); c = C().get(acc, cid); chapters = c.nodes[id].chapters.map(ch => ({ ...ch })); goals.value = c.nodes[id].learningGoals.join('\n'); drawCh(); busy.textContent = '✓ New plan — check it, change what you like, then save.'; }
+        try { const r = await E.plan(acc, cid, [id], { instruction: instr.value.trim() }); if (r.queued) { busy.textContent = '💬 Sent to your Claude app: it re-plans this step (copy the message from the 💬 bar of the map). Your current chapters stay until the new plan arrives.'; replan.disabled = false; return; } c = C().get(acc, cid); chapters = c.nodes[id].chapters.map(ch => ({ ...ch })); goals.value = c.nodes[id].learningGoals.join('\n'); drawCh(); busy.textContent = '✓ New plan — check it, change what you like, then save.'; }
         catch (e) { busy.textContent = '⚠️ ' + e.message; } replan.disabled = false;
       } }, '✨ Re-plan the chapters with AI');
       const head2 = mode === 'review' ? head('📝 Review this step before it is prepared', 'Change anything you like — the name, the goals, the chapters. When you confirm, the material is generated; after that the chapters can no longer change.')
         : mode === 'add' ? head('➕ Add a step', 'Name it, place it with its prerequisites and dependents; the AI can plan its chapters.')
           : head('✏️ Edit the step', locked ? 'Already prepared: you can rename it, move it and change its links; its chapters are fixed.' : 'Everything can change until the step is prepared.');
       const buttons = mode === 'review'
-        ? [el('button', { class: 'btn primary', onclick: () => { if (!save()) return; close(); G().request(C().get(acc, cid), id, { resume: true }); toast('⏳ Preparing “' + title.value + '” — 5–30 minutes; study something else meanwhile.', 5000); onDone(); } }, '✅ Looks good — prepare it'),
+        ? [el('button', { class: 'btn primary', onclick: () => { if (!save()) return; close(); const cc = C().get(acc, cid); G().request(cc, id, { resume: true }); toast(cc.provider === 'claudeapp' ? '💬 Sent to your Claude app — copy the message from the map into a Claude chat.' : '⏳ Preparing “' + title.value + '” — 5–30 minutes; study something else meanwhile.', 5000); onDone(); } }, c.provider === 'claudeapp' ? '✅ Looks good — send it to my Claude app' : '✅ Looks good — prepare it'),
           el('button', { class: 'btn small', onclick: () => { if (save()) { close(); onDone(); } } }, 'Save changes only')]
         : mode === 'add'
           ? [el('button', { class: 'btn primary', onclick: async () => {
               err.textContent = ''; if (!title.value.trim()) { err.textContent = '👆 Give the step a name.'; return; }
               const r = E.add(acc, cid, { title: title.value, summary: summary.value, role: role.value, parents, children }); if (r.error) { err.textContent = '⚠️ ' + r.error; return; }
               if (chapters.length || goals.value.trim()) E.update(acc, cid, r.id, { chapters, learningGoals: goals.value.split('\n') });
-              else { busy.textContent = '⏳ The AI is planning its chapters…'; try { await E.plan(acc, cid, [r.id], { instruction: instr.value.trim() }); } catch (e) { toast('⚠️ Chapters not planned: ' + e.message, 5000); } }
+              else { busy.textContent = '⏳ The AI is planning its chapters…'; try { const pr = await E.plan(acc, cid, [r.id], { instruction: instr.value.trim() }); if (pr.queued) toast('💬 Your Claude app plans its chapters — copy the message from the 💬 bar.', 4500); } catch (e) { toast('⚠️ Chapters not planned: ' + e.message, 5000); } }
               close(); onDone(r.id); } }, '➕ Add the step')]
           : [el('button', { class: 'btn primary', onclick: () => { if (save()) { close(); onDone(); toast('✔ Saved'); } } }, 'Save'),
             el('button', { class: 'btn small danger', onclick: async () => {
@@ -248,7 +332,7 @@ window.NoemaCurMap = (() => {
       const title = el('input', { class: 'noema-input', placeholder: 'Name of the curriculum' });
       const lang = el('select', { class: 'noema-input' }, ...Object.entries(C().LANG).map(([v, t]) => el('option', { value: v }, t))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
       const learner = el('input', { class: 'noema-input', placeholder: 'Optional: what you already know' });
-      const provider = el('select', { class: 'noema-input' }, el('option', { value: 'auto' }, 'Automatic (Claude if its key is here, else Gemini)'), el('option', { value: 'claude' }, 'Claude'), el('option', { value: 'gemini' }, 'Gemini'));
+      const PP = providerPick(acc, { what: 'plans the chapters of your steps and prepares each step as a subject (from your files, when the step has some)' }), provider = PP.sel;
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
       const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: '8' });
       const fileBox = el('div', { class: 'cm-files' }), fileSum = el('div', { class: 'tiny cm-filesum' });
@@ -257,7 +341,7 @@ window.NoemaCurMap = (() => {
       ['dragover', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop' && e.dataTransfer.files.length) addFiles([...e.dataTransfer.files]); }));
       const aiBtn = el('button', { class: 'btn small ai', onclick: async () => {
         perr.textContent = ''; if (!text.value.trim()) { perr.textContent = '👆 Paste your map first.'; return; }
-        if (!LLM().pick(acc, provider.value)) { perr.textContent = '👆 The AI needs a Claude or Gemini key (step 4).'; return; }
+        if (!LLM().pick(acc, provider.value === 'claudeapp' ? 'auto' : provider.value)) { perr.textContent = '👆 Reading a map with AI needs a Claude API key or a Gemini key here (step 4). With the Claude app, write the map in one of the forms in ⓘ instead.'; return; }
         aiBtn.disabled = true; info.textContent = '✨ The AI is reading your map…';
         try { aiParsed = await I.aiRead(acc, text.value, { provider: provider.value, onLog: m => { info.textContent = m; } }); show(aiParsed); } catch (e) { perr.textContent = '⚠️ ' + e.message; info.textContent = ''; }
         aiBtn.disabled = false;
@@ -370,12 +454,13 @@ window.NoemaCurMap = (() => {
         err.textContent = '';
         if (!parsed) { err.textContent = '👆 Paste a map that can be read (step 1).'; return; }
         const needPlan = Object.values(parsed.nodes).some(n => !n.chapters?.length);
-        if (needPlan && !LLM().pick(acc, provider.value)) { err.textContent = '👆 Planning the chapters needs a Claude API key or a Gemini key (step 4).'; return; }
+        if (needPlan && provider.value !== 'claudeapp' && !LLM().pick(acc, provider.value)) { err.textContent = '👆 Planning the chapters needs a Claude API key or a Gemini key (step 4) — or choose the Claude app.'; return; }
         const big = files.find(f => f.size > (window.NoemaSrcFiles?.MAX || 2147483648)); if (big) { err.textContent = `⚠️ ${big.name} is too big for a browser to keep (over 2 GB).`; return; }
         go.disabled = true;
         try {
           const assignments = files.map(f => ({ file: f, targets: (A.get(f)?.targets || []).filter(t => parsed.nodes[t.id]) })).filter(a => a.targets.length);
           const c = await I.create(acc, parsed, { title: title.value.trim(), language: lang.value, learner: learner.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8), assignments, source: text.value, onLog: m => { busy.textContent = m; } });
+          if (c.provider === 'claudeapp') { const r = await C().build(acc, c); close(); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { }); G().kick(); map(acc, r.id, { onStudy, appHelp: !J().work(r).done }); return; }
           close(); if (c.status === 'ready') { G().kick(); map(acc, c.id, { onStudy }); } else progress(acc, c, { onStudy, start: true });
         } catch (e) { err.textContent = '⚠️ ' + e.message; go.disabled = false; }
       } }, '📥 Import my map');
@@ -475,8 +560,8 @@ window.NoemaCurMap = (() => {
             info, perr, warnBox, graph, nodeBox, el('details', { class: 'cg-faq' }, el('summary', {}, 'The steps as a list'), prev)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Name and language')), el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'Language of the course', lang), el('label', { class: 'cg-field' }, 'Your starting point', learner)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip(filesGuide)), drop, el('div', { class: 'row' }, folder), fileSum, fileBox),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI plans and prepares the steps?'), tip('The map is used as it is. The AI only plans the chapters of each step (from its files, when it has some) and later prepares each step as a subject.')), keysBox(acc), el('label', { class: 'cg-field' }, 'Use', provider),
-            el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude: stop and ask me when one step costs more than $', budget)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI plans and prepares the steps?'), tip(el('div', {}, el('p', {}, 'The map is used as it is. The AI only plans the chapters of each step (from its files, when it has some) and later prepares each step as a subject.'), el('p', {}, el('b', {}, '💬 Claude app (recommended): '), 'nothing more to do in this form — press Import. The map opens with a 💬 bar: copy its message into a chat of your Claude app (or claude.ai); Claude plans the chapters and prepares the steps that wait in its queue, one per chat, and they appear here by themselves. Your files are given to Claude through the connector (or in a bundle you download, without it). Usually the cheapest way — no cost beyond your Claude plan, which matters most for big curricula.'), el('p', {}, el('b', {}, 'API key / Gemini: '), 'the work runs here, in the background while the app is open.')))), PP.box,
+            el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude API key: stop and ask me when one step costs more than $', budget)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Import')), go, busy, err)),
         el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       setTimeout(() => text.focus(), 200);
@@ -485,15 +570,23 @@ window.NoemaCurMap = (() => {
 
   /* ======================= the map ======================= */
   const NW = 196, NH = 76, GX = 74, GY = 18, TOP = 64;
-  function map(acc, cid, { focus, onStudy } = {}) {
+  function map(acc, cid, { focus, onStudy, appHelp = false } = {}) {
     let c = C().get(acc, cid); if (!c) { toast?.('That curriculum is not on this device yet.'); return; }
-    G().start(acc);
+    G().start(acc); window.NoemaCurJobs?.App.start(acc);
     overlay((box, close) => {
       box.classList.add('cm-full'); box.parentElement.classList.add('cm-ov');
       const phone = matchMedia('(max-width: 720px)').matches;
       let zoom = phone ? 0.78 : 1, sel = focus || null;
       const sum = el('div', { class: 'cm-sum' }); const scroller = el('div', { class: 'cm-scroll' }); const canvas = el('div', { class: 'cm-canvas' }); scroller.append(canvas);
       const panel = el('aside', { class: 'cm-panel', 'aria-live': 'polite' });
+      const appBar = el('div', { class: 'cm-appbar', role: 'status' });
+      const showApp = (nid = null) => overlay((b2, close2) => b2.append(head('💬 Your Claude app', 'Your own Claude (with your Claude plan) plans and prepares the steps; the results appear on this map by themselves.'), appPanel(acc, cid, { onStudy, nid }), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, 'Close'))));
+      const drawBar = () => {
+        const w = J().work(c); appBar.innerHTML = '';
+        if (w.done) return;
+        appBar.append(el('span', {}, '💬 ', el('b', {}, 'For your Claude app: '), [w.toPlan.length ? `${w.toPlan.length} step${w.toPlan.length > 1 ? 's' : ''} to plan` : null, w.steps.length ? `${w.steps.length} to prepare` : null].filter(Boolean).join(' · ')),
+          el('button', { class: 'btn small primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message'), el('button', { class: 'btn small', onclick: () => showApp() }, 'How? · by hand'));
+      };
       const study = s => { close(); if (onStudy) onStudy(s); else window.Noema.switchTo(acc, s); };
       const zoomTo = z => { const r = scroller.getBoundingClientRect(); const cx = (scroller.scrollLeft + r.width / 2) / zoom, cy = (scroller.scrollTop + r.height / 2) / zoom; zoom = Math.max(0.35, Math.min(1.6, z)); drawMap(); scroller.scrollLeft = cx * zoom - r.width / 2; scroller.scrollTop = cy * zoom - r.height / 2; };
       const tools = el('div', { class: 'cm-tools' },
@@ -503,12 +596,12 @@ window.NoemaCurMap = (() => {
         el('button', { class: 'btn small', title: 'Add a step', onclick: () => editStep(acc, cid, null, { mode: 'add', onDone: nid => { drawMap(); if (nid) { sel = nid; drawMap(); showPanel(nid); scrollToNode(nid); } } }) }, '➕ Step'),
         el('button', { class: 'btn small', title: 'Settings of this curriculum', onclick: () => settings() }, '⚙️'));
       box.append(el('div', { class: 'cm-top' }, el('button', { class: 'btn small ghost', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'), el('div', { class: 'cm-title' }, el('b', {}, '🧭 ' + (c.title || c.goal)), sum), tools, el('button', { class: 'btn small', 'aria-label': 'Close', onclick: close }, '✕')),
-        el('div', { class: 'cm-body' }, scroller, panel),
-        el('div', { class: 'cm-legend tiny' }, '✅ mastered · 🔓 open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared', tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.')));
+        appBar, el('div', { class: 'cm-body' }, scroller, panel),
+        el('div', { class: 'cm-legend tiny' }, '✅ mastered · 🔓 open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app', tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.')));
 
       function drawMap() {
         c = C().get(acc, cid) || c; const st = C().statuses(acc, c); const L = C().layout(c); const s = C().summary(acc, c);
-        sum.textContent = `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (G().paused() ? ' · ⏸ preparing paused' : '');
+        sum.textContent = `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (G().paused() ? ' · ⏸ preparing paused' : ''); drawBar();
         const rows = Math.max(...L.cols.map(col => col.length)); const W = L.cols.length * (NW + GX) + GX, H = TOP + rows * (NH + GY) + 30;
         canvas.dataset.w = W; canvas.dataset.h = H; canvas.style.width = W * zoom + 'px'; canvas.style.height = H * zoom + 'px'; canvas.innerHTML = '';
         const inner = el('div', { class: 'cm-inner', style: { width: W + 'px', height: H + 'px', transform: `scale(${zoom})` } }); canvas.append(inner);
@@ -525,7 +618,7 @@ window.NoemaCurMap = (() => {
           const s2 = st[id], pk = n.pack?.status, key = c.id + '/' + id;
           const state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked';
           const badge = s2.mastered ? '✅' : s2.locked ? '🔒' : '🔓';
-          const prep = pk === 'ready' ? '⚡' : pk === 'generating' || G().busy() === key ? '⏳' : pk === 'failed' ? '⚠️' : pk === 'paused' ? '⏸️' : s2.open && !s2.mastered && !n.reviewed && !c.autoApprove ? '📝' : '';
+          const prep = pk === 'ready' ? '⚡' : pk === 'app' || J().needsPlan(n) && c.provider === 'claudeapp' ? '💬' : pk === 'generating' || G().busy() === key ? '⏳' : pk === 'failed' ? '⚠️' : pk === 'paused' ? '⏸️' : s2.open && !s2.mastered && !n.reviewed && !c.autoApprove ? '📝' : '';
           const b = el('button', { class: `cm-node cm-${state} cm-r-${n.role}` + (sel === id ? ' sel' : '') + (rel && !rel.has(id) ? ' dim' : ''), style: { left: P[id].x + 'px', top: P[id].y + 'px', width: NW + 'px', height: NH + 'px' }, 'data-id': id,
             'aria-label': `${n.title} — ${ROLE[n.role]} — ${state}${pk === 'ready' ? ', prepared' : ''}`, onclick: () => { sel = id; drawMap(); showPanel(id); } },
             el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), el('span', { class: 'cm-badges' }, badge, prep, n.material?.files?.length ? el('span', { title: 'Your material: ' + n.material.files.map(f => f.name).join(', ') }, '📎') : null),
@@ -541,12 +634,20 @@ window.NoemaCurMap = (() => {
         panel.innerHTML = ''; panel.classList.add('on');
         const act = el('div', { class: 'cm-actions' });
         if (st.open || st.mastered) {
+          const appWay = () => el('details', { class: 'cg-faq cm-otherways' }, el('summary', {}, 'Other ways to prepare it'),
+            el('div', { class: 'row' }, c.provider !== 'claudeapp' ? el('button', { class: 'btn small cm-toapp', onclick: () => { G().toApp(c, id); showPanel(id); showApp(id); } }, '💬 In my Claude app instead') : null, importBtn(acc, cid, id, () => { drawMap(); showPanel(id); })),
+            el('p', { class: 'tiny' }, '💬 Your Claude app prepares it with your Claude plan (no API cost). 📥 Or import a .noema.zip that Claude made for this step.'));
           if (pk.status === 'ready') act.append(el('button', { class: 'btn primary', onclick: () => study(pk.id) }, st.mastered ? '📖 Review' : '📖 Study this step'));
+          else if (pk.status === 'app') act.append(el('div', { class: 'cm-live cm-appq' }, '💬 Waiting for your Claude app', el('span', { class: 'tiny' }, ' — paste the message into a Claude chat; the step appears here by itself.')),
+            el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message for Claude'), el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand'), importBtn(acc, cid, id, () => { drawMap(); showPanel(id); }),
+              el('button', { class: 'btn small ghost', title: 'Take it out of the Claude app’s queue', onclick: () => { G().fromApp(c, id); showPanel(id); } }, '↩ Not now')));
+          else if (c.provider === 'claudeapp' && J().needsPlan(n)) act.append(el('div', { class: 'cm-live cm-appq' }, '💬 Its chapters are planned by your Claude app', el('span', { class: 'tiny' }, ' — copy the message in the 💬 bar into a Claude chat.')), el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => showApp(id) }, 'How? · by hand')));
           else if (pk.status === 'generating' || G().busy() === key) act.append(el('div', { class: 'cm-live' }, '⏳ Preparing… ', el('span', { class: 'tiny' }, live?.msg || '')), el('button', { class: 'btn small', onclick: () => { G().stop(); } }, '⏸ Pause'));
           else if (pk.status === 'paused' && pk.budgetHit) { const nb = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(Math.ceil((c.nodeBudget || 8) * 1.5)) }); act.append(el('p', { class: 'tiny' }, '💰 ' + (pk.error || 'The spending limit for this step was reached.')), el('label', { class: 'tiny' }, 'New limit $ ', nb), el('button', { class: 'btn primary', onclick: () => { G().request(c, id, { resume: true, raiseBudget: +nb.value || 0 }); showPanel(id); } }, '▶ Continue')); }
           else if (!n.reviewed && !c.autoApprove && pk.status !== 'failed') act.append(el('button', { class: 'btn primary', onclick: () => editStep(acc, cid, id, { mode: 'review', onDone: () => { drawMap(); showPanel(id); } }) }, '📝 Review & prepare this step'), tip('Before the material is generated you can check and change its chapters and goals. After that the chapters are fixed.'));
+          else if (c.provider === 'claudeapp') act.append(el('button', { class: 'btn primary', onclick: () => { G().toApp(c, id); showPanel(id); showApp(id); } }, '💬 Prepare it in my Claude app'), importBtn(acc, cid, id, () => { drawMap(); showPanel(id); }));
           else act.append(el('button', { class: 'btn primary', onclick: () => { G().request(c, id, { resume: true }); toast?.('⏳ Preparing “' + n.title + '” — it usually takes 5–30 minutes; you can study something else meanwhile.', 5000); showPanel(id); } }, pk.status === 'failed' ? '↻ Try again' : '⚡ Prepare this step now'),
-            pk.status === 'failed' ? el('p', { class: 'tiny cg-kstat bad' }, '⚠️ ' + pk.error) : null);
+            pk.status === 'failed' ? el('p', { class: 'tiny cg-kstat bad' }, '⚠️ ' + pk.error) : null, appWay());
           if (!st.mastered) act.append(el('button', { class: 'btn small', onclick: () => test(id) }, '🎓 I already know this'), tip('A 10-question test (from the step’s own exercises when it is prepared). 8 / 10 marks it mastered and opens the next steps.'));
           else if (st.how === 'test' || st.how === 'manual') act.append(el('button', { class: 'btn small ghost', onclick: () => { C().setMastered(acc, c, id, null); drawMap(); showPanel(id); } }, '↩ Undo “mastered”'));
         } else act.append(el('p', { class: 'cm-lock' }, '🔒 Locked. Master these first: ', ...missing.map((p, i) => [i ? ', ' : '', el('a', { href: '#', onclick: e => { e.preventDefault(); sel = p; drawMap(); showPanel(p); scrollToNode(p); } }, T(p))])));
@@ -582,7 +683,7 @@ window.NoemaCurMap = (() => {
         overlay((b2, close2) => {
           const pf = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} steps ahead` : 'only when I open a step'))); pf.value = String(c.prefetch ?? 3);
           const bud = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(c.nodeBudget || 8) });
-          const prov = el('select', { class: 'noema-input' }, el('option', { value: 'auto' }, 'Automatic'), el('option', { value: 'claude' }, 'Claude'), el('option', { value: 'gemini' }, 'Gemini')); prov.value = c.provider || 'auto';
+          const prov = el('select', { class: 'noema-input' }, el('option', { value: 'claudeapp' }, '💬 Claude app (your Claude plan)'), el('option', { value: 'auto' }, 'Automatic (API key here)'), el('option', { value: 'claude' }, 'Claude — API key'), el('option', { value: 'gemini' }, 'Gemini')); prov.value = c.provider || 'auto';
           const pause = el('input', { type: 'checkbox' }); pause.checked = G().paused();
           const review = el('input', { type: 'checkbox' }); review.checked = !c.autoApprove;
           b2.append(head('⚙️ ' + (c.title || c.goal), `${Object.keys(c.nodes).length} steps · built ${new Date(c.created).toLocaleDateString()}`),
@@ -590,7 +691,10 @@ window.NoemaCurMap = (() => {
               el('label', { class: 'tiny' }, review, ' Let me review each step before it is prepared (recommended)'),
               el('label', { class: 'tiny' }, pause, ' Pause preparing in the background on this device'), keysBox(acc)),
             el('div', { class: 'row noema-ovfoot' },
-              el('button', { class: 'btn primary', onclick: () => { const cur = C().get(acc, cid); cur.prefetch = +pf.value; cur.nodeBudget = Math.max(1, +bud.value || 8); cur.provider = prov.value; cur.autoApprove = !review.checked; C().save(acc, cur); G().setPaused(pause.checked); close2(); drawMap(); G().kick(); } }, 'Save'),
+              el('button', { class: 'btn primary', onclick: () => { const cur = C().get(acc, cid); cur.prefetch = +pf.value; cur.nodeBudget = Math.max(1, +bud.value || 8); cur.provider = prov.value; cur.autoApprove = !review.checked;
+                if (cur.provider !== 'claudeapp') for (const n of Object.values(cur.nodes)) if (n.pack?.status === 'app' && n.pack.auto) n.pack = { ...n.pack, status: null, queuedAt: null };   // queued ahead for the Claude app → prepared here now
+                if (cur.provider === 'claudeapp' && cur.status === 'building') cur.status = 'waiting';
+                C().save(acc, cur); G().setPaused(pause.checked); close2(); drawMap(); G().kick(); } }, 'Save'),
               el('button', { class: 'btn small', onclick: () => { const b = new Blob([JSON.stringify(C().get(acc, cid), null, 1)], { type: 'application/json' }); const a = el('a', { href: URL.createObjectURL(b), download: `curriculum-${cid}.json` }); document.body.append(a); a.click(); a.remove(); } }, '⬇️ Export'),
               el('button', { class: 'btn small ghost', onclick: () => { if (confirm('Delete this curriculum? The subjects already prepared stay in your subjects.')) { C().remove(acc, cid); close2(); close(); library(acc, { onStudy }); } } }, '🗑 Delete'),
               el('button', { class: 'btn small', onclick: close2 }, 'Close')));
@@ -618,9 +722,10 @@ window.NoemaCurMap = (() => {
         });
       }
       drawMap(); if (sel) { showPanel(sel); setTimeout(() => scrollToNode(sel), 60); } else { const first = C().nextUp(acc, c)[0]; if (first) setTimeout(() => scrollToNode(first), 60); }
+      if (appHelp) setTimeout(() => showApp(), 300);
       // live updates (statuses, preparation) — redraw at most twice a second
       let t = null; const redraw = () => { if (!box.isConnected) { offA(); offB(); return; } clearTimeout(t); t = setTimeout(() => { drawMap(); if (sel && panel.classList.contains('on')) showPanel(sel); }, 400); };
-      const offA = C().onChange(redraw), offB = G().onChange(redraw);
+      const offA = C().onChange(redraw), offB = G().onChange(redraw); const offC = J().App.onChange(() => { if (box.isConnected) drawBar(); else offC(); });
       scroller.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) { e.preventDefault(); zoomTo(zoom * (e.deltaY < 0 ? 1.1 : 0.9)); } }, { passive: false });
     });
   }

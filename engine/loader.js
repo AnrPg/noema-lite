@@ -652,11 +652,10 @@
   const sub = (...kids) => el('li', {}, ...kids);
   const plain = (...kids) => el('li', { class: 'cg-plain' }, ...kids);   // a form field inside a step (not numbered)
 
-  /** Way B (Claude app / website + connector): the steps and the two questions — used by ✨ Create with Claude and by ❓ Help. */
-  function claudeAppSteps(acc) {
+  /** Ways B and C, steps 1–4: a Claude account, code execution, the noema-lite connector, the optional skill. */
+  function claudeConnectSteps(acc) {
     const cloud = window.NoemaCloud && NoemaCloud.session();
     return [
-      el('ol', { class: 'cg-steps' },
         step('Create a Claude account', 'The Free plan works for small sources (a few pages). For whole books or many PDFs use Pro or Max: they allow much longer work.',
           sub('Open ', ext('https://claude.ai/', 'claude.ai'), ' — or install the Claude app for your computer or phone from ', ext('https://claude.ai/download', 'claude.ai/download'), '.'),
           sub('Click ', el('b', {}, 'Sign up'), ' and use your e-mail or Google account.'),
@@ -673,7 +672,13 @@
           sub('Click ', el('b', {}, 'Connect'), ': a noema-lite page opens → sign in with your cloud account → ', el('b', {}, 'Allow'), '.')) : null,
         step('Optional: add the skill', 'Not required: the connector already gives Claude the same instructions and tools. The skill only lets Claude start a little faster. Claude does not allow other websites to install skills into your account (a safety rule), so this one step is manual.',
           sub(el('a', { class: 'btn small', href: SKILL_URL, download: 'noema-pack-builder.zip' }, '⬇️ Download the skill'), ' (a .zip file — do not unzip it).'),
-          sub('In Claude: ', el('b', {}, 'Customize → Skills'), ' → ', el('b', {}, '+'), ' → ', el('b', {}, 'Create skill'), ' → ', el('b', {}, 'Upload a skill'), ' → choose the zip.')),
+          sub('In Claude: ', el('b', {}, 'Customize → Skills'), ' → ', el('b', {}, '+'), ' → ', el('b', {}, 'Create skill'), ' → ', el('b', {}, 'Upload a skill'), ' → choose the zip.'))].filter(Boolean);
+  }
+  /** Way B (Claude app / website + connector): the steps and the two questions — used by ✨ Create with Claude and by ❓ Help. */
+  function claudeAppSteps(acc) {
+    return [
+      el('ol', { class: 'cg-steps' },
+        ...claudeConnectSteps(acc),
         step('Ask Claude', 'Big sources take 10–40 minutes. You can watch Claude work; keep the chat open until it says the subject is saved.',
           sub(ext('https://claude.ai/new', 'Open a new chat')),
           sub('Attach your PDFs and pictures with the ', el('b', {}, '+'), ' (or 📎) button.'),
@@ -689,16 +694,43 @@
         el('p', {}, 'Yes: ', el('code', {}, MCP_URL || '(this installation has no website address)'), '. It points to the noema-lite website, so it is the same for every user and every device (Windows, Mac, Linux, phones).')),
     ];
   }
-  /** ❓ Help → “Set up Claude”: both ways, always available (the same steps as in ✨ Create with Claude). */
-  function claudeSetupView(acc = KV.acc) {
+  /** Way C (curricula with the Claude plan): the learner's Claude app runs the curriculum agents and prepares the steps. */
+  function claudeCurriculumSteps(acc) {
+    const lib = () => window.NoemaCurMap?.library(acc);
+    return [
+      el('p', { class: 'cg-recommend' }, '⭐ ', el('b', {}, 'Recommended for curricula — usually the cheapest way. '), 'A curriculum has many steps and each one becomes a full subject. With an API key (way A) every prepared step costs a few dollars, so 30–40 steps add up; with your Claude plan (Free, Pro or Max) there is nothing to pay beyond the plan. The difference grows with the size of the curriculum. The catch: your plan has usage limits, so a big curriculum may be prepared over a few days — prepare the next steps while you study the first ones.'),
+      el('ol', { class: 'cg-steps' },
+        ...claudeConnectSteps(acc),
+        step('Choose “Claude app” in noema-lite', 'It is preselected when you have a cloud account. Your curricula made with an API key can switch too: open the map → ⚙️ → AI for new steps; or send single steps with “💬 In my Claude app instead”.',
+          sub('Open ', el('button', { class: 'btn small', onclick: lib }, '🧭 Curricula'), ' → ', el('b', {}, '➕ New curriculum'), ' or ', el('b', {}, '📥 Import a map'), '.'),
+          sub('At “Which AI…?” choose ', el('b', {}, '💬 Claude app — with your Claude plan'), '.'),
+          sub('Press ', el('b', {}, 'Build'), ' / ', el('b', {}, 'Import'), '. Nothing runs in noema-lite: it waits for your Claude app.')),
+        step('Paste one message into a Claude chat', 'Claude asks the connector for the next task — the map’s agents, the chapter plans, then the queued steps — does it and saves it into your account. One step per chat keeps Claude fast and focused; for the next step paste the same message into a new chat.',
+          sub('In noema-lite press ', el('b', {}, '📋 Copy the message'), ' (on the waiting curriculum, in the 💬 bar of its map, or on a step).'),
+          sub(ext('https://claude.ai/new', 'Open a new chat'), ' — in the chat, make sure the noema-lite connector is on (', el('b', {}, '+ → Connectors'), ').'),
+          sub('Paste the message and send it. Claude works for a few minutes (the map) up to 10–40 minutes (a step with big files).')),
+        step('Come back to noema-lite', 'The app checks when you return to it and every 20 seconds while something waits. ⚡ on the map = ready to study.',
+          sub('What Claude saved appears by itself: the map, the chapters, the prepared steps.'),
+          sub('No connector (or no cloud account)? Press ', el('b', {}, 'How? · by hand'), ': copy a task into any Claude chat and paste the answer back; for a step, download its bundle (task + your files + toolkit), give it to Claude, and import the .noema.zip it makes with ', el('b', {}, '📥 Import its package'), '.'))),
+      el('details', { class: 'cg-faq' }, el('summary', {}, '❓ Which way should I choose?'),
+        el('ul', {}, el('li', {}, el('b', {}, 'C (Claude plan): '), 'cheapest for curricula, best for big ones; you paste a message per step and the plan’s limits set the pace.'),
+          el('li', {}, el('b', {}, 'A (API key): '), 'fully automatic — steps are prepared in the background while the app is open; you pay per step (you set a limit).'),
+          el('li', {}, el('b', {}, 'Gemini (free key): '), 'free and automatic, simpler subjects (no web pictures).'),
+          el('li', {}, 'You can mix them: switch a curriculum in ⚙️, or send single steps to the Claude app.'))),
+    ];
+  }
+  /** ❓ Help → “Set up Claude”: all ways, always available (the same steps as in ✨ Create with Claude). open: 'A' | 'B' | 'C' */
+  function claudeSetupView(acc = KV.acc, { open = 'A' } = {}) {
     const wrap = el('div', { class: 'cg-setup' });
     const A = window.NoemaClaude ? claudeKeySteps(acc) : null;
     wrap.append(
-      el('details', { class: 'cg-way', open: true }, el('summary', {}, el('b', {}, '🏠 A. Here in noema-lite — with a Claude API key'), el('span', { class: 'tiny' }, ' · you pay Anthropic per use; everything happens in this app')),
+      el('details', { class: 'cg-way', open: open === 'A' }, el('summary', {}, el('b', {}, '🏠 A. Here in noema-lite — with a Claude API key'), el('span', { class: 'tiny' }, ' · you pay Anthropic per use; everything happens in this app')),
         A ? el('ol', { class: 'cg-steps' }, ...A.steps) : el('p', {}, 'This installation has no Claude module.'),
         el('div', { class: 'row' }, el('button', { class: 'btn ai', onclick: () => claudeGuide(acc, { way: 'A' }) }, '✨ Create a subject this way'), el('button', { class: 'btn small', onclick: () => window.NoemaCurMap?.library(acc) }, '🧭 Curricula (use the same key)'))),
-      el('details', { class: 'cg-way' }, el('summary', {}, el('b', {}, '💬 B. In the Claude app or website — with the noema-lite connector'), el('span', { class: 'tiny' }, ' · uses your Claude plan; the subject arrives here by itself')),
-        ...claudeAppSteps(acc)));
+      el('details', { class: 'cg-way', open: open === 'B' }, el('summary', {}, el('b', {}, '💬 B. In the Claude app or website — with the noema-lite connector'), el('span', { class: 'tiny' }, ' · uses your Claude plan; the subject arrives here by itself')),
+        ...claudeAppSteps(acc)),
+      el('details', { class: 'cg-way cg-way-c', open: open === 'C' }, el('summary', {}, el('b', {}, '🧭 C. Curricula with your Claude plan — the Claude app plans and prepares the steps'), el('span', { class: 'cg-badge' }, '⭐ recommended for curricula · usually cheapest'), el('span', { class: 'tiny' }, ' · no API cost; results arrive here by themselves')),
+        ...claudeCurriculumSteps(acc)));
     return wrap;
   }
   /** Way A, steps 1–4 (Console account, credit, API key, paste + check) — used by ✨ Create with Claude and by ❓ Help. */
@@ -763,7 +795,9 @@
             el('button', { class: 'cg-choice', onclick: wayA }, el('span', { class: 'cg-ico' }, '🏠'), el('b', {}, 'A. Here in noema-lite'),
               el('ul', {}, el('li', {}, 'You never leave this app'), el('li', {}, 'Needs a Claude API key: you pay Anthropic per use (a few dollars per subject — you see the cost live and set a limit)'), el('li', {}, 'Simplest: everything happens on this page'))),
             el('button', { class: 'cg-choice', onclick: wayB }, el('span', { class: 'cg-ico' }, '💬'), el('b', {}, 'B. In the Claude app or website'),
-              el('ul', {}, el('li', {}, 'Uses your Claude plan (Free, Pro or Max) — no extra cost'), el('li', {}, 'You chat with Claude there; the finished subject arrives here by itself'), el('li', {}, 'Best for very big sources (Pro / Max)')))),
+              el('ul', {}, el('li', {}, 'Uses your Claude plan (Free, Pro or Max) — no extra cost'), el('li', {}, 'You chat with Claude there; the finished subject arrives here by itself'), el('li', {}, 'Best for very big sources (Pro / Max)'))),
+            el('button', { class: 'cg-choice cg-choice-c', onclick: wayC }, el('span', { class: 'cg-ico' }, '🧭'), el('b', {}, 'C. A whole curriculum with your Claude plan'), el('span', { class: 'cg-badge' }, '⭐ usually cheapest'),
+              el('ul', {}, el('li', {}, 'A map of steps (from a goal, or your own map + files); every step becomes a subject'), el('li', {}, 'Your Claude app plans and prepares the steps — no API cost'), el('li', {}, 'The bigger the curriculum, the bigger the saving')))),
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       };
       const back = () => el('button', { class: 'btn small ghost cg-back', onclick: home }, '← Back');
@@ -861,6 +895,12 @@
         if (start || job.status === 'running') go((k, o) => C.run(job, k, o));
       }
 
+      /* ---------- C: curricula with the Claude plan ---------- */
+      function wayC() {
+        box.innerHTML = '';
+        box.append(back(), brandHead('🧭 A curriculum with your Claude plan', 'Steps 1–4 are needed only the first time (the same as way B).'), ...claudeCurriculumSteps(acc),
+          el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+      }
       /* ---------- B: the Claude app / website + connector ---------- */
       function wayB() {
         box.innerHTML = '';
@@ -868,7 +908,7 @@
           ...claudeAppSteps(acc),
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
       }
-      if (way === 'A') wayA(); else if (way === 'B') wayB(); else home();
+      if (way === 'A') wayA(); else if (way === 'B') wayB(); else if (way === 'C') wayC(); else home();
     });
   }
 
@@ -895,7 +935,7 @@
       box.append(brandHead('🔗 Connect Claude to noema-lite', who ? 'Signed in as ' + who : ''),
         el('div', { class: 'noema-form' },
           el('p', {}, el('b', {}, det?.client?.client_name || 'Claude'), ' wants to use your noema-lite account.'),
-          el('ul', { class: 'noema-consent' }, el('li', {}, '✅ list your subjects'), el('li', {}, '✅ create and update your private subject packs'),
+          el('ul', { class: 'noema-consent' }, el('li', {}, '✅ list your subjects'), el('li', {}, '✅ create and update your private subject packs'), el('li', {}, '✅ read your curricula and send their map, chapter plans and prepared steps (you see them arrive in noema-lite)'),
             el('li', {}, '🚫 it gets only the connector’s tools: no access to your conversations, progress or keys through them')),
           back ? el('p', { class: 'tiny' }, 'After approving you return to ', el('b', {}, back), '.') : null,
           el('div', { class: 'row' }, el('button', { class: 'btn', onclick: e => go('deny', e.currentTarget) }, 'Deny'), el('button', { class: 'btn primary', onclick: e => go('approve', e.currentTarget) }, 'Allow'))));
@@ -991,7 +1031,7 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView, claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
@@ -1019,7 +1059,7 @@
     if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);   // already in the pickers: curricula and shares change keys there
     Notes.start(acc.id);
-    try { window.NoemaCurriculum?.Gen.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background
+    try { window.NoemaCurriculum?.Gen.start(acc.id); window.NoemaCurJobs?.App.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background; picks up what the Claude app did
     const subs = await subjectsFor(acc.id);
     let meta = subs.find(s => s.id === (url.get('subject') || (cur.acc === acc.id ? cur.subj : null)));
     const settings = jget(KV.accountKey('settings'), {});

@@ -66,7 +66,8 @@ function start({ port = 54321, staticDir = null, configOverride = null, maxObjec
       if (p === '/rest/v1/noema_profiles') { (data || []).forEach(r => { if (r.user_id !== uid) return; profiles[uid] = r; }); return json(res, 201); }
       if (p === '/rest/v1/noema_kv') {
         kv[uid] = kv[uid] || {};
-        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => !q('key') || key === decodeURIComponent(q('key'))).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
+        const kq = u.searchParams.get('key') || '', likeRe = /^like\./.test(kq) ? new RegExp('^' + kq.slice(5).replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$') : null;   // PostgREST like.<pattern> (* = %)
+        if (req.method === 'GET') return json(res, 200, Object.entries(kv[uid]).filter(([key]) => likeRe ? likeRe.test(key) : !q('key') || key === decodeURIComponent(q('key'))).sort(([a], [b]) => a < b ? -1 : 1).map(([key, v]) => ({ key, value: v.value, updated_at: v.updated_at })));
         if (req.method === 'POST') { for (const r of data) { if (r.user_id !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); kv[uid][r.key] = { value: r.value, updated_at: r.updated_at }; } return json(res, 201); }
         if (req.method === 'DELETE') { const k = decodeURIComponent(q('key')); delete kv[uid][k]; return json(res, 204); }
       }

@@ -116,7 +116,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   await p.evaluate(() => openAccountMenu('help')); await wait(500);
   await p.click('summary:has-text("Set up Claude and create subjects")'); await wait(500);
   const cs = await p.locator('.claudesetup').innerText();
-  ok(await p.locator('.claudesetup .cg-way').count() === 2 && /Create a Claude Console account/.test(cs) && /Create an API key/.test(cs) && /Paste the key here/.test(cs), 'way A: the same numbered steps as in ✨ Create with Claude (account, credit, key, paste & check)');
+  ok(await p.locator('.claudesetup .cg-way').count() === 3 && /recommended for curricula/.test(cs) && /Create a Claude Console account/.test(cs) && /Create an API key/.test(cs) && /Paste the key here/.test(cs), 'way A: the same numbered steps as in ✨ Create with Claude (account, credit, key, paste & check)');
   await p.click('.claudesetup .cg-way >> nth=1 >> summary'); await wait(200);
   const cs2 = await p.locator('.claudesetup').innerText();
   ok(/Customize → Connectors/.test(cs2) && cs2.includes(BASE + '/mcp') && /Switch on “Code execution”/.test(cs2) && /Download the skill/.test(cs2), 'way B: code execution, the connector (with its address), the skill and the prompt');

@@ -173,6 +173,41 @@ Steps **without** files are researched as before.
 **✨ Let the AI read it** — for anything else (prose, an unusual JSON): the same structure (`S_IMPORT`), checked like every
 agent answer: titles only from the map, none missing, refs valid, acyclic; file names / pages it finds are kept.
 
+## 7. 💬 With the Claude app — the learner's Claude plan (`engine/curjobs.js`)
+
+Choose **💬 Claude app — with your Claude plan** when creating or importing a curriculum (preselected for cloud accounts,
+marked *recommended, usually cheaper*), or switch a curriculum in ⚙️, or send single steps with **💬 In my Claude app
+instead**. Nothing then runs in noema-lite: the learner's own Claude (Claude app / claude.ai, Free · Pro · Max) does the
+work through the connector, and the results arrive by themselves. Why: a curriculum has many steps and each is a full
+subject — a few dollars each with an API key, nothing extra with the plan; the saving grows with the curriculum (the plan's
+usage limits may spread a big one over days).
+
+| work | when | how Claude gets it | the answer |
+|---|---|---|---|
+| **map** — agents 1 · 1b · 2 | a new curriculum (stage `dag` → `audit` → `expand`), status `waiting` | `noema_curriculum_task`: the agent's own prompt + JSON Schema | `noema_curriculum_submit` |
+| **plan** — agent 3, batches of 5 | steps without chapters (imported maps; ✨ re-plan / ➕ step without a key → `replan` + the wish) | the planner's prompt + the steps' own files (pages, outline) | same |
+| **step** | a step in the queue: `pack.status = 'app'` (sent from the map, or *prepare ahead* for a Claude-app curriculum) | the brief, the subject id (`packId`), signed links to the learner's files (big files in parts) | the pack, saved with `noema_start_upload` → `noema_finish_upload` |
+
+* **One code path.** Tasks, the checks of an answer (JSON Schema + the agents' semantic rules) and how an answer changes the
+  curriculum are `engine/curjobs.js` + `engine/curriculum.js`; the connector bundles the same files, so a Claude-app answer
+  is held to exactly the rules of an in-app agent, and wrong answers go back to Claude with the list of problems.
+* **The inbox.** The connector never writes the curriculum record (the app may be changing it). Each accepted answer is a KV
+  row `a:curin:<cid>:<seq>`; the connector works on the curriculum *as it will be* (the record + its inbox, in order).
+  The app (`NoemaCurJobs.App`) reads the inbox when it comes back to the front and every 20 s while something waits,
+  checks each answer again, applies it, pushes the curriculum to the cloud and only then deletes the rows (so the connector
+  always sees one or the other). A finished step: the app downloads the pack (pictures embedded), marks the step ⚡ and
+  syncs the file index the connector wrote. Inbox rows are never mirrored into the device's KV.
+* **The map** shows a 💬 bar (*N to plan · M to prepare* → 📋 Copy the message · How? · by hand); 💬 on steps waiting for the
+  Claude app; the step panel offers the message, “by hand”, 📥 Import its package and ↩ Not now. A Claude-app curriculum
+  is usable as soon as its graph exists; steps get their plans as they arrive.
+* **The learner's files.** Step tasks carry signed links to the curriculum's stored files; when Claude packages the same
+  file (same SHA-256), `noema_finish_upload` does not ask for it again and the step's source links to the curriculum's copy.
+* **Without the connector** (or without a cloud account): *How? · by hand* — 📋 Copy the task (the same text, “answer with the
+  JSON only”), paste Claude's answer (problems listed, 📋 copy them back to Claude); for steps ⬇️ a bundle
+  (`TASK.md` + `files/` + the toolkit zip) and 📥 Import its package (`.noema.zip` / `.json`, stored under the step's id).
+* **Set up:** ❓ Help → Set up Claude → **C** (also ✨ Create with Claude → C): the connector steps of way B, then “choose
+  💬 Claude app → paste the message → come back”, with a comparison of the ways.
+
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
 repaired graph, 25-node map in three parts, locked/open, chapter details, background preparation of the
@@ -180,6 +215,9 @@ next 2 steps by Claude skill jobs (web search + fetch), cloud storage and sync, 
 engine, automatic mastery, placement test unlocking the next step and undo, phone layout, the Gemini path
 (stop + resume without redoing agents, Google Search research, repaired chapter, 4-chapter subject with
 drawn diagrams and listed sources). `engine/packcheck.js` is also the connector's pack gate.
+`tests/curriculum_app.js`: §7 end to end — the connector (run in-process as the learner's Claude) builds a curriculum's map
+(a wrong answer sent back), plans it in batches, prepares a reviewed step; an imported map with a PDF (signed link, the same
+file not uploaded twice); copy / paste, a step bundle and its package; re-plan with a wish; Set up Claude → C; phone.
 `tests/curriculum_import.js`: the parser (tree art, nesting + independent, Mermaid, ⇄, JSON, Greek outline, loops, file
 matching), then in the browser: a pasted tree with two files → only the planner runs (with the files' pages, outline and
 first lines) → a step with a PDF built by Claude from the uploaded file (no web_fetch, packaged back as its source) → a

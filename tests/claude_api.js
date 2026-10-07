@@ -89,7 +89,7 @@ function messages(body, res, J) {
 
   console.log('— the guide: two ways');
   await p.click('.noema-ovfoot button:has-text("Create with Claude")'); await wait(400);
-  ok(await p.locator('.cg-choice').count() === 2, 'two ways are offered: A here in noema-lite, B in the Claude app');
+  ok(await p.locator('.cg-choice').count() === 3 && /usually cheapest/.test(await p.locator('.cg-choice-c').innerText()), 'three ways are offered: A here in noema-lite, B in the Claude app, C a whole curriculum with the Claude plan (⭐ usually cheapest)');
   await p.screenshot({ path: SHOTS + '/c0_ways.png' });
   await p.click('.cg-choice:has-text("In the Claude app")'); await wait(300);
   const b = await p.locator('.noema-ovbox').last().innerText();

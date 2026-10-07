@@ -110,6 +110,22 @@ that every file the user gave you (or each of its parts) is there.
 - **Without it** (or if the upload fails): give the user the **`<id>.noema.zip` package** and tell them:
   *noema-lite → subject picker → 📥 Import subject pack* (choose the .zip — the source files come with it).
 
+## Curricula: steps, maps and chapter plans (noema-lite connector)
+A noema-lite **curriculum** is a map of steps; every step becomes a subject pack. When the learner asks you to work on one
+(“prepare the next step of my curriculum…”, or the prompt *Work on my noema-lite curriculum*):
+1. `noema_curricula` shows what waits; `noema_curriculum_task(curriculum_id)` returns the next task as complete instructions.
+2. **Map / chapter-plan tasks** (agents of the curriculum): think it through, then `noema_curriculum_submit(curriculum_id,
+   task_id, result_json)` with ONE JSON object matching the task's schema. It is checked like the app's own agents — fix
+   every listed problem and submit again. Then ask for the next task.
+3. **Step tasks**: build ONE pack exactly as this skill describes, with the given `subject_id` (start_subject.py with that id),
+   one chapter per planned chapter (same order and titles), from the learner's files when the task gives download links
+   (`curl` them into `work/<id>/sources/`; when only some pages belong to the step, split those pages out) — otherwise
+   researched from authoritative sources. Save it with `noema_start_upload` → `noema_finish_upload` (the learner's own
+   files are recognised by their SHA-256 and not uploaded again). The step then appears ready on the learner's map.
+4. One step per chat unless the learner asked for more; after each saved step, `noema_curriculum_task` again if so.
+Without the connector the learner gives you a step bundle (`TASK.md` + `files/` + this toolkit): follow TASK.md and hand
+back `<subject_id>.noema.zip`.
+
 ## Updating an existing subject (additive only)
 Get the current pack (`noema_get_pack_url`, or the package / file the user gives you), then
 `python3 scripts/unpack.py PACK.noema.zip|PACK.json work` (a package gives back its source files too; from a .json

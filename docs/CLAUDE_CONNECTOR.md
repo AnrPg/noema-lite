@@ -1,4 +1,4 @@
-# Create subjects with Claude — two ways
+# Create subjects (and curricula) with Claude — three ways
 
 Every user can turn their own sources into a noema-lite subject with Claude. The app (✨ **Create with
 Claude**) offers two ways, each explained as numbered steps with sub-steps and ⓘ tips, starting from
@@ -82,6 +82,20 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   `noema_start_source_upload` (one extra file). Prompt `create_subject` (claude.ai: **+ → noema-lite → Create a noema-lite subject**).
 * Without the connector: Claude hands over the package `<id>.noema.zip` → 📥 Import subject pack (pack + source files).
 
+## C. Curricula with the Claude plan (connector)
+
+The same connector lets the learner's Claude do a **curriculum's** work — the four agents, the chapter plans and the
+steps — with the learner's Claude plan instead of API credit (docs/CURRICULUM.md §7). Tools: `noema_curricula` (what
+waits), `noema_curriculum_task` (the next task as complete instructions: agent prompt + JSON Schema, or a step's brief +
+subject id + signed links to the learner's files), `noema_curriculum_submit` (checked with the app's own validators;
+problems come back to fix). Prompt `curriculum_work`. A step is saved with the usual upload; `noema_finish_upload`
+recognises a curriculum step by its subject id, registers it with its curriculum and node, links packaged files that are
+the learner's own (same SHA-256) instead of asking for them again, and tells the app through the inbox.
+The connector runs the app's own code for this (`engine/llm.js`, `curriculum.js`, `curjobs.js`, bundled by
+`tools/build.py` → `MCP_ENGINE`), so tasks, checks and results are identical to the in-app agents.
+In noema-lite: ❓ Help → Set up Claude → **C** (⭐ recommended for curricula — usually the cheapest), and the
+“💬 Claude app” choice when creating or importing a curriculum.
+
 ## One-time setup (owner)
 
 1. **Supabase → Authentication → OAuth Server**: enable the OAuth 2.1 server, turn on **dynamic client
@@ -100,3 +114,6 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
   (numbered steps, tips, FAQ), phone layout, `/api/img` safety.
 * `tests/connector.js` — way B: 401 + resource metadata, protocol, every tool, toolkit + prompt,
   upload → check → register, refusal of broken packs, consent page, the subject in the picker.
+* `tests/curriculum_app.js` — way C: a curriculum built and planned by the connector as the learner's Claude (wrong
+  answers sent back, the inbox, the app applying it), a step prepared and picked up, the learner's PDF by signed link and
+  not uploaded twice, the by-hand path (copy / paste, step bundle, 📥 package), Set up Claude → C, phone.
