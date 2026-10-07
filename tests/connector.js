@@ -49,6 +49,13 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const pg = await call({ jsonrpc: '2.0', id: 5, method: 'prompts/get', params: { name: 'create_subject', arguments: { title: 'Heart', language: 'el' } } }, T);
   ok(/"Heart"/.test(pg.json?.result?.messages?.[0]?.content?.text) && /noema_get_toolkit/.test(pg.json.result.messages[0].content.text), 'prompts/get fills in the title and tells Claude how to work without the skill');
 
+  console.log('— uploading an original source file');
+  const ss = (await tool('noema_start_source_upload', { subject_id: 'physics-by-claude', source_id: 'part1', filename: 'Κεφ 5 βιβλίο.pdf' })).content[0].text;
+  const surl = ss.match(/https?:\/\/\S+upload\/sign\S+/)[0];
+  const up = await fetch(surl, { method: 'PUT', headers: { 'x-upsert': 'true', apikey: 'k' }, body: Buffer.from('%PDF-1.4 x') });
+  const me = Object.values(srv.state.users).find(u => u.email === 'claude-user@example.com').id;
+  ok(up.ok && Object.keys(srv.state.files).includes(`${me}/sources/physics-by-claude/part1/file.pdf`) && /Κεφ 5 βιβλίο\.pdf/.test(srv.state.kv[me]?.['a:srcfiles:physics-by-claude']?.value || ''), 'source files: signed upload (ASCII storage path) + registered in the synced index with the original name');
+
   console.log('— saving a pack');
   const fx = path.join(ROOT, 'tests/fixtures/demo-physics');
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));

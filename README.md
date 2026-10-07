@@ -44,7 +44,9 @@ python3 tools/db_restore.py list        # what the database holds; restore files
 
 ## Two ways to study
 * **📚 Subjects** — ready-made courses made from sources (below).
-* **🧭 Curricula** — type a goal; four AI agents map every prerequisite, the whole goal and its applications as a graph of steps; each step becomes a full subject, prepared on demand from official sources and kept for good. Steps open when their prerequisites are mastered. See docs/CURRICULUM.md.
+* **🧭 Curricula** — type a goal; four AI agents map every prerequisite, the whole goal and its applications as a graph of steps; each step becomes a full subject, prepared on demand from official sources and kept for good. Steps open when their prerequisites are mastered; you review (and may change) each step before it is generated, and can edit, add or remove steps. See docs/CURRICULUM.md.
+
+Every chapter shows the sources it comes from; the original files (PDFs, slides, documents, e-books, spreadsheets, videos…) open inside the app at the cited page — see docs/SOURCES.md. Any subject can be renamed, described, hidden or deleted (✏️ on its chip).
 
 ## Adding a subject (through Claude)
 In the app: **✨ Create with Claude** — any user can do it, two ways (docs/CLAUDE_CONNECTOR.md): **A.** here in the app with their own Claude API key (the app uploads the skill, runs Claude and imports the result), or **B.** in the Claude app/website with their Claude plan + the noema-lite connector. Finished subjects can be shared: 🔗 on a subject → public (🌍 Explore) or to one person (🔔), see docs/SHARING.md. Or, for the shared library:

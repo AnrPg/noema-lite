@@ -53,6 +53,8 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_start_upload', description: 'Step 1 of saving a pack built in your sandbox: returns a signed URL (valid 2 h) and the exact curl command to PUT the .json file to it. Then call noema_finish_upload.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string', description: 'pack.subject.id' } }, required: ['subject_id'] } },
+  { name: 'noema_start_source_upload', description: 'Upload an ORIGINAL SOURCE FILE (the PDF, slides, document… the user gave you) so the learner can open it inside noema-lite (👁 preview, jump to the cited page). Call once per file-based source, with the source id used in sources.json; returns a signed URL + curl command. Do it before noema_finish_upload.',
+    inputSchema: { type: 'object', properties: { subject_id: { type: 'string' }, source_id: { type: 'string', description: 'the id in sources.json' }, filename: { type: 'string', description: 'original file name, e.g. ecb-ch5.pdf' } }, required: ['subject_id', 'source_id', 'filename'] } },
   { name: 'noema_finish_upload', description: 'Step 2: checks the uploaded pack and adds it to the user’s subject picker. Returns errors to fix (then upload again) or a summary.',
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] } },
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
@@ -106,6 +108,21 @@ async function callTool(name, args, ctx) {
       const r = await sb(`/storage/v1/object/upload/sign/${base}${sid}.json`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
       const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
       return text(`Upload URL (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "Content-Type: application/json" -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @/path/to/${sid}.json "${u}"\n\nThen call noema_finish_upload with subject_id "${sid}". If the sandbox cannot reach the internet, give the user the .json file instead (they import it with 📥 Import subject pack).`);
+    }
+    case 'noema_start_source_upload': {
+      const src = String(args?.source_id || '').trim(), fname = String(args?.filename || '').trim().split(/[\\/]/).pop();
+      if (!ID_RE.test(sid)) return fail('subject_id: lowercase letters, digits, hyphens');
+      if (!/^[\w.-]{1,60}$/.test(src) || !fname) return fail('source_id (as in sources.json) and filename are required');
+      const ext = ((fname.toLowerCase().match(/\.([a-z0-9]{1,8})$/) || [])[1] || 'bin');
+      const path = `${uid}/sources/${sid}/${src.replace(/[^a-zA-Z0-9_-]/g, '_')}/file.${ext}`;
+      const r = await sb(`/storage/v1/object/upload/sign/noema-private/${path}`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
+      const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
+      // register it in the learner's synced index (a:srcfiles:<subject>) so every device shows 👁 for this source
+      const key = 'a:srcfiles:' + sid; const cur = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []);
+      let ix = {}; try { ix = JSON.parse(cur?.[0]?.value || '{}'); } catch (e) { }
+      ix[src] = { name: fname, type: '', size: 0, added: new Date().toISOString(), cloud: true, via: 'claude' };
+      await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
+      return text(`Upload URL for source "${src}" (valid 2 h):\n${u}\n\nRun in your sandbox:\ncurl -sS -X PUT -H "x-upsert: true" -H "apikey: ${CFG.supabaseKey}" --data-binary @"/path/to/${fname}" "${u}"`);
     }
     case 'noema_finish_upload': {
       if (!ID_RE.test(sid)) return fail('bad subject_id');

@@ -173,7 +173,41 @@
     imported.forEach(p => { const m = p.subject; const extra = jget(KV.accountKey('packmeta:' + m.id, acc), null) || {}; if (!list.some(s => s.id === m.id)) list.push({ ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner }); });
     // imported packs known from synced metadata (e.g. imported on another device, stored in the cloud)
     ls.keys(`${P}${acc}:a:packmeta:`).forEach(k => { const m = jget(k, null); if (m && !list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported' }); });
-    return list.map(s => ({ ...s, hidden: hidden.has(s.id) }));
+    return list.map(s => ({ ...s, ...subjOverride(acc, s.id), hidden: hidden.has(s.id) }));
+  }
+  /* ---------- your own name / description for any subject (synced; the pack itself is not changed) ---------- */
+  function subjOverride(acc, id) { const o = jget(KV.accountKey('subjoverride:' + id, acc), null); if (!o) return {}; const r = {}; if (o.title) r.title = o.title; if (o.description != null) r.description = o.description; if (o.emoji) r.emoji = o.emoji; return r; }
+  function setSubjOverride(acc, id, o) { const k = KV.accountKey('subjoverride:' + id, acc); const cur = jget(k, {}) || {}; const next = { ...cur, ...o }; Object.keys(next).forEach(x => (next[x] === '' || next[x] == null) && delete next[x]); if (Object.keys(next).length) KV.set(k, JSON.stringify(next)); else KV.del(k); }
+  function setHidden(acc, id, hide) { const k = KV.accountKey('settings', acc); const st = jget(k, {}); const h = new Set(st.hiddenSubjects || []); hide ? h.add(id) : h.delete(id); st.hiddenSubjects = [...h]; KV.set(k, JSON.stringify(st)); }
+  /** Delete a subject that belongs to this account (imported / made with Claude / shared with you / from Explore / a curriculum step):
+      this device, the cloud copy, its metadata and source files. Progress is kept (it returns if the pack is imported again). */
+  async function deleteSubject(acc, s) {
+    await IDB.del('packs', acc + '|' + s.id).catch(() => { });
+    KV.del(KV.accountKey('packmeta:' + s.id, acc)); KV.del(KV.accountKey('subjoverride:' + s.id, acc));
+    if (isCloudAcc(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/packs/${s.id}.json`]).catch(e => console.warn('[delete subject]', e));
+    if (window.NoemaSrcFiles) await NoemaSrcFiles.removeAll(acc, s.id).catch(() => { });
+    if (s.curriculum && window.NoemaCurriculum) { const c = NoemaCurriculum.get(acc, s.curriculum); if (c?.nodes[s.node]) { c.nodes[s.node].pack = null; NoemaCurriculum.save(acc, c); } }
+    if (window.NOEMA_PACKS) delete window.NOEMA_PACKS[s.id];
+  }
+  /** ✏️ Edit a subject: name, description, hide, delete (and share for your own). */
+  function editSubject(acc, s, { onChange } = {}) {
+    const own = s.origin !== 'library' && s.origin !== 'private';
+    overlay((box, close) => {
+      const title = el('input', { class: 'noema-input', value: s.title, maxlength: '90', 'aria-label': 'Name' });
+      const desc = el('textarea', { class: 'noema-input', rows: 3, maxlength: '400', placeholder: 'A line about this subject (shown in the subject list)', 'aria-label': 'Description' }); desc.value = s.description || '';
+      const done = () => { close(); onChange?.(); };
+      box.append(brandHead(`${s.emoji || '📘'} Edit “${s.title}”`, s.origin === 'library' ? 'A library subject: your name and description are only for you.' : 'Only you see these changes.'),
+        el('div', { class: 'noema-form' }, el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'Description', desc),
+          el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: () => { const t = title.value.trim(); if (!t) { title.focus(); return; } setSubjOverride(acc, s.id, { title: t === (s._origTitle || '') ? '' : t, description: desc.value.trim() }); toastL('✔ Saved'); done(); } }, 'Save'),
+            jget(KV.accountKey('subjoverride:' + s.id, acc), null) ? el('button', { class: 'btn small ghost', onclick: () => { KV.del(KV.accountKey('subjoverride:' + s.id, acc)); toastL('↩ Original name and description restored'); done(); } }, '↩ Restore the original') : null)),
+        el('div', { class: 'nx-sec' }, el('h4', {}, '🙈 Remove from my list'), el('p', { class: 'tiny' }, 'Hides the subject from the subject list (your progress stays). Bring it back in ⚙️ → Subjects.'),
+          el('button', { class: 'btn small', onclick: () => { setHidden(acc, s.id, true); toastL('🙈 Hidden — ⚙️ → Subjects brings it back'); done(); } }, '🙈 Hide')),
+        own ? el('div', { class: 'nx-sec' }, el('h4', {}, '🗑 Delete'), el('p', { class: 'tiny' }, 'Deletes the subject from this device and your cloud account, with its attached source files. Your progress is kept, so importing it again brings everything back.'),
+          el('button', { class: 'btn small danger', onclick: async () => { if (!confirm(`Delete “${s.title}”? This cannot be undone (progress is kept).`)) return; await deleteSubject(acc, s); toastL('🗑 Deleted'); done(); if (KV.subj === s.id) Noema.switchTo(acc, null); } }, '🗑 Delete the subject')) : null,
+        own ? el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => { close(); shareDialog(acc, s); } }, '🔗 Share or make public')) : null,
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+      setTimeout(() => title.focus(), 150);
+    });
   }
   function countPack(p) { const ch = p.chapters || []; return { chapters: ch.length, sections: ch.reduce((a, c) => a + c.sections.length, 0), exercises: ch.reduce((a, c) => a + c.exercises.length, 0) }; }
   function subjectProgress(acc, s) {
@@ -309,8 +343,8 @@
               el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
                 const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
                   el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
-                if (s.origin === 'library') return chip;
-                return el('span', { class: 'noema-chipwrap' }, chip, el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
+                const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange: async () => { const fresh = (await subjectsFor(acc)).filter(x => !x.hidden && !x.curriculum); subs.length = 0; subs.push(...fresh); draw(); } }); } }, '✏️');
+                return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
           });
           if (!n) list.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '📭'), el('p', {}, subs.length ? 'No subject matches.' : 'No subjects yet. Tap ✨ Create with Claude: your sources become a full study pack.')));
         };
@@ -690,7 +724,9 @@
           status.textContent = { starting: '⏳ Preparing…', running: running ? '🧠 Claude is working… keep this page open.' : '⏸️ Paused.', paused: '⏸️ ' + (j.error || 'Paused.'), question: '💬 Claude needs an answer:', budget: '💰 ' + j.error, error: '⚠️ ' + j.error, failed: '❌ ' + j.error, done: '✅ Your subject is ready!' }[j.status] || j.status;
           actions.innerHTML = ''; ask.innerHTML = '';
           if (running) actions.append(el('button', { class: 'btn', onclick: () => ctl?.abort() }, '⏹ Stop'));
-          else if (j.status === 'done') actions.append(el('button', { class: 'btn primary', onclick: async () => { try { const s = await importPack(acc, j.pack, { via: 'claude-api' }); await C.deleteJob(j.id); toastL(`📥 “${s.title}” added to your subjects`); done(s); } catch (e) { toastL('⚠️ ' + e.message, 5000); } } }, '📚 Open my new subject'));
+          else if (j.status === 'done') actions.append(el('button', { class: 'btn primary', onclick: async () => { try { const s = await importPack(acc, j.pack, { via: 'claude-api' });
+            if (window.NoemaSrcFiles && j.sourceBlobs?.length) { const pairs = NoemaSrcFiles.match(j.pack.sources?.sources || [], j.sourceBlobs); for (const [src, f] of pairs) await NoemaSrcFiles.put(acc, j.pack.subject.id, src.id, f).catch(e => console.warn('[source files]', e)); if (pairs.length) toastL(`📎 ${pairs.length} source file(s) attached — open them with 👁 in 📚 Sources`, 4000); }
+            await C.deleteJob(j.id); toastL(`📥 “${s.title}” added to your subjects`); done(s); } catch (e) { toastL('⚠️ ' + e.message, 5000); } } }, '📚 Open my new subject'));
           else if (j.status === 'question') {
             const ans = el('textarea', { class: 'noema-input', rows: 3, placeholder: 'Your answer (or just press Send: “continue and finish the pack”)' });
             ask.append(el('div', { class: 'cg-claudesays' }, j.question), ans, el('button', { class: 'btn primary', onclick: () => go((k, o) => C.answer(j, k, ans.value.trim() || 'Continue and finish the pack.', o)) }, 'Send'));
@@ -870,12 +906,13 @@
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, overlay, claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
     share(s) { return shareDialog(Noema.account.id, s); },
+    editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
     curricula() { return window.NoemaCurMap?.library(Noema.account.id); }, curriculumMap(cid, focus) { return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, infoCard, packInfo,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
-    switchTo(acc, subj) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); location.hash = ''; location.reload(); },
+    switchTo(acc, subj) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname); return; } location.hash = ''; location.reload(); },   // a ?subject= link must not win over the new choice
     async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s && s.id !== Noema.subject.id) Noema.switchTo(Noema.account.id, s.id); },
     async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== Noema.account.id) Noema.switchTo(a.id, null); },
   };
@@ -913,10 +950,11 @@
     }
     let pack;
     try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
-    Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject);
+    Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject, subjOverride(acc.id, pack.subject.id));
     Noema.node = pack.curriculum || (meta.curriculum ? { id: meta.curriculum, node: meta.node } : null);   // a curriculum step?
     window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
     document.title = `${Noema.subject.title} · ${CFG.appName}`;
+    document.documentElement.lang = Noema.subject.language || 'en';   // correct capitals, hyphenation and fonts for the subject's language (e.g. Greek without accents in CAPS)
     if (Noema.subject.features?.math) await ensureMath();
     // start the engine
     const inline = document.getElementById('noema-engine-src');

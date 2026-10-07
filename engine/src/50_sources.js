@@ -8,13 +8,78 @@ const SRC_BY_ID = Object.fromEntries(SOURCES.map((s, i) => [s.id, { ...s, _i: i 
 const FULL_COURSE = COURSE.slice();
 FULL_COURSE.forEach((c, i) => {
   c._ci = i;
-  c.src = c.src || SRCREG.chapters?.[c.id] || SOURCES[0].id;
+  c.src = [SRCREG.chapters?.[c.id], c.src].find(id => id && SRC_BY_ID[id]) || SOURCES[0].id;   // only ids that exist
   c.flashcards.forEach((f, k) => { f._key = f._key || c.id + '#' + k; });   // stable SRS keys, independent of filtering
 });
 const srcOfItem = (it, c) => (it && it.src) || c.src;
 
-/* ---------- "new" = sources after the first one that the learner hasn't marked as seen ---------- */
-function isNewSrc(id) { return !!id && id !== SOURCES[0].id && !(S.seenSrc && S.seenSrc[id]); }
+/* ---------- "new" = sources added AFTER the subject was first made (a later version), not yet marked as seen.
+   Sources that arrived together with the first one (same "added" date, or no dates at all) are never "new". ---------- */
+const FIRST_ADDED = SOURCES.map(s => s.added).filter(Boolean).sort()[0] || null;
+function isNewSrc(id) { const s = SRC_BY_ID[id]; if (!id || id === SOURCES[0].id || !s) return false; if (FIRST_ADDED && s.added && s.added <= FIRST_ADDED) return false; if (FIRST_ADDED && !s.added) return false; return !(S.seenSrc && S.seenSrc[id]); }
+
+/* ---------- chapter ↔ sources: EVERY source a chapter really uses ----------
+   Signals (strongest first): chapter.sources [{id, pages}] · the chapter's main source · items with their own src ·
+   the free-text sourcePages ("ECB σ. 23–42 · Karp 9.2 · διάλεξη YouTube (37:00–63:00)"), split into parts and each
+   part matched to a source by its id, short name, acronym or a word only its title has. */
+const NORM = x => String(x || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/['’`]/g, ' ').replace(/[^a-z0-9α-ωа-я]+/g, ' ').trim();
+const SRC_ALIASES = (() => {
+  const words = s => NORM(s.title).split(' ').filter(w => w.length >= 4 && !/^\d+$/.test(w));
+  const count = {}; SOURCES.forEach(s => new Set(words(s)).forEach(w => count[w] = (count[w] || 0) + 1));
+  const STOP = new Set(['part', 'chapter', 'with', 'from', 'the', 'and', 'for', 'των', 'στην', 'στον', 'για', 'απο', 'και', 'μαθημα', 'course', 'notes']);
+  return Object.fromEntries(SOURCES.map(s => {
+    const a = new Set();
+    if (s.id.length >= 2 && !/^(part|src|source|s)\d*$/i.test(s.id)) a.add(NORM(s.id));
+    if (s.short) a.add(NORM(s.short));
+    const latin = (s.title.match(/[A-Z][A-Za-z']+/g) || []).filter(w => !/^(The|And|Of|For|In|On|A|An)$/.test(w)); if (latin.length >= 2) a.add(latin.map(w => w[0]).join('').toLowerCase());
+    for (const m of String(s.title).matchAll(/(κεφ|κεφαλαιο|ch|chapter|kap|chap)\.?\s*(\d+)/gi)) a.add(NORM(m[1].replace(/αλαιο|apter|ap/i, '')) + ' ' + m[2]);
+    words(s).filter(w => count[w] === 1 && !STOP.has(w)).forEach(w => a.add(w));
+    const u = (String(s.url || s.subtitle || '').match(/https?:\/\/(?:www\.)?([a-z0-9-]+)/i) || [])[1]; if (u) a.add(u.toLowerCase());
+    return [s.id, [...a].filter(x => x && x.length >= 2)];
+  }));
+})();
+const hasAlias = (seg, al) => { const t = ' ' + NORM(seg) + ' '; return al.filter(a => t.includes(' ' + a + ' ') || (a.length >= 5 && t.includes(' ' + a))).length; };
+const PAGE_RE = /(?<![\p{L}])(?:σελ|σ|pp?|pages?|page|seite|s|pg)\.?\s*(\d{1,4})/iu, TIME_RE = /(\d{1,2}):(\d{2})(?::(\d{2}))?/;
+const REFS = {};
+/** [{ src, label, page, start, main }] for a chapter (memoised). */
+function chapterRefs(c) {
+  if (REFS[c.id]) return REFS[c.id];
+  const out = []; const add = (src, label, main) => { if (!SRC_BY_ID[src]) return; const pm = String(label || '').match(PAGE_RE), tm = String(label || '').match(TIME_RE); const ex = out.find(r => r.src === src); if (ex) { if (label && !ex.label.includes(label)) ex.label = ex.label ? ex.label + ' · ' + label : label; ex.page = ex.page || (pm ? +pm[1] : null); ex.start = ex.start ?? (tm ? (+tm[1]) * (tm[3] ? 3600 : 60) + (+tm[2]) * (tm[3] ? 60 : 1) + (+(tm[3] || 0)) : null); ex.main = ex.main || main; return; } out.push({ src, label: label || '', page: pm ? +pm[1] : null, start: tm ? (+tm[1]) * (tm[3] ? 3600 : 60) + (+tm[2]) * (tm[3] ? 60 : 1) + (+(tm[3] || 0)) : null, main: !!main }); };
+  if (Array.isArray(c.sources)) c.sources.forEach(r => add(r.id || r.src, r.pages || r.label || '', r.id === c.src));
+  const segs = String(c.sourcePages || '').split(/\s+[·|;]\s+|\n|\s+\+\s+/).map(x => x.trim()).filter(Boolean);
+  for (const seg of segs) {
+    let best = null, bestN = 0; for (const s of SOURCES) { const n = hasAlias(seg, SRC_ALIASES[s.id]); if (n > bestN) { best = s.id; bestN = n; } }
+    add(best || c.src, seg, (best || c.src) === c.src);
+  }
+  if (!out.some(r => r.src === c.src)) add(c.src, '', true); else out.find(r => r.src === c.src).main = true;
+  const items = [...c.sections, ...c.exercises, ...c.debug, ...c.flashcards, ...c.pitfalls, ...c.sections.flatMap(s => s.blocks)];
+  new Set(items.map(it => it.src).filter(Boolean)).forEach(src => add(src, '', false));
+  out.sort((a, b) => (b.main - a.main));
+  return (REFS[c.id] = out);
+}
+/** For a source: the chapters that use it — main source first, then "also used in". */
+function sourceChapters(srcId) { return FULL_COURSE.map(c => ({ c, ref: chapterRefs(c).find(r => r.src === srcId) })).filter(x => x.ref).sort((a, b) => (b.ref.main - a.ref.main) || (a.c._ci - b.c._ci)); }
+
+/* ---------- opening a source (👁 preview) ---------- */
+async function openSource(srcId, { page, start } = {}) {
+  const s = SRC_BY_ID[srcId]; if (!s) return;
+  const av = window.NoemaSrcFiles ? NoemaSrcFiles.available(ACCOUNT.id, SUBJ.id, s) : null;
+  if (!av) { DECK.open = true; DECK.expanded[srcId] = true; renderSourcesDeck(); toast('📎 No file for this source yet — attach it in its card to preview it here.', 4500); return; }
+  if (av.url && !av.meta) return NoemaViewer.open({ url: av.url, title: s.title, subtitle: s.subtitle, page, start });
+  toast('⏳ Opening…', 1200);
+  const rec = await NoemaSrcFiles.get(ACCOUNT.id, SUBJ.id, srcId).catch(() => null);
+  if (!rec) { toast('⚠️ The file is not available on this device and could not be downloaded.', 4500); return; }
+  NoemaViewer.open({ blob: rec.blob, name: rec.name, type: rec.type, title: s.title, subtitle: s.subtitle, page });
+}
+/** The chapter header line: which sources this chapter comes from — tap one to open it at that page. */
+function sourceChips(c) {
+  const refs = chapterRefs(c); if (!refs.length || (refs.length === 1 && !refs[0].label && SOURCES.length === 1 && SOURCES[0].id === 'base')) return null;
+  const short = t => { t = String(t || '').replace(/\s+/g, ' ').trim(); return t.length > 46 ? t.slice(0, 44).replace(/[\s,·]+\S*$/, '') + '…' : t; };
+  return h('div', { class: 'srcrefs', 'aria-label': 'Sources of this chapter' }, h('span', { class: 'srcrefs-l' }, 'From'),
+    ...refs.map(r => { const s = SRC_BY_ID[r.src]; const av = window.NoemaSrcFiles?.available(ACCOUNT.id, SUBJ.id, s);
+      return h('button', { class: 'srcref' + (av ? ' can' : ''), title: `${s.title}${r.label ? '\n' + r.label : ''}\n${av ? '👁 Open the source' + (r.page ? ' at page ' + r.page : '') : 'Show the source card'}`, onclick: () => openSource(r.src, { page: r.page, start: r.start }) },
+        h('span', { class: 'e' }, s.emoji || '📘'), h('span', {}, short(r.label || s.short || s.title)), av ? h('span', { class: 'eye', 'aria-hidden': 'true' }, '👁') : null); }));
+}
 function newSources() { return SOURCES.filter(s => isNewSrc(s.id)).map(s => s.id); }
 function markSeen(ids) { S.seenSrc = S.seenSrc || {}; (ids || SOURCES.map(s => s.id)).forEach(id => S.seenSrc[id] = true); save(); }
 
@@ -147,19 +212,24 @@ function renderSourcesDeck() {
     h('button', { class: 'iconbtn', title: 'Close', onclick: () => toggleSourcesDeck(false) }, '✕')));
   SOURCES.forEach((s, i) => {
     const x = st[s.id]; const exp = !!DECK.expanded[s.id];
-    const chs = FULL_COURSE.filter(c => x.chapters.has(c.id) || c.src === s.id);
+    const chs = sourceChapters(s.id);
+    const fm = window.NoemaSrcFiles ? NoemaSrcFiles.index(ACCOUNT.id, SUBJ.id)[s.id] : null; const web = window.NoemaSrcFiles?.webUrl(s);
+    const pick = h('input', { type: 'file', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; if (!f) return; toast('⬆️ Saving “' + f.name + '”…', 2500); try { await NoemaSrcFiles.put(ACCOUNT.id, SUBJ.id, s.id, f); toast('📎 Attached — tap 👁 to preview it (on every device).'); } catch (er) { toast('⚠️ ' + er.message, 6000); } renderSourcesDeck(); route(); } });
     const card = h('div', { class: 'srccard' + (isOn(s.id) ? '' : ' off') + (exp ? ' exp' : ''), style: { animationDelay: i * 40 + 'ms' } },
       h('div', { class: 'srcrow' },
         h('label', { class: 'switch', title: 'Include in the app' }, h('input', { type: 'checkbox', checked: isOn(s.id), onchange: e => { const cur = on ? [...on] : SOURCES.map(z => z.id); const next = e.target.checked ? [...new Set([...cur, s.id])] : cur.filter(z => z !== s.id); if (!next.length) { e.target.checked = true; toast('Keep at least one source on'); return; } setSrcFilter(next); } }), h('i')),
         h('span', { class: 'srcemo' }, s.emoji || '📘'),
         h('button', { class: 'grow srcmain', onclick: () => { DECK.expanded[s.id] = !exp; renderSourcesDeck(); } },
           h('b', {}, s.title, isNewSrc(s.id) ? h('span', { class: 'newpill', style: { marginLeft: '6px' } }, '✨ new') : null),
-          h('small', {}, `${s.subtitle || ''}${s.pages ? ' · pp. ' + s.pages : ''}`)),
+          h('small', {}, `${s.subtitle || ''}${s.pages ? ' · ' + (/^\d/.test(s.pages) ? 'pp. ' : '') + s.pages : ''}`)),
         h('button', { class: 'iconbtn', onclick: () => { DECK.expanded[s.id] = !exp; renderSourcesDeck(); } }, h('span', { class: 'chev', style: { transform: exp ? 'rotate(90deg)' : '' } }, '▸'))),
       exp ? h('div', { class: 'srcbody' },
         h('div', { class: 'srcstats' }, ...[['🧱', x.newChapters.length, 'chapters'], ['📖', x.sections.size, 'sections'], ['➕', x.enriched.size, 'sections enriched'], ['🎯', x.exercises, 'exercises'], ['🔧', x.playbooks, 'drills'], ['🃏', x.cards, 'cards'], ['⚠️', x.pitfalls, 'traps']].filter(r => r[1]).map(([e, n, l]) => h('span', { class: 'pill' }, `${e} ${n} ${l}`))),
-        h('div', { class: 'tiny', style: { margin: '8px 0 6px' } }, `${s.file ? '📄 ' + s.file + ' · ' : ''}added ${s.added || '—'}`),
-        h('div', { class: 'srcchs' }, ...chs.map(c => h('button', { class: 'srcch', onclick: () => { toggleSourcesDeck(false); go('#/ch/' + c.id); } }, `${c.emoji} Ch${c.num} · ${c.title}`, c.src === s.id ? null : h('small', {}, ' (enriched)')))),
+        h('div', { class: 'srcfile' }, fm ? [h('span', {}, `📎 ${fm.name} · ${fm.size > 1048576 ? (fm.size / 1048576).toFixed(1) + ' MB' : Math.round(fm.size / 1024) + ' KB'}`, fm.cloud ? '' : ' · on this device only'), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 Preview'), h('label', { class: 'btn small' }, '↻ Replace', pick), h('button', { class: 'btn small ghost', onclick: async () => { if (confirm('Remove the attached file of this source? (The course itself is not changed.)')) { await NoemaSrcFiles.remove(ACCOUNT.id, SUBJ.id, s.id); renderSourcesDeck(); route(); } } }, '🗑 Remove file')]
+          : web ? [h('span', {}, '🌐 ', h('a', { href: web, target: '_blank', rel: 'noopener' }, web.replace(/^https?:\/\/(www\.)?/, '').slice(0, 60))), h('button', { class: 'btn small primary', onclick: () => openSource(s.id) }, '👁 Preview'), h('label', { class: 'btn small' }, '📎 Attach a file instead', pick)]
+          : [h('span', { class: 'tiny' }, s.file ? `📄 ${String(s.file).split('/').pop()} — not attached yet` : 'No file attached'), h('label', { class: 'btn small primary' }, '📎 Attach the file', pick)]),
+        h('div', { class: 'tiny', style: { margin: '6px 0' } }, `${s.pages ? (/^\d/.test(s.pages) ? 'Pages ' : '') + s.pages + ' · ' : ''}added ${s.added || '—'}`),
+        chs.length ? h('div', { class: 'srcchs' }, ...chs.map(({ c, ref }) => h('button', { class: 'srcch' + (ref.main ? '' : ' also'), title: ref.label || '', onclick: () => { toggleSourcesDeck(false); go('#/ch/' + c.id); } }, `${c.emoji} Ch${c.num} · ${c.title}`, ref.label ? h('small', {}, ' — ' + (ref.label.length > 60 ? ref.label.slice(0, 58) + '…' : ref.label)) : null, ref.main ? null : h('small', {}, ' (also)')))) : h('div', { class: 'tiny' }, 'No chapter is mapped to this source.'),
         h('div', { class: 'row', style: { marginTop: '10px' } },
           h('button', { class: 'btn small', onclick: () => setSrcFilter([s.id]) }, '🔎 Only this source'),
           isNewSrc(s.id) ? h('button', { class: 'btn small', onclick: () => { markSeen([s.id]); applySourceFilter(); route(); renderSourcesDeck(); } }, '✔ Mark as seen') : null,

@@ -36,11 +36,13 @@ The learner's personal profile ("About me") lives in the account, not in the sub
 
 ## sources.json
 ```json
-{ "sources": [ { "id": "part1", "title": "…", "subtitle": "…", "pages": "1–402", "file": "sources/part1.pdf", "added": "YYYY-MM-DD", "emoji": "📘" } ],
+{ "sources": [ { "id": "part1", "title": "…", "short": "ECB 5", "subtitle": "…", "pages": "1–402", "file": "sources/part1.pdf", "url": "https://… (web sources)", "added": "YYYY-MM-DD", "emoji": "📘" } ],
   "chapters": { "ch01": "part1" }, "patches": { "ch11_links.json": "part2" } }
 ```
 Every item inherits its chapter's source; patched-in items inherit the patch's source (or carry an explicit `"src"`).
-This powers the in-app Sources menu, "✨ what's new" and source filtering.
+This powers the in-app Sources menu, "✨ what's new" and source filtering. One entry per file (each part of a split PDF is its
+own source), web page, video or conversation. The original files can be attached in the app (📎 in the source's card) or
+uploaded by Claude through the connector (`noema_start_source_upload`), so the learner opens them with 👁 at the cited page.
 
 ## Pedagogy rules (non-negotiable)
 1. **Coverage**: teach AND test every concept, number, caveat, trap, worked example and test question of the sources. Repeated material is taught once (best version). Every source exercise/test question becomes ≥1 exercise with its solution as the explanation.
@@ -63,7 +65,8 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
   "title": "Delta Lake Internals",               // short
   "subtitle": "How SQL commands become files + log commits",
   "emoji": "🔺",
-  "sourcePages": "132–179",
+  "sourcePages": "ECB σ. 23–42 · Karp 9.2, 9.5",   // one short line for people (parts joined by " · ")
+  "sources": [{"id": "ecb", "pages": "σ. 23–42"}, {"id": "karp", "pages": "9.2, 9.5"}],   // EVERY source this chapter uses (ids of sources.json) with pages / sections / video times — shown as chips that open the file there
   "mantra": "One sentence mental model for the whole chapter.",
   "objectives": ["You can explain …", "You can write …", "You can debug …"],     // 4–8
   "sections": [ Section ],          // 6–16 sections

@@ -65,6 +65,7 @@ function messages(body, res, J) {
   // the pack Claude "builds": the demo fixture + two web pictures that the APP must download ("fetch": "app")
   const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
   fx.subject = { ...fx.subject, id: 'heart-by-claude', title: 'Heart by Claude', owner: null }; fx.version = 'hbc-1';
+  fx.sources = { sources: [{ id: 'book', title: 'Heart textbook', file: 'sources/heart.pdf', added: '2026-10-07', emoji: '📘' }, { id: 'pic', title: 'Valve photo', file: 'sources/valve.png', added: '2026-10-07', emoji: '🖼️' }], chapters: { ch01: 'book' }, patches: {} };
   const first = Object.keys(fx.media)[0];
   fx.media[first] = { ...fx.media[first], data: undefined, fetch: 'app', origin: 'web', url: BASE + '/testimg/heart.png', page: 'https://commons.wikimedia.org/wiki/File:Heart.png', license: 'CC BY-SA 4.0', retrieved: '2026-10-07' };
   delete fx.media[first].data; A.pack = fx;
@@ -144,6 +145,7 @@ function messages(body, res, J) {
   ok(await p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.title === 'Heart by Claude'), 'it opens as a new subject');
   ok(await p.evaluate(f => /^data:image\/png;base64,/.test(MEDIA[f]?.data || ''), first), '"fetch": "app" picture embedded (works offline)');
   ok(Object.keys(srv.state.files).some(k => k === `${dora}/packs/heart-by-claude.json`), 'and saved to the cloud account (all devices)');
+  ok(Object.keys(srv.state.files).includes(`${dora}/sources/heart-by-claude/book/file.pdf`) && Object.keys(srv.state.files).includes(`${dora}/sources/heart-by-claude/pic/file.png`), 'the files you gave Claude are attached to their sources (👁 preview on every device)');
   ok(!(await p.evaluate(() => NoemaClaude.jobs(Noema.account.id))).length, 'the finished job is cleaned up');
 
   console.log('— phone');

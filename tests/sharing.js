@@ -30,7 +30,7 @@ async function signUp(browser, email, name) {
   await A.p.evaluate(async ps => { for (const p of ps) await Noema.importPack(ACCOUNT.id, p); }, [mk('heart-test', 'Heart test', true), mk('lungs-test', 'Lungs test')]);
   await A.p.evaluate(() => { Noema.openSubjectPicker(); }); await wait(500);
   const sb = A.p.locator('.noema-chipwrap:has-text("Heart test") .noema-sharebtn');
-  ok(await sb.count() === 1 && await A.p.locator('.noema-chipwrap:has-text("Databricks")').count() === 0, 'personal subjects carry a subtle 🔗 share button (library ones don’t)');
+  ok(await sb.count() === 1 && await A.p.locator('.noema-chipwrap:has-text("Databricks") .noema-sharebtn').count() === 0, 'personal subjects carry a subtle 🔗 share button (library ones don’t)');
   await A.p.hover('.noema-chipwrap:has-text("Heart test")'); await sb.click(); await wait(500);
   ok(/Share “Heart test”/.test(await A.p.locator('.noema-ovbox').last().innerText()), 'the share dialog opens');
   ok(await A.p.locator('.nx-warn').count() === 1, 'a pack with non-open pictures shows the licence warning');

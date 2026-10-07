@@ -59,6 +59,14 @@ Record each source in `work/<id>/sources.json` (`sources`, and which chapter com
 
 **Every picture gets ≥ 3 exercises of ≥ 2 visual types** + a `figure` block in the section that teaches it.
 
+## 3b. Sources: one entry per file or link, every chapter mapped to ALL its sources
+Give every PDF (also each part of a split PDF), web page, video and conversation its own entry in
+`sources.json` (`id`, `title`, `short` — a 2–12 character label like "ECB" or "Karp" — `subtitle`, `pages`,
+`file` or `url`, `added`, `emoji`). In each chapter write `"sources": [{"id": "ecb", "pages": "σ. 23–42"},
+{"id": "karp", "pages": "9.2, 9.5"}]` listing EVERY source the chapter uses with its pages / sections /
+timestamps (the app shows them as chips and opens the file at that page), and keep `sourcePages` as one
+short human line built from the same parts joined by " · ".
+
 ## 4. Write the chapters
 `work/<id>/chapters/chNN.json`, one per chapter, exactly as `CONTENT_SPEC.md` says: theory blocks
 (short, concrete, one idea each), comparisons side by side, `ask` blocks and `debug` playbooks for
@@ -78,6 +86,9 @@ Fix every error and run again. Never deliver a pack that fails.
 - **With the noema-lite connector** (tools `noema_*` are available):
   `noema_start_upload(subject_id)` → run the returned `curl` command on the built file →
   `noema_finish_upload(subject_id)`. Small packs (≤ 1.5 MB) can use `noema_save_pack`.
+  **Also upload the original files** (PDFs, slides, documents the user gave you), so the learner can open
+  them in the app at the cited pages: for each file-based source, `noema_start_source_upload(subject_id,
+  source_id, filename)` → run its `curl` (files ≤ 50 MB; split bigger ones and give each part its own source).
   The subject appears in the user's noema-lite picker (cloud account) — tell them.
 - **Without it** (or if the upload fails): give the user the `.json` file and tell them:
   *noema-lite → subject picker → 📥 Import subject pack*.

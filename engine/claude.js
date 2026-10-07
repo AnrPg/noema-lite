@@ -252,6 +252,7 @@ ${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded 
     const log = t => { job.log.push({ t: Date.now(), m: t }); onLog(t); };
     job.skillId = await ensureSkill(key, log);
     for (const f of files) { log('⬆️ Uploading ' + f.name + '…'); job.files.push({ name: f.name, type: f.type || '', size: f.size, fileId: await uploadFile(key, f) }); }
+    job.sourceBlobs = [...files];   // kept with the job (this device) → attached to the matching sources at import (👁 preview)
     job.messages.push(firstMessage(job, false)); job.status = 'running';
     await DB.put(job); return job;
   }

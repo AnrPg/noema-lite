@@ -12,6 +12,7 @@ what to think about first, and status. Newest at the top.
 | TD-5 | Real Supabase sync tested only against the emulator | ✅ closed 2026-10-07 | 2026-10-06 |
 | TD-6 | Claude: verify the connector with claude.ai and way A with a real API key | 📋 known gap | 2026-10-06 |
 | TD-7 | Curricula: run once with real Claude / Gemini keys; preparation only while a tab is open | 📋 known gap | 2026-10-07 |
+| TD-8 | Viewer: exact layout for old binary DOC/PPT, Pages/Keynote; PDF text search | 💭 idea | 2026-10-07 |
 
 ---
 
@@ -89,3 +90,9 @@ each; check cost, time, and the quality of a Gemini-built step against a skill-b
 **Design limit:** steps are prepared in the browser, so only while a noema-lite tab is open somewhere.
 A server-side worker would need the user's API key on a server — deliberately not done (keys stay on
 the device). Possible later: a Supabase Edge Function that holds a key the user opts in to store.
+
+### TD-8 · Viewer: the rare formats — 💭 idea
+Old binary Word/PowerPoint (DOC, PPT), Apple Pages/Keynote and Outlook MSG show only the text found inside them
+(with ⬇️ download for the real program). PPTX shows text and pictures per slide, not the exact layout. PDFs have no
+text layer yet (no select/search inside the viewer). Options: a server-side converter (LibreOffice) — would need
+a backend; pdf.js TextLayer for search.

@@ -526,6 +526,7 @@ window.NoemaCurriculum.Gen = (() => {
       for (const nid of want) {
         const p = c.nodes[nid].pack;
         if (p?.status === 'ready' || p?.status === 'paused') continue;
+        if (!c.autoApprove && !c.nodes[nid].reviewed) continue;   // the learner reviews (and may change) a step before it is generated
         if (p?.status === 'failed' && Date.now() - (p.failedAt || 0) < 30 * 60 * 1000) continue;
         if (!st[nid].open || lockedByOther(c.id, nid)) continue;
         return [c, nid];
@@ -587,6 +588,7 @@ window.NoemaCurriculum.Gen = (() => {
   function request(c, nid, { resume = false, raiseBudget = 0 } = {}) {
     if (raiseBudget) { const cur = C.get(acc, c.id); cur.nodeBudget = Math.max(cur.nodeBudget || 8, raiseBudget); C.save(acc, cur); window.NoemaClaude?.jobs(acc).then(js => { const j = js.find(x => x.kind === 'node' && x.subjectId === C.packId(c, nid)); if (j) { j.budget = Math.max(j.budget, raiseBudget); window.NoemaClaude.saveJob(j); } }); }
     if (resume) patchNode(c.id, nid, { status: 'queued', resume: true, error: null });
+    { const cur = C.get(acc, c.id); if (cur?.nodes[nid] && !cur.nodes[nid].reviewed) { cur.nodes[nid].reviewed = new Date().toISOString(); C.save(acc, cur); } }
     const k = key(c.id, nid); if (!priority.includes(k)) priority.unshift(k); kick(); emit();
   }
   function stop() { ctl?.abort(); }
@@ -613,4 +615,77 @@ window.NoemaCurriculum.Gen = (() => {
   function passTest(c, nid, score) { if (score >= C.PASS) C.setMastered(acc, c, nid, 'test', { score }); return score >= C.PASS; }
 
   return { start, request, stop, setPaused, paused, live, busy: () => busy, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, placementTest, passTest, kick, TAB };
+})();
+
+
+/* ======================= editing the map ======================= */
+window.NoemaCurriculum.Edit = (() => {
+  const C = window.NoemaCurriculum, L = () => window.NoemaLLM;
+  const ROLES = ['foundation', 'intro', 'aspect', 'subtopic', 'related', 'synthesis', 'application'];
+  const PART = { foundation: 'prereq', intro: 'core', aspect: 'core', subtopic: 'core', related: 'core', synthesis: 'core', application: 'apps', goal: 'core' };
+  const generated = n => ['ready', 'generating'].includes(n?.pack?.status);
+  const slug = t => String(t || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 36) || 'step';
+  /** Would these edges keep the graph acyclic? → null or an error message. */
+  function check(c, edges) { return C.topo(Object.keys(c.nodes), edges) ? null : 'That link would make a loop (a step would become its own prerequisite).'; }
+  /** Every node that may become a prerequisite of `id` (not itself, not one of its dependents). */
+  function possibleParents(c, id) { const down = new Set([id]); let grew = true; while (grew) { grew = false; for (const e of c.edges) if (down.has(e.from) && !down.has(e.to)) { down.add(e.to); grew = true; } } return Object.keys(c.nodes).filter(x => !down.has(x)); }
+  function possibleChildren(c, id) { const up = new Set([id]); let grew = true; while (grew) { grew = false; for (const e of c.edges) if (up.has(e.to) && !up.has(e.from)) { up.add(e.from); grew = true; } } return Object.keys(c.nodes).filter(x => !up.has(x)); }
+
+  /**
+   * Change a step. patch: { title, summary, role, learningGoals, chapters, parents: [ids], children: [ids] }
+   * Chapters and learning goals can change only BEFORE the step is generated; the rest always.
+   * → { ok: true } | { error }
+   */
+  function update(acc, cid, id, patch) {
+    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: 'Step not found.' };
+    if ((patch.chapters || patch.learningGoals) && generated(n)) return { error: 'This step has already been prepared — its chapters can no longer change (you can still rename it, move it or change its links).' };
+    let edges = c.edges;
+    if (patch.parents) { const ps = [...new Set(patch.parents)].filter(p => c.nodes[p] && p !== id); edges = [...edges.filter(e => e.to !== id), ...ps.map(p => ({ from: p, to: id, why: (c.edges.find(e => e.from === p && e.to === id) || {}).why || 'Added by you' }))]; }
+    if (patch.children) { const ks = [...new Set(patch.children)].filter(k => c.nodes[k] && k !== id); edges = [...edges.filter(e => e.from !== id), ...ks.map(k => ({ from: id, to: k, why: (c.edges.find(e => e.from === id && e.to === k) || {}).why || 'Added by you' }))]; }
+    const err = check(c, edges); if (err) return { error: err };
+    c.edges = edges;
+    if (patch.title != null) { const t = String(patch.title).trim(); if (!t) return { error: 'A step needs a name.' }; n.title = t.slice(0, 120); if (n.pack?.id) C.kvSet(acc, 'subjoverride:' + n.pack.id, { ...(C.kvGet(acc, 'subjoverride:' + n.pack.id, {}) || {}), title: n.title }); }
+    if (patch.summary != null) n.summary = String(patch.summary).trim();
+    if (patch.role && ROLES.includes(patch.role)) { n.role = patch.role; n.part = PART[patch.role]; }
+    if (patch.learningGoals) n.learningGoals = patch.learningGoals.map(x => String(x).trim()).filter(Boolean);
+    if (patch.chapters) n.chapters = patch.chapters.filter(ch => String(ch.title || '').trim()).map((ch, i) => ({ ref: ch.ref || 'c' + (i + 1) + '_' + Date.now().toString(36).slice(-3), title: String(ch.title).trim(), goals: (ch.goals || []).map(String).filter(Boolean), coverage: (ch.coverage || []).map(String).filter(Boolean) }));
+    n.edited = new Date().toISOString(); C.save(acc, c); return { ok: true };
+  }
+  /** Add a step → its id. */
+  function add(acc, cid, { title, summary = '', role = 'foundation', parents = [], children = [] }) {
+    const c = C.get(acc, cid); let id = slug(title); while (c.nodes[id]) id += '_x';
+    c.nodes[id] = { id, title: String(title).trim(), summary, role, part: PART[role] || 'prereq', chapters: [], learningGoals: [], added: 'user' };
+    const edges = [...c.edges, ...parents.filter(p => c.nodes[p]).map(p => ({ from: p, to: id, why: 'Added by you' })), ...children.filter(k => c.nodes[k]).map(k => ({ from: id, to: k, why: 'Added by you' }))];
+    const err = check(c, edges); if (err) return { error: err };
+    c.edges = edges; C.save(acc, c); return { ok: true, id };
+  }
+  /** Remove a step. bridge: its prerequisites become prerequisites of its dependents (keeps the order). */
+  async function remove(acc, cid, id, { bridge = true, deleteMaterial = true } = {}) {
+    const c = C.get(acc, cid); const n = c?.nodes[id]; if (!n) return { error: 'Step not found.' };
+    const ps = c.edges.filter(e => e.to === id).map(e => e.from), ks = c.edges.filter(e => e.from === id).map(e => e.to);
+    c.edges = c.edges.filter(e => e.from !== id && e.to !== id);
+    if (bridge) for (const p of ps) for (const k of ks) if (!c.edges.some(e => e.from === p && e.to === k)) c.edges.push({ from: p, to: k, why: `Through “${n.title}” (removed)` });
+    delete c.nodes[id];
+    for (const k of ['minimal', 'deep']) c.paths[k] = (c.paths[k] || []).filter(x => x !== id);
+    const P = C.kvGet(acc, 'curprog:' + cid, {}); if (P[id]) { delete P[id]; C.kvSet(acc, 'curprog:' + cid, P); }
+    C.save(acc, c);
+    if (n.pack?.id && window.Noema) {
+      if (deleteMaterial) await window.Noema.deleteSubject({ id: n.pack.id, curriculum: null }).catch(() => { });
+      else { const k = `noema1:${acc}:a:packmeta:${n.pack.id}`; try { const m = JSON.parse(localStorage.getItem(k) || 'null'); if (m) { delete m.curriculum; delete m.node; window.Noema.kv.set(k, JSON.stringify(m)); } } catch (e) { } }   // keep it as a normal subject
+    }
+    return { ok: true };
+  }
+  /** (Re)plan the chapters of some steps with the chapter planner — e.g. a step you added, or with your own instruction. */
+  async function plan(acc, cid, ids, { instruction = '', onLog = () => { } } = {}) {
+    const c = C.get(acc, cid); ids = ids.filter(id => c.nodes[id] && !generated(c.nodes[id]));
+    if (!ids.length) return { ok: true };
+    const x = C.ctx(c); onLog('📚 Planning the chapters…');
+    const { data, usage } = await L().json({ acc, provider: L().pick(acc, c.provider), model: L().pick(acc, c.provider) === 'claude' ? c.model || undefined : undefined, system: C.prompts.PLANNER_SYSTEM,
+      prompt: C.prompts.planPrompt(x, C.snapshot(c, { withSummaries: true }), ids) + (instruction ? `\n\nThe learner's own wishes for these steps (follow them): ${instruction}` : ''), schema: C.schemas.S_PLAN, name: 'submit_chapter_plans', maxTokens: 16000,
+      validate: d => { const got = d.plans.map(p => p.nodeId); return ids.filter(id => got.filter(g => g === id).length !== 1).map(id => `exactly one plan needed for "${id}"`); } });
+    const cur = C.get(acc, cid);
+    for (const p of data.plans) { const n = cur.nodes[p.nodeId]; if (!n || generated(n)) continue; n.learningGoals = p.learningGoals; n.chapters = p.chapters.map(ch => ({ ref: ch.ref, title: ch.title, goals: ch.teachingGoals, coverage: ch.requiredCoverage })); }
+    for (const k in cur.usage) cur.usage[k] += usage?.[k] || 0; C.save(acc, cur); return { ok: true };
+  }
+  return { update, add, remove, plan, possibleParents, possibleChildren, generated, ROLES };
 })();

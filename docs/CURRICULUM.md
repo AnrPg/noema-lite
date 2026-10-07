@@ -50,6 +50,21 @@ left → right. Each step shows its state: **✅ mastered · 🔓 open · 🔒 l
 * ▶ **Next up**: the open steps in a good order. ± / ⤢ Fit / Ctrl + wheel: zoom.
 * ⚙️: prepare-ahead count, Claude limit per step, which AI, pause background preparation, export, delete.
 
+## 2b. Changing the map, and reviewing a step before it is prepared
+* **📝 Review first.** The first time you open a step, noema-lite shows its plan — name, what it teaches,
+  learning goals and chapters (with their teaching goals and coverage) — and you can change anything: rename,
+  reorder (▲▼), remove (✕), add chapters, or **✨ re-plan with AI** with your own wish. Only when you press
+  **✅ Looks good — prepare it** is the material generated. Steps waiting for you show **📝** on the map and
+  "needs your review" in ▶ Next up. (⚙️ → untick *Let me review each step* to prepare automatically.)
+* **After preparation** the chapters are fixed (they are what the subject was built from), but the step can still
+  be renamed (its subject is renamed too), moved and linked differently.
+* **✏️ Edit step** (any step, also locked ones): name, summary, place (prerequisite / introduction / aspect /
+  sub-topic / related / synthesis / application), prerequisites and dependent steps. Only links that keep the
+  graph acyclic are offered.
+* **➕ Step**: add your own step where it belongs; the AI plans its chapters (or write them yourself).
+* **🗑 Remove the step**: its prerequisites become prerequisites of the steps after it (the order is kept); its
+  prepared material can be deleted or kept as a normal subject.
+
 ## 3. Mastery and unlocking
 
 A step is **mastered** when **every section is read and ≥ 80 % of its exercises are solved**
@@ -59,7 +74,7 @@ mastered-by-test step can be undone. A step **opens** when all its prerequisites
 
 ## 4. Preparing the steps (each step = a subject)
 
-* **Ahead of time**: while the app is open, noema-lite keeps the next *N* open steps (default 3) of
+* **Ahead of time**: while the app is open, noema-lite keeps the next *N* open **reviewed** steps (default 3) of
   every curriculum prepared, one at a time per device. Opening a step that is not ready moves it to the
   front of the queue. Browsers cannot work while closed, so preparation pauses when no noema-lite tab is
   open and continues next time.

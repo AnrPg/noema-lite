@@ -155,7 +155,7 @@ function chapterView(id, tab) {
   const v = view(
     h('button', { class: 'back', onclick: () => go('#/') }, '← All chapters'),
     h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
-      h('div', { class: 'grow' }, h('div', { class: 'num' }, `Chapter ${c.num} · source pages ${c.sourcePages}`), h('h1', {}, c.title), h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle)),
+      h('div', { class: 'grow' }, h('div', { class: 'num' }, `Chapter ${c.num}`), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
       h('div', { style: { position: 'relative', width: '76px', height: '76px', flex: 'none' } }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { style: { position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontWeight: 800 } }, Math.round((p.sr + p.ex) * 50) + '%'))),
     h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)),
     h('div', { class: 'tabs' }, ...tabs.map(([k, l, n]) => h('button', { class: tab === k ? 'on' : '', onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, n)))),

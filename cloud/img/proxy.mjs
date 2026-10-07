@@ -1,10 +1,12 @@
-/* noema-lite picture fetcher — GET /api/img?url=<https image url>
+/* noema-lite picture & document fetcher — GET /api/img?url=<image url>   GET /api/file?url=<document url>
+   /api/file (for 👁 previews of web sources): PDFs, office documents, e-books, text, audio/video, archives — ≤ 25 MB.
    Used only when a browser cannot download a web picture itself (the image host sends no CORS header):
    "Create with Claude" inside the app, and importing packs whose web pictures are fetched by the app.
    Holds no secrets. Safety limits: http(s) only, no private / local addresses, images only, ≤ 15 MB,
    10 s timeout, at most 3 redirects (each re-checked), called from this site's pages only. */
-const MAX = 15 * 1024 * 1024;
+const MAX = 15 * 1024 * 1024, MAX_FILE = 25 * 1024 * 1024;
 const TYPES = /^image\/(png|jpeg|webp|gif|svg\+xml|avif)$/;
+const FILE_TYPES = /^(image\/[\w.+-]+|audio\/[\w.+-]+|video\/[\w.+-]+|text\/(plain|csv|markdown|x-markdown|xml|tab-separated-values|calendar|rtf)|application\/(pdf|json|xml|zip|epub\+zip|rtf|msword|vnd\.ms-[\w.-]+|vnd\.openxmlformats-officedocument\.[\w.-]+|vnd\.oasis\.opendocument\.[\w.-]+|x-ipynb\+json|octet-stream|x-zip-compressed))$/;
 
 export function blockedHost(h) {
   h = String(h || '').toLowerCase().replace(/^\[|\]$/g, '');
@@ -33,6 +35,7 @@ const out = (status, msg, extra = {}) => new Response(msg, { status, headers: { 
 
 export default async function handler(req) {
   const me = new URL(req.url);
+  const fileMode = me.pathname.endsWith('/api/file'); const LIMIT = fileMode ? MAX_FILE : MAX;
   if (req.method === 'OPTIONS') return out(204, '', { 'access-control-allow-methods': 'GET' });
   if (req.method !== 'GET') return out(405, 'GET only');
   // only this site's own pages (browsers always send Origin or Referer for these requests)
@@ -51,11 +54,12 @@ export default async function handler(req) {
     if (!r.ok) return out(502, `the picture host answered ${r.status}`);
     let type = (r.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
     const generic = !type || /octet-stream/.test(type);
-    if (!TYPES.test(type) && !generic) return out(415, `not a picture (${type}) — use the direct image url, not the page`);
-    if (+r.headers.get('content-length') > MAX) return out(413, 'picture larger than 15 MB');
+    if (fileMode ? !FILE_TYPES.test(type) && !generic : !TYPES.test(type) && !generic) return out(415, fileMode ? `this kind of file cannot be previewed (${type})` : `not a picture (${type}) — use the direct image url, not the page`);
+    if (+r.headers.get('content-length') > LIMIT) return out(413, `larger than ${LIMIT / 1048576} MB`);
     const buf = new Uint8Array(await r.arrayBuffer());
-    if (buf.byteLength > MAX) return out(413, 'picture larger than 15 MB');
-    if (generic) { type = sniff(buf); if (!type) return out(415, 'not a picture — use the direct image url, not the page'); }
+    if (buf.byteLength > LIMIT) return out(413, `larger than ${LIMIT / 1048576} MB`);
+    if (generic && !fileMode) { type = sniff(buf); if (!type) return out(415, 'not a picture — use the direct image url, not the page'); }
+    if (generic && fileMode) type = sniff(buf) || (buf[0] === 0x25 && buf[1] === 0x50 && buf[2] === 0x44 && buf[3] === 0x46 ? 'application/pdf' : 'application/octet-stream');
     return new Response(buf, { status: 200, headers: { 'content-type': type, 'access-control-allow-origin': '*', 'cache-control': 'public, max-age=86400', 'x-final-url': target.href, 'access-control-expose-headers': 'x-final-url' } });
   }
   return out(508, 'too many redirects');
