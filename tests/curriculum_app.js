@@ -103,7 +103,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
     r = await tool('noema_curriculum_task', { curriculum_id: cid, want: 'plan' }); if (!/task plan:/.test(r.text)) break;
     const ids = r.text.match(/task plan:([^\s]+)/)[1].split(',');
     if (!batches) ok(ids.length === 5 && /node IDs: /.test(r.text) && /Chapter granularity/.test(r.text), 'plan tasks: batches of 5 with the planner’s own prompt');
-    r = await tool('noema_curriculum_submit', { curriculum_id: cid, task_id: 'plan:' + ids.join(','), result_json: JSON.stringify(F.plans(ids)) });
+    r = await tool('noema_curriculum_submit', { curriculum_id: cid, task_id: 'plan:' + ids.join(','), result_json: JSON.stringify(F.withMaterial(F.plans(ids), r.text)) });
     if (r.error) { console.log(r.text.slice(0, 300)); break; }
   }
   ok(/The map and all chapter plans are done/.test(r.text) || /Nothing is waiting/.test(r.text), `${batches} plan batches, then “all done”`);
@@ -151,11 +151,20 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   r = await tool('noema_curriculum_task', { curriculum_id: cid2 });
   ok(/task plan:/.test(r.text) && /The learner's own material/.test(r.text) && /membranes\.pdf — ONLY pages 2–3/.test(r.text), 'plan task: the step’s own file with its pages (plan FROM the files)');
   const planLink = (r.text.match(/curl -sSL -o "work\/plan-[^"]+\/membranes\.pdf" "([^"]+)"/) || [])[1];
-  ok(/READ the pages of each step first/.test(r.text) && planLink && Buffer.from(await (await fetch(planLink)).arrayBuffer()).equals(PDF), 'the plan task also gives Claude the file itself (signed link) and tells it to read the step’s pages before planning');
+  ok(/READ every page of each step before planning it/.test(r.text) && planLink && Buffer.from(await (await fetch(planLink)).arrayBuffer()).equals(PDF), 'the plan task also gives Claude the file itself (signed link) and tells it to read the step’s pages before planning');
   const big = await p.evaluate(() => { const J = NoemaCurJobs; const c = { nodes: { a: { material: { files: [{}] } }, b: { material: { files: [{}] } }, c: {}, d: { material: { files: [{}] } }, e: {}, f: {}, g: {} } }; return J.planBatch(c, ['a', 'b', 'c', 'd', 'e', 'f', 'g']); });
   ok(big.join() === 'a,b,c,e,f', 'plan batches: at most 5 steps, of which at most 2 with files (the others wait for the next batch): ' + big.join());
   const ids2 = r.text.match(/task plan:([^\s]+)/)[1].split(',');
-  await tool('noema_curriculum_submit', { curriculum_id: cid2, task_id: 'plan:' + ids2.join(','), result_json: JSON.stringify(F.plans(ids2)) });
+  { // the plan must cover every page of the step's files: a plan that leaves pages out comes back with them
+    const bad = F.plans(ids2); bad.plans.find(x => x.nodeId === 'membranes').chapters.forEach(ch => { ch.material = 'membranes.pdf p. 2'; });
+    const rb = await tool('noema_curriculum_submit', { curriculum_id: cid2, task_id: 'plan:' + ids2.join(','), result_json: JSON.stringify(bad) });
+    ok(rb.error && /pages 3 of membranes\.pdf are in no chapter|no chapter has "material"/.test(rb.text) || rb.error && /membranes/.test(rb.text), 'a plan that leaves pages of the step’s files out is sent back: ' + (rb.text.split('\n')[1] || '').slice(0, 140));
+    const none = F.plans(ids2);
+    const rn = await tool('noema_curriculum_submit', { curriculum_id: cid2, task_id: 'plan:' + ids2.join(','), result_json: JSON.stringify(none) });
+    ok(rn.error && /no chapter has "material" from membranes\.pdf/.test(rn.text), 'a plan that ignores the step’s file is sent back');
+    ok(/anchor its chapters|Anchor the step's chapters/.test(r.text) && /EVERYTHING in those pages/.test(r.text), 'the task tells Claude explicitly: read ALL the files, cover everything down to the details, cite file + pages');
+  }
+  await tool('noema_curriculum_submit', { curriculum_id: cid2, task_id: 'plan:' + ids2.join(','), result_json: JSON.stringify(F.withMaterial(F.plans(ids2), r.text)) });
   await p.evaluate(() => NoemaCurJobs.App.poll()); await wait(300);
   ok(await p.evaluate(id => Object.values(NoemaCurriculum.get(Noema.account.id, id).nodes).every(n => n.chapters.length), cid2), 'planned by the Claude app');
   await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); c.autoApprove = true; NoemaCurriculum.save(Noema.account.id, c); NoemaCurriculum.setMastered(Noema.account.id, c, 'basics', 'test'); NoemaCurriculum.Gen.kick(); }, cid2);
@@ -208,11 +217,25 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   // re-plan with a wish (no key): the Claude app gets a plan task carrying the wish
   const other = await p.evaluate(id => Object.keys(NoemaCurriculum.get(Noema.account.id, id).nodes).find(n => n.startsWith('g_')), cid3);
   await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); for (const n of Object.values(c.nodes)) if (!n.chapters.length) { n.chapters = [{ ref: 'a', title: 'A', goals: ['g'], coverage: ['c'] }]; n.learningGoals = ['x', 'y']; } c.stage = 'done'; NoemaCurriculum.save(Noema.account.id, c); }, cid3);
+  await p.evaluate(() => NoemaClaude.Key.set(Noema.account.id, 'sk-ant-api03-' + 'k'.repeat(40), true));   // even with an API key here: the curriculum chose the Claude app
   const rp = await p.evaluate(([id, n]) => NoemaCurriculum.Edit.plan(Noema.account.id, id, [n], { instruction: 'more clinical examples' }), [cid3, other]);
+  await p.evaluate(() => NoemaClaude.Key.forget(Noema.account.id));
   await until(() => /more clinical examples/.test(kvOf(uid)['a:curriculum:' + cid3]?.value || ''), 8000);
   r = await tool('noema_curriculum_task', { curriculum_id: cid3, want: 'plan' });
-  ok(rp.queued && r.text.includes(`task plan:${other}\n`) && /more clinical examples/.test(r.text), '✨ re-plan without a key → a plan task for the Claude app, with the learner’s wish');
+  ok(rp.queued && r.text.includes(`task plan:${other}\n`) && /more clinical examples/.test(r.text), '✨ re-plan in a Claude-app curriculum (even with an API key on the device) → a plan task for the Claude app, with the learner’s wish — no API cost');
   ok(await p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].chapters.length > 0, [cid3, other]), 'its current chapters stay until the new plan arrives');
+  // ✨ re-plan the whole curriculum — a Claude-app curriculum: every step not prepared goes to the Claude app (the prepared one keeps its plan)
+  await p.evaluate(() => NoemaCurJobs.App.poll()); await wait(300);
+  await p.click('.cm-tools button:has-text("⚙️")'); await wait(300); await p.click('summary:has-text("Re-plan the whole curriculum")');
+  ok(/your Claude app/.test(await p.locator('.noema-ovbox:has(.cm-replanall)').innerText()), '⚙️ → ✨ Re-plan the whole curriculum — with the curriculum’s own AI (here: the Claude app)');
+  p.once('dialog', d => d.accept()); await p.click('.cm-replanall'); await wait(500);
+  ok(/steps wait for your Claude app/.test(await p.locator('.cm-replanlog').innerText()), 'queued for the Claude app');
+  const rq = await p.evaluate(([id, n]) => { const c = NoemaCurriculum.get(Noema.account.id, id); return { replan: Object.values(c.nodes).filter(x => x.replan).length, total: Object.keys(c.nodes).length, prepared: !c.nodes[n].replan }; }, [cid3, st3]);
+  ok(rq.replan === rq.total - 1 && rq.prepared, `${rq.replan} of ${rq.total} steps wait for a new plan; the prepared step does not`);
+  await until(() => (JSON.parse(kvOf(uid)['a:curriculum:' + cid3]?.value || '{}').nodes ? Object.values(JSON.parse(kvOf(uid)['a:curriculum:' + cid3].value).nodes).filter(x => x.replan).length : 0) === rq.replan, 8000);
+  r = await tool('noema_curriculum_task', { curriculum_id: cid3, want: 'plan' });
+  ok(/task plan:/.test(r.text), 'the Claude app gets the plan tasks');
+  await p.locator('.noema-ovbox:has(.cm-replanall) button:has-text("Close")').click(); await wait(200);
   // an API curriculum: one step sent to the Claude app
   const cid4 = await p.evaluate(id => { const a = Noema.account.id; const c = JSON.parse(JSON.stringify(NoemaCurriculum.get(a, id))); c.id = 'capi' + Date.now().toString(36).slice(-4); c.provider = 'gemini'; c.title = 'API one'; for (const n of Object.values(c.nodes)) { delete n.pack; delete n.replan; if (!n.chapters.length) n.chapters = [{ ref: 'a', title: 'A', goals: ['g'], coverage: ['c'] }]; } NoemaCurriculum.save(a, c); return c.id; }, cid3);
   await p.click('.cm-top button:has-text("Curricula")'); await wait(300); await p.click(`.cm-card:has-text("API one")`); await wait(400);

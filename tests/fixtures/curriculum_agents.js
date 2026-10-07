@@ -48,4 +48,17 @@ function chapter(num, title, { broken = false } = {}) {
     exercises: ex,
     diagrams: [{ id: 'workflow', kind: 'flow', title: 'The Bayesian update', alt: 'Prior, then data, then posterior', caption: 'Prior × likelihood → posterior', items: [{ id: 'prior', label: 'Prior', note: 'Belief before data' }, { id: 'data', label: 'Data / likelihood', note: 'Evidence' }, { id: 'posterior', label: 'Posterior', note: 'Belief after data' }] }] };
 }
-module.exports = { dag, audit, expand, plans, test, chapter, T };
+/** Like a real planner: every chapter of a step that has the learner's files names them with the step's pages
+    (read from the task text: “### id — …” + “- file — ONLY pages a–b belong to this step (N pages in the file)”). */
+function withMaterial(p, text) {
+  const mat = {};
+  for (const b0 of String(text).split(/\n## The text of the learner's files/)[0].split(/\n### /).slice(1)) {
+    const b = b0.split(/\n## /)[0];
+    const id = (b.match(/^(\S+) — /) || [])[1]; if (!id) continue;
+    const files = [...b.matchAll(/^- (.+?)(?: — ONLY pages (\d+)–(\d+) belong to this step)?(?: \((\d+) pages in the file\))?$/gm)].map(m => ({ name: m[1], a: +(m[2] || 1), b: +(m[3] || m[4] || 0) }));
+    if (files.length) mat[id] = files;
+  }
+  for (const pl of p.plans) { const fs = mat[pl.nodeId]; if (fs) pl.chapters.forEach(ch => { ch.material = fs.map(f => f.b ? `${f.name} pp. ${f.a}–${f.b}` : f.name).join('; '); }); }
+  return p;
+}
+module.exports = { dag, audit, expand, plans, test, chapter, T, withMaterial };

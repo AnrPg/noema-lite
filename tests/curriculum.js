@@ -65,7 +65,7 @@ function vendors() {
       if (/^\/v1\/files\/file_pack_\d+\/content$/.test(p)) { const f = A.files[p.split('/')[3]]; res.writeHead(200, { 'content-type': 'application/octet-stream', ...cors }); return res.end(JSON.stringify(f.pack)); }
       if (p === '/v1/messages') {
         const b = JSON.parse(buf.toString());
-        if (b.stream && b.tool_choice) { const name = b.tool_choice.name; const text = b.messages[0].content[0].text; const round = (b.messages.length - 1) / 2; A.agent.push({ name, round, model: b.model, repairText: round ? b.messages.at(-1).content[0].text : '' }); return sse(res, name, agentAnswer(name, text, round)); }
+        if (b.stream && b.tool_choice) { const name = b.tool_choice.name; const text = b.messages[0].content[0].text; const round = (b.messages.length - 1) / 2; A.agent.push({ name, round, model: b.model, text, repairText: round ? b.messages.at(-1).content[0].text : '' }); return sse(res, name, agentAnswer(name, text, round)); }
         // a curriculum node built by the skill (engine/claude.js job)
         const first = b.messages[0].content[0].text; const sid = first.match(/Subject id: (\S+)/)[1];
         A.node.push({ sid, system: b.system[0].text, tools: b.tools.map(t => t.type || t.name), first });
@@ -124,6 +124,16 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   await wait(3500);
   ok(!!srv.state.kv[eva]?.['a:curriculum:' + c.id], 'the curriculum is synced to the cloud account (every device)');
   ok(!JSON.stringify(srv.state.kv[eva] || {}).includes('sk-ant'), 'the API key is not synced');
+  { // ✨ re-plan the whole curriculum with its own AI (here: Claude, API key) — batches of up to 5, prepared steps keep their chapters
+    const before = A.agent.filter(a => a.name === 'submit_chapter_plans').length;
+    await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); c.nodes.prob_basics.pack = { status: 'ready', id: 'x' }; c.nodes.prob_basics.chapters[0].title = 'KEEP ME'; c.nodes.conditional_probability.reviewed = '2026-01-01'; NoemaCurriculum.save(Noema.account.id, c); }, c.id);
+    const rr = await p.evaluate(id => NoemaCurriculum.Edit.replanAll(Noema.account.id, id, { instruction: 'exam focus' }), c.id);
+    const calls = A.agent.filter(a => a.name === 'submit_chapter_plans').slice(before);
+    const c2 = await p.evaluate(id => NoemaCurriculum.get(Noema.account.id, id), c.id);
+    ok(rr.ok && rr.count === 24 && calls.length === 5 && calls.every(a => /exam focus/.test(a.text)) && !calls.some(a => /prob_basics/.test(a.text.match(/node IDs: ([^\n]+)/)[1])), `✨ re-plan the whole curriculum (API): ${rr.count} steps in ${calls.length} requests, with the wish; the prepared step is left out`);
+    ok(c2.nodes.prob_basics.chapters[0].title === 'KEEP ME' && !c2.nodes.conditional_probability.reviewed, 'a prepared step keeps its chapters; re-planned steps are reviewed again');
+    await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); delete c.nodes.prob_basics.pack; NoemaCurriculum.save(Noema.account.id, c); }, c.id);
+  }
 
   console.log('— the map');
   await p.click('button:has-text("Open the map")'); await wait(800);

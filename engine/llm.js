@@ -139,8 +139,17 @@ window.NoemaLLM = (() => {
    * { acc, provider: 'claude'|'gemini', model, system, prompt, schema, name, validate(obj) → [errors], repairs = 2 }
    * → { data, usage, provider }
    */
+  /** A Claude call needs a model: the one chosen in ⚙️ Settings → Claude, else the newest Sonnet the key can use. */
+  const modelCache = {};
+  async function claudeModel(acc) {
+    try { const v = JSON.parse(localStorage.getItem(`noema1:${acc}:a:claudeModel`) || 'null'); if (v) return v; } catch (e) { }
+    const CL = window.NoemaClaude, key = CL?.Key.get(acc); if (!key) throw new LLMError('Add a Claude API key first (⚙️ Settings → Claude).', 401, 'nokey');
+    if (!modelCache[key]) modelCache[key] = CL.models(key).then(ms => CL.defaultModel(ms)).catch(e => { delete modelCache[key]; throw e; });
+    return modelCache[key];
+  }
   async function json(o) {
     const provider = o.provider || pick(o.acc); if (!provider) throw new LLMError('Add a Claude API key or a Gemini key first.', 401, 'nokey');
+    if (provider === 'claude' && !o.model) o = { ...o, model: await claudeModel(o.acc) };
     const name = o.name || 'submit';
     const tool = { name, description: o.toolDescription || 'Submit the answer (the whole JSON object) with this tool.', input_schema: o.schema };
     const total = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 };
@@ -173,5 +182,5 @@ window.NoemaLLM = (() => {
     return { text: r.text, sources: r.sources, usage: r.usage };
   }
 
-  return { available, pick, keys, json, research, check, parseJSON, claudeCall, geminiCall, LLMError };
+  return { available, pick, keys, json, research, check, parseJSON, claudeCall, geminiCall, claudeModel, LLMError };
 })();

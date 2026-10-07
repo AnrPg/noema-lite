@@ -114,7 +114,7 @@ function vendors() {
     ev('content_block_start', { index: 1, content_block: { type: 'text', text: '' } }); for (let i = 0; i < s.length; i += 300) ev('content_block_delta', { index: 1, delta: { type: 'text_delta', text: s.slice(i, i + 300) } });
     ev('content_block_stop', { index: 1 }); ev('message_delta', { delta: { stop_reason: 'end_turn' }, usage: { output_tokens: 100 } }); ev('message_stop', {}); res.end();
   };
-  const plans = ids => { const p = F.plans(ids); for (const x of p.plans) if (/dna_replication/.test(x.nodeId)) x.chapters.forEach((ch, i) => { ch.material = `dna-replication.pdf pp. ${i + 1}–${i + 2}`; }); return p; };
+  const plans = (ids, text) => { const p = F.withMaterial(F.plans(ids), text); for (const x of p.plans) if (/dna_replication/.test(x.nodeId)) x.chapters.forEach((ch, i) => { ch.material = `dna-replication.pdf pp. ${i + 1}–${i + 1}`; }); return p; };
   return http.createServer((req, res) => {
     const chunks = []; req.on('data', c => chunks.push(c)); req.on('end', async () => {
       const buf = Buffer.concat(chunks); const u = new URL(req.url, ABASE); const p = u.pathname;
@@ -142,8 +142,8 @@ function vendors() {
         if (b.stream && b.tool_choice?.type === 'tool') { A.forced = (A.forced || 0) + 1; return J(res, 400, { type: 'error', error: { type: 'invalid_request_error', message: 'tool_choice: type "tool" and "any" are not supported for this model.' } }); }
         if (b.stream && b.tool_choice) {
           const name = b.tool_choice.name || b.tools?.[0]?.name; const text = b.messages[0].content[0].text; const round = (b.messages.length - 1) / 2;
-          A.agent.push({ name, text, round, repairText: round ? b.messages.at(-1).content[0].text : '', choice: b.tool_choice.type, sys: b.system[0].text });
-          if (name === 'submit_chapter_plans') return sse(res, name, plans(text.match(/node IDs: ([^\n]+)\./)[1].split(', ')));
+          A.agent.push({ name, text, round, repairText: round ? b.messages.at(-1).content[0].text : '', choice: b.tool_choice.type, sys: b.system[0].text, model: b.model });
+          if (name === 'submit_chapter_plans') return sse(res, name, plans(text.match(/node IDs: ([^\n]+)\./)[1].split(', '), text));
           if (name === 'submit_imported_map') return sseText(res, { title: 'Genetics', nodes: [{ ref: 'mendel', title: 'Mendelian inheritance', role: 'foundation', prerequisites: [] }, { ref: 'dna', title: 'DNA structure', role: 'aspect', prerequisites: ['mendel'] }, { ref: 'expr', title: 'Gene expression', role: 'aspect', prerequisites: ['dna'] }, ...(round ? [] : [{ ref: 'qg', title: 'Quantum gravity', role: 'related', prerequisites: [] }])] });
           return J(res, 400, { error: { message: 'unscripted agent ' + name } });
         }
@@ -220,12 +220,16 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   const names = A.agent.map(a => a.name);
   ok(names.length && names.every(n => n === 'submit_chapter_plans') && names.length === 3, 'no AI mapping: no DAG creator / auditor / expander — only 3 chapter-planner batches');
   ok(A.forced >= 1 && A.forced <= 3 && A.agent.every(a => a.choice === 'auto') && /Always answer by calling the tool "submit_chapter_plans"/.test(A.agent[0].sys) && await p.evaluate(() => localStorage.getItem('noema-device:claude-json-mode:claude-sonnet-9')) === 'auto', 'a model that refuses a forced tool call: the app switches to tool_choice auto (each parallel batch at most once) and remembers it (no error)');
+  { const nA = A.agent.length;
+    await p.evaluate(() => NoemaLLM.json({ acc: Noema.account.id, provider: 'claude', system: 's', prompt: 'node IDs: dna_replication.', schema: NoemaCurriculum.schemas.S_PLAN, name: 'submit_chapter_plans' }));
+    ok(A.agent.length === nA + 1 && A.agent.at(-1).model === 'claude-sonnet-9', 'a Claude call without a model (re-plan, placement test, AI reading) gets the newest Sonnet — no “model: Field required”'); }
   const planText = A.agent.map(a => a.text).join('\n');
   ok(/The learner's own material/.test(planText) && /dna-replication\.pdf \(4 pages/.test(planText) && /Helicase and the fork \(p\. 2\)/.test(planText) && /Transcription notes\.md/.test(planText) && /RNA polymerase reads/.test(planText), 'the planner gets each step\'s files: pages, outline (bookmarks) and the first lines');
+  ok(/The text of the learner's files for these steps/.test(planText) && /\[p\. 2\] Helicase and the fork/.test(planText) && /\[p\. 4\] Okazaki fragments/.test(planText), 'and the TEXT of the step’s pages (every page, numbered) — the planner reads the files, not only their outline');
   let c = await p.evaluate(() => NoemaCurriculum.list(Noema.account.id)[0]);
   const dna = Object.keys(c.nodes).find(id => c.nodes[id].title === 'DNA replication'), tr = Object.keys(c.nodes).find(id => c.nodes[id].title === 'Transcription'), tl = Object.keys(c.nodes).find(id => c.nodes[id].title === 'Translation');
   ok(c.imported?.format === 'outline' && Object.keys(c.nodes).length === 11 && c.edges.length === 10 && c.title === 'Molecular information biology', 'the curriculum is your map, exactly (11 steps, 10 links)');
-  ok(c.nodes[dna].material.files[0].name === 'dna-replication.pdf' && c.nodes[dna].material.files[0].pages === 4 && c.nodes[dna].chapters[0].material === 'dna-replication.pdf pp. 1–2', 'each chapter of a step with files says which pages it comes from');
+  ok(c.nodes[dna].material.files[0].name === 'dna-replication.pdf' && c.nodes[dna].material.files[0].pages === 4 && c.nodes[dna].chapters[0].material === 'dna-replication.pdf pp. 1–1', 'each chapter of a step with files says which pages it comes from');
   const pidDna = await p.evaluate(([cid, id]) => NoemaCurriculum.packId(NoemaCurriculum.get(Noema.account.id, cid), id), [c.id, dna]);
   ok(c.files && Object.keys(c.files).length === 2 && c.nodes[dna].material.files[0].fileId === 'f1', 'each file is stored once for the curriculum (c.files) and linked to its step');
   ok(await until(() => Object.keys(srv.state.files).includes(`${iro}/sources/curfiles-${c.id}/f1/file.pdf`), 10000), 'the files are in the cloud (this device + every device)');
@@ -244,7 +248,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   const job = A.node[0] || {};
   ok(A.files.some(f => f.name === 'dna-replication.pdf') && job.uploads === 1, 'the PDF is uploaded into Claude’s sandbox with the job');
   ok(/THESE FILES ARE THE SOURCES/.test(job.system) && /Do NOT research the theory on the web/.test(job.system) && !job.tools.includes('web_fetch_20250910'), 'Claude builds from the file — no web research of the theory (no web_fetch)');
-  ok(/m1: dna-replication\.pdf \(4 pages\)/.test(job.first) && /From the material: dna-replication\.pdf pp\. 1–2/.test(job.first), 'the brief names the file (source id m1) and each chapter’s pages');
+  ok(/m1: dna-replication\.pdf \(4 pages\)/.test(job.first) && /From the material: dna-replication\.pdf pp\. 1–1/.test(job.first), 'the brief names the file (source id m1) and each chapter’s pages');
   const ixOk = await until(() => { const ix = JSON.parse(srv.state.kv[iro]?.['a:srcfiles:' + pidDna]?.value || '{}'); return Object.keys(ix).join() === 'm1' && ix.m1.size === A.pdf.length && ix.m1.cloud; }, 15000);
   if (!ixOk) console.log('   index:', srv.state.kv[iro]?.['a:srcfiles:' + pidDna]?.value);
   ok(ixOk, 'the packaged file is the step subject’s source (👁 at the cited pages)');

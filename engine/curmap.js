@@ -280,7 +280,7 @@ window.NoemaCurMap = (() => {
         if (n && !save()) return; busy.textContent = '⏳ The AI is planning the chapters…'; replan.disabled = true;
         try { const r = await E.plan(acc, cid, [id], { instruction: instr.value.trim() }); if (r.queued) { busy.textContent = '💬 Sent to your Claude app: it re-plans this step (copy the message from the 💬 bar of the map). Your current chapters stay until the new plan arrives.'; replan.disabled = false; return; } c = C().get(acc, cid); chapters = c.nodes[id].chapters.map(ch => ({ ...ch })); goals.value = c.nodes[id].learningGoals.join('\n'); drawCh(); busy.textContent = '✓ New plan — check it, change what you like, then save.'; }
         catch (e) { busy.textContent = '⚠️ ' + e.message; } replan.disabled = false;
-      } }, '✨ Re-plan the chapters with AI');
+      } }, c.provider === 'claudeapp' ? '✨ Re-plan with my Claude app' : '✨ Re-plan the chapters with AI');
       const head2 = mode === 'review' ? head('📝 Review this step before it is prepared', 'Change anything you like — the name, the goals, the chapters. When you confirm, the material is generated; after that the chapters can no longer change.')
         : mode === 'add' ? head('➕ Add a step', 'Name it, place it with its prerequisites and dependents; the AI can plan its chapters.')
           : head('✏️ Edit the step', locked ? 'Already prepared: you can rename it, move it and change its links; its chapters are fixed.' : 'Everything can change until the step is prepared.');
@@ -689,10 +689,29 @@ window.NoemaCurMap = (() => {
           const prov = el('select', { class: 'noema-input' }, el('option', { value: 'claudeapp' }, '💬 Claude app (your Claude plan)'), el('option', { value: 'auto' }, 'Automatic (API key here)'), el('option', { value: 'claude' }, 'Claude — API key'), el('option', { value: 'gemini' }, 'Gemini')); prov.value = c.provider || 'auto';
           const pause = el('input', { type: 'checkbox' }); pause.checked = G().paused();
           const review = el('input', { type: 'checkbox' }); review.checked = !c.autoApprove;
+          // ✨ re-plan every step not prepared yet, with the curriculum's own AI
+          const E = C().Edit; const cur0 = C().get(acc, cid); const todo = Object.values(cur0.nodes).filter(n => !E.generated(n)).length, fixed = Object.keys(cur0.nodes).length - todo;
+          const how = cur0.provider === 'claudeapp' ? 'your Claude app (your Claude plan)' : LLM().pick(acc, cur0.provider) === 'claude' ? 'Claude with your API key' : LLM().pick(acc, cur0.provider) === 'gemini' ? 'Gemini' : 'the AI (add a key first)';
+          const wish = el('input', { class: 'noema-input', placeholder: 'Optional wish for every step, e.g. “more worked examples”, “exam focus”' });
+          const rlog = el('div', { class: 'tiny cm-replanlog' });
+          const rbtn = el('button', { class: 'btn small cm-replanall', disabled: !todo, onclick: async () => {
+            if (!confirm(`Re-plan the chapters of ${todo} step${todo === 1 ? '' : 's'} with ${how}?${fixed ? `\n${fixed} step${fixed === 1 ? ' is' : 's are'} already prepared and keep${fixed === 1 ? 's' : ''} its chapters.` : ''}\nYou review each new plan before its step is prepared.`)) return;
+            rbtn.disabled = true; rlog.textContent = '⏳ …';
+            try {
+              const r = await E.replanAll(acc, cid, { instruction: wish.value.trim(), onLog: m => { rlog.textContent = m; } });
+              if (r.error) rlog.textContent = '⚠️ ' + r.error;
+              else if (r.queued) { rlog.textContent = `💬 ${r.count} steps wait for your Claude app — copy the message from the 💬 bar of the map.`; window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { }); }
+              else rlog.textContent = `✅ ${r.count} steps re-planned — review each one before it is prepared.`;
+            } catch (e) { rlog.textContent = '⚠️ ' + e.message; }
+            rbtn.disabled = false; drawMap();
+          } }, `✨ Re-plan all ${todo} step${todo === 1 ? '' : 's'}`);
+          const replanBox = el('details', { class: 'cg-faq' }, el('summary', {}, '✨ Re-plan the whole curriculum'),
+            el('p', { class: 'tiny' }, `Plans the chapters of every step that is not prepared yet again, the way this curriculum is planned: with ${how}${cur0.provider === 'claudeapp' ? '' : ' (here, now)'}. Steps with your files are planned from the text of their pages. ${fixed ? `${fixed} prepared step${fixed === 1 ? ' keeps its' : 's keep their'} chapters. ` : ''}Every re-planned step waits for your review again.`),
+            wish, el('div', { class: 'row' }, rbtn), rlog);
           b2.append(head('⚙️ ' + (c.title || c.goal), `${Object.keys(c.nodes).length} steps · built ${new Date(c.created).toLocaleDateString()}`),
             el('div', { class: 'noema-form' }, el('label', { class: 'cg-field' }, 'Prepare ahead', pf), el('label', { class: 'cg-field' }, 'Claude: limit per step ($)', bud), el('label', { class: 'cg-field' }, 'AI for new steps', prov),
               el('label', { class: 'tiny' }, review, ' Let me review each step before it is prepared (recommended)'),
-              el('label', { class: 'tiny' }, pause, ' Pause preparing in the background on this device'), keysBox(acc)),
+              el('label', { class: 'tiny' }, pause, ' Pause preparing in the background on this device'), keysBox(acc), replanBox),
             el('div', { class: 'row noema-ovfoot' },
               el('button', { class: 'btn primary', onclick: () => { const cur = C().get(acc, cid); cur.prefetch = +pf.value; cur.nodeBudget = Math.max(1, +bud.value || 8); cur.provider = prov.value; cur.autoApprove = !review.checked;
                 if (cur.provider !== 'claudeapp') for (const n of Object.values(cur.nodes)) if (n.pack?.status === 'app' && n.pack.auto) n.pack = { ...n.pack, status: null, queuedAt: null };   // queued ahead for the Claude app → prepared here now
