@@ -427,7 +427,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
     }
     if (!L().pick(acc, c.provider)) throw new Error('Add a Claude API key (✨ Create with Claude → Here in noema-lite) or a Gemini key (⚙️ Settings) first.');
     const on = (m, extra) => { logTo(c, m); onLog(m, c, extra); }; on.signal = signal;
-    if (L().pick(acc, c.provider) === 'claude' && !c.model) { try { const CL = window.NoemaClaude; c.model = CL.defaultModel(await CL.models(CL.Key.get(acc))); } catch (e) { throw new Error('Claude: ' + e.message); } }
+    if (L().pick(acc, c.provider) === 'claude' && !c.model) { try { const CL = window.NoemaClaude; const ms = await CL.models(CL.Key.get(acc)); const pref = kvGet(acc, 'claudeModel', ''); c.model = pref && ms.some(m => m.id === pref) ? pref : CL.defaultModel(ms); } catch (e) { throw new Error('Claude: ' + e.message); } }   // ⚙️ Settings → Claude model
     c.status = 'building'; save(acc, c);
     const stages = [['dag', stageDag], ['audit', stageAudit], ['expand', stageExpand], ['plan', stagePlan]];
     try {

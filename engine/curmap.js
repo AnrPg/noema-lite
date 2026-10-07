@@ -54,12 +54,14 @@ window.NoemaCurMap = (() => {
   }
   /* ---------- 💬 the Claude app (the learner's Claude plan) — engine/curjobs.js ---------- */
   const J = () => window.NoemaCurJobs;
+  const prefs = acc => { try { return JSON.parse(localStorage.getItem(`noema1:${acc}:a:settings`) || '{}'); } catch (e) { return {}; } };
   const cloudOn = acc => !!(window.NoemaCloud?.session?.() && acc === 'u_' + window.NoemaCloud.session().user.id);
   const copy = async (t, b) => { try { await navigator.clipboard.writeText(t); if (b) { const o = b.textContent; b.textContent = '✓ Copied'; setTimeout(() => { b.textContent = o; }, 1600); } } catch (e) { prompt('Copy this:', t); } };
   /** The AI choice of a new / imported curriculum: the Claude app first (usually the cheapest), then the keys. */
   function providerPick(acc, { what = 'builds the map and prepares the steps' } = {}) {
     const sel = el('select', { class: 'noema-input cm-provider' }, el('option', { value: 'claudeapp' }, '💬 Claude app — with your Claude plan (recommended, usually cheaper)'), el('option', { value: 'auto' }, 'Automatic (Claude API key if it is here, else Gemini)'), el('option', { value: 'claude' }, 'Claude — API key'), el('option', { value: 'gemini' }, 'Gemini — free key'));
-    sel.value = cloudOn(acc) || !LLM().pick(acc, 'auto') ? 'claudeapp' : 'auto';
+    const pref = prefs(acc).curProvider;   // ⚙️ Settings → Claude → AI for new curricula
+    sel.value = pref && [...sel.options].some(o => o.value === pref) ? pref : cloudOn(acc) || !LLM().pick(acc, 'auto') ? 'claudeapp' : 'auto';
     const keys = keysBox(acc);
     const app = el('div', { class: 'cm-appinfo' },
       el('p', {}, el('b', {}, '💬 Your own Claude does the work '), `(Claude app or claude.ai, with your Free / Pro / Max plan) — it ${what}; noema-lite only shows you what to paste into a Claude chat, and the results arrive here by themselves.`),
@@ -141,7 +143,7 @@ window.NoemaCurMap = (() => {
       const constraints = el('textarea', { class: 'noema-input', rows: 2, placeholder: 'Optional: anything else the agents must respect' });
       const PP = providerPick(acc), provider = PP.sel;
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
-      const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: '8' });
+      const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(prefs(acc).curBudget || 8) });
       const err = el('div', { class: 'tiny cg-kstat bad' });
       const go = el('button', { class: 'btn primary cg-go', onclick: () => {
         err.textContent = '';
@@ -334,7 +336,7 @@ window.NoemaCurMap = (() => {
       const learner = el('input', { class: 'noema-input', placeholder: 'Optional: what you already know' });
       const PP = providerPick(acc, { what: 'plans the chapters of your steps and prepares each step as a subject (from your files, when the step has some)' }), provider = PP.sel;
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
-      const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: '8' });
+      const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: String(prefs(acc).curBudget || 8) });
       const fileBox = el('div', { class: 'cm-files' }), fileSum = el('div', { class: 'tiny cm-filesum' });
       const drop = el('label', { class: 'cg-drop' }, '📎 Add the material (PDF, Word, slides, notes… or a .zip)', el('input', { type: 'file', multiple: true, onchange: e => { addFiles([...e.target.files]); e.target.value = ''; } }));
       const folder = el('label', { class: 'btn small' }, '📁 Add a folder', el('input', { type: 'file', multiple: true, webkitdirectory: true, style: { display: 'none' }, onchange: e => { addFiles([...e.target.files].filter(f => !/(^|\/)\./.test(f.webkitRelativePath || f.name))); e.target.value = ''; } }));

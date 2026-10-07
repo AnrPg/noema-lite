@@ -74,8 +74,8 @@ async function mockGemini(ctx) {
   await page.evaluate(() => { location.hash = '#/'; }); await wait(500);
   await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
   // account menu tabs
-  for (const t of ['profile', 'subjects', 'backup', 'cloud']) { await page.evaluate(t => { $('.modal')?.remove(); openAccountMenu(t); }, t); await wait(350); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
-  ok(await page.$$eval('.modal .tabs button', b => b.length) === 5, 'account menu has 5 tabs (incl. Help)');
+  for (const t of ['profile', 'settings', 'subjects', 'backup', 'cloud']) { await page.evaluate(t => { $('.modal')?.remove(); openAccountMenu(t); }, t); await wait(350); await page.screenshot({ path: SHOTS + `/a3_menu_${t}.png` }); }
+  ok(await page.$$eval('.modal .tabs button', b => b.map(x => x.textContent).join('|')) === '👤 Profile|⚙️ Settings|📚 Subjects|💾 Backup & restore|☁️ Cloud|❓ Help', 'account menu has 6 tabs: Profile · Settings · Subjects · Backup · Cloud · Help');
   await page.evaluate(() => { $('.modal')?.remove(); openAccountMenu('backup'); }); await wait(500);
   ok(await page.evaluate(() => $$('.modal details.accsec').length === 4 && $$('.modal details.accsec[open]').length === 0), 'backup & restore sections are collapsed by default');
   await page.click('.modal details.accsec:nth-of-type(2) summary'); await wait(300);

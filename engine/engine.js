@@ -590,36 +590,8 @@ async function aiDrillGrade(d, answer) {
   return g;
 }
 
-/* ---------- settings ---------- */
-function openSettings() {
-  modal((b, close) => {
-    const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…' });
-    const sel = h('select', {}, ...(S.settings.models.length ? S.settings.models : FALLBACK_MODELS).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
-    const status = h('div', { class: 'tiny' }, S.settings.model ? 'Current model: ' + S.settings.model : 'Model will be auto-detected on first use.');
-    const theme = h('select', {}, ...[['auto', 'Auto (system)'], ['light', 'Light'], ['dark', 'Dark']].map(([v, l]) => h('option', { value: v, selected: S.settings.theme === v }, l)));
-    const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal });
-    const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
-    const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
-    b.append(h('h2', {}, '⚙️ Settings'),
-      !S.settings.apiKey ? h('div', { class: 'callout warn', style: { marginTop: '10px' } }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
-      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
-      h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
-        h('div', { class: 'row' },
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); status.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); status.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { status.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); status.textContent = 'Testing…'; try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: Brick is ready 🦉' }] }], temperature: 0 }); status.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { status.textContent = '⚠️ ' + e.message; } } }, '🧪 Test')),
-        status),
-      h('div', { class: 'field' }, h('label', {}, 'Theme'), theme),
-      h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal),
-      h('label', { class: 'row', style: { margin: '10px 0' } }, snd, 'Sound effects'),
-      h('label', { class: 'row', style: { margin: '10px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'),
-      h('div', { class: 'hr' }),
-      h('div', { class: 'row' },
-        h('button', { class: 'btn small', onclick: () => { close(); openAccountMenu('backup'); } }, '💾 Backup & restore…'),
-        h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`)),
-      h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '20px' } },
-        h('button', { class: 'btn primary', onclick: () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; save(); applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔'); } }, 'Save')));
-  });
-}
+/* ---------- settings: a tab of the account menu (engine/src/70_account.js ACC_VIEWS.settings) ---------- */
+function openSettings() { openAccountMenu('settings'); }
 
 /* ---- 30_exercises.js ---- */
 /* ===================== Exercise engine ===================== */
@@ -2647,7 +2619,7 @@ function threadTracker(key, histLen) {
 
 /* ---- 70_account.js ---- */
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = [['profile', '👤 Profile'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud'], ['help', '❓ Help']];
+const ACC_TABS = [['profile', '👤 Profile'], ['settings', '⚙️ Settings'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud'], ['help', '❓ Help']];
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
   const d = h('details', { class: 'accsec', open: open || null },
@@ -2677,6 +2649,77 @@ function openAccountMenu(tab = 'profile') {
 }
 
 const ACC_VIEWS = {
+  /** ⚙️ Settings: the AI (Gemini for the tutor, Claude optionally), how the app looks and studies, this subject. */
+  settings(body, close) {
+    const set = accountSettings(); const CL = window.NoemaClaude; const acc = ACCOUNT.id;
+    // — Gemini (the tutor and every in-app AI helper)
+    const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': 'Gemini API key' });
+    const sel = h('select', { 'aria-label': 'Gemini model' }, ...(S.settings.models.length ? S.settings.models : FALLBACK_MODELS).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
+    const gstat = h('div', { class: 'tiny' }, S.settings.model ? 'Current model: ' + S.settings.model : 'The model is detected on first use.');
+    const geminiBox = h('div', {},
+      !S.settings.apiKey ? h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
+      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
+      h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
+        h('div', { class: 'row' },
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { gstat.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),
+          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); gstat.textContent = 'Testing…'; try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: Brick is ready 🦉' }] }], temperature: 0 }); gstat.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { gstat.textContent = '⚠️ ' + e.message; } } }, '🧪 Test')),
+        gstat));
+    // — Claude (optional): the API key for ✨ Create with Claude and curricula; never synced
+    const ckey = h('input', { type: 'password', value: CL ? CL.Key.get(acc) : '', placeholder: 'sk-ant-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': 'Claude API key' });
+    const remember = h('input', { type: 'checkbox', checked: CL ? (CL.Key.remembered(acc) || !CL.Key.get(acc)) : true });
+    const jgetA = (k, d) => { try { const v = Noema.kv.get(Noema.kv.accountKey(k)); return v == null ? d : JSON.parse(v); } catch (e) { return d; } };
+    const cmodel = h('select', { 'aria-label': 'Claude model' }, h('option', { value: '' }, 'Newest Sonnet (recommended)'));
+    const savedModel = jgetA('claudeModel', ''); if (savedModel) cmodel.append(h('option', { value: savedModel, selected: true }, savedModel));
+    const cbudget = h('input', { type: 'number', min: 1, step: 1, value: jgetA('claudeBudget', 15), style: { width: '90px' }, 'aria-label': 'Spending limit per subject' });
+    const nbudget = h('input', { type: 'number', min: 1, step: 1, value: set.curBudget || 8, style: { width: '90px' }, 'aria-label': 'Spending limit per curriculum step' });
+    const curProv = h('select', { 'aria-label': 'AI for new curricula' }, ...[['', 'Recommended (the Claude app for cloud accounts)'], ['claudeapp', '💬 Claude app — your Claude plan'], ['auto', 'Automatic — an API key here'], ['claude', 'Claude — API key'], ['gemini', 'Gemini — free key']].map(([v, l]) => h('option', { value: v, selected: (set.curProvider || '') === v }, l)));
+    const cstat = h('div', { class: 'tiny' });
+    const checkClaude = async () => {
+      const k = ckey.value.trim();
+      if (!k) { CL.Key.forget(acc); cstat.textContent = 'No Claude key on this device.'; return true; }
+      if (!CL.Key.looksValid(k)) { cstat.textContent = '⚠️ That is not a Claude API key (it starts with sk-ant-).'; return false; }
+      cstat.textContent = '⏳ Checking…';
+      try { const ms = await CL.models(k); const cur = cmodel.value; cmodel.innerHTML = ''; cmodel.append(h('option', { value: '' }, 'Newest Sonnet (recommended) — ' + CL.defaultModel(ms)), ...ms.map(m => h('option', { value: m.id, selected: m.id === cur }, m.name))); CL.Key.set(acc, k, remember.checked); cstat.textContent = '✅ The key works.' + (remember.checked ? ' Remembered on this device only (never sent to the noema-lite cloud, not in backups).' : ' Kept until you close this tab.'); return true; }
+      catch (e) { cstat.textContent = '❌ ' + e.message; return false; }
+    };
+    const claude = !CL ? h('p', { class: 'tiny' }, 'This installation has no Claude module.') : h('div', {},
+      h('p', { class: 'tiny' }, 'Optional. Claude builds subjects from your sources (✨ Create with Claude) and curricula. With your Claude plan you need no key here — use the Claude app with the noema-lite connector (ways B and C). A key is for way A: everything runs here, paid per use.'),
+      h('div', { class: 'field' }, h('label', {}, 'Claude API key ', tip('From the Claude Console (platform.claude.com → API keys). It stays in this browser: never uploaded to the noema-lite cloud, not part of backups. Leave it empty to remove it.')), ckey,
+        h('label', { class: 'row tiny' }, remember, 'Remember it on this device (untick on a shared computer)'),
+        h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: checkClaude }, '✔️ Check the key'), CL.Key.get(acc) ? h('button', { class: 'btn small ghost', onclick: () => { CL.Key.forget(acc); ckey.value = ''; cstat.textContent = '🗑 Removed from this device.'; } }, 'Remove the key') : null), cstat),
+      h('div', { class: 'field' }, h('label', {}, 'Claude model ', tip('“Sonnet” gives very good courses for its price; “Opus” is the strongest and costs more; “Haiku” is cheaper but weaker. Check the key to list the models your key can use.')), cmodel),
+      h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Limit per subject ($)'), cbudget), h('div', { class: 'field' }, h('label', {}, 'Limit per curriculum step ($)'), nbudget)),
+      h('div', { class: 'field' }, h('label', {}, 'AI for new curricula ', tip('Preselected when you create or import a curriculum. The Claude app (your Claude plan) is usually the cheapest for curricula; an API key or Gemini runs everything here.')), curProv),
+      h('div', { class: 'row' }, h('button', { class: 'btn small', onclick: () => { close(); Noema.claudeGuide(); } }, '✨ Create a subject with Claude'), h('button', { class: 'btn small', onclick: () => openAccountMenu('help') }, '❓ How to set up Claude (A · B · C)')));
+    if (CL && CL.Key.get(acc)) setTimeout(checkClaude, 0);
+    // — display & studying
+    const theme = h('select', { 'aria-label': 'Theme' }, ...[['auto', 'Auto (system)'], ['light', 'Light'], ['dark', 'Dark']].map(([v, l]) => h('option', { value: v, selected: S.settings.theme === v }, l)));
+    const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': 'Daily XP goal' });
+    const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
+    const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
+    const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Theme'), theme), h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal)),
+      h('label', { class: 'row', style: { margin: '8px 0' } }, snd, 'Sound effects'),
+      h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'));
+    const subject = h('div', { class: 'row' },
+      h('button', { class: 'btn small', onclick: () => show('backup') }, '💾 Backup & restore…'),
+      h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`));
+    const show = t => openAccountMenu(t);
+    const hasClaude = !!(CL && CL.Key.get(acc));
+    body.append(
+      accSection('🤖', 'Gemini — the AI tutor', { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? 'key set' : 'no key' }, open: !S.settings.apiKey, body: geminiBox }),
+      accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and curricula: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
+      accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
+      accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
+      h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
+        h('button', { class: 'btn primary', onclick: async () => {
+          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; save();
+          putAccountSettings({ curProvider: curProv.value || undefined, curBudget: Math.max(1, +nbudget.value || 8) });
+          if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
+            if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }
+          applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔');
+        } }, 'Save settings')));
+  },
+
   profile(body, close) {
     const set = accountSettings();
     const name = h('input', { value: ACCOUNT.name, maxlength: 30 });

@@ -10,6 +10,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m)
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const PORT = 54335, BASE = `http://localhost:${PORT}`, APORT = 54336, ABASE = `http://localhost:${APORT}`;
 const KEY = 'sk-ant-api03-' + 'x'.repeat(40);
+const until = async (fn, ms = 15000, step = 200) => { const t = Date.now(); while (Date.now() - t < ms) { try { if (await fn()) return true; } catch (e) { } await new Promise(r => setTimeout(r, step)); } return false; };
 const PNG = fs.readFileSync(path.join(ROOT, 'library/subjects/databricks/media/spark-stage-page.png'));
 
 /* ---------- a scripted Claude API ---------- */
@@ -161,6 +162,26 @@ function messages(body, res, J) {
   ok(!Object.keys(F).some(k => /heart-by-claude\/book\//.test(k)) && Object.keys(F).filter(k => k.includes('/sources/heart-by-claude/')).length === 3, 'the unsplit original is not attached next to its parts');
   ok(/split|SKILL\.md §3b|work\/<id>\/sources/.test(m1.system[0].text) && /\.noema\.zip/.test(m1.system[0].text), 'Claude is told to package every uploaded file (or its parts) and to copy the .noema.zip');
   ok(!(await p.evaluate(() => NoemaClaude.jobs(Noema.account.id))).length, 'the finished job is cleaned up');
+
+  console.log('— ⚙️ Settings: a tab of the profile menu, with an optional Claude section');
+  await p.click('.iconbtn[title="Settings"]'); await wait(400);
+  ok(await p.locator('.accbox .tabs button.on').innerText() === '⚙️ Settings' && await p.locator('.accbox .accsec').count() === 4, '⚙️ opens the profile menu on its ⚙️ Settings tab: Gemini · Claude · Display & studying · this subject');
+  await p.click('.accsec summary:has-text("Claude (optional)")'); await wait(300);
+  ok(await until(async () => /The key works/.test(await p.locator('.accsec:has-text("Claude (optional)")').innerText()), 6000) && await p.locator('select[aria-label="Claude model"] option').count() === 4, 'the Claude key on this device is shown and checked; its models are listed');
+  await p.selectOption('select[aria-label="Claude model"]', 'claude-opus-9'); await p.fill('input[aria-label="Spending limit per curriculum step"]', '5'); await p.selectOption('select[aria-label="AI for new curricula"]', 'claude');
+  await p.click('button:has-text("Save settings")'); await wait(500);
+  ok(await p.evaluate(() => [JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:claudeModel`)), JSON.parse(localStorage.getItem(`noema1:${Noema.account.id}:a:settings`)).curProvider]).then(x => x[0] === 'claude-opus-9' && x[1] === 'claude'), 'saved: the Claude model and the AI for new curricula');
+  await p.evaluate(() => NoemaCurMap.create(Noema.account.id)); await wait(400);
+  ok(await p.locator('.cm-provider').inputValue() === 'claude' && await p.locator('.cg-budget').inputValue() === '5', 'a new curriculum starts with them (Claude, $5 per step)');
+  await p.locator('.noema-ovbox button:has-text("Close")').last().click(); await wait(300);
+  await p.evaluate(() => openAccountMenu('settings')); await wait(300); await p.click('.accsec summary:has-text("Claude (optional)")');
+  await p.click('button:has-text("Remove the key")'); await wait(200);
+  ok(await p.evaluate(() => NoemaClaude.Key.get(Noema.account.id)) === '', 'Remove the key → gone from this device');
+  await p.fill('input[aria-label="Claude API key"]', KEY); await p.click('button:has-text("Check the key")');
+  ok(await until(() => p.evaluate(k => NoemaClaude.Key.get(Noema.account.id) === k, KEY), 5000), 'pasting a key + ✔️ Check → kept on this device again');
+  await p.screenshot({ path: SHOTS + '/c5_settings.png' });
+  ok(!JSON.stringify(srv.state.kv[dora] || {}).includes('sk-ant'), 'still: the Claude key never reaches the noema-lite cloud');
+  await p.evaluate(() => document.querySelector('.modal')?.remove());
 
   console.log('— phone');
   const ph = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });

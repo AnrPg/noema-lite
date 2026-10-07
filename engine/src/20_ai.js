@@ -317,33 +317,5 @@ async function aiDrillGrade(d, answer) {
   return g;
 }
 
-/* ---------- settings ---------- */
-function openSettings() {
-  modal((b, close) => {
-    const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…' });
-    const sel = h('select', {}, ...(S.settings.models.length ? S.settings.models : FALLBACK_MODELS).map(m => h('option', { value: m, selected: m === S.settings.model }, m)));
-    const status = h('div', { class: 'tiny' }, S.settings.model ? 'Current model: ' + S.settings.model : 'Model will be auto-detected on first use.');
-    const theme = h('select', {}, ...[['auto', 'Auto (system)'], ['light', 'Light'], ['dark', 'Dark']].map(([v, l]) => h('option', { value: v, selected: S.settings.theme === v }, l)));
-    const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal });
-    const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
-    const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
-    b.append(h('h2', {}, '⚙️ Settings'),
-      !S.settings.apiKey ? h('div', { class: 'callout warn', style: { marginTop: '10px' } }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
-      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
-      h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
-        h('div', { class: 'row' },
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); status.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); status.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { status.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),
-          h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; save(); status.textContent = 'Testing…'; try { const t = await gemini({ contents: [{ role: 'user', parts: [{ text: 'Reply with exactly: Brick is ready 🦉' }] }], temperature: 0 }); status.textContent = '✅ ' + t.trim().slice(0, 80); } catch (e) { status.textContent = '⚠️ ' + e.message; } } }, '🧪 Test')),
-        status),
-      h('div', { class: 'field' }, h('label', {}, 'Theme'), theme),
-      h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal),
-      h('label', { class: 'row', style: { margin: '10px 0' } }, snd, 'Sound effects'),
-      h('label', { class: 'row', style: { margin: '10px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'),
-      h('div', { class: 'hr' }),
-      h('div', { class: 'row' },
-        h('button', { class: 'btn small', onclick: () => { close(); openAccountMenu('backup'); } }, '💾 Backup & restore…'),
-        h('button', { class: 'btn small', onclick: () => confirmBox(`Reset your progress in ${SUBJ.title}? (a restore point is kept)`, async () => { await Noema.backup.restorePoint(ACCOUNT.id, 'Before reset of ' + SUBJ.title); const st = S.settings; for (const k of Object.keys(S)) delete S[k]; Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null, settings: st }); flushSave(); close(); route(); renderTopStats(); }) }, `🗑️ Reset ${SUBJ.title} progress`)),
-      h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '20px' } },
-        h('button', { class: 'btn primary', onclick: () => { S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; save(); applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔'); } }, 'Save')));
-  });
-}
+/* ---------- settings: a tab of the account menu (engine/src/70_account.js ACC_VIEWS.settings) ---------- */
+function openSettings() { openAccountMenu('settings'); }
