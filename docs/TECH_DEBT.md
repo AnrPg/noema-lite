@@ -11,6 +11,7 @@ what to think about first, and status. Newest at the top.
 | TD-4 | Tutor that can *see* the picture (multimodal Gemini) | 💭 idea | 2026-10-06 |
 | TD-5 | Real Supabase sync tested only against the emulator | ✅ closed 2026-10-07 | 2026-10-06 |
 | TD-6 | Claude: verify the connector with claude.ai and way A with a real API key | 📋 known gap | 2026-10-06 |
+| TD-7 | Curricula: run once with real Claude / Gemini keys; preparation only while a tab is open | 📋 known gap | 2026-10-07 |
 
 ---
 
@@ -80,3 +81,11 @@ connector once in claude.ai and save one subject. **Way A** (✨ Create with Cla
 tested against a scripted Claude API (`tests/claude_api.js`); run it once with a real API key and a small
 PDF: watch that the skill upload, PDFs in the container and the web-picture tool behave as in the test
 (the code falls back automatically if PDFs or web search are refused).
+
+### TD-7 · Curricula on the real vendors — 📋 known gap
+`tests/curriculum.js` runs the whole flow against scripted Claude and Gemini APIs. Still to do once by
+hand: build a small curriculum with a real Claude key and one with a real Gemini key; prepare one step
+each; check cost, time, and the quality of a Gemini-built step against a skill-built one.
+**Design limit:** steps are prepared in the browser, so only while a noema-lite tab is open somewhere.
+A server-side worker would need the user's API key on a server — deliberately not done (keys stay on
+the device). Possible later: a Supabase Edge Function that holds a key the user opts in to store.

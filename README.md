@@ -42,6 +42,10 @@ python3 tools/db_sync.py                # refresh the SQLite backup database (ve
 python3 tools/db_restore.py list        # what the database holds; restore files/subjects/packs/backups into a NEW folder
 ```
 
+## Two ways to study
+* **📚 Subjects** — ready-made courses made from sources (below).
+* **🧭 Curricula** — type a goal; four AI agents map every prerequisite, the whole goal and its applications as a graph of steps; each step becomes a full subject, prepared on demand from official sources and kept for good. Steps open when their prerequisites are mastered. See docs/CURRICULUM.md.
+
 ## Adding a subject (through Claude)
 In the app: **✨ Create with Claude** — any user can do it, two ways (docs/CLAUDE_CONNECTOR.md): **A.** here in the app with their own Claude API key (the app uploads the skill, runs Claude and imports the result), or **B.** in the Claude app/website with their Claude plan + the noema-lite connector. Finished subjects can be shared: 🔗 on a subject → public (🌍 Explore) or to one person (🔔), see docs/SHARING.md. Or, for the shared library:
 1. Give Claude the sources (PDFs, links, notes) + subject name, group, goal (exam / understanding / project) and language.
@@ -72,6 +76,7 @@ Data written by the app before it was renamed is copied over automatically on fi
 ## Γρήγορος οδηγός (Ελληνικά)
 * Άνοιγμα: διπλό κλικ στο `index.html` (Chrome). Διαλέγεις προφίλ και μάθημα από τα chips.
 * Νέο μάθημα: **✨ Create with Claude** — (A) μέσα στην εφαρμογή με δικό σου Claude API key, ή (B) στην εφαρμογή/ιστοσελίδα του Claude με τον connector `https://noema-lite.netlify.app/mcp` (ίδια διεύθυνση για όλους, σε Windows, Mac, Linux, κινητά).
+* Curricula: 🧭 → γράφεις τον στόχο → χάρτης βημάτων (προαπαιτούμενα → στόχος → εφαρμογές)· κάθε βήμα γίνεται μάθημα όταν φτάσεις εκεί.
 * Κοινή χρήση: 🔗 πάνω σε δικό σου μάθημα → δημόσιο (🌍 Explore) ή σε ένα άτομο (🔔 ειδοποίηση, Accept / Reject).
 * Αντίγραφα ασφαλείας: μενού λογαριασμού (το emoji πάνω δεξιά) → 💾 Backup & restore.
 * Cloud & πρόσβαση από παντού: δες `cloud/README.md`.

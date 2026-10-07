@@ -93,8 +93,9 @@
       } catch (e) { keys.forEach(k => st.pending.add(k)); st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
     },
     startAutoSync(acc) {
-      if (!window.Noema) return;
-      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; st.pending.add(key.slice(('noema1:' + acc + ':').length)); clearTimeout(st.timer); st.timer = setTimeout(() => this.push(acc).catch(() => { }), 3000); emit(); });
+      if (!window.Noema || st.autoAcc === acc) return; st.autoAcc = acc;   // once per page
+      // debounce 3 s, but never longer than 10 s after the first unsynced change (steady writes must not starve the sync)
+      Noema.kv.listeners.push((key, a) => { if (a !== acc) return; st.pending.add(key.slice(('noema1:' + acc + ':').length)); st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(() => { }); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); emit(); });
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') this.push(acc, { keepalive: true }).catch(() => { }); else this.pull(acc).catch(() => { }); });
       addEventListener('online', () => { this.push(acc).catch(() => { }); this.pushConvos(acc).catch(() => { }); });
       if (window.NoemaConvos) NoemaConvos.onChange((a, r) => { if (a !== acc) return; st.convoPending.add(r.id); clearTimeout(st.ctimer); st.ctimer = setTimeout(() => this.pushConvos(acc).catch(() => { }), 2500); emit(); });

@@ -1458,6 +1458,8 @@ function topbar() {
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
     h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
+    Noema.node ? h('button', { class: 'chip curchip', title: 'Back to the map of this curriculum', onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🧭', h('span', { class: 'hide-s' }, ' Map'))
+      : h('button', { class: 'chip curchip', title: 'Curricula: type a goal, get a map of steps', onclick: () => Noema.curricula() }, '🧭', h('span', { class: 'hide-s' }, ' Curricula')),
     h('button', { class: 'chip explorechip', title: 'Explore: every public subject — info, statistics, study it', onclick: () => Noema.explore() }, '🌍', h('span', { class: 'hide-s' }, ' Explore')),
     timer,
     h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: 'Day streak' }),
@@ -1507,6 +1509,19 @@ function ring(pct, size = 120, stroke = 12, color = 'var(--c)') {
   return holder;
 }
 function animateRings(root) { requestAnimationFrame(() => requestAnimationFrame(() => $$('circle[data-off]', root).forEach(c => c.style.strokeDashoffset = c.dataset.off))); }
+/** This subject is a step of a 🧭 curriculum: where it sits, mastery so far, back to the map. */
+function nodeBanner() {
+  if (!Noema.node || !window.NoemaCurMap) return null;
+  const info = NoemaCurMap.nodeInfo(ACCOUNT.id, Noema.node); if (!info) return null;
+  const secs = COURSE.flatMap(c => c.sections.map(s => s.id)); const exN = COURSE.reduce((a, c) => a + c.exercises.length, 0);
+  const read = secs.length ? secs.filter(id => S.read[id]).length / secs.length : 0, solved = exN ? Object.values(S.res).filter(r => r.ok > 0).length / exN : 0;
+  const done = info.st.mastered || (read >= 0.999 && solved >= NoemaCurriculum.PASS);
+  return h('div', { class: 'callout key nodebanner' }, h('span', { class: 'ci' }, '🧭'),
+    h('div', { class: 'grow' }, h('b', { class: 't' }, `Step of “${info.c.title || info.c.goal}”`),
+      h('div', { class: 'tiny' }, done ? '✅ Mastered — the next steps are open on the map.' : `Mastery: ${Math.round(read * 100)} % of the sections read · ${Math.round(solved * 100)} % of the exercises solved — the next steps open at 100 % read + ${Math.round(NoemaCurriculum.PASS * 100)} % solved.`),
+      h('div', { class: 'nbbar' }, h('i', { style: { width: Math.round(Math.min(read, solved / NoemaCurriculum.PASS) * 100) + '%' } }))),
+    h('button', { class: 'btn small', onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🗺️ Map'));
+}
 function homeView() {
   setTutorContext(null);
   setAccent(document.body, null);
@@ -1517,7 +1532,7 @@ function homeView() {
   const search = h('div', { class: 'search' }, h('span', { class: 'si' }, '🔎'), h('input', { placeholder: `Jump to any concept…${SUBJ.searchExamples ? ' (e.g. ' + SUBJ.searchExamples + ')' : ''}`, oninput: e => doSearch(e.target.value, results) }));
   const last = S.last && SEC[S.last];
   const v = view(
-    setupBanner(),
+    setupBanner(), nodeBanner(),
     h('section', { class: 'hero' },
       h('div', {},
         h('h1', { class: 'herohead', html: fmt(SUBJ.hero?.headline || `Master **${SUBJ.title}**, one bite at a time.`) }),
@@ -2795,6 +2810,13 @@ const GUIDES = {
     'Claude reads everything, adds pictures (from your sources, from the web and its own diagrams / graphs) and builds the pack; the new subject appears in your picker.',
     'Share it if you like: 🔗 on the subject → public (🌍 Explore) or with one person.'],
     notes: ['Way A: your API key stays on this device only. Way B: noema-lite never sees your Claude login.', 'Updates are additive: Claude keeps all ids, so your progress stays.'] },
+  curricula: { icon: '🧭', title: 'Curricula: from a goal to a map of steps', who: 'Everyone with a Claude API key or a Gemini key', steps: [
+    'Subject picker → **🧭 Curricula** (or 🧭 in the top bar) → **➕ New curriculum**.',
+    'Type what you want to master, your starting point and the depth. Four AI agents map it: **every prerequisite** (from several sciences), **the whole goal** (aspects, sub-topics, synthesis) and **applications**; then they plan the chapters of every step.',
+    'The map shows three parts. **🔓 open** steps can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.',
+    'Every step becomes a full subject (theory, exercises, flashcards, drills, tutor), prepared in the background a few steps ahead while the app is open — with Claude from official sources found on the web, or with Gemini and Google Search.',
+    'A step is **✅ mastered** when all its sections are read and 80 % of its exercises solved — or with **🎓 I already know this** (8 of 10 in a short test).'],
+    notes: ['Curricula and prepared steps are saved in your account (cloud) like your subjects.', 'Claude costs a few dollars per prepared step (limit per step in ⚙️ of the map); Gemini’s free quota is limited.'] },
   friends: { icon: '👥', title: 'Invite friends', who: 'You', steps: [
     `Send them the website link${SITE_URL ? ' (' + SITE_URL + ')' : ''}.`,
     'Each friend creates their **own cloud account** — they see the shared subjects, never your progress, conversations or key.',

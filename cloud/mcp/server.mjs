@@ -6,11 +6,10 @@
    /oauth/consent). Every call carries the user's own access token, so Supabase row-level security
    applies exactly as in the app — this function holds NO secret keys.
 
-   tools/build.py (site) prepends `const CFG = {…}; const DOCS = {…};` and writes dist/functions/mcp.mjs. */
+   tools/build.py (site) prepends `const CFG = {…}; const DOCS = {…};` + engine/packcheck.js and writes dist/functions/mcp.mjs. */
 
 const VERSION = '1.0.0';
 const PROTOCOLS = ['2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05'];
-const TYPES = new Set(['mcq', 'tf', 'odd', 'order', 'match', 'bucket', 'cloze', 'spotbug', 'calc', 'scenario', 'free', 'write', 'img_hotspot', 'img_sequence', 'img_reveal', 'img_drag', 'img_label', 'img_select', 'img_occlusion']);
 const MAX_INLINE = 1_500_000;          // noema_save_pack: bigger packs go through the signed upload URL
 const ID_RE = /^[a-z0-9][a-z0-9-]{1,60}$/;
 const CORS = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'authorization, content-type, mcp-protocol-version, mcp-session-id', 'access-control-allow-methods': 'POST, GET, OPTIONS', 'access-control-expose-headers': 'www-authenticate' };
@@ -32,46 +31,8 @@ async function sb(path, token, { method = 'GET', body, headers = {}, raw = false
   const t = await r.text(); return t ? JSON.parse(t) : null;
 }
 
-/* ---------- pack checks (the Python validator in the skill is the full one; this is the gate) ---------- */
-function checkPack(p, expectId) {
-  const E = [], W = [];
-  if (!p || p.format !== 'noema-pack') E.push('format must be "noema-pack"');
-  const s = p?.subject || {};
-  if (!ID_RE.test(s.id || '')) E.push('subject.id must be lowercase letters/digits/hyphens');
-  if (expectId && s.id !== expectId) E.push(`subject.id is "${s.id}" but you uploaded it as "${expectId}"`);
-  if (!s.title) E.push('subject.title missing');
-  const media = p?.media || {};
-  for (const [mid, m] of Object.entries(media)) {
-    if (m.fetch === 'app' && !m.data) { if (!/^https?:\/\//.test(m.url || '')) E.push(`media ${mid}: a "fetch": "app" picture needs its image url`); }
-    else if (!/^data:image\//.test(m.data || '')) E.push(`media ${mid}: data must be a data:image/… URI`);
-    if (!(m.w > 0 && m.h > 0)) E.push(`media ${mid}: w/h missing`);
-    if (!m.alt) W.push(`media ${mid}: no alt text`);
-    if (m.origin === 'web' && !m.url) E.push(`media ${mid}: web picture needs its source url`);
-  }
-  const chapters = Array.isArray(p?.chapters) ? p.chapters : [];
-  if (!chapters.length) E.push('no chapters');
-  const exIds = new Set(), secIds = new Set(); let ex = 0, vis = 0, secN = 0;
-  const used = {};
-  for (const c of chapters) {
-    if (!/^ch\d\d$/.test(c.id || '')) E.push(`chapter id "${c.id}" must be chNN`);
-    for (const sec of c.sections || []) { secN++; if (secIds.has(sec.id)) E.push(`duplicate section ${sec.id}`); secIds.add(sec.id); for (const b of sec.blocks || []) if (b.t === 'figure' && !media[b.media]) E.push(`${sec.id}: figure media "${b.media}" not in pack.media`); }
-    for (const e of c.exercises || []) {
-      ex++;
-      if (exIds.has(e.id)) E.push(`duplicate exercise ${e.id}`); exIds.add(e.id);
-      if (!TYPES.has(e.type)) E.push(`${e.id}: unknown type ${e.type}`);
-      if (!secIds.has(e.section)) E.push(`${e.id}: section ${e.section} not found in its chapter`);
-      if (String(e.type).startsWith('img_')) {
-        vis++; used[e.media] = (used[e.media] || 0) + 1;
-        const m = media[e.media]; if (!m) { E.push(`${e.id}: media "${e.media}" not in pack.media`); continue; }
-        const regs = Array.isArray(e.regions) ? e.regions : (m.regions || []); const R = new Set(regs.map(r => r.id));
-        for (const a of [].concat(e.type === 'img_hotspot' || e.type === 'img_sequence' ? e.answer || [] : [], e.targets || [])) if (!R.has(a)) E.push(`${e.id}: region "${a}" not found`);
-      }
-    }
-    if (!(c.exercises || []).some(e => String(e.type).startsWith('img_'))) W.push(`${c.id}: no visual exercises`);
-  }
-  for (const mid of Object.keys(media)) if ((used[mid] || 0) < 3) W.push(`picture ${mid} has ${used[mid] || 0} exercises (aim for >= 3)`);
-  return { errors: E, warnings: W, counts: { chapters: chapters.length, sections: secN, exercises: ex, visual: vis, media: Object.keys(media).length } };
-}
+/* ---------- pack checks: engine/packcheck.js (shared with the app), prepended by tools/build.py ---------- */
+const checkPack = (p, expectId) => globalThis.NoemaPackCheck.checkPack(p, expectId);
 
 async function register(token, uid, p, counts) {
   const meta = { ...p.subject, counts: { ...(p.counts || {}), ...counts }, version: p.version || null, via: 'claude', updatedAt: new Date().toISOString() };

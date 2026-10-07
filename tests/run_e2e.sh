@@ -16,4 +16,5 @@ node "$ROOT/tests/connector.js" "$T"
 node "$ROOT/tests/visual_pack.js" "$T"
 node "$ROOT/tests/sharing.js" "$T"
 node "$ROOT/tests/claude_api.js" "$T"
+node "$ROOT/tests/curriculum.js" "$T"
 python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is installed

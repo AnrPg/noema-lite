@@ -176,9 +176,9 @@ window.NoemaClaude = (() => {
 
   /* ---------- the conversation ---------- */
   const today = () => new Date().toISOString().slice(0, 10);
-  const SYSTEM = () => `You are building a noema-lite subject pack for the user, running inside the noema-lite app through the Claude API (the user is watching a progress screen; they are not technical).
+  const SYSTEM = (job = {}) => `You are building a noema-lite subject pack for the user, running inside the noema-lite app through the Claude API (the user is watching a progress screen; they are not technical).
 The noema-pack-builder skill is available in your code-execution container — follow its SKILL.md and both references completely (coverage, quality bar, ≥ 3 picture exercises per picture, all three kinds of pictures). Differences in THIS environment:
-1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.
+${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.`}
 2. The sandbox has NO internet. For pictures from the web: use the web_search tool to find high-quality, information-rich photographs and diagrams (prefer Wikimedia Commons, OpenStax, NIH, NASA, open-source docs; any licence is fine for this personal app as long as the source is recorded), then call the noema_web_image tool with the DIRECT image file url (Wikimedia: the upload.wikimedia.org original file). You will see the picture and get its size. Register it in media/media.json WITHOUT a file:
    {"id": "…", "origin": "web", "fetch": "app", "url": "<direct image url>", "page": "<page it came from>", "retrieved": "${today()}", "w": W, "h": H, "alt": "…", "credit": "author / site", "license": "…"}
    The app downloads and embeds it when importing. Regions use the W×H pixel coordinates reported by the tool. You cannot open these pictures with Pillow, so place regions carefully from what you see (generous rectangles/circles).
@@ -189,6 +189,8 @@ The noema-pack-builder skill is available in your code-execution container — f
    That file is imported into noema-lite automatically. Finish with a short summary for the user (chapters, exercises, picture exercises, pictures) in the language of the sources.
 6. SKILL.md step 6 (connector / upload) does not apply here.`;
 
+  /** Curriculum nodes (engine/curriculum.js) have no uploaded sources: Claude researches them. */
+  const NODE_SOURCES = `1. This pack is ONE NODE of a learning curriculum (the user message has the plan: the node, what the learner already knows, the chapters to write). There are no uploaded files: research the material yourself with web_search and web_fetch — official, authoritative sources first (official documentation and standards, university course pages, open textbooks such as OpenStax and LibreTexts, review articles, reference works; Wikipedia only as a pointer to better sources). Read what you cite. Record every source in sources.json (title, url, retrieved date) and map each chapter to its main source. Write one pack chapter per planned chapter, in the planned order and with the planned titles, covering every teaching goal and every "must cover" item; facts must be correct and current. Do not re-teach the prerequisites the learner already mastered; connect to them briefly where needed.`;
   const TOOL_WEB_IMAGE = {
     name: 'noema_web_image',
     description: 'Download a picture from the web for the pack (your sandbox has no internet; the noema-lite app downloads it). Returns the picture so you can check it is correct, relevant and sharp, plus its size W×H in pixels (use these coordinates for regions). Then register it in media.json as a "fetch": "app" web picture.',
@@ -196,7 +198,8 @@ The noema-pack-builder skill is available in your code-execution container — f
   };
   function toolsFor(job) {
     return [{ type: 'code_execution_20250825', name: 'code_execution' },
-      ...(job.noSearch ? [] : [{ type: 'web_search_20250305', name: 'web_search', max_uses: job.maxSearches || 20 }]), TOOL_WEB_IMAGE];
+      ...(job.noSearch ? [] : [{ type: 'web_search_20250305', name: 'web_search', max_uses: job.maxSearches || 20 }]),
+      ...(job.kind === 'node' && !job.noFetch ? [{ type: 'web_fetch_20250910', name: 'web_fetch', max_uses: 40 }] : []), TOOL_WEB_IMAGE];
   }
   /** Prompt caching: system + the newest user turn (≤ 4 breakpoints in total). */
   function withCache(messages) {
@@ -205,6 +208,7 @@ The noema-pack-builder skill is available in your code-execution container — f
     return ms;
   }
   function firstMessage(job, pdfAsDocument) {
+    if (job.kind === 'node') return { role: 'user', content: [{ type: 'text', text: [`Create a noema-lite subject pack for one node of my curriculum.`, `Title: ${job.title}`, `Subject id: ${job.subjectId}`, `Language of the material: ${job.language || 'en'}`, '', job.brief || ''].join('\n') }] };
     const files = job.files || [];
     const lines = [`Create a noema-lite subject pack.`, `Title: ${job.title}`, `Subject id: ${job.subjectId}`, `Language of the material: ${job.language || 'same as the sources'}`, `My goal: ${job.goal || 'understanding'}`];
     if (job.notes) lines.push(`Notes from me: ${job.notes}`);
@@ -229,6 +233,7 @@ The noema-pack-builder skill is available in your code-execution container — f
   const describe = b => {
     if (b.type === 'text') return b.text.trim() ? '💬 ' + b.text.trim().split('\n')[0].slice(0, 220) : '';
     if (b.type === 'server_tool_use' && b.name === 'web_search') return '🔎 Searching: ' + (b.input?.query || '');
+    if (b.type === 'server_tool_use' && b.name === 'web_fetch') return '📖 Reading: ' + String(b.input?.url || '').replace(/^https?:\/\//, '').slice(0, 90);
     if (b.type === 'server_tool_use' && /bash/.test(b.name)) { const c = String(b.input?.command || ''); return '🛠️ ' + (/make_pack/.test(c) ? 'Checking and building the pack' : /pdf_text|pdftotext/.test(c) ? 'Reading the PDF' : /extract_images/.test(c) ? 'Finding pictures in the sources' : /svgkit|Diagram|Plot/.test(c) ? 'Drawing diagrams' : /chapters|json\.dump/.test(c) ? 'Writing chapters' : 'Working: ' + c.split('\n')[0].slice(0, 90)); }
     if (b.type === 'server_tool_use' && /text_editor/.test(b.name)) return '📝 ' + (b.input?.command === 'view' ? 'Reading ' : 'Writing ') + String(b.input?.path || '').split('/').pop();
     if (b.type === 'tool_use' && b.name === 'noema_web_image') return '🖼️ Fetching a picture: ' + String(b.input?.url || '').split('/').pop().slice(0, 80);
@@ -241,8 +246,8 @@ The noema-pack-builder skill is available in your code-execution container — f
   }
 
   /** Create a job (uploads skill + files) — returns the saved job. */
-  async function create({ acc, key, model, title, subjectId, language, goal, notes, links = [], files = [], budget = 20, onLog = () => { } }) {
-    const job = { id: 'cj_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), acc, model, title, subjectId, language, goal, notes, links, budget,
+  async function create({ acc, key, model, title, subjectId, language, goal, notes, links = [], files = [], budget = 20, onLog = () => { }, kind = 'subject', brief = '', meta = null }) {
+    const job = { id: 'cj_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), acc, model, title, subjectId, language, goal, notes, links, budget, kind, brief, meta,
       created: Date.now(), status: 'starting', usage: {}, log: [], messages: [], containerId: null, outputIds: [], images: {}, turns: 0, files: [] };
     const log = t => { job.log.push({ t: Date.now(), m: t }); onLog(t); };
     job.skillId = await ensureSkill(key, log);
@@ -284,7 +289,7 @@ The noema-pack-builder skill is available in your code-execution container — f
         if (signal?.aborted) throw new ApiError('Stopped.', 0, 'aborted');
         if (job.turns >= (job.maxTurns || 200)) { job.status = 'paused'; job.error = 'Claude has worked for a very long time. Press Resume to let it continue, or Stop.'; break; }
         if (cost(job.usage, job.model) >= job.budget) { job.status = 'budget'; job.error = `The spending limit of $${job.budget} is reached (≈ $${cost(job.usage, job.model).toFixed(2)} so far). Raise it and press Resume, or stop.`; break; }
-        const body = { model: job.model, max_tokens: 16000, system: [{ type: 'text', text: SYSTEM(), cache_control: { type: 'ephemeral' } }],
+        const body = { model: job.model, max_tokens: 16000, system: [{ type: 'text', text: SYSTEM(job), cache_control: { type: 'ephemeral' } }],
           container: { ...(job.containerId ? { id: job.containerId } : {}), skills: [{ type: 'custom', skill_id: job.skillId, version: 'latest' }] },
           tools: toolsFor(job), messages: withCache(job.messages) };
         let r;
@@ -299,6 +304,7 @@ The noema-pack-builder skill is available in your code-execution container — f
             job.noSearch = true; job.messages.push({ role: 'user', content: [{ type: 'text', text: 'Note from the app: the web_search tool is not available for this API key. For web pictures use direct image URLs you know well (Wikimedia Commons originals on upload.wikimedia.org, OpenStax, NIH, NASA) with noema_web_image.' }] });
             log('ℹ️ Web search is off for this API key (it can be switched on in the Claude Console) — continuing without it'); await save(); continue;
           }
+          if (e.status === 400 && job.kind === 'node' && !job.noFetch && /web.?fetch/i.test(e.message)) { job.noFetch = true; log('ℹ️ Web fetch is off for this API key — continuing with web search only'); await save(); continue; }
           if (e.status === 404 && job.containerId && /container/i.test(e.message)) { job.containerId = null; log('ℹ️ The previous sandbox expired — Claude starts a fresh one and rebuilds from the conversation'); continue; }
           throw e;
         }
