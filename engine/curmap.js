@@ -239,7 +239,7 @@ window.NoemaCurMap = (() => {
       box.classList.add('cg-box', 'cm-import');
       let parsed = null, aiParsed = null, files = [], sel = null, filter = 'all', dragging = null;
       const A = new Map();   // file → { targets: [{ id, range }], how, confidence, alts, manual }
-      const text = el('textarea', { class: 'noema-input cm-maptext', rows: 12, spellcheck: 'false', placeholder: 'Paste your map — a tree like\nCell biology\n├── Prerequisites\n├── Membranes\n│   └── Transport\n└── Applications\n\n…arrows (Algebra → Calculus), a Mermaid graph or JSON.' });
+      const text = el('textarea', { class: 'noema-input cm-maptext', rows: 12, spellcheck: 'false', placeholder: 'Paste your map — a tree like\nCell biology\n├── Prerequisites\n├── Membranes\n│   └── Transport\n└── Applications\n\n…arrows (Algebra → Calculus), a Mermaid graph or JSON.\nⓘ above shows every form, with examples.' });
       const fileIn = el('input', { type: 'file', accept: '.txt,.md,.markdown,.json,.mmd,.mermaid', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; if (f) { text.value = await f.text(); aiParsed = null; reparse(); } } });
       const mode = el('select', { class: 'noema-input', onchange: () => reparse() }, el('option', { value: 'sequence' }, 'in the order written (each after the previous one)'), el('option', { value: 'parallel' }, 'in any order (each after its parent topic)'));
       const reverse = el('input', { type: 'checkbox', onchange: () => reparse() }), keepCaps = el('input', { type: 'checkbox', onchange: () => reparse() });
@@ -379,24 +379,102 @@ window.NoemaCurMap = (() => {
           close(); if (c.status === 'ready') { G().kick(); map(acc, c.id, { onStudy }); } else progress(acc, c, { onStudy, start: true });
         } catch (e) { err.textContent = '⚠️ ' + e.message; go.disabled = false; }
       } }, '📥 Import my map');
-      const ex = (h1, code) => el('div', { class: 'cm-ex' }, el('b', {}, h1), el('pre', {}, code));
-      const syntax = el('details', { class: 'cg-faq' }, el('summary', {}, '✍️ How to write a map (and name its files)'),
-        el('p', { class: 'tiny' }, 'Any shape works: a step may open several steps (a branch) and need several (a join). Only a circle of “needs” is refused.'),
-        ex('Tree / outline — numbered levels follow each other; “(any order)” makes a level independent; “(after: …)” adds links', 'Molecular biology\n├── Prerequisites\n├── DNA (any order)\n│   ├── Structure 📎 dna/structure.pdf\n│   └── Replication\n├── Transcription (after: Structure)\n└── Applications'),
-        ex('Arrows — one chain per line; “A, B → C” is a join, “A → B, C” a branch', 'Algebra → Calculus → Probability\nCalculus → Linear algebra\nProbability, Linear algebra → Bayesian inference'),
-        ex('Mermaid', 'flowchart LR\n  A[Algebra] --> B[Calculus 📎 calc.pdf pp. 3–9]\n  A --> C[Logic]\n  B & C --> D[Proofs]\n%% 📎 Files\n%% D: proofs/'),
-        ex('JSON', '{ "title": "Bayes", "nodes": [\n  { "id": "prob", "title": "Probability", "files": ["book.pdf pp. 1-40"] },\n  { "id": "bayes", "title": "Bayes", "after": ["prob"], "folder": "bayes/" } ] }'),
-        ex('📎 A files section at the end (any text format) — keys: a step’s title, its number (2.1) or its Mermaid / JSON id', '📎 Files\nDNA replication: dna/*.pdf, notes/dna.md\n2.1: lab/\nTranscription: book.pdf pp. 40–62'),
-        el('p', { class: 'tiny' }, 'Paths are matched against the files you add (with their folders). A folder (ending in /) gives every file in it; * matches any name; “pp. 40–62” or “#40-62” gives only those pages of a file to that step — one textbook can serve many steps and is stored once. Files the map does not name are matched by their folders (a sub-folder per step, “03 Transcription” too), their number or their name — check the ones marked ⚠️ or ?.'));
+      // ⓘ guides (step 1: how to write a map · step 3: how to give steps their files) — every example is read by the real parser
+      const tryIt = code => el('button', { class: 'btn small ghost cm-try', onclick: e => { e.preventDefault(); text.value = code; aiParsed = null; reparse(); text.scrollIntoView({ block: 'center', behavior: 'smooth' }); } }, '▶ Try it');
+      const rules = rows => el('table', { class: 'cm-rules' }, el('tbody', {}, ...rows.map(([c, m]) => el('tr', {}, el('td', {}, el('code', {}, c)), el('td', {}, m)))));
+      const ex = (code, reads) => el('div', { class: 'cm-ex' }, el('pre', {}, code), reads ? el('div', { class: 'cm-reads' }, el('b', {}, 'Read as: '), el('pre', {}, reads)) : null, tryIt(code));
+      const sec = (h, ...c) => el('section', { class: 'cm-gsec' }, el('h4', {}, h), ...c);
+      const mapGuide = el('div', { class: 'cm-guide' },
+        el('p', {}, 'A map is your list of steps and which step needs which. Any shape works: a step may open several steps (a ', el('b', {}, 'branch'), ') and need several (a ', el('b', {}, 'join'), '). Only a circle of “needs” is refused (the steps on it are named). Write it in any of the forms below — the preview under the box shows how it was read, so you can check it at once. “A ⟵ B” below means “A needs B” (B is learned first).'),
+        sec('1 · Tree or outline',
+          rules([
+            ['├── └── │   - * •   1.  2.3  a)   # ##   indentation', 'a topic written under another is its sub-topic'],
+            ['(sub-topic)', 'comes after its parent topic; the next topic at the parent’s level waits for all of its sub-topics (a join)'],
+            ['topics at the same level', 'in the order written: each needs the one before it. To make unnumbered levels independent everywhere: “How to read it” ▸ in any order'],
+            ['1. 2. 3.   2.1 2.2', 'numbered topics always follow each other'],
+            ['Topic (any order)', 'its sub-topics are independent: each needs only the parent (on the top line: the whole first level)'],
+            ['Topic (in order)', 'its sub-topics follow each other, even when “any order” is the default'],
+            ['Topic (after: A, 2.1)   Topic ← A', 'an extra link: it also needs A (by title or by number) — e.g. a join across two branches'],
+            ['Topic — one line', 'a short description of what the step covers'],
+            ['one top line with everything under it', 'the name of the course, not a step'],
+            ['Prerequisites / Applications', 'top-level groups with these names come before / after the main topics, even in “any order”'],
+            ['Topic 📎 file.pdf pp. 3–9', 'the files of this step (see ⓘ in step 3)']]),
+          ex('Molecular biology\n├── Chemistry basics\n├── DNA (any order)\n│   ├── Structure\n│   └── Replication — how cells copy DNA\n├── Transcription\n└── Applications',
+            '1 Chemistry basics   (start)\n2 DNA                ⟵ Chemistry basics\n2.1 Structure        ⟵ DNA\n2.2 Replication      ⟵ DNA      (independent of 2.1)\n3 Transcription      ⟵ Structure, Replication   (a join)\n4 Applications       ⟵ Transcription'),
+          ex('Course (any order)\n- Algebra\n- Geometry\n- Calculus (after: Algebra, Geometry)',
+            'Algebra    (start)\nGeometry   (start)\nCalculus   ⟵ Algebra, Geometry')),
+        sec('2 · Arrows',
+          rules([
+            ['A → B     (also -> => ⇒)', 'B needs A: A comes first'],
+            ['A → B → C', 'a chain'],
+            ['A, B → C', 'a join: C needs both A and B'],
+            ['A → B, C', 'a branch: B and C both need A (and not each other)'],
+            ['one chain per line', 'the same title in several lines is the same step'],
+            ['⇄ in “How to read it”', 'if your arrows point from a step to what it needs (C → A, B), reverse them'],
+            ['A — one line   A 📎 a.pdf', 'a description / files on a step work here too']]),
+          ex('Algebra → Calculus → Probability\nCalculus → Linear algebra\nProbability, Linear algebra → Bayesian inference',
+            'Algebra             (start)\nCalculus            ⟵ Algebra\nProbability         ⟵ Calculus\nLinear algebra      ⟵ Calculus          (a branch from Calculus)\nBayesian inference  ⟵ Probability, Linear algebra   (a join)')),
+        sec('3 · Mermaid',
+          rules([
+            ['flowchart LR   graph TD', 'the first line (the direction does not matter)'],
+            ['A[Algebra]   A(Algebra)   A{Algebra}', 'a step: id A, title Algebra (any shape)'],
+            ['A --> B    A ==> B    A -.-> B    A -- text --> B', 'B needs A (labels are ignored)'],
+            ['B & C --> D', 'a join: D needs B and C'],
+            ['subgraph Prerequisites … end', 'a group: its steps are marked as prerequisites (or applications…) — only arrows make links'],
+            ['%% 📎 Files   then   %% D: proofs/', 'files by step id, in comment lines (Mermaid ignores them)']]),
+          ex('flowchart LR\n  A[Algebra] --> B[Calculus]\n  A --> C[Logic]\n  B & C --> D[Proofs]',
+            'Algebra    (start)\nCalculus   ⟵ Algebra\nLogic      ⟵ Algebra\nProofs     ⟵ Calculus, Logic')),
+        sec('4 · JSON',
+          rules([
+            ['"nodes": [{ "id", "title", "after": [ids] }]', 'the steps; “after” may also be called prerequisites, requires, needs, dependsOn'],
+            ['"edges": [{ "from": "a", "to": "b" }]   or   ["a → b"]', 'links instead of “after”: b needs a'],
+            ['"children": [ … ]   "order": "any"', 'a nested tree, read like an outline'],
+            ['"summary"   "files"   "folder"', 'a description and the files of a step: "files": ["book.pdf pp. 1-40"] or [{ "path": "book.pdf", "pages": "1-40" }], "folder": "bayes/"'],
+            ['"files": { "<id or title>": ["path", …] }', 'all files at the top level instead'],
+            ['a curriculum exported from noema-lite', 'is imported as it is (with its chapters)']]),
+          ex('{ "title": "Bayes",\n  "nodes": [\n    { "id": "prob", "title": "Probability" },\n    { "id": "lin", "title": "Linear algebra" },\n    { "id": "bayes", "title": "Bayesian inference", "after": ["prob", "lin"] } ] }',
+            'Probability          (start)\nLinear algebra       (start)\nBayesian inference   ⟵ Probability, Linear algebra')),
+        sec('5 · Anything else', el('p', {}, 'Prose, a table, a syllabus copied from a web page… press “✨ Let the AI read it”. It keeps only your map’s own topics (it may not add, drop or rename any) and you see the result before importing.')),
+        el('p', { class: 'tiny' }, 'Links that other links already imply are dropped (A → B → C makes “C needs A” unnecessary). ALL-CAPS titles become normal capitalisation unless you tick “Keep CAPITALS”.'));
+      const filesGuide = el('div', { class: 'cm-guide' },
+        el('p', {}, 'A step with files is planned and taught FROM them (no web research of its theory); steps without files are researched by the AI as usual. Add files, a folder (📁, keeps its sub-folders) or a .zip — then each file is given to a step in this order:'),
+        sec('1 · Named in your map (✓ sure)',
+          rules([
+            ['Topic 📎 book.pdf pp. 40–62, notes/dna/', 'on the step itself, after 📎 (comma-separated)'],
+            ['Topic (files: lab/)', 'the same, without the emoji'],
+            ['📎 Files   — a line of its own at the end', 'starts a files section: one line per step, “key: paths”'],
+            ['DNA replication: …   2.1: …   D: …', 'the key is the step’s title, its outline number or its Mermaid / JSON id'],
+            ['%% 📎 Files   %% D: proofs/', 'in Mermaid, as comment lines'],
+            ['"files" / "folder"', 'in JSON (see ⓘ in step 1)']]),
+          ex('1. Cell biology\n2. DNA replication 📎 dna/*.pdf, notes/dna.md\n3. Transcription\n\n📎 Files\nCell biology: cells/\n3: book.pdf pp. 40–62',
+            'Cell biology      📎 every file in cells/\nDNA replication   📎 the PDFs in dna/ + notes/dna.md\nTranscription     📎 pages 40–62 of book.pdf')),
+        sec('2 · Paths',
+          rules([
+            ['book.pdf', 'that file, wherever it is in what you added (add its folder to be precise: dna/book.pdf)'],
+            ['dna/   (or dna)', 'a folder: every file in it, at any depth'],
+            ['notes/*.md   lab?/x.pdf   dna/**', '* any name, ? one character, ** any sub-folders'],
+            ['book.pdf pp. 40–62   p. 40   #40-62   σσ. 40–62', 'only these pages of a PDF belong to the step'],
+            ['the same book in several steps', 'name it on each with its pages — one textbook can serve the whole map and is stored once']])),
+        sec('3 · Not named? Matched automatically',
+          rules([
+            ['DNA replication/   03 DNA replication/   2.1/', '≈ a sub-folder named like a step (at any depth) → every file in it'],
+            ['2.1 Structure.pdf   03-transcription.pdf', '≈ a name that starts with the step’s number (or its position)'],
+            ['transcription-notes.pdf', '? a name that looks like a step’s title — a guess, check it'],
+            ['⚠️', 'more than one step fits — pick one (tab “⚠️ To check”)'],
+            ['—', 'no step fits — tab “Not used”: give it a step or leave it out (it is not stored)']]),
+          el('p', {}, 'A folder that holds everything (the folder you dropped, “material/”) is ignored when matching. A good layout: one sub-folder per step, named like the step or with its number.'),
+          el('pre', { class: 'cm-tree' }, 'Biology/\n├── 01 Cell biology/        → step 1 (every file)\n├── 02 DNA replication/\n│   ├── lecture.pdf\n│   └── notes.md\n└── book.pdf               → named in the map with pages per step')),
+        sec('4 · Change anything',
+          el('p', {}, 'Tap a step chip to remove it, “＋ step” to give the file to one more step, type pages (40–62) next to a step, or drag a file onto a step in the map above. ✓ = set by you. Files can also be added later: ✏️ Edit step → 📎, until the step is prepared.')));
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'),
         head('📥 Import a map', 'Your own map of steps becomes the curriculum as it is — no AI redraws it. Give steps their files and they are taught from them.'),
         el('ol', { class: 'cg-steps' },
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Your map'), tip('A tree (├── └── │), an outline (bullets, numbers, indentation, # headings), arrows (A → B), a Mermaid graph (A --> B: A comes first) or JSON (nodes + prerequisites / edges, nested children, or a curriculum exported from noema-lite).')),
-            text, el('div', { class: 'row' }, el('label', { class: 'btn small' }, '📄 Open a file', fileIn), aiBtn), syntax,
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Your map'), tip(mapGuide)),
+            text, el('div', { class: 'row' }, el('label', { class: 'btn small' }, '📄 Open a file', fileIn), aiBtn),
             el('details', { class: 'cg-faq' }, el('summary', {}, 'How to read it'), el('label', { class: 'cg-field' }, 'Topics at the same level (when not numbered and not marked)', mode), el('label', { class: 'tiny' }, reverse, ' ⇄ my arrows point from a step to what it needs (reverse them)'), el('label', { class: 'tiny' }, keepCaps, ' Keep CAPITALS as written')),
             info, perr, warnBox, graph, nodeBox, el('details', { class: 'cg-faq' }, el('summary', {}, 'The steps as a list'), prev)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Name and language')), el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'Language of the course', lang), el('label', { class: 'cg-field' }, 'Your starting point', learner)),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip('A step with files is planned and built FROM them (no web research of its theory); steps without files are researched by the AI as usual. Files are matched to steps by your map, their folders, numbers or names — change any match, give one file to several steps (with pages each), or drag a file onto a step in the map above. You can also add files later (✏️ Edit step → 📎), until the step is prepared.')), drop, el('div', { class: 'row' }, folder), fileSum, fileBox),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip(filesGuide)), drop, el('div', { class: 'row' }, folder), fileSum, fileBox),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI plans and prepares the steps?'), tip('The map is used as it is. The AI only plans the chapters of each step (from its files, when it has some) and later prepares each step as a subject.')), keysBox(acc), el('label', { class: 'cg-field' }, 'Use', provider),
             el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude: stop and ask me when one step costs more than $', budget)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Import')), go, busy, err)),

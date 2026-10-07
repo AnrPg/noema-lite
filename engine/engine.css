@@ -801,6 +801,19 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-filesum{margin-top:8px;font-weight:700}
 .cm-ex{margin:6px 0}.cm-ex pre{margin:4px 0 0;padding:8px 10px;border-radius:10px;background:var(--bg2,rgba(127,127,127,.08));font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
 .cm-matadd{gap:6px;align-items:center}.cm-matadd select{max-width:260px}
+/* ⓘ map / files guides in 📥 Import a map */
+.cm-guide{display:flex;flex-direction:column;gap:10px}.cm-guide p{margin:0}
+.cm-gsec h4{margin:4px 0 6px;font-size:14px}
+.cm-rules{width:100%;border-collapse:collapse;font-size:13px}.cm-rules td{padding:4px 6px;vertical-align:top;border-top:1px solid rgba(127,127,127,.18)}
+.cm-rules td:first-child{width:45%}.cm-rules code{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
+.cm-reads{margin-top:4px}.cm-reads pre{background:transparent;border:1px dashed rgba(127,127,127,.35)}
+.cm-try{margin-top:4px}.cm-tree{font-size:12px;white-space:pre;overflow-x:auto;margin:6px 0 0;padding:8px 10px;border-radius:10px;background:var(--bg2,rgba(127,127,127,.08))}
+.cm-guide .cg-tipbody,.cg-tipbody:has(.cm-guide){max-width:none}
+@media (max-width:560px){.cm-rules,.cm-rules tbody,.cm-rules tr,.cm-rules td{display:block;width:auto}.cm-rules td:first-child{width:auto;border-top:1px solid rgba(127,127,127,.18)}.cm-rules td+td{border-top:0;padding-top:0}}
+.cg-steptitle .cg-tip[open]{min-width:0;max-width:100%}.cg-steptitle .cg-tip[open]>.cg-tipbody{min-width:0;overflow:hidden}
+.cm-guide{min-width:0}.cm-guide>*{min-width:0;max-width:100%}.cm-tree{max-width:100%}
+.cm-guide pre{white-space:pre;overflow-x:auto;overflow-wrap:normal;max-width:100%}
+.cm-guide code,.cm-guide pre,.cm-maptext{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 
 /* ---- 35_visual.css ---- */
 /* ---------- visual exercises & figures (docs/VISUAL.md) ---------- */

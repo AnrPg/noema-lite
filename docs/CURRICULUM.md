@@ -36,6 +36,9 @@ the goal) and the number of applications. Then four agents run, one after the ot
   synthesis → applications, leaves → synthesis), so the trusted parts never change.
 * Every stage is saved; **Stop** and **Continue** later resumes at the unfinished stage.
 * Claude answers through a forced tool call (streamed, so long graphs never time out); Gemini in JSON mode.
+  Models that refuse a forced tool call (`tool_choice: type "tool" … not supported for this model`) are retried at once with
+  `tool_choice: auto` + “always answer by calling the tool”, and models without tools with a JSON-only answer; the working
+  mode is remembered per model (`noema-device:claude-json-mode:<model>`), and a JSON written as text is read too.
 
 ## 2. The map
 
@@ -109,6 +112,12 @@ everything.
 ## 6b. 📥 Importing a map you already have (`engine/curimport.js`)
 Subject picker → 🧭 Curricula → **📥 Import a map**. The map becomes the curriculum **as it is**: no DAG creator, auditor or
 goal expander runs. Only the chapter planner (agent 3) plans the steps that have no chapters yet.
+
+**In-app guides.** The ⓘ of step 1 (“Your map”) explains every form (tree / outline, arrows, Mermaid, JSON, anything else) as
+a table *syntax → what it means*, each with an example, its “Read as” (the links the app makes) and **▶ Try it** (loads it into
+the box). The ⓘ of step 3 (“Material”) explains how files reach steps: named in the map (📎 on a step, a `📎 Files` section,
+JSON `files`/`folder`), path syntax (folders, `*` `?` `**`, page ranges), the automatic matching (folder → number → name, with
+✓ ≈ ? ⚠️ —) and how to fix a match. `tests/curriculum_import.js` parses every example and checks its “Read as”.
 
 **Any shape.** A map is a DAG: a step may open several steps (a *branch*) and need several (a *join*, e.g. A→B, A→C, B→D,
 C→D — a “diamond”). Both are normal everywhere (map, mastery: a join opens when all its prerequisites are mastered). Only a

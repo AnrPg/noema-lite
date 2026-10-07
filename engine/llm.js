@@ -35,22 +35,40 @@ window.NoemaLLM = (() => {
     return out;
   }
 
-  /* ---------- Claude: forced tool call, streamed ---------- */
+  /* ---------- Claude: a tool call (forced when the model allows it), streamed ----------
+     Some models refuse a forced tool_choice ("type tool/any not supported for this model", e.g. models that always
+     think). Then the same request is sent with tool_choice auto (the prompt asks for the tool), and — if a model
+     even refuses tools — as plain text with the JSON Schema in the prompt. What works is remembered per model. */
   class LLMError extends Error { constructor(m, status, kind) { super(m); this.status = status; this.kind = kind; } }
+  const MODES = ['forced', 'auto', 'text'];
+  const modeKey = m => 'noema-device:claude-json-mode:' + m;
+  const modeOf = m => { try { const v = localStorage.getItem(modeKey(m)); return MODES.includes(v) ? v : 'forced'; } catch (e) { return 'forced'; } };
+  const setMode = (m, v) => { try { localStorage.setItem(modeKey(m), v); } catch (e) { } };
   async function claudeCall(acc, { model, system, messages, tool, maxTokens = 16000, signal, onProgress }) {
     const key = keys(acc).claude; if (!key) throw new LLMError('No Claude API key on this device.', 401, 'nokey');
-    const body = { model, max_tokens: maxTokens, stream: true, system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }], messages, tools: [tool], tool_choice: { type: 'tool', name: tool.name } };
+    let mode = modeOf(model);
+    const bodyFor = md => {
+      const b = { model, max_tokens: maxTokens, stream: true, system: [{ type: 'text', text: system + (md === 'text' ? `\n\nAnswer with exactly one JSON object (no prose, no code fence) that matches this JSON Schema:\n${JSON.stringify(tool.input_schema)}` : md === 'auto' ? `\n\nAlways answer by calling the tool "${tool.name}" with the complete result — never in plain text.` : ''), cache_control: { type: 'ephemeral' } }], messages };
+      if (md !== 'text') { b.tools = [tool]; b.tool_choice = md === 'forced' ? { type: 'tool', name: tool.name } : { type: 'auto' }; }
+      return b;
+    };
+    let body = bodyFor(mode);
     for (let attempt = 0; ; attempt++) {
       let r;
       try { r = await fetch(CLAUDE() + '/v1/messages', { method: 'POST', signal, headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true', 'content-type': 'application/json' }, body: JSON.stringify(body) }); }
       catch (e) { if (signal?.aborted) throw new LLMError('Stopped.', 0, 'aborted'); if (attempt < 5) { await wait(1500 * 2 ** attempt); continue; } throw new LLMError('No connection to Claude: ' + e.message, 0, 'network'); }
       if (!r.ok) {
         let m = ''; try { m = (await r.json())?.error?.message || ''; } catch (e) { }
+        // the model does not take a forced tool call (or tools at all): fall back, and remember it for this model
+        const noTools = !/tool_choice/i.test(m) && /\btools?\b[^.]*not supported|does not support tools/i.test(m);
+        if (r.status === 400 && mode !== 'text' && (noTools || (mode === 'forced' && /tool_choice|forced tool|not supported for this model/i.test(m)))) {
+          mode = noTools ? 'text' : 'auto'; setMode(model, mode); body = bodyFor(mode); attempt--; continue;
+        }
         if ((r.status === 429 || r.status === 529 || r.status >= 500) && attempt < 6 && !/credit balance/i.test(m)) { const ra = +r.headers.get('retry-after'); await wait(ra > 0 ? Math.min(ra * 1000, 60000) : Math.min(60000, 2000 * 2 ** attempt)); continue; }
         throw new LLMError(r.status === 401 ? 'The Claude API key was not accepted.' : /credit balance/i.test(m) ? 'Your Claude API account has no credit left (platform.claude.com → Settings → Billing).' : `Claude: ${m || 'HTTP ' + r.status}`, r.status, 'api');
       }
       // server-sent events: input_json_delta pieces of the tool input
-      const reader = r.body.getReader(); const dec = new TextDecoder(); let buf = '', json = '', usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }, stop = null, n = 0;
+      const reader = r.body.getReader(); const dec = new TextDecoder(); let buf = '', json = '', text = '', usage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }, stop = null, n = 0;
       try {
         for (; ;) {
           const { done, value } = await reader.read(); if (done) break;
@@ -61,6 +79,7 @@ window.NoemaLLM = (() => {
             if (!data) continue; let d; try { d = JSON.parse(data); } catch (e) { continue; }
             if (d.type === 'message_start') { const u = d.message?.usage || {}; usage.input += u.input_tokens || 0; usage.cacheRead += u.cache_read_input_tokens || 0; usage.cacheWrite += u.cache_creation_input_tokens || 0; }
             else if (d.type === 'content_block_delta' && d.delta?.type === 'input_json_delta') { json += d.delta.partial_json || ''; if (onProgress && ++n % 40 === 0) onProgress(json.length); }
+            else if (d.type === 'content_block_delta' && d.delta?.type === 'text_delta') { text += d.delta.text || ''; if (onProgress && ++n % 40 === 0) onProgress(text.length); }
             else if (d.type === 'message_delta') { usage.output += d.usage?.output_tokens || 0; stop = d.delta?.stop_reason || stop; }
             else if (d.type === 'error') throw new LLMError('Claude: ' + (d.error?.message || 'stream error'), 0, d.error?.type === 'overloaded_error' ? 'overloaded' : 'api');
           }
@@ -70,7 +89,8 @@ window.NoemaLLM = (() => {
         if ((e.kind === 'overloaded' || !(e instanceof LLMError)) && attempt < 5) { await wait(2000 * 2 ** attempt); continue; }
         throw e;
       }
-      return { text: json, usage, truncated: stop === 'max_tokens' };
+      // the tool input when the model called the tool; else the JSON it wrote as text (auto / text mode)
+      return { text: json || text, usage, truncated: stop === 'max_tokens', mode };
     }
   }
 
@@ -142,7 +162,7 @@ window.NoemaLLM = (() => {
       catch (e) { errs = [r.truncated ? 'The answer was cut off (too long). Be more concise: shorter texts, same structure.' : e.message]; }
       if (!errs.length) return { data, usage: total, provider };
       o.onRepair?.(errs, round);
-      history = history.concat({ role: 'assistant', text: last.slice(0, 60000) }, { role: 'user', text: `Your answer has these problems:\n- ${errs.slice(0, 30).join('\n- ')}\nFix ALL of them and ${provider === 'claude' ? `call the tool "${name}" again with the complete corrected object` : 'return the complete corrected JSON object'}.` });
+      history = history.concat({ role: 'assistant', text: last.slice(0, 60000) || '(no answer)' }, { role: 'user', text: `Your answer has these problems:\n- ${errs.slice(0, 30).join('\n- ')}\nFix ALL of them and ${provider === 'claude' && r.mode !== 'text' ? `call the tool "${name}" again with the complete corrected object` : 'return the complete corrected JSON object'}.` });
     }
     throw new LLMError(`The ${provider === 'claude' ? 'Claude' : 'Gemini'} answer still had problems: ${errs.slice(0, 5).join('; ')}`, 0, 'invalid');
   }

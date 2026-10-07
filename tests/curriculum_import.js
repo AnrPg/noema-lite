@@ -107,6 +107,13 @@ function vendors() {
     for (let i = 0; i < s.length; i += 500) ev('content_block_delta', { index: 0, delta: { type: 'input_json_delta', partial_json: s.slice(i, i + 500) } });
     ev('content_block_stop', { index: 0 }); ev('message_delta', { delta: { stop_reason: 'tool_use' }, usage: { output_tokens: 100 } }); ev('message_stop', {}); res.end();
   };
+  // like some newer Claude models: a FORCED tool call is refused (the app must fall back to tool_choice auto)
+  const sseText = (res, obj) => {
+    res.writeHead(200, { 'content-type': 'text/event-stream', ...cors }); const s = 'Here is the result:\n```json\n' + JSON.stringify(obj) + '\n```'; const ev = (t, d) => res.write(`event: ${t}\ndata: ${JSON.stringify({ type: t, ...d })}\n\n`);
+    ev('message_start', { message: { usage: { input_tokens: 3000 } } }); ev('content_block_start', { index: 0, content_block: { type: 'thinking', thinking: '' } }); ev('content_block_delta', { index: 0, delta: { type: 'thinking_delta', thinking: 'Let me map it.' } }); ev('content_block_stop', { index: 0 });
+    ev('content_block_start', { index: 1, content_block: { type: 'text', text: '' } }); for (let i = 0; i < s.length; i += 300) ev('content_block_delta', { index: 1, delta: { type: 'text_delta', text: s.slice(i, i + 300) } });
+    ev('content_block_stop', { index: 1 }); ev('message_delta', { delta: { stop_reason: 'end_turn' }, usage: { output_tokens: 100 } }); ev('message_stop', {}); res.end();
+  };
   const plans = ids => { const p = F.plans(ids); for (const x of p.plans) if (/dna_replication/.test(x.nodeId)) x.chapters.forEach((ch, i) => { ch.material = `dna-replication.pdf pp. ${i + 1}–${i + 2}`; }); return p; };
   return http.createServer((req, res) => {
     const chunks = []; req.on('data', c => chunks.push(c)); req.on('end', async () => {
@@ -132,11 +139,12 @@ function vendors() {
       if (/^\/v1\/files\/file_pkg_\d+\/content$/.test(p)) { const z = A.zips[p.split('/')[3]]; res.writeHead(200, { 'content-type': 'application/octet-stream', ...cors }); return res.end(z.buf); }
       if (p === '/v1/messages') {
         const b = JSON.parse(buf.toString());
+        if (b.stream && b.tool_choice?.type === 'tool') { A.forced = (A.forced || 0) + 1; return J(res, 400, { type: 'error', error: { type: 'invalid_request_error', message: 'tool_choice: type "tool" and "any" are not supported for this model.' } }); }
         if (b.stream && b.tool_choice) {
-          const name = b.tool_choice.name; const text = b.messages[0].content[0].text; const round = (b.messages.length - 1) / 2;
-          A.agent.push({ name, text, round, repairText: round ? b.messages.at(-1).content[0].text : '' });
+          const name = b.tool_choice.name || b.tools?.[0]?.name; const text = b.messages[0].content[0].text; const round = (b.messages.length - 1) / 2;
+          A.agent.push({ name, text, round, repairText: round ? b.messages.at(-1).content[0].text : '', choice: b.tool_choice.type, sys: b.system[0].text });
           if (name === 'submit_chapter_plans') return sse(res, name, plans(text.match(/node IDs: ([^\n]+)\./)[1].split(', ')));
-          if (name === 'submit_imported_map') return sse(res, name, { title: 'Genetics', nodes: [{ ref: 'mendel', title: 'Mendelian inheritance', role: 'foundation', prerequisites: [] }, { ref: 'dna', title: 'DNA structure', role: 'aspect', prerequisites: ['mendel'] }, { ref: 'expr', title: 'Gene expression', role: 'aspect', prerequisites: ['dna'] }, ...(round ? [] : [{ ref: 'qg', title: 'Quantum gravity', role: 'related', prerequisites: [] }])] });
+          if (name === 'submit_imported_map') return sseText(res, { title: 'Genetics', nodes: [{ ref: 'mendel', title: 'Mendelian inheritance', role: 'foundation', prerequisites: [] }, { ref: 'dna', title: 'DNA structure', role: 'aspect', prerequisites: ['mendel'] }, { ref: 'expr', title: 'Gene expression', role: 'aspect', prerequisites: ['dna'] }, ...(round ? [] : [{ ref: 'qg', title: 'Quantum gravity', role: 'related', prerequisites: [] }])] });
           return J(res, 400, { error: { message: 'unscripted agent ' + name } });
         }
         // a curriculum node built by the skill (engine/claude.js job): answer with a PACKAGE that carries the learner's file
@@ -184,6 +192,20 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   console.log('— 📥 import the map with files');
   await p.click('.cm-mode:has-text("Curricula")'); await wait(300);
   await p.click('button:has-text("Import a map")'); await wait(300);
+  // ⓘ guides: every example is read by the real parser exactly as its “Read as” says; ▶ Try it loads it
+  await p.click('.cg-step >> nth=0 >> .cg-tip summary'); await wait(150);
+  const gd1 = await p.locator('.cg-step >> nth=0 >> .cg-tipbody').innerText();
+  ok(['Tree or outline', 'Arrows', 'Mermaid', 'JSON', 'Anything else', '(any order)', '(after: A, 2.1)', 'A, B → C', 'B & C --> D', '"edges"'].every(x => gd1.includes(x)), 'ⓘ of “Your map”: every form, what each syntax means, with examples');
+  const exs = await p.evaluate(() => [...document.querySelectorAll('.cm-guide .cm-ex')].map(d => ({ code: d.querySelector(':scope > pre').textContent, reads: d.querySelector('.cm-reads pre')?.textContent || '' })));
+  const bad = await p.evaluate(exs => exs.flatMap(({ code, reads }) => { try { const g = NoemaCurImport.parse(code); if (!reads) return []; const lines = reads.split('\n'); return g.order.flatMap(id => { const n = g.nodes[id], pre = g.edges.filter(e => e.to === id).map(e => g.nodes[e.from].title).sort().join(', '); const l = lines.find(x => x.replace(/^[\d.]+ /, '').split(/\s{2,}|\s+⟵|\s+📎/)[0].trim() === n.title); if (!l) return [code.slice(0, 20) + ': no line for ' + n.title]; const m = l.match(/⟵ ([^(]+?)(\s{2,}|\s*\(|$)/); const got = m ? m[1].split(/,\s*/).sort().join(', ') : ''; return got === pre || (!m && /📎/.test(l)) || (!m && /\(start\)/.test(l) && !pre) ? [] : [n.title + ': guide says “' + got + '”, parser “' + pre + '”']; }); } catch (e) { return [code.slice(0, 20) + ': ' + e.message]; } }), exs);
+  ok(exs.length >= 6 && !bad.length, `the ${exs.length} examples of the guides parse, and their “Read as” is what the app reads ` + JSON.stringify(bad));
+  await p.click('.cg-step >> nth=0 >> .cm-gsec:has-text("Arrows") >> .cm-try'); await wait(500);
+  ok(/arrows: 5 steps · 5 links/.test(await p.locator('.cm-detect').innerText()), '▶ Try it puts the example in the box and reads it: ' + await p.locator('.cm-detect').innerText());
+  await p.click('.cg-step >> nth=0 >> .cg-tip summary');
+  await p.click('.cg-step >> nth=2 >> .cg-tip summary'); await wait(150);
+  const gd3 = await p.locator('.cg-step >> nth=2 >> .cg-tipbody').innerText();
+  ok(['Named in your map', '📎 Files', 'pp. 40–62', 'dna/**', 'a sub-folder named like a step', 'To check', 'Not used', 'drag a file onto a step'].every(x => gd3.includes(x)), 'ⓘ of “Material”: how files are given to steps — in the map, paths and pages, automatic matching, fixing');
+  await p.click('.cg-step >> nth=2 >> .cg-tip summary');
   await p.fill('.cm-maptext', TREE); await wait(600);
   ok(/tree \/ outline: 11 steps · 10 links/.test(await p.locator('.cm-detect').innerText()) && await p.locator('.cm-preview li').count() === 11, 'the pasted tree is read at once: ' + await p.locator('.cm-detect').innerText());
   ok(await p.inputValue('input[placeholder="Name of the curriculum"]') === 'Molecular information biology', 'the root becomes the name of the curriculum');
@@ -193,9 +215,11 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   ok(sels[0] === 'DNA replication' && sels[1] === 'Transcription', 'files matched to their steps by name: ' + sels.join(' | '));
   await p.screenshot({ path: SHOTS + '/i1_import.png', fullPage: true });
   await p.click('button:has-text("Import my map")');
-  ok(await until(() => p.locator('.cg-status.ready').count(), 30000), 'imported: only the chapters are planned, then “ready”');
+  const imp1 = await until(() => p.locator('.cg-status.ready').count(), 30000); if (!imp1) console.log('   status:', await p.locator('.cg-status').innerText().catch(() => ''));
+  ok(imp1, 'imported: only the chapters are planned, then “ready”');
   const names = A.agent.map(a => a.name);
   ok(names.length && names.every(n => n === 'submit_chapter_plans') && names.length === 3, 'no AI mapping: no DAG creator / auditor / expander — only 3 chapter-planner batches');
+  ok(A.forced >= 1 && A.forced <= 3 && A.agent.every(a => a.choice === 'auto') && /Always answer by calling the tool "submit_chapter_plans"/.test(A.agent[0].sys) && await p.evaluate(() => localStorage.getItem('noema-device:claude-json-mode:claude-sonnet-9')) === 'auto', 'a model that refuses a forced tool call: the app switches to tool_choice auto (each parallel batch at most once) and remembers it (no error)');
   const planText = A.agent.map(a => a.text).join('\n');
   ok(/The learner's own material/.test(planText) && /dna-replication\.pdf \(4 pages/.test(planText) && /Helicase and the fork \(p\. 2\)/.test(planText) && /Transcription notes\.md/.test(planText) && /RNA polymerase reads/.test(planText), 'the planner gets each step\'s files: pages, outline (bookmarks) and the first lines');
   let c = await p.evaluate(() => NoemaCurriculum.list(Noema.account.id)[0]);
@@ -300,7 +324,7 @@ c.save()`, path.join(TF, 'textbook.pdf')]);
   console.log('— ✨ the AI reads a map written in prose (no new topics allowed)');
   const ai = await p.evaluate(() => NoemaCurImport.aiRead(Noema.account.id, 'To study genetics: first Mendelian inheritance, then DNA structure, then gene expression.', { provider: 'claude' }).then(g => ({ n: g.order.map(id => g.nodes[id].title), title: g.title, ai: g.ai }), e => ({ err: e.message })));
   const aiCalls = A.agent.filter(a => a.name === 'submit_imported_map');
-  ok(aiCalls.length === 2 && /Quantum gravity” is not a topic of the given map/.test(aiCalls[1].repairText), 'an invented topic is sent back (“not a topic of the given map”)');
+  ok(aiCalls.length === 2 && /Quantum gravity” is not a topic of the given map/.test(aiCalls[1].repairText), 'an invented topic is sent back (“not a topic of the given map”) — the model answered in text (after thinking): the JSON is read from it');
   ok(ai.ai && ai.title === 'Genetics' && ai.n.join(' → ') === 'Mendelian inheritance → DNA structure → Gene expression', 'the AI’s reading: ' + (ai.n || [ai.err]).join(' → '));
 
   console.log('— phone');
@@ -313,6 +337,9 @@ c.save()`, path.join(TF, 'textbook.pdf')]);
   const zsel = await ph.$$eval('.cm-filetable tbody tr', rs => rs.map(r => '📄 ' + r.querySelector('td b').textContent + ' → ' + [...r.querySelectorAll('.cm-tchip .linklike')].map(b => b.textContent).join('+')));
   ok(zsel.length === 3 && zsel.includes('📄 ribosomes.md → Translation') && zsel.includes('📄 qc-notes.txt → Quality control'), 'a .zip with a folder per step: its files are matched by the folder names: ' + zsel.join(' | '));
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.cm-import .cg-step, .cm-filetable')].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), 'phone: the import screen fits (no sideways scrolling)');
+  await ph.click('.cg-step >> nth=0 >> .cg-tip summary'); await ph.click('.cg-step >> nth=2 >> .cg-tip summary'); await wait(200);
+  await ph.locator('.cg-step >> nth=0 >> .cm-gsec >> nth=1').screenshot({ path: '/tmp/claude-0/guide-phone.png' }).catch(() => {});
+  ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.cm-guide, .cm-rules, .cm-ex')].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), 'phone: the ⓘ guides fit too (no sideways scrolling)');
   await ph.screenshot({ path: SHOTS + '/i3_phone.png', fullPage: true });
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await browser.close(); srv.close(); api.close();
