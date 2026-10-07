@@ -116,7 +116,9 @@ A noema-lite **curriculum** is a map of steps; every step becomes a subject pack
 1. `noema_curricula` shows what waits; `noema_curriculum_task(curriculum_id)` returns the next task as complete instructions.
 2. **Map / chapter-plan tasks** (agents of the curriculum): think it through, then `noema_curriculum_submit(curriculum_id,
    task_id, result_json)` with ONE JSON object matching the task's schema. It is checked like the app's own agents — fix
-   every listed problem and submit again. Then ask for the next task.
+   every listed problem and submit again. Then ask for the next task. A chapter-plan task for steps with the learner's
+   files gives you their links: download them and READ the pages of each step before planning (`pdf_text.py`), so every
+   chapter follows what those pages really contain and names its pages in `material`.
 3. **Step tasks**: build ONE pack exactly as this skill describes, with the given `subject_id` (start_subject.py with that id),
    one chapter per planned chapter (same order and titles), from the learner's files when the task gives download links
    (`curl` them into `work/<id>/sources/`; when only some pages belong to the step, split those pages out) — otherwise

@@ -102,7 +102,8 @@ window.NoemaCurMap = (() => {
       if (t) {
         const ans = el('textarea', { class: 'noema-input cm-paste', rows: 4, placeholder: 'Paste Claude’s answer here (the JSON object)' });
         const out = el('div', { class: 'tiny cm-pasteout' }); if (pasteOut) out.append(pasteOut);
-        box.append(el('p', { class: 'tiny' }, `Next task: ${t.title}. Copy it into any Claude chat, then paste Claude’s answer below — noema-lite checks it exactly like its own agents.`),
+        box.append(el('p', { class: 'tiny' }, `Next task: ${t.title}. Copy it into any Claude chat${t.files?.length ? ' and attach the files it names' : ''}, then paste Claude’s answer below — noema-lite checks it exactly like its own agents.`),
+          t.files?.length ? el('div', { class: 'row' }, el('span', { class: 'tiny' }, `📎 ${t.files.join(', ')}`), el('button', { class: 'btn small cm-planfiles', onclick: async e => { const b = e.currentTarget; b.disabled = true; try { for (const sid of t.steps) for (const f of C().get(acc, cid).nodes[sid]?.material?.files || []) { if (!t.files.includes(f.name)) continue; const rec = await C().materialFile(acc, C().get(acc, cid), sid, f).catch(() => null); if (rec?.blob) { const a = document.createElement('a'); a.href = URL.createObjectURL(rec.blob); a.download = f.name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 15000); t.files = t.files.filter(x => x !== f.name); } } } finally { b.disabled = false; } } }, '⬇️ Download them')) : null,
           el('div', { class: 'row' }, el('button', { class: 'btn small cm-copytask', onclick: e => copy(t.text, e.currentTarget) }, '📋 Copy the task')), ans,
           el('div', { class: 'row' }, el('button', { class: 'btn small primary cm-usepaste', onclick: () => {
             const r = J().App.paste(acc, cid, t.id, ans.value);

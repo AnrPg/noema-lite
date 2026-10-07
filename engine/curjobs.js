@@ -14,7 +14,7 @@
 (function (root) {
   'use strict';
   const C = () => root.NoemaCurriculum, L = () => root.NoemaLLM;
-  const BATCH = 5, GRAPH = ['dag', 'audit', 'expand'], IN = 'a:curin:';
+  const BATCH = 5, BATCH_FILES = 2, GRAPH = ['dag', 'audit', 'expand'], IN = 'a:curin:';
   const isApp = c => c?.provider === 'claudeapp';
   const prepared = n => ['ready', 'generating'].includes(n?.pack?.status);
   const needsPlan = n => !prepared(n) && (!n.chapters?.length || !!n.replan);
@@ -37,18 +37,30 @@
     if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S.S_DAG };
     if (kind === 'audit') return { kind, id: 'audit', title: TITLES.audit, system: SYS.audit, prompt: P.auditPrompt(x, C().snapshot(c, { withSummaries: true })), schema: S.S_AUDIT };
     if (kind === 'expand') return { kind, id: 'expand', title: TITLES.expand, system: SYS.expand, prompt: P.expandPrompt(x, C().snapshot(c), c.nodes[c.goalId]), schema: S.S_EXPAND };
-    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(','), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + wishes(c, ids), schema: S.S_PLAN };
+    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(','), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
     return null;
   }
-  /** One step to prepare: the brief, the subject id and the learner's files (each file once, even when several page ranges use it). */
-  function stepSpec(c, nid) {
-    const n = c.nodes[nid]; if (!n) return null;
+  /** The learner's files of some steps, each file once (even when several steps or page ranges use it). */
+  function downloadsOf(c, ids) {
     const downloads = [], seen = new Set();
-    for (const f of n.material?.files || []) {
+    for (const nid of ids) for (const f of c.nodes[nid]?.material?.files || []) {
       const store = f.fileId ? C().curStore(c.id) : C().packId(c, nid), src = f.fileId || f.srcId, k = store + '/' + src;
       if (seen.has(k)) continue; seen.add(k);
       downloads.push({ store, src, name: f.name, size: f.size || 0, type: f.type || '', pages: f.pages || null, sha256: f.sha256 || null });
     }
+    return downloads;
+  }
+  const hasFiles = (c, id) => !!c.nodes[id]?.material?.files?.length;
+  /** The next plan batch: up to 5 steps, of which at most 2 with files (Claude reads their pages before planning them). */
+  function planBatch(c, ids) {
+    const out = []; let withFiles = 0;
+    for (const id of ids) { const f = hasFiles(c, id); if (out.length && f && withFiles >= BATCH_FILES) continue; out.push(id); if (f) withFiles++; if (out.length >= BATCH) break; }
+    return out;
+  }
+  /** One step to prepare: the brief, the subject id and the learner's files (each file once, even when several page ranges use it). */
+  function stepSpec(c, nid) {
+    const n = c.nodes[nid]; if (!n) return null;
+    const downloads = downloadsOf(c, [nid]);
     return { kind: 'step', id: 'step:' + nid, nid, packId: C().packId(c, nid), title: `Prepare the step “${n.title}”`, stepTitle: n.title, language: c.language, brief: C().nodeBrief(c, nid), downloads, planned: !!n.chapters?.length };
   }
   /** The next task. want: 'any' | 'map' | 'plan' | 'step'; step: a step id or title (prepares that one). */
@@ -62,7 +74,7 @@
     }
     const w = work(c);
     if (w.graph && /any|map/.test(want)) return spec(c, w.graph);
-    if (w.toPlan.length && /any|plan/.test(want)) return spec(c, 'plan', w.toPlan.slice(0, BATCH));
+    if (w.toPlan.length && /any|plan/.test(want)) return spec(c, 'plan', planBatch(c, w.toPlan));
     if (w.steps.length && /any|step/.test(want)) return stepSpec(c, w.steps[0]);
     return null;
   }
@@ -110,11 +122,12 @@
   /* ---------- texts (the same words in the connector, the copied task and the step bundle) ---------- */
   const LANGN = c => C().LANG[c.language] || c.language;
   /** A map / plan task as text. mode 'connector' (answer with noema_curriculum_submit) or 'paste' (answer with the JSON only). */
-  function taskText(c, t, mode = 'connector') {
+  function taskText(c, t, mode = 'connector', { fileLines = [] } = {}) {
     const how = mode === 'connector'
       ? `## How to answer\nThink it through first (search the web when it helps). Then call **noema_curriculum_submit** with curriculum_id "${c.id}", task_id "${t.id}" and result_json = ONE JSON object that matches the JSON Schema below (no prose, no code fence). The tool checks it exactly like noema-lite does: if it lists problems, fix ALL of them and submit the corrected object again. When it is accepted, call noema_curriculum_task for the next task.`
       : `## How to answer\nThink it through first (search the web when it helps). Then answer with exactly ONE JSON object that matches the JSON Schema below — only the JSON, nothing before or after it. The learner pastes it into noema-lite, which checks it; if noema-lite lists problems, fix all of them and send the whole corrected object again.`;
-    return `# noema-lite curriculum task — ${t.title}\nCurriculum: “${c.title || c.goal}” (${c.id}) · write in ${LANGN(c)} · task ${t.id}\n\n## Your role and rules\n${t.system}\n\n## The task\n${t.prompt}\n\n${how}\n\n## JSON Schema of the answer\n${JSON.stringify(t.schema)}`;
+    const files = t.kind === 'plan' && t.downloads?.length ? `\n\n## Read the learner's files before planning\nSome of these steps come with the learner's own files (listed above with the pages that belong to each step). The outline and first lines above are only a summary — READ the pages of each step first, then plan its chapters from what those pages actually contain, in their order, and give every chapter "material" = file + the pages it comes from. ${mode === 'connector' ? 'Get the files into your sandbox (code execution) and extract the text of those pages (pdftotext -f A -l B, or the noema-pack-builder pdf_text.py); do not paste the files into your answer:' : 'The learner attaches these files to this chat:'}\n${(mode === 'connector' ? fileLines : t.downloads.map(d => `- ${d.name}${d.pages ? ` (${d.pages} pages)` : ''}`)).join('\n')}` : '';
+    return `# noema-lite curriculum task — ${t.title}\nCurriculum: “${c.title || c.goal}” (${c.id}) · write in ${LANGN(c)} · task ${t.id}\n\n## Your role and rules\n${t.system}\n\n## The task\n${t.prompt}${files}\n\n${how}\n\n## JSON Schema of the answer\n${JSON.stringify(t.schema)}`;
   }
   /** A step to prepare as text. fileLines: how to get each file into the sandbox (signed links, or “attached to this chat”). */
   function stepText(c, t, { mode = 'connector', fileLines = [] } = {}) {
@@ -202,7 +215,7 @@
     const line = apply(c, t, data); C().save(acc, c); C().Gen.kick(); return { ok: true, line };
   };
   /** The task text to copy into any Claude chat (no connector). */
-  App.copyTask = (acc, cid) => { const c = C().get(acc, cid); const t = c && next(c, { want: 'any' }); return t && t.kind !== 'step' && !t.error ? { id: t.id, title: t.title, text: taskText(c, t, 'paste') } : null; };
+  App.copyTask = (acc, cid) => { const c = C().get(acc, cid); const t = c && next(c, { want: 'any' }); return t && t.kind !== 'step' && !t.error ? { id: t.id, title: t.title, text: taskText(c, t, 'paste'), files: (t.downloads || []).map(d => d.name), steps: t.ids || [] } : null; };
   /** ⬇️ A step's bundle for a Claude chat without the connector: the task, the learner's files and the toolkit. */
   App.bundle = async (acc, cid, nid) => {
     const c = C().get(acc, cid); const t = c && stepSpec(c, nid); if (!t) throw new Error('Step not found.');
@@ -231,5 +244,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, next, byId, check, apply, merged, spec, stepSpec, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, IN, App };
+  root.NoemaCurJobs = { work, next, byId, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

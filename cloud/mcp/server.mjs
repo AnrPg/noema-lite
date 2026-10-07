@@ -141,17 +141,17 @@ function workLine(c) {
   return `- “${c.title || c.goal}” — curriculum_id ${c.id} · ${n} steps, ${ready} prepared · made with ${c.provider === 'claudeapp' ? 'the Claude app' : 'noema-lite (API key / Gemini)'}\n  ${bits.length ? 'To do: ' + bits.join('; ') : 'nothing waiting for you'}`;
 }
 /** How Claude gets one of the learner's files into its sandbox (signed links; big files are stored in parts). */
-async function downloadLines(token, uid, packId, downloads) {
+async function downloadLines(token, uid, dir, downloads) {
   const out = [], index = {};
   for (const d of downloads) {
     if (!index[d.store]) { const r = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent('a:srcfiles:' + d.store)}`, token).catch(() => []); try { index[d.store] = JSON.parse(r?.[0]?.value || '{}'); } catch (e) { index[d.store] = {}; } }
     const meta = index[d.store][d.src];
-    const local = `work/${packId}/sources/${String(d.name).replace(/["$`\\]/g, '_')}`;
+    const local = `${dir}/${String(d.name).replace(/["$`\\]/g, '_')}`;
     if (!meta?.cloud) { out.push(`- ${d.name}: ⚠️ not in the learner's cloud yet (it is uploaded when noema-lite is open on the device where it was added). Ask the learner to attach it to this chat, or build the step without it and say so.`); continue; }
     const base = `${uid}/sources/${d.store}/${String(d.src).replace(/[^a-zA-Z0-9_-]/g, '_')}/file.${extOf(meta.name || d.name)}`;
     const parts = partNames(base, meta.chunks || 0); const urls = [];
     for (const pth of parts) { const r = await sb(`/storage/v1/object/sign/noema-private/${pth}`, token, { method: 'POST', body: { expiresIn: 7200 } }); urls.push(`${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.signedURL}`); }
-    out.push(`- ${d.name} (${((d.size || meta.size || 0) / 1048576).toFixed(1)} MB${d.pages ? `, ${d.pages} pages` : ''}):\n  mkdir -p "work/${packId}/sources"\n` + (urls.length === 1 ? `  curl -sSL -o "${local}" "${urls[0]}"` : urls.map((u, i) => `  curl -sSL -o "/tmp/noema-part.${String(i).padStart(3, '0')}" "${u}"`).join('\n') + `\n  cat /tmp/noema-part.* > "${local}" && rm /tmp/noema-part.*`));
+    out.push(`- ${d.name} (${((d.size || meta.size || 0) / 1048576).toFixed(1)} MB${d.pages ? `, ${d.pages} pages` : ''}):\n  mkdir -p "${dir}"\n` + (urls.length === 1 ? `  curl -sSL -o "${local}" "${urls[0]}"` : urls.map((u, i) => `  curl -sSL -o "/tmp/noema-part.${String(i).padStart(3, '0')}" "${u}"`).join('\n') + `\n  cat /tmp/noema-part.* > "${local}" && rm /tmp/noema-part.*`));
   }
   out.push('(The links are valid for 2 hours. If your sandbox cannot reach them, ask the learner to attach the files to this chat.)');
   return out;
@@ -291,8 +291,8 @@ async function callTool(name, args, ctx) {
       const t = CJ().next(c, { want: args?.want || 'any', step: args?.step || '' });
       if (t?.error) return fail(t.error);
       if (!t) return text(`✅ Nothing is waiting in “${c.title || c.goal}”${args?.want && args.want !== 'any' ? ` (${args.want})` : ''}. ` + (CJ().isApp(c) ? 'Steps reach this queue when the learner opens them on the map (or the app queues the next ones ahead). ' : '') + 'To prepare a particular step anyway, call noema_curriculum_task with step = its title.');
-      if (t.kind !== 'step') return text(CJ().taskText(c, t, 'connector'));
-      const lines = t.downloads.length ? await downloadLines(token, uid, t.packId, t.downloads) : [];
+      if (t.kind !== 'step') return text(CJ().taskText(c, t, 'connector', { fileLines: t.downloads?.length ? await downloadLines(token, uid, `work/plan-${c.id}`, t.downloads) : [] }));
+      const lines = t.downloads.length ? await downloadLines(token, uid, `work/${t.packId}/sources`, t.downloads) : [];
       return text(CJ().stepText(c, t, { mode: 'connector', fileLines: lines }));
     }
     case 'noema_curriculum_submit': {

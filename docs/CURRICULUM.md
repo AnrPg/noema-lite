@@ -185,7 +185,7 @@ usage limits may spread a big one over days).
 | work | when | how Claude gets it | the answer |
 |---|---|---|---|
 | **map** — agents 1 · 1b · 2 | a new curriculum (stage `dag` → `audit` → `expand`), status `waiting` | `noema_curriculum_task`: the agent's own prompt + JSON Schema | `noema_curriculum_submit` |
-| **plan** — agent 3, batches of 5 | steps without chapters (imported maps; ✨ re-plan / ➕ step without a key → `replan` + the wish) | the planner's prompt + the steps' own files (pages, outline) | same |
+| **plan** — agent 3, batches of up to 5 steps, at most 2 of them with files | steps without chapters (imported maps; ✨ re-plan / ➕ step without a key → `replan` + the wish) | the planner's prompt + a summary of the steps' files (pages, outline, first lines) **and signed links to the files**: Claude reads each step's pages before planning it (by hand: the task names the files to attach, ⬇️ Download them) | same |
 | **step** | a step in the queue: `pack.status = 'app'` (sent from the map, or *prepare ahead* for a Claude-app curriculum) | the brief, the subject id (`packId`), signed links to the learner's files (big files in parts) | the pack, saved with `noema_start_upload` → `noema_finish_upload` |
 
 * **One code path.** Tasks, the checks of an answer (JSON Schema + the agents' semantic rules) and how an answer changes the
