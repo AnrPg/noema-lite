@@ -95,7 +95,7 @@ async function generateTitle(cv) {
     const transcript = cv.msgs.map(m => (m.role === 'user' ? 'Learner: ' : 'Tutor: ') + m.text).join('\n\n').slice(0, 9000);
     const prompt = `Write the title for this ${TUTOR.domain} tutoring conversation (mode: ${MODE_NAME[cv.mode] || cv.mode}; context: ${cv.ctx?.label || 'whole course'}).
 Rules: 3–8 words; name the specific concept(s) actually discussed, not generic words; canonical ${TUTOR.domain} terminology and capitalization (e.g. ${TUTOR.terminology}); Title Case; optionally "Topic: Angle" form; no quotes, emojis, trailing punctuation, dates, or words like Conversation/Chat/Session/Tutor.
-Reply with the title only.
+Reply with the title only.${chatLang() && chatLang() !== COURSE_LANG ? ` Write it in ${langName(chatLang())}.` : ''}
 
 TRANSCRIPT:
 ${transcript}`;

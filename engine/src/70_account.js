@@ -77,6 +77,9 @@ const ACC_VIEWS = {
     const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': 'Daily XP goal' });
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
+    const chatL = chatLangSelect({ persist: false });
+    const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, 'Language of the AI conversations ', tip('The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.')), chatL,
+      h('div', { class: 'tiny' }, `The course material stays in its own language (${SUBJ.title}: ${langName(COURSE_LANG)}). You can also switch it in the tutor (🗣 next to the topic).`)));
     const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Theme'), theme), h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal)),
       h('label', { class: 'row', style: { margin: '8px 0' } }, snd, 'Sound effects'),
       h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'));
@@ -88,11 +91,12 @@ const ACC_VIEWS = {
     body.append(
       accSection('🤖', 'Gemini — the AI tutor', { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? 'key set' : 'no key' }, open: !S.settings.apiKey, body: geminiBox }),
       accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and curricula: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
+      accSection('🗣️', 'Language of the AI conversations', { status: { ok: true, text: chatLang() ? langName(chatLang()) : 'as the course' }, body: langBox }),
       accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
       accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', onclick: async () => {
-          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; save();
+          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; save();
           putAccountSettings({ curProvider: curProv.value || undefined, curBudget: Math.max(1, +nbudget.value || 8) });
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
             if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }

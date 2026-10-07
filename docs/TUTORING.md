@@ -36,3 +36,11 @@ small 💡 in their top corner — visible on hover (faint but always there on t
 **💡 Explain** mode with the context `item`: the part itself first (`FOCUS`), then its section and the chapter
 (`WIDER CONTEXT`), so the explanation is about exactly that part but may connect to the rest of the lesson and go
 beyond it. The conversation is saved like any other (context type `item`, with its section).
+
+## 🗣 Language of the AI conversations
+⚙️ Settings → **Language of the AI conversations** (also the 🗣 picker in the tutor, next to the topic): the tutor in every
+mode, the 💡 explanations, the AI feedback on answers and drills, and conversation titles are written in that language
+(`S.settings.chatLang`, a profile setting, synced). The rule is added to the instructions at call time (`langRule()` /
+`langFields()` in `engine/src/20_ai.js`), so a change applies to the next answer. The course material is **not** changed
+or translated: the notes sent to the tutor stay in the course language, and the tutor translates what it quotes (keeping
+code, formulas and names, and a key term's original form in parentheses). “Same as the course” = the previous behaviour.

@@ -390,8 +390,21 @@ function learnerProfile() {
   return `${learner} ${TUTOR.prior || ''}`.trim();
 }
 const LEARNER = learnerProfile();
-const LANG_NOTE = SUBJ.language && SUBJ.language !== 'en' ? ` Reply in the language of the course material (${SUBJ.language}) unless the learner writes in another language.` : '';
-const STYLE = `Formatting: short turns (max ~120 words unless asked), markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".${LANG_NOTE}`;
+/* ---------- the language of the AI conversations (⚙️ Settings): only what the AI writes to the learner — the pack is unchanged ---------- */
+const CHAT_LANGS = [['en', 'English', 'English'], ['el', 'Ελληνικά', 'Greek'], ['de', 'Deutsch', 'German'], ['fr', 'Français', 'French'], ['es', 'Español', 'Spanish'], ['it', 'Italiano', 'Italian'], ['pt', 'Português', 'Portuguese'], ['nl', 'Nederlands', 'Dutch'], ['pl', 'Polski', 'Polish'], ['ro', 'Română', 'Romanian'], ['bg', 'Български', 'Bulgarian'], ['ru', 'Русский', 'Russian'], ['uk', 'Українська', 'Ukrainian'], ['tr', 'Türkçe', 'Turkish'], ['ar', 'العربية', 'Arabic'], ['he', 'עברית', 'Hebrew'], ['hi', 'हिन्दी', 'Hindi'], ['zh', '中文', 'Chinese'], ['ja', '日本語', 'Japanese'], ['ko', '한국어', 'Korean']];
+const langName = code => (CHAT_LANGS.find(l => l[0] === code) || [])[2] || code;
+const COURSE_LANG = SUBJ.language || 'en';
+/** '' = the language of the course (the learner may still write in another one) */
+const chatLang = () => S.settings.chatLang || '';
+/** The rule added to every conversation's instructions, read at call time (a change applies to the next answer). */
+function langRule() {
+  const l = chatLang();
+  if (!l || l === COURSE_LANG) return COURSE_LANG !== 'en' || l ? `LANGUAGE: reply in ${langName(COURSE_LANG)} (the language of the course material) unless the learner writes in another language.` : '';
+  return `LANGUAGE: always write to the learner in ${langName(l)}, although the course material and the notes below are in ${langName(COURSE_LANG)}. Translate what you quote or explain from them; keep code, formulas and proper names as they are, and give a key technical term in its original form in parentheses the first time it appears (the learner meets it that way in the material). If the learner explicitly asks for another language, use that one.`;
+}
+/** For the JSON helpers (grading, feedback): which language their human-readable fields are written in. */
+const langFields = what => { const l = chatLang(); return l && l !== COURSE_LANG ? ` Write ${what} in ${langName(l)}.` : ''; };
+const STYLE = `Formatting: short turns (max ~120 words unless asked), markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".`;
 const TN = TUTOR.name;
 const MODES = {
   socratic: { label: `${TUTOR.avatar} Socratic`, sys: `You are "${TN}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
@@ -478,6 +491,12 @@ function openTutor(ctx, mode, autoMsg) {
   else setTimeout(() => $('.composer textarea')?.focus(), 350);
 }
 function closeTutor() { T.open = false; $('.drawer')?.classList.remove('open'); $('.scrim')?.classList.remove('on'); }
+/** 🗣 The language picker of the AI conversations (⚙️ Settings and the tutor drawer). */
+function chatLangSelect({ cls = '', onChange = null, persist = true } = {}) {
+  return h('select', { class: cls, title: 'Language of the AI conversations — the course material stays as it is', 'aria-label': 'Language of the AI conversations', onchange: e => { if (persist) { S.settings.chatLang = e.target.value; save(); } onChange?.(e.target.value); } },
+    h('option', { value: '', selected: !chatLang() }, `🗣 Same as the course (${CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG})`),
+    ...CHAT_LANGS.map(([v, l]) => h('option', { value: v, selected: chatLang() === v }, '🗣 ' + l)));
+}
 function renderTutor() {
   const d = $('.drawer'); d.innerHTML = '';
   const hist = T.hist[tutorCtxKey()] || [];
@@ -491,7 +510,8 @@ function renderTutor() {
         h('button', { class: 'iconbtn', title: 'New conversation', onclick: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }, '↺'),
         h('button', { class: 'iconbtn', title: 'Close', onclick: closeTutor }, '✕')),
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
-        T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null),
+        T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null,
+        chatLangSelect({ cls: 'chatlang', onChange: () => renderTutor() })),
       h('div', { class: 'modechips' }, ...Object.entries(MODES).map(([k, m]) => h('button', { class: T.mode === k ? 'on' : '', onclick: () => { T.mode = k; renderTutor(); } }, m.label)))),
     msgs,
     h('div', { class: 'composer' },
@@ -535,6 +555,7 @@ async function sendTutor(text, hidden = false, opts = {}) {
   msgs.append(bubble); msgs.scrollTop = msgs.scrollHeight;
   T.busy = true;
   let system = MODES[T.mode].sys + '\n\n' + tutorContextText();
+  { const lr = langRule(); if (lr) system += '\n\n' + lr; }
   if (threaded) system += '\n\n' + tutorStateBlock(ts, directive);
   else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.';
   const contents = hist.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.text }] }));
@@ -559,7 +580,7 @@ async function aiGrade(ex, answer) {
   const ref = ex.type === 'write' ? `Reference solution:\n${ex.solution}` : `Model answer:\n${ex.model}\nRubric key points:\n- ${(ex.rubric || []).join('\n- ')}`;
   const sec = SEC[ex.section];
   const prompt = `Grade the learner's answer to a ${TUTOR.domain} exercise.\nQuestion: ${ex.q}\n${ex.code ? 'Code shown:\n' + ex.code + '\n' : ''}${ref}\n\nLearner's answer:\n"""${answer}"""\n\nSection notes (ground truth):\n${sec ? sectionText(sec).slice(0, 6000) : ''}\n\nReturn JSON: score 0-100 (meaning, not wording; for code accept equivalent correct syntax), verdict (one short line), covered (rubric points hit), missing (points missed), mistakes (factual errors), feedback (2-4 sentences, encouraging, specific, end with a nudge question).`;
-  const g = await geminiJSON(prompt, `You are a strict but kind ${TUTOR.examinerRole}. Output only JSON.`, schema);
+  const g = await geminiJSON(prompt, `You are a strict but kind ${TUTOR.examinerRole}. Output only JSON.${langFields('the verdict, covered, missing and mistakes texts')}`, schema);
   try {
     const sec = SEC[ex.section];
     logAI(ex.type === 'write' ? 'code-review' : 'grading', {
@@ -583,7 +604,7 @@ async function aiQuestion(sec, kind = 'mcq') {
 async function aiDrillGrade(d, answer) {
   const schema = { type: 'OBJECT', properties: { score: { type: 'INTEGER' }, hit: { type: 'ARRAY', items: { type: 'INTEGER' } }, feedback: { type: 'STRING' } }, required: ['score', 'hit', 'feedback'] };
   const prompt = `A learner was shown this debugging symptom and listed the questions they would ask themselves.\nSymptom: ${d.symptom}\nCanonical ordered checklist:\n${d.askYourself.map((q, i) => `${i}. ${q}`).join('\n')}\n\nLearner wrote:\n"""${answer}"""\n\nReturn JSON: hit = indexes of checklist questions the learner covered (same meaning counts), score 0-100 (coverage + sensible order), feedback 2-3 sentences: what they nailed, the most important one they missed and why it matters.`;
-  const g = await geminiJSON(prompt, 'You are a precise debugging coach. Output only JSON.', schema);
+  const g = await geminiJSON(prompt, 'You are a precise debugging coach. Output only JSON.' + langFields('the feedback'), schema);
   try { logAI('drill-grading', { ctx: { kind: 'playbook', id: d.id, label: d.title }, title: `Drill: ${d.title}`.slice(0, 90),
     prompt: `**Symptom:** ${d.symptom}\n\n**The questions I would ask myself:**\n\n${answer}`,
     response: `**Score: ${g.score}/100** — covered ${(g.hit || []).length}/${d.askYourself.length}\n\n${g.feedback || ''}\n\n**Canonical checklist:**\n${d.askYourself.map((q, i) => `${(g.hit || []).includes(i) ? '✅' : '▫️'} ${i + 1}. ${q}`).join('\n')}` }); } catch (e) { }
@@ -2352,7 +2373,7 @@ async function generateTitle(cv) {
     const transcript = cv.msgs.map(m => (m.role === 'user' ? 'Learner: ' : 'Tutor: ') + m.text).join('\n\n').slice(0, 9000);
     const prompt = `Write the title for this ${TUTOR.domain} tutoring conversation (mode: ${MODE_NAME[cv.mode] || cv.mode}; context: ${cv.ctx?.label || 'whole course'}).
 Rules: 3–8 words; name the specific concept(s) actually discussed, not generic words; canonical ${TUTOR.domain} terminology and capitalization (e.g. ${TUTOR.terminology}); Title Case; optionally "Topic: Angle" form; no quotes, emojis, trailing punctuation, dates, or words like Conversation/Chat/Session/Tutor.
-Reply with the title only.
+Reply with the title only.${chatLang() && chatLang() !== COURSE_LANG ? ` Write it in ${langName(chatLang())}.` : ''}
 
 TRANSCRIPT:
 ${transcript}`;
@@ -2697,6 +2718,9 @@ const ACC_VIEWS = {
     const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': 'Daily XP goal' });
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
+    const chatL = chatLangSelect({ persist: false });
+    const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, 'Language of the AI conversations ', tip('The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.')), chatL,
+      h('div', { class: 'tiny' }, `The course material stays in its own language (${SUBJ.title}: ${langName(COURSE_LANG)}). You can also switch it in the tutor (🗣 next to the topic).`)));
     const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Theme'), theme), h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal)),
       h('label', { class: 'row', style: { margin: '8px 0' } }, snd, 'Sound effects'),
       h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'));
@@ -2708,11 +2732,12 @@ const ACC_VIEWS = {
     body.append(
       accSection('🤖', 'Gemini — the AI tutor', { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? 'key set' : 'no key' }, open: !S.settings.apiKey, body: geminiBox }),
       accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and curricula: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
+      accSection('🗣️', 'Language of the AI conversations', { status: { ok: true, text: chatLang() ? langName(chatLang()) : 'as the course' }, body: langBox }),
       accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
       accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', onclick: async () => {
-          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; save();
+          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; save();
           putAccountSettings({ curProvider: curProv.value || undefined, curBudget: Math.max(1, +nbudget.value || 8) });
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
             if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }

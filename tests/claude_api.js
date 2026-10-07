@@ -165,7 +165,7 @@ function messages(body, res, J) {
 
   console.log('— ⚙️ Settings: a tab of the profile menu, with an optional Claude section');
   await p.click('.iconbtn[title="Settings"]'); await wait(400);
-  ok(await p.locator('.accbox .tabs button.on').innerText() === '⚙️ Settings' && await p.locator('.accbox .accsec').count() === 4, '⚙️ opens the profile menu on its ⚙️ Settings tab: Gemini · Claude · Display & studying · this subject');
+  ok(await p.locator('.accbox .tabs button.on').innerText() === '⚙️ Settings' && await p.locator('.accbox .accsec').count() === 5, '⚙️ opens the profile menu on its ⚙️ Settings tab: Gemini · Claude · language of the AI conversations · Display & studying · this subject');
   await p.click('.accsec summary:has-text("Claude (optional)")'); await wait(300);
   ok(await until(async () => /The key works/.test(await p.locator('.accsec:has-text("Claude (optional)")').innerText()), 6000) && await p.locator('select[aria-label="Claude model"] option').count() === 4, 'the Claude key on this device is shown and checked; its models are listed');
   await p.selectOption('select[aria-label="Claude model"]', 'claude-opus-9'); await p.fill('input[aria-label="Spending limit per curriculum step"]', '5'); await p.selectOption('select[aria-label="AI for new curricula"]', 'claude');

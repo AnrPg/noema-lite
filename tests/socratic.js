@@ -52,6 +52,27 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
   await p.reload(); await wait(800); await p.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   await p.evaluate(() => { openTutor(); T.showHistory = true; renderTutor(); }); await wait(300); await p.click('.cvmain'); await wait(400);
   ok(await p.evaluate(() => { const ts = T.tstate[tutorCtxKey()]; return ts && ts.lessons.length === 1 && T.mode === 'socratic'; }), 'thread state restored when a saved conversation is reopened');
+  // 🗣 the language of the AI conversations: only what the AI writes changes — the pack does not
+  const packBefore = await p.evaluate(() => (s => [s.title, JSON.stringify(s.blocks)].join('|'))(Noema.pack.chapters[4].sections[3]));
+  ok(!/LANGUAGE:/.test(systems[systems.length - 1]), 'an English course, no choice made → no language rule');
+  await p.evaluate(() => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); }); await wait(200);
+  ok(await p.locator('.drawer select.chatlang').count() === 1, 'the tutor has a 🗣 language picker next to the topic');
+  await p.selectOption('.drawer select.chatlang', 'el'); await wait(200);
+  await send('What is a deletion vector?');
+  const lastSys = systems[systems.length - 1];
+  await p.screenshot({ path: '/tmp/noema_shots/s3_lang.png' });
+  ok(/LANGUAGE: always write to the learner in Greek, although the course material and the notes below are in English/.test(lastSys), 'Ελληνικά → the tutor is told to answer in Greek (the notes stay English)');
+  ok(await p.evaluate(() => JSON.parse(localStorage.getItem(`noema1:${ACCOUNT.id}:a:settings`)).chatLang) === 'el', 'the choice is a setting of the profile (synced like the others)');
+  ok(await p.evaluate(() => (s => [s.title, JSON.stringify(s.blocks)].join('|'))(Noema.pack.chapters[4].sections[3])) === packBefore, 'the course material is unchanged');
+  const sysJ = []; await ctx.route('**/generativelanguage.googleapis.com/**:generateContent*', async route => { const b = JSON.parse(route.request().postData() || '{}'); sysJ.push(b.systemInstruction?.parts?.[0]?.text || ''); return route.fulfill({ json: { candidates: [{ content: { parts: [{ text: '{"score":70,"verdict":"Σχεδόν","covered":[],"missing":[],"mistakes":[],"feedback":"ok","hit":[0]}' }] } }] } }); });
+  await p.evaluate(() => aiGrade(Noema.pack.chapters[0].exercises.find(e => e.type === 'free') || { type: 'free', q: 'Q', model: 'M', rubric: ['r'], section: Noema.pack.chapters[0].sections[0].id }, 'my answer'));
+  ok(/Write the verdict, covered, missing and mistakes texts in Greek/.test(sysJ.at(-1) || ''), 'the AI feedback on answers is written in Greek too');
+  await p.evaluate(() => openAccountMenu('settings')); await wait(300);
+  await p.click('.accsec summary:has-text("Language of the AI conversations")'); await wait(200);
+  ok(await p.locator('.accsec:has-text("Language of the AI conversations") select').inputValue() === 'el' && /stays in its own language/.test(await p.locator('.accsec:has-text("Language of the AI conversations")').innerText()), '⚙️ Settings shows the same choice, and says the material is not translated');
+  await p.selectOption('.accsec:has-text("Language of the AI conversations") select', ''); await p.click('button:has-text("Save settings")'); await wait(400);
+  ok(await p.evaluate(() => chatLang()) === '', '“Same as the course” → back to the course language');
+  await p.evaluate(() => openTutor({ kind: 'section', id: 'ch05-s04' }, 'socratic')); await wait(200);
   // other modes: wrap-up works without threads
   await p.evaluate(() => { T.mode = 'explain'; T.hist[tutorCtxKey()] = [{ role: 'user', text: 'x', t: 1 }, { role: 'model', text: 'y', t: 2 }]; renderTutor(); }); await wait(200);
   ok(!!(await p.$('.threadbar button:has-text("Wrap up")')) && !(await p.$('.threadbar button:has-text("Just tell me")')), 'other modes offer 🎓 Wrap up (no thread controls)');

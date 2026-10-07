@@ -408,3 +408,4 @@ select.sel{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);b
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+.chatlang{margin-left:auto;font-size:12.5px;padding:3px 6px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);color:var(--ink2);max-width:170px}
