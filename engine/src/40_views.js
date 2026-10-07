@@ -110,7 +110,7 @@ function homeView() {
       modeTile('🃏', 'Flashcards', 'Spaced-repetition recall', '#/cards', dueFc ? `${dueFc} due` : null),
       modeTile('🔁', 'Mistakes gym', 'Retry what you got wrong', '#/mistakes', wrong ? `${wrong}` : null),
       modeTile('🎲', 'Mixed practice', 'Random exercises from everything you read', '#/practice/all'),
-      modeTile(TUTOR.avatar, 'Socratic tutor', 'Gemini questions you until it clicks', null, null, () => openTutor(null, 'socratic'))),
+      modeTile(TUTOR.avatar, 'Socratic tutor', 'Gemini questions you until it clicks', null, null, () => openTutor(null, 'socratic', null, { intent: INTENT.course }))),
     h('div', { class: 'row', style: { marginBottom: '14px' } }, h('h2', {}, 'Chapters'), h('span', { class: 'tiny' }, `${COURSE.length} chapters · ${COURSE.reduce((a, c) => a + c.sections.length, 0)} sections · ${ALL_EX.length} exercises`)),
     h('div', { class: 'chapters' }, ...COURSE.map((c, i) => {
       const p = chProgress(c);
@@ -173,7 +173,7 @@ function chapterView(id, tab) {
       h('div', { class: 'row', style: { marginTop: '22px' } },
         h('button', { class: 'btn primary', onclick: () => go(`#/practice/${id}`) }, '🎯 Practice this chapter'),
         h('button', { class: 'btn', onclick: () => go(`#/boss/${id}`) }, S.boss[id] ? '🏆 Boss battle (beaten!)' : '👾 Boss battle'),
-        h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic') }, `${TUTOR.avatar} Socratic review`)));
+        h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} Socratic review`)));
   } else if (tab === 'practice') practiceSetup(body, c);
   else if (tab === 'debug') drillList(body, c.debug);
   else if (tab === 'cards') flashDeck(body, c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c })));
@@ -274,9 +274,9 @@ function sectionTail(s, prev, next) {
   const pbs = c.debug.filter(d => d.section === s.id);
   const zone = h('div', { class: 'quickzone' });
   zone.append(h('div', { class: 'row', style: { margin: '6px 0 18px' } },
-    h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'section', id: s.id }, 'socratic', `Start a Socratic session on "${s.title}". Begin by probing what I already think.`) }, `${TUTOR.avatar} Socratic dialogue on this`),
-    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'debug', `Start a debugging simulation related to "${s.title}".`) }, '🔧 Debug simulation'),
-    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'interview', `Interview me about "${s.title}".`) }, '🎤 Interview me')));
+    h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'section', id: s.id }, 'socratic', `Start a Socratic session on "${s.title}". Begin by probing what I already think.`, { intent: INTENT.secSocratic }) }, `${TUTOR.avatar} Socratic dialogue on this`),
+    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'debug', `Start a debugging simulation related to "${s.title}".`, { intent: INTENT.secDebug }) }, '🔧 Debug simulation'),
+    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'interview', `Interview me about "${s.title}".`, { intent: INTENT.secInterview }) }, '🎤 Interview me')));
   if (quick.length) {
     zone.append(h('h3', {}, '⚡ Quick check', h('span', { class: 'tiny' }, `${quick.length} right here, right now`)));
     quick.forEach(e => zone.append(exerciseCard(e)));
@@ -502,7 +502,7 @@ function drillView(id) {
       h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 Reveal checklist'),
       h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ Grading…'; try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + er.message, 4000); reveal(null); } } }, '✨ Grade my checklist'),
       h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 Order drill'),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`) }, '🎭 Role-play it with Brick')),
+      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, '🎭 Role-play it with Brick')),
     stage));
   function orderDrill() {
     stage.innerHTML = '';

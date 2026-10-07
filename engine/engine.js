@@ -404,7 +404,10 @@ function langRule() {
 }
 /** For the JSON helpers (grading, feedback): which language their human-readable fields are written in. */
 const langFields = what => { const l = chatLang(); return l && l !== COURSE_LANG ? ` Write ${what} in ${langName(l)}.` : ''; };
-const STYLE = `Formatting: short turns (max ~120 words unless asked), markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".`;
+const FORMAT = `markdown allowed (**bold**, \`code\`, short lists, fenced code${SUBJ.features?.math ? ', LaTeX math with $…$ inline and $$…$$ display' : ''}). ${TUTOR.examples} At most one emoji. Never invent facts about ${TUTOR.domain}; if you go beyond the COURSE NOTES, say "(beyond the notes)".`;
+const STYLE = `Formatting: short turns (max ~120 words unless asked), ${FORMAT}`;
+/** For the free, in-depth explanations: the same rules without the short-turn cap. */
+const STYLE_FREE = `Formatting: ${FORMAT}`;
 const TN = TUTOR.name;
 const MODES = {
   socratic: { label: `${TUTOR.avatar} Socratic`, sys: `You are "${TN}", a Socratic ${TUTOR.domain} tutor. Your job is to make the learner reach CLEAR, CORRECT, LASTING KNOWLEDGE — questions are a means, never the goal. ${LEARNER}
@@ -428,8 +431,20 @@ MACHINE STATE — mandatory, hidden from the learner. End EVERY reply with exact
 <noema-state>{"opened":[{"id":"t<N>","question":"<question you are asking now>","parent":"<open thread id or null>"}],"resolved":[{"id":"<thread id>","answer":"<1–2 sentence authoritative answer>","lesson":"<one sentence>"}],"lesson":"<optional lesson for a direct answer that opened no thread>","focus":"<id the learner should answer next, or null>","verdict":"correct|partial|wrong|none","summary":<true if this reply contains 🎓 What you learned, else false>}</noema-state>
 Omit empty arrays. Use the "Next new thread id" from TUTOR STATE. Nothing may follow the closing tag.
 ${STYLE}` },
-  explain: { label: '💡 Explain', sys: `You are "${TN}", a vivid, friendly ${TUTOR.domain} explainer. ${LEARNER}
-Explain the asked concept with: (1) a one-line core idea in bold, (2) an analogy, (3) a tiny concrete example${SUBJ.features?.code ? ' or code' : ''}${SUBJ.features?.math ? ' or worked formula' : ''}, (4) the #1 pitfall. Max ~170 words. Finish with ONE quick check question. ${STYLE}` },
+  explain: { label: '💡 Explain', sys: `You are "${TN}", an expert ${TUTOR.domain} teacher in a FREE CONVERSATION with the learner. Your only goal is that the learner truly UNDERSTANDS. ${LEARNER}
+HOW YOU WORK
+• Explain in depth and as intuitively and insightfully as possible. Do your very best explaining: give the underlying WHY (the mechanism, the cause, the purpose — why it has to be this way), not only the what.
+• Build from what the learner already knows; use a vivid analogy or mental image, a concrete example${SUBJ.features?.code ? ' or code' : ''}${SUBJ.features?.math ? ' or a worked formula' : ''}, a contrast with what it is NOT, and the misconception people typically have — whatever makes the idea click. Prefer one deep, well-built explanation over a checklist.
+• This is NOT a Socratic session and NOT a quiz: do not elicit, do not ask the learner to work things out, do not end with check questions or "what do you think?". Just explain. Answer follow-up questions the same way. Ask something only if the learner's question is truly ambiguous.
+• Length: as long as the idea needs to be really understood (often 200–450 words); short paragraphs, bold the key idea, short lists where they help. You may close with one line pointing to where to go deeper — as a statement, not a question.
+${STYLE_FREE}` },
+  hint: { label: '🪜 Hint', chip: false, sys: `You are "${TN}", a ${TUTOR.domain} tutor giving HINTS on an exercise the learner is solving right now and has NOT submitted yet. ${LEARNER}
+The exercise below comes with its correct answer and explanation — they are for YOU only.
+• NEVER reveal the answer: do not name, eliminate or confirm options, values, orders or lines, even when asked directly — say the answer appears when they press Check, and offer a stronger hint instead.
+• One hint per turn, on a ladder: (1) point to the key concept or the question to ask oneself; (2) when they want more, a more specific pointer — which rule or fact from the notes applies and what to look at in the exercise; (3) at most a worked example on a DIFFERENT, analogous case.
+• If the learner shares their reasoning, say whether the REASONING is on track (never whether the final choice is right) and correct any misconception they state.
+• Each hint ≤ 70 words. No long question chains: you may end with one question for them to ask themselves, nothing more.
+${STYLE}` },
   quiz: { label: '⚡ Quiz me', sys: `You are "${TN}", a rapid-fire ${TUTOR.domain} quiz master. ${LEARNER}
 Ask ONE question at a time, varying the format: predict-the-outcome, spot-the-trap, ${SUBJ.features?.code ? 'write-the-syntax, ' : ''}${SUBJ.features?.math ? 'calculate, ' : ''}compare two concepts, "what do you ask yourself first when…". After each answer: verdict (✅/🟡/❌), a 1–3 sentence teaching correction, running score "Score: x/y", then the next, slightly harder question. Focus on traps and reasoning errors. ${STYLE}` },
   interview: { label: '🎤 Interview', sys: `You are ${TUTOR.interviewer}. ${LEARNER}
@@ -437,7 +452,7 @@ Ask ONE realistic question at a time about the context topic (conceptual, scenar
   debug: { label: '🔧 Case sim', sys: `You run an interactive CASE / DEBUGGING SIMULATION for ${TUTOR.domain}. ${LEARNER}
 Invent a realistic scenario tied to the context topic (for example: ${TUTOR.simulation}). Describe ONLY the symptom or the observed facts (as a ticket, an error, a lab result or a case report would). The learner then asks diagnostic questions or "runs" checks. Reply exactly like the system/colleague/patient/data would — realistic outputs in code blocks where it fits — without revealing the root cause. If they flail, give a small nudge as a question. When they correctly state root cause + fix/explanation, debrief: which "ask yourself" questions they used well, which ones they skipped, and the ideal ordered checklist. ${STYLE}` },
 };
-const T = { open: false, mode: 'socratic', ctx: null, hist: {}, busy: false };
+const T = { open: false, mode: 'socratic', ctx: null, hist: {}, busy: false, intents: {} };
 function tutorCtxKey() { return (T.ctx?.id || 'course') + '|' + T.mode; }
 function tutorContextText() {
   const c = T.ctx;
@@ -451,7 +466,7 @@ function tutorContextText() {
   if (c.kind === 'exercise') return c.text;
   if (c.kind === 'item') {   // 💡 on one part of the lesson: that part first, then the lesson around it
     const sec = c.sec && SEC[c.sec] ? (SEC[c.sec]._full ? { ...SEC[c.sec], blocks: SEC[c.sec]._full.blocks } : SEC[c.sec]) : null; const ch = sec ? sec._ch : c.ch && CH[c.ch];
-    return `FOCUS — the part of the lesson the learner asks about. Explain THIS first and in its own terms; then connect it to the rest of the lesson, and go beyond the notes whenever that helps understanding:\n${String(c.text || c.label).slice(0, 8000)}` +
+    return `FOCUS — the part of the lesson the learner asks about:\n${String(c.text || c.label).slice(0, 8000)}` +
       (sec ? `\n\nWIDER CONTEXT — Chapter ${ch.num} "${ch.title}", section "${sec.title}" (the lesson it belongs to):\n` + sectionText(sec).slice(0, 14000) : '') +
       (ch ? '\n\nTHE CHAPTER:\n' + chapterOutline(ch).slice(0, 6000) : '');
   }
@@ -469,8 +484,10 @@ function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {
   const plain = String(label || text || '').replace(/[*_`#>\[\]]/g, '').replace(/\s+/g, ' ').trim();
   const short = plain.length > 70 ? plain.slice(0, 68).replace(/\s+\S*$/, '') + '…' : plain;
   let hsh = 0; for (const x of String(text || label)) hsh = (hsh * 31 + x.charCodeAt(0)) >>> 0;
-  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', `Explain this ${what} to me: “${short}”`);
+  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', `Explain this ${what} to me: “${short}”`,
+    { intent: INTENT.item(what) });
 }
+
 function setTutorContext(ctx) { T.ctx = ctx; if (T.open) renderTutor(); }
 function ctxLabel() {
   const c = T.ctx;
@@ -482,9 +499,24 @@ function ctxLabel() {
   if (c.kind === 'item') return '🔎 ' + (c.label || 'This part');
   return '';
 }
-function openTutor(ctx, mode, autoMsg) {
+/** 🎯 Why a conversation was opened: each button of the app gives the tutor its own task on top of the mode.
+    It goes into the instructions of every turn of that conversation (and is kept with it in the history). */
+const INTENT = {
+  item: what => `The learner pressed 💡 "Explain this" on ONE ${what} of the lesson (the FOCUS below). Explain exactly that ${what}: first in its own terms and in depth — what it means, why it is so, how it works — then how it fits into the lesson around it. Go beyond the notes whenever it helps understanding (mark it "(beyond the notes)").`,
+  exHint: given => `The learner pressed "Ask ${TN}" on an exercise BEFORE answering it — they want a hint, not the solution.${given ? ` What they have entered so far (not submitted): ${given}` : ''}`,
+  exSocratic: given => `The learner answered the exercise below WRONG and pressed "Help me get it (Socratic)".${given ? ` Their answer: ${given}.` : ''} They have already seen the correct answer and the explanation of the app. Start from THEIR answer: find out what made it tempting, then guide them until they can say in their own words why the correct answer is correct and why their choice was a trap. Work on this exercise's key idea only — do not drift into a review of the whole topic.`,
+  exExplain: given => `The learner answered the exercise below WRONG and pressed "💡 Explain differently".${given ? ` Their answer: ${given}.` : ''} They have already seen the correct answer and the explanation shown by the app (the "Explanation" below) and it did not click. Do exactly what the button says: explain the key idea behind the correct answer in a DIFFERENT way from that explanation — another angle, an analogy, a concrete example — and show precisely why their answer is wrong (what it misses or confuses). Do not ask them questions, do not quiz them and do not ask how they read the exercise: just explain.`,
+  secSocratic: `Socratic dialogue on THIS section (the notes below). Cover its key ideas one by one, starting from what the learner already thinks about the first one; prefer the ideas that matter most and the classic traps.`,
+  secDebug: `Case / debugging simulation built on THIS section: the case must exercise what the section teaches (its rules, mechanisms and traps), so that solving it means applying the section.`,
+  secInterview: `Mock interview / oral exam on THIS section: realistic questions an examiner or interviewer would ask about its content, from the basics to the deeper "why" and "what if" questions.`,
+  chSocratic: `Socratic review of the WHOLE chapter (outline below): go through its main ideas section by section, starting from what the learner already thinks; spend time where their answers are shaky and move on where they are solid. Close with a recap of the chapter when the main ideas are covered.`,
+  pbRoleplay: `Role-play of THIS debug playbook: present only its symptom as a realistic case (ticket, error, report) and let the learner investigate. The "Ask yourself" checklist, the steps and the root causes below are for you — never reveal them; react to their checks like the real system would and debrief against the checklist at the end.`,
+  course: `The learner opened the tutor on the whole course without a topic: follow their lead; if they have no topic, suggest 2–3 central ideas of the course to start from.`,
+};
+function openTutor(ctx, mode, autoMsg, { intent } = {}) {
   if (ctx !== undefined) T.ctx = ctx;
   if (mode) T.mode = mode;
+  if (intent) T.intents[tutorCtxKey()] = intent;
   T.open = true; renderTutor();
   $('.drawer').classList.add('open'); $('.scrim').classList.add('on');
   if (autoMsg) sendTutor(autoMsg, true);
@@ -512,7 +544,7 @@ function renderTutor() {
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
         T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null,
         chatLangSelect({ cls: 'chatlang', onChange: () => renderTutor() })),
-      h('div', { class: 'modechips' }, ...Object.entries(MODES).map(([k, m]) => h('button', { class: T.mode === k ? 'on' : '', onclick: () => { T.mode = k; renderTutor(); } }, m.label)))),
+      h('div', { class: 'modechips' }, ...Object.entries(MODES).filter(([k, m]) => m.chip !== false || T.mode === k).map(([k, m]) => h('button', { class: T.mode === k ? 'on' : '', onclick: () => { T.mode = k; renderTutor(); } }, m.label)))),
     msgs,
     h('div', { class: 'composer' },
       h('textarea', { rows: 1, placeholder: 'Your answer or question…', onkeydown: e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = e.target.value.trim(); if (v) { e.target.value = ''; sendTutor(v); } } }, oninput: e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(160, e.target.scrollHeight) + 'px'; } }),
@@ -540,6 +572,14 @@ function renderTutor() {
   const tb = threadTracker(tutorCtxKey(), hist.length); if (tb) msgs.before(tb);
   msgs.scrollTop = msgs.scrollHeight;
 }
+/** The task of this conversation: given now, set by the button that opened it, or kept in its first message. */
+function tutorIntent(key, given) {
+  return given || T.intents[key] || (T.hist[key] || []).find(m => m.meta?.intent)?.meta.intent || null;
+}
+/** The instructions of a tutor turn: the mode, then why the conversation was opened, then the course context. */
+function tutorSystem(intent) {
+  return MODES[T.mode].sys + (intent ? '\n\nWHY THIS CONVERSATION WAS OPENED — your task in it (unless the learner asks for something else):\n' + intent : '') + '\n\n' + tutorContextText();
+}
 async function sendTutor(text, hidden = false, opts = {}) {
   if (T.busy) return;
   const key = tutorCtxKey();
@@ -547,14 +587,16 @@ async function sendTutor(text, hidden = false, opts = {}) {
   const threaded = usesThreads(T.mode);
   const ts = threaded ? threadStateFor(key) : null;
   const directive = threaded ? noteLearnerTurn(ts, text, opts.directive) : (opts.directive || null);
-  hist.push({ role: 'user', text, hidden: false, t: Date.now(), ...(directive ? { meta: { directive } } : {}) });
+  const intent = tutorIntent(key, opts.intent);
+  const meta = { ...(directive ? { directive } : {}), ...(intent && !hist.length ? { intent } : {}) };
+  hist.push({ role: 'user', text, hidden: false, t: Date.now(), ...(Object.keys(meta).length ? { meta } : {}) });
   T.showHistory = false; persistConvo(key);
   renderTutor();
   const msgs = $('.drawer .msgs');
   const bubble = h('div', { class: 'msg ai' }, h('span', { class: 'typing' }, h('i'), h('i'), h('i')));
   msgs.append(bubble); msgs.scrollTop = msgs.scrollHeight;
   T.busy = true;
-  let system = MODES[T.mode].sys + '\n\n' + tutorContextText();
+  let system = tutorSystem(intent);
   { const lr = langRule(); if (lr) system += '\n\n' + lr; }
   if (threaded) system += '\n\n' + tutorStateBlock(ts, directive);
   else if (directive === 'wrapup') system += '\n\nWRAP UP NOW: answer any question still pending with an authoritative **✅ Answer:**, then give **🎓 What you learned:** (3–7 concrete bullets of the key takeaways of this conversation) and one optional next step. Ask no new question.';
@@ -639,6 +681,7 @@ R.mcq = (ex, api) => {
   return {
     el, keys: k => { const b = btns[k]; b && b.click(); },
     check() { if (!sel.size) return null; return sel.size === ans.size && [...sel].every(x => ans.has(x)); },
+    given: () => [...sel].map(oi => String.fromCharCode(65 + oi) + '. ' + ex.options[oi]).join(' + '),
     reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', html: fmt(ex.why[oi]) })); }); },
   };
 };
@@ -651,6 +694,7 @@ R.tf = (ex, api) => {
   return {
     el: h('div', { class: 'tfrow' }, t, f), keys: k => (k === 0 ? t : k === 1 ? f : null)?.click(),
     check: () => pick === null ? null : pick === ex.answer,
+    given: () => pick === null ? '' : String(pick),
     reveal() { (ex.answer ? t : f).classList.add('right'); if (pick !== ex.answer) (pick ? t : f).classList.add('wrong'); },
   };
 };
@@ -669,6 +713,7 @@ R.order = (ex, api) => {
   return {
     el: h('div', {}, seq, pool),
     check: () => picked.length < items.length ? null : picked.every((it, k) => it.i === k),
+    given: () => picked.map(it => it.t).join(' → '),
     reveal() {
       $$('.chipx', seq).forEach((b, k) => b.classList.add(picked[k].i === k ? 'right' : 'wrong'));
       if (!picked.every((it, k) => it.i === k)) seq.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct order: '), h('ol', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.items.map(t => h('li', { html: fmt(t) })))));
@@ -695,6 +740,7 @@ R.match = (ex, api) => {
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap a left item, then its partner on the right.'), h('div', { class: 'matchgrid' }, lcol, rcol)),
     check: () => Object.keys(link).length < L.length ? null : L.every(it => link[it.i] === it.i),
+    given: () => L.filter(it => link[it.i] != null).map(it => it.t + ' = ' + ex.pairs[link[it.i]][1]).join('; '),
     reveal() {
       L.forEach(it => { const ok = link[it.i] === it.i; lb[it.i].classList.add(ok ? 'right' : 'wrong'); });
       if (!L.every(it => link[it.i] === it.i)) lcol.parentElement.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct pairs:'), h('ul', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.pairs.map(p => h('li', { html: fmt(p[0]) + ' → ' + fmt(p[1]) })))));
@@ -729,6 +775,7 @@ R.bucket = (ex, api) => {
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap an item, then tap its bucket (or drag).'), pool, h('div', { class: 'buckets' }, ...zones)),
     check: () => Object.keys(place).length < items.length ? null : items.every(it => place[it.i] === it.bucket),
+    given: () => items.filter(it => place[it.i] != null).map(it => it.text + ' → ' + ex.buckets[place[it.i]]).join('; '),
     reveal() { zones.forEach(z => $$('.chipx', z).forEach(b => { const ok = place[b._it.i] === b._it.bucket; b.classList.add(ok ? 'right' : 'wrong'); if (!ok) b.append(h('small', { style: { opacity: .8 } }, ' → ' + ex.buckets[b._it.bucket])); })); },
   };
 };
@@ -769,6 +816,7 @@ R.cloze = (ex, api) => {
   const val = b => useBank ? (b.val == null ? null : chips[b.val]._w) : b.el.value;
   return {
     el: h('div', {}, box, bankEl), focus: () => !useBank && blanks[0]?.el.focus(),
+    given: () => blanks.some(b => val(b)) ? blanks.map(b => val(b) || '—').join(' | ') : '',
     check() { if (blanks.some(b => !norm(val(b)))) return null; return blanks.every(b => b.alts.some(a => norm(a) === norm(val(b)))); },
     reveal() { blanks.forEach(b => { const ok = b.alts.some(a => norm(a) === norm(val(b))); b.el.classList.add(ok ? 'right' : 'wrong'); if (useBank) { if (!ok) b.el.append(h('span', { class: 'corr' }, '→ ' + b.alts[0])); } else { b.el.readOnly = true; if (!ok) b.el.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', margin: '0 4px', fontFamily: 'var(--mono)' } }, b.alts[0])); } }); if (bankEl) bankEl.style.display = 'none'; },
   };
@@ -781,6 +829,7 @@ R.spotbug = (ex, api) => {
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, `Click the buggy line${bugs.size > 1 ? 's (' + bugs.size + ')' : ''}.`), h('div', { class: 'codelines' }, ...lines)),
     check: () => !sel.size ? null : sel.size === bugs.size && [...sel].every(i => bugs.has(i)),
+    given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1) + ' (0-based ' + i + ')').join(', '),
     reveal() { lines.forEach((b, i) => { if (bugs.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); }); lines[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 Fix'), /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('div', { html: fmt(ex.fix) }))); },
   };
 };
@@ -789,6 +838,7 @@ R.calc = (ex, api) => {
   const inp = h('input', { type: 'number', step: 'any', placeholder: '?', onkeydown: e => { if (e.key === 'Enter') api.check(); } });
   return {
     el: h('div', { class: 'calcrow' }, inp, h('b', { class: 'muted' }, ex.unit || '')), focus: () => inp.focus(),
+    given: () => inp.value === '' ? '' : inp.value + ' ' + (ex.unit || ''),
     check() { if (inp.value === '') return null; return Math.abs(+inp.value - ex.answer) <= (ex.tolerance || 0) + 1e-9; },
     reveal() { inp.readOnly = true; inp.style.borderColor = Math.abs(+inp.value - ex.answer) <= (ex.tolerance || 0) + 1e-9 ? 'var(--ok)' : 'var(--bad)'; inp.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', fontSize: '15px' } }, `= ${ex.answer} ${ex.unit || ''}`)); },
   };
@@ -852,7 +902,7 @@ R.free = (ex, api) => {
     out.append(modelBox(), h('div', { class: 'explain rubric' }, h('div', { class: 'hd' }, '☑️ Tick what your answer covered'), ...ex.rubric.map((r, i) => h('label', {}, checks[i], F(r))),
       h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { const n = checks.filter(c => c.checked).length; e.target.disabled = true; finish(n / ex.rubric.length >= 0.7); } }, 'Done')));
   } }, '🙋 Self-check');
-  return { el: h('div', {}, ta, h('div', { class: 'actions' }, aiBtn, selfBtn), out), selfDone: true, focus: () => ta.focus() };
+  return { el: h('div', {}, ta, h('div', { class: 'actions' }, aiBtn, selfBtn), out), selfDone: true, focus: () => ta.focus(), given: () => ta.value.trim() };
 };
 
 R.write = (ex, api) => {
@@ -862,6 +912,7 @@ R.write = (ex, api) => {
     el: h('div', {}, ta, h('div', { class: 'tiny', style: { marginTop: '6px' } }, 'Checked locally for the essential keywords; use ✨ AI review for a real code review.')),
     focus: () => ta.focus(),
     check() { if (!ta.value.trim()) return null; return missing().length === 0; },
+    given: () => ta.value.trim() ? '\n```\n' + ta.value.trim() + '\n```\n' : '',
     reveal() {
       ta.readOnly = true;
       const m = missing();
@@ -906,7 +957,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, 'Check ✓');
   const nudge = h('span', { class: 'tiny' });
   if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
-  const hintBtn = h('button', { class: 'btn ghost small', onclick: () => askAIAbout(ex, null) }, `${TUTOR.avatar} Ask ${TN}`);
+  const hintBtn = h('button', { class: 'btn ghost small', onclick: () => askAIAbout(ex, null, givenOf(w)) }, `${TUTOR.avatar} Ask ${TN}`);
   actions.append(h('span', { class: 'grow' }), hintBtn);
   card.append(actions);
   function doCheck() {
@@ -926,8 +977,8 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!noXP) addXP(xp, card);
     const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne(['✅ Nailed it!', '✅ Correct!', '🎉 Yes!', '✅ Spot on!', '🔥 Exactly!']) : pickOne(['💡 Not quite — here’s the key', '🧠 Learning moment', '💡 Close — look at this'])), h('div', { html: fmt(ex.explain || '') }));
     if (!ok) exp.append(h('div', { class: 'row', style: { marginTop: '10px' } },
-      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic') }, `${TUTOR.avatar} Help me get it (Socratic)`),
-      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain') }, '💡 Explain differently')));
+      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} Help me get it (Socratic)`),
+      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 Explain differently')));
     card.append(exp);
     if (onDone) onDone(ok, card);
   }
@@ -955,12 +1006,20 @@ function exerciseAsText(ex) {
   const sec = SEC[ex.section];
   return 'COURSE NOTES — exercise context:\n' + t + (sec ? '\n\nSection notes:\n' + sectionText(sec).slice(0, 7000) : '');
 }
-function askAIAbout(ex, mode) {
+/** What the learner entered in an exercise, as text for the tutor ('' when unknown). */
+function givenOf(w) { try { return String(w?.given?.() || '').slice(0, 3000); } catch (e) { return ''; } }
+/** The three AI buttons of an exercise — each its own conversation, mode and task:
+    "Ask Brick" before answering → hints (never the answer) · "Help me get it" after a wrong answer → Socratic, starting from the learner's answer ·
+    "Explain differently" after a wrong answer → a free, in-depth explanation from another angle (no questions). */
+function askAIAbout(ex, mode, given = '') {
   const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex) };
-  T.hist[ex.id + '|' + (mode || 'socratic')] = []; delete T.tstate[ex.id + '|' + (mode || 'socratic')];
-  if (mode === 'explain') openTutor(ctx, 'explain', 'I just got this exercise wrong. Explain the key idea in a different way, then check me with one question.');
-  else if (mode === 'socratic') openTutor(ctx, 'socratic', 'I got this exercise wrong. Don\'t give me the answer — guide me Socratically until I can explain why the correct answer is correct and why my instinct was a trap.');
-  else openTutor(ctx, 'socratic', 'Give me a hint for this exercise as a guiding question — do not reveal the answer.');
+  const m = mode === 'explain' ? 'explain' : mode === 'socratic' ? 'socratic' : 'hint';
+  const key = ex.id + '|' + m;
+  T.hist[key] = []; delete T.tstate[key];
+  const mine = given ? ` (I answered: ${given.length > 300 ? given.slice(0, 300) + '…' : given})` : '';
+  if (m === 'explain') openTutor(ctx, 'explain', `I got this exercise wrong${mine}. Explain it to me differently.`, { intent: INTENT.exExplain(given) });
+  else if (m === 'socratic') openTutor(ctx, 'socratic', `I got this exercise wrong${mine}. Help me get it — don't just give me the answer.`, { intent: INTENT.exSocratic(given) });
+  else openTutor(ctx, 'hint', 'Give me a hint for this exercise — don\'t tell me the answer.', { intent: INTENT.exHint(given) });
 }
 
 /* ---- 35_visual.js ---- */
@@ -1561,7 +1620,7 @@ function homeView() {
       modeTile('🃏', 'Flashcards', 'Spaced-repetition recall', '#/cards', dueFc ? `${dueFc} due` : null),
       modeTile('🔁', 'Mistakes gym', 'Retry what you got wrong', '#/mistakes', wrong ? `${wrong}` : null),
       modeTile('🎲', 'Mixed practice', 'Random exercises from everything you read', '#/practice/all'),
-      modeTile(TUTOR.avatar, 'Socratic tutor', 'Gemini questions you until it clicks', null, null, () => openTutor(null, 'socratic'))),
+      modeTile(TUTOR.avatar, 'Socratic tutor', 'Gemini questions you until it clicks', null, null, () => openTutor(null, 'socratic', null, { intent: INTENT.course }))),
     h('div', { class: 'row', style: { marginBottom: '14px' } }, h('h2', {}, 'Chapters'), h('span', { class: 'tiny' }, `${COURSE.length} chapters · ${COURSE.reduce((a, c) => a + c.sections.length, 0)} sections · ${ALL_EX.length} exercises`)),
     h('div', { class: 'chapters' }, ...COURSE.map((c, i) => {
       const p = chProgress(c);
@@ -1624,7 +1683,7 @@ function chapterView(id, tab) {
       h('div', { class: 'row', style: { marginTop: '22px' } },
         h('button', { class: 'btn primary', onclick: () => go(`#/practice/${id}`) }, '🎯 Practice this chapter'),
         h('button', { class: 'btn', onclick: () => go(`#/boss/${id}`) }, S.boss[id] ? '🏆 Boss battle (beaten!)' : '👾 Boss battle'),
-        h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic') }, `${TUTOR.avatar} Socratic review`)));
+        h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'chapter', id }, 'socratic', null, { intent: INTENT.chSocratic }) }, `${TUTOR.avatar} Socratic review`)));
   } else if (tab === 'practice') practiceSetup(body, c);
   else if (tab === 'debug') drillList(body, c.debug);
   else if (tab === 'cards') flashDeck(body, c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c })));
@@ -1725,9 +1784,9 @@ function sectionTail(s, prev, next) {
   const pbs = c.debug.filter(d => d.section === s.id);
   const zone = h('div', { class: 'quickzone' });
   zone.append(h('div', { class: 'row', style: { margin: '6px 0 18px' } },
-    h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'section', id: s.id }, 'socratic', `Start a Socratic session on "${s.title}". Begin by probing what I already think.`) }, `${TUTOR.avatar} Socratic dialogue on this`),
-    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'debug', `Start a debugging simulation related to "${s.title}".`) }, '🔧 Debug simulation'),
-    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'interview', `Interview me about "${s.title}".`) }, '🎤 Interview me')));
+    h('button', { class: 'btn ai', onclick: () => openTutor({ kind: 'section', id: s.id }, 'socratic', `Start a Socratic session on "${s.title}". Begin by probing what I already think.`, { intent: INTENT.secSocratic }) }, `${TUTOR.avatar} Socratic dialogue on this`),
+    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'debug', `Start a debugging simulation related to "${s.title}".`, { intent: INTENT.secDebug }) }, '🔧 Debug simulation'),
+    h('button', { class: 'btn', onclick: () => openTutor({ kind: 'section', id: s.id }, 'interview', `Interview me about "${s.title}".`, { intent: INTENT.secInterview }) }, '🎤 Interview me')));
   if (quick.length) {
     zone.append(h('h3', {}, '⚡ Quick check', h('span', { class: 'tiny' }, `${quick.length} right here, right now`)));
     quick.forEach(e => zone.append(exerciseCard(e)));
@@ -1953,7 +2012,7 @@ function drillView(id) {
       h('button', { class: 'btn primary', onclick: () => reveal(null) }, '👀 Reveal checklist'),
       h('button', { class: 'btn ai', onclick: async e => { if (!ta.value.trim()) { ta.classList.add('shake'); setTimeout(() => ta.classList.remove('shake'), 500); return; } const b = e.currentTarget; b.disabled = true; b.textContent = '✨ Grading…'; try { const g = await aiDrillGrade(d, ta.value); reveal(g); } catch (er) { toast('⚠️ ' + er.message, 4000); reveal(null); } } }, '✨ Grade my checklist'),
       h('button', { class: 'btn', onclick: () => orderDrill() }, '🔢 Order drill'),
-      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`) }, '🎭 Role-play it with Brick')),
+      h('button', { class: 'btn', onclick: () => openTutor({ kind: 'playbook', id }, 'debug', `Run a debugging simulation based on this playbook: "${d.title}". Give me only the symptom and let me investigate.`, { intent: INTENT.pbRoleplay }) }, '🎭 Role-play it with Brick')),
     stage));
   function orderDrill() {
     stage.innerHTML = '';
@@ -2327,7 +2386,7 @@ function saveConvos(cv) {
 }
 function ctxRecord() {
   const c = T.ctx; if (!c) return null;
-  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null } : {}) };
+  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null, text: String(c.text || '').slice(0, 6000) } : {}) };
 }
 function persistConvo(key) {
   const hist = T.hist[key];
@@ -2459,7 +2518,7 @@ function openConvo(cv) {
     const visible = r.kind === 'section' ? SEC[r.id] : r.kind === 'chapter' ? CH[r.id] : r.kind === 'playbook' ? PB[r.id] : r.kind === 'exercise' ? findFull('exercise', r.id) : null;
     if (!visible && findFull(r.kind, r.id)) { setSrcFilter(null); }   // its source is filtered out → show everything again
     if (r.kind === 'exercise') { const e = findFull('exercise', r.id); ctx = e ? { kind: 'exercise', id: r.id, text: exerciseAsText(e) } : null; }
-    else ctx = { kind: r.kind, id: r.id, label: r.label, ...(r.kind === 'item' ? { sec: r.sec || null, ch: r.ch || null, text: r.label } : {}) };
+    else ctx = { kind: r.kind, id: r.id, label: r.label, ...(r.kind === 'item' ? { sec: r.sec || null, ch: r.ch || null, text: r.text || r.label } : {}) };
   }
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();

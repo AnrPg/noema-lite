@@ -22,6 +22,7 @@ R.mcq = (ex, api) => {
   return {
     el, keys: k => { const b = btns[k]; b && b.click(); },
     check() { if (!sel.size) return null; return sel.size === ans.size && [...sel].every(x => ans.has(x)); },
+    given: () => [...sel].map(oi => String.fromCharCode(65 + oi) + '. ' + ex.options[oi]).join(' + '),
     reveal() { btns.forEach(b => { const oi = b._oi; if (ans.has(oi)) b.classList.add('right'); else if (sel.has(oi)) b.classList.add('wrong'); if (ex.why?.[oi]) b.children[1].append(h('span', { class: 'why', html: fmt(ex.why[oi]) })); }); },
   };
 };
@@ -34,6 +35,7 @@ R.tf = (ex, api) => {
   return {
     el: h('div', { class: 'tfrow' }, t, f), keys: k => (k === 0 ? t : k === 1 ? f : null)?.click(),
     check: () => pick === null ? null : pick === ex.answer,
+    given: () => pick === null ? '' : String(pick),
     reveal() { (ex.answer ? t : f).classList.add('right'); if (pick !== ex.answer) (pick ? t : f).classList.add('wrong'); },
   };
 };
@@ -52,6 +54,7 @@ R.order = (ex, api) => {
   return {
     el: h('div', {}, seq, pool),
     check: () => picked.length < items.length ? null : picked.every((it, k) => it.i === k),
+    given: () => picked.map(it => it.t).join(' → '),
     reveal() {
       $$('.chipx', seq).forEach((b, k) => b.classList.add(picked[k].i === k ? 'right' : 'wrong'));
       if (!picked.every((it, k) => it.i === k)) seq.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct order: '), h('ol', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.items.map(t => h('li', { html: fmt(t) })))));
@@ -78,6 +81,7 @@ R.match = (ex, api) => {
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap a left item, then its partner on the right.'), h('div', { class: 'matchgrid' }, lcol, rcol)),
     check: () => Object.keys(link).length < L.length ? null : L.every(it => link[it.i] === it.i),
+    given: () => L.filter(it => link[it.i] != null).map(it => it.t + ' = ' + ex.pairs[link[it.i]][1]).join('; '),
     reveal() {
       L.forEach(it => { const ok = link[it.i] === it.i; lb[it.i].classList.add(ok ? 'right' : 'wrong'); });
       if (!L.every(it => link[it.i] === it.i)) lcol.parentElement.after(h('div', { class: 'fb info' }, h('b', {}, 'Correct pairs:'), h('ul', { style: { margin: '6px 0 0', paddingLeft: '20px' } }, ...ex.pairs.map(p => h('li', { html: fmt(p[0]) + ' → ' + fmt(p[1]) })))));
@@ -112,6 +116,7 @@ R.bucket = (ex, api) => {
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, 'Tap an item, then tap its bucket (or drag).'), pool, h('div', { class: 'buckets' }, ...zones)),
     check: () => Object.keys(place).length < items.length ? null : items.every(it => place[it.i] === it.bucket),
+    given: () => items.filter(it => place[it.i] != null).map(it => it.text + ' → ' + ex.buckets[place[it.i]]).join('; '),
     reveal() { zones.forEach(z => $$('.chipx', z).forEach(b => { const ok = place[b._it.i] === b._it.bucket; b.classList.add(ok ? 'right' : 'wrong'); if (!ok) b.append(h('small', { style: { opacity: .8 } }, ' → ' + ex.buckets[b._it.bucket])); })); },
   };
 };
@@ -152,6 +157,7 @@ R.cloze = (ex, api) => {
   const val = b => useBank ? (b.val == null ? null : chips[b.val]._w) : b.el.value;
   return {
     el: h('div', {}, box, bankEl), focus: () => !useBank && blanks[0]?.el.focus(),
+    given: () => blanks.some(b => val(b)) ? blanks.map(b => val(b) || '—').join(' | ') : '',
     check() { if (blanks.some(b => !norm(val(b)))) return null; return blanks.every(b => b.alts.some(a => norm(a) === norm(val(b)))); },
     reveal() { blanks.forEach(b => { const ok = b.alts.some(a => norm(a) === norm(val(b))); b.el.classList.add(ok ? 'right' : 'wrong'); if (useBank) { if (!ok) b.el.append(h('span', { class: 'corr' }, '→ ' + b.alts[0])); } else { b.el.readOnly = true; if (!ok) b.el.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', margin: '0 4px', fontFamily: 'var(--mono)' } }, b.alts[0])); } }); if (bankEl) bankEl.style.display = 'none'; },
   };
@@ -164,6 +170,7 @@ R.spotbug = (ex, api) => {
   return {
     el: h('div', {}, h('div', { class: 'tiny', style: { marginBottom: '8px' } }, `Click the buggy line${bugs.size > 1 ? 's (' + bugs.size + ')' : ''}.`), h('div', { class: 'codelines' }, ...lines)),
     check: () => !sel.size ? null : sel.size === bugs.size && [...sel].every(i => bugs.has(i)),
+    given: () => [...sel].sort((a, b) => a - b).map(i => 'line ' + (i + 1) + ' (0-based ' + i + ')').join(', '),
     reveal() { lines.forEach((b, i) => { if (bugs.has(i)) b.classList.add('right'); else if (sel.has(i)) b.classList.add('wrong'); }); lines[0].parentElement.after(h('div', { class: 'fb ok' }, h('b', {}, '🔧 Fix'), /\n|;|\(|=/.test(ex.fix) ? codeBlock(ex.fix, ex.lang || guessLang(ex.fix)) : h('div', { html: fmt(ex.fix) }))); },
   };
 };
@@ -172,6 +179,7 @@ R.calc = (ex, api) => {
   const inp = h('input', { type: 'number', step: 'any', placeholder: '?', onkeydown: e => { if (e.key === 'Enter') api.check(); } });
   return {
     el: h('div', { class: 'calcrow' }, inp, h('b', { class: 'muted' }, ex.unit || '')), focus: () => inp.focus(),
+    given: () => inp.value === '' ? '' : inp.value + ' ' + (ex.unit || ''),
     check() { if (inp.value === '') return null; return Math.abs(+inp.value - ex.answer) <= (ex.tolerance || 0) + 1e-9; },
     reveal() { inp.readOnly = true; inp.style.borderColor = Math.abs(+inp.value - ex.answer) <= (ex.tolerance || 0) + 1e-9 ? 'var(--ok)' : 'var(--bad)'; inp.after(h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)', fontSize: '15px' } }, `= ${ex.answer} ${ex.unit || ''}`)); },
   };
@@ -235,7 +243,7 @@ R.free = (ex, api) => {
     out.append(modelBox(), h('div', { class: 'explain rubric' }, h('div', { class: 'hd' }, '☑️ Tick what your answer covered'), ...ex.rubric.map((r, i) => h('label', {}, checks[i], F(r))),
       h('button', { class: 'btn small primary', style: { marginTop: '8px' }, onclick: e => { const n = checks.filter(c => c.checked).length; e.target.disabled = true; finish(n / ex.rubric.length >= 0.7); } }, 'Done')));
   } }, '🙋 Self-check');
-  return { el: h('div', {}, ta, h('div', { class: 'actions' }, aiBtn, selfBtn), out), selfDone: true, focus: () => ta.focus() };
+  return { el: h('div', {}, ta, h('div', { class: 'actions' }, aiBtn, selfBtn), out), selfDone: true, focus: () => ta.focus(), given: () => ta.value.trim() };
 };
 
 R.write = (ex, api) => {
@@ -245,6 +253,7 @@ R.write = (ex, api) => {
     el: h('div', {}, ta, h('div', { class: 'tiny', style: { marginTop: '6px' } }, 'Checked locally for the essential keywords; use ✨ AI review for a real code review.')),
     focus: () => ta.focus(),
     check() { if (!ta.value.trim()) return null; return missing().length === 0; },
+    given: () => ta.value.trim() ? '\n```\n' + ta.value.trim() + '\n```\n' : '',
     reveal() {
       ta.readOnly = true;
       const m = missing();
@@ -289,7 +298,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
   const checkBtn = h('button', { class: 'btn primary', onclick: () => doCheck() }, 'Check ✓');
   const nudge = h('span', { class: 'tiny' });
   if (!w.selfDone && !w.auto && !['tf'].includes(ex.type) && !(ex.type === 'mcq' && !ex.multi && !Array.isArray(ex.answer)) && ex.type !== 'odd') actions.append(checkBtn, nudge);
-  const hintBtn = h('button', { class: 'btn ghost small', onclick: () => askAIAbout(ex, null) }, `${TUTOR.avatar} Ask ${TN}`);
+  const hintBtn = h('button', { class: 'btn ghost small', onclick: () => askAIAbout(ex, null, givenOf(w)) }, `${TUTOR.avatar} Ask ${TN}`);
   actions.append(h('span', { class: 'grow' }), hintBtn);
   card.append(actions);
   function doCheck() {
@@ -309,8 +318,8 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
     if (!noXP) addXP(xp, card);
     const exp = h('div', { class: 'explain ' + (ok ? 'ok' : 'bad') }, h('div', { class: 'hd' }, ok ? pickOne(['✅ Nailed it!', '✅ Correct!', '🎉 Yes!', '✅ Spot on!', '🔥 Exactly!']) : pickOne(['💡 Not quite — here’s the key', '🧠 Learning moment', '💡 Close — look at this'])), h('div', { html: fmt(ex.explain || '') }));
     if (!ok) exp.append(h('div', { class: 'row', style: { marginTop: '10px' } },
-      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic') }, `${TUTOR.avatar} Help me get it (Socratic)`),
-      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain') }, '💡 Explain differently')));
+      h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} Help me get it (Socratic)`),
+      h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 Explain differently')));
     card.append(exp);
     if (onDone) onDone(ok, card);
   }
@@ -338,10 +347,18 @@ function exerciseAsText(ex) {
   const sec = SEC[ex.section];
   return 'COURSE NOTES — exercise context:\n' + t + (sec ? '\n\nSection notes:\n' + sectionText(sec).slice(0, 7000) : '');
 }
-function askAIAbout(ex, mode) {
+/** What the learner entered in an exercise, as text for the tutor ('' when unknown). */
+function givenOf(w) { try { return String(w?.given?.() || '').slice(0, 3000); } catch (e) { return ''; } }
+/** The three AI buttons of an exercise — each its own conversation, mode and task:
+    "Ask Brick" before answering → hints (never the answer) · "Help me get it" after a wrong answer → Socratic, starting from the learner's answer ·
+    "Explain differently" after a wrong answer → a free, in-depth explanation from another angle (no questions). */
+function askAIAbout(ex, mode, given = '') {
   const ctx = { kind: 'exercise', id: ex.id, text: exerciseAsText(ex) };
-  T.hist[ex.id + '|' + (mode || 'socratic')] = []; delete T.tstate[ex.id + '|' + (mode || 'socratic')];
-  if (mode === 'explain') openTutor(ctx, 'explain', 'I just got this exercise wrong. Explain the key idea in a different way, then check me with one question.');
-  else if (mode === 'socratic') openTutor(ctx, 'socratic', 'I got this exercise wrong. Don\'t give me the answer — guide me Socratically until I can explain why the correct answer is correct and why my instinct was a trap.');
-  else openTutor(ctx, 'socratic', 'Give me a hint for this exercise as a guiding question — do not reveal the answer.');
+  const m = mode === 'explain' ? 'explain' : mode === 'socratic' ? 'socratic' : 'hint';
+  const key = ex.id + '|' + m;
+  T.hist[key] = []; delete T.tstate[key];
+  const mine = given ? ` (I answered: ${given.length > 300 ? given.slice(0, 300) + '…' : given})` : '';
+  if (m === 'explain') openTutor(ctx, 'explain', `I got this exercise wrong${mine}. Explain it to me differently.`, { intent: INTENT.exExplain(given) });
+  else if (m === 'socratic') openTutor(ctx, 'socratic', `I got this exercise wrong${mine}. Help me get it — don't just give me the answer.`, { intent: INTENT.exSocratic(given) });
+  else openTutor(ctx, 'hint', 'Give me a hint for this exercise — don\'t tell me the answer.', { intent: INTENT.exHint(given) });
 }

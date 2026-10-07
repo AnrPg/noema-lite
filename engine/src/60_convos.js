@@ -49,7 +49,7 @@ function saveConvos(cv) {
 }
 function ctxRecord() {
   const c = T.ctx; if (!c) return null;
-  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null } : {}) };
+  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null, text: String(c.text || '').slice(0, 6000) } : {}) };
 }
 function persistConvo(key) {
   const hist = T.hist[key];
@@ -181,7 +181,7 @@ function openConvo(cv) {
     const visible = r.kind === 'section' ? SEC[r.id] : r.kind === 'chapter' ? CH[r.id] : r.kind === 'playbook' ? PB[r.id] : r.kind === 'exercise' ? findFull('exercise', r.id) : null;
     if (!visible && findFull(r.kind, r.id)) { setSrcFilter(null); }   // its source is filtered out → show everything again
     if (r.kind === 'exercise') { const e = findFull('exercise', r.id); ctx = e ? { kind: 'exercise', id: r.id, text: exerciseAsText(e) } : null; }
-    else ctx = { kind: r.kind, id: r.id, label: r.label, ...(r.kind === 'item' ? { sec: r.sec || null, ch: r.ch || null, text: r.label } : {}) };
+    else ctx = { kind: r.kind, id: r.id, label: r.label, ...(r.kind === 'item' ? { sec: r.sec || null, ch: r.ch || null, text: r.text || r.label } : {}) };
   }
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();
