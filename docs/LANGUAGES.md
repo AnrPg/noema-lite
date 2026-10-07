@@ -17,6 +17,26 @@
 | P8 | Course creation and generation through Claude (app queue + connector + skill + refcheck) | ⬜ |
 | P9 | Listening and speaking (later) | ⬜ later |
 
+## 0. Development isolation (until the feature is finished)
+
+The app in use must never be affected or left half-done by this work.
+
+* **Separate branch and folder.** All language work happens on the git branch **`languages`**, checked out as a
+  git worktree in **`~/Documents/MyApps/noema-lite-lang`**. The folder `~/Documents/MyApps/noema-lite` stays on
+  **`main`**: it is the app you use, and it is what Netlify publishes (production branch = `main`).
+* **Not pushed by default.** The branch stays local. If it is ever pushed as a backup, Netlify branch deploys must stay off,
+  so the website never shows it.
+* **Additive code.** New files for everything (`engine/langcore.js`, `engine/src/45–48_lang_*`, `tools/*lang*`,
+  `library/languages/`, `tests/lang*`). Existing files are touched only at registration points (the build lists,
+  `index.html`, the subject picker), and only for courses with `kind: "language"`; ordinary subjects and curricula take
+  exactly the same code paths as before.
+* **Own storage namespace.** Learner state lives only in `…:s:<course>:lang:*` keys (§5.6); no existing key changes format.
+  While developing, the branch copy is opened with a local test profile, not the cloud account; automated tests use the
+  Supabase emulator.
+* **Main keeps moving.** Fixes made on `main` are merged into `languages` regularly (`git merge main`), so the merge back is small.
+* **Merging back** only when a usable milestone is complete (P3 at the earliest), the whole test suite (old + new) is
+  green, and you say so. Until then `main` gets no language code.
+
 ---
 
 ## 1. Decisions
@@ -414,7 +434,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 * `tools/lang_refcheck.py` (network, run by Claude while authoring): compares lexemes and paradigms with **Wiktionary data (kaikki.org)**, **CC-CEDICT** and **Unihan** (zh), **UniMorph** where available, **Make Me a Hanzi** (strokes/components); writes `ref` and a discrepancy report. **Unresolved discrepancies fail the build**; an intentional difference needs `ref.override` with a reason.
 * Images: Wikidata P18 / Commons via the existing picture library (`imglib`), recorded in `media.json`.
 * Sentences: Tatoeba (parallel sentences) may seed the bank, always re-annotated and validated.
-* Tests: unit tests for `langcore` (states, scheduler, gating, known sets, feasibility, selection, form index, segmentation, transliteration, vowel stripping, pinyin) + Playwright tests for every widget and view, with a hand-checked mini course (`tests/fixtures/lang-mini/`, 4 languages, ~40 concepts, 3 functions).
+* Tests: unit tests for `langcore` (states, scheduler, gating, known sets, feasibility, selection, form index, segmentation, transliteration, vowel stripping, pinyin) + Playwright tests for every widget and view, with a hand-checked mini course (`tests/fixtures/lang-mini/`, 4 languages, ~16 concepts, 2 functions).
 
 ## 12. Code layout
 
@@ -435,7 +455,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 ## 13. Implementation plan (in this order)
 
 **P0 — Spec and validation**
-- JSON Schema; `validate_lang.py` with every check of §11; mini fixture course (ar, he, zh, de; ~40 concepts in 3 nodes; 3 functions; ~60 bank sentences); negative fixtures (wrong form, missing cell, unknown lemma, cycle, missing language).
+- JSON Schema; `validate_lang.py` with every check of §11; mini fixture course (ar, he, zh, de; ~16 concepts in 3 nodes; 2 functions; ~24 bank sentences — small enough to be checked by hand); negative fixtures (wrong form, missing cell, unknown lemma, cycle, missing language).
 - ✔ Validator passes the fixture and rejects each broken variant with a clear message.
 
 **P1 — `langcore` runtime**
@@ -476,3 +496,4 @@ Working rules for every phase: read this file first; keep existing subjects unto
 
 ## 14. Changelog
 - 2026-10-07 — first version (decisions D1–D8, catalogue, model, exercise types, plan P0–P9).
+- 2026-10-07 — §0 development isolation (branch `languages` in its own worktree); the mini fixture made smaller so every form can be checked by hand.
