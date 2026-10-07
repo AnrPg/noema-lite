@@ -22,6 +22,7 @@ function claudeApi() {
     const chunks = []; req.on('data', c => chunks.push(c)); req.on('end', () => {
       const buf = Buffer.concat(chunks); const u = new URL(req.url, ABASE); const p = u.pathname;
       if (req.method === 'OPTIONS') { res.writeHead(204, cors); return res.end(); }
+      if (p === '/page/heart') { res.writeHead(200, { 'content-type': 'text/html' }); return res.end('<html><head><meta property="og:image" content="/img/no-cors.png"></head><body>An article about the heart</body></html>'); }   // a page, not a picture
       if (p === '/img/no-cors.png') { res.writeHead(200, { 'content-type': 'application/octet-stream' }); return res.end(PNG); }   // no CORS header + generic type → the app must use /api/img + sniffing
       A.reqs.push({ method: req.method, p, headers: req.headers });
       if (req.headers['x-api-key'] !== KEY) { A.badKey++; return J(res, 401, { type: 'error', error: { type: 'authentication_error', message: 'invalid x-api-key' } }); }
@@ -54,7 +55,9 @@ function messages(body, res, J) {
   if (n === 2) return reply([{ type: 'server_tool_use', id: 'srv_ws', name: 'web_search', input: { query: 'heart anatomy diagram wikimedia' } },
     { type: 'tool_use', id: 'toolu_1', name: 'noema_web_image', input: { url: BASE + '/testimg/heart.png', page_url: 'https://commons.wikimedia.org/wiki/File:Heart.png' } },
     { type: 'tool_use', id: 'toolu_2', name: 'noema_web_image', input: { url: ABASE + '/img/no-cors.png' } },
-    { type: 'tool_use', id: 'toolu_3', name: 'noema_web_image', input: { url: BASE + '/index.html' } }], 'tool_use');
+    { type: 'tool_use', id: 'toolu_3', name: 'noema_web_image', input: { url: BASE + '/index.html' } },
+    { type: 'tool_use', id: 'toolu_4', name: 'noema_web_image', input: { url: ABASE + '/page/heart' } },
+    { type: 'tool_use', id: 'toolu_5', name: 'noema_image_search', input: { query: 'heart anatomy diagram', n: 5 } }], 'tool_use');
   if (n === 3) return reply([{ type: 'text', text: 'Should the course follow the order of the PDF (A) or start from blood flow (B)?' }], 'end_turn');
   if (n === 4) return reply([{ type: 'text', text: 'Building.' }, ...bash('python3 scripts/make_pack.py work/heart-by-claude /tmp/out && cp /tmp/out/heart-by-claude.noema.zip "$OUTPUT_DIR/"', ['file_out_1', 'file_out_2']), { type: 'text', text: 'Done: 1 chapter, 14 exercises.' }], 'end_turn');
   J(res, 500, { error: { type: 'api_error', message: 'unexpected call ' + n } });
@@ -64,6 +67,8 @@ function messages(body, res, J) {
   const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true };`;
   fs.mkdirSync(path.join(ROOT, 'dist/site/testimg'), { recursive: true }); fs.writeFileSync(path.join(ROOT, 'dist/site/testimg/heart.png'), PNG);
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
+  // the picture search's view of the web (scripted): Bing finds a figure on a publisher's page; the other sources are down
+  globalThis.NOEMA_IMG_FETCH = async url => { const u = new URL(url); if (u.hostname === 'www.bing.com') return new Response('<a m="{&quot;murl&quot;:&quot;https://pubs.example.edu/heart.png&quot;,&quot;purl&quot;:&quot;https://pubs.example.edu/heart&quot;,&quot;t&quot;:&quot;Heart&quot;}"></a>', { headers: { 'content-type': 'text/html' } }); return new Response('down', { status: 503 }); };
   const api = claudeApi(); await new Promise(r => api.listen(APORT, r));
   // the pack Claude "builds": the demo fixture + two web pictures that the APP must download ("fetch": "app")
   const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'library/subjects/demo-physics/pack.json'), 'utf8'));
@@ -131,9 +136,12 @@ function messages(body, res, J) {
   ok(m1.messages[0].content.filter(c => c.type === 'container_upload').length === 2 && /Heart by Claude/.test(m1.messages[0].content[0].text) && m1.system?.[0]?.cache_control, 'the sources go into the container; prompt caching on');
   ok(A.msgCalls[1]?.container?.id === 'container_abc' && A.msgCalls[1].messages.length === 2, 'pause_turn → resent with the same container');
   const tr = A.msgCalls[2]?.messages.at(-1)?.content || [];
-  ok(tr.length === 3 && tr[0].content?.[1]?.type === 'image' && JSON.parse(tr[0].content[0].text).w > 800, 'noema_web_image: the app downloads the picture and shows it to Claude with its size');
+  ok(tr.length === 5 && tr[0].content?.[1]?.type === 'image' && JSON.parse(tr[0].content[0].text).w > 800, 'noema_web_image: the app downloads the picture and shows it to Claude with its size');
   ok(tr[1].content?.[1]?.type === 'image', 'a host without CORS / with a generic content type → fetched through /api/img and recognised');
-  ok(tr[2].is_error && /not a picture/.test(tr[2].content), 'a web page instead of an image → a helpful error for Claude');
+  ok(tr[2].is_error && /no main picture|not a picture/.test(tr[2].content), 'a page without a picture → a helpful error for Claude');
+  ok(tr[3].content?.[1]?.type === 'image' && JSON.parse(tr[3].content[0].text).url === ABASE + '/img/no-cors.png', 'a PAGE given instead of an image → its main picture (og:image), reported with its file url for media.json');
+  const sr = JSON.parse(tr[4].content || '{}');
+  ok(m1.tools.some(t => t.name === 'noema_image_search') && sr.results?.[0]?.url === 'https://pubs.example.edu/heart.png' && sr.results[0].source === 'bing' && /noema_web_image/.test(sr.next), 'noema_image_search: Claude searches pictures on the whole web (Bing + open collections) through the picture service');
   ok(tr.at(-1).cache_control?.type === 'ephemeral', 'the newest turn is cached');
   ok(/order of the PDF/.test(await p.locator('.cg-claudesays').innerText()), 'Claude’s question is shown with an answer box');
   ok(/≈ \$\d+\.\d\d of your \$15 limit/.test(await p.locator('.noema-ovbox').last().innerText()), 'live cost estimate with the limit');

@@ -114,7 +114,7 @@ async function complete(token, uid, sid, p, res, fail, text) {
 }
 
 /* ---------- curricula (the app's own code: engine/curriculum.js + engine/curjobs.js) ---------- */
-const CJ = () => globalThis.NoemaCurJobs, CUR = () => globalThis.NoemaCurriculum;
+const CJ = () => globalThis.NoemaCurJobs, CUR = () => globalThis.NoemaCurriculum, IMGL = () => globalThis.NoemaImgLib;
 const kvRows = async (token, like) => (await sb(`/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.${encodeURIComponent(like + '*')}`, token)) || [];
 const kvPut = (token, uid, key, value) => sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(value), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 async function curricula(token) {
@@ -185,6 +185,10 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { subject_id: { type: 'string' } }, required: ['subject_id'] } },
   { name: 'noema_save_pack', description: 'Save a SMALL pack (≤ 1.5 MB of JSON) passed inline as text. For bigger packs (pictures!) use noema_start_upload + noema_finish_upload.',
     inputSchema: { type: 'object', properties: { pack_json: { type: 'string', description: 'The whole noema-pack JSON document as a string' } }, required: ['pack_json'] } },
+  { name: 'noema_image_search', description: 'Search pictures for a pack on the whole web and in open collections at once: Bing Images and DuckDuckGo Images (any site — what a Google image search shows too), Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome Collection, Art Institute of Chicago. Returns candidates (image url, page, size, licence, credit). The packs are for the learner\'s personal study: any licence is fine, the source is recorded. Look at the best ones with noema_image_fetch.',
+    inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'What the picture shows, usually in English (e.g. "DNA replication fork diagram labeled")' }, n: { type: 'integer', description: 'How many (default 12, max 30)' }, sources: { type: 'array', items: { type: 'string', enum: ['bing', 'duckduckgo', 'commons', 'openverse', 'nasa', 'inaturalist', 'wellcome', 'artic'] }, description: 'Only these (default: bing, commons, openverse, duckduckgo)' } }, required: ['query'] }, annotations: { readOnlyHint: true } },
+  { name: 'noema_image_fetch', description: 'Get one picture from the web — an image url, OR a page: Wikimedia / Wikipedia file pages (any language, “#/media/File:…”) and any other page are resolved to their picture. Shows you the picture and returns its file url, size (W×H pixels for regions) and a ready media.json entry ("fetch": "app": the noema-lite app downloads and embeds it). Use it when your sandbox cannot download the picture itself (no network to that site) — or simply to look at a candidate.',
+    inputSchema: { type: 'object', properties: { url: { type: 'string' }, media_id: { type: 'string', description: 'the id for media.json (optional)' }, alt: { type: 'string', description: 'what it shows (optional)' } }, required: ['url'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_curricula', description: 'The learner\'s noema-lite curricula (maps of steps, each step becomes a subject) and what is waiting for you in each: building the map, planning the chapters of steps, preparing queued steps as subjects.',
     inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
   { name: 'noema_curriculum_task', description: 'The next piece of work on a curriculum, as complete instructions: an agent task of the map (answer with noema_curriculum_submit), a batch of chapter plans (same), or a step to prepare as a subject pack (build it with the noema-pack-builder workflow and save it with noema_start_upload/noema_finish_upload under the given subject_id). Call it again after each accepted answer or saved step.',
@@ -279,6 +283,24 @@ async function callTool(name, args, ctx) {
       await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
       return complete(token, uid, p.subject.id, p, res, fail, text);
     }
+    case 'noema_image_search': {
+      const q = String(args?.query || '').trim(); if (!q) return fail('query is empty');
+      const r = await IMGL().searchImages(q, { n: Math.min(30, Math.max(1, +args?.n || 12)), sources: Array.isArray(args?.sources) ? args.sources : null });
+      if (!r.results.length) return fail(`No pictures found for “${q}”${Object.keys(r.errors).length ? ` (unavailable: ${Object.entries(r.errors).map(([k, v]) => k + ': ' + v).join('; ')})` : ''}. Try other words (English often works best), or web_search for pages with pictures.`);
+      return text(`${r.results.length} pictures for “${q}” (personal study: any licence is fine — record the source):\n` + r.results.map((x, i) => `${i + 1}. ${x.title ? x.title.slice(0, 90) + ' — ' : ''}${x.w && x.h ? x.w + '×' + x.h + ' · ' : ''}${x.source} · ${x.license || '?'}${x.credit ? ' · ' + String(x.credit).slice(0, 60) : ''}\n   image: ${x.url}\n   page: ${x.page || '—'}`).join('\n') + (Object.keys(r.errors).length ? `\n(unavailable now: ${Object.keys(r.errors).join(', ')})` : '') + `\n\nLook at the best ones with noema_image_fetch (it shows you the picture and gives its size), or download them in your sandbox with fetch_image.py.`);
+    }
+    case 'noema_image_fetch': {
+      const u = String(args?.url || '').trim(); if (!/^https?:\/\//.test(u)) return fail('url must start with http(s)://');
+      let p; try { p = await IMGL().fetchPicture(u); } catch (e) { return fail(`Could not get the picture: ${e.message}. Take another candidate (noema_image_search), or give the image file url.`); }
+      let show = p; if (p.bytes.byteLength > 3.5e6 || Math.max(p.w, p.h) > 2600) { const pv = IMGL().previewUrl(p.url); show = pv ? await IMGL().fetchPicture(pv).catch(() => null) : null; }
+      const small = Math.max(p.w, p.h) < 800, mid = String(args?.media_id || '').trim() || 'web-' + Date.now().toString(36);
+      const entry = { id: mid, origin: 'web', fetch: 'app', url: p.url, page: p.page || (u !== p.url ? u : undefined), retrieved: new Date().toISOString().slice(0, 10), w: p.w, h: p.h, alt: String(args?.alt || ''), credit: '…', license: '…' };
+      const info = `✅ ${p.mime} ${p.w}×${p.h} px, ${(p.bytes.byteLength / 1048576).toFixed(1)} MB\nfile url: ${p.url}${p.page ? `\nfound on: ${p.page}` : ''}${small ? '\n⚠️ small (< 800 px on the long side): look for a larger version' : ''}\n\nEither download it in your sandbox (python3 scripts/fetch_image.py work/<id> ${mid} "${p.url}" --alt "…" --page "${entry.page || p.url}"), or — if your sandbox cannot reach it — register it in work/<id>/media/media.json WITHOUT a file (the app downloads and embeds it; regions in these W×H pixel coordinates; fill in credit + licence from the page):\n${JSON.stringify(entry)}`;
+      const content = [{ type: 'text', text: info }];
+      if (show && show.bytes.byteLength <= 3.5e6 && show.mime !== 'image/svg+xml') content.push({ type: 'image', data: Buffer.from(show.bytes).toString('base64'), mimeType: show.mime });
+      else content.push({ type: 'text', text: show ? '(an SVG drawing — not shown here)' : '(too large to show here — it is fine for the pack)' });
+      return { content };
+    }
     case 'noema_curricula': {
       const all = await curricula(token);
       if (!all.length) return text('No curriculum yet. In noema-lite: 🧭 Curricula → ➕ New curriculum or 📥 Import a map, and choose “Claude app (your Claude plan)”.');
@@ -322,7 +344,7 @@ async function handle(m, ctx) {
       case 'initialize': {
         const want = m.params?.protocolVersion;
         return ok({ protocolVersion: PROTOCOLS.includes(want) ? want : PROTOCOLS[0], capabilities: { tools: { listChanged: false }, prompts: { listChanged: false } }, serverInfo: { name: 'noema-lite', title: 'noema-lite study packs', version: VERSION },
-          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step.' });
+          instructions: 'noema-lite turns study sources into interactive subject packs. Before building a pack, use the noema-pack-builder skill if it is installed; otherwise call noema_get_toolkit (scripts) and noema_authoring_guide (the contract). Save finished packs with noema_start_upload → curl → noema_finish_upload (or noema_save_pack for small ones); noema_finish_upload then asks for the source files packaged with the pack (the PDFs exactly as split) — upload them with the commands it returns and call it again. Pictures: search the whole web with noema_image_search (Bing / DuckDuckGo Images + open collections; any licence is fine for the learner\'s personal study, record the source) and look at / get one with noema_image_fetch (pages and Wikimedia file pages are resolved to the picture). Curricula (maps of steps): noema_curricula shows what is waiting; noema_curriculum_task gives the next task as complete instructions (answer map / plan tasks with noema_curriculum_submit; build a step as a pack with the given subject_id and save it as usual) — call it again after each accepted answer or saved step.' });
       }
       case 'notifications/initialized': case 'notifications/cancelled': return null;
       case 'ping': return ok({});

@@ -1,4 +1,8 @@
 /* noema-lite picture & document fetcher — GET /api/img?url=<image url>   GET /api/file?url=<document url>
+   GET /api/imgsearch?q=…&n=12&sources=bing,commons — one picture search over the whole web and open collections
+   (engine/imglib.js, prepended by tools/build.py; JSON { results, errors }).
+   /api/img also takes a PAGE: Wikimedia / Wikipedia file pages are turned into the picture file, and any other web page
+   into its main picture (og:image…), so “give the image url, not the page” is no longer needed.
    /api/file (for 👁 previews of web sources): PDFs, office documents, e-books, text, audio/video, archives — ≤ 25 MB.
    Used only when a browser cannot download a web picture itself (the image host sends no CORS header):
    "Create with Claude" inside the app, and importing packs whose web pictures are fetched by the app.
@@ -31,6 +35,7 @@ export function sniff(b) {
   return null;
 }
 
+const IMG = () => globalThis.NoemaImgLib;
 const out = (status, msg, extra = {}) => new Response(msg, { status, headers: { 'content-type': 'text/plain; charset=utf-8', 'access-control-allow-origin': '*', ...extra } });
 
 export default async function handler(req) {
@@ -41,18 +46,33 @@ export default async function handler(req) {
   // only this site's own pages (browsers always send Origin or Referer for these requests)
   const from = req.headers.get('origin') || req.headers.get('referer') || '';
   try { if (from && new URL(from).host !== me.host) return out(403, 'only for noema-lite pages'); } catch (e) { return out(403, 'bad origin'); }
+  if (me.pathname.endsWith('/api/imgsearch')) {
+    const q = (me.searchParams.get('q') || '').slice(0, 200), n = Math.min(30, Math.max(1, +me.searchParams.get('n') || 12));
+    const sources = (me.searchParams.get('sources') || '').split(',').map(x => x.trim()).filter(Boolean);
+    if (!q) return out(400, 'q parameter missing');
+    const r = await IMG().searchImages(q, { n, sources: sources.length ? sources : null });
+    return new Response(JSON.stringify(r), { status: 200, headers: { 'content-type': 'application/json; charset=utf-8', 'access-control-allow-origin': '*', 'cache-control': 'public, max-age=3600' } });
+  }
   let target;
-  try { target = new URL(me.searchParams.get('url') || ''); } catch (e) { return out(400, 'url parameter missing or invalid'); }
-  for (let hop = 0; hop < 4; hop++) {
+  try { target = new URL(IMG() && !fileMode ? IMG().resolvePictureUrl(me.searchParams.get('url') || '') : me.searchParams.get('url') || ''); } catch (e) { return out(400, 'url parameter missing or invalid'); }
+  let pageHops = 0;
+  for (let hop = 0; hop < 6; hop++) {
     if (!/^https?:$/.test(target.protocol) || target.username || target.password) return out(400, 'only plain http(s) urls');
     if (blockedHost(target.hostname) && !globalThis.NOEMA_IMG_ALLOW_LOCAL) return out(400, 'this address is not allowed');   // (the flag exists only in the test emulator)
     let r;
     try {
-      r = await fetch(target, { redirect: 'manual', signal: AbortSignal.timeout(10000), headers: { 'user-agent': 'noema-lite-picture-fetcher/1.0 (personal study app)', accept: 'image/*' } });
+      const wiki = /(^|\.)wiki[mp]edia\.org$/.test(target.hostname);   // Wikimedia asks for a descriptive user agent; other hosts get a browser's
+      r = await fetch(target, { redirect: 'manual', signal: AbortSignal.timeout(10000), headers: { 'user-agent': wiki || !IMG() ? (IMG()?.UA || 'noema-lite-picture-fetcher/1.0 (personal study app)') : IMG().BROWSER_UA, accept: fileMode ? '*/*' : 'image/avif,image/webp,image/*,text/html;q=0.8,*/*;q=0.5' } });
+      if (r.status === 429 && hop < 5) { await new Promise(res => setTimeout(res, 1200)); r = await fetch(target, { redirect: 'manual', signal: AbortSignal.timeout(10000), headers: { 'user-agent': IMG()?.UA || 'noema-lite' } }); }
     } catch (e) { return out(502, 'could not reach the picture: ' + e.message); }
     if (r.status >= 300 && r.status < 400 && r.headers.get('location')) { target = new URL(r.headers.get('location'), target); continue; }
     if (!r.ok) return out(502, `the picture host answered ${r.status}`);
     let type = (r.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+    if (!fileMode && /^text\/html|application\/xhtml/.test(type) && IMG() && pageHops < 2) {   // a page: follow its main picture
+      const html = (await r.text()).slice(0, 2e6); const pic = IMG().pageImage(html, target.href);
+      if (!pic) return out(415, 'this page has no main picture — give the image file url');
+      pageHops++; target = new URL(IMG().resolvePictureUrl(pic)); continue;
+    }
     const generic = !type || /octet-stream/.test(type);
     if (fileMode ? !FILE_TYPES.test(type) && !generic : !TYPES.test(type) && !generic) return out(415, fileMode ? `this kind of file cannot be previewed (${type})` : `not a picture (${type}) — use the direct image url, not the page`);
     if (+r.headers.get('content-length') > LIMIT) return out(413, `larger than ${LIMIT / 1048576} MB`);

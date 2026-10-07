@@ -708,10 +708,28 @@ window.NoemaCurMap = (() => {
           const replanBox = el('details', { class: 'cg-faq' }, el('summary', {}, '✨ Re-plan the whole curriculum'),
             el('p', { class: 'tiny' }, `Plans the chapters of every step that is not prepared yet again, the way this curriculum is planned: with ${how}${cur0.provider === 'claudeapp' ? '' : ' (here, now)'}. Steps with your files are planned from the text of their pages. ${fixed ? `${fixed} prepared step${fixed === 1 ? ' keeps its' : 's keep their'} chapters. ` : ''}Every re-planned step waits for your review again.`),
             wish, el('div', { class: 'row' }, rbtn), rlog);
+          // 💬 prepare many steps ahead in the Claude app (e.g. overnight, with a scheduled task in Claude Desktop)
+          const left = Object.values(cur0.nodes).filter(n => !['ready', 'generating', 'app'].includes(n.pack?.status)).length, inQueue = Object.values(cur0.nodes).filter(n => n.pack?.status === 'app').length;
+          const howMany = el('select', { class: 'noema-input cm-qmany', 'aria-label': 'How many steps' }, ...[5, 10, 20].filter(k => k < left).map(k => el('option', { value: k }, `the next ${k} steps`)), el('option', { value: 'all' }, `all ${left} steps not prepared yet`));
+          const skipReview = el('input', { type: 'checkbox' }); skipReview.checked = !!cur0.autoApprove;
+          const qlog = el('div', { class: 'tiny cm-qlog' });
+          const qbtn = el('button', { class: 'btn small cm-queuemany', disabled: !left, onclick: () => {
+            const r = G().queueMany(C().get(acc, cid), howMany.value, { review: !skipReview.checked }); drawMap();
+            const msg = J().message(C().get(acc, cid), { count: 1 });
+            qlog.innerHTML = ''; qlog.append(el('div', {}, `💬 ${r.queued} step${r.queued === 1 ? '' : 's'} queued for your Claude app (in study order).` + (r.needReview ? ` ${r.needReview} wait for your review (📝) — tick “without my review” to include them.` : '') + (r.needPlan ? ` ${r.needPlan} have no chapter plan yet${C().get(acc, cid).provider === 'claudeapp' ? ' — the Claude app plans them first' : ' — plan them first (✨ Re-plan)'}.` : '')),
+              r.queued ? el('div', { class: 'row' }, el('button', { class: 'btn small primary', onclick: e => copy(msg, e.currentTarget) }, '📋 Copy the message (one step per run)')) : null);
+          } }, '💬 Queue them');
+          const aheadBox = el('details', { class: 'cg-faq cm-ahead' }, el('summary', {}, '💬 Prepare many steps ahead in the Claude app'),
+            el('p', { class: 'tiny' }, `Queue steps for your Claude app — even locked ones — so the whole map gets prepared while you do other things.${inQueue ? ` ${inQueue} already wait in the queue.` : ''}`),
+            el('div', { class: 'row' }, howMany, el('label', { class: 'tiny' }, skipReview, ' without my review (prepare them from their current plan)')), el('div', { class: 'row' }, qbtn), qlog,
+            el('details', { class: 'tiny' }, el('summary', {}, 'Overnight, by itself: a scheduled task in Claude Desktop'),
+              el('ol', {}, el('li', {}, 'Queue the steps here.'), el('li', {}, 'In Claude Desktop: Scheduled → New task. Paste the message (📋 above), choose “every hour” (or every 2 hours) for the night, and make sure the noema-lite connector and code execution are on for it.'),
+                el('li', {}, 'Each run is a fresh chat that prepares ONE queued step and saves it; when the queue is empty, a run just says so. Your plan’s usage limits decide how many steps fit in a night — the runs after a limit simply continue later.'),
+                el('li', {}, 'In the morning the prepared steps are ⚡ on this map (it picks them up when it opens).'))));
           b2.append(head('⚙️ ' + (c.title || c.goal), `${Object.keys(c.nodes).length} steps · built ${new Date(c.created).toLocaleDateString()}`),
             el('div', { class: 'noema-form' }, el('label', { class: 'cg-field' }, 'Prepare ahead', pf), el('label', { class: 'cg-field' }, 'Claude: limit per step ($)', bud), el('label', { class: 'cg-field' }, 'AI for new steps', prov),
               el('label', { class: 'tiny' }, review, ' Let me review each step before it is prepared (recommended)'),
-              el('label', { class: 'tiny' }, pause, ' Pause preparing in the background on this device'), keysBox(acc), replanBox),
+              el('label', { class: 'tiny' }, pause, ' Pause preparing in the background on this device'), keysBox(acc), aheadBox, replanBox),
             el('div', { class: 'row noema-ovfoot' },
               el('button', { class: 'btn primary', onclick: () => { const cur = C().get(acc, cid); cur.prefetch = +pf.value; cur.nodeBudget = Math.max(1, +bud.value || 8); cur.provider = prov.value; cur.autoApprove = !review.checked;
                 if (cur.provider !== 'claudeapp') for (const n of Object.values(cur.nodes)) if (n.pack?.status === 'app' && n.pack.auto) n.pack = { ...n.pack, status: null, queuedAt: null };   // queued ahead for the Claude app → prepared here now

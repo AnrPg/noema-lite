@@ -119,7 +119,7 @@ Every time sources are turned into a subject pack (or added to one), the visual 
 | kind | what | how | `origin` |
 |---|---|---|---|
 | **Pictures from the sources** | every figure, photo, scan, chart, table-as-image and vector diagram inside the PDFs / files | `tools/extract_images.py scan SOURCE.pdf OUT/` (embedded images + page renders, contact sheet) → `crop` the useful ones at 200 dpi | `source` |
-| **Pictures from the web** | photographs **and** diagrams that add information the sources lack (anatomy plates, micrographs, real apparatus, maps, real software screenshots…) — even when the sources have no pictures at all; any licence, source always recorded (§6) | `tools/fetch_image.py` (Wikimedia Commons resolved automatically) | `web` |
+| **Pictures from the web** | photographs **and** diagrams that add information the sources lack (anatomy plates, micrographs, real apparatus, maps, real software screenshots…) — even when the sources have no pictures at all; any licence, source always recorded (§6) | `tools/find_images.py` / connector `noema_image_search` (Bing + DuckDuckGo Images = the whole web, Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome, museums) → `tools/fetch_image.py` / `noema_image_fetch` (pages and Wikimedia file pages resolved to the picture) | `web` |
 | **Drawings & graphs we make** | clean redraws of the sources’ diagrams, process flows, timelines; **function graphs** (γραφικές παραστάσεις) whenever the subject has functions, rates, distributions, kinetics… | `tools/svgkit.py` — `Diagram` and `Plot` (curves, points, intervals → regions) | `drawn` / `plot` |
 
 Rules:
@@ -157,6 +157,15 @@ this under every picture with a link back.
   your own study; the app **warns** before you make such a pack public or share it with someone, because
   redistributing it may need the owner’s permission (not legal advice).
 * Quality and information value still come first (§5): sharp, correct, relevant, ≥ 800 px.
+
+How to search (engine/imglib.js — one library for the app, the picture service and the connector):
+* **The whole web first**: Bing Images and DuckDuckGo Images (what a Google image search shows too) via `find_images.py`,
+  the connector's `noema_image_search`, the picture service `/api/imgsearch`, or Claude's own web search for pages with
+  figures. Then the open collections below when they fit.
+* A **page** is enough: `/api/img`, `noema_image_fetch` and `fetch_image.py` take its main picture (og:image…);
+  Wikimedia / Wikipedia file pages (any language, `#/media/File:…`, small thumbnails) become the file itself
+  (Special:FilePath / a 1600–2400 px rendering) — fetching the file page as HTML is what used to fail.
+* Personal study: any licence; the source is always recorded and non-open pictures are flagged before sharing.
 
 Good places to look:
 

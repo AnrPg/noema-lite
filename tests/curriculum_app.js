@@ -29,7 +29,7 @@ const JSZip = require(path.join(ROOT, 'engine/vendor/viewer/jszip.min.js'));
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [] };
   const DOCS = { workflow: 'SKILL', content: 'CONTENT', visual: 'VISUAL' };
   const fn = path.join(os.tmpdir(), `noema-mcp-app-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
+  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));
   const { default: handler } = await import(fn);
   let T = null, rpc = 0;
   const tool = async (name, args = {}) => { const r = await handler(new Request(BASE + '/mcp', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + T }, body: JSON.stringify({ jsonrpc: '2.0', id: ++rpc, method: 'tools/call', params: { name, arguments: args } }) })); const j = await r.json(); return { text: j.result?.content?.[0]?.text || j.error?.message || '', error: !!j.result?.isError || !!j.error }; };
@@ -132,6 +132,18 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   ok(!r.error && /This is the step “[^”]+” of the curriculum/.test(r.text) && JSON.parse(kvOf(uid)['a:packmeta:' + sid].value).curriculum === cid, 'finish_upload knows the step: registered with its curriculum + node, the app is told through the inbox');
   ok(await until(() => p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack?.status === 'ready', [cid, first]), 25000), 'the app picks it up: the step is ⚡ ready (pack downloaded from the cloud)');
   ok(await until(async () => /Study this step/.test(await p.locator('.cm-panel').innerText()), 5000) && await p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack.via === 'claude-app', [cid, first]), '📖 Study this step');
+  // 💬 prepare many steps ahead (e.g. overnight with a scheduled task): queue the whole map at once, in study order
+  await p.click('.cm-tools button:has-text("⚙️")'); await wait(300); await p.click('summary:has-text("Prepare many steps ahead")');
+  await p.selectOption('.cm-qmany', '5'); await p.click('.cm-queuemany'); await wait(300);
+  ok(/0 steps queued/.test(await p.locator('.cm-qlog').innerText()) && /wait for your review/.test(await p.locator('.cm-qlog').innerText()), 'steps waiting for a review are not queued unless asked');
+  await p.check('.cm-ahead input[type=checkbox]'); await p.selectOption('.cm-qmany', 'all'); await p.click('.cm-queuemany'); await wait(400);
+  const qn = await p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); const q = Object.entries(c.nodes).filter(([, n]) => n.pack?.status === 'app').sort((a, b) => a[1].pack.queuedAt.localeCompare(b[1].pack.queuedAt)).map(([k]) => k); return { q, total: Object.keys(c.nodes).length, order: NoemaCurriculum.order(c) }; }, cid);
+  ok(qn.q.length === qn.total - 1 && /Copy the message/.test(await p.locator('.cm-qlog').innerText()), `“all steps not prepared yet”, without review → ${qn.q.length} steps queued (even locked ones), with the message to paste`);
+  ok(qn.q.every((id, i) => i === 0 || qn.order.indexOf(id) > -1), 'queued in study order');
+  await until(() => (JSON.parse(kvOf(uid)['a:curriculum:' + cid]?.value || '{"nodes":{}}').nodes ? Object.values(JSON.parse(kvOf(uid)['a:curriculum:' + cid].value).nodes).filter(n => n.pack?.status === 'app').length : 0) === qn.q.length, 8000);
+  ok(new RegExp(`${qn.q.length} step\\(s\\) queued to prepare`).test((await tool('noema_curricula')).text) && (await tool('noema_curriculum_task', { curriculum_id: cid, want: 'step' })).text.includes(`(${qn.q[0]})`), 'the connector serves them one by one, first the first in study order');
+  await p.evaluate(([id, ids]) => { const c = NoemaCurriculum.get(Noema.account.id, id); for (const k of ids) c.nodes[k].pack = { ...c.nodes[k].pack, status: null }; NoemaCurriculum.save(Noema.account.id, c); }, [cid, qn.q]);
+  await p.locator('.noema-ovbox:has(.cm-ahead) button:has-text("Close")').click(); await wait(200);
 
   /* ---------- C. an imported map with the learner's PDF ---------- */
   console.log('— C. an imported map with a PDF, planned and prepared by the Claude app');

@@ -47,18 +47,22 @@ every file the user gave into `work/<id>/sources/`** (as it is, or only its part
    Vector diagrams appear only in the page renders: crop them with
    `python3 scripts/extract_images.py crop SOURCE.pdf PAGE X Y W H work/<id>/media/<name>.png` (percent of the page).
    Register them in `media/media.json` with `"origin": "source"`.
-2. **From the web — even if the sources have pictures**: search for high-quality, information-rich
-   **photographs and diagrams** that add what the text lacks (anatomy plates, micrographs, real
-   apparatus, maps, real software screens…). Any licence is fine for a personal pack **as long as the
-   source is recorded** (page url, author, licence text); non-open ones are flagged "restricted" and the app
-   warns before sharing. Prefer open sources when equally good (Wikimedia Commons, OpenStax, NASA, NIH,
-   Smithsonian Open Access, open-source docs). Download with
-   `python3 scripts/fetch_image.py work/<id> <media-id> <URL> --alt "…" [--license … --author … --page …] [--crop X,Y,W,H]`
-   (Commons file pages fill author + licence automatically). **Open every picture and check it**:
-   correct, relevant, sharp (≥ 800 px), labels agree with the sources. If the sandbox has no internet
-   but you can see pictures some other way (web search, a `noema_web_image` tool), register them as
-   `"fetch": "app"` web pictures (direct image url + `w`/`h`, no file — VISUAL.md §6); the app downloads
-   them. Only if that is impossible too, say so and continue with kinds 1 and 3.
+2. **From the web — even if the sources have pictures**: search WIDELY for the best, information-rich **photographs
+   and diagrams** that add what the text lacks (anatomy plates, micrographs, real apparatus, labelled diagrams, maps,
+   real software screens…). The packs are for the learner's **personal study**: any site and any licence is fine as long
+   as the source is recorded (page url, credit, licence if known); non-open ones are flagged "restricted" and the app
+   warns before sharing. Do not limit yourself to open collections — pick the clearest, best-labelled picture.
+   * Search: `python3 scripts/find_images.py "what it shows" [--sources bing,duckduckgo,commons,openverse,nasa,inaturalist,wellcome,artic]`
+     (Bing + DuckDuckGo Images = the whole web, what a Google image search shows too) — or, with the connector,
+     `noema_image_search`; plus web search for textbook / publisher figure pages, university lecture pages, open-access
+     articles (their figures), encyclopedias and specialist sites.
+   * Download: `python3 scripts/fetch_image.py work/<id> <media-id> <image url OR the page> --alt "…" [--license … --author … --page …] [--crop X,Y,W,H]`
+     — pages are resolved to their main picture; Wikimedia/Wikipedia file pages (any language, `#/media/File:…`, thumbnails)
+     to the file, with author + licence filled in. **Never web-fetch a Commons/Wikipedia file page to get the picture.**
+   * If your sandbox cannot reach a site (the script says so), call the connector's `noema_image_fetch` with the url: it
+     shows you the picture, gives its size and a ready `"fetch": "app"` media.json entry (no file — the app downloads it).
+   **Open every picture and check it**: correct, relevant, sharp (≥ 800 px), labels agree with the sources. Only if no
+   way works, say so and continue with kinds 1 and 3.
 3. **Drawings and function graphs**: redraw the sources' diagrams and flows, and plot functions
    (rates, kinetics, distributions, any f(x)) with `scripts/svgkit.py` (`Diagram`, `Plot`); it writes
    the SVG **and** its regions, so clickable parts always line up. Save with `d.save(media_dir, id, alt=…)`

@@ -45,8 +45,14 @@ and not needed, because the connector's `noema_get_toolkit` hands Claude the sam
 * **Pictures from the web:** the code-execution sandbox has no internet. Claude finds pictures with
   web search and calls `noema_web_image`; the app downloads them and registers them in the pack as
   `"fetch": "app"` web pictures (url + size, no file — docs/VISUAL.md §6), embedding them at import.
-* **`/api/img`** (`cloud/img/proxy.mjs` → Netlify function): fetches a picture whose host blocks
-  browsers (no CORS). Holds no secrets; http(s) only, no private/local addresses, pictures only, ≤ 15 MB,
+* **Finding pictures** (`engine/imglib.js`, one library for the app, the picture service and the connector): Claude gets
+  `noema_image_search` — Bing + DuckDuckGo Images (the whole web, what a Google image search shows too), Wikimedia
+  Commons, Openverse, NASA, iNaturalist, Wellcome, Art Institute of Chicago, keyless, in parallel (`/api/imgsearch`) — and
+  `noema_web_image` / the connector's `noema_image_fetch` accept a **page**: Wikimedia / Wikipedia file pages (any
+  language, `#/media/File:…`, thumbnails) become the file, other pages their main picture (og:image, logos skipped).
+  The skill has `find_images.py` and a `fetch_image.py` that does the same. Personal study: any licence, source recorded.
+* **`/api/img`** (`cloud/img/proxy.mjs` → Netlify function, with `engine/imglib.js` prepended): fetches a picture whose host blocks
+  browsers (no CORS), or the picture of a page. Holds no secrets; http(s) only, no private/local addresses, pictures only, ≤ 15 MB,
   10 s, redirects re-checked, only for this site's pages.
 * Prompt caching (system + newest turn) keeps long jobs cheaper.
 
@@ -117,6 +123,3 @@ In noema-lite: ❓ Help → Set up Claude → **C** (⭐ recommended for curricu
 * `tests/curriculum_app.js` — way C: a curriculum built and planned by the connector as the learner's Claude (wrong
   answers sent back, the inbox, the app applying it), a step prepared and picked up, the learner's PDF by signed link and
   not uploaded twice, the by-hand path (copy / paste, step bundle, 📥 package), Set up Claude → C, phone.
-* `tests/pack_update.js` — a subject already on the device gets Claude's new version by itself: the synced
-  `a:packmeta` version wins over the cached copy (✨ on the chip), opening it or 🔄 Sync now downloads the new version,
-  and a failed download is reported (the saved copy keeps working) instead of silently showing the old one.

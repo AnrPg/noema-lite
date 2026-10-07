@@ -712,6 +712,27 @@ window.NoemaCurriculum.Gen = (() => {
     C.save(acc, cur); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });   // the connector reads it from the cloud
     const k = key(c.id, nid); if (priority.includes(k)) priority.splice(priority.indexOf(k), 1); emit();
   }
+  /** 💬 Queue many steps for the Claude app at once (e.g. the whole map, for a night of scheduled runs), prerequisites first.
+      which: 'all' | a number (the next N not prepared, in study order). review: false = the learner skips the review of these.
+      Steps without chapters are left out (they are planned first); steps waiting for a review are left out unless review is false.
+      → { queued, needPlan, needReview } */
+  function queueMany(c, which = 'all', { review = true } = {}) {
+    const cur = C.get(acc, c.id); if (!cur) return { queued: 0, needPlan: 0, needReview: 0 };
+    const ord = [...new Set([...(cur.paths?.deep || []), ...C.order(cur)])].filter(id => cur.nodes[id]);
+    const todo = ord.filter(id => !['ready', 'generating', 'app'].includes(cur.nodes[id].pack?.status));
+    const max = which === 'all' ? Infinity : Math.max(0, +which || 0); let queued = 0, needPlan = 0, needReview = 0; const t0 = Date.now();
+    for (const id of todo) {
+      if (queued >= max) break;
+      const n = cur.nodes[id];
+      if (!n.chapters?.length || n.replan) { needPlan++; continue; }
+      if (review && !n.reviewed && !cur.autoApprove) { needReview++; continue; }
+      n.pack = { ...(n.pack || {}), id: C.packId(cur, id), status: 'app', queuedAt: new Date(t0 + queued).toISOString(), error: null, auto: false };   // queue order = study order
+      if (!n.reviewed) n.reviewed = new Date().toISOString();
+      queued++;
+    }
+    if (queued) { C.save(acc, cur); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { }); emit(); }
+    return { queued, needPlan, needReview };
+  }
   /** Take a step back from the Claude app's queue. */
   function fromApp(c, nid) { const cur = C.get(acc, c.id); const n = cur?.nodes[nid]; if (n?.pack?.status !== 'app') return; n.pack = { ...n.pack, status: null, queuedAt: null }; C.save(acc, cur); emit(); }
 
@@ -746,7 +767,7 @@ window.NoemaCurriculum.Gen = (() => {
   }
   function passTest(c, nid, score) { if (score >= C.PASS) C.setMastered(acc, c, nid, 'test', { score }); return score >= C.PASS; }
 
-  return { finish, toApp, fromApp, patchNode, acc: () => acc, start, request, stop, setPaused, paused, live, busy: () => busy, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, placementTest, passTest, kick, TAB };
+  return { finish, toApp, fromApp, queueMany, patchNode, acc: () => acc, start, request, stop, setPaused, paused, live, busy: () => busy, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, placementTest, passTest, kick, TAB };
 })();
 
 

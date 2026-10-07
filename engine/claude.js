@@ -125,6 +125,7 @@ window.NoemaClaude = (() => {
     return null;
   }
   async function downloadImage(url) {
+    url = window.NoemaImgLib ? NoemaImgLib.resolvePictureUrl(url) : url;   // Wikimedia file pages / thumbnails → the picture file
     const tries = [() => fetch(url, { mode: 'cors', referrerPolicy: 'no-referrer' })];
     if (SITE()) tries.push(() => fetch(SITE() + '/api/img?url=' + encodeURIComponent(url)));
     let last = '';
@@ -132,8 +133,9 @@ window.NoemaClaude = (() => {
       try {
         const r = await t();
         if (!r.ok) { last = (await r.text().catch(() => '')).slice(0, 160) || 'HTTP ' + r.status; continue; }
-        let b = await r.blob();
-        if (!/^image\//.test(b.type)) { const t = await sniff(b); if (!t) { last = 'not a picture (' + (b.type || 'unknown type') + ') — give the direct image file url, not the page'; continue; } b = new Blob([b], { type: t }); }
+        let b = await r.blob(); const fin = r.headers.get('x-final-url') || (r.url && !/\/api\/img\?/.test(r.url) ? r.url : null);
+        if (!/^image\//.test(b.type)) { const t = await sniff(b); if (!t) { last = 'not a picture (' + (b.type || 'unknown type') + ') — the picture service finds the main picture of a page by itself; if this fails, give the image file url'; continue; } b = new Blob([b], { type: t }); }
+        if (fin) try { Object.defineProperty(b, '_url', { value: fin }); } catch (e) { }   // the picture a page / Wikimedia link led to: kept as the pack's url
         return b;
       } catch (e) { last = e.message; }
     }
@@ -148,7 +150,7 @@ window.NoemaClaude = (() => {
   }
   /** → { data (data URI kept for the pack), w, h, mime, preview (base64 JPEG ≤ 1568 px for Claude to look at) } */
   async function webImage(url) {
-    const blob = await downloadImage(url);
+    const blob = await downloadImage(url); const finalUrl = blob._url || (window.NoemaImgLib ? NoemaImgLib.resolvePictureUrl(url) : url);
     if (blob.size > 15 * 1024 * 1024) throw new Error('picture larger than 15 MB');
     let data = await blobToDataUrl(blob); const img = await loadImg(data);
     let w = img.naturalWidth || 0, h = img.naturalHeight || 0, mime = blob.type;
@@ -156,7 +158,7 @@ window.NoemaClaude = (() => {
     // keep packs light: big rasters are stored at ≤ 2000 px (JPEG 88 %); region coordinates use the stored size
     if (!/svg/.test(mime) && (blob.size > 700 * 1024 || Math.max(w, h) > 2400)) { const e = encode(img, 2000, /png/.test(mime) && blob.size < 1.5e6 ? 'image/png' : 'image/jpeg', 0.88); data = e.url; w = e.w; h = e.h; mime = data.slice(5, data.indexOf(';')); }
     const pv = encode(img, 1568, 'image/jpeg', 0.85);
-    return { data, w, h, mime, preview: pv.url.split(',')[1], pw: pv.w, ph: pv.h };
+    return { data, w, h, mime, url: finalUrl, preview: pv.url.split(',')[1], pw: pv.w, ph: pv.h };
   }
 
   /** Fill the "fetch": "app" pictures of a pack (cache first, then the web). Pictures that fail keep their url. */
@@ -180,7 +182,7 @@ window.NoemaClaude = (() => {
 The noema-pack-builder skill is available in your code-execution container — follow its SKILL.md and both references completely (coverage, quality bar, ≥ 3 picture exercises per picture, all three kinds of pictures). Differences in THIS environment:
 ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.
    EVERY uploaded file goes into the package: copy it into work/<id>/sources/ (or, if you split a PDF, ONLY its parts — scripts/split_pdf.py) and give each file its own source in sources.json with "file": "sources/<name>" (SKILL.md §3b). make_pack.py refuses a source without its file and a file without its source.`}
-2. The sandbox has NO internet. For pictures from the web: use the web_search tool to find high-quality, information-rich photographs and diagrams (prefer Wikimedia Commons, OpenStax, NIH, NASA, open-source docs; any licence is fine for this personal app as long as the source is recorded), then call the noema_web_image tool with the DIRECT image file url (Wikimedia: the upload.wikimedia.org original file). You will see the picture and get its size. Register it in media/media.json WITHOUT a file:
+2. The sandbox has NO internet. For pictures from the web, search WIDELY — this is the learner's personal study, so any site and any licence is fine as long as the source is recorded: noema_image_search (Bing + DuckDuckGo Images = the whole web, plus Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome, museum collections) and web_search (textbook and publisher figure pages, university lecture pages, open-access articles and their figures, encyclopedias, specialist sites). Look for the BEST picture for each idea — high-quality, information-rich, well-labelled photographs and diagrams — not only open-licence ones. Then call noema_web_image with the image url or the page (Wikimedia/Wikipedia file pages and other pages are resolved to their picture). You will see the picture and get its size; if one fails, take the next candidate. Register it in media/media.json WITHOUT a file, with the url the tool reports:
    {"id": "…", "origin": "web", "fetch": "app", "url": "<direct image url>", "page": "<page it came from>", "retrieved": "${today()}", "w": W, "h": H, "alt": "…", "credit": "author / site", "license": "…"}
    The app downloads and embeds it when importing. Regions use the W×H pixel coordinates reported by the tool. You cannot open these pictures with Pillow, so place regions carefully from what you see (generous rectangles/circles).
 3. Do not ask the user anything unless something essential is missing — choose sensible defaults and say them in one line.
@@ -196,13 +198,26 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
   const NODE_FILES = `1. This pack is ONE NODE of a learning curriculum (the user message has the plan: the node, what the learner already knows, the chapters to write). The learner gave the material of this node: the uploaded files (find them first, e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f -mmin -1440 \\( -iname '*.pdf' -o -iname '*.docx' -o -iname '*.pptx' -o -iname '*.md' -o -iname '*.txt' -o -iname '*.png' -o -iname '*.jpg' \\) 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). THESE FILES ARE THE SOURCES: build the pack from them — read every page that belongs to this node; each planned chapter teaches and tests everything its pages contain ("From the material" in the plan) — every topic, definition, mechanism, example, figure, table and detail, nothing skipped — and cites those pages. Do NOT research the theory on the web (use web_search only to find pictures). Where a planned chapter is not covered by the files, write it briefly from your own reliable knowledge and say so in the coverage notes. Package every file (SKILL.md §3b) with the source ids given in the plan (m1, m2…; the parts of a split PDF get their own ids). Write one pack chapter per planned chapter, in the planned order and with the planned titles; do not re-teach the prerequisites the learner already mastered.`;
   const TOOL_WEB_IMAGE = {
     name: 'noema_web_image',
-    description: 'Download a picture from the web for the pack (your sandbox has no internet; the noema-lite app downloads it). Returns the picture so you can check it is correct, relevant and sharp, plus its size W×H in pixels (use these coordinates for regions). Then register it in media.json as a "fetch": "app" web picture.',
-    input_schema: { type: 'object', properties: { url: { type: 'string', description: 'Direct URL of the image file (jpg/png/webp/svg), not the web page' }, page_url: { type: 'string', description: 'The page where you found it (for the credit)' } }, required: ['url'] },
+    description: 'Download a picture from the web for the pack (your sandbox has no internet; the noema-lite app downloads it). Give the image file url — or a page: Wikimedia / Wikipedia file pages and any web page are resolved to their picture. Returns the picture so you can check it is correct, relevant and sharp, plus its size W×H in pixels (use these coordinates for regions). Then register it in media.json as a "fetch": "app" web picture with the url this tool reports.',
+    input_schema: { type: 'object', properties: { url: { type: 'string', description: 'The image file url (best) or the page it is on' }, page_url: { type: 'string', description: 'The page where you found it (for the credit)' } }, required: ['url'] },
   };
+  const TOOL_IMAGE_SEARCH = {
+    name: 'noema_image_search',
+    description: 'Search pictures on the whole web and in open collections at once: Bing Images and DuckDuckGo Images (any site — what a Google image search shows too), Wikimedia Commons, Openverse, NASA, iNaturalist, Wellcome Collection, Art Institute of Chicago. Returns candidates with their image url, page, size, licence and credit. This is for the learner\'s personal study: any licence is fine, the source is recorded. Then check the best ones with noema_web_image.',
+    input_schema: { type: 'object', properties: { query: { type: 'string', description: 'What the picture shows, in English usually (e.g. "DNA replication fork diagram labeled")' }, n: { type: 'integer', description: 'How many results (default 12, max 30)' }, sources: { type: 'array', items: { type: 'string', enum: ['bing', 'duckduckgo', 'commons', 'openverse', 'nasa', 'inaturalist', 'wellcome', 'artic'] }, description: 'Only these sources (default: bing, commons, openverse, duckduckgo)' } }, required: ['query'] },
+  };
+  async function imageSearch(input) {
+    const q = String(input?.query || '').trim(); if (!q) throw new Error('query is empty');
+    const qs = new URLSearchParams({ q, n: String(Math.min(30, Math.max(1, +input.n || 12))) }); if (Array.isArray(input.sources) && input.sources.length) qs.set('sources', input.sources.join(','));
+    let r; try { r = await fetch((SITE() || '') + '/api/imgsearch?' + qs); } catch (e) { r = null; }
+    if (r?.ok) return r.json();
+    if (window.NoemaImgLib) return NoemaImgLib.searchImages(q, { n: +input.n || 12, sources: ['commons', 'openverse', 'nasa', 'wellcome', 'artic'] });   // without the site function: the collections that allow browsers
+    throw new Error('image search is not available here');
+  }
   function toolsFor(job) {
     return [{ type: 'code_execution_20250825', name: 'code_execution' },
       ...(job.noSearch ? [] : [{ type: 'web_search_20250305', name: 'web_search', max_uses: job.maxSearches || 20 }]),
-      ...(job.kind === 'node' && !job.noFetch && !job.files?.length ? [{ type: 'web_fetch_20250910', name: 'web_fetch', max_uses: 40 }] : []), TOOL_WEB_IMAGE];
+      ...(job.kind === 'node' && !job.noFetch && !job.files?.length ? [{ type: 'web_fetch_20250910', name: 'web_fetch', max_uses: 40 }] : []), TOOL_IMAGE_SEARCH, TOOL_WEB_IMAGE];
   }
   /** Prompt caching: system + the newest user turn (≤ 4 breakpoints in total). */
   function withCache(messages) {
@@ -244,6 +259,7 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
     if (b.type === 'server_tool_use' && /bash/.test(b.name)) { const c = String(b.input?.command || ''); return '🛠️ ' + (/make_pack/.test(c) ? 'Checking and building the pack' : /pdf_text|pdftotext/.test(c) ? 'Reading the PDF' : /extract_images/.test(c) ? 'Finding pictures in the sources' : /svgkit|Diagram|Plot/.test(c) ? 'Drawing diagrams' : /chapters|json\.dump/.test(c) ? 'Writing chapters' : 'Working: ' + c.split('\n')[0].slice(0, 90)); }
     if (b.type === 'server_tool_use' && /text_editor/.test(b.name)) return '📝 ' + (b.input?.command === 'view' ? 'Reading ' : 'Writing ') + String(b.input?.path || '').split('/').pop();
     if (b.type === 'tool_use' && b.name === 'noema_web_image') return '🖼️ Fetching a picture: ' + String(b.input?.url || '').split('/').pop().slice(0, 80);
+    if (b.type === 'tool_use' && b.name === 'noema_image_search') return '🔎 Searching pictures: ' + String(b.input?.query || '').slice(0, 80);
     return '';
   };
 
@@ -275,14 +291,19 @@ ${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. Th
       if (!pending.length) return false;
       const results = [];
       for (const b of pending) {
+        if (b.name === 'noema_image_search') {
+          try { const r = await imageSearch(b.input); results.push({ type: 'tool_result', tool_use_id: b.id, content: JSON.stringify({ results: r.results.map(x => ({ url: x.url, page: x.page, title: x.title, w: x.w, h: x.h, source: x.source, license: x.license, credit: x.credit })), ...(Object.keys(r.errors || {}).length ? { unavailable: r.errors } : {}), next: 'Check the best candidates with noema_web_image (it shows you the picture).' }) }); log(`   🔎 ${r.results.length} picture(s) for “${String(b.input?.query).slice(0, 60)}”`); }
+          catch (e) { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: 'Image search failed: ' + e.message + ' — use web_search to find pages with pictures, then noema_web_image with the page or image url.' }); }
+          continue;
+        }
         if (b.name !== 'noema_web_image') { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: 'Unknown tool' }); continue; }
         try {
           const url = String(b.input?.url || ''); if (!/^https?:\/\//.test(url)) throw new Error('url must start with https://');
           const got = job.images[url] || await webImage(url);
-          job.images[url] = { data: got.data, w: got.w, h: got.h, mime: got.mime };
+          job.images[url] = { data: got.data, w: got.w, h: got.h, mime: got.mime, url: got.url };
           const small = Math.max(got.w, got.h) < 800;
           results.push({ type: 'tool_result', tool_use_id: b.id, content: [
-            { type: 'text', text: JSON.stringify({ ok: true, url, w: got.w, h: got.h, mime: got.mime, shown_at: got.pw ? `${got.pw}×${got.ph}` : undefined, note: small ? 'TOO SMALL (< 800 px on the long side): find a larger version or do not use it' : `Register it with "w": ${got.w}, "h": ${got.h}; region coordinates in that size.` }) },
+            { type: 'text', text: JSON.stringify({ ok: true, url: got.url || url, w: got.w, h: got.h, mime: got.mime, shown_at: got.pw ? `${got.pw}×${got.ph}` : undefined, note: small ? 'TOO SMALL (< 800 px on the long side): find a larger version or do not use it' : `Register it with "w": ${got.w}, "h": ${got.h}; region coordinates in that size.` }) },
             ...(got.preview ? [{ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: got.preview } }] : [])] });
           log(`   ✓ picture ${got.w}×${got.h}${small ? ' (too small)' : ''}`);
         } catch (e) { results.push({ type: 'tool_result', tool_use_id: b.id, is_error: true, content: e.message + ' — try another picture (a direct image url).' }); log('   ✗ ' + e.message); }

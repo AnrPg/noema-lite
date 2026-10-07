@@ -16,7 +16,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', storageChunkBytes: 4500, library: [{ id: 'databricks', title: 'Databricks', counts: { chapters: 13, exercises: 1715 } }] };
   const DOCS = { workflow: fs.readFileSync(path.join(ROOT, 'skill/noema-pack-builder/SKILL.md'), 'utf8'), content: fs.readFileSync(path.join(ROOT, 'tools/CONTENT_SPEC.md'), 'utf8'), visual: fs.readFileSync(path.join(ROOT, 'docs/VISUAL.md'), 'utf8') };
   const fn = path.join(os.tmpdir(), `noema-mcp-${process.pid}.mjs`);
-  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
+  fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\nglobalThis.window = globalThis;\n` + ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/imglib.js'].map(f => fs.readFileSync(path.join(ROOT, f), 'utf8') + '\n').join('') + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py (MCP_ENGINE)   // as tools/build.py assembles it
   const { default: handler } = await import(fn);
   const call = async (body, token, method = 'POST', url = BASE + '/mcp') => {
     const r = await handler(new Request(url, { method, headers: Object.assign({ 'content-type': 'application/json' }, token ? { authorization: 'Bearer ' + token } : {}), body: method === 'POST' ? JSON.stringify(body) : undefined }));
@@ -48,6 +48,28 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   ok(pl.json?.result?.prompts?.[0]?.name === 'create_subject', 'prompts/list offers “Create a noema-lite subject”');
   const pg = await call({ jsonrpc: '2.0', id: 5, method: 'prompts/get', params: { name: 'create_subject', arguments: { title: 'Heart', language: 'el' } } }, T);
   ok(/"Heart"/.test(pg.json?.result?.messages?.[0]?.content?.text) && /noema_get_toolkit/.test(pg.json.result.messages[0].content.text), 'prompts/get fills in the title and tells Claude how to work without the skill');
+
+  console.log('— pictures: search the whole web, get one (pages and Wikimedia file pages resolved, shown to Claude)');
+  ok(names.includes('noema_image_search') && names.includes('noema_image_fetch'), 'tools: noema_image_search + noema_image_fetch');
+  { const PNGB = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+    const seen = [];
+    globalThis.NOEMA_IMG_FETCH = async url => { const u = new URL(url); seen.push(u.href);
+      const R = (b, t, st = 200, h = {}) => new Response(b, { status: st, headers: { 'content-type': t, ...h } });
+      if (u.hostname === 'www.bing.com') return R('<a m="{&quot;murl&quot;:&quot;https://www.textbook.org/fig/fork.png&quot;,&quot;purl&quot;:&quot;https://www.textbook.org/ch5&quot;,&quot;t&quot;:&quot;Replication fork&quot;}"></a>', 'text/html');
+      if (u.hostname === 'commons.wikimedia.org' && u.pathname === '/w/api.php') return R(JSON.stringify({ query: { pages: {} } }), 'application/json');
+      if (u.hostname === 'commons.wikimedia.org' && u.pathname.startsWith('/wiki/Special:FilePath/')) return R('', 'text/plain', 302, { location: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/DNA.png' });
+      if (u.hostname === 'upload.wikimedia.org') return R(PNGB, 'image/png');
+      return R('down', 'text/plain', 503);
+    };
+    const s1 = (await tool('noema_image_search', { query: 'replication fork' })).content[0].text;
+    ok(/1 pictures for “replication fork”/.test(s1) && /image: https:\/\/www\.textbook\.org\/fig\/fork\.png/.test(s1) && /page: https:\/\/www\.textbook\.org\/ch5/.test(s1) && /unavailable now: .*openverse/.test(s1), 'noema_image_search: web-wide results (Bing) with image + page; unavailable sources named');
+    const f1 = await tool('noema_image_fetch', { url: 'https://commons.wikimedia.org/wiki/File:DNA_Structure%2BKey%2BLabelled.pn_NoBB.png', media_id: 'dna', alt: 'DNA' });
+    const entry = JSON.parse(f1.content[0].text.match(/\{"id":"dna".*\}/)[0]);
+    ok(!f1.isError && f1.content[1]?.type === 'image' && f1.content[1].mimeType === 'image/png' && seen.some(x => x.includes('Special:FilePath')), 'noema_image_fetch: the Commons FILE PAGE (the link that failed) → the picture, shown to Claude');
+    ok(entry.fetch === 'app' && entry.url === 'https://upload.wikimedia.org/wikipedia/commons/4/4c/DNA.png' && entry.w === 1 && entry.h === 1 && /commons\.wikimedia\.org\/wiki\/File:/.test(entry.page), 'and a ready media.json entry: "fetch": "app", the file url, its size, the page as source');
+    const f2 = await tool('noema_image_fetch', { url: 'http://169.254.169.254/latest/meta-data' });
+    ok(f2.isError && /not allowed/.test(f2.content[0].text), 'private addresses are refused');
+    delete globalThis.NOEMA_IMG_FETCH; }
 
   console.log('— uploading an original source file');
   const ss = (await tool('noema_start_source_upload', { subject_id: 'physics-by-claude', source_id: 'part1', filename: 'Κεφ 5 βιβλίο.pdf' })).content[0].text;
