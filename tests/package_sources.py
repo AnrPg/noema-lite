@@ -48,13 +48,13 @@ os.remove(os.path.join(sd, 'sources', 'book.pdf'))
 # 2. a source whose file is missing → refused
 sources([P1, P2, NT, WEB, {'id': 'gone', 'title': 'x', 'file': 'sources/gone.pdf'}], [{'id': 'ecb-1', 'pages': 'σ. 3'}])
 r = mk(); check(r.returncode == 1 and 'its file sources/gone.pdf is missing' in r.stdout, 'a source without its file is refused', r.stdout)
-# 3. "file" outside sources/ → refused;  4. > 50 MB → refused
+# 3. "file" outside sources/ → refused;  4. > 50 MB → accepted (stored in parts by the app / connector)
 sources([{**P1, 'file': '../ecb_p1-12.pdf'}, P2, NT], [{'id': 'ecb-2', 'pages': 'σ. 14'}])
 r = mk(); check(r.returncode == 1 and 'must be "sources/<file name>"' in r.stdout, '"file" must point inside sources/', r.stdout)
 big = os.path.join(sd, 'sources', 'huge.pdf')
 with open(big, 'wb') as f: f.truncate(51 * 1024 * 1024)
 sources([P1, P2, NT, {'id': 'huge', 'title': 'Huge', 'file': 'sources/huge.pdf'}], [{'id': 'ecb-1', 'pages': 'σ. 3'}])
-r = mk(); check(r.returncode == 1 and 'the limit is 50 MB per file' in r.stdout, 'files over 50 MB are refused (split them)', r.stdout); os.remove(big)
+r = mk(); check(r.returncode == 0 and 'huge: sources/huge.pdf (51.0 MB)' in r.stdout, 'files over 50 MB are fine (no size limit for Claude’s packages)', r.stdout); os.remove(big)
 # 5. the good package
 sources([P1, P2, NT, WEB], [{'id': 'ecb-1', 'pages': 'σ. 3–5'}, {'id': 'ecb-2', 'pages': 'σ. 40'}, {'id': 'notes'}, {'id': 'web'}])
 r = mk(); check(r.returncode == 0, 'make_pack.py builds the package', r.stdout + r.stderr)

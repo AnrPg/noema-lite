@@ -96,6 +96,33 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   ok(/youtube-nocookie\.com\/embed\/dQw4w9WgXcQ\?start=2220/.test(await p.$eval('.vw-ov iframe', e => e.src)), 'YouTube lectures play inside, at the cited time');
   await p.keyboard.press('Escape');
 
+  console.log('— 💡 explain any part of the lesson');
+  await p.evaluate(() => { document.querySelectorAll('.noema-overlay').forEach(o => o.remove()); location.hash = '#/s/' + COURSE[0].sections[0].id; }); await wait(700);
+  await p.evaluate(() => { const b = [...document.querySelectorAll('.continue button')].find(x => /show all/.test(x.textContent)); b && b.click(); }); await wait(300);
+  const nBlk = await p.locator('.reader .blk').count(), nX = await p.locator('.reader .blk > .xbtn').count();
+  ok(nBlk > 0 && nX === nBlk && await p.locator('.sechead > .xbtn').count() === 1, `every part of the lesson has a 💡 (${nX} blocks + the section heading)`);
+  const op0 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
+  await p.hover('.reader .blk >> nth=0'); await wait(250);
+  const op1 = await p.$eval('.reader .blk > .xbtn', b => +getComputedStyle(b).opacity);
+  ok(op0 === 0 && op1 > 0.5, `the icon is hidden and appears on hover (opacity ${op0} → ${op1})`);
+  await p.click('.reader .blk >> nth=0 >> .xbtn'); await wait(500);
+  const xs = await p.evaluate(() => ({ open: document.querySelector('.drawer').classList.contains('open'), chip: document.querySelector('.drawer .ctxchip')?.textContent, mode: T.mode, ctx: tutorContextText(), sec: SEC[T.ctx.sec]?.title }));
+  ok(xs.open && /^🔎 /.test(xs.chip) && xs.mode === 'explain', 'click → the tutor dock opens in 💡 Explain mode on that part: ' + xs.chip);
+  ok(/^FOCUS/.test(xs.ctx) && xs.ctx.includes('WIDER CONTEXT') && xs.ctx.includes(xs.sec) && /THE CHAPTER/.test(xs.ctx), 'the AI gets the part itself first, then its section and chapter as wider context');
+  await p.evaluate(() => closeTutor());
+  await p.screenshot({ path: SHOTS + '/s7_explain.png' });
+
+  console.log('— ❓ Help: setting up Claude (both ways), always there');
+  await p.evaluate(() => openAccountMenu('help')); await wait(500);
+  await p.click('summary:has-text("Set up Claude and create subjects")'); await wait(500);
+  const cs = await p.locator('.claudesetup').innerText();
+  ok(await p.locator('.claudesetup .cg-way').count() === 2 && /Create a Claude Console account/.test(cs) && /Create an API key/.test(cs) && /Paste the key here/.test(cs), 'way A: the same numbered steps as in ✨ Create with Claude (account, credit, key, paste & check)');
+  await p.click('.claudesetup .cg-way >> nth=1 >> summary'); await wait(200);
+  const cs2 = await p.locator('.claudesetup').innerText();
+  ok(/Customize → Connectors/.test(cs2) && cs2.includes(BASE + '/mcp') && /Switch on “Code execution”/.test(cs2) && /Download the skill/.test(cs2), 'way B: code execution, the connector (with its address), the skill and the prompt');
+  await p.screenshot({ path: SHOTS + '/s8_help_claude.png', fullPage: true });
+  await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelectorAll('.modal, .noema-overlay').forEach(o => o.remove()));
+
   console.log('— remove the file');
   await p.evaluate(() => { DECK.expanded.ecb = true; toggleSourcesDeck(true); }); await wait(200);
   p.once('dialog', d => d.accept()); await p.click('.srccard:has-text("Essential Cell Biology") button:has-text("Remove file")'); await wait(3500);

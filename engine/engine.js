@@ -436,7 +436,27 @@ function tutorContextText() {
   if (c.kind === 'chapter') return 'COURSE NOTES:\n' + chapterOutline(CH[c.id]);
   if (c.kind === 'playbook') { const d = PB[c.id]; return `COURSE NOTES — Debug playbook "${d.title}":\nSymptom: ${d.symptom}\nAsk yourself: ${d.askYourself.join(' | ')}\nSteps: ${d.steps.map(s => s.do + (s.code ? ' [' + s.code + ']' : '')).join(' | ')}\nRoot causes: ${d.rootCauses.join('; ')}\nFix: ${d.fix}`; }
   if (c.kind === 'exercise') return c.text;
+  if (c.kind === 'item') {   // 💡 on one part of the lesson: that part first, then the lesson around it
+    const sec = c.sec && SEC[c.sec] ? (SEC[c.sec]._full ? { ...SEC[c.sec], blocks: SEC[c.sec]._full.blocks } : SEC[c.sec]) : null; const ch = sec ? sec._ch : c.ch && CH[c.ch];
+    return `FOCUS — the part of the lesson the learner asks about. Explain THIS first and in its own terms; then connect it to the rest of the lesson, and go beyond the notes whenever that helps understanding:\n${String(c.text || c.label).slice(0, 8000)}` +
+      (sec ? `\n\nWIDER CONTEXT — Chapter ${ch.num} "${ch.title}", section "${sec.title}" (the lesson it belongs to):\n` + sectionText(sec).slice(0, 14000) : '') +
+      (ch ? '\n\nTHE CHAPTER:\n' + chapterOutline(ch).slice(0, 6000) : '');
+  }
   return '';
+}
+/** 💡 Explain this — a small icon in the top corner of a lesson part (shown on hover; always faintly on touch screens).
+    It opens the tutor dock in “Explain” mode with that part as the focus and its section + chapter as wider context. */
+function explainable(el, get) {
+  if (!el || [...el.children].some(k => k.classList.contains('xbtn'))) return el;
+  el.classList.add('xable');
+  el.append(h('button', { class: 'xbtn', type: 'button', title: 'Explain this (AI)', 'aria-label': 'Explain this with the AI tutor', onclick: e => { e.stopPropagation(); e.preventDefault(); explainItem(get()); } }, '💡'));
+  return el;
+}
+function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {
+  const plain = String(label || text || '').replace(/[*_`#>\[\]]/g, '').replace(/\s+/g, ' ').trim();
+  const short = plain.length > 70 ? plain.slice(0, 68).replace(/\s+\S*$/, '') + '…' : plain;
+  let hsh = 0; for (const x of String(text || label)) hsh = (hsh * 31 + x.charCodeAt(0)) >>> 0;
+  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', `Explain this ${what} to me: “${short}”`);
 }
 function setTutorContext(ctx) { T.ctx = ctx; if (T.open) renderTutor(); }
 function ctxLabel() {
@@ -446,6 +466,7 @@ function ctxLabel() {
   if (c.kind === 'chapter') return CH[c.id] ? `📍 Ch${CH[c.id].num} · ${CH[c.id].title}` : '📍 ' + (c.label || 'Chapter');
   if (c.kind === 'playbook') return PB[c.id] ? `🔧 ${PB[c.id].title}` : '🔧 ' + (c.label || 'Debug drill');
   if (c.kind === 'exercise') return '🧩 This exercise';
+  if (c.kind === 'item') return '🔎 ' + (c.label || 'This part');
   return '';
 }
 function openTutor(ctx, mode, autoMsg) {
@@ -1594,7 +1615,7 @@ function chapterView(id, tab) {
     h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
       h('div', { class: 'grow' }, h('div', { class: 'num' }, `Chapter ${c.num}`), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
       h('div', { style: { position: 'relative', width: '76px', height: '76px', flex: 'none' } }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { style: { position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontWeight: 800 } }, Math.round((p.sr + p.ex) * 50) + '%'))),
-    h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)),
+    explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),
     h('div', { class: 'tabs' }, ...tabs.map(([k, l, n]) => h('button', { class: tab === k ? 'on' : '', onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, n)))),
     body);
   animateRings(v);
@@ -1617,7 +1638,7 @@ function chapterView(id, tab) {
   else if (tab === 'traps') {
     body.append(h('p', { class: 'muted' }, 'Every trap in this chapter, side by side. Read them, then hit the trap drill.'),
       h('div', { class: 'row', style: { marginBottom: '14px' } }, h('button', { class: 'btn primary', onclick: () => startRun(c.exercises.filter(e => e.tags.some(t => ['pitfall', 'exam'].includes(t))), { title: `⚠️ Trap drill · Ch${c.num}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ Start trap drill')),
-      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => h('div', { class: 'callout pitfall', style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null))));
+      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));
   }
 }
 
@@ -1647,6 +1668,16 @@ function renderBlock(b, i) {
   }
   return wrap;
 }
+/** 💡 on a block and on its cards / items (compare columns, terms, list items, table rows). */
+const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
+function explainParts(el, b, s) {
+  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || 'this figure') : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson' }));
+  if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card' })); });
+  if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term' })); });
+  if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point' })); });
+  if (b.t === 'table') $$('tbody tr', el).forEach((d, k) => { const r = b.rows[k]; if (r) explainable(d.lastElementChild || d, () => ({ label: r[0], text: b.head.map((hd, j) => `${hd}: ${r[j] ?? ''}`).join('\n'), sec: s, what: 'row of the table' })); });
+  return el;
+}
 function chunkBlocks(blocks) {
   // group into bite-size chunks of ~3–4 blocks, never splitting right after a heading-like callout
   const out = []; let cur = [], weight = 0;
@@ -1673,12 +1704,12 @@ function sectionView(sid) {
   const v = view(h('div', { class: 'reader' },
     h('button', { class: 'back', onclick: () => go('#/ch/' + c.id) }, `← ${c.emoji} Ch${c.num} · ${c.title}`),
     pl,
-    h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, `Section ${s._j + 1} / ${c.sections.length}`), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ read') : null),
-      h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null),
+    explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, `Section ${s._j + 1} / ${c.sections.length}`), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ read') : null),
+      h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),
     body, tail));
   function draw(scroll) {
     body.innerHTML = '';
-    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); markNewBlock(el, b, c); body.append(el); }));
+    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
     pl.firstChild.style.width = (shown / chunks.length * 100) + '%';
     tail.innerHTML = '';
     if (shown < chunks.length) {
@@ -2277,14 +2308,14 @@ const ACC_REF = { id: ACCOUNT.id, kind: ACCOUNT.kind || 'local' };
 const SUBJ_REF = { id: SUBJ.id, title: SUBJ.title, packVersion: Noema.pack?.version || null };
 function fromRec(r) {     // canonical record → in-memory shape used by the UI
   return { id: r.id, kind: r.kind, mode: r.mode, created: Date.parse(r.createdAt), updated: Date.parse(r.updatedAt),
-    ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label } : null,
+    ctx: r.context?.type && r.context.type !== 'course' ? { kind: r.context.type, id: r.context.id, label: r.context.label, ...(r.context.type === 'item' ? { sec: r.context.sectionId || null, ch: r.context.chapterId || null } : {}) } : null,
     model: r.model?.name || '', title: r.title, titleSource: r.titleSource,
     titledLen: r.titleSource === 'user' ? 1e9 : (r.meta?.titledAtMessage ?? (r.title ? r.messages.length : 0)),
     msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt), ...(m.meta ? { meta: m.meta } : {}) })),
     tutorState: r.tutorState || null };
 }
 function toRec(cv) {      // in-memory shape → canonical record
-  const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : null;
+  const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : cv.ctx?.kind === 'item' ? (cv.ctx.sec || null) : null;
   return Noema.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
     titleSource: cv.titleSource || (cv.titledLen >= 1e9 ? 'user' : cv.title ? 'ai' : 'none'),
     context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
@@ -2303,7 +2334,7 @@ function saveConvos(cv) {
 }
 function ctxRecord() {
   const c = T.ctx; if (!c) return null;
-  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, '') };
+  return { kind: c.kind, id: c.id, label: ctxLabel().replace(/^\S+\s/, ''), ...(c.kind === 'item' ? { sec: c.sec || null, ch: c.ch || null } : {}) };
 }
 function persistConvo(key) {
   const hist = T.hist[key];
@@ -2435,7 +2466,7 @@ function openConvo(cv) {
     const visible = r.kind === 'section' ? SEC[r.id] : r.kind === 'chapter' ? CH[r.id] : r.kind === 'playbook' ? PB[r.id] : r.kind === 'exercise' ? findFull('exercise', r.id) : null;
     if (!visible && findFull(r.kind, r.id)) { setSrcFilter(null); }   // its source is filtered out → show everything again
     if (r.kind === 'exercise') { const e = findFull('exercise', r.id); ctx = e ? { kind: 'exercise', id: r.id, text: exerciseAsText(e) } : null; }
-    else ctx = { kind: r.kind, id: r.id, label: r.label };
+    else ctx = { kind: r.kind, id: r.id, label: r.label, ...(r.kind === 'item' ? { sec: r.sec || null, ch: r.ch || null, text: r.label } : {}) };
   }
   T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
   const key = tutorCtxKey();
@@ -2816,9 +2847,16 @@ function selfTestBox() {
 
 ACC_VIEWS.help = function (body) {
   const st = setupStatus();
-  const state = { gemini: st.gemini, backupFolder: !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!Noema.config.supabaseUrl };
+  const state = { gemini: st.gemini, backupFolder: !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!Noema.config.supabaseUrl, claude: !!window.NoemaClaude?.Key.get(ACCOUNT.id) };
   body.append(h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, 'Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.'),
-    ...Object.entries(GUIDES).map(([id, g]) => accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) })));
+    ...Object.entries(GUIDES).map(([id, g]) => {
+      if (id !== 'claude' || !Noema.claudeSetupView) return accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) });
+      // ✨ Set up Claude: the same numbered steps as in “Create with Claude” (both ways), built when opened
+      const holder = h('div', { class: 'claudesetup' });
+      const sec = accSection(g.icon, g.title, { status: state.claude ? { ok: true, text: 'API key here' } : null, body: h('div', {}, guideBody(id), holder) });
+      sec.addEventListener('toggle', () => { if (sec.open && !holder.firstChild) holder.append(Noema.claudeSetupView(ACCOUNT.id)); });
+      return sec;
+    }));
 };
 
 /* ---------- sync indicator ---------- */
@@ -2875,7 +2913,7 @@ const GUIDES = {
     '**File → Add Local Repository** → choose Documents/MyApps/noema-lite.',
     '**Publish repository** → keep **Keep this code private** ticked.',
     'Whenever Claude has made changes: open GitHub Desktop → **Push origin**. Netlify then updates the website automatically.'] },
-  claude: { icon: '✨', title: 'Create a subject with Claude', who: 'Everyone', steps: [
+  claude: { icon: '✨', title: 'Set up Claude and create subjects (two ways)', who: 'Everyone', steps: [
     'Account menu → 📚 Subjects → **✨ Create a subject with Claude** (or the same button in the subject picker). The window shows every step, numbered, with ⓘ tips.',
     '**Way A — here in noema-lite:** create a Claude Console account (platform.claude.com), add a little credit, create an API key and paste it in the window. noema-lite uploads the skill, sends your files to Claude and imports the finished subject — you never leave the app. You see the cost live and set a limit.',
     `**Way B — in the Claude app or website:** with your Claude plan (Free, Pro, Max): switch on code execution, add the connector **Customize → Connectors → + Add → Add custom connector** with the address ${SITE_URL ? SITE_URL + '/mcp' : '<your site>/mcp'} (the same for everyone and every device), then attach your sources in a new chat and send the prompt from the window.`,

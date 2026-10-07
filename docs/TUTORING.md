@@ -27,3 +27,12 @@ nested questions pile up, and the conversation never culminates in knowledge.
    a missing control line triggers a reminder directive on the next turn).
 4. `tutorState` is saved with the conversation (IndexedDB, folder, cloud, backups, SQLite) and the lessons appear
    in the tracker, as chips under the reply, and at the top of every Markdown export.
+
+
+## 💡 Explain this (any part of a lesson)
+Every block of a section (paragraph, list, table, figure, callout, comparison…), its cards and items (comparison
+columns, terms, longer list points, table rows), the section heading, the chapter's mental model and every trap get a
+small 💡 in their top corner — visible on hover (faint but always there on touch screens). It opens the tutor dock in
+**💡 Explain** mode with the context `item`: the part itself first (`FOCUS`), then its section and the chapter
+(`WIDER CONTEXT`), so the explanation is about exactly that part but may connect to the rest of the lesson and go
+beyond it. The conversation is saved like any other (context type `item`, with its section).

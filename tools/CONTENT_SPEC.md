@@ -47,7 +47,7 @@ own source), web page, video or conversation.
 subject's `sources/` folder — exactly the file the chapters were written from (for a split PDF: the part, never also the
 unsplit original). `make_pack.py` (skill) packages them into `<id>.noema.zip` (`pack.json` + `sources/…`) and records for each
 `fileName`, `size`, `sha256`, `mime` and, for PDFs, `pageCount`; it refuses a source without its file, a file without a source,
-and files over 50 MB (split them: `scripts/split_pdf.py`). `firstPage` (default 1) is the page number the chapters cite for the
+(any size: big files are stored in parts and joined again by the app; `scripts/split_pdf.py` only if you WANT one source per part). `firstPage` (default 1) is the page number the chapters cite for the
 file's first page — a part that starts at page 403 of the book has `"firstPage": 403`, so "σ. 410" opens page 8 of the part.
 The app imports the package with its files (📥, "Create with Claude", or the connector's `noema_finish_upload`, which asks for
 every packaged file); files can also be attached later in the app (📎 in the source's card).

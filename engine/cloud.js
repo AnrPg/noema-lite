@@ -151,6 +151,31 @@
     /* ---------- private storage: imported subject packs + database backups ---------- */
     async uploadObject(path, blob, type) { return call(`/storage/v1/object/noema-private/${uid()}/${path}`, { method: 'POST', body: blob, headers: { 'Content-Type': type, 'x-upsert': 'true' } }); },
     async downloadObject(path) { const r = await call(`/storage/v1/object/authenticated/noema-private/${uid()}/${path}`, { raw: true }); return r; },
+    /* ---------- big files: stored in parts (Supabase's free plan accepts ≤ 50 MB per object) ---------- */
+    chunkBytes() { return (CFG && CFG.storageChunkBytes) || 45 * 1024 * 1024; },
+    partPaths(path, chunks) { return chunks ? Array.from({ length: chunks }, (_, i) => `${path}.p${String(i).padStart(3, '0')}`) : [path]; },
+    /** Upload a blob of any size to bucket/path (path = full object name in the bucket) → { chunks } (0 = one object). */
+    async putFile(bucket, path, blob, type = 'application/octet-stream', { onProgress } = {}) {
+      const C = this.chunkBytes(); const n = blob.size > C ? Math.ceil(blob.size / C) : 0;
+      const parts = this.partPaths(path, n);
+      for (let i = 0; i < parts.length; i++) {
+        const body = n ? blob.slice(i * C, Math.min(blob.size, (i + 1) * C), 'application/octet-stream') : blob;
+        await call(`/storage/v1/object/${bucket}/${parts[i].split('/').map(encodeURIComponent).join('/')}`, { method: 'POST', body, headers: { 'Content-Type': n ? 'application/octet-stream' : (type || 'application/octet-stream'), 'x-upsert': 'true' } });
+        onProgress && onProgress(i + 1, parts.length);
+      }
+      return { chunks: n };
+    },
+    /** Download what putFile stored (public buckets need no sign-in) → Blob */
+    async getFile(bucket, path, chunks = 0, { isPublic = false, type = '' } = {}) {
+      const blobs = [];
+      for (const pth of this.partPaths(path, chunks)) {
+        const enc2 = pth.split('/').map(encodeURIComponent).join('/');
+        const r = isPublic ? await fetch(`${BASE}/storage/v1/object/public/${bucket}/${enc2}`) : await call(`/storage/v1/object/authenticated/${bucket}/${enc2}`, { raw: true });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        blobs.push(await r.blob());
+      }
+      return new Blob(blobs, { type: type || blobs[0]?.type || '' });
+    },
     async listObjects(prefix) { return call('/storage/v1/object/list/noema-private', { method: 'POST', body: { prefix: `${uid()}/${prefix}`.replace(/\/+$/, ''), limit: 1000, offset: 0, sortBy: { column: 'name', order: 'asc' } } }); },
     async deleteObjects(bucket, paths) { return call(`/storage/v1/object/${bucket}`, { method: 'DELETE', body: { prefixes: paths } }); },
     async uploadPack(p) { return this.uploadObject(`packs/${p.subject.id}.json`, new Blob([JSON.stringify(p)], { type: 'application/json' }), 'application/json'); },
@@ -159,32 +184,57 @@
     /* ---------- sharing: public packs (everyone) and shares with one person (docs/SHARING.md) ---------- */
     publicPackUrl(owner, id) { return `${BASE}/storage/v1/object/public/noema-public/${owner}/${id}.json`; },
     async listPublic() { return call('/rest/v1/noema_public_packs?select=*&order=updated_at.desc', { auth: !!session() }); },
-    async publish(pack, meta) {
+    /** files: [{ srcId, blob, name, type }] — the subject's source files go with it (pack.sharedFiles tells the receiver where). */
+    async publish(pack, meta, { files = [], onProgress } = {}) {
       const id = pack.subject.id;
+      if (files.length) { const up = await this.uploadShareFiles('noema-public', f => `${uid()}/${id}/sources/${f.safe}/file.${f.ext}`, files, onProgress); pack = { ...pack, sharedFiles: up.map }; meta = { ...meta, filePaths: up.paths, sourceFiles: files.length, sourceBytes: files.reduce((a, f) => a + f.blob.size, 0) }; }
+      else meta = { ...meta, filePaths: [], sourceFiles: 0 };
+      const old = ((await this.myPublished().catch(() => [])) || []).find(r => r.subject_id === id);
+      const stale = (old?.meta?.filePaths || []).filter(x => !(meta.filePaths || []).includes(x)); if (stale.length) await this.deleteObjects('noema-public', stale).catch(() => { });
       await call(`/storage/v1/object/noema-public/${uid()}/${id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } });
       const row = { owner: uid(), subject_id: id, owner_name: meta.ownerName || null, title: pack.subject.title, emoji: pack.subject.emoji || null, description: pack.subject.description || null, language: pack.subject.language || null, meta, updated_at: new Date().toISOString() };
       await call('/rest/v1/noema_public_packs?on_conflict=owner,subject_id', { method: 'POST', body: [row], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
     },
     async unpublish(id) {
+      const old = ((await this.myPublished().catch(() => [])) || []).find(r => r.subject_id === id);
       await call(`/rest/v1/noema_public_packs?owner=eq.${uid()}&subject_id=eq.${enc(id)}`, { method: 'DELETE' });
-      await this.deleteObjects('noema-public', [`${uid()}/${id}.json`]).catch(() => { });
+      await this.deleteObjects('noema-public', [`${uid()}/${id}.json`, ...(old?.meta?.filePaths || [])]).catch(() => { });
     },
-    async myPublished() { return call(`/rest/v1/noema_public_packs?select=subject_id,title,updated_at&owner=eq.${uid()}`); },
-    async shareWith(email, pack, meta, message) {
+    async myPublished() { return call(`/rest/v1/noema_public_packs?select=subject_id,title,updated_at,meta&owner=eq.${uid()}`); },
+    /** Upload source files for sharing → { map: { srcId: { path, name, type, size, chunks } }, paths: [every object written] } */
+    async uploadShareFiles(bucket, pathOf, files, onProgress) {
+      const map = {}, paths = []; let k = 0;
+      for (const f of files) {
+        const safe = String(f.srcId).replace(/[^a-zA-Z0-9_-]/g, '_'); const ext = ((String(f.name).toLowerCase().match(/\.([a-z0-9]{1,8})$/) || [])[1] || 'bin');
+        const path = pathOf({ ...f, safe, ext });
+        const r = await this.putFile(bucket, path, f.blob, f.type, { onProgress: (i, n) => onProgress && onProgress(k + i / n, files.length, f.name) });
+        map[f.srcId] = { path, name: f.name, type: f.type || '', size: f.blob.size, chunks: r.chunks }; paths.push(...this.partPaths(path, r.chunks)); k++;
+      }
+      return { map, paths };
+    },
+    async shareWith(email, pack, meta, message, { files = [], onProgress } = {}) {
       const to = String(email || '').trim().toLowerCase();
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) throw new Error('Please type a valid e-mail address.');
       if (to === (session()?.user?.email || '').toLowerCase()) throw new Error('That is your own e-mail address.');
       const u = session().user;
       const [row] = await call('/rest/v1/noema_shares', { method: 'POST', body: [{ from_user: uid(), from_email: u.email, from_name: meta.ownerName || u.user_metadata?.name || u.email, to_email: to, subject_id: pack.subject.id, title: pack.subject.title, meta, message: message || null }], headers: { Prefer: 'return=representation' } });
-      try { await call(`/storage/v1/object/noema-shared/${row.id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } }); }
+      try {
+        // files are named <share-id>.<source>.<ext>: the storage rules give them to exactly the same two people as the pack
+        if (files.length) {
+          const up = await this.uploadShareFiles('noema-shared', f => `${row.id}.src-${f.safe}.${f.ext}`, files, onProgress);
+          pack = { ...pack, sharedFiles: up.map };
+          await call(`/rest/v1/noema_shares?id=eq.${row.id}`, { method: 'PATCH', body: { meta: { ...meta, filePaths: up.paths, sourceFiles: files.length, sourceBytes: files.reduce((a, f) => a + f.blob.size, 0) } }, headers: { Prefer: 'return=minimal' } });
+        }
+        await call(`/storage/v1/object/noema-shared/${row.id}.json`, { method: 'POST', body: new Blob([JSON.stringify(pack)], { type: 'application/json' }), headers: { 'Content-Type': 'application/json', 'x-upsert': 'true' } });
+      }
       catch (e) { await call(`/rest/v1/noema_shares?id=eq.${row.id}`, { method: 'DELETE' }).catch(() => { }); throw e; }
       return row;
     },
     async incomingShares() { const me = (session()?.user?.email || '').toLowerCase(); if (!me) return []; return call(`/rest/v1/noema_shares?select=*&to_email=eq.${enc(me)}&status=eq.pending&order=created_at.desc`); },
-    async outgoingShares() { return call(`/rest/v1/noema_shares?select=id,to_email,subject_id,title,status,created_at,responded_at&from_user=eq.${uid()}&order=created_at.desc&limit=200`); },
+    async outgoingShares() { return call(`/rest/v1/noema_shares?select=id,to_email,subject_id,title,status,created_at,responded_at,meta&from_user=eq.${uid()}&order=created_at.desc&limit=200`); },
     async downloadShared(id) { const r = await call(`/storage/v1/object/authenticated/noema-shared/${id}.json`, { raw: true }); return r.json(); },
     async answerShare(id, accept) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: accept ? 'accepted' : 'rejected', responded_at: new Date().toISOString() }, headers: { Prefer: 'return=minimal' } }); },
-    async revokeShare(id) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: 'revoked' }, headers: { Prefer: 'return=minimal' } }); await this.deleteObjects('noema-shared', [`${id}.json`]).catch(() => { }); },
+    async revokeShare(id, filePaths = []) { await call(`/rest/v1/noema_shares?id=eq.${id}`, { method: 'PATCH', body: { status: 'revoked' }, headers: { Prefer: 'return=minimal' } }); await this.deleteObjects('noema-shared', [`${id}.json`, ...filePaths]).catch(() => { }); },
 
     /* ---------- 🩺 self-test against the REAL project with the signed-in account (cleans up after itself) ---------- */
     async selfTest(onStep = () => { }) {

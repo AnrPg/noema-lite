@@ -75,7 +75,7 @@
       if (x.sha256 != null) {
         if (!/^sources\/[^/].*/.test(String(x.file || '')) || String(x.file).split('/').includes('..')) E.push(`source ${x.id}: a packaged file must be "sources/<name>"`);
         if (!/^[0-9a-f]{64}$/.test(String(x.sha256))) E.push(`source ${x.id}: sha256 is not a SHA-256 hex digest`);
-        if (!(x.size > 0 && x.size <= 52428800)) E.push(`source ${x.id}: size must be 1 byte … 50 MB`);
+        if (!(x.size > 0)) E.push(`source ${x.id}: size must be a positive number of bytes`);
       }
       if (x.firstPage != null && !Number.isInteger(x.firstPage)) E.push(`source ${x.id}: firstPage must be a whole number`);
     }

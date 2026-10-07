@@ -41,25 +41,34 @@ async function register(token, uid, p, counts) {
 /* ---------- the pack's own source files (make_pack.py packages them: file "sources/<name>" + size + sha256) ---------- */
 const packaged = p => ((p?.sources?.sources) || []).filter(x => x && x.sha256 && /^sources\//.test(String(x.file || '')));
 const extOf = name => ((String(name || '').toLowerCase().match(/\.([a-z0-9]{1,8})$/) || [])[1] || 'bin');
+const CHUNK = () => CFG.storageChunkBytes || 45 * 1024 * 1024;   // = engine/cloud.js chunkBytes: big files are stored in parts (file.pdf.p000, .p001…)
+const chunksOf = x => (x.size > CHUNK() ? Math.ceil(x.size / CHUNK()) : 0);
+const partNames = (name, n) => (n ? Array.from({ length: n }, (_, i) => `${name}.p${String(i).padStart(3, '0')}`) : [name]);
 const srcDir = (uid, sid, src) => `${uid}/sources/${sid}/${String(src).replace(/[^a-zA-Z0-9_-]/g, '_')}/`;   // = engine/srcfiles.js cloudPath
 /** Which packaged source files are in the account's storage with the right size → { ok: [...], missing: [...] } */
 async function sourceFileStatus(token, uid, sid, srcs) {
   const out = { ok: [], missing: [] };
   await Promise.all(srcs.map(async x => {
-    const want = 'file.' + extOf(x.fileName || x.file);
-    const list = await sb('/storage/v1/object/list/noema-private', token, { method: 'POST', body: { prefix: srcDir(uid, sid, x.id), limit: 100 } }).catch(() => []);
-    const hit = (list || []).find(o => o.name === want);
-    (hit && Number(hit.metadata?.size) === Number(x.size) ? out.ok : out.missing).push(x);
+    const want = partNames('file.' + extOf(x.fileName || x.file), chunksOf(x));
+    const list = await sb('/storage/v1/object/list/noema-private', token, { method: 'POST', body: { prefix: srcDir(uid, sid, x.id), limit: 1000 } }).catch(() => []);
+    const got = want.map(n => (list || []).find(o => o.name === n));
+    const total = got.reduce((a, o) => a + Number(o?.metadata?.size || 0), 0);
+    (got.every(Boolean) && total === Number(x.size) ? out.ok : out.missing).push(x);
   }));
   return out;
 }
 async function uploadCommands(token, uid, sid, srcs) {
   const lines = [];
+  const sign = async path => { const r = await sb(`/storage/v1/object/upload/sign/noema-private/${path}`, token, { method: 'POST', headers: { 'x-upsert': 'true' } }); return `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`; };
   for (const x of srcs) {
-    const path = srcDir(uid, sid, x.id) + 'file.' + extOf(x.fileName || x.file);
-    const r = await sb(`/storage/v1/object/upload/sign/noema-private/${path}`, token, { method: 'POST', headers: { 'x-upsert': 'true' } });
-    const u = `${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.url}`;
-    lines.push(`# ${x.id} — ${x.fileName || x.file} (${(x.size / 1048576).toFixed(1)} MB)\ncurl -sS -X PUT -H "x-upsert: true" -H "Content-Type: ${x.mime || 'application/octet-stream'}" -H "apikey: ${CFG.supabaseKey}" --data-binary @"work/${sid}/${x.file}" "${u}"`);
+    const base = srcDir(uid, sid, x.id) + 'file.' + extOf(x.fileName || x.file); const n = chunksOf(x); const local = `work/${sid}/${x.file}`;
+    if (!n) { lines.push(`# ${x.id} — ${x.fileName || x.file} (${(x.size / 1048576).toFixed(1)} MB)\ncurl -sS -X PUT -H "x-upsert: true" -H "Content-Type: ${x.mime || 'application/octet-stream'}" -H "apikey: ${CFG.supabaseKey}" --data-binary @"${local}" "${await sign(base)}"`); continue; }
+    // a big file: the storage takes ≤ 50 MB per object → upload it in ${n} parts (the app joins them again)
+    const tmp = `/tmp/noema-${x.id.replace(/[^a-zA-Z0-9_-]/g, '_')}.p`;
+    const cmds = [`# ${x.id} — ${x.fileName || x.file} (${(x.size / 1048576).toFixed(1)} MB, in ${n} parts)`, `split -b ${CHUNK()} -d -a 3 "${local}" ${tmp}`];
+    const names = partNames(base, n);
+    for (let i = 0; i < n; i++) cmds.push(`curl -sS -X PUT -H "x-upsert: true" -H "Content-Type: application/octet-stream" -H "apikey: ${CFG.supabaseKey}" --data-binary @${tmp}${String(i).padStart(3, '0')} "${await sign(names[i])}"`);
+    lines.push(cmds.join('\n'));
   }
   return lines.join('\n\n');
 }
@@ -69,7 +78,7 @@ async function indexSourceFiles(token, uid, sid, srcs) {
   const key = 'a:srcfiles:' + sid; const cur = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent(key)}`, token).catch(() => []);
   let ix = {}; try { ix = JSON.parse(cur?.[0]?.value || '{}'); } catch (e) { }
   const now = new Date().toISOString();
-  for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude' }; }
+  for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude', ...(chunksOf(x) ? { chunks: chunksOf(x) } : {}) }; }
   await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: now }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 }
 /** The pack is stored and valid: check its packaged files, then add it to the picker — or say which files to upload. */

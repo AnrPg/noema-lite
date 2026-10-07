@@ -163,7 +163,27 @@ function tutorContextText() {
   if (c.kind === 'chapter') return 'COURSE NOTES:\n' + chapterOutline(CH[c.id]);
   if (c.kind === 'playbook') { const d = PB[c.id]; return `COURSE NOTES — Debug playbook "${d.title}":\nSymptom: ${d.symptom}\nAsk yourself: ${d.askYourself.join(' | ')}\nSteps: ${d.steps.map(s => s.do + (s.code ? ' [' + s.code + ']' : '')).join(' | ')}\nRoot causes: ${d.rootCauses.join('; ')}\nFix: ${d.fix}`; }
   if (c.kind === 'exercise') return c.text;
+  if (c.kind === 'item') {   // 💡 on one part of the lesson: that part first, then the lesson around it
+    const sec = c.sec && SEC[c.sec] ? (SEC[c.sec]._full ? { ...SEC[c.sec], blocks: SEC[c.sec]._full.blocks } : SEC[c.sec]) : null; const ch = sec ? sec._ch : c.ch && CH[c.ch];
+    return `FOCUS — the part of the lesson the learner asks about. Explain THIS first and in its own terms; then connect it to the rest of the lesson, and go beyond the notes whenever that helps understanding:\n${String(c.text || c.label).slice(0, 8000)}` +
+      (sec ? `\n\nWIDER CONTEXT — Chapter ${ch.num} "${ch.title}", section "${sec.title}" (the lesson it belongs to):\n` + sectionText(sec).slice(0, 14000) : '') +
+      (ch ? '\n\nTHE CHAPTER:\n' + chapterOutline(ch).slice(0, 6000) : '');
+  }
   return '';
+}
+/** 💡 Explain this — a small icon in the top corner of a lesson part (shown on hover; always faintly on touch screens).
+    It opens the tutor dock in “Explain” mode with that part as the focus and its section + chapter as wider context. */
+function explainable(el, get) {
+  if (!el || [...el.children].some(k => k.classList.contains('xbtn'))) return el;
+  el.classList.add('xable');
+  el.append(h('button', { class: 'xbtn', type: 'button', title: 'Explain this (AI)', 'aria-label': 'Explain this with the AI tutor', onclick: e => { e.stopPropagation(); e.preventDefault(); explainItem(get()); } }, '💡'));
+  return el;
+}
+function explainItem({ label, text, sec, ch, what = 'part of the lesson' }) {
+  const plain = String(label || text || '').replace(/[*_`#>\[\]]/g, '').replace(/\s+/g, ' ').trim();
+  const short = plain.length > 70 ? plain.slice(0, 68).replace(/\s+\S*$/, '') + '…' : plain;
+  let hsh = 0; for (const x of String(text || label)) hsh = (hsh * 31 + x.charCodeAt(0)) >>> 0;
+  openTutor({ kind: 'item', id: 'x' + hsh.toString(36), label: short, text: text || label, sec: sec?.id || sec || null, ch: ch?.id || ch || null }, 'explain', `Explain this ${what} to me: “${short}”`);
 }
 function setTutorContext(ctx) { T.ctx = ctx; if (T.open) renderTutor(); }
 function ctxLabel() {
@@ -173,6 +193,7 @@ function ctxLabel() {
   if (c.kind === 'chapter') return CH[c.id] ? `📍 Ch${CH[c.id].num} · ${CH[c.id].title}` : '📍 ' + (c.label || 'Chapter');
   if (c.kind === 'playbook') return PB[c.id] ? `🔧 ${PB[c.id].title}` : '🔧 ' + (c.label || 'Debug drill');
   if (c.kind === 'exercise') return '🧩 This exercise';
+  if (c.kind === 'item') return '🔎 ' + (c.label || 'This part');
   return '';
 }
 function openTutor(ctx, mode, autoMsg) {

@@ -30,14 +30,14 @@ From each part the app also reads a **page** ("σ.", "σελ.", "p.", "pp.", "pa
 | where | what |
 |---|---|
 | this device | IndexedDB `noema-files` (instant, offline) |
-| your cloud account | private storage `<user>/sources/<subject>/<source>/file.<ext>` (≤ 50 MB per file) |
+| your cloud account | private storage `<user>/sources/<subject>/<source>/file.<ext>` — any size: files over 45 MB are stored in parts `file.<ext>.p000, .p001…` (Supabase takes ≤ 50 MB per object) and joined again when opened |
 | every device | the synced index `a:srcfiles:<subject>` (original name, type, size) — a device without the file downloads it on first preview |
 
 How files get there:
 * **In the package.** Claude's skill builds `<id>.noema.zip` = `pack.json` + `sources/<file>` for every file-based source —
   exactly the files it used: each part of a split PDF (`scripts/split_pdf.py`) is its own source and its own file, never the
   unsplit original next to it. `make_pack.py` refuses a source without its file, a file without its source and files over
-  50 MB, and records `fileName`, `size`, `sha256`, `mime`, `pageCount`. The app attaches each file to its source after checking
+  2 GB, and records `fileName`, `size`, `sha256`, `mime`, `pageCount`. The app attaches each file to its source after checking
   size and SHA-256:
   * **📥 Import subject pack** with the `.noema.zip` (a plain `.json` imports too, and says which files it lacks);
   * **Create with Claude → here in noema-lite (API key)**: Claude copies the package to `$OUTPUT_DIR`; the app imports it with
@@ -49,6 +49,7 @@ How files get there:
 * Sources with a web address (a `url`, or a link in the subtitle) are previewed from the web (directly, or
   through `/api/file` when the site blocks browsers — http(s) only, no private addresses, ≤ 25 MB).
 * Deleting a subject deletes its files too.
+* Sharing a subject (public or with a person) shares its files too — docs/SHARING.md.
 
 **Pages of split PDFs.** Chapters cite the book's page numbers; a part has `"firstPage"` (the book page it starts at), so
 "σ. 410" in a part with `firstPage` 403 opens page 8 of that part. Citations below `firstPage` are taken as pages of the part.

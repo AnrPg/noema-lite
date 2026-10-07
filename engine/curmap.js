@@ -290,7 +290,7 @@ window.NoemaCurMap = (() => {
         if (!parsed) { err.textContent = '👆 Paste a map that can be read (step 1).'; return; }
         const needPlan = Object.values(parsed.nodes).some(n => !n.chapters?.length);
         if (needPlan && !LLM().pick(acc, provider.value)) { err.textContent = '👆 Planning the chapters needs a Claude API key or a Gemini key (step 4).'; return; }
-        const big = files.find(f => f.size > (window.NoemaSrcFiles?.MAX || 5e7)); if (big) { err.textContent = `⚠️ ${big.name} is over 50 MB — split it (e.g. one PDF per chapter).`; return; }
+        const big = files.find(f => f.size > (window.NoemaSrcFiles?.MAX || 2147483648)); if (big) { err.textContent = `⚠️ ${big.name} is too big for a browser to keep (over 2 GB).`; return; }
         go.disabled = true;
         try {
           const c = await I.create(acc, parsed, { title: title.value.trim(), language: lang.value, learner: learner.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8), files: matches.filter(m => m.id), source: text.value, onLog: m => { busy.textContent = m; } });

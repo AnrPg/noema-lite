@@ -176,6 +176,7 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 .cg-steptitle .cg-tip[open]{flex-basis:100%}
 .cg-kstat.ok{color:var(--ok)}.cg-kstat.bad{color:var(--bad)}
 .cg-model{margin-top:6px}.cg-model select{max-width:320px;display:inline-block}
+.cg-setup{display:grid;gap:10px;margin-top:10px}.cg-way{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--card,transparent)}.cg-way>summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;gap:4px;align-items:baseline}.cg-way>summary::-webkit-details-marker{display:none}.cg-way>summary::before{content:'▸';margin-right:6px;transition:transform .15s}.cg-way[open]>summary::before{transform:rotate(90deg)}.cg-way .cg-steps{margin-top:10px}
 .cg-drop{display:flex;align-items:center;gap:6px;justify-content:center;padding:18px;border:2px dashed var(--line);border-radius:14px;cursor:pointer;font-weight:700}
 .cg-drop.on,.cg-drop:hover{border-color:var(--violet);background:var(--violet-bg)}
 .cg-files{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:4px;font-size:14px}
@@ -294,3 +295,11 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-chline{display:flex;gap:4px;align-items:center}.cm-chline .noema-input{flex:1;margin:0}
 .cm-chrow details{margin:4px 0 0}.cm-chrow textarea{margin-top:4px}
 .cm-editrow{margin:6px 0 10px}
+
+/* 💡 explain this (hover a part of the lesson) */
+.xable{position:relative}
+.xbtn{position:absolute;top:4px;right:4px;z-index:3;width:28px;height:28px;display:grid;place-items:center;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--card,#fff);box-shadow:0 1px 4px rgba(0,0,0,.08);font-size:13px;line-height:1;cursor:pointer;opacity:0;transform:scale(.9);transition:opacity .15s,transform .15s}
+.xable:hover:not(:has(.xable:hover))>.xbtn,.xbtn:focus-visible{opacity:.9;transform:none}
+.xbtn:hover{opacity:1;border-color:var(--violet);box-shadow:0 2px 8px rgba(99,102,241,.25)}
+@media (hover:none){.xbtn{opacity:.4;transform:none;width:26px;height:26px}.xable:not(:has(.xable))>.xbtn{opacity:.5}}
+.b-list li.xable,.terms .term.xable,.compare>div.xable{padding-right:30px}

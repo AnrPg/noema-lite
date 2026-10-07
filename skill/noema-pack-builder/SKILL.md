@@ -24,8 +24,9 @@ choose sensible defaults, say them in one line, and carry on.
 
 ## 1. Read every source completely
 - PDFs: `python3 scripts/pdf_text.py FILE.pdf > text.txt` (page-numbered). Read all of it, in chunks.
-- A PDF over 50 MB (the app's limit per file), or a whole book you want to treat chapter by chapter: split it with
-  `python3 scripts/split_pdf.py BOOK.pdf work/<id>/sources --ranges 1-24,25-60,… --name ecb` (or `--max-mb 45`).
+- Files of any size are fine (the app and the connector store big files in parts). Split a PDF only when you WANT the
+  parts as separate sources (e.g. a whole book treated chapter by chapter):
+  `python3 scripts/split_pdf.py BOOK.pdf work/<id>/sources --ranges 1-24,25-60,… --name ecb` (or `--max-mb N`).
   It prints a `sources.json` entry per part with `"firstPage"` (the book page where the part starts) — keep citing the
   **book's page numbers** and the app opens the right page of the right part. If the user already gave you parts,
   each part is simply its own source.
@@ -101,7 +102,8 @@ that every file the user gave you (or each of its parts) is there.
 - **With the noema-lite connector** (tools `noema_*` are available):
   1. `noema_start_upload(subject_id)` → run the returned `curl` command on `work/<id>/build/<id>.json`;
   2. `noema_finish_upload(subject_id)` → it checks the pack, then **asks for the source files** packaged in it:
-     run the `curl` commands it returns (one per file — each part of a split PDF), then call
+     run the commands it returns (a `curl` per file — each part of a split PDF; a file over 45 MB comes as a `split`
+     command plus one `curl` per part: no size limit), then call
      `noema_finish_upload` again. The subject is saved only when every packaged file is in the account (right size).
   Small packs (≤ 1.5 MB) can use `noema_save_pack` instead of step 1 (step 2's file uploads still apply).
   The subject appears in the user's noema-lite picker (cloud account) with its files — tell them.

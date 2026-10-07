@@ -157,7 +157,7 @@ function chapterView(id, tab) {
     h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
       h('div', { class: 'grow' }, h('div', { class: 'num' }, `Chapter ${c.num}`), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
       h('div', { style: { position: 'relative', width: '76px', height: '76px', flex: 'none' } }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { style: { position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontWeight: 800 } }, Math.round((p.sr + p.ex) * 50) + '%'))),
-    h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)),
+    explainable(h('div', { class: 'mantrabox' }, h('span', {}, '🧭'), F(c.mantra)), () => ({ label: c.mantra, text: `The mental model of chapter ${c.num} "${c.title}": ${c.mantra}`, ch: c, what: 'mental model' })),
     h('div', { class: 'tabs' }, ...tabs.map(([k, l, n]) => h('button', { class: tab === k ? 'on' : '', onclick: () => go(`#/ch/${id}/${k}`) }, l, h('span', { class: 'n' }, n)))),
     body);
   animateRings(v);
@@ -180,7 +180,7 @@ function chapterView(id, tab) {
   else if (tab === 'traps') {
     body.append(h('p', { class: 'muted' }, 'Every trap in this chapter, side by side. Read them, then hit the trap drill.'),
       h('div', { class: 'row', style: { marginBottom: '14px' } }, h('button', { class: 'btn primary', onclick: () => startRun(c.exercises.filter(e => e.tags.some(t => ['pitfall', 'exam'].includes(t))), { title: `⚠️ Trap drill · Ch${c.num}`, count: 12, back: `#/ch/${id}/traps` }) }, '⚠️ Start trap drill')),
-      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => h('div', { class: 'callout pitfall', style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null))));
+      h('div', { style: { display: 'grid', gap: '10px' } }, ...c.pitfalls.map((p, i) => explainable(h('div', { class: 'callout pitfall', style: { animation: `slideIn .4s ${i * 30}ms both` } }, h('span', { class: 'ci' }, '⚠️'), h('b', { class: 't', html: fmt(p.title) }), h('div', { html: fmt(p.text) }), p.fix ? h('div', { style: { marginTop: '6px' }, html: '✅ <b>Fix:</b> ' + fmt(p.fix) }) : null), () => ({ label: p.title, text: `${p.title}: ${p.text}${p.fix ? ' — Fix: ' + p.fix : ''}`, ch: c, what: 'trap' })))));
   }
 }
 
@@ -210,6 +210,16 @@ function renderBlock(b, i) {
   }
   return wrap;
 }
+/** 💡 on a block and on its cards / items (compare columns, terms, list items, table rows). */
+const BLOCK_WHAT = { p: 'paragraph', list: 'list', code: 'code example', figure: 'figure', diagram: 'diagram', table: 'table', callout: 'note', compare: 'comparison', flow: 'process', reveal: 'question', ask: 'set of questions', terms: 'set of terms' };
+function explainParts(el, b, s) {
+  explainable(el, () => ({ label: b.title || b.label || b.caption || (b.t === 'figure' ? (MEDIA[b.media]?.alt || 'this figure') : blockText(b)), text: blockText(b), sec: s, what: BLOCK_WHAT[b.t] || 'part of the lesson' }));
+  if (b.t === 'compare') $$('.compare > div', el).forEach((d, k) => { const it = b.items[k]; if (it) explainable(d, () => ({ label: it.title, text: it.title + ':\n' + it.points.map(p => '- ' + p).join('\n') + '\n\n(Compared with: ' + b.items.filter(x => x !== it).map(x => x.title).join(', ') + ')', sec: s, what: 'card' })); });
+  if (b.t === 'terms') $$('.term', el).forEach((d, k) => { const t = b.items[k]; if (t) explainable(d, () => ({ label: t.term, text: `${t.term}: ${t.def}`, sec: s, what: 'term' })); });
+  if (b.t === 'list') $$('li', el).forEach((d, k) => { const x = b.items[k]; if (x && String(x).length > 30) explainable(d, () => ({ label: x, text: x + '\n\n(One item of the list:\n' + blockText(b) + ')', sec: s, what: 'point' })); });
+  if (b.t === 'table') $$('tbody tr', el).forEach((d, k) => { const r = b.rows[k]; if (r) explainable(d.lastElementChild || d, () => ({ label: r[0], text: b.head.map((hd, j) => `${hd}: ${r[j] ?? ''}`).join('\n'), sec: s, what: 'row of the table' })); });
+  return el;
+}
 function chunkBlocks(blocks) {
   // group into bite-size chunks of ~3–4 blocks, never splitting right after a heading-like callout
   const out = []; let cur = [], weight = 0;
@@ -236,12 +246,12 @@ function sectionView(sid) {
   const v = view(h('div', { class: 'reader' },
     h('button', { class: 'back', onclick: () => go('#/ch/' + c.id) }, `← ${c.emoji} Ch${c.num} · ${c.title}`),
     pl,
-    h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, `Section ${s._j + 1} / ${c.sections.length}`), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ read') : null),
-      h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null),
+    explainable(h('div', { class: 'sechead' }, h('div', { class: 'row' }, h('span', { class: 'pill c' }, `Section ${s._j + 1} / ${c.sections.length}`), S.read[sid] ? h('span', { class: 'pill', style: { background: 'var(--ok-bg)', color: 'var(--ok)' } }, '✓ read') : null),
+      h('h1', { style: { marginTop: '10px' } }, s.title), s.hook ? h('p', { class: 'hook', html: fmt(s.hook) }) : null), () => ({ label: s.title, text: `The whole section "${s.title}" — ${s.hook || ''} (give me the big picture of this section)`, sec: s, what: 'section' })),
     body, tail));
   function draw(scroll) {
     body.innerHTML = '';
-    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); markNewBlock(el, b, c); body.append(el); }));
+    chunks.slice(0, shown).forEach((ch, ci) => ch.forEach((b, i) => { const el = renderBlock(b, ci === shown - 1 ? i : 0); markNewBlock(el, b, c); explainParts(el, b, s); body.append(el); }));
     pl.firstChild.style.width = (shown / chunks.length * 100) + '%';
     tail.innerHTML = '';
     if (shown < chunks.length) {

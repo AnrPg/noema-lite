@@ -5,8 +5,14 @@ person**. Library subjects (Databricks…) are already available to everyone and
 
 Sharing needs a **cloud account** (⚙️ → Cloud). On a local profile the 🔗 dialog offers the pack file to
 download instead — a package `<id>.noema.zip` with the subject **and its attached source files** — so you can send it
-any other way (the other person uses *📥 Import subject pack*). Public and person-to-person shares carry the subject
-only: your source files stay in your private storage.
+any other way (the other person uses *📥 Import subject pack*).
+
+**Source files travel with every share** (📎 *Include its N source files*, ticked by default): public subjects put them in
+the public bucket (`noema-public/<you>/<subject>/sources/<source>/file.<ext>`), a share with one person in the private
+share bucket (`noema-shared/<share-id>.src-<source>.<ext>` — the existing storage rules give them to exactly the two of
+you). The pack names them in `sharedFiles`; when the subject is accepted or chosen in 🌍 Explore, the app copies each
+file into the receiver's own account (device + private cloud) and drops the addresses. Files over 45 MB are stored in
+parts and joined again. Withdrawing a share or a public subject deletes its copies of the files.
 
 ## 1. Where the buttons are
 

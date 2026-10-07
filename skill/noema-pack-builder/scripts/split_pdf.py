@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Split a PDF into parts — each part becomes ITS OWN source (sources.json) and is packaged as it is.
   python3 split_pdf.py BOOK.pdf work/<id>/sources --ranges 1-24,25-60,61-120 [--name ecb]
-  python3 split_pdf.py BOOK.pdf work/<id>/sources --max-mb 45 [--name ecb]       (equal parts under the limit)
+  python3 split_pdf.py BOOK.pdf work/<id>/sources --max-mb 45 [--name ecb]       (equal parts under a size)
 Writes <name>_p<from>-<to>.pdf and prints a sources.json entry for every part, with "firstPage" = the page number of
 the ORIGINAL book where the part starts: keep citing the original page numbers ("σ. 403") and the app opens the part
 at the right page. Do NOT keep the unsplit original in sources/ (make_pack.py refuses files no source points to)."""

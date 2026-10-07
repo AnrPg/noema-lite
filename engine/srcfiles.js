@@ -15,7 +15,8 @@ window.NoemaSrcFiles = (() => {
   const cloudOn = acc => !!(window.NoemaCloud && NoemaCloud.session() && acc === 'u_' + NoemaCloud.session().user.id);
   const safeExt = name => ((String(name).toLowerCase().match(/\.([a-z0-9]{1,8})$/) || [])[1] || 'bin');
   const cloudPath = (subj, src, name) => `sources/${subj}/${String(src).replace(/[^a-zA-Z0-9_-]/g, '_')}/file.${safeExt(name)}`;
-  const MAX = 50 * 1024 * 1024;
+  const MAX = 2 * 1024 * 1024 * 1024;   // a practical browser limit; the cloud stores big files in parts (NoemaCloud.putFile)
+  const fullPath = (subj, src, name) => `${NoemaCloud.session().user.id}/${cloudPath(subj, src, name)}`;
 
   function index(acc, subj) { try { return JSON.parse(localStorage.getItem(idxKey(acc, subj)) || '{}'); } catch (e) { return {}; } }
   function setIndex(acc, subj, ix) { const v = JSON.stringify(ix); if (kv()) { if (Object.keys(ix).length) kv().set(idxKey(acc, subj), v); else kv().del(idxKey(acc, subj)); } else localStorage.setItem(idxKey(acc, subj), v); }
@@ -23,11 +24,15 @@ window.NoemaSrcFiles = (() => {
   /** Attach (or replace) the file of a source. */
   async function put(acc, subj, src, file, { name } = {}) {
     name = name || file.name || 'file'; const type = file.type || '';
-    if (file.size > MAX) throw new Error(`The file is ${Math.round(file.size / 1048576)} MB — the limit is 50 MB. Split it (e.g. one PDF per chapter) and attach the parts to separate sources.`);
+    if (file.size > MAX) throw new Error(`The file is ${Math.round(file.size / 1048576)} MB — too big for a browser to keep (limit ${Math.round(MAX / 1073741824)} GB).`);
     await DB.put(key(acc, subj, src), { blob: file, name, type, size: file.size, added: new Date().toISOString() });
     const meta = { name, type, size: file.size, added: new Date().toISOString(), cloud: false };
+    const old = index(acc, subj)[src];
     if (cloudOn(acc)) {
-      try { await NoemaCloud.uploadObject(cloudPath(subj, src, name), file, type || 'application/octet-stream'); meta.cloud = true; }
+      try {
+        if (old?.cloud && (old.chunks || cloudPath(subj, src, old.name) !== cloudPath(subj, src, name))) await NoemaCloud.deleteObjects('noema-private', NoemaCloud.partPaths(fullPath(subj, src, old.name), old.chunks || 0)).catch(() => { });
+        const r = await NoemaCloud.putFile('noema-private', fullPath(subj, src, name), file, type || 'application/octet-stream'); meta.cloud = true; if (r.chunks) meta.chunks = r.chunks;
+      }
       catch (e) { console.warn('[source files] cloud upload failed — kept on this device', e); meta.cloudError = e.message; }
     }
     const ix = index(acc, subj); ix[src] = meta; setIndex(acc, subj, ix);
@@ -38,15 +43,15 @@ window.NoemaSrcFiles = (() => {
     const hit = await DB.get(key(acc, subj, src)).catch(() => null); if (hit?.blob) return hit;
     const meta = index(acc, subj)[src];
     if (meta?.cloud && cloudOn(acc)) {
-      const r = await NoemaCloud.downloadObject(cloudPath(subj, src, meta.name)).catch(() => null);
-      if (r?.ok) { const blob = await r.blob(); const rec = { blob, name: meta.name, type: meta.type || blob.type, size: blob.size, added: meta.added }; await DB.put(key(acc, subj, src), rec).catch(() => { }); return rec; }
+      const blob = await NoemaCloud.getFile('noema-private', fullPath(subj, src, meta.name), meta.chunks || 0, { type: meta.type }).catch(() => null);
+      if (blob) { const rec = { blob, name: meta.name, type: meta.type || blob.type, size: blob.size, added: meta.added }; await DB.put(key(acc, subj, src), rec).catch(() => { }); return rec; }
     }
     return null;
   }
   async function remove(acc, subj, src) {
     const meta = index(acc, subj)[src];
     await DB.del(key(acc, subj, src)).catch(() => { });
-    if (meta?.cloud && cloudOn(acc)) await NoemaCloud.deleteObjects('noema-private', [`${NoemaCloud.session().user.id}/${cloudPath(subj, src, meta.name)}`]).catch(() => { });
+    if (meta?.cloud && cloudOn(acc)) await NoemaCloud.deleteObjects('noema-private', NoemaCloud.partPaths(fullPath(subj, src, meta.name), meta.chunks || 0)).catch(() => { });
     const ix = index(acc, subj); delete ix[src]; setIndex(acc, subj, ix);
   }
   /** Remove every file of a subject (when the subject is deleted). */
@@ -131,5 +136,24 @@ window.NoemaSrcFiles = (() => {
     if (s?.pageCount && q > s.pageCount) q = s.pageCount;
     return q;
   }
-  return { put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX, isZip, packaged, readBundle, attachPackaged, makeBundle, downloadBundle, sha256, filePage };
+  /** The attached files of a subject, ready to share: [{ srcId, blob, name, type }] (downloads the ones not on this device). */
+  async function forSharing(acc, subj) {
+    const out = [];
+    for (const [src, m] of Object.entries(index(acc, subj))) { const rec = await get(acc, subj, src).catch(() => null); if (rec?.blob) out.push({ srcId: src, blob: rec.blob, name: rec.name || m.name, type: rec.type || m.type || '' }); }
+    return out;
+  }
+  /** After importing a shared / public subject: fetch the files it came with into this account. */
+  async function attachShared(acc, pack, bucket, { onLog = () => { } } = {}) {
+    const res = { attached: 0, failed: [] };
+    for (const [src, f] of Object.entries(pack.sharedFiles || {})) {
+      try {
+        onLog(`📎 ${f.name}…`);
+        const blob = await NoemaCloud.getFile(bucket, f.path, f.chunks || 0, { isPublic: bucket === 'noema-public', type: f.type });
+        if (f.size && blob.size !== f.size) throw new Error('incomplete download');
+        await put(acc, pack.subject.id, src, new File([blob], f.name, { type: f.type || blob.type || '' }), { name: f.name }); res.attached++;
+      } catch (e) { console.warn('[shared files]', f.name, e); res.failed.push(f.name); }
+    }
+    return res;
+  }
+  return { forSharing, attachShared, put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX, isZip, packaged, readBundle, attachPackaged, makeBundle, downloadBundle, sha256, filePage };
 })();

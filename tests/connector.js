@@ -13,7 +13,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const cfgJs = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', autoBackupMinutes: 5, askSubjectOnStart: true };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfgJs });
   // the function exactly as tools/build.py generates it, but pointed at the emulator
-  const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', library: [{ id: 'databricks', title: 'Databricks', counts: { chapters: 13, exercises: 1715 } }] };
+  const CFG = { siteUrl: BASE, supabaseUrl: BASE, supabaseKey: 'sb_publishable_test', storageChunkBytes: 4500, library: [{ id: 'databricks', title: 'Databricks', counts: { chapters: 13, exercises: 1715 } }] };
   const DOCS = { workflow: fs.readFileSync(path.join(ROOT, 'skill/noema-pack-builder/SKILL.md'), 'utf8'), content: fs.readFileSync(path.join(ROOT, 'tools/CONTENT_SPEC.md'), 'utf8'), visual: fs.readFileSync(path.join(ROOT, 'docs/VISUAL.md'), 'utf8') };
   const fn = path.join(os.tmpdir(), `noema-mcp-${process.pid}.mjs`);
   fs.writeFileSync(fn, `const CFG = ${JSON.stringify(CFG)};\nconst DOCS = ${JSON.stringify(DOCS)};\n` + fs.readFileSync(path.join(ROOT, 'engine/packcheck.js'), 'utf8') + '\n' + fs.readFileSync(path.join(ROOT, 'cloud/mcp/server.mjs'), 'utf8'));   // as tools/build.py assembles it
@@ -93,20 +93,24 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   const s3 = await tool('noema_start_upload', { subject_id: 'packaged-physics' });
   ok(/work\/packaged-physics\/build\/packaged-physics\.json/.test(s3.content[0].text), 'start_upload points at the pack written by make_pack.py');
   await fetch(s3.content[0].text.match(/https?:\/\/\S+token=\S+/)[0], { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(pk) });
-  const cmds = t => [...t.matchAll(/^# (\S+) — [^\n]*\ncurl [^\n]*--data-binary @"([^"]+)" "([^"]+)"/gm)].map(m => ({ id: m[1], local: m[2], url: m[3] }));
+  // the commands, one block per file: a curl, or (big file) split into parts + one curl per part
+  const cmds = t => t.split(/\n\n/).filter(b => /^# \S+ — /.test(b)).map(b => ({ id: b.match(/^# (\S+)/)[1], local: (b.match(/--data-binary @"([^"]+)"/) || b.match(/split -b \d+ -d -a 3 "([^"]+)"/) || [])[1], split: +((b.match(/split -b (\d+)/) || [])[1] || 0), urls: [...b.matchAll(/curl [^\n]* "([^"]+)"/g)].map(m => m[1]) }));
+  const putF = (u, buf) => fetch(u, { method: 'PUT', headers: { 'x-upsert': 'true', apikey: 'k', 'content-type': 'application/octet-stream' }, body: buf });
+  const run = async (c, buf) => { if (!c.split) return putF(c.urls[0], buf); for (let i = 0; i < c.urls.length; i++) await putF(c.urls[i], buf.subarray(i * c.split, (i + 1) * c.split)); };   // what `split` + the curls do
   const f1 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' }); const c1 = cmds(f1.content[0].text);
-  ok(f1.isError && c1.length === 2 && c1[0].local === 'work/packaged-physics/sources/ecb_p1-12.pdf' && /Content-Type: application\/pdf/.test(f1.content[0].text) && !srv.state.kv[uid]['a:packmeta:packaged-physics'], 'finish_upload refuses to save while source files are missing and returns one upload command per file (not saved yet)');
-  const putF = (u, buf) => fetch(u, { method: 'PUT', headers: { 'x-upsert': 'true', apikey: 'k' }, body: buf });
-  await putF(c1.find(c => c.id === 'ecb-1').url, F['ecb-1']);
-  await putF(c1.find(c => c.id === 'ecb-2').url, F['ecb-2'].subarray(0, 100));   // a broken (short) upload
+  ok(f1.isError && c1.length === 2 && c1[0].local === 'work/packaged-physics/sources/ecb_p1-12.pdf' && /Content-Type: application\/pdf/.test(f1.content[0].text) && !srv.state.kv[uid]['a:packmeta:packaged-physics'], 'finish_upload refuses to save while source files are missing and returns the upload commands of each file (not saved yet)');
+  const big = c1.find(c => c.id === 'ecb-2');
+  ok(big.split === 4500 && big.urls.length === 2 && big.local === 'work/packaged-physics/sources/ecb_p13-30.pdf' && /in 2 parts/.test(f1.content[0].text), 'a file over the storage limit is uploaded in parts: split + one signed URL per part (no size limit for Claude)');
+  await run(c1.find(c => c.id === 'ecb-1'), F['ecb-1']);
+  await putF(big.urls[0], F['ecb-2'].subarray(0, 4500));   // only the first part arrives
   const f2 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' }); const c2 = cmds(f2.content[0].text);
-  ok(f2.isError && c2.length === 1 && c2[0].id === 'ecb-2', 'an uploaded file with the wrong size still counts as missing; the good one is accepted');
-  await putF(c2[0].url, F['ecb-2']);
+  ok(f2.isError && c2.length === 1 && c2[0].id === 'ecb-2', 'a file with a part missing still counts as missing; the complete one is accepted');
+  await run(c2[0], F['ecb-2']);
   const f3 = await tool('noema_finish_upload', { subject_id: 'packaged-physics' });
   const ix = JSON.parse(srv.state.kv[uid]?.['a:srcfiles:packaged-physics']?.value || '{}');
   ok(!f3.isError && /📎 2 source file\(s\)/.test(f3.content[0].text) && srv.state.kv[uid]['a:packmeta:packaged-physics'], 'with every file uploaded the subject is saved: ' + f3.content[0].text.split('\n').pop());
-  ok(ix['ecb-1']?.size === F['ecb-1'].length && ix['ecb-2']?.name === 'Βιβλίο μέρος 2.pdf' && ix['ecb-2'].type === 'application/pdf' && ix['ecb-2'].cloud && !ix.web, 'the synced index lists each file (original name, type, size) → 👁 on every device');
-  ok(Buffer.compare(Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-2/file.pdf`].data), F['ecb-2']) === 0, 'the storage holds exactly the packaged file (same path as the app uses)');
+  ok(ix['ecb-1']?.size === F['ecb-1'].length && !ix['ecb-1'].chunks && ix['ecb-2']?.name === 'Βιβλίο μέρος 2.pdf' && ix['ecb-2'].type === 'application/pdf' && ix['ecb-2'].chunks === 2 && ix['ecb-2'].cloud && !ix.web, 'the synced index lists each file (original name, type, size, parts) → 👁 on every device');
+  ok(Buffer.compare(Buffer.concat([0, 1].map(i => Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-2/file.pdf.p00${i}`].data))), F['ecb-2']) === 0 && Buffer.compare(Buffer.from(srv.state.files[`${uid}/sources/packaged-physics/ecb-1/file.pdf`].data), F['ecb-1']) === 0, 'the storage holds exactly the packaged files (same paths as the app uses)');
   const inl = JSON.parse(JSON.stringify(pk)); inl.subject.id = 'inline-with-files'; inl.subject.title = 'Inline with files';
   const si = await tool('noema_save_pack', { pack_json: JSON.stringify(inl) });
   ok(si.isError && cmds(si.content[0].text).length === 2 && !srv.state.kv[uid]['a:packmeta:inline-with-files'], 'save_pack applies the same file check');
@@ -147,6 +151,7 @@ const PORT = 54331, BASE = `http://localhost:${PORT}`;
   await p.click('.noema-ovbox button:has-text("Close")'); await wait(300);
   await p.click('.noema-chip:has-text("Physics by Claude")'); await wait(1800);
   ok(await p.evaluate(() => typeof SUBJ !== 'undefined' && SUBJ.id === 'physics-by-claude' && ALL_EX.length === 14), 'it opens: downloaded from the user’s private storage');
+  ok(await p.evaluate(async n => (await NoemaSrcFiles.get(Noema.account.id, 'packaged-physics', 'ecb-2'))?.blob.size === n, F['ecb-2'].length), 'the app joins the parts Claude uploaded into the original file');
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await browser.close(); srv.close(); fs.unlinkSync(fn);
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);

@@ -199,9 +199,16 @@ function selfTestBox() {
 
 ACC_VIEWS.help = function (body) {
   const st = setupStatus();
-  const state = { gemini: st.gemini, backupFolder: !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!Noema.config.supabaseUrl };
+  const state = { gemini: st.gemini, backupFolder: !!Noema.jget(`noema1:${ACCOUNT.id}:meta:lastFolderBackup`, 0), cloudUser: ACCOUNT.kind === 'cloud', cloudOwner: !!Noema.config.supabaseUrl, claude: !!window.NoemaClaude?.Key.get(ACCOUNT.id) };
   body.append(h('p', { class: 'tiny', style: { margin: '0 0 10px' } }, 'Step-by-step guides. Everything here is optional — the app works fully on one device without any of it.'),
-    ...Object.entries(GUIDES).map(([id, g]) => accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) })));
+    ...Object.entries(GUIDES).map(([id, g]) => {
+      if (id !== 'claude' || !Noema.claudeSetupView) return accSection(g.icon, g.title, { status: id in state ? (state[id] ? { ok: true, text: 'done' } : { ok: false, text: 'not set up' }) : null, body: guideBody(id) });
+      // ✨ Set up Claude: the same numbered steps as in “Create with Claude” (both ways), built when opened
+      const holder = h('div', { class: 'claudesetup' });
+      const sec = accSection(g.icon, g.title, { status: state.claude ? { ok: true, text: 'API key here' } : null, body: h('div', {}, guideBody(id), holder) });
+      sec.addEventListener('toggle', () => { if (sec.open && !holder.firstChild) holder.append(Noema.claudeSetupView(ACCOUNT.id)); });
+      return sec;
+    }));
 };
 
 /* ---------- sync indicator ---------- */

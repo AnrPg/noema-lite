@@ -161,7 +161,7 @@ def load_media(sdir, embed=True):
     return out, report
 
 # ---------------- source files packaged with the pack (docs/SOURCES.md §3) ----------------
-SOURCE_FILE_MAX = 50 * 1024 * 1024        # the app's and the cloud bucket's limit per file
+SOURCE_FILE_MAX = 2 * 1024 * 1024 * 1024  # a practical limit (the cloud stores big files in parts, so no 50 MB limit any more)
 def _mime(fn):
     import mimetypes
     ext = os.path.splitext(fn)[1].lower()
@@ -194,7 +194,7 @@ def _first_page(txt):
 
 def package_sources(sdir, sources, chapters, base_ids=()):
     """Check the original files of the sources and describe them for the pack.
-    Every source with a local "file" (sources/<name>) must have that file in SDIR/sources/ (≤ 50 MB); every file in
+    Every source with a local "file" (sources/<name>) must have that file in SDIR/sources/ (any size); every file in
     SDIR/sources/ must belong to a source (so nothing the learner gave is left out — a split PDF = one source per part).
     Returns (sources_json, files, errors, warnings); files = [(source_id, abs_path, 'sources/<name>')].
     base_ids: sources of the previous version (unpacked from a .json without files) — their file is already in the
@@ -230,7 +230,7 @@ def package_sources(sdir, sources, chapters, base_ids=()):
                 errs.append(f'ERROR source {sid}: its file {rel} is missing — copy the original (or the split part) into {os.path.basename(sdir)}/sources/')
             continue
         size = os.path.getsize(p)
-        if size > SOURCE_FILE_MAX: errs.append(f'ERROR source {sid}: {rel} is {size // 1048576} MB — the limit is 50 MB per file: split it with scripts/split_pdf.py and give each part its own source'); continue
+        if size > SOURCE_FILE_MAX: errs.append(f'ERROR source {sid}: {rel} is {size // 1048576} MB — over 2 GB is too big for a browser to keep: split it with scripts/split_pdf.py'); continue
         if size == 0: errs.append(f'ERROR source {sid}: {rel} is empty'); continue
         h = H.sha256()
         with open(p, 'rb') as fh:

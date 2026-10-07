@@ -1,7 +1,7 @@
 /* Minimal in-memory Supabase emulator (Auth + PostgREST subset + Storage subset) for e2e tests.
    Enforces per-user isolation like the RLS policies in cloud/supabase.sql. Also serves a static folder. */
 const http = require('http'), fs = require('fs'), path = require('path'), crypto = require('crypto');
-function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
+function start({ port = 54321, staticDir = null, configOverride = null, maxObject = Infinity } = {}) {   // maxObject: like Supabase's per-file upload limit
   const users = {}, tokens = {}, kv = {}, snaps = [], profiles = {}, files = {}, signed = {}, pubFiles = {}, shrFiles = {}, pubPacks = [], shares = []; let snapId = 1;
   const json = (res, code, obj, extra = {}) => { res.writeHead(code, Object.assign({ 'Content-Type': 'application/json' }, cors, extra)); res.end(obj === undefined ? '' : JSON.stringify(obj)); };
   const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization,apikey,content-type,prefer,x-upsert', 'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS' };
@@ -13,10 +13,12 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       const u = new URL(req.url, 'http://x'); const p = u.pathname;
       if (req.method === 'OPTIONS') { res.writeHead(204, cors); return res.end(); }
       server.log.push(`${req.method} ${p}${u.search}`);
+      // Supabase refuses objects above the per-file limit (free plan: 50 MB) → the app / Claude upload big files in parts
+      if (/^\/storage\/v1\/object\/(?!list\/|sign\/)/.test(p) && ['POST', 'PUT'].includes(req.method) && !/\/object\/upload\/sign\/[^?]+$/.test(p) || (/\/object\/upload\/sign\//.test(p) && req.method === 'PUT')) { if (buf.length > maxObject) return json(res, 413, { statusCode: '413', error: 'Payload too large', message: 'The object exceeded the maximum allowed size' }); }
       // ---- signed storage URLs (no apikey / Authorization needed: the token in the URL authorizes)
       let sm;
       if ((sm = p.match(/^\/storage\/v1\/object\/upload\/sign\/noema-private\/(.+)$/)) && req.method === 'PUT') { const k = decodeURIComponent(sm[1]); if (signed[u.searchParams.get('token')] !== 'up:' + k) return json(res, 400, { message: 'invalid signature' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
-      if ((sm = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'GET') { const k = decodeURIComponent(sm[1]); if (signed[u.searchParams.get('token')] !== 'dl:' + k || !files[k]) return json(res, 400, { message: 'invalid signature' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
+      if ((sm = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'GET') { const k = decodeURIComponent(sm[1]); if (signed[u.searchParams.get('token')] !== 'dl:' + k || !files[k]) return json(res, 400, { message: 'invalid signature' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type || 'application/octet-stream' }, cors)); return res.end(files[k].data); }
       if (p === '/oauth-callback') { server.state.callbacks.push(u.search); res.writeHead(200, { 'Content-Type': 'text/html' }); return res.end('<h1>back in Claude</h1>'); }
       const api = /^\/(auth|rest|storage)\/v1\//.test(p);
       if (api && !req.headers.apikey && !p.startsWith('/storage/v1/object/public/')) return  /* public bucket URLs work without a key, like <img src> */ json(res, 401, { message: 'No API key found in request' });
@@ -34,7 +36,7 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
       // ---- anonymous reads: public packs + public bucket
       if (p === '/rest/v1/noema_public_packs' && req.method === 'GET') { const o = q('owner'); return json(res, 200, pubPacks.filter(r => !o || r.owner === o).slice().sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)); }
       let pm;
-      if ((pm = p.match(/^\/storage\/v1\/object\/public\/noema-public\/(.+)$/))) { const k = decodeURIComponent(pm[1]); if (!pubFiles[k]) return json(res, 404, { message: 'not found' }); res.writeHead(200, Object.assign({ 'Content-Type': pubFiles[k].type }, cors)); return res.end(pubFiles[k].data); }
+      if ((pm = p.match(/^\/storage\/v1\/object\/public\/noema-public\/(.+)$/))) { const k = decodeURIComponent(pm[1]); if (!pubFiles[k]) return json(res, 404, { message: 'not found' }); res.writeHead(200, Object.assign({ 'Content-Type': pubFiles[k].type || 'application/octet-stream' }, cors)); return res.end(pubFiles[k].data); }
       if (p.startsWith('/rest/v1/') || p.startsWith('/storage/v1/')) { if (!uid) return json(res, 401, { message: 'JWT required' }); }
       const myEmail = uid && users[uid].email.toLowerCase();
       // ---- public packs (owner only writes)
@@ -93,16 +95,16 @@ function start({ port = 54321, staticDir = null, configOverride = null } = {}) {
         for (const k of data.prefixes || []) {
           if (m[1] === 'noema-private' && k.split('/')[0] === uid) delete files[k];
           if (m[1] === 'noema-public' && k.split('/')[0] === uid) delete pubFiles[k];
-          if (m[1] === 'noema-shared') { const sh = shares.find(x => x.id + '.json' === k); if (sh && sh.from_user === uid) delete shrFiles[k]; }
+          if (m[1] === 'noema-shared') { const sh = shares.find(x => x.id === k.split('.')[0]); if (sh && sh.from_user === uid) delete shrFiles[k]; }
         }
         return json(res, 200, []);
       }
       if ((m = p.match(/^\/storage\/v1\/object\/noema-public\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); pubFiles[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-public/' + k }); }
-      if ((m = p.match(/^\/storage\/v1\/object\/noema-shared\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); const sh = shares.find(x => x.id + '.json' === k); if (!sh || sh.from_user !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); shrFiles[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-shared/' + k }); }
-      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-shared\/(.+)$/))) { const k = decodeURIComponent(m[1]); const sh = shares.find(x => x.id + '.json' === k); if (!sh || !(sh.from_user === uid || sh.to_email === myEmail) || !shrFiles[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': shrFiles[k].type }, cors)); return res.end(shrFiles[k].data); }
+      if ((m = p.match(/^\/storage\/v1\/object\/noema-shared\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); const sh = shares.find(x => x.id === k.split('.')[0]); if (!sh || sh.from_user !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); shrFiles[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-shared/' + k }); }
+      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-shared\/(.+)$/))) { const k = decodeURIComponent(m[1]); const sh = shares.find(x => x.id === k.split('.')[0]); if (!sh || !(sh.from_user === uid || sh.to_email === myEmail) || !shrFiles[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': shrFiles[k].type || 'application/octet-stream' }, cors)); return res.end(shrFiles[k].data); }
       if ((m = p.match(/^\/storage\/v1\/object\/upload\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'rls' }); const t = crypto.randomUUID(); signed[t] = 'up:' + k; return json(res, 200, { url: `/object/upload/sign/noema-private/${k}?token=${t}`, token: t }); }
       if ((m = p.match(/^\/storage\/v1\/object\/sign\/noema-private\/(.+)$/)) && req.method === 'POST') { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 400, { message: 'Object not found' }); const t = crypto.randomUUID(); signed[t] = 'dl:' + k; return json(res, 200, { signedURL: `/object/sign/noema-private/${k}?token=${t}` }); }
-      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type }, cors)); return res.end(files[k].data); }
+      if ((m = p.match(/^\/storage\/v1\/object\/authenticated\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid || !files[k]) return json(res, 404, { message: 'Object not found' }); res.writeHead(200, Object.assign({ 'Content-Type': files[k].type || 'application/octet-stream' }, cors)); return res.end(files[k].data); }
       if ((m = p.match(/^\/storage\/v1\/object\/noema-private\/(.+)$/))) { const k = decodeURIComponent(m[1]); if (k.split('/')[0] !== uid) return json(res, 403, { message: 'new row violates row-level security policy' }); files[k] = { data: buf, type: req.headers['content-type'] }; return json(res, 200, { Key: 'noema-private/' + k }); }
       // ---- /api/img: the picture fetcher Netlify function (cloud/img/proxy.mjs), run in-process; local hosts allowed in tests
       if (p === '/api/img' || p === '/api/file') {
