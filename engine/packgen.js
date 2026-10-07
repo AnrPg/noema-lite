@@ -160,8 +160,32 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     const add = u => { run.usage.input += u?.input || 0; run.usage.output += u?.output || 0; };
     const brief = window.NoemaCurriculum.nodeBrief(c, nodeId);
     const S = await spec();
-    // 1. research
-    if (!run.research) {
+    // 1. the learner's own files (imported maps, 📎 material) are THE sources: read them, no web research
+    const mat = n.material?.files || [];
+    if (mat.length && !run.material) {
+      onLog('📖 Reading your material…'); run.material = [];
+      for (const f of mat) {
+        const rec = await window.NoemaSrcFiles?.get(acc, packId, f.srcId).catch(() => null);
+        if (!rec?.blob) { onLog(`   ⚠️ ${f.name} is not available on this device`); continue; }
+        const x = await window.NoemaViewer.extract(rec.blob, f.name, { maxPages: 1500, outline: false }).catch(e => { onLog(`   ⚠️ ${f.name}: ${e.message}`); return null; });
+        if (x?.pages?.length) run.material.push({ srcId: f.srcId, name: f.name, pdf: x.kind === 'pdf', pages: x.pages, pageCount: x.pageCount || null });
+      }
+      if (!run.material.length) throw new Error('None of the files of this step could be read on this device.');
+      run.research = ''; run.sources = []; await keep();
+      onLog(`   ✓ ${run.material.length} file(s), ${run.material.reduce((a, m) => a + m.pages.length, 0)} pages`);
+    }
+    /** The part of the material a chapter comes from ("file.pdf pp. 12–30" from the planner), else all of it (capped). */
+    const materialFor = ch => {
+      const M = run.material || []; if (!M.length) return null;
+      const want = String(ch.material || ''); const nm = x => x.toLowerCase().replace(/\.[a-z0-9]+$/, '');
+      const file = M.find(m => want.toLowerCase().includes(nm(m.name))) || (M.length === 1 ? M[0] : null);
+      const r = want.match(/(\d{1,5})\s*[–-]\s*(\d{1,5})/) || want.match(/p{1,2}\.\s*(\d{1,5})/);
+      if (file && r && file.pdf) { const a = +r[1], b = +(r[2] || r[1]); const txt = file.pages.slice(a - 1, b).map((t, i) => `[${file.name} p. ${a + i}]\n${t}`).join('\n\n'); if (txt.trim()) return { text: txt.slice(0, 160000), refs: [{ id: file.srcId, pages: `σ. ${a}–${b}` }] }; }
+      const all = (file ? [file] : M).map(m => m.pages.map((t, i) => `[${m.name} ${m.pdf ? 'p. ' + (i + 1) : 'part ' + (i + 1)}]\n${t}`).join('\n\n')).join('\n\n');
+      return { text: all.slice(0, 160000), refs: (file ? [file] : M).map(m => ({ id: m.srcId })) };
+    };
+    // 1b. research (steps without material)
+    if (!run.research && !run.material) {
       onLog('🔎 Researching official sources with Google Search…');
       const r = await L().research(acc, { signal, model, system: 'You are a meticulous subject-matter researcher. Use Google Search. Prefer official documentation, standards bodies, university courses, open textbooks, reference works and review articles. Be precise and current; never invent facts.',
         prompt: `${brief}\n\nWrite a dense research brief (in ${lang}) for a teacher who will write this course: for EVERY planned chapter give the key definitions, principles, facts and numbers, formulas or procedures, worked examples, common misconceptions and pitfalls, typical errors and how to diagnose them, and current best practice. Cite sources inline as [n].` });
@@ -181,7 +205,8 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
       if (signal?.aborted) throw new (L().LLMError)('Stopped.', 0, 'aborted');
       const id = 'ch' + String(i + 1).padStart(2, '0'); const ch = plan[i];
       onLog(`✍️ Chapter ${i + 1}/${plan.length}: ${ch.title}`);
-      const prompt = `${brief}\n\n## Research brief (from Google Search; cite nothing, but stay faithful to it)\n${(run.research || '').slice(0, 24000)}\n\n## Write chapter ${i + 1} of ${plan.length} now: “${ch.title}”\nTeaching goals: ${(ch.goals || []).join('; ')}\nMust cover: ${(ch.coverage || []).join('; ')}\nEarlier chapters of this node: ${plan.slice(0, i).map(x => x.title).join('; ') || '(none)'} — do not repeat them.\n\nRules: language ${lang}. Chapter id "${id}", num ${i + 1}. 3–8 sections with ids "${id}-s01"…; 4–14 blocks each, varied (p, list, table, compare, flow, callout, reveal, ask, terms, code/diagram when useful, one figure). ≥ 4 exercises per section with ids "${id}-e001"… and ≥ 7 different types, incl. ≥ 3 picture exercises on your diagrams; ≥ 25 % tagged pitfall/debug/exam; every explanation teaches why the right answer is right and why the tempting one is wrong. 8–25 flashcards, ≥ 1 pitfall, debug playbooks where the topic has failure modes. ${S.content ? '' : 'Follow the noema-lite content format.'}`;
+      const mt = materialFor(ch);
+      const prompt = `${brief}\n\n` + (mt ? `## The learner's material for this chapter (THE source — teach from it and stay faithful to it; do not add theory it does not contain beyond brief connecting explanations; page markers are in [brackets])\n${mt.text}` : `## Research brief (from Google Search; cite nothing, but stay faithful to it)\n${(run.research || '').slice(0, 24000)}`) + `\n\n## Write chapter ${i + 1} of ${plan.length} now: “${ch.title}”\nTeaching goals: ${(ch.goals || []).join('; ')}\nMust cover: ${(ch.coverage || []).join('; ')}\nEarlier chapters of this node: ${plan.slice(0, i).map(x => x.title).join('; ') || '(none)'} — do not repeat them.\n\nRules: language ${lang}. Chapter id "${id}", num ${i + 1}. 3–8 sections with ids "${id}-s01"…; 4–14 blocks each, varied (p, list, table, compare, flow, callout, reveal, ask, terms, code/diagram when useful, one figure). ≥ 4 exercises per section with ids "${id}-e001"… and ≥ 7 different types, incl. ≥ 3 picture exercises on your diagrams; ≥ 25 % tagged pitfall/debug/exam; every explanation teaches why the right answer is right and why the tempting one is wrong. 8–25 flashcards, ≥ 1 pitfall, debug playbooks where the topic has failure modes. ${S.content ? '' : 'Follow the noema-lite content format.'}`;
       const { data, usage } = await L().json({ acc, provider: 'gemini', model, signal, maxTokens: 65536, system: `You are an expert teacher and instructional designer writing one chapter of a noema-lite subject pack as JSON. Follow the content contract exactly.\n\n${S.content || ''}\n\n${S.visual ? S.visual.split('## 5.')[0] : ''}\n\n${DIAGRAM_KIT}`, prompt, schema: S_CHAPTER,
         validate: d => {
           if (d.id !== id) return [`"id" must be "${id}"`];
@@ -191,7 +216,7 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
           return [...r.errors, ...quality(d)].slice(0, 30);
         }, onRepair: e => onLog(`   ↻ fixing ${e.length} problem(s)…`) });
       add(usage);
-      const m = materialize(data, prefix); m.chapter.src = 'web';
+      const m = materialize(data, prefix); m.chapter.src = mt ? mt.refs[0].id : 'web'; if (mt) m.chapter.sources = mt.refs;
       run.chapters.push(m.chapter); Object.assign(run.media, m.media); await keep();
       onLog(`   ✓ ${m.chapter.sections.length} sections · ${m.chapter.exercises.length} exercises · ${m.chapter.flashcards.length} flashcards`);
     }
@@ -199,7 +224,7 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     const M = run.meta;
     const subject = { id: packId, title: n.title, appTitle: n.title, emoji: M.emoji, group: 'curriculum', description: M.description, language: c.language, features: { math: !!M.math, code: !!M.code },
       hero: { headline: M.headline, mantra: M.mantra }, searchExamples: M.searchExamples, tutor: { ...M.tutor, prior: `Already mastered: ${c.edges.filter(e => e.to === nodeId).map(e => c.nodes[e.from]?.title).filter(Boolean).join('; ') || 'nothing specific'}.` } };
-    const sources = { sources: [{ id: 'web', title: 'Web research (Gemini + Google Search)', subtitle: (run.sources || []).map(s => s.title).slice(0, 6).join(' · '), added: new Date().toISOString().slice(0, 10), emoji: '🔎' },
+    const sources = run.material ? { sources: run.material.map(m => ({ id: m.srcId, title: m.name.replace(/\.[a-z0-9]+$/i, ''), fileName: m.name, file: 'sources/' + m.name, pages: m.pageCount ? `1–${m.pageCount}` : '', added: new Date().toISOString().slice(0, 10), emoji: '📄' })), chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, ch.src])), patches: {} } : { sources: [{ id: 'web', title: 'Web research (Gemini + Google Search)', subtitle: (run.sources || []).map(s => s.title).slice(0, 6).join(' · '), added: new Date().toISOString().slice(0, 10), emoji: '🔎' },
       ...(run.sources || []).map((s, i) => ({ id: 's' + (i + 1), title: s.title, url: s.url, added: new Date().toISOString().slice(0, 10), emoji: '🌐' }))], chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, 'web'])), patches: {} };
     const pack = { format: 'noema-pack', v: 1, subject, sources, chapters: run.chapters, media: run.media, builtAt: new Date().toISOString(), generatedBy: 'gemini', curriculum: { id: c.id, node: nodeId } };
     const r = window.NoemaPackCheck.checkPack(pack, packId, { strict: true });

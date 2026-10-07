@@ -106,6 +106,44 @@ mastered-by-test step can be undone. A step **opens** when all its prerequisites
 Prepared steps are hidden from the 📚 Subjects list (they live in their curriculum). Backups include
 everything.
 
+## 6b. 📥 Importing a map you already have (`engine/curimport.js`)
+Subject picker → 🧭 Curricula → **📥 Import a map**. The map becomes the curriculum **as it is**: no DAG creator, auditor or
+goal expander runs. Only the chapter planner (agent 3) plans the steps that have no chapters yet.
+
+**What it reads (no AI needed)**
+| format | example | how |
+|---|---|---|
+| tree / outline | `├── └── │`, bullets, `1.` / `1.2`, indentation, `#` headings | a single top line with children is the **title**; topics at the same level follow each other (**in the order written**, the default) or are **independent** (each after its parent); a parent topic comes before its sub-topics |
+| Mermaid | `flowchart LR` · `A[Algebra] --> B(Calculus) & C` · `-- text -->` · `==>` · `subgraph` | `A --> B` = A first (⇄ reverses arrows drawn the other way); a link to a subgraph goes to its first / from its last steps |
+| JSON | noema-lite's ⬇️ export (keeps chapters), the `dag_creator` format, `{nodes:[{id,title,prerequisites\|requires\|dependsOn,chapters,files}], edges:[{from,to}\|[a,b]\|"a->b"]}`, nested `children` | prerequisites by id or by title |
+
+In any text a step can say more: `Topic (after: A, B)` / `Topic ← A` (extra prerequisites), `Topic — what it covers`
+(summary), `Topic 📎 file.pdf` (its files). Words like *Prerequisites / Βασικές… / Basics* make prerequisite steps,
+*Applications / Εφαρμογές* application steps (and everything under them). ALL-CAPS titles get normal capitals
+(DNA, RNA stay) unless *keep capitals* is ticked. Loops are reported with the steps on them; links implied by others
+(A→B→C makes A→C redundant) are dropped.
+
+**✨ Let the AI read it** — for anything else (prose, an unusual JSON): Claude or Gemini returns the same structure
+(`S_IMPORT`), checked like every agent answer: every title must come from the map (an invented topic is sent back:
+“not a topic of the given map”), no topic of the map may be missing, refs valid, acyclic.
+
+**The material of the steps** — drop files (PDF, Word, slides, notes…), a `.zip` or a folder with a sub-folder per
+step; they are matched to the steps by file / folder names (or by `📎` / `files` in the map) and every match can be
+changed. Later: ✏️ Edit step → **📎 Your material for this step** (add / remove until the step is prepared).
+A step's files are stored like the source files of its future subject (this device + cloud, `<user>/sources/<pack-id>/m1/…`)
+and described in the curriculum (`node.material.files`: name, pages, the PDF's outline, the first lines).
+
+A step **with files** is not researched:
+* the planner plans its chapters **from the files** (their outline and beginning) and gives each chapter
+  `material` = the file and pages it comes from;
+* **Claude** gets the files uploaded into its sandbox (`NODE_FILES`): “these files are the sources”, no web_fetch,
+  web search only for pictures; it packages them back (`.noema.zip`, source ids m1, m2…), so the subject opens them
+  with 👁 at the cited pages;
+* **Gemini** gets the text of the pages each chapter comes from (pdf.js / mammoth in the browser) instead of a
+  Google Search brief; the files become the subject's sources.
+If a planned chapter is not in the files, it is written briefly from the model's own knowledge (Claude says so in its
+coverage notes). Steps **without** files are researched exactly as before.
+
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
 repaired graph, 25-node map in three parts, locked/open, chapter details, background preparation of the
@@ -113,3 +151,8 @@ next 2 steps by Claude skill jobs (web search + fetch), cloud storage and sync, 
 engine, automatic mastery, placement test unlocking the next step and undo, phone layout, the Gemini path
 (stop + resume without redoing agents, Google Search research, repaired chapter, 4-chapter subject with
 drawn diagrams and listed sources). `engine/packcheck.js` is also the connector's pack gate.
+`tests/curriculum_import.js`: the parser (tree art, nesting + independent, Mermaid, ⇄, JSON, Greek outline, loops, file
+matching), then in the browser: a pasted tree with two files → only the planner runs (with the files' pages, outline and
+first lines) → a step with a PDF built by Claude from the uploaded file (no web_fetch, packaged back as its source) → a
+step with notes built by Gemini from their text (no Google Search) → 📎 add / remove in the editor, fixed once prepared
+→ ✨ AI reading with an invented topic sent back → a .zip with a folder per step → phone layout.

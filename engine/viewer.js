@@ -245,5 +245,34 @@ window.NoemaViewer = (() => {
       ov.dataset.kind = kind; return { close, kind };
     } catch (e) { console.warn('[viewer]', e); fail('This file could not be shown (' + e.message + '). You can still download it.'); return { close, kind: 'error' }; }
   }
-  return { open, kindOf, LABEL, KINDS, youtube, loadZip: zip, jszip: () => script('viewer/jszip.min.js') };
+  /** The text of a file, for the AI (curriculum material): { kind, pageCount, pages: [text per page / chunk], outline: [{title, page, depth}] } */
+  async function extract(blob, name, { maxPages = 2000, outline = true } = {}) {
+    const kind = kindOf(name, blob.type || ''); const buf = await blob.arrayBuffer();
+    const chunk = (t, n = 3000) => { t = String(t || '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim(); const out = []; for (let i = 0; i < t.length; i += n) out.push(t.slice(i, i + n)); return out; };
+    if (kind === 'pdf') {
+      const lib = await import(new URL(BASE() + 'pdfjs/pdf.min.mjs', location.href).href);
+      lib.GlobalWorkerOptions.workerSrc = new URL(BASE() + 'pdfjs/pdf.worker.min.mjs', location.href).href;
+      const root = new URL(BASE() + 'pdfjs/', location.href).href;
+      const doc = await lib.getDocument({ data: new Uint8Array(buf), cMapUrl: root + 'cmaps/', cMapPacked: true, standardFontDataUrl: root + 'standard_fonts/', wasmUrl: root + 'wasm/', isEvalSupported: false }).promise;
+      const pages = [];
+      for (let i = 1; i <= Math.min(doc.numPages, maxPages); i++) { const pg = await doc.getPage(i); const tc = await pg.getTextContent(); pages.push(tc.items.map(it => (it.str || '') + (it.hasEOL ? '\n' : ' ')).join('').replace(/[ \t]+/g, ' ').trim()); pg.cleanup?.(); }
+      const ol = [];
+      if (outline) {
+        try {
+          const walk = async (items, d) => { for (const it of items || []) { if (ol.length >= 150) return; let page = null; try { let dest = it.dest; if (typeof dest === 'string') dest = await doc.getDestination(dest); if (Array.isArray(dest) && dest[0]) page = (await doc.getPageIndex(dest[0])) + 1; } catch (e) { } ol.push({ title: String(it.title || '').trim(), page, depth: d }); if (d < 2) await walk(it.items, d + 1); } };
+          await walk(await doc.getOutline(), 0);
+        } catch (e) { }
+      }
+      const n = doc.numPages; doc.destroy?.();
+      return { kind, pageCount: n, pages, outline: ol };
+    }
+    if (kind === 'docx') { await script('viewer/mammoth.browser.min.js'); const r = await mammoth.extractRawText({ arrayBuffer: buf }); return { kind, pages: chunk(r.value), outline: [] }; }
+    if (['text', 'markdown', 'csv', 'json'].includes(kind)) return { kind, pages: chunk(decode(buf)), outline: kind === 'markdown' ? decode(buf).split('\n').filter(l => /^#{1,3}\s/.test(l)).slice(0, 150).map(l => ({ title: l.replace(/^#+\s*/, ''), page: null, depth: l.match(/^#+/)[0].length - 1 })) : [] };
+    if (kind === 'html' || kind === 'eml') { const t = decode(buf).replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>'); return { kind, pages: chunk(t), outline: [] }; }
+    if (R[kind] && !['image', 'heic', 'tiff', 'audio', 'video', 'zip', 'unknown', 'pdf'].includes(kind)) {
+      try { const e = await R[kind]({ blob, buf, name, bar: h('div'), openInner: () => { } }); return { kind, pages: chunk(e.innerText || e.textContent || ''), outline: [] }; } catch (e) { console.warn('[viewer] extract', e); }
+    }
+    return { kind, pages: [], outline: [] };
+  }
+  return { open, kindOf, LABEL, KINDS, youtube, loadZip: zip, jszip: () => script('viewer/jszip.min.js'), extract };
 })();

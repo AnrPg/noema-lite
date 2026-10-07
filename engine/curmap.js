@@ -21,7 +21,7 @@ window.NoemaCurMap = (() => {
         box.innerHTML = '';
         const list = C().list(acc);
         box.append(head('🧭 Curricula', 'Type a goal; Claude or Gemini maps everything you need — prerequisites → the goal → applications — and prepares each step as a full subject.'),
-          el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: () => { close(); create(acc, { onStudy }); } }, '➕ New curriculum'), el('span', { class: 'tiny' }, 'Each step (node) becomes a subject with theory, exercises, flashcards, drills and the tutor.')),
+          el('div', { class: 'row' }, el('button', { class: 'btn primary', onclick: () => { close(); create(acc, { onStudy }); } }, '➕ New curriculum'), el('button', { class: 'btn', onclick: () => { close(); importMap(acc, { onStudy }); } }, '📥 Import a map'), el('span', { class: 'tiny' }, 'Each step (node) becomes a subject with theory, exercises, flashcards, drills and the tutor.')),
           list.length ? el('div', { class: 'cm-cards' }, ...list.map(c => {
             const s = c.status === 'ready' ? C().summary(acc, c) : null;
             return el('button', { class: 'cm-card', onclick: () => { close(); c.status === 'ready' ? map(acc, c.id, { onStudy }) : progress(acc, c, { onStudy }); } },
@@ -92,14 +92,15 @@ window.NoemaCurMap = (() => {
 
   /* ======================= building progress ======================= */
   const STAGES = [['dag', '🧭 Agent 1 · all prerequisites + applications'], ['audit', '🔍 Agent 1b · are the prerequisites complete?'], ['expand', '🎯 Agent 2 · the whole goal, in depth'], ['plan', '📚 Agent 3 · chapters, learning goals, outcomes']];
+  const stagesOf = c => c.imported ? [['import', '📥 Your map — imported as it is (no AI mapping)'], STAGES[3]] : STAGES;
   function progress(acc, c, { onStudy, start = false } = {}) {
     overlay((box, close) => {
       box.classList.add('cg-box');
       let ctl = null;
       const stages = el('ol', { class: 'cm-stages' }); const log = el('ol', { class: 'cg-log', 'aria-live': 'polite' }); const status = el('div', { class: 'cg-status' }); const actions = el('div', { class: 'row' }); const bar = el('div', { class: 'cm-bar' }, el('i', {}));
       const paint = () => {
-        const i = STAGES.findIndex(s => s[0] === c.stage);
-        stages.innerHTML = ''; STAGES.forEach(([k, t], j) => stages.append(el('li', { class: c.stage === 'done' || j < i ? 'done' : j === i ? (ctl ? 'now' : 'wait') : '' }, (c.stage === 'done' || j < i ? '✅ ' : j === i && ctl ? '⏳ ' : '◻️ ') + t)));
+        const SG = stagesOf(c); const i = SG.findIndex(s => s[0] === c.stage);
+        stages.innerHTML = ''; SG.forEach(([k, t], j) => stages.append(el('li', { class: c.stage === 'done' || j < i ? 'done' : j === i ? (ctl ? 'now' : 'wait') : '' }, (c.stage === 'done' || j < i ? '✅ ' : j === i && ctl ? '⏳ ' : '◻️ ') + t)));
         status.className = 'cg-status ' + c.status;
         status.textContent = ctl ? '🧠 The agents are working — keep this page open (other tabs are fine).' : c.status === 'ready' ? '✅ Your curriculum is ready.' : c.status === 'failed' ? '⚠️ ' + (c.error || 'Stopped') : c.status === 'paused' ? '⏸️ Paused.' : '';
         actions.innerHTML = '';
@@ -117,7 +118,7 @@ window.NoemaCurMap = (() => {
         if (c.status === 'ready') { G().kick(); }
       }
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { if (ctl && !confirm('The agents work only while this window is open. Stop?')) return; ctl?.abort(); close(); library(acc, { onStudy }); } }, '← Curricula'),
-        head(`🧭 “${c.goal}”`, `${C().LANG[c.language] || c.language} · ${c.depth} · ${c.learner || 'from the basics'}`), stages, bar, status, actions,
+        head(`🧭 “${c.title || c.goal}”`, c.imported ? `${C().LANG[c.language] || c.language} · your map, ${Object.keys(c.nodes).length} steps · ${c.learner || 'from the basics'}` : `${C().LANG[c.language] || c.language} · ${c.depth} · ${c.learner || 'from the basics'}`), stages, bar, status, actions,
         el('details', { class: 'cg-logbox', open: true }, el('summary', {}, 'What the agents are doing'), log));
       paint(); if (start || c.status === 'building') run();
     }, { closable: false });
@@ -162,6 +163,15 @@ window.NoemaCurMap = (() => {
       drawCh();
       const instr = el('input', { class: 'noema-input', placeholder: 'Optional wish for the AI, e.g. “more clinical examples”, “skip the history”' });
       const err = el('div', { class: 'tiny cg-kstat bad' }); const busy = el('span', { class: 'tiny' });
+      // 📎 the learner's own files for this step: the step is planned and built from them (no web research of the theory)
+      const matBox = el('div', { class: 'cm-mat' });
+      const drawMat = () => {
+        matBox.innerHTML = ''; if (!n) return; const cur = C().get(acc, cid)?.nodes[id]?.material?.files || [];
+        matBox.append(cur.length ? el('ul', { class: 'cm-matlist' }, ...cur.map(f => el('li', {}, el('button', { class: 'linklike', title: '👁 Open', onclick: () => openMaterial(acc, cid, id, f) }, '📄 ' + f.name), el('span', { class: 'tiny' }, f.pages ? ` · ${f.pages} pages` : ''),
+          locked ? null : el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name, onclick: async () => { await E.removeMaterial(acc, cid, id, f.srcId); drawMat(); } }, '✕')))) : el('div', { class: 'tiny' }, 'None — the AI researches this step from authoritative sources.'),
+          locked ? null : el('label', { class: 'btn small' }, '📎 Add files', el('input', { type: 'file', multiple: true, style: { display: 'none' }, onchange: async e => { const fs = [...e.target.files]; e.target.value = ''; if (!fs.length) return; busy.textContent = '⏳ Reading the files…'; const r = await E.addMaterial(acc, cid, id, fs); busy.textContent = r.error ? '⚠️ ' + r.error : `✓ ${r.added.length} file(s) added — ✨ re-plan the chapters to follow them`; drawMat(); } })));
+      };
+      drawMat();
       const collect = () => ({ title: title.value, summary: summary.value, role: role.value, parents, children, ...(locked ? {} : { learningGoals: goals.value.split('\n'), chapters }) });
       const save = () => { err.textContent = ''; const r = n ? E.update(acc, cid, id, collect()) : null; if (r?.error) { err.textContent = '⚠️ ' + r.error; return false; } return true; };
       const replan = el('button', { class: 'btn small', disabled: locked, onclick: async () => {
@@ -192,6 +202,7 @@ window.NoemaCurMap = (() => {
           el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'What it teaches', summary), el('label', { class: 'cg-field' }, 'Place in the curriculum', role),
           el('div', { class: 'cg-field' }, el('b', {}, '⬅️ Prerequisites (must be mastered first)'), links('prerequisite', () => parents, v => { parents = v; }, possibleP)),
           el('div', { class: 'cg-field' }, el('b', {}, '➡️ Opens these steps'), links('dependent step', () => children, v => { children = v; }, possibleK)),
+          n ? el('div', { class: 'cg-field' }, el('b', {}, '📎 Your material for this step'), tip('Files you give a step are its sources: its chapters are planned from them and its subject is built from them (with Claude: inside its sandbox; with Gemini: from their text) — no web research of the theory. Steps without files are researched as usual.'), matBox) : null,
           el('label', { class: 'cg-field' }, 'Learning goals' + (locked ? ' (fixed — already prepared)' : ''), goals),
           el('div', { class: 'cg-field' }, el('b', {}, `📖 Chapters${locked ? ' (fixed — already prepared)' : ''}`), chBox,
             locked ? null : el('div', { class: 'row' }, el('button', { class: 'btn small', onclick: () => { chapters.push({ title: '', goals: [], coverage: [] }); drawCh(); chBox.querySelector('li:last-child input')?.focus(); } }, '➕ Add a chapter'), replan),
@@ -200,6 +211,109 @@ window.NoemaCurMap = (() => {
       setTimeout(() => (mode === 'review' ? box.querySelector('.cm-chedit input') : title)?.focus(), 150);
     });
   }
+  async function openMaterial(acc, cid, id, f) {
+    const c = C().get(acc, cid); const rec = await window.NoemaSrcFiles?.get(acc, C().packId(c, id), f.srcId).catch(() => null);
+    if (!rec?.blob) { toast('⚠️ This file is not on this device and could not be downloaded.', 4000); return; }
+    window.NoemaViewer.open({ blob: rec.blob, name: f.name, type: rec.type, title: f.name, subtitle: c.nodes[id]?.title });
+  }
+
+  /* ======================= 📥 import a map you already have ======================= */
+  function importMap(acc, { onStudy } = {}) {
+    const I = window.NoemaCurImport;
+    overlay((box, close) => {
+      box.classList.add('cg-box', 'cm-import');
+      let parsed = null, aiParsed = null, files = [], matches = [];
+      const text = el('textarea', { class: 'noema-input cm-maptext', rows: 12, spellcheck: 'false', placeholder: 'Paste your map — a tree like\nCell biology\n├── Prerequisites\n├── Membranes\n│   └── Transport\n└── Applications\n\n…or a Mermaid graph (flowchart LR / A --> B), or JSON.' });
+      const fileIn = el('input', { type: 'file', accept: '.txt,.md,.markdown,.json,.mmd,.mermaid', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; if (f) { text.value = await f.text(); aiParsed = null; reparse(); } } });
+      const mode = el('select', { class: 'noema-input', onchange: () => reparse() }, el('option', { value: 'sequence' }, 'in the order written (each after the previous one)'), el('option', { value: 'parallel' }, 'independent (each after its parent topic)'));
+      const reverse = el('input', { type: 'checkbox', onchange: () => reparse() }), keepCaps = el('input', { type: 'checkbox', onchange: () => reparse() });
+      const info = el('div', { class: 'tiny cm-detect' }), prev = el('ol', { class: 'cm-preview' }), perr = el('div', { class: 'tiny cg-kstat bad' });
+      const title = el('input', { class: 'noema-input', placeholder: 'Name of the curriculum' });
+      const lang = el('select', { class: 'noema-input' }, ...Object.entries(C().LANG).map(([v, t]) => el('option', { value: v }, t))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
+      const learner = el('input', { class: 'noema-input', placeholder: 'Optional: what you already know' });
+      const provider = el('select', { class: 'noema-input' }, el('option', { value: 'auto' }, 'Automatic (Claude if its key is here, else Gemini)'), el('option', { value: 'claude' }, 'Claude'), el('option', { value: 'gemini' }, 'Gemini'));
+      const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
+      const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: '8' });
+      const fileBox = el('div', { class: 'cm-files' });
+      const drop = el('label', { class: 'cg-drop' }, '📎 Add the material of the steps (PDF, Word, slides, notes… or a .zip) — optional', el('input', { type: 'file', multiple: true, onchange: e => { addFiles([...e.target.files]); e.target.value = ''; } }));
+      const folder = el('label', { class: 'btn small' }, '📁 Add a folder (a sub-folder per step)', el('input', { type: 'file', multiple: true, webkitdirectory: true, style: { display: 'none' }, onchange: e => { addFiles([...e.target.files].filter(f => !/(^|\/)\./.test(f.webkitRelativePath || f.name))); e.target.value = ''; } }));
+      ['dragover', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop') addFiles([...e.dataTransfer.files]); }));
+      const aiBtn = el('button', { class: 'btn small ai', onclick: async () => {
+        perr.textContent = ''; if (!text.value.trim()) { perr.textContent = '👆 Paste your map first.'; return; }
+        if (!LLM().pick(acc, provider.value)) { perr.textContent = '👆 The AI needs a Claude or Gemini key (step 4).'; return; }
+        aiBtn.disabled = true; info.textContent = '✨ The AI is reading your map…';
+        try { aiParsed = await I.aiRead(acc, text.value, { provider: provider.value, onLog: m => { info.textContent = m; } }); show(aiParsed); } catch (e) { perr.textContent = '⚠️ ' + e.message; info.textContent = ''; }
+        aiBtn.disabled = false;
+      } }, '✨ Let the AI read it');
+      const err = el('div', { class: 'tiny cg-kstat bad' }); const busy = el('div', { class: 'tiny' });
+      const FMT = { outline: 'tree / outline', mermaid: 'Mermaid graph', json: 'JSON', ai: 'read by the AI' };
+      function show(g) {
+        parsed = g; prev.innerHTML = ''; perr.textContent = '';
+        if (!g) { info.textContent = ''; drawFiles(); return; }
+        const T = id => g.nodes[id].title; const planned = Object.values(g.nodes).filter(n => n.chapters?.length).length;
+        info.textContent = `✓ ${FMT[g.format] || g.format}: ${g.order.length} steps · ${g.edges.length} links` + (planned ? ` · ${planned} with their chapters` : '') + (g.warnings.length ? ' · ⚠️ ' + g.warnings.slice(0, 3).join('; ') : '');
+        if (!title.value.trim() || title.dataset.auto) { title.value = g.title || ''; title.dataset.auto = '1'; }
+        if (g.language && C().LANG[g.language]) lang.value = g.language;
+        g.order.forEach(id => { const ps = g.edges.filter(e => e.to === id).map(e => T(e.from)); prev.append(el('li', {}, el('span', { class: 'cm-ic' }, ICON[g.nodes[id].role] || '•'), ' ', el('b', {}, T(id)), ps.length ? el('span', { class: 'tiny' }, '  ← ' + ps.join(', ')) : el('span', { class: 'tiny' }, '  (starts here)'))); });
+        drawFiles();
+      }
+      let t0 = null;
+      function reparse() {
+        clearTimeout(t0); t0 = setTimeout(() => {
+          if (!text.value.trim()) { show(null); return; }
+          if (aiParsed) { show(aiParsed); return; }
+          try { show(I.parse(text.value, { mode: mode.value, reverse: reverse.checked, keepCaps: keepCaps.checked })); }
+          catch (e) { parsed = null; prev.innerHTML = ''; info.textContent = ''; perr.textContent = '⚠️ ' + e.message + (LLM().pick(acc, provider.value) ? ' — or tap ✨ Let the AI read it.' : ''); drawFiles(); }
+        }, 250);
+      }
+      text.addEventListener('input', () => { aiParsed = null; reparse(); }); title.addEventListener('input', () => { delete title.dataset.auto; });
+      async function addFiles(fs) {
+        for (const f of fs) {
+          if (/\.zip$/i.test(f.name)) { try { const inner = await I.unzipMaterial(f); for (const g of inner) if (!files.some(x => x.name === g.name && x.size === g.size)) files.push(g); } catch (e) { toast('⚠️ ' + f.name + ': ' + e.message, 4000); } continue; }
+          if (!files.some(x => x.name === f.name && x.size === f.size)) files.push(f);
+        }
+        drawFiles();
+      }
+      function drawFiles() {
+        fileBox.innerHTML = '';
+        if (!files.length) return;
+        const auto = parsed ? I.matchFiles(parsed, files) : files.map(f => ({ file: f, id: null }));
+        matches = files.map(f => { const prevM = matches.find(m => m.file === f && m.manual); return prevM || auto.find(a => a.file === f); });
+        fileBox.append(el('table', { class: 'cm-filetable' }, el('tbody', {}, ...matches.map((m, i) => {
+          const sel = el('select', { class: 'noema-input', 'aria-label': 'Step for ' + m.file.name, onchange: () => { matches[i] = { file: m.file, id: sel.value || null, manual: true }; } }, el('option', { value: '' }, '— not used —'), ...(parsed ? parsed.order.map(id => el('option', { value: id }, parsed.nodes[id].title)) : []));
+          sel.value = m.id || '';
+          return el('tr', {}, el('td', {}, '📄 ' + m.file.name, el('div', { class: 'tiny' }, (m.file.size / 1048576).toFixed(1) + ' MB' + (m.how ? ' · matched ' + m.how : ''))), el('td', {}, sel), el('td', {}, el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + m.file.name, onclick: () => { files = files.filter(x => x !== m.file); drawFiles(); } }, '✕')));
+        }))));
+      }
+      const go = el('button', { class: 'btn primary cg-go', onclick: async () => {
+        err.textContent = '';
+        if (!parsed) { err.textContent = '👆 Paste a map that can be read (step 1).'; return; }
+        const needPlan = Object.values(parsed.nodes).some(n => !n.chapters?.length);
+        if (needPlan && !LLM().pick(acc, provider.value)) { err.textContent = '👆 Planning the chapters needs a Claude API key or a Gemini key (step 4).'; return; }
+        const big = files.find(f => f.size > (window.NoemaSrcFiles?.MAX || 5e7)); if (big) { err.textContent = `⚠️ ${big.name} is over 50 MB — split it (e.g. one PDF per chapter).`; return; }
+        go.disabled = true;
+        try {
+          const c = await I.create(acc, parsed, { title: title.value.trim(), language: lang.value, learner: learner.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8), files: matches.filter(m => m.id), source: text.value, onLog: m => { busy.textContent = m; } });
+          close(); if (c.status === 'ready') { G().kick(); map(acc, c.id, { onStudy }); } else progress(acc, c, { onStudy, start: true });
+        } catch (e) { err.textContent = '⚠️ ' + e.message; go.disabled = false; }
+      } }, '📥 Import my map');
+      box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'),
+        head('📥 Import a map', 'Your own map of steps becomes the curriculum as it is — no AI redraws it. Give steps their files and they are taught from them.'),
+        el('ol', { class: 'cg-steps' },
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Your map'), tip('A tree (├── └── │), an outline (bullets, numbers, indentation, # headings), a Mermaid graph (A --> B: A comes first) or JSON (nodes + prerequisites / edges, or nested children; also a curriculum exported from noema-lite). A step can say what comes before it: “Topic (after: A, B)” or “Topic ← A”, what it covers: “Topic — summary”, and its files: “Topic 📎 file.pdf”.')),
+            text, el('div', { class: 'row' }, el('label', { class: 'btn small' }, '📄 Open a file', fileIn), aiBtn),
+            el('details', { class: 'cg-faq' }, el('summary', {}, 'How to read it'), el('label', { class: 'cg-field' }, 'Topics at the same level', mode), el('label', { class: 'tiny' }, reverse, ' ⇄ my arrows point from a step to what it needs (reverse them)'), el('label', { class: 'tiny' }, keepCaps, ' Keep CAPITALS as written')),
+            info, perr, prev),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Name and language')), el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'Language of the course', lang), el('label', { class: 'cg-field' }, 'Your starting point', learner)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip('Files are matched to steps by their names — change any match. A step with files is planned and built FROM them (no web research of its theory); steps without files are researched by the AI as usual. You can add files to any step later (✏️ Edit step → 📎), until it is prepared. A folder or .zip with a sub-folder per step (named like the step) is matched by the folder names.')), drop, el('div', { class: 'row' }, folder), fileBox),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI plans and prepares the steps?'), tip('The map is used as it is. The AI only plans the chapters of each step (from its files, when it has some) and later prepares each step as a subject.')), keysBox(acc), el('label', { class: 'cg-field' }, 'Use', provider),
+            el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude: stop and ask me when one step costs more than $', budget)),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Import')), go, busy, err)),
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+      setTimeout(() => text.focus(), 200);
+    });
+  }
+
   /* ======================= the map ======================= */
   const NW = 196, NH = 76, GX = 74, GY = 18, TOP = 64;
   function map(acc, cid, { focus, onStudy } = {}) {
@@ -245,7 +359,7 @@ window.NoemaCurMap = (() => {
           const prep = pk === 'ready' ? '⚡' : pk === 'generating' || G().busy() === key ? '⏳' : pk === 'failed' ? '⚠️' : pk === 'paused' ? '⏸️' : s2.open && !s2.mastered && !n.reviewed && !c.autoApprove ? '📝' : '';
           const b = el('button', { class: `cm-node cm-${state} cm-r-${n.role}` + (sel === id ? ' sel' : '') + (rel && !rel.has(id) ? ' dim' : ''), style: { left: P[id].x + 'px', top: P[id].y + 'px', width: NW + 'px', height: NH + 'px' }, 'data-id': id,
             'aria-label': `${n.title} — ${ROLE[n.role]} — ${state}${pk === 'ready' ? ', prepared' : ''}`, onclick: () => { sel = id; drawMap(); showPanel(id); } },
-            el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), el('span', { class: 'cm-badges' }, badge, prep),
+            el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), el('span', { class: 'cm-badges' }, badge, prep, n.material?.files?.length ? el('span', { title: 'Your material: ' + n.material.files.map(f => f.name).join(', ') }, '📎') : null),
             s2.score && !s2.mastered ? el('i', { class: 'cm-prog', style: { width: fmtPct(s2.score) } }) : null);
           inner.append(b);
         }
@@ -276,6 +390,7 @@ window.NoemaCurMap = (() => {
         panel.append(el('button', { class: 'btn small ghost cm-pclose', 'aria-label': 'Close the panel', onclick: () => { panel.classList.remove('on'); sel = null; drawMap(); } }, '✕'),
           el('div', { class: 'cm-ptitle' }, el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('div', {}, el('h3', {}, n.title), el('div', { class: 'tiny' }, ROLE[n.role] + (n.domains?.length ? ' · ' + n.domains.join(', ') : '')))),
           n.summary ? el('p', {}, n.summary) : null, prog ? el('p', { class: 'tiny' }, prog) : null, act,
+          n.material?.files?.length ? el('div', { class: 'cm-matpanel' }, el('div', { class: 'nx-lbl' }, '📎 Your material — this step is taught from it'), el('ul', { class: 'cm-matlist' }, ...n.material.files.map(f => el('li', {}, el('button', { class: 'linklike', onclick: () => openMaterial(acc, cid, id, f) }, '📄 ' + f.name), f.pages ? el('span', { class: 'tiny' }, ` · ${f.pages} pages`) : null)))) : null,
           el('div', { class: 'row cm-editrow' }, el('button', { class: 'btn small', onclick: () => editStep(acc, cid, id, { onDone: nid => { drawMap(); if (nid === null) { panel.classList.remove('on'); sel = null; } else showPanel(id); } }) }, '✏️ Edit step'),
             !pk.status && !st.mastered && (n.reviewed || c.autoApprove) && !(st.open) ? el('span', { class: 'tiny' }, '✔ reviewed — prepared when it opens') : null),
           n.learningGoals?.length ? el('div', {}, el('div', { class: 'nx-lbl' }, '🎯 After this step you can'), el('ul', { class: 'cm-goals' }, ...n.learningGoals.map(g => el('li', {}, g)))) : null,
@@ -343,5 +458,5 @@ window.NoemaCurMap = (() => {
 
   /** In a node's subject: the curriculum it belongs to, mastery so far, back to the map. */
   function nodeInfo(acc, ref) { const c = C().get(acc, ref?.id); const n = c?.nodes[ref?.node]; if (!n) return null; const st = C().nodeStatus(acc, c, ref.node); return { c, n, st }; }
-  return { library, create, map, progress, nodeInfo, editStep };
+  return { importMap, library, create, map, progress, nodeInfo, editStep };
 })();

@@ -178,7 +178,7 @@ window.NoemaClaude = (() => {
   const today = () => new Date().toISOString().slice(0, 10);
   const SYSTEM = (job = {}) => `You are building a noema-lite subject pack for the user, running inside the noema-lite app through the Claude API (the user is watching a progress screen; they are not technical).
 The noema-pack-builder skill is available in your code-execution container — follow its SKILL.md and both references completely (coverage, quality bar, ≥ 3 picture exercises per picture, all three kinds of pictures). Differences in THIS environment:
-${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.
+${job.kind === 'node' ? (job.files?.length ? NODE_FILES : NODE_SOURCES) : `1. The user's source files are uploaded into the container. Find them first (e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f \\( -iname '*.pdf' -o -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.txt' -o -iname '*.md' -o -iname '*.docx' \\) -mmin -1440 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). If some PDFs were attached as documents instead (see the user message), read them directly.
    EVERY uploaded file goes into the package: copy it into work/<id>/sources/ (or, if you split a PDF, ONLY its parts — scripts/split_pdf.py) and give each file its own source in sources.json with "file": "sources/<name>" (SKILL.md §3b). make_pack.py refuses a source without its file and a file without its source.`}
 2. The sandbox has NO internet. For pictures from the web: use the web_search tool to find high-quality, information-rich photographs and diagrams (prefer Wikimedia Commons, OpenStax, NIH, NASA, open-source docs; any licence is fine for this personal app as long as the source is recorded), then call the noema_web_image tool with the DIRECT image file url (Wikimedia: the upload.wikimedia.org original file). You will see the picture and get its size. Register it in media/media.json WITHOUT a file:
    {"id": "…", "origin": "web", "fetch": "app", "url": "<direct image url>", "page": "<page it came from>", "retrieved": "${today()}", "w": W, "h": H, "alt": "…", "credit": "author / site", "license": "…"}
@@ -192,6 +192,8 @@ ${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded 
 
   /** Curriculum nodes (engine/curriculum.js) have no uploaded sources: Claude researches them. */
   const NODE_SOURCES = `1. This pack is ONE NODE of a learning curriculum (the user message has the plan: the node, what the learner already knows, the chapters to write). There are no uploaded files: research the material yourself with web_search and web_fetch — official, authoritative sources first (official documentation and standards, university course pages, open textbooks such as OpenStax and LibreTexts, review articles, reference works; Wikipedia only as a pointer to better sources). Read what you cite. Record every source in sources.json (title, url, retrieved date) and map each chapter to its main source. Write one pack chapter per planned chapter, in the planned order and with the planned titles, covering every teaching goal and every "must cover" item; facts must be correct and current. Do not re-teach the prerequisites the learner already mastered; connect to them briefly where needed.`;
+  /** Curriculum nodes WITH the learner's own files (imported maps, 📎 material): built from the files, no theory research. */
+  const NODE_FILES = `1. This pack is ONE NODE of a learning curriculum (the user message has the plan: the node, what the learner already knows, the chapters to write). The learner gave the material of this node: the uploaded files (find them first, e.g. \`ls -la /mnt/user-data/uploads 2>/dev/null; find / -xdev -type f -mmin -1440 \\( -iname '*.pdf' -o -iname '*.docx' -o -iname '*.pptx' -o -iname '*.md' -o -iname '*.txt' -o -iname '*.png' -o -iname '*.jpg' \\) 2>/dev/null | grep -v -E '^/(proc|sys|usr|lib|opt|etc|var)' | head -50\`). THESE FILES ARE THE SOURCES: build the pack from them — read them completely, teach and test everything they contain for the planned chapters, cite their pages. Do NOT research the theory on the web (use web_search only to find pictures). Where a planned chapter is not covered by the files, write it briefly from your own reliable knowledge and say so in the coverage notes. Package every file (SKILL.md §3b) with the source ids given in the plan (m1, m2…; the parts of a split PDF get their own ids). Write one pack chapter per planned chapter, in the planned order and with the planned titles; do not re-teach the prerequisites the learner already mastered.`;
   const TOOL_WEB_IMAGE = {
     name: 'noema_web_image',
     description: 'Download a picture from the web for the pack (your sandbox has no internet; the noema-lite app downloads it). Returns the picture so you can check it is correct, relevant and sharp, plus its size W×H in pixels (use these coordinates for regions). Then register it in media.json as a "fetch": "app" web picture.',
@@ -200,7 +202,7 @@ ${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded 
   function toolsFor(job) {
     return [{ type: 'code_execution_20250825', name: 'code_execution' },
       ...(job.noSearch ? [] : [{ type: 'web_search_20250305', name: 'web_search', max_uses: job.maxSearches || 20 }]),
-      ...(job.kind === 'node' && !job.noFetch ? [{ type: 'web_fetch_20250910', name: 'web_fetch', max_uses: 40 }] : []), TOOL_WEB_IMAGE];
+      ...(job.kind === 'node' && !job.noFetch && !job.files?.length ? [{ type: 'web_fetch_20250910', name: 'web_fetch', max_uses: 40 }] : []), TOOL_WEB_IMAGE];
   }
   /** Prompt caching: system + the newest user turn (≤ 4 breakpoints in total). */
   function withCache(messages) {
@@ -209,8 +211,12 @@ ${job.kind === 'node' ? NODE_SOURCES : `1. The user's source files are uploaded 
     return ms;
   }
   function firstMessage(job, pdfAsDocument) {
-    if (job.kind === 'node') return { role: 'user', content: [{ type: 'text', text: [`Create a noema-lite subject pack for one node of my curriculum.`, `Title: ${job.title}`, `Subject id: ${job.subjectId}`, `Language of the material: ${job.language || 'en'}`, '', job.brief || ''].join('\n') }] };
     const files = job.files || [];
+    if (job.kind === 'node') {
+      const blocks = [{ type: 'text', text: [`Create a noema-lite subject pack for one node of my curriculum.`, `Title: ${job.title}`, `Subject id: ${job.subjectId}`, `Language of the material: ${job.language || 'en'}`, files.length ? `My files for this node (uploaded): ${files.map(f => f.name).join(', ')}` : '', '', job.brief || ''].filter(x => x !== null).join('\n') }];
+      for (const f of files) blocks.push(pdfAsDocument && /pdf/.test(f.type) ? { type: 'document', source: { type: 'file', file_id: f.fileId }, title: f.name } : { type: 'container_upload', file_id: f.fileId });
+      return { role: 'user', content: blocks };
+    }
     const lines = [`Create a noema-lite subject pack.`, `Title: ${job.title}`, `Subject id: ${job.subjectId}`, `Language of the material: ${job.language || 'same as the sources'}`, `My goal: ${job.goal || 'understanding'}`];
     if (job.notes) lines.push(`Notes from me: ${job.notes}`);
     if (job.links?.length) lines.push(`Links to read as sources (use web search / your knowledge of them; the sandbox has no internet):\n- ${job.links.join('\n- ')}`);
