@@ -142,6 +142,44 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   ok(qn.q.every((id, i) => i === 0 || qn.order.indexOf(id) > -1), 'queued in study order');
   await until(() => (JSON.parse(kvOf(uid)['a:curriculum:' + cid]?.value || '{"nodes":{}}').nodes ? Object.values(JSON.parse(kvOf(uid)['a:curriculum:' + cid].value).nodes).filter(n => n.pack?.status === 'app').length : 0) === qn.q.length, 8000);
   ok(new RegExp(`${qn.q.length} step\\(s\\) queued to prepare`).test((await tool('noema_curricula')).text) && (await tool('noema_curriculum_task', { curriculum_id: cid, want: 'step' })).text.includes(`(${qn.q[0]})`), 'the connector serves them one by one, first the first in study order');
+  // ♻️ each queued step is handed out ONCE (overlapping scheduled runs, two runs at the same moment, an older copy of the map)
+  {
+    const stepOf = t => (t.match(/^Step: “[^”]*” \(([^)]+)\)/m) || [])[1];
+    const task = (a = {}) => tool('noema_curriculum_task', { curriculum_id: cid, want: 'step', ...a });
+    ok(stepOf((await task()).text) === qn.q[1], 'a second run (while the first still builds its step) gets the NEXT queued step, not the same one');
+    const pk1 = (await task({ peek: true })).text, pk2 = (await task({ peek: true })).text;
+    ok(pk1.includes(`(${qn.q[2]})`) && pk2.includes(`(${qn.q[2]})`) && !kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[2]], 'peek says what is next without claiming it (asked twice → the same step, no claim)');
+    ok(/being prepared by another run right now/.test((await tool('noema_curricula')).text), 'noema_curricula shows the steps other runs are preparing');
+    r = await task({ step: qn.q[0] });
+    ok(r.error && /being prepared by another run/.test(r.text), 'asking for a claimed step by name is refused…');
+    ok(stepOf((await task({ step: qn.q[0], force: true })).text) === qn.q[0], '…unless force = true (a run that stopped without saving)');
+    kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[0]].updated_at = new Date(Date.now() - 5 * 3600e3).toISOString();
+    ok(stepOf((await task()).text) === qn.q[0], 'a claim older than 4 h (its run died) expires: the step is handed out again');
+    if (qn.q.length >= 5) {
+      const [ra, rb] = await Promise.all([task(), task()]); const a = stepOf(ra.text), b = stepOf(rb.text);
+      ok(a && b && a !== b && ![qn.q[0], qn.q[1]].includes(a) && ![qn.q[0], qn.q[1]].includes(b), `two runs asking at the same moment get different steps (${a} · ${b})`);
+    }
+    // the second run saves its step → the claim ends, the step is ready
+    const sid1 = await p.evaluate(([id, n]) => NoemaCurriculum.packId(NoemaCurriculum.get(Noema.account.id, id), n), [cid, qn.q[1]]);
+    const pk = JSON.parse(JSON.stringify(FX)); pk.subject = { ...pk.subject, id: sid1, title: 'Step two', owner: null }; pk.version = sid1 + '-v1';
+    const up1 = (await tool('noema_start_upload', { subject_id: sid1 })).text.match(/https?:\/\/\S+upload\/sign\S+/)[0];
+    await fetch(up1, { method: 'PUT', headers: { 'content-type': 'application/json', 'x-upsert': 'true' }, body: JSON.stringify(pk) });
+    ok(/This is the step/.test((await tool('noema_finish_upload', { subject_id: sid1 })).text) && !kvOf(uid)['a:curclaim:' + cid + ':' + qn.q[1]], 'saving the step ends its claim');
+    ok(await until(() => p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack?.status === 'ready', [cid, qn.q[1]]), 25000), 'the app marks it ready');
+    // an older copy of the map (another device) puts the saved step back in the queue → it is NOT prepared again, and the app heals it
+    await p.evaluate(([id, n]) => { const c = NoemaCurriculum.get(Noema.account.id, id); c.nodes[n].pack = { ...c.nodes[n].pack, status: 'app', queuedAt: new Date(Date.now() - 864e5).toISOString() }; NoemaCurriculum.save(Noema.account.id, c); }, [cid, qn.q[1]]);
+    await until(() => JSON.parse(kvOf(uid)['a:curriculum:' + cid].value).nodes[qn.q[1]].pack.status === 'app', 8000);
+    const all = [];
+    for (let i = 0; i < qn.q.length + 2; i++) { const t = (await task({ peek: true })).text; const s = stepOf(t) || (t.match(/\(([a-z0-9_]+)\) · subject_id/) || [])[1]; if (!s) break; all.push(s); kvOf(uid)['a:curclaim:' + cid + ':' + s] = { value: '{}', updated_at: new Date().toISOString() }; }
+    ok(all.length && !all.includes(qn.q[1]) && new Set(all).size === all.length, `a step saved after it was queued is never served again, even when an older copy re-queues it (served: ${all.length}, each once)`);
+    for (const s of all) delete kvOf(uid)['a:curclaim:' + cid + ':' + s];
+    ok(await until(() => p.evaluate(async ([id, n]) => { await NoemaCurJobs.App.poll(); return NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack?.status === 'ready'; }, [cid, qn.q[1]]), 15000, 1000), 'the app heals the re-queued step back to ready (its subject is saved)');
+    // the app never queues a step twice: queueing a queued step again keeps its place
+    const before = await p.evaluate(([id, n]) => NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack.queuedAt, [cid, qn.q[2]]);
+    const after = await p.evaluate(([id, n]) => { const c = NoemaCurriculum.get(Noema.account.id, id); NoemaCurriculum.Gen.toApp(c, n); NoemaCurriculum.Gen.request(c, n); return NoemaCurriculum.get(Noema.account.id, id).nodes[n].pack.queuedAt; }, [cid, qn.q[2]]);
+    ok(before && before === after, 'queueing an already-queued step again changes nothing (idempotent: same place in the queue)');
+    for (const k of Object.keys(kvOf(uid))) if (k.startsWith('a:curclaim:')) delete kvOf(uid)[k];
+  }
   await p.evaluate(([id, ids]) => { const c = NoemaCurriculum.get(Noema.account.id, id); for (const k of ids) c.nodes[k].pack = { ...c.nodes[k].pack, status: null }; NoemaCurriculum.save(Noema.account.id, c); }, [cid, qn.q]);
   await p.locator('.noema-ovbox:has(.cm-ahead) button:has-text("Close")').click(); await wait(200);
 

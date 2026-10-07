@@ -15,17 +15,41 @@
   'use strict';
   const C = () => root.NoemaCurriculum, L = () => root.NoemaLLM;
   const BATCH = 5, BATCH_FILES = 2, GRAPH = ['dag', 'audit', 'expand'], IN = 'a:curin:';
+  /* A step handed to a run of the learner's Claude is CLAIMED (KV a:curclaim:<cid>:<nid>, a lease): other runs — e.g. the
+     hourly scheduled ones, while this one is still building — skip it, so every queued step is prepared once. The claim
+     ends when the step is saved, or after LEASE (a run that died without saving). */
+  const CLAIM = 'a:curclaim:', LEASE = 4 * 3600e3;
+  const claimKey = (cid, nid) => `${CLAIM}${cid}:${nid}`;
   const isApp = c => c?.provider === 'claudeapp';
   const prepared = n => ['ready', 'generating'].includes(n?.pack?.status);
   const needsPlan = n => !prepared(n) && (!n.chapters?.length || !!n.replan);
   const clone = o => JSON.parse(JSON.stringify(o));
+  const ms = v => Date.parse(v || '') || 0;
 
-  /** What is still to do outside the app: { graph: 'dag'|'audit'|'expand'|null, toPlan: [ids], steps: [ids], done } */
+  /** What is still to do outside the app: { graph: 'dag'|'audit'|'expand'|null, toPlan: [ids], steps: [ids], claimed: [ids], done }
+      steps: queued and free, in queue order · claimed: queued and being prepared by a run right now (see settle) */
   function work(c) {
     const graph = isApp(c) && GRAPH.includes(c.stage) ? c.stage : null;
     const toPlan = isApp(c) && !graph && c.stage !== 'dag' ? C().order(c).filter(id => needsPlan(c.nodes[id])) : [];
-    const steps = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')));
-    return { graph, toPlan, steps, done: !graph && !toPlan.length && !steps.length };
+    const queued = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')) || a.localeCompare(b));
+    const steps = queued.filter(id => !c.nodes[id].pack.claimedAt), claimed = queued.filter(id => c.nodes[id].pack.claimedAt);
+    return { graph, toPlan, steps, claimed, done: !graph && !toPlan.length && !steps.length };
+  }
+  /** Saved already? The step's subject (KV a:packmeta:<packId>, written when it is saved) is newer than the step's place in the queue. */
+  const savedSince = (c, nid, meta) => !!meta && meta.id === C().packId(c, nid) && meta.curriculum === c.id && meta.node === nid && ms(meta.updatedAt) >= ms(c.nodes[nid]?.pack?.queuedAt);
+  /** The queue as it really is (the connector works on this): a queued step whose subject was saved after it was queued is
+      prepared — even when an older copy of the curriculum (another device) put it back in the queue; a queued step with a
+      live claim is being prepared by another run.  claims: KV rows a:curclaim:<cid>:*  · packs: KV rows a:packmeta:* */
+  function settle(c, { claims = [], packs = [], now = Date.now(), lease = LEASE } = {}) {
+    const cc = clone(c), live = {}, saved = {};
+    for (const r of claims) { if (!r.key.startsWith(CLAIM + c.id + ':')) continue; const t = ms(r.updated_at); if (now - t < lease) live[r.key.slice(CLAIM.length + c.id.length + 1)] = t; }
+    for (const r of packs) { let m; try { m = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; } if (m?.curriculum === c.id && m.node) saved[m.node] = m; }
+    for (const [nid, n] of Object.entries(cc.nodes || {})) {
+      if (n.pack?.status !== 'app') continue;
+      if (savedSince(cc, nid, saved[nid])) { n.pack = { ...n.pack, status: 'ready', version: saved[nid].version || null }; continue; }
+      if (live[nid]) n.pack = { ...n.pack, claimedAt: new Date(live[nid]).toISOString() };
+    }
+    return cc;
   }
 
   /* ---------- tasks ---------- */
@@ -64,11 +88,12 @@
     return { kind: 'step', id: 'step:' + nid, nid, packId: C().packId(c, nid), title: `Prepare the step “${n.title}”`, stepTitle: n.title, language: c.language, brief: C().nodeBrief(c, nid), downloads, planned: !!n.chapters?.length };
   }
   /** The next task. want: 'any' | 'map' | 'plan' | 'step'; step: a step id or title (prepares that one). */
-  function next(c, { want = 'any', step = '' } = {}) {
+  function next(c, { want = 'any', step = '', force = false } = {}) {
     if (step) {
       const s = String(step).trim().toLowerCase(); const nid = c.nodes[step] ? step : Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase() === s) || Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase().includes(s));
       if (!nid) return { error: `No step “${step}” in “${c.title}”.` };
       if (prepared(c.nodes[nid])) return { error: `“${c.nodes[nid].title}” is already prepared.` };
+      if (c.nodes[nid].pack?.claimedAt && !force) return { error: `“${c.nodes[nid].title}” is being prepared by another run since ${c.nodes[nid].pack.claimedAt} — do not prepare it twice. If that run has stopped without saving it, call noema_curriculum_task again with step and force = true.` };
       if (!c.nodes[nid].chapters?.length) return isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
       return stepSpec(c, nid);
     }
@@ -187,6 +212,14 @@
           done.push(r.key);
         } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
       }
+      // a queued step whose subject is saved already — its answer was handled on another device, then an older copy of the
+      // curriculum put the step back in the queue: finish it here, so it is not prepared a second time
+      for (const c of C().list(acc)) for (const [nid, nd] of Object.entries(c.nodes || {})) {
+        if (nd.pack?.status !== 'app') continue;
+        const pid = C().packId(c, nid), meta = C().kvGet(acc, 'packmeta:' + pid);
+        if (!savedSince(c, nid, meta)) continue;
+        try { if (await finishStep(acc, c, { nid, packId: pid, version: meta.version || null })) { n++; steps++; } } catch (x) { console.warn('[curjobs]', x); App.error = x.message; }
+      }
       // the changed curricula reach the cloud BEFORE their answers leave the inbox: the connector always sees one or the other
       if (n) await CL.push(acc);
       for (const k of done) await CL.kvDelete(k).catch(() => { });
@@ -244,5 +277,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, next, byId, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, savedSince, claimKey, CLAIM, LEASE, next, byId, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);

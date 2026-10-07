@@ -107,6 +107,7 @@ async function complete(token, uid, sid, p, res, fail, text) {
   let more = '';
   if (step) {
     await kvPut(token, uid, CJ().inboxKey(step.c.id), { v: 1, kind: 'step', nid: step.nid, packId: sid, version: p.version || null, at: new Date().toISOString(), via: 'claude-app' });
+    await releaseStep(token, step.c.id, step.nid).catch(() => { });   // saved: its claim ends (the inbox entry + the subject keep it out of the queue)
     const left = CJ().work(await curState(token, step.c)).steps.length;
     more = `\n🧭 This is the step “${step.c.nodes[step.nid].title}” of the curriculum “${step.c.title}”: it appears ready on the learner's map by itself (the app picks it up when it is open or next opened).` + (left ? `\n${left} more step(s) are queued — call noema_curriculum_task with curriculum_id "${step.c.id}" for the next one, if the learner asked for more.` : '');
   }
@@ -122,8 +123,24 @@ async function curricula(token) {
   for (const r of await kvRows(token, 'a:curriculum:')) { try { const c = JSON.parse(r.value); if (c?.format === 'noema.curriculum/v1' && c.nodes) out.push(c); } catch (e) { } }
   return out.sort((a, b) => String(b.updated || '').localeCompare(String(a.updated || '')));
 }
-/** The curriculum as it will be once the app has applied the answers still waiting in the inbox. */
-async function curState(token, c) { return CJ().merged(c, await kvRows(token, `${CJ().IN}${c.id}:`)); }
+/** The curriculum as it will be once the app has applied the answers still waiting in the inbox — with its queue as it
+    really is: steps whose subject is saved already are prepared, steps claimed by a run that is building them are taken. */
+async function curState(token, c) {
+  const [inbox, claims, packs] = await Promise.all([kvRows(token, `${CJ().IN}${c.id}:`), kvRows(token, `${CJ().CLAIM}${c.id}:`), kvRows(token, `a:packmeta:cur-${c.id.slice(1, 7)}-`)]);
+  return CJ().settle(CJ().merged(c, inbox), { claims, packs });
+}
+/** Claim a step for this run — atomically, so two runs that ask at the same moment never get the same step:
+    insert the claim if there is none; else take it over only when it has expired (or force). → true when this run has it */
+async function claimStep(token, uid, cid, nid, { force = false } = {}) {
+  const key = CJ().claimKey(cid, nid), now = new Date().toISOString();
+  const value = JSON.stringify({ v: 1, nid, at: now, run: Math.random().toString(36).slice(2, 10) });
+  const ins = await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value, updated_at: now }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
+  if (Array.isArray(ins) && ins.length) return true;
+  const stale = new Date(Date.now() - CJ().LEASE).toISOString();
+  const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}` + (force ? '' : `&updated_at=lt.${encodeURIComponent(stale)}`), token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });
+  return Array.isArray(upd) && upd.length > 0;
+}
+const releaseStep = (token, cid, nid) => sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(CJ().claimKey(cid, nid))}`, token, { method: 'DELETE' });
 async function findStep(token, sid) {
   const m = /^cur-([a-z0-9]{1,6})-/.exec(sid); if (!m) return null;
   for (const r of await kvRows(token, 'a:curriculum:c' + m[1])) {
@@ -137,6 +154,7 @@ function workLine(c) {
   if (w.graph) bits.push(`its map is being built (next: ${w.graph === 'dag' ? 'agent 1, the map' : w.graph === 'audit' ? 'agent 1b, the prerequisite check' : 'agent 2, the goal in depth'})`);
   if (w.toPlan.length) bits.push(`${w.toPlan.length} step(s) need their chapter plan`);
   if (w.steps.length) bits.push(`${w.steps.length} step(s) queued to prepare: ${w.steps.slice(0, 5).map(id => '“' + c.nodes[id].title + '”').join(', ')}${w.steps.length > 5 ? '…' : ''}`);
+  if (w.claimed.length) bits.push(`${w.claimed.length} step(s) being prepared by another run right now: ${w.claimed.slice(0, 5).map(id => '“' + c.nodes[id].title + '”').join(', ')}${w.claimed.length > 5 ? '…' : ''}`);
   const n = Object.keys(c.nodes).length, ready = Object.values(c.nodes).filter(x => x.pack?.status === 'ready').length;
   return `- “${c.title || c.goal}” — curriculum_id ${c.id} · ${n} steps, ${ready} prepared · made with ${c.provider === 'claudeapp' ? 'the Claude app' : 'noema-lite (API key / Gemini)'}\n  ${bits.length ? 'To do: ' + bits.join('; ') : 'nothing waiting for you'}`;
 }
@@ -191,8 +209,8 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { url: { type: 'string' }, media_id: { type: 'string', description: 'the id for media.json (optional)' }, alt: { type: 'string', description: 'what it shows (optional)' } }, required: ['url'] }, annotations: { readOnlyHint: true } },
   { name: 'noema_curricula', description: 'The learner\'s noema-lite curricula (maps of steps, each step becomes a subject) and what is waiting for you in each: building the map, planning the chapters of steps, preparing queued steps as subjects.',
     inputSchema: { type: 'object', properties: {} }, annotations: { readOnlyHint: true } },
-  { name: 'noema_curriculum_task', description: 'The next piece of work on a curriculum, as complete instructions: an agent task of the map (answer with noema_curriculum_submit), a batch of chapter plans (same), or a step to prepare as a subject pack (build it with the noema-pack-builder workflow and save it with noema_start_upload/noema_finish_upload under the given subject_id). Call it again after each accepted answer or saved step.',
-    inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string', description: 'from noema_curricula (may be omitted when only one curriculum has work)' }, want: { type: 'string', enum: ['any', 'map', 'plan', 'step'], description: 'only this kind of work (default any: map first, then plans, then queued steps)' }, step: { type: 'string', description: 'prepare this step (id or title) even if it is not queued' } } } },
+  { name: 'noema_curriculum_task', description: 'The next piece of work on a curriculum, as complete instructions: an agent task of the map (answer with noema_curriculum_submit), a batch of chapter plans (same), or a step to prepare as a subject pack (build it with the noema-pack-builder workflow and save it with noema_start_upload/noema_finish_upload under the given subject_id). A step handed to you is claimed for you: other runs skip it until you save it (or for 4 hours), so each queued step is prepared once — prepare the step you got. When the learner only asks what is next, pass peek = true. Call it again after each accepted answer or saved step.',
+    inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string', description: 'from noema_curricula (may be omitted when only one curriculum has work)' }, want: { type: 'string', enum: ['any', 'map', 'plan', 'step'], description: 'only this kind of work (default any: map first, then plans, then queued steps)' }, step: { type: 'string', description: 'prepare this step (id or title) even if it is not queued' }, peek: { type: 'boolean', description: 'true = only SAY what is next (the learner asked what is next, you will not do it now): the step is not claimed, so another run can still take it' }, force: { type: 'boolean', description: 'with step: take over a step that another run claimed but stopped preparing without saving' } } } },
   { name: 'noema_curriculum_submit', description: 'Submit your answer to a map / chapter-plan task from noema_curriculum_task. It is checked exactly as noema-lite checks its own agents; problems come back as a list — fix all of them and submit again. Accepted answers reach the learner\'s app by themselves.',
     inputSchema: { type: 'object', properties: { curriculum_id: { type: 'string' }, task_id: { type: 'string', description: 'the task id given with the task (e.g. "dag", "plan:a,b,c")' }, result_json: { type: 'string', description: 'ONE JSON object matching the task\'s JSON Schema' } }, required: ['curriculum_id', 'task_id', 'result_json'] } },
 ];
@@ -309,10 +327,21 @@ async function callTool(name, args, ctx) {
     }
     case 'noema_curriculum_task': {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return pk.error.startsWith('Which') ? text(pk.error) : fail(pk.error);
-      const c = await curState(token, pk.c);
-      const t = CJ().next(c, { want: args?.want || 'any', step: args?.step || '' });
+      const c = await curState(token, pk.c), force = args?.force === true || args?.force === 'true', peek = args?.peek === true || args?.peek === 'true';
+      let t = null;
+      for (let tries = 0; tries < 8; tries++) {   // a step is handed out only once it is claimed for this run (another run may claim it a moment earlier → the next one)
+        t = CJ().next(c, { want: args?.want || 'any', step: args?.step || '', force });
+        if (!t || t.error || t.kind !== 'step') break;
+        if (peek) return text(`Next step (not claimed — peek): “${t.stepTitle}” (${t.nid}) · subject_id ${t.packId}. ${CJ().work(c).steps.length} step(s) queued in all. To prepare it, call noema_curriculum_task again without peek.`);
+        if (await claimStep(token, uid, c.id, t.nid, { force: force && !!args?.step })) break;
+        if (args?.step) { t = { error: `“${t.stepTitle}” has just been taken by another run — do not prepare it twice. If that run has stopped without saving it, call again with force = true.` }; break; }
+        c.nodes[t.nid].pack = { ...c.nodes[t.nid].pack, claimedAt: new Date().toISOString() }; t = null;
+      }
       if (t?.error) return fail(t.error);
-      if (!t) return text(`✅ Nothing is waiting in “${c.title || c.goal}”${args?.want && args.want !== 'any' ? ` (${args.want})` : ''}. ` + (CJ().isApp(c) ? 'Steps reach this queue when the learner opens them on the map (or the app queues the next ones ahead). ' : '') + 'To prepare a particular step anyway, call noema_curriculum_task with step = its title.');
+      if (!t) {
+        const busy = CJ().work(c).claimed;
+        return text(`✅ Nothing is waiting in “${c.title || c.goal}”${args?.want && args.want !== 'any' ? ` (${args.want})` : ''}. ` + (busy.length ? `${busy.length} queued step(s) are being prepared by other runs right now (${busy.slice(0, 5).map(id => '“' + c.nodes[id].title + '”').join(', ')}) — do NOT prepare them again; stop here. ` : '') + (CJ().isApp(c) ? 'Steps reach this queue when the learner opens them on the map (or the app queues the next ones ahead). ' : '') + 'To prepare a particular step anyway, call noema_curriculum_task with step = its title.');
+      }
       if (t.kind !== 'step') return text(CJ().taskText(c, t, 'connector', { fileLines: t.downloads?.length ? await downloadLines(token, uid, `work/plan-${c.id}`, t.downloads) : [] }));
       const lines = t.downloads.length ? await downloadLines(token, uid, `work/${t.packId}/sources`, t.downloads) : [];
       return text(CJ().stepText(c, t, { mode: 'connector', fileLines: lines }));

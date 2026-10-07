@@ -69,12 +69,12 @@
         const rows = await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key');
         const pre = 'noema1:' + acc + ':'; const mt = jget(pre + 'meta:mtime', {}); let changed = 0;
         for (const r of rows || []) {
-          if (r.key.startsWith('a:curin:')) continue;   // answers from the Claude app: read and deleted by engine/curjobs.js, never stored here
+          if (r.key.startsWith('a:curin:') || r.key.startsWith('a:curclaim:')) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js) and its runs' claims: never stored here
           const t = Date.parse(r.updated_at) || 0;
           if (!mt[r.key] || t > mt[r.key]) { if (localStorage.getItem(pre + r.key) !== r.value) { try { localStorage.setItem(pre + r.key, r.value); changed++; } catch (e) { } } mt[r.key] = t; }
         }
         // keys changed locally while offline (newer than server or missing there) → push
-        const remote = new Map((rows || []).filter(r => !r.key.startsWith('a:curin:')).map(r => [r.key, Date.parse(r.updated_at) || 0]));
+        const remote = new Map((rows || []).filter(r => !r.key.startsWith('a:curin:') && !r.key.startsWith('a:curclaim:')).map(r => [r.key, Date.parse(r.updated_at) || 0]));
         Object.keys(mt).forEach(k => { if (!remote.has(k) || mt[k] > remote.get(k)) st.pending.add(k); });
         jset(pre + 'meta:mtime', mt);
         st.lastSync = Date.now(); st.error = null; return changed;

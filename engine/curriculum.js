@@ -707,6 +707,7 @@ window.NoemaCurriculum.Gen = (() => {
   /** 💬 Prepare a step in the learner's Claude app (their Claude plan) instead of here: it waits in the queue the connector serves. */
   function toApp(c, nid, { auto = false } = {}) {
     const cur = C.get(acc, c.id); const n = cur?.nodes[nid]; if (!n || ['ready', 'generating'].includes(n.pack?.status)) return;
+    if (n.pack?.status === 'app') { const k = key(c.id, nid); if (priority.includes(k)) priority.splice(priority.indexOf(k), 1); return; }   // queued already: keep its place (idempotent)
     if (busy === key(c.id, nid)) ctl?.abort();
     n.pack = { ...(n.pack || {}), id: C.packId(cur, nid), status: 'app', queuedAt: new Date().toISOString(), error: null, auto }; if (!n.reviewed) n.reviewed = new Date().toISOString();
     C.save(acc, cur); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });   // the connector reads it from the cloud
