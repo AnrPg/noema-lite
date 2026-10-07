@@ -31,7 +31,102 @@
      "lemma": "Rüebli",
      "region": "CH"
     }
-   ]
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Homely and healthy; children's food and rabbit jokes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "carrot, the orange root vegetable",
+      "concept": "veg.carrot",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schäle die Karotten für die Suppe.",
+      "tr": "I'm peeling the carrots for the soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Kilo Karotten, bitte.",
+      "tr": "A kilo of carrots, please.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Karotten sind gut für die Augen, sagt meine Oma.",
+      "tr": "Carrots are good for your eyes, my grandma says.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Karotten schälen",
+      "tr": "to peel carrots"
+     },
+     {
+      "text": "geriebene Karotten",
+      "tr": "grated carrots"
+     },
+     {
+      "text": "der Karottensaft",
+      "tr": "carrot juice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Möhre",
+      "register": "neutral",
+      "nuance": "the same vegetable; the usual word in northern and central Germany",
+      "region": "north"
+     },
+     {
+      "word": "Gelbe Rübe",
+      "register": "regional",
+      "nuance": "southern Germany (Bavaria, Swabia)",
+      "region": "south"
+     },
+     {
+      "word": "Rüebli",
+      "register": "regional",
+      "nuance": "Switzerland",
+      "region": "CH"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French carotte, from Latin carōta, from Ancient Greek καρωτόν (karōtón).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The orange carrot is often credited to Dutch growers of the 17th century; older carrots were purple or yellow."
+    ],
+    "pitfalls": [
+     "Spelling: German Karotte has one r and two t's; English carrot has two r's and one t."
+    ],
+    "subtleties": [
+     "‘Carrot and stick’ is not said with Karotte in German: Zuckerbrot und Peitsche (‘sweet bread and whip’).",
+     "Which word people use (Karotte, Möhre, Gelbe Rübe, Rüebli) tells you where they are from."
+    ]
+   }
   },
   {
    "id": "de:Zwiebel",
@@ -54,6 +149,118 @@
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Kitchen tears; cosy cooking smells.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "onion",
+      "concept": "veg.onion",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "bulb of a plant (tulip, lily …)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "gardening"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(old) pocket watch",
+      "register": [
+       "colloquial",
+       "dated"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Beim Zwiebelschneiden muss ich immer weinen.",
+      "tr": "I always cry when I cut onions.",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Brate die Zwiebeln goldbraun an.",
+      "tr": "Fry the onions until golden brown.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Herbst pflanzt man Tulpenzwiebeln.",
+      "tr": "Tulip bulbs are planted in autumn.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
+     },
+     {
+      "text": "Opa zog seine alte Zwiebel aus der Westentasche.",
+      "tr": "Grandpa pulled his old pocket watch out of his waistcoat pocket.",
+      "register": "colloquial",
+      "context": "humour",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Zwiebeln schneiden",
+      "tr": "to cut onions"
+     },
+     {
+      "text": "rote Zwiebel",
+      "tr": "red onion"
+     },
+     {
+      "text": "die Zwiebelsuppe",
+      "tr": "onion soup"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "sich nach dem Zwiebelprinzip anziehen",
+      "tr": "to dress following the onion principle",
+      "kind": "colloquial",
+      "meaning": "to dress in several layers",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Bolle",
+      "register": "regional",
+      "nuance": "Berlin and northern colloquial word for onion",
+      "region": "Berlin"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German zwibel, Old High German zwibollo, from Late Latin cēpulla, diminutive of Latin cēpa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The onion-shaped domes of Bavarian churches are called Zwiebeltürme (‘onion towers’)."
+    ],
+    "pitfalls": [
+     "die Zwiebel is feminine; plural die Zwiebeln.",
+     "Frühlingszwiebel = spring onion (scallion), not a small onion."
+    ],
+    "subtleties": [
+     "Zwiebel also means any plant bulb: Blumenzwiebel, Tulpenzwiebel."
+    ]
    }
   },
   {
@@ -77,6 +284,126 @@
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh salads in summer; in slang, mocking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cucumber",
+      "concept": "veg.cucumber",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "pickled gherkin (saure Gurke)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "old banger, piece of junk (a car or device)",
+      "register": [
+       "colloquial",
+       "pejorative"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "big nose",
+      "register": [
+       "colloquial",
+       "humorous"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schneide eine Gurke für den Salat.",
+      "tr": "I'm slicing a cucumber for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Gurken aus dem Garten sind dieses Jahr klein.",
+      "tr": "The cucumbers from the garden are small this year.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Abendbrot gibt es saure Gurken.",
+      "tr": "There are pickled gherkins with supper.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Mit der alten Gurke fährst du noch?",
+      "tr": "You're still driving that old banger?",
+      "register": "colloquial",
+      "context": "cars",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "saure Gurken",
+      "tr": "pickled gherkins"
+     },
+     {
+      "text": "der Gurkensalat",
+      "tr": "cucumber salad"
+     },
+     {
+      "text": "eine Gurke schälen",
+      "tr": "to peel a cucumber"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Sauregurkenzeit",
+      "tr": "the sour-gherkin season",
+      "kind": "colloquial",
+      "meaning": "the silly season: summer, when there is little news",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Salatgurke",
+      "register": "neutral",
+      "nuance": "the long fresh cucumber, as opposed to pickles"
+     },
+     {
+      "word": "Gewürzgurke",
+      "register": "neutral",
+      "nuance": "a small pickled gherkin"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον (angoúrion, ‘cucumber’); cognate with Dutch augurk and English gherkin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Gurke reached German through Polish from Byzantine Greek ἀγγούριον — the same word as Modern Greek αγγούρι."
+    ],
+    "pitfalls": [
+     "German Gurke covers both the fresh cucumber and the small pickle; English separates cucumber and gherkin."
+    ],
+    "subtleties": [
+     "In slang a Gurke is a lame old car or a useless device — context tells you which ‘cucumber’ is meant."
+    ]
    }
   }
  ],

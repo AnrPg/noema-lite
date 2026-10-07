@@ -18,6 +18,82 @@
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Healthy everyday food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "carrot",
+      "concept": "veg.carrot",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא מְגָרֶרֶת גֶּזֶר לַסָּלָט.",
+      "tr": "Mom is grating carrot for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי קִילוֹ גֶּזֶר בַּשּׁוּק.",
+      "tr": "I bought a kilo of carrots at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "מִיץ גֶּזֶר טִבְעִי, בְּבַקָּשָׁה.",
+      "tr": "Fresh carrot juice, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִיץ גֶּזֶר",
+      "tr": "carrot juice"
+     },
+     {
+      "text": "גֶּזֶר מְגֻרָּר",
+      "tr": "grated carrot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שִׁיטַת הַמַּקֵּל וְהַגֶּזֶר",
+      "tr": "the method of the stick and the carrot",
+      "kind": "idiom",
+      "meaning": "a carrot-and-stick approach",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "From Persian گزر (gazar, ‘carrot’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic جَزَر (jazar) is the same Persian word."
+    ],
+    "pitfalls": [
+     "גֶּזֶר (carrot) and the verb גָּזַר (to cut; to decree) share the letters גזר — read the vowels or the context."
+    ],
+    "subtleties": [
+     "For food the singular is often used for the mass: קָנִיתִי גֶּזֶר = I bought carrots."
+    ]
    }
   },
   {
@@ -38,6 +114,84 @@
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Kitchen tears, frying smells.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "onion",
+      "concept": "veg.onion",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "bulb (of a plant)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "gardening"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "צָרִיךְ לְטַגֵּן אֶת הַבָּצָל עַד שֶׁיַּזְהִיב.",
+      "tr": "You need to fry the onion until it turns golden.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "חִתּוּךְ בָּצָל מַדְמִיעַ לִי אֶת הָעֵינַיִם.",
+      "tr": "Cutting onion makes my eyes water.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּצָלִים שֶׁל צִבְעוֹנִים שׁוֹתְלִים בַּסְּתָיו.",
+      "tr": "Tulip bulbs are planted in autumn.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בָּצָל יָרֹק",
+      "tr": "spring onion"
+     },
+     {
+      "text": "מְרַק בָּצָל",
+      "tr": "onion soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Cognate with Arabic بَصَل (baṣal); related to Aramaic בּוּצְלָא.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew בָּצָל and Arabic بَصَل are the same Semitic word."
+    ],
+    "pitfalls": [
+     "The plural בְּצָלִים shortens the first vowel."
+    ],
+    "subtleties": [
+     "בָּצָל is also a plant bulb: בְּצָלִים שֶׁל צִבְעוֹנִים = tulip bulbs."
+    ]
    }
   },
   {
@@ -51,13 +205,87 @@
    "translit": "melafefon",
    "forms": {
     "N;SG;INDF": "מְלָפְפוֹן",
-    "N;SG;DEF": "הַמְלָפְפוֹן",
+    "N;SG;DEF": "הַמְּלָפְפוֹן",
     "N;PL;INDF": "מְלָפְפוֹנִים",
-    "N;PL;DEF": "הַמְלָפְפוֹנִים"
+    "N;PL;DEF": "הַמְּלָפְפוֹנִים"
    },
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Israeli salad, fresh and crunchy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cucumber",
+      "concept": "veg.cucumber",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מֵכִין סָלָט עִם עַגְבָנִיּוֹת וּמְלָפְפוֹנִים.",
+      "tr": "I'm making a salad with tomatoes and cucumbers.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים אוֹהֲבִים מְלָפְפוֹנִים חֲמוּצִים.",
+      "tr": "The kids love pickles.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "כַּמָּה עוֹלֶה קִילוֹ מְלָפְפוֹנִים?",
+      "tr": "How much is a kilo of cucumbers?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְלָפְפוֹן חָמוּץ",
+      "tr": "pickled cucumber"
+     },
+     {
+      "text": "מְלָפְפוֹן בְּמִלַּח",
+      "tr": "cucumber in brine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קִשּׁוּא",
+      "register": "literary",
+      "nuance": "the Biblical word (Numbers 11:5); in Modern Hebrew קִשּׁוּא means zucchini!"
+     }
+    ],
+    "etymology": {
+     "text": "From Ancient Greek μηλοπέπων (mēlopépōn, ‘melon’), from μῆλον (‘apple’) + πέπων (‘ripe’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is often wrongly linked to לָפַף (to wrap around) because of the twisting vines; it really comes from Greek."
+    ],
+    "pitfalls": [
+     "Two פ: מְלָפְפוֹן (m'laf'fon).",
+     "With the article the מ takes a dagesh: הַמְּלָפְפוֹן."
+    ],
+    "subtleties": [
+     "The Biblical cucumber word קִשּׁוּא now means zucchini — a classic ‘false friend’ inside Hebrew."
+    ]
    }
   }
  ],

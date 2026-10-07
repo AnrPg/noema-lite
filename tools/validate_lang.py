@@ -18,8 +18,105 @@ GENERATORS = {  # exercise types a function may ask for (docs/LANGUAGES.md §6)
     'paradigm', 'inflect', 'analyze', 'morph_build', 'root_pattern', 'agree',
     'build_sentence', 'word_order', 'transform', 'contrast', 'parse', 'gloss', 'proofread', 'combine',
     'translate', 'rewrite', 'expand', 'guided_compose', 'graded_reader', 'number_words', 'clock', 'date', 'register', 'dialogue_turn',
-    'parallel_translate', 'parallel_align', 'which_language', 'cognate_bridge', 'compare_rule'}
+    'parallel_translate', 'parallel_align', 'which_language', 'cognate_bridge', 'compare_rule',
+    'register_pick', 'nuance_pick', 'connotation', 'idiom_meaning', 'example_cloze', 'sense_pick', 'etymology_link'}
 STATUS = {'realized', 'periphrastic', 'absent'}
+CONTENT_POS = {'NOUN', 'VERB', 'ADJ', 'ADV'}   # words that get a full profile (§4.6)
+REGISTERS = {'neutral', 'formal', 'informal', 'colloquial', 'slang', 'vulgar', 'literary', 'poetic', 'technical', 'scientific', 'children',
+             'regional', 'dialectal', 'archaic', 'obsolete', 'dated', 'euphemistic', 'humorous', 'pejorative', 'honorific', 'religious'}
+WORD_STATUS = {'current', 'dated', 'archaic', 'obsolete', 'rare', 'neologism'}
+CONNOTATION = {'neutral', 'positive', 'negative', 'mixed'}
+PHRASE_KINDS = {'idiom', 'proverb', 'saying', 'quote', 'slang', 'colloquial', 'fixed expression'}
+CEFR = {'A1', 'A2', 'B1', 'B2', 'C1', 'C2'}
+
+
+def contains_word(L, lj, x, text):
+    """Does the text use the word (any of its forms, its lemma, or a full spelling)? Vowel marks must match too."""
+    t = nfc(text)
+    cands = [x.get('lemma', '')] + list((x.get('forms') or {}).values()) + list((x.get('plene') or {}).values())
+    if lj.get('capitalizeFirst'):
+        t = t.casefold(); cands = [c.casefold() for c in cands]
+    return any(c and nfc(c) in t for c in cands)
+
+
+def check_profile(v, w, L, lj, x, required):
+    pr = x.get('profile')
+    content = x.get('pos') in CONTENT_POS
+    if pr is None:
+        if required and content: v.E(w, 'a word profile is required for content words (docs/LANGUAGES.md §4.6)')
+        return
+    if not isinstance(pr, dict): v.E(w, 'profile must be an object'); return
+    pw = w + ' · profile'
+    regs = lambda r: [r] if isinstance(r, str) else (r or [])
+    def reg_ok(where, r):
+        for g in regs(r):
+            if g not in REGISTERS: v.E(where, f'unknown register “{g}” (one of {", ".join(sorted(REGISTERS))})')
+    if pr.get('frequency') not in CEFR: v.E(pw, 'frequency must be a CEFR level (A1 … C2)')
+    if pr.get('status') not in WORD_STATUS: v.E(pw, f'status must be one of {", ".join(sorted(WORD_STATUS))}')
+    if pr.get('connotation') not in CONNOTATION: v.E(pw, f'connotation must be one of {", ".join(sorted(CONNOTATION))}')
+    if not regs(pr.get('register')): v.E(pw, 'register is required')
+    reg_ok(pw, pr.get('register'))
+    need_str(v, pw, pr, 'feeling')
+    if pr.get('intensity') is not None and pr.get('intensity') not in (1, 2, 3, 4, 5): v.E(pw, 'intensity must be 1–5 (or absent)')
+    senses = pr.get('senses') or []
+    if not senses: v.E(pw, 'at least one sense is required')
+    sids = set()
+    for s in senses:
+        sw = f'{pw} · sense {s.get("id")}'
+        if not s.get('id') or s['id'] in sids: v.E(sw, 'sense id missing or repeated')
+        sids.add(s.get('id'))
+        need_str(v, sw, s, 'def')
+        if not regs(s.get('register')): v.E(sw, 'register is required')
+        reg_ok(sw, s.get('register'))
+        if s.get('concept') and s['concept'] not in (x.get('senses') or []): v.E(sw, f'concept “{s["concept"]}” is not one of the word\'s senses')
+    for c in x.get('senses') or []:
+        if not any(s.get('concept') == c for s in senses): v.E(pw, f'no sense explains the concept “{c}”')
+    exs = pr.get('examples') or []
+    per = {}
+    for i, e in enumerate(exs):
+        ew = f'{pw} · example {i + 1}'
+        for k in ('text', 'tr', 'context'): need_str(v, ew, e, k)
+        if not e.get('register'): v.E(ew, 'register is required')
+        reg_ok(ew, e.get('register'))
+        if e.get('sense') not in sids: v.E(ew, f'unknown sense “{e.get("sense")}”')
+        per[e.get('sense')] = per.get(e.get('sense'), 0) + 1
+        if e.get('text') and not contains_word(L, lj, x, e['text']): v.E(ew, f'“{e["text"]}” does not contain the word (none of its forms, with the same vowel marks)')
+        if lj.get('vowelMarks') and e.get('text') and not has_marks(L, e['text']): v.E(ew, 'examples are written fully vocalized')
+        if e.get('cell'):
+            f = (x.get('forms') or {}).get(e['cell'])
+            if not f or nfc(f) not in nfc(e.get('text', '')): v.E(ew, f'the cell {e["cell"]} form is not in the text')
+    if content:
+        if len(exs) < 3: v.E(pw, f'at least 3 examples are required ({len(exs)})')
+        if len({e.get('context') for e in exs}) < 2: v.E(pw, 'examples must cover at least 2 different contexts')
+        for s in senses:
+            if s.get('concept') and per.get(s.get('id'), 0) < 2: v.E(f'{pw} · sense {s.get("id")}', 'the main sense of a concept needs at least 2 examples')
+    for k in ('collocations', 'particleVerbs'):
+        for i, c in enumerate(pr.get(k) or []):
+            for f in ('text', 'tr'): need_str(v, f'{pw} · {k} {i + 1}', c, f)
+    if content and x.get('pos') in ('NOUN', 'VERB', 'ADJ') and len(pr.get('collocations') or []) < 2: v.E(pw, 'at least 2 collocations are required')
+    for i, ph in enumerate(pr.get('phrases') or []):
+        phw = f'{pw} · phrase {i + 1}'
+        for f in ('text', 'tr', 'meaning'): need_str(v, phw, ph, f)
+        if ph.get('kind') not in PHRASE_KINDS: v.E(phw, f'kind must be one of {", ".join(sorted(PHRASE_KINDS))}')
+        reg_ok(phw, ph.get('register'))
+        if ph.get('kind') == 'quote':
+            need_str(v, phw, ph, 'source')
+            if len(ph.get('text', '')) > 160: v.E(phw, 'a quote must be short (≤ 160 characters) and from a public-domain or properly attributed source')
+    if 'synonyms' not in pr: v.E(pw, 'synonyms is required (an empty list with synonymsNone when there is none)')
+    syns = pr.get('synonyms') or []
+    if not syns and content and not (isinstance(pr.get('synonymsNone'), str) and pr['synonymsNone'].strip()): v.E(pw, 'no synonyms: say why in synonymsNone')
+    for i, sy in enumerate(syns):
+        sw = f'{pw} · synonym {i + 1}'
+        for f in ('word', 'nuance'): need_str(v, sw, sy, f)
+        if not sy.get('register'): v.E(sw, 'register is required (synonyms are compared by register)')
+        reg_ok(sw, sy.get('register'))
+    ety = pr.get('etymology') or {}
+    if content:
+        if not (isinstance(ety, dict) and ety.get('text') and ety.get('src')): v.E(pw, 'etymology {text, src} is required')
+        if not pr.get('pitfalls'): v.E(pw, 'at least one pitfall is required')
+        if not pr.get('subtleties'): v.E(pw, 'at least one subtlety is required')
+        if not pr.get('funFacts'): v.W(pw, 'no fun fact')
+
 GENDERED_NOUNS = {'de', 'ar', 'he', 'fr', 'es', 'it', 'pt', 'ru', 'el', 'hi'}
 
 
@@ -195,6 +292,7 @@ def validate(root):
                     if canon(cc) not in seen: v.E(w, f'missing citation cell {cc}')
                     elif forms[seen[canon(cc)]] != x.get('lemma'): v.E(w, f'the lemma “{x.get("lemma")}” must be the {cc} form “{forms[seen[canon(cc)]]}”')
                 if marks and len(letters(x.get('lemma', ''))) > 1 and not has_marks(L, x.get('lemma', '')): v.E(w, f'the lemma has no vowel marks')
+                check_profile(v, w, L, lj, x, course.get('profiles', 'required') == 'required')
                 if x.get('pos') == 'NOUN' and L in GENDERED_NOUNS and x.get('gender') not in ('MASC', 'FEM', 'NEUT'): v.E(w, 'gender is required (MASC, FEM or NEUT)')
                 if L == 'zh':
                     lemma = x.get('lemma', '')

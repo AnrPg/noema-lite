@@ -9,6 +9,7 @@
   "zh",
   "de"
  ],
+ "profiles": "required",
  "defaults": {
   "depth": {
    "ar": 3,

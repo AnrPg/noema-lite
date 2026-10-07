@@ -8,7 +8,7 @@
 |---|---|---|
 | P0 | Spec, schemas, validator, mini fixture course | ✅ 2026-10-07 |
 | P1 | `langcore` runtime (pure JS): model, states, scheduler, gating, known sets, form index, script utilities | ✅ 2026-10-07 |
-| P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ⏳ next |
+| P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ⏳ in progress |
 | P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ⬜ |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
 | P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
@@ -198,12 +198,55 @@ Shape: a **core spine** of functional vocabulary (pronouns, be/have, ~80 core ve
 * Every concept of the node has a lexeme in the language **or** an `absent` entry (no word in common use, with what is said instead).
 * `forms` keys use UniMorph tags; the required cells per language and POS are defined in `language.json` (`paradigmCells`), and the validator checks completeness.
 * ar and he forms are stored **fully vocalized**; the unvocalized spelling is derived by stripping the marks (he: unless the lexeme gives the full spelling, `plene`, for a form whose unvocalized spelling adds ו or י).
-* Words that attach to the next word (ar وَ, he וְ …) have `"prefix": true`; in a sentence they are a token with `parts` (§4.7).
+* Words that attach to the next word (ar وَ, he וְ …) have `"prefix": true`; in a sentence they are a token with `parts` (§4.8).
 * Words without a shared concept (he אֶת, zh 个) have `"senses": []` and a `role` text; they belong to the node of their file.
 * `ref` records how the item was checked (§11); unchecked items fail the build unless `ref.override` gives a reason.
 * Language-specific fields: de `gender`, `plural`, `separable`, `aux` (haben/sein), `governs` (case frame); ar `root`, `pattern`, `verbForm` (I–X), `masdar`, `brokenPlural`, `diptote`; he `root`, `binyan`, `mishkal`, `construct`, `ktivMale`; zh `trad`, `pinyin`, `measure`, characters via `chars.json`.
 
-### 4.6 Grammar functions — `core/functions/<id>.json`
+### 4.6 Word profile — every word in depth
+
+Every **content word** (noun, verb, adjective, adverb) is taught in depth, not as a bare translation. Its lexeme carries a
+`profile`; `course.json` `"profiles": "required"` (the default) makes the validator enforce it. Function words may have one too.
+
+```json
+"profile": {
+  "frequency": "A2", "status": "current", "register": ["neutral"], "connotation": "neutral", "intensity": null,
+  "feeling": "Fresh salads in summer; in slang, mocking.",
+  "senses": [
+    { "id": "s1", "def": "cucumber", "concept": "veg.cucumber", "register": ["neutral"] },
+    { "id": "s3", "def": "old banger, piece of junk", "register": ["colloquial", "pejorative"] } ],
+  "examples": [
+    { "text": "Ich schneide eine Gurke für den Salat.", "tr": "I'm slicing a cucumber for the salad.", "register": "neutral", "context": "cooking", "sense": "s1" },
+    { "text": "Mit der alten Gurke fährst du noch?", "tr": "You're still driving that old banger?", "register": "colloquial", "context": "cars", "sense": "s3" } ],
+  "collocations": [ { "text": "saure Gurken", "tr": "pickled gherkins" } ],
+  "particleVerbs": [ { "text": "aufessen", "tr": "to eat up" } ],
+  "phrases": [ { "text": "die Sauregurkenzeit", "tr": "the sour-gherkin season", "kind": "colloquial", "meaning": "the silly season", "register": "colloquial" } ],
+  "synonyms": [ { "word": "Salatgurke", "register": "neutral", "nuance": "the fresh cucumber, not a pickle" } ],
+  "synonymsNone": "…why there is none (when the list is empty)",
+  "antonyms": [ { "word": "fasten", "note": "to fast" } ],
+  "etymology": { "text": "Borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον …", "src": "Wiktionary (kaikki.org)" },
+  "funFacts": ["…"], "pitfalls": ["…"], "subtleties": ["…"] }
+```
+
+| Part | What it shows | Minimum (content words) |
+|---|---|---|
+| `senses` | every meaning, each with its own register and domain; the course concept is one of them | ≥ 1, and every concept of the word has a sense |
+| `examples` | the word in real sentences, each labelled with **register**, **context** and **sense**, with a translation (Chinese: also `py` pinyin) | ≥ 3, in ≥ 2 contexts; ≥ 2 for the concept's sense; each must contain a form of the word (vowel marks included); ar/he fully vocalized |
+| `register`, `status`, `frequency` | neutral / formal / informal / colloquial / slang / vulgar / literary / poetic / technical / regional / dated / archaic / obsolete / humorous / pejorative / euphemistic / honorific …; current / dated / archaic / obsolete / rare / neologism; CEFR level | required |
+| `connotation`, `intensity`, `feeling` | the emotional colour, the strength on a 1–5 scale for scalar words, what the word evokes | connotation + feeling required |
+| `collocations`, `particleVerbs` | what it goes with; phrasal / separable / light-verb constructions built on it | ≥ 2 collocations (nouns, verbs, adjectives) |
+| `phrases` | idioms, proverbs, sayings, slang and colloquial expressions, quotes | quotes: short (≤ 160 characters), with `source`, public domain or properly attributed only |
+| `synonyms`, `antonyms` | synonyms **per register and context**, each with the nuance that separates it | each synonym has register + nuance; empty only with `synonymsNone` |
+| `etymology` | origin, cognates (bridges to other languages) | required, with its source |
+| `pitfalls`, `subtleties` | caveats, edge cases, false friends, homographs; fine points of use | ≥ 1 each |
+| `funFacts` | memorable facts | recommended (warning when empty) |
+
+Profiles are **exposure content**: their sentences may contain words the learner does not know yet; the app shows the
+translation, glosses the course words on tap and marks the rest. They are never the answer key of an automatic exercise,
+except for the word itself (e.g. `example_cloze`). Senses and etymologies follow the reference data (§11); when Claude adds
+knowledge beyond it, the claim must be one it is sure of — otherwise it is left out.
+
+### 4.7 Grammar functions — `core/functions/<id>.json`
 Language-neutral, defined by what they *do*:
 ```json
 { "id": "fn.plural.noun", "title": "More than one: plural of nouns", "category": "morphology",
@@ -224,7 +267,7 @@ Per language — `lang/<code>/grammar/<id>.json`:
 * `procedure` is the "ask yourself" checklist (same idea as the debug playbooks).
 * `needs` is the minimum known vocabulary for the function to be trainable (feasibility, §7.3).
 
-### 4.7 Frames and the sentence bank
+### 4.8 Frames and the sentence bank
 `core/frames.json` — the meaning, once:
 ```json
 { "id": "fr.eat.food", "meaning": "PERSON eats FOOD", "slots": { "agent": "person", "patient": "food.*" } }
@@ -243,11 +286,11 @@ Per language — `lang/<code>/grammar/<id>.json`:
 * `alts`: other correct translations/realizations (for typed answers).
 * The **requirement set** of a sentence = its lemma ids (punctuation and proper names excluded).
 
-### 4.8 Script modules
+### 4.9 Script modules
 * ar, he `letters.json`: letter, name, sound, transliteration, positional/final forms, connecting behaviour, teaching order (groups of similar shapes: ب ت ث ن ي), confusable shapes.
 * zh `chars.json`: character, pinyin readings, meaning, components and radical (IDS), stroke data (Make Me a Hanzi median paths), simplified/traditional pair, frequency.
 
-### 4.9 Comparisons, confusables, bridges
+### 4.10 Comparisons, confusables, bridges
 * `compare/<function>.json`: rows (aspect of the function) × columns (course languages), each cell a short statement + example sentence id; plus `common`, `differs`, `interference` notes (where learning one will mislead in another).
 * `confusables.json` (per language) and the cross-language list in `bridges.json` (`kind: cognate | loan | falseFriend | lookAlike`), e.g. ar kitāb ↔ he ktav (root k-t-b) ↔ tr kitap (known language) ↔ hi kitāb.
 
@@ -331,6 +374,13 @@ Every new type gets a widget in `engine/src/47_lang_ex.js` with `check`, `reveal
 | `collocation` | collocations | which verb/adjective goes with the noun | D |
 | `confusables` | look-alikes | pairs drilled together on purpose | D |
 | `intensity_scale` | nuance | order words by intensity (uses `order`) | D |
+| `register_pick` | register | which word fits this situation (formal letter, friends, slang, literary)? from the synonyms by register | D (profile) |
+| `nuance_pick` | subtleties | choose the synonym that fits the context; the explanation is its `nuance` | D (profile) |
+| `connotation` | feeling and strength | positive / negative / neutral, or order by intensity | D (profile) |
+| `idiom_meaning` | phrases | what does the idiom/proverb mean? (and the reverse: which idiom fits) | D (profile) |
+| `example_cloze` | the word in context | the word removed from its example sentences (any of its forms) | D (profile) |
+| `sense_pick` | polysemy | which meaning is used in this sentence? | D (profile) |
+| `etymology_link` | origins and bridges | match the word to its origin / its cognates in other languages | D (profile) |
 
 ### 6.3 Morphology
 | id | trains | how | src |
@@ -406,6 +456,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 
 * **Course home**: flags of the active languages, each with progress ring and "due" badge; lanes **Vocabulary · Grammar · Script · Reading · Writing · Compare**; the daily session button. The explanation language is shown in the header ("explained in English").
 * **Flag card** (one component for concepts, functions, sentences, fields): content in one language at a time; a vertical rail of small flags, each with a state dot (✅ mastered, 🟢 known, 🟡 learning, 🔓 open, 🔒 locked); click → that language's realization loads in place; **⇄ Compare** opens the aligned table of all course languages. The last chosen language is remembered per card type.
+* **Word card** (the flag card of a word, `langcore.wordCard`): principal parts (article/plural, unit noun, root, pinyin + measure word), then the profile in sections — Meanings · In sentences (register and context chips, translation, unknown words marked) · Goes with · Verbs built on it · Idioms, sayings and quotes · Synonyms by register · Opposites · ⚠️ Watch out · Subtleties · Where it comes from · Fun facts — and the feeling / connotation / status / frequency badges. The flags switch the same concept to another language.
 * **Field map**: the whole field (e.g. 200 vegetables) as a picture grid grouped by subgroup, coloured by state in the chosen language; tier dividers; tap an item for its card.
 * **Vocabulary DAG view**: reuses the curriculum map component (`curmap`), with node states for the chosen language.
 * **Grammar function page**: realization in the chosen language (summary, blocks, paradigm, "ask yourself", traps, examples), the flag rail for the other languages, comparison strip at the bottom, the feasibility light and its exercises.
@@ -435,7 +486,7 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 ## 11. Correctness and validation
 
 * `tools/schemas/noema.lang.v1.schema.json` + `tools/validate_lang.py` (offline, part of `build.py`):
-  ids unique, references resolve, DAG acyclic, each concept in one node, every concept of a node realized or `absent` in every language, paradigm cells complete, unvocalized = stripped vocalized, pinyin syllables and tone marks valid, every bank token's form equals its paradigm cell, text = joined tokens, functions really present, frames realized in all languages (or `absent`), tiers ordered, field `sources` present, all texts present in `explainLang`.
+  ids unique, references resolve, word profiles complete (§4.6), DAG acyclic, each concept in one node, every concept of a node realized or `absent` in every language, paradigm cells complete, unvocalized = stripped vocalized, pinyin syllables and tone marks valid, every bank token's form equals its paradigm cell, text = joined tokens, functions really present, frames realized in all languages (or `absent`), tiers ordered, field `sources` present, all texts present in `explainLang`.
 * `tools/lang_refcheck.py` (network, run by Claude while authoring): compares lexemes and paradigms with **Wiktionary data (kaikki.org)**, **CC-CEDICT** and **Unihan** (zh), **UniMorph** where available, **Make Me a Hanzi** (strokes/components); writes `ref` and a discrepancy report. **Unresolved discrepancies fail the build**; an intentional difference needs `ref.override` with a reason.
 * Images: Wikidata P18 / Commons via the existing picture library (`imglib`), recorded in `media.json`.
 * Sentences: Tatoeba (parallel sentences) may seed the bank, always re-annotated and validated.
@@ -472,10 +523,11 @@ Existing subjects and curricula must keep working unchanged; the language part i
 
 **P2 — Pilot content v1** (written by Claude here, validated and ref-checked)
 - Explanations in English; core spine node 1–2 (~120 concepts) + `food.vegetables` tiers 1–3 (exhaustive, with images) in ar, he, zh, de; script modules (ar, he letters; zh characters of the included words); 3–4 functions (gender, plural, present tense / basic sentence, definiteness).
+- Every content word gets its full profile (§4.6); senses, etymologies and forms are drawn from the reference data.
 - ✔ `validate_lang.py` and `lang_refcheck.py` clean.
 
 **P3 — UI shell and vocabulary lane**
-- Course in the picker (`kind: "language"`), course home with flags, flag card + compare, field map, DAG view, `learn_batch`, `recognize`, `picture_name`, `spell`, `gender_article`, `principal_parts`, `measure_word`, `exhaustive_recall`, `field_map` sorting; daily session v1; sync of the state keys.
+- Course in the picker (`kind: "language"`), course home with flags, flag card + compare, the word card with the whole profile, field map, DAG view, `learn_batch`, `recognize`, `picture_name`, `spell`, `gender_article`, `principal_parts`, `measure_word`, `exhaustive_recall`, `field_map` sorting; daily session v1; sync of the state keys.
 - ✔ Playwright: a new learner opens the course, learns a batch in two languages, reviews it, a node becomes known and the next opens only in that language; reload/sync keeps everything.
 
 **P4 — Scripts and input**
@@ -506,3 +558,4 @@ Working rules for every phase: read this file first; keep existing subjects unto
 - 2026-10-07 — first version (decisions D1–D8, catalogue, model, exercise types, plan P0–P9).
 - 2026-10-07 — §0 development isolation (branch `languages` in its own worktree); the mini fixture made smaller so every form can be checked by hand.
 - 2026-10-07 — P0 and P1 done. Items are words, not concepts (§5.1); states are derived, never stored; `prefix`, `parts`, `senses: []` + `role`, `citationCells`, `plene` added to the model.
+- 2026-10-08 — Word profiles (§4.6): every content word in depth (senses, examples by register and context, collocations, particle verbs, phrases and quotes, synonyms by register, etymology, pitfalls, subtleties, feeling, fun facts) — schema, validator, mini course (24 profiles), `langcore.wordCard`; exercise types `register_pick`, `nuance_pick`, `connotation`, `idiom_meaning`, `example_cloze`, `sense_pick`, `etymology_link`. `tools/lang_refcheck.py` (Wiktionary via kaikki.org) found two real mistakes in the mini course (דְּלַעַת plural, 黄瓜 measure word), now fixed.

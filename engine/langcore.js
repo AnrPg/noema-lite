@@ -366,6 +366,57 @@
     return { tokens, unknown, unlearned };
   }
 
+  /* ---------- the word card: everything about one word, in depth (§4.6) ---------- */
+  const ARTICLE = { MASC: 'der', FEM: 'die', NEUT: 'das' };
+  /** The forms a learner memorizes with the word, per language: [[label, value], …] */
+  function principalParts(C, code, lx) {
+    const f = lx.forms || {}, get = c => { const k = Object.keys(f).find(x => canon(x) === canon(c)); return k ? f[k] : null; }, out = [];
+    const G = { MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter' };
+    if (code === 'de' && lx.pos === 'NOUN') { out.push(['article', ARTICLE[lx.gender] + ' ' + lx.lemma]); if (get('N;GEN;SG')) out.push(['genitive', (lx.gender === 'FEM' ? 'der ' : 'des ') + get('N;GEN;SG')]); if (get('N;NOM;PL')) out.push(['plural', 'die ' + get('N;NOM;PL')]); }
+    else if (code === 'de' && lx.pos === 'VERB') { for (const [l, c] of [['er/sie/es', 'V;PRS;3;SG'], ['du', 'V;PRS;2;SG']]) if (get(c)) out.push([l, get(c)]); if (lx.aux) out.push(['perfect with', lx.aux]); }
+    else if (lx.pos === 'NOUN' && lx.class === 'collective') { out.push(['collective', lx.lemma]); if (lx.unit) out.push(['one (unit noun)', lx.unit]); if (get('N;NOM;PL;INDF')) out.push(['counted plural', get('N;NOM;PL;INDF')]); }
+    else if (code === 'he' && lx.pos === 'NOUN') { if (get('N;PL;INDF')) out.push(['plural', get('N;PL;INDF')]); if (get('N;SG;DEF')) out.push(['with the article', get('N;SG;DEF')]); }
+    else if (lx.pos === 'VERB' && lx.root) { out.push(['root', lx.root]); if (lx.binyan) out.push(['binyan', lx.binyan]); if (lx.verbForm) out.push(['verb form', lx.verbForm]); }
+    if (lx.gender && !(code === 'de' && lx.pos === 'NOUN')) out.push(['gender', G[lx.gender]]);
+    if (lx.root && lx.pos !== 'VERB') out.push(['root', lx.root]);
+    if (code === 'zh') { if (lx.pinyin) out.push(['pinyin', lx.pinyin.replace(/\s+/g, '')]); if (lx.trad && lx.trad !== lx.lemma) out.push(['traditional', lx.trad]); if (lx.measure) out.push(['measure word', lx.measure.join(' · ')]); }
+    if (lx.translit && code !== 'zh') out.push(['transliteration', lx.translit]);
+    return out;
+  }
+  /** → {lex, lemma, pos, parts, flags (the concept in every course language), meaning, register, examples (with their words checked against what the learner knows), sections} */
+  function wordCard(C, L, code, lexId, opts = {}) {
+    const X = C.lang[code], lx = X.lex[lexId];
+    if (!lx) throw new Error(`unknown word ${lexId} in ${code}`);
+    const p = lx.profile || {}, k = opts.k || known(C, L, code), concept = (lx.senses || [])[0] || null;
+    const flags = concept
+      ? C.languages.map(c => ({ lang: c, state: conceptState(C, L, c, concept), words: (C.lang[c].byConcept[concept] || []).map(id => ({ lex: id, lemma: C.lang[c].lex[id].lemma })), absent: C.lang[c].absent[concept] || null }))
+      : [{ lang: code, state: k.state[lexId], words: [{ lex: lexId, lemma: lx.lemma }], absent: null }];
+    const examples = (p.examples || []).map(e => {
+      const a = analyze(C, code, e.text, k.R);
+      return { ...e, plain: X.language.vowelMarks ? stripMarks(code, e.text) : e.text, unknown: a.unknown, unlearned: a.unlearned,
+        senseDef: (p.senses || []).find(s => s.id === e.sense)?.def || '' };
+    });
+    const byRegister = {};
+    for (const s of p.synonyms || []) for (const r of [].concat(s.register)) (byRegister[r] = byRegister[r] || []).push(s);
+    const sec = (key, title, items) => (items && (Array.isArray(items) ? items.length : Object.keys(items).length)) ? { key, title, items } : null;
+    const sections = [
+      sec('senses', 'Meanings', p.senses),
+      sec('examples', 'In sentences — contexts and registers', examples),
+      sec('collocations', 'Goes with', p.collocations),
+      sec('particleVerbs', 'Verbs built on it', p.particleVerbs),
+      sec('phrases', 'Idioms, sayings and quotes', p.phrases),
+      sec('synonyms', 'Synonyms by register', byRegister),
+      sec('antonyms', 'Opposites', p.antonyms),
+      sec('pitfalls', '⚠️ Watch out', p.pitfalls),
+      sec('subtleties', 'Subtleties', p.subtleties),
+      sec('etymology', 'Where it comes from', p.etymology ? [p.etymology] : []),
+      sec('funFacts', 'Fun facts', p.funFacts),
+    ].filter(Boolean);
+    return { lex: lexId, lang: code, lemma: lx.lemma, pos: lx.pos, concept, gloss: concept ? C.concepts[concept]?.gloss : (lx.role || ''), parts: principalParts(C, code, lx),
+      state: k.state[lexId], flags, frequency: p.frequency || null, status: p.status || null, register: [].concat(p.register || []), connotation: p.connotation || null,
+      intensity: p.intensity ?? null, feeling: p.feeling || '', synonymsNone: p.synonymsNone || '', examples, sections, hasProfile: !!lx.profile };
+  }
+
   /* ---------- the daily session (§7.5) ---------- */
   const SECONDS = { review: 8, learn: 40, grammar: 300, extra: 120 };
   /** → {steps: [{kind:'review', items:[{lang, lex, track}]}, {kind:'learn', node, concepts:[{concept, langs:[{lang, lex}]}]}, {kind:'grammar', lang, fn}], seconds} */
@@ -436,7 +487,7 @@
   const API = { version: 1, nfc, canon, cellParts, cellHas, stripMarks, hasMarks, isHan, pinyinSplit, pinyinTone, pinyinSyllableErrors,
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
     readCourse, course, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
-    practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber };
+    practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts };
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

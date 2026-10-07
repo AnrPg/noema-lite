@@ -43,6 +43,113 @@
    },
    "ref": {
     "src": "fixture"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday; in figurative use, being consumed by something.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "concept": "verb.eat",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to consume, eat up (figuratively: worry, jealousy)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה אַתָּה אוֹכֵל לַאֲרוּחַת בֹּקֶר?",
+      "tr": "What do you eat for breakfast?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא אוֹכֶלֶת הַרְבֵּה יְרָקוֹת.",
+      "tr": "She eats a lot of vegetables.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקִּנְאָה אוֹכֶלֶת אוֹתוֹ.",
+      "tr": "Jealousy is eating him up.",
+      "register": "neutral",
+      "context": "figurative",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֶאֱכֹל אֲרוּחַת עֶרֶב",
+      "tr": "to eat dinner"
+     },
+     {
+      "text": "לֶאֱכֹל בַּחוּץ",
+      "tr": "to eat out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אָכַל אֶת עַצְמוֹ",
+      "tr": "he ate himself",
+      "kind": "idiom",
+      "meaning": "he was eaten up by regret or worry",
+      "register": "colloquial"
+     },
+     {
+      "text": "אָכַלְתִּי אוֹתָהּ",
+      "tr": "I ate it (f.)",
+      "kind": "slang",
+      "meaning": "I got into trouble, I paid for it",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "סָעַד",
+      "register": "formal",
+      "nuance": "to dine — elevated, literary"
+     },
+     {
+      "word": "זָלַל",
+      "register": "colloquial",
+      "nuance": "to gobble, eat greedily (mocking)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "צָם",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔakal-; compare Aramaic אֲכַל (ʾăḵal), Arabic أَكَلَ (ʔakala).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "אֹכֶל (okhel, food) and מַאֲכָל (ma'akhal, dish) come from the same root א־כ־ל."
+    ],
+    "pitfalls": [
+     "The present tense agrees in gender: a man says אֲנִי אוֹכֵל, a woman אֲנִי אוֹכֶלֶת.",
+     "Future יֹאכַל: the א is silent (yokhal)."
+    ],
+    "subtleties": [
+     "Slang אָכַלְתִּי אוֹתָהּ has nothing to do with food: ‘I got burned’."
+    ]
    }
   },
   {

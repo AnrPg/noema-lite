@@ -18,6 +18,74 @@
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A beloved staple of Israeli cuisine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eggplant, aubergine",
+      "concept": "veg.eggplant",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אָכַלְנוּ חָצִיל עַל הָאֵשׁ עִם טְחִינָה.",
+      "tr": "We ate fire-roasted eggplant with tahini.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "סָבְתָא מְטַגֶּנֶת חֲצִילִים.",
+      "tr": "Grandma is frying eggplants.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֲצִילִים בַּשּׁוּק הָיוּ זוֹלִים הַיּוֹם.",
+      "tr": "The eggplants at the market were cheap today.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חָצִיל בַּטְּחִינָה",
+      "tr": "eggplant with tahini"
+     },
+     {
+      "text": "חֲצִילִים מְטֻגָּנִים",
+      "tr": "fried eggplants"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Coined in 1831, adapted from Arabic حَيْصَل (ḥayṣal).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word is young: it was coined in the 19th century from Arabic."
+    ],
+    "pitfalls": [
+     "Before חָ the article becomes הֶ: הֶחָצִיל."
+    ],
+    "subtleties": [
+     "חָצִיל עַל הָאֵשׁ is roasted directly over a flame — a dish, not just a cooking method."
+    ]
    }
   },
   {
@@ -32,12 +100,85 @@
    "forms": {
     "N;SG;INDF": "דְּלַעַת",
     "N;SG;DEF": "הַדְּלַעַת",
-    "N;PL;INDF": "דְּלָעוֹת",
-    "N;PL;DEF": "הַדְּלָעוֹת"
+    "N;PL;INDF": "דְּלוּעִים",
+    "N;PL;DEF": "הַדְּלוּעִים"
    },
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Autumn, soups.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pumpkin, gourd, squash",
+      "concept": "veg.pumpkin",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּסוֹף הַקַּיִץ קוֹטְפִים דְּלוּעִים.",
+      "tr": "Pumpkins are picked at the end of summer.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֹרֶף אֲנִי מֵכִין מְרַק דְּלַעַת.",
+      "tr": "In winter I make pumpkin soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים גִּלְּפוּ פַּרְצוּף בַּדְּלַעַת.",
+      "tr": "The children carved a face into the pumpkin.",
+      "register": "neutral",
+      "context": "festivities",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק דְּלַעַת",
+      "tr": "pumpkin soup"
+     },
+     {
+      "text": "גַּרְעִינֵי דְּלַעַת",
+      "tr": "pumpkin seeds"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "דַּלַּעַת",
+      "register": "neutral",
+      "nuance": "an alternative vocalization of the same word"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic دَلَّاع (dallāʕ, ‘watermelon’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its Arabic relative دَلَّاع means ‘watermelon’."
+    ],
+    "pitfalls": [
+     "Feminine noun with a masculine-looking plural: דְּלַעַת → דְּלוּעִים."
+    ],
+    "subtleties": [
+     "One Hebrew word for what English splits into pumpkin, gourd and squash."
+    ]
    }
   }
  ],

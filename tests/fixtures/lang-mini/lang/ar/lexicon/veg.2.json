@@ -27,6 +27,74 @@
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Levantine and Mediterranean home cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eggplants (collective); one eggplant = بَاذِنْجَانَة",
+      "concept": "veg.eggplant",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَطْبُخُ الْبَاذِنْجَانَ مَعَ اللَّحْمِ.",
+      "tr": "We cook eggplant with meat.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْتُ ثَلَاثَ بَاذِنْجَانَاتٍ.",
+      "tr": "I bought three eggplants.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَاذِنْجَانُ الْمَحْشِيُّ طَبَقٌ شَهِيرٌ.",
+      "tr": "Stuffed eggplant is a famous dish.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَاذِنْجَانٌ مَشْوِيٌّ",
+      "tr": "grilled eggplant"
+     },
+     {
+      "text": "بَاذِنْجَانٌ مَحْشِيٌّ",
+      "tr": "stuffed eggplant"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No common synonym in Modern Standard Arabic.",
+    "etymology": {
+     "text": "Borrowed from Classical Persian بَاذِنْگَان (bāzingān), ultimately from Sanskrit वातिङ्गण (vātiṅgaṇa).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Through Arabic al-bāḏinjān came Spanish berenjena, Catalan albergínia and French — and German — aubergine."
+    ],
+    "pitfalls": [
+     "Written with ذ (ḏ, as in English ‘this’), not ز: بَاذِنْجَان."
+    ],
+    "subtleties": [
+     "Counting: ثَلَاثُ بَاذِنْجَانَاتٍ — numbers 3–10 take the opposite gender of the singular (بَاذِنْجَانَة is feminine, so ثَلَاث has no ة)."
+    ]
    }
   },
   {
@@ -56,6 +124,85 @@
    "ref": {
     "src": "fixture",
     "checked": "2026-10-07"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sweet autumn dishes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pumpkin, gourd (collective); one pumpkin = قَرْعَة",
+      "concept": "veg.pumpkin",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "صَنَعَتْ جَدَّتِي حَلْوَى مِنَ الْقَرْعِ.",
+      "tr": "My grandmother made a sweet from pumpkin.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْقَرْعُ غَنِيٌّ بِالْفِيتَامِينَاتِ.",
+      "tr": "Pumpkin is rich in vitamins.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَيْنَا قَرْعَةً كَبِيرَةً.",
+      "tr": "We bought a big pumpkin.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَسَاءُ الْقَرْعِ",
+      "tr": "pumpkin soup"
+     },
+     {
+      "text": "بُذُورُ الْقَرْعِ",
+      "tr": "pumpkin seeds"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "يَقْطِين",
+      "register": "literary",
+      "nuance": "classical word for a gourd plant (Qurʾān 37:146, the plant over Jonah)"
+     },
+     {
+      "word": "قَرْعٌ عَسَلِيٌّ",
+      "register": "regional",
+      "nuance": "‘honey pumpkin’ — the sweet orange pumpkin, especially in Egypt",
+      "region": "EG"
+     }
+    ],
+    "etymology": {
+     "text": "From Classical Syriac qarrʾā.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "With u, قُرْعَة (qurʿa) is ‘a draw, a lottery’ — from the root q-r-ʿ of casting lots; with a, قَرْعَة is one pumpkin."
+    ],
+    "pitfalls": [
+     "قَرْع also means ‘knocking’ (verbal noun of قَرَعَ, to knock): قَرْعُ الْبَابِ = knocking on the door."
+    ],
+    "subtleties": [
+     "Collective الْقَرْع (pumpkin as food) vs. unit قَرْعَة (one pumpkin)."
+    ]
    }
   }
  ],

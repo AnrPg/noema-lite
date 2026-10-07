@@ -63,6 +63,13 @@
       "type": "string"
      },
      "description": "languages the learner already speaks (bridges only)"
+    },
+    "profiles": {
+     "enum": [
+      "required",
+      "optional"
+     ],
+     "description": "required (default): every content word has a full profile"
     }
    }
   },
@@ -471,6 +478,15 @@
        "type": "string"
       }
      }
+    },
+    "profile": {
+     "$ref": "#/$defs/profile"
+    },
+    "plene": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string"
+     }
     }
    }
   },
@@ -695,6 +711,553 @@
         "type": "string"
        }
       }
+     }
+    }
+   }
+  },
+  "profile": {
+   "type": "object",
+   "description": "Every content word in depth (docs/LANGUAGES.md §4.6); tools/validate_lang.py enforces the minimums.",
+   "required": [
+    "frequency",
+    "status",
+    "register",
+    "connotation",
+    "feeling",
+    "senses",
+    "examples",
+    "synonyms"
+   ],
+   "properties": {
+    "frequency": {
+     "enum": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2"
+     ]
+    },
+    "status": {
+     "enum": [
+      "current",
+      "dated",
+      "archaic",
+      "obsolete",
+      "rare",
+      "neologism"
+     ]
+    },
+    "register": {
+     "oneOf": [
+      {
+       "enum": [
+        "archaic",
+        "children",
+        "colloquial",
+        "dated",
+        "dialectal",
+        "euphemistic",
+        "formal",
+        "honorific",
+        "humorous",
+        "informal",
+        "literary",
+        "neutral",
+        "obsolete",
+        "pejorative",
+        "poetic",
+        "regional",
+        "religious",
+        "scientific",
+        "slang",
+        "technical",
+        "vulgar"
+       ]
+      },
+      {
+       "type": "array",
+       "items": {
+        "enum": [
+         "archaic",
+         "children",
+         "colloquial",
+         "dated",
+         "dialectal",
+         "euphemistic",
+         "formal",
+         "honorific",
+         "humorous",
+         "informal",
+         "literary",
+         "neutral",
+         "obsolete",
+         "pejorative",
+         "poetic",
+         "regional",
+         "religious",
+         "scientific",
+         "slang",
+         "technical",
+         "vulgar"
+        ]
+       }
+      }
+     ]
+    },
+    "connotation": {
+     "enum": [
+      "neutral",
+      "positive",
+      "negative",
+      "mixed"
+     ]
+    },
+    "intensity": {
+     "enum": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      null
+     ]
+    },
+    "feeling": {
+     "type": "string"
+    },
+    "senses": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "def",
+       "register"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "def": {
+        "type": "string"
+       },
+       "concept": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "domains": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "status": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "examples": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr",
+       "register",
+       "context",
+       "sense"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "context": {
+        "type": "string"
+       },
+       "sense": {
+        "type": "string"
+       },
+       "cell": {
+        "type": "string"
+       },
+       "py": {
+        "type": "string"
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "collocations": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "particleVerbs": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "phrases": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "text",
+       "tr",
+       "kind",
+       "meaning"
+      ],
+      "properties": {
+       "text": {
+        "type": "string"
+       },
+       "tr": {
+        "type": "string"
+       },
+       "kind": {
+        "enum": [
+         "idiom",
+         "proverb",
+         "saying",
+         "quote",
+         "slang",
+         "colloquial",
+         "fixed expression"
+        ]
+       },
+       "meaning": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "source": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "synonyms": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "word",
+       "register",
+       "nuance"
+      ],
+      "properties": {
+       "word": {
+        "type": "string"
+       },
+       "register": {
+        "oneOf": [
+         {
+          "enum": [
+           "archaic",
+           "children",
+           "colloquial",
+           "dated",
+           "dialectal",
+           "euphemistic",
+           "formal",
+           "honorific",
+           "humorous",
+           "informal",
+           "literary",
+           "neutral",
+           "obsolete",
+           "pejorative",
+           "poetic",
+           "regional",
+           "religious",
+           "scientific",
+           "slang",
+           "technical",
+           "vulgar"
+          ]
+         },
+         {
+          "type": "array",
+          "items": {
+           "enum": [
+            "archaic",
+            "children",
+            "colloquial",
+            "dated",
+            "dialectal",
+            "euphemistic",
+            "formal",
+            "honorific",
+            "humorous",
+            "informal",
+            "literary",
+            "neutral",
+            "obsolete",
+            "pejorative",
+            "poetic",
+            "regional",
+            "religious",
+            "scientific",
+            "slang",
+            "technical",
+            "vulgar"
+           ]
+          }
+         }
+        ]
+       },
+       "nuance": {
+        "type": "string"
+       },
+       "region": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "synonymsNone": {
+     "type": "string"
+    },
+    "antonyms": {
+     "type": "array"
+    },
+    "related": {
+     "type": "array"
+    },
+    "etymology": {
+     "type": "object",
+     "required": [
+      "text",
+      "src"
+     ],
+     "properties": {
+      "text": {
+       "type": "string"
+      },
+      "src": {
+       "type": "string"
+      }
+     }
+    },
+    "funFacts": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "pitfalls": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "subtleties": {
+     "type": "array",
+     "items": {
+      "type": "string"
      }
     }
    }

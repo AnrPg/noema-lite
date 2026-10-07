@@ -37,6 +37,129 @@
    ],
    "ref": {
     "src": "fixture"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Central to social life: food is how people show care.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "concept": "verb.eat",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to take (medicine)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to suffer, endure (吃苦, 吃亏)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们一起吃饭吧。",
+      "tr": "Let's eat together.",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1",
+      "py": "Wǒmen yìqǐ chīfàn ba."
+     },
+     {
+      "text": "我不吃肉。",
+      "tr": "I don't eat meat.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1",
+      "py": "Wǒ bù chī ròu."
+     },
+     {
+      "text": "你吃药了吗？",
+      "tr": "Have you taken your medicine?",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2",
+      "py": "Nǐ chī yào le ma?"
+     },
+     {
+      "text": "他从小吃了很多苦。",
+      "tr": "He has suffered a lot since childhood.",
+      "register": "neutral",
+      "context": "figurative",
+      "sense": "s3",
+      "py": "Tā cóngxiǎo chīle hěn duō kǔ."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃饭",
+      "tr": "to eat, have a meal"
+     },
+     {
+      "text": "吃药",
+      "tr": "to take medicine"
+     },
+     {
+      "text": "吃亏",
+      "tr": "to suffer a loss"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "吃醋",
+      "tr": "to eat vinegar",
+      "kind": "idiom",
+      "meaning": "to be jealous (in love)",
+      "register": "colloquial"
+     },
+     {
+      "text": "吃不了兜着走",
+      "tr": "what you can't eat you'll carry away",
+      "kind": "idiom",
+      "meaning": "you'll have to face the consequences",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "食",
+      "register": "literary",
+      "nuance": "classical word for eat; lives on in compounds (食物 food, 饮食 diet)"
+     },
+     {
+      "word": "用",
+      "register": "formal",
+      "nuance": "polite, said to guests: 请慢用 = enjoy your meal"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 口 (‘mouth’) + phonetic 乞.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "吃了吗？(‘Have you eaten?’) is a greeting, like ‘How are you?’ — not an invitation to a meal."
+    ],
+    "pitfalls": [
+     "Drinks take 喝, not 吃: 喝水, 喝茶 — and soup is drunk: 喝汤.",
+     "吃 is used where English says ‘take’: 吃药 (take medicine)."
+    ],
+    "subtleties": [
+     "吃 + an experience = to undergo it: 吃苦 (endure hardship), 吃亏 (lose out), 吃惊 (be startled)."
+    ]
    }
   },
   {

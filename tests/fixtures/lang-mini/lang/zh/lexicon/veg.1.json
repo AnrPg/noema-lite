@@ -14,7 +14,92 @@
    },
    "measure": [
     "根"
-   ]
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday vegetable; rabbits.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "carrot",
+      "concept": "veg.carrot",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "妈妈买了三根胡萝卜。",
+      "tr": "Mom bought three carrots.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1",
+      "py": "Māma mǎile sān gēn húluóbo."
+     },
+     {
+      "text": "我喜欢喝胡萝卜汁。",
+      "tr": "I like drinking carrot juice.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s1",
+      "py": "Wǒ xǐhuan hē húluóbo zhī."
+     },
+     {
+      "text": "兔子最爱吃胡萝卜。",
+      "tr": "Rabbits love carrots most of all.",
+      "register": "informal",
+      "context": "children",
+      "sense": "s1",
+      "py": "Tùzi zuì ài chī húluóbo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "胡萝卜汁",
+      "tr": "carrot juice"
+     },
+     {
+      "text": "胡萝卜丝",
+      "tr": "shredded carrot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "胡萝卜加大棒",
+      "tr": "carrot plus big stick",
+      "kind": "idiom",
+      "meaning": "a carrot-and-stick approach",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "红萝卜",
+      "register": "regional",
+      "nuance": "common in the south and in Taiwan; in some places it can also mean a red radish"
+     }
+    ],
+    "etymology": {
+     "text": "胡 (hú, ‘foreign’, of the northern and western peoples) + 萝卜 (luóbo, ‘radish’): the ‘foreigners' radish’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "胡 marks old imports from Central Asia: 胡椒 (pepper), 胡瓜 (an old word for cucumber)."
+    ],
+    "pitfalls": [
+     "卜 is toneless here: húluóbo.",
+     "萝卜 alone is the white radish (daikon), not a carrot."
+    ],
+    "subtleties": [
+     "Traditional characters: 胡蘿蔔."
+    ]
+   }
   },
   {
    "id": "zh:yangcong",
@@ -31,7 +116,95 @@
    "measure": [
     "个",
     "颗"
-   ]
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Kitchen tears.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "onion (bulb or plant)",
+      "concept": "veg.onion",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "a sad, tear-jerking story",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "切洋葱的时候我总是流眼泪。",
+      "tr": "I always cry when I cut onions.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1",
+      "py": "Qiē yángcōng de shíhou wǒ zǒngshì liú yǎnlèi."
+     },
+     {
+      "text": "先把洋葱炒香。",
+      "tr": "First fry the onion until fragrant.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Xiān bǎ yángcōng chǎoxiāng."
+     },
+     {
+      "text": "这个洋葱很大。",
+      "tr": "This onion is very big.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1",
+      "py": "Zhège yángcōng hěn dà."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "洋葱圈",
+      "tr": "onion rings"
+     },
+     {
+      "text": "炒洋葱",
+      "tr": "fried onion"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "葱头",
+      "register": "regional",
+      "nuance": "‘scallion head’ — regional everyday word"
+     },
+     {
+      "word": "圆葱",
+      "register": "regional",
+      "nuance": "‘round scallion’ — northern regional word"
+     }
+    ],
+    "etymology": {
+     "text": "洋 (yáng, ‘from overseas’) + 葱 (cōng, ‘scallion’): the ‘foreign scallion’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "洋 marks things that came from overseas: 洋葱, 洋娃娃 (doll)."
+    ],
+    "pitfalls": [
+     "葱 alone is the spring onion (scallion), not the onion."
+    ],
+    "subtleties": [
+     "Measure words: 一个 or 一颗洋葱 (the bulb), 一棵 (the plant)."
+    ]
+   }
   },
   {
    "id": "zh:huanggua",
@@ -46,9 +219,89 @@
     "src": "fixture"
    },
    "measure": [
-    "根",
-    "条"
-   ]
+    "根"
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Cool summer dishes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cucumber",
+      "concept": "veg.cucumber",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "夏天我常吃拍黄瓜。",
+      "tr": "In summer I often eat smashed cucumber salad.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1",
+      "py": "Xiàtiān wǒ cháng chī pāi huángguā."
+     },
+     {
+      "text": "请给我两根黄瓜。",
+      "tr": "Two cucumbers, please.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1",
+      "py": "Qǐng gěi wǒ liǎng gēn huángguā."
+     },
+     {
+      "text": "黄瓜可以生吃。",
+      "tr": "Cucumbers can be eaten raw.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1",
+      "py": "Huángguā kěyǐ shēng chī."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "拍黄瓜",
+      "tr": "smashed cucumber salad"
+     },
+     {
+      "text": "黄瓜片",
+      "tr": "cucumber slices"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "青瓜",
+      "register": "regional",
+      "nuance": "southern (Cantonese-speaking) word, ‘green melon’"
+     },
+     {
+      "word": "胡瓜",
+      "register": "archaic",
+      "nuance": "old name, ‘foreign melon’"
+     }
+    ],
+    "etymology": {
+     "text": "Literally ‘yellow melon’ (黄 huáng + 瓜 guā): a ripe cucumber turns yellow.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It used to be called 胡瓜, the ‘foreign melon’."
+    ],
+    "pitfalls": [
+     "Although 黄 means yellow, 黄瓜 is the green cucumber."
+    ],
+    "subtleties": [
+     "Measure word 根 (for long, thin things)."
+    ]
+   }
   }
  ],
  "absent": []

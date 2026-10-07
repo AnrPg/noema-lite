@@ -15,7 +15,99 @@
    "measure": [
     "个",
     "根"
-   ]
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Home cooking — and smiles for photos.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eggplant, aubergine",
+      "concept": "veg.eggplant",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "‘cheese!’ (said when taking a photo)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "鱼香茄子是一道有名的川菜。",
+      "tr": "Yuxiang eggplant is a famous Sichuan dish.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1",
+      "py": "Yúxiāng qiézi shì yí dào yǒumíng de chuāncài."
+     },
+     {
+      "text": "我不太喜欢吃茄子。",
+      "tr": "I don't really like eggplant.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1",
+      "py": "Wǒ bú tài xǐhuan chī qiézi."
+     },
+     {
+      "text": "拍照的时候大家说“茄子”！",
+      "tr": "When taking a photo everyone says ‘qiézi’ (= ‘cheese’)!",
+      "register": "colloquial",
+      "context": "photos",
+      "sense": "s2",
+      "py": "Pāizhào de shíhou dàjiā shuō “qiézi”!"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "红烧茄子",
+      "tr": "braised eggplant"
+     },
+     {
+      "text": "烤茄子",
+      "tr": "grilled eggplant"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "说茄子",
+      "tr": "say eggplant",
+      "kind": "colloquial",
+      "meaning": "say cheese (for a photo)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "茄瓜",
+      "register": "regional",
+      "nuance": "southern regional word"
+     }
+    ],
+    "etymology": {
+     "text": "茄 (qié, eggplant) + the noun suffix 子 (zi).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese photographers say 茄子 because ‘qiézi’ makes you smile, like ‘cheese’."
+    ],
+    "pitfalls": [
+     "子 is toneless: qiézi.",
+     "茄 is read jiā in 雪茄 (cigar)."
+    ],
+    "subtleties": [
+     "Measure words vary with shape and region: 一个, 一根 or 一条茄子."
+    ]
+   }
   },
   {
    "id": "zh:nangua",
@@ -31,7 +123,88 @@
    },
    "measure": [
     "个"
-   ]
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Sweet autumn food, festivals.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pumpkin, winter squash",
+      "concept": "veg.pumpkin",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "万圣节的时候孩子们刻南瓜灯。",
+      "tr": "At Halloween children carve jack-o'-lanterns.",
+      "register": "neutral",
+      "context": "festivities",
+      "sense": "s1",
+      "py": "Wànshèngjié de shíhou háizimen kè nánguā dēng."
+     },
+     {
+      "text": "南瓜粥又甜又香。",
+      "tr": "Pumpkin porridge is sweet and fragrant.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Nánguā zhōu yòu tián yòu xiāng."
+     },
+     {
+      "text": "这个南瓜有十斤重。",
+      "tr": "This pumpkin weighs ten jin (5 kg).",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1",
+      "py": "Zhège nánguā yǒu shí jīn zhòng."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "南瓜子",
+      "tr": "pumpkin seeds"
+     },
+     {
+      "text": "南瓜饼",
+      "tr": "pumpkin cake"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "倭瓜",
+      "register": "regional",
+      "nuance": "northern regional word"
+     },
+     {
+      "word": "北瓜",
+      "register": "regional",
+      "nuance": "‘northern melon’ — regional"
+     }
+    ],
+    "etymology": {
+     "text": "南 (nán, ‘south’) + 瓜 (guā, ‘melon, gourd’): the ‘southern melon’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same vegetable is a ‘southern melon’ (南瓜) in standard Chinese and a ‘northern melon’ (北瓜) in some dialects."
+    ],
+    "pitfalls": [
+     "Don't mix 南瓜 (pumpkin) with 西瓜 (watermelon) — both are 瓜."
+    ],
+    "subtleties": [
+     "瓜 is the family name of gourds and melons: 西瓜, 黄瓜, 南瓜, 冬瓜."
+    ]
+   }
   }
  ],
  "absent": []

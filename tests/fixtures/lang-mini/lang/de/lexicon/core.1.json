@@ -51,6 +51,153 @@
    },
    "ref": {
     "src": "fixture"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and warm: shared meals (zusammen essen) are a social ritual.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat (of people)",
+      "concept": "verb.eat",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to have a meal, to dine (essen gehen = to eat out)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Isst du Fleisch?",
+      "tr": "Do you eat meat?",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Er isst gern Gemüse.",
+      "tr": "He likes eating vegetables.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir essen um sieben Uhr zu Abend.",
+      "tr": "We have dinner at seven.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     },
+     {
+      "text": "Am Wochenende gehen wir essen.",
+      "tr": "At the weekend we go out to eat.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Mittag essen",
+      "tr": "to have lunch"
+     },
+     {
+      "text": "zu Abend essen",
+      "tr": "to have dinner"
+     },
+     {
+      "text": "essen gehen",
+      "tr": "to eat out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das Auge isst mit.",
+      "tr": "The eye eats too.",
+      "kind": "saying",
+      "meaning": "How food looks matters.",
+      "register": "neutral"
+     },
+     {
+      "text": "Es wird nichts so heiß gegessen, wie es gekocht wird.",
+      "tr": "Nothing is eaten as hot as it is cooked.",
+      "kind": "proverb",
+      "meaning": "Things are rarely as bad as they first seem.",
+      "register": "neutral"
+     },
+     {
+      "text": "So jemand nicht will arbeiten, der soll auch nicht essen.",
+      "tr": "If anyone will not work, neither shall he eat.",
+      "kind": "quote",
+      "meaning": "Who does not work should not eat.",
+      "register": "literary",
+      "source": "Bible, 2 Thessalonians 3:10 (Luther translation, public domain)"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "aufessen",
+      "tr": "to eat up, finish one's food"
+     },
+     {
+      "text": "mitessen",
+      "tr": "to eat with others, join in"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "speisen",
+      "register": "formal",
+      "nuance": "elevated ‘to dine’: restaurants, menus, ceremonies"
+     },
+     {
+      "word": "zu sich nehmen",
+      "register": "formal",
+      "nuance": "to ingest, take (food) — medical or official language"
+     },
+     {
+      "word": "futtern",
+      "register": "colloquial",
+      "nuance": "to tuck in, eat heartily — playful"
+     },
+     {
+      "word": "fressen",
+      "register": "pejorative",
+      "nuance": "neutral for animals; said of people it means eating greedily, like an animal"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "fasten",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ëȥȥen, Old High German ëȥȥan, from Proto-Germanic *etaną, from Proto-Indo-European *h₁ed-; cognate with English eat and Dutch eten.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Animals do not ‘essen’ in German, they ‘fressen’ — using fressen for a person is rude or jokey.",
+     "The past participle is gegessen, with an extra -ge-; the old form gessen is obsolete."
+    ],
+    "pitfalls": [
+     "Stem vowel e → i: du isst, er isst (not *esst); and du isst / er isst are spelled the same.",
+     "Past tense with ß: ich aß, wir aßen."
+    ],
+    "subtleties": [
+     "Soup is eaten in German (Suppe essen), not drunk — unlike English ‘drink soup’ in some contexts or Chinese 喝汤."
+    ]
    }
   },
   {

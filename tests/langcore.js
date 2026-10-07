@@ -154,6 +154,22 @@ ok(short.seconds <= 60 && short.steps.every(s => s.kind === 'review'), `a 1-minu
 plan = N.planSession(C, L, { day: 7, minutes: 30, languages: ['de'] });
 ok(plan.steps.some(s => s.kind === 'grammar' && s.lang === 'de'), 'when a function is trainable, the session has a grammar block');
 
+// ---------- the word card (§4.6) ----------
+const card = N.wordCard(C, L, 'de', 'de:Gurke');
+ok(card.hasProfile && card.examples.length === 4 && new Set(card.examples.map(e => e.register)).size >= 2, `German Gurke: ${card.examples.length} examples in ${new Set(card.examples.map(e => e.register)).size} registers`);
+ok(same(card.parts.map(p => p[1]), ['die Gurke', 'der Gurke', 'die Gurken']), 'principal parts: article, genitive, plural');
+ok(same(card.flags.map(f => f.lang + ':' + f.words.map(w => w.lemma).join('/')), ['ar:خِيَار', 'he:מְלָפְפוֹן', 'zh:黄瓜', 'de:Gurke'].map(x => x.normalize('NFC'))), 'flags: the same concept in every course language');
+ok(card.sections.map(s => s.key).join(',') === 'senses,examples,collocations,phrases,synonyms,pitfalls,subtleties,etymology,funFacts', 'sections in order, empty ones left out');
+ok(Object.keys(card.sections.find(s => s.key === 'synonyms').items).join(',') === 'neutral', 'synonyms are grouped by register');
+ok(same(N.wordCard(C, L, 'de', 'de:Kürbis').parts.map(p => p[1]), ['der Kürbis', 'des Kürbisses', 'die Kürbisse']), 'masculine: des Kürbisses');
+const slang = card.examples.find(e => e.register === 'colloquial');
+ok(slang && /banger/.test(slang.tr) && slang.senseDef.includes('junk'), 'a colloquial example carries its sense: ' + slang.senseDef);
+const arCard = N.wordCard(C, N.newLearner(C), 'ar', 'ar:jazar');
+ok(arCard.examples.every(e => !/[ً-ْ]/.test(e.plain)) && arCard.parts.some(p => p[0] === 'one (unit noun)'), 'Arabic card: unvocalized copies of the examples; collective + unit noun in the principal parts');
+ok(arCard.examples[0].unlearned.includes('الْجَزَرِ'.normalize('NFC')) || arCard.examples[0].unknown.length > 0, 'example words are checked against what the learner knows');
+const fnCard = N.wordCard(C, L, 'he', 'he:et');
+ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCard.flags.length === 1, 'a word without a concept: its role, one flag');
+
 // ---------- storage ----------
 const kv = N.toKV(C, L);
 ok(Object.keys(kv).every(k => k === 'settings' || /^lang:(de|ar|he|zh):(node|fn):/.test(k)) && !!kv['lang:de:node:core.1'], `stored per (language, node): ${Object.keys(kv).filter(k => k !== 'settings').join(', ')}`);
