@@ -27,7 +27,7 @@ accounts/<profile>/
   backups/                 suggested target for the app's automatic folder backups
   packs/<id>/              PRIVATE subjects of this profile (never published to the website)
 tools/                     build, validate, new_subject, source_text, db_sync, db_restore, svgkit (diagrams), CONTENT_SPEC.md, schemas/
-docs/                      VISUAL.md (picture exercises — canonical schema), CLAUDE_CONNECTOR.md, TUTORING.md, CONVERSATIONS.md, TECH_DEBT.md
+docs/                      LANGUAGES.md (foreign languages, polyglot — design + plan), VISUAL.md (picture exercises — canonical schema), CLAUDE_CONNECTOR.md, TUTORING.md, CONVERSATIONS.md, TECH_DEBT.md
 cloud/                     supabase.sql (schema + row-level security), the setup guide, mcp/server.mjs (the Claude connector)
 skill/noema-pack-builder/  the Claude skill users add to their own Claude (zip built into the website)
 data/noema-lite.db     SQLite backup database (GENERATED, git-ignored; upload it to the cloud from the app)
