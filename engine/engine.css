@@ -781,6 +781,26 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .xbtn:hover{opacity:1;border-color:var(--violet);box-shadow:0 2px 8px rgba(99,102,241,.25)}
 @media (hover:none){.xbtn{opacity:.4;transform:none;width:26px;height:26px}.xable:not(:has(.xable))>.xbtn{opacity:.5}}
 .b-list li.xable,.terms .term.xable,.compare>div.xable{padding-right:30px}
+/* 📥 import a map: the preview graph, the step's files, the file table */
+.cm-miniscroll{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:14px;margin:8px 0;background:var(--bg2,rgba(127,127,127,.04))}
+.cm-mini{position:relative}
+.cm-mnode{position:absolute;display:flex;align-items:center;gap:5px;padding:5px 8px;border-radius:11px;border:2px solid var(--line);background:var(--card);font:inherit;font-size:12px;font-weight:700;line-height:1.2;color:inherit;text-align:left;cursor:pointer;overflow:hidden}
+.cm-mnode .cm-t{flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cm-mnode.has{border-style:solid;box-shadow:inset 3px 0 0 var(--violet)}.cm-mnode.sel{border-color:var(--violet);box-shadow:0 0 0 3px var(--violet-bg)}.cm-mnode.over{border-color:var(--ok);background:var(--ok-bg)}
+.cm-mnode.cm-r-foundation{background:color-mix(in srgb,#0ea5e9 8%,var(--card))}.cm-mnode.cm-r-application{background:color-mix(in srgb,#f59e0b 9%,var(--card))}
+.cm-mbadge{font-size:11px;font-weight:800;white-space:nowrap}
+.cm-nodebox:not(:empty){border:1px solid var(--violet);border-radius:12px;padding:8px 10px;margin:6px 0;display:grid;gap:6px}.cm-nodehead{display:flex;align-items:center;gap:6px}.cm-nodehead b{flex:1}
+.cm-warns:not(:empty){margin:4px 0;color:var(--warn,#b45309)}
+.cm-filetabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 2px}
+.cm-filetable tr[draggable]{cursor:grab}.cm-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.cm-tchip{display:inline-flex;align-items:center;gap:4px;padding:2px 4px 2px 8px;border-radius:999px;background:var(--violet-bg);font-size:12.5px}
+.cm-range{width:74px;padding:2px 6px;font-size:12px;min-height:0}.cm-rangel{white-space:nowrap}
+.cm-addstep{max-width:100%;font-size:12.5px}
+.cm-conf{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:6px;font-size:12px;font-weight:800;background:var(--line)}
+.cm-conf.c-high{background:var(--ok-bg);color:var(--ok)}.cm-conf.c-medium{background:#e0f2fe;color:#0369a1}.cm-conf.c-low,.cm-conf.c-check{background:#fef3c7;color:#b45309}.cm-conf.c-none{opacity:.6}
+.cm-filesum{margin-top:8px;font-weight:700}
+.cm-ex{margin:6px 0}.cm-ex pre{margin:4px 0 0;padding:8px 10px;border-radius:10px;background:var(--bg2,rgba(127,127,127,.08));font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.cm-matadd{gap:6px;align-items:center}.cm-matadd select{max-width:260px}
 
 /* ---- 35_visual.css ---- */
 /* ---------- visual exercises & figures (docs/VISUAL.md) ---------- */

@@ -165,11 +165,26 @@ window.NoemaCurMap = (() => {
       const err = el('div', { class: 'tiny cg-kstat bad' }); const busy = el('span', { class: 'tiny' });
       // 📎 the learner's own files for this step: the step is planned and built from them (no web research of the theory)
       const matBox = el('div', { class: 'cm-mat' });
+      const parseRange = v => { const m = String(v || '').match(/(\d+)\s*(?:[-–—]\s*(\d+))?/); return m ? [+m[1], +(m[2] || m[1])] : null; };
       const drawMat = () => {
-        matBox.innerHTML = ''; if (!n) return; const cur = C().get(acc, cid)?.nodes[id]?.material?.files || [];
-        matBox.append(cur.length ? el('ul', { class: 'cm-matlist' }, ...cur.map(f => el('li', {}, el('button', { class: 'linklike', title: '👁 Open', onclick: () => openMaterial(acc, cid, id, f) }, '📄 ' + f.name), el('span', { class: 'tiny' }, f.pages ? ` · ${f.pages} pages` : ''),
-          locked ? null : el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name, onclick: async () => { await E.removeMaterial(acc, cid, id, f.srcId); drawMat(); } }, '✕')))) : el('div', { class: 'tiny' }, 'None — the AI researches this step from authoritative sources.'),
-          locked ? null : el('label', { class: 'btn small' }, '📎 Add files', el('input', { type: 'file', multiple: true, style: { display: 'none' }, onchange: async e => { const fs = [...e.target.files]; e.target.value = ''; if (!fs.length) return; busy.textContent = '⏳ Reading the files…'; const r = await E.addMaterial(acc, cid, id, fs); busy.textContent = r.error ? '⚠️ ' + r.error : `✓ ${r.added.length} file(s) added — ✨ re-plan the chapters to follow them`; drawMat(); } })));
+        matBox.innerHTML = ''; if (!n) return; const cc = C().get(acc, cid); const cur = cc?.nodes[id]?.material?.files || [];
+        matBox.append(cur.length ? el('ul', { class: 'cm-matlist' }, ...cur.map(f => {
+          const shared = f.fileId ? Object.values(cc.nodes).filter(x => x.id !== id && (x.material?.files || []).some(f2 => f2.fileId === f.fileId)) : [];
+          const rg = el('input', { class: 'noema-input cm-range', placeholder: 'all pages', value: f.range ? `${f.range[0]}–${f.range[1]}` : '', disabled: locked, 'aria-label': 'Pages of ' + f.name + ' for this step', title: 'Only these pages of the file belong to this step (empty = the whole file)',
+            onchange: e => { const r = E.setMaterialRange(acc, cid, id, f.srcId, parseRange(e.target.value)); busy.textContent = r.error ? '⚠️ ' + r.error : '✓ pages saved — ✨ re-plan the chapters to follow them'; } });
+          return el('li', {}, el('button', { class: 'linklike', title: '👁 Open', onclick: () => openMaterial(acc, cid, id, f) }, '📄 ' + f.name), el('span', { class: 'tiny' }, f.pages ? ` · ${f.pages} p.` : ''),
+            f.pages || f.range ? el('label', { class: 'tiny cm-rangel' }, 'pages ', rg) : null,
+            shared.length ? el('span', { class: 'tiny', title: 'The same file, stored once' }, ` · also for ${shared.map(x => '“' + x.title + '”').join(', ')}`) : null,
+            locked ? null : el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name, onclick: async () => { await E.removeMaterial(acc, cid, id, f.srcId); drawMat(); } }, '✕'));
+        })) : el('div', { class: 'tiny' }, 'None — the AI researches this step from authoritative sources.'));
+        if (locked) return;
+        const pg = el('input', { class: 'noema-input cm-range', placeholder: 'pages, e.g. 40–62 (optional)', 'aria-label': 'Pages for the next file' });
+        const known = Object.entries(cc.files || {});
+        const reuse = known.length ? el('select', { class: 'noema-input', 'aria-label': 'Use a file of this curriculum', onchange: async e => { const fid = e.target.value; if (!fid) return; busy.textContent = '⏳ …'; const r = await E.addMaterial(acc, cid, id, [{ fileId: fid, range: parseRange(pg.value) }]); busy.textContent = r.error ? '⚠️ ' + r.error : '✓ added — ✨ re-plan the chapters to follow it'; drawMat(); } },
+          el('option', { value: '' }, '📚 Use a file of this curriculum…'), ...known.map(([fid, x]) => el('option', { value: fid }, `${x.name}${x.pages ? ' (' + x.pages + ' p.)' : ''}`))) : null;
+        matBox.append(el('div', { class: 'row cm-matadd' },
+          el('label', { class: 'btn small' }, '📎 Add files', el('input', { type: 'file', multiple: true, style: { display: 'none' }, onchange: async e => { const fs = [...e.target.files]; e.target.value = ''; if (!fs.length) return; busy.textContent = '⏳ Reading the files…'; const r = await E.addMaterial(acc, cid, id, fs.map(file => ({ file, range: parseRange(pg.value) }))); busy.textContent = r.error ? '⚠️ ' + r.error : `✓ ${r.added.length} file(s) added — ✨ re-plan the chapters to follow them`; drawMat(); } })),
+          reuse, pg));
       };
       drawMat();
       const collect = () => ({ title: title.value, summary: summary.value, role: role.value, parents, children, ...(locked ? {} : { learningGoals: goals.value.split('\n'), chapters }) });
@@ -212,9 +227,9 @@ window.NoemaCurMap = (() => {
     });
   }
   async function openMaterial(acc, cid, id, f) {
-    const c = C().get(acc, cid); const rec = await window.NoemaSrcFiles?.get(acc, C().packId(c, id), f.srcId).catch(() => null);
+    const c = C().get(acc, cid); const rec = await C().materialFile(acc, c, id, f).catch(() => null);
     if (!rec?.blob) { toast('⚠️ This file is not on this device and could not be downloaded.', 4000); return; }
-    window.NoemaViewer.open({ blob: rec.blob, name: f.name, type: rec.type, title: f.name, subtitle: c.nodes[id]?.title });
+    window.NoemaViewer.open({ blob: rec.blob, name: f.name, type: rec.type, title: f.name, subtitle: c.nodes[id]?.title + (f.range ? ` · pages ${f.range[0]}–${f.range[1]}` : ''), page: f.range ? f.range[0] : undefined });
   }
 
   /* ======================= 📥 import a map you already have ======================= */
@@ -222,22 +237,24 @@ window.NoemaCurMap = (() => {
     const I = window.NoemaCurImport;
     overlay((box, close) => {
       box.classList.add('cg-box', 'cm-import');
-      let parsed = null, aiParsed = null, files = [], matches = [];
-      const text = el('textarea', { class: 'noema-input cm-maptext', rows: 12, spellcheck: 'false', placeholder: 'Paste your map — a tree like\nCell biology\n├── Prerequisites\n├── Membranes\n│   └── Transport\n└── Applications\n\n…or a Mermaid graph (flowchart LR / A --> B), or JSON.' });
+      let parsed = null, aiParsed = null, files = [], sel = null, filter = 'all', dragging = null;
+      const A = new Map();   // file → { targets: [{ id, range }], how, confidence, alts, manual }
+      const text = el('textarea', { class: 'noema-input cm-maptext', rows: 12, spellcheck: 'false', placeholder: 'Paste your map — a tree like\nCell biology\n├── Prerequisites\n├── Membranes\n│   └── Transport\n└── Applications\n\n…arrows (Algebra → Calculus), a Mermaid graph or JSON.' });
       const fileIn = el('input', { type: 'file', accept: '.txt,.md,.markdown,.json,.mmd,.mermaid', style: { display: 'none' }, onchange: async e => { const f = e.target.files[0]; if (f) { text.value = await f.text(); aiParsed = null; reparse(); } } });
-      const mode = el('select', { class: 'noema-input', onchange: () => reparse() }, el('option', { value: 'sequence' }, 'in the order written (each after the previous one)'), el('option', { value: 'parallel' }, 'independent (each after its parent topic)'));
+      const mode = el('select', { class: 'noema-input', onchange: () => reparse() }, el('option', { value: 'sequence' }, 'in the order written (each after the previous one)'), el('option', { value: 'parallel' }, 'in any order (each after its parent topic)'));
       const reverse = el('input', { type: 'checkbox', onchange: () => reparse() }), keepCaps = el('input', { type: 'checkbox', onchange: () => reparse() });
-      const info = el('div', { class: 'tiny cm-detect' }), prev = el('ol', { class: 'cm-preview' }), perr = el('div', { class: 'tiny cg-kstat bad' });
+      const info = el('div', { class: 'tiny cm-detect' }), perr = el('div', { class: 'tiny cg-kstat bad' }), warnBox = el('div', { class: 'tiny cm-warns' });
+      const graph = el('div', { class: 'cm-miniscroll', 'aria-label': 'Preview of the map' }), nodeBox = el('div', { class: 'cm-nodebox' }), prev = el('ol', { class: 'cm-preview' });
       const title = el('input', { class: 'noema-input', placeholder: 'Name of the curriculum' });
       const lang = el('select', { class: 'noema-input' }, ...Object.entries(C().LANG).map(([v, t]) => el('option', { value: v }, t))); lang.value = (navigator.language || 'en').slice(0, 2) in C().LANG ? (navigator.language || 'en').slice(0, 2) : 'en';
       const learner = el('input', { class: 'noema-input', placeholder: 'Optional: what you already know' });
       const provider = el('select', { class: 'noema-input' }, el('option', { value: 'auto' }, 'Automatic (Claude if its key is here, else Gemini)'), el('option', { value: 'claude' }, 'Claude'), el('option', { value: 'gemini' }, 'Gemini'));
       const prefetch = el('select', { class: 'noema-input' }, ...[0, 1, 2, 3, 5, 8].map(n => el('option', { value: n }, n ? `${n} step${n > 1 ? 's' : ''} ahead` : 'only when I open a step'))); prefetch.value = '3';
       const budget = el('input', { class: 'noema-input cg-budget', type: 'number', min: '1', value: '8' });
-      const fileBox = el('div', { class: 'cm-files' });
-      const drop = el('label', { class: 'cg-drop' }, '📎 Add the material of the steps (PDF, Word, slides, notes… or a .zip) — optional', el('input', { type: 'file', multiple: true, onchange: e => { addFiles([...e.target.files]); e.target.value = ''; } }));
-      const folder = el('label', { class: 'btn small' }, '📁 Add a folder (a sub-folder per step)', el('input', { type: 'file', multiple: true, webkitdirectory: true, style: { display: 'none' }, onchange: e => { addFiles([...e.target.files].filter(f => !/(^|\/)\./.test(f.webkitRelativePath || f.name))); e.target.value = ''; } }));
-      ['dragover', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop') addFiles([...e.dataTransfer.files]); }));
+      const fileBox = el('div', { class: 'cm-files' }), fileSum = el('div', { class: 'tiny cm-filesum' });
+      const drop = el('label', { class: 'cg-drop' }, '📎 Add the material (PDF, Word, slides, notes… or a .zip)', el('input', { type: 'file', multiple: true, onchange: e => { addFiles([...e.target.files]); e.target.value = ''; } }));
+      const folder = el('label', { class: 'btn small' }, '📁 Add a folder', el('input', { type: 'file', multiple: true, webkitdirectory: true, style: { display: 'none' }, onchange: e => { addFiles([...e.target.files].filter(f => !/(^|\/)\./.test(f.webkitRelativePath || f.name))); e.target.value = ''; } }));
+      ['dragover', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop' && e.dataTransfer.files.length) addFiles([...e.dataTransfer.files]); }));
       const aiBtn = el('button', { class: 'btn small ai', onclick: async () => {
         perr.textContent = ''; if (!text.value.trim()) { perr.textContent = '👆 Paste your map first.'; return; }
         if (!LLM().pick(acc, provider.value)) { perr.textContent = '👆 The AI needs a Claude or Gemini key (step 4).'; return; }
@@ -246,16 +263,57 @@ window.NoemaCurMap = (() => {
         aiBtn.disabled = false;
       } }, '✨ Let the AI read it');
       const err = el('div', { class: 'tiny cg-kstat bad' }); const busy = el('div', { class: 'tiny' });
-      const FMT = { outline: 'tree / outline', mermaid: 'Mermaid graph', json: 'JSON', ai: 'read by the AI' };
+      const FMT = { outline: 'tree / outline', arrows: 'arrows', mermaid: 'Mermaid graph', json: 'JSON', ai: 'read by the AI' };
+      const T = id => parsed?.nodes[id]?.title || id;
+      const nFiles = id => [...A.values()].filter(a => a.targets.some(t => t.id === id)).length;
+      const parseRange = v => { const m = String(v || '').match(/(\d+)\s*(?:[-–—]\s*(\d+))?/); return m ? [+m[1], +(m[2] || m[1])] : null; };
+      const fmtRange = r => r ? (r[0] === r[1] ? String(r[0]) : `${r[0]}–${r[1]}`) : '';
+      const addTarget = (f, id) => { const a = A.get(f); if (!a || a.targets.some(t => t.id === id)) return; a.targets.push({ id, range: null }); a.manual = true; a.confidence = 'high'; a.how = a.how || 'you'; redraw(); };
+
+      /* ---- the map as a picture: branches and joins are visible; drop a file on a step ---- */
+      function drawGraph() {
+        graph.innerHTML = ''; if (!parsed) return;
+        const Lt = C().layout({ nodes: parsed.nodes, edges: parsed.edges }); const NW = 158, NH = 44, GX = 30, GY = 10;
+        const rows = Math.max(1, ...Lt.cols.map(c => c.length)); const Wd = Lt.cols.length * (NW + GX) + 8, Hd = rows * (NH + GY) + 8;
+        const P = {}; Lt.cols.forEach((col, x) => { const off = (rows - col.length) * (NH + GY) / 2; col.forEach((id, y) => { P[id] = { x: 4 + x * (NW + GX), y: 4 + off + y * (NH + GY) }; }); });
+        const inner = el('div', { class: 'cm-mini', style: { width: Wd + 'px', height: Hd + 'px' } });
+        const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'); svg.setAttribute('width', Wd); svg.setAttribute('height', Hd); svg.setAttribute('class', 'cm-edges');
+        for (const e of parsed.edges) { const a = P[e.from], b = P[e.to]; if (!a || !b) continue; const p = document.createElementNS(NS, 'path'); const x1 = a.x + NW, y1 = a.y + NH / 2, x2 = b.x, y2 = b.y + NH / 2, mx = (x1 + x2) / 2; p.setAttribute('d', `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`); if (sel && (e.from === sel || e.to === sel)) p.setAttribute('class', 'hl'); svg.append(p); }
+        inner.append(svg);
+        for (const id of parsed.order) {
+          const n = parsed.nodes[id], k = nFiles(id), ins = parsed.edges.filter(e => e.to === id).length, outs = parsed.edges.filter(e => e.from === id).length;
+          const b = el('button', { class: 'cm-mnode cm-r-' + n.role + (sel === id ? ' sel' : '') + (k ? ' has' : ''), 'data-id': id, style: { left: P[id].x + 'px', top: P[id].y + 'px', width: NW + 'px', height: NH + 'px' }, title: `${n.title}${ins > 1 ? ' · needs ' + ins + ' steps (join)' : ''}${outs > 1 ? ' · opens ' + outs + ' steps (branch)' : ''}\n${k ? '📎 ' + k + ' file(s)' : 'no files — researched by the AI'}\nDrop a file here to give it to this step`,
+            onclick: () => { sel = sel === id ? null : id; drawGraph(); drawNode(); },
+            ondragover: e => { e.preventDefault(); b.classList.add('over'); }, ondragleave: () => b.classList.remove('over'),
+            ondrop: e => { e.preventDefault(); b.classList.remove('over'); const raw = e.dataTransfer.getData('text/noema-file') || e.dataTransfer.getData('text/plain'); const i = /^\d+$/.test(raw) ? +raw : (dragging ?? -1); dragging = null; if (files[i]) addTarget(files[i], id); else if (e.dataTransfer.files.length) addFiles([...e.dataTransfer.files], id); } },
+            el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), k ? el('span', { class: 'cm-mbadge' }, '📎' + k) : null);
+          inner.append(b);
+        }
+        graph.append(inner);
+      }
+      /* ---- the selected step: its files (pages per step), add one ---- */
+      function drawNode() {
+        nodeBox.innerHTML = ''; if (!parsed || !sel || !parsed.nodes[sel]) return;
+        const mine = [...A.entries()].filter(([, a]) => a.targets.some(t => t.id === sel));
+        const add = el('select', { class: 'noema-input', 'aria-label': 'Give a file to this step', onchange: e => { const f = files[+e.target.value]; if (f) addTarget(f, sel); } }, el('option', { value: '' }, files.length ? '＋ Give it a file…' : 'Add files below first'), ...files.map((f, i) => el('option', { value: i }, relPath(f))));
+        nodeBox.append(el('div', { class: 'cm-nodehead' }, el('b', {}, '📎 ' + T(sel)), el('button', { class: 'btn small ghost', 'aria-label': 'Close', onclick: () => { sel = null; redraw(); } }, '✕')),
+          mine.length ? el('ul', { class: 'cm-matlist' }, ...mine.map(([f, a]) => { const t = a.targets.find(x => x.id === sel); return el('li', {}, '📄 ' + relPath(f), rangeInput(f, t), el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name + ' from this step', onclick: () => { a.targets = a.targets.filter(x => x !== t); a.manual = true; redraw(); } }, '✕')); }))
+            : el('div', { class: 'tiny' }, 'No files — the AI will research this step (or drop a file on it).'), add);
+      }
+      const rangeInput = (f, t) => el('label', { class: 'tiny cm-rangel' }, ' pages ', el('input', { class: 'noema-input cm-range', value: fmtRange(t.range), placeholder: 'all', 'aria-label': `Pages of ${f.name} for “${T(t.id)}”`, onchange: e => { t.range = parseRange(e.target.value); A.get(f).manual = true; } }));
+      const relPath = f => String(f.hint || f.webkitRelativePath || f.name);
+
       function show(g) {
-        parsed = g; prev.innerHTML = ''; perr.textContent = '';
-        if (!g) { info.textContent = ''; drawFiles(); return; }
-        const T = id => g.nodes[id].title; const planned = Object.values(g.nodes).filter(n => n.chapters?.length).length;
-        info.textContent = `✓ ${FMT[g.format] || g.format}: ${g.order.length} steps · ${g.edges.length} links` + (planned ? ` · ${planned} with their chapters` : '') + (g.warnings.length ? ' · ⚠️ ' + g.warnings.slice(0, 3).join('; ') : '');
+        parsed = g; prev.innerHTML = ''; perr.textContent = ''; warnBox.innerHTML = '';
+        if (sel && !(g && g.nodes[sel])) sel = null;
+        if (!g) { info.textContent = ''; redraw(); return; }
+        const s = g.stats || {}; const planned = Object.values(g.nodes).filter(n => n.chapters?.length).length;
+        info.textContent = `✓ ${FMT[g.format] || g.format}: ${s.steps} steps · ${s.links} links` + (s.branches ? ` · ${s.branches} branch${s.branches > 1 ? 'es' : ''}` : '') + (s.joins ? ` · ${s.joins} join${s.joins > 1 ? 's' : ''}` : '') + (s.starts > 1 ? ` · ${s.starts} starting points` : '') + (planned ? ` · ${planned} with their chapters` : '') + (s.named ? ` · files named for ${s.named} step(s)` : '');
+        if (g.warnings.length) warnBox.append(...g.warnings.slice(0, 6).map(w => el('div', {}, '⚠️ ' + w)));
         if (!title.value.trim() || title.dataset.auto) { title.value = g.title || ''; title.dataset.auto = '1'; }
         if (g.language && C().LANG[g.language]) lang.value = g.language;
         g.order.forEach(id => { const ps = g.edges.filter(e => e.to === id).map(e => T(e.from)); prev.append(el('li', {}, el('span', { class: 'cm-ic' }, ICON[g.nodes[id].role] || '•'), ' ', el('b', {}, T(id)), ps.length ? el('span', { class: 'tiny' }, '  ← ' + ps.join(', ')) : el('span', { class: 'tiny' }, '  (starts here)'))); });
-        drawFiles();
+        rematch(); redraw();
       }
       let t0 = null;
       function reparse() {
@@ -263,28 +321,51 @@ window.NoemaCurMap = (() => {
           if (!text.value.trim()) { show(null); return; }
           if (aiParsed) { show(aiParsed); return; }
           try { show(I.parse(text.value, { mode: mode.value, reverse: reverse.checked, keepCaps: keepCaps.checked })); }
-          catch (e) { parsed = null; prev.innerHTML = ''; info.textContent = ''; perr.textContent = '⚠️ ' + e.message + (LLM().pick(acc, provider.value) ? ' — or tap ✨ Let the AI read it.' : ''); drawFiles(); }
+          catch (e) { parsed = null; prev.innerHTML = ''; info.textContent = ''; perr.textContent = '⚠️ ' + e.message + (LLM().pick(acc, provider.value) ? ' — or tap ✨ Let the AI read it.' : ''); redraw(); }
         }, 250);
       }
       text.addEventListener('input', () => { aiParsed = null; reparse(); }); title.addEventListener('input', () => { delete title.dataset.auto; });
-      async function addFiles(fs) {
-        for (const f of fs) {
-          if (/\.zip$/i.test(f.name)) { try { const inner = await I.unzipMaterial(f); for (const g of inner) if (!files.some(x => x.name === g.name && x.size === g.size)) files.push(g); } catch (e) { toast('⚠️ ' + f.name + ': ' + e.message, 4000); } continue; }
-          if (!files.some(x => x.name === f.name && x.size === f.size)) files.push(f);
-        }
-        drawFiles();
-      }
-      function drawFiles() {
-        fileBox.innerHTML = '';
+      /** automatic matches for the files the learner has not touched (their own choices stay) */
+      function rematch() {
         if (!files.length) return;
-        const auto = parsed ? I.matchFiles(parsed, files) : files.map(f => ({ file: f, id: null }));
-        matches = files.map(f => { const prevM = matches.find(m => m.file === f && m.manual); return prevM || auto.find(a => a.file === f); });
-        fileBox.append(el('table', { class: 'cm-filetable' }, el('tbody', {}, ...matches.map((m, i) => {
-          const sel = el('select', { class: 'noema-input', 'aria-label': 'Step for ' + m.file.name, onchange: () => { matches[i] = { file: m.file, id: sel.value || null, manual: true }; } }, el('option', { value: '' }, '— not used —'), ...(parsed ? parsed.order.map(id => el('option', { value: id }, parsed.nodes[id].title)) : []));
-          sel.value = m.id || '';
-          return el('tr', {}, el('td', {}, '📄 ' + m.file.name, el('div', { class: 'tiny' }, (m.file.size / 1048576).toFixed(1) + ' MB' + (m.how ? ' · matched ' + m.how : ''))), el('td', {}, sel), el('td', {}, el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + m.file.name, onclick: () => { files = files.filter(x => x !== m.file); drawFiles(); } }, '✕')));
+        const auto = parsed ? I.matchFiles(parsed, files) : files.map(f => ({ file: f, targets: [], confidence: 'none', alts: [] }));
+        for (const m of auto) { const a = A.get(m.file); if (a?.manual) { if (parsed) a.targets = a.targets.filter(t => parsed.nodes[t.id]); continue; } A.set(m.file, { targets: m.targets.map(t => ({ ...t })), how: m.targets[0]?.how || '', confidence: m.confidence, alts: m.alts || [], manual: false }); }
+      }
+      async function addFiles(fs, toStep) {
+        const added = [];
+        for (const f of fs) {
+          if (/\.zip$/i.test(f.name)) { try { const inner = await I.unzipMaterial(f); for (const g of inner) if (!files.some(x => relPath(x) === relPath(g) && x.size === g.size)) { files.push(g); added.push(g); } } catch (e) { toast('⚠️ ' + f.name + ': ' + e.message, 4000); } continue; }
+          if (!files.some(x => relPath(x) === relPath(f) && x.size === f.size)) { files.push(f); added.push(f); }
+        }
+        rematch();
+        if (toStep) for (const f of added) addTarget(f, toStep);
+        redraw();
+      }
+      const BADGE = { high: ['✓', 'sure'], medium: ['≈', 'likely'], low: ['?', 'guess — check'], check: ['⚠️', 'check: more than one step fits'], none: ['—', 'not used'] };
+      const HOW = { map: 'named in your map', folder: 'by its folder', number: 'by its number', name: 'by its name', you: 'by you' };
+      function drawFiles() {
+        fileBox.innerHTML = ''; fileSum.textContent = '';
+        if (!files.length) return;
+        const all = files.map((f, i) => ({ f, i, a: A.get(f) || { targets: [], confidence: 'none', alts: [] } }));
+        const unused = all.filter(x => !x.a.targets.length), check = all.filter(x => x.a.targets.length && (x.a.confidence === 'check' || x.a.confidence === 'low') && !x.a.manual);
+        const stepsWith = parsed ? parsed.order.filter(id => nFiles(id)).length : 0;
+        fileSum.textContent = `${files.length} file(s) · ${stepsWith}/${parsed ? parsed.order.length : 0} steps have files` + (check.length ? ` · ⚠️ ${check.length} to check` : '') + (unused.length ? ` · ${unused.length} not used` : '');
+        const tabs = el('div', { class: 'cm-filetabs', role: 'tablist' }, ...[['all', `All ${all.length}`], ['check', `⚠️ To check ${check.length}`], ['unused', `Not used ${unused.length}`]].map(([k, l]) => el('button', { class: 'fchip' + (filter === k ? ' on' : ''), role: 'tab', onclick: () => { filter = k; drawFiles(); } }, l)));
+        const rows = (filter === 'check' ? check : filter === 'unused' ? unused : all);
+        fileBox.append(tabs, el('table', { class: 'cm-filetable' }, el('tbody', {}, ...rows.map(({ f, i, a }) => {
+          const conf = a.manual ? ['✓', 'set by you'] : BADGE[a.confidence] || BADGE.none;
+          const chips = el('div', { class: 'cm-chips' }, ...a.targets.map(t => el('span', { class: 'cm-tchip' }, el('button', { class: 'linklike', onclick: () => { sel = t.id; redraw(); graph.querySelector(`[data-id="${CSS.escape(t.id)}"]`)?.scrollIntoView?.({ block: 'nearest', inline: 'center' }); } }, T(t.id)), rangeInput(f, t),
+            el('button', { class: 'btn small ghost', 'aria-label': `Remove ${f.name} from “${T(t.id)}”`, onclick: () => { a.targets = a.targets.filter(x => x !== t); a.manual = true; redraw(); } }, '✕'))));
+          const addSel = el('select', { class: 'noema-input cm-addstep', 'aria-label': (a.targets.length ? 'Another step for ' : 'Step for ') + f.name, onchange: e => { if (e.target.value) addTarget(f, e.target.value); } },
+            el('option', { value: '' }, a.targets.length ? '＋ also for…' : '— choose a step —'), ...(parsed ? parsed.order.filter(id => !a.targets.some(t => t.id === id)).map(id => el('option', { value: id }, T(id))) : []));
+          const alts = !a.manual && a.alts?.length ? el('div', { class: 'tiny' }, 'or: ', ...a.alts.map((id, k) => [k ? ', ' : '', el('button', { class: 'linklike', onclick: () => { a.targets = [{ id, range: null }]; a.manual = true; redraw(); } }, T(id))])) : null;
+          return el('tr', { draggable: 'true', ondragstart: e => { dragging = i; e.dataTransfer.setData('text/noema-file', String(i)); e.dataTransfer.setData('text/plain', String(i)); e.dataTransfer.effectAllowed = 'copy'; }, ondragend: () => { setTimeout(() => { dragging = null; }, 0); } },
+            el('td', {}, el('span', { class: 'cm-conf c-' + (a.manual ? 'high' : a.confidence), title: conf[1] }, conf[0]), ' 📄 ', el('b', {}, f.name), el('div', { class: 'tiny' }, relPath(f) !== f.name ? relPath(f).replace(/[^/]+$/, '') + ' · ' : '', (f.size / 1048576).toFixed(1) + ' MB' + (a.targets.length ? ' · ' + (a.manual ? HOW.you : HOW[a.how] || '') : ''))),
+            el('td', {}, chips, alts, addSel),
+            el('td', {}, el('button', { class: 'btn small ghost', 'aria-label': 'Remove ' + f.name, onclick: () => { files = files.filter(x => x !== f); A.delete(f); redraw(); } }, '✕')));
         }))));
       }
+      function redraw() { drawGraph(); drawNode(); drawFiles(); }
       const go = el('button', { class: 'btn primary cg-go', onclick: async () => {
         err.textContent = '';
         if (!parsed) { err.textContent = '👆 Paste a map that can be read (step 1).'; return; }
@@ -293,19 +374,29 @@ window.NoemaCurMap = (() => {
         const big = files.find(f => f.size > (window.NoemaSrcFiles?.MAX || 2147483648)); if (big) { err.textContent = `⚠️ ${big.name} is too big for a browser to keep (over 2 GB).`; return; }
         go.disabled = true;
         try {
-          const c = await I.create(acc, parsed, { title: title.value.trim(), language: lang.value, learner: learner.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8), files: matches.filter(m => m.id), source: text.value, onLog: m => { busy.textContent = m; } });
+          const assignments = files.map(f => ({ file: f, targets: (A.get(f)?.targets || []).filter(t => parsed.nodes[t.id]) })).filter(a => a.targets.length);
+          const c = await I.create(acc, parsed, { title: title.value.trim(), language: lang.value, learner: learner.value, provider: provider.value, prefetch: +prefetch.value, nodeBudget: Math.max(1, +budget.value || 8), assignments, source: text.value, onLog: m => { busy.textContent = m; } });
           close(); if (c.status === 'ready') { G().kick(); map(acc, c.id, { onStudy }); } else progress(acc, c, { onStudy, start: true });
         } catch (e) { err.textContent = '⚠️ ' + e.message; go.disabled = false; }
       } }, '📥 Import my map');
+      const ex = (h1, code) => el('div', { class: 'cm-ex' }, el('b', {}, h1), el('pre', {}, code));
+      const syntax = el('details', { class: 'cg-faq' }, el('summary', {}, '✍️ How to write a map (and name its files)'),
+        el('p', { class: 'tiny' }, 'Any shape works: a step may open several steps (a branch) and need several (a join). Only a circle of “needs” is refused.'),
+        ex('Tree / outline — numbered levels follow each other; “(any order)” makes a level independent; “(after: …)” adds links', 'Molecular biology\n├── Prerequisites\n├── DNA (any order)\n│   ├── Structure 📎 dna/structure.pdf\n│   └── Replication\n├── Transcription (after: Structure)\n└── Applications'),
+        ex('Arrows — one chain per line; “A, B → C” is a join, “A → B, C” a branch', 'Algebra → Calculus → Probability\nCalculus → Linear algebra\nProbability, Linear algebra → Bayesian inference'),
+        ex('Mermaid', 'flowchart LR\n  A[Algebra] --> B[Calculus 📎 calc.pdf pp. 3–9]\n  A --> C[Logic]\n  B & C --> D[Proofs]\n%% 📎 Files\n%% D: proofs/'),
+        ex('JSON', '{ "title": "Bayes", "nodes": [\n  { "id": "prob", "title": "Probability", "files": ["book.pdf pp. 1-40"] },\n  { "id": "bayes", "title": "Bayes", "after": ["prob"], "folder": "bayes/" } ] }'),
+        ex('📎 A files section at the end (any text format) — keys: a step’s title, its number (2.1) or its Mermaid / JSON id', '📎 Files\nDNA replication: dna/*.pdf, notes/dna.md\n2.1: lab/\nTranscription: book.pdf pp. 40–62'),
+        el('p', { class: 'tiny' }, 'Paths are matched against the files you add (with their folders). A folder (ending in /) gives every file in it; * matches any name; “pp. 40–62” or “#40-62” gives only those pages of a file to that step — one textbook can serve many steps and is stored once. Files the map does not name are matched by their folders (a sub-folder per step, “03 Transcription” too), their number or their name — check the ones marked ⚠️ or ?.'));
       box.append(el('button', { class: 'btn small ghost cg-back', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'),
         head('📥 Import a map', 'Your own map of steps becomes the curriculum as it is — no AI redraws it. Give steps their files and they are taught from them.'),
         el('ol', { class: 'cg-steps' },
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Your map'), tip('A tree (├── └── │), an outline (bullets, numbers, indentation, # headings), a Mermaid graph (A --> B: A comes first) or JSON (nodes + prerequisites / edges, or nested children; also a curriculum exported from noema-lite). A step can say what comes before it: “Topic (after: A, B)” or “Topic ← A”, what it covers: “Topic — summary”, and its files: “Topic 📎 file.pdf”.')),
-            text, el('div', { class: 'row' }, el('label', { class: 'btn small' }, '📄 Open a file', fileIn), aiBtn),
-            el('details', { class: 'cg-faq' }, el('summary', {}, 'How to read it'), el('label', { class: 'cg-field' }, 'Topics at the same level', mode), el('label', { class: 'tiny' }, reverse, ' ⇄ my arrows point from a step to what it needs (reverse them)'), el('label', { class: 'tiny' }, keepCaps, ' Keep CAPITALS as written')),
-            info, perr, prev),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Your map'), tip('A tree (├── └── │), an outline (bullets, numbers, indentation, # headings), arrows (A → B), a Mermaid graph (A --> B: A comes first) or JSON (nodes + prerequisites / edges, nested children, or a curriculum exported from noema-lite).')),
+            text, el('div', { class: 'row' }, el('label', { class: 'btn small' }, '📄 Open a file', fileIn), aiBtn), syntax,
+            el('details', { class: 'cg-faq' }, el('summary', {}, 'How to read it'), el('label', { class: 'cg-field' }, 'Topics at the same level (when not numbered and not marked)', mode), el('label', { class: 'tiny' }, reverse, ' ⇄ my arrows point from a step to what it needs (reverse them)'), el('label', { class: 'tiny' }, keepCaps, ' Keep CAPITALS as written')),
+            info, perr, warnBox, graph, nodeBox, el('details', { class: 'cg-faq' }, el('summary', {}, 'The steps as a list'), prev)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Name and language')), el('label', { class: 'cg-field' }, 'Name', title), el('label', { class: 'cg-field' }, 'Language of the course', lang), el('label', { class: 'cg-field' }, 'Your starting point', learner)),
-          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip('Files are matched to steps by their names — change any match. A step with files is planned and built FROM them (no web research of its theory); steps without files are researched by the AI as usual. You can add files to any step later (✏️ Edit step → 📎), until it is prepared. A folder or .zip with a sub-folder per step (named like the step) is matched by the folder names.')), drop, el('div', { class: 'row' }, folder), fileBox),
+          el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Material of the steps (optional)'), tip('A step with files is planned and built FROM them (no web research of its theory); steps without files are researched by the AI as usual. Files are matched to steps by your map, their folders, numbers or names — change any match, give one file to several steps (with pages each), or drag a file onto a step in the map above. You can also add files later (✏️ Edit step → 📎), until the step is prepared.')), drop, el('div', { class: 'row' }, folder), fileSum, fileBox),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Which AI plans and prepares the steps?'), tip('The map is used as it is. The AI only plans the chapters of each step (from its files, when it has some) and later prepares each step as a subject.')), keysBox(acc), el('label', { class: 'cg-field' }, 'Use', provider),
             el('label', { class: 'cg-field' }, 'Prepare ahead', prefetch), el('label', { class: 'cg-field' }, 'Claude: stop and ask me when one step costs more than $', budget)),
           el('li', { class: 'cg-step' }, el('div', { class: 'cg-steptitle' }, el('b', {}, 'Import')), go, busy, err)),

@@ -110,39 +110,59 @@ everything.
 Subject picker → 🧭 Curricula → **📥 Import a map**. The map becomes the curriculum **as it is**: no DAG creator, auditor or
 goal expander runs. Only the chapter planner (agent 3) plans the steps that have no chapters yet.
 
-**What it reads (no AI needed)**
+**Any shape.** A map is a DAG: a step may open several steps (a *branch*) and need several (a *join*, e.g. A→B, A→C, B→D,
+C→D — a “diamond”). Both are normal everywhere (map, mastery: a join opens when all its prerequisites are mastered). Only a
+real circle of “needs” is refused, with the steps on it named. Links implied by others (A→B→C makes A→C redundant) are
+dropped. The preview draws the map (branches and joins visible) and counts steps, links, branches, joins, starting points.
+
+**Formats (no AI needed)**
 | format | example | how |
 |---|---|---|
-| tree / outline | `├── └── │`, bullets, `1.` / `1.2`, indentation, `#` headings | a single top line with children is the **title**; topics at the same level follow each other (**in the order written**, the default) or are **independent** (each after its parent); a parent topic comes before its sub-topics |
-| Mermaid | `flowchart LR` · `A[Algebra] --> B(Calculus) & C` · `-- text -->` · `==>` · `subgraph` | `A --> B` = A first (⇄ reverses arrows drawn the other way); a link to a subgraph goes to its first / from its last steps |
-| JSON | noema-lite's ⬇️ export (keeps chapters), the `dag_creator` format, `{nodes:[{id,title,prerequisites\|requires\|dependsOn,chapters,files}], edges:[{from,to}\|[a,b]\|"a->b"]}`, nested `children` | prerequisites by id or by title |
+| tree / outline | `├── └── │`, bullets, `1.` / `1.2`, indentation, `#` headings | a single top line (or a title line above a list) is the **title**; a parent topic comes before its sub-topics; siblings follow each other when **numbered** or by default (“in the order written”), or are independent with **`(any order)`** on the parent (per level; `(in order)` the other way; the default is in “How to read it”); the step after a level waits for all of it (a join); extra links `Topic (after: A, 2.1)` / `Topic ← A` (by title, number or id) |
+| arrows | `Algebra → Calculus → Probability` · `A, B → C` (join) · `A → B, C` (branch) | one chain per line (`→ -> => ⇒`); lines without an arrow are single steps; `# heading` = title |
+| Mermaid | `flowchart LR` · `A[Algebra] --> B(Calculus) & C` · `-- text -->` · `==>` · `subgraph` | `A --> B` = A first (⇄ reverses); a link to a subgraph goes to its first / from its last steps; 📎 also inside labels |
+| JSON | noema-lite's export (keeps chapters), `dag_creator`, `{nodes:[{id,title,prerequisites\|after,chapters,files,folder}], edges}`, nested `children` (+ `order: "any"`) | prerequisites by id or title |
 
-In any text a step can say more: `Topic (after: A, B)` / `Topic ← A` (extra prerequisites), `Topic — what it covers`
-(summary), `Topic 📎 file.pdf` (its files). Words like *Prerequisites / Βασικές… / Basics* make prerequisite steps,
-*Applications / Εφαρμογές* application steps (and everything under them). ALL-CAPS titles get normal capitals
-(DNA, RNA stay) unless *keep capitals* is ticked. Loops are reported with the steps on them; links implied by others
-(A→B→C makes A→C redundant) are dropped.
+`Topic — what it covers` gives a summary. Prerequisite / application words (*Prerequisites, Βασικές…, Applications,
+Εφαρμογές*) set the part (and everything under them). ALL-CAPS titles get normal capitals unless *keep capitals* is ticked.
 
-**✨ Let the AI read it** — for anything else (prose, an unusual JSON): Claude or Gemini returns the same structure
-(`S_IMPORT`), checked like every agent answer: every title must come from the map (an invented topic is sent back:
-“not a topic of the given map”), no topic of the map may be missing, refs valid, acyclic.
+**Naming the files — in every format**
+* on the step: `Topic 📎 book.pdf pp. 40–62, notes/topic/*.md` (Mermaid labels too; JSON `files` / `folder`);
+* a **📎 Files** section at the end (Mermaid: `%% 📎 Files` + `%% key: …`), one line per step — the key is the step's
+  title, its outline number (`2.1`) or its Mermaid / JSON id:
+  ```
+  📎 Files
+  DNA replication: dna/*.pdf, notes/dna.md
+  2.1: lab/
+  Transcription: book.pdf pp. 40–62
+  ```
+Paths match the files you add *with their folders* (a dropped folder or a .zip keeps them): a name, a path suffix, a folder
+(`lab/` = everything in it), globs (`*`, `**`, `?`); accents, case and separators do not matter; `pp. 40–62` / `#40-62`
+gives only those pages to that step. **One file may serve several steps** (a textbook, with pages per step).
 
-**The material of the steps** — drop files (PDF, Word, slides, notes…), a `.zip` or a folder with a sub-folder per
-step; they are matched to the steps by file / folder names (or by `📎` / `files` in the map) and every match can be
-changed. Later: ✏️ Edit step → **📎 Your material for this step** (add / remove until the step is prepared).
-A step's files are stored like the source files of its future subject (this device + cloud, `<user>/sources/<pack-id>/m1/…`)
-and described in the curriculum (`node.material.files`: name, pages, the PDF's outline, the first lines).
+**Automatic matching** of the files the map does not name, each with a confidence you can review:
+1. *by its folder* (✓) — any folder level named like a step (`03 Transcription`, `2.3 Promoters`, the step's number alone);
+   the deepest wins; two steps with the same title (“Introduction” under two topics) are told apart by the parent folders;
+   a folder all files share (the dropped folder itself) is ignored unless it is itself a step;
+2. *by its number* (≈) — `03 …` / `2.3 …` = the step's outline number (or its position in the map);
+3. *by its name* (≈ exact, ? similar) — ⚠️ when two steps fit equally (“or: …” offers them).
+The table has tabs **All / ⚠️ To check / Not used**; each file shows its steps as chips (with pages), **＋ also for…** adds
+another step, and you can **drag a file onto a step** in the preview or tap a step to see and give it files.
+
+**Storage.** Every file is stored **once per curriculum** (`curfiles-<id>`, this device + cloud, big files in parts), described
+in `c.files` (name, size, pages, outline, SHA-256); a step's `material.files` entries point at it with their page range
+(`fileId`, `range`) plus the part of the outline in those pages and their first lines. When a step is prepared, its subject's
+sources **link** to that copy (no second copy; Claude's packaged file is recognised by its SHA-256). A file no step uses any
+more is deleted. ✏️ Edit step → 📎: add files, **use a file of this curriculum** (with pages), change the pages, remove.
 
 A step **with files** is not researched:
-* the planner plans its chapters **from the files** (their outline and beginning) and gives each chapter
-  `material` = the file and pages it comes from;
-* **Claude** gets the files uploaded into its sandbox (`NODE_FILES`): “these files are the sources”, no web_fetch,
-  web search only for pictures; it packages them back (`.noema.zip`, source ids m1, m2…), so the subject opens them
-  with 👁 at the cited pages;
-* **Gemini** gets the text of the pages each chapter comes from (pdf.js / mammoth in the browser) instead of a
-  Google Search brief; the files become the subject's sources.
-If a planned chapter is not in the files, it is written briefly from the model's own knowledge (Claude says so in its
-coverage notes). Steps **without** files are researched exactly as before.
+* the planner plans its chapters **from the files** (only its pages), each chapter with `material` = file + pages;
+* **Claude** gets the files in its sandbox (`NODE_FILES`, told which pages belong to the step), no web_fetch;
+* **Gemini** gets the text of exactly those pages instead of a Google Search brief.
+Steps **without** files are researched as before.
+
+**✨ Let the AI read it** — for anything else (prose, an unusual JSON): the same structure (`S_IMPORT`), checked like every
+agent answer: titles only from the map, none missing, refs valid, acyclic; file names / pages it finds are kept.
 
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
@@ -155,4 +175,6 @@ drawn diagrams and listed sources). `engine/packcheck.js` is also the connector'
 matching), then in the browser: a pasted tree with two files → only the planner runs (with the files' pages, outline and
 first lines) → a step with a PDF built by Claude from the uploaded file (no web_fetch, packaged back as its source) → a
 step with notes built by Gemini from their text (no Google Search) → 📎 add / remove in the editor, fixed once prepared
-→ ✨ AI reading with an invented topic sent back → a .zip with a folder per step → phone layout.
+→ ✨ AI reading with an invented topic sent back → a .zip with a folder per step → phone layout; branches and joins in
+every format, the files section, paths / globs / folders, duplicate titles told apart by folders, a textbook for two steps
+(stored once, pages per step, Gemini reads only those pages, the step's subject links to it), drag & drop onto a step.

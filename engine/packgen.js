@@ -165,10 +165,11 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     if (mat.length && !run.material) {
       onLog('📖 Reading your material…'); run.material = [];
       for (const f of mat) {
-        const rec = await window.NoemaSrcFiles?.get(acc, packId, f.srcId).catch(() => null);
+        const rec = await window.NoemaCurriculum.materialFile(acc, c, nodeId, f).catch(() => null);
         if (!rec?.blob) { onLog(`   ⚠️ ${f.name} is not available on this device`); continue; }
-        const x = await window.NoemaViewer.extract(rec.blob, f.name, { maxPages: 1500, outline: false }).catch(e => { onLog(`   ⚠️ ${f.name}: ${e.message}`); return null; });
-        if (x?.pages?.length) run.material.push({ srcId: f.srcId, name: f.name, pdf: x.kind === 'pdf', pages: x.pages, pageCount: x.pageCount || null });
+        // only the pages that belong to this step (a textbook may serve several steps)
+        const x = await window.NoemaViewer.extract(rec.blob, f.name, f.range ? { from: f.range[0], maxPages: f.range[1] - f.range[0] + 1, outline: false } : { maxPages: 1500, outline: false }).catch(e => { onLog(`   ⚠️ ${f.name}: ${e.message}`); return null; });
+        if (x?.pages?.length) run.material.push({ srcId: f.srcId, name: f.name, pdf: x.kind === 'pdf', pages: x.pages, first: x.first || 1, range: f.range || null, pageCount: x.pageCount || null });
       }
       if (!run.material.length) throw new Error('None of the files of this step could be read on this device.');
       run.research = ''; run.sources = []; await keep();
@@ -180,8 +181,8 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
       const want = String(ch.material || ''); const nm = x => x.toLowerCase().replace(/\.[a-z0-9]+$/, '');
       const file = M.find(m => want.toLowerCase().includes(nm(m.name))) || (M.length === 1 ? M[0] : null);
       const r = want.match(/(\d{1,5})\s*[–-]\s*(\d{1,5})/) || want.match(/p{1,2}\.\s*(\d{1,5})/);
-      if (file && r && file.pdf) { const a = +r[1], b = +(r[2] || r[1]); const txt = file.pages.slice(a - 1, b).map((t, i) => `[${file.name} p. ${a + i}]\n${t}`).join('\n\n'); if (txt.trim()) return { text: txt.slice(0, 160000), refs: [{ id: file.srcId, pages: `σ. ${a}–${b}` }] }; }
-      const all = (file ? [file] : M).map(m => m.pages.map((t, i) => `[${m.name} ${m.pdf ? 'p. ' + (i + 1) : 'part ' + (i + 1)}]\n${t}`).join('\n\n')).join('\n\n');
+      if (file && r && file.pdf) { const a = +r[1], b = +(r[2] || r[1]); const txt = file.pages.slice(Math.max(0, a - file.first), Math.max(0, b - file.first + 1)).map((t, i) => `[${file.name} p. ${Math.max(a, file.first) + i}]\n${t}`).join('\n\n'); if (txt.trim()) return { text: txt.slice(0, 160000), refs: [{ id: file.srcId, pages: `σ. ${a}–${b}` }] }; }
+      const all = (file ? [file] : M).map(m => m.pages.map((t, i) => `[${m.name} ${m.pdf ? 'p. ' + (m.first + i) : 'part ' + (i + 1)}]\n${t}`).join('\n\n')).join('\n\n');
       return { text: all.slice(0, 160000), refs: (file ? [file] : M).map(m => ({ id: m.srcId })) };
     };
     // 1b. research (steps without material)
@@ -224,7 +225,7 @@ Each chapter has "diagrams": 1–2 objects { "id": "lowercase-id", "kind": "flow
     const M = run.meta;
     const subject = { id: packId, title: n.title, appTitle: n.title, emoji: M.emoji, group: 'curriculum', description: M.description, language: c.language, features: { math: !!M.math, code: !!M.code },
       hero: { headline: M.headline, mantra: M.mantra }, searchExamples: M.searchExamples, tutor: { ...M.tutor, prior: `Already mastered: ${c.edges.filter(e => e.to === nodeId).map(e => c.nodes[e.from]?.title).filter(Boolean).join('; ') || 'nothing specific'}.` } };
-    const sources = run.material ? { sources: run.material.map(m => ({ id: m.srcId, title: m.name.replace(/\.[a-z0-9]+$/i, ''), fileName: m.name, file: 'sources/' + m.name, pages: m.pageCount ? `1–${m.pageCount}` : '', added: new Date().toISOString().slice(0, 10), emoji: '📄' })), chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, ch.src])), patches: {} } : { sources: [{ id: 'web', title: 'Web research (Gemini + Google Search)', subtitle: (run.sources || []).map(s => s.title).slice(0, 6).join(' · '), added: new Date().toISOString().slice(0, 10), emoji: '🔎' },
+    const sources = run.material ? { sources: run.material.map(m => ({ id: m.srcId, title: m.name.replace(/\.[a-z0-9]+$/i, ''), fileName: m.name, file: 'sources/' + m.name, pages: m.range ? `${m.range[0]}–${m.range[1]}` : m.pageCount ? `1–${m.pageCount}` : '', added: new Date().toISOString().slice(0, 10), emoji: '📄' })), chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, ch.src])), patches: {} } : { sources: [{ id: 'web', title: 'Web research (Gemini + Google Search)', subtitle: (run.sources || []).map(s => s.title).slice(0, 6).join(' · '), added: new Date().toISOString().slice(0, 10), emoji: '🔎' },
       ...(run.sources || []).map((s, i) => ({ id: 's' + (i + 1), title: s.title, url: s.url, added: new Date().toISOString().slice(0, 10), emoji: '🌐' }))], chapters: Object.fromEntries(run.chapters.map(ch => [ch.id, 'web'])), patches: {} };
     const pack = { format: 'noema-pack', v: 1, subject, sources, chapters: run.chapters, media: run.media, builtAt: new Date().toISOString(), generatedBy: 'gemini', curriculum: { id: c.id, node: nodeId } };
     const r = window.NoemaPackCheck.checkPack(pack, packId, { strict: true });

@@ -38,8 +38,11 @@ window.NoemaSrcFiles = (() => {
     const ix = index(acc, subj); ix[src] = meta; setIndex(acc, subj, ix);
     return meta;
   }
+  /** A source that uses a file stored elsewhere (e.g. a textbook shared by several curriculum steps): no copy. */
+  function link(acc, subj, src, ref, meta = {}) { const ix = index(acc, subj); ix[src] = { name: meta.name || '', type: meta.type || '', size: meta.size || 0, added: new Date().toISOString(), cloud: true, ref: { subj: ref.subj, src: ref.src } }; setIndex(acc, subj, ix); return ix[src]; }
   /** The file of a source: this device first, else the cloud (then cached). null when there is none. */
   async function get(acc, subj, src) {
+    { const m0 = index(acc, subj)[src]; if (m0?.ref) return get(acc, m0.ref.subj, m0.ref.src); }
     const hit = await DB.get(key(acc, subj, src)).catch(() => null); if (hit?.blob) return hit;
     const meta = index(acc, subj)[src];
     if (meta?.cloud && cloudOn(acc)) {
@@ -50,6 +53,7 @@ window.NoemaSrcFiles = (() => {
   }
   async function remove(acc, subj, src) {
     const meta = index(acc, subj)[src];
+    if (meta?.ref) { const ix = index(acc, subj); delete ix[src]; setIndex(acc, subj, ix); return; }   // a link: the file itself stays where it is
     await DB.del(key(acc, subj, src)).catch(() => { });
     if (meta?.cloud && cloudOn(acc)) await NoemaCloud.deleteObjects('noema-private', NoemaCloud.partPaths(fullPath(subj, src, meta.name), meta.chunks || 0)).catch(() => { });
     const ix = index(acc, subj); delete ix[src]; setIndex(acc, subj, ix);
@@ -93,9 +97,11 @@ window.NoemaSrcFiles = (() => {
   }
   /** Attach the packaged files of a pack (from a package, or from Claude's outputs) to its sources — each checked
       against the size and SHA-256 recorded by make_pack.py, so exactly the files Claude used (and split) arrive. */
-  async function attachPackaged(acc, pack, fileOf, { onLog = () => { } } = {}) {
+  async function attachPackaged(acc, pack, fileOf, { onLog = () => { }, refFor = null } = {}) {
     const res = { attached: [], missing: [], bad: [] };
     for (const s of packaged(pack)) {
+      const ref = refFor && refFor(s);
+      if (ref) { link(acc, pack.subject.id, s.id, ref, { name: s.fileName || String(s.file).split('/').pop(), type: s.mime, size: s.size }); res.attached.push(s.id); continue; }   // the same file is already stored (same SHA-256)
       let blob = null; try { blob = await fileOf(s.file, s); } catch (e) { }
       if (!blob) { res.missing.push(s.id); continue; }
       if (s.size && blob.size !== s.size) { res.bad.push(s.id); onLog(`⚠️ ${s.file}: size differs from the pack — not attached`); continue; }
@@ -155,5 +161,5 @@ window.NoemaSrcFiles = (() => {
     }
     return res;
   }
-  return { forSharing, attachShared, put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX, isZip, packaged, readBundle, attachPackaged, makeBundle, downloadBundle, sha256, filePage };
+  return { link, forSharing, attachShared, put, get, remove, removeAll, index, available, webUrl, match, cloudPath, MAX, isZip, packaged, readBundle, attachPackaged, makeBundle, downloadBundle, sha256, filePage };
 })();

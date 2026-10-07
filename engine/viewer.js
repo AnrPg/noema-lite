@@ -246,7 +246,7 @@ window.NoemaViewer = (() => {
     } catch (e) { console.warn('[viewer]', e); fail('This file could not be shown (' + e.message + '). You can still download it.'); return { close, kind: 'error' }; }
   }
   /** The text of a file, for the AI (curriculum material): { kind, pageCount, pages: [text per page / chunk], outline: [{title, page, depth}] } */
-  async function extract(blob, name, { maxPages = 2000, outline = true } = {}) {
+  async function extract(blob, name, { maxPages = 2000, outline = true, from = 1 } = {}) {
     const kind = kindOf(name, blob.type || ''); const buf = await blob.arrayBuffer();
     const chunk = (t, n = 3000) => { t = String(t || '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim(); const out = []; for (let i = 0; i < t.length; i += n) out.push(t.slice(i, i + n)); return out; };
     if (kind === 'pdf') {
@@ -255,7 +255,7 @@ window.NoemaViewer = (() => {
       const root = new URL(BASE() + 'pdfjs/', location.href).href;
       const doc = await lib.getDocument({ data: new Uint8Array(buf), cMapUrl: root + 'cmaps/', cMapPacked: true, standardFontDataUrl: root + 'standard_fonts/', wasmUrl: root + 'wasm/', isEvalSupported: false }).promise;
       const pages = [];
-      for (let i = 1; i <= Math.min(doc.numPages, maxPages); i++) { const pg = await doc.getPage(i); const tc = await pg.getTextContent(); pages.push(tc.items.map(it => (it.str || '') + (it.hasEOL ? '\n' : ' ')).join('').replace(/[ \t]+/g, ' ').trim()); pg.cleanup?.(); }
+      for (let i = Math.max(1, from); i <= Math.min(doc.numPages, Math.max(1, from) + maxPages - 1); i++) { const pg = await doc.getPage(i); const tc = await pg.getTextContent(); pages.push(tc.items.map(it => (it.str || '') + (it.hasEOL ? '\n' : ' ')).join('').replace(/[ \t]+/g, ' ').trim()); pg.cleanup?.(); }
       const ol = [];
       if (outline) {
         try {
@@ -264,7 +264,7 @@ window.NoemaViewer = (() => {
         } catch (e) { }
       }
       const n = doc.numPages; doc.destroy?.();
-      return { kind, pageCount: n, pages, outline: ol };
+      return { kind, pageCount: n, pages, first: Math.max(1, from), outline: ol };
     }
     if (kind === 'docx') { await script('viewer/mammoth.browser.min.js'); const r = await mammoth.extractRawText({ arrayBuffer: buf }); return { kind, pages: chunk(r.value), outline: [] }; }
     if (['text', 'markdown', 'csv', 'json'].includes(kind)) return { kind, pages: chunk(decode(buf)), outline: kind === 'markdown' ? decode(buf).split('\n').filter(l => /^#{1,3}\s/.test(l)).slice(0, 150).map(l => ({ title: l.replace(/^#+\s*/, ''), page: null, depth: l.match(/^#+/)[0].length - 1 })) : [] };
