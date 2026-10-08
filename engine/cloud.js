@@ -48,6 +48,12 @@
   // rows other writers append for the app to read and delete; never mirrored into localStorage
   const inboxKey = k => k.startsWith('a:curin:') || k.startsWith('a:curclaim:') || k.startsWith('a:inbox:');
 
+  /** Two JSON copies of a curriculum record → `base` with the newer chapter plans of `other` (string), or null when nothing changes. */
+  function mergeCurriculum(key, base, other) {
+    if (!key.startsWith('a:curriculum:') || !window.NoemaCurriculum?.mergePlans) return null;
+    try { const c = JSON.parse(base), o = JSON.parse(other); return window.NoemaCurriculum.mergePlans(c, o) ? JSON.stringify(c) : null; } catch (e) { return null; }
+  }
+
   const NoemaCloud = window.NoemaCloud = {
     session, status, onStatus(f) { st.listeners.push(f); },
     /** A raw Supabase call as the signed-in user (row-level security applies) — e.g. engine/curshare.js. */
@@ -77,7 +83,13 @@
         for (const r of rows || []) {
           if (inboxKey(r.key)) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js), its runs' claims, other apps' results (engine/src/15_inbox.js): never stored here
           const t = Date.parse(r.updated_at) || 0;
-          if (!mt[r.key] || t > mt[r.key]) { if (localStorage.getItem(pre + r.key) !== r.value) { try { localStorage.setItem(pre + r.key, r.value); changed++; } catch (e) { } } mt[r.key] = t; }
+          if (!mt[r.key] || t > mt[r.key]) {
+            let v = r.value; const local = localStorage.getItem(pre + r.key);
+            const m = local != null && local !== v && mergeCurriculum(r.key, v, local);   // keep the chapter plans only this copy has
+            if (m) { v = m; st.pending.add(r.key); }
+            if (local !== v) { try { localStorage.setItem(pre + r.key, v); changed++; } catch (e) { } }
+            mt[r.key] = t;
+          }
         }
         // keys changed locally while offline (newer than server or missing there) → push
         const remote = new Map((rows || []).filter(r => !inboxKey(r.key)).map(r => [r.key, Date.parse(r.updated_at) || 0]));
@@ -93,9 +105,14 @@
       const pre = 'noema1:' + acc + ':'; const mt = jget(pre + 'meta:mtime', {});
       const keys = [...st.pending]; st.pending.clear();
       const rows = [], dels = [];
-      keys.forEach(k => { const v = noSecrets(k, localStorage.getItem(pre + k)); if (v == null) dels.push(k); else rows.push({ user_id: uid(), key: k, value: v, updated_at: new Date(mt[k] || Date.now()).toISOString() }); });
       st.syncing = true; emit();
       try {
+        // a curriculum is one record (last write wins): first take in the chapter plans the cloud copy has and this one lacks
+        const curs = keys.filter(k => k.startsWith('a:curriculum:') && localStorage.getItem(pre + k) != null);
+        for (const k of curs) for (const r of (await call('/rest/v1/noema_kv?select=key,value&key=eq.' + enc(k))) || []) {
+          const m = mergeCurriculum(k, localStorage.getItem(pre + k), r.value); if (m) { try { localStorage.setItem(pre + k, m); } catch (e) { } }
+        }
+        keys.forEach(k => { const v = noSecrets(k, localStorage.getItem(pre + k)); if (v == null) dels.push(k); else rows.push({ user_id: uid(), key: k, value: v, updated_at: new Date(mt[k] || Date.now()).toISOString() }); });
         for (let i = 0; i < rows.length; i += 50) await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: rows.slice(i, i + 50), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive });
         for (const k of dels) await call('/rest/v1/noema_kv?key=eq.' + enc(k), { method: 'DELETE', keepalive });
         st.lastSync = Date.now(); st.error = null; return rows.length + dels.length;
