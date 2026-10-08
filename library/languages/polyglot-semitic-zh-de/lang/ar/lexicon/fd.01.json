@@ -1,0 +1,2528 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:ana",
+   "lemma": "أَنَا",
+   "pos": "PRON",
+   "senses": [
+    "pron.i"
+   ],
+   "translit": "ʾana",
+   "forms": {
+    "PRON;NOM": "أَنَا"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The plain “I” — often left out, because the verb already says who is speaking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "I (first person singular subject pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.i"
+     },
+     {
+      "id": "s2",
+      "def": "the ego, the self (as a noun: الْأَنَا)",
+      "register": [
+       "formal"
+      ],
+      "domains": [
+       "psychology",
+       "philosophy"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا مِنْ مِصْرَ.",
+      "tr": "I am from Egypt.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا طَالِبٌ، وَأَنْتَ؟",
+      "tr": "I am a student — and you?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا أُحِبُّ الْقَهْوَةَ، أَمَّا هُوَ فَيُحِبُّ الشَّايَ.",
+      "tr": "I like coffee, whereas he likes tea.",
+      "register": "neutral",
+      "context": "contrast",
+      "sense": "s1"
+     },
+     {
+      "text": "يَتَحَدَّثُ الْكِتَابُ عَنِ الْأَنَا وَالْآخَرِ.",
+      "tr": "The book talks about the self and the other.",
+      "register": "formal",
+      "context": "philosophy",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَنَا أَيْضًا",
+      "tr": "me too"
+     },
+     {
+      "text": "أَنَا نَفْسِي",
+      "tr": "I myself"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other independent “I”; as object or possessor Arabic uses the suffixes ـنِي / ـي (forms, not synonyms).",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔanāku; cognate with Hebrew אֲנִי (aní) and Amharic እኔ (enē); compare Egyptian jnk (Coptic ⲁⲛⲟⲕ, anok).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The noun الْأَنَا, “the ego”, is a semantic loan from German “das Ich” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "Written with a final alif, but in connected MSA speech the last vowel is short: ʾana. The alif is pronounced long only at a pause.",
+     "The pronoun is not needed with a verb: آكُلُ alone already means “I eat”."
+    ],
+    "subtleties": [
+     "أَنَا before a verb adds emphasis or contrast: أَنَا آكُلُ = it is I who eat (not someone else)."
+    ]
+   }
+  },
+  {
+   "id": "ar:anta",
+   "lemma": "أَنْتَ",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg"
+   ],
+   "translit": "ʾanta",
+   "forms": {
+    "PRON;NOM": "أَنْتَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Direct and everyday — used even with strangers; politeness comes from titles, not from the pronoun.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (one man; masculine singular subject pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنْتَ صَدِيقِي.",
+      "tr": "You are my friend. (to a man)",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ أَيْنَ أَنْتَ؟",
+      "tr": "Where are you from? (to a man)",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنْتَ عَلَى حَقٍّ.",
+      "tr": "You are right. (to a man)",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَنْتَ أَيْضًا",
+      "tr": "you too"
+     },
+     {
+      "text": "وَأَنْتَ؟",
+      "tr": "and you?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَضْرَتُكَ",
+      "register": "honorific",
+      "nuance": "lit. “your presence” — a polite way to address a man, very common in Egypt; grammatically a noun with a suffix, not a pronoun"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔanta (Wiktionary); Hebrew אַתָּה (atá) continues the same form with the n assimilated.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The -ta of أَنْتَ is the same ending as in the past verb: كَتَبْتَ, “you (m.) wrote”."
+    ],
+    "pitfalls": [
+     "أَنْتَ (man) and أَنْتِ (woman) are the same letters, انت; only the final vowel differs (-ta / -ti). In unvocalized text only the context tells you.",
+     "With أَنْتَ the present verb starts with تَـ and has no ending: أَنْتَ تَأْكُلُ — the same form as “she eats” (هِيَ تَأْكُلُ)."
+    ],
+    "subtleties": [
+     "Arabic has no built-in polite “you” like German Sie or Russian вы: respect is shown with titles and formulas (حَضْرَتُكَ, يَا أُسْتَاذُ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:anti",
+   "lemma": "أَنْتِ",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg"
+   ],
+   "translit": "ʾanti",
+   "forms": {
+    "PRON;NOM": "أَنْتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The same everyday “you”, addressed to one woman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (one woman; feminine singular subject pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنْتِ صَدِيقَتِي.",
+      "tr": "You are my friend. (to a woman)",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ أَيْنَ أَنْتِ؟",
+      "tr": "Where are you from? (to a woman)",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ أَنْتِ جَاهِزَةٌ؟",
+      "tr": "Are you ready? (to a woman)",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَنْتِ أَيْضًا",
+      "tr": "you too (to a woman)"
+     },
+     {
+      "text": "وَأَنْتِ؟",
+      "tr": "and you? (to a woman)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حَضْرَتُكِ",
+      "register": "honorific",
+      "nuance": "lit. “your presence” — polite address to a woman, very common in Egypt; a noun with a suffix, not a pronoun"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔanti (Wiktionary); compare the Hebrew feminine אַתְּ (at).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew lost the n in אַתְּ (at); Arabic keeps it: ʾanti."
+    ],
+    "pitfalls": [
+     "The verb after أَنْتِ ends in -īna: أَنْتِ تَأْكُلِينَ, تَشْرَبِينَ — not تَأْكُلُ.",
+     "Same letters as أَنْتَ (انت): only the kasra (-ti) shows that a woman is meant."
+    ],
+    "subtleties": [
+     "Adjectives agree too: أَنْتِ جَاهِزَةٌ (to a woman) vs أَنْتَ جَاهِزٌ (to a man)."
+    ]
+   }
+  },
+  {
+   "id": "ar:huwa",
+   "lemma": "هُوَ",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "translit": "huwa",
+   "forms": {
+    "PRON;NOM": "هُوَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral; also “it” for every masculine thing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "he (third person masculine singular subject pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.he"
+     },
+     {
+      "id": "s2",
+      "def": "it (referring to a masculine noun, also a thing)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُوَ طَبِيبٌ.",
+      "tr": "He is a doctor.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ هُوَ الْآنَ؟",
+      "tr": "Where is he now?",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ يَأْكُلُ وَهِيَ تَشْرَبُ.",
+      "tr": "He eats and she drinks.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "الْكِتَابُ؟ هُوَ عَلَى الطَّاوِلَةِ.",
+      "tr": "The book? It is on the table.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هُوَ نَفْسُهُ",
+      "tr": "he himself; the very same"
+     },
+     {
+      "text": "هُوَ أَيْضًا",
+      "tr": "he too"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: هُوَ is the only third-person masculine singular subject pronoun (as object or possessor: the suffix ـهُ).",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šuʔa (Wiktionary); compare Hebrew הוּא (hu).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Psychology’s “id” is الْهُوَ in Arabic — a calque of Freud’s German “Es” (Wiktionary), just as الْأَنَا is “das Ich”."
+    ],
+    "pitfalls": [
+     "هُوَ also means “it” for masculine nouns: الْبَصَلُ؟ هُوَ هُنَا = the onions? They (lit. it) are here. Do not always translate “he”."
+    ],
+    "subtleties": [
+     "Between a subject and a definite predicate, هُوَ / هِيَ can act like a copula (ḍamīr al-faṣl): الْمُشْكِلَةُ هِيَ الْوَقْتُ = the problem is time."
+    ]
+   }
+  },
+  {
+   "id": "ar:hiya",
+   "lemma": "هِيَ",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "translit": "hiya",
+   "forms": {
+    "PRON;NOM": "هِيَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral; also “it” for feminine things — and “they” for non-human plurals.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "she (third person feminine singular subject pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.she"
+     },
+     {
+      "id": "s2",
+      "def": "it (feminine noun); they (non-human plural)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هِيَ مُعَلِّمَةٌ.",
+      "tr": "She is a teacher.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ تَشْرَبُ الشَّايَ كُلَّ صَبَاحٍ.",
+      "tr": "She drinks tea every morning.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "السَّيَّارَةُ؟ هِيَ أَمَامَ الْبَيْتِ.",
+      "tr": "The car? It is in front of the house.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s2"
+     },
+     {
+      "text": "الْكُتُبُ؟ هِيَ عَلَى الطَّاوِلَةِ.",
+      "tr": "The books? They are on the table.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هِيَ نَفْسُهَا",
+      "tr": "she herself; the very same"
+     },
+     {
+      "text": "هِيَ أَيْضًا",
+      "tr": "she too"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: هِيَ is the only third-person feminine singular subject pronoun (as object or possessor: the suffix ـهَا).",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šiʔa (Wiktionary); compare Hebrew הִיא (hi).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew הִיא (hi) is the same Semitic word."
+    ],
+    "pitfalls": [
+     "Non-human plurals are referred to with هِيَ, not هُمْ: الْجَزَرَاتُ؟ هِيَ هُنَا = the carrots? They are here."
+    ],
+    "subtleties": [
+     "The verb after هِيَ starts with تَـ, like the verb after أَنْتَ: هِيَ تَأْكُلُ / أَنْتَ تَأْكُلُ."
+    ]
+   }
+  },
+  {
+   "id": "ar:nahnu",
+   "lemma": "نَحْنُ",
+   "pos": "PRON",
+   "senses": [
+    "pron.we"
+   ],
+   "translit": "naḥnu",
+   "forms": {
+    "PRON;NOM": "نَحْنُ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Togetherness: family, team, “us”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "we (first person plural subject pronoun; also for two people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.we"
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَحْنُ طُلَّابٌ.",
+      "tr": "We are students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "نَحْنُ نَأْكُلُ فِي الْبَيْتِ.",
+      "tr": "We eat at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَحْنُ فِي انْتِظَارِكَ.",
+      "tr": "We are waiting for you.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "نَحْنُ أَيْضًا",
+      "tr": "we too"
+     },
+     {
+      "text": "نَحْنُ جَمِيعًا",
+      "tr": "all of us"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: نَحْنُ is the only first-person plural subject pronoun (as object or possessor: the suffix ـنَا).",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *niḥnu; cognate with Hebrew אֲנַחְנוּ (anáchnu).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same n appears in the suffix “us/our”: بَيْتُنَا (our house), عِنْدَنَا (we have)."
+    ],
+    "pitfalls": [
+     "The final -u is fixed: نَحْنُ never changes with case.",
+     "The present verb with نَحْنُ starts with نَـ: نَأْكُلُ، نَشْرَبُ، نُحِبُّ."
+    ],
+    "subtleties": [
+     "Used for men, women and mixed groups, and also for two people: Arabic has no dual “we”."
+    ]
+   }
+  },
+  {
+   "id": "ar:antum",
+   "lemma": "أَنْتُمْ",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.pl"
+   ],
+   "translit": "ʾantum",
+   "forms": {
+    "PRON;NOM": "أَنْتُمْ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Addressing a group — a class, a family, friends; men or a mixed group.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (several people: men, or a mixed group) — masculine plural",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنْتُمْ طُلَّابٌ.",
+      "tr": "You are students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ أَيْنَ أَنْتُمْ؟",
+      "tr": "Where are you (all) from?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنْتُمْ أَصْدِقَائِي.",
+      "tr": "You are my friends.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَأَنْتُمْ؟",
+      "tr": "and you (all)?"
+     },
+     {
+      "text": "أَنْتُمْ جَمِيعًا",
+      "tr": "all of you"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word. For a group of women only: أَنْتُنَّ; for exactly two people: the dual أَنْتُمَا.",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔantum; cognate with Hebrew אַתֶּם (atém).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אַתֶּם (atém) is the same word: Hebrew assimilated the n (*ʔantum → attem), Arabic kept it."
+    ],
+    "pitfalls": [
+     "One man in a group of women is enough for أَنْتُمْ; only an all-female group is أَنْتُنَّ.",
+     "Exactly two people are addressed with the dual أَنْتُمَا (ʾantumā), not with أَنْتُمْ."
+    ],
+    "subtleties": [
+     "There is no fixed polite “you” like German Sie or Russian вы; formal letters sometimes address one important person with the plural (-كُمْ: حَضْرَتُكُمْ), but that is style, not a rule."
+    ]
+   }
+  },
+  {
+   "id": "ar:antunna",
+   "lemma": "أَنْتُنَّ",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.pl"
+   ],
+   "translit": "ʾantunna",
+   "forms": {
+    "PRON;NOM": "أَنْتُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Addressing a group of women or girls only.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (several women; feminine plural)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنْتُنَّ مُعَلِّمَاتٌ.",
+      "tr": "You (women) are teachers.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ أَيْنَ أَنْتُنَّ؟",
+      "tr": "Where are you (women) from?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنْتُنَّ صَدِيقَاتِي.",
+      "tr": "You (women) are my friends.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَأَنْتُنَّ؟",
+      "tr": "and you (women)?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other word; a mixed group is أَنْتُمْ, two women أَنْتُمَا.",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *ʔantin; Hebrew has the same pair אַתֶּם / אַתֶּן.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew אַתֶּן (atén) is its counterpart: both languages keep a separate “you” for a group of women."
+    ],
+    "pitfalls": [
+     "Write the šadda: أَنْتُنَّ (antunna), with a doubled n.",
+     "Most spoken dialects have lost this form and say أَنْتُو / إِنْتُو to everybody; in MSA keep أَنْتُنَّ for women only."
+    ],
+    "subtleties": [
+     "Its verb forms have their own ending -tunna / -na: كُنْتُنَّ (you women were)."
+    ]
+   }
+  },
+  {
+   "id": "ar:hum",
+   "lemma": "هُمْ",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "translit": "hum",
+   "forms": {
+    "PRON;NOM": "هُمْ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A group of people — men, or men and women together.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they (masculine or mixed plural, people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُمْ أَصْدِقَائِي.",
+      "tr": "They are my friends.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "هُمْ يَشْرَبُونَ الْقَهْوَةَ الْآنَ.",
+      "tr": "They are drinking coffee now.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ هُمْ؟",
+      "tr": "Where are they?",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هُمْ أَنْفُسُهُمْ",
+      "tr": "they themselves"
+     },
+     {
+      "text": "هُمْ جَمِيعًا",
+      "tr": "all of them"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: هُنَّ is its feminine counterpart (only women), and هُمَا is for exactly two.",
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *šum (Wiktionary); compare Hebrew הֵם (hem).",
+     "src": "Wiktionary (kaikki.org), Hebrew comparison added"
+    },
+    "funFacts": [
+     "For exactly two people Arabic uses the dual هُمَا — a living dual that Hebrew pronouns no longer have."
+    ],
+    "pitfalls": [
+     "A mixed group takes هُمْ: one man among women is enough for the masculine.",
+     "Not for things: non-human plurals are هِيَ (الْبَصَلَاتُ؟ هِيَ هُنَا)."
+    ],
+    "subtleties": [
+     "When هُمْ comes first, the verb agrees fully (هُمْ يَأْكُلُونَ); a noun subject after the verb leaves the verb singular (يَأْكُلُ الطُّلَّابُ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:hunna",
+   "lemma": "هُنَّ",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "translit": "hunna",
+   "forms": {
+    "PRON;NOM": "هُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A group of women only.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they (feminine plural, a group of women)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُنَّ طَالِبَاتٌ.",
+      "tr": "They (women) are students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "هُنَّ يَشْرَبْنَ الشَّايَ.",
+      "tr": "They (women) drink tea.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ هُنَّ؟",
+      "tr": "Where are they (the women)?",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هُنَّ أَيْضًا",
+      "tr": "they (women) too"
+     },
+     {
+      "text": "هُنَّ جَمِيعًا",
+      "tr": "all of them (women)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym: هُمْ is the masculine/mixed counterpart.",
+    "etymology": {
+     "text": "Feminine plural of the inherited Semitic third-person pronoun series (هُوَ، هِيَ، هُمْ، هُنَّ); Hebrew הֵן (hen) is the corresponding form.",
+     "src": "Arabic and Hebrew grammars (Wiktionary has no etymology for this entry)"
+    },
+    "funFacts": [
+     "The double n (šadda) is what distinguishes هُنَّ (they, f.) from هُنَا (here)."
+    ],
+    "pitfalls": [
+     "The verb after هُنَّ ends in -na: هُنَّ يَأْكُلْنَ، يَشْرَبْنَ — the 2nd person “you (women)” has the same ending: تَأْكُلْنَ.",
+     "Only for a group made up entirely of women; one man in the group → هُمْ."
+    ],
+    "subtleties": [
+     "Most spoken dialects have lost the feminine plural and say هُمْ for women too; Modern Standard Arabic requires هُنَّ."
+    ]
+   }
+  },
+  {
+   "id": "ar:kana",
+   "lemma": "كَانَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.be"
+   ],
+   "root": "ك و ن",
+   "verbForm": "I",
+   "translit": "kāna",
+   "forms": {
+    "V;PST;1;SG": "كُنْتُ",
+    "V;PST;2;SG;MASC": "كُنْتَ",
+    "V;PST;3;SG;MASC": "كَانَ",
+    "V;PST;1;PL": "كُنَّا",
+    "V;PST;2;PL;MASC": "كُنْتُمْ",
+    "V;PST;3;PL;MASC": "كَانُوا",
+    "V;PST;2;SG;FEM": "كُنْتِ",
+    "V;PST;3;SG;FEM": "كَانَتْ",
+    "V;PST;2;PL;FEM": "كُنْتُنَّ",
+    "V;PST;3;PL;FEM": "كُنَّ",
+    "V;PRS;IND;1;SG": "أَكُونُ",
+    "V;PRS;IND;2;SG;MASC": "تَكُونُ",
+    "V;PRS;IND;3;SG;MASC": "يَكُونُ",
+    "V;PRS;IND;1;PL": "نَكُونُ",
+    "V;PRS;IND;2;PL;MASC": "تَكُونُونَ",
+    "V;PRS;IND;3;PL;MASC": "يَكُونُونَ",
+    "V;PRS;IND;2;SG;FEM": "تَكُونِينَ",
+    "V;PRS;IND;3;SG;FEM": "تَكُونُ",
+    "V;PRS;IND;2;PL;FEM": "تَكُنَّ",
+    "V;PRS;IND;3;PL;FEM": "يَكُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The invisible verb: absent in the present, essential for past and future.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to be (past and future; the present “is” is not expressed)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s2",
+      "def": "auxiliary: كَانَ + present verb = past continuous or habit (“was doing, used to do”)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to exist, to be; there was (Wiktionary: “to exist, to be, there be”)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَانَ الْجَوُّ جَمِيلًا أَمْسِ.",
+      "tr": "The weather was beautiful yesterday.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     },
+     {
+      "text": "سَأَكُونُ فِي الْبَيْتِ غَدًا.",
+      "tr": "I will be at home tomorrow.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَتْ تَأْكُلُ عِنْدَمَا وَصَلْتُ.",
+      "tr": "She was eating when I arrived.",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s2"
+     },
+     {
+      "text": "كَانَ يَا مَا كَانَ، فِي قَدِيمِ الزَّمَانِ…",
+      "tr": "Once upon a time, long, long ago…",
+      "register": "literary",
+      "context": "fairy tales",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَانَ عِنْدِي",
+      "tr": "I had (lit. there was at me)"
+     },
+     {
+      "text": "كَانَ يَجِبُ أَنْ …",
+      "tr": "should have …"
+     },
+     {
+      "text": "لَمْ يَكُنْ",
+      "tr": "was not"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "كَانَ يَا مَا كَانَ، فِي قَدِيمِ الزَّمَانِ",
+      "tr": "there was, or there was not, in the old days",
+      "kind": "fixed expression",
+      "meaning": "the traditional opening of a fairy tale: once upon a time",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No real synonym. Its “sisters” (أَخَوَاتُ كَانَ: أَصْبَحَ “to become”, صَارَ “to become”, ظَلَّ “to remain”, لَيْسَ “not to be”) work the same way but add a meaning.",
+    "antonyms": [
+     {
+      "word": "لَيْسَ",
+      "note": "not to be (present)"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *kawan- (“to be or exist in a place”); root ك و ن, verbal noun كَوْن (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arab fairy tales start with كَانَ يَا مَا كَانَ — “once upon a time”.",
+     "The same root gives مَكَان (place) and كَوْن (being; the universe)."
+    ],
+    "pitfalls": [
+     "No verb “to be” in the present: هُوَ طَبِيبٌ = he is a doctor. Never *هُوَ يَكُونُ طَبِيبٌ for a simple “is”.",
+     "Its predicate is accusative: الْجَوُّ جَمِيلٌ → كَانَ الْجَوُّ جَمِيلًا.",
+     "Hollow verb: the long ā shortens before consonant endings — كَانَ but كُنْتُ (I was), كُنَّا (we were)."
+    ],
+    "subtleties": [
+     "The present forms (يَكُونُ …) do exist: for the future (سَيَكُونُ), for habits and general truths, and after أَنْ (يَجِبُ أَنْ يَكُونَ = he must be)."
+    ]
+   }
+  },
+  {
+   "id": "ar:wa",
+   "lemma": "وَ",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "translit": "wa",
+   "prefix": true,
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everywhere: Arabic links clauses with وَ far more than English uses “and”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "and",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.and"
+     },
+     {
+      "id": "s2",
+      "def": "while, as (introduces a circumstance: وَهُوَ …)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "by … (oath, with the genitive)",
+      "register": [
+       "neutral",
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَكَلْتُ خُبْزًا وَجُبْنًا.",
+      "tr": "I ate bread and cheese.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا وَأَخِي فِي الْبَيْتِ.",
+      "tr": "My brother and I are at home.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "دَخَلَ وَهُوَ يَبْتَسِمُ.",
+      "tr": "He came in smiling.",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s2"
+     },
+     {
+      "text": "وَاللّٰهِ لَا أَعْرِفُ.",
+      "tr": "By God, I don’t know.",
+      "register": "neutral",
+      "context": "everyday speech",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَغَيْرُ ذٰلِكَ",
+      "tr": "and so on, etc."
+     },
+     {
+      "text": "وَهٰكَذَا",
+      "tr": "and so on, and so forth"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ثُمَّ",
+      "register": "neutral",
+      "nuance": "and then, afterwards — sequence with a gap in time"
+     },
+     {
+      "word": "فَـ",
+      "register": "neutral",
+      "nuance": "and so, and then — immediate sequence or consequence"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *wa; cognate with Hebrew וְ־ (ve-).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew וְ (ve-) is the same Semitic word and is also written joined to the next word."
+    ],
+    "pitfalls": [
+     "وَ is never written alone: it joins the next word — وَالْبَصَلُ، وَأَنَا.",
+     "In lists Arabic repeats وَ before every item: جَزَرٌ وَبَصَلٌ وَثُومٌ."
+    ],
+    "subtleties": [
+     "Before al- the connecting hamza is silent: وَالْبَصَلُ = wa-l-baṣalu.",
+     "Arabic prose often begins sentences with وَ; translating every one as “and” sounds odd in English."
+    ]
+   }
+  },
+  {
+   "id": "ar:rajul",
+   "lemma": "رَجُل",
+   "pos": "NOUN",
+   "senses": [
+    "person.man"
+   ],
+   "gender": "MASC",
+   "root": "ر ج ل",
+   "translit": "rajul",
+   "forms": {
+    "N;NOM;SG;INDF": "رَجُلٌ",
+    "N;NOM;PL;INDF": "رِجَالٌ",
+    "N;NOM;SG;DEF": "الرَّجُلُ",
+    "N;NOM;PL;DEF": "الرِّجَالُ",
+    "N;ACC;SG;INDF": "رَجُلًا",
+    "N;ACC;PL;INDF": "رِجَالًا",
+    "N;ACC;SG;DEF": "الرَّجُلَ",
+    "N;ACC;PL;DEF": "الرِّجَالَ",
+    "N;GEN;SG;INDF": "رَجُلٍ",
+    "N;GEN;PL;INDF": "رِجَالٍ",
+    "N;GEN;SG;DEF": "الرَّجُلِ",
+    "N;GEN;PL;DEF": "الرِّجَالِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An adult man; said with emphasis (كُنْ رَجُلًا!) it praises courage and reliability.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "man (adult male)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.man"
+     },
+     {
+      "id": "s2",
+      "def": "a real man — brave, reliable (in praise or as a demand)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا الرَّجُلُ مُعَلِّمٌ.",
+      "tr": "This man is a teacher.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "رَأَيْتُ رَجُلًا فِي الشَّارِعِ.",
+      "tr": "I saw a man in the street.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s1"
+     },
+     {
+      "text": "دَخَلَ رَجُلَانِ وَامْرَأَةٌ.",
+      "tr": "Two men and a woman came in.",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s1"
+     },
+     {
+      "text": "كُنْ رَجُلًا!",
+      "tr": "Be a man! (Show some courage!)",
+      "register": "neutral",
+      "context": "encouragement",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَجُلُ أَعْمَالٍ",
+      "tr": "businessman"
+     },
+     {
+      "text": "رَجُلُ شُرْطَةٍ",
+      "tr": "policeman"
+     },
+     {
+      "text": "رَجُلٌ عَجُوزٌ",
+      "tr": "an old man"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الرِّجَالُ مَوَاقِفُ",
+      "tr": "men are (their) stances",
+      "kind": "saying",
+      "meaning": "a man is judged by how he acts when it matters",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "سَيِّد",
+      "register": "honorific",
+      "nuance": "gentleman; Mr. (as a title: السَّيِّدُ …)"
+     },
+     {
+      "word": "شَابّ",
+      "register": "neutral",
+      "nuance": "a young man"
+     },
+     {
+      "word": "ذَكَر",
+      "register": "technical",
+      "nuance": "male (sex), also of animals — not a polite word for a man"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "اِمْرَأَة",
+      "note": "woman"
+     }
+    ],
+    "etymology": {
+     "text": "Originally “walker”: Wiktionary notes the meaning “foot-soldier” attested in Safaitic rgl. The same root ر ج ل gives رِجْل “leg, foot” (Proto-Semitic *rigl-), cognate with Hebrew רֶגֶל (regel, “foot”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Gulf Arabic the word became رَيَّال (rayyāl) — j turns into y in many Gulf dialects (Wiktionary lists the Gulf forms).",
+     "Hebrew רֶגֶל (regel, foot) comes from the same root: a man was “one who goes on foot”."
+    ],
+    "pitfalls": [
+     "Unvocalized رجل can be رَجُل (rajul, man) or رِجْل (rijl, leg): only the vowels or the context tell you.",
+     "The plural is broken: رِجَال — never *رَجُلُونَ."
+    ],
+    "subtleties": [
+     "رِجَال also means “the men of a field”: رِجَالُ الْأَعْمَالِ (businessmen), رِجَالُ الدِّينِ (clergy)."
+    ]
+   }
+  },
+  {
+   "id": "ar:imraa",
+   "lemma": "اِمْرَأَة",
+   "pos": "NOUN",
+   "senses": [
+    "person.woman"
+   ],
+   "gender": "FEM",
+   "root": "م ر ء",
+   "translit": "imraʾa",
+   "forms": {
+    "N;NOM;SG;INDF": "اِمْرَأَةٌ",
+    "N;NOM;PL;INDF": "نِسَاءٌ",
+    "N;NOM;SG;DEF": "الْمَرْأَةُ",
+    "N;NOM;PL;DEF": "النِّسَاءُ",
+    "N;ACC;SG;INDF": "اِمْرَأَةً",
+    "N;ACC;PL;INDF": "نِسَاءً",
+    "N;ACC;SG;DEF": "الْمَرْأَةَ",
+    "N;ACC;PL;DEF": "النِّسَاءَ",
+    "N;GEN;SG;INDF": "اِمْرَأَةٍ",
+    "N;GEN;PL;INDF": "نِسَاءٍ",
+    "N;GEN;SG;DEF": "الْمَرْأَةِ",
+    "N;GEN;PL;DEF": "النِّسَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The standard, respectful word for a woman; with the article also “woman” as such, in general.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "woman",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.woman"
+     },
+     {
+      "id": "s2",
+      "def": "wife (someone’s woman)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَرْأَةُ مُعَلِّمَةٌ.",
+      "tr": "The woman is a teacher.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "الْيَوْمَ يَوْمُ الْمَرْأَةِ الْعَالَمِيُّ.",
+      "tr": "Today is International Women’s Day.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1"
+     },
+     {
+      "text": "اِمْرَأَةُ الْعَزِيزِ",
+      "tr": "the wife of al-ʿAzīz (Potiphar’s wife, in the story of Joseph)",
+      "register": "literary",
+      "context": "literature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حُقُوقُ الْمَرْأَةِ",
+      "tr": "women’s rights"
+     },
+     {
+      "text": "اِمْرَأَةٌ عَامِلَةٌ",
+      "tr": "a working woman"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "سَيِّدَة",
+      "register": "honorific",
+      "nuance": "lady; Mrs. — the polite word"
+     },
+     {
+      "word": "أُنْثَى",
+      "register": "technical",
+      "nuance": "female (sex), also of animals"
+     },
+     {
+      "word": "زَوْجَة",
+      "register": "neutral",
+      "nuance": "wife — the usual word in that sense"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "رَجُل",
+      "note": "man"
+     }
+    ],
+    "etymology": {
+     "text": "Root م ر ء, as in مَرْء / اِمْرُؤ (“a man, a person”). The plural نِسَاء is built on another root; Wiktionary compares it to Hebrew נָשִׁים (nashím, “women”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The plural has nothing in common with the singular: اِمْرَأَة → نِسَاء, like English person → people.",
+     "Hebrew נָשִׁים (nashím, women) matches the Arabic plural نِسَاء."
+    ],
+    "pitfalls": [
+     "With the article the first alif disappears: الْمَرْأَةُ (al-marʾa), not *الِامْرَأَةُ.",
+     "The first vowel is a connecting hamza: inside a sentence it is not pronounced and the kasra is not written — وَامْرَأَةٌ (wa-mraʾatun)."
+    ],
+    "subtleties": [
+     "الْمَرْأَةُ is often “woman” as a category: حُقُوقُ الْمَرْأَةِ = women’s rights."
+    ]
+   }
+  },
+  {
+   "id": "ar:walad",
+   "lemma": "وَلَد",
+   "pos": "NOUN",
+   "senses": [
+    "person.boy"
+   ],
+   "gender": "MASC",
+   "root": "و ل د",
+   "translit": "walad",
+   "forms": {
+    "N;NOM;SG;INDF": "وَلَدٌ",
+    "N;NOM;PL;INDF": "أَوْلَادٌ",
+    "N;NOM;SG;DEF": "الْوَلَدُ",
+    "N;NOM;PL;DEF": "الْأَوْلَادُ",
+    "N;ACC;SG;INDF": "وَلَدًا",
+    "N;ACC;PL;INDF": "أَوْلَادًا",
+    "N;ACC;SG;DEF": "الْوَلَدَ",
+    "N;ACC;PL;DEF": "الْأَوْلَادَ",
+    "N;GEN;SG;INDF": "وَلَدٍ",
+    "N;GEN;PL;INDF": "أَوْلَادٍ",
+    "N;GEN;SG;DEF": "الْوَلَدِ",
+    "N;GEN;PL;DEF": "الْأَوْلَادِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday “boy”; in the plural, often simply “the kids”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "boy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.boy"
+     },
+     {
+      "id": "s2",
+      "def": "child, offspring (son or daughter of any age)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "son",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْوَلَدُ طَالِبٌ.",
+      "tr": "The boy is a pupil.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا وَلَدٌ صَغِيرٌ.",
+      "tr": "This is a little boy.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهُمْ ثَلَاثَةُ أَوْلَادٍ.",
+      "tr": "They have three children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "الْأَوْلَادُ يَلْعَبُونَ فِي الْحَدِيقَةِ.",
+      "tr": "The children are playing in the garden.",
+      "register": "neutral",
+      "context": "play",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَلَدٌ صَغِيرٌ",
+      "tr": "a little boy"
+     },
+     {
+      "text": "الْأَوْلَادُ وَالْبَنَاتُ",
+      "tr": "the boys and the girls"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْوَلَدُ سِرُّ أَبِيهِ",
+      "tr": "the son is his father’s secret",
+      "kind": "proverb",
+      "meaning": "like father, like son",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "صَبِيّ",
+      "register": "literary",
+      "nuance": "boy, lad — more literary"
+     },
+     {
+      "word": "اِبْن",
+      "register": "neutral",
+      "nuance": "son (as a relative); وَلَد is broader"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بِنْت",
+      "note": "girl"
+     }
+    ],
+    "etymology": {
+     "text": "Root و ل د (“to give birth”). Wiktionary compares Hebrew יֶלֶד (yéled) and Geʿez ወልድ (wäld).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish evlat (child, offspring) comes from the plural أَوْلَاد (Wiktionary).",
+     "Hebrew יֶלֶד (yéled, boy, child) is the same Semitic word: an Arabic root that starts with w- often starts with y- in Hebrew."
+    ],
+    "pitfalls": [
+     "أَوْلَاد often means “children” of both sexes: عِنْدِي ثَلَاثَةُ أَوْلَادٍ can include daughters.",
+     "Do not confuse وَلَد (walad, boy) with the verb وُلِدَ (wulida, he was born)."
+    ],
+    "subtleties": [
+     "In MSA writing صَبِيّ and غُلَام sound more literary; وَلَد is the word you hear every day."
+    ]
+   }
+  },
+  {
+   "id": "ar:bint",
+   "lemma": "بِنْت",
+   "pos": "NOUN",
+   "senses": [
+    "person.girl"
+   ],
+   "gender": "FEM",
+   "translit": "bint",
+   "forms": {
+    "N;NOM;SG;INDF": "بِنْتٌ",
+    "N;NOM;PL;INDF": "بَنَاتٌ",
+    "N;NOM;SG;DEF": "الْبِنْتُ",
+    "N;NOM;PL;DEF": "الْبَنَاتُ",
+    "N;ACC;SG;INDF": "بِنْتًا",
+    "N;ACC;PL;INDF": "بَنَاتٍ",
+    "N;ACC;SG;DEF": "الْبِنْتَ",
+    "N;ACC;PL;DEF": "الْبَنَاتِ",
+    "N;GEN;SG;INDF": "بِنْتٍ",
+    "N;GEN;PL;INDF": "بَنَاتٍ",
+    "N;GEN;SG;DEF": "الْبِنْتِ",
+    "N;GEN;PL;DEF": "الْبَنَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday “girl”; within a family it is “daughter”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "girl",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.girl"
+     },
+     {
+      "id": "s2",
+      "def": "daughter",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْبِنْتُ طَالِبَةٌ.",
+      "tr": "The girl is a student.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ بِنْتٌ ذَكِيَّةٌ.",
+      "tr": "She is a clever girl.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ بِنْتِي.",
+      "tr": "This is my daughter.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بِنْتٌ صَغِيرَةٌ",
+      "tr": "a little girl"
+     },
+     {
+      "text": "بِنْتُ الْجِيرَانِ",
+      "tr": "the neighbours’ daughter"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "بَنَاتُ أَفْكَارِهِ",
+      "tr": "the daughters of his thoughts",
+      "kind": "idiom",
+      "meaning": "his own ideas, his brainchildren",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "فَتَاة",
+      "register": "formal",
+      "nuance": "girl, young woman — more formal or literary"
+     },
+     {
+      "word": "اِبْنَة",
+      "register": "formal",
+      "nuance": "daughter — the more formal word in that sense"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "وَلَد",
+      "note": "boy"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *bint-: the feminine suffix *-t added to *bin- of اِبْن (ibn, “son”). Cognate with Hebrew בַּת (bat).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew בַּת (bat, daughter) is the same word, with the n assimilated: *bint → bat.",
+     "English slang “bint” (a woman — derogatory, British) was borrowed from Arabic بِنْت (Wiktionary)."
+    ],
+    "pitfalls": [
+     "بِنْت ends in a plain ت, not ة — but it is feminine, and its plural is بَنَات.",
+     "In a family context بِنْتِي is “my daughter”, not “my girl”."
+    ],
+    "subtleties": [
+     "In names بِنْت means “daughter of”: فَاطِمَةُ بِنْتُ مُحَمَّدٍ — the female counterpart of اِبْن / بْن."
+    ]
+   }
+  },
+  {
+   "id": "ar:tifl",
+   "lemma": "طِفْل",
+   "pos": "NOUN",
+   "senses": [
+    "person.child"
+   ],
+   "gender": "MASC",
+   "root": "ط ف ل",
+   "translit": "ṭifl",
+   "forms": {
+    "N;NOM;SG;INDF": "طِفْلٌ",
+    "N;NOM;PL;INDF": "أَطْفَالٌ",
+    "N;NOM;SG;DEF": "الطِّفْلُ",
+    "N;NOM;PL;DEF": "الْأَطْفَالُ",
+    "N;ACC;SG;INDF": "طِفْلًا",
+    "N;ACC;PL;INDF": "أَطْفَالًا",
+    "N;ACC;SG;DEF": "الطِّفْلَ",
+    "N;ACC;PL;DEF": "الْأَطْفَالَ",
+    "N;GEN;SG;INDF": "طِفْلٍ",
+    "N;GEN;PL;INDF": "أَطْفَالٍ",
+    "N;GEN;SG;DEF": "الطِّفْلِ",
+    "N;GEN;PL;DEF": "الْأَطْفَالِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A child as a young human being — tender, small, to be protected.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "child (a minor, from a baby to about 12)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.child"
+     }
+    ],
+    "examples": [
+     {
+      "text": "الطِّفْلُ نَائِمٌ.",
+      "tr": "The child is asleep.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْأَطْفَالُ فِي الْمَدْرَسَةِ.",
+      "tr": "The children are at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "كَانَ يَلْعَبُ مَعَ الْأَطْفَالِ.",
+      "tr": "He was playing with the children.",
+      "register": "neutral",
+      "context": "play",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طِفْلٌ صَغِيرٌ",
+      "tr": "a small child"
+     },
+     {
+      "text": "رَوْضَةُ الْأَطْفَالِ",
+      "tr": "kindergarten"
+     },
+     {
+      "text": "حُقُوقُ الطِّفْلِ",
+      "tr": "children’s rights"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "وَلَد",
+      "register": "neutral",
+      "nuance": "child in the sense of son or daughter; also “boy”"
+     },
+     {
+      "word": "رَضِيع",
+      "register": "neutral",
+      "nuance": "a baby that is still nursing"
+     }
+    ],
+    "etymology": {
+     "text": "Root ط ف ل; Wiktionary gives no older origin. The word passed into Persian, Urdu and Ottoman Turkish (Turkish tıfıl) and Maltese (tifel, “boy”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Maltese tifel means “boy” — the same Arabic word (Wiktionary)."
+    ],
+    "pitfalls": [
+     "طِفْل is grammatically masculine but can mean a girl too; for a girl you also hear طِفْلَة.",
+     "The plural starts with a hamza: أَطْفَال, الْأَطْفَالُ."
+    ],
+    "subtleties": [
+     "طِفْل stresses age (a minor); وَلَد stresses birth and family (someone’s child) or means “boy”."
+    ]
+   }
+  },
+  {
+   "id": "ar:shakhs",
+   "lemma": "شَخْص",
+   "pos": "NOUN",
+   "senses": [
+    "person.person"
+   ],
+   "gender": "MASC",
+   "root": "ش خ ص",
+   "translit": "šaḫṣ",
+   "forms": {
+    "N;NOM;SG;INDF": "شَخْصٌ",
+    "N;NOM;PL;INDF": "أَشْخَاصٌ",
+    "N;NOM;SG;DEF": "الشَّخْصُ",
+    "N;NOM;PL;DEF": "الْأَشْخَاصُ",
+    "N;ACC;SG;INDF": "شَخْصًا",
+    "N;ACC;PL;INDF": "أَشْخَاصًا",
+    "N;ACC;SG;DEF": "الشَّخْصَ",
+    "N;ACC;PL;DEF": "الْأَشْخَاصَ",
+    "N;GEN;SG;INDF": "شَخْصٍ",
+    "N;GEN;PL;INDF": "أَشْخَاصٍ",
+    "N;GEN;SG;DEF": "الشَّخْصِ",
+    "N;GEN;PL;DEF": "الْأَشْخَاصِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A neutral “person, individual” — the word for counting people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "person, individual",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.person"
+     },
+     {
+      "id": "s2",
+      "def": "figure, shape (seen from afar); a character",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِي الْغُرْفَةِ خَمْسَةُ أَشْخَاصٍ.",
+      "tr": "There are five people in the room.",
+      "register": "neutral",
+      "context": "counting",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ شَخْصٌ طَيِّبٌ.",
+      "tr": "He is a kind person.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s1"
+     },
+     {
+      "text": "رَأَيْتُ شَخْصًا مِنْ بَعِيدٍ.",
+      "tr": "I saw a figure in the distance.",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "شَخْصٌ وَاحِدٌ",
+      "tr": "one person"
+     },
+     {
+      "text": "شَخْصٌ مُهِمٌّ",
+      "tr": "an important person"
+     },
+     {
+      "text": "بِطَاقَةٌ شَخْصِيَّةٌ",
+      "tr": "identity card"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِنْسَان",
+      "register": "neutral",
+      "nuance": "a human being — stresses humanity, not the individual"
+     },
+     {
+      "word": "فَرْد",
+      "register": "formal",
+      "nuance": "an individual; a member (of a family, a group)"
+     }
+    ],
+    "etymology": {
+     "text": "Root ش خ ص (“to rise, to appear”); Wiktionary gives no older origin. It passed into Persian and Ottoman Turkish: Turkish şahıs “person”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish şahıs (person) — and Azerbaijani şəxs, Uzbek shaxs — come from شَخْص (Wiktionary).",
+     "شَخْصِيَّة (personality; a character in a story) is شَخْص + -iyya, like English person → personality."
+    ],
+    "pitfalls": [
+     "To count people Arabic uses أَشْخَاص, not نَاس: ثَلَاثَةُ أَشْخَاصٍ = three people.",
+     "شَخْص stays masculine even for a woman: هِيَ شَخْصٌ طَيِّبٌ (she is a kind person)."
+    ],
+    "subtleties": [
+     "In law شَخْصٌ اعْتِبَارِيٌّ is a legal person (a company, an institution)."
+    ]
+   }
+  },
+  {
+   "id": "ar:nas",
+   "lemma": "نَاس",
+   "pos": "NOUN",
+   "senses": [
+    "person.people"
+   ],
+   "class": "plt",
+   "translit": "nās",
+   "forms": {
+    "N;NOM;PL;INDF": "نَاسٌ",
+    "N;NOM;PL;DEF": "النَّاسُ",
+    "N;ACC;PL;INDF": "نَاسًا",
+    "N;ACC;PL;DEF": "النَّاسَ",
+    "N;GEN;PL;INDF": "نَاسٍ",
+    "N;GEN;PL;DEF": "النَّاسِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "People in general — “folks”, what “people say”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "people, humans (in general)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.people"
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَثِيرٌ مِنَ النَّاسِ فِي السُّوقِ.",
+      "tr": "There are many people in the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "النَّاسُ هُنَا طَيِّبُونَ.",
+      "tr": "The people here are kind.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "بَعْضُ النَّاسِ لَا يُحِبُّونَ الْقَهْوَةَ.",
+      "tr": "Some people don’t like coffee.",
+      "register": "neutral",
+      "context": "opinions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَثِيرٌ مِنَ النَّاسِ",
+      "tr": "many people"
+     },
+     {
+      "text": "عَامَّةُ النَّاسِ",
+      "tr": "ordinary people, the public"
+     },
+     {
+      "text": "بَيْنَ النَّاسِ",
+      "tr": "among people"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "النَّاسُ عَلَى دِينِ مُلُوكِهِمْ",
+      "tr": "people follow the religion of their kings",
+      "kind": "proverb",
+      "meaning": "people follow the example of those who rule them",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "أُنَاس",
+      "register": "formal",
+      "nuance": "people, some people — literary; can be indefinite: أُنَاسٌ كَثِيرُونَ"
+     },
+     {
+      "word": "شَعْب",
+      "register": "neutral",
+      "nuance": "a people, a nation — not “people” in general"
+     },
+     {
+      "word": "أَشْخَاص",
+      "register": "neutral",
+      "nuance": "persons — the word for counting"
+     }
+    ],
+    "etymology": {
+     "text": "Back-formation from النَّاس (an-nās), a contraction of الْأُنَاس (al-ʔunās). Cognate with Aramaic אֲנָשָׁא (ʾănāšā) and Biblical Hebrew אֱנוֹשׁ (ʾĕnōš, “man, mankind”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The last sura of the Qurʾān is سُورَةُ النَّاسِ, “Mankind”.",
+     "Biblical Hebrew אֱנוֹשׁ (enosh, mankind) — also the name Enos — is related (Wiktionary)."
+    ],
+    "pitfalls": [
+     "نَاس is plural: النَّاسُ يَقُولُونَ (people say), not *يَقُولُ — and النَّاسُ طَيِّبُونَ, not *طَيِّبٌ.",
+     "It is nearly always used with the article: النَّاسُ = people in general."
+    ],
+    "subtleties": [
+     "A counted number of people is أَشْخَاص: ثَلَاثَةُ أَشْخَاصٍ — not *ثَلَاثَةُ نَاسٍ."
+    ]
+   }
+  },
+  {
+   "id": "ar:sadiq",
+   "lemma": "صَدِيق",
+   "pos": "NOUN",
+   "senses": [
+    "person.friend"
+   ],
+   "class": "person",
+   "gender": "MASC",
+   "root": "ص د ق",
+   "translit": "ṣadīq",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "صَدِيقٌ",
+    "N;NOM;SG;FEM;INDF": "صَدِيقَةٌ",
+    "N;NOM;PL;MASC;INDF": "أَصْدِقَاءُ",
+    "N;NOM;PL;FEM;INDF": "صَدِيقَاتٌ",
+    "N;NOM;SG;MASC;DEF": "الصَّدِيقُ",
+    "N;NOM;SG;FEM;DEF": "الصَّدِيقَةُ",
+    "N;NOM;PL;MASC;DEF": "الْأَصْدِقَاءُ",
+    "N;NOM;PL;FEM;DEF": "الصَّدِيقَاتُ",
+    "N;ACC;SG;MASC;INDF": "صَدِيقًا",
+    "N;ACC;SG;FEM;INDF": "صَدِيقَةً",
+    "N;ACC;PL;MASC;INDF": "أَصْدِقَاءَ",
+    "N;ACC;PL;FEM;INDF": "صَدِيقَاتٍ",
+    "N;ACC;SG;MASC;DEF": "الصَّدِيقَ",
+    "N;ACC;SG;FEM;DEF": "الصَّدِيقَةَ",
+    "N;ACC;PL;MASC;DEF": "الْأَصْدِقَاءَ",
+    "N;ACC;PL;FEM;DEF": "الصَّدِيقَاتِ",
+    "N;GEN;SG;MASC;INDF": "صَدِيقٍ",
+    "N;GEN;SG;FEM;INDF": "صَدِيقَةٍ",
+    "N;GEN;PL;MASC;INDF": "أَصْدِقَاءَ",
+    "N;GEN;PL;FEM;INDF": "صَدِيقَاتٍ",
+    "N;GEN;SG;MASC;DEF": "الصَّدِيقِ",
+    "N;GEN;SG;FEM;DEF": "الصَّدِيقَةِ",
+    "N;GEN;PL;MASC;DEF": "الْأَصْدِقَاءِ",
+    "N;GEN;PL;FEM;DEF": "الصَّدِيقَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm and loyal — the root is “truth”: a friend is someone true to you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "friend (feminine صَدِيقَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.friend"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هُوَ صَدِيقِي.",
+      "tr": "He is my friend.",
+      "register": "neutral",
+      "context": "friendship",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ صَدِيقَتِي سَارَةُ.",
+      "tr": "This is my friend Sara.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "لِي أَصْدِقَاءُ كَثِيرُونَ فِي مِصْرَ.",
+      "tr": "I have many friends in Egypt.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "صَدِيقٌ قَدِيمٌ",
+      "tr": "an old friend"
+     },
+     {
+      "text": "صَدِيقٌ مُقَرَّبٌ",
+      "tr": "a close friend"
+     },
+     {
+      "text": "صَدِيقُ الطُّفُولَةِ",
+      "tr": "a childhood friend"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الصَّدِيقُ قَبْلَ الطَّرِيقِ",
+      "tr": "the friend before the road",
+      "kind": "proverb",
+      "meaning": "choose your companion before you set out",
+      "register": "neutral"
+     },
+     {
+      "text": "الصَّدِيقُ وَقْتَ الضِّيقِ",
+      "tr": "the friend in the time of hardship",
+      "kind": "proverb",
+      "meaning": "a friend in need is a friend indeed",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "صَاحِب",
+      "register": "neutral",
+      "nuance": "companion, friend — very common in speech; also “owner”"
+     },
+     {
+      "word": "رَفِيق",
+      "register": "neutral",
+      "nuance": "companion, comrade (on a journey, in a party)"
+     },
+     {
+      "word": "زَمِيل",
+      "register": "neutral",
+      "nuance": "colleague, classmate — a friend from work or school"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "عَدُوّ",
+      "note": "enemy"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ص د ق (“truth, sincerity”: صِدْق “truth”); Wiktionary gives no older origin. The masculine plural أَصْدِقَاء and the rarer صُدَقَاء are both listed.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish sadık (loyal) comes from صَادِق (truthful), of the same root.",
+     "Hebrew צֶדֶק (tsédek, justice) belongs to the cognate root צ ד ק."
+    ],
+    "pitfalls": [
+     "The masculine plural أَصْدِقَاءُ is a diptote: no tanwīn (not *أَصْدِقَاءٌ), and -a in the indefinite genitive.",
+     "صَدِيقَة can mean “girlfriend” in a romantic sense, depending on the context."
+    ],
+    "subtleties": [
+     "Do not confuse صَدِيق (ṣadīq, friend) with صِدِّيق (ṣiddīq, always truthful — the epithet of Abū Bakr)."
+    ]
+   }
+  },
+  {
+   "id": "ar:talib",
+   "lemma": "طَالِب",
+   "pos": "NOUN",
+   "senses": [
+    "person.student"
+   ],
+   "class": "person",
+   "gender": "MASC",
+   "root": "ط ل ب",
+   "translit": "ṭālib",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "طَالِبٌ",
+    "N;NOM;SG;FEM;INDF": "طَالِبَةٌ",
+    "N;NOM;PL;MASC;INDF": "طُلَّابٌ",
+    "N;NOM;PL;FEM;INDF": "طَالِبَاتٌ",
+    "N;NOM;SG;MASC;DEF": "الطَّالِبُ",
+    "N;NOM;SG;FEM;DEF": "الطَّالِبَةُ",
+    "N;NOM;PL;MASC;DEF": "الطُّلَّابُ",
+    "N;NOM;PL;FEM;DEF": "الطَّالِبَاتُ",
+    "N;ACC;SG;MASC;INDF": "طَالِبًا",
+    "N;ACC;SG;FEM;INDF": "طَالِبَةً",
+    "N;ACC;PL;MASC;INDF": "طُلَّابًا",
+    "N;ACC;PL;FEM;INDF": "طَالِبَاتٍ",
+    "N;ACC;SG;MASC;DEF": "الطَّالِبَ",
+    "N;ACC;SG;FEM;DEF": "الطَّالِبَةَ",
+    "N;ACC;PL;MASC;DEF": "الطُّلَّابَ",
+    "N;ACC;PL;FEM;DEF": "الطَّالِبَاتِ",
+    "N;GEN;SG;MASC;INDF": "طَالِبٍ",
+    "N;GEN;SG;FEM;INDF": "طَالِبَةٍ",
+    "N;GEN;PL;MASC;INDF": "طُلَّابٍ",
+    "N;GEN;PL;FEM;INDF": "طَالِبَاتٍ",
+    "N;GEN;SG;MASC;DEF": "الطَّالِبِ",
+    "N;GEN;SG;FEM;DEF": "الطَّالِبَةِ",
+    "N;GEN;PL;MASC;DEF": "الطُّلَّابِ",
+    "N;GEN;PL;FEM;DEF": "الطَّالِبَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A learner at school or university — literally “one who seeks” (knowledge).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "student, pupil (feminine طَالِبَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student"
+     },
+     {
+      "id": "s2",
+      "def": "seeker, one who asks for something; applicant",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا طَالِبٌ فِي الْجَامِعَةِ.",
+      "tr": "I am a student at the university.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     },
+     {
+      "text": "هِيَ طَالِبَةٌ مُجْتَهِدَةٌ.",
+      "tr": "She is a hard-working student.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "هُوَ طَالِبُ عِلْمٍ.",
+      "tr": "He is a seeker of knowledge.",
+      "register": "neutral",
+      "context": "tradition",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَالِبٌ جَامِعِيٌّ",
+      "tr": "a university student"
+     },
+     {
+      "text": "طُلَّابُ الْمَدْرَسَةِ",
+      "tr": "the pupils of the school"
+     },
+     {
+      "text": "طَالِبُ عِلْمٍ",
+      "tr": "a seeker of knowledge"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "اُطْلُبُوا الْعِلْمَ وَلَوْ فِي الصِّينِ",
+      "tr": "seek knowledge, even in China",
+      "kind": "saying",
+      "meaning": "go as far as you must in order to learn (a famous saying; its attribution to the Prophet is considered weak)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "تِلْمِيذ",
+      "register": "neutral",
+      "nuance": "pupil — a younger school learner; also disciple"
+     },
+     {
+      "word": "دَارِس",
+      "register": "formal",
+      "nuance": "one who studies a subject"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "مُعَلِّم",
+      "note": "teacher"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of طَلَبَ (ṭalaba, “to seek, to ask for”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "“Taliban” is the Pashto plural of طَالِب — “students” (of religion); Wiktionary lists Pashto طالب.",
+     "Turkish talebe (student) comes from another Arabic plural of the word, طَلَبَة (Wiktionary)."
+    ],
+    "pitfalls": [
+     "There are three plurals: طُلَّاب (the usual one), طَلَبَة (also common), طَالِبُونَ (rare for students). Learn طُلَّاب.",
+     "A female student is طَالِبَة (plural طَالِبَات); a mixed group is طُلَّاب."
+    ],
+    "subtleties": [
+     "The word is a participle: “one who seeks”. Arabic sees a student as a seeker — hence the saying about China."
+    ]
+   }
+  },
+  {
+   "id": "ar:muallim",
+   "lemma": "مُعَلِّم",
+   "pos": "NOUN",
+   "senses": [
+    "person.teacher"
+   ],
+   "class": "person",
+   "gender": "MASC",
+   "root": "ع ل م",
+   "translit": "muʿallim",
+   "forms": {
+    "N;NOM;SG;MASC;INDF": "مُعَلِّمٌ",
+    "N;NOM;SG;FEM;INDF": "مُعَلِّمَةٌ",
+    "N;NOM;PL;MASC;INDF": "مُعَلِّمُونَ",
+    "N;NOM;PL;FEM;INDF": "مُعَلِّمَاتٌ",
+    "N;NOM;SG;MASC;DEF": "الْمُعَلِّمُ",
+    "N;NOM;SG;FEM;DEF": "الْمُعَلِّمَةُ",
+    "N;NOM;PL;MASC;DEF": "الْمُعَلِّمُونَ",
+    "N;NOM;PL;FEM;DEF": "الْمُعَلِّمَاتُ",
+    "N;ACC;SG;MASC;INDF": "مُعَلِّمًا",
+    "N;ACC;SG;FEM;INDF": "مُعَلِّمَةً",
+    "N;ACC;PL;MASC;INDF": "مُعَلِّمِينَ",
+    "N;ACC;PL;FEM;INDF": "مُعَلِّمَاتٍ",
+    "N;ACC;SG;MASC;DEF": "الْمُعَلِّمَ",
+    "N;ACC;SG;FEM;DEF": "الْمُعَلِّمَةَ",
+    "N;ACC;PL;MASC;DEF": "الْمُعَلِّمِينَ",
+    "N;ACC;PL;FEM;DEF": "الْمُعَلِّمَاتِ",
+    "N;GEN;SG;MASC;INDF": "مُعَلِّمٍ",
+    "N;GEN;SG;FEM;INDF": "مُعَلِّمَةٍ",
+    "N;GEN;PL;MASC;INDF": "مُعَلِّمِينَ",
+    "N;GEN;PL;FEM;INDF": "مُعَلِّمَاتٍ",
+    "N;GEN;SG;MASC;DEF": "الْمُعَلِّمِ",
+    "N;GEN;SG;FEM;DEF": "الْمُعَلِّمَةِ",
+    "N;GEN;PL;MASC;DEF": "الْمُعَلِّمِينَ",
+    "N;GEN;PL;FEM;DEF": "الْمُعَلِّمَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A respected figure: “the one who makes (others) know”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "teacher (feminine مُعَلِّمَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.teacher"
+     },
+     {
+      "id": "s2",
+      "def": "master of a trade; boss (in a workshop)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُمِّي مُعَلِّمَةٌ.",
+      "tr": "My mother is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُعَلِّمُ فِي الصَّفِّ.",
+      "tr": "The teacher is in the classroom.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "الْمُعَلِّمُونَ فِي إِضْرَابٍ.",
+      "tr": "The teachers are on strike.",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مُعَلِّمُ اللُّغَةِ الْعَرَبِيَّةِ",
+      "tr": "the Arabic teacher"
+     },
+     {
+      "text": "يَوْمُ الْمُعَلِّمِ",
+      "tr": "Teachers’ Day"
+     },
+     {
+      "text": "غُرْفَةُ الْمُعَلِّمِينَ",
+      "tr": "the staff room"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "قُمْ لِلْمُعَلِّمِ وَفِّهِ التَّبْجِيلَا، كَادَ الْمُعَلِّمُ أَنْ يَكُونَ رَسُولَا",
+      "tr": "Stand up for the teacher and give him full respect: the teacher is almost a messenger (prophet).",
+      "kind": "quote",
+      "meaning": "teachers deserve the highest respect",
+      "register": "literary",
+      "source": "Aḥmad Šawqī (1868–1932)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "مُدَرِّس",
+      "register": "neutral",
+      "nuance": "teacher, especially at secondary school; very common in Egypt"
+     },
+     {
+      "word": "أُسْتَاذ",
+      "register": "honorific",
+      "nuance": "professor, teacher; also a polite title for educated men (“Mr.”)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "طَالِب",
+      "note": "student"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of the verb عَلَّمَ (ʿallama, “to teach”), root ع ل م (“knowledge”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish muallim and Swahili mwalimu (teacher) come from مُعَلِّم (Wiktionary).",
+     "The same root gives عِلْم (knowledge, science), عَالِم (scholar) and عَالَم (world)."
+    ],
+    "pitfalls": [
+     "مُعَلِّم (muʿallim, teacher) vs مُتَعَلِّم (mutaʿallim, learner; educated) — two letters make the opposite.",
+     "The masculine plural is sound: مُعَلِّمُونَ (nominative), مُعَلِّمِينَ (accusative and genitive); feminine مُعَلِّمَات."
+    ],
+    "subtleties": [
+     "In Egypt and the Levant the spoken word مْعَلِّم / مِعَلِّم is also a respectful title for a master craftsman or a boss."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "pron.it",
+   "reason": "Arabic has no neuter and no word for “it”: every thing is masculine or feminine, and a pronoun that refers to it takes its gender.",
+   "use": "هُوَ for a masculine thing (الْبَابُ؟ هُوَ هُنَا — the door? it is here), هِيَ for a feminine thing and for any non-human plural (الْغُرْفَةُ؟ هِيَ هُنَاكَ; الْكُتُبُ؟ هِيَ هُنَا)."
+  },
+  {
+   "concept": "det.def",
+   "reason": "No separate word: the definite article al- (الْ) is written joined to the noun and is part of the noun’s forms (the DEF cells). Before the 14 sun letters its l is assimilated: الشَّقَّةُ (aš-šaqqa), not al-šaqqa.",
+   "use": "الْ + noun (the DEF forms): الْبَيْتُ، الْغُرْفَةُ، الشَّقَّةُ"
+  },
+  {
+   "concept": "det.indef",
+   "reason": "No indefinite article: an indefinite noun ends in nunation (tanwīn: -un, -an, -in); diptotes (نَوَافِذُ، مَصَابِيحُ) are indefinite without it.",
+   "use": "the noun with tanwīn (the INDF forms): بَيْتٌ = a house, غُرْفَةٌ = a room"
+  }
+ ]
+}

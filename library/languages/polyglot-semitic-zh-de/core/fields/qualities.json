@@ -1,0 +1,204 @@
+{
+ "field": "qualities",
+ "title": "Describing",
+ "subgroups": [
+  {
+   "id": "adj",
+   "title": "Adjectives"
+  }
+ ],
+ "sources": [
+  "The first adjectives, in pairs of opposites — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "adj.big",
+   "gloss": "big",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "adj.small",
+   "gloss": "small",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "adj.long",
+   "gloss": "long",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "adj.short",
+   "gloss": "short (length)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "adj.tall",
+   "gloss": "tall (person, building)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "adj.good",
+   "gloss": "good",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "adj.bad",
+   "gloss": "bad",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "adj.new",
+   "gloss": "new",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "adj.old.thing",
+   "gloss": "old (of things)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "adj.young",
+   "gloss": "young",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "adj.old.person",
+   "gloss": "old (of people)",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "adj.hot",
+   "gloss": "hot",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "adj.cold",
+   "gloss": "cold",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "adj.warm",
+   "gloss": "warm",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "adj.beautiful",
+   "gloss": "beautiful",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "adj.ugly",
+   "gloss": "ugly",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "adj.easy",
+   "gloss": "easy",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "adj.difficult",
+   "gloss": "difficult",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "adj.cheap",
+   "gloss": "cheap",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "adj.expensive",
+   "gloss": "expensive",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "adj.happy",
+   "gloss": "happy, glad",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "adj.sad",
+   "gloss": "sad",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "adj.tired",
+   "gloss": "tired",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "adj.hungry",
+   "gloss": "hungry",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "adj.thirsty",
+   "gloss": "thirsty",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "adj.fast",
+   "gloss": "fast",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "adj.slow",
+   "gloss": "slow",
+   "subgroup": "adj",
+   "tier": 1,
+   "rank": 27
+  }
+ ]
+}

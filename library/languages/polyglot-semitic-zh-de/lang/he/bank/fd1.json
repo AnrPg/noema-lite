@@ -1,0 +1,3806 @@
+{
+ "sentences": [
+  {
+   "id": "he.f1.001",
+   "frame": "fr.be.person",
+   "text": "אֲנִי סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I am a student (a man speaking).",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.002",
+   "frame": "fr.be.person",
+   "text": "אֲנִי סְטוּדֶנְטִית.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "סְטוּדֶנְטִית",
+     "l": "he:studentit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I am a student (a woman speaking).",
+   "variantOf": "he.f1.001",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.003",
+   "frame": "fr.be.person",
+   "text": "אַתָּה מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You are a teacher (to a man).",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.004",
+   "frame": "fr.be.person",
+   "text": "אַתְּ מוֹרָה.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You are a teacher (to a woman).",
+   "variantOf": "he.f1.003",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.005",
+   "frame": "fr.be.person",
+   "text": "הוּא יֶלֶד.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "יֶלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is a boy.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.006",
+   "frame": "fr.be.person",
+   "text": "הִיא יַלְדָּה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "יַלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is a girl.",
+   "variantOf": "he.f1.005",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.007",
+   "frame": "fr.be.person",
+   "text": "הוּא תַּלְמִיד.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "תַּלְמִיד",
+     "l": "he:talmid",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.008",
+   "frame": "fr.be.person",
+   "text": "הֵם תַּלְמִידִים.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "תַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They are pupils.",
+   "variantOf": "he.f1.007",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.009",
+   "frame": "fr.be.person",
+   "text": "הִיא חֲבֵרָה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "חֲבֵרָה",
+     "l": "he:chavera",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is a friend.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.010",
+   "frame": "fr.be.person",
+   "text": "הֵן חֲבֵרוֹת.",
+   "tokens": [
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "חֲבֵרוֹת",
+     "l": "he:chavera",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They (women) are friends.",
+   "variantOf": "he.f1.009",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.011",
+   "frame": "fr.be.person",
+   "text": "אַתָּה חָבֵר.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "חָבֵר",
+     "l": "he:chaver",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You are a friend (to a man).",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.012",
+   "frame": "fr.be.person",
+   "text": "אַתֶּם חֲבֵרִים.",
+   "tokens": [
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "חֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You (several people) are friends.",
+   "variantOf": "he.f1.011",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.013",
+   "frame": "fr.be.person",
+   "text": "אַתְּ סְטוּדֶנְטִית.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "סְטוּדֶנְטִית",
+     "l": "he:studentit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You are a student (to a woman).",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.014",
+   "frame": "fr.be.person",
+   "text": "אַתֶּן סְטוּדֶנְטִיּוֹת.",
+   "tokens": [
+    {
+     "t": "אַתֶּן",
+     "l": "he:aten"
+    },
+    {
+     "t": "סְטוּדֶנְטִיּוֹת",
+     "l": "he:studentit",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "You (women) are students.",
+   "variantOf": "he.f1.013",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.015",
+   "frame": "fr.be.person",
+   "text": "אֲנַחְנוּ חֲבֵרִים.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "חֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "We are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.016",
+   "frame": "fr.be.person",
+   "text": "הוּא גֶּבֶר וְהִיא אִשָּׁה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "גֶּבֶר",
+     "l": "he:gever",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְהִיא",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הִיא",
+       "l": "he:hi"
+      }
+     ]
+    },
+    {
+     "t": "אִשָּׁה",
+     "l": "he:isha",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is a man and she is a woman.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.017",
+   "frame": "fr.be.person",
+   "text": "הוּא מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.018",
+   "frame": "fr.be.person",
+   "text": "הוּא הָיָה מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He was a teacher.",
+   "variantOf": "he.f1.017",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.019",
+   "frame": "fr.be.person",
+   "text": "הִיא סְטוּדֶנְטִית.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "סְטוּדֶנְטִית",
+     "l": "he:studentit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.020",
+   "frame": "fr.be.person",
+   "text": "הִיא הָיְתָה סְטוּדֶנְטִית.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "סְטוּדֶנְטִית",
+     "l": "he:studentit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She was a student.",
+   "variantOf": "he.f1.019",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.021",
+   "frame": "fr.be.person",
+   "text": "הֵם חֲבֵרִים.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "חֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.022",
+   "frame": "fr.be.person",
+   "text": "הֵם הָיוּ חֲבֵרִים.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "חֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They were friends.",
+   "variantOf": "he.f1.021",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.023",
+   "frame": "fr.be.person",
+   "text": "אֲנִי תַּלְמִידָה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "תַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I am a pupil (a girl speaking).",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.024",
+   "frame": "fr.be.person",
+   "text": "אֲנִי הָיִיתִי תַּלְמִידָה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "הָיִיתִי",
+     "l": "he:haya",
+     "f": "V;PST;1;SG"
+    },
+    {
+     "t": "תַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I was a pupil (a woman speaking).",
+   "variantOf": "he.f1.023",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.025",
+   "frame": "fr.be.person",
+   "text": "הִיא מוֹרָה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "She is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.026",
+   "frame": "fr.be.person",
+   "text": "הִיא תִּהְיֶה מוֹרָה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "תִּהְיֶה",
+     "l": "he:haya",
+     "f": "V;FUT;3;SG;FEM"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She will be a teacher.",
+   "variantOf": "he.f1.025",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.027",
+   "frame": "fr.be.person",
+   "text": "הוּא סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.028",
+   "frame": "fr.be.person",
+   "text": "הוּא יִהְיֶה סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "יִהְיֶה",
+     "l": "he:haya",
+     "f": "V;FUT;3;SG;MASC"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He will be a student.",
+   "variantOf": "he.f1.027",
+   "variant": {
+    "Tense": "FUT"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.029",
+   "frame": "fr.be.person",
+   "text": "אֲנַחְנוּ הָיִינוּ יְלָדִים.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "הָיִינוּ",
+     "l": "he:haya",
+     "f": "V;PST;1;PL"
+    },
+    {
+     "t": "יְלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We were children.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.030",
+   "frame": "fr.be.person",
+   "text": "הָאִשָּׁה הָיְתָה מוֹרָה.",
+   "tokens": [
+    {
+     "t": "הָאִשָּׁה",
+     "l": "he:isha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The woman was a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.031",
+   "frame": "fr.be.person",
+   "text": "הַגֶּבֶר הָיָה סְטוּדֶנְט.",
+   "tokens": [
+    {
+     "t": "הַגֶּבֶר",
+     "l": "he:gever",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "סְטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "gloss": "The man was a student.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.032",
+   "frame": "fr.be.person",
+   "text": "יֶלֶד הוּא אָדָם.",
+   "tokens": [
+    {
+     "t": "יֶלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אָדָם",
+     "l": "he:adam",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "A child is a person.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.033",
+   "frame": "fr.be.person",
+   "text": "יְלָדִים הֵם אֲנָשִׁים.",
+   "tokens": [
+    {
+     "t": "יְלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "אֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Children are people.",
+   "variantOf": "he.f1.032",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.034",
+   "frame": "fr.greet",
+   "text": "שָׁלוֹם!",
+   "tokens": [
+    {
+     "t": "שָׁלוֹם",
+     "l": "he:shalom"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.035",
+   "frame": "fr.greet",
+   "text": "בֹּקֶר טוֹב!",
+   "tokens": [
+    {
+     "t": "בֹּקֶר טוֹב",
+     "l": "he:boker-tov"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good morning!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.036",
+   "frame": "fr.greet",
+   "text": "בֹּקֶר טוֹב, דָּוִד! בֹּקֶר אוֹר, שָׂרָה!",
+   "tokens": [
+    {
+     "t": "בֹּקֶר טוֹב",
+     "l": "he:boker-tov"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "בֹּקֶר אוֹר",
+     "l": "he:boker-or"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שָׂרָה",
+     "name": true
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good morning, David! — Good morning, Sarah!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.037",
+   "frame": "fr.greet",
+   "text": "עֶרֶב טוֹב!",
+   "tokens": [
+    {
+     "t": "עֶרֶב טוֹב",
+     "l": "he:erev-tov"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good evening!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.038",
+   "frame": "fr.greet",
+   "text": "לַיְלָה טוֹב!",
+   "tokens": [
+    {
+     "t": "לַיְלָה טוֹב",
+     "l": "he:laila-tov"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good night!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.039",
+   "frame": "fr.greet",
+   "text": "שָׁלוֹם, דָּוִד! מַה שְּׁלוֹמְךָ?",
+   "tokens": [
+    {
+     "t": "שָׁלוֹם",
+     "l": "he:shalom"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "מַה שְּׁלוֹמְךָ",
+     "l": "he:ma-shlomcha"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello, David! How are you?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.040",
+   "frame": "fr.greet",
+   "text": "בְּסֵדֶר, תּוֹדָה. מַה שְּׁלוֹמְךָ?",
+   "tokens": [
+    {
+     "t": "בְּסֵדֶר",
+     "l": "he:beseder"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "מַה שְּׁלוֹמְךָ",
+     "l": "he:ma-shlomcha"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Fine, thanks. How are you? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.041",
+   "frame": "fr.greet",
+   "text": "בְּסֵדֶר, תּוֹדָה. מַה שְּׁלוֹמֵךְ?",
+   "tokens": [
+    {
+     "t": "בְּסֵדֶר",
+     "l": "he:beseder"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "מַה שְּׁלוֹמֵךְ",
+     "l": "he:ma-shlomech"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Fine, thanks. How are you? (to a woman)",
+   "variantOf": "he.f1.040",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.042",
+   "frame": "fr.greet",
+   "text": "סְלִיחָה, אַתָּה מוֹרֶה?",
+   "tokens": [
+    {
+     "t": "סְלִיחָה",
+     "l": "he:slicha"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Excuse me, are you a teacher? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.043",
+   "frame": "fr.greet",
+   "text": "סְלִיחָה, אַתְּ מוֹרָה?",
+   "tokens": [
+    {
+     "t": "סְלִיחָה",
+     "l": "he:slicha"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Excuse me, are you a teacher? (to a woman)",
+   "variantOf": "he.f1.042",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.044",
+   "frame": "fr.greet",
+   "text": "נָעִים מְאוֹד, אֲנִי דָּוִד.",
+   "tokens": [
+    {
+     "t": "נָעִים מְאוֹד",
+     "l": "he:naim-meod"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Nice to meet you, I’m David.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.045",
+   "frame": "fr.greet",
+   "text": "קוֹרְאִים לִי שָׂרָה.",
+   "tokens": [
+    {
+     "t": "קוֹרְאִים לִי",
+     "l": "he:korim-li"
+    },
+    {
+     "t": "שָׂרָה",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "My name is Sarah.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.046",
+   "frame": "fr.greet",
+   "text": "שְׁמִי דָּוִד.",
+   "tokens": [
+    {
+     "t": "שְׁמִי",
+     "l": "he:shmi"
+    },
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "My name is David. (formal)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.047",
+   "frame": "fr.greet",
+   "text": "שָׁלוֹם, קוֹרְאִים לִי דָּוִד. נָעִים מְאוֹד!",
+   "tokens": [
+    {
+     "t": "שָׁלוֹם",
+     "l": "he:shalom"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "קוֹרְאִים לִי",
+     "l": "he:korim-li"
+    },
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    },
+    {
+     "t": "נָעִים מְאוֹד",
+     "l": "he:naim-meod"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello, my name is David. Nice to meet you!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.048",
+   "frame": "fr.greet",
+   "text": "תּוֹדָה! בְּבַקָּשָׁה.",
+   "tokens": [
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thank you! — You’re welcome.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.049",
+   "frame": "fr.greet",
+   "text": "תּוֹדָה, דָּוִד! עַל לֹא דָּבָר.",
+   "tokens": [
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "עַל לֹא דָּבָר",
+     "l": "he:al-lo-davar"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thanks, David! — Don’t mention it.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.050",
+   "frame": "fr.greet",
+   "text": "כֵּן, בְּבַקָּשָׁה.",
+   "tokens": [
+    {
+     "t": "כֵּן",
+     "l": "he:ken"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "בְּבַקָּשָׁה",
+     "l": "he:bevakasha"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Yes, please.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.051",
+   "frame": "fr.greet",
+   "text": "לֹא, תּוֹדָה.",
+   "tokens": [
+    {
+     "t": "לֹא",
+     "l": "he:lo-no"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "No, thank you.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.052",
+   "frame": "fr.greet",
+   "text": "אֲנִי בְּסֵדֶר, תּוֹדָה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "בְּסֵדֶר",
+     "l": "he:beseder"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m fine, thank you.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.053",
+   "frame": "fr.greet",
+   "text": "מַה נִּשְׁמַע? בְּסֵדֶר, תּוֹדָה.",
+   "tokens": [
+    {
+     "t": "מַה נִּשְׁמַע",
+     "l": "he:ma-nishma"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "בְּסֵדֶר",
+     "l": "he:beseder"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "How’s it going? — Fine, thanks.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.054",
+   "frame": "fr.greet",
+   "text": "תּוֹדָה, לְהִתְרָאוֹת!",
+   "tokens": [
+    {
+     "t": "תּוֹדָה",
+     "l": "he:toda"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "לְהִתְרָאוֹת",
+     "l": "he:lehitraot"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thanks, goodbye!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.055",
+   "frame": "fr.greet",
+   "text": "לַיְלָה טוֹב, נִתְרָאֶה!",
+   "tokens": [
+    {
+     "t": "לַיְלָה טוֹב",
+     "l": "he:laila-tov"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "נִתְרָאֶה",
+     "l": "he:nitrae"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good night, see you!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.056",
+   "frame": "fr.greet",
+   "text": "אַתָּה בְּסֵדֶר?",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "בְּסֵדֶר",
+     "l": "he:beseder"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Are you OK? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.057",
+   "frame": "fr.greet",
+   "text": "אַתְּ בְּסֵדֶר?",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "בְּסֵדֶר",
+     "l": "he:beseder"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Are you OK? (to a woman)",
+   "variantOf": "he.f1.056",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.058",
+   "frame": "fr.greet",
+   "text": "שָׁלוֹם, שָׂרָה! לְהִתְרָאוֹת!",
+   "tokens": [
+    {
+     "t": "שָׁלוֹם",
+     "l": "he:shalom"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "שָׂרָה",
+     "name": true
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "לְהִתְרָאוֹת",
+     "l": "he:lehitraot"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Bye, Sarah! See you!",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.059",
+   "frame": "fr.greet",
+   "text": "סְלִיחָה, אַתֶּם סְטוּדֶנְטִים?",
+   "tokens": [
+    {
+     "t": "סְלִיחָה",
+     "l": "he:slicha"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "סְטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Excuse me, are you students? (to a group)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.060",
+   "frame": "fr.greet",
+   "text": "שָׁלוֹם, מַה שְּׁלוֹמְךָ?",
+   "tokens": [
+    {
+     "t": "שָׁלוֹם",
+     "l": "he:shalom"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "מַה שְּׁלוֹמְךָ",
+     "l": "he:ma-shlomcha"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hi, how are you? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.061",
+   "frame": "fr.greet",
+   "text": "שָׁלוֹם, מַה שְּׁלוֹמֵךְ?",
+   "tokens": [
+    {
+     "t": "שָׁלוֹם",
+     "l": "he:shalom"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "מַה שְּׁלוֹמֵךְ",
+     "l": "he:ma-shlomech"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hi, how are you? (to a woman)",
+   "variantOf": "he.f1.060",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.062",
+   "frame": "fr.be.person",
+   "text": "זֶה מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.063",
+   "frame": "fr.be.person",
+   "text": "זֹאת מוֹרָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a teacher (a woman).",
+   "variantOf": "he.f1.062",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.064",
+   "frame": "fr.be.person",
+   "text": "אֵלֶּה מוֹרִים.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "מוֹרִים",
+     "l": "he:more",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "These are teachers.",
+   "variantOf": "he.f1.062",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.065",
+   "frame": "fr.be.person",
+   "text": "זֶה חָבֵר.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "חָבֵר",
+     "l": "he:chaver",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a friend.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.066",
+   "frame": "fr.be.person",
+   "text": "זֹאת תַּלְמִידָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "תַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This is a pupil (a girl).",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.067",
+   "frame": "fr.be.person",
+   "text": "אֵלֶּה תַּלְמִידוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "תַּלְמִידוֹת",
+     "l": "he:talmida",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "These are pupils (girls).",
+   "variantOf": "he.f1.066",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.068",
+   "frame": "fr.be.person",
+   "text": "זֶה דָּוִד וְזֹאת שָׂרָה.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": "וְזֹאת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "זֹאת",
+       "l": "he:ze",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "שָׂרָה",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This is David and this is Sarah.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.069",
+   "frame": "fr.be.person",
+   "text": "הַיֶּלֶד הַזֶּה תַּלְמִיד.",
+   "tokens": [
+    {
+     "t": "הַיֶּלֶד",
+     "l": "he:yeled",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "תַּלְמִיד",
+     "l": "he:talmid",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This boy is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.070",
+   "frame": "fr.be.person",
+   "text": "הַיַּלְדָּה הַזֹּאת תַּלְמִידָה.",
+   "tokens": [
+    {
+     "t": "הַיַּלְדָּה",
+     "l": "he:yalda",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "תַּלְמִידָה",
+     "l": "he:talmida",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This girl is a pupil.",
+   "variantOf": "he.f1.069",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.071",
+   "frame": "fr.be.person",
+   "text": "הַיְּלָדִים הָאֵלֶּה תַּלְמִידִים.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָאֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL;DEF"
+    },
+    {
+     "t": "תַּלְמִידִים",
+     "l": "he:talmid",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "These children are pupils.",
+   "variantOf": "he.f1.069",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.072",
+   "frame": "fr.be.person",
+   "text": "הָאִשָּׁה הַהִיא מוֹרָה.",
+   "tokens": [
+    {
+     "t": "הָאִשָּׁה",
+     "l": "he:isha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַהִיא",
+     "l": "he:hahu",
+     "f": "DET;SG;FEM"
+    },
+    {
+     "t": "מוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "That woman is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.073",
+   "frame": "fr.be.person",
+   "text": "הַגֶּבֶר הַהוּא מוֹרֶה.",
+   "tokens": [
+    {
+     "t": "הַגֶּבֶר",
+     "l": "he:gever",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַהוּא",
+     "l": "he:hahu",
+     "f": "DET;SG;MASC"
+    },
+    {
+     "t": "מוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "That man is a teacher.",
+   "variantOf": "he.f1.072",
+   "variant": {
+    "Gender": "MASC"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.074",
+   "frame": "fr.be.person",
+   "text": "הָאֲנָשִׁים הָהֵם סְטוּדֶנְטִים.",
+   "tokens": [
+    {
+     "t": "הָאֲנָשִׁים",
+     "l": "he:anashim",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָהֵם",
+     "l": "he:hahu",
+     "f": "DET;PL;MASC"
+    },
+    {
+     "t": "סְטוּדֶנְטִים",
+     "l": "he:student",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "Those people are students.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.075",
+   "frame": "fr.be.person",
+   "text": "הַנָּשִׁים הָהֵן סְטוּדֶנְטִיּוֹת.",
+   "tokens": [
+    {
+     "t": "הַנָּשִׁים",
+     "l": "he:isha",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָהֵן",
+     "l": "he:hahu",
+     "f": "DET;PL;FEM"
+    },
+    {
+     "t": "סְטוּדֶנְטִיּוֹת",
+     "l": "he:studentit",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "Those women are students.",
+   "variantOf": "he.f1.074",
+   "variant": {
+    "Gender": "FEM"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.076",
+   "frame": "fr.be.person",
+   "text": "הָאָדָם הַזֶּה חָבֵר.",
+   "tokens": [
+    {
+     "t": "הָאָדָם",
+     "l": "he:adam",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "חָבֵר",
+     "l": "he:chaver",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This person is a friend.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.077",
+   "frame": "fr.be.person",
+   "text": "זֶה הַמּוֹרֶה.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַמּוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "This is the teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.078",
+   "frame": "fr.be.where",
+   "text": "הַמּוֹרֶה פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "The teacher is here.",
+   "alts": [
+    "פֹּה הַמּוֹרֶה."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.079",
+   "frame": "fr.be.where",
+   "text": "הַמּוֹרֶה הָיָה פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרֶה",
+     "l": "he:more",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The teacher was here.",
+   "variantOf": "he.f1.078",
+   "variant": {
+    "Tense": "PST"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.080",
+   "frame": "fr.be.where",
+   "text": "הַמּוֹרָה שָׁם.",
+   "tokens": [
+    {
+     "t": "הַמּוֹרָה",
+     "l": "he:mora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "The teacher (a woman) is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.081",
+   "frame": "fr.be.where",
+   "text": "דָּוִד פֹּה וְשָׂרָה שָׁם.",
+   "tokens": [
+    {
+     "t": "דָּוִד",
+     "name": true
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "וְשָׂרָה",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "שָׂרָה",
+       "name": true
+      }
+     ]
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "David is here and Sarah is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.082",
+   "frame": "fr.be.where",
+   "text": "אֲנִי כָּאן.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "כָּאן",
+     "l": "he:kan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I am here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.083",
+   "frame": "fr.be.where",
+   "text": "הַחֲבֵרִים שָׁם.",
+   "tokens": [
+    {
+     "t": "הַחֲבֵרִים",
+     "l": "he:chaver",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "The friends are there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.084",
+   "frame": "fr.be.where",
+   "text": "הַסְּטוּדֶנְט הַהוּא פֹּה.",
+   "tokens": [
+    {
+     "t": "הַסְּטוּדֶנְט",
+     "l": "he:student",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַהוּא",
+     "l": "he:hahu",
+     "f": "DET;SG;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "That student is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.085",
+   "frame": "fr.be.where",
+   "text": "אַתָּה פֹּה? כֵּן, אֲנִי פֹּה.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "כֵּן",
+     "l": "he:ken"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Are you here? — Yes, I’m here. (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.086",
+   "frame": "fr.be.where",
+   "text": "הַיְּלָדִים פֹּה וְהַמּוֹרֶה שָׁם.",
+   "tokens": [
+    {
+     "t": "הַיְּלָדִים",
+     "l": "he:yeled",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "וְהַמּוֹרֶה",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הַמּוֹרֶה",
+       "l": "he:more",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative"
+   ],
+   "gloss": "The children are here and the teacher is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.087",
+   "frame": "fr.be.where",
+   "text": "אַתֶּם כָּאן?",
+   "tokens": [
+    {
+     "t": "אַתֶּם",
+     "l": "he:atem"
+    },
+    {
+     "t": "כָּאן",
+     "l": "he:kan"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Are you (several people) here?",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.088",
+   "frame": "fr.be.person",
+   "text": "שָׁלוֹם, זֹאת שָׂרָה.",
+   "tokens": [
+    {
+     "t": "שָׁלוֹם",
+     "l": "he:shalom"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "שָׂרָה",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.greetings"
+   ],
+   "gloss": "Hello, this is Sarah.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.089",
+   "frame": "fr.this.is",
+   "text": "זֶה בַּיִת.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "בַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a house.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.090",
+   "frame": "fr.this.is",
+   "text": "זֶה הַבַּיִת.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַבַּיִת",
+     "l": "he:bayit",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is the house.",
+   "variantOf": "he.f1.089",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.091",
+   "frame": "fr.this.is",
+   "text": "זֹאת דִּירָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "דִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a flat.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.092",
+   "frame": "fr.this.is",
+   "text": "זֹאת הַדִּירָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הַדִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is the flat.",
+   "variantOf": "he.f1.091",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.093",
+   "frame": "fr.this.is",
+   "text": "זֶה חֶדֶר.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "חֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a room.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.094",
+   "frame": "fr.this.is",
+   "text": "זֶה הַחֶדֶר.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "הַחֶדֶר",
+     "l": "he:cheder",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is the room.",
+   "variantOf": "he.f1.093",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.095",
+   "frame": "fr.this.is",
+   "text": "זֶה קִיר, זֶה חַלּוֹן וְזֹאת דֶּלֶת.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "קִיר",
+     "l": "he:kir",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "חַלּוֹן",
+     "l": "he:chalon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְזֹאת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "זֹאת",
+       "l": "he:ze",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "דֶּלֶת",
+     "l": "he:delet",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a wall, this is a window and this is a door.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.096",
+   "frame": "fr.this.is",
+   "text": "זֶה סֵפֶר.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "סֵפֶר",
+     "l": "he:sefer",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a book.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.097",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה סְפָרִים.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "סְפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "These are books.",
+   "variantOf": "he.f1.096",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.098",
+   "frame": "fr.this.is",
+   "text": "זֹאת מְנוֹרָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "מְנוֹרָה",
+     "l": "he:menora",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a lamp.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.099",
+   "frame": "fr.this.is",
+   "text": "זֹאת הַמְּנוֹרָה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "הַמְּנוֹרָה",
+     "l": "he:menora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is the lamp.",
+   "variantOf": "he.f1.098",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.100",
+   "frame": "fr.this.is",
+   "text": "זֶה סֵפֶל וְזֹאת כּוֹס.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "סֵפֶל",
+     "l": "he:sefel",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְזֹאת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "זֹאת",
+       "l": "he:ze",
+       "f": "PRON;SG;FEM"
+      }
+     ]
+    },
+    {
+     "t": "כּוֹס",
+     "l": "he:kos",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This is a cup and this is a glass.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.101",
+   "frame": "fr.thing.here",
+   "text": "הַמַּפְתֵּחַ פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמַּפְתֵּחַ",
+     "l": "he:mafteach",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The key is here.",
+   "alts": [
+    "פֹּה הַמַּפְתֵּחַ."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.102",
+   "frame": "fr.thing.here",
+   "text": "הַמַּפְתְּחוֹת פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמַּפְתְּחוֹת",
+     "l": "he:mafteach",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The keys are here.",
+   "variantOf": "he.f1.101",
+   "variant": {
+    "Number": "PL"
+   },
+   "alts": [
+    "פֹּה הַמַּפְתְּחוֹת."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.103",
+   "frame": "fr.thing.here",
+   "text": "הַטֶּלֶפוֹן? הוּא פֹּה.",
+   "tokens": [
+    {
+     "t": "הַטֶּלֶפוֹן",
+     "l": "he:telefon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The phone? It’s here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.104",
+   "frame": "fr.thing.here",
+   "text": "הַכּוֹס? הִיא שָׁם.",
+   "tokens": [
+    {
+     "t": "הַכּוֹס",
+     "l": "he:kos",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The glass? It’s there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.105",
+   "frame": "fr.thing.here",
+   "text": "הַכִּסְּאוֹת? הֵם שָׁם.",
+   "tokens": [
+    {
+     "t": "הַכִּסְּאוֹת",
+     "l": "he:kise",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The chairs? They’re there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.106",
+   "frame": "fr.thing.here",
+   "text": "הַצַּלָּחוֹת? הֵן פֹּה.",
+   "tokens": [
+    {
+     "t": "הַצַּלָּחוֹת",
+     "l": "he:tsalachat",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The plates? They’re here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.107",
+   "frame": "fr.thing.here",
+   "text": "הַשֻּׁלְחָן הָיָה פֹּה.",
+   "tokens": [
+    {
+     "t": "הַשֻּׁלְחָן",
+     "l": "he:shulchan",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The table was here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.108",
+   "frame": "fr.thing.here",
+   "text": "הַמִּטָּה הָיְתָה שָׁם.",
+   "tokens": [
+    {
+     "t": "הַמִּטָּה",
+     "l": "he:mita",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The bed was there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.109",
+   "frame": "fr.thing.here",
+   "text": "הַסְּפָרִים הָיוּ פֹּה.",
+   "tokens": [
+    {
+     "t": "הַסְּפָרִים",
+     "l": "he:sefer",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "The books were here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.110",
+   "frame": "fr.thing.here",
+   "text": "הַתִּיק הַזֶּה הָיָה שָׁם.",
+   "tokens": [
+    {
+     "t": "הַתִּיק",
+     "l": "he:tik",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֶּה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC;DEF"
+    },
+    {
+     "t": "הָיָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;MASC"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This bag was there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.111",
+   "frame": "fr.thing.here",
+   "text": "הַכּוֹס הַזֹּאת הָיְתָה פֹּה.",
+   "tokens": [
+    {
+     "t": "הַכּוֹס",
+     "l": "he:kos",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַזֹּאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM;DEF"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "This glass was here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.112",
+   "frame": "fr.thing.here",
+   "text": "הָעֵט וְהַנְּיָר פֹּה.",
+   "tokens": [
+    {
+     "t": "הָעֵט",
+     "l": "he:et-pen",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "וְהַנְּיָר",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הַנְּיָר",
+       "l": "he:neyar",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The pen and the paper are here.",
+   "alts": [
+    "פֹּה הָעֵט וְהַנְּיָר."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.113",
+   "frame": "fr.thing.here",
+   "text": "הָאָרוֹן שָׁם.",
+   "tokens": [
+    {
+     "t": "הָאָרוֹן",
+     "l": "he:aron",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The cupboard is there.",
+   "alts": [
+    "שָׁם הָאָרוֹן."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.114",
+   "frame": "fr.thing.here",
+   "text": "הַדֶּלֶת שָׁם.",
+   "tokens": [
+    {
+     "t": "הַדֶּלֶת",
+     "l": "he:delet",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The door is there.",
+   "alts": [
+    "שָׁם הַדֶּלֶת."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.115",
+   "frame": "fr.thing.here",
+   "text": "הַסֵּפֶל הַהוּא שָׁם.",
+   "tokens": [
+    {
+     "t": "הַסֵּפֶל",
+     "l": "he:sefel",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַהוּא",
+     "l": "he:hahu",
+     "f": "DET;SG;MASC"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.agreement"
+   ],
+   "gloss": "That cup is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.116",
+   "frame": "fr.thing.here",
+   "text": "הַדִּירָה פֹּה וְהַבַּיִת שָׁם.",
+   "tokens": [
+    {
+     "t": "הַדִּירָה",
+     "l": "he:dira",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "וְהַבַּיִת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הַבַּיִת",
+       "l": "he:bayit",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The flat is here and the house is there.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.117",
+   "frame": "fr.thing.here",
+   "text": "הַמְּנוֹרָה הַהִיא הָיְתָה פֹּה.",
+   "tokens": [
+    {
+     "t": "הַמְּנוֹרָה",
+     "l": "he:menora",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "הַהִיא",
+     "l": "he:hahu",
+     "f": "DET;SG;FEM"
+    },
+    {
+     "t": "הָיְתָה",
+     "l": "he:haya",
+     "f": "V;PST;3;SG;FEM"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "That lamp was here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.118",
+   "frame": "fr.thing.here",
+   "text": "הַטֶּלֶפוֹנִים? הֵם פֹּה.",
+   "tokens": [
+    {
+     "t": "הַטֶּלֶפוֹנִים",
+     "l": "he:telefon",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The phones? They’re here.",
+   "variantOf": "he.f1.103",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.119",
+   "frame": "fr.thing.here",
+   "text": "הַכּוֹסוֹת? הֵן שָׁם.",
+   "tokens": [
+    {
+     "t": "הַכּוֹסוֹת",
+     "l": "he:kos",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The glasses? They’re there.",
+   "variantOf": "he.f1.104",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.120",
+   "frame": "fr.thing.here",
+   "text": "הַשֻּׁלְחָנוֹת הָיוּ פֹּה.",
+   "tokens": [
+    {
+     "t": "הַשֻּׁלְחָנוֹת",
+     "l": "he:shulchan",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The tables were here.",
+   "variantOf": "he.f1.107",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.f1.121",
+   "frame": "fr.thing.here",
+   "text": "הַמִּטּוֹת הָיוּ שָׁם.",
+   "tokens": [
+    {
+     "t": "הַמִּטּוֹת",
+     "l": "he:mita",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "הָיוּ",
+     "l": "he:haya",
+     "f": "V;PST;3;PL"
+    },
+    {
+     "t": "שָׁם",
+     "l": "he:sham"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement"
+   ],
+   "gloss": "The beds were there.",
+   "variantOf": "he.f1.108",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  }
+ ]
+}

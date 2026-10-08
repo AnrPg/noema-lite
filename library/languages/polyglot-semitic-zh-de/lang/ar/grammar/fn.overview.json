@@ -1,0 +1,171 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "Arabic is a Semitic language of the Afro-Asiatic family, the closest relative of Hebrew in this course. You learn Modern Standard Arabic (الْفُصْحَى), the written and formal language shared by the whole Arab world; at home people speak regional dialects. It is written from right to left with 28 letters for consonants and long vowels — the short vowels are small optional marks — and most words are built from roots of three consonants.",
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Afro-Asiatic › Semitic › Central Semitic — with Hebrew and Aramaic as close relatives"
+  },
+  {
+   "label": "Script and direction",
+   "value": "Arabic script, right to left; 28 letters that join and change shape; short vowels are marks above or below the letters and are usually left out; numbers run left to right"
+  },
+  {
+   "label": "Standard variety",
+   "value": "Modern Standard Arabic (الْفُصْحَى) for writing, news and formal speech; everyday speech in dialects (Egyptian, Levantine, Gulf, Iraqi, Maghrebi …) — two layers side by side, called diglossia"
+  },
+  {
+   "label": "Where",
+   "value": "official language of more than 20 countries from Morocco to Iraq and Oman; one of the six official languages of the United Nations; the language of the Qurʾān"
+  },
+  {
+   "label": "Speakers",
+   "value": "more than 300 million native speakers of Arabic dialects; Standard Arabic is learned at school"
+  },
+  {
+   "label": "Name",
+   "value": "الْعَرَبِيَّةُ (al-ʿarabiyya)"
+  }
+ ],
+ "typology": {
+  "type": "fusional",
+  "why": "Arabic weaves a root of consonants into a pattern of vowels inside the word (k-t-b “writing” → كَتَبَ kataba “he wrote”, كِتَاب kitāb “book”, كَاتِب kātib “writer”), and one ending carries several meanings at once: the -at of كَتَبَتْ says 3rd person + singular + feminine + past together.",
+  "alsoShows": "Agglutinating touches: small words are attached in front — وَ “and”, الْ “the”, بِـ “with” — and pronoun endings behind (كِتَابِي “my book”), each piece with one meaning."
+ },
+ "peculiarities": [
+  {
+   "title": "Right to left, letters joined",
+   "text": "Words run from right to left and the letters connect, taking up to four shapes; six letters (ا د ذ ر ز و) never join the letter after them."
+  },
+  {
+   "title": "Short vowels are not written",
+   "text": "Normal texts show only consonants and long vowels: كتب can be كَتَبَ (he wrote), كُتُبٌ (books) or كُتِبَ (it was written). This course shows every vowel mark until you can read without them."
+  },
+  {
+   "title": "Roots and patterns",
+   "text": "Three consonants carry a meaning and patterns make words of it: ك ت ب → كِتَاب book, مَكْتَب desk, office, كَاتِب writer, مَكْتَبَة library. Learn the patterns and you can guess new words."
+  },
+  {
+   "title": "No “to be” in the present",
+   "text": "أَنَا طَالِبٌ = “I (am) a student”: subject and predicate simply stand side by side. The verb كَانَ appears only in the past and future: كُنْتُ طَالِبًا, I was a student."
+  },
+  {
+   "title": "Two genders — even for “you”",
+   "text": "Every noun is masculine or feminine (most feminines end in ة). “You” is أَنْتَ to a man and أَنْتِ to a woman, and greetings change with it: كَيْفَ حَالُكَ / كَيْفَ حَالُكِ."
+  },
+  {
+   "title": "Singular, dual, plural — and broken plurals",
+   "text": "Two of anything have their own form, the dual. Many plurals change the inside of the word: كِتَاب → كُتُب, رَجُل → رِجَال. Learn every noun with its plural."
+  },
+  {
+   "title": "“The” is a prefix, “a” is an ending",
+   "text": "بَيْتٌ (baytun) = a house, الْبَيْتُ (al-baytu) = the house. Before “sun letters” the l of al- is not heard: الشَّقَّةُ = aš-šaqqa."
+  },
+  {
+   "title": "Things in the plural are “she”",
+   "text": "Plurals of things take feminine singular agreement: هٰذِهِ الْكُتُبُ (these books), الْكُتُبُ؟ هِيَ هُنَا (the books? they are here)."
+  }
+ ],
+ "forYou": [
+  {
+   "lang": "el",
+   "text": "Familiar: gender, agreement and case endings (Arabic has three cases: -u, -a, -i — like nominative, accusative, genitive), and an article used for things in general, as in Greek: أُحِبُّ الْقَهْوَةَ = μου αρέσει ο καφές. New: no neuter, no word for “a”, and sounds such as ع, ح, ق. Bridges: قَلَم (pen) comes from κάλαμος, فِنْجَان (cup) goes back to πίναξ (and came back to Greek as φλιτζάνι), and the old Arabic letter order أ ب ج د is the same as α β γ δ."
+  },
+  {
+   "lang": "en",
+   "text": "Easy: simple sentences in the order subject–verb–object, one article “the” (الْ), and many English words from Arabic: algebra, alcohol, sugar, coffee, cotton. Hard: a new script, two genders that also mark “you”, endings for every person of the verb, cases, and vowels that are not written."
+  },
+  {
+   "lang": "de",
+   "text": "You already learn nouns with their gender and plural and verbs with person endings — the same habits work here. Like German, Arabic needs no article with a job: Ich bin Lehrer = أَنَا مُعَلِّمٌ. The ach-Laut is Arabic خ, and the glottal stop before a vowel (be-achten) is the hamza ء. Different: no “is” in the present, only two genders, and the verb may come first (VSO)."
+  },
+  {
+   "lang": "ru",
+   "text": "Russian has no present “to be” either: Я студент = أَنَا طَالِبٌ, word for word; and the past shows the gender, as in был / была = كَانَ / كَانَتْ. Russian х is Arabic خ. Different: Arabic has a definite article (الْ) and three cases, Russian no article and six cases."
+  },
+  {
+   "lang": "tr",
+   "text": "Thousands of Turkish words are Arabic — kitap (كِتَاب), kalem (قَلَم), merhaba (مَرْحَبًا), selam (سَلَام), sabah (صَبَاح), insan (إِنْسَان), muallim (مُعَلِّم), fincan (فِنْجَان): your best bridge, and Ottoman Turkish was written in this script until 1928. Hard: Turkish has no gender and adds suffixes in a fixed order; Arabic changes the inside of the word and marks gender everywhere, even on “you”."
+  }
+ ],
+ "pathNote": "Arabic walks the fusional path: the same 19 steps and the same words as Hebrew, Chinese and German, with the grammar of a fusional, root-and-pattern language at each step. S01 a verbless present “to be” and a gendered “you” (أَنْتَ / أَنْتِ, dual أَنْتُمَا); S02 greetings that change with the listener; S03 demonstratives that agree (هٰذَا / هٰذِهِ / هٰؤُلَاءِ); S04 gender, agreement (things in the plural = feminine singular), al- and tanwīn; S05 the dual, broken plurals and numbers with reversed gender for 3–10; S06 possessive endings (كِتَابِي) and “to have” with عِنْدَ; S07 conjugation tables and roots and patterns; S08 a negator chosen by tense (لَا، لَيْسَ، لَمْ، لَنْ); S11 the genitive after prepositions; S16 adjectives after the noun, agreeing in gender, number, case and definiteness; S17 the elative أَفْعَل; S18 أَنَّ / لِأَنَّ with pronoun endings. The isolating path (Chinese) spends these steps on tones, measure words, word order and aspect particles; the agglutinating path on suffix chains and vowel harmony.",
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is Arabic mainly?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "fusional",
+   "why": "Roots are woven into vowel patterns inside the word, and one ending carries several meanings at once."
+  },
+  {
+   "q": "How do you say “I am a student” (a man speaking)?",
+   "options": [
+    "أَنَا طَالِبٌ",
+    "أَنَا أَكُونُ طَالِبٌ",
+    "أَنَا هُوَ طَالِبٌ"
+   ],
+   "answer": "أَنَا طَالِبٌ",
+   "why": "The present of “to be” is not said: subject + predicate."
+  },
+  {
+   "q": "In which direction is Arabic written?",
+   "options": [
+    "right to left",
+    "left to right",
+    "top to bottom"
+   ],
+   "answer": "right to left",
+   "why": "Words run right to left; only numbers run left to right."
+  },
+  {
+   "q": "What do كِتَاب, كَاتِب and مَكْتَب have in common?",
+   "options": [
+    "the root k-t-b “writing”",
+    "the same ending",
+    "the article"
+   ],
+   "answer": "the root k-t-b “writing”",
+   "why": "Book, writer, office: one root, different patterns."
+  },
+  {
+   "q": "“You” to a woman is …",
+   "options": [
+    "أَنْتَ",
+    "أَنْتِ",
+    "أَنْتُمْ"
+   ],
+   "answer": "أَنْتِ",
+   "why": "أَنْتَ (-ta) to a man, أَنْتِ (-ti) to a woman, أَنْتُمْ to several people."
+  },
+  {
+   "q": "بَيْتٌ (baytun) means …",
+   "options": [
+    "a house",
+    "the house",
+    "houses"
+   ],
+   "answer": "a house",
+   "why": "The ending -un (tanwīn) marks an indefinite noun; “the house” is الْبَيْتُ."
+  },
+  {
+   "q": "Which variety does this course teach?",
+   "options": [
+    "Modern Standard Arabic (الْفُصْحَى)",
+    "Egyptian Arabic",
+    "only Classical Arabic"
+   ],
+   "answer": "Modern Standard Arabic (الْفُصْحَى)",
+   "why": "MSA is the shared written and formal language; dialects differ by region."
+  }
+ ]
+}

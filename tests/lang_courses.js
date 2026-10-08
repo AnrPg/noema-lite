@@ -10,13 +10,16 @@ for (const id of fs.existsSync(LIB) ? fs.readdirSync(LIB) : []) {
   console.log(`— ${id}`);
   const read = rel => { const p = path.join(root, rel); return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : null; };
   const list = rel => { const p = path.join(root, rel); return fs.existsSync(p) ? fs.readdirSync(p).filter(f => f.endsWith('.json')).sort() : []; };
-  const C = N.course(N.readCourse(read, list));
+  const data = N.readCourse(read, list);
+  if ((data.course.draft || []).length) console.log(`  (nodes in progress: ${data.course.draft.join(', ')} — checked here as if finished)`);
+  data.course = { ...data.course, draft: [] };
+  const C = N.course(data);
   for (const code of C.languages) {
     const X = C.lang[code], prepared = Object.keys(X.prepared).filter(n => X.prepared[n]);
     const bad = [];
     for (const s of X.sentences) {
-      const flat = []; const walk = ks => ks.forEach(t => t.parts ? walk(t.parts) : !t.p && flat.push(t.l)); walk(s.tokens);
-      const got = []; for (const t of N.tokenize(C, code, s.text)) { if (t.p) continue; if (t.parts) t.parts.forEach(p => got.push(p.matches.map(m => m.l))); else got.push(t.matches.map(m => m.l)); }
+      const flat = [], names = new Set(); const walk = ks => ks.forEach(t => t.parts && t.parts.some(x => x.name) ? names.add(t.t) : t.parts ? walk(t.parts) : t.name ? names.add(t.t) : !t.p && flat.push(t.l)); walk(s.tokens);
+      const got = []; for (const t of N.tokenize(C, code, s.text)) { if (t.p || (t.unknown && names.has(t.t))) continue; if (t.parts) t.parts.forEach(p => got.push(p.matches.map(m => m.l))); else got.push(t.matches.map(m => m.l)); }
       if (got.length !== flat.length || got.some((alts, i) => !alts.includes(flat[i]))) bad.push(s.id);
     }
     ok(!bad.length, `${code}: ${X.sentences.length} sentences tokenize back to their words` + (bad.length ? ' — not: ' + bad.slice(0, 8).join(', ') : ''));

@@ -1,0 +1,226 @@
+{
+ "function": "fn.agreement",
+ "status": "realized",
+ "summary": "In German the words around a noun change with its gender, number and case: the article (der Tisch, die Lampe, das Bett), dieser (dieser Tisch, diese Lampe, dieses Bett), and – from S06 and S16 – mein and the adjectives (ein großer Tisch, eine große Lampe, ein großes Bett). A pronoun that refers back takes the noun’s gender (der Tisch → er), and the verb agrees with the subject in person and number (das Buch ist – die Bücher sind). One thing does NOT agree: an adjective after sein stays bare (Der Tisch ist groß, die Lampe ist groß), unlike Greek, Russian or Arabic.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "article",
+     "der Tisch",
+     "die Lampe",
+     "das Bett",
+     "die Betten"
+    ],
+    [
+     "dieser",
+     "dieser Tisch",
+     "diese Lampe",
+     "dieses Bett",
+     "diese Betten"
+    ],
+    [
+     "pronoun",
+     "er",
+     "sie",
+     "es",
+     "sie"
+    ],
+    [
+     "verb (sein)",
+     "ist",
+     "ist",
+     "ist",
+     "sind"
+    ]
+   ],
+   "caption": "What agrees with the noun at this step"
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "after ein / no article",
+     "ein großer Tisch",
+     "eine große Lampe",
+     "ein großes Bett",
+     "große Betten"
+    ],
+    [
+     "after der",
+     "der große Tisch",
+     "die große Lampe",
+     "das große Bett",
+     "die großen Betten"
+    ],
+    [
+     "after sein",
+     "Der Tisch ist groß.",
+     "Die Lampe ist groß.",
+     "Das Bett ist groß.",
+     "Die Betten sind groß."
+    ]
+   ],
+   "caption": "Preview (S16): adjective endings in the nominative"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One signal is enough",
+   "text": "German shows the gender once, as clearly as possible: der Tisch → the adjective is weak (der große Tisch); ein Tisch shows nothing → the adjective shows it (ein großer Tisch)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "After sein: no ending",
+   "text": "Der Tisch ist groß, never *Der Tisch ist großer. In Greek ο τραπέζι … μεγάλο / η πόρτα … μεγάλη agree; in German the predicate adjective does not."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "What is the noun, and what are its gender and number?",
+   "Which case does its role need (for now: nominative after sein, as subject)?",
+   "Do the article and dieser carry the right ending (dieser / diese / dieses / diese)?",
+   "Does a pronoun refer back? er / sie / es by the noun’s gender; sie for every plural.",
+   "Does the verb agree with the subject (ist / sind)?"
+  ],
+  "steps": [
+   "Find the noun’s gender and number.",
+   "Give every word that goes with it the matching ending.",
+   "Check the pronoun and the verb."
+  ]
+ },
+ "traps": [
+  "ein shows no gender in the masculine and neuter nominative – that is why the adjective must: ein großer Tisch, ein großes Bett.",
+  "Predicate adjectives never agree: Die Lampen sind neu.",
+  "In the plural all genders look alike: die, diese, sie, sind.",
+  "Das ist … does not agree (das stays das); only the verb changes for a plural: Das sind Tische."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:der",
+   "de:ein",
+   "de:dieser",
+   "de:jener"
+  ]
+ },
+ "paradigmCells": [
+  "DET;NOM;SG;MASC",
+  "DET;NOM;SG;FEM",
+  "DET;NOM;SG;NEUT",
+  "DET;NOM;PL"
+ ],
+ "needs": {
+  "NOUN": 6,
+  "DET": 2
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.agreement"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "lemmas": [
+    "de:dieser"
+   ],
+   "cells": [
+    "DET;NOM;SG;FEM",
+    "DET;NOM;SG;NEUT",
+    "DET;NOM;PL"
+   ],
+   "count": 6
+  },
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Das Buch ist hier. → plural:",
+   "options": [
+    "Die Bücher ist hier.",
+    "Die Bücher sind hier.",
+    "Das Bücher sind hier."
+   ],
+   "answer": "Die Bücher sind hier.",
+   "why": "Article, noun and verb all change: die … sind."
+  },
+  {
+   "q": "der Stuhl – the pronoun:",
+   "options": [
+    "er",
+    "sie",
+    "es"
+   ],
+   "answer": "er",
+   "why": "The pronoun copies the noun’s gender."
+  },
+  {
+   "q": "Preview: “a big table” (groß, der Tisch):",
+   "options": [
+    "ein groß Tisch",
+    "ein großer Tisch",
+    "ein großes Tisch"
+   ],
+   "answer": "ein großer Tisch",
+   "why": "ein shows no gender, so the adjective takes -er for the masculine."
+  },
+  {
+   "q": "Preview: “The lamp is new.” (neu)",
+   "options": [
+    "Die Lampe ist neue.",
+    "Die Lampe ist neu.",
+    "Die Lampe ist neuer."
+   ],
+   "answer": "Die Lampe ist neu.",
+   "why": "After sein the adjective has no ending."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.agreement",
+   "note": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness; non-human plurals take feminine singular agreement."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.agreement",
+   "note": "Hebrew adjectives follow the noun and agree in gender, number and definiteness (ha-bayit ha-gadol, the big house)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.agreement",
+   "note": "Chinese has no agreement at all: 大房子, 大桌子 – the adjective never changes."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.noun.gender",
+   "note": "Agreement starts from the noun’s gender."
+  }
+ ]
+}

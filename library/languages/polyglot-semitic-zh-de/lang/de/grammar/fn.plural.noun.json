@@ -61,5 +61,22 @@
     "variant": "Number"
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.plural.noun",
+   "note": "Arabic has a dual and “broken” plurals made inside the word (kitāb → kutub)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.plural.noun",
+   "note": "Hebrew plurals in -im (masculine) and -ot (feminine), with exceptions."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.plural.noun",
+   "note": "Chinese nouns do not change; numbers and measure words show the amount, 们 only for people."
+  }
  ]
 }

@@ -1,0 +1,296 @@
+{
+ "function": "fn.greetings",
+ "status": "realized",
+ "summary": "German greetings follow two questions: what time is it, and do I say du or Sie to this person? With Sie-people you use the full formulas – Guten Tag, Auf Wiedersehen, Wie geht es Ihnen? – with du-people the short ones – Hallo, Tschüss, Wie geht’s? / Wie geht es dir?. The formulas do not change for a man or a woman (unlike Arabic and Hebrew), but they change by region: Grüß Gott and Servus in the south and Austria, Moin in the north, Grüezi in Switzerland. Guten Tag / Morgen / Abend are accusatives (einen guten Tag wünschen), gute Nacht is feminine.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "situation",
+    "with du (informal)",
+    "with Sie (polite)"
+   ],
+   "rows": [
+    [
+     "meeting",
+     "Hallo! · Hi!",
+     "Guten Tag! (Grüß Gott! in the south)"
+    ],
+    [
+     "in the morning",
+     "Morgen!",
+     "Guten Morgen!"
+    ],
+    [
+     "in the evening",
+     "Hallo! / Guten Abend!",
+     "Guten Abend!"
+    ],
+    [
+     "going to bed / late at night",
+     "Gute Nacht!",
+     "Gute Nacht!"
+    ],
+    [
+     "leaving",
+     "Tschüss! · Bis später! · Bis bald!",
+     "Auf Wiedersehen! (on the phone: Auf Wiederhören!)"
+    ],
+    [
+     "how are you?",
+     "Wie geht’s? · Wie geht es dir?",
+     "Wie geht es Ihnen?"
+    ],
+    [
+     "the answer",
+     "Gut, danke – und dir?",
+     "Danke, gut – und Ihnen?"
+    ],
+    [
+     "your name",
+     "Ich heiße … · Ich bin …",
+     "Mein Name ist … · Ich heiße …"
+    ],
+    [
+     "nice to meet you",
+     "Freut mich!",
+     "Freut mich, Sie kennenzulernen."
+    ],
+    [
+     "thanks – you’re welcome",
+     "Danke! – Bitte! / Gern!",
+     "Vielen Dank! – Bitte schön. / Gern geschehen."
+    ],
+    [
+     "sorry / excuse me",
+     "Entschuldigung! · Tut mir leid!",
+     "Entschuldigen Sie! · Es tut mir leid."
+    ]
+   ],
+   "caption": "Greetings and polite words by register"
+  },
+  {
+   "t": "table",
+   "head": [
+    "du",
+    "Sie"
+   ],
+   "rows": [
+    [
+     "family, friends, children, classmates",
+     "adults you do not know, customers, officials"
+    ],
+    [
+     "young people among themselves, many workplaces, online",
+     "teachers (for pupils), doctors, older people"
+    ],
+    [
+     "the older or higher-ranking person offers the du",
+     "when unsure: start with Sie"
+    ]
+   ],
+   "caption": "Who gets du, who gets Sie"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Gute Nacht is not hello",
+   "text": "You arrive at 11 p.m. with Guten Abend; Gute Nacht is only for going to bed or parting late."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Regional greetings",
+   "text": "Grüß Gott (Bavaria, Austria: polite hello), Servus (south and Austria: hi and bye among friends), Moin (north: hello at any hour), Grüezi (Switzerland: polite hello), Ade (Swabia: bye)."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Bitte does two jobs",
+   "text": "bitte = please (Ein Glas Wasser, bitte) and you’re welcome (Danke! – Bitte!)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Do I say du or Sie to this person? (stranger, adult, office → Sie; friend, family, child, peer → du)",
+   "What time is it: morning, day, evening, bedtime?",
+   "Am I arriving or leaving? Is it a phone call (Auf Wiederhören)?",
+   "Where am I? South: Grüß Gott; north: Moin; Switzerland: Grüezi.",
+   "Small slip or real regret? Entschuldigung for a bump or to get attention; Es tut mir leid for regret and sympathy.",
+   "Someone offers something: do I want it (Ja, bitte!) or not (Nein, danke!)?"
+  ],
+  "steps": [
+   "Choose du or Sie.",
+   "Choose the formula for the moment.",
+   "Answer in kind: Gut, danke – und dir? / und Ihnen?"
+  ]
+ },
+ "traps": [
+  "Gute Nacht is never a greeting on arrival.",
+  "A bare Danke! when someone offers you something often means “no, thanks”.",
+  "Wie geht es Ihnen? with a capital I; ihnen (small i) = them.",
+  "guten Tag, not *gute Tag: Tag, Morgen and Abend are masculine accusatives; only Nacht is feminine (gute Nacht).",
+  "Wie geht’s? expects a short real answer (Gut, danke – und dir?), not the same question back."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:hallo",
+   "de:guten_Tag",
+   "de:guten_Morgen",
+   "de:guten_Abend",
+   "de:gute_Nacht",
+   "de:auf_Wiedersehen",
+   "de:tschüss",
+   "de:bis_später",
+   "de:bis_bald",
+   "de:wie_gehts",
+   "de:wie_geht_es_dir",
+   "de:wie_geht_es_Ihnen",
+   "de:freut_mich",
+   "de:danke",
+   "de:bitte",
+   "de:Entschuldigung",
+   "de:es_tut_mir_leid",
+   "de:du",
+   "de:ihr",
+   "de:Sie"
+  ]
+ },
+ "needs": {
+  "INTJ": 6
+ },
+ "generators": [
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.greetings"
+    ],
+    "variant": "Formality"
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "8 a.m., you walk into a bakery. You say …",
+   "options": [
+    "Guten Morgen!",
+    "Gute Nacht!",
+    "Guten Abend!"
+   ],
+   "answer": "Guten Morgen!",
+   "why": "Until about 10–11 a.m.: Guten Morgen."
+  },
+  {
+   "q": "You leave a shop. Polite goodbye:",
+   "options": [
+    "Tschüss, Leute!",
+    "Auf Wiedersehen!",
+    "Gute Nacht!"
+   ],
+   "answer": "Auf Wiedersehen!",
+   "why": "Auf Wiedersehen is the polite goodbye (tschüss is fine with friends)."
+  },
+  {
+   "q": "You arrive at a dinner party at 9 p.m.:",
+   "options": [
+    "Gute Nacht!",
+    "Guten Abend!",
+    "Guten Morgen!"
+   ],
+   "answer": "Guten Abend!",
+   "why": "Arriving in the evening: Guten Abend. Gute Nacht only for bed."
+  },
+  {
+   "q": "You ask your doctor how she is:",
+   "options": [
+    "Wie geht’s, Doktor?",
+    "Wie geht es dir?",
+    "Wie geht es Ihnen?"
+   ],
+   "answer": "Wie geht es Ihnen?",
+   "why": "With Sie-people: Wie geht es Ihnen?"
+  },
+  {
+   "q": "Someone says “Danke!”. You answer …",
+   "options": [
+    "Bitte!",
+    "Danke!",
+    "Entschuldigung!"
+   ],
+   "answer": "Bitte!",
+   "why": "bitte = you’re welcome."
+  },
+  {
+   "q": "You bump into someone on the tram:",
+   "options": [
+    "Entschuldigung!",
+    "Bitte schön!",
+    "Freut mich!"
+   ],
+   "answer": "Entschuldigung!",
+   "why": "A small slip: Entschuldigung."
+  },
+  {
+   "q": "A friend tells you his grandmother is ill:",
+   "options": [
+    "Entschuldigung!",
+    "Oh, es tut mir leid.",
+    "Bitte!"
+   ],
+   "answer": "Oh, es tut mir leid.",
+   "why": "Sympathy and real regret: es tut mir leid."
+  },
+  {
+   "q": "You end a phone call politely:",
+   "options": [
+    "Auf Wiederhören!",
+    "Auf Wiedersehen!",
+    "Gute Nacht!"
+   ],
+   "answer": "Auf Wiederhören!",
+   "why": "On the phone you “hear” each other again."
+  },
+  {
+   "q": "A polite hello in Munich or Vienna:",
+   "options": [
+    "Moin!",
+    "Grüß Gott!",
+    "Grüezi!"
+   ],
+   "answer": "Grüß Gott!",
+   "why": "Grüß Gott is the polite greeting in Bavaria and Austria; Moin is northern, Grüezi Swiss."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.greetings",
+   "note": "Arabic answers a greeting in kind (as-salāmu ʿalaykum – wa-ʿalaykumu s-salām) and many formulas change for a man, a woman or a group."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.greetings",
+   "note": "Hebrew shalom is hello and goodbye; “how are you” changes for a man or a woman (ma shlomkha? / ma shlomekh?)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.greetings",
+   "note": "Chinese 你好 / 您好 (polite), 再见, 谢谢 – 不客气: politeness by choosing 您, no gender."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.pronoun.subject",
+   "note": "du, ihr and Sie: the same choice decides the greeting."
+  }
+ ]
+}

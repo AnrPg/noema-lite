@@ -14,7 +14,8 @@
   "VERB.defective": "V;PFV;3;SG;MASC",
   "PRON": "PRON;NOM",
   "PRON.dem": "PRON;SG;MASC",
-  "ADP": "ADP"
+  "ADP": "ADP",
+  "PRON.dempl": "PRON;PL"
  },
  "paradigmCells": {
   "NOUN": [
@@ -114,6 +115,43 @@
    "ADP;2;PL;FEM",
    "ADP;3;PL;MASC",
    "ADP;3;PL;FEM"
+  ],
+  "NOUN.person": [
+   "N;NOM;SG;MASC;INDF",
+   "N;NOM;SG;MASC;DEF",
+   "N;NOM;SG;FEM;INDF",
+   "N;NOM;SG;FEM;DEF",
+   "N;NOM;PL;MASC;INDF",
+   "N;NOM;PL;MASC;DEF",
+   "N;NOM;PL;FEM;INDF",
+   "N;NOM;PL;FEM;DEF",
+   "N;ACC;SG;MASC;INDF",
+   "N;ACC;SG;MASC;DEF",
+   "N;ACC;SG;FEM;INDF",
+   "N;ACC;SG;FEM;DEF",
+   "N;ACC;PL;MASC;INDF",
+   "N;ACC;PL;MASC;DEF",
+   "N;ACC;PL;FEM;INDF",
+   "N;ACC;PL;FEM;DEF",
+   "N;GEN;SG;MASC;INDF",
+   "N;GEN;SG;MASC;DEF",
+   "N;GEN;SG;FEM;INDF",
+   "N;GEN;SG;FEM;DEF",
+   "N;GEN;PL;MASC;INDF",
+   "N;GEN;PL;MASC;DEF",
+   "N;GEN;PL;FEM;INDF",
+   "N;GEN;PL;FEM;DEF"
+  ],
+  "NOUN.plt": [
+   "N;NOM;PL;INDF",
+   "N;NOM;PL;DEF",
+   "N;ACC;PL;INDF",
+   "N;ACC;PL;DEF",
+   "N;GEN;PL;INDF",
+   "N;GEN;PL;DEF"
+  ],
+  "PRON.dempl": [
+   "PRON;PL"
   ]
  }
 }

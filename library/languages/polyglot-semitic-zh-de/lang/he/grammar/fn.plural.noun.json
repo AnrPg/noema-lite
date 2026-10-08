@@ -66,5 +66,22 @@
     ]
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.plural.noun",
+   "note": "Arabic has sound plurals like Hebrew -ִים / -וֹת (-ūna / -āt) and also “broken” plurals that change the inside of the word — and a dual."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.plural.noun",
+   "note": "German has five plural types (-e, -er, -(e)n, -s, umlaut) learned with each noun, as Hebrew plurals are."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.plural.noun",
+   "note": "Chinese nouns have no plural; 们 is added only to people (朋友们), and numbers use measure words."
+  }
  ]
 }

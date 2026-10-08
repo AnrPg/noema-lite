@@ -165,7 +165,7 @@ const ar = N.tokenize(C, 'ar', 'هو يأكل الجزرة والبصلة.');
 ok(ar.filter(t => !t.p).every(t => !t.unknown) && ar[3].parts?.map(p => p.matches[0].l).join('+') === 'ar:wa+ar:basal', 'Arabic without vowel marks: every word found; والبصلة = وَ + الْبَصَلَة');
 ok(same(words(N.tokenize(C, 'zh', '他吃胡萝卜和洋葱。')), ['他', '吃', '胡萝卜', '和', '洋葱', '。']), 'Chinese is segmented by the course words (longest match)');
 const zu = N.tokenize(C, 'zh', '他吃苹果。');
-ok(same(zu.filter(t => t.unknown).map(t => t.t), ['苹', '果']), 'Chinese: characters outside the course are reported one by one');
+ok(same(zu.filter(t => t.unknown).map(t => t.t), ['苹果']), 'Chinese: a run of characters outside the course is reported as one unknown word (a name, a new word)');
 { const d = N.readCourse(read, list); d.langs.he.lexicon['veg.1'].lexemes[0].plene = { 'N;SG;INDF': 'גזר', 'N;SG;DEF': 'הגזר' };
   d.langs.he.lexicon['veg.1'].lexemes[1].plene = { 'N;SG;INDF': 'בצאל' };   // an invented full spelling, only to test the index
   const C2 = N.course(d); ok(N.lookup(C2, 'he', 'בצאל').matches[0]?.l === 'he:batsal', 'a full (plene) spelling given by the lexeme is found'); }

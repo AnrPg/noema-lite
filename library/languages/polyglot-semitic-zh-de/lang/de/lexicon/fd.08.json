@@ -1,0 +1,271 @@
+{
+ "lexemes": [
+  {
+   "id": "de:nicht",
+   "lemma": "nicht",
+   "pos": "ADV",
+   "senses": [
+    "part.not"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "The everyday negation of verbs, adjectives and whole statements.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not (negates a verb, an adjective, an adverb or a definite noun phrase)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     },
+     {
+      "id": "s2",
+      "def": "nicht? / nicht wahr? – tag question “isn't it?, right?”",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich esse die Zwiebel nicht.",
+      "tr": "I'm not eating the onion.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Salat ist nicht frisch.",
+      "tr": "The lettuce isn't fresh.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist nicht mein Problem.",
+      "tr": "That's not my problem.",
+      "register": "informal",
+      "context": "argument",
+      "sense": "s1"
+     },
+     {
+      "text": "Du kommst doch morgen, nicht wahr?",
+      "tr": "You're coming tomorrow, aren't you?",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gar nicht",
+      "tr": "not at all"
+     },
+     {
+      "text": "noch nicht",
+      "tr": "not yet"
+     },
+     {
+      "text": "nicht mehr",
+      "tr": "no longer, not any more"
+     },
+     {
+      "text": "nicht nur … sondern auch",
+      "tr": "not only … but also"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Nicht schlecht!",
+      "tr": "Not bad!",
+      "kind": "fixed expression",
+      "meaning": "quite good – a typical German understatement of praise",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "net",
+      "register": "regional",
+      "nuance": "colloquial pronunciation in Austria and southern Germany",
+      "region": "south, AT"
+     },
+     {
+      "word": "nich",
+      "register": "colloquial",
+      "nuance": "spoken form, especially in northern Germany",
+      "region": "north"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From Middle High German niwiht, niweht, niht, a contracted form of Old High German niowiht, from Proto-West Germanic *naiwwiht; essentially nio (“never”) + wiht (“being, creature, thing”) – literally “not a thing”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English not has the same history: from Old English nāwiht “no thing” (also the source of naught)."
+    ],
+    "pitfalls": [
+     "nicht vs kein: kein replaces “not a / not any” before a noun without the definite article (Ich habe keine Gurke), nicht negates verbs, adjectives and nouns with der/die/das (Ich esse die Gurke nicht).",
+     "Position: nicht usually comes after the object and at the end of a main clause (Ich mag ihn nicht), but before adjectives, places and second verbs (nicht frisch, nicht hier, nicht essen)."
+    ],
+    "subtleties": [
+     "The position of nicht can change what is negated: Ich esse nicht die Gurke (but something else) vs Ich esse die Gurke nicht (not at all)."
+    ]
+   }
+  },
+  {
+   "id": "de:kein",
+   "lemma": "kein",
+   "pos": "DET",
+   "class": "neg",
+   "senses": [
+    "part.not"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "kein",
+    "DET;NOM;SG;FEM": "keine",
+    "DET;NOM;SG;NEUT": "kein",
+    "DET;ACC;SG;MASC": "keinen",
+    "DET;ACC;SG;FEM": "keine",
+    "DET;ACC;SG;NEUT": "kein",
+    "DET;DAT;SG;MASC": "keinem",
+    "DET;DAT;SG;FEM": "keiner",
+    "DET;DAT;SG;NEUT": "keinem",
+    "DET;GEN;SG;MASC": "keines",
+    "DET;GEN;SG;FEM": "keiner",
+    "DET;GEN;SG;NEUT": "keines",
+    "DET;NOM;PL": "keine",
+    "DET;ACC;PL": "keine",
+    "DET;DAT;PL": "keinen",
+    "DET;GEN;PL": "keiner"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "“None at all”: the negative article that replaces ein and plurals without an article.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "no, not a, not any (negates a noun that would have ein or no article)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     },
+     {
+      "id": "s2",
+      "def": "keiner / keine / keins (as a pronoun): nobody, none",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich mag keine Zwiebeln.",
+      "tr": "I don't like onions.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben keinen Knoblauch mehr.",
+      "tr": "We have no garlic left.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist kein Problem.",
+      "tr": "That's no problem.",
+      "register": "neutral",
+      "context": "service",
+      "sense": "s1"
+     },
+     {
+      "text": "Keiner hat mich gefragt.",
+      "tr": "Nobody asked me.",
+      "register": "informal",
+      "context": "complaint",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "kein Problem",
+      "tr": "no problem"
+     },
+     {
+      "text": "keine Ahnung",
+      "tr": "no idea"
+     },
+     {
+      "text": "keine Zeit",
+      "tr": "no time"
+     },
+     {
+      "text": "kein Wunder",
+      "tr": "no wonder"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Keine Ahnung!",
+      "tr": "No idea!",
+      "kind": "colloquial",
+      "meaning": "I don't know (at all)",
+      "register": "colloquial"
+     },
+     {
+      "text": "Kein Wunder!",
+      "tr": "No wonder!",
+      "kind": "fixed expression",
+      "meaning": "that's not surprising",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "nicht ein",
+      "register": "neutral",
+      "nuance": "“not one” – only with emphasis on the number: Nicht ein Gast ist gekommen"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German kein, a back-formation from original nekein (“not any”), from Old High German nihein, from Proto-West Germanic *nehwain, from Proto-Germanic *nehw ainaz (“not any”). Compare Dutch geen, Yiddish קיין (keyn).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "kein is declined exactly like ein in the singular – but unlike ein it has a plural: keine Tomaten."
+    ],
+    "pitfalls": [
+     "*Ich habe nicht eine Tomate is not the normal negation – say Ich habe keine Tomate.",
+     "kein takes the case endings of ein: keinen Kürbis (masc. accusative), keiner Gurke (fem. dative)."
+    ],
+    "subtleties": [
+     "Used alone as a pronoun it takes adjective-like endings: Hast du einen Apfel? – Nein, ich habe keinen."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

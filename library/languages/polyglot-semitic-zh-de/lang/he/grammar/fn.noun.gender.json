@@ -1,0 +1,209 @@
+{
+ "function": "fn.noun.gender",
+ "status": "realized",
+ "summary": "Every Hebrew noun is masculine or feminine — there is no neuter. The ending usually tells: nouns ending in stressed -ָה (דִּירָה, מִטָּה, מְנוֹרָה) or in -ת (דֶּלֶת, צַלַּחַת, סְטוּדֶנְטִית) are feminine; most others are masculine (בַּיִת, סֵפֶר, שֻׁלְחָן, טֶלֶפוֹן). A few must be learned: כּוֹס “glass” is feminine with no ending, לַיְלָה “night” is masculine despite its -ָה. People have their natural gender, usually in pairs: מוֹרֶה / מוֹרָה, חָבֵר / חֲבֵרָה, סְטוּדֶנְט / סְטוּדֶנְטִית. The article הַ does not show gender; you see it in the words that agree: זֶה / זֹאת, הוּא / הִיא, הָיָה / הָיְתָה.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "ending",
+    "gender",
+    "examples"
+   ],
+   "rows": [
+    [
+     "-ָה (stressed -a)",
+     "feminine",
+     "דִּירָה, מִטָּה, מְנוֹרָה, יַלְדָּה"
+    ],
+    [
+     "-ֶת, -ַת",
+     "feminine",
+     "דֶּלֶת, צַלַּחַת"
+    ],
+    [
+     "-ִית, -וּת",
+     "feminine",
+     "סְטוּדֶנְטִית"
+    ],
+    [
+     "any other ending",
+     "masculine (mostly)",
+     "בַּיִת, חֶדֶר, חַלּוֹן, קִיר, שֻׁלְחָן, כִּסֵּא, אָרוֹן, סֵפֶר, עֵט, נְיָר, טֶלֶפוֹן, מַפְתֵּחַ, תִּיק, סֵפֶל"
+    ],
+    [
+     "exceptions to learn",
+     "",
+     "כּוֹס (f.) · לַיְלָה (m.) · אִשָּׁה (f., plural נָשִׁים)"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The plural does not tell the gender",
+   "text": "חַלּוֹן → חַלּוֹנוֹת, קִיר → קִירוֹת, שֻׁלְחָן → שֻׁלְחָנוֹת, כִּסֵּא → כִּסְּאוֹת, מַפְתֵּחַ → מַפְתְּחוֹת are masculine although they end in -וֹת; נָשִׁים “women” is feminine although it ends in -ִים. Learn the gender from the singular."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Same gender as in German",
+     "points": [
+      "דֶּלֶת f. — die Tür",
+      "מְנוֹרָה f. — die Lampe",
+      "שֻׁלְחָן m. — der Tisch",
+      "כִּסֵּא m. — der Stuhl",
+      "מַפְתֵּחַ m. — der Schlüssel",
+      "אָרוֹן m. — der Schrank"
+     ]
+    },
+    {
+     "title": "Different from German",
+     "points": [
+      "סֵפֶר m. — das Buch",
+      "מִטָּה f. — das Bett",
+      "כּוֹס f. — das Glas",
+      "צַלַּחַת f. — der Teller",
+      "סֵפֶל m. — die Tasse",
+      "קִיר m. — die Wand"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Test it with זֶה / זֹאת",
+   "text": "If you know the gender, you can say “this is a …”: זֶה בַּיִת, זֹאת דִּירָה, זֶה חַלּוֹן, זֹאת כּוֹס. The demonstrative, the pronoun (הוּא / הִיא) and later the adjective and the verb all show it."
+  },
+  {
+   "t": "p",
+   "text": "You already met the exceptions in the greetings: לַיְלָה טוֹב (not טוֹבָה) shows that לַיְלָה is masculine, and בֹּקֶר טוֹב, עֶרֶב טוֹב are masculine too."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is it a person? Then natural gender.",
+    "Does it end in stressed -ָה or in -ת? Then feminine.",
+    "Is it on the exception list (כּוֹס, לַיְלָה)?",
+    "Am I being fooled by the plural ending?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it a person? → the person’s sex: מוֹרֶה (m.) / מוֹרָה (f.).",
+   "Does the singular end in stressed -ָה? → feminine (דִּירָה, מִטָּה).",
+   "Does it end in -ת (-ֶת, -ַת, -ִית, -וּת)? → feminine (דֶּלֶת, צַלַּחַת).",
+   "Otherwise → masculine (בַּיִת, סֵפֶר) — unless it is an exception (כּוֹס f., לַיְלָה m.).",
+   "Am I looking at the plural? → do not judge by -ִים / -וֹת; go back to the singular."
+  ],
+  "steps": [
+   "Look at the singular.",
+   "Apply the ending rule.",
+   "Check the exception list.",
+   "Confirm with זֶה / זֹאת."
+  ]
+ },
+ "traps": [
+  "Plural -וֹת does not mean feminine: הַחַלּוֹנוֹת הָאֵלֶּה are masculine (הֵם).",
+  "כּוֹס is feminine with no ending: הַכּוֹס הַזֹּאת, הִיא.",
+  "לַיְלָה is masculine despite -ָה: לַיְלָה טוֹב.",
+  "German gender is no guide: das Bett → מִטָּה (f.), das Buch → סֵפֶר (m.).",
+  "The article הַ is the same for both genders — it never shows the gender."
+ ],
+ "evidence": {
+  "tags": [
+   "N"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "gender_article",
+   "pos": "NOUN"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "חַלּוֹן has the plural חַלּוֹנוֹת. Its gender?",
+   "options": [
+    "masculine",
+    "feminine"
+   ],
+   "answer": "masculine",
+   "why": "The plural ending does not decide: הַחַלּוֹן הַזֶּה, הַחַלּוֹנוֹת הָהֵם — masculine."
+  },
+  {
+   "q": "Which noun is feminine although it has no feminine ending?",
+   "options": [
+    "כּוֹס",
+    "סֵפֶל",
+    "קִיר"
+   ],
+   "answer": "כּוֹס",
+   "why": "כּוֹס “glass, cup” is feminine in standard Hebrew: הַכּוֹס הַזֹּאת."
+  },
+  {
+   "q": "Which noun is masculine although it ends in -ָה?",
+   "options": [
+    "לַיְלָה",
+    "מִטָּה",
+    "דִּירָה"
+   ],
+   "answer": "לַיְלָה",
+   "why": "That is why we say לַיְלָה טוֹב, not *טוֹבָה."
+  },
+  {
+   "q": "What shows the gender of a noun in הַסֵּפֶר?",
+   "options": [
+    "nothing in the article — only the words that agree",
+    "the article הַ",
+    "the dagesh"
+   ],
+   "answer": "nothing in the article — only the words that agree",
+   "why": "הַ is the same for both genders; זֶה / זֹאת, הוּא / הִיא and הָיָה / הָיְתָה show it."
+  },
+  {
+   "q": "German das Bett is neuter. Hebrew מִטָּה is …",
+   "options": [
+    "feminine",
+    "masculine",
+    "neuter"
+   ],
+   "answer": "feminine",
+   "why": "Hebrew has no neuter; מִטָּה ends in -ָה → feminine."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.noun.gender",
+   "note": "Arabic has the same two genders; its feminine ending ـة (-a / -at) is the twin of Hebrew -ָה / -ַת, and Arabic too has unmarked feminines."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.noun.gender",
+   "note": "German has three genders and shows them in the article (der / die / das); Hebrew has two and shows them only through agreement."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.noun.gender",
+   "note": "Chinese nouns have no grammatical gender at all."
+  }
+ ]
+}

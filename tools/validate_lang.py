@@ -188,6 +188,7 @@ def validate(root, only=None, strict=True, batch=None):
     if course.get('format') != 'noema.langcourse/v1': v.E('course.json', 'format must be "noema.langcourse/v1"')
     for k in ('id', 'title', 'explainLang'): need_str(v, 'course.json', course, k)
     langs = course.get('languages') or []
+    draft = set(course.get('draft') or [])   # nodes whose words are being written: not offered to learners yet (§4.2)
     if not langs or not all(isinstance(x, str) for x in langs): v.E('course.json', '“languages” must list the language codes of the course')
     for L in (course.get('defaults', {}).get('depth') or {}):
         if L not in langs: v.E('course.json', f'depth given for “{L}”, which is not a course language')
@@ -341,7 +342,8 @@ def validate(root, only=None, strict=True, batch=None):
                 if len(ns) > 1: v.E(f'core/nodes.json · {p}', f'in {L} two lessons follow it ({", ".join(sorted(ns))}); lessons form a chain')
             if len(firsts) == 1 and 'fn.overview' in functions and 'fn.overview' not in lesson_functions(nodes[firsts[0]], L, typ):
                 v.E(f'core/nodes.json · {firsts[0]}', f'the first lesson of {L} is the overview (functions: fn.overview, D11)')
-            last = [nid for nid in mylessons if not nxt.get(nid)]
+            found = [nid for nid in mylessons if nodes[nid].get('stage', 'foundations') == 'foundations']
+            last = [nid for nid in found if not any(x in found for x in nxt.get(nid, []))]
             def reaches(nid, target, seen=None):
                 seen = seen or set()
                 for p in eff(nid):
@@ -423,7 +425,7 @@ def validate(root, only=None, strict=True, batch=None):
                         v.E(w, f'{len(syl)} pinyin syllables for {len(lemma)} characters')
                     for s in syl:
                         for e in pinyin_syllable_errors(s): v.E(w, e)
-                    if x.get('pos') == 'NOUN' and not x.get('measure'): v.E(w, 'a noun needs its measure word(s) (measure)')
+                    if x.get('pos') == 'NOUN' and not x.get('measure') and not x.get('measureNone'): v.E(w, 'a noun needs its measure word(s) (measure), or measureNone with the reason (人们)')
             for a in d.get('absent') or []:
                 cid = a.get('concept'); w = f'{where} · absent {cid}'
                 if owner.get(cid) != nid: v.E(w, f'concept “{cid}” is not in node {nid}')
@@ -433,7 +435,7 @@ def validate(root, only=None, strict=True, batch=None):
             pending_cov.append((where, nid, covered))
         for where, nid, covered in pending_cov:
             for cid in nodes[nid].get('concepts') or []:
-                if cid not in covered and cid not in later_cov: (v.E if not batch or nid in batch else v.W)(where, f'concept “{cid}” has no word and is not marked absent')
+                if cid not in covered and cid not in later_cov: (v.E if (batch and nid in batch) or (not batch and nid not in draft) else v.W)(where, f'concept “{cid}” has no word and is not marked absent')
 
         # grammar realizations
         for nid in mylessons:
@@ -522,10 +524,16 @@ def validate(root, only=None, strict=True, batch=None):
                 used = []; first = True
                 for i, k in enumerate(toks):
                     tw = f'{w} · token {i + 1} “{k.get("t")}”'
-                    if k.get('p'): continue
+                    if k.get('p'):
+                        if k.get('t') and k['t'][-1] in '.?!。？！؟': first = True   # a new sentence inside the text (an exchange): it may start with a capital
+                        continue
+                    if k.get('name'):   # a proper name (Anna, דָּוִד): no lexeme, never taught, never required
+                        if k.get('l') or k.get('f'): v.E(tw, 'a name has no lexeme (l) and no cell (f)')
+                        first = False; continue
                     if k.get('parts'):
                         if ''.join(p.get('t', '') for p in k['parts']) != k.get('t'): v.E(tw, 'the parts do not spell the token')
-                        for j, p in enumerate(k['parts']): used += check_token(p, f'{tw} · part {j + 1}', first and j == 0)
+                        for j, p in enumerate(k['parts']):
+                            if not p.get('name'): used += check_token(p, f'{tw} · part {j + 1}', first and j == 0)
                     else: used += check_token(k, tw, first)
                     first = False
                 if join_tokens(toks, lj.get('tokenJoin')) != s.get('text'): v.E(w, f'text “{s.get("text")}” ≠ the tokens joined “{join_tokens(toks, lj.get("tokenJoin"))}”')

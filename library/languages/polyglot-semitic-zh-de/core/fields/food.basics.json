@@ -1,0 +1,184 @@
+{
+ "field": "food.basics",
+ "title": "Food and drink",
+ "subgroups": [
+  {
+   "id": "food",
+   "title": "Food"
+  },
+  {
+   "id": "drink",
+   "title": "Drinks"
+  },
+  {
+   "id": "meal",
+   "title": "Meals"
+  }
+ ],
+ "sources": [
+  "Everyday food, drinks and meals (vegetables, fruit and the rest have their own fields) — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "food.bread",
+   "gloss": "bread",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "food.cheese",
+   "gloss": "cheese",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "food.egg",
+   "gloss": "egg",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "food.meat",
+   "gloss": "meat",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "food.fish",
+   "gloss": "fish (as food)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "food.chicken",
+   "gloss": "chicken (as food)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "food.rice",
+   "gloss": "rice (cooked, as food)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "food.soup",
+   "gloss": "soup",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "food.salad",
+   "gloss": "salad (the dish)",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "food.fruit",
+   "gloss": "fruit",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "food.apple",
+   "gloss": "apple",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "food.sugar",
+   "gloss": "sugar",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "food.salt",
+   "gloss": "salt",
+   "subgroup": "food",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "drink.water",
+   "gloss": "water",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "drink.tea",
+   "gloss": "tea",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "drink.coffee",
+   "gloss": "coffee",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "drink.milk",
+   "gloss": "milk",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "drink.juice",
+   "gloss": "juice",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "drink.wine",
+   "gloss": "wine",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "drink.beer",
+   "gloss": "beer",
+   "subgroup": "drink",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "meal.breakfast",
+   "gloss": "breakfast",
+   "subgroup": "meal",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "meal.lunch",
+   "gloss": "lunch",
+   "subgroup": "meal",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "meal.dinner",
+   "gloss": "dinner, supper",
+   "subgroup": "meal",
+   "tier": 1,
+   "rank": 23
+  }
+ ]
+}

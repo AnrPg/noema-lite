@@ -50,5 +50,22 @@
     ]
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.question.yesno",
+   "note": "Arabic opens a yes/no question with هَلْ or أَ — the counterpart of the formal הַאִם."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "German puts the verb first (Willst du …?) and answers a negative question with doch; Hebrew keeps the statement order."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.yesno",
+   "note": "Chinese adds 吗 at the end or uses A-not-A (要不要); Hebrew uses only intonation or הַאִם."
+  }
  ]
 }

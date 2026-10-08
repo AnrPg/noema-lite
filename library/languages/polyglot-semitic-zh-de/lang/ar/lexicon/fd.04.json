@@ -1,0 +1,2524 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:bayt",
+   "lemma": "بَيْت",
+   "pos": "NOUN",
+   "senses": [
+    "home.house"
+   ],
+   "gender": "MASC",
+   "root": "ب ي ت",
+   "translit": "bayt",
+   "forms": {
+    "N;NOM;SG;INDF": "بَيْتٌ",
+    "N;NOM;PL;INDF": "بُيُوتٌ",
+    "N;NOM;SG;DEF": "الْبَيْتُ",
+    "N;NOM;PL;DEF": "الْبُيُوتُ",
+    "N;ACC;SG;INDF": "بَيْتًا",
+    "N;ACC;PL;INDF": "بُيُوتًا",
+    "N;ACC;SG;DEF": "الْبَيْتَ",
+    "N;ACC;PL;DEF": "الْبُيُوتَ",
+    "N;GEN;SG;INDF": "بَيْتٍ",
+    "N;GEN;PL;INDF": "بُيُوتٍ",
+    "N;GEN;SG;DEF": "الْبَيْتِ",
+    "N;GEN;PL;DEF": "الْبُيُوتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "House and home at once — family, warmth, hospitality.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "house; home",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.house"
+     },
+     {
+      "id": "s2",
+      "def": "verse (of a poem) — plural أَبْيَات",
+      "register": [
+       "literary"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "family, household",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا بَيْتِي.",
+      "tr": "This is my house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا فِي الْبَيْتِ الْآنَ.",
+      "tr": "I am at home now.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا بَيْتٌ مِنْ قَصِيدَةٍ لِلْمُتَنَبِّي.",
+      "tr": "This is a verse from a poem by al-Mutanabbī.",
+      "register": "literary",
+      "context": "poetry",
+      "sense": "s2"
+     },
+     {
+      "text": "أَهْلُ الْبَيْتِ",
+      "tr": "the people of the house (also: the Prophet’s family)",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِي الْبَيْتِ",
+      "tr": "at home"
+     },
+     {
+      "text": "بَيْتٌ كَبِيرٌ",
+      "tr": "a big house"
+     },
+     {
+      "text": "رَبَّةُ بَيْتٍ",
+      "tr": "housewife"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الْبَيْتُ بَيْتُكَ",
+      "tr": "the house is your house",
+      "kind": "fixed expression",
+      "meaning": "make yourself at home",
+      "register": "neutral"
+     },
+     {
+      "text": "بَيْتُ الْقَصِيدِ",
+      "tr": "the (key) verse of the poem",
+      "kind": "idiom",
+      "meaning": "the heart of the matter, the main point",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "مَنْزِل",
+      "register": "formal",
+      "nuance": "house, residence — common in writing"
+     },
+     {
+      "word": "دَار",
+      "register": "literary",
+      "nuance": "house, abode — feminine; also in names: دَارُ النَّشْرِ (publishing house)"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *bayt- (Wiktionary, which compares Amharic ቤት bēt); Hebrew בַּיִת (bayit) is the same word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The letter ב is called bet (“house”) in Hebrew, and Arabic ب is bāʾ: the old letter was a picture of a house.",
+     "Bethlehem is בֵּית לֶחֶם, “house of bread”, in Hebrew — in Arabic بَيْتُ لَحْمٍ reads as “house of meat”, because لَحْم means meat."
+    ],
+    "pitfalls": [
+     "Two plurals, two meanings: بُيُوت = houses, أَبْيَات = verses of poetry.",
+     "بَيْت is masculine (الْبَيْتُ كَبِيرٌ), while its synonym دَار is feminine."
+    ],
+    "subtleties": [
+     "بَيْت is “home” too: فِي الْبَيْتِ = at home; أَهْلُ الْبَيْتِ = the household."
+    ]
+   }
+  },
+  {
+   "id": "ar:shaqqa",
+   "lemma": "شَقَّة",
+   "pos": "NOUN",
+   "senses": [
+    "home.flat"
+   ],
+   "gender": "FEM",
+   "root": "ش ق ق",
+   "translit": "šaqqa",
+   "forms": {
+    "N;NOM;SG;INDF": "شَقَّةٌ",
+    "N;NOM;PL;INDF": "شُقَقٌ",
+    "N;NOM;SG;DEF": "الشَّقَّةُ",
+    "N;NOM;PL;DEF": "الشُّقَقُ",
+    "N;ACC;SG;INDF": "شَقَّةً",
+    "N;ACC;PL;INDF": "شُقَقًا",
+    "N;ACC;SG;DEF": "الشَّقَّةَ",
+    "N;ACC;PL;DEF": "الشُّقَقَ",
+    "N;GEN;SG;INDF": "شَقَّةٍ",
+    "N;GEN;PL;INDF": "شُقَقٍ",
+    "N;GEN;SG;DEF": "الشَّقَّةِ",
+    "N;GEN;PL;DEF": "الشُّقَقِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "City life: a flat in a building, bought or rented.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "flat, apartment",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.flat"
+     },
+     {
+      "id": "s2",
+      "def": "compartment",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "نَسْكُنُ فِي شَقَّةٍ صَغِيرَةٍ.",
+      "tr": "We live in a small flat.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الشَّقَّةُ فِي الطَّابِقِ الثَّالِثِ.",
+      "tr": "The flat is on the third floor.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     },
+     {
+      "text": "أُرِيدُ أَنْ أَسْتَأْجِرَ شَقَّةً.",
+      "tr": "I want to rent a flat.",
+      "register": "neutral",
+      "context": "renting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "شَقَّةٌ صَغِيرَةٌ",
+      "tr": "a small flat"
+     },
+     {
+      "text": "اِسْتَأْجَرَ شَقَّةً",
+      "tr": "to rent a flat"
+     },
+     {
+      "text": "شَقَّةٌ مَفْرُوشَةٌ",
+      "tr": "a furnished flat"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "بَيْت",
+      "register": "neutral",
+      "nuance": "house, home — often used for one’s flat too"
+     },
+     {
+      "word": "مَسْكَن",
+      "register": "formal",
+      "nuance": "dwelling, residence (official language)"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary gives no origin; the word belongs to the root ش ق ق (“to split, to divide”), like شِقّ (a half, a part).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its plural keeps the doubled root letter apart: شَقَّة → شُقَق (š-q-q)."
+    ],
+    "pitfalls": [
+     "Do not confuse شَقَّة (flat) with شِقَّة (a piece, a half) or شُقَّة (distance): the same letters, other vowels (Wiktionary lists all three)."
+    ],
+    "subtleties": [
+     "شَقَّةٌ لِلْإِيجَارِ = a flat for rent; شَقَّةٌ لِلْبَيْعِ = a flat for sale."
+    ]
+   }
+  },
+  {
+   "id": "ar:ghurfa",
+   "lemma": "غُرْفَة",
+   "pos": "NOUN",
+   "senses": [
+    "home.room"
+   ],
+   "gender": "FEM",
+   "root": "غ ر ف",
+   "translit": "ġurfa",
+   "forms": {
+    "N;NOM;SG;INDF": "غُرْفَةٌ",
+    "N;NOM;PL;INDF": "غُرَفٌ",
+    "N;NOM;SG;DEF": "الْغُرْفَةُ",
+    "N;NOM;PL;DEF": "الْغُرَفُ",
+    "N;ACC;SG;INDF": "غُرْفَةً",
+    "N;ACC;PL;INDF": "غُرَفًا",
+    "N;ACC;SG;DEF": "الْغُرْفَةَ",
+    "N;ACC;PL;DEF": "الْغُرَفَ",
+    "N;GEN;SG;INDF": "غُرْفَةٍ",
+    "N;GEN;PL;INDF": "غُرَفٍ",
+    "N;GEN;SG;DEF": "الْغُرْفَةِ",
+    "N;GEN;PL;DEF": "الْغُرَفِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A room of the house — and of hotels, offices, institutions.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "room",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.room"
+     },
+     {
+      "id": "s2",
+      "def": "chamber (an institution: chamber of commerce)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذِهِ غُرْفَةُ النَّوْمِ.",
+      "tr": "This is the bedroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْغُرْفَةُ كَبِيرَةٌ وَنَظِيفَةٌ.",
+      "tr": "The room is big and clean.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "غُرْفَةُ التِّجَارَةِ وَالصِّنَاعَةِ",
+      "tr": "the Chamber of Commerce and Industry",
+      "register": "formal",
+      "context": "business",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "غُرْفَةُ النَّوْمِ",
+      "tr": "bedroom"
+     },
+     {
+      "text": "غُرْفَةُ الْمَعِيشَةِ",
+      "tr": "living room"
+     },
+     {
+      "text": "غُرْفَةُ الطَّعَامِ",
+      "tr": "dining room"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "حُجْرَة",
+      "register": "formal",
+      "nuance": "room, chamber — more literary"
+     },
+     {
+      "word": "أُوضَة",
+      "register": "regional",
+      "nuance": "room (from Turkish oda) — everyday Egyptian and Levantine",
+      "region": "Egypt, Levant"
+     }
+    ],
+    "etymology": {
+     "text": "Root غ ر ف; Wiktionary gives no older origin. Through Andalusian Arabic it gave Old Spanish and Catalan algorfa (an attic, a granary), and Swahili ghorofa (storey).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Swahili ghorofa (an upper floor) comes from غُرْفَة (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The usual plural is غُرَف (ġuraf); غُرُفَات / غُرْفَات also exist.",
+     "In “bedroom” the first noun has no article and the second has it: غُرْفَةُ النَّوْمِ — never *الْغُرْفَةُ النَّوْمِ."
+    ],
+    "subtleties": [
+     "Rooms are named by iḍāfa (noun + genitive): غُرْفَةُ النَّوْمِ = “room of the sleep”, غُرْفَةُ الْجُلُوسِ = sitting room."
+    ]
+   }
+  },
+  {
+   "id": "ar:bab",
+   "lemma": "بَاب",
+   "pos": "NOUN",
+   "senses": [
+    "home.door"
+   ],
+   "gender": "MASC",
+   "root": "ب و ب",
+   "translit": "bāb",
+   "forms": {
+    "N;NOM;SG;INDF": "بَابٌ",
+    "N;NOM;PL;INDF": "أَبْوَابٌ",
+    "N;NOM;SG;DEF": "الْبَابُ",
+    "N;NOM;PL;DEF": "الْأَبْوَابُ",
+    "N;ACC;SG;INDF": "بَابًا",
+    "N;ACC;PL;INDF": "أَبْوَابًا",
+    "N;ACC;SG;DEF": "الْبَابَ",
+    "N;ACC;PL;DEF": "الْأَبْوَابَ",
+    "N;GEN;SG;INDF": "بَابٍ",
+    "N;GEN;PL;INDF": "أَبْوَابٍ",
+    "N;GEN;SG;DEF": "الْبَابِ",
+    "N;GEN;PL;DEF": "الْأَبْوَابِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Door and gate — and, in books, a chapter.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "door, gate",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.door"
+     },
+     {
+      "id": "s2",
+      "def": "chapter, section (of a book)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "field, category; an opening, a chance",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِفْتَحِ الْبَابَ، مِنْ فَضْلِكَ.",
+      "tr": "Open the door, please.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "الْبَابُ مُغْلَقٌ.",
+      "tr": "The door is closed.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     },
+     {
+      "text": "قَرَأْتُ الْبَابَ الْأَوَّلَ مِنَ الْكِتَابِ.",
+      "tr": "I read the first chapter of the book.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "طَرَقَ الْبَابَ",
+      "tr": "to knock at the door"
+     },
+     {
+      "text": "فَتَحَ الْبَابَ",
+      "tr": "to open the door"
+     },
+     {
+      "text": "بَابُ الْبَيْتِ",
+      "tr": "the front door"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مِنْ بَابِ أَوْلَى",
+      "tr": "from the door of “more fitting”",
+      "kind": "fixed expression",
+      "meaning": "all the more so",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "بَوَّابَة",
+      "register": "neutral",
+      "nuance": "gate, gateway (large); also a web portal"
+     },
+     {
+      "word": "مَدْخَل",
+      "register": "neutral",
+      "nuance": "entrance (the place, not the door itself)"
+     }
+    ],
+    "etymology": {
+     "text": "Usually considered a borrowing from Aramaic בָּבָא (bāḇā, “gate”), from Akkadian bābum (“gate”); Hans Bauer considered it native (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Babylon is Akkadian Bāb-ilim, “gate of god” — the same word bāb.",
+     "Turkish bap (chapter) comes from بَاب in its sense “chapter” (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The plural is أَبْوَاب: the hidden w of the root ب و ب appears.",
+     "بَاب is masculine: الْبَابُ مَفْتُوحٌ (the door is open), not *مَفْتُوحَةٌ."
+    ],
+    "subtleties": [
+     "A book’s أَبْوَاب are its chapters; فِي هٰذَا الْبَابِ = in this field."
+    ]
+   }
+  },
+  {
+   "id": "ar:nafidha",
+   "lemma": "نَافِذَة",
+   "pos": "NOUN",
+   "senses": [
+    "home.window"
+   ],
+   "gender": "FEM",
+   "root": "ن ف ذ",
+   "translit": "nāfiḏa",
+   "forms": {
+    "N;NOM;SG;INDF": "نَافِذَةٌ",
+    "N;NOM;PL;INDF": "نَوَافِذُ",
+    "N;NOM;SG;DEF": "النَّافِذَةُ",
+    "N;NOM;PL;DEF": "النَّوَافِذُ",
+    "N;ACC;SG;INDF": "نَافِذَةً",
+    "N;ACC;PL;INDF": "نَوَافِذَ",
+    "N;ACC;SG;DEF": "النَّافِذَةَ",
+    "N;ACC;PL;DEF": "النَّوَافِذَ",
+    "N;GEN;SG;INDF": "نَافِذَةٍ",
+    "N;GEN;PL;INDF": "نَوَافِذَ",
+    "N;GEN;SG;DEF": "النَّافِذَةِ",
+    "N;GEN;PL;DEF": "النَّوَافِذِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The standard written word for a window; speech prefers شُبَّاك.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "window",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.window"
+     },
+     {
+      "id": "s2",
+      "def": "opening in a wall, air hole",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِفْتَحِ النَّافِذَةَ، مِنْ فَضْلِكَ.",
+      "tr": "Open the window, please.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "النَّوَافِذُ مَفْتُوحَةٌ.",
+      "tr": "The windows are open.",
+      "register": "neutral",
+      "context": "house",
+      "sense": "s1"
+     },
+     {
+      "text": "أَغْلِقِ النَّافِذَةَ، الْجَوُّ بَارِدٌ.",
+      "tr": "Close the window, it is cold.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فَتَحَ النَّافِذَةَ",
+      "tr": "to open the window"
+     },
+     {
+      "text": "نَافِذَةٌ عَلَى الْبَحْرِ",
+      "tr": "a window onto the sea"
+     },
+     {
+      "text": "زُجَاجُ النَّافِذَةِ",
+      "tr": "the window pane"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شُبَّاك",
+      "register": "neutral",
+      "nuance": "window — the everyday word in most dialects; also a ticket counter"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ن ف ذ, verb نَفَذَ (nafaḏa, “to pierce”): a word made in the late 19th century for “window” in literary Arabic (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A modern word: Wiktionary dates the meaning “window” to the late 19th century — before that, dialect words like شُبَّاك and طَاقَة were used."
+    ],
+    "pitfalls": [
+     "The plural نَوَافِذ is a diptote: no tanwīn — نَوَافِذُ, نَوَافِذَ.",
+     "نَافِذَة is also the feminine of the adjective نَافِذ (in force): قَوَانِينُ نَافِذَةٌ (laws in force)."
+    ],
+    "subtleties": [
+     "In speech most Arabs say شُبَّاك; نَافِذَة sounds standard and written — and is the word on a computer screen."
+    ]
+   }
+  },
+  {
+   "id": "ar:jidar",
+   "lemma": "جِدَار",
+   "pos": "NOUN",
+   "senses": [
+    "home.wall"
+   ],
+   "gender": "MASC",
+   "root": "ج د ر",
+   "translit": "jidār",
+   "forms": {
+    "N;NOM;SG;INDF": "جِدَارٌ",
+    "N;NOM;PL;INDF": "جُدْرَانٌ",
+    "N;NOM;SG;DEF": "الْجِدَارُ",
+    "N;NOM;PL;DEF": "الْجُدْرَانُ",
+    "N;ACC;SG;INDF": "جِدَارًا",
+    "N;ACC;PL;INDF": "جُدْرَانًا",
+    "N;ACC;SG;DEF": "الْجِدَارَ",
+    "N;ACC;PL;DEF": "الْجُدْرَانَ",
+    "N;GEN;SG;INDF": "جِدَارٍ",
+    "N;GEN;PL;INDF": "جُدْرَانٍ",
+    "N;GEN;SG;DEF": "الْجِدَارِ",
+    "N;GEN;PL;DEF": "الْجُدْرَانِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A solid wall — of a room, a house, a city; also figurative barriers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wall",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.wall"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عَلَى الْجِدَارِ صُورَةٌ.",
+      "tr": "There is a picture on the wall.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "جِدَارُ الْغُرْفَةِ أَبْيَضُ.",
+      "tr": "The wall of the room is white.",
+      "register": "neutral",
+      "context": "decoration",
+      "sense": "s1"
+     },
+     {
+      "text": "بَنَوْا جِدَارًا عَالِيًا.",
+      "tr": "They built a high wall.",
+      "register": "neutral",
+      "context": "building",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَلَى الْجِدَارِ",
+      "tr": "on the wall"
+     },
+     {
+      "text": "جِدَارٌ عَالٍ",
+      "tr": "a high wall"
+     },
+     {
+      "text": "جِدَارُ الصَّمْتِ",
+      "tr": "the wall of silence"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "لِلْجُدْرَانِ آذَانٌ",
+      "tr": "walls have ears",
+      "kind": "saying",
+      "meaning": "be careful what you say, someone may be listening",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "حَائِط",
+      "register": "neutral",
+      "nuance": "wall — the everyday word; plural حِيطَان"
+     },
+     {
+      "word": "سُور",
+      "register": "neutral",
+      "nuance": "an outer wall, a city wall, a fence"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary compares Hebrew גָּדֵר (gadér, “fence”), Phoenician gdr and Egyptian jmḏr.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew גָּדֵר (gadér) means “fence” — the same old root, a lower wall (Wiktionary compares them)."
+    ],
+    "pitfalls": [
+     "Two plurals: جُدْرَان (usual) and جُدُر (literary).",
+     "جِدَار is masculine: الْجِدَارُ أَبْيَضُ — the adjective has the masculine form."
+    ],
+    "subtleties": [
+     "جِدَار is a little more formal and figurative; حَائِط is everyday — the Western Wall is حَائِطُ الْمَبْكَى or حَائِطُ الْبُرَاقِ."
+    ]
+   }
+  },
+  {
+   "id": "ar:tawila",
+   "lemma": "طَاوِلَة",
+   "pos": "NOUN",
+   "senses": [
+    "home.table"
+   ],
+   "gender": "FEM",
+   "translit": "ṭāwila",
+   "forms": {
+    "N;NOM;SG;INDF": "طَاوِلَةٌ",
+    "N;NOM;PL;INDF": "طَاوِلَاتٌ",
+    "N;NOM;SG;DEF": "الطَّاوِلَةُ",
+    "N;NOM;PL;DEF": "الطَّاوِلَاتُ",
+    "N;ACC;SG;INDF": "طَاوِلَةً",
+    "N;ACC;PL;INDF": "طَاوِلَاتٍ",
+    "N;ACC;SG;DEF": "الطَّاوِلَةَ",
+    "N;ACC;PL;DEF": "الطَّاوِلَاتِ",
+    "N;GEN;SG;INDF": "طَاوِلَةٍ",
+    "N;GEN;PL;INDF": "طَاوِلَاتٍ",
+    "N;GEN;SG;DEF": "الطَّاوِلَةِ",
+    "N;GEN;PL;DEF": "الطَّاوِلَاتِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The table of everyday life — and the board of backgammon in the café.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "table",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.table"
+     },
+     {
+      "id": "s2",
+      "def": "backgammon",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْكُتُبُ عَلَى الطَّاوِلَةِ.",
+      "tr": "The books are on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "حَجَزْنَا طَاوِلَةً لِشَخْصَيْنِ.",
+      "tr": "We booked a table for two.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "يَلْعَبُ جَدِّي الطَّاوِلَةَ فِي الْمَقْهَى.",
+      "tr": "My grandfather plays backgammon at the café.",
+      "register": "colloquial",
+      "context": "leisure",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عَلَى الطَّاوِلَةِ",
+      "tr": "on the table"
+     },
+     {
+      "text": "طَاوِلَةُ الطَّعَامِ",
+      "tr": "the dining table"
+     },
+     {
+      "text": "حَجَزَ طَاوِلَةً",
+      "tr": "to book a table"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَائِدَة",
+      "register": "formal",
+      "nuance": "(dining) table, a table laid with food — literary"
+     },
+     {
+      "word": "مَكْتَب",
+      "register": "neutral",
+      "nuance": "desk; also office"
+     },
+     {
+      "word": "تَرَابِيزَة",
+      "register": "regional",
+      "nuance": "table — everyday Egyptian word",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From Italian tavola (“table”), from Latin tabula; reshaped to the native pattern فَاعِلَة, possibly by phono-semantic matching with the root ط و ل (“long”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its second meaning, backgammon, links it to Turkish tavla and Greek τάβλι — all from Latin tabula, a board."
+    ],
+    "pitfalls": [
+     "A loanword that follows Arabic rules: feminine with ة, sound plural طَاوِلَات.",
+     "مَائِدَة is a table laid with food (and the name of a sura, سُورَةُ الْمَائِدَةِ); for the piece of furniture say طَاوِلَة."
+    ],
+    "subtleties": [
+     "“To play backgammon” is لَعِبَ الطَّاوِلَةَ — the same word as the table."
+    ]
+   }
+  },
+  {
+   "id": "ar:kursi",
+   "lemma": "كُرْسِيّ",
+   "pos": "NOUN",
+   "senses": [
+    "home.chair"
+   ],
+   "gender": "MASC",
+   "root": "ك ر س",
+   "translit": "kursī",
+   "forms": {
+    "N;NOM;SG;INDF": "كُرْسِيٌّ",
+    "N;NOM;PL;INDF": "كَرَاسِيُّ",
+    "N;NOM;SG;DEF": "الْكُرْسِيُّ",
+    "N;NOM;PL;DEF": "الْكَرَاسِيُّ",
+    "N;ACC;SG;INDF": "كُرْسِيًّا",
+    "N;ACC;PL;INDF": "كَرَاسِيَّ",
+    "N;ACC;SG;DEF": "الْكُرْسِيَّ",
+    "N;ACC;PL;DEF": "الْكَرَاسِيَّ",
+    "N;GEN;SG;INDF": "كُرْسِيٍّ",
+    "N;GEN;PL;INDF": "كَرَاسِيَّ",
+    "N;GEN;SG;DEF": "الْكُرْسِيِّ",
+    "N;GEN;PL;DEF": "الْكَرَاسِيِّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "An ordinary chair — and, in high style, a throne or a professor’s chair.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chair, seat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.chair"
+     },
+     {
+      "id": "s2",
+      "def": "throne (of a king; of God)",
+      "register": [
+       "literary",
+       "religious"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "professorial chair",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِجْلِسْ عَلَى الْكُرْسِيِّ.",
+      "tr": "Sit on the chair.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْكُرْسِيُّ مُرِيحٌ.",
+      "tr": "This chair is comfortable.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "آيَةُ الْكُرْسِيِّ",
+      "tr": "the Throne Verse (Qurʾān 2:255)",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "جَلَسَ عَلَى كُرْسِيٍّ",
+      "tr": "to sit on a chair"
+     },
+     {
+      "text": "كُرْسِيٌّ مُتَحَرِّكٌ",
+      "tr": "wheelchair"
+     },
+     {
+      "text": "كُرْسِيُّ الْحُكْمِ",
+      "tr": "the seat of power"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَقْعَد",
+      "register": "neutral",
+      "nuance": "seat (in a car, bus, theatre, parliament)"
+     },
+     {
+      "word": "عَرْش",
+      "register": "literary",
+      "nuance": "throne"
+     }
+    ],
+    "etymology": {
+     "text": "Thought to be borrowed from Aramaic כּוּרְסְיָא (kursəyā); compare Biblical Hebrew כִּסֵּא (kissé), Akkadian kussûm — ultimately from Sumerian guza, “chair” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish kürsü (lectern, podium) and Malay and Indonesian kursi (chair) come from it (Wiktionary).",
+     "The chain goes back to Sumerian guza — one of the oldest traceable words in this course."
+    ],
+    "pitfalls": [
+     "The ending is a doubled yā: كُرْسِيّ (kursiyy); with the article الْكُرْسِيُّ.",
+     "The plural كَرَاسِيّ is a diptote (كَرَاسِيُّ, no tanwīn); it is usually written simply كراسي."
+    ],
+    "subtleties": [
+     "آيَةُ الْكُرْسِيِّ, the Throne Verse, is one of the best-known verses of the Qurʾān — there كُرْسِيّ is God’s throne."
+    ]
+   }
+  },
+  {
+   "id": "ar:sarir",
+   "lemma": "سَرِير",
+   "pos": "NOUN",
+   "senses": [
+    "home.bed"
+   ],
+   "gender": "MASC",
+   "root": "س ر ر",
+   "translit": "sarīr",
+   "forms": {
+    "N;NOM;SG;INDF": "سَرِيرٌ",
+    "N;NOM;PL;INDF": "أَسِرَّةٌ",
+    "N;NOM;SG;DEF": "السَّرِيرُ",
+    "N;NOM;PL;DEF": "الْأَسِرَّةُ",
+    "N;ACC;SG;INDF": "سَرِيرًا",
+    "N;ACC;PL;INDF": "أَسِرَّةً",
+    "N;ACC;SG;DEF": "السَّرِيرَ",
+    "N;ACC;PL;DEF": "الْأَسِرَّةَ",
+    "N;GEN;SG;INDF": "سَرِيرٍ",
+    "N;GEN;PL;INDF": "أَسِرَّةٍ",
+    "N;GEN;SG;DEF": "السَّرِيرِ",
+    "N;GEN;PL;DEF": "الْأَسِرَّةِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The bed (the piece of furniture); rest, sleep — and in hospitals, capacity.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bed, bedstead",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bed"
+     },
+     {
+      "id": "s2",
+      "def": "throne",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "السَّرِيرُ فِي غُرْفَةِ النَّوْمِ.",
+      "tr": "The bed is in the bedroom.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "ذَهَبَ الطِّفْلُ إِلَى السَّرِيرِ.",
+      "tr": "The child went to bed.",
+      "register": "neutral",
+      "context": "bedtime",
+      "sense": "s1"
+     },
+     {
+      "text": "فِي الْمُسْتَشْفَى خَمْسُونَ سَرِيرًا.",
+      "tr": "The hospital has fifty beds.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "سَرِيرٌ مُزْدَوَجٌ",
+      "tr": "a double bed"
+     },
+     {
+      "text": "سَرِيرُ الطِّفْلِ",
+      "tr": "the child’s bed, the cot"
+     },
+     {
+      "text": "نَامَ عَلَى السَّرِيرِ",
+      "tr": "to sleep on the bed"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فِرَاش",
+      "register": "neutral",
+      "nuance": "bedding, mattress; the bed one lies in (مَرِيضٌ فِي الْفِرَاشِ)"
+     },
+     {
+      "word": "تَخْت",
+      "register": "regional",
+      "nuance": "bed (from Persian)",
+      "region": "Levant, Iraq"
+     }
+    ],
+    "etymology": {
+     "text": "Root س ر ر; Wiktionary gives no older origin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives سُرُور (joy) and سِرّ (secret)."
+    ],
+    "pitfalls": [
+     "Plural أَسِرَّة, with a doubled r: الْأَسِرَّةُ.",
+     "Sun letter: with the article the s is doubled — السَّرِيرُ (as-sarīr)."
+    ],
+    "subtleties": [
+     "As in English, hospitals count beds: مُسْتَشْفًى بِمِئَةِ سَرِيرٍ (a hundred-bed hospital)."
+    ]
+   }
+  },
+  {
+   "id": "ar:khizana",
+   "lemma": "خِزَانَة",
+   "pos": "NOUN",
+   "senses": [
+    "home.cupboard"
+   ],
+   "gender": "FEM",
+   "root": "خ ز ن",
+   "translit": "ḫizāna",
+   "forms": {
+    "N;NOM;SG;INDF": "خِزَانَةٌ",
+    "N;NOM;PL;INDF": "خَزَائِنُ",
+    "N;NOM;SG;DEF": "الْخِزَانَةُ",
+    "N;NOM;PL;DEF": "الْخَزَائِنُ",
+    "N;ACC;SG;INDF": "خِزَانَةً",
+    "N;ACC;PL;INDF": "خَزَائِنَ",
+    "N;ACC;SG;DEF": "الْخِزَانَةَ",
+    "N;ACC;PL;DEF": "الْخَزَائِنَ",
+    "N;GEN;SG;INDF": "خِزَانَةٍ",
+    "N;GEN;PL;INDF": "خَزَائِنَ",
+    "N;GEN;SG;DEF": "الْخِزَانَةِ",
+    "N;GEN;PL;DEF": "الْخَزَائِنِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A place where things are stored and kept safe.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cupboard, wardrobe, closet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.cupboard"
+     },
+     {
+      "id": "s2",
+      "def": "safe, vault",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَلَابِسُ فِي الْخِزَانَةِ.",
+      "tr": "The clothes are in the wardrobe.",
+      "register": "neutral",
+      "context": "bedroom",
+      "sense": "s1"
+     },
+     {
+      "text": "خِزَانَةُ الْمَطْبَخِ مَمْلُوءَةٌ.",
+      "tr": "The kitchen cupboard is full.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "وَضَعَ الْمَالَ فِي الْخِزَانَةِ.",
+      "tr": "He put the money in the safe.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "خِزَانَةُ الْمَلَابِسِ",
+      "tr": "wardrobe"
+     },
+     {
+      "text": "خِزَانَةُ الْكُتُبِ",
+      "tr": "bookcase"
+     },
+     {
+      "text": "خِزَانَةُ الْمَطْبَخِ",
+      "tr": "kitchen cupboard"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "دُولَاب",
+      "register": "neutral",
+      "nuance": "cupboard, wardrobe — very common in speech (Egypt, Gulf)"
+     }
+    ],
+    "etymology": {
+     "text": "Root خ ز ن (“to store”); Wiktionary gives no older origin. It passed into Classical Persian (خِزَانَه).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English magazine and German Magazin come from the Arabic plural مَخَازِن (storehouses), of the same root خ ز ن, through Italian magazzino."
+    ],
+    "pitfalls": [
+     "Spelled with kasra: خِزَانَة (ḫizāna); خَزِينَة is another word (treasury, cash box).",
+     "The plural خَزَائِن is a diptote; the sound plural خِزَانَات is also used."
+    ],
+    "subtleties": [
+     "Literally “a place of storing”: the same root gives مَخْزَن (warehouse) and خَزْن (storage)."
+    ]
+   }
+  },
+  {
+   "id": "ar:misbah",
+   "lemma": "مِصْبَاح",
+   "pos": "NOUN",
+   "senses": [
+    "home.lamp"
+   ],
+   "gender": "MASC",
+   "root": "ص ب ح",
+   "translit": "miṣbāḥ",
+   "forms": {
+    "N;NOM;SG;INDF": "مِصْبَاحٌ",
+    "N;NOM;PL;INDF": "مَصَابِيحُ",
+    "N;NOM;SG;DEF": "الْمِصْبَاحُ",
+    "N;NOM;PL;DEF": "الْمَصَابِيحُ",
+    "N;ACC;SG;INDF": "مِصْبَاحًا",
+    "N;ACC;PL;INDF": "مَصَابِيحَ",
+    "N;ACC;SG;DEF": "الْمِصْبَاحَ",
+    "N;ACC;PL;DEF": "الْمَصَابِيحَ",
+    "N;GEN;SG;INDF": "مِصْبَاحٍ",
+    "N;GEN;PL;INDF": "مَصَابِيحَ",
+    "N;GEN;SG;DEF": "الْمِصْبَاحِ",
+    "N;GEN;PL;DEF": "الْمَصَابِيحِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light in the dark — a little “morning” in the room.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lamp",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.lamp"
+     },
+     {
+      "id": "s2",
+      "def": "headlight (of a car)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْعِلِ الْمِصْبَاحَ، مِنْ فَضْلِكَ.",
+      "tr": "Switch on the lamp, please.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "عَلَى الطَّاوِلَةِ مِصْبَاحٌ صَغِيرٌ.",
+      "tr": "There is a small lamp on the table.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "مَصَابِيحُ السَّيَّارَةِ قَوِيَّةٌ.",
+      "tr": "The car’s headlights are strong.",
+      "register": "neutral",
+      "context": "cars",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِصْبَاحٌ كَهْرَبَائِيٌّ",
+      "tr": "an electric lamp"
+     },
+     {
+      "text": "أَطْفَأَ الْمِصْبَاحَ",
+      "tr": "to switch off the lamp"
+     },
+     {
+      "text": "مِصْبَاحُ عَلَاءِ الدِّينِ",
+      "tr": "Aladdin’s lamp"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مَثَلُ نُورِهِ كَمِشْكَاةٍ فِيهَا مِصْبَاحٌ",
+      "tr": "the likeness of His light is like a niche in which there is a lamp",
+      "kind": "quote",
+      "meaning": "the Light Verse: God’s light compared to a lamp",
+      "register": "religious",
+      "source": "Qurʾān 24:35"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "لَمْبَة",
+      "register": "colloquial",
+      "nuance": "lamp, light bulb"
+     },
+     {
+      "word": "سِرَاج",
+      "register": "literary",
+      "nuance": "an oil lamp, a light (classical)"
+     },
+     {
+      "word": "فَانُوس",
+      "register": "neutral",
+      "nuance": "lantern — e.g. the Ramadan lantern"
+     }
+    ],
+    "etymology": {
+     "text": "Tool noun from the root ص ب ح (ṣ b ḥ); compare صَبْح (ṣabḥ, “dawn”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مِصْبَاح and صَبَاحُ الْخَيْرِ share the root ص ب ح (“dawn, morning”)."
+    ],
+    "pitfalls": [
+     "The plural مَصَابِيح is a diptote: no tanwīn (مَصَابِيحُ).",
+     "The pattern مِفْعَال names tools: مِصْبَاح (lamp), مِفْتَاح (key) — learn them together."
+    ],
+    "subtleties": [
+     "The light itself is ضَوْء or نُور; مِصْبَاح is the device that gives it."
+    ]
+   }
+  },
+  {
+   "id": "ar:kitab",
+   "lemma": "كِتَاب",
+   "pos": "NOUN",
+   "senses": [
+    "obj.book"
+   ],
+   "gender": "MASC",
+   "root": "ك ت ب",
+   "translit": "kitāb",
+   "forms": {
+    "N;NOM;SG;INDF": "كِتَابٌ",
+    "N;NOM;PL;INDF": "كُتُبٌ",
+    "N;NOM;SG;DEF": "الْكِتَابُ",
+    "N;NOM;PL;DEF": "الْكُتُبُ",
+    "N;ACC;SG;INDF": "كِتَابًا",
+    "N;ACC;PL;INDF": "كُتُبًا",
+    "N;ACC;SG;DEF": "الْكِتَابَ",
+    "N;ACC;PL;DEF": "الْكُتُبَ",
+    "N;GEN;SG;INDF": "كِتَابٍ",
+    "N;GEN;PL;INDF": "كُتُبٍ",
+    "N;GEN;SG;DEF": "الْكِتَابِ",
+    "N;GEN;PL;DEF": "الْكُتُبِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The book — and, in high style, the written word, a letter, the Scripture.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "book",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.book"
+     },
+     {
+      "id": "s2",
+      "def": "letter, written message",
+      "register": [
+       "formal"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "the Scripture (الْكِتَابُ)",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا كِتَابٌ جَدِيدٌ.",
+      "tr": "This is a new book.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "أَقْرَأُ كِتَابًا عَنْ تَارِيخِ مِصْرَ.",
+      "tr": "I am reading a book about the history of Egypt.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "الْكُتُبُ عَلَى الرَّفِّ.",
+      "tr": "The books are on the shelf.",
+      "register": "neutral",
+      "context": "library",
+      "sense": "s1"
+     },
+     {
+      "text": "أَهْلُ الْكِتَابِ",
+      "tr": "the People of the Book (Jews and Christians)",
+      "register": "religious",
+      "context": "religion",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَرَأَ كِتَابًا",
+      "tr": "to read a book"
+     },
+     {
+      "text": "مَعْرِضُ الْكِتَابِ",
+      "tr": "the book fair"
+     },
+     {
+      "text": "كِتَابٌ مَدْرَسِيٌّ",
+      "tr": "a schoolbook"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "وَخَيْرُ جَلِيسٍ فِي الزَّمَانِ كِتَابُ",
+      "tr": "and the best companion at any time is a book",
+      "kind": "quote",
+      "meaning": "books are the best company",
+      "register": "literary",
+      "source": "al-Mutanabbī (915–965)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "مُؤَلَّف",
+      "register": "formal",
+      "nuance": "a (written) work, a publication"
+     },
+     {
+      "word": "كُتَيِّب",
+      "register": "neutral",
+      "nuance": "booklet, brochure (diminutive)"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ك ت ب (“writing”): Wiktionary lists it as the verbal noun of كَتَبَ (kataba, “to write”) as well as “book”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish kitap, Persian and Hindi kitāb, Swahili kitabu: all from كِتَاب (Wiktionary lists dozens of descendants).",
+     "Hebrew כְּתָב (ktav, script, writing) has the same root k-t-b."
+    ],
+    "pitfalls": [
+     "The plural is كُتُب (kutub) — كِتَابَات means “writings”.",
+     "Unvocalized كتاب can also be كُتَّاب (writers, plural of كَاتِب) — the vowels and the šadda decide."
+    ],
+    "subtleties": [
+     "One root, a whole family: كَتَبَ (he wrote), كَاتِب (writer), مَكْتَب (desk, office), مَكْتَبَة (library, bookshop), مَكْتُوب (written)."
+    ]
+   }
+  },
+  {
+   "id": "ar:qalam",
+   "lemma": "قَلَم",
+   "pos": "NOUN",
+   "senses": [
+    "obj.pen"
+   ],
+   "gender": "MASC",
+   "root": "ق ل م",
+   "translit": "qalam",
+   "forms": {
+    "N;NOM;SG;INDF": "قَلَمٌ",
+    "N;NOM;PL;INDF": "أَقْلَامٌ",
+    "N;NOM;SG;DEF": "الْقَلَمُ",
+    "N;NOM;PL;DEF": "الْأَقْلَامُ",
+    "N;ACC;SG;INDF": "قَلَمًا",
+    "N;ACC;PL;INDF": "أَقْلَامًا",
+    "N;ACC;SG;DEF": "الْقَلَمَ",
+    "N;ACC;PL;DEF": "الْأَقْلَامَ",
+    "N;GEN;SG;INDF": "قَلَمٍ",
+    "N;GEN;PL;INDF": "أَقْلَامٍ",
+    "N;GEN;SG;DEF": "الْقَلَمِ",
+    "N;GEN;PL;DEF": "الْأَقْلَامِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Writing, learning, authorship — the pen as a symbol.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pen; pencil",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.pen"
+     },
+     {
+      "id": "s2",
+      "def": "handwriting, style; “by the pen of” (an author)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هَلْ عِنْدَكَ قَلَمٌ؟",
+      "tr": "Do you have a pen?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "كَتَبْتُ اسْمِي بِالْقَلَمِ الْأَزْرَقِ.",
+      "tr": "I wrote my name with the blue pen.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "مَقَالٌ بِقَلَمِ الْكَاتِبِ",
+      "tr": "an article by (lit. by the pen of) the writer",
+      "register": "neutral",
+      "context": "press",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "قَلَمُ رَصَاصٍ",
+      "tr": "pencil (lit. lead pen)"
+     },
+     {
+      "text": "قَلَمُ حِبْرٍ",
+      "tr": "ink pen"
+     },
+     {
+      "text": "قَلَمٌ جَافٌّ",
+      "tr": "ballpoint pen"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الَّذِي عَلَّمَ بِالْقَلَمِ",
+      "tr": "who taught by the pen",
+      "kind": "quote",
+      "meaning": "from the first revealed sura: God taught mankind by the pen",
+      "register": "religious",
+      "source": "Qurʾān 96:4"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "رِيشَة",
+      "register": "literary",
+      "nuance": "a quill; an artist’s brush; a writer’s pen (figurative)"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from Ancient Greek κάλαμος (kálamos, “reed”), perhaps through Geʿez ቀለም (ḳäläm) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "From Greek κάλαμος, “reed” — the first pens were cut reeds. Turkish kalem and Swahili kalamu come from the Arabic (Wiktionary)."
+    ],
+    "pitfalls": [
+     "قَلَم covers pens and pencils; a pencil is قَلَمُ رَصَاصٍ.",
+     "The plural has a hamza: أَقْلَام, الْأَقْلَامُ."
+    ],
+    "subtleties": [
+     "بِقَلَمِ فُلَانٍ under an article = “written by so-and-so” (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "ar:waraq",
+   "lemma": "وَرَق",
+   "pos": "NOUN",
+   "senses": [
+    "obj.paper"
+   ],
+   "class": "collective",
+   "gender": "MASC",
+   "root": "و ر ق",
+   "translit": "waraq",
+   "unit": "وَرَقَة",
+   "forms": {
+    "N;NOM;COLL;INDF": "وَرَقٌ",
+    "N;NOM;SG;INDF": "وَرَقَةٌ",
+    "N;NOM;PL;INDF": "أَوْرَاقٌ",
+    "N;NOM;COLL;DEF": "الْوَرَقُ",
+    "N;NOM;SG;DEF": "الْوَرَقَةُ",
+    "N;NOM;PL;DEF": "الْأَوْرَاقُ",
+    "N;ACC;COLL;INDF": "وَرَقًا",
+    "N;ACC;SG;INDF": "وَرَقَةً",
+    "N;ACC;PL;INDF": "أَوْرَاقًا",
+    "N;ACC;COLL;DEF": "الْوَرَقَ",
+    "N;ACC;SG;DEF": "الْوَرَقَةَ",
+    "N;ACC;PL;DEF": "الْأَوْرَاقَ",
+    "N;GEN;COLL;INDF": "وَرَقٍ",
+    "N;GEN;SG;INDF": "وَرَقَةٍ",
+    "N;GEN;PL;INDF": "أَوْرَاقٍ",
+    "N;GEN;COLL;DEF": "الْوَرَقِ",
+    "N;GEN;SG;DEF": "الْوَرَقَةِ",
+    "N;GEN;PL;DEF": "الْأَوْرَاقِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Paper as material; and leaves on a tree — the same word.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "paper (one sheet: وَرَقَة)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.paper"
+     },
+     {
+      "id": "s2",
+      "def": "leaves, foliage",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "paper money, banknotes; playing cards",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَحْتَاجُ إِلَى وَرَقٍ وَقَلَمٍ.",
+      "tr": "I need paper and a pen.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "أَعْطِنِي وَرَقَةً، مِنْ فَضْلِكَ.",
+      "tr": "Give me a sheet of paper, please.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "وَرَقُ الشَّجَرِ أَخْضَرُ.",
+      "tr": "The leaves of the trees are green.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "وَرَقَةٌ بَيْضَاءُ",
+      "tr": "a blank sheet"
+     },
+     {
+      "text": "وَرَقُ عِنَبٍ",
+      "tr": "vine leaves (stuffed, as a dish)"
+     },
+     {
+      "text": "وَرَقٌ مُقَوًّى",
+      "tr": "cardboard"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "قِرْطَاس",
+      "register": "literary",
+      "nuance": "paper, a sheet — a classical word"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *waraḳ- (“leaf”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish varak (a thin leaf, gold leaf) comes from وَرَق (Wiktionary).",
+     "Stuffed vine leaves are وَرَقُ عِنَبٍ — the same word as paper."
+    ],
+    "pitfalls": [
+     "وَرَق is the material (a collective, masculine); one sheet is وَرَقَة (feminine); several sheets أَوْرَاق.",
+     "أَوْرَاق often means “papers, documents”: أَوْرَاقُ السَّفَرِ (travel documents)."
+    ],
+    "subtleties": [
+     "لَعِبَ الْوَرَقَ = to play cards: the cards are “the paper”."
+    ]
+   }
+  },
+  {
+   "id": "ar:hatif",
+   "lemma": "هَاتِف",
+   "pos": "NOUN",
+   "senses": [
+    "obj.phone"
+   ],
+   "gender": "MASC",
+   "root": "ه ت ف",
+   "translit": "hātif",
+   "forms": {
+    "N;NOM;SG;INDF": "هَاتِفٌ",
+    "N;NOM;PL;INDF": "هَوَاتِفُ",
+    "N;NOM;SG;DEF": "الْهَاتِفُ",
+    "N;NOM;PL;DEF": "الْهَوَاتِفُ",
+    "N;ACC;SG;INDF": "هَاتِفًا",
+    "N;ACC;PL;INDF": "هَوَاتِفَ",
+    "N;ACC;SG;DEF": "الْهَاتِفَ",
+    "N;ACC;PL;DEF": "الْهَوَاتِفَ",
+    "N;GEN;SG;INDF": "هَاتِفٍ",
+    "N;GEN;PL;INDF": "هَوَاتِفَ",
+    "N;GEN;SG;DEF": "الْهَاتِفِ",
+    "N;GEN;PL;DEF": "الْهَوَاتِفِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses هَاتِف as “telephone”; the course gloss says “phone”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The standard written word for “telephone”; speech says تِلِفُون, مُوبَايِل, جَوَّال.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "telephone, phone",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.phone"
+     },
+     {
+      "id": "s2",
+      "def": "a voice calling out (an unseen caller)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْهَاتِفُ يَرِنُّ.",
+      "tr": "The phone is ringing.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "تَكَلَّمْتُ مَعَهُ بِالْهَاتِفِ.",
+      "tr": "I talked to him on the phone.",
+      "register": "neutral",
+      "context": "communication",
+      "sense": "s1"
+     },
+     {
+      "text": "سَمِعَ هَاتِفًا فِي اللَّيْلِ.",
+      "tr": "He heard a voice calling in the night.",
+      "register": "literary",
+      "context": "story",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هَاتِفٌ مَحْمُولٌ",
+      "tr": "mobile phone"
+     },
+     {
+      "text": "رَقْمُ الْهَاتِفِ",
+      "tr": "phone number"
+     },
+     {
+      "text": "اِتَّصَلَ بِالْهَاتِفِ",
+      "tr": "to call by phone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تِلِفُون",
+      "register": "colloquial",
+      "nuance": "telephone — the international word, everyday"
+     },
+     {
+      "word": "جَوَّال",
+      "register": "regional",
+      "nuance": "mobile phone",
+      "region": "Saudi Arabia, Gulf, Palestine"
+     },
+     {
+      "word": "مَحْمُول",
+      "register": "regional",
+      "nuance": "mobile phone",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of the verb هَتَفَ (hatafa, “to shout, to call out”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its old meaning (Wiktionary) is “a voice calling out” — a fitting name for the telephone."
+    ],
+    "pitfalls": [
+     "The plural هَوَاتِف is a diptote: هَوَاتِفُ, no tanwīn.",
+     "In speech you mostly hear تِلِفُون, مُوبَايِل, جَوَّال or مَحْمُول; هَاتِف is the written standard."
+    ],
+    "subtleties": [
+     "“To phone someone” is usually اِتَّصَلَ بِـ (to connect with); the verb هَاتَفَ (to telephone) also exists (Wiktionary)."
+    ]
+   }
+  },
+  {
+   "id": "ar:miftah",
+   "lemma": "مِفْتَاح",
+   "pos": "NOUN",
+   "senses": [
+    "obj.key"
+   ],
+   "gender": "MASC",
+   "root": "ف ت ح",
+   "translit": "miftāḥ",
+   "forms": {
+    "N;NOM;SG;INDF": "مِفْتَاحٌ",
+    "N;NOM;PL;INDF": "مَفَاتِيحُ",
+    "N;NOM;SG;DEF": "الْمِفْتَاحُ",
+    "N;NOM;PL;DEF": "الْمَفَاتِيحُ",
+    "N;ACC;SG;INDF": "مِفْتَاحًا",
+    "N;ACC;PL;INDF": "مَفَاتِيحَ",
+    "N;ACC;SG;DEF": "الْمِفْتَاحَ",
+    "N;ACC;PL;DEF": "الْمَفَاتِيحَ",
+    "N;GEN;SG;INDF": "مِفْتَاحٍ",
+    "N;GEN;PL;INDF": "مَفَاتِيحَ",
+    "N;GEN;SG;DEF": "الْمِفْتَاحِ",
+    "N;GEN;PL;DEF": "الْمَفَاتِيحِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The opener — of doors, of problems, of happiness.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "key (to a door, a car)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.key"
+     },
+     {
+      "id": "s2",
+      "def": "key (on a keyboard or piano)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "key (to a problem); legend (of a map)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيْنَ مِفْتَاحُ الْبَيْتِ؟",
+      "tr": "Where is the house key?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "نَسِيتُ الْمِفْتَاحَ فِي السَّيَّارَةِ.",
+      "tr": "I forgot the key in the car.",
+      "register": "neutral",
+      "context": "car",
+      "sense": "s1"
+     },
+     {
+      "text": "لَوْحَةُ الْمَفَاتِيحِ",
+      "tr": "the keyboard",
+      "register": "neutral",
+      "context": "computers",
+      "sense": "s2"
+     },
+     {
+      "text": "الصَّبْرُ مِفْتَاحُ الْفَرَجِ.",
+      "tr": "Patience is the key to relief.",
+      "register": "neutral",
+      "context": "proverbs",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِفْتَاحُ الْبَابِ",
+      "tr": "the door key"
+     },
+     {
+      "text": "مِفْتَاحُ السَّيَّارَةِ",
+      "tr": "the car key"
+     },
+     {
+      "text": "لَوْحَةُ الْمَفَاتِيحِ",
+      "tr": "keyboard"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "الصَّبْرُ مِفْتَاحُ الْفَرَجِ",
+      "tr": "patience is the key to relief",
+      "kind": "proverb",
+      "meaning": "be patient and things will get better",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No real synonym in MSA; مُفْتَاح (with u) is the spoken pronunciation in Egypt, the Hejaz and Morocco (Wiktionary).",
+    "etymology": {
+     "text": "Tool noun (pattern مِفْعَال) from the verb فَتَحَ (fataḥa, “to open”); Wiktionary compares Hebrew מַפְתֵּחַ (maftéakh).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מַפְתֵּחַ (maftéakh, key) is built the same way from the same root (Wiktionary).",
+     "الْفَاتِحَة, “the Opener” — the first sura of the Qurʾān — has the same root ف ت ح."
+    ],
+    "pitfalls": [
+     "The plural مَفَاتِيح is a diptote: مَفَاتِيحُ, no tanwīn.",
+     "Pattern مِفْعَال = a tool: مِفْتَاح is literally “an opener”."
+    ],
+    "subtleties": [
+     "مِفْتَاحُ الْخَرِيطَةِ is the legend of a map; مِفْتَاحُ الْحَلِّ the key to the solution."
+    ]
+   }
+  },
+  {
+   "id": "ar:haqiba",
+   "lemma": "حَقِيبَة",
+   "pos": "NOUN",
+   "senses": [
+    "obj.bag"
+   ],
+   "gender": "FEM",
+   "root": "ح ق ب",
+   "translit": "ḥaqība",
+   "forms": {
+    "N;NOM;SG;INDF": "حَقِيبَةٌ",
+    "N;NOM;PL;INDF": "حَقَائِبُ",
+    "N;NOM;SG;DEF": "الْحَقِيبَةُ",
+    "N;NOM;PL;DEF": "الْحَقَائِبُ",
+    "N;ACC;SG;INDF": "حَقِيبَةً",
+    "N;ACC;PL;INDF": "حَقَائِبَ",
+    "N;ACC;SG;DEF": "الْحَقِيبَةَ",
+    "N;ACC;PL;DEF": "الْحَقَائِبَ",
+    "N;GEN;SG;INDF": "حَقِيبَةٍ",
+    "N;GEN;PL;INDF": "حَقَائِبَ",
+    "N;GEN;SG;DEF": "الْحَقِيبَةِ",
+    "N;GEN;PL;DEF": "الْحَقَائِبِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bags of every kind — school bag, handbag, suitcase — and a minister’s portfolio.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bag; suitcase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.bag"
+     },
+     {
+      "id": "s2",
+      "def": "portfolio (of a minister)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْحَقِيبَةُ ثَقِيلَةٌ جِدًّا.",
+      "tr": "The bag is very heavy.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "وَضَعْتُ الْكُتُبَ فِي الْحَقِيبَةِ.",
+      "tr": "I put the books in the bag.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "تَوَلَّى حَقِيبَةَ الْخَارِجِيَّةِ.",
+      "tr": "He took over the foreign-affairs portfolio.",
+      "register": "formal",
+      "context": "politics",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "حَقِيبَةُ سَفَرٍ",
+      "tr": "suitcase"
+     },
+     {
+      "text": "حَقِيبَةُ يَدٍ",
+      "tr": "handbag"
+     },
+     {
+      "text": "حَقِيبَةٌ مَدْرَسِيَّةٌ",
+      "tr": "school bag"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "شَنْطَة",
+      "register": "colloquial",
+      "nuance": "bag, suitcase — the everyday word (from Turkish çanta)"
+     },
+     {
+      "word": "كِيس",
+      "register": "neutral",
+      "nuance": "a (plastic or paper) bag, a sack"
+     }
+    ],
+    "etymology": {
+     "text": "Root ح ق ب; Wiktionary gives no older origin. It passed into Ottoman Turkish (Turkish heybe, “saddlebag”), Albanian and Armenian.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish heybe (saddlebag) comes from حَقِيبَة, while the Arabic everyday word شَنْطَة comes from Turkish çanta: a loan in each direction."
+    ],
+    "pitfalls": [
+     "The plural حَقَائِب is a diptote: حَقَائِبُ.",
+     "A plastic shopping bag is كِيس, not حَقِيبَة."
+    ],
+    "subtleties": [
+     "وَزِيرٌ بِلَا حَقِيبَةٍ = a minister without portfolio."
+    ]
+   }
+  },
+  {
+   "id": "ar:finjan",
+   "lemma": "فِنْجَان",
+   "pos": "NOUN",
+   "senses": [
+    "obj.cup"
+   ],
+   "gender": "MASC",
+   "translit": "finjān",
+   "forms": {
+    "N;NOM;SG;INDF": "فِنْجَانٌ",
+    "N;NOM;PL;INDF": "فَنَاجِينُ",
+    "N;NOM;SG;DEF": "الْفِنْجَانُ",
+    "N;NOM;PL;DEF": "الْفَنَاجِينُ",
+    "N;ACC;SG;INDF": "فِنْجَانًا",
+    "N;ACC;PL;INDF": "فَنَاجِينَ",
+    "N;ACC;SG;DEF": "الْفِنْجَانَ",
+    "N;ACC;PL;DEF": "الْفَنَاجِينَ",
+    "N;GEN;SG;INDF": "فِنْجَانٍ",
+    "N;GEN;PL;INDF": "فَنَاجِينَ",
+    "N;GEN;SG;DEF": "الْفِنْجَانِ",
+    "N;GEN;PL;DEF": "الْفَنَاجِينِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A small cup of coffee or tea — hospitality in miniature.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cup (small, for coffee or tea)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.cup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فِنْجَانُ قَهْوَةٍ، مِنْ فَضْلِكَ.",
+      "tr": "A cup of coffee, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "شَرِبْتُ فِنْجَانَيْنِ مِنَ الشَّايِ.",
+      "tr": "I drank two cups of tea.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s1"
+     },
+     {
+      "text": "قَرَأَتْ لَهُ الْفِنْجَانَ.",
+      "tr": "She read his coffee cup (his fortune in the grounds).",
+      "register": "neutral",
+      "context": "tradition",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "فِنْجَانُ قَهْوَةٍ",
+      "tr": "a cup of coffee"
+     },
+     {
+      "text": "فِنْجَانُ شَايٍ",
+      "tr": "a cup of tea"
+     },
+     {
+      "text": "قِرَاءَةُ الْفِنْجَانِ",
+      "tr": "reading fortunes in coffee grounds"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "زَوْبَعَةٌ فِي فِنْجَانٍ",
+      "tr": "a storm in a cup",
+      "kind": "idiom",
+      "meaning": "a storm in a teacup — a big fuss about nothing",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "كُوب",
+      "register": "neutral",
+      "nuance": "cup, mug or glass — bigger, often without a saucer"
+     },
+     {
+      "word": "كَأْس",
+      "register": "neutral",
+      "nuance": "a glass, a goblet; also a trophy"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Classical Persian پِنْگَان (pingān), possibly from Syriac and Aramaic פִּינְכָא (pīnəkā), from Ancient Greek πίναξ (pínax, “plate, board”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek φλιτζάνι (cup) comes from Turkish fincan, from this Arabic word — which itself goes back through Persian and Aramaic to Greek πίναξ: a round trip."
+    ],
+    "pitfalls": [
+     "The plural فَنَاجِين is a diptote: فَنَاجِينُ.",
+     "فِنْجَان is masculine though small and dainty: فِنْجَانٌ صَغِيرٌ."
+    ],
+    "subtleties": [
+     "فِنْجَان is the small cup for Arabic or Turkish coffee (or tea); a big mug is كُوب."
+    ]
+   }
+  },
+  {
+   "id": "ar:kas",
+   "lemma": "كَأْس",
+   "pos": "NOUN",
+   "senses": [
+    "obj.glass"
+   ],
+   "gender": "FEM",
+   "root": "ك أ س",
+   "translit": "kaʾs",
+   "forms": {
+    "N;NOM;SG;INDF": "كَأْسٌ",
+    "N;NOM;PL;INDF": "كُؤُوسٌ",
+    "N;NOM;SG;DEF": "الْكَأْسُ",
+    "N;NOM;PL;DEF": "الْكُؤُوسُ",
+    "N;ACC;SG;INDF": "كَأْسًا",
+    "N;ACC;PL;INDF": "كُؤُوسًا",
+    "N;ACC;SG;DEF": "الْكَأْسَ",
+    "N;ACC;PL;DEF": "الْكُؤُوسَ",
+    "N;GEN;SG;INDF": "كَأْسٍ",
+    "N;GEN;PL;INDF": "كُؤُوسٍ",
+    "N;GEN;SG;DEF": "الْكَأْسِ",
+    "N;GEN;PL;DEF": "الْكُؤُوسِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A glass or goblet — water, a toast, or the cup of victory.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "glass (for drinking)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.glass"
+     },
+     {
+      "id": "s2",
+      "def": "cup, goblet; (wine) glass",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "cup (trophy)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَأْسُ مَاءٍ، مِنْ فَضْلِكَ.",
+      "tr": "A glass of water, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ الْكَأْسُ نَظِيفَةٌ.",
+      "tr": "This glass is clean.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "فَازَتْ فَرَنْسَا بِكَأْسِ الْعَالَمِ.",
+      "tr": "France won the World Cup.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "كَأْسُ مَاءٍ",
+      "tr": "a glass of water"
+     },
+     {
+      "text": "كَأْسُ الْعَالَمِ",
+      "tr": "the World Cup"
+     },
+     {
+      "text": "رَفَعَ الْكَأْسَ",
+      "tr": "to raise the glass (or the cup)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كُوب",
+      "register": "neutral",
+      "nuance": "glass, cup, mug — masculine; very common for a glass of water"
+     }
+    ],
+    "etymology": {
+     "text": "Perhaps from Proto-Semitic *kaʔs-; Wiktionary also considers a later borrowing from Aramaic.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew כּוֹס (kos, cup, glass) is the related word — and it is feminine in Hebrew too."
+    ],
+    "pitfalls": [
+     "كَأْس is feminine although it has no ة: هٰذِهِ كَأْسٌ، الْكَأْسُ نَظِيفَةٌ.",
+     "The plural كُؤُوس has its hamza on a wāw: الْكُؤُوسُ."
+    ],
+    "subtleties": [
+     "In literature كَأْس is often the wine cup — and one’s fate: كَأْسُ الْمَوْتِ, the cup of death."
+    ]
+   }
+  },
+  {
+   "id": "ar:sahn",
+   "lemma": "صَحْن",
+   "pos": "NOUN",
+   "senses": [
+    "obj.plate"
+   ],
+   "gender": "MASC",
+   "root": "ص ح ن",
+   "translit": "ṣaḥn",
+   "forms": {
+    "N;NOM;SG;INDF": "صَحْنٌ",
+    "N;NOM;PL;INDF": "صُحُونٌ",
+    "N;NOM;SG;DEF": "الصَّحْنُ",
+    "N;NOM;PL;DEF": "الصُّحُونُ",
+    "N;ACC;SG;INDF": "صَحْنًا",
+    "N;ACC;PL;INDF": "صُحُونًا",
+    "N;ACC;SG;DEF": "الصَّحْنَ",
+    "N;ACC;PL;DEF": "الصُّحُونَ",
+    "N;GEN;SG;INDF": "صَحْنٍ",
+    "N;GEN;PL;INDF": "صُحُونٍ",
+    "N;GEN;SG;DEF": "الصَّحْنِ",
+    "N;GEN;PL;DEF": "الصُّحُونِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The plate on the table — and the open courtyard of a mosque.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plate, bowl",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.plate"
+     },
+     {
+      "id": "s2",
+      "def": "dish, plateful (of food)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "courtyard (of a mosque, a house)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الصُّحُونُ عَلَى الطَّاوِلَةِ.",
+      "tr": "The plates are on the table.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "أَكَلْتُ صَحْنًا مِنَ الْأَرُزِّ.",
+      "tr": "I ate a plate of rice.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "هٰذَا الصَّحْنُ نَظِيفٌ.",
+      "tr": "This plate is clean.",
+      "register": "neutral",
+      "context": "washing up",
+      "sense": "s1"
+     },
+     {
+      "text": "صَحْنُ الْمَسْجِدِ",
+      "tr": "the courtyard of the mosque",
+      "register": "neutral",
+      "context": "architecture",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "صَحْنُ حَسَاءٍ",
+      "tr": "a soup plate"
+     },
+     {
+      "text": "غَسَلَ الصُّحُونَ",
+      "tr": "to wash the dishes"
+     },
+     {
+      "text": "صَحْنٌ لَاقِطٌ",
+      "tr": "a satellite dish"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "طَبَق",
+      "register": "neutral",
+      "nuance": "plate, dish — also a dish on a menu"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic, related to the root ص ف ح; akin to Geʿez ጻሕል (ṣaḥl, “bowl”) and Hebrew צַלַּחַת (tsalákhat, “plate, dish”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek σαγάνι (a shallow pan) — and the dish σαγανάκι named after it — comes from Turkish sahan, from Arabic صَحْن (Wiktionary)."
+    ],
+    "pitfalls": [
+     "The plural is صُحُون: غَسَلْتُ الصُّحُونَ (I washed the dishes).",
+     "Sun letter: with the article the ṣ is doubled — الصَّحْنُ."
+    ],
+    "subtleties": [
+     "The plate is صَحْن; the food on the menu is طَبَق: الطَّبَقُ الرَّئِيسِيُّ = the main course."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

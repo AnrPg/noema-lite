@@ -39,5 +39,22 @@
   "A number always needs a measure word: 三个西红柿, not *三西红柿."
  ],
  "needs": {},
- "generators": []
+ "generators": [],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.plural.noun",
+   "note": "German has several plural endings (-e, -er, -(e)n, -s, umlaut) learned with each noun; Chinese nouns never change."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.plural.noun",
+   "note": "Arabic has a dual and ‘broken’ plurals made by changing the vowels inside the word; Chinese has no plural form at all."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.plural.noun",
+   "note": "Hebrew adds -im or -ot (with vowel changes); Chinese adds nothing — 们 only for groups of people."
+  }
+ ]
 }

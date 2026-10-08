@@ -1,0 +1,178 @@
+{
+ "function": "fn.copula",
+ "status": "realized",
+ "summary": "German links a subject to what it is with the verb sein (to be), and it can never be left out: Ich bin Lehrer. Er ist hier. sein is the most irregular verb of the language – bin, bist, ist, sind, seid, sind – and the first table to know by heart. With a job, a role or a nationality German uses no article: Ich bin Lehrerin (not *eine Lehrerin), Er ist Student. After das the verb agrees with what follows: Das ist ein Tisch, but Das sind Kinder and Das bin ich.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "person",
+    "singular",
+    "plural"
+   ],
+   "rows": [
+    [
+     "1st",
+     "ich bin",
+     "wir sind"
+    ],
+    [
+     "2nd (informal)",
+     "du bist",
+     "ihr seid"
+    ],
+    [
+     "3rd",
+     "er / sie / es ist",
+     "sie sind"
+    ],
+    [
+     "polite",
+     "Sie sind",
+     "Sie sind"
+    ]
+   ],
+   "caption": "sein in the present"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "No article with jobs",
+   "text": "Ich bin Lehrer. Sie ist Studentin. Wir sind Schüler. An article comes only with an adjective or a specific person: Er ist ein guter Lehrer. Das ist der Lehrer."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Man or woman?",
+   "text": "The job word follows the person: Er ist Lehrer – Sie ist Lehrerin; Ich bin Student (a man) – Ich bin Studentin (a woman)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Das ist / Das sind / Das bin ich",
+   "text": "In pointing sentences the verb agrees with the noun or pronoun after it: Das ist ein Kind. Das sind Kinder. Das bin ich. Das sind wir."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "German",
+     "points": [
+      "Ich bin Student.",
+      "sein is always there",
+      "no article with jobs"
+     ]
+    },
+    {
+     "title": "Russian, Arabic, Hebrew",
+     "points": [
+      "я студент · ana ṭālib · ani student",
+      "no “to be” in the present",
+      "the two nouns simply stand side by side"
+     ]
+    },
+    {
+     "title": "Chinese",
+     "points": [
+      "我是学生 (wǒ shì xuésheng)",
+      "是 links two nouns",
+      "but not adjectives: 我很好"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who or what is the subject? → ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind.",
+   "Is the complement a job, role or nationality without an adjective? → no article (Ich bin Lehrer).",
+   "Is the subject a woman or a girl? → the feminine job word (Lehrerin, Studentin, Schülerin).",
+   "Does the sentence start with Das and a plural or a pronoun follows? → Das sind Kinder / Das bin ich.",
+   "Is it a yes/no question? → sein comes first: Bist du Student?"
+  ],
+  "steps": [
+   "Find the subject.",
+   "Pick the form of sein.",
+   "Add the complement (job without article, place, or a noun with its article)."
+  ]
+ },
+ "traps": [
+  "*Ich bin ein Lehrer – with a job German uses no article (unless an adjective comes in: ein guter Lehrer).",
+  "ihr seid (you are) vs seit (since): same sound, different spelling.",
+  "Das sind Freunde, not *Das ist Freunde.",
+  "wir sind, sie sind and Sie sind are the same form – the pronoun decides the meaning.",
+  "Feeling cold or bad uses the dative, not “I am”: Mir ist kalt (Ich bin kalt = I am a cold person)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:sein"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;1;SG",
+  "V;PRS;2;SG",
+  "V;PRS;3;SG",
+  "V;PRS;1;PL",
+  "V;PRS;2;PL",
+  "V;PRS;3;PL"
+ ],
+ "needs": {
+  "VERB": 1,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "de:sein"
+   ],
+   "cells": [
+    "V;PRS;1;SG",
+    "V;PRS;2;SG",
+    "V;PRS;3;SG",
+    "V;PRS;1;PL",
+    "V;PRS;2;PL",
+    "V;PRS;3;PL"
+   ],
+   "count": 12
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.copula"
+    ],
+    "variant": "Number"
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.copula",
+   "note": "Arabic has no “to be” in the present: huwa ṭālib (he student); kāna appears in the past and future."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.copula",
+   "note": "Hebrew has no present “to be” either: hu student (he student); haya / hayta in the past."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.copula",
+   "note": "Chinese 是 links two nouns (我是老师), but an adjective needs no 是 (他很高)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.pronoun.subject",
+   "note": "The form of sein depends on the subject pronoun."
+  }
+ ]
+}

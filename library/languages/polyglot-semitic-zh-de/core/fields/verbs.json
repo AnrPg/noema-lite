@@ -1,0 +1,145 @@
+{
+ "field": "verbs",
+ "title": "Everyday verbs",
+ "subgroups": [
+  {
+   "id": "eat",
+   "title": "Eating and drinking"
+  },
+  {
+   "id": "move",
+   "title": "Going and coming"
+  }
+ ],
+ "sources": [
+  "The first verbs: eating and drinking, going and coming — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "verb.eat",
+   "gloss": "to eat",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "verb.drink",
+   "gloss": "to drink",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "verb.want",
+   "gloss": "to want",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "verb.like",
+   "gloss": "to like",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "verb.cook",
+   "gloss": "to cook",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "verb.buy",
+   "gloss": "to buy",
+   "subgroup": "eat",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "verb.go",
+   "gloss": "to go",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "verb.come",
+   "gloss": "to come",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "verb.walk",
+   "gloss": "to walk, go on foot",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "verb.run",
+   "gloss": "to run",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "verb.drive",
+   "gloss": "to drive (a car)",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "verb.travel",
+   "gloss": "to travel",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "verb.return",
+   "gloss": "to return, come back",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "verb.enter",
+   "gloss": "to enter, go in",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "verb.leave",
+   "gloss": "to leave, go out (of a place)",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "verb.arrive",
+   "gloss": "to arrive",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "verb.stay",
+   "gloss": "to stay",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "verb.wait",
+   "gloss": "to wait",
+   "subgroup": "move",
+   "tier": 1,
+   "rank": 18
+  }
+ ]
+}

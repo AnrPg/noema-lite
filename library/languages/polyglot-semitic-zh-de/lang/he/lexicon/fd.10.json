@@ -1,0 +1,226 @@
+{
+ "lexemes": [
+  {
+   "id": "he:ma",
+   "lemma": "מָה",
+   "pos": "PRON",
+   "senses": [
+    "q.what"
+   ],
+   "translit": "ma",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity; also surprise and admiration.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (interrogative)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "how …! (in exclamations: מָה יָפֶה!)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה אַתָּה שׁוֹתֶה?",
+      "tr": "What are you (m.) drinking?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה זֶה?",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה נִשְׁמָע?",
+      "tr": "How are things? (“What is heard?”)",
+      "register": "colloquial",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה יָפֶה!",
+      "tr": "How beautiful!",
+      "register": "informal",
+      "context": "exclamation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מָה נִשְׁמָע?",
+      "tr": "how are you? what’s up?"
+     },
+     {
+      "text": "מָה הַשָּׁעָה?",
+      "tr": "what time is it?"
+     },
+     {
+      "text": "מָה פִּתְאֹם!",
+      "tr": "no way!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "מַה נִּשְׁתַּנָּה הַלַּיְלָה הַזֶּה",
+      "tr": "what has changed (on) this night",
+      "kind": "quote",
+      "meaning": "the Four Questions of the Seder",
+      "register": "religious",
+      "source": "Passover Haggadah"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "מַה",
+      "register": "literary",
+      "nuance": "the classical spelling with patah, followed by a doubled consonant: מַה נִּשְׁתַּנָּה"
+     }
+    ],
+    "etymology": {
+     "text": "Cognates such as Aramaic מָה (mā, “what”), Arabic مَا (mā, “what”) and Ugaritic 𐎎𐎅 (mh) can be found across the Central Semitic languages.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Passover Seder’s Four Questions open with מַה נִּשְׁתַּנָּה הַלַּיְלָה הַזֶּה — “What makes this night different?”"
+    ],
+    "pitfalls": [
+     "No verb “is” is needed: מָה זֶה? = What is this?",
+     "“Which …?” is usually אֵיזֶה / אֵיזוֹ, not מָה: אֵיזֶה יָרָק? (which vegetable?)."
+    ],
+    "subtleties": [
+     "מָה alone (“What?!”) can express surprise or impatience, depending on the tone."
+    ]
+   }
+  },
+  {
+   "id": "he:eifo",
+   "lemma": "אֵיפֹה",
+   "pos": "ADV",
+   "senses": [
+    "q.where"
+   ],
+   "translit": "efo",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Looking for things, people and places.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where? (at what place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "where (in indirect questions: אֲנִי לֹא יוֹדֵעַ אֵיפֹה …)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵיפֹה הַגֶּזֶר?",
+      "tr": "Where is the carrot?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה אַתָּה גָּר?",
+      "tr": "Where do you (m.) live?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵיפֹה הַשֵּׁרוּתִים?",
+      "tr": "Where are the toilets?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא יוֹדֵעַ אֵיפֹה הוּא.",
+      "tr": "I (m.) don’t know where he is.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מֵאֵיפֹה?",
+      "tr": "from where?"
+     },
+     {
+      "text": "אֵיפֹה אַתָּה?",
+      "tr": "where are you (m.)?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "הֵיכָן",
+      "register": "formal",
+      "nuance": "the formal and literary “where”"
+     },
+     {
+      "word": "אַיֵּה",
+      "register": "literary",
+      "nuance": "a poetic, Biblical “where (is)?”"
+     }
+    ],
+    "etymology": {
+     "text": "From אֵי (e, “where”) + פֹּה (po, “here”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is literally “where-here”: אֵי + פֹּה.",
+     "Do not confuse it with אֵיפָה “ephah” (a Biblical dry measure): אֵיפָה וְאֵיפָה (“an ephah and an ephah”) means a double standard."
+    ],
+    "pitfalls": [
+     "“Where to?” is לְאָן, not אֵיפֹה: לְאָן אַתָּה הוֹלֵךְ?",
+     "Spelled with a final ה although it is pronounced efó."
+    ],
+    "subtleties": [
+     "“Where are you from?” is מֵאֵיפֹה אַתָּה? (מֵ = from)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

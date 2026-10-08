@@ -83,6 +83,7 @@ function overviewCard(c, g) {
     h('div', { class: 'lx-callout k-key' }, h('b', {}, `Type: ${type?.name || g.typology?.type}. `), wordsIn(c, g.typology?.why), g.typology?.alsoShows ? h('div', { class: 'tiny' }, 'Also: ', wordsIn(c, g.typology.alsoShows)) : null),
     h('h4', {}, '✨ What is special from the very beginning'),
     h('ul', { class: 'lx-list' }, ...(g.peculiarities || []).map(p => h('li', {}, h('b', {}, p.title), ' — ', wordsIn(c, p.text)))),
+    g.pathNote ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🛤️ Its path through the steps '), wordsIn(c, g.pathNote)) : null,
     (g.forYou || []).length ? [h('h4', {}, '🧭 For you'), h('ul', { class: 'lx-list' }, ...g.forYou.map(f => h('li', {}, info(f.lang).flag, ' ', wordsIn(c, f.text))))] : null,
     others.length ? h('p', { class: 'tiny' }, 'The same overview for: ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).name))) : null);
 }

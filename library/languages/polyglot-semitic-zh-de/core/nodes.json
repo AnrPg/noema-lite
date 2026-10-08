@@ -1,35 +1,749 @@
 {
  "nodes": [
   {
-   "id": "core.1",
-   "kind": "core",
-   "title": "Me, you and the first verbs",
+   "id": "fd.00",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 0,
+   "title": "The language and the four types of languages",
+   "concepts": [],
+   "functions": {
+    "*": [
+     "fn.overview"
+    ],
+    "isolating": [
+     "fn.tones"
+    ]
+   },
+   "prereqs": []
+  },
+  {
+   "id": "fd.01",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 1,
+   "title": "I, you, he … — to be — people",
    "concepts": [
     "pron.i",
     "pron.you.sg",
     "pron.he",
     "pron.she",
+    "pron.it",
     "pron.we",
+    "pron.you.pl",
     "pron.they",
     "verb.be",
-    "poss.have",
-    "verb.eat",
-    "verb.drink",
-    "verb.buy",
-    "verb.like",
-    "verb.want",
-    "part.yes",
-    "part.no",
-    "part.not",
     "conj.and",
     "det.def",
     "det.indef",
-    "dem.this",
-    "q.what",
-    "q.where",
-    "adv.here"
+    "person.man",
+    "person.woman",
+    "person.boy",
+    "person.girl",
+    "person.child",
+    "person.person",
+    "person.people",
+    "person.friend",
+    "person.student",
+    "person.teacher"
    ],
-   "prereqs": []
+   "functions": {
+    "*": [
+     "fn.pronoun.subject",
+     "fn.copula"
+    ],
+    "agglutinating": [
+     "fn.personal.suffix"
+    ],
+    "polysynthetic": [
+     "fn.verb.person"
+    ]
+   },
+   "prereqs": [
+    "fd.00"
+   ]
+  },
+  {
+   "id": "fd.02",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 2,
+   "title": "Hello, thank you: greetings and polite words",
+   "concepts": [
+    "greet.hello",
+    "greet.goodmorning",
+    "greet.goodevening",
+    "greet.goodnight",
+    "greet.goodbye",
+    "greet.seeyou",
+    "greet.howareyou",
+    "greet.fine",
+    "greet.myname",
+    "greet.nicetomeet",
+    "greet.thanks",
+    "greet.welcome",
+    "greet.please",
+    "greet.sorry",
+    "greet.excuseme",
+    "part.yes",
+    "part.no"
+   ],
+   "functions": {
+    "*": [
+     "fn.greetings"
+    ]
+   },
+   "prereqs": [
+    "fd.01"
+   ]
+  },
+  {
+   "id": "fd.03",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 3,
+   "title": "This and that, here and there",
+   "concepts": [
+    "dem.this",
+    "dem.that",
+    "dem.these",
+    "dem.those",
+    "adv.here",
+    "adv.there"
+   ],
+   "functions": {
+    "*": [
+     "fn.demonstrative"
+    ],
+    "isolating": [
+     "fn.measure.word"
+    ]
+   },
+   "prereqs": [
+    "fd.02"
+   ]
+  },
+  {
+   "id": "fd.04",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 4,
+   "title": "Things at home: the noun, its gender and the article",
+   "concepts": [
+    "home.house",
+    "home.flat",
+    "home.room",
+    "home.door",
+    "home.window",
+    "home.wall",
+    "home.table",
+    "home.chair",
+    "home.bed",
+    "home.cupboard",
+    "home.lamp",
+    "obj.book",
+    "obj.pen",
+    "obj.paper",
+    "obj.phone",
+    "obj.key",
+    "obj.bag",
+    "obj.cup",
+    "obj.glass",
+    "obj.plate"
+   ],
+   "functions": {
+    "*": [
+     "fn.noun.gender",
+     "fn.definite"
+    ],
+    "fusional": [
+     "fn.agreement",
+     "fn.case.basic"
+    ],
+    "agglutinating": [
+     "fn.case.basic"
+    ]
+   },
+   "prereqs": [
+    "fd.03"
+   ]
+  },
+  {
+   "id": "fd.05",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 5,
+   "title": "Numbers and the plural",
+   "concepts": [
+    "num.0",
+    "num.1",
+    "num.2",
+    "num.3",
+    "num.4",
+    "num.5",
+    "num.6",
+    "num.7",
+    "num.8",
+    "num.9",
+    "num.10",
+    "num.11",
+    "num.12",
+    "num.13",
+    "num.14",
+    "num.15",
+    "num.16",
+    "num.17",
+    "num.18",
+    "num.19",
+    "num.20",
+    "num.30",
+    "num.40",
+    "num.50",
+    "num.60",
+    "num.70",
+    "num.80",
+    "num.90",
+    "num.100",
+    "num.1000",
+    "quant.many",
+    "quant.few",
+    "quant.alittle",
+    "quant.all",
+    "quant.some"
+   ],
+   "functions": {
+    "*": [
+     "fn.numerals",
+     "fn.plural.noun"
+    ],
+    "agglutinating": [
+     "fn.vowel.harmony"
+    ]
+   },
+   "prereqs": [
+    "fd.04"
+   ]
+  },
+  {
+   "id": "fd.06",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 6,
+   "title": "To have — the family — my, your",
+   "concepts": [
+    "poss.have",
+    "family.family",
+    "family.parents",
+    "family.mother",
+    "family.father",
+    "family.son",
+    "family.daughter",
+    "family.brother",
+    "family.sister",
+    "family.husband",
+    "family.wife",
+    "family.baby",
+    "family.grandparents",
+    "family.grandfather",
+    "family.grandmother",
+    "family.grandson",
+    "family.granddaughter",
+    "family.uncle",
+    "family.aunt",
+    "family.cousin",
+    "family.nephew",
+    "family.niece",
+    "family.relative",
+    "poss.my",
+    "poss.your.sg",
+    "poss.his",
+    "poss.her",
+    "poss.our",
+    "poss.your.pl",
+    "poss.their"
+   ],
+   "functions": {
+    "*": [
+     "fn.have",
+     "fn.possessive"
+    ]
+   },
+   "prereqs": [
+    "fd.05"
+   ]
+  },
+  {
+   "id": "fd.07",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 7,
+   "title": "Eating and drinking: verbs in the present",
+   "concepts": [
+    "verb.eat",
+    "verb.drink",
+    "verb.want",
+    "verb.like",
+    "verb.cook",
+    "verb.buy",
+    "food.bread",
+    "food.cheese",
+    "food.egg",
+    "food.meat",
+    "food.fish",
+    "food.chicken",
+    "food.rice",
+    "food.soup",
+    "food.salad",
+    "food.fruit",
+    "food.apple",
+    "food.sugar",
+    "food.salt",
+    "drink.water",
+    "drink.tea",
+    "drink.coffee",
+    "drink.milk",
+    "drink.juice",
+    "drink.wine",
+    "drink.beer",
+    "meal.breakfast",
+    "meal.lunch",
+    "meal.dinner"
+   ],
+   "functions": {
+    "*": [
+     "fn.present",
+     "fn.object"
+    ],
+    "isolating": [
+     "fn.word.order"
+    ],
+    "polysynthetic": [
+     "fn.incorporation"
+    ],
+    "ar": [
+     "fn.root.pattern"
+    ],
+    "he": [
+     "fn.root.pattern"
+    ]
+   },
+   "prereqs": [
+    "fd.06"
+   ]
+  },
+  {
+   "id": "fd.08",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 8,
+   "title": "No, not, nothing: negation",
+   "concepts": [
+    "part.not",
+    "det.none",
+    "pron.nothing",
+    "pron.nobody",
+    "adv.never",
+    "conj.neithernor"
+   ],
+   "functions": {
+    "*": [
+     "fn.negation"
+    ]
+   },
+   "prereqs": [
+    "fd.07"
+   ]
+  },
+  {
+   "id": "fd.09",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 9,
+   "title": "Yes or no? Questions",
+   "concepts": [
+    "conj.or",
+    "adv.maybe",
+    "adv.really",
+    "adv.ofcourse",
+    "adv.also",
+    "adv.only"
+   ],
+   "functions": {
+    "*": [
+     "fn.question.yesno"
+    ]
+   },
+   "prereqs": [
+    "fd.08"
+   ]
+  },
+  {
+   "id": "fd.10",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 10,
+   "title": "Who, what, where …? — jobs",
+   "concepts": [
+    "q.what",
+    "q.who",
+    "q.where",
+    "q.when",
+    "q.how",
+    "q.why",
+    "q.howmany",
+    "q.which",
+    "q.whose",
+    "job.doctor",
+    "job.nurse",
+    "job.engineer",
+    "job.driver",
+    "job.cook",
+    "job.seller",
+    "job.worker",
+    "job.farmer",
+    "job.police",
+    "job.lawyer",
+    "job.artist"
+   ],
+   "functions": {
+    "*": [
+     "fn.question.wh"
+    ]
+   },
+   "prereqs": [
+    "fd.09"
+   ]
+  },
+  {
+   "id": "fd.11",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 11,
+   "title": "In, at, to, from, with — places in town",
+   "concepts": [
+    "prep.in",
+    "prep.at",
+    "prep.to",
+    "prep.from",
+    "prep.with",
+    "prep.without",
+    "prep.for",
+    "prep.about",
+    "place.home",
+    "place.school",
+    "place.university",
+    "place.work",
+    "place.office",
+    "place.shop",
+    "place.supermarket",
+    "place.market",
+    "place.restaurant",
+    "place.cafe",
+    "place.hospital",
+    "place.pharmacy",
+    "place.bank",
+    "place.postoffice",
+    "place.station",
+    "place.airport",
+    "place.street",
+    "place.square",
+    "place.park",
+    "place.city",
+    "place.village",
+    "place.country"
+   ],
+   "functions": {
+    "*": [
+     "fn.prep.core"
+    ],
+    "fusional": [
+     "fn.case"
+    ],
+    "agglutinating": [
+     "fn.case"
+    ],
+    "polysynthetic": [
+     "fn.case"
+    ]
+   },
+   "prereqs": [
+    "fd.10"
+   ]
+  },
+  {
+   "id": "fd.12",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 12,
+   "title": "On, under, next to … — rooms and furniture",
+   "concepts": [
+    "prep.on",
+    "prep.under",
+    "prep.nextto",
+    "prep.infront",
+    "prep.behind",
+    "prep.between",
+    "adv.near",
+    "adv.far",
+    "adv.inside",
+    "adv.outside",
+    "adv.left",
+    "adv.right",
+    "home.kitchen",
+    "home.bathroom",
+    "home.bedroom",
+    "home.livingroom",
+    "home.garden",
+    "home.floor",
+    "home.stairs",
+    "home.shelf",
+    "home.sofa",
+    "home.fridge"
+   ],
+   "functions": {
+    "*": [
+     "fn.prep.place"
+    ]
+   },
+   "prereqs": [
+    "fd.11"
+   ]
+  },
+  {
+   "id": "fd.13",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 13,
+   "title": "Going and coming — transport",
+   "concepts": [
+    "verb.go",
+    "verb.come",
+    "verb.walk",
+    "verb.run",
+    "verb.drive",
+    "verb.travel",
+    "verb.return",
+    "verb.enter",
+    "verb.leave",
+    "verb.arrive",
+    "verb.stay",
+    "verb.wait",
+    "tr.bus",
+    "tr.train",
+    "tr.plane",
+    "tr.taxi",
+    "tr.car",
+    "tr.bicycle",
+    "tr.boat",
+    "tr.onfoot",
+    "tr.ticket"
+   ],
+   "functions": {
+    "*": [
+     "fn.direction",
+     "fn.imperative"
+    ]
+   },
+   "prereqs": [
+    "fd.12"
+   ]
+  },
+  {
+   "id": "fd.14",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 14,
+   "title": "The days and the day",
+   "concepts": [
+    "time.monday",
+    "time.tuesday",
+    "time.wednesday",
+    "time.thursday",
+    "time.friday",
+    "time.saturday",
+    "time.sunday",
+    "time.weekend",
+    "time.day",
+    "time.night",
+    "time.morning",
+    "time.noon",
+    "time.afternoon",
+    "time.evening",
+    "time.today",
+    "time.tomorrow",
+    "time.yesterday",
+    "adv.now",
+    "adv.later",
+    "adv.soon",
+    "adv.early",
+    "adv.late",
+    "adv.always",
+    "adv.often",
+    "adv.sometimes"
+   ],
+   "functions": {
+    "*": [
+     "fn.time.day"
+    ],
+    "isolating": [
+     "fn.aspect"
+    ]
+   },
+   "prereqs": [
+    "fd.13"
+   ]
+  },
+  {
+   "id": "fd.15",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 15,
+   "title": "The months, the seasons, the year",
+   "concepts": [
+    "time.january",
+    "time.february",
+    "time.march",
+    "time.april",
+    "time.may",
+    "time.june",
+    "time.july",
+    "time.august",
+    "time.september",
+    "time.october",
+    "time.november",
+    "time.december",
+    "time.spring",
+    "time.summer",
+    "time.autumn",
+    "time.winter",
+    "time.week",
+    "time.month",
+    "time.year",
+    "time.hour",
+    "time.minute",
+    "time.oclock",
+    "time.date",
+    "time.birthday",
+    "time.holiday",
+    "prep.before",
+    "prep.after",
+    "prep.until",
+    "prep.since",
+    "prep.during",
+    "prep.attime",
+    "prep.onday",
+    "prep.inmonth"
+   ],
+   "functions": {
+    "*": [
+     "fn.prep.time"
+    ]
+   },
+   "prereqs": [
+    "fd.14"
+   ]
+  },
+  {
+   "id": "fd.16",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 16,
+   "title": "Describing: adjectives",
+   "concepts": [
+    "adj.big",
+    "adj.small",
+    "adj.long",
+    "adj.short",
+    "adj.tall",
+    "adj.good",
+    "adj.bad",
+    "adj.new",
+    "adj.old.thing",
+    "adj.young",
+    "adj.old.person",
+    "adj.hot",
+    "adj.cold",
+    "adj.warm",
+    "adj.beautiful",
+    "adj.ugly",
+    "adj.easy",
+    "adj.difficult",
+    "adj.cheap",
+    "adj.expensive",
+    "adj.happy",
+    "adj.sad",
+    "adj.tired",
+    "adj.hungry",
+    "adj.thirsty",
+    "adj.fast",
+    "adj.slow"
+   ],
+   "functions": {
+    "*": [
+     "fn.adjective"
+    ]
+   },
+   "prereqs": [
+    "fd.15"
+   ]
+  },
+  {
+   "id": "fd.17",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 17,
+   "title": "Colours — bigger, the biggest",
+   "concepts": [
+    "colour.white",
+    "colour.black",
+    "colour.red",
+    "colour.blue",
+    "colour.green",
+    "colour.yellow",
+    "colour.brown",
+    "colour.grey",
+    "colour.orange",
+    "colour.pink",
+    "colour.purple",
+    "adj.light",
+    "adj.dark",
+    "adv.more",
+    "adv.most",
+    "conj.than"
+   ],
+   "functions": {
+    "*": [
+     "fn.comparison"
+    ]
+   },
+   "prereqs": [
+    "fd.16"
+   ]
+  },
+  {
+   "id": "fd.18",
+   "kind": "lesson",
+   "stage": "foundations",
+   "step": 18,
+   "title": "But, because, so: linking words",
+   "concepts": [
+    "conj.but",
+    "conj.because",
+    "conj.so",
+    "adv.then",
+    "conj.when",
+    "conj.if",
+    "conj.that",
+    "conj.although"
+   ],
+   "functions": {
+    "*": [
+     "fn.connectors"
+    ]
+   },
+   "prereqs": [
+    "fd.17"
+   ]
   },
   {
    "id": "veg.1",
@@ -65,7 +779,7 @@
     "veg.corn"
    ],
    "prereqs": [
-    "core.1"
+    "fd.18"
    ]
   },
   {

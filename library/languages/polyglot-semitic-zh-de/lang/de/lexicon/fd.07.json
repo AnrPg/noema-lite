@@ -1,0 +1,787 @@
+{
+ "lexemes": [
+  {
+   "id": "de:essen",
+   "lemma": "essen",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "essen",
+    "V;PRS;1;SG": "esse",
+    "V;PRS;2;SG": "isst",
+    "V;PRS;3;SG": "isst",
+    "V;PRS;1;PL": "essen",
+    "V;PRS;2;PL": "esst",
+    "V;PRS;3;PL": "essen",
+    "V;PST;3;SG": "aß",
+    "V;PTCP;PST": "gegessen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and warm: shared meals (zusammen essen) are a social ritual.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat (of people)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.eat"
+     },
+     {
+      "id": "s2",
+      "def": "to have a meal, to dine (essen gehen = to eat out)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Isst du Fleisch?",
+      "tr": "Do you eat meat?",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Er isst jeden Tag einen Apfel.",
+      "tr": "He eats an apple every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir essen um sieben Uhr zu Abend.",
+      "tr": "We have dinner at seven.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     },
+     {
+      "text": "Am Wochenende gehen wir essen.",
+      "tr": "At the weekend we go out to eat.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "zu Mittag essen",
+      "tr": "to have lunch"
+     },
+     {
+      "text": "zu Abend essen",
+      "tr": "to have dinner"
+     },
+     {
+      "text": "essen gehen",
+      "tr": "to eat out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das Auge isst mit.",
+      "tr": "The eye eats too.",
+      "kind": "saying",
+      "meaning": "How food looks matters.",
+      "register": "neutral"
+     },
+     {
+      "text": "Es wird nichts so heiß gegessen, wie es gekocht wird.",
+      "tr": "Nothing is eaten as hot as it is cooked.",
+      "kind": "proverb",
+      "meaning": "Things are rarely as bad as they first seem.",
+      "register": "neutral"
+     },
+     {
+      "text": "So jemand nicht will arbeiten, der soll auch nicht essen.",
+      "tr": "If anyone will not work, neither shall he eat.",
+      "kind": "quote",
+      "meaning": "Who does not work should not eat.",
+      "register": "literary",
+      "source": "Bible, 2 Thessalonians 3:10 (Luther translation, public domain)"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "aufessen",
+      "tr": "to eat up, finish one's food"
+     },
+     {
+      "text": "mitessen",
+      "tr": "to eat with others, join in"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "speisen",
+      "register": "formal",
+      "nuance": "elevated “to dine”: restaurants, menus, ceremonies"
+     },
+     {
+      "word": "zu sich nehmen",
+      "register": "formal",
+      "nuance": "to ingest, take (food) – medical or official language"
+     },
+     {
+      "word": "futtern",
+      "register": "colloquial",
+      "nuance": "to tuck in, eat heartily – playful"
+     },
+     {
+      "word": "fressen",
+      "register": "pejorative",
+      "nuance": "neutral for animals; said of people it means eating greedily, like an animal"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "fasten",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ëȥȥen, from Old High German ëȥȥan, from Proto-West Germanic *etan, from Proto-Germanic *etaną, from Proto-Indo-European *h₁ed-. Cognate with Dutch eten, English eat, Swedish äta; non-Germanic cognates include Latin edō and Russian есть (jestʹ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Animals do not “essen” in German, they “fressen” – using fressen for a person is rude or jokey.",
+     "The past participle is gegessen, with an extra -ge-; the old form gessen is obsolete."
+    ],
+    "pitfalls": [
+     "Stem vowel e → i: du isst, er isst (not *esst); du isst and er isst are spelled the same.",
+     "Past tense with ß: ich aß, wir aßen."
+    ],
+    "subtleties": [
+     "Soup is eaten in German (Suppe essen), not drunk."
+    ]
+   }
+  },
+  {
+   "id": "de:trinken",
+   "lemma": "trinken",
+   "pos": "VERB",
+   "senses": [
+    "verb.drink"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "trinken",
+    "V;PRS;1;SG": "trinke",
+    "V;PRS;2;SG": "trinkst",
+    "V;PRS;3;SG": "trinkt",
+    "V;PRS;1;PL": "trinken",
+    "V;PRS;2;PL": "trinkt",
+    "V;PRS;3;PL": "trinken",
+    "V;PST;3;SG": "trank",
+    "V;PTCP;PST": "getrunken"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee breaks, beer gardens, toasts – and, without an object, the drinking of alcohol.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drink (a liquid)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drink"
+     },
+     {
+      "id": "s2",
+      "def": "to drink alcohol (habitually) – used without an object: Er trinkt.",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "auf jemanden/etwas trinken: to drink to, to toast",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was trinkst du? – Ein Wasser, bitte.",
+      "tr": "What are you drinking? – A water, please.",
+      "register": "informal",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Morgens trinke ich immer Tee.",
+      "tr": "In the morning I always drink tea.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "Sein Vater trinkt seit Jahren nicht mehr.",
+      "tr": "His father hasn't drunk alcohol for years.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir trinken auf das Brautpaar!",
+      "tr": "Let's drink to the bride and groom!",
+      "register": "neutral",
+      "context": "wedding",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Kaffee trinken",
+      "tr": "to drink coffee (also: to have a coffee break)"
+     },
+     {
+      "text": "einen trinken gehen",
+      "tr": "to go for a drink"
+     },
+     {
+      "text": "ein Glas Wasser trinken",
+      "tr": "to drink a glass of water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wir trinken auf dich!",
+      "tr": "We drink to you!",
+      "kind": "fixed expression",
+      "meaning": "a toast",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "austrinken",
+      "tr": "to drink up, finish (a glass)"
+     },
+     {
+      "text": "mittrinken",
+      "tr": "to drink along with others"
+     },
+     {
+      "text": "zutrinken",
+      "tr": "to raise one's glass to someone"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "schlürfen",
+      "register": "neutral",
+      "nuance": "to slurp, sip noisily"
+     },
+     {
+      "word": "nippen",
+      "register": "neutral",
+      "nuance": "to take a tiny sip"
+     },
+     {
+      "word": "saufen",
+      "register": "vulgar",
+      "nuance": "neutral for animals; for people: to drink a lot, especially alcohol – crude"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From Middle High German trinken, from Old High German trinkan (attested since the 8th century), from Proto-West Germanic *drinkan. Cognates include Dutch drinken, English drink, Swedish dricka and Gothic 𐌳𐍂𐌹𐌲𐌺𐌰𐌽 (drigkan).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kaffee und Kuchen: in Germany “Kaffee trinken” in the afternoon is a small meal with cake, not just a drink."
+    ],
+    "pitfalls": [
+     "Without an object, Er trinkt usually means “he drinks (too much alcohol)”.",
+     "Strong verb: trinken – trank – getrunken (not *getrinkt)."
+    ],
+    "subtleties": [
+     "Wollen wir einen Kaffee trinken gehen? is an invitation to meet and talk, not only to drink coffee."
+    ]
+   }
+  },
+  {
+   "id": "de:kaufen",
+   "lemma": "kaufen",
+   "pos": "VERB",
+   "senses": [
+    "verb.buy"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "kaufen",
+    "V;PRS;1;SG": "kaufe",
+    "V;PRS;2;SG": "kaufst",
+    "V;PRS;3;SG": "kauft",
+    "V;PRS;1;PL": "kaufen",
+    "V;PRS;2;PL": "kauft",
+    "V;PRS;3;PL": "kaufen",
+    "V;PST;3;SG": "kaufte",
+    "V;PTCP;PST": "gekauft"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Shops, markets, the Saturday shopping list.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to buy, to purchase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.buy"
+     },
+     {
+      "id": "s2",
+      "def": "to buy (something) for someone: jemandem etwas kaufen",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe Gemüse immer auf dem Markt.",
+      "tr": "I always buy vegetables at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Wo hast du die Schuhe gekauft?",
+      "tr": "Where did you buy the shoes?",
+      "register": "informal",
+      "context": "clothes",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir kaufen unserer Tochter ein Fahrrad.",
+      "tr": "We're buying our daughter a bicycle.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "im Supermarkt kaufen",
+      "tr": "to buy at the supermarket"
+     },
+     {
+      "text": "online kaufen",
+      "tr": "to buy online"
+     },
+     {
+      "text": "günstig kaufen",
+      "tr": "to buy cheaply"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Katze im Sack kaufen",
+      "tr": "to buy the cat in the sack",
+      "kind": "idiom",
+      "meaning": "to buy something without having seen it (English: to buy a pig in a poke)",
+      "register": "neutral"
+     },
+     {
+      "text": "Das kaufe ich dir nicht ab.",
+      "tr": "I'm not buying that from you.",
+      "kind": "idiom",
+      "meaning": "I don't believe you",
+      "register": "colloquial"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "einkaufen",
+      "tr": "to shop, to go shopping"
+     },
+     {
+      "text": "abkaufen",
+      "tr": "to buy from someone; (colloquial) to believe"
+     },
+     {
+      "text": "aufkaufen",
+      "tr": "to buy up"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "erwerben",
+      "register": "formal",
+      "nuance": "to acquire – contracts, official texts"
+     },
+     {
+      "word": "besorgen",
+      "register": "neutral",
+      "nuance": "to get, fetch – focus on obtaining, not on paying"
+     },
+     {
+      "word": "shoppen",
+      "register": "colloquial",
+      "nuance": "to go shopping (for fun) – an anglicism"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "verkaufen",
+      "note": "to sell"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German koufen, from Old High German koufōn, from Proto-West Germanic *kaupōn, an early borrowing of Latin caupō (“innkeeper, petty trader”). Related to English cheap and Swedish köpa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Danish cognate is in Copenhagen: København = “merchants' harbour”."
+    ],
+    "pitfalls": [
+     "einkaufen is “to go shopping” in general; kaufen needs an object: Ich kaufe Brot. / Ich gehe einkaufen."
+    ],
+    "subtleties": [
+     "Kauf mir was! – with a dative, kaufen means buying for someone."
+    ]
+   }
+  },
+  {
+   "id": "de:mögen",
+   "lemma": "mögen",
+   "pos": "VERB",
+   "senses": [
+    "verb.like"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "mögen",
+    "V;PRS;1;SG": "mag",
+    "V;PRS;2;SG": "magst",
+    "V;PRS;3;SG": "mag",
+    "V;PRS;1;PL": "mögen",
+    "V;PRS;2;PL": "mögt",
+    "V;PRS;3;PL": "mögen",
+    "V;PST;3;SG": "mochte",
+    "V;PTCP;PST": "gemocht",
+    "V;SBJV;PST;1;SG": "möchte"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Liking food, music, people – friendly, not passionate.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to like (something or someone)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.like"
+     },
+     {
+      "id": "s2",
+      "def": "would like (in the form möchte, Konjunktiv II)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "may (concession or possibility): Das mag sein.",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich mag Tomaten, aber keine Gurken.",
+      "tr": "I like tomatoes, but not cucumbers.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "Magst du Jazz?",
+      "tr": "Do you like jazz?",
+      "register": "informal",
+      "context": "music",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich möchte einen Kaffee, bitte.",
+      "tr": "I'd like a coffee, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "Das mag sein, aber ich glaube es nicht.",
+      "tr": "That may be, but I don't believe it.",
+      "register": "formal",
+      "context": "discussion",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jemanden sehr mögen",
+      "tr": "to like someone a lot"
+     },
+     {
+      "text": "etwas gar nicht mögen",
+      "tr": "not to like something at all"
+     },
+     {
+      "text": "Ich möchte …",
+      "tr": "I would like …"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das mag sein.",
+      "tr": "That may be.",
+      "kind": "fixed expression",
+      "meaning": "a concession: that may well be true (but …)",
+      "register": "neutral"
+     }
+    ],
+    "particleVerbs": [],
+    "synonyms": [
+     {
+      "word": "gernhaben",
+      "register": "neutral",
+      "nuance": "to be fond of (a person) – warmer than mögen"
+     },
+     {
+      "word": "lieben",
+      "register": "neutral",
+      "nuance": "to love – much stronger for people; for things it is emphatic (Ich liebe Pizza!)"
+     },
+     {
+      "word": "leiden können",
+      "register": "colloquial",
+      "nuance": "mostly negated: Ich kann ihn nicht leiden = I can't stand him"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "hassen",
+      "note": "to hate"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German mugen, from Old High German mugan, from Proto-West Germanic *magan, from Proto-Germanic *maganą, from Proto-Indo-European *megʰ-. Compare Dutch mogen, English may. The sense “to like” developed in the 16th century from negated nicht mögen (“not to be able to” → “not to like doing”); the old sense “to be able to” fell out of use in the 17th century.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "mögen is a cousin of English may and might: it once meant “to be able”."
+    ],
+    "pitfalls": [
+     "For activities German prefers gern + verb: Ich schwimme gern (I like swimming), rather than Ich mag schwimmen.",
+     "No ending in ich mag / er mag; vowel change ö → a in the singular."
+    ],
+    "subtleties": [
+     "Ich mag dich (I like you) – Ich hab dich lieb (I'm fond of you, family and friends) – Ich liebe dich (I love you).",
+     "möchte (would like) is the polite way to ask for something; Ich will … can sound demanding."
+    ]
+   }
+  },
+  {
+   "id": "de:wollen",
+   "lemma": "wollen",
+   "pos": "VERB",
+   "senses": [
+    "verb.want"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "wollen",
+    "V;PRS;1;SG": "will",
+    "V;PRS;2;SG": "willst",
+    "V;PRS;3;SG": "will",
+    "V;PRS;1;PL": "wollen",
+    "V;PRS;2;PL": "wollt",
+    "V;PRS;3;PL": "wollen",
+    "V;PST;3;SG": "wollte",
+    "V;PTCP;PST": "gewollt"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Direct will and intention – honest, but can sound blunt in a shop.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to want (something or to do something)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.want"
+     },
+     {
+      "id": "s2",
+      "def": "to claim (Er will es nicht gewusst haben = he claims not to have known)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to be about to, to intend",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Willst du eine Tomate?",
+      "tr": "Do you want a tomato?",
+      "register": "informal",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder wollen heute Pizza essen.",
+      "tr": "The children want to eat pizza today.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Er will nichts davon gewusst haben.",
+      "tr": "He claims to have known nothing about it.",
+      "register": "neutral",
+      "context": "news, gossip",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich wollte gerade gehen, als du angerufen hast.",
+      "tr": "I was just about to leave when you called.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "unbedingt wollen",
+      "tr": "to really want"
+     },
+     {
+      "text": "nach Hause wollen",
+      "tr": "to want to go home"
+     },
+     {
+      "text": "Was willst du?",
+      "tr": "What do you want?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wer nicht will, der hat schon.",
+      "tr": "Who doesn't want, already has.",
+      "kind": "saying",
+      "meaning": "if you turn down an offer, that's your loss",
+      "register": "colloquial"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "mitwollen",
+      "tr": "to want to come along (colloquial: Willst du mit?)"
+     },
+     {
+      "text": "wegwollen",
+      "tr": "to want to leave"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "möchten",
+      "register": "neutral",
+      "nuance": "would like – the polite choice when asking for something"
+     },
+     {
+      "word": "wünschen",
+      "register": "formal",
+      "nuance": "to wish, desire – service language: Was wünschen Sie?"
+     },
+     {
+      "word": "Lust haben",
+      "register": "informal",
+      "nuance": "to feel like (doing) something"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From Middle High German wollen, wöllen, wellen, from Old High German wollen, wellen, from a blend of Proto-West Germanic *willjan and *walljan, from Proto-Germanic *wiljaną and *waljaną, ultimately from Proto-Indo-European *welh₁-. Compare Dutch willen, English will.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “will” was once “to want”, too – that sense survives in “if you will” and in “willing”."
+    ],
+    "pitfalls": [
+     "False friend: German Ich will = I want, not “I will”. The future is werden: Ich werde kommen.",
+     "Ich will einen Kaffee can sound rude when ordering – say Ich möchte … or Ich hätte gern …"
+    ],
+    "subtleties": [
+     "Like other modal verbs, wollen often drops a verb of motion: Ich will nach Hause. Willst du mit?"
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

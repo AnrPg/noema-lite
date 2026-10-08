@@ -54,5 +54,22 @@
     ]
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.negation",
+   "note": "Arabic chooses its “not” by tense and type (لَا, لَمْ, لَنْ, لَيْسَ, مَا); Hebrew mostly needs לֹא, with אֵין for “there isn’t”."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.negation",
+   "note": "German splits nicht and kein (no + noun); Hebrew uses לֹא for both."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "Chinese splits 不 (general, present, future) from 没 (have not, did not); compare Hebrew לֹא vs אֵין."
+  }
  ]
 }

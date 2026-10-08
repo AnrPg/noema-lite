@@ -1,0 +1,207 @@
+{
+ "function": "fn.demonstrative",
+ "status": "realized",
+ "summary": "Chinese has two demonstratives: 这 zhè ‘this’ (near) and 那 nà ‘that’ (far). They never change for gender, number or case. Before a noun they need a measure word: 这个人 ‘this person’, 那本书 ‘that book’. The plural is 这些 / 那些 ‘these / those’, without a measure word: 这些人. Alone as a subject they stand bare: 这是老师 ‘this is the teacher’. The place words are 这里 ‘here’ and 那里 ‘there’ (northern 这儿 / 那儿).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "Near",
+    "Far"
+   ],
+   "rows": [
+    [
+     "alone (subject)",
+     "这 zhè — this",
+     "那 nà — that"
+    ],
+    [
+     "+ measure word + noun",
+     "这个人, 这本书",
+     "那个人, 那张桌子"
+    ],
+    [
+     "plural + noun",
+     "这些 zhèxiē — these: 这些人",
+     "那些 nàxiē — those: 那些书"
+    ],
+    [
+     "place",
+     "这里 zhèli / 这儿 zhèr — here",
+     "那里 nàli / 那儿 nàr — there"
+    ]
+   ],
+   "caption": "This and that"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "这",
+    "本",
+    "书"
+   ],
+   "caption": "这 / 那 + measure word + noun"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No measure word after 这些 / 那些",
+   "text": "这些书 — not *这些本书. 些 is itself a measure word (‘some’)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "那 or 哪?",
+   "text": "那 nà ‘that’ (4th tone) and 哪 nǎ ‘which?’ (3rd tone, with 口) — likewise 那里 ‘there’ and 哪里 ‘where?’."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "As subject: no measure word",
+     "points": [
+      "这是老师。 This is the teacher.",
+      "那是门。 That is the door."
+     ]
+    },
+    {
+     "title": "Before a noun: measure word",
+     "points": [
+      "这位老师在这里。 This teacher is here.",
+      "那扇门 that door"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "zhèi and nèi",
+   "text": "Many northerners say zhèi / nèi before a measure word: 这个 zhèige, 那个 nèige."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Near me or away from me? → 这 or 那.",
+   "One thing or several? → 这 / 那 + measure word, or 这些 / 那些 (no measure word).",
+   "Is the demonstrative alone as the subject (‘this is …’)? → bare 这 / 那: 这是…",
+   "Is it a noun phrase (‘this book’)? → 这 + measure word + noun: 这本书.",
+   "Do I mean a place? → 这里 / 那里 (这儿 / 那儿).",
+   "Tone check: nà ‘that’ or nǎ ‘which’?"
+  ],
+  "steps": [
+   "Choose near or far.",
+   "Add the noun’s measure word (or 些 for the plural).",
+   "Put the noun last."
+  ]
+ },
+ "traps": [
+  "*这书 in careful speech → 这本书.",
+  "*这些个人 / *这些本书 → 这些人, 这些书.",
+  "那里 nàli ‘there’ ≠ 哪里 nǎli ‘where?’.",
+  "这 is not ‘the’: most English ‘the’ is simply nothing in Chinese."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:zhe",
+   "zh:na",
+   "zh:zhexie",
+   "zh:naxie",
+   "zh:zheli",
+   "zh:nali.there"
+  ]
+ },
+ "needs": {
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.demonstrative"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘these people’",
+   "options": [
+    "这些人",
+    "这些个人",
+    "这个人们"
+   ],
+   "answer": "这些人",
+   "why": "这些 takes no measure word."
+  },
+  {
+   "q": "‘This is the teacher.’",
+   "options": [
+    "这是老师。",
+    "这个是老师的。",
+    "这位是是老师。"
+   ],
+   "answer": "这是老师。",
+   "why": "As a subject 这 stands alone."
+  },
+  {
+   "q": "‘that person’",
+   "options": [
+    "那个人",
+    "那人们",
+    "哪个人"
+   ],
+   "answer": "那个人",
+   "why": "那 + measure word 个 + noun; 哪个人 means ‘which person?’."
+  },
+  {
+   "q": "‘They are over there.’",
+   "options": [
+    "他们在那里。",
+    "他们在哪里？",
+    "他们是那里。"
+   ],
+   "answer": "他们在那里。",
+   "why": "那里 nàli ‘there’; 哪里 nǎli asks ‘where?’; place needs 在."
+  },
+  {
+   "q": "Which means ‘here’ in Beijing speech?",
+   "options": [
+    "这儿",
+    "那儿",
+    "哪儿"
+   ],
+   "answer": "这儿",
+   "why": "这儿 zhèr = 这里."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.demonstrative",
+   "note": "dieser / diese / dieses agrees in gender, number and case; Chinese 这 never changes but needs a measure word."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.demonstrative",
+   "note": "Arabic hādhā / hādhihi / hāʾulāʾi change for gender and number; Chinese has one 这 and one plural 这些."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.demonstrative",
+   "note": "Hebrew ze / zot / ele follow the noun with ha- (ha-bayit ha-ze ‘this house’); Chinese 这 + measure word comes before the noun."
+  }
+ ]
+}

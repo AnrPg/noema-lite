@@ -1,0 +1,226 @@
+{
+ "function": "fn.demonstrative",
+ "status": "realized",
+ "summary": "“This” is זֶה (m.), זֹאת (f.), and “these” אֵלֶּה (both genders). It is used in two ways. Presenting (“this is …”), it stands alone at the start, without an article, and agrees with what it presents: זֶה מוֹרֶה, זֹאת מוֹרָה, אֵלֶּה מוֹרִים — and it also covers English “that is …”. Pointing out which one (“this boy”), it follows the noun like an adjective, and both take the article: הַיֶּלֶד הַזֶּה, הַיַּלְדָּה הַזֹּאת, הַיְּלָדִים הָאֵלֶּה. “That / those” is the article + “he, she, they”: הַהוּא, הַהִיא, הָהֵם, הָהֵן — also after a definite noun: הָאִשָּׁה הַהִיא “that woman”. Here is פֹּה (everyday) or כָּאן (a little more formal); there is שָׁם.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "plural (m.)",
+    "plural (f.)"
+   ],
+   "rows": [
+    [
+     "this / these — presenting",
+     "זֶה",
+     "זֹאת",
+     "אֵלֶּה",
+     "אֵלֶּה"
+    ],
+    [
+     "this / these — after a noun",
+     "הַזֶּה",
+     "הַזֹּאת",
+     "הָאֵלֶּה",
+     "הָאֵלֶּה"
+    ],
+    [
+     "that / those — after a noun",
+     "הַהוּא",
+     "הַהִיא",
+     "הָהֵם",
+     "הָהֵן"
+    ]
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Presenting: “this is a …”",
+     "points": [
+      "זֶה תַּלְמִיד — this is a pupil",
+      "זֹאת תַּלְמִידָה — this is a pupil (f.)",
+      "אֵלֶּה תַּלְמִידִים — these are pupils",
+      "no article on זֶה, no verb “is”"
+     ]
+    },
+    {
+     "title": "Pointing out: “this / that …”",
+     "points": [
+      "הַתַּלְמִיד הַזֶּה — this pupil",
+      "הַתַּלְמִידָה הַהִיא — that pupil (f.)",
+      "הַתַּלְמִידִים הָאֵלֶּה — these pupils",
+      "noun first, article on both words"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "A full sentence can combine both: הַיֶּלֶד הַזֶּה תַּלְמִיד “this boy is a pupil” (the demonstrative belongs to the subject; the predicate תַּלְמִיד has no article)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "The article goes on both words",
+   "text": "הַבַּיִת הַזֶּה, not *בַּיִת הַזֶּה and not *הַזֶּה בַּיִת. Without the article on the noun, זֶה becomes a sentence: זֶה בַּיִת “this is a house”."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "“That is …” is זֶה",
+   "text": "Presenting something far away still uses זֶה: זֶה הַמּוֹרֶה “that’s the teacher”. הַהוּא is not used to present; it follows a noun (הַמּוֹרֶה הַהוּא) or, in speech, means “that guy”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Agreement follows the noun",
+   "text": "זֹאת for a feminine noun (זֹאת מוֹרָה), and the plural gender follows the noun, not its ending: הַנָּשִׁים הָהֵן “those women” (feminine, although נָשִׁים ends in -ִים). Casual speech often uses זֶה for everything."
+  },
+  {
+   "t": "terms",
+   "items": [
+    {
+     "term": "פֹּה",
+     "def": "here — the everyday word"
+    },
+    {
+     "term": "כָּאן",
+     "def": "here — a little more formal (signs, news)"
+    },
+    {
+     "term": "שָׁם",
+     "def": "there — away from the speaker"
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Am I presenting (“this is …”) or pointing out one (“this …”)?",
+    "Near (זֶה) or far (הַהוּא)?",
+    "Masculine, feminine or plural?",
+    "Does the noun have its article?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Am I presenting something (“this is a …”)? → זֶה / זֹאת / אֵלֶּה first, no article — also for “that is …”.",
+   "Am I saying which one (“this book”, “that woman”)? → the noun with הַ, then the demonstrative with הַ: הַסֵּפֶר הַזֶּה, הָאִשָּׁה הַהִיא.",
+   "Near or far? → הַזֶּה / הַזֹּאת / הָאֵלֶּה, or הַהוּא / הַהִיא / הָהֵם / הָהֵן.",
+   "What is the gender and number of the noun (not its ending)?",
+   "Is it a place, “here” or “there”? → פֹּה / כָּאן or שָׁם."
+  ],
+  "steps": [
+   "Decide: presenting or pointing out.",
+   "Choose near or far.",
+   "Match gender and number.",
+   "Add the article to both words when pointing out."
+  ]
+ },
+ "traps": [
+  "*בַּיִת הַזֶּה — the noun needs the article too: הַבַּיִת הַזֶּה.",
+  "*הַזֶּה בַּיִת — the demonstrative comes after the noun.",
+  "זֶה בַּיִת (“this is a house”) is a whole sentence; הַבַּיִת הַזֶּה (“this house”) is only a phrase.",
+  "“That is a teacher” is זֶה מוֹרֶה, not *הַהוּא מוֹרֶה.",
+  "אֵלֶּה has one form for both genders, but “those” has two: הָהֵם (m.), הָהֵן (f.)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:ze",
+   "he:hahu",
+   "he:po",
+   "he:kan",
+   "he:sham"
+  ]
+ },
+ "paradigmCells": [
+  "PRON;SG;MASC",
+  "PRON;SG;FEM",
+  "PRON;PL",
+  "PRON;SG;MASC;DEF",
+  "PRON;SG;FEM;DEF",
+  "PRON;PL;DEF",
+  "DET;SG;MASC",
+  "DET;SG;FEM",
+  "DET;PL;MASC",
+  "DET;PL;FEM"
+ ],
+ "needs": {
+  "PRON": 1,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "PRON",
+   "class": "dem",
+   "cells": [
+    "PRON;SG;MASC",
+    "PRON;SG;FEM",
+    "PRON;PL",
+    "PRON;SG;MASC;DEF",
+    "PRON;SG;FEM;DEF",
+    "PRON;PL;DEF"
+   ]
+  },
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "class": "dem",
+   "cells": [
+    "DET;SG;MASC",
+    "DET;SG;FEM",
+    "DET;PL;MASC",
+    "DET;PL;FEM"
+   ]
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.demonstrative"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.demonstrative"
+    ],
+    "variant": "Gender"
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.demonstrative",
+   "note": "Arabic هٰذَا / هٰذِهِ / هٰؤُلَاءِ and ذٰلِكَ / تِلْكَ / أُولٰئِكَ agree like Hebrew, but come before the noun: هٰذَا الْبَيْتُ “this house” vs Hebrew הַבַּיִת הַזֶּה."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.demonstrative",
+   "note": "German dieser / diese / dieses also agree in gender (and case); “this is …” is das ist …, just as Hebrew uses זֶה."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.demonstrative",
+   "note": "Chinese 这 / 那 do not agree but need a measure word before the noun: 这个人, 那本书."
+  }
+ ]
+}

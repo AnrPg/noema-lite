@@ -1,0 +1,272 @@
+{
+ "function": "fn.tones",
+ "status": "realized",
+ "summary": "Every Mandarin syllable has a tone — a pitch shape that is part of the word. There are four tones and a light neutral tone: mā (high and level), má (rising), mǎ (low, dipping), mà (falling), ma (short and light). Pinyin marks them over the main vowel. A few rules change tones in speech while the writing keeps the dictionary tone: a 3rd tone before another 3rd tone becomes a 2nd (你好 ní hǎo), 不 bù becomes bú before a 4th tone, and 一 yī becomes yí before a 4th tone and yì before the others.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Tone",
+    "Mark",
+    "Pitch (1 low – 5 high)",
+    "Example",
+    "Meaning"
+   ],
+   "rows": [
+    [
+     "1st — high, level",
+     "ā",
+     "55",
+     "妈 mā",
+     "mother"
+    ],
+    [
+     "2nd — rising",
+     "á",
+     "35",
+     "麻 má",
+     "hemp"
+    ],
+    [
+     "3rd — low, dipping",
+     "ǎ",
+     "214 (before other tones only the low part: 21)",
+     "马 mǎ",
+     "horse"
+    ],
+    [
+     "4th — falling",
+     "à",
+     "51",
+     "骂 mà",
+     "to scold"
+    ],
+    [
+     "neutral — short, light",
+     "a (no mark)",
+     "depends on the syllable before",
+     "吗 ma",
+     "question particle"
+    ]
+   ],
+   "caption": "The four tones and the neutral tone"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The tone is part of the word",
+   "text": "mǎi 买 ‘to buy’ and mài 卖 ‘to sell’ differ only in tone. Learn every word with its tone from the first day."
+  },
+  {
+   "t": "table",
+   "head": [
+    "Rule",
+    "Written",
+    "Said"
+   ],
+   "rows": [
+    [
+     "3rd + 3rd → 2nd + 3rd",
+     "你好 nǐ hǎo, 很好 hěn hǎo",
+     "ní hǎo, hén hǎo"
+    ],
+    [
+     "3rd before 1st, 2nd, 4th, neutral → only the low part",
+     "我是 wǒ shì",
+     "wǒ (low) shì"
+    ],
+    [
+     "不 before a 4th tone → bú",
+     "不是 bù shì, 不客气",
+     "bú shì, bú kèqi"
+    ],
+    [
+     "一 before a 4th tone → yí",
+     "一个 yī gè, 一下",
+     "yí ge, yíxià"
+    ],
+    [
+     "一 before 1st, 2nd, 3rd → yì",
+     "一张 yī zhāng, 一本 yī běn",
+     "yì zhāng, yì běn"
+    ],
+    [
+     "一 counting, in numbers, at the end → yī",
+     "一, 十一, 第一",
+     "yī, shíyī, dì-yī"
+    ]
+   ],
+   "caption": "Tone changes (sandhi) — pinyin in dictionaries keeps the original tone, textbooks often print the spoken one for 不 and 一"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Neutral tones",
+   "text": "Particles (吗, 们, 了), the noun suffix 子 and the second syllable of many words have no tone of their own: xièxie 谢谢, péngyou 朋友, zhuōzi 桌子, xuésheng 学生."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Where the mark goes",
+   "text": "On a or e if there is one (hǎo, xiè); in ou on the o (dōu); otherwise on the last vowel (duì, liù). The dot of i disappears under a mark: nǐ."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Greek, German, English",
+     "points": [
+      "stress makes one syllable stronger (πότε ‘when’ / ποτέ ‘never’; ÜBERsetzen / überSETZen)",
+      "pitch shows emotion and questions"
+     ]
+    },
+    {
+     "title": "Chinese",
+     "points": [
+      "every syllable has its own pitch shape",
+      "pitch changes the word itself: mǎi ‘buy’ ≠ mài ‘sell’",
+      "questions are made with 吗, not with the voice"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself before you say a word",
+   "questions": [
+    "What tone does the dictionary give each syllable?",
+    "Is it a 3rd tone followed by another 3rd tone?",
+    "Is it 不 or 一 — and what tone follows?",
+    "Is the syllable a particle, a suffix or a repeated second syllable (toneless)?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which of the four tones (or neutral) does the dictionary give each syllable?",
+   "Is a 3rd tone followed by another 3rd tone? → say the first one as a 2nd tone (你好 ní hǎo).",
+   "Is a 3rd tone followed by any other tone? → only its low part (wǒ shì).",
+   "Is it 不 before a 4th tone? → bú (不是 bú shì); otherwise bù.",
+   "Is it 一 before a 4th tone → yí; before 1st, 2nd or 3rd → yì; counting, in a number or at the end → yī.",
+   "Is the syllable a particle (吗, 们), the suffix 子 or the second half of a word like 谢谢 or 朋友? → neutral, short and light.",
+   "Where does the mark go? a or e first, the o of ou, otherwise the last vowel."
+  ],
+  "steps": [
+   "Learn every word with its dictionary tones.",
+   "Apply the sandhi rules when speaking; do not change the written pinyin of ordinary words.",
+   "Keep the tones in questions — add 吗 instead of raising the voice."
+  ]
+ },
+ "traps": [
+  "Writing the sandhi tone in a dictionary search: look up nǐ hǎo, not ní hǎo.",
+  "Saying 不是 as bù shì — it is bú shì.",
+  "Saying 一个 as yī gè — it is yí ge.",
+  "Letting the voice rise at the end of a question in the English way: the last syllable keeps its own tone.",
+  "Giving full tones to toneless syllables: xièxie, not xièxiè."
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "How do you say 你好 (written nǐ hǎo)?",
+   "options": [
+    "ní hǎo",
+    "nǐ hǎo with two low tones",
+    "nì hào"
+   ],
+   "answer": "ní hǎo",
+   "why": "Two 3rd tones in a row: the first becomes a 2nd tone."
+  },
+  {
+   "q": "How is 不是 pronounced?",
+   "options": [
+    "bú shì",
+    "bù shì",
+    "bū shì"
+   ],
+   "answer": "bú shì",
+   "why": "不 becomes bú before a 4th tone (shì)."
+  },
+  {
+   "q": "How is 一个 pronounced?",
+   "options": [
+    "yí ge",
+    "yī gè",
+    "yì ge"
+   ],
+   "answer": "yí ge",
+   "why": "个 is a 4th tone (gè) → 一 is said yí; 个 itself is usually light."
+  },
+  {
+   "q": "How is 一本书 pronounced?",
+   "options": [
+    "yì běn shū",
+    "yí běn shū",
+    "yī běn shū"
+   ],
+   "answer": "yì běn shū",
+   "why": "本 is a 3rd tone, so 一 becomes yì."
+  },
+  {
+   "q": "Which tone does mà have?",
+   "options": [
+    "4th — falling",
+    "1st — high and level",
+    "3rd — low and dipping",
+    "2nd — rising"
+   ],
+   "answer": "4th — falling",
+   "why": "The grave accent ` marks the falling 4th tone (pitch 51)."
+  },
+  {
+   "q": "Where does the tone mark go in hao?",
+   "options": [
+    "hǎo — on the a",
+    "haǒ — on the o",
+    "on the h"
+   ],
+   "answer": "hǎo — on the a",
+   "why": "a and e always take the mark when present."
+  },
+  {
+   "q": "What is the second syllable of 谢谢?",
+   "options": [
+    "neutral (xièxie)",
+    "4th tone (xièxiè)",
+    "1st tone"
+   ],
+   "answer": "neutral (xièxie)",
+   "why": "In a repeated word the second syllable is usually toneless."
+  },
+  {
+   "q": "In 很好 (hěn hǎo), which syllable changes?",
+   "options": [
+    "很 → hén",
+    "好 → háo",
+    "neither"
+   ],
+   "answer": "很 → hén",
+   "why": "The first of two 3rd tones becomes a 2nd tone."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.overview",
+   "note": "German has no tones: stress (ÜBERsetzen / überSETZen) and sentence intonation, not word pitch."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.overview",
+   "note": "Arabic has no tones; what changes meaning is vowel length and the emphatic consonants."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.overview",
+   "note": "Hebrew has no tones; stress, mostly on the last syllable, can tell words apart."
+  }
+ ]
+}

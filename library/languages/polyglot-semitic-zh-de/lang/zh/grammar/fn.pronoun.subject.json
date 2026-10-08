@@ -1,0 +1,199 @@
+{
+ "function": "fn.pronoun.subject",
+ "status": "realized",
+ "summary": "Chinese has one small set of personal pronouns that never change: 我 wǒ ‘I, me’, 你 nǐ ‘you’ (polite 您 nín), 他 / 她 / 它 tā ‘he, she, it’. The plural adds 们 men: 我们 ‘we’, 你们 ‘you (all)’, 他们 / 她们 / 它们 ‘they’; 咱们 is ‘we’ including the listener. The same form is subject and object, and the verb does not change with the person: 我是, 你是, 他们是.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "Singular",
+    "Plural (+ 们)"
+   ],
+   "rows": [
+    [
+     "1st person",
+     "我 wǒ — I, me",
+     "我们 wǒmen — we, us; 咱们 zánmen — we (you and I)"
+    ],
+    [
+     "2nd person",
+     "你 nǐ — you; 您 nín — you (polite)",
+     "你们 nǐmen — you (all)"
+    ],
+    [
+     "3rd person",
+     "他 tā — he; 她 tā — she; 它 tā — it",
+     "他们 — they (men or mixed); 她们 — they (women); 它们 — they (things, animals)"
+    ]
+   ],
+   "caption": "The personal pronouns"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "One form for every job",
+   "text": "我 is ‘I’ and ‘me’: 我是学生 ‘I am a student’ — 他喜欢我 ‘he likes me’. ‘My’ is 我的 (lesson S06)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "tā is one sound",
+   "text": "他, 她 and 它 are all pronounced tā; a mixed group is 他们, even with one man among many women."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "我们 wǒmen",
+     "points": [
+      "the general ‘we’",
+      "may exclude the listener: 我们走了，你呢？ ‘we’re going — and you?’"
+     ]
+    },
+    {
+     "title": "咱们 zánmen",
+     "points": [
+      "‘we’ including the listener: ‘you and I’",
+      "warm, northern and colloquial"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "您 and the plural",
+   "text": "There is no standard polite plural *您们: to a group say 你们, or politely 各位 / 大家."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is the subject — me, the listener, someone else? Pick 我, 你 / 您, 他 / 她 / 它.",
+   "Is the listener older, a teacher, a customer or a stranger to be respected? → 您.",
+   "More than one person? → add 们: 我们, 你们, 他们 — or 咱们 if the listener is included.",
+   "A group of only women? → 她们; any man in it → 他们; things or animals → 它们 (often left out).",
+   "Is the verb changing? → never: 我是, 他们是."
+  ],
+  "steps": [
+   "Choose the pronoun by person, respect and number.",
+   "Put it before the verb.",
+   "Use the same form as an object: 老师认识我."
+  ]
+ },
+ "traps": [
+  "*我们们 or *您们 — 们 only once, and not on 您.",
+  "Using 您 with close friends sounds cold or ironic.",
+  "咱们 must include the listener: never *咱们走了，你呢？",
+  "它 is much rarer than English ‘it’: no dummy subject (是我 ‘it’s me’)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:wo",
+   "zh:ni",
+   "zh:nin",
+   "zh:ta.he",
+   "zh:ta.she",
+   "zh:ta.it",
+   "zh:women",
+   "zh:zanmen",
+   "zh:nimen",
+   "zh:tamen.m",
+   "zh:tamen.f",
+   "zh:tamen.it"
+  ]
+ },
+ "needs": {
+  "PRON": 4,
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.pronoun.subject"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which ‘you’ for your teacher?",
+   "options": [
+    "您",
+    "你",
+    "你们"
+   ],
+   "answer": "您",
+   "why": "您 is the polite ‘you’ for teachers, elders and customers."
+  },
+  {
+   "q": "‘They’ for two girls and one boy?",
+   "options": [
+    "他们",
+    "她们",
+    "它们"
+   ],
+   "answer": "他们",
+   "why": "As soon as one man is in the group, the plural is 他们."
+  },
+  {
+   "q": "‘We (you and I)’ in northern speech?",
+   "options": [
+    "咱们",
+    "你们",
+    "他们"
+   ],
+   "answer": "咱们",
+   "why": "咱们 includes the listener."
+  },
+  {
+   "q": "‘He likes me’?",
+   "options": [
+    "他喜欢我",
+    "他喜欢我的",
+    "他喜欢我们们"
+   ],
+   "answer": "他喜欢我",
+   "why": "我 is also the object form — no change."
+  },
+  {
+   "q": "How do 他 and 她 sound?",
+   "options": [
+    "the same: tā",
+    "tā and tà",
+    "tā and nǚ tā"
+   ],
+   "answer": "the same: tā",
+   "why": "The difference exists only in writing."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.pronoun.subject",
+   "note": "German du / Sie match 你 / 您, but German pronouns change with case (ich – mich – mir) and the verb agrees (ich bin, du bist)."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.pronoun.subject",
+   "note": "Arabic has gender in ‘you’ (anta / anti) and a dual (antumā); Chinese has one 你 and no dual."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.pronoun.subject",
+   "note": "Hebrew has a masculine and a feminine ‘you’ (atá / at) and ‘they’ (hem / hen); Chinese marks gender only in writing (他们 / 她们)."
+  }
+ ]
+}

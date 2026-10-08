@@ -1,0 +1,263 @@
+{
+ "function": "fn.copula",
+ "status": "realized",
+ "summary": "In the present Arabic has no verb “to be”: subject and predicate simply stand side by side, both in the nominative — أَنَا طَالِبٌ “I (am) a student”, الرَّجُلُ مُعَلِّمٌ “the man (is) a teacher”, الْمُعَلِّمُ هُنَا “the teacher (is) here”. This is the nominal sentence. The verb كَانَ “to be” appears in the past (كُنْتُ طَالِبًا, I was a student) and, as يَكُونُ, in the future and in general statements; its predicate goes into the accusative. “Is not” is لَيْسَ, a verb of its own (lesson 8).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "present — no verb",
+    "past — كَانَ + accusative"
+   ],
+   "rows": [
+    [
+     "I (a man)",
+     "أَنَا طَالِبٌ",
+     "كُنْتُ طَالِبًا"
+    ],
+    [
+     "you (a man)",
+     "أَنْتَ مُعَلِّمٌ",
+     "كُنْتَ مُعَلِّمًا"
+    ],
+    [
+     "you (a woman)",
+     "أَنْتِ مُعَلِّمَةٌ",
+     "كُنْتِ مُعَلِّمَةً"
+    ],
+    [
+     "he",
+     "هُوَ صَدِيقٌ",
+     "كَانَ صَدِيقًا"
+    ],
+    [
+     "she",
+     "هِيَ صَدِيقَةٌ",
+     "كَانَتْ صَدِيقَةً"
+    ],
+    [
+     "we",
+     "نَحْنُ أَصْدِقَاءُ",
+     "كُنَّا أَصْدِقَاءَ"
+    ],
+    [
+     "you (men / mixed)",
+     "أَنْتُمْ طُلَّابٌ",
+     "كُنْتُمْ طُلَّابًا"
+    ],
+    [
+     "you (women)",
+     "أَنْتُنَّ طَالِبَاتٌ",
+     "كُنْتُنَّ طَالِبَاتٍ"
+    ],
+    [
+     "they (men / mixed)",
+     "هُمْ أَصْدِقَاءُ",
+     "كَانُوا أَصْدِقَاءَ"
+    ],
+    [
+     "they (women)",
+     "هُنَّ صَدِيقَاتٌ",
+     "كُنَّ صَدِيقَاتٍ"
+    ]
+   ],
+   "caption": "After كَانَ the predicate is accusative: -an / -a; a sound feminine plural takes -in (طَالِبَاتٍ). The pronoun is usually dropped, because كَانَ shows the person."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The nominal sentence.",
+   "text": "Subject (usually definite or a pronoun) + predicate (usually indefinite), both nominative: الْبِنْتُ طَالِبَةٌ = the girl is a student. The “is” is understood."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Two definite words make a phrase.",
+   "text": "الرَّجُلُ الْمُعَلِّمُ = “the man the teacher” (a phrase). For “the man is the teacher” put a pronoun between them: الرَّجُلُ هُوَ الْمُعَلِّمُ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Place, and “there is”.",
+   "text": "الْمُعَلِّمُ هُنَا = the teacher is here. With an indefinite subject the place comes first: هُنَا كِتَابٌ = there is a book here; هُنَاكَ مُشْكِلَةٌ = there is a problem."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "present: no verb",
+    "past: كَانَ + accusative",
+    "future, habit: يَكُونُ / سَيَكُونُ",
+    "not: لَيْسَ + accusative (lesson 8)"
+   ]
+  },
+  {
+   "t": "p",
+   "text": "Before a plural subject كَانَ stays singular (كَانَ النَّاسُ أَصْدِقَاءَ); after it, it agrees (النَّاسُ كَانُوا أَصْدِقَاءَ) — the word-order rule of Arabic verbs."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is it the present? → no verb: subject + predicate (أَنَا طَالِبٌ).",
+   "Is it the past? → كَانَ in the right person (كُنْتُ، كَانَتْ، كَانُوا …) and the predicate in the accusative.",
+   "Are subject and predicate both definite? → put هُوَ / هِيَ / هُمْ between them.",
+   "Is the subject indefinite (“a book is here”)? → start with the place: هُنَا كِتَابٌ.",
+   "Is it negative? → لَيْسَ, not لَا (lesson 8)."
+  ]
+ },
+ "traps": [
+  "*أَنَا أَكُونُ طَالِبٌ for “I am a student” is wrong: the plain present needs no verb.",
+  "After كَانَ the predicate changes its ending: هُوَ صَدِيقٌ → كَانَ صَدِيقًا.",
+  "A verb before its plural subject stays singular: كَانَ النَّاسُ …, but النَّاسُ كَانُوا ….",
+  "لَا does not negate a nominal sentence; that is the job of لَيْسَ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:kana",
+   "ar:huna",
+   "ar:hunaka"
+  ],
+  "tags": [
+   "NOM",
+   "INDF"
+  ]
+ },
+ "paradigmCells": [
+  "V;PST;1;SG",
+  "V;PST;2;SG;MASC",
+  "V;PST;2;SG;FEM",
+  "V;PST;3;SG;MASC",
+  "V;PST;3;SG;FEM",
+  "V;PST;1;PL",
+  "V;PST;2;PL;MASC",
+  "V;PST;2;PL;FEM",
+  "V;PST;3;PL;MASC",
+  "V;PST;3;PL;FEM"
+ ],
+ "needs": {
+  "NOUN": 4,
+  "PRON": 4
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "frames": [
+     "fr.be.person",
+     "fr.be.where"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "frames": [
+     "fr.be.person",
+     "fr.be.where"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "ar:kana"
+   ],
+   "cells": [
+    "V;PST;1;SG",
+    "V;PST;2;SG;MASC",
+    "V;PST;2;SG;FEM",
+    "V;PST;3;SG;MASC",
+    "V;PST;3;SG;FEM",
+    "V;PST;1;PL",
+    "V;PST;2;PL;MASC",
+    "V;PST;2;PL;FEM",
+    "V;PST;3;PL;MASC",
+    "V;PST;3;PL;FEM"
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“She is a teacher”:",
+   "options": [
+    "هِيَ مُعَلِّمَةٌ",
+    "هِيَ تَكُونُ مُعَلِّمَةٌ",
+    "هِيَ كَانَتْ مُعَلِّمَةٌ"
+   ],
+   "answer": "هِيَ مُعَلِّمَةٌ",
+   "why": "The present needs no verb."
+  },
+  {
+   "q": "“I was a student” (a man):",
+   "options": [
+    "كُنْتُ طَالِبًا",
+    "كُنْتُ طَالِبٌ",
+    "أَنَا طَالِبٌ"
+   ],
+   "answer": "كُنْتُ طَالِبًا",
+   "why": "Past = كَانَ, and its predicate is accusative (-an)."
+  },
+  {
+   "q": "الرَّجُلُ مُعَلِّمٌ means …",
+   "options": [
+    "The man is a teacher.",
+    "the teacher-man",
+    "A man is the teacher."
+   ],
+   "answer": "The man is a teacher.",
+   "why": "Definite subject + indefinite predicate = a sentence with an understood “is”."
+  },
+  {
+   "q": "“There is a book here”:",
+   "options": [
+    "هُنَا كِتَابٌ",
+    "الْكِتَابُ هُنَا",
+    "كِتَابٌ هُنَا"
+   ],
+   "answer": "هُنَا كِتَابٌ",
+   "why": "An indefinite subject follows the place; الْكِتَابُ هُنَا = the book is here."
+  },
+  {
+   "q": "“They (men) were friends”:",
+   "options": [
+    "كَانُوا أَصْدِقَاءَ",
+    "كَانُوا أَصْدِقَاءُ",
+    "كَانَ أَصْدِقَاءُ"
+   ],
+   "answer": "كَانُوا أَصْدِقَاءَ",
+   "why": "كَانُوا agrees with “they”; the predicate is accusative (a diptote: -a)."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.copula",
+   "note": "Hebrew also drops “to be” in the present (אֲנִי סְטוּדֶנְט); its past הָיָה works like كَانَ, and a pronoun can link two definite words, as in Arabic الرَّجُلُ هُوَ الْمُعَلِّمُ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.copula",
+   "note": "Chinese 是 links two nouns (我是学生) but not an adjective (我很好); Arabic links both with no word at all."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.copula",
+   "note": "German needs the verb every time (ich bin, du bist, er ist) — but like Arabic it uses no article with a profession: Ich bin Lehrer = أَنَا مُعَلِّمٌ."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.negation",
+   "note": "“Is not” has its own verb, لَيْسَ, which puts the predicate in the accusative like كَانَ."
+  }
+ ]
+}

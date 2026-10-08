@@ -1,0 +1,332 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:madha",
+   "lemma": "مَاذَا",
+   "pos": "PRON",
+   "senses": [
+    "q.what"
+   ],
+   "translit": "māḏā",
+   "class": "int",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The question before a verb: what do you…?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (especially before a verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَاذَا تَأْكُلُ؟",
+      "tr": "What are you eating?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تُرِيدِينَ؟",
+      "tr": "What do you (f) want?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا حَدَثَ؟",
+      "tr": "What happened?",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s1"
+     },
+     {
+      "text": "لِمَاذَا تَضْحَكُ؟",
+      "tr": "Why are you laughing?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لِمَاذَا",
+      "tr": "why (lit. for what)"
+     },
+     {
+      "text": "مَاذَا عَنْ …؟",
+      "tr": "what about …?"
+     },
+     {
+      "text": "مَاذَا بِكَ؟",
+      "tr": "what’s wrong with you?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَا",
+      "register": "neutral",
+      "nuance": "before nouns and pronouns: مَا هٰذَا؟ مَا اسْمُكَ؟"
+     },
+     {
+      "word": "إِيه",
+      "register": "regional",
+      "nuance": "spoken “what”, after the verb",
+      "region": "Egypt"
+     },
+     {
+      "word": "شُو",
+      "register": "regional",
+      "nuance": "spoken “what”",
+      "region": "Levant"
+     }
+    ],
+    "etymology": {
+     "text": "From مَا (mā) + ذَا (ḏā).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "لِمَاذَا, “why”, is literally “for what”."
+    ],
+    "pitfalls": [
+     "Use مَاذَا before a verb (مَاذَا تَشْرَبُ؟) but مَا before a noun or pronoun (مَا هٰذَا؟)."
+    ],
+    "subtleties": [
+     "Formal Arabic also uses مَاذَا before a past verb: مَاذَا فَعَلْتَ؟ (what did you do?)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ma",
+   "lemma": "مَا",
+   "pos": "PRON",
+   "senses": [
+    "q.what"
+   ],
+   "translit": "mā",
+   "class": "int",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Short and frequent — and with many jobs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (before a noun or pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "how …! (exclamation: مَا أَفْعَلَ …)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَا هٰذَا؟",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا اسْمُكَ؟",
+      "tr": "What is your name?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا رَأْيُكَ؟",
+      "tr": "What do you think?",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا أَجْمَلَ الْبَحْرَ!",
+      "tr": "How beautiful the sea is!",
+      "register": "neutral",
+      "context": "exclamation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَا اسْمُكَ؟",
+      "tr": "what is your name?"
+     },
+     {
+      "text": "مَا رَأْيُكَ؟",
+      "tr": "what do you think?"
+     },
+     {
+      "text": "مَا الْأَمْرُ؟",
+      "tr": "what’s the matter?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَاذَا",
+      "register": "neutral",
+      "nuance": "the form used before a verb: مَاذَا تَأْكُلُ؟"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Hebrew מָה (ma) and Ugaritic mh.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew מָה (ma, “what”) is the same Semitic word."
+    ],
+    "pitfalls": [
+     "مَا is also the negation “not” (مَا أَكَلْتُ = I didn’t eat) and the relative “what, that which” (أَعْرِفُ مَا تُرِيدُ = I know what you want). Only position and context tell them apart."
+    ],
+    "subtleties": [
+     "In the exclamation مَا أَجْمَلَ …! the noun is accusative: مَا أَجْمَلَ الْبَحْرَ!"
+    ]
+   }
+  },
+  {
+   "id": "ar:ayna",
+   "lemma": "أَيْنَ",
+   "pos": "ADV",
+   "senses": [
+    "q.where"
+   ],
+   "translit": "ʾayna",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Finding your way: places, people, things.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where? (also مِنْ أَيْنَ “from where”, إِلَى أَيْنَ “where to”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "how can … compare with …? (أَيْنَ X مِنْ Y — implying there is no comparison)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَيْنَ الْمَحَطَّةُ؟",
+      "tr": "Where is the station?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ أَيْنَ أَنْتِ؟",
+      "tr": "Where are you from? (to a woman)",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "إِلَى أَيْنَ تَذْهَبُ؟",
+      "tr": "Where are you going?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "أَيْنَ هٰذَا مِنْ ذَاكَ؟",
+      "tr": "How can this even compare with that?",
+      "register": "formal",
+      "context": "comparison",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مِنْ أَيْنَ",
+      "tr": "from where"
+     },
+     {
+      "text": "إِلَى أَيْنَ",
+      "tr": "where to"
+     },
+     {
+      "text": "أَيْنَمَا",
+      "tr": "wherever"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "وَيْن",
+      "register": "regional",
+      "nuance": "spoken “where”",
+      "region": "Levant, Gulf, Iraq"
+     },
+     {
+      "word": "فِين",
+      "register": "regional",
+      "nuance": "spoken “where”",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "From the root ء ي ن (“to come or approach”, “to draw near to a place or time”); related to آن (ʾān, “time, now”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Qurʾān asks: فَأَيْنَ تَذْهَبُونَ؟ — “So where are you going?” (81:26)."
+    ],
+    "pitfalls": [
+     "No verb “is” after it: أَيْنَ الْمَحَطَّةُ؟ = where is the station? The noun is nominative.",
+     "أَيْنَ always ends in -a; it never takes case endings."
+    ],
+    "subtleties": [
+     "أَيْنَمَا + jussive = “wherever”: أَيْنَمَا تَذْهَبْ أَذْهَبْ (wherever you go, I go)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

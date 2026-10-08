@@ -1,6 +1,71 @@
 {
  "lexemes": [
   {
+   "id": "zh:gen",
+   "lemma": "根",
+   "trad": "根",
+   "pinyin": "gēn",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for long, thin things: 一根黄瓜, 一根胡萝卜, 一根葱",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:ke.round",
+   "lemma": "颗",
+   "trad": "顆",
+   "pinyin": "kē",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for small round things: 一颗洋葱, 一颗豌豆",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:ke.plant",
+   "lemma": "棵",
+   "trad": "棵",
+   "pinyin": "kē",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for plants: 一棵生菜, 一棵菠菜, 一棵卷心菜",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:tiao",
+   "lemma": "条",
+   "trad": "條",
+   "pinyin": "tiáo",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for long, narrow (often flexible) things: 一条茄子, 一条鱼, 一条路",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:tou",
+   "lemma": "头",
+   "trad": "頭",
+   "pinyin": "tóu",
+   "pos": "CLF",
+   "senses": [],
+   "role": "measure word for heads of garlic (一头大蒜) and for livestock",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
    "id": "zh:xihongshi",
    "lemma": "西红柿",
    "trad": "西紅柿",

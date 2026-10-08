@@ -1,0 +1,17 @@
+{
+ "lexemes": [
+  {
+   "id": "he:haim",
+   "lemma": "הַאִם",
+   "pos": "PART",
+   "senses": [],
+   "translit": "ha'im",
+   "role": "question particle: opens a yes/no question (formal and written; in speech rising intonation alone is enough)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  }
+ ],
+ "absent": []
+}

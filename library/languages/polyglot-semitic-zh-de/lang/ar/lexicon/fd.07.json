@@ -1,0 +1,698 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:akala",
+   "lemma": "أَكَلَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "root": "ء ك ل",
+   "verbForm": "I",
+   "translit": "ʾakala",
+   "forms": {
+    "V;PST;1;SG": "أَكَلْتُ",
+    "V;PST;2;SG;MASC": "أَكَلْتَ",
+    "V;PST;3;SG;MASC": "أَكَلَ",
+    "V;PST;1;PL": "أَكَلْنَا",
+    "V;PST;2;PL;MASC": "أَكَلْتُمْ",
+    "V;PST;3;PL;MASC": "أَكَلُوا",
+    "V;PST;2;SG;FEM": "أَكَلْتِ",
+    "V;PST;3;SG;FEM": "أَكَلَتْ",
+    "V;PST;2;PL;FEM": "أَكَلْتُنَّ",
+    "V;PST;3;PL;FEM": "أَكَلْنَ",
+    "V;PRS;IND;1;SG": "آكُلُ",
+    "V;PRS;IND;2;SG;MASC": "تَأْكُلُ",
+    "V;PRS;IND;3;SG;MASC": "يَأْكُلُ",
+    "V;PRS;IND;1;PL": "نَأْكُلُ",
+    "V;PRS;IND;2;PL;MASC": "تَأْكُلُونَ",
+    "V;PRS;IND;3;PL;MASC": "يَأْكُلُونَ",
+    "V;PRS;IND;2;SG;FEM": "تَأْكُلِينَ",
+    "V;PRS;IND;3;SG;FEM": "تَأْكُلُ",
+    "V;PRS;IND;2;PL;FEM": "تَأْكُلْنَ",
+    "V;PRS;IND;3;PL;FEM": "يَأْكُلْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Basic and everyday; in figurative use, something that slowly destroys.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.eat"
+     },
+     {
+      "id": "s2",
+      "def": "to eat away, corrode, consume (rust, fire, time)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَاذَا تَأْكُلُ عَلَى الْفُطُورِ؟",
+      "tr": "What do you eat for breakfast?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "نَأْكُلُ مَعًا كُلَّ يَوْمٍ.",
+      "tr": "We eat together every day.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "يَأْكُلُ الصَّدَأُ الْحَدِيدَ.",
+      "tr": "Rust eats away at iron.",
+      "register": "literary",
+      "context": "figurative",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَكَلَ بِشَهِيَّةٍ",
+      "tr": "to eat with appetite"
+     },
+     {
+      "text": "أَكَلَ بِسُرْعَةٍ",
+      "tr": "to eat quickly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "أَكَلَ عَلَيْهِ الدَّهْرُ وَشَرِبَ",
+      "tr": "time has eaten and drunk on it",
+      "kind": "idiom",
+      "meaning": "it is very old, worn out or outdated",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "تَنَاوَلَ",
+      "register": "formal",
+      "nuance": "to have, take (a meal, medicine) — news, menus and polite speech"
+     },
+     {
+      "word": "اِلْتَهَمَ",
+      "register": "literary",
+      "nuance": "to devour, gobble up"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "صَامَ",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔakal-; cognate with Hebrew אָכַל (akhal) and Aramaic ʾăḵal.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The imperative is just كُلْ (kul, ‘eat!’): like خُذْ (‘take!’) and مُرْ (‘order!’) it drops its first radical, the hamza."
+    ],
+    "pitfalls": [
+     "I eat = آكُلُ (ʾākulu): hamza + long ā is written with madda, آ.",
+     "The vowel of the 2nd radical changes: a in the past (أَكَلَ), u in the present (يَأْكُلُ)."
+    ],
+    "subtleties": [
+     "In formal Arabic, especially for meals, تَنَاوَلَ is preferred: تَنَاوَلْنَا الْغَدَاءَ (we had lunch)."
+    ]
+   }
+  },
+  {
+   "id": "ar:shariba",
+   "lemma": "شَرِبَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.drink"
+   ],
+   "root": "ش ر ب",
+   "verbForm": "I",
+   "translit": "šariba",
+   "forms": {
+    "V;PST;1;SG": "شَرِبْتُ",
+    "V;PST;2;SG;MASC": "شَرِبْتَ",
+    "V;PST;3;SG;MASC": "شَرِبَ",
+    "V;PST;1;PL": "شَرِبْنَا",
+    "V;PST;2;PL;MASC": "شَرِبْتُمْ",
+    "V;PST;3;PL;MASC": "شَرِبُوا",
+    "V;PST;2;SG;FEM": "شَرِبْتِ",
+    "V;PST;3;SG;FEM": "شَرِبَتْ",
+    "V;PST;2;PL;FEM": "شَرِبْتُنَّ",
+    "V;PST;3;PL;FEM": "شَرِبْنَ",
+    "V;PRS;IND;1;SG": "أَشْرَبُ",
+    "V;PRS;IND;2;SG;MASC": "تَشْرَبُ",
+    "V;PRS;IND;3;SG;MASC": "يَشْرَبُ",
+    "V;PRS;IND;1;PL": "نَشْرَبُ",
+    "V;PRS;IND;2;PL;MASC": "تَشْرَبُونَ",
+    "V;PRS;IND;3;PL;MASC": "يَشْرَبُونَ",
+    "V;PRS;IND;2;SG;FEM": "تَشْرَبِينَ",
+    "V;PRS;IND;3;SG;FEM": "تَشْرَبُ",
+    "V;PRS;IND;2;PL;FEM": "تَشْرَبْنَ",
+    "V;PRS;IND;3;PL;FEM": "يَشْرَبْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday and social: tea, coffee, hospitality.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drink",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drink"
+     },
+     {
+      "id": "s2",
+      "def": "to smoke (cigarettes, shisha) — lit. “drink” smoke",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَشْرَبُ الْقَهْوَةَ كُلَّ صَبَاحٍ.",
+      "tr": "I drink coffee every morning.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تَشْرَبِينَ؟",
+      "tr": "What will you (f) have to drink?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "شَرِبَ الْمَرِيضُ الدَّوَاءَ.",
+      "tr": "The patient took (drank) the medicine.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "يَشْرَبُ جَدِّي الشِّيشَةَ فِي الْمَقْهَى.",
+      "tr": "My grandfather smokes shisha at the café.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "شَرِبَ الشَّايَ",
+      "tr": "to drink tea"
+     },
+     {
+      "text": "شَرِبَ نَخْبَ …",
+      "tr": "to drink a toast to …"
+     },
+     {
+      "text": "مَاءُ الشُّرْبِ",
+      "tr": "drinking water"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "اِشْرَبْ مِنَ الْبَحْرِ",
+      "tr": "go drink from the sea",
+      "kind": "colloquial",
+      "meaning": "do what you like, I don’t care (a rude dismissal)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "تَنَاوَلَ",
+      "register": "formal",
+      "nuance": "to have, take (food, drink, medicine) — polite and written style"
+     },
+     {
+      "word": "اِحْتَسَى",
+      "register": "literary",
+      "nuance": "to sip, drink slowly (a hot drink)"
+     }
+    ],
+    "etymology": {
+     "text": "Root ش ر ب; compare Akkadian sarāpum (“to suck”) and Geʿez ሠረበ (śäräbä).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English syrup and sherbet, Turkish şerbet and Greek σιρόπι all come from this root: شَرَاب / شَرْبَة, “a drink”."
+    ],
+    "pitfalls": [
+     "The vowel changes: šariba (past, i) → yašrabu (present, a). Not *yašribu.",
+     "شَرَّبَ with šadda is a different verb: “to make drink, to soak” (form II)."
+    ],
+    "subtleties": [
+     "In formal or polite language تَنَاوَلَ is preferred for meals and medicine: تَنَاوَلَ الدَّوَاءَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:ishtara",
+   "lemma": "اِشْتَرَى",
+   "pos": "VERB",
+   "senses": [
+    "verb.buy"
+   ],
+   "root": "ش ر ي",
+   "verbForm": "VIII",
+   "translit": "ištarā",
+   "forms": {
+    "V;PST;1;SG": "اِشْتَرَيْتُ",
+    "V;PST;2;SG;MASC": "اِشْتَرَيْتَ",
+    "V;PST;3;SG;MASC": "اِشْتَرَى",
+    "V;PST;1;PL": "اِشْتَرَيْنَا",
+    "V;PST;2;PL;MASC": "اِشْتَرَيْتُمْ",
+    "V;PST;3;PL;MASC": "اِشْتَرَوْا",
+    "V;PST;2;SG;FEM": "اِشْتَرَيْتِ",
+    "V;PST;3;SG;FEM": "اِشْتَرَتْ",
+    "V;PST;2;PL;FEM": "اِشْتَرَيْتُنَّ",
+    "V;PST;3;PL;FEM": "اِشْتَرَيْنَ",
+    "V;PRS;IND;1;SG": "أَشْتَرِي",
+    "V;PRS;IND;2;SG;MASC": "تَشْتَرِي",
+    "V;PRS;IND;3;SG;MASC": "يَشْتَرِي",
+    "V;PRS;IND;1;PL": "نَشْتَرِي",
+    "V;PRS;IND;2;PL;MASC": "تَشْتَرُونَ",
+    "V;PRS;IND;3;PL;MASC": "يَشْتَرُونَ",
+    "V;PRS;IND;2;SG;FEM": "تَشْتَرِينَ",
+    "V;PRS;IND;3;SG;FEM": "تَشْتَرِي",
+    "V;PRS;IND;2;PL;FEM": "تَشْتَرِينَ",
+    "V;PRS;IND;3;PL;FEM": "يَشْتَرِينَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Markets, shopping, bargaining.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to buy, to purchase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.buy"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِشْتَرَيْتُ خُبْزًا مِنَ الْمَخْبَزِ.",
+      "tr": "I bought bread at the bakery.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تَشْتَرِي لِلْعَشَاءِ؟",
+      "tr": "What are you buying for dinner?",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "نَشْتَرِي الْخُضَارَ مِنَ السُّوقِ كُلَّ أُسْبُوعٍ.",
+      "tr": "We buy vegetables at the market every week.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "اِشْتَرَتْ أُخْتِي فُسْتَانًا جَدِيدًا.",
+      "tr": "My sister bought a new dress.",
+      "register": "neutral",
+      "context": "clothes",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "اِشْتَرَى بِالتَّقْسِيطِ",
+      "tr": "to buy in instalments"
+     },
+     {
+      "text": "اِشْتَرَى نَقْدًا",
+      "tr": "to buy for cash"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "اِبْتَاعَ",
+      "register": "formal",
+      "nuance": "to buy, purchase — written and formal style"
+     },
+     {
+      "word": "شَرَى",
+      "register": "literary",
+      "nuance": "classical form I: can mean “to buy” but also “to sell” (Wiktionary)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "بَاعَ",
+      "note": "to sell"
+     }
+    ],
+    "etymology": {
+     "text": "Form VIII (pattern اِفْتَعَلَ) of the root ش ر ي, whose form I شَرَى can mean both “to sell” and “to buy” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "مُشْتَرٍ means “buyer” — and الْمُشْتَرِي is also the planet Jupiter."
+    ],
+    "pitfalls": [
+     "Weak final radical: the y appears as -ā, -ī or -ay — اِشْتَرَى (he bought), يَشْتَرِي (he buys), اِشْتَرَيْتُ (I bought), اِشْتَرَوْا (they bought).",
+     "تَشْتَرِينَ is both “you (one woman) buy” and “you (women) buy”."
+    ],
+    "subtleties": [
+     "The initial alif is a connecting hamza (hamzat al-waṣl): after a vowel it is silent — وَاشْتَرَى (wa-štarā)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ahabba",
+   "lemma": "أَحَبَّ",
+   "pos": "VERB",
+   "senses": [
+    "verb.like"
+   ],
+   "root": "ح ب ب",
+   "verbForm": "IV",
+   "translit": "ʾaḥabba",
+   "forms": {
+    "V;PST;1;SG": "أَحْبَبْتُ",
+    "V;PST;2;SG;MASC": "أَحْبَبْتَ",
+    "V;PST;3;SG;MASC": "أَحَبَّ",
+    "V;PST;1;PL": "أَحْبَبْنَا",
+    "V;PST;2;PL;MASC": "أَحْبَبْتُمْ",
+    "V;PST;3;PL;MASC": "أَحَبُّوا",
+    "V;PST;2;SG;FEM": "أَحْبَبْتِ",
+    "V;PST;3;SG;FEM": "أَحَبَّتْ",
+    "V;PST;2;PL;FEM": "أَحْبَبْتُنَّ",
+    "V;PST;3;PL;FEM": "أَحْبَبْنَ",
+    "V;PRS;IND;1;SG": "أُحِبُّ",
+    "V;PRS;IND;2;SG;MASC": "تُحِبُّ",
+    "V;PRS;IND;3;SG;MASC": "يُحِبُّ",
+    "V;PRS;IND;1;PL": "نُحِبُّ",
+    "V;PRS;IND;2;PL;MASC": "تُحِبُّونَ",
+    "V;PRS;IND;3;PL;MASC": "يُحِبُّونَ",
+    "V;PRS;IND;2;SG;FEM": "تُحِبِّينَ",
+    "V;PRS;IND;3;SG;FEM": "تُحِبُّ",
+    "V;PRS;IND;2;PL;FEM": "تُحْبِبْنَ",
+    "V;PRS;IND;3;PL;FEM": "يُحْبِبْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm; from “I like onions” to “I love you”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to like, to love",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.like"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُحِبُّ الْقِرَاءَةَ.",
+      "tr": "I like reading.",
+      "register": "neutral",
+      "context": "hobbies",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ تُحِبُّ الشَّايَ بِالنَّعْنَاعِ؟",
+      "tr": "Do you like tea with mint?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "تُحِبُّ الْأُمُّ أَطْفَالَهَا.",
+      "tr": "The mother loves her children.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "أُحِبُّكَ.",
+      "tr": "I love you. (to a man)",
+      "register": "neutral",
+      "context": "romance",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أُحِبُّ أَنْ …",
+      "tr": "I would like to …"
+     },
+     {
+      "text": "أَحَبَّ مِنْ كُلِّ قَلْبِهِ",
+      "tr": "to love with all one’s heart"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "مَنْ أَحَبَّ شَيْئًا أَكْثَرَ مِنْ ذِكْرِهِ",
+      "tr": "whoever loves a thing mentions it often",
+      "kind": "saying",
+      "meaning": "people keep talking about what they love",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "عَشِقَ",
+      "register": "literary",
+      "nuance": "to love passionately, be infatuated"
+     },
+     {
+      "word": "هَوِيَ",
+      "register": "poetic",
+      "nuance": "to love, be fond of — classical and poetic"
+     },
+     {
+      "word": "أَعْجَبَ",
+      "register": "neutral",
+      "nuance": "“to please”: أَعْجَبَنِي الْفِيلْمُ = I liked the film — the thing liked is the subject"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "كَرِهَ",
+      "note": "to hate, dislike"
+     }
+    ],
+    "etymology": {
+     "text": "Form IV of the root ح ب ب; the verbal nouns are حُبّ (love) and مَحَبَّة (affection) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish muhabbet (friendly chat, affection) comes from Arabic مَحَبَّة, from the same root; Hebrew חִבָּה (ḥiba, fondness) is a Semitic cousin."
+    ],
+    "pitfalls": [
+     "Form IV: the present has u-prefixes — أُحِبُّ (ʾuḥibbu), يُحِبُّ — not *أَحِبُّ.",
+     "Doubled root: before a consonant ending the two b’s come apart — أَحْبَبْتُ (I loved), يُحْبِبْنَ (they, women, love)."
+    ],
+    "subtleties": [
+     "أُحِبُّ means both “I like” and “I love”; the object decides: أُحِبُّ الْبَصَلَ (I like onions) vs أُحِبُّكِ (I love you).",
+     "To like doing: أُحِبُّ + verbal noun (أُحِبُّ السِّبَاحَةَ) or أَنْ + subjunctive (أُحِبُّ أَنْ أَسْبَحَ)."
+    ]
+   }
+  },
+  {
+   "id": "ar:arada",
+   "lemma": "أَرَادَ",
+   "pos": "VERB",
+   "senses": [
+    "verb.want"
+   ],
+   "root": "ر و د",
+   "verbForm": "IV",
+   "translit": "ʾarāda",
+   "forms": {
+    "V;PST;1;SG": "أَرَدْتُ",
+    "V;PST;2;SG;MASC": "أَرَدْتَ",
+    "V;PST;3;SG;MASC": "أَرَادَ",
+    "V;PST;1;PL": "أَرَدْنَا",
+    "V;PST;2;PL;MASC": "أَرَدْتُمْ",
+    "V;PST;3;PL;MASC": "أَرَادُوا",
+    "V;PST;2;SG;FEM": "أَرَدْتِ",
+    "V;PST;3;SG;FEM": "أَرَادَتْ",
+    "V;PST;2;PL;FEM": "أَرَدْتُنَّ",
+    "V;PST;3;PL;FEM": "أَرَدْنَ",
+    "V;PRS;IND;1;SG": "أُرِيدُ",
+    "V;PRS;IND;2;SG;MASC": "تُرِيدُ",
+    "V;PRS;IND;3;SG;MASC": "يُرِيدُ",
+    "V;PRS;IND;1;PL": "نُرِيدُ",
+    "V;PRS;IND;2;PL;MASC": "تُرِيدُونَ",
+    "V;PRS;IND;3;PL;MASC": "يُرِيدُونَ",
+    "V;PRS;IND;2;SG;FEM": "تُرِيدِينَ",
+    "V;PRS;IND;3;SG;FEM": "تُرِيدُ",
+    "V;PRS;IND;2;PL;FEM": "تُرِدْنَ",
+    "V;PRS;IND;3;PL;FEM": "يُرِدْنَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wishes and intentions; direct, so softened with مِنْ فَضْلِكَ.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to want, to wish",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.want"
+     },
+     {
+      "id": "s2",
+      "def": "to be about to (of things)",
+      "register": [
+       "literary"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُرِيدُ كُوبًا مِنَ الْمَاءِ، مِنْ فَضْلِكَ.",
+      "tr": "I would like a glass of water, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "مَاذَا تُرِيدِينَ أَنْ تَأْكُلِي؟",
+      "tr": "What do you (f) want to eat?",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "يُرِيدُونَ أَنْ يُسَافِرُوا إِلَى الْمَغْرِبِ.",
+      "tr": "They want to travel to Morocco.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "فَوَجَدَا فِيهَا جِدَارًا يُرِيدُ أَنْ يَنْقَضَّ",
+      "tr": "and they found in it a wall about to collapse (Qurʾān 18:77)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أُرِيدُ أَنْ …",
+      "tr": "I want to …"
+     },
+     {
+      "text": "إِنْ أَرَدْتَ",
+      "tr": "if you want"
+     },
+     {
+      "text": "بِإِرَادَتِهِ",
+      "tr": "of his own free will"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "إِذَا أَرَدْتَ أَنْ تُطَاعَ فَأْمُرْ بِمَا يُسْتَطَاعُ",
+      "tr": "if you want to be obeyed, order what can be done",
+      "kind": "proverb",
+      "meaning": "make demands that people are able to meet",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "وَدَّ",
+      "register": "formal",
+      "nuance": "to wish, would like — very polite: أَوَدُّ أَنْ أَشْكُرَكُمْ (I would like to thank you)"
+     },
+     {
+      "word": "رَغِبَ فِي",
+      "register": "formal",
+      "nuance": "to desire, wish for — written and official style"
+     }
+    ],
+    "etymology": {
+     "text": "Form IV of the root ر و د; verbal noun إِرَادَة, “will, intention” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish irade (will, decree) and mürit (disciple) come from Arabic إِرَادَة and مُرِيد, “one who wants”, from this root."
+    ],
+    "pitfalls": [
+     "Hollow verb: the long ī/ā shortens before consonant endings — تُرِيدُ but تُرِدْنَ (you, women, want); أَرَادَ but أَرَدْتُ (I wanted).",
+     "Form IV: present with u-prefix — أُرِيدُ, يُرِيدُ (not *أَرِيدُ)."
+    ],
+    "subtleties": [
+     "Followed by a noun (أُرِيدُ خُبْزًا) or by أَنْ + subjunctive (أُرِيدُ أَنْ آكُلَ). In a shop, أُرِيدُ + مِنْ فَضْلِكَ is fine; أَوَدُّ is more formal."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

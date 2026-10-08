@@ -1,0 +1,237 @@
+{
+ "field": "home",
+ "title": "At home",
+ "subgroups": [
+  {
+   "id": "house",
+   "title": "The house"
+  },
+  {
+   "id": "furniture",
+   "title": "Furniture"
+  },
+  {
+   "id": "things",
+   "title": "Everyday things"
+  },
+  {
+   "id": "rooms",
+   "title": "Rooms and parts of the home"
+  }
+ ],
+ "sources": [
+  "The home, its rooms, furniture and everyday things — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "home.house",
+   "gloss": "house",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "home.flat",
+   "gloss": "flat, apartment",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "home.room",
+   "gloss": "room",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "home.door",
+   "gloss": "door",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "home.window",
+   "gloss": "window",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "home.wall",
+   "gloss": "wall",
+   "subgroup": "house",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "home.table",
+   "gloss": "table",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "home.chair",
+   "gloss": "chair",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "home.bed",
+   "gloss": "bed",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "home.cupboard",
+   "gloss": "cupboard, wardrobe",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "home.lamp",
+   "gloss": "lamp",
+   "subgroup": "furniture",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "obj.book",
+   "gloss": "book",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "obj.pen",
+   "gloss": "pen",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "obj.paper",
+   "gloss": "paper",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "obj.phone",
+   "gloss": "phone",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "obj.key",
+   "gloss": "key",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "obj.bag",
+   "gloss": "bag",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "obj.cup",
+   "gloss": "cup",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "obj.glass",
+   "gloss": "glass (for drinking)",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "obj.plate",
+   "gloss": "plate",
+   "subgroup": "things",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "home.kitchen",
+   "gloss": "kitchen",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "home.bathroom",
+   "gloss": "bathroom",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "home.bedroom",
+   "gloss": "bedroom",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 23
+  },
+  {
+   "id": "home.livingroom",
+   "gloss": "living room",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 24
+  },
+  {
+   "id": "home.garden",
+   "gloss": "garden",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 25
+  },
+  {
+   "id": "home.floor",
+   "gloss": "floor (of a room)",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 26
+  },
+  {
+   "id": "home.stairs",
+   "gloss": "stairs",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 27
+  },
+  {
+   "id": "home.shelf",
+   "gloss": "shelf",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 28
+  },
+  {
+   "id": "home.sofa",
+   "gloss": "sofa",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 29
+  },
+  {
+   "id": "home.fridge",
+   "gloss": "fridge",
+   "subgroup": "rooms",
+   "tier": 1,
+   "rank": 30
+  }
+ ]
+}

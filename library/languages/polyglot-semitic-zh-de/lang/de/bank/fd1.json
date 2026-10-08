@@ -1,0 +1,5524 @@
+{
+ "sentences": [
+  {
+   "id": "de.f1.001",
+   "frame": "fr.be.person",
+   "text": "Ich bin Lehrer.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "I am a teacher. (a man speaking)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.002",
+   "frame": "fr.be.person",
+   "text": "Wir sind Lehrer.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f1.001",
+   "gloss": "We are teachers.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.003",
+   "frame": "fr.be.person",
+   "text": "Ich bin Lehrerin.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "I am a teacher. (a woman speaking)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.004",
+   "frame": "fr.be.person",
+   "text": "Wir sind Lehrerinnen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Lehrerinnen",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f1.003",
+   "gloss": "We are teachers. (women)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.005",
+   "frame": "fr.be.person",
+   "text": "Du bist Schüler.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "You are a pupil. (to a boy)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.006",
+   "frame": "fr.be.person",
+   "text": "Ihr seid Schüler.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "seid",
+     "l": "de:sein",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f1.005",
+   "gloss": "You are pupils. (to several, informal)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.007",
+   "frame": "fr.be.person",
+   "text": "Du bist Schülerin.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Schülerin",
+     "l": "de:Schülerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "You are a pupil. (to a girl)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.008",
+   "frame": "fr.be.person",
+   "text": "Er ist Student.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Student",
+     "l": "de:Student",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "He is a (university) student.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.009",
+   "frame": "fr.be.person",
+   "text": "Sie sind Studenten.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Studenten",
+     "l": "de:Student",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f1.008",
+   "gloss": "They are (university) students.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.010",
+   "frame": "fr.be.person",
+   "text": "Sie ist Studentin.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Studentin",
+     "l": "de:Studentin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "She is a (university) student.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.011",
+   "frame": "fr.be.person",
+   "text": "Sie sind Studentinnen.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Studentinnen",
+     "l": "de:Studentin",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f1.010",
+   "gloss": "They are (university) students. (women)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.012",
+   "frame": "fr.be.person",
+   "text": "Wir sind Freunde.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Freunde",
+     "l": "de:Freund",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We are friends.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.013",
+   "frame": "fr.be.person",
+   "text": "Ihr seid Freundinnen.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "seid",
+     "l": "de:sein",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "Freundinnen",
+     "l": "de:Freundin",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "You are friends. (to several women or girls, informal)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.014",
+   "frame": "fr.be.person",
+   "text": "Ihr seid Kinder.",
+   "tokens": [
+    {
+     "t": "Ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "seid",
+     "l": "de:sein",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "You are children. (to several, informal)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.015",
+   "frame": "fr.be.person",
+   "text": "Jungen und Mädchen sind Kinder.",
+   "tokens": [
+    {
+     "t": "Jungen",
+     "l": "de:Junge",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Boys and girls are children.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.016",
+   "frame": "fr.be.person",
+   "text": "Er ist Lehrer und sie ist Lehrerin.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "He is a teacher and she is a teacher too.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.017",
+   "frame": "fr.be.person",
+   "text": "Du und ich sind Freunde.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Freunde",
+     "l": "de:Freund",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "You and I are friends.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.018",
+   "frame": "fr.be.person",
+   "text": "Ich bin Schüler und du bist Student.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Student",
+     "l": "de:Student",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "I am a pupil and you are a university student.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.019",
+   "frame": "fr.be.person",
+   "text": "Sind Sie Lehrerin?",
+   "tokens": [
+    {
+     "t": "Sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Are you a teacher? (polite, to a woman)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.020",
+   "frame": "fr.be.person",
+   "text": "Bist du Student?",
+   "tokens": [
+    {
+     "t": "Bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Student",
+     "l": "de:Student",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Are you a university student? (informal)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.021",
+   "frame": "fr.be.person",
+   "text": "Seid ihr Freunde?",
+   "tokens": [
+    {
+     "t": "Seid",
+     "l": "de:sein",
+     "f": "V;PRS;2;PL"
+    },
+    {
+     "t": "ihr",
+     "l": "de:ihr",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Freunde",
+     "l": "de:Freund",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Are you friends? (to several, informal)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.022",
+   "frame": "fr.be.person",
+   "text": "Sie sind Mann und Frau.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "They are husband and wife.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.023",
+   "frame": "fr.be.person",
+   "text": "Wir sind Mann und Frau.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "We are husband and wife.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.024",
+   "frame": "fr.be.person",
+   "text": "Er ist ein Junge.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Junge",
+     "l": "de:Junge",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "He is a boy.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.025",
+   "frame": "fr.be.person",
+   "text": "Sie sind Jungen.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Jungen",
+     "l": "de:Junge",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.f1.024",
+   "gloss": "They are boys.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.026",
+   "frame": "fr.be.person",
+   "text": "Sie ist ein Mädchen.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "She is a girl.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.027",
+   "frame": "fr.be.person",
+   "text": "Er ist ein Freund.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Freund",
+     "l": "de:Freund",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "He is a friend.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.028",
+   "frame": "fr.be.person",
+   "text": "Sie ist eine Freundin.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Freundin",
+     "l": "de:Freundin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.027",
+   "gloss": "She is a friend.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "de.f1.029",
+   "frame": "fr.be.person",
+   "text": "Ist er ein Freund?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Freund",
+     "l": "de:Freund",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.question.yesno",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Is he a friend?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.030",
+   "frame": "fr.be.person",
+   "text": "Der Mann ist Lehrer.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The man is a teacher.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.031",
+   "frame": "fr.be.person",
+   "text": "Die Frau ist Lehrerin.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.030",
+   "gloss": "The woman is a teacher.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Gender": "FEM"
+   }
+  },
+  {
+   "id": "de.f1.032",
+   "frame": "fr.be.person",
+   "text": "Das Kind ist ein Mädchen.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The child is a girl.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.033",
+   "frame": "fr.be.person",
+   "text": "Der Junge und das Mädchen sind Freunde.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Junge",
+     "l": "de:Junge",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Freunde",
+     "l": "de:Freund",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The boy and the girl are friends.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.034",
+   "frame": "fr.be.person",
+   "text": "Die Kinder sind Schüler.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The children are pupils.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.035",
+   "frame": "fr.be.person",
+   "text": "Die Leute sind Studenten.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Studenten",
+     "l": "de:Student",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The people are (university) students.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.036",
+   "frame": "fr.be.person",
+   "text": "Anna ist Studentin und Tom ist Schüler.",
+   "tokens": [
+    {
+     "t": "Anna",
+     "name": true
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Studentin",
+     "l": "de:Studentin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Tom",
+     "name": true
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "Anna is a (university) student and Tom is a pupil.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.037",
+   "frame": "fr.greet",
+   "text": "Hallo!",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Hello! / Hi!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.038",
+   "frame": "fr.greet",
+   "text": "Guten Tag!",
+   "tokens": [
+    {
+     "t": "Guten Tag",
+     "l": "de:guten_Tag"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Good afternoon! / Hello! (polite)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.039",
+   "frame": "fr.greet",
+   "text": "Guten Morgen!",
+   "tokens": [
+    {
+     "t": "Guten Morgen",
+     "l": "de:guten_Morgen"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Good morning!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.040",
+   "frame": "fr.greet",
+   "text": "Guten Abend!",
+   "tokens": [
+    {
+     "t": "Guten Abend",
+     "l": "de:guten_Abend"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Good evening!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.041",
+   "frame": "fr.greet",
+   "text": "Gute Nacht!",
+   "tokens": [
+    {
+     "t": "Gute Nacht",
+     "l": "de:gute_Nacht"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Good night!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.042",
+   "frame": "fr.greet",
+   "text": "Hallo, wie geht's?",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wie geht's",
+     "l": "de:wie_gehts"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Hi, how’s it going?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.043",
+   "frame": "fr.greet",
+   "text": "Hallo, wie geht es dir?",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wie geht es dir",
+     "l": "de:wie_geht_es_dir"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Hi, how are you? (to a friend)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.044",
+   "frame": "fr.greet",
+   "text": "Guten Tag, wie geht es Ihnen?",
+   "tokens": [
+    {
+     "t": "Guten Tag",
+     "l": "de:guten_Tag"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "wie geht es Ihnen",
+     "l": "de:wie_geht_es_Ihnen"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": "de.f1.043",
+   "gloss": "Good afternoon, how are you? (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f1.045",
+   "frame": "fr.greet",
+   "text": "Gut, danke, und dir?",
+   "tokens": [
+    {
+     "t": "Gut",
+     "l": "de:gut"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "danke",
+     "l": "de:danke"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "dir",
+     "l": "de:du",
+     "f": "PRON;DAT"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Fine, thanks – and you? (informal)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.046",
+   "frame": "fr.greet",
+   "text": "Gut, danke, und Ihnen?",
+   "tokens": [
+    {
+     "t": "Gut",
+     "l": "de:gut"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "danke",
+     "l": "de:danke"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "Ihnen",
+     "l": "de:Sie",
+     "f": "PRON;DAT"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": "de.f1.045",
+   "gloss": "Fine, thanks – and you? (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f1.047",
+   "frame": "fr.greet",
+   "text": "Danke, gut.",
+   "tokens": [
+    {
+     "t": "Danke",
+     "l": "de:danke"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "gut",
+     "l": "de:gut"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Thank you, I’m fine.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.048",
+   "frame": "fr.greet",
+   "text": "Freut mich!",
+   "tokens": [
+    {
+     "t": "Freut mich",
+     "l": "de:freut_mich"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Nice to meet you!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.049",
+   "frame": "fr.greet",
+   "text": "Ja, bitte!",
+   "tokens": [
+    {
+     "t": "Ja",
+     "l": "de:ja"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Yes, please!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.050",
+   "frame": "fr.greet",
+   "text": "Nein, danke!",
+   "tokens": [
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "danke",
+     "l": "de:danke"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "No, thank you!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.051",
+   "frame": "fr.greet",
+   "text": "Es tut mir leid.",
+   "tokens": [
+    {
+     "t": "Es tut mir leid",
+     "l": "de:es_tut_mir_leid"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "I’m sorry.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.052",
+   "frame": "fr.greet",
+   "text": "Entschuldigung, sind Sie Lehrer?",
+   "tokens": [
+    {
+     "t": "Entschuldigung",
+     "l": "de:Entschuldigung"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.greetings",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Excuse me, are you a teacher? (polite, to a man)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.053",
+   "frame": "fr.greet",
+   "text": "Danke, tschüss!",
+   "tokens": [
+    {
+     "t": "Danke",
+     "l": "de:danke"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "tschüss",
+     "l": "de:tschüss"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Thanks, bye!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.054",
+   "frame": "fr.greet",
+   "text": "Danke, auf Wiedersehen!",
+   "tokens": [
+    {
+     "t": "Danke",
+     "l": "de:danke"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "auf Wiedersehen",
+     "l": "de:auf_Wiedersehen"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": "de.f1.053",
+   "gloss": "Thank you, goodbye! (polite)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f1.055",
+   "frame": "fr.greet",
+   "text": "Tschüss, bis später!",
+   "tokens": [
+    {
+     "t": "Tschüss",
+     "l": "de:tschüss"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "bis später",
+     "l": "de:bis_später"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Bye, see you later!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.056",
+   "frame": "fr.greet",
+   "text": "Tschüss, bis bald!",
+   "tokens": [
+    {
+     "t": "Tschüss",
+     "l": "de:tschüss"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "bis bald",
+     "l": "de:bis_bald"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Bye, see you soon!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.057",
+   "frame": "fr.greet",
+   "text": "Auf Wiedersehen und danke!",
+   "tokens": [
+    {
+     "t": "Auf Wiedersehen",
+     "l": "de:auf_Wiedersehen"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "danke",
+     "l": "de:danke"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Goodbye and thank you!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.058",
+   "frame": "fr.greet",
+   "text": "Hallo, Leute!",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Hi, guys!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.059",
+   "frame": "fr.greet",
+   "text": "Guten Morgen, Kinder!",
+   "tokens": [
+    {
+     "t": "Guten Morgen",
+     "l": "de:guten_Morgen"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Good morning, children!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.060",
+   "frame": "fr.greet",
+   "text": "Gute Nacht, Kinder!",
+   "tokens": [
+    {
+     "t": "Gute Nacht",
+     "l": "de:gute_Nacht"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Good night, children!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.061",
+   "frame": "fr.greet",
+   "text": "Guten Tag, ich bin Lehrer.",
+   "tokens": [
+    {
+     "t": "Guten Tag",
+     "l": "de:guten_Tag"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Good afternoon, I am the teacher. (a man)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.062",
+   "frame": "fr.greet",
+   "text": "Hallo, ich bin Studentin.",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Studentin",
+     "l": "de:Studentin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Hi, I’m a (university) student. (a woman)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.063",
+   "frame": "fr.be.person",
+   "text": "Bist du Lehrer?",
+   "tokens": [
+    {
+     "t": "Bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Are you a teacher? (informal, to a man)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.064",
+   "frame": "fr.be.person",
+   "text": "Sind Sie Lehrer?",
+   "tokens": [
+    {
+     "t": "Sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.question.yesno",
+    "fn.greetings"
+   ],
+   "variantOf": "de.f1.063",
+   "gloss": "Are you a teacher? (polite, to a man)",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Formality": "formal"
+   }
+  },
+  {
+   "id": "de.f1.065",
+   "frame": "fr.greet",
+   "text": "Nein heißt nein.",
+   "tokens": [
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": "heißt",
+     "l": "de:heißen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "No means no.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.066",
+   "frame": "fr.greet",
+   "text": "Hallo, ich heiße Anna.",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heiße",
+     "l": "de:heißen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Anna",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Hi, my name is Anna.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.067",
+   "frame": "fr.greet",
+   "text": "Guten Tag, ich heiße Max Weber.",
+   "tokens": [
+    {
+     "t": "Guten Tag",
+     "l": "de:guten_Tag"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heiße",
+     "l": "de:heißen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Max",
+     "name": true
+    },
+    {
+     "t": "Weber",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Good afternoon, my name is Max Weber.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.068",
+   "frame": "fr.greet",
+   "text": "Er heißt Tom.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "heißt",
+     "l": "de:heißen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Tom",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject"
+   ],
+   "variantOf": null,
+   "gloss": "His name is Tom.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.069",
+   "frame": "fr.greet",
+   "text": "Freut mich, ich bin Lena.",
+   "tokens": [
+    {
+     "t": "Freut mich",
+     "l": "de:freut_mich"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Lena",
+     "name": true
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Nice to meet you, I’m Lena.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.070",
+   "frame": "fr.greet",
+   "text": "Hallo, Tom! Wie geht's?",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "Tom",
+     "name": true
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "Wie geht's",
+     "l": "de:wie_gehts"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Hi, Tom! How’s it going?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.071",
+   "frame": "fr.greet",
+   "text": "Wie geht es Ihnen? Danke, gut.",
+   "tokens": [
+    {
+     "t": "Wie geht es Ihnen",
+     "l": "de:wie_geht_es_Ihnen"
+    },
+    {
+     "t": "?",
+     "p": true
+    },
+    {
+     "t": "Danke",
+     "l": "de:danke"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "gut",
+     "l": "de:gut"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "How are you? (polite) – Fine, thank you.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.072",
+   "frame": "fr.greet",
+   "text": "Danke! Bitte!",
+   "tokens": [
+    {
+     "t": "Danke",
+     "l": "de:danke"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "Bitte",
+     "l": "de:bitte"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Thank you! – You’re welcome!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.073",
+   "frame": "fr.be.person",
+   "text": "Dieser Mann ist Lehrer.",
+   "tokens": [
+    {
+     "t": "Dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This man is a teacher.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.074",
+   "frame": "fr.be.person",
+   "text": "Diese Männer sind Lehrer.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Männer",
+     "l": "de:Mann",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.073",
+   "gloss": "These men are teachers.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.075",
+   "frame": "fr.be.person",
+   "text": "Diese Frau ist Studentin.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Studentin",
+     "l": "de:Studentin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This woman is a (university) student.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.076",
+   "frame": "fr.be.person",
+   "text": "Diese Frauen sind Studentinnen.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Frauen",
+     "l": "de:Frau",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Studentinnen",
+     "l": "de:Studentin",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.075",
+   "gloss": "These women are (university) students.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.077",
+   "frame": "fr.be.where",
+   "text": "Dieses Kind ist hier.",
+   "tokens": [
+    {
+     "t": "Dieses",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Kind",
+     "l": "de:Kind",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This child is here.",
+   "alts": [
+    "Hier ist dieses Kind."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.078",
+   "frame": "fr.be.where",
+   "text": "Diese Kinder sind hier.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.077",
+   "gloss": "These children are here.",
+   "alts": [
+    "Hier sind diese Kinder."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.079",
+   "frame": "fr.be.person",
+   "text": "Dieser Junge ist Schüler.",
+   "tokens": [
+    {
+     "t": "Dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Junge",
+     "l": "de:Junge",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This boy is a pupil.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.080",
+   "frame": "fr.be.person",
+   "text": "Diese Jungen sind Schüler.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Jungen",
+     "l": "de:Junge",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Schüler",
+     "l": "de:Schüler",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.079",
+   "gloss": "These boys are pupils.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.081",
+   "frame": "fr.be.where",
+   "text": "Dieses Mädchen ist dort.",
+   "tokens": [
+    {
+     "t": "Dieses",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This girl is over there.",
+   "alts": [
+    "Dort ist dieses Mädchen."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.082",
+   "frame": "fr.be.where",
+   "text": "Diese Mädchen sind dort.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Mädchen",
+     "l": "de:Mädchen",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.081",
+   "gloss": "These girls are over there.",
+   "alts": [
+    "Dort sind diese Mädchen."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.083",
+   "frame": "fr.this.is",
+   "text": "Das ist er.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "variantOf": null,
+   "gloss": "That’s him.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.084",
+   "frame": "fr.this.is",
+   "text": "Das sind sie.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "variantOf": "de.f1.083",
+   "gloss": "That’s them.",
+   "alts": [],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.085",
+   "frame": "fr.this.is",
+   "text": "Das ist sie.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "variantOf": null,
+   "gloss": "That’s her.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.086",
+   "frame": "fr.this.is",
+   "text": "Das bin ich.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.demonstrative"
+   ],
+   "variantOf": null,
+   "gloss": "That’s me.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.087",
+   "frame": "fr.this.is",
+   "text": "Das sind Freunde.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Freunde",
+     "l": "de:Freund",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "These are friends.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.088",
+   "frame": "fr.this.is",
+   "text": "Bist du das?",
+   "tokens": [
+    {
+     "t": "Bist",
+     "l": "de:sein",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Is that you? (informal)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.089",
+   "frame": "fr.this.is",
+   "text": "Ist sie das?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Is that her?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.090",
+   "frame": "fr.be.where",
+   "text": "Ich bin hier.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "I’m here.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.091",
+   "frame": "fr.be.where",
+   "text": "Wir sind da.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "We’re here. (we have arrived)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.092",
+   "frame": "fr.be.where",
+   "text": "Hallo, ich bin da!",
+   "tokens": [
+    {
+     "t": "Hallo",
+     "l": "de:hallo"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "bin",
+     "l": "de:sein",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.greetings"
+   ],
+   "variantOf": null,
+   "gloss": "Hi, I’m here!",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.093",
+   "frame": "fr.be.where",
+   "text": "Ist er hier?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Is he here?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.094",
+   "frame": "fr.be.where",
+   "text": "Diese Person ist dort.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Person",
+     "l": "de:Person",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This person is over there.",
+   "alts": [
+    "Dort ist diese Person."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.095",
+   "frame": "fr.be.where",
+   "text": "Diese Leute sind dort.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Leute",
+     "l": "de:Leute",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "These people are over there.",
+   "alts": [
+    "Dort sind diese Leute."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.096",
+   "frame": "fr.be.where",
+   "text": "Dieser Mann ist dort und diese Frau ist hier.",
+   "tokens": [
+    {
+     "t": "Dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This man is over there and this woman is here.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.097",
+   "frame": "fr.be.person",
+   "text": "Jene Frau ist Lehrerin.",
+   "tokens": [
+    {
+     "t": "Jene",
+     "l": "de:jener",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "That woman is a teacher. (formal, written)",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.098",
+   "frame": "fr.be.where",
+   "text": "Es ist hier.",
+   "tokens": [
+    {
+     "t": "Es",
+     "l": "de:es",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "variantOf": null,
+   "gloss": "It’s here.",
+   "alts": [
+    "Hier ist es."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.099",
+   "frame": "fr.this.is",
+   "text": "Das ist ein Tisch.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tisch",
+     "l": "de:Tisch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a table.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.100",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Tür.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tür",
+     "l": "de:Tür",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a door.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.101",
+   "frame": "fr.this.is",
+   "text": "Das ist ein Fenster.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Fenster",
+     "l": "de:Fenster",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a window.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.102",
+   "frame": "fr.this.is",
+   "text": "Das ist ein Bett.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Bett",
+     "l": "de:Bett",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a bed.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.103",
+   "frame": "fr.this.is",
+   "text": "Das ist ein Stift.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Stift",
+     "l": "de:Stift",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a pen.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.104",
+   "frame": "fr.this.is",
+   "text": "Das ist das Zimmer.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Zimmer",
+     "l": "de:Zimmer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is the room.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.105",
+   "frame": "fr.this.is",
+   "text": "Das ist ein Haus und das ist eine Wohnung.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wohnung",
+     "l": "de:Wohnung",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a house and that is a flat.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.106",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Wand und das ist eine Tür.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wand",
+     "l": "de:Wand",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tür",
+     "l": "de:Tür",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This is a wall and that is a door.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.107",
+   "frame": "fr.this.is",
+   "text": "Ist das ein Glas?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Glas",
+     "l": "de:Glas",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.question.yesno",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Is that a glass?",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.108",
+   "frame": "fr.this.is",
+   "text": "Ja, das ist ein Glas.",
+   "tokens": [
+    {
+     "t": "Ja",
+     "l": "de:ja"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Glas",
+     "l": "de:Glas",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Yes, that is a glass.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.109",
+   "frame": "fr.this.is",
+   "text": "Nein, das ist eine Tasse.",
+   "tokens": [
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tasse",
+     "l": "de:Tasse",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "No, that is a cup.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.110",
+   "frame": "fr.this.is",
+   "text": "Das sind Gläser.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Gläser",
+     "l": "de:Glas",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "These are glasses.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.111",
+   "frame": "fr.thing.here",
+   "text": "Hier ist ein Schlüssel.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Schlüssel",
+     "l": "de:Schlüssel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Here is a key.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.112",
+   "frame": "fr.thing.here",
+   "text": "Hier ist der Schlüssel.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Schlüssel",
+     "l": "de:Schlüssel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.111",
+   "gloss": "Here is the key.",
+   "alts": [
+    "Der Schlüssel ist hier."
+   ],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f1.113",
+   "frame": "fr.thing.here",
+   "text": "Hier ist eine Tasse.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tasse",
+     "l": "de:Tasse",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "Here is a cup.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.114",
+   "frame": "fr.thing.here",
+   "text": "Hier ist die Tasse.",
+   "tokens": [
+    {
+     "t": "Hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tasse",
+     "l": "de:Tasse",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.113",
+   "gloss": "Here is the cup.",
+   "alts": [
+    "Die Tasse ist hier."
+   ],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f1.115",
+   "frame": "fr.thing.here",
+   "text": "Dort ist ein Stuhl.",
+   "tokens": [
+    {
+     "t": "Dort",
+     "l": "de:dort"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Stuhl",
+     "l": "de:Stuhl",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "There is a chair over there.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.116",
+   "frame": "fr.thing.here",
+   "text": "Dort ist der Stuhl.",
+   "tokens": [
+    {
+     "t": "Dort",
+     "l": "de:dort"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Stuhl",
+     "l": "de:Stuhl",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.115",
+   "gloss": "There is the chair.",
+   "alts": [
+    "Der Stuhl ist dort."
+   ],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f1.117",
+   "frame": "fr.thing.here",
+   "text": "Da ist ein Handy.",
+   "tokens": [
+    {
+     "t": "Da",
+     "l": "de:da"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Handy",
+     "l": "de:Handy",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "There’s a phone (there).",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.118",
+   "frame": "fr.thing.here",
+   "text": "Da ist das Handy.",
+   "tokens": [
+    {
+     "t": "Da",
+     "l": "de:da"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Handy",
+     "l": "de:Handy",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.117",
+   "gloss": "There’s the phone.",
+   "alts": [
+    "Das Handy ist da."
+   ],
+   "level": "A1",
+   "variant": {
+    "Definiteness": "DEF"
+   }
+  },
+  {
+   "id": "de.f1.119",
+   "frame": "fr.thing.here",
+   "text": "Der Tisch ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Tisch",
+     "l": "de:Tisch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The table is here.",
+   "alts": [
+    "Hier ist der Tisch."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.120",
+   "frame": "fr.thing.here",
+   "text": "Die Lampe ist dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Lampe",
+     "l": "de:Lampe",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The lamp is over there.",
+   "alts": [
+    "Dort ist die Lampe."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.121",
+   "frame": "fr.thing.here",
+   "text": "Das Buch ist hier.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Buch",
+     "l": "de:Buch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The book is here.",
+   "alts": [
+    "Hier ist das Buch."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.122",
+   "frame": "fr.thing.here",
+   "text": "Die Bücher sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Bücher",
+     "l": "de:Buch",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.121",
+   "gloss": "The books are here.",
+   "alts": [
+    "Hier sind die Bücher."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.123",
+   "frame": "fr.thing.here",
+   "text": "Der Teller ist da.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Teller",
+     "l": "de:Teller",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The plate is there.",
+   "alts": [
+    "Da ist der Teller."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.124",
+   "frame": "fr.thing.here",
+   "text": "Die Teller sind da.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Teller",
+     "l": "de:Teller",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.123",
+   "gloss": "The plates are there.",
+   "alts": [
+    "Da sind die Teller."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.125",
+   "frame": "fr.thing.here",
+   "text": "Dieser Stuhl ist hier.",
+   "tokens": [
+    {
+     "t": "Dieser",
+     "l": "de:dieser",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Stuhl",
+     "l": "de:Stuhl",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "This chair is here.",
+   "alts": [
+    "Hier ist dieser Stuhl."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.126",
+   "frame": "fr.thing.here",
+   "text": "Diese Stühle sind hier.",
+   "tokens": [
+    {
+     "t": "Diese",
+     "l": "de:dieser",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Stühle",
+     "l": "de:Stuhl",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": "de.f1.125",
+   "gloss": "These chairs are here.",
+   "alts": [
+    "Hier sind diese Stühle."
+   ],
+   "level": "A1",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.f1.127",
+   "frame": "fr.thing.here",
+   "text": "Die Tasche ist hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tasche",
+     "l": "de:Tasche",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The bag is here.",
+   "alts": [
+    "Hier ist die Tasche."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.128",
+   "frame": "fr.thing.here",
+   "text": "Das Papier ist dort.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Papier",
+     "l": "de:Papier",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The paper is over there.",
+   "alts": [
+    "Dort ist das Papier."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.129",
+   "frame": "fr.thing.here",
+   "text": "Das Telefon ist da.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Telefon",
+     "l": "de:Telefon",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The phone is there.",
+   "alts": [
+    "Da ist das Telefon."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.130",
+   "frame": "fr.thing.here",
+   "text": "Der Schrank ist dort.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Schrank",
+     "l": "de:Schrank",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The cupboard is over there.",
+   "alts": [
+    "Dort ist der Schrank."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.131",
+   "frame": "fr.thing.here",
+   "text": "Das Haus ist dort.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Haus",
+     "l": "de:Haus",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The house is over there.",
+   "alts": [
+    "Dort ist das Haus."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.132",
+   "frame": "fr.thing.here",
+   "text": "Die Wohnung ist hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wohnung",
+     "l": "de:Wohnung",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The flat is here.",
+   "alts": [
+    "Hier ist die Wohnung."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.133",
+   "frame": "fr.thing.here",
+   "text": "Die Tür ist hier und das Fenster ist dort.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tür",
+     "l": "de:Tür",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "und",
+     "l": "de:und"
+    },
+    {
+     "t": "das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Fenster",
+     "l": "de:Fenster",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "dort",
+     "l": "de:dort"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The door is here and the window is over there.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.134",
+   "frame": "fr.be.person",
+   "text": "Der Mann da ist Lehrer.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Mann",
+     "l": "de:Mann",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.demonstrative"
+   ],
+   "variantOf": null,
+   "gloss": "That man (there) is a teacher.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.135",
+   "frame": "fr.be.person",
+   "text": "Die Frau da ist Lehrerin.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Frau",
+     "l": "de:Frau",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lehrerin",
+     "l": "de:Lehrerin",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.demonstrative"
+   ],
+   "variantOf": null,
+   "gloss": "That woman (there) is a teacher.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.136",
+   "frame": "fr.adj.pred",
+   "text": "Das Buch hier ist gut.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:der",
+     "f": "DET;NOM;SG;NEUT"
+    },
+    {
+     "t": "Buch",
+     "l": "de:Buch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "gut",
+     "l": "de:gut"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic",
+    "fn.demonstrative"
+   ],
+   "variantOf": null,
+   "gloss": "This book (here) is good.",
+   "alts": [],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.137",
+   "frame": "fr.be.where",
+   "text": "Die Kinder sind da.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kinder",
+     "l": "de:Kind",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "da",
+     "l": "de:da"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.definite",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The children are here.",
+   "alts": [
+    "Da sind die Kinder."
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "de.f1.138",
+   "frame": "fr.be.where",
+   "text": "Der Lehrer ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Lehrer",
+     "l": "de:Lehrer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.noun.gender",
+    "fn.definite",
+    "fn.agreement",
+    "fn.case.basic"
+   ],
+   "variantOf": null,
+   "gloss": "The teacher is here.",
+   "alts": [
+    "Hier ist der Lehrer."
+   ],
+   "level": "A1"
+  }
+ ]
+}

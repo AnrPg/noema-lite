@@ -56,7 +56,8 @@
    "subgroup": "fruitveg",
    "tier": 1,
    "rank": 1,
-   "wikidata": "Q23501"
+   "wikidata": "Q23501",
+   "media": "veg-tomato"
   },
   {
    "id": "veg.onion",
@@ -64,7 +65,8 @@
    "subgroup": "bulb",
    "tier": 1,
    "rank": 2,
-   "wikidata": "Q23485"
+   "wikidata": "Q23485",
+   "media": "veg-onion"
   },
   {
    "id": "veg.potato",
@@ -72,7 +74,8 @@
    "subgroup": "root",
    "tier": 1,
    "rank": 3,
-   "wikidata": "Q10998"
+   "wikidata": "Q10998",
+   "media": "veg-potato"
   },
   {
    "id": "veg.garlic",
@@ -80,7 +83,8 @@
    "subgroup": "bulb",
    "tier": 1,
    "rank": 4,
-   "wikidata": "Q23400"
+   "wikidata": "Q23400",
+   "media": "veg-garlic"
   },
   {
    "id": "veg.cucumber",
@@ -88,7 +92,8 @@
    "subgroup": "cucurbit",
    "tier": 1,
    "rank": 5,
-   "wikidata": "Q23425"
+   "wikidata": "Q23425",
+   "media": "veg-cucumber"
   },
   {
    "id": "veg.eggplant",

@@ -1,0 +1,97 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:hal",
+   "lemma": "هَلْ",
+   "pos": "PART",
+   "senses": [],
+   "translit": "hal",
+   "role": "Yes/no question particle: put it at the start of a statement to turn it into a question (هَلْ تُحِبُّ الْجَزَرَ؟).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral question marker of written Arabic.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes/no question marker (placed before the statement)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "shall we …? (suggestion)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "هَلْ تَتَكَلَّمُ الْعَرَبِيَّةَ؟",
+      "tr": "Do you speak Arabic?",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ عِنْدَكِ سَيَّارَةٌ؟",
+      "tr": "Do you (f) have a car?",
+      "register": "neutral",
+      "context": "transport",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ نَشْرَبُ شَايًا؟",
+      "tr": "Shall we have some tea?",
+      "register": "neutral",
+      "context": "invitation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هَلْ مِنْ …؟",
+      "tr": "is there any …?"
+     },
+     {
+      "text": "هَلْ … أَمْ …؟",
+      "tr": "is it … or …?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَ",
+      "register": "formal",
+      "nuance": "prefix question marker (أَتُحِبُّ …؟); required before a negation: أَلَيْسَ …؟"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of هَـ (ha-, an old interrogative, now أَ) + لـ (l-, an affirmative particle) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Word order never changes in an Arabic question — هَلْ is all you add."
+    ],
+    "pitfalls": [
+     "Before al- it takes a helping vowel: هَلِ الْبَصَلُ طَازَجٌ؟ (not هَلْ الْ…).",
+     "Not before a negation: “don’t you like …?” = أَلَا تُحِبُّ …؟ (with أَ), not *هَلْ لَا …"
+    ],
+    "subtleties": [
+     "Spoken Arabic often drops هَلْ and uses intonation alone; in writing it is expected."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

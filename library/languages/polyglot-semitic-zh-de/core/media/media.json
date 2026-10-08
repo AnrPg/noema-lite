@@ -1,0 +1,71 @@
+{
+ "format": "noema.media/v1",
+ "items": [
+  {
+   "id": "veg-cucumber",
+   "file": "veg-cucumber.webp",
+   "origin": "web",
+   "url": "https://commons.wikimedia.org/wiki/File:Cucumis_sativus_0001.JPG",
+   "retrieved": "2026-10-08",
+   "lowResOk": "a small picture-dictionary thumbnail",
+   "alt": "cucumber",
+   "credit": "H. Zell",
+   "license": "CC BY-SA 3.0",
+   "w": 330,
+   "h": 247
+  },
+  {
+   "id": "veg-garlic",
+   "file": "veg-garlic.webp",
+   "origin": "web",
+   "url": "https://commons.wikimedia.org/wiki/File:Garlic_bulbs_and_cloves.jpg",
+   "retrieved": "2026-10-08",
+   "lowResOk": "a small picture-dictionary thumbnail",
+   "alt": "garlic",
+   "credit": "Ivar Leidus",
+   "license": "CC BY-SA 4.0",
+   "w": 330,
+   "h": 220
+  },
+  {
+   "id": "veg-onion",
+   "file": "veg-onion.webp",
+   "origin": "web",
+   "url": "https://commons.wikimedia.org/wiki/File:Allium_cepa,_Amol.jpg",
+   "retrieved": "2026-10-08",
+   "lowResOk": "a small picture-dictionary thumbnail",
+   "alt": "onion",
+   "credit": "Mehdi",
+   "license": "CC BY-SA 3.0",
+   "w": 330,
+   "h": 247
+  },
+  {
+   "id": "veg-potato",
+   "file": "veg-potato.webp",
+   "origin": "web",
+   "url": "https://commons.wikimedia.org/wiki/File:234_Solanum_tuberosum_L.jpg",
+   "retrieved": "2026-10-08",
+   "lowResOk": "a small picture-dictionary thumbnail",
+   "alt": "potato",
+   "credit": "Amédée Masclef",
+   "license": "Public domain",
+   "w": 330,
+   "h": 462
+  },
+  {
+   "id": "veg-tomato",
+   "file": "veg-tomato.webp",
+   "origin": "web",
+   "url": "https://commons.wikimedia.org/wiki/File:Bright_red_tomato_and_cross_section02.jpg",
+   "retrieved": "2026-10-08",
+   "lowResOk": "a small picture-dictionary thumbnail",
+   "alt": "tomato",
+   "credit": "fir0002 flagstaffotos [at] gmail.com Canon 20D + Sigma 150mm f/2.8",
+   "license": "GFDL 1.2",
+   "w": 330,
+   "h": 220,
+   "restricted": true
+  }
+ ]
+}

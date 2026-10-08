@@ -1,7 +1,7 @@
 {
  "function": "fn.definite",
  "status": "absent",
- "summary": "Chinese has no articles. A bare noun is read as ‘the’ or ‘a’ from context and from its place in the sentence: a noun before the verb is usually known (西红柿在这里 ‘the tomatoes are here’), a noun after 有 is new (这里有西红柿 ‘there are tomatoes here’). 一 + measure word introduces one new thing (我买一个南瓜 ‘I buy a pumpkin’); 这/那 + measure word points at a known one (这个南瓜 ‘this pumpkin’).",
+ "summary": "Chinese has no articles. A bare noun is read as ‘the’ or ‘a’ from context and from its place: a noun before the verb is usually something known (书在这里 ‘the book is here’, 钥匙不在这里 ‘the keys aren’t here’). To introduce one new thing, Chinese can use 一 + measure word (这是一本书 ‘this is a book’), but often a bare noun is enough (这是书). To point at a known thing, 这 / 那 + measure word (这本书 ‘this book’). From S06 on, 有 adds the other half: 这里有书 ‘there is a book here’ — a new thing after the verb.",
  "blocks": [
   {
    "t": "table",
@@ -12,44 +12,160 @@
    ],
    "rows": [
     [
-     "the tomato is here",
-     "西红柿在这里。",
+     "The book is here.",
+     "书在这里。",
      "bare noun before the verb = known"
     ],
     [
-     "there is a tomato here",
-     "这里有西红柿。",
-     "new thing after 有"
+     "The keys aren’t here.",
+     "钥匙不在这里。",
+     "bare noun before the verb = known"
     ],
     [
-     "I buy a pumpkin",
-     "我买一个南瓜。",
-     "一 + measure word = one new thing"
+     "This is a book.",
+     "这是一本书。 / 这是书。",
+     "一 + measure word, or just the bare noun"
     ],
     [
-     "this pumpkin",
-     "这个南瓜",
+     "this book",
+     "这本书",
      "这 + measure word when you must point"
     ],
     [
-     "I like tomatoes",
-     "我喜欢西红柿。",
-     "bare noun = things in general"
+     "There is a book here. (S06)",
+     "这里有书。",
+     "a new thing after 有"
     ]
-   ]
+   ],
+   "caption": "The work of ‘the’ and ‘a’"
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "这 is not ‘the’",
-   "text": "这个 means ‘this one’. Most English ‘the’ is simply nothing in Chinese."
+   "text": "这本书 means ‘this book’. Most English ‘the’ is simply nothing in Chinese."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Don’t add 一个 for every ‘a’",
+   "text": "这是书 ‘this is a book’ and 我是学生 ‘I am a student’ need nothing; 一 + measure word stresses ‘one’ or introduces something new."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Known (‘the’)",
+     "points": [
+      "bare noun before the verb",
+      "书在这里。"
+     ]
+    },
+    {
+     "title": "New (‘a’)",
+     "points": [
+      "一 + measure word, or after 有 (S06)",
+      "这是一本书。"
+     ]
+    }
+   ]
   }
  ],
+ "procedure": {
+  "askYourself": [
+   "Is the thing already known to both speakers? → a bare noun, usually before the verb: 书在这里.",
+   "Am I introducing one new thing? → 一 + measure word (这是一本书) — or just the bare noun.",
+   "Must I point at it? → 这 / 那 + measure word.",
+   "Am I translating an English ‘the’ word by word? → stop: usually nothing."
+  ]
+ },
  "traps": [
-  "Do not translate ‘the’ word by word: 这 means ‘this’, not ‘the’.",
-  "Do not add 一个 for every English ‘a’: 这是西红柿 (‘this is a tomato’) and 我喜欢西红柿 (‘I like tomatoes’) need none.",
-  "A known thing goes before the verb: 西红柿在哪里？ ‘where is the tomato?’ — 哪里有西红柿？ asks ‘where can I find (any) tomatoes?’"
+  "Do not translate ‘the’ with 这: 这 means ‘this’.",
+  "Do not add 一个 for every English ‘a’: 我是老师, not necessarily 我是一个老师.",
+  "A known thing goes before the verb: 钥匙在这里 ‘the keys are here’ — 这里有钥匙 (S06) means ‘there are keys here’."
  ],
  "needs": {},
- "generators": []
+ "generators": [
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "frames": [
+     "fr.thing.here",
+     "fr.this.is"
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "How do you say ‘the’ in Chinese?",
+   "options": [
+    "usually nothing — a bare noun",
+    "这",
+    "一个"
+   ],
+   "answer": "usually nothing — a bare noun",
+   "why": "Chinese has no article; 这 is ‘this’."
+  },
+  {
+   "q": "书在这里。 means …",
+   "options": [
+    "The book is here.",
+    "There is a book here.",
+    "This book is here."
+   ],
+   "answer": "The book is here.",
+   "why": "A bare noun before the verb is a known thing."
+  },
+  {
+   "q": "这是一本书。 means …",
+   "options": [
+    "This is a book.",
+    "This is the book.",
+    "These are books."
+   ],
+   "answer": "This is a book.",
+   "why": "一 + measure word introduces one new thing."
+  },
+  {
+   "q": "‘this book’",
+   "options": [
+    "这本书",
+    "这书本",
+    "书这"
+   ],
+   "answer": "这本书",
+   "why": "这 + measure word + noun."
+  },
+  {
+   "q": "Which word is ‘the’ in 钥匙不在这里 (‘the keys aren’t here’)?",
+   "options": [
+    "none",
+    "这",
+    "里"
+   ],
+   "answer": "none",
+   "why": "钥匙 alone, before the verb, is understood as ‘the keys’."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.definite",
+   "note": "German der / die / das and ein / eine also show gender and case; Chinese has no article at all."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.definite",
+   "note": "Arabic marks ‘the’ with al- (al-kitāb) and ‘a’ with -un (kitābun); Chinese uses word order and context."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.definite",
+   "note": "Hebrew has ha- for ‘the’ and nothing for ‘a’ — like Chinese for ‘a’, but Chinese has no ‘the’ either."
+  }
+ ]
 }

@@ -134,12 +134,12 @@ FIELDS = {
 G = lambda f: [c for c, _ in next(s for s in FIELDS[f.split('/')[0]][2] if s[0] == f.split('/')[1])[2]]
 STEPS = [
  ('fd.00', 'The language and the four types of languages', [], {'*': ['fn.overview'], 'isolating': ['fn.tones']}),
- ('fd.01', 'I, you, he … — to be — people', G('core/pron') + ['verb.be', 'conj.and'] + G('people/person'),
+ ('fd.01', 'I, you, he … — to be — people', G('core/pron') + ['verb.be', 'conj.and', 'det.def', 'det.indef'] + G('people/person'),
   {'*': ['fn.pronoun.subject', 'fn.copula'], 'agglutinating': ['fn.personal.suffix'], 'polysynthetic': ['fn.verb.person']}),
  ('fd.02', 'Hello, thank you: greetings and polite words', G('greetings/greet') + G('greetings/polite') + ['part.yes', 'part.no'], {'*': ['fn.greetings']}),
  ('fd.03', 'This and that, here and there', G('core/dem'), {'*': ['fn.demonstrative'], 'isolating': ['fn.measure.word']}),
- ('fd.04', 'Things at home: the noun, its gender and the article', G('home/house') + G('home/furniture') + G('home/things') + ['det.def', 'det.indef'],
-  {'*': ['fn.noun.gender', 'fn.definite'], 'fusional': ['fn.agreement']}),
+ ('fd.04', 'Things at home: the noun, its gender and the article', G('home/house') + G('home/furniture') + G('home/things'),
+  {'*': ['fn.noun.gender', 'fn.definite'], 'fusional': ['fn.agreement', 'fn.case.basic'], 'agglutinating': ['fn.case.basic']}),
  ('fd.05', 'Numbers and the plural', G('numbers/num') + G('core/quant'), {'*': ['fn.numerals', 'fn.plural.noun'], 'agglutinating': ['fn.vowel.harmony']}),
  ('fd.06', 'To have — the family — my, your', ['poss.have'] + G('family/core') + G('family/extended') + G('core/poss'), {'*': ['fn.have', 'fn.possessive']}),
  ('fd.07', 'Eating and drinking: verbs in the present', G('verbs/eat') + G('food.basics/food') + G('food.basics/drink') + G('food.basics/meal'),
@@ -151,7 +151,7 @@ STEPS = [
   {'*': ['fn.prep.core'], 'fusional': ['fn.case'], 'agglutinating': ['fn.case'], 'polysynthetic': ['fn.case']}),
  ('fd.12', 'On, under, next to … — rooms and furniture', ['prep.on', 'prep.under', 'prep.nextto', 'prep.infront', 'prep.behind', 'prep.between'] + G('core/where') + G('home/rooms'),
   {'*': ['fn.prep.place']}),
- ('fd.13', 'Going and coming — transport', G('verbs/move') + G('transport/tr'), {'*': ['fn.direction']}),
+ ('fd.13', 'Going and coming — transport', G('verbs/move') + G('transport/tr'), {'*': ['fn.direction', 'fn.imperative']}),
  ('fd.14', 'The days and the day', G('time/days') + G('time/day') + G('time/when'), {'*': ['fn.time.day'], 'isolating': ['fn.aspect']}),
  ('fd.15', 'The months, the seasons, the year', G('time/months') + G('time/seasons') + G('time/units') + ['prep.before', 'prep.after', 'prep.until', 'prep.since', 'prep.during', 'prep.attime', 'prep.onday', 'prep.inmonth'],
   {'*': ['fn.prep.time']}),
@@ -179,7 +179,7 @@ FUNCTIONS = [  # id, title, category, tags
  ('fn.have', 'To have', 'syntax', ['Possession']),
  ('fn.possessive', 'My, your, his …: possession', 'morphosyntax', ['Possession']),
  ('fn.present', 'The present tense (or what the language uses instead)', 'morphology', ['Tense']),
- ('fn.object', 'The direct object: who or what is affected', 'morphosyntax', ['Case']),
+ ('fn.object', 'The direct object (accusative): who or what is affected', 'morphosyntax', ['Case']),
  ('fn.word.order', 'Word order: subject – verb – object', 'syntax', []),
  ('fn.incorporation', 'Noun incorporation: the object inside the verb', 'morphology', []),
  ('fn.root.pattern', 'Roots and patterns', 'morphology', []),
@@ -187,7 +187,9 @@ FUNCTIONS = [  # id, title, category, tags
  ('fn.question.yesno', 'Yes/no questions', 'syntax', ['Mood']),
  ('fn.question.wh', 'Questions with question words', 'syntax', []),
  ('fn.prep.core', 'In / at / to, from, with: the core prepositions (Greek σε, από, με)', 'morphosyntax', []),
- ('fn.case', 'Cases: the endings or forms that show a noun’s role', 'morphology', ['Case']),
+ ('fn.case.basic', 'What a case is — the subject form (nominative)', 'morphology', ['Case']),
+ ('fn.case', 'Cases after prepositions: where, where to, where from (dative, genitive, locative …)', 'morphology', ['Case']),
+ ('fn.imperative', 'Commands and requests: the imperative', 'morphology', ['Mood']),
  ('fn.prep.place', 'Where things are: prepositions of place', 'morphosyntax', []),
  ('fn.direction', 'Movement: where to, where from, by what', 'morphosyntax', []),
  ('fn.time.day', 'Saying when: days, parts of the day, how often', 'syntax', []),
@@ -201,13 +203,13 @@ FUNCTIONS = [  # id, title, category, tags
 FRAMES = [  # the meanings the lesson sentences realize (§4.8); vegetables frames stay as they are
  ('fr.be.person', 'PERSON is a PERSON-WORD / JOB (I am a student)'), ('fr.be.where', 'PERSON or THING is here / there / at PLACE'),
  ('fr.greet', 'a greeting or polite formula, or a short exchange (Hello! — How are you? — Fine, thank you.)'),
- ('fr.this.is', 'This / that is a THING.'), ('fr.thing.here', 'The THING is here / there.'), ('fr.count', 'NUMBER THINGS (I have two keys; three books are here)'),
+ ('fr.this.is', 'This / that is a THING (a book, a vegetable, a person …).'), ('fr.thing.here', 'The THING is here / there.'), ('fr.count', 'NUMBER THINGS (I have two keys; three books are here)'),
  ('fr.have', 'PERSON has a THING / a RELATIVE'), ('fr.poss', 'This is my / your … THING or RELATIVE'),
  ('fr.eat', 'PERSON eats / drinks / cooks / buys FOOD or DRINK'), ('fr.want', 'PERSON wants / likes FOOD, DRINK or THING'),
  ('fr.alt.q', 'Do you want X or Y? (choice question)'), ('fr.who', 'Who is PERSON? — PERSON is a JOB'), ('fr.wh', 'a question with a question word (what, where, when, how, why, how many, which, whose)'),
  ('fr.at.place', 'PERSON is at / in PLACE; PERSON is with PERSON; THING is for PERSON; THING with / without THING'),
  ('fr.place.on', 'THING is on / under / next to / in front of / behind / between THING(S); PLACE is near / far'),
- ('fr.go.to', 'PERSON goes / comes / returns to PLACE (by TRANSPORT)'), ('fr.from', 'PERSON comes / leaves from PLACE'),
+ ('fr.go.to', 'PERSON goes / comes / returns to PLACE (by TRANSPORT)'), ('fr.command', 'a command or request: Come! Go to PLACE! Wait! Please sit down.'), ('fr.from', 'PERSON comes / leaves from PLACE'),
  ('fr.day', 'On DAY / in the MORNING … PERSON does something; today is DAY'), ('fr.time', 'PERSON does something at TIME / in MONTH / before / after / until …'),
  ('fr.adj.pred', 'THING or PERSON is ADJECTIVE'), ('fr.adj.attr', 'an ADJECTIVE THING (This is a big house.)'), ('fr.compare', 'THING is more ADJECTIVE than THING; the most ADJECTIVE'),
  ('fr.colour', 'The THING is COLOUR; a COLOUR THING'), ('fr.link', 'CLAUSE but / because / so / when / if / although CLAUSE'),
@@ -234,15 +236,17 @@ def main(root):
     nodes = [n for n in J('core/nodes.json')['nodes'] if not n['id'].startswith('fd.') and n['id'] != 'core.1']
     for n in nodes:
         if n.get('prereqs') == ['core.1']: n['prereqs'] = ['fd.18']
-    lessons = [{'id': nid, 'kind': 'lesson', 'step': i, 'title': t, 'concepts': cs, 'functions': fn, 'prereqs': [STEPS[i - 1][0]] if i else []}
+    lessons = [{'id': nid, 'kind': 'lesson', 'stage': 'foundations', 'step': i, 'title': t, 'concepts': cs, 'functions': fn, 'prereqs': [STEPS[i - 1][0]] if i else []}
                for i, (nid, t, cs, fn) in enumerate(STEPS)]
     W('core/nodes.json', {'nodes': lessons + nodes})
     for fid, title, cat, tags in FUNCTIONS:
         p = f'core/functions/{fid}.json'
         old = J(p) if os.path.exists(os.path.join(root, p)) else {}
         W(p, {'id': fid, 'title': title, 'category': cat, 'level': 'A1', 'after': old.get('after', []), 'tags': tags})
-    fr = J('core/frames.json'); have = {f['id'] for f in fr['frames']}
-    fr['frames'] += [{'id': i, 'meaning': m} for i, m in FRAMES if i not in have]
+    fr = J('core/frames.json'); mine = dict(FRAMES)
+    for f in fr['frames']:
+        if f['id'] in mine: f['meaning'] = mine.pop(f['id'])
+    fr['frames'] += [{'id': i, 'meaning': m} for i, m in FRAMES if i in mine]
     W('core/frames.json', fr)
     W('core/typology.json', json.load(open(os.path.join(HERE, 'typology.json'), encoding='utf-8')))
     print(f'{len(seen)} concepts in {len(FIELDS)} fields · {len(STEPS)} lessons · {len(FUNCTIONS)} functions · {len(FRAMES)} frames')

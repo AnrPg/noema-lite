@@ -1,0 +1,208 @@
+{
+ "function": "fn.demonstrative",
+ "status": "realized",
+ "summary": "Arabic has a near and a far demonstrative, each with a masculine, a feminine and a plural for people: هٰذَا / هٰذِهِ / هٰؤُلَاءِ “this, these” and ذٰلِكَ / تِلْكَ / أُولٰئِكَ “that, those”; هُنَا is “here”, هُنَاكَ “there”. They agree with the noun — and plurals of things take the feminine singular: هٰذِهِ الْكُتُبُ (these books). The article decides between a sentence and a phrase: هٰذَا طَالِبٌ = this is a student; هٰذَا الطَّالِبُ = this student.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "near — this, these",
+    "far — that, those"
+   ],
+   "rows": [
+    [
+     "masculine singular",
+     "هٰذَا hāḏā",
+     "ذٰلِكَ ḏālika"
+    ],
+    [
+     "feminine singular — also things in the plural",
+     "هٰذِهِ hāḏihi",
+     "تِلْكَ tilka"
+    ],
+    [
+     "plural (people, men or women)",
+     "هٰؤُلَاءِ hāʾulāʾi",
+     "أُولٰئِكَ ʾulāʾika"
+    ],
+    [
+     "place",
+     "هُنَا hunā — here",
+     "هُنَاكَ hunāka — there"
+    ]
+   ]
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "هٰذَا طَالِبٌ — a sentence",
+     "points": [
+      "no article on the noun, tanwīn (-un)",
+      "= This is a student."
+     ]
+    },
+    {
+     "title": "هٰذَا الطَّالِبُ … — a phrase",
+     "points": [
+      "the noun has the article",
+      "= this student …",
+      "it needs a predicate: هٰذَا الطَّالِبُ هُنَا (this student is here)"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Agreement.",
+   "text": "هٰذَا رَجُلٌ (m.) — هٰذِهِ بِنْتٌ (f.) — هٰؤُلَاءِ طُلَّابٌ (people) — هٰذِهِ كُتُبٌ (things in the plural → feminine singular)."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "“This is THE …”.",
+   "text": "For “this is the student” put a pronoun between: هٰذَا هُوَ الطَّالِبُ. Without it, هٰذَا الطَّالِبُ is only “this student”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Two of them.",
+   "text": "For two people or things there are dual demonstratives, هٰذَانِ (m.) and هَاتَانِ (f.) “these two” — they come with the dual in lesson 5."
+  },
+  {
+   "t": "p",
+   "text": "هُنَاكَ also means “there is / there are”: هُنَاكَ طُلَّابٌ = there are students (there)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Near or far? → هٰذَا … / ذٰلِكَ …",
+   "Is the noun masculine or feminine? (ة usually means feminine)",
+   "Plural? People → هٰؤُلَاءِ / أُولٰئِكَ; things → هٰذِهِ / تِلْكَ.",
+   "Do I mean “this is a …” (no article on the noun) or “this … is …” (article on the noun, then a predicate)?",
+   "“This is THE …”? → put هُوَ / هِيَ / هُمْ in between."
+  ]
+ },
+ "traps": [
+  "*هٰؤُلَاءِ الْكُتُبُ is wrong: things in the plural take هٰذِهِ.",
+  "هٰذَا الْكِتَابُ is not a sentence; هٰذَا كِتَابٌ is.",
+  "The ā of هٰذَا and ذٰلِكَ is a small (dagger) alif: unvocalized هذا، ذلك — no long alif.",
+  "The feminine of ذٰلِكَ is تِلْكَ, a different word."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:hadha",
+   "ar:dhalika",
+   "ar:haulai",
+   "ar:ulaika"
+  ]
+ },
+ "paradigmCells": [
+  "PRON;SG;MASC",
+  "PRON;SG;FEM",
+  "PRON;PL"
+ ],
+ "needs": {
+  "PRON": 2,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "PRON",
+   "class": "dem",
+   "cells": [
+    "PRON;SG;FEM",
+    "PRON;PL"
+   ]
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.demonstrative"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“This is a room” (غُرْفَة):",
+   "options": [
+    "هٰذِهِ غُرْفَةٌ",
+    "هٰذَا غُرْفَةٌ",
+    "هٰذِهِ الْغُرْفَةُ"
+   ],
+   "answer": "هٰذِهِ غُرْفَةٌ",
+   "why": "Feminine noun → هٰذِهِ; no article → a sentence."
+  },
+  {
+   "q": "“These books”:",
+   "options": [
+    "هٰذِهِ الْكُتُبُ",
+    "هٰؤُلَاءِ الْكُتُبُ",
+    "هٰذَا الْكُتُبُ"
+   ],
+   "answer": "هٰذِهِ الْكُتُبُ",
+   "why": "Things in the plural take the feminine singular."
+  },
+  {
+   "q": "“Those people”:",
+   "options": [
+    "أُولٰئِكَ النَّاسُ",
+    "تِلْكَ النَّاسُ",
+    "ذٰلِكَ النَّاسُ"
+   ],
+   "answer": "أُولٰئِكَ النَّاسُ",
+   "why": "People in the plural, far → أُولٰئِكَ."
+  },
+  {
+   "q": "هٰذَا الطَّالِبُ means …",
+   "options": [
+    "this student",
+    "This is a student.",
+    "This is the student."
+   ],
+   "answer": "this student",
+   "why": "With the article it is a phrase; “this is the student” = هٰذَا هُوَ الطَّالِبُ."
+  },
+  {
+   "q": "The feminine of ذٰلِكَ:",
+   "options": [
+    "تِلْكَ",
+    "هٰذِهِ",
+    "ذٰلِكَةٌ"
+   ],
+   "answer": "تِلْكَ",
+   "why": "A separate word: تِلْكَ."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.demonstrative",
+   "note": "Hebrew puts the demonstrative after the noun, both with the article — הַבַּיִת הַזֶּה “the house the this” — where Arabic puts it first: هٰذَا الْبَيْتُ. Arabic ذ corresponds to Hebrew ז (זֶה ↔ ذَا)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.demonstrative",
+   "note": "German dieser / diese / dieses is declined in four cases; for “this is a …” the invariable das ist … works like هٰذَا …."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.demonstrative",
+   "note": "Chinese 这 / 那 never change for gender or number but need a measure word before the noun (这本书)."
+  }
+ ]
+}

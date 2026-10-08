@@ -22,7 +22,7 @@
   },
   {
    "id": "fr.this.is",
-   "meaning": "This is a VEGETABLE."
+   "meaning": "This / that is a THING (a book, a vegetable, a person …)."
   },
   {
    "id": "fr.where.def",
@@ -39,6 +39,102 @@
   {
    "id": "fr.drink.what",
    "meaning": "What does PERSON drink?"
+  },
+  {
+   "id": "fr.be.person",
+   "meaning": "PERSON is a PERSON-WORD / JOB (I am a student)"
+  },
+  {
+   "id": "fr.be.where",
+   "meaning": "PERSON or THING is here / there / at PLACE"
+  },
+  {
+   "id": "fr.greet",
+   "meaning": "a greeting or polite formula, or a short exchange (Hello! — How are you? — Fine, thank you.)"
+  },
+  {
+   "id": "fr.thing.here",
+   "meaning": "The THING is here / there."
+  },
+  {
+   "id": "fr.count",
+   "meaning": "NUMBER THINGS (I have two keys; three books are here)"
+  },
+  {
+   "id": "fr.have",
+   "meaning": "PERSON has a THING / a RELATIVE"
+  },
+  {
+   "id": "fr.poss",
+   "meaning": "This is my / your … THING or RELATIVE"
+  },
+  {
+   "id": "fr.eat",
+   "meaning": "PERSON eats / drinks / cooks / buys FOOD or DRINK"
+  },
+  {
+   "id": "fr.want",
+   "meaning": "PERSON wants / likes FOOD, DRINK or THING"
+  },
+  {
+   "id": "fr.alt.q",
+   "meaning": "Do you want X or Y? (choice question)"
+  },
+  {
+   "id": "fr.who",
+   "meaning": "Who is PERSON? — PERSON is a JOB"
+  },
+  {
+   "id": "fr.wh",
+   "meaning": "a question with a question word (what, where, when, how, why, how many, which, whose)"
+  },
+  {
+   "id": "fr.at.place",
+   "meaning": "PERSON is at / in PLACE; PERSON is with PERSON; THING is for PERSON; THING with / without THING"
+  },
+  {
+   "id": "fr.place.on",
+   "meaning": "THING is on / under / next to / in front of / behind / between THING(S); PLACE is near / far"
+  },
+  {
+   "id": "fr.go.to",
+   "meaning": "PERSON goes / comes / returns to PLACE (by TRANSPORT)"
+  },
+  {
+   "id": "fr.from",
+   "meaning": "PERSON comes / leaves from PLACE"
+  },
+  {
+   "id": "fr.day",
+   "meaning": "On DAY / in the MORNING … PERSON does something; today is DAY"
+  },
+  {
+   "id": "fr.time",
+   "meaning": "PERSON does something at TIME / in MONTH / before / after / until …"
+  },
+  {
+   "id": "fr.adj.pred",
+   "meaning": "THING or PERSON is ADJECTIVE"
+  },
+  {
+   "id": "fr.adj.attr",
+   "meaning": "an ADJECTIVE THING (This is a big house.)"
+  },
+  {
+   "id": "fr.compare",
+   "meaning": "THING is more ADJECTIVE than THING; the most ADJECTIVE"
+  },
+  {
+   "id": "fr.colour",
+   "meaning": "The THING is COLOUR; a COLOUR THING"
+  },
+  {
+   "id": "fr.link",
+   "meaning": "CLAUSE but / because / so / when / if / although CLAUSE"
+  },
+  {
+   "id": "fr.command",
+   "meaning": "a command or request: Come! Go to PLACE! Wait! Please sit down."
   }
  ]
 }

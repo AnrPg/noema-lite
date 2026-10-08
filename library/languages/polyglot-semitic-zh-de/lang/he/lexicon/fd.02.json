@@ -1,0 +1,1947 @@
+{
+ "lexemes": [
+  {
+   "id": "he:shalom",
+   "lemma": "שָׁלוֹם",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello",
+    "greet.goodbye"
+   ],
+   "translit": "shalom",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm and universal — literally “peace, wholeness”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hello",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.hello"
+     },
+     {
+      "id": "s2",
+      "def": "goodbye",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodbye"
+     },
+     {
+      "id": "s3",
+      "def": "peace; well-being (the noun)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "שָׁלוֹם, אֲנִי דָּוִד.",
+      "tr": "Hello, I’m David.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "שָׁלוֹם, מַה שְּׁלוֹמְךָ?",
+      "tr": "Hello, how are you (m.)?",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "תּוֹדָה רַבָּה וְשָׁלוֹם!",
+      "tr": "Thank you very much and goodbye!",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s2"
+     },
+     {
+      "text": "לְהִתְרָאוֹת, שָׁלוֹם!",
+      "tr": "See you, bye!",
+      "register": "informal",
+      "context": "leaving",
+      "sense": "s2"
+     },
+     {
+      "text": "אֲנַחְנוּ רוֹצִים שָׁלוֹם.",
+      "tr": "We want peace.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שָׁלוֹם עֲלֵיכֶם",
+      "tr": "peace be upon you (the traditional greeting)"
+     },
+     {
+      "text": "שָׁלוֹם וּבְרָכָה",
+      "tr": "peace and blessing (a warm, slightly formal greeting)"
+     },
+     {
+      "text": "שַׁבָּת שָׁלוֹם",
+      "tr": "Shabbat shalom (good Sabbath)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שָׁלוֹם עֲלֵיכֶם",
+      "tr": "peace be upon you",
+      "kind": "fixed expression",
+      "meaning": "a traditional greeting (answered עֲלֵיכֶם שָׁלוֹם); also the Friday-night song that welcomes the Sabbath",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "הַי",
+      "register": "colloquial",
+      "nuance": "“hi” — casual, from English"
+     },
+     {
+      "word": "בַּיי",
+      "register": "colloquial",
+      "nuance": "“bye” — the casual goodbye, from English"
+     },
+     {
+      "word": "אַהֲלָן",
+      "register": "slang",
+      "nuance": "“hi” — borrowed from Arabic, friendly and very informal"
+     }
+    ],
+    "etymology": {
+     "text": "Related to שָׁלָה “to be quiet, tranquil” and שָׁלַו “to be at ease”. Common Northwest Semitic: Phoenician šlm (šalōm), Aramaic שְׁלָמָא (šlāmā), Ugaritic šlm. Cognate with Arabic سلام (salām).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic سَلَام (salām) is the same word: السَّلَامُ عَلَيْكُمْ ~ שָׁלוֹם עֲלֵיכֶם; Turkish selam “hi” comes from the Arabic.",
+     "The name שְׁלֹמֹה (Solomon) is built on the same root ש־ל־ם “whole, at peace”."
+    ],
+    "pitfalls": [
+     "שָׁלוֹם is both hello and goodbye — only the situation tells which.",
+     "It is also the noun “peace”: שָׁלוֹם בָּעוֹלָם “peace in the world”."
+    ],
+    "subtleties": [
+     "On the phone Israelis usually answer הַלּוֹ; a call or a letter may open with שָׁלוֹם."
+    ]
+   }
+  },
+  {
+   "id": "he:boker-tov",
+   "lemma": "בֹּקֶר טוֹב",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodmorning"
+   ],
+   "translit": "boker tov",
+   "alts": [
+    "בוקר טוב"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coffee, the first light, the office door.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good morning",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodmorning"
+     },
+     {
+      "id": "s2",
+      "def": "(ironic) “good morning!” — “so you’ve finally realized!”",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "בֹּקֶר טוֹב! אַתָּה רוֹצֶה קָפֶה?",
+      "tr": "Good morning! Do you (m.) want coffee?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בֹּקֶר טוֹב לְכֻלָּם!",
+      "tr": "Good morning, everyone!",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "עַכְשָׁו אַתָּה מֵבִין? בֹּקֶר טוֹב!",
+      "tr": "Now you get it? Good morning!",
+      "register": "colloquial",
+      "context": "argument",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֹּקֶר טוֹב לְכֻלָּם",
+      "tr": "good morning, everyone"
+     },
+     {
+      "text": "בֹּקֶר טוֹב — בֹּקֶר אוֹר",
+      "tr": "good morning — good morning to you (the morning exchange)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; later in the day people switch to שָׁלוֹם or צָהֳרַיִם טוֹבִים “good afternoon”.",
+    "etymology": {
+     "text": "From בוקר (“morning”) + טוב (“good”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew builds it like German Guten Morgen, but the adjective comes after the noun: “morning good”."
+    ],
+    "pitfalls": [
+     "בֹּקֶר is masculine, so it is בֹּקֶר טוֹב (not *טוֹבָה).",
+     "The traditional answer is בֹּקֶר אוֹר “morning of light”; simply repeating בֹּקֶר טוֹב is fine too."
+    ],
+    "subtleties": [
+     "Said ironically, בֹּקֶר טוֹב! means “you’ve finally woken up to it!” (Wiktionary: “Finally realized?”)."
+    ]
+   }
+  },
+  {
+   "id": "he:boker-or",
+   "lemma": "בֹּקֶר אוֹר",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodmorning"
+   ],
+   "translit": "boker or",
+   "alts": [
+    "בוקר אור"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bright, friendly answer to the morning greeting.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good morning (the reply to בֹּקֶר טוֹב; literally “morning of light”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodmorning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בֹּקֶר טוֹב, שָׂרָה! בֹּקֶר אוֹר, דָּוִד!",
+      "tr": "Good morning, Sarah! — Good morning, David!",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "בֹּקֶר אוֹר! מַה שְּׁלוֹמֵךְ?",
+      "tr": "Good morning to you! How are you (f.)?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "בֹּקֶר טוֹב — בֹּקֶר אוֹר",
+      "tr": "good morning — good morning to you"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; the other answer is to repeat בֹּקֶר טוֹב.",
+    "etymology": {
+     "text": "Calque of Arabic صَبَاح النُّور (ṣabāḥ an-nūr, literally “morning of light”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "An Arabic gift: صَبَاحُ الْخَيْرِ — صَبَاحُ النُّورِ (“morning of good — morning of light”) is the model of בֹּקֶר טוֹב — בֹּקֶר אוֹר."
+    ],
+    "pitfalls": [
+     "Only as an answer: nobody opens with בֹּקֶר אוֹר."
+    ],
+    "subtleties": [
+     "Literally “morning (of) light”: אוֹר is “light”."
+    ]
+   }
+  },
+  {
+   "id": "he:erev-tov",
+   "lemma": "עֶרֶב טוֹב",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodevening"
+   ],
+   "translit": "erev tov",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The evening greeting — a restaurant, a lecture, a guest at the door.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good evening",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodevening"
+     }
+    ],
+    "examples": [
+     {
+      "text": "עֶרֶב טוֹב וּבְרוּכִים הַבָּאִים!",
+      "tr": "Good evening and welcome!",
+      "register": "formal",
+      "context": "event",
+      "sense": "s1"
+     },
+     {
+      "text": "עֶרֶב טוֹב, אֶפְשָׁר לְהַזְמִין שֻׁלְחָן?",
+      "tr": "Good evening, can I book a table?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֶרֶב טוֹב לְכֻלָּם",
+      "tr": "good evening, everyone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; in the evening Israelis also simply say שָׁלוֹם or הַי.",
+    "etymology": {
+     "text": "From עֶרֶב (“evening”; Wiktionary: cognates include Arabic غَرْب, “west”) + טוֹב (“good”, from Proto-Semitic *ṭāb-).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "עֶרֶב “evening” is related to Arabic غَرْب (gharb, “west”) — where the sun sets; the Maghreb (المغرب) is “the West”."
+    ],
+    "pitfalls": [
+     "It greets on arrival; when you leave at night, say לַיְלָה טוֹב or לְהִתְרָאוֹת."
+    ],
+    "subtleties": [
+     "עֶרֶב is masculine: עֶרֶב טוֹב, never *טוֹבָה."
+    ]
+   }
+  },
+  {
+   "id": "he:laila-tov",
+   "lemma": "לַיְלָה טוֹב",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodnight"
+   ],
+   "translit": "laila tov",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bedtime, quiet, the end of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good night (when leaving at night or going to bed)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodnight"
+     }
+    ],
+    "examples": [
+     {
+      "text": "לַיְלָה טוֹב, יְלָדִים!",
+      "tr": "Good night, children!",
+      "register": "neutral",
+      "context": "bedtime",
+      "sense": "s1"
+     },
+     {
+      "text": "תּוֹדָה עַל הָעֶרֶב, לַיְלָה טוֹב!",
+      "tr": "Thanks for the evening, good night!",
+      "register": "neutral",
+      "context": "leaving a party",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לַיְלָה טוֹב, חֲלוֹמוֹת מְתוּקִים",
+      "tr": "good night, sweet dreams"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; לַיְלָה טוֹב is the only good-night formula.",
+    "etymology": {
+     "text": "From לַיְלָה (“night”; Wiktionary: probably an old adverbial accusative “at night” of לַיִל, from Proto-Semitic *layl-, cognate with Arabic لَيْل layl) + טוֹב (“good”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic لَيْل (layl) and لَيْلَة (layla, also the name Layla) are the same word as לַיְלָה."
+    ],
+    "pitfalls": [
+     "Only for parting at night or going to bed — not a greeting when you arrive (that is עֶרֶב טוֹב)."
+    ],
+    "subtleties": [
+     "לַיְלָה ends in -ָה but is masculine — so it is לַיְלָה טוֹב, not *טוֹבָה."
+    ]
+   }
+  },
+  {
+   "id": "he:lehitraot",
+   "lemma": "לְהִתְרָאוֹת",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodbye",
+    "greet.seeyou"
+   ],
+   "translit": "lehitraot",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The standard goodbye — friendly, never wrong.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "goodbye",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodbye"
+     },
+     {
+      "id": "s2",
+      "def": "see you (later)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.seeyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "תּוֹדָה וּלְהִתְרָאוֹת!",
+      "tr": "Thank you and goodbye!",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     },
+     {
+      "text": "לְהִתְרָאוֹת, דָּוִד!",
+      "tr": "Goodbye, David!",
+      "register": "neutral",
+      "context": "leaving",
+      "sense": "s1"
+     },
+     {
+      "text": "לְהִתְרָאוֹת מָחָר!",
+      "tr": "See you tomorrow!",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s2"
+     },
+     {
+      "text": "לְהִתְרָאוֹת בַּשָּׁבוּעַ הַבָּא!",
+      "tr": "See you next week!",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְהִתְרָאוֹת מָחָר",
+      "tr": "see you tomorrow"
+     },
+     {
+      "text": "תּוֹדָה וּלְהִתְרָאוֹת",
+      "tr": "thank you and goodbye"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שָׁלוֹם",
+      "register": "neutral",
+      "nuance": "goodbye (and hello)"
+     },
+     {
+      "word": "בַּיי",
+      "register": "colloquial",
+      "nuance": "“bye”"
+     },
+     {
+      "word": "יַאלְלָה בַּיי",
+      "register": "slang",
+      "nuance": "“OK, bye!” — the typical Israeli end of a phone call (יַאלְלָה is from Arabic)"
+     }
+    ],
+    "etymology": {
+     "text": "The infinitive of the verb הִתְרָאָה “to see each other” (Wiktionary), root ר־א־ה “to see”: literally “to see one another (again)”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Many languages say goodbye with “seeing again”: German auf Wiedersehen, Russian до свидания, Greek εις το επανιδείν, Turkish görüşürüz, Chinese 再见 (zàijiàn, “again see”)."
+    ],
+    "pitfalls": [
+     "Do not confuse it with הַתְרָאָה “a warning, an alert” — the same letters התראה."
+    ],
+    "subtleties": [
+     "On the phone some people joke לְהִשְׁתַּמֵּעַ “to hear each other” instead, since nobody sees anyone."
+    ]
+   }
+  },
+  {
+   "id": "he:nitrae",
+   "lemma": "נִתְרָאֶה",
+   "pos": "INTJ",
+   "senses": [
+    "greet.seeyou"
+   ],
+   "translit": "nitra'e",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "note": "Wiktionary has no page for נתראה; the verb הִתְרָאָה “to see each other” is checked there."
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A friendly promise to meet again.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "see you! (literally “we will see each other”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.seeyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "נִתְרָאֶה מָחָר!",
+      "tr": "See you tomorrow!",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "לַיְלָה טוֹב, נִתְרָאֶה!",
+      "tr": "Good night, see you!",
+      "register": "neutral",
+      "context": "leaving",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נִתְרָאֶה מָחָר",
+      "tr": "see you tomorrow"
+     },
+     {
+      "text": "נִתְרָאֶה בְּקָרוֹב",
+      "tr": "see you soon"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לְהִתְרָאוֹת",
+      "register": "neutral",
+      "nuance": "the standard goodbye (“to see each other”)"
+     }
+    ],
+    "etymology": {
+     "text": "The first person plural future of הִתְרָאָה “to see each other” (root ר־א־ה “to see”): “we will see each other”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like Turkish görüşürüz (“we’ll see each other”) it is one verb form: the prefix נִ־ marks “we will”."
+    ],
+    "pitfalls": [
+     "It is a verb form and does not change for gender: everyone says נִתְרָאֶה."
+    ],
+    "subtleties": [
+     "A little warmer and more personal than לְהִתְרָאוֹת: it expects a real next meeting."
+    ]
+   }
+  },
+  {
+   "id": "he:ma-shlomcha",
+   "lemma": "מַה שְּׁלוֹמְךָ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "translit": "ma shlomcha",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files this formula as a phrase; the course gives every greeting and polite formula the part of speech INTJ (one fixed expression)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A polite, caring question — to a man.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "How are you? (to a man; literally “what is your well-being?”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שָׁלוֹם, דָּוִד! מַה שְּׁלוֹמְךָ?",
+      "tr": "Hello, David! How are you?",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "מַה שְּׁלוֹמְךָ הַיּוֹם?",
+      "tr": "How are you today? (to a man)",
+      "register": "neutral",
+      "context": "visit",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַה שְּׁלוֹמְךָ הַיּוֹם?",
+      "tr": "how are you today? (to a man)"
+     },
+     {
+      "text": "מַה שְּׁלוֹמְכֶם?",
+      "tr": "how are you? (to a group)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מַה נִּשְׁמַע",
+      "register": "colloquial",
+      "nuance": "the casual “how’s it going?”, the same for everyone"
+     },
+     {
+      "word": "מָה הָעִנְיָנִים",
+      "register": "slang",
+      "nuance": "“what’s up?” (literally “what are the matters?”)"
+     }
+    ],
+    "etymology": {
+     "text": "מָה “what” + שְׁלוֹם־, the construct form of שָׁלוֹם “peace, well-being”, + ־ְךָ “your (m.)”: “what is your well-being?”",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew asks about your שָׁלוֹם: in Genesis 29:6 Jacob asks about Laban הֲשָׁלוֹם לוֹ? “is he well?”"
+    ],
+    "pitfalls": [
+     "Gender! To a man מַה שְּׁלוֹמְךָ (shlomkha), to a woman מַה שְּׁלוֹמֵךְ (shlomekh), to a group מַה שְּׁלוֹמְכֶם.",
+     "A short answer is expected: בְּסֵדֶר, תּוֹדָה."
+    ],
+    "subtleties": [
+     "In careful pointing מַה takes a patah and the ש a dagesh (מַה שְּׁ…); in speech it is ma shlomkha."
+    ]
+   }
+  },
+  {
+   "id": "he:ma-shlomech",
+   "lemma": "מַה שְּׁלוֹמֵךְ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "translit": "ma shlomech",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files this formula as a phrase; the course gives every greeting and polite formula the part of speech INTJ (one fixed expression)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A polite, caring question — to a woman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "How are you? (to a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שָׁלוֹם, שָׂרָה! מַה שְּׁלוֹמֵךְ?",
+      "tr": "Hello, Sarah! How are you?",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "מַה שְּׁלוֹמֵךְ, סָבְתָא?",
+      "tr": "How are you, Grandma?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַה שְּׁלוֹמֵךְ הַיּוֹם?",
+      "tr": "how are you today? (to a woman)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מַה נִּשְׁמַע",
+      "register": "colloquial",
+      "nuance": "the casual “how’s it going?”, the same for everyone"
+     }
+    ],
+    "etymology": {
+     "text": "מָה “what” + שְׁלוֹם־ (“well-being”) + ־ֵךְ “your (f.)”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The ending ־ֵךְ “your (f.)” is the one in לָךְ “to you (f.)”; Arabic has the same feminine -ki (ـكِ)."
+    ],
+    "pitfalls": [
+     "To a woman only; to a man say מַה שְּׁלוֹמְךָ."
+    ],
+    "subtleties": [
+     "Without vowels both are written מה שלומך — only knowing whom you speak to tells you how to read it."
+    ]
+   }
+  },
+  {
+   "id": "he:ma-nishma",
+   "lemma": "מַה נִּשְׁמַע",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "translit": "ma nishma",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files this formula as a phrase; the course gives every greeting and polite formula the part of speech INTJ (one fixed expression)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "Easy-going, friendly, Israeli.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "How’s it going? What’s up? (to anyone)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הַי, מַה נִּשְׁמַע?",
+      "tr": "Hi, how’s it going?",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "מַה נִּשְׁמַע אֶצְלְכֶם?",
+      "tr": "What’s new with you (pl.)?",
+      "register": "informal",
+      "context": "phone call",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מַה נִּשְׁמַע אֶצְלְךָ?",
+      "tr": "what’s new with you? (m.)"
+     },
+     {
+      "text": "מַה נִּשְׁמַע? הַכֹּל טוֹב",
+      "tr": "how’s it going? — all good"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מַה שְּׁלוֹמְךָ / מַה שְּׁלוֹמֵךְ",
+      "register": "neutral",
+      "nuance": "the standard “how are you?”, which changes for gender"
+     },
+     {
+      "word": "מָה קוֹרֶה",
+      "register": "slang",
+      "nuance": "“what’s happening?”"
+     }
+    ],
+    "etymology": {
+     "text": "Calque of Yiddish וואָס הערט זיך (vos hert zikh, literally “what is heard?”); נִשְׁמַע is “it is heard”, from the root ש־מ־ע “to hear”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A Yiddish import: vos hert zikh? “what is heard?” — word for word German “was hört sich?”"
+    ],
+    "pitfalls": [
+     "It does not change for gender or number — the easy all-purpose greeting.",
+     "It means “how are things?”: answer בְּסֵדֶר or הַכֹּל טוֹב, not with news you heard."
+    ],
+    "subtleties": [
+     "Very common on the phone and among friends; too casual for a job interview."
+    ]
+   }
+  },
+  {
+   "id": "he:beseder",
+   "lemma": "בְּסֵדֶר",
+   "pos": "ADJ",
+   "senses": [
+    "greet.fine"
+   ],
+   "translit": "beseder",
+   "note": "Invariable: the same form for a man, a woman and a group.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Calm and reassuring — everything is in order.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fine, OK, all right (of how someone is: אֲנִי בְּסֵדֶר)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.fine"
+     },
+     {
+      "id": "s2",
+      "def": "OK! agreed (as an answer)",
+      "register": [
+       "informal"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "decent, a good sort (of a person)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "מַה שְּׁלוֹמְךָ? אֲנִי בְּסֵדֶר, תּוֹדָה.",
+      "tr": "How are you? — I’m fine, thanks.",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיֶּלֶד נָפַל, אֲבָל הוּא בְּסֵדֶר.",
+      "tr": "The boy fell, but he’s OK.",
+      "register": "neutral",
+      "context": "playground",
+      "sense": "s1"
+     },
+     {
+      "text": "נִפָּגֵשׁ בְּשֶׁבַע? בְּסֵדֶר.",
+      "tr": "Shall we meet at seven? — OK.",
+      "register": "informal",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "הוּא בָּחוּר בְּסֵדֶר.",
+      "tr": "He’s a decent guy.",
+      "register": "colloquial",
+      "context": "describing people",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "הַכֹּל בְּסֵדֶר",
+      "tr": "everything is fine"
+     },
+     {
+      "text": "אַתָּה בְּסֵדֶר?",
+      "tr": "are you OK? (to a man)"
+     },
+     {
+      "text": "בְּסֵדֶר גָּמוּר",
+      "tr": "perfectly fine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "טוֹב",
+      "register": "neutral",
+      "nuance": "“good, well” — a warmer answer than בְּסֵדֶר"
+     },
+     {
+      "word": "מְצֻיָּן",
+      "register": "neutral",
+      "nuance": "“excellent” — an enthusiastic answer"
+     },
+     {
+      "word": "סַבָּבָּה",
+      "register": "slang",
+      "nuance": "“cool, fine” — from Arabic, very informal"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "לֹא בְּסֵדֶר",
+      "note": "not OK; not fair"
+     }
+    ],
+    "etymology": {
+     "text": "From בְּ־ (“in”) + סֵדֶר (“order”), probably a calque of German in Ordnung (alles in Ordnung). Compare Russian в порядке (v porjadke).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A word you already own twice: German in Ordnung and Russian в порядке are built exactly like בְּ־סֵדֶר “in order”.",
+     "סֵדֶר is also the Passover Seder — the “order” of the evening."
+    ],
+    "pitfalls": [
+     "It never changes for gender or number: אֲנִי בְּסֵדֶר, הִיא בְּסֵדֶר, הֵם בְּסֵדֶר.",
+     "As an answer to “How are you?” it is neutral, like “OK”, not “great”."
+    ],
+    "subtleties": [
+     "לֹא בְּסֵדֶר means “not OK” but also “not fair, wrong”: זֶה לֹא בְּסֵדֶר! “that’s not right!”"
+    ]
+   }
+  },
+  {
+   "id": "he:korim-li",
+   "lemma": "קוֹרְאִים לִי",
+   "pos": "INTJ",
+   "senses": [
+    "greet.myname"
+   ],
+   "translit": "korim li",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "note": "Wiktionary has no page for the phrase; its parts קָרָא and לְ are checked there."
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The friendly, everyday way to say your name.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "my name is … (literally “(they) call me …”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.myname"
+     }
+    ],
+    "examples": [
+     {
+      "text": "קוֹרְאִים לִי שָׂרָה.",
+      "tr": "My name is Sarah.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "שָׁלוֹם, קוֹרְאִים לִי דָּוִד, אֲנִי סְטוּדֶנְט.",
+      "tr": "Hi, my name is David, I’m a student.",
+      "register": "neutral",
+      "context": "class",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֵיךְ קוֹרְאִים לְךָ?",
+      "tr": "what’s your name? (to a man)"
+     },
+     {
+      "text": "אֵיךְ קוֹרְאִים לָךְ?",
+      "tr": "what’s your name? (to a woman)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שְׁמִי",
+      "register": "formal",
+      "nuance": "“my name (is)” — formal and written"
+     },
+     {
+      "word": "אֲנִי …",
+      "register": "informal",
+      "nuance": "simply “I’m …”: אֲנִי דָּוִד"
+     }
+    ],
+    "etymology": {
+     "text": "קוֹרְאִים, the present plural of קָרָא “to call; to read” (Wiktionary: from Proto-Semitic *ḳaraʔ-), + לִי “to me”: an impersonal “(people) call me”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Greek με λένε and Russian меня зовут use the same impersonal “they call me”."
+    ],
+    "pitfalls": [
+     "The question uses אֵיךְ “how”, not מָה: אֵיךְ קוֹרְאִים לְךָ? (“how do they call you?”).",
+     "קוֹרְאִים never changes: a man and a woman both say קוֹרְאִים לִי."
+    ],
+    "subtleties": [
+     "The same verb קָרָא also means “to read”: קוֹרְאִים סֵפֶר “(they) read a book”."
+    ]
+   }
+  },
+  {
+   "id": "he:shmi",
+   "lemma": "שְׁמִי",
+   "pos": "INTJ",
+   "senses": [
+    "greet.myname"
+   ],
+   "translit": "shmi",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files שְׁמִי as a noun form (“my name”); the course treats the introduction formula as INTJ, like the other greetings."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "formal"
+    ],
+    "connotation": "neutral",
+    "feeling": "Formal introductions, letters, speeches.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "my name (is) … — formal",
+      "register": [
+       "formal"
+      ],
+      "concept": "greet.myname"
+     }
+    ],
+    "examples": [
+     {
+      "text": "שְׁמִי דָּוִד כֹּהֵן.",
+      "tr": "My name is David Cohen.",
+      "register": "formal",
+      "context": "formal letter",
+      "sense": "s1"
+     },
+     {
+      "text": "שְׁמִי שָׂרָה, וַאֲנִי הַמּוֹרָה הַחֲדָשָׁה.",
+      "tr": "My name is Sarah, and I am the new teacher.",
+      "register": "formal",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שְׁמִי …",
+      "tr": "my name is …"
+     },
+     {
+      "text": "מַה שִּׁמְךָ?",
+      "tr": "what is your name? (formal, to a man)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קוֹרְאִים לִי",
+      "register": "neutral",
+      "nuance": "the everyday “my name is”"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary: the singular form of שֵׁם “name” with the first-person possessor “my”. שֵׁם is from Proto-Semitic *šim-, cognate with Arabic اسم (ism).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic اِسْمِي (ismī) “my name” is the same word with the same suffix -ī."
+    ],
+    "pitfalls": [
+     "Formal: in conversation it can sound stiff — say קוֹרְאִים לִי.",
+     "The vowel changes: שֵׁם → שְׁמִי (shmi)."
+    ],
+    "subtleties": [
+     "Religious speakers call God הַשֵּׁם, “the Name”."
+    ]
+   }
+  },
+  {
+   "id": "he:naim-meod",
+   "lemma": "נָעִים מְאוֹד",
+   "pos": "INTJ",
+   "senses": [
+    "greet.nicetomeet"
+   ],
+   "translit": "naim meod",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files this formula as a phrase; the course gives every greeting and polite formula the part of speech INTJ (one fixed expression)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A smile and a handshake.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nice to meet you (literally “very pleasant”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.nicetomeet"
+     }
+    ],
+    "examples": [
+     {
+      "text": "נָעִים מְאוֹד, אֲנִי שָׂרָה.",
+      "tr": "Nice to meet you, I’m Sarah.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "זֶה דָּוִד. נָעִים מְאוֹד!",
+      "tr": "This is David. — Nice to meet you!",
+      "register": "neutral",
+      "context": "party",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "נָעִים מְאוֹד, אֲנִי …",
+      "tr": "nice to meet you, I’m …"
+     },
+     {
+      "text": "נָעִים לְהַכִּיר",
+      "tr": "nice to meet you (literally “pleasant to get to know”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "נָעִים לְהַכִּיר",
+      "register": "neutral",
+      "nuance": "“pleasant to get to know (you)” — a little more explicit"
+     },
+     {
+      "word": "נָעִים",
+      "register": "informal",
+      "nuance": "just “nice!” — short and casual"
+     }
+    ],
+    "etymology": {
+     "text": "From נָעִים “pleasant” (Wiktionary: related to נָעַם “to please”, cognate with Arabic نَعِيم “bliss”) + מְאוֹד “very”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The root נ־ע־ם gives the name נָעֳמִי (Naomi, “my pleasantness”) and Arabic نِعْمَة (“blessing”), which Turkish knows as nimet."
+    ],
+    "pitfalls": [
+     "Literally “very pleasant” — “to meet you” is understood, not said.",
+     "The same for everyone: it does not change for gender."
+    ],
+    "subtleties": [
+     "The usual answer is נָעִים מְאוֹד back, or גַּם לִי “me too”."
+    ]
+   }
+  },
+  {
+   "id": "he:toda",
+   "lemma": "תּוֹדָה",
+   "pos": "INTJ",
+   "senses": [
+    "greet.thanks"
+   ],
+   "translit": "toda",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Gratitude — said often and easily.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thank you, thanks",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.thanks"
+     },
+     {
+      "id": "s2",
+      "def": "gratitude, thanks (the noun)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "תּוֹדָה, זֶה טָעִים!",
+      "tr": "Thanks, it’s delicious!",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "תּוֹדָה רַבָּה עַל הָעֶזְרָה!",
+      "tr": "Thank you very much for the help!",
+      "register": "neutral",
+      "context": "help",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מָלֵא תּוֹדָה.",
+      "tr": "I am full of gratitude.",
+      "register": "formal",
+      "context": "speech",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תּוֹדָה רַבָּה",
+      "tr": "thank you very much"
+     },
+     {
+      "text": "תּוֹדָה עַל …",
+      "tr": "thanks for …"
+     },
+     {
+      "text": "לֹא, תּוֹדָה",
+      "tr": "no, thank you"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תּוֹדָה רַבָּה",
+      "register": "neutral",
+      "nuance": "“thank you very much”"
+     },
+     {
+      "word": "אֲנִי מוֹדֶה לְךָ",
+      "register": "formal",
+      "nuance": "“I thank you” — speeches and letters"
+     }
+    ],
+    "etymology": {
+     "text": "From the root י־ד־ה; closely related to the verb הוֹדָה “to acknowledge, to thank”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Bible links the name Judah (יְהוּדָה) — the source of “Jew”, German Jude, Greek Ιουδαίος — to this verb: Leah says הַפַּעַם אוֹדֶה אֶת ה׳ “this time I will thank the Lord” (Genesis 29:35)."
+    ],
+    "pitfalls": [
+     "תּוֹדָה רַבָּה, not *תּוֹדָה הַרְבֵּה: רַבָּה is “much”, agreeing with the feminine תּוֹדָה."
+    ],
+    "subtleties": [
+     "The answer is בְּבַקָּשָׁה or עַל לֹא דָּבָר."
+    ]
+   }
+  },
+  {
+   "id": "he:bevakasha",
+   "lemma": "בְּבַקָּשָׁה",
+   "pos": "INTJ",
+   "senses": [
+    "greet.please",
+    "greet.welcome"
+   ],
+   "translit": "bevakasha",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Politeness in one word — asking, answering, handing over.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "please",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.please"
+     },
+     {
+      "id": "s2",
+      "def": "you’re welcome (the answer to thanks)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.welcome"
+     },
+     {
+      "id": "s3",
+      "def": "here you are (handing something over)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "כּוֹס מַיִם, בְּבַקָּשָׁה.",
+      "tr": "A glass of water, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּבַקָּשָׁה, שֵׁב.",
+      "tr": "Please sit down. (to a man)",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "תּוֹדָה! בְּבַקָּשָׁה.",
+      "tr": "Thanks! — You’re welcome.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s2"
+     },
+     {
+      "text": "תּוֹדָה רַבָּה! בְּבַקָּשָׁה, אֵין בְּעָיָה.",
+      "tr": "Thank you very much! — You’re welcome, no problem.",
+      "register": "informal",
+      "context": "help",
+      "sense": "s2"
+     },
+     {
+      "text": "הִנֵּה הַמַּפְתֵּחַ, בְּבַקָּשָׁה.",
+      "tr": "Here is the key — here you are.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כֵּן, בְּבַקָּשָׁה",
+      "tr": "yes, please"
+     },
+     {
+      "text": "תּוֹדָה — בְּבַקָּשָׁה",
+      "tr": "thank you — you’re welcome"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "עַל לֹא דָּבָר",
+      "register": "formal",
+      "nuance": "“don’t mention it” — only as the answer to תּוֹדָה"
+     },
+     {
+      "word": "אֵין בְּעָיָה",
+      "register": "informal",
+      "nuance": "“no problem” (as the answer to thanks)"
+     },
+     {
+      "word": "אֵין בְּעַד מָה",
+      "register": "formal",
+      "nuance": "“no need to thank” (literally “there is nothing for which”)"
+     }
+    ],
+    "etymology": {
+     "text": "From בְּ־ (“in”) + בַּקָּשָׁה (“request”); hence literally “in request”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One word, three jobs — please, you’re welcome, here you are — exactly like German bitte, Russian пожалуйста and Greek παρακαλώ; Turkish and Chinese split them (lütfen / rica ederim; 请 / 不客气)."
+    ],
+    "pitfalls": [
+     "It does not change for gender or number.",
+     "From a seller, בְּבַקָּשָׁה often means “here you are” — or, with a rising voice, “yes? what would you like?”"
+    ],
+    "subtleties": [
+     "Literally “in request”: בַּקָּשָׁה is “a request”."
+    ]
+   }
+  },
+  {
+   "id": "he:al-lo-davar",
+   "lemma": "עַל לֹא דָּבָר",
+   "pos": "INTJ",
+   "senses": [
+    "greet.welcome"
+   ],
+   "translit": "al lo davar",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files this formula as a phrase; the course gives every greeting and polite formula the part of speech INTJ (one fixed expression)."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A modest, polite answer to thanks.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you’re welcome, don’t mention it (the answer to thanks)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.welcome"
+     }
+    ],
+    "examples": [
+     {
+      "text": "תּוֹדָה רַבָּה! עַל לֹא דָּבָר.",
+      "tr": "Thank you very much! — Don’t mention it.",
+      "register": "neutral",
+      "context": "help",
+      "sense": "s1"
+     },
+     {
+      "text": "עַל לֹא דָּבָר, זֶה הָיָה תַּעֲנוּג.",
+      "tr": "You’re welcome, it was a pleasure.",
+      "register": "formal",
+      "context": "service",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תּוֹדָה — עַל לֹא דָּבָר",
+      "tr": "thanks — don’t mention it"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "בְּבַקָּשָׁה",
+      "register": "neutral",
+      "nuance": "the everyday “you’re welcome”"
+     },
+     {
+      "word": "אֵין בְּעָיָה",
+      "register": "informal",
+      "nuance": "“no problem”"
+     }
+    ],
+    "etymology": {
+     "text": "עַל “for, on” + לֹא “no, not” + דָּבָר “thing, word”: “for no thing”. Wiktionary has the phrase but no etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German nichts zu danken, Russian не за что and Greek τίποτα answer thanks the same way: “(it was) for nothing”."
+    ],
+    "pitfalls": [
+     "Only an answer to thanks — it never means “please”."
+    ],
+    "subtleties": [
+     "A little more formal and polite than בְּבַקָּשָׁה."
+    ]
+   }
+  },
+  {
+   "id": "he:slicha",
+   "lemma": "סְלִיחָה",
+   "pos": "INTJ",
+   "senses": [
+    "greet.sorry",
+    "greet.excuseme"
+   ],
+   "translit": "slicha",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A small apology, a polite way through the crowd.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorry (an apology)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.sorry"
+     },
+     {
+      "id": "s2",
+      "def": "excuse me (to get attention or to pass)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.excuseme"
+     },
+     {
+      "id": "s3",
+      "def": "pardon? (asking someone to repeat)",
+      "register": [
+       "informal"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "forgiveness (the noun)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "סְלִיחָה, אֲנִי מְאַחֵר.",
+      "tr": "Sorry, I’m late. (a man)",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "אוֹי, סְלִיחָה!",
+      "tr": "Oh, sorry!",
+      "register": "informal",
+      "context": "bumping into someone",
+      "sense": "s1"
+     },
+     {
+      "text": "סְלִיחָה, אֵיפֹה הַתַּחֲנָה?",
+      "tr": "Excuse me, where is the station?",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s2"
+     },
+     {
+      "text": "סְלִיחָה, אֶפְשָׁר לַעֲבֹר?",
+      "tr": "Excuse me, may I pass?",
+      "register": "neutral",
+      "context": "bus",
+      "sense": "s2"
+     },
+     {
+      "text": "סְלִיחָה? לֹא שָׁמַעְתִּי.",
+      "tr": "Sorry? I didn’t hear.",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלִיחָה עַל הָאִחוּר",
+      "tr": "sorry for being late"
+     },
+     {
+      "text": "סְלִיחָה, אֶפְשָׁר …?",
+      "tr": "excuse me, may I …?"
+     },
+     {
+      "text": "לְבַקֵּשׁ סְלִיחָה",
+      "tr": "to apologize (literally “to ask forgiveness”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אֲנִי מִצְטַעֵר / מִצְטַעֶרֶת",
+      "register": "formal",
+      "nuance": "“I am sorry” — a fuller, more serious apology; it changes for gender"
+     }
+    ],
+    "etymology": {
+     "text": "The action noun of סָלַח “to forgive, to excuse”; the interjection comes from the noun.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "One word for “sorry” and “excuse me”, like German Entschuldigung, Greek συγγνώμη and Russian извините; Chinese splits them (对不起 / 请问).",
+     "סְלִיחוֹת are the penitential prayers said before Yom Kippur."
+    ],
+    "pitfalls": [
+     "It does not change for gender; the longer אֲנִי מִצְטַעֵר (m.) / מִצְטַעֶרֶת (f.) does.",
+     "To ask a stranger something, start with סְלִיחָה — it is the polite opener."
+    ],
+    "subtleties": [
+     "With a rising voice, סְלִיחָה? means “pardon? say that again”."
+    ]
+   }
+  },
+  {
+   "id": "he:ken",
+   "lemma": "כֵּן",
+   "pos": "ADV",
+   "senses": [
+    "part.yes"
+   ],
+   "translit": "ken",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Agreement, a quick nod.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.yes"
+     },
+     {
+      "id": "s2",
+      "def": "so, thus (in fixed phrases: אַחֲרֵי כֵּן, לָכֵן)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "כֵּן, אֲנִי רוֹצֶה.",
+      "tr": "Yes, I (m.) want some.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתְּ בַּבַּיִת? כֵּן, אֲנִי בַּבַּיִת.",
+      "tr": "Are you (f.) at home? Yes, I’m at home.",
+      "register": "neutral",
+      "context": "phone call",
+      "sense": "s1"
+     },
+     {
+      "text": "אַחֲרֵי כֵּן אֲנַחְנוּ אוֹכְלִים.",
+      "tr": "Afterwards we eat.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כֵּן, בְּטַח",
+      "tr": "yes, sure"
+     },
+     {
+      "text": "אַחֲרֵי כֵּן",
+      "tr": "afterwards"
+     },
+     {
+      "text": "לָכֵן",
+      "tr": "therefore"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "כֵּן יִרְבּוּ",
+      "tr": "so may they multiply",
+      "kind": "fixed expression",
+      "meaning": "may there be many more like it (a congratulation)",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בְּטַח",
+      "register": "colloquial",
+      "nuance": "“sure!” — an eager, informal yes"
+     },
+     {
+      "word": "בְּהֶחְלֵט",
+      "register": "neutral",
+      "nuance": "“definitely” — an emphatic yes"
+     },
+     {
+      "word": "הֵן",
+      "register": "formal",
+      "nuance": "a formal “yes”, e.g. when voting"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "לֹא",
+      "note": "no"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary records two senses: “yes” and the older “thus, so” (archaic). The old meaning survives in אַחֲרֵי כֵּן (“after so” = afterwards) and לָכֵן (“for so” = therefore); “yes” is the answer “(it is) so”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "כֵּן יִרְבּוּ (“may they multiply so”) is a congratulation: “may there be many more like it”."
+    ],
+    "pitfalls": [
+     "כֵּן (ken, yes) and כָּאן (kan, here) are easy to confuse: watch the vowel."
+    ],
+    "subtleties": [
+     "Israelis often answer a yes/no question by repeating the verb: — אַתָּה רוֹצֶה? — רוֹצֶה.",
+     "A homograph is the adjective כֵּן “sincere, honest”."
+    ]
+   }
+  },
+  {
+   "id": "he:lo-no",
+   "lemma": "לֹא",
+   "pos": "INTJ",
+   "senses": [
+    "part.no"
+   ],
+   "translit": "lo",
+   "note": "Same written form and sound as the negation לֹא “not” (he:lo); as an answer it stands alone, usually followed by a pause or comma.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary’s interjection לֹא is glossed “No; used in responding to questions” — exactly this concept, the answer “no”; the check misses it only because it looks for the word “answer” of the course gloss “no (the answer)”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A clear refusal; Israeli directness.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "no (an answer)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.no"
+     }
+    ],
+    "examples": [
+     {
+      "text": "לֹא, תּוֹדָה.",
+      "tr": "No, thank you.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתְּ רוֹצָה עוֹד? לֹא, דַּי.",
+      "tr": "Do you (f.) want more? No, that’s enough.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "לֹא! זֶה שֶׁלִּי!",
+      "tr": "No! That’s mine!",
+      "register": "informal",
+      "context": "children",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֹא, תּוֹדָה",
+      "tr": "no, thank you"
+     },
+     {
+      "text": "מַמָּשׁ לֹא",
+      "tr": "absolutely not"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מָה פִּתְאֹם",
+      "register": "colloquial",
+      "nuance": "“what suddenly?!” — a strong “no way!”"
+     },
+     {
+      "word": "לָאו",
+      "register": "formal",
+      "nuance": "an Aramaic-flavoured “no / not”, alive in fixed phrases: לָאו דַּוְקָא “not necessarily”"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "כֵּן",
+      "note": "yes"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *lā. Cognate with Arabic لا.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic لا also means both “no” and “not”."
+    ],
+    "pitfalls": [
+     "Hebrew uses one word for “no” and “not”: לֹא, אֲנִי לֹא רוֹצֶה (No, I don’t want)."
+    ],
+    "subtleties": [
+     "Israeli speech is direct: a plain לֹא is not rude, though לֹא, תּוֹדָה is the polite default."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

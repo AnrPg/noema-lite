@@ -1,0 +1,221 @@
+{
+ "function": "fn.pronoun.subject",
+ "status": "realized",
+ "summary": "Arabic subject pronouns mark person, number and — in the 2nd and 3rd person — gender: أَنَا I, أَنْتَ you (a man), أَنْتِ you (a woman), هُوَ he, هِيَ she, نَحْنُ we, أَنْتُمْ you (men or a mixed group), أَنْتُنَّ you (women), هُمْ they (men or mixed), هُنَّ they (women). Exactly two people have dual pronouns: أَنْتُمَا (you two) and هُمَا (they two). There is no “it”: a thing is هُوَ or هِيَ by its gender, and every plural of things is هِيَ. Before a verb the pronoun is usually left out, because the verb ending shows the person; in a sentence without a verb it is needed: أَنَا طَالِبٌ.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "one (singular)",
+    "several (plural)",
+    "two (dual)"
+   ],
+   "rows": [
+    [
+     "1st person",
+     "أَنَا ʾana — I",
+     "نَحْنُ naḥnu — we",
+     "نَحْنُ (the same)"
+    ],
+    [
+     "2nd, masculine",
+     "أَنْتَ ʾanta — you (a man)",
+     "أَنْتُمْ ʾantum — you (men, or mixed)",
+     "أَنْتُمَا ʾantumā — you two"
+    ],
+    [
+     "2nd, feminine",
+     "أَنْتِ ʾanti — you (a woman)",
+     "أَنْتُنَّ ʾantunna — you (women)",
+     "أَنْتُمَا ʾantumā — you two"
+    ],
+    [
+     "3rd, masculine",
+     "هُوَ huwa — he; it (a masculine thing)",
+     "هُمْ hum — they (men, or mixed)",
+     "هُمَا humā — they two"
+    ],
+    [
+     "3rd, feminine",
+     "هِيَ hiya — she; it (a feminine thing; things in the plural)",
+     "هُنَّ hunna — they (women)",
+     "هُمَا humā — they two"
+    ]
+   ],
+   "caption": "The dual pronouns come with the dual of nouns and verbs (lesson 5); here they are for recognition."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No “it”.",
+   "text": "الْبَابُ؟ هُوَ هُنَا (the door? it is here) — الْغُرْفَةُ؟ هِيَ هُنَاكَ (the room? it is there) — الْكُتُبُ؟ هِيَ هُنَا (the books? they are here): a plural of things is هِيَ."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Mixed groups are masculine.",
+   "text": "One man among many women is enough for أَنْتُمْ and هُمْ; only an all-female group is أَنْتُنَّ / هُنَّ."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "With a verb",
+     "points": [
+      "the ending already shows the person: كُنْتُ = I was, كَانَتْ = she was",
+      "the pronoun adds emphasis or contrast: أَنَا كُنْتُ طَالِبًا = it was I who was a student"
+     ]
+    },
+    {
+     "title": "Without a verb",
+     "points": [
+      "the pronoun is the subject and cannot be dropped",
+      "أَنَا طَالِبٌ = I am a student; هِيَ مُعَلِّمَةٌ = she is a teacher"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "text": "There is no polite “you” — no Sie, no вы, no εσείς: أَنْتَ / أَنْتِ is said even to strangers. Respect comes from titles and formulas: يَا أُسْتَاذُ (sir), حَضْرَتُكَ (your presence)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is it: me, the person I speak to, or someone else?",
+   "One person, two, or more?",
+   "A man or a woman (2nd and 3rd person)? A mixed group counts as masculine.",
+   "Is it a thing? → هُوَ or هِيَ by the noun’s gender; a plural of things → هِيَ.",
+   "Is there a verb? → the pronoun may be dropped; no verb → keep it."
+  ]
+ },
+ "traps": [
+  "أَنْتَ and أَنْتِ look the same without vowels (انت): pronounce the last vowel clearly.",
+  "*الْكُتُبُ؟ هُمْ هُنَا is wrong: things in the plural are هِيَ.",
+  "هُوَ / هِيَ also mean “it”; there is no separate word.",
+  "For exactly two people careful MSA uses أَنْتُمَا / هُمَا, not أَنْتُمْ / هُمْ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:ana",
+   "ar:anta",
+   "ar:anti",
+   "ar:huwa",
+   "ar:hiya",
+   "ar:nahnu",
+   "ar:antum",
+   "ar:antunna",
+   "ar:hum",
+   "ar:hunna"
+  ]
+ },
+ "paradigmCells": [
+  "PRON;NOM"
+ ],
+ "needs": {
+  "PRON": 6
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“You” to a woman:",
+   "options": [
+    "أَنْتِ",
+    "أَنْتَ",
+    "أَنْتُنَّ",
+    "هِيَ"
+   ],
+   "answer": "أَنْتِ",
+   "why": "أَنْتِ (-ti) for one woman; أَنْتُنَّ for several women."
+  },
+  {
+   "q": "“They” for five women and one man:",
+   "options": [
+    "هُمْ",
+    "هُنَّ",
+    "هِيَ"
+   ],
+   "answer": "هُمْ",
+   "why": "A mixed group is masculine."
+  },
+  {
+   "q": "“It” for الْبَابُ (the door, masculine):",
+   "options": [
+    "هُوَ",
+    "هِيَ",
+    "هُمْ"
+   ],
+   "answer": "هُوَ",
+   "why": "A masculine thing is هُوَ."
+  },
+  {
+   "q": "“They” for الْكُتُبُ (the books):",
+   "options": [
+    "هِيَ",
+    "هُمْ",
+    "هُنَّ"
+   ],
+   "answer": "هِيَ",
+   "why": "Plurals of things take the feminine singular."
+  },
+  {
+   "q": "“You” to exactly two people (careful MSA):",
+   "options": [
+    "أَنْتُمَا",
+    "أَنْتُمْ",
+    "أَنْتُنَّ"
+   ],
+   "answer": "أَنْتُمَا",
+   "why": "The dual pronoun is for two."
+  },
+  {
+   "q": "“We”:",
+   "options": [
+    "نَحْنُ",
+    "هُمْ",
+    "أَنْتُمْ"
+   ],
+   "answer": "نَحْنُ",
+   "why": "نَحْنُ is for men, women, two or more."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.pronoun.subject",
+   "note": "Hebrew has the same Semitic set — אַתָּה / אַתְּ, אַתֶּם / אַתֶּן, הֵם / הֵן; אֲנִי ↔ أَنَا, אֲנַחְנוּ ↔ نَحْنُ — but no dual pronouns."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.pronoun.subject",
+   "note": "German has a polite Sie and a neuter es; Arabic has neither and marks the listener’s gender instead (أَنْتَ / أَنْتِ)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.pronoun.subject",
+   "note": "Chinese 他 / 她 / 它 are all pronounced tā — the gender is only in the writing; the plural adds 们."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.noun.gender",
+   "note": "German also calls things by their gender — der Tisch → er, die Tür → sie — just like Arabic هُوَ / هِيَ; only German has es for neuters."
+  }
+ ]
+}

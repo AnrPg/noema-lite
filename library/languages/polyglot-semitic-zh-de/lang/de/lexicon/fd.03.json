@@ -1,0 +1,830 @@
+{
+ "lexemes": [
+  {
+   "id": "de:dieser",
+   "lemma": "dieser",
+   "pos": "DET",
+   "class": "dem",
+   "senses": [
+    "dem.this",
+    "dem.these"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "dieser",
+    "DET;NOM;SG;FEM": "diese",
+    "DET;NOM;SG;NEUT": "dieses",
+    "DET;ACC;SG;MASC": "diesen",
+    "DET;ACC;SG;FEM": "diese",
+    "DET;ACC;SG;NEUT": "dieses",
+    "DET;DAT;SG;MASC": "diesem",
+    "DET;DAT;SG;FEM": "dieser",
+    "DET;DAT;SG;NEUT": "diesem",
+    "DET;GEN;SG;MASC": "dieses",
+    "DET;GEN;SG;FEM": "dieser",
+    "DET;GEN;SG;NEUT": "dieses",
+    "DET;NOM;PL": "diese",
+    "DET;ACC;PL": "diese",
+    "DET;DAT;PL": "diesen",
+    "DET;GEN;PL": "dieser"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing: this one here (or that one there) – clearer than the article.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "this (also “that” when nothing is contrasted) – points to a particular thing: dieser Tisch, diese Lampe, dieses Buch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.this"
+     },
+     {
+      "id": "s2",
+      "def": "dieser / diese / dieses alone: this one",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "these (plural diese, for all genders): diese Bücher, diese Kinder",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.these"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Kaufen wir diesen Kürbis?",
+      "tr": "Shall we buy this pumpkin?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Welche Gurke willst du? – Diese hier.",
+      "tr": "Which cucumber do you want? – This one here.",
+      "register": "informal",
+      "context": "market",
+      "sense": "s2"
+     },
+     {
+      "text": "Diese Tomaten sind sehr süß.",
+      "tr": "These tomatoes are very sweet.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s3"
+     },
+     {
+      "text": "Diese Kinder sind meine Schüler.",
+      "tr": "These children are my pupils.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "dieses Jahr",
+      "tr": "this year"
+     },
+     {
+      "text": "diese Woche",
+      "tr": "this week"
+     },
+     {
+      "text": "an diesem Tag",
+      "tr": "on that day"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der/die/das (stressed)",
+      "register": "colloquial",
+      "nuance": "in speech the stressed article often replaces dieser: DIE Tomate (da)"
+     },
+     {
+      "word": "jener",
+      "register": "literary",
+      "nuance": "that (far) – old-fashioned and written; contrasted with dieser"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German diser/dirre, disiu, diz, from Old High German dësēr, disiu, diz, from the Old High German demonstrative pronoun dër, from Proto-Germanic *sa, from Proto-Indo-European *tód.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "dieser has the same endings as der in all cases – -er, -e, -es, -en, -em – which is why it is often used to learn the article endings."
+    ],
+    "pitfalls": [
+     "Neuter is dieses (dieses Radieschen), not *dieser; the short form dies is used mostly as a pronoun in writing (Dies ist …).",
+     "Plural diese for every gender: dieser Mann → diese Männer, dieses Kind → diese Kinder."
+    ],
+    "subtleties": [
+     "German does not distinguish this/that sharply: dieser covers both; in speech people often say der da or das hier."
+    ]
+   }
+  },
+  {
+   "id": "de:das.dem",
+   "lemma": "das",
+   "pos": "PRON",
+   "class": "dem",
+   "senses": [
+    "dem.this",
+    "dem.that"
+   ],
+   "forms": {
+    "PRON;NOM": "das",
+    "PRON;ACC": "das",
+    "PRON;DAT": "dem"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The pointing word of “Das ist …” – used for anything you show or name.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "this, that (demonstrative pronoun): Das ist eine Tomate. Das sind Tomaten.",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.this"
+     },
+     {
+      "id": "s2",
+      "def": "that (referring to a whole statement): Das weiß ich nicht.",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "that (pointing farther away; in speech often das da): Das da ist mein Haus.",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.that"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist eine Paprika.",
+      "tr": "This is a bell pepper.",
+      "register": "neutral",
+      "context": "naming things",
+      "sense": "s1"
+     },
+     {
+      "text": "Das sind Radieschen.",
+      "tr": "These are radishes.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Das glaube ich nicht.",
+      "tr": "I don't believe that.",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "Das da ist mein Haus.",
+      "tr": "That (over there) is my house.",
+      "register": "colloquial",
+      "context": "pointing",
+      "sense": "s3"
+     },
+     {
+      "text": "Ist das dort dein Schlüssel?",
+      "tr": "Is that your key over there?",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Das ist …",
+      "tr": "This/That is …"
+     },
+     {
+      "text": "Das sind …",
+      "tr": "These/Those are …"
+     },
+     {
+      "text": "Was ist das?",
+      "tr": "What is this?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das war's.",
+      "tr": "That's it.",
+      "kind": "fixed expression",
+      "meaning": "that's all, we're finished",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "dies",
+      "register": "formal",
+      "nuance": "short form of dieses; Dies ist … sounds written or formal"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German daȥ, from Old High German daȥ, from Proto-Germanic *þat. Compare Dutch dat, English that. Doublet of dass.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "das and dass (“that”, conjunction) are historically the same word; the spelling difference is only a convention."
+    ],
+    "pitfalls": [
+     "In Das ist … the das never changes with the noun: Das ist ein Kürbis / eine Gurke / ein Radieschen; for plurals the verb changes: Das sind Gurken."
+    ],
+    "subtleties": [
+     "This das is the neuter form of the demonstrative der/die/das; its dative is dem and its genitive dessen (not des).",
+     "Das ist … covers both “this is” and “that is”; add hier or da/dort when the distance matters: Das hier ist … / Das da ist …"
+    ]
+   }
+  },
+  {
+   "id": "de:hier",
+   "lemma": "hier",
+   "pos": "ADV",
+   "senses": [
+    "adv.here"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Right here, within reach – presence and attention.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "here (in this place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.here"
+     },
+     {
+      "id": "s2",
+      "def": "here, at this point (in a text or discussion)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "Hier! – “present!” (answer at roll call); also “here you are” when handing something",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Tomaten sind hier.",
+      "tr": "The tomatoes are here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Wohnen Sie schon lange hier?",
+      "tr": "Have you lived here long?",
+      "register": "formal",
+      "context": "small talk",
+      "sense": "s1"
+     },
+     {
+      "text": "Hier irrt der Autor.",
+      "tr": "Here the author is mistaken.",
+      "register": "formal",
+      "context": "academic text",
+      "sense": "s2"
+     },
+     {
+      "text": "Müller? – Hier!",
+      "tr": "Müller? – Present!",
+      "register": "neutral",
+      "context": "school roll call",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "hier und da",
+      "tr": "here and there; now and then"
+     },
+     {
+      "text": "von hier aus",
+      "tr": "from here"
+     },
+     {
+      "text": "hier drüben",
+      "tr": "over here"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "hier und da",
+      "tr": "here and there",
+      "kind": "fixed expression",
+      "meaning": "in some places; from time to time",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "da",
+      "register": "colloquial",
+      "nuance": "in speech often means “here” as well as “there”: Ich bin da."
+     },
+     {
+      "word": "an dieser Stelle",
+      "register": "formal",
+      "nuance": "at this point – in writing and speeches"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "dort",
+      "note": "there (away from the speaker)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German hier, from Old High German hier, from Proto-West Germanic *hēr. Cognate with Dutch hier, English here, Swedish här.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In German schools and the army, pupils and soldiers answer the roll call with Hier!"
+    ],
+    "pitfalls": [
+     "For movement towards the speaker standard German uses her or hierher: Komm her! / Komm hierher!"
+    ],
+    "subtleties": [
+     "hier, da and dort: hier is close to the speaker, dort is far away, and da can be either."
+    ]
+   }
+  },
+  {
+   "id": "de:jener",
+   "lemma": "jener",
+   "pos": "DET",
+   "class": "dem",
+   "senses": [
+    "dem.that",
+    "dem.those"
+   ],
+   "forms": {
+    "DET;NOM;SG;MASC": "jener",
+    "DET;NOM;SG;FEM": "jene",
+    "DET;NOM;SG;NEUT": "jenes",
+    "DET;ACC;SG;MASC": "jenen",
+    "DET;ACC;SG;FEM": "jene",
+    "DET;ACC;SG;NEUT": "jenes",
+    "DET;DAT;SG;MASC": "jenem",
+    "DET;DAT;SG;FEM": "jener",
+    "DET;DAT;SG;NEUT": "jenem",
+    "DET;GEN;SG;MASC": "jenes",
+    "DET;GEN;SG;FEM": "jener",
+    "DET;GEN;SG;NEUT": "jenes",
+    "DET;NOM;PL": "jene",
+    "DET;ACC;PL": "jene",
+    "DET;DAT;PL": "jenen",
+    "DET;GEN;PL": "jener"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Distance in time or space – the written, slightly literary “that”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that (far from the speaker, or contrasted with dieser) – written or formal",
+      "register": [
+       "formal"
+      ],
+      "concept": "dem.that"
+     },
+     {
+      "id": "s2",
+      "def": "those (plural jene); jene, die … = those who …",
+      "register": [
+       "formal"
+      ],
+      "concept": "dem.those"
+     },
+     {
+      "id": "s3",
+      "def": "dieser … jener = the latter … the former (in careful writing)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "In jener Nacht konnte niemand schlafen.",
+      "tr": "That night nobody could sleep.",
+      "register": "literary",
+      "context": "storytelling",
+      "sense": "s1"
+     },
+     {
+      "text": "Dieses Haus ist neu, jenes ist alt.",
+      "tr": "This house is new, that one is old.",
+      "register": "formal",
+      "context": "contrasting",
+      "sense": "s1"
+     },
+     {
+      "text": "Jene Zeiten sind vorbei.",
+      "tr": "Those times are over.",
+      "register": "literary",
+      "context": "memories",
+      "sense": "s2"
+     },
+     {
+      "text": "Jene, die zu spät kommen, müssen warten.",
+      "tr": "Those who come late have to wait.",
+      "register": "formal",
+      "context": "rules",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "in jener Zeit",
+      "tr": "in those days, at that time"
+     },
+     {
+      "text": "dieser und jener",
+      "tr": "this one and that one; various people"
+     },
+     {
+      "text": "jene, die …",
+      "tr": "those who …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "der/die/das … da",
+      "register": "colloquial",
+      "nuance": "the spoken way to say that: der Tisch da, die Frau da"
+     },
+     {
+      "word": "dieser",
+      "register": "neutral",
+      "nuance": "this – also used for “that” when no contrast is needed"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "dieser",
+      "note": "this"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German jener, from Old High German jenēr, from Proto-West Germanic *jain, from Proto-Germanic *jainaz. Cognate with English yon.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "jener is the German cousin of English yon and yonder."
+    ],
+    "pitfalls": [
+     "In everyday speech almost nobody says jener. Spoken German points with der/die/das + da: der Mann da (that man), das Buch da (that book), or simply dieser.",
+     "Same endings as dieser and der: jener, jene, jenes; jenen, jenem."
+    ],
+    "subtleties": [
+     "dieser und jener (“this and that”) means “various people / things”: Ich habe mit diesem und jenem gesprochen."
+    ]
+   }
+  },
+  {
+   "id": "de:da",
+   "lemma": "da",
+   "pos": "ADV",
+   "senses": [
+    "adv.there"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing and presence: there – or simply “here, present”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "there (at that place – pointing or already mentioned)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.there"
+     },
+     {
+      "id": "s2",
+      "def": "here, present, arrived (Ich bin da!)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "then, at that moment (in stories)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "der/die/das … da – that … there (pointing at a person or thing)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Buch liegt da, auf dem Tisch.",
+      "tr": "The book is there, on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wer ist da?",
+      "tr": "Who’s there?",
+      "register": "neutral",
+      "context": "at the door",
+      "sense": "s1"
+     },
+     {
+      "text": "Hallo, ich bin wieder da!",
+      "tr": "Hi, I’m back!",
+      "register": "informal",
+      "context": "coming home",
+      "sense": "s2"
+     },
+     {
+      "text": "Ist Frau Schulz heute da?",
+      "tr": "Is Ms Schulz in today?",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir saßen beim Essen, da klingelte das Telefon.",
+      "tr": "We were having dinner when the phone rang.",
+      "register": "neutral",
+      "context": "telling a story",
+      "sense": "s3"
+     },
+     {
+      "text": "Siehst du den Mann da?",
+      "tr": "Do you see that man (there)?",
+      "register": "colloquial",
+      "context": "pointing out people",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "da drüben",
+      "tr": "over there"
+     },
+     {
+      "text": "hier und da",
+      "tr": "here and there; now and then"
+     },
+     {
+      "text": "da sein",
+      "tr": "to be there, to be present"
+     },
+     {
+      "text": "der … da",
+      "tr": "that … (there)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Da haben wir den Salat!",
+      "tr": "There we have the salad!",
+      "kind": "idiom",
+      "meaning": "now we’re in a mess (what I feared has happened)",
+      "register": "colloquial"
+     },
+     {
+      "text": "Da kann man nichts machen.",
+      "tr": "There one can do nothing.",
+      "kind": "fixed expression",
+      "meaning": "nothing can be done about it",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "dort",
+      "register": "neutral",
+      "nuance": "there – clearly away from the speaker, a little more precise and formal"
+     },
+     {
+      "word": "drüben",
+      "register": "neutral",
+      "nuance": "over there, on the other side"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "hier",
+      "note": "here"
+     }
+    ],
+    "etymology": {
+     "text": "From a merger of three interrelated adverbs: Middle High German dā, dār (“there, at that place”), from Old High German thār, dār, from Proto-West Germanic *þār; Middle High German dar, dare (“thither, to that place”); and Middle High German dō, duo (“then, at that time”), from Old High German thō, dō. Adverbs 1 and 2 are cognate with Dutch daar, Low German dar, dor.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Heidegger built his philosophy on Dasein, “being there” – the ordinary German word for existence."
+    ],
+    "pitfalls": [
+     "da can mean here! Ich bin da = I’m here / I’ve arrived. The situation decides.",
+     "For a direction use dahin / dorthin: Ich gehe dahin (not *Ich gehe da in standard writing)."
+    ],
+    "subtleties": [
+     "In speech, “that” is usually der/die/das + noun + da: Die Lampe da ist schön (That lamp is nice); “this” is … hier: die Lampe hier.",
+     "As a conjunction da means “since, as”: Da es regnet, bleiben wir zu Hause – a different use."
+    ]
+   }
+  },
+  {
+   "id": "de:dort",
+   "lemma": "dort",
+   "pos": "ADV",
+   "senses": [
+    "adv.there"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Over there, away from us – precise, clear distance.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "there, over there (away from the speaker and the listener)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.there"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Dort ist die Tür.",
+      "tr": "The door is over there.",
+      "register": "neutral",
+      "context": "showing the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Siehst du das Haus dort?",
+      "tr": "Do you see the house over there?",
+      "register": "neutral",
+      "context": "pointing",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir waren letztes Jahr in Wien und es war schön dort.",
+      "tr": "We were in Vienna last year and it was lovely there.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Von dort aus kann man das Meer sehen.",
+      "tr": "From there you can see the sea.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "dort drüben",
+      "tr": "over there"
+     },
+     {
+      "text": "dort oben",
+      "tr": "up there"
+     },
+     {
+      "text": "von dort",
+      "tr": "from there"
+     },
+     {
+      "text": "dort hinten",
+      "tr": "back there"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "hier und dort",
+      "tr": "here and there",
+      "kind": "fixed expression",
+      "meaning": "in several places",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "da",
+      "register": "colloquial",
+      "nuance": "there (or here) – vaguer, the usual spoken word"
+     },
+     {
+      "word": "drüben",
+      "register": "neutral",
+      "nuance": "over there, on the other side (of a street, a border)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "hier",
+      "note": "here"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German dort, from Old High German doret, dārot (“thither”), from Proto-West Germanic *þārud (“thither”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "dort first meant “to there, thither”; today the direction needs -hin: dorthin."
+    ],
+    "pitfalls": [
+     "For movement towards the place use dorthin: Ich fahre morgen dorthin (not *Ich fahre morgen dort)."
+    ],
+    "subtleties": [
+     "dort is clear distance; da is vaguer and far more frequent in speech; hier is close to the speaker."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

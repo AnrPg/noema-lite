@@ -1,27 +1,29 @@
 {
  "function": "fn.definite",
  "status": "realized",
- "summary": "Hebrew marks a definite noun with the prefix ha- (הַ), written attached to the noun and to every adjective that agrees with it (הַבָּצָל הַיָּרֹק). There is no indefinite article: a bare noun is indefinite (גֶּזֶר “a carrot / carrots”). A definite direct object is introduced by אֶת (הוּא אוֹכֵל אֶת הַגֶּזֶר). The article usually doubles the next consonant with a dagesh (הַשּׁוּם, הַכְּרוּב); before the gutturals, which cannot be doubled, its vowel changes: הָ before א, ע, ר (הָעַגְבָנִיָּה, הָאֲפוּנָה), הַ with no doubling before ה and ח (הַחַסָּה, הַחֲצִילִים), and הֶ before חָ (הֶחָצִיל, הֶחָרִיף).",
+ "summary": "Hebrew marks a definite noun with the prefix ha- (הַ), written onto the noun: בַּיִת “a house” → הַבַּיִת “the house”. There is no indefinite article: a bare noun is indefinite (זֶה סֵפֶר “this is a book”; זֶה הַסֵּפֶר “this is the book”). The article usually doubles the next consonant with a dagesh (הַסֵּפֶר, הַשֻּׁלְחָן, הַמְּנוֹרָה); before the gutturals, which cannot be doubled, its vowel changes: הָ before א, ע, ר (הָאָרוֹן, הָעֵט, הָאִשָּׁה), הַ with no doubling before ה and ח (הַחֶדֶר, הַחַלּוֹן), and הֶ before חָ (הֶחָבֵר). Words that agree with a definite noun after it take the article too (הַסֵּפֶר הַזֶּה; later הַסֵּפֶר הַחָדָשׁ). From lesson 7 a definite direct object is also introduced by אֶת (הוּא קוֹרֵא אֶת הַסֵּפֶר).",
  "procedure": {
   "askYourself": [
-   "Is the thing specific — already known to the listener, or the only one? → add הַ.",
+   "Is the thing specific — already known to the listener, or the only one? → add הַ; if not, use the bare noun (there is no “a”).",
    "What is the first letter of the noun? א / ע / ר → הָ; ה / ח → הַ without a dagesh; חָ → הֶ; any other letter → הַ + a dagesh in that letter.",
-   "Is there an adjective after the noun? It takes the article too: הַפִּלְפֵּל הֶחָרִיף.",
-   "Is the definite noun the direct object of the verb? → put אֶת before it.",
+   "Is there a demonstrative (or later an adjective) after the noun? It takes the article too: הַסֵּפֶר הַזֶּה.",
+   "Is it a name or a noun with a possessive suffix? → it is already definite: no הַ.",
+   "Is the definite noun the direct object of a verb (from lesson 7)? → put אֶת before it.",
    "Is it a construct phrase (two nouns, like תַּפּוּחַ אֲדָמָה)? → the article goes on the last noun: תַּפּוּחַ הָאֲדָמָה."
   ],
   "steps": [
    "Decide definite or not.",
    "Choose the form of the article from the first letter.",
-   "Repeat the article on agreeing adjectives.",
+   "Repeat the article on a demonstrative or adjective after the noun.",
    "Add אֶת if it is a definite direct object."
   ]
  },
  "traps": [
-  "No indefinite article: “a tomato” is just עַגְבָנִיָּה — never *אַחַת עַגְבָנִיָּה as an article.",
-  "אֶת only before a definite object: הוּא אוֹכֵל בָּצָל (no אֶת), but הוּא אוֹכֵל אֶת הַבָּצָל.",
-  "The article changes before gutturals: הָעַגְבָנִיָּה, הֶחָצִיל — but the plural הַחֲצִילִים, because there the ח has a hataf patah, not a qamats.",
-  "In a noun–adjective phrase both words take the article: הַבָּצָל הַיָּרֹק, not *הַבָּצָל יָרֹק (that means “the onion is green”).",
+  "No indefinite article: “a book” is just סֵפֶר — never *אֶחָד סֵפֶר as an article.",
+  "The article changes before gutturals: הָאָרוֹן, הָעֵט, הֶחָבֵר — but הַחֶדֶר, הַחֲבֵרִים.",
+  "Article on both words: הַבַּיִת הַזֶּה, not *בַּיִת הַזֶּה or *הַבַּיִת זֶה.",
+  "זֶה הַבַּיִת (“this is the house”) and הַבַּיִת הַזֶּה (“this house”) are different: the first is a sentence.",
+  "אֶת only before a definite object (lesson 7): הוּא קוֹרֵא סֵפֶר (no אֶת), but הוּא קוֹרֵא אֶת הַסֵּפֶר.",
   "Names and nouns with a possessive suffix are already definite and take no הַ."
  ],
  "evidence": {
@@ -36,8 +38,7 @@
   "N;PL;DEF"
  ],
  "needs": {
-  "NOUN": 6,
-  "VERB": 1
+  "NOUN": 6
  },
  "generators": [
   {
@@ -50,29 +51,131 @@
    "count": 12
   },
   {
-   "type": "analyze",
-   "pos": "NOUN",
-   "cells": [
-    "N;SG;DEF",
-    "N;SG;INDF"
-   ],
-   "count": 8
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ],
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
   },
   {
    "type": "transform",
    "bank": {
     "functions": [
      "fn.definite"
-    ]
+    ],
+    "variant": "Number"
    }
+  }
+ ],
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "first letter of the noun",
+    "article",
+    "examples"
+   ],
+   "rows": [
+    [
+     "most letters",
+     "הַ + dagesh in the letter",
+     "הַבַּיִת, הַסֵּפֶר, הַשֻּׁלְחָן, הַמְּנוֹרָה, הַטֶּלֶפוֹן, הַמַּפְתֵּחַ"
+    ],
+    [
+     "א, ע, ר",
+     "הָ",
+     "הָאָרוֹן, הָעֵט, הָאִשָּׁה"
+    ],
+    [
+     "ה, ח (with a vowel other than qamats)",
+     "הַ, no dagesh",
+     "הַחֶדֶר, הַחַלּוֹן, הַחֲבֵרִים"
+    ],
+    [
+     "חָ (with qamats)",
+     "הֶ",
+     "הֶחָבֵר"
+    ],
+    [
+     "plural, same rules",
+     "",
+     "הַבָּתִּים, הַסְּפָרִים, הָאֲרוֹנוֹת, הַחֲדָרִים"
+    ]
+   ],
+   "caption": "The forms of the article (the stored DEF cells of every noun)."
   },
   {
-   "type": "build_sentence",
-   "bank": {
-    "functions": [
-     "fn.definite"
-    ]
-   }
+   "t": "compare",
+   "items": [
+    {
+     "title": "Indefinite — no article",
+     "points": [
+      "זֶה בַּיִת — this is a house",
+      "זֹאת דִּירָה — this is a flat",
+      "סֵפֶר is “a book” or “book”"
+     ]
+    },
+    {
+     "title": "Definite — הַ",
+     "points": [
+      "זֶה הַבַּיִת — this is the house",
+      "הַדִּירָה פֹּה — the flat is here",
+      "הַסֵּפֶר הַזֶּה — this book"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No word for “a”",
+   "text": "Do not translate “a” with אֶחָד / אַחַת (“one”) — that means “one”. “A key” is simply מַפְתֵּחַ."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "The article repeats",
+   "text": "A demonstrative after a definite noun takes the article too: הַבַּיִת הַזֶּה, הָאִשָּׁה הַהִיא. Adjectives will do the same (lesson 16)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Already definite",
+   "text": "Names (דָּוִד, שָׂרָה) and nouns with a possessive suffix (שְׁמִי “my name”) are definite without הַ."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is the thing specific — known to the listener, or the only one?",
+    "What is the first letter of the noun?",
+    "Is there a demonstrative after it?"
+   ]
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.definite",
+   "note": "Arabic الـ is the same idea, a prefix; both languages double the next consonant — Arabic for the “sun letters” (الشَّمْس aš-šams), Hebrew for almost every letter (הַשֻּׁלְחָן). Arabic marks the indefinite with -un (tanwīn); Hebrew leaves it bare."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.definite",
+   "note": "German has both articles, der / die / das and ein / eine, and they show gender and case; Hebrew הַ shows neither."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.definite",
+   "note": "Chinese has no articles: definiteness comes from context, word order or 这 / 那."
   }
  ]
 }

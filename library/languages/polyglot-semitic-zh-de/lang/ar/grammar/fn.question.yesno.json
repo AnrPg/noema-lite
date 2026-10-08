@@ -50,5 +50,22 @@
     ]
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.question.yesno",
+   "note": "Hebrew marks a yes/no question with הַאִם in writing or only with intonation in speech — the same idea as هَلْ."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "German moves the verb to the front (Bist du müde?); Arabic never changes the order, it adds هَلْ."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.yesno",
+   "note": "Chinese adds 吗 at the end of the sentence where Arabic puts هَلْ at the start."
+  }
  ]
 }

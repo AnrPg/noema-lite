@@ -1,0 +1,684 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:zhe",
+   "lemma": "这",
+   "trad": "這",
+   "pinyin": "zhè",
+   "pos": "DET",
+   "senses": [
+    "dem.this"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing at what is near — physically or in the conversation.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "this; these",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.this"
+     },
+     {
+      "id": "s2",
+      "def": "(colloquial) right now, at once (这就…)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是西红柿。",
+      "tr": "This is a tomato.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Zhè shì xīhóngshì."
+     },
+     {
+      "text": "这个南瓜很大。",
+      "tr": "This pumpkin is big.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1",
+      "py": "Zhège nánguā hěn dà."
+     },
+     {
+      "text": "这些菜很新鲜。",
+      "tr": "These vegetables are very fresh.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Zhèxiē cài hěn xīnxiān."
+     },
+     {
+      "text": "我这就来！",
+      "tr": "I'm coming right now!",
+      "register": "colloquial",
+      "context": "everyday talk",
+      "sense": "s2",
+      "py": "Wǒ zhè jiù lái!"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "这个",
+      "tr": "this (one)"
+     },
+     {
+      "text": "这些",
+      "tr": "these"
+     },
+     {
+      "text": "这里",
+      "tr": "here"
+     },
+     {
+      "text": "这样",
+      "tr": "like this"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "此",
+      "register": "literary",
+      "nuance": "written ‘this’, in fixed words: 此外 (besides), 因此 (therefore)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "那",
+      "note": "nà, that"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 辶 (‘walk’) + phonetic 言. Originally a verb ‘to meet’ (now read yàn); borrowed for ‘this’ through a medieval confusion with 遮 (zhē, ‘this’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "这 (zhè) ‘this’, 那 (nà) ‘that’ and 哪 (nǎ) ‘which’ form a set: 这里 here, 那里 there, 哪里 where?"
+    ],
+    "pitfalls": [
+     "Before a noun, 这 normally needs a measure word: 这个西红柿, 这根黄瓜.",
+     "Many northerners say zhèi before a measure word: 这个 zhèige."
+    ],
+    "subtleties": [
+     "As a subject, 这 stands alone: 这是土豆 ‘this is a potato’ — no measure word."
+    ]
+   }
+  },
+  {
+   "id": "zh:na",
+   "lemma": "那",
+   "trad": "那",
+   "pinyin": "nà",
+   "pos": "DET",
+   "senses": [
+    "dem.that"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing away — at what is far from the speaker, in space, time or the conversation.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that; those (far from the speaker)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.that"
+     },
+     {
+      "id": "s2",
+      "def": "then, in that case (at the start of a sentence)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "那是老师。",
+      "py": "Nà shì lǎoshī.",
+      "tr": "That is the teacher.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "那个人是谁？",
+      "py": "Nàge rén shì shéi?",
+      "tr": "Who is that person?",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1"
+     },
+     {
+      "text": "那本书很有意思。",
+      "py": "Nà běn shū hěn yǒu yìsi.",
+      "tr": "That book is interesting.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "那我们走吧。",
+      "py": "Nà wǒmen zǒu ba.",
+      "tr": "Then let’s go.",
+      "register": "colloquial",
+      "context": "plans",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "那个",
+      "tr": "that (one)"
+     },
+     {
+      "text": "那些",
+      "tr": "those"
+     },
+     {
+      "text": "那里",
+      "tr": "there"
+     },
+     {
+      "text": "那时候",
+      "tr": "at that time"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "彼",
+      "register": "literary",
+      "nuance": "written ‘that, the other’ — in fixed words: 彼此 ‘each other’"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "这",
+      "note": "this"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 冄 + semantic 邑 ‘city’ (the 阝 on the right). Originally the name of an ancient state, later borrowed for the distal demonstrative ‘that’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "这 ‘this’, 那 ‘that’ and 哪 ‘which?’ form a family: 这里 / 那里 / 哪里 — here, there, where?"
+    ],
+    "pitfalls": [
+     "那 nà ‘that’ and 哪 nǎ ‘which?’ differ only in tone and in the 口 of the written form.",
+     "Before a noun 那 needs a measure word: 那个人, 那本书 — but alone as a subject it stands bare: 那是老师."
+    ],
+    "subtleties": [
+     "Many northerners say nèi before a measure word: 那个 nèige (and 这个 zhèige).",
+     "At the start of a sentence 那 means ‘well then’: 那好吧 ‘OK then’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zhexie",
+   "lemma": "这些",
+   "trad": "這些",
+   "pinyin": "zhè xiē",
+   "pos": "DET",
+   "senses": [
+    "dem.these"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Several things or people close to you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "these",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.these"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这些人是学生。",
+      "py": "Zhèxiē rén shì xuésheng.",
+      "tr": "These people are students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "这些书是我的。",
+      "py": "Zhèxiē shū shì wǒ de.",
+      "tr": "These books are mine.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "这些都是新的。",
+      "py": "Zhèxiē dōu shì xīn de.",
+      "tr": "These are all new.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "这些人",
+      "tr": "these people"
+     },
+     {
+      "text": "这些东西",
+      "tr": "these things"
+     },
+     {
+      "text": "这些天",
+      "tr": "these days"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "这几个",
+      "register": "neutral",
+      "nuance": "‘these few’ — with a measure word, for a small countable number (这几个人)"
+     }
+    ],
+    "funFacts": [
+     "些 is itself a measure word meaning ‘some, a few’: 一些 ‘some’, 这些 ‘these’, 那些 ‘those’."
+    ],
+    "pitfalls": [
+     "No measure word after 这些: 这些书, not *这些本书.",
+     "With an exact number use 这 + number + measure word: ‘these three books’ = 这三本书, not *这些三本书."
+    ],
+    "subtleties": [
+     "Often pronounced zhèixiē in the north."
+    ]
+   }
+  },
+  {
+   "id": "zh:naxie",
+   "lemma": "那些",
+   "trad": "那些",
+   "pinyin": "nà xiē",
+   "pos": "DET",
+   "senses": [
+    "dem.those"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Several things or people further away — or in the past.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "those",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.those"
+     }
+    ],
+    "examples": [
+     {
+      "text": "那些人是老师。",
+      "py": "Nàxiē rén shì lǎoshī.",
+      "tr": "Those people are teachers.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "那些书不是我的。",
+      "py": "Nàxiē shū bú shì wǒ de.",
+      "tr": "Those books aren’t mine.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "那些年，我们都很年轻。",
+      "py": "Nàxiē nián, wǒmen dōu hěn niánqīng.",
+      "tr": "In those years we were all young.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "那些人",
+      "tr": "those people"
+     },
+     {
+      "text": "那些年",
+      "tr": "those years"
+     },
+     {
+      "text": "那些东西",
+      "tr": "those things"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "那几个",
+      "register": "neutral",
+      "nuance": "‘those few’ — with a measure word (那几个孩子)"
+     }
+    ],
+    "funFacts": [
+     "那些年 ‘those years’ opens the title of the Taiwanese hit film 那些年，我们一起追的女孩 (2011), ‘You Are the Apple of My Eye’."
+    ],
+    "pitfalls": [
+     "No measure word after 那些: 那些人, not *那些个人 (heard in some dialects, but not standard).",
+     "那些 nàxiē ‘those’ vs 哪些 nǎxiē ‘which ones?’ — tone!"
+    ],
+    "subtleties": [
+     "Often pronounced nèixiē in the north."
+    ]
+   }
+  },
+  {
+   "id": "zh:zheli",
+   "lemma": "这里",
+   "trad": "這裡",
+   "pinyin": "zhè li",
+   "pos": "PRON",
+   "senses": [
+    "adv.here"
+   ],
+   "variants": [
+    {
+     "lemma": "这儿",
+     "trad": "這兒",
+     "pinyin": "zhèr",
+     "region": "north, esp. Beijing (erhua)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Here, near the speaker.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "here; this place",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.here"
+     }
+    ],
+    "examples": [
+     {
+      "text": "西红柿在这里。",
+      "tr": "The tomatoes are here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1",
+      "py": "Xīhóngshì zài zhèli."
+     },
+     {
+      "text": "这里的菜很好吃。",
+      "tr": "The food here is delicious.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1",
+      "py": "Zhèli de cài hěn hǎochī."
+     },
+     {
+      "text": "请在这里签字。",
+      "tr": "Please sign here.",
+      "register": "formal",
+      "context": "office",
+      "sense": "s1",
+      "py": "Qǐng zài zhèli qiānzì."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在这里",
+      "tr": "here (at this place)"
+     },
+     {
+      "text": "这里的",
+      "tr": "of this place, local"
+     },
+     {
+      "text": "到这里来",
+      "tr": "come here"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "这儿",
+      "register": "colloquial",
+      "nuance": "zhèr: the erhua form — everyday in Beijing and the north",
+      "region": "northern China"
+     },
+     {
+      "word": "此处",
+      "register": "formal",
+      "nuance": "written ‘here, at this point’ (signs, documents)"
+     },
+     {
+      "word": "此地",
+      "register": "formal",
+      "nuance": "written ‘this place’"
+     }
+    ],
+    "etymology": {
+     "text": "这 (‘this’) + 里 (‘place; inside’): ‘this place’.",
+     "src": "morphemes: 这 + 里"
+    },
+    "funFacts": [
+     "Traditional characters are written two ways: 這裡 (Taiwan) and 這裏 (Hong Kong)."
+    ],
+    "pitfalls": [
+     "A place with 在 comes before the verb: 我在这里吃, not *我吃在这里.",
+     "这里 is a place word, not ‘this’: 这里的土豆 ‘the potatoes here’."
+    ],
+    "subtleties": [
+     "‘Here with me’ is pronoun + 这儿/这里: 你的书在我这儿 ‘your book is here with me’.",
+     "Mainland dictionaries give zhè·li with a toneless li."
+    ]
+   }
+  },
+  {
+   "id": "zh:nali.there",
+   "lemma": "那里",
+   "trad": "那裡",
+   "pinyin": "nà li",
+   "pos": "PRON",
+   "senses": [
+    "adv.there"
+   ],
+   "variants": [
+    {
+     "lemma": "那儿",
+     "trad": "那兒",
+     "pinyin": "nàr",
+     "region": "north, esp. Beijing (erhua)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Over there, away from the speaker.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "there; that place",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.there"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他们在那里。",
+      "py": "Tāmen zài nàli.",
+      "tr": "They are over there.",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1"
+     },
+     {
+      "text": "那里的菜很好吃。",
+      "py": "Nàli de cài hěn hǎochī.",
+      "tr": "The food there is delicious.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "你去过那里吗？",
+      "py": "Nǐ qùguo nàli ma?",
+      "tr": "Have you been there?",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在那里",
+      "tr": "there (at that place)"
+     },
+     {
+      "text": "那里的",
+      "tr": "of that place"
+     },
+     {
+      "text": "到那里去",
+      "tr": "go there"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "那儿",
+      "register": "colloquial",
+      "nuance": "nàr: the erhua form — everyday in Beijing and the north",
+      "region": "northern China"
+     },
+     {
+      "word": "那边",
+      "register": "neutral",
+      "nuance": "‘over there, that side’ — pointing in a direction"
+     },
+     {
+      "word": "彼处",
+      "register": "literary",
+      "nuance": "written ‘there’"
+     }
+    ],
+    "etymology": {
+     "text": "那 (‘that’) + 里 (‘place; inside’): ‘that place’.",
+     "src": "morphemes: 那 + 里"
+    },
+    "funFacts": [
+     "Traditional characters write it 那裡 (Taiwan) or 那裏 (Hong Kong)."
+    ],
+    "pitfalls": [
+     "那里 nàli ‘there’ vs 哪里 nǎli ‘where?’ — only the tone and the 口 tell them apart.",
+     "A place with 在 comes before the verb: 我在那里等你 ‘I’ll wait for you there’, not *我等你在那里."
+    ],
+    "subtleties": [
+     "Person + 那里 means ‘at that person’s place’: 书在老师那里 ‘the book is with the teacher’.",
+     "The polite answer to a compliment, 哪里哪里 (‘not at all’), uses 哪, not 那."
+    ]
+   }
+  },
+  {
+   "id": "zh:ge",
+   "lemma": "个",
+   "trad": "個",
+   "pinyin": "gè",
+   "pos": "CLF",
+   "senses": [],
+   "role": "the general measure word, used with nouns that have no special one and, in speech, with almost any noun: 一个人, 这个房间, 那个孩子; usually toneless (ge) after 一, 这, 那",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "zh:wei",
+   "lemma": "位",
+   "trad": "位",
+   "pinyin": "wèi",
+   "pos": "CLF",
+   "senses": [],
+   "role": "the polite measure word for people: 一位老师, 这位朋友; alone after 这 / 那 when introducing someone: 这位是安娜 ‘this is Anna’. Not with 人 itself, and never for yourself (我是老师, not *我是一位老师)",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  }
+ ],
+ "absent": []
+}

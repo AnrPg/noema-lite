@@ -1,0 +1,3167 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:wo",
+   "lemma": "我",
+   "trad": "我",
+   "pinyin": "wǒ",
+   "pos": "PRON",
+   "senses": [
+    "pron.i"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first word you say about yourself; plain and neutral, never rude.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "I; me (subject and object alike)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.i"
+     },
+     {
+      "id": "s2",
+      "def": "my (before relatives and close relations: 我妈妈)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(formal, written) we; our — 我国 ‘our country’, 我校 ‘our school’",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我是学生。",
+      "tr": "I'm a student.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Wǒ shì xuésheng."
+     },
+     {
+      "text": "你找我吗？",
+      "tr": "Are you looking for me?",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1",
+      "py": "Nǐ zhǎo wǒ ma?"
+     },
+     {
+      "text": "我妈妈是老师。",
+      "tr": "My mother is a teacher.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2",
+      "py": "Wǒ māma shì lǎoshī."
+     },
+     {
+      "text": "我国的人口很多。",
+      "tr": "Our country has a large population.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s3",
+      "py": "Wǒguó de rénkǒu hěn duō."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我的",
+      "tr": "my; mine"
+     },
+     {
+      "text": "我自己",
+      "tr": "myself"
+     },
+     {
+      "text": "我们",
+      "tr": "we; us"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "我行我素",
+      "tr": "I walk my way, I keep my ways",
+      "kind": "idiom",
+      "meaning": "to go one’s own way regardless of what others say",
+      "register": "neutral"
+     },
+     {
+      "text": "你死我活",
+      "tr": "you die, I live",
+      "kind": "idiom",
+      "meaning": "a life-and-death struggle",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "本人",
+      "register": "formal",
+      "nuance": "‘this person’: I, the undersigned — official statements and forms"
+     },
+     {
+      "word": "俺",
+      "register": "regional",
+      "nuance": "everyday ‘I’ in much of the north (Shandong, Hebei, the northeast)",
+      "region": "northern China"
+     },
+     {
+      "word": "吾",
+      "register": "literary",
+      "nuance": "Classical Chinese ‘I’; today only in set phrases and jokingly"
+     }
+    ],
+    "etymology": {
+     "text": "Originally a pictogram of a trident-like weapon or tool; borrowed for its sound to write the pronoun ‘I’ already in the oracle-bone script. From Proto-Sino-Tibetan *ŋa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The character 我 was first a drawing of a weapon with a toothed blade; it only stands for ‘I’ because the words sounded alike."
+    ],
+    "pitfalls": [
+     "我 is both ‘I’ and ‘me’ — no case change: 他喜欢我 ‘he likes me’.",
+     "‘My’ is 我的 + noun (我的菜); 的 is dropped only before relatives and close relations (我妈妈, 我朋友).",
+     "Third-tone sandhi: 我很好 wǒ hěn hǎo is spoken wó hén hǎo (written tones stay)."
+    ],
+    "subtleties": [
+     "Chinese leaves out 我 when it is obvious: asked 你喜欢吗？ you can answer just 喜欢。",
+     "In formal writing 我 can mean ‘our’: 我国 (our country), 我校 (our school)."
+    ]
+   }
+  },
+  {
+   "id": "zh:ni",
+   "lemma": "你",
+   "trad": "你",
+   "pinyin": "nǐ",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday, friendly ‘you’ — between equals, friends, younger people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (one person; neutral or familiar)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你好！",
+      "tr": "Hello!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1",
+      "py": "Nǐ hǎo!"
+     },
+     {
+      "text": "你要西红柿吗？",
+      "tr": "Do you want tomatoes?",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Nǐ yào xīhóngshì ma?"
+     },
+     {
+      "text": "我喜欢你。",
+      "tr": "I like you.",
+      "register": "informal",
+      "context": "romance",
+      "sense": "s1",
+      "py": "Wǒ xǐhuan nǐ."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "你好",
+      "tr": "hello"
+     },
+     {
+      "text": "你的",
+      "tr": "your; yours"
+     },
+     {
+      "text": "你们",
+      "tr": "you (plural)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "你追我赶",
+      "tr": "you chase, I catch up",
+      "kind": "idiom",
+      "meaning": "to compete eagerly, each trying to outdo the other",
+      "register": "neutral"
+     },
+     {
+      "text": "你一言我一语",
+      "tr": "you a word, I a phrase",
+      "kind": "fixed expression",
+      "meaning": "everybody chiming in (a lively discussion)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "您",
+      "register": "honorific",
+      "nuance": "polite ‘you’ for elders, teachers, customers and strangers"
+     },
+     {
+      "word": "阁下",
+      "register": "formal",
+      "nuance": "‘Your Excellency’: very formal, diplomatic or ironic"
+     },
+     {
+      "word": "汝",
+      "register": "literary",
+      "nuance": "Classical Chinese ‘you’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 亻 (‘person’) + phonetic 尔. A colloquial form of 爾 (‘you’) attested since the Tang dynasty; ultimately from Proto-Sino-Tibetan *na-ŋ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "你好 is the textbook greeting, but friends usually greet each other with a name or a question instead."
+    ],
+    "pitfalls": [
+     "To elders, teachers and customers use 您, not 你.",
+     "你们 is the plural ‘you’; there is no case or gender change in speech."
+    ],
+    "subtleties": [
+     "In Taiwan the character 妳 is sometimes written for ‘you’ addressing a woman; Mainland Chinese writes 你 for everyone."
+    ]
+   }
+  },
+  {
+   "id": "zh:nin",
+   "lemma": "您",
+   "trad": "您",
+   "pinyin": "nín",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.sg"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "honorific",
+     "formal"
+    ],
+    "connotation": "positive",
+    "feeling": "Respect and courtesy — the waiter, the teacher, the grandparent.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (polite, honorific; one person)",
+      "register": [
+       "honorific",
+       "formal"
+      ],
+      "concept": "pron.you.sg"
+     }
+    ],
+    "examples": [
+     {
+      "text": "您好！",
+      "tr": "Hello! (polite)",
+      "register": "honorific",
+      "context": "greetings",
+      "sense": "s1",
+      "py": "Nín hǎo!"
+     },
+     {
+      "text": "您要什么？",
+      "tr": "What would you like?",
+      "register": "honorific",
+      "context": "shop service",
+      "sense": "s1",
+      "py": "Nín yào shénme?"
+     },
+     {
+      "text": "老师，您喝茶吗？",
+      "tr": "Teacher, would you like some tea?",
+      "register": "honorific",
+      "context": "school",
+      "sense": "s1",
+      "py": "Lǎoshī, nín hē chá ma?"
+     },
+     {
+      "text": "您贵姓？",
+      "tr": "May I ask your surname?",
+      "register": "formal",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Nín guìxìng?"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "您好",
+      "tr": "hello (polite)"
+     },
+     {
+      "text": "您贵姓",
+      "tr": "what is your (honourable) surname?"
+     },
+     {
+      "text": "您慢走",
+      "tr": "take care (to a guest who is leaving)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "你",
+      "register": "neutral",
+      "nuance": "the ordinary ‘you’ — between equals and friends"
+     },
+     {
+      "word": "阁下",
+      "register": "formal",
+      "nuance": "very formal, diplomatic ‘you’"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound of 你 (‘you’) + 心 (‘heart’). First attested in Jin/Yuan-era literature (also written 恁); usually explained as a fusion of 你們 (nǐmen, ‘you (plural)’), the polite use developing from the plural.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The character puts 心 ‘heart’ under 你 ‘you’ — a handy memory aid: ‘you, from the heart’."
+    ],
+    "pitfalls": [
+     "Used with friends or family, 您 can sound cold or sarcastic.",
+     "您们 is avoided by many speakers; for a polite plural say 各位 (‘everyone’) or 你们."
+    ],
+    "subtleties": [
+     "您 is most at home in Beijing and northern speech; many southern speakers use it mainly in service language and writing."
+    ]
+   }
+  },
+  {
+   "id": "zh:ta.he",
+   "lemma": "他",
+   "trad": "他",
+   "pinyin": "tā",
+   "pos": "PRON",
+   "senses": [
+    "pron.he"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral third person; in writing the default for ‘someone’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "he; him",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.he"
+     },
+     {
+      "id": "s2",
+      "def": "other, another (in words like 他人, 其他)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他是我哥哥。",
+      "tr": "He is my older brother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1",
+      "py": "Tā shì wǒ gēge."
+     },
+     {
+      "text": "我不认识他。",
+      "tr": "I don't know him.",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1",
+      "py": "Wǒ bú rènshi tā."
+     },
+     {
+      "text": "不要随便拿他人的东西。",
+      "tr": "Don't just take other people's things.",
+      "register": "formal",
+      "context": "rules",
+      "sense": "s2",
+      "py": "Bú yào suíbiàn ná tārén de dōngxi."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "他的",
+      "tr": "his"
+     },
+     {
+      "text": "他们",
+      "tr": "they (male or mixed)"
+     },
+     {
+      "text": "其他",
+      "tr": "other"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "他山之石，可以攻玉",
+      "tr": "stones from another hill can polish jade",
+      "kind": "proverb",
+      "meaning": "advice from others can help you improve",
+      "register": "literary",
+      "source": "Book of Songs (诗经)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "其",
+      "register": "literary",
+      "nuance": "written ‘his, her, its, their’ (其中, 其他)"
+     },
+     {
+      "word": "怹",
+      "register": "honorific",
+      "nuance": "rare Beijing respectful ‘he/she’",
+      "region": "Beijing"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 亻 (‘man’) + phonetic 也; a corrupted form of 佗. The modern sense ‘he, she, it’ arose after the Han period in colloquial texts.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Until about 1920 他 covered ‘she’ too; the separate character 她 is a 20th-century creation."
+    ],
+    "pitfalls": [
+     "他 and 她 are both pronounced tā — only writing tells them apart.",
+     "A mixed group is 他们, even if most of them are women."
+    ],
+    "subtleties": [
+     "When the sex is unknown or does not matter, writing traditionally uses 他."
+    ]
+   }
+  },
+  {
+   "id": "zh:ta.she",
+   "lemma": "她",
+   "trad": "她",
+   "pinyin": "tā",
+   "pos": "PRON",
+   "senses": [
+    "pron.she"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral; the same sound as ‘he’, a different character.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "she; her",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.she"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她是我妈妈。",
+      "tr": "She is my mother.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1",
+      "py": "Tā shì wǒ māma."
+     },
+     {
+      "text": "我很喜欢她。",
+      "tr": "I like her a lot.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s1",
+      "py": "Wǒ hěn xǐhuan tā."
+     },
+     {
+      "text": "她不吃辣椒。",
+      "tr": "She doesn't eat chili peppers.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Tā bù chī làjiāo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "她的",
+      "tr": "her; hers"
+     },
+     {
+      "text": "她们",
+      "tr": "they (all female)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "他",
+      "register": "neutral",
+      "nuance": "used for women too when the sex does not matter or in older texts"
+     },
+     {
+      "word": "伊",
+      "register": "literary",
+      "nuance": "Classical and early modern written ‘he/she’"
+     }
+    ],
+    "etymology": {
+     "text": "Semantic 女 (‘woman’) + 也, built on the model of 他. The character became the standard written ‘she’ in the 1920s.",
+     "src": "character composition; history of the character"
+    },
+    "funFacts": [
+     "The poet and linguist Liu Bannong (刘半农) championed 她 around 1920 in his poem 教我如何不想她 (‘How can I not think of her’)."
+    ],
+    "pitfalls": [
+     "Spoken tā is ambiguous: in speech context tells you whether it is ‘he’ or ‘she’.",
+     "她们 only for an all-female group."
+    ],
+    "subtleties": [
+     "In poetic and patriotic writing 她 can refer to the motherland (祖国) or other personified things."
+    ]
+   }
+  },
+  {
+   "id": "zh:ta.it",
+   "lemma": "它",
+   "trad": "它",
+   "pinyin": "tā",
+   "pos": "PRON",
+   "senses": [
+    "pron.it"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary: “third-person singular pronoun for inanimate objects; it” — the same sense; the course gloss words it “it (a thing)”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The ‘it’ of writing; in speech Chinese usually repeats the noun or says nothing at all. Common for animals and pets.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "it (a thing or an animal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是我的新手机，它很好用。",
+      "py": "Zhè shì wǒ de xīn shǒujī, tā hěn hǎoyòng.",
+      "tr": "This is my new phone; it is easy to use.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "我家有一只猫，它叫咪咪。",
+      "py": "Wǒ jiā yǒu yì zhī māo, tā jiào Mīmī.",
+      "tr": "We have a cat; it is called Mimi.",
+      "register": "neutral",
+      "context": "pets",
+      "sense": "s1"
+     },
+     {
+      "text": "别管它！",
+      "py": "Bié guǎn tā!",
+      "tr": "Never mind it! / Leave it!",
+      "register": "colloquial",
+      "context": "everyday talk",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "它们",
+      "tr": "they (things, animals)"
+     },
+     {
+      "text": "它的",
+      "tr": "its"
+     },
+     {
+      "text": "其它",
+      "tr": "other (things) — a variant spelling of 其他"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "管它呢！",
+      "tr": "who cares about it!",
+      "kind": "colloquial",
+      "meaning": "never mind, forget it — whatever happens",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "牠",
+      "register": "regional",
+      "nuance": "the character used in Taiwan for animals (牠們 ‘they’, of animals); same sound tā",
+      "region": "Taiwan"
+     },
+     {
+      "word": "祂",
+      "register": "religious",
+      "nuance": "the character used for God or deities, mainly in Taiwan and in Christian texts; same sound tā"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a snake (the snake is now written 蛇); the character was borrowed for the then-homophonous third-person pronoun. Today 他 is written for ‘he’, 她 for ‘she’ and 它 for things and animals.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Spoken Chinese has one third-person pronoun, tā. 他, 她 and 它 are distinctions of writing only — introduced in the early 20th century.",
+     "它 began as a drawing of a snake; the snake later got its own character 蛇, with the insect radical 虫."
+    ],
+    "pitfalls": [
+     "There is no ‘dummy it’: ‘It is me’ is 是我, ‘It is raining’ is 下雨了 — no 它.",
+     "For things Chinese uses 它 much less than English uses ‘it’: asked where the phone is, people answer 在这儿 ‘(it is) here’, without 它."
+    ],
+    "subtleties": [
+     "Many people write 他 or 她 for their own pet, to show affection.",
+     "In writing 它 also refers to abstract things: 这个问题很重要，我们要解决它 ‘this problem is important, we must solve it’."
+    ]
+   }
+  },
+  {
+   "id": "zh:women",
+   "lemma": "我们",
+   "trad": "我們",
+   "pinyin": "wǒ men",
+   "pos": "PRON",
+   "senses": [
+    "pron.we"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral group feeling; the listener may or may not be included.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "we; us",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.we"
+     },
+     {
+      "id": "s2",
+      "def": "(academic writing) we, referring to the author(s)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们是朋友。",
+      "tr": "We are friends.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1",
+      "py": "Wǒmen shì péngyou."
+     },
+     {
+      "text": "我们一起去吧。",
+      "tr": "Let's go together.",
+      "register": "neutral",
+      "context": "invitations",
+      "sense": "s1",
+      "py": "Wǒmen yìqǐ qù ba."
+     },
+     {
+      "text": "本文中我们讨论三个问题。",
+      "tr": "In this paper we discuss three questions.",
+      "register": "formal",
+      "context": "academic writing",
+      "sense": "s2",
+      "py": "Běnwén zhōng wǒmen tǎolùn sān ge wèntí."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我们俩",
+      "tr": "the two of us"
+     },
+     {
+      "text": "我们家",
+      "tr": "our family; our home"
+     },
+     {
+      "text": "我们的",
+      "tr": "our; ours"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "咱们",
+      "register": "colloquial",
+      "nuance": "inclusive ‘we’ (you and I) — warm, northern"
+     },
+     {
+      "word": "俺们",
+      "register": "regional",
+      "nuance": "northern colloquial ‘we’",
+      "region": "northern China"
+     },
+     {
+      "word": "我等",
+      "register": "literary",
+      "nuance": "written, old-fashioned ‘we’"
+     }
+    ],
+    "etymology": {
+     "text": "我 (‘I’) + the plural suffix 们, which is used with pronouns and nouns for people.",
+     "src": "morphemes: 我 + plural suffix 们"
+    },
+    "funFacts": [
+     "Chinese has only one plural ending for pronouns: 我们, 你们, 他们 — the same 们 everywhere."
+    ],
+    "pitfalls": [
+     "们 is not a general plural: 我们, 学生们 — but never *西红柿们.",
+     "我们 may exclude the listener; when you mean ‘you and I’, northerners prefer 咱们."
+    ],
+    "subtleties": [
+     "Before group nouns 的 is usually dropped: 我们学校 (our school), 我们公司 (our company)."
+    ]
+   }
+  },
+  {
+   "id": "zh:zanmen",
+   "lemma": "咱们",
+   "trad": "咱們",
+   "pinyin": "zán men",
+   "pos": "PRON",
+   "senses": [
+    "pron.we"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "positive",
+    "feeling": "Warm and inclusive: ‘you and I together’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "we; us (inclusive: the speaker and the listener)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "pron.we"
+     }
+    ],
+    "examples": [
+     {
+      "text": "咱们走吧！",
+      "tr": "Let's go!",
+      "register": "colloquial",
+      "context": "everyday talk",
+      "sense": "s1",
+      "py": "Zánmen zǒu ba!"
+     },
+     {
+      "text": "咱们一起吃饭吧。",
+      "tr": "Let's eat together.",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s1",
+      "py": "Zánmen yìqǐ chīfàn ba."
+     },
+     {
+      "text": "咱们是一家人。",
+      "tr": "We're family.",
+      "register": "colloquial",
+      "context": "feelings",
+      "sense": "s1",
+      "py": "Zánmen shì yìjiārén."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "咱们俩",
+      "tr": "the two of us (you and I)"
+     },
+     {
+      "text": "咱们一起",
+      "tr": "we together"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "我们",
+      "register": "neutral",
+      "nuance": "the general ‘we’, inclusive or exclusive; the usual word in the south and in Taiwan"
+     },
+     {
+      "word": "咱",
+      "register": "colloquial",
+      "nuance": "short northern form; can also mean ‘I’",
+      "region": "northern China"
+     }
+    ],
+    "etymology": {
+     "text": "咱 + plural suffix 们. The character 咱 is written with 口 (‘mouth’) + 自 (‘self’).",
+     "src": "morphemes and character composition"
+    },
+    "funFacts": [
+     "English has no single word for inclusive ‘we’; Chinese 咱们 makes the difference audible."
+    ],
+    "pitfalls": [
+     "Never use 咱们 when the listener is not part of the group: 我们明天走，你呢？ (not *咱们).",
+     "Tone: zán (2nd tone)."
+    ],
+    "subtleties": [
+     "Typical of northern Mandarin; in the south and in Taiwan most people just say 我们."
+    ]
+   }
+  },
+  {
+   "id": "zh:nimen",
+   "lemma": "你们",
+   "trad": "你們",
+   "pinyin": "nǐ men",
+   "pos": "PRON",
+   "senses": [
+    "pron.you.pl"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Talking to a group — friends, a class, the people in front of you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you (plural); you all",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.you.pl"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你们好！",
+      "py": "Nǐmen hǎo!",
+      "tr": "Hello, everyone!",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "你们是学生吗？",
+      "py": "Nǐmen shì xuésheng ma?",
+      "tr": "Are you students?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我请你们吃饭。",
+      "py": "Wǒ qǐng nǐmen chīfàn.",
+      "tr": "I’m treating you all to a meal.",
+      "register": "neutral",
+      "context": "invitations",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "你们好",
+      "tr": "hello (to a group)"
+     },
+     {
+      "text": "你们俩",
+      "tr": "you two"
+     },
+     {
+      "text": "你们的",
+      "tr": "your (plural); yours"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "大家",
+      "register": "neutral",
+      "nuance": "‘everybody’ — addresses a whole group, often including the speaker (大家好 ‘hello everyone’)"
+     },
+     {
+      "word": "各位",
+      "register": "formal",
+      "nuance": "‘each of you, everyone’ — the polite way to address a group or an audience (各位好)"
+     },
+     {
+      "word": "您们",
+      "register": "honorific",
+      "nuance": "a polite plural that many speakers avoid; 各位 is the safe choice"
+     }
+    ],
+    "etymology": {
+     "text": "你 (‘you’) + the plural suffix 们.",
+     "src": "morphemes: 你 + plural suffix 们"
+    },
+    "funFacts": [
+     "In fast Beijing speech 你们 can shrink to a single syllable, nǐm."
+    ],
+    "pitfalls": [
+     "One form for subject and object: 我喜欢你们 ‘I like you (all)’ — no case change.",
+     "们 goes only on pronouns and nouns for people: 你们, 老师们 — never on things."
+    ],
+    "subtleties": [
+     "In Taiwan 妳們 is sometimes written for a group of women; mainland Chinese writes 你们 for everyone."
+    ]
+   }
+  },
+  {
+   "id": "zh:tamen.m",
+   "lemma": "他们",
+   "trad": "他們",
+   "pinyin": "tā men",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral; the default ‘they’ for people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they; them (male or mixed group)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     }
+    ],
+    "examples": [
+     {
+      "text": "他们是学生。",
+      "tr": "They are students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1",
+      "py": "Tāmen shì xuésheng."
+     },
+     {
+      "text": "我不认识他们。",
+      "tr": "I don't know them.",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1",
+      "py": "Wǒ bú rènshi tāmen."
+     },
+     {
+      "text": "他们都喜欢吃玉米。",
+      "tr": "They all like eating corn.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Tāmen dōu xǐhuan chī yùmǐ."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "他们俩",
+      "tr": "the two of them"
+     },
+     {
+      "text": "他们的",
+      "tr": "their; theirs"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "她们",
+      "register": "neutral",
+      "nuance": "only for a group of women"
+     },
+     {
+      "word": "它们",
+      "register": "neutral",
+      "nuance": "for animals and things (often simply left out)"
+     }
+    ],
+    "etymology": {
+     "text": "他 (‘he’) + plural suffix 们.",
+     "src": "morphemes: 他 + plural suffix 们"
+    },
+    "funFacts": [
+     "In speech 他们, 她们 and 它们 sound exactly the same: tāmen."
+    ],
+    "pitfalls": [
+     "One man in the group → 他们.",
+     "For things, Chinese usually repeats the noun or leaves the pronoun out rather than saying 它们."
+    ],
+    "subtleties": [
+     "他们 also works generically: 他们说… ‘they say…, people say…’."
+    ]
+   }
+  },
+  {
+   "id": "zh:tamen.f",
+   "lemma": "她们",
+   "trad": "她們",
+   "pinyin": "tā men",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neutral; marks an all-female group in writing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they; them (all female)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     }
+    ],
+    "examples": [
+     {
+      "text": "她们是姐妹。",
+      "tr": "They are sisters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1",
+      "py": "Tāmen shì jiěmèi."
+     },
+     {
+      "text": "她们不喜欢芹菜。",
+      "tr": "They don't like celery.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Tāmen bù xǐhuan qíncài."
+     },
+     {
+      "text": "我给她们打电话。",
+      "tr": "I'll call them.",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1",
+      "py": "Wǒ gěi tāmen dǎ diànhuà."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "她们俩",
+      "tr": "the two of them (women)"
+     },
+     {
+      "text": "她们的",
+      "tr": "their (women’s)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "他们",
+      "register": "neutral",
+      "nuance": "the general ‘they’ — required as soon as one man is in the group"
+     }
+    ],
+    "etymology": {
+     "text": "她 (‘she’) + plural suffix 们.",
+     "src": "morphemes: 她 + plural suffix 们"
+    },
+    "funFacts": [
+     "A class of 30 girls and 1 boy is 他们 in standard usage."
+    ],
+    "pitfalls": [
+     "Only for groups made up entirely of women or girls."
+    ],
+    "subtleties": [
+     "Sounds identical to 他们: the difference exists only in writing."
+    ]
+   }
+  },
+  {
+   "id": "zh:tamen.it",
+   "lemma": "它们",
+   "trad": "它們",
+   "pinyin": "tā men",
+   "pos": "PRON",
+   "senses": [
+    "pron.they"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A written ‘they’ for things and animals; in speech the noun is usually just repeated or left out.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "they; them (things or animals)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.they"
+     }
+    ],
+    "examples": [
+     {
+      "text": "这些书很旧，它们是我爷爷的。",
+      "py": "Zhèxiē shū hěn jiù, tāmen shì wǒ yéye de.",
+      "tr": "These books are old; they were my grandfather’s.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "我有两只猫，它们都很懒。",
+      "py": "Wǒ yǒu liǎng zhī māo, tāmen dōu hěn lǎn.",
+      "tr": "I have two cats; they are both lazy.",
+      "register": "neutral",
+      "context": "pets",
+      "sense": "s1"
+     },
+     {
+      "text": "钥匙呢？——它们在桌子上。",
+      "py": "Yàoshi ne? — Tāmen zài zhuōzi shang.",
+      "tr": "Where are the keys? — They’re on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "它们的",
+      "tr": "their (of things or animals)"
+     },
+     {
+      "text": "它们都",
+      "tr": "they all"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "牠們",
+      "register": "regional",
+      "nuance": "Taiwan spelling for animals",
+      "region": "Taiwan"
+     }
+    ],
+    "etymology": {
+     "text": "它 (‘it’) + the plural suffix 们.",
+     "src": "morphemes: 它 + plural suffix 们"
+    },
+    "funFacts": [
+     "他们, 她们 and 它们 all sound tāmen — three spellings for one spoken word."
+    ],
+    "pitfalls": [
+     "它们 is mostly written; in conversation Chinese repeats the noun (钥匙在那里) or leaves the subject out."
+    ],
+    "subtleties": [
+     "它们 is one of the few places where Chinese uses 们 for something that is not human."
+    ]
+   }
+  },
+  {
+   "id": "zh:shi",
+   "lemma": "是",
+   "trad": "是",
+   "pinyin": "shì",
+   "pos": "VERB",
+   "senses": [
+    "verb.be",
+    "part.yes"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The plain ‘is’ that links two nouns; as an answer, a firm ‘yes, that’s right’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to be (links two nouns: A is B)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s2",
+      "def": "yes; that’s right (in answers)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.yes"
+     },
+     {
+      "id": "s3",
+      "def": "emphasis: it is … that (the 是……的 construction)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我是老师。",
+      "tr": "I'm a teacher.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Wǒ shì lǎoshī."
+     },
+     {
+      "text": "这是西红柿。",
+      "tr": "This is a tomato.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Zhè shì xīhóngshì."
+     },
+     {
+      "text": "今天是星期一。",
+      "tr": "Today is Monday.",
+      "register": "neutral",
+      "context": "calendar",
+      "sense": "s1",
+      "py": "Jīntiān shì xīngqīyī."
+     },
+     {
+      "text": "是，我是中国人。",
+      "tr": "Yes, I'm Chinese.",
+      "register": "neutral",
+      "context": "answers",
+      "sense": "s2",
+      "py": "Shì, wǒ shì Zhōngguórén."
+     },
+     {
+      "text": "是的，我明天去。",
+      "tr": "Yes, I'm going tomorrow.",
+      "register": "neutral",
+      "context": "answers",
+      "sense": "s2",
+      "py": "Shì de, wǒ míngtiān qù."
+     },
+     {
+      "text": "我是坐飞机来的。",
+      "tr": "It was by plane that I came.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3",
+      "py": "Wǒ shì zuò fēijī lái de."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "不是",
+      "tr": "is not; no"
+     },
+     {
+      "text": "是的",
+      "tr": "yes, that’s right"
+     },
+     {
+      "text": "还是",
+      "tr": "or (in questions)"
+     },
+     {
+      "text": "是不是",
+      "tr": "is it or not? isn’t it?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "实事求是",
+      "tr": "seek truth from facts",
+      "kind": "idiom",
+      "meaning": "to be practical and realistic, judge by the facts",
+      "register": "neutral"
+     },
+     {
+      "text": "自以为是",
+      "tr": "to consider oneself right",
+      "kind": "idiom",
+      "meaning": "to be opinionated and self-righteous",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "为",
+      "register": "formal",
+      "nuance": "wéi: ‘to be, to act as’ in written style (他被选为班长)"
+     },
+     {
+      "word": "乃",
+      "register": "literary",
+      "nuance": "‘is, is indeed’ in classical and very formal writing (乃是)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "不是",
+      "note": "is not"
+     },
+     {
+      "word": "非",
+      "note": "is not (literary)"
+     }
+    ],
+    "etymology": {
+     "text": "Origin unclear. In Classical Chinese 是 was a pronoun ‘this’; the development ‘this > be right, correct > to be’ gave the copula, which emerged by the Eastern Han dynasty.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In Classical Chinese 是 meant ‘this’ — the modern ‘is’ grew out of the pronoun."
+    ],
+    "pitfalls": [
+     "No 是 before adjectives: 西红柿很红 (the tomato is red), not *西红柿是红.",
+     "The negation is always 不是 (bú shì), never *没是.",
+     "As ‘yes’, 是 fits questions with 是 or confirms a statement; to 你要吗？ answer 要。, to 你有吗？ answer 有。"
+    ],
+    "subtleties": [
+     "是 can also say what fills a place: 桌子上都是书 ‘the table is covered with books’.",
+     "是的 is a softer, very common ‘yes’; a bare 是 can sound like ‘Yes, sir’.",
+     "To agree with what someone just said, 对 (duì, ‘right, correct’) is the most common ‘yes’: 你是老师？— 对。"
+    ]
+   }
+  },
+  {
+   "id": "zh:he",
+   "lemma": "和",
+   "trad": "和",
+   "pinyin": "hé",
+   "pos": "CCONJ",
+   "senses": [
+    "conj.and"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Neat and peaceful — the character also means ‘harmony’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "and (joins nouns and pronouns)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.and"
+     },
+     {
+      "id": "s2",
+      "def": "with, together with (和…一起)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "peace; harmony (in words like 和平)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢西红柿和黄瓜。",
+      "tr": "I like tomatoes and cucumbers.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Wǒ xǐhuan xīhóngshì hé huángguā."
+     },
+     {
+      "text": "我和她是朋友。",
+      "tr": "She and I are friends.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1",
+      "py": "Wǒ hé tā shì péngyou."
+     },
+     {
+      "text": "我想和你一起吃饭。",
+      "tr": "I'd like to have a meal with you.",
+      "register": "neutral",
+      "context": "invitations",
+      "sense": "s2",
+      "py": "Wǒ xiǎng hé nǐ yìqǐ chīfàn."
+     },
+     {
+      "text": "我们都希望世界和平。",
+      "tr": "We all hope for world peace.",
+      "register": "formal",
+      "context": "speeches",
+      "sense": "s3",
+      "py": "Wǒmen dōu xīwàng shìjiè hépíng."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "和…一起",
+      "tr": "together with …"
+     },
+     {
+      "text": "和平",
+      "tr": "peace"
+     },
+     {
+      "text": "和…一样",
+      "tr": "the same as …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "跟",
+      "register": "colloquial",
+      "nuance": "gēn: everyday ‘and, with’, especially in the north"
+     },
+     {
+      "word": "与",
+      "register": "formal",
+      "nuance": "yǔ: written ‘and’ (titles, documents: 《战争与和平》)"
+     },
+     {
+      "word": "及",
+      "register": "formal",
+      "nuance": "jí: ‘and, as well as’ before the last item of a formal list"
+     },
+     {
+      "word": "同",
+      "register": "formal",
+      "nuance": "tóng: ‘and, with’ in formal or southern usage"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 禾 + semantic 口 (‘mouth’) — harmony. The original form was 龢, with the flute radical 龠 suggesting harmony in music.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "和 can also mean ‘Japanese’: 和服 (kimono), 和食 (Japanese cuisine)."
+    ],
+    "pitfalls": [
+     "和 joins nouns, not sentences: ‘I eat and he drinks’ is 我吃，他喝 — not *我吃和他喝.",
+     "In a list of three, 和 goes only before the last item: 西红柿、黄瓜和土豆.",
+     "Other readings: hè (附和 ‘to echo’), huó (和面 ‘to knead dough’), hú (winning at mahjong)."
+    ],
+    "subtleties": [
+     "Verbs and adjectives are joined with 又…又…, 也 or 而且, not 和: 又便宜又新鲜 ‘cheap and fresh’."
+    ]
+   }
+  },
+  {
+   "id": "zh:zai",
+   "lemma": "在",
+   "trad": "在",
+   "pinyin": "zài",
+   "pos": "VERB",
+   "senses": [],
+   "role": "to be (located) at — the ‘be’ of place: 土豆在这里; also ‘at/in’ before a place and the progressive marker",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Where something is; where and when something happens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to be at, to be in (location)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "at, in (before a place, in front of the verb)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "in the middle of doing (progressive: 在吃饭)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "土豆在这里。",
+      "tr": "The potatoes are here.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1",
+      "py": "Tǔdòu zài zhèli."
+     },
+     {
+      "text": "你在哪里？",
+      "tr": "Where are you?",
+      "register": "neutral",
+      "context": "phone",
+      "sense": "s1",
+      "py": "Nǐ zài nǎli?"
+     },
+     {
+      "text": "我在家吃饭。",
+      "tr": "I eat at home.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s2",
+      "py": "Wǒ zài jiā chīfàn."
+     },
+     {
+      "text": "他在吃饭。",
+      "tr": "He is eating.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s3",
+      "py": "Tā zài chīfàn."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在家",
+      "tr": "at home"
+     },
+     {
+      "text": "在哪里",
+      "tr": "where?"
+     },
+     {
+      "text": "正在",
+      "tr": "in the middle of (doing)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "于",
+      "register": "formal",
+      "nuance": "yú: written ‘at, in’ (生于北京 ‘born in Beijing’)"
+     },
+     {
+      "word": "位于",
+      "register": "formal",
+      "nuance": "wèiyú: ‘to be located at’ (descriptions, documents)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 才 + phonetic 士; 士 was later corrupted into 土 (‘earth’). In the oracle bones 才 alone was borrowed for this word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The progressive use (他在吃饭 ‘he is eating’) grew out of the place meaning — literally ‘he is at eating’."
+    ],
+    "pitfalls": [
+     "Known thing + 在 + place: 西红柿在这里 ‘the tomatoes are here’. Place + 有 + new thing: 这里有西红柿 ‘there are tomatoes here’.",
+     "Negate with 不: 他不在 ‘he isn’t in’."
+    ],
+    "subtleties": [
+     "在 + place goes before the verb: 我在家吃饭, not *我吃饭在家."
+    ]
+   }
+  },
+  {
+   "id": "zh:nanren",
+   "lemma": "男人",
+   "trad": "男人",
+   "pinyin": "nán rén",
+   "pos": "NOUN",
+   "senses": [
+    "person.man"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plain and direct ‘man’; to a stranger’s face 先生 or 这位男士 is politer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "man; adult male",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.man"
+     },
+     {
+      "id": "s2",
+      "def": "husband (colloquial, regional; second syllable toneless: nánren)",
+      "register": [
+       "colloquial",
+       "regional"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "那个男人是谁？",
+      "py": "Nàge nánrén shì shéi?",
+      "tr": "Who is that man?",
+      "register": "neutral",
+      "context": "on the street",
+      "sense": "s1"
+     },
+     {
+      "text": "这个男人是老师。",
+      "py": "Zhège nánrén shì lǎoshī.",
+      "tr": "This man is a teacher.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "我男人今天不在家。",
+      "py": "Wǒ nánren jīntiān bú zài jiā.",
+      "tr": "My husband isn’t home today.",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "男人和女人",
+      "tr": "men and women"
+     },
+     {
+      "text": "中年男人",
+      "tr": "a middle-aged man"
+     },
+     {
+      "text": "真正的男人",
+      "tr": "a real man"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "男子汉大丈夫",
+      "tr": "a man, a true man",
+      "kind": "saying",
+      "meaning": "a real man (keeps his word, does not complain) — often 男子汉大丈夫，说话算数",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "男士",
+      "register": "formal",
+      "nuance": "polite ‘gentleman’ — signs (男士洗手间), shops, address"
+     },
+     {
+      "word": "男子",
+      "register": "formal",
+      "nuance": "written ‘man, male’ — news and sport (一名男子, 男子100米)"
+     },
+     {
+      "word": "先生",
+      "register": "honorific",
+      "nuance": "‘Mr; sir’ — how you address or refer politely to a man"
+     },
+     {
+      "word": "男的",
+      "register": "colloquial",
+      "nuance": "‘the male one’ — very informal: 那个男的"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "女人",
+      "note": "woman"
+     }
+    ],
+    "etymology": {
+     "text": "男 ‘male’ + 人 ‘person’. 男 is 田 ‘field’ + 力 ‘strength’: the man providing the strength for work in the fields.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Toilet doors say 男 (men) and 女 (women) — the same characters as in 男人 and 女人."
+    ],
+    "pitfalls": [
+     "‘Male teacher’ is 男老师, not *男人老师 — 男 alone goes before the noun.",
+     "Saying 男人 about a man present can sound blunt; 这位先生 ‘this gentleman’ is polite."
+    ],
+    "subtleties": [
+     "With a toneless second syllable, 我男人 (nánren) is a colloquial, regional ‘my husband’."
+    ]
+   }
+  },
+  {
+   "id": "zh:nvren",
+   "lemma": "女人",
+   "trad": "女人",
+   "pinyin": "nǚ rén",
+   "pos": "NOUN",
+   "senses": [
+    "person.woman"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Plain ‘woman’; polite address uses 女士 or a kin word such as 阿姨 (‘auntie’).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "woman; adult female",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.woman"
+     },
+     {
+      "id": "s2",
+      "def": "wife (colloquial, regional)",
+      "register": [
+       "colloquial",
+       "regional"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个女人是我们的老师。",
+      "py": "Zhège nǚrén shì wǒmen de lǎoshī.",
+      "tr": "This woman is our teacher.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "她是一个很聪明的女人。",
+      "py": "Tā shì yí ge hěn cōngming de nǚrén.",
+      "tr": "She is a very clever woman.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s1"
+     },
+     {
+      "text": "那个女人在等车。",
+      "py": "Nàge nǚrén zài děng chē.",
+      "tr": "That woman is waiting for the bus.",
+      "register": "neutral",
+      "context": "on the street",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "女人味",
+      "tr": "femininity, womanly charm"
+     },
+     {
+      "text": "男人和女人",
+      "tr": "men and women"
+     },
+     {
+      "text": "成熟的女人",
+      "tr": "a mature woman"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "妇女能顶半边天",
+      "tr": "women hold up half the sky",
+      "kind": "saying",
+      "meaning": "women are equal partners in society (a slogan of the Mao era; note 妇女 ‘women’)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "女士",
+      "register": "formal",
+      "nuance": "polite ‘lady; Ms’ — signs, letters, address (王女士)"
+     },
+     {
+      "word": "女子",
+      "register": "formal",
+      "nuance": "written ‘woman, female’ — news and sport (女子组 ‘women’s section’)"
+     },
+     {
+      "word": "妇女",
+      "register": "formal",
+      "nuance": "women as a social group — 妇女节 ‘Women’s Day’"
+     },
+     {
+      "word": "女的",
+      "register": "colloquial",
+      "nuance": "‘the female one’ — very informal"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "男人",
+      "note": "man"
+     }
+    ],
+    "etymology": {
+     "text": "女 ‘female’ + 人 ‘person’. 女 is a pictogram of a kneeling woman with folded arms.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "女 is the radical of many characters: 妈 (mother), 姐 (elder sister), 她 (she) — and 好 ‘good’ is 女 ‘woman’ + 子 ‘child’."
+    ],
+    "pitfalls": [
+     "‘Female student’ is 女学生 or 女生, not *女人学生.",
+     "To address a woman you do not know, use 女士, or 阿姨 (‘auntie’) for an older woman — not 女人."
+    ],
+    "subtleties": [
+     "女人 as ‘wife’ (我女人) is colloquial and regional; the neutral word is 妻子 or 太太."
+    ]
+   }
+  },
+  {
+   "id": "zh:nanhai",
+   "lemma": "男孩",
+   "trad": "男孩",
+   "pinyin": "nán hái",
+   "pos": "NOUN",
+   "senses": [
+    "person.boy"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Young and lively; also used warmly for teenage boys and young men.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "boy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.boy"
+     },
+     {
+      "id": "s2",
+      "def": "son (when counting someone’s children)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这个男孩是学生。",
+      "py": "Zhège nánhái shì xuésheng.",
+      "tr": "This boy is a pupil.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "那个男孩叫小明。",
+      "py": "Nàge nánhái jiào Xiǎomíng.",
+      "tr": "That boy is called Xiaoming.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "他们家有一个男孩和一个女孩。",
+      "py": "Tāmen jiā yǒu yí ge nánhái hé yí ge nǚhái.",
+      "tr": "They have a boy and a girl.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小男孩",
+      "tr": "little boy"
+     },
+     {
+      "text": "男孩子",
+      "tr": "boy (fuller form)"
+     },
+     {
+      "text": "一个男孩",
+      "tr": "a boy"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "男孩子",
+      "register": "neutral",
+      "nuance": "the same word in a fuller form, a little more colloquial"
+     },
+     {
+      "word": "男孩儿",
+      "register": "colloquial",
+      "nuance": "the erhua form of the north (nánháir)",
+      "region": "northern China"
+     },
+     {
+      "word": "男生",
+      "register": "colloquial",
+      "nuance": "‘male student’ — the everyday word for boys at school and young men at university"
+     },
+     {
+      "word": "小伙子",
+      "register": "colloquial",
+      "nuance": "‘lad, young fellow’ — for young men, friendly"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "女孩",
+      "note": "girl"
+     }
+    ],
+    "etymology": {
+     "text": "男 ‘male’ + 孩 ‘child’ (孩 = 子 ‘child’ + phonetic 亥).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Students in China say 男生 and 女生 for boys and girls — even at university."
+    ],
+    "pitfalls": [
+     "A boy is 男孩, a grown man 男人 — don’t mix them up.",
+     "No 们 after a number: 两个男孩, not *两个男孩们."
+    ],
+    "subtleties": [
+     "男孩, 男孩子 and 男孩儿 are one word in plain, fuller and erhua form."
+    ]
+   }
+  },
+  {
+   "id": "zh:nvhai",
+   "lemma": "女孩",
+   "trad": "女孩",
+   "pinyin": "nǚ hái",
+   "pos": "NOUN",
+   "senses": [
+    "person.girl"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Young and friendly; also used for young women well into their twenties.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "girl",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.girl"
+     },
+     {
+      "id": "s2",
+      "def": "young woman; lass",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "那个女孩是学生。",
+      "py": "Nàge nǚhái shì xuésheng.",
+      "tr": "That girl is a pupil.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "这个女孩叫安娜。",
+      "py": "Zhège nǚhái jiào Ānnà.",
+      "tr": "This girl is called Anna.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "她是一个很可爱的女孩。",
+      "py": "Tā shì yí ge hěn kě'ài de nǚhái.",
+      "tr": "She is a lovely girl.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小女孩",
+      "tr": "little girl"
+     },
+     {
+      "text": "女孩子",
+      "tr": "girl (fuller form)"
+     },
+     {
+      "text": "一个女孩",
+      "tr": "a girl"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "女孩子",
+      "register": "neutral",
+      "nuance": "the same word in a fuller form"
+     },
+     {
+      "word": "女孩儿",
+      "register": "colloquial",
+      "nuance": "the erhua form of the north (nǚháir)",
+      "region": "northern China"
+     },
+     {
+      "word": "女生",
+      "register": "colloquial",
+      "nuance": "‘female student’ — the everyday word for girls at school and young women"
+     },
+     {
+      "word": "姑娘",
+      "register": "colloquial",
+      "nuance": "‘girl, young woman’ — warm, a little old-fashioned in the cities"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "男孩",
+      "note": "boy"
+     }
+    ],
+    "etymology": {
+     "text": "女 ‘female’ + 孩 ‘child’ (孩 = 子 ‘child’ + phonetic 亥).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Calling a 25-year-old woman 女孩 is normal and friendly in Chinese — unlike ‘girl’ in some English contexts."
+    ],
+    "pitfalls": [
+     "女孩 vs 女人: a girl or young woman is 女孩; 女人 is a (mature) woman.",
+     "The vowel is ü: nǚ, as in German ‘Mühle’ — not nu."
+    ],
+    "subtleties": [
+     "女孩, 女孩子 and 女孩儿 are one word in plain, fuller and erhua form."
+    ]
+   }
+  },
+  {
+   "id": "zh:haizi",
+   "lemma": "孩子",
+   "trad": "孩子",
+   "pinyin": "hái zi",
+   "pos": "NOUN",
+   "senses": [
+    "person.child"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Warm and everyday: children at play — and one’s own children at any age.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "child; kid (someone not yet grown up)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.child"
+     },
+     {
+      "id": "s2",
+      "def": "child (one’s son or daughter, at any age)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "那个孩子在哭。",
+      "py": "Nàge háizi zài kū.",
+      "tr": "That child is crying.",
+      "register": "neutral",
+      "context": "on the street",
+      "sense": "s1"
+     },
+     {
+      "text": "孩子们在学校。",
+      "py": "Háizimen zài xuéxiào.",
+      "tr": "The children are at school.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "你有孩子吗？",
+      "py": "Nǐ yǒu háizi ma?",
+      "tr": "Do you have children?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "我的孩子都三十岁了。",
+      "py": "Wǒ de háizi dōu sānshí suì le.",
+      "tr": "My children are already thirty.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "小孩子",
+      "tr": "little child"
+     },
+     {
+      "text": "孩子们",
+      "tr": "the children (a group)"
+     },
+     {
+      "text": "生孩子",
+      "tr": "to have a baby"
+     },
+     {
+      "text": "带孩子",
+      "tr": "to look after children"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "孩子气",
+      "tr": "child air",
+      "kind": "colloquial",
+      "meaning": "childish, immature",
+      "register": "colloquial"
+     },
+     {
+      "text": "舍不得孩子套不着狼",
+      "tr": "if you can’t part with your child, you won’t catch the wolf",
+      "kind": "proverb",
+      "meaning": "nothing ventured, nothing gained",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "小孩",
+      "register": "colloquial",
+      "nuance": "‘kid’ — very common in speech (小孩儿 in the north)"
+     },
+     {
+      "word": "儿童",
+      "register": "formal",
+      "nuance": "‘children’ as a category — 儿童节 ‘Children’s Day’, 儿童票 ‘child ticket’"
+     },
+     {
+      "word": "子女",
+      "register": "formal",
+      "nuance": "‘sons and daughters’ — written, official"
+     }
+    ],
+    "etymology": {
+     "text": "孩 ‘child’ (semantic 子 + phonetic 亥) + the toneless noun suffix 子.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The toneless suffix 子 makes nouns: 孩子, and in the home lesson 桌子, 椅子, 杯子, 盘子."
+    ],
+    "pitfalls": [
+     "孩子 is both ‘a child (young)’ and ‘someone’s child’: 我的孩子 can be forty years old.",
+     "A child is never 小人 — 小人 means a petty, mean person."
+    ],
+    "subtleties": [
+     "孩子们 is the children as a group, but not after a number: 三个孩子."
+    ]
+   }
+  },
+  {
+   "id": "zh:ren",
+   "lemma": "人",
+   "trad": "人",
+   "pinyin": "rén",
+   "pos": "NOUN",
+   "senses": [
+    "person.person",
+    "person.people"
+   ],
+   "measure": [
+    "个"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The most basic word for a human being — singular or plural as the context needs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "person; human being",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.person"
+     },
+     {
+      "id": "s2",
+      "def": "people (a bare 人 is singular or plural: 很多人 ‘many people’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.people"
+     },
+     {
+      "id": "s3",
+      "def": "other people, others (in 别人)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "a person of some place or kind: 希腊人 ‘a Greek’, 工人 ‘worker’",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "他是好人。",
+      "py": "Tā shì hǎorén.",
+      "tr": "He is a good person.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s1"
+     },
+     {
+      "text": "这个人是谁？",
+      "py": "Zhège rén shì shéi?",
+      "tr": "Who is this person?",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1"
+     },
+     {
+      "text": "这里人很多。",
+      "py": "Zhèli rén hěn duō.",
+      "tr": "There are lots of people here.",
+      "register": "neutral",
+      "context": "in town",
+      "sense": "s2"
+     },
+     {
+      "text": "门口有三个人。",
+      "py": "Ménkǒu yǒu sān ge rén.",
+      "tr": "There are three people at the door.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s2"
+     },
+     {
+      "text": "别管别人怎么说。",
+      "py": "Bié guǎn biérén zěnme shuō.",
+      "tr": "Don’t mind what other people say.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s3"
+     },
+     {
+      "text": "我是希腊人。",
+      "py": "Wǒ shì Xīlàrén.",
+      "tr": "I am Greek.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "好人",
+      "tr": "a good person"
+     },
+     {
+      "text": "很多人",
+      "tr": "many people"
+     },
+     {
+      "text": "大人",
+      "tr": "adult, grown-up"
+     },
+     {
+      "text": "中国人",
+      "tr": "a Chinese person"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "人山人海",
+      "tr": "mountains of people, seas of people",
+      "kind": "idiom",
+      "meaning": "a huge crowd",
+      "register": "neutral"
+     },
+     {
+      "text": "人不可貌相",
+      "tr": "people cannot be judged by their looks",
+      "kind": "proverb",
+      "meaning": "don’t judge a book by its cover (full: 人不可貌相，海水不可斗量)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "人们",
+      "register": "neutral",
+      "nuance": "‘people’ in general statements (人们常说… ‘people often say…’); never after a number or measure word"
+     },
+     {
+      "word": "人类",
+      "register": "formal",
+      "nuance": "‘mankind, humanity’ — science, philosophy"
+     },
+     {
+      "word": "人士",
+      "register": "formal",
+      "nuance": "‘personage, people (of a circle)’ — 各界人士 ‘people from all walks of life’"
+     },
+     {
+      "word": "家伙",
+      "register": "colloquial",
+      "nuance": "‘guy, fellow’ — familiar, can be rude"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram: the side view of a standing person, with an arm and a leg.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "As a component 人 often becomes 亻 on the left of a character: 你, 他, 们 and 位 all contain it."
+    ],
+    "pitfalls": [
+     "Counted with a measure word: 三个人 — but members of a household are counted with 口: 我家有四口人.",
+     "‘People’ is usually just 人 (很多人); 人们 never takes a number: *三个人们."
+    ],
+    "subtleties": [
+     "Nationalities are country + 人: 希腊人 (Greek), 德国人 (German), 中国人 (Chinese).",
+     "人 is the second syllable of 男人 and 女人, but each of those is a word of its own."
+    ]
+   }
+  },
+  {
+   "id": "zh:pengyou",
+   "lemma": "朋友",
+   "trad": "朋友",
+   "pinyin": "péng you",
+   "pos": "NOUN",
+   "senses": [
+    "person.friend"
+   ],
+   "measure": [
+    "个",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Warmth and trust; friendship (关系) matters a lot in Chinese social life.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "friend",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.friend"
+     },
+     {
+      "id": "s2",
+      "def": "boyfriend / girlfriend (in 男朋友, 女朋友)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "in 小朋友: a friendly word for a child",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们是好朋友。",
+      "py": "Wǒmen shì hǎo péngyou.",
+      "tr": "We are good friends.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "这是我朋友安娜。",
+      "py": "Zhè shì wǒ péngyou Ānnà.",
+      "tr": "This is my friend Anna.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "她有男朋友吗？",
+      "py": "Tā yǒu nán péngyou ma?",
+      "tr": "Does she have a boyfriend?",
+      "register": "neutral",
+      "context": "dating",
+      "sense": "s2"
+     },
+     {
+      "text": "小朋友，你几岁了？",
+      "py": "Xiǎo péngyou, nǐ jǐ suì le?",
+      "tr": "How old are you, little one?",
+      "register": "neutral",
+      "context": "talking to children",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "好朋友",
+      "tr": "good friend"
+     },
+     {
+      "text": "老朋友",
+      "tr": "old friend"
+     },
+     {
+      "text": "交朋友",
+      "tr": "to make friends"
+     },
+     {
+      "text": "男朋友",
+      "tr": "boyfriend"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "有朋自远方来，不亦乐乎？",
+      "tr": "Is it not a joy to have friends come from afar?",
+      "kind": "quote",
+      "meaning": "a classic line to welcome friends or guests from far away",
+      "register": "literary",
+      "source": "Confucius, Analects 1.1 (论语·学而)"
+     },
+     {
+      "text": "酒肉朋友",
+      "tr": "wine-and-meat friends",
+      "kind": "idiom",
+      "meaning": "fair-weather friends, friends only for the good times",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "好友",
+      "register": "formal",
+      "nuance": "‘good friend’ — written; also a ‘friend’ on social media"
+     },
+     {
+      "word": "哥们儿",
+      "register": "slang",
+      "nuance": "‘buddy, mate’ between men",
+      "region": "northern China"
+     },
+     {
+      "word": "闺蜜",
+      "register": "slang",
+      "nuance": "a woman’s best (female) friend"
+     },
+     {
+      "word": "伙伴",
+      "register": "neutral",
+      "nuance": "‘partner, companion’ — in play, work or business"
+     }
+    ],
+    "etymology": {
+     "text": "朋 (originally two strings of cowrie shells — a pair, companions) + 友 (two hands — friendship); the second syllable is toneless.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like German ‘mein Freund’, 男朋友 ‘male friend’ means ‘boyfriend’ — say 我的一个朋友 ‘a friend of mine’ to avoid the romantic sense.",
+     "Adults call children 小朋友 ‘little friend’."
+    ],
+    "pitfalls": [
+     "The second syllable is toneless: péngyou.",
+     "我朋友 and 我的朋友 are both fine ‘my friend’; but 女朋友 means ‘girlfriend’, not ‘female friend’."
+    ],
+    "subtleties": [
+     "In speeches and online, 朋友们 ‘friends!’ addresses an audience warmly."
+    ]
+   }
+  },
+  {
+   "id": "zh:xuesheng",
+   "lemma": "学生",
+   "trad": "學生",
+   "pinyin": "xué sheng",
+   "pos": "NOUN",
+   "senses": [
+    "person.student"
+   ],
+   "measure": [
+    "个",
+    "名",
+    "位"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "measure": "Wiktionary lists only 位 for 學生; 个 is the everyday measure word (一个学生) and 名 the formal one (两名学生) in every Mandarin dictionary."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "School bags and exams — the everyday word for anyone who studies.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "student; pupil (at school or university)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.student"
+     },
+     {
+      "id": "s2",
+      "def": "disciple, follower (of a master)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我是学生。",
+      "py": "Wǒ shì xuésheng.",
+      "tr": "I am a student.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "我们班有三十个学生。",
+      "py": "Wǒmen bān yǒu sānshí ge xuésheng.",
+      "tr": "There are thirty students in our class.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "他是北京大学的学生。",
+      "py": "Tā shì Běijīng Dàxué de xuésheng.",
+      "tr": "He is a student at Peking University.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大学生",
+      "tr": "university student"
+     },
+     {
+      "text": "小学生",
+      "tr": "primary-school pupil"
+     },
+     {
+      "text": "留学生",
+      "tr": "international student"
+     },
+     {
+      "text": "学生证",
+      "tr": "student card"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "同学",
+      "register": "neutral",
+      "nuance": "‘classmate’ — also how students and teachers address a student (这位同学…)"
+     },
+     {
+      "word": "学员",
+      "register": "formal",
+      "nuance": "‘trainee’ — in a course, a driving school, a training programme"
+     },
+     {
+      "word": "男生 / 女生",
+      "register": "colloquial",
+      "nuance": "male / female students — the everyday school words"
+     },
+     {
+      "word": "学子",
+      "register": "literary",
+      "nuance": "‘scholars, students’ — speeches and headlines"
+     }
+    ],
+    "etymology": {
+     "text": "学 ‘to learn’ + 生 ‘one who …’ (生 ‘to grow, to live’, a sprout coming out of the ground).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A teacher calls on a pupil with 这位同学 ‘this classmate’ — 同学 is used as a polite address for students."
+    ],
+    "pitfalls": [
+     "Standard Beijing speech makes the second syllable light: xuésheng; xuéshēng is also heard.",
+     "Count with a measure word: 三个学生, or formally 三名学生 — never *三学生."
+    ],
+    "subtleties": [
+     "名 is the measure word of official counts (news, forms): 两名学生 ‘two students’."
+    ]
+   }
+  },
+  {
+   "id": "zh:laoshi",
+   "lemma": "老师",
+   "trad": "老師",
+   "pinyin": "lǎo shī",
+   "pos": "NOUN",
+   "senses": [
+    "person.teacher"
+   ],
+   "measure": [
+    "位",
+    "个",
+    "名"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Respect: the teacher holds an honoured place in Chinese culture.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "teacher",
+      "register": [
+       "neutral"
+      ],
+      "concept": "person.teacher"
+     },
+     {
+      "id": "s2",
+      "def": "a title and form of address for a teacher (王老师 ‘Teacher Wang’)",
+      "register": [
+       "honorific"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "a polite address for a respected expert, writer or artist",
+      "register": [
+       "honorific"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "她是老师。",
+      "py": "Tā shì lǎoshī.",
+      "tr": "She is a teacher.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "我们的中文老师是北京人。",
+      "py": "Wǒmen de Zhōngwén lǎoshī shì Běijīngrén.",
+      "tr": "Our Chinese teacher is from Beijing.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "老师好！",
+      "py": "Lǎoshī hǎo!",
+      "tr": "Good morning, teacher! (a class greeting its teacher)",
+      "register": "honorific",
+      "context": "classroom",
+      "sense": "s2"
+     },
+     {
+      "text": "王老师，您好！",
+      "py": "Wáng lǎoshī, nín hǎo!",
+      "tr": "Hello, Teacher Wang!",
+      "register": "honorific",
+      "context": "greetings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "中文老师",
+      "tr": "Chinese teacher"
+     },
+     {
+      "text": "王老师",
+      "tr": "Teacher Wang"
+     },
+     {
+      "text": "当老师",
+      "tr": "to be / become a teacher"
+     },
+     {
+      "text": "老师好",
+      "tr": "hello, teacher (class greeting)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "一日为师，终身为父",
+      "tr": "teacher for one day, father for life",
+      "kind": "proverb",
+      "meaning": "you owe your teacher lifelong respect",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "教师",
+      "register": "formal",
+      "nuance": "the profession — 教师节 ‘Teachers’ Day’; not used as an address"
+     },
+     {
+      "word": "导师",
+      "register": "formal",
+      "nuance": "academic supervisor, mentor"
+     },
+     {
+      "word": "师傅",
+      "register": "neutral",
+      "nuance": "‘master’ — for craftsmen, drivers, cooks; also a polite address for workers"
+     },
+     {
+      "word": "先生",
+      "register": "dated",
+      "nuance": "‘teacher, master’ in older usage; today mostly ‘Mr’"
+     }
+    ],
+    "etymology": {
+     "text": "老 (a prefix of respect and familiarity, from ‘old’) + 师 ‘teacher, master’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Teachers’ Day is 10 September in mainland China; Taiwan celebrates it on 28 September, Confucius’ traditional birthday."
+    ],
+    "pitfalls": [
+     "老师 is a title placed after the surname: 王老师 — not *老师王; address your teacher as 老师, not by first name.",
+     "老 here does not mean ‘old’: a 25-year-old teacher is still 老师."
+    ],
+    "subtleties": [
+     "In mainland China 老师 has spread as a polite address for writers, artists and other experts.",
+     "Measure word: 一位老师 (polite) or 一个老师; 位 is never used for yourself: 我是老师, not *我是一位老师."
+    ]
+   }
+  },
+  {
+   "id": "zh:yi",
+   "lemma": "一",
+   "trad": "一",
+   "pinyin": "yī",
+   "pos": "NUM",
+   "senses": [
+    "det.indef",
+    "num.1"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first number — and, with a measure word, the Chinese way to say ‘a, an’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "a, an — one (with a measure word: 一本书 ‘a book’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "det.indef"
+     },
+     {
+      "id": "s2",
+      "def": "one (the number 1)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "num.1"
+     },
+     {
+      "id": "s3",
+      "def": "whole, all (一屋子人 ‘a whole room full of people’)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "as soon as (一…就…)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "这是一本书。",
+      "py": "Zhè shì yì běn shū.",
+      "tr": "This is a book.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "我有一个问题。",
+      "py": "Wǒ yǒu yí ge wèntí.",
+      "tr": "I have a question.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "一、二、三！",
+      "py": "Yī, èr, sān!",
+      "tr": "One, two, three!",
+      "register": "neutral",
+      "context": "counting",
+      "sense": "s2"
+     },
+     {
+      "text": "一加一等于二。",
+      "py": "Yī jiā yī děngyú èr.",
+      "tr": "One plus one is two.",
+      "register": "neutral",
+      "context": "maths",
+      "sense": "s2"
+     },
+     {
+      "text": "我一到家就给你打电话。",
+      "py": "Wǒ yí dào jiā jiù gěi nǐ dǎ diànhuà.",
+      "tr": "As soon as I get home I’ll call you.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "一个",
+      "tr": "a, one (general)"
+     },
+     {
+      "text": "一下",
+      "tr": "a moment, a bit"
+     },
+     {
+      "text": "一起",
+      "tr": "together"
+     },
+     {
+      "text": "一样",
+      "tr": "the same"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "一心一意",
+      "tr": "one heart, one mind",
+      "kind": "idiom",
+      "meaning": "wholeheartedly",
+      "register": "neutral"
+     },
+     {
+      "text": "一石二鸟",
+      "tr": "one stone, two birds",
+      "kind": "idiom",
+      "meaning": "to kill two birds with one stone",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "幺",
+      "register": "colloquial",
+      "nuance": "yāo: ‘one’ when reading out phone and room numbers, so it is not confused with 七 qī (110 = yāo yāo líng)"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogram: a single horizontal stroke for the number one. From Proto-Sino-Tibetan *ʔit.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "When reading phone or room numbers aloud, Chinese say yāo instead of yī for 1, so it cannot be misheard as 七 qī."
+    ],
+    "pitfalls": [
+     "Tone changes: yí before a 4th tone (一个 yí ge, 一下 yí xià), yì before the other tones (一本 yì běn, 一张 yì zhāng), but yī when counting, in numbers and at the end (第一 dì-yī, 十一 shíyī).",
+     "Between 一 and the noun there must be a measure word: 一本书, never *一书."
+    ],
+    "subtleties": [
+     "Chinese needs 一 + measure word much less often than English needs ‘a’: 这是书 ‘this is a book’ is fine.",
+     "一 + measure word introduces one new thing; a thing already known goes bare before the verb: 书在这里 ‘the book is here’."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "det.def",
+   "reason": "Chinese has no definite article. A thing already known is a bare noun, usually placed before the verb: 书在这里 ‘the book is here’, 钥匙不在这里 ‘the keys aren’t here’. When pointing is needed, 这 / 那 + measure word does it: 这本书 ‘this book’.",
+   "use": "a bare noun before the verb; 这 / 那 + measure word when it must be explicit"
+  }
+ ]
+}

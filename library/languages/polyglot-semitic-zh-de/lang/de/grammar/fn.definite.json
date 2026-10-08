@@ -1,13 +1,96 @@
 {
  "function": "fn.definite",
  "status": "realized",
- "summary": "German marks definiteness with articles: der/die/das (the) for something known or specific, ein/eine (a, an) for something new or any one of its kind. The article also carries the gender, number and case of the noun, so it changes with the noun's role in the sentence. There is no plural of ein: a plural noun without an article is indefinite (Tomaten = tomatoes).",
+ "summary": "German marks definiteness with articles: der/die/das (the) for something known or specific, ein/eine (a, an) for something new or any one of its kind. The article also carries the gender, number and case of the noun, so it changes with the noun’s role in the sentence. There is no plural of ein: a plural noun without an article is indefinite (Stühle = chairs). At this step the forms needed are the nominative (der, die, das; ein, eine, ein; plural die); the accusative den / einen follows at S07.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "the (definite)",
+     "der Tisch",
+     "die Lampe",
+     "das Bett",
+     "die Tische"
+    ],
+    [
+     "a (indefinite)",
+     "ein Tisch",
+     "eine Lampe",
+     "ein Bett",
+     "Tische (no article)"
+    ]
+   ],
+   "caption": "Nominative – the forms of this step"
+  },
+  {
+   "t": "table",
+   "head": [
+    "case",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative",
+     "der / ein",
+     "die / eine",
+     "das / ein",
+     "die / –"
+    ],
+    [
+     "accusative",
+     "den / einen",
+     "die / eine",
+     "das / ein",
+     "die / –"
+    ],
+    [
+     "dative",
+     "dem / einem",
+     "der / einer",
+     "dem / einem",
+     "den / –"
+    ],
+    [
+     "genitive",
+     "des / eines",
+     "der / einer",
+     "des / eines",
+     "der / –"
+    ]
+   ],
+   "caption": "The whole table (for reference – the other cases come step by step)"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "ein hides the gender",
+   "text": "ein Tisch (der) and ein Bett (das) look the same; only eine shows feminine. So learn nouns with der/die/das, not with ein."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "New → known",
+   "text": "Hier ist ein Schlüssel. (a key – new) → Der Schlüssel ist für die Tür. (the key – now known)"
+  }
+ ],
  "procedure": {
   "askYourself": [
    "Is the thing known to the listener or a specific one (→ der/die/das) or new, any one (→ ein/eine)?",
-   "What is the gender of the noun (der Kohl, die Gurke, das Radieschen)?",
+   "What is the gender of the noun (der Tisch, die Lampe, das Bett)?",
    "Singular or plural? Plural definite is always die (dative den); plural indefinite has no article.",
-   "Which case does the noun's role need: subject (nominative), direct object (accusative), indirect object (dative)?"
+   "Which case does the noun’s role need: subject (nominative), direct object (accusative), indirect object (dative)?",
+   "Is it a job after sein? Then no article at all: Er ist Lehrer."
   ],
   "steps": [
    "Find the noun and its gender.",
@@ -17,11 +100,11 @@
   ]
  },
  "traps": [
-  "Only the masculine changes from nominative to accusative: der Kürbis → den Kürbis, ein Kürbis → einen Kürbis; die and das stay the same.",
-  "die is feminine singular AND every plural: die Gurke, die Gurken, die Kürbisse.",
-  "There is no plural of ein: Ich kaufe Zwiebeln (I buy onions), not *eine Zwiebeln.",
-  "Uncountable nouns usually take no article when they are indefinite: Ich mag Knoblauch.",
-  "In Das ist eine Gurke the word das is a pointing pronoun, not the article – it does not change with the noun."
+  "Only the masculine changes from nominative to accusative: der Tisch → den Tisch, ein Stuhl → einen Stuhl; die and das stay the same.",
+  "die is feminine singular AND every plural: die Lampe, die Lampen, die Tische.",
+  "There is no plural of ein: Das sind Stühle (these are chairs), not *eine Stühle.",
+  "In Das ist eine Lampe the word das is a pointing pronoun, not the article – it does not change with the noun.",
+  "Jobs after sein take no article: Sie ist Lehrerin."
  ],
  "evidence": {
   "lemmas": [
@@ -33,8 +116,8 @@
   "DET;NOM;SG;MASC",
   "DET;NOM;SG;FEM",
   "DET;NOM;SG;NEUT",
-  "DET;ACC;SG;MASC",
   "DET;NOM;PL",
+  "DET;ACC;SG;MASC",
   "DET;DAT;PL"
  ],
  "needs": {
@@ -42,30 +125,55 @@
  },
  "generators": [
   {
-   "type": "gender_article",
-   "pos": "NOUN",
-   "count": 12
-  },
-  {
    "type": "inflect",
    "pos": "DET",
-   "count": 12
+   "lemmas": [
+    "de:der",
+    "de:ein"
+   ],
+   "cells": [
+    "DET;NOM;SG;FEM",
+    "DET;NOM;SG;NEUT",
+    "DET;NOM;PL"
+   ],
+   "count": 6
   },
   {
-   "type": "agree",
+   "type": "transform",
    "bank": {
     "functions": [
      "fn.definite"
-    ]
+    ],
+    "variant": "Definiteness"
    }
   },
   {
-   "type": "build_sentence",
-   "bank": {
-    "functions": [
-     "fn.definite"
-    ]
-   }
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.definite",
+   "note": "Arabic marks “the” with the prefix al- (al-bayt, the house) and has no word for “a”; indefinite nouns end in -un (baytun)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.definite",
+   "note": "Hebrew marks “the” with the prefix ha- (ha-bayit) and has no indefinite article."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.definite",
+   "note": "Chinese has no articles: context, 这 / 那 or 一个 do the job."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.noun.gender",
+   "note": "The article is where the gender shows."
   }
  ]
 }

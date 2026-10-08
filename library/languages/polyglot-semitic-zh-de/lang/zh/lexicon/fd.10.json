@@ -1,0 +1,282 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:shenme",
+   "lemma": "什么",
+   "trad": "什麼",
+   "pinyin": "shén me",
+   "pos": "PRON",
+   "senses": [
+    "q.what"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity — or, with the right tone, surprise and protest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (question word)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "something; anything (in questions and negations)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "what?! (surprise or anger)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你喝什么？",
+      "tr": "What will you drink?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1",
+      "py": "Nǐ hē shénme?"
+     },
+     {
+      "text": "这是什么？",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Zhè shì shénme?"
+     },
+     {
+      "text": "你想吃点儿什么吗？",
+      "tr": "Would you like something to eat?",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s2",
+      "py": "Nǐ xiǎng chī diǎnr shénme ma?"
+     },
+     {
+      "text": "什么？他走了？",
+      "tr": "What? He left?",
+      "register": "colloquial",
+      "context": "surprise",
+      "sense": "s3",
+      "py": "Shénme? Tā zǒu le?"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "为什么",
+      "tr": "why"
+     },
+     {
+      "text": "什么时候",
+      "tr": "when"
+     },
+     {
+      "text": "什么样",
+      "tr": "what kind of"
+     },
+     {
+      "text": "没什么",
+      "tr": "it's nothing"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "什么风把你吹来了？",
+      "tr": "what wind blew you here?",
+      "kind": "saying",
+      "meaning": "what brings you here? (to an unexpected visitor)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "啥",
+      "register": "colloquial",
+      "nuance": "shá: northern colloquial ‘what’",
+      "region": "northern China"
+     },
+     {
+      "word": "何",
+      "register": "literary",
+      "nuance": "written ‘what’: 何时 (when), 为何 (why)"
+     }
+    ],
+    "etymology": {
+     "text": "A corruption of medieval 是物 (‘what’) or 什物 (‘miscellaneous items’), perhaps influenced by 何物 (‘what’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Taiwan usually writes 什麼 or 甚麼; both are traditional forms of 什么."
+    ],
+    "pitfalls": [
+     "No 吗 with a 什么 question: 你喝什么？ — with 吗, 什么 means ‘anything’: 你喝什么吗？ ‘Will you drink anything?’",
+     "Word order does not change: put 什么 where the answer goes (你喝什么？— 我喝茶)."
+    ],
+    "subtleties": [
+     "Before a noun, 什么 asks ‘what kind / which’: 什么菜？ ‘what dish?’.",
+     "In fast speech it is often shéme."
+    ]
+   }
+  },
+  {
+   "id": "zh:nali",
+   "lemma": "哪里",
+   "trad": "哪裡",
+   "pinyin": "nǎ li",
+   "pos": "PRON",
+   "senses": [
+    "q.where"
+   ],
+   "variants": [
+    {
+     "lemma": "哪儿",
+     "trad": "哪兒",
+     "pinyin": "nǎr",
+     "region": "north, esp. Beijing (erhua)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pinyin": "pinyin: Mainland dictionaries (Xiandai Hanyu Cidian) give nǎ·li with a toneless li; Wiktionary’s own entry lists this toneless variant ‘nǎli’, which the kaikki extraction garbles into “nálǐ] → nǎli (toneless final syllable variant)”, so the tool cannot match it. Everything else checked clean before this override was added."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Asking for a place; and the classic modest reply to praise.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "wherever; anywhere",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(哪里哪里) not at all — a modest reply to a compliment",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "土豆在哪里？",
+      "tr": "Where are the potatoes?",
+      "register": "neutral",
+      "context": "supermarket",
+      "sense": "s1",
+      "py": "Tǔdòu zài nǎli?"
+     },
+     {
+      "text": "你在哪里工作？",
+      "tr": "Where do you work?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Nǐ zài nǎli gōngzuò?"
+     },
+     {
+      "text": "你是哪里人？",
+      "tr": "Where are you from?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Nǐ shì nǎli rén?"
+     },
+     {
+      "text": "哪里哪里，我的中文还不好。",
+      "tr": "Not at all, my Chinese is still not good.",
+      "register": "formal",
+      "context": "compliments",
+      "sense": "s3",
+      "py": "Nǎli nǎli, wǒ de Zhōngwén hái bù hǎo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "在哪里",
+      "tr": "where (is it)?"
+     },
+     {
+      "text": "去哪里",
+      "tr": "go where?"
+     },
+     {
+      "text": "哪里人",
+      "tr": "from where (which place)?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "哪儿",
+      "register": "colloquial",
+      "nuance": "nǎr: the erhua form — everyday in Beijing and the north",
+      "region": "northern China"
+     },
+     {
+      "word": "什么地方",
+      "register": "neutral",
+      "nuance": "‘what place’ — a little more explicit"
+     },
+     {
+      "word": "何处",
+      "register": "literary",
+      "nuance": "written ‘where’"
+     }
+    ],
+    "etymology": {
+     "text": "哪 (‘which’) + 里 (‘place; inside’): ‘which place’.",
+     "src": "morphemes: 哪 + 里"
+    },
+    "funFacts": [
+     "Answering a compliment with 哪里哪里 literally asks ‘where? where?’ — as if the praised quality cannot be found."
+    ],
+    "pitfalls": [
+     "No 吗 with 哪里: 土豆在哪里？ (not *…吗？).",
+     "哪里 nǎli (where?) vs 那里 nàli (there): only the 口 radical and the tone differ.",
+     "Say 在哪里 for ‘where is’ — the verb 在 is needed: *土豆哪里？"
+    ],
+    "subtleties": [
+     "Both 哪里 and 哪儿 are standard: -儿 forms (哪儿, 这儿, 那儿) are typical of Beijing and the north, -里 forms of the south, Taiwan and writing.",
+     "Spoken: the 3rd tone of 哪 before 里 is usually heard as náli."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

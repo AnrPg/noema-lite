@@ -1,0 +1,198 @@
+{
+ "function": "fn.case.basic",
+ "status": "realized",
+ "summary": "Arabic nouns have three cases, shown by the short vowel at the end of the word (iʿrāb, إِعْرَاب): nominative -u, accusative -a, genitive -i — with tanwīn when the noun is indefinite (-un, -an, -in). The nominative (الرَّفْع) is the subject form: the subject of a sentence and the predicate of a nominal sentence both take it — الْكِتَابُ هُنَا (the book is here), هٰذَا بَيْتٌ (this is a house). The accusative comes with objects (lesson 7) and after كَانَ / لَيْسَ, the genitive after prepositions and in “X of Y” (lesson 11). In everyday speech, and always at the end of a phrase (the pause form, الْوَقْف), the endings are mostly not pronounced: الْكِتَابُ is said al-kitāb — but careful MSA and this course write them.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "case",
+    "job",
+    "indefinite",
+    "definite"
+   ],
+   "rows": [
+    [
+     "nominative -u (الرَّفْع)",
+     "subject; predicate of a nominal sentence",
+     "بَيْتٌ baytun",
+     "الْبَيْتُ al-baytu"
+    ],
+    [
+     "accusative -a (النَّصْب)",
+     "object (lesson 7); after كَانَ and لَيْسَ",
+     "بَيْتًا baytan",
+     "الْبَيْتَ al-bayta"
+    ],
+    [
+     "genitive -i (الْجَرّ)",
+     "after a preposition; the second noun of “X of Y” (lesson 11)",
+     "بَيْتٍ baytin",
+     "الْبَيْتِ al-bayti"
+    ]
+   ],
+   "caption": "The indefinite accusative -an is written with an extra alif: بَيْتًا. Feminine nouns in ة take the endings on the ة: غُرْفَةٌ، غُرْفَةً، غُرْفَةٍ."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "In this lesson everything is nominative.",
+   "text": "In a sentence without a verb both parts are nominative: الْغُرْفَةُ هُنَا — هُنَا غُرْفَةٌ — هٰذِهِ كَأْسٌ — الْمُعَلِّمُ هُنَا. You already know the other endings from كَانَ: هُوَ طَالِبٌ → كَانَ طَالِبًا."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The pause form.",
+   "text": "At the end of an utterance the case vowel and the -n are dropped: الْبَابُ هُنَاكَ is said al-bābu hunāk; a final -an becomes -ā (شُكْرًا = šukrā / šukran). Dialects have lost the cases altogether, so you will hear al-bāb, bayt. Read the endings, but do not be surprised when people skip them."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Diptotes.",
+   "text": "Some nouns (many broken plurals such as نَوَافِذُ، مَصَابِيحُ، حَقَائِبُ، أَصْدِقَاءُ) never take tanwīn and have only two endings when indefinite: -u, and -a for both accusative and genitive. With the article they behave normally: النَّوَافِذُ، النَّوَافِذَ، النَّوَافِذِ."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "find the verb (if any)",
+    "find who or what the sentence is about = subject",
+    "subject → -u / -un",
+    "predicate of a verbless sentence → -u / -un",
+    "after كَانَ / لَيْسَ, a preposition or as an object → another case"
+   ]
+  },
+  {
+   "t": "p",
+   "text": "How to find the subject: in a sentence without a verb it is usually the first noun or pronoun (الْكِتَابُ هُنَا) — unless an indefinite subject has been moved after the place (هُنَا كِتَابٌ: the subject is كِتَابٌ). In a verbal sentence it is the doer, often after the verb (كَانَ الْهَاتِفُ هُنَا)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who or what is the sentence about? That word is the subject → nominative (-u, -un).",
+   "Is there no verb? → the predicate (طَالِبٌ، مُعَلِّمَةٌ، كَأْسٌ) is nominative too.",
+   "Is there a كَانَ or لَيْسَ? → its predicate is accusative (-a, -an).",
+   "Does the noun have the article? → -u / -a / -i without -n; no article → -un / -an / -in (or a diptote).",
+   "Is the noun a diptote (نَوَافِذُ، حَقَائِبُ)? → no tanwīn."
+  ]
+ },
+ "traps": [
+  "*الْبَيْتٌ: the article and tanwīn never go together — الْبَيْتُ or بَيْتٌ.",
+  "After كَانَ the predicate is not nominative: كَانَ طَالِبًا, not *كَانَ طَالِبٌ — but the subject of كَانَ stays nominative: كَانَ الْهَاتِفُ هُنَا.",
+  "The indefinite subject placed after هُنَا / هُنَاكَ is still the subject: هُنَا قَلَمٌ (nominative), not *هُنَا قَلَمًا.",
+  "Not hearing the endings in speech does not mean they are wrong in writing: write الْكِتَابُ even if you hear al-kitāb."
+ ],
+ "evidence": {
+  "tags": [
+   "NOM"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;SG;INDF",
+  "N;NOM;SG;DEF",
+  "N;ACC;SG;INDF",
+  "N;ACC;SG;DEF",
+  "N;GEN;SG;INDF",
+  "N;GEN;SG;DEF"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;SG;INDF",
+    "N;NOM;SG;DEF",
+    "N;ACC;SG;INDF",
+    "N;GEN;SG;INDF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.case.basic"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“The room is here” — which form of غُرْفَة?",
+   "options": [
+    "الْغُرْفَةُ",
+    "الْغُرْفَةَ",
+    "الْغُرْفَةِ"
+   ],
+   "answer": "الْغُرْفَةُ",
+   "why": "The subject is nominative: -u."
+  },
+  {
+   "q": "“This is a book” — which form of كِتَاب?",
+   "options": [
+    "كِتَابٌ",
+    "كِتَابًا",
+    "كِتَابٍ"
+   ],
+   "answer": "كِتَابٌ",
+   "why": "The predicate of a sentence without a verb is nominative too: -un."
+  },
+  {
+   "q": "“I was a student” — which form of طَالِب?",
+   "options": [
+    "طَالِبًا",
+    "طَالِبٌ",
+    "طَالِبٍ"
+   ],
+   "answer": "طَالِبًا",
+   "why": "The predicate of كَانَ is accusative."
+  },
+  {
+   "q": "Which ending marks the genitive?",
+   "options": [
+    "-i / -in",
+    "-u / -un",
+    "-a / -an"
+   ],
+   "answer": "-i / -in",
+   "why": "Nominative -u, accusative -a, genitive -i."
+  },
+  {
+   "q": "Why do you often hear al-kitāb for الْكِتَابُ?",
+   "options": [
+    "the pause form and the dialects drop the case vowel",
+    "the word has no case",
+    "only the accusative is pronounced"
+   ],
+   "answer": "the pause form and the dialects drop the case vowel",
+   "why": "At the end of an utterance (الْوَقْف) and in everyday speech the endings are left out; MSA writing keeps them."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.case.basic",
+   "note": "German has four cases (Nominativ, Akkusativ, Dativ, Genitiv), carried mostly by the article (der / den / dem / des); Arabic has three, carried by the noun’s own ending."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.case.basic",
+   "note": "Modern Hebrew has no cases — it lost the old Semitic case endings that Arabic keeps; only word order and prepositions (אֶת before a definite object) show the role."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.word.order",
+   "note": "Chinese has no cases at all: the place in the sentence shows who does what."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.object",
+   "note": "The accusative -a / -an of the direct object comes in lesson 7 (أَكَلْتُ الْخُبْزَ)."
+  }
+ ]
+}

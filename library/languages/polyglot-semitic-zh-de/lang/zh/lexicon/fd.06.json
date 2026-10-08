@@ -1,0 +1,159 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:you",
+   "lemma": "有",
+   "trad": "有",
+   "pinyin": "yǒu",
+   "pos": "VERB",
+   "senses": [
+    "poss.have"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Possession and existence — one of the busiest verbs.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to have; to possess",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.have"
+     },
+     {
+      "id": "s2",
+      "def": "there is / there are (existence)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(colloquial, euphemistic: 有了) to be pregnant",
+      "register": [
+       "colloquial",
+       "euphemistic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我有一个南瓜。",
+      "tr": "I have a pumpkin.",
+      "register": "neutral",
+      "context": "possessions",
+      "sense": "s1",
+      "py": "Wǒ yǒu yí ge nánguā."
+     },
+     {
+      "text": "你有时间吗？",
+      "tr": "Do you have time?",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1",
+      "py": "Nǐ yǒu shíjiān ma?"
+     },
+     {
+      "text": "这里有很多西红柿。",
+      "tr": "There are lots of tomatoes here.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s2",
+      "py": "Zhèli yǒu hěn duō xīhóngshì."
+     },
+     {
+      "text": "她有了。",
+      "tr": "She's expecting (a baby).",
+      "register": "euphemistic",
+      "context": "family news",
+      "sense": "s3",
+      "py": "Tā yǒu le."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "没有",
+      "tr": "not have; there is not"
+     },
+     {
+      "text": "有用",
+      "tr": "useful"
+     },
+     {
+      "text": "有意思",
+      "tr": "interesting"
+     },
+     {
+      "text": "有时候",
+      "tr": "sometimes"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "有朋自远方来，不亦乐乎",
+      "tr": "when friends come from afar, is it not a joy?",
+      "kind": "quote",
+      "meaning": "a classic welcome to visiting friends",
+      "register": "literary",
+      "source": "Confucius, Analects 1.1"
+     },
+     {
+      "text": "有志者事竟成",
+      "tr": "for one with a will, the matter is finally achieved",
+      "kind": "proverb",
+      "meaning": "where there is a will, there is a way",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "具有",
+      "register": "formal",
+      "nuance": "to possess (qualities, meaning, features): 具有意义"
+     },
+     {
+      "word": "拥有",
+      "register": "formal",
+      "nuance": "to own, hold (much or important things): 拥有财富"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "没有",
+      "note": "not have; there isn't"
+     },
+     {
+      "word": "无",
+      "note": "without; there is no (literary)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 又 (a hand) + semantic 肉 (‘meat’, now written ⺼). Folk etymology reads it as a hand holding meat, hence ‘to have’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The folk etymology ‘a hand holding meat’ makes a good memory aid, even though the real analysis treats 又 as the sound element."
+    ],
+    "pitfalls": [
+     "Negate only with 没: 我没有, never *我不有.",
+     "Under negation 一个 is normally dropped: 我没有南瓜 (I have no pumpkin)."
+    ],
+    "subtleties": [
+     "When a place comes first, 有 means ‘there is’: 冰箱里有黄瓜 ‘there are cucumbers in the fridge’.",
+     "有 + a noun can make an adjective: 有名 (famous), 有用 (useful), 有意思 (interesting)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

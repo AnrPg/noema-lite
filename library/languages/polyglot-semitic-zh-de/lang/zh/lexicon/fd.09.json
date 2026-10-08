@@ -1,0 +1,18 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:ma",
+   "lemma": "吗",
+   "trad": "嗎",
+   "pinyin": "ma",
+   "pos": "PART",
+   "senses": [],
+   "role": "question particle: put at the end of a statement, it makes a yes/no question (你要黄瓜吗？); toneless",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  }
+ ],
+ "absent": []
+}

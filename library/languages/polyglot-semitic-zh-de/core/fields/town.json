@@ -1,0 +1,169 @@
+{
+ "field": "town",
+ "title": "In town",
+ "subgroups": [
+  {
+   "id": "place",
+   "title": "Places"
+  }
+ ],
+ "sources": [
+  "Places in a town — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "place.home",
+   "gloss": "home (at home, go home)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "place.school",
+   "gloss": "school",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "place.university",
+   "gloss": "university",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "place.work",
+   "gloss": "work (the workplace: at work)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "place.office",
+   "gloss": "office",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "place.shop",
+   "gloss": "shop",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "place.supermarket",
+   "gloss": "supermarket",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "place.market",
+   "gloss": "market",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "place.restaurant",
+   "gloss": "restaurant",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "place.cafe",
+   "gloss": "café",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "place.hospital",
+   "gloss": "hospital",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "place.pharmacy",
+   "gloss": "pharmacy",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "place.bank",
+   "gloss": "bank (money)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "place.postoffice",
+   "gloss": "post office",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "place.station",
+   "gloss": "station (train or bus)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "place.airport",
+   "gloss": "airport",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "place.street",
+   "gloss": "street",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "place.square",
+   "gloss": "square (in a town)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "place.park",
+   "gloss": "park",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "place.city",
+   "gloss": "city, town",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "place.village",
+   "gloss": "village",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "place.country",
+   "gloss": "country (a state)",
+   "subgroup": "place",
+   "tier": 1,
+   "rank": 22
+  }
+ ]
+}

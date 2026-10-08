@@ -64,5 +64,22 @@
     ]
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.plural.noun",
+   "note": "Hebrew plurals are mostly regular (-ִים / -וֹת) with few broken plurals; Hebrew also keeps a dual for some nouns (יוֹמַיִם, two days)."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.plural.noun",
+   "note": "German plurals also have to be learned with each noun (-e, -er, -(e)n, -s, umlaut) — the same habit as Arabic broken plurals."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.plural.noun",
+   "note": "Chinese nouns have no plural: 们 is added only for people; things are counted with a number and a measure word."
+  }
  ]
 }

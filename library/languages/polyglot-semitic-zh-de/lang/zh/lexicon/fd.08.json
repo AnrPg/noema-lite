@@ -1,0 +1,160 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:mei",
+   "lemma": "没",
+   "trad": "沒",
+   "pinyin": "méi",
+   "pos": "ADV",
+   "senses": [
+    "part.not"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Matter-of-fact: something is missing or did not happen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not (before 有; and before a verb: did not, has not)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     },
+     {
+      "id": "s2",
+      "def": "(short for 没有) not have; there isn’t",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "not as … as (in comparisons)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我没有时间。",
+      "tr": "I don't have time.",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1",
+      "py": "Wǒ méiyǒu shíjiān."
+     },
+     {
+      "text": "他昨天没来。",
+      "tr": "He didn't come yesterday.",
+      "register": "neutral",
+      "context": "past events",
+      "sense": "s1",
+      "py": "Tā zuótiān méi lái."
+     },
+     {
+      "text": "我还没吃饭。",
+      "tr": "I haven't eaten yet.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1",
+      "py": "Wǒ hái méi chīfàn."
+     },
+     {
+      "text": "我没钱。",
+      "tr": "I've got no money.",
+      "register": "colloquial",
+      "context": "money",
+      "sense": "s2",
+      "py": "Wǒ méi qián."
+     },
+     {
+      "text": "他没你高。",
+      "tr": "He isn't as tall as you.",
+      "register": "neutral",
+      "context": "comparisons",
+      "sense": "s3",
+      "py": "Tā méi nǐ gāo."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "没有",
+      "tr": "not have; did not"
+     },
+     {
+      "text": "没关系",
+      "tr": "it doesn't matter"
+     },
+     {
+      "text": "没事",
+      "tr": "it's nothing; I'm fine"
+     },
+     {
+      "text": "没意思",
+      "tr": "boring"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "没门儿",
+      "tr": "no door",
+      "kind": "slang",
+      "meaning": "no way!",
+      "register": "colloquial"
+     },
+     {
+      "text": "没大没小",
+      "tr": "no big, no small",
+      "kind": "idiom",
+      "meaning": "disrespectful of age and rank",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "不",
+      "register": "neutral",
+      "nuance": "negates habits, wishes, the future, adjectives and 是"
+     },
+     {
+      "word": "无",
+      "register": "literary",
+      "nuance": "wú: ‘without, there is no’ in written style (无人 ‘nobody’)"
+     },
+     {
+      "word": "未",
+      "register": "literary",
+      "nuance": "wèi: ‘not yet’ in written style (未成年 ‘under age’)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 水 (‘water’) + phonetic; the character’s old meaning is ‘to sink’. The negator méi is possibly a colloquial variant of 勿 or 未 influenced by 有 — not derived from ‘to sink’ (Schuessler).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The traditional form 沒 has 𠬛 on the right; the simplified 没 writes 殳 (几 over 又) instead."
+    ],
+    "pitfalls": [
+     "Never *没是 — the negation of 是 is 不是.",
+     "Don’t add 了 after 没 + verb: 我没吃 (not *我没吃了).",
+     "In 沉没 (chénmò, ‘to sink’) the same character is read mò."
+    ],
+    "subtleties": [
+     "没 describes facts, 不 describes will and habits: 我不吃肉 ‘I don’t eat meat’ vs 我没吃肉 ‘I didn’t eat (the) meat’."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

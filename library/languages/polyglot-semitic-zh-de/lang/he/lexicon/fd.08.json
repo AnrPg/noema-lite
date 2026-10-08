@@ -1,0 +1,238 @@
+{
+ "lexemes": [
+  {
+   "id": "he:ein",
+   "lemma": "אֵין",
+   "pos": "PART",
+   "senses": [
+    "part.not"
+   ],
+   "translit": "en",
+   "note": "The present-tense negation of existence and possession (the opposite of יֵשׁ). Formal Hebrew also inflects it as a negative copula: אֵינֶנִּי / אֵינִי, אֵינְךָ, אֵינוֹ, אֵינָהּ …",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Absence: no milk, no time, no problem.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "there is not, there are no; with לְ: not to have — the negation of יֵשׁ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     },
+     {
+      "id": "s2",
+      "def": "is not (formal negative copula, often with a suffix: אֵינוֹ, אֵינָהּ)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֵין לִי זְמַן.",
+      "tr": "I don’t have time.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵין חָלָב בַּמְּקָרֵר.",
+      "tr": "There is no milk in the fridge.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "אֵין בְּעָיָה!",
+      "tr": "No problem!",
+      "register": "colloquial",
+      "context": "everyday phrases",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֵין לִי",
+      "tr": "I don’t have"
+     },
+     {
+      "text": "אֵין בְּעָיָה",
+      "tr": "no problem"
+     },
+     {
+      "text": "אֵין בְּרֵרָה",
+      "tr": "there is no choice"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֵין חָדָשׁ תַּחַת הַשֶּׁמֶשׁ",
+      "tr": "there is nothing new under the sun",
+      "kind": "saying",
+      "meaning": "it has all happened before",
+      "register": "neutral"
+     },
+     {
+      "text": "אֵין דָּבָר",
+      "tr": "there is no thing",
+      "kind": "fixed expression",
+      "meaning": "never mind; it’s nothing (a reply to thanks or an apology)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לֹא",
+      "register": "neutral",
+      "nuance": "the general “not” for verbs, adjectives and the past/future; אֵין is only for “there isn’t / don’t have” in the present (and formal negative copula)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "יֵשׁ",
+      "note": "there is; (with לְ) to have"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Ugaritic 𐎛𐎐 (ỉn) and Arabic إِنْ (ʔin).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The mystical name אֵין סוֹף (Ein Sof, “the Infinite”) is literally “there is no end”.",
+     "Same letters, a different word: אַיִן “nothing, nothingness” (as in יֵשׁ מֵאַיִן)."
+    ],
+    "pitfalls": [
+     "Never *לֹא יֵשׁ — say אֵין: אֵין לִי גֶּזֶר.",
+     "Present only: “there wasn’t” = לֹא הָיָה, “there won’t be” = לֹא יִהְיֶה."
+    ],
+    "subtleties": [
+     "Formal style negates a present verb with אֵין + suffix: אֵינִי יוֹדֵעַ “I do not know”; everyday speech says אֲנִי לֹא יוֹדֵעַ."
+    ]
+   }
+  },
+  {
+   "id": "he:lo",
+   "lemma": "לֹא",
+   "pos": "ADV",
+   "senses": [
+    "part.not"
+   ],
+   "translit": "lo",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The basic “not” — short and firm.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not (negates verbs, adjectives, adverbs and whole predicates)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי לֹא אוֹהֵב חֲצִילִים.",
+      "tr": "I (m.) don’t like eggplants.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "הַמָּרָק לֹא חַם.",
+      "tr": "The soup isn’t hot.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "לֹא עַכְשָׁו.",
+      "tr": "Not now.",
+      "register": "informal",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עוֹד לֹא",
+      "tr": "not yet"
+     },
+     {
+      "text": "לֹא כָּל כָּךְ",
+      "tr": "not so much"
+     },
+     {
+      "text": "לֹא נוֹרָא",
+      "tr": "never mind (“not terrible”)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "לֹא דֻּבִּים וְלֹא יַעַר",
+      "tr": "neither bears nor forest",
+      "kind": "idiom",
+      "meaning": "completely untrue, a total fabrication",
+      "register": "neutral"
+     },
+     {
+      "text": "לֹא נוֹרָא",
+      "tr": "not terrible",
+      "kind": "colloquial",
+      "meaning": "no big deal, never mind",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "אַל",
+      "register": "neutral",
+      "nuance": "the “not” of prohibitions, with the future: אַל תִּקְנֶה! “don’t buy!”"
+     },
+     {
+      "word": "בַּל",
+      "register": "literary",
+      "nuance": "a poetic “not” in fixed phrases"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *lā. Cognate with Arabic لا.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic لا (lā) is the same word: both “not” and “no”."
+    ],
+    "pitfalls": [
+     "לֹא stands right before what it negates: הוּא לֹא אוֹכֵל (not after the verb).",
+     "For “there isn’t / I don’t have” use אֵין, not לֹא: אֵין לִי זְמַן."
+    ],
+    "subtleties": [
+     "Negative words still need לֹא: אֲנִי לֹא רוֹצֶה כְּלוּם “I want nothing” (literally “I don’t want nothing”).",
+     "לֹא + future is an absolute prohibition, as in the Ten Commandments: לֹא תִּרְצָח."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

@@ -1,0 +1,2598 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:nihao",
+   "lemma": "你好",
+   "trad": "你好",
+   "pinyin": "nǐ hǎo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Friendly but a little formal — the greeting for strangers and first meetings more than for close friends.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hello; hi",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.hello"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你好！我叫安娜。",
+      "py": "Nǐ hǎo! Wǒ jiào Ānnà.",
+      "tr": "Hello! My name is Anna.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "你好，请问地铁站在哪儿？",
+      "py": "Nǐ hǎo, qǐngwèn dìtiězhàn zài nǎr?",
+      "tr": "Hello, could you tell me where the metro station is?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "小明，你好！",
+      "py": "Xiǎomíng, nǐ hǎo!",
+      "tr": "Hi, Xiaoming!",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "你们好",
+      "tr": "hello (to several people)"
+     },
+     {
+      "text": "大家好",
+      "tr": "hello everyone"
+     },
+     {
+      "text": "老师好",
+      "tr": "hello, teacher (a class to its teacher)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "您好",
+      "register": "honorific",
+      "nuance": "the polite hello — elders, teachers, customers"
+     },
+     {
+      "word": "嗨",
+      "register": "colloquial",
+      "nuance": "hāi, ‘hi’ — borrowed from English, among young people"
+     },
+     {
+      "word": "哈喽",
+      "register": "slang",
+      "nuance": "hālóu, ‘hello’ — playful, from English"
+     },
+     {
+      "word": "喂",
+      "register": "neutral",
+      "nuance": "wéi — ‘hello?’ only on the phone (and ‘hey!’ to get attention, which can be rude)"
+     }
+    ],
+    "etymology": {
+     "text": "你 ‘you’ + 好 ‘good, well’ — literally ‘you (are) well’.",
+     "src": "morphemes: 你 + 好 (Wiktionary)"
+    },
+    "funFacts": [
+     "On the phone Chinese answer with 喂 (wéi), not with 你好.",
+     "Friends rarely say 你好 to each other: they use the name, 嗨, or a question such as 吃了吗？ ‘have you eaten?’"
+    ],
+    "pitfalls": [
+     "Written nǐ hǎo, spoken ní hǎo: a third tone before a third tone becomes a rising tone.",
+     "你好 is not ‘how are you?’ — the answer is simply 你好 back."
+    ],
+    "subtleties": [
+     "A group is greeted with 你们好 or 大家好; a class greets its teacher with 老师好."
+    ]
+   }
+  },
+  {
+   "id": "zh:ninhao",
+   "lemma": "您好",
+   "trad": "您好",
+   "pinyin": "nín hǎo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "honorific"
+    ],
+    "connotation": "positive",
+    "feeling": "Respectful and warm — shops, hotels, offices, elders, teachers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hello (polite)",
+      "register": [
+       "honorific",
+       "formal"
+      ],
+      "concept": "greet.hello"
+     }
+    ],
+    "examples": [
+     {
+      "text": "您好！请进。",
+      "py": "Nín hǎo! Qǐng jìn.",
+      "tr": "Hello! Please come in.",
+      "register": "honorific",
+      "context": "visiting",
+      "sense": "s1"
+     },
+     {
+      "text": "王老师，您好！",
+      "py": "Wáng lǎoshī, nín hǎo!",
+      "tr": "Hello, Teacher Wang!",
+      "register": "honorific",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "您好，这里是中国银行。",
+      "py": "Nín hǎo, zhèli shì Zhōngguó Yínháng.",
+      "tr": "Hello, this is the Bank of China.",
+      "register": "formal",
+      "context": "phone service",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "老师，您好",
+      "tr": "hello, teacher"
+     },
+     {
+      "text": "您好，欢迎光临",
+      "tr": "hello, welcome (in shops)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "你好",
+      "register": "neutral",
+      "nuance": "the ordinary hello between equals"
+     },
+     {
+      "word": "各位好",
+      "register": "formal",
+      "nuance": "polite hello to a group or an audience"
+     }
+    ],
+    "etymology": {
+     "text": "您 ‘you (polite)’ + 好 ‘good, well’.",
+     "src": "morphemes: 您 + 好 (Wiktionary)"
+    },
+    "funFacts": [
+     "Shop assistants greet customers with 您好，欢迎光临！ ‘Hello, welcome!’ — a set phrase you will hear everywhere."
+    ],
+    "pitfalls": [
+     "There is no polite plural *您们好: to a group say 大家好 or 各位好.",
+     "Between friends 您好 sounds stiff or even ironic."
+    ],
+    "subtleties": [
+     "您 belongs above all to Beijing and northern speech; in the south and in Taiwan many people use 你好 even when being polite."
+    ]
+   }
+  },
+  {
+   "id": "zh:zaoshanghao",
+   "lemma": "早上好",
+   "trad": "早上好",
+   "pinyin": "zǎo shang hǎo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodmorning"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Bright and polite — the morning greeting at school, at work and on the radio.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good morning",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodmorning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "老师，早上好！",
+      "py": "Lǎoshī, zǎoshang hǎo!",
+      "tr": "Good morning, teacher!",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "早上好！你吃早饭了吗？",
+      "py": "Zǎoshang hǎo! Nǐ chī zǎofàn le ma?",
+      "tr": "Good morning! Have you had breakfast?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "各位听众，早上好！",
+      "py": "Gèwèi tīngzhòng, zǎoshang hǎo!",
+      "tr": "Good morning, dear listeners!",
+      "register": "formal",
+      "context": "radio",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大家早上好",
+      "tr": "good morning, everyone"
+     },
+     {
+      "text": "老师早上好",
+      "tr": "good morning, teacher"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "早",
+      "register": "colloquial",
+      "nuance": "a short ‘morning!’ between neighbours and colleagues"
+     },
+     {
+      "word": "早安",
+      "register": "neutral",
+      "nuance": "‘good morning’ — common in writing, messages and Taiwan"
+     },
+     {
+      "word": "你早",
+      "register": "colloquial",
+      "nuance": "‘morning to you’ — older, northern"
+     }
+    ],
+    "etymology": {
+     "text": "早上 ‘morning’ + 好 ‘good’.",
+     "src": "morphemes: 早上 + 好 (Wiktionary)"
+    },
+    "funFacts": [
+     "早 alone — 早！ — is the most common morning greeting among people who see each other every day."
+    ],
+    "pitfalls": [
+     "Only in the morning; later in the day just say 你好.",
+     "Pronounced zǎoshang with a toneless shang."
+    ],
+    "subtleties": [
+     "早 also means ‘early’: 你来得真早！ ‘you’re really early!’"
+    ]
+   }
+  },
+  {
+   "id": "zh:wanshanghao",
+   "lemma": "晚上好",
+   "trad": "晚上好",
+   "pinyin": "wǎn shang hǎo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodevening"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A little formal — TV hosts, hotels, the start of an evening event.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good evening",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodevening"
+     }
+    ],
+    "examples": [
+     {
+      "text": "观众朋友们，晚上好！",
+      "py": "Guānzhòng péngyoumen, wǎnshang hǎo!",
+      "tr": "Good evening, dear viewers!",
+      "register": "formal",
+      "context": "television",
+      "sense": "s1"
+     },
+     {
+      "text": "晚上好，欢迎光临！",
+      "py": "Wǎnshang hǎo, huānyíng guānglín!",
+      "tr": "Good evening, welcome!",
+      "register": "formal",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "大家晚上好",
+      "tr": "good evening, everyone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No other set evening greeting; among friends people just say 你好 or use the name.",
+    "etymology": {
+     "text": "晚上 ‘evening’ + 好 ‘good’.",
+     "src": "morphemes: 晚上 + 好 (Wiktionary)"
+    },
+    "funFacts": [
+     "晚 means both ‘evening’ and ‘late’ — like Spanish tarde."
+    ],
+    "pitfalls": [
+     "晚上好 greets; 晚安 says ‘good night’ when parting or going to bed."
+    ],
+    "subtleties": [
+     "In everyday life 晚上好 can sound formal; friends meeting in the evening say 你好 or just the name."
+    ]
+   }
+  },
+  {
+   "id": "zh:wanan",
+   "lemma": "晚安",
+   "trad": "晚安",
+   "pinyin": "wǎn ān",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodnight"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Soft and caring — the last word of the day, said at bedtime or at the end of a late chat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good night",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodnight"
+     }
+    ],
+    "examples": [
+     {
+      "text": "晚安，明天见！",
+      "py": "Wǎn'ān, míngtiān jiàn!",
+      "tr": "Good night, see you tomorrow!",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     },
+     {
+      "text": "妈妈，晚安！",
+      "py": "Māma, wǎn'ān!",
+      "tr": "Good night, Mum!",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "晚安，好梦",
+      "tr": "good night, sweet dreams"
+     },
+     {
+      "text": "说晚安",
+      "tr": "to say good night"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday alternative; 好梦 ‘sweet dreams’ is often added.",
+    "etymology": {
+     "text": "晚 ‘evening, night’ + 安 ‘peace, calm’ — ‘a peaceful night’.",
+     "src": "morphemes: 晚 + 安 (Wiktionary)"
+    },
+    "funFacts": [
+     "Online, 晚安 wǎn’ān is sometimes playfully read as the initials of 我爱你爱你 (wǒ ài nǐ ài nǐ, ‘I love you, love you’)."
+    ],
+    "pitfalls": [
+     "晚安 is for parting at night or going to bed; to greet someone in the evening say 晚上好.",
+     "Pinyin: wǎn’ān — the apostrophe shows where the syllable break is."
+    ],
+    "subtleties": [
+     "In messages 晚安 often ends a late conversation, like ‘night!’ in English."
+    ]
+   }
+  },
+  {
+   "id": "zh:zaijian",
+   "lemma": "再见",
+   "trad": "再見",
+   "pinyin": "zài jiàn",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodbye"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The standard goodbye — neutral, correct in every situation.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "goodbye",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodbye"
+     }
+    ],
+    "examples": [
+     {
+      "text": "老师再见！",
+      "py": "Lǎoshī zàijiàn!",
+      "tr": "Goodbye, teacher!",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "那我走了，再见！",
+      "py": "Nà wǒ zǒu le, zàijiàn!",
+      "tr": "Well, I’m off — goodbye!",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     },
+     {
+      "text": "再见，路上小心！",
+      "py": "Zàijiàn, lùshang xiǎoxīn!",
+      "tr": "Goodbye — take care on the way!",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "说再见",
+      "tr": "to say goodbye"
+     },
+     {
+      "text": "明天见",
+      "tr": "see you tomorrow"
+     },
+     {
+      "text": "再见了",
+      "tr": "goodbye then (final)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "拜拜",
+      "register": "colloquial",
+      "nuance": "‘bye-bye’ — very common, especially on the phone and among young people"
+     },
+     {
+      "word": "回头见",
+      "register": "colloquial",
+      "nuance": "‘see you later’ — you expect to meet again soon"
+     },
+     {
+      "word": "告辞",
+      "register": "formal",
+      "nuance": "‘I take my leave’ — old-fashioned, formal"
+     }
+    ],
+    "etymology": {
+     "text": "再 ‘again’ + 见 ‘to see’: ‘see (you) again’ — Wiktionary also records the literal verb 再見 ‘to meet again’.",
+     "src": "morphemes: 再 + 见 (Wiktionary)"
+    },
+    "funFacts": [
+     "The same picture as German Auf Wiedersehen, Russian до свидания, Hebrew לְהִתְרָאוֹת and Arabic إِلَى اللِّقَاء: ‘until we see / meet again’."
+    ],
+    "pitfalls": [
+     "It is just ‘goodbye’ — said even when you will never meet again."
+    ],
+    "subtleties": [
+     "A class says goodbye with 老师再见！, the teacher answers 同学们再见！"
+    ]
+   }
+  },
+  {
+   "id": "zh:baibai",
+   "lemma": "拜拜",
+   "trad": "拜拜",
+   "pinyin": "bài bài",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodbye"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "positive",
+    "feeling": "Light and casual — friends, family, the end of a phone call.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bye-bye",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "greet.goodbye"
+     }
+    ],
+    "examples": [
+     {
+      "text": "拜拜，明天见！",
+      "py": "Bàibài, míngtiān jiàn!",
+      "tr": "Bye, see you tomorrow!",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "好的，拜拜！",
+      "py": "Hǎo de, bàibài!",
+      "tr": "OK, bye!",
+      "register": "colloquial",
+      "context": "phone",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "拜拜了",
+      "tr": "bye then"
+     },
+     {
+      "text": "跟他说拜拜",
+      "tr": "to say bye-bye to him"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "再见",
+      "register": "neutral",
+      "nuance": "the neutral, always-correct goodbye"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic matching of English bye-bye (拜 ‘to bow, to pay respects’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Phone calls often end with a quick 好，拜拜！ or even 拜拜拜拜."
+    ],
+    "pitfalls": [
+     "Too casual for a boss or a teacher — use 再见 there.",
+     "Do not confuse it with the verb 拜拜 ‘to worship (the gods)’ used in Taiwan and Southeast Asia."
+    ],
+    "subtleties": [
+     "Many speakers say báibái or bāibāi; dictionaries give bàibài."
+    ]
+   }
+  },
+  {
+   "id": "zh:huitoujian",
+   "lemma": "回头见",
+   "trad": "回頭見",
+   "pinyin": "huí tóu jiàn",
+   "pos": "INTJ",
+   "senses": [
+    "greet.seeyou"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files 回頭見 as a “phrase”; it is a fixed parting formula, filed as INTJ like the other formulas of fd.02."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "positive",
+    "feeling": "Easy-going: you will meet again soon, no fixed time.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "see you later",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "greet.seeyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我先走了，回头见！",
+      "py": "Wǒ xiān zǒu le, huítóu jiàn!",
+      "tr": "I’m heading off — see you later!",
+      "register": "colloquial",
+      "context": "parting",
+      "sense": "s1"
+     },
+     {
+      "text": "好，回头见！",
+      "py": "Hǎo, huítóu jiàn!",
+      "tr": "OK, see you later!",
+      "register": "colloquial",
+      "context": "phone",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "回头再说",
+      "tr": "let’s talk about it later"
+     },
+     {
+      "text": "回头见啊",
+      "tr": "see you later, then"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "一会儿见",
+      "register": "colloquial",
+      "nuance": "‘see you in a bit’ — later the same day"
+     },
+     {
+      "word": "待会儿见",
+      "register": "colloquial",
+      "nuance": "‘see you in a while’ — the same day",
+      "region": "northern China"
+     },
+     {
+      "word": "明天见",
+      "register": "neutral",
+      "nuance": "‘see you tomorrow’ — any time word + 见 works: 下午见, 周一见"
+     },
+     {
+      "word": "下次见",
+      "register": "neutral",
+      "nuance": "‘see you next time’"
+     },
+     {
+      "word": "改天见",
+      "register": "neutral",
+      "nuance": "‘see you another day’ — no date fixed"
+     },
+     {
+      "word": "回见",
+      "register": "colloquial",
+      "nuance": "short form of 回头见",
+      "region": "Beijing"
+     }
+    ],
+    "etymology": {
+     "text": "回头 ‘to turn the head; later, in a while’ + 见 ‘to see’.",
+     "src": "morphemes: 回头 + 见 (Wiktionary)"
+    },
+    "funFacts": [
+     "Time word + 见 is a productive pattern: 明天见 ‘see you tomorrow’, 晚上见 ‘see you tonight’, 周末见 ‘see you at the weekend’."
+    ],
+    "pitfalls": [
+     "回头见 fixes no time; for a definite meeting use time + 见 (明天见, 下午见)."
+    ],
+    "subtleties": [
+     "回头 alone means ‘later’: 回头再说 ‘we’ll talk about it later’ — sometimes a polite way to put something off."
+    ]
+   }
+  },
+  {
+   "id": "zh:nihaoma",
+   "lemma": "你好吗",
+   "trad": "你好嗎",
+   "pinyin": "nǐ hǎo ma",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files 你好嗎 as a “phrase”; it is a greeting formula, filed as INTJ like the other formulas of fd.02."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A real question about someone’s wellbeing — warmer than 你好, but rarer than textbooks suggest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how are you?",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "好久不见，你好吗？",
+      "py": "Hǎojiǔ bú jiàn, nǐ hǎo ma?",
+      "tr": "Long time no see — how are you?",
+      "register": "neutral",
+      "context": "meeting again",
+      "sense": "s1"
+     },
+     {
+      "text": "你好吗？——我很好，谢谢。",
+      "py": "Nǐ hǎo ma? — Wǒ hěn hǎo, xièxie.",
+      "tr": "How are you? — I’m fine, thanks.",
+      "register": "neutral",
+      "context": "textbook dialogue",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "你最近好吗",
+      "tr": "how have you been lately?"
+     },
+     {
+      "text": "你好吗？我很好",
+      "tr": "how are you? — I’m fine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "最近怎么样",
+      "register": "colloquial",
+      "nuance": "‘how have you been lately?’ — the natural question between friends"
+     },
+     {
+      "word": "你怎么样",
+      "register": "colloquial",
+      "nuance": "‘how are you doing?’"
+     },
+     {
+      "word": "吃了吗",
+      "register": "colloquial",
+      "nuance": "‘have you eaten?’ — a traditional greeting, not a real question about food"
+     },
+     {
+      "word": "您好吗",
+      "register": "honorific",
+      "nuance": "polite form, rare in speech"
+     }
+    ],
+    "etymology": {
+     "text": "你好 ‘you are well’ + the question particle 吗: ‘are you well?’",
+     "src": "morphemes: 你好 + 吗 (Wiktionary)"
+    },
+    "funFacts": [
+     "To 吃了吗？ ‘have you eaten?’ the answer is just 吃了 or 还没 — it is a greeting, not an invitation."
+    ],
+    "pitfalls": [
+     "People say 你好吗 mostly when they have not seen each other for a while; as a daily greeting it sounds like a textbook. With friends, 最近怎么样？ is more natural.",
+     "Don’t confuse it with 你好 ‘hello’, which needs no answer."
+    ],
+    "subtleties": [
+     "Usual answers: 很好 (fine), 还好 / 还行 (OK), 不错 (not bad), 挺好的 (pretty good) — often followed by 你呢？ ‘and you?’"
+    ]
+   }
+  },
+  {
+   "id": "zh:henhao",
+   "lemma": "很好",
+   "trad": "很好",
+   "pinyin": "hěn hǎo",
+   "pos": "ADJ",
+   "senses": [
+    "greet.fine"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "intensity": 4,
+    "feeling": "Cheerful and positive — the normal answer to ‘how are you?’, and praise for good work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fine, well (of a person: I am fine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.fine"
+     },
+     {
+      "id": "s2",
+      "def": "very good (of things, work, results)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "Good! Very well! (approval)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我很好，谢谢。",
+      "py": "Wǒ hěn hǎo, xièxie.",
+      "tr": "I’m fine, thank you.",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "我爸爸妈妈都很好。",
+      "py": "Wǒ bàba māma dōu hěn hǎo.",
+      "tr": "My mum and dad are both well.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "你的中文很好！",
+      "py": "Nǐ de Zhōngwén hěn hǎo!",
+      "tr": "Your Chinese is very good!",
+      "register": "neutral",
+      "context": "compliments",
+      "sense": "s2"
+     },
+     {
+      "text": "很好！我们开始吧。",
+      "py": "Hěn hǎo! Wǒmen kāishǐ ba.",
+      "tr": "Very good! Let’s begin.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "我很好",
+      "tr": "I’m fine"
+     },
+     {
+      "text": "都很好",
+      "tr": "all well"
+     },
+     {
+      "text": "身体很好",
+      "tr": "in good health"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "不错",
+      "register": "colloquial",
+      "nuance": "‘not bad, pretty good’ — modest and very common"
+     },
+     {
+      "word": "挺好的",
+      "register": "colloquial",
+      "nuance": "‘quite good, pretty well’"
+     },
+     {
+      "word": "还行",
+      "register": "colloquial",
+      "nuance": "‘OK, so-so’"
+     },
+     {
+      "word": "好极了",
+      "register": "neutral",
+      "nuance": "‘excellent’ — enthusiastic"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "不好",
+      "note": "not well, bad"
+     }
+    ],
+    "etymology": {
+     "text": "很 ‘very’ + 好 ‘good, well’. 好 is 女 ‘woman’ + 子 ‘child’; 很 first meant ‘cruel, defiant’ and became ‘very’ in the Yuan dynasty.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "好 ‘good’ is written ‘woman’ + ‘child’."
+    ],
+    "pitfalls": [
+     "No 是 before an adjective: 我很好, never *我是好 or *我是很好.",
+     "很 is often just glue: 我很好 means ‘I’m fine’, not necessarily ‘very fine’; a bare 我好 sounds like a contrast."
+    ],
+    "subtleties": [
+     "Third-tone sandhi: hěn hǎo is spoken hén hǎo.",
+     "A compliment like 你的中文很好！ is answered with modesty: 哪里哪里 or 还差得远 (‘still far from it’)."
+    ]
+   }
+  },
+  {
+   "id": "zh:haihao",
+   "lemma": "还好",
+   "trad": "還好",
+   "pinyin": "hái hǎo",
+   "pos": "ADJ",
+   "senses": [
+    "greet.fine"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary: “not bad; quite OK; passable” — the course concept “fine, well (I am fine)” in its lukewarm form; the words fine/well are not in the gloss."
+    }
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "intensity": 2,
+    "feeling": "Lukewarm: ‘OK, all right’ — not great, not bad.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "OK, all right, not bad (I am OK)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.fine"
+     },
+     {
+      "id": "s2",
+      "def": "fortunately, luckily (at the start of a sentence)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你好吗？——还好。",
+      "py": "Nǐ hǎo ma? — Hái hǎo.",
+      "tr": "How are you? — I’m OK.",
+      "register": "neutral",
+      "context": "greetings",
+      "sense": "s1"
+     },
+     {
+      "text": "今天的考试还好。",
+      "py": "Jīntiān de kǎoshì hái hǎo.",
+      "tr": "Today’s exam went all right.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "还好你来了！",
+      "py": "Hái hǎo nǐ lái le!",
+      "tr": "Luckily you came!",
+      "register": "neutral",
+      "context": "relief",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "还好吧",
+      "tr": "it’s OK, I suppose"
+     },
+     {
+      "text": "还好吗",
+      "tr": "are you OK?"
+     },
+     {
+      "text": "还好还好",
+      "tr": "phew, that was lucky"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "还行",
+      "register": "colloquial",
+      "nuance": "‘OK, it’ll do’"
+     },
+     {
+      "word": "一般",
+      "register": "neutral",
+      "nuance": "‘so-so, average’"
+     },
+     {
+      "word": "马马虎虎",
+      "register": "colloquial",
+      "nuance": "‘so-so’ (literally ‘horse horse tiger tiger’)"
+     },
+     {
+      "word": "幸好",
+      "register": "neutral",
+      "nuance": "‘luckily’ — for the second sense"
+     }
+    ],
+    "etymology": {
+     "text": "还 hái ‘still, fairly’ + 好 ‘good, well’.",
+     "src": "morphemes: 还 + 好 (Wiktionary)"
+    },
+    "funFacts": [
+     "马马虎虎 ‘horse horse, tiger tiger’ also means ‘so-so’ — a fun synonym."
+    ],
+    "pitfalls": [
+     "还 is read hái here, not huán (‘to give back’).",
+     "Answering 还好 to 你好吗 suggests ‘nothing special’ — 很好 is the cheerful answer."
+    ],
+    "subtleties": [
+     "At the start of a sentence 还好 means ‘luckily’: 还好没下雨 ‘luckily it didn’t rain’."
+    ]
+   }
+  },
+  {
+   "id": "zh:jiao",
+   "lemma": "叫",
+   "trad": "叫",
+   "pinyin": "jiào",
+   "pos": "VERB",
+   "senses": [
+    "greet.myname"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Names and calling out: the everyday verb of introductions.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to be called (我叫… ‘my name is …’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.myname"
+     },
+     {
+      "id": "s2",
+      "def": "to call (someone); to shout",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to order (food), to call (a taxi)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "to tell, to make (someone do something)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我叫安娜。",
+      "py": "Wǒ jiào Ānnà.",
+      "tr": "My name is Anna.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "你叫什么名字？",
+      "py": "Nǐ jiào shénme míngzi?",
+      "tr": "What is your name?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "妈妈在叫你。",
+      "py": "Māma zài jiào nǐ.",
+      "tr": "Mum is calling you.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "我们叫外卖吧。",
+      "py": "Wǒmen jiào wàimài ba.",
+      "tr": "Let’s order a takeaway.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s3"
+     },
+     {
+      "text": "老师叫我们明天早点来。",
+      "py": "Lǎoshī jiào wǒmen míngtiān zǎo diǎn lái.",
+      "tr": "The teacher told us to come a bit early tomorrow.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "叫什么名字",
+      "tr": "what is (your) name"
+     },
+     {
+      "text": "叫车",
+      "tr": "to call a taxi"
+     },
+     {
+      "text": "叫外卖",
+      "tr": "to order a takeaway"
+     },
+     {
+      "text": "大叫",
+      "tr": "to shout loudly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "拍手叫好",
+      "tr": "clap the hands and shout “good”",
+      "kind": "idiom",
+      "meaning": "to applaud, to cheer",
+      "register": "neutral"
+     },
+     {
+      "text": "叫苦连天",
+      "tr": "to cry bitterness to the sky",
+      "kind": "idiom",
+      "meaning": "to complain endlessly",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "姓",
+      "register": "neutral",
+      "nuance": "xìng ‘to be surnamed’: 我姓王 ‘my surname is Wang’"
+     },
+     {
+      "word": "名叫",
+      "register": "formal",
+      "nuance": "‘to be named’ — written narration (一个名叫小明的男孩)"
+     },
+     {
+      "word": "称",
+      "register": "formal",
+      "nuance": "‘to call, to address as’ (称他为老师)"
+     },
+     {
+      "word": "喊",
+      "register": "colloquial",
+      "nuance": "‘to shout, to call out’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 口 ‘mouth’ + phonetic 丩; according to the Shuowen Jiezi its original meaning was ‘to shout’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese names put the surname first: 王小明 is Wang Xiaoming — Mr Wang. 我叫王小明 gives the whole name; 我姓王 only the surname."
+    ],
+    "pitfalls": [
+     "叫 is the verb itself — no 是: *我是叫安娜, *我叫是安娜.",
+     "To ask an older person’s name politely: 您贵姓？ ‘your honourable surname?’ — answer 我姓王."
+    ],
+    "subtleties": [
+     "我的名字是安娜 is correct too, but 我叫安娜 is the usual way.",
+     "叫 also means ‘to make, to let’: 别叫他等 ‘don’t keep him waiting’."
+    ]
+   }
+  },
+  {
+   "id": "zh:renshinihengaoxing",
+   "lemma": "认识你很高兴",
+   "trad": "認識你很高興",
+   "pinyin": "rèn shi nǐ hěn gāo xìng",
+   "pos": "INTJ",
+   "senses": [
+    "greet.nicetomeet"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Friendly and polite — said once, at the first meeting.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nice to meet you (literally ‘knowing you, I am very glad’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.nicetomeet"
+     }
+    ],
+    "examples": [
+     {
+      "text": "你好，我叫安娜。——认识你很高兴！",
+      "py": "Nǐ hǎo, wǒ jiào Ānnà. — Rènshi nǐ hěn gāoxìng!",
+      "tr": "Hello, my name is Anna. — Nice to meet you!",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "小明，认识你很高兴。",
+      "py": "Xiǎomíng, rènshi nǐ hěn gāoxìng.",
+      "tr": "Xiaoming, nice to meet you.",
+      "register": "neutral",
+      "context": "meeting friends of friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "认识你很高兴",
+      "tr": "nice to meet you"
+     },
+     {
+      "text": "我也很高兴",
+      "tr": "me too (I’m glad too)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "很高兴认识你",
+      "register": "neutral",
+      "nuance": "the same words in the other order — very common in speech"
+     },
+     {
+      "word": "认识您很高兴",
+      "register": "honorific",
+      "nuance": "with the polite 您 — to an older or senior person"
+     },
+     {
+      "word": "幸会",
+      "register": "formal",
+      "nuance": "‘a pleasure to meet you’ — business and formal occasions"
+     },
+     {
+      "word": "久仰",
+      "register": "formal",
+      "nuance": "‘I have long admired you’ — very formal, to someone of reputation"
+     }
+    ],
+    "etymology": {
+     "text": "认识 ‘to know, to get acquainted with’ + 你 ‘you’ + 很高兴 ‘(I am) very glad’.",
+     "src": "morphemes: 认识 + 你 + 很高兴 (Wiktionary)"
+    },
+    "funFacts": [
+     "The usual reply is 我也很高兴 ‘I’m glad too’ or simply the same sentence back."
+    ],
+    "pitfalls": [
+     "To someone older or senior, use 您: 认识您很高兴.",
+     "Only at the first meeting — not every time you see someone."
+    ],
+    "subtleties": [
+     "Both orders are correct: 认识你很高兴 puts ‘knowing you’ first as the topic; 很高兴认识你 starts with the feeling."
+    ]
+   }
+  },
+  {
+   "id": "zh:hengaoxingrenshini",
+   "lemma": "很高兴认识你",
+   "trad": "很高興認識你",
+   "pinyin": "hěn gāo xìng rèn shi nǐ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.nicetomeet"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Friendly and polite — the most common way to say it in conversation.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nice to meet you (literally ‘very glad to know you’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.nicetomeet"
+     }
+    ],
+    "examples": [
+     {
+      "text": "很高兴认识你！",
+      "py": "Hěn gāoxìng rènshi nǐ!",
+      "tr": "Nice to meet you!",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "安娜，很高兴认识你，我叫小明。",
+      "py": "Ānnà, hěn gāoxìng rènshi nǐ, wǒ jiào Xiǎomíng.",
+      "tr": "Anna, nice to meet you — I’m Xiaoming.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "很高兴认识你们",
+      "tr": "nice to meet you all"
+     },
+     {
+      "text": "我也很高兴认识你",
+      "tr": "nice to meet you too"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "认识你很高兴",
+      "register": "neutral",
+      "nuance": "the same words, with ‘knowing you’ first"
+     },
+     {
+      "word": "很高兴认识您",
+      "register": "honorific",
+      "nuance": "with the polite 您"
+     },
+     {
+      "word": "幸会",
+      "register": "formal",
+      "nuance": "‘a pleasure to meet you’"
+     }
+    ],
+    "etymology": {
+     "text": "很高兴 ‘very glad’ + 认识 ‘to get to know’ + 你 ‘you’.",
+     "src": "morphemes: 很高兴 + 认识 + 你 (Wiktionary)"
+    },
+    "funFacts": [
+     "高兴 ‘glad’ is literally ‘high spirits’: 高 ‘high’ + 兴 ‘mood, interest’."
+    ],
+    "pitfalls": [
+     "With a group: 很高兴认识你们; with an elder: 很高兴认识您."
+    ],
+    "subtleties": [
+     "认识 is ‘to know (a person), to be acquainted’; ‘to know a fact’ is 知道 — a split like German kennen / wissen."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiexie",
+   "lemma": "谢谢",
+   "trad": "謝謝",
+   "pinyin": "xiè xie",
+   "pos": "INTJ",
+   "senses": [
+    "greet.thanks"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Grateful and polite; among family and close friends it can feel a little formal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thank you; thanks",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.thanks"
+     },
+     {
+      "id": "s2",
+      "def": "to thank (verb: 谢谢你的帮助)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "谢谢！",
+      "py": "Xièxie!",
+      "tr": "Thanks!",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1"
+     },
+     {
+      "text": "谢谢老师！",
+      "py": "Xièxie lǎoshī!",
+      "tr": "Thank you, teacher!",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "谢谢你的帮助。",
+      "py": "Xièxie nǐ de bāngzhù.",
+      "tr": "Thank you for your help.",
+      "register": "neutral",
+      "context": "favours",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "谢谢你",
+      "tr": "thank you"
+     },
+     {
+      "text": "谢谢您",
+      "tr": "thank you (polite)"
+     },
+     {
+      "text": "不用了，谢谢",
+      "tr": "no, thank you"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "多谢",
+      "register": "colloquial",
+      "nuance": "‘many thanks’"
+     },
+     {
+      "word": "谢了",
+      "register": "colloquial",
+      "nuance": "‘thanks’ — casual, quick"
+     },
+     {
+      "word": "感谢",
+      "register": "formal",
+      "nuance": "‘to thank; gratitude’ — speeches, letters (非常感谢 ‘thank you very much’)"
+     }
+    ],
+    "etymology": {
+     "text": "Reduplication of 谢 ‘to thank’ (言 ‘speech’ + phonetic 射).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Polite refusal is part of the ritual: offered food or a gift, many people decline once or twice before accepting."
+    ],
+    "pitfalls": [
+     "The second 谢 is toneless: xièxie.",
+     "Thanking close family for small things can sound distant or ironic."
+    ],
+    "subtleties": [
+     "To decline: 不用了，谢谢 ‘no, thanks’; to reply to thanks: 不客气."
+    ]
+   }
+  },
+  {
+   "id": "zh:bukeqi",
+   "lemma": "不客气",
+   "trad": "不客氣",
+   "pinyin": "bú kè qi",
+   "pos": "INTJ",
+   "senses": [
+    "greet.welcome"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Kind and modest: ‘no need to be so polite’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you’re welcome",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.welcome"
+     },
+     {
+      "id": "s2",
+      "def": "impolite, blunt (in other contexts: 说话很不客气)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "谢谢！——不客气。",
+      "py": "Xièxie! — Bú kèqi.",
+      "tr": "Thanks! — You’re welcome.",
+      "register": "neutral",
+      "context": "everyday talk",
+      "sense": "s1"
+     },
+     {
+      "text": "不客气，这是我应该做的。",
+      "py": "Bú kèqi, zhè shì wǒ yīnggāi zuò de.",
+      "tr": "You’re welcome — it was the least I could do.",
+      "register": "neutral",
+      "context": "service",
+      "sense": "s1"
+     },
+     {
+      "text": "他说话很不客气。",
+      "py": "Tā shuōhuà hěn bú kèqi.",
+      "tr": "He speaks very bluntly.",
+      "register": "neutral",
+      "context": "describing people",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "别客气",
+      "tr": "don’t mention it; help yourself"
+     },
+     {
+      "text": "不客气的",
+      "tr": "you’re welcome (softer)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "不用谢",
+      "register": "neutral",
+      "nuance": "‘no need to thank (me)’"
+     },
+     {
+      "word": "没事儿",
+      "register": "colloquial",
+      "nuance": "‘no problem’",
+      "region": "northern China"
+     },
+     {
+      "word": "小意思",
+      "register": "colloquial",
+      "nuance": "‘it’s nothing’ — for a small favour or gift"
+     }
+    ],
+    "etymology": {
+     "text": "不 ‘not’ + 客气 ‘polite, standing on ceremony’: ‘don’t be so polite’.",
+     "src": "morphemes: 不 + 客气 (Wiktionary)"
+    },
+    "funFacts": [
+     "别客气 ‘don’t be polite’ is also what a host says when offering food: help yourself!"
+    ],
+    "pitfalls": [
+     "不客气 answers 谢谢; to 对不起 the answer is 没关系 ‘never mind’.",
+     "不 is said bú here, because 客 kè has the 4th tone."
+    ],
+    "subtleties": [
+     "In other sentences 不客气 means ‘rude, blunt’: 他对我很不客气 ‘he was rude to me’."
+    ]
+   }
+  },
+  {
+   "id": "zh:qing",
+   "lemma": "请",
+   "trad": "請",
+   "pinyin": "qǐng",
+   "pos": "VERB",
+   "senses": [
+    "greet.please"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Courteous and inviting — the word that opens doors: 请进, 请坐.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "please (before a verb: 请坐 ‘please sit down’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.please"
+     },
+     {
+      "id": "s2",
+      "def": "to invite; to treat (to a meal)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to ask, to request (someone to do something)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "to hire (请人 ‘to hire someone’)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "请坐。",
+      "py": "Qǐng zuò.",
+      "tr": "Please sit down.",
+      "register": "neutral",
+      "context": "visiting",
+      "sense": "s1"
+     },
+     {
+      "text": "请进！",
+      "py": "Qǐng jìn!",
+      "tr": "Please come in!",
+      "register": "neutral",
+      "context": "at the door",
+      "sense": "s1"
+     },
+     {
+      "text": "您请！",
+      "py": "Nín qǐng!",
+      "tr": "After you! / Please, go ahead!",
+      "register": "honorific",
+      "context": "courtesy",
+      "sense": "s1"
+     },
+     {
+      "text": "今天我请你吃饭。",
+      "py": "Jīntiān wǒ qǐng nǐ chīfàn.",
+      "tr": "Today I’m treating you to a meal.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
+     },
+     {
+      "text": "我们请老师帮忙。",
+      "py": "Wǒmen qǐng lǎoshī bāngmáng.",
+      "tr": "We ask the teacher for help.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "请进",
+      "tr": "please come in"
+     },
+     {
+      "text": "请坐",
+      "tr": "please sit down"
+     },
+     {
+      "text": "请问",
+      "tr": "may I ask, excuse me"
+     },
+     {
+      "text": "请客",
+      "tr": "to treat, to pay for others"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "请君入瓮",
+      "tr": "invite the gentleman into the urn",
+      "kind": "idiom",
+      "meaning": "to trap someone with his own scheme",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "麻烦",
+      "register": "colloquial",
+      "nuance": "‘may I trouble you’: 麻烦你帮我一下 — the usual way to ask a favour"
+     },
+     {
+      "word": "劳驾",
+      "register": "dated",
+      "nuance": "polite northern ‘excuse me, would you mind’"
+     },
+     {
+      "word": "烦请",
+      "register": "formal",
+      "nuance": "‘kindly …’ — written notices"
+     },
+     {
+      "word": "邀请",
+      "register": "formal",
+      "nuance": "‘to invite’ — invitations, events"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 言 ‘speech’ + phonetic 青.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Whoever says 我请客 ‘I’m inviting’ pays the bill — and friends sometimes argue over who gets to."
+    ],
+    "pitfalls": [
+     "请 goes before the verb: 请坐 — never at the end like English ‘…, please’.",
+     "For a favour 请 alone can sound stiff; 麻烦你… or 能不能… is more natural."
+    ],
+    "subtleties": [
+     "On its own, 请！ or 您请！ with a gesture means ‘after you / go ahead / help yourself’.",
+     "On signs, 请勿 means ‘please do not’: 请勿吸烟 ‘no smoking’."
+    ]
+   }
+  },
+  {
+   "id": "zh:duibuqi",
+   "lemma": "对不起",
+   "trad": "對不起",
+   "pinyin": "duì bu qǐ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.sorry"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A real apology — sincere, for something that matters.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorry; I apologize",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.sorry"
+     },
+     {
+      "id": "s2",
+      "def": "to let (someone) down, to wrong (verb)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "对不起，我来晚了。",
+      "py": "Duìbuqǐ, wǒ lái wǎn le.",
+      "tr": "Sorry, I’m late.",
+      "register": "neutral",
+      "context": "apologies",
+      "sense": "s1"
+     },
+     {
+      "text": "对不起！——没关系。",
+      "py": "Duìbuqǐ! — Méi guānxi.",
+      "tr": "Sorry! — Never mind.",
+      "register": "neutral",
+      "context": "apologies",
+      "sense": "s1"
+     },
+     {
+      "text": "我对不起你。",
+      "py": "Wǒ duìbuqǐ nǐ.",
+      "tr": "I have let you down.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "对不起，我错了",
+      "tr": "sorry, I was wrong"
+     },
+     {
+      "text": "说对不起",
+      "tr": "to say sorry"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "不好意思",
+      "register": "colloquial",
+      "nuance": "a lighter ‘sorry, excuse me’ — for small things"
+     },
+     {
+      "word": "抱歉",
+      "register": "formal",
+      "nuance": "‘I’m sorry, I apologize’ — written and formal speech (很抱歉)"
+     },
+     {
+      "word": "请原谅",
+      "register": "formal",
+      "nuance": "‘please forgive me’"
+     }
+    ],
+    "etymology": {
+     "text": "对 ‘to face, to treat’ + 不起 ‘not up to it’ (as in 买不起 ‘can’t afford’): ‘I can’t face you — I have let you down’.",
+     "src": "morphemes: 对 + 不起 (Wiktionary: 對不起 “to let down”)"
+    },
+    "funFacts": [
+     "The reply is 没关系 ‘it doesn’t matter’ — literally ‘no connection’."
+    ],
+    "pitfalls": [
+     "For a small slip — bumping into someone, interrupting — 不好意思 is more natural than 对不起.",
+     "Pronounced duìbuqǐ, with a toneless bu."
+    ],
+    "subtleties": [
+     "As a verb: 我对不起他 ‘I wronged him’ — the opposite is 对得起 ‘to be worthy of, not let down’."
+    ]
+   }
+  },
+  {
+   "id": "zh:buhaoyisi",
+   "lemma": "不好意思",
+   "trad": "不好意思",
+   "pinyin": "bù hǎo yì si",
+   "pos": "INTJ",
+   "senses": [
+    "greet.sorry"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light and everyday: ‘sorry, excuse me’ — a little embarrassed smile in words.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorry; excuse me (for small things)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "greet.sorry"
+     },
+     {
+      "id": "s2",
+      "def": "embarrassed, shy",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "不好意思，请问洗手间在哪儿？",
+      "py": "Bù hǎoyìsi, qǐngwèn xǐshǒujiān zài nǎr?",
+      "tr": "Excuse me, where is the toilet?",
+      "register": "colloquial",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "不好意思，让一下。",
+      "py": "Bù hǎoyìsi, ràng yíxià.",
+      "tr": "Sorry, could you let me through?",
+      "register": "colloquial",
+      "context": "crowds",
+      "sense": "s1"
+     },
+     {
+      "text": "她有点不好意思。",
+      "py": "Tā yǒudiǎn bù hǎoyìsi.",
+      "tr": "She is a bit embarrassed.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "不好意思，我…",
+      "tr": "sorry, I …"
+     },
+     {
+      "text": "真不好意思",
+      "tr": "really sorry"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "对不起",
+      "register": "neutral",
+      "nuance": "a real apology"
+     },
+     {
+      "word": "打扰了",
+      "register": "neutral",
+      "nuance": "‘sorry to bother you’"
+     }
+    ],
+    "etymology": {
+     "text": "不 ‘not’ + 好意思 ‘to feel at ease, to have the nerve’: ‘I feel embarrassed’.",
+     "src": "morphemes: 不 + 好意思 (Wiktionary)"
+    },
+    "funFacts": [
+     "It is probably the most used ‘sorry’ in daily life — waiters, strangers, colleagues all use it."
+    ],
+    "pitfalls": [
+     "Not for serious wrongs: there you need 对不起."
+    ],
+    "subtleties": [
+     "Also softens a refusal or request: 不好意思，我明天不能来 ‘sorry, I can’t come tomorrow’."
+    ]
+   }
+  },
+  {
+   "id": "zh:daraoyixia",
+   "lemma": "打扰一下",
+   "trad": "打擾一下",
+   "pinyin": "dǎ rǎo yí xià",
+   "pos": "INTJ",
+   "senses": [
+    "greet.excuseme"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Polite and considerate — interrupting someone or getting their attention.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "excuse me (to interrupt or get attention)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.excuseme"
+     }
+    ],
+    "examples": [
+     {
+      "text": "打扰一下，请问地铁站在哪儿？",
+      "py": "Dǎrǎo yíxià, qǐngwèn dìtiězhàn zài nǎr?",
+      "tr": "Excuse me, where is the metro station?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "打扰一下，这里有人吗？",
+      "py": "Dǎrǎo yíxià, zhèli yǒu rén ma?",
+      "tr": "Excuse me, is this seat taken?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "打扰了",
+      "tr": "sorry to have bothered you (when leaving)"
+     },
+     {
+      "text": "不好意思，打扰一下",
+      "tr": "sorry, excuse me"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "不好意思",
+      "register": "colloquial",
+      "nuance": "the most common way to get a stranger’s attention"
+     },
+     {
+      "word": "请问",
+      "register": "neutral",
+      "nuance": "‘may I ask’ — right before a question"
+     },
+     {
+      "word": "劳驾",
+      "register": "dated",
+      "nuance": "polite northern ‘excuse me’, also to get past"
+     },
+     {
+      "word": "借过",
+      "register": "colloquial",
+      "nuance": "‘let me pass’ — in a crowd",
+      "region": "southern China, Taiwan, Hong Kong"
+     }
+    ],
+    "etymology": {
+     "text": "打扰 ‘to disturb’ + 一下 ‘a moment, a bit’: ‘let me disturb you for a moment’.",
+     "src": "morphemes: 打扰 + 一下 (Wiktionary)"
+    },
+    "funFacts": [
+     "Leaving after a visit, 打扰了 ‘I have disturbed (you)’ is a polite goodbye."
+    ],
+    "pitfalls": [
+     "It is for interrupting or asking; to get past people say 借过, 让一下 or 劳驾.",
+     "一 changes tone before the 4th tone: yí xià."
+    ],
+    "subtleties": [
+     "Often combined: 不好意思，打扰一下，请问… — three polite openers in a row are normal."
+    ]
+   }
+  },
+  {
+   "id": "zh:laojia",
+   "lemma": "劳驾",
+   "trad": "勞駕",
+   "pinyin": "láo jià",
+   "pos": "INTJ",
+   "senses": [
+    "greet.excuseme"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files 勞駕 as a verb (“(polite, dated) excuse me; may I trouble you?”); it is used as a fixed polite formula, filed as INTJ like the other formulas of fd.02."
+    }
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral",
+     "dated"
+    ],
+    "connotation": "positive",
+    "feeling": "Old-Beijing courtesy — polite, slightly old-fashioned.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "excuse me; may I trouble you (to ask a favour or to get past)",
+      "register": [
+       "neutral",
+       "dated"
+      ],
+      "concept": "greet.excuseme"
+     }
+    ],
+    "examples": [
+     {
+      "text": "劳驾，劳驾，让我过去。",
+      "py": "Láojià, láojià, ràng wǒ guòqu.",
+      "tr": "Excuse me, excuse me, let me through.",
+      "register": "dated",
+      "context": "crowds",
+      "sense": "s1"
+     },
+     {
+      "text": "劳驾，您帮我看一下。",
+      "py": "Láojià, nín bāng wǒ kàn yíxià.",
+      "tr": "Would you mind having a look for me?",
+      "register": "dated",
+      "context": "favours",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "劳驾您",
+      "tr": "may I trouble you"
+     },
+     {
+      "text": "劳驾，借过",
+      "tr": "excuse me, let me pass"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "打扰一下",
+      "register": "neutral",
+      "nuance": "the usual ‘excuse me’ when interrupting"
+     },
+     {
+      "word": "麻烦你",
+      "register": "colloquial",
+      "nuance": "‘may I trouble you’ — the everyday way to ask a favour"
+     },
+     {
+      "word": "借光",
+      "register": "dated",
+      "nuance": "‘excuse me, let me pass’",
+      "region": "Beijing"
+     }
+    ],
+    "etymology": {
+     "text": "劳 ‘to trouble, to make toil’ + 驾 ‘carriage’, an honorific for the other person (as in 大驾 ‘your honour’): ‘trouble your carriage’.",
+     "src": "morphemes: 劳 + 驾 (Wiktionary: 勞駕 “(polite, dated) excuse me; may I trouble you?”)"
+    },
+    "funFacts": [
+     "劳驾 belongs to the courteous speech of old Beijing; you will hear it from older people and in films."
+    ],
+    "pitfalls": [
+     "Mostly northern and a little dated; younger speakers say 不好意思 or 麻烦你."
+    ],
+    "subtleties": [
+     "It works both for asking a favour and for asking people to step aside."
+    ]
+   }
+  },
+  {
+   "id": "zh:dui",
+   "lemma": "对",
+   "trad": "對",
+   "pinyin": "duì",
+   "pos": "ADJ",
+   "senses": [
+    "part.yes"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary: 對 “correct; true; right”; its use as an answer meaning ‘yes, that’s right’ is the course concept “yes”, which the gloss does not word."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Agreement: ‘right, exactly’ — the most common way to say yes to a statement.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "right, correct; (as an answer) yes, that’s right",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.yes"
+     },
+     {
+      "id": "s2",
+      "def": "towards, to (before a person: 他对我很好)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "a pair (measure word: 一对夫妻 ‘a couple’)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你是学生？——对。",
+      "py": "Nǐ shì xuésheng? — Duì.",
+      "tr": "You’re a student? — Yes.",
+      "register": "neutral",
+      "context": "answers",
+      "sense": "s1"
+     },
+     {
+      "text": "对，我是老师。",
+      "py": "Duì, wǒ shì lǎoshī.",
+      "tr": "Yes, I’m a teacher.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "你说得对。",
+      "py": "Nǐ shuō de duì.",
+      "tr": "You’re right.",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s1"
+     },
+     {
+      "text": "他对我很好。",
+      "py": "Tā duì wǒ hěn hǎo.",
+      "tr": "He is very good to me.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "对不对",
+      "tr": "right? isn’t it?"
+     },
+     {
+      "text": "不对",
+      "tr": "wrong; no, that’s not right"
+     },
+     {
+      "text": "对了",
+      "tr": "oh right; by the way"
+     },
+     {
+      "text": "说得对",
+      "tr": "well said, right"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "门当户对",
+      "tr": "the doors match, the houses match",
+      "kind": "idiom",
+      "meaning": "a well-matched marriage (families of equal standing)",
+      "register": "neutral"
+     },
+     {
+      "text": "对牛弹琴",
+      "tr": "to play the lute to a cow",
+      "kind": "idiom",
+      "meaning": "to talk to someone who cannot understand; to cast pearls before swine",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "是",
+      "register": "neutral",
+      "nuance": "‘yes, it is’ — to questions with 是"
+     },
+     {
+      "word": "是的",
+      "register": "neutral",
+      "nuance": "a soft, common ‘yes, that’s right’"
+     },
+     {
+      "word": "嗯",
+      "register": "colloquial",
+      "nuance": "‘mm-hm’"
+     },
+     {
+      "word": "没错",
+      "register": "colloquial",
+      "nuance": "‘exactly, no mistake’"
+     },
+     {
+      "word": "正确",
+      "register": "formal",
+      "nuance": "‘correct’ — answers in exams, official texts"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "不对",
+      "note": "wrong; that’s not right"
+     },
+     {
+      "word": "错",
+      "note": "wrong"
+     }
+    ],
+    "etymology": {
+     "text": "In the oracle-bone and bronze scripts an ideogrammic compound: 丵 (a digging tool) + 土 ‘earth’ + 又 ‘hand’; the character was later borrowed for ‘to reply’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese has no all-purpose ‘yes’: people repeat the verb (要。是。有。) or say 对 ‘right’ to confirm a statement.",
+     "对了！ is the classic ‘oh, by the way!’ that changes the topic."
+    ],
+    "pitfalls": [
+     "对 confirms that something is right; to accept an offer (你要吗？) answer 要, not 对."
+    ],
+    "subtleties": [
+     "对对对, said three times quickly, is a typical eager agreement."
+    ]
+   }
+  },
+  {
+   "id": "zh:bu",
+   "lemma": "不",
+   "trad": "不",
+   "pinyin": "bù",
+   "pos": "ADV",
+   "senses": [
+    "part.no",
+    "part.not"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Short, clear refusal or denial — the everyday ‘not’.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not (negates verbs, adjectives and 是: habits, wishes, the present and the future)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     },
+     {
+      "id": "s2",
+      "def": "no (as an answer)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.no"
+     },
+     {
+      "id": "s3",
+      "def": "cannot (between a verb and its complement: 听不懂)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我不喜欢洋葱。",
+      "tr": "I don't like onions.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Wǒ bù xǐhuan yángcōng."
+     },
+     {
+      "text": "他不是老师。",
+      "tr": "He isn't a teacher.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1",
+      "py": "Tā bú shì lǎoshī."
+     },
+     {
+      "text": "不，我不要。",
+      "tr": "No, I don't want it.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2",
+      "py": "Bù, wǒ bú yào."
+     },
+     {
+      "text": "不，不是这个。",
+      "tr": "No, not this one.",
+      "register": "neutral",
+      "context": "answers",
+      "sense": "s2",
+      "py": "Bù, bú shì zhège."
+     },
+     {
+      "text": "我听不懂。",
+      "tr": "I don't understand (what I hear).",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s3",
+      "py": "Wǒ tīng bu dǒng."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "不是",
+      "tr": "is not; no"
+     },
+     {
+      "text": "不要",
+      "tr": "don't!"
+     },
+     {
+      "text": "不客气",
+      "tr": "you're welcome"
+     },
+     {
+      "text": "不错",
+      "tr": "not bad, pretty good"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "不三不四",
+      "tr": "not three, not four",
+      "kind": "idiom",
+      "meaning": "shady, disreputable",
+      "register": "colloquial"
+     },
+     {
+      "text": "不见不散",
+      "tr": "don't leave until we meet",
+      "kind": "fixed expression",
+      "meaning": "see you there — I’ll wait until you come",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "没",
+      "register": "neutral",
+      "nuance": "negates 有 and says that something did not happen"
+     },
+     {
+      "word": "别",
+      "register": "neutral",
+      "nuance": "bié: ‘don’t!’ in commands"
+     },
+     {
+      "word": "非",
+      "register": "literary",
+      "nuance": "‘not, is not’ in written style (非卖品 ‘not for sale’)"
+     }
+    ],
+    "etymology": {
+     "text": "Originally a pictogram of the calyx of a flower; borrowed for the negation. A new character 柎 was later made for ‘calyx’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The textbook says 不 (bù) has 4th tone, yet you will hear it as bú almost as often — before every 4th-tone syllable."
+    ],
+    "pitfalls": [
+     "Tone sandhi: before a 4th tone 不 is said bú — 不是 bú shì, 不要 bú yào; in 听不懂 and A-not-A questions it is toneless.",
+     "Never 不有 — the negation of 有 is 没有.",
+     "For a past event use 没: 我昨天没去, not *我昨天不去."
+    ],
+    "subtleties": [
+     "不 can express will: 我不去 ‘I won’t go / I refuse to go’.",
+     "As an answer, Chinese prefers to repeat the verb: 你要吗？— 不要。 A bare 不 sounds blunt."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

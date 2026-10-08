@@ -1,0 +1,155 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:inda",
+   "lemma": "عِنْدَ",
+   "pos": "ADP",
+   "senses": [
+    "poss.have"
+   ],
+   "translit": "ʿinda",
+   "forms": {
+    "ADP": "عِنْدَ",
+    "ADP;1;SG": "عِنْدِي",
+    "ADP;2;SG;MASC": "عِنْدَكَ",
+    "ADP;2;SG;FEM": "عِنْدَكِ",
+    "ADP;3;SG;MASC": "عِنْدَهُ",
+    "ADP;3;SG;FEM": "عِنْدَهَا",
+    "ADP;1;PL": "عِنْدَنَا",
+    "ADP;2;PL;MASC": "عِنْدَكُمْ",
+    "ADP;2;PL;FEM": "عِنْدَكُنَّ",
+    "ADP;3;PL;MASC": "عِنْدَهُمْ",
+    "ADP;3;PL;FEM": "عِنْدَهُنَّ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday “have”: literally “at me, at you” — possession as location.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to have — عِنْدَ + pronoun suffix: عِنْدِي “at me” = I have",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.have"
+     },
+     {
+      "id": "s2",
+      "def": "at, near, with, at the house of",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "at the time of",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "in the opinion of",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "عِنْدِي سُؤَالٌ.",
+      "tr": "I have a question.",
+      "register": "neutral",
+      "context": "classroom",
+      "sense": "s1"
+     },
+     {
+      "text": "هَلْ عِنْدَكَ وَقْتٌ؟",
+      "tr": "Do you have time?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "عِنْدَهَا أَخٌ وَأُخْتَانِ.",
+      "tr": "She has a brother and two sisters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "نَلْتَقِي عِنْدَ الْبَابِ.",
+      "tr": "We’ll meet at the door.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s2"
+     },
+     {
+      "text": "أَسْتَيْقِظُ عِنْدَ الْفَجْرِ.",
+      "tr": "I wake up at dawn.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "عِنْدَ الْحَاجَةِ",
+      "tr": "when needed"
+     },
+     {
+      "text": "مِنْ عِنْدِ …",
+      "tr": "from (someone’s place)"
+     },
+     {
+      "text": "كَانَ عِنْدِي",
+      "tr": "I had"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَدَى",
+      "register": "formal",
+      "nuance": "at, with; لَدَيَّ = I have — the written, formal counterpart of عِنْدِي"
+     },
+     {
+      "word": "لِـ",
+      "register": "neutral",
+      "nuance": "for, belonging to: لِي أَخٌ = I have a brother — for relatives, rights and lasting relations"
+     },
+     {
+      "word": "مَعَ",
+      "register": "neutral",
+      "nuance": "with: مَعِي قَلَمٌ = I have a pen (on me, right now)"
+     }
+    ],
+    "etymology": {
+     "text": "A contraction of ع ن ن or ع ي ن (in the sense of viewing) and يَدَا (“hand”), i.e. “at hand, before one’s eyes”; compare لَدَى and لَدُنْ.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "عِنْدَمَا (“when”) is simply عِنْدَ + مَا."
+    ],
+    "pitfalls": [
+     "عِنْدَ is a preposition, not a verb: it does not change for tense. “I had” = كَانَ عِنْدِي; “I don’t have” = لَيْسَ عِنْدِي.",
+     "The thing you have is the grammatical subject, so it is nominative and usually indefinite: عِنْدِي جَزَرَةٌ (not جَزَرَةً).",
+     "Unvocalized عند can also be the verb عَنَدَ, “to be stubborn” (root of عِنَاد, stubbornness — Turkish inat)."
+    ],
+    "subtleties": [
+     "عِنْدِي is for what you own or keep at your place, لِي for relations and rights, مَعِي for what you carry right now."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

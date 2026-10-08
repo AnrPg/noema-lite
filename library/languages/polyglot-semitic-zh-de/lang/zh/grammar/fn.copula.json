@@ -1,0 +1,207 @@
+{
+ "function": "fn.copula",
+ "status": "realized",
+ "summary": "是 shì links a subject to a noun: 我是学生 ‘I am a student’. It never changes (我是, 你是, 他们是 — present or past) and is negated with 不: 不是 bú shì. Two things English does with ‘to be’ are done differently: before an adjective Chinese uses no verb at all (我很好 ‘I am fine’ — never *我是好), and ‘to be somewhere’ is 在 zài: 老师在这里 ‘the teacher is here’.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "English",
+    "Chinese",
+    "How"
+   ],
+   "rows": [
+    [
+     "I am a student.",
+     "我是学生。",
+     "noun → 是"
+    ],
+    [
+     "They are teachers.",
+     "他们是老师。",
+     "是 never changes"
+    ],
+    [
+     "He is not a student.",
+     "他不是学生。",
+     "不是 (bú shì)"
+    ],
+    [
+     "I am fine.",
+     "我很好。",
+     "adjective → no 是 (很 is the usual link)"
+    ],
+    [
+     "The teacher is here.",
+     "老师在这里。",
+     "place → 在"
+    ],
+    [
+     "This is a book.",
+     "这是一本书。",
+     "这 + 是 + noun"
+    ]
+   ],
+   "caption": "‘To be’ in Chinese"
+  },
+  {
+   "t": "flow",
+   "items": [
+    "我",
+    "是",
+    "学生"
+   ],
+   "caption": "Subject + 是 + noun"
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No 是 before adjectives",
+   "text": "我很好, 她很高 — adjectives act like verbs. *我是好 is a typical beginner’s mistake (adjectives come in S16)."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "是 — what something is",
+     "points": [
+      "我是老师。 I am a teacher.",
+      "这是门。 This is a door."
+     ]
+    },
+    {
+     "title": "在 — where something is",
+     "points": [
+      "老师在这里。 The teacher is here.",
+      "钥匙不在这里。 The keys are not here."
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "No articles after 是",
+   "text": "‘I am a student’ is 我是学生 — no word for ‘a’ is needed."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the thing after ‘to be’ a noun (what someone or something is)? → 是.",
+   "Is it an adjective (how something is)? → no 是: 我很好.",
+   "Is it a place (where something is)? → 在: 他在这里.",
+   "Is the sentence negative? → 不是 / 不在 (bú shì, bú zài).",
+   "Does the verb change for person or time? → never."
+  ],
+  "steps": [
+   "Subject first.",
+   "Choose 是 (noun), nothing (adjective) or 在 (place).",
+   "Negate with 不 directly before it."
+  ]
+ },
+ "traps": [
+  "*我是好 / *我是很好 → 我很好.",
+  "*他是在这里 → 他在这里.",
+  "*他没是老师 → 他不是老师 (是 is negated with 不 only).",
+  "*我是一个老师 is possible but usually just 我是老师 — no ‘a’ needed."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:shi",
+   "zh:zai"
+  ]
+ },
+ "needs": {
+  "NOUN": 4,
+  "PRON": 3
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.copula"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "‘She is a teacher.’",
+   "options": [
+    "她是老师。",
+    "她老师。",
+    "她在老师。"
+   ],
+   "answer": "她是老师。",
+   "why": "A noun after ‘to be’ needs 是."
+  },
+  {
+   "q": "‘I am fine.’",
+   "options": [
+    "我很好。",
+    "我是好。",
+    "我是很好。"
+   ],
+   "answer": "我很好。",
+   "why": "Adjectives take no 是."
+  },
+  {
+   "q": "‘The teacher is here.’",
+   "options": [
+    "老师在这里。",
+    "老师是这里。",
+    "老师是在这里。"
+   ],
+   "answer": "老师在这里。",
+   "why": "Being somewhere is 在."
+  },
+  {
+   "q": "‘He is not a student.’",
+   "options": [
+    "他不是学生。",
+    "他没是学生。",
+    "他是不学生。"
+   ],
+   "answer": "他不是学生。",
+   "why": "是 is negated with 不, placed right before it."
+  },
+  {
+   "q": "How is 不是 said?",
+   "options": [
+    "bú shì",
+    "bù shì",
+    "méi shì"
+   ],
+   "answer": "bú shì",
+   "why": "不 becomes bú before the 4th tone."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.copula",
+   "note": "Arabic has no ‘is’ in the present: ana ṭālib ‘I (am) a student’ — Chinese needs 是 between two nouns."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.copula",
+   "note": "Hebrew too: ani talmid ‘I (am) a pupil’; and like Chinese, nothing stands before an adjective."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.copula",
+   "note": "German sein conjugates (bin, bist, ist, sind) and is also used before adjectives (ich bin müde) — Chinese 我很累 has no verb."
+  }
+ ]
+}

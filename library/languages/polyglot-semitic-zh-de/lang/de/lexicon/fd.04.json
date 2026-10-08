@@ -1,0 +1,2863 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Haus",
+   "lemma": "Haus",
+   "pos": "NOUN",
+   "senses": [
+    "home.house"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Haus",
+    "N;ACC;SG": "Haus",
+    "N;DAT;SG": "Haus",
+    "N;GEN;SG": "Hauses",
+    "N;NOM;PL": "Häuser",
+    "N;ACC;PL": "Häuser",
+    "N;DAT;PL": "Häusern",
+    "N;GEN;PL": "Häuser"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A house – and, in zu Hause / nach Hause, home itself.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "house, building",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.house"
+     },
+     {
+      "id": "s2",
+      "def": "home – only in zu Hause (at home) and nach Hause (home, homewards)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "family, dynasty; firm; theatre audience (das Haus Habsburg, ein volles Haus)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Haus ist alt, aber schön.",
+      "tr": "The house is old but beautiful.",
+      "register": "neutral",
+      "context": "describing a home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir wohnen in einem kleinen Haus am Meer.",
+      "tr": "We live in a small house by the sea.",
+      "register": "neutral",
+      "context": "where I live",
+      "sense": "s1"
+     },
+     {
+      "text": "In unserer Straße stehen nur alte Häuser.",
+      "tr": "There are only old houses in our street.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich bin heute Abend zu Hause.",
+      "tr": "I’m at home tonight.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "Das Theater hatte gestern ein volles Haus.",
+      "tr": "The theatre had a full house yesterday.",
+      "register": "formal",
+      "context": "culture",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Haus bauen",
+      "tr": "to build a house"
+     },
+     {
+      "text": "ein Haus kaufen / mieten",
+      "tr": "to buy / rent a house"
+     },
+     {
+      "text": "zu Hause",
+      "tr": "at home"
+     },
+     {
+      "text": "nach Hause",
+      "tr": "home (direction)"
+     },
+     {
+      "text": "das Einfamilienhaus",
+      "tr": "detached family house"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "aus dem Häuschen sein",
+      "tr": "to be out of the little house",
+      "kind": "idiom",
+      "meaning": "to be beside oneself with excitement",
+      "register": "colloquial"
+     },
+     {
+      "text": "von Haus aus",
+      "tr": "from the house out",
+      "kind": "idiom",
+      "meaning": "originally, by training or by nature (Sie ist von Haus aus Lehrerin)",
+      "register": "neutral"
+     },
+     {
+      "text": "Haus und Hof",
+      "tr": "house and yard",
+      "kind": "fixed expression",
+      "meaning": "all one’s property (Haus und Hof verlieren)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Gebäude",
+      "register": "formal",
+      "nuance": "building – any structure, technical or official"
+     },
+     {
+      "word": "Heim",
+      "register": "formal",
+      "nuance": "home – emotional; also a care home or hostel"
+     },
+     {
+      "word": "Bude",
+      "register": "colloquial",
+      "nuance": "pad, digs – a small or student room/flat"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German hūs, from Old High German hūs, from Proto-West Germanic *hūs, from Proto-Germanic *hūsą. Cognate with Old Frisian hūs, Low German Hus, Huus, Dutch huis, Icelandic hús, Danish hus, Swedish hus, English house.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Bauhaus (1919), the famous school of design, means “building house”.",
+     "Haus and English house were the same word a thousand years ago: Old High German and Old English both said hūs."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: das Haus – die Häuser (dative den Häusern).",
+     "At home = zu Hause, (going) home = nach Hause – both keep an old dative -e (Austria and Switzerland also write zuhause)."
+    ],
+    "subtleties": [
+     "Haus is a building; your home as a feeling is das Zuhause or das Heim.",
+     "Dative dem Haus or (older, set phrases) dem Hause."
+    ]
+   }
+  },
+  {
+   "id": "de:Wohnung",
+   "lemma": "Wohnung",
+   "pos": "NOUN",
+   "senses": [
+    "home.flat"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Wohnung",
+    "N;ACC;SG": "Wohnung",
+    "N;DAT;SG": "Wohnung",
+    "N;GEN;SG": "Wohnung",
+    "N;NOM;PL": "Wohnungen",
+    "N;ACC;PL": "Wohnungen",
+    "N;DAT;PL": "Wohnungen",
+    "N;GEN;PL": "Wohnungen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Where most Germans live: a rented flat in a building.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "flat, apartment (part of a building)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.flat"
+     },
+     {
+      "id": "s2",
+      "def": "dwelling, accommodation, place where someone lives",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Unsere Wohnung hat drei Zimmer.",
+      "tr": "Our flat has three rooms.",
+      "register": "neutral",
+      "context": "describing a home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir suchen eine Wohnung in Berlin.",
+      "tr": "We are looking for a flat in Berlin.",
+      "register": "neutral",
+      "context": "house hunting",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Wohnung liegt im zweiten Stock.",
+      "tr": "The flat is on the second floor.",
+      "register": "neutral",
+      "context": "describing a home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Polizei durchsuchte die Wohnung.",
+      "tr": "The police searched the dwelling.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Wohnung mieten",
+      "tr": "to rent a flat"
+     },
+     {
+      "text": "eine Wohnung suchen",
+      "tr": "to look for a flat"
+     },
+     {
+      "text": "die Zweizimmerwohnung",
+      "tr": "two-room flat"
+     },
+     {
+      "text": "die Mietwohnung",
+      "tr": "rented flat"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Apartment",
+      "register": "neutral",
+      "nuance": "a small, often furnished modern flat"
+     },
+     {
+      "word": "Bleibe",
+      "register": "colloquial",
+      "nuance": "a place to stay, somewhere to sleep"
+     },
+     {
+      "word": "Domizil",
+      "register": "humorous",
+      "nuance": "residence – formal or jokingly grand"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German wonunge, from Old High German wonunga, from Proto-West Germanic *wunungu, equivalent to wohnen + -ung. Related to Dutch woning (“house, residence”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wohnung is wohnen (to live, dwell) + -ung; the same pattern makes the noun from many verbs: rechnen → Rechnung."
+    ],
+    "pitfalls": [
+     "A Wohnung is a flat; a whole building for one family is a Haus.",
+     "Every noun in -ung is feminine: die Wohnung, die Zeitung, die Rechnung."
+    ],
+    "subtleties": [
+     "A Dreizimmerwohnung counts the living room and bedrooms – kitchen and bathroom are not counted.",
+     "Germany has one of the lowest home-ownership rates in the EU – about half of households rent – so Wohnung and Miete (rent) are everyday words."
+    ]
+   }
+  },
+  {
+   "id": "de:Zimmer",
+   "lemma": "Zimmer",
+   "pos": "NOUN",
+   "senses": [
+    "home.room"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Zimmer",
+    "N;ACC;SG": "Zimmer",
+    "N;DAT;SG": "Zimmer",
+    "N;GEN;SG": "Zimmers",
+    "N;NOM;PL": "Zimmer",
+    "N;ACC;PL": "Zimmer",
+    "N;DAT;PL": "Zimmern",
+    "N;GEN;PL": "Zimmer"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A room with walls and a door – at home or in a hotel.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "room (in a flat, house or hotel)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.room"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Zimmer ist klein, aber hell.",
+      "tr": "My room is small but bright.",
+      "register": "neutral",
+      "context": "describing a home",
+      "sense": "s1"
+     },
+     {
+      "text": "Haben Sie noch ein Zimmer frei?",
+      "tr": "Do you have a room available?",
+      "register": "formal",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder spielen in ihrem Zimmer.",
+      "tr": "The children are playing in their room.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das Wohnzimmer",
+      "tr": "living room"
+     },
+     {
+      "text": "das Schlafzimmer",
+      "tr": "bedroom"
+     },
+     {
+      "text": "ein Zimmer buchen",
+      "tr": "to book a room"
+     },
+     {
+      "text": "Zimmer frei",
+      "tr": "vacancies (sign)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "das Zimmer hüten",
+      "tr": "to guard the room",
+      "kind": "idiom",
+      "meaning": "to stay in one’s room because one is ill",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Raum",
+      "register": "technical",
+      "nuance": "room as an enclosed space of any kind; also “space”"
+     },
+     {
+      "word": "Stube",
+      "register": "dated",
+      "nuance": "parlour, living room – old-fashioned or regional"
+     },
+     {
+      "word": "Kammer",
+      "register": "dated",
+      "nuance": "small room, chamber, storeroom"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German zimber, from Old High German zimbar, from Proto-West Germanic *timr, from Proto-Germanic *timrą, from Proto-Indo-European *dem- (“build, house”). Cognate with English timber, Swedish timmer, Dutch timmer (“building; construction; room”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Zimmer first meant timber – rooms were made of wood; a carpenter is still a Zimmermann.",
+     "The root *dem- “build, house” also gave Greek δόμος (domos, house) and Russian дом (dom)."
+    ],
+    "pitfalls": [
+     "Zimmer is a room with walls. “Room” as space is Platz: Hast du Platz? (Have you got room?), not *Zimmer.",
+     "Neuter, plural the same: das Zimmer – die Zimmer (dative den Zimmern)."
+    ],
+    "subtleties": [
+     "Zimmer is the everyday word in homes and hotels; Raum is more technical (Büroraum, Lagerraum) and also means space."
+    ]
+   }
+  },
+  {
+   "id": "de:Tür",
+   "lemma": "Tür",
+   "pos": "NOUN",
+   "senses": [
+    "home.door"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Tür",
+    "N;ACC;SG": "Tür",
+    "N;DAT;SG": "Tür",
+    "N;GEN;SG": "Tür",
+    "N;NOM;PL": "Türen",
+    "N;ACC;PL": "Türen",
+    "N;DAT;PL": "Türen",
+    "N;GEN;PL": "Türen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coming in, going out, knocking – doors open and close the home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "door; doorway",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.door"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mach bitte die Tür zu!",
+      "tr": "Please close the door!",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Es klopft an der Tür.",
+      "tr": "Someone is knocking at the door.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tür ist offen.",
+      "tr": "The door is open.",
+      "register": "neutral",
+      "context": "describing",
+      "sense": "s1"
+     },
+     {
+      "text": "Weihnachten steht vor der Tür.",
+      "tr": "Christmas is just around the corner.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Tür öffnen / aufmachen",
+      "tr": "to open the door"
+     },
+     {
+      "text": "die Tür schließen / zumachen",
+      "tr": "to close the door"
+     },
+     {
+      "text": "an die Tür klopfen",
+      "tr": "to knock at the door"
+     },
+     {
+      "text": "die Haustür",
+      "tr": "front door"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "mit der Tür ins Haus fallen",
+      "tr": "to fall into the house with the door",
+      "kind": "idiom",
+      "meaning": "to blurt something out without preparation",
+      "register": "neutral"
+     },
+     {
+      "text": "vor der Tür stehen",
+      "tr": "to stand in front of the door",
+      "kind": "idiom",
+      "meaning": "to be very near, imminent (Der Winter steht vor der Tür)",
+      "register": "neutral"
+     },
+     {
+      "text": "jemandem die Tür vor der Nase zuschlagen",
+      "tr": "to slam the door in front of someone’s nose",
+      "kind": "idiom",
+      "meaning": "to shut someone out rudely",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Tor",
+      "register": "neutral",
+      "nuance": "gate, large door (garage, garden, city)"
+     },
+     {
+      "word": "Pforte",
+      "register": "literary",
+      "nuance": "gate, portal; also the porter’s entrance of a hospital or firm"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German tür, from Old High German turi, from Proto-West Germanic *dur. Compare English door.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tür, English door, Greek θύρα (thýra) and Russian дверь (dver’) all come from one Indo-European word for door."
+    ],
+    "pitfalls": [
+     "Tür (a door you walk through) ≠ Tor (a gate, a big door; also a goal in football).",
+     "Feminine, plural Türen."
+    ],
+    "subtleties": [
+     "an der Tür (at the door, dative: where) vs an die Tür (to the door, accusative: where to) – two-way preposition."
+    ]
+   }
+  },
+  {
+   "id": "de:Fenster",
+   "lemma": "Fenster",
+   "pos": "NOUN",
+   "senses": [
+    "home.window"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Fenster",
+    "N;ACC;SG": "Fenster",
+    "N;DAT;SG": "Fenster",
+    "N;GEN;SG": "Fensters",
+    "N;NOM;PL": "Fenster",
+    "N;ACC;PL": "Fenster",
+    "N;DAT;PL": "Fenstern",
+    "N;GEN;PL": "Fenster"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light, air, a view – and the windows on a computer screen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "window",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.window"
+     },
+     {
+      "id": "s2",
+      "def": "window on a screen; time window (Zeitfenster)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mach bitte das Fenster auf, es ist so warm.",
+      "tr": "Please open the window, it’s so warm.",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Katze sitzt am Fenster.",
+      "tr": "The cat is sitting at the window.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Zimmer hat zwei große Fenster.",
+      "tr": "The room has two big windows.",
+      "register": "neutral",
+      "context": "describing a home",
+      "sense": "s1"
+     },
+     {
+      "text": "Schließ das Fenster und öffne die Datei neu.",
+      "tr": "Close the window and open the file again.",
+      "register": "technical",
+      "context": "computer",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das Fenster öffnen / aufmachen",
+      "tr": "to open the window"
+     },
+     {
+      "text": "aus dem Fenster schauen",
+      "tr": "to look out of the window"
+     },
+     {
+      "text": "am Fenster",
+      "tr": "at the window"
+     },
+     {
+      "text": "das Schaufenster",
+      "tr": "shop window"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Geld zum Fenster hinauswerfen",
+      "tr": "to throw money out of the window",
+      "kind": "idiom",
+      "meaning": "to waste money",
+      "register": "neutral"
+     },
+     {
+      "text": "weg vom Fenster sein",
+      "tr": "to be away from the window",
+      "kind": "idiom",
+      "meaning": "to be out of the picture, forgotten",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No real synonym: Scheibe is the pane, Luke a hatch or skylight.",
+    "etymology": {
+     "text": "From Middle High German vënster, from Old High German fënstar, from Proto-West Germanic *fenestr (“window”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Fenster came from Latin fenestra with Roman stone houses and glass; English window is a different word – Old Norse vindauga, “wind-eye”."
+    ],
+    "pitfalls": [
+     "Neuter, although many nouns in -er are masculine: das Fenster. Plural die Fenster, dative den Fenstern."
+    ],
+    "subtleties": [
+     "Germans love the Kippfenster: a window that both opens and tilts (kippen) for air."
+    ]
+   }
+  },
+  {
+   "id": "de:Wand",
+   "lemma": "Wand",
+   "pos": "NOUN",
+   "senses": [
+    "home.wall"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Wand",
+    "N;ACC;SG": "Wand",
+    "N;DAT;SG": "Wand",
+    "N;GEN;SG": "Wand",
+    "N;NOM;PL": "Wände",
+    "N;ACC;PL": "Wände",
+    "N;DAT;PL": "Wänden",
+    "N;GEN;PL": "Wände"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The inside walls of a room – pictures, shelves, thin walls and neighbours.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "wall (of a room; a partition)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.wall"
+     },
+     {
+      "id": "s2",
+      "def": "rock face, steep face of a mountain (die Nordwand)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "An der Wand hängt ein Bild.",
+      "tr": "A picture is hanging on the wall.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich stelle das Bett an die Wand.",
+      "tr": "I’m putting the bed against the wall.",
+      "register": "neutral",
+      "context": "moving furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Wände sind hier sehr dünn.",
+      "tr": "The walls are very thin here.",
+      "register": "neutral",
+      "context": "neighbours",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Nordwand des Eigers ist berühmt.",
+      "tr": "The north face of the Eiger is famous.",
+      "register": "neutral",
+      "context": "mountains",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "an der Wand",
+      "tr": "on the wall"
+     },
+     {
+      "text": "die Wand streichen",
+      "tr": "to paint the wall"
+     },
+     {
+      "text": "eine dünne Wand",
+      "tr": "a thin wall"
+     },
+     {
+      "text": "die Trennwand",
+      "tr": "partition"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Die Wände haben Ohren.",
+      "tr": "The walls have ears.",
+      "kind": "saying",
+      "meaning": "be careful, someone may be listening",
+      "register": "neutral"
+     },
+     {
+      "text": "gegen eine Wand reden",
+      "tr": "to talk against a wall",
+      "kind": "idiom",
+      "meaning": "to talk to a brick wall",
+      "register": "neutral"
+     },
+     {
+      "text": "den Teufel an die Wand malen",
+      "tr": "to paint the devil on the wall",
+      "kind": "idiom",
+      "meaning": "to imagine the worst and so invite it",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Mauer",
+      "register": "neutral",
+      "nuance": "stone or brick wall, mostly outdoors or free-standing"
+     },
+     {
+      "word": "Trennwand",
+      "register": "technical",
+      "nuance": "partition wall"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German want, from Old High German want, from Proto-Germanic *wanduz (“fence, wall”), from Proto-Indo-European *wendʰ- (“to turn; bend; wind; twist; braid; weave”). Cognate with English wand although developing a completely distinct meaning.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary traces Wand to a root meaning “to wind, to weave” – probably because early walls were woven from branches and plastered with clay."
+    ],
+    "pitfalls": [
+     "Wand = wall of a room; Mauer = a (stone) wall outside, around a garden or a city – die Berliner Mauer.",
+     "Plural with umlaut: die Wände."
+    ],
+    "subtleties": [
+     "an der Wand (where: dative) / an die Wand (where to: accusative)."
+    ]
+   }
+  },
+  {
+   "id": "de:Tisch",
+   "lemma": "Tisch",
+   "pos": "NOUN",
+   "senses": [
+    "home.table"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Tisch",
+    "N;ACC;SG": "Tisch",
+    "N;DAT;SG": "Tisch",
+    "N;GEN;SG": "Tisches",
+    "N;NOM;PL": "Tische",
+    "N;ACC;PL": "Tische",
+    "N;DAT;PL": "Tischen",
+    "N;GEN;PL": "Tische"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Meals, homework, meetings – the centre of the home.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "table (also a desk)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.table"
+     },
+     {
+      "id": "s2",
+      "def": "the table as a meal or the people at it (Zu Tisch!)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Essen steht auf dem Tisch.",
+      "tr": "The food is on the table.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir sitzen alle am Tisch.",
+      "tr": "We are all sitting at the table.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich brauche einen neuen Tisch für die Küche.",
+      "tr": "I need a new table for the kitchen.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "Bitte zu Tisch, das Essen ist fertig!",
+      "tr": "Please come to the table, dinner is ready!",
+      "register": "formal",
+      "context": "meals",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "den Tisch decken",
+      "tr": "to set the table"
+     },
+     {
+      "text": "am Tisch sitzen",
+      "tr": "to sit at the table"
+     },
+     {
+      "text": "der Schreibtisch",
+      "tr": "desk"
+     },
+     {
+      "text": "der Küchentisch",
+      "tr": "kitchen table"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "etwas unter den Tisch fallen lassen",
+      "tr": "to let something fall under the table",
+      "kind": "idiom",
+      "meaning": "to drop or ignore something",
+      "register": "neutral"
+     },
+     {
+      "text": "reinen Tisch machen",
+      "tr": "to make a clean table",
+      "kind": "idiom",
+      "meaning": "to clear things up, make a clean sweep",
+      "register": "neutral"
+     },
+     {
+      "text": "jemanden über den Tisch ziehen",
+      "tr": "to pull someone across the table",
+      "kind": "idiom",
+      "meaning": "to cheat someone in a deal",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Schreibtisch",
+      "register": "neutral",
+      "nuance": "desk – the table you work at"
+     },
+     {
+      "word": "Tafel",
+      "register": "formal",
+      "nuance": "a long festive table, a banquet"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German tisch, from Old High German tisc, from Proto-West Germanic *disk (“dish”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tisch, English dish and disk all go back through Latin discus to Greek δίσκος (dískos) – first a plate, then a table."
+    ],
+    "pitfalls": [
+     "Masculine: der Tisch, einen Tisch; plural die Tische.",
+     "auf dem Tisch (on top of it) – am Tisch (at the table, sitting there)."
+    ],
+    "subtleties": [
+     "A desk is a Schreibtisch, literally a “writing table”."
+    ]
+   }
+  },
+  {
+   "id": "de:Stuhl",
+   "lemma": "Stuhl",
+   "pos": "NOUN",
+   "senses": [
+    "home.chair"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Stuhl",
+    "N;ACC;SG": "Stuhl",
+    "N;DAT;SG": "Stuhl",
+    "N;GEN;SG": "Stuhles",
+    "N;NOM;PL": "Stühle",
+    "N;ACC;PL": "Stühle",
+    "N;DAT;PL": "Stühlen",
+    "N;GEN;PL": "Stühle"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sitting at the table, in class, at work.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chair",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.chair"
+     },
+     {
+      "id": "s2",
+      "def": "chair, seat of an office (der Lehrstuhl = professorship; der Heilige Stuhl = the Holy See)",
+      "register": [
+       "formal"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "stool, faeces",
+      "register": [
+       "technical"
+      ],
+      "domains": [
+       "medicine"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Setz dich bitte auf den Stuhl.",
+      "tr": "Please sit down on the chair.",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Am Tisch stehen vier Stühle.",
+      "tr": "There are four chairs at the table.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Stuhl ist nicht sehr bequem.",
+      "tr": "The chair isn’t very comfortable.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie hat einen Lehrstuhl für Physik.",
+      "tr": "She holds a chair in physics.",
+      "register": "formal",
+      "context": "university",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "auf einem Stuhl sitzen",
+      "tr": "to sit on a chair"
+     },
+     {
+      "text": "der Rollstuhl",
+      "tr": "wheelchair"
+     },
+     {
+      "text": "der Liegestuhl",
+      "tr": "deckchair"
+     },
+     {
+      "text": "Tisch und Stühle",
+      "tr": "table and chairs"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "zwischen zwei Stühlen sitzen",
+      "tr": "to sit between two chairs",
+      "kind": "idiom",
+      "meaning": "to be caught between two sides",
+      "register": "neutral"
+     },
+     {
+      "text": "jemandem den Stuhl vor die Tür setzen",
+      "tr": "to put someone’s chair outside the door",
+      "kind": "idiom",
+      "meaning": "to throw someone out, to fire someone",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Sessel",
+      "register": "regional",
+      "nuance": "armchair; in Austria also an ordinary chair",
+      "region": "AT"
+     },
+     {
+      "word": "Hocker",
+      "register": "neutral",
+      "nuance": "stool – a seat without a back"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German stuol, from Old High German stuol, from Proto-West Germanic *stōl. Cognate with Dutch stoel, English stool, Swedish stol; ultimately from Proto-Indo-European *steh₂- and thus related to stehen.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Stuhl is English stool – the German word kept the general meaning “seat”, the English one narrowed it."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Stühle.",
+     "At the doctor’s, Stuhl means stool (faeces): Stuhlgang."
+    ],
+    "subtleties": [
+     "In Austria a chair is often called Sessel; in Germany a Sessel is an armchair."
+    ]
+   }
+  },
+  {
+   "id": "de:Bett",
+   "lemma": "Bett",
+   "pos": "NOUN",
+   "senses": [
+    "home.bed"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Bett",
+    "N;ACC;SG": "Bett",
+    "N;DAT;SG": "Bett",
+    "N;GEN;SG": "Bettes",
+    "N;NOM;PL": "Betten",
+    "N;ACC;PL": "Betten",
+    "N;DAT;PL": "Betten",
+    "N;GEN;PL": "Betten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Sleep, rest, being ill – and the end of the day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bed",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.bed"
+     },
+     {
+      "id": "s2",
+      "def": "bed of a river or sea (das Flussbett)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe jetzt ins Bett.",
+      "tr": "I’m going to bed now.",
+      "register": "neutral",
+      "context": "bedtime",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder liegen schon im Bett.",
+      "tr": "The children are already in bed.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Hotelzimmer hat zwei Betten.",
+      "tr": "The hotel room has two beds.",
+      "register": "neutral",
+      "context": "hotel",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Sommer ist das Flussbett fast trocken.",
+      "tr": "In summer the river bed is almost dry.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ins Bett gehen",
+      "tr": "to go to bed"
+     },
+     {
+      "text": "im Bett liegen",
+      "tr": "to lie in bed"
+     },
+     {
+      "text": "das Bett machen",
+      "tr": "to make the bed"
+     },
+     {
+      "text": "das Doppelbett",
+      "tr": "double bed"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "das Bett hüten",
+      "tr": "to guard the bed",
+      "kind": "idiom",
+      "meaning": "to stay in bed because one is ill",
+      "register": "neutral"
+     },
+     {
+      "text": "sich ins gemachte Bett legen",
+      "tr": "to lie down in a made bed",
+      "kind": "idiom",
+      "meaning": "to profit from what others have prepared",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Liege",
+      "register": "neutral",
+      "nuance": "lounger, daybed"
+     },
+     {
+      "word": "Koje",
+      "register": "technical",
+      "nuance": "bunk on a ship or in a caravan"
+     },
+     {
+      "word": "Heia",
+      "register": "children",
+      "nuance": "bed in children’s language (in die Heia gehen)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German bet, bette, from Old High German betti, from Proto-West Germanic *badi, from Proto-Germanic *badją (“plot, grave, resting-place, bed”). Cognate with Dutch bed, English bed, Swedish bädd. Doublet of Beet.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bett and das Beet (a garden bed) are doublets – one word that split in two."
+    ],
+    "pitfalls": [
+     "Plural Betten (with -en, unusual for a neuter noun).",
+     "ins Bett (into bed: accusative, motion) – im Bett (in bed: dative, place)."
+    ],
+    "subtleties": [
+     "Bett is also the duvet in many regions: das Bett aufschütteln = to shake up the duvet."
+    ]
+   }
+  },
+  {
+   "id": "de:Schrank",
+   "lemma": "Schrank",
+   "pos": "NOUN",
+   "senses": [
+    "home.cupboard"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Schrank",
+    "N;ACC;SG": "Schrank",
+    "N;DAT;SG": "Schrank",
+    "N;GEN;SG": "Schrankes",
+    "N;NOM;PL": "Schränke",
+    "N;ACC;PL": "Schränke",
+    "N;DAT;PL": "Schränken",
+    "N;GEN;PL": "Schränke"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Where things are kept: clothes, plates, cups.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cupboard, wardrobe, cabinet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.cupboard"
+     },
+     {
+      "id": "s2",
+      "def": "a big, broad-shouldered man",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Teller stehen im Schrank.",
+      "tr": "The plates are in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Mein Kleiderschrank ist zu voll.",
+      "tr": "My wardrobe is too full.",
+      "register": "neutral",
+      "context": "bedroom",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Schlüssel liegt oben auf dem Schrank.",
+      "tr": "The key is on top of the cupboard.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Türsteher ist ein richtiger Schrank.",
+      "tr": "The bouncer is a real wardrobe of a man.",
+      "register": "colloquial",
+      "context": "nightlife",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Kleiderschrank",
+      "tr": "wardrobe"
+     },
+     {
+      "text": "der Küchenschrank",
+      "tr": "kitchen cupboard"
+     },
+     {
+      "text": "im Schrank",
+      "tr": "in the cupboard"
+     },
+     {
+      "text": "den Schrank aufmachen",
+      "tr": "to open the cupboard"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "nicht alle Tassen im Schrank haben",
+      "tr": "not to have all one’s cups in the cupboard",
+      "kind": "idiom",
+      "meaning": "to be a bit crazy",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kasten",
+      "register": "regional",
+      "nuance": "cupboard, wardrobe – in Austria and the south",
+      "region": "AT"
+     },
+     {
+      "word": "Spind",
+      "register": "neutral",
+      "nuance": "locker (school, barracks, gym)"
+     }
+    ],
+    "etymology": {
+     "text": "From Late Middle High German schranc, from Old High German scranc, from Proto-West Germanic *skrank, from Proto-Germanic *skrankaz (“grid, barrier”), probably derived from Proto-Indo-European *(s)ker- (“to bend, turn”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old meaning “barrier” lives on in die Schranke (barrier, level-crossing gate)."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Schränke.",
+     "A fridge is also a Schrank: der Kühlschrank (“cool cupboard”)."
+    ],
+    "subtleties": [
+     "In Austria and southern Germany a cupboard is often der Kasten."
+    ]
+   }
+  },
+  {
+   "id": "de:Lampe",
+   "lemma": "Lampe",
+   "pos": "NOUN",
+   "senses": [
+    "home.lamp"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Lampe",
+    "N;ACC;SG": "Lampe",
+    "N;DAT;SG": "Lampe",
+    "N;GEN;SG": "Lampe",
+    "N;NOM;PL": "Lampen",
+    "N;ACC;PL": "Lampen",
+    "N;DAT;PL": "Lampen",
+    "N;GEN;PL": "Lampen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light in the evening: on the desk, by the bed, on the ceiling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lamp, light (fitting)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "home.lamp"
+     },
+     {
+      "id": "s2",
+      "def": "light bulb (short for Glühlampe)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mach bitte die Lampe an.",
+      "tr": "Please switch on the lamp.",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Lampe auf dem Schreibtisch ist neu.",
+      "tr": "The lamp on the desk is new.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Lampe im Flur ist kaputt.",
+      "tr": "The lamp in the hallway is broken.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir müssen die Lampe wechseln.",
+      "tr": "We need to change the bulb.",
+      "register": "neutral",
+      "context": "repairs",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Lampe anmachen / ausmachen",
+      "tr": "to switch the lamp on / off"
+     },
+     {
+      "text": "die Stehlampe",
+      "tr": "floor lamp"
+     },
+     {
+      "text": "die Tischlampe",
+      "tr": "table lamp"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "sich einen auf die Lampe gießen",
+      "tr": "to pour oneself one on the lamp",
+      "kind": "idiom",
+      "meaning": "to have a drink (alcohol)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Leuchte",
+      "register": "technical",
+      "nuance": "light fitting – shops and catalogues"
+     },
+     {
+      "word": "Licht",
+      "register": "colloquial",
+      "nuance": "the light (Mach das Licht an!)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German lampe, from Latin lampada, from Latin lampas. Cognate with English lamp.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Latin lampas comes from Greek λαμπάς (lampás, torch), from λάμπω (lámpo, to shine) – so the word sounds familiar in Greek λάμπα, Russian лампа and Turkish lamba."
+    ],
+    "pitfalls": [
+     "Feminine: die Lampe, plural Lampen.",
+     "To switch on the light Germans often say das Licht anmachen."
+    ],
+    "subtleties": [
+     "Lampe is the object; Licht is the light it gives (Mach das Licht aus!)."
+    ]
+   }
+  },
+  {
+   "id": "de:Buch",
+   "lemma": "Buch",
+   "pos": "NOUN",
+   "senses": [
+    "obj.book"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Buch",
+    "N;ACC;SG": "Buch",
+    "N;DAT;SG": "Buch",
+    "N;GEN;SG": "Buches",
+    "N;NOM;PL": "Bücher",
+    "N;ACC;PL": "Bücher",
+    "N;DAT;PL": "Büchern",
+    "N;GEN;PL": "Bücher"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Reading, school, libraries – stories and knowledge.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "book",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.book"
+     },
+     {
+      "id": "s2",
+      "def": "books, accounts (records kept by a business)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich lese gerade ein spannendes Buch.",
+      "tr": "I’m reading an exciting book.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Buch liegt auf dem Tisch.",
+      "tr": "The book is on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie viele Bücher hast du?",
+      "tr": "How many books do you have?",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Firma führt genau Buch über alle Ausgaben.",
+      "tr": "The company keeps exact records of all expenses.",
+      "register": "technical",
+      "context": "business",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Buch lesen",
+      "tr": "to read a book"
+     },
+     {
+      "text": "ein Buch schreiben",
+      "tr": "to write a book"
+     },
+     {
+      "text": "das Kochbuch",
+      "tr": "cookbook"
+     },
+     {
+      "text": "das Wörterbuch",
+      "tr": "dictionary"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "ein Buch mit sieben Siegeln",
+      "tr": "a book with seven seals",
+      "kind": "idiom",
+      "meaning": "something impossible to understand (from the Book of Revelation)",
+      "register": "neutral"
+     },
+     {
+      "text": "wie ein offenes Buch",
+      "tr": "like an open book",
+      "kind": "idiom",
+      "meaning": "easy to read, unable to hide feelings",
+      "register": "neutral"
+     },
+     {
+      "text": "wie er im Buche steht",
+      "tr": "as it stands in the book",
+      "kind": "idiom",
+      "meaning": "typical, a textbook example (ein Lehrer, wie er im Buche steht)",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Band",
+      "register": "formal",
+      "nuance": "volume – one book of a series"
+     },
+     {
+      "word": "Schmöker",
+      "register": "colloquial",
+      "nuance": "a thick, entertaining book"
+     },
+     {
+      "word": "Wälzer",
+      "register": "colloquial",
+      "nuance": "a huge, heavy tome"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German buoch, from Old High German buoh, from Proto-West Germanic *bōk, from Proto-Germanic *bōks. Cognate with English book.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German has many “book” compounds: Wörterbuch (word book = dictionary), Tagebuch (day book = diary), Kochbuch (cookbook)."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Bücher (dative den Büchern)."
+    ],
+    "subtleties": [
+     "wie er im Buche steht (a textbook example) keeps an old dative ending -e."
+    ]
+   }
+  },
+  {
+   "id": "de:Stift",
+   "lemma": "Stift",
+   "pos": "NOUN",
+   "senses": [
+    "obj.pen"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Stift",
+    "N;ACC;SG": "Stift",
+    "N;DAT;SG": "Stift",
+    "N;GEN;SG": "Stiftes",
+    "N;NOM;PL": "Stifte",
+    "N;ACC;PL": "Stifte",
+    "N;DAT;PL": "Stiften",
+    "N;GEN;PL": "Stifte"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Anything to write or draw with: pen, pencil, felt-tip.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pen, pencil (any writing stick)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.pen"
+     },
+     {
+      "id": "s2",
+      "def": "pin, peg (short rod)",
+      "register": [
+       "technical"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "apprentice, youngster",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hast du einen Stift für mich?",
+      "tr": "Do you have a pen for me?",
+      "register": "informal",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Stifte liegen auf dem Schreibtisch.",
+      "tr": "The pens are on the desk.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Bitte schreiben Sie mit einem schwarzen Stift.",
+      "tr": "Please write with a black pen.",
+      "register": "formal",
+      "context": "filling in a form",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Teile werden mit einem Stift verbunden.",
+      "tr": "The parts are joined with a pin.",
+      "register": "technical",
+      "context": "assembly instructions",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Bleistift",
+      "tr": "pencil"
+     },
+     {
+      "text": "der Buntstift",
+      "tr": "coloured pencil"
+     },
+     {
+      "text": "der Filzstift",
+      "tr": "felt-tip pen"
+     },
+     {
+      "text": "einen Stift leihen",
+      "tr": "to borrow a pen"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kugelschreiber",
+      "register": "neutral",
+      "nuance": "ballpoint pen"
+     },
+     {
+      "word": "Kuli",
+      "register": "colloquial",
+      "nuance": "biro – short for Kugelschreiber"
+     },
+     {
+      "word": "Füller",
+      "register": "neutral",
+      "nuance": "fountain pen – still used in German schools"
+     },
+     {
+      "word": "Bleistift",
+      "register": "neutral",
+      "nuance": "pencil"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German stift / steft, from Old High German stift / steft, from Proto-West Germanic *stift, from Proto-Germanic *stiftaz (“pin, nail”); likely from the Proto-Indo-European root *steyp- (“stiff, erect”), whence also German steif (“stiff”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Kuli, the everyday word for a ballpoint, is a clipping of Kugelschreiber (“ball writer”)."
+    ],
+    "pitfalls": [
+     "der Stift (pen) ≠ das Stift (a religious foundation, a monastery) – same spelling, different gender and meaning.",
+     "Plural Stifte, dative Stiften."
+    ],
+    "subtleties": [
+     "Stift is the general word; if you need a ballpoint ask for a Kugelschreiber (Kuli), for a fountain pen a Füller."
+    ]
+   }
+  },
+  {
+   "id": "de:Papier",
+   "lemma": "Papier",
+   "pos": "NOUN",
+   "senses": [
+    "obj.paper"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Papier",
+    "N;ACC;SG": "Papier",
+    "N;DAT;SG": "Papier",
+    "N;GEN;SG": "Papiers",
+    "N;NOM;PL": "Papiere",
+    "N;ACC;PL": "Papiere",
+    "N;DAT;PL": "Papieren",
+    "N;GEN;PL": "Papiere"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Paper to write on – and, in the plural, documents.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "paper (the material; a sheet)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.paper"
+     },
+     {
+      "id": "s2",
+      "def": "Papiere (plural): documents, papers (identity papers)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "a paper, a written document (ein Positionspapier)",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich brauche ein Blatt Papier.",
+      "tr": "I need a sheet of paper.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "Papier, Glas und Plastik werfen wir getrennt weg.",
+      "tr": "We throw away paper, glass and plastic separately.",
+      "register": "neutral",
+      "context": "recycling",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Papier liegt neben dem Drucker.",
+      "tr": "The paper is next to the printer.",
+      "register": "neutral",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "Ihre Papiere, bitte!",
+      "tr": "Your papers, please!",
+      "register": "formal",
+      "context": "police check",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Blatt Papier",
+      "tr": "a sheet of paper"
+     },
+     {
+      "text": "das Altpapier",
+      "tr": "waste paper (for recycling)"
+     },
+     {
+      "text": "Papier und Stift",
+      "tr": "paper and pen"
+     },
+     {
+      "text": "auf dem Papier",
+      "tr": "on paper, in theory"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Papier ist geduldig.",
+      "tr": "Paper is patient.",
+      "kind": "proverb",
+      "meaning": "anything can be written down – that does not make it true or done",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Blatt",
+      "register": "neutral",
+      "nuance": "a sheet (of paper), also a leaf"
+     },
+     {
+      "word": "Zettel",
+      "register": "neutral",
+      "nuance": "slip of paper, note"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German papier, from Old French papier.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Papier goes back through Latin papyrus to Greek πάπυρος (pápyros); paper itself was invented in China – Chinese 纸 (zhǐ)."
+    ],
+    "pitfalls": [
+     "A sheet of paper is ein Blatt Papier, not *ein Papier.",
+     "Papiere (plural) means documents."
+    ],
+    "subtleties": [
+     "Genitive des Papiers or des Papieres."
+    ]
+   }
+  },
+  {
+   "id": "de:Telefon",
+   "lemma": "Telefon",
+   "pos": "NOUN",
+   "senses": [
+    "obj.phone"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Telefon",
+    "N;ACC;SG": "Telefon",
+    "N;DAT;SG": "Telefon",
+    "N;GEN;SG": "Telefons",
+    "N;NOM;PL": "Telefone",
+    "N;ACC;PL": "Telefone",
+    "N;DAT;PL": "Telefonen",
+    "N;GEN;PL": "Telefone"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses Telefon as “telephone”; the check looks for the whole word “phone” (the concept gloss)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Calls, ringing, “who’s that?” – the phone in general and the landline.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "telephone, phone",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.phone"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das Telefon klingelt!",
+      "tr": "The phone is ringing!",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Kann ich kurz dein Telefon benutzen?",
+      "tr": "Can I use your phone for a moment?",
+      "register": "informal",
+      "context": "asking a favour",
+      "sense": "s1"
+     },
+     {
+      "text": "Frau Weber ist gerade am Telefon.",
+      "tr": "Ms Weber is on the phone right now.",
+      "register": "formal",
+      "context": "office",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "am Telefon",
+      "tr": "on the phone"
+     },
+     {
+      "text": "ans Telefon gehen",
+      "tr": "to answer the phone"
+     },
+     {
+      "text": "das Telefon klingelt",
+      "tr": "the phone rings"
+     },
+     {
+      "text": "die Telefonnummer",
+      "tr": "phone number"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Handy",
+      "register": "neutral",
+      "nuance": "mobile phone"
+     },
+     {
+      "word": "Smartphone",
+      "register": "neutral",
+      "nuance": "smartphone"
+     },
+     {
+      "word": "Fernsprecher",
+      "register": "dated",
+      "nuance": "telephone – old official word (still on some public phones)"
+     }
+    ],
+    "etymology": {
+     "text": "Older spelling Telephon; from Ancient Greek τῆλε (têle, “afar”) + φωνή (phōnḗ, “sound; voice”). Wiktionary’s entry for English telephone notes that the English word was modelled on German Telephon.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Philipp Reis called his 1861 apparatus das Telephon – Greek τῆλε + φωνή, “far voice”.",
+     "The old official German word was der Fernsprecher, a German translation of the same idea."
+    ],
+    "pitfalls": [
+     "Neuter: das Telefon; plural die Telefone.",
+     "telefonieren mit + dative (to talk on the phone with), but jemanden anrufen (to call someone)."
+    ],
+    "subtleties": [
+     "Today das Telefon is the phone in general or the landline; the mobile in your pocket is das Handy."
+    ]
+   }
+  },
+  {
+   "id": "de:Handy",
+   "lemma": "Handy",
+   "pos": "NOUN",
+   "senses": [
+    "obj.phone"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Handy",
+    "N;ACC;SG": "Handy",
+    "N;DAT;SG": "Handy",
+    "N;GEN;SG": "Handys",
+    "N;NOM;PL": "Handys",
+    "N;ACC;PL": "Handys",
+    "N;DAT;PL": "Handys",
+    "N;GEN;PL": "Handys"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The mobile in every pocket – messages, calls, photos.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "mobile phone, cell phone",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.phone"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Mein Handy ist leer.",
+      "tr": "My phone’s battery is dead.",
+      "register": "colloquial",
+      "context": "everyday problems",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du mein Handy gesehen?",
+      "tr": "Have you seen my phone?",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Bitte schalten Sie Ihre Handys aus.",
+      "tr": "Please switch off your mobile phones.",
+      "register": "formal",
+      "context": "theatre",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "das Handy ausschalten",
+      "tr": "to switch off the phone"
+     },
+     {
+      "text": "mit dem Handy telefonieren",
+      "tr": "to call on the mobile"
+     },
+     {
+      "text": "die Handynummer",
+      "tr": "mobile number"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Smartphone",
+      "register": "neutral",
+      "nuance": "the modern touch-screen phone"
+     },
+     {
+      "word": "Mobiltelefon",
+      "register": "formal",
+      "nuance": "mobile telephone – official, technical"
+     },
+     {
+      "word": "Natel",
+      "register": "regional",
+      "nuance": "the mobile in Switzerland",
+      "region": "CH"
+     }
+    ],
+    "etymology": {
+     "text": "Perhaps from English handie-talkie (a Motorola product name modelled on walkie-talkie) or from handheld transceiver; others see it as a German formation, Hand (“hand”) + -i, possibly short for Handfunktelefon.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Handy is a German “pseudo-anglicism”: it looks English but English speakers say mobile or cell phone."
+    ],
+    "pitfalls": [
+     "Handy is not English for a phone: in English it means “useful”. A German saying Handy in London will not be understood.",
+     "Plural Handys (with -s, like most nouns in -y)."
+    ],
+    "subtleties": [
+     "In Switzerland the mobile is often called Natel (an old brand name)."
+    ]
+   }
+  },
+  {
+   "id": "de:Schlüssel",
+   "lemma": "Schlüssel",
+   "pos": "NOUN",
+   "senses": [
+    "obj.key"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Schlüssel",
+    "N;ACC;SG": "Schlüssel",
+    "N;DAT;SG": "Schlüssel",
+    "N;GEN;SG": "Schlüssels",
+    "N;NOM;PL": "Schlüssel",
+    "N;ACC;PL": "Schlüssel",
+    "N;DAT;PL": "Schlüsseln",
+    "N;GEN;PL": "Schlüssel"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Locking up, getting in – and solutions (the key to …).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "key (for a lock)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.key"
+     },
+     {
+      "id": "s2",
+      "def": "key, solution, code (der Schlüssel zum Erfolg)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "spanner, wrench (Schraubenschlüssel); clef in music (Notenschlüssel)",
+      "register": [
+       "technical"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich habe meinen Schlüssel vergessen.",
+      "tr": "I forgot my key.",
+      "register": "neutral",
+      "context": "everyday problems",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Schlüssel steckt in der Tür.",
+      "tr": "The key is in the door.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Geduld ist der Schlüssel zum Erfolg.",
+      "tr": "Patience is the key to success.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s2"
+     },
+     {
+      "text": "Gib mir mal den Schlüssel für die Schraube.",
+      "tr": "Hand me the spanner for the screw.",
+      "register": "colloquial",
+      "context": "repairs",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Hausschlüssel",
+      "tr": "house key"
+     },
+     {
+      "text": "der Autoschlüssel",
+      "tr": "car key"
+     },
+     {
+      "text": "den Schlüssel umdrehen",
+      "tr": "to turn the key"
+     },
+     {
+      "text": "der Schlüsselbund",
+      "tr": "bunch of keys"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; a code or password is a Code or Passwort, a solution a Lösung.",
+    "etymology": {
+     "text": "From Middle High German slüȥȥel, from Old High German sluȥȥil, from Proto-West Germanic *slutil, derived from *sleutan (“to close”), from which also modern German schließen. Cognate with Dutch sleutel and English slot.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Schlüssel is “the closer”: it belongs to schließen (to close, to lock)."
+    ],
+    "pitfalls": [
+     "Plural = singular: der Schlüssel – die Schlüssel (dative den Schlüsseln).",
+     "Masculine: den Schlüssel, einen Schlüssel."
+    ],
+    "subtleties": [
+     "Many technical keys are Schlüssel too: Notenschlüssel (clef), Schraubenschlüssel (spanner)."
+    ]
+   }
+  },
+  {
+   "id": "de:Tasche",
+   "lemma": "Tasche",
+   "pos": "NOUN",
+   "senses": [
+    "obj.bag"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Tasche",
+    "N;ACC;SG": "Tasche",
+    "N;DAT;SG": "Tasche",
+    "N;GEN;SG": "Tasche",
+    "N;NOM;PL": "Taschen",
+    "N;ACC;PL": "Taschen",
+    "N;DAT;PL": "Taschen",
+    "N;GEN;PL": "Taschen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bags and pockets – carrying things with you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bag (handbag, shopping bag, school bag)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.bag"
+     },
+     {
+      "id": "s2",
+      "def": "pocket (in clothes)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Meine Tasche ist sehr schwer.",
+      "tr": "My bag is very heavy.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Sie packt ihre Tasche für die Reise.",
+      "tr": "She is packing her bag for the trip.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Handy ist in meiner Tasche.",
+      "tr": "The phone is in my bag.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "Er hat die Hände in den Taschen.",
+      "tr": "He has his hands in his pockets.",
+      "register": "neutral",
+      "context": "describing someone",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Handtasche",
+      "tr": "handbag"
+     },
+     {
+      "text": "die Einkaufstasche",
+      "tr": "shopping bag"
+     },
+     {
+      "text": "die Hosentasche",
+      "tr": "trouser pocket"
+     },
+     {
+      "text": "in der Tasche",
+      "tr": "in the bag / pocket"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "etwas in der Tasche haben",
+      "tr": "to have something in the pocket",
+      "kind": "idiom",
+      "meaning": "to have something secured (den Vertrag in der Tasche haben)",
+      "register": "colloquial"
+     },
+     {
+      "text": "jemandem auf der Tasche liegen",
+      "tr": "to lie on someone’s pocket",
+      "kind": "idiom",
+      "meaning": "to live at someone’s expense",
+      "register": "colloquial"
+     },
+     {
+      "text": "tief in die Tasche greifen",
+      "tr": "to reach deep into the pocket",
+      "kind": "idiom",
+      "meaning": "to pay a lot",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Tüte",
+      "register": "neutral",
+      "nuance": "paper or plastic bag"
+     },
+     {
+      "word": "Beutel",
+      "register": "neutral",
+      "nuance": "pouch, cloth bag"
+     },
+     {
+      "word": "Rucksack",
+      "register": "neutral",
+      "nuance": "backpack"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German tasche, from Old High German taska, tasca. Further origin unknown. Cognate with Dutch tas, Middle Low German tasche (“bag, pouch”), Old Norse taska (“bag, purse”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary calls the origin of Tasche unknown – a common word with a mysterious past."
+    ],
+    "pitfalls": [
+     "Tasche is both bag and pocket; Taschengeld is pocket money.",
+     "A paper or plastic bag from a shop is a Tüte, not a Tasche."
+    ],
+    "subtleties": [
+     "die Tasche ≠ die Tasse (cup): one letter, a very different thing."
+    ]
+   }
+  },
+  {
+   "id": "de:Tasse",
+   "lemma": "Tasse",
+   "pos": "NOUN",
+   "senses": [
+    "obj.cup"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Tasse",
+    "N;ACC;SG": "Tasse",
+    "N;DAT;SG": "Tasse",
+    "N;GEN;SG": "Tasse",
+    "N;NOM;PL": "Tassen",
+    "N;ACC;PL": "Tassen",
+    "N;DAT;PL": "Tassen",
+    "N;GEN;PL": "Tassen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A cup of coffee or tea, a break, a chat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cup (with a handle, for hot drinks), mug",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.cup"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Möchtest du eine Tasse Kaffee?",
+      "tr": "Would you like a cup of coffee?",
+      "register": "informal",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tasse ist leer.",
+      "tr": "The cup is empty.",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tassen stehen im Schrank.",
+      "tr": "The cups are in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Tasse Tee / Kaffee",
+      "tr": "a cup of tea / coffee"
+     },
+     {
+      "text": "die Kaffeetasse",
+      "tr": "coffee cup"
+     },
+     {
+      "text": "die Untertasse",
+      "tr": "saucer"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "nicht alle Tassen im Schrank haben",
+      "tr": "not to have all the cups in the cupboard",
+      "kind": "idiom",
+      "meaning": "to be crazy",
+      "register": "colloquial"
+     },
+     {
+      "text": "Hoch die Tassen!",
+      "tr": "Cups up!",
+      "kind": "fixed expression",
+      "meaning": "cheers! (raise your glasses)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Becher",
+      "register": "neutral",
+      "nuance": "mug, beaker – no saucer; also a paper cup (Kaffeebecher)"
+     },
+     {
+      "word": "Pott",
+      "register": "regional",
+      "nuance": "big mug (northern German)",
+      "region": "north"
+     }
+    ],
+    "etymology": {
+     "text": "From Late Middle High German *tasse, from Middle French tasse, from Arabic طَاس (ṭās), variant of طَسْت (ṭast), from Middle Persian tšt’ (tašt). Cognate with Modern French tasse, Dutch tas.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Tasse came from Arabic طَاس (ṭās, a bowl) through French – the Arabic word is also behind Turkish tas (bowl)."
+    ],
+    "pitfalls": [
+     "No “of”: eine Tasse Kaffee (a cup of coffee), zwei Tassen Tee.",
+     "die Tasse (cup) ≠ die Tasche (bag)."
+    ],
+    "subtleties": [
+     "A Becher is a mug without a saucer; Tasse is the classic cup, often with a saucer (Untertasse)."
+    ]
+   }
+  },
+  {
+   "id": "de:Glas",
+   "lemma": "Glas",
+   "pos": "NOUN",
+   "senses": [
+    "obj.glass"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Glas",
+    "N;ACC;SG": "Glas",
+    "N;DAT;SG": "Glas",
+    "N;GEN;SG": "Glases",
+    "N;NOM;PL": "Gläser",
+    "N;ACC;PL": "Gläser",
+    "N;DAT;PL": "Gläsern",
+    "N;GEN;PL": "Gläser"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Drinking glasses, jars, the material – and a toast.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "glass (for drinking)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.glass"
+     },
+     {
+      "id": "s2",
+      "def": "glass (the material)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "jar (ein Glas Honig)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ein Glas Wasser, bitte.",
+      "tr": "A glass of water, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Gläser sind im Schrank.",
+      "tr": "The glasses are in the cupboard.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Flasche ist aus Glas.",
+      "tr": "The bottle is made of glass.",
+      "register": "neutral",
+      "context": "materials",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich kaufe ein Glas Honig.",
+      "tr": "I’m buying a jar of honey.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Glas Wasser / Wein",
+      "tr": "a glass of water / wine"
+     },
+     {
+      "text": "das Weinglas",
+      "tr": "wine glass"
+     },
+     {
+      "text": "aus Glas",
+      "tr": "made of glass"
+     },
+     {
+      "text": "das Marmeladenglas",
+      "tr": "jam jar"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "zu tief ins Glas geschaut haben",
+      "tr": "to have looked too deep into the glass",
+      "kind": "idiom",
+      "meaning": "to have drunk too much",
+      "register": "humorous"
+     },
+     {
+      "text": "Wer im Glashaus sitzt, sollte nicht mit Steinen werfen.",
+      "tr": "Who sits in a glass house should not throw stones.",
+      "kind": "proverb",
+      "meaning": "don’t criticise others for faults you have yourself",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Becher",
+      "register": "neutral",
+      "nuance": "beaker, tumbler without a stem; plastic cup"
+     },
+     {
+      "word": "Kelch",
+      "register": "literary",
+      "nuance": "goblet, chalice"
+     }
+    ],
+    "etymology": {
+     "text": "From Old High German glas, gles, from Proto-West Germanic *glas, from Proto-Germanic *glasą, from Proto-Indo-European *ǵʰel- (“to shine, glimmer, glow”). Compare Low German Glas, Dutch glas, English glass.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Glas comes from a root meaning “to shine” – a fitting origin for glass."
+    ],
+    "pitfalls": [
+     "Plural with umlaut: die Gläser. But after a number, as a measure: zwei Glas Bier (two glasses of beer).",
+     "Glasses for the eyes are a Brille, not Gläser."
+    ],
+    "subtleties": [
+     "ein Glas Wasser – no “of”, like eine Tasse Kaffee."
+    ]
+   }
+  },
+  {
+   "id": "de:Teller",
+   "lemma": "Teller",
+   "pos": "NOUN",
+   "senses": [
+    "obj.plate"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Teller",
+    "N;ACC;SG": "Teller",
+    "N;DAT;SG": "Teller",
+    "N;GEN;SG": "Tellers",
+    "N;NOM;PL": "Teller",
+    "N;ACC;PL": "Teller",
+    "N;DAT;PL": "Tellern",
+    "N;GEN;PL": "Teller"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Meals: a full plate, an empty plate, a plate of soup.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "plate, dish (to eat from)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "obj.plate"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Stell bitte die Teller auf den Tisch.",
+      "tr": "Please put the plates on the table.",
+      "register": "informal",
+      "context": "setting the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Teller ist leer.",
+      "tr": "The plate is empty.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich esse einen Teller Suppe.",
+      "tr": "I’m having a plate of soup.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein tiefer Teller",
+      "tr": "a soup plate"
+     },
+     {
+      "text": "ein flacher Teller",
+      "tr": "a dinner plate"
+     },
+     {
+      "text": "den Teller leer essen",
+      "tr": "to clear one’s plate"
+     },
+     {
+      "text": "der Suppenteller",
+      "tr": "soup plate"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "über den Tellerrand schauen",
+      "tr": "to look over the rim of the plate",
+      "kind": "idiom",
+      "meaning": "to think outside the box, look beyond one’s own field",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Platte",
+      "register": "neutral",
+      "nuance": "serving platter"
+     },
+     {
+      "word": "Schale",
+      "register": "neutral",
+      "nuance": "bowl, dish"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German teller (“plate”), from Middle French tailloir (“plate, cutting board”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Teller comes from French tailloir, from tailler “to cut”: a medieval plate was a board to cut meat on."
+    ],
+    "pitfalls": [
+     "English teller (bank clerk) is a false friend.",
+     "Plural = singular: die Teller (dative den Tellern)."
+    ],
+    "subtleties": [
+     "ein Teller Suppe – no “of”, like eine Tasse Kaffee."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

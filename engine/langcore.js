@@ -150,7 +150,7 @@
         const n = C.nodes[nid];
         X.applies[nid] = applies(n, code, X.typology);
         if (X.applies[nid]) for (const c of n.concepts) if (!X.owner[c]) X.owner[c] = nid;
-        X.prepared[nid] = X.applies[nid] && (!!src.lexicon[nid] || !n.concepts.length);
+        X.prepared[nid] = X.applies[nid] && (!!src.lexicon[nid] || !n.concepts.length) && !(data.course.draft || []).includes(nid);   // a node still being written is not offered yet
         const file = src.lexicon[nid] || { lexemes: [], absent: [] };
         X.byNode[nid] = [];
         for (const x of file.lexemes || []) {
@@ -178,6 +178,7 @@
         const req = new Set();
         const walk = ks => ks.forEach(k => { if (k.parts) walk(k.parts); else if (!k.p && k.l) req.add(k.l); });
         walk(s.tokens || []);
+        if ([...req].some(l => !X.lex[l])) continue;   // a sentence with a word that is not in the course (yet) is never offered
         const S = { ...s, req: [...req] }; X.sentences.push(S); X.sentenceById[s.id] = S;
       }
       C.lang[code] = X;
@@ -385,7 +386,7 @@
         let hit = null;
         for (let n = Math.min(X.maxWord, chars.length - i); n >= 1; n--) { const w = chars.slice(i, i + n).join(''); if (X.forms.has(w)) { hit = w; break; } }
         if (hit) { out.push({ t: hit, matches: X.forms.get(hit) }); i += [...hit].length; }
-        else { out.push({ t: ch, matches: [], unknown: true }); i++; }
+        else { const prev = out[out.length - 1]; if (prev && prev.unknown && !prev.p) prev.t += ch; else out.push({ t: ch, matches: [], unknown: true }); i++; }   // unknown characters stay together (a name: 小明)
       }
       return out;
     }
@@ -433,7 +434,12 @@
     else if (code === 'de' && lx.pos === 'NOUN') { out.push(['article', ARTICLE[lx.gender] + ' ' + (get('N;NOM;SG;DEF') || lx.lemma)]); if (get('N;GEN;SG')) out.push(['genitive', (lx.gender === 'FEM' ? 'der ' : 'des ') + get('N;GEN;SG')]); if (get('N;NOM;PL')) out.push(['plural', 'die ' + get('N;NOM;PL')]); }
     else if (code === 'de' && lx.pos === 'VERB') { for (const [l, c] of [['er/sie/es', 'V;PRS;3;SG'], ['du', 'V;PRS;2;SG']]) if (get(c)) out.push([l, get(c)]); if (lx.aux) out.push(['perfect with', lx.aux]); }
     else if (lx.pos === 'NOUN' && lx.class === 'collective') { out.push(['collective', lx.lemma]); if (lx.unit) out.push(['one (unit noun)', lx.unit]); if (get('N;NOM;PL;INDF')) out.push(['counted plural', get('N;NOM;PL;INDF')]); }
-    else if (code === 'he' && lx.pos === 'NOUN') { if (get('N;PL;INDF')) out.push(['plural', get('N;PL;INDF')]); if (get('N;SG;DEF')) out.push(['with the article', get('N;SG;DEF')]); }
+    else if (code === 'he' && lx.pos === 'NOUN') { if (get('N;SG;FEM;INDF')) out.push(['feminine', get('N;SG;FEM;INDF')]); if (get('N;PL;INDF')) out.push(['plural', get('N;PL;INDF')]); if (get('N;SG;DEF')) out.push(['with the article', get('N;SG;DEF')]); }
+    else if (code === 'ar' && lx.pos === 'NOUN') {
+      const pick = (...cs) => { for (const c of cs) { const f = get(c); if (f) return f; } return null; };
+      const fem = pick('N;NOM;SG;FEM;INDF'), pl = pick('N;NOM;PL;INDF', 'N;NOM;PL;MASC;INDF'), plf = pick('N;NOM;PL;FEM;INDF'), def = pick('N;NOM;SG;DEF', 'N;NOM;SG;MASC;DEF');
+      if (fem) out.push(['feminine', fem]); if (pl) out.push(['plural', pl]); if (plf) out.push(['feminine plural', plf]); if (def) out.push(['with the article', def]);
+    }
     else if (lx.pos === 'VERB' && lx.root) { out.push(['root', lx.root]); if (lx.binyan) out.push(['binyan', lx.binyan]); if (lx.verbForm) out.push(['verb form', lx.verbForm]); }
     if (lx.gender && !(code === 'de' && lx.pos === 'NOUN')) out.push(['gender', G[lx.gender]]);
     if (lx.root && lx.pos !== 'VERB') out.push(['root', lx.root]);
@@ -482,15 +488,20 @@
     '1': '1st person', '2': '2nd person', '3': '3rd person' };
   /** A feature cell in words: V;PRS;3;SG → “present · 3rd person · singular” */
   const cellLabel = cell => cellParts(canon(cell)).slice(1).map(t => TAG_LABEL[t] || t).join(' · ') || 'basic form';
-  const VARIANT_LABEL = { Polarity: { NEG: 'Make it negative' }, Mood: { INT: 'Make it a question' }, Number: { PL: 'Make it plural', SG: 'Make it singular' },
-    Definiteness: { DEF: 'Make it definite (“the”)', INDF: 'Make it indefinite' } };
-  const variantLabel = v => Object.entries(v || {}).map(([k, x]) => VARIANT_LABEL[k]?.[x] || `${k}: ${x}`).join(' · ');
+  const VARIANT_LABEL = { Polarity: { NEG: 'Make it negative', POS: 'Make it positive' }, Mood: { INT: 'Make it a question', IMP: 'Make it a command' },
+    Number: { PL: 'Make it plural', SG: 'Make it singular', DU: 'Make it dual (two)' }, Definiteness: { DEF: 'Make it definite (“the”)', INDF: 'Make it indefinite' },
+    Gender: { FEM: 'Say it about / to a woman', MASC: 'Say it about / to a man' }, Addressee: { FEM: 'Say it to a woman', MASC: 'Say it to a man' },
+    Tense: { PST: 'Put it in the past', FUT: 'Put it in the future', PRS: 'Put it in the present' }, Aspect: { PFV: 'Say that it happened (completed)', IPFV: 'Say that it is going on' },
+    Formality: { formal: 'Say it politely (formal)', informal: 'Say it informally' }, Address: { formal: 'Say it politely (formal)', informal: 'Say it informally' },
+    Deixis: { FAR: 'Point to something farther away (that)', NEAR: 'Point to something near (this)' },
+    QuestionForm: { 'A-not-A': 'Ask with A-not-A (是不是, 要不要)' }, QuestionMarker: { intonation: 'Ask with intonation only' } };
+  const variantLabel = v => Object.entries(v || {}).map(([k, x]) => VARIANT_LABEL[k]?.[x] || VARIANT_LABEL[k]?.[String(x).split(' ')[0].toLowerCase()] || (/formal/i.test(x) ? (/informal/i.test(x) ? VARIANT_LABEL.Formality.informal : VARIANT_LABEL.Formality.formal) : `${k}: ${x}`)).join(' · ');
   const GENDER_WORD = { MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter' };
   function shuffled(a, rng) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   const uniqStr = a => [...new Set(a)];
   /** The pieces of a sentence a learner puts in order: its written words (a word with attached prefixes stays one tile). */
   const sentenceTiles = s => (s.tokens || []).filter(k => !k.p).map(k => k.t);
-  const endPunct = s => (s.tokens || []).filter(k => k.p === true).map(k => k.t).join('');
+  const endPunct = s => { const ps = (s.tokens || []).filter(k => k.p === true); const last = (s.tokens || [])[s.tokens.length - 1]; return last && last.p === true ? last.t : ''; };
   const cmpText = (code, t) => nfc(t).replace(/[\p{P}\s]+/gu, ' ').trim().toLowerCase();
   /** A wrong tile for a sentence: another form of one of its inflected words (never a form that is in the sentence). */
   function wrongTile(C, code, s, rng) {
@@ -544,9 +555,11 @@
       } else if (gen.type === 'sentence_meaning') {
         const ss = bankFor(gen);
         const all = selectSentences(C, code, { known: K });
+        // two sentences mean the same when their words stand for the same concepts (再见 / 拜拜, 你 / 您): never offer one as a wrong meaning of the other
+        const conceptKey = o => o.req.map(l => (X.lex[l]?.senses || [])[0] || l).sort().join('|');
         for (const s of ss) {
-          const reqKey = s.req.slice().sort().join('|');
-          const others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && !(o.frame === s.frame && o.req.slice().sort().join('|') === reqKey)), rng);
+          const key = conceptKey(s);
+          const others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && conceptKey(o) !== key), rng);
           const near = others.filter(o => o.req.some(l => s.req.includes(l))), wrong = uniqStr([...near, ...others].map(o => o.gloss)).slice(0, 3);
           if (wrong.length < 2) continue;
           items.push({ type: 'choose', kind: 'meaning', fn: fid, lang: code, sentence: s.id, prompt: s.text, ask: 'What does it mean?', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss });

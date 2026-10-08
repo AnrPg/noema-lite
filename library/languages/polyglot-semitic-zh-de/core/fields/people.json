@@ -1,0 +1,166 @@
+{
+ "field": "people",
+ "title": "People and jobs",
+ "subgroups": [
+  {
+   "id": "person",
+   "title": "People"
+  },
+  {
+   "id": "job",
+   "title": "Jobs"
+  }
+ ],
+ "sources": [
+  "Basic words for people; the common jobs — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "person.man",
+   "gloss": "man",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "person.woman",
+   "gloss": "woman",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "person.boy",
+   "gloss": "boy",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "person.girl",
+   "gloss": "girl",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "person.child",
+   "gloss": "child",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "person.person",
+   "gloss": "person",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "person.people",
+   "gloss": "people",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "person.friend",
+   "gloss": "friend",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "person.student",
+   "gloss": "student (at school or university)",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "person.teacher",
+   "gloss": "teacher",
+   "subgroup": "person",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "job.doctor",
+   "gloss": "doctor",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "job.nurse",
+   "gloss": "nurse",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "job.engineer",
+   "gloss": "engineer",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "job.driver",
+   "gloss": "driver",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "job.cook",
+   "gloss": "cook (the job)",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "job.seller",
+   "gloss": "shop assistant, salesperson",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "job.worker",
+   "gloss": "worker",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "job.farmer",
+   "gloss": "farmer",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "job.police",
+   "gloss": "police officer",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "job.lawyer",
+   "gloss": "lawyer",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "job.artist",
+   "gloss": "artist",
+   "subgroup": "job",
+   "tier": 1,
+   "rank": 21
+  }
+ ]
+}

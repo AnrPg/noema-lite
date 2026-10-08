@@ -1,0 +1,172 @@
+{
+ "lexemes": [
+  {
+   "id": "de:haben",
+   "lemma": "haben",
+   "pos": "VERB",
+   "senses": [
+    "poss.have"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "haben",
+    "V;PRS;1;SG": "habe",
+    "V;PRS;2;SG": "hast",
+    "V;PRS;3;SG": "hat",
+    "V;PRS;1;PL": "haben",
+    "V;PRS;2;PL": "habt",
+    "V;PRS;3;PL": "haben",
+    "V;PST;3;SG": "hatte",
+    "V;PTCP;PST": "gehabt"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Possession, but also everyday states: hunger, time, fear, luck.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to have, to own, to possess",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.have"
+     },
+     {
+      "id": "s2",
+      "def": "to have (a state or feeling): Hunger, Durst, Angst, Zeit, Glück haben",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "auxiliary of the perfect: Ich habe gegessen.",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich habe eine Gurke und zwei Tomaten.",
+      "tr": "I have a cucumber and two tomatoes.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du ein Auto?",
+      "tr": "Do you have a car?",
+      "register": "informal",
+      "context": "everyday conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Wir haben Hunger!",
+      "tr": "We're hungry! (lit. We have hunger)",
+      "register": "informal",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "Haben Sie heute Zeit?",
+      "tr": "Do you have time today?",
+      "register": "formal",
+      "context": "at work",
+      "sense": "s2"
+     },
+     {
+      "text": "Er hat den ganzen Kuchen gegessen.",
+      "tr": "He has eaten the whole cake.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Hunger haben",
+      "tr": "to be hungry"
+     },
+     {
+      "text": "Zeit haben",
+      "tr": "to have time"
+     },
+     {
+      "text": "Recht haben",
+      "tr": "to be right"
+     },
+     {
+      "text": "Lust haben",
+      "tr": "to feel like (doing something)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Wer hat, der hat.",
+      "tr": "Who has, has.",
+      "kind": "saying",
+      "meaning": "a shrugging, often ironic remark about someone who has (or can afford) what others do not",
+      "register": "colloquial"
+     }
+    ],
+    "particleVerbs": [
+     {
+      "text": "anhaben",
+      "tr": "to have on, to wear"
+     },
+     {
+      "text": "vorhaben",
+      "tr": "to plan, to intend"
+     },
+     {
+      "text": "aufhaben",
+      "tr": "to have homework; to wear (a hat)"
+     },
+     {
+      "text": "dabeihaben",
+      "tr": "to have with one"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "besitzen",
+      "register": "formal",
+      "nuance": "to own, possess – legal or written style, only for ownership"
+     },
+     {
+      "word": "verfügen über",
+      "register": "formal",
+      "nuance": "to have at one's disposal – official style"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "From Middle High German haben, from Old High German habēn, from Proto-West Germanic *habbjan, from Proto-Germanic *habjaną, from Proto-Indo-European *kap- (“to grasp”). Cognates include Dutch hebben, English have, Danish have.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German “has” hunger, thirst, fear and luck where English “is” hungry, thirsty, afraid and lucky."
+    ],
+    "pitfalls": [
+     "du hast, er hat – the b disappears in these two forms.",
+     "Age is said with sein, not haben: Ich bin 20 (Jahre alt), never *Ich habe 20 Jahre."
+    ],
+    "subtleties": [
+     "Wir haben Montag / Wir haben Mai: “it is Monday / it is May” – haben for the date.",
+     "“There is/are” is es gibt, not haben (except regionally)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

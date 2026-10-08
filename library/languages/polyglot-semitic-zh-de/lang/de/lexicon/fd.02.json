@@ -1,0 +1,2277 @@
+{
+ "lexemes": [
+  {
+   "id": "de:ja",
+   "lemma": "ja",
+   "pos": "INTJ",
+   "senses": [
+    "part.yes"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Agreement and confirmation; as a little modal word, “as you know”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes (answer to a question)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.yes"
+     },
+     {
+      "id": "s2",
+      "def": "modal particle: as we know, after all, obviously (Das ist ja toll!)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Magst du Tomaten? – Ja, sehr!",
+      "tr": "Do you like tomatoes? – Yes, very much!",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "Ja, ich komme gleich.",
+      "tr": "Yes, I'm coming right away.",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist ja eine Überraschung!",
+      "tr": "Well, that's a surprise!",
+      "register": "informal",
+      "context": "surprise",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ja, bitte",
+      "tr": "yes, please"
+     },
+     {
+      "text": "ja, gern",
+      "tr": "yes, gladly"
+     },
+     {
+      "text": "ja klar",
+      "tr": "yes, of course (colloquial)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "jemandem das Jawort geben",
+      "tr": "to give someone the yes-word",
+      "kind": "idiom",
+      "meaning": "to say “I do” – to marry someone",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "jawohl",
+      "register": "formal",
+      "nuance": "emphatic “yes, sir” – military or very deferential; also ironic"
+     },
+     {
+      "word": "genau",
+      "register": "colloquial",
+      "nuance": "exactly, right – agreement in conversation"
+     },
+     {
+      "word": "doch",
+      "register": "neutral",
+      "nuance": "yes – but ONLY as the answer that contradicts a negative question or statement"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German ja, from Old High German ja, jā (“yes”), from Proto-Germanic *ja (“yes”). Cognate with Yiddish יאָ (yo).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The famous unstressed ja in the middle of sentences (Du bist ja nass!) is one of the German modal particles that have no direct English equivalent."
+    ],
+    "pitfalls": [
+     "Answering a negative question with ja is ambiguous: Magst du keine Tomaten? – Doch! (Yes, I do.) / Nein. (No, I don't.)"
+    ],
+    "subtleties": [
+     "Mid-sentence, unstressed ja is not “yes” but a modal particle that marks something as obvious or surprising."
+    ]
+   }
+  },
+  {
+   "id": "de:nein",
+   "lemma": "nein",
+   "pos": "INTJ",
+   "senses": [
+    "part.no"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses nein as “no”; the concept gloss “no (the answer)” has no other word the check can find."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "negative",
+    "feeling": "A clear refusal or denial – softened with danke.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "no (answer to a question)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.no"
+     },
+     {
+      "id": "s2",
+      "def": "exclamation of surprise or disbelief (Nein, wirklich?)",
+      "register": [
+       "informal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Willst du noch Kaffee? – Nein, danke.",
+      "tr": "Do you want more coffee? – No, thank you.",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s1"
+     },
+     {
+      "text": "Nein, das ist keine Gurke, das ist eine Zucchini.",
+      "tr": "No, that's not a cucumber, it's a zucchini.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Nein! Wirklich? Das glaube ich nicht.",
+      "tr": "No! Really? I don't believe it.",
+      "register": "informal",
+      "context": "surprise",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "nein, danke",
+      "tr": "no, thank you"
+     },
+     {
+      "text": "Nein sagen",
+      "tr": "to say no"
+     },
+     {
+      "text": "ein klares Nein",
+      "tr": "a clear no"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Nein heißt nein.",
+      "tr": "No means no.",
+      "kind": "saying",
+      "meaning": "a refusal must be respected",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "nee",
+      "register": "colloquial",
+      "nuance": "relaxed spoken “nope”, very common in northern and central Germany",
+      "region": "north"
+     },
+     {
+      "word": "nö",
+      "register": "colloquial",
+      "nuance": "casual, slightly cheeky “nah”"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German nein, from a contraction of Old High German ni ein (“not one”). Compare Old English nān, from ne ān (Modern English none, further contracted to no).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "nein literally means “not one” – the same pattern as English none (ne + one)."
+    ],
+    "pitfalls": [
+     "nein answers a question; inside a sentence the negation is nicht or kein: Ich mag keine Zwiebeln (not *Ich mag nein Zwiebeln)."
+    ],
+    "subtleties": [
+     "To contradict a negative statement you say doch, not ja: Du magst keinen Spinat. – Doch!"
+    ]
+   }
+  },
+  {
+   "id": "de:hallo",
+   "lemma": "hallo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The all-purpose hello – friendly, everyday, also on the phone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hello, hi – greeting when you meet someone (informal to neutral)",
+      "register": [
+       "informal"
+      ],
+      "concept": "greet.hello"
+     },
+     {
+      "id": "s2",
+      "def": "hello – answering the phone or calling for attention (Hallo? Ist da jemand?)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "Hallo?! – disbelief or protest (“excuse me?!”)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hallo, Anna! Wie geht’s?",
+      "tr": "Hi Anna! How are you?",
+      "register": "informal",
+      "context": "meeting a friend",
+      "sense": "s1"
+     },
+     {
+      "text": "Hallo zusammen!",
+      "tr": "Hello, everyone!",
+      "register": "informal",
+      "context": "greeting a group",
+      "sense": "s1"
+     },
+     {
+      "text": "Hallo? Ist da jemand?",
+      "tr": "Hello? Is anybody there?",
+      "register": "neutral",
+      "context": "calling out",
+      "sense": "s2"
+     },
+     {
+      "text": "Hallo?! Das ist mein Platz!",
+      "tr": "Excuse me?! That’s my seat!",
+      "register": "colloquial",
+      "context": "protest",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Hallo zusammen!",
+      "tr": "Hello, everybody!"
+     },
+     {
+      "text": "Hallo, Leute!",
+      "tr": "Hi, guys!"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Guten Tag",
+      "register": "formal",
+      "nuance": "the polite daytime greeting for strangers and at work"
+     },
+     {
+      "word": "Hi",
+      "register": "colloquial",
+      "nuance": "from English; young people, messages"
+     },
+     {
+      "word": "Grüß Gott",
+      "register": "regional",
+      "nuance": "the usual greeting in Bavaria and Austria, polite (lit. “God greet [you]”)",
+      "region": "AT"
+     },
+     {
+      "word": "Servus",
+      "register": "regional",
+      "nuance": "hello and goodbye among friends in Bavaria and Austria",
+      "region": "AT"
+     },
+     {
+      "word": "Moin",
+      "register": "regional",
+      "nuance": "hello at any time of day in northern Germany",
+      "region": "north"
+     },
+     {
+      "word": "Grüezi",
+      "register": "regional",
+      "nuance": "the polite hello in Switzerland",
+      "region": "CH"
+     }
+    ],
+    "etymology": {
+     "text": "Originally used as a call to the ferryman on the other side of the bank; related to Old High German holā, emphatic imperative of holōn (“to fetch, used especially in hailing a ferryman”). Also see French holà (“hey! stop!”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "hallo began as a shout to call the ferryman across a river: holā! = “fetch (me)!”."
+    ],
+    "pitfalls": [
+     "Hallo is fine with friends, colleagues and most young people; with an older stranger, in an office or in a formal letter use Guten Tag (letters: Sehr geehrte Frau …)."
+    ],
+    "subtleties": [
+     "On the phone many Germans answer with their surname (Weber?) rather than Hallo.",
+     "Hallo works at any time of day; Guten Morgen / Tag / Abend depend on the hour."
+    ]
+   }
+  },
+  {
+   "id": "de:guten_Tag",
+   "lemma": "guten Tag",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Polite and correct – the greeting for shops, offices, strangers and older people.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hello, good day, good afternoon – polite greeting from late morning to early evening",
+      "register": [
+       "formal"
+      ],
+      "concept": "greet.hello"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Guten Tag, Frau Weber!",
+      "tr": "Good afternoon, Mrs Weber!",
+      "register": "formal",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "Guten Tag, ich hätte gern zwei Brötchen.",
+      "tr": "Hello, I’d like two bread rolls, please.",
+      "register": "neutral",
+      "context": "bakery",
+      "sense": "s1"
+     },
+     {
+      "text": "Er sagt nicht einmal guten Tag.",
+      "tr": "He doesn’t even say hello.",
+      "register": "neutral",
+      "context": "complaining",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jemandem guten Tag sagen",
+      "tr": "to say hello to someone"
+     },
+     {
+      "text": "Guten Tag zusammen!",
+      "tr": "Hello, everyone! (polite)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Tag! / Tach!",
+      "register": "colloquial",
+      "nuance": "short form in relaxed speech"
+     },
+     {
+      "word": "Grüß Gott",
+      "register": "regional",
+      "nuance": "polite greeting in the south and in Austria",
+      "region": "AT"
+     },
+     {
+      "word": "Hallo",
+      "register": "informal",
+      "nuance": "friends, colleagues, young people"
+     }
+    ],
+    "etymology": {
+     "text": "Short for ich wünsche einen guten Tag! (“I wish [you] a good day!”), hence the accusative form of the adjective. Compare Yiddish אַ גוטן טאָג (a gutn tog).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Yiddish greeting a gutn tog is the same formula."
+    ],
+    "pitfalls": [
+     "guten, with -en: it is an accusative (einen guten Tag wünschen), never *gute Tag.",
+     "Guten Tag greets; to wish a good day when leaving say Schönen Tag noch!"
+    ],
+    "subtleties": [
+     "In southern Germany and Austria Grüß Gott is more usual than Guten Tag; in the north Moin.",
+     "In casual speech it shrinks to Tag! or Tach!"
+    ]
+   }
+  },
+  {
+   "id": "de:guten_Morgen",
+   "lemma": "guten Morgen",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodmorning"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first greeting of the day – at home, at work, in the bakery.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good morning – greeting until about 10–11 a.m.",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodmorning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Guten Morgen! Hast du gut geschlafen?",
+      "tr": "Good morning! Did you sleep well?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Guten Morgen, Herr Schulz!",
+      "tr": "Good morning, Mr Schulz!",
+      "register": "formal",
+      "context": "office",
+      "sense": "s1"
+     },
+     {
+      "text": "Guten Morgen zusammen! Ist noch Kaffee da?",
+      "tr": "Good morning, everyone! Is there any coffee left?",
+      "register": "neutral",
+      "context": "kitchen at work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jemandem guten Morgen sagen",
+      "tr": "to say good morning to someone"
+     },
+     {
+      "text": "Guten Morgen zusammen!",
+      "tr": "Good morning, everyone!"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Morgen!",
+      "register": "colloquial",
+      "nuance": "short form among colleagues and family"
+     },
+     {
+      "word": "Moin",
+      "register": "regional",
+      "nuance": "northern German hello at any time of day",
+      "region": "north"
+     }
+    ],
+    "etymology": {
+     "text": "guten (masculine accusative of gut, “good”) + Morgen (“morning”), as in ich wünsche einen guten Morgen. Compare Yiddish גוט־מאָרגן (gut-morgn).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Moin looks like a short form of Morgen, but Wiktionary calls its origin unclear – and it is used even at night."
+    ],
+    "pitfalls": [
+     "Accusative guten, like guten Tag and guten Abend.",
+     "der Morgen = the morning, but morgen (small m) = tomorrow: Bis morgen! = See you tomorrow."
+    ],
+    "subtleties": [
+     "Colloquially just Morgen! – in northern Germany Moin is said all day, not only in the morning."
+    ]
+   }
+  },
+  {
+   "id": "de:guten_Abend",
+   "lemma": "guten Abend",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodevening"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Arriving in the evening: a restaurant, a visit, the news on TV.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good evening – greeting when you meet someone from about 6 p.m.",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodevening"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Guten Abend, haben Sie einen Tisch für zwei?",
+      "tr": "Good evening, do you have a table for two?",
+      "register": "formal",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Guten Abend, meine Damen und Herren!",
+      "tr": "Good evening, ladies and gentlemen!",
+      "register": "formal",
+      "context": "TV news",
+      "sense": "s1"
+     },
+     {
+      "text": "Guten Abend, Leute, kommt rein!",
+      "tr": "Evening, guys, come in!",
+      "register": "informal",
+      "context": "visit",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Guten Abend zusammen!",
+      "tr": "Good evening, everyone!"
+     },
+     {
+      "text": "jemandem guten Abend sagen",
+      "tr": "to say good evening to someone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Abend!",
+      "register": "colloquial",
+      "nuance": "short form"
+     },
+     {
+      "word": "Hallo",
+      "register": "informal",
+      "nuance": "any time of day, among friends"
+     }
+    ],
+    "etymology": {
+     "text": "By surface analysis, guten (masculine accusative of gut (“good”)) + Abend (“evening”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The 8 p.m. television news, the Tagesschau, traditionally begins with Guten Abend, meine Damen und Herren."
+    ],
+    "pitfalls": [
+     "Guten Abend is said when you arrive or meet; when you leave in the evening say Schönen Abend noch! or Gute Nacht (late)."
+    ],
+    "subtleties": [
+     "Like guten Tag it is an accusative of wishing: (ich wünsche einen) guten Abend."
+    ]
+   }
+  },
+  {
+   "id": "de:gute_Nacht",
+   "lemma": "gute Nacht",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodnight"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bedtime, parting late at night.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good night – said when going to bed or parting late at night",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodnight"
+     },
+     {
+      "id": "s2",
+      "def": "Na dann gute Nacht! – “then we’re done for / forget it”",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Gute Nacht, schlaf gut!",
+      "tr": "Good night, sleep well!",
+      "register": "informal",
+      "context": "bedtime",
+      "sense": "s1"
+     },
+     {
+      "text": "Gute Nacht, Kinder!",
+      "tr": "Good night, children!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Wenn der Zug ausfällt, na dann gute Nacht!",
+      "tr": "If the train is cancelled, then we’ve had it!",
+      "register": "colloquial",
+      "context": "complaining",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Gute Nacht, schlaf gut!",
+      "tr": "good night, sleep well"
+     },
+     {
+      "text": "jemandem gute Nacht sagen",
+      "tr": "to say good night to someone"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Na dann gute Nacht!",
+      "tr": "Well then, good night!",
+      "kind": "colloquial",
+      "meaning": "then all is lost / that will never work",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Schlaf gut!",
+      "register": "informal",
+      "nuance": "sleep well – to family and friends"
+     },
+     {
+      "word": "Nacht!",
+      "register": "colloquial",
+      "nuance": "short form"
+     }
+    ],
+    "funFacts": [
+     "Brahms’s lullaby begins Guten Abend, gut’ Nacht – with the old short form gut’ Nacht."
+    ],
+    "pitfalls": [
+     "gute, not *guten: Nacht is feminine (die Nacht), so the accusative ending is -e, while Tag, Morgen and Abend are masculine (guten).",
+     "Never a greeting on arrival – at 11 p.m. you still arrive with Guten Abend."
+    ],
+    "subtleties": [
+     "Children often hear the rhyme Gute Nacht, schlaf gut, träum was Schönes!"
+    ]
+   }
+  },
+  {
+   "id": "de:auf_Wiedersehen",
+   "lemma": "auf Wiedersehen",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodbye"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The polite goodbye – shops, offices, people you say Sie to.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "goodbye – polite (lit. “until we see each other again”)",
+      "register": [
+       "formal"
+      ],
+      "concept": "greet.goodbye"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Vielen Dank und auf Wiedersehen!",
+      "tr": "Thank you very much and goodbye!",
+      "register": "formal",
+      "context": "shop",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf Wiedersehen, Frau Doktor!",
+      "tr": "Goodbye, doctor!",
+      "register": "formal",
+      "context": "doctor’s office",
+      "sense": "s1"
+     },
+     {
+      "text": "Sag den Gästen auf Wiedersehen!",
+      "tr": "Say goodbye to the guests!",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "jemandem auf Wiedersehen sagen",
+      "tr": "to say goodbye to someone"
+     },
+     {
+      "text": "Auf Wiederhören!",
+      "tr": "goodbye (on the phone)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Tschüss",
+      "register": "informal",
+      "nuance": "bye – friends, family, and today often in shops"
+     },
+     {
+      "word": "Wiedersehen!",
+      "register": "colloquial",
+      "nuance": "short form"
+     },
+     {
+      "word": "Ade",
+      "register": "regional",
+      "nuance": "goodbye in Swabia and the south-west",
+      "region": "south"
+     }
+    ],
+    "etymology": {
+     "text": "Literally, “until our reunion; that we may see again”. Probably a calque of French au revoir. Compare Italian arrivederci, Dutch tot ziens.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Auf Wiederhören is a German speciality: a goodbye that only works on the phone or radio."
+    ],
+    "pitfalls": [
+     "On the phone you cannot “see again”: say Auf Wiederhören (“until we hear each other again”).",
+     "Wiedersehen (to see again) is written with ie; wider (against) has no e."
+    ],
+    "subtleties": [
+     "Auf Wiedersehen is polite but not cold: shop staff say it to every customer. With friends it sounds stiff – use Tschüss."
+    ]
+   }
+  },
+  {
+   "id": "de:tschüss",
+   "lemma": "tschüss",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodbye"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses tschüss as “bye, cheers, ciao” – the informal goodbye; the check looks for the word “goodbye”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday bye – warm, quick, used by almost everyone.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bye, cheers, ciao – informal goodbye",
+      "register": [
+       "informal"
+      ],
+      "concept": "greet.goodbye"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Tschüss, bis morgen!",
+      "tr": "Bye, see you tomorrow!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Tschüss, Mama!",
+      "tr": "Bye, Mum!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Danke, tschüss!",
+      "tr": "Thanks, bye!",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Tschüss, bis bald!",
+      "tr": "bye, see you soon"
+     },
+     {
+      "text": "Tschüss zusammen!",
+      "tr": "bye, everyone"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Auf Wiedersehen",
+      "register": "formal",
+      "nuance": "the polite goodbye"
+     },
+     {
+      "word": "Ciao",
+      "register": "colloquial",
+      "nuance": "from Italian, very common"
+     },
+     {
+      "word": "Servus",
+      "register": "regional",
+      "nuance": "bye (and hello) in Bavaria and Austria",
+      "region": "AT"
+     },
+     {
+      "word": "Ade",
+      "register": "regional",
+      "nuance": "bye in Swabia and the south-west",
+      "region": "south"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from German Low German tschüß from earlier adjüs, from Dutch adjuus, from Spanish adiós or French adieu. (Compare the origin of moin.)",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "tschüss is a distant cousin of Spanish adiós and French adieu – “(I commend you) to God”."
+    ],
+    "pitfalls": [
+     "Spelling: tschüss and tschüs are both correct; tschüß is the old spelling."
+    ],
+    "subtleties": [
+     "Once northern, tschüss is now used all over Germany, and in shops it is often neutral rather than informal; in the south people also say Servus, Ade or Pfiat di."
+    ]
+   }
+  },
+  {
+   "id": "de:bis_später",
+   "lemma": "bis später",
+   "pos": "INTJ",
+   "senses": [
+    "greet.seeyou"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "See you in a little while – the same day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "see you later (the same day)",
+      "register": [
+       "informal"
+      ],
+      "concept": "greet.seeyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich gehe einkaufen, bis später!",
+      "tr": "I’m going shopping – see you later!",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Tschüss, bis später!",
+      "tr": "Bye, see you later!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Tschüss, bis später!",
+      "tr": "bye, see you later"
+     },
+     {
+      "text": "Also, bis später!",
+      "tr": "well, see you later"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "bis dann",
+      "register": "informal",
+      "nuance": "till then – a time already agreed"
+     },
+     {
+      "word": "bis gleich",
+      "register": "informal",
+      "nuance": "see you in a moment (minutes)"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "bis später is for the same day; for another day say bis bald, bis morgen or bis dann."
+    ],
+    "subtleties": [
+     "bis + a time word makes many goodbyes: bis morgen (tomorrow), bis Montag, bis dann (till then)."
+    ]
+   }
+  },
+  {
+   "id": "de:bis_bald",
+   "lemma": "bis bald",
+   "pos": "INTJ",
+   "senses": [
+    "greet.seeyou"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "See you soon – a friendly goodbye with no date fixed.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "see you soon",
+      "register": [
+       "informal"
+      ],
+      "concept": "greet.seeyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Danke für den Abend, bis bald!",
+      "tr": "Thanks for the evening, see you soon!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Viele Grüße und bis bald!",
+      "tr": "Best wishes and see you soon!",
+      "register": "neutral",
+      "context": "end of an e-mail",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Tschüss und bis bald!",
+      "tr": "bye and see you soon"
+     },
+     {
+      "text": "Hoffentlich bis bald!",
+      "tr": "hopefully see you soon"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "bis später",
+      "register": "informal",
+      "nuance": "later the same day"
+     },
+     {
+      "word": "bis zum nächsten Mal",
+      "register": "neutral",
+      "nuance": "until next time"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "bald means soon, not bold: bis bald = see you soon."
+    ],
+    "subtleties": [
+     "bis bald often closes friendly e-mails and messages, after Viele Grüße."
+    ]
+   }
+  },
+  {
+   "id": "de:wie_gehts",
+   "lemma": "wie geht's",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files wie geht’s as a “phrase”; a greeting formula is an interjection (INTJ) in this course."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The quick friendly “how are you?” – an answer is expected, but a short one.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how are you? how’s it going? (short, informal)",
+      "register": [
+       "informal"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hallo, Tom, wie geht's?",
+      "tr": "Hi Tom, how are you?",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Na, wie geht's? – Gut, und dir?",
+      "tr": "Well, how’s it going? – Fine, and you?",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wie geht's dir?",
+      "tr": "how are you? (du)"
+     },
+     {
+      "text": "Wie geht's, wie steht's?",
+      "tr": "how are things? (rhyming, jokey)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wie geht es dir?",
+      "register": "informal",
+      "nuance": "the full form, to one person you say du to"
+     },
+     {
+      "word": "Wie geht es Ihnen?",
+      "register": "formal",
+      "nuance": "the polite form"
+     },
+     {
+      "word": "Alles klar?",
+      "register": "colloquial",
+      "nuance": "all good? – very casual"
+     }
+    ],
+    "etymology": {
+     "text": "From wie geht es dir. Literally, “how does it go?”; compare English how's it going?, French comment ça va?.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "French ça va, Greek τι κάνεις and Russian как дела? ask the same thing in other images: going, doing, affairs."
+    ],
+    "pitfalls": [
+     "Spelling: wie geht's (apostrophe for the dropped e of es); wie gehts without it is also allowed."
+    ],
+    "subtleties": [
+     "Wie geht's? is a real question: Germans often give a real answer (Ganz gut, ein bisschen müde …) – it is not just “hi”.",
+     "It is neutral enough to use with colleagues you say Sie to; the full formal question is Wie geht es Ihnen?"
+    ]
+   }
+  },
+  {
+   "id": "de:wie_geht_es_dir",
+   "lemma": "wie geht es dir",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files wie geht es dir as a “phrase”; a greeting formula is an interjection (INTJ) in this course."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "How are you? – to a friend, a child, someone in the family.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how are you? (to one person you say du to)",
+      "register": [
+       "informal"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hallo Oma, wie geht es dir?",
+      "tr": "Hi Grandma, how are you?",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Lange nicht gesehen! Wie geht es dir?",
+      "tr": "Long time no see! How are you?",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Und wie geht es dir?",
+      "tr": "and how are you?"
+     },
+     {
+      "text": "Wie geht es dir heute?",
+      "tr": "how are you today?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wie geht es Ihnen?",
+      "register": "formal",
+      "nuance": "the polite form (Sie)"
+     },
+     {
+      "word": "Wie geht's?",
+      "register": "informal",
+      "nuance": "short form"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "dir (dative), not *du: the person goes in the dative – es geht mir gut (I am fine), wie geht es dir?",
+     "To several friends: Wie geht es euch?"
+    ],
+    "subtleties": [
+     "es geht + dative is how German talks about how someone is: Mir geht es gut, ihm geht es schlecht."
+    ]
+   }
+  },
+  {
+   "id": "de:wie_geht_es_Ihnen",
+   "lemma": "wie geht es Ihnen",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files wie geht es Ihnen as a “phrase”; a greeting formula is an interjection (INTJ) in this course."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "How are you? – polite and respectful.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how are you? (polite: to one or several people you say Sie to)",
+      "register": [
+       "formal"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Guten Tag, Herr Doktor, wie geht es Ihnen?",
+      "tr": "Hello, doctor, how are you?",
+      "register": "formal",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Danke, gut. Und wie geht es Ihnen?",
+      "tr": "Fine, thanks. And how are you?",
+      "register": "formal",
+      "context": "small talk",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Und wie geht es Ihnen?",
+      "tr": "and how are you?"
+     },
+     {
+      "text": "Wie geht es Ihnen heute?",
+      "tr": "how are you today?"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Wie geht es dir?",
+      "register": "informal",
+      "nuance": "to one person you say du to"
+     },
+     {
+      "word": "Wie geht's?",
+      "register": "informal",
+      "nuance": "short, relaxed form"
+     }
+    ],
+    "etymology": {
+     "text": "Literally, “how is it going for you”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "Ihnen with a capital I = you (polite); ihnen = them: Wie geht es ihnen? = How are they?",
+     "The answer returns the question: Danke, gut. Und Ihnen?"
+    ],
+    "subtleties": [
+     "A doctor asking Wie geht es Ihnen? wants to know about your health – it can be a real medical question."
+    ]
+   }
+  },
+  {
+   "id": "de:gut",
+   "lemma": "gut",
+   "pos": "ADJ",
+   "senses": [
+    "greet.fine",
+    "adj.good"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "The concept is the answer “fine, well” (Gut, danke. / Mir geht es gut.); Wiktionary’s adjective gives “good; all right, satisfactory” and its adverb gut “well” – one word in German."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fine, good, well – the answer to Wie geht’s? and one of the most frequent German words.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "fine, well – how someone is (Gut, danke. / Mir geht es gut.)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.fine"
+     },
+     {
+      "id": "s2",
+      "def": "good (quality, morals, taste): ein gutes Buch",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.good"
+     },
+     {
+      "id": "s3",
+      "def": "Gut! – okay, all right (agreement)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wie geht es Ihnen? – Gut, danke.",
+      "tr": "How are you? – Fine, thanks.",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Mir geht es heute nicht so gut.",
+      "tr": "I’m not feeling so well today.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist ein gutes Buch.",
+      "tr": "That is a good book.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s2"
+     },
+     {
+      "text": "Die Suppe schmeckt gut.",
+      "tr": "The soup tastes good.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "Gut, dann machen wir es so.",
+      "tr": "Okay, then we’ll do it that way.",
+      "register": "colloquial",
+      "context": "agreement",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Mir geht es gut.",
+      "tr": "I’m fine."
+     },
+     {
+      "text": "sehr gut",
+      "tr": "very good, very well"
+     },
+     {
+      "text": "ganz gut",
+      "tr": "quite good, okay"
+     },
+     {
+      "text": "Alles Gute!",
+      "tr": "all the best!"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Alles Gute!",
+      "tr": "All the good!",
+      "kind": "fixed expression",
+      "meaning": "all the best – for birthdays and farewells",
+      "register": "neutral"
+     },
+     {
+      "text": "Ende gut, alles gut.",
+      "tr": "End good, all good.",
+      "kind": "proverb",
+      "meaning": "all’s well that ends well",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "prima",
+      "register": "colloquial",
+      "nuance": "great, fine – cheerful"
+     },
+     {
+      "word": "toll",
+      "register": "colloquial",
+      "nuance": "great – enthusiastic"
+     },
+     {
+      "word": "in Ordnung",
+      "register": "neutral",
+      "nuance": "all right, okay – about things more than feelings"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "schlecht",
+      "note": "bad; Mir geht es schlecht = I feel bad / ill"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Middle High German guot, from Old High German guot, from Proto-West Germanic *gōd, from Proto-Germanic *gōdaz, from Proto-Indo-European *gʰedʰ- (“to unite, be associated, suit”). Cognate with Dutch goed, English good, Danish god, Swedish god.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "gut is the same word as English good and Dutch goed; Guten Tag is literally “good day”.",
+     "German school marks run from 1 (sehr gut) to 6 (ungenügend); 2 is gut."
+    ],
+    "pitfalls": [
+     "How you are is Mir geht es gut (dative mir!), not *Ich bin gut – that means “I am good (at something / a good person)”.",
+     "Irregular comparison: gut – besser – am besten."
+    ],
+    "subtleties": [
+     "German uses one word for good and well: Er singt gut (he sings well).",
+     "Before a noun it takes endings (ein guter Freund, eine gute Idee); after sein it does not (Das Buch ist gut).",
+     "The answer ganz gut means “okay, not bad” – less than gut."
+    ]
+   }
+  },
+  {
+   "id": "de:heißen",
+   "lemma": "heißen",
+   "pos": "VERB",
+   "senses": [
+    "greet.myname"
+   ],
+   "aux": "haben",
+   "forms": {
+    "V;NFIN": "heißen",
+    "V;PRS;1;SG": "heiße",
+    "V;PRS;2;SG": "heißt",
+    "V;PRS;3;SG": "heißt",
+    "V;PRS;1;PL": "heißen",
+    "V;PRS;2;PL": "heißt",
+    "V;PRS;3;PL": "heißen",
+    "V;PST;3;SG": "hieß",
+    "V;PTCP;PST": "geheißen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Names and meanings: Ich heiße …, Wie heißt das auf Deutsch?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to be called, to have the name (Ich heiße Anna = my name is Anna)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.myname"
+     },
+     {
+      "id": "s2",
+      "def": "to mean (Was heißt das? Nein heißt nein.)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "das heißt (d. h.) – that is, i.e.",
+      "register": [
+       "formal"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "to bid, to tell (someone to do something): jemanden willkommen heißen",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hallo, ich heiße Maria. Und wie heißt du?",
+      "tr": "Hi, my name is Maria. And what’s your name?",
+      "register": "informal",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie heißen Sie, bitte?",
+      "tr": "What is your name, please?",
+      "register": "formal",
+      "context": "at an office",
+      "sense": "s1"
+     },
+     {
+      "text": "Unser Hund heißt Bello.",
+      "tr": "Our dog is called Bello.",
+      "register": "neutral",
+      "context": "pets",
+      "sense": "s1"
+     },
+     {
+      "text": "Wie heißt das auf Deutsch?",
+      "tr": "What is that called in German?",
+      "register": "neutral",
+      "context": "language class",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir kommen am Montag, das heißt in drei Tagen.",
+      "tr": "We’re coming on Monday, that is in three days.",
+      "register": "formal",
+      "context": "planning",
+      "sense": "s3"
+     },
+     {
+      "text": "Wir heißen Sie herzlich willkommen!",
+      "tr": "We warmly welcome you!",
+      "register": "formal",
+      "context": "speech",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wie heißt du?",
+      "tr": "what’s your name? (du)"
+     },
+     {
+      "text": "Wie heißen Sie?",
+      "tr": "what’s your name? (Sie)"
+     },
+     {
+      "text": "das heißt (d. h.)",
+      "tr": "that is, i.e."
+     },
+     {
+      "text": "Was heißt … auf Deutsch?",
+      "tr": "what is … in German?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Nein heißt nein.",
+      "tr": "No means no.",
+      "kind": "saying",
+      "meaning": "a refusal must be respected – also the principle of the German sexual-offence law reform of 2016",
+      "register": "neutral"
+     },
+     {
+      "text": "jemanden willkommen heißen",
+      "tr": "to call someone welcome",
+      "kind": "fixed expression",
+      "meaning": "to welcome someone",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Mein Name ist …",
+      "register": "formal",
+      "nuance": "my name is … – more official, on the phone or in a meeting"
+     },
+     {
+      "word": "sich nennen",
+      "register": "neutral",
+      "nuance": "to call oneself – a chosen name, a title"
+     },
+     {
+      "word": "bedeuten",
+      "register": "neutral",
+      "nuance": "to mean – for words and signs (sense 2)"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German heiȥen, from Old High German heiȥan, from Proto-West Germanic *haitan, from Proto-Germanic *haitaną. Cognate with Yiddish הייסן (heysn), Dutch heten, Old Norse heita, Gothic 𐌷𐌰𐌹𐍄𐌰𐌽 (haitan); compare also English hest, behest.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Old English had the same verb: hātan, “to be called” – it survives only in the archaic English hight (“named”)."
+    ],
+    "pitfalls": [
+     "du heißt, not *heißst: the ending -st loses its s after ß (as after s, z: du sitzt).",
+     "Asking a name uses wie (how), not was: Wie heißt du? (not *Was heißt du?).",
+     "Strong verb: hieß (preterite), geheißen (participle)."
+    ],
+    "subtleties": [
+     "Ich heiße Anna is the everyday way; Mein Name ist Anna sounds more official; Ich bin Anna is casual.",
+     "In Switzerland it is spelled heissen (no ß)."
+    ]
+   }
+  },
+  {
+   "id": "de:freut_mich",
+   "lemma": "freut mich",
+   "pos": "INTJ",
+   "senses": [
+    "greet.nicetomeet"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Nice to meet you – said with a handshake when you are introduced.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nice to meet you, pleased to meet you (said when introduced)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.nicetomeet"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Das ist meine Kollegin Eva. – Freut mich!",
+      "tr": "This is my colleague Eva. – Nice to meet you!",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "Freut mich, Sie kennenzulernen.",
+      "tr": "Pleased to meet you.",
+      "register": "formal",
+      "context": "business meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Freut mich, dich kennenzulernen!",
+      "tr": "Nice to meet you!",
+      "register": "informal",
+      "context": "party",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Freut mich, Sie kennenzulernen.",
+      "tr": "pleased to meet you (Sie)"
+     },
+     {
+      "text": "Freut mich auch!",
+      "tr": "nice to meet you too"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Sehr erfreut",
+      "register": "formal",
+      "nuance": "very pleased – rather old-fashioned"
+     },
+     {
+      "word": "Angenehm",
+      "register": "formal",
+      "nuance": "pleased to meet you – old-fashioned, said with a handshake"
+     },
+     {
+      "word": "Schön, dich kennenzulernen",
+      "register": "informal",
+      "nuance": "nice to meet you (du)"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "The answer is Freut mich auch! or Mich auch! (“me too”).",
+     "Without kennenzulernen it can also mean “I’m glad” in general: Das freut mich! = I’m glad to hear that."
+    ],
+    "subtleties": [
+     "It is short for Es freut mich (, Sie kennenzulernen): “it pleases me”, with es dropped – mich is the accusative of ich."
+    ]
+   }
+  },
+  {
+   "id": "de:danke",
+   "lemma": "danke",
+   "pos": "INTJ",
+   "senses": [
+    "greet.thanks"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Gratitude – said all the time, and also the polite way to say no.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thanks, thank you",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.thanks"
+     },
+     {
+      "id": "s2",
+      "def": "(Nein,) danke – no, thank you: declining an offer",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Danke für deine Hilfe!",
+      "tr": "Thanks for your help!",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1"
+     },
+     {
+      "text": "Danke schön! – Bitte, gern geschehen.",
+      "tr": "Thank you very much! – You’re welcome.",
+      "register": "neutral",
+      "context": "everyday politeness",
+      "sense": "s1"
+     },
+     {
+      "text": "Noch Kaffee? – Nein, danke.",
+      "tr": "More coffee? – No, thank you.",
+      "register": "neutral",
+      "context": "at the table",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "danke schön",
+      "tr": "thank you very much"
+     },
+     {
+      "text": "danke sehr",
+      "tr": "thanks a lot"
+     },
+     {
+      "text": "nein, danke",
+      "tr": "no, thank you"
+     },
+     {
+      "text": "danke für …",
+      "tr": "thanks for …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Vielen Dank",
+      "register": "neutral",
+      "nuance": "many thanks – the safe polite choice, also in writing"
+     },
+     {
+      "word": "Danke schön",
+      "register": "neutral",
+      "nuance": "thank you very much – warm"
+     },
+     {
+      "word": "Ich danke Ihnen",
+      "register": "formal",
+      "nuance": "I thank you – speeches, letters"
+     },
+     {
+      "word": "Merci",
+      "register": "regional",
+      "nuance": "thanks – everyday in Switzerland",
+      "region": "CH"
+     }
+    ],
+    "etymology": {
+     "text": "Ellipsis of ich danke dir (“I thank you”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "danken (to thank) and denken (to think) are related – just like English thank and think."
+    ],
+    "pitfalls": [
+     "A bare Danke! when someone offers you something often means “no, thanks”. To accept, say Ja, bitte! or Ja, gern!",
+     "danke für + accusative: Danke für den Kaffee."
+    ],
+    "subtleties": [
+     "Formal: Ich danke Ihnen / Vielen Dank; warm: Danke schön; casual: Danke dir!"
+    ]
+   }
+  },
+  {
+   "id": "de:bitte",
+   "lemma": "bitte",
+   "pos": "ADV",
+   "senses": [
+    "greet.please",
+    "greet.welcome"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The little word of politeness: please, you’re welcome, here you are, pardon?",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "please (in a request or an offer)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.please"
+     },
+     {
+      "id": "s2",
+      "def": "you’re welcome (answer to danke)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.welcome"
+     },
+     {
+      "id": "s3",
+      "def": "Wie bitte? / Bitte? – pardon? sorry? (asking someone to repeat)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "here you are (Bitte schön! when handing something over)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ein Glas Wasser, bitte.",
+      "tr": "A glass of water, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Kannst du mir bitte helfen?",
+      "tr": "Can you help me, please?",
+      "register": "informal",
+      "context": "at home",
+      "sense": "s1"
+     },
+     {
+      "text": "Danke! – Bitte!",
+      "tr": "Thanks! – You’re welcome!",
+      "register": "neutral",
+      "context": "everyday politeness",
+      "sense": "s2"
+     },
+     {
+      "text": "Vielen Dank für Ihre Hilfe. – Bitte schön, gern geschehen.",
+      "tr": "Thank you very much for your help. – You’re very welcome.",
+      "register": "formal",
+      "context": "office",
+      "sense": "s2"
+     },
+     {
+      "text": "Wie bitte? Ich habe Sie nicht verstanden.",
+      "tr": "Pardon? I didn’t understand you.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s3"
+     },
+     {
+      "text": "Bitte schön, Ihr Kaffee.",
+      "tr": "Here you are, your coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s4"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "bitte schön / bitte sehr",
+      "tr": "you’re very welcome; here you are"
+     },
+     {
+      "text": "Wie bitte?",
+      "tr": "pardon?"
+     },
+     {
+      "text": "ja, bitte",
+      "tr": "yes, please"
+     },
+     {
+      "text": "Bitte, bitte!",
+      "tr": "please, please! (begging)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "gern geschehen",
+      "register": "neutral",
+      "nuance": "you’re welcome – “it was gladly done”"
+     },
+     {
+      "word": "gerne",
+      "register": "colloquial",
+      "nuance": "you’re welcome, my pleasure – short and friendly"
+     },
+     {
+      "word": "kein Problem",
+      "register": "colloquial",
+      "nuance": "no problem – casual answer to thanks"
+     },
+     {
+      "word": "nichts zu danken",
+      "register": "neutral",
+      "nuance": "don’t mention it"
+     }
+    ],
+    "etymology": {
+     "text": "Ellipsis of ich bitte (dich/Sie) (“I beg (you)”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "bitte is the verb bitten (“to ask, request”), cut down from ich bitte; English bid (“to ask, to pray”) is its cousin."
+    ],
+    "pitfalls": [
+     "One word for two English ones: bitte = please AND you’re welcome.",
+     "To ask someone to repeat, say Wie bitte? – a bare Was? sounds rude."
+    ],
+    "subtleties": [
+     "bitte goes almost anywhere in a request: Bitte setzen Sie sich! / Setzen Sie sich bitte! – mid-sentence it sounds softer.",
+     "Bitte schön / bitte sehr are warmer than bitte alone."
+    ]
+   }
+  },
+  {
+   "id": "de:Entschuldigung",
+   "lemma": "Entschuldigung",
+   "pos": "INTJ",
+   "senses": [
+    "greet.sorry",
+    "greet.excuseme"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small slips and polite interruptions: sorry! – excuse me!",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorry! (a small apology)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.sorry"
+     },
+     {
+      "id": "s2",
+      "def": "excuse me (to get attention or to get past)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.excuseme"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Oh, Entschuldigung! Das war mein Fehler.",
+      "tr": "Oh, sorry! That was my mistake.",
+      "register": "neutral",
+      "context": "apology",
+      "sense": "s1"
+     },
+     {
+      "text": "Entschuldigung, ich bin zu spät.",
+      "tr": "Sorry, I’m late.",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "Entschuldigung, wo ist der Bahnhof?",
+      "tr": "Excuse me, where is the station?",
+      "register": "neutral",
+      "context": "asking the way",
+      "sense": "s2"
+     },
+     {
+      "text": "Entschuldigung, darf ich mal vorbei?",
+      "tr": "Excuse me, may I get past?",
+      "register": "neutral",
+      "context": "on the bus",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Entschuldigung, …?",
+      "tr": "excuse me, …? (before a question)"
+     },
+     {
+      "text": "Entschuldigen Sie bitte!",
+      "tr": "excuse me, please (polite)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Entschuldigen Sie",
+      "register": "formal",
+      "nuance": "excuse me – polite verb form to a stranger"
+     },
+     {
+      "word": "Verzeihung",
+      "register": "formal",
+      "nuance": "pardon me – a little more formal and old-fashioned"
+     },
+     {
+      "word": "Sorry",
+      "register": "colloquial",
+      "nuance": "from English, very common among young people"
+     },
+     {
+      "word": "es tut mir leid",
+      "register": "neutral",
+      "nuance": "I’m sorry – real regret or sympathy"
+     }
+    ],
+    "etymology": {
+     "text": "From entschuldig(en) + -ung.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "ent- (away) + Schuld (guilt): to entschuldigen someone is literally to take the guilt away."
+    ],
+    "pitfalls": [
+     "For real regret, bad news or sympathy, Entschuldigung is too light: say Es tut mir leid.",
+     "Written with a capital E: it is a noun (die Entschuldigung, “apology, excuse”) used as an exclamation."
+    ],
+    "subtleties": [
+     "As a noun, die Entschuldigung is also an excuse and a note from parents for missing school.",
+     "Entschuldigen Sie (bitte)! is the more polite way to stop a stranger."
+    ]
+   }
+  },
+  {
+   "id": "de:es_tut_mir_leid",
+   "lemma": "es tut mir leid",
+   "pos": "INTJ",
+   "senses": [
+    "greet.sorry"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files es tut mir leid as a “phrase”; as a fixed formula of apology it is an interjection (INTJ) in this course."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Real regret and sympathy: I’m sorry.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "I’m sorry (apology, regret; also sympathy: I’m sorry to hear that)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.sorry"
+     }
+    ],
+    "examples": [
+     {
+      "text": "Es tut mir leid, ich habe keine Zeit.",
+      "tr": "I’m sorry, I don’t have time.",
+      "register": "neutral",
+      "context": "declining",
+      "sense": "s1"
+     },
+     {
+      "text": "Es tut mir leid, dass ich so spät komme.",
+      "tr": "I’m sorry I’m so late.",
+      "register": "neutral",
+      "context": "apology",
+      "sense": "s1"
+     },
+     {
+      "text": "Dein Opa ist krank? Oh, es tut mir leid.",
+      "tr": "Your grandpa is ill? Oh, I’m sorry.",
+      "register": "neutral",
+      "context": "sympathy",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Es tut mir leid, dass …",
+      "tr": "I’m sorry that …"
+     },
+     {
+      "text": "Es tut mir wirklich leid.",
+      "tr": "I’m really sorry."
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Tut mir leid",
+      "register": "colloquial",
+      "nuance": "short spoken form"
+     },
+     {
+      "word": "Entschuldigung",
+      "register": "neutral",
+      "nuance": "sorry – lighter, for small slips"
+     },
+     {
+      "word": "Verzeihung",
+      "register": "formal",
+      "nuance": "pardon – polite, slightly old-fashioned"
+     }
+    ],
+    "etymology": {
+     "text": "A use of the verb leidtun (“to be sorry”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "mir is dative and changes with the person: es tut ihm leid (he is sorry), es tut uns leid (we are sorry).",
+     "Spelling: leid with a small l (es tut mir leid), from the verb leidtun."
+    ],
+    "subtleties": [
+     "In speech es is usually dropped: Tut mir leid!",
+     "Das tut mir leid often means “I’m sorry to hear that” – sympathy, not guilt."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

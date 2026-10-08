@@ -1,0 +1,635 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:hadha",
+   "lemma": "هٰذَا",
+   "pos": "PRON",
+   "senses": [
+    "dem.this"
+   ],
+   "translit": "hāḏā",
+   "class": "dem",
+   "forms": {
+    "PRON;SG;MASC": "هٰذَا",
+    "PRON;SG;FEM": "هٰذِهِ",
+    "PRON;PL": "هٰؤُلَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing at what is near.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "this (near) — masculine هٰذَا, feminine هٰذِهِ, plural (people) هٰؤُلَاءِ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.this"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰذَا بَيْتِي.",
+      "tr": "This is my house.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذِهِ سَيَّارَةٌ جَدِيدَةٌ.",
+      "tr": "This is a new car.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰذَا الْكِتَابُ مُمْتِعٌ.",
+      "tr": "This book is interesting.",
+      "register": "neutral",
+      "context": "reading",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰؤُلَاءِ طُلَّابِي.",
+      "tr": "These are my students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هٰذَا الصَّبَاحَ",
+      "tr": "this morning"
+     },
+     {
+      "text": "هٰذِهِ الْمَرَّةَ",
+      "tr": "this time"
+     },
+     {
+      "text": "مِثْلُ هٰذَا",
+      "tr": "like this, such a …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in MSA; هٰذِي is a rarer variant of the feminine (Wiktionary).",
+    "antonyms": [
+     {
+      "word": "ذٰلِكَ",
+      "note": "that (far); feminine تِلْكَ"
+     }
+    ],
+    "etymology": {
+     "text": "Univerbation of هَا (attention particle) + ذَا; cognate with Hebrew הַזֶּה (hazé, “this”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew הַזֶּה (hazé) and Arabic هٰذَا share the same deictic element: Arabic ذ = Hebrew ז."
+    ],
+    "pitfalls": [
+     "The first ā is written with a small (dagger) alif, not a full one: هٰذَا. Unvocalized it is just هذا.",
+     "هٰذَا الْبَصَلُ = this onion (a phrase); هٰذَا بَصَلٌ = this is onion (a sentence). The article makes the difference."
+    ],
+    "subtleties": [
+     "Non-human plurals take the feminine singular: هٰذِهِ جَزَرَاتٌ (these are carrots); هٰؤُلَاءِ is only for people."
+    ]
+   }
+  },
+  {
+   "id": "ar:dhalika",
+   "lemma": "ذٰلِكَ",
+   "pos": "PRON",
+   "senses": [
+    "dem.that"
+   ],
+   "translit": "ḏālika",
+   "class": "dem",
+   "forms": {
+    "PRON;SG;MASC": "ذٰلِكَ",
+    "PRON;SG;FEM": "تِلْكَ",
+    "PRON;PL": "أُولٰئِكَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing at what is far away — or back at what was just said.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "that (far) — masculine ذٰلِكَ, feminine تِلْكَ, plural (people) أُولٰئِكَ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.that"
+     },
+     {
+      "id": "s2",
+      "def": "that (what was just said); in لِذٰلِكَ “therefore”",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "ذٰلِكَ الرَّجُلُ مُعَلِّمٌ.",
+      "tr": "That man is a teacher.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "تِلْكَ السَّيَّارَةُ جَمِيلَةٌ.",
+      "tr": "That car is beautiful.",
+      "register": "neutral",
+      "context": "things",
+      "sense": "s1"
+     },
+     {
+      "text": "ذٰلِكَ صَحِيحٌ.",
+      "tr": "That is right.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "كُنْتُ مَرِيضًا، لِذٰلِكَ لَمْ آتِ.",
+      "tr": "I was ill; that is why I did not come.",
+      "register": "neutral",
+      "context": "explanation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "بَعْدَ ذٰلِكَ",
+      "tr": "after that"
+     },
+     {
+      "text": "لِذٰلِكَ",
+      "tr": "therefore, that is why"
+     },
+     {
+      "text": "مَعَ ذٰلِكَ",
+      "tr": "nevertheless"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "ذَاكَ",
+      "register": "literary",
+      "nuance": "that — a shorter, less common form"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "هٰذَا",
+      "note": "this (near)"
+     }
+    ],
+    "etymology": {
+     "text": "From ذَا (ḏā, “this”) + لِ (li) + كَ (ka, “you”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The -ka at the end is the “you” of the person spoken to; Classical Arabic even changed it with the listener — ذٰلِكُمْ when speaking to several people (Wiktionary lists these forms)."
+    ],
+    "pitfalls": [
+     "The ā is a small (dagger) alif: unvocalized the word is ذلك, with no alif.",
+     "The feminine is a different word, تِلْكَ — not *ذٰلِكَةٌ."
+    ],
+    "subtleties": [
+     "Things in the plural take the feminine singular: تِلْكَ الْكُتُبُ (those books); أُولٰئِكَ is for people."
+    ]
+   }
+  },
+  {
+   "id": "ar:haulai",
+   "lemma": "هٰؤُلَاءِ",
+   "pos": "PRON",
+   "senses": [
+    "dem.these"
+   ],
+   "translit": "hāʾulāʾi",
+   "class": "dempl",
+   "forms": {
+    "PRON;PL": "هٰؤُلَاءِ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing at several people near you.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "these (people) — the plural of هٰذَا / هٰذِهِ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.these"
+     }
+    ],
+    "examples": [
+     {
+      "text": "هٰؤُلَاءِ طُلَّابِي.",
+      "tr": "These are my students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "هٰؤُلَاءِ النَّاسُ مِنْ مِصْرَ.",
+      "tr": "These people are from Egypt.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "مَنْ هٰؤُلَاءِ؟",
+      "tr": "Who are these (people)?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym. For things in the plural Arabic uses the feminine singular هٰذِهِ instead: هٰذِهِ الْكُتُبُ (these books).",
+    "antonyms": [
+     {
+      "word": "أُولٰئِكَ",
+      "note": "those (people)"
+     }
+    ],
+    "etymology": {
+     "text": "From هَا (hā, the “look, here” particle) + أُولَاءِ (ʔulāʔi) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "هٰؤُلَاءِ and أُولٰئِكَ share أُولَاءِ: هَا- in front makes it near (“these”), -كَ behind makes it far (“those”)."
+    ],
+    "pitfalls": [
+     "Only for people: “these books” is هٰذِهِ الْكُتُبُ, not *هٰؤُلَاءِ الْكُتُبُ.",
+     "Written with a dagger alif and a hamza on wāw; the final -i never changes: هٰؤُلَاءِ (hāʾulāʾi)."
+    ],
+    "subtleties": [
+     "The same word serves men and women: هٰؤُلَاءِ الطَّالِبَاتُ (these female students)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ulaika",
+   "lemma": "أُولٰئِكَ",
+   "pos": "PRON",
+   "senses": [
+    "dem.those"
+   ],
+   "translit": "ʾulāʾika",
+   "class": "dempl",
+   "forms": {
+    "PRON;PL": "أُولٰئِكَ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses أُولٰئِكَ as “plural of ذٰلِكَ (that)”, i.e. “those”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Pointing at several people over there — common in formal style.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "those (people) — the plural of ذٰلِكَ / تِلْكَ",
+      "register": [
+       "neutral"
+      ],
+      "concept": "dem.those"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أُولٰئِكَ النَّاسُ أَصْدِقَاءُ.",
+      "tr": "Those people are friends.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s1"
+     },
+     {
+      "text": "أُولٰئِكَ هُمُ الطُّلَّابُ الْجُدُدُ.",
+      "tr": "Those are the new students.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "أُولٰئِكَ الرِّجَالُ مِنَ الْعِرَاقِ.",
+      "tr": "Those men are from Iraq.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in MSA; for things in the plural Arabic uses تِلْكَ (تِلْكَ الْبُيُوتُ, those houses).",
+    "antonyms": [
+     {
+      "word": "هٰؤُلَاءِ",
+      "note": "these (people)"
+     }
+    ],
+    "etymology": {
+     "text": "From أُولَاءِ (ʔulāʔi) + كَ (ka) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A Qurʾānic formula uses it: أُولٰئِكَ هُمُ الْمُفْلِحُونَ — “those are the ones who succeed” (2:5)."
+    ],
+    "pitfalls": [
+     "The wāw is written but not pronounced: أُولٰئِكَ = ʾulāʾika.",
+     "Only for people; for things use تِلْكَ: تِلْكَ الْبُيُوتُ."
+    ],
+    "subtleties": [
+     "Before a definite predicate a pronoun is inserted to keep it a sentence: أُولٰئِكَ هُمُ الطُّلَّابُ = those are the students (not “those students”)."
+    ]
+   }
+  },
+  {
+   "id": "ar:huna",
+   "lemma": "هُنَا",
+   "pos": "ADV",
+   "senses": [
+    "adv.here"
+   ],
+   "translit": "hunā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Presence: “here I am”, “here it is”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "here, in this place",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.here"
+     },
+     {
+      "id": "s2",
+      "def": "at this point, then, now (in a story or argument)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا هُنَا.",
+      "tr": "I am here.",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s1"
+     },
+     {
+      "text": "اِجْلِسْ هُنَا، مِنْ فَضْلِكَ.",
+      "tr": "Sit here, please.",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ هُنَا إِلَى الْمَطَارِ عِشْرُونَ دَقِيقَةً.",
+      "tr": "It is twenty minutes from here to the airport.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     },
+     {
+      "text": "وَهُنَا بَدَأَتِ الْمُشْكِلَةُ.",
+      "tr": "And this is where the problem began.",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هُنَا وَهُنَاكَ",
+      "tr": "here and there"
+     },
+     {
+      "text": "مِنْ هُنَا",
+      "tr": "from here; this way"
+     },
+     {
+      "text": "إِلَى هُنَا",
+      "tr": "up to here"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "هٰهُنَا",
+      "register": "literary",
+      "nuance": "here — classical form"
+     },
+     {
+      "word": "هُون",
+      "register": "regional",
+      "nuance": "spoken “here”",
+      "region": "Levant"
+     },
+     {
+      "word": "هِنَا",
+      "register": "regional",
+      "nuance": "spoken “here”",
+      "region": "Egypt"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "هُنَاكَ",
+      "note": "there"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Hebrew הִנֵּה (hinne, “here is, behold”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "هُنَا الْقَاهِرَةُ — “Here is Cairo” — was the famous call sign of Egyptian state radio."
+    ],
+    "pitfalls": [
+     "هُنَاكَ (there) is هُنَا + -ka, and it also means “there is / there are”: هُنَاكَ مُشْكِلَةٌ = there is a problem.",
+     "Do not confuse هُنَا (hunā, here) with هُنَّ (hunna, they — women)."
+    ],
+    "subtleties": [
+     "In a sentence without a verb هُنَا is the predicate: الْبَصَلُ هُنَا = the onions are here."
+    ]
+   }
+  },
+  {
+   "id": "ar:hunaka",
+   "lemma": "هُنَاكَ",
+   "pos": "ADV",
+   "senses": [
+    "adv.there"
+   ],
+   "translit": "hunāka",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Over there; and the everyday way to say “there is”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "there, over there",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.there"
+     },
+     {
+      "id": "s2",
+      "def": "there is, there are (existence)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "الْمَطْعَمُ هُنَاكَ.",
+      "tr": "The restaurant is over there.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "يَسْكُنُ هُنَاكَ مُنْذُ سَنَةٍ.",
+      "tr": "He has been living there for a year.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "هُنَاكَ مُشْكِلَةٌ.",
+      "tr": "There is a problem.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "هَلْ هُنَاكَ مَاءٌ؟",
+      "tr": "Is there any water?",
+      "register": "neutral",
+      "context": "everyday",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "هُنَا وَهُنَاكَ",
+      "tr": "here and there"
+     },
+     {
+      "text": "مِنْ هُنَاكَ",
+      "tr": "from there"
+     },
+     {
+      "text": "إِلَى هُنَاكَ",
+      "tr": "(to) there"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "هُنَالِكَ",
+      "register": "formal",
+      "nuance": "there; also “there is” — more formal or literary"
+     },
+     {
+      "word": "ثَمَّةَ",
+      "register": "literary",
+      "nuance": "there is / there are — formal written style"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "هُنَا",
+      "note": "here"
+     }
+    ],
+    "etymology": {
+     "text": "هُنَا (“here”) + the suffix -كَ that marks distance, as in ذٰلِكَ; Wiktionary gives no further origin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic builds “there” from “here” the way it builds “that” from “this”: هُنَا → هُنَاكَ, ذَا → ذٰلِكَ."
+    ],
+    "pitfalls": [
+     "هُنَاكَ + an indefinite noun means “there is”: هُنَاكَ مُشْكِلَةٌ = there is a problem (not “the problem is there”).",
+     "Do not confuse هُنَاكَ (hunāka) with هُنَّ (hunna, they — women)."
+    ],
+    "subtleties": [
+     "“There was” needs كَانَ: كَانَ هُنَاكَ … / كَانَتْ هُنَاكَ … (agreeing with the noun that follows)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

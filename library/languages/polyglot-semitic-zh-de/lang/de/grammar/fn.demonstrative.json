@@ -1,0 +1,266 @@
+{
+ "function": "fn.demonstrative",
+ "status": "realized",
+ "summary": "German points with dieser (this; also that), which takes the same endings as der: dieser Mann, diese Frau, dieses Kind, plural diese Kinder (these). jener (that, those) exists but belongs to written, formal or literary German; in speech “that” is the article + noun + da: der Mann da, die Lampe da (and “this” often das Buch hier). For simply showing or naming things, das is used and never changes: Das ist ein Tisch, Das sind Kinder. The place words are hier (here), da (there – or here!) and dort (over there).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "this / these",
+     "dieser Mann",
+     "diese Frau",
+     "dieses Kind",
+     "diese Kinder"
+    ],
+    [
+     "that / those (formal)",
+     "jener Mann",
+     "jene Frau",
+     "jenes Kind",
+     "jene Kinder"
+    ],
+    [
+     "that (spoken)",
+     "der Mann da",
+     "die Frau da",
+     "das Kind da",
+     "die Kinder da"
+    ]
+   ],
+   "caption": "Pointing words in the nominative"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "dieser = der",
+   "text": "dieser has the endings of der: der → dieser, die → diese, das → dieses, die (plural) → diese. Learn one table, get both."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Das ist … / Das sind …",
+   "text": "The pointing das does not change with the noun: Das ist ein Tisch / eine Lampe / ein Bett. Only the verb changes for a plural: Das sind Stühle."
+  },
+  {
+   "t": "table",
+   "head": [
+    "word",
+    "meaning",
+    "example"
+   ],
+   "rows": [
+    [
+     "hier",
+     "here (near me)",
+     "Ich bin hier."
+    ],
+    [
+     "da",
+     "there – or here, present",
+     "Das Buch ist da. / Ich bin da!"
+    ],
+    [
+     "dort",
+     "over there (away from us)",
+     "Dort ist die Tür."
+    ]
+   ],
+   "caption": "Here and there"
+  },
+  {
+   "t": "table",
+   "head": [
+    "case",
+    "masculine",
+    "feminine",
+    "neuter",
+    "plural"
+   ],
+   "rows": [
+    [
+     "nominative",
+     "dieser",
+     "diese",
+     "dieses",
+     "diese"
+    ],
+    [
+     "accusative",
+     "diesen",
+     "diese",
+     "dieses",
+     "diese"
+    ],
+    [
+     "dative",
+     "diesem",
+     "dieser",
+     "diesem",
+     "diesen"
+    ],
+    [
+     "genitive",
+     "dieses",
+     "dieser",
+     "dieses",
+     "dieser"
+    ]
+   ],
+   "caption": "Preview: dieser in all four cases (the cases come from S07 on)"
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "What gender is the noun? der → dieser, die → diese, das → dieses.",
+   "Singular or plural? The plural is always diese.",
+   "Am I just pointing and naming (Das ist …)? Then das, unchanged; Das sind … for plurals.",
+   "Near or far, in speech? das Buch hier (this), das Buch da (that).",
+   "Formal writing with a contrast? dieser … jener."
+  ],
+  "steps": [
+   "Find the noun and its gender.",
+   "Give dieser the ending of der.",
+   "Add hier / da / dort for place."
+  ]
+ },
+ "traps": [
+  "dieses Kind, not *dieser Kind: neuter takes -es.",
+  "Das sind meine Freunde, not *Das ist meine Freunde.",
+  "jener sounds bookish in conversation – say der … da.",
+  "da can mean here: Ich bin da = I’m here / I’ve arrived."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:dieser",
+   "de:jener",
+   "de:das.dem",
+   "de:hier",
+   "de:da",
+   "de:dort"
+  ]
+ },
+ "paradigmCells": [
+  "DET;NOM;SG;MASC",
+  "DET;NOM;SG;FEM",
+  "DET;NOM;SG;NEUT",
+  "DET;NOM;PL"
+ ],
+ "needs": {
+  "DET": 1,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "class": "dem",
+   "cells": [
+    "DET;NOM;SG;MASC",
+    "DET;NOM;SG;FEM",
+    "DET;NOM;SG;NEUT",
+    "DET;NOM;PL"
+   ],
+   "count": 8
+  },
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.demonstrative"
+    ],
+    "variant": "Number"
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“this child”:",
+   "options": [
+    "dieser Kind",
+    "diese Kind",
+    "dieses Kind"
+   ],
+   "answer": "dieses Kind",
+   "why": "das Kind → dieses Kind."
+  },
+  {
+   "q": "“this lamp” (die Lampe):",
+   "options": [
+    "dieser Lampe",
+    "diese Lampe",
+    "dieses Lampe"
+   ],
+   "answer": "diese Lampe",
+   "why": "die → diese."
+  },
+  {
+   "q": "“these chairs” (der Stuhl, die Stühle):",
+   "options": [
+    "dieser Stühle",
+    "diese Stühle",
+    "dieses Stühle"
+   ],
+   "answer": "diese Stühle",
+   "why": "Every plural: diese."
+  },
+  {
+   "q": "How do people usually say “that man” in conversation?",
+   "options": [
+    "jener Mann",
+    "der Mann da",
+    "das Mann"
+   ],
+   "answer": "der Mann da",
+   "why": "jener is written and formal; speech uses der … da."
+  },
+  {
+   "q": "“These are friends.”",
+   "options": [
+    "Das ist Freunde.",
+    "Das sind Freunde.",
+    "Diese ist Freunde."
+   ],
+   "answer": "Das sind Freunde.",
+   "why": "das stays; the verb agrees with the plural."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.demonstrative",
+   "note": "Arabic hādhā / hādhihi (this, m./f.), dhālika / tilka (that), hāʾulāʾi (these): gender in the singular, as in German."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.demonstrative",
+   "note": "Hebrew ze / zot (this, m./f.), ele (these); after a noun with the article it follows: ha-bayit ha-ze (this house)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.demonstrative",
+   "note": "Chinese 这 / 那 (this / that) need a measure word before the noun: 这本书, 那个人 – no gender, no endings."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.definite",
+   "note": "dieser has the same endings as der."
+  }
+ ]
+}

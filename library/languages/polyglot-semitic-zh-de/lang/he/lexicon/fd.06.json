@@ -1,0 +1,169 @@
+{
+ "lexemes": [
+  {
+   "id": "he:yesh",
+   "lemma": "יֵשׁ",
+   "pos": "ADV",
+   "senses": [
+    "poss.have"
+   ],
+   "translit": "yesh",
+   "note": "An existential particle (Wiktionary files it as an adverb). Possession: יֵשׁ + לְ + possessor (יֵשׁ לִי); its negation is אֵין.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary’s second sense is “someone/something has” (with לְ) — exactly this concept; the check only misses it because the gloss is worded with “has”."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hebrew “has” nothing — things “are there for” you: יֵשׁ לִי.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "with לְ: to have (possession) — יֵשׁ לִי “I have”",
+      "register": [
+       "neutral"
+      ],
+      "concept": "poss.have"
+     },
+     {
+      "id": "s2",
+      "def": "there is, there are (existence)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "Yes! (a cry of triumph)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "יֵשׁ לִי גֶּזֶר.",
+      "tr": "I have a carrot / carrots.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ לָךְ זְמַן?",
+      "tr": "Do you (f.) have time?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ חָלָב בַּמְּקָרֵר?",
+      "tr": "Is there milk in the fridge?",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "יֵשׁ! נִצַּחְנוּ!",
+      "tr": "Yes! We won!",
+      "register": "colloquial",
+      "context": "sport",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "יֵשׁ לִי",
+      "tr": "I have"
+     },
+     {
+      "text": "יֵשׁ לְךָ",
+      "tr": "you (m.) have"
+     },
+     {
+      "text": "יֵשׁ מָקוֹם",
+      "tr": "there is room"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "יֵשׁ מַצָּב",
+      "tr": "there is a situation",
+      "kind": "slang",
+      "meaning": "maybe; it’s possible; is there a chance?",
+      "register": "slang"
+     },
+     {
+      "text": "יֵשׁ מֵאַיִן",
+      "tr": "something from nothing",
+      "kind": "fixed expression",
+      "meaning": "creation out of nothing (ex nihilo)",
+      "register": "formal"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "יֶשְׁנוֹ",
+      "register": "formal",
+      "nuance": "inflected form “he/it is there, exists” (יֶשְׁנוֹ, יֶשְׁנָהּ …), used in formal writing"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "אֵין",
+      "note": "there isn’t; (with לְ) not to have"
+     }
+    ],
+    "etymology": {
+     "text": "Related to Aramaic אִית (ʾīṯ). Compare Arabic لَيْسَ (laysa, “to not be, there is not”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Wiktionary compares Arabic لَيْسَ (laysa, “is not”), which is often explained as “not” + this same existential word."
+    ],
+    "pitfalls": [
+     "יֵשׁ never changes for person: יֵשׁ לִי, יֵשׁ לוֹ, יֵשׁ לָנוּ — the owner is shown by לְ with a suffix.",
+     "The negative is אֵין, never *לֹא יֵשׁ: אֵין לִי גֶּזֶר.",
+     "Only present: “I had” = הָיָה לִי / הָיְתָה לִי, “I will have” = יִהְיֶה לִי."
+    ],
+    "subtleties": [
+     "The thing possessed is grammatically the subject, so standard Hebrew puts no אֶת before it (יֵשׁ לִי הַסֵּפֶר); colloquially יֵשׁ לִי אֶת הַסֵּפֶר is very common."
+    ]
+   }
+  },
+  {
+   "id": "he:le",
+   "lemma": "לְ",
+   "pos": "ADP",
+   "class": "suffixed",
+   "senses": [],
+   "prefix": true,
+   "translit": "le",
+   "role": "to, for; with יֵשׁ / אֵין it marks the possessor (יֵשׁ לִי “I have”). With a pronoun it takes suffixes and is written as a word of its own.",
+   "forms": {
+    "ADP;1;SG": "לִי",
+    "ADP;2;SG;MASC": "לְךָ",
+    "ADP;2;SG;FEM": "לָךְ",
+    "ADP;3;SG;MASC": "לוֹ",
+    "ADP;3;SG;FEM": "לָהּ",
+    "ADP;1;PL": "לָנוּ",
+    "ADP;2;PL;MASC": "לָכֶם",
+    "ADP;2;PL;FEM": "לָכֶן",
+    "ADP;3;PL;MASC": "לָהֶם",
+    "ADP;3;PL;FEM": "לָהֶן"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  }
+ ],
+ "absent": []
+}

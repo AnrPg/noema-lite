@@ -79,5 +79,22 @@
     ]
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.negation",
+   "note": "Hebrew splits like Arabic: לֹא before verbs, אֵין for “there is not” and in verbless sentences — compare لَا and لَيْسَ."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.negation",
+   "note": "German chooses between nicht and kein by the word negated; Arabic chooses by tense and sentence type (لَا، لَيْسَ، لَمْ، لَنْ)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "Chinese chooses 不 or 没 by aspect — a little like Arabic لَا (present) vs لَمْ (past)."
+  }
  ]
 }

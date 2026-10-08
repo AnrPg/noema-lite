@@ -65,5 +65,22 @@
    ],
    "count": 8
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.negation",
+   "note": "Arabic chooses the negator by tense: lā, lam, lan, laysa, mā."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.negation",
+   "note": "Hebrew lo for verbs, ein for “there is not”."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.negation",
+   "note": "Chinese 不 for the present and habits, 没 for the past and with 有."
+  }
  ]
 }

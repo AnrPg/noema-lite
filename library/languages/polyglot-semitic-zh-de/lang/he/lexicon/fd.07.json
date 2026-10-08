@@ -1,0 +1,637 @@
+{
+ "lexemes": [
+  {
+   "id": "he:akhal",
+   "lemma": "אָכַל",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "root": "א־כ־ל",
+   "binyan": "paal",
+   "translit": "akhal",
+   "forms": {
+    "V;PST;3;SG;MASC": "אָכַל",
+    "V;PRS;SG;MASC": "אוֹכֵל",
+    "V;PRS;SG;FEM": "אוֹכֶלֶת",
+    "V;PRS;PL;MASC": "אוֹכְלִים",
+    "V;PRS;PL;FEM": "אוֹכְלוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Everyday; in figurative use, being consumed by something.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.eat"
+     },
+     {
+      "id": "s2",
+      "def": "to consume, eat up (figuratively: worry, jealousy)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "מָה אַתָּה אוֹכֵל לַאֲרוּחַת בֹּקֶר?",
+      "tr": "What do you eat for breakfast?",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא אוֹכֶלֶת הַרְבֵּה יְרָקוֹת.",
+      "tr": "She eats a lot of vegetables.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "הַקִּנְאָה אוֹכֶלֶת אוֹתוֹ.",
+      "tr": "Jealousy is eating him up.",
+      "register": "neutral",
+      "context": "figurative",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לֶאֱכֹל אֲרוּחַת עֶרֶב",
+      "tr": "to eat dinner"
+     },
+     {
+      "text": "לֶאֱכֹל בַּחוּץ",
+      "tr": "to eat out"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אָכַל אֶת עַצְמוֹ",
+      "tr": "he ate himself",
+      "kind": "idiom",
+      "meaning": "he was eaten up by regret or worry",
+      "register": "colloquial"
+     },
+     {
+      "text": "אָכַלְתִּי אוֹתָהּ",
+      "tr": "I ate it (f.)",
+      "kind": "slang",
+      "meaning": "I got into trouble, I paid for it",
+      "register": "slang"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "סָעַד",
+      "register": "formal",
+      "nuance": "to dine — elevated, literary"
+     },
+     {
+      "word": "זָלַל",
+      "register": "colloquial",
+      "nuance": "to gobble, eat greedily (mocking)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "צָם",
+      "note": "to fast"
+     }
+    ],
+    "etymology": {
+     "text": "From Proto-Semitic *ʔakal-. Compare Aramaic אֲכַל (ʾăḵal), Arabic أَكَلَ (ʔakala).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "אֹכֶל (okhel, food) and מַאֲכָל (ma’akhal, dish) come from the same root א־כ־ל."
+    ],
+    "pitfalls": [
+     "The present tense agrees in gender: a man says אֲנִי אוֹכֵל, a woman אֲנִי אוֹכֶלֶת.",
+     "Future יֹאכַל: the א is silent (yokhal)."
+    ],
+    "subtleties": [
+     "Slang אָכַלְתִּי אוֹתָהּ has nothing to do with food: ‘I got burned’."
+    ]
+   }
+  },
+  {
+   "id": "he:shata",
+   "lemma": "שָׁתָה",
+   "pos": "VERB",
+   "senses": [
+    "verb.drink"
+   ],
+   "root": "ש־ת־ה",
+   "binyan": "paal",
+   "translit": "shata",
+   "forms": {
+    "V;PST;3;SG;MASC": "שָׁתָה",
+    "V;PRS;SG;MASC": "שׁוֹתֶה",
+    "V;PRS;SG;FEM": "שׁוֹתָה",
+    "V;PRS;PL;MASC": "שׁוֹתִים",
+    "V;PRS;PL;FEM": "שׁוֹתוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Water in the heat, coffee in the morning; on its own, often alcohol.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drink",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drink"
+     },
+     {
+      "id": "s2",
+      "def": "to drink alcohol (without an object)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹתֶה מַיִם.",
+      "tr": "I (m.) drink water.",
+      "register": "neutral",
+      "context": "daily routine",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה אַתְּ שׁוֹתָה בַּבֹּקֶר?",
+      "tr": "What do you (f.) drink in the morning?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא לֹא שׁוֹתֶה, הוּא נוֹהֵג.",
+      "tr": "He isn’t drinking — he’s driving.",
+      "register": "colloquial",
+      "context": "party",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לִשְׁתּוֹת קָפֶה",
+      "tr": "to drink coffee"
+     },
+     {
+      "text": "לִשְׁתּוֹת לְחַיִּים",
+      "tr": "to drink a toast (“to life”)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "לָגַם",
+      "register": "literary",
+      "nuance": "to sip, take a gulp"
+     },
+     {
+      "word": "גָּמַע",
+      "register": "literary",
+      "nuance": "to gulp down, drink in one go"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Aramaic אִשְׁתִּי (ʾištī), Ge’ez ሰትየ (sätyä).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "מִשְׁתֶּה (a feast, literally “a drinking”), the word for the banquets of the Purim story, comes from the same root."
+    ],
+    "pitfalls": [
+     "A lamed-he verb: the present ends in a vowel — שׁוֹתֶה (m), שׁוֹתָה (f); the feminine has no -ֶת ending like אוֹכֶלֶת.",
+     "Infinitive לִשְׁתּוֹת (lishtot), with a dagesh in the ת."
+    ],
+    "subtleties": [
+     "Without an object, הוּא שׁוֹתֶה can mean “he drinks (alcohol)” — as in English."
+    ]
+   }
+  },
+  {
+   "id": "he:kana",
+   "lemma": "קָנָה",
+   "pos": "VERB",
+   "senses": [
+    "verb.buy"
+   ],
+   "root": "ק־נ־ה",
+   "binyan": "paal",
+   "translit": "kana",
+   "forms": {
+    "V;PST;3;SG;MASC": "קָנָה",
+    "V;PRS;SG;MASC": "קוֹנֶה",
+    "V;PRS;SG;FEM": "קוֹנָה",
+    "V;PRS;PL;MASC": "קוֹנִים",
+    "V;PRS;PL;FEM": "קוֹנוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The market, the supermarket, the shopping list.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to buy, to purchase",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.buy"
+     },
+     {
+      "id": "s2",
+      "def": "to acquire, to obtain (formal; wisdom, a friend)",
+      "register": [
+       "formal"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to accept as true, to “buy” (a story)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹנֶה לֶחֶם בַּמַּכֹּלֶת.",
+      "tr": "I (m.) buy bread at the grocery shop.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא קוֹנָה פֵּרוֹת בַּשּׁוּק.",
+      "tr": "She buys fruit at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא קוֹנֶה אֶת הַסִּפּוּר הַזֶּה.",
+      "tr": "I don’t buy that story.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לִקְנוֹת בַּשּׁוּק",
+      "tr": "to shop at the market"
+     },
+     {
+      "text": "לִקְנוֹת בְּזוֹל",
+      "tr": "to buy cheaply"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "קְנֵה לְךָ חָבֵר",
+      "tr": "acquire a friend for yourself",
+      "kind": "quote",
+      "meaning": "make the effort to find a true friend",
+      "register": "literary",
+      "source": "Pirkei Avot 1:6"
+     },
+     {
+      "text": "קָנָה אֶת לִבּוֹ",
+      "tr": "he bought his heart",
+      "kind": "idiom",
+      "meaning": "he won him over, captivated him",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "רָכַשׁ",
+      "register": "formal",
+      "nuance": "to acquire, purchase — written, commercial and official language"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Aramaic קְנָא (“to acquire”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The present participle is also a noun: קוֹנֶה “buyer, customer”.",
+     "Same letters, a different word: קָנֶה “reed, cane” — related to Greek κάννα and to English cane, canal, cannon."
+    ],
+    "pitfalls": [
+     "A lamed-he verb like שָׁתָה: קוֹנֶה (m), קוֹנָה (f), קוֹנִים, קוֹנוֹת.",
+     "Do not confuse קוֹנָה “(she) buys” with קָנְתָה “she bought”."
+    ],
+    "subtleties": [
+     "In the Bible and in formal Hebrew קָנָה means “acquire” in general, not only with money: קְנֵה לְךָ חָבֵר."
+    ]
+   }
+  },
+  {
+   "id": "he:ahav",
+   "lemma": "אָהַב",
+   "pos": "VERB",
+   "senses": [
+    "verb.like"
+   ],
+   "root": "א־ה־ב",
+   "binyan": "paal",
+   "translit": "ahav",
+   "forms": {
+    "V;PST;3;SG;MASC": "אָהַב",
+    "V;PRS;SG;MASC": "אוֹהֵב",
+    "V;PRS;SG;FEM": "אוֹהֶבֶת",
+    "V;PRS;PL;MASC": "אוֹהֲבִים",
+    "V;PRS;PL;FEM": "אוֹהֲבוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses אָהַב only as “to love”; in Modern Hebrew the same verb is the normal way to say “like” for food and activities (אֲנִי אוֹהֵב חֲצִילִים), and the profile shows both senses."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "From “I like salad” to “I love you” — one verb for both.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to like (food, activities, things)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.like"
+     },
+     {
+      "id": "s2",
+      "def": "to love (a person)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא אוֹהֶבֶת יְרָקוֹת.",
+      "tr": "She likes vegetables.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "אַתָּה אוֹהֵב קָפֶה?",
+      "tr": "Do you like coffee?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי אוֹהֵב אוֹתָךְ.",
+      "tr": "I love you (a man to a woman).",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אוֹהֵב מְאֹד",
+      "tr": "likes very much"
+     },
+     {
+      "text": "אוֹהֵב לְבַשֵּׁל",
+      "tr": "likes to cook"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וְאָהַבְתָּ לְרֵעֲךָ כָּמוֹךָ",
+      "tr": "and you shall love your neighbour as yourself",
+      "kind": "quote",
+      "meaning": "the Golden Rule",
+      "register": "literary",
+      "source": "Leviticus 19:18"
+     },
+     {
+      "text": "אַהֲבָה מִמַּבָּט רִאשׁוֹן",
+      "tr": "love from a first look",
+      "kind": "fixed expression",
+      "meaning": "love at first sight",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "חִבֵּב",
+      "register": "formal",
+      "nuance": "to be fond of, to like (people or things) — milder than אָהַב"
+     },
+     {
+      "word": "מֵת עַל",
+      "register": "slang",
+      "nuance": "“dying on” — to be crazy about: אֲנִי מֵת עַל חֲצִילִים"
+     },
+     {
+      "word": "מָצָא חֵן בְּעֵינֵי",
+      "register": "neutral",
+      "nuance": "“found favour in my eyes” = I like it; the thing liked is the subject: הַסָּלָט מָצָא חֵן בְּעֵינַי"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "שָׂנֵא",
+      "note": "to hate"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Ugaritic 𐎀𐎅𐎁 (ảhb).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew uses one verb for “like” and “love”: אֲנִי אוֹהֵב חֲצִילִים and אֲנִי אוֹהֵב אוֹתָךְ.",
+     "אַהֲבָה (love) and אָהוּב (beloved) come from the same root."
+    ],
+    "pitfalls": [
+     "A definite object needs אֶת: אֲנִי אוֹהֵב אֶת הַסָּלָט — but אֲנִי אוֹהֵב סָלָט.",
+     "Plural with hataf patah: אוֹהֲבִים, אוֹהֲבוֹת."
+    ],
+    "subtleties": [
+     "For people אוֹהֵב is strong (“love”); to say you simply like someone, Hebrew prefers מְחַבֵּב."
+    ]
+   }
+  },
+  {
+   "id": "he:ratsa",
+   "lemma": "רָצָה",
+   "pos": "VERB",
+   "senses": [
+    "verb.want"
+   ],
+   "root": "ר־צ־ה",
+   "binyan": "paal",
+   "translit": "ratsa",
+   "forms": {
+    "V;PST;3;SG;MASC": "רָצָה",
+    "V;PRS;SG;MASC": "רוֹצֶה",
+    "V;PRS;SG;FEM": "רוֹצָה",
+    "V;PRS;PL;MASC": "רוֹצִים",
+    "V;PRS;PL;FEM": "רוֹצוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Wishes, orders at the counter, children asking for ice cream.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to want",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.want"
+     },
+     {
+      "id": "s2",
+      "def": "to accept, to be pleased with (Biblical)",
+      "register": [
+       "archaic"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי רוֹצֶה מַיִם, בְּבַקָּשָׁה.",
+      "tr": "I’d like (I want) water, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "מָה אַתְּ רוֹצָה לֶאֱכֹל?",
+      "tr": "What do you (f.) want to eat?",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים רוֹצִים גְּלִידָה.",
+      "tr": "The children want ice cream.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רוֹצֶה עוֹד",
+      "tr": "wants more"
+     },
+     {
+      "text": "רוֹצֶה לִקְנוֹת",
+      "tr": "wants to buy"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אִם תִּרְצוּ, אֵין זוֹ אַגָּדָה",
+      "tr": "if you will it, it is no legend",
+      "kind": "quote",
+      "meaning": "determination can make a dream real",
+      "register": "neutral",
+      "source": "Theodor Herzl, Altneuland (1902), motto"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "בָּא לִי",
+      "register": "colloquial",
+      "nuance": "“it comes to me” = I feel like (it): בָּא לִי גְּלִידָה; the thing wanted is the subject"
+     },
+     {
+      "word": "חָפֵץ",
+      "register": "literary",
+      "nuance": "to desire, to wish — elevated style"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic رَضِيَ (raḍiya).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Bible רָצָה means “to be pleased with, to accept” — close to its Arabic relative رَضِيَ (raḍiya, “to be satisfied”); “to want” is the later meaning."
+    ],
+    "pitfalls": [
+     "Homograph: רָצָה is also “(she) runs” (the present of רָץ). הוּא רָצָה (ratsá) = he wanted; הִיא רָצָה (rátsa) = she runs.",
+     "A lamed-he verb: רוֹצֶה (m), רוֹצָה (f)."
+    ],
+    "subtleties": [
+     "In shops Israelis often ask with אֶפְשָׁר …? (“is it possible …?”) — politer than אֲנִי רוֹצֶה."
+    ]
+   }
+  },
+  {
+   "id": "he:et",
+   "lemma": "אֶת",
+   "pos": "ADP",
+   "senses": [],
+   "translit": "et",
+   "role": "marks a definite direct object (no English equivalent): אֲנִי אוֹכֵל אֶת הַגֶּזֶר",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  }
+ ],
+ "absent": []
+}

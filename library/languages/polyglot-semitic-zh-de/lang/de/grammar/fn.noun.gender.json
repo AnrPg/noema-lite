@@ -1,0 +1,251 @@
+{
+ "function": "fn.noun.gender",
+ "status": "realized",
+ "summary": "Every German noun is masculine (der), feminine (die) or neuter (das). The gender belongs to the word, not to the thing: der Tisch, die Tür, das Fenster – and for people it usually follows the sex (der Mann, die Frau) but not always (das Mädchen, das Kind, die Person). Learn each noun with its article. Endings give good hints – -ung, -heit, -keit, -in, -ion are feminine; -chen, -lein are neuter; -ling, -ismus are masculine – and a compound takes the gender of its last part (die Haustür, der Kleiderschrank). The gender decides the article, dieser, the pronoun (der Tisch → er) and, later, the adjective ending.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "der (masculine)",
+    "die (feminine)",
+    "das (neuter)"
+   ],
+   "rows": [
+    [
+     "der Tisch",
+     "die Tür",
+     "das Haus"
+    ],
+    [
+     "der Stuhl",
+     "die Wand",
+     "das Zimmer"
+    ],
+    [
+     "der Schrank",
+     "die Lampe",
+     "das Fenster"
+    ],
+    [
+     "der Stift",
+     "die Wohnung",
+     "das Bett"
+    ],
+    [
+     "der Schlüssel",
+     "die Tasche",
+     "das Buch"
+    ],
+    [
+     "der Teller",
+     "die Tasse",
+     "das Glas"
+    ],
+    [
+     "der Mann, der Junge",
+     "die Frau, die Person",
+     "das Papier, das Telefon, das Handy"
+    ],
+    [
+     "der Lehrer, der Freund",
+     "die Lehrerin, die Freundin",
+     "das Kind, das Mädchen"
+    ]
+   ],
+   "caption": "The words of S01 and S04 by gender"
+  },
+  {
+   "t": "table",
+   "head": [
+    "gender",
+    "useful endings",
+    "examples",
+    "watch out"
+   ],
+   "rows": [
+    [
+     "die",
+     "-ung, -heit, -keit, -schaft, -ion, -in; most nouns in -e",
+     "die Wohnung, die Freiheit, die Lehrerin, die Lampe, die Tasse",
+     "der Junge, der Name, der Käse, das Auge"
+    ],
+    [
+     "das",
+     "-chen, -lein (always); most -um, -ment; many Ge- nouns",
+     "das Mädchen, das Tischlein, das Zentrum, das Dokument",
+     "der Gedanke, die Geschichte"
+    ],
+    [
+     "der",
+     "-ling, -ismus; -er for people and tools; days, months, seasons",
+     "der Frühling, der Lehrer, der Montag, der Sommer",
+     "das Fenster, das Zimmer, die Mutter"
+    ]
+   ],
+   "caption": "Hints from the ending"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Compounds: the last part decides",
+   "text": "Haus + die Tür → die Haustür · Kleider + der Schrank → der Kleiderschrank · Wohnen + das Zimmer → das Wohnzimmer · Kugel + der Schreiber → der Kugelschreiber."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Grammar, not nature",
+   "text": "das Mädchen (girl) and das Kind (child) are neuter; die Person is feminine even for a man. The pronoun follows the noun: Das Mädchen ist hier – es …"
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Same as Greek",
+     "points": [
+      "das Mädchen – το κορίτσι (both neuter)",
+      "die Tür – η πόρτα",
+      "das Haus – το σπίτι",
+      "das Buch – το βιβλίο"
+     ]
+    },
+    {
+     "title": "Different from Greek",
+     "points": [
+      "die Wand – ο τοίχος",
+      "der Stuhl – η καρέκλα",
+      "der Tisch – το τραπέζι",
+      "der Teller – το πιάτο"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Did I learn this noun with its article? (der Tisch, die Tür, das Bett)",
+   "Is it a person? Usually by sex – but das Mädchen, das Kind, die Person.",
+   "Does the ending give it away: -ung / -heit / -keit / -in / -ion → die; -chen / -lein → das; -ling / -ismus → der?",
+   "Is it a compound? Take the gender of the last part.",
+   "Which pronoun refers back to it? der → er, die → sie, das → es."
+  ],
+  "steps": [
+   "Recall the article learned with the noun.",
+   "Check the ending and the last part of a compound.",
+   "Use the gender for the article, dieser and the pronoun."
+  ]
+ },
+ "traps": [
+  "Most nouns in -e are feminine, but der Junge, der Name, der Käse and das Auge are not.",
+  "Most -er nouns for people and tools are masculine (der Lehrer), but das Fenster, das Zimmer, die Mutter.",
+  "The plural hides the gender – die Tische, die Türen, die Betten: always learn the singular with der/die/das.",
+  "der Stift (pen) and das Stift (monastery) are two different nouns."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:der",
+   "de:ein",
+   "de:dieser",
+   "de:jener"
+  ]
+ },
+ "needs": {
+  "NOUN": 8
+ },
+ "generators": [
+  {
+   "type": "gender_article",
+   "pos": "NOUN",
+   "count": 15
+  },
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "build_sentence"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Wohnung – which article?",
+   "options": [
+    "der",
+    "die",
+    "das"
+   ],
+   "answer": "die",
+   "why": "Nouns in -ung are feminine."
+  },
+  {
+   "q": "Mädchen – which article?",
+   "options": [
+    "der",
+    "die",
+    "das"
+   ],
+   "answer": "das",
+   "why": "Nouns in -chen are neuter."
+  },
+  {
+   "q": "Haustür (Haus + Tür) – which article?",
+   "options": [
+    "der",
+    "die",
+    "das"
+   ],
+   "answer": "die",
+   "why": "The last part decides: die Tür."
+  },
+  {
+   "q": "Kleiderschrank (Kleider + Schrank) – which article?",
+   "options": [
+    "der",
+    "die",
+    "das"
+   ],
+   "answer": "der",
+   "why": "The last part decides: der Schrank."
+  },
+  {
+   "q": "Lehrerin – which article?",
+   "options": [
+    "der",
+    "die",
+    "das"
+   ],
+   "answer": "die",
+   "why": "Female forms in -in are feminine."
+  },
+  {
+   "q": "A man is a “Person”. Which pronoun refers to “die Person”?",
+   "options": [
+    "er",
+    "sie",
+    "es"
+   ],
+   "answer": "sie",
+   "why": "The pronoun follows the noun’s gender: die Person → sie."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.noun.gender",
+   "note": "Arabic has two genders; most feminine nouns end in -a (tāʾ marbūṭa: madrasa, school)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.noun.gender",
+   "note": "Hebrew has two genders; feminine nouns usually end in -a or -t (ha-ir, the city, is a feminine exception)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.noun.gender",
+   "note": "Chinese nouns have no grammatical gender at all; the measure word is what you learn with the noun."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.definite",
+   "note": "The gender shows on the article: der / die / das, ein / eine / ein."
+  }
+ ]
+}

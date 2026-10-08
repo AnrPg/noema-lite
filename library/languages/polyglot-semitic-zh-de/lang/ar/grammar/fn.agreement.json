@@ -1,0 +1,213 @@
+{
+ "function": "fn.agreement",
+ "status": "realized",
+ "summary": "In Arabic the words that point to a noun follow its gender and number: demonstratives (هٰذَا بَابٌ / هٰذِهِ غُرْفَةٌ), pronouns (الْبَابُ؟ هُوَ هُنَا / الْغُرْفَةُ؟ هِيَ هُنَا), person nouns used as predicates (هُوَ طَالِبٌ / هِيَ طَالِبَةٌ) — and, from lesson 16, adjectives and verbs. The great rule: plurals of things agree as feminine singular — هٰذِهِ الْكُتُبُ (these books), الْمَفَاتِيحُ؟ هِيَ هُنَا (the keys? they are here). Only plurals of people take plural agreement: هٰؤُلَاءِ طُلَّابٌ، هُمْ هُنَاكَ.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "noun",
+    "this",
+    "it / they",
+    "example"
+   ],
+   "rows": [
+    [
+     "بَاب (m.)",
+     "هٰذَا",
+     "هُوَ",
+     "هٰذَا بَابٌ. الْبَابُ؟ هُوَ هُنَاكَ."
+    ],
+    [
+     "غُرْفَة (f.)",
+     "هٰذِهِ",
+     "هِيَ",
+     "هٰذِهِ غُرْفَةٌ. الْغُرْفَةُ؟ هِيَ هُنَا."
+    ],
+    [
+     "كُتُب (things, pl.)",
+     "هٰذِهِ",
+     "هِيَ",
+     "هٰذِهِ كُتُبٌ. الْكُتُبُ؟ هِيَ هُنَا."
+    ],
+    [
+     "طُلَّاب (men or mixed, pl.)",
+     "هٰؤُلَاءِ",
+     "هُمْ",
+     "هٰؤُلَاءِ طُلَّابٌ. الطُّلَّابُ؟ هُمْ هُنَاكَ."
+    ],
+    [
+     "طَالِبَات (women, pl.)",
+     "هٰؤُلَاءِ",
+     "هُنَّ",
+     "هٰؤُلَاءِ طَالِبَاتٌ. الطَّالِبَاتُ؟ هُنَّ هُنَا."
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Things in the plural = “she”.",
+   "text": "The most useful agreement rule of Arabic: any plural that is not people is treated like one feminine thing — هٰذِهِ، تِلْكَ، هِيَ, and later a feminine singular adjective and verb (الْكُتُبُ جَدِيدَةٌ, the books are new)."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "People as predicates agree with the subject.",
+   "text": "هُوَ طَالِبٌ، هِيَ طَالِبَةٌ، هُمْ طُلَّابٌ، هُنَّ طَالِبَاتٌ."
+  },
+  {
+   "t": "flow",
+   "items": [
+    "find the noun",
+    "people or things?",
+    "masculine or feminine?",
+    "one, two or several?",
+    "choose “this”, “it” (later: adjective, verb)"
+   ]
+  },
+  {
+   "t": "p",
+   "text": "Coming later: an adjective follows its noun and agrees in gender, number, case and definiteness (الْبَيْتُ الْكَبِيرُ, the big house — lesson 16); a verb before its subject stays singular (كَانَ النَّاسُ أَصْدِقَاءَ)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Which noun does the word refer to?",
+   "Is it a person, or a group of people?",
+   "Not people and plural? → feminine singular (هٰذِهِ، تِلْكَ، هِيَ).",
+   "People → masculine or feminine; one, two or several? (a mixed group is masculine)",
+   "Is the agreeing word a verb standing before its subject? → singular (later lessons)."
+  ]
+ },
+ "traps": [
+  "*هٰؤُلَاءِ الْمَفَاتِيحُ → هٰذِهِ الْمَفَاتِيحُ.",
+  "*الْكُتُبُ؟ هُمْ هُنَا → الْكُتُبُ؟ هِيَ هُنَا.",
+  "The gender comes from the word, not the thing: الْكَأْسُ؟ هِيَ هُنَا, but الْفِنْجَانُ؟ هُوَ هُنَا.",
+  "A mixed group of people is masculine: الطُّلَّابُ وَالطَّالِبَاتُ؟ هُمْ هُنَا."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:hadha",
+   "ar:dhalika",
+   "ar:haulai",
+   "ar:ulaika",
+   "ar:huwa",
+   "ar:hiya",
+   "ar:hum",
+   "ar:hunna"
+  ]
+ },
+ "paradigmCells": [
+  "PRON;SG;MASC",
+  "PRON;SG;FEM",
+  "PRON;PL"
+ ],
+ "needs": {
+  "NOUN": 6,
+  "PRON": 4
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.agreement"
+    ],
+    "variant": "Number"
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.agreement"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "inflect",
+   "pos": "PRON",
+   "class": "dem",
+   "cells": [
+    "PRON;SG;MASC",
+    "PRON;SG;FEM",
+    "PRON;PL"
+   ]
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "“These keys” (مَفَاتِيح):",
+   "options": [
+    "هٰذِهِ الْمَفَاتِيحُ",
+    "هٰؤُلَاءِ الْمَفَاتِيحُ",
+    "هٰذَا الْمَفَاتِيحُ"
+   ],
+   "answer": "هٰذِهِ الْمَفَاتِيحُ",
+   "why": "Things in the plural → feminine singular."
+  },
+  {
+   "q": "الْكُتُبُ؟ … هُنَا. (The books? They are here.)",
+   "options": [
+    "هِيَ",
+    "هُمْ",
+    "هُوَ"
+   ],
+   "answer": "هِيَ",
+   "why": "A plural of things is “she”."
+  },
+  {
+   "q": "الطُّلَّابُ؟ … هُنَاكَ. (The students? They are there.)",
+   "options": [
+    "هُمْ",
+    "هِيَ",
+    "هُنَّ"
+   ],
+   "answer": "هُمْ",
+   "why": "People in the plural: masculine or mixed → هُمْ."
+  },
+  {
+   "q": "الْكَأْسُ؟ … هُنَا. (The glass? It is here.)",
+   "options": [
+    "هِيَ",
+    "هُوَ"
+   ],
+   "answer": "هِيَ",
+   "why": "كَأْس is feminine."
+  },
+  {
+   "q": "“Those plates” (صُحُون):",
+   "options": [
+    "تِلْكَ الصُّحُونُ",
+    "أُولٰئِكَ الصُّحُونُ",
+    "ذٰلِكَ الصُّحُونُ"
+   ],
+   "answer": "تِلْكَ الصُّحُونُ",
+   "why": "Things in the plural, far → تِلْكَ."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.agreement",
+   "note": "Hebrew agrees in gender and number the same way but gives plurals of things plural agreement (הַסְּפָרִים הָאֵלֶּה, these books) — switch the rule when you change language."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.agreement",
+   "note": "German agreement runs through articles and adjective endings in four cases (ein großes Haus); plurals of things are simply plural (die Bücher … sie)."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.demonstrative",
+   "note": "Chinese has no agreement at all: 这本书 / 这些书 — only the measure word and 些 change."
+  }
+ ]
+}

@@ -1,0 +1,173 @@
+{
+ "field": "family",
+ "title": "Family",
+ "subgroups": [
+  {
+   "id": "core",
+   "title": "The close family"
+  },
+  {
+   "id": "extended",
+   "title": "The extended family"
+  }
+ ],
+ "sources": [
+  "The family, the extended family included — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "family.family",
+   "gloss": "family",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "family.parents",
+   "gloss": "parents",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "family.mother",
+   "gloss": "mother",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "family.father",
+   "gloss": "father",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "family.son",
+   "gloss": "son",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "family.daughter",
+   "gloss": "daughter",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "family.brother",
+   "gloss": "brother",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "family.sister",
+   "gloss": "sister",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "family.husband",
+   "gloss": "husband",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "family.wife",
+   "gloss": "wife",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "family.baby",
+   "gloss": "baby",
+   "subgroup": "core",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "family.grandparents",
+   "gloss": "grandparents",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "family.grandfather",
+   "gloss": "grandfather",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "family.grandmother",
+   "gloss": "grandmother",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "family.grandson",
+   "gloss": "grandson",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "family.granddaughter",
+   "gloss": "granddaughter",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "family.uncle",
+   "gloss": "uncle",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "family.aunt",
+   "gloss": "aunt",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "family.cousin",
+   "gloss": "cousin",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "family.nephew",
+   "gloss": "nephew",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "family.niece",
+   "gloss": "niece",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "family.relative",
+   "gloss": "relative",
+   "subgroup": "extended",
+   "tier": 1,
+   "rank": 22
+  }
+ ]
+}

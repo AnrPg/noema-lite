@@ -12,7 +12,10 @@
  "citationCells": {
   "NOUN": "N;SG;INDF",
   "VERB": "V;PST;3;SG;MASC",
-  "PRON.dem": "PRON;SG;MASC"
+  "PRON.dem": "PRON;SG;MASC",
+  "DET.dem": "DET;SG;MASC",
+  "NOUN.plt": "N;PL;INDF",
+  "NOUN.sgt": "N;SG;INDF"
  },
  "paradigmCells": {
   "NOUN": [
@@ -43,7 +46,10 @@
   "PRON.dem": [
    "PRON;SG;MASC",
    "PRON;SG;FEM",
-   "PRON;PL"
+   "PRON;PL",
+   "PRON;SG;MASC;DEF",
+   "PRON;SG;FEM;DEF",
+   "PRON;PL;DEF"
   ],
   "ADP.suffixed": [
    "ADP;1;SG",
@@ -56,12 +62,29 @@
    "ADP;2;PL;FEM",
    "ADP;3;PL;MASC",
    "ADP;3;PL;FEM"
+  ],
+  "DET.dem": [
+   "DET;SG;MASC",
+   "DET;SG;FEM",
+   "DET;PL;MASC",
+   "DET;PL;FEM"
+  ],
+  "NOUN.plt": [
+   "N;PL;INDF",
+   "N;PL;DEF"
+  ],
+  "NOUN.sgt": [
+   "N;SG;INDF",
+   "N;SG;DEF"
   ]
  },
  "classes": {
   "NOUN.mass": "mass nouns used without a plural in everyday Hebrew (שׁוּם, בְּרוֹקוֹלִי, תִּירָס …)",
   "VERB.copula": "הָיָה “to be”: no present tense in use, so past, future and infinitive cells",
-  "PRON.dem": "the demonstrative זֶה / זֹאת / אֵלֶּה",
-  "ADP.suffixed": "a prefix preposition (לְ) whose pronoun forms are separate words (לִי, לְךָ …)"
+  "PRON.dem": "the demonstrative זֶה / זֹאת / אֵלֶּה, alone (presenting) and with the article after a definite noun (הַזֶּה / הַזֹּאת / הָאֵלֶּה)",
+  "ADP.suffixed": "a prefix preposition (לְ) whose pronoun forms are separate words (לִי, לְךָ …)",
+  "DET.dem": "the distal demonstrative הַהוּא / הַהִיא / הָהֵם / הָהֵן “that, those”, after a definite noun",
+  "NOUN.plt": "nouns used only in the plural (אֲנָשִׁים “people”)",
+  "NOUN.sgt": "count nouns with no plural in use (אָדָם “person”: the plural is said with another word, אֲנָשִׁים / בְּנֵי אָדָם)"
  }
 }

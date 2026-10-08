@@ -1,0 +1,833 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:chi",
+   "lemma": "吃",
+   "trad": "吃",
+   "pinyin": "chī",
+   "pos": "VERB",
+   "senses": [
+    "verb.eat"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Central to social life: food is how people show care.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to eat",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.eat"
+     },
+     {
+      "id": "s2",
+      "def": "to take (medicine)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "to suffer, endure (吃苦, 吃亏)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们一起吃饭吧。",
+      "tr": "Let's eat together.",
+      "register": "informal",
+      "context": "friends",
+      "sense": "s1",
+      "py": "Wǒmen yìqǐ chīfàn ba."
+     },
+     {
+      "text": "我不吃肉。",
+      "tr": "I don't eat meat.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1",
+      "py": "Wǒ bù chī ròu."
+     },
+     {
+      "text": "你吃药了吗？",
+      "tr": "Have you taken your medicine?",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s2",
+      "py": "Nǐ chī yào le ma?"
+     },
+     {
+      "text": "他从小吃了很多苦。",
+      "tr": "He has suffered a lot since childhood.",
+      "register": "neutral",
+      "context": "figurative",
+      "sense": "s3",
+      "py": "Tā cóngxiǎo chīle hěn duō kǔ."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "吃饭",
+      "tr": "to eat, have a meal"
+     },
+     {
+      "text": "吃药",
+      "tr": "to take medicine"
+     },
+     {
+      "text": "吃亏",
+      "tr": "to suffer a loss"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "吃醋",
+      "tr": "to eat vinegar",
+      "kind": "idiom",
+      "meaning": "to be jealous (in love)",
+      "register": "colloquial"
+     },
+     {
+      "text": "吃不了兜着走",
+      "tr": "what you can't eat you'll carry away",
+      "kind": "idiom",
+      "meaning": "you'll have to face the consequences",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "食",
+      "register": "literary",
+      "nuance": "classical word for eat; lives on in compounds (食物 food, 饮食 diet)"
+     },
+     {
+      "word": "用",
+      "register": "formal",
+      "nuance": "polite, said to guests: 请慢用 = enjoy your meal"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 口 (‘mouth’) + phonetic 乞.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "吃了吗？(‘Have you eaten?’) is a greeting, like ‘How are you?’ — not an invitation to a meal."
+    ],
+    "pitfalls": [
+     "Drinks take 喝, not 吃: 喝水, 喝茶 — and soup is drunk: 喝汤.",
+     "吃 is used where English says ‘take’: 吃药 (take medicine)."
+    ],
+    "subtleties": [
+     "吃 + an experience = to undergo it: 吃苦 (endure hardship), 吃亏 (lose out), 吃惊 (be startled)."
+    ]
+   }
+  },
+  {
+   "id": "zh:he.drink",
+   "lemma": "喝",
+   "trad": "喝",
+   "pinyin": "hē",
+   "pos": "VERB",
+   "senses": [
+    "verb.drink"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Tea, water, soup — and, at a dinner table, often alcohol.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to drink",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.drink"
+     },
+     {
+      "id": "s2",
+      "def": "(specifically) to drink alcohol",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你喝什么？",
+      "tr": "What would you like to drink?",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1",
+      "py": "Nǐ hē shénme?"
+     },
+     {
+      "text": "我每天喝很多水。",
+      "tr": "I drink a lot of water every day.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1",
+      "py": "Wǒ měitiān hē hěn duō shuǐ."
+     },
+     {
+      "text": "我们喝汤吧。",
+      "tr": "Let's have the soup.",
+      "register": "neutral",
+      "context": "meals",
+      "sense": "s1",
+      "py": "Wǒmen hē tāng ba."
+     },
+     {
+      "text": "他昨天喝多了。",
+      "tr": "He drank too much yesterday.",
+      "register": "colloquial",
+      "context": "drinking",
+      "sense": "s2",
+      "py": "Tā zuótiān hē duō le."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "喝水",
+      "tr": "to drink water"
+     },
+     {
+      "text": "喝茶",
+      "tr": "to drink tea"
+     },
+     {
+      "text": "喝酒",
+      "tr": "to drink alcohol"
+     },
+     {
+      "text": "喝汤",
+      "tr": "to have soup"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "喝西北风",
+      "tr": "to drink the north-west wind",
+      "kind": "idiom",
+      "meaning": "to have nothing to eat; to go hungry",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "饮",
+      "register": "literary",
+      "nuance": "yǐn: written ‘to drink’, alive in compounds (饮料 drinks, 饮酒 drinking)"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: semantic 口 (‘mouth’) + phonetic 曷. An innovative written form of 欱, from Proto-Sino-Tibetan *hwap (‘to drink’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese eats soup with a spoon but still says 喝汤 ‘drink soup’."
+    ],
+    "pitfalls": [
+     "Soup and porridge are ‘drunk’ in Chinese: 喝汤, 喝粥.",
+     "The same character is read hè in 喝彩 (hècǎi, ‘to cheer’) — a different word, ‘to shout’."
+    ],
+    "subtleties": [
+     "At a dinner, 喝一杯 or just 喝 usually means alcohol: 你喝吗？ may be an offer of a drink."
+    ]
+   }
+  },
+  {
+   "id": "zh:mai",
+   "lemma": "买",
+   "trad": "買",
+   "pinyin": "mǎi",
+   "pos": "VERB",
+   "senses": [
+    "verb.buy"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Markets, shopping, bargains.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to buy",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.buy"
+     },
+     {
+      "id": "s2",
+      "def": "to buy off, bribe (in 收买, 买通)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我买一个南瓜。",
+      "tr": "I'll buy a pumpkin.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Wǒ mǎi yí ge nánguā."
+     },
+     {
+      "text": "他想买一辆车。",
+      "tr": "He wants to buy a car.",
+      "register": "neutral",
+      "context": "big purchases",
+      "sense": "s1",
+      "py": "Tā xiǎng mǎi yí liàng chē."
+     },
+     {
+      "text": "你在哪儿买的？",
+      "tr": "Where did you buy it?",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s1",
+      "py": "Nǐ zài nǎr mǎi de?"
+     },
+     {
+      "text": "他们收买了证人。",
+      "tr": "They bought off the witness.",
+      "register": "neutral",
+      "context": "crime news",
+      "sense": "s2",
+      "py": "Tāmen shōumǎile zhèngrén."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "买东西",
+      "tr": "to go shopping"
+     },
+     {
+      "text": "买菜",
+      "tr": "to buy groceries (vegetables)"
+     },
+     {
+      "text": "买单",
+      "tr": "to pay the bill"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "买椟还珠",
+      "tr": "buy the box, return the pearl",
+      "kind": "idiom",
+      "meaning": "to value the wrapping over the content",
+      "register": "literary"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "购买",
+      "register": "formal",
+      "nuance": "written, official ‘to purchase’"
+     },
+     {
+      "word": "购",
+      "register": "formal",
+      "nuance": "only in compounds: 购物 (shopping), 网购 (online shopping)"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "卖",
+      "note": "mài, to sell"
+     }
+    ],
+    "etymology": {
+     "text": "Ideogrammic compound: 网 (‘net’) + 貝 (‘cowrie’ = money); simplified 买. Possibly from Proto-Sino-Tibetan *laj (‘to buy; to barter’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Many money words contain 貝/贝 (cowrie shell, early money): 买, 卖, 贵 (expensive), 货 (goods)."
+    ],
+    "pitfalls": [
+     "买 mǎi (3rd tone) = buy, 卖 mài (4th tone) = sell; the extra 十 on top of 卖 means ‘sell’.",
+     "Traditional 買 has 貝 (money) at the bottom; the simplified form hides it."
+    ],
+    "subtleties": [
+     "买单 ‘to pay the bill’ came into Mandarin from Cantonese 埋单."
+    ]
+   }
+  },
+  {
+   "id": "zh:xihuan",
+   "lemma": "喜欢",
+   "trad": "喜歡",
+   "pinyin": "xǐ huan",
+   "pos": "VERB",
+   "senses": [
+    "verb.like"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "intensity": 2,
+    "feeling": "Warm, positive; from liking food to having a crush.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to like; to be fond of",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.like"
+     },
+     {
+      "id": "s2",
+      "def": "to tend to, to have a habit of (doing something)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我喜欢西红柿。",
+      "tr": "I like tomatoes.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1",
+      "py": "Wǒ xǐhuan xīhóngshì."
+     },
+     {
+      "text": "你喜欢什么颜色？",
+      "tr": "What colour do you like?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1",
+      "py": "Nǐ xǐhuan shénme yánsè?"
+     },
+     {
+      "text": "我喜欢你。",
+      "tr": "I like you. (I have feelings for you.)",
+      "register": "informal",
+      "context": "romance",
+      "sense": "s1",
+      "py": "Wǒ xǐhuan nǐ."
+     },
+     {
+      "text": "他总喜欢迟到。",
+      "tr": "He's always late (it's a habit of his).",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s2",
+      "py": "Tā zǒng xǐhuan chídào."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "喜欢吃",
+      "tr": "to like eating"
+     },
+     {
+      "text": "很喜欢",
+      "tr": "to like very much"
+     },
+     {
+      "text": "最喜欢",
+      "tr": "to like best"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "喜新厌旧",
+      "tr": "like the new, loathe the old",
+      "kind": "idiom",
+      "meaning": "to be fickle; always chasing the new",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "爱",
+      "register": "neutral",
+      "nuance": "stronger: ‘to love’; colloquially also ‘to love doing’: 爱吃"
+     },
+     {
+      "word": "喜爱",
+      "register": "formal",
+      "nuance": "written, ‘to be fond of’: 受到读者喜爱"
+     },
+     {
+      "word": "爱好",
+      "register": "neutral",
+      "nuance": "‘to be keen on’, mainly the noun ‘hobby’"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "讨厌",
+      "note": "tǎoyàn, to dislike"
+     }
+    ],
+    "etymology": {
+     "text": "喜 (‘joy, happy’) + 欢 (‘joyful, glad’): a compound of two words for joy.",
+     "src": "character composition"
+    },
+    "funFacts": [
+     "Both characters mean ‘joy’, so 喜欢 is literally ‘joy-joy’."
+    ],
+    "pitfalls": [
+     "Mainland standard has a neutral second syllable: xǐhuan; Taiwan says xǐhuān.",
+     "A verb follows directly — no ‘to’: 我喜欢吃玉米."
+    ],
+    "subtleties": [
+     "我喜欢你 is a typical way to confess feelings; 我爱你 is much heavier.",
+     "Degree words go before it: 很喜欢, 非常喜欢, 有点儿喜欢."
+    ]
+   }
+  },
+  {
+   "id": "zh:yao",
+   "lemma": "要",
+   "trad": "要",
+   "pinyin": "yào",
+   "pos": "VERB",
+   "senses": [
+    "verb.want"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Direct and practical: what you want, what is needed, what will happen.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to want (to have); to ask for",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.want"
+     },
+     {
+      "id": "s2",
+      "def": "to need; to take (time, money)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "will; to be going to (future)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "should; must",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "你要黄瓜吗？",
+      "tr": "Do you want cucumbers?",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1",
+      "py": "Nǐ yào huángguā ma?"
+     },
+     {
+      "text": "我要一杯咖啡。",
+      "tr": "I'd like a coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1",
+      "py": "Wǒ yào yì bēi kāfēi."
+     },
+     {
+      "text": "到北京要两个小时。",
+      "tr": "It takes two hours to get to Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2",
+      "py": "Dào Běijīng yào liǎng ge xiǎoshí."
+     },
+     {
+      "text": "要下雨了。",
+      "tr": "It's going to rain.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s3",
+      "py": "Yào xià yǔ le."
+     },
+     {
+      "text": "你要多喝水。",
+      "tr": "You should drink more water.",
+      "register": "neutral",
+      "context": "advice",
+      "sense": "s4",
+      "py": "Nǐ yào duō hē shuǐ."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "要不要",
+      "tr": "want it or not?"
+     },
+     {
+      "text": "不要",
+      "tr": "don't! / not want"
+     },
+     {
+      "text": "要是",
+      "tr": "if"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "不要脸",
+      "tr": "not want face",
+      "kind": "colloquial",
+      "meaning": "shameless",
+      "register": [
+       "colloquial",
+       "pejorative"
+      ]
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "想要",
+      "register": "neutral",
+      "nuance": "softer, ‘would like to have’"
+     },
+     {
+      "word": "需要",
+      "register": "neutral",
+      "nuance": "‘to need’ — necessity rather than wish"
+     }
+    ],
+    "etymology": {
+     "text": "Pictogram of a person with both hands at the waist; the original meaning was ‘waist’, now written 腰.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The character once meant ‘waist’ — when it was borrowed for ‘want’, the flesh radical was added to make a new character 腰."
+    ],
+    "pitfalls": [
+     "不要 + verb is a command, ‘don’t!’: 不要吃! ‘Don’t eat (it)!’ For ‘I don’t want to eat’ say 我不想吃.",
+     "In 要求 (yāoqiú, ‘to demand’) the character is read yāo (1st tone)."
+    ],
+    "subtleties": [
+     "要 is direct: at a counter 我要… is normal; to elders or hosts 我想要… sounds softer.",
+     "想 + verb = ‘would like to’ (a wish); 要 + verb = ‘want to, am going to’ (a firmer intention)."
+    ]
+   }
+  },
+  {
+   "id": "zh:xiang",
+   "lemma": "想",
+   "trad": "想",
+   "pinyin": "xiǎng",
+   "pos": "VERB",
+   "senses": [
+    "verb.want"
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Thinking, wishing, longing — soft and inward.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "to think; to think over; to suppose",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "to want to, would like to (+ verb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.want"
+     },
+     {
+      "id": "s3",
+      "def": "to miss (a person, home)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "我想喝水。",
+      "tr": "I'd like to drink some water.",
+      "register": "neutral",
+      "context": "everyday needs",
+      "sense": "s2",
+      "py": "Wǒ xiǎng hē shuǐ."
+     },
+     {
+      "text": "你想吃什么？",
+      "tr": "What would you like to eat?",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2",
+      "py": "Nǐ xiǎng chī shénme?"
+     },
+     {
+      "text": "我很想你。",
+      "tr": "I miss you very much.",
+      "register": "neutral",
+      "context": "feelings",
+      "sense": "s3",
+      "py": "Wǒ hěn xiǎng nǐ."
+     },
+     {
+      "text": "让我想想。",
+      "tr": "Let me think.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1",
+      "py": "Ràng wǒ xiǎngxiang."
+     },
+     {
+      "text": "我想他不会来。",
+      "tr": "I don't think he'll come.",
+      "register": "neutral",
+      "context": "opinions",
+      "sense": "s1",
+      "py": "Wǒ xiǎng tā bú huì lái."
+     }
+    ],
+    "collocations": [
+     {
+      "text": "想要",
+      "tr": "to want (to have)"
+     },
+     {
+      "text": "想家",
+      "tr": "to be homesick"
+     },
+     {
+      "text": "想法",
+      "tr": "idea; opinion"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "胡思乱想",
+      "tr": "think wildly, think chaotically",
+      "kind": "idiom",
+      "meaning": "to let one’s imagination run wild; to worry needlessly",
+      "register": "neutral"
+     },
+     {
+      "text": "异想天开",
+      "tr": "strange ideas open the sky",
+      "kind": "idiom",
+      "meaning": "a fanciful, unrealistic idea",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "要",
+      "register": "neutral",
+      "nuance": "more direct ‘want’, also ‘will’"
+     },
+     {
+      "word": "打算",
+      "register": "neutral",
+      "nuance": "‘to plan, intend’"
+     },
+     {
+      "word": "认为",
+      "register": "formal",
+      "nuance": "‘to consider, hold the view that’"
+     },
+     {
+      "word": "希望",
+      "register": "neutral",
+      "nuance": "‘to hope’"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic compound: phonetic 相 (‘to look at’) + semantic 心 (‘heart, mind’) — to visualise, to think. From Proto-Sino-Tibetan *saŋ (‘to think’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "心 ‘heart’ is at the bottom of 想: in Chinese tradition the heart is the seat of thought."
+    ],
+    "pitfalls": [
+     "想 needs a verb before a thing: 我想吃土豆 / 我想要土豆. 想 + a person or place means ‘miss’: 我想你 ‘I miss you’.",
+     "‘I don’t want to’ is 我不想 — not 我不要 (which sounds like a refusal or a command)."
+    ],
+    "subtleties": [
+     "想 = a wish (softer, may not happen); 要 = a firmer intention. 我想去 ‘I’d like to go’, 我要去 ‘I’m going to go’."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

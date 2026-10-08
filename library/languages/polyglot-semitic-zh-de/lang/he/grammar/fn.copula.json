@@ -1,0 +1,226 @@
+{
+ "function": "fn.copula",
+ "status": "realized",
+ "summary": "In the present tense Hebrew has no verb “to be”: the subject and what it is simply stand side by side — אֲנִי סְטוּדֶנְט “I (am) a student”, הַמּוֹרֶה פֹּה “the teacher (is) here”. This is a nominal sentence. In the past and future the verb הָיָה appears and agrees with the subject: הוּא הָיָה מוֹרֶה “he was a teacher”, הִיא הָיְתָה סְטוּדֶנְטִית, הֵם הָיוּ חֲבֵרִים; הוּא יִהְיֶה / הִיא תִּהְיֶה “he / she will be”. Between two nouns, especially in definitions, a pronoun that agrees with the subject can stand where “is” would be: יֶלֶד הוּא אָדָם “a child is a person”.",
+ "blocks": [
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "Present — no verb",
+     "points": [
+      "אֲנִי סְטוּדֶנְט — I am a student",
+      "הִיא מוֹרָה — she is a teacher",
+      "הַסֵּפֶר פֹּה — the book is here",
+      "זֶה בַּיִת — this is a house"
+     ]
+    },
+    {
+     "title": "Past and future — הָיָה",
+     "points": [
+      "אֲנִי הָיִיתִי סְטוּדֶנְט — I was a student",
+      "הִיא הָיְתָה מוֹרָה — she was a teacher",
+      "הַסֵּפֶר הָיָה פֹּה — the book was here",
+      "הִיא תִּהְיֶה מוֹרָה — she will be a teacher"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "head": [
+    "",
+    "past",
+    "future"
+   ],
+   "rows": [
+    [
+     "I",
+     "הָיִיתִי",
+     "אֶהְיֶה"
+    ],
+    [
+     "you (m.)",
+     "הָיִיתָ",
+     "—"
+    ],
+    [
+     "you (f.)",
+     "הָיִית",
+     "—"
+    ],
+    [
+     "he / it (m.)",
+     "הָיָה",
+     "יִהְיֶה"
+    ],
+    [
+     "she / it (f.)",
+     "הָיְתָה",
+     "תִּהְיֶה"
+    ],
+    [
+     "we",
+     "הָיִינוּ",
+     "נִהְיֶה"
+    ],
+    [
+     "you (m. pl.)",
+     "הֱיִיתֶם",
+     "—"
+    ],
+    [
+     "you (f. pl.)",
+     "הֱיִיתֶן",
+     "—"
+    ],
+    [
+     "they",
+     "הָיוּ",
+     "יִהְיוּ"
+    ]
+   ],
+   "caption": "The forms of הָיָה you meet now (the rest of the future comes with the verb lessons). Everyday spelling of הָיְתָה: הייתה."
+  },
+  {
+   "t": "p",
+   "text": "Word order stays the same as in English: subject first, then the predicate. In the past the verb goes between them: הַמּוֹרָה הָיְתָה פֹּה."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Agreement in the past",
+   "text": "הָיָה agrees with the subject, not with the noun after it: הַמִּטָּה הָיְתָה שָׁם (מִטָּה is feminine), הַשֻּׁלְחָן הָיָה פֹּה, הַסְּפָרִים הָיוּ פֹּה."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Do not invent a present",
+   "text": "There is no *אֲנִי הוֹוֶה סְטוּדֶנְט and no *אֲנִי הָיָה סְטוּדֶנְט for “I am”. הָיָה is always past: “was”."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "Russian already does this",
+   "text": "Я студент — Он был учителем — Она была студенткой: no verb in the present, a gendered verb in the past. Hebrew works the same way: אֲנִי סְטוּדֶנְט — הוּא הָיָה מוֹרֶה — הִיא הָיְתָה סְטוּדֶנְטִית."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "The pronoun as “is”",
+   "text": "With a noun subject, especially in definitions, Hebrew can put הוּא / הִיא / הֵם / הֵן where English has “is / are”: יֶלֶד הוּא אָדָם, יְלָדִים הֵם אֲנָשִׁים. It agrees with the subject. With a pronoun subject it is not used: אֲנִי מוֹרֶה, never *אֲנִי הוּא מוֹרֶה."
+  },
+  {
+   "t": "ask",
+   "title": "Ask yourself",
+   "questions": [
+    "Is it now (present)? → no verb.",
+    "Was it, or will it be? → a form of הָיָה.",
+    "Who or what is the subject: masculine, feminine, plural?"
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the sentence about now? → no verb at all: subject + noun / place.",
+   "Is it about the past? → הָיָה in the form of the subject: הָיִיתִי, הָיָה, הָיְתָה, הָיוּ …",
+   "Is it about the future? → יִהְיֶה (he), תִּהְיֶה (she), אֶהְיֶה (I) …",
+   "What is the gender and number of the subject? The verb follows the subject, not the noun after it.",
+   "Is the subject a noun and the predicate a noun, as in a definition? → you may add הוּא / הִיא / הֵם / הֵן (agreeing with the subject).",
+   "Is it “there is / there are”? → that is יֵשׁ (lesson 6), not a form of הָיָה in the present."
+  ],
+  "steps": [
+   "Decide the time: present, past or future.",
+   "Present: put the subject and the predicate side by side.",
+   "Past or future: insert the form of הָיָה that agrees with the subject."
+  ]
+ },
+ "traps": [
+  "No present “to be”: אֲנִי מוֹרֶה, not *אֲנִי הוּא מוֹרֶה or *אֲנִי הָיָה מוֹרֶה.",
+  "הָיָה means “was”, never “is”.",
+  "Past agreement follows the subject: הַדֶּלֶת הָיְתָה שָׁם (feminine), not *הַדֶּלֶת הָיָה שָׁם.",
+  "In the past the pronoun can be dropped (הָיִיתִי סְטוּדֶנְט), in the present it cannot (אֲנִי סְטוּדֶנְט).",
+  "The pronoun copula agrees with the subject, not with the predicate: אִשָּׁה הִיא אָדָם (אִשָּׁה is feminine, although אָדָם is masculine)."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:haya"
+  ]
+ },
+ "paradigmCells": [
+  "V;PST;3;SG;MASC",
+  "V;PST;3;SG;FEM",
+  "V;PST;3;PL",
+  "V;FUT;3;SG;MASC",
+  "V;FUT;3;SG;FEM",
+  "V;PST;1;SG",
+  "V;PST;1;PL"
+ ],
+ "needs": {
+  "PRON": 4,
+  "NOUN": 4
+ },
+ "generators": [
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "frames": [
+     "fr.be.person",
+     "fr.be.where",
+     "fr.thing.here"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "frames": [
+     "fr.be.person",
+     "fr.be.where"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.copula"
+    ],
+    "variant": "Tense"
+   }
+  },
+  {
+   "type": "inflect",
+   "pos": "VERB",
+   "lemmas": [
+    "he:haya"
+   ],
+   "cells": [
+    "V;PST;3;SG;MASC",
+    "V;PST;3;SG;FEM",
+    "V;PST;3;PL",
+    "V;FUT;3;SG;MASC",
+    "V;FUT;3;SG;FEM",
+    "V;PST;1;SG",
+    "V;PST;1;PL"
+   ]
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.copula",
+   "note": "Arabic too has a verbless present (أَنَا طَالِبٌ “I (am) a student”) and uses كَانَ in the past — which, unlike Hebrew הָיָה, puts the predicate in the accusative."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.copula",
+   "note": "German always says the verb and conjugates it for person: ich bin, du bist, er ist — Hebrew says nothing in the present."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.copula",
+   "note": "Chinese 是 links two nouns (我是学生) but is not used before adjectives (他很高); Hebrew needs no linking word for either."
+  }
+ ]
+}

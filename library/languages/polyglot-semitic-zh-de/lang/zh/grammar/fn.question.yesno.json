@@ -116,5 +116,22 @@
     ]
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.question.yesno",
+   "note": "German puts the verb first (Bist du Student?); Chinese keeps the statement order and adds 吗."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.question.yesno",
+   "note": "Arabic opens the question with hal or ʾa-; Chinese closes it with 吗."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.question.yesno",
+   "note": "Hebrew often uses intonation alone (or ha-im at the start); Chinese keeps its tones and uses 吗 instead."
+  }
  ]
 }

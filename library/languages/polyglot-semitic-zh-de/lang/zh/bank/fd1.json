@@ -1,0 +1,4071 @@
+{
+ "sentences": [
+  {
+   "id": "zh.f1.001",
+   "frame": "fr.be.person",
+   "text": "我是学生。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am a student.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.002",
+   "frame": "fr.be.person",
+   "text": "我们是学生。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are students.",
+   "variantOf": "zh.f1.001",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.003",
+   "frame": "fr.be.person",
+   "text": "你是老师。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You are a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.004",
+   "frame": "fr.be.person",
+   "text": "您是老师。",
+   "tokens": [
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You are a teacher. (polite)",
+   "variantOf": "zh.f1.003",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.005",
+   "frame": "fr.be.person",
+   "text": "你们是老师。",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "You (all) are teachers.",
+   "variantOf": "zh.f1.003",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.006",
+   "frame": "fr.be.person",
+   "text": "他是学生。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.007",
+   "frame": "fr.be.person",
+   "text": "他们是学生。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are students.",
+   "variantOf": "zh.f1.006",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.008",
+   "frame": "fr.be.person",
+   "text": "她是老师。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.009",
+   "frame": "fr.be.person",
+   "text": "她们是老师。",
+   "tokens": [
+    {
+     "t": "她们",
+     "l": "zh:tamen.f"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They (the women) are teachers.",
+   "variantOf": "zh.f1.008",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.010",
+   "frame": "fr.be.person",
+   "text": "他是男孩。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "男孩",
+     "l": "zh:nanhai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is a boy.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.011",
+   "frame": "fr.be.person",
+   "text": "她们是女孩。",
+   "tokens": [
+    {
+     "t": "她们",
+     "l": "zh:tamen.f"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "女孩",
+     "l": "zh:nvhai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are girls.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.012",
+   "frame": "fr.be.person",
+   "text": "我们是朋友。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are friends.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.013",
+   "frame": "fr.be.person",
+   "text": "我和他是朋友。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He and I are friends.",
+   "alts": [
+    "他和我是朋友。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.014",
+   "frame": "fr.be.person",
+   "text": "他是男人，她是女人。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "男人",
+     "l": "zh:nanren"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "女人",
+     "l": "zh:nvren"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is a man, she is a woman.",
+   "alts": [
+    "她是女人，他是男人。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.015",
+   "frame": "fr.be.person",
+   "text": "他们是老师和学生。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are teachers and students.",
+   "alts": [
+    "他们是学生和老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.016",
+   "frame": "fr.be.person",
+   "text": "他们是孩子。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They are children.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.017",
+   "frame": "fr.be.person",
+   "text": "我是老师，你是学生。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am the teacher, you are the student.",
+   "alts": [
+    "你是学生，我是老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.018",
+   "frame": "fr.be.person",
+   "text": "我是老师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.019",
+   "frame": "fr.be.person",
+   "text": "她是女孩，他是男孩。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "女孩",
+     "l": "zh:nvhai"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "男孩",
+     "l": "zh:nanhai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "She is a girl, he is a boy.",
+   "alts": [
+    "他是男孩，她是女孩。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.020",
+   "frame": "fr.be.where",
+   "text": "我在。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I’m here. (answering when someone calls you)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.021",
+   "frame": "fr.greet",
+   "text": "你好！",
+   "tokens": [
+    {
+     "t": "你好",
+     "l": "zh:nihao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.022",
+   "frame": "fr.greet",
+   "text": "您好！",
+   "tokens": [
+    {
+     "t": "您好",
+     "l": "zh:ninhao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello! (polite)",
+   "variantOf": "zh.f1.021",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.023",
+   "frame": "fr.greet",
+   "text": "老师，您好！",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "您好",
+     "l": "zh:ninhao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Hello, teacher!",
+   "alts": [
+    "您好，老师！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.024",
+   "frame": "fr.greet",
+   "text": "老师，早上好！",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "早上好",
+     "l": "zh:zaoshanghao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good morning, teacher!",
+   "alts": [
+    "早上好，老师！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.025",
+   "frame": "fr.greet",
+   "text": "晚上好，安娜！",
+   "tokens": [
+    {
+     "t": "晚上好",
+     "l": "zh:wanshanghao"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good evening, Anna!",
+   "alts": [
+    "安娜，晚上好！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.026",
+   "frame": "fr.greet",
+   "text": "晚安，小明！",
+   "tokens": [
+    {
+     "t": "晚安",
+     "l": "zh:wanan"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "小明",
+     "name": true
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Good night, Xiaoming!",
+   "alts": [
+    "小明，晚安！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.027",
+   "frame": "fr.greet",
+   "text": "再见！",
+   "tokens": [
+    {
+     "t": "再见",
+     "l": "zh:zaijian"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Goodbye!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.028",
+   "frame": "fr.greet",
+   "text": "拜拜！",
+   "tokens": [
+    {
+     "t": "拜拜",
+     "l": "zh:baibai"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Bye-bye! (casual)",
+   "variantOf": "zh.f1.027",
+   "variant": {
+    "Formality": "informal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.029",
+   "frame": "fr.greet",
+   "text": "老师再见！",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "再见",
+     "l": "zh:zaijian"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Goodbye, teacher!",
+   "alts": [
+    "再见，老师！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.030",
+   "frame": "fr.greet",
+   "text": "小明，回头见！",
+   "tokens": [
+    {
+     "t": "小明",
+     "name": true
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "回头见",
+     "l": "zh:huitoujian"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "See you later, Xiaoming!",
+   "alts": [
+    "回头见，小明！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.031",
+   "frame": "fr.greet",
+   "text": "你好吗？",
+   "tokens": [
+    {
+     "t": "你好吗",
+     "l": "zh:nihaoma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "How are you?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.032",
+   "frame": "fr.greet",
+   "text": "我很好，谢谢。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "很好",
+     "l": "zh:henhao"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "谢谢",
+     "l": "zh:xiexie"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m fine, thank you.",
+   "alts": [
+    "谢谢，我很好。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.033",
+   "frame": "fr.greet",
+   "text": "我还好。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "还好",
+     "l": "zh:haihao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "I’m OK.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.034",
+   "frame": "fr.greet",
+   "text": "你好吗？我很好。",
+   "tokens": [
+    {
+     "t": "你好吗",
+     "l": "zh:nihaoma"
+    },
+    {
+     "t": "？",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "很好",
+     "l": "zh:henhao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "How are you? — I’m fine.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.035",
+   "frame": "fr.greet",
+   "text": "你好！我叫安娜。",
+   "tokens": [
+    {
+     "t": "你好",
+     "l": "zh:nihao"
+    },
+    {
+     "t": "！",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "叫",
+     "l": "zh:jiao"
+    },
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Hello! My name is Anna.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.036",
+   "frame": "fr.greet",
+   "text": "您好！我叫安娜。",
+   "tokens": [
+    {
+     "t": "您好",
+     "l": "zh:ninhao"
+    },
+    {
+     "t": "！",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "叫",
+     "l": "zh:jiao"
+    },
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Hello! My name is Anna. (polite)",
+   "variantOf": "zh.f1.035",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.037",
+   "frame": "fr.greet",
+   "text": "我叫小明。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "叫",
+     "l": "zh:jiao"
+    },
+    {
+     "t": "小明",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "My name is Xiaoming.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.038",
+   "frame": "fr.greet",
+   "text": "她叫安娜。",
+   "tokens": [
+    {
+     "t": "她",
+     "l": "zh:ta.she"
+    },
+    {
+     "t": "叫",
+     "l": "zh:jiao"
+    },
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Her name is Anna.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.039",
+   "frame": "fr.greet",
+   "text": "认识你很高兴！",
+   "tokens": [
+    {
+     "t": "认识你很高兴",
+     "l": "zh:renshinihengaoxing"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Nice to meet you!",
+   "alts": [
+    "很高兴认识你！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.040",
+   "frame": "fr.greet",
+   "text": "安娜，很高兴认识你！",
+   "tokens": [
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "很高兴认识你",
+     "l": "zh:hengaoxingrenshini"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Anna, nice to meet you!",
+   "alts": [
+    "安娜，认识你很高兴！",
+    "很高兴认识你，安娜！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.041",
+   "frame": "fr.greet",
+   "text": "谢谢你！",
+   "tokens": [
+    {
+     "t": "谢谢",
+     "l": "zh:xiexie"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thank you!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.042",
+   "frame": "fr.greet",
+   "text": "谢谢您！",
+   "tokens": [
+    {
+     "t": "谢谢",
+     "l": "zh:xiexie"
+    },
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thank you! (polite)",
+   "variantOf": "zh.f1.041",
+   "variant": {
+    "Formality": "formal"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.043",
+   "frame": "fr.greet",
+   "text": "谢谢老师！",
+   "tokens": [
+    {
+     "t": "谢谢",
+     "l": "zh:xiexie"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thank you, teacher!",
+   "alts": [
+    "老师，谢谢！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.044",
+   "frame": "fr.greet",
+   "text": "谢谢！不客气。",
+   "tokens": [
+    {
+     "t": "谢谢",
+     "l": "zh:xiexie"
+    },
+    {
+     "t": "！",
+     "p": true
+    },
+    {
+     "t": "不客气",
+     "l": "zh:bukeqi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Thanks! — You’re welcome.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.045",
+   "frame": "fr.greet",
+   "text": "对不起，老师！",
+   "tokens": [
+    {
+     "t": "对不起",
+     "l": "zh:duibuqi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Sorry, teacher!",
+   "alts": [
+    "老师，对不起！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.046",
+   "frame": "fr.greet",
+   "text": "不好意思！",
+   "tokens": [
+    {
+     "t": "不好意思",
+     "l": "zh:buhaoyisi"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Sorry! / Excuse me! (a small thing)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.047",
+   "frame": "fr.greet",
+   "text": "老师，打扰一下。",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "打扰一下",
+     "l": "zh:daraoyixia"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Excuse me, teacher.",
+   "alts": [
+    "打扰一下，老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.048",
+   "frame": "fr.greet",
+   "text": "劳驾，劳驾！",
+   "tokens": [
+    {
+     "t": "劳驾",
+     "l": "zh:laojia"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "劳驾",
+     "l": "zh:laojia"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "Excuse me, excuse me! (making your way through)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.049",
+   "frame": "fr.greet",
+   "text": "老师，您请！",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings"
+   ],
+   "gloss": "After you, teacher!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.050",
+   "frame": "fr.be.person",
+   "text": "对，我是老师。",
+   "tokens": [
+    {
+     "t": "对",
+     "l": "zh:dui"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "Yes, I am a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.051",
+   "frame": "fr.be.person",
+   "text": "我不是老师。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "I am not a teacher.",
+   "variantOf": "zh.f1.018",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.052",
+   "frame": "fr.be.person",
+   "text": "不，我不是学生。",
+   "tokens": [
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "No, I am not a student.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.053",
+   "frame": "fr.be.person",
+   "text": "他不是学生。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "He is not a student.",
+   "variantOf": "zh.f1.006",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.054",
+   "frame": "fr.be.person",
+   "text": "她们不是老师。",
+   "tokens": [
+    {
+     "t": "她们",
+     "l": "zh:tamen.f"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "They (the women) are not teachers.",
+   "variantOf": "zh.f1.009",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.055",
+   "frame": "fr.be.person",
+   "text": "我们不是朋友。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "朋友",
+     "l": "zh:pengyou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "We are not friends.",
+   "variantOf": "zh.f1.012",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.056",
+   "frame": "fr.greet",
+   "text": "你好，我叫小明，我是学生。",
+   "tokens": [
+    {
+     "t": "你好",
+     "l": "zh:nihao"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "叫",
+     "l": "zh:jiao"
+    },
+    {
+     "t": "小明",
+     "name": true
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.copula"
+   ],
+   "gloss": "Hello, my name is Xiaoming, I am a student.",
+   "alts": [
+    "你好，我是学生，我叫小明。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.057",
+   "frame": "fr.be.person",
+   "text": "这是老师。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is the teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.058",
+   "frame": "fr.be.person",
+   "text": "这位是安娜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is Anna. (introducing politely)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.059",
+   "frame": "fr.be.person",
+   "text": "那位是老师。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That is the teacher. (polite)",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.060",
+   "frame": "fr.be.person",
+   "text": "这个人是学生。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This person is a student.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.061",
+   "frame": "fr.be.person",
+   "text": "这些人是学生。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "These people are students.",
+   "variantOf": "zh.f1.060",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.062",
+   "frame": "fr.be.person",
+   "text": "那个人是老师。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That person is a teacher.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.063",
+   "frame": "fr.be.person",
+   "text": "那些人是老师。",
+   "tokens": [
+    {
+     "t": "那些",
+     "l": "zh:naxie"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Those people are teachers.",
+   "variantOf": "zh.f1.062",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.064",
+   "frame": "fr.be.person",
+   "text": "那个人不是老师。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "人",
+     "l": "zh:ren"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That person is not a teacher.",
+   "variantOf": "zh.f1.062",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.065",
+   "frame": "fr.be.person",
+   "text": "这个男孩是学生。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "男孩",
+     "l": "zh:nanhai"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This boy is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.066",
+   "frame": "fr.be.person",
+   "text": "那个女孩是学生。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女孩",
+     "l": "zh:nvhai"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That girl is a pupil.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.067",
+   "frame": "fr.be.person",
+   "text": "这个女人是老师，那个男人是学生。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "女人",
+     "l": "zh:nvren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "男人",
+     "l": "zh:nanren"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "学生",
+     "l": "zh:xuesheng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This woman is a teacher, that man is a student.",
+   "alts": [
+    "那个男人是学生，这个女人是老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.068",
+   "frame": "fr.be.person",
+   "text": "这是小明，那是安娜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "小明",
+     "name": true
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is Xiaoming, that is Anna.",
+   "alts": [
+    "那是安娜，这是小明。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.069",
+   "frame": "fr.greet",
+   "text": "你好！这位是安娜。",
+   "tokens": [
+    {
+     "t": "你好",
+     "l": "zh:nihao"
+    },
+    {
+     "t": "！",
+     "p": true
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "Hello! This is Anna.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.070",
+   "frame": "fr.be.where",
+   "text": "小明在这里。",
+   "tokens": [
+    {
+     "t": "小明",
+     "name": true
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Xiaoming is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.071",
+   "frame": "fr.be.where",
+   "text": "他们在那里。",
+   "tokens": [
+    {
+     "t": "他们",
+     "l": "zh:tamen.m"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "They are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.072",
+   "frame": "fr.be.where",
+   "text": "老师，我们在这里！",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "Teacher, we are here!",
+   "alts": [
+    "我们在这里，老师！"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.073",
+   "frame": "fr.be.where",
+   "text": "他在这里。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.074",
+   "frame": "fr.be.where",
+   "text": "他不在这里。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "He is not here.",
+   "variantOf": "zh.f1.073",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.075",
+   "frame": "fr.be.where",
+   "text": "这位老师在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "位",
+     "l": "zh:wei"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This teacher is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.076",
+   "frame": "fr.be.where",
+   "text": "这些老师在这里。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "These teachers are here.",
+   "variantOf": "zh.f1.075",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.077",
+   "frame": "fr.be.where",
+   "text": "那个孩子在那里。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That child is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.078",
+   "frame": "fr.be.where",
+   "text": "那些孩子在那里。",
+   "tokens": [
+    {
+     "t": "那些",
+     "l": "zh:naxie"
+    },
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Those children are over there.",
+   "variantOf": "zh.f1.077",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.079",
+   "frame": "fr.be.where",
+   "text": "它在这里。",
+   "tokens": [
+    {
+     "t": "它",
+     "l": "zh:ta.it"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "It is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.080",
+   "frame": "fr.be.where",
+   "text": "安娜和小明在那里。",
+   "tokens": [
+    {
+     "t": "安娜",
+     "name": true
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "小明",
+     "name": true
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Anna and Xiaoming are over there.",
+   "alts": [
+    "小明和安娜在那里。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.081",
+   "frame": "fr.this.is",
+   "text": "这是一栋房子。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "栋",
+     "l": "zh:dong"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a house.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.082",
+   "frame": "fr.this.is",
+   "text": "这是公寓，不是房子。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "公寓",
+     "l": "zh:gongyu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "房子",
+     "l": "zh:fangzi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is a flat, not a house.",
+   "alts": [
+    "这不是房子，是公寓。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.083",
+   "frame": "fr.thing.here",
+   "text": "老师，房间在这里。",
+   "tokens": [
+    {
+     "t": "老师",
+     "l": "zh:laoshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "Teacher, the room is here.",
+   "alts": [
+    "房间在这里，老师。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.084",
+   "frame": "fr.this.is",
+   "text": "这是门，那是窗户。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "门",
+     "l": "zh:men"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "窗户",
+     "l": "zh:chuanghu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is the door, that is the window.",
+   "alts": [
+    "那是窗户，这是门。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.085",
+   "frame": "fr.thing.here",
+   "text": "门在那里。",
+   "tokens": [
+    {
+     "t": "门",
+     "l": "zh:men"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The door is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.086",
+   "frame": "fr.this.is",
+   "text": "这是一扇窗户。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "扇",
+     "l": "zh:shan"
+    },
+    {
+     "t": "窗户",
+     "l": "zh:chuanghu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a window.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.087",
+   "frame": "fr.this.is",
+   "text": "那是一面墙，不是门。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "面",
+     "l": "zh:mian"
+    },
+    {
+     "t": "墙",
+     "l": "zh:qiang"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "门",
+     "l": "zh:men"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That is a wall, not a door.",
+   "alts": [
+    "那不是门，是一面墙。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.088",
+   "frame": "fr.thing.here",
+   "text": "桌子和椅子在那里。",
+   "tokens": [
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "椅子",
+     "l": "zh:yizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The table and the chairs are over there.",
+   "alts": [
+    "椅子和桌子在那里。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.089",
+   "frame": "fr.this.is",
+   "text": "这是一张桌子。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a table.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.090",
+   "frame": "fr.this.is",
+   "text": "这是一张床。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "床",
+     "l": "zh:chuang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a bed.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.091",
+   "frame": "fr.thing.here",
+   "text": "床在那里。",
+   "tokens": [
+    {
+     "t": "床",
+     "l": "zh:chuang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The bed is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.092",
+   "frame": "fr.this.is",
+   "text": "这个柜子不是衣柜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "柜子",
+     "l": "zh:guizi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "衣柜",
+     "l": "zh:yigui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This cupboard is not a wardrobe.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.093",
+   "frame": "fr.thing.here",
+   "text": "衣柜在那里。",
+   "tokens": [
+    {
+     "t": "衣柜",
+     "l": "zh:yigui"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The wardrobe is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.094",
+   "frame": "fr.this.is",
+   "text": "这是一盏灯。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "盏",
+     "l": "zh:zhan"
+    },
+    {
+     "t": "灯",
+     "l": "zh:deng"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a lamp.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.095",
+   "frame": "fr.thing.here",
+   "text": "这本书在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "本",
+     "l": "zh:ben"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This book is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.096",
+   "frame": "fr.thing.here",
+   "text": "这些书在这里。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "These books are here.",
+   "variantOf": "zh.f1.095",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.097",
+   "frame": "fr.thing.here",
+   "text": "笔和纸在这里。",
+   "tokens": [
+    {
+     "t": "笔",
+     "l": "zh:bi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "纸",
+     "l": "zh:zhi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The pen and the paper are here.",
+   "alts": [
+    "纸和笔在这里。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.098",
+   "frame": "fr.this.is",
+   "text": "这是一张纸。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "张",
+     "l": "zh:zhang"
+    },
+    {
+     "t": "纸",
+     "l": "zh:zhi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a sheet of paper.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.099",
+   "frame": "fr.this.is",
+   "text": "这是一支笔。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "支",
+     "l": "zh:zhi.clf"
+    },
+    {
+     "t": "笔",
+     "l": "zh:bi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a pen.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.100",
+   "frame": "fr.thing.here",
+   "text": "手机在这里。",
+   "tokens": [
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The phone is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.101",
+   "frame": "fr.thing.here",
+   "text": "手机不在这里。",
+   "tokens": [
+    {
+     "t": "手机",
+     "l": "zh:shouji"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The phone is not here.",
+   "variantOf": "zh.f1.100",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.102",
+   "frame": "fr.thing.here",
+   "text": "那部电话在那里。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "部",
+     "l": "zh:bu.clf"
+    },
+    {
+     "t": "电话",
+     "l": "zh:dianhua"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That telephone is over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.103",
+   "frame": "fr.thing.here",
+   "text": "钥匙在这里。",
+   "tokens": [
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The key is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.104",
+   "frame": "fr.thing.here",
+   "text": "钥匙不在这里。",
+   "tokens": [
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The key is not here.",
+   "variantOf": "zh.f1.103",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.105",
+   "frame": "fr.thing.here",
+   "text": "这把椅子在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "把",
+     "l": "zh:ba"
+    },
+    {
+     "t": "椅子",
+     "l": "zh:yizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This chair is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.106",
+   "frame": "fr.thing.here",
+   "text": "这些椅子在这里。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "椅子",
+     "l": "zh:yizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "These chairs are here.",
+   "variantOf": "zh.f1.105",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.107",
+   "frame": "fr.this.is",
+   "text": "这是一个包。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "包",
+     "l": "zh:bao"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a bag.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.108",
+   "frame": "fr.thing.here",
+   "text": "这个杯子在这里。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This cup is here.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.109",
+   "frame": "fr.thing.here",
+   "text": "这些杯子在这里。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "These cups are here.",
+   "variantOf": "zh.f1.108",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.110",
+   "frame": "fr.this.is",
+   "text": "那是玻璃杯。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "玻璃杯",
+     "l": "zh:bolibei"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "That is a glass.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.111",
+   "frame": "fr.thing.here",
+   "text": "盘子和杯子在那里。",
+   "tokens": [
+    {
+     "t": "盘子",
+     "l": "zh:panzi"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "杯子",
+     "l": "zh:beizi"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "The plates and the cups are over there.",
+   "alts": [
+    "杯子和盘子在那里。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.112",
+   "frame": "fr.thing.here",
+   "text": "它们在那里。",
+   "tokens": [
+    {
+     "t": "它们",
+     "l": "zh:tamen.it"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "They (the things) are over there.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.113",
+   "frame": "fr.this.is",
+   "text": "这是一把钥匙。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "把",
+     "l": "zh:ba"
+    },
+    {
+     "t": "钥匙",
+     "l": "zh:yaoshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "This is a key.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.114",
+   "frame": "fr.this.is",
+   "text": "这不是书，是纸。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "书",
+     "l": "zh:shu"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "纸",
+     "l": "zh:zhi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is not a book, it is paper.",
+   "alts": [
+    "这是纸，不是书。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.115",
+   "frame": "fr.this.is",
+   "text": "这是房间，不是公寓。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "公寓",
+     "l": "zh:gongyu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is a room, not a flat.",
+   "alts": [
+    "这不是公寓，是房间。"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "zh.f1.116",
+   "frame": "fr.thing.here",
+   "text": "那个房间在那里。",
+   "tokens": [
+    {
+     "t": "那",
+     "l": "zh:na"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "房间",
+     "l": "zh:fangjian"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "那里",
+     "l": "zh:nali.there"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula"
+   ],
+   "gloss": "That room is over there.",
+   "level": "A1"
+  }
+ ]
+}

@@ -1,0 +1,285 @@
+{
+ "function": "fn.measure.word",
+ "status": "realized",
+ "summary": "A Chinese noun cannot follow a number or 这 / 那 directly: a measure word (classifier) comes in between — 一本书 ‘a book’, 这张桌子 ‘this table’, 那位老师 ‘that teacher’. The measure word is chosen by the kind or shape of the thing: 本 for bound books, 张 for flat things, 把 for things with a handle. 个 is the general one, used for people and for many things without a special measure word. Learn every noun with its measure word.",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "一 / 这 / 那",
+    "measure word",
+    "noun"
+   ],
+   "caption": "The pattern"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Measure word",
+    "For",
+    "Examples"
+   ],
+   "rows": [
+    [
+     "个 gè (ge)",
+     "people and many things — the general one",
+     "一个人, 这个房间, 一个杯子, 一个包"
+    ],
+    [
+     "位 wèi",
+     "people, politely",
+     "一位老师, 这位朋友"
+    ],
+    [
+     "本 běn",
+     "bound volumes",
+     "一本书"
+    ],
+    [
+     "张 zhāng",
+     "flat things, things with a flat top",
+     "一张桌子, 一张床, 一张纸"
+    ],
+    [
+     "把 bǎ",
+     "things held by a handle",
+     "一把椅子, 一把钥匙"
+    ],
+    [
+     "支 zhī",
+     "long thin things",
+     "一支笔"
+    ],
+    [
+     "扇 shàn",
+     "doors and windows (panels that swing)",
+     "一扇门, 一扇窗户"
+    ],
+    [
+     "面 miàn",
+     "flat surfaces you face",
+     "一面墙"
+    ],
+    [
+     "间 jiān",
+     "rooms",
+     "一间房子"
+    ],
+    [
+     "栋 dòng",
+     "buildings, houses",
+     "一栋房子"
+    ],
+    [
+     "盏 zhǎn",
+     "lamps",
+     "一盏灯"
+    ],
+    [
+     "部 bù",
+     "machines and works",
+     "一部手机, 一部电话"
+    ],
+    [
+     "杯 bēi",
+     "‘a cup of’ — a container as a measure",
+     "一杯茶 (S07), but the cup itself: 一个杯子"
+    ]
+   ],
+   "caption": "The measure words of S03 and S04"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Like a German article",
+   "text": "Learn 书 as ‘本 书’ just as you learn ‘das Buch’: the measure word is part of knowing the noun."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "No measure word after 这些 / 那些, and none when 这 is alone",
+   "text": "这些书, 那些人 — and 这是书 ‘this is a book’."
+  },
+  {
+   "t": "callout",
+   "kind": "tip",
+   "title": "个 when in doubt",
+   "text": "In speech 个 is heard with almost anything and is always understood; the specific measure word is what educated speech and writing expect."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "杯子 bēizi — the cup (a noun)",
+     "points": [
+      "一个杯子 a cup",
+      "这个杯子 this cup"
+     ]
+    },
+    {
+     "title": "杯 bēi — a cup of (a measure)",
+     "points": [
+      "一杯水 a glass of water",
+      "一杯茶 a cup of tea"
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is there a number, 这 / 那 or 哪 before the noun? → it needs a measure word.",
+   "Is it a person? → 个, politely 位.",
+   "Is it a book? → 本. Flat (table, bed, paper)? → 张. Held by a handle (chair, key)? → 把. Long and thin (pen)? → 支.",
+   "A door or window? → 扇. A wall? → 面. A room? → 间. A building? → 栋. A lamp? → 盏. A phone? → 部.",
+   "Do I mean ‘a cup OF something’? → 杯; the cup itself → 一个杯子.",
+   "Is it 这些 / 那些, or 这 / 那 alone as the subject? → no measure word."
+  ],
+  "steps": [
+   "Find the noun and recall its measure word.",
+   "Number / 这 / 那 + measure word + noun.",
+   "When you do not know it, 个 is understood — then learn the right one."
+  ]
+ },
+ "traps": [
+  "*一书 / *这书 → 一本书, 这本书.",
+  "*这些本书 → 这些书.",
+  "一个老师 and 一位老师 are both fine, but *一位人 is not: 位 goes with titles and respected people, not with 人 itself.",
+  "杯 vs 杯子: 一杯 is ‘a cup of’, 一个杯子 is ‘a cup’.",
+  "一 changes tone: yí ge, yí shàn, but yì běn, yì zhāng, yì bǎ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:ge",
+   "zh:wei",
+   "zh:dong",
+   "zh:jian",
+   "zh:shan",
+   "zh:mian",
+   "zh:zhang",
+   "zh:ba",
+   "zh:ben",
+   "zh:zhi.clf",
+   "zh:bu.clf",
+   "zh:zhan",
+   "zh:bei",
+   "zh:gen",
+   "zh:ke.round",
+   "zh:ke.plant",
+   "zh:tiao",
+   "zh:tou"
+  ]
+ },
+ "needs": {
+  "NOUN": 6,
+  "CLF": 3
+ },
+ "generators": [
+  {
+   "type": "measure_word"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "一 __ 书",
+   "options": [
+    "本",
+    "张",
+    "把",
+    "支"
+   ],
+   "answer": "本",
+   "why": "Bound volumes take 本."
+  },
+  {
+   "q": "这 __ 桌子",
+   "options": [
+    "张",
+    "本",
+    "支",
+    "扇"
+   ],
+   "answer": "张",
+   "why": "Things with a flat top take 张."
+  },
+  {
+   "q": "一 __ 钥匙",
+   "options": [
+    "把",
+    "张",
+    "本",
+    "面"
+   ],
+   "answer": "把",
+   "why": "Things held by a handle take 把."
+  },
+  {
+   "q": "那 __ 老师 (polite)",
+   "options": [
+    "位",
+    "张",
+    "把",
+    "本"
+   ],
+   "answer": "位",
+   "why": "位 is the polite measure word for people."
+  },
+  {
+   "q": "‘these books’",
+   "options": [
+    "这些书",
+    "这些本书",
+    "这本些书"
+   ],
+   "answer": "这些书",
+   "why": "No measure word after 这些."
+  },
+  {
+   "q": "‘a cup’ (the object)",
+   "options": [
+    "一个杯子",
+    "一杯",
+    "一杯杯子"
+   ],
+   "answer": "一个杯子",
+   "why": "杯 alone means ‘a cup of’."
+  },
+  {
+   "q": "一 __ 门",
+   "options": [
+    "扇",
+    "本",
+    "支",
+    "盏"
+   ],
+   "answer": "扇",
+   "why": "Doors and windows take 扇."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "de",
+   "fn": "fn.measure.word",
+   "note": "German counts mass nouns with measure nouns — ein Blatt Papier (一张纸), eine Tasse Kaffee (一杯咖啡), zwei Stück Kuchen; Chinese needs one with every counted noun."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.numerals",
+   "note": "Arabic has no measure words; the difficulty is elsewhere — the number agrees with the noun (gender polarity for 3–10)."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.numerals",
+   "note": "Hebrew has no measure words; numbers have masculine and feminine forms chosen by the noun’s gender."
+  }
+ ]
+}

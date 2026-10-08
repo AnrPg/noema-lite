@@ -1,0 +1,167 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "German is a West Germanic language, a close relative of Dutch and English, written in the Latin alphabet with ä, ö, ü and ß. It is the fusional language of this course: articles, pronouns, adjectives and verbs change their endings for gender, number, case and person, and one ending carries several of these meanings at once. Every noun has one of three genders (der, die, das) and appears in four cases; the conjugated verb stands in second place in a main clause. You already speak German – here you meet it from the outside, as the model the other three languages are compared with.",
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Indo-European › Germanic › West Germanic (with Dutch, Frisian, English, Luxembourgish and Yiddish)"
+  },
+  {
+   "label": "Script and direction",
+   "value": "Latin alphabet with ä, ö, ü and ß; written left to right; every noun starts with a capital letter"
+  },
+  {
+   "label": "Where it is spoken",
+   "value": "Official in Germany, Austria, Switzerland, Liechtenstein, Luxembourg and Belgium (German-speaking Community); regional in Italy (South Tyrol)"
+  },
+  {
+   "label": "Standard variety",
+   "value": "Standard German (Hochdeutsch) with three national standards – Germany, Austria, Switzerland (Swiss spelling uses ss for ß). This course teaches the standard of Germany and notes Austrian and Swiss words."
+  },
+  {
+   "label": "Speakers",
+   "value": "Roughly 75–95 million native speakers (estimates differ), well over 100 million with second-language speakers; the most widely spoken first language in the European Union"
+  },
+  {
+   "label": "Sounds",
+   "value": "Vowel length matters (Staat – Stadt); umlauts ä, ö, ü; ch after a, o, u (Bach) differs from ch after other vowels (ich); final b, d, g sound like p, t, k (Tag)"
+  }
+ ],
+ "typology": {
+  "type": "fusional",
+  "why": "One ending carries several meanings at once, and the ending depends on the word class: dem = dative + singular + masculine or neuter; du bist = 2nd person + singular + present. Stems change inside the word too: Mann → Männer, Buch → Bücher, sprechen → spricht. So the forms are learned in tables, not read off piece by piece.",
+  "alsoShows": "Compounds are built the agglutinating way and written as one word: Haus + Tür → die Haustür (the last part decides the gender). Many small function words (articles, prepositions, helper verbs) give German an analytic side as well, as in English."
+ },
+ "peculiarities": [
+  {
+   "title": "Three genders – learn the article with the noun",
+   "text": "Every noun is der, die or das, and the gender is grammatical, not natural: das Mädchen (the girl) is neuter, die Person is feminine even for a man. Endings help (-ung, -heit → die; -chen → das), but the safe way is to learn die Tür, der Tisch, das Bett as one unit."
+  },
+  {
+   "title": "Four cases, shown mostly on the article",
+   "text": "Nominative, accusative, dative, genitive: der Tisch, den Tisch, dem Tisch, des Tisches. The noun itself changes little; the article (and later the adjective) carries the case."
+  },
+  {
+   "title": "The verb in second place",
+   "text": "In a main clause the conjugated verb is the second element, whatever comes first: Ich bin hier. / Hier bin ich. A yes/no question starts with the verb (Bist du hier?); in subordinate clauses the verb goes to the end (later, S18)."
+  },
+  {
+   "title": "Two words for “you”",
+   "text": "du (and plural ihr) for family, friends and children; Sie, with a capital S and the verb forms of “they”, for adults you do not know well. Choosing is a social decision from the very first sentence."
+  },
+  {
+   "title": "Capital letters for every noun",
+   "text": "das Haus, die Tür, der Lehrer – and for the polite Sie and Ihnen. Capitals are a reading aid: they show where the nouns are."
+  },
+  {
+   "title": "Many ways to make a plural",
+   "text": "Tisch → Tische, Buch → Bücher, Lampe → Lampen, Handy → Handys, Zimmer → Zimmer. Learn the plural with the noun (step S05)."
+  },
+  {
+   "title": "“To be” is never left out",
+   "text": "Unlike Arabic, Hebrew and Russian, German always needs the verb sein in the present: Ich bin Lehrer – and with jobs there is no article."
+  }
+ ],
+ "forYou": [
+  {
+   "lang": "el",
+   "text": "Three genders and cases will feel familiar from Greek, but the genders often differ (ο τοίχος – die Wand, το πιάτο – der Teller, η καρέκλα – der Stuhl), and German has a dative where Greek uses σε + accusative or the genitive. German never drops the subject pronoun (Ich bin Lehrerin, not just Bin Lehrerin), and its word order is strict: the verb is second. Many learned words come from Greek: Telefon, Schule (σχολή), Lampe (λαμπάς)."
+  },
+  {
+   "lang": "en",
+   "text": "English is German’s close cousin: Haus – house, Buch – book, Mann – man, Glas – glass, Tür – door. But English lost genders, cases and most endings, and has fixed subject–verb–object order; German puts the verb second or last and has no helper “do” (Bist du Lehrer? – Are you a teacher?). Beware false friends: Handy (mobile phone), Gift (poison), bekommen (to get, not “become”)."
+  },
+  {
+   "lang": "de",
+   "text": "You already speak German. In this course German is the model the other languages are compared with, so the point is to see it from outside – as a fusional language with gender, cases and verb-second order – and to check the details even fluent speakers slip on: the dative plural -n (den Kindern), weak nouns (den Jungen, dem Studenten), plurals such as zwei Glas Bier, and register (Sie vs du, Guten Tag vs Hallo)."
+  },
+  {
+   "lang": "ru",
+   "text": "Russian is fusional too: three genders, cases and tables are familiar ideas. But German has four cases (Russian six), and German shows the case mostly on the article, which Russian does not have – der/ein will be the real novelty. Russian leaves out “to be” in the present (я студент); German cannot (ich bin Student). ты/вы map neatly onto du/Sie."
+  },
+  {
+   "lang": "tr",
+   "text": "Turkish has no gender and no articles (only bir), so der/die/das and agreement are new. Cases are a familiar idea (-i, -e, -de, -den), but in German they sit on the article, not on the noun. Turkish helps elsewhere: ö and ü sound the same as in German, compounds are built like Turkish suffix chains, the verb at the end of German subordinate clauses feels Turkish, and sen/siz match du/Sie."
+  }
+ ],
+ "pathNote": "German walks the fusional path. The theme and words of every step are the same as in the other languages; the extra grammar is German’s tables: S01 sein in full (bin, bist, ist …); S03 dieser with its endings; S04 gender, der/ein and agreement; S05 numbers and the many plural types; S06 haben and mein/dein with endings; S07 the present-tense conjugation and the accusative (den, einen); S11 prepositions with the case they take; S12 dative for “where”, accusative for “where to”; S13 verbs of movement (gehen, fahren); S15 cases after time prepositions; S16 adjective endings; S17 -er / am -sten; S18 the verb at the end after weil and dass. An isolating language (Chinese) has no tables at all but tones and measure words; an agglutinating one glues a single meaning per suffix; German fuses them.",
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is German mainly?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "fusional",
+   "why": "One ending carries several meanings at once: dem = dative + singular + masculine or neuter."
+  },
+  {
+   "q": "In dem Mann, what does the ending of dem tell you?",
+   "options": [
+    "dative, singular and masculine all at once",
+    "only that the noun is plural",
+    "only that the noun is definite"
+   ],
+   "answer": "dative, singular and masculine all at once",
+   "why": "That is fusion: one ending, several meanings."
+  },
+  {
+   "q": "Where does the conjugated verb stand in a main clause?",
+   "options": [
+    "first",
+    "second",
+    "last"
+   ],
+   "answer": "second",
+   "why": "Verb second: Ich bin hier. / Hier bin ich."
+  },
+  {
+   "q": "How do you learn a German noun?",
+   "options": [
+    "with its article and its plural",
+    "alone – the gender follows from the meaning",
+    "only in the plural"
+   ],
+   "answer": "with its article and its plural",
+   "why": "The gender is grammatical (das Mädchen) and the plural has many types."
+  },
+  {
+   "q": "Which “you” do you use with a shop assistant you don’t know?",
+   "options": [
+    "du",
+    "ihr",
+    "Sie"
+   ],
+   "answer": "Sie",
+   "why": "Sie (capital S) is the polite “you” for adults you do not know well."
+  },
+  {
+   "q": "Why is das Mädchen neuter?",
+   "options": [
+    "because every noun in -chen is neuter",
+    "because girls are children",
+    "it is an exception with no reason"
+   ],
+   "answer": "because every noun in -chen is neuter",
+   "why": "The diminutive suffix -chen makes any noun neuter: das Mädchen, das Tischchen."
+  },
+  {
+   "q": "Which sentence is correct German?",
+   "options": [
+    "Ich Lehrer.",
+    "Ich bin Lehrer.",
+    "Ich bin ein Lehrer von Beruf ist."
+   ],
+   "answer": "Ich bin Lehrer.",
+   "why": "German always needs sein in the present, and a job takes no article."
+  }
+ ]
+}

@@ -54,5 +54,22 @@
     "variant": "Mood"
    }
   }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.question.yesno",
+   "note": "Arabic puts hal (or ʾa-) before a statement."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.question.yesno",
+   "note": "Hebrew keeps the statement order; intonation or ha-im makes the question."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.question.yesno",
+   "note": "Chinese adds 吗 at the end or uses verb-not-verb (是不是)."
+  }
  ]
 }

@@ -1,13 +1,14 @@
 {
  "function": "fn.definite",
  "status": "realized",
- "summary": "Arabic marks a definite noun with the prefix al- (الْ), written joined to the noun, and an indefinite noun with nunation (tanwīn: -un, -an, -in). There is no word for “a”. Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is assimilated: it carries no sukūn and the next letter gets a šadda — الثُّومُ = aṯ-ṯūmu. Diptotes (طَمَاطِم، بَطَاطِس، سَبَانِخ) never take tanwīn, and indeclinable words in -ā / -ī (كُوسَا، بْرُوكُلِي) show definiteness only by al-. General statements (“I like tomatoes”) use al-: أُحِبُّ الطَّمَاطِمَ.",
+ "summary": "Arabic marks a definite noun with the prefix al- (الْ), written joined to the noun, and an indefinite noun with nunation (tanwīn: -un, -an, -in). There is no word for “a”: بَيْتٌ = a house, الْبَيْتُ = the house. Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is assimilated: it carries no sukūn and the next letter gets a šadda — الشَّقَّةُ = aš-šaqqa. Diptotes (نَوَافِذُ، مَصَابِيحُ، طَمَاطِم) never take tanwīn, and indeclinable words in -ā / -ī (كُوسَا، بْرُوكُلِي) show definiteness only by al-. General statements (“I like tomatoes”) use al-: أُحِبُّ الطَّمَاطِمَ.",
  "procedure": {
   "askYourself": [
-   "Is the noun specific (one we both know) or meant in general (“tomatoes”, “onions as food”)? → al-",
-   "Is it one of many, not identified (“a carrot”)? → tanwīn, no al-",
-   "Does the noun start with a sun letter? → no sukūn on the l, šadda on the letter (الطَّمَاطِمُ)",
+   "Is the noun specific (one we both know) or meant in general (“books”, “onions as food”)? → al-",
+   "Is it one of many, not identified (“a book”)? → tanwīn, no al-",
+   "Does the noun start with a sun letter? → no sukūn on the l, šadda on the letter (الشَّقَّةُ)",
    "Is the noun a diptote or indeclinable? → no tanwīn even when it is indefinite",
+   "Is my indefinite noun the subject? → put the place first: هُنَا كِتَابٌ",
    "After adding al-, did I remove the tanwīn?"
   ],
   "steps": [
@@ -21,7 +22,8 @@
   "Generic = definite: هِيَ تُحِبُّ الْخِيَارَ = she likes cucumbers (in general), not only “the cucumbers”.",
   "هٰذِهِ جَزَرَةٌ (“this is a carrot” — a sentence) vs هٰذِهِ الْجَزَرَةُ (“this carrot” — a phrase): the article changes the structure.",
   "What you have with عِنْدَ is indefinite and nominative: عِنْدِي جَزَرَةٌ.",
-  "With a sun letter you hear no l: الطَّمَاطِمُ = aṭ-ṭamāṭimu."
+  "With a sun letter you hear no l: الطَّمَاطِمُ = aṭ-ṭamāṭimu.",
+  "*كِتَابٌ هُنَا → هُنَا كِتَابٌ (an indefinite subject follows the place)."
  ],
  "evidence": {
   "tags": [
@@ -65,6 +67,166 @@
      "fn.definite"
     ]
    }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "variant": "Definiteness"
+   }
+  },
+  {
+   "type": "sentence_meaning",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ]
+   }
+  },
+  {
+   "type": "quiz"
+  }
+ ],
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "indefinite (a …) — tanwīn",
+    "definite (the …) — al-"
+   ],
+   "rows": [
+    [
+     "house — moon letter ب",
+     "بَيْتٌ baytun",
+     "الْبَيْتُ al-baytu"
+    ],
+    [
+     "room — moon letter غ",
+     "غُرْفَةٌ ġurfatun",
+     "الْغُرْفَةُ al-ġurfatu"
+    ],
+    [
+     "flat — sun letter ش",
+     "شَقَّةٌ šaqqatun",
+     "الشَّقَّةُ aš-šaqqatu"
+    ],
+    [
+     "table — sun letter ط",
+     "طَاوِلَةٌ ṭāwilatun",
+     "الطَّاوِلَةُ aṭ-ṭāwilatu"
+    ],
+    [
+     "windows — a diptote",
+     "نَوَافِذُ nawāfiḏu",
+     "النَّوَافِذُ an-nawāfiḏu"
+    ]
+   ],
+   "caption": "Nominative forms. The case vowel changes (-u, -a, -i), the article does not."
+  },
+  {
+   "t": "table",
+   "head": [
+    "sun letters — the l is not heard, the letter is doubled",
+    "moon letters — the l is heard"
+   ],
+   "rows": [
+    [
+     "ت ث د ذ ر ز س ش ص ض ط ظ ل ن",
+     "ء ب ج ح خ ع غ ف ق ك م ه و ي"
+    ]
+   ],
+   "caption": "Sun letters are mostly said with the tip of the tongue: السَّرِيرُ as-sarīr, الصَّحْنُ aṣ-ṣaḥn, النَّافِذَةُ an-nāfiḏa."
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "General = definite.",
+   "text": "الْكُتُبُ مُفِيدَةٌ = books are useful (in general); أُحِبُّ الْقَهْوَةَ = I like coffee. English and German leave the article out here; Arabic, like Greek, puts it in."
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "An indefinite subject goes after the place.",
+   "text": "“A book is here” is not *كِتَابٌ هُنَا: say هُنَا كِتَابٌ (there is a book here). With the article the order is the other way: الْكِتَابُ هُنَا (the book is here)."
+  },
+  {
+   "t": "p",
+   "text": "With a demonstrative the article turns a sentence into a phrase: هٰذَا كِتَابٌ = this is a book; هٰذَا الْكِتَابُ = this book."
+  }
+ ],
+ "quiz": [
+  {
+   "q": "الشَّقَّةُ is pronounced …",
+   "options": [
+    "aš-šaqqatu",
+    "al-šaqqatu",
+    "aš-šaqqatun"
+   ],
+   "answer": "aš-šaqqatu",
+   "why": "ش is a sun letter: the l assimilates; and al- and tanwīn never go together."
+  },
+  {
+   "q": "“A house”:",
+   "options": [
+    "بَيْتٌ",
+    "الْبَيْتُ",
+    "الْبَيْتٌ"
+   ],
+   "answer": "بَيْتٌ",
+   "why": "Indefinite = tanwīn, no article."
+  },
+  {
+   "q": "Which noun starts with a sun letter?",
+   "options": [
+    "سَرِير",
+    "بَيْت",
+    "كِتَاب",
+    "قَلَم"
+   ],
+   "answer": "سَرِير",
+   "why": "س is a sun letter: السَّرِيرُ; ب, ك, ق are moon letters."
+  },
+  {
+   "q": "“There is a pen here”:",
+   "options": [
+    "هُنَا قَلَمٌ",
+    "الْقَلَمُ هُنَا",
+    "قَلَمٌ هُنَا"
+   ],
+   "answer": "هُنَا قَلَمٌ",
+   "why": "An indefinite subject follows the place; الْقَلَمُ هُنَا = the pen is here."
+  },
+  {
+   "q": "Can a noun have al- and tanwīn at the same time?",
+   "options": [
+    "no — one or the other",
+    "yes, in the nominative",
+    "only with sun letters"
+   ],
+   "answer": "no — one or the other",
+   "why": "Definite = al-, indefinite = tanwīn: *الْبَيْتٌ is impossible."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "he",
+   "fn": "fn.definite",
+   "note": "Hebrew הַ־ is a prefix too and Hebrew has no “a” either; instead of sun letters, הַ doubles the next consonant with a dagesh (הַבַּיִת), and there is no tanwīn."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.definite",
+   "note": "German has two articles, der / die / das and ein / eine, and both change for case; Arabic folds “the” and “a” into the noun."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.definite",
+   "note": "Chinese has no articles: 书 is “a book” or “the book” from the context; 这本书 = this book."
+  },
+  {
+   "lang": "ar",
+   "fn": "fn.demonstrative",
+   "note": "هٰذَا كِتَابٌ (this is a book) vs هٰذَا الْكِتَابُ (this book): the article decides."
   }
  ]
 }

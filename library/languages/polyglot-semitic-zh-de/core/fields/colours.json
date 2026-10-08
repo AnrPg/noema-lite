@@ -1,0 +1,106 @@
+{
+ "field": "colours",
+ "title": "Colours",
+ "subgroups": [
+  {
+   "id": "colour",
+   "title": "Colours"
+  }
+ ],
+ "sources": [
+  "The basic colour words — the foundations of the course (docs/LANGUAGES.md D9, §4.4.1)"
+ ],
+ "concepts": [
+  {
+   "id": "colour.white",
+   "gloss": "white",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "colour.black",
+   "gloss": "black",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "colour.red",
+   "gloss": "red",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "colour.blue",
+   "gloss": "blue",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "colour.green",
+   "gloss": "green",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "colour.yellow",
+   "gloss": "yellow",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "colour.brown",
+   "gloss": "brown",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "colour.grey",
+   "gloss": "grey",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "colour.orange",
+   "gloss": "orange (colour)",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "colour.pink",
+   "gloss": "pink",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "colour.purple",
+   "gloss": "purple",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "adj.light",
+   "gloss": "light (of a colour)",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "adj.dark",
+   "gloss": "dark (of a colour)",
+   "subgroup": "colour",
+   "tier": 1,
+   "rank": 13
+  }
+ ]
+}

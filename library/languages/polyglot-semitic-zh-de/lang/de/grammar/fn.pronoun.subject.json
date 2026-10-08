@@ -1,0 +1,274 @@
+{
+ "function": "fn.pronoun.subject",
+ "status": "realized",
+ "summary": "German has eight subject pronouns – ich, du, er, sie, es, wir, ihr, sie – plus the polite Sie. A subject pronoun is never left out, because the verb ending alone is not enough (Ich bin …, not *Bin …). er, sie and es follow the grammatical gender of the noun, not the real sex: der Tisch → er, die Lampe → sie, das Mädchen → es. Three words look alike: sie (she, verb in -t), sie (they, verb in -en) and Sie (you, polite, capital S, verb in -en).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "",
+    "singular",
+    "plural"
+   ],
+   "rows": [
+    [
+     "1st person",
+     "ich – I",
+     "wir – we"
+    ],
+    [
+     "2nd person (informal)",
+     "du – you (one friend)",
+     "ihr – you (several friends)"
+    ],
+    [
+     "3rd person",
+     "er – he / it (der-nouns) · sie – she / it (die-nouns) · es – it (das-nouns)",
+     "sie – they (people and things)"
+    ],
+    [
+     "polite",
+     "Sie – you (one person)",
+     "Sie – you (several people)"
+    ]
+   ],
+   "caption": "The subject pronouns (nominative)"
+  },
+  {
+   "t": "callout",
+   "kind": "key",
+   "title": "Things are er, sie or es.",
+   "text": "The pronoun copies the gender of the noun: der Tisch → er, die Tür → sie, das Buch → es; every plural → sie."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "du",
+     "points": [
+      "one person",
+      "family, friends, children, young peers",
+      "verb in -st: du bist"
+     ]
+    },
+    {
+     "title": "ihr",
+     "points": [
+      "several people you each say du to",
+      "verb in -t: ihr seid"
+     ]
+    },
+    {
+     "title": "Sie",
+     "points": [
+      "one or several people, polite",
+      "strangers, customers, officials, teachers",
+      "verb like “they”: Sie sind",
+      "always a capital S"
+     ]
+    }
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Three sie",
+   "text": "sie ist (she is) – sie sind (they are) – Sie sind (you are, polite). The verb and the capital letter tell them apart."
+  },
+  {
+   "t": "table",
+   "head": [
+    "nominative",
+    "accusative",
+    "dative"
+   ],
+   "rows": [
+    [
+     "ich",
+     "mich",
+     "mir"
+    ],
+    [
+     "du",
+     "dich",
+     "dir"
+    ],
+    [
+     "er / sie / es",
+     "ihn / sie / es",
+     "ihm / ihr / ihm"
+    ],
+    [
+     "wir",
+     "uns",
+     "uns"
+    ],
+    [
+     "ihr",
+     "euch",
+     "euch"
+    ],
+    [
+     "sie / Sie",
+     "sie / Sie",
+     "ihnen / Ihnen"
+    ]
+   ],
+   "caption": "Preview: the pronouns change with their case (taught from S07 on; you meet dir and Ihnen in Wie geht es dir? / Ihnen? at S02)."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Who is the subject: me (ich), the person I talk to, or someone/something else?",
+   "Am I talking to one person or several – and do I say du or Sie to them?",
+   "Is it a thing? Then what is the gender of its noun: der → er, die → sie, das → es?",
+   "One or several? Several people or things are always sie, with the verb in -en (sie sind).",
+   "Polite Sie: did I write the capital S and use the “they” form of the verb?"
+  ],
+  "steps": [
+   "Find the subject.",
+   "Choose the pronoun by person, number, gender of the noun and du/Sie.",
+   "Give the verb the matching ending."
+  ]
+ },
+ "traps": [
+  "Never drop the pronoun: Ich bin müde, not *Bin müde (in Greek είμαι alone is enough).",
+  "ich is lower-case inside a sentence – unlike English I.",
+  "A girl is es in grammar (das Mädchen … es), though people often say sie once they know her name.",
+  "Sie (polite) takes the verb of “they”: Sie sind, never *Sie bist / *Sie ist.",
+  "ihr (you, plural) is also ihr = (to) her and ihr = her/their (possessive); the verb shows which: ihr seid."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:ich",
+   "de:du",
+   "de:Sie",
+   "de:er",
+   "de:sie",
+   "de:es",
+   "de:wir",
+   "de:ihr",
+   "de:sie.pl"
+  ]
+ },
+ "paradigmCells": [
+  "PRON;NOM"
+ ],
+ "needs": {
+  "PRON": 6
+ },
+ "generators": [
+  {
+   "type": "quiz"
+  },
+  {
+   "type": "sentence_meaning"
+  },
+  {
+   "type": "build_sentence"
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.pronoun.subject"
+    ],
+    "variant": "Number"
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "der Tisch – which pronoun?",
+   "options": [
+    "er",
+    "sie",
+    "es"
+   ],
+   "answer": "er",
+   "why": "der-nouns are er, even for things."
+  },
+  {
+   "q": "die Lampe – which pronoun?",
+   "options": [
+    "er",
+    "sie",
+    "es"
+   ],
+   "answer": "sie",
+   "why": "die-nouns (singular) are sie."
+  },
+  {
+   "q": "das Buch – which pronoun?",
+   "options": [
+    "er",
+    "sie",
+    "es"
+   ],
+   "answer": "es",
+   "why": "das-nouns are es."
+  },
+  {
+   "q": "die Bücher (plural) – which pronoun?",
+   "options": [
+    "es",
+    "sie",
+    "ihr"
+   ],
+   "answer": "sie",
+   "why": "Every plural is sie, whatever the gender."
+  },
+  {
+   "q": "You talk to your new boss. “You” is …",
+   "options": [
+    "du",
+    "ihr",
+    "Sie"
+   ],
+   "answer": "Sie",
+   "why": "Polite address: Sie, capital S."
+  },
+  {
+   "q": "You talk to two friends at once. “You” is …",
+   "options": [
+    "du",
+    "ihr",
+    "Sie"
+   ],
+   "answer": "ihr",
+   "why": "Several people you each say du to: ihr."
+  },
+  {
+   "q": "Which form goes with polite Sie?",
+   "options": [
+    "Sie bist",
+    "Sie ist",
+    "Sie sind"
+   ],
+   "answer": "Sie sind",
+   "why": "Sie takes the verb form of “they”."
+  }
+ ],
+ "seeAlso": [
+  {
+   "lang": "ar",
+   "fn": "fn.pronoun.subject",
+   "note": "Arabic splits “you” and “they” by gender (anta / anti, hum / hunna) and has a dual (antumā, humā); the pronoun is often dropped because the verb shows the person."
+  },
+  {
+   "lang": "he",
+   "fn": "fn.pronoun.subject",
+   "note": "Hebrew also splits “you” and “they” by gender (atá / at, atem / aten, hem / hen); in the past tense ani / ata can be left out, in the present not."
+  },
+  {
+   "lang": "zh",
+   "fn": "fn.pronoun.subject",
+   "note": "Chinese has one spoken tā for he / she / it (他 / 她 / 它 differ only in writing), plural with 们 (我们, 你们, 他们) and a polite 您 – no endings, no cases."
+  },
+  {
+   "lang": "de",
+   "fn": "fn.copula",
+   "note": "The pronoun chooses the form of sein: ich bin, du bist, er ist …"
+  }
+ ]
+}

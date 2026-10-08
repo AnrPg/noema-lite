@@ -1,0 +1,2224 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:marhaban",
+   "lemma": "مَرْحَبًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "translit": "marḥaban",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warm and universal — the safe “hello” for anyone, anywhere, any time of day.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hello; welcome",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.hello"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَرْحَبًا! كَيْفَ حَالُكَ؟",
+      "tr": "Hello! How are you? (to a man)",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "مَرْحَبًا بِكَ فِي بَيْتِنَا.",
+      "tr": "Welcome to our home. (to a man)",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَرْحَبًا بِكَ / بِكِ / بِكُمْ",
+      "tr": "welcome (to a man / a woman / several people)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَهْلًا",
+      "register": "informal",
+      "nuance": "hi — a little more casual"
+     },
+     {
+      "word": "السَّلَامُ عَلَيْكُمْ",
+      "register": "neutral",
+      "nuance": "peace be upon you — the greeting everybody uses, also in formal and religious settings"
+     }
+    ],
+    "etymology": {
+     "text": "Related to the verb رَحِبَ (raḥiba, “to be wide, spacious”): “(you have come to) a wide, welcoming place”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish merhaba is this word."
+    ],
+    "pitfalls": [
+     "The ending -an (tanwīn) is pronounced: marḥaban — the alif only carries it."
+    ],
+    "subtleties": [
+     "A friendly reply repeats it or answers with أَهْلًا; colloquial Levantine even says مَرْحَبْتَيْن, “two hellos”."
+    ]
+   }
+  },
+  {
+   "id": "ar:ahlan",
+   "lemma": "أَهْلًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "translit": "ʾahlan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses the interjection أَهْلًا as “hi; welcome” — the greeting “hello” in its everyday form."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Casual and friendly: “hi!”, and the word that welcomes a guest.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "hi; welcome",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.hello"
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَهْلًا! أَنَا طَالِبٌ جَدِيدٌ.",
+      "tr": "Hi! I am a new student.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "أَهْلًا وَسَهْلًا!",
+      "tr": "Welcome!",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "أَهْلًا بِكِ!",
+      "tr": "Welcome! (to a woman)",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "أَهْلًا وَسَهْلًا",
+      "tr": "welcome! (to a guest)"
+     },
+     {
+      "text": "أَهْلًا بِكَ",
+      "tr": "welcome (to a man)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَرْحَبًا",
+      "register": "neutral",
+      "nuance": "hello — the neutral word"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of أَهْل (ʾahl, “family, kin”): “(you are) among family”. أَهْلًا وَسَهْلًا is short for لَقَدْ صَادَفْتُمْ أَهْلًا وَوَطِئْتُمْ سَهْلًا, “you have met your own people and trodden on even ground” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "أَهْلًا وَسَهْلًا literally says: “(you have come to) family, and (you tread on) easy ground”."
+    ],
+    "pitfalls": [
+     "أَهْلًا وَسَهْلًا is “welcome!” to a guest — not “you’re welcome” after thanks (that is عَفْوًا)."
+    ],
+    "subtleties": [
+     "It is also the quick answer to مَرْحَبًا: مَرْحَبًا! — أَهْلًا!"
+    ]
+   }
+  },
+  {
+   "id": "ar:assalamu_alaykum",
+   "lemma": "السَّلَامُ عَلَيْكُمْ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "translit": "as-salāmu ʿalaykum",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The greeting that works everywhere — street, shop, office, mosque; it carries a blessing.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "peace be upon you — hello (to one person or many)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.hello"
+     }
+    ],
+    "examples": [
+     {
+      "text": "السَّلَامُ عَلَيْكُمْ! وَعَلَيْكُمُ السَّلَامُ!",
+      "tr": "Peace be upon you! — And upon you be peace!",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "دَخَلَ وَقَالَ: السَّلَامُ عَلَيْكُمْ.",
+      "tr": "He came in and said: “Peace be upon you.”",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "رَدَّ السَّلَامَ",
+      "tr": "to return the greeting"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَرْحَبًا",
+      "register": "neutral",
+      "nuance": "hello — without the blessing"
+     },
+     {
+      "word": "سَلَام",
+      "register": "informal",
+      "nuance": "a short “hi” or “bye” among friends"
+     }
+    ],
+    "etymology": {
+     "text": "Literally “the peace (be) upon you (pl.)”; Wiktionary gives it as cognate with Hebrew שָׁלוֹם עֲלֵיכֶם (shalóm aleikhém).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew שָׁלוֹם עֲלֵיכֶם (shalóm aleikhém) is the same greeting word for word — both from the Semitic root š-l-m, “peace, wholeness”.",
+     "Turkish selam and selamünaleyküm come from it."
+    ],
+    "pitfalls": [
+     "عَلَيْكُمْ is plural even to one person: it is a fixed formula.",
+     "The answer is always وَعَلَيْكُمُ السَّلَامُ — with وَ and a -u before the article."
+    ],
+    "subtleties": [
+     "A fuller answer adds blessings: وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ."
+    ]
+   }
+  },
+  {
+   "id": "ar:waalaykumu_ssalam",
+   "lemma": "وَعَلَيْكُمُ السَّلَامُ",
+   "pos": "INTJ",
+   "senses": [],
+   "role": "the fixed answer to السَّلَامُ عَلَيْكُمْ: “and upon you be peace”",
+   "translit": "wa-ʿalaykumu s-salām",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "ar:sabah_alkhayr",
+   "lemma": "صَبَاحُ الْخَيْرِ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodmorning"
+   ],
+   "translit": "ṣabāḥu l-ḫayr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bright and polite — the morning greeting, with a fixed answer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good morning (lit. “morning of goodness”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodmorning"
+     }
+    ],
+    "examples": [
+     {
+      "text": "صَبَاحُ الْخَيْرِ! صَبَاحُ النُّورِ!",
+      "tr": "Good morning! — Good morning! (lit. morning of light)",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "صَبَاحُ الْخَيْرِ يَا أُسْتَاذُ.",
+      "tr": "Good morning, sir.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "صَبَاحُ الْفُلِّ",
+      "register": "colloquial",
+      "nuance": "“morning of jasmine” — a warm, playful variant (Egypt)"
+     }
+    ],
+    "funFacts": [
+     "Turkish sabah (morning) and hayır (no; also “good” in hayırlı) are Arabic loans: صَبَاح and خَيْر."
+    ],
+    "pitfalls": [
+     "The answer is not the same phrase but صَبَاحُ النُّورِ (morning of light)."
+    ],
+    "subtleties": [
+     "Used until about noon; later in the day people say مَسَاءُ الْخَيْرِ."
+    ]
+   }
+  },
+  {
+   "id": "ar:sabah_annur",
+   "lemma": "صَبَاحُ النُّورِ",
+   "pos": "INTJ",
+   "senses": [],
+   "role": "the usual answer to صَبَاحُ الْخَيْرِ: “morning of light”",
+   "translit": "ṣabāḥu n-nūr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "ar:masa_alkhayr",
+   "lemma": "مَسَاءُ الْخَيْرِ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodevening"
+   ],
+   "translit": "masāʾu l-ḫayr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Polite and warm — the greeting from the afternoon on.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good evening (lit. “evening of goodness”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodevening"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَسَاءُ الْخَيْرِ! مَسَاءُ النُّورِ!",
+      "tr": "Good evening! — Good evening! (lit. evening of light)",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "مَسَاءُ الْخَيْرِ، كَيْفَ حَالُكِ؟",
+      "tr": "Good evening, how are you? (to a woman)",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "funFacts": [],
+    "pitfalls": [
+     "It greets when you meet; it is not a goodbye for the night (that is تُصْبِحُ عَلَى خَيْرٍ).",
+     "The answer is مَسَاءُ النُّورِ."
+    ],
+    "subtleties": [
+     "Built like صَبَاحُ الْخَيْرِ: the same answer pattern with النُّور, “light”."
+    ]
+   }
+  },
+  {
+   "id": "ar:masa_annur",
+   "lemma": "مَسَاءُ النُّورِ",
+   "pos": "INTJ",
+   "senses": [],
+   "role": "the usual answer to مَسَاءُ الْخَيْرِ: “evening of light”",
+   "translit": "masāʾu n-nūr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   }
+  },
+  {
+   "id": "ar:tusbihu",
+   "lemma": "تُصْبِحُ عَلَى خَيْرٍ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodnight"
+   ],
+   "translit": "tuṣbiḥu ʿalā ḫayr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files it as a phrase; in this course fixed formulas are one lexeme with pos INTJ (docs/LANGUAGES.md, multi-word formulas)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A soft wish at bedtime: “may you wake up to good things”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good night (to a man)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodnight"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تُصْبِحُ عَلَى خَيْرٍ يَا أَبِي.",
+      "tr": "Good night, Dad.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "تُصْبِحُ عَلَى خَيْرٍ! وَأَنْتَ مِنْ أَهْلِهِ.",
+      "tr": "Good night! — And you too. (to a man)",
+      "register": "neutral",
+      "context": "bedtime",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَيْلَةً سَعِيدَةً",
+      "register": "formal",
+      "nuance": "have a happy night — more formal or written"
+     },
+     {
+      "word": "تُصْبِحِينَ عَلَى خَيْرٍ",
+      "register": "neutral",
+      "nuance": "the same, to a woman"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "It is a verb in the 2nd person, so it changes with the listener: to a woman تُصْبِحِينَ عَلَى خَيْرٍ, to several people تُصْبِحُونَ عَلَى خَيْرٍ.",
+     "The answer: وَأَنْتَ مِنْ أَهْلِهِ (to a man), وَأَنْتِ مِنْ أَهْلِهِ (to a woman) — “and may you be among its people”."
+    ],
+    "subtleties": [
+     "Literally “you wake up upon good”: a wish for the next morning, said when someone goes to bed — not a greeting when you meet in the evening."
+    ]
+   }
+  },
+  {
+   "id": "ar:tusbihina",
+   "lemma": "تُصْبِحِينَ عَلَى خَيْرٍ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodnight"
+   ],
+   "translit": "tuṣbiḥīna ʿalā ḫayr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The bedtime wish, said to a woman or a girl.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "good night (to a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodnight"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تُصْبِحِينَ عَلَى خَيْرٍ يَا أُمِّي.",
+      "tr": "Good night, Mum.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "تُصْبِحِينَ عَلَى خَيْرٍ! وَأَنْتَ مِنْ أَهْلِهِ.",
+      "tr": "Good night! (to a woman) — And you too. (her answer, to a man)",
+      "register": "neutral",
+      "context": "bedtime",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تُصْبِحُ عَلَى خَيْرٍ",
+      "register": "neutral",
+      "nuance": "the same, to a man"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "The ending -īna marks “you, a woman”: تُصْبِحِينَ, not تُصْبِحُ."
+    ],
+    "subtleties": [
+     "The same ending -īna appears in every present verb addressed to a woman: أَنْتِ تَكُونِينَ."
+    ]
+   }
+  },
+  {
+   "id": "ar:maa_assalama",
+   "lemma": "مَعَ السَّلَامَةِ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodbye"
+   ],
+   "translit": "maʿa s-salāma",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The everyday goodbye: “go safely”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "goodbye (lit. “with safety”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodbye"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَعَ السَّلَامَةِ! إِلَى اللِّقَاءِ!",
+      "tr": "Goodbye! — See you!",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     },
+     {
+      "text": "قَالَ لَهَا: مَعَ السَّلَامَةِ.",
+      "tr": "He said to her: “Goodbye.”",
+      "register": "neutral",
+      "context": "narration",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "إِلَى اللِّقَاءِ",
+      "register": "neutral",
+      "nuance": "until we meet again — a little more formal"
+     },
+     {
+      "word": "بَايْ",
+      "register": "slang",
+      "nuance": "bye (from English), among young people"
+     }
+    ],
+    "etymology": {
+     "text": "Literally “with safety” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "Strictly it is said to the one who leaves; in speech the one leaving often answers اللّٰهُ يُسَلِّمُكَ (may God keep you safe)."
+    ],
+    "subtleties": [
+     "السَّلَامَة (safety) has the same root س ل م as سَلَام (peace)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ila_alliqa",
+   "lemma": "إِلَى اللِّقَاءِ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.goodbye"
+   ],
+   "translit": "ʾilā l-liqāʾ",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A goodbye with a promise: “until the (next) meeting”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "goodbye, until we meet again",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.goodbye"
+     }
+    ],
+    "examples": [
+     {
+      "text": "إِلَى اللِّقَاءِ، أَرَاكَ لَاحِقًا!",
+      "tr": "Goodbye, see you later! (to a man)",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     },
+     {
+      "text": "شُكْرًا، وَإِلَى اللِّقَاءِ.",
+      "tr": "Thank you, and goodbye.",
+      "register": "neutral",
+      "context": "shop",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مَعَ السَّلَامَةِ",
+      "register": "neutral",
+      "nuance": "goodbye — the most common everyday word"
+     }
+    ],
+    "etymology": {
+     "text": "Literally “to the meeting”; a calque of French au revoir (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Russian до свидания is built the same way: “until the meeting” (Wiktionary compares the Slavic calques)."
+    ],
+    "pitfalls": [
+     "إِلَى is written with alif maqṣūra (ى); before the article its long ā is shortened in speech: ʾila l-liqāʾ."
+    ],
+    "subtleties": [
+     "A bit more formal than مَعَ السَّلَامَةِ: typical of TV, radio and the classroom."
+    ]
+   }
+  },
+  {
+   "id": "ar:araka_lahiqan",
+   "lemma": "أَرَاكَ لَاحِقًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.seeyou"
+   ],
+   "translit": "ʾarāka lāḥiqan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Light and friendly: “see you later”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "see you later (to a man)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.seeyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "إِلَى اللِّقَاءِ، أَرَاكَ لَاحِقًا!",
+      "tr": "Goodbye, see you later!",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     },
+     {
+      "text": "أَرَاكَ لَاحِقًا فِي الْمَكْتَبِ.",
+      "tr": "See you later at the office.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَرَاكِ لَاحِقًا",
+      "register": "neutral",
+      "nuance": "the same, to a woman"
+     },
+     {
+      "word": "أَرَاكَ غَدًا",
+      "register": "neutral",
+      "nuance": "see you tomorrow"
+     }
+    ],
+    "etymology": {
+     "text": "From أَرَى (ʾarā, “I see”) + ـكَ (-ka, “you”) + لَاحِقًا (lāḥiqan, “later”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "The “you” follows the listener: أَرَاكَ (man), أَرَاكِ (woman), أَرَاكُمْ (several people)."
+    ],
+    "subtleties": [
+     "Word for word like English “see you later”: أَرَى “I see” + -ka “you”."
+    ]
+   }
+  },
+  {
+   "id": "ar:araki_lahiqan",
+   "lemma": "أَرَاكِ لَاحِقًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.seeyou"
+   ],
+   "translit": "ʾarāki lāḥiqan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "“See you later”, said to a woman or a girl.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "see you later (to a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.seeyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَعَ السَّلَامَةِ، أَرَاكِ لَاحِقًا!",
+      "tr": "Goodbye, see you later!",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     },
+     {
+      "text": "أَرَاكِ لَاحِقًا فِي الْجَامِعَةِ.",
+      "tr": "See you later at the university.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَرَاكَ لَاحِقًا",
+      "register": "neutral",
+      "nuance": "the same, to a man"
+     }
+    ],
+    "etymology": {
+     "text": "From أَرَى (ʾarā, “I see”) + ـكِ (-ki, “you”, feminine) + لَاحِقًا (lāḥiqan, “later”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "Only the last vowel of -ki tells it from the masculine: unvocalized both are اراك لاحقا."
+    ],
+    "subtleties": [
+     "The same -ki is the “your” of كَيْفَ حَالُكِ and مِنْ فَضْلِكِ."
+    ]
+   }
+  },
+  {
+   "id": "ar:kayfa_haluka",
+   "lemma": "كَيْفَ حَالُكَ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "translit": "kayfa ḥāluka",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files it as a phrase; in this course fixed formulas are one lexeme with pos INTJ (docs/LANGUAGES.md, multi-word formulas)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The standard “how are you?” — asked sincerely and often more than once.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how are you? (to a man; lit. “how is your state?”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَرْحَبًا يَا أَحْمَدُ، كَيْفَ حَالُكَ؟",
+      "tr": "Hello, Ahmad, how are you?",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "كَيْفَ حَالُكَ الْيَوْمَ؟",
+      "tr": "How are you today?",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كَيْفَكَ",
+      "register": "regional",
+      "nuance": "how are you? (Levant)",
+      "region": "Levant"
+     },
+     {
+      "word": "إِزَّيَّكَ",
+      "register": "regional",
+      "nuance": "how are you? (Egypt)",
+      "region": "Egypt"
+     },
+     {
+      "word": "شْلَوْنَكَ",
+      "register": "regional",
+      "nuance": "how are you? (Iraq, Gulf)",
+      "region": "Iraq, Gulf"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "To a woman: كَيْفَ حَالُكِ (-ki); to several people: كَيْفَ حَالُكُمْ.",
+     "Answer with بِخَيْرٍ، شُكْرًا or الْحَمْدُ لِلّٰهِ — and ask back: وَأَنْتَ؟ / وَأَنْتِ؟"
+    ],
+    "subtleties": [
+     "حَال (state, condition) + -uka (your): Arabic asks about your “state”, not about how you “go” (wie geht’s, как дела)."
+    ]
+   }
+  },
+  {
+   "id": "ar:kayfa_haluki",
+   "lemma": "كَيْفَ حَالُكِ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.howareyou"
+   ],
+   "translit": "kayfa ḥāluki",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files it as a phrase; in this course fixed formulas are one lexeme with pos INTJ (docs/LANGUAGES.md, multi-word formulas)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "“How are you?”, asked of a woman or a girl.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "how are you? (to a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.howareyou"
+     }
+    ],
+    "examples": [
+     {
+      "text": "صَبَاحُ الْخَيْرِ يَا مَرْيَمُ، كَيْفَ حَالُكِ؟",
+      "tr": "Good morning, Maryam, how are you?",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "كَيْفَ حَالُكِ؟ بِخَيْرٍ، شُكْرًا.",
+      "tr": "How are you? — Fine, thanks.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "كَيْفَ حَالُكَ",
+      "register": "neutral",
+      "nuance": "the same, to a man"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "Only the last vowel differs from the masculine: حَالُكِ (-ki) vs حَالُكَ (-ka); unvocalized both are كيف حالك."
+    ],
+    "subtleties": [
+     "Getting this ending right is how you show you noticed whom you speak to — Arabic marks the listener’s gender everywhere."
+    ]
+   }
+  },
+  {
+   "id": "ar:bikhayr",
+   "lemma": "بِخَيْرٍ",
+   "pos": "ADV",
+   "senses": [
+    "greet.fine"
+   ],
+   "translit": "bi-ḫayr",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files بِخَيْرٍ as a prepositional phrase (bi- + ḵayr); it works as a predicate adverbial “well, fine”, so it is ADV here."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Reassuring: “I’m well, all is good”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "well, fine (I am fine)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.fine"
+     },
+     {
+      "id": "s2",
+      "def": "safely, in good shape",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا بِخَيْرٍ، شُكْرًا.",
+      "tr": "I am fine, thank you.",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَمْدُ لِلّٰهِ، كُلُّنَا بِخَيْرٍ.",
+      "tr": "Thank God, we are all fine.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "وَصَلُوا بِخَيْرٍ.",
+      "tr": "They arrived safely.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَمَام",
+      "register": "colloquial",
+      "nuance": "fine, OK, perfect — everyday speech"
+     },
+     {
+      "word": "كْوَيِّس",
+      "register": "regional",
+      "nuance": "fine, good (Egypt)",
+      "region": "Egypt"
+     },
+     {
+      "word": "مَبْسُوط",
+      "register": "colloquial",
+      "nuance": "happy, doing well"
+     }
+    ],
+    "etymology": {
+     "text": "بِ (bi, “with, in”) + خَيْر (ḵayr, “good”) (Wiktionary): “in good (state)”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "خَيْر (good) is also in صَبَاحُ الْخَيْرِ; Turkish hayır and, through Turkish, Greek χαΐρι (good, benefit) go back to it."
+    ],
+    "pitfalls": [
+     "It never changes: أَنَا بِخَيْرٍ، هِيَ بِخَيْرٍ، نَحْنُ بِخَيْرٍ — no gender, no plural.",
+     "The ending is tanwīn: bi-ḫayrin; in speech you mostly hear bi-ḫēr."
+    ],
+    "subtleties": [
+     "كُلُّ عَامٍ وَأَنْتُمْ بِخَيْرٍ (“every year may you be well”) is the standard wish for a holiday or a birthday."
+    ]
+   }
+  },
+  {
+   "id": "ar:alhamdulillah",
+   "lemma": "الْحَمْدُ لِلّٰهِ",
+   "pos": "INTJ",
+   "senses": [],
+   "role": "the most common answer to كَيْفَ حَالُكَ؟ — “praise be to God”, i.e. fine, thank God",
+   "translit": "al-ḥamdu li-llāh",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary files it as a phrase; in this course fixed formulas are one lexeme with pos INTJ (docs/LANGUAGES.md, multi-word formulas)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Gratitude, said by believers and non-believers alike — the usual answer to “how are you?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "praise be to God; thank God — also the answer “fine, thank God”",
+      "register": [
+       "neutral",
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "كَيْفَ حَالُكَ؟ الْحَمْدُ لِلّٰهِ.",
+      "tr": "How are you? — Fine, thank God.",
+      "register": "neutral",
+      "context": "greeting",
+      "sense": "s1"
+     },
+     {
+      "text": "الْحَمْدُ لِلّٰهِ عَلَى السَّلَامَةِ!",
+      "tr": "Thank God you arrived safely!",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "funFacts": [
+     "It is also the second verse of the Qurʾān (الْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ)."
+    ],
+    "pitfalls": [
+     "As an answer it means “fine (thank God)”, even when things are only so-so — it is not a religious statement in that use."
+    ],
+    "subtleties": [
+     "Two words: الْحَمْدُ (the praise) + لِلّٰهِ (to God, with the preposition لِـ joined)."
+    ]
+   }
+  },
+  {
+   "id": "ar:ismi",
+   "lemma": "اِسْمِي",
+   "pos": "INTJ",
+   "senses": [
+    "greet.myname"
+   ],
+   "translit": "ismī",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "pos": "Wiktionary has اِسْمِي as a noun form (ism + -ī) and as the phrasebook phrase “my name is …”; here it is the formula, pos INTJ."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The first sentence of every introduction.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "my name (is) … — اِسْم (name) + ـِي (my)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.myname"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِسْمِي أَحْمَدُ.",
+      "tr": "My name is Ahmad.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "مَرْحَبًا، اِسْمِي لَيْلَى، وَأَنَا طَالِبَةٌ.",
+      "tr": "Hello, my name is Layla, and I am a student.",
+      "register": "neutral",
+      "context": "class",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [],
+    "funFacts": [
+     "Hebrew שְׁמִי (shmi, my name) is the same word: Arabic اِسْم = Hebrew שֵׁם (Proto-Semitic *šim-, Wiktionary)."
+    ],
+    "pitfalls": [
+     "No verb “is”: اِسْمِي سَارَةُ = my name (is) Sara.",
+     "The first alif is a connecting hamza: after another word it is not pronounced — وَاسْمِي (wa-smī)."
+    ],
+    "subtleties": [
+     "To ask: مَا اسْمُكَ؟ (to a man) / مَا اسْمُكِ؟ (to a woman)."
+    ]
+   }
+  },
+  {
+   "id": "ar:tasharrafna",
+   "lemma": "تَشَرَّفْنَا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.nicetomeet"
+   ],
+   "translit": "tašarrafnā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Courteous and warm: “we are honoured (to meet you)”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nice to meet you (lit. “we have been honoured”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.nicetomeet"
+     }
+    ],
+    "examples": [
+     {
+      "text": "تَشَرَّفْنَا! الشَّرَفُ لِي.",
+      "tr": "Nice to meet you! — The honour is mine.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "أَنَا مُعَلِّمٌ هُنَا. تَشَرَّفْنَا.",
+      "tr": "I am a teacher here. Nice to meet you.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "فُرْصَةٌ سَعِيدَةٌ",
+      "register": "neutral",
+      "nuance": "“a happy opportunity” — pleased to meet you, often when parting"
+     },
+     {
+      "word": "سُعِدْتُ بِلِقَائِكَ",
+      "register": "formal",
+      "nuance": "I was glad to meet you (to a man)"
+     }
+    ],
+    "etymology": {
+     "text": "First person plural past of تَشَرَّفَ (tašarrafa, “to be honoured”): “we are honoured” (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "It is a past verb (“we have been honoured”) but means “nice to meet you” now; it does not change for the listener."
+    ],
+    "subtleties": [
+     "Usual replies: الشَّرَفُ لِي (the honour is mine) or تَشَرَّفْنَا again."
+    ]
+   }
+  },
+  {
+   "id": "ar:fursa_saida",
+   "lemma": "فُرْصَةٌ سَعِيدَةٌ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.nicetomeet"
+   ],
+   "translit": "furṣa saʿīda",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Friendly and light: “what a happy chance (to meet you)”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pleased to meet you (lit. “a happy opportunity”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.nicetomeet"
+     }
+    ],
+    "examples": [
+     {
+      "text": "فُرْصَةٌ سَعِيدَةٌ! وَأَنَا أَسْعَدُ.",
+      "tr": "Pleased to meet you! — I am even happier.",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     },
+     {
+      "text": "إِلَى اللِّقَاءِ، فُرْصَةٌ سَعِيدَةٌ!",
+      "tr": "Goodbye — it was nice to meet you!",
+      "register": "neutral",
+      "context": "parting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "تَشَرَّفْنَا",
+      "register": "neutral",
+      "nuance": "nice to meet you — “we are honoured”"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "It is a noun phrase, so it does not change for the listener."
+    ],
+    "subtleties": [
+     "Very often said at the end of a first meeting, like “nice to have met you”."
+    ]
+   }
+  },
+  {
+   "id": "ar:shukran",
+   "lemma": "شُكْرًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.thanks"
+   ],
+   "translit": "šukran",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The plain, universal “thanks”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "thank you, thanks",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.thanks"
+     }
+    ],
+    "examples": [
+     {
+      "text": "شُكْرًا جَزِيلًا!",
+      "tr": "Thank you very much!",
+      "register": "neutral",
+      "context": "thanks",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا، شُكْرًا.",
+      "tr": "No, thank you.",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "شُكْرًا عَلَى الْقَهْوَةِ.",
+      "tr": "Thanks for the coffee.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "شُكْرًا جَزِيلًا",
+      "tr": "thank you very much"
+     },
+     {
+      "text": "شُكْرًا لَكَ / لَكِ",
+      "tr": "thank you (to a man / a woman)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "مُتَشَكِّر",
+      "register": "colloquial",
+      "nuance": "thank you (lit. “thankful”) — Egypt, Levant"
+     },
+     {
+      "word": "مَمْنُون",
+      "register": "colloquial",
+      "nuance": "grateful, obliged"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of شُكْر (šukr, “thankfulness, gratitude”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish teşekkür (thanks) comes from Arabic تَشَكُّر, of the same root ش ك ر."
+    ],
+    "pitfalls": [
+     "The answer is عَفْوًا (you’re welcome)."
+    ],
+    "subtleties": [
+     "The -an (tanwīn) is pronounced: šukran; it marks the accusative of a noun used as an adverb, like أَهْلًا and عَفْوًا."
+    ]
+   }
+  },
+  {
+   "id": "ar:afwan",
+   "lemma": "عَفْوًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.welcome"
+   ],
+   "translit": "ʿafwan",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Modest and polite: “don’t mention it”; as a question, “pardon?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "you’re welcome, don’t mention it",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.welcome"
+     },
+     {
+      "id": "s2",
+      "def": "pardon? excuse me",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "شُكْرًا! عَفْوًا.",
+      "tr": "Thank you! — You’re welcome.",
+      "register": "neutral",
+      "context": "thanks",
+      "sense": "s1"
+     },
+     {
+      "text": "عَفْوًا، لَا شُكْرَ عَلَى وَاجِبٍ.",
+      "tr": "You’re welcome — no thanks are needed for a duty.",
+      "register": "neutral",
+      "context": "politeness",
+      "sense": "s1"
+     },
+     {
+      "text": "عَفْوًا؟ لَمْ أَفْهَمْ.",
+      "tr": "Pardon? I didn’t understand.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَا شُكْرَ عَلَى وَاجِبٍ",
+      "register": "neutral",
+      "nuance": "“no thanks for a duty” — modest and warm"
+     },
+     {
+      "word": "الْعَفْوُ",
+      "register": "neutral",
+      "nuance": "you’re welcome (with the article)"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of عَفْو (ʿafw, “pardon, forgiveness”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish af (pardon) and affedersiniz (excuse me) come from the same Arabic word عَفْو."
+    ],
+    "pitfalls": [
+     "One word, three jobs: after thanks “you’re welcome”; as a question “pardon?”; before a request “excuse me”."
+    ],
+    "subtleties": [
+     "Literally “(I ask) forgiveness”: Arabic answers thanks by playing the favour down."
+    ]
+   }
+  },
+  {
+   "id": "ar:min_fadlika",
+   "lemma": "مِنْ فَضْلِكَ",
+   "pos": "ADV",
+   "senses": [
+    "greet.please"
+   ],
+   "translit": "min faḍlika",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Polite softening: “out of your kindness”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "please (to a man)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.please"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِفْتَحِ الْبَابَ، مِنْ فَضْلِكَ.",
+      "tr": "Open the door, please.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "اِجْلِسْ، مِنْ فَضْلِكَ.",
+      "tr": "Sit down, please.",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ فَضْلِكَ، أَيْنَ الْمَحَطَّةُ؟",
+      "tr": "Excuse me, where is the station?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَوْ سَمَحْتَ",
+      "register": "neutral",
+      "nuance": "“if you allow” — please, excuse me; also to get attention"
+     },
+     {
+      "word": "رَجَاءً",
+      "register": "formal",
+      "nuance": "please — on notices: رَجَاءً، لَا تُدَخِّنْ"
+     }
+    ],
+    "etymology": {
+     "text": "مِنْ (min, “from, out of”) + فَضْل (faḍl, “kindness, favour”) + ـكَ (-ka, “your”): “out of your kindness”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Turkish lütfen (please) is built in the same spirit from another Arabic noun, لُطْف (kindness)."
+    ],
+    "pitfalls": [
+     "To a woman: مِنْ فَضْلِكِ (-ki); to several people: مِنْ فَضْلِكُمْ."
+    ],
+    "subtleties": [
+     "It can stand before or after the request, like English “please”."
+    ]
+   }
+  },
+  {
+   "id": "ar:min_fadliki",
+   "lemma": "مِنْ فَضْلِكِ",
+   "pos": "ADV",
+   "senses": [
+    "greet.please"
+   ],
+   "translit": "min faḍliki",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "“Please”, said to a woman or a girl.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "please (to a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.please"
+     }
+    ],
+    "examples": [
+     {
+      "text": "اِجْلِسِي، مِنْ فَضْلِكِ.",
+      "tr": "Sit down, please.",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "مِنْ فَضْلِكِ، أَيْنَ الْمَكْتَبَةُ؟",
+      "tr": "Excuse me, where is the library?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "اِفْتَحِي النَّافِذَةَ، مِنْ فَضْلِكِ.",
+      "tr": "Open the window, please.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَوْ سَمَحْتِ",
+      "register": "neutral",
+      "nuance": "“if you allow” — please, excuse me (to a woman)"
+     }
+    ],
+    "etymology": {
+     "text": "مِنْ (min, “from, out of”) + فَضْل (faḍl, “kindness, favour”) + ـكِ (-ki, “your”, feminine).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The verb before it changes too: اِجْلِسْ (to a man) → اِجْلِسِي (to a woman) — Arabic marks the listener twice."
+    ],
+    "pitfalls": [
+     "Unvocalized it is the same as the masculine (من فضلك); say -ki clearly."
+    ],
+    "subtleties": [
+     "Wiktionary lists both forms on one page: مِنْ فَضْلِكَ / مِنْ فَضْلِكِ."
+    ]
+   }
+  },
+  {
+   "id": "ar:law_samahta",
+   "lemma": "لَوْ سَمَحْتَ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.excuseme"
+   ],
+   "translit": "law samaḥta",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The standard way to get attention politely — a waiter, a passer-by.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "excuse me; please (to a man; lit. “if you allowed”)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.excuseme"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَوْ سَمَحْتَ، أَيْنَ الْبَابُ؟",
+      "tr": "Excuse me, where is the door?",
+      "register": "neutral",
+      "context": "asking",
+      "sense": "s1"
+     },
+     {
+      "text": "لَوْ سَمَحْتَ! الْحِسَابُ.",
+      "tr": "Excuse me! The bill, please.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَنْ إِذْنِكَ",
+      "register": "neutral",
+      "nuance": "“with your permission” — excuse me, to pass or to leave"
+     },
+     {
+      "word": "عَفْوًا",
+      "register": "neutral",
+      "nuance": "excuse me, pardon"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "To a woman: لَوْ سَمَحْتِ; to several people: لَوْ سَمَحْتُمْ.",
+     "It is a past verb after لَوْ (“if you allowed”) but means the present."
+    ],
+    "subtleties": [
+     "To get past someone, عَنْ إِذْنِكَ is more natural; لَوْ سَمَحْتَ asks for attention or a favour."
+    ]
+   }
+  },
+  {
+   "id": "ar:law_samahti",
+   "lemma": "لَوْ سَمَحْتِ",
+   "pos": "INTJ",
+   "senses": [
+    "greet.excuseme"
+   ],
+   "translit": "law samaḥti",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "“Excuse me”, said to a woman.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "excuse me; please (to a woman)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.excuseme"
+     }
+    ],
+    "examples": [
+     {
+      "text": "لَوْ سَمَحْتِ، أَيْنَ الْمُعَلِّمَةُ؟",
+      "tr": "Excuse me, where is the teacher?",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "لَوْ سَمَحْتِ! مَا اسْمُكِ؟",
+      "tr": "Excuse me! What is your name?",
+      "register": "neutral",
+      "context": "introductions",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عَنْ إِذْنِكِ",
+      "register": "neutral",
+      "nuance": "with your permission (to a woman)"
+     }
+    ],
+    "funFacts": [],
+    "pitfalls": [
+     "The final -ti (سَمَحْتِ) is the only difference from the masculine -ta."
+    ],
+    "subtleties": [
+     "The same -ti ending marks “you (woman)” in every past verb: كُنْتِ (you were)."
+    ]
+   }
+  },
+  {
+   "id": "ar:asif",
+   "lemma": "آسِف",
+   "pos": "ADJ",
+   "senses": [
+    "greet.sorry"
+   ],
+   "translit": "ʾāsif",
+   "forms": {
+    "ADJ;NOM;SG;MASC;INDF": "آسِفٌ",
+    "ADJ;NOM;SG;FEM;INDF": "آسِفَةٌ",
+    "ADJ;NOM;PL;MASC;INDF": "آسِفُونَ",
+    "ADJ;NOM;PL;FEM;INDF": "آسِفَاتٌ"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A sincere apology; it agrees with the one who apologises.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorry (I am sorry)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.sorry"
+     },
+     {
+      "id": "s2",
+      "def": "regretful, sad about something",
+      "register": [
+       "formal"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "أَنَا آسِفٌ جِدًّا.",
+      "tr": "I am very sorry. (a man speaking)",
+      "register": "neutral",
+      "context": "apology",
+      "sense": "s1"
+     },
+     {
+      "text": "آسِفَةٌ، تَأَخَّرْتُ.",
+      "tr": "Sorry, I’m late. (a woman speaking)",
+      "register": "neutral",
+      "context": "meeting",
+      "sense": "s1"
+     },
+     {
+      "text": "نَحْنُ آسِفُونَ عَلَى التَّأْخِيرِ.",
+      "tr": "We are sorry for the delay.",
+      "register": "formal",
+      "context": "announcement",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "آسِفٌ جِدًّا",
+      "tr": "very sorry"
+     },
+     {
+      "text": "آسِفٌ عَلَى التَّأْخِيرِ",
+      "tr": "sorry for the delay"
+     },
+     {
+      "text": "آسِفٌ لِلْإِزْعَاجِ",
+      "tr": "sorry for the bother"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "عُذْرًا",
+      "register": "neutral",
+      "nuance": "sorry, pardon — does not change with the speaker"
+     },
+     {
+      "word": "مُتَأَسِّف",
+      "register": "colloquial",
+      "nuance": "sorry — everyday speech"
+     }
+    ],
+    "etymology": {
+     "text": "Derived from the active participle of the verb أَسِفَ (ʔasifa, “to regret, to grieve”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same root gives أَسَف (regret): لِلْأَسَفِ / مَعَ الْأَسَفِ = unfortunately."
+    ],
+    "pitfalls": [
+     "It agrees with the speaker: a man says آسِفٌ, a woman آسِفَةٌ, men آسِفُونَ, women آسِفَاتٌ.",
+     "For condolences Arabic uses fixed formulas (الْبَقَاءُ لِلّٰهِ) rather than آسِف."
+    ],
+    "subtleties": [
+     "أَنَا آسِفٌ is a verbless sentence: “I (am) regretful” — the present “am” is not said."
+    ]
+   }
+  },
+  {
+   "id": "ar:udhran",
+   "lemma": "عُذْرًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.sorry"
+   ],
+   "translit": "ʿuḏran",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A short, polite “sorry / pardon”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sorry; pardon me",
+      "register": [
+       "neutral"
+      ],
+      "concept": "greet.sorry"
+     }
+    ],
+    "examples": [
+     {
+      "text": "عُذْرًا، لَمْ أَقْصِدْ.",
+      "tr": "Sorry, I didn’t mean it.",
+      "register": "neutral",
+      "context": "apology",
+      "sense": "s1"
+     },
+     {
+      "text": "عُذْرًا، هَلْ هٰذَا مَكَانُكَ؟",
+      "tr": "Excuse me, is this your seat?",
+      "register": "neutral",
+      "context": "bus",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "آسِف",
+      "register": "neutral",
+      "nuance": "sorry — agrees with the speaker (آسِفٌ / آسِفَةٌ)"
+     },
+     {
+      "word": "عَفْوًا",
+      "register": "neutral",
+      "nuance": "pardon, excuse me"
+     }
+    ],
+    "etymology": {
+     "text": "Adverbial accusative of عُذْر (ʿuḏr, “excuse”) (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [],
+    "pitfalls": [
+     "Unlike آسِف it never changes for the speaker."
+    ],
+    "subtleties": [
+     "Literally “(I ask) an excuse”; common in writing and on signs: عُذْرًا، الْمَحَلُّ مُغْلَقٌ."
+    ]
+   }
+  },
+  {
+   "id": "ar:naam",
+   "lemma": "نَعَمْ",
+   "pos": "ADV",
+   "senses": [
+    "part.yes"
+   ],
+   "translit": "naʿam",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Clear and polite; as a question (نَعَمْ؟) it answers a call.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yes",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.yes"
+     },
+     {
+      "id": "s2",
+      "def": "yes? (answering when called; asking someone to go on)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "— هَلْ أَنْتَ جَاهِزٌ؟ — نَعَمْ، أَنَا جَاهِزٌ.",
+      "tr": "“Are you ready?” — “Yes, I’m ready.”",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s1"
+     },
+     {
+      "text": "نَعَمْ، أُرِيدُ قَهْوَةً بِلَا سُكَّرٍ.",
+      "tr": "Yes, I’d like coffee without sugar.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "قَالَ نَعَمْ لِلْعَرْضِ.",
+      "tr": "He said yes to the offer.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
+     },
+     {
+      "text": "نَعَمْ؟ هَلْ نَادَيْتَنِي؟",
+      "tr": "Yes? Did you call me?",
+      "register": "neutral",
+      "context": "answering a call",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "نَعَمْ، بِالتَّأْكِيدِ",
+      "tr": "yes, certainly"
+     },
+     {
+      "text": "قَالَ نَعَمْ",
+      "tr": "to say yes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "أَجَلْ",
+      "register": "formal",
+      "nuance": "yes, indeed — more formal or literary"
+     },
+     {
+      "word": "بَلَى",
+      "register": "formal",
+      "nuance": "yes (on the contrary) — the answer that contradicts a negative question"
+     },
+     {
+      "word": "أَيْوَه",
+      "register": "regional",
+      "nuance": "everyday spoken “yes”",
+      "region": "Egypt"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary links it to the root ن ع م (“to be pleased, to live in comfort”), cognate with Hebrew נָעַם (naʿam, “to please”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew נָעִים (naʿim, “pleasant”) — as in נָעִים מְאוֹד, “nice to meet you” — comes from the same Semitic root."
+    ],
+    "pitfalls": [
+     "To a negative question, “yes, it is so” is بَلَى, not نَعَمْ: أَلَيْسَ هٰذَا بَصَلًا؟ — بَلَى (Isn’t this onion? — Yes, it is). نَعَمْ would confirm the negative.",
+     "Unvocalized نعم can also be نِعْمَ (“how excellent …!”) or نَعَم (cattle) — the vowels and the final sukūn of نَعَمْ tell them apart."
+    ],
+    "subtleties": [
+     "Said as a question, نَعَمْ؟ means “yes? / pardon?”; with a sharp tone it can sound like “excuse me?!”."
+    ]
+   }
+  },
+  {
+   "id": "ar:la_no",
+   "lemma": "لَا",
+   "pos": "PART",
+   "senses": [
+    "part.no"
+   ],
+   "translit": "lā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary glosses لَا as “no, not”; the answer “no” is that sense (the word “no” is too short for the automatic gloss match)."
+    }
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A plain “no”; in hospitality, often said once and then overruled by the host.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "no (as an answer)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.no"
+     }
+    ],
+    "examples": [
+     {
+      "text": "— هَلْ تُرِيدُ شَايًا؟ — لَا، شُكْرًا.",
+      "tr": "“Do you want tea?” — “No, thanks.”",
+      "register": "neutral",
+      "context": "hospitality",
+      "sense": "s1"
+     },
+     {
+      "text": "لَا، هٰذَا لَيْسَ صَحِيحًا.",
+      "tr": "No, that’s not right.",
+      "register": "neutral",
+      "context": "discussion",
+      "sense": "s1"
+     },
+     {
+      "text": "قُلْ لَا لِلْمُخَدِّرَاتِ.",
+      "tr": "Say no to drugs.",
+      "register": "neutral",
+      "context": "campaign",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "لَا، شُكْرًا",
+      "tr": "no, thank you"
+     },
+     {
+      "text": "قَالَ لَا",
+      "tr": "to say no"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "لَا وَأَلْفُ لَا",
+      "tr": "no, and a thousand times no",
+      "kind": "fixed expression",
+      "meaning": "absolutely not",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "كَلَّا",
+      "register": "literary",
+      "nuance": "no, by no means — an emphatic rejection, frequent in the Qurʾān"
+     },
+     {
+      "word": "لَأ",
+      "register": "regional",
+      "nuance": "everyday spoken “no”",
+      "region": "Egypt, Levant"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "نَعَمْ",
+      "note": "yes"
+     }
+    ],
+    "etymology": {
+     "text": "Inherited from Proto-Semitic *lā; compare Hebrew לֹא (lo).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew לֹא (lo) is the same Proto-Semitic word *lā — and it also means both “no” and “not”."
+    ],
+    "pitfalls": [
+     "The answer “no” and the negation “not” are the same written word لَا (separate words in this course). As an answer it stands alone, usually followed by a comma; as negation it stands directly before a present verb: لَا أُحِبُّ."
+    ],
+    "subtleties": [
+     "A first لَا to food or drink is often not taken as final in Arab hospitality — the host may insist; a firm refusal usually repeats it with thanks: لَا، شُكْرًا."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

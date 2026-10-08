@@ -1,0 +1,242 @@
+{
+ "lexemes": [
+  {
+   "id": "de:was",
+   "lemma": "was",
+   "pos": "PRON",
+   "class": "int",
+   "senses": [
+    "q.what"
+   ],
+   "forms": {
+    "PRON;NOM": "was",
+    "PRON;ACC": "was",
+    "PRON;GEN": "wessen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Curiosity – and, alone and sharp, a slightly rude “What?”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "what? (interrogative pronoun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.what"
+     },
+     {
+      "id": "s2",
+      "def": "what, which (relative: alles, was …)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "something (= etwas, colloquial: Ich habe was gefunden)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Was trinkst du?",
+      "tr": "What are you drinking?",
+      "register": "informal",
+      "context": "café",
+      "sense": "s1"
+     },
+     {
+      "text": "Was ist das?",
+      "tr": "What is this?",
+      "register": "neutral",
+      "context": "naming things",
+      "sense": "s1"
+     },
+     {
+      "text": "Alles, was du brauchst, ist im Kühlschrank.",
+      "tr": "Everything you need is in the fridge.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Willst du was essen?",
+      "tr": "Do you want something to eat?",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Was ist los?",
+      "tr": "What's the matter?"
+     },
+     {
+      "text": "Was für ein …?",
+      "tr": "What kind of …?"
+     },
+     {
+      "text": "Was kostet das?",
+      "tr": "How much is this?"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Was ist los?",
+      "tr": "What's loose?",
+      "kind": "fixed expression",
+      "meaning": "What's going on? / What's wrong?",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Wie bitte?",
+      "register": "neutral",
+      "nuance": "“Pardon?” – the polite way to ask someone to repeat; a bare Was? sounds rude"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German waȥ, from Old High German waȥ, from Proto-West Germanic *hwat, from Proto-Germanic *hwat, from Proto-Indo-European *kʷod. Cognate with Dutch wat, English what, Danish hvad.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German w- question words match English wh- words: was – what, wo – where, wer – who (careful!)."
+    ],
+    "pitfalls": [
+     "False friend: German was = what, not the English past tense “was” (that is war).",
+     "After prepositions standard German uses wo(r)- + preposition: Womit? Worüber? – mit was is colloquial."
+    ],
+    "subtleties": [
+     "Was? alone sounds abrupt; Wie bitte? is the polite version."
+    ]
+   }
+  },
+  {
+   "id": "de:wo",
+   "lemma": "wo",
+   "pos": "ADV",
+   "senses": [
+    "q.where"
+   ],
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Searching for something – the keys, the station, the garlic.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "where? (at what place)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "q.where"
+     },
+     {
+      "id": "s2",
+      "def": "where (relative: die Stadt, wo ich wohne)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "somewhere (= irgendwo, colloquial)",
+      "register": [
+       "colloquial"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Wo ist die Kartoffel?",
+      "tr": "Where is the potato?",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Entschuldigung, wo ist der Bahnhof?",
+      "tr": "Excuse me, where is the station?",
+      "register": "formal",
+      "context": "asking the way",
+      "sense": "s1"
+     },
+     {
+      "text": "Das ist die Stadt, wo ich geboren bin.",
+      "tr": "That's the town where I was born.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich habe meine Brille wo liegen lassen.",
+      "tr": "I've left my glasses somewhere.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Wo wohnst du?",
+      "tr": "Where do you live?"
+     },
+     {
+      "text": "irgendwo",
+      "tr": "somewhere"
+     },
+     {
+      "text": "überall, wo …",
+      "tr": "everywhere where …"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "an welchem Ort",
+      "register": "formal",
+      "nuance": "at which place – stiff, written"
+     }
+    ],
+    "antonyms": [],
+    "etymology": {
+     "text": "With a widespread dialectal shift from -ā- to -ō-, from Middle High German wā, wār, from Old High German wār, hwār, from Proto-West Germanic *hwār, from Proto-Germanic *hwēr, *hwar; ultimately from Proto-Indo-European *kʷís, whence also wer. Cognate with English where.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old -r of wo (compare English where) survives in compounds: woran, worauf, worin."
+    ],
+    "pitfalls": [
+     "wo is only for location: wohin = where to (Wohin gehst du?), woher = where from (Woher kommst du?).",
+     "False friend: German wo = where, German wer = who."
+    ],
+    "subtleties": [
+     "In southern German speech wo is also used as a relative pronoun (der Mann, wo …) – nonstandard."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}
