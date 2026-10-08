@@ -364,7 +364,7 @@
         };
         const imp = el('label', { class: 'btn small' }, '📥 Import subject pack', el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); close(); resolve(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
-        Notes.on(pending => { reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, `📬 ${pending.length} subject(s) shared with you`), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
+        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, `📬 ${pending.length} subject(s) shared with you`), ...pending.map(sh => shareRow(sh, { onAccepted: s => { close(); resolve(s); } }))); });
         // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
           el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, '📚 Subjects', el('small', {}, 'ready-made courses')),
@@ -603,13 +603,27 @@
     pending: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
     emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
-    async refresh() { if (!this.acc || !isCloudAcc(this.acc)) return this.pending; try { this.pending = (await NoemaCloud.incomingShares()) || []; this.emit(); } catch (e) { console.warn('[notes]', e.message); } return this.pending; },
+    async refresh() {
+      if (!this.acc || !isCloudAcc(this.acc)) return this.pending;
+      try {
+        const subs = (await NoemaCloud.incomingShares()) || [];
+        // 👥 invitations to curricula (engine/curshare.js) — in the same bell and banner
+        const curs = window.NoemaCurShare ? ((await NoemaCurShare.invites().catch(e => { console.warn('[notes] curricula', e.message); return []; })) || []).map(i => ({ ...i, id: 'cur:' + i.curriculum, kind: 'curriculum', from_name: i.owner_name || '', meta: { ...(i.meta || {}), counts: i.meta?.counts || {} } })) : [];
+        this.pending = [...subs, ...curs]; this.emit();
+      } catch (e) { console.warn('[notes]', e.message); }
+      return this.pending;
+    },
     start(acc) {
       this.acc = acc; if (!isCloudAcc(acc)) return;
       this.refresh(); clearInterval(this.timer); this.timer = setInterval(() => this.refresh(), 120e3);
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') this.refresh(); });
     },
     async accept(sh) {
+      if (sh.kind === 'curriculum') {   // 👥 join a shared curriculum: my own progress, the steps prepared together
+        const c = await NoemaCurShare.join(this.acc, sh.curriculum);
+        this.pending = this.pending.filter(x => x.id !== sh.id); this.emit();
+        return { kind: 'curriculum', curriculum: c.id, title: c.title || c.goal };
+      }
       const p = await NoemaCloud.downloadShared(sh.id);
       if ((REG.subjects || []).some(x => x.id === p.subject.id)) p.subject.id = p.subject.id + '-' + slugify(sh.from_name || 'shared');
       const added = await importPack(this.acc, p, { sharedBy: sh.from_name || sh.from_email, sharedAt: new Date().toISOString() });
@@ -618,15 +632,17 @@
       this.pending = this.pending.filter(x => x.id !== sh.id); this.emit();
       return added;
     },
-    async reject(sh) { await NoemaCloud.answerShare(sh.id, false); this.pending = this.pending.filter(x => x.id !== sh.id); this.emit(); },
+    async reject(sh) { if (sh.kind === 'curriculum') await NoemaCurShare.decline(sh.curriculum); else await NoemaCloud.answerShare(sh.id, false); this.pending = this.pending.filter(x => x.id !== sh.id); this.emit(); },
   };
   /** One request as a row: who, what (info), Accept / Reject. */
   function shareRow(sh, { onAccepted } = {}) {
     const row = el('div', { class: 'nx-req' },
-      el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || sh.from_email}`), ` wants to share `, el('b', {}, `“${sh.title}”`), ' with you',
+      sh.kind === 'curriculum' ? el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || 'Someone'}`), ' invites you to the curriculum ', el('b', {}, `“${sh.title}”`),
+        el('div', { class: 'tiny' }, `👥 ${nOf(sh.meta?.counts?.steps, 'step')} — your own progress, the prepared steps are shared` + (sh.message ? ` · “${sh.message}”` : '')))
+      : el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || sh.from_email}`), ` wants to share `, el('b', {}, `“${sh.title}”`), ' with you',
         el('div', { class: 'tiny' }, `${nOf(sh.meta?.counts?.chapters, 'chapter')} · ${nOf(sh.meta?.counts?.exercises, 'exercise')}` + (sh.message ? ` · “${sh.message}”` : ''))),
-      el('button', { class: 'btn small ghost', title: 'Details', onclick: () => overlay((b, c) => b.append(infoCard({ title: sh.title, emoji: sh.meta?.emoji, owner_name: sh.from_name }, sh.meta), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: c }, 'Back')))) }, 'ℹ️'),
-      el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(`✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, '✓ Accept'),
+      sh.kind === 'curriculum' ? null : el('button', { class: 'btn small ghost', title: 'Details', onclick: () => overlay((b, c) => b.append(infoCard({ title: sh.title, emoji: sh.meta?.emoji, owner_name: sh.from_name }, sh.meta), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: c }, 'Back')))) }, 'ℹ️'),
+      el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? `👥 You joined “${s.title}” — find it in 🧭 Curricula` : `✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, sh.kind === 'curriculum' ? '✓ Join' : '✓ Accept'),
       el('button', { class: 'btn small', onclick: async () => { await Notes.reject(sh).catch(er => toastL('⚠️ ' + er.message)); toastL('Rejected'); } }, '✕ Reject'));
     return row;
   }

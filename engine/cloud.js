@@ -46,6 +46,8 @@
 
   const NoemaCloud = window.NoemaCloud = {
     session, status, onStatus(f) { st.listeners.push(f); },
+    /** A raw Supabase call as the signed-in user (row-level security applies) — e.g. engine/curshare.js. */
+    api: (path, o) => call(path, o), uid,
     async init(cfg) { CFG = cfg; BASE = cfg.supabaseUrl.replace(/\/+$/, ''); KEY = cfg.supabaseKey || cfg.supabaseAnonKey || ''; if (session()) { try { await fresh(); } catch (e) { console.warn('[cloud] session refresh failed', e.message); } } },
     async signUp(email, password, name) {
       const j = await call('/auth/v1/signup', { method: 'POST', auth: false, body: { email, password, data: { name: name || email.split('@')[0] } } });
@@ -291,6 +293,7 @@
         await this.deleteObjects('noema-public', [path]); if (!ok) throw new Error('public file not readable (bucket must be public)');
       });
       await step('Sharing with a person', async () => { await call('/rest/v1/noema_shares?select=id&limit=1'); await call('/storage/v1/object/list/noema-shared', { method: 'POST', body: { prefix: '', limit: 1 } }); });
+      await step('Shared curricula', async () => { await call('/rest/v1/noema_curricula_shared?select=id&limit=1'); await call('/rest/v1/noema_curriculum_steps?select=node_id&limit=1'); await call('/rest/v1/noema_curriculum_members?select=email&limit=1'); await call('/storage/v1/object/list/noema-curricula', { method: 'POST', body: { prefix: '', limit: 1 } }); });
       return out;
     },
 

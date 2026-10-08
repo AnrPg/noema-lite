@@ -587,7 +587,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
    the same node. Claude (API key) → the noema-pack-builder skill job (engine/claude.js, web research);
    otherwise Gemini → engine/packgen.js. */
 window.NoemaCurriculum.Gen = (() => {
-  const C = window.NoemaCurriculum, L = () => window.NoemaLLM;
+  const C = window.NoemaCurriculum, L = () => window.NoemaLLM, SH = () => window.NoemaCurShare;
   const TAB = 't' + Math.random().toString(36).slice(2, 9);
   const live = {};            // nodeKey → { msg, at } (in memory: progress lines are not synced)
   const listeners = new Set(); const emit = () => listeners.forEach(f => { try { f(); } catch (e) { } });
@@ -607,7 +607,7 @@ window.NoemaCurriculum.Gen = (() => {
   /** What should be built next? user requests first, then the next open nodes of each curriculum. */
   function next() {
     const cs = C.list(acc).filter(c => c.status === 'ready');
-    for (const k of priority.slice()) { const [cid, nid] = k.split('/'); const c = cs.find(x => x.id === cid); const p = c?.nodes[nid]?.pack; if (!c || p?.status === 'ready' || p?.status === 'app' || (p?.status === 'paused' && !p.resume)) { priority.splice(priority.indexOf(k), 1); continue; } if (!lockedByOther(cid, nid)) return [c, nid]; }
+    for (const k of priority.slice()) { const [cid, nid] = k.split('/'); const c = cs.find(x => x.id === cid); const p = c?.nodes[nid]?.pack; if (!c || p?.status === 'ready' || p?.status === 'app' || (p?.status === 'paused' && !p.resume) || SH()?.taken(c, nid)) { priority.splice(priority.indexOf(k), 1); continue; } if (!lockedByOther(cid, nid)) return [c, nid]; }
     if (paused()) return null;
     for (const c of cs) {
       const st = C.statuses(acc, c); const want = C.nextUp(acc, c).slice(0, Math.max(0, c.prefetch ?? 3));
@@ -615,8 +615,9 @@ window.NoemaCurriculum.Gen = (() => {
         const p = c.nodes[nid].pack;
         if (p?.status === 'ready' || p?.status === 'paused' || p?.status === 'app') continue;
         if (c.nodes[nid].replan || (c.provider === 'claudeapp' && !c.nodes[nid].chapters?.length)) continue;   // its (new) plan comes from the Claude app first
+        if (SH()?.taken(c, nid) || (SH()?.isMember(c) && !c.nodes[nid].chapters?.length)) continue;   // 👥 somebody else prepared / prepares it · its plan comes from the owner
         if (!c.autoApprove && !c.nodes[nid].reviewed) continue;   // the learner reviews (and may change) a step before it is generated
-        if (p?.status === 'failed' && Date.now() - (p.failedAt || 0) < 30 * 60 * 1000) continue;
+        if ((p?.status === 'failed' || (c.shared && p?.failedAt)) && Date.now() - (p.failedAt || 0) < 30 * 60 * 1000) continue;
         if (!st[nid].open || lockedByOther(c.id, nid)) continue;
         return [c, nid];
       }
@@ -637,7 +638,13 @@ window.NoemaCurriculum.Gen = (() => {
     const k = key(c.id, nid), n = c.nodes[nid], pid = C.packId(c, nid);
     const say = m => { live[k] = { msg: m, at: Date.now() }; emit(); };
     const provider = L().pick(acc, c.provider);
-    lock(c.id, nid, true); const hb = setInterval(() => lock(c.id, nid, true), 60000);
+    // 👥 a shared curriculum: reserve the step first (somebody else may have it), and get the curriculum's material here
+    if (c.shared && !c.shared.ended && SH()) {
+      if (!(await SH().claim(acc, c, nid))) { if (priority.includes(k)) priority.splice(priority.indexOf(k), 1); patchNode(c.id, nid, { status: c.nodes[nid].pack?.status === 'generating' ? null : c.nodes[nid].pack?.status || null, failedAt: Date.now() }); const x = C.get(acc, c.id)?.remote?.[nid]; say(`👥 ${x?.by || 'Somebody'} ${x?.status === 'ready' ? 'has prepared' : 'is preparing'} this step — it is shared with you`); return; }
+      await SH().ensureNodeFiles(acc, c, nid);
+    }
+    let beats = 0;
+    lock(c.id, nid, true); const hb = setInterval(() => { lock(c.id, nid, true); if (++beats % 10 === 0) SH()?.renew(acc, c, nid); }, 60000);
     patchNode(c.id, nid, { id: pid, status: 'generating', provider, startedAt: new Date().toISOString(), error: null, resume: false });
     ctl = new AbortController();
     try {
@@ -651,6 +658,7 @@ window.NoemaCurriculum.Gen = (() => {
     } catch (e) {
       const stopped = e.kind === 'aborted' || /Stopped/.test(e.message);
       patchNode(c.id, nid, stopped ? { status: 'paused', error: 'Paused.' } : { status: 'failed', error: e.message, failedAt: Date.now() });
+      if (!stopped) SH()?.release(acc, c, nid);   // 👥 free for the others again
       say((stopped ? '⏸️ ' : '⚠️ ') + e.message);
     } finally { clearInterval(hb); lock(c.id, nid, false); ctl = null; }
   }
@@ -682,6 +690,8 @@ window.NoemaCurriculum.Gen = (() => {
       const secs = pack.chapters.flatMap(ch => (ch.sections || []).map(s => s.id)); const exN = pack.chapters.reduce((a, ch) => a + (ch.exercises || []).length, 0);
       patchNode(c.id, nid, { id: pid, status: 'ready', version: pack.version || null, sections: secs, exercises: exN, chapters: pack.chapters.length, generatedAt: new Date().toISOString(), error: null, ...(via ? { via } : {}) });
     }
+    // 👥 a shared curriculum: everybody gets it (unless somebody else's version was there first — then this one stays mine)
+    if (c.shared && !c.shared.ended && SH()) await SH().contribute(acc, c.id, nid).catch(e => { console.warn('[curriculum] sharing the step failed', e); window.Noema?.toast?.('⚠️ The step is ready for you, but sharing it failed: ' + e.message + ' — it is tried again when you open the map.', 6000); patchNode(c.id, nid, { shareError: e.message }); });
   }
 
   async function viaClaude(c, nid, pid, say) {
@@ -706,7 +716,7 @@ window.NoemaCurriculum.Gen = (() => {
 
   /** 💬 Prepare a step in the learner's Claude app (their Claude plan) instead of here: it waits in the queue the connector serves. */
   function toApp(c, nid, { auto = false } = {}) {
-    const cur = C.get(acc, c.id); const n = cur?.nodes[nid]; if (!n || ['ready', 'generating'].includes(n.pack?.status)) return;
+    const cur = C.get(acc, c.id); const n = cur?.nodes[nid]; if (!n || ['ready', 'generating'].includes(n.pack?.status) || SH()?.taken(cur, nid)) return;
     if (n.pack?.status === 'app') { const k = key(c.id, nid); if (priority.includes(k)) priority.splice(priority.indexOf(k), 1); return; }   // queued already: keep its place (idempotent)
     if (busy === key(c.id, nid)) ctl?.abort();
     n.pack = { ...(n.pack || {}), id: C.packId(cur, nid), status: 'app', queuedAt: new Date().toISOString(), error: null, auto }; if (!n.reviewed) n.reviewed = new Date().toISOString();
@@ -720,7 +730,7 @@ window.NoemaCurriculum.Gen = (() => {
   function queueMany(c, which = 'all', { review = true } = {}) {
     const cur = C.get(acc, c.id); if (!cur) return { queued: 0, needPlan: 0, needReview: 0 };
     const ord = [...new Set([...(cur.paths?.deep || []), ...C.order(cur)])].filter(id => cur.nodes[id]);
-    const todo = ord.filter(id => !['ready', 'generating', 'app'].includes(cur.nodes[id].pack?.status));
+    const todo = ord.filter(id => !['ready', 'generating', 'app'].includes(cur.nodes[id].pack?.status) && !SH()?.taken(cur, id));
     const max = which === 'all' ? Infinity : Math.max(0, +which || 0); let queued = 0, needPlan = 0, needReview = 0; const t0 = Date.now();
     for (const id of todo) {
       if (queued >= max) break;
@@ -746,7 +756,7 @@ window.NoemaCurriculum.Gen = (() => {
     const k = key(c.id, nid); if (!priority.includes(k)) priority.unshift(k); kick(); emit();
   }
   function stop() { ctl?.abort(); }
-  function start(a) { if (acc === a) return; acc = a; kick(); C.onChange(() => { if (!busy) kick(); }); document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') kick(); }); }
+  function start(a) { SH()?.start?.(a); if (acc === a) return; acc = a; kick(); C.onChange(() => { if (!busy) kick(); }); document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') kick(); }); }
 
   /* ---- "I already know this": a short placement test ---- */
   const S_TEST = { type: 'object', required: ['questions'], properties: { questions: { type: 'array', minItems: 8, maxItems: 12, items: { type: 'object', required: ['q', 'options', 'answer', 'explain'], properties: { q: { type: 'string', minLength: 5 }, options: { type: 'array', minItems: 3, maxItems: 5, items: { type: 'string', minLength: 1 } }, answer: { type: 'integer', minimum: 0, maximum: 4 }, explain: { type: 'string' } } } } } };

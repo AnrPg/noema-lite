@@ -28,9 +28,10 @@
 
   /** What is still to do outside the app: { graph: 'dag'|'audit'|'expand'|null, toPlan: [ids], steps: [ids], claimed: [ids], done }
       steps: queued and free, in queue order · claimed: queued and being prepared by a run right now (see settle) */
+  const member = c => c?.shared?.role === 'member' && !c.shared.ended;   // 👥 a curriculum someone shared with the learner: its map and plans are the owner's
   function work(c) {
-    const graph = isApp(c) && GRAPH.includes(c.stage) ? c.stage : null;
-    const toPlan = isApp(c) && !graph && c.stage !== 'dag' ? C().order(c).filter(id => needsPlan(c.nodes[id])) : [];
+    const graph = isApp(c) && !member(c) && GRAPH.includes(c.stage) ? c.stage : null;
+    const toPlan = isApp(c) && !member(c) && !graph && c.stage !== 'dag' ? C().order(c).filter(id => needsPlan(c.nodes[id])) : [];
     const queued = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')) || a.localeCompare(b));
     const steps = queued.filter(id => !c.nodes[id].pack.claimedAt), claimed = queued.filter(id => c.nodes[id].pack.claimedAt);
     return { graph, toPlan, steps, claimed, done: !graph && !toPlan.length && !steps.length };
@@ -40,13 +41,19 @@
   /** The queue as it really is (the connector works on this): a queued step whose subject was saved after it was queued is
       prepared — even when an older copy of the curriculum (another device) put it back in the queue; a queued step with a
       live claim is being prepared by another run.  claims: KV rows a:curclaim:<cid>:*  · packs: KV rows a:packmeta:* */
-  function settle(c, { claims = [], packs = [], now = Date.now(), lease = LEASE } = {}) {
+  function settle(c, { claims = [], packs = [], remote = null, me = null, now = Date.now(), lease = LEASE } = {}) {
     const cc = clone(c), live = {}, saved = {};
+    // 👥 a shared curriculum: what the other participants prepared / are preparing (rows of noema_curriculum_steps)
+    const rem = remote && cc.shared && !cc.shared.ended && root.NoemaCurShare ? root.NoemaCurShare.core.remoteOf(remote, me, now) : null;
+    if (rem) cc.remote = rem;
     for (const r of claims) { if (!r.key.startsWith(CLAIM + c.id + ':')) continue; const t = ms(r.updated_at); if (now - t < lease) live[r.key.slice(CLAIM.length + c.id.length + 1)] = t; }
     for (const r of packs) { let m; try { m = typeof r.value === 'string' ? JSON.parse(r.value) : r.value; } catch (x) { continue; } if (m?.curriculum === c.id && m.node) saved[m.node] = m; }
     for (const [nid, n] of Object.entries(cc.nodes || {})) {
       if (n.pack?.status !== 'app') continue;
       if (savedSince(cc, nid, saved[nid])) { n.pack = { ...n.pack, status: 'ready', version: saved[nid].version || null }; continue; }
+      const x = rem?.[nid];
+      if (x?.status === 'ready') { n.pack = { ...n.pack, status: 'ready', version: x.version || null, by: x.by }; continue; }   // prepared already (by somebody, or by me elsewhere)
+      if (x && !x.mine) { n.pack = { ...n.pack, claimedAt: x.at || new Date(now).toISOString(), by: x.by }; continue; }     // being prepared by somebody else
       if (live[nid]) n.pack = { ...n.pack, claimedAt: new Date(live[nid]).toISOString() };
     }
     return cc;
@@ -94,7 +101,8 @@
       if (!nid) return { error: `No step “${step}” in “${c.title}”.` };
       if (prepared(c.nodes[nid])) return { error: `“${c.nodes[nid].title}” is already prepared.` };
       if (c.nodes[nid].pack?.claimedAt && !force) return { error: `“${c.nodes[nid].title}” is being prepared by another run since ${c.nodes[nid].pack.claimedAt} — do not prepare it twice. If that run has stopped without saving it, call noema_curriculum_task again with step and force = true.` };
-      if (!c.nodes[nid].chapters?.length) return isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
+      if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared curriculum — do not prepare it again (the learner gets it on the map).` };
+      if (!c.nodes[nid].chapters?.length) return member(c) ? { error: `“${c.nodes[nid].title}” has no chapter plan yet — the owner of this shared curriculum plans it first.` } : isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” has no chapter plan yet — open it in noema-lite and plan it first (✏️ Edit step).` };
       return stepSpec(c, nid);
     }
     const w = work(c);

@@ -1554,7 +1554,7 @@ function bellButton() {
 function openNotes() {
   modal((box, close) => {
     const body = h('div');
-    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? 'Nothing new. 🎈' : 'Notifications need a ☁️ cloud account (Account menu → Cloud).')); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } }))); };
+    const draw = list => { body.innerHTML = ''; if (!list.length) body.append(h('p', { class: 'muted' }, ACCOUNT.kind === 'cloud' ? 'Nothing new. 🎈' : 'Notifications need a ☁️ cloud account (Account menu → Cloud).')); list.forEach(sh => body.append(Noema.shareRow(sh, { onAccepted: s => { close(); confirmBox(`Open “${s.title}” now?`, () => s.kind === 'curriculum' ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } }))); };
     Noema.notes.on(draw);
     box.append(h('div', { class: 'row' }, h('h2', { class: 'grow' }, '🔔 Notifications'), h('button', { class: 'iconbtn', onclick: close }, '✕')), body);
   });
@@ -1566,8 +1566,9 @@ function shareBanner() {
     const items = list.filter(x => !later.has(x.id)); bar.innerHTML = '';
     bar.classList.toggle('on', !!items.length); if (!items.length) return;
     const sh = items[0];
-    bar.append(h('span', { class: 'grow' }, '📬 ', h('b', {}, sh.from_name || sh.from_email), ' wants to share ', h('b', {}, `“${sh.title}”`), ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
-      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(`✅ “${s.title}” added to your subjects`); confirmBox(`Open “${s.title}” now?`, () => Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, '✓ Accept'),
+    const cur = sh.kind === 'curriculum';   // 👥 an invitation to a shared curriculum
+    bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', h('b', {}, sh.from_name || sh.from_email || 'Someone'), cur ? ' invites you to the curriculum ' : ' wants to share ', h('b', {}, `“${sh.title}”`), cur ? '' : ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
+      h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? `👥 You joined “${s.title}” — your progress is your own, the prepared steps are shared` : `✅ “${s.title}” added to your subjects`); confirmBox(`Open “${s.title}” now?`, () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, cur ? '✓ Join' : '✓ Accept'),
       h('button', { class: 'btn small', onclick: async () => { await Noema.notes.reject(sh).catch(er => toast('⚠️ ' + er.message)); } }, '✕ Reject'),
       h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
   };

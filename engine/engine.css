@@ -684,12 +684,21 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-lib{width:min(860px,100%)}
 .cm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:12px 0}
 .cm-card{display:grid;gap:6px;padding:14px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);font:inherit;color:inherit;text-align:left;cursor:pointer}.cm-card:hover{border-color:var(--violet)}
+.cm-cardwrap{position:relative;display:grid}.cm-cardwrap>.cm-card{padding-right:46px}
+.cm-sharebtn{position:absolute;top:8px;right:8px;min-width:34px}
+.cm-sharedby{color:var(--violet)}
+.cm-pubcard{cursor:default}.cm-pubcard:hover{border-color:var(--line)}
+.cm-invites:empty{display:none}.cm-invites{margin:10px 0}
+.cm-sharebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 14px;background:var(--bg2);border-bottom:1px solid var(--line);font-size:13px}
+.cm-sharebar:empty{padding:0;border:0}
+.cm-by{white-space:nowrap}.cm-byline{margin:4px 0;color:var(--ink2)}
+.cm-members{display:grid;gap:2px}.cm-sharelog{min-height:1.2em;margin:6px 0}
 .cm-cardtop{display:flex;gap:8px;align-items:center}.cm-emo{font-size:22px}
 .cm-bar{height:8px;border-radius:99px;background:var(--bg2);overflow:hidden;margin:6px 0}.cm-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--ok));transition:width .4s}
 .cm-keys{display:grid;gap:6px;margin:6px 0}.cm-keyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .cm-stages{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}.cm-stages li{padding:8px 12px;border-radius:12px;background:var(--bg2)}.cm-stages li.now{background:var(--violet-bg);font-weight:700}.cm-stages li.done{background:var(--ok-bg)}
 .noema-overlay.cm-ov{padding:0}
-.noema-ovbox.cm-full{width:100vw;max-width:none;height:100dvh;max-height:none;border-radius:0;padding:0;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:minmax(0,1fr);overflow:clip;animation:none}
+.noema-ovbox.cm-full{width:100vw;max-width:none;height:100dvh;max-height:none;border-radius:0;padding:0;display:grid;grid-template-rows:auto auto auto 1fr auto;grid-template-columns:minmax(0,1fr);overflow:clip;animation:none}
 .cm-top{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .cm-title{flex:1;min-width:180px;display:grid}.cm-title b{font-size:17px;line-height:1.25}.cm-sum{font-size:12.5px;color:var(--ink2)}
 .cm-tools{display:flex;gap:6px;flex-wrap:wrap}

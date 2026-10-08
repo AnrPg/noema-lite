@@ -142,7 +142,7 @@ async function signUp(browser, email, name) {
   await B.p.evaluate(() => openAccountMenu('cloud')); await wait(600);
   await B.p.click('summary:has-text("Check the cloud connection")'); await B.p.click('button:has-text("Run the check")'); await wait(2500);
   const st = await B.p.locator('.selftest').innerText();
-  ok(/Everything works with the real cloud/.test(st) && (st.match(/✅/g) || []).length >= 8, 'all 8 checks pass and clean up: ' + st.replace(/\s+/g, ' '));
+  ok(/Everything works with the real cloud/.test(st) && (st.match(/✅/g) || []).length >= 9, 'all 9 checks pass and clean up: ' + st.replace(/\s+/g, ' '));
   await B.p.screenshot({ path: SHOTS + '/x5_selftest.png' });
   ok(!Object.keys(srv.state.files).some(k => k.includes('selftest')) && !Object.keys(srv.state.pubFiles).some(k => k.includes('selftest')) && !Object.keys(srv.state.kv[bob] || {}).some(k => k.includes('selftest')), 'the self-test leaves nothing behind');
   // Anna sees the answers

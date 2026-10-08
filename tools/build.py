@@ -98,7 +98,7 @@ def build_site(metas):
     html = '\n'.join(l for l in html.split('\n') if 'config.local.js' not in l)
     wt(os.path.join(out, 'index.html'), html)
     os.makedirs(os.path.join(out, 'engine'))
-    for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
+    for f in ('engine.js', 'engine.css', 'loader.js', 'convos.js', 'cloud.js', 'claude.js', 'packcheck.js', 'llm.js', 'curriculum.js', 'curjobs.js', 'curshare.js', 'imglib.js', 'curimport.js', 'packgen.js', 'curmap.js', 'authoring.js', 'srcfiles.js', 'viewer.js'): shutil.copy(os.path.join(ENGINE, f), os.path.join(out, 'engine', f))
     shutil.copytree(os.path.join(ENGINE, 'vendor'), os.path.join(out, 'engine', 'vendor'))
     for m in metas:
         if m.get('owner'): continue
@@ -133,7 +133,7 @@ def public_config():
     return {'siteUrl': g('siteUrl'), 'supabaseUrl': g('supabaseUrl'), 'supabaseKey': g('supabaseKey')}
 
 # the app's own code the connector runs (pack checks; curriculum tasks, checks and how answers change a curriculum)
-MCP_ENGINE = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/imglib.js']
+MCP_ENGINE = ['engine/packcheck.js', 'engine/llm.js', 'engine/curriculum.js', 'engine/curjobs.js', 'engine/curshare.js', 'engine/imglib.js']
 MCP_PRELUDE = 'globalThis.window = globalThis;\n'
 
 def build_mcp_function(metas, out_dir):
@@ -188,6 +188,7 @@ def build_bundle(metas):
 <script>{esc(rd("engine/packgen.js"))}</script>
 <script>{esc(rd("engine/curriculum.js"))}</script>
 <script>{esc(rd("engine/curjobs.js"))}</script>
+<script>{esc(rd("engine/curshare.js"))}</script>
 <script>{esc(rd("engine/curimport.js"))}</script>
 <script>{esc(rd("engine/curmap.js"))}</script>
 <script>{esc(rd("engine/authoring.js"))}</script>

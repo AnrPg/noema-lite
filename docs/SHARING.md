@@ -1,5 +1,8 @@
 # Sharing subjects, 🌍 Explore and 🔔 notifications
 
+> **Curricula** are shared differently — together, each with their own progress, the prepared steps in common: see
+> `docs/CURRICULUM.md` §8 (🧭 Curricula → 👥 on a curriculum · 🌍 Explore curricula). Their invitations also arrive in 🔔.
+
 Your own subjects (made with Claude, imported, or shared with you) can be **made public** or **sent to one
 person**. Library subjects (Databricks…) are already available to everyone and have no share button.
 
@@ -68,4 +71,4 @@ The whole flow (two people, accept, reject, Explore, a third person choosing a p
 `tests/sharing.js`.
 
 **Setup once:** run the newest `cloud/supabase.sql` in the Supabase SQL editor, then ⚙️ → Cloud →
-🩺 *Check the cloud connection* — the last two checks are *Public subjects* and *Sharing with a person*.
+🩺 *Check the cloud connection* — the last three checks are *Public subjects*, *Sharing with a person* and *Shared curricula*.

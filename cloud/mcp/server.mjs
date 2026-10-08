@@ -89,10 +89,24 @@ async function indexSourceFiles(token, uid, sid, srcs, known = new Map()) {
   for (const x of srcs) { const name = x.fileName || String(x.file).split('/').pop(); const ref = known.get(x.sha256); ix[x.id] = { name: extOf(name) === extOf(x.file) ? name : name + '.' + extOf(x.file), type: x.mime || '', size: x.size, sha256: x.sha256, added: now, cloud: true, via: 'claude', ...(ref ? { ref } : chunksOf(x) ? { chunks: chunksOf(x) } : {}) }; }
   await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(ix), updated_at: now }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 }
+/** 👥 A step of a shared curriculum is saved → the other participants get it (the pack now; its source files follow when
+    the learner's app opens — it publishes them with the step). Somebody else's version that came first stays the shared one. */
+async function publishStep(token, uid, step, p, files) {
+  const { c, nid } = step, A = apiOf(token), path = CS().core.stepPath(c.id, uid, nid);
+  try {
+    const cur = await CS().core.row(A, c.id, nid);
+    if (cur && cur.author !== uid && (cur.status === 'ready' || Date.parse(cur.claimed_until || '') > Date.now())) return `\n👥 ${cur.author_name || 'Another member'} had already ${cur.status === 'ready' ? 'prepared' : 'started'} this step of the shared curriculum — theirs is the shared version; this one stays in the learner's own account.`;
+    await sb(`/storage/v1/object/${CS().BUCKET}/${path}`, token, { method: 'POST', body: JSON.stringify(p), headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
+    const r = await CS().core.ready(A, { cid: c.id, nid, me: uid, name: nameOf(step.user), packId: CUR().packId(c, nid), version: p.version || null, path, meta: { chunks: 0, counts: p.counts || null, sharedFiles: {}, filePaths: [], sourceFiles: files, filesPending: files > 0 } });
+    if (!r.ok) return `\n👥 ${r.row?.author_name || 'Another member'} prepared this step a moment earlier — theirs is the shared version; this one stays in the learner's own account.`;
+    return `\n👥 Shared: every member of “${c.title || c.goal}” sees this step on their map now.`;
+  } catch (e) { return `\n⚠️ Saved for the learner, but sharing it with the curriculum's members failed (${e.message.slice(0, 120)}) — the learner's app tries again when it opens.`; }
+}
 /** The pack is stored and valid: check its packaged files, then add it to the picker — or say which files to upload. */
-async function complete(token, uid, sid, p, res, fail, text) {
+async function complete(token, uid, sid, p, res, fail, text, user = null) {
   const need = packaged(p);
   const step = await findStep(token, sid).catch(() => null);   // a step of one of the learner's curricula?
+  if (step) step.user = user;
   const known = new Map(step ? Object.entries(step.c.files || {}).filter(([, f]) => f.sha256).map(([fid, f]) => [f.sha256, { subj: CUR().curStore(step.c.id), src: fid }]) : []);
   if (need.length) {
     const st = await sourceFileStatus(token, uid, sid, need, known);
@@ -108,14 +122,19 @@ async function complete(token, uid, sid, p, res, fail, text) {
   if (step) {
     await kvPut(token, uid, CJ().inboxKey(step.c.id), { v: 1, kind: 'step', nid: step.nid, packId: sid, version: p.version || null, at: new Date().toISOString(), via: 'claude-app' });
     await releaseStep(token, step.c.id, step.nid).catch(() => { });   // saved: its claim ends (the inbox entry + the subject keep it out of the queue)
-    const left = CJ().work(await curState(token, step.c)).steps.length;
-    more = `\n🧭 This is the step “${step.c.nodes[step.nid].title}” of the curriculum “${step.c.title}”: it appears ready on the learner's map by itself (the app picks it up when it is open or next opened).` + (left ? `\n${left} more step(s) are queued — call noema_curriculum_task with curriculum_id "${step.c.id}" for the next one, if the learner asked for more.` : '');
+    if (sharedOn(step.c)) more += await publishStep(token, uid, step, p, need.length);
+    const left = CJ().work(await curState(token, step.c, uid)).steps.length;
+    more += `\n🧭 This is the step “${step.c.nodes[step.nid].title}” of the curriculum “${step.c.title}”: it appears ready on the learner's map by itself (the app picks it up when it is open or next opened).` + (left ? `\n${left} more step(s) are queued — call noema_curriculum_task with curriculum_id "${step.c.id}" for the next one, if the learner asked for more.` : '');
   }
   return text(summary(p, res) + (need.length ? `\n📎 ${need.length} source file(s) attached — the learner opens them with 👁 in 📚 Sources, at the cited pages.` : '') + more);
 }
 
 /* ---------- curricula (the app's own code: engine/curriculum.js + engine/curjobs.js) ---------- */
-const CJ = () => globalThis.NoemaCurJobs, CUR = () => globalThis.NoemaCurriculum, IMGL = () => globalThis.NoemaImgLib;
+const CJ = () => globalThis.NoemaCurJobs, CUR = () => globalThis.NoemaCurriculum, IMGL = () => globalThis.NoemaImgLib, CS = () => globalThis.NoemaCurShare;
+/* 👥 shared curricula (docs/CURRICULUM.md §8): the same rules as the app (engine/curshare.js), as this user */
+const apiOf = token => (path, o = {}) => sb(path, token, o);
+const sharedOn = c => !!(c?.shared && !c.shared.ended && CS());
+const nameOf = user => user?.user_metadata?.name || String(user?.email || '').split('@')[0] || '';
 const kvRows = async (token, like) => (await sb(`/rest/v1/noema_kv?select=key,value,updated_at&order=key&key=like.${encodeURIComponent(like + '*')}`, token)) || [];
 const kvPut = (token, uid, key, value) => sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value: JSON.stringify(value), updated_at: new Date().toISOString() }], headers: { Prefer: 'resolution=merge-duplicates,return=minimal' } });
 async function curricula(token) {
@@ -125,20 +144,29 @@ async function curricula(token) {
 }
 /** The curriculum as it will be once the app has applied the answers still waiting in the inbox — with its queue as it
     really is: steps whose subject is saved already are prepared, steps claimed by a run that is building them are taken. */
-async function curState(token, c) {
-  const [inbox, claims, packs] = await Promise.all([kvRows(token, `${CJ().IN}${c.id}:`), kvRows(token, `${CJ().CLAIM}${c.id}:`), kvRows(token, `a:packmeta:cur-${c.id.slice(1, 7)}-`)]);
-  return CJ().settle(CJ().merged(c, inbox), { claims, packs });
+async function curState(token, c, uid = null) {
+  const [inbox, claims, packs, remote] = await Promise.all([kvRows(token, `${CJ().IN}${c.id}:`), kvRows(token, `${CJ().CLAIM}${c.id}:`), kvRows(token, `a:packmeta:cur-${c.id.slice(1, 7)}-`),
+    sharedOn(c) ? CS().core.rows(apiOf(token), c.id).catch(() => null) : null]);
+  return CJ().settle(CJ().merged(c, inbox), { claims, packs, remote, me: uid });
 }
 /** Claim a step for this run — atomically, so two runs that ask at the same moment never get the same step:
     insert the claim if there is none; else take it over only when it has expired (or force). → true when this run has it */
-async function claimStep(token, uid, cid, nid, { force = false } = {}) {
+async function claimStep(token, uid, cid, nid, { force = false, c = null, user = null } = {}) {
   const key = CJ().claimKey(cid, nid), now = new Date().toISOString();
   const value = JSON.stringify({ v: 1, nid, at: now, run: Math.random().toString(36).slice(2, 10) });
   const ins = await sb('/rest/v1/noema_kv?on_conflict=user_id,key', token, { method: 'POST', body: [{ user_id: uid, key, value, updated_at: now }], headers: { Prefer: 'resolution=ignore-duplicates,return=representation' } });
-  if (Array.isArray(ins) && ins.length) return true;
-  const stale = new Date(Date.now() - CJ().LEASE).toISOString();
-  const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}` + (force ? '' : `&updated_at=lt.${encodeURIComponent(stale)}`), token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });
-  return Array.isArray(upd) && upd.length > 0;
+  let mine = Array.isArray(ins) && ins.length > 0;
+  if (!mine) {
+    const stale = new Date(Date.now() - CJ().LEASE).toISOString();
+    const upd = await sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(key)}` + (force ? '' : `&updated_at=lt.${encodeURIComponent(stale)}`), token, { method: 'PATCH', body: { value, updated_at: now }, headers: { Prefer: 'return=representation' } });
+    mine = Array.isArray(upd) && upd.length > 0;
+  }
+  // 👥 a shared curriculum: the step is also reserved among its participants (somebody else may have it — then not this one)
+  if (mine && sharedOn(c)) {
+    const r = await CS().core.claim(apiOf(token), { cid, nid, me: uid, name: nameOf(user), packId: CUR().packId(c, nid) }).catch(() => ({ ok: false }));
+    if (!r.ok) { await releaseStep(token, cid, nid).catch(() => { }); return false; }
+  }
+  return mine;
 }
 const releaseStep = (token, cid, nid) => sb(`/rest/v1/noema_kv?key=eq.${encodeURIComponent(CJ().claimKey(cid, nid))}`, token, { method: 'DELETE' });
 async function findStep(token, sid) {
@@ -156,15 +184,23 @@ function workLine(c) {
   if (w.steps.length) bits.push(`${w.steps.length} step(s) queued to prepare: ${w.steps.slice(0, 5).map(id => '“' + c.nodes[id].title + '”').join(', ')}${w.steps.length > 5 ? '…' : ''}`);
   if (w.claimed.length) bits.push(`${w.claimed.length} step(s) being prepared by another run right now: ${w.claimed.slice(0, 5).map(id => '“' + c.nodes[id].title + '”').join(', ')}${w.claimed.length > 5 ? '…' : ''}`);
   const n = Object.keys(c.nodes).length, ready = Object.values(c.nodes).filter(x => x.pack?.status === 'ready').length;
-  return `- “${c.title || c.goal}” — curriculum_id ${c.id} · ${n} steps, ${ready} prepared · made with ${c.provider === 'claudeapp' ? 'the Claude app' : 'noema-lite (API key / Gemini)'}\n  ${bits.length ? 'To do: ' + bits.join('; ') : 'nothing waiting for you'}`;
+  const sh = c.shared && !c.shared.ended ? (c.shared.role === 'member' ? ` · 👥 shared by ${c.shared.ownerName || 'its owner'}` : ' · 👥 shared by the learner') : '';
+  return `- “${c.title || c.goal}” — curriculum_id ${c.id}${sh} · ${n} steps, ${ready} prepared · made with ${c.provider === 'claudeapp' ? 'the Claude app' : 'noema-lite (API key / Gemini)'}\n  ${bits.length ? 'To do: ' + bits.join('; ') : 'nothing waiting for you'}`;
 }
 /** How Claude gets one of the learner's files into its sandbox (signed links; big files are stored in parts). */
-async function downloadLines(token, uid, dir, downloads) {
+async function downloadLines(token, uid, dir, downloads, shared = null) {
   const out = [], index = {};
   for (const d of downloads) {
     if (!index[d.store]) { const r = await sb(`/rest/v1/noema_kv?select=value&key=eq.${encodeURIComponent('a:srcfiles:' + d.store)}`, token).catch(() => []); try { index[d.store] = JSON.parse(r?.[0]?.value || '{}'); } catch (e) { index[d.store] = {}; } }
     const meta = index[d.store][d.src];
     const local = `${dir}/${String(d.name).replace(/["$`\\]/g, '_')}`;
+    const sf = !meta?.cloud && shared?.[d.src] && /^curfiles-/.test(d.store) ? shared[d.src] : null;   // 👥 a member: the owner's copy in the shared curriculum
+    if (sf) {
+      const urls = [];
+      for (const pth of partNames(sf.path, sf.chunks || 0)) { const r = await sb(`/storage/v1/object/sign/${CS().BUCKET}/${pth}`, token, { method: 'POST', body: { expiresIn: 7200 } }); urls.push(`${CFG.supabaseUrl.replace(/\/$/, '')}/storage/v1${r.signedURL}`); }
+      out.push(`- ${d.name} (${((d.size || sf.size || 0) / 1048576).toFixed(1)} MB${d.pages ? `, ${d.pages} pages` : ''}, from the shared curriculum):\n  mkdir -p "${dir}"\n` + (urls.length === 1 ? `  curl -sSL -o "${local}" "${urls[0]}"` : urls.map((u, i) => `  curl -sSL -o "/tmp/noema-part.${String(i).padStart(3, '0')}" "${u}"`).join('\n') + `\n  cat /tmp/noema-part.* > "${local}" && rm /tmp/noema-part.*`));
+      continue;
+    }
     if (!meta?.cloud) { out.push(`- ${d.name}: ⚠️ not in the learner's cloud yet (it is uploaded when noema-lite is open on the device where it was added). Ask the learner to attach it to this chat, or build the step without it and say so.`); continue; }
     const base = `${uid}/sources/${d.store}/${String(d.src).replace(/[^a-zA-Z0-9_-]/g, '_')}/file.${extOf(meta.name || d.name)}`;
     const parts = partNames(base, meta.chunks || 0); const urls = [];
@@ -289,7 +325,7 @@ async function callTool(name, args, ctx) {
       catch (e) { return fail(`No uploaded file found for "${sid}" (${e.message.slice(0, 120)}). Run the curl command from noema_start_upload first.`); }
       const res = checkPack(p, sid);
       if (res.errors.length) return fail(`The pack has ${res.errors.length} error(s) — fix them, rebuild with make_pack.py and upload again:\n- ${res.errors.slice(0, 40).join('\n- ')}`);
-      return complete(token, uid, sid, p, res, fail, text);
+      return complete(token, uid, sid, p, res, fail, text, user);
     }
     case 'noema_save_pack': {
       const raw = String(args?.pack_json || '');
@@ -299,7 +335,7 @@ async function callTool(name, args, ctx) {
       if (res.errors.length) return fail(`${res.errors.length} error(s):\n- ${res.errors.slice(0, 40).join('\n- ')}`);
       if ((CFG.library || []).some(s => s.id === p.subject.id)) return fail(`"${p.subject.id}" is a library subject id — use a new id.`);
       await sb(`/storage/v1/object/${base}${p.subject.id}.json`, token, { method: 'POST', body: raw, headers: { 'content-type': 'application/json', 'x-upsert': 'true' } });
-      return complete(token, uid, p.subject.id, p, res, fail, text);
+      return complete(token, uid, p.subject.id, p, res, fail, text, user);
     }
     case 'noema_image_search': {
       const q = String(args?.query || '').trim(); if (!q) return fail('query is empty');
@@ -322,19 +358,19 @@ async function callTool(name, args, ctx) {
     case 'noema_curricula': {
       const all = await curricula(token);
       if (!all.length) return text('No curriculum yet. In noema-lite: 🧭 Curricula → ➕ New curriculum or 📥 Import a map, and choose “Claude app (your Claude plan)”.');
-      const states = await Promise.all(all.map(c => curState(token, c)));
+      const states = await Promise.all(all.map(c => curState(token, c, uid)));
       return text(`The learner's curricula:\n${states.map(workLine).join('\n')}\n\nCall noema_curriculum_task with a curriculum_id to get the next piece of work.`);
     }
     case 'noema_curriculum_task': {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return pk.error.startsWith('Which') ? text(pk.error) : fail(pk.error);
-      const c = await curState(token, pk.c), force = args?.force === true || args?.force === 'true', peek = args?.peek === true || args?.peek === 'true';
+      const c = await curState(token, pk.c, uid), force = args?.force === true || args?.force === 'true', peek = args?.peek === true || args?.peek === 'true';
       let t = null;
       for (let tries = 0; tries < 8; tries++) {   // a step is handed out only once it is claimed for this run (another run may claim it a moment earlier → the next one)
         t = CJ().next(c, { want: args?.want || 'any', step: args?.step || '', force });
         if (!t || t.error || t.kind !== 'step') break;
         if (peek) return text(`Next step (not claimed — peek): “${t.stepTitle}” (${t.nid}) · subject_id ${t.packId}. ${CJ().work(c).steps.length} step(s) queued in all. To prepare it, call noema_curriculum_task again without peek.`);
-        if (await claimStep(token, uid, c.id, t.nid, { force: force && !!args?.step })) break;
-        if (args?.step) { t = { error: `“${t.stepTitle}” has just been taken by another run — do not prepare it twice. If that run has stopped without saving it, call again with force = true.` }; break; }
+        if (await claimStep(token, uid, c.id, t.nid, { force: force && !!args?.step, c, user })) break;
+        if (args?.step) { const x = sharedOn(c) ? await CS().core.row(apiOf(token), c.id, t.nid).catch(() => null) : null; t = { error: x && x.author !== uid ? `“${t.stepTitle}” is ${x.status === 'ready' ? 'prepared' : 'being prepared'} by ${x.author_name || 'another member'} of this shared curriculum — do not prepare it again.` : `“${t.stepTitle}” has just been taken by another run — do not prepare it twice. If that run has stopped without saving it, call again with force = true.` }; break; }
         c.nodes[t.nid].pack = { ...c.nodes[t.nid].pack, claimedAt: new Date().toISOString() }; t = null;
       }
       if (t?.error) return fail(t.error);
@@ -343,12 +379,12 @@ async function callTool(name, args, ctx) {
         return text(`✅ Nothing is waiting in “${c.title || c.goal}”${args?.want && args.want !== 'any' ? ` (${args.want})` : ''}. ` + (busy.length ? `${busy.length} queued step(s) are being prepared by other runs right now (${busy.slice(0, 5).map(id => '“' + c.nodes[id].title + '”').join(', ')}) — do NOT prepare them again; stop here. ` : '') + (CJ().isApp(c) ? 'Steps reach this queue when the learner opens them on the map (or the app queues the next ones ahead). ' : '') + 'To prepare a particular step anyway, call noema_curriculum_task with step = its title.');
       }
       if (t.kind !== 'step') return text(CJ().taskText(c, t, 'connector', { fileLines: t.downloads?.length ? await downloadLines(token, uid, `work/plan-${c.id}`, t.downloads) : [] }));
-      const lines = t.downloads.length ? await downloadLines(token, uid, `work/${t.packId}/sources`, t.downloads) : [];
+      const lines = t.downloads.length ? await downloadLines(token, uid, `work/${t.packId}/sources`, t.downloads, sharedOn(c) ? c.shared.files : null) : [];
       return text(CJ().stepText(c, t, { mode: 'connector', fileLines: lines }));
     }
     case 'noema_curriculum_submit': {
       const pk = await pickCurriculum(token, String(args?.curriculum_id || '').trim()); if (pk.error) return fail(pk.error);
-      const c = await curState(token, pk.c); const tid = String(args?.task_id || '').trim();
+      const c = await curState(token, pk.c, uid); const tid = String(args?.task_id || '').trim();
       const t = CJ().byId(c, tid);
       if (!t) return fail(`Task "${tid}" is not open any more (already answered, or the curriculum changed). Call noema_curriculum_task for the current one.`);
       const raw = String(args?.result_json || '');
