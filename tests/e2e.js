@@ -213,8 +213,6 @@ async function mockGemini(ctx) {
   ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (noema_kv)');
   ok(!!kvA['a:settings'] && JSON.parse(kvA['a:settings'].value).goal === 150 && !JSON.stringify(kvA).includes('CLOUDKEY') && await pA.evaluate(() => localStorage.getItem('noema-device:geminiKey:' + ACCOUNT.id) === 'CLOUDKEY'), 'settings pushed to the cloud, the Gemini key stays on this device');
   ok(srv.state.snaps.length >= 1, 'daily auto-snapshot created');
-  // an older version had synced the key in a:settings: the next device keeps it locally and clears it from the cloud
-  kvA['a:settings'] = { value: JSON.stringify({ ...JSON.parse(kvA['a:settings'].value), apiKey: 'OLDKEY' }), updated_at: new Date().toISOString() };
   ok(await pA.$eval('#syncdot', d => d.className.includes('ok')), 'sync indicator shows synced');
   // results inbox: other apps (Meletee) append a:inbox:<app>:<id> rows; the open subject applies its own once, then deletes them
   { const inbox = srv.state.kv[uidA]; const at = new Date().toISOString();
@@ -246,6 +244,8 @@ async function mockGemini(ctx) {
   // pack upload to private storage
   await pA.evaluate(async txt => { const f = new File([txt], 'p.json', { type: 'application/json' }); await Noema.importPackFile(ACCOUNT.id, f); }, packJSON); await wait(4000);
   ok(Object.keys(srv.state.files).some(k => k.endsWith('packs/demo-imported.json')), 'imported pack stored in private cloud storage');
+  // an older version had synced the key in a:settings: the next device keeps it locally and clears it from the cloud
+  kvA['a:settings'] = { value: JSON.stringify({ ...JSON.parse(kvA['a:settings'].value), apiKey: 'OLDKEY' }), updated_at: new Date().toISOString() };
   // device B
   const devB = await browser.newContext({ viewport: { width: 390, height: 844 } }); const pB = await devB.newPage(); const EB = []; errs(pB, EB);
   await pB.goto('http://localhost:54329/'); await wait(800);
