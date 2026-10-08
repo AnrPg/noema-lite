@@ -43,6 +43,8 @@
   const uid = () => session()?.user.id;
   const accId = () => 'u_' + uid();
   const enc = s => encodeURIComponent(s);
+  // rows other writers append for the app to read and delete; never mirrored into localStorage
+  const inboxKey = k => k.startsWith('a:curin:') || k.startsWith('a:curclaim:') || k.startsWith('a:inbox:');
 
   const NoemaCloud = window.NoemaCloud = {
     session, status, onStatus(f) { st.listeners.push(f); },
@@ -71,15 +73,17 @@
         const rows = await call('/rest/v1/noema_kv?select=key,value,updated_at&order=key');
         const pre = 'noema1:' + acc + ':'; const mt = jget(pre + 'meta:mtime', {}); let changed = 0;
         for (const r of rows || []) {
-          if (r.key.startsWith('a:curin:') || r.key.startsWith('a:curclaim:')) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js) and its runs' claims: never stored here
+          if (inboxKey(r.key)) continue;   // answers from the Claude app (read and deleted by engine/curjobs.js), its runs' claims, other apps' results (engine/src/15_inbox.js): never stored here
           const t = Date.parse(r.updated_at) || 0;
           if (!mt[r.key] || t > mt[r.key]) { if (localStorage.getItem(pre + r.key) !== r.value) { try { localStorage.setItem(pre + r.key, r.value); changed++; } catch (e) { } } mt[r.key] = t; }
         }
         // keys changed locally while offline (newer than server or missing there) → push
-        const remote = new Map((rows || []).filter(r => !r.key.startsWith('a:curin:') && !r.key.startsWith('a:curclaim:')).map(r => [r.key, Date.parse(r.updated_at) || 0]));
+        const remote = new Map((rows || []).filter(r => !inboxKey(r.key)).map(r => [r.key, Date.parse(r.updated_at) || 0]));
         Object.keys(mt).forEach(k => { if (!remote.has(k) || mt[k] > remote.get(k)) st.pending.add(k); });
         jset(pre + 'meta:mtime', mt);
-        st.lastSync = Date.now(); st.error = null; return changed;
+        st.lastSync = Date.now(); st.error = null;
+        try { dispatchEvent(new CustomEvent('noema:pulled', { detail: { acc, changed } })); } catch (e) { }   // e.g. the open subject reads its results inbox
+        return changed;
       } catch (e) { st.error = e.message; throw e; } finally { st.syncing = false; emit(); }
     },
     async push(acc = accId(), { keepalive = false } = {}) {

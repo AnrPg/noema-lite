@@ -171,6 +171,32 @@ async function mockGemini(ctx) {
   ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (noema_kv)');
   ok(srv.state.snaps.length >= 1, 'daily auto-snapshot created');
   ok(await pA.$eval('#syncdot', d => d.className.includes('ok')), 'sync indicator shows synced');
+  // results inbox: other apps (Meletee) append a:inbox:<app>:<id> rows; the open subject applies its own once, then deletes them
+  { const inbox = srv.state.kv[uidA]; const at = new Date().toISOString();
+    const put = (key, value) => { inbox[key] = { value: typeof value === 'string' ? value : JSON.stringify(value), updated_at: at }; };
+    const before = await pA.evaluate(() => ({ n: S.res['ch01-e004']?.n || 0, card: CH.ch02.flashcards[0]._key, box: S.fc[CH.ch02.flashcards[0]._key]?.box || 0, read: !!S.read['ch01-s02'] }));
+    const row = { schema: 'noema.results/v1', app: 'meletee', subject: 'databricks', at, items: [
+      { kind: 'section', id: 'ch01-s02', event: 'studied', at }, { kind: 'chapter', id: 'ch01', event: 'review', rating: 'hard', date: at.slice(0, 10), at },
+      { kind: 'exercise', id: 'ch01-e004', ok: true, at }, { kind: 'card', id: before.card, grade: 2, at },
+      { kind: 'exercise', id: 'ch01-e005', ok: 'yes' }, { kind: 'card', id: 'nope#9', grade: 1 }, { kind: 'exercise', id: 'ch99-e001', ok: true }, null, 'junk'] };
+    put('a:inbox:meletee:001', row); put('a:inbox:meletee:002', '{not json'); put('a:inbox:meletee:003', { ...row, subject: 'demo-physics' }); put('a:inbox:other:004', { schema: 'noema.results/v9', subject: 'databricks', items: [] });
+    put('a:inbox:meletee:005', { schema: 'noema.results/v1', app: 'meletee', subject: 'databricks', items: 'not a list' });
+    const n1 = await pA.evaluate(() => checkInbox());
+    const after = await pA.evaluate(k => ({ n: S.res['ch01-e004']?.n || 0, ok: S.res['ch01-e005'], box: S.fc[k]?.box, read: !!S.read['ch01-s02'], ext: S.ext?.meletee }), before.card);
+    ok(n1 === 4 && after.read && after.n === before.n + 1 && after.box === Math.min(5, before.box + 2) && after.ext?.length === 1 && after.ext[0].rating === 'hard', 'inbox row applied: section read, exercise recorded, card rated, review kept in S.ext.meletee (' + n1 + ' items)');
+    ok(!after.ok, 'malformed items in a row are skipped');
+    ok(!inbox['a:inbox:meletee:001'] && !inbox['a:inbox:meletee:002'] && !inbox['a:inbox:meletee:005'], 'applied, unreadable and empty rows are deleted from the inbox');
+    ok(!!inbox['a:inbox:meletee:003'] && !!inbox['a:inbox:other:004'], 'rows of another subject or an unknown format stay in the inbox');
+    ok(JSON.parse(inbox['s:databricks:state'].value).inboxDone?.['a:inbox:meletee:001'] && JSON.parse(inbox['s:databricks:state'].value).read['ch01-s02'], 'the changed state reached the cloud before the row was deleted');
+    put('a:inbox:meletee:001', row);   // the same row again (a delete that failed, another tab): counted once
+    const n2 = await pA.evaluate(() => checkInbox());
+    ok(n2 === 0 && await pA.evaluate(n => S.res['ch01-e004'].n === n, after.n) && !inbox['a:inbox:meletee:001'], 'a row applied twice does not count twice (and is deleted)');
+    put('a:inbox:meletee:006', { schema: 'noema.results/v1', app: 'meletee', subject: 'databricks', at, items: [{ kind: 'exercise', id: 'ch01-e004', ok: false, at }] });
+    await pA.evaluate(() => NoemaCloud.pull(ACCOUNT.id)); await wait(800);
+    ok(await pA.evaluate(n => S.res['ch01-e004'].n === n + 1, after.n) && !inbox['a:inbox:meletee:006'], 'rows arriving later are applied after a pull');
+    ok(await pA.evaluate(() => !Object.keys(localStorage).some(k => k.includes(':a:inbox:'))), 'inbox rows are never mirrored into localStorage');
+    ok(JSON.parse(inbox['a:caps']?.value || '{}').resultsInbox === 1, 'a:caps announces resultsInbox to other apps');
+  }
   await pA.evaluate(() => openAccountMenu('cloud')); await wait(600); await pA.screenshot({ path: SHOTS + '/b2_cloud_menu.png' });
   // pack upload to private storage
   await pA.evaluate(async txt => { const f = new File([txt], 'p.json', { type: 'application/json' }); await Noema.importPackFile(ACCOUNT.id, f); }, packJSON); await wait(4000);

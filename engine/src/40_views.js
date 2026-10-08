@@ -434,6 +434,8 @@ function playLightning(chid) {
 
 /* ---------- flashcards (Leitner) ---------- */
 const BOX_DAYS = [0, 1, 3, 7, 16, 35];
+/* one Leitner step for a card: 0 = again (back to box 1), 1 = good (+1 box), 2 = easy (+2); due counted from `from` */
+function rateCardKey(key, q, from = new Date()) { const r = S.fc[key] || { box: 0 }; r.box = q === 0 ? 1 : Math.min(5, (r.box || 0) + (q === 2 ? 2 : 1)); const d = new Date(from); d.setDate(d.getDate() + BOX_DAYS[q === 0 ? 0 : r.box]); r.due = d.toISOString().slice(0, 10); S.fc[key] = r; save(); return r; }
 function cardDue(key) { const r = S.fc[key]; return !r || !r.due || r.due <= today(); }
 function countDueCards() { return COURSE.reduce((a, c) => a + c.flashcards.filter((f, i) => { const k = f._key || c.id + '#' + i; return S.fc[k] && cardDue(k); }).length, 0); }
 function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ ...f, key: f._key || c.id + '#' + i, _ch: c }))); }
@@ -458,7 +460,7 @@ function flashDeck(body, cards) {
       h('div', { class: 'face' }, h('small', {}, `${c._ch.emoji} Ch${c._ch.num} · ${i + 1}/${queue.length}`), h('div', { html: fmt(c.q) }), h('div', { class: 'tiny', style: { position: 'absolute', bottom: '14px' } }, 'tap to flip')),
       h('div', { class: 'face back' }, h('small', {}, 'answer'), h('div', { html: fmt(c.a) }))));
     setAccent(fl, c._ch);
-    const rate = q => { const r = S.fc[c.key] || { box: 0 }; r.box = q === 0 ? 1 : Math.min(5, (r.box || 0) + (q === 2 ? 2 : 1)); const d = new Date(); d.setDate(d.getDate() + BOX_DAYS[q === 0 ? 0 : r.box]); r.due = d.toISOString().slice(0, 10); S.fc[c.key] = r; save(); addXP(q === 0 ? 1 : 2, fl); if (q === 0) queue.push(c); i++; show(); };
+    const rate = q => { rateCardKey(c.key, q); addXP(q === 0 ? 1 : 2, fl); if (q === 0) queue.push(c); i++; show(); };
     stage.append(fl, h('div', { class: 'rate' }, h('button', { class: 'btn', onclick: () => rate(0) }, '😵 Again'), h('button', { class: 'btn', onclick: () => rate(1) }, '🙂 Good'), h('button', { class: 'btn primary', onclick: () => rate(2) }, '😎 Easy')),
       c.section && SEC[c.section] ? h('div', { style: { textAlign: 'center', marginTop: '10px' } }, h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => go('#/s/' + c.section) }, 'open the section')) : null);
   }
