@@ -2064,8 +2064,11 @@ function route() {
   if (p[0] === 'drill') return drillView(p[1]);
   if (p[0] === 'mistakes') return mistakesView();
   if (p[0] === 'new') return whatsNewView();
+  if (p[0] === 'ex') { const e = EX[p[1]]; return e ? startRun([e], { title: '🎯 ' + (SEC[e.section]?.title || e._ch.title), count: 1, keepOrder: true, back: '#/s/' + e.section }) : homeView(); }   // one exercise (deep links from other apps)
   homeView();
 }
+// tell other apps (a:caps, synced) that #/ex/<id> exists; each feature merges its own flag
+{ const k = Noema.kv.accountKey('caps'); let c = {}; try { c = JSON.parse(Noema.kv.get(k) || '{}') || {}; } catch (e) { } if (!c.exerciseRoute) Noema.kv.set(k, JSON.stringify({ ...c, exerciseRoute: 1 })); }
 function closeTutorIfMobile() { if (innerWidth < 720) closeTutor(); }
 
 /* ---------- keyboard ---------- */
