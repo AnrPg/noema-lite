@@ -139,7 +139,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
   await p.click('button:has-text("Open the map")'); await wait(800);
   ok(await p.locator('.cm-node').count() === 25 && await p.locator('.cm-band').count() === 3, 'map: 25 nodes in three parts (Prerequisites · goal · Applications)');
   const roots = ['sets_and_events', 'calculus_basics', 'philosophy_of_induction'];
-  ok(await p.evaluate(r => r.every(id => document.querySelector(`.cm-node[data-id="${id}"]`).classList.contains('cm-open')), roots) && await p.locator('.cm-node.cm-locked').count() === 22, 'the 3 starting prerequisites are open ▶️, the other 22 steps locked 🔒');
+  ok(await p.evaluate(r => r.every(id => document.querySelector(`.cm-node[data-id="${id}"]`).classList.contains('cm-open')), roots) && await p.locator('.cm-node.cm-locked').count() === 22, 'the 3 starting prerequisites are open, the other 22 steps locked 🔒');
   await p.click('.cm-node[data-id="likelihood"]'); await wait(300);
   const lockTxt = await p.locator('.cm-panel').innerText();
   ok(/Locked/.test(lockTxt) && /Probability distributions/.test(lockTxt) && await p.locator('.cm-panel .cm-chapters li').count() === 4 && !(await p.locator('.cm-panel button:has-text("Study")').count()), 'a locked step shows its info and chapters, what to master first — and no Study button');
