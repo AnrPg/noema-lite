@@ -678,7 +678,7 @@ details.accsec[open]>summary{border-bottom:1px solid var(--line)}
 .cg-steps>li,.cg-choices>*{min-width:0}.cg-sub>li{overflow-wrap:anywhere}
 kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border:1px solid var(--line);border-bottom-width:2px;background:var(--bg2)}
 /* 🧭 Curricula (engine/curmap.js) */
-.cm-modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 12px}
+.cm-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:6px 0 12px}
 .cm-mode{display:grid;gap:2px;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card);font:inherit;font-weight:800;color:inherit;cursor:pointer;text-align:left}
 .cm-mode small{font-weight:500;color:var(--ink2);font-size:12.5px}.cm-mode.on{border-color:var(--violet);background:var(--violet-bg)}.cm-mode:not(.on):hover{border-color:var(--violet)}
 .cm-lib{width:min(860px,100%)}

@@ -170,16 +170,7 @@
     const allow = Array.isArray(a.subjects) ? new Set(a.subjects) : null;
     const list = (REG.subjects || []).filter(s => (!s.owner || s.owner === acc) && (!allow || allow.has(s.id) || s.owner === acc)).map(s => ({ ...s, origin: s.owner ? 'private' : 'library' }));
     const imported = await importedPacks(acc);
-    imported.forEach(p => {
-      const m = p.subject; const extra = jget(KV.accountKey('packmeta:' + m.id, acc), null) || {};
-      if (list.some(s => s.id === m.id)) return;
-      // The synced metadata (written by the connector when Claude saves a new version, or by another device) wins over
-      // the copy cached on this device: a different version there means the cached copy is out of date → getPack downloads it.
-      const newer = !!(extra.version && extra.version !== (p.version || null));
-      list.push(newer
-        ? { ...m, ...extra, origin: 'imported', counts: extra.counts || p.counts || countPack(p), version: extra.version, updateAvailable: true }
-        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner });
-    });
+    imported.forEach(p => { const m = p.subject; const extra = jget(KV.accountKey('packmeta:' + m.id, acc), null) || {}; if (!list.some(s => s.id === m.id)) list.push({ ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner }); });
     // imported packs known from synced metadata (e.g. imported on another device, stored in the cloud)
     ls.keys(`${P}${acc}:a:packmeta:`).forEach(k => { const m = jget(k, null); if (m && !list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported' }); });
     return list.map(s => ({ ...s, ...subjOverride(acc, s.id), hidden: hidden.has(s.id) }));
@@ -243,16 +234,11 @@
     let cached = null;
     if (meta.origin === 'imported') {
       cached = await IDB.get('packs', acc + '|' + meta.id);
-      const stale = !!(cached && meta.version && cached.version !== meta.version && window.NoemaCloud && NoemaCloud.session());
+      const stale = cached && meta.version && cached.version && cached.version !== meta.version && window.NoemaCloud && NoemaCloud.session();
       if (cached && !stale) { if (needsPictures(cached)) embedWebPictures(acc, cached, { wait: 0 }); return cached; }     // a newer version exists in the cloud (e.g. Claude updated it) → download below
-      if (stale) toastL(`⬇️ Getting the new version of “${meta.title || meta.id}”…`, 4000);
     }
     if (meta.path) { await loadScript(meta.path); if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id]; }
-    if (window.NoemaCloud && NoemaCloud.session()) {
-      let err = null; const p = await NoemaCloud.downloadPack(meta.id).catch(e => { err = e; return null; });
-      if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); if (cached) toastL(`✨ “${meta.title || meta.id}” is up to date`, 3000); return embedWebPictures(acc, p); }
-      if (cached && err) { console.warn('[noema] the new version could not be downloaded', err); toastL(`⚠️ The new version of “${meta.title || meta.id}” could not be downloaded right now (${err.message || 'network'}). You are studying the copy saved on this device; it will try again next time.`, 7000); }
-    }
+    if (window.NoemaCloud && NoemaCloud.session()) { const p = await NoemaCloud.downloadPack(meta.id).catch(() => null); if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); return embedWebPictures(acc, p); } }
     if (cached) return cached;
     throw new Error(`The study pack for “${meta.title || meta.id}” could not be loaded.`);
   }
@@ -356,7 +342,7 @@
             list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
               el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
                 const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
-                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
+                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
                 const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange: async () => { const fresh = (await subjectsFor(acc)).filter(x => !x.hidden && !x.curriculum); subs.length = 0; subs.push(...fresh); draw(); } }); } }, '✏️');
                 return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
           });
@@ -368,6 +354,7 @@
         // two ways to study: ready-made subject packs, or a curriculum (a map of steps generated on demand)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
           el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true' }, '📚 Subjects', el('small', {}, 'ready-made courses')),
+          (REG.languages || []).length ? el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => pickLanguage(acc, s => { close(); resolve(s); }) }, '🌍 Languages', el('small', {}, 'several at once')) : null,
           el('button', { class: 'cm-mode', role: 'tab', 'aria-selected': 'false', onclick: () => window.NoemaCurMap?.library(acc, { onStudy: async id => { const s = (await subjectsFor(acc)).find(x => x.id === id); if (s) { close(); resolve(s); } } }) }, '🧭 Curricula', el('small', {}, 'a goal → a map of steps')));
         box.append(brandHead('What do you want to study?', `${a.emoji || ''} ${a.name}`), modes, reqs, q, list,
           el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small ai', onclick: () => claudeGuide(acc, { onDone: s => { close(); resolve(s); } }) }, '✨ Create with Claude'), el('button', { class: 'btn small', onclick: () => explore(acc, { onChoose: s => { close(); resolve(s); } }) }, '🌍 Explore'), imp, el('button', { class: 'btn small ghost', onclick: async () => { close(); const na = await pickAccount({ closable: true }); if (na) { Noema.switchTo(na.id, null); } } }, '👤 Switch profile'),
@@ -375,6 +362,29 @@
         draw(); if (subs.length > 8) setTimeout(() => q.focus(), 300);
       }, { closable });
     });
+  }
+  /* ---------------- language courses (docs/LANGUAGES.md): their own runtime and UI, loaded instead of the subject engine ---------------- */
+  const langMeta = id => { const m = (REG.languages || []).find(x => 'lang:' + x.id === id); return m ? { ...m, id: 'lang:' + m.id, courseId: m.id, kind: 'language' } : null; };
+  const LANG_FLAGS = { ar: '🇸🇦', he: '🇮🇱', zh: '🇨🇳', de: '🇩🇪', el: '🇬🇷', en: '🇬🇧', ru: '🇷🇺', tr: '🇹🇷', hi: '🇮🇳', fr: '🇫🇷', es: '🇪🇸', it: '🇮🇹', ja: '🇯🇵' };
+  function pickLanguage(acc, onPick) {
+    overlay((box, close) => {
+      box.append(brandHead('🌍 Language courses', 'Several languages learned side by side: the same idea in each of them'),
+        el('div', { class: 'noema-chips' }, ...(REG.languages || []).map(m => el('button', { class: 'noema-chip', onclick: () => { close(); onPick(langMeta('lang:' + m.id)); } },
+          el('span', { class: 'e' }, m.languages.map(c => LANG_FLAGS[c] || c).join('')), el('span', { class: 't' }, m.title)))),
+        el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close }, 'Close')));
+    }, { closable: true });
+  }
+  async function startLanguage(acc, meta) {
+    KV.subj = meta.id; Noema.setCurrent(acc.id, meta.id);
+    Noema.subject = { id: meta.id, title: meta.title, kind: 'language', tutor: {}, hero: {}, features: {} };
+    const base = window.NOEMA_ENGINE_BASE || 'engine/';
+    await loadCSS(base + 'langui.css');
+    await loadScript(base + 'langcore.js');
+    if (!(window.NOEMA_LANGPACKS || {})[meta.courseId]) await loadScript(meta.path);
+    await loadScript(base + 'langui.js');
+    document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove();
+    NoemaLangUI.start({ acc: acc.id, id: meta.courseId, data: window.NOEMA_LANGPACKS[meta.courseId] });
+    AutoBackup.start(acc.id).catch(() => { });
   }
   /** 📥 Import: a package (<id>.noema.zip = pack + its source files) or a plain pack (.json). */
   async function importPackFile(acc, file) {
@@ -1075,11 +1085,13 @@
     Notes.start(acc.id);
     try { window.NoemaCurriculum?.Gen.start(acc.id); window.NoemaCurJobs?.App.start(acc.id); } catch (e) { console.warn('[curriculum]', e); }   // prepares the next curriculum steps in the background; picks up what the Claude app did
     const subs = await subjectsFor(acc.id);
-    let meta = subs.find(s => s.id === (url.get('subject') || (cur.acc === acc.id ? cur.subj : null)));
+    const wanted = url.get('subject') || (cur.acc === acc.id ? cur.subj : null);
+    let meta = subs.find(s => s.id === wanted) || (String(wanted || '').startsWith('lang:') ? langMeta(wanted) : null);
     const settings = jget(KV.accountKey('settings'), {});
     const ask = settings.askSubjectOnStart ?? CFG.askSubjectOnStart;
     if (!meta || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
     if (!meta) return;
+    if (meta.kind === 'language') return startLanguage(acc, meta);
     KV.subj = meta.id;
     Noema.setCurrent(acc.id, meta.id);
     migrateLegacy(acc.id, meta.id);

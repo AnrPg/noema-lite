@@ -9,7 +9,7 @@
 | P0 | Spec, schemas, validator, mini fixture course | ✅ 2026-10-07 |
 | P1 | `langcore` runtime (pure JS): model, states, scheduler, gating, known sets, form index, script utilities | ✅ 2026-10-07 |
 | P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ✅ 2026-10-08 (the next core nodes continue as content batches alongside P3+) |
-| P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ⏳ next |
+| P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ✅ v1 2026-10-08 (P3b: pictures, field sorting) |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
 | P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ⬜ |
@@ -26,7 +26,7 @@ The app in use must never be affected or left half-done by this work.
   **`main`**: it is the app you use, and it is what Netlify publishes (production branch = `main`).
 * **Not pushed by default.** The branch stays local. If it is ever pushed as a backup, Netlify branch deploys must stay off,
   so the website never shows it.
-* **Additive code.** New files for everything (`engine/langcore.js`, `engine/src/45–48_lang_*`, `tools/*lang*`,
+* **Additive code.** New files for everything (`engine/langcore.js`, `engine/lang/*`, `tools/*lang*`,
   `library/languages/`, `tests/lang*`). Existing files are touched only at registration points (the build lists,
   `index.html`, the subject picker), and only for courses with `kind: "language"`; ordinary subjects and curricula take
   exactly the same code paths as before.
@@ -344,7 +344,7 @@ noema1:<acc>:s:<course>:log:<day>           session log (for statistics)
 ## 6. Exercise types (new, on top of the existing ones)
 
 Legend — source: **D** deterministic from stored data, **B** sentence bank, **AI** graded by Gemini (labelled "AI-judged").
-Every new type gets a widget in `engine/src/47_lang_ex.js` with `check`, `reveal`, `given` (the learner's answer, for the tutor buttons) and keyboard support.
+Every new type gets a widget in `engine/lang/40_ex.js` with `check`, `reveal`, `given` (the learner's answer, for the tutor buttons) and keyboard support.
 
 ### 6.1 Script
 | id | trains | how | src | languages |
@@ -498,10 +498,8 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 |---|---|
 | `tools/langlib.py`, `tests/fixtures/lang-vectors.json` | the shared helpers in Python (cells, vowel marks, pinyin, joining tokens) and the vectors both twins must pass |
 | `engine/langcore.js` | pure module (no DOM; also runs in Node and in the connector): loading the course packs, state machine, SM-2 two-track scheduler, gating, known sets, form index, tokenizer/segmenter, feasibility, bank selection, session planner, script utilities (strip marks, positional forms, pinyin numbers ↔ marks, transliteration) |
-| `engine/src/45_lang_views.js` | course home, lanes, flag card, field map, DAG view (reusing `curmap`), function pages, compare view |
-| `engine/src/46_lang.css` | language UI, RTL, fonts, keyboards |
-| `engine/src/47_lang_ex.js` | the new exercise widgets (§6) |
-| `engine/src/48_lang_input.js` | on-screen keyboards, pinyin input, character choice |
+| `engine/lang/*.js`, `engine/lang/lang.css` → `engine/langui.js`, `engine/langui.css` (built) | the language-course UI, a bundle of its own, loaded **instead of** `engine.js` when a language course is open (so the subject engine is untouched): `00_base` (helpers, word rendering, storage), `10_shell` (top bar, routes, home, vocabulary map), `20_cards` (node page, flag card, compare, word card), `30_vocab` (field map, name-them-all, settings), `40_ex` (exercises), `50_session` (the session runner); later `60_grammar`, `70_script`, `80_input` … |
+| `library/languages/<id>/course.pack.js` (built) | the whole course as one script (`window.NOEMA_LANGPACKS[id]`); the registry lists it under `languages` |
 | `tools/validate_lang.py`, `tools/lang_refcheck.py`, `tools/schemas/noema.lang.v1.schema.json` | validation |
 | `tools/build.py` | builds `core.pack.js` / `<code>.pack.js`, registry entries `kind: "language"` |
 | `library/languages/<course-id>/` | the pilot course |
@@ -535,7 +533,9 @@ Existing subjects and curricula must keep working unchanged; the language part i
 | 3 | veg.3a (40) + veg.3b (40) | ✅ 13 + 67 absent · 73 | ✅ 14 + 66 absent · 69 | ✅ 53 + 27 absent · 224 | ✅ 59 + 21 absent · 149 |
 | 4 | core.2 … (numbers, adjectives, colours, more verbs) | ⬜ | ⬜ | ⬜ | ⬜ |
 
-**P3 — UI shell and vocabulary lane**
+**P3 — UI shell and vocabulary lane** — ✅ v1 2026-10-08
+- Done: `tools/build.py` builds the course pack and the UI bundle and lists the course in the registry (`languages`); the subject picker has a 🌍 Languages tab and `?subject=lang:<id>` opens a course; top bar with the explanation language and one chip per language (progress ring); home with today's session and the vocabulary map (node states per language); node page; flag card with the state dot of every language, ⇄ compare table, the full word card (§4.6); field map (all tiers, subgroups, “show words not learned yet”); ⏱️ name them all (any form, without vowel marks, transliteration or pinyin; learned words named count as production reviews); settings (active languages, depth per language, batch, minutes, vowel marks / transliteration / pinyin); the session runner — reviews, then each new idea introduced in every language one after the other, recognized (meaning among same-subgroup distractors) and produced (letter or character tiles in any script, typing for Latin script; then the German article or the Chinese measure word), wrong answers once more a little later; state stored per (language, node) through `Noema.kv` (synced like every key). `tests/lang_ui.js` (34 checks, incl. phone width, per-language unlocking and the picker).
+- Still to do (P3b): pictures for the concepts (Wikidata P18 through the picture library), the field-map sorting exercise, a principal-parts drill of its own, a test of cloud sync with the emulator.
 - Course in the picker (`kind: "language"`), course home with flags, flag card + compare, the word card with the whole profile, field map, DAG view, `learn_batch`, `recognize`, `picture_name`, `spell`, `gender_article`, `principal_parts`, `measure_word`, `exhaustive_recall`, `field_map` sorting; daily session v1; sync of the state keys.
 - ✔ Playwright: a new learner opens the course, learns a batch in two languages, reviews it, a node becomes known and the next opens only in that language; reload/sync keeps everything.
 
@@ -571,3 +571,4 @@ Working rules for every phase: read this file first; keep existing subjects unto
 - 2026-10-08 — P2 started: the vegetables field (163 concepts, tiers and subgroups, Wikidata ids), the core spine node core.1, 10 frames, 4 functions; batch 1 (core.1 + veg.1) written in all four languages, 215 words, 249 sentences, every word with its full profile, everything validated and ref-checked. Runtime and tools grown with it: nodes not yet written are “unprepared” (they block what follows, in that language only) and `validate_lang.py` treats them as warnings unless `--strict`; multi-word words (תַּפּוּחַ אֲדָמָה, Rote Bete) are one token; prefix spellings (`alts`: וּ for וְ); `evidence.punct` for questions; erhua pinyin (哪儿 nǎr); refcheck keys `pos | meaning | gender | <cell> | pinyin | trad | measure` for `ref.override`, all genders, determiners filed as pronouns, pronoun rows, German preterite, full spellings (plene) for Hebrew look-ups; `tests/lang_courses.js` reads every course back.
 - 2026-10-08 — P2 batch 2 (veg.2a + veg.2b) in all four languages (169 words, 61 marked absent with what people say instead, 590 sentences). Refcheck: hyphenated glosses (water-cress), apostrophes in Wiktionary pinyin (lián'ǒu), Hebrew/Arabic pages that only say “defective spelling of X” are followed to X.
 - 2026-10-08 — P2 batch 3 (veg.3a + veg.3b): the whole vegetables field now exists in all four languages; the course validates with `--strict`. Fixes from the workers' reports: wh-questions are no longer counted as yes/no questions (`evidence.exclude`: the wh-words), plural-only nouns (`NOUN.plt`, no gender: die Edamame), the German word card shows the article with the form used after it (der Gute Heinrich), refcheck matches whole words without accents (hen ≠ Chenopodium, jícama), reads the concept's `aka` (the Wikipedia title, often the scientific name) and the full-spelling page when the short spelling is another word (כרכום ≠ כורכום), and reports explanations that are no longer needed. Open: Arabic fixed phrases that exist only with the article (حَبُّ الْعَزِيزِ) need a definite-only noun class; words with no Wiktionary entry are only “unverified” (a second source — e.g. CC-CEDICT, Duden — would close that gap).
+- 2026-10-08 — P3 v1: the language-course UI as its own bundle (`engine/lang/*` → `langui.js/css`), loaded instead of the subject engine. Registration points touched in existing files, as §0 allows: `tools/build.py` (course packs, UI bundle, registry key `languages`, site copy), `engine/loader.js` (🌍 Languages tab in the picker, `lang:` subjects start the language UI), `engine/src/30_shell.css` (the picker's mode tabs fit three). Ordinary subjects and curricula take the same code paths as before.

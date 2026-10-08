@@ -1,0 +1,85 @@
+/* GENERATED from engine/lang/*.css. Do not edit. */
+/* noema-lite · language courses (docs/LANGUAGES.md §8) — built into engine/langui.css */
+body.lx main.lx-main{max-width:1000px}
+.lx-title{max-width:38vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lx-flag{font-size:1.15em;line-height:1}
+.lx-flagchip{gap:6px;padding:5px 10px}.lx-flagchip.on{border-color:var(--violet);background:var(--violet-bg)}
+.lx-ring{width:14px;height:14px;border-radius:50%;background:conic-gradient(var(--ok) calc(var(--p)*1%),var(--line) 0);display:inline-block}
+.lx-explain{font-weight:600;font-size:13px}
+.lx-hero{padding:8px 0 18px}.lx-hero h1{margin:0 0 4px;font-size:30px;letter-spacing:-.02em}.lx-sub{color:var(--ink2);margin:0 0 14px}
+.lx-go{font-size:17px;padding:14px 24px}
+.lx-h2{margin:26px 0 10px}.lx-h3{margin:22px 0 8px}
+.lx-nodes{display:grid;gap:10px}
+.lx-node{display:grid;gap:6px;text-align:left;padding:14px 16px;border-radius:var(--r-sm);background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit}
+.lx-node:hover{border-color:var(--violet)}
+.lx-nodetitle{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.lx-nodestates{display:flex;gap:6px;flex-wrap:wrap}
+.lx-ns{font-size:13px;padding:2px 8px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);white-space:nowrap}
+.ns-open,.ns-learning{background:var(--info-bg)}.ns-known{background:var(--ok-bg)}.ns-mastered{background:var(--warn-bg)}.ns-locked,.ns-unprepared,.ns-skipped{opacity:.7}
+.lx-back{margin:0 0 6px}
+.lx-rail{display:inline-flex;gap:4px;padding:3px;border-radius:14px;background:var(--bg2);border:1px solid var(--line)}
+.lx-railbtn{position:relative;width:44px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:20px}
+.lx-railbtn.on{background:var(--card);box-shadow:var(--shadow)}
+.lx-dot{position:absolute;right:5px;bottom:5px;width:9px;height:9px;border-radius:50%;background:var(--line);border:1.5px solid var(--card)}
+.lx-dot.s-learning,.lx-dot.s-seen{background:var(--info)}.lx-dot.s-known_r{background:#7fd1b5}.lx-dot.s-known_p{background:var(--ok)}.lx-dot.s-mastered{background:var(--warn)}.lx-dot.s-absent{background:transparent;border-color:var(--ink3)}
+.lx-actions{margin:12px 0}
+.lx-note{padding:10px 14px;border-radius:12px;background:var(--warn-bg)}
+.lx-cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:12px 0}
+.lx-tile{display:grid;gap:2px;justify-items:center;text-align:center;padding:10px 8px;border-radius:14px;background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit;min-width:0}
+.lx-tile.s-locked,.lx-tile.s-ready{opacity:.62}.lx-tile.s-learning,.lx-tile.s-seen{border-color:var(--info)}.lx-tile.s-known_r,.lx-tile.s-known_p{border-color:var(--ok)}.lx-tile.s-mastered{border-color:var(--warn);background:var(--warn-bg)}.lx-tile.s-absent{border-style:dashed}
+.lx-tierbreak{grid-column-start:1}
+.lx-temoji{font-size:24px}.lx-tword{font-size:18px;font-weight:650;max-width:100%;overflow-wrap:anywhere}.lx-tgloss{font-size:12.5px;color:var(--ink2)}
+.lx-w[lang=ar]{font-family:'Noto Naskh Arabic',serif;font-size:1.25em}.lx-w[lang=he]{font-family:'Noto Sans Hebrew',sans-serif;font-size:1.12em}.lx-w[lang=zh]{font-family:'Noto Sans SC',sans-serif}
+.lx-wbox{display:inline-flex;flex-direction:column;align-items:center;line-height:1.25}
+.lx-help{font-size:.72em;color:var(--ink2);font-style:italic}
+.lx-cardhead{display:flex;gap:14px;align-items:center}.lx-cardhead h1{margin:0}.lx-bigemoji{font-size:44px}
+.lx-card{margin:14px 0;padding:18px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.lx-cardtop{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.lx-lemma{font-size:34px;font-weight:700}
+.lx-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.lx-badge{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);white-space:nowrap}
+.lx-badge.reg{background:var(--violet-bg)}.lx-badge.ctx{background:var(--info-bg)}.lx-badge.new{background:var(--warn-bg)}
+.lx-parts{display:grid;grid-template-columns:max-content 1fr;gap:2px 14px;margin:12px 0;font-size:15px}.lx-parts dt{color:var(--ink2)}.lx-parts dd{margin:0}
+.lx-feeling{margin:6px 0;color:var(--ink2)}
+.lx-sec{border-top:1px solid var(--line);padding:8px 0}.lx-sec summary{font-weight:750;cursor:pointer}
+.lx-ex{padding:8px 0}.lx-card .lx-ex{border-bottom:1px dashed var(--line)}
+.lx-extext{font-size:19px}.lx-plain{color:var(--ink3);font-size:15px}.lx-tr{color:var(--ink2)}
+.lx-list{margin:6px 0;padding-left:20px}.lx-list li{margin:4px 0}
+.lx-warn li,.lx-warn{color:#b4530c}
+.lx-syngroup{margin:6px 0}
+.lx-absent{margin:14px 0;padding:14px;border-radius:14px;border:1.5px dashed var(--line);background:var(--bg2)}
+.lx-compare{overflow-x:auto;margin:12px 0}.lx-compare table{border-collapse:collapse;width:100%}.lx-compare th,.lx-compare td{padding:8px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+.lx-seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}.lx-seg button{padding:6px 10px;font-size:14px}.lx-seg button.on{background:var(--violet-bg);font-weight:700}
+.lx-session .lx-stage{max-width:640px;margin:18px auto}
+.lx-progress{flex:1;height:8px;border-radius:99px;background:var(--bg2);overflow:hidden}.lx-progress i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.lx-q{font-weight:700;color:var(--ink2);margin:6px 0}
+.lx-prompt{font-size:40px;text-align:center;margin:14px 0}
+.lx-meaning{font-size:22px;text-align:center;margin:6px 0}
+.lx-opts{display:grid;gap:8px}
+.lx-opt{display:flex;gap:10px;align-items:center;text-align:start;padding:12px 14px;border-radius:14px;background:var(--card);border:1.5px solid var(--line);font:inherit;color:inherit;font-size:17px}
+.lx-opt.right{border-color:var(--ok);background:var(--ok-bg)}.lx-opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.lx-k{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--bg2);font-size:13px;flex:none}
+.lx-slot{min-height:56px;font-size:32px;text-align:center;padding:8px;border-radius:14px;border:2px dashed var(--line);margin:8px 0}
+.lx-slot.right{border-color:var(--ok);background:var(--ok-bg)}.lx-slot.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.lx-tiles{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.lx-tile1{min-width:44px;height:48px;padding:0 10px;border-radius:12px;background:var(--card);border:1.5px solid var(--line);font-size:24px}
+.lx-tile1:disabled{opacity:.3}
+.lx-tiles[lang=ar] .lx-tile1{font-family:'Noto Naskh Arabic',serif}.lx-tiles[lang=he] .lx-tile1{font-family:'Noto Sans Hebrew',sans-serif}.lx-tiles[lang=zh] .lx-tile1{font-family:'Noto Sans SC',sans-serif}
+.lx-slot[lang=ar]{font-family:'Noto Naskh Arabic',serif}.lx-slot[lang=he]{font-family:'Noto Sans Hebrew',sans-serif}.lx-slot[lang=zh]{font-family:'Noto Sans SC',sans-serif}
+.lx-typein{max-width:220px}
+.lx-fb{margin:12px 0;padding:12px 14px;border-radius:14px;font-size:18px}.lx-fb.ok{background:var(--ok-bg)}.lx-fb.bad{background:var(--bad-bg)}
+.lx-intro .lx-ex1{margin:12px 0;font-size:18px}
+.lx-nextrow{justify-content:flex-end;margin-top:12px}
+.lx-which{text-align:center}
+.lx-result{text-align:center;padding:20px}
+.lx-recallin{flex:1;min-width:200px;font-size:20px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--card)}
+.lx-clock{font-size:22px;font-variant-numeric:tabular-nums}
+.lx-found{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.lx-hit{padding:6px 10px;border-radius:12px;background:var(--ok-bg)}
+.lx-setrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}.lx-check{display:flex;gap:6px;align-items:center;margin:6px 0;flex-wrap:wrap}
+.lx-check select,.lx-setrow input{padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card)}
+.lx-peek{margin-inline-start:auto}
+@media (max-width:640px){
+  .lx-top{padding:8px 10px;gap:6px;flex-wrap:wrap}.lx-title{max-width:48vw}.lx-explain{display:none}
+  .lx-flagchip{padding:4px 7px;font-size:12px}.lx-hero h1{font-size:24px}.lx-prompt{font-size:32px}.lx-lemma{font-size:28px}
+  .lx-cgrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+}

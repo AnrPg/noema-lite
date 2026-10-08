@@ -23,3 +23,9 @@ node "$ROOT/tests/curriculum_import.js" "$T"
 node "$ROOT/tests/curriculum_app.js" "$T"
 node "$ROOT/tests/sources.js" "$T"
 python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is installed
+# foreign languages (docs/LANGUAGES.md §11): content validator, reference checker, runtime, the course, the UI
+python3 "$ROOT/tests/lang_validate.py"
+python3 "$ROOT/tests/lang_refcheck.py"
+node "$ROOT/tests/langcore.js"
+node "$ROOT/tests/lang_courses.js"
+node "$ROOT/tests/lang_ui.js" "$T"
