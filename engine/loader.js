@@ -170,7 +170,16 @@
     const allow = Array.isArray(a.subjects) ? new Set(a.subjects) : null;
     const list = (REG.subjects || []).filter(s => (!s.owner || s.owner === acc) && (!allow || allow.has(s.id) || s.owner === acc)).map(s => ({ ...s, origin: s.owner ? 'private' : 'library' }));
     const imported = await importedPacks(acc);
-    imported.forEach(p => { const m = p.subject; const extra = jget(KV.accountKey('packmeta:' + m.id, acc), null) || {}; if (!list.some(s => s.id === m.id)) list.push({ ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner }); });
+    imported.forEach(p => {
+      const m = p.subject; const extra = jget(KV.accountKey('packmeta:' + m.id, acc), null) || {};
+      if (list.some(s => s.id === m.id)) return;
+      // The synced metadata (written by the connector when Claude saves a new version, or by another device) wins over
+      // the copy cached on this device: a different version there means the cached copy is out of date → getPack downloads it.
+      const newer = !!(extra.version && extra.version !== (p.version || null));
+      list.push(newer
+        ? { ...m, ...extra, origin: 'imported', counts: extra.counts || p.counts || countPack(p), version: extra.version, updateAvailable: true }
+        : { ...extra, ...m, origin: 'imported', counts: p.counts || countPack(p), version: p.version, sharedBy: extra.sharedBy, publicFrom: extra.publicFrom, publicOwner: extra.publicOwner });
+    });
     // imported packs known from synced metadata (e.g. imported on another device, stored in the cloud)
     ls.keys(`${P}${acc}:a:packmeta:`).forEach(k => { const m = jget(k, null); if (m && !list.some(s => s.id === m.id)) list.push({ ...m, origin: 'imported' }); });
     return list.map(s => ({ ...s, ...subjOverride(acc, s.id), hidden: hidden.has(s.id) }));
@@ -234,11 +243,16 @@
     let cached = null;
     if (meta.origin === 'imported') {
       cached = await IDB.get('packs', acc + '|' + meta.id);
-      const stale = cached && meta.version && cached.version && cached.version !== meta.version && window.NoemaCloud && NoemaCloud.session();
+      const stale = !!(cached && meta.version && cached.version !== meta.version && window.NoemaCloud && NoemaCloud.session());
       if (cached && !stale) { if (needsPictures(cached)) embedWebPictures(acc, cached, { wait: 0 }); return cached; }     // a newer version exists in the cloud (e.g. Claude updated it) → download below
+      if (stale) toastL(`⬇️ Getting the new version of “${meta.title || meta.id}”…`, 4000);
     }
     if (meta.path) { await loadScript(meta.path); if (window.NOEMA_PACKS[meta.id]) return window.NOEMA_PACKS[meta.id]; }
-    if (window.NoemaCloud && NoemaCloud.session()) { const p = await NoemaCloud.downloadPack(meta.id).catch(() => null); if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); return embedWebPictures(acc, p); } }
+    if (window.NoemaCloud && NoemaCloud.session()) {
+      let err = null; const p = await NoemaCloud.downloadPack(meta.id).catch(e => { err = e; return null; });
+      if (p) { await IDB.put('packs', acc + '|' + meta.id, p).catch(() => { }); if (cached) toastL(`✨ “${meta.title || meta.id}” is up to date`, 3000); return embedWebPictures(acc, p); }
+      if (cached && err) { console.warn('[noema] the new version could not be downloaded', err); toastL(`⚠️ The new version of “${meta.title || meta.id}” could not be downloaded right now (${err.message || 'network'}). You are studying the copy saved on this device; it will try again next time.`, 7000); }
+    }
     if (cached) return cached;
     throw new Error(`The study pack for “${meta.title || meta.id}” could not be loaded.`);
   }
@@ -342,7 +356,7 @@
             list.append(el('div', { class: 'noema-group' }, el('div', { class: 'noema-grouphead' }, `${g.emoji || ''} ${g.title}`),
               el('div', { class: 'noema-chips' }, ...items.map(s => { n++; const pct = Math.round(subjectProgress(acc, s) * 100);
                 const chip = el('button', { class: 'noema-chip' + (s.id === KV.subj ? ' on' : ''), style: { animationDelay: n * 35 + 'ms' }, title: s.description || '', onclick: () => { close(); resolve(s); } },
-                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
+                  el('span', { class: 'e' }, s.emoji || '📘'), el('span', { class: 't' }, s.title), s.origin !== 'library' ? el('span', { class: 'o', title: s.sharedBy ? 'shared by ' + s.sharedBy : s.publicOwner ? 'from ' + s.publicOwner : '' }, s.origin === 'private' ? '🔒' : s.sharedBy ? '🤝' : s.publicFrom ? '🌍' : '📥') : null, s.updateAvailable ? el('span', { class: 'o', title: 'A new version is ready — it downloads when you open the subject' }, '✨') : null, pct ? el('span', { class: 'p' }, pct + '%') : null);
                 const edit = el('button', { class: 'noema-editbtn', title: 'Rename, describe, hide or delete', 'aria-label': 'Edit ' + s.title, onclick: e => { e.stopPropagation(); editSubject(acc, s, { onChange: async () => { const fresh = (await subjectsFor(acc)).filter(x => !x.hidden && !x.curriculum); subs.length = 0; subs.push(...fresh); draw(); } }); } }, '✏️');
                 return el('span', { class: 'noema-chipwrap' }, chip, edit, s.origin === 'library' ? null : el('button', { class: 'noema-sharebtn', title: 'Share or make public', 'aria-label': 'Share ' + s.title, onclick: e => { e.stopPropagation(); shareDialog(acc, s); } }, '🔗')); }))));
           });
