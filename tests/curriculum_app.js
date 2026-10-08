@@ -59,7 +59,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
 
   /* ---------- A. a new curriculum built by the Claude app ---------- */
   console.log('— A. a new curriculum, built by the learner’s Claude app');
-  await p.click('.cm-mode:has-text("Curricula")'); await p.click('button:has-text("New curriculum")'); await wait(300);
+  await p.click('.cm-mode:has-text("Curricula")'); await p.locator('.noema-ovbox').last().locator('button:has-text("New curriculum")').click(); await wait(300);
   ok(await p.locator('.cm-provider').inputValue() === 'claudeapp' && await p.locator('.cm-appinfo').isVisible() && !(await p.locator('.cm-keys').isVisible()), 'cloud account: “💬 Claude app — with your Claude plan (recommended, usually cheaper)” is preselected; no key needed');
   ok(/usually cheaper/i.test(await p.locator('.cm-provider option[value=claudeapp]').innerText()) && /no extra cost beyond your plan/i.test(await p.locator('.cm-appinfo').innerText()), 'the choice says why: no cost beyond the Claude plan, the saving grows with the curriculum');
   await p.fill('textarea[placeholder^="e.g. “Bayesian"]', 'Bayesian inference'); await p.selectOption('label:has-text("Depth") select', 'standard');

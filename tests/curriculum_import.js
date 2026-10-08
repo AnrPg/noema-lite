@@ -191,7 +191,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
 
   console.log('— 📥 import the map with files');
   await p.click('.cm-mode:has-text("Curricula")'); await wait(300);
-  await p.click('button:has-text("Import a map")'); await wait(300);
+  await p.locator('.noema-ovbox').last().locator('button:has-text("Import a map")').click(); await wait(300);
   // ⓘ guides: every example is read by the real parser exactly as its “Read as” says; ▶ Try it loads it
   await p.click('.cg-step >> nth=0 >> .cg-tip summary'); await wait(150);
   const gd1 = await p.locator('.cg-step >> nth=0 >> .cg-tipbody').innerText();
