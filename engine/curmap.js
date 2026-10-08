@@ -719,7 +719,7 @@ window.NoemaCurMap = (() => {
         el('button', { class: 'btn small', title: 'Settings of this curriculum', onclick: () => settings() }, '⚙️'));
       box.append(el('div', { class: 'cm-top' }, el('button', { class: 'btn small ghost', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'), el('div', { class: 'cm-title' }, el('b', {}, '🧭 ' + (c.title || c.goal)), sum), tools, el('button', { class: 'btn small', 'aria-label': 'Close', onclick: close }, '✕')),
         appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
-        el('div', { class: 'cm-legend tiny' }, '✅ mastered · 🔓 open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app', tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.')));
+        el('div', { class: 'cm-legend tiny' }, '✅ mastered · ▶️ open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app', tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.')));
 
       function drawMap() {
         c = C().get(acc, cid) || c; const st = C().statuses(acc, c); const L = C().layout(c); const s = C().summary(acc, c);
@@ -739,7 +739,7 @@ window.NoemaCurMap = (() => {
         for (const [id, n] of Object.entries(c.nodes)) {
           const s2 = st[id], pk = n.pack?.status, key = c.id + '/' + id;
           const state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked';
-          const badge = s2.mastered ? '✅' : s2.locked ? '🔒' : '🔓';
+          const badge = s2.mastered ? '✅' : s2.locked ? '🔒' : '▶️';
           const rx = c.shared && !c.shared.ended ? c.remote?.[id] : null;   // 👥 what the others did with this step
           const prep = pk === 'ready' ? '⚡' : rx?.status === 'ready' ? '⚡' : rx && !rx.mine ? '⏳' : pk === 'app' || J().needsPlan(n) && c.provider === 'claudeapp' && !member ? '💬' : pk === 'generating' || G().busy() === key ? '⏳' : pk === 'failed' ? '⚠️' : pk === 'paused' ? '⏸️' : s2.open && !s2.mastered && !n.reviewed && !c.autoApprove ? '📝' : '';
           const byOther = rx && !rx.mine ? (rx.status === 'ready' ? `prepared by ${rx.by || 'another member'}` : `being prepared by ${rx.by || 'another member'}`) : '';
