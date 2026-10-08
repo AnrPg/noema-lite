@@ -217,7 +217,11 @@ def main(path):
             if k not in d: E(f"debug {did}: missing {k}")
         if d.get("section") and d["section"] not in sids: E(f"debug {did}: bad section")
         if len(d.get("askYourself",[]))<3: W(f"debug {did}: <3 askYourself")
+    fids = Counter(f.get("id") for f in ch.get("flashcards",[]))
     for f in ch.get("flashcards",[]):
+        fid = f.get("id")
+        if not re.fullmatch(cid+r"-f\d{3}", str(fid)): E(f"flashcard needs an id like {cid}-f001 (got {fid!r}); progress is keyed by it")
+        elif fids[fid] > 1: E(f"duplicate flashcard id {fid}")
         if not (s(f.get("q")) and s(f.get("a"))): E("flashcard needs q+a")
         if f.get("section") and f["section"] not in sids: E(f"flashcard bad section {f.get('section')}")
     # warnings on quantity

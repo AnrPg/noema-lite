@@ -150,6 +150,18 @@ const S = (() => {
   return st;
 })();
 if (!S.settings.apiKey) S.settings.apiKey = DEFAULT_KEY;
+/* flashcards have ids now (chNN-fNNN); their progress used to be keyed by position (chNN#k), which shifted when a card
+   was inserted. Move positional progress to the card's id (idempotent: a moved key is gone; if both exist the id wins). */
+const CARD_KEYS_MOVED = (() => {
+  let n = 0;
+  COURSE.forEach(c => c.flashcards.forEach((f, k) => {
+    const old = c.id + '#' + k;
+    if (!f.id || !S.fc[old]) return;
+    if (!S.fc[f.id]) S.fc[f.id] = S.fc[old];
+    delete S.fc[old]; n++;
+  }));
+  return n;
+})();
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
@@ -159,6 +171,7 @@ function flushSave() {
   Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
+if (CARD_KEYS_MOVED) save();
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
 function touchStreak() { Noema.stats.touchStreak(); }
@@ -2101,8 +2114,12 @@ const FULL_COURSE = COURSE.slice();
 FULL_COURSE.forEach((c, i) => {
   c._ci = i;
   c.src = [SRCREG.chapters?.[c.id], c.src].find(id => id && SRC_BY_ID[id]) || SOURCES[0].id;   // only ids that exist
-  c.flashcards.forEach((f, k) => { f._key = f._key || c.id + '#' + k; });   // stable SRS keys, independent of filtering
+  c.flashcards.forEach((f, k) => { f._key = f.id || f._key || c.id + '#' + k; });   // SRS keys: the card's id (packs without ids: its position), independent of filtering
 });
+{ /* tell sibling apps (Meletee, a:caps) that card progress is keyed by card id; each feature merges only its own flag */
+  const k = Noema.kv.accountKey('caps'); let c = {}; try { c = JSON.parse(Noema.kv.get(k) || '{}') || {}; } catch (e) { }
+  if (!c.stableCardIds) Noema.kv.set(k, JSON.stringify({ ...c, stableCardIds: 1 }));
+}
 const srcOfItem = (it, c) => (it && it.src) || c.src;
 
 /* ---------- "new" = sources added AFTER the subject was first made (a later version), not yet marked as seen.

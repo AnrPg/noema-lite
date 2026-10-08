@@ -80,7 +80,7 @@ Math (subjects with `features.math`): `$…$` inline, `$$…$$` display (KaTeX).
   "sections": [ Section ],          // 6–16 sections
   "debug": [ Playbook ],            // as many as the source supports (min 3)
   "pitfalls": [ {"title": "...", "text": "...", "fix": "..."} ],
-  "flashcards": [ {"q": "...", "a": "...", "section": "ch05-s03"} ],   // 20–50, crisp
+  "flashcards": [ {"id": "ch05-f001", "q": "...", "a": "...", "section": "ch05-s03"} ],   // 20–50, crisp; id chNN-fNNN, unique (cards without one get the id of their position at build time)
   "exercises": [ Exercise ]
 }
 ```
@@ -151,12 +151,12 @@ the section id and exercise ids that cover it. Use it to self-audit before finis
 
 
 ## Additive updates (new sources for an existing subject)
-* Never edit or delete published chapter files — progress and SRS schedules are keyed by section/exercise ids.
+* Never edit or delete published chapter files — progress and SRS schedules are keyed by section/exercise/flashcard ids.
 * New topics → new chapter files (next free `chNN`). Material for existing sections → a patch file in `patches/`:
 ```json
 {"patches":[{"chapter":"ch02","section":"ch02-s05","appendBlocks":[…],"appendExercises":[…],"appendFlashcards":[…],"appendPitfalls":[…],"appendDebug":[…]}]}
 ```
-  Patched exercise ids must not collide: reserve a range per patch file (e.g. `chNN-e7NN`). Databricks: `e6NN` = visual_v1, `e7NN`–`e9NN` = the links patches.
+  Patched exercise and flashcard ids must not collide: reserve a range per patch file (e.g. `chNN-e7NN`, `chNN-f7NN`); patch cards without an id get the next free one. Databricks: `e6NN` = visual_v1, `e7NN`–`e9NN` = the links patches.
   Typical patch content: a `callout` (kind key/tip, title "Level-up → …") linking to the deeper new chapter, plus genuinely new nuances with an exercise each.
 * Register the new source in `sources.json` (append; order = chronology) and map the new chapter/patch files to it.
 * `python3 tools/build.py` validates the MERGED result; `python3 tools/db_sync.py` records the new version in the backup database.
