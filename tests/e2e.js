@@ -259,6 +259,7 @@ async function mockGemini(ctx) {
   await pB.click('.noema-inuse button:has-text("Use here")'); await wait(1200);
   ok(!(await pB.isVisible('.noema-inuse')) && await pB.evaluate(() => NoemaCloud.lease.state === 'mine'), '"Use here" continues on device B');
   ok(await pA.evaluate(() => NoemaCloud.lease.check()) === 'other' && await pA.isVisible('.noema-inuse') && await pA.evaluate(() => !Noema.kv.set(STATE_KEY, '{}')), 'device A pauses with the same card and saves nothing');
+  ok(await pA.evaluate(() => [...document.body.children].filter(x => !x.classList.contains('noema-inuse-ov')).every(x => x.inert) && document.activeElement?.closest('.noema-inuse')), '… the app underneath is inert and the focus is on “Use here”');
   const chipsB = await pB.$$eval('.noema-chip', c => c.map(x => x.textContent));
   ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
   await pB.click('.noema-chip:has-text("Databricks")'); await wait(1600);

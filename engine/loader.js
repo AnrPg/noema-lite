@@ -84,7 +84,8 @@
   const KV = {
     acc: null, subj: null, listeners: [],
     frozen: null,   // an account in use on another device right now (engine/cloud.js lease): nothing of it is saved here until "Use here"
-    paused(key) { return !!this.frozen && key.startsWith(`${P}${this.frozen}:`) && !key.startsWith(`${P}${this.frozen}:meta:`); },
+    sealed: null,   // an account just restored: the page reloads, and its last save must not write the old state back
+    paused(key) { return [this.frozen, this.sealed].some(a => a && key.startsWith(`${P}${a}:`) && !key.startsWith(`${P}${a}:meta:`)); },
     accountKey(name, acc = this.acc) { return `${P}${acc}:a:${name}`; },
     subjectKey(name, subj = this.subj, acc = this.acc) { return `${P}${acc}:s:${subj}:${name}`; },
     get(key) { return ls.get(key); },
@@ -1037,6 +1038,7 @@
         // v1 backups / legacy kv conversations are converted on next start (migrateLegacy)
         if (mode === 'replace') ls.del(`${P}${targetAcc}:meta:convosMigrated`);
       }
+      if (targetAcc === KV.acc) KV.sealed = targetAcc;   // every caller reloads (or switches profile) next
       return true;
     },
   };
@@ -1115,12 +1117,16 @@
         el('p', { class: 'muted small' }, tr('inuse.stay', { where })),
         unsynced ? el('p', { class: 'muted small' }, tr('inuse.offlineWork')) : null);
     };
-    if (!inUse) { inUse = el('div', { class: 'noema-overlay noema-inuse-ov', role: 'dialog', 'aria-modal': 'true' }, el('div', { class: 'noema-ovbox noema-inuse' })); document.body.append(inUse); }
-    draw(inUse.firstChild, false);
+    if (!inUse) {
+      inUse = el('div', { class: 'noema-overlay noema-inuse-ov', role: 'dialog', 'aria-modal': 'true' }, el('div', { class: 'noema-ovbox noema-inuse' }));
+      [...document.body.children].forEach(x => { if (!x.inert) { x.inert = true; x.dataset.inuseInert = '1'; } });   // keys and taps can't reach the app underneath
+      document.body.append(inUse);
+    }
+    draw(inUse.firstChild, false); inUse.querySelector('button')?.focus();
   }
   addEventListener('noema:inuse', e => {
     if (e.detail?.state === 'other') return showInUse(e.detail);
-    if (inUse) { const o = inUse; inUse = null; o.classList.add('out'); setTimeout(() => o.remove(), 250); }
+    if (inUse) { const o = inUse; inUse = null; document.querySelectorAll('[data-inuse-inert]').forEach(x => { x.inert = false; delete x.dataset.inuseInert; }); o.classList.add('out'); setTimeout(() => o.remove(), 250); }
   });
 
   /* ---------------- boot ---------------- */

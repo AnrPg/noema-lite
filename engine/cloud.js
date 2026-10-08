@@ -319,8 +319,10 @@
       // debounce 3 s, but never longer than 10 s after the first unsynced change (steady writes must not starve the sync)
       Noema.kv.listeners.push((key, a) => { if (a !== acc) return; const k = key.slice(('noema1:' + acc + ':').length); if (remoteOnly(k)) return; markDirty(acc, k); st.firstPending = st.firstPending || Date.now(); clearTimeout(st.timer); st.timer = setTimeout(() => { st.firstPending = null; this.push(acc).catch(() => { }); }, Math.max(0, Math.min(3000, 10000 - (Date.now() - st.firstPending)))); });
       const sync = () => this.lease.check().finally(() => this.pull(acc).then(() => this.push(acc)).catch(() => { }));
-      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') { this.push(acc, { keepalive: true }).catch(() => { }); leaseRelease(); } else { L.lastInput = Date.now(); sync(); } });
-      addEventListener('pagehide', leaseRelease);
+      // leaving: save what the open page holds first (engine/src/10_core.js flushSave), then send it, then let the "in use" row go
+      const leave = () => { try { window.flushSave?.(); } catch (e) { } this.push(acc, { keepalive: true }).catch(() => { }); leaseRelease(); };
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') leave(); else { L.lastInput = Date.now(); sync(); } });
+      addEventListener('pagehide', leave);
       addEventListener('online', () => { sync(); this.pushConvos(acc).catch(() => { }); });
       // the learner touches this tab: renew (or take) the "in use" row at most every 30 s
       const touched = () => { L.lastInput = Date.now(); if (L.state !== 'other' && Date.now() - L.lastBeat > BEAT) this.lease.check(); };
