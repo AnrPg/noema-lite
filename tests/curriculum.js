@@ -223,7 +223,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
 
   console.log('— phone');
   const phc = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, storageState: await U.ctx.storageState() }); const ph = await phc.newPage(); const PE = []; ph.on('pageerror', e => PE.push(e.message));
-  await ph.goto(BASE + '/'); await wait(2500);
+  await ph.goto(BASE + '/'); await wait(2500); if (await ph.isVisible('.noema-inuse')) { await ph.click('.noema-inuse .btn'); await wait(1000); }   // the first window is still in use: continue here
   await ph.evaluate(id => { Noema.curriculumMap(id); }, c.id); await wait(800);
   await ph.tap('.cm-node[data-id="calculus_basics"]'); await wait(400);
   const pb = await ph.locator('.cm-panel').boundingBox();

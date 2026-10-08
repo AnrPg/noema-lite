@@ -83,16 +83,19 @@
   /* ---------------- namespaced key/value store (+ mtimes for sync, dirty flag for backups) ---------------- */
   const KV = {
     acc: null, subj: null, listeners: [],
+    frozen: null,   // an account in use on another device right now (engine/cloud.js lease): nothing of it is saved here until "Use here"
+    paused(key) { return !!this.frozen && key.startsWith(`${P}${this.frozen}:`) && !key.startsWith(`${P}${this.frozen}:meta:`); },
     accountKey(name, acc = this.acc) { return `${P}${acc}:a:${name}`; },
     subjectKey(name, subj = this.subj, acc = this.acc) { return `${P}${acc}:s:${subj}:${name}`; },
     get(key) { return ls.get(key); },
     set(key, val, { silent = false } = {}) {
       if (ls.get(key) === val) return true;
+      if (this.paused(key)) return false;
       const ok = ls.set(key, val);
       if (ok && !silent) this.touch(key);
       return ok;
     },
-    del(key) { if (ls.get(key) == null) return; ls.del(key); this.touch(key); },
+    del(key) { if (ls.get(key) == null || this.paused(key)) return; ls.del(key); this.touch(key); },
     touch(key) {
       const acc = key.slice(P.length).split(':')[0];
       const mk = `${P}${acc}:meta:mtime`; const m = jget(mk, {}); m[key.slice((P + acc + ':').length)] = Date.now(); jset(mk, m);
@@ -1020,7 +1023,7 @@
       obj = this.validate(obj);
       await this.restorePoint(targetAcc, 'Before restore ' + new Date().toLocaleString());
       const pre = `${P}${targetAcc}:`;
-      if (mode === 'replace') ls.keys(pre).forEach(k => { if (!k.slice(pre.length).startsWith('meta:')) ls.del(k); });
+      if (mode === 'replace') ls.keys(pre).forEach(k => { if (!k.slice(pre.length).startsWith('meta:') && !(k.slice(pre.length) in obj.data)) KV.del(k); });   // a synced account deletes them in the cloud too
       for (const [suf, val] of Object.entries(obj.data)) {
         let v = val;
         if (suf === 'a:settings') { try { const nv = JSON.parse(val); if (obj.includesSecrets && nv.apiKey) GeminiKey.set(targetAcc, nv.apiKey); delete nv.apiKey; v = JSON.stringify(nv); } catch (e) { } }   // without secrets: this device's key stays
@@ -1091,6 +1094,34 @@
     async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s && s.id !== Noema.subject.id) Noema.switchTo(Noema.account.id, s.id); },
     async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== Noema.account.id) Noema.switchTo(a.id, null); },
   };
+
+  /* ---------------- "in use on another device" (engine/cloud.js lease) ----------------
+     Shown while another tab or device is being used right now. Nothing is saved here meanwhile, so the two can never
+     undo each other's progress; "Use here" pauses the other one and brings in what it did. */
+  let inUse = null;
+  function showInUse({ holder, unsynced }) {
+    const where = holder?.sameDevice ? tr('inuse.otherTab') : (holder?.name || tr('inuse.otherDevice'));
+    const draw = (box, busy) => {
+      box.innerHTML = '';
+      box.append(el('div', { class: 'noema-inuse-dot' }),
+        el('h2', {}, tr('inuse.title', { where })),
+        el('p', {}, tr('inuse.why')),
+        el('button', { class: 'btn primary', disabled: busy || null, onclick: async () => {
+          draw(box, true);
+          const st = await NoemaCloud.lease.check({ take: true });
+          if (st === 'mine') toastL(tr('inuse.continued')); else { draw(box, false); toastL(tr('inuse.offline'), 4000); }
+        } }, tr('inuse.use')),
+        el('p', { class: 'muted small' }, tr('inuse.useNote', { where })),
+        el('p', { class: 'muted small' }, tr('inuse.stay', { where })),
+        unsynced ? el('p', { class: 'muted small' }, tr('inuse.offlineWork')) : null);
+    };
+    if (!inUse) { inUse = el('div', { class: 'noema-overlay noema-inuse-ov', role: 'dialog', 'aria-modal': 'true' }, el('div', { class: 'noema-ovbox noema-inuse' })); document.body.append(inUse); }
+    draw(inUse.firstChild, false);
+  }
+  addEventListener('noema:inuse', e => {
+    if (e.detail?.state === 'other') return showInUse(e.detail);
+    if (inUse) { const o = inUse; inUse = null; o.classList.add('out'); setTimeout(() => o.remove(), 250); }
+  });
 
   /* ---------------- boot ---------------- */
   async function start() {

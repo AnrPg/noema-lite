@@ -21,6 +21,8 @@ Note: anyone who has the website address can open the shared study material (not
 5. From now on: when Claude has made changes, open GitHub Desktop → **Push origin**. (Claude commits; you push.)
 
 ## 2. Supabase (accounts + sync)
+
+How devices stay in sync without overwriting each other (version-checked saves, combining, one device at a time): [docs/SYNC.md](../docs/SYNC.md).
 1. https://supabase.com → *Start your project* → sign in with GitHub → **New project** (name `noema-lite`, region *Frankfurt (eu-central-1)*, generate a DB password and store it in your password manager).
 2. When ready: left menu **SQL Editor** → *New query* → paste the whole content of `cloud/supabase.sql` → **Run**.
    The last result lists the 6 `noema_` tables with `rls_enabled = true` (plus the storage buckets `noema-private`, `noema-public`, `noema-shared`). The script is idempotent: run it again after every update of the file.

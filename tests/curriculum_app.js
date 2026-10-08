@@ -110,7 +110,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   await p.click('.cm-appbar button:has-text("How?")'); await p.click('.cm-checknow'); await wait(800);
   ok(await until(() => p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return Object.values(c.nodes).every(n => n.chapters.length) && c.stage === 'done'; }, cid), 8000), '⟳ Check now → every step has its chapters; stage “done”');
   // an older copy of the curriculum (another device, a background save) must not drop the accepted chapter plans:
-  // the record is synced whole, last write wins — so plans are merged step by step on every pull and push
+  // an older app or the connector may write the record whole — so plans are merged step by step on every pull and push
   {
     const ck = 'a:curriculum:' + cid, row = kvOf(uid)[ck], old = JSON.parse(row.value), strip = Object.keys(old.nodes).slice(0, 3);
     for (const id of strip) { delete old.nodes[id].chapters; delete old.nodes[id].learningGoals; delete old.nodes[id].plannedAt; }
@@ -126,8 +126,8 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
     r = await tool('noema_curricula'); ok(!/need their chapter plan/.test(r.text), 'the connector still sees every step planned');
     // the merged copy goes out NEWER than the stale row it replaces (devices that saw that row take it), and stays due after a reload
     const stale = Date.now() + 2 * 864e5; old.stage = 'plan'; srv.state.kv[uid][ck] = { value: JSON.stringify(old), updated_at: new Date(stale).toISOString() };
-    const mtAfterPull = await p.evaluate(async k => { await NoemaCloud.pull(); return JSON.parse(localStorage.getItem('noema1:' + Noema.account.id + ':meta:mtime'))[k]; }, ck);
-    ok(mtAfterPull > stale, 'a pull that merges plans in marks the copy newer than the cloud row (so it is pushed even after a reload)');
+    const dueAfterPull = await p.evaluate(async k => { await NoemaCloud.pull(); return k in JSON.parse(localStorage.getItem('noema1:' + Noema.account.id + ':meta:unsynced') || '{}'); }, ck);
+    ok(dueAfterPull, 'a pull that merges plans in marks the copy as waiting to sync (so it is pushed even after a reload)');
     await p.evaluate(() => NoemaCloud.push());
     ok(Date.parse(kvOf(uid)[ck].updated_at) > stale && planned(JSON.parse(kvOf(uid)[ck].value)), 'pushed with a later timestamp than the stale row, every plan kept');
     // stamps only move forward: a plan accepted under a re-plan stamped “in the future” (clock drift) still wins the merge
@@ -346,7 +346,7 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   console.log('— E. ❓ Set up Claude → way C; phone');
   const sv = await p.evaluate(() => { const d = Noema.claudeSetupView(Noema.account.id, { open: 'C' }); document.body.append(d); const c = d.querySelector('.cg-way-c'); const t = { open: c.open, text: c.innerText, order: [...d.querySelectorAll('.cg-way > summary b')].map(b => b.textContent.slice(0, 2)) }; d.remove(); return t; });
   ok(sv.open && /recommended for curricula/.test(sv.text) && /usually the cheapest/.test(sv.text) && /Add custom connector/.test(sv.text) && /Copy the message/.test(sv.text) && sv.order.length === 3, '❓ Set up Claude has a 3rd way, C — ⭐ recommended for curricula (usually the cheapest), with its own steps');
-  const ph = await ctx.newPage(); await ph.setViewportSize({ width: 390, height: 844 }); await ph.goto(BASE + '/'); await wait(1200);
+  const ph = await ctx.newPage(); await ph.setViewportSize({ width: 390, height: 844 }); await ph.goto(BASE + '/'); await wait(1200); if (await ph.isVisible('.noema-inuse')) { await ph.click('.noema-inuse .btn'); await wait(1000); }   // the first window is still in use: continue here
   await ph.evaluate(id => NoemaCurMap.map(Noema.account.id, id, { appHelp: true }), cid3).catch(() => { }); await wait(800);
   ok(await ph.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.cm-apppanel, .cm-appbar')].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), 'phone: the Claude-app panel fits');
   await ph.screenshot({ path: SHOTS + '/ca2_phone.png' });
