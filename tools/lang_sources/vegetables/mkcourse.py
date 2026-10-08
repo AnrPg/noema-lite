@@ -28,6 +28,7 @@ for t in (1, 2, 3):
     for i, v in enumerate(tv):
         c = {"id": v['id'], "gloss": v['gloss'], "subgroup": v['subgroup'], "tier": t, "rank": i + 1}
         if v.get('qid'): c['wikidata'] = v['qid']
+        if v.get('enwiki') and v['enwiki'].lower() not in v['gloss'].lower(): c['aka'] = v['enwiki']   # the Wikipedia title (often the scientific name): the reference check reads it too
         concepts.append(c)
 w('core/fields/food.vegetables.json', {"field": "food.vegetables", "title": "Vegetables", "subgroups": [{"id": a, "title": b} for a, b in SUB],
   "sources": ["Wikipedia, “List of vegetables” (retrieved 2026-10-08)", "Wikidata: item ids; the number of Wikipedia editions per item as the measure of how widely known a vegetable is (tiers and ranks)",

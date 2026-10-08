@@ -22,6 +22,10 @@
   ],
   "punct": [
    "?"
+  ],
+  "exclude": [
+   "he:ma",
+   "he:eifo"
   ]
  },
  "paradigmCells": [],

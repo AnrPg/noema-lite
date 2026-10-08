@@ -1,0 +1,5402 @@
+{
+ "sentences": [
+  {
+   "id": "de.s3.001",
+   "frame": "fr.buy.indef",
+   "text": "Sie kauft Kurkuma.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Kurkuma",
+     "l": "de:Kurkuma",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "She buys turmeric.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.002",
+   "frame": "fr.where.def",
+   "text": "Wo ist die Kurkuma?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Kurkuma",
+     "l": "de:Kurkuma",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the turmeric?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.003",
+   "frame": "fr.like.generic",
+   "text": "Du magst Kurkuma.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Kurkuma",
+     "l": "de:Kurkuma",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "You like turmeric.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.004",
+   "frame": "fr.like.generic",
+   "text": "Magst du Kurkuma?",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Kurkuma",
+     "l": "de:Kurkuma",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.s3.003",
+   "gloss": "Do you like turmeric?",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.s3.005",
+   "frame": "fr.like.generic",
+   "text": "Wir mögen Borretsch.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Borretsch",
+     "l": "de:Borretsch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "We like borage.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.006",
+   "frame": "fr.notlike.generic",
+   "text": "Er mag keinen Borretsch.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Borretsch",
+     "l": "de:Borretsch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "He doesn’t like borage.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.007",
+   "frame": "fr.here.def",
+   "text": "Der Borretsch ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Borretsch",
+     "l": "de:Borretsch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The borage is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.008",
+   "frame": "fr.this.is",
+   "text": "Das ist Gänsefuß.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Gänsefuß",
+     "l": "de:Gänsefuß",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "This is fat hen.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.009",
+   "frame": "fr.this.is",
+   "text": "Das ist kein Gänsefuß.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Gänsefuß",
+     "l": "de:Gänsefuß",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": "de.s3.008",
+   "gloss": "This is not fat hen.",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.s3.010",
+   "frame": "fr.eat.def",
+   "text": "Sie essen den Gänsefuß.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Gänsefuß",
+     "l": "de:Gänsefuß",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "They eat the fat hen.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.011",
+   "frame": "fr.buy.indef",
+   "text": "Ich kaufe eine Klettenwurzel.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Klettenwurzel",
+     "l": "de:Klettenwurzel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I buy a burdock root.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.012",
+   "frame": "fr.here.def",
+   "text": "Die Klettenwurzeln sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Klettenwurzeln",
+     "l": "de:Klettenwurzel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The burdock roots are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.013",
+   "frame": "fr.notlike.generic",
+   "text": "Du magst keinen Wasabi.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Wasabi",
+     "l": "de:Wasabi",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "You don’t like wasabi.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.014",
+   "frame": "fr.want.q",
+   "text": "Wollen Sie Wasabi?",
+   "tokens": [
+    {
+     "t": "Wollen",
+     "l": "de:wollen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Wasabi",
+     "l": "de:Wasabi",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want wasabi?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.015",
+   "frame": "fr.where.def",
+   "text": "Wo ist der Wasabi?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Wasabi",
+     "l": "de:Wasabi",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the wasabi?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.016",
+   "frame": "fr.have.indef",
+   "text": "Wir haben eine Winterzwiebel.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Winterzwiebel",
+     "l": "de:Winterzwiebel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "We have a Welsh onion.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.017",
+   "frame": "fr.like.generic",
+   "text": "Sie mag Winterzwiebeln.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Winterzwiebeln",
+     "l": "de:Winterzwiebel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "She likes Welsh onions.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.018",
+   "frame": "fr.like.generic",
+   "text": "Ich mag Rhabarber.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Rhabarber",
+     "l": "de:Rhabarber",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "I like rhubarb.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.019",
+   "frame": "fr.eat.def",
+   "text": "Wir essen den Rhabarber.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Rhabarber",
+     "l": "de:Rhabarber",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "We eat the rhubarb.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.020",
+   "frame": "fr.eat.def",
+   "text": "Wir essen den Rhabarber nicht.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Rhabarber",
+     "l": "de:Rhabarber",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "variantOf": "de.s3.019",
+   "gloss": "We don’t eat the rhubarb.",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.s3.021",
+   "frame": "fr.buy.indef",
+   "text": "Er kauft Rhabarber.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Rhabarber",
+     "l": "de:Rhabarber",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "He buys rhubarb.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.022",
+   "frame": "fr.like.generic",
+   "text": "Wir mögen Wasserkastanien.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Wasserkastanien",
+     "l": "de:Wasserkastanie",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We like water chestnuts.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.023",
+   "frame": "fr.where.def",
+   "text": "Wo sind die Wasserkastanien?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Wasserkastanien",
+     "l": "de:Wasserkastanie",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Where are the water chestnuts?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.024",
+   "frame": "fr.this.is",
+   "text": "Das sind Wasserkastanien.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Wasserkastanien",
+     "l": "de:Wasserkastanie",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "These are water chestnuts.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.025",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Wassernuss.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wassernuss",
+     "l": "de:Wassernuss",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "This is a water caltrop.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.026",
+   "frame": "fr.this.is",
+   "text": "Ist das eine Wassernuss?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Wassernuss",
+     "l": "de:Wassernuss",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.s3.025",
+   "gloss": "Is this a water caltrop?",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.s3.027",
+   "frame": "fr.have.indef",
+   "text": "Sie haben eine Wassernuss.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Wassernuss",
+     "l": "de:Wassernuss",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "They have a water caltrop.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.028",
+   "frame": "fr.buy.indef",
+   "text": "Du kaufst eine Yambohne.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Yambohne",
+     "l": "de:Yambohne",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "You buy a jícama.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.029",
+   "frame": "fr.eat.def",
+   "text": "Er isst die Yambohne.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Yambohne",
+     "l": "de:Yambohne",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "He eats the jícama.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.030",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Kardone.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Kardone",
+     "l": "de:Kardone",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "This is a cardoon.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.031",
+   "frame": "fr.notlike.generic",
+   "text": "Sie mag keine Kardonen.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kardonen",
+     "l": "de:Kardone",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "She doesn’t like cardoons.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.032",
+   "frame": "fr.like.generic",
+   "text": "Sie mögen Erdmandeln.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Erdmandeln",
+     "l": "de:Erdmandel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "They like tiger nuts.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.033",
+   "frame": "fr.want.q",
+   "text": "Willst du Erdmandeln?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Erdmandeln",
+     "l": "de:Erdmandel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want tiger nuts?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.034",
+   "frame": "fr.here.def",
+   "text": "Die Erdmandeln sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Erdmandeln",
+     "l": "de:Erdmandel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The tiger nuts are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.035",
+   "frame": "fr.here.def",
+   "text": "Der Malabarspinat ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Malabarspinat",
+     "l": "de:Malabarspinat",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The Malabar spinach is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.036",
+   "frame": "fr.have.indef",
+   "text": "Ich habe Malabarspinat.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Malabarspinat",
+     "l": "de:Malabarspinat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "I have Malabar spinach.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.037",
+   "frame": "fr.buy.indef",
+   "text": "Ich kaufe Galgant.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Galgant",
+     "l": "de:Galgant",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "I buy galangal.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.038",
+   "frame": "fr.where.def",
+   "text": "Wo ist der Galgant?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Galgant",
+     "l": "de:Galgant",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the galangal?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.039",
+   "frame": "fr.notlike.generic",
+   "text": "Wir mögen keinen Galgant.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Galgant",
+     "l": "de:Galgant",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "We don’t like galangal.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.040",
+   "frame": "fr.this.is",
+   "text": "Das ist Gartenmelde.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Gartenmelde",
+     "l": "de:Gartenmelde",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "This is orache.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.041",
+   "frame": "fr.eat.def",
+   "text": "Du isst die Gartenmelde.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Gartenmelde",
+     "l": "de:Gartenmelde",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "You eat the orache.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.042",
+   "frame": "fr.this.is",
+   "text": "Das ist Guter Heinrich.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Guter Heinrich",
+     "l": "de:Guter_Heinrich",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "This is Good King Henry.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.043",
+   "frame": "fr.like.generic",
+   "text": "Er mag Guten Heinrich.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Guten Heinrich",
+     "l": "de:Guter_Heinrich",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "He likes Good King Henry.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.044",
+   "frame": "fr.here.def",
+   "text": "Der Gute Heinrich ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Gute Heinrich",
+     "l": "de:Guter_Heinrich",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The Good King Henry is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.045",
+   "frame": "fr.have.indef",
+   "text": "Du hast eine Konjakwurzel.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Konjakwurzel",
+     "l": "de:Konjakwurzel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "You have a konjac root.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.046",
+   "frame": "fr.have.indef",
+   "text": "Hast du eine Konjakwurzel?",
+   "tokens": [
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Konjakwurzel",
+     "l": "de:Konjakwurzel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.s3.045",
+   "gloss": "Do you have a konjac root?",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.s3.047",
+   "frame": "fr.where.def",
+   "text": "Wo ist die Konjakwurzel?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Konjakwurzel",
+     "l": "de:Konjakwurzel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the konjac root?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.048",
+   "frame": "fr.like.generic",
+   "text": "Sie mag Meerfenchel.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Meerfenchel",
+     "l": "de:Meerfenchel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "She likes sea fennel.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.049",
+   "frame": "fr.here.def",
+   "text": "Der Meerfenchel ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Meerfenchel",
+     "l": "de:Meerfenchel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The sea fennel is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.050",
+   "frame": "fr.buy.indef",
+   "text": "Wir kaufen Queller.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Queller",
+     "l": "de:Queller",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "We buy glasswort.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.051",
+   "frame": "fr.eat.def",
+   "text": "Ich esse den Queller.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Queller",
+     "l": "de:Queller",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I eat the glasswort.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.052",
+   "frame": "fr.like.generic",
+   "text": "Wir mögen Neuseeländer Spinat.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Neuseeländer Spinat",
+     "l": "de:Neuseeländer_Spinat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "We like New Zealand spinach.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.053",
+   "frame": "fr.where.def",
+   "text": "Wo ist der Neuseeländer Spinat?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Neuseeländer Spinat",
+     "l": "de:Neuseeländer_Spinat",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the New Zealand spinach?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.054",
+   "frame": "fr.like.generic",
+   "text": "Ich mag Palmherzen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Palmherzen",
+     "l": "de:Palmherz",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I like hearts of palm.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.055",
+   "frame": "fr.here.def",
+   "text": "Die Palmherzen sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Palmherzen",
+     "l": "de:Palmherz",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The hearts of palm are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.056",
+   "frame": "fr.here.def",
+   "text": "Die Palmherzen sind nicht hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Palmherzen",
+     "l": "de:Palmherz",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "nicht",
+     "l": "de:nicht"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": "de.s3.055",
+   "gloss": "The hearts of palm are not here.",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.s3.057",
+   "frame": "fr.buy.indef",
+   "text": "Sie kauft Haferwurzeln.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Haferwurzeln",
+     "l": "de:Haferwurzel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "She buys salsify roots.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.058",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Haferwurzel.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Haferwurzel",
+     "l": "de:Haferwurzel",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "This is a salsify root.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.059",
+   "frame": "fr.this.is",
+   "text": "Das sind Zuckerwurzeln.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Zuckerwurzeln",
+     "l": "de:Zuckerwurzel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "These are skirret roots.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.060",
+   "frame": "fr.notlike.generic",
+   "text": "Ich mag keine Zuckerwurzeln.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Zuckerwurzeln",
+     "l": "de:Zuckerwurzel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I don’t like skirret roots.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.061",
+   "frame": "fr.want.q",
+   "text": "Willst du Knollenziest?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Knollenziest",
+     "l": "de:Knollenziest",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want Chinese artichoke?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.062",
+   "frame": "fr.here.def",
+   "text": "Der Knollenziest ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Knollenziest",
+     "l": "de:Knollenziest",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The Chinese artichoke is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.063",
+   "frame": "fr.like.generic",
+   "text": "Sie mögen Amarant.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Amarant",
+     "l": "de:Amarant",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "They like amaranth.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.064",
+   "frame": "fr.this.is",
+   "text": "Das ist Amarant.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Amarant",
+     "l": "de:Amarant",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "This is amaranth.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.065",
+   "frame": "fr.this.is",
+   "text": "Das ist kein Amarant.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Amarant",
+     "l": "de:Amarant",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": "de.s3.064",
+   "gloss": "This is not amaranth.",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.s3.066",
+   "frame": "fr.eat.def",
+   "text": "Wir essen die Winterkresse.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Winterkresse",
+     "l": "de:Winterkresse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "We eat the land cress.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.067",
+   "frame": "fr.buy.indef",
+   "text": "Du kaufst Winterkresse.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Winterkresse",
+     "l": "de:Winterkresse",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "You buy land cress.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.068",
+   "frame": "fr.have.indef",
+   "text": "Er hat eine Etagenzwiebel.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Etagenzwiebel",
+     "l": "de:Etagenzwiebel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "He has a tree onion.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.069",
+   "frame": "fr.this.is",
+   "text": "Das sind Etagenzwiebeln.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Etagenzwiebeln",
+     "l": "de:Etagenzwiebel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "These are tree onions.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.070",
+   "frame": "fr.where.def",
+   "text": "Wo ist der Spargelsalat?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Spargelsalat",
+     "l": "de:Spargelsalat",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the celtuce?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.071",
+   "frame": "fr.eat.def",
+   "text": "Sie isst den Spargelsalat.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spargelsalat",
+     "l": "de:Spargelsalat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "She eats the celtuce.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.072",
+   "frame": "fr.like.generic",
+   "text": "Magst du Perlzwiebeln?",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Perlzwiebeln",
+     "l": "de:Perlzwiebel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you like pearl onions?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.073",
+   "frame": "fr.notlike.generic",
+   "text": "Er mag keine Perlzwiebeln.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Perlzwiebeln",
+     "l": "de:Perlzwiebel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "He doesn’t like pearl onions.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.074",
+   "frame": "fr.buy.indef",
+   "text": "Sie kaufen Elefantenknoblauch.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Elefantenknoblauch",
+     "l": "de:Elefantenknoblauch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "They buy elephant garlic.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.075",
+   "frame": "fr.want.q",
+   "text": "Wollen Sie Elefantenknoblauch?",
+   "tokens": [
+    {
+     "t": "Wollen",
+     "l": "de:wollen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Elefantenknoblauch",
+     "l": "de:Elefantenknoblauch",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want elephant garlic?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.076",
+   "frame": "fr.here.def",
+   "text": "Der Elefantenknoblauch ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Elefantenknoblauch",
+     "l": "de:Elefantenknoblauch",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The elephant garlic is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.077",
+   "frame": "fr.buy.indef",
+   "text": "Wir kaufen eine Petersilienwurzel.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Petersilienwurzel",
+     "l": "de:Petersilienwurzel",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "We buy a parsley root.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.078",
+   "frame": "fr.eat.def",
+   "text": "Ich esse die Petersilienwurzeln.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Petersilienwurzeln",
+     "l": "de:Petersilienwurzel",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I eat the parsley roots.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.079",
+   "frame": "fr.where.def",
+   "text": "Wo sind die Petersilienwurzeln?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Petersilienwurzeln",
+     "l": "de:Petersilienwurzel",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Where are the parsley roots?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.080",
+   "frame": "fr.like.generic",
+   "text": "Ich mag Kapern.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Kapern",
+     "l": "de:Kaper",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I like capers.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.081",
+   "frame": "fr.notlike.generic",
+   "text": "Sie mag keine Kapern.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Kapern",
+     "l": "de:Kaper",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "She doesn’t like capers.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.082",
+   "frame": "fr.where.def",
+   "text": "Wo sind die Kapern?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Kapern",
+     "l": "de:Kaper",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Where are the capers?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.083",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Horngurke.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Horngurke",
+     "l": "de:Horngurke",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "This is a horned melon.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.084",
+   "frame": "fr.this.is",
+   "text": "Ist das eine Horngurke?",
+   "tokens": [
+    {
+     "t": "Ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Horngurke",
+     "l": "de:Horngurke",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.s3.083",
+   "gloss": "Is this a horned melon?",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.s3.085",
+   "frame": "fr.buy.indef",
+   "text": "Er kauft eine Horngurke.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Horngurke",
+     "l": "de:Horngurke",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "He buys a horned melon.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.086",
+   "frame": "fr.eat.def",
+   "text": "Wir essen die Limabohnen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Limabohnen",
+     "l": "de:Limabohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We eat the lima beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.087",
+   "frame": "fr.want.q",
+   "text": "Wollen Sie Limabohnen?",
+   "tokens": [
+    {
+     "t": "Wollen",
+     "l": "de:wollen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Sie",
+     "l": "de:Sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Limabohnen",
+     "l": "de:Limabohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want lima beans?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.088",
+   "frame": "fr.buy.indef",
+   "text": "Ich kaufe einen Wirsing.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Wirsing",
+     "l": "de:Wirsing",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I buy a Savoy cabbage.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.089",
+   "frame": "fr.have.indef",
+   "text": "Sie haben einen Wirsing.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Wirsing",
+     "l": "de:Wirsing",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "They have a Savoy cabbage.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.090",
+   "frame": "fr.here.def",
+   "text": "Der Wirsing ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Wirsing",
+     "l": "de:Wirsing",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The Savoy cabbage is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.091",
+   "frame": "fr.this.is",
+   "text": "Das sind Guarbohnen.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Guarbohnen",
+     "l": "de:Guarbohne",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "These are guar beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.092",
+   "frame": "fr.like.generic",
+   "text": "Sie mag Guarbohnen.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Guarbohnen",
+     "l": "de:Guarbohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "She likes guar beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.093",
+   "frame": "fr.have.indef",
+   "text": "Ich habe ein Noriblatt.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Noriblatt",
+     "l": "de:Noriblatt",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I have a nori sheet.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.094",
+   "frame": "fr.have.indef",
+   "text": "Ich habe kein Noriblatt.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;NEUT"
+    },
+    {
+     "t": "Noriblatt",
+     "l": "de:Noriblatt",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": "de.s3.093",
+   "gloss": "I don’t have a nori sheet.",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.s3.095",
+   "frame": "fr.where.def",
+   "text": "Wo sind die Noriblätter?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Noriblätter",
+     "l": "de:Noriblatt",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Where are the nori sheets?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.096",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Goabohne.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Goabohne",
+     "l": "de:Goabohne",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "This is a winged bean.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.097",
+   "frame": "fr.eat.def",
+   "text": "Sie essen die Goabohnen.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Goabohnen",
+     "l": "de:Goabohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "They eat the winged beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.098",
+   "frame": "fr.buy.indef",
+   "text": "Wir kaufen Tomatillos.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Tomatillos",
+     "l": "de:Tomatillo",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We buy tomatillos.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.099",
+   "frame": "fr.here.def",
+   "text": "Die Tomatillos sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Tomatillos",
+     "l": "de:Tomatillo",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The tomatillos are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.100",
+   "frame": "fr.this.is",
+   "text": "Das ist keine Tomatillo.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Tomatillo",
+     "l": "de:Tomatillo",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "This is not a tomatillo.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.101",
+   "frame": "fr.buy.indef",
+   "text": "Du kaufst Spargelbohnen.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufst",
+     "l": "de:kaufen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "Spargelbohnen",
+     "l": "de:Spargelbohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "You buy yardlong beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.102",
+   "frame": "fr.like.generic",
+   "text": "Er mag Spargelbohnen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Spargelbohnen",
+     "l": "de:Spargelbohne",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "He likes yardlong beans.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.103",
+   "frame": "fr.buy.indef",
+   "text": "Sie kauft einen Romanesco.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Romanesco",
+     "l": "de:Romanesco",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "She buys a Romanesco.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.104",
+   "frame": "fr.eat.def",
+   "text": "Wir essen den Romanesco.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Romanesco",
+     "l": "de:Romanesco",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "We eat the Romanesco.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.105",
+   "frame": "fr.like.generic",
+   "text": "Ich mag Romanesco.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Romanesco",
+     "l": "de:Romanesco",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "I like Romanesco.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.106",
+   "frame": "fr.notlike.generic",
+   "text": "Sie mögen keinen Cayennepfeffer.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "keinen",
+     "l": "de:kein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Cayennepfeffer",
+     "l": "de:Cayennepfeffer",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "They don’t like cayenne pepper.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.107",
+   "frame": "fr.where.def",
+   "text": "Wo ist der Cayennepfeffer?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Cayennepfeffer",
+     "l": "de:Cayennepfeffer",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the cayenne pepper?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.108",
+   "frame": "fr.this.is",
+   "text": "Das ist Meerkohl.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Meerkohl",
+     "l": "de:Meerkohl",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "This is sea kale.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.109",
+   "frame": "fr.eat.def",
+   "text": "Er isst den Meerkohl.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Meerkohl",
+     "l": "de:Meerkohl",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "He eats the sea kale.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.110",
+   "frame": "fr.notlike.generic",
+   "text": "Ich mag keine Habaneros.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Habaneros",
+     "l": "de:Habanero",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I don’t like habaneros.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.111",
+   "frame": "fr.want.q",
+   "text": "Willst du eine Habanero?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Habanero",
+     "l": "de:Habanero",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want a habanero?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.112",
+   "frame": "fr.want.q",
+   "text": "Willst du Habaneros?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Habaneros",
+     "l": "de:Habanero",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.s3.111",
+   "gloss": "Do you want habaneros?",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Number": "PL"
+   }
+  },
+  {
+   "id": "de.s3.113",
+   "frame": "fr.here.def",
+   "text": "Die Habaneros sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Habaneros",
+     "l": "de:Habanero",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The habaneros are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.114",
+   "frame": "fr.like.generic",
+   "text": "Wir mögen Wakame-Algen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Wakame-Algen",
+     "l": "de:Wakame-Alge",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We like wakame.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.115",
+   "frame": "fr.where.def",
+   "text": "Wo sind die Wakame-Algen?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Wakame-Algen",
+     "l": "de:Wakame-Alge",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the wakame?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.116",
+   "frame": "fr.this.is",
+   "text": "Das ist eine Schlangenhaargurke.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Schlangenhaargurke",
+     "l": "de:Schlangenhaargurke",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "This is a snake gourd.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.117",
+   "frame": "fr.have.indef",
+   "text": "Sie hat eine Schlangenhaargurke.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hat",
+     "l": "de:haben",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "eine",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;FEM"
+    },
+    {
+     "t": "Schlangenhaargurke",
+     "l": "de:Schlangenhaargurke",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "She has a snake gourd.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.118",
+   "frame": "fr.have.indef",
+   "text": "Wir haben Kombu.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "haben",
+     "l": "de:haben",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "Kombu",
+     "l": "de:Kombu",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "We have kombu.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.119",
+   "frame": "fr.here.def",
+   "text": "Der Kombu ist hier.",
+   "tokens": [
+    {
+     "t": "Der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Kombu",
+     "l": "de:Kombu",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "The kombu is here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.120",
+   "frame": "fr.this.is",
+   "text": "Das ist Meersalat.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Meersalat",
+     "l": "de:Meersalat",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "This is sea lettuce.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.121",
+   "frame": "fr.like.generic",
+   "text": "Sie mögen Meersalat.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Meersalat",
+     "l": "de:Meersalat",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "They like sea lettuce.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.122",
+   "frame": "fr.want.q",
+   "text": "Willst du Lappentang?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Lappentang",
+     "l": "de:Lappentang",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want dulse?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.123",
+   "frame": "fr.this.is",
+   "text": "Das ist Lappentang.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Lappentang",
+     "l": "de:Lappentang",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "This is dulse.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.124",
+   "frame": "fr.this.is",
+   "text": "Das ist kein Lappentang.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "kein",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Lappentang",
+     "l": "de:Lappentang",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": "de.s3.123",
+   "gloss": "This is not dulse.",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Polarity": "NEG"
+   }
+  },
+  {
+   "id": "de.s3.125",
+   "frame": "fr.like.generic",
+   "text": "Magst du Edamame?",
+   "tokens": [
+    {
+     "t": "Magst",
+     "l": "de:mögen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Edamame",
+     "l": "de:Edamame",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you like edamame?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.126",
+   "frame": "fr.here.def",
+   "text": "Die Edamame sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Edamame",
+     "l": "de:Edamame",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The edamame are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.127",
+   "frame": "fr.buy.indef",
+   "text": "Ich kaufe Edamame.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufe",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Edamame",
+     "l": "de:Edamame",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I buy edamame.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.128",
+   "frame": "fr.buy.indef",
+   "text": "Er kauft einen Patisson.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kauft",
+     "l": "de:kaufen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Patisson",
+     "l": "de:Patisson",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "He buys a pattypan squash.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.129",
+   "frame": "fr.this.is",
+   "text": "Das sind Patissons.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "Patissons",
+     "l": "de:Patisson",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "These are pattypan squashes.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.130",
+   "frame": "fr.notlike.generic",
+   "text": "Wir mögen keine Hijiki-Algen.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mögen",
+     "l": "de:mögen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Hijiki-Algen",
+     "l": "de:Hijiki-Alge",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We don’t like hijiki.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.131",
+   "frame": "fr.where.def",
+   "text": "Wo sind die Hijiki-Algen?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Hijiki-Algen",
+     "l": "de:Hijiki-Alge",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the hijiki?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.132",
+   "frame": "fr.eat.def",
+   "text": "Ich esse den Stängelkohl.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "esse",
+     "l": "de:essen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Stängelkohl",
+     "l": "de:Stängelkohl",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I eat the broccoli rabe.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.133",
+   "frame": "fr.like.generic",
+   "text": "Sie mag Stängelkohl.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Stängelkohl",
+     "l": "de:Stängelkohl",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "variantOf": null,
+   "gloss": "She likes broccoli rabe.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.134",
+   "frame": "fr.have.indef",
+   "text": "Du hast einen Spaghettikürbis.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spaghettikürbis",
+     "l": "de:Spaghettikürbis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "You have a spaghetti squash.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.135",
+   "frame": "fr.have.indef",
+   "text": "Hast du einen Spaghettikürbis?",
+   "tokens": [
+    {
+     "t": "Hast",
+     "l": "de:haben",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spaghettikürbis",
+     "l": "de:Spaghettikürbis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "variantOf": "de.s3.134",
+   "gloss": "Do you have a spaghetti squash?",
+   "alts": [],
+   "level": "A2",
+   "variant": {
+    "Mood": "INT"
+   }
+  },
+  {
+   "id": "de.s3.136",
+   "frame": "fr.eat.def",
+   "text": "Sie essen den Spaghettikürbis.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie.pl",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "den",
+     "l": "de:der",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spaghettikürbis",
+     "l": "de:Spaghettikürbis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "They eat the spaghetti squash.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.137",
+   "frame": "fr.like.generic",
+   "text": "Sie mag Zucchiniblüten.",
+   "tokens": [
+    {
+     "t": "Sie",
+     "l": "de:sie",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "Zucchiniblüten",
+     "l": "de:Zucchiniblüte",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "She likes zucchini flowers.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.138",
+   "frame": "fr.here.def",
+   "text": "Die Zucchiniblüten sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Zucchiniblüten",
+     "l": "de:Zucchiniblüte",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The zucchini flowers are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.139",
+   "frame": "fr.eat.def",
+   "text": "Wir essen die Zucchiniblüten.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "essen",
+     "l": "de:essen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Zucchiniblüten",
+     "l": "de:Zucchiniblüte",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "We eat the zucchini flowers.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.140",
+   "frame": "fr.buy.indef",
+   "text": "Wir kaufen einen Spitzkohl.",
+   "tokens": [
+    {
+     "t": "Wir",
+     "l": "de:wir",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "kaufen",
+     "l": "de:kaufen",
+     "f": "V;PRS;1;PL"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Spitzkohl",
+     "l": "de:Spitzkohl",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "We buy a pointed cabbage.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.141",
+   "frame": "fr.where.def",
+   "text": "Wo ist der Spitzkohl?",
+   "tokens": [
+    {
+     "t": "Wo",
+     "l": "de:wo"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "der",
+     "l": "de:der",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Spitzkohl",
+     "l": "de:Spitzkohl",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "Where is the pointed cabbage?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.142",
+   "frame": "fr.like.generic",
+   "text": "Ich mag Maiskölbchen.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "Maiskölbchen",
+     "l": "de:Maiskölbchen",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "I like baby corn.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.143",
+   "frame": "fr.want.q",
+   "text": "Willst du Maiskölbchen?",
+   "tokens": [
+    {
+     "t": "Willst",
+     "l": "de:wollen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "Maiskölbchen",
+     "l": "de:Maiskölbchen",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.question.yesno"
+   ],
+   "variantOf": null,
+   "gloss": "Do you want baby corn?",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.144",
+   "frame": "fr.this.is",
+   "text": "Das ist ein Eichelkürbis.",
+   "tokens": [
+    {
+     "t": "Das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "ein",
+     "l": "de:ein",
+     "f": "DET;NOM;SG;MASC"
+    },
+    {
+     "t": "Eichelkürbis",
+     "l": "de:Eichelkürbis",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "This is an acorn squash.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.145",
+   "frame": "fr.have.indef",
+   "text": "Ich habe einen Eichelkürbis.",
+   "tokens": [
+    {
+     "t": "Ich",
+     "l": "de:ich",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "habe",
+     "l": "de:haben",
+     "f": "V;PRS;1;SG"
+    },
+    {
+     "t": "einen",
+     "l": "de:ein",
+     "f": "DET;ACC;SG;MASC"
+    },
+    {
+     "t": "Eichelkürbis",
+     "l": "de:Eichelkürbis",
+     "f": "N;ACC;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "variantOf": null,
+   "gloss": "I have an acorn squash.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.146",
+   "frame": "fr.eat.def",
+   "text": "Du isst die Zuckererbsen.",
+   "tokens": [
+    {
+     "t": "Du",
+     "l": "de:du",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "isst",
+     "l": "de:essen",
+     "f": "V;PRS;2;SG"
+    },
+    {
+     "t": "die",
+     "l": "de:der",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Zuckererbsen",
+     "l": "de:Zuckererbse",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "You eat the sugar snap peas.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.147",
+   "frame": "fr.notlike.generic",
+   "text": "Er mag keine Zuckererbsen.",
+   "tokens": [
+    {
+     "t": "Er",
+     "l": "de:er",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "mag",
+     "l": "de:mögen",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;ACC;PL"
+    },
+    {
+     "t": "Zuckererbsen",
+     "l": "de:Zuckererbse",
+     "f": "N;ACC;PL"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "He doesn’t like sugar snap peas.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.148",
+   "frame": "fr.here.def",
+   "text": "Die Zuckererbsen sind hier.",
+   "tokens": [
+    {
+     "t": "Die",
+     "l": "de:der",
+     "f": "DET;NOM;PL"
+    },
+    {
+     "t": "Zuckererbsen",
+     "l": "de:Zuckererbse",
+     "f": "N;NOM;PL"
+    },
+    {
+     "t": "sind",
+     "l": "de:sein",
+     "f": "V;PRS;3;PL"
+    },
+    {
+     "t": "hier",
+     "l": "de:hier"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "variantOf": null,
+   "gloss": "The sugar snap peas are here.",
+   "alts": [],
+   "level": "A2"
+  },
+  {
+   "id": "de.s3.149",
+   "frame": "fr.this.is",
+   "text": "Nein, das ist keine Kardone.",
+   "tokens": [
+    {
+     "t": "Nein",
+     "l": "de:nein"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "das",
+     "l": "de:das.dem",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "ist",
+     "l": "de:sein",
+     "f": "V;PRS;3;SG"
+    },
+    {
+     "t": "keine",
+     "l": "de:kein",
+     "f": "DET;NOM;SG;FEM"
+    },
+    {
+     "t": "Kardone",
+     "l": "de:Kardone",
+     "f": "N;NOM;SG"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "variantOf": null,
+   "gloss": "No, this is not a cardoon.",
+   "alts": [],
+   "level": "A2"
+  }
+ ]
+}

@@ -67,10 +67,11 @@ def lookup_word(lang, lx):
 def entries_for(lang, lx, offline):
     es = fetch(lang, lookup_word(lang, lx), offline)
     if es is None: return None
-    if not es and lang in ('ar', 'he'):   # Wiktionary titles many words by their full (plene) spelling: קישוא, עגבנייה
+    if lang in ('ar', 'he') and not any(canonical(e) == nfc(lx['lemma']) for e in es):
+        # Wiktionary titles many words by their full (plene) spelling (קישוא, עגבנייה), and the short spelling may be another word (כרכום ≠ כורכום)
         for alt in dict.fromkeys(v for v in (lx.get('plene') or {}).values() if ' ' not in v or ' ' in lx['lemma']):
-            es = fetch(lang, alt, offline) or []
-            if es: break
+            more = fetch(lang, alt, offline) or []
+            if more: es = es + more; break
     if lang in ('he', 'ar'):   # a page that only says "defective spelling of X" / "alternative form of X": read X too
         more = []
         for e in es:
@@ -145,6 +146,8 @@ def check_lexeme(lang, lx, gloss, offline):
             if key in ov or 'all' in ov: res.setdefault('overridden', []).append(f'{p} — {ov.get(key) or ov.get("all")}')
             else: kept.append(p)
         res['problems'] = kept
+        keys = {p.split(': ')[0] for p in res.get('overridden', [])}
+        res['unneeded'] = [k for k in ov if k != 'all' and k not in keys]   # an explanation for a difference that no longer exists
     return res
 
 
@@ -162,8 +165,10 @@ def _check(lang, lx, gloss, offline):
         return res
     lemma = nfc(lx['lemma'])
     same = [e for e in pos_ok if canonical(e) == lemma] if lang in ('ar', 'he') else pos_ok
-    words = [w for w in re.split(r'[^a-z]+', (gloss or '').lower()) if len(w) > 2 and w not in ('the', 'and', 'definite', 'indefinite', 'article')]
-    def means(e): return any(any(w in g.lower().replace('-', '') for w in words) for s in e.get('senses', []) for g in s.get('glosses', []))   # water-cress = watercress
+    fold = lambda t: ''.join(c for c in unicodedata.normalize('NFKD', t.lower()) if not unicodedata.combining(c)).replace('-', '')   # jícama = jicama
+    words = [w for w in re.split(r'[^a-z]+', fold(gloss or '')) if len(w) > 2 and w not in ('the', 'and', 'definite', 'indefinite', 'article')]
+    def means(e):   # whole words (“hen” must not match “Chenopodium”); water-cress = watercress; plural -s/-es allowed
+        return any(any(re.search(r'\b' + re.escape(w) + r'(?:e?s)?\b', fold(g)) for w in words) for s in e.get('senses', []) for g in s.get('glosses', []))
     meant = [e for e in (same or pos_ok) if means(e)] if words else (same or pos_ok)
     pool = meant or same or pos_ok
     if words and not meant: res['problems'].append(f'meaning: no Wiktionary meaning of “{lookup_word(lang, lx)}” mentions “{gloss}”')
@@ -237,7 +242,7 @@ def run(root, only=None, offline=False):
     course = J('course.json'); nodes = J('core/nodes.json')['nodes']
     gloss = {}
     for f in sorted(os.listdir(os.path.join(root, 'core', 'fields'))):
-        for c in J(f'core/fields/{f}')['concepts']: gloss[c['id']] = c.get('gloss', '')
+        for c in J(f'core/fields/{f}')['concepts']: gloss[c['id']] = (c.get('gloss', '') + ' ' + c.get('aka', '')).strip()   # aka: e.g. the scientific name
     report = {}
     for L in course['languages']:
         if only and L != only: continue
@@ -260,7 +265,7 @@ def main(a):
     for lid, r in rep.items():
         mark = '❌' if r['problems'] else '✅'
         if r['problems']: bad += 1
-        print(f'{mark} {lid}: checked {len(r["checked"])} · unverified {len(r["unverified"])}' + ''.join(f'\n     ❌ {p}' for p in r['problems']) + ''.join(f'\n     ↪ {p}' for p in r.get('overridden', [])))
+        print(f'{mark} {lid}: checked {len(r["checked"])} · unverified {len(r["unverified"])}' + ''.join(f'\n     ❌ {p}' for p in r['problems']) + ''.join(f'\n     ↪ {p}' for p in r.get('overridden', [])) + ''.join(f'\n     ⚠️ override “{k}” is not needed any more' for k in r.get('unneeded', [])))
     print(f'\n{"❌ " + str(bad) + " word(s) disagree with Wiktionary" if bad else "✅ no disagreement with Wiktionary"} ({len(rep)} words)')
     sys.exit(1 if bad else 0)
 

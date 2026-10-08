@@ -23,6 +23,12 @@ for (const id of fs.existsSync(LIB) ? fs.readdirSync(LIB) : []) {
     const L = N.newLearner(C); let cards = 0, unknownIn = 0, err = [];
     for (const lid of Object.keys(X.lex)) { try { const c = N.wordCard(C, L, code, lid); cards++; } catch (e) { err.push(lid + ': ' + e.message); } }
     ok(!err.length && cards === Object.keys(X.lex).length, `${code}: ${cards} word cards (${prepared.length} prepared nodes)` + (err.length ? ' — ' + err.slice(0, 3) : ''));
+    if (code === 'de') {
+      const bad = Object.keys(X.lex).filter(id => X.lex[id].pos === 'NOUN').map(id => N.wordCard(C, L, code, id).parts[0]?.[1] || '').filter(p => !/^(der|die|das) /.test(p));
+      ok(!bad.length, 'de: every noun card starts with its article' + (bad.length ? ' — ' + bad.slice(0, 5) : ''));
+      const gh = Object.values(X.lex).find(x => /Heinrich/.test(x.lemma));
+      if (gh) ok(N.wordCard(C, L, code, gh.id).parts[0][1] === 'der Gute Heinrich', 'de: der Gute Heinrich (the form after the article)');
+    }
     const plan = N.planSession(C, L, { day: 0, minutes: 30, languages: [code] });
     ok(plan.steps[0]?.kind === 'learn' && plan.steps[0].node === C.order[0], `${code}: a new learner starts with ${plan.steps[0]?.node} (${plan.steps[0]?.concepts.length} words)`);
   }

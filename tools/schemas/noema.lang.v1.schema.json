@@ -154,6 +154,10 @@
        },
        "note": {
         "type": "string"
+       },
+       "aka": {
+        "type": "string",
+        "description": "another name (e.g. the scientific name / Wikipedia title) — the reference check reads it too"
        }
       }
      }

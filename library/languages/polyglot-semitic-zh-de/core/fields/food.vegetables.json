@@ -304,7 +304,8 @@
    "subgroup": "legume",
    "tier": 2,
    "rank": 7,
-   "wikidata": "Q131342"
+   "wikidata": "Q131342",
+   "aka": "Vicia faba"
   },
   {
    "id": "veg.lotusroot",
@@ -312,7 +313,8 @@
    "subgroup": "stem",
    "tier": 2,
    "rank": 8,
-   "wikidata": "Q16528"
+   "wikidata": "Q16528",
+   "aka": "Nelumbo nucifera"
   },
   {
    "id": "veg.dandelion",
@@ -320,7 +322,8 @@
    "subgroup": "leafy",
    "tier": 2,
    "rank": 9,
-   "wikidata": "Q131219"
+   "wikidata": "Q131219",
+   "aka": "Taraxacum officinale"
   },
   {
    "id": "veg.turnip",
@@ -336,7 +339,8 @@
    "subgroup": "cucurbit",
    "tier": 2,
    "rank": 11,
-   "wikidata": "Q428750"
+   "wikidata": "Q428750",
+   "aka": "Momordica charantia"
   },
   {
    "id": "veg.chicory",
@@ -360,7 +364,8 @@
    "subgroup": "leafy",
    "tier": 2,
    "rank": 14,
-   "wikidata": "Q158015"
+   "wikidata": "Q158015",
+   "aka": "Portulaca oleracea"
   },
   {
    "id": "veg.jerusalemartichoke",
@@ -376,7 +381,8 @@
    "subgroup": "leafy",
    "tier": 2,
    "rank": 16,
-   "wikidata": "Q155909"
+   "wikidata": "Q155909",
+   "aka": "Urtica dioica"
   },
   {
    "id": "veg.wildgarlic",
@@ -384,7 +390,8 @@
    "subgroup": "bulb",
    "tier": 2,
    "rank": 17,
-   "wikidata": "Q130882"
+   "wikidata": "Q130882",
+   "aka": "Allium ursinum"
   },
   {
    "id": "veg.parsnip",
@@ -464,7 +471,8 @@
    "subgroup": "leafy",
    "tier": 2,
    "rank": 27,
-   "wikidata": "Q272754"
+   "wikidata": "Q272754",
+   "aka": "Ipomoea aquatica"
   },
   {
    "id": "veg.chayote",
@@ -488,7 +496,8 @@
    "subgroup": "root",
    "tier": 2,
    "rank": 30,
-   "wikidata": "Q8047551"
+   "wikidata": "Q8047551",
+   "aka": "Yam (vegetable)"
   },
   {
    "id": "veg.wintermelon",
@@ -496,7 +505,8 @@
    "subgroup": "cucurbit",
    "tier": 2,
    "rank": 31,
-   "wikidata": "Q652206"
+   "wikidata": "Q652206",
+   "aka": "Wax gourd"
   },
   {
    "id": "veg.mustardgreens",
@@ -504,7 +514,8 @@
    "subgroup": "leafy",
    "tier": 2,
    "rank": 32,
-   "wikidata": "Q504781"
+   "wikidata": "Q504781",
+   "aka": "Brassica juncea"
   },
   {
    "id": "veg.chard",
@@ -536,7 +547,8 @@
    "subgroup": "leafy",
    "tier": 2,
    "rank": 36,
-   "wikidata": "Q156884"
+   "wikidata": "Q156884",
+   "aka": "Eruca sativa"
   },
   {
    "id": "veg.kale",
@@ -592,7 +604,8 @@
    "subgroup": "bulb",
    "tier": 2,
    "rank": 43,
-   "wikidata": "Q42285"
+   "wikidata": "Q42285",
+   "aka": "Allium tuberosum"
   },
   {
    "id": "veg.runnerbean",
@@ -600,7 +613,8 @@
    "subgroup": "legume",
    "tier": 2,
    "rank": 44,
-   "wikidata": "Q159753"
+   "wikidata": "Q159753",
+   "aka": "Phaseolus coccineus"
   },
   {
    "id": "veg.blacksalsify",
@@ -608,7 +622,8 @@
    "subgroup": "root",
    "tier": 2,
    "rank": 45,
-   "wikidata": "Q385259"
+   "wikidata": "Q385259",
+   "aka": "Scorzonera hispanica"
   },
   {
    "id": "veg.daikon",
@@ -624,7 +639,8 @@
    "subgroup": "leafy",
    "tier": 2,
    "rank": 47,
-   "wikidata": "Q165343"
+   "wikidata": "Q165343",
+   "aka": "Corchorus olitorius"
   },
   {
    "id": "veg.collards",
@@ -632,7 +648,8 @@
    "subgroup": "brassica",
    "tier": 2,
    "rank": 48,
-   "wikidata": "Q14879985"
+   "wikidata": "Q14879985",
+   "aka": "Collard (plant)"
   },
   {
    "id": "veg.cherrytomato",
@@ -656,7 +673,8 @@
    "subgroup": "legume",
    "tier": 2,
    "rank": 51,
-   "wikidata": "Q7635866"
+   "wikidata": "Q7635866",
+   "aka": "Mung bean sprout"
   },
   {
    "id": "veg.romaine",
@@ -728,7 +746,8 @@
    "subgroup": "legume",
    "tier": 3,
    "rank": 2,
-   "wikidata": "Q234193"
+   "wikidata": "Q234193",
+   "aka": "Moringa oleifera"
   },
   {
    "id": "veg.borage",
@@ -752,7 +771,8 @@
    "subgroup": "leafy",
    "tier": 3,
    "rank": 5,
-   "wikidata": "Q158610"
+   "wikidata": "Q158610",
+   "aka": "Chenopodium album"
   },
   {
    "id": "veg.burdock",
@@ -760,7 +780,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 6,
-   "wikidata": "Q26932"
+   "wikidata": "Q26932",
+   "aka": "Arctium lappa"
   },
   {
    "id": "veg.wasabi",
@@ -776,7 +797,8 @@
    "subgroup": "bulb",
    "tier": 3,
    "rank": 8,
-   "wikidata": "Q27938"
+   "wikidata": "Q27938",
+   "aka": "Allium fistulosum"
   },
   {
    "id": "veg.rhubarb",
@@ -792,7 +814,8 @@
    "subgroup": "stem",
    "tier": 3,
    "rank": 10,
-   "wikidata": "Q932664"
+   "wikidata": "Q932664",
+   "aka": "Eleocharis dulcis"
   },
   {
    "id": "veg.watercaltrop",
@@ -808,7 +831,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 12,
-   "wikidata": "Q1932852"
+   "wikidata": "Q1932852",
+   "aka": "Dioscorea alata"
   },
   {
    "id": "veg.kiwano",
@@ -816,7 +840,8 @@
    "subgroup": "cucurbit",
    "tier": 3,
    "rank": 13,
-   "wikidata": "Q41318"
+   "wikidata": "Q41318",
+   "aka": "Cucumis metuliferus"
   },
   {
    "id": "veg.jicama",
@@ -824,7 +849,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 14,
-   "wikidata": "Q517283"
+   "wikidata": "Q517283",
+   "aka": "Pachyrhizus erosus"
   },
   {
    "id": "veg.ivygourd",
@@ -832,7 +858,8 @@
    "subgroup": "cucurbit",
    "tier": 3,
    "rank": 15,
-   "wikidata": "Q727330"
+   "wikidata": "Q727330",
+   "aka": "Coccinia grandis"
   },
   {
    "id": "veg.limabean",
@@ -856,7 +883,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 18,
-   "wikidata": "Q1165724"
+   "wikidata": "Q1165724",
+   "aka": "Cyperus esculentus"
   },
   {
    "id": "veg.malabarspinach",
@@ -864,7 +892,8 @@
    "subgroup": "leafy",
    "tier": 3,
    "rank": 19,
-   "wikidata": "Q1130368"
+   "wikidata": "Q1130368",
+   "aka": "Basella alba"
   },
   {
    "id": "veg.galangal",
@@ -872,7 +901,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 20,
-   "wikidata": "Q402971"
+   "wikidata": "Q402971",
+   "aka": "Alpinia galanga"
   },
   {
    "id": "veg.elephantyam",
@@ -880,7 +910,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 21,
-   "wikidata": "Q151527"
+   "wikidata": "Q151527",
+   "aka": "Amorphophallus paeoniifolius"
   },
   {
    "id": "veg.savoy",
@@ -896,7 +927,8 @@
    "subgroup": "leafy",
    "tier": 3,
    "rank": 23,
-   "wikidata": "Q158505"
+   "wikidata": "Q158505",
+   "aka": "Atriplex hortensis"
   },
   {
    "id": "veg.goodkinghenry",
@@ -904,7 +936,8 @@
    "subgroup": "leafy",
    "tier": 3,
    "rank": 24,
-   "wikidata": "Q163805"
+   "wikidata": "Q163805",
+   "aka": "Blitum bonus-henricus"
   },
   {
    "id": "veg.kurrat",
@@ -912,7 +945,8 @@
    "subgroup": "bulb",
    "tier": 3,
    "rank": 25,
-   "wikidata": "Q148995"
+   "wikidata": "Q148995",
+   "aka": "Allium ampeloprasum"
   },
   {
    "id": "veg.guar",
@@ -936,7 +970,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 28,
-   "wikidata": "Q674443"
+   "wikidata": "Q674443",
+   "aka": "Amorphophallus konjac"
   },
   {
    "id": "veg.samphire",
@@ -944,7 +979,8 @@
    "subgroup": "stem",
    "tier": 3,
    "rank": 29,
-   "wikidata": "Q1136311"
+   "wikidata": "Q1136311",
+   "aka": "Crithmum"
   },
   {
    "id": "veg.ridgedgourd",
@@ -952,7 +988,8 @@
    "subgroup": "cucurbit",
    "tier": 3,
    "rank": 30,
-   "wikidata": "Q1948703"
+   "wikidata": "Q1948703",
+   "aka": "Luffa acutangula"
   },
   {
    "id": "veg.wingedbean",
@@ -976,7 +1013,8 @@
    "subgroup": "stem",
    "tier": 3,
    "rank": 33,
-   "wikidata": "Q159525"
+   "wikidata": "Q159525",
+   "aka": "Salicornia"
   },
   {
    "id": "veg.yardlongbean",
@@ -984,7 +1022,8 @@
    "subgroup": "legume",
    "tier": 3,
    "rank": 34,
-   "wikidata": "Q1323455"
+   "wikidata": "Q1323455",
+   "aka": "Asparagus bean"
   },
   {
    "id": "veg.romanesco",
@@ -1008,7 +1047,8 @@
    "subgroup": "brassica",
    "tier": 3,
    "rank": 37,
-   "wikidata": "Q165299"
+   "wikidata": "Q165299",
+   "aka": "Crambe maritima"
   },
   {
    "id": "veg.oca",
@@ -1016,7 +1056,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 38,
-   "wikidata": "Q1355893"
+   "wikidata": "Q1355893",
+   "aka": "Oxalis tuberosa"
   },
   {
    "id": "veg.nzspinach",
@@ -1024,7 +1065,8 @@
    "subgroup": "leafy",
    "tier": 3,
    "rank": 39,
-   "wikidata": "Q278283"
+   "wikidata": "Q278283",
+   "aka": "Tetragonia tetragonioides"
   },
   {
    "id": "veg.habanero",
@@ -1056,7 +1098,8 @@
    "subgroup": "cucurbit",
    "tier": 3,
    "rank": 43,
-   "wikidata": "Q1323731"
+   "wikidata": "Q1323731",
+   "aka": "Trichosanthes cucumerina"
   },
   {
    "id": "veg.kombu",
@@ -1080,7 +1123,8 @@
    "subgroup": "sea",
    "tier": 3,
    "rank": 46,
-   "wikidata": "Q864648"
+   "wikidata": "Q864648",
+   "aka": "Palmaria palmata"
   },
   {
    "id": "veg.mashua",
@@ -1088,7 +1132,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 47,
-   "wikidata": "Q766182"
+   "wikidata": "Q766182",
+   "aka": "Tropaeolum tuberosum"
   },
   {
    "id": "veg.kailan",
@@ -1096,7 +1141,8 @@
    "subgroup": "brassica",
    "tier": 3,
    "rank": 48,
-   "wikidata": "Q1677369"
+   "wikidata": "Q1677369",
+   "aka": "Gai lan"
   },
   {
    "id": "veg.heartofpalm",
@@ -1120,7 +1166,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 51,
-   "wikidata": "Q941639"
+   "wikidata": "Q941639",
+   "aka": "Tragopogon porrifolius"
   },
   {
    "id": "veg.skirret",
@@ -1128,7 +1175,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 52,
-   "wikidata": "Q228122"
+   "wikidata": "Q228122",
+   "aka": "Sium sisarum"
   },
   {
    "id": "veg.pattypan",
@@ -1168,7 +1216,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 57,
-   "wikidata": "Q625399"
+   "wikidata": "Q625399",
+   "aka": "Arracacia xanthorrhiza"
   },
   {
    "id": "veg.chineseartichoke",
@@ -1176,7 +1225,8 @@
    "subgroup": "root",
    "tier": 3,
    "rank": 58,
-   "wikidata": "Q1758702"
+   "wikidata": "Q1758702",
+   "aka": "Stachys affinis"
   },
   {
    "id": "veg.amaranth",
@@ -1184,7 +1234,8 @@
    "subgroup": "leafy",
    "tier": 3,
    "rank": 59,
-   "wikidata": "Q3238412"
+   "wikidata": "Q3238412",
+   "aka": "Amaranthus dubius"
   },
   {
    "id": "veg.landcress",
@@ -1192,7 +1243,8 @@
    "subgroup": "leafy",
    "tier": 3,
    "rank": 60,
-   "wikidata": "Q164056"
+   "wikidata": "Q164056",
+   "aka": "Barbarea verna"
   },
   {
    "id": "veg.seagrapes",
@@ -1200,7 +1252,8 @@
    "subgroup": "sea",
    "tier": 3,
    "rank": 61,
-   "wikidata": "Q1936864"
+   "wikidata": "Q1936864",
+   "aka": "Caulerpa lentillifera"
   },
   {
    "id": "veg.treeonion",
@@ -1216,7 +1269,8 @@
    "subgroup": "cucurbit",
    "tier": 3,
    "rank": 63,
-   "wikidata": "Q929967"
+   "wikidata": "Q929967",
+   "aka": "Melothria scabra"
   },
   {
    "id": "veg.celtuce",
@@ -1248,7 +1302,8 @@
    "subgroup": "cucurbit",
    "tier": 3,
    "rank": 67,
-   "wikidata": "Q2724295"
+   "wikidata": "Q2724295",
+   "aka": "Trichosanthes dioica"
   },
   {
    "id": "veg.komatsuna",
@@ -1264,7 +1319,8 @@
    "subgroup": "bulb",
    "tier": 3,
    "rank": 69,
-   "wikidata": "Q2714893"
+   "wikidata": "Q2714893",
+   "aka": "Allium tricoccum"
   },
   {
    "id": "veg.mizuna",
@@ -1304,7 +1360,8 @@
    "subgroup": "flower",
    "tier": 3,
    "rank": 74,
-   "wikidata": "Q42293042"
+   "wikidata": "Q42293042",
+   "aka": "Squash blossom"
   },
   {
    "id": "veg.pointedcabbage",

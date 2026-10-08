@@ -97,6 +97,9 @@ expect('capital letter only allowed at the start', lambda J, d: J('lang/de/bank/
 expect('plene spelling with vowel marks', lambda J, d: J('lang/he/lexicon/veg.1.json', lambda o: o['lexemes'][0].update(plene={'N;SG;INDF': 'גֶּזֶר'})), 'must be written without vowel marks')
 expect('question evidence by punctuation', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(evidence={'punct': ['?']})), 'listed as fn.definite, but no word shows it (evidence {\'punct\'')
 
+expect('evidence excluded by a word (a wh-word is not a yes/no question)', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o['evidence'].update(exclude=['de:sie'])), 'de.s.001: listed as fn.definite, but no word shows it')
+expect('plural-only noun needs no gender, others do', lambda J, d: J('lang/de/lexicon/veg.2.json', lambda o: [o['lexemes'][0].update({'class': 'plt'}), o['lexemes'][0].pop('gender'), o['lexemes'][1].pop('gender')]), 'de:Kürbis: gender is required')
+
 # word profiles (§4.6)
 PR = lambda rel, i, fn: (lambda J, d: J(rel, lambda o: fn(o['lexemes'][i]['profile'])))
 expect('content word without a profile', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0].pop('profile')), 'a word profile is required')

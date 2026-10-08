@@ -300,7 +300,7 @@ def validate(root, only=None, strict=True):
                     elif forms[seen[canon(cc)]] != x.get('lemma'): v.E(w, f'the lemma “{x.get("lemma")}” must be the {cc} form “{forms[seen[canon(cc)]]}”')
                 if marks and len(letters(x.get('lemma', ''))) > 1 and not has_marks(L, x.get('lemma', '')): v.E(w, f'the lemma has no vowel marks')
                 check_profile(v, w, L, lj, x, course.get('profiles', 'required') == 'required')
-                if x.get('pos') == 'NOUN' and L in GENDERED_NOUNS and x.get('gender') not in ('MASC', 'FEM', 'NEUT'): v.E(w, 'gender is required (MASC, FEM or NEUT)')
+                if x.get('pos') == 'NOUN' and L in GENDERED_NOUNS and x.get('class') != 'plt' and x.get('gender') not in ('MASC', 'FEM', 'NEUT'): v.E(w, 'gender is required (MASC, FEM or NEUT)')
                 if L == 'zh':
                     lemma = x.get('lemma', '')
                     hans = [ch for ch in lemma if is_han(ch)]
@@ -389,6 +389,7 @@ def validate(root, only=None, strict=True):
                     ev = g.get('evidence') or {}
                     ok = (any(l in (ev.get('lemmas') or []) for l, _ in used) or any(f and all(t in cell_parts(f) for t in ev.get('tags') or ['∅']) for _, f in used)
                           or any(k.get('p') and k.get('t') in (ev.get('punct') or []) for k in toks))   # e.g. a question mark
+                    if ok and any(l in (ev.get('exclude') or []) for l, _ in used): ok = False   # e.g. a wh-word: not a yes/no question
                     if not ok: v.E(w, f'listed as {fid}, but no word shows it (evidence {ev})')
         for sid, s in sids.items():
             vo = s.get('variantOf')

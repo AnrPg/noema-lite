@@ -4519,9 +4519,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where is the ginger?",
    "level": "A1"
   },
@@ -4547,9 +4545,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where is the asparagus?",
    "level": "A1"
   },
@@ -4575,9 +4571,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where is the winter melon?",
    "level": "A1"
   },
@@ -4603,9 +4597,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where are the bean sprouts?",
    "level": "A1"
   },
@@ -4631,9 +4623,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where are the garlic chives?",
    "level": "A1"
   },
@@ -4659,9 +4649,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where is the napa cabbage?",
    "level": "A1"
   },
@@ -4687,9 +4675,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where are the cherry tomatoes?",
    "level": "A1"
   },
@@ -4715,9 +4701,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where is the cassava?",
    "level": "A1"
   },
@@ -4743,9 +4727,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where are the broad beans?",
    "level": "A1"
   },
@@ -4771,9 +4753,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "Where are the runner beans?",
    "level": "A1"
   },
@@ -6057,9 +6037,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "What shall we drink?",
    "level": "A1"
   },
@@ -6085,9 +6063,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "What do they drink?",
    "level": "A1"
   },
@@ -6113,9 +6089,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "What does she drink?",
    "level": "A1"
   },
@@ -6141,9 +6115,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "What shall we (you and I) drink?",
    "level": "A1"
   }

@@ -73,6 +73,10 @@
   "punct": [
    "？",
    "?"
+  ],
+  "exclude": [
+   "zh:shenme",
+   "zh:nali"
   ]
  },
  "needs": {

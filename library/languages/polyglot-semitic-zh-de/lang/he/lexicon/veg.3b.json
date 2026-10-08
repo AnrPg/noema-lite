@@ -1,0 +1,864 @@
+{
+ "lexemes": [
+  {
+   "id": "he:tsalaf",
+   "lemma": "צָלָף",
+   "pos": "NOUN",
+   "senses": [
+    "veg.capers"
+   ],
+   "gender": "MASC",
+   "translit": "tsalaf",
+   "forms": {
+    "N;SG;INDF": "צָלָף",
+    "N;SG;DEF": "הַצָּלָף",
+    "N;PL;INDF": "צְלָפִים",
+    "N;PL;DEF": "הַצְּלָפִים"
+   },
+   "note": "Pattern קָטָל (Wiktionary). Mostly used in the plural for the pickled buds.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small salty-sour green buds — and a thorny bush growing out of old stone walls.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "caper — the pickled flower bud of Capparis spinosa, a condiment",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.capers"
+     },
+     {
+      "id": "s2",
+      "def": "caper bush, the plant (Capparis spinosa)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא מוֹסִיפָה צְלָפִים לָרֹטֶב.",
+      "tr": "She adds capers to the sauce.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַצְּלָפִים חֲמוּצִים וּמְלוּחִים.",
+      "tr": "Capers are sour and salty.",
+      "register": "neutral",
+      "context": "taste",
+      "sense": "s1"
+     },
+     {
+      "text": "הַצָּלָף צוֹמֵחַ בֵּין הָאֲבָנִים שֶׁל הַכֹּתֶל.",
+      "tr": "The caper bush grows between the stones of the Western Wall.",
+      "register": "neutral",
+      "context": "Jerusalem",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "צְלָפִים כְּבוּשִׁים",
+      "tr": "pickled capers"
+     },
+     {
+      "text": "שִׂיחַ צָלָף",
+      "tr": "a caper bush"
+     },
+     {
+      "text": "רֹטֶב צְלָפִים",
+      "tr": "caper sauce"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in Hebrew.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this noun (pattern קָטָל). The homograph צַלָּף “sniper” belongs to the verb צָלַף “to whip, to snipe”, which Wiktionary says is possibly the same word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "German Kapern, Russian каперсы, Greek κάππαρη and Turkish kapari all go back to Greek κάππαρις; Hebrew has its own word, צָלָף.",
+     "The caper bush is one of the plants that grow out of the stones of the Western Wall in Jerusalem."
+    ],
+    "pitfalls": [
+     "צָלָף “caper” and צַלָּף “sniper” are both spelled צלף; only the vowels and the context tell them apart.",
+     "Count noun: one bud is צָלָף, but the food is nearly always צְלָפִים."
+    ],
+    "subtleties": [
+     "Ecclesiastes 12:5 says וְתָפֵר הָאֲבִיּוֹנָה, traditionally understood as “the caper berry shall fail”; אֲבִיּוֹנָה is the caper berry, צָלָף the plant and its bud.",
+     "After the article the צ is doubled: הַצָּלָף, הַצְּלָפִים."
+    ]
+   }
+  },
+  {
+   "id": "he:nori",
+   "lemma": "נוֹרִי",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.nori"
+   ],
+   "gender": "MASC",
+   "translit": "nori",
+   "forms": {
+    "N;SG;INDF": "נוֹרִי",
+    "N;SG;DEF": "הַנּוֹרִי"
+   },
+   "note": "A loanword used as a mass noun. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The dark green sheet around a sushi roll; crisp, salty, of the sea.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "nori — dried edible seaweed (laver, Pyropia) pressed into thin sheets",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.nori"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְגַלְגֵּל סוּשִׁי בְּדַף נוֹרִי.",
+      "tr": "I (m.) roll sushi in a sheet of nori.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים אוֹכְלִים חֲטִיפֵי נוֹרִי.",
+      "tr": "The children eat nori snacks.",
+      "register": "neutral",
+      "context": "snacks",
+      "sense": "s1"
+     },
+     {
+      "text": "הַנּוֹרִי עָשׂוּי מֵאַצּוֹת יָם.",
+      "tr": "Nori is made from seaweed.",
+      "register": "neutral",
+      "context": "food facts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "דַּפֵּי נוֹרִי",
+      "tr": "nori sheets"
+     },
+     {
+      "text": "אַצּוֹת נוֹרִי",
+      "tr": "nori seaweed"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "אַצָּה",
+      "register": "colloquial",
+      "nuance": "“seaweed, alga” in general; at the sushi bar the nori sheet is often simply הָאַצָּה"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From Japanese 海苔 (nori), like English nori (Wiktionary: the kanji literally mean “ocean moss”, but are only a spelling of the native word, from Proto-Japonic *nǝri).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese writes 海苔 hǎitái with the same characters; the dried laver of Chinese soups is 紫菜 zǐcài, “purple vegetable”.",
+     "The British phycologist Kathleen Drew-Baker worked out the life cycle of laver in 1949, which rescued Japanese nori farming; she is honoured in Japan as the “Mother of the Sea”."
+    ],
+    "pitfalls": [
+     "Masculine and without a plural: count the sheets with דַּף — שְׁנֵי דַּפֵּי נוֹרִי."
+    ],
+    "subtleties": [
+     "At the sushi bar people often just say הָאַצָּה (“the seaweed”) for the nori sheet.",
+     "Unvocalized נורי has the same letters as the given name Nuri."
+    ]
+   }
+  },
+  {
+   "id": "he:lubya",
+   "lemma": "לוּבְּיָה",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.yardlongbean"
+   ],
+   "gender": "FEM",
+   "translit": "lubya",
+   "forms": {
+    "N;SG;INDF": "לוּבְּיָה",
+    "N;SG;DEF": "הַלּוּבְּיָה"
+   },
+   "note": "Used as a mass noun. Wiktionary has no Hebrew entry. The dagesh in בּ marks b (a loanword); everyday spelling לוביה.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Long, thin green pods in a tomato stew — and the black-eyed peas of the Rosh Hashanah table.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "yardlong bean — the long green pods of the cowpea (Vigna unguiculata), eaten as a vegetable",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.yardlongbean"
+     },
+     {
+      "id": "s2",
+      "def": "black-eyed peas — the dried seeds of the same plant",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא מְבַשֶּׁלֶת לוּבְּיָה עִם עַגְבָנִיּוֹת.",
+      "tr": "Mom cooks yardlong beans with tomatoes.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַלּוּבְּיָה בַּשּׁוּק אֲרֻכָּה וְדַקָּה.",
+      "tr": "The yardlong beans at the market are long and thin.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּרֹאשׁ הַשָּׁנָה אוֹכְלִים לוּבְּיָה לְסִימָן טוֹב.",
+      "tr": "At Rosh Hashanah people eat black-eyed peas as a good omen.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "תַּבְשִׁיל לוּבְּיָה",
+      "tr": "a cowpea stew"
+     },
+     {
+      "text": "לוּבְּיָה בְּרֹטֶב עַגְבָנִיּוֹת",
+      "tr": "yardlong beans in tomato sauce"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שְׁעוּעִית",
+      "register": "neutral",
+      "nuance": "the general word for beans (Phaseolus); לוּבְּיָה names the cowpea specifically"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. Compare Arabic لُوبِيَا (lūbiyā, “black-eyed peas”), which Wiktionary derives from Classical Persian لوبیا (lōbiyā), Classical Syriac ܠܘܒܝܐ (lōbyā) or directly from Ancient Greek λόβια, plural of λόβιον “pod”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same word travelled far: Turkish lobya, Georgian ლობიო (lobio) — known to Russian speakers as the bean dish лобио — and Persian lubia, all from Greek λόβιον “pod”.",
+     "A single pod can grow to half a metre; English calls it the yardlong bean, Chinese 豇豆 jiāngdòu."
+    ],
+    "pitfalls": [
+     "לוּבְּיָה can mean the long green pods or the dried black-eyed peas; the context (or the shop shelf) decides."
+    ],
+    "subtleties": [
+     "Feminine: לוּבְּיָה טְרִיָּה.",
+     "The dagesh in בּ keeps the sound b; without it the letter would read v."
+    ]
+   }
+  },
+  {
+   "id": "he:edamame",
+   "lemma": "אֶדָמָמֶה",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.edamame"
+   ],
+   "gender": "MASC",
+   "translit": "edamame",
+   "forms": {
+    "N;SG;INDF": "אֶדָמָמֶה",
+    "N;SG;DEF": "הָאֶדָמָמֶה"
+   },
+   "note": "A recent loanword used as a mass noun; masculine like other loanwords not ending in -a. Wiktionary has no Hebrew entry.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A bowl of salted green pods at the start of a sushi meal.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "edamame — young green soybeans in the pod, boiled or steamed and salted",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.edamame"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּמִּסְעָדָה הַיַּפָּנִית הִזְמַנּוּ אֶדָמָמֶה עִם מֶלַח גַּס.",
+      "tr": "At the Japanese restaurant we ordered edamame with coarse salt.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת הָאֶדָמָמֶה מְבַשְּׁלִים חָמֵשׁ דַּקּוֹת בְּמַיִם רוֹתְחִים.",
+      "tr": "Edamame is boiled for five minutes in boiling water.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶדָמָמֶה זֶה סוֹיָה צְעִירָה בְּתוֹךְ הַתַּרְמִיל.",
+      "tr": "Edamame is young soy in the pod.",
+      "register": "colloquial",
+      "context": "food facts",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קְעָרַת אֶדָמָמֶה",
+      "tr": "a bowl of edamame"
+     },
+     {
+      "text": "אֶדָמָמֶה בְּמֶלַח",
+      "tr": "edamame with salt"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פּוֹלֵי סוֹיָה",
+      "register": "neutral",
+      "nuance": "“soybeans” in general, also the dry ones; אֶדָמָמֶה are the young green pods"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From Japanese 枝豆 (edamame), literally “stem beans” (Wiktionary, English entry edamame).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Chinese calls the same pods 毛豆 máodòu, “hairy beans”, after the fuzz on the pods.",
+     "Edamame are ordinary soybeans picked before they ripen and dry."
+    ],
+    "pitfalls": [
+     "It looks like אֲדָמָה “earth, soil” + מֶה — a pure coincidence; the word is Japanese.",
+     "The final -e is not the feminine -a: it is treated as masculine, like other such loanwords."
+    ],
+    "subtleties": [
+     "Used without a plural, for the dish or the beans.",
+     "Only the beans are eaten; the pod is squeezed between the teeth and left."
+    ]
+   }
+  },
+  {
+   "id": "he:fakus",
+   "lemma": "פַקּוּס",
+   "pos": "NOUN",
+   "senses": [
+    "veg.armeniancucumber"
+   ],
+   "gender": "MASC",
+   "translit": "fakus",
+   "forms": {
+    "N;SG;INDF": "פַקּוּס",
+    "N;SG;DEF": "הַפַקּוּס",
+    "N;PL;INDF": "פַקּוּסִים",
+    "N;PL;DEF": "הַפַקּוּסִים"
+   },
+   "note": "Pronounced fakús: the פ has no dagesh (f), also after the article. Wiktionary has no Hebrew entry; its English entry Armenian cucumber gives פקוס (fakús, masculine).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "C1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A long, pale, ribbed “cucumber” of the summer market — crisp and mild.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "Armenian cucumber, snake melon (Cucumis melo var. flexuosus), eaten raw like a cucumber",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.armeniancucumber"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּקַּיִץ קוֹנִים פַקּוּסִים בַּשּׁוּק.",
+      "tr": "In summer people buy Armenian cucumbers at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַפַקּוּס בָּהִיר וְאָרֹךְ יוֹתֵר מִמְּלָפְפוֹן רָגִיל.",
+      "tr": "The Armenian cucumber is paler and longer than an ordinary cucumber.",
+      "register": "neutral",
+      "context": "comparison",
+      "sense": "s1"
+     },
+     {
+      "text": "הַפַקּוּס פָּרִיךְ וּמְרַעֲנֵן בַּסָּלָט.",
+      "tr": "Armenian cucumber is crisp and refreshing in a salad.",
+      "register": "neutral",
+      "context": "salad",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "סְלַט פַקּוּס",
+      "tr": "Armenian cucumber salad"
+     },
+     {
+      "text": "פַקּוּסִים צְעִירִים",
+      "tr": "young Armenian cucumbers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "מְלָפְפוֹן אַרְמֶנִי",
+      "register": "neutral",
+      "nuance": "“Armenian cucumber”, the descriptive name of books and seed catalogues"
+     },
+     {
+      "word": "מְלָפְפוֹן הַפַקּוּס",
+      "register": "formal",
+      "nuance": "the fuller name, “the fakus cucumber”"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary has no Hebrew entry. From Arabic فَقُّوس (faqqūs, “Armenian cucumber”), which Wiktionary traces to Aramaic and relates to Aramaic פַּקּוּעָא (paqqūʿā, “a type of gourd”) ; compare the wild gourds, פַּקֻּעֹת שָׂדֶה, of 2 Kings 4:39.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Botanically it is a melon (Cucumis melo), not a cucumber — hence names like snake melon.",
+     "Some scholars identify the קִשֻּׁאִים that the Israelites missed in Egypt (Numbers 11:5) with this melon-cucumber."
+    ],
+    "pitfalls": [
+     "The first letter is f, not p: fakús.",
+     "It is not a מְלָפְפוֹן (cucumber) to a botanist, although it is eaten like one."
+    ],
+    "subtleties": [
+     "A word of the market, borrowed from Arabic; in books and seed catalogues it is מְלָפְפוֹן אַרְמֶנִי.",
+     "Plural: פַקּוּסִים."
+    ]
+   }
+  },
+  {
+   "id": "he:perach-kishu",
+   "lemma": "פֶּרַח קִשּׁוּא",
+   "pos": "NOUN",
+   "senses": [
+    "veg.zucchiniflower"
+   ],
+   "gender": "MASC",
+   "translit": "perach kishu",
+   "forms": {
+    "N;SG;INDF": "פֶּרַח קִשּׁוּא",
+    "N;SG;DEF": "פֶּרַח הַקִּשּׁוּא",
+    "N;PL;INDF": "פִּרְחֵי קִשּׁוּא",
+    "N;PL;DEF": "פִּרְחֵי הַקִּשּׁוּא"
+   },
+   "plene": {
+    "N;SG;INDF": "פרח קישוא",
+    "N;SG;DEF": "פרח הקישוא",
+    "N;PL;INDF": "פרחי קישוא",
+    "N;PL;DEF": "פרחי הקישוא"
+   },
+   "note": "A two-word lexeme (construct phrase: the article goes on the second word, the plural on the first). Tokenized as one word (the engine matches multi-word lexemes first). Mostly used in the plural.",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries פֶּרַח (plural construct פִּרְחֵי־) and קִשּׁוּא (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Golden blossoms stuffed with cheese and fried — a summer restaurant treat.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "zucchini flower, squash blossom (eaten stuffed or fried)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.zucchiniflower"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּמִּסְעָדָה הִזְמַנְתִּי פִּרְחֵי קִשּׁוּא מְמֻלָּאִים בִּגְבִינָה.",
+      "tr": "At the restaurant I ordered zucchini flowers stuffed with cheese.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "אֶת פִּרְחֵי הַקִּשּׁוּא קוֹטְפִים בַּבֹּקֶר, כְּשֶׁהֵם פְּתוּחִים.",
+      "tr": "Zucchini flowers are picked in the morning, when they are open.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "פֶּרַח קִשּׁוּא מְטֻגָּן הוּא מָנָה אִיטַלְקִית קְלָאסִית.",
+      "tr": "A fried zucchini flower is a classic Italian dish.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פִּרְחֵי קִשּׁוּא מְמֻלָּאִים",
+      "tr": "stuffed zucchini flowers"
+     },
+     {
+      "text": "פִּרְחֵי קִשּׁוּא מְטֻגָּנִים",
+      "tr": "fried zucchini flowers"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "פִּרְחֵי זוּקִינִי",
+      "register": "informal",
+      "nuance": "with the Italian/English zucchini; frequent on restaurant menus"
+     }
+    ],
+    "etymology": {
+     "text": "פֶּרַח “flower” (Wiktionary: cognate with Arabic فَرْخ, “chick, sprout”, and Aramaic פְּרַח “to fly”) + קִשּׁוּא “zucchini” (Wiktionary: compare Arabic كوسة).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Stuffed zucchini flowers are a classic in Greece (κολοκυθοανθοί) and Turkey (kabak çiçeği dolması) as well as in Italy (fiori di zucca).",
+     "Mostly the male flowers are picked, so the plant still sets fruit."
+    ],
+    "pitfalls": [
+     "The plural changes the first word: פִּרְחֵי קִשּׁוּא (not *פְּרָחִים קִשּׁוּא).",
+     "The article goes on the second word: פִּרְחֵי הַקִּשּׁוּא."
+    ],
+    "subtleties": [
+     "On menus the Italian word is common too: פִּרְחֵי זוּקִינִי.",
+     "Everyday spelling with י: פרחי קישוא."
+    ]
+   }
+  },
+  {
+   "id": "he:dlaat-spageti",
+   "lemma": "דְּלַעַת סְפָּגֶטִי",
+   "pos": "NOUN",
+   "senses": [
+    "veg.spaghettisquash"
+   ],
+   "gender": "FEM",
+   "translit": "dla’at spageti",
+   "forms": {
+    "N;SG;INDF": "דְּלַעַת סְפָּגֶטִי",
+    "N;SG;DEF": "דְּלַעַת הַסְּפָּגֶטִי",
+    "N;PL;INDF": "דְּלוּעֵי סְפָּגֶטִי",
+    "N;PL;DEF": "דְּלוּעֵי הַסְּפָּגֶטִי"
+   },
+   "note": "A two-word lexeme (construct phrase: the article goes on the second word, the plural on the first; the plural of דְּלַעַת is דְּלוּעִים as in batch 1). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries דְּלַעַת (plural דְּלוּעִים) and סְפָּגֶטִי (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A yellow squash whose baked flesh falls apart into “noodles”.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spaghetti squash (Cucurbita pepo), whose cooked flesh separates into strands",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.spaghettisquash"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי אוֹפָה דְּלַעַת סְפָּגֶטִי בַּתַּנּוּר.",
+      "tr": "I (f.) bake a spaghetti squash in the oven.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּתוֹךְ דְּלַעַת הַסְּפָּגֶטִי יֵשׁ סִיבִים דַּקִּים כְּמוֹ אִטְרִיּוֹת.",
+      "tr": "Inside the spaghetti squash there are thin strands like noodles.",
+      "register": "neutral",
+      "context": "food facts",
+      "sense": "s1"
+     },
+     {
+      "text": "הֵם מְגַדְּלִים דְּלוּעֵי סְפָּגֶטִי בַּגִּנָּה.",
+      "tr": "They grow spaghetti squashes in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "דְּלַעַת סְפָּגֶטִי אֲפוּיָה",
+      "tr": "baked spaghetti squash"
+     },
+     {
+      "text": "דְּלַעַת סְפָּגֶטִי בְּרֹטֶב עַגְבָנִיּוֹת",
+      "tr": "spaghetti squash in tomato sauce"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "דְּלַעַת “pumpkin, gourd, squash” (Wiktionary: compare Arabic دَلَّاع, “watermelon”) + סְפָּגֶטִי “spaghetti” (from Italian) — like English spaghetti squash and German Spaghettikürbis.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is the same species as the zucchini (קִשּׁוּא), Cucurbita pepo.",
+     "A favourite of low-carb cooking: the strands are served like pasta, with tomato sauce."
+    ],
+    "pitfalls": [
+     "The plural changes the first word: דְּלוּעֵי סְפָּגֶטִי.",
+     "The article goes on the second word: דְּלַעַת הַסְּפָּגֶטִי."
+    ],
+    "subtleties": [
+     "Feminine, after דְּלַעַת: דְּלַעַת סְפָּגֶטִי אֲפוּיָה.",
+     "The strands appear only after cooking: the flesh is scraped out with a fork."
+    ]
+   }
+  }
+ ],
+ "absent": [
+  {
+   "concept": "veg.drumstick",
+   "reason": "Moringa pods are known only from Indian cooking; no Hebrew word for the vegetable.",
+   "use": "Described as the pods of the moringa tree (known in Israel mainly as a health-food powder), with the name moringa in Hebrew letters."
+  },
+  {
+   "concept": "veg.kiwano",
+   "reason": "No Hebrew word: the fruit is sold under its trade name, with varying spellings.",
+   "use": "The trade name kiwano in Hebrew letters."
+  },
+  {
+   "concept": "veg.ivygourd",
+   "reason": "Known only from Indian cooking; no Hebrew name.",
+   "use": "An Indian name (tindora) or the English name in Hebrew letters."
+  },
+  {
+   "concept": "veg.limabean",
+   "reason": "Not a distinct everyday vegetable in Israel; no settled name.",
+   "use": "שְׁעוּעִית (beans) with the English name lima added."
+  },
+  {
+   "concept": "veg.savoy",
+   "reason": "No settled Hebrew name.",
+   "use": "כְּרוּב (cabbage) with the name Savoy added, or a description of the crinkled leaves."
+  },
+  {
+   "concept": "veg.guar",
+   "reason": "Known in Israel only as a food additive (guar gum); the vegetable has no Hebrew name.",
+   "use": "The Hindi/English name guar in Hebrew letters."
+  },
+  {
+   "concept": "veg.ridgedgourd",
+   "reason": "Known only from Asian and Indian cooking; no Hebrew name.",
+   "use": "Described as a kind of לוּפָה (luffa, veg.luffa) or with an Indian name."
+  },
+  {
+   "concept": "veg.wingedbean",
+   "reason": "Not known in Israel; no Hebrew name.",
+   "use": "A literal translation of “winged bean” built on שְׁעוּעִית."
+  },
+  {
+   "concept": "veg.tomatillo",
+   "reason": "Not sold in Israel; no Hebrew word.",
+   "use": "The Spanish name tomatillo in Hebrew letters."
+  },
+  {
+   "concept": "veg.romanesco",
+   "reason": "No Hebrew word: the Italian name is used.",
+   "use": "The name romanesco in Hebrew letters, often after כְּרוּבִית (cauliflower) or בְּרוֹקוֹלִי."
+  },
+  {
+   "concept": "veg.cayenne",
+   "reason": "No separate word for the fresh pepper; the name is known mainly for the ground spice.",
+   "use": "פִּלְפֵּל חָרִיף (veg.chili), or the name cayenne in Hebrew letters for the spice."
+  },
+  {
+   "concept": "veg.seakale",
+   "reason": "Not grown or eaten in Israel; no everyday name.",
+   "use": "A botanical or descriptive name."
+  },
+  {
+   "concept": "veg.habanero",
+   "reason": "No Hebrew word: the Spanish name is used, with unstable spelling.",
+   "use": "The name habanero in Hebrew letters, or simply פִּלְפֵּל חָרִיף (veg.chili)."
+  },
+  {
+   "concept": "veg.wakame",
+   "reason": "No Hebrew word: the Japanese name is used on sushi menus, with varying spellings.",
+   "use": "The name wakame in Hebrew letters, or אַצּוֹת (seaweed)."
+  },
+  {
+   "concept": "veg.snakegourd",
+   "reason": "Known only from Asian and Indian cooking; no Hebrew name.",
+   "use": "A literal translation of “snake gourd”, or an Indian name."
+  },
+  {
+   "concept": "veg.kombu",
+   "reason": "Known only from Japanese cooking; no Hebrew word.",
+   "use": "The Japanese name kombu in Hebrew letters, or אַצּוֹת (seaweed)."
+  },
+  {
+   "concept": "veg.sealettuce",
+   "reason": "Not eaten in Israel; no everyday food word.",
+   "use": "A botanical name for the alga, or a literal translation of “sea lettuce”."
+  },
+  {
+   "concept": "veg.dulse",
+   "reason": "Not eaten in Israel; no Hebrew word.",
+   "use": "The English name dulse, or אַצּוֹת (seaweed)."
+  },
+  {
+   "concept": "veg.kailan",
+   "reason": "Known only from Chinese cooking; no Hebrew name.",
+   "use": "The Chinese name (kai-lan) or “Chinese broccoli” built on בְּרוֹקוֹלִי."
+  },
+  {
+   "concept": "veg.pattypan",
+   "reason": "No settled Hebrew name.",
+   "use": "Described as a kind of קִשּׁוּא (zucchini) or דְּלַעַת (squash), or with a foreign name."
+  },
+  {
+   "concept": "veg.hijiki",
+   "reason": "Known only from Japanese cooking; no Hebrew word.",
+   "use": "The Japanese name hijiki in Hebrew letters, or אַצּוֹת (seaweed)."
+  },
+  {
+   "concept": "veg.rapini",
+   "reason": "Not a common vegetable in Israel; no Hebrew name.",
+   "use": "The Italian name (cime di rapa) or the English broccoli rabe in Hebrew letters."
+  },
+  {
+   "concept": "veg.seagrapes",
+   "reason": "Not eaten in Israel; no Hebrew word.",
+   "use": "A literal translation of “sea grapes”, or the Japanese name umibudo."
+  },
+  {
+   "concept": "veg.cucamelon",
+   "reason": "A garden novelty; no Hebrew name.",
+   "use": "The English name in Hebrew letters, or a description as a tiny cucumber (מְלָפְפוֹן)."
+  },
+  {
+   "concept": "veg.pointedgourd",
+   "reason": "Known only from Indian cooking; no Hebrew name.",
+   "use": "The Hindi name parwal in Hebrew letters."
+  },
+  {
+   "concept": "veg.komatsuna",
+   "reason": "Known only from Japanese cooking; no Hebrew word.",
+   "use": "The Japanese name komatsuna in Hebrew letters."
+  },
+  {
+   "concept": "veg.mizuna",
+   "reason": "Appears only in some salad mixes; no Hebrew word of its own.",
+   "use": "The Japanese name mizuna in Hebrew letters."
+  },
+  {
+   "concept": "veg.padron",
+   "reason": "Known only from Spanish tapas; no Hebrew word.",
+   "use": "פִּלְפְּלִים (veg.bellpepper / veg.chili) with the name Padrón added."
+  },
+  {
+   "concept": "veg.tatsoi",
+   "reason": "Known only from Asian cooking; no Hebrew word.",
+   "use": "The Chinese/Japanese name tatsoi in Hebrew letters."
+  },
+  {
+   "concept": "veg.pointedcabbage",
+   "reason": "Not distinguished from other cabbages in everyday Hebrew.",
+   "use": "כְּרוּב (veg.cabbage), with a description of the pointed head."
+  },
+  {
+   "concept": "veg.babycorn",
+   "reason": "No single settled word.",
+   "use": "A description built on תִּירָס (corn) and a word for small or baby; packaging varies."
+  },
+  {
+   "concept": "veg.acorns",
+   "reason": "Not a common squash in Israel; no settled name.",
+   "use": "Described as a kind of דְּלַעַת (squash), or with the English name."
+  },
+  {
+   "concept": "veg.sugarsnap",
+   "reason": "No separate everyday word.",
+   "use": "אֲפוּנָה סִינִית (veg.snowpea) loosely, or the English name sugar snap."
+  }
+ ]
+}

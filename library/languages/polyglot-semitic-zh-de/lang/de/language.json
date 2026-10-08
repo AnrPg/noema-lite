@@ -15,7 +15,8 @@
   "DET.def": "DET;NOM;SG;MASC",
   "DET.indef": "DET;NOM;SG;MASC",
   "DET.dem": "DET;NOM;SG;MASC",
-  "DET.neg": "DET;NOM;SG;MASC"
+  "DET.neg": "DET;NOM;SG;MASC",
+  "NOUN.plt": "N;NOM;PL"
  },
  "paradigmCells": {
   "NOUN": [
@@ -120,6 +121,12 @@
    "DET;ACC;PL",
    "DET;DAT;PL",
    "DET;GEN;PL"
+  ],
+  "NOUN.plt": [
+   "N;NOM;PL",
+   "N;ACC;PL",
+   "N;DAT;PL",
+   "N;GEN;PL"
   ]
  }
 }

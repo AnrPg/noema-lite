@@ -8,8 +8,8 @@
 |---|---|---|
 | P0 | Spec, schemas, validator, mini fixture course | ✅ 2026-10-07 |
 | P1 | `langcore` runtime (pure JS): model, states, scheduler, gating, known sets, form index, script utilities | ✅ 2026-10-07 |
-| P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ⏳ in progress |
-| P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ⬜ |
+| P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ✅ 2026-10-08 (the next core nodes continue as content batches alongside P3+) |
+| P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ⏳ next |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
 | P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ⬜ |
@@ -532,7 +532,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 |---|---|---|---|---|---|
 | 1 | core.1 (23 concepts) + veg.1 (25) | ✅ 51 words · 59 sentences | ✅ 53 · 75 | ✅ 60 · 48 | ✅ 51 · 67 |
 | 2 | veg.2a (37) + veg.2b (21) | ✅ 26 words + 31 absent · 95 sentences | ✅ 34 + 24 absent · 109 | ✅ 53 + 4 absent · 202 | ✅ 56 + 2 absent · 184 |
-| 3 | veg.3a (40) + veg.3b (40) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3 | veg.3a (40) + veg.3b (40) | ✅ 13 + 67 absent · 73 | ✅ 14 + 66 absent · 69 | ✅ 53 + 27 absent · 224 | ✅ 59 + 21 absent · 149 |
 | 4 | core.2 … (numbers, adjectives, colours, more verbs) | ⬜ | ⬜ | ⬜ | ⬜ |
 
 **P3 — UI shell and vocabulary lane**
@@ -570,3 +570,4 @@ Working rules for every phase: read this file first; keep existing subjects unto
 - 2026-10-08 — Word profiles (§4.6): every content word in depth (senses, examples by register and context, collocations, particle verbs, phrases and quotes, synonyms by register, etymology, pitfalls, subtleties, feeling, fun facts) — schema, validator, mini course (24 profiles), `langcore.wordCard`; exercise types `register_pick`, `nuance_pick`, `connotation`, `idiom_meaning`, `example_cloze`, `sense_pick`, `etymology_link`. `tools/lang_refcheck.py` (Wiktionary via kaikki.org) found two real mistakes in the mini course (דְּלַעַת plural, 黄瓜 measure word), now fixed.
 - 2026-10-08 — P2 started: the vegetables field (163 concepts, tiers and subgroups, Wikidata ids), the core spine node core.1, 10 frames, 4 functions; batch 1 (core.1 + veg.1) written in all four languages, 215 words, 249 sentences, every word with its full profile, everything validated and ref-checked. Runtime and tools grown with it: nodes not yet written are “unprepared” (they block what follows, in that language only) and `validate_lang.py` treats them as warnings unless `--strict`; multi-word words (תַּפּוּחַ אֲדָמָה, Rote Bete) are one token; prefix spellings (`alts`: וּ for וְ); `evidence.punct` for questions; erhua pinyin (哪儿 nǎr); refcheck keys `pos | meaning | gender | <cell> | pinyin | trad | measure` for `ref.override`, all genders, determiners filed as pronouns, pronoun rows, German preterite, full spellings (plene) for Hebrew look-ups; `tests/lang_courses.js` reads every course back.
 - 2026-10-08 — P2 batch 2 (veg.2a + veg.2b) in all four languages (169 words, 61 marked absent with what people say instead, 590 sentences). Refcheck: hyphenated glosses (water-cress), apostrophes in Wiktionary pinyin (lián'ǒu), Hebrew/Arabic pages that only say “defective spelling of X” are followed to X.
+- 2026-10-08 — P2 batch 3 (veg.3a + veg.3b): the whole vegetables field now exists in all four languages; the course validates with `--strict`. Fixes from the workers' reports: wh-questions are no longer counted as yes/no questions (`evidence.exclude`: the wh-words), plural-only nouns (`NOUN.plt`, no gender: die Edamame), the German word card shows the article with the form used after it (der Gute Heinrich), refcheck matches whole words without accents (hen ≠ Chenopodium, jícama), reads the concept's `aka` (the Wikipedia title, often the scientific name) and the full-spelling page when the short spelling is another word (כרכום ≠ כורכום), and reports explanations that are no longer needed. Open: Arabic fixed phrases that exist only with the article (حَبُّ الْعَزِيزِ) need a definite-only noun class; words with no Wiktionary entry are only “unverified” (a second source — e.g. CC-CEDICT, Duden — would close that gap).

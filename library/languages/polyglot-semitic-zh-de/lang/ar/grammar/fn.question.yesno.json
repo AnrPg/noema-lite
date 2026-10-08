@@ -22,6 +22,11 @@
   ],
   "punct": [
    "؟"
+  ],
+  "exclude": [
+   "ar:madha",
+   "ar:ma",
+   "ar:ayna"
   ]
  },
  "paradigmCells": [],

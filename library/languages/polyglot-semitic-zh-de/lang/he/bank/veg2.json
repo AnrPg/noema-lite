@@ -2443,8 +2443,7 @@
     }
    ],
    "functions": [
-    "fn.definite",
-    "fn.question.yesno"
+    "fn.definite"
    ],
    "gloss": "Where is the fennel?",
    "level": "A2"
@@ -2469,8 +2468,7 @@
     }
    ],
    "functions": [
-    "fn.definite",
-    "fn.question.yesno"
+    "fn.definite"
    ],
    "gloss": "Where is the Jerusalem artichoke?",
    "level": "A2"
@@ -2495,8 +2493,7 @@
     }
    ],
    "functions": [
-    "fn.definite",
-    "fn.question.yesno"
+    "fn.definite"
    ],
    "gloss": "Where is the sorrel?",
    "level": "A2"
@@ -2522,8 +2519,7 @@
    ],
    "functions": [
     "fn.definite",
-    "fn.plural.noun",
-    "fn.question.yesno"
+    "fn.plural.noun"
    ],
    "gloss": "Where are the shallots?",
    "level": "A2"
@@ -2548,8 +2544,7 @@
     }
    ],
    "functions": [
-    "fn.definite",
-    "fn.question.yesno"
+    "fn.definite"
    ],
    "gloss": "Where is the celeriac?",
    "level": "A2"
@@ -2575,8 +2570,7 @@
    ],
    "functions": [
     "fn.definite",
-    "fn.plural.noun",
-    "fn.question.yesno"
+    "fn.plural.noun"
    ],
    "gloss": "Where are the artichokes?",
    "level": "A2"
@@ -2601,8 +2595,7 @@
     }
    ],
    "functions": [
-    "fn.definite",
-    "fn.question.yesno"
+    "fn.definite"
    ],
    "gloss": "Where is the Chinese cabbage?",
    "level": "A2"
@@ -2627,8 +2620,7 @@
     }
    ],
    "functions": [
-    "fn.definite",
-    "fn.question.yesno"
+    "fn.definite"
    ],
    "gloss": "Where is the butternut squash?",
    "level": "A2"
@@ -2654,8 +2646,7 @@
    ],
    "functions": [
     "fn.definite",
-    "fn.plural.noun",
-    "fn.question.yesno"
+    "fn.plural.noun"
    ],
    "gloss": "Where are the butternut squashes?",
    "variantOf": "he.s2.084",
@@ -2684,8 +2675,7 @@
     }
    ],
    "functions": [
-    "fn.definite",
-    "fn.question.yesno"
+    "fn.definite"
    ],
    "gloss": "Where are the snow peas?",
    "level": "A2"
@@ -3293,9 +3283,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "What is she drinking?",
    "level": "A2"
   },
@@ -3322,9 +3310,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "What are we drinking?",
    "level": "A2"
   },
@@ -3351,9 +3337,7 @@
      "p": true
     }
    ],
-   "functions": [
-    "fn.question.yesno"
-   ],
+   "functions": [],
    "gloss": "What are we (f.) drinking?",
    "level": "A2"
   }
