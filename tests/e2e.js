@@ -85,6 +85,19 @@ async function mockGemini(ctx) {
   ok(await page.$$eval('.modal details.accsec', d => d.length) === 9, 'help tab lists 9 setup guides');
   await page.screenshot({ path: SHOTS + '/a3c_help.png' });
   await page.evaluate(() => $('.modal')?.remove());
+  // menus in the learner's language (engine/i18n.js): ⚙️ Settings → Language of the menus
+  ok(await page.evaluate(() => { const B = NoemaI18n.bundles, en = Object.keys(B.en); return ['el', 'ru', 'fr'].every(l => en.every(k => B[l][k]) && Object.keys(B[l]).length === en.length); }), 'every menu string is translated in el, ru and fr');
+  const setUiLang = async v => { await page.evaluate(v => { $('.modal')?.remove(); openAccountMenu('settings'); const sel = $('.modal select[aria-label="' + t('set.uiLang') + '"]'); sel.value = v; [...$$('.modal button')].find(b => b.textContent === 'Save settings').click(); }, v); await wait(1200); };
+  await setUiLang('fr');
+  ok(await page.evaluate(() => document.body.innerText.includes('Qu’est-ce que tu veux étudier\u202f?')), 'after the change the subject picker speaks French');
+  await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
+  const fr = await page.evaluate(() => ({ tiles: $$('.modes .mode b').map(b => b.textContent), tutor: $('.iconbtn.tutor span').textContent, ch: (location.hash = '#/ch/ch01', route(), $$('main .tabs button').map(b => b.textContent.trim()).join('|')), back: $('main .back').textContent, cards: (location.hash = '#/cards', route(), $('main .back').textContent + ' ' + $('main h1').textContent), tabs: (openAccountMenu('profile'), $$('.modal .tabs button').map(b => b.textContent).join('|')) }));
+  ok(fr.tiles[0] === 'Manche éclair' && fr.tiles.includes('Salle des erreurs') && fr.tutor === 'Tuteur', 'home tiles and top bar in French: ' + fr.tiles.join(' · '));
+  ok(/Apprendre/.test(fr.ch) && /S’entraîner/.test(fr.ch) && fr.back === '← Tous les chapitres' && fr.cards === '← Accueil 🃏 Cartes mémoire', 'chapter tabs, back buttons and view titles in French');
+  ok(fr.tabs.startsWith('👤 Profil|⚙️ Réglages|📚 Matières'), 'account menu tabs in French: ' + fr.tabs);
+  await setUiLang('');
+  await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
+  ok(await page.evaluate(() => { location.hash = '#/'; route(); return !S.settings.lang && $$('.modes .mode b')[0].textContent === 'Lightning round'; }), 'back to automatic: the browser’s language (English)');
   // switch subject → math subject
   await page.evaluate(() => Noema.switchTo('anr', 'demo-physics')); await wait(1800);
   ok(await page.evaluate(() => SUBJ.id === 'demo-physics' && S.xp === 0), 'switched to Demo Physics with separate progress');

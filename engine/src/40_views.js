@@ -11,32 +11,32 @@ function renderTopStats() {
   if (s) s.textContent = `🔥 ${Noema.stats.streakNow()}`;
 }
 function topbar() {
-  const timer = h('button', { class: 'chip timer hide-m', title: '15-minute focus sprint', onclick: () => {
-    if (timerT) { clearInterval(timerT); timerT = null; timer.classList.remove('running'); timer.textContent = '⏱️ Focus'; return; }
+  const timer = h('button', { class: 'chip timer hide-m', title: t('top.focusTitle'), onclick: () => {
+    if (timerT) { clearInterval(timerT); timerT = null; timer.classList.remove('running'); timer.textContent = '⏱️ ' + t('top.focus'); return; }
     timerEnd = Date.now() + 15 * 60e3; timer.classList.add('running');
-    const tick = () => { const left = Math.max(0, timerEnd - Date.now()); timer.textContent = `⏱️ ${String(left / 60e3 | 0).padStart(2, '0')}:${String((left / 1e3 | 0) % 60).padStart(2, '0')}`; if (!left) { clearInterval(timerT); timerT = null; timer.classList.remove('running'); timer.textContent = '⏱️ Focus'; confetti(120); beep('win'); toast('🎉 Sprint done! Take a 3-minute break — stretch, water, breathe.', 5000); } };
+    const tick = () => { const left = Math.max(0, timerEnd - Date.now()); timer.textContent = `⏱️ ${String(left / 60e3 | 0).padStart(2, '0')}:${String((left / 1e3 | 0) % 60).padStart(2, '0')}`; if (!left) { clearInterval(timerT); timerT = null; timer.classList.remove('running'); timer.textContent = '⏱️ ' + t('top.focus'); confetti(120); beep('win'); toast('🎉 Sprint done! Take a 3-minute break — stretch, water, breathe.', 5000); } };
     tick(); timerT = setInterval(tick, 1000);
-  } }, '⏱️ Focus');
+  } }, '⏱️ ' + t('top.focus'));
   return h('header', { class: 'topbar' },
     h('div', { class: 'brand', onclick: () => go('#/') }, h('div', { class: 'logo' }, '◆'), h('span', { class: 'name' }, Noema.config.appName || 'noema-lite')),
-    h('button', { class: 'subjchip', title: 'Switch subject', onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
+    h('button', { class: 'subjchip', title: t('top.switchSubject'), onclick: () => Noema.openSubjectPicker() }, h('span', {}, SUBJ.emoji || '📘'), h('span', { class: 'st' }, SUBJ.title), h('span', { class: 'chev' }, '▾')),
     h('div', { class: 'spacer' }),
-    Noema.node ? h('button', { class: 'chip curchip', title: 'Back to the map of this curriculum', onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🧭', h('span', { class: 'hide-s' }, ' Map'))
-      : h('button', { class: 'chip curchip', title: 'Curricula: type a goal, get a map of steps', onclick: () => Noema.curricula() }, '🧭', h('span', { class: 'hide-s' }, ' Curricula')),
-    h('button', { class: 'chip explorechip', title: 'Explore: every public subject — info, statistics, study it', onclick: () => Noema.explore() }, '🌍', h('span', { class: 'hide-s' }, ' Explore')),
+    Noema.node ? h('button', { class: 'chip curchip', title: t('top.mapTitle'), onclick: () => Noema.curriculumMap(Noema.node.id, Noema.node.node) }, '🧭', h('span', { class: 'hide-s' }, ' ' + t('top.map')))
+      : h('button', { class: 'chip curchip', title: t('top.curriculaTitle'), onclick: () => Noema.curricula() }, '🧭', h('span', { class: 'hide-s' }, ' ' + t('top.curricula'))),
+    h('button', { class: 'chip explorechip', title: t('top.exploreTitle'), onclick: () => Noema.explore() }, '🌍', h('span', { class: 'hide-s' }, ' ' + t('top.explore'))),
     timer,
-    h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: 'Day streak' }),
-    h('button', { class: 'iconbtn srcbtn', title: 'Sources', onclick: () => toggleSourcesDeck() }, '📚'),
-    h('button', { class: 'iconbtn hide-m', title: 'Theme', onclick: () => { S.settings.theme = isDark() ? 'light' : 'dark'; save(); applyTheme(); route(); } }, '🌓'),
+    h('span', { class: 'chip xp hide-m', id: 'xpchip' }), h('span', { class: 'chip streak hide-s', id: 'streakchip', title: t('top.streak') }),
+    h('button', { class: 'iconbtn srcbtn', title: t('top.sources'), onclick: () => toggleSourcesDeck() }, '📚'),
+    h('button', { class: 'iconbtn hide-m', title: t('top.theme'), onclick: () => { S.settings.theme = isDark() ? 'light' : 'dark'; save(); applyTheme(); route(); } }, '🌓'),
     bellButton(),
-    h('button', { class: 'iconbtn tutor', title: 'Open tutor', onclick: () => openTutor() }, TUTOR.avatar, h('span', {}, 'Tutor')),
-    h('button', { class: 'acchip', title: `${ACCOUNT.name} — profile, ⚙️ settings, backup & sync, ❓ help`, onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
+    h('button', { class: 'iconbtn tutor', title: t('top.tutorTitle'), onclick: () => openTutor() }, TUTOR.avatar, h('span', {}, t('top.tutor'))),
+    h('button', { class: 'acchip', title: t('top.account', { name: ACCOUNT.name }), onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
 }
 
 /* ---------- 🔔 notifications: subjects shared with me (bell + banner) ---------- */
 function bellButton() {
   const badge = h('span', { class: 'bellbadge' });
-  const b = h('button', { class: 'iconbtn bell', id: 'bellbtn', title: 'Notifications', 'aria-label': 'Notifications', onclick: () => openNotes() }, '🔔', badge);
+  const b = h('button', { class: 'iconbtn bell', id: 'bellbtn', title: t('top.notifications'), 'aria-label': t('top.notifications'), onclick: () => openNotes() }, '🔔', badge);
   Noema.notes.on(list => { badge.textContent = list.length || ''; badge.style.display = list.length ? '' : 'none'; b.classList.toggle('has', !!list.length); });
   return b;
 }
@@ -105,13 +105,13 @@ function homeView() {
       goal),
     search, results,
     h('div', { class: 'modes' },
-      modeTile('⚡', 'Lightning round', '60 seconds of true/false traps', '#/lightning'),
-      modeTile('🔧', 'Debug drills', 'Memorize the “ask yourself” checklists', '#/drills', duePb ? `${duePb} due` : null),
-      modeTile('🃏', 'Flashcards', 'Spaced-repetition recall', '#/cards', dueFc ? `${dueFc} due` : null),
-      modeTile('🔁', 'Mistakes gym', 'Retry what you got wrong', '#/mistakes', wrong ? `${wrong}` : null),
-      modeTile('🎲', 'Mixed practice', 'Random exercises from everything you read', '#/practice/all'),
-      modeTile(TUTOR.avatar, 'Socratic tutor', 'Gemini questions you until it clicks', null, null, () => openTutor(null, 'socratic', null, { intent: INTENT.course }))),
-    h('div', { class: 'row', style: { marginBottom: '14px' } }, h('h2', {}, 'Chapters'), h('span', { class: 'tiny' }, `${COURSE.length} chapters · ${COURSE.reduce((a, c) => a + c.sections.length, 0)} sections · ${ALL_EX.length} exercises`)),
+      modeTile('⚡', t('home.lightning'), t('home.lightningSub'), '#/lightning'),
+      modeTile('🔧', t('home.drills'), t('home.drillsSub'), '#/drills', duePb ? t('home.due', { n: duePb }) : null),
+      modeTile('🃏', t('home.cards'), t('home.cardsSub'), '#/cards', dueFc ? t('home.due', { n: dueFc }) : null),
+      modeTile('🔁', t('home.mistakes'), t('home.mistakesSub'), '#/mistakes', wrong ? `${wrong}` : null),
+      modeTile('🎲', t('home.mixed'), t('home.mixedSub'), '#/practice/all'),
+      modeTile(TUTOR.avatar, t('home.tutor'), t('home.tutorSub'), null, null, () => openTutor(null, 'socratic', null, { intent: INTENT.course }))),
+    h('div', { class: 'row', style: { marginBottom: '14px' } }, h('h2', {}, t('home.chapters')), h('span', { class: 'tiny' }, `${COURSE.length} chapters · ${COURSE.reduce((a, c) => a + c.sections.length, 0)} sections · ${ALL_EX.length} exercises`)),
     h('div', { class: 'chapters' }, ...COURSE.map((c, i) => {
       const p = chProgress(c);
       const card = h('button', { class: 'chcard', style: { animationDelay: i * 40 + 'ms' }, onclick: () => go('#/ch/' + c.id) },
@@ -150,10 +150,10 @@ function chapterView(id, tab) {
   setTutorContext({ kind: 'chapter', id });
   tab = tab || chTab[id] || 'learn'; chTab[id] = tab;
   const p = chProgress(c);
-  const tabs = [['learn', '📖 Learn', c.sections.length], ['practice', '🎯 Practice', c.exercises.length], ['debug', '🔧 Debug drills', c.debug.length], ['cards', '🃏 Cards', c.flashcards.length], ['traps', '⚠️ Traps', c.pitfalls.length]];
+  const tabs = [['learn', t('ch.learn'), c.sections.length], ['practice', t('ch.practice'), c.exercises.length], ['debug', t('ch.debug'), c.debug.length], ['cards', t('ch.cards'), c.flashcards.length], ['traps', t('ch.traps'), c.pitfalls.length]];
   const body = h('div');
   const v = view(
-    h('button', { class: 'back', onclick: () => go('#/') }, '← All chapters'),
+    h('button', { class: 'back', onclick: () => go('#/') }, t('ch.all')),
     h('div', { class: 'chhead' }, h('div', { class: 'emo' }, c.emoji),
       h('div', { class: 'grow' }, h('div', { class: 'num' }, `Chapter ${c.num}`), h('h1', {}, c.title), c.subtitle ? h('p', { class: 'muted', style: { margin: '6px 0 0' } }, c.subtitle) : null, sourceChips(FULL_COURSE.find(x => x.id === c.id) || c)),
       h('div', { style: { position: 'relative', width: '76px', height: '76px', flex: 'none' } }, ring((p.sr + p.ex) / 2, 76, 9), h('div', { style: { position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontWeight: 800 } }, Math.round((p.sr + p.ex) * 50) + '%'))),
@@ -363,7 +363,7 @@ function mistakesList() { return ALL_EX.filter(e => S.res[e.id] && S.res[e.id].l
 function mistakesView() {
   setAccent(document.body, null);
   const list = mistakesList();
-  view(h('button', { class: 'back', onclick: () => go('#/') }, '← Home'), h('h1', {}, '🔁 Mistakes gym'),
+  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.mistakes')),
     h('p', { class: 'muted' }, 'Everything whose last attempt was wrong. Get it right once and it leaves the gym.'),
     list.length ? h('div', {}, h('div', { class: 'row', style: { margin: '8px 0 18px' } }, h('button', { class: 'btn primary', onclick: () => startRun(list, { title: '🔁 Mistakes gym', count: 15, back: '#/mistakes' }) }, `▶ Train ${Math.min(15, list.length)} of ${list.length}`)),
       h('div', { style: { display: 'grid', gap: '8px' } }, ...COURSE.map(c => { const n = list.filter(e => e._ch === c).length; return n ? h('button', { class: 'node', onclick: () => startRun(list.filter(e => e._ch === c), { title: `🔁 Ch${c.num} mistakes`, count: n, back: '#/mistakes' }) }, h('div', { class: 'dot' }, c.emoji), h('div', { class: 'grow' }, h('b', {}, c.title)), h('span', { class: 'pill' }, n)) : null; })))
@@ -373,7 +373,7 @@ function mixedView() {
   setAccent(document.body, null);
   const readSecs = new Set(Object.keys(S.read));
   const pool = ALL_EX.filter(e => readSecs.has(e.section));
-  view(h('button', { class: 'back', onclick: () => go('#/') }, '← Home'), h('h1', {}, '🎲 Mixed practice'),
+  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.mixed')),
     h('p', { class: 'muted' }, 'Interleaving beats blocking: random exercises from every section you have read (or from everything).'),
     h('div', { class: 'row', style: { marginTop: '14px' } },
       h('button', { class: 'btn primary', disabled: !pool.length, onclick: () => startRun(pool, { title: '🎲 Mixed: what I have read', count: 12, back: '#/practice/all' }) }, `▶ From what I've read (${pool.length})`),
@@ -400,8 +400,8 @@ function lightningView() {
   setAccent(document.body, null);
   const chSel = h('select', { class: 'sel' }, h('option', { value: 'all' }, 'All chapters'), ...COURSE.map(c => h('option', { value: c.id }, `${c.emoji} Ch${c.num} ${c.title}`)));
   const best = S.bestLightning || 0;
-  view(h('button', { class: 'back', onclick: () => go('#/') }, '← Home'),
-    h('div', { class: 'card lightning' }, h('div', { style: { fontSize: '56px' } }, '⚡'), h('h1', {}, 'Lightning round'),
+  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')),
+    h('div', { class: 'card lightning' }, h('div', { style: { fontSize: '56px' } }, '⚡'), h('h1', {}, t('view.lightning')),
       h('p', { class: 'muted' }, '60 seconds. True or false. Use ← / → or the buttons. Wrong answers are explained at the end.'),
       h('div', { class: 'row', style: { justifyContent: 'center', margin: '14px 0' } }, chSel), h('p', { class: 'tiny' }, `Personal best: ${best}`),
       h('button', { class: 'btn primary', onclick: () => playLightning(chSel.value) }, '▶ Go!')));
@@ -440,7 +440,7 @@ function allCards() { return COURSE.flatMap(c => c.flashcards.map((f, i) => ({ .
 function cardsView() {
   setAccent(document.body, null);
   const body = h('div');
-  view(h('button', { class: 'back', onclick: () => go('#/') }, '← Home'), h('h1', {}, '🃏 Flashcards'), h('p', { class: 'muted' }, 'Leitner spaced repetition: “Again” sends a card back to box 1, “Easy” jumps it ahead.'), body);
+  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.cards')), h('p', { class: 'muted' }, 'Leitner spaced repetition: “Again” sends a card back to box 1, “Easy” jumps it ahead.'), body);
   flashDeck(body, allCards());
 }
 function flashDeck(body, cards) {
@@ -483,7 +483,7 @@ function drillList(body, list) {
 function drillsView() {
   setAccent(document.body, null);
   const body = h('div');
-  view(h('button', { class: 'back', onclick: () => go('#/') }, '← Home'), h('h1', {}, '🔧 Debug drills'),
+  view(h('button', { class: 'back', onclick: () => go('#/') }, t('nav.home')), h('h1', {}, t('view.drills')),
     h('p', { class: 'muted' }, `${Object.keys(PB).length} debugging playbooks. The goal: the right questions pop into your head automatically when something breaks.`), body);
   COURSE.forEach(c => { if (!c.debug.length) return; const sub = h('div', { style: { margin: '22px 0 0' } }); body.append(h('h3', { style: { margin: '20px 0 10px' } }, `${c.emoji} Ch${c.num} · ${c.title}`), sub); sub.append(...c.debug.map(drillTile)); });
 }

@@ -1,5 +1,5 @@
 /* ===================== Account menu: profile, subjects, backup & restore, cloud ===================== */
-const ACC_TABS = [['profile', '👤 Profile'], ['settings', '⚙️ Settings'], ['subjects', '📚 Subjects'], ['backup', '💾 Backup & restore'], ['cloud', '☁️ Cloud'], ['help', '❓ Help']];
+const ACC_TABS = ['profile', 'settings', 'subjects', 'backup', 'cloud', 'help'];   // labels: t('acc.<tab>')
 /** Collapsible section (closed by default) with an optional status pill and ⓘ tooltip. */
 function accSection(icon, title, { status = null, info = null, open = false, body }) {
   const d = h('details', { class: 'accsec', open: open || null },
@@ -18,7 +18,7 @@ function openAccountMenu(tab = 'profile') {
     const body = h('div', { class: 'accbody' });
     const tabs = h('div', { class: 'tabs' });
     const show = t => { tab = t; $$('button', tabs).forEach(b => b.classList.toggle('on', b.dataset.t === t)); body.innerHTML = ''; ACC_VIEWS[t](body, close); };
-    ACC_TABS.forEach(([k, l]) => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, l)));
+    ACC_TABS.forEach(k => tabs.append(h('button', { 'data-t': k, onclick: () => show(k) }, t('acc.' + k))));
     const st = Noema.stats.get();
     box.append(h('div', { class: 'acchead' }, h('div', { class: 'accemo' }, ACCOUNT.emoji || '🙂'),
       h('div', { class: 'grow' }, h('h2', {}, ACCOUNT.name), h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? `☁️ Cloud account · ${ACCOUNT.email}` : '💻 Local profile on this device')),
@@ -77,10 +77,13 @@ const ACC_VIEWS = {
     const goal = h('input', { type: 'number', min: 20, step: 10, value: S.settings.goal, 'aria-label': 'Daily XP goal' });
     const snd = h('input', { type: 'checkbox', checked: S.settings.sound });
     const chunk = h('input', { type: 'checkbox', checked: S.settings.chunk });
+    const uiL = h('select', { 'aria-label': t('set.uiLang') }, h('option', { value: '', selected: !S.settings.lang }, t('set.uiLangAuto', { lang: NoemaI18n.LANGS.find(l => l[0] === NoemaI18n.browser())?.[1] })),
+      ...NoemaI18n.LANGS.map(([v, l]) => h('option', { value: v, selected: S.settings.lang === v }, l)));
     const chatL = chatLangSelect({ persist: false });
     const langBox = h('div', {}, h('div', { class: 'field' }, h('label', {}, 'Language of the AI conversations ', tip('The tutor (all its modes), the 💡 explanations, the feedback on your answers and the titles of your conversations are written in this language. The course material is NOT changed or translated: it stays in its own language on every screen.')), chatL,
       h('div', { class: 'tiny' }, `The course material stays in its own language (${SUBJ.title}: ${langName(COURSE_LANG)}). You can also switch it in the tutor (🗣 next to the topic).`)));
     const display = h('div', {}, h('div', { class: 'row' }, h('div', { class: 'field' }, h('label', {}, 'Theme'), theme), h('div', { class: 'field' }, h('label', {}, 'Daily XP goal'), goal)),
+      h('div', { class: 'field' }, h('label', {}, t('set.uiLang') + ' ', tip(t('set.uiLangTip'))), uiL),
       h('label', { class: 'row', style: { margin: '8px 0' } }, snd, 'Sound effects'),
       h('label', { class: 'row', style: { margin: '8px 0' } }, chunk, 'Bite-size reading (reveal theory chunk by chunk)'));
     const subject = h('div', { class: 'row' },
@@ -96,10 +99,11 @@ const ACC_VIEWS = {
       accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', onclick: async () => {
-          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; save();
+          S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; const relabel = (S.settings.lang || '') !== uiL.value; S.settings.lang = uiL.value || undefined; save();
           putAccountSettings({ curProvider: curProv.value || undefined, curBudget: Math.max(1, +nbudget.value || 8) });
           if (CL) { Noema.kv.set(Noema.kv.accountKey('claudeBudget'), JSON.stringify(Math.max(1, +cbudget.value || 15))); if (cmodel.value) Noema.kv.set(Noema.kv.accountKey('claudeModel'), JSON.stringify(cmodel.value)); else Noema.kv.del(Noema.kv.accountKey('claudeModel'));
             if ((ckey.value.trim() || '') !== CL.Key.get(acc) || remember.checked !== CL.Key.remembered(acc)) { if (!(await checkClaude())) return; } }
+          if (relabel) { flushSave(); location.reload(); return; }   // the menus are drawn once: show them in the new language
           applyTheme(); close(); route(); renderTopStats(); toast('Saved ✔');
         } }, 'Save settings')));
   },
