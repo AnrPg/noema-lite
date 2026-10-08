@@ -195,8 +195,8 @@ const C = { fuel: [95, 125], boiler: [290, 125], turbine: [490, 125], generator:
   await p.mouse.click(hx, hy); await wait(100);
   ok(await p.$$eval('#F1 .vx-mask.off', x => x.length) === 1, 'figure: tapping a cover peeks under it');
   await p.screenshot({ path: SHOTS + '/v2_figure.png' });
-  // practice tab lists the visual types as filters
-  await p.evaluate(() => { location.hash = '#/practice/ch01'; }); await wait(500);
+  // Practice › “Choose what to practise” lists the visual types as filters
+  await p.evaluate(() => { location.hash = '#/ch/ch01/filters'; }); await wait(500);
   ok(/Drag the labels/.test(await p.locator('main').innerText()), 'practice filters show the visual types');
   // tutor context
   ok(await p.evaluate(() => /Labeled parts: .*Boiler/.test(exerciseAsText(EX['ch01-e104'])) && /Correct order: Fuel → Boiler/.test(exerciseAsText(EX['ch01-e103']))), 'the tutor gets a text version of the picture and the answers');

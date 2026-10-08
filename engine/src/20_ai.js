@@ -256,18 +256,26 @@ function chatLangSelect({ cls = '', onChange = null, persist = true } = {}) {
     h('option', { value: '', selected: !chatLang() }, `🗣 Same as the course (${CHAT_LANGS.find(l => l[0] === COURSE_LANG)?.[1] || COURSE_LANG})`),
     ...CHAT_LANGS.map(([v, l]) => h('option', { value: v, selected: chatLang() === v }, '🗣 ' + l)));
 }
+/** The tutor is the learner's character: its face (engine/art.js), else the subject's emoji. */
+function tutorFace() { const svg = SHL() && window.NoemaArt && window.NoemaThemes ? NoemaArt.mascot(NoemaThemes.current()) : ''; return svg ? h('div', { class: 'avatar face', html: svg }) : h('div', { class: 'avatar' }, TUTOR.avatar); }
+/** 🕘 history, ⬇️ export, ↺ new: in a ⋮ with the shell, three small buttons without it. */
+function tutorTools() {
+  const items = [{ label: 'Conversation history', icon: '🕘', run: () => { T.showHistory = !T.showHistory; renderTutor(); } }, { label: 'Export this conversation (.md)', icon: '⬇️', run: () => exportConvo(currentConvo()) },
+    { label: 'New conversation', icon: '↺', run: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }];
+  if (SHL()) return [T.showHistory ? h('button', { class: 'iconbtn on', title: 'Conversation history', onclick: items[0].run }, '🕘') : null, SHL().menuButton(items, { label: 'More' })];
+  return items.map((it, i) => h('button', { class: 'iconbtn' + (i === 0 && T.showHistory ? ' on' : ''), title: it.label, onclick: it.run }, it.icon));
+}
+function renderTutorHead() { if (T.open) renderTutor(); }
 function renderTutor() {
   const d = $('.drawer'); d.innerHTML = '';
   const hist = T.hist[tutorCtxKey()] || [];
   const msgs = h('div', { class: 'msgs' });
   d.append(
     h('div', { class: 'dh' },
-      h('div', { class: 'top' }, h('div', { class: 'avatar' }, TUTOR.avatar),
+      h('div', { class: 'top' }, tutorFace(),
         h('div', { class: 'grow' }, h('b', {}, TN), h('div', { class: 'tiny' }, 'Your Gemini-powered tutor · ' + (S.settings.model || 'auto model'))),
-        h('button', { class: 'iconbtn' + (T.showHistory ? ' on' : ''), title: 'Conversation history', onclick: () => { T.showHistory = !T.showHistory; renderTutor(); } }, '🕘'),
-        h('button', { class: 'iconbtn', title: 'Export this conversation (.md)', onclick: () => exportConvo(currentConvo()) }, '⬇️'),
-        h('button', { class: 'iconbtn', title: 'New conversation', onclick: () => { T.hist[tutorCtxKey()] = []; delete T.tstate[tutorCtxKey()]; renderTutor(); } }, '↺'),
-        h('button', { class: 'iconbtn', title: 'Close', onclick: closeTutor }, '✕')),
+        ...tutorTools(),
+        h('button', { class: 'iconbtn', title: 'Close', 'aria-label': 'Close', onclick: closeTutor }, '✕')),
       h('div', { class: 'row' }, h('span', { class: 'ctxchip' }, ctxLabel()),
         T.ctx ? h('button', { class: 'tiny', style: { textDecoration: 'underline' }, onclick: () => setTutorContext(null) }, 'use whole course') : null,
         chatLangSelect({ cls: 'chatlang', onChange: () => renderTutor() })),

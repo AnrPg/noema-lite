@@ -841,14 +841,26 @@ window.NoemaCurMap = (() => {
 
   /* ======================= the map ======================= */
   const NW = 196, NH = 76, GX = 74, GY = 18, TOP = 64;
-  function map(acc, cid, { focus, onStudy, appHelp = false } = {}) {
+  /* the treasure map (a page of the shell): stations from the bottom (prerequisites) up to the goal; smaller nodes */
+  const VW = 158, VH = 66, VGX = 26, VGY = 72, VTOP = 96;
+  /** What the shell asks the next map it opens to do (e.g. { settings: true } from a Roadmap's ⋮). */
+  const mapOpts = { next: null };
+  const SHL = () => window.NoemaShell?.mounted ? window.NoemaShell : null;
+  const SL = (k, d) => window.NoemaShell ? NoemaShell.L(k) : d;   // the shell's words (engine/i18n_shell.js), English without it
+  const viewKey = 'noema-mapview';
+  /** opts.page: draw into this element (a page of the shell) instead of a full-screen overlay; opts.chrome(menu): the page's ⋮ */
+  function map(acc, cid, { focus, onStudy, appHelp = false, page = null, chrome = null, settings: openSettings = false } = {}) {
     let c = C().get(acc, cid); if (!c) { toast?.('That curriculum is not on this device yet.'); return; }
     G().start(acc); window.NoemaCurJobs?.App.start(acc);
     if (c.shared && !c.shared.ended) SH()?.refresh(acc, cid).then(() => SH().prefetch(acc, cid)).catch(e => console.warn('[curshare]', e.message));   // 👥 who prepared what, the owner's newest map
-    overlay((box, close) => {
-      box.classList.add('cm-full'); box.parentElement.classList.add('cm-ov');
+    const frame = page ? (build => { page.replaceChildren(); const box = el('div', { class: 'cm-full cm-page' }); page.append(box); build(box, () => { }); }) : (build => overlay(build));
+    const toLibrary = () => page ? SHL()?.go('#/learn') : library(acc, { onStudy });
+    frame((box, close) => {
+      if (!page) { box.classList.add('cm-full'); box.parentElement.classList.add('cm-ov'); }
       const phone = matchMedia('(max-width: 720px)').matches;
-      let zoom = phone ? 0.78 : 1, sel = focus || null;
+      const vert = !!page;   // the shell's map grows upwards, like a path to a treasure
+      let zoom = phone && !vert ? 0.78 : 1, sel = focus || null, fitted = false;
+      let listMode = (() => { try { return page && localStorage.getItem(viewKey) === 'list'; } catch (e) { return false; } })();
       const sum = el('div', { class: 'cm-sum' }); const scroller = el('div', { class: 'cm-scroll' }); const canvas = el('div', { class: 'cm-canvas' }); scroller.append(canvas);
       const panel = el('aside', { class: 'cm-panel', 'aria-live': 'polite' });
       const appBar = el('div', { class: 'cm-appbar', role: 'status' });
@@ -880,33 +892,62 @@ window.NoemaCurMap = (() => {
           el('button', { class: 'btn small primary', onclick: e => copy(J().message(C().get(acc, cid), { count: 1 }), e.currentTarget) }, '📋 Copy the message'), el('button', { class: 'btn small', onclick: () => showApp() }, 'How? · by hand'));
       };
       const study = (s, nid) => { close(); viaStep(acc, cid, nid, s); if (onStudy) onStudy(s); else window.Noema.switchTo(acc, s); };
+      const addStep = () => editStep(acc, cid, null, { mode: 'add', onDone: nid => { drawMap(); if (nid) { sel = nid; drawMap(); showPanel(nid); scrollToNode(nid); } } });
+      const exportJson = () => { const b = new Blob([JSON.stringify(C().get(acc, cid), null, 1)], { type: 'application/json' }); const a = el('a', { href: URL.createObjectURL(b), download: `curriculum-${cid}.json` }); document.body.append(a); a.click(); a.remove(); };
+      const legend = () => el('div', { class: 'cm-legend tiny' }, el('span', {}, '✅ mastered · ', openIc(), ' open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app · 📦 taught by your own subject · 🔄 being re-planned'), tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.'));
+      const showLegend = () => SHL() ? SHL().sheet(SL('mapSigns', 'What the signs mean'), b2 => b2.append(legend())) : overlay((b2, close2) => b2.append(legend(), el('div', { class: 'row noema-ovfoot' }, el('button', { class: 'btn small', onclick: close2 }, 'Close'))));
+      const setList = on => { listMode = on; try { localStorage.setItem(viewKey, on ? 'list' : 'map'); } catch (e) { } drawMap(); drawMenu(); };
+      /** the shell's ⋮ for this map: what is not needed all the time */
+      const drawMenu = () => chrome?.(() => [
+        { label: listMode ? SL('showAsMap', 'Show as a map') : SL('showAsList', 'Show as a list'), icon: listMode ? 'map' : 'list', run: () => setList(!listMode) },
+        member ? null : { label: SL('addStep', 'Add a step'), icon: 'plus', run: addStep },
+        member ? null : { label: c.shared && !c.shared.ended ? SL('sharing', 'Sharing') : SL('share', 'Share'), sub: SL('shareRmSub', 'Everybody keeps their own progress; the prepared steps are shared'), icon: 'people', run: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) },
+        c.provider === 'claudeapp' ? { label: SL('claudeApp', 'Your Claude app'), sub: SL('claudeAppMapSub', 'Copy the message · by hand · import'), icon: 'chat', run: () => showApp() } : null,
+        { label: SL('rmSettings', 'Settings'), sub: SL('rmSettingsSubAll', 'Prepare ahead, AI, budget, review, re-plan, delete'), icon: 'gear', run: () => settings() },
+        { label: SL('exportJson', 'Export (.json)'), icon: 'download', run: exportJson }, '-',
+        { label: SL('mapSigns', 'What the signs mean'), icon: 'help', run: showLegend }]);
       const zoomTo = z => { const r = scroller.getBoundingClientRect(); const cx = (scroller.scrollLeft + r.width / 2) / zoom, cy = (scroller.scrollTop + r.height / 2) / zoom; zoom = Math.max(0.35, Math.min(1.6, z)); drawMap(); scroller.scrollLeft = cx * zoom - r.width / 2; scroller.scrollTop = cy * zoom - r.height / 2; };
+      const fit = () => { const r = scroller.getBoundingClientRect(); zoomTo(vert ? Math.min(1, r.width / (+canvas.dataset.w || 1)) : Math.min(r.width / (+canvas.dataset.w || 1), r.height / (+canvas.dataset.h || 1))); };
       const tools = el('div', { class: 'cm-tools' },
-        el('button', { class: 'btn small', title: 'Zoom out', 'aria-label': 'Zoom out', onclick: () => zoomTo(zoom / 1.2) }, '−'), el('button', { class: 'btn small', title: 'Zoom in', 'aria-label': 'Zoom in', onclick: () => zoomTo(zoom * 1.2) }, '+'),
-        el('button', { class: 'btn small', title: 'See the whole map', onclick: () => { const r = scroller.getBoundingClientRect(); zoomTo(Math.min(r.width / (+canvas.dataset.w || 1), r.height / (+canvas.dataset.h || 1))); } }, '⤢ Fit'),
+        el('button', { class: 'btn small cm-zoom', title: 'Zoom out', 'aria-label': 'Zoom out', onclick: () => zoomTo(zoom / 1.2) }, '−'), el('button', { class: 'btn small cm-zoom', title: 'Zoom in', 'aria-label': 'Zoom in', onclick: () => zoomTo(zoom * 1.2) }, '+'),
+        el('button', { class: 'btn small cm-zoom', title: 'See the whole map', onclick: fit }, '⤢ Fit'),
         el('button', { class: 'btn small primary', onclick: () => showNext() }, '▶ Next up'),
-        member ? null : el('button', { class: 'btn small', title: 'Add a step', onclick: () => editStep(acc, cid, null, { mode: 'add', onDone: nid => { drawMap(); if (nid) { sel = nid; drawMap(); showPanel(nid); scrollToNode(nid); } } }) }, '➕ Step'),
-        member ? null : el('button', { class: 'btn small cm-sharetool', title: 'Share this curriculum — everybody keeps their own progress, the prepared steps are shared', onclick: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) }, '👥'),
-        el('button', { class: 'btn small', title: 'Settings of this curriculum', onclick: () => settings() }, '⚙️'));
-      box.append(el('div', { class: 'cm-top' }, el('button', { class: 'btn small ghost', onclick: () => { close(); library(acc, { onStudy }); } }, '← Curricula'), el('div', { class: 'cm-title' }, el('b', {}, '🧭 ' + (c.title || c.goal)), sum), tools, el('button', { class: 'btn small', 'aria-label': 'Close', onclick: close }, '✕')),
+        page ? null : member ? null : el('button', { class: 'btn small', title: 'Add a step', onclick: addStep }, '➕ Step'),
+        page ? null : member ? null : el('button', { class: 'btn small cm-sharetool', title: 'Share this curriculum — everybody keeps their own progress, the prepared steps are shared', onclick: () => shareCurriculum(acc, cid, { onDone: () => drawMap() }) }, '👥'),
+        page ? null : el('button', { class: 'btn small', title: 'Settings of this curriculum', onclick: () => settings() }, '⚙️'));
+      const seg = page ? el('div', { class: 'ns-seg small cm-viewseg', role: 'radiogroup', 'aria-label': SL('mapOrList', 'Map or list') }, ...[[false, SL('viewMap', 'Map')], [true, SL('viewList', 'List')]].map(([v, l]) => el('button', { class: 'cm-vbtn', 'data-list': String(v), role: 'radio', onclick: () => setList(v) }, l))) : null;
+      box.append(el('div', { class: 'cm-top' }, page ? null : el('button', { class: 'btn small ghost', onclick: () => { close(); toLibrary(); } }, '← Curricula'), el('div', { class: 'cm-title' }, el('b', {}, '🧭 ' + (c.title || c.goal)), sum), seg, tools, page ? null : el('button', { class: 'btn small', 'aria-label': 'Close', onclick: close }, '✕')),
         holdBar, appBar, shareBar, el('div', { class: 'cm-body' }, scroller, panel),
-        el('div', { class: 'cm-legend tiny' }, el('span', {}, '✅ mastered · ', openIc(), ' open · 🔒 locked — master its prerequisites first · 📝 review it, then it is prepared · ⚡ prepared · ⏳ being prepared · 💬 waiting for your Claude app · 📦 taught by your own subject · 🔄 being re-planned'), tip('A step opens when every step before it (its prerequisites) is mastered: all its sections read and at least 80 % of its exercises solved — or the short “I already know this” test passed.')));
+        page ? null : legend());
 
       function drawMap() {
         c = C().get(acc, cid) || c; const st = C().statuses(acc, c); const L = C().layout(c); const s = C().summary(acc, c);
         sum.textContent = `${s.mastered}/${s.total} mastered · ${s.open} open · ${s.ready} prepared` + (G().paused() ? ' · ⏸ preparing paused' : ''); drawBar(); drawShareBar(); drawHold();
-        const rows = Math.max(...L.cols.map(col => col.length)); const W = L.cols.length * (NW + GX) + GX, H = TOP + rows * (NH + GY) + 30;
+        box.classList.toggle('cm-listmode', !!listMode); seg?.querySelectorAll('button').forEach(b => { const on = (b.dataset.list === 'true') === !!listMode; b.classList.toggle('on', on); b.setAttribute('aria-checked', String(on)); });
+        if (listMode) return drawList(st);
+        const nw = vert ? VW : NW, nh = vert ? VH : NH, gx = vert ? VGX : GX, gy = vert ? VGY : GY, top = vert ? VTOP : TOP;
+        const rows = Math.max(...L.cols.map(col => col.length)), nL = L.cols.length;
+        const W = vert ? rows * (nw + gx) + gx : nL * (nw + gx) + gx, H = vert ? top + nL * (nh + gy) + 40 : top + rows * (nh + gy) + 30;
         canvas.dataset.w = W; canvas.dataset.h = H; canvas.style.width = W * zoom + 'px'; canvas.style.height = H * zoom + 'px'; canvas.innerHTML = '';
-        const inner = el('div', { class: 'cm-inner', style: { width: W + 'px', height: H + 'px', transform: `scale(${zoom})` } }); canvas.append(inner);
-        const P = {}; L.cols.forEach((col, x) => { const off = (rows - col.length) * (NH + GY) / 2; col.forEach((id, y) => P[id] = { x: GX / 2 + x * (NW + GX), y: TOP + off + y * (NH + GY) }); });
+        const inner = el('div', { class: 'cm-inner' + (vert ? ' cm-vert' : ''), style: { width: W + 'px', height: H + 'px', transform: `scale(${zoom})` } }); canvas.append(inner);
+        const P = {};
+        if (vert) L.cols.forEach((col, x) => { const off = (rows - col.length) * (nw + gx) / 2; col.forEach((id, y) => P[id] = { x: gx / 2 + off + y * (nw + gx), y: top + (nL - 1 - x) * (nh + gy) }); });   // layer 0 at the bottom
+        else L.cols.forEach((col, x) => { const off = (rows - col.length) * (nh + gy) / 2; col.forEach((id, y) => P[id] = { x: gx / 2 + x * (nw + gx), y: top + off + y * (nh + gy) }); });
         // the three parts
         const goalT = c.title || c.goal;
-        for (const [k, label] of [['prereq', '1 · Prerequisites'], ['core', '2 · ' + goalT], ['apps', '3 · Applications']]) { const [a, b] = L.parts[k]; if (b < a) continue; inner.append(el('div', { class: 'cm-band cm-' + k, style: { left: (a * (NW + GX) + 8) + 'px', width: ((b - a + 1) * (NW + GX) - 16) + 'px', height: (H - 8) + 'px' } }, el('span', {}, label))); }
+        for (const [k, label] of [['prereq', '1 · Prerequisites'], ['core', '2 · ' + goalT], ['apps', '3 · Applications']]) { const [a, b] = L.parts[k]; if (b < a) continue;
+          inner.append(el('div', { class: 'cm-band cm-' + k, style: vert ? { left: '6px', width: (W - 12) + 'px', top: (top + (nL - 1 - b) * (nh + gy) - gy / 2 + 6) + 'px', height: ((b - a + 1) * (nh + gy) - 12) + 'px' } : { left: (a * (nw + gx) + 8) + 'px', width: ((b - a + 1) * (nw + gx) - 16) + 'px', height: (H - 8) + 'px' } }, el('span', {}, label))); }
+        if (vert) inner.append(el('div', { class: 'cm-chest', 'aria-hidden': 'true', style: { left: (W / 2 - 22) + 'px', top: '18px' }, html: '<svg viewBox="0 0 44 34" width="44" height="34"><rect x="3" y="12" width="38" height="20" rx="4" fill="var(--t2, #ffe8a3)" stroke="var(--t2i, #b07d10)" stroke-width="2"/><path d="M3 18h38M22 12v20" stroke="var(--t2i, #b07d10)" stroke-width="2"/><path d="M5 12q17-14 34 0" fill="var(--t2, #ffe8a3)" stroke="var(--t2i, #b07d10)" stroke-width="2"/></svg>' }));
         // edges
         const NS = 'http://www.w3.org/2000/svg'; const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('class', 'cm-edges');
         const rel = sel ? new Set([sel, ...c.edges.filter(e => e.to === sel).map(e => e.from), ...c.edges.filter(e => e.from === sel).map(e => e.to)]) : null;
-        for (const e of c.edges) { const a = P[e.from], b = P[e.to]; if (!a || !b) continue; const p = document.createElementNS(NS, 'path'); const x1 = a.x + NW, y1 = a.y + NH / 2, x2 = b.x, y2 = b.y + NH / 2, mx = (x1 + x2) / 2; p.setAttribute('d', `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`); p.setAttribute('class', (st[e.from].mastered ? 'ok' : '') + (rel && (e.from === sel || e.to === sel) ? ' hl' : '') + (rel && !(e.from === sel || e.to === sel) ? ' dim' : '')); svg.append(p); }
+        for (const e of c.edges) { const a = P[e.from], b = P[e.to]; if (!a || !b) continue; const p = document.createElementNS(NS, 'path');
+          if (vert) { const x1 = a.x + nw / 2, y1 = a.y, x2 = b.x + nw / 2, y2 = b.y + nh, my = (y1 + y2) / 2; p.setAttribute('d', `M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}`); }
+          else { const x1 = a.x + nw, y1 = a.y + nh / 2, x2 = b.x, y2 = b.y + nh / 2, mx = (x1 + x2) / 2; p.setAttribute('d', `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`); }
+          p.setAttribute('class', (st[e.from].mastered ? 'ok' : '') + (rel && (e.from === sel || e.to === sel) ? ' hl' : '') + (rel && !(e.from === sel || e.to === sel) ? ' dim' : '')); svg.append(p); }
         inner.append(svg);
+        // the learner's character waits at the next station
+        const nx = vert ? C().nextUp(acc, c)[0] : null, ART = window.NoemaArt, TH = window.NoemaThemes;
         for (const [id, n] of Object.entries(c.nodes)) {
           const s2 = st[id], pk = n.pack?.status, key = c.id + '/' + id;
           const state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked';
@@ -915,12 +956,25 @@ window.NoemaCurMap = (() => {
           const prep = pk === 'ready' ? '⚡' : rx?.status === 'ready' ? '⚡' : rx && !rx.mine ? '⏳' : pk === 'app' || J().needsPlan(n) && c.provider === 'claudeapp' && !member ? '💬' : pk === 'generating' || G().busy() === key ? '⏳' : pk === 'failed' ? '⚠️' : pk === 'paused' ? '⏸️' : s2.open && !s2.mastered && !n.reviewed && !c.autoApprove ? '📝' : '';
           const byOther = rx && !rx.mine ? (rx.status === 'ready' ? `prepared by ${rx.by || 'another member'}` : `being prepared by ${rx.by || 'another member'}`) : '';
           const prep2 = n.pack?.assigned ? (s2.replanning ? '🔄' : '📦') : prep;   // 📦 taught by the learner's own subject · 🔄 being re-planned to match it
-          const b = el('button', { class: `cm-node cm-${state} cm-r-${n.role}` + (sel === id ? ' sel' : '') + (rel && !rel.has(id) ? ' dim' : ''), style: { left: P[id].x + 'px', top: P[id].y + 'px', width: NW + 'px', height: NH + 'px' }, 'data-id': id,
+          const b = el('button', { class: `cm-node cm-${state} cm-r-${n.role}` + (sel === id ? ' sel' : '') + (rel && !rel.has(id) ? ' dim' : '') + (id === nx ? ' cm-nextup' : ''), style: { left: P[id].x + 'px', top: P[id].y + 'px', width: nw + 'px', height: nh + 'px' }, 'data-id': id,
             'aria-label': `${n.title} — ${ROLE[n.role]} — ${state}${n.pack?.assigned ? (s2.replanning ? ', being re-planned to match your subject' : ', taught by your subject') : pk === 'ready' ? ', prepared' : ''}${byOther ? ', ' + byOther : ''}`, onclick: () => { sel = id; drawMap(); showPanel(id); } },
-            el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), el('span', { class: 'cm-badges' }, badge, byOther ? el('span', { class: 'cm-by', title: byOther }, prep2, '👤') : prep2, n.material?.files?.length && !n.pack?.assigned ? el('span', { title: 'Your material: ' + n.material.files.map(f => f.name).join(', ') }, '📎') : null),
+            id === nx && ART && TH ? el('span', { class: 'cm-ic cm-hero', title: 'Next up', html: ART.mascot(TH.current()) }) : el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, n.title), el('span', { class: 'cm-badges' }, badge, byOther ? el('span', { class: 'cm-by', title: byOther }, prep2, '👤') : prep2, n.material?.files?.length && !n.pack?.assigned ? el('span', { title: 'Your material: ' + n.material.files.map(f => f.name).join(', ') }, '📎') : null),
             s2.score && !s2.mastered ? el('i', { class: 'cm-prog', style: { width: fmtPct(s2.score) } }) : null);
           inner.append(b);
         }
+        if (vert && !fitted && scroller.clientWidth) { fitted = true; const z = Math.max(0.45, Math.min(1, (scroller.clientWidth - 8) / W)); if (Math.abs(z - zoom) > 0.02) { zoom = z; drawMap(); } }
+      }
+      /** The same stations as a list, in study order (from the first prerequisite up to the goal). */
+      function drawList(st) {
+        const L = C().layout(c); canvas.innerHTML = ''; canvas.style.width = ''; canvas.style.height = '';
+        const list = el('ol', { class: 'cm-list' });
+        L.cols.forEach((col, x) => col.forEach(id => {
+          const n = c.nodes[id], s2 = st[id], state = s2.mastered ? 'mastered' : s2.open ? 'open' : 'locked', pk = n.pack?.status;
+          list.append(el('li', {}, el('button', { class: `cm-node cm-listnode cm-${state}` + (sel === id ? ' sel' : ''), 'data-id': id, onclick: () => { sel = id; drawMap(); showPanel(id); } },
+            el('span', { class: 'cm-ic' }, ICON[n.role] || '•'), el('span', { class: 'cm-t' }, el('b', {}, n.title), el('small', {}, (ROLE[n.role] || '') + (pk === 'ready' ? ' · ⚡ prepared' : pk === 'generating' ? ' · ⏳ preparing' : n.pack?.assigned ? ' · 📦 your subject' : ''))),
+            el('span', { class: 'cm-badges' }, s2.mastered ? '✅' : s2.locked ? '🔒' : openIc()), s2.score && !s2.mastered ? el('i', { class: 'cm-prog', style: { width: fmtPct(s2.score) } }) : null)));
+        }));
+        canvas.append(list);
       }
       function showPanel(id) {
         c = C().get(acc, cid) || c; const n = c.nodes[id]; if (!n) return; const st = C().statuses(acc, c)[id]; const pk = n.pack || {}; const key = c.id + '/' + id;
@@ -1003,6 +1057,7 @@ window.NoemaCurMap = (() => {
       // scroll only the map (scrollIntoView would also scroll the full-screen frame and hide the top bar)
       function scrollToNode(id) {
         const b = canvas.querySelector(`[data-id="${CSS.escape(id)}"]`); if (!b) return;
+        if (listMode) { b.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
         const x = parseFloat(b.style.left) * zoom, y = parseFloat(b.style.top) * zoom, r = scroller.getBoundingClientRect();
         scroller.scrollTo({ left: Math.max(0, x - r.width / 2 + NW * zoom / 2), top: Math.max(0, y - r.height / 2 + NH * zoom / 2), behavior: 'smooth' });
       }
@@ -1059,13 +1114,13 @@ window.NoemaCurMap = (() => {
               member ? el('p', { class: 'tiny' }, `👥 Shared by ${c.shared.ownerName || 'its owner'}: you prepare steps nobody has prepared yet with your own AI (above); the map and its plans are the owner’s.`) : el('label', { class: 'tiny' }, review, ' Let me review each step before it is prepared (recommended)'),
               el('label', { class: 'tiny' }, pause, ' Pause preparing in the background on this device'), keysBox(acc), aheadBox, member ? null : replanBox),
             el('div', { class: 'row noema-ovfoot' },
-              el('button', { class: 'btn primary', onclick: () => { const cur = C().get(acc, cid); cur.prefetch = +pf.value; cur.nodeBudget = Math.max(1, +bud.value || 8); cur.provider = prov.value; cur.autoApprove = !review.checked;
+              el('button', { class: 'btn primary cm-savesettings', onclick: () => { const cur = C().get(acc, cid); cur.prefetch = +pf.value; cur.nodeBudget = Math.max(1, +bud.value || 8); cur.provider = prov.value; cur.autoApprove = !review.checked;
                 if (cur.provider !== 'claudeapp') for (const n of Object.values(cur.nodes)) if (n.pack?.status === 'app' && n.pack.auto) n.pack = { ...n.pack, status: null, queuedAt: null };   // queued ahead for the Claude app → prepared here now
                 if (cur.provider === 'claudeapp' && cur.status === 'building') cur.status = 'waiting';
                 C().save(acc, cur); G().setPaused(pause.checked); close2(); drawMap(); G().kick(); } }, 'Save'),
-              el('button', { class: 'btn small', onclick: () => { const b = new Blob([JSON.stringify(C().get(acc, cid), null, 1)], { type: 'application/json' }); const a = el('a', { href: URL.createObjectURL(b), download: `curriculum-${cid}.json` }); document.body.append(a); a.click(); a.remove(); } }, '⬇️ Export'),
-              member ? el('button', { class: 'btn small ghost cm-leave', onclick: async () => { if (!confirm(`Leave “${c.title || c.goal}”? Your copy of the map goes; the steps you studied stay in your subjects, with your progress.`)) return; await SH().leave(acc, cid); close2(); close(); library(acc, { onStudy }); } }, '↩ Leave')
-                : el('button', { class: 'btn small ghost', onclick: async () => { const sh = C().get(acc, cid)?.shared; if (!confirm('Delete this curriculum? The subjects already prepared stay in your subjects.' + (sh && !sh.ended && sh.role === 'owner' ? '\nIt is shared: sharing stops too (the others keep their copies).' : ''))) return; if (sh && !sh.ended && sh.role === 'owner') await SH().unpublish(acc, cid).catch(e => toast('⚠️ ' + e.message, 5000)); C().remove(acc, cid); close2(); close(); library(acc, { onStudy }); } }, '🗑 Delete'),
+              el('button', { class: 'btn small', onclick: exportJson }, '⬇️ Export'),
+              member ? el('button', { class: 'btn small ghost cm-leave', onclick: async () => { if (!confirm(`Leave “${c.title || c.goal}”? Your copy of the map goes; the steps you studied stay in your subjects, with your progress.`)) return; await SH().leave(acc, cid); close2(); close(); toLibrary(); } }, '↩ Leave')
+                : el('button', { class: 'btn small ghost', onclick: async () => { const sh = C().get(acc, cid)?.shared; if (!confirm('Delete this curriculum? The subjects already prepared stay in your subjects.' + (sh && !sh.ended && sh.role === 'owner' ? '\nIt is shared: sharing stops too (the others keep their copies).' : ''))) return; if (sh && !sh.ended && sh.role === 'owner') await SH().unpublish(acc, cid).catch(e => toast('⚠️ ' + e.message, 5000)); C().remove(acc, cid); close2(); close(); toLibrary(); } }, '🗑 Delete'),
               el('button', { class: 'btn small', onclick: close2 }, 'Close')));
         });
       }
@@ -1090,8 +1145,10 @@ window.NoemaCurMap = (() => {
           ask();
         });
       }
-      drawMap(); if (sel) { showPanel(sel); setTimeout(() => scrollToNode(sel), 60); } else { const first = C().nextUp(acc, c)[0]; if (first) setTimeout(() => scrollToNode(first), 60); }
+      drawMap(); drawMenu(); if (sel) { showPanel(sel); setTimeout(() => scrollToNode(sel), 60); } else { const first = C().nextUp(acc, c)[0]; if (first) setTimeout(() => scrollToNode(first), 60); }
+      if (page && !sel && !listMode) requestAnimationFrame(() => { fitted = false; drawMap(); const first = C().nextUp(acc, c)[0]; if (first) scrollToNode(first); });
       if (appHelp) setTimeout(() => showApp(), 300);
+      if (openSettings) setTimeout(() => settings(), 100);
       // live updates (statuses, preparation) — redraw at most twice a second
       let t = null; const redraw = () => { if (!box.isConnected) { offA(); offB(); offS?.(); return; } clearTimeout(t); t = setTimeout(() => { drawMap(); if (sel && panel.classList.contains('on')) showPanel(sel); }, 400); };
       const offA = C().onChange(redraw), offB = G().onChange(redraw); const offS = SH()?.onChange(redraw); const offC = J().App.onChange(() => { if (box.isConnected) drawBar(); else offC(); });
@@ -1101,5 +1158,5 @@ window.NoemaCurMap = (() => {
 
   /** In a node's subject: the curriculum it belongs to, mastery so far, back to the map. */
   function nodeInfo(acc, ref) { const c = C().get(acc, ref?.id); const n = c?.nodes[ref?.node]; if (!n) return null; const st = C().nodeStatus(acc, c, ref.node); return { c, n, st }; }
-  return { importMap, library, create, map, progress, nodeInfo, editStep, attachDialog, attachMany, planNow, doAttach, likeness, reviewChanges };
+  return { importMap, library, create, map, mapOpts, progress, nodeInfo, editStep, attachDialog, attachMany, planNow, doAttach, likeness, reviewChanges, shareCurriculum, exploreCurricula, inviteRow };
 })();

@@ -12,7 +12,9 @@ const fmtWhen = t => t ? new Date(t).toLocaleString() : '—';
 function accountSettings() { try { return JSON.parse(Noema.kv.get(Noema.kv.accountKey('settings')) || '{}'); } catch (e) { return {}; } }
 function putAccountSettings(patch) { flushSave(); const s = Object.assign(accountSettings(), patch); Noema.kv.set(Noema.kv.accountKey('settings'), JSON.stringify(s)); Object.assign(S.settings, patch); }
 
+const ME_PAGE = { profile: 'profile', settings: 'ai', subjects: 'subjects', backup: 'data', cloud: 'data', help: 'help' };
 function openAccountMenu(tab = 'profile') {
+  if (SHL()) { closeTutor(); $$('.modal').forEach(m => m.remove()); return go('#/me/' + (ME_PAGE[tab] || '')); }   // the shell's “Me” pages (engine/shell.js)
   modal((box, close) => {
     box.classList.add('accbox');
     const body = h('div', { class: 'accbody' });
@@ -30,7 +32,8 @@ function openAccountMenu(tab = 'profile') {
 
 const ACC_VIEWS = {
   /** ⚙️ Settings: the AI (Gemini for the tutor, Claude optionally), how the app looks and studies, this subject. */
-  settings(body, close) {
+  /** opts.only = 'ai': just the AI sections (the shell has its own page for language and appearance). */
+  settings(body, close, opts = {}) {
     const set = accountSettings(); const CL = window.NoemaClaude; const acc = ACCOUNT.id;
     // — Gemini (the tutor and every in-app AI helper)
     const key = h('input', { type: 'password', value: S.settings.apiKey || '', placeholder: 'AIza…', autocomplete: 'off', 'aria-label': 'Gemini API key' });
@@ -95,8 +98,8 @@ const ACC_VIEWS = {
       accSection('🤖', 'Gemini — the AI tutor', { status: { ok: !!S.settings.apiKey, text: S.settings.apiKey ? 'key set' : 'no key' }, open: !S.settings.apiKey, body: geminiBox }),
       accSection('✨', 'Claude (optional)', { status: { ok: true, text: hasClaude ? 'API key on this device' : 'Claude app / no key' }, info: 'Claude makes subjects and curricula: with your Claude plan in the Claude app (no key needed here), or with an API key in this app.', body: claude }),
       accSection('🗣️', 'Language of the AI conversations', { status: { ok: true, text: chatLang() ? langName(chatLang()) : 'as the course' }, body: langBox }),
-      accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
-      accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
+      opts.only === 'ai' ? null : accSection('🎨', 'Display & studying', { open: !!S.settings.apiKey, body: display }),
+      opts.only === 'ai' ? null : accSection('📘', 'This subject — ' + SUBJ.title, { body: subject }),
       h('div', { class: 'row', style: { justifyContent: 'flex-end', marginTop: '16px' } },
         h('button', { class: 'btn primary', onclick: async () => {
           S.settings.apiKey = key.value.trim(); S.settings.model = sel.value; S.settings.theme = theme.value; S.settings.goal = Math.max(20, +goal.value || 120); S.settings.sound = snd.checked; S.settings.chunk = chunk.checked; S.settings.chatLang = chatL.value; const relabel = (S.settings.lang || '') !== uiL.value; S.settings.lang = uiL.value || undefined; save();
@@ -296,6 +299,7 @@ ACC_VIEWS.help = function (body) {
 
 /* ---------- sync indicator ---------- */
 function wireSyncDot() {
+  if (SHL()) return;   // the shell paints its own (engine/shell.js)
   const dot = $('#syncdot'); if (!dot) return;
   if (ACCOUNT.kind !== 'cloud' || !window.NoemaCloud) { dot.remove(); return; }
   const paint = s => { dot.className = 'syncdot ' + (s.error ? 'err' : s.syncing || s.pending ? 'busy' : 'ok'); dot.title = s.error ? 'Sync error: ' + s.error : s.syncing ? 'Syncing…' : s.pending ? 'Changes waiting to sync' : 'All changes synced'; };

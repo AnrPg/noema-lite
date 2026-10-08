@@ -177,7 +177,7 @@ c.save()`, path.join(TF, 'dna-replication.pdf')]);
   fs.writeFileSync(path.join(TF, 'Transcription notes.md'), '# Transcription\n\nRNA polymerase reads the template strand from 3′ to 5′ and builds RNA 5′ → 3′.\n\n## Promoters\n\nThe TATA box sits about 25 bp upstream.\n');
   fs.writeFileSync(path.join(TF, 'translation-extra.md'), '# Ribosomes\n\nThe ribosome reads codons.\n');
   A.pdf = fs.readFileSync(path.join(TF, 'dna-replication.pdf'));
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', geminiBase: '${ABASE}/v1beta', askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = vendors(); await new Promise(r => api.listen(APORT, r));
   const browser = await chromium.launch();

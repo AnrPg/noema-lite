@@ -14,7 +14,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
 
 (async () => {
   execFileSync('python3', [path.join(ROOT, 'tests/fixtures/make_viewer_files.py'), TF], { stdio: 'ignore' });
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(15000); const E = []; p.on('pageerror', e => E.push(e.message));
@@ -39,7 +39,7 @@ const TF = path.join(ROOT, 'dist/site/testfiles');
   console.log('— the chapter header');
   await p.evaluate(() => { location.hash = '#/ch/ch01'; }); await wait(700);
   ok(await p.evaluate(() => document.documentElement.lang) === 'el', '<html lang> follows the subject (Greek capitals without accents, Greek hyphenation)');
-  ok(await p.$eval('.chhead .num', e => e.textContent) === 'Chapter 1', 'the kicker is only “Chapter 1” (no long capitalised page list)');
+  ok(/^Chapter 1( of \d+)?$/.test(await p.$eval('.chhead .num', e => e.textContent)), 'the kicker is only “Chapter 1 (of N)” (no long capitalised page list)');
   const chips = await p.$$eval('.srcrefs .srcref', b => b.map(x => x.textContent));
   ok(chips.length === 4 && /chat F/.test(chips[0]) && chips.some(t => /ECB σ\. 2–3/.test(t)) && chips.some(t => /Karp 9\.2/.test(t)) && chips.some(t => /Khan Academy/.test(t)), 'one chip per source the chapter uses, its main source first: ' + chips.join(' | '));
   await p.screenshot({ path: SHOTS + '/s1_header.png', clip: { x: 0, y: 0, width: 1280, height: 330 } });

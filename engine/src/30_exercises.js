@@ -321,6 +321,7 @@ function exerciseCard(ex, { onDone, compact = false, noXP = false, showSection =
       h('button', { class: 'btn small ai', onclick: () => askAIAbout(ex, 'socratic', givenOf(w)) }, `${TUTOR.avatar} Help me get it (Socratic)`),
       h('button', { class: 'btn small', onclick: () => askAIAbout(ex, 'explain', givenOf(w)) }, '💡 Explain differently')));
     card.append(exp);
+    window.NoemaReact?.answered(!!ok, { hard: ex.difficulty >= 3 });   // the character reacts (rarely big: engine/react.js)
     if (onDone) onDone(ok, card);
   }
   card._w = w; card._check = doCheck; card._locked = () => locked;

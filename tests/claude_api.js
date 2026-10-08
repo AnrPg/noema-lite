@@ -64,7 +64,7 @@ function messages(body, res, J) {
 }
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
   fs.mkdirSync(path.join(ROOT, 'dist/site/testimg'), { recursive: true }); fs.writeFileSync(path.join(ROOT, 'dist/site/testimg/heart.png'), PNG);
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   // the picture search's view of the web (scripted): Bing finds a figure on a publisher's page; the other sources are down

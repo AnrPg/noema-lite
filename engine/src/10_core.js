@@ -3,7 +3,8 @@
 const COURSE = window.COURSE;               // array of chapters of the loaded subject pack (set by the loader)
 const SUBJ = Noema.subject;                    // subject.json of the loaded pack
 const ACCOUNT = Noema.account;                 // current profile / cloud account
-const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {});
+const TUTOR = Object.assign({ name: 'Brick', avatar: '🦉', domain: SUBJ.title, prior: '', examples: 'Concrete, everyday examples from the subject.', interviewer: `an examiner for ${SUBJ.title}`, simulation: 'a realistic problem, misconception or anomaly from the subject', terminology: 'the canonical terminology of the field', examinerRole: `${SUBJ.title} examiner` }, SUBJ.tutor || {},
+  window.NoemaShell?.mounted && window.NoemaThemes ? (t => ({ name: t.n, avatar: t.emoji }))(NoemaThemes.tutor(NoemaThemes.owned())) : {});   // in the new frame the tutor is the learner's character (engine/themes.js), named in the menus' language
 const APP_TITLE = SUBJ.appTitle || `${SUBJ.title} Quest`;
 const DEFAULT_KEY = Noema.local.geminiKey || window.DEFAULT_GEMINI_KEY || '';
 const PALETTE = [
@@ -195,13 +196,15 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 function touchStreak() { Noema.stats.touchStreak(); }
 function addXP(n, el) {
   if (n <= 0) return;
-  const before = Noema.stats.todayXP();
+  const before = Noema.stats.todayXP(), LV = window.NoemaShell?.level, lv0 = LV ? LV(Noema.stats.get().xp || 0).lv : 0;
   S.xp += n; Noema.stats.add(n); save();
   renderTopStats();
   const r = el?.getBoundingClientRect?.();
   const f = h('div', { class: 'xpfloat', style: { left: (r ? r.left + r.width / 2 : innerWidth / 2) + 'px', top: (r ? r.top : innerHeight / 2) + 'px' } }, `+${n} XP`);
   document.body.append(f); setTimeout(() => f.remove(), 1200);
-  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { confetti(160); toast('🎯 Daily goal smashed!'); }
+  const RX = window.NoemaShell?.mounted ? window.NoemaReact : null;   // the character's reactions live in the new frame
+  if (before < S.settings.goal && Noema.stats.todayXP() >= S.settings.goal) { if (RX) RX.big('goal'); else confetti(160); toast('🎯 Daily goal smashed!'); }
+  else if (LV && RX && LV(Noema.stats.get().xp || 0).lv > lv0) RX.big('level');
 }
 function record(ex, ok, firstTry = true) {
   const r = S.res[ex.id] || { n: 0, ok: 0 };

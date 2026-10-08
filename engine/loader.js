@@ -6,7 +6,8 @@
    ===================================================================================== */
 (function () {
   'use strict';
-  const CFG = Object.assign({ appName: 'noema-lite', supabaseUrl: '', supabaseKey: '', autoBackupMinutes: 5, askSubjectOnStart: true }, window.NOEMA_CONFIG || {});
+  const CFG = Object.assign({ appName: 'noema-lite', supabaseUrl: '', supabaseKey: '', autoBackupMinutes: 5, askSubjectOnStart: false, shell: true, onboarding: true }, window.NOEMA_CONFIG || {});
+  const SHELL = () => !!window.NoemaShell && CFG.shell !== false;   // the new frame (engine/shell.js): tabs, Today, Knowledge, … docs/UI_MAP.md
   const LOCAL = window.NOEMA_CONFIG_LOCAL || {};            // config.local.js — never committed (e.g. a default Gemini key)
   const REG = window.NOEMA_REGISTRY || { groups: [], subjects: [], accounts: [] };
   const P = 'noema1:';
@@ -1208,12 +1209,13 @@
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),
-    curricula() { return window.NoemaCurMap?.library(Noema.account.id); }, curriculumMap(cid, focus) { return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, infoCard, packInfo,
+    curricula() { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/learn'); return window.NoemaCurMap?.library(Noema.account.id); },
+    curriculumMap(cid, focus) { if (SHELL() && NoemaShell.mounted) return NoemaShell.go('#/map/' + encodeURIComponent(cid) + (focus ? '/' + encodeURIComponent(focus) : '')); return window.NoemaCurMap?.map(Noema.account.id, cid, { focus }); }, explore() { return explore(Noema.account.id); }, infoCard, packInfo,
     removeLocalAccount(id) { const rm = jget(P + 'accounts:removed', []); rm.push(id); jset(P + 'accounts:removed', rm); jset(P + 'accounts', jget(P + 'accounts', []).filter(a => a.id !== id)); },
     wipeAccountData(id) { ls.keys(`${P}${id}:`).forEach(k => ls.del(k)); },
     setCurrent(acc, subj) { jset(P + 'current', { acc, subj }); },
-    switchTo(acc, subj) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname); return; } location.hash = ''; location.reload(); },   // a ?subject= link must not win over the new choice
-    async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s && s.id !== Noema.subject.id) Noema.switchTo(Noema.account.id, s.id); },
+    switchTo(acc, subj, hash) { jset(P + 'current', { acc, subj, skipPicker: !!subj }); if (/[?&](subject|account)=/.test(location.search)) { location.replace(location.pathname + (hash || '')); return; } location.hash = hash || ''; location.reload(); },   // a ?subject= link must not win over the new choice; hash: where to land (#/subject, #/s/<id>, …)
+    async openSubjectPicker() { const s = await pickSubject(Noema.account.id, { closable: true }); if (s && s.id !== Noema.subject?.id) Noema.switchTo(Noema.account.id, s.id, SHELL() ? '#/subject' : ''); else if (s && SHELL()) NoemaShell.go('#/subject'); },
     async openAccountPicker() { const a = await pickAccount({ closable: true }); if (a && a.id !== Noema.account.id) Noema.switchTo(a.id, null); },
   };
 
@@ -1270,8 +1272,10 @@
     let meta = subs.find(s => s.id === (url.get('subject') || (cur.acc === acc.id ? cur.subj : null)));
     const settings = jget(KV.accountKey('settings'), {});
     const ask = settings.askSubjectOnStart ?? CFG.askSubjectOnStart;
-    if (!meta || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
-    if (!meta) return;
+    // the new frame opens on Today and needs no subject; the picker at start stays for whoever asked for it (Me › Profile)
+    if ((!meta && !SHELL()) || (ask && !cur.skipPicker && !url.get('subject'))) meta = await pickSubject(acc.id) || meta;
+    if (SHELL()) { try { NoemaShell.mount({ engine: !!meta }); document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); } catch (e) { console.error('[shell]', e); } }
+    if (!meta) { if (SHELL()) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); window.NoemaReact?.dayStart(acc.id); AutoBackup.start(acc.id).catch(() => { }); } return; }
     KV.subj = meta.id;
     Noema.setCurrent(acc.id, meta.id);
     migrateLegacy(acc.id, meta.id);
@@ -1282,8 +1286,9 @@
       try { Noema.preloadedConvos = await NoemaConvos.list(acc.id, { subject: meta.id, includeDeleted: false }); } catch (e) { Noema.preloadedConvos = []; }
     }
     let pack;
-    try { pack = await getPack(acc.id, meta); } catch (e) { document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
+    try { pack = await getPack(acc.id, meta); } catch (e) { if (SHELL() && NoemaShell.mounted) { document.body.classList.remove('noema-booting'); document.getElementById('noema-splash')?.remove(); NoemaShell.noEngine(e.message); return; } document.body.append(el('div', { class: 'empty' }, el('div', { class: 'e' }, '⚠️'), el('p', {}, e.message), el('button', { class: 'btn', onclick: () => Noema.switchTo(acc.id, null) }, 'Choose another subject'))); return; }
     Noema.pack = pack; Noema.subject = Object.assign({ tutor: {}, hero: {}, features: {} }, pack.subject, subjOverride(acc.id, pack.subject.id));
+    Noema.subjectMeta = meta;   // where it comes from (origin: library, private, shared, public…), for the subject's ⋮
     Noema.node = stepOf(acc.id, meta, pack);   // a curriculum step? (made for it, or 📦 attached to it)
     window.COURSE = pack.chapters; window.SOURCES = pack.sources || { sources: [], chapters: {}, patches: {} };
     document.title = `${Noema.subject.title} · ${CFG.appName}`;
@@ -1295,6 +1300,7 @@
     else await loadScript((window.NOEMA_ENGINE_BASE || 'engine/') + 'engine.js');
     document.body.classList.remove('noema-booting');
     document.getElementById('noema-splash')?.remove();
+    window.NoemaReact?.dayStart(acc.id);
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);
     AutoBackup.start(acc.id).catch(() => { });
   }

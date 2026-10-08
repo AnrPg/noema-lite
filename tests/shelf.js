@@ -64,7 +64,7 @@ const makeMap = (p, { provider = 'auto', planned = true, attachFirst = false } =
 const node = (p, cid, nid) => p.evaluate(({ cid, nid }) => NoemaCurriculum.get(Noema.account.id, cid).nodes[nid], { cid, nid });
 
 (async () => {
-  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true };`;
+  const cfg = `window.NOEMA_CONFIG = { appName: 'noema-lite', siteUrl: '${BASE}', supabaseUrl: '${BASE}', supabaseKey: 'sb_publishable_test', anthropicBase: '${ABASE}', askSubjectOnStart: true, shell: false };`;
   const srv = await start({ port: PORT, staticDir: path.join(ROOT, 'dist', 'site'), configOverride: cfg });
   const api = claude(); await new Promise(r => api.listen(APORT, r));
   // the connector exactly as tools/build.py bundles it (MCP_ENGINE), pointed at the emulator
