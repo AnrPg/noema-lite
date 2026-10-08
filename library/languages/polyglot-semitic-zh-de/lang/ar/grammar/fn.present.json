@@ -84,7 +84,13 @@
      "ya- … -na"
     ]
    ],
-   "caption": "A regular (sound) verb: طَبَخَ / يَطْبُخُ “to cook”. The same prefixes and endings come back in every verb."
+   "caption": "A regular (sound) verb: طَبَخَ / يَطْبُخُ “to cook”. The same prefixes and endings come back in every verb.",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -265,6 +271,12 @@
       "the verb stays singular before a noun subject; only the gender shows: تَأْكُلُ الْبِنْتُ"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "VSO"
+    }
    ]
   },
   {
@@ -274,12 +286,14 @@
   {
    "t": "callout",
    "kind": "key",
-   "title": "One present for three English tenses.",
-   "text": "آكُلُ = I eat / I am eating / (often) I will eat. The future can be marked with سَـ or سَوْفَ (سَآكُلُ, “I will eat”) — later. To negate the present put لَا before it (lesson 8): لَا آكُلُ."
-  },
-  {
-   "t": "p",
-   "text": "For you: Greek, Russian and German also show the person in the verb (τρώω, ем, ich esse) — Arabic does it mostly at the front of the verb. Turkish piles endings at the back (yiyorum); Arabic puts most of the information in the prefix."
+   "title": "One present for “I eat”, “I am eating” — and often “I will eat”.",
+   "text": "آكُلُ = I eat / I am eating / (often) I will eat. The future can be marked with سَـ or سَوْفَ (سَآكُلُ, “I will eat”) — later. To negate the present put لَا before it (lesson 8): لَا آكُلُ.",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "none"
+    }
+   ]
   }
  ],
  "procedure": {
@@ -491,6 +505,111 @@
    "lang": "ar",
    "fn": "fn.root.pattern",
    "note": "The prefix vowel and the stem vowel are part of the verb’s pattern: yafʿalu (يَشْرَبُ), yafʿulu (يَأْكُلُ), yufʿilu (يُرِيدُ)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  },
+  {
+   "feature": "syn.proDrop",
+   "value": "agreement"
+  },
+  {
+   "feature": "verb.progressive",
+   "value": "none"
+  },
+  {
+   "feature": "verb.infinitive",
+   "value": "finite-clause"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also shows the person in the verb and drops the pronoun (τρώω, τρως, τρώει); Arabic shows it mostly with a prefix (آكُلُ, تَأْكُلُ, يَأْكُلُ) and adds gender in the 2nd and 3rd person."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian also marks the person with endings (ем, ешь, ест); Arabic mostly with prefixes (آكُلُ, تَأْكُلُ, يَأْكُلُ), and adds gender."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "As in Spanish, the pronoun is dropped (como → آكُلُ) and the present also means “I am eating” and often the future; but Arabic marks the person mostly at the front of the verb."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English needs a pronoun and has two presents (I eat / I am eating); Arabic has one form, آكُلُ, for both — often for the future too — and the person is in the verb."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French je mange covers “I eat” and “I am eating”, like آكُلُ; but Arabic drops the pronoun and marks the person with prefixes."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi builds the present with a participle and है (मैं खाता हूँ / खाती हूँ) and shows the speaker’s gender even with “I”; Arabic uses one verb form with a prefix, and its “I” form has no gender (أَطْبُخُ)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also has a prefix in the present (mi-xor-am, I eat) and drops the pronoun; Arabic puts the person into the prefix itself and adds gender."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi verbs show the speaker’s gender even with “I” (मी जातो / मी जाते); the Arabic “I” form has no gender (أَذْهَبُ), but “you” and “he / she” do."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish piles endings at the back (yiyorum) and has two presents (-iyor, -ir); Arabic puts most of the information in the prefix (آكُلُ) and has one present."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese verbs do not change for person; Arabic verbs change for person, number and gender. Like 食べる, the Arabic present also serves for the future."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean verbs change for politeness, not for person; Arabic verbs change for person, number and gender, never for politeness."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish also marks the person with endings and drops the pronoun (syön, syöt); Arabic does it mostly with prefixes and adds gender. Both use the present for the future."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian also marks the person in the verb (eszem, eszel, eszik); Arabic adds gender and puts most of the marking in front."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also puts the person in front of the verb (ninakula, unakula, anakula), as Arabic does (آكُلُ, تَأْكُلُ, يَأْكُلُ); Arabic adds gender and has no separate tense marker like -na-."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda also puts a subject prefix in front of the verb; Arabic does the same (أَ، تَ، يَ، نَ) and adds gender."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese verbs never change and need a pronoun; Arabic verbs carry person, number and gender, so the pronoun is usually dropped."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut also packs the person into the verb, at the end (nirijunga, I eat); Arabic puts it mostly in front (آكُلُ)."
   }
  ]
 }

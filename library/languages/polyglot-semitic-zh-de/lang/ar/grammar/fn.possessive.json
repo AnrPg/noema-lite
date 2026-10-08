@@ -70,7 +70,13 @@
      "أَبُوهُمْ"
     ]
    ],
-   "caption": "These are the subject (nominative) forms. The same suffixes go on prepositions: عِنْدِي (I have), عِنْدَكَ, عِنْدَهُ …"
+   "caption": "These are the subject (nominative) forms. The same suffixes go on prepositions: عِنْدِي (I have), عِنْدَكَ, عِنْدَهُ …",
+   "typology": [
+    {
+     "feature": "nom.possessiveAffixes",
+     "value": "suffixes"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -129,7 +135,17 @@
      "بِنْتُ أَخِي / بِنْتُ أُخْتِي"
     ]
    ],
-   "caption": "Arabic has no single word for cousin, nephew or niece: it always says whose child. The first noun is in the construct form (اِبْنُ — no article, no tanwīn) and the suffix goes on the last one."
+   "caption": "Arabic has no single word for cousin, nephew or niece: it always says whose child. The first noun is in the construct form (اِبْنُ — no article, no tanwīn) and the suffix goes on the last one.",
+   "typology": [
+    {
+     "feature": "lex.uncleTerms",
+     "value": "bifurcate-collateral"
+    },
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
+   ]
   },
   {
    "t": "p",
@@ -287,6 +303,102 @@
    "lang": "ar",
    "fn": "fn.have",
    "note": "The same suffixes on عِنْدَ give “to have”: عِنْدِي (at me = I have)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "nom.possessiveAffixes",
+   "value": "suffixes"
+  },
+  {
+   "feature": "nom.constructState",
+   "value": "construct-state"
+  },
+  {
+   "feature": "syn.genitiveNoun",
+   "value": "noun-gen"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also uses short words after the noun (το σπίτι μου); in Arabic they are endings joined to the noun (بَيْتِي), and the noun then takes no article."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian мой / моя / моё agree with the thing owned; Arabic uses endings on the noun (كِتَابِي) that change only with the owner."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish mi / tu / su stand before the noun; Arabic endings come after it and show the owner’s gender: كِتَابُهُ (his book), كِتَابُهَا (her book), where su libro is both."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English my / your / his are words before the noun; Arabic has endings after it (كِتَابِي, my book), and “your” has two forms by gender (-ka / -ki)."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French mon / ma / mes agree with the thing owned; Arabic endings follow the owner: كِتَابُهُ (his) / كِتَابُهَا (her), where French says son livre for both."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi मेरा / मेरी / मेरे agree with the thing owned; Arabic endings change only with the owner."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian also has possessive endings (کتابم, my book; کتابت, your book); the Arabic ones (-ī, -ka / -ki, -hu, -hā …) add gender in the 2nd and 3rd person."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi माझा / माझी / माझे agree with the thing owned; Arabic endings show the owner (كِتَابِي my, كِتَابُهَا her)."
+  },
+  {
+   "for": "tr",
+   "rel": "same",
+   "text": "Turkish also uses endings: kitabım (my book) ≈ كِتَابِي, kitabın ≈ كِتَابُكَ. Arabic adds gender to “your”, “his” and “her”."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese says 私の本 with の; Arabic attaches an ending: كِتَابِي."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish kirjani, kirjasi ≈ كِتَابِي, كِتَابُكَ — endings on the noun, as in Arabic; Arabic adds gender in the 2nd and 3rd person."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian könyvem, könyved, könyve ≈ كِتَابِي, كِتَابُكَ, كِتَابُهُ — endings on the noun, as in Arabic; Arabic adds gender."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili puts an agreeing word after the noun (kitabu changu, vitabu vyangu); Arabic uses an ending that does not change with the thing: كِتَابِي, كُتُبِي."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda puts an agreeing possessive after the noun (ekitabo kyange); Arabic attaches an ending: كِتَابِي."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese puts the owner after the thing (sách của tôi); Arabic also puts it after — as an ending: كِتَابِي."
+  },
+  {
+   "for": "iu",
+   "rel": "same",
+   "text": "Inuktitut also has possessive endings on the noun; the Arabic ones show the owner’s person, number and, in the 2nd and 3rd person, gender."
   }
  ]
 }

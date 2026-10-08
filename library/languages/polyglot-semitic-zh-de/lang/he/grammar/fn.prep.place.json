@@ -1,6 +1,20 @@
 {
  "function": "fn.prep.place",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "sem.positionVerbs",
+   "value": "generic"
+  },
+  {
+   "feature": "syn.copula",
+   "value": "absent-in-present"
+  }
+ ],
  "summary": "Where things are: עַל “on”, מִתַּחַת לְ “under”, לְיַד “next to”, לִפְנֵי “in front of”, מֵאֲחוֹרֵי “behind”, בֵּין … לְ… “between … and …”, and בְּ “in” (בַּמְּקָרֵר). In the present there is no verb: הַסֵּפֶר עַל הַשֻּׁלְחָן “the book (is) on the table”. Several of them are built from body and space words: לִפְנֵי “to the face of”, לְיַד “at the hand of”, מִתַּחַת “from under”, מֵאֲחוֹרֵי “from the back of”. Two of them take a second preposition: מִתַּחַת לְ… and בֵּין X לְY. Near and far are adjectives that agree with their noun and take different prepositions: קָרוֹב לְ… “close to”, רָחוֹק מִ… “far from” (הַתַּחֲנָה קְרוֹבָה לַבַּיִת). Without a noun: בִּפְנִים “inside”, בַּחוּץ “outside”, מִשְּׂמֹאל “on the left”, מִיָּמִין “on the right” — and with movement the ending ־ָה: פְּנִימָה, הַחוּצָה, שְׂמֹאלָה, יָמִינָה. The noun after a preposition never changes (no cases): only the article fuses with לְ and בְּ (מִתַּחַת לַשֻּׁלְחָן, בַּמִּטְבָּח).",
  "blocks": [
   {
@@ -52,7 +66,13 @@
      "הַתַּחֲנָה קְרוֹבָה לַבַּיִת. · זֶה רָחוֹק מִכָּאן."
     ]
    ],
-   "caption": "No verb “is” in the present: thing + preposition + place."
+   "caption": "No verb “is” in the present: thing + preposition + place.",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -110,13 +130,29 @@
      "רְחוֹקוֹת"
     ]
    ],
-   "caption": "Near and far are adjectives: they agree with the noun (הַתַּחֲנָה קְרוֹבָה)."
+   "caption": "Near and far are adjectives: they agree with the noun (הַתַּחֲנָה קְרוֹבָה).",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "Thing — preposition — place",
-   "text": "הַסֵּפֶר עַל הַשֻּׁלְחָן. The present needs no verb; in the past or future add הָיָה / יִהְיֶה (הַסֵּפֶר הָיָה עַל הַשֻּׁלְחָן)."
+   "text": "הַסֵּפֶר עַל הַשֻּׁלְחָן. The present needs no verb — not even one for “lies” or “stands”; in the past or future add הָיָה / יִהְיֶה (הַסֵּפֶר הָיָה עַל הַשֻּׁלְחָן).",
+   "typology": [
+    {
+     "feature": "sem.positionVerbs",
+     "value": "generic"
+    },
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -134,7 +170,7 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "לְ near, מִ far",
-   "text": "קָרוֹב לַבַּיִת “close to the house” but רָחוֹק מֵהַבַּיִת “far from the house” — as in English “close to / far from”."
+   "text": "קָרוֹב לַבַּיִת “close to the house” but רָחוֹק מֵהַבַּיִת “far from the house”."
   },
   {
    "t": "callout",
@@ -166,13 +202,17 @@
       "在 … + a place word after the noun (上 “on”)"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    },
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    }
    ]
-  },
-  {
-   "t": "callout",
-   "kind": "tip",
-   "title": "For you",
-   "text": "Greek builds the same picture with two words: πάνω στο τραπέζι (עַל), κάτω από (מִתַּחַת לְ), δίπλα σε (לְיַד), μπροστά από (לִפְנֵי), πίσω από (מֵאֲחוֹרֵי), ανάμεσα σε (בֵּין). Hebrew needs no case after them, unlike German auf dem / auf den."
   },
   {
    "t": "ask",
@@ -344,6 +384,103 @@
    "lang": "zh",
    "fn": "fn.prep.place",
    "note": "Chinese puts the place word after the noun (桌子上 “on the table”, 床下 “under the bed”) with 在 before it; Hebrew puts the preposition before the noun."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek builds the same picture, often with two words: πάνω στο τραπέζι (עַל), κάτω από (מִתַּחַת לְ), δίπλα σε (לְיַד), μπροστά από (לִפְנֵי), πίσω από (מֵאֲחוֹרֵי), ανάμεσα σε (בֵּין). Like κοντά σε / μακριά από, Hebrew says קָרוֹב לְ / רָחוֹק מִ."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian на столе / под столом need cases, and often a posture verb (книга лежит на столе); Hebrew needs neither: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "encima de, debajo de, al lado de, delante de, detrás de, entre — Hebrew has one or two words for each (עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין … לְ), and no estar: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "“Close to / far from” are the same in Hebrew: קָרוֹב לְ / רָחוֹק מִ. But there is no “is” and no “lies / stands”: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "sur, sous, à côté de, devant, derrière, entre ~ עַל, מִתַּחַת לְ, לְיַד, לִפְנֵי, מֵאֲחוֹרֵי, בֵּין; près de / loin de ~ קָרוֹב לְ / רָחוֹק מִ — but Hebrew has no verb in the present."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German says where something is with a posture verb and the dative (Das Buch liegt auf dem Tisch) and where it goes with the accusative (auf den Tisch); Hebrew needs no verb and no case: הַסֵּפֶר עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi uses postpositions after the noun (मेज़ पर, मेज़ के नीचे); Hebrew puts the preposition first: עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also puts the place word first, often a noun with ezafe (روی میز “on the table”, literally “face of the table”) — just as Hebrew לִפְנֵי “in front of” comes from “face”."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi puts the place word after the noun (टेबलावर “on the table”, टेबलाखाली “under the table”); Hebrew puts it first: עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "Arabic عَلَى, تَحْتَ, بَيْنَ, أَمَامَ, وَرَاءَ come first too, and no verb is needed (الْكِتَابُ عَلَى الطَّاوِلَةِ ~ הַסֵּפֶר עַל הַשֻּׁלְחָן; עַל ~ عَلَى, בֵּין ~ بَيْنَ). Only Hebrew has no case after them."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish says “the table’s top-on” (masanın üstünde); Hebrew puts the preposition first: עַל הַשֻּׁלְחָן. Turkish yakın / uzak take -e / -den (eve yakın, evden uzak) — the same “to / from” split as קָרוֹב לְ / רָחוֹק מִ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese says “the desk’s top-at” (机の上に) and needs ある / いる; Hebrew puts the place word first and needs no verb: עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean says 책상 위에 “desk top-at” and needs a verb of existence; Hebrew says עַל הַשֻּׁלְחָן with no verb in the present."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses cases or postpositions (pöydällä, pöydän alla); Hebrew uses prepositions before the noun: עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian uses suffixes and postpositions (az asztalon, az asztal alatt); Hebrew uses prepositions before the noun."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili juu ya, chini ya, karibu na, mbele ya, nyuma ya also come before the noun with a small linking word, much like Hebrew מִתַּחַת לְ…."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese wraps the place: 在 + noun + 上 / 下 / 旁边 (在桌子上); Hebrew uses one preposition before the noun: עַל הַשֻּׁלְחָן."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese also puts the place word first (trên bàn, dưới bàn); Hebrew: עַל הַשֻּׁלְחָן, מִתַּחַת לַשֻּׁלְחָן."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut says where something is with a location noun carrying a case ending, after the thing it relates to; Hebrew uses a preposition before the noun: עַל הַשֻּׁלְחָן."
   }
  ]
 }

@@ -68,7 +68,13 @@
    "t": "callout",
    "kind": "key",
    "title": "The nominal sentence.",
-   "text": "Subject (usually definite or a pronoun) + predicate (usually indefinite), both nominative: الْبِنْتُ طَالِبَةٌ = the girl is a student. The “is” is understood."
+   "text": "Subject (usually definite or a pronoun) + predicate (usually indefinite), both nominative: الْبِنْتُ طَالِبَةٌ = the girl is a student. The “is” is understood.",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -80,7 +86,13 @@
    "t": "callout",
    "kind": "tip",
    "title": "Place, and “there is”.",
-   "text": "الْمُعَلِّمُ هُنَا = the teacher is here. With an indefinite subject the place comes first: هُنَا كِتَابٌ = there is a book here; هُنَاكَ مُشْكِلَةٌ = there is a problem."
+   "text": "الْمُعَلِّمُ هُنَا = the teacher is here. With an indefinite subject the place comes first: هُنَا كِتَابٌ = there is a book here; هُنَاكَ مُشْكِلَةٌ = there is a problem.",
+   "typology": [
+    {
+     "feature": "syn.beSplit",
+     "value": "same"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -258,6 +270,113 @@
    "lang": "ar",
    "fn": "fn.negation",
    "note": "“Is not” has its own verb, لَيْسَ, which puts the predicate in the accusative like كَانَ."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.copula",
+   "value": "absent-in-present"
+  },
+  {
+   "feature": "syn.beSplit",
+   "value": "same"
+  }
+ ],
+ "notes": [
+  {
+   "for": "ru",
+   "rel": "same",
+   "text": "Russian has no present “to be” either: Я студент = أَنَا طَالِبٌ; its past был / была agrees in gender like كَانَ / كَانَتْ. One difference: after كَانَ the predicate is accusative (كَانَ طَالِبًا), where Russian uses the nominative or the instrumental (был студентом)."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish has no separate verb either (öğrenciyim); Arabic does not even add an ending: أَنَا طَالِبٌ. For the past Turkish adds -di (öğrenciydim), Arabic uses the verb كَانَ (كُنْتُ طَالِبًا)."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian drops van in the 3rd person (Péter tanár, Peter is a teacher); Arabic drops “to be” in every person: أَنَا طَالِبٌ, where Hungarian needs vagyok."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek needs είμαι in every person (είμαι φοιτητής); Arabic says nothing in the present — أَنَا طَالِبٌ — and uses كَانَ only for the past and the future."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish chooses between ser and estar (soy estudiante, estoy aquí); Arabic uses no verb for either in the present: أَنَا طَالِبٌ, أَنَا هُنَا."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English cannot drop am / is / are; Arabic has nothing in their place: الرَّجُلُ مُعَلِّمٌ, “the man (is) a teacher” — and no “a” either, the ending -un says it."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French needs être (je suis étudiant); Arabic needs no verb in the present — but, as in French, a bare profession takes no article: أَنَا طَالِبٌ."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German needs sein in every person (ich bin, du bist, er ist); Arabic leaves it out in the present and uses كَانَ for the past."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi ends the sentence with है / हूँ (मैं छात्र हूँ); Arabic needs no verb in the present: أَنَا طَالِبٌ."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian adds the copula as an ending (dānešju-am, I am a student); Arabic adds nothing: أَنَا طَالِبٌ."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi needs आहे (मी विद्यार्थी आहे); Arabic needs no verb in the present."
+  },
+  {
+   "for": "he",
+   "rel": "same",
+   "text": "Hebrew also drops “to be” in the present (אֲנִי סְטוּדֶנְט) and uses הָיָה for the past like كَانَ; only Arabic puts the predicate into the accusative after it."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese ends the sentence with です / だ (学生です); Arabic has no such word in the present: أَنَا طَالِبٌ."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean attaches 이다 to the noun (학생이에요); Arabic has nothing in the present and uses the separate verb كَانَ for the past."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish needs olla (olen opettaja); Arabic leaves “to be” out in the present."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili links with ni (Mimi ni mwalimu); Arabic needs no linking word: أَنَا مُعَلِّمٌ."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese needs 是 between two nouns (我是学生) but not before an adjective; Arabic needs nothing in either case."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese needs là between two nouns (tôi là sinh viên) but nothing before an adjective (nhà lớn); Arabic needs nothing in either case."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut turns the noun itself into a verb with a suffix meaning “be” and a person ending; Arabic adds nothing at all in the present."
   }
  ]
 }

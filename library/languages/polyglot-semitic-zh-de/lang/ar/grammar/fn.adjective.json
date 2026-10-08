@@ -52,7 +52,17 @@
      "فِي بَيْتٍ كَبِيرٍ — فِي الْبَيْتِ الْكَبِيرِ"
     ]
    ],
-   "caption": "The adjective copies gender, number, case and definiteness."
+   "caption": "The adjective copies gender, number, case and definiteness.",
+   "typology": [
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "noun-adj"
+    },
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -72,6 +82,12 @@
       "هٰذَا الْبَيْتُ كَبِيرٌ — this house is big",
       "بَيْتِي كَبِيرٌ — my house is big"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "nonverbal"
     }
    ]
   },
@@ -477,6 +493,107 @@
    "lang": "ar",
    "fn": "fn.copula",
    "note": "الْبَيْتُ كَبِيرٌ is a verbless sentence; كَانَ and لَيْسَ make the adjective accusative."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.adjectiveNoun",
+   "value": "noun-adj"
+  },
+  {
+   "feature": "adj.agreement",
+   "value": "gender-number-case"
+  },
+  {
+   "feature": "adj.predicative",
+   "value": "nonverbal"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek puts the adjective before the noun (το μεγάλο σπίτι); Arabic after it, with the article repeated: الْبَيْتُ الْكَبِيرُ. Both agree in gender, number and case."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian adjectives come first (большой дом) and agree in gender, number and case; Arabic adjectives follow and agree in definiteness too."
+  },
+  {
+   "for": "es",
+   "rel": "same",
+   "text": "Spanish also puts most adjectives after the noun and makes them agree (casa grande, casas grandes) — بَيْتٌ كَبِيرٌ; Arabic adds case and the article, and things in the plural take the feminine singular."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English adjectives come first and never change; Arabic ones follow the noun and copy its gender, number, case and article."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French also puts many adjectives after the noun and makes them agree (une maison blanche); Arabic always does, and adds case and the article."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi adjectives come first (बड़ा घर), and only those in -ā change; Arabic adjectives follow the noun and all of them change."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian also puts the adjective after the noun (خانهٔ بزرگ, with the ezafe -e); Arabic needs no linker but makes the adjective agree: بَيْتٌ كَبِيرٌ, غُرْفَةٌ كَبِيرَةٌ."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi adjectives come first (मोठे घर); Arabic ones follow the noun."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adjectives come first and never change (büyük ev, büyük evler); Arabic ones follow the noun and agree."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese adjectives behave like verbs and have tenses (高い / 高かった); Arabic adjectives behave like nouns, with case and gender, and need كَانَ for the past (كَانَ الْبَيْتُ كَبِيرًا)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adjectives are verbs (커요, “is big”); Arabic adjectives need no verb in the present (الْبَيْتُ كَبِيرٌ)."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish adjectives agree in number and case (isossa talossa ≈ فِي الْبَيْتِ الْكَبِيرِ) but come first; Arabic ones follow the noun and add gender and the article."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adjectives come first and do not agree (a nagy ház, a nagy házak); Arabic ones follow and agree."
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili also puts the adjective after the noun and makes it agree (kitabu kikubwa, vitabu vikubwa); Arabic agrees in gender, number, case and definiteness."
+  },
+  {
+   "for": "lg",
+   "rel": "same",
+   "text": "Luganda also puts the adjective after the noun with an agreement prefix (ekitabo ekinene); Arabic agrees in gender, number, case and the article."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese also puts the adjective after the noun (nhà lớn) and needs no “is” before it; Arabic adds agreement, and the article tells “the big house” (الْبَيْتُ الْكَبِيرُ) from “the house is big” (الْبَيْتُ كَبِيرٌ)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses most qualities with verbs (“it is big”) that can also describe a noun; Arabic adjectives are nouns that follow and agree."
   }
  ]
 }

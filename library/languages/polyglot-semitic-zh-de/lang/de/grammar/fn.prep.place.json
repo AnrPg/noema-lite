@@ -1,6 +1,12 @@
 {
  "function": "fn.prep.place",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  }
+ ],
  "summary": "To say where something is, German uses the two-way prepositions with the DATIVE: auf (on, touching a surface), unter (under), neben (next to), vor (in front of), hinter (behind), zwischen (between), über (above, not touching), in (in), an (at, on a side). Das Buch ist auf dem Tisch. Der Schlüssel ist unter dem Sofa. Die Lampe ist neben dem Bett. The question is Wo? – and the answer is dative: dem (masculine, neuter), der (feminine), den + -n (plural). When something moves to a place (Wohin?), the same prepositions take the accusative: Ich lege das Buch auf den Tisch (S13). in dem and an dem merge to im and am (im Kühlschrank, am Fenster); speech also says aufm, unterm, hinterm, vorm. auf vs an vs über: auf = on top, touching (auf dem Tisch); an = at the side or on a wall (an der Wand, am Fenster); über = above, not touching (über dem Tisch). Open places take auf: auf dem Markt, auf dem Platz, auf der Straße. Without a noun, German uses adverbs: links / rechts (on the left / right), drinnen / draußen (inside / outside), nah or in der Nähe (near), weit (far). The rooms of this step: die Küche, das Bad / Badezimmer, das Schlafzimmer, das Wohnzimmer, der Garten, der (Fuß)Boden, die Treppe, das Regal, das Sofa, der Kühlschrank.",
  "blocks": [
   {
@@ -8,66 +14,62 @@
    "head": [
     "preposition",
     "meaning",
-    "Wo? + dative",
-    "Greek"
+    "Wo? + dative"
    ],
    "rows": [
     [
      "auf",
      "on (top, touching)",
-     "auf dem Tisch",
-     "πάνω σε (στο τραπέζι)"
+     "auf dem Tisch"
     ],
     [
      "unter",
      "under",
-     "unter dem Sofa",
-     "κάτω από"
+     "unter dem Sofa"
     ],
     [
      "neben",
      "next to",
-     "neben dem Bett",
-     "δίπλα σε"
+     "neben dem Bett"
     ],
     [
      "vor",
      "in front of",
-     "vor dem Haus",
-     "μπροστά σε / από"
+     "vor dem Haus"
     ],
     [
      "hinter",
      "behind",
-     "hinter dem Haus",
-     "πίσω από"
+     "hinter dem Haus"
     ],
     [
      "zwischen",
      "between",
-     "zwischen dem Sofa und dem Regal",
-     "ανάμεσα σε"
+     "zwischen dem Sofa und dem Regal"
     ],
     [
      "über",
      "above (not touching)",
-     "über dem Tisch",
-     "πάνω από"
+     "über dem Tisch"
     ],
     [
      "in",
      "in",
-     "im Kühlschrank, in der Küche",
-     "μέσα σε"
+     "im Kühlschrank, in der Küche"
     ],
     [
      "an",
      "at, on (a side, a wall)",
-     "am Fenster, an der Wand",
-     "σε, δίπλα σε"
+     "am Fenster, an der Wand"
     ]
    ],
-   "caption": "Where is it? – the two-way prepositions with the dative"
+   "caption": "Where is it? – the two-way prepositions with the dative",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -94,7 +96,13 @@
      "auf die Stühle"
     ]
    ],
-   "caption": "Dative for where, accusative for where to"
+   "caption": "Dative for where, accusative for where to",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -149,17 +157,17 @@
    "t": "compare",
    "items": [
     {
-     "title": "Greek",
+     "title": "German",
      "points": [
-      "Greek builds compound prepositions with an adverb: πάνω στο τραπέζι, κάτω από το κρεβάτι, δίπλα στην πόρτα",
-      "German uses one word + dative: auf dem Tisch, unter dem Bett, neben der Tür"
+      "one preposition before the noun: auf dem Tisch",
+      "the article in the dative for “where”"
      ]
     },
     {
-     "title": "Turkish and Chinese",
+     "title": "Chinese",
      "points": [
-      "Turkish and Chinese put a place noun after the thing: masanın üstünde, 桌子上",
-      "German puts the preposition before it: auf dem Tisch"
+      "在 before, a place word after the noun: 在桌子上 (zài zhuōzi shang)",
+      "the noun itself never changes"
      ]
     }
    ]
@@ -380,6 +388,103 @@
    "lang": "de",
    "fn": "fn.case",
    "note": "Where → dative, where to → accusative: the two-way prepositions."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek builds compound prepositions with an adverb (πάνω στο τραπέζι, κάτω από το κρεβάτι, δίπλα στην πόρτα); German uses one word + dative: auf dem Tisch, unter dem Bett, neben der Tür."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "на столе / на стол is the same where / where-to switch as auf dem Tisch / auf den Tisch, and под, над, перед, за take a case as German prepositions do."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "en covers both in and on (en la mesa); German separates in, auf and an: im Kühlschrank, auf dem Tisch, an der Wand."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "“on” is auf for a top surface (auf dem Tisch) and an for a wall or side (an der Wand) – never *auf der Wand."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "sur, sous, devant, derrière, entre match auf, unter, vor, hinter, zwischen; German adds the dative on the article, and a picture on a wall is an der Wand."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi postpositions follow the noun (mez par, mez ke nīce); German prepositions precede it: auf dem Tisch, unter dem Tisch."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian uses position nouns with the ezafe (ruy-e miz, zir-e miz); German uses one preposition + dative: auf dem Tisch, unter dem Tisch."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi adds the position after the noun (ṭeblāvar, on the table); German puts auf before it and the article in the dative."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "ʿalā, taḥta, amāma, khalfa, bayna come before the noun as German prepositions do; Arabic always uses the genitive, German the dative for “where”."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "al, mitachat le-, leyad, lifnei, meachorei, bein precede the noun, like auf, unter, neben, vor, hinter, zwischen; German adds the dative on the article."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish uses a place noun with possessive and locative after the thing (masanın üstünde, masanın altında); German puts a preposition before it: auf dem Tisch, unter dem Tisch."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "tsukue no ue ni (desk – top – at) puts a position noun after the thing; German uses a preposition before it: auf dem Tisch."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "chaeksang wi-e (desk – top – at): a position noun after the thing; German: auf dem Tisch."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses case endings (pöydällä, on the table) and postpositions (pöydän alla, under the table); German uses prepositions before the noun."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian uses suffixes (az asztalon) and postpositions (az asztal alatt); German puts the preposition first: auf dem Tisch, unter dem Tisch."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "juu ya, chini ya, mbele ya, nyuma ya (on, under, in front of, behind) precede the noun like German prepositions, but nothing changes in the noun; German puts the article in the dative."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "在 + noun + place word (在桌子上, 在床下): the position comes after the noun; German puts it before, as a preposition with the dative."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "trên bàn, dưới bàn: the position word comes first, as in German (auf dem Tisch, unter dem Tisch), but the noun never changes."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses positions with nouns for “top”, “underside”, “front” and the like, carrying case endings; German uses a preposition before the noun and the dative."
   }
  ]
 }

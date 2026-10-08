@@ -1,6 +1,20 @@
 {
  "function": "fn.time.day",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "time.dayNames",
+   "value": "numbered"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "none"
+  },
+  {
+   "feature": "verb.progressive",
+   "value": "none"
+  }
+ ],
  "summary": "Hebrew numbers the days of the week from Sunday: יוֹם רִאשׁוֹן “first day” (Sunday), יוֹם שֵׁנִי “second day” (Monday) … יוֹם שִׁשִּׁי “sixth day” (Friday); only the seventh has a name, שַׁבָּת. In Israel the week starts on Sunday and the weekend (סוֹף שָׁבוּעַ) is Friday and Saturday. Telling the day needs no verb in the present: הַיּוֹם יוֹם שֵׁנִי “today (is) Monday”, מָחָר שַׁבָּת; in the past it takes הָיָה / הָיְתָה: אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן. “On Monday” is בְּיוֹם שֵׁנִי (no article). The parts of the day take בְּ with the article — בַּבֹּקֶר “in the morning”, בַּצָּהֳרַיִם “at noon”, בָּעֶרֶב “in the evening”, בַּלַּיְלָה “at night” — except אַחַר הַצָּהֳרַיִם “in the afternoon”, which needs nothing. With the article alone they mean “this …”: הַבֹּקֶר “this morning”, הָעֶרֶב “this evening”, הַלַּיְלָה “tonight” — and הַיּוֹם, “the day”, is “today”. Words of time (הַיּוֹם, מָחָר, עַכְשָׁו, בַּבֹּקֶר …) usually open the sentence or close it; frequency words (תָּמִיד, לִפְעָמִים, לְעִתִּים קְרוֹבוֹת) stand before the verb or at the start, and “never” is אַף פַּעַם + לֹא. With מָחָר the present is enough for a plan: מָחָר אֲנִי נוֹסֵעַ. Hebrew verbs have no aspect: “I am going” and “I go” are the same form.",
  "blocks": [
   {
@@ -55,7 +69,13 @@
      "שַׁבָּת"
     ]
    ],
-   "caption": "The week counts from Sunday — like Greek Δευτέρα “second” = Monday."
+   "caption": "The week counts from Sunday: “the second day” is Monday.",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
+   ]
   },
   {
    "t": "table",
@@ -138,7 +158,13 @@
    "t": "callout",
    "kind": "key",
    "title": "No verb, no article",
-   "text": "“Today is Monday” = הַיּוֹם יוֹם שֵׁנִי — no “is”. “On Monday” = בְּיוֹם שֵׁנִי — no article (בַּיּוֹם הַשֵּׁנִי would be “on the second day”)."
+   "text": "“Today is Monday” = הַיּוֹם יוֹם שֵׁנִי — no “is”. “On Monday” = בְּיוֹם שֵׁנִי — no article (בַּיּוֹם הַשֵּׁנִי would be “on the second day”).",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -151,12 +177,6 @@
    "kind": "pitfall",
    "title": "Yesterday needs the past",
    "text": "אֶתְמוֹל goes with a past verb: אֶתְמוֹל הָיָה יוֹם רִאשׁוֹן “yesterday was Sunday”, אֶתְמוֹל הָיְתָה שַׁבָּת (שַׁבָּת is feminine). The past tense comes in lesson C01."
-  },
-  {
-   "t": "callout",
-   "kind": "tip",
-   "title": "For you",
-   "text": "German says am Montag, morgens, heute Abend — Hebrew בְּיוֹם שֵׁנִי, בַּבֹּקֶר, הָעֶרֶב. Greek numbers the weekdays like Hebrew (Δευτέρα, Τρίτη, Τετάρτη, Πέμπτη); Russian counts from Monday (вторник “second” is Tuesday) — Hebrew counts from Sunday. Turkish and German put the time word early, as Hebrew may: Yarın Hayfa’ya gidiyorum / Morgen fahre ich nach Haifa / מָחָר אֲנִי נוֹסֵעַ לְחֵיפָה."
   },
   {
    "t": "ask",
@@ -335,6 +355,108 @@
    "lang": "zh",
    "fn": "fn.aspect",
    "note": "Chinese marks completed or experienced actions with 了 / 过 in this lesson; Hebrew verbs have tense, not aspect — the past comes later (C01)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "Greek numbers the weekdays as Hebrew does (Δευτέρα “second”, Τρίτη, Τετάρτη, Πέμπτη) and calls Saturday Σάββατο ~ שַׁבָּת; Hebrew numbers Sunday too: יוֹם רִאשׁוֹן."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian also numbers some days (вторник “second”, четверг “fourth”, пятница “fifth”) but counts from Monday; Hebrew counts from Sunday, so יוֹם שֵׁנִי “second day” is Monday. суббота comes from the same word as שַׁבָּת."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish days are named after planets and gods (lunes, martes …); Hebrew numbers them from Sunday: יוֹם שֵׁנִי “second day” = Monday. sábado is שַׁבָּת."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English names the days; Hebrew numbers them from Sunday (יוֹם שֵׁנִי “second day” = Monday). “On Monday” is בְּיוֹם שֵׁנִי, “in the morning” בַּבֹּקֶר, “this morning” הַבֹּקֶר."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "lundi, mardi … are planetary names; Hebrew counts: יוֹם רִאשׁוֹן, יוֹם שֵׁנִי …, with the week starting on Sunday. “Ce matin” is just הַבֹּקֶר."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German says am Montag, morgens, heute Abend — Hebrew בְּיוֹם שֵׁנִי, בַּבֹּקֶר, הָעֶרֶב. A time word may open the sentence in both (Morgen fahre ich nach Haifa / מָחָר אֲנִי נוֹסֵעַ לְחֵיפָה), but Hebrew does not move the verb."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi days are named after the planets (सोमवार “Moon-day”); Hebrew numbers them from Sunday."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also numbers the days, counting from Saturday (یکشنبه “one-shanbe” = Sunday, دوشنبه = Monday), and شنبه comes from the same word as שַׁבָּת; Hebrew counts from Sunday."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi days carry planetary names (सोमवार, मंगळवार); Hebrew numbers them from Sunday."
+  },
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "Arabic numbers the days the same way, from Sunday (الْأَحَد “the first”, الِاثْنَيْن “the second” …), and السَّبْت is the same word as שַׁבָּת."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has its own day names (Pazartesi, Salı …) and starts the week on Monday; Hebrew numbers the days from Sunday. Both may put the time word first: Yarın Hayfa’ya gidiyorum / מָחָר אֲנִי נוֹסֵעַ לְחֵיפָה."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese names the days after the sun, the moon and the elements (月曜日, 火曜日); Hebrew numbers them from Sunday."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean names the days after the sun, the moon and the elements (월요일, 화요일); Hebrew numbers them from Sunday."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has day names (maanantai, tiistai …) and starts on Monday; Hebrew numbers from Sunday, and “on Monday” is בְּיוֹם שֵׁנִי, not an ending as in maanantaina."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian marks “on Monday” with a suffix (hétfőn); Hebrew puts בְּ in front: בְּיוֹם שֵׁנִי — and counts the days from Sunday."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also numbers the days, counting from Saturday (Jumamosi = Saturday, Jumapili = Sunday, Jumatatu = Monday …); Hebrew counts from Sunday: יוֹם רִאשׁוֹן."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda numbers most weekdays too (Lwakubiri “day two” = Tuesday, Lwakusatu = Wednesday …), counting from Monday; Hebrew counts from Sunday, so its “second day” is Monday."
+  },
+  {
+   "for": "zh",
+   "rel": "trap",
+   "text": "Chinese also numbers the days (星期一 = Monday), but from Monday: 星期二 “week-two” is Tuesday, while Hebrew יוֹם שֵׁנִי “second day” is Monday. As in Chinese, the verb has no aspect form here: מָחָר אֲנִי נוֹסֵעַ."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese counts the days exactly like Hebrew: thứ hai “the second” = Monday = יוֹם שֵׁנִי, thứ ba = יוֹם שְׁלִישִׁי … thứ sáu = יוֹם שִׁשִּׁי; Sunday has a name of its own in Vietnamese (chủ nhật), Saturday in Hebrew (שַׁבָּת)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut makes time words with case endings (ullumi “today”, from ullu “day” + -mi “at”); Hebrew uses the article: הַיּוֹם “today”, literally “the day”."
   }
  ]
 }

@@ -56,13 +56,29 @@
      "عِنْدَ + genitive",
      "عِنْدَ أَبِي ثَلَاثَةُ إِخْوَةٍ. — My father has three brothers."
     ]
+   ],
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
+    },
+    {
+     "feature": "nom.possessiveAffixes",
+     "value": "suffixes"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "What you have is the subject.",
-   "text": "In عِنْدِي أَخٌ the word أَخٌ is the subject of a sentence without a verb (“a brother is at me”): nominative -un, not accusative. Compare German Ich habe einen Bruder (accusative) — Arabic says عِنْدِي أَخٌ."
+   "text": "In عِنْدِي أَخٌ the word أَخٌ is the subject of a sentence without a verb (“a brother is at me”): nominative -un, not accusative. Compare German Ich habe einen Bruder (accusative) — Arabic says عِنْدِي أَخٌ.",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -98,7 +114,7 @@
   },
   {
    "t": "p",
-   "text": "Formal writing also uses لَدَى: لَدَيَّ (I have), لَدَيْكَ (you have) — the same idea, “at me”. Russian у меня есть and Turkish bende var build “to have” in exactly this way."
+   "text": "Formal writing also uses لَدَى: لَدَيَّ (I have), لَدَيْكَ (you have) — the same idea, “at me”."
   }
  ],
  "procedure": {
@@ -214,7 +230,7 @@
    "why": "عِنْدَ + the owner in the genitive; أَخ is masculine → ثَلَاثَةُ."
   },
   {
-   "q": "German haben, Greek έχω — what does Arabic use instead?",
+   "q": "Arabic has no verb “to have”. What does it use instead?",
    "options": [
     "the preposition عِنْدَ + a suffix",
     "the verb كَانَ",
@@ -244,6 +260,103 @@
    "lang": "ar",
    "fn": "fn.possessive",
    "note": "The endings of عِنْدِي, عِنْدَكَ … are the possessive endings of كِتَابِي, كِتَابُكَ …"
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.have",
+   "value": "locational"
+  },
+  {
+   "feature": "nom.possessiveAffixes",
+   "value": "suffixes"
+  }
+ ],
+ "notes": [
+  {
+   "for": "ru",
+   "rel": "same",
+   "text": "Russian builds “to have” the same way: у меня есть = عِنْدِي, “at me (is)”, and the thing owned is the subject in both (у меня есть брат ≈ عِنْدِي أَخٌ)."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish says kitabım var (“my book exists”) or bende var (“at me there is”); Arabic says عِنْدِي كِتَابٌ, “at me (is) a book”, with the thing owned as the subject."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish minulla on kirja, “at me is a book”, is the same construction as عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian nekem van egy könyvem is “to me there is a book-of-mine”; Arabic needs only the preposition with an ending: عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "Hindi मेरे पास किताब है, “near me (is) a book”, is the same idea as عِنْدِي كِتَابٌ; for relatives Hindi says मेरा एक भाई है, close to Arabic لِي أَخٌ."
+  },
+  {
+   "for": "mr",
+   "rel": "same",
+   "text": "Marathi माझ्याकडे पुस्तक आहे, “at me (is) a book”, is the same idea as عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek uses the verb έχω with an accusative object (έχω έναν αδερφό); Arabic has no verb — عِنْدِي أَخٌ — and the brother is nominative."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish tengo un hermano is a verb with an object; Arabic says عِنْدِي أَخٌ — a preposition with an ending, and the brother is the subject."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English “have” is a verb with an object; Arabic says “at me (is) a brother”, عِنْدِي أَخٌ — so the past is كَانَ عِنْدِي and the negative لَيْسَ عِنْدِي."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French avoir is a verb (j’ai un frère); Arabic uses عِنْدَ, close to chez, with an ending: عِنْدِي أَخٌ."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian uses the verb داشتن (کتاب دارم); Arabic has no verb: عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese 本がある / 兄がいる presents what you have as something that exists; Arabic places it “at” the owner: عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean 책이 있어요 (“a book exists”) treats having as existing, as Arabic عِنْدِي كِتَابٌ does; the negative 없어요 matches لَيْسَ عِنْدِي."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili nina kitabu is literally “I am with a book”; Arabic says “at me” — عِنْدِي كِتَابٌ — or مَعِي for what you carry."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda also says “be with” (nnina ekitabo, I have a book); Arabic says “at me”: عِنْدِي كِتَابٌ."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses the verb có (tôi có một quyển sách), which also means “there is”; Arabic uses the preposition عِنْدَ, and “there is” is said with a place word (هُنَا كِتَابٌ)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut adds a suffix meaning “have” (-qaq-) to the noun and makes it a verb; Arabic puts the owner after a preposition: عِنْدِي كِتَابٌ."
   }
  ]
 }

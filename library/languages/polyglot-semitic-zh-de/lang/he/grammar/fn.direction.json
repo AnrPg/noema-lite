@@ -1,7 +1,21 @@
 {
  "function": "fn.direction",
  "status": "realized",
- "summary": "Hebrew shows the direction of a movement with the same small prepositions it uses for place, put before the noun, which never changes: where to = לְ (לַשּׁוּק “to the market”, לְחֵיפָה “to Haifa”; formal אֶל), where from = מִ / מֵ (מֵהָעֲבוֹדָה “from work”), by what = בְּ (בְּאוֹטוֹבּוּס “by bus”, בָּרַכֶּבֶת “by train”) and on foot = בָּרֶגֶל. Home(wards) is the single word הַבַּיְתָה (no לְ), and the questions are לְאָן? “where to?” and מֵאֵיפֹה? “where from?”. The verb carries the rest — and Hebrew, like German, splits “go”: הָלַךְ is going on foot (or going somewhere in town in general), נָסַע is going by any vehicle, as driver or passenger (gehen / fahren); the driver himself נוֹהֵג. Each verb has its preposition: נִכְנַס לְ… “go into”, יָצָא מִ… “go out of”, הִגִּיעַ לְ… “arrive at”, חִכָּה לְ… “wait for”, נִשְׁאַר בְּ… “stay at”, but עָזַב אֶת … “leave (behind)” takes a direct object. The verbs come from roots in different patterns (binyanim): pa‘al הָלַךְ / הוֹלֵךְ, nif‘al נִכְנַס / נִכְנָס, hif‘il הִגִּיעַ / מַגִּיעַ, pi‘el חִכָּה / מְחַכֶּה — the present tense still has just four forms, by gender and number.",
+ "typology": [
+  {
+   "feature": "sem.motionFraming",
+   "value": "verb-framed"
+  },
+  {
+   "feature": "verb.particleVerbs",
+   "value": "none"
+  },
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  }
+ ],
+ "summary": "Hebrew shows the direction of a movement with the same small prepositions it uses for place, put before the noun, which never changes: where to = לְ (לַשּׁוּק “to the market”, לְחֵיפָה “to Haifa”; formal אֶל), where from = מִ / מֵ (מֵהָעֲבוֹדָה “from work”), by what = בְּ (בְּאוֹטוֹבּוּס “by bus”, בָּרַכֶּבֶת “by train”) and on foot = בָּרֶגֶל. Home(wards) is the single word הַבַּיְתָה (no לְ), and the questions are לְאָן? “where to?” and מֵאֵיפֹה? “where from?”. The verb carries the rest — and Hebrew, like German, splits “go”: הָלַךְ is going on foot (or going somewhere in town in general), נָסַע is going by any vehicle, as driver or passenger (gehen / fahren); the driver himself נוֹהֵג. Each verb has its preposition: נִכְנַס לְ… “go into”, יָצָא מִ… “go out of”, הִגִּיעַ לְ… “arrive at”, חִכָּה לְ… “wait for”, נִשְׁאַר בְּ… “stay at”, but עָזַב אֶת … “leave (behind)” takes a direct object. The verbs come from roots in different patterns (binyanim): pa‘al הָלַךְ / הוֹלֵךְ, nif‘al נִכְנַס / נִכְנָס, hif‘il הִגִּיעַ / מַגִּיעַ, pi‘el חִכָּה / מְחַכֶּה — the present tense still has just four forms, by gender and number. The direction itself is inside the verb (נִכְנַס “go in”, יָצָא “go out”, חָזַר “come back”), never in a particle added to it, and the way of moving is added only when it matters (בָּרֶגֶל “on foot”).",
  "blocks": [
   {
    "t": "table",
@@ -32,7 +46,13 @@
      "אֲנִי נִשְׁאָר בַּבַּיִת."
     ]
    ],
-   "caption": "Where to, where from, by what — Greek σε / από / με, German wohin / woher / womit."
+   "caption": "Where to, where from, by what — German wohin / woher / womit.",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -116,7 +136,17 @@
      "לְ…"
     ]
    ],
-   "caption": "The twelve verbs of the lesson: the present and the preposition each one takes."
+   "caption": "The twelve verbs of the lesson: the present and the preposition each one takes.",
+   "typology": [
+    {
+     "feature": "sem.motionFraming",
+     "value": "verb-framed"
+    },
+    {
+     "feature": "verb.particleVerbs",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -192,8 +222,18 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "For you",
-   "text": "German needs a case for every direction (in die Stadt, in der Stadt, aus der Stadt); Turkish adds a suffix (şehre, şehirde, şehirden). Hebrew uses three prefixes and leaves the noun alone: לָעִיר, בָּעִיר, מֵהָעִיר. Greek σε covers both “to” and “in” — Hebrew separates them (לְ / בְּ), like German wohin / wo."
+   "title": "Three prefixes, an unchanged noun",
+   "text": "German needs a case for every direction (in die Stadt, in der Stadt, aus der Stadt); Hebrew uses three prefixes and leaves the noun alone: לָעִיר, בָּעִיר, מֵהָעִיר. “To” and “in” are always different words (לְ / בְּ), like German wohin / wo.",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    },
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    }
+   ]
   },
   {
    "t": "terms",
@@ -403,6 +443,93 @@
    "lang": "zh",
    "fn": "fn.direction",
    "note": "Chinese uses 去 “go” / 来 “come”, 从 … 到 … “from … to …” and 坐 + vehicle (坐公共汽车 “take the bus”) before the verb."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek σε covers both “to” and “in” (πάω στο σπίτι / είμαι στο σπίτι); Hebrew separates them: לַבַּיִת / בַּבַּיִת. And Greek πάω covers foot and vehicle, where Hebrew splits הָלַךְ / נָסַע."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian also splits идти / ехать (on foot / by vehicle) like הָלַךְ / נָסַע; but Russian builds direction with prefixes (войти, выйти, прийти), while Hebrew uses separate verbs: נִכְנַס, יָצָא, הִגִּיעַ."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish also puts the direction in the verb (entrar, salir, volver ~ נִכְנַס, יָצָא, חָזַר) and adds the manner only if needed (a pie ~ בָּרֶגֶל). But ir covers foot and vehicle alike; Hebrew uses נָסַע for a vehicle."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English puts the direction in a particle (go in, go out, come back); Hebrew has a verb for each: נִכְנַס, יָצָא, חָזַר. “Go by bus” is נָסַע, never הָלַךְ."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "As in French (entrer, sortir, revenir), the direction is in the verb: נִכְנַס, יָצָא, חָזַר. Aller covers both ways of going; Hebrew separates הָלַךְ (on foot) and נָסַע (by vehicle)."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "Like gehen / fahren, Hebrew splits הָלַךְ / נָסַע; but German puts the direction in particles (hineingehen, zurückkommen) and cases, Hebrew in the verb itself (נִכְנַס, חָזַר) and three prefixes (לְ / בְּ / מִ)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi also has single verbs for “arrive” (पहुँचना), “return” (लौटना) and “go out” (निकलना), as Hebrew has הִגִּיעַ, חָזַר, יָצָא; but it marks the place with a postposition after it, Hebrew with a prefix before it."
+  },
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "Arabic, like Hebrew, has a verb for each direction (دَخَلَ, خَرَجَ, رَجَعَ, وَصَلَ ~ נִכְנַס, יָצָא, חָזַר, הִגִּיעַ) and the prepositions إِلَى / مِنْ ~ לְ / מִ."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adds a suffix for each direction (şehre, şehirde, şehirden); Hebrew uses three prefixes and leaves the noun alone: לָעִיר, בָּעִיר, מֵהָעִיר. Like Hebrew, Turkish puts the direction in the verb (girmek, çıkmak, dönmek)."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese also has verbs for each direction (入る, 出る, 帰る ~ נִכְנַס, יָצָא, חָזַר) but marks the place with a particle after it (家に, 家から); Hebrew uses a prefix before it."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean builds directions as compound verbs (들어가다 “go in”, 나가다 “go out”); Hebrew has one simple verb for each (נִכְנַס, יָצָא) and prefixes for the place."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish shows where to / where / where from with cases (kaupunkiin, kaupungissa, kaupungista) and adds adverbs like sisään “in” and ulos “out”; Hebrew uses separate verbs (נִכְנַס, יָצָא) and three prefixes."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian puts the direction in verb prefixes (bemegy, kimegy, visszajön); Hebrew has a separate verb for each: נִכְנַס, יָצָא, חָזַר."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili has a verb for each direction (kuingia “enter”, kutoka “go out”, kurudi “return”), as Hebrew does (נִכְנַס, יָצָא, חָזַר)."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese adds direction complements to the verb (走进去, 跑出来); Hebrew uses one verb that contains the direction (נִכְנַס, יָצָא) and adds the manner only if needed (בָּרֶגֶל)."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese strings verbs together (đi vào, chạy ra); Hebrew uses one verb with the direction in it: נִכְנַס, יָצָא."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks the goal and the source with case endings (-mut “to”, -mit “from”) and builds the movement into one long verb; Hebrew uses separate words: a verb plus לְ / מִ."
   }
  ]
 }

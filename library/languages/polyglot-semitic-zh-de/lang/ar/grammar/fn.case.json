@@ -67,7 +67,13 @@
      "مَعَ أَبِيكَ (-ū → -ī)"
     ]
    ],
-   "caption": "One rule — the genitive after a preposition — with the endings of each noun type."
+   "caption": "One rule — the genitive after a preposition — with the endings of each noun type.",
+   "typology": [
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "core-and-noncore"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -124,13 +130,29 @@
    "t": "callout",
    "kind": "key",
    "title": "The construct: the second noun is genitive.",
-   "text": "مَكْتَبُ الْبَرِيدِ (the post office), غُرْفَةُ النَّوْمِ (the bedroom): the second noun is genitive; the first has no article and no tanwīn and takes the case of its place — فِي مَكْتَبِ الْبَرِيدِ, إِلَى غُرْفَةِ النَّوْمِ."
+   "text": "مَكْتَبُ الْبَرِيدِ (the post office), غُرْفَةُ النَّوْمِ (the bedroom): the second noun is genitive; the first has no article and no tanwīn and takes the case of its place — فِي مَكْتَبِ الْبَرِيدِ, إِلَى غُرْفَةِ النَّوْمِ.",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    },
+    {
+     "feature": "nom.genitive",
+     "value": "construct"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "Diptotes: -a for the genitive.",
-   "text": "Without the article a diptote has no tanwīn and takes -a in the genitive: فِي مَدَارِسَ, مِنْ شَوَارِعَ, مَعَ أَطِبَّاءَ. With the article it is normal again: فِي الْمَدَارِسِ."
+   "text": "Without the article a diptote has no tanwīn and takes -a in the genitive: فِي مَدَارِسَ, مِنْ شَوَارِعَ, مَعَ أَطِبَّاءَ. With the article it is normal again: فِي الْمَدَارِسِ.",
+   "typology": [
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "core-and-noncore"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -321,6 +343,96 @@
    "lang": "ar",
    "fn": "fn.case.basic",
    "note": "The three case endings were introduced in lesson 4 (nominative) and lesson 7 (accusative); the genitive completes them."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "three"
+  },
+  {
+   "feature": "nom.caseSyncretism",
+   "value": "core-and-noncore"
+  },
+  {
+   "feature": "nom.genitive",
+   "value": "construct"
+  },
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek prepositions also take a case (σε / από + accusative); Arabic always takes the genitive, whatever the preposition."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian chooses the case by preposition and meaning (в школе / в школу, из школы); Arabic has one case after every preposition: the genitive."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish nouns never change after a preposition; Arabic nouns take the genitive -i / -in: فِي الْبَيْتِ."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English changes only pronouns after a preposition (with me); Arabic changes every noun: فِي الْبَيْتِ, مَعَ أَبِيكَ."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi puts a noun into its oblique form before every postposition (लड़का → लड़के से); Arabic puts it into the genitive after every preposition — one form for all, in both."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian nouns do not change after prepositions. The Arabic construct (بَيْتُ الْأَبِ, the father’s house) is the counterpart of the Persian ezafe (خانهٔ پدر), but it marks the second noun with the genitive instead of linking with -e."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi also uses an oblique stem before endings and postpositions; Arabic uses one genitive after every preposition."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has separate cases for place, direction and source (-de, -e, -den); Arabic has one genitive and lets the preposition say where."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese particles never change the noun; Arabic prepositions put it into the genitive (-i / -in)."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses six local cases for in / into / out of and on / onto / off; Arabic has one genitive and lets the preposition carry the meaning."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian has many local cases (házban, házba, házból …); Arabic uses a preposition + the genitive."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili nouns do not change after prepositions (kwa, na); Arabic nouns take the genitive."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese nouns never change; Arabic nouns take the genitive after every preposition."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut says in / to / from with case endings (-mi, -mut, -mit); Arabic with a preposition + the genitive."
   }
  ]
 }

@@ -1,6 +1,16 @@
 {
  "function": "fn.comparison",
  "status": "periphrastic",
+ "typology": [
+  {
+   "feature": "syn.comparison",
+   "value": "exceed"
+  },
+  {
+   "feature": "adj.comparativeForm",
+   "value": "analytic"
+  }
+ ],
  "summary": "Chinese never changes the adjective to compare: it adds words. ‘Taller than’ is A 比 B + adjective — 我哥哥比我高 ‘my brother is taller than me’ — with the adjective bare (no 很). How much more follows the adjective (高一点 ‘a bit taller’, 快多了 ‘much faster’, 大两岁 ‘two years older’); 更 or 还 before it says ‘even more’. ‘Not as … as’ is A 没有 B + adjective (我没有他高), ‘as … as’ is A 跟 B 一样 + adjective (我跟他一样高). 更 + adjective is ‘more …’ when the other thing is understood (这个更好 ‘this one is better’), and 最 + adjective is ‘the most …’ (他最高 ‘he is the tallest’, 最好的饭馆 ‘the best restaurant’).",
  "blocks": [
   {
@@ -57,7 +67,17 @@
      "他最高。 He is the tallest."
     ]
    ],
-   "caption": "Comparing: the adjective never changes"
+   "caption": "Comparing: the adjective never changes",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "exceed"
+    },
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -67,7 +87,13 @@
     "我",
     "高"
    ],
-   "caption": "A 比 B + adjective — the adjective stays bare"
+   "caption": "A 比 B + adjective — the adjective stays bare",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "exceed"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -110,7 +136,13 @@
    "t": "callout",
    "kind": "key",
    "title": "No -er, no -est",
-   "text": "高 · 比他高 · 更高 · 最高 — the adjective never changes. German and Greek change the word (größer, am größten; ψηλότερος, ο ψηλότερος); Chinese adds a word."
+   "text": "高 · 比他高 · 更高 · 最高 — the adjective never changes. German changes the word (größer, am größten); Chinese adds a word.",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -126,9 +158,15 @@
   },
   {
    "t": "callout",
-   "kind": "analogy",
-   "title": "Like Turkish",
-   "text": "Turkish also keeps the adjective as it is: benden daha uzun ‘taller than me’ (-den ≈ 比, daha ≈ 更), en uzun ‘the tallest’ (en ≈ 最)."
+   "kind": "key",
+   "title": "Three words do it all",
+   "text": "比 brings in what you compare with, 更 ‘more’ and 最 ‘most’ stand before the adjective, and the adjective itself never changes: 比我高, 更高, 最高.",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -273,6 +311,108 @@
    ],
    "answer": "浅蓝色",
    "why": "浅 ‘light’ goes straight before the colour; dark blue is 深蓝色."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek has an analytic comparative too (πιο ψηλός ‘more tall’ ~ 更高) besides ψηλότερος, but ‘than’ (από) follows the adjective: πιο ψηλός από μένα. Chinese puts 比 + the other thing before it: 比我高."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian выше / дороже change the adjective and put ‘than’ after it (выше меня); Chinese adds 比 before an unchanged adjective: 比我高. самый ~ 最."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish más alto que yo is analytic like Chinese (más ~ 更, el más alto ~ 最高), but que + the other thing follows the adjective; Chinese puts 比 + the other thing first: 比我高."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English taller / tallest change the adjective and ‘than’ follows it (taller than me); Chinese puts 比 + the other thing before an unchanged adjective: 比我高. ‘not as tall as’ ~ 没有…高; ‘as tall as’ ~ 跟…一样高."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French plus grand que moi is analytic like Chinese (plus ~ 更, le plus ~ 最), but que + the other thing follows the adjective; Chinese: 比我高."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German größer als ich changes the adjective and puts als after it; Chinese 比我高 adds 比 before an unchanged adjective. am größten ~ 最高."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi puts the thing compared with first, with से, and leaves the adjective unchanged: वह मुझसे लंबा है ~ 他比我高. सबसे ‘than all’ ~ 最: सबसे लंबा ~ 最高."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian adds -tar to the adjective and az ‘than’ after it (bozorgtar az man ‘bigger than me’); Chinese leaves the adjective unchanged and puts 比 + the other thing first: 比我大."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi puts the other thing first with -पेक्षा and leaves the adjective unchanged: तो माझ्यापेक्षा उंच आहे ~ 他比我高; सगळ्यात ‘of all’ ~ 最."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic makes a new form of the adjective (kabīr → akbar) and puts min ‘than’ after it (akbar minnī ‘bigger than me’); Chinese leaves 大 alone and puts 比 + the other thing first: 比我大."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew yoter gadol mi- ‘more big than’ is analytic like 更大, but mi- follows the adjective; Chinese puts 比 first: 比我大. ha-khi gadol ~ 最大."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish also keeps the adjective unchanged and puts the other thing first: benden daha uzun ‘taller than me’ (-den ~ 比, daha ~ 更), en uzun ~ 最高."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese 私より高い ‘taller than me’ puts the other thing first, with より, and leaves the adjective unchanged — the Chinese 比我高 with the particle after the noun. 一番 / 最も ~ 最."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean 나보다 커요 ‘bigger than me’ puts the other thing first with 보다 and leaves the adjective unchanged; 더 ~ 更, 제일 ~ 最."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adds -mpi to the adjective (pitkä → pidempi) with kuin ‘than’ after it, or puts the other thing first in the partitive (minua pidempi); Chinese never changes the adjective: 比我高."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adds -bb to the adjective (magas → magasabb) and marks the other thing with -nál / -nél or mint; Chinese never changes the adjective: 比我高. leg-…-bb ~ 最."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili says ‘tall more than me’: mrefu kuliko mimi; Chinese puts the other thing first: 比我高."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda compares with the verb ‘to surpass’ (-singa) after the adjective; Chinese 比 also comes from a verb (‘to compare’), but stands before the adjective: 比我高."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "Vietnamese puts hơn ‘more than’ after the adjective (cao hơn tôi ‘taller than me’) and nhất after it for ‘most’ (cao nhất); Chinese puts 比 and 最 before it: 比我高, 最高."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut makes the comparative with a suffix inside the word, and the thing compared with takes a ‘from’ ending; Chinese uses separate words and an unchanged adjective: 比我高."
   }
  ],
  "seeAlso": [

@@ -1,6 +1,24 @@
 {
  "function": "fn.present",
  "status": "absent",
+ "typology": [
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "none"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "optional"
+  },
+  {
+   "feature": "verb.past",
+   "value": "none"
+  },
+  {
+   "feature": "verb.future",
+   "value": "none"
+  }
+ ],
  "summary": "Chinese has no present tense — it has no tenses at all. The verb never changes: 我吃, 你吃, 他吃, 我们吃, 他们吃 — one form for every person and number, where German has ich esse, du isst, er isst. Whether something happens now, as a habit or later is shown by the situation and by time words (今天 ‘today’, 现在 ‘now’ — S14); a finished action or an experience gets an aspect particle, 了 or 过 (S14), not a past tense. So 我喝茶 is ‘I drink tea’, ‘I’m having tea’ or ‘I’ll have tea’ — whichever the moment makes clear.",
  "blocks": [
   {
@@ -8,70 +26,92 @@
    "head": [
     "Person",
     "Chinese",
-    "German",
-    "Greek"
+    "German"
    ],
    "rows": [
     [
      "I",
      "我吃",
-     "ich esse",
-     "τρώω"
+     "ich esse"
     ],
     [
      "you",
      "你吃 / 您吃",
-     "du isst / Sie essen",
-     "τρως"
+     "du isst / Sie essen"
     ],
     [
      "he, she",
      "他吃 / 她吃",
-     "er / sie isst",
-     "τρώει"
+     "er / sie isst"
     ],
     [
      "we",
      "我们吃",
-     "wir essen",
-     "τρώμε"
+     "wir essen"
     ],
     [
      "you (pl)",
      "你们吃",
-     "ihr esst",
-     "τρώτε"
+     "ihr esst"
     ],
     [
      "they",
      "他们吃",
-     "sie essen",
-     "τρώνε"
+     "sie essen"
     ]
    ],
-   "caption": "One form for all six persons — compare the German and Greek endings"
+   "caption": "One form for all six persons — compare the German endings",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "No tense, only time",
-   "text": "我喝茶 can be ‘I drink tea’ (a habit), ‘I’m having tea’ (now) or ‘I’ll have tea’ (a plan). When it matters, a time word before the verb says when: 我今天喝茶 ‘I’m having tea today’ — the time words come in S14."
+   "text": "我喝茶 can be ‘I drink tea’ (a habit), ‘I’m having tea’ (now) or ‘I’ll have tea’ (a plan). When it matters, a time word before the verb says when: 我今天喝茶 ‘I’m having tea today’ — the time words come in S14.",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    },
+    {
+     "feature": "verb.past",
+     "value": "none"
+    },
+    {
+     "feature": "verb.future",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "tip",
    "title": "Aspect instead of tense (S14)",
-   "text": "What English does with tenses Chinese does with small particles: 了 for a completed action (我喝了茶 ‘I had the tea’), 过 for an experience (我喝过 ‘I have had it before’), 在 for an action in progress (我在喝茶 ‘I’m drinking tea’). They come in S14 with the days and the times of day."
+   "text": "Where other languages use tenses, Chinese uses small particles: 了 for a completed action (我喝了茶 ‘I had the tea’), 过 for an experience (我喝过 ‘I have had it before’), 在 for an action in progress (我在喝茶 ‘I’m drinking tea’). They come in S14 with the days and the times of day.",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "particle"
+    },
+    {
+     "feature": "verb.progressive",
+     "value": "optional"
+    }
+   ]
   },
   {
    "t": "compare",
    "items": [
     {
-     "title": "German and Greek: the verb carries person and tense",
+     "title": "German: the verb carries person and tense",
      "points": [
       "ich trinke — du trinkst — er trinkt",
-      "ich trank (past), ich werde trinken (future)",
-      "πίνω — πίνεις — πίνει"
+      "ich trank (past), ich werde trinken (future)"
      ]
     },
     {
@@ -183,6 +223,108 @@
    ],
    "answer": "她喜欢咖啡。",
    "why": "Bare verb, no 是 — and 她们 would be ‘they’."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "new",
+   "text": "Greek endings carry person, number, tense and aspect (τρώω, τρως, τρώει; έφαγα; θα φάω); Chinese 吃 never changes. θα for the future has no Chinese match: 我明天吃 needs only the time word."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian conjugates for person in the present (ем, ешь, ест) and for gender in the past (ел / ела); Chinese 吃 never changes. The Russian aspect pairs (есть / съесть) meet their Chinese counterparts in 了 and 过."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish endings carry person and tense (como, comes, comí, comeré); Chinese 吃 stays the same and lets 我, 你 and time words do that work."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English verbs already change little (I eat, he eats), so Chinese is one step further: no -s, no -ed, no ‘will’. ‘I eat’ and ‘I’m eating’ can both be 我吃; ‘I ate’ is 我吃了, or just a time word."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French conjugation (je mange, nous mangeons, j’ai mangé, je mangerai) disappears entirely: 我吃 for every person and every time."
+  },
+  {
+   "for": "de",
+   "rel": "new",
+   "text": "German conjugation (ich esse, du isst, er isst) and Präteritum, Perfekt, Futur have no Chinese counterpart: 吃 stays 吃, and time words and 了 / 过 do the work."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi verbs change for gender, number, person and tense (खाता हूँ, खाती है, खाया); Chinese 吃 is one form for everyone and every time."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian endings show the person (mikhoram, mikhori, mikhorad) and prefixes the tense or mood (mi-, be-); Chinese 吃 never changes."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi verbs change for person, gender, number and tense (खातो, खाते, खाल्ले); Chinese 吃 never changes."
+  },
+  {
+   "for": "ar",
+   "rel": "new",
+   "text": "Arabic verbs take prefixes and suffixes for person, number and gender (aktubu, taktubu, yaktubūna) and have two stems (kataba / yaktubu); a Chinese verb has one form."
+  },
+  {
+   "for": "he",
+   "rel": "new",
+   "text": "Hebrew present forms change for gender and number (okhel, okhelet, okhlim), past and future for person; Chinese 吃 never changes."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish stacks tense and person suffixes (yiyorum, yedim, yiyeceğim); Chinese has no suffixes at all: 我吃, 我吃了, 我明天吃."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese verbs do not change for person (食べる for I, you, he) — like Chinese — but they do for tense and politeness (食べた, 食べます); Chinese 吃 changes for nothing."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean verbs do not change for person either, but their endings show tense and speech level (먹어요, 먹었어요); Chinese 吃 never changes."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish conjugates for person and tense (syön, syöt, söin); Chinese 吃 is the same for everyone and every time."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian conjugates for person and tense and even shows whether the object is definite; Chinese 吃 never changes."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili builds each verb from prefixes for person and tense (ninakula ‘I eat’, nilikula ‘I ate’, nitakula ‘I will eat’); Chinese 吃 has none: 我吃, 我吃了, 我明天吃."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "Luganda verbs carry prefixes for person and tense (ndya ‘I eat’); Chinese 吃 carries nothing — 我, 昨天 and 了 do that work."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese verbs never change either; optional words such as đã, đang, sẽ add time or aspect, as Chinese adds 了, 在 or a time word."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut packs tense, person and much more into one verb word (nirijunga ‘I eat’); Chinese keeps everything separate and the verb unchanged: 我吃."
   }
  ],
  "seeAlso": [

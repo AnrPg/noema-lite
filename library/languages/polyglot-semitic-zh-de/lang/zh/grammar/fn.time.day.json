@@ -1,6 +1,20 @@
 {
  "function": "fn.time.day",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "time.dayNames",
+   "value": "numbered"
+  },
+  {
+   "feature": "syn.obliquePosition",
+   "value": "XVO"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "optional"
+  }
+ ],
  "summary": "The time of an action stands BEFORE the verb — at the very start of the sentence or right after the subject, never at the end: 我明天去北京 or 明天我去北京 ‘I’m going to Beijing tomorrow’. No preposition is needed: 星期一我工作 ‘on Monday I work’, 晚上我们在家 ‘in the evening we’re at home’. Several time words go from big to small: 明天下午三点 ‘tomorrow at 3 p.m.’, 星期五晚上 ‘Friday evening’. Days are numbered from Monday: 星期一 (1) … 星期六 (6), and Sunday is 星期天 / 星期日; ‘which day?’ is 星期几. A day or date can be the predicate without 是: 今天星期三. Frequency words — 总是 always, 常常 / 经常 often, 有时候 sometimes, 每天 every day — also stand before the verb, and so do 现在 now, 马上 at once, 等一下 / 以后 later. The verb itself never changes: 昨天, 今天 and 明天 alone place the action in time.",
  "blocks": [
   {
@@ -13,53 +27,65 @@
     "verb",
     "object"
    ],
-   "caption": "明天 我 去北京 · 我 明天 去北京 · 我 常常 去公园"
+   "caption": "明天 我 去北京 · 我 明天 去北京 · 我 常常 去公园",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ]
   },
   {
    "t": "table",
    "head": [
-    "English / Greek",
+    "Meaning",
     "Chinese",
     "Note"
    ],
    "rows": [
     [
-     "I’m going to Beijing tomorrow. — Πάω στο Πεκίνο αύριο.",
+     "I’m going to Beijing tomorrow.",
      "我明天去北京。 / 明天我去北京。",
      "time before the verb — never at the end"
     ],
     [
-     "On Monday I work. — Τη Δευτέρα δουλεύω.",
+     "On Monday I work.",
      "星期一我工作。",
-     "no word for ‘on’ (Greek, too, says just τη Δευτέρα)"
+     "no word for ‘on’"
     ],
     [
-     "In the evening we eat at home. — Το βράδυ τρώμε στο σπίτι.",
+     "In the evening we eat at home.",
      "晚上我们在家吃饭。",
      "time before place: 晚上 + 在家"
     ],
     [
-     "tomorrow at 3 p.m. — αύριο στις τρεις το απόγευμα",
+     "tomorrow at 3 p.m.",
      "明天下午三点",
      "big → small"
     ],
     [
-     "Today is Wednesday. — Σήμερα είναι Τετάρτη.",
+     "Today is Wednesday.",
      "今天星期三。",
      "是 can drop with days and dates"
     ],
     [
-     "I often go to the park. — Πηγαίνω συχνά στο πάρκο.",
+     "I often go to the park.",
      "我常常去公园。",
      "how often: before the verb"
     ],
     [
-     "I’m busy now. — Είμαι απασχολημένος τώρα.",
+     "I’m busy now.",
      "我现在很忙。",
      "现在 before the predicate"
     ]
    ],
-   "caption": "When: before the verb"
+   "caption": "When: before the verb",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ]
   },
   {
    "t": "table",
@@ -92,7 +118,13 @@
      "周日"
     ]
    ],
-   "caption": "The week: numbered from Monday (周一 … is the written short form)"
+   "caption": "The week: numbered from Monday (周一 … is the written short form)",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
+   ]
   },
   {
    "t": "table",
@@ -139,13 +171,19 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "Monday is ONE",
-   "text": "Greek Δευτέρα ‘second’, Hebrew יוֹם שֵׁנִי and Arabic الاثنين count from Sunday; Chinese counts from Monday: 星期一 = Monday, 星期二 = Tuesday. Russian вторник ‘second’ = 星期二 — the same count as Chinese."
+   "text": "Chinese counts the weekdays from Monday: 星期一 ‘week-one’ = Monday, 星期二 = Tuesday … 星期六 = Saturday, and Sunday is 星期天 / 星期日. Hebrew יוֹם שֵׁנִי ‘second day’ and Arabic الاثنين ‘the second’ count from Sunday and mean Monday — in Chinese the ‘second’ day, 星期二, is Tuesday.",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "Never at the end",
-   "text": "*我去北京明天 copies English ‘I go to Beijing tomorrow’. Chinese: 我明天去北京. The time frames the action, so it comes first."
+   "text": "*我去北京明天, with the time at the end, is wrong. Chinese: 我明天去北京. The time frames the action, so it comes first."
   },
   {
    "t": "compare",
@@ -177,7 +215,13 @@
    "t": "callout",
    "kind": "key",
    "title": "No tense: the time word does the work",
-   "text": "昨天我在家 ‘yesterday I was at home’, 今天我在家 ‘today I’m at home’, 明天我在家 ‘tomorrow I’ll be at home’ — 在 never changes. (For a completed action Chinese adds 了 — see the aspect page.)"
+   "text": "昨天我在家 ‘yesterday I was at home’, 今天我在家 ‘today I’m at home’, 明天我在家 ‘tomorrow I’ll be at home’ — 在 never changes. (For a completed action Chinese adds 了 — see the aspect page.)",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -194,7 +238,7 @@
    "Which day? → 星期 + 1–6, Sunday 星期天 / 星期日; ask 星期几.",
    "Did I add ‘on / in / at’? → remove it: 星期一我工作.",
    "How often? → 总是 / 常常 / 经常 / 有时候 / 每天 before the verb (after the subject).",
-   "Did I put the time at the end, as in English or Greek? → move it forward."
+   "Did I put the time at the end? → move it before the verb."
   ],
   "steps": [
    "Subject and time (either order).",
@@ -206,7 +250,7 @@
  "traps": [
   "*我去北京明天 → 我明天去北京.",
   "*在星期一我工作 (in speech) → 星期一我工作.",
-  "星期一 is Monday — not Greek Δευτέρα ‘second’ = *星期二.",
+  "星期一 is Monday and 星期二 Tuesday — don’t carry over a week that is counted from Sunday.",
   "*星期七 → 星期天 / 星期日.",
   "*星期两 → 星期二.",
   "*我们在家晚上吃饭 → 晚上我们在家吃饭 (time before place).",
@@ -341,6 +385,108 @@
    ],
    "answer": "晚上我们在家吃饭。",
    "why": "Time first, then the place, then the verb."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "Greek Δευτέρα ‘second’ is Monday and Τρίτη ‘third’ Tuesday, counted from Sunday; Chinese 星期一 is Monday and 星期二 Tuesday. Greek, too, needs no preposition with days (τη Δευτέρα), but its time words can go anywhere; Chinese ones go before the verb."
+  },
+  {
+   "for": "ru",
+   "rel": "same",
+   "text": "Russian вторник ‘second’ = Tuesday = 星期二 and четверг ‘fourth’ = Thursday = 星期四 — the same count from Monday. в понедельник needs в; Chinese 星期一 needs nothing and stands before the verb."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish days are named after planets and gods (lunes, martes); Chinese ones are numbered from Monday (星期一, 星期二). el lunes needs the article; Chinese 星期一 needs nothing and stands before the verb."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English names the days (Monday, Tuesday), needs ‘on’ / ‘in’, and puts the time at the end (I work on Monday); Chinese numbers the days and puts the time first, with no preposition: 星期一我工作."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French lundi, mardi are planetary names; Chinese days are numbered: 星期一, 星期二. le lundi for a habit has no Chinese equivalent — 星期一 alone, before the verb."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German Montag, Dienstag are names, though Mittwoch ‘mid-week’ counts; Chinese numbers them all: 星期一, 星期三. am Montag ~ 星期一, with no word for ‘on’, and the time always before the verb."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi सोमवार ‘moon-day’, मंगलवार ‘Mars-day’ are planetary names; Chinese days are numbers. Hindi also puts time words before the verb (मैं कल जाऊँगा ‘I’ll go tomorrow’), as Chinese does."
+  },
+  {
+   "for": "fa",
+   "rel": "trap",
+   "text": "Persian numbers the days from Saturday: doshanbe ‘two-shanbe’ is Monday, seshanbe Tuesday; Chinese numbers from Monday: 星期一 Monday, 星期二 Tuesday. The same number names a different day."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi सोमवार, मंगळवार are planetary names; Chinese days are numbers from Monday. Marathi, like Chinese, puts the time before the verb (मी उद्या जाईन ‘I’ll go tomorrow’)."
+  },
+  {
+   "for": "ar",
+   "rel": "trap",
+   "text": "Arabic al-ithnayn ‘the second’ is Monday and al-thulāthāʾ ‘the third’ Tuesday, counted from Sunday; Chinese 星期二 ‘week-two’ is Tuesday."
+  },
+  {
+   "for": "he",
+   "rel": "trap",
+   "text": "Hebrew yom sheni ‘second day’ is Monday, counted from Sunday; Chinese 星期二 is Tuesday — the same number, the next day."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish days have names (Pazartesi, Salı); Chinese ones are numbered from Monday. Turkish puts the time before the verb (yarın gidiyorum), as Chinese does (我明天去), with no preposition."
+  },
+  {
+   "for": "ja",
+   "rel": "trap",
+   "text": "Japanese 月曜日 ‘moon day’ uses planetary names, so the characters do not match: Monday is 星期一. Months do match (一月, 二月), and Japanese also puts the time before the verb."
+  },
+  {
+   "for": "ko",
+   "rel": "trap",
+   "text": "Korean 월요일 ‘moon day’ uses planetary names; Chinese numbers the days: 星期一. Korean, like Chinese, puts time words before the verb (내일 가요 ~ 明天去)."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish maanantai, tiistai are names, and maanantaina takes a case ending; Chinese numbers the days from Monday, and 星期一 needs nothing."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian hétfő ‘week head’ = Monday and szerda ‘middle’ = Wednesday; Chinese simply counts: 星期一, 星期三. hétfőn takes a case ending; Chinese 星期一 needs nothing."
+  },
+  {
+   "for": "sw",
+   "rel": "trap",
+   "text": "Swahili numbers its days from Saturday (Jumamosi ‘day one’ = Saturday, Jumatatu ‘day three’ = Monday); Chinese numbers from Monday (星期一). Same idea, different start — the numbers do not match."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda counts several weekdays too, and Lwakubiri ‘the second’ is Tuesday — like 星期二. Chinese numbers all of them from Monday: 星期一 … 星期六, and Sunday is 星期天."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "Vietnamese thứ hai ‘second’ is Monday and thứ ba Tuesday; Chinese 星期二 is Tuesday. Vietnamese time words can go at the start or the end; Chinese ones go before the verb."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks time with suffixes inside the verb word; Chinese marks it only with separate time words before the verb (明天, 星期一), and the verb never changes."
   }
  ],
  "seeAlso": [

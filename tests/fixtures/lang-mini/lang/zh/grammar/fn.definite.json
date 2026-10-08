@@ -6,5 +6,107 @@
   "Do not translate “the” word by word."
  ],
  "needs": {},
- "generators": []
+ "generators": [],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek uses ο / η / το for known things and ένας / μία / ένα for new ones; Chinese has no ‘the’, and 一 + measure word is the counterpart of ένας. Position does the rest: a known thing stands before the verb (书在这里)."
+  },
+  {
+   "for": "ru",
+   "rel": "same",
+   "text": "Russian has no articles either and uses word order the same way: Книга на столе (the book) vs На столе книга (a book) — exactly 书在桌子上 vs 桌子上有一本书."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish el / la / un / una come with nearly every noun; Chinese has none — 一 + measure word only when ‘one’ or a new thing matters."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English the / a are obligatory; Chinese has neither. Word order does the work of ‘the’: a known thing before the verb (书在这里 ‘the book is here’), a new thing after 有 (这里有书 ‘there is a book here’)."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French le / la / les / un / une / du are obligatory; Chinese has none — 我喝咖啡 is je bois du café and je bois le café alike."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German der / ein carry gender and case; Chinese has no article at all, and 一 + measure word appears only when ‘one’ matters."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi has no definite article either and uses एक like 一 + measure word for something new; Hindi marks a known object with को, which Chinese does not need."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian has no ‘the’; a new thing gets -i or yek (ketābi ‘a book’), a known object rā. Chinese has only 一 + measure word for ‘a’ and nothing for ‘the’ or a known object."
+  },
+  {
+   "for": "mr",
+   "rel": "same",
+   "text": "Marathi has no articles; एक ‘one’ introduces a new thing, like Chinese 一 + measure word."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic al- makes a noun definite and -un (tanwīn) often marks it indefinite; Chinese marks neither — position and 这 / 那 do the work."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew ha- marks a known noun and repeats on its adjective (ha-bayit ha-gadol); Chinese has no article: 大房子 is ‘a big house’ or ‘the big house’ by context."
+  },
+  {
+   "for": "tr",
+   "rel": "same",
+   "text": "Turkish has no ‘the’ and uses bir for ‘a’ — exactly 一 + measure word. A known object takes -ı in Turkish (kitabı okudum); Chinese marks it with nothing."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese has no articles either; the topic particle は marks known things, a role Chinese gives to the start of the sentence."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean has no articles; 은 / 는 marks a known topic, which Chinese shows by putting it first."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish has no articles and uses word order like Chinese: Kirja on pöydällä ‘the book is on the table’ vs Pöydällä on kirja ‘there is a book on the table’."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian has a / az and egy, like an article system; Chinese has neither — position does the work of ‘the’, and 一 + measure word that of ‘a’."
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili has no articles; demonstratives or context make a noun definite, as in Chinese."
+  },
+  {
+   "for": "lg",
+   "rel": "same",
+   "text": "Luganda has no article words; as in Chinese, context and position decide whether a noun is known."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese has no definite article either; một ‘one’ + classifier introduces a new thing (một cái bàn), just like 一张桌子."
+  },
+  {
+   "for": "iu",
+   "rel": "same",
+   "text": "Inuktitut has no articles; neither has Chinese."
+  }
+ ]
 }

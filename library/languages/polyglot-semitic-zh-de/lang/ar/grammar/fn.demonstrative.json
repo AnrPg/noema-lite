@@ -31,6 +31,12 @@
      "هُنَا hunā — here",
      "هُنَاكَ hunāka — there"
     ]
+   ],
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    }
    ]
   },
   {
@@ -50,6 +56,12 @@
       "= this student …",
       "it needs a predicate: هٰذَا الطَّالِبُ هُنَا (this student is here)"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
     }
    ]
   },
@@ -203,6 +215,98 @@
    "lang": "zh",
    "fn": "fn.demonstrative",
    "note": "Chinese 这 / 那 never change for gender or number but need a measure word before the noun (这本书)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.demonstrativeNoun",
+   "value": "dem-noun"
+  },
+  {
+   "feature": "nom.genderCount",
+   "value": "two"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also puts the article after the demonstrative — αυτό το σπίτι, “this the house” — like هٰذَا الْبَيْتُ; and αυτό είναι σπίτι (this is a house) has no article, like هٰذَا بَيْتٌ."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian ez a ház (“this the house”) is built exactly like هٰذَا الْبَيْتُ."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian это in “this is …” never changes (это книга); Arabic هٰذَا / هٰذِهِ agrees with the noun: هٰذَا كِتَابٌ, هٰذِهِ غُرْفَةٌ."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish has three distances (este, ese, aquel); Arabic has two: هٰذَا near, ذٰلِكَ far."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English this / these change only for number; Arabic also for gender (هٰذَا / هٰذِهِ), and things in the plural take the feminine singular: هٰذِهِ الْكُتُبُ (these books)."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French ce / cette agree in gender like هٰذَا / هٰذِهِ — but for things in the plural Arabic uses the feminine singular: هٰذِهِ الْكُتُبُ (ces livres)."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi यह / वह do not change for gender; Arabic هٰذَا / هٰذِهِ do."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian این / آن never change (این کتاب‌ها, these books); Arabic switches between هٰذَا, هٰذِهِ and هٰؤُلَاءِ."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi हा / ही / हे agree with the noun’s gender like هٰذَا / هٰذِهِ — Marathi with a neuter as well."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has three demonstratives (bu, şu, o) that never change; Arabic has two distances that agree in gender and number."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese has three distances (これ / それ / あれ) and no agreement; Arabic has two (هٰذَا, ذٰلِكَ) that agree."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish tämä / tuo / se are three and take case endings; Arabic has two, and they agree in gender instead."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili demonstratives follow the noun and agree by class (kitabu hiki, vitabu hivi); Arabic ones come first and agree by gender: هٰذَا الْكِتَابُ."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda demonstratives follow the noun and agree by class (ekitabo kino, this book); Arabic puts هٰذَا first."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese puts the demonstrative after the noun, with a classifier (quyển sách này, this book); Arabic puts it first, with the article on the noun: هٰذَا الْكِتَابُ."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has many demonstratives that also say where the thing is — above, below, inside, outside; Arabic has just two distances."
   }
  ]
 }

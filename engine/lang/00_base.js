@@ -42,6 +42,41 @@ function word(code, text, { lex = null, cls = '', sub = true } = {}) {
     : X.language.vowelMarks && UI.prefs.translit !== false && lex.translit && text === lex.lemma ? lex.translit : null;
   return helper ? h('span', { class: 'lx-wbox' }, e, h('span', { class: 'lx-help', lang: code === 'zh' ? 'zh-Latn-pinyin' : 'und-Latn' }, helper)) : e;
 }
+/* ---------- the learner's languages (D18) and words met before they are learned (D19) ---------- */
+/** The languages the learner knows: settings, else the course's known languages as native ones. */
+const knowsL = () => UI.L.settings.knows || (UI.C.data.course.knownLanguages || []).map(code => ({ code, level: 'native' }));
+const profileOf = code => (UI.C.data.world?.languages || []).find(l => l.code === code) || null;
+const langName = code => code?.startsWith('type:') ? `${code.slice(5)} languages` : code?.startsWith('family:') ? `${code.slice(7)} languages` : (profileOf(code)?.name || info(code).name || code);
+/** A bank sentence, word by word: every word shows its meaning on hover and opens its card on tap; unknown words carry 🆕. */
+function sentenceView(c, s, unknown = []) {
+  if (!s?.tokens) return word(c, s?.text || '', { sub: false });
+  const X = LX(c), un = new Set(unknown), parts = [];
+  for (const k of s.tokens) {
+    const l = k.l || (k.parts || []).map(p => p.l).filter(x => x && X.lex[x]).slice(-1)[0];
+    if (k.p || !l || !X.lex[l]) { parts.push({ t: k.t, el: h('span', { lang: c }, k.t) }); continue; }
+    const isNew = un.has(l), el = h('span', { class: 'lx-w lx-tok' + (isNew ? ' lx-new' : ''), lang: c, title: (isNew ? '🆕 ' : '') + gloss(c, l), tabindex: '0',
+      onclick: e => { e.stopPropagation(); wordPopup(c, l); } }, X.language.vowelMarks && UI.prefs.marks === false ? N.stripMarks(c, k.t) : k.t);
+    parts.push({ t: k.t, el });
+  }
+  const sp = X.language.tokenJoin !== 'none';
+  return h('span', { class: 'lx-sent', lang: c, dir: X.language.dir || 'ltr' }, ...parts.flatMap((p, i) => i && sp && !/^[.,!?;:،؟。，！？、)」]/.test(p.t) ? [' ', p.el] : [p.el]));
+}
+/** The card of a word over the page (translation first, then everything about it). */
+function wordPopup(c, lid) {
+  document.querySelector('.lx-pop')?.remove();
+  const pop = h('div', { class: 'lx-pop', role: 'dialog', onclick: e => { if (e.target === pop) pop.remove(); } },
+    h('div', { class: 'lx-popbox' }, h('div', { class: 'row' }, h('b', {}, gloss(c, lid)), h('button', { class: 'btn ghost small', onclick: () => pop.remove() }, '✕')), wordCardView(c, lid)));
+  document.body.append(pop);
+}
+/** Words met before they were learned (D19): remembered per session, listed at the end of a lesson. */
+const metNew = new Map();
+function noteNew(c, ids) { for (const l of ids || []) metNew.set(c + '|' + l, { c, l }); }
+function newWordsList(title = '🆕 Words you met before learning them') {
+  if (!metNew.size) return null;
+  const items = [...metNew.values()];
+  return h('details', { class: 'lx-sec lx-newlist', open: true }, h('summary', {}, title, h('span', { class: 'tiny' }, ' ' + items.length)),
+    h('ul', { class: 'lx-list' }, ...items.map(({ c, l }) => h('li', {}, info(c).flag, ' ', h('button', { class: 'btn ghost small', onclick: () => wordPopup(c, l) }, LX(c).lex[l].lemma), ' — ', gloss(c, l)))));
+}
 /** What a word means, in the explanation language. */
 function gloss(code, lid) {
   const x = LX(code).lex[lid], c = (x.senses || [])[0];

@@ -1,12 +1,26 @@
 {
  "function": "fn.plural.noun",
  "status": "absent",
+ "typology": [
+  {
+   "feature": "nom.plural",
+   "value": "optional"
+  },
+  {
+   "feature": "nom.pluralAfterNumeral",
+   "value": "unmarked"
+  },
+  {
+   "feature": "nom.dual",
+   "value": "none"
+  }
+ ],
  "summary": "Chinese nouns have no plural: 书 is ‘book’ and ‘books’, 一本书 → 三本书. When the amount matters, Chinese says it with a number and a measure word (三本书), with 些 (这些书 ‘these books’), with quantity words (很多书 ‘many books’, 一些书 ‘some books’) or with 都 ‘all’ before the verb; otherwise the context decides. The suffix 们 marks a group of people (我们, 孩子们, 朋友们) but never things and never after a number.",
  "blocks": [
   {
    "t": "table",
    "head": [
-    "English",
+    "Meaning",
     "Chinese",
     "How"
    ],
@@ -51,21 +65,33 @@
      "我们, 他们",
      "们 on pronouns"
     ]
+   ],
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "optional"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "们 is not a plural ending",
-   "text": "们 marks a group of people you have in mind — 孩子们，早上好！ ‘Good morning, children!’ It is never used with things (*书们) and never together with a number (三个学生, not *三个学生们)."
+   "text": "们 marks a group of people you have in mind — 孩子们，早上好！ ‘Good morning, children!’ It is never used with things (*书们) and never together with a number (三个学生, not *三个学生们).",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "optional"
+    }
+   ]
   },
   {
    "t": "compare",
    "items": [
     {
-     "title": "German, Greek, Russian",
+     "title": "Languages that mark the plural on the noun",
      "points": [
-      "the noun changes: Buch → Bücher, βιβλίο → βιβλία, книга → книги",
+      "the noun changes: German Buch → Bücher, Arabic kitāb → kutub",
       "also after numbers: drei Bücher"
      ]
     },
@@ -81,9 +107,15 @@
   },
   {
    "t": "callout",
-   "kind": "analogy",
-   "title": "Like Turkish after numbers",
-   "text": "Turkish says iki kitap ‘two book’ — no plural after a number. Chinese treats every noun like that, all the time."
+   "kind": "key",
+   "title": "Bare everywhere",
+   "text": "No plural after a number, and none anywhere else: 两本书, 三个学生, 很多书 — the noun is always the same.",
+   "typology": [
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "unmarked"
+    }
+   ]
   }
  ],
  "procedure": {
@@ -174,6 +206,108 @@
    ],
    "answer": "either — the context decides",
    "why": "Chinese nouns have no singular or plural form."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "new",
+   "text": "Greek marks the plural on noun, article and adjective (το βιβλίο → τα βιβλία); Chinese marks it nowhere — 书 is one book or many, and 们 is only for groups of people."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian marks plural and case together (книга → книги, after five книг); Chinese 书 never changes."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish adds -s / -es to noun, article and adjective (los libros nuevos); Chinese adds nothing: 新书 is ‘new book’ or ‘new books’."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English adds -s even after numbers (three books); Chinese never: 三本书. 们 is not -s: it is only for people (孩子们) and never after a number."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French plural is mostly silent in speech (livre / livres) but shown by the article (le / les); Chinese shows it with neither — only context, numbers, 这些 and 很多."
+  },
+  {
+   "for": "de",
+   "rel": "new",
+   "text": "German plurals are irregular (Buch → Bücher, Tisch → Tische) and learned per noun; Chinese has nothing to learn here."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi marks the plural on nouns and verbs (लड़का → लड़के); Chinese marks it nowhere, except 们 for groups of people."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian -hā is left out after numbers (se ketāb ‘three books’); Chinese leaves the plural out always, and 们 is only for people."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi plurals change the noun according to its gender class (मुलगा → मुलगे, पुस्तक → पुस्तके); Chinese nouns never change."
+  },
+  {
+   "for": "ar",
+   "rel": "new",
+   "text": "Arabic has sound and broken plurals (kitāb → kutub) and a dual; Chinese has neither: 书, 两本书, 三本书."
+  },
+  {
+   "for": "he",
+   "rel": "new",
+   "text": "Hebrew plurals in -im / -ot (sefer → sfarim) agree with adjectives and verbs; Chinese marks no plural at all."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish -lar / -ler is dropped after numbers (iki kitap ‘two book’); Chinese treats every noun like that, all the time."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese also leaves nouns unmarked (本 is ‘book’ or ‘books’) and has -たち for groups of people (子供たち ~ 孩子们); the two systems are very close."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean -들 is optional and mostly used for people (학생들 ~ 学生们); Chinese 们 is narrower still: never on things, never after a number."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish marks the plural in every case (kirja → kirjat, kirjoissa); Chinese never changes the noun."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian keeps the noun singular after numbers (három könyv ‘three book’), but has a plural -k elsewhere (könyvek); Chinese keeps the noun bare everywhere."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili marks the plural with the class prefix (kitabu → vitabu, mtu → watu); Chinese has no prefixes and no plural."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "Luganda marks the plural by changing the class prefix (omuntu → abantu, ekitabo → ebitabo); Chinese 人 is one person or many."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese nouns do not change either; những / các before a noun mark plurality when needed, where Chinese uses 这些, 一些 or 很多."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut distinguishes singular, dual and plural on the noun (inuk, inuuk, inuit); Chinese marks none of them."
   }
  ],
  "seeAlso": [

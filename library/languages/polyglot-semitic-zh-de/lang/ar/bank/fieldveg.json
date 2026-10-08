@@ -1,0 +1,1818 @@
+{
+ "sentences": [
+  {
+   "id": "ar.fv.001",
+   "frame": "fr.adj.attr",
+   "text": "هٰذِهِ جَزَرَةٌ كَبِيرَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "جَزَرَةٌ",
+     "l": "ar:jazar",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "كَبِيرَةٌ",
+     "l": "ar:kabir",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic",
+    "fn.adjective"
+   ],
+   "gloss": "This is a big carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.002",
+   "frame": "fr.adj.pred",
+   "text": "هٰذِهِ الْخِيَارَةُ طَوِيلَةٌ.",
+   "tokens": [
+    {
+     "t": "هٰذِهِ",
+     "l": "ar:hadha",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "الْخِيَارَةُ",
+     "l": "ar:khiyar",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "طَوِيلَةٌ",
+     "l": "ar:tawil",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.copula",
+    "fn.case.basic",
+    "fn.adjective"
+   ],
+   "gloss": "This cucumber is long.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.003",
+   "frame": "fr.adj.pred",
+   "text": "تِلْكَ الْبَاذِنْجَانَاتُ كَبِيرَةٌ.",
+   "tokens": [
+    {
+     "t": "تِلْكَ",
+     "l": "ar:dhalika",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "الْبَاذِنْجَانَاتُ",
+     "l": "ar:badhinjan",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "كَبِيرَةٌ",
+     "l": "ar:kabir",
+     "f": "ADJ;NOM;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.noun.gender",
+    "fn.copula",
+    "fn.case.basic",
+    "fn.adjective"
+   ],
+   "gloss": "Those eggplants are big.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.004",
+   "frame": "fr.be.where",
+   "text": "الْبَاذِنْجَانَاتُ؟ هِيَ فِي الْمَطْبَخِ.",
+   "tokens": [
+    {
+     "t": "الْبَاذِنْجَانَاتُ",
+     "l": "ar:badhinjan",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَطْبَخِ",
+     "l": "ar:matbakh",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.agreement",
+    "fn.plural.noun",
+    "fn.pronoun.subject",
+    "fn.definite",
+    "fn.prep.core",
+    "fn.case"
+   ],
+   "gloss": "The eggplants? They are in the kitchen.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.005",
+   "frame": "fr.here.def",
+   "text": "الذُّرَةُ؟ هِيَ هُنَا.",
+   "tokens": [
+    {
+     "t": "الذُّرَةُ",
+     "l": "ar:dhura",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "هُنَا",
+     "l": "ar:huna"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "gloss": "The corn? It is here.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.006",
+   "frame": "fr.place.on",
+   "text": "الثُّومُ؟ هُوَ عَلَى الطَّاوِلَةِ.",
+   "tokens": [
+    {
+     "t": "الثُّومُ",
+     "l": "ar:thum",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    },
+    {
+     "t": "هُوَ",
+     "l": "ar:huwa",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "عَلَى",
+     "l": "ar:ala",
+     "f": "ADP"
+    },
+    {
+     "t": "الطَّاوِلَةِ",
+     "l": "ar:tawila",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.noun.gender",
+    "fn.agreement",
+    "fn.pronoun.subject",
+    "fn.definite",
+    "fn.prep.place",
+    "fn.case"
+   ],
+   "gloss": "The garlic? It is on the table.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.007",
+   "frame": "fr.eat",
+   "text": "هِيَ تَأْكُلُ الْجَزَرَ كُلَّ يَوْمٍ.",
+   "tokens": [
+    {
+     "t": "هِيَ",
+     "l": "ar:hiya",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْجَزَرَ",
+     "l": "ar:jazar",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "كُلَّ",
+     "l": "ar:kull",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "يَوْمٍ",
+     "l": "ar:yawm",
+     "f": "N;GEN;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.time.day"
+   ],
+   "gloss": "She eats carrots every day.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.008",
+   "frame": "fr.eat",
+   "text": "نَحْنُ نَطْبُخُ الْبَامِيَةَ.",
+   "tokens": [
+    {
+     "t": "نَحْنُ",
+     "l": "ar:nahnu",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "نَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْبَامِيَةَ",
+     "l": "ar:bamiya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "We are cooking okra.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.009",
+   "frame": "fr.have",
+   "text": "هُمْ فَلَّاحُونَ، وَعِنْدَهُمْ بَصَلٌ كَثِيرٌ.",
+   "tokens": [
+    {
+     "t": "هُمْ",
+     "l": "ar:hum",
+     "f": "PRON;NOM"
+    },
+    {
+     "t": "فَلَّاحُونَ",
+     "l": "ar:fallah",
+     "f": "N;NOM;PL;MASC;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "وَعِنْدَهُمْ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "عِنْدَهُمْ",
+       "l": "ar:inda",
+       "f": "ADP;3;PL;MASC"
+      }
+     ]
+    },
+    {
+     "t": "بَصَلٌ",
+     "l": "ar:basal",
+     "f": "N;NOM;COLL;INDF"
+    },
+    {
+     "t": "كَثِيرٌ",
+     "l": "ar:kathir",
+     "f": "ADJ;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.copula",
+    "fn.plural.noun",
+    "fn.have",
+    "fn.connectors",
+    "fn.adjective",
+    "fn.case.basic"
+   ],
+   "gloss": "They are farmers, and they have a lot of onions.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.010",
+   "frame": "fr.greet",
+   "text": "صَبَاحُ الْخَيْرِ! هَلْ عِنْدَكَ طَمَاطِمُ؟",
+   "tokens": [
+    {
+     "t": "صَبَاحُ الْخَيْرِ",
+     "l": "ar:sabah_alkhayr"
+    },
+    {
+     "t": "!",
+     "p": true
+    },
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "طَمَاطِمُ",
+     "l": "ar:tamatim",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.have",
+    "fn.question.yesno",
+    "fn.case.basic"
+   ],
+   "gloss": "Good morning! Do you have tomatoes? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.011",
+   "frame": "fr.want",
+   "text": "أُرِيدُ جَزَرًا، مِنْ فَضْلِكَ.",
+   "tokens": [
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "جَزَرًا",
+     "l": "ar:jazar",
+     "f": "N;ACC;COLL;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’d like some carrots, please. (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.012",
+   "frame": "fr.count",
+   "text": "عِنْدِي ثَلَاثُ بَصَلَاتٍ.",
+   "tokens": [
+    {
+     "t": "عِنْدِي",
+     "l": "ar:inda",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "ثَلَاثُ",
+     "l": "ar:thalatha",
+     "f": "NUM;NOM;FEM;CONST"
+    },
+    {
+     "t": "بَصَلَاتٍ",
+     "l": "ar:basal",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.have",
+    "fn.plural.noun"
+   ],
+   "gloss": "I have three onions.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.013",
+   "frame": "fr.count",
+   "text": "أَشْتَرِي خَمْسَ جَزَرَاتٍ.",
+   "tokens": [
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "خَمْسَ",
+     "l": "ar:khamsa",
+     "f": "NUM;ACC;FEM;CONST"
+    },
+    {
+     "t": "جَزَرَاتٍ",
+     "l": "ar:jazar",
+     "f": "N;GEN;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.present",
+    "fn.object",
+    "fn.plural.noun"
+   ],
+   "gloss": "I’m buying five carrots.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.014",
+   "frame": "fr.count",
+   "text": "عِنْدَنَا عِشْرُونَ خِيَارَةً.",
+   "tokens": [
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "عِشْرُونَ",
+     "l": "ar:ishrun",
+     "f": "NUM;NOM;INDF"
+    },
+    {
+     "t": "خِيَارَةً",
+     "l": "ar:khiyar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.numerals",
+    "fn.have"
+   ],
+   "gloss": "We have twenty cucumbers.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.fv.015",
+   "frame": "fr.at.place",
+   "text": "الْبَصَلَاتُ فِي الثَّلَّاجَةِ.",
+   "tokens": [
+    {
+     "t": "الْبَصَلَاتُ",
+     "l": "ar:basal",
+     "f": "N;NOM;PL;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الثَّلَّاجَةِ",
+     "l": "ar:thallaja",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun",
+    "fn.definite",
+    "fn.prep.core",
+    "fn.prep.place",
+    "fn.case"
+   ],
+   "gloss": "The onions are in the fridge.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.016",
+   "frame": "fr.have",
+   "text": "عِنْدَ جَدَّتِي حَدِيقَةٌ فِيهَا طَمَاطِمُ وَخِيَارٌ.",
+   "tokens": [
+    {
+     "t": "عِنْدَ",
+     "l": "ar:inda",
+     "f": "ADP"
+    },
+    {
+     "t": "جَدَّتِي",
+     "l": "ar:jadda",
+     "f": "N;GEN;SG;POSS;PSS1S"
+    },
+    {
+     "t": "حَدِيقَةٌ",
+     "l": "ar:hadiqa",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "فِيهَا",
+     "l": "ar:fi",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "طَمَاطِمُ",
+     "l": "ar:tamatim",
+     "f": "N;NOM;SG;INDF"
+    },
+    {
+     "t": "وَخِيَارٌ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "خِيَارٌ",
+       "l": "ar:khiyar",
+       "f": "N;NOM;COLL;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.have",
+    "fn.possessive",
+    "fn.prep.core",
+    "fn.connectors",
+    "fn.case.basic"
+   ],
+   "gloss": "My grandmother has a garden with tomatoes and cucumbers in it.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.fv.017",
+   "frame": "fr.eat",
+   "text": "أُمِّي تَطْبُخُ الْمُلُوخِيَّةَ.",
+   "tokens": [
+    {
+     "t": "أُمِّي",
+     "l": "ar:umm",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "تَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْمُلُوخِيَّةَ",
+     "l": "ar:mulukhiyya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "gloss": "My mother cooks molokhia.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.018",
+   "frame": "fr.like.generic",
+   "text": "أَخِي يُحِبُّ الْفُولَ.",
+   "tokens": [
+    {
+     "t": "أَخِي",
+     "l": "ar:akh",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "يُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْفُولَ",
+     "l": "ar:ful",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "My brother likes fava beans (fūl).",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.019",
+   "frame": "fr.eat",
+   "text": "الطَّبَّاخُ يَطْبُخُ الْبَاذِنْجَانَ فِي الْمَطْبَخِ.",
+   "tokens": [
+    {
+     "t": "الطَّبَّاخُ",
+     "l": "ar:tabbakh",
+     "f": "N;NOM;SG;MASC;DEF"
+    },
+    {
+     "t": "يَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْبَاذِنْجَانَ",
+     "l": "ar:badhinjan",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْمَطْبَخِ",
+     "l": "ar:matbakh",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.root.pattern",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.prep.core",
+    "fn.case",
+    "fn.case.basic"
+   ],
+   "gloss": "The cook is cooking the eggplant in the kitchen.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.020",
+   "frame": "fr.eat",
+   "text": "الطَّبَّاخَةُ تَطْبُخُ الْكُوسَا.",
+   "tokens": [
+    {
+     "t": "الطَّبَّاخَةُ",
+     "l": "ar:tabbakh",
+     "f": "N;NOM;SG;FEM;DEF"
+    },
+    {
+     "t": "تَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "الْكُوسَا",
+     "l": "ar:kusa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.root.pattern",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.noun.gender"
+   ],
+   "gloss": "The cook (a woman) is cooking zucchini.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.021",
+   "frame": "fr.notlike.generic",
+   "text": "لَا أُحِبُّ الْكُرَّاثَ.",
+   "tokens": [
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْكُرَّاثَ",
+     "l": "ar:kurrath",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "I don’t like leeks.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.022",
+   "frame": "fr.have.indef",
+   "text": "لَيْسَ عِنْدَنَا ثُومٌ الْيَوْمَ.",
+   "tokens": [
+    {
+     "t": "لَيْسَ",
+     "l": "ar:laysa",
+     "f": "V;PFV;3;SG;MASC"
+    },
+    {
+     "t": "عِنْدَنَا",
+     "l": "ar:inda",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "ثُومٌ",
+     "l": "ar:thum",
+     "f": "N;NOM;COLL;INDF"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.have",
+    "fn.time.day",
+    "fn.case.basic"
+   ],
+   "gloss": "We have no garlic today.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.023",
+   "frame": "fr.like.generic",
+   "text": "هَلْ تُحِبِّينَ الْبَامِيَةَ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "تُحِبِّينَ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;2;SG;FEM"
+    },
+    {
+     "t": "الْبَامِيَةَ",
+     "l": "ar:bamiya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "Do you like okra? (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.024",
+   "frame": "fr.have.indef",
+   "text": "هَلْ عِنْدَكَ فُجْلٌ؟",
+   "tokens": [
+    {
+     "t": "هَلْ",
+     "l": "ar:hal"
+    },
+    {
+     "t": "عِنْدَكَ",
+     "l": "ar:inda",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "فُجْلٌ",
+     "l": "ar:fujl",
+     "f": "N;NOM;COLL;INDF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.have",
+    "fn.case.basic"
+   ],
+   "gloss": "Do you have radishes? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.025",
+   "frame": "fr.wh",
+   "text": "كَمْ جَزَرَةً تُرِيدُ؟",
+   "tokens": [
+    {
+     "t": "كَمْ",
+     "l": "ar:kam"
+    },
+    {
+     "t": "جَزَرَةً",
+     "l": "ar:jazar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "تُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "How many carrots do you want? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.026",
+   "frame": "fr.where.def",
+   "text": "أَيْنَ الْبَطَاطِسُ؟",
+   "tokens": [
+    {
+     "t": "أَيْنَ",
+     "l": "ar:ayna"
+    },
+    {
+     "t": "الْبَطَاطِسُ",
+     "l": "ar:batatis",
+     "f": "N;NOM;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.definite",
+    "fn.case.basic"
+   ],
+   "gloss": "Where are the potatoes?",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.027",
+   "frame": "fr.wh",
+   "text": "لِمَاذَا لَا تَأْكُلُ السَّبَانِخَ؟",
+   "tokens": [
+    {
+     "t": "لِمَاذَا",
+     "l": "ar:limadha"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "تَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;2;SG;MASC"
+    },
+    {
+     "t": "السَّبَانِخَ",
+     "l": "ar:sabanikh",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "؟",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.wh",
+    "fn.negation",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "Why don’t you eat spinach? (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.028",
+   "frame": "fr.eat",
+   "text": "أَطْبُخُ الْأَرُزَّ بِالْبَازِلَّاءِ.",
+   "tokens": [
+    {
+     "t": "أَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْأَرُزَّ",
+     "l": "ar:aruzz",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "بِالْبَازِلَّاءِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الْبَازِلَّاءِ",
+       "l": "ar:bazilla",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.case",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "I cook rice with peas.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.029",
+   "frame": "fr.want",
+   "text": "أُرِيدُ سَلَطَةً بِدُونِ بَصَلٍ، مِنْ فَضْلِكَ.",
+   "tokens": [
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "سَلَطَةً",
+     "l": "ar:salata",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "بِدُونِ",
+     "l": "ar:biduni",
+     "f": "ADP"
+    },
+    {
+     "t": "بَصَلٍ",
+     "l": "ar:basal",
+     "f": "N;GEN;COLL;INDF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكَ",
+     "l": "ar:min_fadlika"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.core",
+    "fn.case",
+    "fn.greetings",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I’d like a salad without onions, please. (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.030",
+   "frame": "fr.place.on",
+   "text": "الْبَصَلُ تَحْتَ الطَّاوِلَةِ، بِجَانِبِ الْبَطَاطِسِ.",
+   "tokens": [
+    {
+     "t": "الْبَصَلُ",
+     "l": "ar:basal",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "تَحْتَ",
+     "l": "ar:tahta",
+     "f": "ADP"
+    },
+    {
+     "t": "الطَّاوِلَةِ",
+     "l": "ar:tawila",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "بِجَانِبِ",
+     "l": "ar:bijanibi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْبَطَاطِسِ",
+     "l": "ar:batatis",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.case",
+    "fn.definite"
+   ],
+   "gloss": "The onions are under the table, next to the potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.031",
+   "frame": "fr.go.to",
+   "text": "نَذْهَبُ إِلَى السُّوقِ وَنَشْتَرِي خِيَارًا وَطَمَاطِمَ.",
+   "tokens": [
+    {
+     "t": "نَذْهَبُ",
+     "l": "ar:dhahaba",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "السُّوقِ",
+     "l": "ar:suq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "وَنَشْتَرِي",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "نَشْتَرِي",
+       "l": "ar:ishtara",
+       "f": "V;PRS;IND;1;PL"
+      }
+     ]
+    },
+    {
+     "t": "خِيَارًا",
+     "l": "ar:khiyar",
+     "f": "N;ACC;COLL;INDF"
+    },
+    {
+     "t": "وَطَمَاطِمَ",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "طَمَاطِمَ",
+       "l": "ar:tamatim",
+       "f": "N;ACC;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case",
+    "fn.present",
+    "fn.object",
+    "fn.connectors"
+   ],
+   "gloss": "We go to the market and buy cucumbers and tomatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.032",
+   "frame": "fr.day",
+   "text": "يَصِلُ الْجَزَرُ إِلَى السُّوقِ صَبَاحًا.",
+   "tokens": [
+    {
+     "t": "يَصِلُ",
+     "l": "ar:wasala",
+     "f": "V;PRS;IND;3;SG;MASC"
+    },
+    {
+     "t": "الْجَزَرُ",
+     "l": "ar:jazar",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "إِلَى",
+     "l": "ar:ila",
+     "f": "ADP"
+    },
+    {
+     "t": "السُّوقِ",
+     "l": "ar:suq",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "صَبَاحًا",
+     "l": "ar:sabah",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.case",
+    "fn.present",
+    "fn.time.day",
+    "fn.definite"
+   ],
+   "gloss": "The carrots reach the market in the morning.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.033",
+   "frame": "fr.command",
+   "text": "اِشْتَرِ بَصَلًا وَثُومًا!",
+   "tokens": [
+    {
+     "t": "اِشْتَرِ",
+     "l": "ar:ishtara",
+     "f": "V;IMP;2;SG;MASC"
+    },
+    {
+     "t": "بَصَلًا",
+     "l": "ar:basal",
+     "f": "N;ACC;COLL;INDF"
+    },
+    {
+     "t": "وَثُومًا",
+     "parts": [
+      {
+       "t": "وَ",
+       "l": "ar:wa"
+      },
+      {
+       "t": "ثُومًا",
+       "l": "ar:thum",
+       "f": "N;ACC;COLL;INDF"
+      }
+     ]
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object",
+    "fn.connectors"
+   ],
+   "gloss": "Buy onions and garlic! (to a man)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.034",
+   "frame": "fr.command",
+   "text": "اُطْبُخِي الْبَامِيَةَ بِالطَّمَاطِمِ، مِنْ فَضْلِكِ!",
+   "tokens": [
+    {
+     "t": "اُطْبُخِي",
+     "l": "ar:tabakha",
+     "f": "V;IMP;2;SG;FEM"
+    },
+    {
+     "t": "الْبَامِيَةَ",
+     "l": "ar:bamiya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": "بِالطَّمَاطِمِ",
+     "parts": [
+      {
+       "t": "بِ",
+       "l": "ar:bi",
+       "f": "ADP"
+      },
+      {
+       "t": "الطَّمَاطِمِ",
+       "l": "ar:tamatim",
+       "f": "N;GEN;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "مِنْ فَضْلِكِ",
+     "l": "ar:min_fadliki"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object",
+    "fn.definite",
+    "fn.prep.core",
+    "fn.case",
+    "fn.greetings"
+   ],
+   "gloss": "Cook the okra with tomatoes, please! (to a woman)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.035",
+   "frame": "fr.command",
+   "text": "كُلُوا الْخَسَّ!",
+   "tokens": [
+    {
+     "t": "كُلُوا",
+     "l": "ar:akala",
+     "f": "V;IMP;2;PL;MASC"
+    },
+    {
+     "t": "الْخَسَّ",
+     "l": "ar:khass",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "!",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "Eat the lettuce! (to several people)",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.036",
+   "frame": "fr.day",
+   "text": "يَوْمَ الْجُمُعَةِ تَطْبُخُ جَدَّتِي الْمُلُوخِيَّةَ.",
+   "tokens": [
+    {
+     "t": "يَوْمَ",
+     "l": "ar:yawm",
+     "f": "N;ACC;SG;CONST"
+    },
+    {
+     "t": "الْجُمُعَةِ",
+     "l": "ar:jumua",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": "تَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;3;SG;FEM"
+    },
+    {
+     "t": "جَدَّتِي",
+     "l": "ar:jadda",
+     "f": "N;NOM;SG;POSS;PSS1S"
+    },
+    {
+     "t": "الْمُلُوخِيَّةَ",
+     "l": "ar:mulukhiyya",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.possessive",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.case"
+   ],
+   "gloss": "On Friday my grandmother cooks molokhia.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.037",
+   "frame": "fr.day",
+   "text": "غَدًا نَطْبُخُ الْقَرْعَ.",
+   "tokens": [
+    {
+     "t": "غَدًا",
+     "l": "ar:ghadan"
+    },
+    {
+     "t": "نَطْبُخُ",
+     "l": "ar:tabakha",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْقَرْعَ",
+     "l": "ar:qar",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "Tomorrow we are cooking the pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.038",
+   "frame": "fr.time",
+   "text": "نَأْكُلُ الْفُجْلَ قَبْلَ الْغَدَاءِ.",
+   "tokens": [
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْفُجْلَ",
+     "l": "ar:fujl",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "قَبْلَ",
+     "l": "ar:qabla",
+     "f": "ADP"
+    },
+    {
+     "t": "الْغَدَاءِ",
+     "l": "ar:ghada",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "We eat radishes before lunch.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.039",
+   "frame": "fr.time",
+   "text": "نَأْكُلُ الْقَرْعَ فِي الْخَرِيفِ.",
+   "tokens": [
+    {
+     "t": "نَأْكُلُ",
+     "l": "ar:akala",
+     "f": "V;PRS;IND;1;PL"
+    },
+    {
+     "t": "الْقَرْعَ",
+     "l": "ar:qar",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "فِي",
+     "l": "ar:fi",
+     "f": "ADP"
+    },
+    {
+     "t": "الْخَرِيفِ",
+     "l": "ar:kharif",
+     "f": "N;GEN;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.case",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "We eat pumpkin in autumn.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.040",
+   "frame": "fr.adj.pred",
+   "text": "الْبَصَلُ رَخِيصٌ الْيَوْمَ.",
+   "tokens": [
+    {
+     "t": "الْبَصَلُ",
+     "l": "ar:basal",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "رَخِيصٌ",
+     "l": "ar:rakhis",
+     "f": "ADJ;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": "الْيَوْمَ",
+     "l": "ar:alyawma"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.definite",
+    "fn.copula",
+    "fn.case.basic",
+    "fn.time.day"
+   ],
+   "gloss": "Onions are cheap today.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.041",
+   "frame": "fr.adj.attr",
+   "text": "أُرِيدُ جَزَرَةً كَبِيرَةً.",
+   "tokens": [
+    {
+     "t": "أُرِيدُ",
+     "l": "ar:arada",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "جَزَرَةً",
+     "l": "ar:jazar",
+     "f": "N;ACC;SG;INDF"
+    },
+    {
+     "t": "كَبِيرَةً",
+     "l": "ar:kabir",
+     "f": "ADJ;ACC;SG;FEM;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.present",
+    "fn.object"
+   ],
+   "gloss": "I want a big carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.042",
+   "frame": "fr.compare",
+   "text": "الْقَرْعُ أَكْبَرُ مِنَ الْبَاذِنْجَانِ.",
+   "tokens": [
+    {
+     "t": "الْقَرْعُ",
+     "l": "ar:qar",
+     "f": "N;NOM;COLL;DEF"
+    },
+    {
+     "t": "أَكْبَرُ",
+     "l": "ar:kabir",
+     "f": "ADJ;CMPR;NOM"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْبَاذِنْجَانِ",
+     "l": "ar:badhinjan",
+     "f": "N;GEN;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.definite",
+    "fn.case"
+   ],
+   "gloss": "Pumpkins are bigger than eggplants.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.fv.043",
+   "frame": "fr.compare",
+   "text": "أُحِبُّ الْجَزَرَ أَكْثَرَ مِنَ الْفُجْلِ.",
+   "tokens": [
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْجَزَرَ",
+     "l": "ar:jazar",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "أَكْثَرَ",
+     "l": "ar:akthar",
+     "f": "ADJ;CMPR;ACC"
+    },
+    {
+     "t": "مِنَ",
+     "l": "ar:min",
+     "f": "ADP;ALT"
+    },
+    {
+     "t": "الْفُجْلِ",
+     "l": "ar:fujl",
+     "f": "N;GEN;COLL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.case"
+   ],
+   "gloss": "I like carrots more than radishes.",
+   "level": "A2"
+  },
+  {
+   "id": "ar.fv.044",
+   "frame": "fr.link",
+   "text": "أُحِبُّ الْبَاذِنْجَانَ، لٰكِنْ لَا أُحِبُّ الْكُوسَا.",
+   "tokens": [
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْبَاذِنْجَانَ",
+     "l": "ar:badhinjan",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "،",
+     "p": true
+    },
+    {
+     "t": "لٰكِنْ",
+     "l": "ar:lakin"
+    },
+    {
+     "t": "لَا",
+     "l": "ar:la"
+    },
+    {
+     "t": "أُحِبُّ",
+     "l": "ar:ahabba",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْكُوسَا",
+     "l": "ar:kusa",
+     "f": "N;ACC;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.negation",
+    "fn.present",
+    "fn.object",
+    "fn.definite"
+   ],
+   "gloss": "I like eggplant, but I don’t like zucchini.",
+   "level": "A1"
+  },
+  {
+   "id": "ar.fv.045",
+   "frame": "fr.link",
+   "text": "أَشْتَرِي الْخَسَّ لِأَنَّهُ رَخِيصٌ.",
+   "tokens": [
+    {
+     "t": "أَشْتَرِي",
+     "l": "ar:ishtara",
+     "f": "V;PRS;IND;1;SG"
+    },
+    {
+     "t": "الْخَسَّ",
+     "l": "ar:khass",
+     "f": "N;ACC;COLL;DEF"
+    },
+    {
+     "t": "لِأَنَّهُ",
+     "l": "ar:lianna",
+     "f": "PART;3;SG;MASC"
+    },
+    {
+     "t": "رَخِيصٌ",
+     "l": "ar:rakhis",
+     "f": "ADJ;NOM;SG;MASC;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.present",
+    "fn.object",
+    "fn.definite",
+    "fn.adjective"
+   ],
+   "gloss": "I buy lettuce because it is cheap.",
+   "level": "A2"
+  }
+ ],
+ "fieldExemptions": []
+}

@@ -1,6 +1,20 @@
 {
  "function": "fn.adjective",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.adjectiveNoun",
+   "value": "noun-adj"
+  },
+  {
+   "feature": "adj.agreement",
+   "value": "gender-number"
+  },
+  {
+   "feature": "adj.predicative",
+   "value": "nonverbal"
+  }
+ ],
  "summary": "A Hebrew adjective comes AFTER its noun and agrees with it in three things: gender, number and definiteness. Every adjective has four forms — masculine and feminine, singular and plural: גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת “big”. The endings are those of the nouns (-ָה or -ֶת or -ִית for the feminine, -ִים and -וֹת for the plural), and what counts is the noun’s grammatical gender, not its ending: שֻׁלְחָנוֹת גְּדוֹלִים “big tables” (a masculine noun with -וֹת), עִיר יָפָה “a beautiful city” (a feminine noun without -ָה). The article decides between a phrase and a sentence. Attributive — “the big house” — repeats the article on the adjective: הַבַּיִת הַגָּדוֹל. Predicative — “the house is big” — leaves the adjective bare, and, as in every Hebrew present-tense sentence, there is no verb “is”: הַבַּיִת גָּדוֹל. So one ה turns a sentence into a phrase. In the past and the future the verb הָיָה appears (הַבַּיִת הָיָה גָּדוֹל). Often the first vowel shortens in the longer forms (גָּדוֹל → גְּדוֹלָה, יָקָר → יְקָרָה); short adjectives double their last letter (קַל → קַלָּה, קָטָן → קְטַנָּה). Feelings of heat and cold, and easy and hard, are said impersonally with לְ: חַם לִי “I’m hot”, קַר לָהּ “she is cold”, קָשֶׁה לִי “it is hard for me” — the adjective stays masculine singular. There are no cases, so nothing else changes.",
  "blocks": [
   {
@@ -77,7 +91,13 @@
      "אִטִּיּוֹת"
     ]
    ],
-   "caption": "Four forms; the endings are the noun endings -ָה / -ֶת / -ִית, -ִים, -וֹת. Adjectives in -ֶה turn it into -ָה; ־ִי takes ־ִית."
+   "caption": "Four forms; the endings are the noun endings -ָה / -ֶת / -ִית, -ִים, -וֹת. Adjectives in -ֶה turn it into -ָה; ־ִי takes ־ִית.",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -98,13 +118,33 @@
       "הַבַּיִת הָיָה גָּדוֹל — the house was big"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "noun-adj"
+    },
+    {
+     "feature": "adj.predicative",
+     "value": "nonverbal"
+    },
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "One ה makes the difference",
-   "text": "הַבַּיִת הַגָּדוֹל = “the big house” (a phrase, waiting for a verb). הַבַּיִת גָּדוֹל = “the house is big” (a complete sentence). Read the article on the adjective before you translate."
+   "text": "הַבַּיִת הַגָּדוֹל = “the big house” (a phrase, waiting for a verb). הַבַּיִת גָּדוֹל = “the house is big” (a complete sentence). Read the article on the adjective before you translate.",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "nonverbal"
+    }
+   ]
   },
   {
    "t": "table",
@@ -198,7 +238,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "The noun’s gender, not its ending",
-   "text": "שֻׁלְחָנוֹת גְּדוֹלִים (m., although -וֹת), נָשִׁים יָפוֹת (f., although -ִים), עִיר יָפָה (f., no ending), עֵינַיִם כְּחֻלּוֹת (f.). Check the gender of the noun in its word card."
+   "text": "שֻׁלְחָנוֹת גְּדוֹלִים (m., although -וֹת), נָשִׁים יָפוֹת (f., although -ִים), עִיר יָפָה (f., no ending), עֵינַיִם כְּחֻלּוֹת (f.). Check the gender of the noun in its word card.",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -435,6 +481,108 @@
    "lang": "zh",
    "fn": "fn.adjective",
    "note": "Chinese adjectives are verbs: 房子很大 “the house is big” needs no 是, like Hebrew needs no “is”; before a noun they take 的 (很大的房子) and never change."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek adjectives come before the noun (το μεγάλο σπίτι); Hebrew ones follow it and repeat the article: הַבַּיִת הַגָּדוֹל. Agreement in gender and number works as in Greek, without the neuter and without cases."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian adjectives come first and agree in case too (большой дом, в большом доме); Hebrew ones follow the noun, never change for case, but take the article: הַבַּיִת הַגָּדוֹל."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "As in Spanish, the adjective usually follows and agrees in gender and number (casa grande ~ דִּירָה גְּדוֹלָה); new is that it repeats the article (הַבַּיִת הַגָּדוֹל) — without it the phrase becomes a sentence (הַבַּיִת גָּדוֹל “the house is big”)."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English adjectives come first and never change; Hebrew ones follow the noun, have four forms and repeat the article. “The big house” and “the house is big” differ by one ה: הַבַּיִת הַגָּדוֹל / הַבַּיִת גָּדוֹל."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "As in French, most adjectives follow and agree (une maison blanche ~ דִּירָה לְבָנָה); Hebrew also repeats the article: הַדִּירָה הַלְּבָנָה."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German adjectives come first and change with the article and the case (der große Tisch, ein großer Tisch); Hebrew ones follow the noun, take הַ when the noun has it, and have only four forms."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi adjectives come first, and those in -ā agree (बड़ा घर, बड़ी गाड़ी); Hebrew adjectives follow the noun, all of them agree, and they take the article: הַבַּיִת הַגָּדוֹל."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also puts the adjective after the noun, joined by ezafe (خانهٔ بزرگ ~ בַּיִת גָּדוֹל); but Persian adjectives never change, while Hebrew ones agree in gender and number and repeat the article."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi adjectives come first, and some agree (मोठा मुलगा / मोठी मुलगी); Hebrew adjectives follow the noun and all agree: יֶלֶד גָּדוֹל / יַלְדָּה גְּדוֹלָה."
+  },
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "The same rule as Arabic: the adjective follows and agrees in gender, number and definiteness (الْبَيْتُ الْكَبِيرُ ~ הַבַּיִת הַגָּדוֹל; الْبَيْتُ كَبِيرٌ ~ הַבַּיִת גָּדוֹל). Hebrew has no case, and plural things take plural adjectives."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adjectives come first and never change (büyük ev, büyük evler); Hebrew ones follow the noun and agree: בַּיִת גָּדוֹל, בָּתִּים גְּדוֹלִים."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese い-adjectives behave like verbs and can end a sentence (家は大きい); Hebrew adjectives are not verbs — they follow the noun and agree, and the present needs no verb: הַבַּיִת גָּדוֹל."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adjectives are verbs (집이 커요); Hebrew adjectives agree like nouns, and a present sentence has no verb at all: הַבַּיִת גָּדוֹל."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adjectives come first and copy the noun’s case and number (isossa talossa); Hebrew ones follow, copy gender, number and the article, and never take a case."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adjectives come first and do not agree (nagy házak); Hebrew adjectives follow the noun and agree: בָּתִּים גְּדוֹלִים."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "As in Swahili, the adjective follows the noun and agrees with it (kitabu kikubwa, vitabu vikubwa); Hebrew agrees in gender and number and adds the article: הַסֵּפֶר הַגָּדוֹל."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "As in Luganda, the adjective follows the noun and agrees with it (omuntu omulungi “a good person”); Hebrew agrees in gender, number and definiteness."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese adjectives come first (大房子) and work like verbs in a sentence (房子很大); Hebrew adjectives follow the noun and agree, and the sentence needs no 很 or 是: הַבַּיִת גָּדוֹל."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "As in Vietnamese, the adjective follows the noun (nhà lớn ~ בַּיִת גָּדוֹל); but Hebrew adjectives change for gender and number and take the article."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut often says “big” or “small” with a suffix inside the noun (iglujuaq “a big house”); Hebrew uses a separate adjective after the noun: בַּיִת גָּדוֹל."
   }
  ]
 }

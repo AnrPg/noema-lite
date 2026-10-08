@@ -104,6 +104,23 @@ async function runThrough(page, wrongIn = []) {
   ok(await page.evaluate(() => location.hash) === '#/fn/fn.root.pattern/he' && /כ-ת-ב/.test(await page.locator('.lx-gram').innerText()), 'a link opens the same point in Hebrew');
   await page.setViewportSize({ width: 380, height: 800 }); await page.goto(url + '?account=anr&subject=' + SUBJ + '#/lesson/fd.00'); await wait(800);
   ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'phone width: the lesson page does not scroll sideways');
+  // ---------- D18: notes from the learner's languages, the library of peculiarities, the languages in ⚙️ Settings ----------
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/fn.definite/de'); await wait(900);
+  { const mine = await page.locator('.lx-notesbox .k-key [data-for]').evaluateAll(els => els.map(e => e.dataset.for));
+    ok(['el', 'en', 'ru', 'tr'].every(x => mine.includes(x)) && !mine.includes('ja'), 'D18: the grammar page opens the notes for the learner’s languages (' + mine.join(', ') + '), the rest folded'); }
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/settings'); await wait(700);
+  await page.selectOption('.lx-knows select[aria-label="add a language"]', 'ja'); await wait(300);
+  ok(await page.evaluate(() => (NoemaLangUI.UI.L.settings.knows || []).some(k => k.code === 'ja')), 'Settings: a known language is added (Japanese)');
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/fn.definite/de'); await wait(900);
+  ok((await page.locator('.lx-notesbox .k-key [data-for]').evaluateAll(els => els.map(e => e.dataset.for))).includes('ja'), '… and its notes now open on the grammar page');
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/peculiar/de'); await wait(900);
+  { const n = await page.locator('.lx-pec').count(), t = await page.locator('.lx-view').innerText();
+    ok(n > 50 && /new for you/.test(t) && /familiar from/.test(t), `D18: the library of German peculiarities (${n} entries, new / familiar marked, any order)`); }
+  await page.evaluate(() => { const U = NoemaLangUI.UI, N = window.NoemaLang; for (const id of Object.keys(U.C.lang.de.lex).slice(0, 6)) N.review(U.C, U.L, 'de', id, 'r', true, 0); });
+  await page.goto(url + '?account=anr&subject=' + SUBJ + '#/fn/fn.plural.noun/de'); await wait(900);
+  if (await page.locator('.lx-gram .lx-tok').count()) { await page.locator('.lx-gram .lx-tok').first().click(); await wait(200);
+    ok(await page.locator('.lx-pop .lx-card').count() === 1, 'D19: a word of a sentence opens its card on tap (its meaning on hover)'); await page.click('.lx-pop button:has-text("✕")'); }
+  else ok(false, 'D19: the example sentences are shown word by word');
   ok(!E.length, 'no page errors ' + JSON.stringify(E.slice(0, 3)));
   await browser.close(); fs.rmSync(ROOT, { recursive: true, force: true });
   console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);

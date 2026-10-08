@@ -1,7 +1,21 @@
 {
  "function": "fn.adjective",
  "status": "realized",
- "summary": "A German adjective has two lives. After sein (and werden, bleiben) and as an adverb it never changes: Das Haus ist groß. Der Zug fährt schnell. Before a noun it always takes an ending, and the ending depends on the word in front of it. The rule of thumb: the article and the adjective share the job of showing gender and case – if the article already shows it clearly (der, die, das, dem, den, dieser …), the adjective only adds the weak ending -e or -en; if there is no article, or the article has no ending (ein, kein, mein in the masculine nominative and the neuter nominative/accusative), the adjective takes the strong ending that der/das would have had (-er, -es). The WEAK endings are learned in one sentence: -e in the five “light” places (nominative singular of all three genders, accusative singular feminine and neuter), -en everywhere else – all datives and all plurals included. German puts the adjective before the noun, as Greek and English do (unlike Arabic and Hebrew). Feelings of the body use the dative or haben, not sein + adjective: Mir ist kalt (I’m cold), Ich habe Hunger / Durst (I’m hungry / thirsty).",
+ "typology": [
+  {
+   "feature": "adj.agreement",
+   "value": "gender-number-case"
+  },
+  {
+   "feature": "syn.adjectiveNoun",
+   "value": "adj-noun"
+  },
+  {
+   "feature": "adj.predicative",
+   "value": "nonverbal"
+  }
+ ],
+ "summary": "A German adjective has two lives. After sein (and werden, bleiben) and as an adverb it never changes: Das Haus ist groß. Der Zug fährt schnell. Before a noun it always takes an ending, and the ending depends on the word in front of it. The rule of thumb: the article and the adjective share the job of showing gender and case – if the article already shows it clearly (der, die, das, dem, den, dieser …), the adjective only adds the weak ending -e or -en; if there is no article, or the article has no ending (ein, kein, mein in the masculine nominative and the neuter nominative/accusative), the adjective takes the strong ending that der/das would have had (-er, -es). The WEAK endings are learned in one sentence: -e in the five “light” places (nominative singular of all three genders, accusative singular feminine and neuter), -en everywhere else – all datives and all plurals included. German puts the adjective before the noun (Arabic and Hebrew put it after). Feelings of the body use the dative or haben, not sein + adjective: Mir ist kalt (I’m cold), Ich habe Hunger / Durst (I’m hungry / thirsty).",
  "blocks": [
   {
    "t": "table",
@@ -35,7 +49,13 @@
      "den großen Häusern"
     ]
    ],
-   "caption": "Step 1 – WEAK endings after der, die, das (also dieser, jener, welcher, alle): -e in the five light places, -en everywhere else"
+   "caption": "Step 1 – WEAK endings after der, die, das (also dieser, jener, welcher, alle): -e in the five light places, -en everywhere else",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    }
+   ]
   },
   {
    "t": "table",
@@ -69,7 +89,13 @@
      "keinen großen Häusern"
     ]
    ],
-   "caption": "Step 2 – MIXED endings after ein, kein, mein, dein … : the weak pattern, except the three places where ein has no ending – there the adjective shows the gender (-er, -es)"
+   "caption": "Step 2 – MIXED endings after ein, kein, mein, dein … : the weak pattern, except the three places where ein has no ending – there the adjective shows the gender (-er, -es)",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    }
+   ]
   },
   {
    "t": "table",
@@ -103,7 +129,13 @@
      "mit kleinen Kindern"
     ]
    ],
-   "caption": "Step 3 – STRONG endings with no article (also after numbers, viele, einige, wenige): the adjective takes the ending of der / die / das (-er, -e, -es, -en, -em)"
+   "caption": "Step 3 – STRONG endings with no article (also after numbers, viele, einige, wenige): the adjective takes the ending of der / die / das (-er, -e, -es, -en, -em)",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -126,7 +158,7 @@
     ],
     [
      "describing a verb (adverb)",
-     "no ending, no -ly",
+     "no ending – the same word as the adjective",
      "Er fährt schnell. Sie spricht langsam."
     ],
     [
@@ -135,7 +167,13 @@
      "ein großes Haus, die kleine Wohnung, mit dem neuen Auto"
     ]
    ],
-   "caption": "Predicate, adverb, attribute"
+   "caption": "Predicate, adverb, attribute",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "nonverbal"
+    }
+   ]
   },
   {
    "t": "table",
@@ -287,7 +325,7 @@
   "hoch → ein hohes Haus (not *hoches); teuer → ein teures Auto; dunkel → ein dunkles Bier.",
   "Tall of people is groß, not hoch.",
   "Mir ist kalt (I’m cold), not *Ich bin kalt; Ich habe Hunger is the usual “I’m hungry”.",
-  "No -ly: Er fährt schnell (fast / quickly)."
+  "The adverb is the bare adjective: Er fährt schnell (fast / quickly)."
  ],
  "paradigmCells": [
   "ADJ",
@@ -514,6 +552,103 @@
    "lang": "de",
    "fn": "fn.case",
    "note": "The case after a preposition decides the adjective ending too: mit dem neuen Auto (dative), für den kleinen Jungen (accusative)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "A Greek adjective agrees with its noun whatever stands before it, also after είναι (το σπίτι είναι μεγάλο); German endings depend on the article (der große / ein großer) and disappear after sein: Das Haus ist groß."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian adjectives agree in gender, number and case, as German ones do, but their ending does not depend on the article (Russian has none); German has weak, mixed and strong endings."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish puts most adjectives after the noun (una casa grande) and they always agree; German puts them before and changes them only there: ein großes Haus, but Das Haus ist groß."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English adjectives never change; German ones take an ending before the noun, chosen by the article. The adverb has no -ly: schnell = fast and quickly. “I’m cold” is Mir ist kalt."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "Most French adjectives follow the noun and always agree (la maison est grande); German ones precede the noun and agree only there."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi adjectives in -ā agree (achchhā laṛkā, achchhī laṛkī, achchhe laṛke) and come before the noun, as in German; others never change (sundar). mujhe ṭhaṇḍ lag rahī hai has the experiencer in the dative, like Mir ist kalt."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian adjectives follow the noun with the ezafe and never change (ketāb-e bozorg); German ones precede it and take endings: ein großes Buch."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Adjectives in -ā agree in gender and precede the noun, as in German; German adds case and the choice between weak and strong endings."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic adjectives follow the noun and agree in gender, number, case and definiteness (al-baytu l-kabīru); German ones precede it, and the article decides the ending: das große Haus, ein großes Haus."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew adjectives follow the noun and repeat the article (ha-bayit ha-gadol); German ones precede the noun and take an ending: das große Haus."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish adjectives never change (büyük ev, büyük evler); German ones do, before a noun. “I’m cold” is a verb in Turkish (üşüyorum), a dative phrase in German: Mir ist kalt."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese i-adjectives inflect for tense like verbs (takai, takakatta); German adjectives have no tense, but take case and gender endings before a noun."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adjectives are verbs (keuda, keun jip); a German adjective needs sein as a predicate and an ending before a noun."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish adjectives agree in case and number before the noun (isossa talossa), as German ones do – but without gender, and without the weak / strong choice."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian attributive adjectives never change (a nagy házban); German ones always take an ending before a noun: in dem großen Haus."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili adjectives follow the noun and agree by class (kitabu kikubwa, vitabu vikubwa); German ones precede the noun and agree by gender, number and case."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese adjectives precede the noun with or without 的 (大房子, 很大的房子) and never change; as a predicate they need no copula (房子很大). German needs sein (Das Haus ist groß) and endings before the noun."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese adjectives follow the noun (nhà lớn) and need no copula (nhà lớn = the house is big); German puts them before the noun with an ending and uses sein in a predicate."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has no separate class of adjectives: a quality is a verb or a suffix on the noun (-rjuaq, big). German adjectives are words of their own, with endings before the noun."
   }
  ]
 }

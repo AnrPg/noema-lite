@@ -1,6 +1,16 @@
 {
  "function": "fn.greetings",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "binary"
+  },
+  {
+   "feature": "prag.speechLevels",
+   "value": "none"
+  }
+ ],
  "summary": "Chinese greetings and polite words are fixed formulas that never change their form. The one choice to make is 你 or 您: 您好 for elders, teachers, customers and strangers to be respected, 你好 between equals. In daily life Chinese greet less with ‘hello’ than with a name or title (老师好！, 王老师！) or a friendly question (吃了吗？ ‘have you eaten?’); 你好吗 ‘how are you?’ is a real question for people you have not seen for a while. There is no form for ‘to a man’ or ‘to a woman’.",
  "blocks": [
   {
@@ -116,6 +126,12 @@
       "strangers you want to respect — especially in the north"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
    ]
   },
   {
@@ -160,7 +176,7 @@
  },
  "traps": [
   "*你们好 to a teacher — say 老师好 or 您好.",
-  "请 at the end like English ‘please’: *坐，请 → 请坐.",
+  "请 at the end of the request: *坐，请 → 请坐 (请 always stands before the verb).",
   "Answering 谢谢 with 没关系 (that is for apologies) — say 不客气.",
   "晚安 as an evening greeting — it means ‘good night’; greet with 晚上好.",
   "Using 拜拜 with your boss — 再见 is safer."
@@ -293,6 +309,108 @@
    ],
    "answer": "明天见！",
    "why": "Time word + 见 = see you then."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Γεια σου / γεια σας ↔ 你好 / 您好: Greek, too, builds the polite ‘you’ into the greeting. But γεια serves for hello and goodbye, while Chinese parts with 再见; and παρακαλώ is both ‘please’ and ‘you’re welcome’, which Chinese splits into 请 and 不客气."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Привет / Здравствуйте ↔ 你好 / 您好 — the polite ‘you’ is in the greeting. Пожалуйста is ‘please’ and ‘you’re welcome’; Chinese splits it into 请 (before the verb) and 不客气. Respect comes from name and patronymic in Russian, from surname + title in Chinese (王老师)."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Hola has no polite form; Chinese chooses 你好 or 您好. Por favor may close a request (un café, por favor); 请 must open it (请坐). Buenas noches greets and parts at night, but Chinese 晚安 only parts — the evening greeting is 晚上好."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English hello and please have no polite form; Chinese marks respect with 您好. ‘Please’ can end an English request, 请 cannot (请等我). ‘Good night’ is a parting in both languages (晚安); ‘good evening’ is 晚上好."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Bonjour / bonsoir work for anyone; Chinese picks 你好 or 您好 as you pick tu or vous. S’il vous plaît closes a request, 请 opens it (请进). Bonne nuit ↔ 晚安: for parting only."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "Hallo and Guten Tag carry no du / Sie, but 你好 / 您好 do. Bitte is ‘please’ and ‘you’re welcome’; Chinese has 请 (before the verb) and 不客气. Auf Wiedersehen and 再见 are built alike: 再 ‘again’ + 见 ‘see’."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "नमस्ते works at any hour, for hello and goodbye; Chinese changes with the time of day (早上好, 晚上好) and parts with 再见. Hindi shows respect in the verb (बैठिए ‘please sit’) and with आप; Chinese with 请 + verb (请坐) and 您."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian salām / khodāhāfez ↔ 你好 / 再见; respect shows in shomā and in polite verb forms, in Chinese in 您 and 请. Persian lotfan ‘please’ can open or close a request; 请 only stands before the verb."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "नमस्कार serves for hello and goodbye at any hour; Chinese greets with 你好 / 您好 and parts with 再见. Marathi respect lies in तुम्ही / आपण and the verb; Chinese respect in 您, 请 and titles."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic greetings have fixed answers (as-salāmu ʿalaykum — wa-ʿalaykumu s-salām) and many change for a man or a woman (kayfa ḥāluka / ḥāluki). Chinese formulas never change: 你好 is answered with 你好, and the only choice is 你 or 您."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Shalom is hello and goodbye; Chinese has 你好 and 再见. Hebrew ‘how are you’ depends on gender (ma shlomkha / ma shlomekh); 你好吗 does not. Bevakasha is both ‘please’ and ‘you’re welcome’; Chinese uses 请 and 不客气."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Merhaba has no sen / siz form; Chinese chooses 你好 or 您好. Lütfen may follow the request (bir çay lütfen); 请 only precedes the verb. Turkish names put the given name first; Chinese names put the surname first (王小明)."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Like Japanese, Chinese puts the family name first (王小明, like 山田太郎) and greets people by title (老师好). But Chinese has no humble or honorific verb forms: politeness is 您, 请 and the title, and the verb stays the same."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean shows politeness with speech levels in every verb ending; Chinese has none: 您, 请, titles (王老师) and phrases like 您贵姓 do that work, and the verb never changes. Both put the family name first."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish moi / hei / terve are neutral; Chinese chooses 你好 or 您好. Kiitos ↔ 谢谢; ole hyvä is ‘you’re welcome’ and also ‘here you are’ — Chinese answers thanks with 不客气 and offers with 请 (请喝茶)."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian, like Chinese, puts the family name first (Kovács János ~ 王小明). Szia / jó napot kívánok ↔ 你好 / 您好 — a casual and a respectful greeting; köszönöm ↔ 谢谢, szívesen ↔ 不客气."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili greetings are exchanges with set answers (Habari? — Nzuri; to an elder Shikamoo — Marahaba). Chinese has a respectful 您好 for elders but no fixed answer word: 你好 is answered with 你好."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda greetings are exchanges with set replies (Oli otya? — Bulungi), often several turns long. Chinese greetings are short fixed formulas; respect is shown with 您 and titles (王老师好)."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Xin chào ↔ 你好, cảm ơn ↔ 谢谢, and Vietnamese, like Chinese, puts the family name first (Nguyễn Văn An). But Vietnamese adds a kinship word to every greeting (chào anh, chào bác), where Chinese uses 您 or a title."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut greetings are verb words with person endings (Qanuippit? ‘how are you?’); Chinese greetings are fixed formulas that never change. Qujannamiik ↔ 谢谢."
   }
  ],
  "seeAlso": [

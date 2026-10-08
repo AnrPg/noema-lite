@@ -1,6 +1,24 @@
 {
  "function": "fn.pronoun.subject",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "pron.gender",
+   "value": "written-only"
+  },
+  {
+   "feature": "pron.inclusive",
+   "value": "present"
+  },
+  {
+   "feature": "prag.politePronouns",
+   "value": "binary"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "none"
+  }
+ ],
  "summary": "Chinese has one small set of personal pronouns that never change: 我 wǒ ‘I, me’, 你 nǐ ‘you’ (polite 您 nín), 他 / 她 / 它 tā ‘he, she, it’. The plural adds 们 men: 我们 ‘we’, 你们 ‘you (all)’, 他们 / 她们 / 它们 ‘they’; 咱们 is ‘we’ including the listener. The same form is subject and object, and the verb does not change with the person: 我是, 你是, 他们是.",
  "blocks": [
   {
@@ -27,7 +45,17 @@
      "他们 — they (men or mixed); 她们 — they (women); 它们 — they (things, animals)"
     ]
    ],
-   "caption": "The personal pronouns"
+   "caption": "The personal pronouns",
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "written-only"
+    },
+    {
+     "feature": "pron.inclusive",
+     "value": "present"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -39,7 +67,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "tā is one sound",
-   "text": "他, 她 and 它 are all pronounced tā; a mixed group is 他们, even with one man among many women."
+   "text": "他, 她 and 它 are all pronounced tā; a mixed group is 他们, even with one man among many women.",
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "written-only"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -58,13 +92,25 @@
       "warm, northern and colloquial"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "pron.inclusive",
+     "value": "present"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "tip",
    "title": "您 and the plural",
-   "text": "There is no standard polite plural *您们: to a group say 你们, or politely 各位 / 大家."
+   "text": "There is no standard polite plural *您们: to a group say 你们, or politely 各位 / 大家.",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
+   ]
   }
  ],
  "procedure": {
@@ -85,7 +131,7 @@
   "*我们们 or *您们 — 们 only once, and not on 您.",
   "Using 您 with close friends sounds cold or ironic.",
   "咱们 must include the listener: never *咱们走了，你呢？",
-  "它 is much rarer than English ‘it’: no dummy subject (是我 ‘it’s me’)."
+  "它 is rare: there is no dummy subject — ‘it’s me’ is 是我, and weather words need none either (今天很冷 ‘it is cold today’)."
  ],
  "evidence": {
   "lemmas": [
@@ -177,6 +223,108 @@
    ],
    "answer": "the same: tā",
    "why": "The difference exists only in writing."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek pronouns change by case (εγώ / με / μου) and gender (αυτός / αυτή / αυτό), and the subject is usually dropped because the verb ending shows it (τρώω ‘I eat’). Chinese 我 is subject and object, and it usually stays, because the verb has no ending. εσύ / εσείς ↔ 你 / 您 — but 您 is one person only; several are 你们."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian я / меня / мне and он / она / оно change by case and gender; Chinese has one form each, and 他 / 她 / 它 sound the same. ты / вы ↔ 你 / 您, but Russian вы is also the plural, while 您 is one person (several: 你们)."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish drops the subject (como ‘I eat’) because the verb shows it; Chinese verbs show nothing, so 我吃 keeps 我. tú / usted ↔ 你 / 您, and ellos / ellas ↔ 他们 / 她们 make the same split: a mixed group takes the masculine form in both."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English I / me and he / him change by role; Chinese 我 and 他 do not. English has no polite ‘you’ (您) and no ‘we including you’ (咱们). he / she / it ↔ 他 / 她 / 它 — but in Chinese they are one spoken word, tā."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French je / me / moi and il / elle change with their role; 我 serves for all of them. tu / vous ↔ 你 / 您, but vous is also plural, while ‘you all’ is 你们 — never *您们."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German ich / mich / mir change by case and the verb agrees (ich bin, du bist); Chinese 我 never changes and 是 stays 是. du / Sie ↔ 你 / 您 — but Sie also serves a polite group, while 您 is one person."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi वह is both ‘he’ and ‘she’ (the verb shows the gender), close to the single spoken tā. Hindi has three levels of ‘you’ (तू / तुम / आप), Chinese two (你 / 您); Hindi हम has no inclusive / exclusive split like 咱们 / 我们."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian u is ‘he’ and ‘she’ alike, like spoken tā. to / shomā ↔ 你 / 您, but shomā is also the plural. Persian often drops the subject because the verb ending shows it (mikhoram ‘I eat’); Chinese keeps 我."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi separates आपण ‘we, including you’ from आम्ही ‘we, without you’ — exactly 咱们 / 我们. Unlike Chinese, Marathi तो / ती / ते tell ‘he’, ‘she’ and ‘it’ apart in speech."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic marks gender in ‘you’ and ‘they’ (anta / anti, hum / hunna) and has dual pronouns (antumā, humā); Chinese has neither. The Arabic verb carries the person (katabtu ‘I wrote’), so pronouns are often dropped; Chinese verbs carry nothing, so the pronoun stays."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew separates ‘you’ masculine and feminine (ata / at) and ‘they’ (hem / hen); Chinese marks gender only in writing (他们 / 她们). The rule for mixed groups is the same: one man makes it hem, and 他们."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish o is ‘he’, ‘she’ and ‘it’ — like the single spoken tā. sen / siz ↔ 你 / 您, but siz is also the plural (Chinese 你们). Turkish pronouns take case endings (beni, bana); 我 never changes."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese also leaves pronouns out when the context is clear and adds -たち to people (私たち ‘we’) much like 们. But Japanese avoids ‘you’ with superiors and uses names and titles, while Chinese 您 is a respectful pronoun used freely."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean avoids second-person pronouns with elders and uses titles or names (선생님 ‘teacher’); Chinese addresses them directly with 您. Korean -들 (학생들) marks a group of people, like 们, but optionally."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish hän is ‘he’ and ‘she’ — no gender in speech, like tā. sinä / te ↔ 你 / 您, but te is also the plural. Finnish pronouns decline (minä, minua, minulle); 我 never changes."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian ő is ‘he’ and ‘she’, like spoken tā. Hungarian polite ‘you’ (ön, maga) takes a 3rd-person verb; Chinese 您 simply replaces 你 and the verb stays the same."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili yeye is ‘he’ and ‘she’, like spoken tā, but the verb prefix shows the person (ninakula ‘I eat’, anakula ‘she eats’), so pronouns are often dropped. Chinese verbs show nothing and keep the pronoun. Swahili has no respectful ‘you’ like 您."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda ye is ‘he’ and ‘she’, like spoken tā, and a prefix on the verb shows the person (n- ‘I’, o- ‘you’, a- ‘he / she’). Chinese verbs have no prefix: the pronoun itself does that job, so it is rarely left out."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese also has an inclusive ‘we’ (chúng ta) and an exclusive one (chúng tôi) — exactly 咱们 / 我们. But Vietnamese mostly addresses people with kinship words (anh, chị, em, bác); Chinese uses 你 / 您 for everyone."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut shows the person in the verb ending, with singular, dual (‘we two’) and plural, and pronouns are mostly left out. Chinese has no dual and puts the person only in the pronoun: 我们 is ‘we’, however many."
   }
  ],
  "seeAlso": [

@@ -32,5 +32,77 @@
    ],
    "count": 8
   }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek plurals change the ending (βιβλίο → βιβλία); Arabic most often changes the inside of the word (كِتَاب → كُتُب), has a dual for two, and treats plurals of things as feminine singular."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian has unit nouns like the Arabic ones: горох → горошина (a pea), картофель → картофелина (a potato) — compare بَصَل → بَصَلَة (an onion). New are the dual and the broken plurals."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish adds -s / -es to every noun; most Arabic plurals are broken — a new vowel pattern inside the word (قَلَم → أَقْلَام) — and are learned with each noun."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English has a few inside-the-word plurals (foot → feet, man → men); in Arabic that is the most common kind (رَجُل → رِجَال), and there is a dual for two."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi plurals change the ending by gender (लड़का → लड़के, किताब → किताबें); Arabic often changes the inside of the word and has a dual."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian uses Arabic broken plurals for many Arabic loanwords (کتب, اخبار) besides its own -hā / -ān, and even the Arabic ending -āt (سبزیجات, vegetables); in Arabic these are the normal plurals."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has one plural ending, -ler / -lar, and drops it after numbers; Arabic has three kinds of plural plus a dual, learned with each noun."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese nouns usually do not mark plural; Arabic must choose singular, dual or plural every time."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish plurals are regular (-t, -i-); Arabic plurals are mostly broken and are learned with each noun."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adds -k (könyvek); Arabic mostly changes the vowels inside the word (كُتُب)."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili makes the plural by changing the prefix (kitabu → vitabu), Arabic often by changing the vowels inside (كِتَاب → كُتُب) — in both, learn the pair."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda changes the class prefix (ekitabo → ebitabo), Arabic often changes the inside of the word — in both, learn the pair."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese marks plural only with words like các / những; Arabic marks it on the noun itself, with a dual for two."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut also has singular, dual and plural: inuk, inuuk, inuit (one, two, several people) — like Arabic -āni for two; but Arabic plurals are often broken."
+  }
  ]
 }

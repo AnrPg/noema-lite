@@ -136,7 +136,13 @@
      "اِشْتَرِينَ"
     ]
    ],
-   "caption": "The commands of the verbs taught so far (from the Wiktionary tables)."
+   "caption": "The commands of the verbs taught so far (from the Wiktionary tables).",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
   },
   {
    "t": "table",
@@ -213,7 +219,13 @@
    "t": "callout",
    "kind": "key",
    "title": "No pronoun, four forms.",
-   "text": "The ending already says who is meant, so there is no “you”: اِجْلِسْ / اِجْلِسِي — German setz dich / setzen Sie sich has a polite form; Arabic has gender and number instead."
+   "text": "The ending already says who is meant, so there is no “you”: اِجْلِسْ / اِجْلِسِي — German setz dich / setzen Sie sich has a polite form; Arabic has gender and number instead.",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -451,6 +463,98 @@
    "lang": "ar",
    "fn": "fn.greetings",
    "note": "مِنْ فَضْلِكَ / مِنْ فَضْلِكِ and لَوْ سَمَحْتَ change with the listener (lesson 2)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  },
+  {
+   "feature": "prag.politePronouns",
+   "value": "none"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also has a singular and a plural command (φάε / φάτε), and the plural is also polite; Arabic has four forms by gender and number, and no polite form."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian ешь / ешьте split by number (the plural is also polite); Arabic adds gender: كُلْ (to a man), كُلِي (to a woman), كُلُوا, كُلْنَ."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish chooses the command by politeness (come / coma, comed / coman); Arabic only by gender and number: كُلْ, كُلِي, كُلُوا, كُلْنَ."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English has one form for everyone (Go!); Arabic has four: اِذْهَبْ to a man, اِذْهَبِي to a woman, اِذْهَبُوا to several, اِذْهَبْنَ to women."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French va ! / allez ! split by number and politeness; Arabic splits by gender and number."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has three commands by respect (जा, जाओ, जाइए); Arabic has four by gender and number (اِذْهَبْ, اِذْهَبِي, اِذْهَبُوا, اِذْهَبْنَ)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian builds the command with a prefix on the present stem (برو, go!; بروید, plural); Arabic builds it from the present by dropping the prefix and, if needed, adding a helping vowel: اِذْهَبْ."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish uses the bare stem (gel!, git!) and -in for the plural or polite (gelin); Arabic changes the ending by gender as well: تَعَالَ, تَعَالَيْ, تَعَالَوْا."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese softens requests with 〜てください and keeps blunt forms (行け) for rare uses; Arabic uses the plain command politely, adding مِنْ فَضْلِكَ."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean commands change by speech level (가 / 가세요); Arabic ones change by gender and number."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish mene! / menkää! split by number; Arabic by number and gender: اِذْهَبْ / اِذْهَبِي / اِذْهَبُوا / اِذْهَبْنَ."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian menj! / menjetek! split by number; Arabic adds gender."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also has a bare singular command and a plural in -ni (soma! / someni!); Arabic adds gender: اِذْهَبْ / اِذْهَبِي."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda also commands with the bare verb (genda!, go!); Arabic has separate forms for a man and a woman: اِذْهَبْ / اِذْهَبِي."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese commands are the bare verb with words like hãy, đi, đừng (hãy đi!, đừng đi!); Arabic changes the verb itself."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut commands are a mood ending with singular, dual and plural; Arabic has a dual command too (اِذْهَبَا, you two, go!), plus gender in the singular and plural."
   }
  ]
 }

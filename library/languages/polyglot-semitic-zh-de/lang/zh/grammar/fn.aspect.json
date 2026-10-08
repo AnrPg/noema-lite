@@ -1,6 +1,24 @@
 {
  "function": "fn.aspect",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "verb.perfective",
+   "value": "particle"
+  },
+  {
+   "feature": "verb.progressive",
+   "value": "optional"
+  },
+  {
+   "feature": "verb.perfect",
+   "value": "finish-already"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "optional"
+  }
+ ],
  "summary": "Chinese has no tenses; instead three small markers show how an action is seen. 了 le after the verb: the action is complete (我买了两张票 ‘I bought two tickets’); 了 at the end of the sentence: something new is the case (他来了 ‘he’s here (now)’, 下雨了 ‘it has started to rain’). 过 guo after the verb: experience, ‘have ever done’ (我去过北京 ‘I have been to Beijing’). 在 / 正在 zài / zhèngzài before the verb: in progress (他在吃饭 ‘he is eating’) — the same 在 as ‘to be at’, so 他在吃饭 is literally ‘he is at eating’. Negation: completed actions are denied with 没 and the 了 disappears (他没来 ‘he didn’t come’); experience keeps 过 (我没去过北京 ‘I have never been to Beijing’). 了 is not a past tense: when you only say WHEN something happened or describe a habit, there is no 了 (昨天我在家, 以前我常常去); a future action can be complete too (明天吃了饭我们走).",
  "blocks": [
   {
@@ -42,7 +60,17 @@
      "他没在吃饭。"
     ]
    ],
-   "caption": "Aspect: how the action is seen"
+   "caption": "Aspect: how the action is seen",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "particle"
+    },
+    {
+     "feature": "verb.progressive",
+     "value": "optional"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -65,7 +93,13 @@
    "t": "callout",
    "kind": "key",
    "title": "了 is not a past tense",
-   "text": "昨天我在家 ‘yesterday I was at home’ — no 了: the time word already says ‘past’, and nothing was completed. 以前我常常去公园 ‘I used to go to the park often’ — a habit, no 了. But 明天吃了饭我们走 ‘tomorrow, after we have eaten, we’ll leave’ — a future 了. Think ‘done’, not ‘past’."
+   "text": "昨天我在家 ‘yesterday I was at home’ — no 了: the time word already says ‘past’, and nothing was completed. 以前我常常去公园 ‘I used to go to the park often’ — a habit, no 了. But 明天吃了饭我们走 ‘tomorrow, after we have eaten, we’ll leave’ — a future 了. Think ‘done’, not ‘past’.",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -96,13 +130,25 @@
       "他正在吃饭呢。 He’s eating right now."
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "optional"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "key",
-   "title": "Greek, German and Russian",
-   "text": "Greek and Russian mark aspect inside the verb (έφαγα / έτρωγα, съел / ел); German has no aspect at all and uses gerade for ‘in progress’. Chinese marks it with separate particles, and the verb itself never changes: 吃了, 吃过, 在吃."
+   "title": "The verb never changes",
+   "text": "German has no aspect forms and uses gerade for ‘in progress’. Chinese marks aspect with separate particles, and the verb itself never changes: 吃了, 吃过, 在吃.",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "particle"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -119,7 +165,7 @@
    "Is it going on right now? → 在 / 正在 + verb (+ 呢).",
    "Is it negative? → 没 + verb, and drop 了; keep 过 (没去过).",
    "Am I only saying WHEN, or describing a habit? → no 了 needed.",
-   "Did I put 了 because English uses a past tense? → check: is it complete or new? If not, remove it."
+   "Did I put 了 only because the event is in the past? → check: is it complete or new? If not, remove it."
   ],
   "steps": [
    "Find the verb.",
@@ -248,6 +294,108 @@
    "why": "了 = the going is done and he is away; 过 = an experience in his past."
   }
  ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek marks aspect inside the verb (έφαγα ‘I ate it’ / έτρωγα ‘I was eating’), and the split is close to 了 vs 在: complete vs ongoing. But Greek always marks tense as well; Chinese marks only aspect, and only when it matters."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian aspect pairs (съел / ел) feel like 吃了 / 吃: the perfective ‘done’ ≈ verb + 了. But Russian marks aspect on every verb, Chinese only when it matters — and 了 also works in the future (明天吃了饭我们走)."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish comí / comía split complete and ongoing in the past; Chinese 吃了 / 在吃 split them without any tense. estoy comiendo ~ 我在吃; ¿has estado en Pekín? ‘have you ever been’ ~ 你去过北京吗？"
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "The English past tense is not 了: ‘yesterday I was at home’ is 昨天我在家, without 了. ‘I have been to Beijing’ ~ 我去过北京; ‘he is eating’ ~ 他在吃饭; ‘I bought two tickets’ ~ 我买了两张票."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French passé composé / imparfait (j’ai mangé / je mangeais) split complete and ongoing in the past; Chinese 吃了 / 在吃 split them at any time. être en train de ~ 在 / 正在."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has no aspect forms; ich habe gegessen covers both 吃了 and 吃过. Chinese chooses: 我吃了 (done, now), 我吃过 (ever). gerade ~ 正在."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi marks aspect with participles and auxiliaries: खाया ‘ate (done)’ ~ 吃了, खा रहा है ‘is eating’ ~ 在吃; Chinese uses separate particles and no tense."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian mi- marks ongoing or repeated action (mikhordam ‘I was eating’), dāshtan + verb the progressive now (dāram mikhoram ~ 我在吃); Chinese uses 在 before the verb and 了 / 过 after it."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi marks aspect with participles and आहे: खात आहे ‘is eating’ ~ 在吃, खाल्ले ‘ate’ ~ 吃了; Chinese uses separate particles and no tense."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic perfect and imperfect (akala / yaʾkulu) mix aspect with tense; Chinese separates them: 了 says ‘done’, a time word says ‘when’."
+  },
+  {
+   "for": "he",
+   "rel": "new",
+   "text": "Modern Hebrew has tenses but no aspect forms (akhalti ‘I ate’ covers 吃了 and 吃过); Chinese has no tenses but marks aspect: 吃了, 吃过, 在吃."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish -iyor ‘in progress’ ~ 在 / 正在 and -di ‘done’ ~ 了 are suffixes on the verb; Chinese uses separate words and adds no tense."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese 食べた ‘ate’ ~ 吃了, 食べている ‘is eating’ ~ 在吃, 食べたことがある ‘have eaten (ever)’ ~ 吃过 — the same distinctions, made with verb endings."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean 먹었어요 ‘ate’ ~ 吃了, 먹고 있어요 ‘is eating’ ~ 在吃, 먹은 적이 있어요 ‘have eaten (ever)’ ~ 吃过 — the same distinctions, made with endings."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish shows completion with the object case: luin kirjan ‘I read the book (through)’ vs luin kirjaa ‘I was reading the book’; Chinese marks it on the verb with 了."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian preverbs often mark completion (megettem ‘I ate it up’ vs ettem ‘I ate, I was eating’); Chinese uses 了 after the verb: 我吃了."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili -me- ‘has done’ (nimekula ‘I have eaten’) ~ 了 and -na- ‘now, ongoing’ ~ 在 are prefixes on the verb; Chinese uses separate particles and no tense."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda marks tense and aspect with affixes on the verb; Chinese marks only aspect, with separate particles (了, 过, 在), and the verb never changes."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese uses the same kind of particles: đang ~ 在 (ongoing), rồi ~ 了 (done, a new state), từng ~ 过 (ever), đã for completed or past: tôi ăn rồi ~ 我吃了."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks time and aspect with suffixes inside the verb word (nirilauqtunga ‘I ate’); Chinese adds separate particles to an unchanged verb: 我吃了."
+  }
+ ],
  "seeAlso": [
   {
    "lang": "de",
@@ -262,7 +410,7 @@
   {
    "lang": "he",
    "fn": "fn.aspect",
-   "note": "Modern Hebrew has past, present and future but no aspect marking: אָכַלְתִּי ‘I ate / I have eaten’; Chinese distinguishes 吃了 (done) and 吃过 (ever eaten) where Hebrew and English do not."
+   "note": "Modern Hebrew has past, present and future but no aspect marking: אָכַלְתִּי ‘I ate / I have eaten’; Chinese distinguishes 吃了 (done) and 吃过 (ever eaten) where Hebrew does not."
   },
   {
    "lang": "zh",

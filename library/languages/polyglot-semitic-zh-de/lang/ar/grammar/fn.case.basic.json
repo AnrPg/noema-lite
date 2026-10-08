@@ -31,7 +31,17 @@
      "الْبَيْتِ al-bayti"
     ]
    ],
-   "caption": "The indefinite accusative -an is written with an extra alif: بَيْتًا. Feminine nouns in ة take the endings on the ة: غُرْفَةٌ، غُرْفَةً، غُرْفَةٍ."
+   "caption": "The indefinite accusative -an is written with an extra alif: بَيْتًا. Feminine nouns in ة take the endings on the ة: غُرْفَةٌ، غُرْفَةً، غُرْفَةٍ.",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "three"
+    },
+    {
+     "feature": "nom.caseMarking",
+     "value": "suffixes"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -49,7 +59,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "Diptotes.",
-   "text": "Some nouns (many broken plurals such as نَوَافِذُ، مَصَابِيحُ، حَقَائِبُ، أَصْدِقَاءُ) never take tanwīn and have only two endings when indefinite: -u, and -a for both accusative and genitive. With the article they behave normally: النَّوَافِذُ، النَّوَافِذَ، النَّوَافِذِ."
+   "text": "Some nouns (many broken plurals such as نَوَافِذُ، مَصَابِيحُ، حَقَائِبُ، أَصْدِقَاءُ) never take tanwīn and have only two endings when indefinite: -u, and -a for both accusative and genitive. With the article they behave normally: النَّوَافِذُ، النَّوَافِذَ، النَّوَافِذِ.",
+   "typology": [
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "core-and-noncore"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -193,6 +209,107 @@
    "lang": "ar",
    "fn": "fn.object",
    "note": "The accusative -a / -an of the direct object comes in lesson 7 (أَكَلْتُ الْخُبْزَ)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "three"
+  },
+  {
+   "feature": "nom.caseMarking",
+   "value": "suffixes"
+  },
+  {
+   "feature": "syn.alignment",
+   "value": "accusative"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also puts both the subject and the predicate of a “be” sentence in the nominative (ο Γιάννης είναι δάσκαλος); Arabic does the same in a verbless sentence — but after كَانَ the predicate turns accusative."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian also changes the ending of the noun itself; Arabic has three cases instead of six, carried by one short vowel: -u, -a, -i."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish nouns have no cases; in Arabic the last vowel shows the role: -u subject, -a object, -i after a preposition."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English shows case only in pronouns (I / me, he / him); every Arabic noun has three endings: الْبَيْتُ, الْبَيْتَ, الْبَيْتِ."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French nouns never change for case; Arabic nouns change their last vowel: -u, -a, -i."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi nouns have a direct and an oblique form and take postpositions; Arabic has three case vowels on the noun and prepositions before it."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian nouns have no case endings (only -rā marks a definite object); Arabic nouns end in -u, -a or -i by their role."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi marks roles with suffixes and postpositions on an oblique stem; Arabic with three case vowels at the end of the noun."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish also marks case with endings; Arabic has only three, and marks the subject too (-u), where Turkish leaves it bare."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks roles with particles after the noun (が, を, に); Arabic with the noun’s own last vowel (-u, -a, -i)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean particles (이 / 가, 을 / 를) do the job of the Arabic endings -u and -a."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has fifteen cases; Arabic has three and leaves place and direction to prepositions."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian has many cases and a bare nominative; Arabic has three and marks the nominative too (-u)."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili nouns have no case endings; in Arabic the end of the noun changes with its role."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "Luganda nouns have no case endings; Arabic nouns change their last vowel with their role."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese nouns never change; Arabic nouns change their last vowel with their role."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has many cases and marks the subject of a transitive verb differently from that of an intransitive one (ergative); Arabic marks every subject the same way, with -u."
   }
  ]
 }

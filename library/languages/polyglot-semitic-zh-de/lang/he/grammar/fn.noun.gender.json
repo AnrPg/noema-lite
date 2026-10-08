@@ -1,6 +1,16 @@
 {
  "function": "fn.noun.gender",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.genderCount",
+   "value": "two"
+  },
+  {
+   "feature": "nom.genderBasis",
+   "value": "sex-based"
+  }
+ ],
  "summary": "Every Hebrew noun is masculine or feminine — there is no neuter. The ending usually tells: nouns ending in stressed -ָה (דִּירָה, מִטָּה, מְנוֹרָה) or in -ת (דֶּלֶת, צַלַּחַת, סְטוּדֶנְטִית) are feminine; most others are masculine (בַּיִת, סֵפֶר, שֻׁלְחָן, טֶלֶפוֹן). A few must be learned: כּוֹס “glass” is feminine with no ending, לַיְלָה “night” is masculine despite its -ָה. People have their natural gender, usually in pairs: מוֹרֶה / מוֹרָה, חָבֵר / חֲבֵרָה, סְטוּדֶנְט / סְטוּדֶנְטִית. The article הַ does not show gender; you see it in the words that agree: זֶה / זֹאת, הוּא / הִיא, הָיָה / הָיְתָה.",
  "blocks": [
   {
@@ -36,13 +46,29 @@
      "",
      "כּוֹס (f.) · לַיְלָה (m.) · אִשָּׁה (f., plural נָשִׁים)"
     ]
+   ],
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    },
+    {
+     "feature": "nom.genderBasis",
+     "value": "sex-based"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "The plural does not tell the gender",
-   "text": "חַלּוֹן → חַלּוֹנוֹת, קִיר → קִירוֹת, שֻׁלְחָן → שֻׁלְחָנוֹת, כִּסֵּא → כִּסְּאוֹת, מַפְתֵּחַ → מַפְתְּחוֹת are masculine although they end in -וֹת; נָשִׁים “women” is feminine although it ends in -ִים. Learn the gender from the singular."
+   "text": "חַלּוֹן → חַלּוֹנוֹת, קִיר → קִירוֹת, שֻׁלְחָן → שֻׁלְחָנוֹת, כִּסֵּא → כִּסְּאוֹת, מַפְתֵּחַ → מַפְתְּחוֹת are masculine although they end in -וֹת; נָשִׁים “women” is feminine although it ends in -ִים. Learn the gender from the singular.",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -68,6 +94,12 @@
       "סֵפֶל m. — die Tasse",
       "קִיר m. — die Wand"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
     }
    ]
   },
@@ -204,6 +236,108 @@
    "lang": "zh",
    "fn": "fn.noun.gender",
    "note": "Chinese nouns have no grammatical gender at all."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has three genders; Hebrew has two, and Greek neuters land on either side: το βιβλίο → סֵפֶר (m.), το κρεβάτι → מִטָּה (f.). As in Greek, the ending is a good guide (-ָה, -ת feminine), with exceptions to learn."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian has three genders and also reads them from the ending (-а feminine ~ Hebrew -ָה, -ת); but there is no neuter, so a Russian neuter becomes masculine or feminine: окно → חַלּוֹן (m.)."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Two genders, as in Spanish, with typical endings: -ָה / -ת feminine (like -a), most others masculine (like -o). Both languages have exceptions (la mano; כּוֹס f.), and the genders do not match across them: la mesa, but שֻׁלְחָן is masculine."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English nouns have no gender; in Hebrew every noun is masculine or feminine, and it shows in זֶה / זֹאת, הוּא / הִיא and later in adjectives and verbs. A thing is “he” or “she”, never “it”."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Two genders and no neuter, as in French; but the genders do not match (la table, but שֻׁלְחָן m.; le lit, but מִטָּה f.), and the article הַ does not show the gender as le / la does."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has three genders and shows them in the article (der / die / das); Hebrew has two, and its article הַ shows none — the gender appears in the words that agree. German neuters land on either side: das Buch → סֵפֶר (m.), das Bett → מִטָּה (f.)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi has two genders and its endings help (लड़का / लड़की); in Hebrew -ָה and -ת mark the feminine. The genders do not carry over: Hindi किताब is feminine, Hebrew סֵפֶר masculine."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian has no grammatical gender; in Hebrew every noun has one, and the words around it agree with it."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi has three genders; Hebrew has two — no neuter. Learn each noun with its gender; the endings -ָה and -ת usually mean feminine."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The same two genders and the same main sign: Arabic tāʾ marbūṭa (ـة) corresponds to Hebrew -ָה / -ת. Both languages also have feminines without the ending, which must be learnt (Hebrew כּוֹס)."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish has no gender at all; in Hebrew every noun is masculine or feminine, and pronouns, demonstratives, adjectives and verbs agree with it."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese nouns have no gender; in Hebrew every noun has one, even a table (שֻׁלְחָן m.) or a bed (מִטָּה f.)."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "Korean nouns have no gender; Hebrew gives every noun one, and the words around it change for it."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish has no gender (hän is “he” and “she”); Hebrew gives every noun a gender, which decides the form of the words that agree with it."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian has no gender (ő is “he” and “she”); in Hebrew each noun is masculine or feminine."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili sorts nouns into classes with prefixes (m-/wa-, ki-/vi-) that the other words copy; Hebrew does the same with only two classes, masculine and feminine, marked by endings."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda noun classes (omu-/aba-, eki-/ebi- …) are copied by the words around the noun; Hebrew has only two classes — masculine and feminine — marked by endings rather than prefixes."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns have no gender; in Hebrew every noun is masculine or feminine."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese nouns have no gender; in Hebrew every noun has one, and the words around it agree with it."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut has no gender; Hebrew has two, on every noun, and they decide the form of the words around it."
   }
  ]
 }

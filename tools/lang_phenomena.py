@@ -84,6 +84,7 @@ def for_learner(ph, prof, knows):
     for p in ph:
         tags = p.get('typology') or []
         if not tags: continue
+        if p.get('specific'): (fam if any(k in (p.get('alsoIn') or []) for k in knows) else new).append(p); continue   # tags only approximate it
         ok = all(any(prof[k]['values'].get(t['feature']) == t['value'] for k in knows if k in prof) for t in tags)
         (fam if ok else new).append(p)
     return new, fam

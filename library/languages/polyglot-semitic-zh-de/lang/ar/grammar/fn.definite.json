@@ -121,7 +121,17 @@
      "النَّوَافِذُ an-nawāfiḏu"
     ]
    ],
-   "caption": "Nominative forms. The case vowel changes (-u, -a, -i), the article does not."
+   "caption": "Nominative forms. The case vowel changes (-u, -a, -i), the article does not.",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    },
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "suffix"
+    }
+   ]
   },
   {
    "t": "table",
@@ -141,7 +151,40 @@
    "t": "callout",
    "kind": "key",
    "title": "General = definite.",
-   "text": "الْكُتُبُ مُفِيدَةٌ = books are useful (in general); أُحِبُّ الْقَهْوَةَ = I like coffee. English and German leave the article out here; Arabic, like Greek, puts it in."
+   "text": "الْكُتُبُ مُفِيدَةٌ = books are useful (in general); أُحِبُّ الْقَهْوَةَ = I like coffee. Things meant in general take the article.",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
+   ],
+   "notes": [
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English leaves the article out for things in general (I like coffee); Arabic puts it in: أُحِبُّ الْقَهْوَةَ."
+    },
+    {
+     "for": "de",
+     "rel": "trap",
+     "text": "German says Ich mag Kaffee with no article; Arabic says أُحِبُّ الْقَهْوَةَ, with الْ."
+    },
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "Greek puts the article in too: μου αρέσει ο καφές = أُحِبُّ الْقَهْوَةَ."
+    },
+    {
+     "for": "fr",
+     "rel": "same",
+     "text": "As in j’aime le café, the general meaning takes the article: أُحِبُّ الْقَهْوَةَ."
+    },
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "As in me gusta el café, the general meaning takes the article: أُحِبُّ الْقَهْوَةَ."
+    }
+   ]
   },
   {
    "t": "callout",
@@ -227,6 +270,98 @@
    "lang": "ar",
    "fn": "fn.demonstrative",
    "note": "هٰذَا كِتَابٌ (this is a book) vs هٰذَا الْكِتَابُ (this book): the article decides."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "nom.definiteArticle",
+   "value": "prefix"
+  },
+  {
+   "feature": "nom.indefiniteArticle",
+   "value": "suffix"
+  }
+ ],
+ "notes": [
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English the and a become a prefix and an ending: الْبَيْتُ (the house), بَيْتٌ (a house). The fossil al- lives on in English words taken from Arabic: alcohol, algebra, alchemy."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish loans keep the Arabic article — with the sun-letter assimilation: aceite (الزَّيْت az-zayt), azúcar (السُّكَّر as-sukkar), arroz (الرُّزّ ar-ruzz, a variant of أَرُزّ). Spanish has un / una for “a”; Arabic uses the ending -un."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French le / la and un / une become a prefix and an ending: الْبَيْتُ / بَيْتٌ. There is no partitive du / de la: أُرِيدُ قَهْوَةً is “I want (some) coffee”."
+  },
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek has ο / η / το and ένας / μία / ένα; Arabic has one prefix for “the” (الْ, the same for every gender, number and case) and no separate “a”: the ending -un says it."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian has no articles; Arabic marks every noun: الْبَيْتُ (the house) or بَيْتٌ (a house). Ask: do we both know which one? Then الْ."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi has no articles (एक means “one”); Arabic marks every noun as definite (الْ) or indefinite (-un)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian marks “a” with an ending too (کتابی, a book) but has no “the” — only -rā on a definite object; Arabic puts الْ on every definite noun."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi has no articles; Arabic marks every noun as definite or indefinite."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish has bir for “a” and no “the” — only the -ı of a definite object; Arabic puts الْ on every definite noun, subject or object."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese has no articles; Arabic marks every noun: الْبَيْتُ or بَيْتٌ."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish has no articles; Arabic marks every noun, and a noun meant in general takes الْ: أُحِبُّ الْقَهْوَةَ (I like coffee)."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian has a / az and egy and uses the article for things in general too (szeretem a kávét); Arabic does this with الْ, and says “a” with the ending -un."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili has no articles; Arabic marks every noun as definite (الْ) or indefinite (-un)."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "Luganda has no articles; Arabic marks every noun as definite (الْ) or indefinite (-un)."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese has no articles (một means “one”); Arabic marks every noun: الْبَيْتُ or بَيْتٌ."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut has no articles; Arabic marks every noun as definite (الْ) or indefinite (-un)."
   }
  ]
 }

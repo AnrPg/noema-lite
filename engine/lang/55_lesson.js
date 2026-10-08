@@ -57,6 +57,7 @@ function runLesson(nid, langs, { checkOnly = false } = {}) {
 }
 
 function runQueue(queue, { nid, langs, title }) {
+  metNew.clear();   // the 🆕 words of this run, listed at the end (D19)
   const m = $('.lx-main'), bar = h('div', { class: 'lx-progress' }, h('i')), stage = h('div', { class: 'lx-stage' });
   m.innerHTML = ''; m.append(h('div', { class: 'view lx-view lx-session lx-lessonrun', 'data-node': nid }, h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => { save(true); go('#/lesson/' + nid); render(); } }, '✕ Stop'), h('b', { class: 'tiny' }, title), bar), stage));
   const stats = { right: 0, wrong: 0, introduced: 0 }, results = {}, retried = new Set(); let total = queue.length, i = 0;
@@ -115,6 +116,7 @@ function runQueue(queue, { nid, langs, title }) {
       h('p', {}, `${stats.introduced} new words · ${stats.right} right · ${stats.wrong} to practise again`),
       Object.keys(results).length ? h('ul', {}, ...Object.entries(results).map(([c, R]) => h('li', { 'data-lang': c }, info(c).flag, ' ', info(c).name, `: ${R.c}/${R.n} = ${Math.round(R.c / R.n * 100)} % — `, st[c] === 'passed' || st[c] === 'known' || st[c] === 'mastered' ? '✔ passed' : 'not yet (80 % passes)'))) : null,
       langs.some(c => toIntroduce(c, nid, N.known(UI.C, UI.L, c)).length) ? h('p', { class: 'tiny' }, 'More words of this lesson are waiting — continue when you are ready.') : null,
+      newWordsList(),
       h('div', { class: 'row' }, h('button', { class: 'btn primary', onclick: () => go('#/lesson/' + nid) }, 'Back to the lesson'), h('button', { class: 'btn', onclick: () => go('#/') }, 'The map'))));
   }
   document.onkeydown = e => {

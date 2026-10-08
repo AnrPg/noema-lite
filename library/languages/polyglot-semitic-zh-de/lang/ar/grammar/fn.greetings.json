@@ -103,13 +103,29 @@
      "تُصْبِحُونَ عَلَى خَيْرٍ"
     ]
    ],
-   "caption": "“I am sorry” follows the speaker instead: آسِفٌ (a man), آسِفَةٌ (a woman), آسِفُونَ (men or mixed), آسِفَاتٌ (women); عُذْرًا never changes."
+   "caption": "“I am sorry” follows the speaker instead: آسِفٌ (a man), آسِفَةٌ (a woman), آسِفُونَ (men or mixed), آسِفَاتٌ (women); عُذْرًا never changes.",
+   "typology": [
+    {
+     "feature": "prag.genderedSpeech",
+     "value": "grammatical"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "Register.",
-   "text": "Fine everywhere, also formal: السَّلَامُ عَلَيْكُمْ، صَبَاحُ الْخَيْرِ، إِلَى اللِّقَاءِ، مِنْ فَضْلِكَ، تَشَرَّفْنَا. Everyday and friendly: أَهْلًا، مَرْحَبًا، مَعَ السَّلَامَةِ، أَرَاكَ لَاحِقًا. Respect comes from titles, not from the pronoun: يَا أُسْتَاذُ (sir, teacher), يَا سَيِّدَتِي (madam), حَضْرَتُكَ."
+   "text": "Fine everywhere, also formal: السَّلَامُ عَلَيْكُمْ، صَبَاحُ الْخَيْرِ، إِلَى اللِّقَاءِ، مِنْ فَضْلِكَ، تَشَرَّفْنَا. Everyday and friendly: أَهْلًا، مَرْحَبًا، مَعَ السَّلَامَةِ، أَرَاكَ لَاحِقًا. Respect comes from titles, not from the pronoun: يَا أُسْتَاذُ (sir, teacher), يَا سَيِّدَتِي (madam), حَضْرَتُكَ.",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    },
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -270,6 +286,97 @@
    "lang": "zh",
    "fn": "fn.greetings",
    "note": "Chinese shows politeness with 您 (你好 / 您好) and has no gender in “you” at all."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "none"
+  },
+  {
+   "feature": "prag.genderedSpeech",
+   "value": "grammatical"
+  },
+  {
+   "feature": "prag.speechLevels",
+   "value": "none"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek chooses γεια σου / γεια σας by politeness and number; Arabic chooses by the listener’s gender and number (كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ), and many greetings have a fixed, different answer (صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ)."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian chooses здравствуй / здравствуйте by politeness; Arabic formulas change by gender instead, and have set answers (مَسَاءُ الْخَيْرِ → مَسَاءُ النُّورِ)."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish answers Buenos días with the same words and picks ¿cómo estás? / ¿cómo está? by politeness; Arabic answers صَبَاحُ الْخَيْرِ with صَبَاحُ النُّورِ and picks كَيْفَ حَالُكَ / حَالُكِ by gender."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English answers “Good morning” with the same words; Arabic has a set answer (صَبَاحُ النُّورِ, “morning of light”), and “how are you?” and “please” change with the listener’s gender."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French changes greetings by politeness (comment vas-tu / comment allez-vous); Arabic changes them by gender and number, and politeness comes from titles (يَا أُسْتَاذُ)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi and Urdu use Arabic words in greetings too — सलाम, शुक्रिया (from شُكْر) —, but where नमस्ते serves for hello and goodbye, Arabic has separate formulas, each with its answer."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian asks about your حال as Arabic does (حال شما چطور است؟ — كَيْفَ حَالُكَ؟) and uses سلام; Arabic adds fixed answers and changes the ending by the listener’s gender."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish greets with Arabic formulas itself: merhaba (مَرْحَبًا), selamün aleyküm — aleyküm selam (السَّلَامُ عَلَيْكُمْ — وَعَلَيْكُمُ السَّلَامُ). It picks sen / siz by politeness; Arabic picks the ending by gender: حَالُكَ / حَالُكِ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese changes greetings by politeness (おはよう / おはようございます); Arabic has no polite verb forms and changes the formula by the listener’s gender and number instead."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean changes the ending by speech level (안녕 / 안녕하세요); Arabic changes the pronoun ending by gender: كَيْفَ حَالُكَ / كَيْفَ حَالُكِ."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish moi, hei and terve have no fixed answers; Arabic pairs are set: السَّلَامُ عَلَيْكُمْ → وَعَلَيْكُمُ السَّلَامُ."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili greetings also come in fixed question–answer pairs, and some are Arabic: Shikamoo is answered marahaba (from مَرْحَبًا), and habari is خَبَر (news)."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda greetings also come in set exchanges (Oli otya? — Bulungi); Arabic answers كَيْفَ حَالُكَ؟ with بِخَيْرٍ, and the question changes with the listener’s gender."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese chooses the word for “you” in a greeting by age and status (chào anh, chào bà); Arabic chooses only by gender and number."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut asks Qanuippit? (how are you?) and answers with one word, qanuingittunga (I’m fine); Arabic uses set phrases: كَيْفَ حَالُكَ؟ — بِخَيْرٍ، شُكْرًا."
   }
  ]
 }

@@ -223,6 +223,10 @@ ok(plan.steps.some(s => s.kind === 'grammar' && s.lang === 'de'), 'when a functi
   ok(tr.new.length > el.new.length, `German looks different from every background: ${tr.new.length} new things for a Turkish speaker, ${el.new.length} for a Greek one`);
   ok(about(tr.new, 'nom.genderCount') && about(el.familiar, 'nom.genderCount'), 'grammatical gender: new for a Turkish speaker, familiar to a Greek one');
   ok(vi.new.some(x => x.p.kind === 'lacks' && x.p.typology.some(t => t.feature === 'tone.lexical')), 'an absence counts too: “no lexical tone” is new for a Vietnamese speaker');
+  { const spec = J('_phenomena/de.json').phenomena.find(p => p.specific && !(p.alsoIn || []).includes('el'));
+    ok(spec && el.new.some(x => x.p.id === spec.id), `a specific phenomenon (${spec?.id}) stays new even when the tags match: only its alsoIn languages make it familiar`);
+    const sv = J('_phenomena/de.json').phenomena.find(p => p.specific && (p.alsoIn || []).includes('nl'));
+    ok(!sv || N.forLearner(CW, 'de', ['nl']).familiar.some(x => x.p.id === sv.id), `… and familiar to a speaker of one of them (${sv?.id}: Dutch)`); }
   ok(N.forLearner(CW, 'de', ['xx']).unknownLangs[0] === 'xx' && N.forLearner(N.course(N.readCourse(read, list)), 'de', ['el']) === null, 'a language without a profile is “unknown”; without the world data there is no guess'); }
 
 // ---------- the word card (§4.6) ----------
@@ -277,10 +281,26 @@ ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCa
     for (const c of C.languages) { const kk = N.known(C, T, c);
       for (const f of Object.keys(C.functions)) for (const x of N.exercises(C, T, c, f, { k: kk, rng: rr, max: 50 })) {
         if (x.lex && !kk.R.has(x.lex)) only = false;
-        if (x.sentence && !C.lang[c].sentenceById[x.sentence].req.every(l => kk.R.has(l))) only = false;
+        if (x.sentence) { const S = C.lang[c].sentenceById[x.sentence], un = S.req.filter(l => !kk.R.has(l)); if (un.length > S.cap || un.some(l => !(x.unknown || []).includes(l))) only = false; }
       } }
   }
-  ok(only, '60 random learners: every generated item uses only words the learner knows'); }
+  ok(only, '60 random learners: every item has at most ⌈30 %⌉ unknown words (D19), all listed as 🆕');
+  // strictKnown: only known words
+  let strict = true;
+  { const T = N.newLearner(C); passFoundations(T); const kk = N.known(C, T, 'de');
+    for (const f of Object.keys(C.functions)) for (const x of N.exercises(C, T, 'de', f, { k: kk, max: 50, strictKnown: true })) if (x.sentence && !C.lang.de.sentenceById[x.sentence].req.every(l => kk.R.has(l))) strict = false; }
+  ok(strict, 'strictKnown: only sentences of known words'); }
+{ // D18: the learner's languages — prototypes for a language without a profile, notes by language / type / family
+  const J = rel => JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'library', 'languages', rel), 'utf8'));
+  const d = N.readCourse(read, list); d.world = { features: J('_typology/features.json').features, languages: J('_typology/languages.json').languages, phenomena: { de: J('_phenomena/de.json').phenomena } };
+  const CW = N.course(d);
+  const inf = N.learnerProfiles(CW, [{ name: 'Kirundi', type: 'agglutinating', family: 'Niger-Congo', level: 'native' }, { code: 'fr', level: 'B1' }]);
+  ok(inf.length === 1 && inf[0].inferred === 'family' && inf[0].values['nom.genderCount'] === J('_typology/languages.json').languages.find(l => l.code === 'sw').values['nom.genderCount'], 'a language without a profile is inferred from its family (Kirundi → the Niger-Congo prototype); B1 languages do not fold anything');
+  const byType = N.learnerProfiles(CW, [{ name: 'X', type: 'isolating' }]);
+  ok(byType[0]?.inferred === 'type' && byType[0].values['tone.lexical'] !== 'none', 'without a known family, the prototype of the type (isolating → tones)');
+  const notes = [{ for: 'tr', rel: 'same', text: 'a' }, { for: 'type:isolating', rel: 'new', text: 'b' }, { for: 'family:Uralic', rel: 'similar', text: 'c' }, { for: 'ja', rel: 'different', text: 'd' }];
+  ok(N.notesFor(CW, notes, [{ code: 'tr' }, { code: 'fi' }]).map(n => n.text).join('') === 'ac' && N.notesFor(CW, notes, [{ name: 'X', type: 'isolating' }]).map(n => n.text).join('') === 'b', 'notes for the learner: by language, by family (fi → Uralic), by type');
+  ok(N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], [{ code: 'el' }]).join() === 'Greek (Modern)' && !N.familiarFrom(CW, [{ feature: 'nom.genderCount', value: 'three' }], [{ code: 'tr' }]).length, 'three genders: familiar from Greek, not from Turkish'); }
 
 // ---------- storage ----------
 const kv = N.toKV(C, L);

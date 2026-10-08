@@ -1,6 +1,28 @@
 {
  "function": "fn.numerals",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "num.base",
+   "value": "decimal"
+  },
+  {
+   "feature": "num.order",
+   "value": "units-first"
+  },
+  {
+   "feature": "nom.pluralAfterNumeral",
+   "value": "plural"
+  },
+  {
+   "feature": "nom.classifiers",
+   "value": "none"
+  },
+  {
+   "feature": "syn.numeralNoun",
+   "value": "num-noun"
+  }
+ ],
  "summary": "German numbers are built like a kit. 0–12 are single words (null, eins, zwei … elf, zwölf); 13–19 are unit + zehn (dreizehn, vierzehn); the tens end in -zig (zwanzig, vierzig … neunzig – but dreißig with ß); then hundert and tausend. Between the tens German says the unit first, joined with und, all in one word: 21 = einundzwanzig (“one-and-twenty”), 45 = fünfundvierzig. Watch three short cuts: sechzehn and sechzig drop the s of sechs, siebzehn and siebzig drop the -en of sieben. Counting, you say eins; before a noun the number one is the article ein / eine / ein with its endings – in everyday German the only number that changes its form (rare old forms like zweier, dreier aside). After zwei and above the noun is plural: zwei Stühle, zehn Kinder. Amounts without a number: viel / viele (much / many), wenig / wenige (little / few), ein bisschen / ein wenig (a little), alle (all), einige / manche (some): the forms without -e go with a singular uncountable noun (viel Papier), the forms with -e with a plural (viele Bücher). Age is said with sein: Ich bin achtzehn.",
  "blocks": [
   {
@@ -111,7 +133,20 @@
     "zwanzig (20)",
     "= einundzwanzig (21)"
    ],
-   "caption": "From 21 on: the unit first, then und, then the ten – one word"
+   "caption": "From 21 on: the unit first, then und, then the ten – one word",
+   "notes": [
+    {
+     "for": "ar",
+     "rel": "similar",
+     "text": "German says the unit first, joined with und, like Arabic wāḥid wa-ʿishrūn: einundzwanzig."
+    }
+   ],
+   "typology": [
+    {
+     "feature": "num.order",
+     "value": "units-first"
+    }
+   ]
   },
   {
    "t": "table",
@@ -167,7 +202,13 @@
      "two-thousand + six-and-twenty"
     ]
    ],
-   "caption": "Bigger numbers – written as one word up to a million"
+   "caption": "Bigger numbers – written as one word up to a million",
+   "typology": [
+    {
+     "feature": "num.order",
+     "value": "units-first"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -227,32 +268,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "Age: sein, not haben",
-   "text": "Ich bin achtzehn (Jahre alt). – I am eighteen. Never *Ich habe achtzehn: German, like Greek, English and Turkish, uses “to be” for age."
+   "text": "Ich bin achtzehn (Jahre alt). – I am eighteen. Never *Ich habe achtzehn: age is said with sein."
   },
   {
    "t": "callout",
    "kind": "tip",
    "title": "Points and commas",
-   "text": "German writes 1.000 for a thousand and 1,5 for one and a half – the opposite of English. 2,50 € = zwei Euro fünfzig."
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "English, Greek, Russian, Turkish",
-     "points": [
-      "say the tens first: twenty-one, είκοσι ένα, двадцать один, yirmi bir",
-      "German turns it round: einundzwanzig – like Arabic, and like old English “four-and-twenty”"
-     ]
-    },
-    {
-     "title": "The noun after a number",
-     "points": [
-      "German: plural from zwei on (zwei Stühle) – as in Greek and English",
-      "Turkish keeps the singular (iki sandalye); Russian changes the case (два стула, пять стульев)"
-     ]
-    }
-   ]
+   "text": "German writes 1.000 for a thousand and 1,5 for one and a half: the point groups the thousands, the comma marks the decimals. 2,50 € = zwei Euro fünfzig."
   }
  ],
  "procedure": {
@@ -277,7 +299,7 @@
   "siebzehn, siebzig (no -en) – but siebenundzwanzig.",
   "dreißig is the only ten with -ßig.",
   "einundzwanzig, not *einsundzwanzig; but hunderteins.",
-  "The noun after a number above one is plural: zwei Bücher, not *zwei Buch (Turkish speakers beware: iki kitap).",
+  "The noun after a number above one is plural: zwei Bücher, not *zwei Buch.",
   "viel / wenig with an uncountable singular, viele / wenige with a plural: viel Papier, viele Stühle.",
   "Age with sein: Ich bin fünfzehn, not *Ich habe fünfzehn."
  ],
@@ -468,6 +490,103 @@
    "lang": "de",
    "fn": "fn.plural.noun",
    "note": "After zwei and above the German noun is plural – learn each noun with its plural."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek says the tens first (είκοσι ένα), German the unit first (einundzwanzig). Greek ένας, τρεις, τέσσερις change for gender; in German only ein does. The plural after δύο and age with είμαι work as in German."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian says двадцать один, German einundzwanzig. After два / три / четыре Russian uses the genitive singular and after пять the genitive plural; German simply uses the plural (zwei Stühle, fünf Stühle). Age is Мне двадцать лет in Russian, Ich bin zwanzig in German."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "veintiuno puts the tens first; German says einundzwanzig. Age takes tener (tengo veinte años) but sein in German: Ich bin zwanzig. The decimal comma (1,5) is the same."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English says twenty-one, German einundzwanzig (as in old “four-and-twenty”); the teens agree (fourteen – vierzehn). German writes 1.000 and 1,5 – the point and comma the other way round."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "French vingt et un has the tens first, and soixante-dix, quatre-vingts count in twenties; German is decimal throughout, but puts the unit first: einundzwanzig, siebzig, achtzig. Age takes avoir (j’ai vingt ans), but sein in German."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi also says the unit first (paccīs = 25), but its numbers up to 100 are fused words learned one by one; German builds them openly (fünfundzwanzig). Large numbers go by lākh and karoṛ in Hindi, by thousands in German (hunderttausend)."
+  },
+  {
+   "for": "fa",
+   "rel": "trap",
+   "text": "Persian says the tens first (bist-o yek) and keeps the noun singular after a number (do ketāb); German says einundzwanzig and uses the plural: zwei Bücher."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi also says the unit first in its fused numbers (ekvīs = 21); German builds them openly: einundzwanzig."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic numbers 3–10 take the opposite gender to the noun and govern different cases (thalāthatu kutubin); German numbers never change except ein, and the noun is just plural: drei Bücher."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew numbers have masculine and feminine forms (shlosha / shalosh) and say the tens first (esrim ve-echad); German numbers do not change (except ein) and say einundzwanzig."
+  },
+  {
+   "for": "tr",
+   "rel": "trap",
+   "text": "Turkish keeps the noun singular after a number (iki kitap); German needs the plural (zwei Bücher). Turkish says the tens first (yirmi bir); German says einundzwanzig."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese counts things with counters (hon ni-satsu, two books) and groups large numbers by ten thousands (man); German puts the number straight before a plural noun (zwei Bücher) and groups by thousands (zehntausend)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean uses counters (chaek du gwon) and two sets of numbers; German has one set and no counters: zwei Bücher."
+  },
+  {
+   "for": "fi",
+   "rel": "trap",
+   "text": "After a number Finnish uses the partitive singular (kaksi kirjaa); German uses the plural (zwei Bücher). Finnish says kaksikymmentäyksi, tens first; German says einundzwanzig."
+  },
+  {
+   "for": "hu",
+   "rel": "trap",
+   "text": "Hungarian keeps the noun singular after a number (két könyv) and says the tens first (huszonegy); German uses the plural and the unit first: zwei Bücher, einundzwanzig."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili says the tens first with na (ishirini na moja) and makes some numbers agree with the noun class (watu wawili, vitabu viwili); German says einundzwanzig, and only ein agrees."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese needs a measure word (两本书) and says the tens first (二十一); German has no measure words, puts the unit first (einundzwanzig) and makes the noun plural: zwei Bücher."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses classifiers (hai con mèo) and says the tens first (hai mươi mốt); German uses neither: zwei Katzen, einundzwanzig."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has a dual: two of something take their own ending (inuuk, two people). German has no dual: zwei takes the ordinary plural (zwei Menschen, zwei Bücher)."
   }
  ]
 }

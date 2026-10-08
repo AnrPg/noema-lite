@@ -1,7 +1,17 @@
 {
  "function": "fn.demonstrative",
  "status": "realized",
- "summary": "“This” is זֶה (m.), זֹאת (f.), and “these” אֵלֶּה (both genders). It is used in two ways. Presenting (“this is …”), it stands alone at the start, without an article, and agrees with what it presents: זֶה מוֹרֶה, זֹאת מוֹרָה, אֵלֶּה מוֹרִים — and it also covers English “that is …”. Pointing out which one (“this boy”), it follows the noun like an adjective, and both take the article: הַיֶּלֶד הַזֶּה, הַיַּלְדָּה הַזֹּאת, הַיְּלָדִים הָאֵלֶּה. “That / those” is the article + “he, she, they”: הַהוּא, הַהִיא, הָהֵם, הָהֵן — also after a definite noun: הָאִשָּׁה הַהִיא “that woman”. Here is פֹּה (everyday) or כָּאן (a little more formal); there is שָׁם.",
+ "typology": [
+  {
+   "feature": "syn.demonstrativeNoun",
+   "value": "noun-dem"
+  },
+  {
+   "feature": "nom.genderCount",
+   "value": "two"
+  }
+ ],
+ "summary": "“This” is זֶה (m.), זֹאת (f.), and “these” אֵלֶּה (both genders). It is used in two ways. Presenting (“this is …”), it stands alone at the start, without an article, and agrees with what it presents: זֶה מוֹרֶה, זֹאת מוֹרָה, אֵלֶּה מוֹרִים — also for something far away (“that is …”). Pointing out which one (“this boy”), it follows the noun like an adjective, and both take the article: הַיֶּלֶד הַזֶּה, הַיַּלְדָּה הַזֹּאת, הַיְּלָדִים הָאֵלֶּה. “That / those” is the article + “he, she, they”: הַהוּא, הַהִיא, הָהֵם, הָהֵן — also after a definite noun: הָאִשָּׁה הַהִיא “that woman”. Here is פֹּה (everyday) or כָּאן (a little more formal); there is שָׁם.",
  "blocks": [
   {
    "t": "table",
@@ -34,6 +44,12 @@
      "הָהֵם",
      "הָהֵן"
     ]
+   ],
+   "typology": [
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "noun-dem"
+    }
    ]
   },
   {
@@ -57,6 +73,16 @@
       "noun first, article on both words"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "noun-dem"
+    },
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
    ]
   },
   {
@@ -67,7 +93,17 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "The article goes on both words",
-   "text": "הַבַּיִת הַזֶּה, not *בַּיִת הַזֶּה and not *הַזֶּה בַּיִת. Without the article on the noun, זֶה becomes a sentence: זֶה בַּיִת “this is a house”."
+   "text": "הַבַּיִת הַזֶּה, not *בַּיִת הַזֶּה and not *הַזֶּה בַּיִת. Without the article on the noun, זֶה becomes a sentence: זֶה בַּיִת “this is a house”.",
+   "typology": [
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "noun-dem"
+    },
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -221,6 +257,103 @@
    "lang": "zh",
    "fn": "fn.demonstrative",
    "note": "Chinese 这 / 那 do not agree but need a measure word before the noun: 这个人, 那本书."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also puts the article on the noun with a demonstrative (αυτό το βιβλίο); Hebrew puts it on both words and the demonstrative follows: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian это presents (это книга) and этот / эта / это points (эта книга) before the noun; Hebrew זֶה / זֹאת presents too, but pointing is noun + article + demonstrative: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish este / esta / estos come before the noun without an article; Hebrew puts the demonstrative after the noun and gives both the article: הַבַּיִת הַזֶּה. Spanish also distinguishes ese and aquel; Hebrew has “this” and “that” only."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "“This is a house” and “this house” look alike in English; in Hebrew they are different: זֶה בַּיִת is a sentence, הַבַּיִת הַזֶּה a phrase. And “that is …” is still זֶה."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French ce / cette / ces stand before the noun (cette maison); Hebrew says “the house the-this”: הַבַּיִת הַזֶּה. For presenting, זֶה works like c’est."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German dieser / diese / dieses stand before the noun and change for case; Hebrew puts the demonstrative after the noun, with the article on both: הַבַּיִת הַזֶּה."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi यह / वह come before the noun (यह घर); Hebrew puts the demonstrative after the noun and adds the article twice: הַבַּיִת הַזֶּה."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian این / آن come before the noun (این خانه); Hebrew puts זֶה after the noun, both with the article: הַבַּיִת הַזֶּה."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi हा / ही / हे agree in gender like זֶה / זֹאת, but stand before the noun (हा मुलगा); in Hebrew the demonstrative follows the noun: הַיֶּלֶד הַזֶּה."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic puts the demonstrative first, before a definite noun (هٰذَا الْبَيْتُ); Hebrew puts it after, and both words take the article: הַבַּיִת הַזֶּה."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish bu / şu / o come before the noun and have no gender (bu ev); Hebrew follows the noun and agrees with it: הַבַּיִת הַזֶּה, הַדִּירָה הַזֹּאת."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese has three distances (この / その / あの) before the noun; Hebrew has two (הַזֶּה / הַהוּא), after the noun and with the article."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean 이 / 그 / 저 distinguish three distances and stand before the noun; Hebrew has two, after the noun: הַבַּיִת הַזֶּה, הַבַּיִת הַהוּא."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish tämä / tuo / se precede the noun and take case endings; Hebrew demonstratives follow the noun, take the article and agree in gender."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also puts the demonstrative after the noun and makes it agree (kitabu hiki “this book”, vitabu hivi); Hebrew does the same with two genders: הַסֵּפֶר הַזֶּה, הַסְּפָרִים הָאֵלֶּה."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda demonstratives also follow the noun and agree with its class (omuntu ono “this person”); Hebrew does the same with two genders and adds the article to both words: הָאִישׁ הַזֶּה."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese 这 / 那 come first and need a measure word (这本书); Hebrew needs no measure word and puts the demonstrative after the noun: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese also puts the demonstrative after the noun (cuốn sách này “this book”); Hebrew adds the article to both words and makes them agree: הַסֵּפֶר הַזֶּה, הַמְּנוֹרָה הַזֹּאת."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut demonstratives distinguish many places (up there, down there, out there, inside …) and whether the thing is seen; Hebrew distinguishes only near (הַזֶּה) and far (הַהוּא)."
   }
  ]
 }

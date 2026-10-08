@@ -1,6 +1,16 @@
 {
  "function": "fn.case",
  "status": "absent",
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "none"
+  },
+  {
+   "feature": "nom.caseMarking",
+   "value": "prepositional-clitics"
+  }
+ ],
  "summary": "Hebrew has no cases, so a preposition never changes the form of the noun after it: הַבַּיִת is the same in הַבַּיִת גָּדוֹל, בַּבַּיִת, לַבַּיִת and מֵהַבַּיִת. The meaning a case would carry is carried by the preposition alone — and “where?”, “where to?” and “where from?”, which German shows with the dative and the accusative (in der Stadt / in die Stadt), Hebrew shows with three different prepositions: בָּעִיר “in the city”, לָעִיר “to the city”, מֵהָעִיר “from the city” (the question words are אֵיפֹה? לְאָן? מֵאֵיפֹה?). What does change is only spelling at the start of the word: the article fuses with בְּ and לְ (בַּבַּיִת), מִ doubles the first letter (מִשְּׂמֹאל), and a בגדכפ״ת letter loses its dot after a prefix (בְּבֵית). Pronouns are not declined either: “me, to me, with me” are prepositions with personal endings (אוֹתִי, לִי, אִתִּי). A few old words still carry a fossil of the Biblical directional ending ־ָה “towards”: הַבַּיְתָה “home(wards)”, הַחוּצָה “outwards”, צָפוֹנָה “northwards”.",
  "blocks": [
   {
@@ -31,13 +41,33 @@
      "مِنَ الْمَدِينَةِ (genitive)"
     ]
    ],
-   "caption": "Hebrew עִיר stays עִיר; only the preposition changes."
+   "caption": "Hebrew עִיר stays עִיר; only the preposition changes.",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    },
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "What does the work of the cases",
-   "text": "The preposition (בְּ, לְ, מִ, עִם …), the word order (subject first), אֶת before a definite object (lesson 7), and personal endings on prepositions (לִי, אִתִּי)."
+   "text": "The preposition (בְּ, לְ, מִ, עִם …), the word order (subject first), אֶת before a definite object (lesson 7), and personal endings on prepositions (לִי, אִתִּי).",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    },
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -50,12 +80,6 @@
    "kind": "tip",
    "title": "Wo? Wohin? Woher?",
    "text": "Hebrew has the same three questions as German — אֵיפֹה? לְאָן? מֵאֵיפֹה? — but answers them with בְּ, לְ and מִ instead of dative and accusative."
-  },
-  {
-   "t": "callout",
-   "kind": "tip",
-   "title": "For you",
-   "text": "Greek (στο σπίτι / από το σπίτι — the accusative after every preposition), Russian (в доме / в дом / из дома) and Turkish (evde / eve / evden) all change the noun; Hebrew, like English, does not."
   },
   {
    "t": "ask",
@@ -150,6 +174,103 @@
    "lang": "zh",
    "fn": "fn.prep.core",
    "note": "Chinese has no cases either: 在, 从 and 往 / 到 do the work, as בְּ, מִ and לְ do in Hebrew."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek puts the accusative after every preposition (στο σπίτι, από το σπίτι); Hebrew changes nothing in the noun: בַּבַּיִת, מֵהַבַּיִת."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian shows where / where to / where from with the case (в доме / в дом / из дома); Hebrew uses three prepositions and an unchanged noun: בַּבַּיִת / לַבַּיִת / מֵהַבַּיִת."
+  },
+  {
+   "for": "es",
+   "rel": "same",
+   "text": "As in Spanish (en casa, a casa, de casa), the preposition alone carries the meaning; the noun never changes."
+  },
+  {
+   "for": "en",
+   "rel": "same",
+   "text": "As in English (in, to, from the house), the preposition carries the meaning and the noun stays the same: בַּבַּיִת, לַבַּיִת, מֵהַבַּיִת."
+  },
+  {
+   "for": "fr",
+   "rel": "same",
+   "text": "As in French (dans, à, de la maison), the noun stays the same; only the preposition changes."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German two-way prepositions choose the dative or the accusative (in der / in die Stadt); Hebrew chooses the preposition instead: בָּעִיר / לָעִיר."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi puts many nouns in an oblique form before a postposition (लड़का → लड़के से); Hebrew nouns never change after a preposition."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian also leaves the noun unchanged after a preposition (در شهر، به شهر، از شهر) — the same picture as בָּעִיר, לָעִיר, מֵהָעִיר."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi changes the noun to an oblique stem before its endings (मुलगा → मुलाला); Hebrew nouns never change after a preposition."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic puts the noun in the genitive after every preposition (فِي الْمَدِينَةِ); Hebrew lost the case endings: בָּעִיר."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish evde / eve / evden change the noun; Hebrew uses three prepositions and leaves the noun alone: בַּבַּיִת / לַבַּיִת / מֵהַבַּיִת."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese で / に / から follow the noun; Hebrew בְּ / לְ / מִ come before it and are written onto it."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has a case for each of in / into / out of (talossa, taloon, talosta); Hebrew uses בְּ / לְ / מִ before an unchanged noun."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian has separate case suffixes for in / into / out of (házban, házba, házból); Hebrew uses בְּ / לְ / מִ."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili nouns do not change for case either; where / where to / where from come from the verb and small words (nyumbani, kutoka) — in Hebrew from בְּ / לְ / מִ."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda uses locative words before the noun (mu nnyumba “in the house”), much as Hebrew uses בְּ; the noun itself has no case."
+  },
+  {
+   "for": "zh",
+   "rel": "same",
+   "text": "As in Chinese, the noun never changes; the preposition (在 / 到 / 从 ~ בְּ / לְ / מִ) does the work."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "As in Vietnamese (ở / đến / từ), the preposition carries the meaning and the noun stays the same."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks where / where to / where from with case endings (-mi, -mut, -mit); Hebrew uses prefixes with an unchanged noun."
   }
  ]
 }

@@ -8,54 +8,89 @@
    "head": [
     "day",
     "Arabic",
-    "literally",
-    "Greek"
+    "literally"
    ],
    "rows": [
     [
      "Sunday",
      "الْأَحَدُ",
-     "the one",
-     "Κυριακή"
+     "the one"
     ],
     [
      "Monday",
      "الِاثْنَيْنِ",
-     "the two",
-     "Δευτέρα (the second)"
+     "the two"
     ],
     [
      "Tuesday",
      "الثُّلَاثَاءُ",
-     "the three",
-     "Τρίτη (the third)"
+     "the three"
     ],
     [
      "Wednesday",
      "الْأَرْبِعَاءُ",
-     "the four",
-     "Τετάρτη (the fourth)"
+     "the four"
     ],
     [
      "Thursday",
      "الْخَمِيسُ",
-     "the five",
-     "Πέμπτη (the fifth)"
+     "the five"
     ],
     [
      "Friday",
      "الْجُمُعَةُ",
-     "the gathering",
-     "Παρασκευή"
+     "the gathering"
     ],
     [
      "Saturday",
      "السَّبْتُ",
-     "the Sabbath",
-     "Σάββατο"
+     "the Sabbath"
     ]
    ],
-   "caption": "Always with the article; on a day = يَوْمَ + the name in the genitive: يَوْمَ الْجُمُعَةِ."
+   "caption": "Always with the article; on a day = يَوْمَ + the name in the genitive: يَوْمَ الْجُمُعَةِ.",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
+   ],
+   "notes": [
+    {
+     "for": "el",
+     "rel": "same",
+     "text": "Greek also numbers the days from Sunday: Δευτέρα (second), Τρίτη, Τετάρτη, Πέμπτη — Arabic الِاثْنَيْن, الثُّلَاثَاء, الْأَرْبِعَاء, الْخَمِيس; and Σάββατο is السَّبْت."
+    },
+    {
+     "for": "vi",
+     "rel": "same",
+     "text": "Vietnamese numbers the days the same way: thứ hai (Monday, “second”), thứ ba, thứ tư, thứ năm — like الِاثْنَيْن, الثُّلَاثَاء, الْأَرْبِعَاء, الْخَمِيس."
+    },
+    {
+     "for": "fa",
+     "rel": "same",
+     "text": "Persian also counts from Saturday (شنبه): یکشنبه (Sunday, “one”) like الْأَحَد, then دوشنبه, سه‌شنبه, چهارشنبه, پنجشنبه; Friday is جمعه — the Arabic الْجُمُعَة."
+    },
+    {
+     "for": "ru",
+     "rel": "trap",
+     "text": "Russian вторник (“second”) is Tuesday, but Arabic الِاثْنَيْن (“the two”) is Monday: Arabic counts from Sunday."
+    },
+    {
+     "for": "sw",
+     "rel": "trap",
+     "text": "Swahili counts from Saturday: Jumatatu (“day three”) is Monday, while Arabic الثُّلَاثَاء (“the three”) is Tuesday. Alhamisi and Ijumaa are the Arabic الْخَمِيس and الْجُمُعَة."
+    },
+    {
+     "for": "tr",
+     "rel": "similar",
+     "text": "Turkish Cuma is الْجُمُعَة and Cumartesi (Saturday) is “after Friday”; Çarşamba and Perşembe are Persian numbers (fourth, fifth)."
+    },
+    {
+     "for": "zh",
+     "rel": "trap",
+     "text": "Chinese 星期一 (“week-one”) is Monday, but Arabic الْأَحَد (“the one”) is Sunday: Arabic counts from Sunday."
+    }
+   ]
   },
   {
    "t": "table",
@@ -95,6 +130,12 @@
      "اللَّيْلَةَ (tonight)",
      "—"
     ]
+   ],
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "three"
+    }
    ]
   },
   {
@@ -264,7 +305,7 @@
     "the first"
    ],
    "answer": "the fifth",
-   "why": "From خَمْسَة (five) — like Greek Πέμπτη."
+   "why": "From خَمْسَة (five)."
   },
   {
    "q": "“I go to work in the morning.”",
@@ -328,6 +369,64 @@
    "lang": "ar",
    "fn": "fn.prep.time",
    "note": "Lesson 15: before, after, until, since — and the clock."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "time.dayNames",
+   "value": "numbered"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "Greek also says “when” with a bare accusative: τη Δευτέρα (on Monday), το πρωί (in the morning) — like يَوْمَ الِاثْنَيْنِ, صَبَاحًا."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian uses the instrumental for parts of the day (утром, вечером, ночью) where Arabic uses the accusative (صَبَاحًا, مَسَاءً, لَيْلًا) — a bare case form in both, with no preposition."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English names the days after gods and planets (Sunday, Monday …); Arabic mostly numbers them, starting from Sunday: الْأَحَد, “the one”. “On Monday” needs no preposition: يَوْمَ الِاثْنَيْنِ."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish lunes, martes … come from planets, but el lunes (“on Monday”) needs no preposition — like Arabic يَوْمَ الِاثْنَيْنِ."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi names the days after planets (सोमवार, मंगलवार …); Arabic numbers them from Sunday."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi सोमवार, मंगळवार … are planet names; Arabic numbers the days from Sunday."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese 月曜日, 火曜日 … are named after the moon and the planets; Arabic numbers the days."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish maanantai, tiistai … are borrowed Germanic names (keskiviikko is “mid-week”); Arabic numbers the days."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian hétfő (“week’s head”) and vasárnap (“market day”) describe the days; Arabic numbers them."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut says “when” with a case ending on the time word — ullumi, today (“on the day”, locative -mi); Arabic uses the bare accusative: الْيَوْمَ, صَبَاحًا."
   }
  ]
 }

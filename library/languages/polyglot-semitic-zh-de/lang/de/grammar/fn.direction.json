@@ -1,6 +1,20 @@
 {
  "function": "fn.direction",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "sem.motionFraming",
+   "value": "satellite-framed"
+  },
+  {
+   "feature": "verb.particleVerbs",
+   "value": "separable"
+  },
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  }
+ ],
  "summary": "German asks three different “where” questions and answers each with its own prepositions and cases: Wo? (where – a place, no movement) takes the dative: Ich bin im Park, beim Arzt, zu Hause. Wohin? (where to – a goal) takes nach for cities and countries without an article (nach Berlin, nach Griechenland, nach Hause), zu + dative for people, shops, buildings and events (zum Arzt, zur Arbeit, zum Bahnhof), and in / an / auf + ACCUSATIVE for going into or onto a place (in den Park, in die Stadt, ins Kino). Woher? (where from) takes aus + dative for coming out of a country, a city or a building (aus Griechenland, aus der Schule) and von + dative for a person, a point or work (vom Bahnhof, von der Arbeit). The verb shows HOW you move: gehen is on foot, fahren is by any vehicle (Ich fahre mit dem Bus), fliegen is by plane; laufen is everyday “walk” (and “run” in sport), rennen is “run fast”. kommen is movement towards the speaker, gehen away from the speaker. The means of transport takes mit + dative: mit dem Bus, mit dem Zug, mit dem Auto, mit dem Fahrrad, mit dem Schiff; on foot is zu Fuß. Many verbs of movement are separable: the particle goes to the end of the clause – Der Zug kommt um acht Uhr an. Ich komme morgen zurück. Kommen Sie herein! – and her- (towards me) / hin- (away from me) mark the direction: herein (in here), hinein (in there); speech shortens both to rein. To leave a place is verlassen + accusative (Ich verlasse das Haus) or, without an object, weggehen (Ich gehe weg).",
  "blocks": [
   {
@@ -156,7 +170,13 @@
      "Ich bleibe zu Hause. · Ich warte auf den Bus."
     ]
    ],
-   "caption": "The verbs of this step"
+   "caption": "The verbs of this step",
+   "typology": [
+    {
+     "feature": "sem.motionFraming",
+     "value": "satellite-framed"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -167,7 +187,13 @@
     "in München",
     "an (particle, last)"
    ],
-   "caption": "A separable verb: the particle closes the clause"
+   "caption": "A separable verb: the particle closes the clause",
+   "typology": [
+    {
+     "feature": "verb.particleVerbs",
+     "value": "separable"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -192,30 +218,6 @@
    "kind": "pitfall",
    "title": "nach Hause – zu Hause",
    "text": "nach Hause = (going) home; zu Hause = at home: Ich gehe nach Hause. – Ich bin zu Hause."
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek",
-     "points": [
-      "σε covers “where” and “where to”: Είμαι στο πάρκο / Πάω στο πάρκο",
-      "German splits them: im Park (dative) / in den Park (accusative); one verb πηγαίνω, two in German: gehen / fahren"
-     ]
-    },
-    {
-     "title": "Russian",
-     "points": [
-      "the same logic as German: в парке (prepositional, where) / в парк (accusative, where to); идти (on foot) / ехать (by vehicle) = gehen / fahren"
-     ]
-    },
-    {
-     "title": "Turkish",
-     "points": [
-      "suffixes instead of prepositions: parkta (where), parka (where to), parktan (where from) – one ending for each German question"
-     ]
-    }
-   ]
   }
  ],
  "procedure": {
@@ -429,6 +431,103 @@
    "lang": "de",
    "fn": "fn.case",
    "note": "nach, zu, aus, von, mit always take the dative."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "σε covers “where” and “where to” (Είμαι στο πάρκο / Πάω στο πάρκο); German splits them: im Park (dative) / in den Park (accusative). πηγαίνω is one verb for walking and riding; German has gehen and fahren."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "The same logic: в парке (where) / в парк (where to), and идти / ехать = gehen / fahren. German has no pairs like идти / ходить, and its particles (ankommen, weggehen) separate from the verb."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "ir is any way of going; German separates gehen (on foot) and fahren (by vehicle). Spanish puts the direction in the verb (entrar, salir); German puts it in a particle (hineingehen, hinausgehen)."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "Particles like come in, go away are German separable verbs (hereinkommen, weggehen) – but the German particle goes to the end of the clause: Kommen Sie herein! “go” by car or train is fahren, not gehen."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French puts the direction in the verb (entrer, sortir, partir) and uses aller for any way of going; German uses gehen / fahren plus particles: hineingehen, weggehen."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "jānā (go) and ānā (come) cover any way of moving; German splits gehen (on foot) and fahren (by vehicle)."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "raftan (go) covers walking and riding; German chooses gehen or fahren."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "jāṇe (go) and yeṇe (come) cover any way of moving; German chooses gehen or fahren."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "dhahaba (go) covers any way of going; German chooses gehen or fahren. ilā (to) and min (from) take the genitive; German nach, zu, aus, von take the dative."
+  },
+  {
+   "for": "he",
+   "rel": "same",
+   "text": "halach / nasa split like gehen / fahren: on foot or by vehicle."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish suffixes answer the three questions (parkta, parka, parktan); German uses prepositions and switches the case: im Park, in den Park, aus dem Park. gitmek covers walking and riding."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "iku (go) / kuru (come) cover any means, with de for the vehicle (densha de iku); German chooses fahren and says mit dem Zug."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "gada / oda cover any means (beoseu-ro gada); German chooses fahren and mit dem Bus."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish cases answer the same three questions (puistossa, puistoon, puistosta – im Park, in den Park, aus dem Park); mennä covers any means, German needs gehen or fahren."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian suffixes split where / where to / where from (a parkban, a parkba, a parkból) as German does with cases; menni covers any means."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "kwenda covers any means, and the vehicle takes kwa (kwa basi); German uses fahren and mit + dative (mit dem Bus)."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "来 / 去 add the direction like her- / hin-: 进来 = herein, 进去 = hinein. German puts these particles at the end of the clause (Kommen Sie herein!)."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "đi covers any way of going (đi bộ, đi xe buýt); German chooses gehen or fahren."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut endings answer where / where to / where from (-mi, -mut, -mit), as German Wo? / Wohin? / Woher? do with prepositions and case."
   }
  ]
 }

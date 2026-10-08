@@ -1,7 +1,21 @@
 {
  "function": "fn.negation",
  "status": "realized",
- "summary": "German has two everyday negators. kein (declined like ein, with a plural keine) negates a noun that would otherwise have ein or no article: ein Apfel → kein Apfel, Wasser → kein Wasser, Äpfel → keine Äpfel; as an object, the masculine is keinen (Ich trinke keinen Kaffee). nicht negates everything else: verbs, adjectives, places, and nouns with der/die/das, dieser or a possessive (Ich mag den Käse nicht. Das ist nicht mein Bruder.). In a simple sentence nicht stands at the end, after the object (Ich esse den Fisch nicht), but before an adjective, a place or a second verb (nicht gut, nicht hier, nicht kochen). The other negative words replace both: nichts (nothing), niemand (nobody; object niemanden), nie / niemals (never) and weder … noch (neither … nor). Standard German allows only ONE negation per clause: Ich esse nichts – never *Ich esse nicht nichts, although Greek (δεν τρώω τίποτα) and Russian (я ничего не ем) need two. The answer word is nein; “yes” to a negative question is doch (S09).",
+ "typology": [
+  {
+   "feature": "syn.negation",
+   "value": "particle"
+  },
+  {
+   "feature": "syn.negationPosition",
+   "value": "varies"
+  },
+  {
+   "feature": "syn.negativeConcord",
+   "value": "no-concord"
+  }
+ ],
+ "summary": "German has two everyday negators. kein (declined like ein, with a plural keine) negates a noun that would otherwise have ein or no article: ein Apfel → kein Apfel, Wasser → kein Wasser, Äpfel → keine Äpfel; as an object, the masculine is keinen (Ich trinke keinen Kaffee). nicht negates everything else: verbs, adjectives, places, and nouns with der/die/das, dieser or a possessive (Ich mag den Käse nicht. Das ist nicht mein Bruder.). In a simple sentence nicht stands at the end, after the object (Ich esse den Fisch nicht), but before an adjective, a place or a second verb (nicht gut, nicht hier, nicht kochen). The other negative words replace both: nichts (nothing), niemand (nobody; object niemanden), nie / niemals (never) and weder … noch (neither … nor). Standard German allows only ONE negation per clause: Ich esse nichts – never *Ich esse nicht nichts: a negative word is the whole negation. The answer word is nein; “yes” to a negative question is doch (S09).",
  "blocks": [
   {
    "t": "table",
@@ -94,7 +108,13 @@
      "Ich trinke nicht den Tee (sondern den Kaffee)."
     ]
    ],
-   "caption": "Where nicht goes"
+   "caption": "Where nicht goes",
+   "typology": [
+    {
+     "feature": "syn.negationPosition",
+     "value": "varies"
+    }
+   ]
   },
   {
    "t": "table",
@@ -125,38 +145,31 @@
      "Ich trinke weder Tee noch Kaffee."
     ]
    ],
-   "caption": "The other negative words – each one is the whole negation"
+   "caption": "The other negative words – each one is the whole negation",
+   "typology": [
+    {
+     "feature": "syn.negativeConcord",
+     "value": "no-concord"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "Only one negation",
-   "text": "Ich esse nichts. Niemand kocht. Ich trinke nie Kaffee. – No nicht or kein beside them. Greek and Russian double the negation (δεν … τίποτα, ничего не …); German does not."
+   "text": "Ich esse nichts. Niemand kocht. Ich trinke nie Kaffee. – No nicht or kein beside them: one negative word per clause is enough.",
+   "typology": [
+    {
+     "feature": "syn.negativeConcord",
+     "value": "no-concord"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "tip",
    "title": "nein is an answer, not a negator",
    "text": "Nein, danke. Ich will keinen Tee. – nein answers a question; inside the sentence you need nicht or kein."
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek, Russian, Turkish",
-     "points": [
-      "one negator before the verb (δεν, не) or inside it (Turkish -me/-ma: yemiyorum)",
-      "a separate word for “there is no / not have” (Russian нет, Turkish yok)"
-     ]
-    },
-    {
-     "title": "German",
-     "points": [
-      "kein inside the noun phrase (keinen Kaffee), nicht late in the clause",
-      "Ich habe kein Brot covers Greek δεν έχω ψωμί, Russian у меня нет хлеба, Turkish ekmeğim yok"
-     ]
-    }
-   ]
   }
  ],
  "procedure": {
@@ -323,6 +336,103 @@
    "lang": "de",
    "fn": "fn.question.yesno",
    "note": "doch – the “yes” that contradicts a negative question (S09)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "Greek needs δεν with τίποτα (δεν τρώω τίποτα); German has one negation: Ich esse nichts. δεν stands before the verb; nicht usually goes late (Ich esse den Fisch nicht). δεν έχω ψωμί is Ich habe kein Brot."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian doubles the negation (я ничего не ем) and puts не before the verb; German says Ich esse nichts, with nicht late in the clause. у меня нет хлеба is Ich habe kein Brot."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Spanish needs no with nada (no como nada); German has one negation: Ich esse nichts."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "“no” before a noun is kein (no bread – kein Brot), and standard English also has one negation (I eat nothing). But German has no do: Ich esse nicht, and nein is only the answer word."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "ne … pas surrounds the verb; German has one word, late in the clause (Ich esse den Fisch nicht). pas de pain is kein Brot, ne … rien is nichts."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "nahī̃ stands before the verb (maĩ nahī̃ khātā); German nicht goes late in the clause, and a noun with ein or no article takes kein."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian negates with the prefix na- / ne- on the verb (nemixoram); German uses separate words, nicht or kein."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi puts nāhī after the verb (mī khāt nāhī), which is close to German nicht at the end (Ich esse nicht); a noun with ein or no article takes kein instead."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic changes the negator with the tense and type of sentence (lā, lam, lan, laysa); German uses nicht and kein in every tense."
+  },
+  {
+   "for": "he",
+   "rel": "trap",
+   "text": "Hebrew doubles the negation (af echad lo ba, “nobody not came”) and says ein li for “I have no”; German has one negation (Niemand kommt) and Ich habe kein …"
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish negates inside the verb (yemiyorum), uses değil for nouns and yok for absence (ekmeğim yok); German uses separate words: nicht, kein (Ich habe kein Brot). hiç kimse still needs the negative verb (hiç kimse gelmedi); German niemand stands alone: Niemand kommt."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese negates with a verb ending (tabenai, tabemasen); German uses separate words, nicht and kein."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean puts an before the verb or adds -ji anta; German has nicht late in the clause and kein for nouns."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish negates with a verb that takes the person (en, et, ei … syö); German nicht never changes and kein changes like ein."
+  },
+  {
+   "for": "hu",
+   "rel": "trap",
+   "text": "Hungarian doubles the negation (nem eszem semmit, senki sem jött); German uses one negative word: Ich esse nichts. Niemand kommt."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili negates with prefixes and a changed verb form (ninakula → sili); German leaves the verb as it is and adds nicht or kein."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "不 and 没 stand before the verb (我不吃 / 我没有面包); German has nicht late in the clause and kein for nouns: Ich esse nicht. Ich habe kein Brot."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "không stands before the verb (tôi không ăn); German nicht usually comes later (Ich esse das nicht), and kein negates a noun."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut negates with a suffix inside the verb (-nngit-); German uses separate words: nicht, kein, nichts."
   }
  ]
 }

@@ -1,6 +1,20 @@
 {
  "function": "fn.case",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "four"
+  },
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "nom.caseSyncretism",
+   "value": "core-and-noncore"
+  }
+ ],
  "summary": "After a preposition German puts the noun phrase in a fixed case, and you see it mostly on the article. Six common prepositions always take the dative: aus, bei, mit, nach, von, zu (and seit, gegenüber – later). A few always take the accusative: für, ohne, um, durch (and gegen, bis). Nine prepositions of place take either case (the two-way prepositions: in, an, auf, über, unter, vor, hinter, neben, zwischen): Wo? – where something is – dative: Ich bin in der Küche. Wohin? – where it goes – accusative: Ich will in die Küche. (Fully at S12 and S13.) The dative forms to learn now: der → dem, die → der, das → dem, plural die → den with -n on the noun (mit den Kindern); ein → einem / einer; mein → meinem / meiner, plural meinen; pronouns mir, dir, ihm, ihr, ihm, uns, euch, ihnen, Ihnen – and wem. Weak nouns add -(e)n outside the nominative: mit dem Jungen, beim Polizisten, für den Bauern. Plurals in -s take no extra -n: in den Cafés, in den Büros. über in the sense “about” always takes the accusative: ein Buch über die Stadt.",
  "blocks": [
   {
@@ -27,7 +41,13 @@
      "Wo? in der Küche · Wohin? in die Küche"
     ]
    ],
-   "caption": "Which case after which preposition"
+   "caption": "Which case after which preposition",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -82,7 +102,13 @@
      "die"
     ]
    ],
-   "caption": "The article in the dative (and the accusative for für / ohne)"
+   "caption": "The article in the dative (and the accusative for für / ohne)",
+   "typology": [
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "core-and-noncore"
+    }
+   ]
   },
   {
    "t": "table",
@@ -190,25 +216,6 @@
    "text": "Dative: aus – bei – mit – nach – von – zu (many learners sing it). Accusative: durch – für – ohne – um (and gegen)."
   },
   {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek",
-     "points": [
-      "Greek prepositions take the accusative: σε + αιτιατική (στο σχολείο), από τον γιατρό, με τον αδερφό μου",
-      "German: mostly dative – mit meinem Bruder, vom Arzt"
-     ]
-    },
-    {
-     "title": "Russian and Turkish",
-     "points": [
-      "Russian has the same idea: в школе (where, prepositional) – в школу (where to, accusative)",
-      "Turkish shows it with suffixes: okulda (at school) – okula (to school)"
-     ]
-    }
-   ]
-  },
-  {
    "t": "callout",
    "kind": "tip",
    "title": "Prepositions of time have cases too (S15)",
@@ -233,7 +240,7 @@
   ]
  },
  "traps": [
-  "mit takes the dative even though Greek με takes the accusative: mit meinem Bruder (not *mit meinen Bruder).",
+  "mit always takes the dative: mit meinem Bruder (not *mit meinen Bruder).",
   "für and ohne take the accusative: für meinen Vater, ohne meinen Bruder.",
   "Dative feminine is der: in der Schule, bei der Arbeit – the same word as the masculine nominative.",
   "Dative plural: den + noun with -n: mit den Kindern.",
@@ -469,6 +476,103 @@
    "lang": "de",
    "fn": "fn.prep.place",
    "note": "The two-way prepositions in full: Wo? + dative (S12), Wohin? + accusative (S13)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "Greek prepositions take the accusative (με τον αδερφό μου, από τον γιατρό, στο σχολείο); German mostly the dative: mit meinem Bruder, vom Arzt, in der Schule."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Each Russian preposition also fixes a case, and в школе (where) / в школу (where to) is exactly in der Schule / in die Schule. German has only dative and accusative after its everyday prepositions."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish nouns do not change after a preposition (only pronouns: para mí); German changes the article: für den Vater, mit dem Vater."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English changes only pronouns after a preposition (with him); German changes the article too, and the preposition decides the case: mit dem Vater, für den Vater."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French nouns stay the same after a preposition; German articles change with the preposition’s case: mit der Mutter, für die Mutter."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Every Hindi postposition takes the same oblique form (laṛke ke sāth, laṛke ko); German prepositions take different cases (mit dem Jungen, für den Jungen)."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian nouns do not change after a preposition; German articles change: mit dem Bruder, für den Bruder."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi postpositions all take the oblique form of the noun; German prepositions choose between dative and accusative."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Every Arabic preposition takes the genitive (fī l-bayti, maʿa l-walad); German prepositions take the dative or the accusative, and some take either (in der Küche / in die Küche)."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew nouns do not change after a preposition, and pronouns join it (iti, with me); German keeps the pronoun separate and in its case: mit mir, für dich."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish postpositions also govern a case (yemekten önce, ablative); German prepositions come before the noun and govern dative or accusative: vor dem Essen."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese particles mark the relation directly (gakkō de, gakkō e); German needs a preposition and a case on the article."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean particles do the work alone (hakgyo-eseo, hakgyo-e); German needs a preposition plus the right case."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish postpositions take the genitive (talon edessä); German prepositions come first and take dative or accusative: vor dem Haus."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian postpositions leave the noun as it is (a ház előtt); German prepositions change the article: vor dem Haus."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili has no cases (na, kwa change nothing); German prepositions put the article in the dative or accusative."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese nouns never change after 在, 跟 or 给; German articles change after every preposition: mit dem Bus, für den Vater."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Nothing changes after a Vietnamese preposition; in German the article takes the preposition’s case."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses these relations with case endings and has no prepositions; German combines a preposition with a case on the article: mit dem Bus, in der Küche."
   }
  ]
 }

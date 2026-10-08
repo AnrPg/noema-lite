@@ -1,6 +1,24 @@
 {
  "function": "fn.root.pattern",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "morph.rootPattern",
+   "value": "present"
+  },
+  {
+   "feature": "morph.stemChange",
+   "value": "pervasive"
+  },
+  {
+   "feature": "morph.fusion",
+   "value": "fusional"
+  },
+  {
+   "feature": "verb.lightVerbs",
+   "value": "rare"
+  }
+ ],
  "summary": "Hebrew builds most words from a **root** — usually three consonants that carry a core meaning — poured into a **pattern** of vowels and extra letters that carries the grammar. א־כ־ל means “eat”: אָכַל “he ate”, אוֹכֵל “eats”, לֶאֱכֹל “to eat”, אֹכֶל “food”, מַאֲכָל “a dish”. Verbs come in seven patterns, the **binyanim**; the verbs so far use two. **Paʿal** (also called קַל), the basic one: אָכַל, אָהַב, שָׁתָה, רָצָה, קָנָה — and הָיָה. **Piʿel**: בִּשֵּׁל “to cook” — the middle root letter is doubled (the dot in שּׁ) and the present starts with מְ־: מְבַשֵּׁל. Some root letters are weak: a root ending in ה (שׁ־ת־ה, ר־צ־ה, ק־נ־ה) loses it in many forms (שׁוֹתֶה, שׁוֹתָה, לִשְׁתּוֹת), and the gutturals א, ה, ח, ע take hataf vowels (אוֹהֲבִים, לֶאֱכֹל). Dictionaries list a verb by its past “he” form (אָכַל, בִּשֵּׁל), and many also by the root. Arabic works the same way, often with the same roots: أَكَلَ (ʔakala) “he ate” is א־כ־ל.",
  "blocks": [
   {
@@ -49,7 +67,13 @@
      "סִפּוּר story, סִפְרִיָּה library"
     ]
    ],
-   "caption": "One root, many words: the consonants stay, the vowels and the extra letters change."
+   "caption": "One root, many words: the consonants stay, the vowels and the extra letters change.",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ]
   },
   {
    "t": "table",
@@ -79,7 +103,13 @@
      "לְבַשֵּׁל"
     ]
    ],
-   "caption": "The two binyanim so far; the other five (nifʿal, hifʿil, hufʿal, puʿal, hitpaʿel) come later."
+   "caption": "The two binyanim so far; the other five (nifʿal, hifʿil, hufʿal, puʿal, hitpaʿel) come later.",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ]
   },
   {
    "t": "table",
@@ -139,7 +169,17 @@
    "t": "callout",
    "kind": "key",
    "title": "Root = meaning, pattern = grammar",
-   "text": "Once you know a root, you can guess words you have never seen: from ב־שׁ־ל “cook”, בִּשּׁוּל is “cooking” and בָּשֵׁל “ripe” (cooked by the sun)."
+   "text": "Once you know a root, you can guess words you have never seen: from ב־שׁ־ל “cook”, בִּשּׁוּל is “cooking” and בָּשֵׁל “ripe” (cooked by the sun). New verbs are made the same way, by putting a root into a binyan — not with a helper verb: from טֶלֶפוֹן comes the piʿel טִלְפֵּן “he phoned”.",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    },
+    {
+     "feature": "verb.lightVerbs",
+     "value": "rare"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -151,7 +191,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "Weak letters hide",
-   "text": "A final ה is not written in many forms (שׁוֹתִים, לִשְׁתּוֹת) and a final ה in שׁוֹתֶה / שׁוֹתָה is only the vowel; yet the root is שׁ־ת־ה. Gutturals change the vowels next to them: אוֹהֲבִים, not *אוֹהְבִים."
+   "text": "A final ה is not written in many forms (שׁוֹתִים, לִשְׁתּוֹת) and a final ה in שׁוֹתֶה / שׁוֹתָה is only the vowel; yet the root is שׁ־ת־ה. Gutturals change the vowels next to them: אוֹהֲבִים, not *אוֹהְבִים.",
+   "typology": [
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -165,10 +211,10 @@
      ]
     },
     {
-     "title": "German · English",
+     "title": "German",
      "points": [
       "singen – sang – gesungen – Gesang",
-      "sing – sang – song: vowels change inside a fixed frame — a small taste of the Semitic idea"
+      "vowels change inside a fixed frame of consonants — a small taste of the Semitic idea"
      ]
     },
     {
@@ -177,6 +223,12 @@
       "吃 + 饭 → 吃饭",
       "words are built by joining whole syllables, never by changing vowels inside"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
     }
    ]
   },
@@ -367,6 +419,108 @@
    "lang": "zh",
    "fn": "fn.present",
    "note": "Chinese never changes a word inside: it builds words by joining whole syllables (吃 + 饭 → 吃饭) — the opposite strategy."
+  }
+ ],
+ "notes": [
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "The same system, often with the same roots: א־כ־ל ~ ء ك ل (أَكَلَ), כ־ת־ב ~ ك ت ب, שׁ־ל־ם ~ س ل م. The binyanim match Arabic verb forms: piʿel ~ form II with a doubled middle letter, hifʿil ~ form IV."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek builds words from a stem plus endings and suffixes (γράφω, γράμμα, γραφείο); Hebrew pours three consonants into vowel patterns: א־כ־ל → אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian adds prefixes and suffixes to a stem (писать, писатель, написать); Hebrew keeps the consonants and changes the vowels and pattern letters around them."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish derives with suffixes (cocinar, cocina, cocinero); Hebrew changes the vowel pattern of the root ב־שׁ־ל: בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English sing – sang – song is a small taste of the idea: the consonants stay and the vowels change. In Hebrew this is the main way of making words."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French builds words with suffixes on a stem (cuire, cuisson, cuisine); Hebrew puts a consonant root into patterns."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German singen – sang – gesungen – Gesang changes vowels inside a frame of consonants, as Hebrew does everywhere: אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi words grow from stems with suffixes; its Arabic loans (किताब) share roots with Hebrew (כ־ת־ב), but Hindi does not change their vowels to make new words."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian borrowed many Arabic words together with their patterns (کتاب، کاتب، مکتب), so the root idea is familiar: Hebrew כְּתָב, כּוֹתֵב, מִכְתָּב are built in the same way from כ־ת־ב."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi words grow from stems with suffixes; Hebrew words grow from roots of three consonants placed into vowel patterns."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish keeps the stem and adds suffixes in a row (yaz-, yazar, yazı); Hebrew changes the vowels inside a root and adds letters around it (כ־ת־ב: כָּתַב, כְּתָב, מִכְתָּב). The Arabic loans kitap, katip, mektup come from the same root."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese builds words with suffixes and compounds (食べる, 食べ物); Hebrew changes the vowels around a root: אָכַל “he ate”, אֹכֶל “food”."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adds endings to an unchanging stem (먹다, 먹어요); Hebrew keeps only the consonants fixed: אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adds suffixes and changes consonants at the edge of the stem; Hebrew keeps the root consonants and changes the vowels between them."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian chains suffixes onto a stem; Hebrew changes the vowel pattern around a root."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili keeps the verb root and adds prefixes and suffixes (kupika “to cook”, mpishi “a cook”); Hebrew changes the vowels inside: בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל. The Arabic loan kitabu shares the root כ־ת־ב."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda builds words with class prefixes and verb extensions around a fixed root; Hebrew changes the vowels around three consonants."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese never changes the inside of a word; it joins whole syllables (吃 + 饭 → 吃饭). Hebrew changes the vowels and adds letters around a root: אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese words never change inside; new words are compounds of whole syllables. Hebrew makes new words by changing the vowels around a root."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut builds long words by adding suffix after suffix to a stem; Hebrew keeps words short and changes their inside — the vowels around the root consonants."
   }
  ]
 }

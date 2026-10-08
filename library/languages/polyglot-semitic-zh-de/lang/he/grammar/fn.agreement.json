@@ -1,6 +1,20 @@
 {
  "function": "fn.agreement",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.genderCount",
+   "value": "two"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  },
+  {
+   "feature": "adj.agreement",
+   "value": "gender-number"
+  }
+ ],
  "summary": "In Hebrew the words that point to or stand for a noun copy its gender and number: the demonstratives (זֶה / זֹאת / אֵלֶּה; הַהוּא / הַהִיא / הָהֵם / הָהֵן), the pronoun that replaces it (הַכּוֹס? הִיא שָׁם — כּוֹס is feminine), and the verb “to be” in the past and future (הַשֻּׁלְחָן הָיָה פֹּה, הַמִּטָּה הָיְתָה שָׁם, הַסְּפָרִים הָיוּ פֹּה). A demonstrative after a noun also copies its definiteness: הַסֵּפֶר הַזֶּה, both with the article. Adjectives (lesson 16) and present-tense verbs (lesson 7) will agree in the same way. What counts is the noun’s grammatical gender, not its ending: הַחַלּוֹנוֹת הָהֵם (m.), הַנָּשִׁים הָהֵן (f.). A mixed group is masculine.",
  "blocks": [
   {
@@ -42,7 +56,17 @@
      "הַמְּנוֹרוֹת הָיוּ פֹּה"
     ]
    ],
-   "caption": "One noun, all the words that agree with it."
+   "caption": "One noun, all the words that agree with it.",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    },
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -59,7 +83,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "The ending can lie",
-   "text": "חַלּוֹנוֹת, קִירוֹת, כִּסְּאוֹת, מַפְתְּחוֹת are masculine: הַכִּסְּאוֹת? הֵם שָׁם. נָשִׁים is feminine: הַנָּשִׁים הָהֵן."
+   "text": "חַלּוֹנוֹת, קִירוֹת, כִּסְּאוֹת, מַפְתְּחוֹת are masculine: הַכִּסְּאוֹת? הֵם שָׁם. נָשִׁים is feminine: הַנָּשִׁים הָהֵן.",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -93,6 +123,12 @@
       "plural things take feminine singular: هٰذِهِ الْكُتُبُ “these books”",
       "Hebrew does not do this"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
     }
    ]
   },
@@ -226,6 +262,103 @@
    "lang": "zh",
    "fn": "fn.agreement",
    "note": "Chinese has no agreement: 这 and the verb never change for the noun."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek agreement also covers gender and number (αυτό το βιβλίο, αυτή η λάμπα) — and case, which Hebrew lacks; Hebrew instead copies definiteness: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "As in Russian, the words copy gender and number, and the past of “to be” agrees (был / была / были ~ הָיָה / הָיְתָה / הָיוּ). Hebrew has no case to copy, but copies the article instead."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "As in Spanish, gender and number agree (esta lámpara, estos libros ~ הַמְּנוֹרָה הַזֹּאת, הַסְּפָרִים הָאֵלֶּה); new is that the article is copied too."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English agreement is little more than this / these; in Hebrew pronouns, demonstratives, adjectives and verbs copy the noun’s gender and number, and a word after a definite noun takes the article too."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Like ce / cette / ces and il / elle, Hebrew words copy gender and number; in addition a demonstrative or adjective after a definite noun takes the article: הַסֵּפֶר הַזֶּה."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German agreement adds case (diesen Tisch, diesem Tisch); Hebrew has no cases but copies definiteness: הַשֻּׁלְחָן הַזֶּה."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi verbs and many adjectives copy gender and number (अच्छा लड़का / अच्छी लड़की); Hebrew does the same with demonstratives, pronouns, adjectives and verbs."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian has no gender agreement; in Hebrew pronouns, demonstratives, adjectives and verbs copy the noun’s gender and number."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi words copy gender and number (हा मुलगा / ही मुलगी), much as Hebrew does (הַיֶּלֶד הַזֶּה / הַיַּלְדָּה הַזֹּאת); Hebrew has no neuter."
+  },
+  {
+   "for": "ar",
+   "rel": "trap",
+   "text": "In Arabic a plural of things takes feminine singular agreement (هٰذِهِ الْكُتُبُ); Hebrew never does: הַסְּפָרִים הָאֵלֶּה, הֵם פֹּה."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish has no gender agreement; Hebrew makes every word that points to a noun copy its gender and number."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese words do not agree with nouns; in Hebrew demonstratives, pronouns and verbs change with the noun’s gender and number."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish agreement copies number and case (tässä talossa); Hebrew copies gender, number and definiteness — never case."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian adjectives and demonstratives before a noun copy no gender; Hebrew words after a noun copy its gender, number and definiteness."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Agreement is at the heart of Swahili (kitabu hiki, vitabu hivi); Hebrew works the same way with two genders instead of many classes."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "As with Luganda class agreement (ekitabo kino, ebitabo bino), every Hebrew word that points to a noun copies it — with two genders and the plural, marked by endings."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese words never change for agreement; in Hebrew demonstratives, pronouns, adjectives and verbs change for the noun’s gender and number."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese words never change for agreement; Hebrew words that point to a noun copy its gender and number."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut words agree in number (singular, dual, plural) and case, not in gender; Hebrew agreement is gender and number, plus the article."
   }
  ]
 }

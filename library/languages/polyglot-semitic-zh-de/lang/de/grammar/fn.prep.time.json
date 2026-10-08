@@ -1,7 +1,21 @@
 {
  "function": "fn.prep.time",
  "status": "realized",
- "summary": "Each kind of time has its own preposition in German. A clock time takes um: um acht Uhr. A day, a date, a part of the day takes am (an + dem): am Montag, am Abend, am 3. Mai. A month or a season takes im (in + dem): im Mai, im Sommer; a year takes no preposition (2026 fahre ich nach Athen) or im Jahr 2026 – *in 2026 is an anglicism. in + dative also says “in” a span or “from now”: in der Nacht, in der Woche, in fünf Minuten. vor + dative = before (vor dem Frühstück, vor acht Uhr) and, with a length of time, “ago” (vor zwei Wochen). nach + dative = after (nach der Arbeit, nach zehn Uhr). bis = until or by (bis Montag, bis morgen); with an article it joins zu: bis zum Abend, bis zur Pause. seit + dative = since / for something that started in the past and is STILL going on – with the PRESENT tense: Ich bin seit einer Woche hier. Wir warten seit zwanzig Minuten. während + genitive = during: während der Woche, während des Urlaubs (speech often uses the dative). A length of time needs no preposition at all: Wir bleiben eine Woche (accusative). Telling the time: Es ist acht Uhr. Wie spät ist es? / Wie viel Uhr ist es? – Uhr is the time on the clock (never plural here), Stunde is an hour of duration. halb neun is 8:30 – half TO nine, not half past. The date: Welches Datum ist heute? (the ordinal numbers for “the 8th” come later).",
+ "typology": [
+  {
+   "feature": "time.halfHour",
+   "value": "half-to-next"
+  },
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "time.calendar",
+   "value": "gregorian"
+  }
+ ],
+ "summary": "Each kind of time has its own preposition in German. A clock time takes um: um acht Uhr. A day, a date, a part of the day takes am (an + dem): am Montag, am Abend, am 3. Mai. A month or a season takes im (in + dem): im Mai, im Sommer; a year takes no preposition (2026 fahre ich nach Athen) or im Jahr 2026 – *in 2026 is not standard German. in + dative also says “in” a span or “from now”: in der Nacht, in der Woche, in fünf Minuten. vor + dative = before (vor dem Frühstück, vor acht Uhr) and, with a length of time, “ago” (vor zwei Wochen). nach + dative = after (nach der Arbeit, nach zehn Uhr). bis = until or by (bis Montag, bis morgen); with an article it joins zu: bis zum Abend, bis zur Pause. seit + dative = since / for something that started in the past and is STILL going on – with the PRESENT tense: Ich bin seit einer Woche hier. Wir warten seit zwanzig Minuten. während + genitive = during: während der Woche, während des Urlaubs (speech often uses the dative). A length of time needs no preposition at all: Wir bleiben eine Woche (accusative). Telling the time: Es ist acht Uhr. Wie spät ist es? / Wie viel Uhr ist es? – Uhr is the time on the clock (never plural here), Stunde is an hour of duration. halb neun is 8:30 – half TO nine, not half past. The date: Welches Datum ist heute? (the ordinal numbers for “the 8th” come later).",
  "blocks": [
   {
    "t": "table",
@@ -67,7 +81,13 @@
      "während der Woche, während des Urlaubs, während der Ferien"
     ]
    ],
-   "caption": "The prepositions of time"
+   "caption": "The prepositions of time",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -137,19 +157,31 @@
      "zwanzig Uhr"
     ]
    ],
-   "caption": "The clock"
+   "caption": "The clock",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-to-next"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "halb neun = 8:30",
-   "text": "German counts towards the next hour: halb neun is “half (on the way) to nine” – Russian половина девятого works the same way; Greek οχτώμισι and English “half past eight” count from the hour before."
+   "text": "German counts towards the next hour: halb neun is “half (on the way) to nine”.",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-to-next"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "seit + present",
-   "text": "Ich wohne seit drei Jahren hier – not *Ich habe seit drei Jahren hier gewohnt. Greek (μένω εδώ από …) and Russian (живу здесь три года) use the present too."
+   "text": "Ich wohne seit drei Jahren hier – not *Ich habe seit drei Jahren hier gewohnt. What started in the past and is still going on stays in the present tense."
   },
   {
    "t": "callout",
@@ -161,25 +193,7 @@
    "t": "callout",
    "kind": "tip",
    "title": "ago = vor",
-   "text": "vor zwei Wochen = two weeks ago (vor + dative, before the time word – English puts “ago” after it)."
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek",
-     "points": [
-      "στις οκτώ, τη Δευτέρα, τον Μάιο – σε or the plain accusative",
-      "πριν, μετά, μέχρι, από, κατά τη διάρκεια = vor, nach, bis, seit, während"
-     ]
-    },
-    {
-     "title": "Turkish",
-     "points": [
-      "suffixes: saat sekizde, mayısta, iki yıldan beri (seit), pazartesiye kadar (bis), yemekten önce / sonra (vor / nach)"
-     ]
-    }
-   ]
+   "text": "vor zwei Wochen = two weeks ago (vor + dative, before the time word)."
   }
  ],
  "procedure": {
@@ -399,6 +413,103 @@
    "lang": "de",
    "fn": "fn.case",
    "note": "vor, nach, seit take the dative, bis and um the accusative, während the genitive."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "trap",
+   "text": "οχτώμισι counts from the hour before; German halb neun is 8:30 (“half to nine”). στις οκτώ, τη Δευτέρα, τον Μάιο become um acht, am Montag, im Mai – three prepositions. μένω εδώ από … is Ich wohne seit … hier: the present in both."
+  },
+  {
+   "for": "ru",
+   "rel": "same",
+   "text": "половина девятого counts to the next hour exactly as halb neun does, and живу здесь три года uses the present like Ich wohne seit drei Jahren hier."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "las ocho y media counts from eight; halb neun means the same time but names nine. Vivo aquí desde hace tres años uses the present, as Ich wohne seit drei Jahren hier does."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "“half past eight” is halb neun (half to nine). “I have lived here for three years” is Ich wohne seit drei Jahren hier – present tense. Not *in 2026: say 2026 or im Jahr 2026. “ago” follows the time, vor precedes it: vor zwei Wochen."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "huit heures et demie counts from eight; halb neun names nine. J’habite ici depuis trois ans uses the present, like Ich wohne seit drei Jahren hier."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has its own words for half past (sāṛhe āṭh = 8:30, ḍeṛh = 1:30, ḍhāī = 2:30) and puts baje after the number (āṭh baje); German says um acht Uhr and halb neun for 8:30."
+  },
+  {
+   "for": "fa",
+   "rel": "trap",
+   "text": "hašt-o nim (8:30) counts from eight; German halb neun names the next hour."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "sāḍe āṭh (8:30) counts from eight, with special words for 1:30 and 2:30; German halb neun names the next hour."
+  },
+  {
+   "for": "ar",
+   "rel": "trap",
+   "text": "ath-thāmina wa-n-niṣf (8:30, “eight and a half”) counts from eight; halb neun names nine. mundhu with the present is seit with the present."
+  },
+  {
+   "for": "he",
+   "rel": "trap",
+   "text": "shmone va-chetsi (8:30) counts from eight; halb neun names nine. ani gar kan kvar shalosh shanim uses the present, like Ich wohne seit drei Jahren hier."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish uses suffixes (saat sekizde, mayısta) and sekiz buçuk for 8:30, counted from eight; but iki yıldır burada oturuyorum keeps the present, as German does with seit."
+  },
+  {
+   "for": "ja",
+   "rel": "trap",
+   "text": "hachi-ji han (8:30) counts from eight; halb neun names nine. Japanese puts mae / ato after the time (hachi-ji mae); German vor / nach come before it: vor acht Uhr."
+  },
+  {
+   "for": "ko",
+   "rel": "trap",
+   "text": "yeodeol si ban (8:30) counts from eight; halb neun names nine."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "puoli yhdeksän is 8:30, half to nine – exactly halb neun."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "fél kilenc is 8:30, half to nine – exactly halb neun."
+  },
+  {
+   "for": "sw",
+   "rel": "trap",
+   "text": "Swahili counts the hours from about 6 a.m. (saa mbili asubuhi = 8 a.m.); German counts from midnight: acht Uhr, zwanzig Uhr."
+  },
+  {
+   "for": "zh",
+   "rel": "trap",
+   "text": "八点半 (8:30) counts from eight; halb neun names nine. 三年前 puts “ago” after the time; vor drei Jahren puts it before."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "tám giờ rưỡi (8:30) counts from eight; German halb neun names nine. ba năm trước (three years ago) is vor drei Jahren, with vor first."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks “at”, “since”, “until” mostly with endings on the noun or the verb; German puts a preposition before the time word and the article in its case: am Montag, seit einer Woche."
   }
  ]
 }

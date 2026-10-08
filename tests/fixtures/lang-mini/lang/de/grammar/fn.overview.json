@@ -1,7 +1,7 @@
 {
  "function": "fn.overview",
  "status": "realized",
- "summary": "German is a West Germanic language, a close relative of English and Dutch. It is written in the Latin alphabet, has three genders and four cases, and puts the conjugated verb in second place.",
+ "summary": "German is a West Germanic language. It is written in the Latin alphabet, has three genders and four cases, and puts the conjugated verb in second place.",
  "typology": {
   "type": "fusional",
   "why": "One ending carries several meanings at once: dem = dative + singular + masculine or neuter; articles and adjectives change with gender, number and case.",
@@ -37,16 +37,6 @@
   {
    "title": "Capital letters",
    "text": "Every noun starts with a capital letter: das Haus, die Gurke."
-  }
- ],
- "forYou": [
-  {
-   "lang": "el",
-   "text": "Genders and cases will feel familiar from Greek, but the genders rarely match (ο ήλιος — die Sonne)."
-  },
-  {
-   "lang": "en",
-   "text": "Much basic vocabulary is shared (Haus — house, Wasser — water); the endings and the word order are the new part."
   }
  ],
  "generators": [
@@ -85,6 +75,118 @@
    ],
    "answer": "second",
    "why": "Verb second: Heute esse ich Brot."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Three genders and cases will feel familiar, but the genders often differ (ο τοίχος – die Wand, το πιάτο – der Teller, η καρέκλα – der Stuhl), and German has a dative where Greek uses σε + accusative or the genitive. German never drops the subject pronoun (Ich bin Lehrerin, not just *Bin Lehrerin), and its word order is strict: the verb is second. Many learned words go back to Greek: Telefon, Schule (σχολή), Lampe (λαμπάς)."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English is German’s close cousin: Haus – house, Buch – book, Mann – man, Glas – glass, Tür – door. But English lost genders, cases and most endings and keeps subject–verb–object order; German puts the verb second or last and has no helper “do” (Bist du Lehrer? – Are you a teacher?). Beware false friends: Handy (mobile phone), Gift (poison), bekommen (to get, not “become”)."
+  },
+  {
+   "for": "de",
+   "rel": "same",
+   "text": "If German is your own language, this course shows it from the outside – as a fusional language with gender, cases and verb-second order – and checks the details even fluent speakers slip on: the dative plural -n (den Kindern), weak nouns (den Jungen, dem Studenten), measure nouns such as zwei Glas Bier, and register (Sie or du, Guten Tag or Hallo)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian is fusional too: three genders, cases and tables are familiar ideas. But German has four cases (Russian six), and it shows the case mostly on the article, which Russian does not have – der / ein will be the real novelty. Russian leaves out “to be” in the present (я студент); German cannot (ich bin Student). ты / вы match du / Sie, but вы is also the plural of ты, where German has a separate ihr."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish has no gender and no definite article (only bir), so der / die / das and agreement are new. Cases are a familiar idea (-i, -e, -de, -den), but in German they sit mostly on the article, not on the noun. There is no vowel harmony: a German ending has one shape (Lehrerin, Köchin; Zeitung, Wohnung), unlike -ler / -lar. Turkish helps elsewhere: ö and ü sound much as in German, compounds stack words as Turkish stacks suffixes, the verb at the end of German subordinate clauses feels Turkish, and sen / siz match du / Sie."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Articles and gender are familiar, but German has three genders, and its articles also change for case (der, den, dem, des). The subject pronoun is never left out (Ich komme, not *Komme), and one verb, sein, covers both ser and estar. tú / usted correspond to du / Sie, vosotros to ihr."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Articles, gender and obligatory subject pronouns are familiar; new are the third gender (das), the four cases on the article and the verb-second order. ü and ö are the vowels of French tu and peu; German has no nasal vowels – the n of Bahnhof or Zentrum is always said. tu / vous correspond to du / Sie, but German has a separate plural ihr."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi has gender (two), a verb that agrees with the subject, and verbs at the end – German has three genders, puts the verb second in a main clause and last only in subordinate clauses, and uses prepositions before the noun where Hindi has postpositions after it (ghar mẽ – im Haus). German has articles (der, ein), Hindi none. The subject of a German verb is always in the nominative, also in the past – there is no ergative ne. German p, t, k are breathy, but that breath never separates two words as kh and k do in Hindi."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian has no grammatical gender – even u means he and she – so der / die / das, er / sie / es and agreement are new. German has articles where Persian has the suffix -i (ketābi, a book) and rā for a definite object. Possession is not linked with an ezafe (ketāb-e man) but with a word before the noun: mein Buch. tu / šomā match du / Sie."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi also has three genders, a neuter included, so der / die / das is a familiar idea – but the gender of a given noun has to be learned anew. German puts the verb second in a main clause, not at the end, and uses prepositions before the noun instead of endings and postpositions after it. German wir is one word for “we”: it does not separate “we including you” (āpaṇ) from “we without you” (āmhī)."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "German builds words from stems and endings, not from roots and patterns: Buch – Bücher – Bücherei share a stem, and the vowel change Buch → Bücher (umlaut) is the nearest thing to a pattern. German has three genders, no dual, and an article that is a separate word changing with gender and case (der, den, dem). sein is never left out. German h is a light breath, and there are no pharyngeal or emphatic consonants: t, s, d have no “heavy” partners. Printed German letters stand apart and keep one shape wherever they are in the word."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Words are built from stems and endings, not roots and patterns. German has three genders and an article that changes with gender, number and case (der, die, das, den, dem …) instead of the one prefix ha-; it also has an indefinite article (ein). sein is always there in the present (Das Haus ist groß), and the verb ending shows the person, not the gender. German letters have no final forms: n, m, k look the same at the end of a word."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Almost everything in the noun phrase is new: articles, three genders, number and four cases shown on the article. Instead of particles after the noun (ga, o, ni) German changes the article; the verb comes second, not last, and it changes for the person (ich gehe, du gehst). Politeness lives in the choice du / Sie, not in verb forms such as -masu. Pitch never changes a German word – the stress does."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "Articles, gender, obligatory plural and the case endings of the article are new, and the verb stands second in a main clause, not at the end. There are no speech levels in the verb: politeness is the pronoun Sie and the matching verb form (Kommen Sie?)."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Cases are familiar, but German has only four and shows them mostly on the article; German has gender (Finnish hän is he and she), articles (Finnish none) and many prepositions where Finnish uses case endings. No vowel harmony (an ending has one shape) and no consonant gradation: a German stem keeps its consonants (Buch, Buches), only the vowel may change (Bücher)."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Articles are familiar (a / az – der, egy – ein), but German articles change for gender and case. German has three genders (Hungarian none), four cases instead of a long row of suffixes, no vowel harmony, and stress that is not always on the first syllable (Kaˈffee, Toˈmate). The verb does not change for a definite object: ich sehe das Haus / ein Haus."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "German nouns have three genders, not a long row of noun classes, and the gender is shown on the article and the adjective, rarely on the noun itself (der Tisch, die Tür, das Buch). The verb takes person endings at its end (ich gehe, du gehst) instead of prefixes, objects are separate words (ich sehe ihn), and German has nothing like the applicative: “cook for someone” is kochen für + noun."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "German nouns have three genders, marked on the article (der, die, das) and not by a class prefix on the noun; the plural is an ending or a vowel change (Buch – Bücher), not a new prefix. The verb takes person endings at its end, and pitch is intonation only: it never changes a German word."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "German is the opposite pole: words change their form all the time (ich gehe, du gehst; der, den, dem), there are no tones – pitch only shapes the sentence – and no measure words (zwei Bücher). Gender, number and case must be chosen for every noun. Doubling a word changes nothing in German (看看, 慢慢 have no German pattern): ein bisschen, langsam."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Words change their form (gehe, gehst, geht; Buch, Bücher), pitch never changes a word, and there are no classifiers. German syllables can begin and end with clusters of consonants (Strumpf, Herbst), which need practice."
+  },
+  {
+   "for": "cy",
+   "rel": "different",
+   "text": "German never changes the first sound of a word: Katze stays Katze in meine Katze, seine Katze, ihre Katze – where Welsh says fy nghath, ei gath, ei chath. Only the endings and the vowel inside the word change."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "German words are long only as compounds of nouns (Haustür, Kleiderschrank); a sentence is still several words, and the verb does not take in its object – German has no incorporation. Every subject is in the nominative, the subject of a transitive verb included (no ergative), and there is no antipassive: the object is simply left out (Ich esse)."
   }
  ]
 }

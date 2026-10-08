@@ -73,7 +73,13 @@
      "لِ + مَنْ, “to whom”; answer: هٰذَا لِي"
     ]
    ],
-   "caption": "The question word comes first; the rest keeps the order of the statement."
+   "caption": "The question word comes first; the rest keeps the order of the statement.",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -93,6 +99,12 @@
       "مَتَى تَأْكُلُ الْغَدَاءَ؟ — the verb does not move",
       "مَنْ هُوَ؟ — no “is”, no “do”"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
     }
    ]
   },
@@ -373,6 +385,89 @@
    "lang": "ar",
    "fn": "fn.question.yesno",
    "note": "Yes/no questions take هَلْ (lesson 9) — never together with a question word."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.whPosition",
+   "value": "fronted"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also puts the question word first (τι πίνεις;) and needs no helper verb, like مَاذَا تَشْرَبُ؟"
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian also fronts the question word (что ты пьёшь?) with no helper verb, like مَاذَا تَشْرَبُ؟"
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish also fronts it (¿qué bebes?); Arabic adds nothing else — no inversion, no helper verb."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English fronts the question word but adds do (What do you drink?); Arabic only fronts it: مَاذَا تَشْرَبُ؟"
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French qu’est-ce que tu bois ? fronts the question word; Arabic fronts it and needs nothing else: مَاذَا تَشْرَبُ؟"
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi leaves the question word where the answer goes (तुम क्या पीते हो?); Arabic moves it to the front: مَاذَا تَشْرَبُ؟"
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian leaves the question word in the place of the answer, before the verb (چه می‌خوری؟); Arabic moves it to the front."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi keeps the question word in the answer’s place (तू काय खातोस?); Arabic moves it to the front: مَاذَا تَأْكُلُ؟"
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish leaves the question word in place (ne içiyorsun?); Arabic moves it to the front. But كَمْ takes a singular noun just as kaç does: kaç kardeş ≈ كَمْ أَخًا."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese leaves the question word in place and ends with か (何を飲みますか); Arabic fronts it and ends with nothing but ؟."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish also fronts the question word and keeps the order (Mitä juot?); and as montako takes a singular (montako kirjaa?), Arabic كَمْ does too: كَمْ كِتَابًا؟"
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian puts the question word right before the verb (Mit iszol?); Arabic puts it first. Hungarian hány + singular (hány könyv?) matches كَمْ + singular (كَمْ كِتَابًا؟)."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili leaves the question word after the verb (unakula nini?); Arabic moves it to the front. Swahili kwa nini, “for what”, is built like لِمَاذَا (لِ + مَاذَا)."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese leaves the question word in place (bạn uống gì?); Arabic moves it to the front (مَاذَا تَشْرَبُ؟)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut question words take case endings, and the verb takes a question mood; Arabic question words come first, with a preposition in front when needed: مِنْ أَيْنَ؟ (from where?)."
   }
  ]
 }

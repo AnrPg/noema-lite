@@ -190,7 +190,7 @@ FUNCTIONS = [  # id, title, category, tags
  ('fn.negation', 'Saying no: negation', 'syntax', ['Polarity']),
  ('fn.question.yesno', 'Yes/no questions', 'syntax', ['Mood']),
  ('fn.question.wh', 'Questions with question words', 'syntax', []),
- ('fn.prep.core', 'In / at / to, from, with: the core prepositions (Greek σε, από, με)', 'morphosyntax', []),
+ ('fn.prep.core', 'In / at / to, from, with: the core prepositions', 'morphosyntax', []),
  ('fn.case.basic', 'What a case is — the subject form (nominative)', 'morphology', ['Case']),
  ('fn.case', 'Cases after prepositions: where, where to, where from (dative, genitive, locative …)', 'morphology', ['Case']),
  ('fn.imperative', 'Commands and requests: the imperative', 'morphology', ['Mood']),

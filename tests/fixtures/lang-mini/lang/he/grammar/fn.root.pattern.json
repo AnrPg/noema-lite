@@ -48,5 +48,107 @@
    "answer": "a verb pattern",
    "why": "There are seven; each gives the root a different shade of meaning."
   }
+ ],
+ "notes": [
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "The same system, often with the same roots: א־כ־ל ~ ء ك ل (أَكَلَ), כ־ת־ב ~ ك ت ب, שׁ־ל־ם ~ س ل م. The binyanim match Arabic verb forms: piʿel ~ form II with a doubled middle letter, hifʿil ~ form IV."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek builds words from a stem plus endings and suffixes (γράφω, γράμμα, γραφείο); Hebrew pours three consonants into vowel patterns: א־כ־ל → אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian adds prefixes and suffixes to a stem (писать, писатель, написать); Hebrew keeps the consonants and changes the vowels and pattern letters around them."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish derives with suffixes (cocinar, cocina, cocinero); Hebrew changes the vowel pattern of the root ב־שׁ־ל: בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English sing – sang – song is a small taste of the idea: the consonants stay and the vowels change. In Hebrew this is the main way of making words."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French builds words with suffixes on a stem (cuire, cuisson, cuisine); Hebrew puts a consonant root into patterns."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German singen – sang – gesungen – Gesang changes vowels inside a frame of consonants, as Hebrew does everywhere: אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi words grow from stems with suffixes; its Arabic loans (किताब) share roots with Hebrew (כ־ת־ב), but Hindi does not change their vowels to make new words."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian borrowed many Arabic words together with their patterns (کتاب، کاتب، مکتب), so the root idea is familiar: Hebrew כְּתָב, כּוֹתֵב, מִכְתָּב are built in the same way from כ־ת־ב."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi words grow from stems with suffixes; Hebrew words grow from roots of three consonants placed into vowel patterns."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish keeps the stem and adds suffixes in a row (yaz-, yazar, yazı); Hebrew changes the vowels inside a root and adds letters around it (כ־ת־ב: כָּתַב, כְּתָב, מִכְתָּב). The Arabic loans kitap, katip, mektup come from the same root."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese builds words with suffixes and compounds (食べる, 食べ物); Hebrew changes the vowels around a root: אָכַל “he ate”, אֹכֶל “food”."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adds endings to an unchanging stem (먹다, 먹어요); Hebrew keeps only the consonants fixed: אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adds suffixes and changes consonants at the edge of the stem; Hebrew keeps the root consonants and changes the vowels between them."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian chains suffixes onto a stem; Hebrew changes the vowel pattern around a root."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili keeps the verb root and adds prefixes and suffixes (kupika “to cook”, mpishi “a cook”); Hebrew changes the vowels inside: בִּשֵּׁל, מְבַשֵּׁל, בִּשּׁוּל. The Arabic loan kitabu shares the root כ־ת־ב."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda builds words with class prefixes and verb extensions around a fixed root; Hebrew changes the vowels around three consonants."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese never changes the inside of a word; it joins whole syllables (吃 + 饭 → 吃饭). Hebrew changes the vowels and adds letters around a root: אָכַל, אוֹכֵל, אֹכֶל."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese words never change inside; new words are compounds of whole syllables. Hebrew makes new words by changing the vowels around a root."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut builds long words by adding suffix after suffix to a stem; Hebrew keeps words short and changes their inside — the vowels around the root consonants."
+  }
  ]
 }

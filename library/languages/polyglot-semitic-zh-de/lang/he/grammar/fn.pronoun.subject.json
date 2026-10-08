@@ -1,6 +1,24 @@
 {
  "function": "fn.pronoun.subject",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "pron.gender",
+   "value": "second-and-third"
+  },
+  {
+   "feature": "syn.proDrop",
+   "value": "partial"
+  },
+  {
+   "feature": "prag.politePronouns",
+   "value": "none"
+  },
+  {
+   "feature": "pron.inclusive",
+   "value": "none"
+  }
+ ],
  "summary": "Hebrew has ten subject pronouns. In the second and third person they show gender in the singular and in the plural: אַתָּה “you” to a man, אַתְּ to a woman; הוּא “he”, הִיא “she”; אַתֶּם / אַתֶּן “you (pl.)”; הֵם / הֵן “they”. A group with at least one man takes the masculine plural. There is no “it” (a thing is הוּא or הִיא by its gender) and no polite “you”. In the present tense the pronoun is required, because the verb shows only gender and number; in the past and future the verb ending already shows the person, so the pronoun is often left out.",
  "blocks": [
   {
@@ -35,7 +53,13 @@
      "הֵן (hen) they"
     ]
    ],
-   "caption": "The subject pronouns. The first person has no gender: אֲנִי and אֲנַחְנוּ are said by men and women alike."
+   "caption": "The subject pronouns. The first person has no gender: אֲנִי and אֲנַחְנוּ are said by men and women alike.",
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
+   ]
   },
   {
    "t": "p",
@@ -60,13 +84,25 @@
       "one man in the group → אַתֶּם"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "No “it”",
-   "text": "Things are “he” or “she” by their gender: הַסֵּפֶר? הוּא פֹּה “the book? it is here” (סֵפֶר is masculine); הַמְּנוֹרָה? הִיא שָׁם (מְנוֹרָה is feminine). For a situation, or when you point at something, Hebrew uses זֶה (lesson 3)."
+   "text": "Things are “he” or “she” by their gender: הַסֵּפֶר? הוּא פֹּה “the book? it is here” (סֵפֶר is masculine); הַמְּנוֹרָה? הִיא שָׁם (מְנוֹרָה is feminine). For a situation, or when you point at something, Hebrew uses זֶה (lesson 3).",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -77,8 +113,18 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "For your languages",
-   "text": "German du / Sie, Russian ты / вы and Greek εσύ / εσείς have a polite “you”; Hebrew does not — but it has the gender split that English, German and Russian lack in “you”."
+   "title": "One “you” for everyone — split by gender",
+   "text": "Hebrew has no polite “you”: a friend, a stranger and a minister are all אַתָּה (a man) or אַתְּ (a woman), and a group is אַתֶּם / אַתֶּן. What it does mark is gender — in the singular and in the plural of “you” and “they”. אֲנַחְנוּ is the only “we”, whether or not the listener is included.",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    },
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
+   ]
   },
   {
    "t": "ask",
@@ -173,6 +219,108 @@
    "lang": "zh",
    "fn": "fn.pronoun.subject",
    "note": "Chinese 他 / 她 / 它 are all pronounced tā — gender only in writing; the plural is made with 们 (我们, 你们, 他们)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has a polite plural εσείς and no gender in “you”; Hebrew is the opposite: one “you” for everyone, but אַתָּה (m.) / אַתְּ (f.). Greek drops the pronoun everywhere (είμαι φοιτητής); Hebrew must keep it in the present: אֲנִי סְטוּדֶנְט."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "The ты / вы of respect has no Hebrew counterpart: a stranger is אַתָּה or אַתְּ. Like он / она, הוּא / הִיא also mean “it” for things by their gender — but there is no neuter оно."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish splits the plural by gender (vosotros / vosotras, ellos / ellas); Hebrew does the same with אַתֶּם / אַתֶּן and הֵם / הֵן — and also splits the singular “you”: אַתָּה / אַתְּ. There is no usted."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English has one “you” for everyone; Hebrew has no polite form either, but splits “you” by gender and number into four words, and has no “it”: a thing is הוּא or הִיא by its gender."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "There is no vous of politeness: everyone is אַתָּה / אַתְּ. As with ils / elles, הֵם / הֵן split the plural, and a mixed group is masculine, as in French."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German has a polite Sie and a neuter es; Hebrew has neither — but it splits “you” into אַתָּה / אַתְּ / אַתֶּם / אַתֶּן by gender and number."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi वह covers “he” and “she”, and politeness lives in तू / तुम / आप; Hebrew splits “he / she” and “you” by gender but has no polite pronoun."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian او is both “he” and “she”, and شما is also the polite “you”; Hebrew marks gender in “he / she” and in “you”, and has no polite form."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi तो / ती match הוּא / הִיא, but Hebrew has no neuter (ते) and no respectful तुम्ही / आपण; instead “you” itself has gender: אַתָּה / אַתְּ. Marathi separates an inclusive “we” (आपण) from an exclusive one (आम्ही); Hebrew אֲנַחְנוּ covers both."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The same system: أَنْتَ / أَنْتِ ~ אַתָּה / אַתְּ, هُوَ / هِيَ ~ הוּא / הִיא, gender in the plural too — but Hebrew has no dual pronouns (أَنْتُمَا, هُمَا)."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish o is “he, she, it”, and siz is also the polite “you”; Hebrew must choose הוּא or הִיא and אַתָּה or אַתְּ, and has no polite form."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese often avoids “you” and uses a name or a title; Hebrew uses אַתָּה / אַתְּ with everyone, even a minister — and in the present it cannot leave the pronoun out."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean avoids 너 / 당신 with most people and uses titles; in Hebrew אַתָּה / אַתְּ is neutral and polite enough for anyone."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish hän is “he” and “she”, and te is also the polite “you”; Hebrew has four words for “you” by gender and number and no polite form."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian ő is “he” and “she”, and ön / maga are polite forms of “you”; Hebrew marks gender in the pronoun and has no polite form."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili yeye is “he” and “she”; Hebrew separates them (הוּא / הִיא), and “you” too (אַתָּה / אַתְּ). Swahili can drop the pronoun because the verb prefix shows the person; Hebrew can do so only in the past and future."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "In Luganda the person is in the verb prefix and the pronoun has no gender; Hebrew pronouns mark gender (הוּא / הִיא, אַתָּה / אַתְּ), and in the present they are required because the verb shows only gender and number."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "他 / 她 / 它 are all said tā — gender only in writing; Hebrew הוּא / הִיא differ in sound, and “you” has gender too (אַתָּה / אַתְּ). There is no polite 您, and אֲנַחְנוּ is the only “we” (no 咱们 / 我们 split)."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese chooses its pronouns by age and relationship (anh, chị, em …) and separates an inclusive chúng ta from an exclusive chúng tôi; Hebrew has one set for everyone, chosen only by person, gender and number, and one “we”."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut shows the person (singular, dual or plural) in the verb ending and has no gender; Hebrew pronouns are separate words that mark gender: הוּא / הִיא, אַתָּה / אַתְּ."
   }
  ]
 }

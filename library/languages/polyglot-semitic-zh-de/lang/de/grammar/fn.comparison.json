@@ -1,6 +1,16 @@
 {
  "function": "fn.comparison",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "adj.comparativeForm",
+   "value": "affix"
+  },
+  {
+   "feature": "syn.comparison",
+   "value": "particle"
+  }
+ ],
  "summary": "German compares with endings, not with words for “more” and “most”: the comparative adds -er (schnell → schneller), and “than” is als: Der Zug ist schneller als der Bus (the pronoun after als stays nominative: älter als ich). The superlative has two forms: am …-sten after sein and with verbs (Der Zug ist am schnellsten; Er fährt am schnellsten), and der / die / das …-ste before a noun (der schnellste Zug). Most short adjectives with a, o, u take an umlaut: alt – älter – am ältesten, groß – größer, jung – jünger, kurz – kürzer, lang – länger, kalt – kälter, warm – wärmer (but not all: blau – blauer, froh – froher). After -t, -d, -s, -ß, -z, -sch the superlative adds -est: am ältesten, am heißesten, am kürzesten. A few are irregular: gut – besser – am besten, viel – mehr – am meisten, hoch – höher – am höchsten, nah – näher – am nächsten, gern – lieber – am liebsten. Comparative and superlative before a noun take the normal endings: ein größeres Haus, der ältere Bruder, die größten Zimmer. Equality is so … wie: so groß wie ich. Colours: all colour words decline (ein rotes Auto) except orange, rosa and lila; light and dark shades are compounds written as one word – hellblau, dunkelrot, dunkelgrün.",
  "blocks": [
   {
@@ -67,7 +77,13 @@
      "die dunkelste Nacht"
     ]
    ],
-   "caption": "Regular comparison – watch the umlaut and the -est after t, s, ß, z"
+   "caption": "Regular comparison – watch the umlaut and the -est after t, s, ß, z",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "affix"
+    }
+   ]
   },
   {
    "t": "table",
@@ -149,7 +165,13 @@
      "die meisten Kinder"
     ]
    ],
-   "caption": "Comparing"
+   "caption": "Comparing",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "particle"
+    }
+   ]
   },
   {
    "t": "table",
@@ -180,7 +202,25 @@
      "neuter, capitalised"
     ]
    ],
-   "caption": "Colours"
+   "caption": "Colours",
+   "notes": [
+    {
+     "for": "ru",
+     "rel": "trap",
+     "text": "Russian splits blue into синий (dark) and голубой (light); German has one word, blau, and adds hell- / dunkel- when needed (hellblau)."
+    },
+    {
+     "for": "vi",
+     "rel": "trap",
+     "text": "xanh covers green and blue (xanh lá cây, xanh dương); German always separates grün and blau."
+    }
+   ],
+   "typology": [
+    {
+     "feature": "sem.greenBlue",
+     "value": "distinct"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -450,6 +490,103 @@
    "lang": "de",
    "fn": "fn.adjective",
    "note": "Comparative and superlative before a noun take the endings of S16: ein größeres Haus, die größten Zimmer."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek has -τερος (γρηγορότερος) beside πιο + adjective; German always uses the ending: schneller, also for long words (interessanter). than is als, with the nominative: älter als ich."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "быстрее is like schneller; but “than” is als + nominative (älter als ich), never a genitive (старше меня)."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish uses más … que (más rápido que); German adds -er and uses als: schneller als. The superlative is am schnellsten or der schnellste."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "German always uses -er, even for long adjectives: interessanter, not *mehr interessant. “than” is als, not wie; “as … as” is so … wie."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French uses plus … que; German adds -er and als: schneller als. meilleur is besser."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi compares with se (“from”): vah mujhse lambā hai; German adds -er to the adjective and uses als: Er ist größer als ich. sabse (“from all”) is am …-sten."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "bozorgtar az man is größer als ich: a suffix and a word for “than”; -tarin (bozorgtarin) is der größte."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi compares with -peksha (“than”) on the other noun and keeps the adjective; German changes the adjective (größer) and uses als."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic makes one pattern ʾafʿal for “bigger” and “biggest” (kabīr → ʾakbar) with min; German has two forms (größer, am größten) and als."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew adds yoter (more) and mi- (than): gadol yoter mi-; German changes the adjective itself: größer als."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts the compared thing in the ablative and may add daha (benden daha büyük); German changes the adjective (größer) and uses als: größer als ich."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese adjectives do not change: kare wa watashi yori takai (“he than me tall”); German says Er ist größer als ich, and the superlative is am größten (Japanese ichiban)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean adds boda (than) and deo (more) without changing the adjective; German adds -er."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish -mpi (nopeampi) and -in (nopein) are endings like German -er and -st: schneller, am schnellsten; kuin is als."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "-bb (nagyobb) and leg-…-bb (legnagyobb) are endings like German -er and -st; mint is als."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili says mrefu kuliko mimi (“tall where there is me”); German changes the adjective: größer als ich."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "比 sits before the compared thing and the adjective does not change (他比我高); German changes the adjective and uses als: Er ist größer als ich."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "hơn follows the adjective (cao hơn tôi), which never changes; German adds -er (größer als ich) and the superlative ending -st."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut adds a suffix meaning “more” to the word for the quality and puts the thing compared in the case meaning “from”; German has the ending -er and the word als."
   }
  ]
 }

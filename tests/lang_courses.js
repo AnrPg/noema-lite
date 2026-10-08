@@ -37,7 +37,7 @@ for (const id of fs.existsSync(LIB) ? fs.readdirSync(LIB) : []) {
     const first = plan.steps[0], lessons = C.order.filter(n => C.nodes[n].kind === 'lesson' && X.applies[n]);
     if (lessons.length) ok(first?.kind === 'lesson' && first.node === lessons[0], `${code}: a new learner starts with lesson ${first?.node}`);
     else ok(first?.kind === 'learn' && first.node === C.order[0], `${code}: a new learner starts with ${first?.node} (${first?.concepts.length} words)`);
-    // every lesson exercise is made from stored data and uses only words of the lessons up to it (a learner who knows exactly those)
+    // every lesson exercise is made from stored data; at most ⌈30 %⌉ of a sentence's words are unknown, and those are listed as 🆕 (D19)
     if (lessons.length) {
       const T = N.newLearner(C), bad2 = []; let n = 0;
       for (const nid of lessons) {
@@ -48,10 +48,12 @@ for (const id of fs.existsSync(LIB) ? fs.readdirSync(LIB) : []) {
         for (const f of N.lessonFunctions(C, code, nid)) for (const it of N.exercises(C, T, code, f, { k, max: 200 })) {
           n++;
           if (it.type === 'choose' && !it.options.includes(it.answer)) bad2.push(`${nid} ${f}: answer not among the options`);
-          if (it.sentence && !X.sentenceById[it.sentence].req.every(l => k.R.has(l))) bad2.push(`${nid} ${f}: ${it.sentence} uses unknown words`);
+          if (it.sentence) { const S = X.sentenceById[it.sentence], un = S.req.filter(l => !k.R.has(l));
+            if (un.length > S.cap) bad2.push(`${nid} ${f}: ${it.sentence} has ${un.length} unknown words (at most ${S.cap})`);
+            if (un.some(l => !(it.unknown || []).includes(l))) bad2.push(`${nid} ${f}: ${it.sentence} does not list its unknown words as 🆕`); }
         }
       }
-      ok(!bad2.length, `${code}: ${n} lesson exercises, all from stored data and known words` + (bad2.length ? ' — ' + bad2.slice(0, 5).join('; ') : ''));
+      ok(!bad2.length, `${code}: ${n} lesson exercises, all from stored data, ≤ ⌈30 %⌉ unknown words, each listed` + (bad2.length ? ' — ' + bad2.slice(0, 5).join('; ') : ''));
     }
   }
 }

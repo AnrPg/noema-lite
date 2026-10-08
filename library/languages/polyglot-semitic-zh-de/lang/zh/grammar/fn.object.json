@@ -1,6 +1,20 @@
 {
  "function": "fn.object",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "none"
+  },
+  {
+   "feature": "syn.wordOrder",
+   "value": "SVO"
+  },
+  {
+   "feature": "verb.objectMarking",
+   "value": "none"
+  }
+ ],
  "summary": "The direct object — what is eaten, drunk, bought or liked — simply follows the verb: 我吃面包 ‘I eat bread’, 妈妈买鱼 ‘Mum buys fish’. Chinese has no cases: a noun looks the same as subject (面包在这里 ‘the bread is here’) and as object (我吃面包), and only its place after the verb makes it the object. So the order cannot change: 妈妈喜欢孩子 ‘the mother likes the child’, 孩子喜欢妈妈 ‘the child likes the mother’. A counted object keeps number + measure word: 我要一杯咖啡. Indirect objects (‘give him tea’) and objects with a preposition (‘with a friend’) come with the coverbs 给, 跟 in S11–S13 and in C03; other ways to place the object — as a topic (茶我不喝) or with 把 (我把茶喝了) — come much later.",
  "blocks": [
   {
@@ -10,7 +24,13 @@
     "verb",
     "object"
    ],
-   "caption": "我 + 吃 + 面包"
+   "caption": "我 + 吃 + 面包",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    }
+   ]
   },
   {
    "t": "table",
@@ -76,7 +96,17 @@
    "t": "callout",
    "kind": "key",
    "title": "The position is the case",
-   "text": "妈妈喜欢孩子 ‘the mother likes the child’ — 孩子喜欢妈妈 ‘the child likes the mother’. Swap the nouns and you swap the roles. German can say Den Kaffee trinkt er because den shows the accusative; Chinese cannot move the object that way."
+   "text": "妈妈喜欢孩子 ‘the mother likes the child’ — 孩子喜欢妈妈 ‘the child likes the mother’. Swap the nouns and you swap the roles. German can say Den Kaffee trinkt er because den shows the accusative; Chinese cannot move the object that way.",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    },
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -201,6 +231,108 @@
    ],
    "answer": "我喜欢喝茶。",
    "why": "Verb + verb + object."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek marks the object by case (βλέπω τον φίλο, τρώω το ψωμί) and can move it; Chinese has no case — only the place after the verb makes 面包 the object (我吃面包)."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian case lets the object move freely (Маму любит ребёнок ‘the child loves Mum’); Chinese cannot do this — 妈妈喜欢孩子 and 孩子喜欢妈妈 mean opposite things."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish marks a human object with a (veo a María) and nothing else; Chinese marks no object at all: 我喜欢安娜, 我吃面包."
+  },
+  {
+   "for": "en",
+   "rel": "same",
+   "text": "English also shows the object by position (the dog bites the man / the man bites the dog), and so does Chinese: 妈妈喜欢孩子 / 孩子喜欢妈妈. Unlike me / him, Chinese pronouns do not change: 他喜欢我."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French relies on order for nouns (le chat mange la souris), as Chinese does, but its object pronouns move before the verb (je le mange); Chinese ones stay after it (他喜欢我) or are left out."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German den Kaffee shows the accusative, so the object can open the sentence; Chinese has no case — fronting 茶 makes it a topic (茶我不喝), not a marked object."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi puts the object before the verb (मैं रोटी खाता हूँ) and marks a known one with को; Chinese puts it after the verb and marks nothing: 我吃面包."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian puts the object before the verb and marks a known one with rā (nān rā khordam ‘I ate the bread’); Chinese puts it after the verb, unmarked: 我吃了面包."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi puts the object before the verb (मी पोळी खातो ‘I eat chapati’) and marks known human objects with ला; Chinese puts every object after the verb, unmarked."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic marks the object with -a (akala l-waladu l-khubza) and can vary the order; Chinese has no case: subject before the verb, object after it."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew marks a definite object with et (ani ohev et ha-lekhem ‘I like the bread’); Chinese never marks the object: 我喜欢面包."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts the object before the verb and marks a definite one with -ı (ekmeği yiyorum ‘I eat the bread’); Chinese puts it after the verb, unmarked: 我吃面包."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks the object with を and puts it before the verb (パンを食べる); Chinese puts it after and marks nothing: 我吃面包."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks the object with 을 / 를 before the verb (빵을 먹어요); Chinese: verb first, unmarked object — 我吃面包."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish marks the object by case — partitive or accusative, which even tells ongoing from completed (luin kirjaa / luin kirjan); Chinese marks nothing and shows completion with 了."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian marks the object with -t, and the verb shows whether it is definite (látok egy házat / látom a házat); Chinese marks neither."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also has subject – verb – object with no case on nouns (ninakula mkate ‘I eat bread’), but the verb can carry an object prefix (ninakupenda ‘I love you’); Chinese verbs carry nothing: 我喜欢你."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda is subject – verb – object with no case on nouns, but object prefixes can go into the verb; Chinese leaves the verb bare and the object after it."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese works exactly like Chinese here: tôi ăn bánh mì ‘I eat bread’ — subject, verb, unmarked object."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut shows subject and object in the verb ending and marks nouns by case in an ergative pattern; Chinese has no endings at all — only the position after the verb."
   }
  ],
  "seeAlso": [

@@ -287,6 +287,11 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Japanese also uses full-width 。 and 、, but 、 is its ordinary comma and titles take 『 』.",
    "what": "Chinese uses full-width punctuation: the small circle 。 as full stop, ，for a comma between clauses, the enumeration comma 、 between items of a list, “ ” for quotes and 《 》 for titles of books and films. The question mark and the exclamation mark are full-width too (？！).",
    "examples": [
     {
@@ -415,6 +420,9 @@
      "value": "not-phonographic"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Cantonese is romanized with Jyutping, whose letter values differ; mainland Cantonese speakers usually learned Pinyin at school.",
    "what": "Hanyu Pinyin writes Mandarin in Latin letters with tone marks. Several letters have values of their own: q = [tɕʰ], x = [ɕ], j = [tɕ], zh / ch / sh / r are retroflex, c = [tsʰ], z = [ts]; ü is written u after j, q, x, y; iou, uei, uen shorten to iu, ui, un after a consonant; i, u, ü at the start of a syllable are written y-, w-, yu-.",
    "examples": [
     {
@@ -458,6 +466,8 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "Pinyin orthography writes the syllables of one word together (wǒmen, xuésheng) and separates words. When a syllable starting with a, o or e follows another syllable inside a word, an apostrophe marks the boundary (Xī'ān, nǚ'ér), otherwise the reading is ambiguous. Proper names and the first word of a sentence are capitalized.",
    "examples": [
     {
@@ -501,6 +511,11 @@
      "feature": "pron.gender",
      "value": "written-only"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ja"
    ],
    "what": "Because Mandarin has few distinct syllables, many words and morphemes sound the same and are distinguished only by their characters (and by context). 他, 她 and 它 are all tā; 是, 事, 市 and 试 are all shì. Reading and typing therefore mean choosing the right character for the sound.",
    "examples": [
@@ -558,12 +573,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for the learners whose scripts have letter case (el, en, de, ru, es, fr, tr, fi, hu, sw, lg, vi): characters have no capitals, names are capitalised only in pinyin"
    },
-   "status": "missing",
-   "gap": "Not said anywhere; for learners whose scripts have letter case, a line in the script part of the overview (fd.00): names are not marked in characters, only in pinyin.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -591,12 +608,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for ar, fa, he, el: characters never join or change shape, no final forms"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the script part of the overview for learners whose scripts change letter shapes by position.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00; P4"
   },
   {
@@ -714,6 +733,9 @@
      "value": "some"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Burmese has toneless reduced (minor) syllables, a related but different phenomenon.",
    "what": "Some syllables lose their tone and are said short and light: grammatical particles (吗, 了, 们), the suffix 子 and the second syllable of many words. Sometimes the neutral tone alone separates two words. Taiwan Mandarin uses the neutral tone far less (學生 xuéshēng).",
    "examples": [
     {
@@ -756,6 +778,8 @@
      "value": "complex"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "A third tone before another third tone is said as a second tone; dictionaries and pinyin keep the written third tone. Before tones 1, 2, 4 and the neutral tone only the low part of the third tone is said.",
    "examples": [
     {
@@ -803,6 +827,8 @@
      "value": "complex"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "不 bù becomes bú before a fourth tone (不是 bú shì). 一 yī becomes yí before a fourth tone (一个 yí ge), yì before tones 1, 2 and 3 (一本 yì běn), and stays yī when counting, at the end and in ordinals (十一, 第一, 一月). Textbooks usually print these spoken tones; dictionaries print yī and bù.",
    "examples": [
     {
@@ -854,6 +880,8 @@
      "value": "suffixing"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "In northern Mandarin, and above all in Beijing, many words take a rhotic -r (written 儿) that merges with the syllable: 这儿 zhèr, 哪儿 nǎr, 一点儿 yìdiǎnr. Mostly it is a regional or colloquial variant; in some words it changes the meaning (头 tóu ‘head’, 头儿 tóur ‘boss’). Southern speakers and Taiwan mostly say 这里, 哪里, 一点.",
    "examples": [
     {
@@ -943,6 +971,11 @@
      "value": "sibilants"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "pl"
+   ],
+   "alsoNote": "Serbian distinguishes retroflex and alveolo-palatal affricates (č / ć, dž / đ), but not three full series.",
    "what": "Mandarin distinguishes zh ch sh r (tongue tip curled back, retroflex), j q x (tongue blade at the hard palate, alveolo-palatal) and z c s (tongue tip at the teeth, dental). Mixing them changes the word (知 zhī ‘know’, 鸡 jī ‘chicken’, 资 zī ‘capital’).",
    "examples": [
     {
@@ -985,6 +1018,9 @@
      "value": "high-only"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Albanian has the front rounded y [y], but not the apical vowel or [ɤ].",
    "what": "The i after z c s and zh ch sh r is not [i] but a buzzing continuation of the consonant (字 zì, 是 shì, 日 rì). ü is a high front rounded vowel [y] (女 nǚ, 绿 lǜ). Pinyin e alone is a back unrounded vowel [ɤ] (饿 è ‘hungry’).",
    "examples": [
     {
@@ -1027,6 +1063,9 @@
      "value": "moderately-complex"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Cantonese also has a small syllable inventory, but with more finals (-m, -p, -t, -k).",
    "what": "A Mandarin syllable is (consonant) + (glide) + vowel + (n / ng): no consonant clusters and no other final consonants. There are only about 400 syllables (about 1,300 with tones). This explains the many homophones, the preference for two-syllable words, and how loanwords are adapted (final consonants dropped or given a vowel).",
    "examples": [
     {
@@ -1087,13 +1126,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.tones"
+     "fn.tones",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.tones comparison notes (D18) for the stress languages (el, ru, es, en, de, he, fi, hu, sw …) and the overview note for ru: Mandarin has no word stress, tone does that work"
    },
-   "status": "partial",
-   "gap": "fn.tones contrasts tone with stress only for the course languages; the overview does not say that Mandarin has no lexical stress and no stress mark.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1122,13 +1162,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.tones"
+     "fn.tones",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.tones comparison notes (D18) for de, hi, ar, ja, fi, hu, lg, iu and the overview notes for ar, fi, hu: length never tells words apart"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the pronunciation block (S00 / fn.tones) for learners whose languages distinguish long and short vowels.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1162,10 +1203,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for tr, fi, hu: particles and suffixes never adapt to vowel harmony (吗 is always 吗)"
    },
-   "status": "partial",
-   "gap": "The overview says that words never change, but not that suffixes and particles never adapt to the vowels of the word (for learners whose languages have vowel harmony).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1193,12 +1234,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for ar, fa, iu"
    },
-   "status": "missing",
-   "gap": "A pronunciation table in S00 with the place of h and q, and audio (P9).",
+   "status": "partial",
+   "gap": "A pronunciation table in S00 with the place of h and q, and audio (P9). The overview notes for ar, fa and iu (D18) already warn that pinyin q is no uvular.",
    "when": "fd.00"
   },
   {
@@ -1226,12 +1269,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison note (D18) for ar: pharyngeal and emphatic consonants play no role"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the pronunciation table of S00.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1330,12 +1375,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for fr, hi"
    },
-   "status": "missing",
-   "gap": "A note on -n / -ng finals in the pronunciation block (S00) and audio minimal pairs (P9).",
+   "status": "partial",
+   "gap": "Audio minimal pairs for -n / -ng (P9). The overview notes for fr and hi (D18) say that Chinese has no nasal vowels and that n / ng are real consonants.",
    "when": "fd.00"
   },
   {
@@ -1363,12 +1410,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for de, ru, tr: syllables end only in a vowel, -n, -ng or -r — nothing to devoice"
    },
-   "status": "missing",
-   "gap": "Not said; the syllable chart of S00 (zh.phon.syllable) could state the possible finals.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1396,12 +1445,15 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.tones",
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "comparison notes (D18) for the languages with double consonants (fn.overview: hi, fa, mr, ar, tr, ja, fi, hu; fn.tones: lg, iu)"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the pronunciation block of S00.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1429,12 +1481,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for el, en, es, ar, sw: no ‘th’ sounds"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the pronunciation table of S00.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1502,12 +1556,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison note (D18) for ru"
    },
-   "status": "missing",
-   "gap": "The pinyin chart of S00 (initials × finals) would show the gaps; not said for learners whose languages have hard / soft pairs.",
+   "status": "partial",
+   "gap": "The pinyin chart of S00 (initials × finals) would show the gaps to everyone; so far only the overview note for ru (D18) says that there are no hard / soft pairs.",
    "when": "fd.00"
   },
   {
@@ -1536,13 +1592,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.tones"
+     "fn.tones",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison note (D18) for fi: no consonant gradation; only tones change in combination (fn.tones)"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the overview next to the tone-sandhi rules (fn.tones).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1707,6 +1764,8 @@
      "value": "suffixing"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "Many nouns end in a toneless suffix that adds no meaning but makes a one-syllable morpheme into a two-syllable word: 桌子 ‘table’, 椅子 ‘chair’, 孩子 ‘child’, 木头 ‘wood’, 芋头 ‘taro’. The suffix is dropped inside compounds (饭桌 ‘dining table’).",
    "examples": [
     {
@@ -1807,6 +1866,10 @@
      "value": "partial-or-both"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
    "what": "Doubling is productive: kinship words (妈妈, 哥哥), adverbs (常常 ‘often’), adjectives for vividness (慢慢 ‘slowly’, 高高兴兴 ‘happily’), verbs for ‘a little, briefly’ (看看 ‘have a look’), and nouns or measure words for ‘every’ (人人 ‘everyone’, 天天 ‘every day’). The second syllable of a doubled verb or kin word is toneless.",
    "examples": [
     {
@@ -1855,6 +1918,10 @@
      "feature": "morph.affixation",
      "value": "suffixing"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
    ],
    "what": "A few productive affixes: 老 and 小 before a surname (老王 ‘old Wang’, 小王 ‘young Wang’), 第 before a number for ordinals (第一 ‘first’), 阿 in kin terms (阿姨); agent suffixes 家 (艺术家 ‘artist’), 员 (售货员 ‘shop assistant’), 师 (工程师 ‘engineer’), 者, 手; 们 for groups of people.",
    "examples": [
@@ -2020,12 +2087,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for ar, he: word families come from compounding whole syllables, not from roots"
    },
-   "status": "missing",
-   "gap": "Not said; for learners whose languages build words from roots, a line in the overview: word families come from compounding whole syllables (see zh.morph.compounding).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -2060,10 +2129,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison note (D18) for iu: verb–object words like 吃饭 are separable (吃了饭), not incorporation"
    },
-   "status": "partial",
-   "gap": "The facts are described under zh.morph.separable; the overview does not say that these are separable words, not incorporation.",
+   "status": "covered",
+   "gap": "",
    "when": "later"
   },
   {
@@ -2096,13 +2165,15 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.numerals"
+     "fn.numerals",
+     "fn.pronoun.subject",
+     "fn.plural.noun"
     ],
     "exercises": [],
-    "other": ""
+    "other": "comparison notes (D18) for ar, iu"
    },
-   "status": "missing",
-   "gap": "The concept gap ‘dual’ is noted, but 双, 对 (pair) and 俩 are not in the course and no grammar block says how two is expressed beyond 两.",
+   "status": "partial",
+   "gap": "双, 对 (pair) and 俩 are not in the course; the absence of a dual is said in the comparison notes for ar and iu (D18: fn.pronoun.subject, fn.numerals, fn.plural.noun).",
    "when": "fd.05"
   },
   {
@@ -2518,12 +2589,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for es, fr"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the overview for learners whose languages have a subjunctive; 希望 and 为了 are not in the course.",
+   "status": "partial",
+   "gap": "希望 and 为了 are not in the course; the absence is said only in the overview notes for es and fr (D18).",
    "when": "later"
   },
   {
@@ -2864,6 +2937,8 @@
      "value": "invariant-particle"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "Three different particles all sound de and are told apart only in writing: 的 links a modifier to a noun (我的书), 地 links a manner phrase to a verb (慢慢地走 ‘walk slowly’), 得 links a verb to a comment on how it is done (跑得很快 ‘runs fast’). Native writers also mix them up.",
    "examples": [
     {
@@ -3176,6 +3251,11 @@
      "value": "mixed"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Japanese and Korean put relational place nouns after the noun too (机の上 / 책상 위 'on the desk'), and Amharic frames a place with a preposition plus a postposed place noun.",
    "what": "Where something is inside, on or under is said with a place word after the noun: 桌子上 ‘on the table’, 冰箱里 ‘in the fridge’. An ordinary object noun needs such a place word to be a place (在冰箱里, not *在冰箱), while place names and institutions do not (在学校, 在北京). Together with the coverb 在 before the noun, the place is framed from both sides.",
    "examples": [
     {
@@ -3350,6 +3430,10 @@
      "value": "verbal"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
    "what": "Adjectives are stative verbs: they are the predicate themselves, with no 是. A plain statement uses an unstressed 很 as a link (这个房子很大); a bare adjective sounds contrastive. Before a noun a one-syllable adjective attaches directly (新书), a longer or modified one takes 的 (很新的书).",
    "examples": [
     {
@@ -3403,6 +3487,10 @@
      "feature": "syn.negationPosition",
      "value": "before-verb"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
    ],
    "what": "不 negates will, habits, the present and future, adjectives and 是; 没 (有) negates 有 and says that something did not happen or has not happened yet. ‘Don't!’ is 别 or 不要. The negator stands right before the verb (or before 在 + place), and the choice depends on aspect and on the verb, not on tense.",
    "examples": [
@@ -3465,6 +3553,11 @@
      "value": "final"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Vietnamese có … không? frames the verb in a similar way.",
    "what": "A yes/no question adds the particle 吗 at the end of the statement, or repeats the verb with 不 between (A-not-A: 你喝不喝茶？); nothing moves and the voice need not rise. 呢 asks ‘and …?’ (你呢？ ‘and you?’) or softens a question-word question.",
    "examples": [
     {
@@ -3567,6 +3660,12 @@
      "value": "concord"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ja",
+    "vi"
+   ],
    "what": "The question words double as indefinites: 什么 ‘something, anything’, 谁 ‘anyone’, 哪儿 ‘anywhere’. With 都 / 也 they mean ‘every-’ or, negated, ‘no-’: 我什么都不吃 ‘I eat nothing’, 谁都知道 ‘everybody knows’.",
    "examples": [
     {
@@ -3616,6 +3715,14 @@
      "value": "particle"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "th",
+    "ga",
+    "cy"
+   ],
+   "alsoNote": "Vietnamese often echoes the verb too, but also has general 'yes' words (vâng, dạ) and không 'no'.",
    "what": "Yes/no questions are answered by repeating the verb (or adjective), negated for ‘no’: 要。/ 不要。, 有。/ 没有。; 对 ‘right’ confirms a statement. 是 means ‘yes’ only for questions with 是.",
    "examples": [
     {
@@ -3762,6 +3869,10 @@
      "value": "verbal"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
    "what": "How well or how fast something is done follows the verb with 得: 他跑得很快 ‘he runs fast’. With an object the verb is repeated (or the object fronted): 他说中文说得很好 / 他中文说得很好 ‘he speaks Chinese well’.",
    "examples": [
     {
@@ -3808,6 +3919,9 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Cantonese has a similar but much rarer, formal 將 construction.",
    "what": "With 把 the definite object moves before the verb, and the sentence says what is done to it and with what result: 我把书放在桌子上了 ‘I put the book on the table’. The verb must be followed by something (a place, a result, 了). It is required with verbs like 放 ‘put’ when the place follows.",
    "examples": [
     {
@@ -3848,6 +3962,12 @@
      "value": "periphrastic"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "vi",
+    "th"
+   ],
+   "alsoNote": "Cantonese 畀 passive has the same structure but is used for neutral events too; Japanese has an adversative passive in -(r)are-.",
    "what": "被 marks the passive: object – 被 – (agent) – verb – result. It is used mainly for unwelcome events (stolen, broken, criticised); for neutral events Chinese prefers an active sentence or a topic. Like 把, the verb needs something after it.",
    "examples": [
     {
@@ -3981,6 +4101,10 @@
      "feature": "syn.copula",
      "value": "obligatory"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
    ],
    "what": "For a past event already known, 是……的 puts the focus on when, where, how or with whom it happened: 你是怎么来的？ ‘how did you come?’ — 我是坐飞机来的 ‘I came by plane’. It is the normal way to ask about the circumstances of a past event.",
    "examples": [
@@ -4181,6 +4305,11 @@
      "value": "conjunctions"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Vietnamese pairs its connectives the same way (vì … nên, tuy … nhưng, nếu … thì); Japanese marks 'when' and 'if' at the end of the clause (…時, …なら).",
    "what": "Clauses are often linked by pairs: 因为…所以 ‘because … so’, 虽然…但是 ‘although … but’, 如果…就 ‘if … then’. ‘When’ and ‘if’ can be marked at the end of their clause (…的时候, …的话). ‘And’ (和) never joins clauses.",
    "examples": [
     {
@@ -4474,10 +4603,10 @@
      "fn.possessive"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.possessive comparison notes (D18) for ar, he (construct state) and fa (ezafe): the possessed noun never changes, only the owner takes 的"
    },
-   "status": "partial",
-   "gap": "fn.possessive covers 的; the absence of a construct form or linker on the head is not said.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.06"
   },
   {
@@ -4556,12 +4685,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison note (D18) for tr"
    },
-   "status": "missing",
-   "gap": "Not said; 听说 and 好像 are not in the course. A line in the overview for learners whose languages mark evidentiality.",
+   "status": "partial",
+   "gap": "听说 and 好像 are not in the course; the absence is said only in the overview note for tr (D18).",
    "when": "later"
   },
   {
@@ -4747,13 +4878,14 @@
     "paradigm": [],
     "grammar": [
      "fn.word.order",
-     "fn.time.day"
+     "fn.time.day",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.word.order (block German V2 vs Chinese) and comparison notes (D18) for de in fn.word.order, fn.time.day and fn.overview"
    },
-   "status": "partial",
-   "gap": "fn.word.order and fn.time.day show both orders; the absence of a V2 rule is said only in the overview’s note for one learner language.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.07, fd.14"
   },
   {
@@ -4854,6 +4986,11 @@
      "value": "bifurcate-collateral"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Korean, Vietnamese and Hindi also split uncles and aunts by side and by relative age, with their own sets of terms.",
    "what": "Chinese has no general ‘uncle’, ‘aunt’, ‘cousin’ or ‘grandfather’: the word says whose side (father's or mother's), older or younger, and blood relative or in-law. 叔叔 is the father's younger brother, 伯伯 his elder brother, 舅舅 the mother's brother; 堂 cousins are the children of the father's brothers, all others are 表.",
    "examples": [
     {
@@ -5186,6 +5323,11 @@
      "value": "particle"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "fi"
+   ],
    "what": "In a question offering a choice, ‘or’ is 还是 (and no 吗); in statements it is 或者. The two are not interchangeable.",
    "examples": [
     {
@@ -5234,6 +5376,12 @@
      "value": "manner-specific"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "th"
+   ],
+   "alsoNote": "Cantonese pedals a bicycle (踩單車) rather than sitting astride it.",
    "what": "‘Go by’ a vehicle depends on how you sit: 坐 for vehicles you sit in as a passenger (bus, train, plane, taxi, boat), 骑 for what you straddle (bicycle, motorbike, horse); driving yourself is 开.",
    "examples": [
     {
@@ -5371,6 +5519,12 @@
      "value": "analytic"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "vi"
+   ],
+   "alsoNote": "Thai, Japanese and Korean also split 'old' for people and for things.",
    "what": "‘Old’ splits: 老 for people, animals and long-standing relations, 旧 for used things; ‘new’ is 新 for things, but ‘young’ for people is 年轻. Age comparison uses 大 / 小 with 比: 他比我大两岁 ‘he is two years older than me’.",
    "examples": [
     {
@@ -5419,6 +5573,17 @@
      "value": "pervasive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ja",
+    "ko",
+    "vi",
+    "id",
+    "ms",
+    "tl",
+    "bn"
+   ],
    "what": "Raw rice grains are 米 (on the plant 稻子), cooked rice is 米饭 or 饭, and 饭 also means ‘a meal’ (吃饭 ‘to eat, have a meal’).",
    "examples": [
     {
@@ -5464,6 +5629,14 @@
      "value": "productive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "de",
+    "nl",
+    "sv"
+   ],
+   "alsoNote": "Vietnamese mượn and Thai ยืม mean 'borrow' and become 'lend' with cho / ให้ 'give' before them.",
    "what": "借 means both ‘borrow’ and ‘lend’; the direction comes from the construction: 跟 / 向 someone 借 ‘borrow from’, 借给 someone ‘lend to’.",
    "examples": [
     {
@@ -5548,6 +5721,11 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "ja"
+   ],
+   "alsoNote": "Cantonese and Korean separate clock points from durations in a similar way (三點 / 三個鐘; 세 시 / 세 시간).",
    "what": "Chinese separates points from amounts of time: 什么时候 ‘when (at what point)’ vs 时间 ‘time (an amount)’; 三点 ‘three o'clock’ vs 三个小时 ‘three hours’; 十分 ‘ten past’ (on the clock) vs 十分钟 ‘ten minutes’.",
    "examples": [
     {
@@ -5597,6 +5775,10 @@
      "value": "optional"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
    "what": "‘Again’ depends on whether the repetition is still to come (再: 明天再来 ‘come again tomorrow’, and 再见 ‘see you again’) or has already happened (又: 他又来了 ‘he came again’).",
    "examples": [
     {
@@ -5637,6 +5819,11 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "German makes a similar firm / polite split with wollen and möchten.",
    "what": "要 + noun is ‘want, ask for’ and 要 + verb is a firm ‘want to, will’; 想 + verb is a softer ‘would like to’ (想 also means ‘think’ and ‘miss’). ‘I don't want to’ is 我不想; 不要 is a command ‘don't!’.",
    "examples": [
     {
@@ -5691,6 +5878,10 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
    "what": "高兴 and 开心 describe being glad or having fun; wishes use 快乐: 生日快乐 ‘happy birthday’, 新年快乐 ‘happy New Year’ (never *生日高兴).",
    "examples": [
     {
@@ -5740,6 +5931,11 @@
      "value": "pervasive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Vietnamese words of Chinese origin behave in a similar way.",
    "what": "Short, old words have many meanings, and compounds pick one: 天 ‘day’, ‘sky’, ‘weather’ (今天, 天空, 天气); 家 ‘home’, ‘family’, the measure word for businesses and the suffix ‘-ist’; 开 ‘open’, ‘drive’, ‘switch on’, ‘bloom’.",
    "examples": [
     {
@@ -5943,6 +6139,8 @@
      "value": "variants"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "The standard varieties of the mainland (普通话) and Taiwan (國語) differ in a number of everyday words, and the same word can mean different things: 土豆 is ‘potato’ in Beijing but ‘peanut’ in Taiwan. North and south also differ (西红柿 / 番茄 ‘tomato’).",
    "examples": [
     {
@@ -6035,6 +6233,13 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ja",
+    "ko"
+   ],
+   "alsoNote": "Vietnamese also uses Sino-Vietnamese four-syllable idioms (thành ngữ).",
    "what": "Chengyu are fixed four-character expressions, mostly from classical texts, often with a story behind them. They are frequent in writing and educated speech and cannot be understood word by word.",
    "examples": [
     {
@@ -6074,6 +6279,10 @@
      "feature": "phon.syllableStructure",
      "value": "moderately-complex"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
    ],
    "what": "A xiehouyu is a riddle-like saying in two parts; the speaker often says only the first part and the listener supplies the second, which frequently rests on a pun.",
    "examples": [
@@ -6152,6 +6361,11 @@
      "value": "moderately-complex"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Japanese and Korean avoid 4 for the same reason (shi / sa sound like 'death').",
    "what": "Sound-alikes carry luck: 四 sì sounds like 死 sǐ ‘die’ (no 4th floor), 八 bā like 发 fā ‘get rich’, 鱼 yú like 余 yú ‘surplus’ (fish at New Year: 年年有余). A clock is never a gift (送钟 sòng zhōng sounds like 送终 ‘attend a deathbed’).",
    "examples": [
     {
@@ -6198,6 +6412,12 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ko"
+   ],
+   "alsoNote": "Japanese, Hungarian and Vietnamese also put the family name first; Japanese titles follow the name too (田中先生).",
    "what": "The surname comes first and is usually one syllable (王, 李, 张), followed by a one- or two-syllable given name: 王小明. Titles follow the name (王老师). Asking politely for someone's surname is 您贵姓？",
    "examples": [
     {
@@ -6242,6 +6462,13 @@
      "value": "particle"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ko",
+    "vi",
+    "th"
+   ],
    "what": "Among acquaintances, a common greeting is a question about what the other is doing — 吃了吗？ ‘have you eaten?’, 去哪儿啊？ ‘where are you off to?’ — not a real inquiry; a short answer is enough. 你好 is more for strangers; 你好吗 is a real question about someone you have not seen for a while.",
    "examples": [
     {
@@ -6281,6 +6508,12 @@
      "feature": "prag.speechLevels",
      "value": "none"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ja",
+    "ko"
    ],
    "what": "A compliment is traditionally deflected rather than accepted with ‘thank you’: 哪里哪里 ‘not at all’ (literally ‘where, where?’), 过奖了 ‘you flatter me’. Younger speakers say 谢谢 more often.",
    "examples": [
@@ -6414,12 +6647,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "fn.overview comparison notes (D18) for el, ru, hi, mr"
    },
-   "status": "missing",
-   "gap": "Not said; a line in the overview for learners whose languages mark the speaker’s sex.",
+   "status": "partial",
+   "gap": "Said in the overview notes for el, ru, hi and mr (D18: 我累了 for a man and a woman); not yet for the other learners whose languages mark the speaker’s sex (es, fr, ar, he, ja, ko).",
    "when": "fd.00"
   },
   {
@@ -6455,13 +6690,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.greetings"
+     "fn.greetings",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.greetings teaches 您, 请 and 您贵姓; its comparison notes (D18) for ko and ja and the overview note for ko say that Chinese has no speech levels"
    },
-   "status": "partial",
-   "gap": "fn.greetings teaches 您 and 请; 贵姓 and the absence of speech levels are not said.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.02"
   },
   {
@@ -6570,6 +6806,10 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
    "what": "Before a measure word ‘two’ is 两 (两个人, 两点 ‘two o'clock’); when counting, inside larger numbers and in ordinals it is 二 (十二, 二十, 第二). 两 can also mean ‘a couple of’.",
    "examples": [
     {
@@ -6658,6 +6898,11 @@
      "value": "decimal"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Vietnamese also says a word for the gap (một trăm lẻ / linh một '101'), but names each empty place in longer numbers.",
    "what": "A missing place inside a number is said with 零 (once for any number of zeros): 一百零一 = 101, 一千零五 = 1005. 10 is 十, but 110 is 一百一十.",
    "examples": [
     {
@@ -6801,6 +7046,12 @@
      "feature": "time.halfHour",
      "value": "half-past"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "ja",
+    "ko"
    ],
    "what": "Fractions and percentages name the whole first: 三分之一 ‘one third’ (of three parts, one), 百分之五十 ‘50 %’ (of a hundred parts, fifty). 半 ‘half’ is special: 三点半 ‘half past three’, 半个小时 ‘half an hour’.",
    "examples": [
@@ -6950,6 +7201,13 @@
      "value": "gregorian-plus-traditional"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue",
+    "vi",
+    "ko"
+   ],
+   "alsoNote": "Japanese keeps the twelve animals but celebrates New Year on 1 January; Mongolian and Tibetan have their own lunisolar New Year with the twelve animals.",
    "what": "Alongside the Gregorian calendar, the traditional lunisolar calendar (农历) fixes the festivals — 春节 Spring Festival, 中秋节 Mid-Autumn — and each year has one of twelve animals (生肖): 2026 is a Year of the Horse. Birthdays may be counted in either calendar.",
    "examples": [
     {
@@ -6993,6 +7251,11 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Traditional Korean age also counted a newborn as one.",
    "what": "Age is a number + 岁 without 是 (我二十岁). The question depends on whom you ask: 你几岁？ to a child, 你多大？ to a peer, 您多大年纪？ to an older person. Traditionally a newborn counted as one year old (虚岁).",
    "examples": [
     {
@@ -7042,6 +7305,9 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Cantonese has the same written / spoken split with its own spoken words (蚊, 毫).",
    "what": "The yuan is 元 in writing but 块 in speech; a tenth is 角 (written) or 毛 (spoken), a hundredth 分. Prices are said with 钱: 五块钱 ‘five yuan’, 三块五 ‘3.50’.",
    "examples": [
     {
@@ -7085,6 +7351,11 @@
      "value": "distinct"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
+   ],
+   "alsoNote": "Japanese 青, Korean 푸르다 and Vietnamese xanh also cover both green and blue.",
    "what": "Basic colours have a short adjective (红 ‘red’) and a noun with 色 ‘colour’ (红色 ‘red (colour)’). Green 绿 lǜ and blue 蓝 lán are two basic colours; the older 青 covers green, blue and black shades in set words (青菜 ‘green vegetables’, 青天 ‘blue sky’). Colours carry cultural meaning: red for luck and celebration, white for mourning, 黄色 also ‘pornographic’, and a ‘green hat’ (戴绿帽子) for a man whose partner cheats.",
    "examples": [
     {
@@ -7131,6 +7402,10 @@
      "feature": "prag.diglossia",
      "value": "none"
     }
+   ],
+   "specific": true,
+   "alsoIn": [
+    "yue"
    ],
    "what": "Mandarin (普通话 / 國語) is the standard, and its spoken and written forms are the same language, with no separate high variety. Cantonese, Wu, Min and Hakka, however, are separate Sinitic languages, mutually unintelligible with Mandarin though written with the same characters. Many Chinese speak a regional language at home, and dialect words appear in the standard (regional senses in the lexicon).",
    "examples": [

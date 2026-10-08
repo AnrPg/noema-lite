@@ -1,7 +1,21 @@
 {
  "function": "fn.connectors",
  "status": "realized",
- "summary": "Hebrew joins clauses without ever changing their word order: a subordinate clause looks exactly like a main clause — there is no verb-final rule as in German. Two kinds of linking words do the work. Separate words: וְ “and” (a prefix), אוֹ “or”, אֲבָל “but”, כִּי “because” (+ a clause; בִּגְלַל + a noun), לָכֵן “so, therefore” and, in speech, אָז “so”, וְאָז / אַחַר כָּךְ “and then”, אִם “if”. And the prefix שֶׁ “that”, written onto the first word of its clause: אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה “I’m glad that you are here” — it is never left out, as English “that” often is, and it doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א ה ח ע ר. שֶׁ is the key to a whole family: a preposition + שֶׁ becomes a conjunction — כְּשֶׁ “when” (from כְּ “as”), לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, מִשּׁוּם שֶׁ “because”, לַמְרוֹת שֶׁ and אַף עַל פִּי שֶׁ “although”. A clause can come first or second; when the subordinate clause comes first, a comma follows it: כְּשֶׁאֲנִי עָיֵף, אֲנִי שׁוֹתֶה קָפֶה. Two tense rules differ from English: after כְּשֶׁ and אִם a future event is in the future tense (כְּשֶׁאֶהְיֶה גָּדוֹל “when I grow up”, אִם יֵרֵד גֶּשֶׁם “if it rains”), and reported speech keeps the original tense.",
+ "typology": [
+  {
+   "feature": "syn.subordination",
+   "value": "conjunctions"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "none"
+  },
+  {
+   "feature": "verb.converbs",
+   "value": "none"
+  }
+ ],
+ "summary": "Hebrew joins clauses without ever changing their word order: a subordinate clause looks exactly like a main clause — there is no verb-final rule as in German. Two kinds of linking words do the work. Separate words: וְ “and” (a prefix), אוֹ “or”, אֲבָל “but”, כִּי “because” (+ a clause; בִּגְלַל + a noun), לָכֵן “so, therefore” and, in speech, אָז “so”, וְאָז / אַחַר כָּךְ “and then”, אִם “if”. And the prefix שֶׁ “that”, written onto the first word of its clause: אֲנִי שָׂמֵחַ שֶׁאַתָּה פֹּה “I’m glad that you are here” — it is never left out, and it doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א ה ח ע ר. שֶׁ is the key to a whole family: a preposition + שֶׁ becomes a conjunction — כְּשֶׁ “when” (from כְּ “as”), לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”, עַד שֶׁ “until”, מִשּׁוּם שֶׁ “because”, לַמְרוֹת שֶׁ and אַף עַל פִּי שֶׁ “although”. A clause can come first or second; when the subordinate clause comes first, a comma follows it: כְּשֶׁאֲנִי עָיֵף, אֲנִי שׁוֹתֶה קָפֶה. Two tense rules matter: after כְּשֶׁ and אִם a future event is in the future tense (כְּשֶׁאֶהְיֶה גָּדוֹל “when I grow up”, אִם יֵרֵד גֶּשֶׁם “if it rains”), and reported speech keeps the original tense.",
  "blocks": [
   {
    "t": "table",
@@ -57,7 +71,13 @@
      "לַמְרוֹת שֶׁהַבַּיִת יָשָׁן, הוּא יָפֶה."
     ]
    ],
-   "caption": "The word order inside both clauses stays subject – verb – object."
+   "caption": "The word order inside both clauses stays subject – verb – object.",
+   "typology": [
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -91,7 +111,13 @@
      "לַמְרוֹת שֶׁ “although”"
     ]
    ],
-   "caption": "The prepositions of lessons 11–15 become conjunctions with שֶׁ: לִפְנֵי הָעֲבוֹדָה “before work” → לִפְנֵי שֶׁאֲנִי הוֹלֵךְ “before I go”."
+   "caption": "The prepositions of lessons 11–15 become conjunctions with שֶׁ: לִפְנֵי הָעֲבוֹדָה “before work” → לִפְנֵי שֶׁאֲנִי הוֹלֵךְ “before I go”.",
+   "typology": [
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -110,6 +136,12 @@
       "לָכֵן אֲנִי נִשְׁאָר — the same order as without it"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "none"
+    }
    ]
   },
   {
@@ -122,7 +154,7 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "Future after “when” and “if”",
-   "text": "English says “when I grow up”, “if it rains” in the present; Hebrew uses the future: כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם. (A general truth stays in the present: כְּשֶׁאֲנִי עָיֵף, אֲנִי שׁוֹתֶה קָפֶה “whenever I’m tired”.)"
+   "text": "A future event after כְּשֶׁ or אִם is in the future tense: כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם. (A general truth stays in the present: כְּשֶׁאֲנִי עָיֵף, אֲנִי שׁוֹתֶה קָפֶה “whenever I’m tired”.)"
   },
   {
    "t": "callout",
@@ -311,6 +343,103 @@
    "lang": "zh",
    "fn": "fn.connectors",
    "note": "Chinese likes pairs — 因为 … 所以 … (because … so …), 虽然 … 但是 … (although … but …) — where Hebrew uses one word; and it has no word for “that” (我知道他是老师), where Hebrew cannot do without שֶׁ."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek ότι / που ~ שֶׁ, όταν ~ כְּשֶׁ, αν ~ אִם, γιατί ~ כִּי, αλλά ~ אֲבָל, and the word order stays as in a main clause — as in Hebrew."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "что ~ שֶׁ, когда ~ כְּשֶׁ, если ~ אִם, потому что ~ כִּי, но ~ אֲבָל; Russian also uses the future after когда / если for a future event (когда я вырасту ~ כְּשֶׁאֶהְיֶה גָּדוֹל). Hebrew שֶׁ is never left out."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "que ~ שֶׁ, cuando ~ כְּשֶׁ, si ~ אִם, porque ~ כִּי, pero ~ אֲבָל. Where Spanish puts cuando + subjunctive (cuando sea grande), Hebrew uses the future: כְּשֶׁאֶהְיֶה גָּדוֹל. Like que, שֶׁ is never left out."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "“That” can be left out in English, שֶׁ never: אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה. After “when” and “if” English uses the present for the future (“when I grow up”); Hebrew uses the future: כְּשֶׁאֶהְיֶה גָּדוֹל, אִם יֵרֵד גֶּשֶׁם."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "que ~ שֶׁ (never left out in either language), quand ~ כְּשֶׁ, si ~ אִם, parce que ~ כִּי, mais ~ אֲבָל. As with quand + future (quand je serai grand), Hebrew uses the future after כְּשֶׁ — and after אִם too, where French says s’il pleut."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "weil, dass, wenn send the verb to the end; כִּי, שֶׁ, כְּשֶׁ change nothing. deshalb puts the verb before the subject; לָכֵן does not: לָכֵן אֲנִי נִשְׁאָר."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi कि ~ שֶׁ, जब ~ כְּשֶׁ, अगर ~ אִם, क्योंकि ~ כִּי, लेकिन ~ אֲבָל; but Hindi keeps the verb at the end of each clause, while Hebrew keeps subject – verb – object."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian که ~ שֶׁ, وقتی که ~ כְּשֶׁ, اگر ~ אִם, چون ~ כִּי, ولی / اما ~ אֲבָל; but Persian keeps the verb at the end of each clause, Hebrew keeps subject – verb – object."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi की “that”, जेव्हा “when”, जर “if”, कारण “because” are close to שֶׁ, כְּשֶׁ, אִם, כִּי; but Marathi keeps the verb at the end of each clause, and Hebrew needs no second word like तेव्हा / तर."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic أَنَّ ~ שֶׁ, عِنْدَمَا ~ כְּשֶׁ, إِذَا / إِنْ ~ אִם, لِأَنَّ ~ כִּי, لٰكِنْ ~ אֲבָל, لِذٰلِكَ ~ לָכֵן. Written Arabic often puts the verb first; Hebrew keeps the subject first in both clauses."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish builds subordinate clauses with verb forms (geldiğinde “when he comes”, geldiği için “because he came”); Hebrew uses linking words and leaves the verb as it is: כְּשֶׁהוּא בָּא, כִּי הוּא בָּא."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese chains clauses with verb forms (-て, -たら, -から) placed at the end of the clause; Hebrew puts the linking word first (כִּי, כְּשֶׁ, אִם) and changes nothing in the verb."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean joins clauses with endings on the verb (-고, -아서, -면); Hebrew puts a separate linking word before the clause: וְ, כִּי, אִם."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish että ~ שֶׁ, kun ~ כְּשֶׁ, jos ~ אִם, koska ~ כִּי, mutta ~ אֲבָל — linking words at the start, and the word order stays as in a main clause."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian hogy ~ שֶׁ, amikor ~ כְּשֶׁ, ha ~ אִם, mert ~ כִּי, de ~ אֲבָל — joining words at the start of the clause, as in Hebrew."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili kwamba ~ שֶׁ, kwa sababu ~ כִּי, lakini ~ אֲבָל, kama ~ אִם — linking words before the clause with no change of order, as in Hebrew."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "因为 ~ כִּי, 所以 ~ לָכֵן, 但是 ~ אֲבָל, 如果 ~ אִם; Chinese often pairs 因为 … 所以 …, Hebrew uses one of them. Chinese …的时候 “when” closes its clause; Hebrew כְּשֶׁ opens it."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "vì ~ כִּי, nên ~ לָכֵן, nhưng ~ אֲבָל, nếu ~ אִם, khi ~ כְּשֶׁ — linking words at the start, as in Hebrew; Vietnamese often pairs vì … nên, Hebrew uses one of them."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut joins clauses with verb moods (endings meaning “because”, “when”, “if”) rather than separate words; Hebrew uses linking words — כִּי, כְּשֶׁ, אִם — and changes nothing in the verb."
   }
  ]
 }

@@ -1,6 +1,16 @@
 {
  "function": "fn.direction",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "sem.motionFraming",
+   "value": "equipollent"
+  },
+  {
+   "feature": "syn.serialVerbs",
+   "value": "productive"
+  }
+ ],
  "summary": "Chinese says ‘where to’ with the verb itself: 去 ‘go (there)’, 来 ‘come (here)’, 回 ‘go back’, 进 ‘enter’, 到 ‘arrive’ take the place as their object — 我去学校 ‘I go to school’, no word for ‘to’ and no case. ‘Where from’ is 从 + place before the verb: 他从北京来. A whole trip is 从 A 到 B: 从我家到学校. How you travel is a small verb phrase BEFORE the main verb: 坐 + vehicle you ride in (坐公共汽车去 ‘go by bus’), 骑 + what you sit astride (骑自行车去 ‘go by bike’), 开车 ‘drive’, 走路 ‘on foot’. After a verb of movement, 来 / 去 show the direction seen from the speaker: 进来 ‘come in’, 进去 ‘go in’, 回来 ‘come back’, 出去 ‘go out’. The order is always: who – (when) – from where / how – movement verb – where to.",
  "blocks": [
   {
@@ -13,53 +23,59 @@
     "去",
     "学校"
    ],
-   "caption": "who – when – from where – how – the movement – where to"
+   "caption": "who – when – from where – how – the movement – where to",
+   "typology": [
+    {
+     "feature": "syn.serialVerbs",
+     "value": "productive"
+    }
+   ]
   },
   {
    "t": "table",
    "head": [
-    "English / Greek",
+    "Meaning",
     "Chinese",
     "How"
    ],
    "rows": [
     [
-     "I go to school. — Πάω στο σχολείο.",
+     "I go to school.",
      "我去学校。",
      "the verb takes the place: no ‘to’"
     ],
     [
-     "He comes from Beijing. — Έρχεται από το Πεκίνο.",
+     "He comes from Beijing.",
      "他从北京来。",
      "从 + place BEFORE the verb"
     ],
     [
-     "I go to school by bus. — Πάω στο σχολείο με το λεωφορείο.",
+     "I go to school by bus.",
      "我坐公共汽车去学校。",
      "vehicle phrase before 去"
     ],
     [
-     "We fly to Beijing. — Πετάμε για Πεκίνο.",
+     "We fly to Beijing.",
      "我们坐飞机去北京。",
      "坐飞机 ‘sit-plane’"
     ],
     [
-     "I cycle to the park. — Πάω στο πάρκο με το ποδήλατο.",
+     "I cycle to the park.",
      "我骑自行车去公园。",
      "骑 for a bike"
     ],
     [
-     "My father drives to work. — Ο πατέρας μου πάει στη δουλειά με το αυτοκίνητο.",
+     "My father drives to work.",
      "我爸爸开车去工作。",
      "开车 ‘drive’"
     ],
     [
-     "I walk home. — Πάω σπίτι με τα πόδια.",
+     "I walk home.",
      "我走路回家。",
      "走路 ‘on foot’"
     ],
     [
-     "from my home to the station — από το σπίτι μου ως τον σταθμό",
+     "from my home to the station",
      "从我家到车站",
      "从 … 到 …"
     ]
@@ -82,6 +98,12 @@
       "你来我家吧！ Come to my place!",
       "进来 come in · 出来 come out · 回来 come back (here)"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "sem.motionFraming",
+     "value": "equipollent"
     }
    ]
   },
@@ -143,13 +165,19 @@
      "—"
     ]
    ],
-   "caption": "坐 what you ride in, 骑 what you sit astride, 开 what you drive"
+   "caption": "坐 what you ride in, 骑 what you sit astride, 开 what you drive",
+   "typology": [
+    {
+     "feature": "syn.serialVerbs",
+     "value": "productive"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
-   "title": "Greek σε / German zu, nach, in — Chinese: nothing",
-   "text": "Πάω στο σχολείο, ich gehe in die Schule / zur Schule / nach Hause: the preposition (and in German the case) depends on the place. Chinese has none of this: 去学校, 去超市, 回家, 到北京 — the movement verb carries the ‘to’."
+   "title": "German zu, nach, in — Chinese: nothing",
+   "text": "German ich gehe in die Schule / zur Schule / nach Hause: the preposition and the case depend on the place. Chinese has none of this: 去学校, 去超市, 回家, 到北京 — the movement verb carries the ‘to’."
   },
   {
    "t": "callout",
@@ -212,7 +240,7 @@
    "How do I travel? → 坐 / 骑 / 开 + vehicle, or 走路 — before the movement verb.",
    "Leaving a place? → 离开 + place; just leaving → 走; going out → 出去.",
    "Into / out of / back, seen from where I stand? → verb + 来 (towards me) or 去 (away).",
-   "Did I put the vehicle or 从-phrase at the end, as in English? → move it before the verb."
+   "Did I put the vehicle or the 从-phrase at the end? → move it before the verb."
   ],
   "steps": [
    "Who (and when).",
@@ -358,6 +386,108 @@
    ],
    "answer": "从我家到学校",
    "why": "从 A 到 B."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek πάω στο σχολείο needs σε for the goal and puts the means after it (με το λεωφορείο); Chinese puts the goal right after the verb with no ‘to’ (去学校) and the means before the verb (坐公共汽车去学校)."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian chooses the verb by means — идти on foot, ехать by vehicle — and needs в / на for the goal (иду в школу). Chinese uses 去 for both, adds 走路 / 坐车 before it, and the goal follows 去 with no preposition."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish ir a la escuela needs a; Chinese 去学校 needs nothing. The means comes after in Spanish (en autobús), before in Chinese (坐公共汽车去)."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English go to school / come from Beijing / by bus put ‘to’, ‘from’ and the means after the verb; Chinese puts 从 + place and the means before the verb and the goal right after it, with no ‘to’: 我从家坐公共汽车去学校."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French aller à l’école / venir de Pékin / en bus puts everything after the verb; Chinese: 从北京来, 坐公共汽车去, 去学校 — source and means before the verb, goal after it, no ‘to’."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German splits gehen / fahren by means and zu / nach / in by goal; Chinese 去 does all of it, adds the means before it, and needs no preposition for the goal."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi often needs no postposition for a destination either (मैं स्कूल जाता हूँ ‘I go to school’) — like 去学校 — but puts it before the verb; Chinese after it. से ‘from’ ~ 从, also before the verb."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Spoken Persian often needs no preposition for the goal (madrese miram ‘I go to school’) — like 去学校 — but puts it before the verb; Chinese after it."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi marks the goal with an ending and puts it before the verb (मी शाळेत जातो ‘I go to school’); Chinese puts the bare goal after 去: 我去学校."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic dhahabtu ilā l-madrasa needs ilā ‘to’ after the verb and bi- for the means; Chinese needs no ‘to’ and puts the means before the verb: 坐公共汽车去学校."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew splits halakh (on foot) and nasa (by vehicle), as German does; Chinese uses 去 for every trip, with the means before it (走路去, 坐车去)."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish marks the goal with -e / -a before the verb (okula gidiyorum) and the means with -le (otobüsle); Chinese puts the goal after the verb, unmarked (去学校), and the means before it (坐公共汽车)."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese 学校に行く puts the goal before the verb with に and the means with で (バスで); Chinese: 坐公共汽车去学校 — means first, then 去, then the goal without a particle."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean 학교에 가요 puts the goal before the verb with 에 and the means with 로 (버스로); Chinese: 坐公共汽车去学校 — the means before, the goal after 去."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish marks the goal by case (kouluun ‘to school’) and the means with -lla (bussilla); Chinese has no case: 坐公共汽车去学校."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian preverbs (bemegy ‘goes in’, kijön ‘comes out’) show direction together with the verb, much like Chinese 进去, 出来; the goal takes a case ending (iskolába), while the Chinese goal stands bare after 去."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili ninaenda shuleni ‘I go to school’ marks the goal with -ni and puts the means after (kwa basi); Chinese: 坐公共汽车去学校."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda marks the goal with a place word after the verb; Chinese puts the bare goal right after 去 and the means before the verb."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese đi Hà Nội also takes the goal right after the verb with no ‘to’ — like 去北京 — but puts the means after it (đi bằng xe buýt); Chinese puts the means first: 坐公共汽车去."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks goal and source with case endings on the noun (-mut ‘to’, -mit ‘from’); Chinese uses the verb itself for the goal (去学校) and 从 before the verb for the source."
   }
  ],
  "seeAlso": [

@@ -1,7 +1,7 @@
 {
  "function": "fn.comparison",
  "status": "realized",
- "summary": "Arabic compares with one special form of the adjective, the elative أَفْعَلُ (ʾafʿal, “more / most”): كَبِير → أَكْبَرُ, صَغِير → أَصْغَرُ, جَمِيل → أَجْمَلُ, سَرِيع → أَسْرَعُ. With مِنْ it is the comparative: الْبَيْتُ أَكْبَرُ مِنَ الشَّقَّةِ (the house is bigger than the flat) — “than” is the same مِنْ as “from”, as in Greek μεγαλύτερος από. With the article, or before a noun in the genitive, it is the superlative: الْبَيْتُ الْأَكْبَرُ (the biggest house), أَكْبَرُ بَيْتٍ فِي الْقَرْيَةِ (the biggest house in the village). The comparative does not change for gender or number — أَخِي أَكْبَرُ مِنِّي, أُخْتِي أَكْبَرُ مِنِّي — and it is a diptote: أَكْبَرُ, accusative and genitive أَكْبَرَ, never with tanwīn. Roots with a doubled or weak letter keep their shape: حَارّ → أَحَرُّ, قَرِيب → أَقْرَبُ, بَطِيء → أَبْطَأُ, سَيِّئ → أَسْوَأُ (worse), غَالٍ → أَغْلَى (never changes). “Better” is أَفْضَلُ (or أَحْسَنُ), not a form of جَيِّد. Adjectives that cannot take the pattern — the colours, participles like مُتْعَب — use أَكْثَرُ (more) or أَشَدُّ + a noun in the accusative: أَكْثَرُ تَعَبًا (more tired), أَكْثَرُ حُمْرَةً (redder). أَكْثَرُ is itself the elative of كَثِير: “more” (أُحِبُّ الشَّايَ أَكْثَرَ مِنَ الْقَهْوَةِ) and, before a definite plural, “most of” (أَكْثَرُ النَّاسِ). The colours have a pattern of their own that looks like the elative: أَحْمَرُ (m.), حَمْرَاءُ (f.), حُمْرٌ (pl.) — with no tanwīn in the singular; the newer colour words in -iyy (بُنِّيّ, رَمَادِيّ, بُرْتُقَالِيّ, وَرْدِيّ, بَنَفْسَجِيّ) are regular. Light and dark shades follow the colour: أَزْرَقُ فَاتِحٌ, أَخْضَرُ غَامِقٌ.",
+ "summary": "Arabic compares with one special form of the adjective, the elative أَفْعَلُ (ʾafʿal, “more / most”): كَبِير → أَكْبَرُ, صَغِير → أَصْغَرُ, جَمِيل → أَجْمَلُ, سَرِيع → أَسْرَعُ. With مِنْ it is the comparative: الْبَيْتُ أَكْبَرُ مِنَ الشَّقَّةِ (the house is bigger than the flat) — “than” is the same مِنْ as “from”. With the article, or before a noun in the genitive, it is the superlative: الْبَيْتُ الْأَكْبَرُ (the biggest house), أَكْبَرُ بَيْتٍ فِي الْقَرْيَةِ (the biggest house in the village). The comparative does not change for gender or number — أَخِي أَكْبَرُ مِنِّي, أُخْتِي أَكْبَرُ مِنِّي — and it is a diptote: أَكْبَرُ, accusative and genitive أَكْبَرَ, never with tanwīn. Roots with a doubled or weak letter keep their shape: حَارّ → أَحَرُّ, قَرِيب → أَقْرَبُ, بَطِيء → أَبْطَأُ, سَيِّئ → أَسْوَأُ (worse), غَالٍ → أَغْلَى (never changes). “Better” is أَفْضَلُ (or أَحْسَنُ), not a form of جَيِّد. Adjectives that cannot take the pattern — the colours, participles like مُتْعَب — use أَكْثَرُ (more) or أَشَدُّ + a noun in the accusative: أَكْثَرُ تَعَبًا (more tired), أَكْثَرُ حُمْرَةً (redder). أَكْثَرُ is itself the elative of كَثِير: “more” (أُحِبُّ الشَّايَ أَكْثَرَ مِنَ الْقَهْوَةِ) and, before a definite plural, “most of” (أَكْثَرُ النَّاسِ). The colours have a pattern of their own that looks like the elative: أَحْمَرُ (m.), حَمْرَاءُ (f.), حُمْرٌ (pl.) — with no tanwīn in the singular; the newer colour words in -iyy (بُنِّيّ, رَمَادِيّ, بُرْتُقَالِيّ, وَرْدِيّ, بَنَفْسَجِيّ) are regular. Light and dark shades follow the colour: أَزْرَقُ فَاتِحٌ, أَخْضَرُ غَامِقٌ.",
  "blocks": [
   {
    "t": "table",
@@ -115,7 +115,13 @@
      "الْأَقْدَمُ"
     ]
    ],
-   "caption": "The elative أَفْعَل: one form for “-er” and “-est”."
+   "caption": "The elative أَفْعَل: one form for “-er” and “-est”.",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "both"
+    }
+   ]
   },
   {
    "t": "table",
@@ -150,6 +156,12 @@
      "أَكْثَرُ / أَشَدُّ + accusative noun",
      "أَكْثَرُ تَعَبًا (more tired), أَكْثَرُ حُمْرَةً (redder)"
     ]
+   ],
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "locational"
+    }
    ]
   },
   {
@@ -573,6 +585,103 @@
    "lang": "ar",
    "fn": "fn.prep.core",
    "note": "مِنْ with pronoun endings — مِنِّي, مِنْكَ, مِنْهُ — is “than me, than you, than him”."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.comparison",
+   "value": "locational"
+  },
+  {
+   "feature": "adj.comparativeForm",
+   "value": "both"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "“Than” is the same word as “from” in Greek too: μεγαλύτερος από = أَكْبَرُ مِنْ."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian also uses “from”: بزرگ‌تر از = أَكْبَرُ مِنْ; but Persian adds -tar to any adjective, Arabic changes its pattern (كَبِير → أَكْبَر)."
+  },
+  {
+   "for": "tr",
+   "rel": "same",
+   "text": "Turkish also uses “from”: evden daha büyük (“from the house more big”) = أَكْبَرُ مِنَ الْبَيْتِ."
+  },
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "Hindi also uses “from”: घर से बड़ा = أَكْبَرُ مِنَ الْبَيْتِ — Arabic changes the adjective as well (أَكْبَرُ)."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi puts पेक्षा after the standard (घरापेक्षा मोठा); Arabic puts مِنْ before it and changes the adjective: أَكْبَرُ مِنَ الْبَيْتِ."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese 家より大きい marks the standard with より, close to مِنْ; Arabic also changes the adjective (كَبِير → أَكْبَر)."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean 집보다 커요 puts 보다 (“than”) after the standard; Arabic puts مِنْ before it and uses the elative أَكْبَرُ."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian has a comparative in -ее / -е (быстрее, больше) with чем or the genitive (старше брата); Arabic has the pattern أَفْعَل with مِنْ."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish says más grande que; Arabic changes the adjective (أَكْبَرُ) and says مِنْ for que. As with mejor and peor, “better” and “worse” are words of their own: أَفْضَلُ, أَسْوَأُ."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English bigger / biggest use endings; Arabic has one pattern for both — أَكْبَرُ (bigger), الْأَكْبَرُ (the biggest) — and its “than” is مِنْ, “from”."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French plus grand que; Arabic changes the adjective itself (أَكْبَرُ) and says مِنْ (“from”) for que."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish isompi kuin (or with the partitive: taloa isompi) uses a comparative ending; Arabic uses the pattern أَفْعَل and مِنْ."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian nagyobb, mint a ház — or a háznál nagyobb, with -nál “at”; Arabic says أَكْبَرُ مِنَ الْبَيْتِ, with “from”."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili says kubwa kuliko or kubwa zaidi ya; Arabic changes the adjective (أَكْبَرُ) and adds مِنْ."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda compares with the verb “surpass” (okusinga); Arabic uses the elative and مِنْ: أَكْبَرُ مِنْ."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese adds hơn after the adjective (lớn hơn); Arabic changes the adjective (أَكْبَرُ) and puts مِنْ before the standard."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut adds a comparative suffix and puts the standard in the “from” case (-mit) — the same idea as مِنْ."
   }
  ]
 }

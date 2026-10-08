@@ -67,7 +67,13 @@
      "الْحَمَّامُ عَلَى الْيَمِينِ."
     ]
    ],
-   "caption": "A place word + a genitive noun; no verb “to be” is needed."
+   "caption": "A place word + a genitive noun; no verb “to be” is needed.",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -86,6 +92,12 @@
       "the place first, then the new thing (indefinite, nominative)",
       "هَلْ عَلَى الطَّاوِلَةِ كِتَابٌ؟ — is there a book on the table?"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
     }
    ]
   },
@@ -189,7 +201,13 @@
    "t": "callout",
    "kind": "tip",
    "title": "Rooms are constructs.",
-   "text": "غُرْفَةُ النَّوْمِ (bedroom), غُرْفَةُ الْجُلُوسِ (living room): the case ending is on the first word — فِي غُرْفَةِ النَّوْمِ, بَيْنَ غُرْفَةِ النَّوْمِ وَالْمَطْبَخِ. German makes one word (Schlafzimmer), Arabic two."
+   "text": "غُرْفَةُ النَّوْمِ (bedroom), غُرْفَةُ الْجُلُوسِ (living room): the case ending is on the first word — فِي غُرْفَةِ النَّوْمِ, بَيْنَ غُرْفَةِ النَّوْمِ وَالْمَطْبَخِ. German makes one word (Schlafzimmer), Arabic two.",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
+   ]
   },
   {
    "t": "p",
@@ -389,6 +407,93 @@
    "lang": "ar",
    "fn": "fn.case",
    "note": "Every place word is followed by the genitive (lesson 11)."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "syn.copula",
+   "value": "absent-in-present"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek builds most place words from an adverb + preposition (πάνω σε, κάτω από, δίπλα σε, μπροστά από, πίσω από); Arabic uses one word + the genitive: عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian chooses the case after the place word (на столе / на стол, под столом); Arabic always uses the genitive: عَلَى الطَّاوِلَةِ."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish encima de, debajo de, al lado de, delante de, detrás de are built like Arabic place words: a word + “of” — in Arabic the genitive: تَحْتَ الطَّاوِلَةِ."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English on, under, next to, in front of, behind match عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; for “there is a book on the table” Arabic starts with the place: عَلَى الطَّاوِلَةِ كِتَابٌ."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French sur, sous, à côté de, devant, derrière ↔ عَلَى, تَحْتَ, بِجَانِبِ, أَمَامَ, خَلْفَ; il y a un livre sur la table = عَلَى الطَّاوِلَةِ كِتَابٌ, with no verb."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi place words follow the noun (मेज़ पर, मेज़ के नीचे); Arabic ones come first (عَلَى الطَّاوِلَةِ, تَحْتَ الطَّاوِلَةِ)."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian place words are nouns linked to the next noun — رویِ میز, زیرِ میز, کنارِ میز (with the ezafe) —, just as Arabic تَحْتَ, أَمَامَ take a genitive."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi place words follow the noun (टेबलावर, on the table); Arabic ones come before it."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish says masanın üstünde (“at the table’s top”), with the place word after the noun; Arabic puts it first: عَلَى الطَّاوِلَةِ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese says 机の上に (“at the desk’s top”), after the noun; Arabic puts the place word first."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses postpositions with the genitive (pöydän alla, under the table) or cases (pöydällä, on the table); Arabic puts the place word first, with the genitive after it."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian postpositions follow the noun (az asztal alatt); Arabic place words come first (تَحْتَ الطَّاوِلَةِ)."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili juu ya, chini ya, mbele ya, nyuma ya (“top of, bottom of, front of, back of”) are built like Arabic place words: a noun of place + “of”, before the noun."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese trên, dưới, trước, sau come before the noun (trên bàn, on the table), like عَلَى الطَّاوِلَةِ — but the noun never changes."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut shows position with a noun of place and a case ending; Arabic puts a place word before the noun and the noun in the genitive."
   }
  ]
 }

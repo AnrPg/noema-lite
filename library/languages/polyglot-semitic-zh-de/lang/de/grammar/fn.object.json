@@ -1,6 +1,16 @@
 {
  "function": "fn.object",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "verb.objectMarking",
+   "value": "none"
+  },
+  {
+   "feature": "syn.alignment",
+   "value": "accusative"
+  }
+ ],
  "summary": "The direct object – the thing or person a verb acts on (wen? or was? – whom? what?) – stands in the accusative. In German you see the accusative only in the masculine singular: der → den, ein → einen, kein → keinen, mein → meinen (also deinen, seinen, ihren, unseren, euren, Ihren): Der Kaffee ist hier. → Ich trinke den Kaffee / einen Kaffee. Feminine (die, eine, keine, meine Suppe), neuter (das, ein, kein, mein Brot) and plural (die, keine, meine Äpfel) look exactly like the nominative. The noun itself usually stays the same; a few masculine nouns add -n (der Junge → den Jungen, der Student → den Studenten, der Neffe → den Neffen). Pronouns have their own accusative: mich, dich, ihn, sie, es, uns, euch, sie, Sie (Ich mag dich. Magst du ihn?). Food and drink are often objects without any article: Ich trinke Wasser, Wir essen Brot. Verbs of this step that take an accusative: haben, essen, trinken, kochen, kaufen, mögen, wollen, möchte. sein never takes an object: after sein comes the nominative (Das ist ein Apfel). Because the case marks the object, it may even come first: Den Kaffee trinke ich (the coffee – that’s what I drink). The dative (the indirect object, “to whom”) and objects after prepositions come later (S11–S13 and C03).",
  "blocks": [
   {
@@ -28,7 +38,13 @@
      "die / keine / meine Äpfel"
     ]
    ],
-   "caption": "Only the masculine singular changes: -en (den, einen, keinen, meinen)"
+   "caption": "Only the masculine singular changes: -en (den, einen, keinen, meinen)",
+   "typology": [
+    {
+     "feature": "syn.alignment",
+     "value": "accusative"
+    }
+   ]
   },
   {
    "t": "table",
@@ -107,25 +123,6 @@
    "kind": "tip",
    "title": "No article with food and drink",
    "text": "Speaking of food and drink in general, German uses no article: Ich trinke Wasser. Wir essen Brot. Er kocht Reis. The accusative is then invisible – but it is still there (keinen Reis, den Reis)."
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek and Russian",
-     "points": [
-      "also mark the object: ο καφές → πίνω τον καφέ – τον like German den",
-      "Russian changes feminine -а to -у: я пью воду (вода) – German changes only the masculine article"
-     ]
-    },
-    {
-     "title": "Turkish and English",
-     "points": [
-      "Turkish adds -(y)ı only to a definite object: suyu içiyorum (the water) / su içiyorum (water)",
-      "English shows the object only in pronouns (him, me) and by word order"
-     ]
-    }
-   ]
   }
  ],
  "procedure": {
@@ -316,6 +313,108 @@
    "lang": "de",
    "fn": "fn.case.basic",
    "note": "The nominative (S04) is the subject form; the accusative is the second case you learn."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also marks the object: ο καφές → πίνω τον καφέ, like der → den. But Greek changes the feminine too (η → τη) and the noun ending; German changes only the masculine article: die Suppe stays die Suppe."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian changes feminine -а to -у (вода → воду) and makes animate masculines look genitive; German changes only the masculine singular article (der → den) and keeps the noun."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish marks a person object with a (veo a Juan) and puts object pronouns before the verb (lo como); German has no such a and puts the pronoun after the verb: Ich esse ihn."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English shows the object only in pronouns (him, me) and by position; German also marks it on the masculine article (den, einen) – which is why Den Kaffee trinke ich is possible."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French object pronouns go before the verb (je le mange); German ones go after it: Ich esse ihn."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi marks a definite or human object with ko (laṛke ko) and puts it before the verb; German marks every masculine object on the article (den Jungen) and puts it after the verb."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian marks only a definite object, with rā (ketāb rā xāndam); German marks every masculine object, definite or not: den Kaffee, einen Kaffee."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi marks a definite or human object with -lā; German marks the masculine object on the article, whether definite (den) or not (einen)."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "The accusative -a (al-kitāba) is the same idea, but Arabic shows it on every noun and attaches object pronouns to the verb (akaltuhu); German shows it on the masculine article only and uses a separate pronoun: Ich esse ihn."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew puts et before a definite object (ani ochel et ha-tapuach); German has no such word, it changes the masculine article: Ich esse den Apfel."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adds -(y)ı only to a definite object (suyu içiyorum – su içiyorum); German marks the masculine object whether definite or not (den Saft, einen Saft) and never marks feminine and neuter ones."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks the object with o after it (mizu o nomimasu); German changes the masculine article (den, einen) and puts the object after the verb."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks the object with eul / reul (mul-eul masyeoyo); German marks it on the masculine article only."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish chooses between accusative and partitive (syön omenan – the whole apple; syön omenaa – some of it, or still eating); German has one object case and leaves that to context or the article."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian marks every object with -t (almát) and changes the verb for a definite object (látom a házat); German marks only the masculine article and never changes the verb."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "A known object can be a prefix inside the verb (ninakipenda, I like it); German uses a separate pronoun after the verb: Ich mag es."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda, like other Bantu languages, can put an object marker inside the verb; German needs a separate pronoun: Ich sehe ihn."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese marks the object by position only (我喝咖啡); German changes the masculine article (Ich trinke den Kaffee) and can therefore move the object first. A verb–object compound like 吃饭 has no German counterpart: essen alone needs no object (Wir essen um eins)."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese objects are unmarked and follow the verb; German changes the masculine article: den Kaffee, einen Kaffee."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut leaves the object unmarked, marks the subject of a transitive verb instead (ergative), and shows both persons in the verb ending; German marks the object in the accusative, shows only the subject on the verb, and never builds the object into the verb."
   }
  ]
 }

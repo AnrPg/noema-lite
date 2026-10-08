@@ -44,6 +44,16 @@
      "value": "words"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "et",
+    "fi",
+    "sv",
+    "hu",
+    "tr",
+    "az"
+   ],
+   "alsoNote": "Latin alphabet with umlaut vowels as letters of their own: et ä ö ü, fi/sv ä ö, hu/tr/az ö ü. ß is German only; other Latin-script languages share the basic alphabet but not the umlaut letters.",
    "what": "German is written from left to right in one script, the Latin alphabet: the 26 basic letters plus the umlaut letters ä, ö, ü and the letter ß (Eszett), with spaces between words. Every vowel is written with a letter. Umlauts are separate vowels, not accents: Mutter (mother) and Mütter (mothers) are different words. Without these keys they are written ae, oe, ue and ss (Maedchen, Strasse) – acceptable in e-mails, wrong in careful writing. Old print and some signs use Fraktur, a broken typeface of the same alphabet.",
    "examples": [
     {
@@ -106,10 +116,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview notes (ar: no joining; he: no final forms)."
    },
-   "status": "partial",
-   "gap": "The overview names the Latin alphabet; for learners whose scripts join letters or have final forms it could add that printed German letters stand apart and keep one shape.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -128,6 +138,9 @@
      "value": "contrastive"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The ß/ss rule after long/short vowels is German only (Swiss Standard German writes ss throughout).",
    "what": "ß is written after a long vowel or a diphthong, ss after a short vowel (rule of the 1996 reform): heißen, Straße, aß – but dass, essen, isst. The same verb can switch: essen (short e) → er isst (short i) → er aß (long a). Switzerland and Liechtenstein never use ß (Strasse, heissen). Since 2017 a capital ẞ exists for all-caps text (STRASSE or STRAẞE). The reform of 1996 also replaced daß by dass and keeps three equal consonants in compounds (Brennnessel, Schifffahrt); older texts show the old spellings.",
    "examples": [
     {
@@ -236,6 +249,11 @@
      "value": "conjunctions"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "cs"
+   ],
+   "alsoNote": "Czech has the same set: commas before every subordinate clause, „…“ quotes, decimal comma, ordinal dot. Partly: pl, hu, sr (ordinal dot, low–high quotes), ru (syntactic commas, decimal comma, «…» quotes).",
    "what": "Commas follow the grammar, not the breath: every subordinate clause is separated by a comma (Ich weiß, dass er kommt), also relative clauses and most infinitive groups with um … zu. Quotation marks are „…“ (low–high) or »…«. Numbers use a decimal comma and a thousands point (1,5 · 1.000), and a dot after a number makes it an ordinal: am 3. Mai = am dritten Mai.",
    "examples": [
     {
@@ -354,10 +372,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": "fn.tones is a function of zh only; language.json of de has no tone module."
+    "other": "fn.tones is a function of zh only; language.json of de has no tone module. Comparison notes (D18): fn.overview notes (zh, vi, ja, lg)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview for learners whose languages have tones: German pitch is intonation only (statement ↘, yes/no question ↗, focus), never part of the word.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -463,6 +481,11 @@
      "value": "continuants"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "el"
+   ],
+   "alsoNote": "Greek χ is [ç] before e/i and [x] elsewhere (the following vowel decides, in German the preceding one). Partly: ru х/хь; nl, he, ar, cy, es have only the ach-sound.",
    "what": "ch has two sounds chosen by the vowel before it: after a, o, u and au it is a fricative at the back of the mouth, velar [x] or uvular [χ] (Bach, Buch, auch – the ach-sound); after all other vowels, after consonants and in -chen it is the palatal [ç] (ich, Milch, Mädchen – the ich-sound). The two never distinguish words. At the start of a word ch is [k] or [ç] (Chor, China) and [ʃ] in French loans (Chef). The ending -ig is [ɪç] in the standard of Germany (zwanzig), [ɪk] in the south and Austria.",
    "examples": [
     {
@@ -669,10 +692,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview note (hi)."
    },
-   "status": "missing",
-   "gap": "Say it on a pronunciation page for learners whose languages contrast aspiration: German p, t, k vs b, d, g is heard as aspirated vs unaspirated, but the aspiration itself never makes a new word.",
+   "status": "partial",
+   "gap": "Said for Hindi in the overview note; a pronunciation page for the other languages that contrast aspiration (zh, ko, th …).",
    "when": "fd.00"
   },
   {
@@ -711,10 +734,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview note (ar)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview or a pronunciation page for learners whose languages have pharyngeals or emphatics: German h is a light breath, and t, s, d have no emphatic counterparts.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -905,10 +928,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview note (fr)."
    },
-   "status": "missing",
-   "gap": "Say it on a pronunciation page for learners whose languages have nasal vowels: the n of German words is always said.",
+   "status": "partial",
+   "gap": "Said for French in the overview note; a pronunciation page for the other languages with nasal vowels (pt, hi …).",
    "when": "fd.00"
   },
   {
@@ -989,10 +1012,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview notes (tr, fi, hu)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview for learners whose languages have vowel harmony: a German ending has one shape.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1069,10 +1092,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview notes (fi: consonant gradation; cy: initial mutation)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview for learners whose languages mutate initial consonants or have consonant gradation.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -1091,6 +1114,9 @@
      "value": "alphabet"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The letter–sound correspondences (st/sp = [ʃt]/[ʃp], z = [ts], w = [v], ei = [aɪ̯], ie = [iː]) are German; nl shares some (ie, sch) but differs in most.",
    "what": "German spelling is regular once a few rules are known: st and sp at the start of a word or stem are [ʃt], [ʃp]; z is [ts]; v is usually [f] and w is [v]; ei is [aɪ̯] but ie is [iː]; eu and äu are [ɔʏ̯]; s before a vowel is [z]; pf is one sound [p͡f]; r after a vowel and in -er becomes a vowel [ɐ]. A word or stem beginning with a vowel starts with an unwritten glottal stop [ʔ] (beobachten [bəˈʔoːbaxtn̩]).",
    "examples": [
     {
@@ -1156,6 +1182,11 @@
      "value": "unmarked"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl"
+   ],
+   "alsoNote": "Dutch has the same system: stem-initial stress in native words, stressed separable vs unstressed inseparable prefixes, compounds stressed on the first part. Partly: en, sv (Germanic stem stress, different loanword and prefix patterns).",
    "what": "Stress is never marked in writing. Native words stress the first syllable of the stem (ˈLehrer, ˈkaufen). Separable prefixes are stressed (ˈankommen), inseparable ones never (verˈlassen) – stress tells the two verb types apart. Compounds stress their first part (ˈKühlschrank). Many loanwords keep a final stress (Caˈfé, Büˈro, Universiˈtät); some words differ by country: Kaffee is ˈKaffee in Germany, Kaˈffee in Austria.",
    "examples": [
     {
@@ -1367,6 +1398,11 @@
      "value": "plural"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "sv"
+   ],
+   "alsoNote": "Swedish also has several lexical plural classes, some with umlaut (bok – böcker, man – män). Neither sv nor any other language has the dative plural -n. Partly: nl (mainly -en / -s); ru, el, la, ar learn plurals by declension class or pattern.",
    "what": "Every countable noun has a plural, and it is used after every number above one (zwei Tische). There is no single plural ending: -e (Tische), umlaut + -e (Stühle), -er with umlaut (Bücher), -(e)n (Frauen, Lampen), -nen after -in (Lehrerinnen), -s (Handys) and no ending, sometimes with umlaut only (Zimmer, Mütter). The plural is learned with the noun (der Stuhl, -¨e). The plural article is die for all genders, and ein has no plural. In the dative plural every noun ends in -n unless the plural already ends in -n or -s (mit den Kindern, but mit den Frauen, den Handys).",
    "examples": [
     {
@@ -1454,10 +1490,10 @@
      "fn.plural.noun"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.plural.noun notes (ar, he, iu) and fn.numerals note (iu)."
    },
-   "status": "partial",
-   "gap": "The plural lesson shows zwei + plural; say for learners whose languages have a dual that German has none.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.05"
   },
   {
@@ -1474,6 +1510,13 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "ru",
+    "nl",
+    "it"
+   ],
+   "alsoNote": "ru листы/листья, зубы/зубья; nl bladen/bladeren; it bracci/braccia, ossi/ossa – one singular, two plurals for two meanings. en has only relics (brothers / brethren).",
    "what": "A few nouns have two meanings with two different plurals; the singular is the same word: die Bank – Banken (banks) / Bänke (benches), die Mutter – Mütter (mothers) / Muttern (nuts for bolts), das Wort – Wörter (single words) / Worte (sayings).",
    "examples": [
     {
@@ -1525,6 +1568,11 @@
      "value": "some"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "sv"
+   ],
+   "alsoNote": "Swedish uses umlaut in noun plurals (man – män, bok – böcker) and in comparison (stor – större), not in verbs. en keeps relics only (man – men, foot – feet, old – elder).",
    "what": "Umlaut – a change of the stem vowel a → ä, o → ö, u → ü, au → äu inside the word – marks grammar in many places: noun plurals, comparison, the du/er present of some strong verbs, female nouns, diminutives and the Konjunktiv II. It often goes together with an ending (Buch – Bücher, alt – älter) but can be the only sign (Mutter – Mütter).",
    "examples": [
     {
@@ -1594,6 +1642,9 @@
      "value": "suffixes"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Four cases carried mostly by the article and adjective, with little change on the noun, is German only. Partly: el (article declines for three cases, noun changes too), sq (inflected linking articles).",
    "what": "German has four cases – nominative, accusative, dative, genitive. They are marked by endings, but the noun itself changes little (dative plural -n, genitive -s, weak nouns -n); the case is carried mostly by the endings of the article, the pronoun and the adjective. Only the masculine singular shows the accusative (der → den).",
    "examples": [
     {
@@ -1678,10 +1729,10 @@
      "fn.object"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview notes (hi, iu) and fn.case.basic notes (hi, mr, iu: ergative subjects)."
    },
-   "status": "partial",
-   "gap": "The case lessons show it; the overview could say it for learners whose languages mark the subject of a transitive verb differently (ergative or split systems).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.07"
   },
   {
@@ -1782,10 +1833,10 @@
      "fn.possessive"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.possessive notes (ar, he: construct state; fa: ezafe)."
    },
-   "status": "missing",
-   "gap": "Say it with the genitive (later) for learners whose languages have a construct state or a linker.",
+   "status": "covered",
+   "gap": "",
    "when": "later"
   },
   {
@@ -1802,6 +1853,9 @@
      "value": "suffixes"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The weak (n-) declension class is German; noun declension classes as such are familiar from ru, el, la and others.",
    "what": "A group of masculine nouns – mostly persons and animals in -e, and loan nouns in -ent, -ist, -ant – take -(e)n in every case except the nominative singular. A few mixed nouns add -s in the genitive as well (der Name, des Namens). Herr is weak in the singular (Herrn) and takes -en in the plural (Herren).",
    "examples": [
     {
@@ -1978,10 +2032,10 @@
      "fn.plural.noun"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.plural.noun note (ar)."
    },
-   "status": "partial",
-   "gap": "de.morph.noun.number.class covers mass nouns; say for learners whose languages have singulatives that German uses a measure noun or another word.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.05"
   },
   {
@@ -2003,6 +2057,9 @@
      "value": "num-noun"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Masculine/neuter measure nouns staying singular after a number is German. nl and sv share the juxtaposition without a word for ‘of’ (een kop koffie, en kopp kaffe).",
    "what": "After a number, masculine and neuter nouns of measure stay in the singular: zwei Glas Wasser, drei Stück Kuchen, zehn Euro; feminine ones take the plural (zwei Tassen Kaffee). The measured thing follows directly, with no word for “of”. In ordering, a drink itself counts as a portion: Zwei Bier, bitte.",
    "examples": [
     {
@@ -2074,10 +2131,10 @@
      "fn.plural.noun"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.numerals notes (zh, vi, ja, ko)."
    },
-   "status": "partial",
-   "gap": "de.morph.noun.measure shows measure nouns; say for learners whose languages use classifiers that a German numeral takes the noun directly.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.05"
   },
   {
@@ -2334,10 +2391,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview notes (ar, he)."
    },
-   "status": "partial",
-   "gap": "conceptGaps names it and de.morph.verb.classes teaches ablaut; say in the overview for learners whose languages build words from roots and patterns.",
+   "status": "covered",
+   "gap": "",
    "when": "cr.01"
   },
   {
@@ -2380,10 +2437,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview note (zh)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview for learners whose languages use reduplication.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -2460,6 +2517,11 @@
      "value": "fusional"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "el"
+   ],
+   "alsoNote": "Greek articles also decline for gender, number and case, and ένας/μία/ένα is the numeral ‘one’. fr, es, it, pt articles vary for gender and number only.",
    "what": "German has a definite article der/die/das and an indefinite article ein/eine/ein, both separate words before the noun; ein is the same word as the numeral ‘one’. Both change for gender, number and case – sixteen cells with only six forms, so one form has several readings (der = masculine nominative, feminine dative or genitive, genitive plural). ein has no plural: ein Buch → Bücher.",
    "examples": [
     {
@@ -2580,6 +2642,9 @@
      "value": "gender-number-case"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Owner chooses the stem, owned noun the ending: rare. Partly: sq (i tij / e saj); en, nl, sv mark only the owner's sex (his/her); fr, es, it agree only with the owned noun.",
    "what": "mein, dein, sein, ihr, unser, euer, Ihr are separate words before the noun; they replace the article and take the endings of ein (with a plural: meine). Two separate choices: the owner chooses sein (his, its) or ihr (her, their), the owned noun the ending: seine Frau (his wife), ihr Mann (her husband). An article is never added to a possessive before a noun.",
    "examples": [
     {
@@ -2657,10 +2722,10 @@
      "fn.possessive"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.possessive notes (tr, fi, hu, fa, ar, he, iu)."
    },
-   "status": "partial",
-   "gap": "fn.possessive teaches mein, dein …; say for learners whose languages mark the possessor on the noun that German uses a separate word.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.06"
   },
   {
@@ -2883,10 +2948,10 @@
      "fn.pronoun.subject"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.pronoun.subject and fn.overview notes (mr: āpaṇ / āmhī)."
    },
-   "status": "missing",
-   "gap": "Say it with the pronouns for learners whose languages distinguish inclusive and exclusive ‘we’.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.01"
   },
   {
@@ -2903,6 +2968,13 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fr",
+    "nl",
+    "sv"
+   ],
+   "alsoNote": "fr on, nl men, sv man are the same impersonal subject pronoun. en one / generic you partly.",
    "what": "man is the everyday impersonal subject: ‘one, you, people, they’ (Man sagt … – people say …). It takes the er-form of the verb and has the object forms einen, einem; it is never replaced by er. Because a clause needs a subject, man fills the place where the doer is general or unknown.",
    "examples": [
     {
@@ -2945,6 +3017,14 @@
      "value": "subject-prominent"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "en",
+    "fr",
+    "nl",
+    "sv"
+   ],
+   "alsoNote": "Dummy subjects with weather verbs and an existential: en it rains / there is, fr il pleut / il y a, nl het regent / er is, sv det regnar / det finns.",
    "what": "Every finite clause needs a subject in the nominative that the verb agrees with, whatever stands in first place – even when nobody acts: es is an empty subject with weather verbs (es regnet), in fixed phrases (Wie geht es dir?) and in es gibt (there is). ‘There is / are’ is es gibt + accusative (Es gibt hier einen Park), not haben or sein.",
    "examples": [
     {
@@ -2999,6 +3079,21 @@
      "value": "person-number"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fr",
+    "es",
+    "it",
+    "pt",
+    "ro",
+    "nl",
+    "sv",
+    "pl",
+    "cs",
+    "sr",
+    "bg"
+   ],
+   "alsoNote": "Reflexive pronoun with the verb and inherently reflexive verbs; cs se/si and bg се/си even split accusative and dative like mich/mir. ru, uk have reflexive verbs with the suffix -ся/-сь instead of a pronoun.",
    "what": "Many verbs need a reflexive pronoun: mich, dich, sich, uns, euch, sich (accusative) or mir, dir, sich (dative when there is another object). Some verbs are only reflexive (sich freuen), others change meaning (verlassen → sich verlassen auf, to rely on).",
    "examples": [
     {
@@ -3060,10 +3155,10 @@
      "fn.object"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.object notes (sw, lg, iu) and fn.present note (hu: definite conjugation)."
    },
-   "status": "partial",
-   "gap": "fn.object teaches the accusative object; say for learners whose languages mark the object on the verb that German never does.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.07"
   },
   {
@@ -3127,6 +3222,11 @@
      "value": "prepositions"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl"
+   ],
+   "alsoNote": "Dutch daarop, waarmee, er … op are the same construction. en (thereby, whereupon) and sv (därpå, varmed) keep it in formal or old style only.",
    "what": "A preposition with a pronoun for a thing becomes da(r)- + preposition (darauf, damit, dafür), in questions wo(r)- (worauf, womit). For persons the preposition + pronoun stays: auf ihn, auf wen.",
    "examples": [
     {
@@ -3170,6 +3270,9 @@
      "value": "adj-noun"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Strong/weak/mixed endings by the preceding determiner combined with case are German. Partly: sv, nl (strong/weak split without case: en stor bil / den stora bilen, een groot huis / het grote huis); sr, lt (definite and indefinite adjective forms); ru, el, pl (gender-number-case agreement without determiner dependence).",
    "what": "An adjective before its noun always has an ending, chosen by the word in front of it: after der/dieser (weak) only -e or -en; after ein/kein/mein without an ending (mixed) the adjective shows the gender itself (-er, -es); with no article (strong) it takes the article's ending. In the dative the ending after any article is -en. A few adjectives change their stem when they take an ending: ein hohes Haus, ein dunkles Bier, ein teures Auto.",
    "examples": [
     {
@@ -3239,6 +3342,11 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl"
+   ],
+   "alsoNote": "Dutch predicative adjectives have no ending and the adverb is the bare adjective (het huis is groot, hij rijdt snel). en: predicative invariable but adverbs mostly in -ly; fr, es, it, el, ru: the predicative adjective agrees.",
    "what": "An adjective used as the predicate needs the verb sein (or werden, bleiben) and has no ending there: Das Haus ist groß, Die Häuser sind groß. The same bare form is the adverb, with no adverb suffix: Er fährt schnell.",
    "examples": [
     {
@@ -3498,10 +3606,10 @@
      "fn.present"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.present notes (ru: aspect pairs; es, hi, tr, fa, zh, vi: progressive forms)."
    },
-   "status": "partial",
-   "gap": "de.morph.verb.present says one present covers ongoing and habitual; say in the overview for learners whose languages mark aspect.",
+   "status": "covered",
+   "gap": "",
    "when": "cr.01"
   },
   {
@@ -3522,6 +3630,13 @@
      "value": "few"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "en",
+    "nl",
+    "sv"
+   ],
+   "alsoNote": "The Germanic strong (ablaut) / weak (dental suffix) verb classes: en sing – sang – sung / walk – walked, nl, sv likewise. Principal parts to learn are familiar from el, la, Romance irregular verbs, without the ablaut classes.",
    "what": "Weak verbs form the past with -te and the participle ge-…-t (kaufen – kaufte – gekauft). Strong verbs change the stem vowel (ablaut) and form the participle in -en (trinken – trank – getrunken). Mixed verbs change the vowel and take weak endings (rennen – rannte – gerannt). Inseparable prefixes and -ieren verbs have no ge- (verlassen, studiert). The principal parts are learned with each strong verb (singen – sang – gesungen).",
    "examples": [
     {
@@ -3694,6 +3809,11 @@
      "value": "separable"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl"
+   ],
+   "alsoNote": "Dutch be-, ver-, ont-, ge-, her- are unstressed, never separate and block ge- (vergeten); door-, over-, om-, onder- can be both. ru, pl, cs and other fixed-prefix languages know prefixes that stay on the verb and change its meaning.",
    "what": "These prefixes never separate, are never stressed and block ge- in the participle. They often change the meaning or make a verb transitive: verlassen (leave a place, + accusative) vs weggehen. durch-, über-, um-, unter- can be either: übersetzen (translate, inseparable) – übersetzen (ferry across, separable).",
    "examples": [
     {
@@ -3776,10 +3896,10 @@
      "fn.object"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview note (iu); fn.object notes (iu; zh for verb–object compounds such as 吃饭)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview for learners whose languages incorporate objects or have verb–object compounds.",
+   "status": "covered",
+   "gap": "",
    "when": "later"
   },
   {
@@ -3796,6 +3916,13 @@
      "value": "possessive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fr",
+    "it",
+    "nl"
+   ],
+   "alsoNote": "Choice between ‘have’ and ‘be’ in the perfect: fr avoir/être, it avere/essere, nl hebben/zijn. en, es, sv, el, sq use ‘have’ only.",
    "what": "The perfect is formed with an auxiliary + the Partizip II at the end of the clause: haben (‘have’) for most verbs, sein for verbs of motion or change of state without an object (gehen, fahren, kommen, bleiben, sein). A verb can take both: Ich bin nach Berlin gefahren / Ich habe das Auto gefahren. South German and Austrian use sein also with stehen, sitzen, liegen.",
    "examples": [
     {
@@ -3848,6 +3975,11 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fr"
+   ],
+   "alsoNote": "French has the same split: passé composé in speech, passé simple in written narrative. Partly: ro (perfect simplu mainly literary/regional), it (passato remoto rare in northern speech).",
    "what": "German has one past tense, without degrees of remoteness, in two forms. Spoken German tells the past mostly with the perfect (Ich habe gegessen), written narrative with the Präteritum (Er aß). sein, haben and the modals use the Präteritum in speech too (war, hatte, wollte). The south uses the perfect almost only; the north uses more Präteritum. A finite verb always shows present or past.",
    "examples": [
     {
@@ -4122,6 +4254,14 @@
      "value": "periphrastic"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl",
+    "es",
+    "pt",
+    "pl"
+   ],
+   "alsoNote": "Two passives, of the action and of the resulting state: nl worden/zijn, es and pt ser/estar, pl zostać/być + participle. Partly: it venire/essere, en be/get.",
    "what": "werden + participle describes an action being done (Vorgangspassiv), sein + participle the resulting state (Zustandspassiv). The doer is von + dative.",
    "examples": [
     {
@@ -4186,10 +4326,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview note (iu)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview for learners whose languages have an antipassive.",
+   "status": "covered",
+   "gap": "",
    "when": "later"
   },
   {
@@ -4266,10 +4406,10 @@
      "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview note (sw)."
    },
-   "status": "missing",
-   "gap": "Say it in the overview for learners whose languages have applicatives; be- verbs come with derivation (later).",
+   "status": "partial",
+   "gap": "Said for Swahili in the overview; be- verbs (beschenken …) come with derivation (later).",
    "when": "later"
   },
   {
@@ -4344,6 +4484,13 @@
      "value": "infinitive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "en",
+    "nl",
+    "sv"
+   ],
+   "alsoNote": "An infinitive marker with bare infinitives after modals: en to / can go, nl te / kan gaan, sv att / kan gå. Partly: fr, it, es (prepositions de/à, di/a before an infinitive); ru, el have no infinitive marker.",
    "what": "Most verbs, nouns and adjectives take zu + infinitive at the end of the clause (Ich habe keine Zeit zu kochen); um … zu means ‘in order to’. Modals (and lassen, gehen, sehen, hören) take the bare infinitive. With a separable verb zu goes inside: anzukommen.",
    "examples": [
     {
@@ -4422,10 +4569,10 @@
      "fn.connectors"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.connectors notes (tr, ja, ko, iu)."
    },
    "status": "partial",
-   "gap": "fn.connectors teaches und, weil, dass …; say for learners whose languages chain clauses with converbs or serial verbs that German needs a conjunction or zu.",
+   "gap": "Converbs and verb-ending clause links are said in the fn.connectors notes; serial verbs (zh, vi, yo …) are not said yet – careful: gehen + infinitive (Ich gehe einkaufen) exists.",
    "when": "fd.18"
   },
   {
@@ -4534,10 +4681,10 @@
      "fn.question.yesno"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.question.yesno notes (tr, ja, zh, mr, hi, fa, fi …)."
    },
-   "status": "partial",
-   "gap": "fn.question.yesno teaches the verb-first question; say for learners whose languages use a question particle that German has none.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.09"
   },
   {
@@ -4829,6 +4976,14 @@
      "value": "particle"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "sv",
+    "nl",
+    "fr",
+    "ar"
+   ],
+   "alsoNote": "A special ‘yes’ against a negative: sv jo, nl jawel, fr si, ar بلى balā. en has none.",
    "what": "To contradict a negative question or statement, German answers doch, not ja: Isst du kein Fleisch? – Doch! (Yes, I do). nein confirms the negative (Nein, ich esse keins). ja answers a positive question.",
    "examples": [
     {
@@ -4935,6 +5090,16 @@
      "value": "four"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "ru",
+    "uk",
+    "pl",
+    "cs",
+    "sr",
+    "la"
+   ],
+   "alsoNote": "Location vs goal with the same preposition and two cases: ru в/на + prepositional vs accusative, pl, cs, sr, uk likewise, la in + ablative vs accusative.",
    "what": "in, an, auf, über, unter, vor, hinter, neben, zwischen take the dative for a place (Wo?) and the accusative for a goal (Wohin?): Ich bin im Park – Ich gehe in den Park.",
    "examples": [
     {
@@ -5039,6 +5204,15 @@
      "value": "have-verb"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "ru",
+    "uk",
+    "pl",
+    "cs",
+    "sr"
+   ],
+   "alsoNote": "Person in the dative for body states and liking: ru мне холодно, мне нравится; pl zimno mi; cs je mi zima; sr hladno mi je. fr, es, it, pt share only ‘have hunger/cold’ (j'ai faim, tengo hambre).",
    "what": "Feelings of the body and impersonal states take the person in the dative: Mir ist kalt (I'm cold – Ich bin kalt means ‘I am a cold person’), Mir ist schlecht (I feel sick), Wie geht es dir?, Das gefällt mir. Hunger and thirst use haben + a bare noun: Ich habe Hunger, Ich habe Durst (also Angst, Zeit, Recht haben).",
    "examples": [
     {
@@ -5106,6 +5280,15 @@
      "value": "prepositions"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fr",
+    "it",
+    "pt",
+    "es",
+    "el"
+   ],
+   "alsoNote": "Obligatory preposition + article contractions: fr au/du, it nel/al/del, pt no/do/ao, es al/del, el στο/στη/στον. Partly: ga (sa + an = san). en and nl (apart from old ter/ten) have none.",
    "what": "Some prepositions merge with dem, der or das: im, am, beim, vom, zum (dem), zur (der), ins, ans (das). The merged form is the normal one; in dem Park sounds like ‘in that park’. Speech also says aufm, unterm, hinterm.",
    "examples": [
     {
@@ -5164,6 +5347,9 @@
      "value": "one"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Article rules are language-particular. nl is closest (no article with jobs after zijn, mass nouns bare, most countries bare) but differs for months and some countries; fr omits the article with jobs but uses it with countries and the partitive with masses.",
    "what": "No article with a job, role or nationality after sein (Ich bin Lehrerin), with mass nouns in general (Ich trinke Wasser) and with most country names (nach Griechenland). An article with feminine and plural country names (in die Türkei, in der Schweiz, in den USA), with months and seasons (im Mai) and, in colloquial southern German, with first names (der Peter).",
    "examples": [
     {
@@ -5219,6 +5405,11 @@
      "value": "person-number"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl"
+   ],
+   "alsoNote": "Dutch Dat zijn mijn ouders, Dat ben ik – the verb agrees with what follows. fr ce sont partly (but c'est moi).",
    "what": "In pointing sentences with das, the verb agrees with the noun or pronoun that follows, not with das: Das sind meine Eltern. Das bin ich.",
    "examples": [
     {
@@ -5283,10 +5474,10 @@
      "fn.copula"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.copula and fn.overview notes (es: ser / estar)."
    },
-   "status": "partial",
-   "gap": "fn.copula shows sein with nouns, adjectives and places; say for learners whose languages split ‘be’ that German does not.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.01"
   },
   {
@@ -5348,6 +5539,17 @@
      "value": "adj-noun"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl",
+    "ru",
+    "pl",
+    "cs",
+    "fi",
+    "hu",
+    "tr"
+   ],
+   "alsoNote": "A participle with its own complements before the noun: nl de om acht uur aankomende trein (formal), ru прибывающий в восемь поезд, fi kahdeksalta saapuva juna, hu a nyolckor érkező vonat, tr saat sekizde gelen tren (in fi, hu, tr the ordinary relative construction). en has no such construction; ja, ko put whole clauses before the noun.",
    "what": "A participle with its own objects and adverbs can stand between the article and the noun: der um acht Uhr ankommende Zug (the train arriving at eight). It is frequent in written German; speech uses a relative clause after the noun instead (der Zug, der um acht Uhr ankommt).",
    "examples": [
     {
@@ -5393,6 +5595,26 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fr",
+    "es",
+    "it",
+    "pt",
+    "el",
+    "nl",
+    "ru",
+    "uk",
+    "pl",
+    "cs",
+    "sr",
+    "bg",
+    "tr",
+    "hu",
+    "ar",
+    "he"
+   ],
+   "alsoNote": "A state still going on is said in the present with ‘since/for’: fr depuis, es desde hace, it da, ru уже … / с …, tr -dır, hu óta, ar منذ. en and sv use the perfect.",
    "what": "Something that started in the past and still goes on is said in the present with seit, not in the perfect: Ich wohne seit drei Jahren hier (I have lived here for three years).",
    "examples": [
     {
@@ -5442,6 +5664,11 @@
      "value": "suffixing"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl"
+   ],
+   "alsoNote": "Dutch 's maandags, 's avonds are the same old genitive adverbs. en Mondays / nights (I work nights) partly.",
    "what": "A day or part of the day + -s, written small, means ‘every …, on …s’: montags (on Mondays), morgens, abends, nachts. With a clock time morgens/abends act as a.m./p.m.",
    "examples": [
     {
@@ -5723,6 +5950,11 @@
      "value": "separable"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "hu"
+   ],
+   "alsoNote": "Hungarian ide- (towards the speaker) / oda- (away) are deictic verb prefixes (idejön / odamegy), with hova/honnan questions. Partly: nl heen/naartoe; ru куда/откуда (question split only).",
    "what": "Directional words mark the speaker's point of view: her- means towards the speaker, hin- away from the speaker (herein / hinein, herauf / hinauf). Spoken German shortens both to r- (rein, rauf). The question words split the same way: Wo gehst du hin? = Wohin gehst du?",
    "examples": [
     {
@@ -5780,6 +6012,9 @@
      "value": "two"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The particular splits are German; some are shared (kennen/wissen with fr connaître/savoir, es conocer/saber), others not.",
    "what": "German divides several common meanings into separate words: when (wenn / als / wann), if (wenn / ob), because (weil / denn), to (zu / nach / in), at (an / bei / in / auf), from (aus / von), holiday (Urlaub / Ferien), hour (Stunde / Uhr), know (kennen / wissen). Each choice follows one question (past or not? whether or condition? kind of place?). The full list is in `distinctions`.",
    "examples": [
     {
@@ -5839,6 +6074,9 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The particular homonyms and polysemous words are German.",
    "what": "Many common words have meanings that are separate concepts: Bank (bank / bench), Schloss (castle / lock), Zug (train / move / draught), leicht (easy / light). Some differ in plural or gender (see the polysemy list).",
    "examples": [
     {
@@ -5885,6 +6123,9 @@
      "value": "alphabet"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The cognates, loans and false friends are German; many are shared with nl, en, sv (Germanic) and with languages that borrowed from German.",
    "what": "German shares many words with other languages, as inherited cognates (Haus, Buch, Mann) or as loans in both directions (Schule, Telefon, Computer; Rucksack, Kindergarten). Some look-alikes mean something else – false friends: Handy (mobile phone), also (so, therefore), Gift (poison), bekommen (to get), will (want), Chef (boss), eventuell (possibly), Apotheke (pharmacy). Which words are bridges and which are traps depends on the learner's languages.",
    "examples": [
     {
@@ -6116,10 +6357,10 @@
      "fn.possessive"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.have notes (zh, ja, hu, vi)."
    },
-   "status": "partial",
-   "gap": "The family lesson teaches Bruder and Schwester; say for learners whose languages split siblings by age that German adds älter / jünger only when needed.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.06"
   },
   {
@@ -6223,10 +6464,10 @@
      "fn.greetings"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.overview, fn.pronoun.subject, fn.greetings and fn.imperative notes (ja, ko)."
    },
-   "status": "partial",
-   "gap": "de.prag.address covers du / Sie; say for learners whose languages have honorific verbs or speech levels that German has none.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.02"
   },
   {
@@ -6265,10 +6506,10 @@
      "fn.copula"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes (D18): fn.copula notes (hi, he: the speaker’s sex in the 1st person)."
    },
-   "status": "partial",
-   "gap": "de.morph.noun.feminine.in shows the job nouns; say for learners whose languages mark the speaker's sex that German does not.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.01"
   },
   {
@@ -6285,6 +6526,9 @@
      "value": "binary"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The greetings, their register and regional forms (Grüß Gott, Moin, Grüezi, Mahlzeit) are German; greeting by time of day is widespread.",
    "what": "Guten Morgen / Tag / Abend by the time of day, Gute Nacht only when parting late. Hallo and Tschüss go with du, Guten Tag and Auf Wiedersehen with Sie. Regions have their own: Grüß Gott and Servus in Bavaria and Austria, Moin in the north, Grüezi in Switzerland. At noon colleagues greet each other with Mahlzeit!, at table Guten Appetit!",
    "examples": [
     {
@@ -6335,6 +6579,12 @@
      "value": "indirect-only"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "nl",
+    "sv"
+   ],
+   "alsoNote": "Unstressed attitude particles in the middle of the clause: nl toch, maar, even, wel, eens; sv ju, väl, nog. Partly: ru же, ведь; pl przecież; ja, ko, yue sentence-final particles with similar functions in another position.",
    "what": "Small unstressed words in the middle of the sentence add the speaker's attitude and stance towards what is said: ja (as we both know), doch (come on / after all), mal (just, softens a request), denn (in questions: interest, impatience), halt / eben (that's how it is), schon (surely), wohl (presumably – an inference), vielleicht (amazement). They are hard to translate but make German sound natural.",
    "examples": [
     {
@@ -6441,6 +6691,9 @@
      "value": "binary"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Herr/Frau + surname for every adult and academic titles in address are German (especially Austrian) conventions.",
    "what": "Adults are addressed as Herr / Frau + surname with Sie; Frau is used for every woman whatever her marital status (Fräulein is obsolete). Academic titles are part of the address: Frau Dr. Weber.",
    "examples": [
     {
@@ -6489,6 +6742,9 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The particular standards and dialects are German. Several national standards are familiar from en, es, pt, fr, nl; a spoken-dialect / written-standard split like Swiss German resembles the diglossia of ar.",
    "what": "German has three national standards with their own words and spellings (Austrian Jänner, Paradeiser, Erdapfel; Swiss ss for ß, Rüebli) and strong regional dialects. In Germany and Austria the standard is both written and spoken, with regional colouring, so writing and educated speech are one language. German-speaking Switzerland is different: everyday speech is Swiss German dialect, and Standard German is written and used in formal settings – a diglossia in that region.",
    "examples": [
     {
@@ -6536,6 +6792,9 @@
      "value": "planetary"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The meals and food customs are German-speaking culture.",
    "what": "Frühstück, Mittagessen, Abendessen – in many families the evening meal is a cold one (Abendbrot); Kaffee und Kuchen is an afternoon meal of its own, especially on Sundays. Mahlzeit! greets colleagues at noon, Guten Appetit! starts a meal.",
    "examples": [
     {

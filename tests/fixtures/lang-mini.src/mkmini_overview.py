@@ -3,7 +3,7 @@ TYPES = ['isolating', 'agglutinating', 'fusional', 'polysynthetic']
 
 OVERVIEW = {
  'de': {"function": "fn.overview", "status": "realized",
-  "summary": "German is a West Germanic language, a close relative of English and Dutch. It is written in the Latin alphabet, has three genders and four cases, and puts the conjugated verb in second place.",
+  "summary": "German is a West Germanic language. It is written in the Latin alphabet, has three genders and four cases, and puts the conjugated verb in second place.",
   "typology": {"type": "fusional", "why": "One ending carries several meanings at once: dem = dative + singular + masculine or neuter; articles and adjectives change with gender, number and case.",
                "alsoShows": "Compounds are built the agglutinating way: Gemüse + Suppe → die Gemüsesuppe (the last part decides the gender)."},
   "facts": [{"label": "Family", "value": "Indo-European › Germanic › West Germanic"},

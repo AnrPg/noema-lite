@@ -206,4 +206,14 @@ def drop_tone(c): c['phenomena'] = [p for p in c['phenomena'] if not any(t['feat
 e = phen_errors(drop_tone)
 ok(any('not covered by any phenomenon' in x and 'tone.lexical' in x for x in e), 'an uncovered feature — here an absence, “no lexical tone” — is refused')
 
+# ---------- D18: comparison notes for the reference set; D19: every field brings sentences for the nodes before it ----------
+expect('a page without comparison notes', lambda J, d: J('lang/ar/grammar/fn.definite.json', lambda o: o.pop('notes')), 'comparison notes for the reference set: 0 of at least 8')
+expect('a comparison in the general text', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(summary=o['summary'] + ' As in English.')), 'names other languages in its general text (English)')
+expect('a note for a language without a profile', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'].append({'for': 'xx', 'rel': 'new', 'text': '…'})), '“xx” has no profile')
+expect('a note with an unknown relation', lambda J, d: J('lang/he/grammar/fn.definite.json', lambda o: o['notes'][0].update(rel='odd')), 'rel must be one of')
+expect('the old forYou', lambda J, d: J('lang/zh/grammar/fn.overview.json', lambda o: o.update(forYou=[{'lang': 'el', 'text': '…'}])), 'forYou is replaced by notes')
+expect('a field without sentences for a node before it', lambda J, d: J('lang/ar/bank/basic.json', lambda o: o.pop('fieldExemptions')), 'field food.vegetables: 0 sentence(s) for fn.root.pattern')
+expect('an exemption without a reason', lambda J, d: J('lang/he/bank/basic.json', lambda o: o['fieldExemptions'][0].update(reason='')), 'say why')
+expect('a function without its aspect', lambda J, d: J('core/functions/fn.definite.json', lambda o: o.update(category='stuff')), 'category must be one of')
+
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

@@ -1,6 +1,24 @@
 {
  "function": "fn.case.basic",
  "status": "absent",
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "none"
+  },
+  {
+   "feature": "nom.caseSyncretism",
+   "value": "no-case"
+  },
+  {
+   "feature": "nom.caseMarking",
+   "value": "prepositional-clitics"
+  },
+  {
+   "feature": "syn.alignment",
+   "value": "accusative"
+  }
+ ],
  "summary": "Modern Hebrew has no cases: a noun never changes its ending for its role in the sentence. הַיֶּלֶד “the boy” is the same word as subject, as object and after a preposition — so the “subject form” (nominative) is simply the dictionary form, with nothing to learn. What does the job of the cases instead: (1) word order — normally subject – verb – object, and in a verbless sentence the subject comes first (הַסֵּפֶר פֹּה); (2) the small word אֶת before a definite direct object (lesson 7: הוּא קוֹרֵא אֶת הַסֵּפֶר), which works like a one-word accusative; (3) prepositions, most of them prefixes (lessons 11–13: לַיֶּלֶד “to the boy”, בַּבַּיִת “in the house”, מֵהַבַּיִת “from the house”); (4) agreement: a present-tense verb agrees with its subject in gender and number, which also shows who the subject is. Old Semitic had three case endings (-u, -a, -i), which Arabic still has; Hebrew lost them before the Bible was written. The construct state (בֵּית סֵפֶר “school”, from בַּיִת) is not a case: it changes the first noun of a pair to show that the next noun belongs to it, whatever the role of the pair in the sentence.",
  "blocks": [
   {
@@ -31,7 +49,13 @@
      "mit dem Jungen"
     ]
    ],
-   "caption": "The same noun in three roles. Hebrew keeps הַיֶּלֶד unchanged and adds a word or a prefix where needed."
+   "caption": "The same noun in three roles. Hebrew keeps הַיֶּלֶד unchanged and adds a word or a prefix where needed.",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "p",
@@ -41,7 +65,17 @@
    "t": "callout",
    "kind": "key",
    "title": "What replaces the cases",
-   "text": "Word order (subject before the verb), אֶת before a definite direct object, prepositions (mostly the prefixes בְּ, לְ, מִ), and the agreement of the verb with its subject."
+   "text": "Word order (subject before the verb), אֶת before a definite direct object, prepositions (mostly the prefixes בְּ, לְ, מִ), and the agreement of the verb with its subject.",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    },
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -54,12 +88,6 @@
    "kind": "pitfall",
    "title": "Pronouns look like cases, but are prepositions",
    "text": "“me” as an object is אוֹתִי, “to me” is לִי: these are אֶת and לְ with a pronoun suffix (lessons 6–7), not case forms of אֲנִי."
-  },
-  {
-   "t": "callout",
-   "kind": "tip",
-   "title": "For you",
-   "text": "Greek, Russian and German mark the role on the word or its article (ο φίλος / τον φίλο, друг / друга, der / den Freund). In Hebrew the noun stays the same — as in English, and as in Turkish only when there is no suffix (Turkish uses suffixes such as -i, -e, -de, which Hebrew does not have)."
   },
   {
    "t": "ask",
@@ -168,6 +196,108 @@
    "lang": "zh",
    "fn": "fn.word.order",
    "note": "Chinese has no cases either: as in Hebrew, the place in the sentence shows who does what."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek marks the role on the article and the noun (ο φίλος / τον φίλο / του φίλου); Hebrew keeps הַחָבֵר unchanged and adds אֶת before a definite object, or a preposition."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian changes the ending for every role (друг / друга / другу); Hebrew never does — the form you learn is the only form: הַחָבֵר."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "As in Spanish, nouns have no cases. Spanish a before a personal object (veo a Juan) and Hebrew אֶת before a definite object are both small words, not endings."
+  },
+  {
+   "for": "en",
+   "rel": "same",
+   "text": "As in English, nouns do not change for their role; word order and small words (אֶת, prepositions) do the work. Even pronoun objects are אֶת or a preposition with an ending (אוֹתִי, לִי), not a separate case."
+  },
+  {
+   "for": "fr",
+   "rel": "same",
+   "text": "French nouns have no cases either; the only extra is אֶת, a small word before a definite direct object."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German shows the case on the article (der / den / dem Freund); Hebrew has no cases at all — הַחָבֵר in every role."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi nouns take an oblique form before a postposition (लड़का → लड़के को); Hebrew nouns never change: הַיֶּלֶד, לַיֶּלֶד, עִם הַיֶּלֶד."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian nouns have no case endings either; Persian را after a definite object is the mirror image of Hebrew אֶת before it."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi nouns take an oblique stem and case suffixes (मुलगा → मुलाला “to the boy”); Hebrew nouns stay the same and take a preposition."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic keeps three case endings (-u, -a, -i: الْوَلَدُ / الْوَلَدَ / الْوَلَدِ); Hebrew lost them — הַיֶּלֶד is the same in every role."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish marks the role with suffixes (ev, evi, eve, evde, evden); Hebrew has no such suffixes: אֶת before a definite object, and prefixes such as לְ, בְּ, מִ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks roles with particles after the noun (が, を, に); Hebrew uses word order and small words before the noun (אֶת, לְ, בְּ)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean role particles follow the noun (이 / 가, 을 / 를); Hebrew uses word order, אֶת and prepositions before the noun."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish has more than a dozen cases; Hebrew has none — prepositions and אֶת do their job."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian marks roles with case suffixes (-t, -ban, -ból …); Hebrew has none."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili nouns have no case endings either; roles come from word order, the verb prefixes and small words — in Hebrew from word order, אֶת and prepositions."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda nouns have no case endings; roles come from word order and the verb prefixes. Hebrew relies on word order, אֶת and prepositions."
+  },
+  {
+   "for": "zh",
+   "rel": "same",
+   "text": "As in Chinese, Hebrew nouns never change for their role; word order and small words (אֶת, prepositions) do the work."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "As in Vietnamese, the noun has one form in every role; word order and small words show who does what."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has many cases and ergative alignment (the subject of a transitive verb takes its own ending); Hebrew has no cases and treats every subject alike."
   }
  ]
 }

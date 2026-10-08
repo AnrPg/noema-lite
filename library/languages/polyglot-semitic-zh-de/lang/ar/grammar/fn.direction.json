@@ -37,7 +37,13 @@
      "أَنَا فِي الْمَحَطَّةِ."
     ]
    ],
-   "caption": "Every noun after a preposition is genitive (-i / -in)."
+   "caption": "Every noun after a preposition is genitive (-i / -in).",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -267,13 +273,41 @@
       "خَرَجَ الْقِطَارُ مِنَ الْمَحَطَّةِ."
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "sem.motionFraming",
+     "value": "verb-framed"
+    }
    ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "Not فِي for “to”.",
-   "text": "Greek σε and German in / zu cover both “at” and “to”; Arabic separates them: فِي الْمَدْرَسَةِ (at school) but إِلَى الْمَدْرَسَةِ (to school)."
+   "text": "Arabic separates “at” and “to”: فِي الْمَدْرَسَةِ (at school) but إِلَى الْمَدْرَسَةِ (to school).",
+   "notes": [
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "Greek σε covers both (στο σχολείο = at / to school); Arabic: فِي الْمَدْرَسَةِ (at) but إِلَى الْمَدْرَسَةِ (to)."
+    },
+    {
+     "for": "de",
+     "rel": "trap",
+     "text": "German keeps in and changes the case (in der Schule / in die Schule); Arabic changes the word: فِي / إِلَى."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "French à covers both (à l’école); Arabic splits فِي / إِلَى."
+    },
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "Spanish separates them too: en la escuela (at) ≈ فِي الْمَدْرَسَةِ, a la escuela (to) ≈ إِلَى الْمَدْرَسَةِ."
+    }
+   ]
   },
   {
    "t": "callout",
@@ -285,7 +319,24 @@
    "t": "callout",
    "kind": "key",
    "title": "One “go” for all.",
-   "text": "German says gehen on foot and fahren by vehicle, Hebrew הָלַךְ and נָסַע; Arabic uses ذَهَبَ for both and adds the vehicle: ذَهَبْتُ بِالْقِطَارِ, ذَهَبْتُ مَشْيًا. “Drive (a car)” is قَادَ السَّيَّارَةَ."
+   "text": "German says gehen on foot and fahren by vehicle, Hebrew הָלַךְ and נָסַע; Arabic uses ذَهَبَ for both and adds the vehicle: ذَهَبْتُ بِالْقِطَارِ, ذَهَبْتُ مَشْيًا. “Drive (a car)” is قَادَ السَّيَّارَةَ.",
+   "notes": [
+    {
+     "for": "es",
+     "rel": "same",
+     "text": "Spanish ir is one verb for every way of going, like ذَهَبَ: ir a pie = ذَهَبَ مَشْيًا, ir en tren = ذَهَبَ بِالْقِطَارِ."
+    },
+    {
+     "for": "ru",
+     "rel": "different",
+     "text": "Russian separates идти (on foot) and ехать (by vehicle); Arabic uses ذَهَبَ for both and adds the vehicle: ذَهَبْتُ بِالْقِطَارِ."
+    },
+    {
+     "for": "vi",
+     "rel": "same",
+     "text": "Vietnamese đi covers every way of going, like ذَهَبَ; the vehicle comes with bằng (đi bằng xe buýt ≈ أَذْهَبُ بِالْحَافِلَةِ)."
+    }
+   ]
   },
   {
    "t": "p",
@@ -476,6 +527,73 @@
    "lang": "ar",
    "fn": "fn.imperative",
    "note": "Commands with the same verbs: اِذْهَبْ!, تَعَالَ!, اُدْخُلْ!"
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  },
+  {
+   "feature": "sem.motionFraming",
+   "value": "verb-framed"
+  }
+ ],
+ "notes": [
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian в + accusative (в школу) is Arabic إِلَى + genitive (إِلَى الْمَدْرَسَةِ), and из (from) is مِنْ; Arabic shows the direction with the preposition, never with the case."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English go, come, to, from, by bus match ذَهَبَ, جَاءَ, إِلَى, مِنْ, بِالْحَافِلَةِ; “enter” and “leave” take a direct object in Arabic too (دَخَلَ الْبَيْتَ, غَادَرَ الْمَدِينَةَ)."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi often puts the goal before the verb with no postposition (मैं स्कूल जाता हूँ); Arabic needs إِلَى: أَذْهَبُ إِلَى الْمَدْرَسَةِ. “By bus” is बस से — Arabic بِالْحَافِلَةِ."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also uses به (to), از (from) and با (by: با اتوبوس); Arabic: إِلَى, مِنْ, بِـ (بِالْحَافِلَةِ)."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi marks the goal with an ending (मी शाळेत जातो, I go to school); Arabic puts إِلَى before the noun."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish marks direction with endings — okula (to school), okuldan (from school), otobüsle (by bus); Arabic puts إِلَى, مِنْ, بِـ before the noun."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese particles follow the noun: 学校へ行く, 学校から, バスで; Arabic: إِلَى الْمَدْرَسَةِ, مِنَ الْمَدْرَسَةِ, بِالْحَافِلَةِ."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish puts direction into case endings (kouluun, koulusta, bussilla); Arabic uses prepositions."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian iskolába, iskolából, busszal are endings; Arabic puts إِلَى, مِنْ, بِـ before the noun."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili kwenda (go) can take the place with the ending -ni (naenda sokoni, I go to the market), and “by bus” is kwa basi — like بِالْحَافِلَةِ."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks “to” and “from” with endings on the place (-mut, -mit); Arabic puts إِلَى and مِنْ before it."
   }
  ]
 }

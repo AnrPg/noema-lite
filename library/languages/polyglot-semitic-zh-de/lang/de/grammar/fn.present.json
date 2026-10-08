@@ -1,7 +1,25 @@
 {
  "function": "fn.present",
  "status": "realized",
- "summary": "A German verb changes its ending for every person: you take the stem (the infinitive without -en: koch-en, trink-en, kauf-en) and add -e, -st, -t for ich, du, er/sie/es and -en, -t, -en for wir, ihr, sie/Sie. Polite Sie always takes the plural form (Sie trinken). A group of strong verbs also changes the stem vowel, but only in the du and er/sie/es forms: essen → du isst, er isst (e → i); later you will meet a → ä (fahren → du fährst). The modal verbs wollen and mögen are irregular: no ending in ich and er (ich will, er will; ich mag, er mag) and another vowel in the singular. Their polite cousin möchte (would like) is a form of mögen used like a present: ich möchte, du möchtest, er möchte, wir möchten. sein and haben are irregular too (ich bin, du bist, er ist …; du hast, er hat). German has one present tense for “I eat”, “I am eating” and often “I will eat” – there is no -ing form. The finite verb always stands in second place in a statement (Ich trinke Tee. Vielleicht trinke ich Tee.); with a modal, the second verb goes to the very end as an infinitive (Ich will Tee trinken).",
+ "typology": [
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number"
+  },
+  {
+   "feature": "verb.tenseObligatory",
+   "value": "obligatory"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "none"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "v2-and-final"
+  }
+ ],
+ "summary": "A German verb changes its ending for every person: you take the stem (the infinitive without -en: koch-en, trink-en, kauf-en) and add -e, -st, -t for ich, du, er/sie/es and -en, -t, -en for wir, ihr, sie/Sie. Polite Sie always takes the plural form (Sie trinken). A group of strong verbs also changes the stem vowel, but only in the du and er/sie/es forms: essen → du isst, er isst (e → i); later you will meet a → ä (fahren → du fährst). The modal verbs wollen and mögen are irregular: no ending in ich and er (ich will, er will; ich mag, er mag) and another vowel in the singular. Their polite cousin möchte (would like) is a form of mögen used like a present: ich möchte, du möchtest, er möchte, wir möchten. sein and haben are irregular too (ich bin, du bist, er ist …; du hast, er hat). German has one present tense for what happens regularly, what is going on now and often what will happen: ich esse = I eat, I am eating, I’ll eat – there is no separate progressive form. The finite verb always stands in second place in a statement (Ich trinke Tee. Vielleicht trinke ich Tee.); with a modal, the second verb goes to the very end as an infinitive (Ich will Tee trinken).",
  "blocks": [
   {
    "t": "table",
@@ -56,7 +74,13 @@
      "trinken"
     ]
    ],
-   "caption": "The regular present: stem + ending (the same for almost every verb)"
+   "caption": "The regular present: stem + ending (the same for almost every verb)",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number"
+    }
+   ]
   },
   {
    "t": "table",
@@ -158,7 +182,13 @@
    "t": "callout",
    "kind": "key",
    "title": "Verb second",
-   "text": "In a statement the conjugated verb is always the second element: Ich trinke Tee. – Natürlich trinke ich Tee. – Vielleicht kocht er. Whatever comes first (subject, adverb, object), the verb stays in place two and the subject moves behind it if needed."
+   "text": "In a statement the conjugated verb is always the second element: Ich trinke Tee. – Natürlich trinke ich Tee. – Vielleicht kocht er. Whatever comes first (subject, adverb, object), the verb stays in place two and the subject moves behind it if needed.",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -168,13 +198,25 @@
     "Tee",
     "trinken."
    ],
-   "caption": "With a modal (wollen, mögen, möchte): the modal is second, the other verb waits at the end in the infinitive"
+   "caption": "With a modal (wollen, mögen, möchte): the modal is second, the other verb waits at the end in the infinitive",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "No -ing form",
-   "text": "Ich esse = I eat and I am eating. Never *Ich bin essen. The present also covers plans: Morgen koche ich (I’ll cook tomorrow)."
+   "title": "One present tense",
+   "text": "Ich esse = I eat and I am eating. Never *Ich bin essen. The present also covers plans: Morgen koche ich (I’ll cook tomorrow).",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -185,27 +227,8 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "Ich will is not “I will”",
+   "title": "Ich will = I want",
    "text": "wollen means “to want”: Ich will Kaffee = I want coffee. In a shop or café möchte is more polite: Ich möchte einen Kaffee, bitte."
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek, Russian, Turkish",
-     "points": [
-      "also one ending per person: τρώω, τρως, τρώει …; ем, ешь, ест …; yerim, yersin, yer …",
-      "German is the same idea with fewer distinct endings (wir and sie are alike: kaufen)"
-     ]
-    },
-    {
-     "title": "English",
-     "points": [
-      "only one ending (-s): he eats",
-      "and a separate -ing form (I am eating) that German does not have"
-     ]
-    }
-   ]
   }
  ],
  "procedure": {
@@ -409,6 +432,103 @@
    "lang": "de",
    "fn": "fn.object",
    "note": "The verbs of this lesson take an object in the accusative: Ich trinke einen Kaffee."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "One ending per person is familiar (τρώω, τρως, τρώει …), but German shows fewer distinct forms (wir and sie are alike: kaufen) and needs the pronoun. Greek uses θα for the future; German often uses the plain present with a time word: Morgen koche ich."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "German has no aspect pairs (делать / сделать): one verb, one present, for ongoing and repeated actions alike. Like the Russian perfective, the German present can refer to the future (Morgen koche ich)."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "German has no progressive like estoy comiendo – Ich esse covers both; and the pronoun cannot be dropped. The verb-second rule (Vielleicht trinke ich Tee) has no Spanish counterpart."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "One present for “I eat” and “I am eating” – never *Ich bin essen. English has one ending (-s), German six slots (-e, -st, -t, -en, -t, -en). Ich will means “I want”, not “I will”."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "The French present also covers both “I eat” and “I am eating” (je mange). German endings are more audible (ich koche, du kochst, er kocht), and the verb must be second in the sentence."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi separates the habitual (khātā hū̃) from the progressive (khā rahā hū̃) and shows gender in the verb (khātā / khātī); German has one present and no gender: ich esse."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian adds the prefix mi- and person endings (mixoram, mixori, mixorad) and a progressive with dāštan; German has endings only and one present."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi verbs show the subject’s gender (mī khāto / mī khāte); German verbs show only person and number: ich esse."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "The Arabic imperfect uses prefixes and suffixes (aktubu, taktubu, yaktubu); German uses endings only: ich koche, du kochst, er kocht."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "The Hebrew present is a participle that changes for gender and number but not person (ochel, ochelet, ochlim, ochlot); the German present changes for person (esse, isst) and never for gender."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish separates the progressive -iyor (yiyorum) from the aorist (yerim) and puts the verb last; German has one present (ich esse) and puts the verb second."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese verbs do not change for the person (tabemasu for everyone); German verbs do: ich esse, du isst, er isst. The verb stands second, not at the end."
+  },
+  {
+   "for": "ko",
+   "rel": "new",
+   "text": "Korean verbs change for politeness, not for the person; German verbs change for the person (ich koche, du kochst) and stand second in a statement."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Person endings (syön, syöt, syö, syömme, syötte, syövät) and a present that also covers the future are just as in German; new is the fixed verb-second position."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian verbs change for a definite object (látok egy házat / látom a házat); German verbs never do: ich sehe ein Haus, ich sehe das Haus."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili puts the subject and tense in prefixes (ninakula, nilikula, nitakula); German adds a person ending to the stem (ich esse, du isst) and has no tense prefix."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese verbs never change (我吃, 你吃); German verbs take a person ending, and some change their vowel too (ich esse, du isst). There is no 在 for “now”: Ich esse covers it."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese verbs never change and use đang / đã / sẽ for time; a German verb takes a person ending, and the present covers “now” and often the future."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut verbs also take person endings, at the end of one long word with many suffixes; in German the ending sits on a short verb, and the other ideas are separate words."
   }
  ]
 }

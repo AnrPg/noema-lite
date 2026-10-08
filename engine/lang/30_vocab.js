@@ -69,6 +69,59 @@ VIEWS.recall = (v, r) => {
 };
 
 /* ---------- ⚙️ settings ---------- */
+/** D18: the learner's languages with their level; native / C2 ones fold what is familiar. A language without a profile is
+ *  described by its type (and family), and the app infers from them. */
+const LEVELS = [['native', 'native'], ['C2', 'C2 (near-native)'], ['C1', 'C1'], ['B2', 'B2'], ['B1', 'B1'], ['A2', 'A2 or less']];
+function knowsEditor() {
+  const S = UI.L.settings, W = UI.C.data.world, box = h('div', { class: 'lx-knows' });
+  const list = () => S.knows || (S.knows = knowsL().map(k => ({ ...k })));
+  const draw = () => {
+    box.innerHTML = '';
+    for (const [i, k] of list().entries()) box.append(h('div', { class: 'lx-setrow', 'data-know': k.code || k.name },
+      h('b', {}, k.code ? langName(k.code) : k.name), k.code ? null : h('span', { class: 'tiny' }, ` (${k.type || '?'}${k.family ? ', ' + k.family : ''}: inferred)`), ' ',
+      h('select', { 'aria-label': 'level', onchange: e => { k.level = e.target.value; save(); } }, ...LEVELS.map(([v, t]) => h('option', { value: v, selected: (k.level || 'native') === v ? true : null }, t))),
+      h('button', { class: 'btn ghost small', onclick: () => { list().splice(i, 1); save(); draw(); } }, '✕')));
+    const langs = (W?.languages || []).slice().sort((a, b) => a.name.localeCompare(b.name));
+    const pick = h('select', { 'aria-label': 'add a language' }, h('option', { value: '' }, '+ add a language …'), ...langs.map(l => h('option', { value: l.code }, `${l.name} — ${l.family}`)), h('option', { value: '*' }, 'another language (not in the list) …'));
+    pick.onchange = () => {
+      if (pick.value === '*') {
+        const name = prompt('Name of the language?'); if (!name) return draw();
+        const type = prompt('Its type: isolating, agglutinating, fusional or polysynthetic?', 'agglutinating') || '';
+        const fams = [...new Set((W?.languages || []).map(l => l.family))].sort();
+        const family = prompt('Its family, if one of these (else leave empty): ' + fams.join(', '), '') || '';
+        list().push({ name, type: type.trim().toLowerCase(), ...(fams.includes(family.trim()) ? { family: family.trim() } : {}), level: 'native' });
+      } else if (pick.value && !list().some(k => k.code === pick.value)) list().push({ code: pick.value, level: 'native' });
+      save(); draw();
+    };
+    box.append(pick, h('p', { class: 'tiny' }, 'Native and C2 languages decide what is folded as familiar; comparison notes are shown for all of them.'),
+      h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: S.aiNotes ? true : null, onchange: e => { S.aiNotes = e.target.checked; save(); } }),
+        ' ✨ Let Claude or Gemini write comparison notes for my languages that the course has none for (needs your API key in the app’s ⚙️ Settings)'));
+  };
+  draw(); return box;
+}
+/** D18: the peculiarities of a language as a free library (no order): what is new for you first marked, every one readable. */
+VIEWS.peculiar = (v, r) => {
+  const c = r.arg && UI.C.lang[r.arg] ? r.arg : UI.lang, W = UI.C.data.world;
+  v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/') }, '← Back')),
+    h('h1', {}, `📚 ${info(c).name}: its peculiarities`), h('div', { class: 'row' }, flagRail(null, c, x => go('#/peculiar/' + x))));
+  if (!W) return v.append(h('p', { class: 'lx-note' }, 'The catalogue is not in this build.'));
+  const r2 = N.forLearner(UI.C, c, knowsL()), isNew = new Set(r2.new.map(x => x.p.id)), fam = Object.fromEntries(r2.familiar.map(x => [x.p.id, x.from]));
+  const filt = UI.prefs.pecFilter || 'all';
+  v.append(h('p', { class: 'tiny' }, `${r2.new.length} new for you · ${r2.familiar.length} familiar from ${r2.knownProfiles.map(langName).join(', ') || '—'} · read them in any order. `,
+    ...['all', 'new', 'familiar'].map(f => h('button', { class: 'btn small' + (filt === f ? ' primary' : ''), onclick: () => { UI.prefs.pecFilter = f; save(); go('#/peculiar/' + c); render(); } }, f))));
+  const byArea = {};
+  for (const p of W.phenomena[c] || []) {
+    if (filt === 'new' && !isNew.has(p.id) || filt === 'familiar' && !fam[p.id]) continue;
+    (byArea[p.area] = byArea[p.area] || []).push(p);
+  }
+  for (const [area, ps] of Object.entries(byArea)) v.append(h('details', { class: 'lx-sec', open: true, 'data-area': area }, h('summary', {}, area, h('span', { class: 'tiny' }, ' ' + ps.length)),
+    ...ps.map(p => h('details', { class: 'lx-pec', 'data-id': p.id }, h('summary', {}, isNew.has(p.id) ? '✨ ' : fam[p.id] ? '✓ ' : '', p.kind === 'lacks' ? '∅ ' : '', h('b', {}, p.title),
+        fam[p.id] ? h('span', { class: 'tiny' }, ' — familiar from ' + fam[p.id].map(langName).join(', ')) : null),
+      h('p', {}, wordsIn(c, p.what)),
+      ...(p.examples || []).map(e => h('div', { class: 'lx-ex' }, h('div', { class: 'lx-extext' }, wordsIn(c, e.text)), e.translit ? h('div', { class: 'tiny' }, e.translit) : null, e.note ? h('div', { class: 'lx-tr' }, e.note) : null)),
+      (() => { const mine = N.notesFor(UI.C, p.notes, knowsL()); return mine.length ? notesList(mine) : null; })(),
+      p.when ? h('p', { class: 'tiny' }, '🛤️ In the course: ', p.when) : null))));
+};
 VIEWS.settings = (v) => {
   const S = UI.L.settings;
   const langBox = h('div', { class: 'lx-setrow' }, ...UI.C.languages.map(c => h('label', { class: 'lx-check' },
@@ -80,6 +133,7 @@ VIEWS.settings = (v) => {
   const tog = (label, key) => h('label', { class: 'lx-check' }, h('input', { type: 'checkbox', checked: UI.prefs[key] !== false ? true : null, onchange: e => { UI.prefs[key] = e.target.checked; save(); } }), ' ', label);
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')), h('h1', {}, '⚙️ Settings'),
     h('h3', { class: 'lx-h3' }, 'Languages you study now'), langBox,
+    h('h3', { class: 'lx-h3' }, 'Languages you already know'), knowsEditor(),
     h('h3', { class: 'lx-h3' }, 'Sessions'), num('New ideas per session', 'batch', 3, 30, 12), num('Minutes per session', 'minutes', 5, 120, UI.C.data.course.defaults?.dailyMinutes || 20),
     h('h3', { class: 'lx-h3' }, 'Reading help'), tog('Vowel marks in Arabic and Hebrew', 'marks'), tog('Transliteration under Arabic and Hebrew words', 'translit'), tog('Pinyin under Chinese words', 'pinyin'),
     h('p', { class: 'tiny' }, `Explanations are in ${info(UI.C.explainLang).name}: the language chosen when the course was made.`));

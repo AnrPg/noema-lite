@@ -1,7 +1,21 @@
 {
  "function": "fn.negation",
  "status": "realized",
- "summary": "לֹא (lo) “not” stands directly before what it negates — a verb, an adjective, an adverb or a whole predicate: הוּא לֹא אוֹכֵל בָּשָׂר, הַמַּיִם לֹא פֹּה. “There is no …” and “… doesn’t have” in the present are אֵין, the opposite of יֵשׁ: אֵין פֹּה מֶלַח, אֵין לִי זְמַן “I have no time” — never *לֹא יֵשׁ. Hebrew needs no word for “no” before a noun (אֵין לִי מְכוֹנִית “I have no car”, אֲנִי לֹא אוֹכֵל בָּשָׂר “I eat no meat”); שׁוּם adds “at all” (הוּא לֹא אוֹכֵל שׁוּם בָּשָׂר). The negative words — כְּלוּם or שׁוּם דָּבָר “nothing”, אַף אֶחָד “nobody”, אַף פַּעַם “never” — do not replace לֹא: they go with it, as in Russian and Greek (никто не ест, κανείς δεν τρώει): אֲנִי לֹא רוֹצֶה כְּלוּם, אַף אֶחָד לֹא אוֹכֵל. Alone, as an answer, they need nothing else: — מָה אַתָּה קוֹנֶה? — כְּלוּם. “Neither … nor” has no word of its own: repeat לֹא — לֹא תֵּה וְלֹא קָפֶה. The answer “no” is the same word, לֹא; a prohibition uses אַל + future (אַל תִּקְנֶה! “don’t buy!”, S13).",
+ "typology": [
+  {
+   "feature": "syn.negation",
+   "value": "particle"
+  },
+  {
+   "feature": "syn.negationPosition",
+   "value": "before-verb"
+  },
+  {
+   "feature": "syn.negativeConcord",
+   "value": "concord"
+  }
+ ],
+ "summary": "לֹא (lo) “not” stands directly before what it negates — a verb, an adjective, an adverb or a whole predicate: הוּא לֹא אוֹכֵל בָּשָׂר, הַמַּיִם לֹא פֹּה. “There is no …” and “… doesn’t have” in the present are אֵין, the opposite of יֵשׁ: אֵין פֹּה מֶלַח, אֵין לִי זְמַן “I have no time” — never *לֹא יֵשׁ. Hebrew needs no word for “no” before a noun (אֵין לִי מְכוֹנִית “I have no car”, אֲנִי לֹא אוֹכֵל בָּשָׂר “I eat no meat”); שׁוּם adds “at all” (הוּא לֹא אוֹכֵל שׁוּם בָּשָׂר). The negative words — כְּלוּם or שׁוּם דָּבָר “nothing”, אַף אֶחָד “nobody”, אַף פַּעַם “never” — do not replace לֹא: they go with it: אֲנִי לֹא רוֹצֶה כְּלוּם, אַף אֶחָד לֹא אוֹכֵל. Alone, as an answer, they need nothing else: — מָה אַתָּה קוֹנֶה? — כְּלוּם. “Neither … nor” has no word of its own: repeat לֹא — לֹא תֵּה וְלֹא קָפֶה. The answer “no” is the same word, לֹא; a prohibition uses אַל + future (אַל תִּקְנֶה! “don’t buy!”, S13).",
  "blocks": [
   {
    "t": "table",
@@ -37,7 +51,17 @@
      "לֹא, תּוֹדָה."
     ]
    ],
-   "caption": "לֹא for “not”, אֵין for “there isn’t” and “not have” in the present."
+   "caption": "לֹא for “not”, אֵין for “there isn’t” and “not have” in the present.",
+   "typology": [
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.negationPosition",
+     "value": "before-verb"
+    }
+   ]
   },
   {
    "t": "table",
@@ -73,13 +97,25 @@
      "אֲנִי לֹא רוֹצֶה תֵּה וְלֹא קָפֶה."
     ]
    ],
-   "caption": "In a sentence each of them goes with לֹא (or אֵין)."
+   "caption": "In a sentence each of them goes with לֹא (or אֵין).",
+   "typology": [
+    {
+     "feature": "syn.negativeConcord",
+     "value": "concord"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "Two negatives are correct",
-   "text": "אֲנִי לֹא רוֹצֶה כְּלוּם is literally “I don’t want nothing” — and that is the only correct way. Russian (я ничего не хочу) and Greek (δεν θέλω τίποτα) work the same; German and English do not."
+   "text": "אֲנִי לֹא רוֹצֶה כְּלוּם is literally “I don’t want nothing” — and that is the only correct way.",
+   "typology": [
+    {
+     "feature": "syn.negativeConcord",
+     "value": "concord"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -90,8 +126,8 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "No “kein”",
-   "text": "German kein / English “no” before a noun has no Hebrew word: אֵין לִי זְמַן “I have no time”, הוּא לֹא שׁוֹתֶה יַיִן “he drinks no wine”. Add שׁוּם only to stress “at all”."
+   "title": "No word for “no …” before a noun",
+   "text": "There is no special word for “no” before a noun: אֵין לִי זְמַן “I have no time”, הוּא לֹא שׁוֹתֶה יַיִן “he drinks no wine”. Add שׁוּם only to stress “at all”."
   },
   {
    "t": "compare",
@@ -105,20 +141,18 @@
      ]
     },
     {
-     "title": "Russian · Greek",
+     "title": "German",
      "points": [
-      "никто не ест · κανείς δεν τρώει",
-      "я ничего не хочу · δεν θέλω τίποτα",
-      "the same double negation"
-     ]
-    },
-    {
-     "title": "German · English",
-     "points": [
-      "niemand isst · nobody eats",
-      "ich will nichts · I want nothing",
+      "niemand isst",
+      "ich will nichts",
       "one negation only"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.negativeConcord",
+     "value": "concord"
     }
    ]
   },
@@ -225,6 +259,108 @@
    "lang": "zh",
    "fn": "fn.negation",
    "note": "Chinese splits 不 (general, present, future) from 没 (have not, did not); compare Hebrew לֹא and אֵין."
+  }
+ ],
+ "notes": [
+  {
+   "for": "ru",
+   "rel": "same",
+   "text": "As in Russian, the negative words go with the negation of the verb: никто не ест ~ אַף אֶחָד לֹא אוֹכֵל, я ничего не хочу ~ אֲנִי לֹא רוֹצֶה כְּלוּם. нет “there isn’t / don’t have” matches אֵין."
+  },
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "As in Greek, double negation is required: δεν θέλω τίποτα ~ אֲנִי לֹא רוֹצֶה כְּלוּם, κανείς δεν τρώει ~ אַף אֶחָד לֹא אוֹכֵל."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "As in Spanish, a negative word after the verb needs the negation too: no quiero nada ~ אֲנִי לֹא רוֹצֶה כְּלוּם. But before the verb Hebrew still needs לֹא (אַף אֶחָד לֹא אוֹכֵל), where Spanish says nadie come."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "“I don’t want nothing” is wrong in standard English but the only correct Hebrew: אֲנִי לֹא רוֹצֶה כְּלוּם. And “no” before a noun (“I have no time”) is just אֵין or לֹא: אֵין לִי זְמַן."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French ne … rien / personne / jamais also combines two negative words: je ne veux rien ~ אֲנִי לֹא רוֹצֶה כְּלוּם. Hebrew לֹא stands only before the verb — there is no second part like pas."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German uses one negation (niemand isst, ich will nichts) and kein before nouns; Hebrew doubles it (אַף אֶחָד לֹא אוֹכֵל) and has no kein: אֵין לִי זְמַן."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi नहीं stands before the verb like לֹא (मैं मांस नहीं खाता ~ אֲנִי לֹא אוֹכֵל בָּשָׂר), and कुछ नहीं “nothing” also goes with the negation."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian negates with the prefix نـ on the verb (نمی‌خورم); Hebrew uses the separate word לֹא before the verb. Both need double negation: هیچ چیز نمی‌خواهم ~ אֲנִי לֹא רוֹצֶה כְּלוּם."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi puts नाही after the verb (मी मांस खात नाही); Hebrew puts לֹא before it: אֲנִי לֹא אוֹכֵל בָּשָׂר."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Hebrew לֹא is one word for every tense, where Arabic chooses لَا, لَمْ or لَنْ; and אֵין is the negative of “there is” (Arabic لَا يُوجَدُ / لَيْسَ هُنَاكَ)."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish negates inside the verb (yemiyorum) and uses yok for “there isn’t”; Hebrew puts the separate word לֹא before the verb and uses אֵין (~ yok). Double negation is the same: hiçbir şey istemiyorum ~ אֲנִי לֹא רוֹצֶה כְּלוּם."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese negates with a verb ending (食べない) and uses ない for “there isn’t”; Hebrew puts לֹא before the verb and uses אֵין. Both keep the negative word with the negation: 何も食べない ~ אֲנִי לֹא אוֹכֵל כְּלוּם."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean negates with 안 before the verb or -지 않다 after it, and uses 없다 for “there isn’t”; Hebrew uses לֹא before the verb and אֵין."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish negates with a verb of its own that takes the person (en syö, et syö); Hebrew לֹא never changes."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian nem stands before the verb like לֹא, and negative words need it too (senki nem eszik ~ אַף אֶחָד לֹא אוֹכֵל); nincs “there isn’t” matches אֵין."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili negates with prefixes on the verb (sili “I don’t eat”); Hebrew uses the word לֹא before the verb."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda negates with a prefix on the verb; Hebrew uses the separate word לֹא before the verb, and אֵין for “there isn’t”."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "不 stands before the verb like לֹא, and 没有 “there isn’t / don’t have” matches אֵין (没有时间 ~ אֵין לִי זְמַן). Hebrew has one לֹא for every tense — no 不 / 没 choice."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese không stands before the verb like לֹא (tôi không ăn thịt ~ אֲנִי לֹא אוֹכֵל בָּשָׂר); “there isn’t” is không có, Hebrew אֵין."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut negates with a suffix inside the verb (-nngit-); Hebrew uses the word לֹא before the verb, and אֵין for “there isn’t”."
   }
  ]
 }

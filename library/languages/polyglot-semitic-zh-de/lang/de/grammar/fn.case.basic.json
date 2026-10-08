@@ -1,6 +1,20 @@
 {
  "function": "fn.case.basic",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.cases",
+   "value": "four"
+  },
+  {
+   "feature": "syn.alignment",
+   "value": "accusative"
+  },
+  {
+   "feature": "nom.caseSyncretism",
+   "value": "core-and-noncore"
+  }
+ ],
  "summary": "A case is the form a noun phrase takes to show its role in the sentence. German has four: nominative (Nominativ), accusative (Akkusativ), dative (Dativ) and genitive (Genitiv). The case shows mostly on the article, much less on the noun: der Tisch – den Tisch – dem Tisch – des Tisches. The first one is the nominative: the form of the subject – the one who does something or is something – and of the noun after sein (Das ist ein Tisch. Er ist ein Freund.). It is also the dictionary form. To find the subject, ask Wer oder was …? (Who or what …?): Wer ist hier? – Der Lehrer. → der Lehrer is the subject, in the nominative.",
  "blocks": [
   {
@@ -42,7 +56,13 @@
      "later; in speech often von + dative"
     ]
    ],
-   "caption": "The four German cases"
+   "caption": "The four German cases",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "four"
+    }
+   ]
   },
   {
    "t": "table",
@@ -108,32 +128,19 @@
    "t": "callout",
    "kind": "key",
    "title": "Both sides of sein are nominative",
-   "text": "Der Mann ist ein Lehrer. Das ist der Schlüssel. sein links two nominatives – it never takes an accusative (not *Das ist den Schlüssel)."
+   "text": "Der Mann ist ein Lehrer. Das ist der Schlüssel. sein links two nominatives – it never takes an accusative (not *Das ist den Schlüssel).",
+   "typology": [
+    {
+     "feature": "syn.alignment",
+     "value": "accusative"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "tip",
    "title": "Only the masculine gives it away",
    "text": "In the nominative and accusative, die and das look the same; only the masculine changes: der Tisch (subject) → den Tisch (object, S07). That is why German teachers drill the masculine."
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek and Russian",
-     "points": [
-      "cases are familiar: ο / η / το, Russian стол is the nominative",
-      "Russian shows the case on the noun ending; German mostly on the article"
-     ]
-    },
-    {
-     "title": "Turkish",
-     "points": [
-      "the nominative has no suffix (yalın hal: ev)",
-      "German marks it on der / ein instead"
-     ]
-    }
-   ]
   }
  ],
  "procedure": {
@@ -276,6 +283,108 @@
    "lang": "de",
    "fn": "fn.object",
    "note": "The accusative (den, einen) – the direct object – comes at S07."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Cases are familiar (ο δρόμος, τον δρόμο, του δρόμου), and the noun after είναι is nominative as in German. Greek shows the case on the noun ending as well; German mostly on the article. German has a dative, which Greek lacks."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian has six cases and shows them on the noun ending (стол, стола, столу); German has four and shows them mostly on the article. The nominative after “to be” is the same (Это стол – Das ist ein Tisch)."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish nouns have no cases (only pronouns: yo, me, mí); German shows the case on the article: der Tisch, den Tisch, dem Tisch, des Tisches."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English shows case only in pronouns (he – him); German shows it on the article too: der Tisch – den Tisch."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French marks case only in pronouns (il, le, lui); German marks it on every article."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi nouns have a direct and an oblique form plus postpositions (laṛkā, laṛke ko), and in the perfective past a transitive subject takes ne (laṛke ne khānā khāyā). A German subject is always nominative, in every tense: Der Junge hat gegessen."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian has no case endings (only rā for a definite object); German shows the case on the article."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi marks case with endings and postpositions on the noun, and in the perfective past a transitive subject takes -ne. A German subject is always in the nominative, whatever the tense."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic nominative -u, accusative -a, genitive -i (al-kitābu, al-kitāba, al-kitābi) are the same idea; German has a fourth case, the dative, and shows the case mostly on the article. In a nominal sentence both nouns are nominative in Arabic too."
+  },
+  {
+   "for": "he",
+   "rel": "new",
+   "text": "Hebrew nouns have no cases (only et before a definite object); German shows four cases on the article."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish cases are suffixes on the noun (ev, evi, eve, evde, evden, evin), and the nominative has none (yalın hal); German marks even the nominative, on der / ein."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks roles with particles after the noun (ga, o, ni); German changes the article. The topic (wa) is not a case: a German subject is nominative wherever it stands."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean marks the subject with i / ga, the object with eul / reul and the topic with eun / neun; German changes the article instead, and has no topic marker."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish has fifteen cases on the noun, German four on the article. The predicate noun of olla is nominative in both (Hän on opettaja – Er ist Lehrer)."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Many case suffixes, the nominative without any; German has only four cases, shown mostly on the article (der, den, dem, des)."
+  },
+  {
+   "for": "sw",
+   "rel": "new",
+   "text": "Swahili has no cases: word order and the verb prefixes show who does what. German changes the article for the role: der Mann, den Mann."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "Luganda nouns have no case forms; roles show in word order and the verb. German shows them on the article."
+  },
+  {
+   "for": "zh",
+   "rel": "new",
+   "text": "Chinese has no cases; word order shows the roles. German changes the article and can therefore move the object first (Den Tisch kaufe ich)."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "No cases in Vietnamese, word order decides; German marks roles on the article."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut is ergative: the subject of a transitive verb takes its own case, while the subject of an intransitive verb looks like an object. German puts every subject in the nominative: Der Mann schläft. Der Mann kauft den Tisch."
   }
  ]
 }

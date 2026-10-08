@@ -235,5 +235,12 @@
     "Number": "PL"
    }
   }
+ ],
+ "fieldExemptions": [
+  {
+   "field": "food.vegetables",
+   "function": "fn.root.pattern",
+   "reason": "the mini course has no vegetable word whose root family it teaches"
+  }
  ]
 }

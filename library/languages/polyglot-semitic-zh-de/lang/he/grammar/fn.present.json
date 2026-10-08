@@ -1,7 +1,21 @@
 {
  "function": "fn.present",
  "status": "realized",
- "summary": "Hebrew has one present tense, and it works differently from Greek, German or Russian: the verb does not change for the person (I / you / he) but for **gender and number** — four forms. אָכַל “to eat”: אוֹכֵל for a man or a masculine subject, אוֹכֶלֶת for a woman, אוֹכְלִים for men or a mixed group, אוֹכְלוֹת for women only. The person is shown only by the subject, so the pronoun is never left out: אֲנִי אוֹכֵל, אַתָּה אוֹכֵל and הוּא אוֹכֵל share one form. The present is historically a participle (בֵּינוֹנִי, “the middle form”), which is why it inflects like an adjective. One form covers “I eat” and “I am eating” — there is no progressive and no helper verb “do”. The vowels depend on the verb’s pattern (binyan, see roots and patterns): paʿal אוֹכֵל, שׁוֹתֶה; piʿel מְבַשֵּׁל. After רוֹצֶה “want” or אוֹהֵב “like”, a second verb is an infinitive with לְ־: אֲנִי רוֹצֶה לֶאֱכֹל, הִיא אוֹהֶבֶת לְבַשֵּׁל. The past and the future do have person endings; they come after the foundations (C01, C02).",
+ "typology": [
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  },
+  {
+   "feature": "verb.progressive",
+   "value": "none"
+  },
+  {
+   "feature": "verb.perfective",
+   "value": "none"
+  }
+ ],
+ "summary": "Hebrew has one present tense, and in it the verb does not change for the person (I / you / he) but for **gender and number** — four forms. אָכַל “to eat”: אוֹכֵל for a man or a masculine subject, אוֹכֶלֶת for a woman, אוֹכְלִים for men or a mixed group, אוֹכְלוֹת for women only. The person is shown only by the subject, so the pronoun is never left out: אֲנִי אוֹכֵל, אַתָּה אוֹכֵל and הוּא אוֹכֵל share one form. The present is historically a participle (בֵּינוֹנִי, “the middle form”), which is why it inflects like an adjective. One form covers “I eat” and “I am eating” — there is no progressive and no helper verb “do”. The vowels depend on the verb’s pattern (binyan, see roots and patterns): paʿal אוֹכֵל, שׁוֹתֶה; piʿel מְבַשֵּׁל. After רוֹצֶה “want” or אוֹהֵב “like”, a second verb is an infinitive with לְ־: אֲנִי רוֹצֶה לֶאֱכֹל, הִיא אוֹהֶבֶת לְבַשֵּׁל. The past and the future do have person endings; they come after the foundations (C01, C02).",
  "blocks": [
   {
    "t": "table",
@@ -32,13 +46,25 @@
      "okhlot"
     ]
    ],
-   "caption": "Three persons, singular and plural — but only four forms: the pronoun shows the person."
+   "caption": "Three persons, singular and plural — but only four forms: the pronoun shows the person.",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "Gender and number, not person",
-   "text": "The present form tells you whether the subject is masculine or feminine, one or more — never whether it is “I”, “you” or “he”. That is why the pronoun (or a noun) must always be there: אֲנִי שׁוֹתֶה, אַתָּה שׁוֹתֶה, הוּא שׁוֹתֶה."
+   "text": "The present form tells you whether the subject is masculine or feminine, one or more — never whether it is “I”, “you” or “he”. That is why the pronoun (or a noun) must always be there: אֲנִי שׁוֹתֶה, אַתָּה שׁוֹתֶה, הוּא שׁוֹתֶה.",
+   "typology": [
+    {
+     "feature": "syn.proDrop",
+     "value": "partial"
+    }
+   ]
   },
   {
    "t": "table",
@@ -214,7 +240,13 @@
    "t": "callout",
    "kind": "tip",
    "title": "One form, two meanings — and no “do”",
-   "text": "הִיא שׁוֹתָה קָפֶה is “she drinks coffee” and “she is drinking coffee”. A question is the same sentence with a question mark: אַתָּה שׁוֹתֶה קָפֶה? “Do you drink coffee?”"
+   "text": "הִיא שׁוֹתָה קָפֶה is “she drinks coffee” and “she is drinking coffee”. A question is the same sentence with a question mark: אַתָּה שׁוֹתֶה קָפֶה? “Do you drink coffee?”",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "table",
@@ -240,7 +272,13 @@
      "הִיא אוֹהֶבֶת לְבַשֵּׁל."
     ]
    ],
-   "caption": "The second verb does not agree: it is the infinitive, with לְ־ in front."
+   "caption": "The second verb does not agree: it is the infinitive, with לְ־ in front.",
+   "typology": [
+    {
+     "feature": "verb.infinitive",
+     "value": "infinitive"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -259,13 +297,12 @@
       "ich esse, du isst, er isst, wir essen, ihr esst, sie essen",
       "person and number — never gender"
      ]
-    },
+    }
+   ],
+   "typology": [
     {
-     "title": "Greek · Russian · Turkish",
-     "points": [
-      "τρώω, τρως, τρώει … · ем, ешь, ест … · yerim, yersin, yer …",
-      "person endings; Russian shows gender only in the past (ел / ела) — Hebrew does it in the present"
-     ]
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
     }
    ]
   },
@@ -394,6 +431,108 @@
    "lang": "zh",
    "fn": "fn.present",
    "note": "Chinese verbs never change: 我吃, 她吃, 他们吃 — time and aspect come from other words."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek verbs change for the person (τρώω, τρως, τρώει) and the pronoun can go; the Hebrew present changes for gender and number only (אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת), so the pronoun must stay."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "The Russian present has person endings (ем, ешь, ест) and shows gender only in the past (ел / ела); the Hebrew present is the reverse — gender and number, but no person."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish endings show the person (como, comes, come), so yo can be left out; the Hebrew present shows gender and number instead, so אֲנִי must be said. There is no estar + -ndo: אֲנִי אוֹכֵל is “I eat” and “I am eating”."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English needs “do” and “am …-ing”; Hebrew has neither: אֲנִי אוֹכֵל is “I eat”, “I am eating” and, with a question mark, “do I eat?”. But the verb changes for gender: a woman says אֲנִי אוֹכֶלֶת."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "Where French conjugates for the person (je mange, tu manges), the Hebrew present changes for gender and number only — a woman says אֲנִי אוֹכֶלֶת — and one form also covers “être en train de”."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German conjugates for person and number (ich esse, du isst); Hebrew for gender and number only — the pronoun shows the person."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi also marks gender in the present (मैं खाता हूँ / मैं खाती हूँ), with the auxiliary showing the person; Hebrew has only the gender-and-number form (אֲנִי אוֹכֵל / אוֹכֶלֶת) and no auxiliary."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian verbs end in person endings (می‌خورم, می‌خوری); the Hebrew present has no person endings, but changes for gender and number."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi also changes the present for the speaker’s gender (मी खातो / मी खाते); Hebrew does the same (אֲנִי אוֹכֵל / אֲנִי אוֹכֶלֶת), but uses one form for “I”, “you” and “he”, so the pronoun is needed."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "The Arabic imperfect has person prefixes (آكُلُ, تَأْكُلُ, يَأْكُلُ); the Hebrew present is a participle (like Arabic آكِل) with no person marking — only gender and number."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish personal endings show the person (yerim, yersin, yer); the Hebrew present shows gender and number, and the pronoun shows the person."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese verbs do not change for person or gender (食べる); Hebrew verbs change for gender and number: אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת. There is no ている: one form covers “eat” and “is eating”."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean verbs change for politeness and tense, not for the subject (먹어요); the Hebrew present changes for the subject’s gender and number."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish verbs have person endings (syön, syöt, syö); the Hebrew present has none — but it has gender and number."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian verbs show person and number (eszem, eszel, eszik); the Hebrew present shows gender and number instead."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili shows the person with a prefix (ninakula, unakula, anakula); the Hebrew present shows gender and number, so the pronoun is needed: אֲנִי אוֹכֵל."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda puts the person in a verb prefix; the Hebrew present has no person marking at all — only gender and number — so the subject must be said."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese verbs never change (我吃 / 她吃); Hebrew present verbs change for gender and number (אֲנִי אוֹכֵל / הִיא אוֹכֶלֶת). As in Chinese, one form covers “eat” and “is eating”."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese verbs never change (tôi ăn, cô ấy ăn); Hebrew verbs change for gender and number: אֲנִי אוֹכֵל, הִיא אוֹכֶלֶת."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut verbs carry the person and number (singular, dual, plural) of the subject — and of the object; the Hebrew present carries only the gender and number of the subject, and the object is a separate word."
   }
  ]
 }

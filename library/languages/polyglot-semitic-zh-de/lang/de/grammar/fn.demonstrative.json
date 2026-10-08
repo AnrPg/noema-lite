@@ -1,6 +1,12 @@
 {
  "function": "fn.demonstrative",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.demonstrativeNoun",
+   "value": "dem-noun"
+  }
+ ],
  "summary": "German points with dieser (this; also that), which takes the same endings as der: dieser Mann, diese Frau, dieses Kind, plural diese Kinder (these). jener (that, those) exists but belongs to written, formal or literary German; in speech “that” is the article + noun + da: der Mann da, die Lampe da (and “this” often das Buch hier). For simply showing or naming things, das is used and never changes: Das ist ein Tisch, Das sind Kinder. The place words are hier (here), da (there – or here!) and dort (over there).",
  "blocks": [
   {
@@ -35,7 +41,13 @@
      "die Kinder da"
     ]
    ],
-   "caption": "Pointing words in the nominative"
+   "caption": "Pointing words in the nominative",
+   "typology": [
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "dem-noun"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -261,6 +273,103 @@
    "lang": "de",
    "fn": "fn.definite",
    "note": "dieser has the same endings as der."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "αυτός / αυτή / αυτό agree like dieser, but Greek adds the article too (αυτό το σπίτι); German never does: dieses Haus."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "этот / эта / это / эти agree like dieser / diese / dieses / diese, and the unchanging это of Это стол is German das of Das ist ein Tisch. тот is everyday Russian, jener is bookish German: say der … da."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish has three degrees (este, ese, aquel); German has dieser and, in speech, uses hier / da / dort for distance: das Buch hier, das Buch da."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "this / that split by distance; German dieser often covers both, and distance is added with hier / da: das Buch hier, das Buch da. Both “this is” and “that is” are Das ist …"
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "ce livre-ci / ce livre-là work like das Buch hier / das Buch da; dieser adds the gender and case endings: dieser, diese, dieses, diesen …"
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "yah (this) / vah (that) have no gender; they change only in the oblique case (is, us). dieser changes for three genders, plural and four cases."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "in (this) / ān (that) never change before a noun (in ketāb); dieser takes the endings of der."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "hā / hī / he (this, m. / f. / n.) agree in gender like dieser / diese / dieses; German also changes the ending for the case (diesen, diesem)."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "hādhā / hādhihi come with the article (hādhā l-kitāb, “this the book”); German drops the article: dieses Buch."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew puts the pointing word after the noun, with the article on both (ha-sefer ha-ze); German puts dieser before the noun, without der."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "bu / şu / o never change and have three degrees; dieser takes gender and case endings, and German marks distance with hier / da / dort."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "ko- / so- / a- (kono hon, sono hon, ano hon) are three degrees, by the speaker and the listener; German has one everyday dieser, with endings, and adds hier / da / dort."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "i / geu / jeo (i chaek, geu chaek, jeo chaek) are three degrees and never change; dieser has endings for gender and case."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "tämä / tuo / se take the case endings of the noun (tässä talossa), as dieser does (in diesem Haus), but German adds gender (dieser, diese, dieses)."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "ez / az come with the article and take the noun’s case (ez a ház, ebben a házban); German drops the article (dieses Haus, in diesem Haus) and adds gender."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "The pointing word follows the noun and takes its class (kitabu hiki, vitabu hivi); German dieser comes before the noun and takes its gender (dieses Buch, diese Bücher)."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "这 / 那 need a measure word (这本书, 那个人) and never change; dieser needs no measure word but takes the gender endings: dieses Buch, dieser Mann."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "này / đó / kia follow the noun (cuốn sách này); dieser precedes it and changes its ending."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has a large set of pointing words that also tell whether the thing is up, down, inside, outside or out of sight, and they take case endings. German manages with dieser and adds hier, da or dort."
   }
  ]
 }

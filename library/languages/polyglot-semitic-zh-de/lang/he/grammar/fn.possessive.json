@@ -1,6 +1,24 @@
 {
  "function": "fn.possessive",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.possessiveAffixes",
+   "value": "suffixes"
+  },
+  {
+   "feature": "nom.genitive",
+   "value": "adposition-or-particle"
+  },
+  {
+   "feature": "syn.genitiveNoun",
+   "value": "noun-gen"
+  },
+  {
+   "feature": "nom.alienability",
+   "value": "none"
+  }
+ ],
  "summary": "Hebrew says “my, your, his …” in two ways. (1) Everyday: the noun with the article, then שֶׁל “of” with a personal ending — הַבַּיִת שֶׁלִּי “my house”, literally “the house of-me”. The endings give שֶׁלִּי, שֶׁלְּךָ (to a man), שֶׁלָּךְ (to a woman), שֶׁלּוֹ, שֶׁלָּהּ, שֶׁלָּנוּ, שֶׁלָּכֶם, שֶׁלָּכֶן, שֶׁלָּהֶם, שֶׁלָּהֶן; they never agree with the thing owned — only the owner’s person, gender and number count (הָאָחוֹת שֶׁלּוֹ “his sister”). With a name or a noun as owner: הַתִּיק שֶׁל דָּנָה “Dana’s bag”. (2) The possessive suffix on the noun itself: אָחִי “my brother”, אִשְׁתִּי “my wife”, הוֹרַי “my parents”. For most nouns it is formal or written (אִמִּי, בְּנִי), but some family words take it in everyday speech too: אִשְׁתִּי, בַּעֲלִי, אָחִי, אֲחוֹתִי. A noun with a suffix is already definite and takes no הַ. The family words אִמָּא, אַבָּא, סַבָּא, סָבְתָא work like names: אִמָּא שֶׁלִּי, without הַ.",
  "blocks": [
   {
@@ -57,7 +75,17 @@
      "הַבַּיִת שֶׁל דָּנָה"
     ]
    ],
-   "caption": "Everyday possession: הַ + noun + שֶׁל with the owner’s ending."
+   "caption": "Everyday possession: הַ + noun + שֶׁל with the owner’s ending.",
+   "typology": [
+    {
+     "feature": "nom.genitive",
+     "value": "adposition-or-particle"
+    },
+    {
+     "feature": "syn.genitiveNoun",
+     "value": "noun-gen"
+    }
+   ]
   },
   {
    "t": "table",
@@ -117,7 +145,13 @@
      "אִשְׁתָּם"
     ]
    ],
-   "caption": "The suffixes are the endings of שֶׁל and לְ; אָח and אָב add -ִי- (אָחִיו), feminines in -ָה show their old -ת- (אִשָּׁה → אִשְׁתִּי)."
+   "caption": "The suffixes are the endings of שֶׁל and לְ; אָח and אָב add -ִי- (אָחִיו), feminines in -ָה show their old -ת- (אִשָּׁה → אִשְׁתִּי).",
+   "typology": [
+    {
+     "feature": "nom.possessiveAffixes",
+     "value": "suffixes"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -129,7 +163,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "It follows the owner, not the thing",
-   "text": "שֶׁלּוֹ is “his”, שֶׁלָּהּ “her” — whatever the thing: הָאָחוֹת שֶׁלּוֹ “his sister”, הַבֵּן שֶׁלָּהּ “her son”. The word never changes for the thing owned: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי, הַסְּפָרִים שֶׁלִּי. To one person: שֶׁלְּךָ to a man, שֶׁלָּךְ to a woman."
+   "text": "שֶׁלּוֹ is “his”, שֶׁלָּהּ “her” — whatever the thing: הָאָחוֹת שֶׁלּוֹ “his sister”, הַבֵּן שֶׁלָּהּ “her son”. The word never changes for the thing owned: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי, הַסְּפָרִים שֶׁלִּי. To one person: שֶׁלְּךָ to a man, שֶׁלָּךְ to a woman. And the same שֶׁל serves for everything owned — a relative, a part of the body or a thing.",
+   "typology": [
+    {
+     "feature": "nom.alienability",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -156,13 +196,6 @@
       "הָאָח שֶׁלִּי — article + noun + “of me”",
       "or the suffix: אָחִי",
       "no agreement with the thing owned"
-     ]
-    },
-    {
-     "title": "Greek · Turkish",
-     "points": [
-      "ο αδερφός μου — the same order as הָאָח שֶׁלִּי",
-      "kardeşim — a suffix, like אָחִי"
      ]
     },
     {
@@ -316,6 +349,108 @@
    "lang": "zh",
    "fn": "fn.possessive",
    "note": "Chinese uses 的 after the owner (我的书) and drops it with close family (我妈妈) — as Hebrew drops הַ in אִמָּא שֶׁלִּי."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "ο αδερφός μου — article + noun + “of me” — has the same order as הָאָח שֶׁלִּי, and as in Greek the possessive word does not agree with the thing owned. The suffix (אָחִי) has no Greek match."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish kardeşim “my brother” is a suffix, like Hebrew אָחִי; but Hebrew uses the suffix mostly in formal style and says הָאָח שֶׁלִּי in everyday speech."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian мой / моя / моё agree with the thing owned; Hebrew שֶׁלִּי never does — it follows only the owner: הַסֵּפֶר שֶׁלִּי, הַמִּטָּה שֶׁלִּי."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish mi / mis come before the noun and agree in number with it; Hebrew שֶׁלִּי comes after a definite noun and never changes for it: הַסְּפָרִים שֶׁלִּי. Unlike su, Hebrew separates “his” and “her”: שֶׁלּוֹ / שֶׁלָּהּ."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "“His” and “her” follow the owner, as in English (הָאָחוֹת שֶׁלּוֹ “his sister”); but the noun needs the article: הַבַּיִת שֶׁלִּי, literally “the house of me”."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "son / sa follow the thing owned (sa sœur is “his” or “her sister”); Hebrew follows the owner: הָאָחוֹת שֶׁלּוֹ “his sister”, הָאָחוֹת שֶׁלָּהּ “her sister”."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "mein / meine come before the noun and agree with it; Hebrew שֶׁלִּי follows a definite noun and does not change for it."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi मेरा / मेरी / मेरे agree with the thing owned and come first; Hebrew שֶׁלִּי comes after the noun and never agrees with it."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian puts the owner after the noun, with ezafe or a suffix (کتابِ من / کتابم); Hebrew has both ways too: הַסֵּפֶר שֶׁלִּי (everyday) and the suffix (formal)."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi माझा / माझी / माझे agree with the thing owned and come before it; Hebrew שֶׁלִּי follows the noun and depends only on the owner."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic uses the suffix every day (أَخِي, كِتَابِي); Hebrew uses it mainly in formal style and with some family words, and otherwise says הַסֵּפֶר שֶׁלִּי — Standard Arabic has no word like שֶׁל."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese puts the owner first with の (私の本); Hebrew puts it after the noun: הַסֵּפֶר שֶׁלִּי “the book of me”."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean puts the owner first (제 책); Hebrew puts it after: הַסֵּפֶר שֶׁלִּי."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish also has possessive suffixes (kirjani “my book”, often with minun in front); Hebrew has suffixes too (אָחִי), but everyday speech prefers הָאָח שֶׁלִּי."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian marks the thing owned with a suffix (könyvem); Hebrew has such suffixes (אָחִי, אִשְׁתִּי), but everyday speech mostly uses שֶׁל + ending."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili puts the possessive after the noun (kitabu changu), as Hebrew does (הַסֵּפֶר שֶׁלִּי); but Swahili -angu agrees with the noun’s class, while שֶׁלִּי never changes."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda also puts the possessive after the noun (ekitabo kyange “my book”) and makes it agree with the noun’s class; Hebrew שֶׁלִּי stays the same for every noun."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese puts the owner first with 的 (我的书); Hebrew puts it after — הַסֵּפֶר שֶׁלִּי — and the noun takes the article."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese also puts the owner after the noun, often with của (sách của tôi); Hebrew שֶׁל is the same idea — הַסֵּפֶר שֶׁלִּי — with the article on the noun."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut marks the owner with a suffix on the noun — “my house” is one word; Hebrew has such suffixes too (אָחִי), but everyday speech uses שֶׁל: הַבַּיִת שֶׁלִּי."
   }
  ]
 }

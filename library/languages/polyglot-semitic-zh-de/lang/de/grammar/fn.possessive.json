@@ -1,6 +1,20 @@
 {
  "function": "fn.possessive",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.possessiveAffixes",
+   "value": "none"
+  },
+  {
+   "feature": "nom.constructState",
+   "value": "none"
+  },
+  {
+   "feature": "nom.alienability",
+   "value": "none"
+  }
+ ],
  "summary": "German shows the owner with a possessive word before the noun, in place of the article: mein (my), dein (your, to du), sein (his; its), ihr (her; their), unser (our), euer (your, to ihr) and Ihr (your, polite – with a capital I). Two choices are made separately: the owner chooses the word (Anna → ihr, Max → sein), and the owned noun chooses the ending, exactly like ein: mein Vater, meine Mutter, mein Kind. Unlike ein, the possessives have a plural: meine Eltern. So seine Frau is “his wife” and ihr Mann is “her husband”. This step teaches the nominative (Das ist mein Bruder) and the masculine accusative after haben (Ich habe meinen Schlüssel – like einen); the dative and genitive forms come later with the prepositions. euer drops its e before an ending: eure Kinder.",
  "blocks": [
   {
@@ -173,7 +187,13 @@
    "t": "callout",
    "kind": "key",
    "title": "Two questions, two choices",
-   "text": "Whose is it? → the word (sein or ihr). What is it? → the ending (-, -e, -, -e). Anna und ihr Bruder (her brother) · Max und seine Schwester (his sister)."
+   "text": "Whose is it? → the word (sein or ihr). What is it? → the ending (-, -e, -, -e). Anna und ihr Bruder (her brother) · Max und seine Schwester (his sister).",
+   "typology": [
+    {
+     "feature": "nom.possessiveAffixes",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -185,24 +205,11 @@
    "t": "callout",
    "kind": "tip",
    "title": "No article with a possessive",
-   "text": "meine Mutter, not *die meine Mutter. Greek says η μητέρα μου (article + noun + μου); German puts the possessive in the article’s place."
-  },
-  {
-   "t": "compare",
-   "items": [
+   "text": "meine Mutter, not *die meine Mutter. The possessive takes the article’s place: never an article and a possessive together.",
+   "typology": [
     {
-     "title": "Greek and English",
-     "points": [
-      "the owner chooses: του / της, his / her – as in German sein / ihr",
-      "only German also adds an ending for the thing owned: seine Frau, sein Kind"
-     ]
-    },
-    {
-     "title": "Russian and Turkish",
-     "points": [
-      "Russian мой / моя / моё / мои agrees like German mein / meine; его, её, их never change – German sein / ihr do",
-      "Turkish puts a suffix on the noun: annem, annen, annesi (my, your, his/her mother)"
-     ]
+     "feature": "nom.possessiveAffixes",
+     "value": "none"
     }
    ]
   }
@@ -384,6 +391,103 @@
    "lang": "de",
    "fn": "fn.have",
    "note": "After haben the masculine possessive takes -en: Ich habe meinen Schlüssel."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek puts an unstressed μου / σου / του / της after the noun and keeps the article (η μητέρα μου); German puts mein / dein / sein / ihr in the article’s place (meine Mutter). του / της choose by the owner like sein / ihr, but only German adds an ending for the thing owned: seine Frau, sein Kind."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "мой / моя / моё / мои agree like mein / meine. But его, её, их never change, while sein and ihr do (seine Frau, ihre Kinder); and German has no свой – it is sein / ihr again."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "su can mean his, her, their or your (usted); German keeps them apart: sein, ihr, Ihr. mi changes only for number (mis), mein also for gender and case (meine, meinen)."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "his / her / its / their choose by the owner, like sein / ihr; German adds an ending for the thing owned: seine Schwester, sein Bruder."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "son / sa agree with the thing owned, not the owner (sa femme = his or her wife); German chooses by the owner first – seine Frau (his), ihre Frau (her) – and then adds the ending."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "merā / merī / mere agree with the thing owned (merā beṭā, merī beṭī), like mein / meine; but uskā is his and her alike, where German chooses sein or ihr."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian adds a suffix (ketābam, my book) or links with the ezafe (ketāb-e man); German puts a separate word before the noun: mein Buch."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi chooses by the owner (tyācā, his; ticā, her) and agrees with the thing owned (ticā bhāū, ticī bahīṇ) – the same two choices as German ihr Bruder, ihre Schwester."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic attaches the owner as a suffix (kitābī, kitābuhu, kitābuhā) and links two nouns in the construct state (bābu l-bayti); German puts a separate word before the noun (mein Buch, sein Buch) and uses the genitive or von for nouns (die Tür des Hauses, die Tür vom Haus)."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew uses suffixes (sifri) or shel (ha-sefer sheli) after the noun, and the construct state for nouns (beit ha-sefer); German puts mein, dein … before the noun, without an article."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts the owner on the noun as a suffix (annem, annen, annesi); German uses a separate word before it: meine Mutter, deine Mutter, seine / ihre Mutter."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "watashi no hon links with the particle no, which never changes; German mein changes with the noun: mein Buch, meine Tasche."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean uses -ui (na-ui chaek) or a short form (nae chaek) that never changes; German mein takes endings and chooses sein / ihr by the owner."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adds a suffix (kirjani, kirjasi), often with the pronoun (minun kirjani), and hänen is his and her; German uses mein, dein, and sein or ihr."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian puts the owner as a suffix and keeps the article (a könyvem); German uses mein in the article’s place: mein Buch. ő könyve is his or her book; German chooses sein or ihr."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "The possessive agrees with the noun class (kitabu changu, vitabu vyangu) – as mein agrees with the noun – but it follows the noun, where mein precedes it."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "的 never changes (我的书) and is often dropped with family (我妈妈); German mein changes with the noun: mein Buch, meine Mutter."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese puts the owner after the noun (sách của tôi); German puts mein before it and adds an ending."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks possession with endings on the noun owned (and a case on the owner); German uses a separate word before the noun: mein, dein, sein, ihr."
   }
  ]
 }

@@ -1,68 +1,88 @@
 {
  "function": "fn.prep.time",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "mixed"
+  },
+  {
+   "feature": "time.halfHour",
+   "value": "half-past"
+  },
+  {
+   "feature": "time.monthNames",
+   "value": "numbered"
+  }
+ ],
  "summary": "Chinese frames time with words AFTER the time phrase, and the whole phrase stands before the verb: 八点以前 ‘before eight’, 吃饭以后 ‘after eating’, 假期期间 ‘during the holidays’, 吃饭的时候 ‘while eating’, 从去年以来 ‘since last year’. ‘Until’ is 到 (after a verb: 工作到六点) or 直到 (直到十二点才回家 ‘not until twelve’); ‘since’ is 自从 … (以后 / 以来) or 从 … 以来; ‘from … to …’ is 从 … 到 …. ‘At / on / in’ a time has NO word at all: 我七点吃早饭 ‘at seven’, 星期一 ‘on Monday’, 五月 ‘in May’, 冬天 ‘in winter’ (formal writing may add 在). The clock: number + 点 (o’clock) + number + 分 (minutes), 半 for half past: 八点半, 下午三点十分. The date goes from big to small: 年 → 月 → 号 (spoken) / 日 (written): 2026年五月一号. Months are numbered: 一月 … 十二月; 三月 ‘March’ but 三个月 ‘three months’.",
  "blocks": [
   {
    "t": "table",
    "head": [
-    "English / Greek",
+    "Meaning",
     "Chinese",
     "Where the word goes"
    ],
    "rows": [
     [
-     "before eight — πριν από τις οχτώ",
+     "before eight",
      "八点以前 / 八点之前",
      "after the time"
     ],
     [
-     "after eating — μετά το φαγητό",
+     "after eating",
      "吃饭以后 / 吃饭之后",
      "after the event"
     ],
     [
-     "until six — μέχρι τις έξι",
+     "until six",
      "(工作)到六点 · 直到六点",
      "after the verb (到) / before the time (直到)"
     ],
     [
-     "since last year — από πέρσι",
+     "since last year",
      "从去年以来 · 自从去年",
      "frame: 从 … 以来 / 自从 …"
     ],
     [
-     "during the holidays — κατά τη διάρκεια των διακοπών",
+     "during the holidays",
      "假期期间 · 假期里",
      "after the noun"
     ],
     [
-     "while eating — ενώ τρώμε",
+     "while eating",
      "吃饭的时候",
      "after the clause, with 的"
     ],
     [
-     "at seven — στις επτά",
+     "at seven",
      "七点",
      "no word"
     ],
     [
-     "on Monday — τη Δευτέρα",
+     "on Monday",
      "星期一",
      "no word"
     ],
     [
-     "in May — τον Μάιο",
+     "in May",
      "五月",
      "no word"
     ],
     [
-     "from Monday to Friday — από Δευτέρα ως Παρασκευή",
+     "from Monday to Friday",
      "从星期一到星期五",
      "从 … 到 …"
     ]
    ],
-   "caption": "Time phrases: the time comes first, the ‘preposition’ after it"
+   "caption": "Time phrases: the time comes first, the ‘preposition’ after it",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "mixed"
+    }
+   ]
   },
   {
    "t": "table",
@@ -103,7 +123,13 @@
      "xiànzài jǐ diǎn?"
     ]
    ],
-   "caption": "The clock: 点 o’clock, 分 minutes, 半 half"
+   "caption": "The clock: 点 o’clock, 分 minutes, 半 half",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -115,19 +141,25 @@
     "上午",
     "十点"
    ],
-   "caption": "The date: from big to small (the reverse of Greek and German)"
+   "caption": "The date: from big to small (German writes it the other way round)"
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "Postpositions of time — like the place words of S12",
-   "text": "桌子上 ‘on the table’ put the place word after the noun (S12); time works the same way: 八点以前, 吃饭以后, 假期期间. 以前 / 以后 even use the words for ‘front’ and ‘back’ (前面, 后面)."
+   "text": "桌子上 ‘on the table’ put the place word after the noun (S12); time works the same way: 八点以前, 吃饭以后, 假期期间. 以前 / 以后 even use the words for ‘front’ and ‘back’ (前面, 后面).",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "mixed"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "pitfall",
    "title": "No ‘at / on / in’",
-   "text": "Greek στις πέντε, German um fünf, am Montag, im Mai — Chinese: 五点, 星期一, 五月, just before the verb: 我五点走. (Greek τη Δευτέρα and German heute also do without a preposition — Chinese does so everywhere.)"
+   "text": "German um fünf, am Montag, im Mai — Chinese: 五点, 星期一, 五月, just before the verb: 我五点走. (German heute also does without a preposition — Chinese does so everywhere.)"
   },
   {
    "t": "compare",
@@ -353,6 +385,108 @@
    ],
    "answer": "我工作八个小时。",
    "why": "How long goes after the verb; 我八点工作 is ‘I work at eight’."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek puts the preposition before the time (πριν από τις οχτώ, μετά το φαγητό) and needs στις for clock times; Chinese puts 以前 / 以后 after it and needs nothing for ‘at’: 八点以前, 七点. Greek dates go small to big (1 Μαΐου 2026), Chinese big to small. πέντε και μισή ~ 五点半."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian до / после come before the time (до восьми, после обеда); Chinese 八点以前, 吃饭以后 come after. Russian половина шестого ‘half of the sixth’ is 5:30 = 五点半: Chinese counts from the hour just passed."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish antes de / después de come before the time (antes de las ocho); Chinese 以前 / 以后 come after it (八点以前). las cinco y media ~ 五点半; Spanish dates go small to big (1 de mayo de 2026), Chinese big to small."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English before / after / until come before the time (before eight, after dinner); Chinese 以前 / 以后 come after it (八点以前, 吃饭以后). ‘At seven’, ‘on Monday’, ‘in May’ have no word in Chinese: 七点, 星期一, 五月."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French avant / après / jusqu’à come before the time (avant huit heures); Chinese puts 以前 / 以后 after it. cinq heures et demie ~ 五点半; French dates go small to big (le 1er mai 2026)."
+  },
+  {
+   "for": "de",
+   "rel": "trap",
+   "text": "German halb sechs is 5:30 — half TO six; Chinese 五点半 is half PAST five. vor acht ~ 八点以前, with the word after the time in Chinese."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi postpositions also follow the time (आठ बजे से पहले ‘before eight’, खाने के बाद ‘after eating’), as 以前 / 以后 do. Hindi has special words for 1:30 and 2:30 (डेढ़, ढाई); Chinese simply says 一点半, 两点半."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian qabl az / baʿd az come before the time (qabl az sāʿat-e hasht ‘before eight’); Chinese 以前 / 以后 come after it: 八点以前. Iran’s official calendar is the Solar Hijri one; Chinese dates follow the Gregorian calendar, big to small."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi puts ‘before’ and ‘after’ after the time or event (जेवणानंतर ‘after eating’), as Chinese does (吃饭以后). साडेपाच ‘5:30’ ~ 五点半, but Marathi has special words for 1:30 and 2:30 (दीड, अडीच); Chinese says 一点半, 两点半."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic qabla / baʿda come before the time (qabla l-thāmina ‘before eight’); Chinese 以前 / 以后 come after it: 八点以前. Arabic dates go small to big, Chinese big to small."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew lifnei / aharei come before the time (lifnei shmone ‘before eight’); Chinese puts 以前 / 以后 after it: 八点以前. Hebrew dates go small to big, Chinese big to small."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish postpositions follow the time like Chinese ones: sekizden önce ~ 八点以前, yemekten sonra ~ 吃饭以后. beş buçuk ~ 五点半; but Turkish dates go small to big (1 Mayıs 2026), Chinese big to small."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese puts ‘before / after’ after the time (8時前, 食事の後), writes dates big to small (2026年5月1日) and says 5時半 for 5:30 — all as in Chinese (八点以前, 2026年五月一号, 五点半)."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean puts ‘before / after’ after the time (8시 전에, 식사 후에), writes dates big to small (2026년 5월 1일) and says 5시 반 for 5:30 — all as in Chinese."
+  },
+  {
+   "for": "fi",
+   "rel": "trap",
+   "text": "Finnish puoli kuusi ‘half six’ is 5:30 — half TO six; Chinese 五点半 is half past five. ennen kahdeksaa ‘before eight’ puts ennen first; Chinese 八点以前 puts it after."
+  },
+  {
+   "for": "hu",
+   "rel": "trap",
+   "text": "Hungarian fél hat ‘half six’ is 5:30; Chinese 五点半 is half past five. But Hungarian dates go big to small like Chinese ones (2026. május 1.), and postpositions follow the time (nyolc előtt ~ 八点以前)."
+  },
+  {
+   "for": "sw",
+   "rel": "trap",
+   "text": "Swahili time counts from 6 a.m.: saa moja ‘hour one’ is 7 o’clock; Chinese 七点 is 7 o’clock. kabla ya / baada ya come before the time; Chinese 以前 / 以后 come after it."
+  },
+  {
+   "for": "lg",
+   "rel": "trap",
+   "text": "Luganda time-telling also counts the hours from 6 a.m. (essaawa emu ‘hour one’ = 7 o’clock); Chinese counts from midnight and noon: 七点 is 7 o’clock."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "Vietnamese dates go small to big (ngày 1 tháng 5 năm 2026); Chinese big to small: 2026年五月一号. trước / sau come before the time (trước 8 giờ); Chinese 以前 / 以后 come after it."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses many time relations with suffixes and verb endings; Chinese uses separate words after the time or event: 八点以前, 吃饭以后."
   }
  ],
  "seeAlso": [

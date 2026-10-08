@@ -140,6 +140,12 @@
      "value": "joining"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fa",
+    "ur"
+   ],
+   "alsoNote": "The obligatory لا ligature belongs to the Arabic script and is shared by every language written in it (Persian, Urdu …); other joining scripts do not have it.",
    "what": "When ل is followed by ا (also أ إ آ) the two letters must be written as one ligature, لا. Learners who know the separate shapes often fail to recognise it.",
    "examples": [
     {
@@ -218,6 +224,12 @@
      "value": "contrastive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fa",
+    "ur"
+   ],
+   "alsoNote": "Persian and Urdu write the same mark (tašdīd), mostly in Arabic loanwords. Hebrew dagesh once marked doubling but Modern Hebrew does not pronounce it; Japanese marks a doubled consonant with a small っ before it. Knowing gemination alone does not teach the mark.",
    "what": "A doubled consonant is written once with a šadda above it. It is meaningful: it distinguishes verb forms and words, and it appears after the article before sun letters.",
    "examples": [
     {
@@ -262,6 +274,9 @@
      "value": "suffix"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Persian and Urdu keep the written -an (ـاً) only in Arabic loan adverbs (فوراً، اتفاقاً); the Persian indefinite suffix -i is a different thing.",
    "what": "Indefinite endings are written as doubled vowel marks (ـٌ ـً ـٍ). The accusative -an adds a written alif (كِتَابًا), except after ة and after ـاء, and the same -an ending makes many adverbs and formulas (شُكْرًا).",
    "examples": [
     {
@@ -316,6 +331,9 @@
      "value": "sex-based"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew has the same alternation of the feminine ending, -a in isolation and -at- in the construct (ה → ת), but with two different letters; Persian and Urdu keep ة only in a few Arabic loanwords.",
    "what": "The feminine ending ة looks like h with two dots; it is said -a in pause and -at- whenever something follows: a case ending, a possessive suffix, or a second noun in a construct. Before suffixes it is written ت.",
    "examples": [
     {
@@ -369,6 +387,9 @@
      "value": "abjad"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Persian and Urdu write a few Arabic loanwords with a final ی read ā (موسی، حتی).",
    "what": "A final ā can be written ى (a dotless yāʾ). It turns into ي or ا when a suffix is added, and nouns in -an (مَقْهًى) keep the ى under their tanwīn.",
    "examples": [
     {
@@ -424,6 +445,9 @@
      "value": "abjad"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Persian and Urdu write hamza on seats too, mainly in Arabic loanwords (مسئله، تأثیر), without the changes across a paradigm; Urdu ئ mostly marks a vowel sequence. Hebrew א has no seats.",
    "what": "The glottal stop ء is a full consonant, but it is written on a seat (أ إ ؤ ئ) or alone (ء) by rules that depend on the surrounding vowels; the same root letter therefore changes its spelling across a paradigm.",
    "examples": [
     {
@@ -476,6 +500,8 @@
      "value": "complex"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "Some words begin with an alif whose vowel is heard only at the start of speech (the article al-, اِبْن, اِسْم, اِمْرَأَة, imperatives and forms VII–X). After a vowel it is silent and the words run together.",
    "examples": [
     {
@@ -519,6 +545,9 @@
      "value": "prefix"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew ha- historically doubled the following consonant (dagesh) before any letter, and Modern Hebrew does not pronounce it; there is no assimilation of an l.",
    "what": "Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is not pronounced; the next consonant is doubled and carries šadda. Before the other 14 (moon) letters al- is said in full.",
    "examples": [
     {
@@ -569,6 +598,9 @@
      "value": "mostly-unwritten"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Urdu writes the same small alif in a few words (عیسیٰ، موسیٰ، اللّٰہ); Hebrew has historical defective spellings, a related but different idea.",
    "what": "A few very frequent words have a long ā that is not written with a full alif but with a small superscript alif (or nothing in plain text): هٰذَا, ذٰلِكَ, لٰكِنْ, اللّٰه. مِائَة (hundred) has an alif that is not pronounced.",
    "examples": [
     {
@@ -614,6 +646,12 @@
      "value": "rtl"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fa",
+    "ur"
+   ],
+   "alsoNote": "Persian and Urdu use the same turned marks ، ؛ ؟ (Urdu adds ۔ as its full stop); Hebrew uses the unturned marks. The long chains of clauses with وَ / فَ are a matter of Arabic prose style.",
    "what": "The comma, semicolon and question mark are mirrored or turned (، ؛ ؟), and all marks follow the right-to-left direction. Traditional and much modern prose uses few full stops and links clauses with وَ 'and' and فَ 'so'.",
    "examples": [
     {
@@ -699,6 +737,9 @@
      "value": "abjad"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "DIN 31635 is a scheme for Arabic; scholarly transliterations of Persian and Urdu use similar conventions (macrons, ʿ, ʾ).",
    "what": "Until the script is learned every word is shown with a scientific transliteration: macrons for long vowels, dots for emphatics (ṣ ḍ ṭ ẓ ḥ), ʿ for ع and ʾ for hamza.",
    "examples": [
     {
@@ -745,6 +786,12 @@
      "value": "rtl"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fa",
+    "ur"
+   ],
+   "alsoNote": "Persian and Urdu use the extended Arabic-Indic digits ۰–۹, in which 4, 5 and 6 (and in Urdu 7) have other shapes; Hebrew uses 0–9 but shares the left-to-right numbers inside right-to-left text.",
    "what": "The Arab East writes the Arabic-Indic digits ٠١٢٣٤٥٦٧٨٩; the Maghreb uses the digits 0–9, which come from the same Indian system. Inside right-to-left text a multi-digit number is still written with its highest digit on the left, so numbers are read left to right.",
    "examples": [
     {
@@ -1095,6 +1142,9 @@
      "value": "suffixes"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Biblical Hebrew has pausal forms; Modern Hebrew does not.",
    "what": "At the end of a phrase final short vowels and tanwīn are not pronounced, -an becomes -ā and ة is said -ah. Everyday reading aloud uses pause forms almost everywhere, so the written case endings are often not heard.",
    "examples": [
     {
@@ -1139,6 +1189,8 @@
      "value": "complex"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "A word ending in a consonant takes a short vowel before al- or another hamzat al-waṣl so that two consonants do not meet: مِنْ → مِنَ, عَنْ → عَنِ, هَلْ → هَلِ.",
    "examples": [
     {
@@ -1412,6 +1464,12 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he",
+    "am"
+   ],
+   "alsoNote": "Hebrew: past = suffix conjugation, future = prefix conjugation (its present is a participle). Amharic: perfective with suffixes, imperfective with prefixes.",
    "what": "Every verb has two finite stems: the perfect with person endings (past, completed) and the imperfect with person prefixes (present, and the base of the moods and the future).",
    "examples": [
     {
@@ -1461,6 +1519,11 @@
      "value": "pervasive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew pa'al has the same o / a choice in the future (יִכְתֹּב / יִלְמַד), more predictable than in Arabic (a near gutturals and in many statives).",
    "what": "For form I verbs the vowel of the present stem (a, i or u) cannot be predicted from the past; it is learned with each verb (dictionaries give it).",
    "examples": [
     {
@@ -1514,6 +1577,9 @@
      "value": "inflectional"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The أَنْ-subjunctive matches the subjunctive of Romance languages, German or Greek only in part; the jussive (also the past after لَمْ) has no counterpart there. Amharic has a jussive (\"let him …\"); Biblical Hebrew had one, Modern Hebrew does not.",
    "what": "The imperfect has three moods shown by the ending: indicative -u, subjunctive -a (after أَنْ، لَنْ، لِـ 'in order to'), jussive with no vowel (after لَمْ, prohibitive لَا, and لِـ of command). An energetic mood exists in formal style.",
    "examples": [
     {
@@ -1622,6 +1688,9 @@
      "value": "inflectional"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The Hebrew imperative is also cut from the future (תִּכְתֹּב → כְּתֹב), without a helping alif.",
    "what": "The imperative is cut from the jussive 'you' form; a helping alif (اِ / اُ) is added when it starts with two consonants. Four forms by addressee (plus a dual).",
    "examples": [
     {
@@ -1722,6 +1791,11 @@
      "value": "morphological"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew pu'al and huf'al are internal u–a passives of pi'el and hif'il (the passive of pa'al is nif'al, a prefix form).",
    "what": "The passive is made by changing the vowels, not with an auxiliary: u–i in the perfect, u–a in the imperfect. Unvocalized it looks exactly like the active.",
    "examples": [
     {
@@ -1809,6 +1883,9 @@
      "value": "past"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew says a past habit with הָיָה + participle; Amharic puts a finite imperfective before ነበር. Elsewhere the meaning is familiar, the two finite agreeing verbs are not.",
    "what": "كَانَ followed by an imperfect verb gives the past continuous or habitual ('was doing, used to do'); both verbs agree with the subject.",
    "examples": [
     {
@@ -1856,6 +1933,11 @@
      "value": "finite-clause"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew has a verbal noun for every binyan (כְּתִיבָה، דִּבּוּר، הַפְעָלָה) next to its infinitive; the pa'al one is fairly regular, the Arabic form I one is not.",
    "what": "Each verb has a verbal noun that does the work of an infinitive or a gerund. For form I it is unpredictable and must be learned; for forms II–X it follows the form.",
    "examples": [
     {
@@ -2122,6 +2204,9 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew -im is the counterpart (and its construct -ei drops the m like -ūna drops the -na), but it serves all masculine nouns and has no case forms.",
    "what": "Mostly for male human participles and adjectives: -ūna in the nominative, -īna otherwise; the final -na drops in a construct and before a suffix.",
    "examples": [
     {
@@ -2173,6 +2258,9 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew -ot is the counterpart, without case forms.",
    "what": "For female persons, many nouns in ة, loanwords and maṣdars of derived forms: -ātun, with -ātin in both accusative and genitive (no -an).",
    "examples": [
     {
@@ -2229,6 +2317,9 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew changes stem vowels together with a plural suffix (מֶלֶךְ → מְלָכִים) but has no true broken plurals; Amharic keeps a few learned Ge'ez broken plurals (ኮከብ → ከዋክብት); Persian and Urdu use Arabic broken plurals of Arabic loanwords (کتب، اخبار).",
    "what": "Most nouns form the plural by a new pattern of the root (about thirty common patterns). The plural is not predictable from the singular with certainty and is learned with the word.",
    "examples": [
     {
@@ -2290,6 +2381,9 @@
      "value": "obligatory"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "German has a few plurals by meaning (Worte / Wörter); the paucity / multitude pair has no counterpart.",
    "what": "A noun can have two or more plurals: free variants, a plural of paucity (3–10) next to a plural of multitude, or different plurals for different meanings.",
    "examples": [
     {
@@ -2394,6 +2488,8 @@
      "value": "suffix"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "Some nouns and adjectives (many broken plural patterns, أَفْعَل adjectives, many proper names, feminines in -āʾ) never take tanwīn and use -a for the genitive when indefinite. With al- or in a construct they decline normally.",
    "examples": [
     {
@@ -2572,6 +2668,11 @@
      "value": "noun-gen"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew has the same construct state (סְמִיכוּת: בֵּית סֵפֶר), next to the particle שֶׁל.",
    "what": "'X of Y' is two nouns side by side: the first loses al- and tanwīn and takes the case of its place, the second is genitive and decides definiteness for both. It replaces most compounds and genitive phrases.",
    "examples": [
     {
@@ -2625,6 +2726,9 @@
      "value": "fusional"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew אָב and אָח keep a trace: -i- before suffixes (אָבִיו، אָחִיו).",
    "what": "A small group shows case by a long vowel before a genitive or a suffix: -ū, -ā, -ī.",
    "examples": [
     {
@@ -2679,6 +2783,11 @@
      "value": "clitic-pronouns"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew attaches the same pronouns to nouns, verbs (formal style) and prepositions (לִי، אִתּוֹ). Persian has possessive and object clitics, Amharic possessive and object suffixes, but not on prepositions in the same way.",
    "what": "Possessors, objects and prepositional objects are suffixes: -ī/-ya my, -ka/-ki your, -hu his, -hā her … On a verb 'me' is -nī, not -ī.",
    "examples": [
     {
@@ -2803,6 +2912,13 @@
      "value": "second-and-third"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he",
+    "am",
+    "ha"
+   ],
+   "alsoNote": "Spanish has gender in \"you\" and \"they\" only in the plural (vosotros / vosotras, ellos / ellas); a gendered singular \"you\" is new there.",
    "what": "Second-person pronouns, verb forms and suffixes differ for a man and a woman (and for groups of women); 3rd-person plural too. Speaking to someone requires knowing their gender.",
    "examples": [
     {
@@ -2858,6 +2974,9 @@
      "value": "noun-adj"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew repeats the article on the adjective and agrees in gender and number (no case); Romanian and Albanian agree in case but mark definiteness on the adjective differently.",
    "what": "The adjective follows the noun and agrees in gender, number, case and definiteness (al- is repeated on the adjective). Human plurals take plural adjectives, non-human plurals feminine singular.",
    "examples": [
     {
@@ -2971,6 +3090,9 @@
      "value": "present"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew has patterns of its own for colours (אָדֹם، יָרֹק) and for bodily defects (עִוֵּר، אִלֵּם), but not one shared pattern with a feminine and plural of its own.",
    "what": "Basic colours (and bodily defects) have a pattern of their own: masculine أَفْعَل, feminine فَعْلَاء, plural فُعْل. They look like elatives but cannot be compared directly.",
    "examples": [
     {
@@ -3069,6 +3191,9 @@
      "value": "present"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew and Amharic form diminutives by suffixes or by repetition (כְּלַבְלַב), not by an inserted -ay-.",
    "what": "A pattern with -ay- makes diminutives; it is mostly lexicalised and frequent in names.",
    "examples": [
     {
@@ -3109,6 +3234,11 @@
      "value": "extensive"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew 3–10 have the same polarity (שָׁלֹשׁ בָּנוֹת / שְׁלֹשָׁה בָּנִים).",
    "what": "The numbers 3–10 take the opposite gender of the counted noun's singular: with a masculine noun the number has ة, with a feminine noun it has none.",
    "examples": [
     {
@@ -3275,6 +3405,9 @@
      "value": "extensive"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Russian names the hour in progress with an ordinal (пятый час), a partial parallel.",
    "what": "Ordinals use the fāʿil pattern of the root (except 'first'); the hour is said with a feminine ordinal: 'the fifth hour'.",
    "examples": [
     {
@@ -3370,6 +3503,11 @@
      "value": "absent-in-present"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew works the same way (הַבַּיִת גָּדוֹל / הַבַּיִת הַגָּדוֹל).",
    "what": "With al- on both noun and adjective it is a phrase; with al- only on the noun it is a complete verbless sentence. The same holds for demonstratives.",
    "examples": [
     {
@@ -3472,6 +3610,8 @@
      "value": "person-number-gender"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "Plurals of things, animals and ideas take feminine singular adjectives, verbs and pronouns; only plurals of people take plural agreement.",
    "examples": [
     {
@@ -3522,6 +3662,9 @@
      "value": "absent-in-present"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Russian and Ukrainian put the predicate of быть / стать in the instrumental, a close parallel with another case.",
    "what": "The 'sisters of kāna' (كَانَ, لَيْسَ, أَصْبَحَ, مَا زَالَ …) keep the subject nominative and make the predicate accusative.",
    "examples": [
     {
@@ -3572,6 +3715,8 @@
      "value": "conjunctions"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "إِنَّ, أَنَّ, لٰكِنَّ, لِأَنَّ, كَأَنَّ, لَعَلَّ must be followed by a noun in the accusative or a pronoun suffix; the predicate stays nominative.",
    "examples": [
     {
@@ -3626,6 +3771,9 @@
      "value": "before-verb"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew also chooses the negator by sentence type (לֹא، אֵין، אַל), but not by tense with a change of mood.",
    "what": "لَا + present, لَمْ + jussive for the past, لَنْ + subjunctive for the future, لَيْسَ for verbless sentences, مَا + past in classical and dialectal style, and لَا + jussive for 'don't!'.",
    "examples": [
     {
@@ -3689,6 +3837,9 @@
      "value": "initial"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Only the initial question particle is shared with Irish, Welsh or Estonian; French si / German doch match بَلَى, and Finnish vai / tai match أَمْ / أَوْ.",
    "what": "A yes/no question puts هَلْ (or the prefix أَ) before the unchanged statement. In a choice question 'or' is أَمْ, not أَوْ. 'Yes' that contradicts a negative question is a word of its own, بَلَى.",
    "examples": [
     {
@@ -3839,6 +3990,9 @@
      "value": "three"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Russian depictives in the instrumental (пришёл усталым) are a partial parallel.",
    "what": "An indefinite accusative describes the state of the subject or object during the action.",
    "examples": [
     {
@@ -3878,6 +4032,9 @@
      "value": "noun-rel"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew and Persian also repeat the head as a pronoun, but use one relativizer (שֶׁ، که) after any head.",
    "what": "The relative pronoun agrees with a definite head (الَّذِي، الَّتِي، الَّذِينَ …); after an indefinite head there is none. The clause repeats the head as a pronoun.",
    "examples": [
     {
@@ -3918,6 +4075,9 @@
      "value": "conjunction-only"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew separates a real אִם from an unreal לוּ / אִלּוּ — two of the three.",
    "what": "إِذَا is a likely or expected condition, إِنْ an open possibility (with the jussive or past), لَوْ an unreal condition (with لَـ in the result). The past tense is used after إِذَا even for the future.",
    "examples": [
     {
@@ -3958,6 +4118,9 @@
      "value": "absent-in-present"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Russian also fronts the place before an indefinite subject; Hebrew uses יֵשׁ.",
    "what": "An indefinite subject does not start a sentence: the place phrase comes first, or the sentence opens with هُنَاكَ or يُوجَدُ.",
    "examples": [
     {
@@ -4115,6 +4278,9 @@
      "value": "prefix"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Persian (ای, literary) and Irish (a) have a vocative particle, without the loss of the article.",
    "what": "People are called with يَا before the name or title; a definite address noun loses al-.",
    "examples": [
     {
@@ -4202,6 +4368,11 @@
      "value": "second-and-third"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Spanish adjectives in formulas agree with the speaker or listener (encantado / encantada), but its singular \"you\" has no gender.",
    "what": "Every polite formula that contains 'you' has a form for a man, a woman and a group; formulas that describe the speaker (آسِف 'sorry') agree with the speaker.",
    "examples": [
     {
@@ -4286,6 +4457,9 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Set replies to greetings also exist in Turkish (hoş geldiniz – hoş bulduk), Swahili (shikamoo – marahaba) and others, but not the Arabic echo-and-outdo pairs.",
    "what": "Many greetings require a set reply that echoes and outdoes them.",
    "examples": [
     {
@@ -4333,6 +4507,13 @@
      "value": "none"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fa",
+    "ur",
+    "tr"
+   ],
+   "alsoNote": "Persian, Urdu and Turkish use the same Arabic formulas (inşallah, maşallah …), as do many languages of Muslim communities (Somali, Hausa, Swahili, Malay, Indonesian, Azerbaijani, Uzbek …); Hebrew has its own (בְּעֶזְרַת הַשֵּׁם، בָּרוּךְ הַשֵּׁם).",
    "what": "Formulas naming God are used by Muslims and Christians alike as ordinary politeness: for the future, for good news, before starting, when praising.",
    "examples": [
     {
@@ -4431,6 +4612,9 @@
      "value": "latin-derived"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew month names come from the same Babylonian set (תַּמּוּז، אָב، אֱלוּל), but in a different calendar.",
    "what": "The Levant and Iraq use old Syriac-Babylonian month names, Egypt, the Gulf and the Maghreb Latin-based ones; both are standard and often written together.",
    "examples": [
     {
@@ -4469,6 +4653,9 @@
      "value": "present"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Which loans a learner already knows is computed from the bridges, not from the tags. Hebrew also fits loans into its patterns (לְסַמֵּס).",
    "what": "Arabic has old loans from Greek, Persian and Aramaic and newer ones from Italian, French and English, usually fitted into Arabic patterns (often with a broken plural: فِيلْم → أَفْلَام). It has lent words to many languages — Persian, Turkish, Urdu, Swahili, Malay, Spanish and, through them, much of Europe (sugar, coffee, algebra); the app shows the bridges that matter for each learner's languages.",
    "examples": [
     {
@@ -4518,6 +4705,9 @@
      "value": "bifurcate-collateral"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Which pairs are false friends is computed from the bridges for each learner, not from the tags.",
    "what": "Words that travelled between Arabic and other languages often changed meaning on the way, so a familiar-looking word can mislead. Which pairs are false friends depends on the learner's languages; the app derives them from the bridges (§4.10).",
    "examples": [
     {
@@ -4560,6 +4750,9 @@
      "value": "gregorian-plus-traditional"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew also starts the week on Sunday, with its own lunisolar calendar; Persian, Urdu, Turkish and other languages of Muslim communities know the Hijri months and Friday prayer.",
    "what": "The week starts on Sunday; Friday (الْجُمُعَة, 'the gathering') is the day of congregational prayer and, with Saturday, the weekend in many Arab states. Religious life follows the lunar Hijri calendar (رَمَضَان …), which moves about eleven days a year against the solar calendar.",
    "examples": [
     {
@@ -4643,6 +4836,9 @@
      "value": "construct-state"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "Hebrew uses בֶּן / בַּת in religious names (a nasab), but has no kunya.",
    "what": "Parents are respectfully called 'father/mother of' their (eldest) child; traditional names chain 'son of'.",
    "examples": [
     {
@@ -4685,6 +4881,19 @@
      "value": "bifurcate-collateral"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "tr",
+    "hi",
+    "ur",
+    "fa",
+    "zh",
+    "ko",
+    "vi",
+    "ja",
+    "th"
+   ],
+   "alsoNote": "Swahili (mama, kaka, dada) and many other languages address strangers with kin terms too; having two kinds of uncle does not imply it (Swedish does not).",
    "what": "Strangers are addressed as relatives: an older man 'uncle', an older woman 'auntie', a peer 'brother' or 'sister'.",
    "examples": [
     {
@@ -4773,6 +4982,8 @@
      "value": "strong"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
    "what": "Proverbs (أَمْثَال) and fixed classical phrases are frequent in speech and writing; many are rhymed or parallel.",
    "examples": [
     {
@@ -4812,6 +5023,9 @@
      "value": "present"
     }
    ],
+   "specific": true,
+   "alsoIn": [],
+   "alsoNote": "The principle of meanings grouped in one root is familiar to Hebrew and Amharic speakers; the particular pairs are Arabic's own (see polysemy).",
    "what": "One word often covers concepts that many languages keep apart (house / verse, grandfather / luck, maternal uncle / mole), sometimes with a different plural per meaning; distinct roots also coincide in spelling.",
    "examples": [
     {
@@ -4927,12 +5141,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: el, en, de, ru, tr, es, fr, fi, hu, sw, lg, vi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have capital letters: no case, names are not marked.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -4985,6 +5201,11 @@
      "value": "words"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "he"
+   ],
+   "alsoNote": "Hebrew attaches the same kind of one-letter words (ו ה ב ל כ מ ש) and pronoun suffixes; Persian attaches far fewer.",
    "what": "Words are separated by spaces. One-letter words (وَ فَ بِـ لِـ كَـ سَـ) and the article are written together with the next word, and pronoun suffixes with the word before, so one written word can be a whole phrase; the letter shapes also mark word ends (final forms).",
    "examples": [
     {
@@ -5045,12 +5266,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: zh, vi, lg, ja (pitch accent)."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have tones: pitch does not distinguish words.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5065,6 +5288,11 @@
      "value": "complex"
     }
    ],
+   "specific": true,
+   "alsoIn": [
+    "fa"
+   ],
+   "alsoNote": "Persian has the same CV(C)(C) syllable with a consonant at every syllable start; Turkish also bans initial clusters but allows syllables that begin with a vowel.",
    "what": "Syllables are CV, CVC and CVV; at the end of a word in pause also CVVC and CVCC, and CVVC before a doubled consonant (دَابَّة). A syllable never begins with two consonants: words that would start with a cluster take a helping vowel (hamzat al-waṣl), and inside a word no more than two consonants meet. Final two-consonant clusters (كَلْب kalb) are frequent in pause.",
    "examples": [
     {
@@ -5164,12 +5392,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: vi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have ejectives or implosives: the emphatics are a different articulation.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5230,12 +5460,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: hi, mr, zh."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have retroflex consonants: the emphatic series is not retroflex.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5263,12 +5495,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: hi, mr, ko, zh, vi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have aspiration contrasts.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5301,12 +5535,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: fr, de, tr, fi, hu, zh, and the five-vowel systems of el, es, ja, sw."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have front rounded vowels or a five-vowel system: three qualities only.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5334,12 +5570,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: fr, hi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have nasal vowels.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5372,12 +5610,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: tr, fi, hu."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have vowel harmony: suffixes keep their vowels (except -hu → -hi).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5410,12 +5650,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: ru, de, tr."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have final devoicing.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5481,12 +5723,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: ru."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have palatalization (soft / hard consonants).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5514,12 +5758,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: ru, en."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have vowel reduction: no reduced vowels.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5547,12 +5793,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: fi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have initial mutation or consonant gradation.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5724,12 +5972,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: iu."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have noun incorporation.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -5761,13 +6011,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.pronoun.subject"
+     "fn.pronoun.subject",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: mr, zh, vi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have an inclusive / exclusive 'we'.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.01"
   },
   {
@@ -5804,13 +6055,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.numerals"
+     "fn.numerals",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: zh, vi, ja, ko."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have classifiers (measure words).",
+   "status": "covered",
+   "gap": "",
    "when": "fd.05"
   },
   {
@@ -5887,10 +6139,10 @@
      "fn.aspect"
     ],
     "exercises": [],
-    "other": ""
+    "other": "fn.present says that one form covers “I eat” and “I am eating” (block “One present for …”); its notes for en, es, fr and others compare it (D18)."
    },
-   "status": "partial",
-   "gap": "The present lesson (fd.07) uses the imperfect; that it covers 'is doing' is not stated.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.07"
   },
   {
@@ -5927,13 +6179,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.aspect"
+     "fn.aspect",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: en, de, es, el."
    },
-   "status": "missing",
-   "gap": "قَدْ and بَعْدُ 'yet' are not lexemes; say it in the overview (fd.00) for learners whose languages have a perfect tense.",
+   "status": "partial",
+   "gap": "قَدْ and بَعْدُ 'yet' are not lexemes.",
    "when": "later"
   },
   {
@@ -6010,12 +6263,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: tr, ja, ko, iu."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have evidential verb forms.",
+   "status": "partial",
+   "gap": "Not yet said for fa, nor against the reportative conditional / subjunctive of fr, de and fi.",
    "when": "fd.00"
   },
   {
@@ -6045,12 +6300,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: tr, ko."
    },
-   "status": "missing",
-   "gap": "The exclamative pattern is not in the course; say it in the overview (fd.00) for learners whose languages have mirative forms.",
+   "status": "partial",
+   "gap": "The exclamative pattern (مَا أَجْمَلَ …!) is not in the course.",
    "when": "later"
   },
   {
@@ -6080,12 +6337,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: iu."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have an antipassive.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -6120,12 +6379,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: sw, lg, iu."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have applicatives.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -6161,12 +6422,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: en, de, ru, hu."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have particle or prefix verbs.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.07"
   },
   {
@@ -6202,12 +6465,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: hi, fa, tr, ja, ko."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have noun + light-verb compounds.",
+   "status": "covered",
+   "gap": "",
    "when": "later"
   },
   {
@@ -6238,12 +6503,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: zh."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have verb–object compounds.",
+   "status": "covered",
+   "gap": "",
    "when": "later"
   },
   {
@@ -6279,12 +6546,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: tr, ja, ko, iu, mr (fn.connectors)."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have converbs (adverbial participles / gerunds).",
+   "status": "partial",
+   "gap": "The gerunds and adverbial participles of el, ru, es, en, fr, hi, fi and hu are not compared yet; the ḥāl (ar.syn.hal), the nearest Arabic means, comes later.",
    "when": "later"
   },
   {
@@ -6315,13 +6584,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.greetings"
+     "fn.greetings",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: ja, ko."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have honorific verb forms.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.02"
   },
   {
@@ -6570,12 +6840,14 @@
    "model": {
     "wordFields": [],
     "paradigm": [],
-    "grammar": [],
+    "grammar": [
+     "fn.overview"
+    ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: de."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have a verb-second rule.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.00"
   },
   {
@@ -6612,13 +6884,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.connectors"
+     "fn.connectors",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: zh, vi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have serial verbs.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.18"
   },
   {
@@ -6687,13 +6960,14 @@
     "wordFields": [],
     "paradigm": [],
     "grammar": [
-     "fn.greetings"
+     "fn.greetings",
+     "fn.overview"
     ],
     "exercises": [],
-    "other": ""
+    "other": "Comparison notes on fn.overview (D18) say it for the reference languages that have it: ja, ko, vi."
    },
-   "status": "missing",
-   "gap": "say it in the overview (fd.00) for learners whose languages have speech levels or polite verb forms.",
+   "status": "covered",
+   "gap": "",
    "when": "fd.02"
   },
   {

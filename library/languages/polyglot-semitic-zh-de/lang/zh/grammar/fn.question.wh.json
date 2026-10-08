@@ -1,6 +1,12 @@
 {
  "function": "fn.question.wh",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.whPosition",
+   "value": "in-situ"
+  }
+ ],
  "summary": "A Chinese question word stands exactly where the answer will stand — nothing moves to the front and the verb does not change places (‘in situ’): 你喝茶。→ 你喝什么？ ‘What do you drink?’; 安娜是医生。→ 谁是医生？ ‘Who is a doctor?’. Write the answer sentence, then replace the unknown part by the question word. No 吗 is added: the question word already makes the question. The words: 什么 what, 谁 who, 谁的 whose, 哪里 / 哪儿 where, 什么时候 when, 怎么 how (the way), 怎么样 how is it / what is it like, 为什么 why, 几 how many (a small number, with a measure word), 多少 how many / how much (any number), 哪 + measure word which. Time, manner and reason words stand before the verb: 你什么时候吃早饭？ 你为什么不吃肉？",
  "blocks": [
   {
@@ -10,7 +16,13 @@
     "茶 → 什么",
     "你喝什么？"
    ],
-   "caption": "Replace the unknown part — and stop: nothing moves, no 吗"
+   "caption": "Replace the unknown part — and stop: nothing moves, no 吗",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "in-situ"
+    }
+   ]
   },
   {
    "t": "table",
@@ -86,8 +98,14 @@
   {
    "t": "callout",
    "kind": "key",
-   "title": "In situ — the opposite of German, Greek and English",
-   "text": "German Was trinkst du?, Greek Τι πίνεις;, English What do you drink? all bring the question word to the front. Chinese leaves it in the object slot: 你喝什么？ (literally ‘you drink what?’). Only when the question word is the subject does it stand first — because the subject stands first anyway: 谁要咖啡？"
+   "title": "In situ — the question word stays put",
+   "text": "German brings the question word to the front (Was trinkst du?). Chinese leaves it in the object slot: 你喝什么？ (literally ‘you drink what?’). Only when the question word is the subject does it stand first — because the subject stands first anyway: 谁要咖啡？",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "in-situ"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -129,7 +147,13 @@
      "你妈妈怎么样？"
     ]
    ],
-   "caption": "Same slot as the answer"
+   "caption": "Same slot as the answer",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "in-situ"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -211,7 +235,7 @@
    "A time, a way or a reason? → 什么时候 / 怎么 / 为什么 before the verb.",
    "Asking how something is or what it is like? → 怎么样 as the predicate.",
    "Did I add 吗? → remove it.",
-   "Did I move the question word to the front out of German, Greek or English habit? → put it back where the answer goes."
+   "Did I move the question word to the front? → put it back where the answer goes."
   ],
   "steps": [
    "Say the statement.",
@@ -351,6 +375,108 @@
    ],
    "answer": "您是哪位？",
    "why": "哪位 is the polite ‘which person’; no 吗 with a question word."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek brings the question word to the front (Τι πίνεις;); Chinese leaves it where the answer goes: 你喝什么？"
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian fronts the question word (Что ты пьёшь?); Chinese leaves it in place: 你喝什么？ Russian сколько covers both 几 and 多少; Chinese chooses by the size expected."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish fronts the question word and often inverts (¿Qué bebes tú?); Chinese changes nothing: 你喝什么？"
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English fronts the question word and adds ‘do’ (What do you drink?); Chinese does neither: 你喝什么？ ‘you drink what?’. *什么你喝？ is the typical mistake."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Colloquial French already leaves the question word in place (Tu bois quoi ? Tu vas où ?) — the Chinese order: 你喝什么？ 你去哪里？"
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German fronts the question word with the verb in second place (Was trinkst du?); Chinese leaves it in place (你喝什么？)."
+  },
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "Hindi leaves the question word in place (तुम क्या पीते हो? ‘you what drink?’), like 你喝什么？ — only the position of the verb differs."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian leaves the question word in place (chi mikhori? ‘what are you eating?’, koja miri? ‘where are you going?’), as Chinese does."
+  },
+  {
+   "for": "mr",
+   "rel": "same",
+   "text": "Marathi leaves the question word in place (तू काय खातोस? ‘you what eat?’), like Chinese."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic fronts the question word (mādhā tashrabu?); Chinese leaves it in place: 你喝什么？"
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew fronts the question word (ma ata shote?); Chinese leaves it in place: 你喝什么？"
+  },
+  {
+   "for": "tr",
+   "rel": "same",
+   "text": "Turkish leaves the question word in place (Ne içiyorsun? Nereye gidiyorsun?) and adds no question particle to it — as Chinese adds no 吗."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese leaves the question word in place too (何を飲みますか), but keeps か; Chinese drops 吗 when there is a question word."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean leaves the question word in place (뭐 마셔요? ‘what do you drink?’), as Chinese does."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish fronts the question word (Mitä sinä juot?); Chinese leaves it in place: 你喝什么？"
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian puts the question word right before the verb (Mit iszol?); Chinese puts it where the answer goes, usually after the verb: 你喝什么？"
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili leaves the question word in place (unakunywa nini? ‘you drink what?’), as Chinese does."
+  },
+  {
+   "for": "lg",
+   "rel": "same",
+   "text": "Luganda leaves the question word after the verb (Ogenda wa? ‘you go where?’), as Chinese does: 你去哪里？"
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese works the same way: anh uống gì? ‘you drink what?’ ~ 你喝什么？ — no fronting."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut question words (suna ‘what’, kina ‘who’) usually open the sentence, and the verb takes a question ending; Chinese keeps the statement order and changes nothing but the unknown word."
   }
  ],
  "seeAlso": [

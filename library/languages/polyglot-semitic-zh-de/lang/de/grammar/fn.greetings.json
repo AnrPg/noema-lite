@@ -1,6 +1,20 @@
 {
  "function": "fn.greetings",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "binary"
+  },
+  {
+   "feature": "prag.speechLevels",
+   "value": "none"
+  },
+  {
+   "feature": "prag.genderedSpeech",
+   "value": "none"
+  }
+ ],
  "summary": "German greetings follow two questions: what time is it, and do I say du or Sie to this person? With Sie-people you use the full formulas – Guten Tag, Auf Wiedersehen, Wie geht es Ihnen? – with du-people the short ones – Hallo, Tschüss, Wie geht’s? / Wie geht es dir?. The formulas do not change for a man or a woman (unlike Arabic and Hebrew), but they change by region: Grüß Gott and Servus in the south and Austria, Moin in the north, Grüezi in Switzerland. Guten Tag / Morgen / Abend are accusatives (einen guten Tag wünschen), gute Nacht is feminine.",
  "blocks": [
   {
@@ -89,7 +103,13 @@
      "when unsure: start with Sie"
     ]
    ],
-   "caption": "Who gets du, who gets Sie"
+   "caption": "Who gets du, who gets Sie",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -291,6 +311,103 @@
    "lang": "de",
    "fn": "fn.pronoun.subject",
    "note": "du, ihr and Sie: the same choice decides the greeting."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Γεια σου / Γεια σας split like du / Sie, and Καλημέρα, Καλησπέρα, Καληνύχτα are like Guten Morgen, Guten Abend, Gute Nacht. But γεια is hello and goodbye; German splits Hallo and Tschüss."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Привет / Здравствуйте follow the ты / вы line just as Hallo / Guten Tag follow du / Sie, and Спокойной ночи, like Gute Nacht, is only for parting at night."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Buenas noches greets on arrival in the evening too; Gute Nacht never does – arriving at night you say Guten Abend. Hola / Buenos días follow the same tú / usted logic as Hallo / Guten Tag."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "Wie geht’s? expects a short real answer (Gut, danke – und dir?), not the same question back as “How are you?” often does. Gute Nacht, like “Good night”, is only for parting."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "Bonjour / Salut, Bonsoir, Bonne nuit (only for bedtime) and tu / vous work much like Guten Tag / Hallo, Guten Abend, Gute Nacht and du / Sie. Ça va ? is Wie geht’s?"
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "namaste greets and takes leave at any hour and with anyone; German changes the formula with the time of day (Guten Morgen, Guten Abend) and with du / Sie, and has a separate goodbye (Tschüss, Auf Wiedersehen)."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "salām works at any hour and xodāhāfez says goodbye; German has a formula for each part of the day. The du / Sie choice matches tu / šomā."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "namaskār works at any hour; German changes the greeting with the time of day and with du / Sie."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic greetings come with a fixed reply (as-salāmu ʿalaykum – wa-ʿalaykum as-salām; ṣabāḥ al-khayr – ṣabāḥ an-nūr) and change for a man or a woman (kayfa ḥāluka / ḥāluki). German formulas are the same for everyone, and the answer is free: Guten Morgen! – Morgen!"
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "shalom is hello and goodbye; German has Hallo and Tschüss. ma shlomkha / ma shlomekh change for a man or a woman; Wie geht es dir? / Ihnen? change only for du / Sie."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Merhaba, Günaydın, İyi akşamlar and İyi geceler (only for parting at night) work like Hallo, Guten Morgen, Guten Abend and Gute Nacht; Nasılsın? / Nasılsınız? mirror Wie geht es dir? / Ihnen?"
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Ohayō (gozaimasu) / Konnichiwa / Konbanwa change with the time of day, as German greetings do; but politeness is shown in the form (ohayō vs ohayō gozaimasu), German shows it with du / Sie (Wie geht es dir? / Ihnen?)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "annyeonghaseyo serves at any hour, and its politeness is in the ending (annyeong among friends); German Hallo / Guten Tag differ the same way, but the greeting also changes with the time of day."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Hei / Moi (also used for goodbye) and Hyvää huomenta are like Hallo and Guten Morgen; German keeps hello and goodbye apart (Hallo – Tschüss), and the du / Sie choice is made more often than sinä / te."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili greets by age and respect (Shikamoo to elders, answered Marahaba) and asks Habari? – Nzuri. German respect is the pronoun Sie, chosen for strangers of any age, not only for elders."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Oli otya? – Bulungi works like Wie geht’s? – Gut; German adds the choice du / Sie (Wie geht es dir? / Ihnen?) and a formula for each part of the day."
+  },
+  {
+   "for": "zh",
+   "rel": "similar",
+   "text": "你好 / 您好 split like Hallo – Guten Tag / du – Sie; 晚安 is only for bedtime, like Gute Nacht. 再见 (“again see”) has the same image as Auf Wiedersehen."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Xin chào is followed by the kinship word for the person (chào anh, chào bác); German greetings name no one and choose only between du and Sie."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut has no polite “you”; German must choose du or Sie before the first sentence (Wie geht es dir? / Ihnen?). danke is the everyday word for qujannamiik."
   }
  ]
 }

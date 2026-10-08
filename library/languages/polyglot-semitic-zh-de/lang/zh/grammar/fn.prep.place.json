@@ -1,6 +1,12 @@
 {
  "function": "fn.prep.place",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "mixed"
+  }
+ ],
  "summary": "Where things are is said with a place word AFTER the noun — like a postposition: 桌子上 ‘on the table’ (table-top), 椅子下面 ‘under the chair’, 冰箱里 ‘in the fridge’, 沙发旁边 ‘next to the sofa’, 房子后面 ‘behind the house’, 床和衣柜中间 ‘between the bed and the wardrobe’. The whole frame is 在 + noun + place word: 书在桌子上. Short forms 上 / 下 / 里 attach to a noun; the long forms 上面, 下面, 里面, 外面, 前面, 后面, 旁边, 中间, 左边, 右边 can also stand alone (他在外面, 车站在前面). ‘There is X on Y’ turns round and starts with the place: 桌子上有一本书. Near and far are adjectives with 离 ‘from’: 超市离我家很近.",
  "blocks": [
   {
@@ -10,7 +16,13 @@
     "noun",
     "place word"
    ],
-   "caption": "书 在 桌子 上 — ‘the book is at table-top’"
+   "caption": "书 在 桌子 上 — ‘the book is at table-top’",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "mixed"
+    }
+   ]
   },
   {
    "t": "table",
@@ -120,7 +132,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "After the noun, not before",
-   "text": "Greek πάνω στο τραπέζι, German auf dem Tisch put ‘on’ first. Chinese: 在桌子上 — *在上桌子 is wrong. Turkish works like Chinese: masanın üstünde ‘table-of top-at’."
+   "text": "German auf dem Tisch puts ‘on’ before the noun. Chinese puts the place word after it: 在桌子上 — *在上桌子 is wrong.",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "mixed"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -193,7 +211,7 @@
   "*书在上桌子 → 书在桌子上.",
   "*牛奶在冰箱 → 牛奶在冰箱里.",
   "*书在上 → 书在上面 (a short form cannot stand alone).",
-  "*有一本书在桌子上 (copying English) → 桌子上有一本书.",
+  "*有一本书在桌子上 (the new thing first) → 桌子上有一本书.",
   "*超市近我家 → 超市离我家很近.",
   "*中间床和衣柜 → 床和衣柜中间.",
   "‘Floor’ as a storey is not 地板: 三楼 ‘the third floor’."
@@ -307,14 +325,116 @@
    "why": "Both sides first, then 中间."
   },
   {
-   "q": "Which language puts the place word after the noun, like Chinese?",
+   "q": "Where does the place word go?",
    "options": [
-    "Turkish (masanın üstünde)",
-    "German (auf dem Tisch)",
-    "Greek (πάνω στο τραπέζι)"
+    "after the noun: 在桌子上",
+    "before the noun: 在上桌子",
+    "no place word at all: 在桌子"
    ],
-   "answer": "Turkish (masanın üstünde)",
-   "why": "Turkish, like Chinese, says ‘table top-at’; German and Greek put the preposition first."
+   "answer": "after the noun: 在桌子上",
+   "why": "Chinese says ‘table-top’: 书在桌子上 — the place word follows the noun, like a postposition."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek puts ‘on’ before the noun (πάνω στο τραπέζι); Chinese puts the place word after it: 桌子上. ‘There is a book on the table’ starts with the place in Chinese: 桌子上有一本书."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian на столе / под столом put the preposition first and change the case; Chinese 桌子上, 桌子下面 put the place word after an unchanged noun. But Russian На столе книга already starts with the place — like 桌子上有一本书."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish encima de / debajo de / al lado de come before the noun; Chinese 上面 / 下面 / 旁边 come after it: 桌子上面, 沙发旁边. Spanish en covers ‘in’ and ‘on’ (en la mesa); Chinese chooses 上 or 里."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English on / under / in front of come before the noun; Chinese 上 / 下面 / 前面 come after it: 桌子上, 房子前面. And ‘there is a book on the table’ starts with the place: 桌子上有一本书, not *有一本书在桌子上."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French sur / sous / devant / à côté de come before the noun; Chinese 上 / 下面 / 前面 / 旁边 come after it."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German auf dem Tisch / unter dem Stuhl: preposition first and case on the noun; Chinese: noun first, then the place word, no case."
+  },
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "Hindi postpositions work like Chinese place words: मेज़ पर ‘on the table’ ~ 桌子上, मेज़ के नीचे ‘under the table’ ~ 桌子下面 — noun first, then the place."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian ru-ye miz ‘on the table’, zir-e miz ‘under the table’ put the place word first, joined by the ezafe; Chinese puts it after the noun: 桌子上, 桌子下面."
+  },
+  {
+   "for": "mr",
+   "rel": "same",
+   "text": "Marathi टेबलावर ‘on the table’, घरात ‘in the house’ add the place after the noun — like 桌子上, 房子里."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic ʿalā l-ṭāwila ‘on the table’, taḥta ‘under’ come before the noun; Chinese 桌子上, 桌子下面 come after it."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "Hebrew al ha-shulḥan ‘on the table’, mitaḥat ‘under’ come before the noun; Chinese puts the place word after it: 桌子上, 桌子下面."
+  },
+  {
+   "for": "tr",
+   "rel": "same",
+   "text": "Turkish works like Chinese: masanın üstünde ‘on the table’ (table-of top-at) ~ 桌子上面, evin önünde ‘in front of the house’ ~ 房子前面 — the noun first, then a place noun."
+  },
+  {
+   "for": "ja",
+   "rel": "same",
+   "text": "Japanese 机の上に ‘on the desk’ (desk-of top-at) is the Chinese pattern 桌子上(面); 家の前 ~ 房子前面."
+  },
+  {
+   "for": "ko",
+   "rel": "same",
+   "text": "Korean 책상 위에 ‘on the desk’ (desk top-at) is the Chinese pattern 桌子上(面); 집 앞 ~ 房子前面."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish postpositions work like Chinese place words: pöydän päällä ‘on the table’ ~ 桌子上面, talon takana ‘behind the house’ ~ 房子后面."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian postpositions follow the noun as Chinese place words do: az asztal alatt ~ 桌子下面, a ház mögött ~ 房子后面; ‘on’ is the ending -n (asztalon), Chinese 上."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili juu ya meza ‘on top of the table’ puts the place word first; Chinese puts it after the noun: 桌子上面. The ending -ni (mezani ‘at / on the table’) attaches after the noun, like 上."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda puts the place word before the noun (ku mmeeza ‘on the table’, mu nnyumba ‘in the house’); Chinese puts it after: 桌子上, 房子里."
+  },
+  {
+   "for": "vi",
+   "rel": "trap",
+   "text": "Vietnamese puts the place word first (trên bàn ‘on the table’, trong nhà ‘in the house’) — the opposite order of Chinese 桌子上, 房子里."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut adds case endings to the noun (illumi ‘in the house’); Chinese adds a separate place word after the noun: 房子里, 桌子上."
   }
  ],
  "seeAlso": [

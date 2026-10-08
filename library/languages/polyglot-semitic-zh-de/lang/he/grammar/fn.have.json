@@ -1,7 +1,13 @@
 {
  "function": "fn.have",
  "status": "periphrastic",
- "summary": "Hebrew has no verb “to have”. It says that the thing exists “to” the owner: יֵשׁ “there is” + לְ “to” + the owner — יֵשׁ לִי אָח “I have a brother”, literally “there is to me a brother”. With a pronoun, לְ takes the personal endings: לִי, לְךָ (to a man), לָךְ (to a woman), לוֹ, לָהּ, לָנוּ, לָכֶם, לָכֶן, לָהֶם, לָהֶן. יֵשׁ itself never changes. Because the thing owned is the grammatical subject, the past and the future use הָיָה agreeing with that thing — not with the owner: הָיָה לִי מַפְתֵּחַ, הָיְתָה לִי דִּירָה, הָיוּ לִי סְפָרִים; יִהְיֶה לָנוּ תִּינוֹק, תִּהְיֶה לָהֶם תִּינֹקֶת. The negative replaces יֵשׁ with אֵין (אֵין לִי …, lesson 8). Russian and Turkish, which you know, work the same way: у меня есть брат, kardeşim var.",
+ "typology": [
+  {
+   "feature": "syn.have",
+   "value": "locational"
+  }
+ ],
+ "summary": "Hebrew has no verb “to have”. It says that the thing exists “to” the owner: יֵשׁ “there is” + לְ “to” + the owner — יֵשׁ לִי אָח “I have a brother”, literally “there is to me a brother”. With a pronoun, לְ takes the personal endings: לִי, לְךָ (to a man), לָךְ (to a woman), לוֹ, לָהּ, לָנוּ, לָכֶם, לָכֶן, לָהֶם, לָהֶן. יֵשׁ itself never changes. Because the thing owned is the grammatical subject, the past and the future use הָיָה agreeing with that thing — not with the owner: הָיָה לִי מַפְתֵּחַ, הָיְתָה לִי דִּירָה, הָיוּ לִי סְפָרִים; יִהְיֶה לָנוּ תִּינוֹק, תִּהְיֶה לָהֶם תִּינֹקֶת. The negative replaces יֵשׁ with אֵין (אֵין לִי …, lesson 8).",
  "blocks": [
   {
    "t": "table",
@@ -52,7 +58,13 @@
      "יֵשׁ לָהֶם שְׁתֵּי בָּנוֹת."
     ]
    ],
-   "caption": "לְ with the owner’s ending; יֵשׁ never changes."
+   "caption": "לְ with the owner’s ending; יֵשׁ never changes.",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
+    }
+   ]
   },
   {
    "t": "table",
@@ -82,13 +94,25 @@
      "יִהְיוּ לִי סְפָרִים"
     ]
    ],
-   "caption": "In the past and future הָיָה agrees with the thing owned, never with the owner."
+   "caption": "In the past and future הָיָה agrees with the thing owned, never with the owner.",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "Having = existing for someone",
-   "text": "The thing owned is the subject of the sentence. That is why הָיָה agrees with it, and why standard Hebrew puts no אֶת before it even when it is definite: יֵשׁ לִי הַסֵּפֶר (in speech יֵשׁ לִי אֶת הַסֵּפֶר is very common)."
+   "text": "The thing owned is the subject of the sentence. That is why הָיָה agrees with it, and why standard Hebrew puts no אֶת before it even when it is definite: יֵשׁ לִי הַסֵּפֶר (in speech יֵשׁ לִי אֶת הַסֵּפֶר is very common).",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -129,20 +153,17 @@
      ]
     },
     {
-     "title": "Russian · Turkish",
-     "points": [
-      "у меня есть брат — “at me there is a brother”",
-      "bir kardeşim var — “a brother of mine exists”",
-      "the same idea: no verb “have”"
-     ]
-    },
-    {
-     "title": "German · Greek · Chinese",
+     "title": "German · Chinese",
      "points": [
       "ich habe einen Bruder",
-      "έχω έναν αδερφό",
       "我有一个哥哥 — a real verb “to have”"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
     }
    ]
   },
@@ -260,6 +281,108 @@
    "lang": "zh",
    "fn": "fn.have",
    "note": "Chinese uses the verb 有 (我有一个哥哥) — the same word as “there is”, just as Hebrew יֵשׁ means both."
+  }
+ ],
+ "notes": [
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "у меня есть брат “at me there is a brother” is the same idea as יֵשׁ לִי אָח “there is to me a brother”: no verb “have”. Hebrew uses “to” (לְ) where Russian uses “at” (у), and in both the past agrees with the thing owned: у меня была сестра ~ הָיְתָה לִי אָחוֹת."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish says “my brother exists” (kardeşim var); Hebrew says “there is to me a brother” (יֵשׁ לִי אָח). The negative is a word of its own in both: yok ~ אֵין. Turkish abi / ağabey and kardeş are all אָח: Hebrew does not split siblings by age."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has a verb, έχω; Hebrew has none — it says יֵשׁ לִי “there is to me”. Do not look for a verb to conjugate: only לְ changes for the owner."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish tener has no Hebrew counterpart: “I have” is יֵשׁ לִי “there is to me”. The owner goes into לְ, and only לְ changes (לִי, לְךָ, לָהּ …)."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English “have” is a verb; Hebrew uses “there is” + “to me”: יֵשׁ לִי. In the past the verb agrees with the thing owned: הָיְתָה לִי דִּירָה “I had a flat” (literally “a flat was to me”)."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French avoir has no counterpart: Hebrew says “there is to me”, יֵשׁ לִי — close to il y a. The past agrees with the thing owned, not with the owner."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German haben (ich habe einen Bruder) has no Hebrew counterpart; the thing owned is the subject and the owner is in לְ: יֵשׁ לִי אָח."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi also has no “have” verb: मेरे पास किताब है “near me is a book”, and मेरा एक भाई है for relatives; Hebrew has one construction for both: יֵשׁ לִי סֵפֶר, יֵשׁ לִי אָח."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian has a verb, داشتن (کتاب دارم); Hebrew has none: יֵשׁ לִי סֵפֶר."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi says माझ्याकडे पुस्तक आहे “with me is a book” and मला भाऊ आहे “to me is a brother”; Hebrew uses one pattern for both: יֵשׁ לִי."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic uses prepositions too (عِنْدِي كِتَابٌ, لِي أَخٌ) but no word like יֵשׁ; Hebrew always says יֵשׁ in the present and אֵין in the negative."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese says “to me there is” (私には兄がいる); Hebrew is the same idea: יֵשׁ לִי אָח — with one word for people and things (no いる / ある split). 兄 and 弟 are both אָח: Hebrew does not split siblings by age."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean uses 있다 “exist” (저는 형이 있어요); Hebrew יֵשׁ is the same idea, with the owner in לְ: יֵשׁ לִי אָח. 형 / 오빠 and 남동생 are all אָח: no older / younger split."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish minulla on veli “at me is a brother” is the same pattern as יֵשׁ לִי אָח; Hebrew uses “to” (לְ) where Finnish uses -lla. Negative: minulla ei ole ~ אֵין לִי."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian nekem van egy bátyám “to me there is a brother of mine” is close to יֵשׁ לִי אָח; the negative is a word of its own in both: nincs ~ אֵין. Báty and öcs are both אָח: Hebrew does not split brothers by age."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili says “I am with” (nina kitabu); Hebrew says “there is to me” (יֵשׁ לִי סֵפֶר) — the owner is in לְ, not in a verb prefix."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda says “I am with” (nnina ekitabo); Hebrew says “there is to me”: יֵשׁ לִי סֵפֶר."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "有 is both “have” and “there is” (我有一个哥哥 / 这儿有书); Hebrew יֵשׁ is both too, but the owner must be marked with לְ: יֵשׁ לִי — “there is to me”. And 哥哥 and 弟弟 are both אָח: Hebrew does not split siblings by age."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese có is both “have” and “there is” (tôi có sách); Hebrew יֵשׁ is the same word for both, with the owner in לְ: יֵשׁ לִי סֵפֶר. Anh trai and em trai are both אָח."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut adds a “have” suffix (-qaq-) to the noun of the thing owned and makes it a verb; Hebrew uses separate words: יֵשׁ + לְ + the owner + the thing."
   }
  ]
 }

@@ -42,6 +42,12 @@
      "هُنَّ",
      "هٰؤُلَاءِ طَالِبَاتٌ. الطَّالِبَاتُ؟ هُنَّ هُنَا."
     ]
+   ],
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    }
    ]
   },
   {
@@ -208,6 +214,102 @@
    "lang": "zh",
    "fn": "fn.demonstrative",
    "note": "Chinese has no agreement at all: 这本书 / 这些书 — only the measure word and 些 change."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "nom.genderCount",
+   "value": "two"
+  },
+  {
+   "feature": "adj.agreement",
+   "value": "gender-number-case"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "person-number-gender"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek words that point to a noun also follow its gender and number — but Greek plurals stay plural (αυτά τα βιβλία), while Arabic plurals of things become feminine singular (هٰذِهِ الْكُتُبُ)."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian plurals of things take plural agreement (эти книги … они); in Arabic they take the feminine singular: هٰذِهِ الْكُتُبُ، الْكُتُبُ؟ هِيَ هُنَا."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "Spanish estos libros … ellos stays plural; Arabic says هٰذِهِ الْكُتُبُ … هِيَ — “this (f.) books … she”."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English has almost no agreement (this / these); Arabic makes “this”, “it”, adjectives and verbs follow the noun’s gender and number — and plurals of things count as “she”."
+  },
+  {
+   "for": "fr",
+   "rel": "trap",
+   "text": "French ces livres … ils; Arabic هٰذِهِ الْكُتُبُ … هِيَ: the feminine singular for things in the plural."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi adjectives and verbs follow the noun’s gender and number (बड़ा घर, बड़ी किताब), as Arabic ones do; new is the Arabic rule that things in the plural agree as feminine singular."
+  },
+  {
+   "for": "fa",
+   "rel": "new",
+   "text": "Persian has no gender agreement; Arabic makes demonstratives, pronouns, adjectives and verbs follow the noun’s gender."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi adjectives and verbs agree in gender and number as Arabic ones do; new is the rule that things in the plural agree as feminine singular."
+  },
+  {
+   "for": "tr",
+   "rel": "new",
+   "text": "Turkish demonstratives and adjectives never agree (bu kitaplar); Arabic ones agree in gender and number — and plurals of things take the feminine singular."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese words never agree; in Arabic “this”, “it”, adjectives and verbs follow the noun."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish adjectives agree in number and case (isot talot); Arabic agrees in gender too — and treats plurals of things as feminine singular."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian ez / az agree only in number and case (ezek a könyvek); Arabic agrees in gender and turns plurals of things into feminine singular (هٰذِهِ الْكُتُبُ)."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili agreement runs through every word that points to the noun, by class (kitabu hiki kizuri); Arabic does the same by gender and number."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda agreement also runs through the whole phrase by class (ekitabo kino); Arabic agreement follows gender and number instead."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese has no agreement at all; Arabic marks gender and number on everything that refers to a noun."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut verbs agree with subject and object in person and number (singular, dual, plural); Arabic agreement adds gender — and plurals of things agree as feminine singular."
   }
  ]
 }

@@ -117,17 +117,63 @@
   }
 
   /** What the app needs of a phenomenon (the catalogue keeps more: model, gaps …). */
-  const trimPhenomenon = p => ({ id: p.id, title: p.title, area: p.area, kind: p.kind || 'has', typology: p.typology || [], what: p.what, examples: (p.examples || []).slice(0, 2) });
+  const trimPhenomenon = p => ({ id: p.id, title: p.title, area: p.area, kind: p.kind || 'has', typology: p.typology || [], what: p.what, examples: (p.examples || []).slice(0, 2), when: p.when || '', notes: p.notes || [], ...(p.specific ? { specific: true, alsoIn: p.alsoIn || [], alsoNote: p.alsoNote || '' } : {}) });
   /** D16 — what is new and what is familiar in a language for a learner who knows `knows` (language codes), computed from the
    *  shared typological profiles, never written from one point of view. → {knownProfiles, unknownLangs, new: [{p, notes}], familiar: [{p, from}]} */
+  const UNKNOWN_SHARE = 0.3;   // D19
+  /** The learner's languages (D18): settings.knows = [{code | name, level, type?, family?}] → the ones that decide what is familiar
+   *  (native, C2) as profiles; a language without a profile gets the prototype of its family, else of its type. */
+  function learnerProfiles(C, knows) {
+    const W = C.data.world; if (!W) return [];
+    const prof = Object.fromEntries(W.languages.map(l => [l.code, l]));
+    const out = [];
+    for (const k of (knows || []).map(x => typeof x === 'string' ? { code: x, level: 'native' } : x)) {
+      if (!['native', 'C2'].includes(k.level || 'native')) continue;
+      if (k.code && prof[k.code]) { out.push({ ...prof[k.code], level: k.level || 'native' }); continue; }
+      const p = prototype(C, k.family ? { family: k.family } : null) || prototype(C, k.type ? { typology: k.type } : null);
+      if (p) out.push({ code: k.code || k.name, name: k.name || k.code, typology: k.type || p.typology, family: k.family || p.family, values: p.values, inferred: k.family && prototype(C, { family: k.family }) ? 'family' : 'type', level: k.level || 'native' });
+    }
+    return out;
+  }
+  /** The prototype of a family or a type: the majority value of every feature among its profiled languages. */
+  function prototype(C, by) {
+    const W = C.data.world; if (!W || !by) return null;
+    const [k, val] = Object.entries(by)[0], ls = W.languages.filter(l => l[k] === val);
+    if (!ls.length) return null;
+    const values = {};
+    for (const f of W.features) {
+      const n = {}; for (const l of ls) { const v = l.values[f.id]; if (v && v !== 'unknown') n[v] = (n[v] || 0) + 1; }
+      const best = Object.entries(n).sort((a, b) => b[1] - a[1])[0]; values[f.id] = best ? best[0] : 'unknown';
+    }
+    return { typology: k === 'typology' ? val : ls[0].typology, family: k === 'family' ? val : null, values };
+  }
+  /** Is a set of typological tags familiar to the learner? → the languages (names) that have every value, or [] */
+  function familiarFrom(C, tags, knows) {
+    const ps = learnerProfiles(C, knows); if (!tags?.length || !ps.length) return [];
+    const from = ps.filter(p => tags.every(t => p.values[t.feature] === t.value));
+    return from.map(p => p.name || p.code);
+  }
+  /** The comparison notes a learner sees (D18): those for one of their languages, its family or its type (any level). */
+  function notesFor(C, notes, knows) {
+    const W = C.data.world, prof = W ? Object.fromEntries(W.languages.map(l => [l.code, l])) : {};
+    const ks = (knows || []).map(x => typeof x === 'string' ? { code: x } : x);
+    const keys = new Set(ks.flatMap(k => [k.code, k.type && 'type:' + k.type, k.family && 'family:' + k.family, prof[k.code] && 'type:' + prof[k.code].typology, prof[k.code] && 'family:' + prof[k.code].family].filter(Boolean)));
+    return (notes || []).filter(n => keys.has(n.for));
+  }
   function forLearner(C, code, knows) {
     const W = C.data.world; if (!W) return null;
-    const prof = Object.fromEntries(W.languages.map(l => [l.code, l])), feat = Object.fromEntries(W.features.map(f => [f.id, f]));
-    const mine = (knows || []).filter(k => prof[k] && k !== code), unknownLangs = (knows || []).filter(k => !prof[k]);
+    const feat = Object.fromEntries(W.features.map(f => [f.id, f]));
+    const ps = learnerProfiles(C, knows).filter(p => p.code !== code), prof = Object.fromEntries(ps.map(p => [p.code, p]));
+    const mine = ps.map(p => p.code), unknownLangs = (knows || []).map(x => typeof x === 'string' ? x : x.code || x.name).filter(k => k && !prof[k] && !(W.languages.find(l => l.code === k)));
     const out = { knownProfiles: mine, unknownLangs, new: [], familiar: [] };
     for (const p of (W.phenomena[code] || [])) {
       const tags = (p.typology || []).filter(t => feat[t.feature]);
       if (!tags.length) continue;
+      if (p.specific) {   // the tags only approximate it: familiar only to speakers of the languages that really have it
+        const from = mine.filter(k => (p.alsoIn || []).includes(k));
+        if (from.length) out.familiar.push({ p, from }); else out.new.push({ p, notes: p.alsoNote ? [{ feature: '', title: 'Specific to this language', value: '', note: p.alsoNote }] : [] });
+        continue;
+      }
       const from = new Set(), notes = []; let familiar = true;
       for (const t of tags) {
         const has = mine.filter(k => prof[k].values[t.feature] === t.value);
@@ -213,7 +259,8 @@
         const walk = ks => ks.forEach(k => { if (k.parts) walk(k.parts); else if (!k.p && k.l) req.add(k.l); });
         walk(s.tokens || []);
         if ([...req].some(l => !X.lex[l])) continue;   // a sentence with a word that is not in the course (yet) is never offered
-        const S = { ...s, req: [...req] }; X.sentences.push(S); X.sentenceById[s.id] = S;
+        const nwords = (s.tokens || []).filter(k => !k.p).length;   // words of the sentence (a prefixed word is one word; names count)
+        const S = { ...s, req: [...req], nwords, cap: Math.ceil(UNKNOWN_SHARE * nwords) }; X.sentences.push(S); X.sentenceById[s.id] = S;
       }
       C.lang[code] = X;
     }
@@ -223,7 +270,7 @@
   /* ---------- the learner ---------- */
   function newLearner(C, settings = {}) {
     const L = { course: C.id, settings: { languages: settings.languages || C.languages.slice(), depth: { ...(C.data.course.defaults?.depth || {}), ...(settings.depth || {}) },
-      batch: settings.batch || C.data.course.defaults?.batch || 12 }, langs: {} };
+      batch: settings.batch || C.data.course.defaults?.batch || 12, ...(settings.knows ? { knows: settings.knows } : {}), ...(settings.aiNotes ? { aiNotes: true } : {}) }, langs: {} };
     for (const code of C.languages) L.langs[code] = { items: {}, fns: {}, checks: {} };
     return L;
   }
@@ -349,14 +396,16 @@
 
   /* ---------- the sentence bank ---------- */
   /** Sentences whose words are all known (or at most maxUnknown unknown). opts: {known: Set, functions: [ids] (all of them), frame, maxUnknown = 0, variants = true} */
+  /** Sentences for an exercise or an example. maxUnknown: a number, or 'auto' = at most ⌈30 %⌉ of the sentence's words
+   *  unknown to the learner (D19: every aspect but vocabulary trains with any vocabulary). Fewest unknown words first. */
   function selectSentences(C, code, opts = {}) {
     const X = C.lang[code], K = opts.known || new Set(), max = opts.maxUnknown || 0;
     return X.sentences.filter(s => {
       if (opts.frame && s.frame !== opts.frame) return false;
       if (opts.variants === false && s.variantOf) return false;
       if ((opts.functions || []).some(f => !(s.functions || []).includes(f))) return false;
-      return s.req.filter(l => !K.has(l)).length <= max;
-    }).map(s => ({ ...s, unknown: s.req.filter(l => !K.has(l)) }));
+      return s.req.filter(l => !K.has(l)).length <= (max === 'auto' ? s.cap : max);
+    }).map(s => ({ ...s, unknown: s.req.filter(l => !K.has(l)) })).sort((a, b) => a.unknown.length - b.unknown.length);
   }
   /** Can a function be trained now in this language? (§7.3) → {state: ready|thin|locked|absent, sentences, needs: {POS: [have, need]}, unlockBy: [node ids]} */
   function feasibility(C, L, code, fid, opts = {}) {
@@ -611,7 +660,8 @@
     const gens = (g.generators && g.generators.length) ? g.generators : [{ type: 'sentence_meaning' }, { type: 'build_sentence' }, { type: 'transform' }];
     const fnsOf = gen => gen.bank?.functions || [fid];
     // the sentences a generator draws on: by functions (default: this one) or by frames (for points no word shows, e.g. a verbless “to be”)
-    const bankFor = gen => gen.bank?.frames ? selectSentences(C, code, { known: K }).filter(s => gen.bank.frames.includes(s.frame)) : selectSentences(C, code, { known: K, functions: fnsOf(gen) });
+    const U = opts.strictKnown ? 0 : 'auto';   // D19: up to ⌈30 %⌉ unknown words (marked 🆕); strictKnown: only known words
+    const bankFor = gen => gen.bank?.frames ? selectSentences(C, code, { known: K, maxUnknown: U }).filter(s => gen.bank.frames.includes(s.frame)) : selectSentences(C, code, { known: K, functions: fnsOf(gen), maxUnknown: U });
     const pools = [];
     for (const gen of gens) {
       const items = [];
@@ -646,7 +696,7 @@
         }
       } else if (gen.type === 'sentence_meaning') {
         const ss = bankFor(gen);
-        const all = selectSentences(C, code, { known: K });
+        const all = selectSentences(C, code, { known: K, maxUnknown: U });
         // two sentences mean the same when their words stand for the same concepts (再见 / 拜拜, 你 / 您): never offer one as a wrong meaning of the other
         const conceptKey = o => o.req.map(l => (X.lex[l]?.senses || [])[0] || l).sort().join('|');
         for (const s of ss) {
@@ -654,24 +704,25 @@
           const others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && conceptKey(o) !== key), rng);
           const near = others.filter(o => o.req.some(l => s.req.includes(l))), wrong = uniqStr([...near, ...others].map(o => o.gloss)).slice(0, 3);
           if (wrong.length < 2) continue;
-          items.push({ type: 'choose', kind: 'meaning', fn: fid, lang: code, sentence: s.id, prompt: s.text, ask: 'What does it mean?', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss });
+          items.push({ type: 'choose', kind: 'meaning', fn: fid, lang: code, sentence: s.id, prompt: s.text, ask: 'What does it mean?', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss, unknown: s.unknown });
         }
       } else if (gen.type === 'build_sentence' || gen.type === 'word_order') {
         for (const s of bankFor(gen)) {
           const tiles = sentenceTiles(s); if (tiles.length < 2) continue;
           const wt = wrongTile(C, code, s, rng);
           items.push({ type: 'build', kind: 'build', fn: fid, lang: code, sentence: s.id, gloss: s.gloss, tiles: shuffled(wt ? [...tiles, wt] : tiles, rng), size: tiles.length,
-            answers: [s.text, ...(s.alts || [])], punct: endPunct(s), why: s.text });
+            answers: [s.text, ...(s.alts || [])], punct: endPunct(s), why: s.text, unknown: s.unknown });
         }
       } else if (gen.type === 'transform') {
         const want = gen.bank?.variant;
-        for (const s2 of selectSentences(C, code, { known: K, functions: gen.bank?.functions ? fnsOf(gen) : [] })) {
+        for (const s2 of selectSentences(C, code, { known: K, functions: gen.bank?.functions ? fnsOf(gen) : [], maxUnknown: U })) {
           if (!s2.variantOf || (want && !(want in (s2.variant || {}))) || (gen.bank?.frames && !gen.bank.frames.includes(s2.frame))) continue;
-          const s1 = X.sentenceById[s2.variantOf]; if (!s1 || s1.req.some(l => !K.has(l))) continue;
+          const s1 = X.sentenceById[s2.variantOf]; if (!s1 || s1.req.filter(l => !K.has(l)).length > (U === 'auto' ? s1.cap : 0)) continue;
           if (!gen.bank?.functions && !gen.bank?.frames && !(s2.functions || []).includes(fid) && !(s1.functions || []).includes(fid)) continue;
           const tiles = sentenceTiles(s2), extra = sentenceTiles(s1).filter(t => !tiles.includes(t));
           items.push({ type: 'build', kind: 'transform', fn: fid, lang: code, sentence: s2.id, source: s1.text, sourceGloss: s1.gloss, change: variantLabel(s2.variant), gloss: s2.gloss,
-            tiles: shuffled([...tiles, ...extra.slice(0, 1)], rng), size: tiles.length, answers: [s2.text, ...(s2.alts || [])], punct: endPunct(s2), why: s2.text });
+            tiles: shuffled([...tiles, ...extra.slice(0, 1)], rng), size: tiles.length, answers: [s2.text, ...(s2.alts || [])], punct: endPunct(s2), why: s2.text,
+            unknown: [...new Set([...s2.unknown, ...s1.req.filter(l => !K.has(l))])] });
         }
       } else if (gen.type === 'quiz') {
         for (const q of g.quiz || []) items.push({ type: 'choose', kind: 'quiz', fn: fid, lang: code, prompt: q.q, ask: '', options: shuffled(q.options, rng), answer: q.answer, why: q.why });
@@ -800,7 +851,7 @@
 
   const API = { version: 1, nfc, canon, cellParts, cellHas, stripMarks, hasMarks, isHan, pinyinSplit, pinyinTone, pinyinSyllableErrors,
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
-    readCourse, course, forLearner, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
+    readCourse, course, forLearner, learnerProfiles, prototype, familiarFrom, notesFor, UNKNOWN_SHARE, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
   root.NoemaLang = API;

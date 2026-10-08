@@ -61,7 +61,13 @@
    "t": "callout",
    "kind": "key",
    "title": "Who does it: -u. What is affected: -a.",
-   "text": "الْوَلَدُ يَأْكُلُ الْخُبْزَ — the boy (-u) eats the bread (-a). The endings, not the order, tell you who does what: يَأْكُلُ الْخُبْزَ الْوَلَدُ is still “the boy eats the bread”."
+   "text": "الْوَلَدُ يَأْكُلُ الْخُبْزَ — the boy (-u) eats the bread (-a). The endings, not the order, tell you who does what: يَأْكُلُ الْخُبْزَ الْوَلَدُ is still “the boy eats the bread”.",
+   "typology": [
+    {
+     "feature": "syn.alignment",
+     "value": "accusative"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -137,7 +143,13 @@
      "أُحِبُّهُمْ — I love them"
     ]
    ],
-   "caption": "A preview: the same endings as the possessives (كِتَابُكَ), except “me”: -nī on verbs, -ī on nouns."
+   "caption": "A preview: the same endings as the possessives (كِتَابُكَ), except “me”: -nī on verbs, -ī on nouns.",
+   "typology": [
+    {
+     "feature": "verb.objectMarking",
+     "value": "clitic-pronouns"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -148,10 +160,6 @@
   {
    "t": "p",
    "text": "Later: verbs that take their object with a preposition (to wait for, to look at), the indirect object (to give someone something) and the genitive after prepositions come in lessons 11–13 and in the core lesson on two objects."
-  },
-  {
-   "t": "p",
-   "text": "For you: German marks the accusative only on the article and only in the masculine (den Tee, einen Apfel); Greek on the article and the ending (τον καφέ); Turkish adds -(y)ı only to a definite object (çayı içiyorum) — Arabic marks every object, definite or not: الشَّايَ / شَايًا. Russian is the closest: the ending changes (воду, кашу)."
   }
  ],
  "procedure": {
@@ -339,6 +347,112 @@
    "lang": "ar",
    "fn": "fn.case.basic",
    "note": "The three cases: the nominative (subject) was lesson 4; the genitive after prepositions comes in lesson 11."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "nom.caseMarking",
+   "value": "suffixes"
+  },
+  {
+   "feature": "syn.alignment",
+   "value": "accusative"
+  },
+  {
+   "feature": "verb.objectMarking",
+   "value": "clitic-pronouns"
+  }
+ ],
+ "notes": [
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German marks the accusative only on the article, and only in the masculine (den Tee, einen Apfel); Arabic marks every object on the noun itself: الشَّايَ / شَايًا."
+  },
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek marks the object on the article and the ending (τον καφέ); Arabic only on the ending, but for every noun: الشَّايَ / شَايًا."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adds -(y)ı only to a definite object (çayı içiyorum) and leaves an indefinite one bare (çay içiyorum); Arabic marks every object: الشَّايَ / شَايًا."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian is the closest: the ending changes (воду, кашу); Arabic does it with -a / -an on every noun."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish nouns do not change as objects (bebo té) — only people get a (veo a Juan); Arabic marks every object with -a / -an."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English shows the object only by its place after the verb; Arabic marks it on the noun (-a / -an), so the order can change without changing who does what."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French shows the object by its place, and puts object pronouns before the verb (je le mange); Arabic marks the noun with -a / -an and attaches object pronouns after the verb (آكُلُهُ)."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi marks some objects with को (mostly people and definite things); Arabic marks every object with an ending."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian marks a definite object with -rā (چای را می‌خورم) and leaves an indefinite one bare; Arabic marks both: الشَّايَ / شَايًا."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi marks some objects with -ला (people, definite things); Arabic marks every object with -a / -an."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese marks the object with を after the noun (お茶を飲む) and puts the verb last; Arabic changes the noun’s ending and puts the verb first or in the middle."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean 을 / 를 after the noun (차를 마셔요) does the job of the Arabic ending -a."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish chooses between the accusative and the partitive (luen kirjan / luen kirjaa); Arabic has one object case for every object."
+  },
+  {
+   "for": "hu",
+   "rel": "same",
+   "text": "Hungarian also marks every object, definite or not (kávét iszom, a kávét iszom); Arabic does it with -a / -an."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili nouns do not change as objects; an object prefix inside the verb can stand for them (nimekinunua, I have bought it). Arabic marks the object noun with -a / -an and attaches object pronouns as endings (أَشْتَرِيهِ)."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda nouns do not change as objects, and an object prefix can sit inside the verb; Arabic marks the noun with -a / -an and attaches object pronouns as endings (أَشْتَرِيهِ)."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese shows the object only by its place after the verb (tôi uống trà); Arabic marks it on the noun: أَشْرَبُ الشَّايَ."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut marks the subject of a transitive verb (ergative) rather than the object, and puts an indefinite object in the -mik case; Arabic always marks the object with the accusative -a / -an."
   }
  ]
 }

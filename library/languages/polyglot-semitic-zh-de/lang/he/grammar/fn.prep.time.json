@@ -1,12 +1,30 @@
 {
  "function": "fn.prep.time",
  "status": "realized",
- "summary": "One small prefix does the work of English at / on / in for time: בְּ. At an hour: בְּשָׁעָה חָמֵשׁ “at five o’clock” (also just בְּחָמֵשׁ); on a day: בְּיוֹם שֵׁנִי; in a month: בְּמַאי (no article); in a season: בַּקַּיִץ, בַּחֹרֶף (with the article). The other prepositions of time are separate words: לִפְנֵי “before” (and “ago”: לִפְנֵי שָׁבוּעַ), אַחֲרֵי “after”, עַד “until” (מִ… עַד … “from … to …”), מֵאָז “since” (or מִ with a time word: מֵהַבֹּקֶר) and בְּמֶשֶׁךְ “during, for”. As always in Hebrew the noun after them does not change. “Since” goes with the present when the state still lasts — הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January”, exactly like German seit. A length of time often needs no preposition at all (אֲנִי מְחַכֶּה שָׁעָה), and two days, weeks, months, years or hours have a dual: יוֹמַיִם, שְׁבוּעַיִם, חׇדְשַׁיִם, שְׁנָתַיִם, שְׁעָתַיִם. The clock: הַשָּׁעָה + a feminine number (because שָׁעָה is feminine) — הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”, וָחֵצִי “half past”, וָרֶבַע “quarter past”, רֶבַע לְ… “quarter to”. The date: the day (masculine number, for יוֹם) + בְּ + the month — עֶשְׂרִים בְּמַאי “the 20th of May”. The months are the German ones (יָנוּאָר … דֵּצֶמְבֶּר); next to them lives the Hebrew lunar calendar (תִּשְׁרֵי … אֱלוּל), which fixes the holidays.",
+ "typology": [
+  {
+   "feature": "time.monthNames",
+   "value": "latin-derived"
+  },
+  {
+   "feature": "time.calendar",
+   "value": "gregorian-plus-traditional"
+  },
+  {
+   "feature": "time.halfHour",
+   "value": "half-past"
+  },
+  {
+   "feature": "verb.perfect",
+   "value": "none"
+  }
+ ],
+ "summary": "One small prefix, בְּ, places an event at a point in time — an hour, a day, a month or a season. At an hour: בְּשָׁעָה חָמֵשׁ “at five o’clock” (also just בְּחָמֵשׁ); on a day: בְּיוֹם שֵׁנִי; in a month: בְּמַאי (no article); in a season: בַּקַּיִץ, בַּחֹרֶף (with the article). The other prepositions of time are separate words: לִפְנֵי “before” (and “ago”: לִפְנֵי שָׁבוּעַ), אַחֲרֵי “after”, עַד “until” (מִ… עַד … “from … to …”), מֵאָז “since” (or מִ with a time word: מֵהַבֹּקֶר) and בְּמֶשֶׁךְ “during, for”. As always in Hebrew the noun after them does not change. “Since” goes with the present when the state still lasts — הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January”, exactly like German seit. A length of time often needs no preposition at all (אֲנִי מְחַכֶּה שָׁעָה), and two days, weeks, months, years or hours have a dual: יוֹמַיִם, שְׁבוּעַיִם, חׇדְשַׁיִם, שְׁנָתַיִם, שְׁעָתַיִם. The clock: הַשָּׁעָה + a feminine number (because שָׁעָה is feminine) — הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”, וָחֵצִי “half past”, וָרֶבַע “quarter past”, רֶבַע לְ… “quarter to”. The date: the day (masculine number, for יוֹם) + בְּ + the month — עֶשְׂרִים בְּמַאי “the 20th of May”. The months are the German ones (יָנוּאָר … דֵּצֶמְבֶּר); next to them lives the Hebrew lunar calendar (תִּשְׁרֵי … אֱלוּל), which fixes the holidays.",
  "blocks": [
   {
    "t": "table",
    "head": [
-    "English",
+    "meaning",
     "Hebrew",
     "example"
    ],
@@ -57,7 +75,7 @@
      "בְּמֶשֶׁךְ הַקַּיִץ · מְחַכֶּה שָׁעָה"
     ]
    ],
-   "caption": "Greek στις πέντε, τη Δευτέρα, τον Μάιο — Hebrew: always בְּ."
+   "caption": "An hour, a day, a month, a season: always בְּ."
   },
   {
    "t": "table",
@@ -95,7 +113,13 @@
      "מָה הַשָּׁעָה?"
     ]
    ],
-   "caption": "Feminine numbers, because שָׁעָה is feminine: שָׁלוֹשׁ, not שְׁלוֹשָׁה."
+   "caption": "Feminine numbers, because שָׁעָה is feminine: שָׁלוֹשׁ, not שְׁלוֹשָׁה.",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ]
   },
   {
    "t": "table",
@@ -131,7 +155,13 @@
      "שָׁלוֹשׁ שָׁעוֹת"
     ]
    ],
-   "caption": "Two units of time = one word, the dual (-ַיִם)."
+   "caption": "Two units of time = one word, the dual (-ַיִם).",
+   "typology": [
+    {
+     "feature": "nom.dual",
+     "value": "limited"
+    }
+   ]
   },
   {
    "t": "table",
@@ -202,7 +232,17 @@
      ""
     ]
    ],
-   "caption": "The Hebrew months follow the moon, so they move against the Gregorian ones; a leap year adds a second Adar (אֲדָר א׳, אֲדָר ב׳). Several are the Levantine Arabic and Turkish month names: Nisan, Temmuz, Eylül, Şubat."
+   "caption": "The Hebrew months follow the moon, so they move against the Gregorian ones; a leap year adds a second Adar (אֲדָר א׳, אֲדָר ב׳). Several live on in the Levantine Arabic month names (نِيسَان, تَمُّوز, أَيْلُول, شُبَاط).",
+   "typology": [
+    {
+     "feature": "time.calendar",
+     "value": "gregorian-plus-traditional"
+    },
+    {
+     "feature": "time.monthNames",
+     "value": "latin-derived"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -214,7 +254,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "“Since” + present",
-   "text": "הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January”; מֵהַבֹּקֶר אֲנִי מְחַכֶּה “I have been waiting since the morning”. Hebrew uses the present, like German seit — not a perfect like English."
+   "text": "הוּא פֹּה מֵאָז יָנוּאָר “he has been here since January”; מֵהַבֹּקֶר אֲנִי מְחַכֶּה “I have been waiting since the morning”. Hebrew uses the present, like German seit; there is no perfect tense.",
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -231,8 +277,8 @@
   {
    "t": "callout",
    "kind": "tip",
-   "title": "For you",
-   "text": "German: um fünf, am Montag, im Mai, im Sommer, vor / nach, bis, seit (+ present!), während. Hebrew: בְּ for the first four, then לִפְנֵי, אַחֲרֵי, עַד, מֵאָז (+ present!), בְּמֶשֶׁךְ — and no cases after any of them. The month names are the German ones (Wiktionary: “from German Januar …”). Turkish -de / -den / -e kadar = בְּ / מִ / עַד."
+   "title": "German and Hebrew side by side",
+   "text": "German: um fünf, am Montag, im Mai, im Sommer, vor / nach, bis, seit (+ present!), während. Hebrew: בְּ for the first four, then לִפְנֵי, אַחֲרֵי, עַד, מֵאָז (+ present!), בְּמֶשֶׁךְ — and no cases after any of them. The month names are the German ones (Wiktionary: “from German Januar …”)."
   },
   {
    "t": "ask",
@@ -424,6 +470,103 @@
    "lang": "zh",
    "fn": "fn.prep.time",
    "note": "Chinese puts time words before the verb and uses words after the noun: 吃饭以前 “before eating”, 下班以后 “after work”, 从八点到五点 “from eight to five”."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek says στις πέντε, τη Δευτέρα, τον Μάιο; Hebrew always uses בְּ: בְּשָׁעָה חָמֵשׁ, בְּיוֹם שֵׁנִי, בְּמַאי. The clock is built the same way: και μισή ~ וָחֵצִי, και τέταρτο ~ וָרֶבַע, παρά τέταρτο ~ רֶבַע לְ…."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian takes в + accusative for days (в понедельник) and в + prepositional for months (в мае); Hebrew uses בְּ for all and changes nothing. “Since” + present works as in Russian (он здесь с января ~ הוּא פֹּה מֵאָז יָנוּאָר). Russian half past three is половина четвёртого “half of the fourth”; Hebrew says שָׁלוֹשׁ וָחֵצִי."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "a las cinco, el lunes, en mayo, en verano — Hebrew uses בְּ for all four. desde + present (está aquí desde enero) works exactly like מֵאָז + present; y media ~ וָחֵצִי, menos cuarto ~ רֶבַע לְ…."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English at / on / in are all בְּ; “since” takes the present, not the perfect: “he has been here since January” = הוּא פֹּה מֵאָז יָנוּאָר. “Ago” is לִפְנֵי + time, in front: לִפְנֵי שָׁבוּעַ."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "à cinq heures, lundi, en mai, en été → בְּ for all; depuis + present (il est là depuis janvier) is exactly מֵאָז + present; et demie ~ וָחֵצִי, moins le quart ~ רֶבַע לְ…."
+  },
+  {
+   "for": "de",
+   "rel": "trap",
+   "text": "um, am, im all become בְּ; seit + present is the same rule (er ist seit Januar hier ~ הוּא פֹּה מֵאָז יָנוּאָר), and vor is both “before” and “ago”, like לִפְנֵי. But halb vier is half past three — Hebrew says שָׁלוֹשׁ וָחֵצִי “three and a half”."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi puts a postposition after the time word (पाँच बजे, सोमवार को, मई में); Hebrew puts בְּ in front: בְּחָמֵשׁ, בְּיוֹם שֵׁנִי, בְּמַאי. Beside the Gregorian months Hindi speakers use the Hindu lunisolar calendar, as Hebrew speakers use the Hebrew one."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Iran’s official calendar is the solar Hijri one; in Israel daily life runs on the Gregorian months (יָנוּאָר …), and the Hebrew lunisolar calendar fixes the holidays."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi speakers use the Gregorian months beside the Hindu calendar (चैत्र, वैशाख …), much as Hebrew speakers use יָנוּאָר … beside תִּשְׁרֵי …; but Marathi marks the time with an ending, Hebrew with בְּ in front."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Several Hebrew months share their names with the Levantine Arabic months (נִיסָן ~ نِيسَان, תַּמּוּז ~ تَمُّوز, אֱלוּל ~ أَيْلُول, שְׁבָט ~ شُبَاط), all from the old Babylonian names; Arabic مُنْذُ with the present matches מֵאָז + present."
+  },
+  {
+   "for": "tr",
+   "rel": "trap",
+   "text": "Turkish Şubat, Nisan, Temmuz, Eylül come from the same old names as שְׁבָט, נִיסָן, תַּמּוּז, אֱלוּל — but in Turkish they are fixed Gregorian months, while the Hebrew ones follow the moon and move. Turkish -de / -den / -e kadar ~ בְּ / מִ / עַד."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese numbers its months (五月 “month five”) and puts に after the time (五時に); Hebrew uses names (מַאי) and בְּ before the time: בְּחָמֵשׁ."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean numbers the months (오월 “month five”) and puts 에 after the time (다섯 시에); Hebrew uses month names and בְּ before the time: בְּחָמֵשׁ, בְּמַאי."
+  },
+  {
+   "for": "fi",
+   "rel": "trap",
+   "text": "Finnish uses case endings for time (maanantaina, toukokuussa, kesällä); Hebrew uses בְּ before an unchanged word. And puoli neljä is half past three — Hebrew says שָׁלוֹשׁ וָחֵצִי “three and a half”."
+  },
+  {
+   "for": "hu",
+   "rel": "trap",
+   "text": "Hungarian fél négy is half past three — Hebrew says שָׁלוֹשׁ וָחֵצִי “three and a half”. Time takes suffixes in Hungarian (ötkor, hétfőn, májusban), בְּ in Hebrew."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili time counts from sunrise (saa moja “hour one” = 7 a.m.); Hebrew counts from midnight, like the international clock: הַשָּׁעָה שֶׁבַע = 7 o’clock."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese numbers the months (五月) and puts time words before the verb without a preposition (五点去); Hebrew uses month names and בְּ: בְּחָמֵשׁ, בְּמַאי. 三点半 “three-half” matches שָׁלוֹשׁ וָחֵצִי."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese numbers the months (tháng năm “month five”); Hebrew names them (מַאי). The clock is alike: ba giờ rưỡi ~ שָׁלוֹשׁ וָחֵצִי."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut uses the same locative ending for “at a place” and “at a time” (ullumi “today”, from ullu “day”); Hebrew likewise uses בְּ for both: בַּבַּיִת, בַּבֹּקֶר."
   }
  ]
 }

@@ -1,7 +1,25 @@
 {
  "function": "fn.connectors",
  "status": "realized",
- "summary": "German linking words come in three groups, and each group does something different to the word order. (1) und, oder, aber, denn (and sondern) stand between two main clauses and change nothing: Ich bin müde, aber ich gehe zur Arbeit. (2) Adverbs such as deshalb, deswegen, also, dann (and trotzdem) take the first place of their clause, so the verb follows at once: Ich habe Hunger, deshalb esse ich ein Brot. (3) Subordinating conjunctions – weil, dass, wenn, als, ob, obwohl – send the conjugated verb to the END of their clause: …, weil ich Durst habe. If the subordinate clause comes first, it fills the first place of the sentence and the main clause starts with its verb: Weil es kalt ist, trinken wir Tee (verb – comma – verb). A comma always separates the clauses. A separable verb joins up again at the end (…, weil der Zug um acht ankommt) and a modal verb comes last (…, weil ich Tee trinken will). Three English words split in German: “because” is weil (verb last) or denn (normal order); “when” is wenn (present, future, every time), als (one event in the past) or the question word wann; “if” is wenn (a condition) or ob (whether).",
+ "typology": [
+  {
+   "feature": "syn.subordination",
+   "value": "conjunctions"
+  },
+  {
+   "feature": "syn.verbSecond",
+   "value": "v2-and-final"
+  },
+  {
+   "feature": "syn.serialVerbs",
+   "value": "none"
+  },
+  {
+   "feature": "verb.converbs",
+   "value": "none"
+  }
+ ],
+ "summary": "German linking words come in three groups, and each group does something different to the word order. (1) und, oder, aber, denn (and sondern) stand between two main clauses and change nothing: Ich bin müde, aber ich gehe zur Arbeit. (2) Adverbs such as deshalb, deswegen, also, dann (and trotzdem) take the first place of their clause, so the verb follows at once: Ich habe Hunger, deshalb esse ich ein Brot. (3) Subordinating conjunctions – weil, dass, wenn, als, ob, obwohl – send the conjugated verb to the END of their clause: …, weil ich Durst habe. If the subordinate clause comes first, it fills the first place of the sentence and the main clause starts with its verb: Weil es kalt ist, trinken wir Tee (verb – comma – verb). A comma always separates the clauses. A separable verb joins up again at the end (…, weil der Zug um acht ankommt) and a modal verb comes last (…, weil ich Tee trinken will). Three meanings need two or three words: a reason is weil (verb last) or denn (normal order); a time “when” is wenn (present, future, every time), als (one event in the past) or the question word wann; “if” is wenn for a condition and ob for “whether”.",
  "blocks": [
   {
    "t": "table",
@@ -31,7 +49,17 @@
      "Ich trinke Wasser, weil ich Durst habe."
     ]
    ],
-   "caption": "Three groups, three word orders"
+   "caption": "Three groups, three word orders",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    },
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -41,12 +69,18 @@
     "trinken",
     "wir Tee."
    ],
-   "caption": "A subordinate clause first: it counts as position 1, so the main verb comes right after the comma (verb – comma – verb)"
+   "caption": "A subordinate clause first: it counts as position 1, so the main verb comes right after the comma (verb – comma – verb)",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "v2-and-final"
+    }
+   ]
   },
   {
    "t": "table",
    "head": [
-    "English",
+    "meaning",
     "German",
     "when"
    ],
@@ -69,7 +103,7 @@
     [
      "so, therefore",
      "also",
-     "a conclusion; verb next – NOT English “also” (= auch)"
+     "a conclusion; verb next (also never means “too” – that is auch)"
     ],
     [
      "then",
@@ -82,7 +116,7 @@
   {
    "t": "table",
    "head": [
-    "English",
+    "meaning",
     "German",
     "use"
    ],
@@ -139,7 +173,13 @@
      "…, weil der Zug um acht ankommt. (an + kommt joined again)"
     ]
    ],
-   "caption": "More verb-final clauses"
+   "caption": "More verb-final clauses",
+   "typology": [
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -150,8 +190,8 @@
   {
    "t": "callout",
    "kind": "pitfall",
-   "title": "also is a false friend",
-   "text": "German also = so, therefore. English “also” is auch: Ich komme auch (I’m coming too)."
+   "title": "also means “so”",
+   "text": "also = so, therefore: Ich bin müde, also gehe ich nach Hause. “Too, as well” is auch: Ich komme auch."
   },
   {
    "t": "callout",
@@ -198,7 +238,7 @@
   "Subordinate clause first → the main clause starts with the verb: Wenn es kalt ist, bleiben wir zu Hause.",
   "als for one event in the past, wenn for present / future / repeated, wann for questions.",
   "if = whether → ob; if = condition → wenn.",
-  "also = so, therefore – not English “also” (auch).",
+  "also = so, therefore – never “too” (that is auch).",
   "dass (conjunction) vs das (article / pronoun).",
   "A comma before weil, dass, wenn, ob, obwohl, aber, denn."
  ],
@@ -380,6 +420,103 @@
    "lang": "de",
    "fn": "fn.question.yesno",
    "note": "The verb-first order of a yes/no question (Bleibst du zu Hause?) stays the same when a weil-clause follows: Bleibst du zu Hause, weil du müde bist?"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek επειδή, ότι, αν, όταν leave the word order as it is; German weil, dass, wenn, ob send the verb to the end: …, weil ich Durst habe."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "потому что, что, если, когда change no word order; German weil, dass, wenn, ob send the verb to the end, and a clause that comes first pulls the main verb right after the comma."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "porque, que, si, cuando leave the order alone; German subordinate clauses put the verb last: …, weil ich Hunger habe."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "German also means “so”, not “also” (that is auch). “because” is weil (verb last) or denn; “when” is wenn, als or wann; “if” is wenn or ob. After weil, dass, wenn the verb goes to the end."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "parce que, que, si, quand change nothing in the order; German weil, dass, wenn, ob put the verb last. quand splits into wenn (present, repeated) and als (once in the past)."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "kyõki (because) keeps the normal order, and jab … tab pairs “when … then”; German weil sends the verb to the end, and a clause that comes first makes the main clause start with its verb."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian verbs are final anyway, after čon, ke, agar as in main clauses; German puts the verb last only in subordinate clauses (weil ich müde bin) and second in main clauses."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi uses kāraṇ (because) and jar … tar (if … then); German weil and wenn send the verb to the end of their clause."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "li-ʾanna, ʾanna, idhā leave the order of the clause as it is; German weil, dass, wenn put the conjugated verb last."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "ki, she-, im keep the normal order; German weil, dass, wenn send the verb to the end."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish makes subordinate clauses with verb suffixes (geldiği için, gelirse) and chains actions with converbs (-ip); German needs a conjunction (weil, wenn, und) – but its verb-final subordinate clause feels like the Turkish order."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese adds -kara, -node, -tara to the verb and chains clauses with the te-form; German uses a separate conjunction (weil, wenn, und) and puts the verb at the end of the clause."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean links clauses with verb endings (-aseo, -nikka, -myeon); German uses conjunctions, and after weil / wenn the verb comes last."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "koska, että, jos keep the normal order, and kun covers both wenn and als; German puts the verb last and splits “when” by time."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "mert, hogy, ha change no word order; German weil, dass, wenn put the verb last."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "kwa sababu (because), kwamba (that), kama (if) keep the order, and -ki- / -po- inside the verb can mean “if” or “when”; German uses weil, dass, wenn with the verb last."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "因为 … 所以 … are used together; German uses either weil or deshalb, and weil sends the verb to the end: Weil ich müde bin, gehe ich nach Hause."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "vì … nên … (because … so) go together and change no word order; German uses weil or deshalb, each with its own verb position."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses “because”, “when” and “if” with special verb endings (moods) instead of conjunctions; German uses a separate word (weil, wenn) and moves the verb to the end."
   }
  ]
 }

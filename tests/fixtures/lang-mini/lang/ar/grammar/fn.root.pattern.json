@@ -48,5 +48,87 @@
    "answer": "three",
    "why": "Most roots are triliteral; some have four."
   }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "new",
+   "text": "Greek builds words from stems and endings (γράφω, γραφείο, γράμμα); Arabic weaves three root consonants into vowel patterns (كَتَبَ, مَكْتَب, كِتَاب). أَرُزّ (rice) is the same word as ὄρυζα, borrowed through Aramaic — a loan with no usable root."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian builds families with prefixes and suffixes on a stem (писать, писатель, письмо); Arabic changes the vowels and adds letters around a root of consonants (كَتَبَ, كَاتِب, كِتَاب)."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English keeps traces of the idea in sing / sang / song; in Arabic it is the main way to make words: ك ت ب → كَتَبَ, كَاتِب, كِتَاب, مَكْتَب."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish builds words with suffixes (cocinar, cocina, cocinero); Arabic with patterns around a root: طَبَخَ (cook), مَطْبَخ (kitchen), طَبَّاخ (a cook)."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French cuisine, cuisinier add suffixes to a stem; Arabic puts the root ط ب خ into patterns: مَطْبَخ (kitchen), طَبَّاخ (cook)."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi borrowed whole Arabic word families through Persian — इल्म (knowledge), आलिम (scholar), मालूम (known) all come from ع ل م; in Arabic the patterns behind them are living rules."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian is full of Arabic words, so many patterns look familiar: کتاب, کاتب, مکتب (ک ت ب); علم, عالم, معلم (ع ل م). شَاي came into Arabic from Persian چای — a loan with no Arabic root."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi builds words with prefixes and suffixes on a stem; Arabic weaves a consonant root into patterns: ك ت ب → كِتَاب, كَاتِب, مَكْتَب."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish already has whole Arabic root families: kitap, kâtip (clerk), mektup (letter), mektep (school) all come from ك ت ب; ilim, âlim, muallim, malumat from ع ل م. In Arabic you learn the patterns behind them."
+  },
+  {
+   "for": "ja",
+   "rel": "new",
+   "text": "Japanese makes new words by combining kanji and adding endings; Arabic changes the vowels inside a consonant root."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish adds suffixes to an unchanging stem (kirja, kirjasto, kirjailija); Arabic keeps three consonants and changes everything around them (كِتَاب, مَكْتَبَة, كَاتِب)."
+  },
+  {
+   "for": "hu",
+   "rel": "new",
+   "text": "Hungarian adds suffixes to an unchanging stem; Arabic changes the vowels inside the root."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili borrowed Arabic word families too: kitabu (book), katibu (secretary), maktaba (library) — all ك ت ب. In Arabic the pattern is a living rule."
+  },
+  {
+   "for": "lg",
+   "rel": "new",
+   "text": "Luganda builds words with class prefixes and verb extensions; Arabic changes the vowel pattern around a consonant root."
+  },
+  {
+   "for": "vi",
+   "rel": "new",
+   "text": "Vietnamese words never change inside; new words are made by combining syllables. Arabic makes them by pouring a root into patterns."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut builds long words by adding suffix after suffix to a stem; Arabic keeps words short and changes the vowels and added letters around a root of three consonants."
+  }
  ]
 }

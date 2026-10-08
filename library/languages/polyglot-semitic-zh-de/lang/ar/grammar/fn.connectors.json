@@ -1,7 +1,7 @@
 {
  "function": "fn.connectors",
  "status": "realized",
- "summary": "Arabic joins clauses without changing their word order — there is nothing like the German verb at the end. What changes is the case of what follows. Most linking words are followed by an ordinary clause: وَ (and), أَوْ (or), لٰكِنْ (but), ثُمَّ (then), the prefix فَـ (and so, and then), لِذٰلِكَ (so, therefore), عِنْدَمَا (when), إِذَا (if). A small family, the “sisters of إِنَّ”, must be followed by a noun in the ACCUSATIVE or by a pronoun ending: لٰكِنَّ (but), لِأَنَّ (because), أَنَّ (that) and مَعَ أَنَّ (although) — لِأَنَّ الْجَوَّ بَارِدٌ (because the weather is cold), لِأَنَّهُ مُتْعَبٌ (because he is tired), لِأَنَّنِي جَائِعٌ (because I am hungry). أَنْ (that, to) is followed by a verb in the subjunctive, which ends in -a: أُرِيدُ أَنْ أَذْهَبَ (I want to go — “I want that I go”, like Greek θέλω να πάω). After إِذَا the verb usually stands in the past form with a present or future meaning (إِذَا جَاءَ الصَّيْفُ نُسَافِرُ), and a command after it needs فَـ: إِذَا كُنْتَ جَائِعًا فَكُلْ. In clauses with عِنْدَمَا and إِذَا, “to be” comes back as كَانَ (أَكُونُ, كُنْتَ) with the predicate in the accusative. “When?” in a question is مَتَى, never عِنْدَمَا, and “although …” never takes a “but” in the main clause.",
+ "summary": "Arabic joins clauses without changing their word order — there is nothing like the German verb at the end. What changes is the case of what follows. Most linking words are followed by an ordinary clause: وَ (and), أَوْ (or), لٰكِنْ (but), ثُمَّ (then), the prefix فَـ (and so, and then), لِذٰلِكَ (so, therefore), عِنْدَمَا (when), إِذَا (if). A small family, the “sisters of إِنَّ”, must be followed by a noun in the ACCUSATIVE or by a pronoun ending: لٰكِنَّ (but), لِأَنَّ (because), أَنَّ (that) and مَعَ أَنَّ (although) — لِأَنَّ الْجَوَّ بَارِدٌ (because the weather is cold), لِأَنَّهُ مُتْعَبٌ (because he is tired), لِأَنَّنِي جَائِعٌ (because I am hungry). أَنْ (that, to) is followed by a verb in the subjunctive, which ends in -a: أُرِيدُ أَنْ أَذْهَبَ (I want to go — literally “I want that I go”). After إِذَا the verb usually stands in the past form with a present or future meaning (إِذَا جَاءَ الصَّيْفُ نُسَافِرُ), and a command after it needs فَـ: إِذَا كُنْتَ جَائِعًا فَكُلْ. In clauses with عِنْدَمَا and إِذَا, “to be” comes back as كَانَ (أَكُونُ, كُنْتَ) with the predicate in the accusative. “When?” in a question is مَتَى, never عِنْدَمَا, and “although …” never takes a “but” in the main clause.",
  "blocks": [
   {
    "t": "table",
@@ -91,7 +91,13 @@
      "مَعَ أَنَّنِي مُتْعَبٌ، أَذْهَبُ إِلَى الْعَمَلِ."
     ]
    ],
-   "caption": "The linking words and what must follow them."
+   "caption": "The linking words and what must follow them.",
+   "typology": [
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
+   ]
   },
   {
    "t": "table",
@@ -204,13 +210,29 @@
      "أَنْ يَذْهَبُوا"
     ]
    ],
-   "caption": "أَنْ + subjunctive: -u becomes -a, and the -na of -īna / -ūna falls (the plural keeps a silent alif)."
+   "caption": "أَنْ + subjunctive: -u becomes -a, and the -na of -īna / -ūna falls (the plural keeps a silent alif).",
+   "typology": [
+    {
+     "feature": "verb.subjunctive",
+     "value": "inflectional"
+    },
+    {
+     "feature": "verb.infinitive",
+     "value": "finite-clause"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "tip",
    "title": "إِذَا + past, and فَـ.",
-   "text": "إِذَا ذَهَبْتَ إِلَى السُّوقِ = if you go to the market (past form, future meaning). If the result is a command, a nominal sentence or a negation with لَيْسَ, it begins with فَـ: إِذَا كُنْتَ جَائِعًا فَكُلْ! — a present verb needs no فَـ: إِذَا جَاءَ الصَّيْفُ نُسَافِرُ."
+   "text": "إِذَا ذَهَبْتَ إِلَى السُّوقِ = if you go to the market (past form, future meaning). If the result is a command, a nominal sentence or a negation with لَيْسَ, it begins with فَـ: إِذَا كُنْتَ جَائِعًا فَكُلْ! — a present verb needs no فَـ: إِذَا جَاءَ الصَّيْفُ نُسَافِرُ.",
+   "typology": [
+    {
+     "feature": "verb.conditional",
+     "value": "conjunction-only"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -508,6 +530,110 @@
    "lang": "ar",
    "fn": "fn.copula",
    "note": "After عِنْدَمَا and إِذَا, “to be” returns as كَانَ (أَكُونُ, كُنْتَ) with an accusative predicate."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.subordination",
+   "value": "conjunctions"
+  },
+  {
+   "feature": "verb.subjunctive",
+   "value": "inflectional"
+  },
+  {
+   "feature": "verb.infinitive",
+   "value": "finite-clause"
+  },
+  {
+   "feature": "verb.conditional",
+   "value": "conjunction-only"
+  },
+  {
+   "feature": "verb.converbs",
+   "value": "none"
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "Greek θέλω να πάω has the same shape as أُرِيدُ أَنْ أَذْهَبَ — “I want that I go”, with a person on both verbs and no infinitive."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian я хочу пойти uses an infinitive; Arabic has none: أُرِيدُ أَنْ أَذْهَبَ, “I want that I go”."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish quiero ir uses an infinitive; Arabic says أُرِيدُ أَنْ أَذْهَبَ (“I want that I go”). Spanish que + subjunctive (quiero que vayas) is close to أَنْ + subjunctive."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English “I want to go” has an infinitive; Arabic has a full verb with a person: أُرِيدُ أَنْ أَذْهَبَ. And “because he is tired” is لِأَنَّهُ مُتْعَبٌ — the pronoun becomes an ending of “because”."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French bien que and Arabic مَعَ أَنَّ both mean “although”, and neither takes a “but” in the main clause; French je veux partir has an infinitive, Arabic أُرِيدُ أَنْ أَذْهَبَ does not."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi लेकिन is Arabic لٰكِنْ, borrowed through Persian, and कि (that) opens a clause like أَنَّ; but after لِأَنَّ / أَنَّ a pronoun becomes an ending (لِأَنَّهُ), which Hindi क्योंकि never does."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian که, اگر, چون and اما (from Arabic أَمَّا) open clauses without changing their order, as Arabic linking words do; Persian می‌خواهم بروم (“I want I go”) is close to أُرِيدُ أَنْ أَذْهَبَ."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi can join clauses with verb forms such as खाऊन (“having eaten”); Arabic always uses a linking word: أَكَلَ ثُمَّ ذَهَبَ."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish joins clauses with verb endings (-ince, -ip, -diği için) before the main clause; Arabic uses separate words at the start of the clause: عِنْدَمَا, لِأَنَّ. Turkish ama, fakat and ve come from Arabic أَمَّا, فَقَطْ and وَ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese puts the linking word at the end of the first clause (疲れたから, because I’m tired); Arabic puts it at the start: لِأَنَّنِي مُتْعَبٌ."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean links clauses with verb endings (-고, -서, -지만); Arabic with separate words: وَ, فَـ, لٰكِنْ."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish että (that), koska (because), mutta (but), kun (when), jos (if) open the clause as in Arabic; Arabic adds the accusative after لِأَنَّ / أَنَّ."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian hogy, mert, de, amikor, ha also open the clause; Arabic adds the accusative after لِأَنَّ / أَنَّ / لٰكِنَّ."
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili lakini (but) is Arabic لٰكِنْ, and kwa sababu (because) uses the Arabic word سَبَب; clauses keep their order, as in Arabic."
+  },
+  {
+   "for": "vi",
+   "rel": "similar",
+   "text": "Vietnamese nhưng (but), vì (because), nếu (if), khi (when) open the clause and change nothing — as Arabic linking words do, except that لِأَنَّ / أَنَّ / لٰكِنَّ put the next noun in the accusative."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut joins clauses with special verb moods (“when …”, “because …”) instead of separate words; Arabic uses linking words: عِنْدَمَا, لِأَنَّ, إِذَا."
   }
  ]
 }

@@ -1,7 +1,21 @@
 {
  "function": "fn.comparison",
  "status": "periphrastic",
- "summary": "Hebrew adjectives have no comparative or superlative endings — no -er, no -est. You compare with words. “Bigger” is יוֹתֵר “more” + the adjective, before or after it: גָּדוֹל יוֹתֵר = יוֹתֵר גָּדוֹל (after is a little more formal). “Than” is the prefix מִ / מֵ, the same “from” as in lesson 11: הַבַּיִת גָּדוֹל יוֹתֵר מֵהַדִּירָה “the house is bigger than the flat”; before a clause, an adverb or a phrase with a preposition it is מֵאֲשֶׁר (יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”), and with a pronoun it takes endings: מִמֶּנִּי “than me”, מִמְּךָ / מִמֵּךְ “than you”, מִמֶּנּוּ “than him”, מִמֶּנָּה “than her”, מֵהֶם “than them”. “Less” is פָּחוֹת (פָּחוֹת יָקָר) and “as … as” is כְּמוֹ (גָּבֹהַּ כְּמוֹ אַבָּא). “The most” is הֲכִי before the adjective, in everyday Hebrew: הוּא הֲכִי גָּבֹהַּ “he is the tallest”, הַסֵּפֶר הֲכִי טוֹב “the best book” (the adjective then takes no article). Formal style puts בְּיוֹתֵר after a definite adjective: הַבַּיִת הַגָּדוֹל בְּיוֹתֵר “the biggest house”. The adjective itself still agrees as always (גְּבֹהָה יוֹתֵר for a woman), and there are no irregular forms: “better” is just טוֹב יוֹתֵר. Colours are ordinary adjectives that share one pattern, קָטֹל: אָדֹם → אֲדֻמָּה, אֲדֻמִּים, אֲדֻמּוֹת “red”; light and dark come after the colour and agree too (חֻלְצָה כְּחֻלָּה בְּהִירָה “a light-blue shirt”).",
+ "typology": [
+  {
+   "feature": "adj.comparativeForm",
+   "value": "analytic"
+  },
+  {
+   "feature": "syn.comparison",
+   "value": "locational"
+  },
+  {
+   "feature": "sem.greenBlue",
+   "value": "distinct"
+  }
+ ],
+ "summary": "Hebrew adjectives have no comparative or superlative endings: you compare with words. “Bigger” is יוֹתֵר “more” + the adjective, before or after it: גָּדוֹל יוֹתֵר = יוֹתֵר גָּדוֹל (after is a little more formal). “Than” is the prefix מִ / מֵ, the same “from” as in lesson 11: הַבַּיִת גָּדוֹל יוֹתֵר מֵהַדִּירָה “the house is bigger than the flat”; before a clause, an adverb or a phrase with a preposition it is מֵאֲשֶׁר (יוֹתֵר טוֹב מֵאֲשֶׁר בַּבַּיִת “better than at home”), and with a pronoun it takes endings: מִמֶּנִּי “than me”, מִמְּךָ / מִמֵּךְ “than you”, מִמֶּנּוּ “than him”, מִמֶּנָּה “than her”, מֵהֶם “than them”. “Less” is פָּחוֹת (פָּחוֹת יָקָר) and “as … as” is כְּמוֹ (גָּבֹהַּ כְּמוֹ אַבָּא). “The most” is הֲכִי before the adjective, in everyday Hebrew: הוּא הֲכִי גָּבֹהַּ “he is the tallest”, הַסֵּפֶר הֲכִי טוֹב “the best book” (the adjective then takes no article). Formal style puts בְּיוֹתֵר after a definite adjective: הַבַּיִת הַגָּדוֹל בְּיוֹתֵר “the biggest house”. The adjective itself still agrees as always (גְּבֹהָה יוֹתֵר for a woman), and there are no irregular forms: “better” is just טוֹב יוֹתֵר. Colours are ordinary adjectives that share one pattern, קָטֹל: אָדֹם → אֲדֻמָּה, אֲדֻמִּים, אֲדֻמּוֹת “red”; light and dark come after the colour and agree too (חֻלְצָה כְּחֻלָּה בְּהִירָה “a light-blue shirt”).",
  "blocks": [
   {
    "t": "table",
@@ -52,7 +66,17 @@
      "יוֹתֵר סְפָרִים · הוּא אוֹכֵל יוֹתֵר"
     ]
    ],
-   "caption": "No -er, no -est: the adjective never changes for comparison — only for gender and number."
+   "caption": "No comparative ending: the adjective never changes for comparison — only for gender and number.",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    },
+    {
+     "feature": "syn.comparison",
+     "value": "locational"
+    }
+   ]
   },
   {
    "t": "table",
@@ -78,13 +102,25 @@
      "מֵהֶם"
     ]
    ],
-   "caption": "מִ takes endings like לְ (לִי, לְךָ …): הוּא גָּבֹהַּ מִמֶּנִּי “he is taller than me”."
+   "caption": "מִ takes endings like לְ (לִי, לְךָ …): הוּא גָּבֹהַּ מִמֶּנִּי “he is taller than me”.",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "locational"
+    }
+   ]
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "מִ is “from” and “than”",
-   "text": "Greek uses από in the same way (μεγαλύτερος από), Arabic مِنْ (أَكْبَرُ مِنْ): “bigger from the flat”. Before a noun: מִ, which doubles the next letter (מִכָּאן), or מֵ before א ה ח ע ר and the article (מֵהַדִּירָה, מֵאַבָּא)."
+   "text": "Arabic uses مِنْ in the same way (أَكْبَرُ مِنْ): “bigger from the flat”. Before a noun: מִ, which doubles the next letter (מִכָּאן), or מֵ before א ה ח ע ר and the article (מֵהַדִּירָה, מֵאַבָּא).",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "locational"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -180,7 +216,13 @@
      "חוּמוֹת"
     ]
    ],
-   "caption": "The colour pattern קָטֹל: o in the masculine; in the other forms the last letter doubles and o becomes u (אֲדֻמָּה) — except שְׁחֹרָה and אֲפֹרָה. חוּם keeps its u. Unpointed they are written with ו: אדום, אדומה."
+   "caption": "The colour pattern קָטֹל: o in the masculine; in the other forms the last letter doubles and o becomes u (אֲדֻמָּה) — except שְׁחֹרָה and אֲפֹרָה. חוּם keeps its u. Unpointed they are written with ו: אדום, אדומה.",
+   "typology": [
+    {
+     "feature": "sem.greenBlue",
+     "value": "distinct"
+    }
+   ]
   },
   {
    "t": "table",
@@ -234,7 +276,7 @@
   ]
  },
  "traps": [
-  "*גָּדוֹלֶר — Hebrew has no -er: גָּדוֹל יוֹתֵר.",
+  "There is no comparative ending: “bigger” is גָּדוֹל יוֹתֵר — the adjective itself does not change.",
   "*יוֹתֵר גָּדוֹל מֵאֲשֶׁר הַדִּירָה → … מֵהַדִּירָה (before a plain noun use the prefix).",
   "*הַסֵּפֶר הֲכִי הַטּוֹב → הַסֵּפֶר הֲכִי טוֹב.",
   "*הוּא גָּבֹהַּ יוֹתֵר מֵאֲנִי → מִמֶּנִּי.",
@@ -390,6 +432,108 @@
    "lang": "zh",
    "fn": "fn.comparison",
    "note": "Chinese also adds words instead of endings: A 比 B 大 “A is bigger than B”, 最大 “the biggest” — 比 = Hebrew מִ, 最 = הֲכִי, 更 = יוֹתֵר."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also says “than” with “from” (μεγαλύτερος από ~ גָּדוֹל יוֹתֵר מִ…); but Greek can use an ending (-τερος), Hebrew only יוֹתֵר: גָּדוֹל יוֹתֵר."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian uses an ending (выше) and “than” as чем or the genitive (выше брата); Hebrew uses יוֹתֵר + מִ: גָּבֹהַּ יוֹתֵר מֵהָאָח. Russian синий / голубой are two blues; Hebrew also has two, כָּחֹל and תְּכֵלֶת."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Like más … que, Hebrew uses a word (יוֹתֵר), but “than” is מִ “from”: más grande que el piso ~ גָּדוֹל יוֹתֵר מֵהַדִּירָה. הֲכִי works like el más, but the adjective takes no article."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English -er / -est have no Hebrew counterpart: “bigger” is גָּדוֹל יוֹתֵר, “the biggest” הֲכִי גָּדוֹל, and even “better” is just טוֹב יוֹתֵר. “Than” is מִ, the word for “from”."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "plus … que ~ יוֹתֵר … מִ, le plus ~ הֲכִי; Hebrew has no irregular meilleur: “better” is טוֹב יוֹתֵר."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German uses endings (größer, am größten) and als; Hebrew uses words (יוֹתֵר, הֲכִי) and מִ “from”. Light and dark follow the colour in Hebrew (כָּחֹל בָּהִיר), where German hell- / dunkel- come before it."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Hindi also compares with “from” (भाई से लंबा “taller than the brother”); Hebrew does the same with מִ (גָּבֹהַּ יוֹתֵר מֵהָאָח) and adds יוֹתֵר “more”."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian adds the ending -تر (بزرگ‌تر از …); Hebrew has no ending, only יוֹתֵר — but “than” is “from” in both: از ~ מִ."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "Marathi compares with पेक्षा after the standard (भावापेक्षा उंच “taller than the brother”); Hebrew puts מִ before it and adds יוֹתֵר: גָּבֹהַּ יוֹתֵר מֵהָאָח."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic also says “than” with مِنْ, but builds a special form, the elative (أَكْبَرُ مِنْ); Hebrew has no such form — just יוֹתֵר: גָּדוֹל יוֹתֵר מִ…."
+  },
+  {
+   "for": "tr",
+   "rel": "same",
+   "text": "Turkish also compares with “from” and an optional “more” (evden daha büyük); Hebrew says גָּדוֹל יוֹתֵר מֵהַבַּיִת — the same idea, with מִ before the noun. en büyük ~ הֲכִי גָּדוֹל."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese also compares with “from” (兄より高い); Hebrew says גָּבֹהַּ יוֹתֵר מֵהָאָח and adds יוֹתֵר “more”. 一番 ~ הֲכִי."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean 보다 (형보다 커요) ~ Hebrew מִ (גָּבֹהַּ יוֹתֵר מֵהָאָח); 제일 / 가장 ~ הֲכִי."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses an ending (-mpi: isompi) and kuin or the partitive; Hebrew has no ending — יוֹתֵר + מִ."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian adds -bb (nagyobb) and uses mint or the -nál / -nél case; Hebrew uses יוֹתֵר and מִ."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili uses kuliko “than” (mrefu kuliko kaka); Hebrew uses יוֹתֵר “more” and מִ “from”: גָּבֹהַּ יוֹתֵר מֵהָאָח."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda compares with a verb meaning “surpass” (-singa); Hebrew uses יוֹתֵר “more” + מִ “from”."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese puts 比 before the standard (他比我高) and leaves the adjective unchanged; Hebrew too leaves it unchanged, but adds יוֹתֵר and marks the standard with מִ: הוּא גָּבֹהַּ יוֹתֵר מִמֶּנִּי. 最 ~ הֲכִי."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese puts hơn after the adjective (cao hơn tôi); Hebrew uses יוֹתֵר and מִ: גָּבֹהַּ יוֹתֵר מִמֶּנִּי. nhất ~ הֲכִי. And where xanh covers green and blue, Hebrew always separates יָרֹק and כָּחֹל."
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut adds a comparative suffix and puts the thing compared in the ablative case (“from”); Hebrew has no suffix, but uses מִ “from” the same way: גָּדוֹל יוֹתֵר מֵהַבַּיִת."
   }
  ]
 }

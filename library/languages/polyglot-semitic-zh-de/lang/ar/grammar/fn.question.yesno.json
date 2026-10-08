@@ -138,7 +138,17 @@
      "أَلَيْسَ هٰذَا شَايًا؟"
     ]
    ],
-   "caption": "The order of the words does not change — you only add هَلْ (or أَ) and ؟."
+   "caption": "The order of the words does not change — you only add هَلْ (or أَ) and ؟.",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "initial"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -278,6 +288,98 @@
    ],
    "answer": "أَنَا أَيْضًا أُحِبُّ السَّمَكَ",
    "why": "أَيْضًا (too) follows the word it adds to (أَنَا); فَقَطْ would mean “only I”."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.polarQuestion",
+   "value": "particle"
+  },
+  {
+   "feature": "syn.questionParticlePosition",
+   "value": "initial"
+  }
+ ],
+ "notes": [
+  {
+   "for": "hi",
+   "rel": "same",
+   "text": "Hindi क्या at the start of a yes/no question (क्या तुम चाय पीते हो?) is exactly Arabic هَلْ: the statement stays as it is."
+  },
+  {
+   "for": "fa",
+   "rel": "same",
+   "text": "Persian آیا at the start (آیا چای می‌خواهی؟) works like هَلْ; both are often dropped in speech, leaving only the voice."
+  },
+  {
+   "for": "sw",
+   "rel": "same",
+   "text": "Swahili Je, … ? at the start of a question (Je, unapenda chai?) works like هَلْ."
+  },
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek asks with the voice alone (θέλεις τσάι;); Arabic adds هَلْ in front, and its question mark is ؟."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian asks with the voice, or with ли after the word in question (хочешь ли ты чаю?); Arabic puts هَلْ in front."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish uses intonation and ¿…?; Arabic adds هَلْ at the start and writes ؟ only at the end."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English inverts or adds do (Do you like tea?); Arabic keeps the statement and adds هَلْ: هَلْ تُحِبُّ الشَّايَ؟ For “yes, I do” after a negative question it has a word of its own, بَلَى."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French est-ce que before an unchanged statement (est-ce que tu aimes le thé ?) is the idea of هَلْ; and French si — “yes, I do” after a negative question — is Arabic بَلَى."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish puts mi after the word in question (çay istiyor musun?); Arabic puts هَلْ at the start of the sentence."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese adds か at the end (お茶が好きですか); Arabic puts هَلْ at the start. Japanese はい after a negative question agrees with it, as Arabic نَعَمْ does; “yes, I do” is بَلَى."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean asks with the verb ending and the voice (좋아해요?); Arabic adds the separate word هَلْ."
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "Finnish -ko / -kö goes on the first word (Juotko teetä?); Arabic also marks the start of the sentence — with هَلْ, or the formal prefix أَ on the first word (أَتَشْرَبُ؟)."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian asks with intonation alone (Iszol teát?); Arabic adds هَلْ in front."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda asks yes/no questions with intonation; Arabic adds هَلْ."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese wraps the verb in có … không? (bạn có uống trà không?); Arabic puts هَلْ in front and changes nothing else."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut has a question mood inside the verb; Arabic adds the word هَلْ and leaves the verb as it is."
   }
  ]
 }

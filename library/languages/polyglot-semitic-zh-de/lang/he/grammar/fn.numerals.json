@@ -1,6 +1,32 @@
 {
  "function": "fn.numerals",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "num.agreement",
+   "value": "extensive"
+  },
+  {
+   "feature": "nom.pluralAfterNumeral",
+   "value": "plural"
+  },
+  {
+   "feature": "num.order",
+   "value": "tens-first"
+  },
+  {
+   "feature": "num.base",
+   "value": "decimal"
+  },
+  {
+   "feature": "nom.classifiers",
+   "value": "none"
+  },
+  {
+   "feature": "syn.numeralNoun",
+   "value": "num-noun"
+  }
+ ],
  "summary": "Hebrew numbers have gender. From 1 to 19 every number has a masculine and a feminine form, chosen by the gender of the noun you count: שְׁלוֹשָׁה סְפָרִים “three books” (סֵפֶר is masculine), שָׁלוֹשׁ מִטּוֹת “three beds” (מִטָּה is feminine). Surprisingly, for 3–10 the form with the ending -ָה, which looks feminine, goes with masculine nouns — an old Semitic pattern that Arabic shares. When you simply count (and in phone numbers, prices and sums) you use the feminine: אַחַת, שְׁתַּיִם, שָׁלוֹשׁ, אַרְבַּע … The number stands before the noun, except אֶחָד / אַחַת, which follows it like an adjective (סֵפֶר אֶחָד). Two has a short (construct) form before nouns: שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת. Before a definite masculine noun, 3–10 take a construct form in -ֶת: שְׁלוֹשֶׁת הַסְּפָרִים “the three books”. The tens (עֶשְׂרִים, שְׁלוֹשִׁים …) never change, and 21 is said ten first: עֶשְׂרִים וְאַחַת. מֵאָה “100” and אֶלֶף “1000” have a dual for 200 and 2000 (מָאתַיִם, אַלְפַּיִם): the dual ending -ַיִם is still alive for “two” of a few things (יוֹמַיִם “two days”). From 2 on, the counted noun is plural.",
  "blocks": [
   {
@@ -73,7 +99,17 @@
      "עֲשֶׂרֶת"
     ]
    ],
-   "caption": "Zero is אֶפֶס. The feminine column is also the counting form: אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …"
+   "caption": "Zero is אֶפֶס. The feminine column is also the counting form: אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    }
+   ]
   },
   {
    "t": "table",
@@ -129,7 +165,13 @@
      "תְּשַׁע עֶשְׂרֵה"
     ]
    ],
-   "caption": "11–19: the unit + עָשָׂר (masculine) or עֶשְׂרֵה (feminine). In the feminine some units shorten: שְׁלוֹשׁ, חֲמֵשׁ, שְׁבַע, תְּשַׁע."
+   "caption": "11–19: the unit + עָשָׂר (masculine) or עֶשְׂרֵה (feminine). In the feminine some units shorten: שְׁלוֹשׁ, חֲמֵשׁ, שְׁבַע, תְּשַׁע.",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
+   ]
   },
   {
    "t": "table",
@@ -169,6 +211,16 @@
      "אֶלֶף · אַלְפַּיִם · שְׁלוֹשֶׁת אֲלָפִים",
      "אֶלֶף is masculine; 2000 is a dual"
     ]
+   ],
+   "typology": [
+    {
+     "feature": "num.order",
+     "value": "tens-first"
+    },
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    }
    ]
   },
   {
@@ -181,7 +233,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "The ending -ָה lies",
-   "text": "From 3 to 10 the form in -ָה goes with masculine nouns: שְׁלוֹשָׁה יְלָדִים “three boys”, but שָׁלוֹשׁ יְלָדוֹת “three girls”. Arabic does exactly the same: ثَلَاثَةُ أَوْلَادٍ, ثَلَاثُ بَنَاتٍ."
+   "text": "From 3 to 10 the form in -ָה goes with masculine nouns: שְׁלוֹשָׁה יְלָדִים “three boys”, but שָׁלוֹשׁ יְלָדוֹת “three girls”. Arabic does exactly the same: ثَلَاثَةُ أَوْلَادٍ, ثَلَاثُ بَنَاتٍ.",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -199,7 +257,13 @@
    "t": "callout",
    "kind": "tip",
    "title": "The dual is alive",
-   "text": "A few words keep the old dual ending -ַיִם for exactly two: יוֹמַיִם “two days”, שְׁבוּעַיִם “two weeks”, שְׁנָתַיִם “two years”, פַּעֲמַיִם “twice”, מָאתַיִם “200”, אַלְפַּיִם “2000”. Paired body parts use it as their plural: עֵינַיִם “eyes”, יָדַיִם “hands”, רַגְלַיִם “legs”."
+   "text": "A few words keep the old dual ending -ַיִם for exactly two: יוֹמַיִם “two days”, שְׁבוּעַיִם “two weeks”, שְׁנָתַיִם “two years”, פַּעֲמַיִם “twice”, מָאתַיִם “200”, אַלְפַּיִם “2000”. Paired body parts use it as their plural: עֵינַיִם “eyes”, יָדַיִם “hands”, רַגְלַיִם “legs”.",
+   "typology": [
+    {
+     "feature": "nom.dual",
+     "value": "limited"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -217,7 +281,17 @@
     "definite? → construct (-ֶת)",
     "noun in the plural"
    ],
-   "caption": "Choosing the number word"
+   "caption": "Choosing the number word",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "none"
+    },
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "plural"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -245,6 +319,16 @@
       "drei Bücher, drei Betten — one form",
       "21 = einundzwanzig (the unit first)"
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    },
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "plural"
     }
    ]
   },
@@ -474,6 +558,108 @@
    "lang": "zh",
    "fn": "fn.measure.word",
    "note": "Chinese needs a measure word between the number and the noun (三本书) and has two words for two (二 / 两); the noun never changes."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also has gendered 1, 3 and 4 (ένας / μία / ένα, τρεις / τρία, τέσσερις / τέσσερα); Hebrew has two forms for every number from 1 to 19 — and for 3–10 the form in -ָה goes with masculine nouns."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian changes the noun after a number (два стола, пять столов); in Hebrew the noun is simply plural from two on (שְׁנֵי שֻׁלְחָנוֹת, חֲמִשָּׁה שֻׁלְחָנוֹת), and the number agrees in gender instead (два / две ~ שְׁנֵי / שְׁתֵּי)."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish has gender in uno / una and in the hundreds (doscientos / doscientas); Hebrew has it in every number from 1 to 19. Twenty-one is said ten first, as veintiuno is: עֶשְׂרִים וְאַחַת."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English numbers never change; Hebrew numbers 1–19 have a masculine and a feminine form chosen by the noun — and for 3–10 the form in -ָה goes with masculine nouns."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French has only un / une; Hebrew has two forms for every number 1–19. Twenty-one is ten first with “and”, as in vingt et un: עֶשְׂרִים וְאַחַת."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German says the unit first (einundzwanzig); Hebrew says the ten first: עֶשְׂרִים וְאַחַת. In German only ein / eine agree; in Hebrew every number up to 19 does."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi numbers do not change for gender, and 21–99 are separate words to learn one by one (इक्कीस, बाईस …); Hebrew numbers agree in gender, and 21–99 are regular: ten + וְ + unit."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also says the ten first, with “and” (بیست و یک ~ עֶשְׂרִים וְאַחַת); but it keeps the noun singular after a number (سه کتاب) and has no gender, while Hebrew uses the plural and gendered numbers."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi numbers put the unit first (एकवीस “twenty-one”) and do not change for gender; Hebrew says the ten first and chooses a masculine or feminine form."
+  },
+  {
+   "for": "ar",
+   "rel": "similar",
+   "text": "Arabic has the same reversed gender for 3–10 (ثَلَاثَةُ أَوْلَادٍ, ثَلَاثُ بَنَاتٍ); but it says the unit first (وَاحِدٌ وَعِشْرُونَ) and uses a singular noun after 11, while Hebrew says the ten first and keeps the plural."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish numbers never change and the noun stays singular (üç kitap); Hebrew uses the plural (שְׁלוֹשָׁה סְפָרִים) and a gendered number."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese counts with counters (本を三冊); Hebrew needs no counter — the number goes straight before the plural noun: שְׁלוֹשָׁה סְפָרִים."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean uses counters and often puts the number after the noun (책 세 권); Hebrew puts the number before the plural noun, with no counter: שְׁלוֹשָׁה סְפָרִים."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish puts the noun in the partitive singular after a number (kolme kirjaa); Hebrew puts it in the plural: שְׁלוֹשָׁה סְפָרִים."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian keeps the noun singular after a number (három könyv); Hebrew makes it plural, and the number agrees in gender."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili numbers follow the noun and agree with its class (vitabu vitatu); Hebrew numbers come before the noun (except “one”) and agree in gender: שְׁלוֹשָׁה סְפָרִים."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda numbers follow the noun and agree with its class (ebitabo bisatu “three books”); Hebrew numbers come before it (except “one”) and agree in gender."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese needs a measure word (三本书); Hebrew counts the noun directly, in the plural: שְׁלוֹשָׁה סְפָרִים."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses classifiers (ba cuốn sách); Hebrew counts the plural noun directly: שְׁלוֹשָׁה סְפָרִים."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut nouns have a singular, a dual and a plural, and the language has its own words for small numbers (atausiq, marruuk, pingasut …), while larger numbers are often borrowed; Hebrew keeps a dual only in a few words and counts every noun with gendered numbers."
   }
  ]
 }

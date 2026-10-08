@@ -1,6 +1,20 @@
 {
  "function": "fn.copula",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.copula",
+   "value": "obligatory"
+  },
+  {
+   "feature": "syn.beSplit",
+   "value": "same"
+  },
+  {
+   "feature": "adj.predicative",
+   "value": "nonverbal"
+  }
+ ],
  "summary": "German links a subject to what it is with the verb sein (to be), and it can never be left out: Ich bin Lehrer. Er ist hier. sein is the most irregular verb of the language – bin, bist, ist, sind, seid, sind – and the first table to know by heart. With a job, a role or a nationality German uses no article: Ich bin Lehrerin (not *eine Lehrerin), Er ist Student. After das the verb agrees with what follows: Das ist ein Tisch, but Das sind Kinder and Das bin ich.",
  "blocks": [
   {
@@ -32,7 +46,13 @@
      "Sie sind"
     ]
    ],
-   "caption": "sein in the present"
+   "caption": "sein in the present",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "obligatory"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -64,9 +84,9 @@
      ]
     },
     {
-     "title": "Russian, Arabic, Hebrew",
+     "title": "Arabic, Hebrew",
      "points": [
-      "я студент · ana ṭālib · ani student",
+      "ana ṭālib · ani student",
       "no “to be” in the present",
       "the two nouns simply stand side by side"
      ]
@@ -173,6 +193,103 @@
    "lang": "de",
    "fn": "fn.pronoun.subject",
    "note": "The form of sein depends on the subject pronoun."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "same",
+   "text": "είμαι is never left out, and a job takes no article: Είμαι δάσκαλος – Ich bin Lehrer."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian has no present-tense “to be” (я студент); German always needs it: Ich bin Student. The job without an article is the same."
+  },
+  {
+   "for": "es",
+   "rel": "trap",
+   "text": "One verb, sein, covers ser and estar: Ich bin Lehrer, Ich bin müde, Ich bin hier. As in Spanish, a job takes no article (Soy profesor – Ich bin Lehrer)."
+  },
+  {
+   "for": "en",
+   "rel": "trap",
+   "text": "English needs “a” with a job (I am a teacher); German has none: Ich bin Lehrer. Ich bin ein Lehrer sounds wrong unless an adjective comes in (ein guter Lehrer)."
+  },
+  {
+   "for": "fr",
+   "rel": "same",
+   "text": "Like être, sein is never left out, and a job takes no article: Je suis professeur – Ich bin Lehrer."
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "The copula is always there and agrees with the person (maĩ śikṣak hū̃, vah śikṣak hai), as sein does (ich bin, er ist); but German puts it second, not at the end. The speaker’s sex never shows: ich bin müde for everyone, where Hindi says maĩ thakā hū̃ / maĩ thakī hū̃."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian also needs “to be” (man dānešju hastam / dānešju-am); German uses a separate, very irregular verb (bin, bist, ist) and puts it second, not at the end."
+  },
+  {
+   "for": "mr",
+   "rel": "similar",
+   "text": "āhe is always there (mī śikṣak āhe), as sein is; German puts it second and changes it for the person: ich bin, du bist, er ist."
+  },
+  {
+   "for": "ar",
+   "rel": "trap",
+   "text": "In the present Arabic simply puts the two nouns side by side (ana ṭālib); German never does: Ich bin Student."
+  },
+  {
+   "for": "he",
+   "rel": "trap",
+   "text": "Hebrew has no present-tense “to be” (ani student; ha-bayit gadol); German always needs sein: Ich bin Student. Das Haus ist groß. Nothing shows the speaker’s sex: ich bin müde for ani ayef and ani ayefa alike."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish adds a personal suffix (öğretmenim) and often nothing in the 3rd person (O öğretmen); German needs a separate verb in every person: Ich bin Lehrer, Er ist Lehrer."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "desu / da links nouns (gakusei desu), but adjectives inflect on their own (takai); German uses sein for both: Ich bin Student. Das ist teuer."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "The copula -ida is attached to the noun (haksaeng-ida), and adjectives are verbs (keuda); German has the separate verb sein for both: Ich bin Student. Das Haus ist groß."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "olla is always there and a job takes no article: Olen opettaja – Ich bin Lehrer."
+  },
+  {
+   "for": "hu",
+   "rel": "trap",
+   "text": "The 3rd person drops the copula (Anna tanár), the others keep it (tanár vagyok). German never drops it: Anna ist Lehrerin."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "ni links two nouns (Mimi ni mwalimu), but it never changes; German sein changes for every person: ich bin, du bist, er ist."
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "是 links two nouns (我是学生), but an adjective follows without it (我很好). German uses sein in both: Ich bin Student. Mir geht es gut / Das ist gut."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "là links nouns (tôi là giáo viên), but adjectives need no copula (tôi mệt); German says Ich bin müde."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut turns the noun itself into a verb with a suffix meaning “be” and adds the person ending, all in one word. German uses the separate verb sein and a noun after it: Ich bin Lehrer."
   }
  ]
 }

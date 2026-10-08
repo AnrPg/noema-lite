@@ -1,73 +1,76 @@
 {
  "function": "fn.prep.core",
  "status": "realized",
- "summary": "Arabic prepositions stand before the noun, and the noun after them is always genitive (-i / -in, see fn.case). The core set: فِي (in, at — where?), إِلَى (to — where to?), مِنْ (from — where from?), عِنْدَ (at someone’s place), مَعَ (with — together with), بِـ (with — a tool or an ingredient; by; for a price), بِدُونِ (without), لِـ (for; belonging to) and عَنْ (about; away from). بِـ and لِـ are single letters written together with the next word (بِالْحَلِيبِ, لِأَخِي). Every preposition takes the pronoun endings: مَعِي (with me), لَكَ (for you), مِنْهُ (from him), فِيهَا (in it), إِلَيْكَ (to you). Where Greek has one σε for in, at and to, Arabic chooses: فِي for “where?”, إِلَى for “where to?”, عِنْدَ for “at someone’s”.",
+ "summary": "Arabic prepositions stand before the noun, and the noun after them is always genitive (-i / -in, see fn.case). The core set: فِي (in, at — where?), إِلَى (to — where to?), مِنْ (from — where from?), عِنْدَ (at someone’s place), مَعَ (with — together with), بِـ (with — a tool or an ingredient; by; for a price), بِدُونِ (without), لِـ (for; belonging to) and عَنْ (about; away from). بِـ and لِـ are single letters written together with the next word (بِالْحَلِيبِ, لِأَخِي). Every preposition takes the pronoun endings: مَعِي (with me), لَكَ (for you), مِنْهُ (from him), فِيهَا (in it), إِلَيْكَ (to you). Arabic chooses by the question: فِي for “where?”, إِلَى for “where to?”, عِنْدَ for “at someone’s”.",
  "blocks": [
   {
    "t": "table",
    "head": [
-    "Greek",
     "meaning",
     "Arabic",
     "example"
    ],
    "rows": [
     [
-     "σε — στο σπίτι, στο σχολείο",
      "in, at (where?)",
      "فِي",
      "فِي الْبَيْتِ (at home), فِي الْمَدْرَسَةِ (at school)"
     ],
     [
-     "σε — πάω στο σχολείο",
      "to (where to?)",
      "إِلَى",
      "إِلَى الْمَدْرَسَةِ (to school)"
     ],
     [
-     "σε — στον γιατρό",
      "at someone’s place",
      "عِنْدَ",
      "عِنْدَ الطَّبِيبِ (at the doctor’s)"
     ],
     [
-     "από — από την πόλη",
      "from",
      "مِنْ",
      "مِنَ الْمَدِينَةِ (from the city)"
     ],
     [
-     "με — με τον φίλο μου",
      "with (together)",
      "مَعَ",
      "مَعَ صَدِيقِي (with my friend)"
     ],
     [
-     "με — καφές με γάλα, με το στυλό",
      "with (ingredient, tool)",
      "بِـ",
      "قَهْوَةٌ بِالْحَلِيبِ, بِالْقَلَمِ"
     ],
     [
-     "για — για σένα",
      "for",
      "لِـ",
      "لَكَ (for you), لِأَخِي (for my brother)"
     ],
     [
-     "χωρίς",
      "without",
      "بِدُونِ",
      "بِدُونِ سُكَّرٍ (without sugar)"
     ],
     [
-     "για / σχετικά με — ένα βιβλίο για την πόλη",
      "about",
      "عَنْ",
      "كِتَابٌ عَنِ الْمَدِينَةِ (a book about the city)"
     ]
    ],
-   "caption": "Greek σε alone covers in, at and to; Arabic decides between فِي, إِلَى and عِنْدَ. Greek με is مَعَ for company but بِـ for a tool or an ingredient."
+   "caption": "One idea, one preposition: فِي, إِلَى and عِنْدَ split “in / at / to”; مَعَ is company, بِـ a tool or an ingredient.",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ],
+   "notes": [
+    {
+     "for": "el",
+     "rel": "trap",
+     "text": "Greek σε covers in, at and to (στο σπίτι, πάω στο σχολείο, στον γιατρό); Arabic splits it: فِي, إِلَى, عِنْدَ. Greek με is مَعَ for company but بِـ for a tool or an ingredient (καφές με γάλα = قَهْوَةٌ بِالْحَلِيبِ)."
+    }
+   ]
   },
   {
    "t": "compare",
@@ -207,7 +210,39 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "Two “with”s.",
-   "text": "مَعَ is company: أَنَا مَعَ صَدِيقِي (I am with my friend). بِـ is a tool, an ingredient or a means: أَكْتُبُ بِالْقَلَمِ (I write with a pen), قَهْوَةٌ بِالْحَلِيبِ (coffee with milk). Greek and German use one word (με, mit) for both."
+   "text": "مَعَ is company: أَنَا مَعَ صَدِيقِي (I am with my friend). بِـ is a tool, an ingredient or a means: أَكْتُبُ بِالْقَلَمِ (I write with a pen), قَهْوَةٌ بِالْحَلِيبِ (coffee with milk).",
+   "notes": [
+    {
+     "for": "de",
+     "rel": "trap",
+     "text": "German mit covers both; Arabic says مَعَ صَدِيقِي (mit meinem Freund) but بِالْقَلَمِ (mit dem Stift)."
+    },
+    {
+     "for": "en",
+     "rel": "trap",
+     "text": "English “with” covers both: with my friend = مَعَ صَدِيقِي, with a pen = بِالْقَلَمِ."
+    },
+    {
+     "for": "es",
+     "rel": "trap",
+     "text": "Spanish con covers both: con mi amigo = مَعَ صَدِيقِي, con leche = بِالْحَلِيبِ."
+    },
+    {
+     "for": "fr",
+     "rel": "trap",
+     "text": "French avec covers both: avec mon ami = مَعَ صَدِيقِي, but café au lait / avec du lait = قَهْوَةٌ بِالْحَلِيبِ."
+    },
+    {
+     "for": "ru",
+     "rel": "similar",
+     "text": "Russian splits them too: с другом (with a friend) is مَعَ, and a tool takes the bare instrumental (ручкой), where Arabic uses بِـ: بِالْقَلَمِ."
+    },
+    {
+     "for": "vi",
+     "rel": "same",
+     "text": "Vietnamese makes the same split: với for company, bằng for a tool or means — với bạn ≈ مَعَ صَدِيقٍ, bằng bút ≈ بِالْقَلَمِ."
+    }
+   ]
   },
   {
    "t": "callout",
@@ -245,7 +280,13 @@
    "t": "callout",
    "kind": "key",
    "title": "“There is” = a place first.",
-   "text": "فِي الْقَرْيَةِ مَدْرَسَةٌ — there is a school in the village. The indefinite noun (مَدْرَسَةٌ) comes after the place and is nominative; no verb is needed. Question: هَلْ فِي الْقَرْيَةِ مَدْرَسَةٌ؟"
+   "text": "فِي الْقَرْيَةِ مَدْرَسَةٌ — there is a school in the village. The indefinite noun (مَدْرَسَةٌ) comes after the place and is nominative; no verb is needed. Question: هَلْ فِي الْقَرْيَةِ مَدْرَسَةٌ؟",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
   },
   {
    "t": "terms",
@@ -272,7 +313,7 @@
   ]
  },
  "traps": [
-  "“To school” is إِلَى الْمَدْرَسَةِ, “at school” فِي الْمَدْرَسَةِ — do not use فِي for “to” as Greek σε would.",
+  "“To school” is إِلَى الْمَدْرَسَةِ, “at school” فِي الْمَدْرَسَةِ — فِي never means “to”.",
   "A tool takes بِـ, not مَعَ: *أَكْتُبُ مَعَ الْقَلَمِ → أَكْتُبُ بِالْقَلَمِ.",
   "*مِنْ الْبَيْتِ → مِنَ الْبَيْتِ; *عَنْ الْمَدِينَةِ → عَنِ الْمَدِينَةِ.",
   "بِـ and لِـ never stand alone: بِالْحَلِيبِ, لِأَخِي, لَكَ.",
@@ -413,7 +454,7 @@
    "why": "After a preposition a pronoun is an ending: مَعِي, مَعَكَ, مَعَهُ …"
   },
   {
-   "q": "Greek σε covers “in / at” and “to”. Which Arabic preposition is “to” (where to?)?",
+   "q": "Which Arabic preposition means “to” (where to?)?",
    "options": [
     "إِلَى",
     "فِي",
@@ -443,6 +484,89 @@
    "lang": "ar",
    "fn": "fn.case",
    "note": "Why the noun ends in -i after every preposition: the genitive."
+  }
+ ],
+ "typology": [
+  {
+   "feature": "syn.adpositions",
+   "value": "prepositions"
+  }
+ ],
+ "notes": [
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French chez is Arabic عِنْدَ: chez le médecin = عِنْدَ الطَّبِيبِ. But French à covers both “at” and “to” (à l’école), where Arabic splits فِي / إِلَى."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish en / a / de match فِي / إِلَى / مِنْ (en casa, a la escuela, de la ciudad)."
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "Russian keeps в and changes the case: в школе (where?) / в школу (where to?); Arabic changes the preposition: فِي الْمَدْرَسَةِ / إِلَى الْمَدْرَسَةِ."
+  },
+  {
+   "for": "en",
+   "rel": "similar",
+   "text": "English at / to / from match فِي / إِلَى / مِنْ; “at the doctor’s” is عِنْدَ الطَّبِيبِ."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish marks place, direction and source with case endings (evde, okula, şehirden); Arabic puts prepositions before the noun: فِي الْبَيْتِ, إِلَى الْمَدْرَسَةِ, مِنَ الْمَدِينَةِ."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi postpositions follow the noun (घर में, शहर से); Arabic prepositions come first: فِي الْبَيْتِ, مِنَ الْمَدِينَةِ."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian prepositions also come first — در (in), به (to), از (from), با (with), برای (for), بی (without) — and match فِي, إِلَى, مِنْ, مَعَ, لِـ, بِدُونِ almost one to one; only با covers both company and tool, where Arabic splits مَعَ / بِـ."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi uses endings and postpositions after the noun (घरात, in the house); Arabic puts a preposition before it: فِي الْبَيْتِ."
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese particles follow the noun (家に, 学校へ, 町から); Arabic prepositions come before it (فِي الْبَيْتِ, إِلَى الْمَدْرَسَةِ, مِنَ الْمَدِينَةِ)."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean particles follow the noun (집에, 학교에); Arabic prepositions come before it."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish uses case endings — talossa (in), taloon (into), talosta (out of); Arabic uses prepositions and one case after them: فِي الْبَيْتِ, إِلَى الْبَيْتِ, مِنَ الْبَيْتِ."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian uses case endings — házban, házba, házból; Arabic uses prepositions and keeps the noun in the genitive."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili also has prepositions before the noun (kwa, na) and a locative ending -ni (nyumbani, at home); Arabic uses prepositions only: فِي الْبَيْتِ."
+  },
+  {
+   "for": "lg",
+   "rel": "similar",
+   "text": "Luganda puts mu (in) and ku (on, at) before the noun, as Arabic does with فِي and عَلَى."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut uses case endings: illumi (in the house), illumut (to the house), illumit (from the house); Arabic uses prepositions: فِي الْبَيْتِ, إِلَى الْبَيْتِ, مِنَ الْبَيْتِ."
   }
  ]
 }

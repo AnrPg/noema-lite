@@ -3,7 +3,7 @@
 **Who must follow this file:** every agent and every person that writes code, content, briefs, tools or designs for the
 language courses — Claude Code sessions, Cowork sessions, subagents that write words, grammar or sentences, the Claude
 skill (`noema-pack-builder`), the connector's tasks, and anyone merging the `languages` branch. It is the short, binding
-form of the decisions D1–D17 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
+form of the decisions D1–D19 in `docs/LANGUAGES.md` (the full contract). If the two ever disagree, `docs/LANGUAGES.md`
 wins and this file is fixed in the same commit. `tests/lang_rules.py` fails when a decision of `docs/LANGUAGES.md` is
 missing here or when one of the places below does not point to this file.
 
@@ -53,12 +53,25 @@ Where it is enforced: `CLAUDE.md` and `AGENTS.md` (read by code agents), `README
   the advanced stage: open-ended modules (exhaustive fields, advanced grammar, registers and varieties, idioms, reading
   and writing, culture) added indefinitely, each placed on the common order (D13) and written to all the rules above.
 
+- **D18** **The learner's languages decide what is explained.** Settings list the learner's languages with levels;
+  native / C2 ones make parts familiar (hidden in one line); a language without a profile is inferred from its family or
+  type. Every grammar page carries **comparison notes** for the reference set (fusional: el, ru, es, en, fr, de, hi, fa,
+  mr; Semitic: ar, he; agglutinating: tr, ja, ko, fi, hu, sw, lg; isolating: zh, vi; polysynthetic: iu — at least 8 of
+  them per page, all four types); Claude / Gemini may add notes for other languages only on the learner's request with
+  their key. The peculiarities of each language form a free library.
+- **D19** **Vocabulary is its own track; every other aspect uses any vocabulary.** Sentences prefer the learner's known
+  words but may contain unknown ones — at most ⌈30 %⌉ of the words, in production too — shown with 🆕, the word card on
+  hover / tap and a list at the end of the lesson. Every word used anywhere has its full facade. Every field brings
+  ≥ 2 sentences for every non-vocabulary node before it on the common order (or a reason in `fieldExemptions`).
+
 ## C. Checklist for every task (copy it into every brief)
 - [ ] I read `docs/LANGUAGE_RULES.md` and the sections of `docs/LANGUAGES.md` my task touches.
 - [ ] Nothing I add or move breaks the common order of any language of any course (D13) — the validator checks it.
 - [ ] Every word I write states its whole facade, every meaning is a concept or `of`, every shared concept has contrasts (D14, D15).
-- [ ] My texts describe the language, not a comparison with one other language (D16); comparisons with the learner's
-      languages go only where the model asks for them (`forYou`) or are computed.
+- [ ] My texts describe the language (D16); comparisons with other languages go into `notes` (`for`: a language, a
+      type or a family), and every grammar page has notes for at least 8 reference languages of all four types (D18).
+- [ ] Every word in my sentences is in the lexicon with its full facade; a field I write brings sentences for every
+      non-vocabulary node before it (D19).
 - [ ] I grounded every fact; the validator (`--strict`), refcheck and `lang_phenomena.py` pass; the catalogue of
       phenomena is updated for what I added (status, gap).
 - [ ] I touched only the files my task allows, and reported doubtful cases.

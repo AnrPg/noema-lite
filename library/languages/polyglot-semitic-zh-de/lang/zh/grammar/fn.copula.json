@@ -1,12 +1,26 @@
 {
  "function": "fn.copula",
  "status": "realized",
- "summary": "是 shì links a subject to a noun: 我是学生 ‘I am a student’. It never changes (我是, 你是, 他们是 — present or past) and is negated with 不: 不是 bú shì. Two things English does with ‘to be’ are done differently: before an adjective Chinese uses no verb at all (我很好 ‘I am fine’ — never *我是好), and ‘to be somewhere’ is 在 zài: 老师在这里 ‘the teacher is here’.",
+ "typology": [
+  {
+   "feature": "syn.copula",
+   "value": "obligatory"
+  },
+  {
+   "feature": "syn.beSplit",
+   "value": "different"
+  },
+  {
+   "feature": "adj.predicative",
+   "value": "verbal"
+  }
+ ],
+ "summary": "是 shì links a subject to a noun: 我是学生 ‘I am a student’. It never changes (我是, 你是, 他们是 — present or past) and is negated with 不: 不是 bú shì. Two other jobs of ‘to be’ are done with other means: before an adjective Chinese uses no verb at all (我很好 ‘I am fine’ — never *我是好), and ‘to be somewhere’ is 在 zài: 老师在这里 ‘the teacher is here’.",
  "blocks": [
   {
    "t": "table",
    "head": [
-    "English",
+    "Meaning",
     "Chinese",
     "How"
    ],
@@ -42,7 +56,21 @@
      "这 + 是 + noun"
     ]
    ],
-   "caption": "‘To be’ in Chinese"
+   "caption": "‘To be’ in Chinese",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "obligatory"
+    },
+    {
+     "feature": "syn.beSplit",
+     "value": "different"
+    },
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -57,7 +85,13 @@
    "t": "callout",
    "kind": "pitfall",
    "title": "No 是 before adjectives",
-   "text": "我很好, 她很高 — adjectives act like verbs. *我是好 is a typical beginner’s mistake (adjectives come in S16)."
+   "text": "我很好, 她很高 — adjectives act like verbs. *我是好 is a typical beginner’s mistake (adjectives come in S16).",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
+   ]
   },
   {
    "t": "compare",
@@ -75,6 +109,12 @@
       "老师在这里。 The teacher is here.",
       "钥匙不在这里。 The keys are not here."
      ]
+    }
+   ],
+   "typology": [
+    {
+     "feature": "syn.beSplit",
+     "value": "different"
     }
    ]
   },
@@ -185,6 +225,108 @@
    ],
    "answer": "bú shì",
    "why": "不 becomes bú before the 4th tone."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek είμαι conjugates (είμαι, είσαι, είναι) and serves nouns, adjectives and places alike (είμαι φοιτητής, είμαι καλά, είμαι στο σπίτι). Chinese splits these: 是 before a noun, no verb before an adjective (我很好), 在 for a place (我在家)."
+  },
+  {
+   "for": "ru",
+   "rel": "trap",
+   "text": "Russian drops ‘to be’ in the present (Я студент), but Chinese needs 是 between two nouns: 我是学生. Before an adjective Chinese drops it as Russian does (Она высокая ~ 她很高). And ‘there is’ (есть) is 有, not 是."
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "Spanish already splits ‘to be’: ser for what something is (soy estudiante ~ 我是学生), estar for where it is (estoy en casa ~ 我在家). Chinese adds a third way: before an adjective there is no verb at all (estoy cansado ~ 我很累)."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English uses ‘be’ for nouns (I am a student), adjectives (I am tired) and places (I am at home). Chinese uses three patterns: 我是学生, 我很累 (no verb), 我在家."
+  },
+  {
+   "for": "fr",
+   "rel": "different",
+   "text": "French être covers c’est un livre, je suis fatigué and je suis à la maison; Chinese splits them into 这是书, 我很累 (no verb) and 我在家."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German sein conjugates (bin, bist, ist) and serves nouns, adjectives and places; Chinese 是 is only for nouns, adjectives take no verb (ich bin müde ~ 我很累), and being somewhere is 在 (ich bin zu Hause ~ 我在家)."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi ends such sentences with है / हूँ / हैं, which change with person (मैं छात्र हूँ ‘I am a student’), and uses them with adjectives too. Chinese 是 stands between the nouns, never changes, and is left out before adjectives."
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian -am / -i / ast change with person (man dāneshjuam ‘I am a student’) and also stand after adjectives (khasteam ‘I’m tired’). Chinese 是 never changes and is left out before adjectives: 我很累."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi आहे comes at the end and serves nouns, adjectives and places (मी विद्यार्थी आहे, मी घरी आहे). Chinese 是 stands between the nouns, never changes, and has two partners: no verb before adjectives, 在 for places."
+  },
+  {
+   "for": "ar",
+   "rel": "trap",
+   "text": "Arabic has no ‘is’ in the present (anā ṭālib ‘I am a student’), and kāna changes with person and tense. Chinese needs 是 between two nouns, in every tense, and it never changes; before adjectives Chinese, like Arabic, has no verb."
+  },
+  {
+   "for": "he",
+   "rel": "trap",
+   "text": "Hebrew leaves out ‘to be’ in the present (ani student, ha-bayit gadol) and uses haya in the past and future. Chinese links two nouns with 是 in every tense; with adjectives it agrees with Hebrew — no verb (房子很大)."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish makes ‘to be’ an ending on the noun (öğrenciyim ‘I am a student’) and leaves it out in the 3rd person (o öğrenci). Chinese uses the separate word 是 in every person (他是学生), and ‘I am at home’ (evdeyim) is the verb 在: 我在家."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese i-adjectives are predicates by themselves (高い ‘is tall’), just as Chinese 他很高 needs no 是. だ / です after a noun matches 是; いる / ある for being somewhere match 在."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean descriptive verbs (크다 ‘be big’) need no copula, like Chinese adjectives; 이다 (학생이에요) matches 是. Korean 있다 is both ‘be at’ and ‘have’ — Chinese splits these into 在 and 有."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish olla serves everything and conjugates (olen opiskelija, olen väsynyt, olen kotona). Chinese splits it: 是 + noun, a bare adjective with 很, 在 + place."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian leaves out ‘is’ in the 3rd person before nouns and adjectives (Ő tanár, A ház nagy) but uses van for a place (otthon van). Chinese leaves it out before adjectives in every person (我很好), keeps 是 before nouns, and 在 does the work of van."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili ni is an unchanging copula like 是 (mimi ni mwalimu ‘I am a teacher’), but it also stands before adjectives (yeye ni mrefu ‘he is tall’), where Chinese has no verb (他很高). Being somewhere is -ko (yuko nyumbani ‘he is at home’) — 在 in Chinese."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda -li ‘be’ takes the person prefix (ndi ‘I am’, oli ‘you are’, ali ‘he / she is’) and serves qualities and places. Chinese has one unchanging 是 for nouns, no verb before adjectives, and 在 for places."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese works the same way: là before a noun (tôi là sinh viên ~ 我是学生), no verb before an adjective (tôi mệt ~ 我很累), and ở for a place (tôi ở nhà ~ 我在家)."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut makes ‘be a teacher’ one verb word: a ‘be’ suffix on the noun plus the person ending. Chinese keeps three separate, unchanging words: 我 + 是 + 老师."
   }
  ],
  "seeAlso": [

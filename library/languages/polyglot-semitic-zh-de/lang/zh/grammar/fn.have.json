@@ -1,13 +1,23 @@
 {
  "function": "fn.have",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "syn.have",
+   "value": "topic"
+  },
+  {
+   "feature": "verb.subjectAgreement",
+   "value": "none"
+  }
+ ],
  "summary": "‘To have’ is the verb 有 yǒu: 我有一个哥哥 ‘I have an elder brother’. 有 never changes — the same for every person and every time — and with a place first it means ‘there is / there are’: 这里有很多人 ‘there are many people here’. Its negation is irregular, 没有 (S08), never *不有.",
  "blocks": [
   {
    "t": "table",
    "head": [
     "Chinese",
-    "English",
+    "Meaning",
     "German"
    ],
    "rows": [
@@ -42,7 +52,13 @@
      "sie haben"
     ]
    ],
-   "caption": "One form for everybody"
+   "caption": "One form for everybody",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "none"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -78,13 +94,29 @@
       "我妈妈在那里 ‘my mother is over there’"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "topic"
+    },
+    {
+     "feature": "syn.beSplit",
+     "value": "different"
+    }
    ]
   },
   {
    "t": "callout",
-   "kind": "analogy",
-   "title": "Like Russian and Turkish",
-   "text": "Russian у меня есть and Turkish bende var / kardeşim var say ‘there is (to me)’; Chinese uses one verb, 有, for both ‘have’ and ‘there is’."
+   "kind": "key",
+   "title": "One verb for ‘have’ and ‘there is’",
+   "text": "有 means ‘have’ when an owner comes first (我有两个弟弟) and ‘there is’ when a place comes first (这里有很多人) — one verb, read from what stands before it.",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "topic"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -197,6 +229,108 @@
    ],
    "answer": "口",
    "why": "Family members are counted with 口."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek έχω ‘have’ conjugates (έχω, έχεις, έχει), and ‘there is’ is υπάρχει (in speech also έχει: έχει ψωμί;). Chinese 有 does both and never changes: 我有面包, 这里有面包. Negation: δεν έχω ~ 没有, never *不有."
+  },
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "Russian у меня есть ‘at me there is’ uses one word, есть, for ‘have’ and ‘there is’ (Здесь есть кафе) — so does Chinese 有. нет (у меня нет …) ~ 没有: both negate ‘have’ and ‘there is’ with a special form."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish has tener ‘have’ and hay ‘there is’; Chinese uses 有 for both: tengo dos hermanos ~ 我有两个哥哥, hay mucha gente ~ 这里有很多人."
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English has two constructions, ‘I have’ and ‘there is’; Chinese has one verb, 有, with the owner or the place first: 我有书 / 桌子上有书. ‘There is’ never uses 是: *这里是很多人."
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "French il y a ‘there is’ already uses avoir ‘have’; Chinese goes all the way: 有 is ‘have’ and ‘there is’ (j’ai un frère ~ 我有一个哥哥, il y a beaucoup de monde ~ 这里有很多人)."
+  },
+  {
+   "for": "de",
+   "rel": "different",
+   "text": "German haben and es gibt are two constructions; Chinese 有 covers both: ich habe ein Buch ~ 我有一本书, hier gibt es viele Leute ~ 这里有很多人."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi says ‘near me is a car’ (मेरे पास कार है) and ‘my two brothers are’ (मेरे दो भाई हैं); Chinese uses one verb with the owner as subject: 我有一辆车, 我有两个哥哥."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian dāshtan ‘have’ (dāram, dāri) ~ 有, but conjugated; ‘there is’ is hast. Chinese uses 有 for both and never changes it."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi says ‘with me is a book’ (माझ्याकडे पुस्तक आहे) and ‘to me is a brother’ (मला एक भाऊ आहे); Chinese makes the owner the subject of 有: 我有一本书, 我有一个哥哥."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic has no verb ‘have’: ʿindī kitāb ‘at me (is) a book’, and hunāka for ‘there is’. Chinese uses the verb 有 for both, with the owner as subject: 我有一本书."
+  },
+  {
+   "for": "he",
+   "rel": "similar",
+   "text": "Hebrew yesh li ‘there is to me’ uses yesh for ‘have’ and ‘there is’ and ein for both negatives — just like 有 / 没有. The difference: Chinese makes the owner the subject (我有), Hebrew puts him after le- (li)."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish var / yok cover ‘there is’ and ‘have’ (kardeşim var ‘I have a brother’, burada çay var ‘there is tea here’) — Chinese 有 / 没有 work the same way, but the owner is a plain subject: 我有一个哥哥."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese ある / いる mean ‘there is’ and also ‘have’ (車がある ‘I have a car’), split by animacy (いる for people and animals). Chinese 有 serves for everything, living or not."
+  },
+  {
+   "for": "ko",
+   "rel": "trap",
+   "text": "Korean 있다 is ‘there is’, ‘have’ and also ‘be at’ (학교에 있어요 ‘is at school’); Chinese splits it: 有 for ‘have / there is’, 在 for ‘be at’ (他在学校)."
+  },
+  {
+   "for": "fi",
+   "rel": "different",
+   "text": "Finnish says ‘at me is a car’ (minulla on auto); Chinese says ‘I have a car’, with the owner as subject: 我有一辆车."
+  },
+  {
+   "for": "hu",
+   "rel": "different",
+   "text": "Hungarian says ‘to me is my car’ (nekem van autóm) and has a special negative, nincs; Chinese has a plain verb ‘have’, 有, and a special negative, 没有."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "Swahili ‘have’ is ‘be with’: nina gari ‘I have a car’, sina ‘I don’t have’; ‘there is’ is kuna. Chinese uses one verb for both, 有, and one negative, 没有."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda ‘have’ is ‘be with’ (nnina ‘I have’), with the person prefix; Chinese has one unchanging verb, 有."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese có is ‘have’ and ‘there is’, exactly like 有: tôi có hai anh trai ~ 我有两个哥哥, ở đây có nhiều người ~ 这里有很多人."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut expresses ‘have’ with a suffix on the noun, inside one verb word (‘brother-have-I’). Chinese keeps separate words: 我 + 有 + 一个哥哥."
   }
  ],
  "seeAlso": [

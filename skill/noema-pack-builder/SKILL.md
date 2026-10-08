@@ -134,7 +134,7 @@ back `<subject_id>.noema.zip`.
 
 ## Language courses (🌍 Languages)
 Foreign-language courses are not subject packs. **Read `references/LANGUAGE_RULES.md` first — it is binding for every
-task on a language course** (the short form of decisions D1–D17; with the connector: `noema_authoring_guide` part
+task on a language course** (the short form of decisions D1–D19; with the connector: `noema_authoring_guide` part
 "languages"); the full contract is `references/LANGUAGES.md`. Courses are checked with `tools/validate_lang.py`,
 `tools/lang_refcheck.py` and `tools/lang_phenomena.py`. The hard rules, in short:
 1. **A new language starts with its catalogue of phenomena** (`library/languages/_phenomena/<code>.json`, §4.11): every
@@ -148,6 +148,8 @@ task on a language course** (the short form of decisions D1–D17; with the conn
 4. **Every distinct meaning of a word is its own concept** (D15) — pending until a node teaches it; nuances say `of` the sense.
 5. **One common order of subjects across all languages** (D13, §4.4.3): never teach a subject earlier or later in one language.
 6. **No built-in point of view** (D16): describe a language for a learner of ANY background — its typological profile (`_typology/languages.json`) and phenomena tagged with feature values, covering everything it has or lacks; never "unlike English…". What is new for a learner is computed from their languages.
+8. **Comparison notes, not inline comparisons** (D16, D18): general texts name no outside language; every grammar page gets `notes` for at least 8 languages of the reference set (`_typology/reference.json`), covering all four types.
+9. **Vocabulary is its own track** (D19): sentences for the other aspects may hold up to ⌈30 %⌉ unknown words (each in the lexicon with its full facade); every field you write brings ≥ 2 sentences for every non-vocabulary node before it.
 7. **The course never ends** (D17): foundations → core C01–C48 → open-ended advanced modules, each placed on the common order.
 
 ## Updating an existing subject (additive only)

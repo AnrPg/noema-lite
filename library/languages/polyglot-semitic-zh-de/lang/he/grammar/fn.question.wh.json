@@ -1,7 +1,13 @@
 {
  "function": "fn.question.wh",
  "status": "realized",
- "summary": "A Hebrew question with a question word is the statement with the question word put first: הַנֶּהָג פֹּה “the driver is here” → אֵיפֹה הַנֶּהָג? “where is the driver?”. There is no helper verb like English “do” and, in the present, no “is / are” at all: מָה אַתָּה רוֹצֶה? “what (do) you want?”, מִי הִיא? “who (is) she?”. The question words: מָה what, מִי who, אֵיפֹה where (לְאָן where to, מֵאֵיפֹה where from), מָתַי when, אֵיךְ how, לָמָּה why (everyday) and מַדּוּעַ why (formal), כַּמָּה how many / how much (with a plural noun), אֵיזֶה / אֵיזוֹ / אֵילוּ which (agreeing with the noun, which follows it), and the two-word שֶׁל מִי whose. A preposition always goes in front of the question word, never to the end of the sentence: עִם מִי? “who with?”, מֵאֵיפֹה? “where from?”, לְמִי? “to whom?”. In speech the question word may also stay at the end as an echo (הַתִּיק שֶׁל מִי?), but the normal place is first.",
+ "typology": [
+  {
+   "feature": "syn.whPosition",
+   "value": "fronted"
+  }
+ ],
+ "summary": "A Hebrew question with a question word is the statement with the question word put first: הַנֶּהָג פֹּה “the driver is here” → אֵיפֹה הַנֶּהָג? “where is the driver?”. There is no auxiliary verb and, in the present, no “is / are” at all: מָה אַתָּה רוֹצֶה? “what (do) you want?”, מִי הִיא? “who (is) she?”. The question words: מָה what, מִי who, אֵיפֹה where (לְאָן where to, מֵאֵיפֹה where from), מָתַי when, אֵיךְ how, לָמָּה why (everyday) and מַדּוּעַ why (formal), כַּמָּה how many / how much (with a plural noun), אֵיזֶה / אֵיזוֹ / אֵילוּ which (agreeing with the noun, which follows it), and the two-word שֶׁל מִי whose. A preposition always goes in front of the question word, never to the end of the sentence: עִם מִי? “who with?”, מֵאֵיפֹה? “where from?”, לְמִי? “to whom?”. In speech the question word may also stay at the end as an echo (הַתִּיק שֶׁל מִי?), but the normal place is first.",
  "blocks": [
   {
    "t": "table",
@@ -57,7 +63,13 @@
      "שֶׁל מִי הַתִּיק הַזֶּה? — Whose bag is this?"
     ]
    ],
-   "caption": "The question words of lesson 10 — each goes first in its question."
+   "caption": "The question words of lesson 10 — each goes first in its question.",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    }
+   ]
   },
   {
    "t": "table",
@@ -99,13 +111,23 @@
      "in which street?"
     ]
    ],
-   "caption": "The preposition comes first — Hebrew never leaves it at the end, as English does (“Who is it for?”)."
+   "caption": "The preposition comes first — it is never left at the end of the question."
   },
   {
    "t": "callout",
    "kind": "key",
    "title": "Question word first — then the statement",
-   "text": "Take the statement, put the question word in front, and change nothing else: הִיא רוֹצָה קָפֶה → מָה הִיא רוֹצָה? No “do”, no inversion, and no “is” in the present."
+   "text": "Take the statement, put the question word in front, and change nothing else: הִיא רוֹצָה קָפֶה → מָה הִיא רוֹצָה? No “do”, no inversion, and no “is” in the present.",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    },
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -149,19 +171,19 @@
      ]
     },
     {
-     "title": "Chinese · Turkish",
+     "title": "Chinese",
      "points": [
-      "司机在哪儿？ · Şoför nerede?",
+      "司机在哪儿？",
       "the question word stays where the answer would be"
      ]
     }
+   ],
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    }
    ]
-  },
-  {
-   "t": "callout",
-   "kind": "tip",
-   "title": "For you",
-   "text": "Greek, Russian and German also put the question word first (Πού είναι ο οδηγός; Где водитель? Wo ist der Fahrer?) — Hebrew is like Russian here: no verb “is” at all. Turkish keeps the question word in place (Şoför nerede?); Hebrew does not."
   },
   {
    "t": "ask",
@@ -327,6 +349,108 @@
    "lang": "zh",
    "fn": "fn.question.wh",
    "note": "Chinese leaves the question word where the answer goes (你去哪儿？); Hebrew moves it to the front."
+  }
+ ],
+ "notes": [
+  {
+   "for": "ru",
+   "rel": "similar",
+   "text": "As in Russian, the question word comes first and there is no “is” in the present (Где водитель? ~ אֵיפֹה הַנֶּהָג?). Куда / откуда match לְאָן / מֵאֵיפֹה."
+  },
+  {
+   "for": "el",
+   "rel": "similar",
+   "text": "Greek also puts the question word first (Πού είναι ο οδηγός;); Hebrew has no verb “is” in the present: אֵיפֹה הַנֶּהָג?"
+  },
+  {
+   "for": "es",
+   "rel": "similar",
+   "text": "As in Spanish, the question word goes first and a preposition goes before it (¿con quién? ~ עִם מִי?); unlike Spanish, there is no verb “is” in the present: אֵיפֹה הַנֶּהָג?"
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English uses “do” and can leave a preposition at the end (“Who is it for?”); Hebrew has no “do”, no “is” in the present, and the preposition always goes first: בִּשְׁבִיל מִי?"
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "As in French, the question word comes first and a preposition stays with it (avec qui ? ~ עִם מִי?); Hebrew needs no est-ce que and no inversion."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German also puts the question word first and has wo / wohin / woher ~ אֵיפֹה / לְאָן / מֵאֵיפֹה; but Hebrew does not put the verb second — the statement order stays."
+  },
+  {
+   "for": "hi",
+   "rel": "different",
+   "text": "Hindi keeps the question word in place (ड्राइवर कहाँ है?); Hebrew puts it first: אֵיפֹה הַנֶּהָג?"
+  },
+  {
+   "for": "fa",
+   "rel": "different",
+   "text": "Persian usually keeps the question word where the answer would be (راننده کجاست؟); Hebrew moves it to the front."
+  },
+  {
+   "for": "mr",
+   "rel": "different",
+   "text": "Marathi keeps the question word where the answer goes (ड्रायव्हर कुठे आहे?); Hebrew puts it first and adds no verb."
+  },
+  {
+   "for": "ar",
+   "rel": "same",
+   "text": "Arabic also puts the question word first (أَيْنَ السَّائِقُ؟) and needs no verb in the present; several words are cognates: מִי ~ مَنْ, מָה ~ مَا, כַּמָּה ~ كَمْ — but كَمْ takes a singular noun and כַּמָּה a plural."
+  },
+  {
+   "for": "tr",
+   "rel": "different",
+   "text": "Turkish keeps the question word in place (Şoför nerede?); Hebrew moves it to the front: אֵיפֹה הַנֶּהָג?"
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "Japanese keeps the question word in place and adds か (運転手はどこですか); Hebrew puts it first and adds nothing."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean keeps the question word in place (운전기사는 어디에 있어요?); Hebrew puts it first."
+  },
+  {
+   "for": "fi",
+   "rel": "same",
+   "text": "Finnish also puts the question word first (Missä kuljettaja on?) and has three “where” words like Hebrew: missä / mihin / mistä ~ אֵיפֹה / לְאָן / מֵאֵיפֹה."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian puts the question word first, right before the verb (Hol van a sofőr?), and has hol / hova / honnan ~ אֵיפֹה / לְאָן / מֵאֵיפֹה."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili keeps the question word in place, often after the verb (dereva yuko wapi?); Hebrew puts it first."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda usually keeps the question word after the verb (ogenda wa? “where are you going?”); Hebrew puts it first: לְאָן אַתָּה הוֹלֵךְ?"
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese keeps the question word where the answer goes (司机在哪儿？); Hebrew moves it to the front and needs no 在."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese keeps the question word in place (tài xế ở đâu?); Hebrew moves it to the front."
+  },
+  {
+   "for": "iu",
+   "rel": "different",
+   "text": "Inuktitut question words (kina “who”, suna “what”) take case endings, and the verb takes an interrogative ending; Hebrew puts the question word first and leaves the verb unchanged."
   }
  ]
 }

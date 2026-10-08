@@ -1,6 +1,12 @@
 {
  "function": "fn.imperative",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "prag.politePronouns",
+   "value": "binary"
+  }
+ ],
  "summary": "German has three imperative forms, one for each way of saying “you”. To one person you say du to: the stem, often without an ending – Geh! Komm! Warte! (Gehe! with -e is correct but formal or old-fashioned; after -t / -d the -e is needed: Warte!). To several people you say ihr to: the ihr form of the present without ihr – Geht! Kommt! Wartet! To one or more people you say Sie to: the infinitive form + Sie, verb first – Gehen Sie! Kommen Sie! Warten Sie! (the pronoun is never left out). The verb stands first and the sentence ends with an exclamation mark. Verbs that change e to i / ie in the present keep it and drop the -e: essen → Iss! (du isst), nehmen → Nimm!, lesen → Lies!; verbs that change a to ä do NOT keep the umlaut: fahren → Fahr! (du fährst), laufen → Lauf! (du läufst). A separable particle goes to the end: Komm herein! Geh weg! Kommen Sie bitte zurück! sein is irregular: Sei …! Seid …! Seien Sie …! bitte (please), mal and doch make a command softer: Komm doch mal her! – and nicht makes it negative: Geh nicht weg! “Let’s …” is the wir form with the verb first: Gehen wir! Signs and recipes often use the bare infinitive: Bitte nicht rauchen! Langsam fahren!",
  "blocks": [
   {
@@ -73,7 +79,13 @@
      "Kommen Sie herein!"
     ]
    ],
-   "caption": "The three imperatives"
+   "caption": "The three imperatives",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
+   ]
   },
   {
    "t": "flow",
@@ -88,7 +100,13 @@
    "t": "callout",
    "kind": "key",
    "title": "Who are you talking to?",
-   "text": "One friend → Komm! · several friends → Kommt! · anyone you call Sie (one or many) → Kommen Sie!"
+   "text": "One friend → Komm! · several friends → Kommt! · anyone you call Sie (one or many) → Kommen Sie!",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
+   ]
   },
   {
    "t": "callout",
@@ -113,25 +131,6 @@
    "kind": "tip",
    "title": "Separable verbs",
    "text": "The particle closes the command: Komm herein! Geh weg! Kommen Sie bitte zurück!"
-  },
-  {
-   "t": "compare",
-   "items": [
-    {
-     "title": "Greek and Russian",
-     "points": [
-      "two forms: πήγαινε / πηγαίνετε, иди / идите – the polite form is the plural form",
-      "German has a separate polite form with the pronoun: Gehen Sie!"
-     ]
-    },
-    {
-     "title": "Turkish",
-     "points": [
-      "git (one friend), gidin (several / polite), gidiniz (more formal)",
-      "German: Geh! – Geht! – Gehen Sie!"
-     ]
-    }
-   ]
   }
  ],
  "procedure": {
@@ -328,6 +327,98 @@
    "lang": "de",
    "fn": "fn.greetings",
    "note": "du / ihr / Sie: the same choice of address decides the imperative."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "different",
+   "text": "Greek has two forms (πήγαινε / πηγαίνετε), and the polite one is the plural; German has a third, separate polite form with its pronoun: Gehen Sie!"
+  },
+  {
+   "for": "ru",
+   "rel": "different",
+   "text": "иди / идите – the polite form is the plural; German has Geh! / Geht! and a separate Gehen Sie! with the pronoun."
+  },
+  {
+   "for": "es",
+   "rel": "different",
+   "text": "Spanish has ve / id and vaya / vayan for usted / ustedes, and changes the form in the negative (no vayas); German adds only nicht: Geh nicht!"
+  },
+  {
+   "for": "en",
+   "rel": "different",
+   "text": "English has one form (Go!) for everyone; German has three: Geh! Geht! Gehen Sie! “Let’s go” is Gehen wir!"
+  },
+  {
+   "for": "fr",
+   "rel": "similar",
+   "text": "va / allez / allons match Geh / Geht – Gehen Sie / Gehen wir; but German Sie keeps its pronoun: Gehen Sie!"
+  },
+  {
+   "for": "hi",
+   "rel": "similar",
+   "text": "Three forms by politeness – jā (tū), jāo (tum), jāiye (āp) – like Geh! / Geht! / Gehen Sie!"
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "boro (to) / beravid (šomā) match Geh! / Gehen Sie!; German has a further plural Geht! for ihr."
+  },
+  {
+   "for": "ar",
+   "rel": "different",
+   "text": "Arabic imperatives change for gender and number, the dual included (idhhab, idhhabī, idhhabā, idhhabū); German changes only for du, ihr and Sie."
+  },
+  {
+   "for": "he",
+   "rel": "different",
+   "text": "lech / lechi / lechu change for gender and number (speech often uses the future: telech); German changes only for du / ihr / Sie."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "git (one friend), gidin (several or polite), gidiniz (more formal) – German: Geh! – Geht! – Gehen Sie!"
+  },
+  {
+   "for": "ja",
+   "rel": "different",
+   "text": "A polite request is -te kudasai (itte kudasai); the plain imperative (ike) sounds rough. German Gehen Sie! is a neutral polite form, softened with bitte."
+  },
+  {
+   "for": "ko",
+   "rel": "different",
+   "text": "Korean shows politeness in the ending (gaseyo); German switches to the Sie form: Gehen Sie!"
+  },
+  {
+   "for": "fi",
+   "rel": "similar",
+   "text": "mene (sinä) / menkää (te, also polite): like Geh! / Geht!, but German has its own polite form, Gehen Sie!"
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "menj (te), menjetek (ti), menjen (ön): the polite form is 3rd person, as German Gehen Sie! uses the form of “they”."
+  },
+  {
+   "for": "sw",
+   "rel": "similar",
+   "text": "nenda (one), nendeni (several); politeness comes with tafadhali (bitte). German adds a polite form, Gehen Sie!"
+  },
+  {
+   "for": "zh",
+   "rel": "different",
+   "text": "Chinese has no imperative form: the verb alone, 请 (请进 = Kommen Sie herein!) or 吧 (走吧 = Gehen wir!). German changes the verb for du, ihr and Sie."
+  },
+  {
+   "for": "vi",
+   "rel": "different",
+   "text": "Vietnamese uses the verb with đi or hãy (ăn đi!) and mời for polite invitations; German changes the verb form: Iss! Esst! Essen Sie!"
+  },
+  {
+   "for": "iu",
+   "rel": "similar",
+   "text": "Inuktitut has imperative endings for one, two and several people; German has no dual, but it adds a polite form: Geh! Geht! Gehen Sie!"
   }
  ]
 }

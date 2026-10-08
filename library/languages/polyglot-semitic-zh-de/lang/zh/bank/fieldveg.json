@@ -1,0 +1,2448 @@
+{
+ "sentences": [
+  {
+   "id": "zh.fv.001",
+   "frame": "fr.want",
+   "text": "你好！我要两个西红柿。",
+   "tokens": [
+    {
+     "t": "你好",
+     "l": "zh:nihao"
+    },
+    {
+     "t": "！",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.object",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "Hello! I’d like two tomatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.002",
+   "frame": "fr.command",
+   "text": "请给我三根黄瓜，谢谢！",
+   "tokens": [
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "给",
+     "l": "zh:gei"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "谢谢",
+     "l": "zh:xiexie"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.imperative",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "Three cucumbers, please — thank you!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.003",
+   "frame": "fr.have",
+   "text": "对不起，今天没有土豆了。",
+   "tokens": [
+    {
+     "t": "对不起",
+     "l": "zh:duibuqi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "没",
+     "l": "zh:mei"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.negation",
+    "fn.have",
+    "fn.aspect",
+    "fn.time.day"
+   ],
+   "gloss": "Sorry, there are no potatoes left today.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.004",
+   "frame": "fr.wh",
+   "text": "您好！您要几根胡萝卜？",
+   "tokens": [
+    {
+     "t": "您好",
+     "l": "zh:ninhao"
+    },
+    {
+     "t": "！",
+     "p": true
+    },
+    {
+     "t": "您",
+     "l": "zh:nin"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.greetings",
+    "fn.pronoun.subject",
+    "fn.question.wh",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "Hello! How many carrots would you like?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.005",
+   "frame": "fr.this.is",
+   "text": "这是芋头，不是土豆。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "芋头",
+     "l": "zh:yutou"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.demonstrative",
+    "fn.negation"
+   ],
+   "gloss": "This is taro, not potato.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.006",
+   "frame": "fr.place.on",
+   "text": "西兰花在冰箱里。",
+   "tokens": [
+    {
+     "t": "西兰花",
+     "l": "zh:xilanhua"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "冰箱",
+     "l": "zh:bingxiang"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.prep.place"
+   ],
+   "gloss": "The broccoli is in the fridge.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.007",
+   "frame": "fr.be.person",
+   "text": "我爷爷是农民，他有很多土豆。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "爷爷",
+     "l": "zh:yeye"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "农民",
+     "l": "zh:nongmin"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.copula",
+    "fn.possessive",
+    "fn.have",
+    "fn.numerals",
+    "fn.pronoun.subject"
+   ],
+   "gloss": "My grandpa is a farmer; he has lots of potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.008",
+   "frame": "fr.adj.pred",
+   "text": "这个南瓜很大。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.adjective"
+   ],
+   "gloss": "This pumpkin is big.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.009",
+   "frame": "fr.poss",
+   "text": "那些豆芽是谁的？",
+   "tokens": [
+    {
+     "t": "那些",
+     "l": "zh:naxie"
+    },
+    {
+     "t": "豆芽",
+     "l": "zh:douya"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "谁的",
+     "l": "zh:sheide"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.question.wh",
+    "fn.possessive"
+   ],
+   "gloss": "Whose bean sprouts are those?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.010",
+   "frame": "fr.have",
+   "text": "这里有玉米吗？",
+   "tokens": [
+    {
+     "t": "这里",
+     "l": "zh:zheli"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.have",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is there any corn here?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.011",
+   "frame": "fr.eat",
+   "text": "我买了两头大蒜和一块姜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "头",
+     "l": "zh:tou"
+    },
+    {
+     "t": "大蒜",
+     "l": "zh:dasuan"
+    },
+    {
+     "t": "和",
+     "l": "zh:he"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "块",
+     "l": "zh:kuai"
+    },
+    {
+     "t": "姜",
+     "l": "zh:jiang"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.object",
+    "fn.aspect",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "I bought two heads of garlic and a piece of ginger.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.012",
+   "frame": "fr.place.on",
+   "text": "冰箱里有五颗洋葱。",
+   "tokens": [
+    {
+     "t": "冰箱",
+     "l": "zh:bingxiang"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "颗",
+     "l": "zh:ke.round"
+    },
+    {
+     "t": "洋葱",
+     "l": "zh:yangcong"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "There are five onions in the fridge.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.013",
+   "frame": "fr.want",
+   "text": "我要一把菠菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "要",
+     "l": "zh:yao"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "把",
+     "l": "zh:ba"
+    },
+    {
+     "t": "菠菜",
+     "l": "zh:bocai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.object",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "I’d like a bunch of spinach.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.014",
+   "frame": "fr.have",
+   "text": "我们家有很多西红柿。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.have",
+    "fn.numerals"
+   ],
+   "gloss": "Our family has lots of tomatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.015",
+   "frame": "fr.have",
+   "text": "你家有黄瓜吗？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.have",
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you have cucumbers at home?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.016",
+   "frame": "fr.poss",
+   "text": "这是我的胡萝卜。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.demonstrative",
+    "fn.copula"
+   ],
+   "gloss": "This is my carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.017",
+   "frame": "fr.compare",
+   "text": "奶奶的南瓜比我们的大。",
+   "tokens": [
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "Grandma’s pumpkin is bigger than ours.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.018",
+   "frame": "fr.notlike.generic",
+   "text": "孩子们不喜欢吃苦瓜。",
+   "tokens": [
+    {
+     "t": "孩子",
+     "l": "zh:haizi"
+    },
+    {
+     "t": "们",
+     "l": "zh:men.pl"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "The children don’t like eating bitter melon.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.019",
+   "frame": "fr.day",
+   "text": "我们晚上在家吃土豆。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "晚上",
+     "l": "zh:wanshang"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "家",
+     "l": "zh:jia"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.time.day",
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "In the evening we eat potatoes at home.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.020",
+   "frame": "fr.at.place",
+   "text": "我妈妈在超市买菠菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "在",
+     "l": "zh:zai"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "菠菜",
+     "l": "zh:bocai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.possessive",
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "My mum buys spinach at the supermarket.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.021",
+   "frame": "fr.wh",
+   "text": "你想吃什么？土豆还是米饭？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "什么",
+     "l": "zh:shenme"
+    },
+    {
+     "t": "？",
+     "p": true
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "还是",
+     "l": "zh:haishi"
+    },
+    {
+     "t": "米饭",
+     "l": "zh:mifan"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.question.wh",
+    "fn.object"
+   ],
+   "gloss": "What would you like to eat? Potatoes or rice?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.022",
+   "frame": "fr.wh",
+   "text": "你买了几根黄瓜？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "几",
+     "l": "zh:ji"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.question.wh",
+    "fn.aspect",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "How many cucumbers did you buy?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.023",
+   "frame": "fr.wh",
+   "text": "你为什么不吃洋葱？",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "为什么",
+     "l": "zh:weishenme"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "洋葱",
+     "l": "zh:yangcong"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.question.wh",
+    "fn.negation",
+    "fn.object"
+   ],
+   "gloss": "Why don’t you eat onions?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.024",
+   "frame": "fr.from",
+   "text": "这些土豆是从市场买的。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "市场",
+     "l": "zh:shichang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.copula",
+    "fn.prep.core"
+   ],
+   "gloss": "These potatoes are from the market.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.025",
+   "frame": "fr.at.place",
+   "text": "我给妈妈买了一棵大白菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "给",
+     "l": "zh:gei"
+    },
+    {
+     "t": "妈妈",
+     "l": "zh:mama"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "大白菜",
+     "l": "zh:dabaicai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.prep.core",
+    "fn.aspect",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "I bought a napa cabbage for Mum.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.026",
+   "frame": "fr.at.place",
+   "text": "我跟奶奶一起吃玉米。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "跟",
+     "l": "zh:gen.with"
+    },
+    {
+     "t": "奶奶",
+     "l": "zh:nainai"
+    },
+    {
+     "t": "一起",
+     "l": "zh:yiqi"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.prep.core",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "I eat corn with Grandma.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.027",
+   "frame": "fr.place.on",
+   "text": "桌子上有一根西葫芦。",
+   "tokens": [
+    {
+     "t": "桌子",
+     "l": "zh:zhuozi"
+    },
+    {
+     "t": "上",
+     "l": "zh:shang"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "西葫芦",
+     "l": "zh:xihulu"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "There is a zucchini on the table.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.028",
+   "frame": "fr.place.on",
+   "text": "盘子里有三个土豆。",
+   "tokens": [
+    {
+     "t": "盘子",
+     "l": "zh:panzi"
+    },
+    {
+     "t": "里",
+     "l": "zh:li"
+    },
+    {
+     "t": "有",
+     "l": "zh:you"
+    },
+    {
+     "t": "三",
+     "l": "zh:san"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.place",
+    "fn.have",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "There are three potatoes on the plate.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.029",
+   "frame": "fr.go.to",
+   "text": "我们去市场买西红柿吧！",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "市场",
+     "l": "zh:shichang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.direction",
+    "fn.imperative",
+    "fn.object"
+   ],
+   "gloss": "Let’s go to the market and buy tomatoes!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.030",
+   "frame": "fr.go.to",
+   "text": "爸爸从超市回来了，他买了很多胡萝卜。",
+   "tokens": [
+    {
+     "t": "爸爸",
+     "l": "zh:baba"
+    },
+    {
+     "t": "从",
+     "l": "zh:cong.from"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "回来",
+     "l": "zh:huilai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.direction",
+    "fn.prep.core",
+    "fn.aspect",
+    "fn.pronoun.subject",
+    "fn.object",
+    "fn.numerals"
+   ],
+   "gloss": "Dad is back from the supermarket — he bought lots of carrots.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.031",
+   "frame": "fr.go.to",
+   "text": "我骑自行车去市场买玉米。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "骑",
+     "l": "zh:qi.ride"
+    },
+    {
+     "t": "自行车",
+     "l": "zh:zixingche"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "市场",
+     "l": "zh:shichang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.direction",
+    "fn.object"
+   ],
+   "gloss": "I cycle to the market to buy corn.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.032",
+   "frame": "fr.command",
+   "text": "别吃这个辣椒！",
+   "tokens": [
+    {
+     "t": "别",
+     "l": "zh:bie"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "辣椒",
+     "l": "zh:lajiao"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "Don’t eat this chili!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.033",
+   "frame": "fr.command",
+   "text": "请吃玉米！",
+   "tokens": [
+    {
+     "t": "请",
+     "l": "zh:qing"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "！",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.imperative",
+    "fn.greetings",
+    "fn.object"
+   ],
+   "gloss": "Please have some corn!",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.034",
+   "frame": "fr.command",
+   "text": "你买两个洋葱吧。",
+   "tokens": [
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "两",
+     "l": "zh:liang"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "洋葱",
+     "l": "zh:yangcong"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.imperative",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "Buy two onions.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.035",
+   "frame": "fr.day",
+   "text": "星期六我们去市场买土豆。",
+   "tokens": [
+    {
+     "t": "星期六",
+     "l": "zh:xingqiliu"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "市场",
+     "l": "zh:shichang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.pronoun.subject",
+    "fn.direction",
+    "fn.object"
+   ],
+   "gloss": "On Saturday we go to the market to buy potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.036",
+   "frame": "fr.day",
+   "text": "我每天早上吃一根黄瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "每",
+     "l": "zh:mei.every"
+    },
+    {
+     "t": "天",
+     "l": "zh:tian"
+    },
+    {
+     "t": "早上",
+     "l": "zh:zaoshang"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.time.day",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "Every morning I eat a cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.037",
+   "frame": "fr.day",
+   "text": "今天中午我们吃茄子。",
+   "tokens": [
+    {
+     "t": "今天",
+     "l": "zh:jintian"
+    },
+    {
+     "t": "中午",
+     "l": "zh:zhongwu"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "茄子",
+     "l": "zh:qiezi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.time.day",
+    "fn.pronoun.subject",
+    "fn.object"
+   ],
+   "gloss": "Today at noon we’re having eggplant.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.038",
+   "frame": "fr.eat",
+   "text": "我吃过苦瓜，不喜欢。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "过",
+     "l": "zh:guo"
+    },
+    {
+     "t": "苦瓜",
+     "l": "zh:kugua"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.aspect",
+    "fn.object",
+    "fn.negation"
+   ],
+   "gloss": "I’ve had bitter melon before — I don’t like it.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.039",
+   "frame": "fr.eat",
+   "text": "他正在吃玉米。",
+   "tokens": [
+    {
+     "t": "他",
+     "l": "zh:ta.he"
+    },
+    {
+     "t": "正在",
+     "l": "zh:zhengzai"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.aspect",
+    "fn.object"
+   ],
+   "gloss": "He is eating corn.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.040",
+   "frame": "fr.time",
+   "text": "秋天我们吃很多南瓜。",
+   "tokens": [
+    {
+     "t": "秋天",
+     "l": "zh:qiutian"
+    },
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.pronoun.subject",
+    "fn.numerals",
+    "fn.object"
+   ],
+   "gloss": "In autumn we eat a lot of pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.041",
+   "frame": "fr.time",
+   "text": "吃饭以前，我买了一些生菜。",
+   "tokens": [
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "饭",
+     "l": "zh:fan"
+    },
+    {
+     "t": "以前",
+     "l": "zh:yiqian.before"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "一些",
+     "l": "zh:yixie"
+    },
+    {
+     "t": "生菜",
+     "l": "zh:shengcai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.pronoun.subject",
+    "fn.aspect",
+    "fn.numerals",
+    "fn.object"
+   ],
+   "gloss": "Before the meal I bought some lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.042",
+   "frame": "fr.compare",
+   "text": "七月的西红柿最便宜。",
+   "tokens": [
+    {
+     "t": "七月",
+     "l": "zh:qiyue"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "最",
+     "l": "zh:zui"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.comparison",
+    "fn.adjective"
+   ],
+   "gloss": "Tomatoes are cheapest in July.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.043",
+   "frame": "fr.time",
+   "text": "五点半我去超市买土豆。",
+   "tokens": [
+    {
+     "t": "五",
+     "l": "zh:wu"
+    },
+    {
+     "t": "点",
+     "l": "zh:dian"
+    },
+    {
+     "t": "半",
+     "l": "zh:ban"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "去",
+     "l": "zh:qu"
+    },
+    {
+     "t": "超市",
+     "l": "zh:chaoshi"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.prep.time",
+    "fn.numerals",
+    "fn.pronoun.subject",
+    "fn.direction",
+    "fn.object"
+   ],
+   "gloss": "At half past five I’m going to the supermarket to buy potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.044",
+   "frame": "fr.compare",
+   "text": "红甜椒比绿甜椒贵。",
+   "tokens": [
+    {
+     "t": "红",
+     "l": "zh:hong"
+    },
+    {
+     "t": "甜椒",
+     "l": "zh:tianjiao"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "绿",
+     "l": "zh:lv"
+    },
+    {
+     "t": "甜椒",
+     "l": "zh:tianjiao"
+    },
+    {
+     "t": "贵",
+     "l": "zh:gui"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.adjective",
+    "fn.comparison"
+   ],
+   "gloss": "Red peppers are dearer than green ones.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.045",
+   "frame": "fr.adj.attr",
+   "text": "我想买一个大南瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "想",
+     "l": "zh:xiang"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "个",
+     "l": "zh:ge"
+    },
+    {
+     "t": "大",
+     "l": "zh:da"
+    },
+    {
+     "t": "南瓜",
+     "l": "zh:nangua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.adjective",
+    "fn.numerals",
+    "fn.measure.word",
+    "fn.object"
+   ],
+   "gloss": "I want to buy a big pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.046",
+   "frame": "fr.adj.pred",
+   "text": "这些西红柿很便宜。",
+   "tokens": [
+    {
+     "t": "这些",
+     "l": "zh:zhexie"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.adjective"
+   ],
+   "gloss": "These tomatoes are cheap.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.047",
+   "frame": "fr.compare",
+   "text": "土豆比红薯便宜吗？",
+   "tokens": [
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "比",
+     "l": "zh:bi.than"
+    },
+    {
+     "t": "红薯",
+     "l": "zh:hongshu"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.comparison",
+    "fn.adjective",
+    "fn.question.yesno"
+   ],
+   "gloss": "Are potatoes cheaper than sweet potatoes?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.048",
+   "frame": "fr.compare",
+   "text": "我最喜欢胡萝卜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "最",
+     "l": "zh:zui"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.comparison",
+    "fn.object"
+   ],
+   "gloss": "I like carrots best.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.049",
+   "frame": "fr.link",
+   "text": "我喜欢西红柿，但是不喜欢黄瓜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "西红柿",
+     "l": "zh:xihongshi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "但是",
+     "l": "zh:danshi"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "黄瓜",
+     "l": "zh:huanggua"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.connectors",
+    "fn.negation",
+    "fn.object"
+   ],
+   "gloss": "I like tomatoes, but not cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.050",
+   "frame": "fr.link",
+   "text": "因为土豆很便宜，所以我买了很多。",
+   "tokens": [
+    {
+     "t": "因为",
+     "l": "zh:yinwei"
+    },
+    {
+     "t": "土豆",
+     "l": "zh:tudou"
+    },
+    {
+     "t": "很",
+     "l": "zh:hen"
+    },
+    {
+     "t": "便宜",
+     "l": "zh:pianyi"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "所以",
+     "l": "zh:suoyi"
+    },
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "买",
+     "l": "zh:mai"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "很多",
+     "l": "zh:henduo"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.adjective",
+    "fn.pronoun.subject",
+    "fn.aspect",
+    "fn.numerals"
+   ],
+   "gloss": "Because potatoes are cheap, I bought a lot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.051",
+   "frame": "fr.link",
+   "text": "如果你饿了，就吃一根胡萝卜吧。",
+   "tokens": [
+    {
+     "t": "如果",
+     "l": "zh:ruguo"
+    },
+    {
+     "t": "你",
+     "l": "zh:ni"
+    },
+    {
+     "t": "饿",
+     "l": "zh:e"
+    },
+    {
+     "t": "了",
+     "l": "zh:le"
+    },
+    {
+     "t": "，",
+     "p": true
+    },
+    {
+     "t": "就",
+     "l": "zh:jiu.then"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "一",
+     "l": "zh:yi"
+    },
+    {
+     "t": "根",
+     "l": "zh:gen"
+    },
+    {
+     "t": "胡萝卜",
+     "l": "zh:huluobo"
+    },
+    {
+     "t": "吧",
+     "l": "zh:ba.part"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.pronoun.subject",
+    "fn.adjective",
+    "fn.aspect",
+    "fn.imperative",
+    "fn.numerals",
+    "fn.measure.word"
+   ],
+   "gloss": "If you’re hungry, have a carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.052",
+   "frame": "fr.link",
+   "text": "我小的时候不喜欢吃菠菜。",
+   "tokens": [
+    {
+     "t": "我",
+     "l": "zh:wo"
+    },
+    {
+     "t": "小",
+     "l": "zh:xiao"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "时候",
+     "l": "zh:shihou"
+    },
+    {
+     "t": "不",
+     "l": "zh:bu"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "菠菜",
+     "l": "zh:bocai"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.connectors",
+    "fn.pronoun.subject",
+    "fn.adjective",
+    "fn.negation",
+    "fn.object"
+   ],
+   "gloss": "When I was little I didn’t like spinach.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.053",
+   "frame": "fr.colour",
+   "text": "这棵生菜是绿色的。",
+   "tokens": [
+    {
+     "t": "这",
+     "l": "zh:zhe"
+    },
+    {
+     "t": "棵",
+     "l": "zh:ke.plant"
+    },
+    {
+     "t": "生菜",
+     "l": "zh:shengcai"
+    },
+    {
+     "t": "是",
+     "l": "zh:shi"
+    },
+    {
+     "t": "绿色",
+     "l": "zh:lvse"
+    },
+    {
+     "t": "的",
+     "l": "zh:de"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.demonstrative",
+    "fn.measure.word",
+    "fn.copula",
+    "fn.adjective"
+   ],
+   "gloss": "This lettuce is green.",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.054",
+   "frame": "fr.eat",
+   "text": "你们吃过莲藕吗？",
+   "tokens": [
+    {
+     "t": "你们",
+     "l": "zh:nimen"
+    },
+    {
+     "t": "吃",
+     "l": "zh:chi"
+    },
+    {
+     "t": "过",
+     "l": "zh:guo"
+    },
+    {
+     "t": "莲藕",
+     "l": "zh:lianou"
+    },
+    {
+     "t": "吗",
+     "l": "zh:ma"
+    },
+    {
+     "t": "？",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.aspect",
+    "fn.object",
+    "fn.question.yesno"
+   ],
+   "gloss": "Have you ever eaten lotus root?",
+   "level": "A1"
+  },
+  {
+   "id": "zh.fv.055",
+   "frame": "fr.like.generic",
+   "text": "我们都喜欢玉米。",
+   "tokens": [
+    {
+     "t": "我们",
+     "l": "zh:women"
+    },
+    {
+     "t": "都",
+     "l": "zh:dou"
+    },
+    {
+     "t": "喜欢",
+     "l": "zh:xihuan"
+    },
+    {
+     "t": "玉米",
+     "l": "zh:yumi"
+    },
+    {
+     "t": "。",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.pronoun.subject",
+    "fn.numerals",
+    "fn.object",
+    "fn.word.order"
+   ],
+   "gloss": "We all like corn.",
+   "level": "A1"
+  }
+ ],
+ "fieldExemptions": [
+  {
+   "field": "food.vegetables",
+   "function": "fn.tones",
+   "reason": "Tones belong to every syllable, not to a sentence pattern: the realization of fn.tones has no sentence evidence (no particle, tag or punctuation a sentence could show), so no sentence can be listed for it. The vegetable words train the tones in the vocabulary track through their pinyin (土豆 tǔdòu, 西红柿 xīhóngshì, 胡萝卜 húluóbo), and every sentence of this file is read with them."
+  }
+ ]
+}

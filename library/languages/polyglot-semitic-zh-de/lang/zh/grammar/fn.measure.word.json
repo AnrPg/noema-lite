@@ -1,6 +1,16 @@
 {
  "function": "fn.measure.word",
  "status": "realized",
+ "typology": [
+  {
+   "feature": "nom.classifiers",
+   "value": "obligatory"
+  },
+  {
+   "feature": "syn.numeralNoun",
+   "value": "num-noun"
+  }
+ ],
  "summary": "A Chinese noun cannot follow a number or 这 / 那 directly: a measure word (classifier) comes in between — 一本书 ‘a book’, 这张桌子 ‘this table’, 那位老师 ‘that teacher’. The measure word is chosen by the kind or shape of the thing: 本 for bound books, 张 for flat things, 把 for things with a handle. 个 is the general one, used for people and for many things without a special measure word. Learn every noun with its measure word.",
  "blocks": [
   {
@@ -10,7 +20,17 @@
     "measure word",
     "noun"
    ],
-   "caption": "The pattern"
+   "caption": "The pattern",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    }
+   ]
   },
   {
    "t": "table",
@@ -361,6 +381,108 @@
    ],
    "answer": "所",
    "why": "Schools and universities take 所 (一个学校 is also heard)."
+  }
+ ],
+ "notes": [
+  {
+   "for": "el",
+   "rel": "new",
+   "text": "Greek counts nouns directly (τρία βιβλία ‘three books’); measure words appear only with masses (ένα φλιτζάνι καφέ ~ 一杯咖啡). In Chinese every counted noun needs one: 三本书."
+  },
+  {
+   "for": "ru",
+   "rel": "new",
+   "text": "Russian counts directly and changes the noun after the number (две книги, пять книг); Chinese never changes the noun but puts a measure word in between: 两本书, 五本书. Colloquial штука (три штуки) is the nearest cousin of 个."
+  },
+  {
+   "for": "es",
+   "rel": "new",
+   "text": "Spanish counts directly (tres libros) and uses measure words only for masses (una taza de café ~ 一杯咖啡, un trozo de pan ~ 一块面包). In Chinese the slot is obligatory for every noun."
+  },
+  {
+   "for": "en",
+   "rel": "new",
+   "text": "English needs measure words only for mass nouns (a cup of tea, a piece of bread, a head of lettuce); Chinese needs one for every noun, even countable ones: 一本书 ‘a book’, 一个人 ‘a person’."
+  },
+  {
+   "for": "fr",
+   "rel": "new",
+   "text": "French counts directly (trois livres) and uses une tasse de, un morceau de only for masses; Chinese needs a measure word for every counted noun, chosen by its shape or kind."
+  },
+  {
+   "for": "de",
+   "rel": "similar",
+   "text": "German has measure nouns for masses (eine Tasse Kaffee, ein Stück Kuchen, ein Blatt Papier) and Stück even for countables in shops (drei Stück); Chinese makes this obligatory for every noun, with the choice by shape (本, 张, 把)."
+  },
+  {
+   "for": "hi",
+   "rel": "new",
+   "text": "Hindi counts directly (तीन किताबें ‘three books’) and uses measure words only for masses (एक कप चाय ~ 一杯茶). Chinese drops the plural ending but requires the measure word: 三本书."
+  },
+  {
+   "for": "fa",
+   "rel": "similar",
+   "text": "Persian already has an optional classifier: do tā ketāb ‘two books’ (tā ~ 个), nafar for people (se nafar ~ 三个人). Chinese makes the classifier obligatory and has many more, chosen by shape and kind."
+  },
+  {
+   "for": "mr",
+   "rel": "new",
+   "text": "Marathi counts directly and marks the plural on the noun (तीन पुस्तके ‘three books’); Chinese marks no plural but needs a measure word: 三本书."
+  },
+  {
+   "for": "ar",
+   "rel": "new",
+   "text": "Arabic numerals have intricate rules (gender polarity, plural after 3–10, singular after 11 and up) but no classifiers; Chinese has no agreement at all — only number + measure word + noun."
+  },
+  {
+   "for": "he",
+   "rel": "new",
+   "text": "Hebrew numbers agree in gender with the noun, which is plural; Chinese numbers never change, the noun never changes, and a measure word stands between them."
+  },
+  {
+   "for": "tr",
+   "rel": "similar",
+   "text": "Turkish tane is an optional classifier (iki tane kitap ‘two books’) — Chinese 个 in all but obligation. Turkish keeps the noun singular after numbers, as Chinese always does."
+  },
+  {
+   "for": "ja",
+   "rel": "similar",
+   "text": "Japanese counters work the same way (枚 mai for flat things, 冊 satsu for books, 匹 hiki for small animals), but the same character can mislead: Japanese 本 hon counts long, thin things, Chinese 本 counts books — long things take 根 or 支. Japanese can put the counter after the noun (本を三冊); Chinese always says 三本书."
+  },
+  {
+   "for": "ko",
+   "rel": "similar",
+   "text": "Korean counters are close relatives: 개 (個) ~ 个, 장 (張) for paper and tickets ~ 张, 명 (名) for people ~ 名, 병 ~ 瓶. Korean puts them after the noun (사과 세 개), Chinese before it (三个苹果). Trap: Korean 잔 (盞) counts cups, Chinese 盏 counts lamps — cups are 杯."
+  },
+  {
+   "for": "fi",
+   "rel": "new",
+   "text": "Finnish counts directly, with the noun in the partitive singular (kolme kirjaa); Chinese never changes the noun but inserts a measure word: 三本书."
+  },
+  {
+   "for": "hu",
+   "rel": "similar",
+   "text": "Hungarian keeps the noun singular after numbers (három könyv) and has optional classifiers such as darab ‘piece’ (három darab); Chinese makes the classifier obligatory and chooses it by shape."
+  },
+  {
+   "for": "sw",
+   "rel": "different",
+   "text": "Swahili counts with numerals that follow the noun and agree with its class (vitabu vitatu ‘three books’). Noun classes sort things by kind, a little like Chinese measure words — but in Chinese the measure word is a separate word before the noun: 三本书."
+  },
+  {
+   "for": "lg",
+   "rel": "different",
+   "text": "Luganda numerals follow the noun and agree with its class (ebitabo bisatu ‘three books’). Chinese numerals never agree; the class-like information goes into the measure word before the noun: 三本书."
+  },
+  {
+   "for": "vi",
+   "rel": "same",
+   "text": "Vietnamese classifiers work just like Chinese ones: hai quyển sách ‘two books’ (quyển ~ 本), một cái bàn ‘a table’. Only the demonstrative differs: quyển sách này, but 这本书."
+  },
+  {
+   "for": "iu",
+   "rel": "new",
+   "text": "Inuktitut has no classifiers: numbers stand with the noun, which itself shows singular, dual or plural (inuk, inuuk, inuit). Chinese never marks number on the noun, but always puts a measure word after the number."
   }
  ],
  "seeAlso": [

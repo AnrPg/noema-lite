@@ -18,9 +18,13 @@ def attach(obj):
         if x.get('id') in PROFILES: x['profile'] = PROFILES[x['id']]
     return obj
 import re as _re
-import mkmini_facade
+import mkmini_facade, mkmini_notes
 def w(rel, obj):
     obj = attach(obj)
+    g_ = _re.match(r'lang/(\w+)/grammar/(.+)\.json$', rel)
+    if g_: mkmini_notes.grammar(g_.group(1), g_.group(2), obj)   # D18: comparison notes, no forYou
+    b_ = _re.match(r'lang/(\w+)/bank/basic\.json$', rel)
+    if b_ and mkmini_notes.EXEMPT.get(b_.group(1)): obj['fieldExemptions'] = mkmini_notes.EXEMPT[b_.group(1)]   # D19
     m = _re.match(r'lang/(\w+)/(language\.json|lexicon/)', rel)
     if m and m.group(2) == 'language.json': mkmini_facade.apply(m.group(1), obj, {})
     elif m: mkmini_facade.apply(m.group(1), {}, obj)   # D14 facade, D15 meanings
