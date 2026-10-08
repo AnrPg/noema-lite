@@ -9,10 +9,11 @@ window.NoemaLLM = (() => {
   const CLAUDE = () => (CFG().anthropicBase || 'https://api.anthropic.com').replace(/\/$/, '');
   const GEMINI = () => (CFG().geminiBase || 'https://generativelanguage.googleapis.com/v1beta').replace(/\/$/, '');
   const wait = ms => new Promise(r => setTimeout(r, ms));
+  const deviceKey = acc => { try { return localStorage.getItem('noema-device:geminiKey:' + acc) || ''; } catch (e) { return ''; } };   // the Gemini key: this device only (loader.js GeminiKey)
   const settingsOf = acc => { try { return JSON.parse(localStorage.getItem(`noema1:${acc}:a:settings`) || '{}'); } catch (e) { return {}; } };
 
   /* ---------- which vendors can this learner use? ---------- */
-  const keys = acc => ({ claude: window.NoemaClaude?.Key.get(acc) || '', gemini: settingsOf(acc).apiKey || window.Noema?.local?.geminiKey || window.DEFAULT_GEMINI_KEY || '' });
+  const keys = acc => ({ claude: window.NoemaClaude?.Key.get(acc) || '', gemini: deviceKey(acc) || settingsOf(acc).apiKey || window.Noema?.local?.geminiKey || window.DEFAULT_GEMINI_KEY || '' });
   function available(acc) { const k = keys(acc); return { claude: !!k.claude, gemini: !!k.gemini }; }
   /** pref: 'claude' | 'gemini' | 'auto' (Claude when its key exists — best quality — else Gemini). */
   function pick(acc, pref = 'auto') { const a = available(acc); if (pref !== 'auto' && a[pref]) return pref; return a.claude ? 'claude' : a.gemini ? 'gemini' : null; }

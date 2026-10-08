@@ -133,16 +133,18 @@ function mdLite(s) {
 
 /* ---------- state ---------- */
 /* State is namespaced: per-subject progress  → noema1:<account>:s:<subject>:state
-                        per-account settings  → noema1:<account>:a:settings   (API key, model, theme, goal…)
+                        per-account settings  → noema1:<account>:a:settings   (model, theme, goal…)
+                        the Gemini key        → noema-device:geminiKey:<account>  (this device only, Noema.geminiKey)
                         XP / streak across all subjects → Noema.stats (noema1:<account>:a:stats)            */
 const STATE_KEY = Noema.kv.subjectKey('state'), SETTINGS_KEY = Noema.kv.accountKey('settings');
 const SETTINGS_DEFAULT = { apiKey: DEFAULT_KEY, model: '', models: [], theme: 'auto', sound: true, goal: 120, chunk: true };
+Noema.geminiKey.migrate(ACCOUNT.id);   // the Gemini key lives on this device only (never in a:settings → never synced)
 const S = (() => {
   let s = {}, g = {};
   try { s = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
   try { g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
   const st = Object.assign({ xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null }, s);
-  st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null });
+  delete g.apiKey; st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null }, Noema.geminiKey.get(ACCOUNT.id) ? { apiKey: Noema.geminiKey.get(ACCOUNT.id) } : {});
   delete st.srcOn; delete st.xpDay; delete st.streak; delete st.lastDay;
   return st;
 })();
@@ -150,10 +152,11 @@ if (!S.settings.apiKey) S.settings.apiKey = DEFAULT_KEY;
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { settings, ...rest } = S; const { srcOn, ...glob } = settings;
+  const { settings, ...rest } = S; const { srcOn, apiKey, ...glob } = settings;
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
+  Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
   let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
-  Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
+  delete cur.apiKey; Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 addEventListener('pagehide', flushSave);

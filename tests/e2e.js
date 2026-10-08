@@ -44,6 +44,7 @@ async function mockGemini(ctx) {
   await page.screenshot({ path: SHOTS + '/a1_picker.png' });
   await page.click('.noema-chip:has-text("Databricks")'); await wait(1500);
   ok(await page.evaluate(() => S.xp === 50 && Object.keys(S.res).length === 2 && S.settings.apiKey === 'LEGACYKEY'), 'legacy progress migrated into anr/databricks');
+  ok(await page.evaluate(() => localStorage.getItem('noema-device:geminiKey:anr') === 'LEGACYKEY' && !localStorage.getItem('noema1:anr:a:settings').includes('LEGACYKEY')), 'the Gemini key moved out of a:settings into this device only');
   ok(await page.evaluate(() => CV.list.length === 1 && CV.list[0].title === 'Old Chat'), 'legacy conversations migrated');
   const canon = await page.evaluate(async () => { const l = await Noema.convos.list('anr'); return l.length === 1 && l[0].schema === 'noema.conversation/v1' && l[0].messages[1].role === 'assistant' && l[0].subject.id === 'databricks'; });
   ok(canon, 'legacy conversation converted to canonical noema.conversation/v1 in IndexedDB');
@@ -116,6 +117,7 @@ async function mockGemini(ctx) {
     return st.xp === src.xp && JSON.stringify(st.res) === JSON.stringify(src.res) && pts.length >= 1 ? 'ok' : 'bad restore ' + JSON.stringify({ xp: st.xp, pts: pts.length });
   });
   ok(backupOk === 'ok', backupOk + ' — backup of ANR restored into Maria (+ restore point created, API key excluded)');
+  ok(await page.evaluate(async () => { const b = await Noema.backup.collect('anr', { includeSecrets: true }); const k = JSON.parse(b.data['a:settings']).apiKey; const prev = localStorage.getItem('noema-device:geminiKey:maria'); await Noema.backup.apply(b, 'maria', 'merge'); const got = localStorage.getItem('noema-device:geminiKey:maria'), kept = localStorage.getItem('noema1:maria:a:settings'); prev ? localStorage.setItem('noema-device:geminiKey:maria', prev) : localStorage.removeItem('noema-device:geminiKey:maria'); return !!k && k === localStorage.getItem('noema-device:geminiKey:anr') && got === k && !kept.includes(k); }), 'a backup with secrets carries this device’s Gemini key, and restoring it puts the key on the device');
   const [dl] = await Promise.all([page.waitForEvent('download'), page.evaluate(async () => Noema.backup.download(await Noema.backup.collect('anr')))]);
   ok(/^noema-lite-backup_anr_\d{4}-\d\d-\d\d_\d{4}\.json$/.test(dl.suggestedFilename()), 'backup download: ' + dl.suggestedFilename());
   const legacyOk = await page.evaluate(() => { try { const b = Noema.backup.validate({ xp: 5, res: { a: { ok: 1 } }, settings: { theme: 'dark' } }); return !!b.data['s:databricks:state']; } catch (e) { return false; } });
@@ -153,7 +155,7 @@ async function mockGemini(ctx) {
   { const sa = await pA.$('button:has-text("show all")'); if (sa) { await sa.click(); await wait(400); } }
   const tipW = await pA.$$eval('main .callout.tip', els => els.map(e => ({ w: e.getBoundingClientRect().width, cur: getComputedStyle(e).cursor })));
   ok(tipW.length > 0 && tipW.every(t => t.w > 300 && t.cur !== 'help'), 'tip callouts render full width (no clash with the ⓘ tooltip style)');
-  await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; flushSave(); });
+  await pA.evaluate(() => { record(EX['ch01-e001'], true); addXP(12); flushSave(); S.settings.apiKey = 'CLOUDKEY'; S.settings.goal = 150; flushSave(); });
   await pA.evaluate(() => { openTutor({ kind: 'chapter', id: 'ch05' }, 'quiz'); }); await pA.evaluate(() => sendTutor('quiz me')); await pA.evaluate(() => closeTutor());
   await wait(4200);
   const uidA = Object.keys(srv.state.users)[0];
@@ -169,7 +171,10 @@ async function mockGemini(ctx) {
   console.log('     ' + fsLayout.slice(0, 220));
   const kvA = srv.state.kv[Object.keys(srv.state.users)[0]] || {};
   ok(!!kvA['s:databricks:state'] && JSON.parse(kvA['s:databricks:state'].value).res['ch01-e001'], 'progress pushed to the cloud (noema_kv)');
+  ok(!!kvA['a:settings'] && JSON.parse(kvA['a:settings'].value).goal === 150 && !JSON.stringify(kvA).includes('CLOUDKEY') && await pA.evaluate(() => localStorage.getItem('noema-device:geminiKey:' + ACCOUNT.id) === 'CLOUDKEY'), 'settings pushed to the cloud, the Gemini key stays on this device');
   ok(srv.state.snaps.length >= 1, 'daily auto-snapshot created');
+  // an older version had synced the key in a:settings: the next device keeps it locally and clears it from the cloud
+  kvA['a:settings'] = { value: JSON.stringify({ ...JSON.parse(kvA['a:settings'].value), apiKey: 'OLDKEY' }), updated_at: new Date().toISOString() };
   ok(await pA.$eval('#syncdot', d => d.className.includes('ok')), 'sync indicator shows synced');
   await pA.evaluate(() => openAccountMenu('cloud')); await wait(600); await pA.screenshot({ path: SHOTS + '/b2_cloud_menu.png' });
   // pack upload to private storage
@@ -183,9 +188,11 @@ async function mockGemini(ctx) {
   const chipsB = await pB.$$eval('.noema-chip', c => c.map(x => x.textContent));
   ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
   await pB.click('.noema-chip:has-text("Databricks")'); await wait(1600);
-  ok(await pB.evaluate(() => !!S.res['ch01-e001'] && S.settings.apiKey === 'CLOUDKEY' && Noema.stats.get().xp >= 12), 'device B pulled progress, settings and stats');
+  ok(await pB.evaluate(() => !!S.res['ch01-e001'] && S.settings.goal === 150 && Noema.stats.get().xp >= 12), 'device B pulled progress, settings and stats');
+  ok(await pB.evaluate(() => S.settings.apiKey === 'OLDKEY' && localStorage.getItem('noema-device:geminiKey:' + ACCOUNT.id) === 'OLDKEY' && !localStorage.getItem(Noema.kv.accountKey('settings')).includes('OLDKEY')), 'a key synced by an older version is moved to this device');
   ok(await pB.evaluate(() => CV.list.some(c => c.mode === 'quiz' && c.msgs.length >= 2)), 'device B has the conversation from device A');
   await pB.screenshot({ path: SHOTS + '/b3_deviceB_mobile.png' });
+  await wait(3500); ok(!srv.state.kv[uidA]['a:settings'].value.includes('OLDKEY') && JSON.parse(srv.state.kv[uidA]['a:settings'].value).goal === 150, '… and removed from the cloud row');
   await pB.evaluate(() => Noema.switchTo(ACCOUNT.id, 'demo-imported')); await wait(1800);
   ok(await pB.evaluate(() => SUBJ.id === 'demo-imported'), 'device B downloads the private pack from cloud storage');
   // isolation: a second user sees nothing of the first
