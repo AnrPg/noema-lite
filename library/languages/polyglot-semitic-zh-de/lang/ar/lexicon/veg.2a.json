@@ -8,6 +8,26 @@
    "senses": [
     "veg.ginger"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Indian languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "zanjabīl",
    "forms": {
@@ -123,8 +143,29 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.fennel"
+    "veg.fennel",
+    "nature.dill"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "šamar",
    "forms": {
@@ -164,7 +205,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "nature.dill"
      }
     ],
     "examples": [
@@ -188,6 +230,13 @@
       "register": "neutral",
       "context": "nature",
       "sense": "s1"
+     },
+     {
+      "text": "فِي بَعْضِ الْكُتُبِ الْقَدِيمَةِ يَعْنِي الشَّمَرُ نَبَاتَ الشِّبِتِّ.",
+      "tr": "In some old books šamar means dill.",
+      "register": "dated",
+      "context": "old books",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -243,6 +292,26 @@
    "senses": [
     "veg.asparagus"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Greek): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "hilyawn",
    "forms": {
@@ -349,8 +418,36 @@
    "pos": "NOUN",
    "class": "collective",
    "senses": [
-    "veg.taro"
+    "veg.taro",
+    "veg.cardoon"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قُلْقَاسَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted (plural of قُلْقَاسَة)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قُلْقَاسَتَانِ",
+    "declension": "triptote",
+    "unit": "قُلْقَاسَة",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
    "translit": "qulqās",
    "forms": {
@@ -402,7 +499,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "veg.cardoon"
      }
     ],
     "examples": [
@@ -433,6 +531,20 @@
       "register": "neutral",
       "context": "shopping",
       "sense": "s1"
+     },
+     {
+      "text": "فِي كُتُبِ النَّبَاتِ الْقَدِيمَةِ قَدْ يَعْنِي الْقُلْقَاسُ الْخُرْشُوفَ.",
+      "tr": "In old botanical books qulqās can mean the artichoke.",
+      "register": "obsolete",
+      "context": "old books",
+      "sense": "s2"
+     },
+     {
+      "text": "لَا يُسْتَعْمَلُ الْقُلْقَاسُ الْيَوْمَ بِمَعْنَى الْخُرْشُوفِ.",
+      "tr": "Today qulqās is no longer used in the sense of artichoke.",
+      "register": "neutral",
+      "context": "word history",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -476,7 +588,40 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.dandelion"
+    "veg.dandelion",
+    "veg.chicory"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Middle Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.dandelion",
+     "axis": "frequency",
+     "value": "the botanical / medical name (formal)"
+    },
+    {
+     "concept": "veg.chicory",
+     "axis": "frequency",
+     "value": "old and medical texts"
+    }
    ],
    "gender": "MASC",
    "translit": "ṭarḫašqūn",
@@ -517,7 +662,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "veg.chicory"
      }
     ],
     "examples": [
@@ -541,6 +687,20 @@
       "register": "formal",
       "context": "nature",
       "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ الطَّرْخَشْقُونُ أَيْضًا عَلَى الْهِنْدِبَاءِ الْبَرِّيَّةِ.",
+      "tr": "ṭaraḫšaqūn is also used for wild chicory.",
+      "register": "formal",
+      "context": "botany",
+      "sense": "s2"
+     },
+     {
+      "text": "فِي الطِّبِّ الْقَدِيمِ كَانَ الطَّرْخَشْقُونُ اسْمًا لِلْهِنْدِبَاءِ أَيْضًا.",
+      "tr": "In old medicine ṭaraḫšaqūn was also a name for chicory.",
+      "register": "formal",
+      "context": "history of medicine",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -591,8 +751,23 @@
    "senses": [
     "veg.turnip"
    ],
+   "features": {
+    "root": "ل ف ت",
+    "pattern": "فِعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ل ف ت",
    "translit": "lift",
    "forms": {
     "N;NOM;SG;INDF": "لِفْتٌ",
@@ -631,7 +806,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -704,10 +880,42 @@
    "class": "mass",
    "senses": [
     "veg.chicory",
-    "veg.endive"
+    "veg.endive",
+    "veg.dandelion"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.dandelion",
+     "axis": "frequency",
+     "value": "the everyday name (also chicory)"
+    },
+    {
+     "concept": "veg.chicory",
+     "axis": "frequency",
+     "value": "the usual name"
+    }
    ],
    "gender": "FEM",
-   "diptote": true,
    "translit": "hindibāʾ",
    "forms": {
     "N;NOM;SG;INDF": "هِنْدِبَاءُ",
@@ -754,7 +962,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "veg.dandelion"
      }
     ],
     "examples": [
@@ -792,6 +1001,20 @@
       "register": "neutral",
       "context": "shopping",
       "sense": "s2"
+     },
+     {
+      "text": "تَنْبُتُ الْهِنْدِبَاءُ الْبَرِّيَّةُ ذَاتُ الزَّهْرِ الْأَصْفَرِ فِي الْحُقُولِ.",
+      "tr": "Wild hindibāʾ with yellow flowers — the dandelion — grows in the fields.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s3"
+     },
+     {
+      "text": "يُسَمِّي بَعْضُ النَّاسِ الطَّرْخَشْقُونَ هِنْدِبَاءَ.",
+      "tr": "Some people call the dandelion hindibāʾ.",
+      "register": "neutral",
+      "context": "names of plants",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -852,8 +1075,23 @@
    "senses": [
     "veg.purslane"
    ],
+   "features": {
+    "root": "ر ج ل",
+    "pattern": "فِعْلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ر ج ل",
    "translit": "rijla",
    "forms": {
     "N;NOM;SG;INDF": "رِجْلَةٌ",
@@ -970,8 +1208,23 @@
    "senses": [
     "veg.nettle"
    ],
+   "features": {
+    "root": "ق ر ص",
+    "pattern": "فُعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ق ر ص",
    "translit": "qurrāṣ",
    "forms": {
     "N;NOM;SG;INDF": "قُرَّاصٌ",
@@ -1077,6 +1330,26 @@
    "senses": [
     "veg.wildgarlic"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: ثُوم (ث و م) + بَرِّيّ (ب ر ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "ṯūm barrī",
    "forms": {
@@ -1168,8 +1441,34 @@
    "senses": [
     "veg.parsnip"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: جَزَر (a loanword) + أَبْيَض (ب ي ض)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَزَرَات بَيْضَاء",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: جَزَرَاتٌ بَيْضَاءُ (plural of the unit)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَزَرَتَانِ بَيْضَاوَانِ",
+    "declension": "triptote",
+    "unit": "جَزَرَة بَيْضَاء",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "جَزَرَة بَيْضَاء",
    "translit": "jazar ʾabyaḍ",
    "forms": {
     "N;NOM;COLL;INDF": "جَزَرٌ أَبْيَضُ",
@@ -1271,10 +1570,26 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.sorrel"
+    "veg.sorrel",
+    "health.acidosis"
    ],
+   "features": {
+    "root": "ح م ض",
+    "pattern": "فُعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ح م ض",
    "translit": "ḥummāḍ",
    "forms": {
     "N;NOM;SG;INDF": "حُمَّاضٌ",
@@ -1313,7 +1628,8 @@
       ],
       "domains": [
        "medicine"
-      ]
+      ],
+      "concept": "health.acidosis"
      }
     ],
     "examples": [
@@ -1337,6 +1653,13 @@
       "register": "neutral",
       "context": "cooking",
       "sense": "s1"
+     },
+     {
+      "text": "أُصِيبَ الْمَرِيضُ بِالْحُمَّاضِ الْكِيتُونِيِّ.",
+      "tr": "The patient developed ketoacidosis.",
+      "register": "technical",
+      "context": "medicine",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1381,6 +1704,26 @@
    "senses": [
     "veg.horseradish"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: فُجْل (ف ج ل) + حَارّ (ح ر ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "fujl ḥārr",
    "forms": {
@@ -1471,10 +1814,33 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.watercress"
+    "veg.watercress",
+    "health.eyeremedy"
+   ],
+   "features": {
+    "root": "ق ر ر",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.watercress",
+     "axis": "name",
+     "value": "the specific name"
+    }
    ],
    "gender": "FEM",
-   "root": "ق ر ر",
    "translit": "qurra",
    "forms": {
     "N;NOM;SG;INDF": "قُرَّةٌ",
@@ -1513,7 +1879,8 @@
       ],
       "domains": [
        "medicine"
-      ]
+      ],
+      "concept": "health.eyeremedy"
      }
     ],
     "examples": [
@@ -1537,6 +1904,13 @@
       "register": "neutral",
       "context": "taste",
       "sense": "s1"
+     },
+     {
+      "text": "كَانَتِ الْقُرَّةُ عِنْدَ الْقُدَمَاءِ دَوَاءً يُهَدِّئُ الْتِهَابَ الْعَيْنِ.",
+      "tr": "For the ancients, qurra was a remedy that soothed an inflamed eye.",
+      "register": "archaic",
+      "context": "history of medicine",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1592,10 +1966,26 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.cress"
+    "veg.cress",
+    "abstract.guidance"
    ],
+   "features": {
+    "root": "ر ش د",
+    "pattern": "فَعَال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ر ش د",
    "translit": "rašād",
    "forms": {
     "N;NOM;SG;INDF": "رَشَادٌ",
@@ -1631,7 +2021,8 @@
       "def": "right guidance, the right way of acting (verbal noun of رَشِدَ)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "abstract.guidance"
      }
     ],
     "examples": [
@@ -1705,6 +2096,26 @@
    "senses": [
     "veg.chard"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Greek): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "silq",
    "forms": {
@@ -1800,7 +2211,35 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.arugula"
+    "veg.arugula",
+    "veg.watercress"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.watercress",
+     "axis": "name",
+     "value": "“rocket”: جِرْجِيرُ الْمَاءِ = watercress"
+    }
    ],
    "gender": "MASC",
    "translit": "jirjīr",
@@ -1841,7 +2280,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "veg.watercress"
      }
     ],
     "examples": [
@@ -1865,6 +2305,20 @@
       "register": "neutral",
       "context": "shopping",
       "sense": "s1"
+     },
+     {
+      "text": "يَنْمُو جِرْجِيرُ الْمَاءِ عَلَى ضِفَافِ الْجَدَاوِلِ.",
+      "tr": "Watercress (“water rocket”) grows on the banks of streams.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
+     },
+     {
+      "text": "تُسَمَّى الْقُرَّةُ أَيْضًا جِرْجِيرَ الْمَاءِ.",
+      "tr": "Watercress (qurra) is also called jirjīr al-māʾ.",
+      "register": "neutral",
+      "context": "names of plants",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1903,7 +2357,35 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.molokhia"
+    "veg.molokhia",
+    "veg.okra"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Greek molókhion): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.okra",
+     "axis": "region",
+     "value": "Morocco (elsewhere: jute mallow)"
+    }
    ],
    "gender": "FEM",
    "translit": "mulūḫiyya",
@@ -1941,7 +2423,8 @@
       "def": "okra (Moroccan Arabic; Wiktionary)",
       "register": [
        "regional"
-      ]
+      ],
+      "concept": "veg.okra"
      }
     ],
     "examples": [
@@ -1971,6 +2454,13 @@
       "tr": "In Morocco, “mulūḫiyya” means okra.",
       "register": "regional",
       "context": "regional usage",
+      "sense": "s2"
+     },
+     {
+      "text": "طَلَبْتُ مُلُوخِيَّةً فِي مَطْعَمٍ بِفَاسَ فَجَاءَتْنِي بَامِيَةٌ.",
+      "tr": "I ordered mulūḫiyya in a restaurant in Fez and was brought okra.",
+      "register": "regional",
+      "context": "travel",
       "sense": "s2"
      }
     ],
@@ -2023,8 +2513,34 @@
    "senses": [
     "veg.redonion"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: بَصَل (ب ص ل) + أَحْمَر (ح م ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَصَلَات حَمْرَاء",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: بَصَلَاتٌ حَمْرَاءُ (plural of the unit)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَصَلَتَانِ حَمْرَاوَانِ",
+    "declension": "triptote",
+    "unit": "بَصَلَة حَمْرَاء",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "بَصَلَة حَمْرَاء",
    "translit": "baṣal ʾaḥmar",
    "forms": {
     "N;NOM;COLL;INDF": "بَصَلٌ أَحْمَرُ",

@@ -17,6 +17,10 @@
   {
    "id": "rooms",
    "title": "Rooms and parts of the home"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -232,6 +236,206 @@
    "subgroup": "rooms",
    "tier": 1,
    "rank": 30
+  },
+  {
+   "id": "home.apartmentbuilding",
+   "gloss": "apartment building, block of flats",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.attic",
+   "gloss": "attic, loft",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.bath",
+   "gloss": "bath (taking a bath)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.bench",
+   "gloss": "bench (seat)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.courtyard",
+   "gloss": "courtyard",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.desk",
+   "gloss": "desk",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.shutter",
+   "gloss": "shutter (of a window)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "home.suite",
+   "gloss": "living-room suite (sofa and armchairs)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.bowl",
+   "gloss": "bowl",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.card",
+   "gloss": "card (a bank card, a greeting card, a playing card)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.clock",
+   "gloss": "clock, watch",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.coffin",
+   "gloss": "coffin",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.compartment",
+   "gloss": "compartment",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.file",
+   "gloss": "file, dossier (a folder; a police or legal case file)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.glass.material",
+   "gloss": "glass (the material)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.jar",
+   "gloss": "jar",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.junk",
+   "gloss": "old banger, piece of junk (a poor car or device)",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.kite",
+   "gloss": "kite (the toy)",
+   "tier": 2,
+   "rank": 18,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.lightbulb",
+   "gloss": "light bulb",
+   "tier": 2,
+   "rank": 19,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.parcel",
+   "gloss": "parcel, package",
+   "tier": 2,
+   "rank": 20,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.peg",
+   "gloss": "pin, peg (short rod)",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.safe",
+   "gloss": "safe, strongbox, vault",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.seat",
+   "gloss": "seat, place (to sit)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.sponge",
+   "gloss": "bath sponge, loofah",
+   "tier": 2,
+   "rank": 25,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "obj.tray",
+   "gloss": "tray",
+   "tier": 2,
+   "rank": 26,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

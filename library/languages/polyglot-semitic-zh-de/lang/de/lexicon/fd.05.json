@@ -5,7 +5,15 @@
    "lemma": "null",
    "pos": "NUM",
    "senses": [
-    "num.0"
+    "num.0",
+    "det.none"
+   ],
+   "contrasts": [
+    {
+     "concept": "det.none",
+     "axis": "register",
+     "value": "colloquial and emphatic: zero (null Ahnung)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -33,7 +41,8 @@
       "def": "no, none at all (null Ahnung = no idea)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "det.none"
      }
     ],
     "examples": [
@@ -50,6 +59,20 @@
       "register": "neutral",
       "context": "weather",
       "sense": "s1"
+     },
+     {
+      "text": "Ich habe null Ahnung.",
+      "tr": "I have absolutely no idea.",
+      "register": "colloquial",
+      "context": "conversation",
+      "sense": "s2"
+     },
+     {
+      "text": "Heute habe ich null Lust zu kochen.",
+      "tr": "Today I have zero desire to cook.",
+      "register": "colloquial",
+      "context": "at home",
+      "sense": "s2"
      }
     ],
     "collocations": [],
@@ -70,6 +93,9 @@
     "subtleties": [
      "Colloquially null means “no … at all”: Ich habe null Ahnung (I have no idea)."
     ]
+   },
+   "features": {
+    "ordinal": "nullte"
    }
   },
   {
@@ -78,6 +104,13 @@
    "pos": "NUM",
    "senses": [
     "num.1"
+   ],
+   "contrasts": [
+    {
+     "concept": "num.1",
+     "axis": "before a noun or alone",
+     "value": "counting or standing alone (eins, zwei, drei)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -142,6 +175,9 @@
     "subtleties": [
      "Telling the time it can stand alone: Es ist eins (it is one o’clock) – but Es ist ein Uhr."
     ]
+   },
+   "features": {
+    "ordinal": "erste"
    }
   },
   {
@@ -207,6 +243,9 @@
     "subtleties": [
      "In a café the drink stays singular after the number: Zwei Kaffee, bitte (two coffees)."
     ]
+   },
+   "features": {
+    "ordinal": "zweite"
    }
   },
   {
@@ -276,6 +315,9 @@
     "pitfalls": [
      "drei and zwei sound alike on a bad line – hence zwo for two."
     ]
+   },
+   "features": {
+    "ordinal": "dritte"
    }
   },
   {
@@ -342,6 +384,9 @@
     "funFacts": [
      "unter vier Augen – “under four eyes” – means a talk between two people only."
     ]
+   },
+   "features": {
+    "ordinal": "vierte"
    }
   },
   {
@@ -411,6 +456,9 @@
     "pitfalls": [
      "Write ü: fünf, fünfzehn, fünfzig (fuffzehn, fuffzig are Berlin speech)."
     ]
+   },
+   "features": {
+    "ordinal": "fünfte"
    }
   },
   {
@@ -472,6 +520,9 @@
     "pitfalls": [
      "The s disappears in sechzehn (16) and sechzig (60) – not *sechszehn, *sechszig."
     ]
+   },
+   "features": {
+    "ordinal": "sechste"
    }
   },
   {
@@ -542,6 +593,9 @@
     "pitfalls": [
      "The -en disappears in siebzehn (17) and siebzig (70)."
     ]
+   },
+   "features": {
+    "ordinal": "siebte"
    }
   },
   {
@@ -603,6 +657,9 @@
     "pitfalls": [
      "Do not mix it up with die Acht in Acht geben / sich in Acht nehmen (to watch out) – an unrelated word."
     ]
+   },
+   "features": {
+    "ordinal": "achte"
    }
   },
   {
@@ -664,6 +721,9 @@
     "pitfalls": [
      "eu sounds like oi: neun [nɔɪ̯n]."
     ]
+   },
+   "features": {
+    "ordinal": "neunte"
    }
   },
   {
@@ -725,6 +785,9 @@
     "pitfalls": [
      "The teens end in -zehn (dreizehn), the tens in -zig (dreißig) – do not mix them."
     ]
+   },
+   "features": {
+    "ordinal": "zehnte"
    }
   },
   {
@@ -787,6 +850,9 @@
     "pitfalls": [
      "False friend: German elf is the number 11; the fairy creature is der Elf / die Elfe."
     ]
+   },
+   "features": {
+    "ordinal": "elfte"
    }
   },
   {
@@ -861,6 +927,9 @@
     "pitfalls": [
      "Write ö: zwölf, not *zwolf."
     ]
+   },
+   "features": {
+    "ordinal": "zwölfte"
    }
   },
   {
@@ -922,6 +991,9 @@
     "pitfalls": [
      "Built like English: the unit first, then -zehn (drei + zehn = dreizehn)."
     ]
+   },
+   "features": {
+    "ordinal": "dreizehnte"
    }
   },
   {
@@ -983,6 +1055,9 @@
     "pitfalls": [
      "Built like English: the unit first, then -zehn (vier + zehn = vierzehn)."
     ]
+   },
+   "features": {
+    "ordinal": "vierzehnte"
    }
   },
   {
@@ -1044,6 +1119,9 @@
     "pitfalls": [
      "Built like English: the unit first, then -zehn (fünf + zehn = fünfzehn)."
     ]
+   },
+   "features": {
+    "ordinal": "fünfzehnte"
    }
   },
   {
@@ -1106,6 +1184,9 @@
      "Not *sechszehn: the s of sechs is dropped.",
      "Built like English: the unit first, then -zehn (sechs + zehn = sechzehn)."
     ]
+   },
+   "features": {
+    "ordinal": "sechzehnte"
    }
   },
   {
@@ -1168,6 +1249,9 @@
      "Not *siebenzehn: the -en of sieben is dropped.",
      "Built like English: the unit first, then -zehn (sieben + zehn = siebzehn)."
     ]
+   },
+   "features": {
+    "ordinal": "siebzehnte"
    }
   },
   {
@@ -1229,6 +1313,9 @@
     "pitfalls": [
      "Built like English: the unit first, then -zehn (acht + zehn = achtzehn)."
     ]
+   },
+   "features": {
+    "ordinal": "achtzehnte"
    }
   },
   {
@@ -1290,6 +1377,9 @@
     "pitfalls": [
      "Built like English: the unit first, then -zehn (neun + zehn = neunzehn)."
     ]
+   },
+   "features": {
+    "ordinal": "neunzehnte"
    }
   },
   {
@@ -1352,6 +1442,9 @@
      "Not *zweizig: twenty is zwanzig.",
      "From 21 on, the unit comes first: einundzwanzig, zweiundzwanzig … neunundzwanzig – written as one word."
     ]
+   },
+   "features": {
+    "ordinal": "zwanzigste"
    }
   },
   {
@@ -1411,6 +1504,9 @@
      "The only ten with -ßig instead of -zig: dreißig (Swiss spelling dreissig).",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einunddreißig = 31."
     ]
+   },
+   "features": {
+    "ordinal": "dreißigste"
    }
   },
   {
@@ -1473,6 +1569,9 @@
      "vier + zig: vierzig; 44 = vierundvierzig.",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundvierzig = 41."
     ]
+   },
+   "features": {
+    "ordinal": "vierzigste"
    }
   },
   {
@@ -1532,6 +1631,9 @@
      "Colloquially fuffzig or fuchzig (Wiktionary lists both).",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundfünfzig = 51."
     ]
+   },
+   "features": {
+    "ordinal": "fünfzigste"
    }
   },
   {
@@ -1591,6 +1693,9 @@
      "Not *sechszig: the s of sechs is dropped, as in sechzehn.",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundsechzig = 61."
     ]
+   },
+   "features": {
+    "ordinal": "sechzigste"
    }
   },
   {
@@ -1650,6 +1755,9 @@
      "Not *siebenzig: the -en of sieben is dropped, as in siebzehn.",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundsiebzig = 71."
     ]
+   },
+   "features": {
+    "ordinal": "siebzigste"
    }
   },
   {
@@ -1709,6 +1817,9 @@
      "acht + zig, with one t: achtzig.",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundachtzig = 81."
     ]
+   },
+   "features": {
+    "ordinal": "achtzigste"
    }
   },
   {
@@ -1768,6 +1879,9 @@
      "neun + zig: neunzig; 99 is neunundneunzig.",
      "The tens end in -zig (-ßig in dreißig); the unit comes first in between: einundneunzig = 91."
     ]
+   },
+   "features": {
+    "ordinal": "neunzigste"
    }
   },
   {
@@ -1840,6 +1954,9 @@
     "subtleties": [
      "101 = hunderteins, 121 = hunderteinundzwanzig: one word, the hundreds first, then units-and-tens."
     ]
+   },
+   "features": {
+    "ordinal": "hundertste"
    }
   },
   {
@@ -1904,6 +2021,9 @@
     "subtleties": [
      "tausendmal = a thousand times; Tausende von Leuten = thousands of people (noun, capital T)."
     ]
+   },
+   "features": {
+    "ordinal": "tausendste"
    }
   },
   {
@@ -1912,8 +2032,22 @@
    "pos": "DET",
    "class": "quant",
    "senses": [
-    "quant.many"
+    "quant.many",
+    "adv.alot"
    ],
+   "contrasts": [
+    {
+     "concept": "adv.alot",
+     "axis": "what it strengthens",
+     "value": "verbs and comparatives (Er arbeitet viel; viel besser)"
+    }
+   ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;SG": "viel",
     "DET;NOM;PL": "viele",
@@ -1947,7 +2081,8 @@
       "def": "much, a lot (as an adverb: Er arbeitet viel)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alot"
      }
     ],
     "examples": [
@@ -2053,8 +2188,15 @@
    "pos": "DET",
    "class": "quant",
    "senses": [
-    "quant.few"
+    "quant.few",
+    "adv.little"
    ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;SG": "wenig",
     "DET;NOM;PL": "wenige",
@@ -2091,7 +2233,8 @@
       "def": "little, not much (as an adverb: Er isst wenig)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.little"
      }
     ],
     "examples": [
@@ -2175,7 +2318,20 @@
    "lemma": "ein bisschen",
    "pos": "DET",
    "senses": [
-    "quant.alittle"
+    "quant.alittle",
+    "adv.alittle"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.alittle",
+     "axis": "register",
+     "value": "everyday"
+    },
+    {
+     "concept": "adv.alittle",
+     "axis": "what it goes with",
+     "value": "anything: ein bisschen müde, ein bisschen warten"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -2204,7 +2360,8 @@
       "def": "a bit, somewhat (before an adjective or verb: ein bisschen müde)",
       "register": [
        "informal"
-      ]
+      ],
+      "concept": "adv.alittle"
      }
     ],
     "examples": [
@@ -2275,6 +2432,12 @@
     "subtleties": [
      "ein bisschen softens a request or criticism: Das ist ein bisschen teuer (that’s a bit expensive)."
     ]
+   },
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
    }
   },
   {
@@ -2283,6 +2446,13 @@
    "pos": "DET",
    "senses": [
     "quant.alittle"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.alittle",
+     "axis": "register",
+     "value": "more formal"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -2354,6 +2524,12 @@
     "subtleties": [
      "In speech ein bisschen is far more common; ein wenig sounds polite or bookish."
     ]
+   },
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "one meaning"
+    }
    }
   },
   {
@@ -2362,8 +2538,21 @@
    "pos": "DET",
    "class": "quantpl",
    "senses": [
-    "quant.all"
+    "quant.all",
+    "adj.usedup"
    ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": [
+     {
+      "form": "alle",
+      "senses": [
+       "s2"
+      ],
+      "note": "never inflected, only after sein: Die Milch ist alle."
+     }
+    ]
+   },
    "forms": {
     "DET;NOM;PL": "alle",
     "DET;ACC;PL": "alle",
@@ -2396,7 +2585,8 @@
       "def": "used up, gone (only after sein: Die Milch ist alle)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.usedup"
      }
     ],
     "examples": [
@@ -2482,6 +2672,19 @@
    "senses": [
     "quant.some"
    ],
+   "contrasts": [
+    {
+     "concept": "quant.some",
+     "axis": "which kind of “some”",
+     "value": "a few, several (a number)"
+    }
+   ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "DET;NOM;PL": "einige",
     "DET;ACC;PL": "einige",
@@ -2590,6 +2793,19 @@
    "senses": [
     "quant.some"
    ],
+   "contrasts": [
+    {
+     "concept": "quant.some",
+     "axis": "which kind of “some”",
+     "value": "some but not others (a selection)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "DET;NOM;PL": "manche",
     "DET;ACC;PL": "manche",

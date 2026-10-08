@@ -10,6 +10,19 @@
     "dem.these"
    ],
    "translit": "ze",
+   "features": {
+    "spelling": "זה",
+    "agreement": "inflected",
+    "meaningForms": [
+     {
+      "form": "אֵלֶּה, הָאֵלֶּה",
+      "senses": [
+       "s3"
+      ],
+      "note": "a separate stem for “these”, the same for both genders"
+     }
+    ]
+   },
    "forms": {
     "PRON;SG;MASC": "זֶה",
     "PRON;SG;FEM": "זֹאת",
@@ -18,6 +31,7 @@
     "PRON;SG;FEM;DEF": "הַזֹּאת",
     "PRON;PL;DEF": "הָאֵלֶּה"
    },
+   "note": "Alone (presenting: “this is …”) it has no article: זֶה / זֹאת / אֵלֶּה. After a definite noun (“this …”) it takes the article like an adjective: הַבַּיִת הַזֶּה, הַמְּנוֹרָה הַזֹּאת, הַסְּפָרִים הָאֵלֶּה — the DEF cells.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -44,7 +58,8 @@
       "def": "it (empty subject: זֶה טָעִים “it’s tasty”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
@@ -146,8 +161,7 @@
      "In casual speech זֶה is used for everything, even feminine and plural things: זֶה עַגְבָנִיָּה, זֶה טָעִים.",
      "Presenting something far away also uses זֶה: זֶה הַבַּיִת שֶׁלִּי “that (over there) is my house” — Hebrew does not need “that” here."
     ]
-   },
-   "note": "Alone (presenting: “this is …”) it has no article: זֶה / זֹאת / אֵלֶּה. After a definite noun (“this …”) it takes the article like an adjective: הַבַּיִת הַזֶּה, הַמְּנוֹרָה הַזֹּאת, הַסְּפָרִים הָאֵלֶּה — the DEF cells."
+   }
   },
   {
    "id": "he:hahu",
@@ -159,13 +173,26 @@
     "dem.those"
    ],
    "translit": "hahu",
-   "note": "The article + the third-person pronoun: הַהוּא (m), הַהִיא (f), הָהֵם (m. pl.), הָהֵן (f. pl.). It follows a definite noun: הַבַּיִת הַהוּא “that house”.",
+   "features": {
+    "spelling": "ההוא",
+    "position": "after",
+    "meaningForms": [
+     {
+      "form": "הָהֵם, הָהֵן",
+      "senses": [
+       "s2"
+      ],
+      "note": "“those”: masculine הָהֵם, feminine הָהֵן"
+     }
+    ]
+   },
    "forms": {
     "DET;SG;MASC": "הַהוּא",
     "DET;SG;FEM": "הַהִיא",
     "DET;PL;MASC": "הָהֵם",
     "DET;PL;FEM": "הָהֵן"
    },
+   "note": "The article + the third-person pronoun: הַהוּא (m), הַהִיא (f), הָהֵם (m. pl.), הָהֵן (f. pl.). It follows a definite noun: הַבַּיִת הַהוּא “that house”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -273,6 +300,22 @@
     "adv.here"
    ],
    "translit": "po",
+   "features": {
+    "spelling": "פה",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.here",
+     "axis": "register",
+     "value": "everyday speech"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -373,6 +416,22 @@
     "adv.here"
    ],
    "translit": "kan",
+   "features": {
+    "spelling": "כאן",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.here",
+     "axis": "register",
+     "value": "neutral to formal; usual in writing"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -460,6 +519,15 @@
     "adv.there"
    ],
    "translit": "sham",
+   "features": {
+    "spelling": "שם",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

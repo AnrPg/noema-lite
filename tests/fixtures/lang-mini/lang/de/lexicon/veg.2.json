@@ -7,6 +7,27 @@
    "senses": [
     "veg.eggplant"
    ],
+   "features": {
+    "plurals": [
+     {
+      "form": "Auberginen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "forms": {
     "N;NOM;SG": "Aubergine",
@@ -109,6 +130,27 @@
    "senses": [
     "veg.pumpkin"
    ],
+   "features": {
+    "plurals": [
+     {
+      "form": "Kürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "forms": {
     "N;NOM;SG": "Kürbis",

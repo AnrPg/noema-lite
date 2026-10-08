@@ -132,6 +132,20 @@ A noema-lite **curriculum** is a map of steps; every step becomes a subject pack
 Without the connector the learner gives you a step bundle (`TASK.md` + `files/` + this toolkit): follow TASK.md and hand
 back `<subject_id>.noema.zip`.
 
+## Language courses (🌍 Languages)
+Foreign-language courses are not subject packs: they follow `references/LANGUAGES.md` (the binding contract) and are checked
+with `tools/validate_lang.py` and `tools/lang_refcheck.py`. The hard rules:
+1. **A new language starts with its catalogue of phenomena** (`library/languages/_phenomena/<code>.json`, §4.11): every
+   special, uncommon or notable feature of the language — script, sounds, the morphology of every part of speech, syntax,
+   one concept with several words, one word with several meanings, register, politeness, culture, numbers — with how the
+   app records and teaches it and what is missing. The language's `wordFeatures` and its course content come from it.
+2. **Every word states its language's whole facade** (`features` per `wordFeatures`, §4.5.1): a value for every parameter
+   of its part of speech, or `{"none": "<why>"}` — e.g. Arabic nouns: root, pattern, every plural with the meanings it
+   belongs to, dual, human or not; Chinese: measure words, readings and traditional forms per meaning.
+3. **Several words for one concept** (还是 / 或者, gehen / fahren) each say what separates them (`contrasts`, §4.5.2).
+4. **Every distinct meaning of a word is its own concept** (D15) — pending until a node teaches it; nuances say `of` the sense.
+5. **One common order of subjects across all languages** (D13, §4.4.3): never teach a subject earlier or later in one language.
+
 ## Updating an existing subject (additive only)
 Get the current pack (`noema_get_pack_url`, or the package / file the user gives you), then
 `python3 scripts/unpack.py PACK.noema.zip|PACK.json work` (a package gives back its source files too; from a .json

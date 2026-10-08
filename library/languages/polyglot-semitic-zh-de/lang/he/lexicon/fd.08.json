@@ -5,10 +5,35 @@
    "lemma": "אֵין",
    "pos": "PART",
    "senses": [
+    "det.none",
     "part.not"
    ],
-   "translit": "en",
+   "translit": "ein",
+   "features": {
+    "spelling": "אין",
+    "meaningForms": [
+     {
+      "form": "אֵינִי (אֵינֶנִּי), אֵינְךָ, אֵינֵךְ, אֵינוֹ (אֵינֶנּוּ), אֵינָהּ (אֵינֶנָּה), אֵינֶנּוּ, אֵינְכֶם, אֵינְכֶן, אֵינָם, אֵינָן",
+      "senses": [
+       "s2"
+      ],
+      "note": "with personal endings (formal): הוּא אֵינוֹ בַּבַּיִת “he is not at home”"
+     }
+    ]
+   },
    "note": "The present-tense negation of existence and possession (the opposite of יֵשׁ). Formal Hebrew also inflects it as a negative copula: אֵינֶנִּי / אֵינִי, אֵינְךָ, אֵינוֹ, אֵינָהּ …",
+   "contrasts": [
+    {
+     "concept": "det.none",
+     "axis": "what it does",
+     "value": "denies that something exists or is had (אֵין לִי מְכוֹנִית)"
+    },
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "existence and possession in the present; formally the present copula (אֵינוֹ)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -28,14 +53,15 @@
       "register": [
        "neutral"
       ],
-      "concept": "part.not"
+      "concept": "det.none"
      },
      {
       "id": "s2",
       "def": "is not (formal negative copula, often with a suffix: אֵינוֹ, אֵינָהּ)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "part.not"
      }
     ],
     "examples": [
@@ -129,6 +155,22 @@
     "part.not"
    ],
    "translit": "lo",
+   "features": {
+    "spelling": "לא",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "verbs, adjectives and whole statements"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -238,10 +280,30 @@
    "lemma": "שׁוּם",
    "pos": "DET",
    "senses": [
-    "det.none"
+    "det.none",
+    "det.any"
    ],
    "translit": "shum",
+   "features": {
+    "spelling": "שום",
+    "position": "before",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "Before a noun, with לֹא or אֵין: “no … at all, not any”. Plain “no + noun” needs no word in Hebrew (אֵין לִי מְכוֹנִית “I have no car”); שׁוּם adds emphasis. Same spelling as שׁוּם “garlic”.",
+   "contrasts": [
+    {
+     "concept": "det.any",
+     "axis": "kind of sentence",
+     "value": "questions and conditions (יֵשׁ שׁוּם סִכּוּי?)"
+    },
+    {
+     "concept": "det.none",
+     "axis": "what it does",
+     "value": "adds “no … at all” before a noun, with לֹא / אֵין (אֵין לִי שׁוּם מְכוֹנִית)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -268,7 +330,8 @@
       "def": "any (in questions and conditions)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "det.any"
      }
     ],
     "examples": [
@@ -348,6 +411,20 @@
     "pron.nothing"
    ],
    "translit": "klum",
+   "features": {
+    "spelling": "כלום",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.nothing",
+     "axis": "register",
+     "value": "everyday speech"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -446,7 +523,21 @@
     "pron.nothing"
    ],
    "translit": "shum davar",
+   "features": {
+    "spelling": "שום דבר",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "note": "A two-word lexeme: שׁוּם “any” + דָּבָר “thing”. Tokenized as one word.",
+   "contrasts": [
+    {
+     "concept": "pron.nothing",
+     "axis": "register",
+     "value": "neutral; usual in writing"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -536,6 +627,13 @@
     "pron.nobody"
    ],
    "translit": "af echad",
+   "features": {
+    "spelling": "אף אחד",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "note": "A two-word lexeme: אַף “even” + אֶחָד “one”. Feminine אַף אַחַת. Tokenized as one word.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -625,9 +723,17 @@
    "lemma": "אַף פַּעַם",
    "pos": "ADV",
    "senses": [
-    "adv.never"
+    "adv.never",
+    "adv.ever"
    ],
-   "translit": "af paam",
+   "translit": "af pa'am",
+   "features": {
+    "spelling": "אף פעם",
+    "derivedFrom": "אַף “even” + פַּעַם “time, once”",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "A two-word lexeme: אַף “even” + פַּעַם “time, once”. Tokenized as one word.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -655,7 +761,8 @@
       "def": "ever (in a question)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.ever"
      }
     ],
     "examples": [
@@ -729,6 +836,128 @@
     ],
     "subtleties": [
      "Unlike German nie, which needs no other negation, Hebrew keeps the double negation (אַף פַּעַם לֹא), as Russian никогда не and Greek ποτέ δεν do."
+    ]
+   }
+  },
+  {
+   "id": "he:al-imp",
+   "lemma": "אַל",
+   "pos": "ADV",
+   "senses": [
+    "part.not"
+   ],
+   "translit": "al",
+   "role": "“don’t”: the negation of commands, always followed by the future (2nd person): אַל תֵּלֵךְ “don’t go!”, אַל תְּחַכִּי “don’t wait! (to a woman)”. Never with the imperative itself (*אַל לֵךְ).",
+   "features": {
+    "spelling": "אל",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "commands: “don’t” + future (אַל תֵּלֵךְ)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Warnings and kind advice: don’t worry, don’t forget.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "don’t (+ future, 2nd person): a prohibition or a request not to do something",
+      "register": [
+       "neutral"
+      ],
+      "concept": "part.not"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אַל תֵּלֵךְ!",
+      "tr": "Don’t go! (to a man)",
+      "register": "neutral",
+      "context": "requests",
+      "sense": "s1"
+     },
+     {
+      "text": "אַל תִּדְאֲגִי.",
+      "tr": "Don’t worry. (to a woman)",
+      "register": "neutral",
+      "context": "comfort",
+      "sense": "s1"
+     },
+     {
+      "text": "אַל תִּשְׁכַּח אֶת הַמַּפְתֵּחַ!",
+      "tr": "Don’t forget the key! (to a man)",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אַל תִּדְאַג",
+      "tr": "don’t worry (to a man)"
+     },
+     {
+      "text": "אַל דְּאָגָה",
+      "tr": "no worries"
+     },
+     {
+      "text": "אַל תִּשְׁכַּח",
+      "tr": "don’t forget"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אַל תִּסְתַּכֵּל בַּקַּנְקַן אֶלָּא בְּמַה שֶּׁיֵּשׁ בּוֹ",
+      "tr": "look not at the jug but at what is in it",
+      "kind": "quote",
+      "meaning": "don’t judge by appearances",
+      "register": "literary",
+      "source": "Pirkei Avot, chapter 4 (Rabbi Meir)"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "לֹא",
+      "register": "neutral",
+      "nuance": "with the future: a firm, lasting prohibition — the Ten Commandments say לֹא תִּגְנֹב “you shall not steal”"
+     },
+     {
+      "word": "אָסוּר",
+      "register": "neutral",
+      "nuance": "“it is forbidden” + infinitive: אָסוּר לְהִכָּנֵס “no entry” — on signs and for rules"
+     }
+    ],
+    "etymology": {
+     "text": "Cognate with Phoenician 𐤀𐤋 (ʾl), Ugaritic ảl and Akkadian ul (Wiktionary).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic says “don’t” with لَا + the jussive (لَا تَذْهَبْ “don’t go”) — the same idea as Hebrew אַל + future, with another word."
+    ],
+    "pitfalls": [
+     "Only with the future: אַל תֵּלֵךְ, never *אַל לֵךְ and never *לֹא לֵךְ.",
+     "Unvowelled אל is also אֶל “to” and אֵל “god” — the context decides."
+    ],
+    "subtleties": [
+     "לֹא + future is a general rule or an order (“you won’t / you shall not”); אַל + future is the everyday “don’t”."
     ]
    }
   }

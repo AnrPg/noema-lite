@@ -8,6 +8,17 @@
     "colour.white"
    ],
    "translit": "lavan",
+   "features": {
+    "spelling": "לבן",
+    "root": "ל ב ן",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "לָבָן",
     "ADJ;SG;FEM": "לְבָנָה",
@@ -44,7 +55,8 @@
       "def": "white (of people: a white person)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -134,6 +146,17 @@
     "colour.black"
    ],
    "translit": "shachor",
+   "features": {
+    "spelling": "שחור",
+    "root": "שׁ ח ר",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "שָׁחֹר",
     "ADJ;SG;FEM": "שְׁחֹרָה",
@@ -180,7 +203,8 @@
       "def": "black, illegal, menial (in set phrases: שׁוּק שָׁחֹר, עֲבוֹדָה שְׁחֹרָה)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -281,6 +305,17 @@
     "colour.red"
    ],
    "translit": "adom",
+   "features": {
+    "spelling": "אדום",
+    "root": "א ד ם",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "אָדֹם",
     "ADJ;SG;FEM": "אֲדֻמָּה",
@@ -404,6 +439,17 @@
     "colour.blue"
    ],
    "translit": "kachol",
+   "features": {
+    "spelling": "כחול",
+    "root": "כ ח ל",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "כָּחֹל",
     "ADJ;SG;FEM": "כְּחֻלָּה",
@@ -528,6 +574,17 @@
     "colour.green"
    ],
    "translit": "yarok",
+   "features": {
+    "spelling": "ירוק",
+    "root": "י ר ק",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "יָרֹק",
     "ADJ;SG;FEM": "יְרֻקָּה",
@@ -574,7 +631,8 @@
       "def": "green, ecological",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -661,6 +719,17 @@
     "colour.yellow"
    ],
    "translit": "tsahov",
+   "features": {
+    "spelling": "צהוב",
+    "root": "צ ה ב",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "צָהֹב",
     "ADJ;SG;FEM": "צְהֻבָּה",
@@ -776,6 +845,21 @@
     "colour.brown"
    ],
    "translit": "chum",
+   "features": {
+    "spelling": "חום",
+    "root": {
+     "none": "a one-syllable (Biblical) colour word: no root in use"
+    },
+    "pattern": {
+     "none": "a one-syllable adjective: no pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "חוּם",
     "ADJ;SG;FEM": "חוּמָה",
@@ -880,6 +964,17 @@
     "colour.grey"
    ],
    "translit": "afor",
+   "features": {
+    "spelling": "אפור",
+    "root": "א פ ר",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "אָפֹר",
     "ADJ;SG;FEM": "אֲפֹרָה",
@@ -926,7 +1021,8 @@
       "def": "grey, dull, drab; ambiguous (figurative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1002,6 +1098,17 @@
     "colour.orange"
    ],
    "translit": "katom",
+   "features": {
+    "spelling": "כתום",
+    "root": "כ ת ם",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "כָּתֹם",
     "ADJ;SG;FEM": "כְּתֻמָּה",
@@ -1108,6 +1215,17 @@
     "colour.pink"
    ],
    "translit": "varod",
+   "features": {
+    "spelling": "ורוד",
+    "root": "ו ר ד",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "וָרֹד",
     "ADJ;SG;FEM": "וְרֻדָּה",
@@ -1154,7 +1272,8 @@
       "def": "rosy, optimistic (figurative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1229,6 +1348,17 @@
     "colour.purple"
    ],
    "translit": "sagol",
+   "features": {
+    "spelling": "סגול",
+    "root": "ס ג ל",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "סָגֹל",
     "ADJ;SG;FEM": "סְגֻלָּה",
@@ -1342,9 +1472,22 @@
    "lemma": "בָּהִיר",
    "pos": "ADJ",
    "senses": [
-    "adj.light"
+    "adj.light",
+    "adj.bright",
+    "adj.clear"
    ],
    "translit": "bahir",
+   "features": {
+    "spelling": "בהיר",
+    "root": "ב ה ר",
+    "pattern": "קָטִיל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "בָּהִיר",
     "ADJ;SG;FEM": "בְּהִירָה",
@@ -1355,6 +1498,13 @@
     "ADJ;PL;MASC;DEF": "הַבְּהִירִים",
     "ADJ;PL;FEM;DEF": "הַבְּהִירוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "adj.clear",
+     "axis": "what is clear",
+     "value": "an explanation or a style: lucid, easy to follow"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1381,14 +1531,16 @@
       "def": "bright, clear (a day, the sky)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.bright"
      },
      {
       "id": "s3",
       "def": "clear, lucid (an explanation)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.clear"
      }
     ],
     "examples": [
@@ -1490,6 +1642,19 @@
     "adj.dark"
    ],
    "translit": "kehe",
+   "features": {
+    "spelling": "כהה",
+    "root": "כ ה ה",
+    "pattern": {
+     "none": "a lamed-he adjective (כ־ה־ה): no standard pattern is given"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "כֵּהֶה",
     "ADJ;SG;FEM": "כֵּהָה",
@@ -1526,7 +1691,8 @@
       "def": "dim, faded (literary)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1606,10 +1772,34 @@
    "lemma": "יוֹתֵר",
    "pos": "ADV",
    "senses": [
-    "adv.more"
+    "adv.more",
+    "adv.nolonger",
+    "adv.most"
    ],
    "translit": "yoter",
+   "features": {
+    "spelling": "יותר",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": [
+     {
+      "form": "בְּיוֹתֵר",
+      "senses": [
+       "s3"
+      ],
+      "note": "only as בְּיוֹתֵר, after an adjective: חָשׁוּב בְּיוֹתֵר “most important”"
+     }
+    ]
+   },
    "note": "“More”: before or after an adjective (יוֹתֵר גָּדוֹל = גָּדוֹל יוֹתֵר “bigger”), before a noun (יוֹתֵר סְפָרִים “more books”) or after a verb (אוֹכֵל יוֹתֵר “eats more”); “than” = מִ / מֵ.",
+   "contrasts": [
+    {
+     "concept": "adv.most",
+     "axis": "register",
+     "value": "formal: בְּיוֹתֵר after the adjective"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1636,14 +1826,16 @@
       "def": "any more, no longer (with a negation)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.nolonger"
      },
      {
       "id": "s3",
       "def": "most, extremely (בְּיוֹתֵר, formal)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adv.most"
      }
     ],
     "examples": [
@@ -1673,6 +1865,13 @@
       "tr": "This is extremely important.",
       "register": "formal",
       "context": "work",
+      "sense": "s3"
+     },
+     {
+      "text": "זֶה הַסֵּפֶר הַטּוֹב בְּיוֹתֵר.",
+      "tr": "This is the very best book.",
+      "register": "formal",
+      "context": "reading",
       "sense": "s3"
      }
     ],
@@ -1747,11 +1946,27 @@
    "senses": [
     "adv.most"
    ],
+   "translit": "hachi",
    "alts": [
     "הַכִּי"
    ],
-   "translit": "hachi",
+   "features": {
+    "spelling": "הכי",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "note": "“Most, the most”: before the adjective (הֲכִי גָּדוֹל “the biggest”), which then takes no article: הַבַּיִת הֲכִי גָּדוֹל. Formal: הַגָּדוֹל בְּיוֹתֵר.",
+   "contrasts": [
+    {
+     "concept": "adv.most",
+     "axis": "register",
+     "value": "everyday: הֲכִי before the adjective"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

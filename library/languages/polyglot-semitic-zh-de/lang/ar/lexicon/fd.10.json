@@ -7,6 +7,13 @@
    "senses": [
     "q.what"
    ],
+   "contrasts": [
+    {
+     "concept": "q.what",
+     "axis": "what follows",
+     "value": "before a verb"
+    }
+   ],
    "translit": "māḏā",
    "class": "int",
    "ref": {
@@ -115,7 +122,16 @@
    "lemma": "مَا",
    "pos": "PRON",
    "senses": [
-    "q.what"
+    "q.what",
+    "adv.how.excl",
+    "pron.what"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.what",
+     "axis": "what follows",
+     "value": "before a noun or a pronoun"
+    }
    ],
    "translit": "mā",
    "class": "int",
@@ -145,7 +161,16 @@
       "def": "how …! (exclamation: مَا أَفْعَلَ …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.how.excl"
+     },
+     {
+      "id": "s4",
+      "def": "what, that which (relative): أَعْرِفُ مَا تَقْصِدُ (I know what you mean)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.what"
      }
     ],
     "examples": [
@@ -176,6 +201,13 @@
       "register": "neutral",
       "context": "exclamation",
       "sense": "s2"
+     },
+     {
+      "text": "أَعْرِفُ مَا تَقْصِدُ.",
+      "tr": "I know what you mean.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -222,6 +254,17 @@
    "senses": [
     "q.where"
    ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle (Wiktionary relates it to ء ي ن)"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾayna",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -249,7 +292,8 @@
       "def": "how can … compare with …? (أَيْنَ X مِنْ Y — implying there is no comparison)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -333,7 +377,8 @@
    "pos": "PRON",
    "class": "int",
    "senses": [
-    "q.who"
+    "q.who",
+    "pron.who"
    ],
    "translit": "man",
    "alts": [
@@ -365,7 +410,8 @@
       "def": "who, the one who; whoever (relative and conditional)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.who"
      }
     ],
     "examples": [
@@ -458,7 +504,26 @@
    "lemma": "مَتَى",
    "pos": "ADV",
    "senses": [
-    "q.when"
+    "q.when",
+    "conj.when"
+   ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "kind of clause",
+     "value": "whenever: a condition (+ jussive)"
+    }
    ],
    "translit": "matā",
    "ref": {
@@ -487,7 +552,8 @@
       "def": "whenever (conditional)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "conj.when"
      }
     ],
     "examples": [
@@ -515,6 +581,13 @@
      {
       "text": "تَعَالَ مَتَى شِئْتَ.",
       "tr": "Come whenever you like.",
+      "register": "formal",
+      "context": "invitation",
+      "sense": "s2"
+     },
+     {
+      "text": "مَتَى تَزُرْنَا تَجِدْنَا فِي الْبَيْتِ.",
+      "tr": "Whenever you visit us, you will find us at home.",
       "register": "formal",
       "context": "invitation",
       "sense": "s2"
@@ -573,6 +646,23 @@
    "senses": [
     "q.how"
    ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": [
+     {
+      "form": "كَيْفَمَا",
+      "what": "with مَا: however, in whatever way",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "translit": "kayfa",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -600,7 +690,8 @@
       "def": "however, in whatever way (كَيْفَمَا)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -685,6 +776,15 @@
    "senses": [
     "q.why"
    ],
+   "features": {
+    "root": {
+     "none": "a particle: لِ + مَاذَا"
+    },
+    "derivedFrom": "لِ + مَاذَا (what?)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "li-māḏā",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -784,6 +884,17 @@
    "senses": [
     "q.howmany"
    ],
+   "features": {
+    "root": {
+     "none": "an interrogative particle"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "kam",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -811,7 +922,8 @@
       "def": "how many …! how much …! (exclamation, with مِنْ or a genitive)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -896,7 +1008,8 @@
    "pos": "DET",
    "class": "int",
    "senses": [
-    "q.which"
+    "q.which",
+    "det.any"
    ],
    "translit": "ʾayy",
    "forms": {
@@ -933,7 +1046,8 @@
       "def": "any (in questions and negations: أَيُّ شَيْءٍ, anything)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "det.any"
      }
     ],
     "examples": [
@@ -1017,7 +1131,8 @@
    "lemma": "لِمَنْ",
    "pos": "DET",
    "senses": [
-    "q.whose"
+    "q.whose",
+    "q.forwhom"
    ],
    "translit": "li-man",
    "alts": [
@@ -1049,7 +1164,8 @@
       "def": "for whom? to whom?",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "q.forwhom"
      }
     ],
     "examples": [
@@ -1128,8 +1244,29 @@
    "senses": [
     "job.doctor"
    ],
+   "features": {
+    "root": "ط ب ب",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَطِبَّاء",
+      "kind": "broken",
+      "pattern": "أَفْعِلَاء",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "طَبِيبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ط ب ب",
    "translit": "ṭabīb",
    "forms": {
     "N;NOM;SG;MASC;INDF": "طَبِيبٌ",
@@ -1265,8 +1402,28 @@
    "senses": [
     "job.nurse"
    ],
+   "features": {
+    "root": "م ر ض",
+    "pattern": "مُفَعِّل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُمَرِّضُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُمَرِّضَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "م ر ض",
    "translit": "mumarriḍ",
    "forms": {
     "N;NOM;SG;MASC;INDF": "مُمَرِّضٌ",
@@ -1386,10 +1543,32 @@
    "pos": "NOUN",
    "class": "person",
    "senses": [
-    "job.engineer"
+    "job.engineer",
+    "job.architect"
    ],
+   "features": {
+    "root": "ه ن د س",
+    "pattern": "مُفَعْلِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُهَنْدِسُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مُهَنْدِسَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ه ن د س",
    "translit": "muhandis",
    "forms": {
     "N;NOM;SG;MASC;INDF": "مُهَنْدِسٌ",
@@ -1455,7 +1634,8 @@
       "def": "architect; surveyor (older senses)",
       "register": [
        "dated"
-      ]
+      ],
+      "concept": "job.architect"
      }
     ],
     "examples": [
@@ -1479,6 +1659,13 @@
       "register": "neutral",
       "context": "city",
       "sense": "s1"
+     },
+     {
+      "text": "صَمَّمَ هٰذَا الْمَسْجِدَ مُهَنْدِسٌ مِنْ إِسْطَنْبُولَ.",
+      "tr": "An architect from Istanbul designed this mosque.",
+      "register": "dated",
+      "context": "architecture",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1527,8 +1714,28 @@
    "senses": [
     "job.driver"
    ],
+   "features": {
+    "root": "س و ق",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "سَائِقُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَائِقَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "س و ق",
    "translit": "sāʾiq",
    "forms": {
     "N;NOM;SG;MASC;INDF": "سَائِقٌ",
@@ -1660,8 +1867,28 @@
    "senses": [
     "job.cook"
    ],
+   "features": {
+    "root": "ط ب خ",
+    "pattern": "فَعَّال",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "طَبَّاخُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "طَبَّاخَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ط ب خ",
    "translit": "ṭabbāḫ",
    "forms": {
     "N;NOM;SG;MASC;INDF": "طَبَّاخٌ",
@@ -1793,8 +2020,37 @@
    "senses": [
     "job.seller"
    ],
+   "features": {
+    "root": "ب ي ع",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "بَاعَة",
+      "kind": "broken",
+      "pattern": "فَعَلَة",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "بَائِعُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَائِعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ب ي ع",
    "translit": "bāʾiʿ",
    "forms": {
     "N;NOM;SG;MASC;INDF": "بَائِعٌ",
@@ -1947,10 +2203,52 @@
    "pos": "NOUN",
    "class": "person",
    "senses": [
-    "job.worker"
+    "job.worker",
+    "abstract.factor"
    ],
+   "features": {
+    "root": "ع م ل",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "عُمَّال",
+      "kind": "broken",
+      "pattern": "فُعَّال",
+      "declension": "triptote",
+      "note": "workers",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "عَامِلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "employees, those working (الْعَامِلُونَ فِي الشَّرِكَةِ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "عَوَامِل",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "note": "factors",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "عَامِلَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "root": "ع م ل",
    "translit": "ʿāmil",
    "forms": {
     "N;NOM;SG;MASC;INDF": "عَامِلٌ",
@@ -2036,7 +2334,8 @@
       "def": "factor (also in mathematics; plural عَوَامِل)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "abstract.factor"
      }
     ],
     "examples": [
@@ -2119,8 +2418,35 @@
    "senses": [
     "job.farmer"
    ],
+   "features": {
+    "root": "ز ر ع",
+    "pattern": "مُفَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُزَارِعُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُزَارِعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "connotation and modernity",
+     "value": "farmer (neutral, modern)"
+    }
+   ],
    "gender": "MASC",
-   "root": "ز ر ع",
    "translit": "muzāriʿ",
    "forms": {
     "N;NOM;SG;MASC;INDF": "مُزَارِعٌ",
@@ -2247,8 +2573,35 @@
    "senses": [
     "job.farmer"
    ],
+   "features": {
+    "root": "ف ل ح",
+    "pattern": "فَعَّال",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "فَلَّاحُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فَلَّاحَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "connotation and modernity",
+     "value": "peasant, traditional farmer"
+    }
+   ],
    "gender": "MASC",
-   "root": "ف ل ح",
    "translit": "fallāḥ",
    "forms": {
     "N;NOM;SG;MASC;INDF": "فَلَّاحٌ",
@@ -2375,8 +2728,29 @@
    "senses": [
     "job.police"
    ],
+   "features": {
+    "root": "ش ر ط",
+    "pattern": "فُعْلِيّ",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "شُرْطِيُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شُرْطِيَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "translit": "šurṭiyy",
+   "translit": "šurṭī",
    "forms": {
     "N;NOM;SG;MASC;INDF": "شُرْطِيٌّ",
     "N;NOM;PL;MASC;INDF": "شُرْطِيُّونَ",
@@ -2511,9 +2885,29 @@
    "senses": [
     "job.lawyer"
    ],
+   "features": {
+    "root": "ح م ي",
+    "pattern": "مُفَاعِل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُحَامُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُحَامِيَانِ",
+    "declension": "defective",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ح م ي",
-   "translit": "muḥāmin",
+   "translit": "muḥāmī",
    "forms": {
     "N;NOM;SG;MASC;INDF": "مُحَامٍ",
     "N;NOM;PL;MASC;INDF": "مُحَامُونَ",
@@ -2644,6 +3038,27 @@
    "senses": [
     "job.artist"
    ],
+   "features": {
+    "root": "ف ن ن",
+    "pattern": "فَعَّال",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "فَنَّانُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فَنَّانَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "fannān",
    "forms": {

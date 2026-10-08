@@ -7,7 +7,32 @@
    "senses": [
     "poss.have",
     "prep.at",
-    "prep.attime"
+    "prep.attime",
+    "prep.accordingto"
+   ],
+   "features": {
+    "root": "ع ن د",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "a person’s place or a location",
+     "value": "at someone’s (عِنْدَ الطَّبِيبِ), at a point (عِنْدَ الْبَابِ)"
+    },
+    {
+     "concept": "prep.attime",
+     "axis": "the kind of time",
+     "value": "a moment or an event (عِنْدَ الظُّهْرِ، عِنْدَ الْفَجْرِ)"
+    },
+    {
+     "concept": "prep.accordingto",
+     "axis": "whose word",
+     "value": "in someone’s opinion (عِنْدَ سِيبَوَيْهِ)"
+    }
    ],
    "translit": "ʿinda",
    "forms": {
@@ -53,18 +78,12 @@
       "concept": "prep.at"
      },
      {
-      "id": "s3",
-      "def": "at the time of",
-      "register": [
-       "neutral"
-      ]
-     },
-     {
       "id": "s4",
       "def": "in the opinion of",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "prep.accordingto"
      },
      {
       "id": "s5",
@@ -116,7 +135,7 @@
       "tr": "I wake up at dawn.",
       "register": "neutral",
       "context": "daily routine",
-      "sense": "s3"
+      "sense": "s5"
      },
      {
       "text": "نَأْكُلُ الْغَدَاءَ عِنْدَ الظُّهْرِ.",
@@ -184,18 +203,49 @@
      "“At” a place is فِي (فِي الْبَيْتِ, at home); “at” a person or a landmark is عِنْدَ (عِنْدَ صَدِيقِي, at my friend’s; عِنْدَ الْبَابِ, at the door).",
      "For a moment in time عِنْدَ is as common as فِي: عِنْدَ الظُّهْرِ, عِنْدَ الْفَجْرِ (at dawn)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:usra",
    "lemma": "أُسْرَة",
    "pos": "NOUN",
    "senses": [
-    "family.family"
+    "family.family",
+    "pol.dynasty"
+   ],
+   "features": {
+    "root": "ء س ر",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أُسَر",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أُسْرَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.family",
+     "axis": "nuclear or extended",
+     "value": "the household: parents and children"
+    }
    ],
    "class": "kin",
    "gender": "FEM",
-   "root": "ء س ر",
    "translit": "ʾusra",
    "forms": {
     "N;NOM;SG;INDF": "أُسْرَةٌ",
@@ -264,7 +314,8 @@
       "def": "a dynasty, a ruling house (الْأُسْرَةُ الْحَاكِمَةُ)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "pol.dynasty"
      }
     ],
     "examples": [
@@ -340,9 +391,48 @@
    "senses": [
     "family.family"
    ],
+   "features": {
+    "root": "ع و ل",
+    "pattern": "فَاعِلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "عَائِلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "عَوَائِل",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "note": "also used",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "عَائِلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.family",
+     "axis": "nuclear or extended",
+     "value": "the family in general, often the wider family"
+    }
+   ],
    "class": "kin",
    "gender": "FEM",
-   "root": "ع و ل",
    "translit": "ʿāʾila",
    "forms": {
     "N;NOM;SG;INDF": "عَائِلَةٌ",
@@ -411,7 +501,8 @@
       "def": "family name: اِسْمُ الْعَائِلَةِ (surname)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -487,9 +578,24 @@
    "senses": [
     "family.parents"
    ],
+   "features": {
+    "root": "و ل د",
+    "pattern": "فَاعِلَان",
+    "sunLetter": false,
+    "human": true,
+    "plurals": {
+     "none": "a dual (the two parents)"
+    },
+    "dual": {
+     "none": "itself a dual"
+    },
+    "declension": "dual",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "class": "du",
    "gender": "MASC",
-   "root": "و ل د",
    "translit": "wālidān",
    "forms": {
     "N;NOM;DU;INDF": "وَالِدَانِ",
@@ -601,9 +707,31 @@
    "senses": [
     "family.mother"
    ],
+   "features": {
+    "root": "ء م م",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أُمَّهَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "أُمَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "class": "kin",
    "gender": "FEM",
-   "root": "ء م م",
    "translit": "ʾumm",
    "forms": {
     "N;NOM;SG;INDF": "أُمٌّ",
@@ -672,14 +800,16 @@
       "def": "origin, source; the main one (أُمُّ الْقُرَى, “mother of towns” = Mecca)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "mother of (a woman called after her child: أُمُّ أَحْمَدَ)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -770,11 +900,42 @@
    "lemma": "أَب",
    "pos": "NOUN",
    "senses": [
-    "family.father"
+    "family.father",
+    "family.ancestor"
+   ],
+   "features": {
+    "root": "ء ب و",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "آبَاء",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "أَبَوَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.ancestor",
+     "axis": "how the ancestors are named",
+     "value": "“the fathers” (آبَاؤُنَا): the generations before us"
+    }
    ],
    "class": "kin",
    "gender": "MASC",
-   "root": "ء ب و",
    "translit": "ʾab",
    "forms": {
     "N;NOM;SG;INDF": "أَبٌ",
@@ -843,14 +1004,16 @@
       "def": "ancestor, forefather (plural آبَاء)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.ancestor"
      },
      {
       "id": "s3",
       "def": "father of (a man called after his child: أَبُو أَحْمَدَ)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -874,6 +1037,13 @@
       "register": "neutral",
       "context": "names",
       "sense": "s3"
+     },
+     {
+      "text": "نَحْتَرِمُ تَقَالِيدَ الْآبَاءِ وَالْأَجْدَادِ.",
+      "tr": "We respect the traditions of our forefathers.",
+      "register": "neutral",
+      "context": "tradition",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -934,6 +1104,49 @@
    "pos": "NOUN",
    "senses": [
     "family.son"
+   ],
+   "features": {
+    "root": "ب ن ي",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَبْنَاء",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     },
+     {
+      "form": "بَنُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "literary; بَنُو in the names of tribes (بَنُو هَاشِمٍ)",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "اِبْنَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.son",
+     "axis": "register and range",
+     "value": "the standard word: son (also “son of” in names)"
+    }
    ],
    "class": "kin",
    "gender": "MASC",
@@ -1005,14 +1218,16 @@
       "def": "son of (in names: مُحَمَّدُ بْنُ عَبْدِ اللّٰهِ)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "a child of (a place or a group): اِبْنُ الْبَلَدِ, a local",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1096,6 +1311,36 @@
    "pos": "NOUN",
    "senses": [
     "family.daughter"
+   ],
+   "features": {
+    "root": "ب ن ي",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "بَنَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "اِبْنَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.daughter",
+     "axis": "register",
+     "value": "formal, written"
+    }
    ],
    "class": "kin",
    "gender": "FEM",
@@ -1232,6 +1477,41 @@
    "senses": [
     "family.brother"
    ],
+   "features": {
+    "root": "ء خ و",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "إِخْوَة",
+      "kind": "broken",
+      "pattern": "فِعْلَة",
+      "declension": "triptote",
+      "note": "brothers by blood",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "إِخْوَان",
+      "kind": "broken",
+      "pattern": "فِعْلَان",
+      "declension": "triptote",
+      "note": "brethren, fellows",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أَخَوَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "class": "kin",
    "gender": "MASC",
    "translit": "ʾaḫ",
@@ -1302,7 +1582,8 @@
       "def": "brother, fellow (friendly address: يَا أَخِي)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1382,6 +1663,30 @@
    "senses": [
     "family.sister"
    ],
+   "features": {
+    "root": "ء خ و",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَخَوَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أُخْتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "class": "kin",
    "gender": "FEM",
    "translit": "ʾuḫt",
@@ -1452,7 +1757,8 @@
       "def": "sister (polite address to a woman: يَا أُخْتِي)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1529,11 +1835,34 @@
    "lemma": "زَوْج",
    "pos": "NOUN",
    "senses": [
-    "family.husband"
+    "family.husband",
+    "measure.pair"
    ],
+   "features": {
+    "root": "ز و ج",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَزْوَاج",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "زَوْجَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "class": "kin",
    "gender": "MASC",
-   "root": "ز و ج",
    "translit": "zawj",
    "forms": {
     "N;NOM;SG;INDF": "زَوْجٌ",
@@ -1602,7 +1931,8 @@
       "def": "a pair, a couple; one of a pair (زَوْجَانِ, a married couple)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.pair"
      }
     ],
     "examples": [
@@ -1678,9 +2008,36 @@
    "senses": [
     "family.wife"
    ],
+   "features": {
+    "root": "ز و ج",
+    "pattern": "فَعْلَة",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "زَوْجَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "زَوْجَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "the standard word: wife"
+    }
+   ],
    "class": "kin",
    "gender": "FEM",
-   "root": "ز و ج",
    "translit": "zawja",
    "forms": {
     "N;NOM;SG;INDF": "زَوْجَةٌ",
@@ -1822,9 +2179,30 @@
    "senses": [
     "family.baby"
    ],
+   "features": {
+    "root": "ر ض ع",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "رُضَّع",
+      "kind": "broken",
+      "pattern": "فُعَّل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "رَضِيعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "class": "kin",
    "gender": "MASC",
-   "root": "ر ض ع",
    "translit": "raḍīʿ",
    "forms": {
     "N;NOM;SG;INDF": "رَضِيعٌ",
@@ -1960,10 +2338,33 @@
    "lemma": "أَجْدَاد",
    "pos": "NOUN",
    "senses": [
-    "family.grandparents"
+    "family.grandparents",
+    "family.ancestor"
+   ],
+   "features": {
+    "root": "ج د د",
+    "pattern": "أَفْعَال",
+    "sunLetter": false,
+    "human": true,
+    "plurals": {
+     "none": "itself a plural (of جَدّ)"
+    },
+    "dual": {
+     "none": "a plural noun"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.ancestor",
+     "axis": "how the ancestors are named",
+     "value": "the forefathers as a group (a plural word)"
+    }
    ],
    "class": "plt",
-   "root": "ج د د",
    "translit": "ʾajdād",
    "forms": {
     "N;NOM;PL;INDF": "أَجْدَادٌ",
@@ -2011,7 +2412,8 @@
       "def": "ancestors, forefathers",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.ancestor"
      }
     ],
     "examples": [
@@ -2078,18 +2480,60 @@
     "subtleties": [
      "To be precise, people say جَدِّي وَجَدَّتِي (my grandfather and grandmother)."
     ]
-   }
+   },
+   "gender": "MASC"
   },
   {
    "id": "ar:jadd",
    "lemma": "جَدّ",
    "pos": "NOUN",
    "senses": [
-    "family.grandfather"
+    "family.grandfather",
+    "family.ancestor",
+    "abstract.luck"
+   ],
+   "features": {
+    "root": "ج د د",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَجْدَاد",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "جُدُود",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "fortunes (the homonym “luck”)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "dual": "جَدَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.ancestor",
+     "axis": "how the ancestors are named",
+     "value": "one ancestor, a forefather (singular)"
+    }
    ],
    "class": "kin",
    "gender": "MASC",
-   "root": "ج د د",
    "translit": "jadd",
    "forms": {
     "N;NOM;SG;INDF": "جَدٌّ",
@@ -2158,14 +2602,16 @@
       "def": "ancestor, forefather",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.ancestor"
      },
      {
       "id": "s3",
       "def": "good fortune, luck (a homonym)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "abstract.luck"
      }
     ],
     "examples": [
@@ -2189,6 +2635,20 @@
       "register": "neutral",
       "context": "family",
       "sense": "s1"
+     },
+     {
+      "text": "عَاشَ الْأَجْدَادُ فِي هٰذِهِ الْأَرْضِ قَبْلَنَا.",
+      "tr": "Our forefathers lived in this land before us.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
+     },
+     {
+      "text": "وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ.",
+      "tr": "And the good fortune of the fortunate is of no avail against You (a well-known prayer).",
+      "register": "literary",
+      "context": "prayer",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2236,9 +2696,29 @@
    "senses": [
     "family.grandmother"
    ],
+   "features": {
+    "root": "ج د د",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "جَدَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَدَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "class": "kin",
    "gender": "FEM",
-   "root": "ج د د",
    "translit": "jadda",
    "forms": {
     "N;NOM;SG;INDF": "جَدَّةٌ",
@@ -2368,11 +2848,34 @@
    "lemma": "حَفِيد",
    "pos": "NOUN",
    "senses": [
-    "family.grandson"
+    "family.grandson",
+    "family.descendant"
    ],
+   "features": {
+    "root": "ح ف د",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَحْفَاد",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَفِيدَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "class": "kin",
    "gender": "MASC",
-   "root": "ح ف د",
    "translit": "ḥafīd",
    "forms": {
     "N;NOM;SG;INDF": "حَفِيدٌ",
@@ -2441,7 +2944,8 @@
       "def": "descendant (plural أَحْفَاد)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.descendant"
      }
     ],
     "examples": [
@@ -2465,6 +2969,13 @@
       "register": "neutral",
       "context": "family",
       "sense": "s1"
+     },
+     {
+      "text": "سَيَتَذَكَّرُ الْأَحْفَادُ مَا فَعَلْنَاهُ.",
+      "tr": "Our descendants will remember what we did.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2512,9 +3023,29 @@
    "senses": [
     "family.granddaughter"
    ],
+   "features": {
+    "root": "ح ف د",
+    "pattern": "فَعِيلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "حَفِيدَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "حَفِيدَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "class": "kin",
    "gender": "FEM",
-   "root": "ح ف د",
    "translit": "ḥafīda",
    "forms": {
     "N;NOM;SG;INDF": "حَفِيدَةٌ",
@@ -2642,6 +3173,36 @@
    "senses": [
     "family.uncle"
    ],
+   "features": {
+    "root": "ع م م",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَعْمَام",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "عَمَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side of the family",
+     "value": "father’s brother"
+    }
+   ],
    "class": "kin",
    "gender": "MASC",
    "translit": "ʿamm",
@@ -2718,7 +3279,8 @@
       "def": "“uncle”: a polite address to an older man (يَا عَمِّي)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2788,7 +3350,48 @@
    "lemma": "خَال",
    "pos": "NOUN",
    "senses": [
-    "family.uncle"
+    "family.uncle",
+    "body.mole"
+   ],
+   "features": {
+    "root": "خ و ل",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَخْوَال",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "maternal uncles",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "خِيلَان",
+      "kind": "broken",
+      "pattern": "فِعْلَان",
+      "declension": "triptote",
+      "note": "moles, beauty spots (the homonym)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "خَالَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side of the family",
+     "value": "mother’s brother"
+    }
    ],
    "class": "kin",
    "gender": "MASC",
@@ -2860,7 +3463,8 @@
       "def": "a beauty spot, a mole (a homonym)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "body.mole"
      }
     ],
     "examples": [
@@ -2930,6 +3534,34 @@
    "pos": "NOUN",
    "senses": [
     "family.aunt"
+   ],
+   "features": {
+    "root": "ع م م",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "عَمَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عَمَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side of the family",
+     "value": "father’s sister"
+    }
    ],
    "class": "kin",
    "gender": "FEM",
@@ -3060,6 +3692,35 @@
    "senses": [
     "family.aunt"
    ],
+   "features": {
+    "root": "خ و ل",
+    "pattern": "فَعَلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "خَالَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "خَالَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side of the family",
+     "value": "mother’s sister"
+    }
+   ],
    "class": "kin",
    "gender": "FEM",
    "translit": "ḫāla",
@@ -3130,7 +3791,8 @@
       "def": "“auntie”: a polite address to an older woman",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3202,11 +3864,60 @@
    "lemma": "قَرِيب",
    "pos": "NOUN",
    "senses": [
-    "family.relative"
+    "family.relative",
+    "adv.near"
+   ],
+   "features": {
+    "root": "ق ر ب",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَقَارِب",
+      "kind": "broken",
+      "pattern": "أَفَاعِل",
+      "declension": "diptote",
+      "note": "relatives (the usual word)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "أَقْرِبَاء",
+      "kind": "broken",
+      "pattern": "أَفْعِلَاء",
+      "declension": "diptote",
+      "note": "relatives (formal)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "قَرِيبُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "as the adjective “near” (of people)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "قَرِيبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "word class (the same form قَرِيب)",
+     "value": "the noun “relative”, here used as the adjective"
+    }
    ],
    "class": "kin",
    "gender": "MASC",
-   "root": "ق ر ب",
    "translit": "qarīb",
    "forms": {
     "N;NOM;SG;INDF": "قَرِيبٌ",
@@ -3275,7 +3986,8 @@
       "def": "near, close (the same word as an adjective, lesson 12)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.near"
      }
     ],
     "examples": [
@@ -3296,6 +4008,13 @@
      {
       "text": "الْبَيْتُ قَرِيبٌ مِنْ هُنَا.",
       "tr": "The house is close to here.",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s2"
+     },
+     {
+      "text": "هَلِ الْمَطْعَمُ قَرِيبٌ؟",
+      "tr": "Is the restaurant close?",
       "register": "neutral",
       "context": "directions",
       "sense": "s2"

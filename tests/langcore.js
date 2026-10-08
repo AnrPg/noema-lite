@@ -217,10 +217,20 @@ ok(plan.steps.some(s => s.kind === 'grammar' && s.lang === 'de'), 'when a functi
 
 // ---------- the word card (§4.6) ----------
 const card = N.wordCard(C, L, 'de', 'de:Gurke');
-ok(card.hasProfile && card.examples.length === 4 && new Set(card.examples.map(e => e.register)).size >= 2, `German Gurke: ${card.examples.length} examples in ${new Set(card.examples.map(e => e.register)).size} registers`);
+ok(card.hasProfile && card.examples.length === 5 && new Set(card.examples.map(e => e.register)).size >= 2, `German Gurke: ${card.examples.length} examples in ${new Set(card.examples.map(e => e.register)).size} registers`);
 ok(same(card.parts.map(p => p[1]), ['die Gurke', 'der Gurke', 'die Gurken']), 'principal parts: article, genitive, plural');
 ok(same(card.flags.map(f => f.lang + ':' + f.words.map(w => w.lemma).join('/')), ['ar:خِيَار', 'he:מְלָפְפוֹן', 'zh:黄瓜', 'de:Gurke'].map(x => x.normalize('NFC'))), 'flags: the same concept in every course language');
-ok(card.sections.map(s => s.key).join(',') === 'senses,examples,collocations,phrases,synonyms,pitfalls,subtleties,etymology,funFacts', 'sections in order, empty ones left out');
+ok(card.sections.map(s => s.key).join(',') === 'senses,facade,examples,collocations,phrases,synonyms,pitfalls,subtleties,etymology,funFacts', 'sections in order, empty ones left out');
+{ // D15: every meaning a concept, shown with the others; D14: the facade as the language declares it
+  const mean = card.sections.find(s => s.key === 'senses').items;
+  ok(mean[0].current && mean[0].concept === 'veg.cucumber' && mean.some(m => m.concept === 'obj.junk' && m.pending && !m.current), 'meanings: the one shown first, the others with their (pending) concepts');
+  const junk = N.wordCard(C, L, 'de', 'de:Gurke', { concept: 'obj.junk' }).sections.find(s => s.key === 'senses').items;
+  ok(junk[0].concept === 'obj.junk' && junk[0].current && junk.some(m => m.concept === 'veg.cucumber'), 'the card for another meaning puts that meaning first');
+  const fac = card.sections.find(s => s.key === 'facade').items;
+  ok(fac.some(f => f.id === 'plurals' && /Gurken/.test(f.text)) && fac.every(f => f.title), 'the facade: the German parameters with their titles (plurals …)');
+  ok(C.lang.de.lex['de:Gurke'].senses.includes('obj.junk') && (C.lang.de.byConcept['obj.junk'] || []).includes('de:Gurke'), 'the word belongs to every concept of its meanings');
+  ok(same(C.lang.zh.lex['zh:huluobo'].measure, ['根']) || (C.lang.zh.lex['zh:huluobo'].measure || []).length > 0, 'features are readable as fields (zh measure words)');
+}
 ok(Object.keys(card.sections.find(s => s.key === 'synonyms').items).join(',') === 'neutral', 'synonyms are grouped by register');
 ok(same(N.wordCard(C, L, 'de', 'de:Kürbis').parts.map(p => p[1]), ['der Kürbis', 'des Kürbisses', 'die Kürbisse']), 'masculine: des Kürbisses');
 const slang = card.examples.find(e => e.register === 'colloquial');

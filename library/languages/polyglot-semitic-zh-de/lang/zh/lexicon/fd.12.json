@@ -7,7 +7,21 @@
    "pinyin": "shàng",
    "pos": "ADP",
    "senses": [
-    "prep.on"
+    "prep.on",
+    "verb.goup",
+    "adj.previous"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.on",
+     "axis": "bound or free",
+     "value": "only after a noun (桌子上)"
+    },
+    {
+     "concept": "adj.previous",
+     "axis": "construction",
+     "value": "上 + measure word: last (上个月, 上个星期)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,14 +49,16 @@
       "def": "(verb) to go up; to get on (a vehicle); to attend",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.goup"
      },
      {
       "id": "s3",
       "def": "last, previous (上个月 ‘last month’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.previous"
      }
     ],
     "examples": [
@@ -133,6 +149,18 @@
      "上 is also ‘on’ for surfaces that are not on top: 墙上 ‘on the wall’, 街上 ‘in the street’.",
      "After a noun it is usually said lightly: 桌子上 zhuōzi shang."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "after"
    }
   },
   {
@@ -142,9 +170,30 @@
    "pinyin": "shàng mian",
    "pos": "NOUN",
    "senses": [
-    "prep.on"
+    "prep.on",
+    "pol.authorities"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.on",
+     "axis": "bound or free",
+     "value": "after a noun or alone (在上面)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -171,21 +220,24 @@
       "def": "the top, the surface",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "above, aforementioned (in a text)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "the higher-ups, the authorities",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "pol.authorities"
      }
     ],
     "examples": [
@@ -276,7 +328,17 @@
    "pinyin": "xià",
    "pos": "ADP",
    "senses": [
-    "prep.under"
+    "prep.under",
+    "verb.godown",
+    "adj.next",
+    "verb.fall"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.under",
+     "axis": "bound or free",
+     "value": "only after a noun (床下)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -304,21 +366,24 @@
       "def": "(verb) to go down; to get off (a vehicle)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.godown"
      },
      {
       "id": "s3",
       "def": "next (下个月 ‘next month’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.next"
      },
      {
       "id": "s4",
       "def": "(verb, of rain or snow) to fall",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.fall"
      }
     ],
     "examples": [
@@ -399,6 +464,18 @@
     "subtleties": [
      "上 / 下 also order time: 上个月 ‘last month’, 下个月 ‘next month’ — the past is ‘up’, the future ‘down’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "after"
    }
   },
   {
@@ -408,9 +485,30 @@
    "pinyin": "xià mian",
    "pos": "NOUN",
    "senses": [
-    "prep.under"
+    "prep.under",
+    "person.subordinate"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.under",
+     "axis": "bound or free",
+     "value": "after a noun or alone (在下面)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -437,14 +535,16 @@
       "def": "next, following (in a talk, a text)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "the lower levels, subordinates",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.subordinate"
      }
     ],
     "examples": [
@@ -471,6 +571,14 @@
       "register": "neutral",
       "context": "meetings",
       "sense": "s2"
+     },
+     {
+      "text": "下面的人都很忙。",
+      "py": "Xiàmian de rén dōu hěn máng.",
+      "tr": "The people below (the staff) are all very busy.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -527,7 +635,21 @@
    "pinyin": "lǐ",
    "pos": "ADP",
    "senses": [
-    "adv.inside"
+    "adv.inside",
+    "prep.within",
+    "measure.li"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.inside",
+     "axis": "bound or free",
+     "value": "only after a noun (冰箱里)"
+    },
+    {
+     "concept": "prep.within",
+     "axis": "register",
+     "value": "after a time word: during (暑假里) — everyday"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -555,14 +677,16 @@
       "def": "within, during (a time)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.within"
      },
      {
       "id": "s3",
       "def": "li, a Chinese mile (500 m)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.li"
      }
     ],
     "examples": [
@@ -645,6 +769,30 @@
      "After a noun 里 is usually toneless: 家里 jiāli.",
      "With rooms and buildings 里 is optional: 在厨房 / 在厨房里."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": [
+     {
+      "trad": "裡",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "trad": "里",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "after"
    }
   },
   {
@@ -656,7 +804,27 @@
    "senses": [
     "adv.inside"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 裡面 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.inside",
+     "axis": "bound or free",
+     "value": "after a noun or alone (在里面)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -683,7 +851,8 @@
       "def": "the inside, the interior",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -768,7 +937,20 @@
    "senses": [
     "adv.outside"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -795,14 +977,16 @@
       "def": "away from home; the outside world",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "the outside, the surface",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -888,7 +1072,20 @@
    "senses": [
     "prep.nextto"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 旁邊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -993,7 +1190,20 @@
    "senses": [
     "prep.infront"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1020,7 +1230,8 @@
       "def": "the earlier part, above (in a text)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1103,9 +1314,30 @@
    "pinyin": "hòu mian",
    "pos": "NOUN",
    "senses": [
-    "prep.behind"
+    "prep.behind",
+    "adv.later"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 後面 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.later",
+     "axis": "how much later",
+     "value": "later on, further on (in a talk or a text)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1132,7 +1364,8 @@
       "def": "later; the later part",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.later"
      }
     ],
     "examples": [
@@ -1158,6 +1391,14 @@
       "tr": "There is a lot more later on.",
       "register": "neutral",
       "context": "reading",
+      "sense": "s2"
+     },
+     {
+      "text": "这个问题我们后面再讨论。",
+      "py": "Zhège wèntí wǒmen hòumian zài tǎolùn.",
+      "tr": "We’ll discuss this question later.",
+      "register": "neutral",
+      "context": "meetings",
       "sense": "s2"
      }
     ],
@@ -1210,9 +1451,30 @@
    "pinyin": "zhōng jiān",
    "pos": "NOUN",
    "senses": [
-    "prep.between"
+    "prep.between",
+    "prep.among"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 中間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.between",
+     "axis": "place or relation",
+     "value": "between, in the middle (a place word)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1242,7 +1504,8 @@
       "def": "among, in the midst of",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.among"
      }
     ],
     "examples": [
@@ -1269,6 +1532,14 @@
       "register": "neutral",
       "context": "photos",
       "sense": "s1"
+     },
+     {
+      "text": "我们中间谁会说德语？",
+      "py": "Wǒmen zhōngjiān shéi huì shuō Déyǔ?",
+      "tr": "Who among us can speak German?",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1320,7 +1591,20 @@
    "pinyin": "zhī jiān",
    "pos": "ADP",
    "senses": [
-    "prep.between"
+    "prep.between",
+    "prep.within"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.within",
+     "axis": "register",
+     "value": "after a span of time: within (一夜之间 ‘overnight’) — formal"
+    },
+    {
+     "concept": "prep.between",
+     "axis": "place or relation",
+     "value": "between, among — also of time and relations (formal)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1348,7 +1632,8 @@
       "def": "within, in the space of (time)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.within"
      }
     ],
     "examples": [
@@ -1412,6 +1697,18 @@
     "subtleties": [
      "之间 is a little more formal than 中间."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 之間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "after"
    }
   },
   {
@@ -1423,7 +1720,20 @@
    "senses": [
     "adv.left"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 左邊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1523,7 +1833,20 @@
    "senses": [
     "adv.right"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 右邊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1621,7 +1944,16 @@
    "pinyin": "jìn",
    "pos": "ADJ",
    "senses": [
-    "adv.near"
+    "adv.near",
+    "adj.recent",
+    "adj.close"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "adjective or place noun",
+     "value": "near (adjective: 很近)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1649,14 +1981,16 @@
       "def": "near, recent (in time: 最近)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.recent"
      },
      {
       "id": "s3",
       "def": "close, intimate",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.close"
      }
     ],
     "examples": [
@@ -1691,6 +2025,14 @@
       "register": "neutral",
       "context": "proverbs",
       "sense": "s1"
+     },
+     {
+      "text": "他们是很近的亲戚。",
+      "py": "Tāmen shì hěn jìn de qīnqi.",
+      "tr": "They are close relatives.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1748,6 +2090,17 @@
     "subtleties": [
      "近 is the adjective; 附近 is the noun ‘vicinity’: 我家附近 ‘near my home’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1785,14 +2138,16 @@
       "def": "distant (relationship)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(远远) by far",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1868,6 +2223,17 @@
     "subtleties": [
      "远 is also used for time: 不远的将来 ‘the not-too-distant future’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 遠 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1879,7 +2245,27 @@
    "senses": [
     "adv.near"
    ],
-   "measureNone": "a place word (方位词): it names a position and is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a place word (方位词): it names a position and is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "adjective or place noun",
+     "value": "the vicinity (place noun: 学校附近)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1974,105 +2360,6 @@
    }
   },
   {
-   "id": "zh:li.from",
-   "lemma": "离",
-   "trad": "離",
-   "pinyin": "lí",
-   "pos": "ADP",
-   "senses": [],
-   "role": "‘from’ for distance: A 离 B 很近 / 很远 ‘A is close to / far from B’",
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
-   },
-   "profile": {
-    "frequency": "A1",
-    "status": "current",
-    "register": [
-     "neutral"
-    ],
-    "connotation": "neutral",
-    "feeling": "Measuring a distance — how far one place is from another.",
-    "senses": [
-     {
-      "id": "s1",
-      "def": "from (for distance): A 离 B 很近 / 很远",
-      "register": [
-       "neutral"
-      ]
-     },
-     {
-      "id": "s2",
-      "def": "(verb) to leave, to part from",
-      "register": [
-       "neutral"
-      ]
-     }
-    ],
-    "examples": [
-     {
-      "text": "超市离我家很近。",
-      "py": "Chāoshì lí wǒ jiā hěn jìn.",
-      "tr": "The supermarket is close to my home.",
-      "register": "neutral",
-      "context": "neighbourhood",
-      "sense": "s1"
-     },
-     {
-      "text": "学校离这里远吗？",
-      "py": "Xuéxiào lí zhèli yuǎn ma?",
-      "tr": "Is the school far from here?",
-      "register": "neutral",
-      "context": "directions",
-      "sense": "s1"
-     },
-     {
-      "text": "他离开了北京。",
-      "py": "Tā líkāi le Běijīng.",
-      "tr": "He left Beijing.",
-      "register": "neutral",
-      "context": "travel",
-      "sense": "s2"
-     }
-    ],
-    "collocations": [
-     {
-      "text": "离…很近",
-      "tr": "close to …"
-     },
-     {
-      "text": "离…很远",
-      "tr": "far from …"
-     },
-     {
-      "text": "离开",
-      "tr": "to leave"
-     }
-    ],
-    "phrases": [],
-    "synonyms": [
-     {
-      "word": "从",
-      "register": "neutral",
-      "nuance": "cóng: ‘from’ for movement and starting points (S11), not for distance"
-     }
-    ],
-    "etymology": {
-     "text": "Traditional 離: phonetic 离 + semantic 隹 ‘bird’ — first the name of a bird (the oriole), borrowed for ‘to leave, to part’.",
-     "src": "Wiktionary (kaikki.org)"
-    },
-    "funFacts": [
-     "離 first named a bird, the black-naped oriole; the meaning ‘to part’ is a sound loan."
-    ],
-    "pitfalls": [
-     "Distance takes 离, not 从: 我家离学校很近 — *我家从学校很近 is wrong."
-    ],
-    "subtleties": [
-     "离 also counts time: 离春节还有三天 ‘three days to go until the Spring Festival’."
-    ]
-   }
-  },
-  {
    "id": "zh:chufang",
    "lemma": "厨房",
    "trad": "廚房",
@@ -2081,10 +2368,21 @@
    "senses": [
     "home.kitchen"
    ],
-   "measure": [
-    "间",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 廚房 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "间",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2184,9 +2482,27 @@
    "senses": [
     "home.bathroom"
    ],
-   "measure": [
-    "间",
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 衛生間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "间",
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.bathroom",
+     "axis": "register",
+     "value": "bathroom, toilet — neutral, at home"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2292,9 +2608,27 @@
    "senses": [
     "home.bathroom"
    ],
-   "measure": [
-    "个",
-    "间"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 洗手間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "间"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.bathroom",
+     "axis": "register",
+     "value": "washroom — polite, in public places"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2395,9 +2729,20 @@
    "senses": [
     "home.bedroom"
    ],
-   "measure": [
-    "间"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 臥室 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "间"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2498,10 +2843,21 @@
    "senses": [
     "home.livingroom"
    ],
-   "measure": [
-    "个",
-    "间"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 客廳 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "间"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2601,9 +2957,27 @@
    "senses": [
     "home.garden"
    ],
-   "measure": [
-    "个",
-    "座"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 花園 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "座"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.garden",
+     "axis": "kind of garden",
+     "value": "a planted garden, a flower garden"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2709,8 +3083,26 @@
    "senses": [
     "home.garden"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.garden",
+     "axis": "kind of garden",
+     "value": "the yard or courtyard of a house"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2814,9 +3206,20 @@
    "senses": [
     "home.floor"
    ],
-   "measure": [
-    "块"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "块"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2917,9 +3320,20 @@
    "senses": [
     "home.stairs"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 樓梯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3020,11 +3434,23 @@
    "pinyin": "jià zi",
    "pos": "NOUN",
    "senses": [
-    "home.shelf"
+    "home.shelf",
+    "abstract.airs"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3051,7 +3477,8 @@
       "def": "(figurative) airs, arrogance",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "abstract.airs"
      }
     ],
     "examples": [
@@ -3137,13 +3564,25 @@
    "pinyin": "shā fā",
    "pos": "NOUN",
    "senses": [
-    "home.sofa"
+    "home.sofa",
+    "comm.firstreply"
    ],
-   "measure": [
-    "张",
-    "套",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 沙發 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张",
+     "套",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3173,7 +3612,8 @@
       "def": "(internet slang) the first reply in a forum thread",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "comm.firstreply"
      }
     ],
     "examples": [
@@ -3248,9 +3688,20 @@
    "senses": [
     "home.fridge"
    ],
-   "measure": [
-    "台"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "台"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",

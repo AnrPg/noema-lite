@@ -33,15 +33,15 @@ VIEWS.c = (v, r) => {
   const node = UI.C.nodes[LX(UI.lang).owner[cid] || UI.C.owner[cid]];
   const draw = () => {
     v.innerHTML = ''; topbar();
-    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/node/' + node.id) }, '← ' + node.title)),
-      h('div', { class: 'lx-cardhead' }, h('span', { class: 'lx-bigemoji' }, conceptEmoji(cid)), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node.title, con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
+    v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 || !node ? history.back() : go('#/node/' + node.id) }, '← ' + (node ? node.title : 'Back'))),
+      h('div', { class: 'lx-cardhead' }, h('span', { class: 'lx-bigemoji' }, conceptEmoji(cid)), h('div', {}, h('h1', {}, con.gloss), h('div', { class: 'tiny' }, [node ? node.title : '⏳ a meaning not taught yet (D15) — met as another meaning of a word you learn', con.wikidata ? 'Wikidata ' + con.wikidata : null].filter(Boolean).join(' · ')))),
       h('div', { class: 'row' }, flagRail(cid, UI.lang, x => { UI.lang = x; UI.prefs.lang = x; save(); draw(); }),
         h('button', { class: 'btn small' + (UI.prefs.compare ? ' primary' : ''), onclick: () => { UI.prefs.compare = !UI.prefs.compare; save(); draw(); } }, '⇄ Compare')));
     if (UI.prefs.compare) v.append(compareTable(cid));
     const X = LX(UI.lang), lids = X.byConcept[cid] || [];
     if (X.absent[cid]) v.append(h('div', { class: 'lx-absent' }, h('b', {}, `${info(UI.lang).flag} No ${info(UI.lang).name} word for this. `), X.absent[cid].reason, X.absent[cid].use ? h('div', {}, 'Instead: ', h('b', {}, X.absent[cid].use)) : null));
-    else if (!X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(UI.lang).name}.`));
-    for (const lid of lids) v.append(wordCardView(UI.lang, lid));
+    else if (node && !X.prepared[node.id]) v.append(h('p', { class: 'lx-note' }, `⏳ Not written yet in ${info(UI.lang).name}.`));
+    for (const lid of lids) v.append(wordCardView(UI.lang, lid, cid));
   };
   draw();
 };
@@ -60,8 +60,8 @@ function compareTable(cid) {
 }
 
 /** Everything about one word (docs/LANGUAGES.md §4.6). */
-function wordCardView(c, lid) {
-  const card = N.wordCard(UI.C, UI.L, c, lid), X = LX(c), lx = X.lex[lid];
+function wordCardView(c, lid, concept) {
+  const card = N.wordCard(UI.C, UI.L, c, lid, { concept }), X = LX(c), lx = X.lex[lid];
   const badge = (t, cls = '') => t ? h('span', { class: 'lx-badge ' + cls }, t) : null;
   const ex = e => h('div', { class: 'lx-ex' },
     h('div', { class: 'lx-extext' }, word(c, e.text, { sub: false })),
@@ -71,7 +71,13 @@ function wordCardView(c, lid) {
     h('div', { class: 'lx-chips' }, badge('🎭 ' + [].concat(e.register).join(', '), 'reg'), badge('📍 ' + e.context, 'ctx'), e.senseDef ? badge('≈ ' + e.senseDef, 'sense') : null,
       e.unknown?.length ? badge('🆕 ' + e.unknown.length + ' new word' + (e.unknown.length > 1 ? 's' : ''), 'new') : null));
   const sec = {
-    senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', {}, h('b', {}, s.def), ' ', badge([].concat(s.register || []).join(', '), 'reg'), s.domains ? badge(s.domains.join(', '), 'ctx') : null))),
+    senses: items => h('ol', { class: 'lx-senses' }, ...items.map(s => h('li', { class: s.current ? 'lx-cur' : null },
+      h('b', {}, s.def), ' ', badge([].concat(s.register || []).join(', '), 'reg'), s.domains ? badge(s.domains.join(', '), 'ctx') : null,
+      s.current ? badge('← this meaning', 'sense') : s.concept ? h('a', { class: 'lx-badge sense', href: '#/c/' + s.concept }, (s.pending ? '⏳ ' : '→ ') + s.gloss) : null,
+      ...s.forms.map(f => badge(f.label + ': ' + f.text, 'ctx')),
+      s.words.length ? h('div', { class: 'tiny' }, 'also said: ', s.words.join(' · '), s.contrast ? h('span', {}, ' — ⇄ ', h('b', {}, s.contrast.axis), ': this word = ', s.contrast.value) : null) : null,
+      s.nuances.length ? h('ul', { class: 'lx-list' }, ...s.nuances.map(n => h('li', {}, n.def, ' ', badge([].concat(n.register || []).join(', '), 'reg'), ...n.forms.map(f => badge(f.label + ': ' + f.text, 'ctx'))))) : null))),
+    facade: items => h('dl', { class: 'lx-parts' }, ...items.flatMap(x => [h('dt', {}, x.title), h('dd', { class: x.none ? 'tiny' : null }, /[֐-ۿ一-鿿]/.test(x.text) ? word(c, x.text, { sub: false }) : x.text)])),
     examples: items => h('div', {}, ...items.map(ex)),
     collocations: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
     particleVerbs: items => h('ul', { class: 'lx-list' }, ...items.map(x => h('li', {}, word(c, x.text, { sub: false }), ' — ', x.tr))),
@@ -94,7 +100,7 @@ function wordCardView(c, lid) {
         card.intensity ? badge('strength ' + '●'.repeat(card.intensity) + '○'.repeat(5 - card.intensity), 'ctx') : null))),
     card.parts.length ? h('dl', { class: 'lx-parts' }, ...card.parts.flatMap(([k, val]) => [h('dt', {}, k), h('dd', {}, /[֐-ۿ一-鿿]/.test(val) ? word(c, val, { sub: false }) : val)])) : null,
     card.feeling ? h('p', { class: 'lx-feeling' }, '💭 ', card.feeling) : null,
-    ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'examples', 'pitfalls'].includes(s.key) ? true : null },
+    ...card.sections.map(s => h('details', { class: 'lx-sec', open: ['senses', 'facade', 'examples', 'pitfalls'].includes(s.key) ? true : null },
       h('summary', {}, s.title, h('span', { class: 'tiny' }, ' ' + (Array.isArray(s.items) ? s.items.length : Object.values(s.items).flat().length))), sec[s.key](s.items))),
     card.synonymsNone ? h('p', { class: 'tiny' }, 'Synonyms: ', card.synonymsNone) : null,
     !card.hasProfile ? h('p', { class: 'tiny' }, 'A little word: ', gloss(c, lid)) : null);

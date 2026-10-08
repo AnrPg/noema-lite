@@ -7,7 +7,44 @@
    "senses": [
     "verb.eat"
    ],
-   "aux": "haben",
+   "features": {
+    "principalParts": [
+     "essen",
+     "isst",
+     "aß",
+     "gegessen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "e>i",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "the object may be left out: Wir essen um sieben."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "V;NFIN": "essen",
     "V;PRS;1;SG": "esse",
@@ -48,7 +85,8 @@
       "def": "to have a meal, to dine (essen gehen = to eat out)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -191,7 +229,51 @@
    "senses": [
     "verb.drink"
    ],
-   "aux": "haben",
+   "features": {
+    "principalParts": [
+     "trinken",
+     "trinkt",
+     "trank",
+     "getrunken"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "case": "ACC",
+      "prep": "auf",
+      "senses": [
+       "s3"
+      ],
+      "note": "auf deine Gesundheit trinken"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "V;NFIN": "trinken",
     "V;PRS;1;SG": "trinke",
@@ -232,14 +314,16 @@
       "def": "to drink alcohol (habitually) – used without an object: Er trinkt.",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "auf jemanden/etwas trinken: to drink to, to toast",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -359,7 +443,51 @@
    "senses": [
     "verb.buy"
    ],
-   "aux": "haben",
+   "features": {
+    "principalParts": [
+     "kaufen",
+     "kauft",
+     "kaufte",
+     "gekauft"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "case": "DAT",
+      "senses": [
+       "s2"
+      ],
+      "note": "the person it is for: Ich kaufe meiner Mutter Blumen."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "V;NFIN": "kaufen",
     "V;PRS;1;SG": "kaufe",
@@ -400,7 +528,8 @@
       "def": "to buy (something) for someone: jemandem etwas kaufen",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -527,9 +656,55 @@
    "lemma": "mögen",
    "pos": "VERB",
    "senses": [
-    "verb.like"
+    "verb.like",
+    "verb.wouldlike",
+    "verb.may"
    ],
-   "aux": "haben",
+   "features": {
+    "principalParts": [
+     "mögen",
+     "mag",
+     "mochte",
+     "gemocht"
+    ],
+    "conjugation": "modal",
+    "presentChange": "irregular",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "or an infinitive: Ich möchte schlafen."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": [
+     {
+      "form": "möchte, möchtest, möchte, möchten, möchtet, möchten",
+      "senses": [
+       "s2"
+      ],
+      "note": "Konjunktiv II, used as a present: Ich möchte einen Kaffee."
+     }
+    ]
+   },
    "forms": {
     "V;NFIN": "mögen",
     "V;PRS;1;SG": "mag",
@@ -573,14 +748,16 @@
       "def": "would like (the forms möchte, möchtest, möchten, möchtet – Konjunktiv II, used like a present)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.wouldlike"
      },
      {
       "id": "s3",
       "def": "may (concession or possibility): Das mag sein.",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.may"
      }
     ],
     "examples": [
@@ -692,9 +869,48 @@
    "lemma": "wollen",
    "pos": "VERB",
    "senses": [
-    "verb.want"
+    "verb.want",
+    "verb.claim",
+    "verb.beaboutto"
    ],
-   "aux": "haben",
+   "features": {
+    "principalParts": [
+     "wollen",
+     "will",
+     "wollte",
+     "gewollt"
+    ],
+    "conjugation": "modal",
+    "presentChange": "irregular",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "or an infinitive: Ich will schlafen."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "V;NFIN": "wollen",
     "V;PRS;1;SG": "will",
@@ -732,14 +948,16 @@
       "def": "to claim (Er will es nicht gewusst haben = he claims not to have known)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.claim"
      },
      {
       "id": "s3",
       "def": "to be about to, to intend",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.beaboutto"
      }
     ],
     "examples": [
@@ -847,9 +1065,48 @@
    "lemma": "kochen",
    "pos": "VERB",
    "senses": [
-    "verb.cook"
+    "verb.cook",
+    "verb.boil"
    ],
-   "aux": "haben",
+   "features": {
+    "principalParts": [
+     "kochen",
+     "kocht",
+     "kochte",
+     "gekocht"
+    ],
+    "conjugation": "weak",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "also without an object: Das Wasser kocht."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "V;NFIN": "kochen",
     "V;PRS;1;SG": "koche",
@@ -887,14 +1144,16 @@
       "def": "to boil (water boils; to boil eggs, potatoes); to make (coffee, tea)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.boil"
      },
      {
       "id": "s3",
       "def": "to seethe, to boil with anger (figurative)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -1034,9 +1293,31 @@
    "lemma": "Brot",
    "pos": "NOUN",
    "senses": [
-    "food.bread"
+    "food.bread",
+    "work.livelihood"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Brote",
+      "pattern": "-e",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Brot",
     "N;ACC;SG": "Brot",
@@ -1078,14 +1359,16 @@
       "def": "a loaf of bread; a slice of bread with something on it (countable)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "livelihood, a living (figurative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "work.livelihood"
      }
     ],
     "examples": [
@@ -1198,9 +1481,38 @@
    "lemma": "Käse",
    "pos": "NOUN",
    "senses": [
-    "food.cheese"
+    "food.cheese",
+    "abstract.nonsense"
+   ],
+   "contrasts": [
+    {
+     "concept": "abstract.nonsense",
+     "axis": "how it is used",
+     "value": "about a statement: Das ist doch Käse!"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Käse",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Käse",
     "N;ACC;SG": "Käse",
@@ -1237,7 +1549,8 @@
       "def": "nonsense, rubbish (Das ist doch Käse!)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "abstract.nonsense"
      }
     ],
     "examples": [
@@ -1320,9 +1633,33 @@
    "lemma": "Ei",
    "pos": "NOUN",
    "senses": [
-    "food.egg"
+    "food.egg",
+    "body.testicles"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Eier",
+      "pattern": "-er",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "testicles: only the plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Ei",
     "N;ACC;SG": "Ei",
@@ -1364,7 +1701,8 @@
       "def": "Eier (plural): testicles; courage (“balls”)",
       "register": [
        "vulgar"
-      ]
+      ],
+      "concept": "body.testicles"
      }
     ],
     "examples": [
@@ -1388,6 +1726,13 @@
       "register": "neutral",
       "context": "baking",
       "sense": "s1"
+     },
+     {
+      "text": "Er hat keine Eier in der Hose.",
+      "tr": "He has no balls (no guts).",
+      "register": "vulgar",
+      "context": "slang",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1461,9 +1806,25 @@
    "pos": "NOUN",
    "class": "sgt",
    "senses": [
-    "food.meat"
+    "food.meat",
+    "body.flesh"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Fleisch",
     "N;ACC;SG": "Fleisch",
@@ -1501,7 +1862,8 @@
       "def": "flesh (of a body); the soft inside of a fruit (Fruchtfleisch)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "body.flesh"
      }
     ],
     "examples": [
@@ -1599,9 +1961,34 @@
    "lemma": "Fisch",
    "pos": "NOUN",
    "senses": [
-    "food.fish"
+    "food.fish",
+    "animal.fish",
+    "nature.pisces"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fische",
+      "pattern": "-e",
+      "senses": [
+       "s2",
+       "s3"
+      ],
+      "note": "the zodiac sign is always plural: Ich bin Fische"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Fisch",
     "N;ACC;SG": "Fisch",
@@ -1643,14 +2030,16 @@
       "def": "fish (the animal)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "animal.fish"
      },
      {
       "id": "s3",
       "def": "Fische (plural): Pisces, the sign of the zodiac",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.pisces"
      }
     ],
     "examples": [
@@ -1674,6 +2063,13 @@
       "register": "neutral",
       "context": "nature",
       "sense": "s2"
+     },
+     {
+      "text": "Mein Sternzeichen ist Fische.",
+      "tr": "My star sign is Pisces.",
+      "register": "neutral",
+      "context": "astrology",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1740,9 +2136,32 @@
    "lemma": "Hähnchen",
    "pos": "NOUN",
    "senses": [
-    "food.chicken"
+    "food.chicken",
+    "animal.rooster"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Hähnchen",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Hahn + -chen (a diminutive, hence neuter)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Hähnchen",
     "N;ACC;SG": "Hähnchen",
@@ -1789,7 +2208,8 @@
       "def": "little rooster (diminutive of Hahn; rare)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "animal.rooster"
      }
     ],
     "examples": [
@@ -1813,6 +2233,13 @@
       "register": "neutral",
       "context": "cooking",
       "sense": "s1"
+     },
+     {
+      "text": "Auf dem Hof kräht ein junges Hähnchen.",
+      "tr": "On the farm a young cockerel is crowing.",
+      "register": "neutral",
+      "context": "farm",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1891,9 +2318,28 @@
    "pos": "NOUN",
    "class": "sgt",
    "senses": [
-    "food.rice"
+    "food.rice",
+    "nature.rice"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Reis: a shoot, a twig (literary)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Reis",
     "N;ACC;SG": "Reis",
@@ -1926,7 +2372,8 @@
       "def": "rice (the plant and its grain)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.rice"
      }
     ],
     "examples": [
@@ -2003,9 +2450,31 @@
    "lemma": "Suppe",
    "pos": "NOUN",
    "senses": [
-    "food.soup"
+    "food.soup",
+    "nature.fog"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Suppen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Suppe",
     "N;ACC;SG": "Suppe",
@@ -2042,7 +2511,8 @@
       "def": "thick fog, a pea-souper (die Suppe draußen)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "nature.fog"
      }
     ],
     "examples": [
@@ -2066,6 +2536,13 @@
       "register": "neutral",
       "context": "restaurant",
       "sense": "s1"
+     },
+     {
+      "text": "Draußen ist eine richtige Suppe, man sieht kaum die Straße.",
+      "tr": "It is a real pea-souper out there; you can hardly see the street.",
+      "register": "colloquial",
+      "context": "weather",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2152,6 +2629,31 @@
     "veg.lettuce"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Salate",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "FEM",
+      "meaning": "die Salat (also das): the Islamic ritual prayer"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Salat",
     "N;ACC;SG": "Salat",
@@ -2307,6 +2809,21 @@
     "food.fruit"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": {
+     "none": "a collective noun: no plural (one fruit: eine Frucht, ein Stück Obst)"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Obst",
     "N;ACC;SG": "Obst",
@@ -2418,6 +2935,28 @@
     "food.apple"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Äpfel",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Apfel",
     "N;ACC;SG": "Apfel",
@@ -2454,7 +2993,8 @@
       "def": "apple tree (rare; usually Apfelbaum)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2544,9 +3084,32 @@
    "lemma": "Zucker",
    "pos": "NOUN",
    "senses": [
-    "food.sugar"
+    "food.sugar",
+    "health.diabetes"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zucker",
+      "pattern": "no ending",
+      "senses": [
+       "s3"
+      ],
+      "note": "kinds of sugar (chemistry); table sugar has no plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zucker",
     "N;ACC;SG": "Zucker",
@@ -2583,14 +3146,16 @@
       "def": "diabetes (Zucker haben)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "health.diabetes"
      },
      {
       "id": "s3",
       "def": "sugars (chemistry; plural Zucker)",
       "register": [
        "technical"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2676,6 +3241,28 @@
     "food.salt"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Salze",
+      "pattern": "-e",
+      "senses": [
+       "s2"
+      ],
+      "note": "chemistry; table salt has no plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Salz",
     "N;ACC;SG": "Salz",
@@ -2712,7 +3299,8 @@
       "def": "a salt (chemistry; plural Salze)",
       "register": [
        "technical"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2812,9 +3400,40 @@
    "lemma": "Wasser",
    "pos": "NOUN",
    "senses": [
-    "drink.water"
+    "drink.water",
+    "nature.water"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wasser",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "Wässer",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1"
+      ],
+      "note": "kinds of water: Mineralwässer"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wasser",
     "N;ACC;SG": "Wasser",
@@ -2865,7 +3484,8 @@
       "def": "water as an element; a body of water (sea, lake, river)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.water"
      }
     ],
     "examples": [
@@ -2973,6 +3593,31 @@
     "drink.tea"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tees",
+      "pattern": "-s",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Tee: a tee (golf)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tee",
     "N;ACC;SG": "Tee",
@@ -3023,7 +3668,8 @@
       "def": "herbal tea, infusion (Pfefferminztee, Kamillentee)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3100,9 +3746,31 @@
    "lemma": "Kaffee",
    "pos": "NOUN",
    "senses": [
-    "drink.coffee"
+    "drink.coffee",
+    "meal.coffeeandcake"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kaffees",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kaffee",
     "N;ACC;SG": "Kaffee",
@@ -3139,7 +3807,8 @@
       "def": "afternoon coffee and cake (a small meal, especially on Sundays)",
       "register": [
        "regional"
-      ]
+      ],
+      "concept": "meal.coffeeandcake"
      }
     ],
     "examples": [
@@ -3242,6 +3911,21 @@
     "drink.milk"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Milch",
     "N;ACC;SG": "Milch",
@@ -3274,7 +3958,8 @@
       "def": "milky liquid (of plants; a lotion: Reinigungsmilch)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3357,9 +4042,33 @@
    "lemma": "Saft",
    "pos": "NOUN",
    "senses": [
-    "drink.juice"
+    "drink.juice",
+    "nature.sap",
+    "tech.electricity"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Säfte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Saft",
     "N;ACC;SG": "Saft",
@@ -3401,14 +4110,16 @@
       "def": "sap of plants; meat juices, gravy",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.sap"
      },
      {
       "id": "s3",
       "def": "power, electricity, battery charge",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "tech.electricity"
      }
     ],
     "examples": [
@@ -3432,6 +4143,13 @@
       "register": "colloquial",
       "context": "phone",
       "sense": "s3"
+     },
+     {
+      "text": "Im Frühling steigt der Saft in die Bäume.",
+      "tr": "In spring the sap rises in the trees.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3501,9 +4219,31 @@
    "lemma": "Wein",
    "pos": "NOUN",
    "senses": [
-    "drink.wine"
+    "drink.wine",
+    "nature.grapevine"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Weine",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wein",
     "N;ACC;SG": "Wein",
@@ -3545,7 +4285,8 @@
       "def": "grapevine; grapes (Wein anbauen, wilder Wein)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.grapevine"
      }
     ],
     "examples": [
@@ -3645,9 +4386,31 @@
    "lemma": "Bier",
    "pos": "NOUN",
    "senses": [
-    "drink.beer"
+    "drink.beer",
+    "abstract.concern"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Biere",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bier",
     "N;ACC;SG": "Bier",
@@ -3698,7 +4461,8 @@
       "def": "business, concern (Das ist nicht mein Bier.)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "abstract.concern"
      }
     ],
     "examples": [
@@ -3793,6 +4557,34 @@
     "meal.breakfast"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Frühstücke",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "früh",
+      "role": "modifier"
+     },
+     {
+      "part": "Stück",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Frühstück",
     "N;ACC;SG": "Frühstück",
@@ -3916,6 +4708,34 @@
     "meal.lunch"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mittagessen",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Mittag",
+      "role": "modifier"
+     },
+     {
+      "part": "Essen",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mittagessen",
     "N;ACC;SG": "Mittagessen",
@@ -4039,6 +4859,34 @@
     "meal.dinner"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Abendessen",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Abend",
+      "role": "modifier"
+     },
+     {
+      "part": "Essen",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Abendessen",
     "N;ACC;SG": "Abendessen",

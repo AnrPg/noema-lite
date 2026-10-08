@@ -7,7 +7,8 @@
    "pinyin": "líng",
    "pos": "NUM",
    "senses": [
-    "num.0"
+    "num.0",
+    "adj.fragmentary"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,14 +36,16 @@
       "def": "(inside a number) the empty place: 一百零一 ‘a hundred and one’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "odd, fragmentary, spare (零钱 ‘small change’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.fragmentary"
      }
     ],
     "examples": [
@@ -114,6 +117,17 @@
     "subtleties": [
      "101 is 一百零一, but 110 is 一百一十 — 零 only marks an empty place in the middle."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -123,7 +137,15 @@
    "pinyin": "èr",
    "pos": "NUM",
    "senses": [
-    "num.2"
+    "num.2",
+    "adj.silly"
+   ],
+   "contrasts": [
+    {
+     "concept": "num.2",
+     "axis": "position",
+     "value": "counting, inside numbers, ordinals, digits"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -152,7 +174,8 @@
       "register": [
        "colloquial",
        "regional"
-      ]
+      ],
+      "concept": "adj.silly"
      }
     ],
     "examples": [
@@ -249,6 +272,17 @@
     "subtleties": [
      "For 200 and 2000 both 二百 / 两百 and 二千 / 两千 are heard; 两千 is the usual everyday form."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -258,7 +292,22 @@
    "pinyin": "liǎng",
    "pos": "NUM",
    "senses": [
-    "num.2"
+    "num.2",
+    "quant.both",
+    "quant.afew",
+    "measure.tael"
+   ],
+   "contrasts": [
+    {
+     "concept": "num.2",
+     "axis": "position",
+     "value": "before a measure word (两个, 两本)"
+    },
+    {
+     "concept": "quant.afew",
+     "axis": "construction",
+     "value": "两 + measure: a couple (说两句, colloquial)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -286,21 +335,24 @@
       "def": "both, either (two sides): 两边 ‘both sides’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "quant.both"
      },
      {
       "id": "s3",
       "def": "a few, a couple (说两句 ‘say a few words’)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "quant.afew"
      },
      {
       "id": "s4",
       "def": "tael, a unit of weight (50 g in the mainland)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.tael"
      }
     ],
     "examples": [
@@ -401,6 +453,17 @@
      "两 and 二 are the same number: 二 is the name of the digit, 两 the amount ‘two of something’ — like English ‘two’ vs ‘a pair / both’.",
      "In a large number the first 2 may be 两: 两百 / 二百 ‘200’, 两千 ‘2000’, 两万 ‘20 000’ — both are correct, 两 is more colloquial."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 兩 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -498,6 +561,17 @@
     "subtleties": [
      "小三 ‘little three’ is modern slang for ‘the other woman’ — a mistress."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -595,6 +669,17 @@
     "subtleties": [
      "The tongue-twister 四是四，十是十，十四是十四，四十是四十 trains exactly this difference."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -684,6 +769,17 @@
     "subtleties": [
      "The China flag has five stars: 五星红旗 ‘the five-star red flag’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -773,6 +869,17 @@
     "subtleties": [
      "Chinese count 6–10 on one hand with special signs: 六 is thumb + little finger, 八 thumb + index finger, 十 crossed index fingers or a fist."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -869,6 +976,17 @@
     "subtleties": [
      "Ordinals and dates are regular: 第七 ‘seventh’, 七月七日 ‘the 7th of July’ (the Qixi date of the lunar calendar is the 7th day of the 7th month)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -958,6 +1076,17 @@
     "subtleties": [
      "八卦 ‘the eight trigrams’ is also everyday slang for ‘gossip’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1047,6 +1176,17 @@
     "subtleties": [
      "The multiplication table in Chinese is called 九九 because it was recited from 九九八十一 downwards in ancient times."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1136,6 +1276,17 @@
     "subtleties": [
      "十 builds the numbers 11–99: 十 + digit for 11–19 (十五), digit + 十 for the tens (五十), digit + 十 + digit for the rest (五十五)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1150,6 +1301,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "一 at the end of a number keeps yī"
+    }
    }
   },
   {
@@ -1164,6 +1326,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1178,6 +1351,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1192,6 +1376,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1206,6 +1401,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1220,6 +1426,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1234,6 +1451,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1248,6 +1476,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1262,6 +1501,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1276,6 +1526,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1290,6 +1551,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1304,6 +1576,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1318,6 +1601,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1332,6 +1626,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1346,6 +1651,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1360,6 +1676,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1374,6 +1701,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1463,6 +1801,15 @@
     "subtleties": [
      "百 alone also means ‘all, many’ in set words: 百货 ‘all kinds of goods’ (a department store is 百货商店)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yì bǎi"
    }
   },
   {
@@ -1553,6 +1900,15 @@
     "subtleties": [
      "千 also means ‘very many’: 千万 ‘by all means’ (literally ‘thousands and tens of thousands’)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yì qiān"
    }
   },
   {
@@ -1563,6 +1919,13 @@
    "pos": "ADJ",
    "senses": [
     "quant.many"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.many",
+     "axis": "position",
+     "value": "before a noun or as the predicate (很多人, 人很多)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1669,6 +2032,17 @@
      "很 in 很多 is not felt as ‘very’: 很多 is the plain ‘many’; for ‘very many’ say 非常多.",
      "很多 needs no measure word before the noun: 很多书, 很多人."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1678,7 +2052,21 @@
    "pinyin": "duō",
    "pos": "ADJ",
    "senses": [
-    "quant.many"
+    "quant.many",
+    "quant.morethan",
+    "q.how"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.many",
+     "axis": "position",
+     "value": "mostly as the predicate (人多); not alone before a noun"
+    },
+    {
+     "concept": "q.how",
+     "axis": "what is asked",
+     "value": "how + adjective: the degree (多大, 多长)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1706,14 +2094,16 @@
       "def": "(after a round number) over, and more: 一千多 ‘over a thousand’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "quant.morethan"
      },
      {
       "id": "s3",
       "def": "(in questions and exclamations) how: 多大 ‘how old / how big’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "q.how"
      }
     ],
     "examples": [
@@ -1747,6 +2137,14 @@
       "tr": "How old are you?",
       "register": "neutral",
       "context": "small talk",
+      "sense": "s3"
+     },
+     {
+      "text": "这条河有多长？",
+      "py": "Zhè tiáo hé yǒu duō cháng?",
+      "tr": "How long is this river?",
+      "register": "neutral",
+      "context": "geography",
       "sense": "s3"
      }
     ],
@@ -1809,6 +2207,17 @@
     "subtleties": [
      "Like all Chinese adjectives 多 is a predicate on its own, no 是: 人多 ‘there are many people’; a bare 多 sounds like a contrast (这里人多，那里人少)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1818,7 +2227,21 @@
    "pinyin": "shǎo",
    "pos": "ADJ",
    "senses": [
-    "quant.few"
+    "quant.few",
+    "verb.lack",
+    "adj.young"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.few",
+     "axis": "form",
+     "value": "few, little (as the predicate: 人很少)"
+    },
+    {
+     "concept": "adj.young",
+     "axis": "kind of young",
+     "value": "shào: young, in fixed words (少年, 少女)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1846,14 +2269,16 @@
       "def": "to lack, to be short of (少一个人 ‘one person missing’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.lack"
      },
      {
       "id": "s3",
       "def": "(read shào) young: 少年 ‘teenager’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.young"
      }
     ],
     "examples": [
@@ -1888,6 +2313,22 @@
       "register": "neutral",
       "context": "meeting",
       "sense": "s2"
+     },
+     {
+      "text": "他少年时就离开了家。",
+      "py": "Tā shàonián shí jiù líkāi le jiā.",
+      "tr": "He left home when he was a teenager.",
+      "register": "neutral",
+      "context": "biography",
+      "sense": "s3"
+     },
+     {
+      "text": "她还是个少女。",
+      "py": "Tā hái shì ge shàonǚ.",
+      "tr": "She is still a young girl.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1949,6 +2390,29 @@
     "subtleties": [
      "很少 before a verb means ‘seldom’: 我很少喝咖啡 ‘I seldom drink coffee’."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "shǎo",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "pinyin": "shào",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1959,6 +2423,13 @@
    "pos": "ADJ",
    "senses": [
     "quant.few"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.few",
+     "axis": "form",
+     "value": "not many, not much (a negated 多)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2045,6 +2516,17 @@
     "subtleties": [
      "不多 is the softer, more modest way to say ‘few’: 我朋友不多 sounds less sad than 我朋友很少."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "不 stays bù before the 1st tone of 多"
+    }
    }
   },
   {
@@ -2054,7 +2536,21 @@
    "pinyin": "yī diǎn",
    "pos": "ADJ",
    "senses": [
-    "quant.alittle"
+    "quant.alittle",
+    "adv.alittle",
+    "time.oclock"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.alittle",
+     "axis": "position",
+     "value": "after an adjective: a bit more … (快一点)"
+    },
+    {
+     "concept": "time.oclock",
+     "axis": "form",
+     "value": "one o’clock (一 + 点)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2082,21 +2578,24 @@
       "def": "(after an adjective) a bit more …: 少一点 ‘a bit less’, 快一点 ‘a bit faster’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alittle"
      },
      {
       "id": "s3",
       "def": "(with 也 / 都 and a negation) not … at all: 一点也不 …",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "one o’clock",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.oclock"
      }
     ],
     "examples": [
@@ -2131,6 +2630,22 @@
       "register": "neutral",
       "context": "feelings",
       "sense": "s3"
+     },
+     {
+      "text": "我一点吃午饭。",
+      "py": "Wǒ yì diǎn chī wǔfàn.",
+      "tr": "I have lunch at one o’clock.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s4"
+     },
+     {
+      "text": "现在一点了。",
+      "py": "Xiànzài yì diǎn le.",
+      "tr": "It’s one o’clock now.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2183,6 +2698,23 @@
     "subtleties": [
      "一点 makes a request softer: 快一点 ‘a bit faster’, 多吃一点 ‘eat a bit more’."
     ]
+   },
+   "variants": [
+    {
+     "lemma": "一点儿",
+     "trad": "一點兒",
+     "pinyin": "yī diǎnr",
+     "region": "north, esp. Beijing (erhua)"
+    }
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 一點 for every sense"
+    },
+    "toneSandhi": "yì diǎn"
    }
   },
   {
@@ -2192,7 +2724,15 @@
    "pinyin": "suǒ yǒu",
    "pos": "ADJ",
    "senses": [
-    "quant.all"
+    "quant.all",
+    "verb.own"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.all",
+     "axis": "word class and position",
+     "value": "determiner before the noun (所有的人)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2220,7 +2760,8 @@
       "def": "possessions; to own (所有权 ‘ownership’)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.own"
      }
     ],
     "examples": [
@@ -2302,6 +2843,17 @@
     "subtleties": [
      "所有 + noun may take 的 or not: 所有学生 / 所有的学生 — both are correct."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2311,7 +2863,27 @@
    "pinyin": "dōu",
    "pos": "ADV",
    "senses": [
-    "quant.all"
+    "quant.all",
+    "adv.even",
+    "adv.already",
+    "place.capital"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.already",
+     "axis": "construction",
+     "value": "都 … 了: already, with surprise (都十点了)"
+    },
+    {
+     "concept": "quant.all",
+     "axis": "word class and position",
+     "value": "adverb before the verb, summing up what comes before it"
+    },
+    {
+     "concept": "adv.even",
+     "axis": "the word after 连 … (interchangeable)",
+     "value": "连 … 都 …"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2339,21 +2911,24 @@
       "def": "even (连 … 都 …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.even"
      },
      {
       "id": "s3",
       "def": "already (都十点了 ‘it’s already ten’)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.already"
      },
      {
       "id": "s4",
       "def": "(read dū) capital city: 首都",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.capital"
      }
     ],
     "examples": [
@@ -2396,6 +2971,14 @@
       "register": "colloquial",
       "context": "time",
       "sense": "s3"
+     },
+     {
+      "text": "北京是中国的首都。",
+      "py": "Běijīng shì Zhōngguó de shǒudū.",
+      "tr": "Beijing is the capital of China.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2448,6 +3031,33 @@
      "With two people 都 means ‘both’: 我和他都是老师 ‘He and I are both teachers.’",
      "都不 is ‘none of …’, 不都 ‘not all’: 他们都不是老师 vs 他们不都是老师."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "dōu",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     },
+     {
+      "pinyin": "dū",
+      "senses": [
+       "s4"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -2457,7 +3067,20 @@
    "pinyin": "yī xiē",
    "pos": "DET",
    "senses": [
-    "quant.some"
+    "quant.some",
+    "adv.alittle"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.alittle",
+     "axis": "position",
+     "value": "after an adjective: a bit (好一些), a little more formal"
+    },
+    {
+     "concept": "quant.some",
+     "axis": "amount or part",
+     "value": "some, an amount (一些水, 一些人)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2488,7 +3111,8 @@
       "def": "(after an adjective) a bit, slightly: 好一些 ‘a bit better’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alittle"
      }
     ],
     "examples": [
@@ -2558,6 +3182,15 @@
     "subtleties": [
      "一些 can be a few or quite a lot; 一点 is always small: 一些朋友, but 一点水."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yì xiē"
    }
   },
   {
@@ -2567,7 +3200,20 @@
    "pinyin": "yǒu xiē",
    "pos": "DET",
    "senses": [
-    "quant.some"
+    "quant.some",
+    "adv.alittle"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.alittle",
+     "axis": "position",
+     "value": "before an adjective: somewhat, rather (有些累)"
+    },
+    {
+     "concept": "quant.some",
+     "axis": "amount or part",
+     "value": "some, as opposed to others (有些人喜欢 …)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2595,7 +3241,8 @@
       "def": "(adverb, before an adjective) somewhat, rather: 有些累",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alittle"
      }
     ],
     "examples": [
@@ -2660,6 +3307,17 @@
     "subtleties": [
      "有些 contrasts a part with the rest: 有些人喜欢，有些人不喜欢 ‘some like it, some don’t’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2668,8 +3326,17 @@
    "trad": "很",
    "pinyin": "hěn",
    "pos": "ADV",
-   "senses": [],
+   "senses": [
+    "adv.very"
+   ],
    "role": "very; and the plain link before an adjective used as the predicate: 人很多 ‘there are many people’, 这里人很少 ‘there are very few people here’",
+   "contrasts": [
+    {
+     "concept": "adv.very",
+     "axis": "register",
+     "value": "very — neutral; also the plain link before an adjective"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2688,14 +3355,16 @@
       "def": "very, quite",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.very"
      },
      {
       "id": "s2",
       "def": "(before an adjective predicate, unstressed) the link: 我很好 ‘I am fine’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2781,6 +3450,20 @@
     "subtleties": [
      "In 很好 and 很多 the 很 is usually not heard as ‘very’; stress it to mean ‘very’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -2794,6 +3477,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 們 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "afterNoun"
+    ]
    }
   },
   {
@@ -2807,6 +3504,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 歲 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "unit"
+    ]
    }
   }
  ],

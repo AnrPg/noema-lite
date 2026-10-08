@@ -9,6 +9,10 @@
   {
    "id": "job",
    "title": "Jobs"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -161,6 +165,286 @@
    "subgroup": "job",
    "tier": 1,
    "rank": 21
+  },
+  {
+   "id": "job.agronomist",
+   "gloss": "agronomist, agriculturist",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.apprentice",
+   "gloss": "apprentice",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.architect",
+   "gloss": "architect",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.butcher",
+   "gloss": "butcher, slaughterer",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.chief",
+   "gloss": "head, chief",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.housekeeper",
+   "gloss": "domestic helper (nanny, cleaning lady)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.maid",
+   "gloss": "maid, female servant",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.master",
+   "gloss": "master (of a craft), boss (in a workshop)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "job.overseer",
+   "gloss": "officer, overseer (in ancient Israel)",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.applicant",
+   "gloss": "seeker, applicant (one who asks for something)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.arab",
+   "gloss": "an Arab (slang, “cousin”; can sound patronizing)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.bastard",
+   "gloss": "(insult, northern) bastard, wretch, coward",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.beanpole",
+   "gloss": "a tall, skinny child or person, a beanpole (豆芽菜)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.beloved",
+   "gloss": "beloved, lover (Biblical, poetic)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.boor",
+   "gloss": "boor, yokel",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.bore",
+   "gloss": "a bore, a wet blanket (a dull person)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.boyfriend",
+   "gloss": "boyfriend",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.disciple",
+   "gloss": "disciple, follower (of a master or a rabbi)",
+   "tier": 2,
+   "rank": 18,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.dupe",
+   "gloss": "a dupe, a small investor fleeced again and again (internet slang: ‘leeks’ that grow back)",
+   "tier": 2,
+   "rank": 19,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.expert",
+   "gloss": "expert, specialist; -ist (科学家 scientist)",
+   "tier": 2,
+   "rank": 20,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.fan",
+   "gloss": "fan (of a star), from English (饭圈 fandom)",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.german",
+   "gloss": "a German (mocking slang, “spud”)",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.girlfriend",
+   "gloss": "girlfriend",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.hulk",
+   "gloss": "a big, broad-shouldered man, a hulk",
+   "tier": 2,
+   "rank": 24,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.member",
+   "gloss": "member (of a party, a club, the Knesset)",
+   "tier": 2,
+   "rank": 25,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.mrs",
+   "gloss": "Mrs, Ms (title before a woman’s surname)",
+   "tier": 2,
+   "rank": 26,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.oldhand",
+   "gloss": "an old hand, a veteran (slang 老司机)",
+   "tier": 2,
+   "rank": 27,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.oldman",
+   "gloss": "old man, elder",
+   "tier": 2,
+   "rank": 28,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.oldwoman",
+   "gloss": "old woman (any elderly woman)",
+   "tier": 2,
+   "rank": 29,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.owner",
+   "gloss": "owner, master (of a house, a business)",
+   "tier": 2,
+   "rank": 30,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.seller",
+   "gloss": "seller, vendor (the one who sells)",
+   "tier": 2,
+   "rank": 31,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.subordinate",
+   "gloss": "subordinates, the lower levels",
+   "tier": 2,
+   "rank": 32,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.unemployedreturnee",
+   "gloss": "a returnee from study abroad who cannot find a job (pun on 海待)",
+   "tier": 2,
+   "rank": 33,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.weakling",
+   "gloss": "weakling, skinny unathletic person",
+   "tier": 2,
+   "rank": 34,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "person.youngman",
+   "gloss": "young man; (pl.) young people, youth",
+   "tier": 2,
+   "rank": 35,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

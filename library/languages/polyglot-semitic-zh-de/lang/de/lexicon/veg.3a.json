@@ -8,6 +8,27 @@
     "veg.turmeric"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kurkumen",
+      "pattern": "foreign",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kurkuma",
     "N;ACC;SG": "Kurkuma",
@@ -131,6 +152,21 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Borretsch",
     "N;ACC;SG": "Borretsch",
@@ -244,6 +280,35 @@
     "veg.fathen"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Gänsefüße",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Gans",
+      "role": "modifier",
+      "linker": "-¨e- (Gänse-)"
+     },
+     {
+      "part": "Fuß",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Gänsefuß",
     "N;ACC;SG": "Gänsefuß",
@@ -278,16 +343,6 @@
        "food",
        "botany"
       ]
-     },
-     {
-      "id": "s2",
-      "def": "a goose’s foot (literal)",
-      "register": [
-       "neutral"
-      ],
-      "domains": [
-       "animals"
-      ]
      }
     ],
     "examples": [
@@ -311,13 +366,6 @@
       "register": "neutral",
       "context": "culture",
       "sense": "s1"
-     },
-     {
-      "text": "Der Gänsefuß hat Schwimmhäute zwischen den Zehen.",
-      "tr": "A goose’s foot has webbing between the toes.",
-      "register": "neutral",
-      "context": "animals",
-      "sense": "s2"
      }
     ],
     "collocations": [
@@ -371,6 +419,35 @@
     "veg.burdock"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Klettenwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Klette",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Klettenwurzel",
     "N;ACC;SG": "Klettenwurzel",
@@ -495,6 +572,27 @@
     "veg.wasabi"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wasabi",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wasabi",
     "N;ACC;SG": "Wasabi",
@@ -607,6 +705,34 @@
     "veg.welshonion"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Winterzwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Winter",
+      "role": "modifier"
+     },
+     {
+      "part": "Zwiebel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Winterzwiebel",
     "N;ACC;SG": "Winterzwiebel",
@@ -721,6 +847,27 @@
     "veg.rhubarb"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Rhabarber",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Rhabarber",
     "N;ACC;SG": "Rhabarber",
@@ -841,6 +988,34 @@
     "veg.waterchestnut"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wasserkastanien",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Wasser",
+      "role": "modifier"
+     },
+     {
+      "part": "Kastanie",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wasserkastanie",
     "N;ACC;SG": "Wasserkastanie",
@@ -945,6 +1120,34 @@
     "veg.watercaltrop"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wassernüsse",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Wasser",
+      "role": "modifier"
+     },
+     {
+      "part": "Nuss",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wassernuss",
     "N;ACC;SG": "Wassernuss",
@@ -1049,6 +1252,34 @@
     "veg.jicama"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Yambohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Yam",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Yambohne",
     "N;ACC;SG": "Yambohne",
@@ -1159,6 +1390,27 @@
     "veg.cardoon"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kardonen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kardone",
     "N;ACC;SG": "Kardone",
@@ -1274,6 +1526,35 @@
     "veg.tigernut"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Erdmandeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Erde",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Mandel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Erdmandel",
     "N;ACC;SG": "Erdmandel",
@@ -1392,6 +1673,28 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Malabar",
+      "role": "modifier"
+     },
+     {
+      "part": "Spinat",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Malabarspinat",
     "N;ACC;SG": "Malabarspinat",
@@ -1497,6 +1800,27 @@
     "veg.galangal"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Galgante",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Galgant",
     "N;ACC;SG": "Galgant",
@@ -1607,6 +1931,34 @@
     "veg.orache"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Gartenmelden",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Garten",
+      "role": "modifier"
+     },
+     {
+      "part": "Melde",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Gartenmelde",
     "N;ACC;SG": "Gartenmelde",
@@ -1717,15 +2069,28 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "two words: an adjective + a name"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Guter Heinrich",
     "N;ACC;SG": "Guten Heinrich",
-    "N;DAT;SG": "Gutem Heinrich",
+    "N;DAT;SG": "Guten Heinrich",
     "N;GEN;SG": "Guten Heinrichs",
     "N;NOM;SG;DEF": "Gute Heinrich",
-    "N;ACC;SG;DEF": "Guten Heinrich",
-    "N;DAT;SG;DEF": "Guten Heinrich",
-    "N;GEN;SG;DEF": "Guten Heinrichs"
+    "N;DAT;SG;INDF": "Gutem Heinrich"
    },
    "ref": {
     "src": "kaikki",
@@ -1826,6 +2191,34 @@
     "veg.konjac"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Konjakwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Konjak",
+      "role": "modifier"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Konjakwurzel",
     "N;ACC;SG": "Konjakwurzel",
@@ -1936,6 +2329,34 @@
     "veg.samphire"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Meerfenchel",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Meer",
+      "role": "modifier"
+     },
+     {
+      "part": "Fenchel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Meerfenchel",
     "N;ACC;SG": "Meerfenchel",
@@ -2036,6 +2457,27 @@
     "veg.glasswort"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Queller",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: quellen + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Queller",
     "N;ACC;SG": "Queller",
@@ -2151,6 +2593,21 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "two words: a place adjective (Neuseeländer) + a noun"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Neuseeländer Spinat",
     "N;ACC;SG": "Neuseeländer Spinat",
@@ -2256,6 +2713,35 @@
     "veg.heartofpalm"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Palmherzen",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Palme",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Herz",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Palmherz",
     "N;ACC;SG": "Palmherz",
@@ -2365,6 +2851,34 @@
     "veg.salsify"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Haferwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Hafer",
+      "role": "modifier"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Haferwurzel",
     "N;ACC;SG": "Haferwurzel",
@@ -2479,6 +2993,34 @@
     "veg.skirret"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zuckerwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Zucker",
+      "role": "modifier"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zuckerwurzel",
     "N;ACC;SG": "Zuckerwurzel",
@@ -2589,6 +3131,29 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Knolle",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Ziest",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Knollenziest",
     "N;ACC;SG": "Knollenziest",
@@ -2699,6 +3264,30 @@
     "veg.amaranth"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Amarante",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Amarant: the colour amaranth"
+     }
+    ],
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Amarant",
     "N;ACC;SG": "Amarant",
@@ -2810,6 +3399,34 @@
     "veg.landcress"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Winterkressen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Winter",
+      "role": "modifier"
+     },
+     {
+      "part": "Kresse",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Winterkresse",
     "N;ACC;SG": "Winterkresse",
@@ -2919,6 +3536,35 @@
     "veg.treeonion"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Etagenzwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Etage",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Zwiebel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Etagenzwiebel",
     "N;ACC;SG": "Etagenzwiebel",
@@ -3025,9 +3671,39 @@
    "lemma": "Spargelsalat",
    "pos": "NOUN",
    "senses": [
-    "veg.celtuce"
+    "veg.celtuce",
+    "food.asparagussalad"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spargelsalate",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Spargel",
+      "role": "modifier"
+     },
+     {
+      "part": "Salat",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Spargelsalat",
     "N;ACC;SG": "Spargelsalat",
@@ -3071,7 +3747,8 @@
       ],
       "domains": [
        "food"
-      ]
+      ],
+      "concept": "food.asparagussalad"
      }
     ],
     "examples": [
@@ -3154,6 +3831,35 @@
     "veg.pearlonion"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Perlzwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Perle",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Zwiebel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Perlzwiebel",
     "N;ACC;SG": "Perlzwiebel",
@@ -3259,6 +3965,29 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Elefant",
+      "role": "modifier",
+      "linker": "-en-"
+     },
+     {
+      "part": "Knoblauch",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Elefantenknoblauch",
     "N;ACC;SG": "Elefantenknoblauch",
@@ -3364,6 +4093,35 @@
     "veg.rootparsley"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Petersilienwurzeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Petersilie",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Wurzel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Petersilienwurzel",
     "N;ACC;SG": "Petersilienwurzel",

@@ -9,7 +9,40 @@
     "prep.at",
     "prep.attime",
     "prep.onday",
-    "prep.inmonth"
+    "prep.inmonth",
+    "prep.about",
+    "sci.times"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "a person’s place or a location",
+     "value": "at / in a place (فِي الْمَدْرَسَةِ)"
+    },
+    {
+     "concept": "prep.attime",
+     "axis": "the kind of time",
+     "value": "a clock time (فِي السَّاعَةِ الْخَامِسَةِ)"
+    },
+    {
+     "concept": "prep.in",
+     "axis": "register",
+     "value": "neutral: in, inside"
+    },
+    {
+     "concept": "prep.about",
+     "axis": "construction",
+     "value": "after some verbs: فَكَّرَ فِي (to think about)"
+    }
    ],
    "translit": "fī",
    "forms": {
@@ -86,14 +119,16 @@
       "def": "about, concerning (after some verbs: فَكَّرَ فِي, to think about)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.about"
      },
      {
       "id": "s5",
       "def": "times, multiplied by: ثَلَاثَةٌ فِي أَرْبَعَةٍ (3 × 4)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "sci.times"
      }
     ],
     "examples": [
@@ -216,7 +251,8 @@
      "The noun after فِي is genitive: فِي بَيْتٍ (-in), فِي الْبَيْتِ (-i).",
      "Time: one فِي for English at / on / in and German um / am / im — فِي السَّاعَةِ الْخَامِسَةِ (at five), فِي يَوْمِ الْأَحَدِ (on Sunday), فِي يَنَايِرَ, فِي الصَّيْفِ (in January, in summer)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:ila",
@@ -225,6 +261,22 @@
    "senses": [
     "prep.to",
     "prep.until"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.until",
+     "axis": "pairing and range",
+     "value": "until, in مِنْ … إِلَى …"
+    }
    ],
    "translit": "ʾilā",
    "forms": {
@@ -268,13 +320,6 @@
        "neutral"
       ],
       "concept": "prep.until"
-     },
-     {
-      "id": "s2",
-      "def": "until, till (time): مِنَ الصَّبَاحِ إِلَى الْمَسَاءِ",
-      "register": [
-       "neutral"
-      ]
      }
     ],
     "examples": [
@@ -291,13 +336,6 @@
       "register": "neutral",
       "context": "daily life",
       "sense": "s1"
-     },
-     {
-      "text": "أَعْمَلُ مِنَ الصَّبَاحِ إِلَى الْمَسَاءِ.",
-      "tr": "I work from morning till evening.",
-      "register": "neutral",
-      "context": "work",
-      "sense": "s2"
      },
      {
       "text": "أَعْمَلُ مِنَ الصَّبَاحِ إِلَى الْمَسَاءِ.",
@@ -356,7 +394,8 @@
      "إِلَى answers “where to?” (إِلَى أَيْنَ؟), فِي answers “where?” — but the noun is genitive after both: Arabic shows the direction with the preposition, not with the case (German: in die Schule / in der Schule).",
      "In time, مِنْ … إِلَى … is “from … to / until …”; alone, “until” is usually حَتَّى (lesson 15)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:min",
@@ -364,8 +403,18 @@
    "pos": "ADP",
    "senses": [
     "prep.from",
-    "conj.than"
+    "conj.than",
+    "prep.of"
    ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "min",
    "forms": {
     "ADP": "مِنْ",
@@ -407,7 +456,8 @@
       "def": "of, some of (a part of a whole): وَاحِدٌ مِنْهُمْ",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.of"
      },
      {
       "id": "s3",
@@ -509,14 +559,32 @@
      "مِنْ also marks “than” (أَكْبَرُ مِنِّي) and “part of” (بَعْضٌ مِنَ الْخُبْزِ).",
      "For “than” Arabic uses the same مِنْ as “from”: أَكْبَرُ مِنِّي, “bigger from me” — exactly like Hebrew גָּדוֹל מִמֶּנִּי."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:maa_with",
    "lemma": "مَعَ",
    "pos": "ADP",
    "senses": [
-    "prep.with"
+    "prep.with",
+    "prep.despite"
+   ],
+   "features": {
+    "root": {
+     "none": "an old adverbial word (ẓarf) with no root in use"
+    },
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.with",
+     "axis": "accompaniment or instrument",
+     "value": "together with a person or a thing"
+    }
    ],
    "translit": "maʿa",
    "forms": {
@@ -558,14 +626,16 @@
       "def": "in spite of: مَعَ ذٰلِكَ (nevertheless)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "prep.despite"
      },
      {
       "id": "s3",
       "def": "having on oneself: مَعِي (I have with me)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -639,14 +709,44 @@
     "subtleties": [
      "مَعِي، مَعَكَ … = “I have on me, you have on you”: هَلْ مَعَكَ مَاءٌ؟ — what you carry now, unlike عِنْدِي (what you own)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:bi",
    "lemma": "بِ",
    "pos": "ADP",
    "senses": [
-    "prep.with"
+    "prep.with",
+    "prep.in",
+    "prep.by",
+    "prep.for"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.in",
+     "axis": "register",
+     "value": "literary: in, at (بِالْمَدِينَةِ)"
+    },
+    {
+     "concept": "prep.with",
+     "axis": "accompaniment or instrument",
+     "value": "with a tool or an ingredient; by (transport)"
+    },
+    {
+     "concept": "prep.for",
+     "axis": "what it marks",
+     "value": "a price (بِكَمْ؟)"
+    }
    ],
    "prefix": true,
    "translit": "bi-",
@@ -689,21 +789,24 @@
       "def": "in, at (a place) — literary",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "prep.in"
      },
      {
       "id": "s3",
       "def": "by (means of transport): بِالسَّيَّارَةِ",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.by"
      },
      {
       "id": "s4",
       "def": "for (a price): بِكَمْ؟",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.for"
      }
     ],
     "examples": [
@@ -791,6 +894,15 @@
    "senses": [
     "prep.without"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: بِ + دُون (د و ن)"
+    },
+    "kind": "phrase",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "bi-dūni",
    "forms": {
     "ADP": "بِدُونِ",
@@ -901,14 +1013,39 @@
     "subtleties": [
      "With pronoun endings: بِدُونِي (without me), بِدُونِكَ (without you)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:li",
    "lemma": "لِ",
    "pos": "ADP",
    "senses": [
-    "prep.for"
+    "prep.for",
+    "poss.belongto",
+    "prep.to.person",
+    "conj.inorderto"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.for",
+     "axis": "what it marks",
+     "value": "a person or a purpose (هٰذَا لَكَ)"
+    },
+    {
+     "concept": "conj.inorderto",
+     "axis": "form",
+     "value": "لِـ + subjunctive, written attached (لِيَتَعَلَّمَ)"
+    }
    ],
    "prefix": true,
    "translit": "li-",
@@ -951,21 +1088,24 @@
       "def": "belonging to — هٰذَا لِي (this is mine)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "poss.belongto"
      },
      {
       "id": "s3",
       "def": "to (a person: thanks, giving, saying)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.to.person"
      },
      {
       "id": "s4",
       "def": "in order to (+ a verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.inorderto"
      }
     ],
     "examples": [
@@ -1047,7 +1187,30 @@
    "lemma": "عَنْ",
    "pos": "ADP",
    "senses": [
-    "prep.about"
+    "prep.about",
+    "prep.awayfrom",
+    "prep.accordingto"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.accordingto",
+     "axis": "whose word",
+     "value": "on the authority of a report passed on (عَنْ أَبِي هُرَيْرَةَ)"
+    },
+    {
+     "concept": "prep.about",
+     "axis": "construction",
+     "value": "about a topic: تَكَلَّمَ عَنْ، كِتَابٌ عَنْ"
+    }
    ],
    "translit": "ʿan",
    "forms": {
@@ -1090,14 +1253,16 @@
       "def": "away from, off (distance, separation): بَعِيدٌ عَنْ …",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.awayfrom"
      },
      {
       "id": "s3",
       "def": "on the authority of, according to (reports)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "prep.accordingto"
      }
     ],
     "examples": [
@@ -1171,7 +1336,8 @@
     "subtleties": [
      "“Far from” is بَعِيدٌ عَنْ (or مِنْ), but “near” is قَرِيبٌ مِنْ."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:madrasa",
@@ -1180,8 +1346,29 @@
    "senses": [
     "place.school"
    ],
+   "features": {
+    "root": "د ر س",
+    "pattern": "مَفْعَلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَدَارِس",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَدْرَسَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "د ر س",
    "translit": "madrasa",
    "forms": {
     "N;NOM;SG;INDF": "مَدْرَسَةٌ",
@@ -1296,10 +1483,32 @@
    "lemma": "جَامِعَة",
    "pos": "NOUN",
    "senses": [
-    "place.university"
+    "place.university",
+    "pol.league"
    ],
+   "features": {
+    "root": "ج م ع",
+    "pattern": "فَاعِلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَامِعَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "جَامِعَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ج م ع",
    "translit": "jāmiʿa",
    "forms": {
     "N;NOM;SG;INDF": "جَامِعَةٌ",
@@ -1347,7 +1556,8 @@
       "def": "league, union (of states)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "pol.league"
      }
     ],
     "examples": [
@@ -1422,10 +1632,35 @@
    "lemma": "عَمَل",
    "pos": "NOUN",
    "senses": [
-    "place.work"
+    "place.work",
+    "abstract.deed",
+    "work.business"
    ],
+   "features": {
+    "root": "ع م ل",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَعْمَال",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "عَمَلَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ع م ل",
    "translit": "ʿamal",
    "forms": {
     "N;NOM;SG;INDF": "عَمَلٌ",
@@ -1473,14 +1708,16 @@
       "def": "work, action, deed",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.deed"
      },
      {
       "id": "s3",
       "def": "business (plural أَعْمَال: رَجُلُ أَعْمَالٍ, businessman)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "work.business"
      }
     ],
     "examples": [
@@ -1561,10 +1798,35 @@
    "lemma": "مَكْتَب",
    "pos": "NOUN",
    "senses": [
-    "place.office"
+    "place.office",
+    "home.desk",
+    "work.agency"
    ],
+   "features": {
+    "root": "ك ت ب",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَكَاتِب",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "مَكْتَبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ك ت ب",
    "translit": "maktab",
    "forms": {
     "N;NOM;SG;INDF": "مَكْتَبٌ",
@@ -1620,14 +1882,16 @@
       "def": "desk",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.desk"
      },
      {
       "id": "s3",
       "def": "bureau, agency: مَكْتَبُ سِيَاحَةٍ (travel agency)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "work.agency"
      }
     ],
     "examples": [
@@ -1651,6 +1915,13 @@
       "register": "neutral",
       "context": "study",
       "sense": "s2"
+     },
+     {
+      "text": "حَجَزْنَا الرِّحْلَةَ فِي مَكْتَبِ سِيَاحَةٍ.",
+      "tr": "We booked the trip at a travel agency.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1696,10 +1967,43 @@
    "lemma": "مَحَلّ",
    "pos": "NOUN",
    "senses": [
-    "place.shop"
+    "place.shop",
+    "place.place"
    ],
+   "features": {
+    "root": "ح ل ل",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَحَلَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "مَحَالّ",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "note": "formal: الْمَحَالُّ التِّجَارِيَّةُ (shops)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مَحَلَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ح ل ل",
    "translit": "maḥall",
    "forms": {
     "N;NOM;SG;INDF": "مَحَلٌّ",
@@ -1747,7 +2051,8 @@
       "def": "place, location — فِي مَحَلِّهِ (in its place, apt)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "place.place"
      }
     ],
     "examples": [
@@ -1824,6 +2129,26 @@
    "senses": [
     "place.supermarket"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (English): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a recent loanword with no settled plural"
+    },
+    "dual": {
+     "none": "a recent loanword: the dual is not in use"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "sūbarmārkit",
    "forms": {
@@ -1926,6 +2251,29 @@
    "senses": [
     "place.market"
    ],
+   "features": {
+    "root": "س و ق",
+    "pattern": "فُعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَسْوَاق",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "سُوقَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "sūq",
    "forms": {
@@ -1974,7 +2322,8 @@
       "def": "the market (economics): اِقْتِصَادُ السُّوقِ",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2043,10 +2392,32 @@
    "lemma": "مَطْعَم",
    "pos": "NOUN",
    "senses": [
-    "place.restaurant"
+    "place.restaurant",
+    "food.food"
    ],
+   "features": {
+    "root": "ط ع م",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَطَاعِم",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَطْعَمَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "root": "ط ع م",
    "translit": "maṭʿam",
    "forms": {
     "N;NOM;SG;INDF": "مَطْعَمٌ",
@@ -2094,7 +2465,8 @@
       "def": "food (old sense)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "food.food"
      }
     ],
     "examples": [
@@ -2118,6 +2490,13 @@
       "register": "neutral",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "يَا سَعْدُ، أَطِبْ مَطْعَمَكَ تَكُنْ مُسْتَجَابَ الدَّعْوَةِ.",
+      "tr": "O Saʿd, keep your food lawful and your prayers will be answered (hadith).",
+      "register": "literary",
+      "context": "hadith",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2165,9 +2544,37 @@
    "senses": [
     "place.cafe"
    ],
+   "features": {
+    "root": "ق ه و",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَقَاهٍ",
+      "kind": "broken",
+      "pattern": "مَفَاعٍ",
+      "declension": "defective",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَقْهَيَانِ",
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.cafe",
+     "axis": "register",
+     "value": "standard: مَقْهًى"
+    }
+   ],
    "gender": "MASC",
-   "root": "ق ه و",
-   "translit": "maqhan",
+   "translit": "maqhā",
    "forms": {
     "N;NOM;SG;INDF": "مَقْهًى",
     "N;NOM;PL;INDF": "مَقَاهٍ",
@@ -2284,9 +2691,29 @@
    "senses": [
     "place.hospital"
    ],
+   "features": {
+    "root": "ش ف ي",
+    "pattern": "مُسْتَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مُسْتَشْفَيَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مُسْتَشْفَيَانِ",
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ش ف ي",
-   "translit": "mustašfan",
+   "translit": "mustašfā",
    "forms": {
     "N;NOM;SG;INDF": "مُسْتَشْفًى",
     "N;NOM;PL;INDF": "مُسْتَشْفَيَاتٌ",
@@ -2402,6 +2829,31 @@
    "senses": [
     "place.pharmacy"
    ],
+   "features": {
+    "root": {
+     "none": "built on صَيْدَلَة (pharmacy), a word of foreign origin: no triliteral root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "صَيْدَلِيَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "صَيْدَلِيَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "ṣaydaliyya",
    "forms": {
@@ -2510,6 +2962,31 @@
    "senses": [
     "place.bank"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian banco / French banque): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بُنُوك",
+      "kind": "broken",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَنْكَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "bank",
    "forms": {
@@ -2617,6 +3094,32 @@
    "senses": [
     "place.postoffice"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: مَكْتَب (ك ت ب) + بَرِيد (ب ر د)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَكَاتِب بَرِيد",
+      "kind": "broken",
+      "declension": "diptote",
+      "note": "the head noun takes the plural: مَكَاتِبُ بَرِيدٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَكْتَبَا بَرِيدٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "maktab barīd",
    "forms": {
@@ -2729,8 +3232,28 @@
    "senses": [
     "place.station"
    ],
+   "features": {
+    "root": "ح ط ط",
+    "pattern": "مَفْعَلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَحَطَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَحَطَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ح ط ط",
    "translit": "maḥaṭṭa",
    "forms": {
     "N;NOM;SG;INDF": "مَحَطَّةٌ",
@@ -2841,8 +3364,28 @@
    "senses": [
     "place.airport"
    ],
+   "features": {
+    "root": "ط ي ر",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَطَارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَطَارَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ط ي ر",
    "translit": "maṭār",
    "forms": {
     "N;NOM;SG;INDF": "مَطَارٌ",
@@ -2948,8 +3491,29 @@
    "senses": [
     "place.street"
    ],
+   "features": {
+    "root": "ش ر ع",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "شَوَارِع",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شَارِعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ش ر ع",
    "translit": "šāriʿ",
    "forms": {
     "N;NOM;SG;INDF": "شَارِعٌ",
@@ -3063,8 +3627,37 @@
    "lemma": "مَيْدَان",
    "pos": "NOUN",
    "senses": [
-    "place.square"
+    "place.square",
+    "abstract.field",
+    "pol.battlefield"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَيَادِين",
+      "kind": "broken",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "مَيْدَانَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "maydān",
    "forms": {
@@ -3113,14 +3706,16 @@
       "def": "field, sphere (of work or study)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.field"
      },
      {
       "id": "s3",
       "def": "battlefield",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "pol.battlefield"
      }
     ],
     "examples": [
@@ -3151,6 +3746,13 @@
       "register": "neutral",
       "context": "work",
       "sense": "s2"
+     },
+     {
+      "text": "سَقَطَ كَثِيرٌ مِنَ الْجُنُودِ فِي مَيْدَانِ الْمَعْرَكَةِ.",
+      "tr": "Many soldiers fell on the battlefield.",
+      "register": "literary",
+      "context": "history",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -3199,8 +3801,30 @@
     "place.park",
     "home.garden"
    ],
+   "features": {
+    "root": "ح د ق",
+    "pattern": "فَعِيلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "حَدَائِق",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَدِيقَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ح د ق",
    "translit": "ḥadīqa",
    "forms": {
     "N;NOM;SG;INDF": "حَدِيقَةٌ",
@@ -3338,6 +3962,45 @@
    "senses": [
     "place.city"
    ],
+   "features": {
+    "root": "م د ن",
+    "pattern": "فَعِيلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مُدُن",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "مَدَائِن",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "note": "literary: old cities (مَدَائِنُ صَالِحٍ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "مَدِينَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.city",
+     "axis": "range",
+     "value": "city, town (the standard word)"
+    }
+   ],
    "gender": "FEM",
    "translit": "madīna",
    "forms": {
@@ -3455,6 +4118,28 @@
    "senses": [
     "place.village"
    ],
+   "features": {
+    "root": "ق ر ي",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قُرًى",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "invariable",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قَرْيَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "qarya",
    "forms": {
@@ -3573,7 +4258,49 @@
    "lemma": "بَلَد",
    "pos": "NOUN",
    "senses": [
-    "place.country"
+    "place.country",
+    "place.city"
+   ],
+   "features": {
+    "root": "ب ل د",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بُلْدَان",
+      "kind": "broken",
+      "pattern": "فُعْلَان",
+      "declension": "triptote",
+      "note": "countries; towns",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "بِلَاد",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "lands; often one country (بِلَادُ الشَّامِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَلَدَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.city",
+     "axis": "range",
+     "value": "town, home town (regional); usually “country”"
+    }
    ],
    "gender": "MASC",
    "translit": "balad",
@@ -3623,7 +4350,8 @@
       "def": "town, home town (in some regions)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.city"
      }
     ],
     "examples": [
@@ -3647,6 +4375,20 @@
       "register": "neutral",
       "context": "feelings",
       "sense": "s1"
+     },
+     {
+      "text": "رَجَعْتُ إِلَى بَلَدِي فِي الصَّيْفِ لِأَرَى أَهْلِي.",
+      "tr": "In summer I went back to my home town to see my family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "سَكَنَّا فِي بَلَدٍ صَغِيرٍ قُرْبَ الْبَحْرِ.",
+      "tr": "We lived in a small town near the sea.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
      }
     ],
     "collocations": [

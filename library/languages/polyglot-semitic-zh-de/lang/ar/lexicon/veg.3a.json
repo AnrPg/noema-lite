@@ -6,8 +6,29 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.turmeric"
+    "veg.turmeric",
+    "sci.curcumin"
    ],
+   "features": {
+    "root": {
+     "none": "an old wandering word (Aramaic kurkmā): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "kurkum",
    "forms": {
@@ -47,7 +68,8 @@
       ],
       "domains": [
        "chemistry"
-      ]
+      ],
+      "concept": "sci.curcumin"
      }
     ],
     "examples": [
@@ -78,6 +100,13 @@
       "register": "neutral",
       "context": "drinks",
       "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ اسْمُ الْكُرْكُمِ أَيْضًا عَلَى الْمَادَّةِ الصَّفْرَاءِ الَّتِي تُلَوِّنُهُ.",
+      "tr": "The name kurkum is also given to the yellow substance that colours it (curcumin).",
+      "register": "technical",
+      "context": "chemistry",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -128,10 +157,28 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.borage"
+    "veg.borage",
+    "nature.bugloss"
    ],
+   "features": {
+    "root": "ح م م",
+    "pattern": {
+     "none": "a reduplicated word (ḥim-ḥim): it fits no measure of ح م م"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ح م م",
    "translit": "ḥimḥim",
    "forms": {
     "N;NOM;SG;INDF": "حِمْحِمٌ",
@@ -170,7 +217,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "nature.bugloss"
      }
     ],
     "examples": [
@@ -201,6 +249,13 @@
       "register": "neutral",
       "context": "gardening",
       "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ الْحِمْحِمُ فِي كُتُبِ النَّبَاتِ عَلَى أَنْوَاعٍ قَرِيبَةٍ مِنْ لِسَانِ الثَّوْرِ أَيْضًا.",
+      "tr": "In botanical books ḥimḥim is also used for related kinds of bugloss.",
+      "register": "technical",
+      "context": "botany",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -240,7 +295,35 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.fathen"
+    "veg.fathen",
+    "veg.orache"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Middle Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.orache",
+     "axis": "frequency",
+     "value": "technical / botanical name"
+    }
    ],
    "gender": "MASC",
    "translit": "sarmaq",
@@ -281,7 +364,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "veg.orache"
      }
     ],
     "examples": [
@@ -305,6 +389,20 @@
       "register": "neutral",
       "context": "food",
       "sense": "s1"
+     },
+     {
+      "text": "يُطْلَقُ السَّرْمَقُ أَيْضًا عَلَى نَبَاتِ الْقَطَفِ.",
+      "tr": "sarmaq is also used for orache (qaṭaf).",
+      "register": "technical",
+      "context": "botany",
+      "sense": "s2"
+     },
+     {
+      "text": "فِي بَعْضِ الْمَعَاجِمِ السَّرْمَقُ هُوَ الْقَطَفُ.",
+      "tr": "In some dictionaries sarmaq is orache.",
+      "register": "technical",
+      "context": "dictionary",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -344,6 +442,26 @@
    "senses": [
     "veg.wasabi"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Japanese): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "wāsābī",
    "forms": {
@@ -436,6 +554,26 @@
    "senses": [
     "veg.rhubarb"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "rāwand",
    "forms": {
@@ -544,6 +682,26 @@
    "senses": [
     "veg.galangal"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "ḫawlanjān",
    "forms": {
@@ -639,6 +797,33 @@
    "class": "mass",
    "senses": [
     "veg.orache"
+   ],
+   "features": {
+    "root": {
+     "none": "the plant name comes from Syriac (qaṭəp̄ā), not from قَطَفَ “to pick”"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.orache",
+     "axis": "frequency",
+     "value": "the usual name"
+    }
    ],
    "gender": "MASC",
    "translit": "qaṭaf",
@@ -741,8 +926,29 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.glasswort"
+    "veg.glasswort",
+    "sci.potash"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "ʾušnān",
    "forms": {
@@ -779,7 +985,8 @@
       "def": "potash — the alkaline ash of these plants, used for washing (Wiktionary)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "sci.potash"
      }
     ],
     "examples": [
@@ -841,8 +1048,30 @@
    "senses": [
     "veg.heartofpalm"
    ],
+   "features": {
+    "root": "ج م ر",
+    "pattern": "فُعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جُمَّارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a food (heart of palm): not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "root": "ج م ر",
    "translit": "jummār",
    "forms": {
     "N;NOM;SG;INDF": "جُمَّارٌ",
@@ -884,7 +1113,8 @@
       "def": "the pith of other fruits (Wiktionary)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -973,6 +1203,26 @@
    "senses": [
     "veg.amaranth"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "jarbūz",
    "forms": {

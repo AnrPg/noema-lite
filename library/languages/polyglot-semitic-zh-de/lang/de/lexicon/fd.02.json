@@ -5,7 +5,8 @@
    "lemma": "ja",
    "pos": "INTJ",
    "senses": [
-    "part.yes"
+    "part.yes",
+    "part.afterall"
    ],
    "ref": {
     "src": "kaikki",
@@ -33,7 +34,8 @@
       "def": "modal particle: as we know, after all, obviously (Das ist ja toll!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.afterall"
      }
     ],
     "examples": [
@@ -112,6 +114,9 @@
     "subtleties": [
      "Mid-sentence, unstressed ja is not “yes” but a modal particle that marks something as obvious or surprising."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -150,7 +155,8 @@
       "def": "exclamation of surprise or disbelief (Nein, wirklich?)",
       "register": [
        "informal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -225,6 +231,9 @@
     "subtleties": [
      "To contradict a negative statement you say doch, not ja: Du magst keinen Spinat. – Doch!"
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -232,7 +241,15 @@
    "lemma": "hallo",
    "pos": "INTJ",
    "senses": [
-    "greet.hello"
+    "greet.hello",
+    "intj.hello.phone"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.hello",
+     "axis": "register",
+     "value": "informal (friends, family)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -260,14 +277,16 @@
       "def": "hello – answering the phone or calling for attention (Hallo? Ist da jemand?)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "intj.hello.phone"
      },
      {
       "id": "s3",
       "def": "Hallo?! – disbelief or protest (“excuse me?!”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -361,6 +380,9 @@
      "On the phone many Germans answer with their surname (Weber?) rather than Hallo.",
      "Hallo works at any time of day; Guten Morgen / Tag / Abend depend on the hour."
     ]
+   },
+   "features": {
+    "formality": "informal"
    }
   },
   {
@@ -369,6 +391,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.hello"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.hello",
+     "axis": "register",
+     "value": "formal (strangers, customers)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -459,6 +488,9 @@
      "In southern Germany and Austria Grüß Gott is more usual than Guten Tag; in the north Moin.",
      "In casual speech it shrinks to Tag! or Tach!"
     ]
+   },
+   "features": {
+    "formality": "formal"
    }
   },
   {
@@ -551,6 +583,9 @@
     "subtleties": [
      "Colloquially just Morgen! – in northern Germany Moin is said all day, not only in the morning."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -641,6 +676,9 @@
     "subtleties": [
      "Like guten Tag it is an accusative of wishing: (ich wünsche einen) guten Abend."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -676,7 +714,8 @@
       "def": "Na dann gute Nacht! – “then we’re done for / forget it”",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -743,6 +782,9 @@
     "subtleties": [
      "Children often hear the rhyme Gute Nacht, schlaf gut, träum was Schönes!"
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -751,6 +793,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.goodbye"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "register",
+     "value": "formal (strangers, customers)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -840,6 +889,9 @@
     "subtleties": [
      "Auf Wiedersehen is polite but not cold: shop staff say it to every customer. With friends it sounds stiff – use Tschüss."
     ]
+   },
+   "features": {
+    "formality": "formal"
    }
   },
   {
@@ -848,6 +900,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.goodbye"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "register",
+     "value": "informal (friends, family)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -945,6 +1004,9 @@
     "subtleties": [
      "Once northern, tschüss is now used all over Germany, and in shops it is often neutral rather than informal; in the south people also say Servus, Ade or Pfiat di."
     ]
+   },
+   "features": {
+    "formality": "informal"
    }
   },
   {
@@ -953,6 +1015,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.seeyou"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.seeyou",
+     "axis": "when you meet again",
+     "value": "later the same day"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1022,6 +1091,9 @@
     "subtleties": [
      "bis + a time word makes many goodbyes: bis morgen (tomorrow), bis Montag, bis dann (till then)."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -1030,6 +1102,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.seeyou"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.seeyou",
+     "axis": "when you meet again",
+     "value": "soon, in the next days"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1099,6 +1178,9 @@
     "subtleties": [
      "bis bald often closes friendly e-mails and messages, after Viele Grüße."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -1107,6 +1189,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.howareyou"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "addressee and register",
+     "value": "informal and short, to anyone one knows"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1191,6 +1280,9 @@
      "Wie geht's? is a real question: Germans often give a real answer (Ganz gut, ein bisschen müde …) – it is not just “hi”.",
      "It is neutral enough to use with colleagues you say Sie to; the full formal question is Wie geht es Ihnen?"
     ]
+   },
+   "features": {
+    "formality": "informal"
    }
   },
   {
@@ -1199,6 +1291,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.howareyou"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "addressee and register",
+     "value": "to one person one says du to"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1272,6 +1371,9 @@
     "subtleties": [
      "es geht + dative is how German talks about how someone is: Mir geht es gut, ihm geht es schlecht."
     ]
+   },
+   "features": {
+    "formality": "informal"
    }
   },
   {
@@ -1280,6 +1382,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.howareyou"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "addressee and register",
+     "value": "to someone one says Sie to"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1357,6 +1466,9 @@
     "subtleties": [
      "A doctor asking Wie geht es Ihnen? wants to know about your health – it can be a real medical question."
     ]
+   },
+   "features": {
+    "formality": "formal"
    }
   },
   {
@@ -1365,8 +1477,16 @@
    "pos": "ADJ",
    "senses": [
     "greet.fine",
-    "adj.good"
+    "adj.good",
+    "intj.ok",
+    "adv.well"
    ],
+   "features": {
+    "comparison": "irregular",
+    "stem": {
+     "none": "the endings are added to the base form (gut → gute)"
+    }
+   },
    "forms": {
     "ADJ": "gut",
     "ADJ;NOM;SG;MASC;STRG": "guter",
@@ -1460,7 +1580,16 @@
       "def": "Gut! – okay, all right (agreement)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.ok"
+     },
+     {
+      "id": "s4",
+      "def": "well (adverb: Sie singt gut; Er spricht gut Deutsch)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.well"
      }
     ],
     "examples": [
@@ -1505,6 +1634,20 @@
       "register": "neutral",
       "context": "cafés",
       "sense": "s2"
+     },
+     {
+      "text": "Sie singt sehr gut.",
+      "tr": "She sings very well.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s4"
+     },
+     {
+      "text": "Er spricht gut Deutsch.",
+      "tr": "He speaks German well.",
+      "register": "neutral",
+      "context": "languages",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1588,9 +1731,56 @@
    "lemma": "heißen",
    "pos": "VERB",
    "senses": [
-    "greet.myname"
+    "greet.myname",
+    "verb.mean",
+    "verb.bid"
    ],
-   "aux": "haben",
+   "features": {
+    "principalParts": [
+     "heißen",
+     "heißt",
+     "hieß",
+     "geheißen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "no change",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "NOM",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "predicative: Ich heiße Anna. Das heißt „Haus“."
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s4"
+      ],
+      "note": "jemanden willkommen heißen"
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "V;NFIN": "heißen",
     "V;PRS;1;SG": "heiße",
@@ -1628,21 +1818,24 @@
       "def": "to mean (Was heißt das? Nein heißt nein.)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.mean"
      },
      {
       "id": "s3",
       "def": "das heißt (d. h.) – that is, i.e.",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s2"
      },
      {
       "id": "s4",
       "def": "to bid, to tell (someone to do something): jemanden willkommen heißen",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.bid"
      }
     ],
     "examples": [
@@ -1846,6 +2039,9 @@
     "subtleties": [
      "It is short for Es freut mich (, Sie kennenzulernen): “it pleases me”, with es dropped – mich is the accusative of ich."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -1881,7 +2077,8 @@
       "def": "(Nein,) danke – no, thank you: declining an offer",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1963,6 +2160,9 @@
     "subtleties": [
      "Formal: Ich danke Ihnen / Vielen Dank; warm: Danke schön; casual: Danke dir!"
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -1971,7 +2171,9 @@
    "pos": "ADV",
    "senses": [
     "greet.please",
-    "greet.welcome"
+    "greet.welcome",
+    "intj.pardon",
+    "intj.hereyouare"
    ],
    "ref": {
     "src": "kaikki",
@@ -2007,14 +2209,16 @@
       "def": "Wie bitte? / Bitte? – pardon? sorry? (asking someone to repeat)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "intj.pardon"
      },
      {
       "id": "s4",
       "def": "here you are (Bitte schön! when handing something over)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "intj.hereyouare"
      }
     ],
     "examples": [
@@ -2117,6 +2321,11 @@
      "bitte goes almost anywhere in a request: Bitte setzen Sie sich! / Setzen Sie sich bitte! – mid-sentence it sounds softer.",
      "Bitte schön / bitte sehr are warmer than bitte alone."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -2126,6 +2335,13 @@
    "senses": [
     "greet.sorry",
     "greet.excuseme"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.sorry",
+     "axis": "excuse or regret",
+     "value": "a light excuse (bumping into someone, interrupting)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -2235,6 +2451,9 @@
      "As a noun, die Entschuldigung is also an excuse and a note from parents for missing school.",
      "Entschuldigen Sie (bitte)! is the more polite way to stop a stranger."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   },
   {
@@ -2243,6 +2462,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.sorry"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.sorry",
+     "axis": "excuse or regret",
+     "value": "regret or sympathy (I am sorry)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -2333,6 +2559,9 @@
      "In speech es is usually dropped: Tut mir leid!",
      "Das tut mir leid often means “I’m sorry to hear that” – sympathy, not guilt."
     ]
+   },
+   "features": {
+    "formality": "neutral"
    }
   }
  ],

@@ -7,6 +7,27 @@
    "senses": [
     "veg.carrot"
    ],
+   "features": {
+    "plurals": [
+     {
+      "form": "Karotten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "forms": {
     "N;NOM;SG": "Karotte",
@@ -133,8 +154,33 @@
    "lemma": "Zwiebel",
    "pos": "NOUN",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "nature.bulb",
+    "obj.clock"
    ],
+   "features": {
+    "plurals": [
+     {
+      "form": "Zwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "gender": "FEM",
    "forms": {
     "N;NOM;SG": "Zwiebel",
@@ -175,7 +221,8 @@
       ],
       "domains": [
        "gardening"
-      ]
+      ],
+      "concept": "nature.bulb"
      },
      {
       "id": "s3",
@@ -183,7 +230,8 @@
       "register": [
        "colloquial",
        "dated"
-      ]
+      ],
+      "concept": "obj.clock"
      }
     ],
     "examples": [
@@ -268,8 +316,35 @@
    "lemma": "Gurke",
    "pos": "NOUN",
    "senses": [
-    "veg.cucumber"
+    "veg.cucumber",
+    "food.gherkin",
+    "obj.junk",
+    "body.nose"
    ],
+   "features": {
+    "plurals": [
+     {
+      "form": "Gurken",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "gender": "FEM",
    "forms": {
     "N;NOM;SG": "Gurke",
@@ -307,7 +382,8 @@
       "def": "pickled gherkin (saure Gurke)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.gherkin"
      },
      {
       "id": "s3",
@@ -315,7 +391,8 @@
       "register": [
        "colloquial",
        "pejorative"
-      ]
+      ],
+      "concept": "obj.junk"
      },
      {
       "id": "s4",
@@ -323,7 +400,8 @@
       "register": [
        "colloquial",
        "humorous"
-      ]
+      ],
+      "concept": "body.nose"
      }
     ],
     "examples": [
@@ -354,6 +432,13 @@
       "register": "colloquial",
       "context": "cars",
       "sense": "s3"
+     },
+     {
+      "text": "Was hat der für eine Gurke im Gesicht!",
+      "tr": "What a hooter he’s got on his face!",
+      "register": "humorous",
+      "context": "joking",
+      "sense": "s4"
      }
     ],
     "collocations": [

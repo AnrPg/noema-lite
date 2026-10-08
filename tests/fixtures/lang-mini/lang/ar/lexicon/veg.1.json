@@ -8,6 +8,33 @@
    "senses": [
     "veg.carrot"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian gazar): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَزَرَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَزَرَتَانِ",
+    "declension": "triptote",
+    "unit": "جَزَرَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "root": "ج ز ر",
    "unit": "جَزَرَة",
@@ -112,8 +139,33 @@
    "pos": "NOUN",
    "class": "collective",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "nature.bulb"
    ],
+   "features": {
+    "root": "ب ص ل",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَصَلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "بَصَلَتَانِ",
+    "declension": "triptote",
+    "unit": "بَصَلَة",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "root": "ب ص ل",
    "unit": "بَصَلَة",
@@ -159,7 +211,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "nature.bulb"
      }
     ],
     "examples": [
@@ -183,6 +236,13 @@
       "register": "neutral",
       "context": "home",
       "sense": "s1"
+     },
+     {
+      "text": "يُزْرَعُ التُّولِيبُ مِنْ بَصَلٍ فِي الْخَرِيفِ.",
+      "tr": "Tulips are planted from bulbs in autumn.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -221,6 +281,33 @@
    "senses": [
     "veg.cucumber"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword from Persian (xiyār); خِيَار “choice” (خ ي ر) is another word"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "خِيَارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "خِيَارَتَانِ",
+    "declension": "triptote",
+    "unit": "خِيَارَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "root": "خ ي ر",
    "unit": "خِيَارَة",

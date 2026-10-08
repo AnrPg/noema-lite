@@ -5,10 +5,54 @@
    "lemma": "كَبِير",
    "pos": "ADJ",
    "senses": [
-    "adj.big"
+    "adj.big",
+    "adj.old.person",
+    "adj.great"
    ],
-   "root": "ك ب ر",
-   "brokenPlural": "كِبَار",
+   "features": {
+    "root": "ك ب ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "كَبِيرَة",
+    "plurals": [
+     {
+      "form": "كِبَار",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "big; grown-up, old (people)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "كُبَرَاء",
+      "kind": "broken",
+      "pattern": "فُعَلَاء",
+      "declension": "diptote",
+      "note": "great men, dignitaries",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَكْبَر",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.old.person",
+     "axis": "register",
+     "value": "everyday: “big” = grown-up, old (كَبِيرٌ فِي السِّنِّ)"
+    }
+   ],
    "translit": "kabīr",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "كَبِيرٌ",
@@ -83,14 +127,16 @@
       "def": "old, grown-up (of a person; often كَبِيرٌ فِي السِّنِّ)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.old.person"
      },
      {
       "id": "s3",
       "def": "great, important, senior",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adj.great"
      }
     ],
     "examples": [
@@ -128,6 +174,13 @@
       "register": "neutral",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "الْمُتَنَبِّي شَاعِرٌ كَبِيرٌ.",
+      "tr": "al-Mutanabbī is a great poet.",
+      "register": "formal",
+      "context": "literature",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -197,10 +250,42 @@
    "lemma": "صَغِير",
    "pos": "ADJ",
    "senses": [
-    "adj.small"
+    "adj.small",
+    "adj.young"
    ],
-   "root": "ص غ ر",
-   "brokenPlural": "صِغَار",
+   "features": {
+    "root": "ص غ ر",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "صَغِيرَة",
+    "plurals": [
+     {
+      "form": "صِغَار",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَصْغَر",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "age",
+     "value": "young, little (a child); younger"
+    }
+   ],
    "translit": "ṣaġīr",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "صَغِيرٌ",
@@ -295,7 +380,8 @@
       "def": "young, little (of a child; also “younger”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.young"
      }
     ],
     "examples": [
@@ -381,8 +467,33 @@
     "adj.long",
     "adj.tall"
    ],
-   "root": "ط و ل",
-   "brokenPlural": "طِوَال",
+   "features": {
+    "root": "ط و ل",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "طَوِيلَة",
+    "plurals": [
+     {
+      "form": "طِوَال",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَطْوَل",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ṭawīl",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "طَوِيلٌ",
@@ -485,7 +596,8 @@
       "def": "long (time): وَقْتٌ طَوِيلٌ",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -579,10 +691,36 @@
    "lemma": "قَصِير",
    "pos": "ADJ",
    "senses": [
-    "adj.short"
+    "adj.short",
+    "adj.short.person"
    ],
-   "root": "ق ص ر",
-   "brokenPlural": "قِصَار",
+   "features": {
+    "root": "ق ص ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَصِيرَة",
+    "plurals": [
+     {
+      "form": "قِصَار",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْصَر",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "qaṣīr",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "قَصِيرٌ",
@@ -677,14 +815,16 @@
       "def": "short (of a person)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.short.person"
      },
      {
       "id": "s3",
       "def": "short, brief (time)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -766,9 +906,39 @@
    "lemma": "جَيِّد",
    "pos": "ADJ",
    "senses": [
-    "adj.good"
+    "adj.good",
+    "adv.well"
    ],
-   "root": "ج و د",
+   "features": {
+    "root": "ج و د",
+    "pattern": "فَيْعِل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "جَيِّدَة",
+    "plurals": [
+     {
+      "form": "جَيِّدُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَجْوَد",
+    "meaningForms": [
+     {
+      "form": "جَيِّدًا",
+      "what": "the accusative as an adverb: well",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "translit": "jayyid",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "جَيِّدٌ",
@@ -834,14 +1004,16 @@
       "def": "جَيِّدًا: well (adverb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.well"
      },
      {
       "id": "s3",
       "def": "“good” as a school mark (between مَقْبُول and مُمْتَاز)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -929,7 +1101,31 @@
    "senses": [
     "adj.bad"
    ],
-   "root": "س و ء",
+   "features": {
+    "root": "س و ء",
+    "pattern": "فَيْعِل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "سَيِّئَة",
+    "plurals": [
+     {
+      "form": "سَيِّئُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْوَأ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "sayyiʾ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "سَيِّئٌ",
@@ -1004,7 +1200,8 @@
       "def": "bad, evil (morally)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1091,10 +1288,40 @@
    "lemma": "جَدِيد",
    "pos": "ADJ",
    "senses": [
-    "adj.new"
+    "adj.new",
+    "adv.again"
    ],
-   "root": "ج د د",
-   "brokenPlural": "جُدُد",
+   "features": {
+    "root": "ج د د",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "جَدِيدَة",
+    "plurals": [
+     {
+      "form": "جُدُد",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَجَدّ",
+    "meaningForms": [
+     {
+      "form": "مِنْ جَدِيدٍ",
+      "what": "only in this phrase: anew, again",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "translit": "jadīd",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "جَدِيدٌ",
@@ -1180,7 +1407,8 @@
       "def": "مِنْ جَدِيدٍ: anew, again",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.again"
      }
     ],
     "examples": [
@@ -1267,10 +1495,45 @@
    "lemma": "قَدِيم",
    "pos": "ADJ",
    "senses": [
-    "adj.old.thing"
+    "adj.old.thing",
+    "adj.former"
    ],
-   "root": "ق د م",
-   "brokenPlural": "قُدَامَى",
+   "features": {
+    "root": "ق د م",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَدِيمَة",
+    "plurals": [
+     {
+      "form": "قُدَامَى",
+      "kind": "broken",
+      "pattern": "فُعَالَى",
+      "declension": "invariable",
+      "note": "former members, veterans (قُدَامَى الْمُحَارِبِينَ)",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "form": "قُدَمَاء",
+      "kind": "broken",
+      "pattern": "فُعَلَاء",
+      "declension": "diptote",
+      "note": "the ancients (الْمِصْرِيُّونَ الْقُدَمَاءُ)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْدَم",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "translit": "qadīm",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "قَدِيمٌ",
@@ -1371,14 +1634,16 @@
       "def": "old, long-standing (a friend); former",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.former"
      },
      {
       "id": "s3",
       "def": "ancient (of times and peoples)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1466,10 +1731,51 @@
    "lemma": "شَابّ",
    "pos": "ADJ",
    "senses": [
-    "adj.young"
+    "adj.young",
+    "person.youngman"
    ],
-   "root": "ش ب ب",
-   "brokenPlural": "شُبَّان",
+   "features": {
+    "root": "ش ب ب",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "شَابَّة",
+    "plurals": [
+     {
+      "form": "شُبَّان",
+      "kind": "broken",
+      "pattern": "فُعْلَان",
+      "declension": "triptote",
+      "note": "young men",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "no elative in use: younger is أَصْغَرُ سِنًّا"
+    },
+    "meaningForms": [
+     {
+      "form": "الشَّبَاب",
+      "what": "collective: young people, youth",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "age",
+     "value": "young (from the teens to about thirty)"
+    }
+   ],
    "translit": "šābb",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "شَابٌّ",
@@ -1558,7 +1864,8 @@
       "def": "a young man (as a noun); الشَّبَاب = young people, youth",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.youngman"
      }
     ],
     "examples": [
@@ -1640,7 +1947,37 @@
    "senses": [
     "adj.old.person"
    ],
-   "root": "س ن ن",
+   "features": {
+    "root": "س ن ن",
+    "pattern": "مُفْعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of أَسَنَّ (to grow old), form IV",
+    "feminine": "مُسِنَّة",
+    "plurals": [
+     {
+      "form": "مُسِنُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a participle (form IV): older is أَكْبَرُ سِنًّا (also أَسَنُّ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.old.person",
+     "axis": "register",
+     "value": "polite, standard: elderly"
+    }
+   ],
    "translit": "musinn",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "مُسِنٌّ",
@@ -1784,9 +2121,46 @@
    "lemma": "حَارّ",
    "pos": "ADJ",
    "senses": [
-    "adj.hot"
+    "adj.hot",
+    "adj.spicy",
+    "adj.heartfelt"
    ],
-   "root": "ح ر ر",
+   "features": {
+    "root": "ح ر ر",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of حَرَّ (to be hot)",
+    "feminine": "حَارَّة",
+    "plurals": [
+     {
+      "form": "حَارُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَحَرّ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.hot",
+     "axis": "weather / spice or temperature to the touch",
+     "value": "hot weather, climate; spicy food"
+    },
+    {
+     "concept": "adj.heartfelt",
+     "axis": "strength",
+     "value": "warm and heartfelt (تَرْحِيبٌ حَارٌّ)"
+    }
+   ],
    "translit": "ḥārr",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "حَارٌّ",
@@ -1861,14 +2235,16 @@
       "def": "spicy, hot (food)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.spicy"
      },
      {
       "id": "s3",
       "def": "warm, heartfelt (a welcome)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.heartfelt"
      }
     ],
     "examples": [
@@ -1955,9 +2331,40 @@
    "lemma": "سَاخِن",
    "pos": "ADJ",
    "senses": [
-    "adj.hot"
+    "adj.hot",
+    "adj.feverish"
    ],
-   "root": "س خ ن",
+   "features": {
+    "root": "س خ ن",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "derivedFrom": "the active participle of سَخُنَ / سَخِنَ (to become hot)",
+    "feminine": "سَاخِنَة",
+    "plurals": [
+     {
+      "form": "سَاخِنُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْخَن",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.hot",
+     "axis": "weather / spice or temperature to the touch",
+     "value": "hot to the touch: drinks, water, objects"
+    }
+   ],
    "translit": "sāḫin",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "سَاخِنٌ",
@@ -2032,14 +2439,16 @@
       "def": "feverish",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.feverish"
      },
      {
       "id": "s3",
       "def": "hot, tense (news, places): مَنَاطِقُ سَاخِنَةٌ, hot spots",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2125,9 +2534,32 @@
    "lemma": "بَارِد",
    "pos": "ADJ",
    "senses": [
-    "adj.cold"
+    "adj.cold",
+    "adj.dull"
    ],
-   "root": "ب ر د",
+   "features": {
+    "root": "ب ر د",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of بَرَدَ (to be cold)",
+    "feminine": "بَارِدَة",
+    "plurals": [
+     {
+      "form": "بَارِدُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَبْرَد",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "bārid",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "بَارِدٌ",
@@ -2202,7 +2634,8 @@
       "def": "dull, flat, unfunny (a joke, a person)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.dull"
      }
     ],
     "examples": [
@@ -2296,9 +2729,39 @@
    "lemma": "دَافِئ",
    "pos": "ADJ",
    "senses": [
-    "adj.warm"
+    "adj.warm",
+    "adj.heartfelt"
    ],
-   "root": "د ف ء",
+   "features": {
+    "root": "د ف ء",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "derivedFrom": "the active participle of دَفِئَ (to be warm)",
+    "feminine": "دَافِئَة",
+    "plurals": [
+     {
+      "form": "دَافِئُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَدْفَأ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.heartfelt",
+     "axis": "strength",
+     "value": "warm and gentle, friendly (a voice, an atmosphere)"
+    }
+   ],
    "translit": "dāfiʾ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "دَافِئٌ",
@@ -2373,7 +2836,8 @@
       "def": "warm, friendly (a meeting, a voice)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.heartfelt"
      }
     ],
     "examples": [
@@ -2462,7 +2926,31 @@
    "senses": [
     "adj.beautiful"
    ],
-   "root": "ج م ل",
+   "features": {
+    "root": "ج م ل",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "جَمِيلَة",
+    "plurals": [
+     {
+      "form": "جَمِيلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَجْمَل",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "jamīl",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "جَمِيلٌ",
@@ -2557,7 +3045,8 @@
       "def": "nice, lovely (things, ideas, days)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2659,8 +3148,32 @@
    "senses": [
     "adj.ugly"
    ],
-   "root": "ق ب ح",
-   "brokenPlural": "قِبَاح",
+   "features": {
+    "root": "ق ب ح",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَبِيحَة",
+    "plurals": [
+     {
+      "form": "قِبَاح",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْبَح",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "qabīḥ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "قَبِيحٌ",
@@ -2755,7 +3268,8 @@
       "def": "vile, shameful, bad (deeds, words)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2829,9 +3343,44 @@
    "lemma": "سَهْل",
    "pos": "ADJ",
    "senses": [
-    "adj.easy"
+    "adj.easy",
+    "nature.plain"
    ],
-   "root": "س ه ل",
+   "features": {
+    "root": "س ه ل",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "سَهْلَة",
+    "plurals": [
+     {
+      "form": "سَهْلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "easy-going (people)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "سُهُول",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "as a noun: plains",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْهَل",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "translit": "sahl",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "سَهْلٌ",
@@ -2906,7 +3455,8 @@
       "def": "flat, level (land); as a noun: a plain",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.plain"
      }
     ],
     "examples": [
@@ -2930,6 +3480,13 @@
       "register": "neutral",
       "context": "reading",
       "sense": "s1"
+     },
+     {
+      "text": "زَرَعَ الْفَلَّاحُونَ الْقَمْحَ فِي أَرْضٍ سَهْلَةٍ.",
+      "tr": "The farmers grew wheat on flat land.",
+      "register": "neutral",
+      "context": "farming",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2996,8 +3553,32 @@
    "senses": [
     "adj.difficult"
    ],
-   "root": "ص ع ب",
-   "brokenPlural": "صِعَاب",
+   "features": {
+    "root": "ص ع ب",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "صَعْبَة",
+    "plurals": [
+     {
+      "form": "صِعَاب",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَصْعَب",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ṣaʿb",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "صَعْبٌ",
@@ -3072,7 +3653,8 @@
       "def": "hard to handle (a person)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3161,7 +3743,29 @@
    "senses": [
     "adj.cheap"
    ],
-   "root": "ر خ ص",
+   "features": {
+    "root": "ر خ ص",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": "faʿīl of رَخُصَ (to be cheap)",
+    "feminine": "رَخِيصَة",
+    "plurals": [
+     {
+      "form": "رَخِيصُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَرْخَص",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "raḫīṣ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "رَخِيصٌ",
@@ -3236,7 +3840,8 @@
       "def": "cheap, worthless, base (pejorative)",
       "register": [
        "pejorative"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3310,10 +3915,33 @@
    "lemma": "غَالٍ",
    "pos": "ADJ",
    "senses": [
-    "adj.expensive"
+    "adj.expensive",
+    "adj.dear"
    ],
-   "root": "غ ل و",
-   "translit": "ġālin",
+   "features": {
+    "root": "غ ل و",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of غَلَا (to be expensive)",
+    "feminine": "غَالِيَة",
+    "plurals": [
+     {
+      "form": "غَالُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "defective",
+    "elative": "أَغْلَى",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "translit": "ġālī",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "غَالٍ",
     "ADJ;ACC;SG;MASC;INDF": "غَالِيًا",
@@ -3387,7 +4015,8 @@
       "def": "dear, precious (to someone)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.dear"
      }
     ],
     "examples": [
@@ -3475,10 +4104,33 @@
    "lemma": "سَعِيد",
    "pos": "ADJ",
    "senses": [
-    "adj.happy"
+    "adj.happy",
+    "adj.lucky"
    ],
-   "root": "س ع د",
-   "brokenPlural": "سُعَدَاء",
+   "features": {
+    "root": "س ع د",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": "faʿīl of سَعِدَ (to be happy)",
+    "feminine": "سَعِيدَة",
+    "plurals": [
+     {
+      "form": "سُعَدَاء",
+      "kind": "broken",
+      "pattern": "فُعَلَاء",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْعَد",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "saʿīd",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "سَعِيدٌ",
@@ -3573,7 +4225,8 @@
       "def": "lucky, fortunate, blessed",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.lucky"
      }
     ],
     "examples": [
@@ -3670,7 +4323,30 @@
    "senses": [
     "adj.sad"
    ],
-   "root": "ح ز ن",
+   "features": {
+    "root": "ح ز ن",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "حَزِينَة",
+    "plurals": [
+     {
+      "form": "حَزِينُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَحْزَن",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ḥazīn",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "حَزِينٌ",
@@ -3846,7 +4522,30 @@
    "senses": [
     "adj.tired"
    ],
-   "root": "ت ع ب",
+   "features": {
+    "root": "ت ع ب",
+    "pattern": "مُفْعَل",
+    "sunLetter": false,
+    "derivedFrom": "the passive participle of أَتْعَبَ (to tire someone), form IV",
+    "feminine": "مُتْعَبَة",
+    "plurals": [
+     {
+      "form": "مُتْعَبُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a participle: more tired is أَكْثَرُ تَعَبًا"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "mutʿab",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "مُتْعَبٌ",
@@ -3986,8 +4685,31 @@
    "senses": [
     "adj.hungry"
    ],
-   "root": "ج و ع",
-   "brokenPlural": "جِيَاع",
+   "features": {
+    "root": "ج و ع",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of جَاعَ (to be hungry)",
+    "feminine": "جَائِعَة",
+    "plurals": [
+     {
+      "form": "جِيَاع",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "usually أَشَدُّ جُوعًا (hungrier); أَجْوَعُ is rare"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "jāʾiʿ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "جَائِعٌ",
@@ -4143,9 +4865,32 @@
    "senses": [
     "adj.thirsty"
    ],
-   "root": "ع ط ش",
-   "brokenPlural": "عِطَاش",
-   "diptote": true,
+   "features": {
+    "root": "ع ط ش",
+    "pattern": "فَعْلَان",
+    "sunLetter": false,
+    "derivedFrom": "عَطِشَ (to be thirsty) + -ān (faʿlān)",
+    "feminine": "عَطْشَى",
+    "plurals": [
+     {
+      "form": "عِطَاش",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "faʿlān: thirstier is أَشَدُّ عَطَشًا"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʿaṭšān",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "عَطْشَانُ",
@@ -4231,7 +4976,8 @@
       "def": "thirsty for, longing for (figurative)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4308,8 +5054,31 @@
    "senses": [
     "adj.fast"
    ],
-   "root": "س ر ع",
-   "brokenPlural": "سِرَاع",
+   "features": {
+    "root": "س ر ع",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "سَرِيعَة",
+    "plurals": [
+     {
+      "form": "سِرَاع",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَسْرَع",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "sarīʿ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "سَرِيعٌ",
@@ -4481,8 +5250,31 @@
    "senses": [
     "adj.slow"
    ],
-   "root": "ب ط ء",
-   "brokenPlural": "بِطَاء",
+   "features": {
+    "root": "ب ط ء",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "بَطِيئَة",
+    "plurals": [
+     {
+      "form": "بِطَاء",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَبْطَأ",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "baṭīʾ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "بَطِيءٌ",

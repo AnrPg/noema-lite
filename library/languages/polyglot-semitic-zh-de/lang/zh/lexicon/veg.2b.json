@@ -9,10 +9,21 @@
    "senses": [
     "veg.okra"
    ],
-   "measure": [
-    "根",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -33,14 +44,6 @@
        "neutral"
       ],
       "concept": "veg.okra"
-     },
-     {
-      "id": "s2",
-      "def": "(Taiwanese Hokkien, dated) sunflower",
-      "register": [
-       "dialectal",
-       "dated"
-      ]
      }
     ],
     "examples": [
@@ -105,7 +108,8 @@
      "Arabic بَامِيَة (bāmiya), Hebrew בָּמְיָה (bamya), Turkish bamya and Greek μπάμιες are all the same word for okra."
     ],
     "pitfalls": [
-     "秋葵 (okra) is not 葵花 or 向日葵 (sunflower), although in dated Taiwanese Hokkien 秋葵 did mean sunflower (Wiktionary)."
+     "秋葵 (okra) is not 葵花 or 向日葵 (sunflower), although in dated Taiwanese Hokkien 秋葵 did mean sunflower (Wiktionary).",
+     "In Taiwanese Hokkien 秋葵 was once the sunflower (Wiktionary); in Mandarin it is only okra — the sunflower is 向日葵."
     ],
     "subtleties": [
      "The slime (黏液) is what thickens stews; dry cooking or acid keeps okra less slimy."
@@ -121,10 +125,21 @@
    "senses": [
     "veg.broadbean"
    ],
-   "measure": [
-    "颗",
-    "粒"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 蠶豆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -145,13 +160,6 @@
        "neutral"
       ],
       "concept": "veg.broadbean"
-     },
-     {
-      "id": "s2",
-      "def": "(Southern Wu) pea",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -228,10 +236,21 @@
    "senses": [
     "veg.bittermelon"
    ],
-   "measure": [
-    "根",
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -341,9 +360,20 @@
    "senses": [
     "veg.bottlegourd"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 葫蘆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -364,13 +394,6 @@
        "neutral"
       ],
       "concept": "veg.bottlegourd"
-     },
-     {
-      "id": "s2",
-      "def": "(Beijing Mandarin) zucchini, courgette",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -469,10 +492,21 @@
    "senses": [
     "veg.artichoke"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 洋薊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -576,9 +610,20 @@
    "senses": [
     "veg.kohlrabi"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 苤藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -682,10 +727,21 @@
    "senses": [
     "veg.brusselssprout"
    ],
-   "measure": [
-    "颗",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 抱子甘藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -782,9 +838,20 @@
    "senses": [
     "veg.chayote"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -888,9 +955,20 @@
    "senses": [
     "veg.wintermelon"
    ],
-   "measure": [
-    "只"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "只"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -998,10 +1076,21 @@
    "senses": [
     "veg.luffa"
    ],
-   "measure": [
-    "根",
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 絲瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1098,9 +1187,20 @@
     "veg.kale",
     "veg.collards"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 羽衣甘藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1214,10 +1314,21 @@
    "senses": [
     "veg.bokchoy"
    ],
-   "measure": [
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1333,9 +1444,20 @@
    "senses": [
     "veg.napacabbage"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1356,13 +1478,6 @@
        "neutral"
       ],
       "concept": "veg.napacabbage"
-     },
-     {
-      "id": "s2",
-      "def": "(Fuyang Mandarin, Dexing Huizhou) cabbage",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -1438,7 +1553,8 @@
      "Don’t use 白菜 for bok choy in Mandarin (that is 小白菜) — but Cantonese does."
     ],
     "subtleties": [
-     "白菜价 ‘cabbage price’ means dirt cheap — napa cabbage was the cheapest winter vegetable."
+     "白菜价 ‘cabbage price’ means dirt cheap — napa cabbage was the cheapest winter vegetable.",
+     "In a few local varieties (Fuyang Mandarin, Dexing Huizhou) 大白菜 means the round cabbage (Wiktionary); in standard Mandarin that is 卷心菜."
     ]
    }
   },
@@ -1451,10 +1567,21 @@
    "senses": [
     "veg.jalapeno"
    ],
-   "measure": [
-    "个",
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1541,11 +1668,22 @@
    "senses": [
     "veg.redcabbage"
    ],
-   "measure": [
-    "个",
-    "颗",
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紫甘藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗",
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1636,10 +1774,21 @@
    "senses": [
     "veg.runnerbean"
    ],
-   "measure": [
-    "颗",
-    "粒"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1730,10 +1879,21 @@
    "senses": [
     "veg.cherrytomato"
    ],
-   "measure": [
-    "颗",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 聖女果 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1840,11 +2000,23 @@
    "pinyin": "dòu yá",
    "pos": "NOUN",
    "senses": [
-    "veg.beansprout"
+    "veg.beansprout",
+    "person.beanpole"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1871,7 +2043,8 @@
       "def": "(figurative, as 豆芽菜) a tall, skinny child or person",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "person.beanpole"
      }
     ],
     "examples": [
@@ -1953,9 +2126,20 @@
    "senses": [
     "veg.butternut"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -2042,9 +2226,20 @@
    "senses": [
     "veg.snowpea"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 荷蘭豆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

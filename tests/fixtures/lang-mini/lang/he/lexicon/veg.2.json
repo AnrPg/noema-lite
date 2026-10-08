@@ -7,6 +7,38 @@
    "senses": [
     "veg.eggplant"
    ],
+   "features": {
+    "spelling": "חציל",
+    "root": {
+     "none": "coined in 1831 from Arabic حَيْصَل: no Hebrew root"
+    },
+    "pattern": "קָטִיל",
+    "plurals": [
+     {
+      "form": "חֲצִילִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲצִיל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חֲצִילֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "chatsil",
    "forms": {
@@ -95,6 +127,38 @@
    "senses": [
     "veg.pumpkin"
    ],
+   "features": {
+    "spelling": "דלעת",
+    "root": "ד ל ע",
+    "pattern": {
+     "none": "an old plant name: no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "דְּלוּעִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דְּלַעַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דְּלוּעֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "dla'at",
    "forms": {

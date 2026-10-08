@@ -5,10 +5,33 @@
    "lemma": "יֵשׁ",
    "pos": "ADV",
    "senses": [
-    "poss.have"
+    "poss.have",
+    "verb.exist",
+    "intj.yes.triumph"
    ],
    "translit": "yesh",
+   "features": {
+    "spelling": "יש",
+    "derivedFrom": {
+     "none": "a basic existential word (particle)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "An existential particle (Wiktionary files it as an adverb). Possession: יֵשׁ + לְ + possessor (יֵשׁ לִי); its negation is אֵין.",
+   "contrasts": [
+    {
+     "concept": "verb.exist",
+     "axis": "tense",
+     "value": "present (יֵשׁ)"
+    },
+    {
+     "concept": "poss.have",
+     "axis": "tense",
+     "value": "present (יֵשׁ לִי)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -38,14 +61,16 @@
       "def": "there is, there are (existence)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.exist"
      },
      {
       "id": "s3",
       "def": "Yes! (a cry of triumph)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.yes.triumph"
      }
     ],
     "examples": [
@@ -147,8 +172,53 @@
     "prep.to"
    ],
    "prefix": true,
-   "translit": "le",
+   "translit": "le-",
    "role": "“to, for”: the prefix written onto the next word (לְאִמָּא “to / for Mum”), fused with the article as לַ (לַשּׁוּק “to the market”) or לָ before הָ (לָעֲבוֹדָה, לָאוֹטוֹבּוּס); before a shva it is לִ (לִשְׂדֵה הַתְּעוּפָה). With יֵשׁ / אֵין it marks the possessor (יֵשׁ לִי “I have”). With a pronoun it takes endings and is written as a word of its own (לִי, לְךָ, לוֹ …).",
+   "features": {
+    "spelling": "ל",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "לִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "לְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "לָךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "לוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "לָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "לָנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "לָכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "לָכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "לָהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "לָהֶן"
+     }
+    ]
+   },
    "forms": {
     "ADP": "לְ",
     "ADP;DEF": "לַ",
@@ -165,6 +235,13 @@
     "ADP;ALT": "לִ",
     "ADP;DEF;ALT": "לָ"
    },
+   "contrasts": [
+    {
+     "concept": "prep.to",
+     "axis": "register",
+     "value": "everyday: the prefix לְ (לַשּׁוּק)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -178,10 +255,42 @@
    "lemma": "מִשְׁפָּחָה",
    "pos": "NOUN",
    "senses": [
-    "family.family"
+    "family.family",
+    "sci.family"
    ],
    "gender": "FEM",
    "translit": "mishpacha",
+   "features": {
+    "spelling": "משפחה",
+    "root": "שׁ פ ח",
+    "pattern": "מִקְטָלָה",
+    "plurals": [
+     {
+      "form": "מִשְׁפָּחוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִשְׁפַּחַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִשְׁפְּחוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מִשְׁפָּחָה",
     "N;SG;DEF": "הַמִּשְׁפָּחָה",
@@ -197,7 +306,9 @@
     "N;POSS;2;PL;FEM": "מִשְׁפַּחְתְּכֶן",
     "N;POSS;3;PL;MASC": "מִשְׁפַּחְתָּם",
     "N;POSS;3;PL;FEM": "מִשְׁפַּחְתָּן",
-    "N;SG;DEF;PFX": "מִּשְׁפָּחָה"
+    "N;SG;DEF;PFX": "מִּשְׁפָּחָה",
+    "N;SG;CONST": "מִשְׁפַּחַת",
+    "N;PL;CONST": "מִשְׁפְּחוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -228,7 +339,8 @@
       "def": "family (in biology: a rank of classification)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "sci.family"
      }
     ],
     "examples": [
@@ -313,13 +425,32 @@
    "id": "he:horim",
    "lemma": "הוֹרִים",
    "pos": "NOUN",
+   "class": "plt",
    "senses": [
     "family.parents"
    ],
    "gender": "MASC",
-   "class": "plt",
    "translit": "horim",
-   "note": "Used in the plural; the singular הוֹרֶה “a parent” is formal.",
+   "features": {
+    "spelling": "הורים",
+    "root": "ה ר ה",
+    "pattern": "קוֹטֵל",
+    "plurals": {
+     "none": "used in the plural: the word itself is the plural (the singular הוֹרֶה “a parent” is formal)"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "הוֹרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;PL;INDF": "הוֹרִים",
     "N;PL;DEF": "הַהוֹרִים",
@@ -332,12 +463,14 @@
     "N;POSS;2;PL;MASC": "הוֹרֵיכֶם",
     "N;POSS;2;PL;FEM": "הוֹרֵיכֶן",
     "N;POSS;3;PL;MASC": "הוֹרֵיהֶם",
-    "N;POSS;3;PL;FEM": "הוֹרֵיהֶן"
+    "N;POSS;3;PL;FEM": "הוֹרֵיהֶן",
+    "N;PL;CONST": "הוֹרֵי"
    },
    "plene": {
     "N;POSS;1;SG": "הוריי",
     "N;POSS;2;SG;FEM": "הורייך"
    },
+   "note": "Used in the plural; the singular הוֹרֶה “a parent” is formal.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -439,7 +572,31 @@
    ],
    "gender": "FEM",
    "translit": "ima",
-   "note": "Used like a name: אִמָּא שֶׁלִּי “my mum” (no article); calling her: אִמָּא!",
+   "features": {
+    "spelling": "אימא",
+    "root": "א מ ם",
+    "pattern": {
+     "none": "borrowed from Aramaic (the form אִמָּא): no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אִמָּהוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "used like a name (without the article): not the first word of a construct; the formal word is used instead (אֵם: אֵם הַבַּיִת)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אִמָּא",
     "N;SG;DEF": "הָאִמָּא",
@@ -452,6 +609,14 @@
     "N;PL;INDF": "אימהות",
     "N;PL;DEF": "האימהות"
    },
+   "note": "Used like a name: אִמָּא שֶׁלִּי “my mum” (no article); calling her: אִמָּא!",
+   "contrasts": [
+    {
+     "concept": "family.mother",
+     "axis": "register",
+     "value": "everyday; also used like a name (אִמָּא!)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -478,7 +643,8 @@
       "def": "Mum! (calling one’s mother; used like a name, without the article)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -558,8 +724,40 @@
     "family.mother"
    ],
    "gender": "FEM",
-   "mishkal": "קֵטֶל",
    "translit": "em",
+   "features": {
+    "spelling": "אם",
+    "root": "א מ ם",
+    "pattern": {
+     "none": "a one-syllable noun of a doubled root (*ʔimm-, plural אִמּוֹת): not a two-syllable segolate, though Wiktionary files it under קֵטֶל, the type it comes from"
+    },
+    "plurals": [
+     {
+      "form": "אִמָּהוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֵם"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אִמּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֵם",
     "N;SG;DEF": "הָאֵם",
@@ -574,7 +772,9 @@
     "N;POSS;2;PL;MASC": "אִמְּכֶם",
     "N;POSS;2;PL;FEM": "אִמְּכֶן",
     "N;POSS;3;PL;MASC": "אִמָּם",
-    "N;POSS;3;PL;FEM": "אִמָּן"
+    "N;POSS;3;PL;FEM": "אִמָּן",
+    "N;SG;CONST": "אֵם",
+    "N;PL;CONST": "אִמּוֹת"
    },
    "plene": {
     "N;PL;INDF": "אימהות",
@@ -588,8 +788,16 @@
     "N;POSS;2;PL;MASC": "אימכם",
     "N;POSS;2;PL;FEM": "אימכן",
     "N;POSS;3;PL;MASC": "אימם",
-    "N;POSS;3;PL;FEM": "אימן"
+    "N;POSS;3;PL;FEM": "אימן",
+    "N;PL;CONST": "אימות"
    },
+   "contrasts": [
+    {
+     "concept": "family.mother",
+     "axis": "register",
+     "value": "formal and written"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -616,7 +824,8 @@
       "def": "mother, origin (figurative: “the mother of …”, שְׂפַת אֵם “mother tongue”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -698,13 +907,45 @@
    ],
    "gender": "MASC",
    "translit": "aba",
-   "note": "Used like a name: אַבָּא שֶׁלִּי “my dad” (no article); calling him: אַבָּא!",
+   "features": {
+    "spelling": "אבא",
+    "root": "א ב ב",
+    "pattern": {
+     "none": "borrowed from Aramaic (the form אַבָּא): no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אָבוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "used like a name (without the article): not the first word of a construct; the formal word is used instead (אָב: אֲבִי הַמִּשְׁפָּחָה)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אַבָּא",
     "N;SG;DEF": "הָאַבָּא",
     "N;PL;INDF": "אָבוֹת",
     "N;PL;DEF": "הָאָבוֹת"
    },
+   "note": "Used like a name: אַבָּא שֶׁלִּי “my dad” (no article); calling him: אַבָּא!",
+   "contrasts": [
+    {
+     "concept": "family.father",
+     "axis": "register",
+     "value": "everyday; also used like a name (אַבָּא!)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -731,7 +972,8 @@
       "def": "Dad! (calling one’s father; used like a name, without the article)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -800,10 +1042,51 @@
    "lemma": "אָב",
    "pos": "NOUN",
    "senses": [
-    "family.father"
+    "family.father",
+    "family.ancestor"
    ],
    "gender": "MASC",
    "translit": "av",
+   "features": {
+    "spelling": "אב",
+    "root": "א ב ב",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Proto-Semitic *ʔab-)"
+    },
+    "plurals": [
+     {
+      "form": "אָבוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֲבִי"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אֲבוֹת"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "אֲבִי",
+      "senses": [
+       "s3"
+      ],
+      "note": "in this use in the construct: אֲבִי הַ… “the father of …”"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "אָב",
     "N;SG;DEF": "הָאָב",
@@ -818,8 +1101,17 @@
     "N;POSS;2;PL;MASC": "אֲבִיכֶם",
     "N;POSS;2;PL;FEM": "אֲבִיכֶן",
     "N;POSS;3;PL;MASC": "אֲבִיהֶם",
-    "N;POSS;3;PL;FEM": "אֲבִיהֶן"
+    "N;POSS;3;PL;FEM": "אֲבִיהֶן",
+    "N;SG;CONST": "אֲבִי",
+    "N;PL;CONST": "אֲבוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "family.father",
+     "axis": "register",
+     "value": "formal and written"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -846,14 +1138,16 @@
       "def": "forefather, ancestor (הָאָבוֹת “the Patriarchs”)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "family.ancestor"
      },
      {
       "id": "s3",
       "def": "founder, originator (אֲבִי הַ… “the father of …”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -940,11 +1234,69 @@
    "lemma": "בֵּן",
    "pos": "NOUN",
    "senses": [
-    "family.son"
+    "family.son",
+    "adj.aged"
    ],
    "gender": "MASC",
    "translit": "ben",
-   "note": "Construct form בֶּן “son of; aged” (בֶּן דּוֹד, בֶּן שֵׁשׁ).",
+   "features": {
+    "spelling": "בן",
+    "root": "ב ן",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Proto-Semitic *bin-)"
+    },
+    "plurals": [
+     {
+      "form": "בָּנִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s4"
+      ],
+      "note": "as “boys” (s4) only the plural is used"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בֶּן",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בְּנֵי",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "בֶּן, בְּנֵי",
+      "senses": [
+       "s2",
+       "s3"
+      ],
+      "note": "only in the construct (בֶּן שֵׁשׁ “six years old”, בֶּן אָדָם, בְּנֵי אָדָם) — never the absolute בֵּן"
+     },
+     {
+      "form": "בָּנִים",
+      "senses": [
+       "s4"
+      ],
+      "note": "only the plural (also “sons”)"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "בֵּן",
     "N;SG;DEF": "הַבֵּן",
@@ -960,8 +1312,17 @@
     "N;POSS;2;PL;MASC": "בִּנְכֶם",
     "N;POSS;2;PL;FEM": "בִּנְכֶן",
     "N;POSS;3;PL;MASC": "בְּנָם",
-    "N;POSS;3;PL;FEM": "בְּנָן"
+    "N;POSS;3;PL;FEM": "בְּנָן",
+    "N;PL;CONST": "בְּנֵי"
    },
+   "note": "Construct form בֶּן “son of; aged” (בֶּן דּוֹד, בֶּן שֵׁשׁ).",
+   "contrasts": [
+    {
+     "concept": "adj.aged",
+     "axis": "gender of the person",
+     "value": "a male (הוּא בֶּן שֵׁשׁ)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -988,21 +1349,24 @@
       "def": "(בֶּן + number) aged: הוּא בֶּן שֵׁשׁ “he is six”",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.aged"
      },
      {
       "id": "s3",
       "def": "(בֶּן + noun) one who belongs to: בֶּן אָדָם “person”, בֶּן זוּג “partner”",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "(plural בָּנִים) boys",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1091,10 +1455,66 @@
    "lemma": "בַּת",
    "pos": "NOUN",
    "senses": [
-    "family.daughter"
+    "family.daughter",
+    "adj.aged"
    ],
    "gender": "FEM",
    "translit": "bat",
+   "features": {
+    "spelling": "בת",
+    "root": "ב ן",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Proto-Semitic *bint-, the n assimilated)"
+    },
+    "plurals": [
+     {
+      "form": "בָּנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s3"
+      ],
+      "note": "as “girls” (s3) only the plural is used"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בַּת",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בְּנוֹת",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "בַּת, בְּנוֹת",
+      "senses": [
+       "s2"
+      ],
+      "note": "only in the construct (בַּת שֵׁשׁ, בְּנוֹת עֶשֶׂר)"
+     },
+     {
+      "form": "בָּנוֹת",
+      "senses": [
+       "s3"
+      ],
+      "note": "only the plural (also “daughters”)"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "בַּת",
     "N;SG;DEF": "הַבַּת",
@@ -1109,8 +1529,29 @@
     "N;POSS;2;PL;MASC": "בִּתְּכֶם",
     "N;POSS;2;PL;FEM": "בִּתְּכֶן",
     "N;POSS;3;PL;MASC": "בִּתָּם",
-    "N;POSS;3;PL;FEM": "בִּתָּן"
+    "N;POSS;3;PL;FEM": "בִּתָּן",
+    "N;SG;CONST": "בַּת",
+    "N;PL;CONST": "בְּנוֹת"
    },
+   "plene": {
+    "N;POSS;1;SG": "ביתי",
+    "N;POSS;2;SG;MASC": "ביתך",
+    "N;POSS;2;SG;FEM": "ביתך",
+    "N;POSS;3;SG;MASC": "ביתו",
+    "N;POSS;3;SG;FEM": "ביתה",
+    "N;POSS;1;PL": "ביתנו",
+    "N;POSS;2;PL;MASC": "ביתכם",
+    "N;POSS;2;PL;FEM": "ביתכן",
+    "N;POSS;3;PL;MASC": "ביתם",
+    "N;POSS;3;PL;FEM": "ביתן"
+   },
+   "contrasts": [
+    {
+     "concept": "adj.aged",
+     "axis": "gender of the person",
+     "value": "a female (הִיא בַּת שֵׁשׁ)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1137,14 +1578,16 @@
       "def": "(בַּת + number) aged (of a woman or a girl): הִיא בַּת שֵׁשׁ",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.aged"
      },
      {
       "id": "s3",
       "def": "(plural בָּנוֹת) girls",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1238,6 +1681,42 @@
    ],
    "gender": "MASC",
    "translit": "ach",
+   "features": {
+    "spelling": "אח",
+    "root": {
+     "none": "a primary family word (Proto-Semitic *ʔaḫw-), not derived from a verb root; compare אַחֲוָה “brotherhood”"
+    },
+    "pattern": {
+     "none": "a one-syllable noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "אַחִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֲחִי"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אֲחֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אָח",
     "N;SG;DEF": "הָאָח",
@@ -1252,8 +1731,17 @@
     "N;POSS;2;PL;MASC": "אֲחִיכֶם",
     "N;POSS;2;PL;FEM": "אֲחִיכֶן",
     "N;POSS;3;PL;MASC": "אֲחִיהֶם",
-    "N;POSS;3;PL;FEM": "אֲחִיהֶן"
+    "N;POSS;3;PL;FEM": "אֲחִיהֶן",
+    "N;SG;CONST": "אֲחִי",
+    "N;PL;CONST": "אֲחֵי"
    },
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "gender of the person",
+     "value": "a man"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1288,7 +1776,8 @@
       "def": "brother, fellow; אָחִי “bro, mate” as a friendly address",
       "register": [
        "slang"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1398,6 +1887,41 @@
    ],
    "gender": "FEM",
    "translit": "achot",
+   "features": {
+    "spelling": "אחות",
+    "root": {
+     "none": "a primary family word (Proto-Semitic *ʔaḫwat-), not derived from a verb root"
+    },
+    "pattern": {
+     "none": "a primary family word: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "אֲחָיוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֲחוֹת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַחְיוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אָחוֹת",
     "N;SG;DEF": "הָאָחוֹת",
@@ -1412,8 +1936,17 @@
     "N;POSS;2;PL;MASC": "אֲחוֹתְכֶם",
     "N;POSS;2;PL;FEM": "אֲחוֹתְכֶן",
     "N;POSS;3;PL;MASC": "אֲחוֹתָם",
-    "N;POSS;3;PL;FEM": "אֲחוֹתָן"
+    "N;POSS;3;PL;FEM": "אֲחוֹתָן",
+    "N;SG;CONST": "אֲחוֹת",
+    "N;PL;CONST": "אַחְיוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "gender of the person",
+     "value": "a woman; also the profession in general"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1526,11 +2059,44 @@
    "lemma": "בַּעַל",
    "pos": "NOUN",
    "senses": [
-    "family.husband"
+    "family.husband",
+    "person.owner"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "ba'al",
+   "features": {
+    "spelling": "בעל",
+    "root": "ב ע ל",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "בְּעָלִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ],
+      "note": "as “owner” (s2) the plural הַבְּעָלִים is also used for a single owner"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בַּעַל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בַּעֲלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בַּעַל",
     "N;SG;DEF": "הַבַּעַל",
@@ -1545,7 +2111,9 @@
     "N;POSS;2;PL;MASC": "בַּעַלְכֶם",
     "N;POSS;2;PL;FEM": "בַּעַלְכֶן",
     "N;POSS;3;PL;MASC": "בַּעֲלָם",
-    "N;POSS;3;PL;FEM": "בַּעֲלָן"
+    "N;POSS;3;PL;FEM": "בַּעֲלָן",
+    "N;SG;CONST": "בַּעַל",
+    "N;PL;CONST": "בַּעֲלֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1573,14 +2141,16 @@
       "def": "owner, master (בַּעַל הַבַּיִת “the landlord”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.owner"
      },
      {
       "id": "s3",
       "def": "(בַּעַל + noun) having, endowed with: בַּעַל נִסָּיוֹן “experienced”",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -1672,12 +2242,53 @@
    ],
    "gender": "MASC",
    "translit": "tinok",
+   "features": {
+    "spelling": "תינוק",
+    "root": "י נ ק",
+    "pattern": {
+     "none": "a noun of the root י־נ־ק with the prefix תּ־; no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "תִּינוֹקוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תִּינוֹק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תִּינוֹקוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תִּינוֹק",
     "N;SG;DEF": "הַתִּינוֹק",
     "N;PL;INDF": "תִּינוֹקוֹת",
-    "N;PL;DEF": "הַתִּינוֹקוֹת"
+    "N;PL;DEF": "הַתִּינוֹקוֹת",
+    "N;SG;CONST": "תִּינוֹק",
+    "N;PL;CONST": "תִּינוֹקוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "family.baby",
+     "axis": "gender of the person",
+     "value": "a baby boy, or any baby"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1783,16 +2394,58 @@
    ],
    "gender": "FEM",
    "translit": "tinoket",
+   "features": {
+    "spelling": "תינוקת",
+    "root": "י נ ק",
+    "pattern": {
+     "none": "the feminine of תִּינוֹק (ending ־ֶת); no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "תִּינוֹקוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תִּינֹקֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תִּינוֹקוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תִּינֹקֶת",
     "N;SG;DEF": "הַתִּינֹקֶת",
     "N;PL;INDF": "תִּינוֹקוֹת",
-    "N;PL;DEF": "הַתִּינוֹקוֹת"
+    "N;PL;DEF": "הַתִּינוֹקוֹת",
+    "N;SG;CONST": "תִּינֹקֶת",
+    "N;PL;CONST": "תִּינוֹקוֹת"
    },
    "plene": {
     "N;SG;INDF": "תינוקת",
-    "N;SG;DEF": "התינוקת"
+    "N;SG;DEF": "התינוקת",
+    "N;SG;CONST": "תינוקת"
    },
+   "contrasts": [
+    {
+     "concept": "family.baby",
+     "axis": "gender of the person",
+     "value": "a baby girl"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1875,17 +2528,54 @@
    "id": "he:sabim",
    "lemma": "סָבִים",
    "pos": "NOUN",
+   "class": "plt",
    "senses": [
-    "family.grandparents"
+    "family.grandparents",
+    "family.grandfather"
    ],
    "gender": "MASC",
-   "class": "plt",
    "translit": "savim",
-   "note": "The plural of סָב “grandfather”, used for “grandparents”.",
+   "features": {
+    "spelling": "סבים",
+    "root": "ס ב ב",
+    "pattern": {
+     "none": "the plural of סָב, not a pattern of its own"
+    },
+    "plurals": {
+     "none": "used in the plural: the word itself is the plural of סָב"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "סָבֵי"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "סָבִים",
+      "senses": [
+       "s2"
+      ],
+      "note": "the plural of סָב; the singular is the separate word סָב / סַבָּא"
+     }
+    ]
+   },
    "forms": {
     "N;PL;INDF": "סָבִים",
-    "N;PL;DEF": "הַסָּבִים"
+    "N;PL;DEF": "הַסָּבִים",
+    "N;PL;CONST": "סָבֵי"
    },
+   "note": "The plural of סָב “grandfather”, used for “grandparents”.",
+   "contrasts": [
+    {
+     "concept": "family.grandfather",
+     "axis": "form and register",
+     "value": "the plural: grandfathers (also grandparents)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1912,7 +2602,8 @@
       "def": "grandfathers",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.grandfather"
      }
     ],
     "examples": [
@@ -1935,6 +2626,13 @@
       "tr": "Grandfathers and grandmothers are a big help.",
       "register": "neutral",
       "context": "society",
+      "sense": "s2"
+     },
+     {
+      "text": "יֵשׁ לִי שְׁנֵי סָבִים וּשְׁתֵּי סָבְתוֹת.",
+      "tr": "I have two grandfathers and two grandmothers.",
+      "register": "neutral",
+      "context": "family",
       "sense": "s2"
      }
     ],
@@ -1975,17 +2673,43 @@
    "id": "he:saba",
    "lemma": "סַבָּא",
    "pos": "NOUN",
+   "class": "sgt",
    "senses": [
     "family.grandfather"
    ],
    "gender": "MASC",
-   "class": "sgt",
    "translit": "saba",
-   "note": "Used like a name (סַבָּא שֶׁלִּי). Its plural is not used: “grandfathers, grandparents” is סָבִים.",
+   "features": {
+    "spelling": "סבא",
+    "root": "ס ב ב",
+    "pattern": {
+     "none": "borrowed from Aramaic (סָבָא): no Hebrew pattern"
+    },
+    "plurals": {
+     "none": "no plural in use: “grandfathers, grandparents” is סָבִים"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "used like a name (without the article): not the first word of a construct; the formal word is used instead (סָב)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סַבָּא",
     "N;SG;DEF": "הַסַּבָּא"
    },
+   "note": "Used like a name (סַבָּא שֶׁלִּי). Its plural is not used: “grandfathers, grandparents” is סָבִים.",
+   "contrasts": [
+    {
+     "concept": "family.grandfather",
+     "axis": "form and register",
+     "value": "everyday singular, also used like a name (סַבָּא!)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2012,7 +2736,8 @@
       "def": "Grandpa! (calling or naming one’s grandfather, without the article)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2077,10 +2802,44 @@
    "lemma": "סָב",
    "pos": "NOUN",
    "senses": [
-    "family.grandfather"
+    "family.grandfather",
+    "person.oldman"
    ],
    "gender": "MASC",
    "translit": "sav",
+   "features": {
+    "spelling": "סב",
+    "root": "ס ב ב",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "סָבִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סַב"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סָבֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סָב",
     "N;SG;DEF": "הַסָּב",
@@ -2095,8 +2854,22 @@
     "N;POSS;2;PL;MASC": "סַבְכֶם",
     "N;POSS;2;PL;FEM": "סַבְכֶן",
     "N;POSS;3;PL;MASC": "סָבָם",
-    "N;POSS;3;PL;FEM": "סָבָן"
+    "N;POSS;3;PL;FEM": "סָבָן",
+    "N;SG;CONST": "סַב",
+    "N;PL;CONST": "סָבֵי"
    },
+   "contrasts": [
+    {
+     "concept": "family.grandfather",
+     "axis": "form and register",
+     "value": "formal or written singular"
+    },
+    {
+     "concept": "person.oldman",
+     "axis": "register",
+     "value": "literary: an old (wise) man, an elder"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2123,7 +2896,8 @@
       "def": "an old man, an elder",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "person.oldman"
      }
     ],
     "examples": [
@@ -2147,6 +2921,13 @@
       "register": "formal",
       "context": "family",
       "sense": "s1"
+     },
+     {
+      "text": "הַסָּב הֶחָכָם סִפֵּר לַיְּלָדִים סִפּוּרִים.",
+      "tr": "The wise old man told the children stories.",
+      "register": "literary",
+      "context": "story",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2196,12 +2977,44 @@
    ],
    "gender": "FEM",
    "translit": "savta",
+   "features": {
+    "spelling": "סבתא",
+    "root": "ס ב ב",
+    "pattern": {
+     "none": "borrowed from Aramaic (סָבְתָא): no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "סָבְתוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "used like a name (without the article): not the first word of a construct; the formal word is used instead (סָבָה)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סָבְתָא",
     "N;SG;DEF": "הַסָּבְתָא",
     "N;PL;INDF": "סָבְתוֹת",
     "N;PL;DEF": "הַסָּבְתוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "family.grandmother",
+     "axis": "register",
+     "value": "everyday; also used like a name (סָבְתָא!)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2228,7 +3041,8 @@
       "def": "Grandma! (calling or naming one’s grandmother, without the article)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2316,6 +3130,38 @@
    ],
    "gender": "FEM",
    "translit": "sava",
+   "features": {
+    "spelling": "סבה",
+    "root": "ס ב ב",
+    "pattern": {
+     "none": "the feminine of סָב (ending ־ָה); no pattern of its own"
+    },
+    "plurals": [
+     {
+      "form": "סָבוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סָבַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סָבוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סָבָה",
     "N;SG;DEF": "הַסָּבָה",
@@ -2330,8 +3176,17 @@
     "N;POSS;2;PL;MASC": "סָבַתְכֶם",
     "N;POSS;2;PL;FEM": "סָבַתְכֶן",
     "N;POSS;3;PL;MASC": "סָבָתָם",
-    "N;POSS;3;PL;FEM": "סָבָתָן"
+    "N;POSS;3;PL;FEM": "סָבָתָן",
+    "N;SG;CONST": "סָבַת",
+    "N;PL;CONST": "סָבוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "family.grandmother",
+     "axis": "register",
+     "value": "formal and written"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2415,11 +3270,43 @@
    "lemma": "נֶכֶד",
    "pos": "NOUN",
    "senses": [
-    "family.grandson"
+    "family.grandson",
+    "family.grandchild"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "neched",
+   "features": {
+    "spelling": "נכד",
+    "root": "נ כ ד",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "נְכָדִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "as “grandchildren” (s2) only the plural is used"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נֶכֶד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נֶכְדֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "נֶכֶד",
     "N;SG;DEF": "הַנֶּכֶד",
@@ -2434,7 +3321,9 @@
     "N;POSS;2;PL;MASC": "נֶכְדְּכֶם",
     "N;POSS;2;PL;FEM": "נֶכְדְּכֶן",
     "N;POSS;3;PL;MASC": "נֶכְדָּם",
-    "N;POSS;3;PL;FEM": "נֶכְדָּן"
+    "N;POSS;3;PL;FEM": "נֶכְדָּן",
+    "N;SG;CONST": "נֶכֶד",
+    "N;PL;CONST": "נֶכְדֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2462,7 +3351,8 @@
       "def": "(plural נְכָדִים) grandchildren",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.grandchild"
      }
     ],
     "examples": [
@@ -2526,11 +3416,43 @@
    ],
    "gender": "FEM",
    "translit": "nechda",
+   "features": {
+    "spelling": "נכדה",
+    "root": "נ כ ד",
+    "pattern": "קִטְלָה",
+    "plurals": [
+     {
+      "form": "נְכָדוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נֶכְדַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נֶכְדוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "נֶכְדָּה",
     "N;SG;DEF": "הַנֶּכְדָּה",
     "N;PL;INDF": "נְכָדוֹת",
-    "N;PL;DEF": "הַנְּכָדוֹת"
+    "N;PL;DEF": "הַנְּכָדוֹת",
+    "N;SG;CONST": "נֶכְדַּת",
+    "N;PL;CONST": "נֶכְדוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2610,10 +3532,44 @@
    "lemma": "דּוֹד",
    "pos": "NOUN",
    "senses": [
-    "family.uncle"
+    "family.uncle",
+    "person.beloved"
    ],
    "gender": "MASC",
    "translit": "dod",
+   "features": {
+    "spelling": "דוד",
+    "root": "ד ו ד",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Wiktionary files it under the segolate type קֶטֶל: *dawd-)"
+    },
+    "plurals": [
+     {
+      "form": "דּוֹדִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דּוֹד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דּוֹדֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דּוֹד",
     "N;SG;DEF": "הַדּוֹד",
@@ -2628,7 +3584,9 @@
     "N;POSS;2;PL;MASC": "דּוֹדְכֶם",
     "N;POSS;2;PL;FEM": "דּוֹדְכֶן",
     "N;POSS;3;PL;MASC": "דּוֹדָם",
-    "N;POSS;3;PL;FEM": "דּוֹדָן"
+    "N;POSS;3;PL;FEM": "דּוֹדָן",
+    "N;SG;CONST": "דּוֹד",
+    "N;PL;CONST": "דּוֹדֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2656,7 +3614,8 @@
       "def": "beloved (Biblical and poetic)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "person.beloved"
      }
     ],
     "examples": [
@@ -2741,11 +3700,43 @@
    ],
    "gender": "FEM",
    "translit": "doda",
+   "features": {
+    "spelling": "דודה",
+    "root": "ד ו ד",
+    "pattern": "קַטְלָה",
+    "plurals": [
+     {
+      "form": "דּוֹדוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דּוֹדַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דּוֹדוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דּוֹדָה",
     "N;SG;DEF": "הַדּוֹדָה",
     "N;PL;INDF": "דּוֹדוֹת",
-    "N;PL;DEF": "הַדּוֹדוֹת"
+    "N;PL;DEF": "הַדּוֹדוֹת",
+    "N;SG;CONST": "דּוֹדַת",
+    "N;PL;CONST": "דּוֹדוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2829,16 +3820,52 @@
    "lemma": "בֶּן דּוֹד",
    "pos": "NOUN",
    "senses": [
-    "family.cousin"
+    "family.cousin",
+    "person.arab"
    ],
    "gender": "MASC",
    "translit": "ben dod",
+   "features": {
+    "spelling": "בן דוד",
+    "root": {
+     "none": "a compound of two words (בֶּן + דּוֹד): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בְּנֵי דּוֹדִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בֶּן דּוֹד",
     "N;SG;DEF": "בֶּן הַדּוֹד",
     "N;PL;INDF": "בְּנֵי דּוֹדִים",
     "N;PL;DEF": "בְּנֵי הַדּוֹדִים"
    },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "gender of the person",
+     "value": "a male cousin (the plural also for cousins in general)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -2868,7 +3895,8 @@
       "def": "an Arab (slang, from the shared descent from Abraham; can sound patronizing)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "person.arab"
      }
     ],
     "examples": [
@@ -2892,6 +3920,13 @@
       "register": "neutral",
       "context": "celebrations",
       "sense": "s1"
+     },
+     {
+      "text": "״בְּנֵי דּוֹדִים״ — כָּךְ קוֹרְאִים לִפְעָמִים לָעֲרָבִים.",
+      "tr": "“Cousins” — that is what Arabs are sometimes called.",
+      "register": "colloquial",
+      "context": "slang",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2938,12 +3973,46 @@
    ],
    "gender": "FEM",
    "translit": "bat dod",
+   "features": {
+    "spelling": "בת דוד",
+    "root": {
+     "none": "a compound of two words (בַּת + דּוֹד): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בְּנוֹת דּוֹדִים",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בַּת דּוֹד",
     "N;SG;DEF": "בַּת הַדּוֹד",
     "N;PL;INDF": "בְּנוֹת דּוֹדִים",
     "N;PL;DEF": "בְּנוֹת הַדּוֹדִים"
    },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "gender of the person",
+     "value": "a female cousin"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3035,17 +4104,62 @@
    ],
    "gender": "MASC",
    "translit": "achyan",
+   "features": {
+    "spelling": "אחיין",
+    "root": {
+     "none": "built from אָח “brother” with the suffix ־יָן: no root of its own"
+    },
+    "pattern": {
+     "none": "אָח + the suffix ־יָן, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "אַחְיָנִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אַחְיַן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַחְיָנֵי"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "אַחְיָנִים",
+      "senses": [
+       "s2"
+      ],
+      "note": "only the plural: nephews and nieces"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "אַחְיָן",
     "N;SG;DEF": "הָאַחְיָן",
     "N;PL;INDF": "אַחְיָנִים",
-    "N;PL;DEF": "הָאַחְיָנִים"
+    "N;PL;DEF": "הָאַחְיָנִים",
+    "N;SG;CONST": "אַחְיַן",
+    "N;PL;CONST": "אַחְיָנֵי"
    },
    "plene": {
     "N;SG;INDF": "אחיין",
     "N;SG;DEF": "האחיין",
     "N;PL;INDF": "אחיינים",
-    "N;PL;DEF": "האחיינים"
+    "N;PL;DEF": "האחיינים",
+    "N;SG;CONST": "אחיין",
+    "N;PL;CONST": "אחייני"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3073,7 +4187,8 @@
       "def": "(plural אַחְיָנִים) nephews and nieces",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3137,17 +4252,55 @@
    ],
    "gender": "FEM",
    "translit": "achyanit",
+   "features": {
+    "spelling": "אחיינית",
+    "root": {
+     "none": "built from אָח “brother” (אַחְיָן + ־ִית): no root of its own"
+    },
+    "pattern": {
+     "none": "אַחְיָן + the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "אַחְיָנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אַחְיָנִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַחְיָנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אַחְיָנִית",
     "N;SG;DEF": "הָאַחְיָנִית",
     "N;PL;INDF": "אַחְיָנִיּוֹת",
-    "N;PL;DEF": "הָאַחְיָנִיּוֹת"
+    "N;PL;DEF": "הָאַחְיָנִיּוֹת",
+    "N;SG;CONST": "אַחְיָנִית",
+    "N;PL;CONST": "אַחְיָנִיּוֹת"
    },
    "plene": {
     "N;SG;INDF": "אחיינית",
     "N;SG;DEF": "האחיינית",
     "N;PL;INDF": "אחייניות",
-    "N;PL;DEF": "האחייניות"
+    "N;PL;DEF": "האחייניות",
+    "N;SG;CONST": "אחיינית",
+    "N;PL;CONST": "אחייניות"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3231,12 +4384,46 @@
    ],
    "gender": "MASC",
    "translit": "krov mishpacha",
+   "features": {
+    "spelling": "קרוב משפחה",
+    "root": {
+     "none": "a compound of two words (קְרוֹב + מִשְׁפָּחָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "קְרוֹבֵי מִשְׁפָּחָה",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קְרוֹב מִשְׁפָּחָה",
     "N;SG;DEF": "קְרוֹב הַמִּשְׁפָּחָה",
     "N;PL;INDF": "קְרוֹבֵי מִשְׁפָּחָה",
     "N;PL;DEF": "קְרוֹבֵי הַמִּשְׁפָּחָה"
    },
+   "contrasts": [
+    {
+     "concept": "family.relative",
+     "axis": "gender of the person",
+     "value": "a man, or anyone (the plural also mixed)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3329,12 +4516,46 @@
    ],
    "gender": "FEM",
    "translit": "krovat mishpacha",
+   "features": {
+    "spelling": "קרובת משפחה",
+    "root": {
+     "none": "a compound of two words (קְרוֹבַת + מִשְׁפָּחָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "קְרוֹבוֹת מִשְׁפָּחָה",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קְרוֹבַת מִשְׁפָּחָה",
     "N;SG;DEF": "קְרוֹבַת הַמִּשְׁפָּחָה",
     "N;PL;INDF": "קְרוֹבוֹת מִשְׁפָּחָה",
     "N;PL;DEF": "קְרוֹבוֹת הַמִּשְׁפָּחָה"
    },
+   "contrasts": [
+    {
+     "concept": "family.relative",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3420,7 +4641,14 @@
    "senses": [
     "poss.my"
    ],
+   "prefix": false,
    "translit": "sheli",
+   "features": {
+    "spelling": "שלי",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “me”: after a definite noun, הַבַּיִת שֶׁלִּי “my house”. The same for a man and a woman speaking.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3434,8 +4662,22 @@
    "senses": [
     "poss.your.sg"
    ],
+   "prefix": false,
    "translit": "shelcha",
+   "features": {
+    "spelling": "שלך",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “you” (to a man): הַסֵּפֶר שֶׁלְּךָ “your book”. To a woman: שֶׁלָּךְ.",
+   "contrasts": [
+    {
+     "concept": "poss.your.sg",
+     "axis": "addressee",
+     "value": "to a man"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3451,8 +4693,22 @@
    "senses": [
     "poss.your.sg"
    ],
+   "prefix": false,
    "translit": "shelach",
+   "features": {
+    "spelling": "שלך",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “you” (to a woman): הַסֵּפֶר שֶׁלָּךְ “your book”. To a man: שֶׁלְּךָ.",
+   "contrasts": [
+    {
+     "concept": "poss.your.sg",
+     "axis": "addressee",
+     "value": "to a woman"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3468,7 +4724,14 @@
    "senses": [
     "poss.his"
    ],
+   "prefix": false,
    "translit": "shelo",
+   "features": {
+    "spelling": "שלו",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “him”: הַבַּיִת שֶׁלּוֹ “his house”. It follows the owner, not the thing.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3485,7 +4748,14 @@
    "senses": [
     "poss.her"
    ],
+   "prefix": false,
    "translit": "shela",
+   "features": {
+    "spelling": "שלה",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “her”: הַבַּיִת שֶׁלָּהּ “her house”. The final ה is pronounced h in careful speech (shelah).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3502,7 +4772,14 @@
    "senses": [
     "poss.our"
    ],
+   "prefix": false,
    "translit": "shelanu",
+   "features": {
+    "spelling": "שלנו",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “us”: הַבַּיִת שֶׁלָּנוּ “our house”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3519,8 +4796,22 @@
    "senses": [
     "poss.your.pl"
    ],
+   "prefix": false,
    "translit": "shelachem",
+   "features": {
+    "spelling": "שלכם",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “you” (several people, men or a mixed group): הַבַּיִת שֶׁלָּכֶם. To women only: שֶׁלָּכֶן.",
+   "contrasts": [
+    {
+     "concept": "poss.your.pl",
+     "axis": "addressee",
+     "value": "to men or a mixed group (in speech often also to women)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3533,8 +4824,22 @@
    "senses": [
     "poss.your.pl"
    ],
+   "prefix": false,
    "translit": "shelachen",
+   "features": {
+    "spelling": "שלכן",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “you” (several women): הַבַּיִת שֶׁלָּכֶן. In casual speech many use שֶׁלָּכֶם for women too.",
+   "contrasts": [
+    {
+     "concept": "poss.your.pl",
+     "axis": "addressee",
+     "value": "to women only"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3547,8 +4852,22 @@
    "senses": [
     "poss.their"
    ],
+   "prefix": false,
    "translit": "shelahem",
+   "features": {
+    "spelling": "שלהם",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “them” (men or a mixed group): הַבַּיִת שֶׁלָּהֶם. Women only: שֶׁלָּהֶן.",
+   "contrasts": [
+    {
+     "concept": "poss.their",
+     "axis": "owners",
+     "value": "men or a mixed group (in speech often also women)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3561,8 +4880,22 @@
    "senses": [
     "poss.their"
    ],
+   "prefix": false,
    "translit": "shelahen",
+   "features": {
+    "spelling": "שלהן",
+    "pronForms": {
+     "none": "it is already a form of שֶׁל with a personal ending"
+    }
+   },
    "note": "שֶׁל + “them” (women only): הַבַּיִת שֶׁלָּהֶן. In casual speech many use שֶׁלָּהֶם for women too.",
+   "contrasts": [
+    {
+     "concept": "poss.their",
+     "axis": "owners",
+     "value": "women only"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3573,8 +4906,54 @@
    "lemma": "שֶׁל",
    "pos": "ADP",
    "senses": [],
+   "prefix": false,
    "translit": "shel",
    "role": "“of” (belonging): הַתִּיק שֶׁל דָּנָה “Dana’s bag”. With a pronoun it fuses into one word: שֶׁלִּי, שֶׁלְּךָ, שֶׁלָּךְ, שֶׁלּוֹ … (my, your, his …).",
+   "features": {
+    "spelling": "של",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "שֶׁלִּי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "שֶׁלְּךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "שֶׁלָּךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "שֶׁלּוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "שֶׁלָּהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "שֶׁלָּנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "שֶׁלָּכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "שֶׁלָּכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "שֶׁלָּהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "שֶׁלָּהֶן"
+     }
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

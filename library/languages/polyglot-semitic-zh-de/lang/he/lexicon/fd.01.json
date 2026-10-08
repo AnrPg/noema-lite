@@ -5,9 +5,17 @@
    "lemma": "אֲנִי",
    "pos": "PRON",
    "senses": [
-    "pron.i"
+    "pron.i",
+    "mind.ego"
    ],
    "translit": "ani",
+   "features": {
+    "spelling": "אני",
+    "agreement": "both",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -34,7 +42,8 @@
       "def": "the ego, the self (as a noun: הָאֲנִי)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "mind.ego"
      }
     ],
     "examples": [
@@ -102,6 +111,20 @@
     "pron.you.sg"
    ],
    "translit": "ata",
+   "features": {
+    "spelling": "אתה",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "addressee",
+     "value": "to a man"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -184,6 +207,20 @@
     "pron.you.sg"
    ],
    "translit": "at",
+   "features": {
+    "spelling": "את",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "addressee",
+     "value": "to a woman"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -263,9 +300,30 @@
    "lemma": "הוּא",
    "pos": "PRON",
    "senses": [
-    "pron.he"
+    "pron.he",
+    "verb.be",
+    "pron.it"
    ],
    "translit": "hu",
+   "features": {
+    "spelling": "הוא",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.be",
+     "axis": "tense and subject",
+     "value": "present, masculine subject: the pronoun הוּא links subject and predicate"
+    },
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun",
+     "value": "for a masculine noun"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -281,7 +339,7 @@
     "senses": [
      {
       "id": "s1",
-      "def": "he; it (for a masculine noun)",
+      "def": "he (a male person; an animal)",
       "register": [
        "neutral"
       ],
@@ -292,7 +350,16 @@
       "def": "is (present-tense copula linking subject and predicate)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s3",
+      "def": "it (for a masculine noun: אֵיפֹה הַסֵּפֶר? הוּא עַל הַשֻּׁלְחָן)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
      }
     ],
     "examples": [
@@ -308,13 +375,27 @@
       "tr": "The carrot? It’s here.",
       "register": "neutral",
       "context": "kitchen",
-      "sense": "s1"
+      "sense": "s3"
      },
      {
       "text": "יוֹסִי הוּא מוֹרֶה.",
       "tr": "Yossi is a teacher.",
       "register": "neutral",
       "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "הַסֵּפֶר? הוּא עַל הַשֻּׁלְחָן.",
+      "tr": "The book? It’s on the table.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     },
+     {
+      "text": "דָּוִד הוּא הָאָח שֶׁלִּי.",
+      "tr": "David is my brother.",
+      "register": "neutral",
+      "context": "family",
       "sense": "s2"
      }
     ],
@@ -352,9 +433,30 @@
    "lemma": "הִיא",
    "pos": "PRON",
    "senses": [
-    "pron.she"
+    "pron.she",
+    "verb.be",
+    "pron.it"
    ],
    "translit": "hi",
+   "features": {
+    "spelling": "היא",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.be",
+     "axis": "tense and subject",
+     "value": "present, feminine subject: the pronoun הִיא links subject and predicate"
+    },
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun",
+     "value": "for a feminine noun"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -370,7 +472,7 @@
     "senses": [
      {
       "id": "s1",
-      "def": "she; it (for a feminine noun)",
+      "def": "she (a female person; an animal)",
       "register": [
        "neutral"
       ],
@@ -381,7 +483,16 @@
       "def": "is (present-tense copula for a feminine subject)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.be"
+     },
+     {
+      "id": "s3",
+      "def": "it (for a feminine noun: אֵיפֹה הַמְּכוֹנִית? הִיא בַּחוּץ)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.it"
      }
     ],
     "examples": [
@@ -397,13 +508,27 @@
       "tr": "The pumpkin? It’s here.",
       "register": "neutral",
       "context": "kitchen",
-      "sense": "s1"
+      "sense": "s3"
      },
      {
       "text": "שָׂרָה הִיא רוֹפְאָה.",
       "tr": "Sarah is a doctor.",
       "register": "neutral",
       "context": "introductions",
+      "sense": "s2"
+     },
+     {
+      "text": "הַמְּכוֹנִית? הִיא בַּחוּץ.",
+      "tr": "The car? It’s outside.",
+      "register": "neutral",
+      "context": "street",
+      "sense": "s3"
+     },
+     {
+      "text": "רוּתִי הִיא הָאָחוֹת שֶׁלִּי.",
+      "tr": "Ruti is my sister.",
+      "register": "neutral",
+      "context": "family",
       "sense": "s2"
      }
     ],
@@ -445,6 +570,13 @@
     "pron.we"
    ],
    "translit": "anachnu",
+   "features": {
+    "spelling": "אנחנו",
+    "agreement": "both",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -536,6 +668,20 @@
     "pron.you.pl"
    ],
    "translit": "atem",
+   "features": {
+    "spelling": "אתם",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.pl",
+     "axis": "addressee",
+     "value": "to men or a mixed group"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -618,6 +764,20 @@
     "pron.you.pl"
    ],
    "translit": "aten",
+   "features": {
+    "spelling": "אתן",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.pl",
+     "axis": "addressee",
+     "value": "to women only"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -700,6 +860,20 @@
     "pron.they"
    ],
    "translit": "hem",
+   "features": {
+    "spelling": "הם",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "who is meant",
+     "value": "men, a mixed group or masculine nouns"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -720,13 +894,6 @@
        "neutral"
       ],
       "concept": "pron.they"
-     },
-     {
-      "id": "s2",
-      "def": "those (distant demonstrative, after a definite noun: הַיָּמִים הָהֵם)",
-      "register": [
-       "formal"
-      ]
      }
     ],
     "examples": [
@@ -743,13 +910,6 @@
       "register": "neutral",
       "context": "conversation",
       "sense": "s1"
-     },
-     {
-      "text": "בַּיָּמִים הָהֵם לֹא הָיָה חַשְׁמַל.",
-      "tr": "In those days there was no electricity.",
-      "register": "formal",
-      "context": "history",
-      "sense": "s2"
      }
     ],
     "collocations": [
@@ -793,6 +953,20 @@
     "pron.they"
    ],
    "translit": "hen",
+   "features": {
+    "spelling": "הן",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "who is meant",
+     "value": "women only, or feminine nouns"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -878,12 +1052,48 @@
    "pos": "VERB",
    "class": "copula",
    "senses": [
-    "verb.be"
+    "verb.be",
+    "verb.exist",
+    "poss.have"
    ],
-   "root": "ה־י־ה",
-   "binyan": "paal",
    "translit": "haya",
-   "note": "No present tense: in the present Hebrew uses a nominal sentence without a verb (הַמּוֹרֶה פֹּה “the teacher is here”). The participle הוֹוֶה exists only as a rare literary form, so only past, future and infinitive are stored. The past has person endings (הָיִיתִי “I was”); the third person agrees with the subject in gender and number.",
+   "features": {
+    "spelling": "היה",
+    "root": "ה י ה",
+    "binyan": "paal",
+    "rootClass": [
+     "lamed-he",
+     "pe-guttural"
+    ],
+    "future": "יִהְיֶה",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "no verbal noun in everyday use (the infinitive לִהְיוֹת serves)"
+    },
+    "meaningForms": [
+     {
+      "form": "הָיָה לִי, הָיְתָה לִי, הָיוּ לִי",
+      "senses": [
+       "s3"
+      ],
+      "note": "agrees with the thing possessed, not with the possessor: הָיְתָה לִי מְכוֹנִית"
+     }
+    ]
+   },
    "forms": {
     "V;PST;3;SG;MASC": "הָיָה",
     "V;PST;3;SG;FEM": "הָיְתָה",
@@ -904,6 +1114,24 @@
    "plene": {
     "V;PST;3;SG;FEM": "הייתה"
    },
+   "note": "No present tense: in the present Hebrew uses a nominal sentence without a verb (הַמּוֹרֶה פֹּה “the teacher is here”). The participle הוֹוֶה exists only as a rare literary form, so only past, future and infinitive are stored. The past has person endings (הָיִיתִי “I was”); the third person agrees with the subject in gender and number.",
+   "contrasts": [
+    {
+     "concept": "verb.be",
+     "axis": "tense and subject",
+     "value": "past and future: the verb הָיָה / יִהְיֶה"
+    },
+    {
+     "concept": "verb.exist",
+     "axis": "tense",
+     "value": "past and future (הָיָה, יִהְיֶה)"
+    },
+    {
+     "concept": "poss.have",
+     "axis": "tense",
+     "value": "past and future (הָיָה לִי, יִהְיֶה לִי)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -933,14 +1161,16 @@
       "def": "there was / there will be (existence)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.exist"
      },
      {
       "id": "s3",
       "def": "with לְ: to have (in the past and future: הָיָה לִי “I had”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "poss.have"
      }
     ],
     "examples": [
@@ -984,6 +1214,13 @@
       "tr": "I had a tomato.",
       "register": "neutral",
       "context": "possession",
+      "sense": "s3"
+     },
+     {
+      "text": "הָיָה לָנוּ בַּיִת גָּדוֹל.",
+      "tr": "We had a big house.",
+      "register": "neutral",
+      "context": "family",
       "sense": "s3"
      }
     ],
@@ -1047,7 +1284,14 @@
     "conj.and"
    ],
    "prefix": true,
-   "translit": "ve",
+   "translit": "ve-",
+   "alts": [
+    "וּ",
+    "וַ"
+   ],
+   "features": {
+    "spelling": "ו"
+   },
    "note": "Written attached to the next word. Normative form וּ (u-) before ב, מ, פ and before a consonant with shva; before a hataf vowel it takes the matching short vowel (וַ before ־ֲ); before יְ it becomes וִי. The sentence bank uses וְ, and וּ before מ or a shva and וַ before a hataf patah (it avoids וּ before ב / כ / פ, which would also remove the dagesh of the next letter).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1138,11 +1382,7 @@
      "In everyday speech most people say ve- everywhere; u- is heard in careful speech, the news and reading aloud.",
      "In pairs it is sometimes וָ: תֹּהוּ וָבֹהוּ, יוֹם וָלַיְלָה."
     ]
-   },
-   "alts": [
-    "וּ",
-    "וַ"
-   ]
+   }
   },
   {
    "id": "he:gever",
@@ -1152,14 +1392,45 @@
     "person.man"
    ],
    "gender": "MASC",
-   "root": "ג־ב־ר",
-   "mishkal": "קֶטֶל",
    "translit": "gever",
+   "features": {
+    "spelling": "גבר",
+    "root": "ג ב ר",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "גְּבָרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "גֶּבֶר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "גַּבְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "גֶּבֶר",
     "N;SG;DEF": "הַגֶּבֶר",
     "N;PL;INDF": "גְּבָרִים",
-    "N;PL;DEF": "הַגְּבָרִים"
+    "N;PL;DEF": "הַגְּבָרִים",
+    "N;SG;CONST": "גֶּבֶר",
+    "N;PL;CONST": "גַּבְרֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1187,7 +1458,8 @@
       "def": "dude, man (a friendly colloquial address: גֶּבֶר!)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1273,8 +1545,38 @@
     "family.wife"
    ],
    "gender": "FEM",
-   "mishkal": "קִטְלָה",
    "translit": "isha",
+   "features": {
+    "spelling": "אישה",
+    "root": "א נ שׁ",
+    "pattern": "קִטְלָה",
+    "plurals": [
+     {
+      "form": "נָשִׁים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֵשֶׁת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נְשׁוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אִשָּׁה",
     "N;SG;DEF": "הָאִשָּׁה",
@@ -1289,7 +1591,9 @@
     "N;POSS;2;PL;MASC": "אִשְׁתְּכֶם",
     "N;POSS;2;PL;FEM": "אִשְׁתְּכֶן",
     "N;POSS;3;PL;MASC": "אִשְׁתָּם",
-    "N;POSS;3;PL;FEM": "אִשְׁתָּן"
+    "N;POSS;3;PL;FEM": "אִשְׁתָּן",
+    "N;SG;CONST": "אֵשֶׁת",
+    "N;PL;CONST": "נְשׁוֹת"
    },
    "plene": {
     "N;SG;INDF": "אישה",
@@ -1435,17 +1739,50 @@
    "pos": "NOUN",
    "senses": [
     "person.child",
-    "person.boy"
+    "person.boy",
+    "family.child"
    ],
    "gender": "MASC",
-   "root": "י־ל־ד",
-   "mishkal": "קֶטֶל",
    "translit": "yeled",
+   "features": {
+    "spelling": "ילד",
+    "root": "י ל ד",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "יְלָדִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יֶלֶד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "יַלְדֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יֶלֶד",
     "N;SG;DEF": "הַיֶּלֶד",
     "N;PL;INDF": "יְלָדִים",
-    "N;PL;DEF": "הַיְּלָדִים"
+    "N;PL;DEF": "הַיְּלָדִים",
+    "N;SG;CONST": "יֶלֶד",
+    "N;PL;CONST": "יַלְדֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1481,7 +1818,8 @@
       "def": "child, son (one’s own child)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.child"
      }
     ],
     "examples": [
@@ -1579,14 +1917,45 @@
     "person.girl"
    ],
    "gender": "FEM",
-   "root": "י־ל־ד",
-   "mishkal": "קַטְלָה",
    "translit": "yalda",
+   "features": {
+    "spelling": "ילדה",
+    "root": "י ל ד",
+    "pattern": "קַטְלָה",
+    "plurals": [
+     {
+      "form": "יְלָדוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יַלְדַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "יַלְדוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יַלְדָּה",
     "N;SG;DEF": "הַיַּלְדָּה",
     "N;PL;INDF": "יְלָדוֹת",
-    "N;PL;DEF": "הַיְּלָדוֹת"
+    "N;PL;DEF": "הַיְּלָדוֹת",
+    "N;SG;CONST": "יַלְדַּת",
+    "N;PL;CONST": "יַלְדוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1614,7 +1983,8 @@
       "def": "girl (of a young woman; affectionate or condescending)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1689,18 +2059,40 @@
    "id": "he:adam",
    "lemma": "אָדָם",
    "pos": "NOUN",
+   "class": "sgt",
    "senses": [
     "person.person"
    ],
    "gender": "MASC",
-   "class": "sgt",
-   "mishkal": "קָטָל",
    "translit": "adam",
-   "note": "No plural in use: “people” is אֲנָשִׁים (or בְּנֵי אָדָם).",
+   "features": {
+    "spelling": "אדם",
+    "root": "א ד ם",
+    "pattern": "קָטָל",
+    "plurals": {
+     "none": "no plural in use"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "not used as the first word of a construct (“the people of …” is אַנְשֵׁי …)"
+    },
+    "meaningForms": [
+     {
+      "form": "הָאָדָם",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article: man, humankind"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "אָדָם",
     "N;SG;DEF": "הָאָדָם"
    },
+   "note": "No plural in use: “people” is אֲנָשִׁים (or בְּנֵי אָדָם).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1730,7 +2122,8 @@
       "def": "man, humankind (with the article: הָאָדָם)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1825,17 +2218,40 @@
    "id": "he:anashim",
    "lemma": "אֲנָשִׁים",
    "pos": "NOUN",
+   "class": "plt",
    "senses": [
     "person.people"
    ],
    "gender": "MASC",
-   "class": "plt",
    "translit": "anashim",
-   "note": "Plural only: grammatically the plural of אִישׁ “man”, used as the plural of “person”.",
+   "features": {
+    "spelling": "אנשים",
+    "root": "א נ שׁ",
+    "pattern": {
+     "none": "the plural of אִישׁ “man”, not built on a pattern of its own"
+    },
+    "plurals": {
+     "none": "used only in the plural: the word itself is the plural (of אִישׁ “man”)"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַנְשֵׁי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;PL;INDF": "אֲנָשִׁים",
-    "N;PL;DEF": "הָאֲנָשִׁים"
+    "N;PL;DEF": "הָאֲנָשִׁים",
+    "N;PL;CONST": "אַנְשֵׁי"
    },
+   "note": "Plural only: grammatically the plural of אִישׁ “man”, used as the plural of “person”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1932,18 +2348,64 @@
    "lemma": "חָבֵר",
    "pos": "NOUN",
    "senses": [
-    "person.friend"
+    "person.friend",
+    "person.boyfriend",
+    "person.member"
    ],
    "gender": "MASC",
-   "root": "ח־ב־ר",
-   "mishkal": "קָטֵל",
    "translit": "chaver",
+   "features": {
+    "spelling": "חבר",
+    "root": "ח ב ר",
+    "pattern": "קָטֵל",
+    "plurals": [
+     {
+      "form": "חֲבֵרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲבֵר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַבְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חָבֵר",
     "N;SG;DEF": "הֶחָבֵר",
     "N;PL;INDF": "חֲבֵרִים",
-    "N;PL;DEF": "הַחֲבֵרִים"
+    "N;PL;DEF": "הַחֲבֵרִים",
+    "N;SG;CONST": "חֲבֵר",
+    "N;PL;CONST": "חַבְרֵי"
    },
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    },
+    {
+     "concept": "person.member",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1970,14 +2432,16 @@
       "def": "boyfriend",
       "register": [
        "informal"
-      ]
+      ],
+      "concept": "person.boyfriend"
      },
      {
       "id": "s3",
       "def": "member (of a party, club, the Knesset); comrade",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.member"
      }
     ],
     "examples": [
@@ -2064,18 +2528,64 @@
    "lemma": "חֲבֵרָה",
    "pos": "NOUN",
    "senses": [
-    "person.friend"
+    "person.friend",
+    "person.girlfriend",
+    "person.member"
    ],
    "gender": "FEM",
-   "root": "ח־ב־ר",
-   "mishkal": "קְטֵלָה",
    "translit": "chavera",
+   "features": {
+    "spelling": "חברה",
+    "root": "ח ב ר",
+    "pattern": "קְטֵלָה",
+    "plurals": [
+     {
+      "form": "חֲבֵרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲבֶרֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַבְרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֲבֵרָה",
     "N;SG;DEF": "הַחֲבֵרָה",
     "N;PL;INDF": "חֲבֵרוֹת",
-    "N;PL;DEF": "הַחֲבֵרוֹת"
+    "N;PL;DEF": "הַחֲבֵרוֹת",
+    "N;SG;CONST": "חֲבֶרֶת",
+    "N;PL;CONST": "חַבְרוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "gender of the person",
+     "value": "a woman"
+    },
+    {
+     "concept": "person.member",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2102,14 +2612,16 @@
       "def": "girlfriend",
       "register": [
        "informal"
-      ]
+      ],
+      "concept": "person.girlfriend"
      },
      {
       "id": "s3",
       "def": "member (female)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.member"
      }
     ],
     "examples": [
@@ -2133,6 +2645,13 @@
       "register": "informal",
       "context": "relationships",
       "sense": "s2"
+     },
+     {
+      "text": "הִיא חֲבֵרָה בַּמִּפְלָגָה.",
+      "tr": "She is a member of the party.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2178,18 +2697,57 @@
    "lemma": "תַּלְמִיד",
    "pos": "NOUN",
    "senses": [
-    "person.student"
+    "person.student",
+    "person.disciple"
    ],
    "gender": "MASC",
-   "root": "ל־מ־ד",
-   "mishkal": "תַּקְטִיל",
    "translit": "talmid",
+   "features": {
+    "spelling": "תלמיד",
+    "root": "ל מ ד",
+    "pattern": "תַּקְטִיל",
+    "plurals": [
+     {
+      "form": "תַּלְמִידִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תַּלְמִיד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּלְמִידֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תַּלְמִיד",
     "N;SG;DEF": "הַתַּלְמִיד",
     "N;PL;INDF": "תַּלְמִידִים",
-    "N;PL;DEF": "הַתַּלְמִידִים"
+    "N;PL;DEF": "הַתַּלְמִידִים",
+    "N;SG;CONST": "תַּלְמִיד",
+    "N;PL;CONST": "תַּלְמִידֵי"
    },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a pupil at school, a boy (plural also mixed)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2216,7 +2774,8 @@
       "def": "disciple (of a teacher or a rabbi)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "person.disciple"
      }
     ],
     "examples": [
@@ -2301,14 +2860,52 @@
     "person.student"
    ],
    "gender": "FEM",
-   "root": "ל־מ־ד",
    "translit": "talmida",
+   "features": {
+    "spelling": "תלמידה",
+    "root": "ל מ ד",
+    "pattern": "תַּקְטִילָה",
+    "plurals": [
+     {
+      "form": "תַּלְמִידוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תַּלְמִידַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּלְמִידוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תַּלְמִידָה",
     "N;SG;DEF": "הַתַּלְמִידָה",
     "N;PL;INDF": "תַּלְמִידוֹת",
-    "N;PL;DEF": "הַתַּלְמִידוֹת"
+    "N;PL;DEF": "הַתַּלְמִידוֹת",
+    "N;SG;CONST": "תַּלְמִידַת",
+    "N;PL;CONST": "תַּלְמִידוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a pupil at school, a girl"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2396,12 +2993,55 @@
    ],
    "gender": "MASC",
    "translit": "student",
+   "features": {
+    "spelling": "סטודנט",
+    "root": {
+     "none": "a loanword (an internationalism, from Latin studens): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "סְטוּדֶנְטִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סְטוּדֶנְט"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סְטוּדֶנְטֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סְטוּדֶנְט",
     "N;SG;DEF": "הַסְּטוּדֶנְט",
     "N;PL;INDF": "סְטוּדֶנְטִים",
-    "N;PL;DEF": "הַסְּטוּדֶנְטִים"
+    "N;PL;DEF": "הַסְּטוּדֶנְטִים",
+    "N;SG;CONST": "סְטוּדֶנְט",
+    "N;PL;CONST": "סְטוּדֶנְטֵי"
    },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a university student, a man (plural also mixed)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2499,12 +3139,55 @@
    ],
    "gender": "FEM",
    "translit": "studentit",
+   "features": {
+    "spelling": "סטודנטית",
+    "root": {
+     "none": "a loanword (סְטוּדֶנְט with the Hebrew feminine ending ־ִית): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "סְטוּדֶנְטִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סְטוּדֶנְטִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סְטוּדֶנְטִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סְטוּדֶנְטִית",
     "N;SG;DEF": "הַסְּטוּדֶנְטִית",
     "N;PL;INDF": "סְטוּדֶנְטִיּוֹת",
-    "N;PL;DEF": "הַסְּטוּדֶנְטִיּוֹת"
+    "N;PL;DEF": "הַסְּטוּדֶנְטִיּוֹת",
+    "N;SG;CONST": "סְטוּדֶנְטִית",
+    "N;PL;CONST": "סְטוּדֶנְטִיּוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "where one studies, and gender",
+     "value": "a university student, a woman"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -2593,14 +3276,59 @@
     "person.teacher"
    ],
    "gender": "MASC",
-   "root": "י־ר־ה",
    "translit": "more",
+   "features": {
+    "spelling": "מורה",
+    "root": "י ר ה",
+    "pattern": "מַקְטִיל",
+    "plurals": [
+     {
+      "form": "מוֹרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹרֵה"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹרֵי"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "מוֹרֵה",
+      "senses": [
+       "s2"
+      ],
+      "note": "in this meaning only in the construct: מוֹרֵה דֶּרֶךְ “tour guide”, מוֹרֵה נְהִיגָה “driving instructor”"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "מוֹרֶה",
     "N;SG;DEF": "הַמּוֹרֶה",
     "N;PL;INDF": "מוֹרִים",
-    "N;PL;DEF": "הַמּוֹרִים"
+    "N;PL;DEF": "הַמּוֹרִים",
+    "N;SG;CONST": "מוֹרֵה",
+    "N;PL;CONST": "מוֹרֵי"
    },
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "gender of the person",
+     "value": "a man (the plural also for a mixed group)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2627,7 +3355,8 @@
       "def": "guide, instructor — in the construct form מוֹרֵה־: מוֹרֵה דֶּרֶךְ “tour guide”, מוֹרֵה נְהִיגָה “driving instructor”",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2710,20 +3439,59 @@
     "person.teacher"
    ],
    "gender": "FEM",
-   "root": "י־ר־ה",
    "translit": "mora",
+   "features": {
+    "spelling": "מורה",
+    "root": "י ר ה",
+    "pattern": "מַקְטִילָה",
+    "plurals": [
+     {
+      "form": "מוֹרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹרַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מוֹרָה",
     "N;SG;DEF": "הַמּוֹרָה",
     "N;PL;INDF": "מוֹרוֹת",
-    "N;PL;DEF": "הַמּוֹרוֹת"
+    "N;PL;DEF": "הַמּוֹרוֹת",
+    "N;SG;CONST": "מוֹרַת",
+    "N;PL;CONST": "מוֹרוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "gender of the person",
+     "value": "a woman"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
     "override": {
      "gender": "Wiktionary has no page of its own for the feminine מוֹרָה: it lists it on the page of the masculine מוֹרֶה (gender m), whose forms the check then compares.",
-     "N;PL;INDF": "מוֹרִים is the plural of the masculine מוֹרֶה; the plural of מוֹרָה is מוֹרוֹת, which Wiktionary lists on the same page as the feminine plural."
+     "N;PL;INDF": "מוֹרִים is the plural of the masculine מוֹרֶה; the plural of מוֹרָה is מוֹרוֹת, which Wiktionary lists on the same page as the feminine plural.",
+     "N;SG;CONST": "Wiktionary’s מוֹרֵה־ is the construct of the masculine מוֹרֶה on the same page; the feminine מוֹרָה has מוֹרַת (like תַּלְמִידָה → תַּלְמִידַת)."
     }
    },
    "profile": {

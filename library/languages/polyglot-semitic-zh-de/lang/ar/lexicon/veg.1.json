@@ -8,8 +8,27 @@
    "senses": [
     "veg.tomato"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Spanish tomate): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "diptote": true,
    "translit": "ṭamāṭim",
    "forms": {
     "N;NOM;SG;INDF": "طَمَاطِمُ",
@@ -116,11 +135,34 @@
    "pos": "NOUN",
    "class": "collective",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "nature.bulb"
    ],
+   "features": {
+    "root": "ب ص ل",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَصَلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "بَصَلَتَانِ",
+    "declension": "triptote",
+    "unit": "بَصَلَة",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "بَصَلَة",
-   "root": "ب ص ل",
    "translit": "baṣal",
    "forms": {
     "N;NOM;COLL;INDF": "بَصَلٌ",
@@ -171,7 +213,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "nature.bulb"
      }
     ],
     "examples": [
@@ -195,6 +238,13 @@
       "register": "neutral",
       "context": "home",
       "sense": "s1"
+     },
+     {
+      "text": "يُزْرَعُ التُّولِيبُ مِنْ بَصَلٍ فِي الْخَرِيفِ.",
+      "tr": "Tulips are planted from bulbs in autumn.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -233,8 +283,27 @@
    "senses": [
     "veg.potato"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Turkish patates): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "diptote": true,
    "translit": "baṭāṭis",
    "forms": {
     "N;NOM;SG;INDF": "بَطَاطِسُ",
@@ -336,9 +405,30 @@
    "senses": [
     "veg.garlic"
    ],
+   "features": {
+    "root": "ث و م",
+    "pattern": "فُعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "ثُومَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "ثُومَتَانِ",
+    "declension": "triptote",
+    "unit": "ثُومَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "ثُومَة",
-   "root": "ث و م",
    "translit": "ṯūm",
    "forms": {
     "N;NOM;COLL;INDF": "ثُومٌ",
@@ -449,8 +539,34 @@
    "senses": [
     "veg.cucumber"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword from Persian (xiyār); خِيَار “choice” (خ ي ر) is another word"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "خِيَارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "خِيَارَتَانِ",
+    "declension": "triptote",
+    "unit": "خِيَارَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "خِيَارَة",
    "translit": "ḫiyār",
    "forms": {
     "N;NOM;COLL;INDF": "خِيَارٌ",
@@ -558,8 +674,34 @@
    "senses": [
     "veg.eggplant"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَاذِنْجَانَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَاذِنْجَانَتَانِ",
+    "declension": "triptote",
+    "unit": "بَاذِنْجَانَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "بَاذِنْجَانَة",
    "translit": "bāḏinjān",
    "forms": {
     "N;NOM;COLL;INDF": "بَاذِنْجَانٌ",
@@ -662,8 +804,34 @@
    "senses": [
     "veg.carrot"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian gazar): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جَزَرَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جَزَرَتَانِ",
+    "declension": "triptote",
+    "unit": "جَزَرَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "جَزَرَة",
    "translit": "jazar",
    "forms": {
     "N;NOM;COLL;INDF": "جَزَرٌ",
@@ -775,6 +943,26 @@
    "senses": [
     "veg.sweetpotato"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: بَطَاطَا (a loanword) + حُلْوَة (ح ل و)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "baṭāṭā ḥulwa",
    "forms": {
@@ -872,6 +1060,26 @@
    "senses": [
     "veg.pea"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian piselli): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "bāzillāʾ",
    "forms": {
@@ -969,8 +1177,27 @@
    "senses": [
     "veg.spinach"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "diptote": true,
    "translit": "sabāniḫ",
    "forms": {
     "N;NOM;SG;INDF": "سَبَانِخُ",
@@ -1062,9 +1289,30 @@
    "senses": [
     "veg.radish"
    ],
+   "features": {
+    "root": "ف ج ل",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "فُجْلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فُجْلَتَانِ",
+    "declension": "triptote",
+    "unit": "فُجْلَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "فُجْلَة",
-   "root": "ف ج ل",
    "translit": "fujl",
    "forms": {
     "N;NOM;COLL;INDF": "فُجْلٌ",
@@ -1167,8 +1415,34 @@
    "senses": [
     "veg.pumpkin"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword from Syriac (qarʿā), not the native root ق ر ع “to knock”"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قَرْعَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قَرْعَتَانِ",
+    "declension": "triptote",
+    "unit": "قَرْعَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "قَرْعَة",
    "translit": "qarʿ",
    "forms": {
     "N;NOM;COLL;INDF": "قَرْعٌ",
@@ -1282,9 +1556,30 @@
    "senses": [
     "veg.lettuce"
    ],
+   "features": {
+    "root": "خ س س",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "خَسَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "خَسَّتَانِ",
+    "declension": "triptote",
+    "unit": "خَسَّة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "unit": "خَسَّة",
-   "root": "خ س س",
    "translit": "ḫass",
    "forms": {
     "N;NOM;COLL;INDF": "خَسٌّ",
@@ -1388,6 +1683,26 @@
    "senses": [
     "veg.chili"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: فِلْفِل (a loanword) + حَارّ (ح ر ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "filfil ḥārr",
    "forms": {
@@ -1485,8 +1800,23 @@
    "senses": [
     "veg.cabbage"
    ],
+   "features": {
+    "root": "ل ف ف",
+    "pattern": "مَفْعُول",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ل ف ف",
    "translit": "malfūf",
    "forms": {
     "N;NOM;SG;INDF": "مَلْفُوفٌ",
@@ -1583,6 +1913,26 @@
    "senses": [
     "veg.cauliflower"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Greek krambídion): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "qarnabīṭ",
    "forms": {
@@ -1680,6 +2030,26 @@
    "senses": [
     "veg.broccoli"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian broccoli): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "brūkulī",
    "forms": {
@@ -1772,6 +2142,26 @@
    "senses": [
     "veg.leek"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "kurrāṯ",
    "forms": {
@@ -1870,6 +2260,26 @@
    "senses": [
     "veg.bellpepper"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: فِلْفِل (a loanword) + حُلْو (ح ل و)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "filfil ḥulw",
    "forms": {
@@ -1974,6 +2384,26 @@
    "senses": [
     "veg.beetroot"
    ],
+   "features": {
+    "root": {
+     "none": "a word of foreign origin (Turkish?): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "šamandar",
    "forms": {
@@ -2072,6 +2502,26 @@
    "senses": [
     "veg.zucchini"
    ],
+   "features": {
+    "root": {
+     "none": "a dialect word of uncertain origin: no root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "kūsā",
    "forms": {
@@ -2170,6 +2620,26 @@
    "senses": [
     "veg.greenbean"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: فَاصُولِيَا (a loanword) + خَضْرَاء (خ ض ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "fāṣūliyā ḫaḍrāʾ",
    "forms": {
@@ -2273,6 +2743,26 @@
    "senses": [
     "veg.springonion"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: بَصَل (ب ص ل) + أَخْضَر (خ ض ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "baṣal ʾaḫḍar",
    "forms": {
@@ -2364,6 +2854,26 @@
    "senses": [
     "veg.celery"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Syriac): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "karafs",
    "forms": {
@@ -2453,8 +2963,35 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.corn"
+    "veg.corn",
+    "nature.sorghum"
    ],
+   "features": {
+    "root": {
+     "none": "origin uncertain (Wiktionary: perhaps from ذ ر و, to scatter)"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "الذُّرَةُ الرَّفِيعَةُ",
+      "what": "in full (sorghum)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "gender": "FEM",
    "translit": "ḏura",
    "forms": {
@@ -2494,7 +3031,8 @@
       ],
       "domains": [
        "agriculture"
-      ]
+      ],
+      "concept": "nature.sorghum"
      }
     ],
     "examples": [

@@ -11,6 +11,13 @@
     "verb.arrive",
     "prep.until"
    ],
+   "contrasts": [
+    {
+     "concept": "prep.until",
+     "axis": "construction",
+     "value": "after the verb: 工作到六点"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -53,7 +60,8 @@
       "def": "(after a verb) result: managed to — 买到 ‘manage to buy’, 找到 ‘find’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -175,6 +183,21 @@
      "At the start of a phone call 我到了 means ‘I’m here, I’ve arrived’.",
      "‘Arrive’ takes the place directly: 到北京 ‘arrive in Beijing’ — no ‘in’ word; ‘until’ follows the verb: 工作到六点 ‘work until six’, 从早到晚 ‘from morning till night’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -184,7 +207,15 @@
    "pinyin": "cóng",
    "pos": "ADP",
    "senses": [
-    "prep.from"
+    "prep.from",
+    "prep.through"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.from",
+     "axis": "what ‘from’ measures",
+     "value": "the starting point of a movement or a time (从北京来)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -212,14 +243,16 @@
       "def": "through, by way of",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.through"
      },
      {
       "id": "s3",
       "def": "(从来 / 从不) ever, never (S08)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -304,6 +337,18 @@
      "从…到… works for place and time: 从家到学校, 从早到晚 ‘from morning till night’.",
      "For distance Chinese uses 离, not 从: 超市离我家很近 (S12)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 從 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
@@ -313,7 +358,22 @@
    "pinyin": "gēn",
    "pos": "ADP",
    "senses": [
-    "prep.with"
+    "prep.with",
+    "prep.to.person",
+    "verb.follow",
+    "body.heel"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.with",
+     "axis": "register",
+     "value": "with (a person) — colloquial, the everyday spoken word in the north"
+    },
+    {
+     "concept": "prep.to.person",
+     "axis": "construction",
+     "value": "to someone you talk with (跟他说), colloquial"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -341,28 +401,32 @@
       "def": "to (speak to someone): 跟他说",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.to.person"
      },
      {
       "id": "s3",
       "def": "and (joins nouns, colloquial)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "(verb) to follow",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.follow"
      },
      {
       "id": "s5",
       "def": "(noun) heel",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "body.heel"
      }
     ],
     "examples": [
@@ -453,6 +517,18 @@
     "subtleties": [
      "跟 is the everyday spoken ‘with’ in the north; 和 is more neutral; writing uses 与."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
@@ -462,7 +538,21 @@
    "pinyin": "gěi",
    "pos": "ADP",
    "senses": [
-    "prep.for"
+    "prep.for",
+    "prep.to.person",
+    "verb.give"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.to.person",
+     "axis": "construction",
+     "value": "to the receiver (给我打电话, 给他写信)"
+    },
+    {
+     "concept": "prep.for",
+     "axis": "beneficiary or cause",
+     "value": "for the benefit of, to the receiver (给他买)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -490,14 +580,16 @@
       "def": "to (the receiver): 给我打电话",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.to.person"
      },
      {
       "id": "s3",
       "def": "(verb) to give",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.give"
      }
     ],
     "examples": [
@@ -575,6 +667,18 @@
     "subtleties": [
      "给 is both a verb (‘to give’) and a coverb (‘for, to’): 我给你 ‘I give you’ — 我给你做饭 ‘I cook for you’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 給 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
@@ -584,7 +688,21 @@
    "pinyin": "wèi",
    "pos": "ADP",
    "senses": [
-    "prep.for"
+    "prep.for",
+    "prep.becauseof",
+    "verb.become"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.for",
+     "axis": "beneficiary or cause",
+     "value": "for the sake of; formal (为人民服务)"
+    },
+    {
+     "concept": "prep.becauseof",
+     "axis": "register",
+     "value": "为 + noun — formal (为这件事)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -612,14 +730,16 @@
       "def": "because of",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "prep.becauseof"
      },
      {
       "id": "s3",
       "def": "(read wéi) to be, to act as, to become (in written words)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.become"
      }
     ],
     "examples": [
@@ -705,6 +825,30 @@
     "subtleties": [
      "为 sounds more formal than 给: in speech 妈妈给我们做饭; 为 for causes and toasts: 为人民服务, 为…干杯."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "wèi",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "pinyin": "wéi",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "traditional 為 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
@@ -804,6 +948,18 @@
     "subtleties": [
      "关于 names the subject matter; 对于 says how someone treats or regards it."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 關於 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
@@ -812,7 +968,10 @@
    "trad": "一起",
    "pinyin": "yī qǐ",
    "pos": "ADV",
-   "senses": [],
+   "senses": [
+    "adv.together",
+    "adv.altogether"
+   ],
    "role": "together — 跟 / 和 + person + 一起 + verb: 我跟朋友一起吃饭 ‘I eat with friends’",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -832,21 +991,24 @@
       "def": "together, with each other",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.together"
      },
      {
       "id": "s2",
       "def": "in the same place",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "altogether, in all",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.altogether"
      }
     ],
     "examples": [
@@ -925,6 +1087,18 @@
     "subtleties": [
      "The 一 is said yì before 起 (yìqǐ), by the tone rule of 一."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yì qǐ",
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -938,6 +1112,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -951,6 +1139,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 條 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -964,6 +1166,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -975,10 +1191,21 @@
    "senses": [
     "place.school"
    ],
-   "measure": [
-    "所",
-    "家"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 學校 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "所",
+     "家"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1076,11 +1303,23 @@
    "pinyin": "dà xué",
    "pos": "NOUN",
    "senses": [
-    "place.university"
+    "place.university",
+    "lit.greatlearning"
    ],
-   "measure": [
-    "所"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 大學 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "所"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1107,7 +1346,8 @@
       "def": "《大学》 the Great Learning, one of the Four Books of Confucianism",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "lit.greatlearning"
      }
     ],
     "examples": [
@@ -1185,11 +1425,32 @@
    "pinyin": "gōng zuò",
    "pos": "NOUN",
    "senses": [
-    "place.work"
+    "place.work",
+    "verb.work",
+    "verb.function",
+    "work.job"
    ],
-   "measure": [
-    "份",
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "份",
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "verb.function",
+     "axis": "what works",
+     "value": "a machine (电脑不工作了)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1217,14 +1478,24 @@
       "def": "(verb) to work; to have a job",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.work"
      },
      {
       "id": "s3",
       "def": "(verb, of a machine) to work, to function",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.function"
+     },
+     {
+      "id": "s4",
+      "def": "a job, a post, employment (找工作 to look for a job)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "work.job"
      }
     ],
     "examples": [
@@ -1242,7 +1513,7 @@
       "tr": "He has found a new job.",
       "register": "neutral",
       "context": "careers",
-      "sense": "s1"
+      "sense": "s4"
      },
      {
       "text": "你在哪里工作？",
@@ -1259,6 +1530,22 @@
       "register": "colloquial",
       "context": "office",
       "sense": "s3"
+     },
+     {
+      "text": "找工作不容易。",
+      "py": "Zhǎo gōngzuò bù róngyì.",
+      "tr": "Finding a job isn’t easy.",
+      "register": "neutral",
+      "context": "careers",
+      "sense": "s4"
+     },
+     {
+      "text": "我每天八点去工作。",
+      "py": "Wǒ měitiān bā diǎn qù gōngzuò.",
+      "tr": "I go to work at eight every day.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s1"
      }
     ],
     "collocations": [
@@ -1318,9 +1605,20 @@
    "senses": [
     "place.office"
    ],
-   "measure": [
-    "间"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 辦公室 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "间"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1420,9 +1718,20 @@
    "senses": [
     "place.shop"
    ],
-   "measure": [
-    "家"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1527,9 +1836,20 @@
    "senses": [
     "place.supermarket"
    ],
-   "measure": [
-    "家"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1629,9 +1949,20 @@
    "senses": [
     "place.market"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 市場 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1658,7 +1989,8 @@
       "def": "(economics) market, demand",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1743,9 +2075,20 @@
    "senses": [
     "place.restaurant"
    ],
-   "measure": [
-    "家"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 飯館 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1851,9 +2194,20 @@
    "senses": [
     "place.cafe"
    ],
-   "measure": [
-    "家"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 咖啡館 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1953,11 +2307,22 @@
    "senses": [
     "place.hospital"
    ],
-   "measure": [
-    "家",
-    "所",
-    "座"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 醫院 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家",
+     "所",
+     "座"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2057,9 +2422,20 @@
    "senses": [
     "place.pharmacy"
    ],
-   "measure": [
-    "家"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 藥店 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2159,10 +2535,21 @@
    "senses": [
     "place.bank"
    ],
-   "measure": [
-    "家",
-    "所"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 銀行 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家",
+     "所"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2257,9 +2644,20 @@
    "senses": [
     "place.postoffice"
    ],
-   "measure": [
-    "家"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 郵局 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "家"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2354,10 +2752,21 @@
    "senses": [
     "place.station"
    ],
-   "measure": [
-    "个",
-    "座"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 車站 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "座"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2457,9 +2866,20 @@
    "senses": [
     "place.airport"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 機場 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2559,9 +2979,20 @@
    "senses": [
     "place.street"
    ],
-   "measure": [
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2588,7 +3019,8 @@
       "def": "(逛街) shopping streets; going shopping",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2680,11 +3112,23 @@
    "pinyin": "guǎng chǎng",
    "pos": "NOUN",
    "senses": [
-    "place.square"
+    "place.square",
+    "place.mall"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 廣場 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2711,7 +3155,8 @@
       "def": "(in names) shopping centre",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.mall"
      }
     ],
     "examples": [
@@ -2786,9 +3231,20 @@
    "senses": [
     "place.park"
    ],
-   "measure": [
-    "座"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 公園 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "座"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2888,10 +3344,21 @@
    "senses": [
     "place.city"
    ],
-   "measure": [
-    "座",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "座",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2991,10 +3458,21 @@
    "senses": [
     "place.village"
    ],
-   "measure": [
-    "个",
-    "座"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "座"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3104,9 +3582,20 @@
    "senses": [
     "place.country"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 國家 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3195,6 +3684,134 @@
     "subtleties": [
      "国家 is the state or nation; ‘the country(side)’ is 农村."
     ]
+   }
+  },
+  {
+   "id": "zh:li.from",
+   "lemma": "离",
+   "trad": "離",
+   "pinyin": "lí",
+   "pos": "ADP",
+   "senses": [
+    "prep.from",
+    "verb.leave"
+   ],
+   "role": "‘from’ for distance: A 离 B 很近 / 很远 ‘A is close to / far from B’",
+   "contrasts": [
+    {
+     "concept": "prep.from",
+     "axis": "what ‘from’ measures",
+     "value": "the distance from a reference point (A 离 B 很远)"
+    },
+    {
+     "concept": "verb.leave",
+     "axis": "construction and sense",
+     "value": "part from — written, mostly in compounds (离家, 离婚)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Measuring a distance — how far one place is from another.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "from (for distance): A 离 B 很近 / 很远",
+      "register": [
+       "neutral"
+      ],
+      "concept": "prep.from"
+     },
+     {
+      "id": "s2",
+      "def": "(verb) to leave, to part from",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.leave"
+     }
+    ],
+    "examples": [
+     {
+      "text": "超市离我家很近。",
+      "py": "Chāoshì lí wǒ jiā hěn jìn.",
+      "tr": "The supermarket is close to my home.",
+      "register": "neutral",
+      "context": "neighbourhood",
+      "sense": "s1"
+     },
+     {
+      "text": "学校离这里远吗？",
+      "py": "Xuéxiào lí zhèli yuǎn ma?",
+      "tr": "Is the school far from here?",
+      "register": "neutral",
+      "context": "directions",
+      "sense": "s1"
+     },
+     {
+      "text": "他离开了北京。",
+      "py": "Tā líkāi le Běijīng.",
+      "tr": "He left Beijing.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "离…很近",
+      "tr": "close to …"
+     },
+     {
+      "text": "离…很远",
+      "tr": "far from …"
+     },
+     {
+      "text": "离开",
+      "tr": "to leave"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "从",
+      "register": "neutral",
+      "nuance": "cóng: ‘from’ for movement and starting points (S11), not for distance"
+     }
+    ],
+    "etymology": {
+     "text": "Traditional 離: phonetic 离 + semantic 隹 ‘bird’ — first the name of a bird (the oriole), borrowed for ‘to leave, to part’.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "離 first named a bird, the black-naped oriole; the meaning ‘to part’ is a sound loan."
+    ],
+    "pitfalls": [
+     "Distance takes 离, not 从: 我家离学校很近 — *我家从学校很近 is wrong."
+    ],
+    "subtleties": [
+     "离 also counts time: 离春节还有三天 ‘three days to go until the Spring Festival’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 離 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   }
  ],

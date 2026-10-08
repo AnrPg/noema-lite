@@ -6,18 +6,59 @@
    "pos": "NOUN",
    "senses": [
     "home.house",
-    "place.home"
+    "place.home",
+    "lit.stanza"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "bayit",
+   "features": {
+    "spelling": "בית",
+    "root": "ב י ת",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "בָּתִּים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בֵּית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בָּתֵּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בַּיִת",
     "N;SG;DEF": "הַבַּיִת",
     "N;PL;INDF": "בָּתִּים",
     "N;PL;DEF": "הַבָּתִּים",
-    "N;SG;DEF;PFX": "בַּיִת"
+    "N;SG;DEF;PFX": "בַּיִת",
+    "N;SG;CONST": "בֵּית",
+    "N;PL;CONST": "בָּתֵּי"
    },
+   "contrasts": [
+    {
+     "concept": "place.home",
+     "axis": "place or direction",
+     "value": "the place: at home (בַּבַּיִת)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -55,7 +96,8 @@
       "def": "stanza, verse (of a poem or song)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "lit.stanza"
      }
     ],
     "examples": [
@@ -153,11 +195,43 @@
    ],
    "gender": "FEM",
    "translit": "dira",
+   "features": {
+    "spelling": "דירה",
+    "root": "ד ו ר",
+    "pattern": "קִילָה",
+    "plurals": [
+     {
+      "form": "דִּירוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דִּירַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דִּירוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דִּירָה",
     "N;SG;DEF": "הַדִּירָה",
     "N;PL;INDF": "דִּירוֹת",
-    "N;PL;DEF": "הַדִּירוֹת"
+    "N;PL;DEF": "הַדִּירוֹת",
+    "N;SG;CONST": "דִּירַת",
+    "N;PL;CONST": "דִּירוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -252,17 +326,50 @@
    "lemma": "חֶדֶר",
    "pos": "NOUN",
    "senses": [
-    "home.room"
+    "home.room",
+    "edu.cheder"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "cheder",
+   "features": {
+    "spelling": "חדר",
+    "root": "ח ד ר",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "חֲדָרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲדַר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַדְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֶדֶר",
     "N;SG;DEF": "הַחֶדֶר",
     "N;PL;INDF": "חֲדָרִים",
     "N;PL;DEF": "הַחֲדָרִים",
-    "N;SG;DEF;PFX": "חֶדֶר"
+    "N;SG;DEF;PFX": "חֶדֶר",
+    "N;SG;CONST": "חֲדַר",
+    "N;PL;CONST": "חַדְרֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -293,7 +400,8 @@
       "def": "cheder (a traditional Jewish elementary school)",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "edu.cheder"
      }
     ],
     "examples": [
@@ -317,6 +425,13 @@
       "register": "neutral",
       "context": "hotel",
       "sense": "s1"
+     },
+     {
+      "text": "בַּחֶדֶר הַיְּלָדִים לוֹמְדִים לִקְרֹא בַּתּוֹרָה.",
+      "tr": "In the cheder the children learn to read the Torah.",
+      "register": "religious",
+      "context": "religious education",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -370,13 +485,46 @@
     "home.door"
    ],
    "gender": "FEM",
-   "mishkal": "קֶטֶל",
    "translit": "delet",
+   "features": {
+    "spelling": "דלת",
+    "root": "ד ל ת",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "דְּלָתוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": [
+     {
+      "form": "דְּלָתַיִם"
+     }
+    ],
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דֶּלֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דַּלְתוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דֶּלֶת",
     "N;SG;DEF": "הַדֶּלֶת",
     "N;PL;INDF": "דְּלָתוֹת",
-    "N;PL;DEF": "הַדְּלָתוֹת"
+    "N;PL;DEF": "הַדְּלָתוֹת",
+    "N;SG;CONST": "דֶּלֶת",
+    "N;PL;CONST": "דַּלְתוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -471,16 +619,54 @@
    "lemma": "חַלּוֹן",
    "pos": "NOUN",
    "senses": [
-    "home.window"
+    "home.window",
+    "edu.freeperiod"
    ],
    "gender": "MASC",
    "translit": "chalon",
+   "features": {
+    "spelling": "חלון",
+    "root": {
+     "none": "no agreed root: traditionally linked to ח־ל־ל “to bore, hollow”, but the Ugaritic cognate ḥln points to a primary noun"
+    },
+    "pattern": {
+     "none": "a primary noun: no agreed pattern"
+    },
+    "plurals": [
+     {
+      "form": "חַלּוֹנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חַלּוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַלּוֹנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חַלּוֹן",
     "N;SG;DEF": "הַחַלּוֹן",
     "N;PL;INDF": "חַלּוֹנוֹת",
     "N;PL;DEF": "הַחַלּוֹנוֹת",
-    "N;SG;DEF;PFX": "חַלּוֹן"
+    "N;SG;DEF;PFX": "חַלּוֹן",
+    "N;SG;CONST": "חַלּוֹן",
+    "N;PL;CONST": "חַלּוֹנוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -508,7 +694,8 @@
       "def": "a free period (a gap in a timetable)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "edu.freeperiod"
      }
     ],
     "examples": [
@@ -581,11 +768,47 @@
    ],
    "gender": "MASC",
    "translit": "kir",
+   "features": {
+    "spelling": "קיר",
+    "root": {
+     "none": "a primary one-syllable noun: no root in use"
+    },
+    "pattern": {
+     "none": "a one-syllable noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "קִירוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קִיר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "קִירוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קִיר",
     "N;SG;DEF": "הַקִּיר",
     "N;PL;INDF": "קִירוֹת",
-    "N;PL;DEF": "הַקִּירוֹת"
+    "N;PL;DEF": "הַקִּירוֹת",
+    "N;SG;CONST": "קִיר",
+    "N;PL;CONST": "קִירוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -688,26 +911,61 @@
     "home.table"
    ],
    "gender": "MASC",
-   "mishkal": "קֻטְלָן",
    "translit": "shulchan",
+   "features": {
+    "spelling": "שולחן",
+    "root": "שׁ ל ח",
+    "pattern": "קֻטְלָן",
+    "plurals": [
+     {
+      "form": "שֻׁלְחָנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שֻׁלְחַן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שֻׁלְחֲנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שֻׁלְחָן",
     "N;SG;DEF": "הַשֻּׁלְחָן",
     "N;PL;INDF": "שֻׁלְחָנוֹת",
     "N;PL;DEF": "הַשֻּׁלְחָנוֹת",
-    "N;SG;DEF;PFX": "שֻּׁלְחָן"
+    "N;SG;DEF;PFX": "שֻּׁלְחָן",
+    "N;SG;CONST": "שֻׁלְחַן",
+    "N;PL;CONST": "שֻׁלְחֲנוֹת"
    },
    "plene": {
     "N;SG;INDF": "שולחן",
     "N;SG;DEF": "השולחן",
     "N;PL;INDF": "שולחנות",
-    "N;PL;DEF": "השולחנות"
+    "N;PL;DEF": "השולחנות",
+    "N;SG;DEF;PFX": "שולחן",
+    "N;SG;CONST": "שולחן",
+    "N;PL;CONST": "שולחנות"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
     "override": {
-     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַשֻּׁלְחָן → (בַּ / לַ)שֻּׁלְחָן; Wiktionary lists only the full definite form הַשֻּׁלְחָן."
+     "N;SG;DEF;PFX": "the definite form after the fused prepositions בַּ / לַ (בְּ / לְ + הַ), which drop the ה of the article: הַשֻּׁלְחָן → (בַּ / לַ)שֻּׁלְחָן; Wiktionary lists only the full definite form הַשֻּׁלְחָן.",
+     "N;PL;CONST": "the qamats before the stress shortens in the construct plural (as in קׇרְבָּנוֹת → קׇרְבְּנוֹת), under the guttural ח to a ḥataf: שֻׁלְחֲנוֹת־; Wiktionary’s table repeats the absolute form."
     }
    },
    "profile": {
@@ -799,22 +1057,57 @@
    "lemma": "כִּסֵּא",
    "pos": "NOUN",
    "senses": [
-    "home.chair"
+    "home.chair",
+    "pol.throne"
    ],
    "gender": "MASC",
-   "mishkal": "קִטֵּל",
    "translit": "kise",
+   "features": {
+    "spelling": "כיסא",
+    "root": "כ ס א",
+    "pattern": "קִטֵּל",
+    "plurals": [
+     {
+      "form": "כִּסְּאוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כִּסֵּא"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כִּסְּאוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כִּסֵּא",
     "N;SG;DEF": "הַכִּסֵּא",
     "N;PL;INDF": "כִּסְּאוֹת",
-    "N;PL;DEF": "הַכִּסְּאוֹת"
+    "N;PL;DEF": "הַכִּסְּאוֹת",
+    "N;SG;CONST": "כִּסֵּא",
+    "N;PL;CONST": "כִּסְּאוֹת"
    },
    "plene": {
     "N;SG;INDF": "כיסא",
     "N;SG;DEF": "הכיסא",
     "N;PL;INDF": "כיסאות",
-    "N;PL;DEF": "הכיסאות"
+    "N;PL;DEF": "הכיסאות",
+    "N;SG;CONST": "כיסא",
+    "N;PL;CONST": "כיסאות"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -842,7 +1135,8 @@
       "def": "throne, seat (of power)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "pol.throne"
      }
     ],
     "examples": [
@@ -924,20 +1218,54 @@
     "home.bed"
    ],
    "gender": "FEM",
-   "mishkal": "מִקְטָלָה",
    "translit": "mita",
+   "features": {
+    "spelling": "מיטה",
+    "root": "נ ט ה",
+    "pattern": "מִקְטָלָה",
+    "plurals": [
+     {
+      "form": "מִטּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִטַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִטּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מִטָּה",
     "N;SG;DEF": "הַמִּטָּה",
     "N;PL;INDF": "מִטּוֹת",
     "N;PL;DEF": "הַמִּטּוֹת",
-    "N;SG;DEF;PFX": "מִּטָּה"
+    "N;SG;DEF;PFX": "מִּטָּה",
+    "N;SG;CONST": "מִטַּת",
+    "N;PL;CONST": "מִטּוֹת"
    },
    "plene": {
     "N;SG;INDF": "מיטה",
     "N;SG;DEF": "המיטה",
     "N;PL;INDF": "מיטות",
-    "N;PL;DEF": "המיטות"
+    "N;PL;DEF": "המיטות",
+    "N;SG;DEF;PFX": "מיטה",
+    "N;SG;CONST": "מיטת",
+    "N;PL;CONST": "מיטות"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1033,16 +1361,52 @@
    "lemma": "אָרוֹן",
    "pos": "NOUN",
    "senses": [
-    "home.cupboard"
+    "home.cupboard",
+    "obj.coffin",
+    "relig.ark"
    ],
    "gender": "MASC",
    "translit": "aron",
+   "features": {
+    "spelling": "ארון",
+    "root": "א ר ן",
+    "pattern": "קָטוֹל",
+    "plurals": [
+     {
+      "form": "אֲרוֹנוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֲרוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אֲרוֹנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אָרוֹן",
     "N;SG;DEF": "הָאָרוֹן",
     "N;PL;INDF": "אֲרוֹנוֹת",
     "N;PL;DEF": "הָאֲרוֹנוֹת",
-    "N;SG;DEF;PFX": "אָרוֹן"
+    "N;SG;DEF;PFX": "אָרוֹן",
+    "N;SG;CONST": "אֲרוֹן",
+    "N;PL;CONST": "אֲרוֹנוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1070,14 +1434,16 @@
       "def": "coffin",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.coffin"
      },
      {
       "id": "s3",
       "def": "the Ark (of the covenant, of the Torah)",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.ark"
      }
     ],
     "examples": [
@@ -1101,6 +1467,13 @@
       "register": "religious",
       "context": "synagogue",
       "sense": "s3"
+     },
+     {
+      "text": "הָאָרוֹן כֻּסָּה בַּדֶּגֶל.",
+      "tr": "The coffin was covered with the flag.",
+      "register": "neutral",
+      "context": "funeral",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1157,15 +1530,51 @@
    "lemma": "מְנוֹרָה",
    "pos": "NOUN",
    "senses": [
-    "home.lamp"
+    "home.lamp",
+    "relig.menorah"
    ],
    "gender": "FEM",
    "translit": "menora",
+   "features": {
+    "spelling": "מנורה",
+    "root": "נ י ר",
+    "pattern": {
+     "none": "a noun of the weak root נ־י־ר with the prefix מְ־; no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "מְנוֹרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְנוֹרַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְנוֹרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מְנוֹרָה",
     "N;SG;DEF": "הַמְּנוֹרָה",
     "N;PL;INDF": "מְנוֹרוֹת",
-    "N;PL;DEF": "הַמְּנוֹרוֹת"
+    "N;PL;DEF": "הַמְּנוֹרוֹת",
+    "N;SG;CONST": "מְנוֹרַת",
+    "N;PL;CONST": "מְנוֹרוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1193,7 +1602,8 @@
       "def": "menorah, candelabrum (the seven-branched lamp of the Temple; the emblem of Israel)",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.menorah"
      }
     ],
     "examples": [
@@ -1275,13 +1685,45 @@
     "obj.book"
    ],
    "gender": "MASC",
-   "mishkal": "קֵטֶל",
    "translit": "sefer",
+   "features": {
+    "spelling": "ספר",
+    "root": "ס פ ר",
+    "pattern": "קֵטֶל",
+    "plurals": [
+     {
+      "form": "סְפָרִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סֵפֶר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סִפְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סֵפֶר",
     "N;SG;DEF": "הַסֵּפֶר",
     "N;PL;INDF": "סְפָרִים",
-    "N;PL;DEF": "הַסְּפָרִים"
+    "N;PL;DEF": "הַסְּפָרִים",
+    "N;SG;CONST": "סֵפֶר",
+    "N;PL;CONST": "סִפְרֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1309,7 +1751,8 @@
       "def": "a writing, a scroll (older sense)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1392,17 +1835,55 @@
     "obj.pen"
    ],
    "gender": "MASC",
-   "mishkal": "קֵטֶל",
    "translit": "et",
+   "features": {
+    "spelling": "עט",
+    "root": {
+     "none": "of unknown origin (compare Aramaic עֵיטָא): no root in use"
+    },
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (plural עֵטִים)"
+    },
+    "plurals": [
+     {
+      "form": "עֵטִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עֵט"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עֵטֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "עֵט",
     "N;SG;DEF": "הָעֵט",
     "N;PL;INDF": "עֵטִים",
-    "N;PL;DEF": "הָעֵטִים"
+    "N;PL;DEF": "הָעֵטִים",
+    "N;SG;CONST": "עֵט",
+    "N;PL;CONST": "עֵטֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;CONST": "Wiktionary’s עֵטִי־ is a slip: the construct plural of עֵטִים ends in ־ֵי (עֵטֵי־, like סְפָרִים → סִפְרֵי)."
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -1502,21 +1983,67 @@
    "lemma": "נְיָר",
    "pos": "NOUN",
    "senses": [
-    "obj.paper"
+    "obj.paper",
+    "comm.document"
    ],
    "gender": "MASC",
    "translit": "neyar",
+   "features": {
+    "spelling": "נייר",
+    "root": {
+     "none": "an old (Mishnaic) noun, not derived from a verb root"
+    },
+    "pattern": {
+     "none": "an old (Mishnaic) noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "נְיָרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s2"
+      ],
+      "note": "the material נְיָר has no plural; נְיָרוֹת are papers, documents"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נְיַר",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נְיָרוֹת",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "נְיָר",
     "N;SG;DEF": "הַנְּיָר",
     "N;PL;INDF": "נְיָרוֹת",
-    "N;PL;DEF": "הַנְּיָרוֹת"
+    "N;PL;DEF": "הַנְּיָרוֹת",
+    "N;SG;CONST": "נְיַר",
+    "N;PL;CONST": "נְיָרוֹת"
    },
    "plene": {
     "N;SG;INDF": "נייר",
     "N;SG;DEF": "הנייר",
     "N;PL;INDF": "ניירות",
-    "N;PL;DEF": "הניירות"
+    "N;PL;DEF": "הניירות",
+    "N;SG;CONST": "נייר",
+    "N;PL;CONST": "ניירות"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1544,7 +2071,8 @@
       "def": "papers, documents (plural נְיָרוֹת)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "comm.document"
      }
     ],
     "examples": [
@@ -1618,15 +2146,53 @@
    "lemma": "טֶלֶפוֹן",
    "pos": "NOUN",
    "senses": [
-    "obj.phone"
+    "obj.phone",
+    "comm.phonecall"
    ],
    "gender": "MASC",
    "translit": "telefon",
+   "features": {
+    "spelling": "טלפון",
+    "root": {
+     "none": "a loanword (an internationalism, from English telephone): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "טֶלֶפוֹנִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "טֶלֶפוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "טֶלֶפוֹנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "טֶלֶפוֹן",
     "N;SG;DEF": "הַטֶּלֶפוֹן",
     "N;PL;INDF": "טֶלֶפוֹנִים",
-    "N;PL;DEF": "הַטֶּלֶפוֹנִים"
+    "N;PL;DEF": "הַטֶּלֶפוֹנִים",
+    "N;SG;CONST": "טֶלֶפוֹן",
+    "N;PL;CONST": "טֶלֶפוֹנֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1654,7 +2220,8 @@
       "def": "a phone call (לְדַבֵּר בַּטֶּלֶפוֹן “to talk on the phone”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "comm.phonecall"
      }
     ],
     "examples": [
@@ -1733,17 +2300,50 @@
    "lemma": "מַפְתֵּחַ",
    "pos": "NOUN",
    "senses": [
-    "obj.key"
+    "obj.key",
+    "art.clef"
    ],
    "gender": "MASC",
-   "root": "פ־ת־ח",
-   "mishkal": "מַקְטֵל",
    "translit": "mafteach",
+   "features": {
+    "spelling": "מפתח",
+    "root": "פ ת ח",
+    "pattern": "מַקְטֵל",
+    "plurals": [
+     {
+      "form": "מַפְתְּחוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַפְתֵּחַ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מַפְתְּחוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מַפְתֵּחַ",
     "N;SG;DEF": "הַמַּפְתֵּחַ",
     "N;PL;INDF": "מַפְתְּחוֹת",
-    "N;PL;DEF": "הַמַּפְתְּחוֹת"
+    "N;PL;DEF": "הַמַּפְתְּחוֹת",
+    "N;SG;CONST": "מַפְתֵּחַ",
+    "N;PL;CONST": "מַפְתְּחוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1771,14 +2371,16 @@
       "def": "key (to a code, a map); index",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "clef (music)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "art.clef"
      }
     ],
     "examples": [
@@ -1802,6 +2404,13 @@
       "register": "neutral",
       "context": "advice",
       "sense": "s2"
+     },
+     {
+      "text": "הַתָּוִים כְּתוּבִים בְּמַפְתֵּחַ סוֹל.",
+      "tr": "The notes are written in the treble (G) clef.",
+      "register": "technical",
+      "context": "music",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1847,16 +2456,54 @@
    "lemma": "תִּיק",
    "pos": "NOUN",
    "senses": [
-    "obj.bag"
+    "obj.bag",
+    "obj.file",
+    "pol.portfolio"
    ],
    "gender": "MASC",
    "translit": "tik",
+   "features": {
+    "spelling": "תיק",
+    "root": "ת י ק",
+    "pattern": {
+     "none": "a Mishnaic loanword (Greek θήκη): no pattern; the root ת־י־ק was formed from it"
+    },
+    "plurals": [
+     {
+      "form": "תִּיקִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תִּיק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תִּיקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תִּיק",
     "N;SG;DEF": "הַתִּיק",
     "N;PL;INDF": "תִּיקִים",
     "N;PL;DEF": "הַתִּיקִים",
-    "N;SG;DEF;PFX": "תִּיק"
+    "N;SG;DEF;PFX": "תִּיק",
+    "N;SG;CONST": "תִּיק",
+    "N;PL;CONST": "תִּיקֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1884,14 +2531,16 @@
       "def": "file, case (a folder; a police or legal file)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.file"
      },
      {
       "id": "s3",
       "def": "portfolio (of a government minister)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "pol.portfolio"
      }
     ],
     "examples": [
@@ -1977,17 +2626,57 @@
    "lemma": "סֵפֶל",
    "pos": "NOUN",
    "senses": [
-    "obj.cup"
+    "obj.cup",
+    "obj.bowl"
    ],
    "gender": "MASC",
-   "mishkal": "קֵטֶל",
    "translit": "sefel",
+   "features": {
+    "spelling": "ספל",
+    "root": "ס פ ל",
+    "pattern": "קֵטֶל",
+    "plurals": [
+     {
+      "form": "סְפָלִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סֵפֶל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סִפְלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סֵפֶל",
     "N;SG;DEF": "הַסֵּפֶל",
     "N;PL;INDF": "סְפָלִים",
-    "N;PL;DEF": "הַסְּפָלִים"
+    "N;PL;DEF": "הַסְּפָלִים",
+    "N;SG;CONST": "סֵפֶל",
+    "N;PL;CONST": "סִפְלֵי"
    },
+   "contrasts": [
+    {
+     "concept": "obj.cup",
+     "axis": "kind of vessel",
+     "value": "a mug or cup with a handle, for hot drinks"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2014,7 +2703,8 @@
       "def": "bowl (Biblical)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "obj.bowl"
      }
     ],
     "examples": [
@@ -2038,6 +2728,13 @@
       "register": "neutral",
       "context": "presents",
       "sense": "s1"
+     },
+     {
+      "text": "בְּסֵפֶל אַדִּירִים הִקְרִיבָה חֶמְאָה.",
+      "tr": "She brought forth curds in a lordly bowl. (Judges 5:25)",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2089,12 +2786,54 @@
    ],
    "gender": "FEM",
    "translit": "kos",
+   "features": {
+    "spelling": "כוס",
+    "root": "כ א ס",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Proto-Semitic *kaʔs-, Arabic كَأْس)"
+    },
+    "plurals": [
+     {
+      "form": "כּוֹסוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כּוֹס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כּוֹסוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כּוֹס",
     "N;SG;DEF": "הַכּוֹס",
     "N;PL;INDF": "כּוֹסוֹת",
-    "N;PL;DEF": "הַכּוֹסוֹת"
+    "N;PL;DEF": "הַכּוֹסוֹת",
+    "N;SG;CONST": "כּוֹס",
+    "N;PL;CONST": "כּוֹסוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "obj.cup",
+     "axis": "kind of vessel",
+     "value": "a glass; “a cup of” coffee or tea as an amount (כּוֹס קָפֶה)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2207,13 +2946,44 @@
     "obj.plate"
    ],
    "gender": "FEM",
-   "mishkal": "קַטֶּלֶת",
    "translit": "tsalachat",
+   "features": {
+    "spelling": "צלחת",
+    "root": "צ ל ח",
+    "pattern": "קַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "צַלָּחוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "צַלַּחַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "צַלְּחוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "צַלַּחַת",
     "N;SG;DEF": "הַצַּלַּחַת",
     "N;PL;INDF": "צַלָּחוֹת",
-    "N;PL;DEF": "הַצַּלָּחוֹת"
+    "N;PL;DEF": "הַצַּלָּחוֹת",
+    "N;SG;CONST": "צַלַּחַת",
+    "N;PL;CONST": "צַלְּחוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

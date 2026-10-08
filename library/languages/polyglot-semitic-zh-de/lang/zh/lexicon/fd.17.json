@@ -9,7 +9,27 @@
    "senses": [
     "colour.white"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.white",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢白色, 白色的车)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -103,7 +123,16 @@
    "pinyin": "bái",
    "pos": "ADJ",
    "senses": [
-    "colour.white"
+    "colour.white",
+    "adj.plain",
+    "adv.invain"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.white",
+     "axis": "noun or adjective",
+     "value": "the adjective (白衣服, 很白)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -131,14 +160,16 @@
       "def": "clear, plain (明白 ‘to understand’, 白开水 ‘plain boiled water’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.plain"
      },
      {
       "id": "s3",
       "def": "(adverb) in vain, for nothing; for free",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.invain"
      }
     ],
     "examples": [
@@ -173,6 +204,14 @@
       "register": "colloquial",
       "context": "errands",
       "sense": "s3"
+     },
+     {
+      "text": "我只喝白开水。",
+      "py": "Wǒ zhǐ hē báikāishuǐ.",
+      "tr": "I only drink plain boiled water.",
+      "register": "neutral",
+      "context": "drinks",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -230,6 +269,17 @@
     "subtleties": [
      "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -241,7 +291,27 @@
    "senses": [
     "colour.black"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.black",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢黑色, 黑色的车)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -335,7 +405,16 @@
    "pinyin": "hēi",
    "pos": "ADJ",
    "senses": [
-    "colour.black"
+    "colour.black",
+    "adj.dark.nolight",
+    "adj.illegal"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.black",
+     "axis": "noun or adjective",
+     "value": "the adjective (黑头发, 很黑)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -363,14 +442,16 @@
       "def": "dark (without light)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.dark.nolight"
      },
      {
       "id": "s3",
       "def": "illegal, shady (黑车 ‘unlicensed taxi’, 黑市 ‘black market’)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.illegal"
      }
     ],
     "examples": [
@@ -460,6 +541,17 @@
      "天黑了 ‘it has got dark’ — 了 for the change (S14).",
      "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -471,7 +563,27 @@
    "senses": [
     "colour.red"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紅色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.red",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢红色, 红色的车)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -566,7 +678,20 @@
    "pinyin": "hóng",
    "pos": "ADJ",
    "senses": [
-    "colour.red"
+    "colour.red",
+    "adj.popular"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.popular",
+     "axis": "kind of popular",
+     "value": "famous, a star (走红, 网红)"
+    },
+    {
+     "concept": "colour.red",
+     "axis": "noun or adjective",
+     "value": "the adjective (红苹果, 很红)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -594,14 +719,16 @@
       "def": "popular, famous (走红, 网红 ‘internet celebrity’)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.popular"
      },
      {
       "id": "s3",
       "def": "revolutionary, communist (红军 ‘the Red Army’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -687,6 +814,17 @@
      "脸红了 ‘the face went red’ = to blush.",
      "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 紅 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -698,7 +836,27 @@
    "senses": [
     "colour.blue"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 藍色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.blue",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢蓝色, 蓝色的车)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -792,7 +950,15 @@
    "pinyin": "lán",
    "pos": "ADJ",
    "senses": [
-    "colour.blue"
+    "colour.blue",
+    "nature.indigo"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.blue",
+     "axis": "noun or adjective",
+     "value": "the adjective (蓝天, 很蓝)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -820,7 +986,8 @@
       "def": "indigo plant (the dye)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "nature.indigo"
      }
     ],
     "examples": [
@@ -847,6 +1014,14 @@
       "register": "informal",
       "context": "cars",
       "sense": "s1"
+     },
+     {
+      "text": "青出于蓝而胜于蓝。",
+      "py": "Qīng chū yú lán ér shèng yú lán.",
+      "tr": "Blue dye comes from the indigo plant yet is bluer than it (the pupil surpasses the master).",
+      "register": "literary",
+      "context": "saying",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -897,6 +1072,17 @@
     "subtleties": [
      "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -908,7 +1094,27 @@
    "senses": [
     "colour.green"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 綠色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.green",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢绿色, 绿色的车)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -935,7 +1141,8 @@
       "def": "environmentally friendly, organic",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1009,7 +1216,15 @@
    "pinyin": "lǜ",
    "pos": "ADJ",
    "senses": [
-    "colour.green"
+    "colour.green",
+    "verb.cheaton"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.green",
+     "axis": "noun or adjective",
+     "value": "the adjective (绿茶, 很绿)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1037,7 +1252,8 @@
       "def": "(slang) to cheat on (a man): 他被绿了 ‘he was cheated on’",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "verb.cheaton"
      }
     ],
     "examples": [
@@ -1064,6 +1280,14 @@
       "register": "informal",
       "context": "traffic",
       "sense": "s1"
+     },
+     {
+      "text": "听说他被女朋友绿了。",
+      "py": "Tīngshuō tā bèi nǚpéngyou lǜ le.",
+      "tr": "I hear his girlfriend cheated on him.",
+      "register": "slang",
+      "context": "gossip",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1113,6 +1337,17 @@
     "subtleties": [
      "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 綠 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1122,9 +1357,30 @@
    "pinyin": "huáng sè",
    "pos": "NOUN",
    "senses": [
-    "colour.yellow"
+    "colour.yellow",
+    "adj.pornographic"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 黃色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.yellow",
+     "axis": "noun or adjective",
+     "value": "the colour as a noun (我喜欢黄色, 黄色的车)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1151,7 +1407,8 @@
       "def": "pornographic, obscene",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.pornographic"
      }
     ],
     "examples": [
@@ -1178,6 +1435,14 @@
       "register": "neutral",
       "context": "home",
       "sense": "s1"
+     },
+     {
+      "text": "这是一部黄色电影。",
+      "py": "Zhè shì yí bù huángsè diànyǐng.",
+      "tr": "This is a pornographic film.",
+      "register": "colloquial",
+      "context": "films",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1225,7 +1490,15 @@
    "pinyin": "huáng",
    "pos": "ADJ",
    "senses": [
-    "colour.yellow"
+    "colour.yellow",
+    "verb.fallthrough"
+   ],
+   "contrasts": [
+    {
+     "concept": "colour.yellow",
+     "axis": "noun or adjective",
+     "value": "the adjective (黄瓜, 叶子黄了)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1253,14 +1526,8 @@
       "def": "(colloquial) to fall through, come to nothing: 这件事黄了",
       "register": [
        "colloquial"
-      ]
-     },
-     {
-      "id": "s3",
-      "def": "a surname, Huang (Wong)",
-      "register": [
-       "neutral"
-      ]
+      ],
+      "concept": "verb.fallthrough"
      }
     ],
     "examples": [
@@ -1337,6 +1604,17 @@
     "subtleties": [
      "The one-syllable colour is an adjective: it joins a noun directly, often in set words (白葡萄酒, 红茶), and can be a predicate with 很 (脸很红)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 黃 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1348,7 +1626,27 @@
    "senses": [
     "colour.brown"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.brown",
+     "axis": "register",
+     "value": "brown — standard"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1450,7 +1748,27 @@
    "senses": [
     "colour.brown"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.brown",
+     "axis": "register",
+     "value": "coffee-coloured — everyday"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1547,7 +1865,20 @@
    "senses": [
     "colour.grey"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1577,7 +1908,8 @@
       "def": "gloomy; unofficial, in-between (灰色地带 ‘grey area’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1654,7 +1986,27 @@
    "senses": [
     "colour.orange"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.orange",
+     "axis": "shade",
+     "value": "orange"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1755,7 +2107,27 @@
    "senses": [
     "colour.orange"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 橘黃色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.orange",
+     "axis": "shade",
+     "value": "tangerine yellow, a yellowish orange"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1851,7 +2223,27 @@
    "senses": [
     "colour.pink"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 粉紅色 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.pink",
+     "axis": "length",
+     "value": "the full form"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1947,7 +2339,27 @@
    "senses": [
     "colour.pink"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "colour.pink",
+     "axis": "length",
+     "value": "the short form (very common)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2043,7 +2455,20 @@
    "senses": [
     "colour.purple"
    ],
-   "measureNone": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a colour word: not counted with a measure word (一种颜色 counts colours with 种 ‘kind’)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2137,7 +2562,8 @@
    "pinyin": "qiǎn",
    "pos": "ADJ",
    "senses": [
-    "adj.light"
+    "adj.light",
+    "adj.shallow"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2165,14 +2591,16 @@
       "def": "shallow (water)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.shallow"
      },
      {
       "id": "s3",
       "def": "simple, easy to understand",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -2250,6 +2678,17 @@
     "subtleties": [
      "浅 joins the colour word directly: 浅蓝色, 浅绿色 (no 的)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 淺 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2259,7 +2698,8 @@
    "pinyin": "shēn",
    "pos": "ADJ",
    "senses": [
-    "adj.dark"
+    "adj.dark",
+    "adj.deep"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2287,14 +2727,16 @@
       "def": "deep (water, feelings, meaning)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.deep"
      },
      {
       "id": "s3",
       "def": "late (in time): 深夜 ‘late at night’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -2376,6 +2818,17 @@
     "subtleties": [
      "深 joins the colour word directly: 深蓝色, 深绿色 (no 的)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2385,7 +2838,8 @@
    "pinyin": "gèng",
    "pos": "ADV",
    "senses": [
-    "adv.more"
+    "adv.more",
+    "verb.change"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2413,7 +2867,8 @@
       "def": "(read gēng) to change, replace (更新 ‘to update’)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.change"
      }
     ],
     "examples": [
@@ -2504,6 +2959,31 @@
     "subtleties": [
      "更 compares even without 比: 我觉得这个更好 ‘I think this one is better’.",
      "更 can come after a 比-phrase: 他比我更高 ‘he is (even) taller than me’."
+    ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "gèng",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "gēng",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
     ]
    }
   },
@@ -2604,6 +3084,20 @@
     "subtleties": [
      "最 + adjective + 的 = ‘the …-est (one)’: 最大的 ‘the biggest’; the group comes first: 我们家我爸爸最高."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -2613,7 +3107,9 @@
    "pinyin": "bǐ",
    "pos": "ADP",
    "senses": [
-    "conj.than"
+    "conj.than",
+    "verb.compare",
+    "prep.to.score"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2641,14 +3137,16 @@
       "def": "(verb) to compare; to compete",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.compare"
      },
      {
       "id": "s3",
       "def": "to (in scores and ratios: 三比二 ‘3:2’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.to.score"
      }
     ],
     "examples": [
@@ -2729,15 +3227,31 @@
     "subtleties": [
      "The difference comes after the adjective: 他比我大两岁 ‘he is two years older than me’, 贵一点 ‘a bit more expensive’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
    "id": "zh:yiyang",
    "lemma": "一样",
    "trad": "一樣",
-   "pinyin": "yí yàng",
+   "pinyin": "yī yàng",
    "pos": "ADJ",
-   "senses": [],
+   "senses": [
+    "adj.same",
+    "conj.asas",
+    "prep.like"
+   ],
    "role": "the same, alike: A 跟 B 一样 (+ adjective) ‘A is as … as B’, 不一样 ‘different’ (S17)",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2757,21 +3271,24 @@
       "def": "the same, alike",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.same"
      },
      {
       "id": "s2",
       "def": "(A 跟 B 一样 + adjective) as … as",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.asas"
      },
      {
       "id": "s3",
       "def": "(像…一样) just like",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.like"
      }
     ],
     "examples": [
@@ -2857,6 +3374,15 @@
     "subtleties": [
      "不一样 ‘not the same’ is the everyday word for ‘different’: 我们不一样."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 一樣 for every sense"
+    },
+    "toneSandhi": "yí yàng"
    }
   }
  ]

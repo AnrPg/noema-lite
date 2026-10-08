@@ -8,6 +8,10 @@
     "num.0"
    ],
    "translit": "efes",
+   "features": {
+    "spelling": "אפס",
+    "position": "before"
+   },
    "note": "Zero, the digit and the score. Originally a noun meaning “end, nothing”; it never changes.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -21,16 +25,20 @@
    "id": "he:echad",
    "lemma": "אֶחָד",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.1"
    ],
-   "class": "gender",
    "translit": "echad",
-   "note": "The only number that comes after the noun and agrees like an adjective: סֵפֶר אֶחָד, מִטָּה אַחַת. The feminine אַחַת is the counting form (אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …).",
+   "features": {
+    "spelling": "אחד",
+    "position": "after"
+   },
    "forms": {
     "NUM;MASC": "אֶחָד",
     "NUM;FEM": "אַחַת"
    },
+   "note": "The only number that comes after the noun and agrees like an adjective: סֵפֶר אֶחָד, מִטָּה אַחַת. The feminine אַחַת is the counting form (אַחַת, שְׁתַּיִם, שָׁלוֹשׁ …).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -40,12 +48,15 @@
    "id": "he:shnayim",
    "lemma": "שְׁנַיִם",
    "pos": "NUM",
+   "class": "two",
    "senses": [
     "num.2"
    ],
-   "class": "two",
    "translit": "shnayim",
-   "note": "Before a noun always the construct form: שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת (also before a definite noun: שְׁנֵי הַסְּפָרִים). Alone: שְׁנַיִם / שְׁתַּיִם (counting: שְׁתַּיִם).",
+   "features": {
+    "spelling": "שניים",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שְׁנַיִם",
     "NUM;FEM": "שְׁתַּיִם",
@@ -56,6 +67,7 @@
     "NUM;MASC": "שניים",
     "NUM;FEM": "שתיים"
    },
+   "note": "Before a noun always the construct form: שְׁנֵי סְפָרִים, שְׁתֵּי מִטּוֹת (also before a definite noun: שְׁנֵי הַסְּפָרִים). Alone: שְׁנַיִם / שְׁתַּיִם (counting: שְׁתַּיִם).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -65,17 +77,21 @@
    "id": "he:shlosha",
    "lemma": "שְׁלוֹשָׁה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.3"
    ],
-   "class": "const",
    "translit": "shlosha",
-   "note": "With a masculine noun use the form in -ָה (שְׁלוֹשָׁה סְפָרִים), with a feminine noun the short form (שָׁלוֹשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שְׁלוֹשֶׁת הַ… (“the three …”). Counting form: שָׁלוֹשׁ.",
+   "features": {
+    "spelling": "שלושה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שְׁלוֹשָׁה",
     "NUM;FEM": "שָׁלוֹשׁ",
     "NUM;MASC;CONST": "שְׁלוֹשֶׁת"
    },
+   "note": "With a masculine noun use the form in -ָה (שְׁלוֹשָׁה סְפָרִים), with a feminine noun the short form (שָׁלוֹשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שְׁלוֹשֶׁת הַ… (“the three …”). Counting form: שָׁלוֹשׁ.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -85,17 +101,21 @@
    "id": "he:arbaa",
    "lemma": "אַרְבָּעָה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.4"
    ],
-   "class": "const",
    "translit": "arba'a",
-   "note": "With a masculine noun use the form in -ָה (אַרְבָּעָה סְפָרִים), with a feminine noun the short form (אַרְבַּע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: אַרְבַּעַת הַ… (“the four …”). Counting form: אַרְבַּע.",
+   "features": {
+    "spelling": "ארבעה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "אַרְבָּעָה",
     "NUM;FEM": "אַרְבַּע",
     "NUM;MASC;CONST": "אַרְבַּעַת"
    },
+   "note": "With a masculine noun use the form in -ָה (אַרְבָּעָה סְפָרִים), with a feminine noun the short form (אַרְבַּע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: אַרְבַּעַת הַ… (“the four …”). Counting form: אַרְבַּע.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -105,12 +125,15 @@
    "id": "he:chamisha",
    "lemma": "חֲמִשָּׁה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.5"
    ],
-   "class": "const",
    "translit": "chamisha",
-   "note": "With a masculine noun use the form in -ָה (חֲמִשָּׁה סְפָרִים), with a feminine noun the short form (חָמֵשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: חֲמֵשֶׁת הַ… (“the five …”). Counting form: חָמֵשׁ.",
+   "features": {
+    "spelling": "חמישה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "חֲמִשָּׁה",
     "NUM;FEM": "חָמֵשׁ",
@@ -119,6 +142,7 @@
    "plene": {
     "NUM;MASC": "חמישה"
    },
+   "note": "With a masculine noun use the form in -ָה (חֲמִשָּׁה סְפָרִים), with a feminine noun the short form (חָמֵשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: חֲמֵשֶׁת הַ… (“the five …”). Counting form: חָמֵשׁ.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -128,12 +152,15 @@
    "id": "he:shisha",
    "lemma": "שִׁשָּׁה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.6"
    ],
-   "class": "const",
    "translit": "shisha",
-   "note": "With a masculine noun use the form in -ָה (שִׁשָּׁה סְפָרִים), with a feminine noun the short form (שֵׁשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שֵׁשֶׁת הַ… (“the six …”). Counting form: שֵׁשׁ.",
+   "features": {
+    "spelling": "שישה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שִׁשָּׁה",
     "NUM;FEM": "שֵׁשׁ",
@@ -142,6 +169,7 @@
    "plene": {
     "NUM;MASC": "שישה"
    },
+   "note": "With a masculine noun use the form in -ָה (שִׁשָּׁה סְפָרִים), with a feminine noun the short form (שֵׁשׁ מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שֵׁשֶׁת הַ… (“the six …”). Counting form: שֵׁשׁ.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -151,17 +179,21 @@
    "id": "he:shiva",
    "lemma": "שִׁבְעָה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.7"
    ],
-   "class": "const",
    "translit": "shiv'a",
-   "note": "With a masculine noun use the form in -ָה (שִׁבְעָה סְפָרִים), with a feminine noun the short form (שֶׁבַע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שִׁבְעַת הַ… (“the seven …”). Counting form: שֶׁבַע.",
+   "features": {
+    "spelling": "שבעה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שִׁבְעָה",
     "NUM;FEM": "שֶׁבַע",
     "NUM;MASC;CONST": "שִׁבְעַת"
    },
+   "note": "With a masculine noun use the form in -ָה (שִׁבְעָה סְפָרִים), with a feminine noun the short form (שֶׁבַע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שִׁבְעַת הַ… (“the seven …”). Counting form: שֶׁבַע.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -171,18 +203,22 @@
    "id": "he:shmona",
    "lemma": "שְׁמוֹנָה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.8"
    ],
-   "class": "const",
    "translit": "shmona",
-   "note": "With a masculine noun use the form in -ָה (שְׁמוֹנָה סְפָרִים), with a feminine noun the short form (שְׁמוֹנֶה מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שְׁמוֹנַת הַ… (“the eight …”). Counting form: שְׁמוֹנֶה.",
+   "features": {
+    "spelling": "שמונה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שְׁמוֹנָה",
     "NUM;FEM": "שְׁמוֹנֶה",
     "NUM;MASC;CONST": "שְׁמוֹנַת",
     "NUM;FEM;PFX": "שְּׁמוֹנֶה"
    },
+   "note": "With a masculine noun use the form in -ָה (שְׁמוֹנָה סְפָרִים), with a feminine noun the short form (שְׁמוֹנֶה מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: שְׁמוֹנַת הַ… (“the eight …”). Counting form: שְׁמוֹנֶה.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -195,17 +231,21 @@
    "id": "he:tisha",
    "lemma": "תִּשְׁעָה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.9"
    ],
-   "class": "const",
    "translit": "tish'a",
-   "note": "With a masculine noun use the form in -ָה (תִּשְׁעָה סְפָרִים), with a feminine noun the short form (תֵּשַׁע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: תִּשְׁעַת הַ… (“the nine …”). Counting form: תֵּשַׁע.",
+   "features": {
+    "spelling": "תשעה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "תִּשְׁעָה",
     "NUM;FEM": "תֵּשַׁע",
     "NUM;MASC;CONST": "תִּשְׁעַת"
    },
+   "note": "With a masculine noun use the form in -ָה (תִּשְׁעָה סְפָרִים), with a feminine noun the short form (תֵּשַׁע מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: תִּשְׁעַת הַ… (“the nine …”). Counting form: תֵּשַׁע.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -215,17 +255,21 @@
    "id": "he:asara",
    "lemma": "עֲשָׂרָה",
    "pos": "NUM",
+   "class": "const",
    "senses": [
     "num.10"
    ],
-   "class": "const",
    "translit": "asara",
-   "note": "With a masculine noun use the form in -ָה (עֲשָׂרָה סְפָרִים), with a feminine noun the short form (עֶשֶׂר מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: עֲשֶׂרֶת הַ… (“the ten …”). Counting form: עֶשֶׂר.",
+   "features": {
+    "spelling": "עשרה",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "עֲשָׂרָה",
     "NUM;FEM": "עֶשֶׂר",
     "NUM;MASC;CONST": "עֲשֶׂרֶת"
    },
+   "note": "With a masculine noun use the form in -ָה (עֲשָׂרָה סְפָרִים), with a feminine noun the short form (עֶשֶׂר מִטּוֹת) — the reverse of what the endings suggest. Before a definite masculine noun: עֲשֶׂרֶת הַ… (“the ten …”). Counting form: עֶשֶׂר.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -235,16 +279,20 @@
    "id": "he:achad-asar",
    "lemma": "אַחַד עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.11"
    ],
-   "class": "gender",
    "translit": "achad asar",
-   "note": "Masculine with masculine nouns (אַחַד עָשָׂר …), feminine with feminine nouns (אַחַת עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "אחד עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "אַחַד עָשָׂר",
     "NUM;FEM": "אַחַת עֶשְׂרֵה"
    },
+   "note": "Masculine with masculine nouns (אַחַד עָשָׂר …), feminine with feminine nouns (אַחַת עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -254,16 +302,20 @@
    "id": "he:shneim-asar",
    "lemma": "שְׁנֵים עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.12"
    ],
-   "class": "gender",
    "translit": "shneim asar",
-   "note": "Masculine with masculine nouns (שְׁנֵים עָשָׂר …), feminine with feminine nouns (שְׁתֵּים עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "שנים עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שְׁנֵים עָשָׂר",
     "NUM;FEM": "שְׁתֵּים עֶשְׂרֵה"
    },
+   "note": "Masculine with masculine nouns (שְׁנֵים עָשָׂר …), feminine with feminine nouns (שְׁתֵּים עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -273,16 +325,20 @@
    "id": "he:shlosha-asar",
    "lemma": "שְׁלוֹשָׁה עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.13"
    ],
-   "class": "gender",
    "translit": "shlosha asar",
-   "note": "Masculine with masculine nouns (שְׁלוֹשָׁה עָשָׂר …), feminine with feminine nouns (שְׁלוֹשׁ עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "שלושה עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שְׁלוֹשָׁה עָשָׂר",
     "NUM;FEM": "שְׁלוֹשׁ עֶשְׂרֵה"
    },
+   "note": "Masculine with masculine nouns (שְׁלוֹשָׁה עָשָׂר …), feminine with feminine nouns (שְׁלוֹשׁ עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -292,16 +348,20 @@
    "id": "he:arbaa-asar",
    "lemma": "אַרְבָּעָה עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.14"
    ],
-   "class": "gender",
    "translit": "arba'a asar",
-   "note": "Masculine with masculine nouns (אַרְבָּעָה עָשָׂר …), feminine with feminine nouns (אַרְבַּע עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "ארבעה עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "אַרְבָּעָה עָשָׂר",
     "NUM;FEM": "אַרְבַּע עֶשְׂרֵה"
    },
+   "note": "Masculine with masculine nouns (אַרְבָּעָה עָשָׂר …), feminine with feminine nouns (אַרְבַּע עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -311,12 +371,15 @@
    "id": "he:chamisha-asar",
    "lemma": "חֲמִשָּׁה עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.15"
    ],
-   "class": "gender",
    "translit": "chamisha asar",
-   "note": "Masculine with masculine nouns (חֲמִשָּׁה עָשָׂר …), feminine with feminine nouns (חֲמֵשׁ עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "חמישה עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "חֲמִשָּׁה עָשָׂר",
     "NUM;FEM": "חֲמֵשׁ עֶשְׂרֵה"
@@ -324,6 +387,7 @@
    "plene": {
     "NUM;MASC": "חמישה עשר"
    },
+   "note": "Masculine with masculine nouns (חֲמִשָּׁה עָשָׂר …), feminine with feminine nouns (חֲמֵשׁ עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -336,12 +400,15 @@
    "id": "he:shisha-asar",
    "lemma": "שִׁשָּׁה עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.16"
    ],
-   "class": "gender",
    "translit": "shisha asar",
-   "note": "Masculine with masculine nouns (שִׁשָּׁה עָשָׂר …), feminine with feminine nouns (שֵׁשׁ עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "שישה עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שִׁשָּׁה עָשָׂר",
     "NUM;FEM": "שֵׁשׁ עֶשְׂרֵה"
@@ -349,6 +416,7 @@
    "plene": {
     "NUM;MASC": "שישה עשר"
    },
+   "note": "Masculine with masculine nouns (שִׁשָּׁה עָשָׂר …), feminine with feminine nouns (שֵׁשׁ עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -361,16 +429,20 @@
    "id": "he:shiva-asar",
    "lemma": "שִׁבְעָה עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.17"
    ],
-   "class": "gender",
    "translit": "shiv'a asar",
-   "note": "Masculine with masculine nouns (שִׁבְעָה עָשָׂר …), feminine with feminine nouns (שְׁבַע עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "שבעה עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שִׁבְעָה עָשָׂר",
     "NUM;FEM": "שְׁבַע עֶשְׂרֵה"
    },
+   "note": "Masculine with masculine nouns (שִׁבְעָה עָשָׂר …), feminine with feminine nouns (שְׁבַע עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -380,16 +452,20 @@
    "id": "he:shmona-asar",
    "lemma": "שְׁמוֹנָה עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.18"
    ],
-   "class": "gender",
    "translit": "shmona asar",
-   "note": "Masculine with masculine nouns (שְׁמוֹנָה עָשָׂר …), feminine with feminine nouns (שְׁמוֹנֶה עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "שמונה עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "שְׁמוֹנָה עָשָׂר",
     "NUM;FEM": "שְׁמוֹנֶה עֶשְׂרֵה"
    },
+   "note": "Masculine with masculine nouns (שְׁמוֹנָה עָשָׂר …), feminine with feminine nouns (שְׁמוֹנֶה עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -399,16 +475,20 @@
    "id": "he:tisha-asar",
    "lemma": "תִּשְׁעָה עָשָׂר",
    "pos": "NUM",
+   "class": "gender",
    "senses": [
     "num.19"
    ],
-   "class": "gender",
    "translit": "tish'a asar",
-   "note": "Masculine with masculine nouns (תִּשְׁעָה עָשָׂר …), feminine with feminine nouns (תְּשַׁע עֶשְׂרֵה …); the noun after it is plural.",
+   "features": {
+    "spelling": "תשעה עשר",
+    "position": "before"
+   },
    "forms": {
     "NUM;MASC": "תִּשְׁעָה עָשָׂר",
     "NUM;FEM": "תְּשַׁע עֶשְׂרֵה"
    },
+   "note": "Masculine with masculine nouns (תִּשְׁעָה עָשָׂר …), feminine with feminine nouns (תְּשַׁע עֶשְׂרֵה …); the noun after it is plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -422,6 +502,10 @@
     "num.20"
    ],
    "translit": "esrim",
+   "features": {
+    "spelling": "עשרים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: עֶשְׂרִים וְאֶחָד / עֶשְׂרִים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -436,6 +520,10 @@
     "num.30"
    ],
    "translit": "shloshim",
+   "features": {
+    "spelling": "שלושים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שְׁלוֹשִׁים וְאֶחָד / שְׁלוֹשִׁים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -450,6 +538,10 @@
     "num.40"
    ],
    "translit": "arba'im",
+   "features": {
+    "spelling": "ארבעים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: אַרְבָּעִים וְאֶחָד / אַרְבָּעִים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -464,6 +556,13 @@
     "num.50"
    ],
    "translit": "chamishim",
+   "alts": [
+    "חמישים"
+   ],
+   "features": {
+    "spelling": "חמישים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: חֲמִשִּׁים וְאֶחָד / חֲמִשִּׁים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -478,6 +577,13 @@
     "num.60"
    ],
    "translit": "shishim",
+   "alts": [
+    "שישים"
+   ],
+   "features": {
+    "spelling": "שישים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שִׁשִּׁים וְאֶחָד / שִׁשִּׁים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -492,6 +598,10 @@
     "num.70"
    ],
    "translit": "shiv'im",
+   "features": {
+    "spelling": "שבעים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שִׁבְעִים וְאֶחָד / שִׁבְעִים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -506,6 +616,10 @@
     "num.80"
    ],
    "translit": "shmonim",
+   "features": {
+    "spelling": "שמונים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: שְׁמוֹנִים וְאֶחָד / שְׁמוֹנִים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -520,6 +634,10 @@
     "num.90"
    ],
    "translit": "tish'im",
+   "features": {
+    "spelling": "תשעים",
+    "position": "before"
+   },
    "note": "The same form for masculine and feminine nouns; 21, 22 … are said ten first: תִּשְׁעִים וְאֶחָד / תִּשְׁעִים וְאַחַת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -530,12 +648,15 @@
    "id": "he:mea",
    "lemma": "מֵאָה",
    "pos": "NUM",
+   "class": "dual",
    "senses": [
     "num.100"
    ],
-   "class": "dual",
    "translit": "me'a",
-   "note": "Feminine: 200 is the dual מָאתַיִם, 300–900 the feminine number + the plural מֵאוֹת (שְׁלוֹשׁ מֵאוֹת). Alone, מֵאוֹת = “hundreds”.",
+   "features": {
+    "spelling": "מאה",
+    "position": "before"
+   },
    "forms": {
     "NUM;SG": "מֵאָה",
     "NUM;DU": "מָאתַיִם",
@@ -544,6 +665,7 @@
    "plene": {
     "NUM;DU": "מאתיים"
    },
+   "note": "Feminine: 200 is the dual מָאתַיִם, 300–900 the feminine number + the plural מֵאוֹת (שְׁלוֹשׁ מֵאוֹת). Alone, מֵאוֹת = “hundreds”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -553,12 +675,15 @@
    "id": "he:elef",
    "lemma": "אֶלֶף",
    "pos": "NUM",
+   "class": "dual",
    "senses": [
     "num.1000"
    ],
-   "class": "dual",
    "translit": "elef",
-   "note": "Masculine: 2000 is the dual אַלְפַּיִם, 3000–9000 the masculine construct + the plural אֲלָפִים (שְׁלוֹשֶׁת אֲלָפִים). Alone, אֲלָפִים = “thousands”.",
+   "features": {
+    "spelling": "אלף",
+    "position": "before"
+   },
    "forms": {
     "NUM;SG": "אֶלֶף",
     "NUM;DU": "אַלְפַּיִם",
@@ -567,6 +692,7 @@
    "plene": {
     "NUM;DU": "אלפיים"
    },
+   "note": "Masculine: 2000 is the dual אַלְפַּיִם, 3000–9000 the masculine construct + the plural אֲלָפִים (שְׁלוֹשֶׁת אֲלָפִים). Alone, אֲלָפִים = “thousands”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -577,9 +703,17 @@
    "lemma": "הַרְבֵּה",
    "pos": "DET",
    "senses": [
-    "quant.many"
+    "quant.many",
+    "adv.alot"
    ],
    "translit": "harbe",
+   "features": {
+    "spelling": "הרבה",
+    "position": "before",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "Invariable: הַרְבֵּה סְפָרִים, הַרְבֵּה מִטּוֹת, הַרְבֵּה נְיָר — before the noun, no article on the noun.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -607,7 +741,8 @@
       "def": "a lot, much (after a verb or alone)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alot"
      }
     ],
     "examples": [
@@ -687,10 +822,27 @@
    "lemma": "מְעַט",
    "pos": "ADV",
    "senses": [
-    "quant.few"
+    "quant.few",
+    "adv.alittle"
    ],
    "translit": "me'at",
+   "features": {
+    "spelling": "מעט",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "Invariable, before the noun: מְעַט אֲנָשִׁים “few people”, מְעַט זְמַן “little time”. In casual speech “few” is more often לֹא הַרְבֵּה.",
+   "contrasts": [
+    {
+     "concept": "adv.alittle",
+     "axis": "register",
+     "value": "formal (“slightly”)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -717,7 +869,8 @@
       "def": "a little, slightly (before an adjective)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adv.alittle"
      }
     ],
     "examples": [
@@ -811,10 +964,30 @@
    "pos": "DET",
    "senses": [
     "quant.alittle",
-    "quant.some"
+    "quant.some",
+    "adv.alittle"
    ],
    "translit": "ktsat",
+   "features": {
+    "spelling": "קצת",
+    "position": "before",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "Invariable. Before a mass noun: קְצָת נְיָר “a little / some paper”; before an adjective it softens: קְצָת קָשֶׁה “a bit hard”.",
+   "contrasts": [
+    {
+     "concept": "adv.alittle",
+     "axis": "register",
+     "value": "everyday (“a bit”)"
+    },
+    {
+     "concept": "quant.some",
+     "axis": "count or amount",
+     "value": "an amount you do not count (קְצָת לֶחֶם)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -849,7 +1022,8 @@
       "def": "a bit, somewhat (with an adjective or a verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alittle"
      }
     ],
     "examples": [
@@ -942,10 +1116,31 @@
    "lemma": "כָּל",
    "pos": "DET",
    "senses": [
-    "quant.all"
+    "quant.all",
+    "quant.every",
+    "det.any"
    ],
    "translit": "kol",
+   "features": {
+    "spelling": "כל",
+    "position": "before",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "Pronounced kol (the vowel is a qamats katan). כָּל + a definite noun = all / the whole (כָּל הַסְּפָרִים, כָּל הַמִּשְׁפָּחָה); כָּל + an indefinite singular = every (כָּל יוֹם). Alone: הַכֹּל “everything”.",
+   "contrasts": [
+    {
+     "concept": "quant.all",
+     "axis": "with a noun or alone",
+     "value": "before a noun (כָּל הַסְּפָרִים)"
+    },
+    {
+     "concept": "det.any",
+     "axis": "kind of sentence",
+     "value": "statements and open choices (כָּל אֶחָד, כָּל דָּבָר)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -975,14 +1170,16 @@
       "def": "every, each (before an indefinite singular noun): כָּל יוֹם “every day”",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "quant.every"
      },
      {
       "id": "s3",
       "def": "any (in negative or open sentences): כָּל דָּבָר “anything”",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "det.any"
      }
     ],
     "examples": [
@@ -1086,7 +1283,19 @@
     "quant.all"
    ],
    "translit": "kulam",
-   "note": "כֹּל “all” with a personal ending: כֻּלָּנוּ “all of us”, כֻּלְּכֶם / כֻּלְּכֶן “all of you”, כֻּלָּם / כֻּלָּן “all of them”; כֻּלָּם alone = “everyone”.",
+   "features": {
+    "spelling": "כולם",
+    "agreement": "inflected",
+    "meaningForms": [
+     {
+      "form": "כֻּלָּנוּ, כֻּלְּכֶם, כֻּלְּכֶן",
+      "senses": [
+       "s2"
+      ],
+      "note": "“all of us”, “all of you”"
+     }
+    ]
+   },
    "forms": {
     "PRON;1;PL": "כֻּלָּנוּ",
     "PRON;2;PL;MASC": "כֻּלְּכֶם",
@@ -1101,6 +1310,14 @@
     "PRON;3;PL;MASC": "כולם",
     "PRON;3;PL;FEM": "כולן"
    },
+   "note": "כֹּל “all” with a personal ending: כֻּלָּנוּ “all of us”, כֻּלְּכֶם / כֻּלְּכֶן “all of you”, כֻּלָּם / כֻּלָּן “all of them”; כֻּלָּם alone = “everyone”.",
+   "contrasts": [
+    {
+     "concept": "quant.all",
+     "axis": "with a noun or alone",
+     "value": "alone, with a personal ending (כֻּלָּם, כֻּלָּנוּ)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1127,7 +1344,8 @@
       "def": "all of us / all of you (כֻּלָּנוּ, כֻּלְּכֶם, כֻּלְּכֶן)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1205,10 +1423,30 @@
    "pos": "DET",
    "senses": [
     "quant.some",
-    "q.howmany"
+    "q.howmany",
+    "adv.how.excl"
    ],
    "translit": "kama",
+   "features": {
+    "spelling": "כמה",
+    "position": "before",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "Invariable, before a plural noun: כַּמָּה סְפָרִים “a few books”. The same word asks “how many / how much?” (lesson 10): only the question shows the difference.",
+   "contrasts": [
+    {
+     "concept": "quant.some",
+     "axis": "count or amount",
+     "value": "a few things you count (כַּמָּה סְפָרִים)"
+    },
+    {
+     "concept": "adv.how.excl",
+     "axis": "register",
+     "value": "everyday (כַּמָּה יָפֶה!)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1243,7 +1481,8 @@
       "def": "how (very)! (in exclamations): כַּמָּה יָפֶה!",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.how.excl"
      }
     ],
     "examples": [

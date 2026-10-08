@@ -8,6 +8,11 @@
 > course, and the path of each language type) keep one common order of the subjects: a path may add steps of its own
 > or skip some, but no subject comes after a common subject in one path and before it in another. Every new language,
 > node or move is designed with **all** the paths in view; a subject moves in all languages at once or not at all.
+>
+> **Hard requirements (D14, D15).** A new language starts with its **catalogue of phenomena** (§4.11). Every word states
+> its language's whole **facade** (`features` per `wordFeatures`, a value or `none` with a reason); several words for one
+> concept say what separates them (`contrasts`); **every distinct meaning of a word is a concept** (pending until taught),
+> and each meaning's view of the word shows the others.
 
 | Phase | What | Status |
 |---|---|---|
@@ -16,6 +21,7 @@
 | P2 | Pilot content v1 (ar, he, zh, de; explanations in English): core spine 1 + vegetables I–III | ✅ 2026-10-08 (the next core nodes continue as content batches alongside P3+) |
 | P3 | UI shell + vocabulary lane + flag cards + field maps + daily session | ✅ v1 2026-10-08 (P3b: pictures, field sorting) |
 | P3c | **Foundations** (D9–D12): S00 = overview of the language types and of the language; 19 parallel steps of mixed lessons (complete thematic word groups + grammar + first sentences), the grammar of each step per language type; grammar pages with links across the languages; sentence exercises | ✅ 2026-10-08 (ar, he, zh, de: S00–S18 written, validated `--strict`, ref-checked) |
+| P3d | **Rules across all languages** (D13–D15): the parallel order as a validated constraint; the catalogue of phenomena of every language (ar, he, zh, de); the facade of every word (`wordFeatures` / `features`); contrasts; every meaning a concept | ✅ 2026-10-08 |
 | P4 | Script modules (Arabic, Hebrew, Chinese) + keyboards + RTL | ⬜ |
 | P5 | Grammar lane: functions, paradigms, decision procedures, generators, feasibility, bank refills | ⬜ |
 | P6 | Polyglot layer: comparisons, bridges, confusables, parallel exercises, interleaved sessions | ⬜ |
@@ -62,6 +68,8 @@ The app in use must never be affected or left half-done by this work.
 | D11 | The first lesson (2026-10-08, asked by the user) | **Lesson S00 of every language is an overview**: the four morphological types explained with examples (shared text, `core/typology.json`), then the language itself — family, script and direction, sounds/tones, where it stands among the types and why, **its peculiarities that matter from the very beginning** (e.g. no *to be* in the present, roots of three consonants, unwritten vowels, three genders and four cases, tones, measure words, vowel harmony), what will be easy or hard given the languages the learner already knows (`course.knownLanguages`), how its path through the steps differs from the other types — and a short quiz. Greetings come right after the personal pronouns (S02). |
 | D12 | Verbs, cases, clauses, aspect and mood — how much in the foundations (2026-10-08, asked by the user) | The foundations teach the **basics** of each, in the form of the language's type (fusional: conjugation and declension tables; agglutinating: the suffixes; isolating: particles and word order; polysynthetic: the markers inside the verb): **the present tense in all three persons, singular and plural** (S07); **cases** — what a case is and the subject form, the nominative (S04), the direct object, the accusative, with transitive verbs (S07), the cases after prepositions with *where / where to / where from* (S11–S13); **mood** — statements, questions (S09, S10) and the imperative (S13); **clauses** — joined and subordinate clauses with the linking words (S18); **aspect** only where the language needs it from the start (Chinese 了 / 过, S14). Right after the foundations comes the **core grammar** (§4.4.2: past and aspect, future, two objects and the dative, modal verbs, wishes and the subjunctive / conditional, relative clauses, reflexive verbs), taught in the same parallel way, alongside the thematic fields. |
 | D13 | **The parallel order — a hard constraint** (2026-10-08, asked by the user) | All the language paths of the app — every language of every course, and the path of every language type (the path a language still to come would walk) — keep **one common order of the subjects**. Lay the paths side by side: a subject they share (the same node, grammar function or concept) sits at the same place in all of them; a path may have extra steps of its own between two common subjects, or lack some, and then its line simply stretches to the next common subject. **No subject x comes after a common subject y in any path if x comes before y in at least one path.** When a subject should move (because it helps the learning), it moves in **all** languages at once, after analysing every path (§4.4.3). Enforced by `validate_lang.py` against all the courses of `library/languages`. |
+| D14 | **Every language first gets its catalogue of phenomena, and every word its language's "facade"** (2026-10-08, asked by the user) | The course stores **concepts**; each language gives a concept its own **facade**: the word(s) and the **parameters this language needs for such a word** (Arabic nouns: root, pattern, the plurals — several, each tied to its meanings —, dual, human or not, diptote …; Hebrew: binyan, construct forms, root class …; Chinese: measure words, readings and traditional forms per meaning, splitting verbs …; German: plural class, auxiliary, case frame, separable prefix …). The parameters are declared per part of speech in `language.json` (`wordFeatures`, §4.5.1) and **every word states each of them** — a value, or `{"none": "<why>"}` — in its `features`. Before a language is added, its **catalogue of phenomena** is written first (`library/languages/_phenomena/<code>.json`, §4.11): everything special or uncommon about it (and notable things shared with others), how the app records and teaches each one, and what is still missing; the declarations and the course are built from it, and the catalogue keeps track of the coverage. **Concepts may be augmented or reduced per language**: a language adds its own concepts and words (roots, measure words, particles), lacks others (`absent`), or **splits** one concept into several words by an axis other languages do not mark (zh 还是 / 或者 "or", 如果 / 是否, 拿 / 带; ar paternal / maternal uncle; de gehen / fahren) — every such word then says what separates it (`contrasts`, §4.5.2). |
+| D15 | **A word with several meanings belongs to several concepts** (2026-10-08, asked by the user) | Every distinct meaning of a word is its own concept (天 = day **and** sky; بَيْت = house **and** verse of a poem, with its own plural أَبْيَات; Bank = bank **and** bench, with the plurals Banken / Bänke). A meaning that the course does not teach yet is a **pending concept** (in its field, without a node, §4.3), so the word already belongs to it and the course can place it later. A nuance or use of the same meaning is not a new concept: the sense says `of` the sense it belongs to. Wherever the word is shown for one of its meanings, the **other meanings are shown with it** (with their forms when they differ: another plural, reading, traditional character, auxiliary), linked to their concepts. |
 
 ## 2. Principles
 
@@ -141,6 +149,7 @@ Graded texts built from known vocabulary (0 unknown words in drills, at most 1 g
 ```
 library/languages/<course-id>/            shared course   (or accounts/<profile>/packs/<course-id>/ when private)
   course.json                 noema.langcourse/v1 — id, title, explainLang, languages, defaults
+library/languages/_phenomena/<code>.json   the catalogue of phenomena of a language (§4.11), shared by all its courses — written FIRST
   core/
     fields/<field>.json       concepts of one thematic field (subgroups, tiers, images, Wikidata ids)
     nodes.json                the vocabulary DAG
@@ -185,6 +194,7 @@ library/languages/<course-id>/            shared course   (or accounts/<profile>
 * `tier` 1 = common, 2 = intermediate, 3 = rare (the exhaustive tail). `rank` orders items inside a tier (frequency).
 * `sources` is required: how the list was made exhaustive.
 * `gloss` and `note` are in `explainLang`.
+* `"pending": true` — a **meaning known from a word of the course but not taught yet** (D15): it belongs to no node (yet), every other concept belongs to exactly one. When a node takes it, `pending` goes. A concept may serve one language only (a Chinese particle, an Arabic oath formula): concepts are the meanings the course's words have, not a fixed list.
 
 ### 4.4 The vocabulary DAG — `nodes.json`
 ```json
@@ -288,7 +298,36 @@ lang4  A-------L-----B----------------N--------------E
 * Words that attach to the next word (ar وَ, he וְ …) have `"prefix": true`; in a sentence they are a token with `parts` (§4.8).
 * Words without a shared concept (he אֶת, zh 个) have `"senses": []` and a `role` text; they belong to the node of their file.
 * `ref` records how the item was checked (§11); unchecked items fail the build unless `ref.override` gives a reason.
-* Language-specific fields: de `gender`, `plural`, `separable`, `aux` (haben/sein), `governs` (case frame); ar `root`, `pattern`, `verbForm` (I–X), `masdar`, `brokenPlural`, `diptote`; he `root`, `binyan`, `mishkal`, `construct`, `ktivMale`; zh `trad`, `pinyin`, `measure`, characters via `chars.json`.
+* **Everything a language needs to say about a word beyond these shared fields is in `features`**, as declared by the language (§4.5.1). Shared top-level fields: `id`, `lemma`, `pos`, `class` (paradigm class), `senses`, `forms`, `formsAlt`, `alts`, `prefix`, `role`, `gender`, `translit`, `pinyin`, `trad`, `plene`, `variants`, `contrasts`, `ref`, `profile`.
+
+#### 4.5.1 The facade of a word: `wordFeatures` (language.json) and `features` (lexeme) — D14
+```json
+"wordFeatures": { "NOUN": [
+    { "id": "root", "title": "root", "phenomenon": "ar.morph.root", "type": "string", "none": true, "why": "…" },
+    { "id": "plurals", "title": "plurals", "phenomenon": "ar.morph.plural.broken", "type": "list", "none": true,
+      "item": { "form": "string", "kind": "enum:broken|soundMasc|soundFem", "pattern": "string?", "senses": "senses" } },
+    { "id": "human", "title": "human (agreement)", "phenomenon": "ar.syntax.agreement.nonhuman", "type": "bool" },
+    { "id": "unit", "title": "unit noun", "type": "string", "classes": ["NOUN.collective"] } ] }
+```
+```json
+{ "id": "ar:bayt", "lemma": "بَيْت", "pos": "NOUN", "senses": ["home.house", "place.home", "lit.verse", "family.household"],
+  "features": { "root": "ب ي ت", "pattern": "فَعْل", "human": false,
+    "plurals": [ { "form": "بُيُوت", "kind": "broken", "pattern": "فُعُول", "senses": ["s1", "s4", "s3"] },
+                 { "form": "أَبْيَات", "kind": "broken", "pattern": "أَفْعَال", "senses": ["s2"] } ],
+    "dual": "بَيْتَانِ", "diptote": [], "construct": { "none": "regular" } } }
+```
+* Types: `enum` (`values`), `string`, `strings`, `bool`, `int`, `list` (objects; `item` gives each key's type: `string`, `strings`, `bool`, `int`, `enum:a|b`, `senses` = ids of the word's profile senses, `lexeme` = a lexeme id, `cell` = a paradigm cell; `?` = optional). `classes` limits a parameter to some classes (`NOUN.collective`); `"at": "top"` marks a shared top-level field (`gender`, `pinyin` …) that the declaration only makes required for that part of speech.
+* **Every word of that part of speech states every parameter**: a value, or `{"none": "<why>"}` when the declaration allows it (`none: true`) — "not thought of" is never a valid state. A meaning that has its own forms says so with `senses` on the item (each sense's plural, reading, traditional character, auxiliary …).
+* The parameters are this language's — their ids are shared across languages when the idea is the same (`root`, `pattern`, `plurals`, `dual`, `governs`, `separable`, `pair`, `construct`, `measure`).
+* Every parameter names the phenomenon of the catalogue it records (§4.11). The word card shows the parameters with their titles; generators read them (principal parts, plural drills, measure words, agreement).
+
+#### 4.5.2 One concept, several words: `contrasts` (D14)
+When a language has two or more words for one concept, each of them says what separates it, on one axis per concept:
+```json
+"contrasts": [ { "concept": "conj.or", "axis": "question or statement", "value": "in questions: A or B?" } ]   (还是)
+"contrasts": [ { "concept": "conj.or", "axis": "question or statement", "value": "in statements" } ]          (或者)
+```
+The validator requires it for every concept with several words in a language (same axis, different values); exercises use it (which word here?).
 
 ### 4.6 Word profile — every word in depth
 
@@ -317,7 +356,7 @@ Every **content word** (noun, verb, adjective, adverb) is taught in depth, not a
 
 | Part | What it shows | Minimum (content words) |
 |---|---|---|
-| `senses` | every meaning, each with its own register and domain; the course concept is one of them | ≥ 1, and every concept of the word has a sense |
+| `senses` | every meaning, each with its own register and domain; **each distinct meaning has its `concept`** (pending if the course does not teach it yet, D15), a nuance or use of a meaning says `of` that sense | ≥ 1; every concept of the word has a sense and every sense has `concept` or `of`; the word's `senses` list = the concepts of its profile senses |
 | `examples` | the word in real sentences, each labelled with **register**, **context** and **sense**, with a translation (Chinese: also `py` pinyin) | ≥ 3, in ≥ 2 contexts; ≥ 2 for the concept's sense; each must contain a form of the word (vowel marks included); ar/he fully vocalized |
 | `register`, `status`, `frequency` | neutral / formal / informal / colloquial / slang / vulgar / literary / poetic / technical / regional / dated / archaic / obsolete / humorous / pejorative / euphemistic / honorific …; current / dated / archaic / obsolete / rare / neologism; CEFR level | required |
 | `connotation`, `intensity`, `feeling` | the emotional colour, the strength on a 1–5 scale for scalar words, what the word evokes | connotation + feeling required |
@@ -382,6 +421,23 @@ Per language — `lang/<code>/grammar/<id>.json`:
 ### 4.10 Comparisons, confusables, bridges
 * `compare/<function>.json`: rows (aspect of the function) × columns (course languages), each cell a short statement + example sentence id; plus `common`, `differs`, `interference` notes (where learning one will mislead in another).
 * `confusables.json` (per language) and the cross-language list in `bridges.json` (`kind: cognate | loan | falseFriend | lookAlike`), e.g. ar kitāb ↔ he ktav (root k-t-b) ↔ tr kitap (known language) ↔ hi kitāb.
+
+### 4.11 The catalogue of phenomena — `library/languages/_phenomena/<code>.json` (D14)
+**Written first when a language is added** (before any course content), shared by every course with that language, and kept up to date:
+```json
+{ "format": "noema.langphenomena/v1", "lang": "ar", "name": "Arabic (Modern Standard)", "typology": "fusional", "summary": "…", "sources": ["…"],
+  "phenomena": [ { "id": "ar.morph.plural.broken", "title": "Broken plurals", "area": "morphology", "pos": ["NOUN", "ADJ"],
+      "rarity": "rare", "sharedWith": ["he"], "what": "…", "examples": [{ "text": "كِتَاب → كُتُب", "translit": "kitāb → kutub", "note": "book → books" }],
+      "level": "word", "record": "features.plurals (per sense)",
+      "model": { "wordFields": ["plurals"], "paradigm": ["N;NOM;PL;INDF"], "grammar": ["fn.plural.noun"], "exercises": ["principal_parts"], "other": "" },
+      "status": "covered | partial | missing", "gap": "…", "when": "fd.05" } ],
+  "wordFeatures": { … the proposal the language.json declaration comes from … },
+  "distinctions": [ { "concept": "conj.or", "axis": "…", "words": [{ "lemma": "…", "value": "…" }] } ],
+  "polysemy": [ { "lexeme": "zh:tian", "meanings": [{ "gloss": "day", "concept": "time.day" }, { "gloss": "sky", "concept": "nature.sky" }] } ],
+  "conceptGaps": [ { "concept": "det.indef", "kind": "lacks | adds | merges | splits", "note": "…" } ] }
+```
+* **Every area**: script and orthography, phonology and prosody, the morphology of every part of speech, syntax, lexicon and semantics (one concept / several words, one word / several concepts, false friends), register and diglossia, pragmatics and politeness, culture-bound concepts, numbers, time and calendars — everything special or uncommon, and notable things shared with other languages (`sharedWith`).
+* `tools/lang_phenomena.py` reports the coverage and checks the catalogue against the implementation: every word-level phenomenon is recorded by a declared parameter, the named functions exist, the named exercise types are implemented; `status` says honestly what is still missing (`gap`). The validator requires the catalogue for every course language.
 
 ---
 
@@ -590,14 +646,14 @@ Input: due reviews (per language), next batches of open nodes, one trainable fun
 ## 10. Creating courses and content through Claude
 
 * **✨ New language course** (subject picker): title, languages, explanation language (default English), depth per language, known languages. Like curricula, three ways: the app with a Claude key, the Claude app with the connector (recommended), or Claude here in Cowork for the shared library.
-* **Task kinds** (same queue machinery as `NoemaCurJobs`): `lang.core` (spine + field lists + DAG), `lang.node` (one node × one language: lexemes + paradigms + bank sentences), `lang.function` (realization + paradigm cells + bank), `lang.compare` (one function across the course languages), `lang.script`, `lang.refill` (§7.4). Each task text contains the relevant part of this spec, the schema and the validator command — and the parallel order (D13, §4.4.3): a task that adds a language or a node, or moves one, places it on the common order of all the languages of the app.
+* **Task kinds** (same queue machinery as `NoemaCurJobs`): `lang.core` (spine + field lists + DAG), `lang.node` (one node × one language: lexemes + paradigms + bank sentences), `lang.function` (realization + paradigm cells + bank), `lang.compare` (one function across the course languages), `lang.script`, `lang.refill` (§7.4). Each task text contains the relevant part of this spec, the schema and the validator command — and the parallel order (D13, §4.4.3): a task that adds a language or a node, or moves one, places it on the common order of all the languages of the app. **Adding a language starts with its catalogue of phenomena** (§4.11) and its `wordFeatures`; every word task fills the word's whole facade (D14) and gives every meaning its concept (D15).
 * **Skill**: `skill/noema-pack-builder/LANGUAGES.md` (authoring rules from §4 and §11), tools in the toolkit.
 * Night generation works as for curricula: queue many `lang.node` tasks.
 
 ## 11. Correctness and validation
 
 * `tools/schemas/noema.lang.v1.schema.json` + `tools/validate_lang.py` (offline, part of `build.py`):
-  the parallel order across all the languages and types of all the courses (D13, §4.4.3), ids unique, references resolve, word profiles complete (§4.6), DAG acyclic, each concept in one node, every concept of a node realized or `absent` in every language, paradigm cells complete, unvocalized = stripped vocalized, pinyin syllables and tone marks valid, every bank token's form equals its paradigm cell, text = joined tokens, functions really present, frames realized in all languages (or `absent`), tiers ordered, field `sources` present, all texts present in `explainLang`.
+  the parallel order across all the languages and types of all the courses (D13, §4.4.3), the catalogue of phenomena of every course language (§4.11), every word's facade complete and typed (`features` per `wordFeatures`, D14), `contrasts` for every concept with several words, every profile sense a concept or `of` another (D15), ids unique, references resolve, word profiles complete (§4.6), DAG acyclic, each concept in one node, every concept of a node realized or `absent` in every language, paradigm cells complete, unvocalized = stripped vocalized, pinyin syllables and tone marks valid, every bank token's form equals its paradigm cell, text = joined tokens, functions really present, frames realized in all languages (or `absent`), tiers ordered, field `sources` present, all texts present in `explainLang`.
 * `tools/lang_refcheck.py` (network, run by Claude while authoring): compares lexemes and paradigms with **Wiktionary data (kaikki.org)**, **CC-CEDICT** and **Unihan** (zh), **UniMorph** where available, **Make Me a Hanzi** (strokes/components); writes `ref` and a discrepancy report. **Unresolved discrepancies fail the build**; an intentional difference needs `ref.override` with a reason.
 * Images: Wikidata P18 / Commons via the existing picture library (`imglib`), recorded in `media.json`.
 * Sentences: Tatoeba (parallel sentences) may seed the bank, always re-annotated and validated.
@@ -681,6 +737,7 @@ Existing subjects and curricula must keep working unchanged; the language part i
 Working rules for every phase: read this file first; keep existing subjects untouched; full test suite green; files written into the Mac repo; commit with a clear message; update the status table above and §14.
 
 ## 14. Changelog
+- 2026-10-08 — D14 and D15 (asked by the user): the **catalogue of phenomena** of each language (`_phenomena/<code>.json`, §4.11) — written for ar (100 phenomena), he (88), zh (109), de (90) with distinctions, polysemy and concept gaps; the **facade of a word** — `wordFeatures` per part of speech in `language.json`, every word's `features` complete (§4.5.1); `contrasts` when a concept has several words (§4.5.2); **every distinct meaning a concept** (640 new pending concepts from the four lexicons, `pending` in §4.3; ~2,700 senses linked to concepts, ~380 marked `of` another sense), senses `of` another sense for nuances. The four lexicons now state their whole facade (ar 58, he 56, zh 73, de 32 parameters over the parts of speech) and 809 contrasts. A word's other meaning may be a concept taught earlier by another word (it becomes one more word for it); a grammar word may sit in a lesson with a meaning not taught yet (its `role` says why). Tools: `tools/lang_phenomena.py` (coverage report, claims checked against the implementation, part of the test suite); the word card shows the meanings (the one shown first, the others linked, forms per meaning, the contrast) and the facade.
 - 2026-10-08 — D13 (asked by the user): **the parallel order is a hard constraint** — all the paths of all the languages (and of the four language types) keep one common order of the subjects; extra or missing steps in between are fine, opposite orders are not; a subject moves in all languages at once, after analysing all of them (§4.4.3). The foundations S00–S18 already satisfied it (one shared node order; type and language grammar inside the common steps). `validate_lang.py` now checks it within a course and against every other course in `library/languages` (with negative tests: two subjects in opposite orders, a circle through three paths, a second course in another order); the daily session offers free grammar in the course order too (it was ordered by the number of prerequisites).
 - 2026-10-08 — Content batch B6 (S16 adjectives with their full paradigms — German strong / weak / mixed, Arabic gender × number × case × definiteness and the elative, Hebrew four forms ± article; S17 colours and comparison; S18 linking words and subordinate clauses): **the foundations S00–S18 are complete in Arabic, Hebrew, Chinese and German** (466 / 476 / 633 / 575 words with full profiles, ~1000–1400 bank sentences per language), the whole course validates `--strict`, no disagreement with Wiktionary. The overview of each language describes its path through the 19 steps. Build: the word profiles go into `course.profiles.js`, loaded after the course has opened (the course file halves to ~4 MB). Evidence tags may be alternatives (`[["CMPR"], ["SPRL"]]`); transform generators honour `bank.frames`; labels for German strong / weak / mixed endings.
 - 2026-10-08 — Content batch B5 (S13 going and coming, transport, the imperative; S14 the days and the day, with Chinese aspect 了 / 过 / 在; S15 months — Arabic in both naming systems —, seasons, units of time, prepositions of time) in all four languages. Tools: German separable verbs (the particle as a `V;SEP` cell; such verbs are left out of plain inflection drills), erhua syllables (huìr) checked without their r, multi-word names.

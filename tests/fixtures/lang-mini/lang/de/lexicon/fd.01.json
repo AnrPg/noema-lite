@@ -7,6 +7,9 @@
    "senses": [
     "greet.hello"
    ],
+   "features": {
+    "formality": "informal"
+   },
    "ref": {
     "src": "fixture",
     "checked": "2026-10-08"

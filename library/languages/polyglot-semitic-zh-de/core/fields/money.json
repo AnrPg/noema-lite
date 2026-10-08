@@ -1,0 +1,30 @@
+{
+ "field": "money",
+ "title": "Money",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "money.banknote",
+   "gloss": "banknote, paper money",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "money.cent",
+   "gloss": "fen, a cent (1/100 yuan)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "money.gambling",
+   "gloss": "gambling, especially online (slang euphemism, from 博彩)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  }
+ ]
+}

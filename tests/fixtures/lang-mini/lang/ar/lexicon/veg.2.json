@@ -8,6 +8,33 @@
    "senses": [
     "veg.eggplant"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَاذِنْجَانَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَاذِنْجَانَتَانِ",
+    "declension": "triptote",
+    "unit": "بَاذِنْجَانَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "root": null,
    "unit": "بَاذِنْجَانَة",
@@ -105,6 +132,33 @@
    "senses": [
     "veg.pumpkin"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword from Syriac (qarʿā), not the native root ق ر ع “to knock”"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قَرْعَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قَرْعَتَانِ",
+    "declension": "triptote",
+    "unit": "قَرْعَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "root": "ق ر ع",
    "unit": "قَرْعَة",

@@ -129,7 +129,10 @@ async function answer(page, right) {
   await page.click('button:has-text("Compare")'); await wait(150);
   ok(await page.locator('.lx-compare tr').count() === 4, 'compare: the concept in all 4 languages side by side');
   await page.click('.lx-railbtn >> nth=2'); await wait(150);   // zh
-  ok(/húluóbo/.test(await page.locator('.lx-card .lx-lemma').innerText()), 'Chinese: pinyin under the characters');
+  ok(/húluóbo/.test(await page.locator('.lx-card .lx-lemma').first().innerText()), 'Chinese: pinyin under the characters');
+  // D14 / D15: a concept with two words shows both, each with what separates it; every card shows its facade and its other meanings
+  const zhCards = await page.locator('.lx-card').count();
+  ok(zhCards >= 1 && (await page.locator('.lx-card').first().innerText()).includes('measure'), `the facade of the Chinese word (measure words) on its card (${zhCards} word(s) for carrot)`);
   await page.screenshot({ path: SHOTS + '/lx3_card.png', fullPage: true });
   const noAr = await page.evaluate(() => Object.keys(NoemaLangUI.UI.C.lang.ar.absent).find(c => c.startsWith('veg.')));
   await page.goto(url + '?account=anr&subject=' + SUBJ + '#/c/' + noAr); await wait(800);

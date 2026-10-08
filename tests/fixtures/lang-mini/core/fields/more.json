@@ -1,0 +1,79 @@
+{
+ "field": "more",
+ "title": "Other meanings (pending)",
+ "sources": [
+  "the other meanings of the mini course words (D15)"
+ ],
+ "concepts": [
+  {
+   "id": "food.gherkin",
+   "gloss": "pickled gherkin",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "obj.junk",
+   "gloss": "old banger, piece of junk",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "body.nose",
+   "gloss": "(big) nose",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "nature.bulb",
+   "gloss": "bulb (of a plant)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "obj.clock",
+   "gloss": "clock, watch",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "verb.corrode",
+   "gloss": "to eat away, to corrode",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "verb.take.medicine",
+   "gloss": "to take (medicine)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "verb.suffer",
+   "gloss": "to suffer, to endure",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "comm.tearjerker",
+   "gloss": "a sad, tear-jerking story",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "intj.cheese",
+   "gloss": "‘cheese!’ (said when taking a photo)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  }
+ ]
+}

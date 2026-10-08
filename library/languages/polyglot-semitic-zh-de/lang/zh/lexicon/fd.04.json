@@ -7,14 +7,33 @@
    "pinyin": "fáng zi",
    "pos": "NOUN",
    "senses": [
-    "home.house"
+    "home.house",
+    "home.room"
    ],
-   "measure": [
-    "栋",
-    "座",
-    "所",
-    "套",
-    "间"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "栋",
+     "座",
+     "所",
+     "套",
+     "间"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.room",
+     "axis": "standard or regional",
+     "value": "room only in some regions (in standard Mandarin 房子 is the house)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -42,14 +61,16 @@
       "def": "a flat, a home (as property: 买房子)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "room (regional: 一间房子)",
       "register": [
        "regional"
-      ]
+      ],
+      "concept": "home.room"
      }
     ],
     "examples": [
@@ -76,6 +97,22 @@
       "register": "neutral",
       "context": "property",
       "sense": "s2"
+     },
+     {
+      "text": "我家有三间房子。",
+      "py": "Wǒ jiā yǒu sān jiān fángzi.",
+      "tr": "Our home has three rooms.",
+      "register": "regional",
+      "context": "home",
+      "sense": "s3"
+     },
+     {
+      "text": "这间房子是我的卧室。",
+      "py": "Zhè jiān fángzi shì wǒ de wòshì.",
+      "tr": "This room is my bedroom.",
+      "register": "regional",
+      "context": "home",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -150,14 +187,26 @@
    "pinyin": "gōng yù",
    "pos": "NOUN",
    "senses": [
-    "home.flat"
+    "home.flat",
+    "home.apartmentbuilding"
    ],
-   "measure": [
-    "套",
-    "间",
-    "栋",
-    "座"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "套",
+     "间",
+     "栋",
+     "座"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -184,7 +233,8 @@
       "def": "apartment building, block of flats",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.apartmentbuilding"
      }
     ],
     "examples": [
@@ -275,9 +325,27 @@
    "senses": [
     "home.room"
    ],
-   "measure": [
-    "间",
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 房間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "间",
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.room",
+     "axis": "standard or regional",
+     "value": "room — standard Mandarin"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -382,12 +450,25 @@
    "pinyin": "mén",
    "pos": "NOUN",
    "senses": [
-    "home.door"
+    "home.door",
+    "measure.clf.subject",
+    "mind.school"
    ],
-   "measure": [
-    "扇",
-    "道"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 門 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "扇",
+     "道"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -414,14 +495,16 @@
       "def": "measure word for school subjects and languages (一门课)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.clf.subject"
      },
      {
       "id": "s3",
       "def": "school (of thought), sect",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "mind.school"
      }
     ],
     "examples": [
@@ -448,6 +531,14 @@
       "register": "neutral",
       "context": "university",
       "sense": "s2"
+     },
+     {
+      "text": "颜回是孔门弟子。",
+      "py": "Yán Huí shì Kǒng mén dìzǐ.",
+      "tr": "Yan Hui was a disciple of the school of Confucius.",
+      "register": "formal",
+      "context": "history",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -525,10 +616,21 @@
    "senses": [
     "home.window"
    ],
-   "measure": [
-    "扇",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 窗戶 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "扇",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -648,12 +750,24 @@
    "pinyin": "qiáng",
    "pos": "NOUN",
    "senses": [
-    "home.wall"
+    "home.wall",
+    "tech.firewall"
    ],
-   "measure": [
-    "面",
-    "堵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 牆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "面",
+     "堵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -680,7 +794,8 @@
       "def": "(internet slang) the Great Firewall — 翻墙 ‘to climb over the wall’",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "tech.firewall"
      }
     ],
     "examples": [
@@ -784,10 +899,21 @@
    "senses": [
     "home.table"
    ],
-   "measure": [
-    "张",
-    "套"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张",
+     "套"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -905,10 +1031,21 @@
    "senses": [
     "home.chair"
    ],
-   "measure": [
-    "把",
-    "张"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把",
+     "张"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1014,9 +1151,20 @@
    "senses": [
     "home.bed"
    ],
-   "measure": [
-    "张"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1043,7 +1191,8 @@
       "def": "(classical) couch, seat; possibly the railing of a well",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1142,8 +1291,26 @@
    "senses": [
     "home.cupboard"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 櫃子 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.cupboard",
+     "axis": "what it holds",
+     "value": "any cupboard or cabinet"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1259,8 +1426,26 @@
    "senses": [
     "home.cupboard"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 衣櫃 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "home.cupboard",
+     "axis": "what it holds",
+     "value": "clothes: the wardrobe"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1366,9 +1551,20 @@
    "senses": [
     "home.lamp"
    ],
-   "measure": [
-    "盏"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 燈 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "盏"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1395,7 +1591,8 @@
       "def": "traffic light (红绿灯)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1496,12 +1693,25 @@
    "pinyin": "shū",
    "pos": "NOUN",
    "senses": [
-    "obj.book"
+    "obj.book",
+    "comm.letter",
+    "verb.write"
    ],
-   "measure": [
-    "本",
-    "部"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 書 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "本",
+     "部"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1528,14 +1738,16 @@
       "def": "letter, document (in compounds: 情书 ‘love letter’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "comm.letter"
      },
      {
       "id": "s3",
       "def": "(literary) to write; script, calligraphy",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "verb.write"
      }
     ],
     "examples": [
@@ -1562,6 +1774,14 @@
       "register": "neutral",
       "context": "romance",
       "sense": "s2"
+     },
+     {
+      "text": "王羲之是有名的书法家。",
+      "py": "Wáng Xīzhī shì yǒumíng de shūfǎjiā.",
+      "tr": "Wang Xizhi is a famous calligrapher.",
+      "register": "neutral",
+      "context": "art",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1643,12 +1863,24 @@
    "pinyin": "bǐ",
    "pos": "NOUN",
    "senses": [
-    "obj.pen"
+    "obj.pen",
+    "measure.clf.sum"
    ],
-   "measure": [
-    "支",
-    "枝"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 筆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "支",
+     "枝"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1675,14 +1907,16 @@
       "def": "writing brush (毛笔)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "measure word for sums of money and deals (一笔钱)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.clf.sum"
      }
     ],
     "examples": [
@@ -1780,9 +2014,20 @@
    "senses": [
     "obj.paper"
    ],
-   "measure": [
-    "张"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紙 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1907,10 +2152,28 @@
    "senses": [
     "obj.phone"
    ],
-   "measure": [
-    "部",
-    "台",
-    "支"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 手機 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "部",
+     "台",
+     "支"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "obj.phone",
+     "axis": "kind of phone",
+     "value": "the mobile phone"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2027,10 +2290,30 @@
    "pinyin": "diàn huà",
    "pos": "NOUN",
    "senses": [
-    "obj.phone"
+    "obj.phone",
+    "comm.phonecall",
+    "comm.phonenumber"
    ],
-   "measure": [
-    "部"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 電話 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "部"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "obj.phone",
+     "axis": "kind of phone",
+     "value": "any telephone, the landline; also a call"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2058,14 +2341,16 @@
       "def": "phone call (打电话 ‘to phone’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "comm.phonecall"
      },
      {
       "id": "s3",
       "def": "phone number (colloquial)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "comm.phonenumber"
      }
     ],
     "examples": [
@@ -2162,9 +2447,20 @@
    "senses": [
     "obj.key"
    ],
-   "measure": [
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 鑰匙 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2191,7 +2487,8 @@
       "def": "key (to a solution, figuratively)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2283,11 +2580,25 @@
    "pinyin": "bāo",
    "pos": "NOUN",
    "senses": [
-    "obj.bag"
+    "obj.bag",
+    "obj.parcel",
+    "food.bun",
+    "verb.wrap"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2314,21 +2625,24 @@
       "def": "parcel, package",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.parcel"
      },
      {
       "id": "s3",
       "def": "steamed bun (in 包子)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.bun"
      },
      {
       "id": "s4",
       "def": "to wrap (verb: 包饺子 ‘to make dumplings’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.wrap"
      }
     ],
     "examples": [
@@ -2355,6 +2669,22 @@
       "register": "neutral",
       "context": "cooking",
       "sense": "s4"
+     },
+     {
+      "text": "请帮我把这些书打成一个包。",
+      "py": "Qǐng bāng wǒ bǎ zhèxiē shū dǎ chéng yí ge bāo.",
+      "tr": "Please help me pack these books into one parcel.",
+      "register": "neutral",
+      "context": "post",
+      "sense": "s2"
+     },
+     {
+      "text": "我早饭吃了两个包子。",
+      "py": "Wǒ zǎofàn chī le liǎng ge bāozi.",
+      "tr": "I had two steamed buns for breakfast.",
+      "register": "neutral",
+      "context": "breakfast",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2430,10 +2760,21 @@
    "senses": [
     "obj.cup"
    ],
-   "measure": [
-    "个",
-    "只"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "只"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2562,10 +2903,21 @@
    "senses": [
     "obj.glass"
    ],
-   "measure": [
-    "个",
-    "只"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "只"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2664,11 +3016,23 @@
    "pinyin": "pán zi",
    "pos": "NOUN",
    "senses": [
-    "obj.plate"
+    "obj.plate",
+    "obj.tray"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 盤子 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2695,7 +3059,8 @@
       "def": "tray",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.tray"
      }
     ],
     "examples": [
@@ -2722,6 +3087,14 @@
       "register": "colloquial",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "服务员端着一个盘子，上面有四杯茶。",
+      "py": "Fúwùyuán duān zhe yí ge pánzi, shàngmian yǒu sì bēi chá.",
+      "tr": "The waiter is carrying a tray with four cups of tea on it.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2790,6 +3163,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 棟 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2803,6 +3190,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2816,6 +3217,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2829,6 +3244,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2842,6 +3271,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 張 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2855,6 +3298,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2868,6 +3325,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2881,6 +3352,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2894,6 +3379,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2907,6 +3406,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 盞 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -2920,6 +3433,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "container"
+    ]
    }
   }
  ],

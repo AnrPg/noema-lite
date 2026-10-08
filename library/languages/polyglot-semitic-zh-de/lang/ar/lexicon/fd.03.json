@@ -145,7 +145,8 @@
       "def": "that (what was just said); in لِذٰلِكَ “therefore”",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -398,6 +399,17 @@
    "senses": [
     "adv.here"
    ],
+   "features": {
+    "root": {
+     "none": "a basic particle (demonstrative “here”)"
+    },
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "hunā",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -425,7 +437,8 @@
       "def": "at this point, then, now (in a story or argument)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -519,7 +532,24 @@
    "lemma": "هُنَاكَ",
    "pos": "ADV",
    "senses": [
-    "adv.there"
+    "adv.there",
+    "verb.exist"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic particle: هُنَا + ـكَ of distance"
+    },
+    "derivedFrom": "هُنَا + ـكَ (the ending of distance)",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.exist",
+     "axis": "how existence is said",
+     "value": "an adverb: there is / there are, now (هُنَاكَ مُشْكِلَةٌ)"
+    }
    ],
    "translit": "hunāka",
    "ref": {
@@ -548,7 +578,8 @@
       "def": "there is, there are (existence)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.exist"
      }
     ],
     "examples": [

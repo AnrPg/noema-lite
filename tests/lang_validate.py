@@ -105,7 +105,7 @@ expect('step that is not a number', N_(1, step='one'), 'step must be a whole num
 expect('typology text incomplete', lambda J, d: J('core/typology.json', lambda o: o['types'].pop()), 'types must be exactly')
 expect('lemma ≠ citation form', lambda J, d: J('lang/de/lexicon/core.1.json', lambda o: o['lexemes'][2].update(lemma='isst')), 'must be the V;NFIN form')
 expect('German noun without gender', lambda J, d: J('lang/de/lexicon/veg.2.json', lambda o: o['lexemes'][1].pop('gender')), 'gender is required')
-expect('Chinese noun without measure word', lambda J, d: J('lang/zh/lexicon/veg.2.json', lambda o: o['lexemes'][1].pop('measure')), 'needs its measure word')
+expect('Chinese noun without measure word', lambda J, d: J('lang/zh/lexicon/veg.2.json', lambda o: o['lexemes'][1]['features'].pop('measure')), 'does not state its measure word')
 expect('parts that do not spell the token', lambda J, d: J('lang/he/bank/basic.json', lambda o: o['sentences'][3]['tokens'][4]['parts'][0].update(t='וּ')), 'the parts do not spell the token')
 expect('unknown tag in a cell', lambda J, d: J('lang/de/language.json', lambda o: o['paradigmCells']['VERB'].append('V;PRSNT;1;SG')), 'unknown tag “PRSNT”')
 expect('field without sources', lambda J, d: J('core/fields/food.vegetables.json', lambda o: o.pop('sources')), '“sources” is required')
@@ -165,5 +165,29 @@ json.dump(nj, open(os.path.join(b_, 'core/nodes.json'), 'w', encoding='utf-8'))
 ea, ealone = validate(a_, strict=True).errors, validate(a_, strict=True, peers=[]).errors; shutil.rmtree(dd)
 hit = [e for e in ea if 'parallel order' in e and 'lang-mini-b/' in e]
 ok(bool(hit) and not any('parallel order' in e for e in ealone), f'parallel order across courses → “{hit[0][:160] if hit else ea[:2]}”')
+
+# ---------- D14: the facade of every word; D15: every meaning a concept ----------
+LX = lambda L, node, i, fn: (lambda J, d: J(f'lang/{L}/lexicon/{node}.json', lambda o: fn(o['lexemes'][i])))
+expect('a parameter not stated', LX('ar', 'veg.1', 0, lambda x: x['features'].pop('root')), 'does not state its root')
+expect('a parameter with a wrong value', LX('ar', 'veg.1', 0, lambda x: x['features'].update(declension='weird')), '“weird” is not one of')
+expect('“none” where every word has it', LX('ar', 'veg.1', 0, lambda x: x['features'].update(human={'none': 'why not'})), 'cannot be “none”')
+expect('“none” without a reason', LX('ar', 'veg.1', 0, lambda x: x['features'].update(root={'none': ''})), 'say why it is none')
+expect('an unknown parameter', LX('de', 'veg.1', 0, lambda x: x['features'].update(colour='orange')), 'features.colour: not a parameter')
+expect('a per-meaning form for an unknown meaning', LX('ar', 'veg.1', 0, lambda x: x['features']['plurals'][0].update(senses=['s9'])), 'unknown sense(s) s9')
+expect('a list item without a required key', LX('ar', 'veg.1', 0, lambda x: x['features']['plurals'][0].pop('form')), '“form” is required')
+expect('no wordFeatures', lambda J, d: J('lang/he/language.json', lambda o: o.pop('wordFeatures')), 'wordFeatures is required')
+expect('a parameter for an unknown phenomenon', lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures']['NOUN'][1].update(phenomenon='de.nothing')), 'phenomenon “de.nothing” is not in the catalogue')
+expect('a part of speech without its facade', lambda J, d: J('lang/de/language.json', lambda o: o['wordFeatures'].pop('NOUN')), 'no wordFeatures for NOUN in de')
+expect('a meaning that is neither a concept nor a nuance', LX('de', 'veg.1', 2, lambda x: x['profile']['senses'][2].pop('concept')), 'every meaning is a concept (D15)')
+expect('a nuance of nothing', LX('de', 'core.1', 2, lambda x: x['profile']['senses'][1].update(of='s7')), 'of: “s7” is not a sense of this word')
+expect('a pending concept that a node teaches', lambda J, d: J('core/fields/core.json', lambda o: o['concepts'][0].update(pending=True)), 'is pending but node')
+expect('a concept in no node that is not pending', lambda J, d: J('core/fields/more.json', lambda o: o['concepts'][0].pop('pending')), 'is in no node')
+def second_word(o):
+    x = json.loads(json.dumps(o['lexemes'][0])); x['id'] = 'zh:hongluobo'; x['lemma'] = x['trad'] = '红萝卜'; o['lexemes'].append(x)
+expect('two words for one concept without contrasts', lambda J, d: J('lang/zh/lexicon/veg.1.json', second_word), 'each says what separates it (contrasts)')
+from validate_lang import check_phenomena, V as VV
+vv = VV('.'); tmpp = tempfile.mktemp(suffix='.json'); json.dump({'format': 'noema.langphenomena/v1', 'lang': 'xx', 'phenomena': [{'id': 'xx.a', 'title': 'A', 'area': 'syntax', 'what': '…', 'status': 'partial', 'examples': [{'text': 'a'}]}]}, open(tmpp, 'w'))
+check_phenomena(vv, 'xx', tmpp); os.remove(tmpp)
+ok(any('say what is missing (gap)' in e for e in vv.errors) and any('at least 20 phenomena' in e for e in vv.errors), 'a thin catalogue of phenomena is refused (gap, every area)')
 
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

@@ -7,7 +7,15 @@
    "pinyin": "méi",
    "pos": "ADV",
    "senses": [
-    "part.not"
+    "part.not",
+    "verb.nothave"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "time and verb",
+     "value": "what did not happen or has not happened; 有"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,14 +43,16 @@
       "def": "(short for 没有) not have; there isn’t",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.nothave"
      },
      {
       "id": "s3",
       "def": "not as … as (in comparisons)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -153,6 +163,20 @@
     "subtleties": [
      "没 describes facts, 不 describes will and habits: 我不吃肉 ‘I don’t eat meat’ vs 我没吃肉 ‘I didn’t eat (the) meat’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 沒 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -162,7 +186,8 @@
    "pinyin": "shén me dōu",
    "pos": "PRON",
    "senses": [
-    "pron.nothing"
+    "pron.nothing",
+    "pron.everything"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -190,7 +215,8 @@
       "def": "(without a negation) everything, anything at all",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.everything"
      }
     ],
     "examples": [
@@ -275,9 +301,22 @@
      "Choose the negator as usual: 不 for will and habits (什么都不吃 ‘won’t eat anything’), 没 for facts (什么都没买 ‘bought nothing’), and always 什么都没有 with 有."
     ],
     "subtleties": [
+     "什么都 is a phrase, not one word: 什么 ‘what’ + 都 ‘all’. With 不 / 没 it means ‘nothing’, without a negation ‘everything’; it is kept as one entry for the concept ‘nothing’.",
      "Without a negation it means ‘everything’: 他什么都吃 ‘he eats everything’.",
      "什么都 stands before the verb even though it is the object: 我什么都不要 ‘I don’t want anything’."
     ]
+   },
+   "role": "什么都 is a phrase, not one word: 什么 ‘what’ + 都 ‘all’. With 不 / 没 it means ‘nothing’, without a negation ‘everything’; it is kept as one entry for the concept ‘nothing’.",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 什麼都 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -381,8 +420,21 @@
      "As an object Chinese does not use 没有人: ‘I don’t know anybody’ is 我谁都不认识 (S10) — not *我认识没有人."
     ],
     "subtleties": [
+     "没有人 is a phrase, not one word: 没有 ‘there is no’ + 人 ‘person’ — literally ‘there is nobody who …’; it is kept as one entry for the concept ‘nobody’.",
      "没有人 = ‘there isn’t anyone (who …)’; for ‘nobody wants / likes’ 谁都不 + verb is just as common."
     ]
+   },
+   "role": "没有人 is a phrase, not one word: 没有 ‘there is no’ + 人 ‘person’ — literally ‘there is nobody who …’; it is kept as one entry for the concept ‘nobody’.",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 沒有人 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -392,7 +444,15 @@
    "pinyin": "cóng lái",
    "pos": "ADV",
    "senses": [
-    "adv.never"
+    "adv.never",
+    "adv.always"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.always",
+     "axis": "sentence type",
+     "value": "all along — mostly with a negation (从来不 ‘never’); in positive sentences rarer"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -420,7 +480,8 @@
       "def": "always, all along (in positive sentences, less common)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.always"
      }
     ],
     "examples": [
@@ -452,6 +513,14 @@
       "text": "他从来就是这样。",
       "py": "Tā cónglái jiù shì zhèyàng.",
       "tr": "He has always been like this.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s2"
+     },
+     {
+      "text": "他从来都很认真。",
+      "py": "Tā cónglái dōu hěn rènzhēn.",
+      "tr": "He has always been very conscientious.",
       "register": "neutral",
       "context": "character",
       "sense": "s2"
@@ -503,6 +572,20 @@
     "subtleties": [
      "从来不 = never, by habit or choice; 从来没 = it has never happened."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 從來 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -540,7 +623,8 @@
       "def": "not … either, neither (me)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -611,9 +695,20 @@
      "With 有 and with past facts it is 也没: 我没有哥哥，也没有姐姐; 他没吃肉，也没吃鱼."
     ],
     "subtleties": [
+     "也不 is a phrase, not one word: 也 ‘also’ + 不 ‘not’. Repeated (不 A，也不 B) it gives ‘neither A nor B’; it is kept as one entry because the pair works as the ‘nor’ of the course.",
      "既不 … 也不 … is more formal and emphatic than 不 … 也不 ….",
      "Before a 4th tone it is said yě bú: 也不要, 也不是."
     ]
+   },
+   "role": "也不 is a phrase, not one word: 也 ‘also’ + 不 ‘not’. Repeated (不 A，也不 B) it gives ‘neither A nor B’; it is kept as one entry because the pair works as the ‘nor’ of the course.",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yě bú before a 4th-tone syllable (也不是, 也不去); yě bù before the others (也不吃)"
    }
   }
  ],

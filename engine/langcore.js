@@ -132,6 +132,13 @@
     return out;
   }
 
+  /** The stated parameters of a word (features, D14) as plain fields; a parameter stated as {none: why} is left out. */
+  function facade(x) {
+    const out = {};
+    for (const [k, v] of Object.entries(x.features || {})) if (!(v && typeof v === 'object' && !Array.isArray(v) && 'none' in v)) out[k] = v;
+    return out;
+  }
+
   /* ---------- the indexed course ---------- */
   function course(data) {
     const C = { data, id: data.course.id, explainLang: data.course.explainLang || 'en', languages: data.course.languages.slice(),
@@ -154,7 +161,7 @@
         const file = src.lexicon[nid] || { lexemes: [], absent: [] };
         X.byNode[nid] = [];
         for (const x of file.lexemes || []) {
-          const lx = { ...x, node: nid }; X.lex[x.id] = lx; X.byNode[nid].push(x.id);
+          const lx = { ...facade(x), ...x, node: nid }; X.lex[x.id] = lx; X.byNode[nid].push(x.id);   // the word's facade (features, D14) readable as fields: lx.root, lx.measure …
           for (const s of x.senses || []) (X.byConcept[s] = X.byConcept[s] || []).push(x.id);
         }
         for (const a of file.absent || []) X.absent[a.concept] = a;
@@ -456,7 +463,8 @@
   function wordCard(C, L, code, lexId, opts = {}) {
     const X = C.lang[code], lx = X.lex[lexId];
     if (!lx) throw new Error(`unknown word ${lexId} in ${code}`);
-    const p = lx.profile || {}, k = opts.k || known(C, L, code), concept = (lx.senses || [])[0] || null;
+    const p = lx.profile || {}, k = opts.k || known(C, L, code);
+    const concept = opts.concept && (lx.senses || []).includes(opts.concept) ? opts.concept : (lx.senses || [])[0] || null;   // the meaning it is shown for (D15)
     const flags = concept
       ? C.languages.map(c => ({ lang: c, state: conceptState(C, L, c, concept), words: (C.lang[c].byConcept[concept] || []).map(id => ({ lex: id, lemma: C.lang[c].lex[id].lemma })), absent: C.lang[c].absent[concept] || null }))
       : [{ lang: code, state: k.state[lexId], words: [{ lex: lexId, lemma: lx.lemma }], absent: null }];
@@ -469,7 +477,8 @@
     for (const s of p.synonyms || []) for (const r of [].concat(s.register)) (byRegister[r] = byRegister[r] || []).push(s);
     const sec = (key, title, items) => (items && (Array.isArray(items) ? items.length : Object.keys(items).length)) ? { key, title, items } : null;
     const sections = [
-      sec('senses', 'Meanings', p.senses),
+      sec('senses', 'Meanings', meanings(C, code, lx, concept)),
+      sec('facade', 'This word in ' + (X.language.name || code), facadeOf(C, code, lx)),
       sec('examples', 'In sentences — contexts and registers', examples),
       sec('collocations', 'Goes with', p.collocations),
       sec('particleVerbs', 'Verbs built on it', p.particleVerbs),
@@ -484,6 +493,43 @@
     return { lex: lexId, lang: code, lemma: lx.lemma, pos: lx.pos, concept, gloss: concept ? C.concepts[concept]?.gloss : (lx.role || ''), parts: principalParts(C, code, lx),
       state: k.state[lexId], flags, frequency: p.frequency || null, status: p.status || null, register: [].concat(p.register || []), connotation: p.connotation || null,
       intensity: p.intensity ?? null, feeling: p.feeling || '', synonymsNone: p.synonymsNone || '', examples, sections, hasProfile: !!lx.profile };
+  }
+
+  /** Every meaning of a word (D15): its concept, whether it is the meaning shown, its nuances, its own forms. */
+  function meanings(C, code, lx, concept) {
+    const ss = (lx.profile || {}).senses || [], X = C.lang[code];
+    const forms = {};   // sense id → [label: form] from the parameters whose items name senses (another plural, reading …)
+    const decl = ((X.language.wordFeatures || {})[lx.pos] || []);
+    for (const d of decl) {
+      const val = (lx.features || {})[d.id];
+      if (!Array.isArray(val)) continue;
+      for (const it of val) if (it && Array.isArray(it.senses)) {
+        const txt = Object.entries(it).filter(([k2, v2]) => k2 !== 'senses' && typeof v2 === 'string').map(([, v2]) => v2).join(' · ');
+        for (const sid of it.senses) (forms[sid] = forms[sid] || []).push({ label: d.title || d.id, text: txt });
+      }
+    }
+    const one = s => {
+      const c = s.concept || null, con = c ? C.concepts[c] : null;
+      return { id: s.id, def: s.def, register: s.register, domains: s.domains, concept: c, gloss: con?.gloss || '', pending: !!con?.pending,
+        current: !!c && c === concept, forms: forms[s.id] || [], contrast: c ? (lx.contrasts || []).find(t => t.concept === c) || null : null, words: c ? (X.byConcept[c] || []).filter(id => id !== lx.id).map(id => X.lex[id].lemma) : [],
+        nuances: ss.filter(n => n.of === s.id).map(n => ({ id: n.id, def: n.def, register: n.register, forms: forms[n.id] || [] })) };
+    };
+    const main = ss.filter(s => !s.of).map(one);
+    return main.sort((a, b) => (b.current ? 1 : 0) - (a.current ? 1 : 0));
+  }
+  /** The word's parameters as its language declares them (D14): [{title, text}] — what is stated, and what does not apply. */
+  function facadeOf(C, code, lx) {
+    const X = C.lang[code], key = lx.class ? lx.pos + '.' + lx.class : lx.pos, out = [];
+    for (const d of ((X.language.wordFeatures || {})[lx.pos] || [])) {
+      if (d.classes && !d.classes.includes(key)) continue;
+      const val = d.at === 'top' ? lx[d.id] : (lx.features || {})[d.id];
+      if (val == null) continue;
+      const show = v => v == null ? '' : typeof v === 'boolean' ? (v ? 'yes' : 'no') : Array.isArray(v) ? v.map(show).filter(Boolean).join(' · ')
+        : typeof v === 'object' ? ('none' in v ? '— ' + v.none : Object.entries(v).filter(([k2]) => k2 !== 'senses').map(([, v2]) => show(v2)).filter(Boolean).join(' ')
+          + (v.senses ? ' (' + v.senses.map(sid => ((lx.profile || {}).senses || []).find(x => x.id === sid)?.def?.split(/[;,(—]/)[0].trim() || sid).join(', ') + ')' : '')) : String(v);
+      const text = show(val); if (text) out.push({ id: d.id, title: d.title || d.id, text, none: !!(val && typeof val === 'object' && 'none' in val) });
+    }
+    return out;
   }
 
   /* ---------- exercises made from stored data (§6.7 generators) — every answer comes from the course files ---------- */

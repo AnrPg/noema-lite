@@ -7,6 +7,17 @@
    "senses": [
     "greet.hello"
    ],
+   "features": {
+    "addressee": "any",
+    "response": "مَرْحَبًا / أَهْلًا (بِكَ، بِكِ)"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.hello",
+     "axis": "register and formula",
+     "value": "neutral hello"
+    }
+   ],
    "translit": "marḥaban",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -86,6 +97,17 @@
    "pos": "INTJ",
    "senses": [
     "greet.hello"
+   ],
+   "features": {
+    "addressee": "any",
+    "response": "أَهْلًا بِكَ / بِكِ"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.hello",
+     "axis": "register and formula",
+     "value": "warm, informal; welcome"
+    }
    ],
    "translit": "ʾahlan",
    "ref": {
@@ -176,6 +198,17 @@
    "senses": [
     "greet.hello"
    ],
+   "features": {
+    "addressee": "any",
+    "response": "وَعَلَيْكُمُ السَّلَامُ"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.hello",
+     "axis": "register and formula",
+     "value": "the greeting of peace, with a fixed answer"
+    }
+   ],
    "translit": "as-salāmu ʿalaykum",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -256,6 +289,12 @@
    "lemma": "وَعَلَيْكُمُ السَّلَامُ",
    "pos": "INTJ",
    "senses": [],
+   "features": {
+    "addressee": "any",
+    "response": {
+     "none": "itself the answer to السَّلَامُ عَلَيْكُمْ"
+    }
+   },
    "role": "the fixed answer to السَّلَامُ عَلَيْكُمْ: “and upon you be peace”",
    "translit": "wa-ʿalaykumu s-salām",
    "ref": {
@@ -270,6 +309,10 @@
    "senses": [
     "greet.goodmorning"
    ],
+   "features": {
+    "addressee": "any",
+    "response": "صَبَاحُ النُّورِ"
+   },
    "translit": "ṣabāḥu l-ḫayr",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -334,6 +377,12 @@
    "lemma": "صَبَاحُ النُّورِ",
    "pos": "INTJ",
    "senses": [],
+   "features": {
+    "addressee": "any",
+    "response": {
+     "none": "itself the answer to صَبَاحُ الْخَيْرِ"
+    }
+   },
    "role": "the usual answer to صَبَاحُ الْخَيْرِ: “morning of light”",
    "translit": "ṣabāḥu n-nūr",
    "ref": {
@@ -348,6 +397,10 @@
    "senses": [
     "greet.goodevening"
    ],
+   "features": {
+    "addressee": "any",
+    "response": "مَسَاءُ النُّورِ"
+   },
    "translit": "masāʾu l-ḫayr",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -405,6 +458,12 @@
    "lemma": "مَسَاءُ النُّورِ",
    "pos": "INTJ",
    "senses": [],
+   "features": {
+    "addressee": "any",
+    "response": {
+     "none": "itself the answer to مَسَاءُ الْخَيْرِ"
+    }
+   },
    "role": "the usual answer to مَسَاءُ الْخَيْرِ: “evening of light”",
    "translit": "masāʾu n-nūr",
    "ref": {
@@ -418,6 +477,17 @@
    "pos": "INTJ",
    "senses": [
     "greet.goodnight"
+   ],
+   "features": {
+    "addressee": "MASC",
+    "response": "وَأَنْتَ مِنْ أَهْلِهِ"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodnight",
+     "axis": "gender of the addressee",
+     "value": "to a man"
+    }
    ],
    "translit": "tuṣbiḥu ʿalā ḫayr",
    "ref": {
@@ -492,6 +562,17 @@
    "senses": [
     "greet.goodnight"
    ],
+   "features": {
+    "addressee": "FEM",
+    "response": "وَأَنْتِ مِنْ أَهْلِهِ"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodnight",
+     "axis": "gender of the addressee",
+     "value": "to a woman"
+    }
+   ],
    "translit": "tuṣbiḥīna ʿalā ḫayr",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -555,6 +636,17 @@
    "pos": "INTJ",
    "senses": [
     "greet.goodbye"
+   ],
+   "features": {
+    "addressee": "any",
+    "response": "مَعَ السَّلَامَةِ (the same)"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "formula",
+     "value": "“with safety” — the everyday goodbye"
+    }
    ],
    "translit": "maʿa s-salāma",
    "ref": {
@@ -629,6 +721,17 @@
    "senses": [
     "greet.goodbye"
    ],
+   "features": {
+    "addressee": "any",
+    "response": "إِلَى اللِّقَاءِ (the same)"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "formula",
+     "value": "“until the meeting” — see you again"
+    }
+   ],
    "translit": "ʾilā l-liqāʾ",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -698,6 +801,19 @@
    "pos": "INTJ",
    "senses": [
     "greet.seeyou"
+   ],
+   "features": {
+    "addressee": "MASC",
+    "response": {
+     "none": "no fixed answer"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.seeyou",
+     "axis": "gender of the addressee",
+     "value": "to a man"
+    }
    ],
    "translit": "ʾarāka lāḥiqan",
    "ref": {
@@ -772,6 +888,19 @@
    "senses": [
     "greet.seeyou"
    ],
+   "features": {
+    "addressee": "FEM",
+    "response": {
+     "none": "no fixed answer"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.seeyou",
+     "axis": "gender of the addressee",
+     "value": "to a woman"
+    }
+   ],
    "translit": "ʾarāki lāḥiqan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -839,6 +968,17 @@
    "pos": "INTJ",
    "senses": [
     "greet.howareyou"
+   ],
+   "features": {
+    "addressee": "MASC",
+    "response": "بِخَيْرٍ، الْحَمْدُ لِلّٰهِ"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "gender of the addressee",
+     "value": "to a man"
+    }
    ],
    "translit": "kayfa ḥāluka",
    "ref": {
@@ -921,6 +1061,17 @@
    "senses": [
     "greet.howareyou"
    ],
+   "features": {
+    "addressee": "FEM",
+    "response": "بِخَيْرٍ، الْحَمْدُ لِلّٰهِ"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "gender of the addressee",
+     "value": "to a woman"
+    }
+   ],
    "translit": "kayfa ḥāluki",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -988,6 +1139,15 @@
    "senses": [
     "greet.fine"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: بِ + خَيْر (خ ي ر)"
+    },
+    "derivedFrom": "بِ + خَيْر (good)",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "bi-ḫayr",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1018,7 +1178,8 @@
       "def": "safely, in good shape",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1084,7 +1245,15 @@
    "id": "ar:alhamdulillah",
    "lemma": "الْحَمْدُ لِلّٰهِ",
    "pos": "INTJ",
-   "senses": [],
+   "senses": [
+    "intj.thankgod"
+   ],
+   "features": {
+    "addressee": "any",
+    "response": {
+     "none": "itself an answer (to كَيْفَ حَالُكَ؟)"
+    }
+   },
    "role": "the most common answer to كَيْفَ حَالُكَ؟ — “praise be to God”, i.e. fine, thank God",
    "translit": "al-ḥamdu li-llāh",
    "ref": {
@@ -1109,7 +1278,8 @@
       "register": [
        "neutral",
        "religious"
-      ]
+      ],
+      "concept": "intj.thankgod"
      }
     ],
     "examples": [
@@ -1149,6 +1319,12 @@
    "senses": [
     "greet.myname"
    ],
+   "features": {
+    "addressee": "any",
+    "response": {
+     "none": "no fixed answer"
+    }
+   },
    "translit": "ismī",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1212,6 +1388,17 @@
    "pos": "INTJ",
    "senses": [
     "greet.nicetomeet"
+   ],
+   "features": {
+    "addressee": "any",
+    "response": "تَشَرَّفْنَا (the same)"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.nicetomeet",
+     "axis": "formula and tone",
+     "value": "“we have been honoured” — polite, formal"
+    }
    ],
    "translit": "tašarrafnā",
    "ref": {
@@ -1286,6 +1473,17 @@
    "senses": [
     "greet.nicetomeet"
    ],
+   "features": {
+    "addressee": "any",
+    "response": "وَأَنَا أَسْعَدُ"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.nicetomeet",
+     "axis": "formula and tone",
+     "value": "“a happy opportunity” — friendly"
+    }
+   ],
    "translit": "furṣa saʿīda",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1350,6 +1548,10 @@
    "senses": [
     "greet.thanks"
    ],
+   "features": {
+    "addressee": "any",
+    "response": "عَفْوًا"
+   },
    "translit": "šukran",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1439,7 +1641,21 @@
    "lemma": "عَفْوًا",
    "pos": "INTJ",
    "senses": [
-    "greet.welcome"
+    "greet.welcome",
+    "greet.excuseme"
+   ],
+   "features": {
+    "addressee": "any",
+    "response": {
+     "none": "itself the answer to شُكْرًا"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.excuseme",
+     "axis": "when it is used, and to whom",
+     "value": "pardon? — asking to repeat, or making one’s way (to anyone)"
+    }
    ],
    "translit": "ʿafwan",
    "ref": {
@@ -1468,7 +1684,8 @@
       "def": "pardon? excuse me",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "greet.excuseme"
      }
     ],
     "examples": [
@@ -1529,6 +1746,22 @@
    "pos": "ADV",
    "senses": [
     "greet.please"
+   ],
+   "features": {
+    "root": {
+     "none": "a phrase: مِنْ + فَضْل (ف ض ل) + ـكَ"
+    },
+    "derivedFrom": "مِنْ + فَضْل (kindness) + ـكَ",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.please",
+     "axis": "gender of the addressee",
+     "value": "to a man"
+    }
    ],
    "translit": "min faḍlika",
    "ref": {
@@ -1612,6 +1845,22 @@
    "senses": [
     "greet.please"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: مِنْ + فَضْل (ف ض ل) + ـكِ"
+    },
+    "derivedFrom": "مِنْ + فَضْل (kindness) + ـكِ",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.please",
+     "axis": "gender of the addressee",
+     "value": "to a woman"
+    }
+   ],
    "translit": "min faḍliki",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1689,6 +1938,19 @@
    "senses": [
     "greet.excuseme"
    ],
+   "features": {
+    "addressee": "MASC",
+    "response": {
+     "none": "no fixed answer"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.excuseme",
+     "axis": "when it is used, and to whom",
+     "value": "excuse me, to get attention or ask — to a man"
+    }
+   ],
    "translit": "law samaḥta",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1759,6 +2021,19 @@
    "senses": [
     "greet.excuseme"
    ],
+   "features": {
+    "addressee": "FEM",
+    "response": {
+     "none": "no fixed answer"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.excuseme",
+     "axis": "when it is used, and to whom",
+     "value": "excuse me, to get attention or ask — to a woman"
+    }
+   ],
    "translit": "law samaḥti",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1822,6 +2097,38 @@
    "pos": "ADJ",
    "senses": [
     "greet.sorry"
+   ],
+   "features": {
+    "root": "ء س ف",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of أَسِفَ (to regret)",
+    "feminine": "آسِفَة",
+    "plurals": [
+     {
+      "form": "آسِفُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "compared with أَكْثَرُ: أَكْثَرُ أَسَفًا (more sorry)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.sorry",
+     "axis": "agreement with the speaker or fixed formula",
+     "value": "an adjective: agrees with the speaker (آسِفٌ / آسِفَةٌ)"
+    }
    ],
    "translit": "ʾāsif",
    "forms": {
@@ -1888,7 +2195,8 @@
       "def": "regretful, sad about something",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1964,6 +2272,19 @@
    "senses": [
     "greet.sorry"
    ],
+   "features": {
+    "addressee": "any",
+    "response": {
+     "none": "no fixed answer"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.sorry",
+     "axis": "agreement with the speaker or fixed formula",
+     "value": "an invariable formula: pardon me"
+    }
+   ],
    "translit": "ʿuḏran",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2037,6 +2358,15 @@
    "senses": [
     "part.yes"
    ],
+   "features": {
+    "root": "ن ع م",
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "naʿam",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2064,7 +2394,8 @@
       "def": "yes? (answering when called; asking someone to go on)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2249,7 +2580,8 @@
     "subtleties": [
      "A first لَا to food or drink is often not taken as final in Arab hospitality — the host may insist; a firm refusal usually repeats it with thanks: لَا، شُكْرًا."
     ]
-   }
+   },
+   "prefix": false
   }
  ],
  "absent": []

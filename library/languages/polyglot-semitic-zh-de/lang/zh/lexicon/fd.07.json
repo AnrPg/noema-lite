@@ -7,7 +7,9 @@
    "pinyin": "chī",
    "pos": "VERB",
    "senses": [
-    "verb.eat"
+    "verb.eat",
+    "verb.take.medicine",
+    "verb.suffer"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,14 +37,16 @@
       "def": "to take (medicine)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.take.medicine"
      },
      {
       "id": "s3",
       "def": "to suffer, endure (吃苦, 吃亏)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.suffer"
      }
     ],
     "examples": [
@@ -135,6 +139,21 @@
     "subtleties": [
      "吃 + an experience = to undergo it: 吃苦 (endure hardship), 吃亏 (lose out), 吃惊 (be startled)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -172,7 +191,8 @@
       "def": "(specifically) to drink alcohol",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -257,6 +277,21 @@
     "subtleties": [
      "At a dinner, 喝一杯 or just 喝 usually means alcohol: 你喝吗？ may be an offer of a drink."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -294,7 +329,8 @@
       "def": "to buy off, bribe (in 收买, 买通)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -386,6 +422,21 @@
     "subtleties": [
      "买单 ‘to pay the bill’ came into Mandarin from Cantonese 埋单."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 買 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -395,7 +446,8 @@
    "pinyin": "xǐ huan",
    "pos": "VERB",
    "senses": [
-    "verb.like"
+    "verb.like",
+    "verb.usedto"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -424,7 +476,8 @@
       "def": "to tend to, to have a habit of (doing something)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.usedto"
      }
     ],
     "examples": [
@@ -522,6 +575,21 @@
      "我喜欢你 is a typical way to confess feelings; 我爱你 is much heavier.",
      "Degree words go before it: 很喜欢, 非常喜欢, 有点儿喜欢."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 喜歡 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "not a verb-object word: it does not split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -531,7 +599,17 @@
    "pinyin": "yào",
    "pos": "VERB",
    "senses": [
-    "verb.want"
+    "verb.want",
+    "verb.need",
+    "verb.begoingto",
+    "verb.must"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.want",
+     "axis": "object and strength",
+     "value": "want a thing; a firm intention"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -559,21 +637,24 @@
       "def": "to need; to take (time, money)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.need"
      },
      {
       "id": "s3",
       "def": "will; to be going to (future)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.begoingto"
      },
      {
       "id": "s4",
       "def": "should; must",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.must"
      }
     ],
     "examples": [
@@ -671,6 +752,21 @@
      "要 is direct: at a counter 我要… is normal; to elders or hosts 我想要… sounds softer.",
      "想 + verb = ‘would like to’ (a wish); 要 + verb = ‘want to, am going to’ (a firmer intention)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -680,7 +776,16 @@
    "pinyin": "xiǎng",
    "pos": "VERB",
    "senses": [
-    "verb.want"
+    "verb.want",
+    "verb.think",
+    "verb.miss"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.want",
+     "axis": "object and strength",
+     "value": "would like to (+ verb), a wish"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -700,7 +805,8 @@
       "def": "to think; to think over; to suppose",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.think"
      },
      {
       "id": "s2",
@@ -715,7 +821,8 @@
       "def": "to miss (a person, home)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.miss"
      }
     ],
     "examples": [
@@ -826,6 +933,21 @@
     "subtleties": [
      "想 = a wish (softer, may not happen); 要 = a firmer intention. 我想去 ‘I’d like to go’, 我要去 ‘I’m going to go’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -945,6 +1067,25 @@
     "subtleties": [
      "做饭 is cooking a meal in general; the technique has its own verb: 炒 ‘stir-fry’, 煮 ‘boil’, 蒸 ‘steam’, 烤 ‘roast, bake’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 做飯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": [
+     {
+      "verb": "做",
+      "object": "饭",
+      "example": "做了一顿饭"
+     }
+    ],
+    "neg": "bu+mei"
    }
   },
   {
@@ -956,11 +1097,22 @@
    "senses": [
     "food.bread"
    ],
-   "measure": [
-    "个",
-    "片",
-    "块"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 麵包 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "片",
+     "块"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -987,7 +1139,8 @@
       "def": "a bun, a roll (any Western-style baked bread product)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1070,11 +1223,23 @@
    "pinyin": "nǎi lào",
    "pos": "NOUN",
    "senses": [
-    "food.cheese"
+    "food.cheese",
+    "food.milkpudding"
    ],
-   "measure": [
-    "块"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "块"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1101,14 +1266,16 @@
       "def": "(figurative) vested interests (from the book title ‘Who Moved My Cheese?’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(Taiwan) panna cotta",
       "register": [
        "regional"
-      ]
+      ],
+      "concept": "food.milkpudding"
      }
     ],
     "examples": [
@@ -1135,6 +1302,14 @@
       "register": "neutral",
       "context": "politics",
       "sense": "s2"
+     },
+     {
+      "text": "这家甜点店的奶酪其实是一种布丁。",
+      "py": "Zhè jiā tiándiǎndiàn de nǎilào qíshí shì yì zhǒng bùdīng.",
+      "tr": "This dessert shop’s nailao is really a kind of pudding (panna cotta).",
+      "register": "regional",
+      "context": "café",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1199,10 +1374,21 @@
    "senses": [
     "food.egg"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 雞蛋 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1229,7 +1415,8 @@
       "def": "(regional) a zero score, a ‘goose egg’",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1327,12 +1514,24 @@
    "pinyin": "ròu",
    "pos": "NOUN",
    "senses": [
-    "food.meat"
+    "food.meat",
+    "food.pork"
    ],
-   "measure": [
-    "块",
-    "片"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "块",
+     "片"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1359,14 +1558,16 @@
       "def": "(specifically) pork",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.pork"
      },
      {
       "id": "s3",
       "def": "flesh, pulp (of fruit)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1477,11 +1678,23 @@
    "pinyin": "yú",
    "pos": "NOUN",
    "senses": [
-    "food.fish"
+    "food.fish",
+    "animal.fish"
    ],
-   "measure": [
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 魚 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1508,7 +1721,8 @@
       "def": "fish (the animal)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "animal.fish"
      }
     ],
     "examples": [
@@ -1608,9 +1822,20 @@
    "senses": [
     "food.chicken"
    ],
-   "measure": [
-    "块"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 雞肉 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "块"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1707,8 +1932,26 @@
    "senses": [
     "food.rice"
    ],
-   "measure": [
-    "碗"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 米飯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "碗"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "food.rice",
+     "axis": "rice or meal",
+     "value": "cooked rice, the grain only"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1807,11 +2050,31 @@
    "pinyin": "fàn",
    "pos": "NOUN",
    "senses": [
-    "food.rice"
+    "food.rice",
+    "food.meal",
+    "person.fan"
    ],
-   "measure": [
-    "碗",
-    "顿"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 飯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "碗",
+     "顿"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "food.rice",
+     "axis": "rice or meal",
+     "value": "cooked rice; also a meal"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1839,14 +2102,16 @@
       "def": "a meal",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.meal"
      },
      {
       "id": "s3",
       "def": "(slang, neologism) fans, from English fan (饭圈 ‘fandom’)",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "person.fan"
      }
     ],
     "examples": [
@@ -1881,6 +2146,14 @@
       "register": "informal",
       "context": "friends",
       "sense": "s2"
+     },
+     {
+      "text": "饭圈的人每天给偶像投票。",
+      "py": "Fànquān de rén měitiān gěi ǒuxiàng tóupiào.",
+      "tr": "People in fandom vote for their idols every day.",
+      "register": "slang",
+      "context": "internet",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1956,11 +2229,24 @@
    "pinyin": "tāng",
    "pos": "NOUN",
    "senses": [
-    "food.soup"
+    "food.soup",
+    "health.decoction",
+    "drink.hotwater"
    ],
-   "measure": [
-    "碗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 湯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "碗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1987,21 +2273,24 @@
       "def": "broth, stock",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "a decoction of medicinal herbs",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "health.decoction"
      },
      {
       "id": "s4",
       "def": "(literary) hot or boiling water",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "drink.hotwater"
      }
     ],
     "examples": [
@@ -2036,6 +2325,14 @@
       "register": "neutral",
       "context": "medicine",
       "sense": "s3"
+     },
+     {
+      "text": "为了朋友，他赴汤蹈火也愿意。",
+      "py": "Wèile péngyou, tā fù tāng dǎo huǒ yě yuànyì.",
+      "tr": "For a friend he would go through boiling water and fire.",
+      "register": "literary",
+      "context": "idiom",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2105,10 +2402,21 @@
    "senses": [
     "food.salad"
    ],
-   "measure": [
-    "份",
-    "盘"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "份",
+     "盘"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2213,10 +2521,21 @@
    "senses": [
     "food.fruit"
    ],
-   "measure": [
-    "个",
-    "种"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "种"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2319,12 +2638,24 @@
    "pinyin": "píng guǒ",
    "pos": "NOUN",
    "senses": [
-    "food.apple"
+    "food.apple",
+    "tech.iphone"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 蘋果 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2351,7 +2682,8 @@
       "def": "(colloquial) an iPhone, Apple products",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "tech.iphone"
      }
     ],
     "examples": [
@@ -2424,9 +2756,23 @@
    "pinyin": "táng",
    "pos": "NOUN",
    "senses": [
-    "food.sugar"
+    "food.sugar",
+    "food.sweets"
    ],
-   "measureNone": "sugar as a substance is measured, not counted: 一点儿糖, 一勺糖 ‘a spoonful’; a lump or a sweet is 一块糖 / 一颗糖",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "sugar as a substance is measured, not counted: 一点儿糖, 一勺糖 ‘a spoonful’; a lump or a sweet is 一块糖 / 一颗糖"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2453,14 +2799,16 @@
       "def": "sweets, candy",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.sweets"
      },
      {
       "id": "s3",
       "def": "(chemistry) a sugar, carbohydrate",
       "register": [
        "technical"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2553,7 +2901,20 @@
    "senses": [
     "food.salt"
    ],
-   "measureNone": "a mass noun, measured rather than counted: 一点儿盐 ‘a little salt’, 一勺盐 ‘a spoonful’, 一袋盐 ‘a bag of salt’",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 鹽 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a mass noun, measured rather than counted: 一点儿盐 ‘a little salt’, 一勺盐 ‘a spoonful’, 一袋盐 ‘a bag of salt’"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2580,7 +2941,8 @@
       "def": "(chemistry) a salt",
       "register": [
        "technical"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2676,10 +3038,21 @@
    "senses": [
     "drink.water"
    ],
-   "measure": [
-    "杯",
-    "瓶"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "杯",
+     "瓶"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2706,14 +3079,16 @@
       "def": "liquid, juice (in compounds: 药水 liquid medicine)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "a body of water; rivers (as in 山水 ‘landscape’)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2826,10 +3201,21 @@
    "senses": [
     "drink.tea"
    ],
-   "measure": [
-    "杯",
-    "壶"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "杯",
+     "壶"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2856,7 +3242,8 @@
       "def": "tea (the plant, the leaves)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2960,9 +3347,20 @@
    "senses": [
     "drink.coffee"
    ],
-   "measure": [
-    "杯"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "杯"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3057,11 +3455,22 @@
    "senses": [
     "drink.milk"
    ],
-   "measure": [
-    "杯",
-    "瓶",
-    "盒"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "杯",
+     "瓶",
+     "盒"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3166,10 +3575,21 @@
    "senses": [
     "drink.juice"
    ],
-   "measure": [
-    "杯",
-    "瓶"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "杯",
+     "瓶"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3270,10 +3690,21 @@
    "senses": [
     "drink.wine"
    ],
-   "measure": [
-    "杯",
-    "瓶"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "杯",
+     "瓶"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3387,11 +3818,22 @@
    "senses": [
     "drink.beer"
    ],
-   "measure": [
-    "杯",
-    "瓶",
-    "罐"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "杯",
+     "瓶",
+     "罐"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3491,9 +3933,20 @@
    "senses": [
     "meal.breakfast"
    ],
-   "measure": [
-    "顿"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 早飯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "顿"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3593,9 +4046,20 @@
    "senses": [
     "meal.lunch"
    ],
-   "measure": [
-    "顿"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 午飯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "顿"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3695,9 +4159,20 @@
    "senses": [
     "meal.dinner"
    ],
-   "measure": [
-    "顿"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 晚飯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "顿"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3799,6 +4274,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "container"
+    ]
    }
   },
   {
@@ -3812,6 +4301,21 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 塊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "partitive",
+     "unit"
+    ]
    }
   },
   {
@@ -3825,6 +4329,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "container"
+    ]
    }
   },
   {
@@ -3838,6 +4356,21 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "partitive",
+     "sortal"
+    ]
    }
   }
  ]

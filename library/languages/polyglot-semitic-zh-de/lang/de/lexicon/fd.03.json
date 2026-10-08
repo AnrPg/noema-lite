@@ -9,6 +9,25 @@
     "dem.this",
     "dem.these"
    ],
+   "contrasts": [
+    {
+     "concept": "dem.this",
+     "axis": "with a noun or alone",
+     "value": "before a noun (dieser Tisch)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": [
+     {
+      "form": "diese, diesen, dieser",
+      "senses": [
+       "s3"
+      ],
+      "note": "the plural forms: diese Bücher, mit diesen Kindern"
+     }
+    ]
+   },
    "forms": {
     "DET;NOM;SG;MASC": "dieser",
     "DET;NOM;SG;FEM": "diese",
@@ -53,7 +72,8 @@
       "def": "dieser / diese / dieses alone: this one",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
@@ -92,6 +112,13 @@
       "register": "neutral",
       "context": "school",
       "sense": "s3"
+     },
+     {
+      "text": "Dieser Tisch ist neu.",
+      "tr": "This table is new.",
+      "register": "neutral",
+      "context": "furniture",
+      "sense": "s1"
      }
     ],
     "collocations": [
@@ -146,6 +173,27 @@
     "dem.this",
     "dem.that"
    ],
+   "contrasts": [
+    {
+     "concept": "dem.this",
+     "axis": "with a noun or alone",
+     "value": "alone, pointing (Das ist mein Bruder)"
+    },
+    {
+     "concept": "dem.that",
+     "axis": "register",
+     "value": "everyday"
+    }
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "das",
     "PRON;ACC": "das",
@@ -177,7 +225,8 @@
       "def": "that (referring to a whole statement): Das weiß ich nicht.",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s3"
      },
      {
       "id": "s3",
@@ -278,6 +327,13 @@
    "senses": [
     "adv.here"
    ],
+   "contrasts": [
+    {
+     "concept": "adv.here",
+     "axis": "where or present",
+     "value": "at this place, where the speaker is"
+    }
+   ],
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -304,14 +360,16 @@
       "def": "here, at this point (in a text or discussion)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "Hier! – “present!” (answer at roll call); also “here you are” when handing something",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -398,6 +456,11 @@
     "subtleties": [
      "hier, da and dort: hier is close to the speaker, dort is far away, and da can be either."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -409,6 +472,25 @@
     "dem.that",
     "dem.those"
    ],
+   "contrasts": [
+    {
+     "concept": "dem.that",
+     "axis": "register",
+     "value": "written, contrasting (dieser … jener)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": [
+     {
+      "form": "jene, jenen, jener",
+      "senses": [
+       "s2"
+      ],
+      "note": "the plural forms: jene, die … (those who …)"
+     }
+    ]
+   },
    "forms": {
     "DET;NOM;SG;MASC": "jener",
     "DET;NOM;SG;FEM": "jene",
@@ -461,7 +543,8 @@
       "def": "dieser … jener = the latter … the former (in careful writing)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -548,7 +631,32 @@
    "lemma": "da",
    "pos": "ADV",
    "senses": [
-    "adv.there"
+    "adv.there",
+    "adv.here",
+    "adv.then",
+    "conj.because"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.here",
+     "axis": "where or present",
+     "value": "present, arrived (Ich bin da!)"
+    },
+    {
+     "concept": "adv.there",
+     "axis": "how far",
+     "value": "there – mentioned or pointed at, near or far"
+    },
+    {
+     "concept": "adv.then",
+     "axis": "which “then”",
+     "value": "at that moment (in a story)"
+    },
+    {
+     "concept": "conj.because",
+     "axis": "word order and use",
+     "value": "verb at the end; a reason already known, often at the start"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -576,21 +684,32 @@
       "def": "here, present, arrived (Ich bin da!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.here"
      },
      {
       "id": "s3",
       "def": "then, at that moment (in stories)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.then"
      },
      {
       "id": "s4",
       "def": "der/die/das … da – that … there (pointing at a person or thing)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s5",
+      "def": "since, as (because – at the start of a sentence: Da es regnet, bleiben wir zu Hause)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.because"
      }
     ],
     "examples": [
@@ -635,6 +754,27 @@
       "register": "colloquial",
       "context": "pointing out people",
       "sense": "s4"
+     },
+     {
+      "text": "Ich wollte gerade gehen, da kam mein Chef herein.",
+      "tr": "I was just about to leave when my boss came in.",
+      "register": "neutral",
+      "context": "telling a story",
+      "sense": "s3"
+     },
+     {
+      "text": "Da es regnet, bleiben wir zu Hause.",
+      "tr": "Since it is raining, we are staying at home.",
+      "register": "neutral",
+      "context": "weather",
+      "sense": "s5"
+     },
+     {
+      "text": "Da ich kein Auto habe, fahre ich mit dem Bus.",
+      "tr": "As I have no car, I take the bus.",
+      "register": "neutral",
+      "context": "getting around",
+      "sense": "s5"
      }
     ],
     "collocations": [
@@ -704,6 +844,11 @@
      "In speech, “that” is usually der/die/das + noun + da: Die Lampe da ist schön (That lamp is nice); “this” is … hier: die Lampe hier.",
      "As a conjunction da means “since, as”: Da es regnet, bleiben wir zu Hause – a different use."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -712,6 +857,13 @@
    "pos": "ADV",
    "senses": [
     "adv.there"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.there",
+     "axis": "how far",
+     "value": "over there – the distance stressed"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -823,6 +975,11 @@
     "subtleties": [
      "dort is clear distance; da is vaguer and far more frequent in speech; hier is close to the speaker."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   }
  ],

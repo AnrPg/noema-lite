@@ -9,6 +9,20 @@
    "senses": [
     "veg.carrot"
    ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 胡蘿蔔 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "fixture"
    },
@@ -108,8 +122,24 @@
    "pinyin": "yáng cōng",
    "pos": "NOUN",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "comm.tearjerker"
    ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 洋蔥 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "fixture"
    },
@@ -139,7 +169,8 @@
       "def": "a sad, tear-jerking story",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "comm.tearjerker"
      }
     ],
     "examples": [
@@ -166,6 +197,14 @@
       "context": "shopping",
       "sense": "s1",
       "py": "Zhège yángcōng hěn dà."
+     },
+     {
+      "text": "这个视频有洋葱，我看哭了。",
+      "py": "Zhège shìpín yǒu yángcōng, wǒ kàn kū le.",
+      "tr": "This video is a tear-jerker — it made me cry.",
+      "register": "slang",
+      "context": "internet",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -215,6 +254,20 @@
    "senses": [
     "veg.cucumber"
    ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 黃瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "fixture"
    },

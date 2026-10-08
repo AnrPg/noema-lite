@@ -7,7 +7,9 @@
    "pinyin": "dà",
    "pos": "ADJ",
    "senses": [
-    "adj.big"
+    "adj.big",
+    "adj.adult",
+    "adj.intense"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,14 +37,16 @@
       "def": "old, older (of age): 你多大？ ‘how old are you?’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.adult"
      },
      {
       "id": "s3",
       "def": "heavy, strong, loud (rain, wind, voice)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.intense"
      }
     ],
     "examples": [
@@ -147,6 +151,17 @@
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子).",
      "我要大的 ‘I want the big one’: adjective + 的 stands for a noun."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -156,7 +171,15 @@
    "pinyin": "xiǎo",
    "pos": "ADJ",
    "senses": [
-    "adj.small"
+    "adj.small",
+    "adj.young"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "kind of young",
+     "value": "small = young, younger (in age comparisons: 我比他小)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -184,14 +207,16 @@
       "def": "young, younger; the youngest",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.young"
      },
      {
       "id": "s3",
       "def": "(before a one-syllable surname) young … — a friendly way to address a younger person: 小王",
       "register": [
        "informal"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -226,6 +251,14 @@
       "register": "informal",
       "context": "workplace",
       "sense": "s3"
+     },
+     {
+      "text": "我比他小两岁。",
+      "py": "Wǒ bǐ tā xiǎo liǎng suì.",
+      "tr": "I am two years younger than him.",
+      "register": "neutral",
+      "context": "age",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -296,6 +329,17 @@
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子).",
      "他比我小两岁 ‘he is two years younger than me’: for age, 小 = younger, 大 = older."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -305,7 +349,9 @@
    "pinyin": "cháng",
    "pos": "ADJ",
    "senses": [
-    "adj.long"
+    "adj.long",
+    "verb.grow",
+    "job.chief"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -330,10 +376,19 @@
      },
      {
       "id": "s2",
-      "def": "(read zhǎng) to grow; head, chief (校长)",
+      "def": "(read zhǎng) to grow, to grow up",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.grow"
+     },
+     {
+      "id": "s3",
+      "def": "(read zhǎng) head, chief (校长 headmaster, 市长 mayor)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "job.chief"
      }
     ],
     "examples": [
@@ -368,6 +423,14 @@
       "register": "neutral",
       "context": "family",
       "sense": "s2"
+     },
+     {
+      "text": "我们的校长很年轻。",
+      "py": "Wǒmen de xiàozhǎng hěn niánqīng.",
+      "tr": "Our headmaster is very young.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -433,6 +496,29 @@
      "For a long time, 很长时间 and 很久 are both common: 我等了很长时间 / 我等了很久.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "cháng",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "zhǎng",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "traditional 長 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -442,7 +528,8 @@
    "pinyin": "duǎn",
    "pos": "ADJ",
    "senses": [
-    "adj.short"
+    "adj.short",
+    "abstract.weakness"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -470,7 +557,8 @@
       "def": "lacking, short of; a weak point (短处)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.weakness"
      }
     ],
     "examples": [
@@ -568,6 +656,17 @@
      "长 and 短 pair up in many words: 长短 ‘length’, 长处 / 短处 ‘strengths / weaknesses’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -577,7 +676,8 @@
    "pinyin": "gāo",
    "pos": "ADJ",
    "senses": [
-    "adj.tall"
+    "adj.tall",
+    "adj.high"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -605,14 +705,8 @@
       "def": "high (level, price, standard)",
       "register": [
        "neutral"
-      ]
-     },
-     {
-      "id": "s3",
-      "def": "a surname, Gao",
-      "register": [
-       "neutral"
-      ]
+      ],
+      "concept": "adj.high"
      }
     ],
     "examples": [
@@ -708,6 +802,17 @@
      "Tall people are 高, long things 长: 他很高, 这条街很长.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -717,7 +822,21 @@
    "pinyin": "hǎo",
    "pos": "ADJ",
    "senses": [
-    "adj.good"
+    "adj.good",
+    "intj.ok",
+    "adv.very"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.good",
+     "axis": "form",
+     "value": "the adjective itself (好人, 很好)"
+    },
+    {
+     "concept": "adv.very",
+     "axis": "register",
+     "value": "so, very — colloquial, exclamatory (好冷！)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -745,21 +864,32 @@
       "def": "well, fine (你好, 我很好)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(alone) OK! fine! agreed!",
       "register": [
        "informal"
-      ]
+      ],
+      "concept": "intj.ok"
      },
      {
       "id": "s4",
       "def": "(before a verb) nice to …, easy to …: 好吃 ‘tasty’, 好看 ‘good-looking’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s5",
+      "def": "(adverb, colloquial) so, very: 好冷 so cold, 好多 so many",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.very"
      }
     ],
     "examples": [
@@ -802,6 +932,14 @@
       "register": "neutral",
       "context": "food",
       "sense": "s4"
+     },
+     {
+      "text": "今天好冷啊！",
+      "py": "Jīntiān hǎo lěng a!",
+      "tr": "It’s so cold today!",
+      "register": "colloquial",
+      "context": "weather",
+      "sense": "s5"
      }
     ],
     "collocations": [
@@ -882,6 +1020,17 @@
      "In speech 好 before an adjective is an exclamation: 好冷！ ‘so cold!’",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -891,7 +1040,9 @@
    "pinyin": "huài",
    "pos": "ADJ",
    "senses": [
-    "adj.bad"
+    "adj.bad",
+    "adj.broken",
+    "adv.terribly"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -919,14 +1070,16 @@
       "def": "(坏了) broken, out of order; (of food) gone off",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.broken"
      },
      {
       "id": "s3",
       "def": "(after a verb or adjective) terribly: 饿坏了 ‘starving’, 累坏了 ‘worn out’",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.terribly"
      }
     ],
     "examples": [
@@ -1032,6 +1185,17 @@
      "After a verb or an adjective, 坏 only intensifies: 饿坏了 ‘starving’, 高兴坏了 ‘over the moon’ — nothing is bad.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 壞 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1069,7 +1233,8 @@
       "def": "(before a verb) newly, just: 新来的 ‘newly arrived’, 新买的 ‘just bought’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1177,6 +1342,17 @@
      "新 before a verb means ‘newly, just’: 新买的手机 ‘a phone I’ve just bought’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1186,7 +1362,15 @@
    "pinyin": "jiù",
    "pos": "ADJ",
    "senses": [
-    "adj.old.thing"
+    "adj.old.thing",
+    "adj.former"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.former",
+     "axis": "kind of old",
+     "value": "former, of the old days (旧社会)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1214,7 +1398,8 @@
       "def": "former, of the past (旧社会 ‘the old society’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.former"
      }
     ],
     "examples": [
@@ -1311,6 +1496,17 @@
      "旧 = worn, used, outdated; 老 = existing for a long time: 旧房子 is a run-down house, 老房子 an old (perhaps historic) house.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 舊 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1321,6 +1517,13 @@
    "pos": "ADJ",
    "senses": [
     "adj.young"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "kind of young",
+     "value": "young (people, adults; also organisations)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1417,6 +1620,17 @@
      "你看起来很年轻 ‘you look young’ is a standard compliment, especially to someone older.",
      "Two syllables: as an attribute it takes 的 (年轻的老师), except in set words (年轻人)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 年輕 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1426,7 +1640,15 @@
    "pinyin": "lǎo",
    "pos": "ADJ",
    "senses": [
-    "adj.old.person"
+    "adj.old.person",
+    "adj.former"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.former",
+     "axis": "kind of old",
+     "value": "long-standing (老朋友, 老习惯)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1454,21 +1676,24 @@
       "def": "old, long-standing (friends, houses, habits)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.former"
      },
      {
       "id": "s3",
       "def": "(prefix) before a surname: 老王 ‘old Wang’ (friendly, for older people); before numbers for the order of siblings: 老大 ‘eldest’; an empty prefix in 老师, 老公, 老婆, 老虎",
       "register": [
        "informal"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "(adverb, colloquial) always, all the time: 他老迟到 ‘he’s always late’",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -1585,6 +1810,17 @@
      "老 + surname for older friends and colleagues (老王), 小 + surname for younger ones (小王); 老大, 老二 are the first and second child.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1594,7 +1830,16 @@
    "pinyin": "rè",
    "pos": "ADJ",
    "senses": [
-    "adj.hot"
+    "adj.hot",
+    "verb.heat",
+    "adj.popular"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.popular",
+     "axis": "kind of popular",
+     "value": "in demand (热门)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1622,14 +1867,16 @@
       "def": "to heat up, warm up (food)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.heat"
      },
      {
       "id": "s3",
       "def": "popular, in demand (热门)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.popular"
      }
     ],
     "examples": [
@@ -1664,6 +1911,14 @@
       "register": "neutral",
       "context": "cooking",
       "sense": "s2"
+     },
+     {
+      "text": "计算机是热门专业。",
+      "py": "Jìsuànjī shì rèmén zhuānyè.",
+      "tr": "Computer science is a popular subject.",
+      "register": "neutral",
+      "context": "education",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1727,6 +1982,17 @@
      "热情 ‘warm-hearted, enthusiastic’ uses 热 for warmth of heart.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 熱 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1736,7 +2002,8 @@
    "pinyin": "lěng",
    "pos": "ADJ",
    "senses": [
-    "adj.cold"
+    "adj.cold",
+    "adj.unpopular"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1764,14 +2031,16 @@
       "def": "cold, unfriendly (in 冷淡 lěngdàn)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "unpopular; corny (冷门, 冷笑话)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.unpopular"
      }
     ],
     "examples": [
@@ -1879,6 +2148,17 @@
      "冷笑话 ‘cold joke’ is a corny joke — the laugh dies of cold.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1888,7 +2168,8 @@
    "pinyin": "nuǎn huo",
    "pos": "ADJ",
    "senses": [
-    "adj.warm"
+    "adj.warm",
+    "verb.warm"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1916,7 +2197,8 @@
       "def": "to warm (oneself) up (暖和暖和)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.warm"
      }
     ],
     "examples": [
@@ -2004,6 +2286,17 @@
      "As a verb it doubles like other two-syllable verbs: 暖和暖和 ‘warm up a bit’ (ABAB).",
      "Two syllables: as an attribute it takes 的: 暖和的房间."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2014,6 +2307,13 @@
    "pos": "ADJ",
    "senses": [
     "adj.beautiful"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.beautiful",
+     "axis": "what is beautiful and register",
+     "value": "pretty (people, things)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2041,7 +2341,8 @@
       "def": "brilliant, splendid (a performance, a piece of work)",
       "register": [
        "informal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2146,6 +2447,17 @@
      "漂亮话 ‘pretty words’ are fine words that mean nothing.",
      "Two syllables: as an attribute it takes 的: 漂亮的房间."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2155,7 +2467,15 @@
    "pinyin": "hǎo kàn",
    "pos": "ADJ",
    "senses": [
-    "adj.beautiful"
+    "adj.beautiful",
+    "adj.interesting"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.beautiful",
+     "axis": "what is beautiful and register",
+     "value": "good-looking; worth watching (informal)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2183,7 +2503,8 @@
       "def": "interesting, worth watching or reading (films, books)",
       "register": [
        "informal"
-      ]
+      ],
+      "concept": "adj.interesting"
      }
     ],
     "examples": [
@@ -2271,6 +2592,17 @@
      "好看 is the most everyday word for good looks; 漂亮 is a bit stronger, 美 more literary.",
      "Two syllables: as an attribute it takes 的: 好看的包."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2280,7 +2612,16 @@
    "pinyin": "měi",
    "pos": "ADJ",
    "senses": [
-    "adj.beautiful"
+    "adj.beautiful",
+    "place.usa",
+    "adj.smug"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.beautiful",
+     "axis": "what is beautiful and register",
+     "value": "beautiful (literary; scenery, art)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2308,21 +2649,24 @@
       "def": "(bound) good, delicious (美食, 美味)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "short for America, the USA (美国, 美元)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.usa"
      },
      {
       "id": "s4",
       "def": "(colloquial) pleased with oneself",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.smug"
      }
     ],
     "examples": [
@@ -2357,6 +2701,14 @@
       "register": "neutral",
       "context": "countries",
       "sense": "s3"
+     },
+     {
+      "text": "看你美的！",
+      "py": "Kàn nǐ měi de!",
+      "tr": "Look how pleased with yourself you are!",
+      "register": "colloquial",
+      "context": "teasing",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2427,6 +2779,17 @@
      "美什么美！ ‘what are you so smug about?’ — colloquial 美 = pleased with oneself.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2437,6 +2800,13 @@
    "pos": "ADJ",
    "senses": [
     "adj.ugly"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.ugly",
+     "axis": "register",
+     "value": "unsightly — milder"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2464,7 +2834,8 @@
       "def": "embarrassing; (of a face) displeased, pale",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2540,6 +2911,17 @@
      "脸色难看 ‘face-colour ugly’ means looking ill or angry, not ugly.",
      "Two syllables: as an attribute it takes 的: 难看的椅子."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 難看 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2549,7 +2931,16 @@
    "pinyin": "chǒu",
    "pos": "ADJ",
    "senses": [
-    "adj.ugly"
+    "adj.ugly",
+    "abstract.disgrace",
+    "art.clown"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.ugly",
+     "axis": "register",
+     "value": "ugly — blunt"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2577,14 +2968,16 @@
       "def": "shameful; shame, disgrace (出丑 ‘to make a fool of oneself’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.disgrace"
      },
      {
       "id": "s3",
       "def": "(the character 丑 itself) the clown role of Chinese opera; the second Earthly Branch (Ox)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "art.clown"
      }
     ],
     "examples": [
@@ -2611,6 +3004,14 @@
       "register": "neutral",
       "context": "social life",
       "sense": "s2"
+     },
+     {
+      "text": "他在京剧里演丑。",
+      "py": "Tā zài jīngjù li yǎn chǒu.",
+      "tr": "He plays the clown role in Peking opera.",
+      "register": "neutral",
+      "context": "theatre",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2674,6 +3075,29 @@
      "丑 is mostly about people, animals and photos; for clothes and furniture 难看 is more usual.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": [
+     {
+      "trad": "醜",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "trad": "丑",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2683,7 +3107,8 @@
    "pinyin": "róng yì",
    "pos": "ADJ",
    "senses": [
-    "adj.easy"
+    "adj.easy",
+    "adj.likely"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2711,7 +3136,8 @@
       "def": "(before a verb) likely to, apt to: 冬天容易感冒 ‘in winter it’s easy to catch a cold’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.likely"
      }
     ],
     "examples": [
@@ -2803,6 +3229,17 @@
      "容易 describes how hard something is to DO; 简单 describes the thing itself (a simple dish, a simple question).",
      "Two syllables: as an attribute it takes 的: 很容易的工作."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2812,7 +3249,15 @@
    "pinyin": "nán",
    "pos": "ADJ",
    "senses": [
-    "adj.difficult"
+    "adj.difficult",
+    "abstract.disaster"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.difficult",
+     "axis": "what is difficult",
+     "value": "a task, a question (这个问题很难)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2840,14 +3285,16 @@
       "def": "(before a verb) unpleasant to …: 难吃 ‘tastes bad’, 难看 ‘ugly’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(read nàn) disaster, calamity (灾难)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "abstract.disaster"
      }
     ],
     "examples": [
@@ -2874,6 +3321,14 @@
       "register": "informal",
       "context": "food",
       "sense": "s2"
+     },
+     {
+      "text": "这场地震是一场大灾难。",
+      "py": "Zhè cháng dìzhèn shì yì cháng dà zāinàn.",
+      "tr": "This earthquake was a great disaster.",
+      "register": "formal",
+      "context": "news",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2944,6 +3399,29 @@
      "难 + verb can also be ‘hard to’: 很难说 ‘hard to say’, 很难找 ‘hard to find’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "nán",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "pinyin": "nàn",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "traditional 難 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2953,7 +3431,9 @@
    "pinyin": "pián yi",
    "pos": "ADJ",
    "senses": [
-    "adj.cheap"
+    "adj.cheap",
+    "abstract.advantage",
+    "adj.convenient"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2981,14 +3461,16 @@
       "def": "(noun) an unfair advantage: 占便宜 ‘to take advantage’",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "abstract.advantage"
      },
      {
       "id": "s3",
       "def": "(read biànyí, literary) convenient, expedient",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "adj.convenient"
      }
     ],
     "examples": [
@@ -3023,6 +3505,14 @@
       "register": "colloquial",
       "context": "character",
       "sense": "s2"
+     },
+     {
+      "text": "他到了那里可以便宜行事。",
+      "py": "Tā dào le nàli kěyǐ biànyí xíngshì.",
+      "tr": "Once there, he may act as he sees fit.",
+      "register": "literary",
+      "context": "orders",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -3084,6 +3574,29 @@
      "Bargaining: 能便宜一点吗？ ‘could you make it a bit cheaper?’",
      "Two syllables: as an attribute it takes 的: 便宜的饭馆."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "pián yi",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "pinyin": "biàn yí",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3093,7 +3606,8 @@
    "pinyin": "guì",
    "pos": "ADJ",
    "senses": [
-    "adj.expensive"
+    "adj.expensive",
+    "adj.precious"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3121,14 +3635,16 @@
       "def": "precious, valuable; noble (宝贵, 贵族)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adj.precious"
      },
      {
       "id": "s3",
       "def": "(honorific) your: 您贵姓？ ‘what is your (honourable) surname?’",
       "register": [
        "honorific"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -3163,6 +3679,14 @@
       "register": "formal",
       "context": "introductions",
       "sense": "s3"
+     },
+     {
+      "text": "时间很宝贵。",
+      "py": "Shíjiān hěn bǎoguì.",
+      "tr": "Time is precious.",
+      "register": "formal",
+      "context": "life",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3219,6 +3743,17 @@
      "贵 is polite in 您贵姓 ‘your surname’ and 贵国 ‘your country’ — you never use it about yourself.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 貴 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3228,7 +3763,15 @@
    "pinyin": "gāo xìng",
    "pos": "ADJ",
    "senses": [
-    "adj.happy"
+    "adj.happy",
+    "adj.willing"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.happy",
+     "axis": "kind of happy",
+     "value": "glad, pleased"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3256,7 +3799,8 @@
       "def": "(verb) to be willing, to feel like (doing)",
       "register": [
        "informal"
-      ]
+      ],
+      "concept": "adj.willing"
      }
     ],
     "examples": [
@@ -3350,6 +3894,17 @@
      "不高兴 usually means ‘annoyed, upset’, not just ‘not happy’.",
      "Two syllables: as an attribute it takes 的: 高兴的孩子."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 高興 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3359,7 +3914,15 @@
    "pinyin": "kāi xīn",
    "pos": "ADJ",
    "senses": [
-    "adj.happy"
+    "adj.happy",
+    "verb.makefunof"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.happy",
+     "axis": "kind of happy",
+     "value": "happy, having fun (informal)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3387,7 +3950,8 @@
       "def": "(拿…开心) to make fun of someone",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.makefunof"
      }
     ],
     "examples": [
@@ -3467,6 +4031,17 @@
      "开心 ‘open heart’ and 伤心 ‘hurt heart’ are mirror words.",
      "Two syllables: as an attribute it takes 的: 开心的一天."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 開心 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3476,7 +4051,21 @@
    "pinyin": "nán guò",
    "pos": "ADJ",
    "senses": [
-    "adj.sad"
+    "adj.sad",
+    "adj.difficult",
+    "adj.unwell"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.difficult",
+     "axis": "what is difficult",
+     "value": "life, the days (日子很难过)"
+    },
+    {
+     "concept": "adj.sad",
+     "axis": "intensity",
+     "value": "sad, upset"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3504,14 +4093,16 @@
       "def": "(of life) hard to get by: 日子很难过",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.difficult"
      },
      {
       "id": "s3",
       "def": "unwell, uncomfortable (身体难过)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.unwell"
      }
     ],
     "examples": [
@@ -3538,6 +4129,22 @@
       "register": "neutral",
       "context": "life",
       "sense": "s2"
+     },
+     {
+      "text": "没有工作，日子很难过。",
+      "py": "Méiyǒu gōngzuò, rìzi hěn nánguò.",
+      "tr": "Without a job, life is hard.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s2"
+     },
+     {
+      "text": "我胃里有点难过。",
+      "py": "Wǒ wèi li yǒudiǎn nánguò.",
+      "tr": "My stomach feels a bit uncomfortable.",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -3587,6 +4194,17 @@
      "Context decides between 难过 ‘sad’ and 难 + 过 ‘hard to cross’: 这条河很难过 ‘this river is hard to cross’.",
      "Two syllables: as an attribute it takes 的: 难过的事."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 難過 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3597,6 +4215,13 @@
    "pos": "ADJ",
    "senses": [
     "adj.sad"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.sad",
+     "axis": "intensity",
+     "value": "heartbroken"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3624,7 +4249,8 @@
       "def": "(伤…的心) to break someone’s heart",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3716,6 +4342,17 @@
      "The two halves can split: 伤了他的心 ‘broke his heart’.",
      "Two syllables: as an attribute it takes 的: 伤心的孩子."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 傷心 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3725,7 +4362,8 @@
    "pinyin": "lèi",
    "pos": "ADJ",
    "senses": [
-    "adj.tired"
+    "adj.tired",
+    "verb.accumulate"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3753,14 +4391,16 @@
       "def": "(verb) to tire, to wear out (别累着)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(read lěi) to pile up, accumulate (积累)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.accumulate"
      }
     ],
     "examples": [
@@ -3795,6 +4435,14 @@
       "register": "informal",
       "context": "care",
       "sense": "s2"
+     },
+     {
+      "text": "工作中要多积累经验。",
+      "py": "Gōngzuò zhōng yào duō jīlěi jīngyàn.",
+      "tr": "At work you should build up as much experience as you can.",
+      "register": "formal",
+      "context": "work",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -3856,6 +4504,29 @@
      "辛苦了 ‘you’ve worked hard’ thanks someone for an effort; 你累了吧 ‘you must be tired’ is the friendly way to say the same.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "lèi",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "pinyin": "lěi",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3893,7 +4564,8 @@
       "def": "(verb) to starve, to let go hungry",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3984,6 +4656,17 @@
      "The opposite is 饱 bǎo ‘full’: 我饱了 ‘I’m full’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 餓 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -4021,7 +4704,8 @@
       "def": "to long for (in 渴望)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4098,6 +4782,17 @@
      "‘I’m thirsty’: 我渴了 or 我口渴了.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -4107,7 +4802,16 @@
    "pinyin": "kuài",
    "pos": "ADJ",
    "senses": [
-    "adj.fast"
+    "adj.fast",
+    "verb.beaboutto",
+    "adj.happy"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.happy",
+     "axis": "kind of happy",
+     "value": "happy only in 快乐 (wishes: 生日快乐)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4135,21 +4839,24 @@
       "def": "(adverb) quickly; hurry!",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(快…了) soon, about to",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.beaboutto"
      },
      {
       "id": "s4",
       "def": "happy, pleased (in 快乐)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.happy"
      }
     ],
     "examples": [
@@ -4184,6 +4891,22 @@
       "register": "neutral",
       "context": "travel",
       "sense": "s3"
+     },
+     {
+      "text": "祝你生日快乐！",
+      "py": "Zhù nǐ shēngrì kuàilè!",
+      "tr": "Happy birthday!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s4"
+     },
+     {
+      "text": "新年快乐！",
+      "py": "Xīnnián kuàilè!",
+      "tr": "Happy New Year!",
+      "register": "neutral",
+      "context": "wishes",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -4246,6 +4969,17 @@
      "很快 is also ‘very soon’: 他很快就来 ‘he’s coming soon’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -4255,7 +4989,8 @@
    "pinyin": "màn",
    "pos": "ADJ",
    "senses": [
-    "adj.slow"
+    "adj.slow",
+    "adj.arrogant"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4283,14 +5018,16 @@
       "def": "(adverb) slowly: 慢慢吃 ‘enjoy your meal, take your time’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "rude, haughty (in 傲慢)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adj.arrogant"
      }
     ],
     "examples": [
@@ -4325,6 +5062,14 @@
       "register": "neutral",
       "context": "farewells",
       "sense": "s2"
+     },
+     {
+      "text": "他对人很傲慢。",
+      "py": "Tā duì rén hěn àomàn.",
+      "tr": "He is arrogant towards people.",
+      "register": "formal",
+      "context": "character",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -4381,6 +5126,17 @@
      "Doubled, 慢慢 is an adverb: 慢慢走 ‘walk slowly, take care’.",
      "One syllable: it goes straight before the noun (大房子); with 很 it needs 的 (很大的房子)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   }
  ]

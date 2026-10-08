@@ -26,6 +26,7 @@ python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is ins
 # foreign languages (docs/LANGUAGES.md §11): content validator, reference checker, runtime, the course, the UI
 python3 "$ROOT/tests/lang_validate.py"
 python3 "$ROOT/tests/lang_refcheck.py"
+python3 "$ROOT/tools/lang_phenomena.py" > /dev/null   # the catalogues of phenomena agree with the implementation (D14)
 node "$ROOT/tests/langcore.js"
 node "$ROOT/tests/lang_courses.js"
 node "$ROOT/tests/lang_ui.js" "$T"

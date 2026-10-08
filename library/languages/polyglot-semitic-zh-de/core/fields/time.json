@@ -25,6 +25,10 @@
   {
    "id": "units",
    "title": "Units of time"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -380,6 +384,118 @@
    "subgroup": "units",
    "tier": 1,
    "rank": 50
+  },
+  {
+   "id": "time.am",
+   "gloss": "a.m., in the morning (with a clock time)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.childhood",
+   "gloss": "childhood (小时候)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.daytime",
+   "gloss": "daytime, day (as opposed to night)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.endofweek",
+   "gloss": "the end of the week",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.eve",
+   "gloss": "eve, the day before (a holiday: Christmas Eve)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.future",
+   "gloss": "the future, tomorrow (as a noun)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.moment",
+   "gloss": "a time, a moment",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.newyear",
+   "gloss": "(Chinese) New Year (过年)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.period",
+   "gloss": "period, time (a stretch of time)",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.pm",
+   "gloss": "p.m., in the evening (with a clock time)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.thismorning",
+   "gloss": "this morning",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.tonight",
+   "gloss": "tonight",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.weekday",
+   "gloss": "day of the week (星期三 Wednesday; 星期几 which day?)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "time.while",
+   "gloss": "a little while, a moment (as a length of time)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

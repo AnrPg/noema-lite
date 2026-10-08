@@ -5,7 +5,15 @@
    "lemma": "oder",
    "pos": "CCONJ",
    "senses": [
-    "conj.or"
+    "conj.or",
+    "part.tag"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.tag",
+     "axis": "register",
+     "value": "oder? – everyday, everywhere"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -33,7 +41,8 @@
       "def": "right?, isn’t it? (tag at the end of a sentence)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "part.tag"
      }
     ],
     "examples": [
@@ -104,6 +113,9 @@
     "subtleties": [
      "…, oder? at the end asks for agreement, like English right? or Turkish değil mi? – very frequent in the south and in Switzerland."
     ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
    }
   },
   {
@@ -111,7 +123,15 @@
    "lemma": "vielleicht",
    "pos": "ADV",
    "senses": [
-    "adv.maybe"
+    "adv.maybe",
+    "adv.truly"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "kind of word",
+     "value": "a particle of amazement, often ironic (Du bist vielleicht lustig!)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -139,14 +159,16 @@
       "def": "softener in polite requests (Können Sie mir vielleicht helfen?)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "expresses amazement, often ironic (Du bist vielleicht lustig!)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.truly"
      }
     ],
     "examples": [
@@ -240,6 +262,11 @@
     "subtleties": [
      "In a request vielleicht makes it more polite: Hast du vielleicht ein bisschen Zeit?"
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -247,7 +274,16 @@
    "lemma": "wirklich",
    "pos": "ADV",
    "senses": [
-    "adv.really"
+    "adv.really",
+    "adv.truly",
+    "adj.true"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "kind of word",
+     "value": "an adverb: really, truly (Das ist wirklich schön)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -275,14 +311,16 @@
       "def": "really, truly (intensifier)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.truly"
      },
      {
       "id": "s3",
       "def": "real, actual (as an adjective: die wirkliche Welt)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.true"
      }
     ],
     "examples": [
@@ -313,6 +351,13 @@
       "register": "informal",
       "context": "feelings",
       "sense": "s2"
+     },
+     {
+      "text": "Im Film ist alles einfach, in der wirklichen Welt nicht.",
+      "tr": "In films everything is easy, in the real world it is not.",
+      "register": "neutral",
+      "context": "life",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -362,6 +407,11 @@
     "subtleties": [
      "nicht wirklich (not really) works much like English and softens a no."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -369,7 +419,8 @@
    "lemma": "natürlich",
    "pos": "ADV",
    "senses": [
-    "adv.ofcourse"
+    "adv.ofcourse",
+    "adj.natural"
    ],
    "ref": {
     "src": "kaikki",
@@ -397,7 +448,8 @@
       "def": "naturally, in a natural way (also the adjective: natural)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.natural"
      }
     ],
     "examples": [
@@ -469,6 +521,11 @@
     "subtleties": [
      "Natürlich nicht! = Of course not!"
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -476,7 +533,9 @@
    "lemma": "auch",
    "pos": "ADV",
    "senses": [
-    "adv.also"
+    "adv.also",
+    "adv.even",
+    "part.sure"
    ],
    "ref": {
     "src": "kaikki",
@@ -504,14 +563,16 @@
       "def": "even; -ever (was auch, wer auch)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.even"
      },
      {
       "id": "s3",
       "def": "modal particle: really, in fact (Hast du auch alles?)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "part.sure"
      }
     ],
     "examples": [
@@ -542,6 +603,13 @@
       "register": "colloquial",
       "context": "leaving the house",
       "sense": "s3"
+     },
+     {
+      "text": "Auch ein Kind versteht das.",
+      "tr": "Even a child understands that.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -594,6 +662,11 @@
     "subtleties": [
      "Unstressed, auch is a particle that checks: Hast du auch alles? (Are you sure you’ve got everything?)"
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -629,7 +702,8 @@
       "def": "in wishes and urging: if only, just (Wenn ich nur Zeit hätte!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -712,13 +786,29 @@
     "subtleties": [
      "Nur so! = Just because / for no special reason."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
    "id": "de:doch",
    "lemma": "doch",
    "pos": "PART",
-   "senses": [],
+   "senses": [
+    "part.yes.contra",
+    "conj.but",
+    "part.urge"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "more formal or literary (…, doch er kam nicht)"
+    }
+   ],
    "role": "yes – the answer that contradicts a negative question or statement (Isst du kein Fleisch? – Doch!)",
    "ref": {
     "src": "kaikki",
@@ -738,21 +828,24 @@
       "def": "yes (contradicting a negative question or statement)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.yes.contra"
      },
      {
       "id": "s2",
       "def": "but, yet, however (conjunction)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.but"
      },
      {
       "id": "s3",
       "def": "modal particle: after all, do (Komm doch mit!)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "part.urge"
      }
     ],
     "examples": [
@@ -776,6 +869,20 @@
       "register": "colloquial",
       "context": "invitation",
       "sense": "s3"
+     },
+     {
+      "text": "Er wollte kommen, doch er hatte keine Zeit.",
+      "tr": "He wanted to come, but he had no time.",
+      "register": "neutral",
+      "context": "excuses",
+      "sense": "s2"
+     },
+     {
+      "text": "Das Essen war teuer, doch sehr gut.",
+      "tr": "The meal was expensive, but very good.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s2"
      }
     ],
     "collocations": [

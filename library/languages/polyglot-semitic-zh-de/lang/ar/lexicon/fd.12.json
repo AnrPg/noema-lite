@@ -5,8 +5,18 @@
    "lemma": "عَلَى",
    "pos": "ADP",
    "senses": [
-    "prep.on"
+    "prep.on",
+    "verb.must"
    ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʿalā",
    "forms": {
     "ADP": "عَلَى",
@@ -50,14 +60,16 @@
       "def": "duty: عَلَيْكَ أَنْ … (you have to …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.must"
      },
      {
       "id": "s3",
       "def": "on (a side): عَلَى الْيَمِينِ (on the right)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -126,7 +138,8 @@
     "subtleties": [
      "عَلَى also expresses duty and debt: عَلَيَّ أَنْ أَعْمَلَ (I have to work), عَلَيْهِ دَيْنٌ (he owes money)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:tahta",
@@ -135,6 +148,13 @@
    "senses": [
     "prep.under"
    ],
+   "features": {
+    "root": "ت ح ت",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "taḥta",
    "forms": {
     "ADP": "تَحْتَ",
@@ -175,7 +195,8 @@
       "def": "under (figurative): تَحْتَ الطَّلَبِ (on request)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -242,15 +263,26 @@
     "subtleties": [
      "Figurative uses: تَحْتَ الْمُرَاقَبَةِ (under observation), تَحْتَ الطَّلَبِ (on request)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:bijanibi",
    "lemma": "بِجَانِبِ",
    "pos": "ADP",
    "senses": [
-    "prep.nextto"
+    "prep.nextto",
+    "prep.besides"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: بِ + جَانِب (ج ن ب)"
+    },
+    "kind": "phrase",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "bi-jānibi",
    "forms": {
     "ADP": "بِجَانِبِ",
@@ -294,7 +326,8 @@
       "def": "in addition to, apart from (usually إِلَى جَانِبِ)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.besides"
      }
     ],
     "examples": [
@@ -366,7 +399,8 @@
     "subtleties": [
      "إِلَى جَانِبِ also means “in addition to”: إِلَى جَانِبِ عَمَلِهِ يَدْرُسُ (besides his work, he studies)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:amama",
@@ -375,6 +409,13 @@
    "senses": [
     "prep.infront"
    ],
+   "features": {
+    "root": "ء م م",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾamāma",
    "forms": {
     "ADP": "أَمَامَ",
@@ -415,7 +456,8 @@
       "def": "in the presence of; in the face of",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -477,7 +519,8 @@
     "subtleties": [
      "It works for time too: أَمَامَنَا يَوْمٌ طَوِيلٌ (a long day lies ahead of us)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:khalfa",
@@ -485,6 +528,20 @@
    "pos": "ADP",
    "senses": [
     "prep.behind"
+   ],
+   "features": {
+    "root": "خ ل ف",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.behind",
+     "axis": "physical or extended",
+     "value": "behind (physically)"
+    }
    ],
    "translit": "ḫalfa",
    "forms": {
@@ -580,7 +637,8 @@
     "subtleties": [
      "خَلْفَ is concrete (physically behind); وَرَاءَ can also be figurative: مَا وَرَاءَ الْخَبَرِ (what is behind the news)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:waraa",
@@ -588,6 +646,20 @@
    "pos": "ADP",
    "senses": [
     "prep.behind"
+   ],
+   "features": {
+    "root": "و ر ي",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.behind",
+     "axis": "physical or extended",
+     "value": "behind; beyond; the reason behind"
+    }
    ],
    "translit": "warāʾa",
    "forms": {
@@ -629,7 +701,8 @@
       "def": "beyond; the reason behind (figurative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -695,7 +768,8 @@
     "subtleties": [
      "وَرَاءَ often sounds a little more literary than خَلْفَ."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:bayna",
@@ -704,6 +778,13 @@
    "senses": [
     "prep.between"
    ],
+   "features": {
+    "root": "ب ي ن",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "bayna",
    "forms": {
     "ADP": "بَيْنَ",
@@ -814,16 +895,49 @@
     "subtleties": [
      "بَيْنَمَا (while) is built on it (Wiktionary)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:qarib",
    "lemma": "قَرِيب",
    "pos": "ADJ",
    "senses": [
-    "adv.near"
+    "adv.near",
+    "adj.close"
    ],
-   "root": "ق ر ب",
+   "features": {
+    "root": "ق ر ب",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": "faʿīl of قَرُبَ (to be near)",
+    "feminine": "قَرِيبَة",
+    "plurals": [
+     {
+      "form": "قَرِيبُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "near (people); relatives are أَقَارِب (the noun قَرِيب)",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقْرَب",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "word class (the same form قَرِيب)",
+     "value": "the adjective: قَرِيبٌ مِنْ …"
+    }
+   ],
    "translit": "qarīb",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "قَرِيبٌ",
@@ -898,14 +1012,16 @@
       "def": "close (a relationship): صَدِيقٌ قَرِيبٌ",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.close"
      },
      {
       "id": "s3",
       "def": "simple, easily understood (Wiktionary)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -936,6 +1052,20 @@
       "register": "neutral",
       "context": "friends",
       "sense": "s2"
+     },
+     {
+      "text": "يَسْكُنُ قَرِيبًا مِنَ الْمَدْرَسَةِ.",
+      "tr": "He lives near the school.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "تَسْكُنُ أُخْتِي قَرِيبًا مِنِّي.",
+      "tr": "My sister lives near me.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
      }
     ],
     "collocations": [
@@ -993,9 +1123,32 @@
    "lemma": "بَعِيد",
    "pos": "ADJ",
    "senses": [
-    "adv.far"
+    "adv.far",
+    "adj.unlikely"
    ],
-   "root": "ب ع د",
+   "features": {
+    "root": "ب ع د",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": "faʿīl of بَعُدَ (to be far)",
+    "feminine": "بَعِيدَة",
+    "plurals": [
+     {
+      "form": "بَعِيدُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَبْعَد",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "baʿīd",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "بَعِيدٌ",
@@ -1070,7 +1223,8 @@
       "def": "improbable, unlikely (Wiktionary)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.unlikely"
      }
     ],
     "examples": [
@@ -1148,8 +1302,23 @@
    "senses": [
     "adv.inside"
    ],
+   "features": {
+    "root": "د خ ل",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "“the inside”: used in the singular only"
+    },
+    "dual": {
+     "none": "used in the singular only"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "د خ ل",
    "translit": "dāḫil",
    "forms": {
     "N;NOM;SG;INDF": "دَاخِلٌ",
@@ -1186,7 +1355,8 @@
       "def": "the inside, the interior; (of a country) the interior, home",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1275,10 +1445,27 @@
    "pos": "NOUN",
    "class": "sg",
    "senses": [
-    "adv.outside"
+    "adv.outside",
+    "place.abroad",
+    "sci.quotient"
    ],
+   "features": {
+    "root": "خ ر ج",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "“the outside, abroad”: used in the singular only"
+    },
+    "dual": {
+     "none": "used in the singular only"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "خ ر ج",
    "translit": "ḫārij",
    "forms": {
     "N;NOM;SG;INDF": "خَارِجٌ",
@@ -1315,14 +1502,16 @@
       "def": "abroad: فِي الْخَارِجِ",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.abroad"
      },
      {
       "id": "s3",
       "def": "quotient (mathematics)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "sci.quotient"
      }
     ],
     "examples": [
@@ -1346,6 +1535,13 @@
       "register": "neutral",
       "context": "family",
       "sense": "s2"
+     },
+     {
+      "text": "خَارِجُ قِسْمَةِ عَشَرَةٍ عَلَى اثْنَيْنِ خَمْسَةٌ.",
+      "tr": "The quotient of ten divided by two is five.",
+      "register": "technical",
+      "context": "mathematics",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1398,10 +1594,26 @@
    "pos": "NOUN",
    "class": "sg",
    "senses": [
-    "adv.left"
+    "adv.left",
+    "pol.left"
    ],
+   "features": {
+    "root": "ي س ر",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a side (the left): used in the singular only"
+    },
+    "dual": {
+     "none": "used in the singular only"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ي س ر",
    "translit": "yasār",
    "forms": {
     "N;NOM;SG;INDF": "يَسَارٌ",
@@ -1437,7 +1649,8 @@
       "def": "the left (in politics)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.left"
      }
     ],
     "examples": [
@@ -1521,10 +1734,44 @@
    "pos": "NOUN",
    "class": "sg",
    "senses": [
-    "adv.right"
+    "adv.right",
+    "body.righthand",
+    "law.oath",
+    "pol.right"
    ],
+   "features": {
+    "root": "ي م ن",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَيْمَان",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "oaths; also right hands (مَا مَلَكَتْ أَيْمَانُكُمْ)",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "used in the singular only (two oaths: يَمِينَانِ, rare)"
+    },
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "يَمِينٌ غَلِيظَةٌ",
+      "what": "feminine in this meaning (a solemn oath)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ]
+   },
    "gender": "MASC",
-   "root": "ي م ن",
    "translit": "yamīn",
    "forms": {
     "N;NOM;SG;INDF": "يَمِينٌ",
@@ -1560,21 +1807,24 @@
       "def": "the right hand",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "body.righthand"
      },
      {
       "id": "s3",
       "def": "oath (feminine; plural أَيْمَان)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "law.oath"
      },
      {
       "id": "s4",
       "def": "the right (in politics)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.right"
      }
     ],
     "examples": [
@@ -1598,6 +1848,20 @@
       "register": "neutral",
       "context": "law",
       "sense": "s3"
+     },
+     {
+      "text": "كُلْ بِيَمِينِكَ.",
+      "tr": "Eat with your right hand.",
+      "register": "neutral",
+      "context": "manners",
+      "sense": "s2"
+     },
+     {
+      "text": "فَازَ الْيَمِينُ فِي الِانْتِخَابَاتِ.",
+      "tr": "The right won the elections.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1644,10 +1908,33 @@
    "lemma": "مَطْبَخ",
    "pos": "NOUN",
    "senses": [
-    "home.kitchen"
+    "home.kitchen",
+    "food.cuisine"
    ],
+   "features": {
+    "root": "ط ب خ",
+    "pattern": "مَفْعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَطَابِخ",
+      "kind": "broken",
+      "pattern": "مَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مَطْبَخَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ط ب خ",
    "translit": "maṭbaḫ",
    "forms": {
     "N;NOM;SG;INDF": "مَطْبَخٌ",
@@ -1695,7 +1982,8 @@
       "def": "cuisine, style of cooking",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.cuisine"
      }
     ],
     "examples": [
@@ -1759,10 +2047,32 @@
    "lemma": "حَمَّام",
    "pos": "NOUN",
    "senses": [
-    "home.bathroom"
+    "home.bathroom",
+    "place.bathhouse"
    ],
+   "features": {
+    "root": "ح م م",
+    "pattern": "فَعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "حَمَّامَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَمَّامَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ح م م",
    "translit": "ḥammām",
    "forms": {
     "N;NOM;SG;INDF": "حَمَّامٌ",
@@ -1810,7 +2120,8 @@
       "def": "bath, bathtub; bathhouse (hammam)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.bathhouse"
      }
     ],
     "examples": [
@@ -1885,6 +2196,32 @@
    "senses": [
     "home.bedroom"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: غُرْفَة (غ ر ف) + نَوْم (ن و م)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "غُرَف نَوْم",
+      "kind": "broken",
+      "declension": "triptote",
+      "note": "the head noun takes the plural: غُرَفُ نَوْمٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "غُرْفَتَا نَوْمٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "ġurfat nawm",
    "forms": {
@@ -1992,6 +2329,32 @@
    "senses": [
     "home.livingroom"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: غُرْفَة (غ ر ف) + جُلُوس (ج ل س)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "غُرَف جُلُوس",
+      "kind": "broken",
+      "declension": "triptote",
+      "note": "the head noun takes the plural: غُرَفُ جُلُوسٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "غُرْفَتَا جُلُوسٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "ġurfat julūs",
    "forms": {
@@ -2103,8 +2466,29 @@
    "senses": [
     "home.floor"
    ],
+   "features": {
+    "root": "ء ر ض",
+    "pattern": "فَعْلِيَّة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَرْضِيَّات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "أَرْضِيَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ء ر ض",
    "translit": "ʾarḍiyya",
    "forms": {
     "N;NOM;SG;INDF": "أَرْضِيَّةٌ",
@@ -2152,7 +2536,8 @@
       "def": "ground, basis (figurative): أَرْضِيَّةٌ مُشْتَرَكَةٌ (common ground)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2227,8 +2612,29 @@
    "senses": [
     "home.stairs"
    ],
+   "features": {
+    "root": "د ر ج",
+    "pattern": "فَعَل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَدْرَاج",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "دَرَجَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "د ر ج",
    "translit": "daraj",
    "forms": {
     "N;NOM;SG;INDF": "دَرَجٌ",
@@ -2348,8 +2754,29 @@
    "senses": [
     "home.shelf"
    ],
+   "features": {
+    "root": "ر ف ف",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "رُفُوف",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "رَفَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ر ف ف",
    "translit": "raff",
    "forms": {
     "N;NOM;SG;INDF": "رَفٌّ",
@@ -2459,6 +2886,31 @@
    "senses": [
     "home.sofa"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Turkish kanape, from Greek): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "كَنَبَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "كَنَبَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "kanaba",
    "forms": {
@@ -2565,8 +3017,28 @@
    "senses": [
     "home.fridge"
    ],
+   "features": {
+    "root": "ث ل ج",
+    "pattern": "فَعَّالَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "ثَلَّاجَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "ثَلَّاجَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ث ل ج",
    "translit": "ṯallāja",
    "forms": {
     "N;NOM;SG;INDF": "ثَلَّاجَةٌ",

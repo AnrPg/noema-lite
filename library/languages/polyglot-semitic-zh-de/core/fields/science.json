@@ -1,0 +1,58 @@
+{
+ "field": "science",
+ "title": "Science",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "sci.arcminute",
+   "gloss": "minute (of an angle)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "sci.curcumin",
+   "gloss": "curcumin",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "sci.family",
+   "gloss": "family (a rank in biological classification)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "sci.potash",
+   "gloss": "potash",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "sci.quotient",
+   "gloss": "quotient",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "sci.times",
+   "gloss": "times, multiplied by",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "sci.work",
+   "gloss": "work (physics)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  }
+ ]
+}

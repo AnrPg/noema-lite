@@ -1,0 +1,51 @@
+{
+ "field": "animals",
+ "title": "Animals",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "animal.bird",
+   "gloss": "bird, fowl",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "animal.chicken",
+   "gloss": "chicken, hen (the bird)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "animal.fish",
+   "gloss": "fish (the animal)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "animal.rooster",
+   "gloss": "rooster, cock",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "animal.shoal",
+   "gloss": "shoal, school (of fish)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "animal.workerbee",
+   "gloss": "worker bee",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  }
+ ]
+}

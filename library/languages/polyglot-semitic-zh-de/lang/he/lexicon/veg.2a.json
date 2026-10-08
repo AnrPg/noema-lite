@@ -10,9 +10,34 @@
    ],
    "gender": "MASC",
    "translit": "zangvil",
+   "features": {
+    "spelling": "זנגביל",
+    "root": {
+     "none": "a loanword (Arabic زَنْجَبِيل, Aramaic זַנְגְּבִילָא): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "זַנְגְּבִיל"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "זַנְגְּבִיל",
-    "N;SG;DEF": "הַזַּנְגְּבִיל"
+    "N;SG;DEF": "הַזַּנְגְּבִיל",
+    "N;SG;CONST": "זַנְגְּבִיל"
    },
    "note": "Used as a mass noun; Wiktionary lists no plural.",
    "ref": {
@@ -113,15 +138,38 @@
     "veg.fennel"
    ],
    "gender": "MASC",
-   "mishkal": "קֻטָּל",
    "translit": "shumar",
+   "features": {
+    "spelling": "שומר",
+    "root": {
+     "none": "from Akkadian šimru: no Hebrew root in use"
+    },
+    "pattern": "קֻטָּל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שֻׁמַּר"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שֻׁמָּר",
-    "N;SG;DEF": "הַשֻּׁמָּר"
+    "N;SG;DEF": "הַשֻּׁמָּר",
+    "N;SG;CONST": "שֻׁמַּר"
    },
    "plene": {
     "N;SG;INDF": "שומר",
-    "N;SG;DEF": "השומר"
+    "N;SG;DEF": "השומר",
+    "N;SG;CONST": "שומר"
    },
    "note": "Used as a mass noun; Wiktionary lists no plural.",
    "ref": {
@@ -225,9 +273,34 @@
    ],
    "gender": "MASC",
    "translit": "asparagos",
+   "features": {
+    "spelling": "אספרגוס",
+    "root": {
+     "none": "a loanword (Greek ἀσπάραγος): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אַסְפָּרָגוֹס"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אַסְפָּרָגוֹס",
-    "N;SG;DEF": "הָאַסְפָּרָגוֹס"
+    "N;SG;DEF": "הָאַסְפָּרָגוֹס",
+    "N;SG;CONST": "אַסְפָּרָגוֹס"
    },
    "note": "Used as a mass noun (no plural in everyday use). Wiktionary has no Hebrew entry.",
    "ref": {
@@ -317,9 +390,34 @@
    ],
    "gender": "MASC",
    "translit": "kolkas",
+   "features": {
+    "spelling": "קולקס",
+    "root": {
+     "none": "a loanword (Greek κολοκάσιον, through Mishnaic Hebrew): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קוֹלְקָס"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קוֹלְקָס",
-    "N;SG;DEF": "הַקּוֹלְקָס"
+    "N;SG;DEF": "הַקּוֹלְקָס",
+    "N;SG;CONST": "קוֹלְקָס"
    },
    "note": "Used as a mass noun. Wiktionary has no Hebrew entry; its Arabic entry قلقاس cites Mishnaic Hebrew קולקס (“taro”).",
    "ref": {
@@ -406,9 +504,34 @@
    ],
    "gender": "MASC",
    "translit": "shinan",
+   "features": {
+    "spelling": "שינן",
+    "root": {
+     "none": "a modern plant name (built on שֵׁן “tooth”, like French dent-de-lion): no verb root"
+    },
+    "pattern": {
+     "none": "a modern coinage: no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שִׁינָן"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שִׁינָן",
-    "N;SG;DEF": "הַשִּׁינָן"
+    "N;SG;DEF": "הַשִּׁינָן",
+    "N;SG;CONST": "שִׁינָן"
    },
    "note": "Used as a mass noun for the greens.",
    "ref": {
@@ -495,13 +618,46 @@
     "veg.turnip"
    ],
    "gender": "FEM",
-   "mishkal": "קֶטֶל",
    "translit": "lefet",
+   "features": {
+    "spelling": "לפת",
+    "root": {
+     "none": "a primary noun (Proto-Semitic *lapt-): not the root ל־פ־ת “to grasp”"
+    },
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "לְפָתוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "לֶפֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "לַפְתוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "לֶפֶת",
     "N;SG;DEF": "הַלֶּפֶת",
     "N;PL;INDF": "לְפָתוֹת",
-    "N;PL;DEF": "הַלְּפָתוֹת"
+    "N;PL;DEF": "הַלְּפָתוֹת",
+    "N;SG;CONST": "לֶפֶת",
+    "N;PL;CONST": "לַפְתוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -586,15 +742,36 @@
     "veg.chicory"
    ],
    "gender": "MASC",
-   "mishkal": "קֹטֶל",
    "translit": "olesh",
+   "features": {
+    "spelling": "עולש",
+    "root": "ע ל שׁ",
+    "pattern": "קֹטֶל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עֹלֶשׁ"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "עֹלֶשׁ",
-    "N;SG;DEF": "הָעֹלֶשׁ"
+    "N;SG;DEF": "הָעֹלֶשׁ",
+    "N;SG;CONST": "עֹלֶשׁ"
    },
    "plene": {
     "N;SG;INDF": "עולש",
-    "N;SG;DEF": "העולש"
+    "N;SG;DEF": "העולש",
+    "N;SG;CONST": "עולש"
    },
    "note": "Used as a mass noun; Wiktionary lists no plural. Covers both chicory and endive (Wiktionary: “chicory, endive”).",
    "ref": {
@@ -687,11 +864,31 @@
     "veg.purslane"
    ],
    "gender": "FEM",
-   "mishkal": "קְטֵלָה",
    "translit": "regela",
+   "features": {
+    "spelling": "רגלה",
+    "root": "ר ג ל",
+    "pattern": "קְטֵלָה",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רְגֵלַת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "רְגֵלָה",
-    "N;SG;DEF": "הָרְגֵלָה"
+    "N;SG;DEF": "הָרְגֵלָה",
+    "N;SG;CONST": "רְגֵלַת"
    },
    "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -779,6 +976,27 @@
    ],
    "gender": "MASC",
    "translit": "artishok yerushalmi",
+   "features": {
+    "spelling": "ארטישוק ירושלמי",
+    "root": {
+     "none": "a compound of two words (אַרְטִישׁוֹק + יְרוּשַׁלְמִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אַרְטִישׁוֹק יְרוּשַׁלְמִי",
     "N;SG;DEF": "הָאַרְטִישׁוֹק הַיְּרוּשַׁלְמִי"
@@ -874,9 +1092,34 @@
    ],
    "gender": "MASC",
    "translit": "sirpad",
+   "features": {
+    "spelling": "סרפד",
+    "root": {
+     "none": "a Biblical plant name of four consonants: no verb root"
+    },
+    "pattern": {
+     "none": "an old plant name: no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סִרְפַּד"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סִרְפָּד",
-    "N;SG;DEF": "הַסִּרְפָּד"
+    "N;SG;DEF": "הַסִּרְפָּד",
+    "N;SG;CONST": "סִרְפַּד"
    },
    "note": "Used as a mass noun for the greens. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -972,6 +1215,33 @@
    ],
    "gender": "MASC",
    "translit": "gezer lavan",
+   "features": {
+    "spelling": "גזר לבן",
+    "root": {
+     "none": "a compound of two words (גֶּזֶר + לָבָן): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "גְּזָרִים לְבָנִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "גֶּזֶר לָבָן",
     "N;SG;DEF": "הַגֶּזֶר הַלָּבָן",
@@ -1064,13 +1334,39 @@
    ],
    "gender": "FEM",
    "translit": "chum'a",
+   "features": {
+    "spelling": "חומעה",
+    "root": {
+     "none": "a Mishnaic plant name with no root in use"
+    },
+    "pattern": {
+     "none": "an old plant name: no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֻמְעַת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֻמְעָה",
-    "N;SG;DEF": "הַחֻמְעָה"
+    "N;SG;DEF": "הַחֻמְעָה",
+    "N;SG;CONST": "חֻמְעַת"
    },
    "plene": {
     "N;SG;INDF": "חומעה",
-    "N;SG;DEF": "החומעה"
+    "N;SG;DEF": "החומעה",
+    "N;SG;CONST": "חומעת"
    },
    "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -1153,13 +1449,39 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.horseradish"
+    "veg.horseradish",
+    "relig.maror"
    ],
    "gender": "FEM",
    "translit": "chazeret",
+   "features": {
+    "spelling": "חזרת",
+    "root": {
+     "none": "a Mishnaic plant name with no root in use"
+    },
+    "pattern": {
+     "none": "an old plant name: no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲזֶרֶת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֲזֶרֶת",
-    "N;SG;DEF": "הַחֲזֶרֶת"
+    "N;SG;DEF": "הַחֲזֶרֶת",
+    "N;SG;CONST": "חֲזֶרֶת"
    },
    "note": "Used as a mass noun. Wiktionary has no Hebrew entry for the word.",
    "ref": {
@@ -1188,7 +1510,8 @@
       "def": "one of the bitter herbs (maror) of the Passover Seder",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.maror"
      }
     ],
     "examples": [
@@ -1257,7 +1580,28 @@
     "veg.watercress"
    ],
    "gender": "MASC",
-   "translit": "gargir ha-nechalim",
+   "translit": "gargir hanechalim",
+   "features": {
+    "spelling": "גרגיר הנחלים",
+    "root": {
+     "none": "a compound of two words (גַּרְגִּיר + הַנְּחָלִים): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "גַּרְגִּיר הַנְּחָלִים",
     "N;SG;DEF": "גַּרְגִּיר הַנְּחָלִים"
@@ -1346,11 +1690,43 @@
    ],
    "gender": "MASC",
    "translit": "batsaltsal",
+   "features": {
+    "spelling": "בצלצל",
+    "root": "ב צ ל",
+    "pattern": "קְטַלְטַל",
+    "plurals": [
+     {
+      "form": "בְּצַלְצַלִּים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בְּצַלְצַל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בְּצַלְצְלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בְּצַלְצַל",
     "N;SG;DEF": "הַבְּצַלְצַל",
     "N;PL;INDF": "בְּצַלְצַלִּים",
-    "N;PL;DEF": "הַבְּצַלְצַלִּים"
+    "N;PL;DEF": "הַבְּצַלְצַלִּים",
+    "N;SG;CONST": "בְּצַלְצַל",
+    "N;PL;CONST": "בְּצַלְצְלֵי"
    },
    "note": "Wiktionary has no Hebrew entry.",
    "ref": {
@@ -1437,9 +1813,34 @@
    ],
    "gender": "MASC",
    "translit": "mangold",
+   "features": {
+    "spelling": "מנגולד",
+    "root": {
+     "none": "a loanword (German Mangold): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַנְגּוֹלְד"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מַנְגּוֹלְד",
-    "N;SG;DEF": "הַמַּנְגּוֹלְד"
+    "N;SG;DEF": "הַמַּנְגּוֹלְד",
+    "N;SG;CONST": "מַנְגּוֹלְד"
    },
    "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -1531,13 +1932,52 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.arugula"
+    "veg.arugula",
+    "measure.grain"
    ],
    "gender": "MASC",
    "translit": "gargir",
+   "features": {
+    "spelling": "גרגיר",
+    "root": "ג ר ג ר",
+    "pattern": {
+     "none": "a reduplicated noun (גַּרְגִּיר), not a common pattern"
+    },
+    "plurals": [
+     {
+      "form": "גַּרְגִּירִים",
+      "kind": "im",
+      "senses": [
+       "s2"
+      ],
+      "note": "grains (גַּרְגִּירֵי אֹרֶז); the salad green (s1) has no plural"
+     }
+    ],
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "גַּרְגִּיר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "גַּרְגִּירֵי",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "גַּרְגִּיר",
-    "N;SG;DEF": "הַגַּרְגִּיר"
+    "N;SG;DEF": "הַגַּרְגִּיר",
+    "N;SG;CONST": "גַּרְגִּיר",
+    "N;PL;CONST": "גַּרְגִּירֵי"
    },
    "note": "As a salad green used as a mass noun.",
    "ref": {
@@ -1569,7 +2009,8 @@
       "def": "a grain, granule (גַּרְגִּיר אֹרֶז “a grain of rice”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.grain"
      }
     ],
     "examples": [
@@ -1634,7 +2075,28 @@
     "veg.molokhia"
    ],
    "gender": "FEM",
-   "translit": "melukhiya",
+   "translit": "meluchiya",
+   "features": {
+    "spelling": "מלוחייה",
+    "root": {
+     "none": "a loanword (Arabic مُلُوخِيَّة): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a loanword ending in ־ָה: not used as the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מְלוּחִיָּה",
     "N;SG;DEF": "הַמְּלוּחִיָּה"
@@ -1727,6 +2189,33 @@
    ],
    "gender": "MASC",
    "translit": "shoresh seleri",
+   "features": {
+    "spelling": "שורש סלרי",
+    "root": {
+     "none": "a compound of two words (שֹׁרֶשׁ + סֶלֶרִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "שָׁרְשֵׁי סֶלֶרִי",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שֹׁרֶשׁ סֶלֶרִי",
     "N;SG;DEF": "שֹׁרֶשׁ הַסֶּלֶרִי",
@@ -1830,9 +2319,34 @@
    ],
    "gender": "MASC",
    "translit": "radikyo",
+   "features": {
+    "spelling": "רדיקיו",
+    "root": {
+     "none": "a loanword (Italian radicchio): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רָדִיקְיוֹ"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "רָדִיקְיוֹ",
-    "N;SG;DEF": "הָרָדִיקְיוֹ"
+    "N;SG;DEF": "הָרָדִיקְיוֹ",
+    "N;SG;CONST": "רָדִיקְיוֹ"
    },
    "note": "A loanword used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -1917,6 +2431,33 @@
    ],
    "gender": "MASC",
    "translit": "batsal sagol",
+   "features": {
+    "spelling": "בצל סגול",
+    "root": {
+     "none": "a compound of two words (בָּצָל + סָגֹל): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בְּצָלִים סְגֻלִּים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בָּצָל סָגֹל",
     "N;SG;DEF": "הַבָּצָל הַסָּגֹל",

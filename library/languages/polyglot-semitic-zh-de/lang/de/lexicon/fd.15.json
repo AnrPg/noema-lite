@@ -9,6 +9,21 @@
     "time.january"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Januar",
     "N;ACC;SG": "Januar",
@@ -122,6 +137,21 @@
     "time.february"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Februar",
     "N;ACC;SG": "Februar",
@@ -231,6 +261,21 @@
     "time.march"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "März",
     "N;ACC;SG": "März",
@@ -334,6 +379,21 @@
     "time.april"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "April",
     "N;ACC;SG": "April",
@@ -452,6 +512,21 @@
     "time.may"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mai",
     "N;ACC;SG": "Mai",
@@ -556,6 +631,21 @@
     "time.june"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Juni",
     "N;ACC;SG": "Juni",
@@ -659,6 +749,21 @@
     "time.july"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Juli",
     "N;ACC;SG": "Juli",
@@ -762,6 +867,21 @@
     "time.august"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "August",
     "N;ACC;SG": "August",
@@ -866,6 +986,21 @@
     "time.september"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "September",
     "N;ACC;SG": "September",
@@ -969,6 +1104,21 @@
     "time.october"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Oktober",
     "N;ACC;SG": "Oktober",
@@ -1072,6 +1222,21 @@
     "time.november"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "November",
     "N;ACC;SG": "November",
@@ -1175,6 +1340,21 @@
     "time.december"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "in practice used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Dezember",
     "N;ACC;SG": "Dezember",
@@ -1277,6 +1457,27 @@
     "time.spring"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Frühlinge",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: früh + -ling"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Frühling",
     "N;ACC;SG": "Frühling",
@@ -1313,7 +1514,8 @@
       "def": "springtime, youth (figurative)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1390,6 +1592,27 @@
     "time.summer"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Sommer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Sommer",
     "N;ACC;SG": "Sommer",
@@ -1509,6 +1732,27 @@
     "time.autumn"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Herbste",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Herbst",
     "N;ACC;SG": "Herbst",
@@ -1550,7 +1794,8 @@
       "def": "autumn of life (figurative)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1622,6 +1867,27 @@
     "time.winter"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Winter",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Winter",
     "N;ACC;SG": "Winter",
@@ -1733,6 +1999,27 @@
     "time.week"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wochen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Woche",
     "N;ACC;SG": "Woche",
@@ -1769,7 +2056,8 @@
       "def": "the working week, weekdays (unter der Woche)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1854,6 +2142,27 @@
     "time.month"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Monate",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Monat",
     "N;ACC;SG": "Monat",
@@ -1964,6 +2273,28 @@
     "time.year"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jahre",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Jahr",
     "N;ACC;SG": "Jahr",
@@ -2005,7 +2336,8 @@
       "def": "year (of age): Ich bin 30 Jahre alt.",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2105,9 +2437,33 @@
    "lemma": "Stunde",
    "pos": "NOUN",
    "senses": [
-    "time.hour"
+    "time.hour",
+    "edu.lesson"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Stunden",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Stunde",
     "N;ACC;SG": "Stunde",
@@ -2144,14 +2500,16 @@
       "def": "lesson, class (Deutschstunde)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "edu.lesson"
      },
      {
       "id": "s3",
       "def": "hour, moment (die Stunde der Wahrheit)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2252,9 +2610,32 @@
    "lemma": "Minute",
    "pos": "NOUN",
    "senses": [
-    "time.minute"
+    "time.minute",
+    "sci.arcminute"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Minuten",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Minute",
     "N;ACC;SG": "Minute",
@@ -2291,7 +2672,8 @@
       "def": "minute (of an angle)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "sci.arcminute"
      }
     ],
     "examples": [
@@ -2315,6 +2697,13 @@
       "register": "neutral",
       "context": "asking the way",
       "sense": "s1"
+     },
+     {
+      "text": "Ein Grad hat sechzig Minuten.",
+      "tr": "A degree has sixty minutes (of arc).",
+      "register": "technical",
+      "context": "geometry",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2373,9 +2762,46 @@
    "lemma": "Uhr",
    "pos": "NOUN",
    "senses": [
-    "time.oclock"
+    "time.oclock",
+    "obj.clock"
+   ],
+   "contrasts": [
+    {
+     "concept": "obj.clock",
+     "axis": "register",
+     "value": "the everyday word for any clock or watch"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Uhren",
+      "pattern": "-en",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "form": "Uhr",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ],
+      "note": "after a number the word does not change: acht Uhr"
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Uhr",
     "N;ACC;SG": "Uhr",
@@ -2412,7 +2838,8 @@
       "def": "clock, watch",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.clock"
      }
     ],
     "examples": [
@@ -2506,9 +2933,33 @@
    "lemma": "Datum",
    "pos": "NOUN",
    "senses": [
-    "time.date"
+    "time.date",
+    "tech.data"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Daten",
+      "pattern": "foreign",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "data exists only in the plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Datum",
     "N;ACC;SG": "Datum",
@@ -2545,7 +2996,8 @@
       "def": "data (plural Daten: information)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "tech.data"
      }
     ],
     "examples": [
@@ -2622,6 +3074,35 @@
     "time.birthday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Geburtstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Geburt",
+      "role": "modifier",
+      "linker": "-s-"
+     },
+     {
+      "part": "Tag",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Geburtstag",
     "N;ACC;SG": "Geburtstag",
@@ -2744,7 +3225,36 @@
    "senses": [
     "time.holiday"
    ],
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "whose time off",
+     "value": "one’s own time off work, a trip"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Urlaube",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Urlaub",
     "N;ACC;SG": "Urlaub",
@@ -2781,7 +3291,8 @@
       "def": "leave (from work or the army)",
       "register": [
        "dated"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2863,6 +3374,27 @@
    "senses": [
     "time.holiday"
    ],
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "whose time off",
+     "value": "school, university or parliament holidays (plural only)"
+    }
+   ],
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Ferien)"
+    },
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;PL": "Ferien",
     "N;ACC;PL": "Ferien",
@@ -2895,7 +3427,8 @@
       "def": "vacation, holiday (one’s own; especially in Switzerland and Austria)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2975,9 +3508,27 @@
    "lemma": "bis",
    "pos": "ADP",
    "senses": [
-    "prep.until"
+    "prep.until",
+    "prep.by.time",
+    "prep.upto"
    ],
-   "governs": "ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ],
+      "when": "mostly with no article (bis Montag, bis Berlin); before an article another preposition decides the case: bis zum Bahnhof"
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -3004,21 +3555,24 @@
       "def": "by (a deadline: bis Freitag fertig)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.by.time"
      },
      {
       "id": "s3",
       "def": "to, as far as (place: bis Berlin, bis zum Bahnhof)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.upto"
      },
      {
       "id": "s4",
       "def": "von … bis …: from … to …",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3101,9 +3655,23 @@
    "lemma": "seit",
    "pos": "ADP",
    "senses": [
-    "prep.since"
+    "prep.since",
+    "prep.for.time"
    ],
-   "governs": "DAT",
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -3130,7 +3698,8 @@
       "def": "for (a period still going on: seit zwei Jahren)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.for.time"
      }
     ],
     "examples": [
@@ -3207,9 +3776,30 @@
    "lemma": "während",
    "pos": "ADP",
    "senses": [
-    "prep.during"
+    "prep.during",
+    "conj.while"
    ],
-   "governs": "GEN",
+   "contrasts": [
+    {
+     "concept": "prep.during",
+     "axis": "what follows",
+     "value": "a period or an event, + genitive (während des Urlaubs)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "GEN",
+      "senses": [
+       "s1"
+      ],
+      "when": "in everyday speech also the dative: während dem Essen"
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -3230,6 +3820,14 @@
        "neutral"
       ],
       "concept": "prep.during"
+     },
+     {
+      "id": "s2",
+      "def": "while; whereas (conjunction: Während ich koche, …)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.while"
      }
     ],
     "examples": [
@@ -3253,6 +3851,13 @@
       "register": "neutral",
       "context": "holidays",
       "sense": "s1"
+     },
+     {
+      "text": "Während ich koche, deckst du den Tisch.",
+      "tr": "While I cook, you lay the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3293,9 +3898,43 @@
    "lemma": "um",
    "pos": "ADP",
    "senses": [
-    "prep.attime"
+    "prep.attime",
+    "prep.around",
+    "prep.about",
+    "prep.by.difference",
+    "conj.inorderto"
    ],
-   "governs": "ACC",
+   "contrasts": [
+    {
+     "concept": "prep.about",
+     "axis": "the words it goes with",
+     "value": "es geht um … (it is about)"
+    },
+    {
+     "concept": "conj.inorderto",
+     "axis": "construction",
+     "value": "um … zu + infinitive (the same subject)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "contractions": [
+     {
+      "form": "ums",
+      "article": "das"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -3322,21 +3961,32 @@
       "def": "around (um den Tisch, um die Ecke)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.around"
      },
      {
       "id": "s3",
       "def": "about (es geht um …: it is about …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.about"
      },
      {
       "id": "s4",
       "def": "by (a difference: um zehn Euro billiger)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.by.difference"
+     },
+     {
+      "id": "s5",
+      "def": "um … zu: in order to (Ich lerne Deutsch, um in Berlin zu arbeiten)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "conj.inorderto"
      }
     ],
     "examples": [
@@ -3367,6 +4017,34 @@
       "register": "neutral",
       "context": "conversation",
       "sense": "s3"
+     },
+     {
+      "text": "Ich lerne Deutsch, um in Berlin zu arbeiten.",
+      "tr": "I am learning German in order to work in Berlin.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s5"
+     },
+     {
+      "text": "Er spart Geld, um ein Auto zu kaufen.",
+      "tr": "He is saving money to buy a car.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s5"
+     },
+     {
+      "text": "In dem Film geht es um eine Familie in Berlin.",
+      "tr": "The film is about a family in Berlin.",
+      "register": "neutral",
+      "context": "cinema",
+      "sense": "s3"
+     },
+     {
+      "text": "Die Preise sind um zehn Prozent gestiegen.",
+      "tr": "Prices have risen by ten per cent.",
+      "register": "neutral",
+      "context": "economy",
+      "sense": "s4"
      }
     ],
     "collocations": [

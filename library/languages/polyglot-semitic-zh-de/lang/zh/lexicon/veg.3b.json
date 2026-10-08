@@ -9,10 +9,21 @@
    "senses": [
     "veg.capers"
    ],
-   "measure": [
-    "颗",
-    "粒"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
    "ref": {
     "src": "zh.wikipedia: 刺山柑 (title for Capparis spinosa, Wikidata Q156251); Wiktionary has no entry (its 酸豆 lists “pickled caper”)",
     "checked": "2026-10-08"
@@ -103,9 +114,20 @@
    "senses": [
     "veg.kiwano"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 火參果 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "market name (not in Wiktionary or CC-CEDICT); zh.wikipedia files the plant as 刺角瓜 (Wikidata Q41318)",
     "checked": "2026-10-08"
@@ -198,10 +220,21 @@
    "senses": [
     "veg.limabean"
    ],
-   "measure": [
-    "颗",
-    "粒"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -299,10 +332,21 @@
    "senses": [
     "veg.savoy"
    ],
-   "measure": [
-    "个",
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 皺葉甘藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "棵"
+    ]
+   },
    "ref": {
     "src": "descriptive standard name (not in Wiktionary or CC-CEDICT)",
     "checked": "2026-10-08"
@@ -388,9 +432,20 @@
    "senses": [
     "veg.guar"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 瓜爾豆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -482,10 +537,21 @@
    "senses": [
     "veg.nori"
    ],
-   "measure": [
-    "张",
-    "片"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "张",
+     "片"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -506,13 +572,6 @@
        "neutral"
       ],
       "concept": "veg.nori"
-     },
-     {
-      "id": "s2",
-      "def": "(Eastern Min) eggplant",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -588,10 +647,21 @@
    "senses": [
     "veg.ridgedgourd"
    ],
-   "measure": [
-    "根",
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 稜角絲瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -695,9 +765,20 @@
    "senses": [
     "veg.wingedbean"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 四稜豆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -787,11 +868,23 @@
    "pinyin": "jiāng dòu",
    "pos": "NOUN",
    "senses": [
-    "veg.yardlongbean"
+    "veg.yardlongbean",
+    "food.blackeyedpea"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -821,7 +914,8 @@
       "def": "cowpea, black-eyed pea (Vigna unguiculata) and its dry beans",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.blackeyedpea"
      }
     ],
     "examples": [
@@ -910,10 +1004,21 @@
    "senses": [
     "veg.romanesco"
    ],
-   "measure": [
-    "个",
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 寶塔花菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "棵"
+    ]
+   },
    "ref": {
     "src": "zh.wikipedia: 宝塔花菜 (title for Wikidata Q1775431, “又称罗马花椰菜”); Wiktionary has no entry",
     "checked": "2026-10-08"
@@ -1005,10 +1110,21 @@
    "senses": [
     "veg.cayenne"
    ],
-   "measure": [
-    "根",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1094,9 +1210,20 @@
    "senses": [
     "veg.habanero"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "zh.wikipedia: 哈瓦那辣椒 (title for Wikidata Q764375); Wiktionary has no entry",
     "checked": "2026-10-08"
@@ -1182,9 +1309,20 @@
    "senses": [
     "veg.wakame"
    ],
-   "measure": [
-    "片"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 裙帶菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "片"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1281,10 +1419,21 @@
    "senses": [
     "veg.snakegourd"
    ],
-   "measure": [
-    "根",
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1373,12 +1522,24 @@
    "pinyin": "hǎi dài",
    "pos": "NOUN",
    "senses": [
-    "veg.kombu"
+    "veg.kombu",
+    "person.unemployedreturnee"
    ],
-   "measure": [
-    "片",
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 海帶 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "片",
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1408,7 +1569,8 @@
       "def": "(neologism, humorous) a returnee from study abroad who cannot find a job (a pun on 海待)",
       "register": [
        "humorous"
-      ]
+      ],
+      "concept": "person.unemployedreturnee"
      }
     ],
     "examples": [
@@ -1492,9 +1654,20 @@
    "senses": [
     "veg.sealettuce"
    ],
-   "measure": [
-    "片"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 石蓴 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "片"
+    ]
+   },
    "ref": {
     "src": "zh.wikipedia: 石莼属 (Ulva, Wikidata Q1109330), species 石莼 (Ulva lactuca); Wiktionary has no entry",
     "checked": "2026-10-08"
@@ -1585,10 +1758,21 @@
    "senses": [
     "veg.kailan"
    ],
-   "measure": [
-    "棵",
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 芥藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1609,13 +1793,6 @@
        "neutral"
       ],
       "concept": "veg.kailan"
-     },
-     {
-      "id": "s2",
-      "def": "(dialectal Mandarin) kohlrabi",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -1696,10 +1873,21 @@
    "senses": [
     "veg.edamame"
    ],
-   "measure": [
-    "颗",
-    "粒"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "颗",
+     "粒"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1795,9 +1983,20 @@
    "senses": [
     "veg.pattypan"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 飛碟瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "market and seed-catalogue name (not in Wiktionary, CC-CEDICT or zh.wikipedia)",
     "checked": "2026-10-08"
@@ -1883,9 +2082,20 @@
    "senses": [
     "veg.hijiki"
    ],
-   "measure": [
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 羊棲菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把"
+    ]
+   },
    "ref": {
     "src": "zh.wikipedia: 羊栖菜 (title for Wikidata Q1204264); Wiktionary has no entry",
     "checked": "2026-10-08"
@@ -1974,12 +2184,24 @@
    "pinyin": "hǎi pú táo",
    "pos": "NOUN",
    "senses": [
-    "veg.seagrapes"
+    "veg.seagrapes",
+    "nature.seagrape"
    ],
-   "measure": [
-    "串",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "串",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2006,7 +2228,8 @@
       "def": "sea grape (Coccoloba uvifera): a seaside tree of the Caribbean",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "nature.seagrape"
      }
     ],
     "examples": [
@@ -2085,9 +2308,20 @@
    "senses": [
     "veg.spaghettisquash"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 金絲瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "zh.wikipedia: 金絲瓜 (title for Wikidata Q2142043); Wiktionary has no entry",
     "checked": "2026-10-08"
@@ -2184,10 +2418,21 @@
    "senses": [
     "veg.komatsuna"
    ],
-   "measure": [
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "CC-CEDICT (MDBG): 小松菜 xiao3 song1 cai4 ‘komatsuna’; zh.wikipedia (Wikidata Q4383692); Wiktionary has no Chinese entry",
     "checked": "2026-10-08"
@@ -2273,10 +2518,21 @@
    "senses": [
     "veg.mizuna"
    ],
-   "measure": [
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "zh.wikipedia: 水菜 (title for Wikidata Q50912348), “也称京菜、京水、京水菜、京都水菜”; Wiktionary has no entry",
     "checked": "2026-10-08"
@@ -2367,9 +2623,20 @@
    "senses": [
     "veg.tatsoi"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2471,9 +2738,20 @@
    "senses": [
     "veg.zucchiniflower"
    ],
-   "measure": [
-    "朵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "朵"
+    ]
+   },
    "ref": {
     "src": "transparent compound 南瓜 + 花 (not in Wiktionary or CC-CEDICT); the usual Chinese name for squash blossoms as food",
     "checked": "2026-10-08"
@@ -2568,10 +2846,21 @@
    "senses": [
     "veg.pointedcabbage"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2592,13 +2881,6 @@
        "neutral"
       ],
       "concept": "veg.pointedcabbage"
-     },
-     {
-      "id": "s2",
-      "def": "(Northern Wu, Xuzhou Mandarin) cabbage",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -2669,10 +2951,21 @@
    "senses": [
     "veg.babycorn"
    ],
-   "measure": [
-    "根",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 玉米筍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
    "ref": {
     "src": "CC-CEDICT (MDBG): 玉米筍|玉米笋 yu4 mi3 sun3 ‘baby corn’; zh.wikipedia (Wikidata Q4838440); Wiktionary has no entry",
     "checked": "2026-10-08"
@@ -2758,9 +3051,20 @@
    "senses": [
     "veg.sugarsnap"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

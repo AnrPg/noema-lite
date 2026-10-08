@@ -9,6 +9,10 @@
   {
    "id": "extended",
    "title": "The extended family"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -168,6 +172,46 @@
    "subgroup": "extended",
    "tier": 1,
    "rank": 22
+  },
+  {
+   "id": "family.ancestor",
+   "gloss": "ancestor, forefather",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "family.child",
+   "gloss": "child, offspring (son or daughter, of any age)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "family.descendant",
+   "gloss": "descendant",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "family.grandchild",
+   "gloss": "grandchild",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "family.household",
+   "gloss": "household, family (the people of a house)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

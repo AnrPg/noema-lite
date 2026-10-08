@@ -1,0 +1,30 @@
+{
+ "field": "arts",
+ "title": "The arts",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "art.clef",
+   "gloss": "clef (in music)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "art.clown",
+   "gloss": "the clown role of Chinese opera; the second Earthly Branch (Ox)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "art.soiree",
+   "gloss": "soirée, evening event (music, poetry)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  }
+ ]
+}

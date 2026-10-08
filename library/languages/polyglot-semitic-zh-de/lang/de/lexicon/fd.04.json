@@ -5,9 +5,40 @@
    "lemma": "Haus",
    "pos": "NOUN",
    "senses": [
-    "home.house"
+    "home.house",
+    "place.home",
+    "pol.dynasty"
+   ],
+   "contrasts": [
+    {
+     "concept": "place.home",
+     "axis": "where or where to",
+     "value": "the noun inside both phrases (zu Hause, nach Hause)"
+    }
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Häuser",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Haus",
     "N;ACC;SG": "Haus",
@@ -44,14 +75,16 @@
       "def": "home – only in zu Hause (at home) and nach Hause (home, homewards)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.home"
      },
      {
       "id": "s3",
       "def": "family, dynasty; firm; theatre audience (das Haus Habsburg, ein volles Haus)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "pol.dynasty"
      }
     ],
     "examples": [
@@ -89,6 +122,13 @@
       "register": "formal",
       "context": "culture",
       "sense": "s3"
+     },
+     {
+      "text": "Wann kommst du nach Hause?",
+      "tr": "When are you coming home?",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -179,6 +219,28 @@
     "home.flat"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wohnungen",
+      "pattern": "-en",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: wohnen + -ung"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wohnung",
     "N;ACC;SG": "Wohnung",
@@ -215,7 +277,8 @@
       "def": "dwelling, accommodation, place where someone lives",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -309,6 +372,27 @@
     "home.room"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zimmer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zimmer",
     "N;ACC;SG": "Zimmer",
@@ -433,6 +517,27 @@
     "home.door"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Türen",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tür",
     "N;ACC;SG": "Tür",
@@ -569,9 +674,32 @@
    "lemma": "Fenster",
    "pos": "NOUN",
    "senses": [
-    "home.window"
+    "home.window",
+    "tech.window"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fenster",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Fenster",
     "N;ACC;SG": "Fenster",
@@ -608,7 +736,8 @@
       "def": "window on a screen; time window (Zeitfenster)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "tech.window"
      }
     ],
     "examples": [
@@ -697,9 +826,32 @@
    "lemma": "Wand",
    "pos": "NOUN",
    "senses": [
-    "home.wall"
+    "home.wall",
+    "nature.rockface"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wände",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wand",
     "N;ACC;SG": "Wand",
@@ -736,7 +888,8 @@
       "def": "rock face, steep face of a mountain (die Nordwand)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "nature.rockface"
      }
     ],
     "examples": [
@@ -846,6 +999,27 @@
     "home.table"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tische",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tisch",
     "N;ACC;SG": "Tisch",
@@ -882,7 +1056,8 @@
       "def": "the table as a meal or the people at it (Zu Tisch!)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -989,9 +1164,33 @@
    "lemma": "Stuhl",
    "pos": "NOUN",
    "senses": [
-    "home.chair"
+    "home.chair",
+    "edu.chair",
+    "health.stool"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Stühle",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Stuhl",
     "N;ACC;SG": "Stuhl",
@@ -1028,7 +1227,8 @@
       "def": "chair, seat of an office (der Lehrstuhl = professorship; der Heilige Stuhl = the Holy See)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "edu.chair"
      },
      {
       "id": "s3",
@@ -1038,7 +1238,8 @@
       ],
       "domains": [
        "medicine"
-      ]
+      ],
+      "concept": "health.stool"
      }
     ],
     "examples": [
@@ -1069,6 +1270,13 @@
       "register": "formal",
       "context": "university",
       "sense": "s2"
+     },
+     {
+      "text": "Der Arzt fragt, ob Blut im Stuhl ist.",
+      "tr": "The doctor asks whether there is blood in the stool.",
+      "register": "technical",
+      "context": "medicine",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1139,9 +1347,32 @@
    "lemma": "Bett",
    "pos": "NOUN",
    "senses": [
-    "home.bed"
+    "home.bed",
+    "nature.riverbed"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Betten",
+      "pattern": "-en",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bett",
     "N;ACC;SG": "Bett",
@@ -1178,7 +1409,8 @@
       "def": "bed of a river or sea (das Flussbett)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.riverbed"
      }
     ],
     "examples": [
@@ -1283,9 +1515,32 @@
    "lemma": "Schrank",
    "pos": "NOUN",
    "senses": [
-    "home.cupboard"
+    "home.cupboard",
+    "person.hulk"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schränke",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schrank",
     "N;ACC;SG": "Schrank",
@@ -1322,7 +1577,8 @@
       "def": "a big, broad-shouldered man",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "person.hulk"
      }
     ],
     "examples": [
@@ -1416,9 +1672,32 @@
    "lemma": "Lampe",
    "pos": "NOUN",
    "senses": [
-    "home.lamp"
+    "home.lamp",
+    "obj.lightbulb"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Lampen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Lampe",
     "N;ACC;SG": "Lampe",
@@ -1455,7 +1734,8 @@
       "def": "light bulb (short for Glühlampe)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "obj.lightbulb"
      }
     ],
     "examples": [
@@ -1544,9 +1824,32 @@
    "lemma": "Buch",
    "pos": "NOUN",
    "senses": [
-    "obj.book"
+    "obj.book",
+    "work.accounts"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bücher",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Buch",
     "N;ACC;SG": "Buch",
@@ -1583,7 +1886,8 @@
       "def": "books, accounts (records kept by a business)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "work.accounts"
      }
     ],
     "examples": [
@@ -1694,9 +1998,37 @@
    "lemma": "Stift",
    "pos": "NOUN",
    "senses": [
-    "obj.pen"
+    "obj.pen",
+    "obj.peg",
+    "job.apprentice"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Stifte",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Stift: an endowed monastery or convent; a foundation"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Stift",
     "N;ACC;SG": "Stift",
@@ -1733,14 +2065,16 @@
       "def": "pin, peg (short rod)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "obj.peg"
      },
      {
       "id": "s3",
       "def": "apprentice, youngster",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "job.apprentice"
      }
     ],
     "examples": [
@@ -1771,6 +2105,13 @@
       "register": "technical",
       "context": "assembly instructions",
       "sense": "s2"
+     },
+     {
+      "text": "In der Werkstatt muss der Stift immer den Kaffee kochen.",
+      "tr": "In the workshop the apprentice always has to make the coffee.",
+      "register": "colloquial",
+      "context": "workplace",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1835,9 +2176,34 @@
    "lemma": "Papier",
    "pos": "NOUN",
    "senses": [
-    "obj.paper"
+    "obj.paper",
+    "comm.document"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Papiere",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ],
+      "note": "documents, identity papers: always plural"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Papier",
     "N;ACC;SG": "Papier",
@@ -1874,14 +2240,16 @@
       "def": "Papiere (plural): documents, papers (identity papers)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s3"
      },
      {
       "id": "s3",
       "def": "a paper, a written document (ein Positionspapier)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "comm.document"
      }
     ],
     "examples": [
@@ -1912,6 +2280,13 @@
       "register": "formal",
       "context": "police check",
       "sense": "s2"
+     },
+     {
+      "text": "Die Partei hat ein neues Papier zur Bildung vorgelegt.",
+      "tr": "The party has presented a new paper on education.",
+      "register": "formal",
+      "context": "politics",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1976,7 +2351,35 @@
    "senses": [
     "obj.phone"
    ],
+   "contrasts": [
+    {
+     "concept": "obj.phone",
+     "axis": "kind of phone",
+     "value": "a telephone in general, a landline"
+    }
+   ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Telefone",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Telefon",
     "N;ACC;SG": "Telefon",
@@ -2095,7 +2498,35 @@
    "senses": [
     "obj.phone"
    ],
+   "contrasts": [
+    {
+     "concept": "obj.phone",
+     "axis": "kind of phone",
+     "value": "a mobile phone"
+    }
+   ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Handys",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Handy",
     "N;ACC;SG": "Handy",
@@ -2205,9 +2636,33 @@
    "lemma": "Schlüssel",
    "pos": "NOUN",
    "senses": [
-    "obj.key"
+    "obj.key",
+    "tech.spanner"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schlüssel",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schlüssel",
     "N;ACC;SG": "Schlüssel",
@@ -2244,14 +2699,16 @@
       "def": "key, solution, code (der Schlüssel zum Erfolg)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "spanner, wrench (Schraubenschlüssel); clef in music (Notenschlüssel)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "tech.spanner"
      }
     ],
     "examples": [
@@ -2326,9 +2783,32 @@
    "lemma": "Tasche",
    "pos": "NOUN",
    "senses": [
-    "obj.bag"
+    "obj.bag",
+    "clothes.pocket"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Taschen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tasche",
     "N;ACC;SG": "Tasche",
@@ -2365,7 +2845,8 @@
       "def": "pocket (in clothes)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "clothes.pocket"
      }
     ],
     "examples": [
@@ -2480,6 +2961,27 @@
     "obj.cup"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tassen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tasse",
     "N;ACC;SG": "Tasse",
@@ -2599,9 +3101,48 @@
    "lemma": "Glas",
    "pos": "NOUN",
    "senses": [
-    "obj.glass"
+    "obj.glass",
+    "obj.glass.material",
+    "obj.jar"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Gläser",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     },
+     {
+      "form": "Glas",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s3"
+      ],
+      "note": "as a measure after a number: zwei Glas Wein, drei Glas Honig"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "Glas",
+      "senses": [
+       "s2"
+      ],
+      "note": "the material: no plural, often without an article (aus Glas)"
+     }
+    ]
+   },
    "forms": {
     "N;NOM;SG": "Glas",
     "N;ACC;SG": "Glas",
@@ -2638,14 +3179,16 @@
       "def": "glass (the material)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.glass.material"
      },
      {
       "id": "s3",
       "def": "jar (ein Glas Honig)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.jar"
      }
     ],
     "examples": [
@@ -2748,6 +3291,27 @@
     "obj.plate"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Teller",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Teller",
     "N;ACC;SG": "Teller",

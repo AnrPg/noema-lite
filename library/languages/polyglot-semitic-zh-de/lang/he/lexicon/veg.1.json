@@ -9,15 +9,50 @@
    ],
    "gender": "FEM",
    "translit": "agvaniya",
+   "features": {
+    "spelling": "עגבנייה",
+    "root": "ע ג ב",
+    "pattern": {
+     "none": "coined with the suffix ־ָנִיָּה (“love-apple”), not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "עַגְבָנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עַגְבָנִיַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עַגְבָנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "עַגְבָנִיָּה",
     "N;SG;DEF": "הָעַגְבָנִיָּה",
     "N;PL;INDF": "עַגְבָנִיּוֹת",
-    "N;PL;DEF": "הָעַגְבָנִיּוֹת"
+    "N;PL;DEF": "הָעַגְבָנִיּוֹת",
+    "N;SG;CONST": "עַגְבָנִיַּת",
+    "N;PL;CONST": "עַגְבָנִיּוֹת"
    },
    "plene": {
     "N;SG;INDF": "עגבנייה",
-    "N;SG;DEF": "העגבנייה"
+    "N;SG;DEF": "העגבנייה",
+    "N;SG;CONST": "עגבניית"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -102,16 +137,49 @@
    "lemma": "בָּצָל",
    "pos": "NOUN",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "nature.bulb"
    ],
    "gender": "MASC",
-   "mishkal": "קָטָל",
    "translit": "batsal",
+   "features": {
+    "spelling": "בצל",
+    "root": "ב צ ל",
+    "pattern": "קָטָל",
+    "plurals": [
+     {
+      "form": "בְּצָלִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בְּצַל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בִּצְלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בָּצָל",
     "N;SG;DEF": "הַבָּצָל",
     "N;PL;INDF": "בְּצָלִים",
-    "N;PL;DEF": "הַבְּצָלִים"
+    "N;PL;DEF": "הַבְּצָלִים",
+    "N;SG;CONST": "בְּצַל",
+    "N;PL;CONST": "בִּצְלֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -142,7 +210,8 @@
       ],
       "domains": [
        "gardening"
-      ]
+      ],
+      "concept": "nature.bulb"
      }
     ],
     "examples": [
@@ -216,6 +285,33 @@
    ],
    "gender": "MASC",
    "translit": "tapuach adama",
+   "features": {
+    "spelling": "תפוח אדמה",
+    "root": {
+     "none": "a compound of two words (תַּפּוּחַ + אֲדָמָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "תַּפּוּחֵי אֲדָמָה",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תַּפּוּחַ אֲדָמָה",
     "N;SG;DEF": "תַּפּוּחַ הָאֲדָמָה",
@@ -313,9 +409,32 @@
    ],
    "gender": "MASC",
    "translit": "shum",
+   "features": {
+    "spelling": "שום",
+    "root": "שׁ ו ם",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Proto-Semitic *ṯūm-)"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שׁוּם"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שׁוּם",
-    "N;SG;DEF": "הַשּׁוּם"
+    "N;SG;DEF": "הַשּׁוּם",
+    "N;SG;CONST": "שׁוּם"
    },
    "note": "Used as a mass noun; no plural in everyday Modern Hebrew (Wiktionary lists none).",
    "ref": {
@@ -411,16 +530,61 @@
    "lemma": "מְלָפְפוֹן",
    "pos": "NOUN",
    "senses": [
-    "veg.cucumber"
+    "veg.cucumber",
+    "veg.armeniancucumber"
    ],
    "gender": "MASC",
    "translit": "melafefon",
+   "features": {
+    "spelling": "מלפפון",
+    "root": {
+     "none": "a loanword (Greek μηλοπέπων): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "מְלָפְפוֹנִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְלָפְפוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְלָפְפוֹנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מְלָפְפוֹן",
     "N;SG;DEF": "הַמְּלָפְפוֹן",
     "N;PL;INDF": "מְלָפְפוֹנִים",
-    "N;PL;DEF": "הַמְּלָפְפוֹנִים"
+    "N;PL;DEF": "הַמְּלָפְפוֹנִים",
+    "N;SG;CONST": "מְלָפְפוֹן",
+    "N;PL;CONST": "מְלָפְפוֹנֵי"
    },
+   "contrasts": [
+    {
+     "concept": "veg.armeniancucumber",
+     "axis": "usage",
+     "value": "the old (Mishnaic) name; today mostly “cucumber”, or מְלָפְפוֹן אַרְמֵנִי"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -447,7 +611,8 @@
       "def": "Armenian cucumber, vegetable melon",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "veg.armeniancucumber"
      }
     ],
     "examples": [
@@ -471,6 +636,20 @@
       "register": "neutral",
       "context": "shopping",
       "sense": "s1"
+     },
+     {
+      "text": "בַּמִּשְׁנָה ״מְלָפְפוֹן״ הוּא כַּנִּרְאֶה הַפַּקּוּס, לֹא הַמְּלָפְפוֹן שֶׁלָּנוּ.",
+      "tr": "In the Mishnah “melafefon” is probably the Armenian cucumber (fakus), not our cucumber.",
+      "register": "neutral",
+      "context": "language history",
+      "sense": "s2"
+     },
+     {
+      "text": "בַּשּׁוּק מוֹכְרִים גַּם מְלָפְפוֹן אַרְמֵנִי, אָרֹךְ וּבָהִיר.",
+      "tr": "At the market they also sell Armenian cucumber, long and pale.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -515,13 +694,46 @@
     "veg.eggplant"
    ],
    "gender": "MASC",
-   "mishkal": "קָטִיל",
    "translit": "chatsil",
+   "features": {
+    "spelling": "חציל",
+    "root": {
+     "none": "coined in 1831 from Arabic حَيْصَل: no Hebrew root"
+    },
+    "pattern": "קָטִיל",
+    "plurals": [
+     {
+      "form": "חֲצִילִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲצִיל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חֲצִילֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חָצִיל",
     "N;SG;DEF": "הֶחָצִיל",
     "N;PL;INDF": "חֲצִילִים",
-    "N;PL;DEF": "הַחֲצִילִים"
+    "N;PL;DEF": "הַחֲצִילִים",
+    "N;SG;CONST": "חֲצִיל",
+    "N;PL;CONST": "חֲצִילֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -604,13 +816,44 @@
     "veg.carrot"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "gezer",
+   "features": {
+    "spelling": "גזר",
+    "root": "ג ז ר",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "גְּזָרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "גֶּזֶר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "גִּזְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "גֶּזֶר",
     "N;SG;DEF": "הַגֶּזֶר",
     "N;PL;INDF": "גְּזָרִים",
-    "N;PL;DEF": "הַגְּזָרִים"
+    "N;PL;DEF": "הַגְּזָרִים",
+    "N;SG;CONST": "גֶּזֶר",
+    "N;PL;CONST": "גִּזְרֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -702,11 +945,47 @@
    ],
    "gender": "FEM",
    "translit": "batata",
+   "features": {
+    "spelling": "בטטה",
+    "root": {
+     "none": "a loanword (Spanish batata, through Arabic): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "בָּטָטוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בָּטָטַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בָּטָטוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בָּטָטָה",
     "N;SG;DEF": "הַבָּטָטָה",
     "N;PL;INDF": "בָּטָטוֹת",
-    "N;PL;DEF": "הַבָּטָטוֹת"
+    "N;PL;DEF": "הַבָּטָטוֹת",
+    "N;SG;CONST": "בָּטָטַת",
+    "N;PL;CONST": "בָּטָטוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -791,11 +1070,47 @@
    ],
    "gender": "FEM",
    "translit": "afuna",
+   "features": {
+    "spelling": "אפונה",
+    "root": {
+     "none": "an old (Mishnaic) plant name with no root in use"
+    },
+    "pattern": {
+     "none": "an old plant name: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "אֲפוּנִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֲפוּנַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אֲפוּנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֲפוּנָה",
     "N;SG;DEF": "הָאֲפוּנָה",
     "N;PL;INDF": "אֲפוּנִים",
-    "N;PL;DEF": "הָאֲפוּנִים"
+    "N;PL;DEF": "הָאֲפוּנִים",
+    "N;SG;CONST": "אֲפוּנַת",
+    "N;PL;CONST": "אֲפוּנֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -883,13 +1198,44 @@
     "veg.spinach"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "tered",
+   "features": {
+    "spelling": "תרד",
+    "root": "ת ר ד",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "תְּרָדִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תֶּרֶד"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תִּרְדֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תֶּרֶד",
     "N;SG;DEF": "הַתֶּרֶד",
     "N;PL;INDF": "תְּרָדִים",
-    "N;PL;DEF": "הַתְּרָדִים"
+    "N;PL;DEF": "הַתְּרָדִים",
+    "N;SG;CONST": "תֶּרֶד",
+    "N;PL;CONST": "תִּרְדֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -969,15 +1315,49 @@
    "lemma": "צְנוֹן",
    "pos": "NOUN",
    "senses": [
-    "veg.radish"
+    "veg.radish",
+    "person.bore"
    ],
    "gender": "MASC",
    "translit": "tsnon",
+   "features": {
+    "spelling": "צנון",
+    "root": "צ נ ן",
+    "pattern": "קְטוֹל",
+    "plurals": [
+     {
+      "form": "צְנוֹנִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "צְנוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "צְנוֹנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "צְנוֹן",
     "N;SG;DEF": "הַצְּנוֹן",
     "N;PL;INDF": "צְנוֹנִים",
-    "N;PL;DEF": "הַצְּנוֹנִים"
+    "N;PL;DEF": "הַצְּנוֹנִים",
+    "N;SG;CONST": "צְנוֹן",
+    "N;PL;CONST": "צְנוֹנֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1005,7 +1385,8 @@
       "def": "a wet blanket, a dull person",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "person.bore"
      }
     ],
     "examples": [
@@ -1029,6 +1410,13 @@
       "register": "neutral",
       "context": "tasting",
       "sense": "s1"
+     },
+     {
+      "text": "אַל תִּהְיֶה צְנוֹן, בּוֹא לַמְּסִבָּה!",
+      "tr": "Don’t be a wet blanket, come to the party!",
+      "register": "slang",
+      "context": "party",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1073,11 +1461,45 @@
    ],
    "gender": "FEM",
    "translit": "dla'at",
+   "features": {
+    "spelling": "דלעת",
+    "root": "ד ל ע",
+    "pattern": {
+     "none": "an old plant name: no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "דְּלוּעִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דְּלַעַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דְּלוּעֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דְּלַעַת",
     "N;SG;DEF": "הַדְּלַעַת",
     "N;PL;INDF": "דְּלוּעִים",
-    "N;PL;DEF": "הַדְּלוּעִים"
+    "N;PL;DEF": "הַדְּלוּעִים",
+    "N;SG;CONST": "דְּלַעַת",
+    "N;PL;CONST": "דְּלוּעֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1166,11 +1588,47 @@
    ],
    "gender": "FEM",
    "translit": "chasa",
+   "features": {
+    "spelling": "חסה",
+    "root": {
+     "none": "borrowed from Aramaic (חַסָּא): no Hebrew root"
+    },
+    "pattern": {
+     "none": "borrowed from Aramaic: no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "חַסּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חַסַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חַסּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חַסָּה",
     "N;SG;DEF": "הַחַסָּה",
     "N;PL;INDF": "חַסּוֹת",
-    "N;PL;DEF": "הַחַסּוֹת"
+    "N;PL;DEF": "הַחַסּוֹת",
+    "N;SG;CONST": "חַסַּת",
+    "N;PL;CONST": "חַסּוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1255,6 +1713,33 @@
    ],
    "gender": "MASC",
    "translit": "pilpel charif",
+   "features": {
+    "spelling": "פלפל חריף",
+    "root": {
+     "none": "a compound of two words (פִּלְפֵּל + חָרִיף): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "פִּלְפְּלִים חֲרִיפִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "פִּלְפֵּל חָרִיף",
     "N;SG;DEF": "הַפִּלְפֵּל הֶחָרִיף",
@@ -1350,11 +1835,43 @@
    ],
    "gender": "MASC",
    "translit": "kruv",
+   "features": {
+    "spelling": "כרוב",
+    "root": "כ ר ב",
+    "pattern": "קְטוּל",
+    "plurals": [
+     {
+      "form": "כְּרוּבִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כְּרוּב"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כְּרוּבֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כְּרוּב",
     "N;SG;DEF": "הַכְּרוּב",
     "N;PL;INDF": "כְּרוּבִים",
-    "N;PL;DEF": "הַכְּרוּבִים"
+    "N;PL;DEF": "הַכְּרוּבִים",
+    "N;SG;CONST": "כְּרוּב",
+    "N;PL;CONST": "כְּרוּבֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1439,11 +1956,45 @@
    ],
    "gender": "FEM",
    "translit": "kruvit",
+   "features": {
+    "spelling": "כרובית",
+    "root": "כ ר ב",
+    "pattern": {
+     "none": "built from כְּרוּב “cabbage” with the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "כְּרוּבִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כְּרוּבִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כְּרוּבִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כְּרוּבִית",
     "N;SG;DEF": "הַכְּרוּבִית",
     "N;PL;INDF": "כְּרוּבִיּוֹת",
-    "N;PL;DEF": "הַכְּרוּבִיּוֹת"
+    "N;PL;DEF": "הַכְּרוּבִיּוֹת",
+    "N;SG;CONST": "כְּרוּבִית",
+    "N;PL;CONST": "כְּרוּבִיּוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1528,9 +2079,34 @@
    ],
    "gender": "MASC",
    "translit": "brokoli",
+   "features": {
+    "spelling": "ברוקולי",
+    "root": {
+     "none": "a loanword (Italian broccoli): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בְּרוֹקוֹלִי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בְּרוֹקוֹלִי",
-    "N;SG;DEF": "הַבְּרוֹקוֹלִי"
+    "N;SG;DEF": "הַבְּרוֹקוֹלִי",
+    "N;SG;CONST": "בְּרוֹקוֹלִי"
    },
    "note": "No plural forms (Wiktionary: “no plural forms”).",
    "ref": {
@@ -1614,13 +2190,44 @@
     "veg.leek"
    ],
    "gender": "FEM",
-   "mishkal": "קְטֵלָה",
    "translit": "kresha",
+   "features": {
+    "spelling": "כרשה",
+    "root": "כ ר שׁ",
+    "pattern": "קְטֵלָה",
+    "plurals": [
+     {
+      "form": "כְּרֵשִׁים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כְּרֵשַׁת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כְּרֵשֵׁי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כְּרֵשָׁה",
     "N;SG;DEF": "הַכְּרֵשָׁה",
     "N;PL;INDF": "כְּרֵשִׁים",
-    "N;PL;DEF": "הַכְּרֵשִׁים"
+    "N;PL;DEF": "הַכְּרֵשִׁים",
+    "N;SG;CONST": "כְּרֵשַׁת",
+    "N;PL;CONST": "כְּרֵשֵׁי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1702,15 +2309,51 @@
    "lemma": "פִּלְפֵּל",
    "pos": "NOUN",
    "senses": [
-    "veg.bellpepper"
+    "veg.bellpepper",
+    "food.pepper"
    ],
    "gender": "MASC",
    "translit": "pilpel",
+   "features": {
+    "spelling": "פלפל",
+    "root": "פ ל פ ל",
+    "pattern": {
+     "none": "a loanword (Persian pilpil): no pattern; the root פ־ל־פ־ל was formed from it"
+    },
+    "plurals": [
+     {
+      "form": "פִּלְפְּלִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פִּלְפֵּל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פִּלְפְּלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "פִּלְפֵּל",
     "N;SG;DEF": "הַפִּלְפֵּל",
     "N;PL;INDF": "פִּלְפְּלִים",
-    "N;PL;DEF": "הַפִּלְפְּלִים"
+    "N;PL;DEF": "הַפִּלְפְּלִים",
+    "N;SG;CONST": "פִּלְפֵּל",
+    "N;PL;CONST": "פִּלְפְּלֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1738,7 +2381,8 @@
       "def": "pepper (the spice; black pepper)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.pepper"
      }
     ],
     "examples": [
@@ -1815,13 +2459,44 @@
     "veg.beetroot"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "selek",
+   "features": {
+    "spelling": "סלק",
+    "root": "ס ל ק",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "סְלָקִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סֶלֶק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סִלְקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סֶלֶק",
     "N;SG;DEF": "הַסֶּלֶק",
     "N;PL;INDF": "סְלָקִים",
-    "N;PL;DEF": "הַסְּלָקִים"
+    "N;PL;DEF": "הַסְּלָקִים",
+    "N;SG;CONST": "סֶלֶק",
+    "N;PL;CONST": "סִלְקֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1910,17 +2585,51 @@
    ],
    "gender": "MASC",
    "translit": "kishu",
+   "features": {
+    "spelling": "קישוא",
+    "root": "ק שׁ א",
+    "pattern": "קִטּוּל",
+    "plurals": [
+     {
+      "form": "קִשּׁוּאִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קִשּׁוּא"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "קִשּׁוּאֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קִשּׁוּא",
     "N;SG;DEF": "הַקִּשּׁוּא",
     "N;PL;INDF": "קִשּׁוּאִים",
-    "N;PL;DEF": "הַקִּשּׁוּאִים"
+    "N;PL;DEF": "הַקִּשּׁוּאִים",
+    "N;SG;CONST": "קִשּׁוּא",
+    "N;PL;CONST": "קִשּׁוּאֵי"
    },
    "plene": {
     "N;SG;INDF": "קישוא",
     "N;SG;DEF": "הקישוא",
     "N;PL;INDF": "קישואים",
-    "N;PL;DEF": "הקישואים"
+    "N;PL;DEF": "הקישואים",
+    "N;SG;CONST": "קישוא",
+    "N;PL;CONST": "קישואי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2015,6 +2724,27 @@
    ],
    "gender": "FEM",
    "translit": "she'u'it yeruka",
+   "features": {
+    "spelling": "שעועית ירוקה",
+    "root": {
+     "none": "a compound of two words (שְׁעוּעִית + יְרֻקָּה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שְׁעוּעִית יְרֻקָּה",
     "N;SG;DEF": "הַשְּׁעוּעִית הַיְּרֻקָּה"
@@ -2112,6 +2842,33 @@
    ],
    "gender": "MASC",
    "translit": "batsal yarok",
+   "features": {
+    "spelling": "בצל ירוק",
+    "root": {
+     "none": "a compound of two words (בָּצָל + יָרֹק): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "בְּצָלִים יְרֻקִּים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בָּצָל יָרֹק",
     "N;SG;DEF": "הַבָּצָל הַיָּרֹק",
@@ -2205,13 +2962,37 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.celery"
+    "veg.celery",
+    "relig.karpas"
    ],
    "gender": "MASC",
    "translit": "karpas",
+   "features": {
+    "spelling": "כרפס",
+    "root": "כ ר פ ס",
+    "pattern": {
+     "none": "an old loan (compare Arabic كَرَفْس): no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כַּרְפַּס"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כַּרְפַּס",
-    "N;SG;DEF": "הַכַּרְפַּס"
+    "N;SG;DEF": "הַכַּרְפַּס",
+    "N;SG;CONST": "כַּרְפַּס"
    },
    "note": "Used as a mass noun; Wiktionary lists no plural.",
    "ref": {
@@ -2240,7 +3021,8 @@
       "def": "karpas — the vegetable dipped in salt water at the Passover Seder",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.karpas"
      }
     ],
     "examples": [
@@ -2310,9 +3092,34 @@
    ],
    "gender": "MASC",
    "translit": "tiras",
+   "features": {
+    "spelling": "תירס",
+    "root": {
+     "none": "named after Tiras, a son of Japheth (Genesis 10): no root"
+    },
+    "pattern": {
+     "none": "a name turned noun: no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תִּירָס"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תִּירָס",
-    "N;SG;DEF": "הַתִּירָס"
+    "N;SG;DEF": "הַתִּירָס",
+    "N;SG;CONST": "תִּירָס"
    },
    "note": "Used as a mass noun; Wiktionary lists no plural.",
    "ref": {

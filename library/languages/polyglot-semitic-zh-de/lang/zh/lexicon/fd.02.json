@@ -9,6 +9,13 @@
    "senses": [
     "greet.hello"
    ],
+   "contrasts": [
+    {
+     "concept": "greet.hello",
+     "axis": "politeness",
+     "value": "neutral"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -109,6 +116,17 @@
     "subtleties": [
      "A group is greeted with 你们好 or 大家好; a class greets its teacher with 老师好."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -119,6 +137,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.hello"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.hello",
+     "axis": "politeness",
+     "value": "respectful"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -206,6 +231,17 @@
     "subtleties": [
      "您 belongs above all to Beijing and northern speech; in the south and in Taiwan many people use 你好 even when being polite."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -216,6 +252,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.goodmorning"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.goodmorning",
+     "axis": "register",
+     "value": "the full greeting, neutral"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -307,6 +350,17 @@
     "subtleties": [
      "早 also means ‘early’: 你来得真早！ ‘you’re really early!’"
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -380,6 +434,17 @@
     "subtleties": [
      "In everyday life 晚上好 can sound formal; friends meeting in the evening say 你好 or just the name."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -458,6 +523,17 @@
     "subtleties": [
      "In messages 晚安 often ends a late conversation, like ‘night!’ in English."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -468,6 +544,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.goodbye"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "register",
+     "value": "neutral"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -562,6 +645,17 @@
     "subtleties": [
      "A class says goodbye with 老师再见！, the teacher answers 同学们再见！"
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 再見 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -572,6 +666,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.goodbye"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "register",
+     "value": "casual, from English bye-bye"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -645,6 +746,17 @@
     "subtleties": [
      "Many speakers say báibái or bāibāi; dictionaries give bàibài."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -757,6 +869,17 @@
     "subtleties": [
      "回头 alone means ‘later’: 回头再说 ‘we’ll talk about it later’ — sometimes a polite way to put something off."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 回頭見 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -858,6 +981,17 @@
     "subtleties": [
      "Usual answers: 很好 (fine), 还好 / 还行 (OK), 不错 (not bad), 挺好的 (pretty good) — often followed by 你呢？ ‘and you?’"
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 你好嗎 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -867,7 +1001,20 @@
    "pinyin": "hěn hǎo",
    "pos": "ADJ",
    "senses": [
-    "greet.fine"
+    "greet.fine",
+    "adj.good"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.fine",
+     "axis": "how well",
+     "value": "fine, well"
+    },
+    {
+     "concept": "adj.good",
+     "axis": "form",
+     "value": "好 with 很, as a predicate (这个主意很好)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -896,14 +1043,16 @@
       "def": "very good (of things, work, results)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.good"
      },
      {
       "id": "s3",
       "def": "Good! Very well! (approval)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -938,6 +1087,14 @@
       "register": "neutral",
       "context": "classroom",
       "sense": "s3"
+     },
+     {
+      "text": "这个主意很好。",
+      "py": "Zhège zhǔyi hěn hǎo.",
+      "tr": "That’s a very good idea.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -998,6 +1155,17 @@
      "Third-tone sandhi: hěn hǎo is spoken hén hǎo.",
      "A compliment like 你的中文很好！ is answered with modesty: 哪里哪里 or 还差得远 (‘still far from it’)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1007,7 +1175,15 @@
    "pinyin": "hái hǎo",
    "pos": "ADJ",
    "senses": [
-    "greet.fine"
+    "greet.fine",
+    "adv.fortunately"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.fine",
+     "axis": "how well",
+     "value": "OK, not bad (lukewarm)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1039,7 +1215,8 @@
       "def": "fortunately, luckily (at the start of a sentence)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.fortunately"
      }
     ],
     "examples": [
@@ -1119,6 +1296,17 @@
     "subtleties": [
      "At the start of a sentence 还好 means ‘luckily’: 还好没下雨 ‘luckily it didn’t rain’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 還好 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1128,7 +1316,17 @@
    "pinyin": "jiào",
    "pos": "VERB",
    "senses": [
-    "greet.myname"
+    "greet.myname",
+    "verb.call",
+    "verb.order",
+    "verb.let"
+   ],
+   "contrasts": [
+    {
+     "concept": "verb.order",
+     "axis": "what is ordered",
+     "value": "food brought to you, a taxi (叫外卖, 叫车)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1156,21 +1354,24 @@
       "def": "to call (someone); to shout",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.call"
      },
      {
       "id": "s3",
       "def": "to order (food), to call (a taxi)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.order"
      },
      {
       "id": "s4",
       "def": "to tell, to make (someone do something)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.let"
      }
     ],
     "examples": [
@@ -1286,6 +1487,21 @@
      "我的名字是安娜 is correct too, but 我叫安娜 is the usual way.",
      "叫 also means ‘to make, to let’: 别叫他等 ‘don’t keep him waiting’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -1296,6 +1512,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.nicetomeet"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.nicetomeet",
+     "axis": "word order",
+     "value": "认识你 first: ‘knowing you — very glad’"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1384,6 +1607,17 @@
     "subtleties": [
      "Both orders are correct: 认识你很高兴 puts ‘knowing you’ first as the topic; 很高兴认识你 starts with the feeling."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 認識你很高興 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1394,6 +1628,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.nicetomeet"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.nicetomeet",
+     "axis": "word order",
+     "value": "很高兴 first: ‘very glad to know you’"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1476,6 +1717,17 @@
     "subtleties": [
      "认识 is ‘to know (a person), to be acquainted’; ‘to know a fact’ is 知道 — a split like German kennen / wissen."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 很高興認識你 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1485,7 +1737,8 @@
    "pinyin": "xiè xie",
    "pos": "INTJ",
    "senses": [
-    "greet.thanks"
+    "greet.thanks",
+    "verb.thank"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1513,7 +1766,8 @@
       "def": "to thank (verb: 谢谢你的帮助)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.thank"
      }
     ],
     "examples": [
@@ -1588,16 +1842,28 @@
     "subtleties": [
      "To decline: 不用了，谢谢 ‘no, thanks’; to reply to thanks: 不客气."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 謝謝 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
    "id": "zh:bukeqi",
    "lemma": "不客气",
    "trad": "不客氣",
-   "pinyin": "bú kè qi",
+   "pinyin": "bù kè qi",
    "pos": "INTJ",
    "senses": [
-    "greet.welcome"
+    "greet.welcome",
+    "adj.impolite"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1625,7 +1891,8 @@
       "def": "impolite, blunt (in other contexts: 说话很不客气)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.impolite"
      }
     ],
     "examples": [
@@ -1697,6 +1964,15 @@
     "subtleties": [
      "In other sentences 不客气 means ‘rude, blunt’: 他对我很不客气 ‘he was rude to me’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 不客氣 for every sense"
+    },
+    "toneSandhi": "bú kè qi"
    }
   },
   {
@@ -1706,7 +1982,10 @@
    "pinyin": "qǐng",
    "pos": "VERB",
    "senses": [
-    "greet.please"
+    "greet.please",
+    "verb.invite",
+    "verb.request",
+    "verb.hire"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1734,21 +2013,24 @@
       "def": "to invite; to treat (to a meal)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.invite"
      },
      {
       "id": "s3",
       "def": "to ask, to request (someone to do something)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.request"
      },
      {
       "id": "s4",
       "def": "to hire (请人 ‘to hire someone’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.hire"
      }
     ],
     "examples": [
@@ -1791,6 +2073,14 @@
       "register": "neutral",
       "context": "school",
       "sense": "s3"
+     },
+     {
+      "text": "我们公司要请一个新司机。",
+      "py": "Wǒmen gōngsī yào qǐng yí ge xīn sījī.",
+      "tr": "Our company is going to hire a new driver.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1857,6 +2147,21 @@
      "On its own, 请！ or 您请！ with a gesture means ‘after you / go ahead / help yourself’.",
      "On signs, 请勿 means ‘please do not’: 请勿吸烟 ‘no smoking’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 請 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -1866,7 +2171,15 @@
    "pinyin": "duì bu qǐ",
    "pos": "INTJ",
    "senses": [
-    "greet.sorry"
+    "greet.sorry",
+    "verb.letdown"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.sorry",
+     "axis": "weight of the fault",
+     "value": "a real apology"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1894,7 +2207,8 @@
       "def": "to let (someone) down, to wrong (verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.letdown"
      }
     ],
     "examples": [
@@ -1965,6 +2279,17 @@
     "subtleties": [
      "As a verb: 我对不起他 ‘I wronged him’ — the opposite is 对得起 ‘to be worthy of, not let down’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 對不起 for every sense"
+    },
+    "toneSandhi": {
+     "none": "the 不 in 对不起 is toneless (duì bu qǐ): no sandhi"
+    }
    }
   },
   {
@@ -1974,7 +2299,15 @@
    "pinyin": "bù hǎo yì si",
    "pos": "INTJ",
    "senses": [
-    "greet.sorry"
+    "greet.sorry",
+    "adj.embarrassed"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.sorry",
+     "axis": "weight of the fault",
+     "value": "light: small things, embarrassment, ‘excuse me’"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2002,7 +2335,8 @@
       "def": "embarrassed, shy",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.embarrassed"
      }
     ],
     "examples": [
@@ -2067,16 +2401,34 @@
     "subtleties": [
      "Also softens a refusal or request: 不好意思，我明天不能来 ‘sorry, I can’t come tomorrow’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "不 stays bù before the 3rd tone of 好"
+    }
    }
   },
   {
    "id": "zh:daraoyixia",
    "lemma": "打扰一下",
    "trad": "打擾一下",
-   "pinyin": "dǎ rǎo yí xià",
+   "pinyin": "dǎ rǎo yī xià",
    "pos": "INTJ",
    "senses": [
     "greet.excuseme"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.excuseme",
+     "axis": "purpose and register",
+     "value": "to interrupt or to get someone’s attention"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2166,6 +2518,15 @@
     "subtleties": [
      "Often combined: 不好意思，打扰一下，请问… — three polite openers in a row are normal."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 打擾一下 for every sense"
+    },
+    "toneSandhi": "dǎ rǎo yí xià"
    }
   },
   {
@@ -2176,6 +2537,13 @@
    "pos": "INTJ",
    "senses": [
     "greet.excuseme"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.excuseme",
+     "axis": "purpose and register",
+     "value": "to ask a favour or to get past (northern, a little old-fashioned)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2264,6 +2632,17 @@
     "subtleties": [
      "It works both for asking a favour and for asking people to step aside."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 勞駕 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2273,7 +2652,22 @@
    "pinyin": "duì",
    "pos": "ADJ",
    "senses": [
-    "part.yes"
+    "part.yes",
+    "prep.to.person",
+    "measure.pair",
+    "adj.correct"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.yes",
+     "axis": "what the answer confirms",
+     "value": "confirms that a statement is right"
+    },
+    {
+     "concept": "prep.to.person",
+     "axis": "construction",
+     "value": "towards a person: attitude, speaking to (对我很好, 对他说)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2293,7 +2687,7 @@
     "senses": [
      {
       "id": "s1",
-      "def": "right, correct; (as an answer) yes, that’s right",
+      "def": "(as an answer) yes, that’s right — agreeing with what was said",
       "register": [
        "neutral"
       ],
@@ -2304,14 +2698,24 @@
       "def": "towards, to (before a person: 他对我很好)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.to.person"
      },
      {
       "id": "s3",
       "def": "a pair (measure word: 一对夫妻 ‘a couple’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.pair"
+     },
+     {
+      "id": "s4",
+      "def": "right, correct (这个答案不对 ‘this answer is wrong’)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.correct"
      }
     ],
     "examples": [
@@ -2337,7 +2741,7 @@
       "tr": "You’re right.",
       "register": "neutral",
       "context": "discussion",
-      "sense": "s1"
+      "sense": "s4"
      },
      {
       "text": "他对我很好。",
@@ -2346,6 +2750,22 @@
       "register": "neutral",
       "context": "relationships",
       "sense": "s2"
+     },
+     {
+      "text": "这个答案不对。",
+      "py": "Zhège dá'àn bú duì.",
+      "tr": "This answer is wrong.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s4"
+     },
+     {
+      "text": "他们是一对好朋友。",
+      "py": "Tāmen shì yí duì hǎo péngyou.",
+      "tr": "The two of them are a pair of good friends.",
+      "register": "neutral",
+      "context": "friends",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2433,6 +2853,17 @@
     "subtleties": [
      "对对对, said three times quickly, is a typical eager agreement."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 對 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -2444,6 +2875,13 @@
    "senses": [
     "part.no",
     "part.not"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "time and verb",
+     "value": "habits, wishes, the present and the future; adjectives; 是"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2479,7 +2917,8 @@
       "def": "cannot (between a verb and its complement: 听不懂)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2591,6 +3030,192 @@
      "不 can express will: 我不去 ‘I won’t go / I refuse to go’.",
      "As an answer, Chinese prefers to repeat the verb: 你要吗？— 不要。 A bare 不 sounds blunt."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "bú before a 4th tone (不是 bú shì, 不要 bú yào); bù elsewhere",
+    "position": [
+     "preverbal"
+    ]
+   }
+  },
+  {
+   "id": "zh:zao",
+   "lemma": "早",
+   "trad": "早",
+   "pinyin": "zǎo",
+   "pos": "ADJ",
+   "senses": [
+    "greet.goodmorning",
+    "adv.early",
+    "adv.already"
+   ],
+   "contrasts": [
+    {
+     "concept": "greet.goodmorning",
+     "axis": "register",
+     "value": "short and casual (早！)"
+    },
+    {
+     "concept": "adv.already",
+     "axis": "construction",
+     "value": "早就 + verb: long ago, already (我早就知道了)"
+    }
+   ],
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Early — the sun just up, the first bus.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "early",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.early"
+     },
+     {
+      "id": "s2",
+      "def": "good morning (greeting: 早！)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "greet.goodmorning"
+     },
+     {
+      "id": "s3",
+      "def": "long ago, already (早就)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.already"
+     }
+    ],
+    "examples": [
+     {
+      "text": "我们明天早一点去吧。",
+      "py": "Wǒmen míngtiān zǎo yìdiǎn qù ba.",
+      "tr": "Let’s go a bit earlier tomorrow.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s1"
+     },
+     {
+      "text": "你今天来得很早。",
+      "py": "Nǐ jīntiān lái de hěn zǎo.",
+      "tr": "You came early today.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s1"
+     },
+     {
+      "text": "早！",
+      "py": "Zǎo!",
+      "tr": "Morning!",
+      "register": "colloquial",
+      "context": "greeting",
+      "sense": "s2"
+     },
+     {
+      "text": "我早就知道了。",
+      "py": "Wǒ zǎo jiù zhīdào le.",
+      "tr": "I knew that long ago.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s3"
+     },
+     {
+      "text": "老师早！",
+      "py": "Lǎoshī zǎo!",
+      "tr": "Good morning, teacher!",
+      "register": "colloquial",
+      "context": "school",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "早一点",
+      "tr": "a bit earlier"
+     },
+     {
+      "text": "很早",
+      "tr": "very early"
+     },
+     {
+      "text": "早就",
+      "tr": "long since"
+     },
+     {
+      "text": "早饭",
+      "tr": "breakfast"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "早起的鸟儿有虫吃",
+      "tr": "the early bird has worms to eat",
+      "kind": "saying",
+      "meaning": "the early bird catches the worm",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "提前",
+      "register": "neutral",
+      "nuance": "tíqián: in advance, ahead of time"
+     },
+     {
+      "word": "早早",
+      "register": "colloquial",
+      "nuance": "zǎozǎo: very early, in good time"
+     }
+    ],
+    "antonyms": [
+     {
+      "word": "晚",
+      "note": "wǎn: late"
+     }
+    ],
+    "etymology": {
+     "text": "Phono-semantic in the bronze inscriptions: 日 ‘sun’ + phonetic 棗 (earlier a drawing borrowed for its sound); the seal-script form was read as ‘sun’ + 甲 ‘first’ — when the sun first rises.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "早 ‘early’ gives 早饭 ‘early meal’ = breakfast and 早上 ‘morning’."
+    ],
+    "pitfalls": [
+     "After a verb, 早 / 晚 need 得: 你来得很早 ‘you came early’; before a verb add 一点: 早一点去 ‘go a bit earlier’."
+    ],
+    "subtleties": [
+     "早！ alone is a casual ‘good morning’."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   }
  ],

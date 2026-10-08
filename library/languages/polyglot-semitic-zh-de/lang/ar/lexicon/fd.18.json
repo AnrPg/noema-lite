@@ -5,7 +5,18 @@
    "lemma": "لٰكِنْ",
    "pos": "CCONJ",
    "senses": [
-    "conj.but"
+    "conj.but",
+    "conj.butrather"
+   ],
+   "features": {
+    "governs": "clause"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "light or heavy form (government)",
+     "value": "+ any clause"
+    }
    ],
    "translit": "lākin",
    "ref": {
@@ -34,7 +45,8 @@
       "def": "but rather (after a negation)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.butrather"
      }
     ],
     "examples": [
@@ -102,7 +114,8 @@
     "subtleties": [
      "وَلٰكِنْ (“and but”) is the most frequent form at the start of a clause; the وَ adds nothing in English."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:lakinna",
@@ -111,6 +124,16 @@
    "class": "pron",
    "senses": [
     "conj.but"
+   ],
+   "features": {
+    "governs": "ACC+suffix"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "light or heavy form (government)",
+     "value": "+ an accusative noun or a pronoun suffix"
+    }
    ],
    "translit": "lākinna",
    "forms": {
@@ -211,7 +234,8 @@
     "subtleties": [
      "Things in the plural are “she” here too: الْبُيُوتُ صَغِيرَةٌ لٰكِنَّهَا جَمِيلَةٌ."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:lianna",
@@ -221,6 +245,9 @@
    "senses": [
     "conj.because"
    ],
+   "features": {
+    "governs": "ACC+suffix"
+   },
    "translit": "liʾanna",
    "forms": {
     "PART": "لِأَنَّ",
@@ -334,6 +361,22 @@
    "senses": [
     "conj.so"
    ],
+   "features": {
+    "root": {
+     "none": "a particle: لِ + ذٰلِكَ"
+    },
+    "derivedFrom": "لِ + ذٰلِكَ (that)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "attached connective or adverb",
+     "value": "therefore, that is why"
+    }
+   ],
    "translit": "liḏālika",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -436,6 +479,16 @@
    "senses": [
     "conj.so"
    ],
+   "features": {
+    "governs": "clause"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "attached connective or adverb",
+     "value": "and so, then — attached prefix; also opens the main clause after إِذَا"
+    }
+   ],
    "prefix": true,
    "translit": "fa-",
    "ref": {
@@ -464,7 +517,8 @@
       "def": "then — opening the main clause after إِذَا when it is a command, a negation or a nominal sentence",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -534,8 +588,12 @@
    "lemma": "ثُمَّ",
    "pos": "CCONJ",
    "senses": [
-    "adv.then"
+    "adv.then",
+    "adv.moreover"
    ],
+   "features": {
+    "governs": "words or clauses"
+   },
    "translit": "ṯumma",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -563,7 +621,8 @@
       "def": "moreover, and also (in argument)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adv.moreover"
      }
     ],
     "examples": [
@@ -625,14 +684,31 @@
     "subtleties": [
      "It joins clauses with the same word order as before: أَشْرَبُ … ثُمَّ أَذْهَبُ …."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:indama",
    "lemma": "عِنْدَمَا",
    "pos": "SCONJ",
    "senses": [
-    "conj.when"
+    "conj.when",
+    "conj.while"
+   ],
+   "features": {
+    "governs": "clause"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.while",
+     "axis": "what it introduces",
+     "value": "a time clause: while, as"
+    },
+    {
+     "concept": "conj.when",
+     "axis": "kind of clause",
+     "value": "when: a time clause (any tense)"
+    }
    ],
    "translit": "ʿindamā",
    "ref": {
@@ -661,7 +737,8 @@
       "def": "while, as",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.while"
      }
     ],
     "examples": [
@@ -736,7 +813,18 @@
    "lemma": "إِذَا",
    "pos": "SCONJ",
    "senses": [
-    "conj.if"
+    "conj.if",
+    "conj.when"
+   ],
+   "features": {
+    "governs": "PST"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "kind of clause",
+     "value": "when, whenever: + a past verb (expected events)"
+    }
    ],
    "translit": "ʾiḏā",
    "ref": {
@@ -765,7 +853,8 @@
       "def": "when, whenever",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.when"
      }
     ],
     "examples": [
@@ -842,6 +931,16 @@
    "class": "pron",
    "senses": [
     "conj.that"
+   ],
+   "features": {
+    "governs": "ACC+suffix"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.that",
+     "axis": "what follows",
+     "value": "+ an accusative noun or a pronoun suffix (a fact)"
+    }
    ],
    "translit": "ʾanna",
    "forms": {
@@ -960,6 +1059,16 @@
    "senses": [
     "conj.that"
    ],
+   "features": {
+    "governs": "SBJV"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.that",
+     "axis": "what follows",
+     "value": "+ a subjunctive verb (“to …”)"
+    }
+   ],
    "translit": "ʾan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -987,7 +1096,8 @@
       "def": "that (+ a past verb), in reports",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1064,6 +1174,9 @@
    "senses": [
     "conj.although"
    ],
+   "features": {
+    "governs": "ACC+suffix"
+   },
    "translit": "maʿa ʾanna",
    "forms": {
     "PART": "مَعَ أَنَّ",

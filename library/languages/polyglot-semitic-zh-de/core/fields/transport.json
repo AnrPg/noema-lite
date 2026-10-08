@@ -5,6 +5,10 @@
   {
    "id": "tr",
    "title": "Transport"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -73,6 +77,62 @@
    "subgroup": "tr",
    "tier": 1,
    "rank": 9
+  },
+  {
+   "id": "tr.caravan",
+   "gloss": "caravan, a line of camels",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.flight",
+   "gloss": "a flight",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.motorcycle",
+   "gloss": "motorcycle",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.oneway",
+   "gloss": "single, one-way (ticket)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.onhorseback",
+   "gloss": "on horseback (literally)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.roundabout",
+   "gloss": "roundabout, traffic circle",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "tr.tram",
+   "gloss": "tram, streetcar",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

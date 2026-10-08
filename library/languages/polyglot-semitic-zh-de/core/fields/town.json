@@ -5,6 +5,10 @@
   {
    "id": "place",
    "title": "Places"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -164,6 +168,102 @@
    "subgroup": "place",
    "tier": 1,
    "rank": 22
+  },
+  {
+   "id": "place.abroad",
+   "gloss": "abroad",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.bathhouse",
+   "gloss": "bathhouse, hammam; bath",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.capital",
+   "gloss": "capital city (首都)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.cell",
+   "gloss": "a vaulted chamber, a cell",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.centre",
+   "gloss": "town centre, city centre",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.mall",
+   "gloss": "shopping centre, mall (in names: 万达广场)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.north",
+   "gloss": "north (Biblical)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.place",
+   "gloss": "place, location",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.pool",
+   "gloss": "swimming pool, baths",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.south",
+   "gloss": "south (Biblical)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.spa",
+   "gloss": "spa (town)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "place.usa",
+   "gloss": "America, the USA (美国, 美元)",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

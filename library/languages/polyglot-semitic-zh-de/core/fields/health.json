@@ -1,0 +1,58 @@
+{
+ "field": "health",
+ "title": "Health",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "health.acidosis",
+   "gloss": "acidosis",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "health.decoction",
+   "gloss": "decoction (of medicinal herbs)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "health.diabetes",
+   "gloss": "diabetes",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "health.eyeremedy",
+   "gloss": "remedy for sore eyes",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "health.genitalwart",
+   "gloss": "genital wart (colloquial)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "health.marijuana",
+   "gloss": "marijuana (slang)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "health.stool",
+   "gloss": "stool, faeces (medical)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  }
+ ]
+}

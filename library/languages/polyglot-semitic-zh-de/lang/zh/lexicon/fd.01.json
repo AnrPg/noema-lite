@@ -7,7 +7,8 @@
    "pinyin": "wǒ",
    "pos": "PRON",
    "senses": [
-    "pron.i"
+    "pron.i",
+    "poss.our"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,14 +36,16 @@
       "def": "my (before relatives and close relations: 我妈妈)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(formal, written) we; our — 我国 ‘our country’, 我校 ‘our school’",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "poss.our"
      }
     ],
     "examples": [
@@ -143,6 +146,17 @@
      "Chinese leaves out 我 when it is obvious: asked 你喜欢吗？ you can answer just 喜欢。",
      "In formal writing 我 can mean ‘our’: 我国 (our country), 我校 (our school)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -153,6 +167,13 @@
    "pos": "PRON",
    "senses": [
     "pron.you.sg"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "politeness",
+     "value": "neutral, familiar"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -263,6 +284,17 @@
     "subtleties": [
      "In Taiwan the character 妳 is sometimes written for ‘you’ addressing a woman; Mainland Chinese writes 你 for everyone."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -273,6 +305,13 @@
    "pos": "PRON",
    "senses": [
     "pron.you.sg"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "politeness",
+     "value": "respectful (elders, teachers, customers)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -373,6 +412,17 @@
     "subtleties": [
      "您 is most at home in Beijing and northern speech; many southern speakers use it mainly in service language and writing."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -382,7 +432,15 @@
    "pinyin": "tā",
    "pos": "PRON",
    "senses": [
-    "pron.he"
+    "pron.he",
+    "adj.other"
+   ],
+   "contrasts": [
+    {
+     "concept": "adj.other",
+     "axis": "register and construction",
+     "value": "formal, only inside words (其他, 他人)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -410,7 +468,8 @@
       "def": "other, another (in words like 他人, 其他)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adj.other"
      }
     ],
     "examples": [
@@ -490,6 +549,17 @@
     "subtleties": [
      "When the sex is unknown or does not matter, writing traditionally uses 他."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -586,6 +656,17 @@
     "subtleties": [
      "In poetic and patriotic writing 她 can refer to the motherland (祖国) or other personified things."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -700,6 +781,17 @@
      "Many people write 他 or 她 for their own pet, to show affection.",
      "In writing 它 also refers to abstract things: 这个问题很重要，我们要解决它 ‘this problem is important, we must solve it’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -710,6 +802,13 @@
    "pos": "PRON",
    "senses": [
     "pron.we"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.we",
+     "axis": "listener included or not",
+     "value": "we — with or without the listener"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -737,7 +836,8 @@
       "def": "(academic writing) we, referring to the author(s)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -813,6 +913,17 @@
     "subtleties": [
      "Before group nouns 的 is usually dropped: 我们学校 (our school), 我们公司 (our company)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 我們 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -823,6 +934,13 @@
    "pos": "PRON",
    "senses": [
     "pron.we"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.we",
+     "axis": "listener included or not",
+     "value": "we, you and I: always includes the listener (northern, colloquial)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -910,6 +1028,17 @@
     "subtleties": [
      "Typical of northern Mandarin; in the south and in Taiwan most people just say 我们."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 咱們 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1015,6 +1144,17 @@
     "subtleties": [
      "In Taiwan 妳們 is sometimes written for a group of women; mainland Chinese writes 你们 for everyone."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 你們 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1025,6 +1165,13 @@
    "pos": "PRON",
    "senses": [
     "pron.they"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "who they are (written form)",
+     "value": "men or a mixed group"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1111,6 +1258,17 @@
     "subtleties": [
      "他们 also works generically: 他们说… ‘they say…, people say…’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 他們 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1121,6 +1279,13 @@
    "pos": "PRON",
    "senses": [
     "pron.they"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "who they are (written form)",
+     "value": "women only"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1201,6 +1366,17 @@
     "subtleties": [
      "Sounds identical to 他们: the difference exists only in writing."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 她們 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1211,6 +1387,13 @@
    "pos": "PRON",
    "senses": [
     "pron.they"
+   ],
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "who they are (written form)",
+     "value": "things or animals"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1292,6 +1475,17 @@
     "subtleties": [
      "它们 is one of the few places where Chinese uses 们 for something that is not human."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 它們 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1303,6 +1497,13 @@
    "senses": [
     "verb.be",
     "part.yes"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.yes",
+     "axis": "what the answer confirms",
+     "value": "answers a question with 是 (你是学生吗？——是。)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1338,7 +1539,8 @@
       "def": "emphasis: it is … that (the 是……的 construction)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1464,6 +1666,21 @@
      "是的 is a softer, very common ‘yes’; a bare 是 can sound like ‘Yes, sir’.",
      "To agree with what someone just said, 对 (duì, ‘right, correct’) is the most common ‘yes’: 你是老师？— 对。"
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu"
    }
   },
   {
@@ -1474,7 +1691,15 @@
    "pos": "CCONJ",
    "senses": [
     "conj.and",
-    "prep.with"
+    "prep.with",
+    "pol.peace"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.with",
+     "axis": "register",
+     "value": "with / and — neutral, spoken and written"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1510,7 +1735,8 @@
       "def": "peace; harmony (in words like 和平)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "pol.peace"
      }
     ],
     "examples": [
@@ -1608,6 +1834,17 @@
      "Verbs and adjectives are joined with 又…又…, 也 or 而且, not 和: 又便宜又新鲜 ‘cheap and fresh’.",
      "For ‘with (a person)’ 和 and 跟 are interchangeable before 一起: 我和 / 跟朋友一起吃饭; 跟 is more colloquial (S11)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1616,11 +1853,26 @@
    "trad": "在",
    "pinyin": "zài",
    "pos": "VERB",
-   "senses": [],
+   "senses": [
+    "prep.at",
+    "verb.be.located",
+    "part.progressive",
+    "prep.inmonth"
+   ],
    "role": "to be (located) at — the ‘be’ of place: 土豆在这里; ‘at / in’ before a place and the verb (S11): 在家吃饭; before a verb, the progressive ‘be …-ing’ (S14): 他在吃饭",
+   "contrasts": [
+    {
+     "concept": "part.progressive",
+     "axis": "strength",
+     "value": "the plain progressive (他在吃饭)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "meaning": "Wiktionary 在: “in; at”, “to be at; to be in; to be located” — the course concept prep.at; its gloss ‘at (a place: at home, at school)’ shares no word longer than two letters with ‘in; at’, so the tool cannot match it."
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -1636,28 +1888,32 @@
       "def": "to be at, to be in (location)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.be.located"
      },
      {
       "id": "s2",
       "def": "at, in (before a place, in front of the verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.at"
      },
      {
       "id": "s3",
       "def": "in the middle of doing (progressive: 在吃饭)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.progressive"
      },
      {
       "id": "s4",
       "def": "(formal) at, in (a time): 在2008年 — everyday speech uses the time word alone (S15)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "prep.inmonth"
      }
     ],
     "examples": [
@@ -1708,6 +1964,22 @@
       "register": "formal",
       "context": "biography",
       "sense": "s4"
+     },
+     {
+      "text": "他在银行工作。",
+      "py": "Tā zài yínháng gōngzuò.",
+      "tr": "He works at a bank.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
+     },
+     {
+      "text": "他在1998年大学毕业。",
+      "py": "Tā zài yī jiǔ jiǔ bā nián dàxué bìyè.",
+      "tr": "He graduated from university in 1998.",
+      "register": "formal",
+      "context": "biography",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1753,6 +2025,21 @@
      "在 + place goes before the verb: 我在家吃饭, not *我吃饭在家.",
      "The progressive can be strengthened with 正 and 呢: 他正在吃饭呢 ‘he’s eating right now’; its negation is 没(在): 他没在吃饭."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
    }
   },
   {
@@ -1762,10 +2049,40 @@
    "pinyin": "nán rén",
    "pos": "NOUN",
    "senses": [
-    "person.man"
+    "person.man",
+    "family.husband"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": [
+     {
+      "pinyin": "nán rén",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "nán ren",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.husband",
+     "axis": "register",
+     "value": "colloquial, rural or regional (‘my man’)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1794,7 +2111,8 @@
       "register": [
        "colloquial",
        "regional"
-      ]
+      ],
+      "concept": "family.husband"
      }
     ],
     "examples": [
@@ -1818,6 +2136,14 @@
       "text": "我男人今天不在家。",
       "py": "Wǒ nánren jīntiān bú zài jiā.",
       "tr": "My husband isn’t home today.",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "她男人在外地打工。",
+      "py": "Tā nánren zài wàidì dǎgōng.",
+      "tr": "Her husband works away from home.",
       "register": "colloquial",
       "context": "family",
       "sense": "s2"
@@ -1897,10 +2223,29 @@
    "pinyin": "nǚ rén",
    "pos": "NOUN",
    "senses": [
-    "person.woman"
+    "person.woman",
+    "family.wife"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "colloquial, rural or regional (‘my woman’)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1929,7 +2274,8 @@
       "register": [
        "colloquial",
        "regional"
-      ]
+      ],
+      "concept": "family.wife"
      }
     ],
     "examples": [
@@ -1956,6 +2302,22 @@
       "register": "neutral",
       "context": "on the street",
       "sense": "s1"
+     },
+     {
+      "text": "我女人在家做饭呢。",
+      "py": "Wǒ nǚren zài jiā zuòfàn ne.",
+      "tr": "My wife is at home cooking.",
+      "register": "colloquial",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "他女人是小学老师。",
+      "py": "Tā nǚren shì xiǎoxué lǎoshī.",
+      "tr": "His wife is a primary-school teacher.",
+      "register": "colloquial",
+      "context": "jobs",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2034,9 +2396,20 @@
    "senses": [
     "person.boy"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2063,7 +2436,8 @@
       "def": "son (when counting someone’s children)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2161,9 +2535,20 @@
    "senses": [
     "person.girl"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2190,7 +2575,8 @@
       "def": "young woman; lass",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2286,11 +2672,23 @@
    "pinyin": "hái zi",
    "pos": "NOUN",
    "senses": [
-    "person.child"
+    "person.child",
+    "family.child"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2317,7 +2715,8 @@
       "def": "child (one’s son or daughter, at any age)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.child"
      }
     ],
     "examples": [
@@ -2431,9 +2830,20 @@
     "person.person",
     "person.people"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2468,14 +2878,16 @@
       "def": "other people, others (in 别人)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      },
      {
       "id": "s4",
       "def": "a person of some place or kind: 希腊人 ‘a Greek’, 工人 ‘worker’",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2608,12 +3020,24 @@
    "pinyin": "péng you",
    "pos": "NOUN",
    "senses": [
-    "person.friend"
+    "person.friend",
+    "person.boyfriend"
    ],
-   "measure": [
-    "个",
-    "位"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2640,14 +3064,16 @@
       "def": "boyfriend / girlfriend (in 男朋友, 女朋友)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.boyfriend"
      },
      {
       "id": "s3",
       "def": "in 小朋友: a friendly word for a child",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2766,13 +3192,25 @@
    "pinyin": "xué sheng",
    "pos": "NOUN",
    "senses": [
-    "person.student"
+    "person.student",
+    "person.disciple"
    ],
-   "measure": [
-    "个",
-    "名",
-    "位"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 學生 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "名",
+     "位"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -2802,7 +3240,8 @@
       "def": "disciple, follower (of a master)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "person.disciple"
      }
     ],
     "examples": [
@@ -2829,6 +3268,14 @@
       "register": "neutral",
       "context": "university",
       "sense": "s1"
+     },
+     {
+      "text": "他是齐白石的学生。",
+      "py": "Tā shì Qí Báishí de xuésheng.",
+      "tr": "He was a disciple of (the painter) Qi Baishi.",
+      "register": "formal",
+      "context": "art",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2897,11 +3344,22 @@
    "senses": [
     "person.teacher"
    ],
-   "measure": [
-    "位",
-    "个",
-    "名"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 老師 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "个",
+     "名"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2928,14 +3386,16 @@
       "def": "a title and form of address for a teacher (王老师 ‘Teacher Wang’)",
       "register": [
        "honorific"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "a polite address for a respected expert, writer or artist",
       "register": [
        "honorific"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3046,7 +3506,9 @@
    "pos": "NUM",
    "senses": [
     "det.indef",
-    "num.1"
+    "num.1",
+    "adj.whole",
+    "conj.assoonas"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3082,14 +3544,16 @@
       "def": "whole, all (一屋子人 ‘a whole room full of people’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.whole"
      },
      {
       "id": "s4",
       "def": "as soon as (一…就…)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.assoonas"
      }
     ],
     "examples": [
@@ -3190,6 +3654,15 @@
      "Chinese needs 一 + measure word much less often than English needs ‘a’: 这是书 ‘this is a book’ is fine.",
      "一 + measure word introduces one new thing; a thing already known goes bare before the verb: 书在这里 ‘the book is here’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yí before a 4th tone (一个 yí ge), yì before the 1st–3rd tones (一本 yì běn); yī alone, in counting, in dates and ordinals"
    }
   }
  ],

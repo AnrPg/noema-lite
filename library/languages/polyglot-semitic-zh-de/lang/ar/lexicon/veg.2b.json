@@ -8,6 +8,33 @@
    "senses": [
     "veg.okra"
    ],
+   "features": {
+    "root": {
+     "none": "origin unknown: no root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "veg.okra",
+     "axis": "region",
+     "value": "everywhere else (standard)"
+    }
+   ],
    "gender": "FEM",
    "translit": "bāmiya",
    "forms": {
@@ -120,8 +147,42 @@
    "pos": "NOUN",
    "class": "collective",
    "senses": [
-    "veg.broadbean"
+    "veg.broadbean",
+    "food.fulmedames"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Aramaic): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "فُولَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted beans (plural of فُولَة)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فُولَتَانِ",
+    "declension": "triptote",
+    "unit": "فُولَة",
+    "meaningForms": [
+     {
+      "form": "فُولٌ مُدَمَّسٌ",
+      "what": "in full (the dish)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "gender": "MASC",
    "translit": "fūl",
    "forms": {
@@ -173,7 +234,8 @@
       ],
       "domains": [
        "food"
-      ]
+      ],
+      "concept": "food.fulmedames"
      }
     ],
     "examples": [
@@ -262,8 +324,30 @@
    "senses": [
     "veg.bottlegourd"
    ],
+   "features": {
+    "root": "د ب ب",
+    "pattern": "فُعْلَاء",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "دُبَّاءَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "دُبَّاءَتَانِ",
+    "declension": "triptote",
+    "unit": "دُبَّاءَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "د ب ب",
    "translit": "dubbāʾ",
    "forms": {
     "N;NOM;COLL;INDF": "دُبَّاءٌ",
@@ -377,6 +461,31 @@
    "senses": [
     "veg.artichoke"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "خَرَاشِيف",
+      "kind": "broken",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "خُرْشُوفَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "ḫuršūf",
    "forms": {
@@ -487,8 +596,38 @@
    "pos": "NOUN",
    "class": "collective",
    "senses": [
-    "veg.luffa"
+    "veg.luffa",
+    "obj.sponge",
+    "nature.arum"
    ],
+   "features": {
+    "root": {
+     "none": "a variant of لِيف (palm fibre): no root of its own"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "لُوفَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted (plural of لُوفَة)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "لُوفَتَانِ",
+    "declension": "triptote",
+    "unit": "لُوفَة",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
    "translit": "lūf",
    "forms": {
@@ -540,7 +679,8 @@
       ],
       "domains": [
        "household"
-      ]
+      ],
+      "concept": "obj.sponge"
      },
      {
       "id": "s3",
@@ -550,7 +690,8 @@
       ],
       "domains": [
        "botany"
-      ]
+      ],
+      "concept": "nature.arum"
      }
     ],
     "examples": [
@@ -574,6 +715,13 @@
       "register": "neutral",
       "context": "bathing",
       "sense": "s2"
+     },
+     {
+      "text": "فِي فِلَسْطِينَ يَطْبُخُونَ أَوْرَاقَ اللُّوفِ الْبَرِّيِّ مَعَ اللَّيْمُونِ.",
+      "tr": "In Palestine people cook the leaves of wild lūf (arum) with lemon.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -618,6 +766,26 @@
    "senses": [
     "veg.kale"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: كُرُنْب (a loanword) + أَجْعَد (ج ع د)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "kurunb ʾajʿad",
    "forms": {
@@ -710,6 +878,26 @@
    "senses": [
     "veg.redcabbage"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: مَلْفُوف (ل ف ف) + أَحْمَر (ح م ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "malfūf ʾaḥmar",
    "forms": {

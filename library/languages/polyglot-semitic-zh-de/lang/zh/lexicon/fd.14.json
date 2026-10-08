@@ -9,9 +9,20 @@
    "senses": [
     "time.monday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "一 at the end of the word (a day number) keeps yī"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -116,9 +127,20 @@
    "senses": [
     "time.tuesday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -222,9 +244,20 @@
    "senses": [
     "time.wednesday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -328,9 +361,20 @@
    "senses": [
     "time.thursday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -434,9 +478,20 @@
    "senses": [
     "time.friday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -540,9 +595,20 @@
    "senses": [
     "time.saturday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -646,8 +712,26 @@
    "senses": [
     "time.sunday"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.sunday",
+     "axis": "register",
+     "value": "spoken"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -757,8 +841,26 @@
    "senses": [
     "time.sunday"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.sunday",
+     "axis": "register",
+     "value": "written, formal"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -861,12 +963,31 @@
    "pinyin": "xīng qī",
    "pos": "NOUN",
    "senses": [
-    "time.week"
+    "time.week",
+    "time.weekday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "role": "week — in the day names 星期一 … 星期六 and 星期几 ‘which day?’ (S14); ‘week’ as a unit of time is the topic of S15",
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "register and counting",
+     "value": "week — counted with 个 (三个星期)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -893,7 +1014,8 @@
       "def": "day of the week (with a number: 星期三; in 星期几 ‘which day?’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.weekday"
      }
     ],
     "examples": [
@@ -978,9 +1100,20 @@
    "senses": [
     "time.weekend"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 週末 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1077,9 +1210,25 @@
    "pinyin": "tiān",
    "pos": "NOUN",
    "senses": [
-    "time.day"
+    "time.day",
+    "nature.sky",
+    "nature.weather",
+    "time.daytime"
    ],
-   "measureNone": "天 is itself a counter: 三天 ‘three days’ (no 个)",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "天 is itself a counter: 三天 ‘three days’ (no 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1106,21 +1255,24 @@
       "def": "sky, heaven",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.sky"
      },
      {
       "id": "s3",
       "def": "weather (天很冷)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.weather"
      },
      {
       "id": "s4",
       "def": "daytime",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.daytime"
      }
     ],
     "examples": [
@@ -1155,6 +1307,14 @@
       "register": "neutral",
       "context": "weather",
       "sense": "s3"
+     },
+     {
+      "text": "他白天工作，晚上学习。",
+      "py": "Tā báitiān gōngzuò, wǎnshang xuéxí.",
+      "tr": "He works in the daytime and studies in the evening.",
+      "register": "neutral",
+      "context": "daily life",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1223,6 +1383,13 @@
    "pos": "ADV",
    "senses": [
     "time.night"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.night",
+     "axis": "time of night",
+     "value": "the late night hours"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1318,6 +1485,21 @@
     "subtleties": [
      "晚上 covers the evening and the night until you sleep; 夜里 is the dark hours after that."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 夜裡 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal",
+     "sentenceInitial"
+    ]
    }
   },
   {
@@ -1329,8 +1511,26 @@
    "senses": [
     "time.morning"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "part of the morning",
+     "value": "early morning"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1440,8 +1640,26 @@
    "senses": [
     "time.morning"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "part of the morning",
+     "value": "the whole morning until noon, a.m."
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1537,7 +1755,20 @@
    "senses": [
     "time.noon"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1637,9 +1868,20 @@
    "senses": [
     "time.afternoon"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1740,8 +1982,31 @@
     "time.evening",
     "time.night"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.night",
+     "axis": "time of night",
+     "value": "the evening until bedtime"
+    },
+    {
+     "concept": "time.evening",
+     "axis": "bound or free",
+     "value": "evening — the word"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1866,9 +2131,23 @@
    "pinyin": "jīn tiān",
    "pos": "NOUN",
    "senses": [
-    "time.today"
+    "time.today",
+    "adv.nowadays"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1895,7 +2174,8 @@
       "def": "nowadays, the present time",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.nowadays"
      }
     ],
     "examples": [
@@ -1983,7 +2263,20 @@
    "senses": [
     "time.tomorrow"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2010,7 +2303,8 @@
       "def": "the future",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2090,7 +2384,20 @@
    "senses": [
     "time.yesterday"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2190,7 +2497,27 @@
    "senses": [
     "adv.now"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 現在 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.now",
+     "axis": "register",
+     "value": "now — the everyday word"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2217,7 +2544,8 @@
       "def": "the present",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2303,7 +2631,32 @@
     "adv.later",
     "prep.after"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 以後 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.later",
+     "axis": "how much later",
+     "value": "later, in the future"
+    },
+    {
+     "concept": "prep.after",
+     "axis": "register",
+     "value": "after — neutral; also ‘later’"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -2420,124 +2773,21 @@
    }
   },
   {
-   "id": "zh:dengyixia",
-   "lemma": "等一下",
-   "trad": "等一下",
-   "pinyin": "děng yī xià",
-   "pos": "ADV",
-   "senses": [
-    "adv.later"
-   ],
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
-   },
-   "profile": {
-    "frequency": "A1",
-    "status": "current",
-    "register": [
-     "neutral"
-    ],
-    "connotation": "neutral",
-    "feeling": "In a bit — after this, later today.",
-    "senses": [
-     {
-      "id": "s1",
-      "def": "later, in a little while",
-      "register": [
-       "neutral"
-      ],
-      "concept": "adv.later"
-     },
-     {
-      "id": "s2",
-      "def": "(verb) wait a moment!",
-      "register": [
-       "neutral"
-      ]
-     }
-    ],
-    "examples": [
-     {
-      "text": "等一下我给你打电话。",
-      "py": "Děng yíxià wǒ gěi nǐ dǎ diànhuà.",
-      "tr": "I’ll call you later.",
-      "register": "neutral",
-      "context": "phone",
-      "sense": "s1"
-     },
-     {
-      "text": "我们等一下去超市。",
-      "py": "Wǒmen děng yíxià qù chāoshì.",
-      "tr": "We’ll go to the supermarket in a bit.",
-      "register": "neutral",
-      "context": "plans",
-      "sense": "s1"
-     },
-     {
-      "text": "等一下！",
-      "py": "Děng yíxià!",
-      "tr": "Wait a moment!",
-      "register": "neutral",
-      "context": "street",
-      "sense": "s2"
-     }
-    ],
-    "collocations": [
-     {
-      "text": "等一下见",
-      "tr": "see you in a bit"
-     },
-     {
-      "text": "请等一下",
-      "tr": "please wait a moment"
-     },
-     {
-      "text": "等一下再说",
-      "tr": "let’s talk about it in a bit"
-     }
-    ],
-    "phrases": [],
-    "synonyms": [
-     {
-      "word": "一会儿",
-      "register": "neutral",
-      "nuance": "yíhuìr: in a little while, soon"
-     },
-     {
-      "word": "待会儿",
-      "register": "colloquial",
-      "nuance": "dāihuìr: in a bit — northern speech"
-     },
-     {
-      "word": "回头",
-      "register": "colloquial",
-      "nuance": "huítóu: later (回头见 ‘see you later’)"
-     }
-    ],
-    "etymology": {
-     "text": "等 ‘to wait’ + 一下 ‘a moment, once’: ‘wait a moment’ → ‘in a moment, later’.",
-     "src": "morphemes: 等 + 一下 (Wiktionary (kaikki.org) character entries)"
-    },
-    "funFacts": [
-     "等一下 shows how Chinese turns verbs into time words: ‘wait a little’ becomes ‘later’."
-    ],
-    "pitfalls": [
-     "Said děng yíxià: 一 changes to yí before the 4th tone of 下 (dictionaries write yī)."
-    ],
-    "subtleties": [
-     "等一下 is ‘later today, in a little while’; for a far future use 以后."
-    ]
-   }
-  },
-  {
    "id": "zh:mashang",
    "lemma": "马上",
    "trad": "馬上",
    "pinyin": "mǎ shàng",
    "pos": "ADV",
    "senses": [
-    "adv.soon"
+    "adv.soon",
+    "tr.onhorseback"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.soon",
+     "axis": "immediacy",
+     "value": "at once, right away"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2565,7 +2815,8 @@
       "def": "(literally) on horseback",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "tr.onhorseback"
      }
     ],
     "examples": [
@@ -2592,6 +2843,14 @@
       "register": "neutral",
       "context": "calendar",
       "sense": "s1"
+     },
+     {
+      "text": "那个人骑在马上。",
+      "py": "Nàge rén qí zài mǎ shàng.",
+      "tr": "That man is sitting on horseback.",
+      "register": "literary",
+      "context": "description",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2639,16 +2898,38 @@
     "subtleties": [
      "马上 is elastic: 我马上来 can mean one minute — or twenty."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 馬上 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
    "id": "zh:yihui",
    "lemma": "一会",
    "trad": "一會",
-   "pinyin": "yí huì",
+   "pinyin": "yī huì",
    "pos": "ADV",
    "senses": [
-    "adv.soon"
+    "adv.soon",
+    "time.while"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.soon",
+     "axis": "immediacy",
+     "value": "in a little while"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2679,7 +2960,8 @@
       "def": "a little while (as a length of time, after the verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.while"
      }
     ],
     "examples": [
@@ -2758,144 +3040,27 @@
     "subtleties": [
      "一会 … 一会 … means ‘now … now …’: 一会冷，一会热 ‘now cold, now hot’."
     ]
-   }
-  },
-  {
-   "id": "zh:zao",
-   "lemma": "早",
-   "trad": "早",
-   "pinyin": "zǎo",
-   "pos": "ADJ",
-   "senses": [
-    "adv.early"
-   ],
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
    },
-   "profile": {
-    "frequency": "A1",
-    "status": "current",
-    "register": [
-     "neutral"
-    ],
-    "connotation": "positive",
-    "feeling": "Early — the sun just up, the first bus.",
-    "senses": [
-     {
-      "id": "s1",
-      "def": "early",
-      "register": [
-       "neutral"
-      ],
-      "concept": "adv.early"
-     },
-     {
-      "id": "s2",
-      "def": "good morning (greeting: 早！)",
-      "register": [
-       "colloquial"
-      ]
-     },
-     {
-      "id": "s3",
-      "def": "long ago, already (早就)",
-      "register": [
-       "neutral"
-      ]
-     }
-    ],
-    "examples": [
-     {
-      "text": "我们明天早一点去吧。",
-      "py": "Wǒmen míngtiān zǎo yìdiǎn qù ba.",
-      "tr": "Let’s go a bit earlier tomorrow.",
-      "register": "neutral",
-      "context": "plans",
-      "sense": "s1"
-     },
-     {
-      "text": "你今天来得很早。",
-      "py": "Nǐ jīntiān lái de hěn zǎo.",
-      "tr": "You came early today.",
-      "register": "neutral",
-      "context": "school",
-      "sense": "s1"
-     },
-     {
-      "text": "早！",
-      "py": "Zǎo!",
-      "tr": "Morning!",
-      "register": "colloquial",
-      "context": "greeting",
-      "sense": "s2"
-     },
-     {
-      "text": "我早就知道了。",
-      "py": "Wǒ zǎo jiù zhīdào le.",
-      "tr": "I knew that long ago.",
-      "register": "neutral",
-      "context": "conversation",
-      "sense": "s3"
-     }
-    ],
-    "collocations": [
-     {
-      "text": "早一点",
-      "tr": "a bit earlier"
-     },
-     {
-      "text": "很早",
-      "tr": "very early"
-     },
-     {
-      "text": "早就",
-      "tr": "long since"
-     },
-     {
-      "text": "早饭",
-      "tr": "breakfast"
-     }
-    ],
-    "phrases": [
-     {
-      "text": "早起的鸟儿有虫吃",
-      "tr": "the early bird has worms to eat",
-      "kind": "saying",
-      "meaning": "the early bird catches the worm",
-      "register": "colloquial"
-     }
-    ],
-    "synonyms": [
-     {
-      "word": "提前",
-      "register": "neutral",
-      "nuance": "tíqián: in advance, ahead of time"
-     },
-     {
-      "word": "早早",
-      "register": "colloquial",
-      "nuance": "zǎozǎo: very early, in good time"
-     }
-    ],
-    "antonyms": [
-     {
-      "word": "晚",
-      "note": "wǎn: late"
-     }
-    ],
-    "etymology": {
-     "text": "Phono-semantic in the bronze inscriptions: 日 ‘sun’ + phonetic 棗 (earlier a drawing borrowed for its sound); the seal-script form was read as ‘sun’ + 甲 ‘first’ — when the sun first rises.",
-     "src": "Wiktionary (kaikki.org)"
+   "variants": [
+    {
+     "lemma": "一会儿",
+     "trad": "一會兒",
+     "pinyin": "yī huìr",
+     "region": "north, esp. Beijing (erhua)"
+    }
+   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
     },
-    "funFacts": [
-     "早 ‘early’ gives 早饭 ‘early meal’ = breakfast and 早上 ‘morning’."
-    ],
-    "pitfalls": [
-     "After a verb, 早 / 晚 need 得: 你来得很早 ‘you came early’; before a verb add 一点: 早一点去 ‘go a bit earlier’."
-    ],
-    "subtleties": [
-     "早！ alone is a casual ‘good morning’."
+    "tradPerSense": {
+     "none": "traditional 一會 for every sense"
+    },
+    "toneSandhi": "yí huì",
+    "position": [
+     "preverbal",
+     "sentenceInitial",
+     "afterVerb"
     ]
    }
   },
@@ -2906,7 +3071,15 @@
    "pinyin": "wǎn",
    "pos": "ADJ",
    "senses": [
-    "adv.late"
+    "adv.late",
+    "time.evening"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.evening",
+     "axis": "bound or free",
+     "value": "evening only inside words (今晚, 晚饭)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2934,7 +3107,8 @@
       "def": "evening, night (晚上, 晚饭)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.evening"
      }
     ],
     "examples": [
@@ -2960,6 +3134,14 @@
       "tr": "What’s for dinner?",
       "register": "neutral",
       "context": "meals",
+      "sense": "s2"
+     },
+     {
+      "text": "今晚你有空吗？",
+      "py": "Jīnwǎn nǐ yǒu kòng ma?",
+      "tr": "Are you free this evening?",
+      "register": "neutral",
+      "context": "plans",
       "sense": "s2"
      }
     ],
@@ -3021,6 +3203,17 @@
     "subtleties": [
      "晚 + 了 marks a change: 现在很晚了 ‘it’s got late’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -3030,7 +3223,15 @@
    "pinyin": "zǒng shì",
    "pos": "ADV",
    "senses": [
-    "adv.always"
+    "adv.always",
+    "adv.afterall"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.always",
+     "axis": "sentence type",
+     "value": "always — the everyday word"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3058,7 +3259,8 @@
       "def": "after all, in the end",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.afterall"
      }
     ],
     "examples": [
@@ -3085,6 +3287,14 @@
       "register": "colloquial",
       "context": "complaint",
       "sense": "s1"
+     },
+     {
+      "text": "问题总是会解决的。",
+      "py": "Wèntí zǒngshì huì jiějué de.",
+      "tr": "The problem will get solved in the end.",
+      "register": "neutral",
+      "context": "conversation",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3133,6 +3343,20 @@
     "subtleties": [
      "Like English ‘always’, 总是 can carry irritation: 你总是这样！ ‘you’re always like this!’"
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 總是 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -3143,6 +3367,13 @@
    "pos": "ADV",
    "senses": [
     "adv.often"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.often",
+     "axis": "register",
+     "value": "often — spoken"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3237,6 +3468,20 @@
     "subtleties": [
      "常常 is everyday speech; 经常 sounds more regular and is common in writing."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -3247,6 +3492,13 @@
    "pos": "ADV",
    "senses": [
     "adv.often"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.often",
+     "axis": "register",
+     "value": "often, regularly — slightly formal"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3274,7 +3526,8 @@
       "def": "(adjective) everyday, regular",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3347,6 +3600,20 @@
     ],
     "subtleties": [
      "往往 states a tendency known from experience and is not used for the future or for wishes; 经常 can be: 以后我会经常来."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 經常 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
     ]
    }
   },
@@ -3448,6 +3715,21 @@
     "subtleties": [
      "有时候 … 有时候 … balances two habits: 有时候喝茶，有时候喝咖啡."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 有時候 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal",
+     "sentenceInitial"
+    ]
    }
   },
   {
@@ -3456,8 +3738,17 @@
    "trad": "正在",
    "pinyin": "zhèng zài",
    "pos": "ADV",
-   "senses": [],
+   "senses": [
+    "part.progressive"
+   ],
    "role": "in the middle of …-ing: the progressive before a verb, 他正在吃饭 (S14)",
+   "contrasts": [
+    {
+     "concept": "part.progressive",
+     "axis": "strength",
+     "value": "stresses ‘right now, in the middle of’ (他正在吃饭)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3476,7 +3767,8 @@
       "def": "in the middle of …-ing (progressive, before a verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.progressive"
      }
     ],
     "examples": [
@@ -3545,6 +3837,20 @@
     "subtleties": [
      "正在 stresses ‘at this very moment’; 在 alone is the everyday form."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -3553,7 +3859,11 @@
    "trad": "了",
    "pinyin": "le",
    "pos": "PART",
-   "senses": [],
+   "senses": [
+    "part.perfective",
+    "part.change",
+    "verb.finish"
+   ],
    "role": "aspect particle: after the verb, a completed action (买了两张票); at the end of the sentence, a new situation (他来了) (S14)",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3573,21 +3883,32 @@
       "def": "(after the verb) completed action: 买了两张票",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.perfective"
      },
      {
       "id": "s2",
       "def": "(at the end) change, new situation: 下雨了, 他来了",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.change"
      },
      {
       "id": "s3",
       "def": "(太 … 了) emphasis: 太好了",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s2"
+     },
+     {
+      "id": "s4",
+      "def": "(read liǎo) to finish; in …得了 / …不了 to be able to manage: 受不了 can't stand it",
+      "register": [
+       "neutral"
+      ],
+      "concept": "verb.finish"
      }
     ],
     "examples": [
@@ -3622,6 +3943,14 @@
       "register": "colloquial",
       "context": "emotions",
       "sense": "s3"
+     },
+     {
+      "text": "天太热了，我真受不了。",
+      "py": "Tiān tài rè le, wǒ zhēn shòu bu liǎo.",
+      "tr": "It’s too hot — I really can’t stand it.",
+      "register": "colloquial",
+      "context": "weather",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -3655,6 +3984,34 @@
     "subtleties": [
      "With a bare object, sentence-final 了 sounds more natural than verb-了: 我买票了 ‘I’ve bought the tickets’; verb-了 likes a number: 我买了两张票."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "le",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     },
+     {
+      "pinyin": "liǎo",
+      "senses": [
+       "s4"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "afterVerb",
+     "sentenceFinal"
+    ]
    }
   },
   {
@@ -3663,7 +4020,10 @@
    "trad": "過",
    "pinyin": "guo",
    "pos": "PART",
-   "senses": [],
+   "senses": [
+    "part.experiential",
+    "verb.pass"
+   ],
    "role": "aspect particle: experience — have (ever) done, 去过北京 ‘have been to Beijing’ (S14)",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3683,14 +4043,16 @@
       "def": "(after a verb) have ever / once done (experience)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.experiential"
      },
      {
       "id": "s2",
       "def": "(guò, verb) to cross, to pass, to spend (time): 过生日",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.pass"
      }
     ],
     "examples": [
@@ -3757,6 +4119,31 @@
     "subtleties": [
      "去过 = been there (and back): an experience; 去了 = went (and may still be there): 他去过北京 vs 他去北京了."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "guo",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "guò",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "traditional 過 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "afterVerb"
+    ]
    }
   },
   {
@@ -3770,6 +4157,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   }
  ],

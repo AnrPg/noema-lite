@@ -7,8 +7,25 @@
    "pinyin": "qié zi",
    "pos": "NOUN",
    "senses": [
-    "veg.eggplant"
+    "veg.eggplant",
+    "intj.cheese"
    ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "根",
+     "条"
+    ]
+   },
    "ref": {
     "src": "fixture"
    },
@@ -38,7 +55,8 @@
       "def": "‘cheese!’ (said when taking a photo)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.cheese"
      }
     ],
     "examples": [
@@ -118,6 +136,20 @@
    "senses": [
     "veg.pumpkin"
    ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "fixture"
    },

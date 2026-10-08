@@ -6,8 +6,19 @@
    "pos": "PRON",
    "class": "int",
    "senses": [
-    "q.what"
+    "q.what",
+    "pron.what",
+    "pron.something"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "was",
     "PRON;ACC": "was",
@@ -39,14 +50,16 @@
       "def": "what, which (relative: alles, was …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.what"
      },
      {
       "id": "s3",
       "def": "something (= etwas, colloquial: Ich habe was gefunden)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "pron.something"
      }
     ],
     "examples": [
@@ -130,7 +143,9 @@
    "lemma": "wo",
    "pos": "ADV",
    "senses": [
-    "q.where"
+    "q.where",
+    "pron.where",
+    "adv.somewhere"
    ],
    "ref": {
     "src": "kaikki",
@@ -158,14 +173,16 @@
       "def": "where (relative: die Stadt, wo ich wohne)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.where"
      },
      {
       "id": "s3",
       "def": "somewhere (= irgendwo, colloquial)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.somewhere"
      }
     ],
     "examples": [
@@ -235,6 +252,11 @@
     "subtleties": [
      "In southern German speech wo is also used as a relative pronoun (der Mann, wo …) – nonstandard."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -244,8 +266,25 @@
    "class": "intp",
    "senses": [
     "q.who",
-    "q.whose"
+    "q.whose",
+    "pron.who",
+    "pron.someone"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons",
+    "senseForms": [
+     {
+      "form": "wessen",
+      "senses": [
+       "s2"
+      ],
+      "note": "the genitive (formal); in speech: von wem?"
+     }
+    ]
+   },
    "forms": {
     "PRON;NOM": "wer",
     "PRON;ACC": "wen",
@@ -286,14 +325,16 @@
       "def": "whoever, he who (relative: Wer …, der …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.who"
      },
      {
       "id": "s4",
       "def": "somebody, anybody (= jemand)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "pron.someone"
      }
     ],
     "examples": [
@@ -338,6 +379,13 @@
       "register": "colloquial",
       "context": "at the door",
       "sense": "s4"
+     },
+     {
+      "text": "Wer zu spät kommt, muss draußen warten.",
+      "tr": "Whoever comes late has to wait outside.",
+      "register": "neutral",
+      "context": "rules",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -400,7 +448,8 @@
    "lemma": "wann",
    "pos": "ADV",
    "senses": [
-    "q.when"
+    "q.when",
+    "adv.sometime"
    ],
    "ref": {
     "src": "kaikki",
@@ -428,7 +477,8 @@
       "def": "sometime (= irgendwann)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.sometime"
      }
     ],
     "examples": [
@@ -459,6 +509,13 @@
       "register": "informal",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "Komm doch mal wann vorbei!",
+      "tr": "Drop by sometime!",
+      "register": "colloquial",
+      "context": "friends",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -513,6 +570,11 @@
     "subtleties": [
      "For a clock time Germans often ask Um wie viel Uhr …?; Wann …? is wider (a day, a time of day, a date)."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -520,7 +582,8 @@
    "lemma": "wie",
    "pos": "ADV",
    "senses": [
-    "q.how"
+    "q.how",
+    "prep.like"
    ],
    "ref": {
     "src": "kaikki",
@@ -548,14 +611,16 @@
       "def": "how (+ adjective or adverb): wie alt, wie groß, wie lange",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "as, like (comparison: so groß wie …, wie immer)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.like"
      }
     ],
     "examples": [
@@ -637,6 +702,11 @@
      "Wie? alone is a casual “what?/pardon?”; Wie bitte? is the polite form.",
      "so … wie = as … as (so alt wie ich); after a comparative German uses als: älter als ich."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -743,6 +813,11 @@
     "subtleties": [
      "Warum nicht? is also a relaxed “yes”: Kaffee? – Warum nicht?"
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -751,6 +826,13 @@
    "pos": "DET",
    "senses": [
     "q.howmany"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.howmany",
+     "axis": "count or mass noun",
+     "value": "with a mass noun (wie viel Zucker); colloquially also with a plural"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -778,7 +860,8 @@
       "def": "how many? (colloquial, before a plural noun – standard: wie viele)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -835,6 +918,12 @@
     "subtleties": [
      "In everyday speech wie viel also comes before plurals (Wie viel Kinder hast du?), but written standard German says wie viele."
     ]
+   },
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
    }
   },
   {
@@ -845,6 +934,19 @@
    "senses": [
     "q.howmany"
    ],
+   "contrasts": [
+    {
+     "concept": "q.howmany",
+     "axis": "count or mass noun",
+     "value": "with a plural (wie viele Kinder)"
+    }
+   ],
+   "features": {
+    "adjAfter": "strong",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "DET;NOM;PL": "wie viele",
     "DET;ACC;PL": "wie viele",
@@ -931,8 +1033,28 @@
    "pos": "DET",
    "class": "int",
    "senses": [
-    "q.which"
+    "q.which",
+    "pron.which",
+    "quant.some"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.which",
+     "axis": "register",
+     "value": "formal written style (der Mann, welcher …)"
+    },
+    {
+     "concept": "quant.some",
+     "axis": "which kind of “some”",
+     "value": "some, any – standing for a noun already named (Ich habe welche)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "welcher",
     "DET;NOM;SG;FEM": "welche",
@@ -985,14 +1107,16 @@
       "def": "which, who (relative pronoun)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "pron.which"
      },
      {
       "id": "s3",
       "def": "some, any (as a pronoun: Hast du Milch? – Ja, ich habe welche.)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "quant.some"
      }
     ],
     "examples": [
@@ -1020,6 +1144,20 @@
      {
       "text": "Hast du Milch? – Ja, im Kühlschrank ist welche.",
       "tr": "Do you have milk? – Yes, there’s some in the fridge.",
+      "register": "colloquial",
+      "context": "kitchen",
+      "sense": "s3"
+     },
+     {
+      "text": "Der Mann, welcher dort steht, ist mein Vater.",
+      "tr": "The man who is standing there is my father.",
+      "register": "literary",
+      "context": "formal writing",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich habe keine Äpfel mehr. Hast du welche?",
+      "tr": "I have no apples left. Do you have any?",
       "register": "colloquial",
       "context": "kitchen",
       "sense": "s3"
@@ -1068,7 +1206,9 @@
    "id": "de:von_Beruf",
    "lemma": "von Beruf",
    "pos": "ADV",
-   "senses": [],
+   "senses": [
+    "adv.byprofession"
+   ],
    "role": "by profession – the phrase of the job question: Was sind Sie von Beruf? (What do you do for a living?)",
    "ref": {
     "src": "kaikki",
@@ -1088,7 +1228,8 @@
       "def": "by profession, by trade (Was sind Sie von Beruf? – Ich bin Ärztin.)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.byprofession"
      }
     ],
     "examples": [
@@ -1151,6 +1292,11 @@
     "subtleties": [
      "Beruf is a trained profession (a calling); a job is die Stelle or, informally, der Job."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1160,7 +1306,35 @@
    "senses": [
     "job.doctor"
    ],
+   "contrasts": [
+    {
+     "concept": "job.doctor",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ärzte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Arzt",
     "N;ACC;SG": "Arzt",
@@ -1290,7 +1464,35 @@
    "senses": [
     "job.doctor"
    ],
+   "contrasts": [
+    {
+     "concept": "job.doctor",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ärztinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Arzt + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Ärztin",
     "N;ACC;SG": "Ärztin",
@@ -1391,7 +1593,43 @@
    "senses": [
     "job.nurse"
    ],
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "sex and term",
+     "value": "a man (the official term)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Krankenpfleger",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Kranke",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Pfleger",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Krankenpfleger",
     "N;ACC;SG": "Krankenpfleger",
@@ -1502,7 +1740,43 @@
    "senses": [
     "job.nurse"
    ],
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "sex and term",
+     "value": "a woman (the official term)"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Krankenpflegerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Kranke",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Pflegerin",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Krankenpflegerin",
     "N;ACC;SG": "Krankenpflegerin",
@@ -1603,7 +1877,43 @@
    "senses": [
     "job.nurse"
    ],
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "sex and term",
+     "value": "a woman (the traditional term)"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Krankenschwestern",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Kranke",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Schwester",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Krankenschwester",
     "N;ACC;SG": "Krankenschwester",
@@ -1710,7 +2020,35 @@
    "senses": [
     "job.engineer"
    ],
+   "contrasts": [
+    {
+     "concept": "job.engineer",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ingenieure",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Ingenieur",
     "N;ACC;SG": "Ingenieur",
@@ -1811,7 +2149,35 @@
    "senses": [
     "job.engineer"
    ],
+   "contrasts": [
+    {
+     "concept": "job.engineer",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ingenieurinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Ingenieur + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Ingenieurin",
     "N;ACC;SG": "Ingenieurin",
@@ -1907,7 +2273,35 @@
    "senses": [
     "job.driver"
    ],
+   "contrasts": [
+    {
+     "concept": "job.driver",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fahrer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: fahren + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Fahrer",
     "N;ACC;SG": "Fahrer",
@@ -2017,7 +2411,35 @@
    "senses": [
     "job.driver"
    ],
+   "contrasts": [
+    {
+     "concept": "job.driver",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fahrerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Fahrer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Fahrerin",
     "N;ACC;SG": "Fahrerin",
@@ -2116,7 +2538,38 @@
    "senses": [
     "job.cook"
    ],
+   "contrasts": [
+    {
+     "concept": "job.cook",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Köche",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Koch: porridge, mush (Austria)"
+     }
+    ],
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Koch",
     "N;ACC;SG": "Koch",
@@ -2235,7 +2688,35 @@
    "senses": [
     "job.cook"
    ],
+   "contrasts": [
+    {
+     "concept": "job.cook",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Köchinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Koch + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Köchin",
     "N;ACC;SG": "Köchin",
@@ -2330,9 +2811,39 @@
    "lemma": "Verkäufer",
    "pos": "NOUN",
    "senses": [
-    "job.seller"
+    "job.seller",
+    "person.seller"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.seller",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Verkäufer",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: verkaufen + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Verkäufer",
     "N;ACC;SG": "Verkäufer",
@@ -2369,7 +2880,8 @@
       "def": "seller, vendor (in a sale)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.seller"
      }
     ],
     "examples": [
@@ -2445,7 +2957,35 @@
    "senses": [
     "job.seller"
    ],
+   "contrasts": [
+    {
+     "concept": "job.seller",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Verkäuferinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Verkäufer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Verkäuferin",
     "N;ACC;SG": "Verkäuferin",
@@ -2545,7 +3085,35 @@
    "senses": [
     "job.worker"
    ],
+   "contrasts": [
+    {
+     "concept": "job.worker",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Arbeiter",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: arbeiten + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Arbeiter",
     "N;ACC;SG": "Arbeiter",
@@ -2649,9 +3217,39 @@
    "lemma": "Arbeiterin",
    "pos": "NOUN",
    "senses": [
-    "job.worker"
+    "job.worker",
+    "animal.workerbee"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.worker",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Arbeiterinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Arbeiter + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Arbeiterin",
     "N;ACC;SG": "Arbeiterin",
@@ -2688,7 +3286,8 @@
       "def": "worker bee",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "animal.workerbee"
      }
     ],
     "examples": [
@@ -2752,9 +3351,45 @@
    "lemma": "Bauer",
    "pos": "NOUN",
    "senses": [
-    "job.farmer"
+    "job.farmer",
+    "sport.pawn",
+    "person.boor"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "everyday: a man (or unspecified)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bauern",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Bauer: a birdcage"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bauer",
     "N;ACC;SG": "Bauern",
@@ -2802,21 +3437,24 @@
       "def": "peasant (historical)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "pawn (chess)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "sport.pawn"
      },
      {
       "id": "s4",
       "def": "boor, yokel",
       "register": [
        "pejorative"
-      ]
+      ],
+      "concept": "person.boor"
      }
     ],
     "examples": [
@@ -2840,6 +3478,13 @@
       "register": "technical",
       "context": "chess",
       "sense": "s3"
+     },
+     {
+      "text": "Du Bauer, kannst du nicht mal danke sagen?",
+      "tr": "You boor, can’t you even say thank you?",
+      "register": "pejorative",
+      "context": "insults",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2900,7 +3545,35 @@
    "senses": [
     "job.farmer"
    ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "everyday: a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bäuerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Bauer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bäuerin",
     "N;ACC;SG": "Bäuerin",
@@ -2996,7 +3669,42 @@
    "senses": [
     "job.farmer"
    ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "official: a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Landwirte",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Land",
+      "role": "modifier"
+     },
+     {
+      "part": "Wirt",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Landwirt",
     "N;ACC;SG": "Landwirt",
@@ -3107,7 +3815,42 @@
    "senses": [
     "job.farmer"
    ],
+   "contrasts": [
+    {
+     "concept": "job.farmer",
+     "axis": "register and sex",
+     "value": "official: a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Landwirtinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Land",
+      "role": "modifier"
+     },
+     {
+      "part": "Wirtin",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Landwirtin",
     "N;ACC;SG": "Landwirtin",
@@ -3203,7 +3946,35 @@
    "senses": [
     "job.police"
    ],
+   "contrasts": [
+    {
+     "concept": "job.police",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Polizisten",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "derived: Polizei + -ist"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Polizist",
     "N;ACC;SG": "Polizisten",
@@ -3314,7 +4085,35 @@
    "senses": [
     "job.police"
    ],
+   "contrasts": [
+    {
+     "concept": "job.police",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Polizistinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Polizist + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Polizistin",
     "N;ACC;SG": "Polizistin",
@@ -3410,7 +4209,35 @@
    "senses": [
     "job.lawyer"
    ],
+   "contrasts": [
+    {
+     "concept": "job.lawyer",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Anwälte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Anwalt",
     "N;ACC;SG": "Anwalt",
@@ -3526,7 +4353,35 @@
    "senses": [
     "job.lawyer"
    ],
+   "contrasts": [
+    {
+     "concept": "job.lawyer",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Anwältinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Anwalt + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Anwältin",
     "N;ACC;SG": "Anwältin",
@@ -3625,7 +4480,35 @@
    "senses": [
     "job.artist"
    ],
+   "contrasts": [
+    {
+     "concept": "job.artist",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Künstler",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Kunst + -ler"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Künstler",
     "N;ACC;SG": "Künstler",
@@ -3731,7 +4614,35 @@
    "senses": [
     "job.artist"
    ],
+   "contrasts": [
+    {
+     "concept": "job.artist",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Künstlerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Künstler + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Künstlerin",
     "N;ACC;SG": "Künstlerin",

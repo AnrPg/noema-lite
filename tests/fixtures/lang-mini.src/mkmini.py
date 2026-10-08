@@ -17,8 +17,13 @@ def attach(obj):
     for x in (obj.get('lexemes') or []) if isinstance(obj, dict) else []:
         if x.get('id') in PROFILES: x['profile'] = PROFILES[x['id']]
     return obj
+import re as _re
+import mkmini_facade
 def w(rel, obj):
     obj = attach(obj)
+    m = _re.match(r'lang/(\w+)/(language\.json|lexicon/)', rel)
+    if m and m.group(2) == 'language.json': mkmini_facade.apply(m.group(1), obj, {})
+    elif m: mkmini_facade.apply(m.group(1), {}, obj)   # D14 facade, D15 meanings
     p = os.path.join(OUT, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
     with open(p, 'w', encoding='utf-8') as f: json.dump(nfc(obj), f, ensure_ascii=False, indent=1); f.write('\n')
 
@@ -39,6 +44,7 @@ w('core/fields/core.json', {"field": "core", "title": "Core words", "subgroups":
     {"id": "det.indef", "gloss": "a, an (indefinite article)", "subgroup": "func", "tier": 1, "rank": 5},
     {"id": "conj.and", "gloss": "and", "subgroup": "func", "tier": 1, "rank": 6},
     {"id": "greet.hello", "gloss": "hello", "subgroup": "func", "tier": 1, "rank": 7}]})
+w('core/fields/more.json', mkmini_facade.field())   # pending meanings (D15)
 w('core/fields/food.vegetables.json', {"field": "food.vegetables", "title": "Vegetables", "subgroups": [
     {"id": "root", "title": "Root vegetables and bulbs"}, {"id": "fruit", "title": "Fruit vegetables"}],
   "sources": ["Mini fixture: a hand-picked subset (the real field is exhaustive)"],

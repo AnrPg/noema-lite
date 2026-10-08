@@ -7,7 +7,53 @@
    "senses": [
     "prep.under"
    ],
+   "prefix": false,
    "translit": "mitachat",
+   "features": {
+    "spelling": "מתחת",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "מִתַּחְתַּי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "מִתַּחְתֶּיךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "מִתַּחְתַּיִךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "מִתַּחְתָּיו"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "מִתַּחְתֶּיהָ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "מִתַּחְתֵּינוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "מִתַּחְתֵּיכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "מִתַּחְתֵּיכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "מִתַּחְתֵּיהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "מִתַּחְתֵּיהֶן"
+     }
+    ]
+   },
    "note": "Followed by לְ: מִתַּחַת לַשֻּׁלְחָן “under the table”. With pronouns: מִתַּחְתַּי, מִתַּחְתֶּיךָ …",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -96,7 +142,60 @@
    "senses": [
     "prep.nextto"
    ],
+   "prefix": false,
    "translit": "leyad",
+   "features": {
+    "spelling": "ליד",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "לְיָדִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "לְיָדְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "לְיָדֵךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "לְיָדוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "לְיָדָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "לְיָדֵנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "לְיָדְכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "לְיָדְכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "לְיָדָם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "לְיָדָן"
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "prep.nextto",
+     "axis": "register",
+     "value": "everyday"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -192,9 +291,56 @@
    "pos": "ADP",
    "senses": [
     "prep.infront",
-    "prep.before"
+    "prep.before",
+    "adv.ago"
    ],
+   "prefix": false,
    "translit": "lifnei",
+   "features": {
+    "spelling": "לפני",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "לְפָנַי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "לְפָנֶיךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "לְפָנַיִךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "לְפָנָיו"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "לְפָנֶיהָ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "לְפָנֵינוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "לִפְנֵיכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "לִפְנֵיכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "לִפְנֵיהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "לִפְנֵיהֶן"
+     }
+    ]
+   },
    "note": "“in front of” (place); the same word is “before” in time (lesson 15) and “ago”: לִפְנֵי שָׁנָה “a year ago”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -230,7 +376,8 @@
       "def": "ago",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.ago"
      }
     ],
     "examples": [
@@ -327,7 +474,53 @@
    "senses": [
     "prep.behind"
    ],
-   "translit": "meachorei",
+   "prefix": false,
+   "translit": "me'achorei",
+   "features": {
+    "spelling": "מאחורי",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "מֵאֲחוֹרַי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "מֵאֲחוֹרֶיךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "מֵאֲחוֹרַיִךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "מֵאֲחוֹרָיו"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "מֵאֲחוֹרֶיהָ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "מֵאֲחוֹרֵינוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "מֵאֲחוֹרֵיכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "מֵאֲחוֹרֵיכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "מֵאֲחוֹרֵיהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "מֵאֲחוֹרֵיהֶן"
+     }
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -425,9 +618,56 @@
    "lemma": "בֵּין",
    "pos": "ADP",
    "senses": [
-    "prep.between"
+    "prep.between",
+    "prep.among"
    ],
+   "prefix": false,
    "translit": "bein",
+   "features": {
+    "spelling": "בין",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "בֵּינִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "בֵּינְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "בֵּינֵךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "בֵּינוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "בֵּינָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "בֵּינֵינוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "בֵּינֵיכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "בֵּינֵיכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "בֵּינֵיהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "בֵּינֵיהֶן"
+     }
+    ]
+   },
    "note": "Between X and Y: בֵּין X לְY (standard) or בֵּין X וּבֵין Y; in speech also בֵּין X וְY.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -455,7 +695,8 @@
       "def": "among",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.among"
      }
     ],
     "examples": [
@@ -524,10 +765,27 @@
    "lemma": "קָרוֹב",
    "pos": "ADJ",
    "senses": [
-    "adv.near"
+    "adv.near",
+    "adj.close"
    ],
    "translit": "karov",
-   "note": "An adjective: it agrees with its noun (הַשּׁוּק קָרוֹב, הַתַּחֲנָה קְרוֹבָה). “Near to” takes לְ: קָרוֹב לַבַּיִת. As an adverb it stays קָרוֹב: הוּא גָּר קָרוֹב.",
+   "features": {
+    "spelling": "קרוב",
+    "root": "ק ר ב",
+    "pattern": "קָטוֹל",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "קָרוֹב",
     "ADJ;SG;FEM": "קְרוֹבָה",
@@ -538,6 +796,7 @@
     "ADJ;PL;MASC;DEF": "הַקְּרוֹבִים",
     "ADJ;PL;FEM;DEF": "הַקְּרוֹבוֹת"
    },
+   "note": "An adjective: it agrees with its noun (הַשּׁוּק קָרוֹב, הַתַּחֲנָה קְרוֹבָה). “Near to” takes לְ: קָרוֹב לַבַּיִת. As an adverb it stays קָרוֹב: הוּא גָּר קָרוֹב.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -564,7 +823,16 @@
       "def": "close (a friend, a relationship)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.close"
+     },
+     {
+      "id": "s3",
+      "def": "a relative (noun; plural קְרוֹבִים “relatives”, feminine קְרוֹבָה)",
+      "register": [
+       "neutral"
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -588,6 +856,13 @@
       "register": "neutral",
       "context": "friendship",
       "sense": "s2"
+     },
+     {
+      "text": "הֵם קְרוֹבִים שֶׁלִּי.",
+      "tr": "They are relatives of mine.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -648,7 +923,23 @@
     "adv.far"
    ],
    "translit": "rachok",
-   "note": "An adjective: it agrees with its noun (שְׂדֵה הַתְּעוּפָה רָחוֹק, הָאוּנִיבֶרְסִיטָה רְחוֹקָה). “Far from” takes מִ: רָחוֹק מִכָּאן.",
+   "features": {
+    "spelling": "רחוק",
+    "root": "ר ח ק",
+    "pattern": "קָטוֹל",
+    "governs": [
+     {
+      "prep": "mi",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "רָחוֹק",
     "ADJ;SG;FEM": "רְחוֹקָה",
@@ -659,6 +950,7 @@
     "ADJ;PL;MASC;DEF": "הָרְחוֹקִים",
     "ADJ;PL;FEM;DEF": "הָרְחוֹקוֹת"
    },
+   "note": "An adjective: it agrees with its noun (שְׂדֵה הַתְּעוּפָה רָחוֹק, הָאוּנִיבֶרְסִיטָה רְחוֹקָה). “Far from” takes מִ: רָחוֹק מִכָּאן.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -685,7 +977,8 @@
       "def": "distant (a relative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -766,6 +1059,13 @@
     "adv.inside"
    ],
    "translit": "bifnim",
+   "features": {
+    "spelling": "בפנים",
+    "derivedFrom": "בְּ + פְּנִים “inside”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -859,6 +1159,13 @@
     "adv.outside"
    ],
    "translit": "bachuts",
+   "features": {
+    "spelling": "בחוץ",
+    "derivedFrom": "בְּ + הַ + חוּץ “outside”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -947,18 +1254,45 @@
    "id": "he:smol",
    "lemma": "שְׂמֹאל",
    "pos": "NOUN",
-   "senses": [
-    "adv.left"
-   ],
    "class": "sgt",
+   "senses": [
+    "adv.left",
+    "pol.left",
+    "place.north"
+   ],
    "gender": "MASC",
    "translit": "smol",
-   "note": "“On the left” = מִשְּׂמֹאל (מִ doubles the שׂ); “to the left” = שְׂמֹאלָה.",
+   "features": {
+    "spelling": "שמאל",
+    "root": "שׂ מ א ל",
+    "pattern": {
+     "none": "a primary noun of four consonants (Proto-Semitic *śimaʔl-): no pattern"
+    },
+    "plurals": {
+     "none": "no plural"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "not used as the first word of a construct (יַד שְׂמֹאל: here it is the second word)"
+    },
+    "meaningForms": [
+     {
+      "form": "הַשְּׂמֹאל",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article: the Left (in politics)"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "שְׂמֹאל",
     "N;SG;DEF": "הַשְּׂמֹאל",
     "N;SG;INDF;PFX": "שְּׂמֹאל"
    },
+   "note": "“On the left” = מִשְּׂמֹאל (מִ doubles the שׂ); “to the left” = שְׂמֹאלָה.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -988,14 +1322,16 @@
       "def": "the Left (in politics)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.left"
      },
      {
       "id": "s3",
       "def": "north (Biblical)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "place.north"
      }
     ],
     "examples": [
@@ -1026,6 +1362,13 @@
       "register": "neutral",
       "context": "politics",
       "sense": "s2"
+     },
+     {
+      "text": "עַד חוֹבָה אֲשֶׁר מִשְּׂמֹאל לְדַמָּשֶׂק.",
+      "tr": "As far as Hobah, which is north of Damascus. (Genesis 14:15)",
+      "register": "archaic",
+      "context": "Bible",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1072,18 +1415,47 @@
    "id": "he:yamin",
    "lemma": "יָמִין",
    "pos": "NOUN",
-   "senses": [
-    "adv.right"
-   ],
    "class": "sgt",
+   "senses": [
+    "adv.right",
+    "pol.right",
+    "place.south"
+   ],
    "gender": "FEM",
    "translit": "yamin",
-   "note": "“On the right” = מִיָּמִין (מִ doubles the י); “to the right” = יָמִינָה.",
+   "features": {
+    "spelling": "ימין",
+    "root": "י מ ן",
+    "pattern": "קָטִיל",
+    "plurals": {
+     "none": "no plural"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יְמִין"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "הַיָּמִין",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article: the Right (in politics)"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "יָמִין",
     "N;SG;DEF": "הַיָּמִין",
-    "N;SG;INDF;PFX": "יָּמִין"
+    "N;SG;INDF;PFX": "יָּמִין",
+    "N;SG;CONST": "יְמִין"
    },
+   "note": "“On the right” = מִיָּמִין (מִ doubles the י); “to the right” = יָמִינָה.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1113,14 +1485,16 @@
       "def": "the Right (in politics)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.right"
      },
      {
       "id": "s3",
       "def": "south (Biblical)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "place.south"
      }
     ],
     "examples": [
@@ -1151,6 +1525,13 @@
       "register": "neutral",
       "context": "politics",
       "sense": "s2"
+     },
+     {
+      "text": "צָפוֹן וְיָמִין אַתָּה בְרָאתָם.",
+      "tr": "North and south, you created them. (Psalm 89:13)",
+      "register": "archaic",
+      "context": "Bible",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1198,17 +1579,50 @@
    "lemma": "מִטְבָּח",
    "pos": "NOUN",
    "senses": [
-    "home.kitchen"
+    "home.kitchen",
+    "food.cuisine"
    ],
    "gender": "MASC",
-   "root": "ט־ב־ח",
    "translit": "mitbach",
+   "features": {
+    "spelling": "מטבח",
+    "root": "ט ב ח",
+    "pattern": "מִקְטָל",
+    "plurals": [
+     {
+      "form": "מִטְבָּחִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִטְבַּח"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִטְבְּחֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מִטְבָּח",
     "N;SG;DEF": "הַמִּטְבָּח",
     "N;PL;INDF": "מִטְבָּחִים",
     "N;PL;DEF": "הַמִּטְבָּחִים",
-    "N;SG;DEF;PFX": "מִּטְבָּח"
+    "N;SG;DEF;PFX": "מִּטְבָּח",
+    "N;SG;CONST": "מִטְבַּח",
+    "N;PL;CONST": "מִטְבְּחֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1239,7 +1653,8 @@
       "def": "cuisine",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.cuisine"
      }
     ],
     "examples": [
@@ -1307,6 +1722,33 @@
    ],
    "gender": "MASC",
    "translit": "chadar ambatya",
+   "features": {
+    "spelling": "חדר אמבטיה",
+    "root": {
+     "none": "a compound of two words (חֶדֶר + אַמְבַּטְיָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "חַדְרֵי אַמְבַּטְיָה",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֲדַר אַמְבַּטְיָה",
     "N;SG;DEF": "חֲדַר הָאַמְבַּטְיָה",
@@ -1406,6 +1848,34 @@
    ],
    "gender": "MASC",
    "translit": "chadar shena",
+   "features": {
+    "spelling": "חדר שינה",
+    "root": {
+     "none": "a compound of two words (חֶדֶר + שֵׁנָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "חַדְרֵי שֵׁנָה",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֲדַר שֵׁנָה",
     "N;SG;DEF": "חֲדַר הַשֵּׁנָה",
@@ -1444,7 +1914,8 @@
       "def": "dormitory",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1513,16 +1984,54 @@
    "lemma": "סָלוֹן",
    "pos": "NOUN",
    "senses": [
-    "home.livingroom"
+    "home.livingroom",
+    "home.suite"
    ],
    "gender": "MASC",
    "translit": "salon",
+   "features": {
+    "spelling": "סלון",
+    "root": {
+     "none": "a loanword (French salon): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "סָלוֹנִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סָלוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סָלוֹנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סָלוֹן",
     "N;SG;DEF": "הַסָּלוֹן",
     "N;PL;INDF": "סָלוֹנִים",
     "N;PL;DEF": "הַסָּלוֹנִים",
-    "N;SG;DEF;PFX": "סָּלוֹן"
+    "N;SG;DEF;PFX": "סָּלוֹן",
+    "N;SG;CONST": "סָלוֹן",
+    "N;PL;CONST": "סָלוֹנֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1550,7 +2059,8 @@
       "def": "a living-room set (sofa and armchairs)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.suite"
      }
     ],
     "examples": [
@@ -1624,18 +2134,54 @@
    ],
    "gender": "FEM",
    "translit": "gina",
+   "features": {
+    "spelling": "גינה",
+    "root": "ג נ ן",
+    "pattern": "קִטְלָה",
+    "plurals": [
+     {
+      "form": "גִּנּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "גִּנַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "גִּנּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "גִּנָּה",
     "N;SG;DEF": "הַגִּנָּה",
     "N;PL;INDF": "גִּנּוֹת",
     "N;PL;DEF": "הַגִּנּוֹת",
-    "N;SG;DEF;PFX": "גִּנָּה"
+    "N;SG;DEF;PFX": "גִּנָּה",
+    "N;SG;CONST": "גִּנַּת",
+    "N;PL;CONST": "גִּנּוֹת"
    },
    "plene": {
     "N;SG;INDF": "גינה",
     "N;SG;DEF": "הגינה",
     "N;PL;INDF": "גינות",
-    "N;PL;DEF": "הגינות"
+    "N;PL;DEF": "הגינות",
+    "N;SG;DEF;PFX": "גינה",
+    "N;SG;CONST": "גינת",
+    "N;PL;CONST": "גינות"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1663,7 +2209,8 @@
       "def": "a small park, a public garden",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1741,11 +2288,43 @@
    ],
    "gender": "FEM",
    "translit": "ritspa",
+   "features": {
+    "spelling": "רצפה",
+    "root": "ר צ ף",
+    "pattern": "קִטְלָה",
+    "plurals": [
+     {
+      "form": "רְצָפוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רִצְפַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "רִצְפוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "רִצְפָּה",
     "N;SG;DEF": "הָרִצְפָּה",
     "N;PL;INDF": "רְצָפוֹת",
-    "N;PL;DEF": "הָרְצָפוֹת"
+    "N;PL;DEF": "הָרְצָפוֹת",
+    "N;SG;CONST": "רִצְפַּת",
+    "N;PL;CONST": "רִצְפוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1825,15 +2404,36 @@
    "id": "he:madregot",
    "lemma": "מַדְרֵגוֹת",
    "pos": "NOUN",
+   "class": "plt",
    "senses": [
     "home.stairs"
    ],
-   "class": "plt",
    "gender": "FEM",
    "translit": "madregot",
+   "features": {
+    "spelling": "מדרגות",
+    "root": "ד ר ג",
+    "pattern": "מַקְטֵלָה",
+    "plurals": {
+     "none": "used in the plural: the word itself is the plural of מַדְרֵגָה “a step”"
+    },
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "מַדְרְגוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;PL;INDF": "מַדְרֵגוֹת",
-    "N;PL;DEF": "הַמַּדְרֵגוֹת"
+    "N;PL;DEF": "הַמַּדְרֵגוֹת",
+    "N;PL;CONST": "מַדְרְגוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1919,15 +2519,49 @@
    "lemma": "מַדָּף",
    "pos": "NOUN",
    "senses": [
-    "home.shelf"
+    "home.shelf",
+    "tech.flap"
    ],
    "gender": "MASC",
    "translit": "madaf",
+   "features": {
+    "spelling": "מדף",
+    "root": "ד פ ף",
+    "pattern": "מַקְטָל",
+    "plurals": [
+     {
+      "form": "מַדָּפִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַדַּף"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מַדְּפֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מַדָּף",
     "N;SG;DEF": "הַמַּדָּף",
     "N;PL;INDF": "מַדָּפִים",
-    "N;PL;DEF": "הַמַּדָּפִים"
+    "N;PL;DEF": "הַמַּדָּפִים",
+    "N;SG;CONST": "מַדַּף",
+    "N;PL;CONST": "מַדְּפֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1955,7 +2589,8 @@
       "def": "a flap (of an aircraft wing)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "tech.flap"
      }
     ],
     "examples": [
@@ -1979,6 +2614,13 @@
       "register": "neutral",
       "context": "home",
       "sense": "s1"
+     },
+     {
+      "text": "הַטַּיָּס הוֹרִיד אֶת הַמַּדָּפִים לִפְנֵי הַנְּחִיתָה.",
+      "tr": "The pilot lowered the flaps before landing.",
+      "register": "technical",
+      "context": "aviation",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2024,12 +2666,44 @@
    ],
    "gender": "FEM",
    "translit": "sapa",
+   "features": {
+    "spelling": "ספה",
+    "root": "ס פ ף",
+    "pattern": "קַטְלָה",
+    "plurals": [
+     {
+      "form": "סַפּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סַפַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סַפּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סַפָּה",
     "N;SG;DEF": "הַסַּפָּה",
     "N;PL;INDF": "סַפּוֹת",
     "N;PL;DEF": "הַסַּפּוֹת",
-    "N;SG;DEF;PFX": "סַּפָּה"
+    "N;SG;DEF;PFX": "סַּפָּה",
+    "N;SG;CONST": "סַפַּת",
+    "N;PL;CONST": "סַפּוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2119,12 +2793,44 @@
    ],
    "gender": "MASC",
    "translit": "mekarer",
+   "features": {
+    "spelling": "מקרר",
+    "root": "ק ר ר",
+    "pattern": "מְקַטֵּל",
+    "plurals": [
+     {
+      "form": "מְקָרְרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְקָרֵר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְקָרְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מְקָרֵר",
     "N;SG;DEF": "הַמְּקָרֵר",
     "N;PL;INDF": "מְקָרְרִים",
     "N;PL;DEF": "הַמְּקָרְרִים",
-    "N;SG;DEF;PFX": "מְּקָרֵר"
+    "N;SG;DEF;PFX": "מְּקָרֵר",
+    "N;SG;CONST": "מְקָרֵר",
+    "N;PL;CONST": "מְקָרְרֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",

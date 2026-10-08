@@ -164,7 +164,7 @@ def contains_word(L, lj, x, text):
     return any(c and nfc(c) in t for c in cands)
 
 
-def check_profile(v, w, L, lj, x, required):
+def check_profile(v, w, L, lj, x, required, pending=frozenset()):
     pr = x.get('profile')
     content = x.get('pos') in CONTENT_POS
     if pr is None:
@@ -196,6 +196,13 @@ def check_profile(v, w, L, lj, x, required):
         if s.get('concept') and s['concept'] not in (x.get('senses') or []): v.E(sw, f'concept “{s["concept"]}” is not one of the word\'s senses')
     for c in x.get('senses') or []:
         if not any(s.get('concept') == c for s in senses): v.E(pw, f'no sense explains the concept “{c}”')
+    # D15: every distinct meaning is a concept; a nuance hangs under the sense it belongs to
+    byid = {s.get('id'): s for s in senses}
+    for s in senses:
+        sw = f'{pw} · sense {s.get("id")}'
+        if s.get('concept') and s.get('of'): v.E(sw, 'a sense is either its own meaning (concept) or a nuance of another (of), not both')
+        elif not s.get('concept') and not s.get('of'): v.E(sw, 'every meaning is a concept (D15): give its concept (pending if the course does not teach it yet), or “of”: the sense it is a nuance of')
+        elif s.get('of') and not (byid.get(s['of']) or {}).get('concept'): v.E(sw, f'of: “{s["of"]}” is not a sense of this word with a concept')
     exs = pr.get('examples') or []
     per = {}
     for i, e in enumerate(exs):
@@ -214,7 +221,7 @@ def check_profile(v, w, L, lj, x, required):
         if len(exs) < 3: v.E(pw, f'at least 3 examples are required ({len(exs)})')
         if len({e.get('context') for e in exs}) < 2: v.E(pw, 'examples must cover at least 2 different contexts')
         for s in senses:
-            if s.get('concept') and per.get(s.get('id'), 0) < 2: v.E(f'{pw} · sense {s.get("id")}', 'the main sense of a concept needs at least 2 examples')
+            if s.get('concept') and per.get(s.get('id'), 0) < (1 if s['concept'] in pending else 2): v.E(f'{pw} · sense {s.get("id")}', 'the main sense of a concept needs at least 2 examples' if s['concept'] not in pending else 'a meaning needs at least one example')
     for k in ('collocations', 'particleVerbs'):
         for i, c in enumerate(pr.get(k) or []):
             for f in ('text', 'tr'): need_str(v, f'{pw} · {k} {i + 1}', c, f)
@@ -243,6 +250,125 @@ def check_profile(v, w, L, lj, x, required):
         if not pr.get('funFacts'): v.W(pw, 'no fun fact')
 
 GENDERED_NOUNS = {'de', 'ar', 'he', 'fr', 'es', 'it', 'pt', 'ru', 'el', 'hi'}
+
+# ---------- D14: the catalogue of phenomena and the facade of a word ----------
+FEATURE_TYPES = {'enum', 'string', 'strings', 'bool', 'int', 'list'}
+ITEM_TYPES = {'string', 'strings', 'bool', 'int', 'senses', 'lexeme', 'cell'}
+TOP_FIELDS = {'gender', 'class', 'translit', 'pinyin', 'trad', 'plene', 'variants', 'alts', 'prefix', 'role', 'forms', 'formsAlt'}
+PHEN_AREAS = {'script', 'orthography', 'phonology', 'morphology', 'syntax', 'lexicon', 'semantics', 'pragmatics', 'culture', 'numbers'}
+PHEN_STATUS = {'covered', 'partial', 'missing'}
+REPO_PHENOMENA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'library', 'languages', '_phenomena')
+
+
+def phenomena_path(root, L):
+    """The catalogue of phenomena of language L (§4.11): next to the course (library/languages/_phenomena), else the repo's."""
+    for d in (os.path.join(os.path.dirname(os.path.abspath(root)), '_phenomena'), REPO_PHENOMENA):
+        p = os.path.join(d, L + '.json')
+        if os.path.exists(p): return p
+    return None
+
+
+def check_phenomena(v, L, path):
+    """→ the phenomenon ids of the catalogue (errors for a broken catalogue)."""
+    w = f'_phenomena/{L}.json'
+    try: d = json.load(open(path, encoding='utf-8'))
+    except (OSError, ValueError) as e: v.E(w, f'cannot read ({e})'); return set()
+    if d.get('format') != 'noema.langphenomena/v1': v.E(w, 'format must be "noema.langphenomena/v1"')
+    if d.get('lang') != L: v.E(w, f'lang must be “{L}”')
+    ids = set()
+    for ph in d.get('phenomena') or []:
+        pid = ph.get('id'); pw = f'{w} · {pid}'
+        if not pid or pid in ids: v.E(pw, 'phenomenon id missing or repeated'); continue
+        ids.add(pid)
+        for k in ('title', 'what'): need_str(v, pw, ph, k)
+        if ph.get('area') not in PHEN_AREAS: v.E(pw, f'area must be one of {", ".join(sorted(PHEN_AREAS))}')
+        if ph.get('status') not in PHEN_STATUS: v.E(pw, 'status must be covered, partial or missing')
+        if ph.get('status') != 'covered' and not (ph.get('gap') or '').strip(): v.E(pw, 'say what is missing (gap)')
+        if not ph.get('examples'): v.E(pw, 'at least one example')
+    if len(ids) < 20: v.E(w, 'a catalogue of phenomena covers every area of the language (at least 20 phenomena)')
+    return ids
+
+
+def check_decls(v, where, wf, phen):
+    """The wordFeatures declaration of a language → {pos: [declaration]} (errors for broken declarations)."""
+    out = {}
+    if not isinstance(wf, dict): v.E(where, 'wordFeatures must map parts of speech to their parameters (D14, §4.5.1)'); return out
+    for pos, ds in wf.items():
+        if pos not in UD_POS: v.E(where, f'wordFeatures: unknown part of speech “{pos}”')
+        seen = set(); out[pos] = []
+        for d in ds or []:
+            dw = f'{where} · wordFeatures.{pos}.{d.get("id")}'
+            if not d.get('id') or d['id'] in seen: v.E(dw, 'id missing or repeated'); continue
+            seen.add(d['id']); out[pos].append(d)
+            need_str(v, dw, d, 'title')
+            if d.get('at') == 'top':
+                if d['id'] not in TOP_FIELDS: v.E(dw, f'“at: top” only for the shared fields ({", ".join(sorted(TOP_FIELDS))})')
+            elif d['id'] in TOP_FIELDS: v.E(dw, f'“{d["id"]}” is a shared top-level field: declare it with "at": "top"')
+            if d.get('type') not in FEATURE_TYPES: v.E(dw, f'type must be one of {", ".join(sorted(FEATURE_TYPES))}')
+            if d.get('type') == 'enum' and not d.get('values'): v.E(dw, 'an enum needs its values')
+            if d.get('type') == 'list':
+                if not isinstance(d.get('item'), dict) or not d['item']: v.E(dw, 'a list needs its item (key → type)')
+                for k, t in (d.get('item') or {}).items():
+                    t0 = t.rstrip('?')
+                    if not (t0 in ITEM_TYPES or (t0.startswith('enum:') and len(t0) > 5)): v.E(dw, f'item.{k}: unknown type “{t}”')
+            ps = d.get('phenomenon'); ps = ps if isinstance(ps, list) else [ps] if ps else []
+            if not ps: v.E(dw, 'name the phenomenon (or phenomena) it records (§4.11)')
+            for ph_ in ps:
+                if ph_ not in phen: v.E(dw, f'phenomenon “{ph_}” is not in the catalogue')
+    return out
+
+
+def check_features(v, w, x, decls, lexids):
+    """Every parameter of the word's part of speech stated, typed (D14)."""
+    pos = x.get('pos'); key = f'{pos}.{x["class"]}' if x.get('class') else pos
+    feats = x.get('features')
+    if feats is not None and not isinstance(feats, dict): v.E(w, '“features” must be an object'); feats = {}
+    feats = feats or {}
+    sids = {s.get('id') for s in ((x.get('profile') or {}).get('senses') or [])}
+    mine = [d for d in decls.get(pos, []) if not d.get('classes') or key in d['classes']]
+    known = {d['id'] for d in mine}
+    for k in feats:
+        if k not in known: v.E(w, f'features.{k}: not a parameter of {key} in this language (wordFeatures)')
+    def typed(dw, t, val, values=None):
+        t0 = t.rstrip('?')
+        if t0 == 'string': return isinstance(val, str) and val.strip() != ''
+        if t0 == 'strings': return isinstance(val, list) and all(isinstance(a, str) and a.strip() and (not values or a in values) for a in val)
+        if t0 == 'bool': return isinstance(val, bool)
+        if t0 == 'int': return isinstance(val, int) and not isinstance(val, bool)
+        if t0 == 'lexeme': return isinstance(val, str) and ':' in val
+        if t0 == 'cell': return isinstance(val, str) and val.strip() != ''
+        if t0 == 'senses':
+            if not (isinstance(val, list) and val and all(isinstance(a, str) for a in val)): return False
+            bad = [a for a in val if a not in sids]
+            if bad: v.E(dw, f'unknown sense(s) {", ".join(bad)} (the ids of the word\'s profile senses)')
+            return True
+        if t0.startswith('enum:'): return val in t0[5:].split('|')
+        return False
+    for d in mine:
+        fid = d['id']; dw = f'{w} · {fid}'
+        if d.get('at') == 'top': val = x.get(fid)
+        else: val = feats.get(fid)
+        if val is None:
+            v.E(w, f'the word does not state its {d.get("title", fid)} ({fid}{" at the top level" if d.get("at") == "top" else ""}): give a value' + (' or {"none": "<why>"}' if d.get('none') else '') + ' (D14)'); continue
+        if isinstance(val, dict) and set(val) == {'none'}:
+            if not d.get('none'): v.E(dw, 'this parameter cannot be “none”: every such word has it')
+            elif not (isinstance(val['none'], str) and val['none'].strip()): v.E(dw, 'say why it is none')
+            continue
+        t = d.get('type')
+        if t == 'enum':
+            if val not in (d.get('values') or []): v.E(dw, f'“{val}” is not one of {", ".join(map(str, d.get("values") or []))}')
+        elif t == 'list':
+            if not isinstance(val, list): v.E(dw, 'must be a list'); continue
+            for i, it in enumerate(val):
+                iw = f'{dw}[{i}]'
+                if not isinstance(it, dict): v.E(iw, 'must be an object'); continue
+                for k in it:
+                    if k not in d['item']: v.E(iw, f'unknown key “{k}”')
+                for k, kt in d['item'].items():
+                    if k not in it:
+                        if not kt.endswith('?'): v.E(iw, f'“{k}” is required')
+                    elif not typed(iw, kt, it[k]): v.E(iw, f'{k}: not a valid {kt.rstrip("?")}')
+        elif not typed(dw, t, val, d.get('values')): v.E(dw, f'not a valid {t}' + (f' (one of {", ".join(d["values"])})' if d.get('values') else ''))
 
 
 class V:
@@ -363,8 +489,11 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
     for nid, n in nodes.items():
         for p in n.get('prereqs') or []:
             if p not in nodes: v.E(f'core/nodes.json · {nid}', f'unknown prerequisite “{p}”')
+    pending = {cid for cid, c in concepts.items() if c.get('pending')}   # meanings known from words, not taught yet (D15)
     for cid in concepts:
-        if cid not in owners: v.E(f'concept {cid}', 'is in no node')
+        if cid in pending:
+            if cid in owners: v.E(f'concept {cid}', f'is pending but node {owners[cid][0]} teaches it: remove "pending"')
+        elif cid not in owners: v.E(f'concept {cid}', 'is in no node (a meaning not taught yet is "pending": true)')
     state = {}
     def visit(x, path):
         if state.get(x) == 1: v.E('core/nodes.json', 'cycle: ' + ' → '.join(path + [x])); return
@@ -400,6 +529,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         except (OSError, ValueError, KeyError) as e: v.E('parallel order (D13)', f'cannot read the paths: {e}')
 
     # ---------- every language ----------
+    meant = set()   # every concept some word of some language has (D15: a pending concept exists because a word means it)
     for L in langs:
         if only and L != only: continue
         lw = f'lang/{L}'
@@ -415,6 +545,12 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 for e in cell_errors(c, extra): v.E(f'{lw}/language.json · paradigmCells.{k}', f'{c}: {e}')
         typ = lj.get('typology')
         if typ not in TYPOLOGIES: v.E(f'{lw}/language.json', f'typology must be one of {", ".join(sorted(TYPOLOGIES))} (D10)')
+        # D14: the catalogue of phenomena comes first; the facade of every part of speech is declared from it
+        pp = phenomena_path(root, L)
+        if not pp: v.E(f'_phenomena/{L}.json', f'missing: a language starts with its catalogue of phenomena (docs/LANGUAGES.md §4.11)'); phen = set()
+        else: phen = check_phenomena(v, L, pp)
+        if 'wordFeatures' not in lj: v.E(f'{lw}/language.json', 'wordFeatures is required: the parameters every word of each part of speech states (D14, §4.5.1)')
+        decls = check_decls(v, f'{lw}/language.json', lj.get('wordFeatures') or {}, phen) if 'wordFeatures' in lj else {}
         app = {nid for nid, n in nodes.items() if applies(n, L, typ)}
         owner = {}
         for cid, ns in owners.items():
@@ -477,6 +613,7 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 if not (isinstance(lid, str) and lid.startswith(L + ':')): v.E(w, f'lexeme id must start with “{L}:”'); continue
                 if lid in lex: v.E(w, 'lexeme id used twice')
                 lex[lid] = {**x, '_node': nid}
+                meant.update(x.get('senses') or [])
                 need_str(v, w, x, 'lemma')
                 if x.get('pos') not in UD_POS: v.E(w, f'unknown part of speech “{x.get("pos")}”')
                 senses = x.get('senses')
@@ -484,8 +621,8 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 for si, s in enumerate(senses):
                     if s not in concepts: v.E(w, f'unknown concept “{s}”')
                     elif si == 0 and owner.get(s) != nid and x.get('role') and owner.get(s) in order and order.index(owner[s]) > order.index(nid): later_cov.add(s); continue   # a grammar word met early (לְ) whose concept is taught later
+                    elif si == 0 and s in pending and x.get('role'): continue   # a grammar word met here whose meaning is not taught as a concept yet (D15; its role says why it is here)
                     elif si == 0 and owner.get(s) != nid: v.E(w, f'concept “{s}” belongs to node {owner.get(s)} in {L}, not {nid}')
-                    elif si > 0 and owner.get(s) and order.index(owner[s]) < order.index(nid): v.E(w, f'its other sense “{s}” is taught earlier ({owner[s]}): put the word in that node, with that sense first')
                     if si == 0: covered.add(s)
                     else: later_cov.add(s)
                 if not senses: need_str(v, w, x, 'role')
@@ -514,7 +651,13 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                     if canon(cc) not in seen: v.E(w, f'missing citation cell {cc}')
                     elif forms[seen[canon(cc)]] != x.get('lemma'): v.E(w, f'the lemma “{x.get("lemma")}” must be the {cc} form “{forms[seen[canon(cc)]]}”')
                 if marks and len(letters(x.get('lemma', ''))) > 1 and not has_marks(L, x.get('lemma', '')): v.E(w, f'the lemma has no vowel marks')
-                check_profile(v, w, L, lj, x, course.get('profiles', 'required') == 'required')
+                check_profile(v, w, L, lj, x, course.get('profiles', 'required') == 'required', pending)
+                if 'wordFeatures' in lj:
+                    if x.get('pos') not in decls: v.E(w, f'no wordFeatures for {x.get("pos")} in {L}: declare the parameters of this part of speech (an empty list if it has none)')
+                    check_features(v, w, x, decls, lex)
+                for ct in x.get('contrasts') or []:
+                    if ct.get('concept') not in (x.get('senses') or []): v.E(w, f'contrasts: “{ct.get("concept")}” is not one of the word\'s concepts')
+                    for k in ('axis', 'value'): need_str(v, w + ' · contrasts', ct, k)
                 if x.get('pos') == 'NOUN' and L in GENDERED_NOUNS and x.get('class') != 'plt' and x.get('gender') not in ('MASC', 'FEM', 'NEUT'): v.E(w, 'gender is required (MASC, FEM or NEUT)')
                 if L == 'zh':
                     lemma = x.get('lemma', '')
@@ -528,7 +671,8 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                     erhua = lemma.endswith('儿') and len(lemma) > 1 and syl and syl[-1].endswith('r') and pinyin_tone(syl[-1])[0] != 'er' and len(syl) == len(lemma) - 1
                     for i_, s in enumerate(syl):
                         for e in pinyin_syllable_errors(s[:-1] if erhua and i_ == len(syl) - 1 else s): v.E(w, e)   # huìr, nǎr: the syllable without its r
-                    if x.get('pos') == 'NOUN' and not x.get('measure') and not x.get('measureNone'): v.E(w, 'a noun needs its measure word(s) (measure), or measureNone with the reason (人们)')
+                    ms = (x.get('features') or {}).get('measure', x.get('measure'))
+                    if x.get('pos') == 'NOUN' and not ms and not x.get('measureNone'): v.E(w, 'a noun needs its measure word(s) (features.measure), or {"none": "<why>"} (人们)')
             for a in d.get('absent') or []:
                 cid = a.get('concept'); w = f'{where} · absent {cid}'
                 if owner.get(cid) != nid: v.E(w, f'concept “{cid}” is not in node {nid}')
@@ -539,6 +683,18 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
         for where, nid, covered in pending_cov:
             for cid in nodes[nid].get('concepts') or []:
                 if cid not in covered and cid not in later_cov: (v.E if (batch and nid in batch) or (not batch and nid not in draft) else v.W)(where, f'concept “{cid}” has no word and is not marked absent')
+        # D14: one concept, several words → each says what separates it, on one axis
+        words_of = defaultdict(list)
+        for lid, x in lex.items():
+            for c in x.get('senses') or []: words_of[c].append(lid)
+        for cid, ids in words_of.items():
+            if len(ids) < 2: continue
+            got = {lid: next((ct for ct in lex[lid].get('contrasts') or [] if ct.get('concept') == cid), None) for lid in ids}
+            miss = [lid for lid, ct in got.items() if not ct]
+            if miss: v.E(f'{lw} · concept {cid}', f'{len(ids)} words ({", ".join(ids)}): each says what separates it (contrasts) — missing in {", ".join(miss)} (D14, §4.5.2)'); continue
+            if len({ct.get('axis') for ct in got.values()}) > 1: v.E(f'{lw} · concept {cid}', f'the words of one concept are contrasted on ONE axis, not {sorted({ct.get("axis") for ct in got.values()})}')
+            vals = [ct.get('value') for ct in got.values()]
+            if len(set(vals)) < len(vals): v.E(f'{lw} · concept {cid}', 'two words have the same contrast value')
 
         # grammar realizations
         for nid in mylessons:
@@ -662,6 +818,8 @@ def validate(root, only=None, strict=True, batch=None, peers=None):
                 if not s.get('variant'): v.E(f'{lw}/bank · {sid}', 'a variant must say what changed (variant)')
         for fid, f in frames.items():
             if fid not in realized and L not in (f.get('absent') or {}): (v.E if strict else v.W)(f'{lw}/bank', f'frame “{fid}” has no sentence in {L}')
+    if not only and strict:
+        for cid in sorted(pending - meant): v.E(f'concept {cid}', 'is pending, but no word of the course has this meaning: remove it')
     for x in os.listdir(os.path.join(root, 'lang')) if os.path.isdir(os.path.join(root, 'lang')) else []:
         if x not in langs: v.W(f'lang/{x}', 'not a course language (ignored)')
     return v

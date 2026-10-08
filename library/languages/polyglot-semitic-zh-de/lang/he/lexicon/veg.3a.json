@@ -10,13 +10,39 @@
    ],
    "gender": "MASC",
    "translit": "kurkum",
+   "features": {
+    "spelling": "כורכום",
+    "root": {
+     "none": "a loanword (ultimately Sanskrit kuṅkuma, through Arabic كُرْكُم): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כֻּרְכּוּם"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כֻּרְכּוּם",
-    "N;SG;DEF": "הַכֻּרְכּוּם"
+    "N;SG;DEF": "הַכֻּרְכּוּם",
+    "N;SG;CONST": "כֻּרְכּוּם"
    },
    "plene": {
     "N;SG;INDF": "כורכום",
-    "N;SG;DEF": "הכורכום"
+    "N;SG;DEF": "הכורכום",
+    "N;SG;CONST": "כורכום"
    },
    "note": "Used as a mass noun. Wiktionary vowels it with qubuts in the first syllable (כֻּרְכּוּם); everyday spelling כורכום.",
    "ref": {
@@ -109,9 +135,34 @@
    ],
    "gender": "MASC",
    "translit": "ribas",
+   "features": {
+    "spelling": "ריבס",
+    "root": {
+     "none": "a loanword (Arabic/Persian rībās): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רִיבָּס"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "רִיבָּס",
-    "N;SG;DEF": "הָרִיבָּס"
+    "N;SG;DEF": "הָרִיבָּס",
+    "N;SG;CONST": "רִיבָּס"
    },
    "note": "Used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -204,9 +255,37 @@
    ],
    "gender": "MASC",
    "translit": "vasabi",
+   "features": {
+    "spelling": "ואסאבי",
+    "root": {
+     "none": "a loanword (Japanese wasabi): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "וָאסָאבִּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "וָאסָאבִּי",
-    "N;SG;DEF": "הַוָּאסָאבִּי"
+    "N;SG;DEF": "הַוָּאסָאבִּי",
+    "N;SG;CONST": "וָאסָאבִּי"
+   },
+   "plene": {
+    "N;SG;DEF": "הוואסאבי"
    },
    "note": "A loanword used as a mass noun, spelled as in Wiktionary’s English entry wasabi (Hebrew translation ואסאבי, vasabi); other spellings are common. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -295,9 +374,30 @@
    ],
    "gender": "MASC",
    "translit": "maluach",
+   "features": {
+    "spelling": "מלוח",
+    "root": "מ ל ח",
+    "pattern": "קַטּוּל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מַלּוּחַ"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מַלּוּחַ",
-    "N;SG;DEF": "הַמַּלּוּחַ"
+    "N;SG;DEF": "הַמַּלּוּחַ",
+    "N;SG;CONST": "מַלּוּחַ"
    },
    "note": "The genus Atriplex (saltbush, orache); used as a mass noun.",
    "ref": {
@@ -394,6 +494,33 @@
    ],
    "gender": "MASC",
    "translit": "lev dekel",
+   "features": {
+    "spelling": "לב דקל",
+    "root": {
+     "none": "a compound of two words (לֵב + דֶּקֶל): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "לִבְבוֹת דֶּקֶל",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "לֵב דֶּקֶל",
     "N;SG;DEF": "לֵב הַדֶּקֶל",
@@ -487,9 +614,34 @@
    ],
    "gender": "MASC",
    "translit": "yarbuz",
+   "features": {
+    "spelling": "ירבוז",
+    "root": {
+     "none": "an old plant name with no root in use"
+    },
+    "pattern": {
+     "none": "an old plant name: no pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יַרְבּוּז"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יַרְבּוּז",
-    "N;SG;DEF": "הַיַּרְבּוּז"
+    "N;SG;DEF": "הַיַּרְבּוּז",
+    "N;SG;CONST": "יַרְבּוּז"
    },
    "note": "Used as a mass noun. Wiktionary has no Hebrew entry; its English entry amaranth gives ירבוז (yarbúz, masculine).",
    "ref": {
@@ -518,7 +670,8 @@
       "def": "amaranth seed, eaten like a grain",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -583,6 +736,33 @@
    ],
    "gender": "MASC",
    "translit": "shoresh petrozilya",
+   "features": {
+    "spelling": "שורש פטרוזיליה",
+    "root": {
+     "none": "a compound of two words (שֹׁרֶשׁ + פֶּטְרוֹזִילְיָה): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "שָׁרְשֵׁי פֶּטְרוֹזִילְיָה",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שֹׁרֶשׁ פֶּטְרוֹזִילְיָה",
     "N;SG;DEF": "שֹׁרֶשׁ הַפֶּטְרוֹזִילְיָה",

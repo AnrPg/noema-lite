@@ -1,0 +1,86 @@
+{
+ "field": "technology",
+ "title": "Technology",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "tech.bus",
+   "gloss": "bus (computing: data line)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "tech.data",
+   "gloss": "data",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "tech.electricity",
+   "gloss": "electricity, power (battery charge)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "tech.firewall",
+   "gloss": "the Great Firewall (internet censorship: 翻墙)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "tech.flap",
+   "gloss": "flap (of an aircraft wing)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "tech.iphone",
+   "gloss": "an iPhone, Apple products (colloquial)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "tech.key",
+   "gloss": "key (on a keyboard or piano)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "tech.nut",
+   "gloss": "nut (for a bolt)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "tech.spanner",
+   "gloss": "spanner, wrench",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "tech.ticket",
+   "gloss": "ticket (support request)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "tech.window",
+   "gloss": "window (on a computer screen)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true
+  }
+ ]
+}

@@ -13,6 +13,10 @@
   {
    "id": "meal",
    "title": "Meals"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -179,6 +183,190 @@
    "subgroup": "meal",
    "tier": 1,
    "rank": 23
+  },
+  {
+   "id": "drink.hotwater",
+   "gloss": "hot or boiling water (literary: 赴汤蹈火)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.asparagussalad",
+   "gloss": "asparagus salad (a dish)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.blackeyedpea",
+   "gloss": "black-eyed peas (dried cowpea seeds)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.bun",
+   "gloss": "steamed bun (baozi)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.chiliconcarne",
+   "gloss": "chili con carne (the dish)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.chilipowder",
+   "gloss": "chili powder",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.coffeebean",
+   "gloss": "(coffee or cocoa) bean",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.cuisine",
+   "gloss": "cuisine, style of cooking",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.food",
+   "gloss": "food",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.fulmedames",
+   "gloss": "ful medames (stewed fava beans)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.gherkin",
+   "gloss": "pickled gherkin",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.kalestew",
+   "gloss": "kale stew (northern German dish)",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.loaf",
+   "gloss": "loaf (of bread)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.meal",
+   "gloss": "meal",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.milkpudding",
+   "gloss": "milk pudding, panna cotta (Taiwan)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.paprika",
+   "gloss": "paprika (the spice)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.peanut",
+   "gloss": "peanut (Taiwan)",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.pepper",
+   "gloss": "pepper (the spice)",
+   "tier": 2,
+   "rank": 18,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.pork",
+   "gloss": "pork",
+   "tier": 2,
+   "rank": 19,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.rawvegetables",
+   "gloss": "raw vegetables (eaten raw)",
+   "tier": 2,
+   "rank": 20,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.staranise",
+   "gloss": "star anise (the spice; short for 八角茴香)",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "food.sweets",
+   "gloss": "sweets, candy",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "meal.coffeeandcake",
+   "gloss": "afternoon coffee and cake (a light meal)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

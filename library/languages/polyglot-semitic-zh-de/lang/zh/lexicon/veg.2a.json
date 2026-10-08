@@ -9,9 +9,20 @@
    "senses": [
     "veg.ginger"
    ],
-   "measure": [
-    "块"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 薑 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "块"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -32,13 +43,6 @@
        "neutral"
       ],
       "concept": "veg.ginger"
-     },
-     {
-      "id": "s2",
-      "def": "Jiang, a common surname (姜 was a surname before simplification merged it with 薑 ‘ginger’)",
-      "register": [
-       "neutral"
-      ]
      }
     ],
     "examples": [
@@ -132,12 +136,24 @@
    "pinyin": "huí xiāng",
    "pos": "NOUN",
    "senses": [
-    "veg.fennel"
+    "veg.fennel",
+    "food.staranise"
    ],
-   "measure": [
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -164,7 +180,8 @@
       "def": "short for 八角茴香, star anise (the spice)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.staranise"
      }
     ],
     "examples": [
@@ -191,6 +208,14 @@
       "context": "market",
       "sense": "s1",
       "py": "Wǒ mǎi yì bǎ huíxiāng."
+     },
+     {
+      "text": "红烧肉里要放一点大茴香。",
+      "py": "Hóngshāoròu li yào fàng yìdiǎn dà huíxiāng.",
+      "tr": "Red-braised pork needs a little star anise.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -254,9 +279,20 @@
    "senses": [
     "veg.cassava"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -352,11 +388,23 @@
    "pinyin": "lú sǔn",
    "pos": "NOUN",
    "senses": [
-    "veg.asparagus"
+    "veg.asparagus",
+    "nature.reedshoot"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 蘆筍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -383,7 +431,8 @@
       "def": "reed shoot (the young shoot of the common reed)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.reedshoot"
      }
     ],
     "examples": [
@@ -410,6 +459,14 @@
       "context": "food culture",
       "sense": "s1",
       "py": "Déguórén hěn xǐhuan chī bái lúsǔn."
+     },
+     {
+      "text": "春天，河边的芦笋可以吃。",
+      "py": "Chūntiān, hébiān de lúsǔn kěyǐ chī.",
+      "tr": "In spring the reed shoots by the river are edible.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -466,9 +523,20 @@
    "senses": [
     "veg.taro"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 芋頭 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -489,13 +557,6 @@
        "neutral"
       ],
       "concept": "veg.taro"
-     },
-     {
-      "id": "s2",
-      "def": "(dialectal Mandarin, e.g. Shandong, Anhui) sweet potato; (Henan, Yunnan) potato",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -585,10 +646,21 @@
    "senses": [
     "veg.lotusroot"
    ],
-   "measure": [
-    "节",
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 蓮藕 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "节",
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -693,9 +765,20 @@
    "senses": [
     "veg.dandelion"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -792,9 +875,20 @@
    "senses": [
     "veg.turnip"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 蕪菁 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -891,9 +985,20 @@
    "senses": [
     "veg.chicory"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -984,10 +1089,21 @@
    "senses": [
     "veg.purslane"
    ],
-   "measure": [
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 馬齒莧 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1089,10 +1205,21 @@
    "senses": [
     "veg.jerusalemartichoke"
    ],
-   "measure": [
-    "个",
-    "块"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "块"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1189,9 +1316,20 @@
    "senses": [
     "veg.nettle"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 蕁麻 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1282,9 +1420,20 @@
    "senses": [
     "veg.wildgarlic"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 熊蔥 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1376,9 +1525,20 @@
    "senses": [
     "veg.parsnip"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 歐防風 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1464,9 +1624,20 @@
    "senses": [
     "veg.sorrel"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1552,9 +1723,20 @@
    "senses": [
     "veg.horseradish"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1646,9 +1828,20 @@
    "senses": [
     "veg.rutabaga"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 蕪菁甘藍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1735,10 +1928,21 @@
    "senses": [
     "veg.watercress"
    ],
-   "measure": [
-    "把",
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把",
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1839,10 +2043,21 @@
    "senses": [
     "veg.waterspinach"
    ],
-   "measure": [
-    "把",
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把",
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1950,10 +2165,21 @@
    "senses": [
     "veg.shallot"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紅蔥頭 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2044,9 +2270,20 @@
    "senses": [
     "veg.yam"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 山藥 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2067,13 +2304,6 @@
        "neutral"
       ],
       "concept": "veg.yam"
-     },
-     {
-      "id": "s2",
-      "def": "(dialectal Mandarin) sweet potato; (Jin) potato",
-      "register": [
-       "dialectal"
-      ]
      }
     ],
     "examples": [
@@ -2155,9 +2385,20 @@
    "senses": [
     "veg.mustardgreens"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2259,9 +2500,20 @@
    "senses": [
     "veg.chard"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 莙薘菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2365,10 +2617,21 @@
    "senses": [
     "veg.bambooshoot"
    ],
-   "measure": [
-    "根",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 竹筍 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2479,10 +2742,21 @@
    "senses": [
     "veg.arugula"
    ],
-   "measure": [
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2569,9 +2843,20 @@
    "senses": [
     "veg.lambslettuce"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -2661,12 +2946,24 @@
    "pinyin": "jiǔ cài",
    "pos": "NOUN",
    "senses": [
-    "veg.garlicchives"
+    "veg.garlicchives",
+    "person.dupe"
    ],
-   "measure": [
-    "把",
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "把",
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2693,7 +2990,8 @@
       "def": "(Mainland internet slang) a dupe, someone exploited again and again, especially a small investor",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "person.dupe"
      }
     ],
     "examples": [
@@ -2788,10 +3086,21 @@
    "senses": [
     "veg.daikon"
    ],
-   "measure": [
-    "根",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 白蘿蔔 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2892,9 +3201,20 @@
    "senses": [
     "veg.romaine"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 羅馬生菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -2986,10 +3306,21 @@
    "senses": [
     "veg.radicchio"
    ],
-   "measure": [
-    "棵",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紅菊苣 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3076,10 +3407,21 @@
    "senses": [
     "veg.redonion"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紫洋蔥 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3176,10 +3518,21 @@
    "senses": [
     "veg.icebergl"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3277,9 +3630,20 @@
    "senses": [
     "veg.endive"
    ],
-   "measure": [
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",

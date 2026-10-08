@@ -5,8 +5,24 @@
    "lemma": "ich",
    "pos": "PRON",
    "senses": [
-    "pron.i"
+    "pron.i",
+    "mind.ego"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons",
+    "senseForms": [
+     {
+      "form": "das Ich, die Ichs",
+      "senses": [
+       "s2"
+      ],
+      "note": "a neuter noun"
+     }
+    ]
+   },
    "forms": {
     "PRON;NOM": "ich",
     "PRON;ACC": "mich",
@@ -42,7 +58,8 @@
       "domains": [
        "psychology",
        "philosophy"
-      ]
+      ],
+      "concept": "mind.ego"
      }
     ],
     "examples": [
@@ -73,6 +90,13 @@
       "register": "colloquial",
       "context": "at the door",
       "sense": "s1"
+     },
+     {
+      "text": "Freud unterscheidet das Ich, das Es und das Über-Ich.",
+      "tr": "Freud distinguishes the ego, the id and the superego.",
+      "register": "neutral",
+      "context": "psychology",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -123,6 +147,20 @@
    "senses": [
     "pron.you.sg"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "social distance",
+     "value": "informal: family, friends, children"
+    }
+   ],
+   "features": {
+    "address": "informal",
+    "reference": "persons",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "du",
     "PRON;ACC": "dich",
@@ -154,7 +192,8 @@
       "def": "you (generic, “one”) in casual speech: Da weißt du nie, was passiert.",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -243,6 +282,25 @@
     "pron.you.sg",
     "pron.you.pl"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "social distance",
+     "value": "formal: adults one does not know well"
+    },
+    {
+     "concept": "pron.you.pl",
+     "axis": "social distance",
+     "value": "formal: one person or several"
+    }
+   ],
+   "features": {
+    "address": "formal",
+    "reference": "persons",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "Sie",
     "PRON;ACC": "Sie",
@@ -366,8 +424,25 @@
    "lemma": "er",
    "pos": "PRON",
    "senses": [
-    "pron.he"
+    "pron.he",
+    "pron.it"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a der-noun (der Tisch → er)"
+    }
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "er",
     "PRON;ACC": "ihn",
@@ -399,7 +474,8 @@
       "def": "it – for any noun with the article der (der Kohl → er)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.it"
      }
     ],
     "examples": [
@@ -430,6 +506,13 @@
       "register": "neutral",
       "context": "everyday request",
       "sense": "s1"
+     },
+     {
+      "text": "Wo ist der Schlüssel? – Er liegt auf dem Tisch.",
+      "tr": "Where is the key? – It’s on the table.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -475,8 +558,25 @@
    "lemma": "sie",
    "pos": "PRON",
    "senses": [
-    "pron.she"
+    "pron.she",
+    "pron.it"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a die-noun (die Lampe → sie)"
+    }
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "sie",
     "PRON;ACC": "sie",
@@ -508,7 +608,8 @@
       "def": "it – for any noun with the article die (die Gurke → sie)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.it"
      }
     ],
     "examples": [
@@ -539,6 +640,13 @@
       "register": "neutral",
       "context": "friends",
       "sense": "s1"
+     },
+     {
+      "text": "Die Lampe ist neu. Sie war sehr teuer.",
+      "tr": "The lamp is new. It was very expensive.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -586,6 +694,15 @@
    "senses": [
     "pron.we"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "PRON;NOM": "wir",
     "PRON;ACC": "uns",
@@ -683,6 +800,15 @@
    "senses": [
     "pron.they"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "sie",
     "PRON;ACC": "sie",
@@ -714,7 +840,8 @@
       "def": "they/them for things – any plural noun, whatever its gender (die Kartoffeln → sie)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -778,9 +905,61 @@
    "lemma": "sein",
    "pos": "VERB",
    "senses": [
-    "verb.be"
+    "verb.be",
+    "verb.aux.perfect",
+    "verb.exist"
    ],
-   "aux": "sein",
+   "contrasts": [
+    {
+     "concept": "verb.aux.perfect",
+     "axis": "which verbs take it",
+     "value": "verbs of movement and change, and sein, bleiben (ist gegangen)"
+    }
+   ],
+   "features": {
+    "principalParts": [
+     "sein",
+     "ist",
+     "war",
+     "gewesen"
+    ],
+    "conjugation": "irregular",
+    "presentChange": "irregular",
+    "aux": "sein",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "NOM",
+      "senses": [
+       "s1"
+      ],
+      "note": "predicative: Das ist eine Tomate."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": [
+     {
+      "form": "ist … gegangen",
+      "senses": [
+       "s2"
+      ],
+      "note": "the auxiliary with a past participle"
+     }
+    ]
+   },
    "forms": {
     "V;NFIN": "sein",
     "V;PRS;1;SG": "bin",
@@ -821,21 +1000,24 @@
       "def": "auxiliary of the perfect for verbs of motion and change: Ich bin gegangen.",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.aux.perfect"
      },
      {
       "id": "s3",
       "def": "to exist, to be alive",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "verb.exist"
      },
      {
       "id": "s4",
       "def": "to be someone's turn (in a game, in a queue)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -873,6 +1055,13 @@
       "register": "colloquial",
       "context": "board game",
       "sense": "s4"
+     },
+     {
+      "text": "Ich denke, also bin ich.",
+      "tr": "I think, therefore I am.",
+      "register": "literary",
+      "context": "philosophy",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -959,7 +1148,8 @@
    "lemma": "und",
    "pos": "CCONJ",
    "senses": [
-    "conj.and"
+    "conj.and",
+    "intj.sowhat"
    ],
    "ref": {
     "src": "kaikki",
@@ -987,7 +1177,8 @@
       "def": "Und? / Na und? – so? so what? (colloquial question)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.sowhat"
      }
     ],
     "examples": [
@@ -1061,6 +1252,9 @@
     "subtleties": [
      "No comma before und in a simple list (Tomaten, Gurken und Zwiebeln); between two full main clauses the comma is optional."
     ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
    }
   },
   {
@@ -1070,6 +1264,22 @@
    "senses": [
     "pron.it"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a das-noun (das Buch → es)"
+    }
+   ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "es",
     "PRON;ACC": "es",
@@ -1101,14 +1311,16 @@
       "def": "it – an empty subject or placeholder: Es regnet. Es gibt … (there is/are). Es tut mir leid.",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "he, she – for a person named by a neuter noun (das Mädchen → es)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1196,8 +1408,34 @@
    "lemma": "ihr",
    "pos": "PRON",
    "senses": [
-    "pron.you.pl"
+    "pron.you.pl",
+    "pron.you.sg"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "social distance",
+     "value": "the old polite Ihr (fairy tales, historical films)"
+    },
+    {
+     "concept": "pron.you.pl",
+     "axis": "social distance",
+     "value": "informal: several people one says du to"
+    }
+   ],
+   "features": {
+    "address": "informal",
+    "reference": "persons",
+    "senseForms": [
+     {
+      "form": "Ihr",
+      "senses": [
+       "s2"
+      ],
+      "note": "written with a capital, the verb in the 2nd person plural: Habt Ihr …?"
+     }
+    ]
+   },
    "forms": {
     "PRON;NOM": "ihr",
     "PRON;ACC": "euch",
@@ -1229,7 +1467,8 @@
       "def": "Ihr – the old polite “you” to one person (before Sie), still heard in fairy tales and historical films",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "pron.you.sg"
      }
     ],
     "examples": [
@@ -1259,6 +1498,13 @@
       "tr": "Did you sleep well, Your Majesty?",
       "register": "archaic",
       "context": "fairy tale",
+      "sense": "s2"
+     },
+     {
+      "text": "Was wünscht Ihr, Herr Ritter?",
+      "tr": "What is your wish, Sir Knight?",
+      "register": "archaic",
+      "context": "fairy tales",
       "sense": "s2"
      }
     ],
@@ -1307,9 +1553,44 @@
    "pos": "NOUN",
    "senses": [
     "person.man",
-    "family.husband"
+    "family.husband",
+    "intj.man"
+   ],
+   "contrasts": [
+    {
+     "concept": "family.husband",
+     "axis": "register",
+     "value": "everyday: mein Mann"
+    },
+    {
+     "concept": "intj.man",
+     "axis": "feeling",
+     "value": "surprise or annoyance (Mann, oh Mann!)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Männer",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mann",
     "N;ACC;SG": "Mann",
@@ -1354,7 +1635,8 @@
       "def": "Mann! / Mann, oh Mann! – exclamation of surprise or annoyance",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.man"
      }
     ],
     "examples": [
@@ -1488,9 +1770,45 @@
    "pos": "NOUN",
    "senses": [
     "person.woman",
-    "family.wife"
+    "family.wife",
+    "person.mrs"
+   ],
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "everyday: meine Frau"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Frauen",
+      "pattern": "-en",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "Frau",
+      "senses": [
+       "s3"
+      ],
+      "note": "as a title before a surname, without an article, never plural: Frau Weber, mit Frau Weber"
+     }
+    ]
+   },
    "forms": {
     "N;NOM;SG": "Frau",
     "N;ACC;SG": "Frau",
@@ -1535,7 +1853,8 @@
       "def": "Mrs, Ms – title before a woman’s surname (Frau Weber), whatever her marital status",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "person.mrs"
      }
     ],
     "examples": [
@@ -1639,9 +1958,43 @@
    "lemma": "Junge",
    "pos": "NOUN",
    "senses": [
-    "person.boy"
+    "person.boy",
+    "intj.man",
+    "sport.jack"
+   ],
+   "contrasts": [
+    {
+     "concept": "intj.man",
+     "axis": "feeling",
+     "value": "amazement (Junge, Junge!)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jungen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Junge: a young animal (die Jungen of a cat)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Junge",
     "N;ACC;SG": "Jungen",
@@ -1688,7 +2041,8 @@
       "def": "Junge, Junge! – exclamation of surprise (“boy oh boy”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.man"
      },
      {
       "id": "s3",
@@ -1698,7 +2052,8 @@
       ],
       "domains": [
        "games"
-      ]
+      ],
+      "concept": "sport.jack"
      }
     ],
     "examples": [
@@ -1729,6 +2084,13 @@
       "register": "colloquial",
       "context": "exclamation",
       "sense": "s2"
+     },
+     {
+      "text": "Beim Skat sind die vier Jungen die höchsten Trümpfe.",
+      "tr": "In skat the four jacks are the highest trumps.",
+      "register": "neutral",
+      "context": "card games",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1807,9 +2169,32 @@
    "lemma": "Mädchen",
    "pos": "NOUN",
    "senses": [
-    "person.girl"
+    "person.girl",
+    "job.maid"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mädchen",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Magd + -chen (a diminutive, hence neuter)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mädchen",
     "N;ACC;SG": "Mädchen",
@@ -1846,7 +2231,8 @@
       "def": "maid, female servant (old-fashioned)",
       "register": [
        "dated"
-      ]
+      ],
+      "concept": "job.maid"
      }
     ],
     "examples": [
@@ -1877,6 +2263,13 @@
       "register": "colloquial",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "Früher hatte die reiche Familie ein Mädchen für die Küche.",
+      "tr": "In the old days the rich family had a maid for the kitchen.",
+      "register": "dated",
+      "context": "history",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1943,9 +2336,32 @@
    "lemma": "Kind",
    "pos": "NOUN",
    "senses": [
-    "person.child"
+    "person.child",
+    "family.child"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kinder",
+      "pattern": "-er",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kind",
     "N;ACC;SG": "Kind",
@@ -1982,7 +2398,8 @@
       "def": "child, offspring (son or daughter of any age)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.child"
      }
     ],
     "examples": [
@@ -2101,6 +2518,28 @@
     "person.person"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Personen",
+      "pattern": "-en",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Person",
     "N;ACC;SG": "Person",
@@ -2137,7 +2576,8 @@
       "def": "a person (dismissive: a woman or someone one disapproves of)",
       "register": [
        "pejorative"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2231,6 +2671,20 @@
    "senses": [
     "person.people"
    ],
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Leute)"
+    },
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;PL": "Leute",
     "N;ACC;PL": "Leute",
@@ -2263,7 +2717,8 @@
       "def": "guys, folks – addressing a group (Hallo, Leute!)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2357,9 +2812,40 @@
    "lemma": "Freund",
    "pos": "NOUN",
    "senses": [
-    "person.friend"
+    "person.friend",
+    "person.boyfriend"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Freunde",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Freund",
     "N;ACC;SG": "Freund",
@@ -2396,14 +2882,16 @@
       "def": "boyfriend (mein Freund)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.boyfriend"
      },
      {
       "id": "s3",
       "def": "friend, supporter of a thing (ein Freund der Musik)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2507,9 +2995,39 @@
    "lemma": "Freundin",
    "pos": "NOUN",
    "senses": [
-    "person.friend"
+    "person.friend",
+    "person.girlfriend"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.friend",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Freundinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Freund + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Freundin",
     "N;ACC;SG": "Freundin",
@@ -2549,7 +3067,8 @@
       "def": "girlfriend (meine Freundin)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.girlfriend"
      }
     ],
     "examples": [
@@ -2630,7 +3149,35 @@
    "senses": [
     "person.student"
    ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at a university: a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Studenten",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Student",
     "N;ACC;SG": "Studenten",
@@ -2744,7 +3291,35 @@
    "senses": [
     "person.student"
    ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at a university: a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Studentinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Student + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Studentin",
     "N;ACC;SG": "Studentin",
@@ -2851,9 +3426,44 @@
    "lemma": "Schüler",
    "pos": "NOUN",
    "senses": [
-    "person.student"
+    "person.student",
+    "person.disciple"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at school: a boy (or unspecified)"
+    },
+    {
+     "concept": "person.disciple",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schüler",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: Schule + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schüler",
     "N;ACC;SG": "Schüler",
@@ -2893,7 +3503,8 @@
       "def": "disciple, follower of a master (ein Schüler Freuds)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.disciple"
      }
     ],
     "examples": [
@@ -2967,9 +3578,44 @@
    "lemma": "Schülerin",
    "pos": "NOUN",
    "senses": [
-    "person.student"
+    "person.student",
+    "person.disciple"
+   ],
+   "contrasts": [
+    {
+     "concept": "person.student",
+     "axis": "school or university, and sex",
+     "value": "at school: a girl"
+    },
+    {
+     "concept": "person.disciple",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schülerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Schüler + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schülerin",
     "N;ACC;SG": "Schülerin",
@@ -3009,7 +3655,8 @@
       "def": "disciple, follower (female)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.disciple"
      }
     ],
     "examples": [
@@ -3080,7 +3727,35 @@
    "senses": [
     "person.teacher"
    ],
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Lehrer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: lehren + -er"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Lehrer",
     "N;ACC;SG": "Lehrer",
@@ -3204,7 +3879,35 @@
    "senses": [
     "person.teacher"
    ],
+   "contrasts": [
+    {
+     "concept": "person.teacher",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Lehrerinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Lehrer + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Lehrerin",
     "N;ACC;SG": "Lehrerin",
@@ -3312,8 +4015,22 @@
    "pos": "DET",
    "class": "def",
    "senses": [
-    "det.def"
+    "det.def",
+    "pron.which"
    ],
+   "contrasts": [
+    {
+     "concept": "pron.which",
+     "axis": "register",
+     "value": "everyday (der Mann, der dort steht)"
+    }
+   ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "der",
     "DET;NOM;SG;FEM": "die",
@@ -3358,7 +4075,16 @@
       "def": "before names in colloquial southern German: der Peter, die Anna",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
+     },
+     {
+      "id": "s3",
+      "def": "der, die, das as a relative pronoun: who, which, that (der Mann, der dort steht)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.which"
      }
     ],
     "examples": [
@@ -3389,6 +4115,20 @@
       "register": "colloquial",
       "context": "southern speech",
       "sense": "s2"
+     },
+     {
+      "text": "Der Mann, der dort steht, ist mein Lehrer.",
+      "tr": "The man who is standing over there is my teacher.",
+      "register": "neutral",
+      "context": "pointing out people",
+      "sense": "s3"
+     },
+     {
+      "text": "Das ist das Buch, das ich gerade lese.",
+      "tr": "That is the book (that) I am reading at the moment.",
+      "register": "neutral",
+      "context": "books",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -3430,8 +4170,28 @@
    "pos": "DET",
    "class": "indef",
    "senses": [
-    "det.indef"
+    "det.indef",
+    "num.1"
    ],
+   "contrasts": [
+    {
+     "concept": "num.1",
+     "axis": "before a noun or alone",
+     "value": "before a noun (ein Kaffee, nicht zwei)"
+    }
+   ],
+   "features": {
+    "adjAfter": "mixed",
+    "senseForms": [
+     {
+      "form": "einer, eine, eins",
+      "senses": [
+       "s2"
+      ],
+      "note": "standing alone: Ich habe nur eins."
+     }
+    ]
+   },
    "forms": {
     "DET;NOM;SG;MASC": "ein",
     "DET;NOM;SG;FEM": "eine",
@@ -3472,7 +4232,8 @@
       "def": "one (the numeral; stressed in speech)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "num.1"
      }
     ],
     "examples": [
@@ -3495,6 +4256,13 @@
       "tr": "I'll just have one coffee, not two.",
       "register": "neutral",
       "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "Wir bleiben eine Woche, nicht zwei.",
+      "tr": "We are staying one week, not two.",
+      "register": "neutral",
+      "context": "holidays",
       "sense": "s2"
      }
     ],

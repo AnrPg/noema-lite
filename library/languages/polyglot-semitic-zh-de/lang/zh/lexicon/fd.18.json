@@ -9,6 +9,13 @@
    "senses": [
     "conj.but"
    ],
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "neutral, also written"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -104,6 +111,17 @@
     "subtleties": [
      "但是 often comes with 还是 or 也 later in the clause: 但是我还是去了 ‘but I went anyway’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -113,7 +131,15 @@
    "pinyin": "kě shì",
    "pos": "CCONJ",
    "senses": [
-    "conj.but"
+    "conj.but",
+    "adv.truly"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "spoken"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -141,7 +167,8 @@
       "def": "(adverb) really, indeed — stresses what follows",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.truly"
      }
     ],
     "examples": [
@@ -207,6 +234,17 @@
     "subtleties": [
      "可是 sounds more spoken and often a little regretful; 但是 is neutral."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -216,7 +254,15 @@
    "pinyin": "yīn wèi",
    "pos": "SCONJ",
    "senses": [
-    "conj.because"
+    "conj.because",
+    "prep.becauseof"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.becauseof",
+     "axis": "register",
+     "value": "因为 + noun — neutral (因为下雨)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -244,7 +290,8 @@
       "def": "(+ noun) because of",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.becauseof"
      }
     ],
     "examples": [
@@ -314,6 +361,18 @@
     "subtleties": [
      "The word order inside the 因为-clause does not change (unlike German weil, which sends the verb to the end)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 因為 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "pair": "所以"
    }
   },
   {
@@ -323,7 +382,8 @@
    "pinyin": "suǒ yǐ",
    "pos": "CCONJ",
    "senses": [
-    "conj.so"
+    "conj.so",
+    "abstract.reason"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -351,7 +411,8 @@
       "def": "(literary) the reason why; the means by which",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "abstract.reason"
      }
     ],
     "examples": [
@@ -428,6 +489,17 @@
     "subtleties": [
      "所以 can stand alone without 因为; 因为 alone at the start is also fine — the pair is the clearest."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -438,6 +510,13 @@
    "pos": "CCONJ",
    "senses": [
     "adv.then"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.then",
+     "axis": "sequence or time after",
+     "value": "then, next (sequence)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -465,7 +544,8 @@
       "def": "(spoken filler) and, and then",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -535,6 +615,17 @@
     "subtleties": [
      "先 ‘first’ often prepares 然后: 先…然后… ‘first …, then …’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 然後 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -545,6 +636,13 @@
    "pos": "SCONJ",
    "senses": [
     "conj.if"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.if",
+     "axis": "position",
+     "value": "opens the clause"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -640,6 +738,18 @@
     "subtleties": [
      "如果 can stand after the subject: 你如果饿了，就吃吧."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "pair": "就"
    }
   },
   {
@@ -650,6 +760,13 @@
    "pos": "PART",
    "senses": [
     "conj.if"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.if",
+     "axis": "position",
+     "value": "closes the clause (may combine with 如果)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -733,6 +850,20 @@
     ],
     "subtleties": [
      "Pronounced dehuà: a toneless de and a 4th-tone huà."
+    ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 的話 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "clauseFinal"
     ]
    }
   },
@@ -833,125 +964,18 @@
     "subtleties": [
      "When both clauses share the subject, 虽然 often stands after it: 他虽然很累，可是很高兴."
     ]
-   }
-  },
-  {
-   "id": "zh:jiu.then",
-   "lemma": "就",
-   "trad": "就",
-   "pinyin": "jiù",
-   "pos": "ADV",
-   "senses": [],
-   "role": "then — opens the result after a condition or a time (如果…就…, …的话就…, …的时候就…), right before the verb; also ‘already, as early as’ and ‘just’ (S18)",
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
    },
-   "profile": {
-    "frequency": "A1",
-    "status": "current",
-    "register": [
-     "neutral"
-    ],
-    "connotation": "neutral",
-    "feeling": "The small ‘then’ that links a condition or a time to its result.",
-    "senses": [
-     {
-      "id": "s1",
-      "def": "(in a result clause) then, in that case",
-      "register": [
-       "neutral"
-      ]
-     },
-     {
-      "id": "s2",
-      "def": "right away, already, as early as",
-      "register": [
-       "neutral"
-      ]
-     },
-     {
-      "id": "s3",
-      "def": "just, only; exactly (就是)",
-      "register": [
-       "neutral"
-      ]
-     }
-    ],
-    "examples": [
-     {
-      "text": "如果你饿了，我们就吃饭。",
-      "py": "Rúguǒ nǐ è le, wǒmen jiù chī fàn.",
-      "tr": "If you’re hungry, (then) we’ll eat.",
-      "register": "neutral",
-      "context": "meals",
-      "sense": "s1"
-     },
-     {
-      "text": "你累的话就回家吧。",
-      "py": "Nǐ lèi dehuà jiù huí jiā ba.",
-      "tr": "If you’re tired, go home.",
-      "register": "informal",
-      "context": "care",
-      "sense": "s1"
-     },
-     {
-      "text": "他六点就来了。",
-      "py": "Tā liù diǎn jiù lái le.",
-      "tr": "He came as early as six.",
-      "register": "neutral",
-      "context": "time",
-      "sense": "s2"
-     },
-     {
-      "text": "我就要这个。",
-      "py": "Wǒ jiù yào zhège.",
-      "tr": "I’ll take just this one.",
-      "register": "informal",
-      "context": "shopping",
-      "sense": "s3"
-     }
-    ],
-    "collocations": [
-     {
-      "text": "如果…就…",
-      "tr": "if …, then …"
-     },
-     {
-      "text": "马上就",
-      "tr": "right away"
-     },
-     {
-      "text": "就是",
-      "tr": "exactly; it’s just that"
-     },
-     {
-      "text": "就要…了",
-      "tr": "about to …"
-     }
-    ],
-    "phrases": [],
-    "synonyms": [
-     {
-      "word": "便",
-      "register": "literary",
-      "nuance": "biàn: then (written: 如果…便…)"
-     }
-    ],
-    "etymology": {
-     "text": "Originally 𫢁: a temple (享) and a tower (京) — ‘to sacrifice at a high place’; seal script added 尤. Cognate with 造 ‘to proceed to’.",
-     "src": "Wiktionary (kaikki.org)"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
     },
-    "funFacts": [
-     "就 first meant ‘to go up to (a high place)’ — still in 就业 ‘to take up a job’ and 就座 ‘to take a seat’."
-    ],
-    "pitfalls": [
-     "就 stands after the subject, right before the verb: 我们就去 — never *就我们去.",
-     "就 jiù ‘then’, 旧 jiù ‘old’ and 九 jiǔ ‘nine’ sound alike."
-    ],
-    "subtleties": [
-     "就 vs 才: 他八点就来了 ‘he came as early as eight’, 他八点才来 ‘he didn’t come until eight’."
-    ]
+    "tradPerSense": {
+     "none": "traditional 雖然 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "pair": "但是 / 可是"
    }
   }
  ],

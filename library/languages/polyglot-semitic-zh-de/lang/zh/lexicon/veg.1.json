@@ -11,6 +11,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -24,6 +38,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 顆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -37,6 +65,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -50,6 +92,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 頭 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -61,8 +117,26 @@
    "senses": [
     "veg.tomato"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 西紅柿 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "veg.tomato",
+     "axis": "region",
+     "value": "northern Mainland"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -172,8 +246,26 @@
    "senses": [
     "veg.tomato"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "veg.tomato",
+     "axis": "region",
+     "value": "southern China and Taiwan; also on labels (番茄酱)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -275,12 +367,24 @@
    "pinyin": "yáng cōng",
    "pos": "NOUN",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "comm.tearjerker"
    ],
-   "measure": [
-    "个",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 洋蔥 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -307,7 +411,8 @@
       "def": "(neologism) a sad, tear-jerking story",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "comm.tearjerker"
      }
     ],
     "examples": [
@@ -334,6 +439,14 @@
       "context": "shopping",
       "sense": "s1",
       "py": "Zhège yángcōng hěn dà."
+     },
+     {
+      "text": "这个视频有洋葱，我看哭了。",
+      "py": "Zhège shìpín yǒu yángcōng, wǒ kàn kū le.",
+      "tr": "This video is a tear-jerker — it made me cry.",
+      "register": "slang",
+      "context": "internet",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -382,10 +495,29 @@
    "pinyin": "tǔ dòu",
    "pos": "NOUN",
    "senses": [
-    "veg.potato"
+    "veg.potato",
+    "food.peanut"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "veg.potato",
+     "axis": "register and region",
+     "value": "everyday on the Mainland (in Taiwan 土豆 is the peanut)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -413,7 +545,8 @@
       "def": "(Taiwan) peanut",
       "register": [
        "regional"
-      ]
+      ],
+      "concept": "food.peanut"
      },
      {
       "id": "s3",
@@ -421,7 +554,8 @@
       "register": [
        "slang",
        "humorous"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -448,6 +582,14 @@
       "context": "internet",
       "sense": "s3",
       "py": "Hā’ěrbīn hěn huānyíng “nánfāng xiǎo tǔdòu”."
+     },
+     {
+      "text": "台湾的土豆面筋，里面的土豆其实是花生。",
+      "py": "Táiwān de tǔdòu miànjīn, lǐmiàn de tǔdòu qíshí shì huāshēng.",
+      "tr": "In Taiwanese ‘tudou gluten’, the tudou is really peanuts.",
+      "register": "regional",
+      "context": "food",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -525,10 +667,29 @@
    "pinyin": "mǎ líng shǔ",
    "pos": "NOUN",
    "senses": [
-    "veg.potato"
+    "veg.potato",
+    "nature.airpotato"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 馬鈴薯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "veg.potato",
+     "axis": "register and region",
+     "value": "standard and botanical; the everyday word in Taiwan"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -556,7 +717,8 @@
       "def": "(archaic) air potato (Dioscorea bulbifera)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "nature.airpotato"
      }
     ],
     "examples": [
@@ -583,6 +745,14 @@
       "context": "nutrition",
       "sense": "s1",
       "py": "Mǎlíngshǔ hányǒu fēngfù de diànfěn."
+     },
+     {
+      "text": "古书里的马铃薯指的是另一种植物。",
+      "py": "Gǔshū li de mǎlíngshǔ zhǐ de shì lìng yì zhǒng zhíwù.",
+      "tr": "In old books malingshu refers to a different plant (the air potato).",
+      "register": "archaic",
+      "context": "botany",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -640,10 +810,21 @@
    "senses": [
     "veg.garlic"
    ],
-   "measure": [
-    "头",
-    "瓣"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "头",
+     "瓣"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -760,9 +941,20 @@
    "senses": [
     "veg.cucumber"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 黃瓜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -865,13 +1057,25 @@
    "pinyin": "qié zi",
    "pos": "NOUN",
    "senses": [
-    "veg.eggplant"
+    "veg.eggplant",
+    "intj.cheese"
    ],
-   "measure": [
-    "个",
-    "根",
-    "条"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "根",
+     "条"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -898,7 +1102,8 @@
       "def": "‘cheese!’ (said when taking a photo)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.cheese"
      }
     ],
     "examples": [
@@ -988,10 +1193,29 @@
    "pinyin": "hú luó bo",
    "pos": "NOUN",
    "senses": [
-    "veg.carrot"
+    "veg.carrot",
+    "verb.flop"
    ],
-   "measure": [
-    "根"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 胡蘿蔔 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "veg.carrot",
+     "axis": "region",
+     "value": "standard Mandarin"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1019,7 +1243,8 @@
       "def": "(dated fandom slang, Mainland) to flop",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "verb.flop"
      }
     ],
     "examples": [
@@ -1046,6 +1271,14 @@
       "context": "children",
       "sense": "s1",
       "py": "Tùzi zuì ài chī húluóbo."
+     },
+     {
+      "text": "他的新剧又胡萝卜了。",
+      "py": "Tā de xīn jù yòu húluóbo le.",
+      "tr": "His new series flopped again.",
+      "register": "slang",
+      "context": "fandom",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1100,9 +1333,20 @@
    "senses": [
     "veg.sweetpotato"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 紅薯 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1216,10 +1460,21 @@
    "senses": [
     "veg.pea"
    ],
-   "measure": [
-    "粒",
-    "颗"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "粒",
+     "颗"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1319,12 +1574,24 @@
    "pinyin": "bō cài",
    "pos": "NOUN",
    "senses": [
-    "veg.spinach"
+    "veg.spinach",
+    "money.gambling"
    ],
-   "measure": [
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1352,7 +1619,8 @@
       "register": [
        "slang",
        "euphemistic"
-      ]
+      ],
+      "concept": "money.gambling"
      }
     ],
     "examples": [
@@ -1435,11 +1703,30 @@
    "pinyin": "luó bo",
    "pos": "NOUN",
    "senses": [
-    "veg.radish"
+    "veg.radish",
+    "veg.carrot"
    ],
-   "measure": [
-    "根",
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 蘿蔔 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "veg.carrot",
+     "axis": "region",
+     "value": "some dialects (in standard Mandarin 萝卜 is the radish)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1467,7 +1754,8 @@
       "def": "(dialectal) carrot",
       "register": [
        "dialectal"
-      ]
+      ],
+      "concept": "veg.carrot"
      }
     ],
     "examples": [
@@ -1494,6 +1782,22 @@
       "context": "children",
       "sense": "s1",
       "py": "Háizimen zài chàng “Bá Luóbo”."
+     },
+     {
+      "text": "在我们老家，萝卜就是胡萝卜。",
+      "py": "Zài wǒmen lǎojiā, luóbo jiù shì húluóbo.",
+      "tr": "Back in our hometown, luobo means carrot.",
+      "register": "dialectal",
+      "context": "regions",
+      "sense": "s2"
+     },
+     {
+      "text": "奶奶说的萝卜是红色的胡萝卜，不是白萝卜。",
+      "py": "Nǎinai shuō de luóbo shì hóngsè de húluóbo, bú shì báiluóbo.",
+      "tr": "The luobo grandma means is the red carrot, not the white radish.",
+      "register": "dialectal",
+      "context": "family",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1564,9 +1868,20 @@
    "senses": [
     "veg.pumpkin"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1666,12 +1981,24 @@
    "pinyin": "shēng cài",
    "pos": "NOUN",
    "senses": [
-    "veg.lettuce"
+    "veg.lettuce",
+    "food.rawvegetables"
    ],
-   "measure": [
-    "棵",
-    "片"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "片"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1698,7 +2025,8 @@
       "def": "raw vegetables",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.rawvegetables"
      }
     ],
     "examples": [
@@ -1725,6 +2053,14 @@
       "context": "market",
       "sense": "s1",
       "py": "Qǐng gěi wǒ yì kē shēngcài."
+     },
+     {
+      "text": "很多中国老人不习惯吃生菜。",
+      "py": "Hěn duō Zhōngguó lǎorén bù xíguàn chī shēngcài.",
+      "tr": "Many older Chinese people are not used to eating raw vegetables.",
+      "register": "neutral",
+      "context": "food habits",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1774,10 +2110,21 @@
    "senses": [
     "veg.chili"
    ],
-   "measure": [
-    "个",
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1804,7 +2151,8 @@
       "def": "capsicum in general (also bell pepper)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1901,11 +2249,22 @@
    "senses": [
     "veg.cabbage"
    ],
-   "measure": [
-    "个",
-    "颗",
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 捲心菜 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "颗",
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2028,13 +2387,26 @@
    "pinyin": "cài huā",
    "pos": "NOUN",
    "senses": [
-    "veg.cauliflower"
+    "veg.cauliflower",
+    "nature.rapeseedflower",
+    "health.genitalwart"
    ],
-   "measure": [
-    "棵",
-    "个",
-    "朵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "个",
+     "朵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2061,14 +2433,16 @@
       "def": "flowers of brassicas, especially rapeseed blossoms",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.rapeseedflower"
      },
      {
       "id": "s3",
       "def": "(colloquial) genital wart",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "health.genitalwart"
      }
     ],
     "examples": [
@@ -2103,6 +2477,14 @@
       "context": "poetry",
       "sense": "s2",
       "py": "Értóng jí zǒu zhuī huáng dié, fēi rù càihuā wú chù xún."
+     },
+     {
+      "text": "医生说他得了菜花，要尽快治疗。",
+      "py": "Yīshēng shuō tā dé le càihuā, yào jǐnkuài zhìliáo.",
+      "tr": "The doctor said he has genital warts and needs treatment as soon as possible.",
+      "register": "colloquial",
+      "context": "health",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2174,11 +2556,22 @@
    "senses": [
     "veg.broccoli"
    ],
-   "measure": [
-    "棵",
-    "个",
-    "朵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 西蘭花 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "棵",
+     "个",
+     "朵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2281,10 +2674,21 @@
    "senses": [
     "veg.leek"
    ],
-   "measure": [
-    "根",
-    "棵"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 韭蔥 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "棵"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2371,9 +2775,20 @@
    "senses": [
     "veg.bellpepper"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2485,9 +2900,20 @@
    "senses": [
     "veg.beetroot"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2584,9 +3010,20 @@
    "senses": [
     "veg.zucchini"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 西葫蘆 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2689,9 +3126,20 @@
    "senses": [
     "veg.greenbean"
    ],
-   "measure": [
-    "根"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2799,11 +3247,22 @@
    "senses": [
     "veg.springonion"
    ],
-   "measure": [
-    "根",
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 蔥 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2830,7 +3289,8 @@
       "def": "(literary, in compounds) verdant, dark green",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2937,11 +3397,22 @@
    "senses": [
     "veg.celery"
    ],
-   "measure": [
-    "根",
-    "棵",
-    "把"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "棵",
+     "把"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3051,11 +3522,22 @@
    "senses": [
     "veg.corn"
    ],
-   "measure": [
-    "根",
-    "个",
-    "粒"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "根",
+     "个",
+     "粒"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

@@ -7,6 +7,12 @@
    "senses": [
     "colour.white"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (weiß → weiße)"
+    }
+   },
    "forms": {
     "ADJ": "weiß",
     "ADJ;NOM;SG;MASC;STRG": "weißer",
@@ -91,7 +97,8 @@
       "def": "white (wine, bread: Weißwein, Weißbrot)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -191,8 +198,15 @@
    "lemma": "schwarz",
    "pos": "ADJ",
    "senses": [
-    "colour.black"
+    "colour.black",
+    "adj.illegal"
    ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (schwarz → schwarze)"
+    }
+   },
    "forms": {
     "ADJ": "schwarz",
     "ADJ;NOM;SG;MASC;STRG": "schwarzer",
@@ -297,14 +311,16 @@
       "def": "black (coffee without milk, tea)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "illegal, unofficial (schwarzfahren, schwarzarbeiten)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.illegal"
      }
     ],
     "examples": [
@@ -417,8 +433,22 @@
    "lemma": "rot",
    "pos": "ADJ",
    "senses": [
-    "colour.red"
+    "colour.red",
+    "pol.left"
    ],
+   "contrasts": [
+    {
+     "concept": "pol.left",
+     "axis": "kind of word",
+     "value": "colloquial, by the party colour (rot wählen)"
+    }
+   ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (rot → rote)"
+    }
+   },
    "forms": {
     "ADJ": "rot",
     "ADJ;NOM;SG;MASC;STRG": "roter",
@@ -523,14 +553,16 @@
       "def": "red-haired (rote Haare)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "red, left-wing (politics)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "pol.left"
      }
     ],
     "examples": [
@@ -561,6 +593,13 @@
       "register": "neutral",
       "context": "feelings",
       "sense": "s1"
+     },
+     {
+      "text": "Die Stadt wählt seit Jahrzehnten rot.",
+      "tr": "The city has voted red (left) for decades.",
+      "register": "colloquial",
+      "context": "elections",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -631,8 +670,15 @@
    "lemma": "blau",
    "pos": "ADJ",
    "senses": [
-    "colour.blue"
+    "colour.blue",
+    "adj.drunk"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (blau → blaue)"
+    }
+   },
    "forms": {
     "ADJ": "blau",
     "ADJ;NOM;SG;MASC;STRG": "blauer",
@@ -734,7 +780,8 @@
       "def": "drunk",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.drunk"
      }
     ],
     "examples": [
@@ -840,8 +887,16 @@
    "lemma": "grün",
    "pos": "ADJ",
    "senses": [
-    "colour.green"
+    "colour.green",
+    "adj.unripe",
+    "pol.green"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (grün → grüne)"
+    }
+   },
    "forms": {
     "ADJ": "grün",
     "ADJ;NOM;SG;MASC;STRG": "grüner",
@@ -926,14 +981,16 @@
       "def": "unripe (fruit, vegetables)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.unripe"
      },
      {
       "id": "s3",
       "def": "green, ecological; of the Green party",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.green"
      }
     ],
     "examples": [
@@ -1047,6 +1104,12 @@
    "senses": [
     "colour.yellow"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (gelb → gelbe)"
+    }
+   },
    "forms": {
     "ADJ": "gelb",
     "ADJ;NOM;SG;MASC;STRG": "gelber",
@@ -1206,8 +1269,16 @@
    "lemma": "braun",
    "pos": "ADJ",
    "senses": [
-    "colour.brown"
+    "colour.brown",
+    "adj.tanned",
+    "pol.farright"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (braun → braune)"
+    }
+   },
    "forms": {
     "ADJ": "braun",
     "ADJ;NOM;SG;MASC;STRG": "brauner",
@@ -1292,14 +1363,16 @@
       "def": "tanned (braun werden)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.tanned"
      },
      {
       "id": "s3",
       "def": "Nazi, far-right (politics, from the brown SA uniforms)",
       "register": [
        "pejorative"
-      ]
+      ],
+      "concept": "pol.farright"
      }
     ],
     "examples": [
@@ -1323,6 +1396,13 @@
       "register": "neutral",
       "context": "summer",
       "sense": "s2"
+     },
+     {
+      "text": "Die Polizei ermittelt gegen eine braune Gruppe in der Stadt.",
+      "tr": "The police are investigating a neo-Nazi group in the town.",
+      "register": "pejorative",
+      "context": "news",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1377,8 +1457,15 @@
    "lemma": "grau",
    "pos": "ADJ",
    "senses": [
-    "colour.grey"
+    "colour.grey",
+    "adj.dreary"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (grau → graue)"
+    }
+   },
    "forms": {
     "ADJ": "grau",
     "ADJ;NOM;SG;MASC;STRG": "grauer",
@@ -1480,7 +1567,8 @@
       "def": "dull, dreary (der graue Alltag)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.dreary"
      }
     ],
     "examples": [
@@ -1569,6 +1657,12 @@
    "senses": [
     "colour.orange"
    ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "takes no endings (ein rosa Kleid)"
+    }
+   },
    "forms": {
     "ADJ": "orange"
    },
@@ -1663,6 +1757,12 @@
    "senses": [
     "colour.pink"
    ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "takes no endings (ein rosa Kleid)"
+    }
+   },
    "forms": {
     "ADJ": "rosa"
    },
@@ -1774,6 +1874,12 @@
    "senses": [
     "colour.purple"
    ],
+   "features": {
+    "comparison": "not compared",
+    "stem": {
+     "none": "takes no endings (ein rosa Kleid)"
+    }
+   },
    "forms": {
     "ADJ": "lila"
    },
@@ -1875,8 +1981,16 @@
    "lemma": "hell",
    "pos": "ADJ",
    "senses": [
-    "adj.light"
+    "adj.light",
+    "adj.bright",
+    "adj.clever"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (hell → helle)"
+    }
+   },
    "forms": {
     "ADJ": "hell",
     "ADJ;NOM;SG;MASC;STRG": "heller",
@@ -1961,21 +2075,24 @@
       "def": "bright, light (a room, the day: Es ist hell)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.bright"
      },
      {
       "id": "s3",
       "def": "light-coloured (beer, bread: ein Helles)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "bright, clever (ein heller Kopf)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.clever"
      }
     ],
     "examples": [
@@ -2006,6 +2123,13 @@
       "register": "colloquial",
       "context": "Bavarian beer garden",
       "sense": "s3"
+     },
+     {
+      "text": "Ihre Tochter ist ein heller Kopf.",
+      "tr": "Your daughter is a bright spark.",
+      "register": "colloquial",
+      "context": "school",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2075,8 +2199,14 @@
    "lemma": "dunkel",
    "pos": "ADJ",
    "senses": [
-    "adj.dark"
+    "adj.dark",
+    "adj.dark.nolight",
+    "adj.vague"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": "dunkl-"
+   },
    "forms": {
     "ADJ": "dunkel",
     "ADJ;NOM;SG;MASC;STRG": "dunkler",
@@ -2161,21 +2291,24 @@
       "def": "dark (without light: Es ist dunkel)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.dark.nolight"
      },
      {
       "id": "s3",
       "def": "dark (beer, bread: ein Dunkles)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "vague, faint (eine dunkle Erinnerung)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.vague"
      }
     ],
     "examples": [
@@ -2206,6 +2339,13 @@
       "register": "neutral",
       "context": "drinks",
       "sense": "s3"
+     },
+     {
+      "text": "Ich habe nur eine dunkle Erinnerung an das Haus.",
+      "tr": "I have only a faint memory of the house.",
+      "register": "neutral",
+      "context": "memories",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2274,7 +2414,8 @@
    "lemma": "mehr",
    "pos": "ADV",
    "senses": [
-    "adv.more"
+    "adv.more",
+    "adv.nolonger"
    ],
    "ref": {
     "src": "kaikki",
@@ -2302,7 +2443,8 @@
       "def": "no longer, any more (with negation: nicht mehr, kein … mehr)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.nolonger"
      }
     ],
     "examples": [
@@ -2396,6 +2538,11 @@
      "mehrere is a different word: mehrere Bücher = several books.",
      "viel – mehr – am meisten: the comparison of viel."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "itself the comparative of viel (viel – mehr – am meisten)"
+    }
    }
   },
   {
@@ -2492,6 +2639,11 @@
     "subtleties": [
      "am meisten is built like am größten, am schnellsten: am + -sten."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "itself the superlative of viel (viel – mehr – am meisten)"
+    }
    }
   },
   {
@@ -2500,7 +2652,26 @@
    "pos": "SCONJ",
    "senses": [
     "conj.than",
-    "conj.when"
+    "conj.when",
+    "prep.as",
+    "conj.asif"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.than",
+     "axis": "register",
+     "value": "the normal word (größer als ich)"
+    },
+    {
+     "concept": "conj.when",
+     "axis": "time and repetition",
+     "value": "one event or period in the past"
+    },
+    {
+     "concept": "conj.asif",
+     "axis": "how it forms “as if”",
+     "value": "als ob …, or alone with the verb first (als wäre nichts geschehen)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -2536,14 +2707,16 @@
       "def": "as (in the role of: als Lehrer arbeiten)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.as"
      },
      {
       "id": "s4",
       "def": "as if (als ob)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.asif"
      }
     ],
     "examples": [
@@ -2581,6 +2754,13 @@
       "register": "neutral",
       "context": "jobs",
       "sense": "s3"
+     },
+     {
+      "text": "Er tut so, als ob er nichts wüsste.",
+      "tr": "He acts as if he knew nothing.",
+      "register": "neutral",
+      "context": "behaviour",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2627,6 +2807,9 @@
     "subtleties": [
      "A clause with als (when) has the verb at the end: Als ich jung war, …"
     ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
    }
   }
  ]

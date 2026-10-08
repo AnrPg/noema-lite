@@ -1,0 +1,51 @@
+{
+ "field": "education",
+ "title": "Education",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "edu.chair",
+   "gloss": "chair, professorship (at a university)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "edu.cheder",
+   "gloss": "cheder (a traditional Jewish elementary school)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "edu.freeperiod",
+   "gloss": "free period (a gap in a school timetable)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "edu.lesson",
+   "gloss": "lesson, class (period at school)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "edu.mark",
+   "gloss": "point, mark (in a test, a game)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "edu.test",
+   "gloss": "test, written exam; paper (at school)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  }
+ ]
+}

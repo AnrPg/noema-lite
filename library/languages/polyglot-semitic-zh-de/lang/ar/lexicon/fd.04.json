@@ -6,10 +6,54 @@
    "pos": "NOUN",
    "senses": [
     "home.house",
-    "place.home"
+    "place.home",
+    "lit.verse",
+    "family.household"
    ],
+   "features": {
+    "root": "ب ي ت",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بُيُوت",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "houses, homes",
+      "senses": [
+       "s1",
+       "s4"
+      ]
+     },
+     {
+      "form": "أَبْيَات",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "verses of poetry",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "form": "بُيُوتَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "great families, noble houses",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "dual": "بَيْتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "root": "ب ي ت",
    "translit": "bayt",
    "forms": {
     "N;NOM;SG;INDF": "بَيْتٌ",
@@ -83,14 +127,16 @@
       "def": "verse (of a poem) — plural أَبْيَات",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "lit.verse"
      },
      {
       "id": "s3",
       "def": "family, household",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.household"
      }
     ],
     "examples": [
@@ -201,10 +247,33 @@
    "lemma": "شَقَّة",
    "pos": "NOUN",
    "senses": [
-    "home.flat"
+    "home.flat",
+    "obj.compartment"
    ],
+   "features": {
+    "root": "ش ق ق",
+    "pattern": "فَعْلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "شُقَق",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "شَقَّتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ش ق ق",
    "translit": "šaqqa",
    "forms": {
     "N;NOM;SG;INDF": "شَقَّةٌ",
@@ -252,7 +321,8 @@
       "def": "compartment",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.compartment"
      }
     ],
     "examples": [
@@ -276,6 +346,13 @@
       "register": "neutral",
       "context": "renting",
       "sense": "s1"
+     },
+     {
+      "text": "مِنْ مَعَانِي الشَّقَّةِ: الْقِسْمُ الْمُنْفَصِلُ مِنْ بِنَاءٍ أَوْ شَيْءٍ.",
+      "tr": "One of the meanings of šaqqa: a separate section of a building or of a thing.",
+      "register": "neutral",
+      "context": "dictionary",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -325,10 +402,33 @@
    "lemma": "غُرْفَة",
    "pos": "NOUN",
    "senses": [
-    "home.room"
+    "home.room",
+    "pol.chamber"
    ],
+   "features": {
+    "root": "غ ر ف",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "غُرَف",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "غُرْفَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "غ ر ف",
    "translit": "ġurfa",
    "forms": {
     "N;NOM;SG;INDF": "غُرْفَةٌ",
@@ -394,7 +494,8 @@
       "def": "chamber (an institution: chamber of commerce)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "pol.chamber"
      }
     ],
     "examples": [
@@ -469,10 +570,34 @@
    "lemma": "بَاب",
    "pos": "NOUN",
    "senses": [
-    "home.door"
+    "home.door",
+    "lit.chapter"
    ],
+   "features": {
+    "root": "ب و ب",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَبْوَاب",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "بَابَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ب و ب",
    "translit": "bāb",
    "forms": {
     "N;NOM;SG;INDF": "بَابٌ",
@@ -520,14 +645,16 @@
       "def": "chapter, section (of a book)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "lit.chapter"
      },
      {
       "id": "s3",
       "def": "field, category; an opening, a chance",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -612,8 +739,30 @@
    "senses": [
     "home.window"
    ],
+   "features": {
+    "root": "ن ف ذ",
+    "pattern": "فَاعِلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "نَوَافِذ",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "نَافِذَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ن ف ذ",
    "translit": "nāfiḏa",
    "forms": {
     "N;NOM;SG;INDF": "نَافِذَةٌ",
@@ -661,7 +810,8 @@
       "def": "opening in a wall, air hole",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -732,8 +882,39 @@
    "senses": [
     "home.wall"
    ],
+   "features": {
+    "root": "ج د ر",
+    "pattern": "فِعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "جُدْرَان",
+      "kind": "broken",
+      "pattern": "فُعْلَان",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "جُدُر",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "note": "literary",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "جِدَارَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ج د ر",
    "translit": "jidār",
    "forms": {
     "N;NOM;SG;INDF": "جِدَارٌ",
@@ -856,8 +1037,30 @@
    "lemma": "طَاوِلَة",
    "pos": "NOUN",
    "senses": [
-    "home.table"
+    "home.table",
+    "sport.backgammon"
    ],
+   "features": {
+    "root": "ط و ل",
+    "pattern": "فَاعِلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "طَاوِلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "طَاوِلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "FEM",
    "translit": "ṭāwila",
    "forms": {
@@ -906,7 +1109,8 @@
       "def": "backgammon",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "sport.backgammon"
      }
     ],
     "examples": [
@@ -986,10 +1190,42 @@
    "lemma": "كُرْسِيّ",
    "pos": "NOUN",
    "senses": [
-    "home.chair"
+    "home.chair",
+    "pol.throne",
+    "edu.chair"
+   ],
+   "features": {
+    "root": "ك ر س",
+    "pattern": "فُعْلِيّ",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "كَرَاسِيّ",
+      "kind": "broken",
+      "pattern": "فَعَالِيّ",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "كُرْسِيَّانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pol.throne",
+     "axis": "use",
+     "value": "the seat of power; the Throne of God (آيَةُ الْكُرْسِيِّ)"
+    }
    ],
    "gender": "MASC",
-   "root": "ك ر س",
    "translit": "kursī",
    "forms": {
     "N;NOM;SG;INDF": "كُرْسِيٌّ",
@@ -1038,14 +1274,16 @@
       "register": [
        "literary",
        "religious"
-      ]
+      ],
+      "concept": "pol.throne"
      },
      {
       "id": "s3",
       "def": "professorial chair",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "edu.chair"
      }
     ],
     "examples": [
@@ -1069,6 +1307,13 @@
       "register": "religious",
       "context": "religion",
       "sense": "s2"
+     },
+     {
+      "text": "يَشْغَلُ أُسْتَاذُنَا الْكُرْسِيَّ الْوَحِيدَ لِلْفَلْسَفَةِ فِي الْجَامِعَةِ.",
+      "tr": "Our professor holds the only chair of philosophy at the university.",
+      "register": "formal",
+      "context": "university",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1120,10 +1365,50 @@
    "lemma": "سَرِير",
    "pos": "NOUN",
    "senses": [
-    "home.bed"
+    "home.bed",
+    "pol.throne"
+   ],
+   "features": {
+    "root": "س ر ر",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَسِرَّة",
+      "kind": "broken",
+      "pattern": "أَفْعِلَة",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "سُرُر",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "note": "literary: couches, thrones (عَلَى سُرُرٍ, Qurʾān)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "سَرِيرَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "pol.throne",
+     "axis": "use",
+     "value": "literary: a royal couch (سَرِيرُ الْمُلْكِ)"
+    }
    ],
    "gender": "MASC",
-   "root": "س ر ر",
    "translit": "sarīr",
    "forms": {
     "N;NOM;SG;INDF": "سَرِيرٌ",
@@ -1171,7 +1456,8 @@
       "def": "throne",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "pol.throne"
      }
     ],
     "examples": [
@@ -1195,6 +1481,13 @@
       "register": "neutral",
       "context": "hospital",
       "sense": "s1"
+     },
+     {
+      "text": "جَلَسَ الْمَلِكُ عَلَى سَرِيرِ الْمُلْكِ.",
+      "tr": "The king sat on the throne of the kingdom.",
+      "register": "literary",
+      "context": "history",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1246,10 +1539,33 @@
    "lemma": "خِزَانَة",
    "pos": "NOUN",
    "senses": [
-    "home.cupboard"
+    "home.cupboard",
+    "obj.safe"
    ],
+   "features": {
+    "root": "خ ز ن",
+    "pattern": "فِعَالَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "خَزَائِن",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "خِزَانَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "خ ز ن",
    "translit": "ḫizāna",
    "forms": {
     "N;NOM;SG;INDF": "خِزَانَةٌ",
@@ -1297,7 +1613,8 @@
       "def": "safe, vault",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.safe"
      }
     ],
     "examples": [
@@ -1368,8 +1685,30 @@
    "senses": [
     "home.lamp"
    ],
+   "features": {
+    "root": "ص ب ح",
+    "pattern": "مِفْعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَصَابِيح",
+      "kind": "broken",
+      "pattern": "مَفَاعِيل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مِصْبَاحَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ص ب ح",
    "translit": "miṣbāḥ",
    "forms": {
     "N;NOM;SG;INDF": "مِصْبَاحٌ",
@@ -1417,7 +1756,8 @@
       "def": "headlight (of a car)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1505,10 +1845,35 @@
    "lemma": "كِتَاب",
    "pos": "NOUN",
    "senses": [
-    "obj.book"
+    "obj.book",
+    "comm.letter",
+    "relig.scripture"
    ],
+   "features": {
+    "root": "ك ت ب",
+    "pattern": "فِعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "كُتُب",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "كِتَابَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ك ت ب",
    "translit": "kitāb",
    "forms": {
     "N;NOM;SG;INDF": "كِتَابٌ",
@@ -1574,14 +1939,16 @@
       "def": "letter, written message",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "comm.letter"
      },
      {
       "id": "s3",
       "def": "the Scripture (الْكِتَابُ)",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.scripture"
      }
     ],
     "examples": [
@@ -1612,6 +1979,13 @@
       "register": "religious",
       "context": "religion",
       "sense": "s3"
+     },
+     {
+      "text": "وَصَلَنِي كِتَابُكَ أَمْسِ وَفَرِحْتُ بِهِ.",
+      "tr": "Your letter reached me yesterday and I was glad of it.",
+      "register": "formal",
+      "context": "correspondence",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1674,8 +2048,30 @@
    "senses": [
     "obj.pen"
    ],
+   "features": {
+    "root": "ق ل م",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَقْلَام",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "قَلَمَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ق ل م",
    "translit": "qalam",
    "forms": {
     "N;NOM;SG;INDF": "قَلَمٌ",
@@ -1741,7 +2137,8 @@
       "def": "handwriting, style; “by the pen of” (an author)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1819,13 +2216,50 @@
    "lemma": "وَرَق",
    "pos": "NOUN",
    "senses": [
-    "obj.paper"
+    "obj.paper",
+    "nature.leaf",
+    "money.banknote",
+    "sport.cards"
    ],
+   "features": {
+    "root": "و ر ق",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَوْرَاق",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "papers, leaves, banknotes (أَوْرَاقٌ نَقْدِيَّةٌ), playing cards",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     },
+     {
+      "form": "وَرَقَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted sheets: ثَلَاثُ وَرَقَاتٍ (plural of وَرَقَة)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "وَرَقَتَانِ",
+    "declension": "triptote",
+    "unit": "وَرَقَة",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "class": "collective",
    "gender": "MASC",
-   "root": "و ر ق",
    "translit": "waraq",
-   "unit": "وَرَقَة",
    "forms": {
     "N;NOM;COLL;INDF": "وَرَقٌ",
     "N;NOM;SG;INDF": "وَرَقَةٌ",
@@ -1872,14 +2306,24 @@
       "def": "leaves, foliage",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.leaf"
      },
      {
       "id": "s3",
-      "def": "paper money, banknotes; playing cards",
+      "def": "paper money, banknotes",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "money.banknote"
+     },
+     {
+      "id": "s4",
+      "def": "playing cards: لَعِبُ الْوَرَقِ (playing cards); one card = وَرَقَة (split from s3)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "sport.cards"
      }
     ],
     "examples": [
@@ -1903,6 +2347,20 @@
       "register": "neutral",
       "context": "nature",
       "sense": "s2"
+     },
+     {
+      "text": "نَلْعَبُ الْوَرَقَ مَعَ جَدِّي مَسَاءً.",
+      "tr": "We play cards with my grandfather in the evening.",
+      "register": "neutral",
+      "context": "leisure",
+      "sense": "s4"
+     },
+     {
+      "text": "فِي مَحْفَظَتِي أَوْرَاقٌ نَقْدِيَّةٌ قَلِيلَةٌ.",
+      "tr": "There are only a few banknotes in my wallet.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1949,10 +2407,33 @@
    "lemma": "هَاتِف",
    "pos": "NOUN",
    "senses": [
-    "obj.phone"
+    "obj.phone",
+    "comm.caller"
    ],
+   "features": {
+    "root": "ه ت ف",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "هَوَاتِف",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "هَاتِفَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ه ت ف",
    "translit": "hātif",
    "forms": {
     "N;NOM;SG;INDF": "هَاتِفٌ",
@@ -2019,7 +2500,8 @@
       "def": "a voice calling out (an unseen caller)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "comm.caller"
      }
     ],
     "examples": [
@@ -2100,10 +2582,34 @@
    "lemma": "مِفْتَاح",
    "pos": "NOUN",
    "senses": [
-    "obj.key"
+    "obj.key",
+    "tech.key"
    ],
+   "features": {
+    "root": "ف ت ح",
+    "pattern": "مِفْعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مَفَاتِيح",
+      "kind": "broken",
+      "pattern": "مَفَاعِيل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "مِفْتَاحَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ف ت ح",
    "translit": "miftāḥ",
    "forms": {
     "N;NOM;SG;INDF": "مِفْتَاحٌ",
@@ -2169,14 +2675,16 @@
       "def": "key (on a keyboard or piano)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "tech.key"
      },
      {
       "id": "s3",
       "def": "key (to a problem); legend (of a map)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2256,10 +2764,33 @@
    "lemma": "حَقِيبَة",
    "pos": "NOUN",
    "senses": [
-    "obj.bag"
+    "obj.bag",
+    "pol.portfolio"
    ],
+   "features": {
+    "root": "ح ق ب",
+    "pattern": "فَعِيلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "حَقَائِب",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَقِيبَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ح ق ب",
    "translit": "ḥaqība",
    "forms": {
     "N;NOM;SG;INDF": "حَقِيبَةٌ",
@@ -2325,7 +2856,8 @@
       "def": "portfolio (of a minister)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "pol.portfolio"
      }
     ],
     "examples": [
@@ -2401,6 +2933,31 @@
    "senses": [
     "obj.cup"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Greek): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "فَنَاجِين",
+      "kind": "broken",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فِنْجَانَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "finjān",
    "forms": {
@@ -2524,10 +3081,34 @@
    "lemma": "كَأْس",
    "pos": "NOUN",
    "senses": [
-    "obj.glass"
+    "obj.glass",
+    "sport.trophy"
    ],
+   "features": {
+    "root": "ك أ س",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "كُؤُوس",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "كَأْسَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ك أ س",
    "translit": "kaʾs",
    "forms": {
     "N;NOM;SG;INDF": "كَأْسٌ",
@@ -2575,14 +3156,16 @@
       "def": "cup, goblet; (wine) glass",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "cup (trophy)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "sport.trophy"
      }
     ],
     "examples": [
@@ -2651,10 +3234,34 @@
    "lemma": "صَحْن",
    "pos": "NOUN",
    "senses": [
-    "obj.plate"
+    "obj.plate",
+    "home.courtyard"
    ],
+   "features": {
+    "root": "ص ح ن",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "صُحُون",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "صَحْنَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ص ح ن",
    "translit": "ṣaḥn",
    "forms": {
     "N;NOM;SG;INDF": "صَحْنٌ",
@@ -2702,14 +3309,16 @@
       "def": "dish, plateful (of food)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "courtyard (of a mosque, a house)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.courtyard"
      }
     ],
     "examples": [

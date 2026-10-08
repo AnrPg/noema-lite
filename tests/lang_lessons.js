@@ -8,9 +8,9 @@ const SRC = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 let fails = 0; const ok = (c, m) => { console.log((c ? '  ✅ ' : '  ❌ ') + m); if (!c) fails++; };
 const wait = ms => new Promise(r => setTimeout(r, ms));
 // a light copy with the mini course as the only language course (the hand-made mini course is its own little app:
-// next to the real courses it would break their common order, D13)
+// next to the real courses it would break their common order, D13); the catalogues of phenomena come along (D14)
 const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-lessons-'));
-fs.cpSync(SRC, ROOT, { recursive: true, filter: p => !/[\\/](\.git|dist|data)([\\/]|$)/.test(path.relative(SRC, p) ? '/' + path.relative(SRC, p) : '') && !/[\\/]library[\\/](subjects|languages)[\\/]/.test(p) });
+fs.cpSync(SRC, ROOT, { recursive: true, filter: p => !/[\\/](\.git|dist|data)([\\/]|$)/.test(path.relative(SRC, p) ? '/' + path.relative(SRC, p) : '') && !/[\\/]library[\\/](subjects[\\/]|languages[\\/](?!_phenomena))/.test(p) });
 fs.cpSync(path.join(SRC, 'tests', 'fixtures', 'lang-mini'), path.join(ROOT, 'library', 'languages', 'lang-mini'), { recursive: true });
 execSync('python3 tools/build.py', { cwd: ROOT, stdio: 'pipe' });
 const SUBJ = 'lang:lang-mini';

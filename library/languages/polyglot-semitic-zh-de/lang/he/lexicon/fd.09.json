@@ -7,6 +7,12 @@
    "senses": [],
    "translit": "ha'im",
    "role": "question particle: opens a yes/no question (formal and written; in speech rising intonation alone is enough)",
+   "features": {
+    "spelling": "האם",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -17,9 +23,14 @@
    "lemma": "אוֹ",
    "pos": "CCONJ",
    "senses": [
-    "conj.or"
+    "conj.or",
+    "conj.eitheror"
    ],
+   "prefix": false,
    "translit": "o",
+   "features": {
+    "spelling": "או"
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -46,7 +57,8 @@
       "def": "either … or (אוֹ … אוֹ)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.eitheror"
      }
     ],
     "examples": [
@@ -121,7 +133,16 @@
    "senses": [
     "adv.maybe"
    ],
-   "translit": "ulay",
+   "translit": "ulai",
+   "features": {
+    "spelling": "אולי",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -214,9 +235,24 @@
    "lemma": "בֶּאֱמֶת",
    "pos": "ADV",
    "senses": [
-    "adv.really"
+    "adv.really",
+    "adv.truly"
    ],
-   "translit": "be’emet",
+   "translit": "be'emet",
+   "features": {
+    "spelling": "באמת",
+    "derivedFrom": "בְּ + אֱמֶת “truth”",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "period",
+     "value": "modern: “really, truly”"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -243,7 +279,8 @@
       "def": "really, truly (emphasis)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.truly"
      }
     ],
     "examples": [
@@ -321,6 +358,20 @@
     "adv.ofcourse"
    ],
    "translit": "kamuvan",
+   "features": {
+    "spelling": "כמובן",
+    "derivedFrom": "כַּ “as” + הַמּוּבָן “the understood”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.ofcourse",
+     "axis": "register",
+     "value": "neutral, also written"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -415,10 +466,49 @@
    "lemma": "בָּרוּר",
    "pos": "ADJ",
    "senses": [
-    "adv.ofcourse"
+    "adv.ofcourse",
+    "adj.clear"
    ],
    "translit": "barur",
+   "features": {
+    "spelling": "ברור",
+    "root": "ב ר ר",
+    "pattern": "קָטוּל",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "forms": {
+    "ADJ;SG;MASC": "בָּרוּר",
+    "ADJ;SG;FEM": "בְּרוּרָה",
+    "ADJ;PL;MASC": "בְּרוּרִים",
+    "ADJ;PL;FEM": "בְּרוּרוֹת",
+    "ADJ;SG;MASC;DEF": "הַבָּרוּר",
+    "ADJ;SG;FEM;DEF": "הַבְּרוּרָה",
+    "ADJ;PL;MASC;DEF": "הַבְּרוּרִים",
+    "ADJ;PL;FEM;DEF": "הַבְּרוּרוֹת"
+   },
    "note": "An adjective, “clear”, with the eight forms of every adjective (בָּרוּר, בְּרוּרָה, בְּרוּרִים, בְּרוּרוֹת; הַבָּרוּר …); as a one-word reply (בָּרוּר!) it is the casual “sure, of course”, and בָּרוּר שֶׁ… is “it is clear that …, of course …”.",
+   "contrasts": [
+    {
+     "concept": "adv.ofcourse",
+     "axis": "register",
+     "value": "everyday reply: “sure!”"
+    },
+    {
+     "concept": "adj.clear",
+     "axis": "what is clear",
+     "value": "a fact: obvious, evident"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -448,7 +538,8 @@
       "def": "clear, obvious, evident",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.clear"
      }
     ],
     "examples": [
@@ -522,16 +613,6 @@
      "A reply בָּרוּר! is casual and friendly; in writing use כַּמּוּבָן.",
      "As an adjective it agrees like any other: הַתְּשׁוּבָה בְּרוּרָה “the answer is clear”."
     ]
-   },
-   "forms": {
-    "ADJ;SG;MASC": "בָּרוּר",
-    "ADJ;SG;FEM": "בְּרוּרָה",
-    "ADJ;PL;MASC": "בְּרוּרִים",
-    "ADJ;PL;FEM": "בְּרוּרוֹת",
-    "ADJ;SG;MASC;DEF": "הַבָּרוּר",
-    "ADJ;SG;FEM;DEF": "הַבְּרוּרָה",
-    "ADJ;PL;MASC;DEF": "הַבְּרוּרִים",
-    "ADJ;PL;FEM;DEF": "הַבְּרוּרוֹת"
    }
   },
   {
@@ -539,9 +620,19 @@
    "lemma": "גַּם",
    "pos": "ADV",
    "senses": [
-    "adv.also"
+    "adv.also",
+    "adv.even"
    ],
    "translit": "gam",
+   "features": {
+    "spelling": "גם",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -568,7 +659,8 @@
       "def": "even (גַּם אִם “even if”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.even"
      }
     ],
     "examples": [
@@ -649,6 +741,15 @@
     "adv.only"
    ],
    "translit": "rak",
+   "features": {
+    "spelling": "רק",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

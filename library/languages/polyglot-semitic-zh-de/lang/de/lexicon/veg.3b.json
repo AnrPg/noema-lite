@@ -8,6 +8,27 @@
     "veg.capers"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kapern",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kaper",
     "N;ACC;SG": "Kaper",
@@ -120,6 +141,34 @@
     "veg.kiwano"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Horngurken",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Horn",
+      "role": "modifier"
+     },
+     {
+      "part": "Gurke",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Horngurke",
     "N;ACC;SG": "Horngurke",
@@ -230,6 +279,34 @@
     "veg.limabean"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Limabohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Lima",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Limabohne",
     "N;ACC;SG": "Limabohne",
@@ -339,6 +416,27 @@
     "veg.savoy"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wirsinge",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wirsing",
     "N;ACC;SG": "Wirsing",
@@ -449,6 +547,34 @@
     "veg.guar"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Guarbohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Guar",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Guarbohne",
     "N;ACC;SG": "Guarbohne",
@@ -558,6 +684,34 @@
     "veg.nori"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Noriblätter",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Nori",
+      "role": "modifier"
+     },
+     {
+      "part": "Blatt",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Noriblatt",
     "N;ACC;SG": "Noriblatt",
@@ -668,6 +822,34 @@
     "veg.wingedbean"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Goabohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Goa",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Goabohne",
     "N;ACC;SG": "Goabohne",
@@ -772,6 +954,27 @@
     "veg.tomatillo"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tomatillos",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tomatillo",
     "N;ACC;SG": "Tomatillo",
@@ -882,6 +1085,34 @@
     "veg.yardlongbean"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spargelbohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Spargel",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Spargelbohne",
     "N;ACC;SG": "Spargelbohne",
@@ -982,6 +1213,21 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Romanesco",
     "N;ACC;SG": "Romanesco",
@@ -1082,6 +1328,34 @@
     "veg.cayenne"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Cayennepfeffer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Cayenne",
+      "role": "modifier"
+     },
+     {
+      "part": "Pfeffer",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Cayennepfeffer",
     "N;ACC;SG": "Cayennepfeffer",
@@ -1199,6 +1473,34 @@
     "veg.seakale"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Meerkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Meer",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Meerkohl",
     "N;ACC;SG": "Meerkohl",
@@ -1303,6 +1605,27 @@
     "veg.habanero"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Habaneros",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Habanero",
     "N;ACC;SG": "Habanero",
@@ -1407,6 +1730,34 @@
     "veg.wakame"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wakame-Algen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Wakame",
+      "role": "modifier"
+     },
+     {
+      "part": "Alge",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wakame-Alge",
     "N;ACC;SG": "Wakame-Alge",
@@ -1512,6 +1863,39 @@
     "veg.snakegourd"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schlangenhaargurken",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Schlange",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Haar",
+      "role": "modifier"
+     },
+     {
+      "part": "Gurke",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schlangenhaargurke",
     "N;ACC;SG": "Schlangenhaargurke",
@@ -1622,6 +2006,21 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kombu",
     "N;ACC;SG": "Kombu",
@@ -1729,6 +2128,28 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Meer",
+      "role": "modifier"
+     },
+     {
+      "part": "Salat",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Meersalat",
     "N;ACC;SG": "Meersalat",
@@ -1830,6 +2251,28 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Lappen",
+      "role": "modifier"
+     },
+     {
+      "part": "Tang",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Lappentang",
     "N;ACC;SG": "Lappentang",
@@ -1930,6 +2373,20 @@
     "veg.edamame"
    ],
    "class": "plt",
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Edamame)"
+    },
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;PL": "Edamame",
     "N;ACC;PL": "Edamame",
@@ -2031,6 +2488,27 @@
     "veg.pattypan"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Patissons",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Patisson",
     "N;ACC;SG": "Patisson",
@@ -2135,6 +2613,34 @@
     "veg.hijiki"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Hijiki-Algen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Hijiki",
+      "role": "modifier"
+     },
+     {
+      "part": "Alge",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Hijiki-Alge",
     "N;ACC;SG": "Hijiki-Alge",
@@ -2239,6 +2745,34 @@
     "veg.rapini"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Stängelkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Stängel",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Stängelkohl",
     "N;ACC;SG": "Stängelkohl",
@@ -2346,6 +2880,34 @@
     "veg.spaghettisquash"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spaghettikürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Spaghetti",
+      "role": "modifier"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Spaghettikürbis",
     "N;ACC;SG": "Spaghettikürbis",
@@ -2445,6 +3007,34 @@
     "veg.zucchiniflower"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zucchiniblüten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Zucchini",
+      "role": "modifier"
+     },
+     {
+      "part": "Blüte",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zucchiniblüte",
     "N;ACC;SG": "Zucchiniblüte",
@@ -2550,6 +3140,34 @@
     "veg.pointedcabbage"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spitzkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "spitz",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Spitzkohl",
     "N;ACC;SG": "Spitzkohl",
@@ -2655,6 +3273,34 @@
     "veg.babycorn"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Maiskölbchen",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Mais",
+      "role": "modifier"
+     },
+     {
+      "part": "Kölbchen",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Maiskölbchen",
     "N;ACC;SG": "Maiskölbchen",
@@ -2764,6 +3410,34 @@
     "veg.acorns"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Eichelkürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Eichel",
+      "role": "modifier"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Eichelkürbis",
     "N;ACC;SG": "Eichelkürbis",
@@ -2868,6 +3542,34 @@
     "veg.sugarsnap"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zuckererbsen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Zucker",
+      "role": "modifier"
+     },
+     {
+      "part": "Erbse",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zuckererbse",
     "N;ACC;SG": "Zuckererbse",

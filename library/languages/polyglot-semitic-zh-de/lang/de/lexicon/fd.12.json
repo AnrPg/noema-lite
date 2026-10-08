@@ -5,9 +5,43 @@
    "lemma": "auf",
    "pos": "ADP",
    "senses": [
-    "prep.on"
+    "prep.on",
+    "prep.onto",
+    "prep.in.language",
+    "adj.open"
    ],
-   "governs": "DAT|ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3"
+      ],
+      "when": "where? (place)"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s4"
+      ],
+      "when": "a language: auf Deutsch"
+     }
+    ],
+    "contractions": [
+     {
+      "form": "aufs",
+      "article": "das"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -34,21 +68,32 @@
       "def": "onto (Wohin? + accusative: auf den Tisch)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.onto"
      },
      {
       "id": "s3",
       "def": "at, in (with certain places: auf dem Markt, auf der Post, auf dem Land)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "in (a language: auf Deutsch)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.in.language"
+     },
+     {
+      "id": "s5",
+      "def": "open (colloquial adverb: Die Tür ist auf)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.open"
      }
     ],
     "examples": [
@@ -79,6 +124,27 @@
       "register": "neutral",
       "context": "language",
       "sense": "s4"
+     },
+     {
+      "text": "Die Tür ist auf.",
+      "tr": "The door is open.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s5"
+     },
+     {
+      "text": "Ist der Bäcker noch auf?",
+      "tr": "Is the bakery still open?",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s5"
+     },
+     {
+      "text": "Die Katze schläft auf dem Sofa.",
+      "tr": "The cat is sleeping on the sofa.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
      }
     ],
     "collocations": [
@@ -123,9 +189,47 @@
    "lemma": "unter",
    "pos": "ADP",
    "senses": [
-    "prep.under"
+    "prep.under",
+    "prep.among"
    ],
-   "governs": "DAT|ACC",
+   "contrasts": [
+    {
+     "concept": "prep.among",
+     "axis": "among what",
+     "value": "people (unter Freunden)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3"
+      ],
+      "when": "where? (place), and among"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     }
+    ],
+    "contractions": [
+     {
+      "form": "unterm",
+      "article": "dem",
+      "register": "colloquial"
+     },
+     {
+      "form": "unters",
+      "article": "das",
+      "register": "colloquial"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -152,14 +256,16 @@
       "def": "under (Wohin? + accusative: unter das Bett)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "among (unter Freunden)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.among"
      }
     ],
     "examples": [
@@ -223,9 +329,31 @@
    "lemma": "neben",
    "pos": "ADP",
    "senses": [
-    "prep.nextto"
+    "prep.nextto",
+    "prep.besides"
    ],
-   "governs": "DAT|ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3"
+      ],
+      "when": "where? (place), and besides"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -252,14 +380,16 @@
       "def": "next to (Wohin? + accusative: neben die Tür)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "besides, in addition to",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.besides"
      }
     ],
     "examples": [
@@ -323,9 +453,41 @@
    "pos": "ADP",
    "senses": [
     "prep.infront",
-    "prep.before"
+    "prep.before",
+    "adv.ago"
    ],
-   "governs": "DAT|ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3",
+       "s4"
+      ],
+      "when": "where? (place) and time (vor dem Essen, vor zwei Jahren)"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     }
+    ],
+    "contractions": [
+     {
+      "form": "vorm",
+      "article": "dem",
+      "register": "colloquial"
+     },
+     {
+      "form": "vors",
+      "article": "das",
+      "register": "colloquial"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -352,15 +514,24 @@
       "def": "in front of (Wohin? + accusative: vor das Haus)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
-      "def": "before (time, + dative: vor dem Essen, vor acht Uhr); ago (vor zwei Jahren)",
+      "def": "before (time, + dative: vor dem Essen, vor acht Uhr)",
       "register": [
        "neutral"
       ],
       "concept": "prep.before"
+     },
+     {
+      "id": "s4",
+      "def": "ago (vor zwei Jahren = two years ago)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.ago"
      }
     ],
     "examples": [
@@ -397,7 +568,21 @@
       "tr": "Two weeks ago I was in Athens.",
       "register": "neutral",
       "context": "telling a story",
-      "sense": "s3"
+      "sense": "s4"
+     },
+     {
+      "text": "Ich war vor zwei Jahren in Berlin.",
+      "tr": "I was in Berlin two years ago.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s4"
+     },
+     {
+      "text": "Sie ist vor einer Stunde gegangen.",
+      "tr": "She left an hour ago.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -442,7 +627,37 @@
    "senses": [
     "prep.behind"
    ],
-   "governs": "DAT|ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3"
+      ],
+      "when": "where? (place)"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     }
+    ],
+    "contractions": [
+     {
+      "form": "hinterm",
+      "article": "dem",
+      "register": "colloquial"
+     },
+     {
+      "form": "hinters",
+      "article": "das",
+      "register": "colloquial"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -469,14 +684,16 @@
       "def": "behind (Wohin? + accusative: hinter das Haus)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "after, beyond",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -540,9 +757,38 @@
    "lemma": "zwischen",
    "pos": "ADP",
    "senses": [
-    "prep.between"
+    "prep.between",
+    "prep.among"
    ],
-   "governs": "DAT|ACC",
+   "contrasts": [
+    {
+     "concept": "prep.among",
+     "axis": "among what",
+     "value": "things around, in between (zwischen den Bäumen)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3"
+      ],
+      "when": "where? (place), and among"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -569,14 +815,16 @@
       "def": "between (Wohin? + accusative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "among, amongst",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.among"
      }
     ],
     "examples": [
@@ -600,6 +848,13 @@
       "register": "neutral",
       "context": "relationships",
       "sense": "s1"
+     },
+     {
+      "text": "Zwischen den Bäumen steht ein kleines Haus.",
+      "tr": "Among the trees stands a small house.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -639,7 +894,15 @@
    "lemma": "nah",
    "pos": "ADV",
    "senses": [
-    "adv.near"
+    "adv.near",
+    "adj.close"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "kind of word",
+     "value": "an adverb or predicate (Der Bahnhof ist nah)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -667,7 +930,8 @@
       "def": "near, close (in time or in a relationship: ein naher Freund)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.close"
      }
     ],
     "examples": [
@@ -745,6 +1009,12 @@
     "subtleties": [
      "nah also means emotionally close: Wir stehen uns sehr nah."
     ]
+   },
+   "features": {
+    "comparison": [
+     "näher",
+     "am nächsten"
+    ]
    }
   },
   {
@@ -753,6 +1023,13 @@
    "pos": "ADV",
    "senses": [
     "adv.near"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.near",
+     "axis": "kind of word",
+     "value": "a phrase: nearby, near something (in der Nähe vom Bahnhof)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -840,6 +1117,11 @@
     "subtleties": [
      "Ist hier in der Nähe …? is the standard question when you look for something."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -847,7 +1129,16 @@
    "lemma": "weit",
    "pos": "ADV",
    "senses": [
-    "adv.far"
+    "adv.far",
+    "adj.wide",
+    "adv.alot"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.alot",
+     "axis": "what it strengthens",
+     "value": "comparatives only, emphatic (weit besser)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -875,14 +1166,16 @@
       "def": "wide, broad (an adjective: ein weiter Rock)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.wide"
      },
      {
       "id": "s3",
       "def": "far, much (with comparatives: weit besser)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alot"
      }
     ],
     "examples": [
@@ -913,6 +1206,13 @@
       "register": "neutral",
       "context": "clothes",
       "sense": "s2"
+     },
+     {
+      "text": "Das neue Handy ist weit besser als das alte.",
+      "tr": "The new phone is far better than the old one.",
+      "register": "neutral",
+      "context": "comparing",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -969,6 +1269,12 @@
     ],
     "subtleties": [
      "Wie weit ist es? asks the distance; So weit, so gut = so far, so good."
+    ]
+   },
+   "features": {
+    "comparison": [
+     "weiter",
+     "am weitesten"
     ]
    }
   },
@@ -1070,6 +1376,11 @@
     "subtleties": [
      "drinnen is colloquial-neutral and very common; innen is used for the inner side of things (innen und außen)."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1105,7 +1416,8 @@
       "def": "out there (far away: draußen auf dem Meer)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1177,6 +1489,11 @@
     "subtleties": [
      "außen is the outer side of something (außen grün); draußen is outdoors."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1184,7 +1501,16 @@
    "lemma": "links",
    "pos": "ADV",
    "senses": [
-    "adv.left"
+    "adv.left",
+    "pol.left",
+    "adv.insideout"
+   ],
+   "contrasts": [
+    {
+     "concept": "pol.left",
+     "axis": "kind of word",
+     "value": "the neutral word (links sein)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1212,14 +1538,16 @@
       "def": "left-wing (politics)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.left"
      },
      {
       "id": "s3",
       "def": "inside out (clothes)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.insideout"
      }
     ],
     "examples": [
@@ -1243,6 +1571,13 @@
       "register": "neutral",
       "context": "politics",
       "sense": "s2"
+     },
+     {
+      "text": "Du hast den Pullover links an!",
+      "tr": "You’ve got your jumper on inside out!",
+      "register": "colloquial",
+      "context": "clothes",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1294,6 +1629,11 @@
     "subtleties": [
      "Something done “mit links” is done easily – with the left hand, without effort."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1301,7 +1641,8 @@
    "lemma": "rechts",
    "pos": "ADV",
    "senses": [
-    "adv.right"
+    "adv.right",
+    "pol.right"
    ],
    "ref": {
     "src": "kaikki",
@@ -1329,7 +1670,8 @@
       "def": "right-wing (politics)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.right"
      }
     ],
     "examples": [
@@ -1353,6 +1695,13 @@
       "register": "neutral",
       "context": "manners",
       "sense": "s1"
+     },
+     {
+      "text": "Die Partei steht weit rechts.",
+      "tr": "The party is far to the right.",
+      "register": "neutral",
+      "context": "politics",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1396,6 +1745,11 @@
     "subtleties": [
      "rechts vor links: at crossings without signs, the car coming from the right goes first."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1403,9 +1757,32 @@
    "lemma": "Küche",
    "pos": "NOUN",
    "senses": [
-    "home.kitchen"
+    "home.kitchen",
+    "food.cuisine"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Küchen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Küche",
     "N;ACC;SG": "Küche",
@@ -1442,7 +1819,8 @@
       "def": "cuisine, cooking (die griechische Küche)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.cuisine"
      }
     ],
     "examples": [
@@ -1513,7 +1891,43 @@
    "senses": [
     "home.bathroom"
    ],
+   "contrasts": [
+    {
+     "concept": "home.bathroom",
+     "axis": "register",
+     "value": "full form"
+    }
+   ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Badezimmer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "baden",
+      "role": "modifier",
+      "linker": "-e-"
+     },
+     {
+      "part": "Zimmer",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Badezimmer",
     "N;ACC;SG": "Badezimmer",
@@ -1622,9 +2036,48 @@
    "lemma": "Bad",
    "pos": "NOUN",
    "senses": [
-    "home.bathroom"
+    "home.bathroom",
+    "home.bath",
+    "place.pool",
+    "place.spa"
+   ],
+   "contrasts": [
+    {
+     "concept": "home.bathroom",
+     "axis": "register",
+     "value": "everyday, short"
+    }
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bäder",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "Bad",
+      "senses": [
+       "s4"
+      ],
+      "note": "uninflected before a place name, no plural: in Bad Ems"
+     }
+    ]
+   },
    "forms": {
     "N;NOM;SG": "Bad",
     "N;ACC;SG": "Bad",
@@ -1666,21 +2119,24 @@
       "def": "bath (Ich nehme ein Bad)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.bath"
      },
      {
       "id": "s3",
       "def": "swimming pool, baths (Hallenbad, Freibad)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.pool"
      },
      {
       "id": "s4",
       "def": "spa (in town names: Baden-Baden, Bad Ems)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.spa"
      }
     ],
     "examples": [
@@ -1704,6 +2160,20 @@
       "register": "neutral",
       "context": "relaxing",
       "sense": "s2"
+     },
+     {
+      "text": "Das städtische Bad hat ein großes Becken.",
+      "tr": "The municipal baths have a large pool.",
+      "register": "neutral",
+      "context": "sport",
+      "sense": "s3"
+     },
+     {
+      "text": "Meine Oma fährt jedes Jahr zur Kur nach Bad Ems.",
+      "tr": "My grandma goes to Bad Ems for a health cure every year.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -1756,6 +2226,34 @@
     "home.bedroom"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schlafzimmer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Schlaf",
+      "role": "modifier"
+     },
+     {
+      "part": "Zimmer",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schlafzimmer",
     "N;ACC;SG": "Schlafzimmer",
@@ -1857,6 +2355,34 @@
     "home.livingroom"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wohnzimmer",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "wohnen",
+      "role": "modifier"
+     },
+     {
+      "part": "Zimmer",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wohnzimmer",
     "N;ACC;SG": "Wohnzimmer",
@@ -1963,6 +2489,28 @@
     "home.garden"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Gärten",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Garten",
     "N;ACC;SG": "Garten",
@@ -1999,7 +2547,8 @@
       "def": "orchard; park (in names: der Englische Garten)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2077,9 +2626,43 @@
    "lemma": "Boden",
    "pos": "NOUN",
    "senses": [
-    "home.floor"
+    "home.floor",
+    "nature.ground",
+    "abstract.bottom",
+    "home.attic"
+   ],
+   "contrasts": [
+    {
+     "concept": "home.floor",
+     "axis": "precision",
+     "value": "everyday (also ground, bottom, attic)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Böden",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Boden",
     "N;ACC;SG": "Boden",
@@ -2116,21 +2699,24 @@
       "def": "ground, soil",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.ground"
      },
      {
       "id": "s3",
       "def": "bottom (of a container, the sea)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.bottom"
      },
      {
       "id": "s4",
       "def": "attic, loft (Dachboden)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.attic"
      }
     ],
     "examples": [
@@ -2154,6 +2740,20 @@
       "register": "neutral",
       "context": "gardening",
       "sense": "s2"
+     },
+     {
+      "text": "Am Boden der Tasse ist noch Zucker.",
+      "tr": "There is still sugar at the bottom of the cup.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s3"
+     },
+     {
+      "text": "Die Weihnachtssachen liegen oben auf dem Boden unter dem Dach.",
+      "tr": "The Christmas things are up in the loft under the roof.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2206,7 +2806,42 @@
    "senses": [
     "home.floor"
    ],
+   "contrasts": [
+    {
+     "concept": "home.floor",
+     "axis": "precision",
+     "value": "the floor surface, unambiguous"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Fußböden",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Fuß",
+      "role": "modifier"
+     },
+     {
+      "part": "Boden",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Fußboden",
     "N;ACC;SG": "Fußboden",
@@ -2308,6 +2943,27 @@
     "home.stairs"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Treppen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Treppe",
     "N;ACC;SG": "Treppe",
@@ -2414,6 +3070,27 @@
     "home.shelf"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Regale",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Regal",
     "N;ACC;SG": "Regal",
@@ -2520,6 +3197,27 @@
     "home.sofa"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Sofas",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Sofa",
     "N;ACC;SG": "Sofa",
@@ -2626,6 +3324,34 @@
     "home.fridge"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kühlschränke",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "kühl",
+      "role": "modifier"
+     },
+     {
+      "part": "Schrank",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kühlschrank",
     "N;ACC;SG": "Kühlschrank",

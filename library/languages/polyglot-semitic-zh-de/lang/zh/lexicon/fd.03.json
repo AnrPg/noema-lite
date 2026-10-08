@@ -7,7 +7,15 @@
    "pinyin": "zhè",
    "pos": "DET",
    "senses": [
-    "dem.this"
+    "dem.this",
+    "adv.now"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.now",
+     "axis": "register",
+     "value": "这就 + verb: right now, at once (colloquial)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,7 +43,8 @@
       "def": "(colloquial) right now, at once (这就…)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.now"
      }
     ],
     "examples": [
@@ -118,6 +127,17 @@
     "subtleties": [
      "As a subject, 这 stands alone: 这是土豆 ‘this is a potato’ — no measure word."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 這 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -127,7 +147,15 @@
    "pinyin": "nà",
    "pos": "DET",
    "senses": [
-    "dem.that"
+    "dem.that",
+    "adv.inthatcase"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.inthatcase",
+     "axis": "position",
+     "value": "at the start of a reply: well then, in that case (那我们走吧)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -155,7 +183,8 @@
       "def": "then, in that case (at the start of a sentence)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.inthatcase"
      }
     ],
     "examples": [
@@ -239,6 +268,17 @@
      "Many northerners say nèi before a measure word: 那个 nèige (and 这个 zhèige).",
      "At the start of a sentence 那 means ‘well then’: 那好吧 ‘OK then’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -330,6 +370,17 @@
     "subtleties": [
      "Often pronounced zhèixiē in the north."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 這些 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -421,6 +472,17 @@
     "subtleties": [
      "Often pronounced nèixiē in the north."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -536,6 +598,17 @@
      "‘Here with me’ is pronoun + 这儿/这里: 你的书在我这儿 ‘your book is here with me’.",
      "Mainland dictionaries give zhè·li with a toneless li."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 這裡 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -651,6 +724,17 @@
      "Person + 那里 means ‘at that person’s place’: 书在老师那里 ‘the book is with the teacher’.",
      "The polite answer to a compliment, 哪里哪里 (‘not at all’), uses 哪, not 那."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 那裡 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -664,6 +748,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 個 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "general"
+    ]
    }
   },
   {
@@ -677,6 +775,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   }
  ],

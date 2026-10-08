@@ -8,6 +8,41 @@
    "senses": [
     "part.not"
    ],
+   "features": {
+    "root": "ل ي س",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "I",
+    "present": {
+     "none": "no present: لَيْسَ is itself the present negation (“is not”)"
+    },
+    "masdar": {
+     "none": "a frozen verb (only the past forms, meaning the present): it has no maṣdar"
+    },
+    "participles": {
+     "none": "a frozen verb: no participles"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the predicate, often with بِـ (لَيْسَ كَبِيرًا / لَيْسَ بِكَبِيرٍ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "a sentence without a verb (is not); conjugated"
+    }
+   ],
    "translit": "laysa",
    "forms": {
     "V;PFV;1;SG": "لَسْتُ",
@@ -145,7 +180,15 @@
    "pos": "PART",
    "senses": [
     "part.not",
-    "det.none"
+    "det.none",
+    "part.dont"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "a present verb; a prohibition with the jussive"
+    }
    ],
    "translit": "lā",
    "ref": {
@@ -182,7 +225,8 @@
       "def": "don’t … (prohibition, with a jussive verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.dont"
      }
     ],
     "examples": [
@@ -283,7 +327,97 @@
      "لَا + noun = “there is no”: لَا شَكَّ — the noun takes -a without tanwīn.",
      "“I have no car” is not said with لَا: لَيْسَ عِنْدِي سَيَّارَةٌ — the “no” goes on the verbless sentence (لَيْسَ)."
     ]
-   }
+   },
+   "prefix": false
+  },
+  {
+   "id": "ar:ma_neg",
+   "lemma": "مَا",
+   "pos": "PART",
+   "senses": [
+    "part.not"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.not",
+     "axis": "what it negates",
+     "value": "a past verb (literary in MSA, everyday in the dialects)"
+    }
+   ],
+   "translit": "mā",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "literary",
+     "colloquial"
+    ],
+    "connotation": "neutral",
+    "feeling": "The negation of the past in older and literary Arabic — and the everyday “not” of the spoken dialects.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "not — negates a past verb: مَا ذَهَبْتُ (I did not go); literary in MSA, everyday in the dialects",
+      "register": [
+       "literary",
+       "colloquial"
+      ],
+      "concept": "part.not"
+     }
+    ],
+    "examples": [
+     {
+      "text": "مَا ذَهَبْتُ إِلَى الْعَمَلِ أَمْسِ.",
+      "tr": "I didn’t go to work yesterday.",
+      "register": "literary",
+      "context": "daily life",
+      "sense": "s1"
+     },
+     {
+      "text": "مَا رَأَيْتُ مِثْلَهُ قَطُّ.",
+      "tr": "I have never seen anything like it.",
+      "register": "literary",
+      "context": "storytelling",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "مَا … إِلَّا …",
+      "tr": "only … (lit. not … except …)"
+     },
+     {
+      "text": "مَا … قَطُّ",
+      "tr": "never (in the past)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "لَمْ",
+      "register": "neutral",
+      "nuance": "the standard negation of the past in MSA, with the jussive: لَمْ أَذْهَبْ"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary lists it as a particle meaning “not; never”, an entry of its own beside the pronoun مَا “what”.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The dialects negate almost everything with مَا (Egyptian and Levantine مَا رُحْتِش / مَا رُحْت, “I didn’t go”), while MSA prefers لَمْ."
+    ],
+    "pitfalls": [
+     "مَا + a past verb = not (مَا ذَهَبْتُ); مَا before a noun or in a question = what (مَا هٰذَا؟) — the word after it tells which."
+    ],
+    "subtleties": [
+     "In MSA the neutral negation of the past is لَمْ + jussive (لَمْ أَذْهَبْ); مَا + past sounds literary or emphatic."
+    ]
+   },
+   "prefix": false
   },
   {
    "id": "ar:la_shay",
@@ -464,9 +598,16 @@
    "lemma": "أَبَدًا",
    "pos": "ADV",
    "senses": [
-    "adv.never"
+    "adv.never",
+    "adv.forever"
    ],
-   "root": "ء ب د",
+   "features": {
+    "root": "ء ب د",
+    "derivedFrom": "أَبَد (eternity), in the accusative",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾabadan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -494,14 +635,16 @@
       "def": "not at all!, absolutely not! (alone)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "forever, always (literary, without a negation)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "adv.forever"
      }
     ],
     "examples": [
@@ -577,7 +720,18 @@
    "lemma": "وَلَا",
    "pos": "CCONJ",
    "senses": [
-    "conj.neithernor"
+    "conj.neithernor",
+    "adv.even"
+   ],
+   "features": {
+    "governs": "words or clauses"
+   },
+   "contrasts": [
+    {
+     "concept": "adv.even",
+     "axis": "construction",
+     "value": "(not) even, (not) a single — after a negation"
+    }
    ],
    "translit": "wa-lā",
    "ref": {
@@ -606,7 +760,8 @@
       "def": "(not) even, (not) a single …",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.even"
      }
     ],
     "examples": [
@@ -665,16 +820,42 @@
     "subtleties": [
      "The nouns keep the case of their place: لَا أَشْرَبُ الشَّايَ وَلَا الْقَهْوَةَ (both accusative); لَيْسَ عِنْدِي أَخٌ وَلَا أُخْتٌ (both nominative)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:shay_thing",
    "lemma": "شَيْء",
    "pos": "NOUN",
-   "senses": [],
+   "senses": [
+    "abstract.thing",
+    "pron.anything",
+    "pron.something"
+   ],
+   "features": {
+    "root": "ش ي ء",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَشْيَاء",
+      "kind": "broken",
+      "declension": "diptote",
+      "note": "things: a diptote, although it looks like أَفْعَال (grammarians disagree on its measure)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شَيْئَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "role": "thing, something; after a negated verb “anything”: لَا أُرِيدُ شَيْئًا = I don’t want anything. Needed for “nothing” with a verb.",
    "gender": "MASC",
-   "root": "ش ي ء",
    "translit": "šayʾ",
    "forms": {
     "N;NOM;SG;INDF": "شَيْءٌ",
@@ -690,7 +871,6 @@
     "N;ACC;PL;DEF": "الْأَشْيَاءَ",
     "N;GEN;PL;DEF": "الْأَشْيَاءِ"
    },
-   "brokenPlural": "أَشْيَاء",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -706,17 +886,27 @@
     "senses": [
      {
       "id": "s1",
-      "def": "thing, something",
+      "def": "thing (an object, a matter)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.thing"
      },
      {
       "id": "s2",
       "def": "(after a negated verb) anything",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.anything"
+     },
+     {
+      "id": "s3",
+      "def": "something (شَيْءٌ, شَيْءٌ مَا)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "pron.something"
      }
     ],
     "examples": [
@@ -725,7 +915,7 @@
       "tr": "Would you like something?",
       "register": "neutral",
       "context": "shop",
-      "sense": "s1"
+      "sense": "s3"
      },
      {
       "text": "لَا أُرِيدُ شَيْئًا، شُكْرًا.",
@@ -740,6 +930,13 @@
       "register": "neutral",
       "context": "home",
       "sense": "s1"
+     },
+     {
+      "text": "سَمِعْتُ شَيْئًا مَا فِي الْمَطْبَخِ.",
+      "tr": "I heard something in the kitchen.",
+      "register": "neutral",
+      "context": "at home",
+      "sense": "s3"
      }
     ],
     "collocations": [

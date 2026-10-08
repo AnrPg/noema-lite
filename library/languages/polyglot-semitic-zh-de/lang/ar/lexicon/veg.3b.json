@@ -8,6 +8,26 @@
    "senses": [
     "veg.capers"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Greek kápparis): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "kabar",
    "forms": {
@@ -115,8 +135,30 @@
    "senses": [
     "veg.armeniancucumber"
    ],
+   "features": {
+    "root": "ق ث ء",
+    "pattern": "فِعَّال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قِثَّاءَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted (plural of قِثَّاءَة)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قِثَّاءَتَانِ",
+    "declension": "triptote",
+    "unit": "قِثَّاءَة",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "unit": "قِثَّاءَة",
    "translit": "qiṯṯāʾ",
    "forms": {
     "N;NOM;COLL;INDF": "قِثَّاءٌ",
@@ -164,7 +206,8 @@
       "def": "cucumbers and melons in general, the genus Cucumis (Wiktionary)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -251,6 +294,26 @@
    "senses": [
     "veg.pointedcabbage"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: مَلْفُوف (ل ف ف) + مَخْرُوطِيّ (خ ر ط)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "malfūf maḫrūṭī",
    "forms": {

@@ -7,8 +7,17 @@
    "senses": [
     "num.0"
    ],
+   "features": {
+    "root": "ص ف ر",
+    "polarity": false,
+    "countedNoun": {
+     "none": "zero takes no counted noun: “no books” is لَا كُتُبَ"
+    },
+    "ordinal": {
+     "none": "zero has no ordinal"
+    }
+   },
    "class": "noun",
-   "root": "ص ف ر",
    "translit": "ṣifr",
    "forms": {
     "NUM;NOM;SG;INDF": "صِفْرٌ",
@@ -47,7 +56,8 @@
       "def": "nothing, nil (a score, a result)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -94,8 +104,13 @@
    "senses": [
     "num.1"
    ],
+   "features": {
+    "root": "و ح د",
+    "polarity": false,
+    "countedNoun": "agrees (after the noun)",
+    "ordinal": "أَوَّل"
+   },
    "class": "one",
-   "root": "و ح د",
    "translit": "wāḥid",
    "forms": {
     "NUM;NOM;SG;MASC;INDF": "وَاحِدٌ",
@@ -175,6 +190,12 @@
    "senses": [
     "num.2"
    ],
+   "features": {
+    "root": "ث ن ي",
+    "polarity": false,
+    "countedNoun": "dual alone",
+    "ordinal": "ثَانٍ"
+   },
    "class": "two",
    "translit": "iṯnān",
    "forms": {
@@ -246,8 +267,13 @@
    "senses": [
     "num.3"
    ],
+   "features": {
+    "root": "ث ل ث",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "ثَالِث"
+   },
    "class": "unit",
-   "root": "ث ل ث",
    "translit": "ṯalāṯa",
    "forms": {
     "NUM;NOM;MASC;INDF": "ثَلَاثَةٌ",
@@ -322,8 +348,13 @@
    "senses": [
     "num.4"
    ],
+   "features": {
+    "root": "ر ب ع",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "رَابِع"
+   },
    "class": "unit",
-   "root": "ر ب ع",
    "translit": "ʾarbaʿa",
    "forms": {
     "NUM;NOM;MASC;INDF": "أَرْبَعَةٌ",
@@ -399,8 +430,13 @@
    "senses": [
     "num.5"
    ],
+   "features": {
+    "root": "خ م س",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "خَامِس"
+   },
    "class": "unit",
-   "root": "خ م س",
    "translit": "ḫamsa",
    "forms": {
     "NUM;NOM;MASC;INDF": "خَمْسَةٌ",
@@ -475,6 +511,12 @@
    "senses": [
     "num.6"
    ],
+   "features": {
+    "root": "س د س",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "سَادِس"
+   },
    "class": "unit",
    "translit": "sitta",
    "forms": {
@@ -550,8 +592,13 @@
    "senses": [
     "num.7"
    ],
+   "features": {
+    "root": "س ب ع",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "سَابِع"
+   },
    "class": "unit",
-   "root": "س ب ع",
    "translit": "sabʿa",
    "forms": {
     "NUM;NOM;MASC;INDF": "سَبْعَةٌ",
@@ -625,8 +672,13 @@
    "senses": [
     "num.8"
    ],
+   "features": {
+    "root": "ث م ن",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "ثَامِن"
+   },
    "class": "unit",
-   "root": "ث م ن",
    "translit": "ṯamāniya",
    "forms": {
     "NUM;NOM;MASC;INDF": "ثَمَانِيَةٌ",
@@ -701,8 +753,13 @@
    "senses": [
     "num.9"
    ],
+   "features": {
+    "root": "ت س ع",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "تَاسِع"
+   },
    "class": "unit",
-   "root": "ت س ع",
    "translit": "tisʿa",
    "forms": {
     "NUM;NOM;MASC;INDF": "تِسْعَةٌ",
@@ -776,8 +833,13 @@
    "senses": [
     "num.10"
    ],
+   "features": {
+    "root": "ع ش ر",
+    "polarity": true,
+    "countedNoun": "GEN;PL",
+    "ordinal": "عَاشِر"
+   },
    "class": "unit",
-   "root": "ع ش ر",
    "translit": "ʿašara",
    "forms": {
     "NUM;NOM;MASC;INDF": "عَشَرَةٌ",
@@ -853,6 +915,14 @@
    "senses": [
     "num.11"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "حَادِيَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "ʾaḥada ʿašara",
    "forms": {
@@ -922,6 +992,14 @@
    "senses": [
     "num.12"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "ثَانِيَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "iṯnā ʿašara",
    "forms": {
@@ -991,6 +1069,14 @@
    "senses": [
     "num.13"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "ثَالِثَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "ṯalāṯata ʿašara",
    "forms": {
@@ -1059,6 +1145,14 @@
    "senses": [
     "num.14"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "رَابِعَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "ʾarbaʿata ʿašara",
    "forms": {
@@ -1124,6 +1218,14 @@
    "senses": [
     "num.15"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "خَامِسَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "ḫamsata ʿašara",
    "forms": {
@@ -1189,6 +1291,14 @@
    "senses": [
     "num.16"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "سَادِسَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "sittata ʿašara",
    "forms": {
@@ -1254,6 +1364,14 @@
    "senses": [
     "num.17"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "سَابِعَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "sabʿata ʿašara",
    "forms": {
@@ -1319,6 +1437,14 @@
    "senses": [
     "num.18"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "ثَامِنَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "ṯamāniyata ʿašara",
    "forms": {
@@ -1384,6 +1510,14 @@
    "senses": [
     "num.19"
    ],
+   "features": {
+    "root": {
+     "none": "a compound number: the unit + عَشَرَ (see their roots)"
+    },
+    "polarity": true,
+    "countedNoun": "ACC;SG",
+    "ordinal": "تَاسِعَ عَشَرَ"
+   },
    "class": "teen",
    "translit": "tisʿata ʿašara",
    "forms": {
@@ -1449,6 +1583,12 @@
    "senses": [
     "num.20"
    ],
+   "features": {
+    "root": "ع ش ر",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الْعِشْرُونَ"
+   },
    "class": "ten",
    "translit": "ʿišrūna",
    "forms": {
@@ -1518,6 +1658,12 @@
    "senses": [
     "num.30"
    ],
+   "features": {
+    "root": "ث ل ث",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الثَّلَاثُونَ"
+   },
    "class": "ten",
    "translit": "ṯalāṯūna",
    "forms": {
@@ -1587,6 +1733,12 @@
    "senses": [
     "num.40"
    ],
+   "features": {
+    "root": "ر ب ع",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الْأَرْبَعُونَ"
+   },
    "class": "ten",
    "translit": "ʾarbaʿūna",
    "forms": {
@@ -1656,6 +1808,12 @@
    "senses": [
     "num.50"
    ],
+   "features": {
+    "root": "خ م س",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الْخَمْسُونَ"
+   },
    "class": "ten",
    "translit": "ḫamsūna",
    "forms": {
@@ -1725,6 +1883,12 @@
    "senses": [
     "num.60"
    ],
+   "features": {
+    "root": "س د س",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "السِّتُّونَ"
+   },
    "class": "ten",
    "translit": "sittūna",
    "forms": {
@@ -1791,6 +1955,12 @@
    "senses": [
     "num.70"
    ],
+   "features": {
+    "root": "س ب ع",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "السَّبْعُونَ"
+   },
    "class": "ten",
    "translit": "sabʿūna",
    "forms": {
@@ -1857,6 +2027,12 @@
    "senses": [
     "num.80"
    ],
+   "features": {
+    "root": "ث م ن",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "الثَّمَانُونَ"
+   },
    "class": "ten",
    "translit": "ṯamānūna",
    "forms": {
@@ -1923,6 +2099,12 @@
    "senses": [
     "num.90"
    ],
+   "features": {
+    "root": "ت س ع",
+    "polarity": false,
+    "countedNoun": "ACC;SG",
+    "ordinal": "التِّسْعُونَ"
+   },
    "class": "ten",
    "translit": "tisʿūna",
    "forms": {
@@ -1989,6 +2171,12 @@
    "senses": [
     "num.100"
    ],
+   "features": {
+    "root": "م ء ي",
+    "polarity": false,
+    "countedNoun": "GEN;SG",
+    "ordinal": "الْمِائَة"
+   },
    "class": "noun",
    "translit": "miʾa",
    "forms": {
@@ -2072,8 +2260,13 @@
    "senses": [
     "num.1000"
    ],
+   "features": {
+    "root": "ء ل ف",
+    "polarity": false,
+    "countedNoun": "GEN;SG",
+    "ordinal": "الْأَلْف"
+   },
    "class": "noun",
-   "root": "ء ل ف",
    "translit": "ʾalf",
    "forms": {
     "NUM;NOM;SG;INDF": "أَلْفٌ",
@@ -2154,10 +2347,48 @@
    "lemma": "كَثِير",
    "pos": "ADJ",
    "senses": [
-    "quant.many"
+    "quant.many",
+    "adv.alot"
+   ],
+   "features": {
+    "root": "ك ث ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "كَثِيرَة",
+    "plurals": [
+     {
+      "form": "كَثِيرُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "many (people): كَثِيرُونَ يَظُنُّونَ ذٰلِكَ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَكْثَر",
+    "meaningForms": [
+     {
+      "form": "كَثِيرًا",
+      "what": "the accusative as an adverb: a lot",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "adv.alot",
+     "axis": "word class (the same form كَثِيرًا)",
+     "value": "the accusative of the adjective كَثِير, after a verb or شُكْرًا"
+    }
    ],
    "class": "quant",
-   "root": "ك ث ر",
    "translit": "kaṯīr",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "كَثِيرٌ",
@@ -2224,7 +2455,8 @@
       "def": "a lot, very much (the accusative كَثِيرًا as an adverb: شُكْرًا كَثِيرًا)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alot"
      }
     ],
     "examples": [
@@ -2314,8 +2546,33 @@
    "senses": [
     "quant.few"
    ],
+   "features": {
+    "root": "ق ل ل",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic adjective, not made from another word"
+    },
+    "feminine": "قَلِيلَة",
+    "plurals": [
+     {
+      "form": "قَلِيلُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "few (people)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَقَلّ",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "class": "quant",
-   "root": "ق ل ل",
    "translit": "qalīl",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "قَلِيلٌ",
@@ -2391,7 +2648,8 @@
       "def": "scarce, rare",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2488,7 +2746,13 @@
    "senses": [
     "quant.alittle"
    ],
-   "root": "ق ل ل",
+   "features": {
+    "root": "ق ل ل",
+    "derivedFrom": "قَلِيل (little), in the accusative",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "qalīlan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2517,7 +2781,8 @@
       "def": "for a little while, a moment",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2593,11 +2858,27 @@
    "lemma": "كُلّ",
    "pos": "NOUN",
    "senses": [
-    "quant.all"
+    "quant.all",
+    "quant.every"
    ],
+   "features": {
+    "root": "ك ل ل",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a quantifier: it has no plural"
+    },
+    "dual": {
+     "none": "a quantifier"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "class": "quant",
    "gender": "MASC",
-   "root": "ك ل ل",
    "translit": "kull",
    "forms": {
     "N;NOM;SG;INDF": "كُلٌّ",
@@ -2633,14 +2914,16 @@
       "def": "every, each (with an indefinite singular after it: كُلَّ يَوْمٍ, every day)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "quant.every"
      },
      {
       "id": "s3",
       "def": "everyone, each one (alone: كُلٌّ)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -2736,11 +3019,33 @@
    "lemma": "بَعْض",
    "pos": "NOUN",
    "senses": [
-    "quant.some"
+    "quant.some",
+    "pron.eachother"
    ],
+   "features": {
+    "root": "ب ع ض",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a quantifier: it has no plural"
+    },
+    "dual": {
+     "none": "a quantifier"
+    },
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "بَعْضُهُمْ بَعْضًا",
+      "what": "repeated: each other",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "class": "quant",
    "gender": "MASC",
-   "root": "ب ع ض",
    "translit": "baʿḍ",
    "forms": {
     "N;NOM;SG;INDF": "بَعْضٌ",
@@ -2776,7 +3081,8 @@
       "def": "each other (repeated: بَعْضُهُمْ بَعْضًا)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.eachother"
      }
     ],
     "examples": [

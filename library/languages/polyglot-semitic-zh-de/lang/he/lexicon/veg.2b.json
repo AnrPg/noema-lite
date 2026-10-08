@@ -10,6 +10,27 @@
    ],
    "gender": "FEM",
    "translit": "bamya",
+   "features": {
+    "spelling": "במיה",
+    "root": {
+     "none": "a loanword (Arabic بَامْيَة): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a loanword ending in ־ָה: not used as the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בַּמְיָה",
     "N;SG;DEF": "הַבַּמְיָה"
@@ -98,11 +119,45 @@
    ],
    "gender": "MASC",
    "translit": "pol",
+   "features": {
+    "spelling": "פול",
+    "root": {
+     "none": "an old loan (Aramaic פּוֹלָא, Arabic فُول): no verb root"
+    },
+    "pattern": "קוֹל",
+    "plurals": [
+     {
+      "form": "פּוֹלִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פּוֹל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פּוֹלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "פּוֹל",
     "N;SG;DEF": "הַפּוֹל",
     "N;PL;INDF": "פּוֹלִים",
-    "N;PL;DEF": "הַפּוֹלִים"
+    "N;PL;DEF": "הַפּוֹלִים",
+    "N;SG;CONST": "פּוֹל",
+    "N;PL;CONST": "פּוֹלֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -196,11 +251,47 @@
    ],
    "gender": "MASC",
    "translit": "artishok",
+   "features": {
+    "spelling": "ארטישוק",
+    "root": {
+     "none": "a loanword (Italian articiocco): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אַרְטִישׁוֹקִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אַרְטִישׁוֹק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אַרְטִישׁוֹקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אַרְטִישׁוֹק",
     "N;SG;DEF": "הָאַרְטִישׁוֹק",
     "N;PL;INDF": "אַרְטִישׁוֹקִים",
-    "N;PL;DEF": "הָאַרְטִישׁוֹקִים"
+    "N;PL;DEF": "הָאַרְטִישׁוֹקִים",
+    "N;SG;CONST": "אַרְטִישׁוֹק",
+    "N;PL;CONST": "אַרְטִישׁוֹקֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -297,9 +388,34 @@
    ],
    "gender": "MASC",
    "translit": "kolrabi",
+   "features": {
+    "spelling": "קולרבי",
+    "root": {
+     "none": "a loanword (German Kohlrabi): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קוֹלְרַבִּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קוֹלְרַבִּי",
-    "N;SG;DEF": "הַקּוֹלְרַבִּי"
+    "N;SG;DEF": "הַקּוֹלְרַבִּי",
+    "N;SG;CONST": "קוֹלְרַבִּי"
    },
    "note": "A loanword used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -386,6 +502,27 @@
    ],
    "gender": "MASC",
    "translit": "kruv nitsanim",
+   "features": {
+    "spelling": "כרוב ניצנים",
+    "root": {
+     "none": "a compound of two words (כְּרוּב + נִצָּנִים): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כְּרוּב נִצָּנִים",
     "N;SG;DEF": "כְּרוּב הַנִּצָּנִים"
@@ -474,10 +611,39 @@
    "lemma": "לוּפָה",
    "pos": "NOUN",
    "senses": [
-    "veg.luffa"
+    "veg.luffa",
+    "obj.sponge"
    ],
    "gender": "FEM",
    "translit": "lufa",
+   "features": {
+    "spelling": "לופה",
+    "root": {
+     "none": "a loanword (Arabic لُوف): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "לוּפוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a loanword ending in ־ָה: not used as the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "לוּפָה",
     "N;SG;DEF": "הַלּוּפָה",
@@ -511,7 +677,8 @@
       "def": "loofah — the dried fibrous fruit used as a bath sponge",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.sponge"
      }
     ],
     "examples": [
@@ -574,10 +741,35 @@
     "veg.kale"
    ],
    "gender": "MASC",
-   "translit": "keyl",
+   "translit": "keil",
+   "features": {
+    "spelling": "קייל",
+    "root": {
+     "none": "a loanword (English kale): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קֵייל"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קֵייל",
-    "N;SG;DEF": "הַקֵּייל"
+    "N;SG;DEF": "הַקֵּייל",
+    "N;SG;CONST": "קֵייל"
    },
    "note": "A recent loanword, used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -663,6 +855,33 @@
    ],
    "gender": "MASC",
    "translit": "kruv sini",
+   "features": {
+    "spelling": "כרוב סיני",
+    "root": {
+     "none": "a compound of two words (כְּרוּב + סִינִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "כְּרוּבִים סִינִיִּים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כְּרוּב סִינִי",
     "N;SG;DEF": "הַכְּרוּב הַסִּינִי",
@@ -754,6 +973,33 @@
    ],
    "gender": "MASC",
    "translit": "kruv adom",
+   "features": {
+    "spelling": "כרוב אדום",
+    "root": {
+     "none": "a compound of two words (כְּרוּב + אָדֹם): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "כְּרוּבִים אֲדֻמִּים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כְּרוּב אָדֹם",
     "N;SG;DEF": "הַכְּרוּב הָאָדֹם",
@@ -851,6 +1097,33 @@
    ],
    "gender": "FEM",
    "translit": "agvaniyat sheri",
+   "features": {
+    "spelling": "עגבניית שרי",
+    "root": {
+     "none": "a compound of two words (עַגְבָנִיָּה + שֶׁרִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "עַגְבָנִיּוֹת שֶׁרִי",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "עַגְבָנִיַּת שֶׁרִי",
     "N;SG;DEF": "עַגְבָנִיַּת הַשֶּׁרִי",
@@ -947,16 +1220,49 @@
    "lemma": "נֶבֶט",
    "pos": "NOUN",
    "senses": [
-    "veg.beansprout"
+    "veg.beansprout",
+    "nature.sprout"
    ],
    "gender": "MASC",
-   "mishkal": "קֶטֶל",
    "translit": "nevet",
+   "features": {
+    "spelling": "נבט",
+    "root": "נ ב ט",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "נְבָטִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נֶבֶט"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "נִבְטֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "נֶבֶט",
     "N;SG;DEF": "הַנֶּבֶט",
     "N;PL;INDF": "נְבָטִים",
-    "N;PL;DEF": "הַנְּבָטִים"
+    "N;PL;DEF": "הַנְּבָטִים",
+    "N;SG;CONST": "נֶבֶט",
+    "N;PL;CONST": "נִבְטֵי"
    },
    "note": "As food, mostly in the plural נְבָטִים “(bean) sprouts”. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -985,7 +1291,8 @@
       "def": "a sprout, a shoot coming out of any seed",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.sprout"
      }
     ],
     "examples": [
@@ -1060,11 +1367,47 @@
    ],
    "gender": "FEM",
    "translit": "dalorit",
+   "features": {
+    "spelling": "דלורית",
+    "root": {
+     "none": "a modern name for the butternut squash: no verb root"
+    },
+    "pattern": {
+     "none": "a modern coinage with the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "דָּלוֹרִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דָּלוֹרִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דָּלוֹרִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דָּלוֹרִית",
     "N;SG;DEF": "הַדָּלוֹרִית",
     "N;PL;INDF": "דָּלוֹרִיּוֹת",
-    "N;PL;DEF": "הַדָּלוֹרִיּוֹת"
+    "N;PL;DEF": "הַדָּלוֹרִיּוֹת",
+    "N;SG;CONST": "דָּלוֹרִית",
+    "N;PL;CONST": "דָּלוֹרִיּוֹת"
    },
    "note": "Wiktionary has no Hebrew entry; its English entry butternut squash gives דָּלוֹרִית (dalorít, f.).",
    "ref": {
@@ -1151,6 +1494,27 @@
    ],
    "gender": "FEM",
    "translit": "afuna sinit",
+   "features": {
+    "spelling": "אפונה סינית",
+    "root": {
+     "none": "a compound of two words (אֲפוּנָה + סִינִית): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֲפוּנָה סִינִית",
     "N;SG;DEF": "הָאֲפוּנָה הַסִּינִית"

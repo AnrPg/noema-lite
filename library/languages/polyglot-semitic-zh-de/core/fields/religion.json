@@ -1,0 +1,107 @@
+{
+ "field": "religion",
+ "title": "Religion",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "relig.ark",
+   "gloss": "the Ark (of the Covenant; the Torah ark in a synagogue)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "relig.christmas",
+   "gloss": "Christmas",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "relig.judgementday",
+   "gloss": "the Day of Judgement",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "relig.karpas",
+   "gloss": "karpas (the Seder vegetable dipped in salt water)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "relig.maror",
+   "gloss": "maror, the bitter herbs of the Passover Seder",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "relig.menorah",
+   "gloss": "menorah, the seven-branched candelabrum (emblem of Israel)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "relig.monk",
+   "gloss": "brother, monk, friar",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "relig.nave",
+   "gloss": "nave (of a church)",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "relig.noonprayer",
+   "gloss": "the noon prayer",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "relig.nun",
+   "gloss": "nun, (religious) sister",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "relig.sabbath",
+   "gloss": "the Sabbath",
+   "tier": 2,
+   "rank": 11,
+   "pending": true
+  },
+  {
+   "id": "relig.scripture",
+   "gloss": "the Scripture, a holy book",
+   "tier": 2,
+   "rank": 12,
+   "pending": true
+  },
+  {
+   "id": "relig.vinayamaster",
+   "gloss": "master of monastic discipline (Buddhism)",
+   "tier": 2,
+   "rank": 13,
+   "pending": true
+  },
+  {
+   "id": "relig.worship",
+   "gloss": "worship, divine service",
+   "tier": 2,
+   "rank": 14,
+   "pending": true
+  }
+ ]
+}

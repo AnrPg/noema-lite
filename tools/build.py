@@ -179,6 +179,7 @@ def build_skill(out_zip):
         for t in SKILL_TOOLS: z.write(os.path.join(ROOT, 'tools', t), f'noema-pack-builder/scripts/{t}')
         z.write(os.path.join(ROOT, 'tools', 'CONTENT_SPEC.md'), 'noema-pack-builder/references/CONTENT_SPEC.md')
         z.write(os.path.join(ROOT, 'docs', 'VISUAL.md'), 'noema-pack-builder/references/VISUAL.md')
+        if os.path.exists(os.path.join(ROOT, 'docs', 'LANGUAGES.md')): z.write(os.path.join(ROOT, 'docs', 'LANGUAGES.md'), 'noema-pack-builder/references/LANGUAGES.md')
     print('skill →', os.path.relpath(out_zip, ROOT))
 
 def public_config():

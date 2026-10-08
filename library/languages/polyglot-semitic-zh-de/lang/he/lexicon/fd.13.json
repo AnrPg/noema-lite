@@ -6,12 +6,45 @@
    "pos": "VERB",
    "senses": [
     "verb.go",
-    "verb.walk"
+    "verb.walk",
+    "verb.begoingto"
    ],
-   "root": "ה־ל־ך",
-   "binyan": "paal",
    "translit": "halach",
-   "note": "Going on foot, or going to a place in general (הוֹלֵךְ לָעֲבוֹדָה). A trip by bus, car, train or plane is נָסַע. The future and the imperative lose the ה: תֵּלֵךְ, לֵךְ; infinitive לָלֶכֶת.",
+   "features": {
+    "spelling": "הלך",
+    "root": "ה ל ך",
+    "binyan": "paal",
+    "rootClass": [
+     "irregular"
+    ],
+    "future": "יֵלֵךְ",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "verbalNoun": "הֲלִיכָה",
+    "meaningForms": [
+     {
+      "form": "הוֹלֵךְ, הוֹלֶכֶת, הוֹלְכִים, הוֹלְכוֹת",
+      "senses": [
+       "s4"
+      ],
+      "note": "only the present + an infinitive: הוֹלֵךְ לִקְנוֹת “is going to buy”"
+     }
+    ]
+   },
    "forms": {
     "V;PST;3;SG;MASC": "הָלַךְ",
     "V;PRS;SG;MASC": "הוֹלֵךְ",
@@ -26,6 +59,7 @@
     "V;FUT;2;SG;FEM": "תֵּלְכִי",
     "V;FUT;2;PL;MASC": "תֵּלְכוּ"
    },
+   "note": "Going on foot, or going to a place in general (הוֹלֵךְ לָעֲבוֹדָה). A trip by bus, car, train or plane is נָסַע. The future and the imperative lose the ה: תֵּלֵךְ, לֵךְ; infinitive לָלֶכֶת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -60,14 +94,16 @@
       "def": "to leave, be off (אֲנִי הוֹלֵךְ “I’m off”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s4",
       "def": "to be going to (הוֹלֵךְ + infinitive: the near future)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.begoingto"
      }
     ],
     "examples": [
@@ -197,12 +233,52 @@
    "lemma": "בָּא",
    "pos": "VERB",
    "senses": [
-    "verb.come"
+    "verb.come",
+    "part.lets"
    ],
-   "root": "ב־ו־א",
-   "binyan": "paal",
    "translit": "ba",
-   "note": "A hollow verb: the past and the present look alike in the masculine singular (בָּא “came” / “comes”). Imperative בּוֹא, בּוֹאִי, בּוֹאוּ; infinitive לָבוֹא.",
+   "features": {
+    "spelling": "בא",
+    "root": "ב ו א",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-vav",
+     "lamed-alef"
+    ],
+    "future": "יָבוֹא",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "mi",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "no verbal noun in everyday use (בִּיאָה is a different, technical word; “arrival” is הַגָּעָה)"
+    },
+    "meaningForms": [
+     {
+      "form": "בּוֹא, בּוֹאִי, בּוֹאוּ",
+      "senses": [
+       "s3"
+      ],
+      "note": "only the imperative, + a verb in the future: בּוֹא נֵלֵךְ “let’s go”"
+     }
+    ]
+   },
    "forms": {
     "V;PST;3;SG;MASC": "בָּא",
     "V;PRS;SG;MASC": "בָּא",
@@ -217,6 +293,7 @@
     "V;FUT;2;SG;FEM": "תָּבוֹאִי",
     "V;FUT;2;PL;MASC": "תָּבוֹאוּ"
    },
+   "note": "A hollow verb: the past and the present look alike in the masculine singular (בָּא “came” / “comes”). Imperative בּוֹא, בּוֹאִי, בּוֹאוּ; infinitive לָבוֹא.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -243,14 +320,16 @@
       "def": "to come from (a place: origin)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "let’s … (בּוֹא / בּוֹאוּ + a verb in the future)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "part.lets"
      }
     ],
     "examples": [
@@ -365,12 +444,38 @@
    "lemma": "רָץ",
    "pos": "VERB",
    "senses": [
-    "verb.run"
+    "verb.run",
+    "verb.run.election"
    ],
-   "root": "ר־ו־ץ",
-   "binyan": "paal",
    "translit": "rats",
-   "note": "A hollow verb like בָּא: רָץ “ran / runs”, רָצָה “she ran / she runs”. Do not mix it up with רָצָה “wanted” (from רָצָה, lesson 7). Infinitive לָרוּץ, imperative רוּץ.",
+   "features": {
+    "spelling": "רץ",
+    "root": "ר ו ץ",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-vav"
+    ],
+    "future": "יָרוּץ",
+    "governs": [
+     {
+      "prep": "none",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "רִיצָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "רָץ",
     "V;PRS;SG;MASC": "רָץ",
@@ -385,6 +490,7 @@
     "V;FUT;2;SG;FEM": "תָּרוּצִי",
     "V;FUT;2;PL;MASC": "תָּרוּצוּ"
    },
+   "note": "A hollow verb like בָּא: רָץ “ran / runs”, רָצָה “she ran / she runs”. Do not mix it up with רָצָה “wanted” (from רָצָה, lesson 7). Infinitive לָרוּץ, imperative רוּץ.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -411,14 +517,16 @@
       "def": "to hurry, rush somewhere (רָץ לַשּׁוּק “dashes to the market”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "to run (in an election), be a candidate",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.run.election"
      }
     ],
     "examples": [
@@ -500,12 +608,39 @@
    "lemma": "נָהַג",
    "pos": "VERB",
    "senses": [
-    "verb.drive"
+    "verb.drive",
+    "verb.usedto",
+    "verb.treat"
    ],
-   "root": "נ־ה־ג",
-   "binyan": "paal",
    "translit": "nahag",
-   "note": "To drive (a vehicle); the driver is נֶהָג (lesson 10). The vehicle takes בְּ: נוֹהֵג בִּמְכוֹנִית. Infinitive לִנְהֹג (full spelling לנהוג).",
+   "features": {
+    "spelling": "נהג",
+    "root": "נ ה ג",
+    "binyan": "paal",
+    "rootClass": [
+     "ayin-guttural"
+    ],
+    "future": "יִנְהַג",
+    "governs": [
+     {
+      "prep": "be",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "נְהִיגָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "נָהַג",
     "V;PRS;SG;MASC": "נוֹהֵג",
@@ -523,6 +658,7 @@
    "plene": {
     "V;NFIN": "לנהוג"
    },
+   "note": "To drive (a vehicle); the driver is נֶהָג (lesson 10). The vehicle takes בְּ: נוֹהֵג בִּמְכוֹנִית. Infinitive לִנְהֹג (full spelling לנהוג).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -549,14 +685,16 @@
       "def": "to be in the habit of, usually do (נָהַג לְ… + infinitive)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.usedto"
      },
      {
       "id": "s3",
       "def": "to behave, treat (someone) in a certain way (נָהַג בְּ…)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.treat"
      }
     ],
     "examples": [
@@ -644,12 +782,44 @@
    "lemma": "נָסַע",
    "pos": "VERB",
    "senses": [
-    "verb.travel"
+    "verb.travel",
+    "verb.leave"
    ],
-   "root": "נ־ס־ע",
-   "binyan": "paal",
    "translit": "nasa",
-   "note": "To go by vehicle and to travel. The imperative and the future lose the נ: סַע!, תִּסַּע. Infinitive לִנְסֹעַ (full spelling לנסוע).",
+   "features": {
+    "spelling": "נסע",
+    "root": "נ ס ע",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-nun",
+     "lamed-guttural"
+    ],
+    "future": "יִסַּע",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "be",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "נְסִיעָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "נָסַע",
     "V;PRS;SG;MASC": "נוֹסֵעַ",
@@ -670,6 +840,14 @@
     "V;FUT;2;SG;FEM": "תיסעי",
     "V;FUT;2;PL;MASC": "תיסעו"
    },
+   "note": "To go by vehicle and to travel. The imperative and the future lose the נ: סַע!, תִּסַּע. Infinitive לִנְסֹעַ (full spelling לנסוע).",
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "how one leaves",
+     "value": "sets off by vehicle (the train is leaving)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -696,14 +874,16 @@
       "def": "to ride, go (in a bus, a car, a train) as a passenger",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "to leave, set off (by vehicle): הָרַכֶּבֶת נוֹסַעַת “the train is leaving”",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.leave"
      }
     ],
     "examples": [
@@ -740,6 +920,13 @@
       "tr": "The bus is leaving in a minute.",
       "register": "colloquial",
       "context": "transport",
+      "sense": "s3"
+     },
+     {
+      "text": "הָרַכֶּבֶת נוֹסַעַת בְּעוֹד חָמֵשׁ דַּקּוֹת!",
+      "tr": "The train leaves in five minutes!",
+      "register": "neutral",
+      "context": "station",
       "sense": "s3"
      }
     ],
@@ -806,12 +993,50 @@
    "lemma": "חָזַר",
    "pos": "VERB",
    "senses": [
-    "verb.return"
+    "verb.return",
+    "verb.repeat",
+    "verb.becomereligious"
    ],
-   "root": "ח־ז־ר",
-   "binyan": "paal",
    "translit": "chazar",
-   "note": "To come back, go back: חוֹזֵר הַבַּיְתָה “comes home”, חוֹזֵר מֵהָעֲבוֹדָה. Also “to repeat”. Infinitive לַחֲזֹר (full spelling לחזור).",
+   "features": {
+    "spelling": "חזר",
+    "root": "ח ז ר",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-guttural"
+    ],
+    "future": "יַחֲזֹר",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "mi",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "al",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "prep": "be",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "חֲזָרָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "חָזַר",
     "V;PRS;SG;MASC": "חוֹזֵר",
@@ -831,6 +1056,7 @@
     "V;IMP;2;SG;MASC": "חזור",
     "V;FUT;2;SG;MASC": "תחזור"
    },
+   "note": "To come back, go back: חוֹזֵר הַבַּיְתָה “comes home”, חוֹזֵר מֵהָעֲבוֹדָה. Also “to repeat”. Infinitive לַחֲזֹר (full spelling לחזור).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -857,14 +1083,16 @@
       "def": "to repeat, do again (חָזַר עַל …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.repeat"
      },
      {
       "id": "s3",
       "def": "to become religious (חָזַר בִּתְשׁוּבָה)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.becomereligious"
      }
     ],
     "examples": [
@@ -888,6 +1116,13 @@
       "register": "neutral",
       "context": "classroom",
       "sense": "s2"
+     },
+     {
+      "text": "הוּא חָזַר בִּתְשׁוּבָה לִפְנֵי שָׁנָה.",
+      "tr": "He became religious a year ago.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -948,12 +1183,38 @@
    "lemma": "נִכְנַס",
    "pos": "VERB",
    "senses": [
-    "verb.enter"
+    "verb.enter",
+    "verb.bumpinto"
    ],
-   "root": "כ־נ־ס",
-   "binyan": "nifal",
    "translit": "nichnas",
-   "note": "“To go in, come in”, with לְ: נִכְנָס לַחֶדֶר “goes into the room”. A nif‘al verb: the imperative and the infinitive start with הִ: הִכָּנֵס!, לְהִכָּנֵס.",
+   "features": {
+    "spelling": "נכנס",
+    "root": "כ נ ס",
+    "binyan": "nifal",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יִכָּנֵס",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "be",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "כְּנִיסָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "נִכְנַס",
     "V;PRS;SG;MASC": "נִכְנָס",
@@ -977,6 +1238,7 @@
     "V;FUT;2;SG;FEM": "תיכנסי",
     "V;FUT;2;PL;MASC": "תיכנסו"
    },
+   "note": "“To go in, come in”, with לְ: נִכְנָס לַחֶדֶר “goes into the room”. A nif‘al verb: the imperative and the infinitive start with הִ: הִכָּנֵס!, לְהִכָּנֵס.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1003,14 +1265,16 @@
       "def": "to get into (a state): נִכְנַס לְלַחַץ “got stressed”",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "to bump into (בְּ…): נִכְנַס בַּקִּיר “drove into the wall”",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.bumpinto"
      }
     ],
     "examples": [
@@ -1041,6 +1305,13 @@
       "register": "colloquial",
       "context": "feelings",
       "sense": "s2"
+     },
+     {
+      "text": "הוּא נִכְנַס בַּקִּיר עִם הַמְּכוֹנִית.",
+      "tr": "He drove into the wall with the car.",
+      "register": "colloquial",
+      "context": "accident",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1114,12 +1385,46 @@
    "lemma": "יָצָא",
    "pos": "VERB",
    "senses": [
-    "verb.leave"
+    "verb.leave",
+    "verb.turnout",
+    "verb.date"
    ],
-   "root": "י־צ־א",
-   "binyan": "paal",
    "translit": "yatsa",
-   "note": "“To go out (of), leave (a place)”, with מִ: יוֹצֵא מֵהַבַּיִת. Leaving a person or a place behind for good is עָזַב. The י falls away: צֵא!, לָצֵאת.",
+   "features": {
+    "spelling": "יצא",
+    "root": "י צ א",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-yod",
+     "lamed-alef"
+    ],
+    "future": "יֵצֵא",
+    "governs": [
+     {
+      "prep": "mi",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s3"
+      ]
+     },
+     {
+      "prep": "im",
+      "senses": [
+       "s4"
+      ]
+     }
+    ],
+    "verbalNoun": "יְצִיאָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "יָצָא",
     "V;PRS;SG;MASC": "יוֹצֵא",
@@ -1134,6 +1439,14 @@
     "V;FUT;2;SG;FEM": "תֵּצְאִי",
     "V;FUT;2;PL;MASC": "תֵּצְאוּ"
    },
+   "note": "“To go out (of), leave (a place)”, with מִ: יוֹצֵא מֵהַבַּיִת. Leaving a person or a place behind for good is עָזַב. The י falls away: צֵא!, לָצֵאת.",
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "how one leaves",
+     "value": "goes out of a place (יָצָא מִ…)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1160,21 +1473,24 @@
       "def": "to depart (a train, a bus, a flight)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "to come out, turn out, result (הָעוּגָה יָצְאָה טוֹבָה “the cake came out well”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.turnout"
      },
      {
       "id": "s4",
       "def": "to go out (in the evening), date (יוֹצֵא עִם …)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.date"
      }
     ],
     "examples": [
@@ -1285,12 +1601,39 @@
    "lemma": "עָזַב",
    "pos": "VERB",
    "senses": [
-    "verb.leave"
+    "verb.leave",
+    "verb.leavealone"
    ],
-   "root": "ע־ז־ב",
-   "binyan": "paal",
    "translit": "azav",
-   "note": "“To leave (behind)”: a place, a job, a person — for good or for a long time; the object takes אֶת: עָזַב אֶת הָעִיר. Simply going out of a room is יָצָא מִ…",
+   "features": {
+    "spelling": "עזב",
+    "root": "ע ז ב",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-guttural"
+    ],
+    "future": "יַעֲזֹב",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "עֲזִיבָה",
+    "meaningForms": [
+     {
+      "form": "עֲזֹב, עִזְבִי, עִזְבוּ",
+      "senses": [
+       "s2"
+      ],
+      "note": "mostly the imperative: עֲזֹב! “forget it, leave it!”"
+     }
+    ]
+   },
    "forms": {
     "V;PST;3;SG;MASC": "עָזַב",
     "V;PRS;SG;MASC": "עוֹזֵב",
@@ -1310,6 +1653,14 @@
     "V;IMP;2;SG;MASC": "עזוב",
     "V;FUT;2;SG;MASC": "תעזוב"
    },
+   "note": "“To leave (behind)”: a place, a job, a person — for good or for a long time; the object takes אֶת: עָזַב אֶת הָעִיר. Simply going out of a room is יָצָא מִ…",
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "how one leaves",
+     "value": "leaves behind for good (עָזַב אֶת …)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1336,14 +1687,16 @@
       "def": "to leave alone, let be (עֲזֹב! “forget it!”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.leavealone"
      },
      {
       "id": "s3",
       "def": "to abandon",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1438,12 +1791,45 @@
    "lemma": "הִגִּיעַ",
    "pos": "VERB",
    "senses": [
-    "verb.arrive"
+    "verb.arrive",
+    "verb.deserve"
    ],
-   "root": "נ־ג־ע",
-   "binyan": "hifil",
    "translit": "higia",
-   "note": "To arrive, reach; the destination takes לְ: מַגִּיעַ לַתַּחֲנָה. A hif‘il verb: present מַגִּיעַ, imperative הַגַּע (rare: people say תַּגִּיעַ).",
+   "features": {
+    "spelling": "הגיע",
+    "root": "נ ג ע",
+    "binyan": "hifil",
+    "rootClass": [
+     "pe-nun",
+     "lamed-guttural"
+    ],
+    "future": "יַגִּיעַ",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "prep": "mi",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "הַגָּעָה",
+    "meaningForms": [
+     {
+      "form": "מַגִּיעַ",
+      "senses": [
+       "s2"
+      ],
+      "note": "mostly the impersonal present: מַגִּיעַ לְךָ “you deserve it”; past הִגִּיעַ לוֹ"
+     }
+    ]
+   },
    "forms": {
     "V;PST;3;SG;MASC": "הִגִּיעַ",
     "V;PRS;SG;MASC": "מַגִּיעַ",
@@ -1458,6 +1844,7 @@
     "V;FUT;2;SG;FEM": "תַּגִּיעִי",
     "V;FUT;2;PL;MASC": "תַּגִּיעוּ"
    },
+   "note": "To arrive, reach; the destination takes לְ: מַגִּיעַ לַתַּחֲנָה. A hif‘il verb: present מַגִּיעַ, imperative הַגַּע (rare: people say תַּגִּיעַ).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1484,14 +1871,16 @@
       "def": "to be due, deserve (מַגִּיעַ לְ… “… deserves”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.deserve"
      },
      {
       "id": "s3",
       "def": "to come from (origin): מַגִּיעַ מִ…",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1583,10 +1972,34 @@
    "senses": [
     "verb.stay"
    ],
-   "root": "שׁ־א־ר",
-   "binyan": "nifal",
-   "translit": "nishar",
-   "note": "To stay, remain; the place takes בְּ: נִשְׁאָר בַּבַּיִת. Also “to be left (over)”. Imperative הִשָּׁאֵר, infinitive לְהִשָּׁאֵר.",
+   "translit": "nish'ar",
+   "features": {
+    "spelling": "נשאר",
+    "root": "שׁ א ר",
+    "binyan": "nifal",
+    "rootClass": [
+     "ayin-guttural"
+    ],
+    "future": "יִשָּׁאֵר",
+    "governs": [
+     {
+      "prep": "be",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "le",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "הִשָּׁאֲרוּת",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "נִשְׁאַר",
     "V;PRS;SG;MASC": "נִשְׁאָר",
@@ -1610,6 +2023,7 @@
     "V;FUT;2;SG;FEM": "תישארי",
     "V;FUT;2;PL;MASC": "תישארו"
    },
+   "note": "To stay, remain; the place takes בְּ: נִשְׁאָר בַּבַּיִת. Also “to be left (over)”. Imperative הִשָּׁאֵר, infinitive לְהִשָּׁאֵר.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1636,7 +2050,8 @@
       "def": "to be left (over)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1735,12 +2150,35 @@
    "lemma": "חִכָּה",
    "pos": "VERB",
    "senses": [
-    "verb.wait"
+    "verb.wait",
+    "verb.lookforward"
    ],
-   "root": "ח־כ־ה",
-   "binyan": "piel",
    "translit": "chika",
-   "note": "To wait; what you wait for takes לְ: מְחַכֶּה לָאוֹטוֹבּוּס “waits for the bus”. A pi‘el verb: present מְחַכֶּה, imperative חַכֵּה, infinitive לְחַכּוֹת.",
+   "features": {
+    "spelling": "חיכה",
+    "root": "ח כ ה",
+    "binyan": "piel",
+    "rootClass": [
+     "lamed-he",
+     "pe-guttural"
+    ],
+    "future": "יְחַכֶּה",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "no verbal noun in everyday use (חִכּוּי is rare); “waiting” is הַמְתָּנָה, from הִמְתִּין"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "חִכָּה",
     "V;PRS;SG;MASC": "מְחַכֶּה",
@@ -1758,6 +2196,7 @@
    "plene": {
     "V;PST;3;SG;MASC": "חיכה"
    },
+   "note": "To wait; what you wait for takes לְ: מְחַכֶּה לָאוֹטוֹבּוּס “waits for the bus”. A pi‘el verb: present מְחַכֶּה, imperative חַכֵּה, infinitive לְחַכּוֹת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1784,7 +2223,8 @@
       "def": "to look forward to (מְחַכֶּה לְ… “can’t wait for …”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.lookforward"
      }
     ],
     "examples": [
@@ -1858,277 +2298,6 @@
    }
   },
   {
-   "id": "he:al-imp",
-   "lemma": "אַל",
-   "pos": "ADV",
-   "senses": [],
-   "translit": "al",
-   "role": "“don’t”: the negation of commands, always followed by the future (2nd person): אַל תֵּלֵךְ “don’t go!”, אַל תְּחַכִּי “don’t wait! (to a woman)”. Never with the imperative itself (*אַל לֵךְ).",
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
-   },
-   "profile": {
-    "frequency": "A1",
-    "status": "current",
-    "register": [
-     "neutral"
-    ],
-    "connotation": "neutral",
-    "feeling": "Warnings and kind advice: don’t worry, don’t forget.",
-    "senses": [
-     {
-      "id": "s1",
-      "def": "don’t (+ future, 2nd person): a prohibition or a request not to do something",
-      "register": [
-       "neutral"
-      ]
-     }
-    ],
-    "examples": [
-     {
-      "text": "אַל תֵּלֵךְ!",
-      "tr": "Don’t go! (to a man)",
-      "register": "neutral",
-      "context": "requests",
-      "sense": "s1"
-     },
-     {
-      "text": "אַל תִּדְאֲגִי.",
-      "tr": "Don’t worry. (to a woman)",
-      "register": "neutral",
-      "context": "comfort",
-      "sense": "s1"
-     },
-     {
-      "text": "אַל תִּשְׁכַּח אֶת הַמַּפְתֵּחַ!",
-      "tr": "Don’t forget the key! (to a man)",
-      "register": "neutral",
-      "context": "home",
-      "sense": "s1"
-     }
-    ],
-    "collocations": [
-     {
-      "text": "אַל תִּדְאַג",
-      "tr": "don’t worry (to a man)"
-     },
-     {
-      "text": "אַל דְּאָגָה",
-      "tr": "no worries"
-     },
-     {
-      "text": "אַל תִּשְׁכַּח",
-      "tr": "don’t forget"
-     }
-    ],
-    "phrases": [
-     {
-      "text": "אַל תִּסְתַּכֵּל בַּקַּנְקַן אֶלָּא בְּמַה שֶּׁיֵּשׁ בּוֹ",
-      "tr": "look not at the jug but at what is in it",
-      "kind": "quote",
-      "meaning": "don’t judge by appearances",
-      "register": "literary",
-      "source": "Pirkei Avot, chapter 4 (Rabbi Meir)"
-     }
-    ],
-    "synonyms": [
-     {
-      "word": "לֹא",
-      "register": "neutral",
-      "nuance": "with the future: a firm, lasting prohibition — the Ten Commandments say לֹא תִּגְנֹב “you shall not steal”"
-     },
-     {
-      "word": "אָסוּר",
-      "register": "neutral",
-      "nuance": "“it is forbidden” + infinitive: אָסוּר לְהִכָּנֵס “no entry” — on signs and for rules"
-     }
-    ],
-    "etymology": {
-     "text": "Cognate with Phoenician 𐤀𐤋 (ʾl), Ugaritic ảl and Akkadian ul (Wiktionary).",
-     "src": "Wiktionary (kaikki.org)"
-    },
-    "funFacts": [
-     "Arabic says “don’t” with لَا + the jussive (لَا تَذْهَبْ “don’t go”) — the same idea as Hebrew אַל + future, with another word."
-    ],
-    "pitfalls": [
-     "Only with the future: אַל תֵּלֵךְ, never *אַל לֵךְ and never *לֹא לֵךְ.",
-     "Unvowelled אל is also אֶל “to” and אֵל “god” — the context decides."
-    ],
-    "subtleties": [
-     "לֹא + future is a general rule or an order (“you won’t / you shall not”); אַל + future is the everyday “don’t”."
-    ]
-   }
-  },
-  {
-   "id": "he:lean",
-   "lemma": "לְאָן",
-   "pos": "ADV",
-   "senses": [],
-   "translit": "lean",
-   "role": "“where to?” — the question word for a direction: לְאָן אַתָּה הוֹלֵךְ? “where are you going?”. (Where, at what place = אֵיפֹה; where from = מֵאֵיפֹה.)",
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
-   },
-   "profile": {
-    "frequency": "A1",
-    "status": "current",
-    "register": [
-     "neutral"
-    ],
-    "connotation": "neutral",
-    "feeling": "Before a trip: where to?",
-    "senses": [
-     {
-      "id": "s1",
-      "def": "where to? whither?",
-      "register": [
-       "neutral"
-      ]
-     }
-    ],
-    "examples": [
-     {
-      "text": "לְאָן אַתָּה הוֹלֵךְ?",
-      "tr": "Where are you (m.) going?",
-      "register": "neutral",
-      "context": "conversation",
-      "sense": "s1"
-     },
-     {
-      "text": "לְאָן הָאוֹטוֹבּוּס הַזֶּה נוֹסֵעַ?",
-      "tr": "Where does this bus go?",
-      "register": "neutral",
-      "context": "transport",
-      "sense": "s1"
-     },
-     {
-      "text": "לְאָן אַתֶּם נוֹסְעִים בַּקַּיִץ?",
-      "tr": "Where are you (pl.) travelling in the summer?",
-      "register": "neutral",
-      "context": "holidays",
-      "sense": "s1"
-     }
-    ],
-    "collocations": [
-     {
-      "text": "לְאָן הוֹלְכִים?",
-      "tr": "where are we / you going?"
-     },
-     {
-      "text": "לְאָן נוֹסְעִים?",
-      "tr": "where are we going (by car)?"
-     }
-    ],
-    "phrases": [],
-    "synonyms": [
-     {
-      "word": "לְאֵיפֹה",
-      "register": "colloquial",
-      "nuance": "“where to” in casual speech — לְאָן is the correct form"
-     }
-    ],
-    "etymology": {
-     "text": "From לְ “to” + אָן “where” (Wiktionary). אָן alone is Biblical: עַד אָנָה “until when, how long?”.",
-     "src": "Wiktionary (kaikki.org)"
-    },
-    "funFacts": [
-     "German keeps the same three questions apart as Hebrew: wo? (אֵיפֹה), wohin? (לְאָן), woher? (מֵאֵיפֹה)."
-    ],
-    "pitfalls": [
-     "With movement ask לְאָן, not אֵיפֹה: לְאָן אַתָּה נוֹסֵעַ? — like German wohin vs wo."
-    ],
-    "subtleties": [
-     "Casual speech also says לְאֵיפֹה; write לְאָן."
-    ]
-   }
-  },
-  {
-   "id": "he:habayta",
-   "lemma": "הַבַּיְתָה",
-   "pos": "ADV",
-   "senses": [],
-   "translit": "habayta",
-   "role": "“home(wards), to the house” — one word, with no לְ: הוֹלֵךְ הַבַּיְתָה “goes home”, חוֹזֵר הַבַּיְתָה. (At home = בַּבַּיִת.)",
-   "ref": {
-    "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
-   },
-   "profile": {
-    "frequency": "A1",
-    "status": "current",
-    "register": [
-     "neutral"
-    ],
-    "connotation": "positive",
-    "feeling": "The end of the day: going home.",
-    "senses": [
-     {
-      "id": "s1",
-      "def": "home, homewards, to (one’s) home",
-      "register": [
-       "neutral"
-      ]
-     }
-    ],
-    "examples": [
-     {
-      "text": "אֲנִי הוֹלֵךְ הַבַּיְתָה.",
-      "tr": "I (m.) am going home.",
-      "register": "neutral",
-      "context": "daily routine",
-      "sense": "s1"
-     },
-     {
-      "text": "בּוֹאוּ הַבַּיְתָה!",
-      "tr": "Come home! (to several people)",
-      "register": "neutral",
-      "context": "family",
-      "sense": "s1"
-     },
-     {
-      "text": "מָתַי אַתָּה חוֹזֵר הַבַּיְתָה?",
-      "tr": "When are you (m.) coming home?",
-      "register": "neutral",
-      "context": "family",
-      "sense": "s1"
-     }
-    ],
-    "collocations": [
-     {
-      "text": "הוֹלֵךְ הַבַּיְתָה",
-      "tr": "goes home"
-     },
-     {
-      "text": "חוֹזֵר הַבַּיְתָה",
-      "tr": "comes back home"
-     }
-    ],
-    "phrases": [],
-    "synonyms": [
-     {
-      "word": "לַבַּיִת",
-      "register": "neutral",
-      "nuance": "“to the house” — the same with the preposition; הַבַּיְתָה is the usual word for going home"
-     }
-    ],
-    "etymology": {
-     "text": "הַבַּיִת “the house” + the old ending ־ָה “towards” (Wiktionary). The same ending is in שְׂמֹאלָה “to the left”, יָמִינָה “to the right” and הַחוּצָה “outside”.",
-     "src": "Wiktionary (kaikki.org)"
-    },
-    "funFacts": [
-     "The ending ־ָה “towards” is a fossil of an old case ending, still alive in a few words: צָפוֹנָה “northwards”, יָמִינָה, הַבַּיְתָה."
-    ],
-    "pitfalls": [
-     "No לְ before it: הוֹלֵךְ הַבַּיְתָה (not *לְהַבַּיְתָה). Being at home is בַּבַּיִת."
-    ],
-    "subtleties": [
-     "The ending ־ָה is unstressed: habáyta."
-    ]
-   }
-  },
-  {
    "id": "he:otobus",
    "lemma": "אוֹטוֹבּוּס",
    "pos": "NOUN",
@@ -2137,12 +2306,48 @@
    ],
    "gender": "MASC",
    "translit": "otobus",
+   "features": {
+    "spelling": "אוטובוס",
+    "root": {
+     "none": "a loanword (an internationalism, from French autobus): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "אוֹטוֹבּוּסִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אוֹטוֹבּוּס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אוֹטוֹבּוּסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אוֹטוֹבּוּס",
     "N;SG;DEF": "הָאוֹטוֹבּוּס",
     "N;PL;INDF": "אוֹטוֹבּוּסִים",
     "N;PL;DEF": "הָאוֹטוֹבּוּסִים",
-    "N;SG;DEF;PFX": "אוֹטוֹבּוּס"
+    "N;SG;DEF;PFX": "אוֹטוֹבּוּס",
+    "N;SG;CONST": "אוֹטוֹבּוּס",
+    "N;PL;CONST": "אוֹטוֹבּוּסֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2236,12 +2441,44 @@
    ],
    "gender": "FEM",
    "translit": "rakevet",
+   "features": {
+    "spelling": "רכבת",
+    "root": "ר כ ב",
+    "pattern": "קַטֶּלֶת",
+    "plurals": [
+     {
+      "form": "רַכָּבוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "רַכֶּבֶת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "רַכְּבוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "רַכֶּבֶת",
     "N;SG;DEF": "הָרַכֶּבֶת",
     "N;PL;INDF": "רַכָּבוֹת",
     "N;PL;DEF": "הָרַכָּבוֹת",
-    "N;SG;DEF;PFX": "רַכֶּבֶת"
+    "N;SG;DEF;PFX": "רַכֶּבֶת",
+    "N;SG;CONST": "רַכֶּבֶת",
+    "N;PL;CONST": "רַכְּבוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2336,11 +2573,45 @@
    ],
    "gender": "MASC",
    "translit": "matos",
+   "features": {
+    "spelling": "מטוס",
+    "root": "ט ו ס",
+    "pattern": {
+     "none": "a noun of the hollow root ט־ו־ס with the prefix מָ־; no standard pattern is given"
+    },
+    "plurals": [
+     {
+      "form": "מְטוֹסִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְטוֹס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְטוֹסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מָטוֹס",
     "N;SG;DEF": "הַמָּטוֹס",
     "N;PL;INDF": "מְטוֹסִים",
-    "N;PL;DEF": "הַמְּטוֹסִים"
+    "N;PL;DEF": "הַמְּטוֹסִים",
+    "N;SG;CONST": "מְטוֹס",
+    "N;PL;CONST": "מְטוֹסֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2434,11 +2705,45 @@
    ],
    "gender": "FEM",
    "translit": "monit",
+   "features": {
+    "spelling": "מונית",
+    "root": "מ נ ה",
+    "pattern": {
+     "none": "built from מוֹנֶה “meter” with the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "מוֹנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מוֹנִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מוֹנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מוֹנִית",
     "N;SG;DEF": "הַמּוֹנִית",
     "N;PL;INDF": "מוֹנִיּוֹת",
-    "N;PL;DEF": "הַמּוֹנִיּוֹת"
+    "N;PL;DEF": "הַמּוֹנִיּוֹת",
+    "N;SG;CONST": "מוֹנִית",
+    "N;PL;CONST": "מוֹנִיּוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2532,18 +2837,53 @@
    ],
    "gender": "FEM",
    "translit": "mechonit",
+   "features": {
+    "spelling": "מכונית",
+    "root": "כ ו ן",
+    "pattern": {
+     "none": "built from מְכוֹנָה “machine” with the suffix ־ִית, not a pattern"
+    },
+    "plurals": [
+     {
+      "form": "מְכוֹנִיּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְכוֹנִית"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְכוֹנִיּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מְכוֹנִית",
     "N;SG;DEF": "הַמְּכוֹנִית",
     "N;PL;INDF": "מְכוֹנִיּוֹת",
     "N;PL;DEF": "הַמְּכוֹנִיּוֹת",
-    "N;SG;DEF;PFX": "מְּכוֹנִית"
+    "N;SG;DEF;PFX": "מְּכוֹנִית",
+    "N;SG;CONST": "מְכוֹנִית",
+    "N;PL;CONST": "מְכוֹנִיּוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
     "override": {
-     "N;PL;INDF": "The plural of nouns in ־ִית is written with a dagesh in the י (־ִיּוֹת), as Wiktionary itself vowels מוֹנִית → מוֹנִיּוֹת; its table for מְכוֹנִית omits the dagesh."
+     "N;PL;INDF": "The plural of nouns in ־ִית is written with a dagesh in the י (־ִיּוֹת), as Wiktionary itself vowels מוֹנִית → מוֹנִיּוֹת; its table for מְכוֹנִית omits the dagesh.",
+     "N;PL;CONST": "pointed with a dagesh in the י like the plural itself (־ִיּוֹת, see N;PL;INDF); Wiktionary’s table omits the dagesh."
     }
    },
    "profile": {
@@ -2634,21 +2974,44 @@
    "id": "he:ofanayim",
    "lemma": "אוֹפַנַּיִם",
    "pos": "NOUN",
+   "class": "plt",
    "senses": [
     "tr.bicycle"
    ],
-   "class": "plt",
    "gender": "MASC",
    "translit": "ofanayim",
-   "note": "Only plural (a dual form, “two wheels”), masculine: הָאוֹפַנַּיִם חֲדָשִׁים “the bicycle is new”.",
+   "features": {
+    "spelling": "אופניים",
+    "root": "א פ ן",
+    "pattern": {
+     "none": "the dual of אוֹפַן “wheel”, not a pattern of its own"
+    },
+    "plurals": {
+     "none": "dual in form: the same word is one bicycle and many bicycles"
+    },
+    "dual": {
+     "none": "the word itself is a dual (“two wheels”)"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "אוֹפַנֵּי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;PL;INDF": "אוֹפַנַּיִם",
-    "N;PL;DEF": "הָאוֹפַנַּיִם"
+    "N;PL;DEF": "הָאוֹפַנַּיִם",
+    "N;PL;CONST": "אוֹפַנֵּי"
    },
    "plene": {
     "N;PL;INDF": "אופניים",
     "N;PL;DEF": "האופניים"
    },
+   "note": "Only plural (a dual form, “two wheels”), masculine: הָאוֹפַנַּיִם חֲדָשִׁים “the bicycle is new”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2742,13 +3105,56 @@
    ],
    "gender": "FEM",
    "translit": "sira",
-   "note": "A boat (small): a rowing boat, a fishing boat. A big ship is סְפִינָה (or אֳנִיָּה).",
+   "features": {
+    "spelling": "סירה",
+    "root": {
+     "none": "a primary noun with no verb root in use"
+    },
+    "pattern": {
+     "none": "a primary noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "סִירוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סִירַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סִירוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סִירָה",
     "N;SG;DEF": "הַסִּירָה",
     "N;PL;INDF": "סִירוֹת",
-    "N;PL;DEF": "הַסִּירוֹת"
+    "N;PL;DEF": "הַסִּירוֹת",
+    "N;SG;CONST": "סִירַת",
+    "N;PL;CONST": "סִירוֹת"
    },
+   "note": "A boat (small): a rowing boat, a fishing boat. A big ship is סְפִינָה (or אֳנִיָּה).",
+   "contrasts": [
+    {
+     "concept": "tr.boat",
+     "axis": "size",
+     "value": "a small boat"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2842,17 +3248,58 @@
    "lemma": "סְפִינָה",
    "pos": "NOUN",
    "senses": [
-    "tr.boat"
+    "tr.boat",
+    "relig.nave"
    ],
    "gender": "FEM",
    "translit": "sfina",
-   "note": "A ship (big). A small boat is סִירָה.",
+   "features": {
+    "spelling": "ספינה",
+    "root": "ס פ ן",
+    "pattern": "קְטִילָה",
+    "plurals": [
+     {
+      "form": "סְפִינוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סְפִינַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סְפִינוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סְפִינָה",
     "N;SG;DEF": "הַסְּפִינָה",
     "N;PL;INDF": "סְפִינוֹת",
-    "N;PL;DEF": "הַסְּפִינוֹת"
+    "N;PL;DEF": "הַסְּפִינוֹת",
+    "N;SG;CONST": "סְפִינַת",
+    "N;PL;CONST": "סְפִינוֹת"
    },
+   "note": "A ship (big). A small boat is סִירָה.",
+   "contrasts": [
+    {
+     "concept": "tr.boat",
+     "axis": "size",
+     "value": "a ship, a large boat"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2879,7 +3326,8 @@
       "def": "nave (of a church)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "relig.nave"
      }
     ],
     "examples": [
@@ -2953,15 +3401,53 @@
    "lemma": "כַּרְטִיס",
    "pos": "NOUN",
    "senses": [
-    "tr.ticket"
+    "tr.ticket",
+    "obj.card"
    ],
    "gender": "MASC",
    "translit": "kartis",
+   "features": {
+    "spelling": "כרטיס",
+    "root": {
+     "none": "a loanword (Greek χάρτης): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "כַּרְטִיסִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "כַּרְטִיס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "כַּרְטִיסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "כַּרְטִיס",
     "N;SG;DEF": "הַכַּרְטִיס",
     "N;PL;INDF": "כַּרְטִיסִים",
-    "N;PL;DEF": "הַכַּרְטִיסִים"
+    "N;PL;DEF": "הַכַּרְטִיסִים",
+    "N;SG;CONST": "כַּרְטִיס",
+    "N;PL;CONST": "כַּרְטִיסֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2989,7 +3475,8 @@
       "def": "card",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.card"
      }
     ],
     "examples": [
@@ -3061,6 +3548,13 @@
     "tr.onfoot"
    ],
    "translit": "baregel",
+   "features": {
+    "spelling": "ברגל",
+    "derivedFrom": "בְּ + הָ + רֶגֶל “foot”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "note": "One word: בְּ + הָ + רֶגֶל “by the foot”. הוֹלֵךְ בָּרֶגֶל “walks, goes on foot”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",

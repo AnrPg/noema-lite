@@ -8,8 +8,34 @@
    "senses": [
     "time.january"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.january",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "kānūn aṯ-ṯānī",
    "forms": {
     "N;NOM;SG;DEF": "كَانُونُ الثَّانِي",
@@ -110,8 +136,34 @@
    "senses": [
     "time.february"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.february",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "šubāṭ",
    "forms": {
     "N;NOM;SG;DEF": "شُبَاطُ",
@@ -212,8 +264,34 @@
    "senses": [
     "time.march"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.march",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ʾāḏār",
    "forms": {
     "N;NOM;SG;DEF": "آذَارُ",
@@ -314,8 +392,34 @@
    "senses": [
     "time.april"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.april",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "naysān",
    "forms": {
     "N;NOM;SG;DEF": "نَيْسَانُ",
@@ -417,8 +521,34 @@
    "senses": [
     "time.may"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.may",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ʾayyār",
    "forms": {
     "N;NOM;SG;DEF": "أَيَّارُ",
@@ -519,8 +649,34 @@
    "senses": [
     "time.june"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.june",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ḥazīrān",
    "forms": {
     "N;NOM;SG;DEF": "حَزِيرَانُ",
@@ -621,8 +777,34 @@
    "senses": [
     "time.july"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.july",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "tammūz",
    "forms": {
     "N;NOM;SG;DEF": "تَمُّوزُ",
@@ -717,14 +899,40 @@
   },
   {
    "id": "ar:ab_month",
-   "lemma": "آبُ",
+   "lemma": "آبْ",
    "pos": "NOUN",
    "class": "def",
    "senses": [
     "time.august"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.august",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ʾāb",
    "forms": {
     "N;NOM;SG;DEF": "آبُ",
@@ -826,8 +1034,34 @@
    "senses": [
     "time.september"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.september",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ʾaylūl",
    "forms": {
     "N;NOM;SG;DEF": "أَيْلُولُ",
@@ -928,8 +1162,34 @@
    "senses": [
     "time.october"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.october",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "tišrīn al-ʾawwal",
    "forms": {
     "N;NOM;SG;DEF": "تِشْرِينُ الْأَوَّلُ",
@@ -1030,8 +1290,34 @@
    "senses": [
     "time.november"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.november",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "tišrīn aṯ-ṯānī",
    "forms": {
     "N;NOM;SG;DEF": "تِشْرِينُ الثَّانِي",
@@ -1132,8 +1418,34 @@
    "senses": [
     "time.december"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Syriac, from Akkadian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.december",
+     "axis": "region",
+     "value": "Syria, Lebanon, Jordan, Palestine, Iraq"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "kānūn al-ʾawwal",
    "forms": {
     "N;NOM;SG;DEF": "كَانُونُ الْأَوَّلُ",
@@ -1234,8 +1546,34 @@
    "senses": [
     "time.january"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.january",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "yanāyir",
    "forms": {
     "N;NOM;SG;DEF": "يَنَايِرُ",
@@ -1336,8 +1674,34 @@
    "senses": [
     "time.february"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.february",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "fibrāyir",
    "forms": {
     "N;NOM;SG;DEF": "فِبْرَايِرُ",
@@ -1438,8 +1802,34 @@
    "senses": [
     "time.march"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.march",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "māris",
    "forms": {
     "N;NOM;SG;DEF": "مَارِسُ",
@@ -1540,8 +1930,34 @@
    "senses": [
     "time.april"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.april",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ʾabrīl",
    "forms": {
     "N;NOM;SG;DEF": "أَبْرِيلُ",
@@ -1641,6 +2057,33 @@
    "class": "def",
    "senses": [
     "time.may"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.may",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
    ],
    "gender": "MASC",
    "translit": "māyū",
@@ -1742,6 +2185,33 @@
    "class": "def",
    "senses": [
     "time.june"
+   ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.june",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
    ],
    "gender": "MASC",
    "translit": "yūnyū",
@@ -1845,6 +2315,33 @@
    "senses": [
     "time.july"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "invariable",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.july",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
    "translit": "yūlyū",
    "forms": {
@@ -1947,8 +2444,34 @@
    "senses": [
     "time.august"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.august",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ʾaġusṭus",
    "forms": {
     "N;NOM;SG;DEF": "أَغُسْطُسُ",
@@ -2049,8 +2572,34 @@
    "senses": [
     "time.september"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.september",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "sibtimbir",
    "forms": {
     "N;NOM;SG;DEF": "سِبْتِمْبِرُ",
@@ -2151,8 +2700,34 @@
    "senses": [
     "time.october"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.october",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "ʾuktūbir",
    "forms": {
     "N;NOM;SG;DEF": "أُكْتُوبِرُ",
@@ -2253,8 +2828,34 @@
    "senses": [
     "time.november"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.november",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "nūfimbir",
    "forms": {
     "N;NOM;SG;DEF": "نُوفِمْبِرُ",
@@ -2355,8 +2956,34 @@
    "senses": [
     "time.december"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Latin, via European languages): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a month name: not used in the plural"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.december",
+     "axis": "region",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
    "gender": "MASC",
-   "diptote": true,
    "translit": "dīsimbir",
    "forms": {
     "N;NOM;SG;DEF": "دِيسِمْبِرُ",
@@ -2452,10 +3079,26 @@
    "pos": "NOUN",
    "class": "sg",
    "senses": [
-    "time.spring"
+    "time.spring",
+    "nature.pasture"
    ],
+   "features": {
+    "root": "ر ب ع",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every spring: كُلَّ رَبِيعٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ر ب ع",
    "translit": "rabīʿ",
    "forms": {
     "N;NOM;SG;INDF": "رَبِيعٌ",
@@ -2491,7 +3134,8 @@
       "def": "spring grass, pasture (Wiktionary)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "nature.pasture"
      }
     ],
     "examples": [
@@ -2515,6 +3159,13 @@
       "register": "neutral",
       "context": "history",
       "sense": "s1"
+     },
+     {
+      "text": "رَعَتِ الْإِبِلُ الرَّبِيعَ بَعْدَ الْمَطَرِ.",
+      "tr": "The camels grazed on the fresh spring pasture after the rain.",
+      "register": "literary",
+      "context": "desert life",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2559,8 +3210,23 @@
    "senses": [
     "time.summer"
    ],
+   "features": {
+    "root": "ص ي ف",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every summer: كُلَّ صَيْفٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ص ي ف",
    "translit": "ṣayf",
    "forms": {
     "N;NOM;SG;INDF": "صَيْفٌ",
@@ -2666,8 +3332,23 @@
    "senses": [
     "time.autumn"
    ],
+   "features": {
+    "root": "خ ر ف",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every autumn: كُلَّ خَرِيفٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "خ ر ف",
    "translit": "ḫarīf",
    "forms": {
     "N;NOM;SG;INDF": "خَرِيفٌ",
@@ -2703,7 +3384,8 @@
       "def": "harvest; a year (one agricultural cycle) (Wiktionary)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2769,8 +3451,23 @@
    "senses": [
     "time.winter"
    ],
+   "features": {
+    "root": "ش ت و",
+    "pattern": "فِعَال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a season: used in the singular (every winter: كُلَّ شِتَاءٍ)"
+    },
+    "dual": {
+     "none": "a season: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ش ت و",
    "translit": "šitāʾ",
    "forms": {
     "N;NOM;SG;INDF": "شِتَاءٌ",
@@ -2864,8 +3561,36 @@
    "senses": [
     "time.week"
    ],
+   "features": {
+    "root": "س ب ع",
+    "pattern": "أُفْعُول",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَسَابِيع",
+      "kind": "broken",
+      "pattern": "أَفَاعِيل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "أُسْبُوعَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "register",
+     "value": "the standard word"
+    }
+   ],
    "gender": "MASC",
-   "root": "س ب ع",
    "translit": "ʾusbūʿ",
    "forms": {
     "N;NOM;SG;INDF": "أُسْبُوعٌ",
@@ -2974,10 +3699,43 @@
    "lemma": "شَهْر",
    "pos": "NOUN",
    "senses": [
-    "time.month"
+    "time.month",
+    "nature.newmoon"
    ],
+   "features": {
+    "root": "ش ه ر",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَشْهُر",
+      "kind": "broken",
+      "pattern": "أَفْعُل",
+      "declension": "triptote",
+      "note": "after the numbers 3–10: ثَلَاثَةُ أَشْهُرٍ",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "شُهُور",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "months in general",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "شَهْرَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "root": "ش ه ر",
    "translit": "šahr",
    "forms": {
     "N;NOM;SG;INDF": "شَهْرٌ",
@@ -3045,7 +3803,8 @@
       "def": "new moon (Wiktionary)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "nature.newmoon"
      }
     ],
     "examples": [
@@ -3069,6 +3828,13 @@
       "register": "neutral",
       "context": "religion",
       "sense": "s1"
+     },
+     {
+      "text": "الشَّهْرُ فِي الْأَصْلِ هُوَ الْهِلَالُ، وَمِنْهُ سُمِّيَ الشَّهْرُ.",
+      "tr": "Originally šahr is the new moon, and the month was named after it.",
+      "register": "literary",
+      "context": "etymology",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3111,8 +3877,44 @@
    "senses": [
     "time.year"
    ],
+   "features": {
+    "root": "س ن و",
+    "pattern": "فَعَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَنَوَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "سِنُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "literary (accusative / genitive سِنِينَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَنَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.year",
+     "axis": "register and use",
+     "value": "year (the most common)"
+    }
+   ],
    "gender": "FEM",
-   "root": "س ن و",
    "translit": "sana",
    "forms": {
     "N;NOM;SG;INDF": "سَنَةٌ",
@@ -3249,8 +4051,36 @@
    "senses": [
     "time.year"
    ],
+   "features": {
+    "root": "ع و م",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَعْوَام",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عَامَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.year",
+     "axis": "register and use",
+     "value": "year (formal; in dates and “this year”: الْعَامَ)"
+    }
+   ],
    "gender": "MASC",
-   "root": "ع و م",
    "translit": "ʿām",
    "forms": {
     "N;NOM;SG;INDF": "عَامٌ",
@@ -3359,10 +4189,42 @@
    "lemma": "سَاعَة",
    "pos": "NOUN",
    "senses": [
-    "time.hour"
+    "time.hour",
+    "obj.clock",
+    "time.oclock",
+    "relig.judgementday"
+   ],
+   "features": {
+    "root": "س و ع",
+    "pattern": "فَعَلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَاعَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "سَاعَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "relig.judgementday",
+     "axis": "expression",
+     "value": "alone: السَّاعَةُ, the Hour (Qurʾān)"
+    }
    ],
    "gender": "FEM",
-   "root": "س و ع",
    "translit": "sāʿa",
    "forms": {
     "N;NOM;SG;INDF": "سَاعَةٌ",
@@ -3410,21 +4272,24 @@
       "def": "clock, watch",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.clock"
      },
      {
       "id": "s3",
       "def": "the time (on the clock): كَمِ السَّاعَةُ؟",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.oclock"
      },
      {
       "id": "s4",
       "def": "the Hour (the Day of Judgement)",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.judgementday"
      }
     ],
     "examples": [
@@ -3455,6 +4320,20 @@
       "register": "neutral",
       "context": "conversation",
       "sense": "s3"
+     },
+     {
+      "text": "السَّاعَةُ الْآنَ الثَّالِثَةُ وَالنِّصْفُ.",
+      "tr": "It is now half past three.",
+      "register": "neutral",
+      "context": "time",
+      "sense": "s3"
+     },
+     {
+      "text": "يَسْأَلُونَكَ عَنِ السَّاعَةِ أَيَّانَ مُرْسَاهَا.",
+      "tr": "They ask you about the Hour: when will it come? (Qurʾān 7:187)",
+      "register": "religious",
+      "context": "Qurʾān",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -3496,10 +4375,33 @@
    "lemma": "دَقِيقَة",
    "pos": "NOUN",
    "senses": [
-    "time.minute"
+    "time.minute",
+    "abstract.detail"
    ],
+   "features": {
+    "root": "د ق ق",
+    "pattern": "فَعِيلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "دَقَائِق",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "دَقِيقَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "د ق ق",
    "translit": "daqīqa",
    "forms": {
     "N;NOM;SG;INDF": "دَقِيقَةٌ",
@@ -3547,7 +4449,8 @@
       "def": "detail, subtlety (plural دَقَائِق)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "abstract.detail"
      }
     ],
     "examples": [
@@ -3571,6 +4474,13 @@
       "register": "neutral",
       "context": "city",
       "sense": "s1"
+     },
+     {
+      "text": "يَعْرِفُ دَقَائِقَ اللُّغَةِ الْعَرَبِيَّةِ.",
+      "tr": "He knows the subtleties of the Arabic language.",
+      "register": "formal",
+      "context": "language",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3611,10 +4521,34 @@
    "lemma": "تَارِيخ",
    "pos": "NOUN",
    "senses": [
-    "time.date"
+    "time.date",
+    "abstract.history"
    ],
+   "features": {
+    "root": "ء ر خ",
+    "pattern": "تَفْعِيل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "تَوَارِيخ",
+      "kind": "broken",
+      "pattern": "تَفَاعِيل",
+      "declension": "diptote",
+      "note": "dates; chronicles (history itself is singular)",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "تَارِيخَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "root": "ء ر خ",
    "translit": "tārīḫ",
    "forms": {
     "N;NOM;SG;INDF": "تَارِيخٌ",
@@ -3662,14 +4596,16 @@
       "def": "history",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.history"
      },
      {
       "id": "s3",
       "def": "chronicle, annals",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -3732,8 +4668,41 @@
    "lemma": "عِيد مِيلَاد",
    "pos": "NOUN",
    "senses": [
-    "time.birthday"
+    "time.birthday",
+    "relig.christmas"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: عِيد (ع و د) + مِيلَاد (و ل د)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَعْيَاد مِيلَاد",
+      "kind": "broken",
+      "declension": "triptote",
+      "note": "the head noun takes the plural: أَعْيَادُ مِيلَادٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عِيدَا مِيلَادٍ",
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "عِيدُ الْمِيلَادِ",
+      "what": "only with the article: Christmas",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "gender": "MASC",
    "translit": "ʿīd mīlād",
    "forms": {
@@ -3800,7 +4769,8 @@
       "def": "عِيدُ الْمِيلَادِ (with the article) — Christmas",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.christmas"
      }
     ],
     "examples": [
@@ -3878,8 +4848,38 @@
    "senses": [
     "time.holiday"
    ],
+   "features": {
+    "root": "ع ط ل",
+    "pattern": "فُعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "عُطْلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "عُطَل",
+      "kind": "broken",
+      "pattern": "فُعَل",
+      "declension": "triptote",
+      "note": "also used",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "عُطْلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ع ط ل",
    "translit": "ʿuṭla",
    "forms": {
     "N;NOM;SG;INDF": "عُطْلَةٌ",
@@ -4013,9 +5013,16 @@
    "lemma": "قَبْلَ",
    "pos": "ADP",
    "senses": [
-    "prep.before"
+    "prep.before",
+    "adv.ago"
    ],
-   "root": "ق ب ل",
+   "features": {
+    "root": "ق ب ل",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "qabla",
    "forms": {
     "ADP": "قَبْلَ",
@@ -4056,7 +5063,8 @@
       "def": "ago: قَبْلَ سَنَةٍ (a year ago)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.ago"
      }
     ],
     "examples": [
@@ -4113,16 +5121,31 @@
     "subtleties": [
      "قَبْلَ + a span of time = ago: قَبْلَ يَوْمَيْنِ (two days ago)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:bada",
    "lemma": "بَعْدَ",
    "pos": "ADP",
    "senses": [
-    "prep.after"
+    "prep.after",
+    "prep.infromnow",
+    "adv.yet"
    ],
-   "root": "ب ع د",
+   "features": {
+    "root": "ب ع د",
+    "kind": "zarf",
+    "meaningForms": [
+     {
+      "form": "بَعْدُ",
+      "what": "with -u, after a negation: yet (لَمْ يَصِلْ بَعْدُ)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ]
+   },
    "translit": "baʿda",
    "forms": {
     "ADP": "بَعْدَ",
@@ -4163,7 +5186,16 @@
       "def": "in (a time from now): بَعْدَ أُسْبُوعٍ (in a week)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.infromnow"
+     },
+     {
+      "id": "s3",
+      "def": "yet — بَعْدُ (with -u) after a negation: لَمْ يَصِلْ بَعْدُ (he has not arrived yet)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.yet"
      }
     ],
     "examples": [
@@ -4187,6 +5219,13 @@
       "register": "neutral",
       "context": "politeness",
       "sense": "s1"
+     },
+     {
+      "text": "لَمْ يَصِلِ الْقِطَارُ بَعْدُ، سَيَصِلُ بَعْدَ عَشْرِ دَقَائِقَ.",
+      "tr": "The train hasn’t arrived yet; it will arrive in ten minutes.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -4231,7 +5270,8 @@
     "subtleties": [
      "بَعْدَ + a span of time = in (from now): بَعْدَ سَاعَةٍ (in an hour)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:hatta",
@@ -4239,7 +5279,35 @@
    "pos": "ADP",
    "class": "bare",
    "senses": [
-    "prep.until"
+    "prep.until",
+    "adv.even",
+    "conj.inorderto"
+   ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.even",
+     "axis": "construction",
+     "value": "even — in any sentence (حَتَّى الْأَطْفَالُ)"
+    },
+    {
+     "concept": "prep.until",
+     "axis": "pairing and range",
+     "value": "until, as far as; also “even”"
+    },
+    {
+     "concept": "conj.inorderto",
+     "axis": "form",
+     "value": "حَتَّى + subjunctive: so that, until"
+    }
    ],
    "translit": "ḥattā",
    "ref": {
@@ -4268,14 +5336,16 @@
       "def": "even (an adverb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.even"
      },
      {
       "id": "s3",
       "def": "so that, in order to (a conjunction)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.inorderto"
      }
     ],
     "examples": [
@@ -4341,7 +5411,8 @@
     "subtleties": [
      "It can also mean “even”: حَتَّى أَنَا (even I)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:mundhu",
@@ -4349,8 +5420,18 @@
    "pos": "ADP",
    "class": "bare",
    "senses": [
-    "prep.since"
+    "prep.since",
+    "prep.for.time"
    ],
+   "features": {
+    "root": {
+     "none": "a basic preposition (a short particle)"
+    },
+    "kind": "harf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "munḏu",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4378,7 +5459,8 @@
       "def": "for (a period up to now); ago (with a past verb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.for.time"
      }
     ],
     "examples": [
@@ -4440,16 +5522,32 @@
     "subtleties": [
      "With a past verb it means “ago”: وَصَلَ مُنْذُ سَاعَةٍ (he arrived an hour ago)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:khilala",
    "lemma": "خِلَالَ",
    "pos": "ADP",
    "senses": [
-    "prep.during"
+    "prep.during",
+    "prep.within",
+    "prep.through"
    ],
-   "root": "خ ل ل",
+   "features": {
+    "root": "خ ل ل",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.during",
+     "axis": "span or simultaneity",
+     "value": "during, within a period; مِنْ خِلَالِ “through”"
+    }
+   ],
    "translit": "ḫilāla",
    "forms": {
     "ADP": "خِلَالَ",
@@ -4490,14 +5588,16 @@
       "def": "within (a period)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.within"
      },
      {
       "id": "s3",
       "def": "مِنْ خِلَالِ … — through, by way of",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.through"
      }
     ],
     "examples": [
@@ -4563,7 +5663,8 @@
     "subtleties": [
      "خِلَالَ looks at the whole span (within a week); أَثْنَاءَ at what happens at the same time (during the meal)."
     ]
-   }
+   },
+   "prefix": false
   },
   {
    "id": "ar:athnaa",
@@ -4572,7 +5673,20 @@
    "senses": [
     "prep.during"
    ],
-   "root": "ث ن ي",
+   "features": {
+    "root": "ث ن ي",
+    "kind": "zarf",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.during",
+     "axis": "span or simultaneity",
+     "value": "while something happens"
+    }
+   ],
    "translit": "ʾaṯnāʾa",
    "forms": {
     "ADP": "أَثْنَاءَ",
@@ -4672,7 +5786,8 @@
     "subtleties": [
      "Very common with a verbal noun: أَثْنَاءَ الْعَمَلِ (while working), أَثْنَاءَ الْأَكْلِ (while eating)."
     ]
-   }
+   },
+   "prefix": false
   }
  ],
  "absent": [

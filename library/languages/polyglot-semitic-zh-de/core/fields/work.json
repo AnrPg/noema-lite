@@ -1,0 +1,58 @@
+{
+ "field": "work",
+ "title": "Work and business",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "work.accounts",
+   "gloss": "the books, accounts (business records)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "work.agency",
+   "gloss": "agency, bureau",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "work.business",
+   "gloss": "business, commerce",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "work.job",
+   "gloss": "work, a job (employment; labour)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "work.livelihood",
+   "gloss": "livelihood, a living",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "work.market",
+   "gloss": "market (the economy)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "work.subsidiary",
+   "gloss": "subsidiary (company)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  }
+ ]
+}

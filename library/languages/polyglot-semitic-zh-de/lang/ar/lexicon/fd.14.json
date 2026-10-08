@@ -8,6 +8,22 @@
    "senses": [
     "time.sunday"
    ],
+   "features": {
+    "root": "ء ح د",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a day name, used in the singular (every Sunday: كُلَّ يَوْمِ أَحَدٍ)"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "al-ʾaḥad",
    "forms": {
@@ -104,6 +120,24 @@
    "senses": [
     "time.monday"
    ],
+   "features": {
+    "root": "ث ن ي",
+    "pattern": {
+     "none": "a dual form: (يَوْمُ) الِاثْنَيْنِ, “(the day of) the two”"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a day name, used in the singular (every Monday: كُلَّ يَوْمِ اثْنَيْنِ)"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "dual",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "al-iṯnayn",
    "forms": {
@@ -197,6 +231,22 @@
    "senses": [
     "time.tuesday"
    ],
+   "features": {
+    "root": "ث ل ث",
+    "pattern": "فُعَالَاء",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a day name, used in the singular (every Tuesday: كُلَّ يَوْمِ ثُلَاثَاءَ)"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "aṯ-ṯulāṯāʾ",
    "forms": {
@@ -289,6 +339,22 @@
    "senses": [
     "time.wednesday"
    ],
+   "features": {
+    "root": "ر ب ع",
+    "pattern": "أَفْعِلَاء",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a day name, used in the singular (every Wednesday: كُلَّ يَوْمِ أَرْبِعَاءَ)"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "diptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "al-ʾarbiʿāʾ",
    "forms": {
@@ -382,6 +448,22 @@
    "senses": [
     "time.thursday"
    ],
+   "features": {
+    "root": "خ م س",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a day name, used in the singular (every Thursday: كُلَّ يَوْمِ خَمِيسٍ)"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "al-ḫamīs",
    "forms": {
@@ -472,7 +554,31 @@
    "pos": "NOUN",
    "class": "def",
    "senses": [
-    "time.friday"
+    "time.friday",
+    "time.week"
+   ],
+   "features": {
+    "root": "ج م ع",
+    "pattern": "فُعُلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a day name, used in the singular (every Friday: كُلَّ يَوْمِ جُمُعَةٍ)"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "register",
+     "value": "dated or dialectal"
+    }
    ],
    "gender": "FEM",
    "translit": "al-jumuʿa",
@@ -510,7 +616,8 @@
       "def": "week (Wiktionary: جُمُعَة)",
       "register": [
        "dated"
-      ]
+      ],
+      "concept": "time.week"
      }
     ],
     "examples": [
@@ -534,6 +641,20 @@
       "register": "neutral",
       "context": "religion",
       "sense": "s1"
+     },
+     {
+      "text": "فِي بَعْضِ اللَّهَجَاتِ تَعْنِي الْجُمُعَةُ الْأُسْبُوعَ كُلَّهُ.",
+      "tr": "In some dialects al-jumʿa means the whole week.",
+      "register": "dialectal",
+      "context": "dialects",
+      "sense": "s2"
+     },
+     {
+      "text": "قَالَ: أَعُودُ بَعْدَ الْجُمُعَةِ، أَيْ بَعْدَ أُسْبُوعٍ.",
+      "tr": "He said: I’ll be back after the jumʿa — that is, after a week.",
+      "register": "dialectal",
+      "context": "conversation",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -572,8 +693,25 @@
    "pos": "NOUN",
    "class": "def",
    "senses": [
-    "time.saturday"
+    "time.saturday",
+    "relig.sabbath"
    ],
+   "features": {
+    "root": "س ب ت",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a day name, used in the singular (every Saturday: كُلَّ يَوْمِ سَبْتٍ)"
+    },
+    "dual": {
+     "none": "a day or month name: not used in the dual"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "as-sabt",
    "forms": {
@@ -607,7 +745,8 @@
       "def": "the Sabbath",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.sabbath"
      }
     ],
     "examples": [
@@ -670,6 +809,26 @@
    "senses": [
     "time.weekend"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: نِهَايَة (ن ه ي) + أُسْبُوع (س ب ع)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "used in the singular (every weekend: كُلَّ نِهَايَةِ أُسْبُوعٍ)"
+    },
+    "dual": {
+     "none": "used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "nihāyat al-ʾusbūʿ",
    "forms": {
@@ -766,10 +925,39 @@
    "lemma": "يَوْم",
    "pos": "NOUN",
    "senses": [
-    "time.day"
+    "time.day",
+    "relig.judgementday"
+   ],
+   "features": {
+    "root": "ي و م",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَيَّام",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "يَوْمَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "relig.judgementday",
+     "axis": "expression",
+     "value": "in phrases: يَوْمُ الْقِيَامَةِ، يَوْمُ الدِّينِ"
+    }
    ],
    "gender": "MASC",
-   "root": "ي و م",
    "translit": "yawm",
    "forms": {
     "N;NOM;SG;INDF": "يَوْمٌ",
@@ -820,14 +1008,16 @@
       "def": "يَوْمَ + day name: on (that day)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "يَوْمُ الدِّينِ / يَوْمُ الْقِيَامَةِ — the Day of Judgement",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.judgementday"
      }
     ],
     "examples": [
@@ -921,8 +1111,30 @@
    "senses": [
     "time.night"
    ],
+   "features": {
+    "root": "ل ي ل",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "night as a time (uncountable); “nights” is لَيَالٍ, the plural of لَيْلَة"
+    },
+    "dual": {
+     "none": "night as a time: uncountable (two nights: لَيْلَتَانِ)"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.night",
+     "axis": "uncountable time or one night",
+     "value": "night-time (no plural use)"
+    }
+   ],
    "gender": "MASC",
-   "root": "ل ي ل",
    "translit": "layl",
    "forms": {
     "N;NOM;SG;INDF": "لَيْلٌ",
@@ -1025,10 +1237,48 @@
    "lemma": "لَيْلَة",
    "pos": "NOUN",
    "senses": [
-    "time.night"
+    "time.night",
+    "time.tonight",
+    "art.soiree"
+   ],
+   "features": {
+    "root": "ل ي ل",
+    "pattern": "فَعْلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "لَيَالٍ",
+      "kind": "broken",
+      "pattern": "فَعَالٍ",
+      "declension": "defective",
+      "note": "nights; also evenings (لَيَالٍ مُوسِيقِيَّةٌ)",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "لَيْلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "اللَّيْلَةَ",
+      "what": "always definite and accusative: tonight",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.night",
+     "axis": "uncountable time or one night",
+     "value": "a (single) night; اللَّيْلَةَ tonight"
+    }
    ],
    "gender": "FEM",
-   "root": "ل ي ل",
    "translit": "layla",
    "forms": {
     "N;NOM;SG;INDF": "لَيْلَةٌ",
@@ -1076,14 +1326,16 @@
       "def": "اللَّيْلَةَ — tonight",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.tonight"
      },
      {
       "id": "s3",
       "def": "an evening party, a soirée (Wiktionary)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "art.soiree"
      }
     ],
     "examples": [
@@ -1107,6 +1359,13 @@
       "register": "neutral",
       "context": "travel",
       "sense": "s2"
+     },
+     {
+      "text": "حَضَرْنَا لَيْلَةً مُوسِيقِيَّةً رَائِعَةً.",
+      "tr": "We attended a wonderful musical evening.",
+      "register": "neutral",
+      "context": "music",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1155,8 +1414,23 @@
    "senses": [
     "time.morning"
    ],
+   "features": {
+    "root": "ص ب ح",
+    "pattern": "فَعَال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a time of day: used in the singular (every morning: كُلَّ صَبَاحٍ)"
+    },
+    "dual": {
+     "none": "a time of day: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ص ب ح",
    "translit": "ṣabāḥ",
    "forms": {
     "N;NOM;SG;INDF": "صَبَاحٌ",
@@ -1265,10 +1539,26 @@
    "pos": "NOUN",
    "class": "sg",
    "senses": [
-    "time.noon"
+    "time.noon",
+    "relig.noonprayer"
    ],
+   "features": {
+    "root": "ظ ه ر",
+    "pattern": "فُعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "noon: used in the singular only"
+    },
+    "dual": {
+     "none": "used in the singular only"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ظ ه ر",
    "translit": "ẓuhr",
    "forms": {
     "N;NOM;SG;INDF": "ظُهْرٌ",
@@ -1304,7 +1594,8 @@
       "def": "the noon prayer (صَلَاةُ الظُّهْرِ)",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.noonprayer"
      }
     ],
     "examples": [
@@ -1380,6 +1671,15 @@
    "senses": [
     "time.afternoon"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: بَعْدَ (ب ع د) + الظُّهْر (ظ ه ر)"
+    },
+    "derivedFrom": "بَعْدَ + الظُّهْر (noon)",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "baʿda ẓ-ẓuhr",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1472,8 +1772,23 @@
    "senses": [
     "time.evening"
    ],
+   "features": {
+    "root": "م س ي",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a time of day: used in the singular (every evening: كُلَّ مَسَاءٍ)"
+    },
+    "dual": {
+     "none": "a time of day: used in the singular"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "م س ي",
    "translit": "masāʾ",
    "forms": {
     "N;NOM;SG;INDF": "مَسَاءٌ",
@@ -1579,7 +1894,13 @@
    "senses": [
     "time.today"
    ],
-   "root": "ي و م",
+   "features": {
+    "root": "ي و م",
+    "derivedFrom": "الْيَوْم (the day), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "al-yawma",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1661,7 +1982,13 @@
    "senses": [
     "time.tomorrow"
    ],
-   "root": "غ د و",
+   "features": {
+    "root": "غ د و",
+    "derivedFrom": "غَد (the morrow), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ġadan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1754,8 +2081,18 @@
    "lemma": "أَمْسِ",
    "pos": "ADV",
    "senses": [
-    "time.yesterday"
+    "time.yesterday",
+    "adv.recently"
    ],
+   "features": {
+    "root": "ء م س",
+    "derivedFrom": {
+     "none": "a basic word, not made from another"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾamsi",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1783,7 +2120,8 @@
       "def": "lately, recently (Wiktionary)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "adv.recently"
      }
     ],
     "examples": [
@@ -1807,6 +2145,13 @@
       "register": "neutral",
       "context": "weather",
       "sense": "s1"
+     },
+     {
+      "text": "كَانَتْ قَرْيَةً صَغِيرَةً بِالْأَمْسِ، وَهِيَ الْيَوْمَ مَدِينَةٌ كَبِيرَةٌ.",
+      "tr": "Only yesterday it was a small village; today it is a big city.",
+      "register": "literary",
+      "context": "history",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1853,6 +2198,13 @@
    "senses": [
     "adv.now"
    ],
+   "features": {
+    "root": "ء و ن",
+    "derivedFrom": "آن (time), definite, in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "al-ʾāna",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1945,7 +2297,13 @@
    "senses": [
     "adv.later"
    ],
-   "root": "ل ح ق",
+   "features": {
+    "root": "ل ح ق",
+    "derivedFrom": "لَاحِق (following), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "lāḥiqan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2037,7 +2395,13 @@
    "senses": [
     "adv.soon"
    ],
-   "root": "ق ر ب",
+   "features": {
+    "root": "ق ر ب",
+    "derivedFrom": "قَرِيب (near), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "qarīban",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2059,13 +2423,6 @@
        "neutral"
       ],
       "concept": "adv.soon"
-     },
-     {
-      "id": "s2",
-      "def": "near, nearby (Wiktionary)",
-      "register": [
-       "neutral"
-      ]
      }
     ],
     "examples": [
@@ -2084,11 +2441,11 @@
       "sense": "s1"
      },
      {
-      "text": "يَسْكُنُ قَرِيبًا مِنَ الْمَدْرَسَةِ.",
-      "tr": "He lives near the school.",
+      "text": "سَأَعُودُ قَرِيبًا، انْتَظِرْنِي.",
+      "tr": "I’ll be back soon — wait for me.",
       "register": "neutral",
-      "context": "home",
-      "sense": "s2"
+      "context": "everyday",
+      "sense": "s1"
      }
     ],
     "collocations": [
@@ -2136,7 +2493,13 @@
    "senses": [
     "adv.early"
    ],
-   "root": "ب ك ر",
+   "features": {
+    "root": "ب ك ر",
+    "derivedFrom": "مُبَكِّر (early), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "mubakkiran",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2234,7 +2597,13 @@
    "senses": [
     "adv.late"
    ],
-   "root": "ء خ ر",
+   "features": {
+    "root": "ء خ ر",
+    "derivedFrom": "مُتَأَخِّر (late), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "mutaʾaḫḫiran",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2330,7 +2699,13 @@
    "senses": [
     "adv.always"
    ],
-   "root": "د و م",
+   "features": {
+    "root": "د و م",
+    "derivedFrom": "دَائِم (lasting), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "dāʾiman",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2426,9 +2801,28 @@
    "lemma": "كَثِيرًا",
    "pos": "ADV",
    "senses": [
-    "adv.often"
+    "adv.often",
+    "adv.alot"
    ],
-   "root": "ك ث ر",
+   "features": {
+    "root": "ك ث ر",
+    "derivedFrom": "كَثِير (much), in the accusative",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.alot",
+     "axis": "word class (the same form كَثِيرًا)",
+     "value": "the adverb كَثِيرًا as a word of its own (often, a lot)"
+    },
+    {
+     "concept": "adv.often",
+     "axis": "frequency or probability",
+     "value": "often; a lot"
+    }
+   ],
    "translit": "kaṯīran",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2456,7 +2850,8 @@
       "def": "a lot, much",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alot"
      }
     ],
     "examples": [
@@ -2536,9 +2931,23 @@
    "lemma": "غَالِبًا",
    "pos": "ADV",
    "senses": [
-    "adv.often"
+    "adv.often",
+    "adv.probably"
    ],
-   "root": "غ ل ب",
+   "features": {
+    "root": "غ ل ب",
+    "derivedFrom": "غَالِب (prevailing), in the accusative",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adv.often",
+     "axis": "frequency or probability",
+     "value": "usually, mostly; probably"
+    }
+   ],
    "translit": "ġāliban",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2566,7 +2975,8 @@
       "def": "most likely, probably",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.probably"
      }
     ],
     "examples": [
@@ -2642,7 +3052,13 @@
    "senses": [
     "adv.sometimes"
    ],
-   "root": "ح ي ن",
+   "features": {
+    "root": "ح ي ن",
+    "derivedFrom": "أَحْيَان (times, plural of حِين), in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ʾaḥyānan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",

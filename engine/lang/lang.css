@@ -98,3 +98,5 @@ body.lx main.lx-main{max-width:1000px}
 .lx-quizq{font-size:18px;font-weight:600}
 .lx-exbuild .lx-slot{min-height:2.2em}
 @media (max-width:600px){.lx-cmpblk{grid-template-columns:1fr}}
+.lx-senses li{margin:4px 0}.lx-senses li.lx-cur{background:var(--bg2,rgba(127,127,127,.08));border-radius:6px;padding:2px 6px}.lx-senses a.lx-badge{text-decoration:none;cursor:pointer}
+.lx-sec .lx-parts{grid-template-columns:minmax(0,40%) minmax(0,1fr)}.lx-sec .lx-parts dd,.lx-sec .lx-parts dt{overflow-wrap:anywhere;min-width:0}.lx-senses li{overflow-wrap:anywhere}.lx-senses .lx-badge{white-space:normal;max-width:100%}

@@ -6,9 +6,42 @@
    "pos": "ADP",
    "senses": [
     "prep.in",
-    "prep.inmonth"
+    "prep.inmonth",
+    "prep.into",
+    "prep.infromnow"
    ],
-   "governs": "DAT|ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3",
+       "s4"
+      ],
+      "when": "where? (place) and time"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     }
+    ],
+    "contractions": [
+     {
+      "form": "im",
+      "article": "dem",
+      "lexeme": "de:im"
+     },
+     {
+      "form": "ins",
+      "article": "das",
+      "lexeme": "de:ins"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -35,14 +68,16 @@
       "def": "into, to (where to? + accusative: in die Stadt, ins Café)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.into"
      },
      {
       "id": "s3",
       "def": "in, within (time: in einer Stunde, im Mai)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.infromnow"
      },
      {
       "id": "s4",
@@ -138,9 +173,53 @@
    "pos": "ADP",
    "senses": [
     "prep.at",
-    "prep.onday"
+    "prep.onday",
+    "prep.to"
    ],
-   "governs": "DAT|ACC",
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "kind of place",
+     "value": "an edge or side, a station, a school (am Bahnhof, an der Uni)"
+    },
+    {
+     "concept": "prep.to",
+     "axis": "kind of goal",
+     "value": "an edge or side, with the accusative (ans Fenster, an die Wand)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s3",
+       "s4"
+      ],
+      "when": "where? (place) and time (am Montag)"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s2"
+      ],
+      "when": "where to? (direction)"
+     }
+    ],
+    "contractions": [
+     {
+      "form": "am",
+      "article": "dem",
+      "lexeme": "de:am"
+     },
+     {
+      "form": "ans",
+      "article": "das",
+      "lexeme": "de:ans"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -170,7 +249,8 @@
       "def": "to, onto (where to? + accusative: ans Fenster, an die Wand)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.to"
      },
      {
       "id": "s3",
@@ -185,7 +265,8 @@
       "def": "at (a school or university: an der Uni, an der Schule)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -230,6 +311,20 @@
       "register": "neutral",
       "context": "shopping",
       "sense": "s3"
+     },
+     {
+      "text": "Häng das Bild an die Wand!",
+      "tr": "Hang the picture on the wall!",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Er geht ans Fenster.",
+      "tr": "He goes to the window.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -276,9 +371,46 @@
    "lemma": "bei",
    "pos": "ADP",
    "senses": [
-    "prep.at"
+    "prep.at",
+    "adv.near",
+    "prep.during"
    ],
-   "governs": "DAT",
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "kind of place",
+     "value": "a person, a doctor, a firm (beim Arzt)"
+    },
+    {
+     "concept": "adv.near",
+     "axis": "kind of word",
+     "value": "a preposition before a place name (bei Berlin)"
+    },
+    {
+     "concept": "prep.during",
+     "axis": "what follows",
+     "value": "an activity, often a verb noun (beim Essen)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "contractions": [
+     {
+      "form": "beim",
+      "article": "dem",
+      "lexeme": "de:beim"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -308,14 +440,16 @@
       "def": "near, by (bei Berlin = near Berlin)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.near"
      },
      {
       "id": "s3",
       "def": "during, while (beim Essen = while eating)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.during"
      }
     ],
     "examples": [
@@ -346,6 +480,20 @@
       "register": "neutral",
       "context": "at the table",
       "sense": "s3"
+     },
+     {
+      "text": "Beim Essen sieht er fern.",
+      "tr": "He watches TV while eating.",
+      "register": "neutral",
+      "context": "habits",
+      "sense": "s3"
+     },
+     {
+      "text": "Wir wohnen in einem Dorf bei Hamburg.",
+      "tr": "We live in a village near Hamburg.",
+      "register": "neutral",
+      "context": "where we live",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -390,9 +538,47 @@
    "lemma": "zu",
    "pos": "ADP",
    "senses": [
-    "prep.to"
+    "prep.to",
+    "prep.at",
+    "adv.too",
+    "part.infinitive",
+    "adj.closed"
    ],
-   "governs": "DAT",
+   "contrasts": [
+    {
+     "concept": "prep.at",
+     "axis": "kind of place",
+     "value": "fixed phrases (zu Hause, zu Weihnachten)"
+    },
+    {
+     "concept": "prep.to",
+     "axis": "kind of goal",
+     "value": "people, buildings, events (zum Arzt)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "contractions": [
+     {
+      "form": "zum",
+      "article": "dem",
+      "lexeme": "de:zum"
+     },
+     {
+      "form": "zur",
+      "article": "der",
+      "lexeme": "de:zur"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -419,21 +605,32 @@
       "def": "at (in fixed phrases: zu Hause, zu Weihnachten)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.at"
      },
      {
       "id": "s3",
       "def": "too (before an adjective: zu groß)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.too"
      },
      {
       "id": "s4",
       "def": "to (before an infinitive: Ich habe keine Zeit zu kochen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.infinitive"
+     },
+     {
+      "id": "s5",
+      "def": "closed, shut (colloquial adverb: Die Tür ist zu)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adj.closed"
      }
     ],
     "examples": [
@@ -464,6 +661,41 @@
       "register": "neutral",
       "context": "café",
       "sense": "s3"
+     },
+     {
+      "text": "Die Tür ist zu.",
+      "tr": "The door is shut.",
+      "register": "colloquial",
+      "context": "home",
+      "sense": "s5"
+     },
+     {
+      "text": "Am Sonntag sind die Geschäfte zu.",
+      "tr": "On Sundays the shops are closed.",
+      "register": "colloquial",
+      "context": "shopping",
+      "sense": "s5"
+     },
+     {
+      "text": "Ich bin heute Abend zu Hause.",
+      "tr": "I am at home tonight.",
+      "register": "neutral",
+      "context": "plans",
+      "sense": "s2"
+     },
+     {
+      "text": "Zu Weihnachten fahren wir zu meinen Eltern.",
+      "tr": "At Christmas we are going to my parents’.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s2"
+     },
+     {
+      "text": "Ich habe keine Zeit zu kochen.",
+      "tr": "I have no time to cook.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -510,9 +742,31 @@
    "pos": "ADP",
    "senses": [
     "prep.to",
-    "prep.after"
+    "prep.after",
+    "prep.accordingto"
    ],
-   "governs": "DAT",
+   "contrasts": [
+    {
+     "concept": "prep.to",
+     "axis": "kind of goal",
+     "value": "towns, countries without article, home (nach Berlin, nach Hause)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -547,7 +801,8 @@
       "def": "according to (meiner Meinung nach)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.accordingto"
      }
     ],
     "examples": [
@@ -627,9 +882,34 @@
    "lemma": "aus",
    "pos": "ADP",
    "senses": [
-    "prep.from"
+    "prep.from",
+    "prep.madeof",
+    "prep.outof",
+    "adv.off",
+    "adj.over"
    ],
-   "governs": "DAT",
+   "contrasts": [
+    {
+     "concept": "prep.from",
+     "axis": "origin or starting point",
+     "value": "out of: a country, a town, a closed space (aus Griechenland)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -656,14 +936,32 @@
       "def": "out of, made of (aus Holz = made of wood)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.madeof"
      },
      {
       "id": "s3",
       "def": "out of, for (a reason: aus Liebe)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.outof"
+     },
+     {
+      "id": "s4",
+      "def": "off (switched off: Das Licht ist aus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adv.off"
+     },
+     {
+      "id": "s5",
+      "def": "over, finished (Die Schule ist aus, der Film ist aus)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.over"
      }
     ],
     "examples": [
@@ -687,6 +985,27 @@
       "register": "neutral",
       "context": "furniture",
       "sense": "s2"
+     },
+     {
+      "text": "Das Licht ist aus.",
+      "tr": "The light is off.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s4"
+     },
+     {
+      "text": "Die Schule ist um eins aus.",
+      "tr": "School is over at one.",
+      "register": "neutral",
+      "context": "school",
+      "sense": "s5"
+     },
+     {
+      "text": "Sie hat ihn aus Liebe geheiratet.",
+      "tr": "She married him for love.",
+      "register": "neutral",
+      "context": "relationships",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -727,9 +1046,43 @@
    "lemma": "von",
    "pos": "ADP",
    "senses": [
-    "prep.from"
+    "prep.from",
+    "prep.of.owner",
+    "prep.by.agent",
+    "prep.about"
    ],
-   "governs": "DAT",
+   "contrasts": [
+    {
+     "concept": "prep.from",
+     "axis": "origin or starting point",
+     "value": "a person, a starting point (von der Arbeit, vom Arzt)"
+    },
+    {
+     "concept": "prep.about",
+     "axis": "the words it goes with",
+     "value": "erzählen von, hören von, + dative (more casual)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "contractions": [
+     {
+      "form": "vom",
+      "article": "dem",
+      "lexeme": "de:vom"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -756,21 +1109,24 @@
       "def": "of (owner, instead of the genitive: das Buch von meinem Bruder)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.of.owner"
      },
      {
       "id": "s3",
       "def": "by (the doer in the passive: von Goethe geschrieben)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.by.agent"
      },
      {
       "id": "s4",
       "def": "about, of (a topic: von etwas erzählen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.about"
      }
     ],
     "examples": [
@@ -801,6 +1157,20 @@
       "register": "neutral",
       "context": "literature",
       "sense": "s3"
+     },
+     {
+      "text": "Er erzählt oft von seiner Reise nach Japan.",
+      "tr": "He often talks about his trip to Japan.",
+      "register": "neutral",
+      "context": "travel",
+      "sense": "s4"
+     },
+     {
+      "text": "Hast du schon von dem Unfall gehört?",
+      "tr": "Have you heard about the accident?",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -842,9 +1212,23 @@
    "lemma": "mit",
    "pos": "ADP",
    "senses": [
-    "prep.with"
+    "prep.with",
+    "prep.by"
    ],
-   "governs": "DAT",
+   "features": {
+    "governs": [
+     {
+      "case": "DAT",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -871,7 +1255,8 @@
       "def": "with, by (an instrument or transport: mit dem Messer, mit dem Bus)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.by"
      }
     ],
     "examples": [
@@ -937,7 +1322,19 @@
    "senses": [
     "prep.without"
    ],
-   "governs": "ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "contractions": {
+     "none": "no merged forms with the article"
+    }
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -1031,7 +1428,23 @@
    "senses": [
     "prep.for"
    ],
-   "governs": "ACC",
+   "features": {
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "contractions": [
+     {
+      "form": "fürs",
+      "article": "das"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -1058,7 +1471,8 @@
       "def": "for, in favour of (für oder gegen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1129,9 +1543,57 @@
    "lemma": "über",
    "pos": "ADP",
    "senses": [
-    "prep.about"
+    "prep.about",
+    "prep.above",
+    "prep.across",
+    "prep.through",
+    "quant.morethan"
    ],
-   "governs": "ACC|DAT",
+   "contrasts": [
+    {
+     "concept": "prep.about",
+     "axis": "the words it goes with",
+     "value": "most verbs and nouns of speaking and thinking, + accusative (ein Buch über …)"
+    }
+   ],
+   "features": {
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "when": "about a topic: always accusative"
+     },
+     {
+      "case": "DAT",
+      "senses": [
+       "s2"
+      ],
+      "when": "where? (place)"
+     },
+     {
+      "case": "ACC",
+      "senses": [
+       "s3",
+       "s4"
+      ],
+      "when": "where to? (direction), and via"
+     }
+    ],
+    "contractions": [
+     {
+      "form": "übers",
+      "article": "das",
+      "register": "colloquial"
+     },
+     {
+      "form": "überm",
+      "article": "dem",
+      "register": "colloquial"
+     }
+    ]
+   },
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -1158,21 +1620,32 @@
       "def": "over, above (Wo? + dative: Die Lampe hängt über dem Tisch.)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.above"
      },
      {
       "id": "s3",
       "def": "over, across (Wohin? + accusative: über die Straße)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.across"
      },
      {
       "id": "s4",
       "def": "via (über München nach Wien)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.through"
+     },
+     {
+      "id": "s5",
+      "def": "over, more than (a number: über hundert Leute)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "quant.morethan"
      }
     ],
     "examples": [
@@ -1203,6 +1676,20 @@
       "register": "neutral",
       "context": "travel",
       "sense": "s4"
+     },
+     {
+      "text": "Über hundert Leute waren auf der Party.",
+      "tr": "Over a hundred people were at the party.",
+      "register": "neutral",
+      "context": "parties",
+      "sense": "s5"
+     },
+     {
+      "text": "Wir gehen über die Straße.",
+      "tr": "We cross the street.",
+      "register": "neutral",
+      "context": "town",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1243,8 +1730,17 @@
    "lemma": "im",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: in + dem"
+    }
+   },
    "role": "in + dem: in the (masc./neut. dative, where?) – im Park, im Büro; in time: im Mai, im Sommer, im Jahr 2026",
-   "governs": "DAT",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -1258,8 +1754,17 @@
    "lemma": "ins",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "ACC"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: in + das"
+    }
+   },
    "role": "in + das: into the (neut. accusative, where to?) – ins Café",
-   "governs": "ACC",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -1273,8 +1778,17 @@
    "lemma": "am",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: an + dem"
+    }
+   },
    "role": "an + dem: at the, on the (masc./neut. dative) – am Bahnhof, am Fenster; in time: am Montag, am Abend, am Wochenende",
-   "governs": "DAT",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -1285,8 +1799,17 @@
    "lemma": "ans",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "ACC"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: an + das"
+    }
+   },
    "role": "an + das: to the, onto the (neut. accusative) – ans Fenster",
-   "governs": "ACC",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -1300,8 +1823,17 @@
    "lemma": "zum",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: zu + dem"
+    }
+   },
    "role": "zu + dem: to the (masc./neut.) – zum Arzt, zum Bahnhof",
-   "governs": "DAT",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -1315,8 +1847,17 @@
    "lemma": "zur",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: zu + der"
+    }
+   },
    "role": "zu + der: to the (fem.) – zur Schule, zur Post",
-   "governs": "DAT",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -1330,8 +1871,17 @@
    "lemma": "beim",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: bei + dem"
+    }
+   },
    "role": "bei + dem: at the (masc./neut.) – beim Arzt",
-   "governs": "DAT",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -1345,8 +1895,17 @@
    "lemma": "vom",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "governs": [
+     {
+      "case": "DAT"
+     }
+    ],
+    "contractions": {
+     "none": "itself a merged form: von + dem"
+    }
+   },
    "role": "von + dem: from the, of the (masc./neut.) – vom Markt, vom Arzt",
-   "governs": "DAT",
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08",
@@ -1361,6 +1920,13 @@
    "pos": "ADV",
    "senses": [
     "place.home"
+   ],
+   "contrasts": [
+    {
+     "concept": "place.home",
+     "axis": "where or where to",
+     "value": "at home (wo?)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1388,7 +1954,8 @@
       "def": "at home, at ease (figurative: sich wie zu Hause fühlen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1459,6 +2026,11 @@
      "The -e of Hause is an old dative ending kept only in these phrases; elsewhere: im Haus.",
      "The spelling zuhause (one word) is also accepted; das Zuhause is a noun: “home” as a place you belong to."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1467,6 +2039,13 @@
    "pos": "ADV",
    "senses": [
     "place.home"
+   ],
+   "contrasts": [
+    {
+     "concept": "place.home",
+     "axis": "where or where to",
+     "value": "home, homewards (wohin?)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1553,6 +2132,11 @@
     "subtleties": [
      "The spelling nachhause (one word) is also accepted; nach Haus (without -e) is heard in speech and songs."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1560,9 +2144,34 @@
    "lemma": "Schule",
    "pos": "NOUN",
    "senses": [
-    "place.school"
+    "place.school",
+    "mind.school",
+    "animal.shoal"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schulen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schule",
     "N;ACC;SG": "Schule",
@@ -1599,14 +2208,16 @@
       "def": "school (of thought, art: die Frankfurter Schule)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "mind.school"
      },
      {
       "id": "s3",
       "def": "school, shoal (of fish)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "animal.shoal"
      }
     ],
     "examples": [
@@ -1637,6 +2248,13 @@
       "register": "formal",
       "context": "philosophy",
       "sense": "s2"
+     },
+     {
+      "text": "Vor der Küste schwimmt eine Schule Delfine.",
+      "tr": "A school of dolphins is swimming off the coast.",
+      "register": "neutral",
+      "context": "nature",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1702,7 +2320,35 @@
    "senses": [
     "place.university"
    ],
+   "contrasts": [
+    {
+     "concept": "place.university",
+     "axis": "register",
+     "value": "full form"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Universitäten",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Universität",
     "N;ACC;SG": "Universität",
@@ -1809,7 +2455,35 @@
    "senses": [
     "place.university"
    ],
+   "contrasts": [
+    {
+     "concept": "place.university",
+     "axis": "register",
+     "value": "everyday short form"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Unis",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a short form of Universität"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Uni",
     "N;ACC;SG": "Uni",
@@ -1912,9 +2586,33 @@
    "lemma": "Arbeit",
    "pos": "NOUN",
    "senses": [
-    "place.work"
+    "place.work",
+    "edu.test",
+    "sci.work"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Arbeiten",
+      "pattern": "-en",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Arbeit",
     "N;ACC;SG": "Arbeit",
@@ -1951,14 +2649,16 @@
       "def": "a piece of work: a test at school, a paper (eine Arbeit schreiben)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "edu.test"
      },
      {
       "id": "s3",
       "def": "work (physics)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "sci.work"
      }
     ],
     "examples": [
@@ -1989,6 +2689,13 @@
       "register": "neutral",
       "context": "school",
       "sense": "s2"
+     },
+     {
+      "text": "In der Physik ist Arbeit Kraft mal Weg.",
+      "tr": "In physics, work is force times distance.",
+      "register": "technical",
+      "context": "physics",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2056,9 +2763,32 @@
    "lemma": "Büro",
    "pos": "NOUN",
    "senses": [
-    "place.office"
+    "place.office",
+    "work.agency"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Büros",
+      "pattern": "-s",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Büro",
     "N;ACC;SG": "Büro",
@@ -2095,7 +2825,8 @@
       "def": "office, bureau, agency (Reisebüro = travel agency)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "work.agency"
      }
     ],
     "examples": [
@@ -2172,9 +2903,39 @@
    "lemma": "Geschäft",
    "pos": "NOUN",
    "senses": [
-    "place.shop"
+    "place.shop",
+    "work.business"
+   ],
+   "contrasts": [
+    {
+     "concept": "place.shop",
+     "axis": "size and register",
+     "value": "neutral: any shop or store"
+    }
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Geschäfte",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived from schaffen (ge- + -schäft), not a compound"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Geschäft",
     "N;ACC;SG": "Geschäft",
@@ -2216,14 +2977,16 @@
       "def": "business, deal, transaction",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "work.business"
      },
      {
       "id": "s3",
       "def": "business (going to the toilet: sein Geschäft machen)",
       "register": [
        "euphemistic"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -2305,9 +3068,47 @@
    "lemma": "Laden",
    "pos": "NOUN",
    "senses": [
-    "place.shop"
+    "place.shop",
+    "home.shutter"
+   ],
+   "contrasts": [
+    {
+     "concept": "place.shop",
+     "axis": "size and register",
+     "value": "everyday, often a small shop"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Läden",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "Läden",
+      "pattern": "umlaut only",
+      "senses": [
+       "s3"
+      ],
+      "note": "mostly in the compound: die Fensterläden"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Laden",
     "N;ACC;SG": "Laden",
@@ -2344,14 +3145,16 @@
       "def": "place, outfit, joint (a firm, a pub)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "shutter (Fensterladen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.shutter"
      }
     ],
     "examples": [
@@ -2436,6 +3239,27 @@
     "place.supermarket"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Supermärkte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: the prefix super- + Markt (der Markt → der Supermarkt)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Supermarkt",
     "N;ACC;SG": "Supermarkt",
@@ -2544,9 +3368,33 @@
    "lemma": "Markt",
    "pos": "NOUN",
    "senses": [
-    "place.market"
+    "place.market",
+    "work.market"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Märkte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Markt",
     "N;ACC;SG": "Markt",
@@ -2588,14 +3436,16 @@
       "def": "market (economy)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "work.market"
      },
      {
       "id": "s3",
       "def": "market square; market town",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2676,6 +3526,27 @@
     "place.restaurant"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Restaurants",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Restaurant",
     "N;ACC;SG": "Restaurant",
@@ -2787,6 +3658,27 @@
     "place.cafe"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Cafés",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Café",
     "N;ACC;SG": "Café",
@@ -2817,13 +3709,6 @@
        "neutral"
       ],
       "concept": "place.cafe"
-     },
-     {
-      "id": "s2",
-      "def": "coffee",
-      "register": [
-       "obsolete"
-      ]
      }
     ],
     "examples": [
@@ -2888,7 +3773,8 @@
      "Plural Cafés with -s."
     ],
     "subtleties": [
-     "Many German cafés are also bakeries or cake shops (Konditorei); a Kneipe is a pub."
+     "Many German cafés are also bakeries or cake shops (Konditorei); a Kneipe is a pub.",
+     "In older texts Café is also found as a spelling of the drink (today Kaffee); now it means only the place."
     ]
    }
   },
@@ -2900,6 +3786,35 @@
     "place.hospital"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Krankenhäuser",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Kranke",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Haus",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Krankenhaus",
     "N;ACC;SG": "Krankenhaus",
@@ -3011,6 +3926,28 @@
     "place.pharmacy"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Apotheken",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Apotheke",
     "N;ACC;SG": "Apotheke",
@@ -3047,7 +3984,8 @@
       "def": "an overpriced shop",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3119,9 +4057,38 @@
    "lemma": "Bank",
    "pos": "NOUN",
    "senses": [
-    "place.bank"
+    "place.bank",
+    "home.bench"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Banken",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "Bänke",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bank",
     "N;ACC;SG": "Bank",
@@ -3158,7 +4125,8 @@
       "def": "bench (a different plural: Bänke)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "home.bench"
      }
     ],
     "examples": [
@@ -3233,9 +4201,28 @@
    "pos": "NOUN",
    "class": "sgt",
    "senses": [
-    "place.postoffice"
+    "place.postoffice",
+    "comm.mail"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": {
+     "none": "no plural in these meanings (letters and parcels: Briefe, Pakete)"
+    },
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "MASC",
+      "meaning": "der Post: a post in an Internet forum (also das Post)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Post",
     "N;ACC;SG": "Post",
@@ -3268,14 +4255,16 @@
       "def": "post, mail (letters and parcels)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "comm.mail"
      },
      {
       "id": "s3",
       "def": "the postal service",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3352,6 +4341,34 @@
     "place.station"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bahnhöfe",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Bahn",
+      "role": "modifier"
+     },
+     {
+      "part": "Hof",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bahnhof",
     "N;ACC;SG": "Bahnhof",
@@ -3475,6 +4492,34 @@
     "place.airport"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Flughäfen",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Flug",
+      "role": "modifier"
+     },
+     {
+      "part": "Hafen",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Flughafen",
     "N;ACC;SG": "Flughafen",
@@ -3578,9 +4623,32 @@
    "lemma": "Straße",
    "pos": "NOUN",
    "senses": [
-    "place.street"
+    "place.street",
+    "nature.strait"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Straßen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Straße",
     "N;ACC;SG": "Straße",
@@ -3617,7 +4685,8 @@
       "def": "strait (Straße von Gibraltar)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.strait"
      }
     ],
     "examples": [
@@ -3641,6 +4710,13 @@
       "register": "neutral",
       "context": "town",
       "sense": "s1"
+     },
+     {
+      "text": "Die Straße von Gibraltar trennt Europa von Afrika.",
+      "tr": "The Strait of Gibraltar separates Europe from Africa.",
+      "register": "neutral",
+      "context": "geography",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3704,9 +4780,37 @@
    "lemma": "Platz",
    "pos": "NOUN",
    "senses": [
-    "place.square"
+    "place.square",
+    "abstract.space",
+    "obj.seat",
+    "sport.pitch",
+    "abstract.rank"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Plätze",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1",
+       "s3",
+       "s4",
+       "s5"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Platz",
     "N;ACC;SG": "Platz",
@@ -3743,21 +4847,32 @@
       "def": "space, room",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.space"
      },
      {
       "id": "s3",
       "def": "seat, place",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.seat"
      },
      {
       "id": "s4",
       "def": "pitch, court, field (sport)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "sport.pitch"
+     },
+     {
+      "id": "s5",
+      "def": "place, position in a ranking (den ersten Platz belegen)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "abstract.rank"
      }
     ],
     "examples": [
@@ -3788,6 +4903,20 @@
       "register": "formal",
       "context": "reception",
       "sense": "s3"
+     },
+     {
+      "text": "Die Spieler laufen auf den Platz.",
+      "tr": "The players run onto the pitch.",
+      "register": "neutral",
+      "context": "football",
+      "sense": "s4"
+     },
+     {
+      "text": "Sie hat beim Rennen den ersten Platz belegt.",
+      "tr": "She took first place in the race.",
+      "register": "neutral",
+      "context": "competition",
+      "sense": "s5"
      }
     ],
     "collocations": [
@@ -3853,6 +4982,27 @@
     "place.park"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Parks",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Park",
     "N;ACC;SG": "Park",
@@ -3961,9 +5111,32 @@
    "lemma": "Stadt",
    "pos": "NOUN",
    "senses": [
-    "place.city"
+    "place.city",
+    "place.centre",
+    "pol.council"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Städte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Stadt",
     "N;ACC;SG": "Stadt",
@@ -4000,14 +5173,16 @@
       "def": "town centre (in die Stadt gehen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "place.centre"
      },
      {
       "id": "s3",
       "def": "the town council",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.council"
      }
     ],
     "examples": [
@@ -4031,6 +5206,13 @@
       "register": "neutral",
       "context": "plans",
       "sense": "s2"
+     },
+     {
+      "text": "Die Stadt will die alte Brücke neu bauen.",
+      "tr": "The town council wants to rebuild the old bridge.",
+      "register": "neutral",
+      "context": "local politics",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -4101,6 +5283,28 @@
     "place.village"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Dörfer",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Dorf",
     "N;ACC;SG": "Dorf",
@@ -4142,7 +5346,8 @@
       "def": "backwater (figurative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4224,9 +5429,40 @@
    "lemma": "Land",
    "pos": "NOUN",
    "senses": [
-    "place.country"
+    "place.country",
+    "pol.federalstate",
+    "nature.countryside",
+    "nature.land"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Länder",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "Land",
+      "senses": [
+       "s3"
+      ],
+      "note": "only singular, with the article: auf dem Land, aufs Land"
+     }
+    ]
+   },
    "forms": {
     "N;NOM;SG": "Land",
     "N;ACC;SG": "Land",
@@ -4268,21 +5504,24 @@
       "def": "federal state (Bundesland)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.federalstate"
      },
      {
       "id": "s3",
       "def": "the countryside (auf dem Land)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.countryside"
      },
      {
       "id": "s4",
       "def": "land (as opposed to the sea)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "nature.land"
      }
     ],
     "examples": [
@@ -4313,6 +5552,13 @@
       "register": "neutral",
       "context": "politics",
       "sense": "s2"
+     },
+     {
+      "text": "Nach drei Wochen auf dem Schiff sahen wir endlich Land.",
+      "tr": "After three weeks on the ship we finally saw land.",
+      "register": "neutral",
+      "context": "sea voyage",
+      "sense": "s4"
      }
     ],
     "collocations": [

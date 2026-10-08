@@ -6,9 +6,22 @@
    "pos": "INTJ",
    "senses": [
     "greet.hello",
-    "greet.goodbye"
+    "greet.goodbye",
+    "pol.peace"
    ],
    "translit": "shalom",
+   "features": {
+    "spelling": "שלום",
+    "addressee": "anyone",
+    "reply": "שָׁלוֹם"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "what else it says",
+     "value": "nothing more: the same word is “hello” (and “peace”)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -43,7 +56,8 @@
       "def": "peace; well-being (the noun)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.peace"
      }
     ],
     "examples": [
@@ -151,6 +165,18 @@
    "alts": [
     "בוקר טוב"
    ],
+   "features": {
+    "spelling": "בוקר טוב",
+    "addressee": "anyone",
+    "reply": "בֹּקֶר אוֹר"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodmorning",
+     "axis": "greeting or reply",
+     "value": "the greeting, said first"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -177,7 +203,8 @@
       "def": "(ironic) “good morning!” — “so you’ve finally realized!”",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -242,6 +269,20 @@
    "translit": "boker or",
    "alts": [
     "בוקר אור"
+   ],
+   "features": {
+    "spelling": "בוקר אור",
+    "addressee": "anyone",
+    "reply": {
+     "none": "it is itself the reply to בֹּקֶר טוֹב"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodmorning",
+     "axis": "greeting or reply",
+     "value": "the reply to בֹּקֶר טוֹב"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -313,6 +354,11 @@
     "greet.goodevening"
    ],
    "translit": "erev tov",
+   "features": {
+    "spelling": "ערב טוב",
+    "addressee": "anyone",
+    "reply": "עֶרֶב טוֹב"
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -383,6 +429,11 @@
     "greet.goodnight"
    ],
    "translit": "laila tov",
+   "features": {
+    "spelling": "לילה טוב",
+    "addressee": "anyone",
+    "reply": "לַיְלָה טוֹב"
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -453,7 +504,24 @@
     "greet.goodbye",
     "greet.seeyou"
    ],
-   "translit": "lehitraot",
+   "translit": "lehitra'ot",
+   "features": {
+    "spelling": "להתראות",
+    "addressee": "anyone",
+    "reply": "לְהִתְרָאוֹת"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.goodbye",
+     "axis": "what else it says",
+     "value": "that you will meet again (“see you”)"
+    },
+    {
+     "concept": "greet.seeyou",
+     "axis": "register",
+     "value": "neutral: any situation"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -565,6 +633,18 @@
     "greet.seeyou"
    ],
    "translit": "nitra'e",
+   "features": {
+    "spelling": "נתראה",
+    "addressee": "anyone",
+    "reply": "נִתְרָאֶה"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.seeyou",
+     "axis": "register",
+     "value": "informal, among friends"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -645,6 +725,18 @@
     "greet.howareyou"
    ],
    "translit": "ma shlomcha",
+   "features": {
+    "spelling": "מה שלומך",
+    "addressee": "a man",
+    "reply": "בְּסֵדֶר, תּוֹדָה"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "addressee",
+     "value": "to a man"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -733,6 +825,18 @@
     "greet.howareyou"
    ],
    "translit": "ma shlomech",
+   "features": {
+    "spelling": "מה שלומך",
+    "addressee": "a woman",
+    "reply": "בְּסֵדֶר, תּוֹדָה"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "addressee",
+     "value": "to a woman"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -811,6 +915,18 @@
     "greet.howareyou"
    ],
    "translit": "ma nishma",
+   "features": {
+    "spelling": "מה נשמע",
+    "addressee": "anyone",
+    "reply": "בְּסֵדֶר"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.howareyou",
+     "axis": "addressee",
+     "value": "to anyone, casual"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -895,12 +1011,34 @@
    "id": "he:beseder",
    "lemma": "בְּסֵדֶר",
    "pos": "ADJ",
-   "senses": [
-    "greet.fine"
-   ],
    "class": "inv",
+   "senses": [
+    "greet.fine",
+    "intj.ok",
+    "adj.decent"
+   ],
    "translit": "beseder",
+   "features": {
+    "spelling": "בסדר",
+    "root": "ס ד ר",
+    "pattern": {
+     "none": "a phrase (בְּ + סֵדֶר “order”), not a pattern"
+    },
+    "governs": {
+     "none": "takes no complement"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "Invariable: the same form for a man, a woman and a group.",
+   "contrasts": [
+    {
+     "concept": "intj.ok",
+     "axis": "what the reply does",
+     "value": "agrees: “fine, all right with me”"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -927,14 +1065,16 @@
       "def": "OK! agreed (as an answer)",
       "register": [
        "informal"
-      ]
+      ],
+      "concept": "intj.ok"
      },
      {
       "id": "s3",
       "def": "decent, a good sort (of a person)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.decent"
      }
     ],
     "examples": [
@@ -1029,7 +1169,19 @@
    "senses": [
     "greet.myname"
    ],
-   "translit": "korim li",
+   "translit": "kor'im li",
+   "features": {
+    "spelling": "קוראים לי",
+    "addressee": "anyone",
+    "reply": "נָעִים מְאוֹד"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.myname",
+     "axis": "register",
+     "value": "everyday (“they call me …”)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1116,6 +1268,18 @@
     "greet.myname"
    ],
    "translit": "shmi",
+   "features": {
+    "spelling": "שמי",
+    "addressee": "anyone",
+    "reply": "נָעִים מְאוֹד"
+   },
+   "contrasts": [
+    {
+     "concept": "greet.myname",
+     "axis": "register",
+     "value": "formal (“my name is …”)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1198,7 +1362,12 @@
    "senses": [
     "greet.nicetomeet"
    ],
-   "translit": "naim meod",
+   "translit": "na'im me'od",
+   "features": {
+    "spelling": "נעים מאוד",
+    "addressee": "anyone",
+    "reply": "נָעִים מְאוֹד"
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1284,9 +1453,15 @@
    "lemma": "תּוֹדָה",
    "pos": "INTJ",
    "senses": [
-    "greet.thanks"
+    "greet.thanks",
+    "emotion.gratitude"
    ],
    "translit": "toda",
+   "features": {
+    "spelling": "תודה",
+    "addressee": "anyone",
+    "reply": "בְּבַקָּשָׁה"
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1313,7 +1488,8 @@
       "def": "gratitude, thanks (the noun)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "emotion.gratitude"
      }
     ],
     "examples": [
@@ -1387,9 +1563,24 @@
    "pos": "INTJ",
    "senses": [
     "greet.please",
-    "greet.welcome"
+    "greet.welcome",
+    "intj.hereyouare"
    ],
    "translit": "bevakasha",
+   "features": {
+    "spelling": "בבקשה",
+    "addressee": "anyone",
+    "reply": {
+     "none": "as an answer it is itself the reply (to תּוֹדָה); as “please” it needs none"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.welcome",
+     "axis": "register",
+     "value": "everyday (the same word is “please”)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1424,7 +1615,8 @@
       "def": "here you are (handing something over)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "intj.hereyouare"
      }
     ],
     "examples": [
@@ -1516,6 +1708,20 @@
     "greet.welcome"
    ],
    "translit": "al lo davar",
+   "features": {
+    "spelling": "על לא דבר",
+    "addressee": "anyone",
+    "reply": {
+     "none": "it is itself the reply to תּוֹדָה"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "greet.welcome",
+     "axis": "register",
+     "value": "more polite: “don’t mention it”"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1597,9 +1803,15 @@
    "pos": "INTJ",
    "senses": [
     "greet.sorry",
-    "greet.excuseme"
+    "greet.excuseme",
+    "abstract.forgiveness"
    ],
    "translit": "slicha",
+   "features": {
+    "spelling": "סליחה",
+    "addressee": "anyone",
+    "reply": "זֶה בְּסֵדֶר"
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1634,14 +1846,16 @@
       "def": "pardon? (asking someone to repeat)",
       "register": [
        "informal"
-      ]
+      ],
+      "of": "s2"
      },
      {
       "id": "s4",
       "def": "forgiveness (the noun)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "abstract.forgiveness"
      }
     ],
     "examples": [
@@ -1725,9 +1939,20 @@
    "lemma": "כֵּן",
    "pos": "ADV",
    "senses": [
-    "part.yes"
+    "part.yes",
+    "adv.thus",
+    "adj.honest"
    ],
    "translit": "ken",
+   "features": {
+    "spelling": "כן",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1754,7 +1979,16 @@
       "def": "so, thus (in fixed phrases: אַחֲרֵי כֵּן, לָכֵן)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adv.thus"
+     },
+     {
+      "id": "s3",
+      "def": "honest, sincere (adjective: אָדָם כֵּן “an honest person”; feminine כֵּנָה)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "adj.honest"
      }
     ],
     "examples": [
@@ -1778,6 +2012,13 @@
       "register": "neutral",
       "context": "daily routine",
       "sense": "s2"
+     },
+     {
+      "text": "הוּא אָדָם כֵּן.",
+      "tr": "He is an honest person.",
+      "register": "neutral",
+      "context": "character",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1850,6 +2091,13 @@
     "part.no"
    ],
    "translit": "lo",
+   "features": {
+    "spelling": "לא",
+    "addressee": "anyone",
+    "reply": {
+     "none": "it is itself an answer"
+    }
+   },
    "note": "Same written form and sound as the negation לֹא “not” (he:lo); as an answer it stands alone, usually followed by a pause or comma.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",

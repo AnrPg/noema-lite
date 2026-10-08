@@ -7,9 +7,33 @@
    "senses": [
     "colour.white"
    ],
-   "root": "ب ي ض",
-   "brokenPlural": "بِيض",
-   "diptote": true,
+   "features": {
+    "root": "ب ي ض",
+    "pattern": "أَفْعَل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic colour adjective (the measure أَفْعَل)"
+    },
+    "feminine": "بَيْضَاء",
+    "plurals": [
+     {
+      "form": "بِيض",
+      "kind": "broken",
+      "pattern": "فُعْل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "a colour: whiter is أَشَدُّ بَيَاضًا (أَفْعَل is already the colour)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ʾabyaḍ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "أَبْيَضُ",
@@ -146,9 +170,34 @@
    "senses": [
     "colour.black"
    ],
-   "root": "س و د",
-   "brokenPlural": "سُود",
-   "diptote": true,
+   "features": {
+    "root": "س و د",
+    "pattern": "أَفْعَل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic colour adjective (the measure أَفْعَل)"
+    },
+    "feminine": "سَوْدَاء",
+    "plurals": [
+     {
+      "form": "سُود",
+      "kind": "broken",
+      "pattern": "فُعْل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "a colour: blacker is أَشَدُّ سَوَادًا"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾaswad",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "أَسْوَدُ",
@@ -214,7 +263,8 @@
       "def": "dark, gloomy (figurative): يَوْمٌ أَسْوَدُ, a black day",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -292,9 +342,33 @@
    "senses": [
     "colour.red"
    ],
-   "root": "ح م ر",
-   "brokenPlural": "حُمْر",
-   "diptote": true,
+   "features": {
+    "root": "ح م ر",
+    "pattern": "أَفْعَل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic colour adjective (the measure أَفْعَل)"
+    },
+    "feminine": "حَمْرَاء",
+    "plurals": [
+     {
+      "form": "حُمْر",
+      "kind": "broken",
+      "pattern": "فُعْل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "a colour: redder is أَشَدُّ حُمْرَةً"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ʾaḥmar",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "أَحْمَرُ",
@@ -423,9 +497,33 @@
    "senses": [
     "colour.blue"
    ],
-   "root": "ز ر ق",
-   "brokenPlural": "زُرْق",
-   "diptote": true,
+   "features": {
+    "root": "ز ر ق",
+    "pattern": "أَفْعَل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic colour adjective (the measure أَفْعَل)"
+    },
+    "feminine": "زَرْقَاء",
+    "plurals": [
+     {
+      "form": "زُرْق",
+      "kind": "broken",
+      "pattern": "فُعْل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "a colour: bluer is أَشَدُّ زُرْقَةً"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ʾazraq",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "أَزْرَقُ",
@@ -558,11 +656,44 @@
    "lemma": "أَخْضَر",
    "pos": "ADJ",
    "senses": [
-    "colour.green"
+    "colour.green",
+    "adj.dark"
    ],
-   "root": "خ ض ر",
-   "brokenPlural": "خُضْر",
-   "diptote": true,
+   "features": {
+    "root": "خ ض ر",
+    "pattern": "أَفْعَل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic colour adjective (the measure أَفْعَل)"
+    },
+    "feminine": "خَضْرَاء",
+    "plurals": [
+     {
+      "form": "خُضْر",
+      "kind": "broken",
+      "pattern": "فُعْل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "a colour: greener is أَشَدُّ خُضْرَةً"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.dark",
+     "axis": "use",
+     "value": "archaic: dark, black (old poetry)"
+    }
+   ],
    "translit": "ʾaḫḍar",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "أَخْضَرُ",
@@ -628,7 +759,8 @@
       "def": "dark; black; grey (older senses, Wiktionary)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "adj.dark"
      }
     ],
     "examples": [
@@ -652,6 +784,20 @@
       "register": "neutral",
       "context": "home",
       "sense": "s1"
+     },
+     {
+      "text": "قَدْ يَعْنِي الْأَخْضَرُ فِي الشِّعْرِ الْقَدِيمِ الْأَسْوَدَ أَوِ الدَّاكِنَ.",
+      "tr": "In old poetry al-aḫḍar can mean black or dark.",
+      "register": "archaic",
+      "context": "poetry",
+      "sense": "s2"
+     },
+     {
+      "text": "مَا أَظَلَّتِ الْخَضْرَاءُ وَلَا أَقَلَّتِ الْغَبْرَاءُ أَصْدَقَ مِنْ أَبِي ذَرٍّ.",
+      "tr": "Neither has the dark one (the sky) shaded nor the dusty one (the earth) carried anyone more truthful than Abū Ḏarr (hadith).",
+      "register": "archaic",
+      "context": "hadith",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -696,11 +842,37 @@
    "lemma": "أَصْفَر",
    "pos": "ADJ",
    "senses": [
-    "colour.yellow"
+    "colour.yellow",
+    "adj.pale"
    ],
-   "root": "ص ف ر",
-   "brokenPlural": "صُفْر",
-   "diptote": true,
+   "features": {
+    "root": "ص ف ر",
+    "pattern": "أَفْعَل",
+    "sunLetter": false,
+    "derivedFrom": {
+     "none": "a basic colour adjective (the measure أَفْعَل)"
+    },
+    "feminine": "صَفْرَاء",
+    "plurals": [
+     {
+      "form": "صُفْر",
+      "kind": "broken",
+      "pattern": "فُعْل",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "diptote",
+    "elative": {
+     "none": "a colour: yellower is أَشَدُّ صُفْرَةً"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾaṣfar",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "أَصْفَرُ",
@@ -766,7 +938,8 @@
       "def": "pale (a face)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.pale"
      }
     ],
     "examples": [
@@ -841,6 +1014,30 @@
    "senses": [
     "colour.brown"
    ],
+   "features": {
+    "root": "ب ن ن",
+    "pattern": "فُعْلِيّ",
+    "sunLetter": false,
+    "derivedFrom": "بُنّ (coffee beans) + -ī (a nisba)",
+    "feminine": "بُنِّيَّة",
+    "plurals": [
+     {
+      "form": "بُنِّيُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a colour in -ī: compared with أَغْمَقُ / أَفْتَحُ (darker / lighter) or أَكْثَرُ"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "bunnī",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "بُنِّيٌّ",
@@ -970,7 +1167,30 @@
    "senses": [
     "colour.grey"
    ],
-   "root": "ر م د",
+   "features": {
+    "root": "ر م د",
+    "pattern": "فَعَالِيّ",
+    "sunLetter": true,
+    "derivedFrom": "رَمَاد (ash) + -ī (a nisba)",
+    "feminine": "رَمَادِيَّة",
+    "plurals": [
+     {
+      "form": "رَمَادِيُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a colour in -ī: compared with أَغْمَقُ / أَفْتَحُ (darker / lighter) or أَكْثَرُ"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ramādī",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "رَمَادِيٌّ",
@@ -1126,6 +1346,34 @@
    "senses": [
     "colour.orange"
    ],
+   "features": {
+    "root": {
+     "none": "made from بُرْتُقَال (orange), a loanword"
+    },
+    "pattern": {
+     "none": "a nisba made from a loanword: no measure of its own"
+    },
+    "sunLetter": false,
+    "derivedFrom": "بُرْتُقَال (orange) + -ī (a nisba)",
+    "feminine": "بُرْتُقَالِيَّة",
+    "plurals": [
+     {
+      "form": "بُرْتُقَالِيُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a colour in -ī: compared with أَغْمَقُ / أَفْتَحُ (darker / lighter) or أَكْثَرُ"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "burtuqālī",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "بُرْتُقَالِيٌّ",
@@ -1249,7 +1497,32 @@
    "senses": [
     "colour.pink"
    ],
-   "root": "و ر د",
+   "features": {
+    "root": "و ر د",
+    "pattern": "فَعْلِيّ",
+    "sunLetter": false,
+    "derivedFrom": "وَرْد (roses) + -ī (a nisba)",
+    "feminine": "وَرْدِيَّة",
+    "plurals": [
+     {
+      "form": "وَرْدِيُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a colour in -ī: compared with أَغْمَقُ / أَفْتَحُ (darker / lighter) or أَكْثَرُ"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "wardī",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "وَرْدِيٌّ",
@@ -1318,14 +1591,16 @@
       "def": "rosy, hopeful: أَحْلَامٌ وَرْدِيَّةٌ (rosy dreams)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "of roses, floral",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1400,6 +1675,34 @@
    "senses": [
     "colour.purple"
    ],
+   "features": {
+    "root": {
+     "none": "made from بَنَفْسَج (violet), a loanword from Persian"
+    },
+    "pattern": {
+     "none": "a nisba made from a loanword: no measure of its own"
+    },
+    "sunLetter": false,
+    "derivedFrom": "بَنَفْسَج (violets) + -ī (a nisba)",
+    "feminine": "بَنَفْسَجِيَّة",
+    "plurals": [
+     {
+      "form": "بَنَفْسَجِيُّونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": {
+     "none": "a colour in -ī: compared with أَغْمَقُ / أَفْتَحُ (darker / lighter) or أَكْثَرُ"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "banafsajī",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "بَنَفْسَجِيٌّ",
@@ -1527,9 +1830,32 @@
    "lemma": "فَاتِح",
    "pos": "ADJ",
    "senses": [
-    "adj.light"
+    "adj.light",
+    "pol.conqueror"
    ],
-   "root": "ف ت ح",
+   "features": {
+    "root": "ف ت ح",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of فَتَحَ (to open)",
+    "feminine": "فَاتِحَة",
+    "plurals": [
+     {
+      "form": "فَاتِحُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَفْتَح",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "fātiḥ",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "فَاتِحٌ",
@@ -1595,7 +1921,8 @@
       "def": "opener; conqueror (as a noun)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.conqueror"
      }
     ],
     "examples": [
@@ -1671,7 +1998,35 @@
    "senses": [
     "adj.dark"
    ],
-   "root": "غ م ق",
+   "features": {
+    "root": "غ م ق",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "derivedFrom": "the active participle of غَمُقَ (to be dark)",
+    "feminine": "غَامِقَة",
+    "plurals": [
+     {
+      "form": "غَامِقُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "triptote",
+    "elative": "أَغْمَق",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "adj.dark",
+     "axis": "use",
+     "value": "dark (of a colour), modern"
+    }
+   ],
    "translit": "ġāmiq",
    "forms": {
     "ADJ;NOM;SG;MASC;INDF": "غَامِقٌ",
@@ -1813,7 +2168,25 @@
     "adv.more",
     "adv.most"
    ],
-   "root": "ك ث ر",
+   "features": {
+    "root": "ك ث ر",
+    "pattern": "أَفْعَل",
+    "sunLetter": false,
+    "derivedFrom": "the elative of كَثِير",
+    "feminine": {
+     "none": "an elative: one form for both genders in comparisons (هِيَ أَكْثَرُ …); the feminine كُثْرَى is rare"
+    },
+    "plurals": {
+     "none": "an elative: one form (أَكْثَرُ) for every number and gender in comparisons"
+    },
+    "declension": "diptote",
+    "elative": {
+     "none": "itself the elative of كَثِير"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾakṯar",
    "forms": {
     "ADJ;CMPR;NOM": "أَكْثَرُ",

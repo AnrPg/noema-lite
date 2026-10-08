@@ -5,9 +5,60 @@
    "lemma": "haben",
    "pos": "VERB",
    "senses": [
-    "poss.have"
+    "poss.have",
+    "verb.aux.perfect"
    ],
-   "aux": "haben",
+   "contrasts": [
+    {
+     "concept": "verb.aux.perfect",
+     "axis": "which verbs take it",
+     "value": "most verbs, all with a direct object (hat gegessen)"
+    }
+   ],
+   "features": {
+    "principalParts": [
+     "haben",
+     "hat",
+     "hatte",
+     "gehabt"
+    ],
+    "conjugation": "irregular",
+    "presentChange": "irregular",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": [
+     {
+      "form": "hat … gegessen",
+      "senses": [
+       "s3"
+      ],
+      "note": "the auxiliary with a past participle"
+     }
+    ]
+   },
    "forms": {
     "V;NFIN": "haben",
     "V;PRS;1;SG": "habe",
@@ -45,14 +96,16 @@
       "def": "to have (a state or feeling): Hunger, Durst, Angst, Zeit, Glück haben",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "auxiliary of the perfect: Ich habe gegessen.",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.aux.perfect"
      }
     ],
     "examples": [
@@ -181,9 +234,32 @@
    "lemma": "Familie",
    "pos": "NOUN",
    "senses": [
-    "family.family"
+    "family.family",
+    "sci.family"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Familien",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Familie",
     "N;ACC;SG": "Familie",
@@ -220,7 +296,8 @@
       "def": "family (in biology: a group of genera)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "sci.family"
      }
     ],
     "examples": [
@@ -309,6 +386,20 @@
    "senses": [
     "family.parents"
    ],
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Eltern)"
+    },
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;PL": "Eltern",
     "N;ACC;PL": "Eltern",
@@ -416,9 +507,38 @@
    "lemma": "Mutter",
    "pos": "NOUN",
    "senses": [
-    "family.mother"
+    "family.mother",
+    "tech.nut"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mütter",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "Muttern",
+      "pattern": "-n",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mutter",
     "N;ACC;SG": "Mutter",
@@ -455,7 +575,8 @@
       "def": "nut (for a bolt; plural Muttern)",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "tech.nut"
      }
     ],
     "examples": [
@@ -564,6 +685,28 @@
     "family.father"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Väter",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Vater",
     "N;ACC;SG": "Vater",
@@ -600,7 +743,8 @@
       "def": "father, founder (der Vater der Idee)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -708,6 +852,27 @@
     "family.son"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Söhne",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Sohn",
     "N;ACC;SG": "Sohn",
@@ -832,9 +997,32 @@
    "lemma": "Tochter",
    "pos": "NOUN",
    "senses": [
-    "family.daughter"
+    "family.daughter",
+    "work.subsidiary"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Töchter",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tochter",
     "N;ACC;SG": "Tochter",
@@ -871,7 +1059,8 @@
       "def": "subsidiary (company), short for Tochtergesellschaft",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "work.subsidiary"
      }
     ],
     "examples": [
@@ -946,9 +1135,33 @@
    "lemma": "Bruder",
    "pos": "NOUN",
    "senses": [
-    "family.brother"
+    "family.brother",
+    "relig.monk"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Brüder",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bruder",
     "N;ACC;SG": "Bruder",
@@ -985,14 +1198,16 @@
       "def": "brother (monk; a title: Bruder Johannes)",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.monk"
      },
      {
       "id": "s3",
       "def": "bro, mate (address among friends)",
       "register": [
        "slang"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1087,9 +1302,47 @@
    "lemma": "Schwester",
    "pos": "NOUN",
    "senses": [
-    "family.sister"
+    "family.sister",
+    "job.nurse",
+    "relig.nun"
+   ],
+   "contrasts": [
+    {
+     "concept": "job.nurse",
+     "axis": "sex and term",
+     "value": "a woman (short form; also a title)"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schwestern",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "Schwester",
+      "senses": [
+       "s2"
+      ],
+      "note": "as a title before a first name, without an article: Schwester Anna"
+     }
+    ]
+   },
    "forms": {
     "N;NOM;SG": "Schwester",
     "N;ACC;SG": "Schwester",
@@ -1126,14 +1379,16 @@
       "def": "nurse (short for Krankenschwester; also as a title)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "job.nurse"
      },
      {
       "id": "s3",
       "def": "sister, nun",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.nun"
      }
     ],
     "examples": [
@@ -1157,6 +1412,20 @@
       "register": "colloquial",
       "context": "hospital",
       "sense": "s2"
+     },
+     {
+      "text": "Die Schwester bringt dem Patienten das Frühstück.",
+      "tr": "The nurse brings the patient his breakfast.",
+      "register": "neutral",
+      "context": "hospital",
+      "sense": "s2"
+     },
+     {
+      "text": "Schwester Maria lebt seit vierzig Jahren im Kloster.",
+      "tr": "Sister Maria has lived in the convent for forty years.",
+      "register": "neutral",
+      "context": "religion",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1210,7 +1479,42 @@
    "senses": [
     "family.husband"
    ],
+   "contrasts": [
+    {
+     "concept": "family.husband",
+     "axis": "register",
+     "value": "official, unambiguous"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ehemänner",
+      "pattern": "umlaut + -er",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Ehe",
+      "role": "modifier"
+     },
+     {
+      "part": "Mann",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Ehemann",
     "N;ACC;SG": "Ehemann",
@@ -1327,7 +1631,42 @@
    "senses": [
     "family.wife"
    ],
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "official, unambiguous"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ehefrauen",
+      "pattern": "-en",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Ehe",
+      "role": "modifier"
+     },
+     {
+      "part": "Frau",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Ehefrau",
     "N;ACC;SG": "Ehefrau",
@@ -1446,6 +1785,28 @@
     "family.baby"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Babys",
+      "pattern": "-s",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Baby",
     "N;ACC;SG": "Baby",
@@ -1482,7 +1843,8 @@
       "def": "baby (term of endearment, mostly in pop songs)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1559,6 +1921,27 @@
    "senses": [
     "family.grandparents"
    ],
+   "features": {
+    "plurals": {
+     "none": "plural only: the word itself is a plural (die Großeltern)"
+    },
+    "compound": [
+     {
+      "part": "groß",
+      "role": "modifier"
+     },
+     {
+      "part": "Eltern",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;PL": "Großeltern",
     "N;ACC;PL": "Großeltern",
@@ -1651,7 +2034,42 @@
    "senses": [
     "family.grandfather"
    ],
+   "contrasts": [
+    {
+     "concept": "family.grandfather",
+     "axis": "register",
+     "value": "neutral"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Großväter",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "groß",
+      "role": "modifier"
+     },
+     {
+      "part": "Vater",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Großvater",
     "N;ACC;SG": "Großvater",
@@ -1757,9 +2175,39 @@
    "lemma": "Opa",
    "pos": "NOUN",
    "senses": [
-    "family.grandfather"
+    "family.grandfather",
+    "person.oldman"
+   ],
+   "contrasts": [
+    {
+     "concept": "family.grandfather",
+     "axis": "register",
+     "value": "family word"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Opas",
+      "pattern": "-s",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Opa",
     "N;ACC;SG": "Opa",
@@ -1799,7 +2247,8 @@
       "def": "old man (any elderly man; can be disrespectful)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "person.oldman"
      }
     ],
     "examples": [
@@ -1869,9 +2318,51 @@
    "lemma": "Großmutter",
    "pos": "NOUN",
    "senses": [
-    "family.grandmother"
+    "family.grandmother",
+    "person.oldwoman"
+   ],
+   "contrasts": [
+    {
+     "concept": "family.grandmother",
+     "axis": "register",
+     "value": "neutral"
+    },
+    {
+     "concept": "person.oldwoman",
+     "axis": "tone",
+     "value": "an elderly lady (rather kind)"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Großmütter",
+      "pattern": "umlaut only",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "groß",
+      "role": "modifier"
+     },
+     {
+      "part": "Mutter",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Großmutter",
     "N;ACC;SG": "Großmutter",
@@ -1908,7 +2399,8 @@
       "def": "old woman, elderly lady",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "person.oldwoman"
      }
     ],
     "examples": [
@@ -1932,6 +2424,13 @@
       "register": "literary",
       "context": "fairy tale",
       "sense": "s1"
+     },
+     {
+      "text": "Lass die Großmutter doch zuerst einsteigen!",
+      "tr": "Let the old lady get on first!",
+      "register": "colloquial",
+      "context": "on the bus",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1984,9 +2483,44 @@
    "lemma": "Oma",
    "pos": "NOUN",
    "senses": [
-    "family.grandmother"
+    "family.grandmother",
+    "person.oldwoman"
+   ],
+   "contrasts": [
+    {
+     "concept": "family.grandmother",
+     "axis": "register",
+     "value": "family word"
+    },
+    {
+     "concept": "person.oldwoman",
+     "axis": "tone",
+     "value": "familiar, can sound disrespectful"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Omas",
+      "pattern": "-s",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Oma",
     "N;ACC;SG": "Oma",
@@ -2026,7 +2560,8 @@
       "def": "old woman (any elderly woman)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "person.oldwoman"
      }
     ],
     "examples": [
@@ -2050,6 +2585,13 @@
       "register": "colloquial",
       "context": "disbelief",
       "sense": "s1"
+     },
+     {
+      "text": "Im Bus hat eine Oma mit mir über das Wetter geredet.",
+      "tr": "On the bus an old lady chatted with me about the weather.",
+      "register": "colloquial",
+      "context": "on the bus",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2108,9 +2650,34 @@
    "lemma": "Enkel",
    "pos": "NOUN",
    "senses": [
-    "family.grandson"
+    "family.grandson",
+    "family.grandchild",
+    "body.ankle"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Enkel",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Enkel",
     "N;ACC;SG": "Enkel",
@@ -2147,14 +2714,16 @@
       "def": "grandchild (boy or girl; mostly plural: die Enkel)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.grandchild"
      },
      {
       "id": "s3",
       "def": "ankle (regional, north-western Germany)",
       "register": [
        "regional"
-      ]
+      ],
+      "concept": "body.ankle"
      }
     ],
     "examples": [
@@ -2178,6 +2747,13 @@
       "register": "neutral",
       "context": "family",
       "sense": "s2"
+     },
+     {
+      "text": "Ich habe mir beim Fußball den Enkel verstaucht.",
+      "tr": "I sprained my ankle playing football.",
+      "register": "regional",
+      "context": "health",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2227,6 +2803,27 @@
     "family.granddaughter"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Enkelinnen",
+      "pattern": "-nen",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Enkel + -in"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Enkelin",
     "N;ACC;SG": "Enkelin",
@@ -2323,6 +2920,28 @@
     "family.uncle"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Onkel",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Onkel",
     "N;ACC;SG": "Onkel",
@@ -2359,7 +2978,8 @@
       "def": "man (for children: der Onkel Doktor)",
       "register": [
        "children"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2436,6 +3056,28 @@
     "family.aunt"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tanten",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tante",
     "N;ACC;SG": "Tante",
@@ -2472,7 +3114,8 @@
       "def": "woman (for children; colloquially also “old girl”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2544,7 +3187,35 @@
    "senses": [
     "family.cousin"
    ],
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "sex of the person",
+     "value": "a man (or unspecified)"
+    }
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Cousins",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Cousin",
     "N;ACC;SG": "Cousin",
@@ -2648,7 +3319,35 @@
    "senses": [
     "family.cousin"
    ],
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "sex of the person",
+     "value": "a woman"
+    }
+   ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Cousinen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "derived: Cousin + -e (from French cousine)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Cousine",
     "N;ACC;SG": "Cousine",
@@ -2757,6 +3456,27 @@
     "family.nephew"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Neffen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "weak",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Neffe",
     "N;ACC;SG": "Neffen",
@@ -2854,6 +3574,27 @@
     "family.niece"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Nichten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Nichte",
     "N;ACC;SG": "Nichte",
@@ -2953,6 +3694,28 @@
     "family.relative"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Verwandte",
+      "pattern": "adjectival",
+      "senses": [
+       "s1"
+      ],
+      "note": "after the article: die Verwandten"
+     }
+    ],
+    "declension": "adjectival",
+    "compound": {
+     "none": "an adjective used as a noun (verwandt “related”)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG;INDF": "Verwandter",
     "N;NOM;SG;DEF": "Verwandte",
@@ -3074,6 +3837,15 @@
    "senses": [
     "poss.my"
    ],
+   "features": {
+    "adjAfter": "mixed",
+    "address": {
+     "none": "the owner is not the person spoken to"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "mein",
     "DET;NOM;SG;FEM": "meine",
@@ -3164,6 +3936,20 @@
    "senses": [
     "poss.your.sg"
    ],
+   "contrasts": [
+    {
+     "concept": "poss.your.sg",
+     "axis": "social distance",
+     "value": "informal (du)"
+    }
+   ],
+   "features": {
+    "adjAfter": "mixed",
+    "address": "informal",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "dein",
     "DET;NOM;SG;FEM": "deine",
@@ -3245,8 +4031,18 @@
    "pos": "DET",
    "class": "poss",
    "senses": [
-    "poss.his"
+    "poss.his",
+    "poss.its"
    ],
+   "features": {
+    "adjAfter": "mixed",
+    "address": {
+     "none": "the owner is not the person spoken to"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "sein",
     "DET;NOM;SG;FEM": "seine",
@@ -3291,7 +4087,8 @@
       "def": "its (when the owner is masculine or neuter: das Kind und sein Ball)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "poss.its"
      }
     ],
     "examples": [
@@ -3346,6 +4143,15 @@
     "poss.her",
     "poss.their"
    ],
+   "features": {
+    "adjAfter": "mixed",
+    "address": {
+     "none": "the owner is not the person spoken to"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "ihr",
     "DET;NOM;SG;FEM": "ihre",
@@ -3452,6 +4258,15 @@
    "senses": [
     "poss.our"
    ],
+   "features": {
+    "adjAfter": "mixed",
+    "address": {
+     "none": "the owner is not the person spoken to"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "unser",
     "DET;NOM;SG;FEM": "unsere",
@@ -3543,6 +4358,20 @@
    "senses": [
     "poss.your.pl"
    ],
+   "contrasts": [
+    {
+     "concept": "poss.your.pl",
+     "axis": "social distance",
+     "value": "informal (ihr)"
+    }
+   ],
+   "features": {
+    "adjAfter": "mixed",
+    "address": "informal",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "euer",
     "DET;NOM;SG;FEM": "eure",
@@ -3627,6 +4456,25 @@
     "poss.your.sg",
     "poss.your.pl"
    ],
+   "contrasts": [
+    {
+     "concept": "poss.your.sg",
+     "axis": "social distance",
+     "value": "formal (Sie)"
+    },
+    {
+     "concept": "poss.your.pl",
+     "axis": "social distance",
+     "value": "formal (Sie)"
+    }
+   ],
+   "features": {
+    "adjAfter": "mixed",
+    "address": "formal",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "Ihr",
     "DET;NOM;SG;FEM": "Ihre",
@@ -3695,6 +4543,13 @@
       "tr": "Ladies and gentlemen, your passports please!",
       "register": "formal",
       "context": "travel",
+      "sense": "s2"
+     },
+     {
+      "text": "Meine Damen und Herren, Ihre Plätze sind in Reihe drei.",
+      "tr": "Ladies and gentlemen, your seats are in row three.",
+      "register": "formal",
+      "context": "theatre",
       "sense": "s2"
      }
     ],

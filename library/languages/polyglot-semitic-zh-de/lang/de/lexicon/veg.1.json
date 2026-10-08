@@ -8,6 +8,27 @@
     "veg.tomato"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tomaten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Tomate",
     "N;ACC;SG": "Tomate",
@@ -140,9 +161,43 @@
    "lemma": "Zwiebel",
    "pos": "NOUN",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "nature.bulb",
+    "obj.clock",
+    "body.hairroot"
+   ],
+   "contrasts": [
+    {
+     "concept": "obj.clock",
+     "axis": "register",
+     "value": "an old pocket watch (dated, humorous)"
+    }
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zwiebel",
     "N;ACC;SG": "Zwiebel",
@@ -186,7 +241,8 @@
       ],
       "domains": [
        "gardening"
-      ]
+      ],
+      "concept": "nature.bulb"
      },
      {
       "id": "s3",
@@ -194,7 +250,8 @@
       "register": [
        "slang",
        "dated"
-      ]
+      ],
+      "concept": "obj.clock"
      },
      {
       "id": "s4",
@@ -204,7 +261,8 @@
       ],
       "domains": [
        "anatomy"
-      ]
+      ],
+      "concept": "body.hairroot"
      }
     ],
     "examples": [
@@ -235,6 +293,13 @@
       "register": "colloquial",
       "context": "humour",
       "sense": "s3"
+     },
+     {
+      "text": "Die Haarzwiebel sitzt tief in der Haut.",
+      "tr": "The hair bulb sits deep in the skin.",
+      "register": "technical",
+      "context": "biology",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -293,9 +358,32 @@
    "lemma": "Kartoffel",
    "pos": "NOUN",
    "senses": [
-    "veg.potato"
+    "veg.potato",
+    "person.german"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kartoffeln",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kartoffel",
     "N;ACC;SG": "Kartoffel",
@@ -343,7 +431,8 @@
       "register": [
        "slang",
        "pejorative"
-      ]
+      ],
+      "concept": "person.german"
      }
     ],
     "examples": [
@@ -367,6 +456,13 @@
       "register": "neutral",
       "context": "household",
       "sense": "s1"
+     },
+     {
+      "text": "Auf dem Schulhof nennen sie ihn nur die Kartoffel.",
+      "tr": "In the schoolyard they just call him “the spud” (the German).",
+      "register": "slang",
+      "context": "youth slang",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -453,6 +549,21 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically Klobe (“cleft”) + Lauch"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Knoblauch",
     "N;ACC;SG": "Knoblauch",
@@ -561,9 +672,36 @@
    "lemma": "Gurke",
    "pos": "NOUN",
    "senses": [
-    "veg.cucumber"
+    "veg.cucumber",
+    "food.gherkin",
+    "obj.junk",
+    "body.nose"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Gurken",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2",
+       "s3",
+       "s4"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Gurke",
     "N;ACC;SG": "Gurke",
@@ -604,14 +742,16 @@
       "def": "pickled gherkin (saure Gurke, Gewürzgurke)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.gherkin"
      },
      {
       "id": "s3",
       "def": "piece of junk – an old, poor car or device",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "obj.junk"
      },
      {
       "id": "s4",
@@ -619,7 +759,8 @@
       "register": [
        "informal",
        "humorous"
-      ]
+      ],
+      "concept": "body.nose"
      }
     ],
     "examples": [
@@ -650,6 +791,13 @@
       "register": "colloquial",
       "context": "cars",
       "sense": "s3"
+     },
+     {
+      "text": "Was hat der für eine Gurke im Gesicht!",
+      "tr": "What a hooter he’s got on his face!",
+      "register": "humorous",
+      "context": "joking",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -710,6 +858,27 @@
     "veg.eggplant"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Auberginen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Aubergine",
     "N;ACC;SG": "Aubergine",
@@ -821,6 +990,27 @@
     "veg.carrot"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Karotten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Karotte",
     "N;ACC;SG": "Karotte",
@@ -949,6 +1139,34 @@
     "veg.sweetpotato"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Süßkartoffeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "süß",
+      "role": "modifier"
+     },
+     {
+      "part": "Kartoffel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Süßkartoffel",
     "N;ACC;SG": "Süßkartoffel",
@@ -1060,6 +1278,27 @@
     "veg.pea"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Erbsen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Erbse",
     "N;ACC;SG": "Erbse",
@@ -1179,6 +1418,27 @@
     "veg.spinach"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Spinate",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Spinat",
     "N;ACC;SG": "Spinat",
@@ -1282,6 +1542,27 @@
     "veg.radish"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Radieschen",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "derived: a diminutive in -chen (from Latin radix “root”), hence neuter"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Radieschen",
     "N;ACC;SG": "Radieschen",
@@ -1390,6 +1671,27 @@
     "veg.pumpkin"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kürbis",
     "N;ACC;SG": "Kürbis",
@@ -1490,9 +1792,32 @@
    "lemma": "Chili",
    "pos": "NOUN",
    "senses": [
-    "veg.chili"
+    "veg.chili",
+    "food.chilipowder",
+    "food.chiliconcarne"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Chilis",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Chili",
     "N;ACC;SG": "Chili",
@@ -1536,7 +1861,8 @@
       ],
       "domains": [
        "food"
-      ]
+      ],
+      "concept": "food.chilipowder"
      },
      {
       "id": "s3",
@@ -1546,7 +1872,8 @@
       ],
       "domains": [
        "food"
-      ]
+      ],
+      "concept": "food.chiliconcarne"
      }
     ],
     "examples": [
@@ -1570,6 +1897,13 @@
       "register": "neutral",
       "context": "home",
       "sense": "s3"
+     },
+     {
+      "text": "Gib noch etwas Chili in die Soße.",
+      "tr": "Put a little more chili powder in the sauce.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1630,9 +1964,38 @@
    "lemma": "Kohl",
    "pos": "NOUN",
    "senses": [
-    "veg.cabbage"
+    "veg.cabbage",
+    "abstract.nonsense"
+   ],
+   "contrasts": [
+    {
+     "concept": "abstract.nonsense",
+     "axis": "how it is used",
+     "value": "about talking: Kohl reden (rather dated)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kohl",
     "N;ACC;SG": "Kohl",
@@ -1680,7 +2043,8 @@
       "register": [
        "colloquial",
        "dated"
-      ]
+      ],
+      "concept": "abstract.nonsense"
      }
     ],
     "examples": [
@@ -1779,6 +2143,35 @@
     "veg.cauliflower"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Blumenkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Blume",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Blumenkohl",
     "N;ACC;SG": "Blumenkohl",
@@ -1888,9 +2281,31 @@
    "lemma": "Brokkoli",
    "pos": "NOUN",
    "senses": [
-    "veg.broccoli"
+    "veg.broccoli",
+    "health.marijuana"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Brokkoli",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Brokkoli",
     "N;ACC;SG": "Brokkoli",
@@ -1932,7 +2347,8 @@
       "register": [
        "slang",
        "humorous"
-      ]
+      ],
+      "concept": "health.marijuana"
      }
     ],
     "examples": [
@@ -1956,6 +2372,13 @@
       "register": "neutral",
       "context": "health",
       "sense": "s1"
+     },
+     {
+      "text": "Die Jungs rauchen hinter der Schule Brokkoli.",
+      "tr": "The boys are smoking “broccoli” (weed) behind the school.",
+      "register": "slang",
+      "context": "youth slang",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2001,9 +2424,32 @@
    "lemma": "Lauch",
    "pos": "NOUN",
    "senses": [
-    "veg.leek"
+    "veg.leek",
+    "person.weakling"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Lauche",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Lauch",
     "N;ACC;SG": "Lauch",
@@ -2051,7 +2497,8 @@
       "register": [
        "slang",
        "pejorative"
-      ]
+      ],
+      "concept": "person.weakling"
      }
     ],
     "examples": [
@@ -2120,9 +2567,31 @@
    "lemma": "Paprika",
    "pos": "NOUN",
    "senses": [
-    "veg.bellpepper"
+    "veg.bellpepper",
+    "food.paprika"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Paprika",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Paprika",
     "N;ACC;SG": "Paprika",
@@ -2166,7 +2635,8 @@
       ],
       "domains": [
        "food"
-      ]
+      ],
+      "concept": "food.paprika"
      }
     ],
     "examples": [
@@ -2248,6 +2718,27 @@
     "veg.beetroot"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Roten Beten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "two words: an adjective + a noun"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Rote Bete",
     "N;ACC;SG": "Rote Bete",
@@ -2257,6 +2748,8 @@
     "N;ACC;PL": "Roten Beten",
     "N;DAT;PL": "Roten Beten",
     "N;GEN;PL": "Roten Beten",
+    "N;DAT;SG;INDF": "Roter Bete",
+    "N;GEN;SG;INDF": "Roter Bete",
     "N;NOM;PL;INDF": "Rote Beten",
     "N;ACC;PL;INDF": "Rote Beten",
     "N;DAT;PL;INDF": "Roten Beten",
@@ -2379,6 +2872,27 @@
     "veg.zucchini"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zucchini",
+      "pattern": "no ending",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zucchini",
     "N;ACC;SG": "Zucchini",
@@ -2487,9 +3001,32 @@
    "lemma": "Bohne",
    "pos": "NOUN",
    "senses": [
-    "veg.greenbean"
+    "veg.greenbean",
+    "food.coffeebean"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bohne",
     "N;ACC;SG": "Bohne",
@@ -2539,7 +3076,8 @@
       ],
       "domains": [
        "food"
-      ]
+      ],
+      "concept": "food.coffeebean"
      }
     ],
     "examples": [
@@ -2645,6 +3183,35 @@
     "veg.springonion"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Frühlingszwiebeln",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Frühling",
+      "role": "modifier",
+      "linker": "-s-"
+     },
+     {
+      "part": "Zwiebel",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Frühlingszwiebel",
     "N;ACC;SG": "Frühlingszwiebel",
@@ -2750,6 +3317,35 @@
     "veg.celery"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Staudenselleries",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Staude",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Sellerie",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Staudensellerie",
     "N;ACC;SG": "Staudensellerie",
@@ -2861,6 +3457,21 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mais",
     "N;ACC;SG": "Mais",

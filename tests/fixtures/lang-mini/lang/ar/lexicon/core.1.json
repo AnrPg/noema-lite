@@ -7,6 +7,10 @@
    "senses": [
     "pron.he"
    ],
+   "features": {
+    "person": "3rd person singular, masculine",
+    "suffix": "ـهُ"
+   },
    "translit": "huwa",
    "forms": {
     "PRON;NOM": "هُوَ"
@@ -22,6 +26,10 @@
    "senses": [
     "pron.she"
    ],
+   "features": {
+    "person": "3rd person singular, feminine",
+    "suffix": "ـهَا"
+   },
    "translit": "hiya",
    "forms": {
     "PRON;NOM": "هِيَ"
@@ -35,8 +43,43 @@
    "lemma": "أَكَلَ",
    "pos": "VERB",
    "senses": [
-    "verb.eat"
+    "verb.eat",
+    "verb.corrode"
    ],
+   "features": {
+    "root": "ء ك ل",
+    "rootClass": [
+     "hamzated"
+    ],
+    "verbForm": "I",
+    "present": "يَأْكُلُ",
+    "masdar": [
+     "أَكْل"
+    ],
+    "participles": [
+     {
+      "form": "آكِل",
+      "kind": "active"
+     },
+     {
+      "form": "مَأْكُول",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the food (أَكَلَ الْخُبْزَ)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "root": "ء ك ل",
    "verbForm": "I",
    "translit": "akala",
@@ -78,7 +121,8 @@
       "def": "to eat away, corrode, consume (rust, fire, time)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "verb.corrode"
      }
     ],
     "examples": [
@@ -164,6 +208,9 @@
    "senses": [
     "conj.and"
    ],
+   "features": {
+    "governs": "words or clauses"
+   },
    "prefix": true,
    "translit": "wa",
    "ref": {

@@ -5,8 +5,13 @@
    "lemma": "أَنَا",
    "pos": "PRON",
    "senses": [
-    "pron.i"
+    "pron.i",
+    "mind.ego"
    ],
+   "features": {
+    "person": "1st person singular",
+    "suffix": "ـِي (on nouns), ـنِي (on verbs)"
+   },
    "translit": "ʾana",
    "forms": {
     "PRON;NOM": "أَنَا"
@@ -41,7 +46,8 @@
       "domains": [
        "psychology",
        "philosophy"
-      ]
+      ],
+      "concept": "mind.ego"
      }
     ],
     "examples": [
@@ -109,6 +115,17 @@
    "pos": "PRON",
    "senses": [
     "pron.you.sg"
+   ],
+   "features": {
+    "person": "2nd person singular, masculine",
+    "suffix": "ـكَ"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "gender of the addressee",
+     "value": "to a man"
+    }
    ],
    "translit": "ʾanta",
    "forms": {
@@ -200,6 +217,17 @@
    "senses": [
     "pron.you.sg"
    ],
+   "features": {
+    "person": "2nd person singular, feminine",
+    "suffix": "ـكِ"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.sg",
+     "axis": "gender of the addressee",
+     "value": "to a woman"
+    }
+   ],
    "translit": "ʾanti",
    "forms": {
     "PRON;NOM": "أَنْتِ"
@@ -288,7 +316,19 @@
    "lemma": "هُوَ",
    "pos": "PRON",
    "senses": [
-    "pron.he"
+    "pron.he",
+    "pron.it"
+   ],
+   "features": {
+    "person": "3rd person singular, masculine",
+    "suffix": "ـهُ"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a masculine noun (الْكِتَابُ → هُوَ)"
+    }
    ],
    "translit": "huwa",
    "forms": {
@@ -320,7 +360,8 @@
       "def": "it (referring to a masculine noun, also a thing)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.it"
      }
     ],
     "examples": [
@@ -386,7 +427,19 @@
    "lemma": "هِيَ",
    "pos": "PRON",
    "senses": [
-    "pron.she"
+    "pron.she",
+    "pron.it"
+   ],
+   "features": {
+    "person": "3rd person singular, feminine",
+    "suffix": "ـهَا"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.it",
+     "axis": "gender of the noun it stands for",
+     "value": "a feminine noun, or a non-human plural (السَّيَّارَةُ، الْكُتُبُ → هِيَ)"
+    }
    ],
    "translit": "hiya",
    "forms": {
@@ -418,7 +471,8 @@
       "def": "it (feminine noun); they (non-human plural)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.it"
      }
     ],
     "examples": [
@@ -486,6 +540,10 @@
    "senses": [
     "pron.we"
    ],
+   "features": {
+    "person": "1st person plural",
+    "suffix": "ـنَا"
+   },
    "translit": "naḥnu",
    "forms": {
     "PRON;NOM": "نَحْنُ"
@@ -570,6 +628,17 @@
    "pos": "PRON",
    "senses": [
     "pron.you.pl"
+   ],
+   "features": {
+    "person": "2nd person plural, masculine",
+    "suffix": "ـكُمْ"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.pl",
+     "axis": "gender of the addressees",
+     "value": "men or a mixed group"
+    }
    ],
    "translit": "ʾantum",
    "forms": {
@@ -656,6 +725,17 @@
    "senses": [
     "pron.you.pl"
    ],
+   "features": {
+    "person": "2nd person plural, feminine",
+    "suffix": "ـكُنَّ"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.you.pl",
+     "axis": "gender of the addressees",
+     "value": "women only"
+    }
+   ],
    "translit": "ʾantunna",
    "forms": {
     "PRON;NOM": "أَنْتُنَّ"
@@ -736,6 +816,17 @@
    "pos": "PRON",
    "senses": [
     "pron.they"
+   ],
+   "features": {
+    "person": "3rd person plural, masculine",
+    "suffix": "ـهُمْ"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "gender of the group",
+     "value": "men or a mixed group"
+    }
    ],
    "translit": "hum",
    "forms": {
@@ -822,6 +913,17 @@
    "senses": [
     "pron.they"
    ],
+   "features": {
+    "person": "3rd person plural, feminine",
+    "suffix": "ـهُنَّ"
+   },
+   "contrasts": [
+    {
+     "concept": "pron.they",
+     "axis": "gender of the group",
+     "value": "women only"
+    }
+   ],
    "translit": "hunna",
    "forms": {
     "PRON;NOM": "هُنَّ"
@@ -905,10 +1007,51 @@
    "lemma": "كَانَ",
    "pos": "VERB",
    "senses": [
-    "verb.be"
+    "verb.be",
+    "verb.exist"
    ],
-   "root": "ك و ن",
-   "verbForm": "I",
+   "features": {
+    "root": "ك و ن",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "I",
+    "present": "يَكُونُ",
+    "masdar": [
+     "كَوْن"
+    ],
+    "participles": [
+     {
+      "form": "كَائِن",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the predicate (كَانَ الْجَوُّ جَمِيلًا)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "a verb in the present: was doing, used to do (كَانَ يَعْمَلُ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.exist",
+     "axis": "how existence is said",
+     "value": "a verb: to exist, to be (past, future: كَانَ هُنَاكَ …)"
+    }
+   ],
    "translit": "kāna",
    "forms": {
     "V;PST;1;SG": "كُنْتُ",
@@ -958,14 +1101,16 @@
       "def": "auxiliary: كَانَ + present verb = past continuous or habit (“was doing, used to do”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "to exist, to be; there was (Wiktionary: “to exist, to be, there be”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.exist"
      }
     ],
     "examples": [
@@ -1052,7 +1197,19 @@
    "lemma": "وَ",
    "pos": "CCONJ",
    "senses": [
-    "conj.and"
+    "conj.and",
+    "conj.while",
+    "part.oath"
+   ],
+   "features": {
+    "governs": "words or clauses"
+   },
+   "contrasts": [
+    {
+     "concept": "conj.while",
+     "axis": "what it introduces",
+     "value": "وَ + a nominal clause: the circumstance of the action (جَاءَ وَهُوَ يَضْحَكُ)"
+    }
    ],
    "translit": "wa",
    "prefix": true,
@@ -1082,7 +1239,8 @@
       "def": "while, as (introduces a circumstance: وَهُوَ …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.while"
      },
      {
       "id": "s3",
@@ -1090,7 +1248,8 @@
       "register": [
        "neutral",
        "religious"
-      ]
+      ],
+      "concept": "part.oath"
      }
     ],
     "examples": [
@@ -1170,8 +1329,30 @@
    "senses": [
     "person.man"
    ],
+   "features": {
+    "root": "ر ج ل",
+    "pattern": "فَعُل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "رِجَال",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "رَجُلَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ر ج ل",
    "translit": "rajul",
    "forms": {
     "N;NOM;SG;INDF": "رَجُلٌ",
@@ -1219,7 +1400,8 @@
       "def": "a real man — brave, reliable (in praise or as a demand)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1320,10 +1502,52 @@
    "lemma": "اِمْرَأَة",
    "pos": "NOUN",
    "senses": [
-    "person.woman"
+    "person.woman",
+    "family.wife"
+   ],
+   "features": {
+    "root": "م ر ء",
+    "pattern": "اِفْعَلَة",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "نِسَاء",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "from another root (ن س و): a suppletive plural",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "نِسْوَة",
+      "kind": "broken",
+      "pattern": "فِعْلَة",
+      "declension": "triptote",
+      "note": "a few women; less common",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "اِمْرَأَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "older or literary: “his woman” (امْرَأَتُهُ)"
+    }
    ],
    "gender": "FEM",
-   "root": "م ر ء",
    "translit": "imraʾa",
    "forms": {
     "N;NOM;SG;INDF": "اِمْرَأَةٌ",
@@ -1371,7 +1595,8 @@
       "def": "wife (someone’s woman)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.wife"
      }
     ],
     "examples": [
@@ -1394,6 +1619,13 @@
       "tr": "the wife of al-ʿAzīz (Potiphar’s wife, in the story of Joseph)",
       "register": "literary",
       "context": "literature",
+      "sense": "s2"
+     },
+     {
+      "text": "اِمْرَأَةُ أَخِي مُعَلِّمَةٌ.",
+      "tr": "My brother’s wife is a teacher.",
+      "register": "neutral",
+      "context": "family",
       "sense": "s2"
      }
     ],
@@ -1453,10 +1685,42 @@
    "lemma": "وَلَد",
    "pos": "NOUN",
    "senses": [
-    "person.boy"
+    "person.boy",
+    "family.child",
+    "family.son"
+   ],
+   "features": {
+    "root": "و ل د",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَوْلَاد",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "dual": "وَلَدَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.son",
+     "axis": "register and range",
+     "value": "everyday: child, boy — and son"
+    }
    ],
    "gender": "MASC",
-   "root": "و ل د",
    "translit": "walad",
    "forms": {
     "N;NOM;SG;INDF": "وَلَدٌ",
@@ -1504,14 +1768,16 @@
       "def": "child, offspring (son or daughter of any age)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.child"
      },
      {
       "id": "s3",
       "def": "son",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.son"
      }
     ],
     "examples": [
@@ -1542,6 +1808,20 @@
       "register": "neutral",
       "context": "play",
       "sense": "s2"
+     },
+     {
+      "text": "لِي وَلَدٌ وَبِنْتَانِ.",
+      "tr": "I have a son and two daughters.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s3"
+     },
+     {
+      "text": "وَلَدُهُ يَدْرُسُ فِي الْجَامِعَةِ.",
+      "tr": "His son studies at the university.",
+      "register": "neutral",
+      "context": "university",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1605,6 +1885,37 @@
    "senses": [
     "person.girl",
     "family.daughter"
+   ],
+   "features": {
+    "root": "ب ن ي",
+    "pattern": {
+     "none": "an old two-consonant noun: it fits no measure"
+    },
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "بَنَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "بِنْتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "family.daughter",
+     "axis": "register",
+     "value": "everyday (also “girl”)"
+    }
    ],
    "gender": "FEM",
    "translit": "bint",
@@ -1770,8 +2081,29 @@
    "senses": [
     "person.child"
    ],
+   "features": {
+    "root": "ط ف ل",
+    "pattern": "فِعْل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَطْفَال",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "طِفْلَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ط ف ل",
    "translit": "ṭifl",
    "forms": {
     "N;NOM;SG;INDF": "طِفْلٌ",
@@ -1888,8 +2220,39 @@
    "senses": [
     "person.person"
    ],
+   "features": {
+    "root": "ش خ ص",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَشْخَاص",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "شُخُوص",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "figures, characters (of a story or a play)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "شَخْصَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "gender": "MASC",
-   "root": "ش خ ص",
    "translit": "šaḫṣ",
    "forms": {
     "N;NOM;SG;INDF": "شَخْصٌ",
@@ -1937,7 +2300,8 @@
       "def": "figure, shape (seen from afar); a character",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2014,6 +2378,24 @@
    "senses": [
     "person.people"
    ],
+   "features": {
+    "root": "ء ن س",
+    "pattern": {
+     "none": "shortened from أُنَاس: it fits no regular measure"
+    },
+    "sunLetter": true,
+    "human": true,
+    "plurals": {
+     "none": "itself a plural noun (people)"
+    },
+    "dual": {
+     "none": "a plural noun"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "class": "plt",
    "translit": "nās",
    "forms": {
@@ -2124,7 +2506,8 @@
     "subtleties": [
      "A counted number of people is أَشْخَاص: ثَلَاثَةُ أَشْخَاصٍ — not *ثَلَاثَةُ نَاسٍ."
     ]
-   }
+   },
+   "gender": "MASC"
   },
   {
    "id": "ar:sadiq",
@@ -2133,9 +2516,30 @@
    "senses": [
     "person.friend"
    ],
+   "features": {
+    "root": "ص د ق",
+    "pattern": "فَعِيل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "أَصْدِقَاء",
+      "kind": "broken",
+      "pattern": "أَفْعِلَاء",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "صَدِيقَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "class": "person",
    "gender": "MASC",
-   "root": "ص د ق",
    "translit": "ṣadīq",
    "forms": {
     "N;NOM;SG;MASC;INDF": "صَدِيقٌ",
@@ -2333,11 +2737,53 @@
    "lemma": "طَالِب",
    "pos": "NOUN",
    "senses": [
-    "person.student"
+    "person.student",
+    "person.applicant"
    ],
+   "features": {
+    "root": "ط ل ب",
+    "pattern": "فَاعِل",
+    "sunLetter": true,
+    "human": true,
+    "plurals": [
+     {
+      "form": "طُلَّاب",
+      "kind": "broken",
+      "pattern": "فُعَّال",
+      "declension": "triptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "طَلَبَة",
+      "kind": "broken",
+      "pattern": "فَعَلَة",
+      "declension": "triptote",
+      "note": "students only",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "طَالِبُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "note": "seekers, applicants: طَالِبُو اللُّجُوءِ (asylum seekers)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "طَالِبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
    "class": "person",
    "gender": "MASC",
-   "root": "ط ل ب",
    "translit": "ṭālib",
    "forms": {
     "N;NOM;SG;MASC;INDF": "طَالِبٌ",
@@ -2403,7 +2849,8 @@
       "def": "seeker, one who asks for something; applicant",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.applicant"
      }
     ],
     "examples": [
@@ -2492,11 +2939,33 @@
    "lemma": "مُعَلِّم",
    "pos": "NOUN",
    "senses": [
-    "person.teacher"
+    "person.teacher",
+    "job.master"
    ],
+   "features": {
+    "root": "ع ل م",
+    "pattern": "مُفَعِّل",
+    "sunLetter": false,
+    "human": true,
+    "plurals": [
+     {
+      "form": "مُعَلِّمُونَ",
+      "kind": "soundMasc",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "مُعَلِّمَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "class": "person",
    "gender": "MASC",
-   "root": "ع ل م",
    "translit": "muʿallim",
    "forms": {
     "N;NOM;SG;MASC;INDF": "مُعَلِّمٌ",
@@ -2562,7 +3031,8 @@
       "def": "master of a trade; boss (in a workshop)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "job.master"
      }
     ],
     "examples": [
@@ -2586,6 +3056,13 @@
       "register": "neutral",
       "context": "news",
       "sense": "s1"
+     },
+     {
+      "text": "ذَهَبَ الصَّبِيُّ إِلَى الْمُعَلِّمِ لِيَتَعَلَّمَ النِّجَارَةَ.",
+      "tr": "The boy went to the master to learn carpentry.",
+      "register": "neutral",
+      "context": "crafts",
+      "sense": "s2"
      }
     ],
     "collocations": [

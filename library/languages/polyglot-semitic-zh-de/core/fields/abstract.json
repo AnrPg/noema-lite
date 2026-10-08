@@ -1,0 +1,233 @@
+{
+ "field": "abstract",
+ "title": "Abstract things",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "abstract.advantage",
+   "gloss": "an (unfair) advantage, a petty gain (占便宜 to take advantage)",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "abstract.age",
+   "gloss": "age, years of life (年纪)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "abstract.airs",
+   "gloss": "airs, arrogance (摆架子 to put on airs)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "abstract.bottom",
+   "gloss": "bottom (of a container, the sea)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "abstract.circuit",
+   "gloss": "circle, circuit; all around (周围)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "abstract.concern",
+   "gloss": "(one’s) business, concern (that’s not my problem)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "abstract.cowardice",
+   "gloss": "cowardice",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "abstract.deed",
+   "gloss": "deed, action, act",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "abstract.detail",
+   "gloss": "detail, subtlety",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "abstract.disaster",
+   "gloss": "disaster, calamity (灾难)",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "abstract.disgrace",
+   "gloss": "shame, disgrace; shameful (出丑 to make a fool of oneself)",
+   "tier": 2,
+   "rank": 11,
+   "pending": true
+  },
+  {
+   "id": "abstract.factor",
+   "gloss": "factor",
+   "tier": 2,
+   "rank": 12,
+   "pending": true
+  },
+  {
+   "id": "abstract.famine",
+   "gloss": "famine, starvation",
+   "tier": 2,
+   "rank": 13,
+   "pending": true
+  },
+  {
+   "id": "abstract.field",
+   "gloss": "field, sphere (of activity)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true
+  },
+  {
+   "id": "abstract.forgiveness",
+   "gloss": "forgiveness, pardon (the noun)",
+   "tier": 2,
+   "rank": 15,
+   "pending": true
+  },
+  {
+   "id": "abstract.freedom",
+   "gloss": "freedom, release (from bondage)",
+   "tier": 2,
+   "rank": 16,
+   "pending": true
+  },
+  {
+   "id": "abstract.guidance",
+   "gloss": "right guidance, rectitude",
+   "tier": 2,
+   "rank": 17,
+   "pending": true
+  },
+  {
+   "id": "abstract.history",
+   "gloss": "history",
+   "tier": 2,
+   "rank": 18,
+   "pending": true
+  },
+  {
+   "id": "abstract.luck",
+   "gloss": "luck, good fortune",
+   "tier": 2,
+   "rank": 19,
+   "pending": true
+  },
+  {
+   "id": "abstract.mess",
+   "gloss": "a mess, a mix-up",
+   "tier": 2,
+   "rank": 20,
+   "pending": true
+  },
+  {
+   "id": "abstract.nonsense",
+   "gloss": "nonsense, rubbish",
+   "tier": 2,
+   "rank": 21,
+   "pending": true
+  },
+  {
+   "id": "abstract.number",
+   "gloss": "number (of a room, a house, a phone)",
+   "tier": 2,
+   "rank": 22,
+   "pending": true
+  },
+  {
+   "id": "abstract.occasion",
+   "gloss": "time, occasion (去过两回 have been there twice)",
+   "tier": 2,
+   "rank": 23,
+   "pending": true
+  },
+  {
+   "id": "abstract.point",
+   "gloss": "dot, point, spot",
+   "tier": 2,
+   "rank": 24,
+   "pending": true
+  },
+  {
+   "id": "abstract.procession",
+   "gloss": "procession, march",
+   "tier": 2,
+   "rank": 25,
+   "pending": true
+  },
+  {
+   "id": "abstract.rank",
+   "gloss": "class, grade, rank (一等 first class)",
+   "tier": 2,
+   "rank": 26,
+   "pending": true
+  },
+  {
+   "id": "abstract.reason",
+   "gloss": "the reason why; the means by which (literary: 所以然)",
+   "tier": 2,
+   "rank": 27,
+   "pending": true
+  },
+  {
+   "id": "abstract.space",
+   "gloss": "space, room (free space)",
+   "tier": 2,
+   "rank": 28,
+   "pending": true
+  },
+  {
+   "id": "abstract.stage",
+   "gloss": "stage, phase (a station on the way)",
+   "tier": 2,
+   "rank": 29,
+   "pending": true
+  },
+  {
+   "id": "abstract.thing",
+   "gloss": "thing",
+   "tier": 2,
+   "rank": 30,
+   "pending": true
+  },
+  {
+   "id": "abstract.trait",
+   "gloss": "feature, trait (of a face, a character)",
+   "tier": 2,
+   "rank": 31,
+   "pending": true
+  },
+  {
+   "id": "abstract.weakness",
+   "gloss": "weak point, shortcoming; lacking (短处)",
+   "tier": 2,
+   "rank": 32,
+   "pending": true
+  }
+ ]
+}

@@ -9,11 +9,44 @@
    ],
    "gender": "MASC",
    "translit": "tsalaf",
+   "features": {
+    "spelling": "צלף",
+    "root": "צ ל ף",
+    "pattern": "קָטָל",
+    "plurals": [
+     {
+      "form": "צְלָפִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "צְלַף"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "צִלְפֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "צָלָף",
     "N;SG;DEF": "הַצָּלָף",
     "N;PL;INDF": "צְלָפִים",
-    "N;PL;DEF": "הַצְּלָפִים"
+    "N;PL;DEF": "הַצְּלָפִים",
+    "N;SG;CONST": "צְלַף",
+    "N;PL;CONST": "צִלְפֵי"
    },
    "note": "Pattern קָטָל (Wiktionary). Mostly used in the plural for the pickled buds.",
    "ref": {
@@ -42,7 +75,8 @@
       "def": "caper bush, the plant (Capparis spinosa)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -113,9 +147,34 @@
    ],
    "gender": "MASC",
    "translit": "nori",
+   "features": {
+    "spelling": "נורי",
+    "root": {
+     "none": "a loanword (Japanese nori): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "נוֹרִי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "נוֹרִי",
-    "N;SG;DEF": "הַנּוֹרִי"
+    "N;SG;DEF": "הַנּוֹרִי",
+    "N;SG;CONST": "נוֹרִי"
    },
    "note": "A loanword used as a mass noun. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -204,10 +263,32 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "veg.yardlongbean"
+    "veg.yardlongbean",
+    "food.blackeyedpea"
    ],
    "gender": "FEM",
    "translit": "lubya",
+   "features": {
+    "spelling": "לוביה",
+    "root": {
+     "none": "a loanword (Arabic لُوبْيَا): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": {
+     "none": "a loanword ending in ־ָה: not used as the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "לוּבְּיָה",
     "N;SG;DEF": "הַלּוּבְּיָה"
@@ -239,7 +320,8 @@
       "def": "black-eyed peas — the dried seeds of the same plant",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.blackeyedpea"
      }
     ],
     "examples": [
@@ -310,9 +392,34 @@
    ],
    "gender": "MASC",
    "translit": "edamame",
+   "features": {
+    "spelling": "אדממה",
+    "root": {
+     "none": "a loanword (Japanese edamame): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֶדָמָמֶה"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֶדָמָמֶה",
-    "N;SG;DEF": "הָאֶדָמָמֶה"
+    "N;SG;DEF": "הָאֶדָמָמֶה",
+    "N;SG;CONST": "אֶדָמָמֶה"
    },
    "note": "A recent loanword used as a mass noun; masculine like other loanwords not ending in -a. Wiktionary has no Hebrew entry.",
    "ref": {
@@ -405,13 +512,56 @@
    ],
    "gender": "MASC",
    "translit": "fakus",
+   "features": {
+    "spelling": "פקוס",
+    "root": {
+     "none": "a loanword (Arabic فَقُّوس): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "פַקּוּסִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פַקּוּס"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פַקּוּסֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "פַקּוּס",
     "N;SG;DEF": "הַפַקּוּס",
     "N;PL;INDF": "פַקּוּסִים",
-    "N;PL;DEF": "הַפַקּוּסִים"
+    "N;PL;DEF": "הַפַקּוּסִים",
+    "N;SG;CONST": "פַקּוּס",
+    "N;PL;CONST": "פַקּוּסֵי"
    },
    "note": "Pronounced fakús: the פ has no dagesh (f), also after the article. Wiktionary has no Hebrew entry; its English entry Armenian cucumber gives פקוס (fakús, masculine).",
+   "contrasts": [
+    {
+     "concept": "veg.armeniancucumber",
+     "axis": "usage",
+     "value": "the usual modern name"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -507,6 +657,33 @@
    ],
    "gender": "MASC",
    "translit": "perach kishu",
+   "features": {
+    "spelling": "פרח קישוא",
+    "root": {
+     "none": "a compound of two words (פֶּרַח + קִשּׁוּא): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "פִּרְחֵי קִשּׁוּא",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "פֶּרַח קִשּׁוּא",
     "N;SG;DEF": "פֶּרַח הַקִּשּׁוּא",
@@ -609,7 +786,34 @@
     "veg.spaghettisquash"
    ],
    "gender": "FEM",
-   "translit": "dla’at spageti",
+   "translit": "dla'at spageti",
+   "features": {
+    "spelling": "דלעת ספגטי",
+    "root": {
+     "none": "a compound of two words (דְּלַעַת + סְפָּגֶטִי): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "דְּלוּעֵי סְפָּגֶטִי",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דְּלַעַת סְפָּגֶטִי",
     "N;SG;DEF": "דְּלַעַת הַסְּפָּגֶטִי",

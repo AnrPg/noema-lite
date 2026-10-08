@@ -6,8 +6,23 @@
    "pos": "ADJ",
    "senses": [
     "adj.big",
-    "adj.tall"
+    "adj.tall",
+    "adj.great",
+    "adj.older"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.tall",
+     "axis": "what is tall",
+     "value": "people (Er ist groß)"
+    }
+   ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (groß → große)"
+    }
+   },
    "forms": {
     "ADJ": "groß",
     "ADJ;NOM;SG;MASC;STRG": "großer",
@@ -100,14 +115,16 @@
       "def": "great, important (ein großer Künstler)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.great"
      },
      {
       "id": "s4",
       "def": "grown-up, older (mein großer Bruder = my older brother)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.older"
      }
     ],
     "examples": [
@@ -236,8 +253,21 @@
    "lemma": "hoch",
    "pos": "ADJ",
    "senses": [
-    "adj.tall"
+    "adj.tall",
+    "adj.high",
+    "adv.up"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.tall",
+     "axis": "what is tall",
+     "value": "buildings, mountains, trees"
+    }
+   ],
+   "features": {
+    "comparison": "irregular",
+    "stem": "hoh-"
+   },
    "forms": {
     "ADJ": "hoch",
     "ADJ;NOM;SG;MASC;STRG": "hoher",
@@ -322,14 +352,16 @@
       "def": "high (prices, numbers, temperature: hohe Preise, hohes Fieber)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.high"
      },
      {
       "id": "s3",
       "def": "up (adverb: Hände hoch!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.up"
      }
     ],
     "examples": [
@@ -360,6 +392,13 @@
       "register": "neutral",
       "context": "housing",
       "sense": "s2"
+     },
+     {
+      "text": "Hände hoch!",
+      "tr": "Hands up!",
+      "register": "neutral",
+      "context": "films",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -447,8 +486,16 @@
    "lemma": "klein",
    "pos": "ADJ",
    "senses": [
-    "adj.small"
+    "adj.small",
+    "adj.younger",
+    "adj.short.person"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (klein → kleine)"
+    }
+   },
    "forms": {
     "ADJ": "klein",
     "ADJ;NOM;SG;MASC;STRG": "kleiner",
@@ -533,14 +580,16 @@
       "def": "little, young (children: die Kleinen; mein kleiner Bruder = my younger brother)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.younger"
      },
      {
       "id": "s3",
       "def": "short (of people: Sie ist klein)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.short.person"
      }
     ],
     "examples": [
@@ -646,8 +695,22 @@
    "lemma": "lang",
    "pos": "ADJ",
    "senses": [
-    "adj.long"
+    "adj.long",
+    "adj.tall"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.tall",
+     "axis": "what is tall",
+     "value": "people, colloquial: lanky (ein langer Kerl)"
+    }
+   ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (lang → lange)"
+    }
+   },
    "forms": {
     "ADJ": "lang",
     "ADJ;NOM;SG;MASC;STRG": "langer",
@@ -732,7 +795,8 @@
       "def": "tall, lanky (of a person, colloquial: ein langer Kerl)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adj.tall"
      }
     ],
     "examples": [
@@ -769,6 +833,13 @@
       "tr": "Her boyfriend is such a lanky guy.",
       "register": "colloquial",
       "context": "people",
+      "sense": "s2"
+     },
+     {
+      "text": "Der lange Kerl da hinten ist mein Bruder.",
+      "tr": "That tall guy back there is my brother.",
+      "register": "colloquial",
+      "context": "describing people",
       "sense": "s2"
      }
     ],
@@ -845,8 +916,15 @@
    "lemma": "kurz",
    "pos": "ADJ",
    "senses": [
-    "adj.short"
+    "adj.short",
+    "adv.briefly"
    ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (kurz → kurze)"
+    }
+   },
    "forms": {
     "ADJ": "kurz",
     "ADJ;NOM;SG;MASC;STRG": "kurzer",
@@ -931,14 +1009,16 @@
       "def": "short, brief (time)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "briefly, for a moment (adverb: Warte kurz!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.briefly"
      }
     ],
     "examples": [
@@ -1046,8 +1126,16 @@
    "lemma": "schlecht",
    "pos": "ADJ",
    "senses": [
-    "adj.bad"
+    "adj.bad",
+    "adj.sick",
+    "adv.badly"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (schlecht → schlechte)"
+    }
+   },
    "forms": {
     "ADJ": "schlecht",
     "ADJ;NOM;SG;MASC;STRG": "schlechter",
@@ -1132,14 +1220,16 @@
       "def": "sick, unwell (Mir ist schlecht = I feel sick)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.sick"
      },
      {
       "id": "s3",
       "def": "badly (adverb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.badly"
      }
     ],
     "examples": [
@@ -1250,8 +1340,15 @@
    "lemma": "neu",
    "pos": "ADJ",
    "senses": [
-    "adj.new"
+    "adj.new",
+    "adv.again"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (neu → neue)"
+    }
+   },
    "forms": {
     "ADJ": "neu",
     "ADJ;NOM;SG;MASC;STRG": "neuer",
@@ -1353,14 +1450,16 @@
       "def": "recent, latest (das Neueste = the latest news)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "again, anew (adverb: neu anfangen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.again"
      }
     ],
     "examples": [
@@ -1471,8 +1570,15 @@
    "pos": "ADJ",
    "senses": [
     "adj.old.thing",
-    "adj.old.person"
+    "adj.old.person",
+    "adj.former"
    ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (alt → alte)"
+    }
+   },
    "forms": {
     "ADJ": "alt",
     "ADJ;NOM;SG;MASC;STRG": "alter",
@@ -1565,7 +1671,8 @@
       "def": "former, old (mein alter Lehrer = my former teacher)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.former"
      }
     ],
     "examples": [
@@ -1690,6 +1797,12 @@
    "senses": [
     "adj.young"
    ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (jung → junge)"
+    }
+   },
    "forms": {
     "ADJ": "jung",
     "ADJ;NOM;SG;MASC;STRG": "junger",
@@ -1774,7 +1887,8 @@
       "def": "new, recent (eine junge Firma, ein junger Wein)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1870,6 +1984,12 @@
    "senses": [
     "adj.hot"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (heiß → heiße)"
+    }
+   },
    "forms": {
     "ADJ": "heiß",
     "ADJ;NOM;SG;MASC;STRG": "heißer",
@@ -1954,7 +2074,8 @@
       "def": "hot, exciting, promising (colloquial: ein heißer Tipp)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2066,6 +2187,12 @@
    "senses": [
     "adj.cold"
    ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (kalt → kalte)"
+    }
+   },
    "forms": {
     "ADJ": "kalt",
     "ADJ;NOM;SG;MASC;STRG": "kalter",
@@ -2150,14 +2277,16 @@
       "def": "cold, unfriendly (feelings)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "without heating costs (rent: die Kaltmiete)",
       "register": [
        "technical"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2279,8 +2408,15 @@
    "lemma": "warm",
    "pos": "ADJ",
    "senses": [
-    "adj.warm"
+    "adj.warm",
+    "adj.heartfelt"
    ],
+   "features": {
+    "comparison": "umlaut",
+    "stem": {
+     "none": "the endings are added to the base form (warm → warme)"
+    }
+   },
    "forms": {
     "ADJ": "warm",
     "ADJ;NOM;SG;MASC;STRG": "warmer",
@@ -2365,14 +2501,16 @@
       "def": "warm (clothes that keep you warm)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "warm, heartfelt (feelings)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.heartfelt"
      }
     ],
     "examples": [
@@ -2475,8 +2613,15 @@
    "lemma": "schön",
    "pos": "ADJ",
    "senses": [
-    "adj.beautiful"
+    "adj.beautiful",
+    "adj.nice"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (schön → schöne)"
+    }
+   },
    "forms": {
     "ADJ": "schön",
     "ADJ;NOM;SG;MASC;STRG": "schöner",
@@ -2561,14 +2706,16 @@
       "def": "nice, pleasant, good (ein schöner Tag, Schönes Wochenende!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.nice"
      },
      {
       "id": "s3",
       "def": "nicely, really (adverb: schön warm)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -2679,8 +2826,15 @@
    "lemma": "hässlich",
    "pos": "ADJ",
    "senses": [
-    "adj.ugly"
+    "adj.ugly",
+    "adj.nasty"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (hässlich → hässliche)"
+    }
+   },
    "forms": {
     "ADJ": "hässlich",
     "ADJ;NOM;SG;MASC;STRG": "hässlicher",
@@ -2765,7 +2919,8 @@
       "def": "nasty, mean (behaviour, words)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.nasty"
      }
     ],
     "examples": [
@@ -2857,8 +3012,28 @@
    "lemma": "leicht",
    "pos": "ADJ",
    "senses": [
-    "adj.easy"
+    "adj.easy",
+    "adj.light.weight",
+    "adv.alittle"
    ],
+   "contrasts": [
+    {
+     "concept": "adv.alittle",
+     "axis": "what it goes with",
+     "value": "a state or a change: slightly (leicht verletzt)"
+    },
+    {
+     "concept": "adj.easy",
+     "axis": "nuance",
+     "value": "not hard (also: light in weight)"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (leicht → leichte)"
+    }
+   },
    "forms": {
     "ADJ": "leicht",
     "ADJ;NOM;SG;MASC;STRG": "leichter",
@@ -2943,21 +3118,24 @@
       "def": "light (not heavy)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.light.weight"
      },
      {
       "id": "s3",
       "def": "light (food: low in calories)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      },
      {
       "id": "s4",
       "def": "slightly (adverb: leicht verletzt)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.alittle"
      }
     ],
     "examples": [
@@ -2988,6 +3166,13 @@
       "register": "neutral",
       "context": "food",
       "sense": "s3"
+     },
+     {
+      "text": "Bei dem Unfall wurde der Fahrer leicht verletzt.",
+      "tr": "The driver was slightly injured in the accident.",
+      "register": "neutral",
+      "context": "news",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -3067,8 +3252,24 @@
    "lemma": "einfach",
    "pos": "ADJ",
    "senses": [
-    "adj.easy"
+    "adj.easy",
+    "adj.simple",
+    "tr.oneway",
+    "adv.simply"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.easy",
+     "axis": "nuance",
+     "value": "simple, not complicated"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (einfach → einfache)"
+    }
+   },
    "forms": {
     "ADJ": "einfach",
     "ADJ;NOM;SG;MASC;STRG": "einfacher",
@@ -3153,21 +3354,24 @@
       "def": "simple, plain, modest (ein einfaches Essen)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.simple"
      },
      {
       "id": "s3",
       "def": "single, one-way (einfache Fahrt)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "tr.oneway"
      },
      {
       "id": "s4",
       "def": "just, simply (adverb: Das ist einfach toll!)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.simply"
      }
     ],
     "examples": [
@@ -3282,8 +3486,23 @@
    "lemma": "schwer",
    "pos": "ADJ",
    "senses": [
-    "adj.difficult"
+    "adj.difficult",
+    "adj.heavy",
+    "adj.serious"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.difficult",
+     "axis": "nuance",
+     "value": "hard (also: heavy)"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (schwer → schwere)"
+    }
+   },
    "forms": {
     "ADJ": "schwer",
     "ADJ;NOM;SG;MASC;STRG": "schwerer",
@@ -3368,14 +3587,16 @@
       "def": "heavy",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.heavy"
      },
      {
       "id": "s3",
       "def": "serious, severe (eine schwere Krankheit)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.serious"
      }
     ],
     "examples": [
@@ -3477,6 +3698,19 @@
    "senses": [
     "adj.difficult"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.difficult",
+     "axis": "nuance",
+     "value": "complicated; of people: awkward"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (schwierig → schwierige)"
+    }
+   },
    "forms": {
     "ADJ": "schwierig",
     "ADJ;NOM;SG;MASC;STRG": "schwieriger",
@@ -3561,7 +3795,8 @@
       "def": "difficult, awkward (of a person)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3645,8 +3880,22 @@
    "lemma": "billig",
    "pos": "ADJ",
    "senses": [
-    "adj.cheap"
+    "adj.cheap",
+    "adj.fair"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.cheap",
+     "axis": "connotation",
+     "value": "cheap – may imply poor quality"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (billig → billige)"
+    }
+   },
    "forms": {
     "ADJ": "billig",
     "ADJ;NOM;SG;MASC;STRG": "billiger",
@@ -3731,14 +3980,16 @@
       "def": "cheap, shoddy, cheap-looking",
       "register": [
        "pejorative"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "fair, proper (recht und billig)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "adj.fair"
      }
     ],
     "examples": [
@@ -3762,6 +4013,13 @@
       "register": "colloquial",
       "context": "behaviour",
       "sense": "s2"
+     },
+     {
+      "text": "Das ist nur recht und billig.",
+      "tr": "That is only right and proper.",
+      "register": "formal",
+      "context": "fixed phrase",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -3833,8 +4091,22 @@
    "lemma": "günstig",
    "pos": "ADJ",
    "senses": [
-    "adj.cheap"
+    "adj.cheap",
+    "adj.favourable"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.cheap",
+     "axis": "connotation",
+     "value": "good value (positive)"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (günstig → günstige)"
+    }
+   },
    "forms": {
     "ADJ": "günstig",
     "ADJ;NOM;SG;MASC;STRG": "günstiger",
@@ -3919,7 +4191,8 @@
       "def": "favourable, convenient (ein günstiger Moment)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.favourable"
      }
     ],
     "examples": [
@@ -4003,8 +4276,13 @@
    "lemma": "teuer",
    "pos": "ADJ",
    "senses": [
-    "adj.expensive"
+    "adj.expensive",
+    "adj.dear"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": "teur-"
+   },
    "forms": {
     "ADJ": "teuer",
     "ADJ;NOM;SG;MASC;STRG": "teurer",
@@ -4089,7 +4367,8 @@
       "def": "dear, precious (higher register)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "adj.dear"
      }
     ],
     "examples": [
@@ -4199,8 +4478,22 @@
    "lemma": "glücklich",
    "pos": "ADJ",
    "senses": [
-    "adj.happy"
+    "adj.happy",
+    "adj.lucky"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.happy",
+     "axis": "lasting or about something",
+     "value": "happy, deeply, in life"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (glücklich → glückliche)"
+    }
+   },
    "forms": {
     "ADJ": "glücklich",
     "ADJ;NOM;SG;MASC;STRG": "glücklicher",
@@ -4285,7 +4578,8 @@
       "def": "lucky, fortunate (ein glücklicher Zufall)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.lucky"
      }
     ],
     "examples": [
@@ -4384,6 +4678,19 @@
    "senses": [
     "adj.happy"
    ],
+   "contrasts": [
+    {
+     "concept": "adj.happy",
+     "axis": "lasting or about something",
+     "value": "glad about something (froh über …, froh, dass …)"
+    }
+   ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (froh → frohe)"
+    }
+   },
    "forms": {
     "ADJ": "froh",
     "ADJ;NOM;SG;MASC;STRG": "froher",
@@ -4485,7 +4792,8 @@
       "def": "merry, joyful (Frohe Weihnachten!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4583,6 +4891,12 @@
    "senses": [
     "adj.sad"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (traurig → traurige)"
+    }
+   },
    "forms": {
     "ADJ": "traurig",
     "ADJ;NOM;SG;MASC;STRG": "trauriger",
@@ -4667,7 +4981,8 @@
       "def": "sad, sorry, poor (a sad state of affairs)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4766,6 +5081,12 @@
    "senses": [
     "adj.tired"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "ends in -e: only -r, -s, -n, -m are added (müder)"
+    }
+   },
    "forms": {
     "ADJ": "müde",
     "ADJ;NOM;SG;MASC;STRG": "müder",
@@ -4850,7 +5171,8 @@
       "def": "tired of (es müde sein)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4963,6 +5285,12 @@
    "senses": [
     "adj.hungry"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (hungrig → hungrige)"
+    }
+   },
    "forms": {
     "ADJ": "hungrig",
     "ADJ;NOM;SG;MASC;STRG": "hungriger",
@@ -5047,7 +5375,8 @@
       "def": "hungry for (hungrig nach Erfolg)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -5134,6 +5463,12 @@
    "senses": [
     "adj.thirsty"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (durstig → durstige)"
+    }
+   },
    "forms": {
     "ADJ": "durstig",
     "ADJ;NOM;SG;MASC;STRG": "durstiger",
@@ -5285,8 +5620,15 @@
    "lemma": "schnell",
    "pos": "ADJ",
    "senses": [
-    "adj.fast"
+    "adj.fast",
+    "adv.quickly"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (schnell → schnelle)"
+    }
+   },
    "forms": {
     "ADJ": "schnell",
     "ADJ;NOM;SG;MASC;STRG": "schneller",
@@ -5371,14 +5713,16 @@
       "def": "quickly (adverb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.quickly"
      },
      {
       "id": "s3",
       "def": "quickly, just (colloquial: Ich esse nur schnell etwas)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -5488,8 +5832,16 @@
    "lemma": "langsam",
    "pos": "ADJ",
    "senses": [
-    "adj.slow"
+    "adj.slow",
+    "adv.slowly",
+    "adv.gradually"
    ],
+   "features": {
+    "comparison": "regular",
+    "stem": {
+     "none": "the endings are added to the base form (langsam → langsame)"
+    }
+   },
    "forms": {
     "ADJ": "langsam",
     "ADJ;NOM;SG;MASC;STRG": "langsamer",
@@ -5574,14 +5926,16 @@
       "def": "slowly (adverb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.slowly"
      },
      {
       "id": "s3",
       "def": "gradually; it’s about time (colloquial: Ich muss langsam los)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.gradually"
      }
     ],
     "examples": [
@@ -5687,8 +6041,26 @@
    "lemma": "Hunger",
    "pos": "NOUN",
    "class": "sgt",
-   "senses": [],
+   "senses": [
+    "body.hunger",
+    "abstract.famine"
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "uncountable: no plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Hunger",
     "N;ACC;SG": "Hunger",
@@ -5713,21 +6085,24 @@
       "def": "hunger, appetite (Ich habe Hunger = I’m hungry)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "body.hunger"
      },
      {
       "id": "s2",
       "def": "famine, starvation",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.famine"
      },
      {
       "id": "s3",
       "def": "hunger for (Hunger nach Liebe)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -5823,8 +6198,25 @@
    "lemma": "Durst",
    "pos": "NOUN",
    "class": "sgt",
-   "senses": [],
+   "senses": [
+    "body.thirst"
+   ],
    "gender": "MASC",
+   "features": {
+    "plurals": {
+     "none": "uncountable: no plural"
+    },
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Durst",
     "N;ACC;SG": "Durst",
@@ -5854,14 +6246,16 @@
       "def": "thirst (Ich habe Durst = I’m thirsty)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "body.thirst"
      },
      {
       "id": "s2",
       "def": "thirst for (Durst nach Wissen)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [

@@ -7,6 +7,13 @@
    "senses": [
     "pron.he"
    ],
+   "features": {
+    "spelling": "הוא",
+    "agreement": "masculine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "hu",
    "ref": {
     "src": "fixture"
@@ -19,6 +26,13 @@
    "senses": [
     "pron.she"
    ],
+   "features": {
+    "spelling": "היא",
+    "agreement": "feminine",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "hi",
    "ref": {
     "src": "fixture"
@@ -29,8 +43,31 @@
    "lemma": "אָכַל",
    "pos": "VERB",
    "senses": [
-    "verb.eat"
+    "verb.eat",
+    "verb.corrode"
    ],
+   "features": {
+    "spelling": "אכל",
+    "root": "א כ ל",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-alef"
+    ],
+    "future": "יֹאכַל",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "אֲכִילָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "root": "א כ ל",
    "binyan": "paal",
    "translit": "akhal",
@@ -66,7 +103,8 @@
       "def": "to consume, eat up (figuratively: worry, jealousy)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.corrode"
      }
     ],
     "examples": [
@@ -159,6 +197,9 @@
    "senses": [
     "conj.and"
    ],
+   "features": {
+    "spelling": "ו"
+   },
    "prefix": true,
    "translit": "ve",
    "note": "וּ (u-) before ב, מ, פ and before a shva",
@@ -171,11 +212,57 @@
    "lemma": "אֶת",
    "pos": "ADP",
    "senses": [],
+   "features": {
+    "spelling": "את",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "אוֹתִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "אוֹתְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "אוֹתָךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "אוֹתוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "אוֹתָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "אוֹתָנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "אֶתְכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "אֶתְכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "אוֹתָם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "אוֹתָן"
+     }
+    ]
+   },
    "role": "marks a definite direct object (no English equivalent)",
    "translit": "et",
    "ref": {
     "src": "fixture"
-   }
+   },
+   "prefix": false
   }
  ],
  "absent": [

@@ -1,0 +1,65 @@
+{
+ "field": "sport",
+ "title": "Sport and games",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "sport.backgammon",
+   "gloss": "backgammon",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "sport.cards",
+   "gloss": "playing cards",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "sport.chariot",
+   "gloss": "the chariot (rook) in Chinese chess",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "sport.jack",
+   "gloss": "jack, knave (playing card)",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "sport.move",
+   "gloss": "move (in a game)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "sport.pawn",
+   "gloss": "pawn (chess)",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "sport.pitch",
+   "gloss": "pitch, court, field (sport)",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "sport.trophy",
+   "gloss": "cup, trophy",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  }
+ ]
+}

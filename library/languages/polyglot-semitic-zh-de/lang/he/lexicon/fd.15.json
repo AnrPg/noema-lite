@@ -4,17 +4,38 @@
    "id": "he:yanuar",
    "lemma": "יָנוּאָר",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.january"
    ],
-   "class": "cal",
    "gender": "MASC",
-   "translit": "yanuar",
-   "note": "The first month of the civil (Gregorian) year. “In January” = בְּיָנוּאָר (no article); a date: day + בְּ + month (אֶחָד בְּיָנוּאָר).",
+   "translit": "yanu'ar",
+   "features": {
+    "spelling": "ינואר",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יָנוּאָר",
     "N;SG;INDF;PFX": "יָּנוּאָר"
    },
+   "note": "The first month of the civil (Gregorian) year. “In January” = בְּיָנוּאָר (no article); a date: day + בְּ + month (אֶחָד בְּיָנוּאָר).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -105,16 +126,37 @@
    "id": "he:februar",
    "lemma": "פֶבְּרוּאָר",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.february"
    ],
-   "class": "cal",
    "gender": "MASC",
-   "translit": "februar",
-   "note": "The second month of the civil (Gregorian) year. “In February” = בְּפֶבְּרוּאָר (no article); a date: day + בְּ + month (אֶחָד בְּפֶבְּרוּאָר).",
+   "translit": "febru'ar",
+   "features": {
+    "spelling": "פברואר",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "פֶבְּרוּאָר"
    },
+   "note": "The second month of the civil (Gregorian) year. “In February” = בְּפֶבְּרוּאָר (no article); a date: day + בְּ + month (אֶחָד בְּפֶבְּרוּאָר).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -201,16 +243,37 @@
    "id": "he:merts",
    "lemma": "מֶרְץ",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.march"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "merts",
-   "note": "The third month of the civil (Gregorian) year. “In March” = בְּמֶרְץ (no article); a date: day + בְּ + month (אֶחָד בְּמֶרְץ).",
+   "features": {
+    "spelling": "מרץ",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מֶרְץ"
    },
+   "note": "The third month of the civil (Gregorian) year. “In March” = בְּמֶרְץ (no article); a date: day + בְּ + month (אֶחָד בְּמֶרְץ).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -298,16 +361,37 @@
    "id": "he:april",
    "lemma": "אַפְּרִיל",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.april"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "april",
-   "note": "The fourth month of the civil (Gregorian) year. “In April” = בְּאַפְּרִיל (no article); a date: day + בְּ + month (אֶחָד בְּאַפְּרִיל).",
+   "features": {
+    "spelling": "אפריל",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אַפְּרִיל"
    },
+   "note": "The fourth month of the civil (Gregorian) year. “In April” = בְּאַפְּרִיל (no article); a date: day + בְּ + month (אֶחָד בְּאַפְּרִיל).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -394,16 +478,37 @@
    "id": "he:mai",
    "lemma": "מַאי",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.may"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "mai",
-   "note": "The fifth month of the civil (Gregorian) year. “In May” = בְּמַאי (no article); a date: day + בְּ + month (אֶחָד בְּמַאי).",
+   "features": {
+    "spelling": "מאי",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מַאי"
    },
+   "note": "The fifth month of the civil (Gregorian) year. “In May” = בְּמַאי (no article); a date: day + בְּ + month (אֶחָד בְּמַאי).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -485,16 +590,37 @@
    "id": "he:yuni",
    "lemma": "יוּנִי",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.june"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "yuni",
-   "note": "The sixth month of the civil (Gregorian) year. “In June” = בְּיוּנִי (no article); a date: day + בְּ + month (אֶחָד בְּיוּנִי).",
+   "features": {
+    "spelling": "יוני",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יוּנִי"
    },
+   "note": "The sixth month of the civil (Gregorian) year. “In June” = בְּיוּנִי (no article); a date: day + בְּ + month (אֶחָד בְּיוּנִי).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -576,16 +702,37 @@
    "id": "he:yuli",
    "lemma": "יוּלִי",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.july"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "yuli",
-   "note": "The seventh month of the civil (Gregorian) year. “In July” = בְּיוּלִי (no article); a date: day + בְּ + month (אֶחָד בְּיוּלִי).",
+   "features": {
+    "spelling": "יולי",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יוּלִי"
    },
+   "note": "The seventh month of the civil (Gregorian) year. “In July” = בְּיוּלִי (no article); a date: day + בְּ + month (אֶחָד בְּיוּלִי).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -667,16 +814,37 @@
    "id": "he:ogust",
    "lemma": "אוֹגוּסְט",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.august"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "ogust",
-   "note": "The eighth month of the civil (Gregorian) year. “In August” = בְּאוֹגוּסְט (no article); a date: day + בְּ + month (אֶחָד בְּאוֹגוּסְט).",
+   "features": {
+    "spelling": "אוגוסט",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אוֹגוּסְט"
    },
+   "note": "The eighth month of the civil (Gregorian) year. “In August” = בְּאוֹגוּסְט (no article); a date: day + בְּ + month (אֶחָד בְּאוֹגוּסְט).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -763,16 +931,37 @@
    "id": "he:september",
    "lemma": "סֶפְּטֶמְבֶּר",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.september"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "september",
-   "note": "The ninth month of the civil (Gregorian) year. “In September” = בְּסֶפְּטֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּסֶפְּטֶמְבֶּר).",
+   "features": {
+    "spelling": "ספטמבר",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סֶפְּטֶמְבֶּר"
    },
+   "note": "The ninth month of the civil (Gregorian) year. “In September” = בְּסֶפְּטֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּסֶפְּטֶמְבֶּר).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -859,16 +1048,37 @@
    "id": "he:oktober",
    "lemma": "אוֹקְטוֹבֶּר",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.october"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "oktober",
-   "note": "The tenth month of the civil (Gregorian) year. “In October” = בְּאוֹקְטוֹבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּאוֹקְטוֹבֶּר).",
+   "features": {
+    "spelling": "אוקטובר",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אוֹקְטוֹבֶּר"
    },
+   "note": "The tenth month of the civil (Gregorian) year. “In October” = בְּאוֹקְטוֹבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּאוֹקְטוֹבֶּר).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -955,16 +1165,37 @@
    "id": "he:november",
    "lemma": "נוֹבֶמְבֶּר",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.november"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "november",
-   "note": "The eleventh month of the civil (Gregorian) year. “In November” = בְּנוֹבֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּנוֹבֶמְבֶּר).",
+   "features": {
+    "spelling": "נובמבר",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "נוֹבֶמְבֶּר"
    },
+   "note": "The eleventh month of the civil (Gregorian) year. “In November” = בְּנוֹבֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּנוֹבֶמְבֶּר).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1051,16 +1282,37 @@
    "id": "he:detsember",
    "lemma": "דֵּצֶמְבֶּר",
    "pos": "NOUN",
+   "class": "cal",
    "senses": [
     "time.december"
    ],
-   "class": "cal",
    "gender": "MASC",
    "translit": "detsember",
-   "note": "The twelfth month of the civil (Gregorian) year. “In December” = בְּדֵצֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּדֵצֶמְבֶּר).",
+   "features": {
+    "spelling": "דצמבר",
+    "root": {
+     "none": "a loanword (a month of the civil calendar, from German / Latin): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a month name: no plural in use"
+    },
+    "dual": {
+     "none": "a month name: no dual"
+    },
+    "construct": {
+     "none": "a month name: not the first word of a construct"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דֵּצֶמְבֶּר"
    },
+   "note": "The twelfth month of the civil (Gregorian) year. “In December” = בְּדֵצֶמְבֶּר (no article); a date: day + בְּ + month (אֶחָד בְּדֵצֶמְבֶּר).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1148,18 +1400,52 @@
    "lemma": "אָבִיב",
    "pos": "NOUN",
    "senses": [
-    "time.spring"
+    "time.spring",
+    "nature.ears"
    ],
    "gender": "MASC",
    "translit": "aviv",
-   "note": "“In spring” = בָּאָבִיב (with the article).",
+   "features": {
+    "spelling": "אביב",
+    "root": "א ב ב",
+    "pattern": "קָטִיל",
+    "plurals": [
+     {
+      "form": "אֲבִיבִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אָבִיב"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "אֲבִיבֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אָבִיב",
     "N;SG;DEF": "הָאָבִיב",
     "N;PL;INDF": "אֲבִיבִים",
     "N;PL;DEF": "הָאֲבִיבִים",
-    "N;SG;DEF;PFX": "אָבִיב"
+    "N;SG;DEF;PFX": "אָבִיב",
+    "N;SG;CONST": "אָבִיב",
+    "N;PL;CONST": "אֲבִיבֵי"
    },
+   "note": "“In spring” = בָּאָבִיב (with the article).",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1189,7 +1475,8 @@
       "def": "fresh ears of barley; the early ripening of grain",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "nature.ears"
      }
     ],
     "examples": [
@@ -1213,6 +1500,13 @@
       "register": "neutral",
       "context": "weather",
       "sense": "s1"
+     },
+     {
+      "text": "כִּי הַשְּׂעֹרָה אָבִיב וְהַפִּשְׁתָּה גִּבְעֹל.",
+      "tr": "For the barley was in the ear and the flax was in bloom. (Exodus 9:31)",
+      "register": "archaic",
+      "context": "Bible",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1257,14 +1551,46 @@
    ],
    "gender": "MASC",
    "translit": "kayits",
-   "note": "“In summer” = בַּקַּיִץ. Plural קֵיצִים.",
+   "features": {
+    "spelling": "קיץ",
+    "root": "ק י ץ",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "קֵיצִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קֵיץ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "קֵיצֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קַיִץ",
     "N;SG;DEF": "הַקַּיִץ",
     "N;PL;INDF": "קֵיצִים",
     "N;PL;DEF": "הַקֵּיצִים",
-    "N;SG;DEF;PFX": "קַּיִץ"
+    "N;SG;DEF;PFX": "קַּיִץ",
+    "N;SG;CONST": "קֵיץ",
+    "N;PL;CONST": "קֵיצֵי"
    },
+   "note": "“In summer” = בַּקַּיִץ. Plural קֵיצִים.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1348,24 +1674,70 @@
    "lemma": "סְתָו",
    "pos": "NOUN",
    "senses": [
-    "time.autumn"
+    "time.autumn",
+    "time.winter"
    ],
    "gender": "MASC",
    "translit": "stav",
-   "note": "“In autumn” = בַּסְּתָו. Written without vowels סתיו (with a silent י).",
+   "features": {
+    "spelling": "סתיו",
+    "root": {
+     "none": "a primary noun (compare Arabic شِتَاء “winter”): no root in use"
+    },
+    "pattern": "קְטָל",
+    "plurals": [
+     {
+      "form": "סְתָוִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סְתַו"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סְתָוֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סְתָו",
     "N;SG;DEF": "הַסְּתָו",
     "N;PL;INDF": "סְתָוִים",
     "N;PL;DEF": "הַסְּתָוִים",
-    "N;SG;DEF;PFX": "סְּתָו"
+    "N;SG;DEF;PFX": "סְּתָו",
+    "N;SG;CONST": "סְתַו",
+    "N;PL;CONST": "סְתָוֵי"
    },
    "plene": {
     "N;SG;INDF": "סתיו",
     "N;SG;DEF": "הסתיו",
     "N;PL;INDF": "סתווים",
-    "N;PL;DEF": "הסתווים"
+    "N;PL;DEF": "הסתווים",
+    "N;SG;DEF;PFX": "סתיו",
+    "N;PL;CONST": "סתווי",
+    "N;SG;CONST": "סתיו"
    },
+   "note": "“In autumn” = בַּסְּתָו. Written without vowels סתיו (with a silent י).",
+   "contrasts": [
+    {
+     "concept": "time.winter",
+     "axis": "period",
+     "value": "Biblical: the rainy season"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1392,7 +1764,8 @@
       "def": "winter, the rainy season (Biblical)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "time.winter"
      }
     ],
     "examples": [
@@ -1415,6 +1788,13 @@
       "tr": "For lo, the winter is past.",
       "register": "literary",
       "context": "Bible",
+      "sense": "s2"
+     },
+     {
+      "text": "בַּתַּנַ״ךְ ״סְתָו״ הוּא עוֹנַת הַגְּשָׁמִים, הַחֹרֶף.",
+      "tr": "In the Bible “stav” is the rainy season, the winter.",
+      "register": "neutral",
+      "context": "language history",
       "sense": "s2"
      }
     ],
@@ -1469,20 +1849,62 @@
    ],
    "gender": "MASC",
    "translit": "choref",
-   "note": "“In winter” = בַּחֹרֶף. Full spelling חורף.",
+   "features": {
+    "spelling": "חורף",
+    "root": "ח ר ף",
+    "pattern": "קֹטֶל",
+    "plurals": [
+     {
+      "form": "חֳרָפִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֹרֶף"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חׇרְפֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֹרֶף",
     "N;SG;DEF": "הַחֹרֶף",
     "N;PL;INDF": "חֳרָפִים",
     "N;PL;DEF": "הַחֳרָפִים",
-    "N;SG;DEF;PFX": "חֹרֶף"
+    "N;SG;DEF;PFX": "חֹרֶף",
+    "N;SG;CONST": "חֹרֶף",
+    "N;PL;CONST": "חׇרְפֵי"
    },
    "plene": {
     "N;SG;INDF": "חורף",
     "N;SG;DEF": "החורף",
     "N;PL;INDF": "חורפים",
-    "N;PL;DEF": "החורפים"
+    "N;PL;DEF": "החורפים",
+    "N;SG;DEF;PFX": "חורף",
+    "N;SG;CONST": "חורף",
+    "N;PL;CONST": "חורפי"
    },
+   "note": "“In winter” = בַּחֹרֶף. Full spelling חורף.",
+   "contrasts": [
+    {
+     "concept": "time.winter",
+     "axis": "period",
+     "value": "the modern word"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1573,17 +1995,58 @@
    ],
    "gender": "MASC",
    "translit": "shavua",
-   "note": "“This week” = הַשָּׁבוּעַ. Two weeks = שְׁבוּעַיִם (dual). Plural שָׁבוּעוֹת (masculine, with -וֹת).",
+   "features": {
+    "spelling": "שבוע",
+    "root": "שׁ ב ע",
+    "pattern": "קָטוּל",
+    "plurals": [
+     {
+      "form": "שָׁבוּעוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": [
+     {
+      "form": "שְׁבוּעַיִם"
+     }
+    ],
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שְׁבוּעַ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שְׁבוּעוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שָׁבוּעַ",
     "N;SG;DEF": "הַשָּׁבוּעַ",
     "N;PL;INDF": "שָׁבוּעוֹת",
     "N;PL;DEF": "הַשָּׁבוּעוֹת",
-    "N;DU;INDF": "שְׁבוּעַיִם"
+    "N;DU;INDF": "שְׁבוּעַיִם",
+    "N;SG;CONST": "שְׁבוּעַ",
+    "N;PL;CONST": "שְׁבוּעוֹת"
    },
    "plene": {
     "N;DU;INDF": "שבועיים"
    },
+   "note": "“This week” = הַשָּׁבוּעַ. Two weeks = שְׁבוּעַיִם (dual). Plural שָׁבוּעוֹת (masculine, with -וֹת).",
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "period",
+     "value": "the modern word"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1676,25 +2139,66 @@
    "lemma": "חֹדֶשׁ",
    "pos": "NOUN",
    "senses": [
-    "time.month"
+    "time.month",
+    "nature.newmoon"
    ],
    "gender": "MASC",
    "translit": "chodesh",
-   "note": "“This month” = הַחֹדֶשׁ. Two months = חׇדְשַׁיִם (dual). Full spelling חודש.",
+   "features": {
+    "spelling": "חודש",
+    "root": "ח ד שׁ",
+    "pattern": "קֹטֶל",
+    "plurals": [
+     {
+      "form": "חֳדָשִׁים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": [
+     {
+      "form": "חׇדְשַׁיִם",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֹדֶשׁ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חׇדְשֵׁי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֹדֶשׁ",
     "N;SG;DEF": "הַחֹדֶשׁ",
     "N;PL;INDF": "חֳדָשִׁים",
     "N;PL;DEF": "הַחֳדָשִׁים",
-    "N;DU;INDF": "חׇדְשַׁיִם"
+    "N;DU;INDF": "חׇדְשַׁיִם",
+    "N;SG;CONST": "חֹדֶשׁ",
+    "N;PL;CONST": "חׇדְשֵׁי"
    },
    "plene": {
     "N;SG;INDF": "חודש",
     "N;SG;DEF": "החודש",
     "N;PL;INDF": "חודשים",
     "N;PL;DEF": "החודשים",
-    "N;DU;INDF": "חודשיים"
+    "N;DU;INDF": "חודשיים",
+    "N;SG;CONST": "חודש",
+    "N;PL;CONST": "חודשי"
    },
+   "note": "“This month” = הַחֹדֶשׁ. Two months = חׇדְשַׁיִם (dual). Full spelling חודש.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1721,7 +2225,8 @@
       "def": "new moon, the first day of a Hebrew month",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "nature.newmoon"
      }
     ],
     "examples": [
@@ -1793,17 +2298,51 @@
    ],
    "gender": "FEM",
    "translit": "shana",
-   "note": "Feminine, but the plural is שָׁנִים. “This year” = הַשָּׁנָה. Two years = שְׁנָתַיִם.",
+   "features": {
+    "spelling": "שנה",
+    "root": "שׁ נ ה",
+    "pattern": "קְטָלָה",
+    "plurals": [
+     {
+      "form": "שָׁנִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": [
+     {
+      "form": "שְׁנָתַיִם"
+     }
+    ],
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שְׁנַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שְׁנוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "שָׁנָה",
     "N;SG;DEF": "הַשָּׁנָה",
     "N;PL;INDF": "שָׁנִים",
     "N;PL;DEF": "הַשָּׁנִים",
-    "N;DU;INDF": "שְׁנָתַיִם"
+    "N;DU;INDF": "שְׁנָתַיִם",
+    "N;SG;CONST": "שְׁנַת",
+    "N;PL;CONST": "שְׁנוֹת"
    },
    "plene": {
     "N;DU;INDF": "שנתיים"
    },
+   "note": "Feminine, but the plural is שָׁנִים. “This year” = הַשָּׁנָה. Two years = שְׁנָתַיִם.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1901,21 +2440,70 @@
    "pos": "NOUN",
    "senses": [
     "time.hour",
-    "time.oclock"
+    "time.oclock",
+    "time.moment"
    ],
    "gender": "FEM",
-   "translit": "sha‘a",
-   "note": "Hour, and the word for telling the time: הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”, בְּשָׁעָה שָׁלוֹשׁ “at three o’clock” — with the feminine numbers. Two hours = שְׁעָתַיִם.",
+   "translit": "sha'a",
+   "features": {
+    "spelling": "שעה",
+    "root": {
+     "none": "borrowed from Aramaic (שַׁעְתָּא): no Hebrew root"
+    },
+    "pattern": {
+     "none": "borrowed from Aramaic: no Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "שָׁעוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s3"
+      ]
+     }
+    ],
+    "dual": [
+     {
+      "form": "שְׁעָתַיִם",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "שְׁעַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "שְׁעוֹת"
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "הַשָּׁעָה",
+      "senses": [
+       "s2"
+      ],
+      "note": "with the article + a number: הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”"
+     }
+    ]
+   },
    "forms": {
     "N;SG;INDF": "שָׁעָה",
     "N;SG;DEF": "הַשָּׁעָה",
     "N;PL;INDF": "שָׁעוֹת",
     "N;PL;DEF": "הַשָּׁעוֹת",
-    "N;DU;INDF": "שְׁעָתַיִם"
+    "N;DU;INDF": "שְׁעָתַיִם",
+    "N;SG;CONST": "שְׁעַת",
+    "N;PL;CONST": "שְׁעוֹת"
    },
    "plene": {
     "N;DU;INDF": "שעתיים"
    },
+   "note": "Hour, and the word for telling the time: הַשָּׁעָה שָׁלוֹשׁ “it is three o’clock”, בְּשָׁעָה שָׁלוֹשׁ “at three o’clock” — with the feminine numbers. Two hours = שְׁעָתַיִם.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1950,7 +2538,8 @@
       "def": "a time, a moment (בְּשָׁעָה טוֹבָה “at a good time”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.moment"
      }
     ],
     "examples": [
@@ -1988,6 +2577,13 @@
       "register": "neutral",
       "context": "transport",
       "sense": "s2"
+     },
+     {
+      "text": "בְּשָׁעָה טוֹבָה, הַתִּינוֹק נוֹלַד!",
+      "tr": "At a good hour — the baby is born!",
+      "register": "neutral",
+      "context": "congratulations",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2054,11 +2650,43 @@
    ],
    "gender": "FEM",
    "translit": "daka",
+   "features": {
+    "spelling": "דקה",
+    "root": "ד ק ק",
+    "pattern": "קַטְלָה",
+    "plurals": [
+     {
+      "form": "דַּקּוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דַּקַּת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דַּקּוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דַּקָּה",
     "N;SG;DEF": "הַדַּקָּה",
     "N;PL;INDF": "דַּקּוֹת",
-    "N;PL;DEF": "הַדַּקּוֹת"
+    "N;PL;DEF": "הַדַּקּוֹת",
+    "N;SG;CONST": "דַּקַּת",
+    "N;PL;CONST": "דַּקּוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2151,12 +2779,44 @@
     "time.date"
    ],
    "gender": "MASC",
-   "translit": "ta’arich",
+   "translit": "ta'arich",
+   "features": {
+    "spelling": "תאריך",
+    "root": "א ר ך",
+    "pattern": "תַּקְטִיל",
+    "plurals": [
+     {
+      "form": "תַּאֲרִיכִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תַּאֲרִיךְ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּאֲרִיכֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תַּאֲרִיךְ",
     "N;SG;DEF": "הַתַּאֲרִיךְ",
     "N;PL;INDF": "תַּאֲרִיכִים",
-    "N;PL;DEF": "הַתַּאֲרִיכִים"
+    "N;PL;DEF": "הַתַּאֲרִיכִים",
+    "N;SG;CONST": "תַּאֲרִיךְ",
+    "N;PL;CONST": "תַּאֲרִיכֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2245,7 +2905,33 @@
    ],
    "gender": "MASC",
    "translit": "yom huledet",
-   "note": "The article goes on the second word: יוֹם הַהֻלֶּדֶת שֶׁלִּי “my birthday”. Plural יְמֵי הֻלֶּדֶת.",
+   "features": {
+    "spelling": "יום הולדת",
+    "root": {
+     "none": "a compound of two words (יוֹם + הֻלֶּדֶת): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "יְמֵי הֻלֶּדֶת",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יוֹם הֻלֶּדֶת",
     "N;SG;DEF": "יוֹם הַהֻלֶּדֶת",
@@ -2258,6 +2944,7 @@
     "N;PL;INDF": "ימי הולדת",
     "N;PL;DEF": "ימי ההולדת"
    },
+   "note": "The article goes on the second word: יוֹם הַהֻלֶּדֶת שֶׁלִּי “my birthday”. Plural יְמֵי הֻלֶּדֶת.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2354,23 +3041,58 @@
    "lemma": "חֻפְשָׁה",
    "pos": "NOUN",
    "senses": [
-    "time.holiday"
+    "time.holiday",
+    "abstract.freedom"
    ],
    "gender": "FEM",
    "translit": "chufsha",
-   "note": "A holiday, time off (from work or school). A religious or national holiday is חַג. Full spelling חופשה.",
+   "features": {
+    "spelling": "חופשה",
+    "root": "ח פ שׁ",
+    "pattern": "קֻטְלָה",
+    "plurals": [
+     {
+      "form": "חֻפְשׁוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֻפְשַׁת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "חֻפְשׁוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חֻפְשָׁה",
     "N;SG;DEF": "הַחֻפְשָׁה",
     "N;PL;INDF": "חֻפְשׁוֹת",
-    "N;PL;DEF": "הַחֻפְשׁוֹת"
+    "N;PL;DEF": "הַחֻפְשׁוֹת",
+    "N;SG;CONST": "חֻפְשַׁת",
+    "N;PL;CONST": "חֻפְשׁוֹת"
    },
    "plene": {
     "N;SG;INDF": "חופשה",
     "N;SG;DEF": "החופשה",
     "N;PL;INDF": "חופשות",
-    "N;PL;DEF": "החופשות"
+    "N;PL;DEF": "החופשות",
+    "N;SG;CONST": "חופשת",
+    "N;PL;CONST": "חופשות"
    },
+   "note": "A holiday, time off (from work or school). A religious or national holiday is חַג. Full spelling חופשה.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2397,7 +3119,8 @@
       "def": "emancipation, release",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "abstract.freedom"
      }
     ],
     "examples": [
@@ -2421,6 +3144,13 @@
       "register": "neutral",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "אוֹ חֻפְשָׁה לֹא נִתַּן לָהּ.",
+      "tr": "Nor has freedom been given to her. (Leviticus 19:20)",
+      "register": "literary",
+      "context": "Bible",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2471,9 +3201,56 @@
    "lemma": "אַחֲרֵי",
    "pos": "ADP",
    "senses": [
-    "prep.after"
+    "prep.after",
+    "prep.after.follow"
    ],
+   "prefix": false,
    "translit": "acharei",
+   "features": {
+    "spelling": "אחרי",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "אַחֲרַי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "אַחֲרֶיךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "אַחֲרַיִךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "אַחֲרָיו"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "אַחֲרֶיהָ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "אַחֲרֵינוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "אַחֲרֵיכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "אַחֲרֵיכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "אַחֲרֵיהֶם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "אַחֲרֵיהֶן"
+     }
+    ]
+   },
    "note": "“After” (in time): אַחֲרֵי הָעֲבוֹדָה. Before a clause אַחֲרֵי שֶׁ…; with pronouns אַחֲרַי “after me”, אַחֲרֶיךָ …",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2501,7 +3278,8 @@
       "def": "after, behind (following someone): רָץ אַחֲרֵי",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.after.follow"
      }
     ],
     "examples": [
@@ -2581,9 +3359,18 @@
    "lemma": "עַד",
    "pos": "ADP",
    "senses": [
-    "prep.until"
+    "prep.until",
+    "prep.by.time",
+    "prep.upto"
    ],
+   "prefix": false,
    "translit": "ad",
+   "features": {
+    "spelling": "עד",
+    "pronForms": {
+     "none": "not used with personal endings in Modern Hebrew (literary עָדַי …)"
+    }
+   },
    "note": "“Until, till”; with מִ: from … to … (מִשְּׁמוֹנֶה עַד חָמֵשׁ). Before a clause עַד שֶׁ…",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2611,14 +3398,16 @@
       "def": "by (a time: not later than)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.by.time"
      },
      {
       "id": "s3",
       "def": "to, up to, as far as (a place, a number)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.upto"
      }
     ],
     "examples": [
@@ -2707,10 +3496,25 @@
    "lemma": "מֵאָז",
    "pos": "ADP",
    "senses": [
-    "prep.since"
+    "prep.since",
+    "adv.sincethen"
    ],
-   "translit": "me’az",
+   "prefix": false,
+   "translit": "me'az",
+   "features": {
+    "spelling": "מאז",
+    "pronForms": {
+     "none": "a time word: not used with personal endings"
+    }
+   },
    "note": "“Since (a point in time)”, with the present for what is still going on: הוּא פֹּה מֵאָז יָנוּאָר. Alone it means “since then”. With a time word מִ alone also works: מֵהַבֹּקֶר “since the morning”.",
+   "contrasts": [
+    {
+     "concept": "prep.since",
+     "axis": "word or prefix",
+     "value": "a word of its own, “since”; alone “since then” (מֵאָז יָנוּאָר)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2737,7 +3541,8 @@
       "def": "since then (adverb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.sincethen"
      }
     ],
     "examples": [
@@ -2808,7 +3613,14 @@
    "senses": [
     "prep.during"
    ],
+   "prefix": false,
    "translit": "bemeshech",
+   "features": {
+    "spelling": "במשך",
+    "pronForms": {
+     "none": "a time word: not used with personal endings"
+    }
+   },
    "note": "“During, for (a period)”: בְּמֶשֶׁךְ הַקַּיִץ “during the summer”, בְּמֶשֶׁךְ שָׁעָה “for an hour”. A length of time can also stand alone: מְחַכֶּה שָׁעָה.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2836,7 +3648,8 @@
       "def": "for (a length of time)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [

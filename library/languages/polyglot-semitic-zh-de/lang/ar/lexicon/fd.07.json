@@ -5,10 +5,43 @@
    "lemma": "أَكَلَ",
    "pos": "VERB",
    "senses": [
-    "verb.eat"
+    "verb.eat",
+    "verb.corrode"
    ],
-   "root": "ء ك ل",
-   "verbForm": "I",
+   "features": {
+    "root": "ء ك ل",
+    "rootClass": [
+     "hamzated"
+    ],
+    "verbForm": "I",
+    "present": "يَأْكُلُ",
+    "masdar": [
+     "أَكْل"
+    ],
+    "participles": [
+     {
+      "form": "آكِل",
+      "kind": "active"
+     },
+     {
+      "form": "مَأْكُول",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the food (أَكَلَ الْخُبْزَ)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾakala",
    "forms": {
     "V;PST;1;SG": "أَكَلْتُ",
@@ -72,7 +105,8 @@
       "def": "to eat away, corrode, consume (rust, fire, time)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "verb.corrode"
      }
     ],
     "examples": [
@@ -156,10 +190,43 @@
    "lemma": "شَرِبَ",
    "pos": "VERB",
    "senses": [
-    "verb.drink"
+    "verb.drink",
+    "verb.smoke"
    ],
-   "root": "ش ر ب",
-   "verbForm": "I",
+   "features": {
+    "root": "ش ر ب",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَشْرَبُ",
+    "masdar": [
+     "شُرْب"
+    ],
+    "participles": [
+     {
+      "form": "شَارِب",
+      "kind": "active"
+     },
+     {
+      "form": "مَشْرُوب",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the drink; a cigarette, a shisha (شَرِبَ سِيجَارَةً)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "šariba",
    "forms": {
     "V;PST;1;SG": "شَرِبْتُ",
@@ -223,7 +290,8 @@
       "def": "to smoke (cigarettes, shisha) — lit. “drink” smoke",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.smoke"
      }
     ],
     "examples": [
@@ -314,8 +382,39 @@
    "senses": [
     "verb.cook"
    ],
-   "root": "ط ب خ",
-   "verbForm": "I",
+   "features": {
+    "root": "ط ب خ",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَطْبُخُ",
+    "masdar": [
+     "طَبْخ"
+    ],
+    "participles": [
+     {
+      "form": "طَابِخ",
+      "kind": "active"
+     },
+     {
+      "form": "مَطْبُوخ",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the food, the dish (طَبَخَ الْأَرُزَّ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ṭabaḫa",
    "forms": {
     "V;PST;1;SG": "طَبَخْتُ",
@@ -433,10 +532,49 @@
    "lemma": "أَرَادَ",
    "pos": "VERB",
    "senses": [
-    "verb.want"
+    "verb.want",
+    "verb.beaboutto"
    ],
-   "root": "ر و د",
-   "verbForm": "IV",
+   "features": {
+    "root": "ر و د",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "IV",
+    "present": "يُرِيدُ",
+    "masdar": [
+     "إِرَادَة"
+    ],
+    "participles": [
+     {
+      "form": "مُرِيد",
+      "kind": "active"
+     },
+     {
+      "form": "مُرَاد",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "a thing (أُرِيدُ قَهْوَةً)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "أَنْ + a verb in the subjunctive (أُرِيدُ أَنْ أَنَامَ)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ʾarāda",
    "forms": {
     "V;PST;1;SG": "أَرَدْتُ",
@@ -486,7 +624,8 @@
       "def": "to be about to (of things)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "verb.beaboutto"
      }
     ],
     "examples": [
@@ -577,8 +716,46 @@
    "senses": [
     "verb.like"
    ],
-   "root": "ح ب ب",
-   "verbForm": "IV",
+   "features": {
+    "root": "ح ب ب",
+    "rootClass": [
+     "doubled"
+    ],
+    "verbForm": "IV",
+    "present": "يُحِبُّ",
+    "masdar": [
+     "حُبّ",
+     "مَحَبَّة"
+    ],
+    "participles": [
+     {
+      "form": "مُحِبّ",
+      "kind": "active"
+     },
+     {
+      "form": "مَحْبُوب",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "a person or a thing (أُحِبُّ الشَّايَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "أَنْ + a verb in the subjunctive (أُحِبُّ أَنْ أَقْرَأَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ʾaḥabba",
    "forms": {
     "V;PST;1;SG": "أَحْبَبْتُ",
@@ -720,8 +897,46 @@
    "senses": [
     "verb.buy"
    ],
-   "root": "ش ر ي",
-   "verbForm": "VIII",
+   "features": {
+    "root": "ش ر ي",
+    "rootClass": [
+     "defective"
+    ],
+    "verbForm": "VIII",
+    "present": "يَشْتَرِي",
+    "masdar": [
+     "اِشْتِرَاء"
+    ],
+    "participles": [
+     {
+      "form": "مُشْتَرٍ",
+      "kind": "active"
+     },
+     {
+      "form": "مُشْتَرًى",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the thing bought",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "مِنْ",
+      "what": "the seller or the place (اِشْتَرَيْتُهُ مِنَ السُّوقِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "ištarā",
    "forms": {
     "V;PST;1;SG": "اِشْتَرَيْتُ",
@@ -864,8 +1079,23 @@
    "senses": [
     "food.bread"
    ],
+   "features": {
+    "root": "خ ب ز",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "خ ب ز",
    "translit": "ḫubz",
    "forms": {
     "N;NOM;SG;INDF": "خُبْزٌ",
@@ -971,10 +1201,26 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "food.cheese"
+    "food.cheese",
+    "abstract.cowardice"
    ],
+   "features": {
+    "root": "ج ب ن",
+    "pattern": "فُعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ج ب ن",
    "translit": "jubn",
    "forms": {
     "N;NOM;SG;INDF": "جُبْنٌ",
@@ -1004,6 +1250,14 @@
        "neutral"
       ],
       "concept": "food.cheese"
+     },
+     {
+      "id": "s2",
+      "def": "cowardice (the same written form جُبْن; adjective جَبَان, coward)",
+      "register": [
+       "formal"
+      ],
+      "concept": "abstract.cowardice"
      }
     ],
     "examples": [
@@ -1027,6 +1281,13 @@
       "register": "neutral",
       "context": "shopping",
       "sense": "s1"
+     },
+     {
+      "text": "الْخَوْفُ طَبِيعِيٌّ، أَمَّا الْجُبْنُ فَعَيْبٌ.",
+      "tr": "Fear is natural, but cowardice is a flaw.",
+      "register": "formal",
+      "context": "character",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1074,9 +1335,30 @@
    "senses": [
     "food.egg"
    ],
+   "features": {
+    "root": "ب ي ض",
+    "pattern": "فَعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "بَيْضَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "بَيْضَتَانِ",
+    "declension": "triptote",
+    "unit": "بَيْضَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ب ي ض",
-   "unit": "بَيْضَة",
    "translit": "bayḍ",
    "forms": {
     "N;NOM;COLL;INDF": "بَيْضٌ",
@@ -1197,8 +1479,32 @@
    "senses": [
     "food.meat"
    ],
+   "features": {
+    "root": "ل ح م",
+    "pattern": "فَعْل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "لُحُوم",
+      "kind": "broken",
+      "pattern": "فُعُول",
+      "declension": "triptote",
+      "note": "kinds of meat",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a substance (meat): not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ل ح م",
    "translit": "laḥm",
    "forms": {
     "N;NOM;SG;INDF": "لَحْمٌ",
@@ -1214,7 +1520,6 @@
     "N;ACC;PL;DEF": "اللُّحُومَ",
     "N;GEN;PL;DEF": "اللُّحُومِ"
    },
-   "brokenPlural": "لُحُوم",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1306,11 +1611,45 @@
    "pos": "NOUN",
    "class": "collective",
    "senses": [
-    "food.fish"
+    "food.fish",
+    "animal.fish"
    ],
+   "features": {
+    "root": "س م ك",
+    "pattern": "فَعَل",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "أَسْمَاك",
+      "kind": "broken",
+      "pattern": "أَفْعَال",
+      "declension": "triptote",
+      "note": "fish (many, or several kinds)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "سَمَكَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: ثَلَاثُ سَمَكَاتٍ (plural of سَمَكَة)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "سَمَكَتَانِ",
+    "declension": "triptote",
+    "unit": "سَمَكَة",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "س م ك",
-   "unit": "سَمَكَة",
    "translit": "samak",
    "forms": {
     "N;NOM;COLL;INDF": "سَمَكٌ",
@@ -1338,7 +1677,6 @@
     "N;ACC;DU;DEF": "السَّمَكَتَيْنِ",
     "N;GEN;DU;DEF": "السَّمَكَتَيْنِ"
    },
-   "brokenPlural": "أَسْمَاك",
    "formsAlt": {
     "N;NOM;PL;INDF": [
      "سَمَكَاتٌ"
@@ -1374,11 +1712,19 @@
     "senses": [
      {
       "id": "s1",
-      "def": "fish (as food and in general); سَمَكَة = one fish",
+      "def": "fish (as food); سَمَكَة = one fish",
       "register": [
        "neutral"
       ],
       "concept": "food.fish"
+     },
+     {
+      "id": "s2",
+      "def": "fish (the animal); one fish = سَمَكَة, plural أَسْمَاك",
+      "register": [
+       "neutral"
+      ],
+      "concept": "animal.fish"
      }
     ],
     "examples": [
@@ -1401,7 +1747,14 @@
       "tr": "There are many fish in the sea.",
       "register": "neutral",
       "context": "nature",
-      "sense": "s1"
+      "sense": "s2"
+     },
+     {
+      "text": "السَّمَكُ يَعِيشُ فِي الْمَاءِ.",
+      "tr": "Fish live in water.",
+      "register": "neutral",
+      "context": "biology",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1448,11 +1801,39 @@
    "pos": "NOUN",
    "class": "collective",
    "senses": [
-    "food.chicken"
+    "food.chicken",
+    "animal.chicken"
    ],
+   "features": {
+    "root": "د ج ج",
+    "pattern": "فَعَال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "دَجَاجَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "hens (plural of دَجَاجَة)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "دَجَاجَتَانِ",
+    "declension": "triptote",
+    "unit": "دَجَاجَة",
+    "meaningForms": [
+     {
+      "form": "دَجَاجَة",
+      "what": "the unit noun: one hen",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "gender": "MASC",
-   "root": "د ج ج",
-   "unit": "دَجَاجَة",
    "translit": "dajāj",
    "forms": {
     "N;NOM;COLL;INDF": "دَجَاجٌ",
@@ -1506,7 +1887,8 @@
       "def": "دَجَاجَة: a hen, one chicken",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "animal.chicken"
      }
     ],
     "examples": [
@@ -1585,6 +1967,26 @@
    "senses": [
     "food.rice"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Greek/Persian): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "ʾaruzz",
    "forms": {
@@ -1688,8 +2090,23 @@
    "senses": [
     "food.soup"
    ],
+   "features": {
+    "root": "ح س و",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ح س و",
    "translit": "ḥasāʾ",
    "forms": {
     "N;NOM;SG;INDF": "حَسَاءٌ",
@@ -1788,6 +2205,31 @@
    "senses": [
     "food.salad"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian insalata): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَلَطَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَلَطَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "salaṭa",
    "forms": {
@@ -1894,8 +2336,29 @@
    "senses": [
     "food.fruit"
    ],
+   "features": {
+    "root": "ف ك ه",
+    "pattern": "فَاعِلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "فَوَاكِه",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "فَاكِهَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ف ك ه",
    "translit": "fākiha",
    "forms": {
     "N;NOM;SG;INDF": "فَاكِهَةٌ",
@@ -1917,7 +2380,6 @@
     "N;ACC;DU;DEF": "الْفَاكِهَتَيْنِ",
     "N;GEN;DU;DEF": "الْفَاكِهَتَيْنِ"
    },
-   "brokenPlural": "فَوَاكِه",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2008,9 +2470,30 @@
    "senses": [
     "food.apple"
    ],
+   "features": {
+    "root": "ت ف ح",
+    "pattern": "فُعَّال",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "تُفَّاحَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "counted: the plural of the unit noun",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "تُفَّاحَتَانِ",
+    "declension": "triptote",
+    "unit": "تُفَّاحَة",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ت ف ح",
-   "unit": "تُفَّاحَة",
    "translit": "tuffāḥ",
    "forms": {
     "N;NOM;COLL;INDF": "تُفَّاحٌ",
@@ -2121,8 +2604,35 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "food.sugar"
+    "food.sugar",
+    "health.diabetes"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Sanskrit): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "مَرَضُ السُّكَّرِ",
+      "what": "in full (diabetes); informally سُكَّر",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "gender": "MASC",
    "translit": "sukkar",
    "forms": {
@@ -2159,7 +2669,8 @@
       "def": "diabetes (مَرَضُ السُّكَّرِ, informally سُكَّر)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "health.diabetes"
      }
     ],
     "examples": [
@@ -2225,8 +2736,23 @@
    "senses": [
     "food.salt"
    ],
+   "features": {
+    "root": "م ل ح",
+    "pattern": "فِعْل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "م ل ح",
    "translit": "milḥ",
    "forms": {
     "N;NOM;SG;INDF": "مِلْحٌ",
@@ -2328,8 +2854,32 @@
    "senses": [
     "drink.water"
    ],
+   "features": {
+    "root": "م و ه",
+    "pattern": "فَعَل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "مِيَاه",
+      "kind": "broken",
+      "pattern": "فِعَال",
+      "declension": "triptote",
+      "note": "waters (seas, springs; also the water supply: الْمِيَاهُ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a substance (water): not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "م و ه",
    "translit": "māʾ",
    "forms": {
     "N;NOM;SG;INDF": "مَاءٌ",
@@ -2345,7 +2895,6 @@
     "N;ACC;PL;DEF": "الْمِيَاهَ",
     "N;GEN;PL;DEF": "الْمِيَاهِ"
    },
-   "brokenPlural": "مِيَاه",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2441,6 +2990,26 @@
    "senses": [
     "drink.tea"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Persian, from Chinese): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "šāy",
    "forms": {
@@ -2534,10 +3103,42 @@
    "pos": "NOUN",
    "class": "mass",
    "senses": [
-    "drink.coffee"
+    "drink.coffee",
+    "place.cafe"
+   ],
+   "features": {
+    "root": "ق ه و",
+    "pattern": "فَعْلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قَهَاوٍ",
+      "kind": "broken",
+      "pattern": "فَعَالٍ",
+      "declension": "defective",
+      "note": "cafés (colloquial; in MSA مَقَاهٍ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "place.cafe",
+     "axis": "register",
+     "value": "colloquial (Egypt and other dialects): الْقَهْوَة"
+    }
    ],
    "gender": "FEM",
-   "root": "ق ه و",
    "translit": "qahwa",
    "forms": {
     "N;NOM;SG;INDF": "قَهْوَةٌ",
@@ -2573,7 +3174,8 @@
       "def": "café, coffee house (Egyptian and other dialects; Standard مَقْهًى)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "place.cafe"
      }
     ],
     "examples": [
@@ -2596,6 +3198,13 @@
       "tr": "My grandfather sits in the café with his friends.",
       "register": "colloquial",
       "context": "café",
+      "sense": "s2"
+     },
+     {
+      "text": "نَلْتَقِي فِي الْقَهْوَةِ بَعْدَ الْعَمَلِ.",
+      "tr": "We meet at the café after work.",
+      "register": "colloquial",
+      "context": "friends",
       "sense": "s2"
      }
     ],
@@ -2644,8 +3253,23 @@
    "senses": [
     "drink.milk"
    ],
+   "features": {
+    "root": "ح ل ب",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ح ل ب",
    "translit": "ḥalīb",
    "forms": {
     "N;NOM;SG;INDF": "حَلِيبٌ",
@@ -2744,8 +3368,32 @@
    "senses": [
     "drink.juice"
    ],
+   "features": {
+    "root": "ع ص ر",
+    "pattern": "فَعِيل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "عَصَائِر",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "note": "juices, kinds of juice",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "a drink: two juices = كَأْسَا عَصِيرٍ"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ع ص ر",
    "translit": "ʿaṣīr",
    "forms": {
     "N;NOM;SG;INDF": "عَصِيرٌ",
@@ -2761,7 +3409,6 @@
     "N;ACC;PL;DEF": "الْعَصَائِرَ",
     "N;GEN;PL;DEF": "الْعَصَائِرِ"
    },
-   "brokenPlural": "عَصَائِر",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2853,6 +3500,26 @@
    "senses": [
     "drink.wine"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword from Middle Persian (nabīd), although it looks like نَبَذَ “to throw away”"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "nabīḏ",
    "forms": {
@@ -2953,6 +3620,26 @@
    "senses": [
     "drink.beer"
    ],
+   "features": {
+    "root": {
+     "none": "a loanword (Italian birra): no Arabic root"
+    },
+    "pattern": {
+     "none": "no Arabic root, so no measure"
+    },
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "bīra",
    "forms": {
@@ -3053,8 +3740,23 @@
    "senses": [
     "meal.breakfast"
    ],
+   "features": {
+    "root": "ف ط ر",
+    "pattern": "فَعُول",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ف ط ر",
    "translit": "faṭūr",
    "forms": {
     "N;NOM;SG;INDF": "فَطُورٌ",
@@ -3154,8 +3856,23 @@
    "senses": [
     "meal.lunch"
    ],
+   "features": {
+    "root": "غ د و",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "غ د و",
    "translit": "ġadāʾ",
    "forms": {
     "N;NOM;SG;INDF": "غَدَاءٌ",
@@ -3250,8 +3967,23 @@
    "senses": [
     "meal.dinner"
    ],
+   "features": {
+    "root": "ع ش و",
+    "pattern": "فَعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: not counted in twos"
+    },
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
-   "root": "ع ش و",
    "translit": "ʿašāʾ",
    "forms": {
     "N;NOM;SG;INDF": "عَشَاءٌ",

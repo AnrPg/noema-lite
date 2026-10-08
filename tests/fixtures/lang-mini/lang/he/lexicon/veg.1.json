@@ -7,6 +7,36 @@
    "senses": [
     "veg.carrot"
    ],
+   "features": {
+    "spelling": "גזר",
+    "root": "ג ז ר",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "גְּזָרִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "גֶּזֶר"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "גִּזְרֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "gezer",
    "forms": {
@@ -101,8 +131,40 @@
    "lemma": "בָּצָל",
    "pos": "NOUN",
    "senses": [
-    "veg.onion"
+    "veg.onion",
+    "nature.bulb"
    ],
+   "features": {
+    "spelling": "בצל",
+    "root": "ב צ ל",
+    "pattern": "קָטָל",
+    "plurals": [
+     {
+      "form": "בְּצָלִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בְּצַל"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בִּצְלֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "batsal",
    "forms": {
@@ -140,7 +202,8 @@
       ],
       "domains": [
        "gardening"
-      ]
+      ],
+      "concept": "nature.bulb"
      }
     ],
     "examples": [
@@ -201,6 +264,40 @@
    "senses": [
     "veg.cucumber"
    ],
+   "features": {
+    "spelling": "מלפפון",
+    "root": {
+     "none": "a loanword (Greek μηλοπέπων): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "מְלָפְפוֹנִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְלָפְפוֹן"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מְלָפְפוֹנֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "MASC",
    "translit": "melafefon",
    "forms": {

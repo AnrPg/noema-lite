@@ -7,7 +7,8 @@
    "pinyin": "shén me",
    "pos": "PRON",
    "senses": [
-    "q.what"
+    "q.what",
+    "pron.anything"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,14 +36,16 @@
       "def": "something; anything (in questions and negations)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.anything"
      },
      {
       "id": "s3",
       "def": "what?! (surprise or anger)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -134,6 +137,17 @@
      "Before a noun, 什么 asks ‘what kind / which’: 什么菜？ ‘what dish?’.",
      "In fast speech it is often shéme."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 什麼 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -143,7 +157,9 @@
    "pinyin": "nǎ li",
    "pos": "PRON",
    "senses": [
-    "q.where"
+    "q.where",
+    "adv.anywhere",
+    "intj.notatall"
    ],
    "variants": [
     {
@@ -151,6 +167,13 @@
      "trad": "哪兒",
      "pinyin": "nǎr",
      "region": "north, esp. Beijing (erhua)"
+    }
+   ],
+   "contrasts": [
+    {
+     "concept": "q.where",
+     "axis": "form",
+     "value": "where? — the question word"
     }
    ],
    "ref": {
@@ -182,14 +205,16 @@
       "def": "wherever; anywhere",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.anywhere"
      },
      {
       "id": "s3",
       "def": "(哪里哪里) not at all — a modest reply to a compliment",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "intj.notatall"
      }
     ],
     "examples": [
@@ -275,6 +300,17 @@
      "Both 哪里 and 哪儿 are standard: -儿 forms (哪儿, 这儿, 那儿) are typical of Beijing and the north, -里 forms of the south, Taiwan and writing.",
      "Spoken: the 3rd tone of 哪 before 里 is usually heard as náli."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 哪裡 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -284,7 +320,8 @@
    "pinyin": "shéi",
    "pos": "PRON",
    "senses": [
-    "q.who"
+    "q.who",
+    "pron.anyone"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -312,7 +349,8 @@
       "def": "(with 都 / 也) anyone, everyone; (with a negation) nobody",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.anyone"
      }
     ],
     "examples": [
@@ -404,6 +442,17 @@
      "Two readings: shéi (everyday) and shuí (careful or formal speech); both are correct.",
      "With 都 it means ‘everyone’: 谁都喜欢他 ‘everyone likes him’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all senses: shéi in speech; shuí is a less common alternative pronunciation of the same word"
+    },
+    "tradPerSense": {
+     "none": "traditional 誰 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -490,6 +539,17 @@
     "subtleties": [
      "谁的 can stand alone at the end: 这是谁的？ ‘whose is this?’ — answer 是我的 ‘it’s mine’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 誰的 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -595,6 +655,21 @@
     "subtleties": [
      "For the clock time Chinese asks 几点: 你几点吃早饭？; 什么时候 can be a day, a year or a time."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 什麼時候 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal",
+     "sentenceInitial"
+    ]
    }
   },
   {
@@ -604,7 +679,20 @@
    "pinyin": "zěn me",
    "pos": "ADV",
    "senses": [
-    "q.how"
+    "q.how",
+    "q.why"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.how",
+     "axis": "what is asked",
+     "value": "in what way? (before a verb: 怎么走?)"
+    },
+    {
+     "concept": "q.why",
+     "axis": "attitude",
+     "value": "how come? — surprise or reproach"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -632,14 +720,16 @@
       "def": "how come? why on earth? (surprise)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "q.why"
      },
      {
       "id": "s3",
       "def": "(怎么了) what’s wrong? what happened?",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -674,6 +764,14 @@
       "register": "colloquial",
       "context": "health",
       "sense": "s3"
+     },
+     {
+      "text": "你怎么才来？",
+      "py": "Nǐ zěnme cái lái?",
+      "tr": "How come you’re only getting here now?",
+      "register": "colloquial",
+      "context": "meetings",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -732,6 +830,20 @@
      "怎么 vs 为什么: 怎么 shows surprise or disapproval (‘how come?!’), 为什么 asks neutrally for the reason.",
      "In fast speech it is often zěm."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 怎麼 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal"
+    ]
    }
   },
   {
@@ -742,6 +854,13 @@
    "pos": "PRON",
    "senses": [
     "q.how"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.how",
+     "axis": "what is asked",
+     "value": "how is it? what is it like? (as the predicate)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -769,14 +888,16 @@
       "def": "(after a suggestion) how about it?",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "(不怎么样) not up to much",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -854,6 +975,17 @@
     "subtleties": [
      "After a suggestion it asks for agreement: 我们走，怎么样？ ‘let’s go, OK?’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 怎麼樣 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -864,6 +996,13 @@
    "pos": "ADV",
    "senses": [
     "q.why"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.why",
+     "axis": "attitude",
+     "value": "why? — asks for a reason (neutral)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -959,6 +1098,21 @@
     "subtleties": [
      "为 is read wèi (4th tone) here, not wéi."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 為什麼 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "preverbal",
+     "sentenceInitial"
+    ]
    }
   },
   {
@@ -968,7 +1122,15 @@
    "pinyin": "duō shao",
    "pos": "PRON",
    "senses": [
-    "q.howmany"
+    "q.howmany",
+    "adv.moreorless"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.howmany",
+     "axis": "expected size",
+     "value": "any number; the measure word may be left out"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -999,7 +1161,8 @@
       "def": "(duōshǎo, adverb) more or less, somewhat",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.moreorless"
      }
     ],
     "examples": [
@@ -1073,6 +1236,28 @@
     "subtleties": [
      "As a question word the second syllable is toneless (duōshao); in the sense ‘more or less’ it is duōshǎo."
     ]
+   },
+   "features": {
+    "readings": [
+     {
+      "pinyin": "duō shao",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "pinyin": "duō shǎo",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1082,7 +1267,20 @@
    "pinyin": "jǐ",
    "pos": "NUM",
    "senses": [
-    "q.howmany"
+    "q.howmany",
+    "quant.afew"
+   ],
+   "contrasts": [
+    {
+     "concept": "quant.afew",
+     "axis": "construction",
+     "value": "几 + measure in statements: a few, several (几个人)"
+    },
+    {
+     "concept": "q.howmany",
+     "axis": "expected size",
+     "value": "a small number is expected; with a measure word"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1110,7 +1308,8 @@
       "def": "a few, several (in statements)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "quant.afew"
      }
     ],
     "examples": [
@@ -1188,6 +1387,17 @@
      "In statements 几 means ‘a few’: 我有几本书 ‘I have a few books’.",
      "Time and dates use 几: 几点 ‘what time’, 几号 ‘what date’, 星期几 ‘what weekday’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 幾 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1197,7 +1407,15 @@
    "pinyin": "nǎ",
    "pos": "DET",
    "senses": [
-    "q.which"
+    "q.which",
+    "q.where"
+   ],
+   "contrasts": [
+    {
+     "concept": "q.where",
+     "axis": "form",
+     "value": "only inside 哪里 / 哪儿; alone 哪 is ‘which’"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1225,7 +1443,8 @@
       "def": "(哪里 / 哪儿) where",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "q.where"
      }
     ],
     "examples": [
@@ -1303,6 +1522,17 @@
      "In speech 哪 + measure word is often něi: 哪个 něige.",
      "No 吗 with 哪: 你要哪个？"
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   },
   {
@@ -1316,6 +1546,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   },
   {
@@ -1327,11 +1571,22 @@
    "senses": [
     "job.doctor"
    ],
-   "measure": [
-    "位",
-    "个",
-    "名"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 醫生 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "个",
+     "名"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1432,10 +1687,21 @@
    "senses": [
     "job.nurse"
    ],
-   "measure": [
-    "位",
-    "名"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 護士 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1538,11 +1804,22 @@
    "senses": [
     "job.engineer"
    ],
-   "measure": [
-    "位",
-    "名",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 工程師 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1569,7 +1846,8 @@
       "def": "(computing) software developer",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1647,13 +1925,25 @@
    "pinyin": "sī jī",
    "pos": "NOUN",
    "senses": [
-    "job.driver"
+    "job.driver",
+    "person.oldhand"
    ],
-   "measure": [
-    "位",
-    "名",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 司機 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1680,7 +1970,8 @@
       "def": "(slang, 老司机) an old hand, an experienced person",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "person.oldhand"
      }
     ],
     "examples": [
@@ -1769,11 +2060,22 @@
    "senses": [
     "job.cook"
    ],
-   "measure": [
-    "位",
-    "名",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 廚師 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1878,11 +2180,22 @@
    "senses": [
     "job.seller"
    ],
-   "measure": [
-    "位",
-    "名",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 售貨員 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1985,12 +2298,31 @@
    "pinyin": "gōng rén",
    "pos": "NOUN",
    "senses": [
-    "job.worker"
+    "job.worker",
+    "job.housekeeper"
    ],
-   "measure": [
-    "名",
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "名",
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "job.housekeeper",
+     "axis": "region",
+     "value": "Hong Kong, Singapore: the domestic helper"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2018,7 +2350,8 @@
       "def": "(Hong Kong, Singapore) domestic helper",
       "register": [
        "regional"
-      ]
+      ],
+      "concept": "job.housekeeper"
      }
     ],
     "examples": [
@@ -2045,6 +2378,14 @@
       "register": "neutral",
       "context": "building site",
       "sense": "s1"
+     },
+     {
+      "text": "她家请了一个工人照顾老人。",
+      "py": "Tā jiā qǐng le yí ge gōngrén zhàogù lǎorén.",
+      "tr": "Her family hired a domestic helper to look after the old folks.",
+      "register": "regional",
+      "context": "home",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2103,11 +2444,22 @@
    "senses": [
     "job.farmer"
    ],
-   "measure": [
-    "个",
-    "名",
-    "位"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 農民 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "名",
+     "位"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2205,12 +2557,24 @@
    "pinyin": "jǐng chá",
    "pos": "NOUN",
    "senses": [
-    "job.police"
+    "job.police",
+    "pol.police"
    ],
-   "measure": [
-    "名",
-    "位"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "名",
+     "位"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2237,7 +2601,8 @@
       "def": "the police (the force)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.police"
      }
     ],
     "examples": [
@@ -2320,13 +2685,25 @@
    "pinyin": "lǜ shī",
    "pos": "NOUN",
    "senses": [
-    "job.lawyer"
+    "job.lawyer",
+    "relig.vinayamaster"
    ],
-   "measure": [
-    "位",
-    "名",
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 律師 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名",
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2353,7 +2730,8 @@
       "def": "(Buddhism) a master of monastic discipline",
       "register": [
        "religious"
-      ]
+      ],
+      "concept": "relig.vinayamaster"
      }
     ],
     "examples": [
@@ -2380,6 +2758,14 @@
       "register": "neutral",
       "context": "court",
       "sense": "s1"
+     },
+     {
+      "text": "道宣律师是唐代有名的高僧。",
+      "py": "Dàoxuān lǜshī shì Tángdài yǒumíng de gāosēng.",
+      "tr": "The Vinaya master Daoxuan was a famous monk of the Tang dynasty.",
+      "register": "religious",
+      "context": "history",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2434,10 +2820,21 @@
    "senses": [
     "job.artist"
    ],
-   "measure": [
-    "位",
-    "名"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 藝術家 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "名"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

@@ -158,6 +158,10 @@
        "aka": {
         "type": "string",
         "description": "another name (e.g. the scientific name / Wikipedia title) — the reference check reads it too"
+       },
+       "pending": {
+        "type": "boolean",
+        "description": "a meaning known from a word, not taught by a node yet (D15)"
        }
       }
      }
@@ -423,6 +427,77 @@
       "polysynthetic"
      ],
      "description": "the morphological type → the path of foundation lessons (D10)"
+    },
+    "wordFeatures": {
+     "type": "object",
+     "description": "the facade of each part of speech (D14, §4.5.1)",
+     "additionalProperties": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "title",
+        "type",
+        "phenomenon"
+       ],
+       "properties": {
+        "id": {
+         "type": "string"
+        },
+        "title": {
+         "type": "string"
+        },
+        "type": {
+         "enum": [
+          "enum",
+          "string",
+          "strings",
+          "bool",
+          "int",
+          "list"
+         ]
+        },
+        "values": {
+         "type": "array"
+        },
+        "item": {
+         "type": "object",
+         "additionalProperties": {
+          "type": "string"
+         }
+        },
+        "classes": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "none": {
+         "type": "boolean"
+        },
+        "at": {
+         "const": "top"
+        },
+        "phenomenon": {
+         "oneOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         ]
+        },
+        "why": {
+         "type": "string"
+        }
+       }
+      }
+     }
     }
    }
   },
@@ -554,6 +629,37 @@
       "type": "string"
      },
      "description": "other spellings of an invariant word, e.g. וּ and וַ for וְ"
+    },
+    "features": {
+     "type": "object",
+     "description": "the word's facade: every parameter its language declares for its part of speech (wordFeatures, D14, §4.5.1) — a value or {none: why}",
+     "additionalProperties": true
+    },
+    "contrasts": {
+     "type": "array",
+     "description": "when the language has several words for one concept: what separates this one (D14, §4.5.2)",
+     "items": {
+      "type": "object",
+      "required": [
+       "concept",
+       "axis",
+       "value"
+      ],
+      "properties": {
+       "concept": {
+        "type": "string"
+       },
+       "axis": {
+        "type": "string"
+       },
+       "value": {
+        "type": "string"
+       },
+       "note": {
+        "type": "string"
+       }
+      }
+     }
     }
    }
   },
@@ -1082,6 +1188,10 @@
        },
        "status": {
         "type": "string"
+       },
+       "of": {
+        "type": "string",
+        "description": "a nuance of this word's other sense (D15)"
        }
       }
      }
@@ -1490,6 +1600,127 @@
        }
       }
      }
+    }
+   }
+  },
+  "phenomena": {
+   "type": "object",
+   "description": "the catalogue of phenomena of a language (D14, §4.11)",
+   "required": [
+    "format",
+    "lang",
+    "name",
+    "typology",
+    "phenomena"
+   ],
+   "properties": {
+    "format": {
+     "const": "noema.langphenomena/v1"
+    },
+    "lang": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "typology": {
+     "type": "string"
+    },
+    "summary": {
+     "type": "string"
+    },
+    "sources": {
+     "type": "array"
+    },
+    "phenomena": {
+     "type": "array",
+     "minItems": 20,
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "title",
+       "area",
+       "what",
+       "examples",
+       "status"
+      ],
+      "properties": {
+       "id": {
+        "type": "string"
+       },
+       "title": {
+        "type": "string"
+       },
+       "area": {
+        "enum": [
+         "script",
+         "orthography",
+         "phonology",
+         "morphology",
+         "syntax",
+         "lexicon",
+         "semantics",
+         "pragmatics",
+         "culture",
+         "numbers"
+        ]
+       },
+       "pos": {
+        "type": "array"
+       },
+       "rarity": {
+        "type": "string"
+       },
+       "sharedWith": {
+        "type": "array"
+       },
+       "what": {
+        "type": "string"
+       },
+       "examples": {
+        "type": "array",
+        "minItems": 1
+       },
+       "level": {
+        "type": "string"
+       },
+       "record": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "model": {
+        "type": "object"
+       },
+       "status": {
+        "enum": [
+         "covered",
+         "partial",
+         "missing"
+        ]
+       },
+       "gap": {
+        "type": "string"
+       },
+       "when": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "wordFeatures": {
+     "type": "object"
+    },
+    "distinctions": {
+     "type": "array"
+    },
+    "polysemy": {
+     "type": "array"
+    },
+    "conceptGaps": {
+     "type": "array"
     }
    }
   }

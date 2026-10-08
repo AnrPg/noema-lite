@@ -9,6 +9,17 @@
    "senses": [
     "pron.he"
    ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
    "ref": {
     "src": "fixture"
    }
@@ -22,6 +33,17 @@
    "senses": [
     "pron.she"
    ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
    "ref": {
     "src": "fixture"
    }
@@ -33,8 +55,25 @@
    "pinyin": "chī",
    "pos": "VERB",
    "senses": [
-    "verb.eat"
+    "verb.eat",
+    "verb.take.medicine",
+    "verb.suffer"
    ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "bu+mei"
+   },
    "ref": {
     "src": "fixture"
    },
@@ -60,14 +99,16 @@
       "def": "to take (medicine)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.take.medicine"
      },
      {
       "id": "s3",
       "def": "to suffer, endure (吃苦, 吃亏)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.suffer"
      }
     ],
     "examples": [
@@ -171,6 +212,17 @@
    "senses": [
     "conj.and"
    ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
+   },
    "ref": {
     "src": "fixture"
    }
@@ -182,6 +234,15 @@
    "pinyin": "yī",
    "pos": "NUM",
    "senses": [],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": "yí before a 4th tone (一个 yí ge), yì before the 1st–3rd tones (一本 yì běn); yī alone, in counting, in dates and ordinals"
+   },
    "role": "the number one; with a measure word it plays the role of “a”",
    "ref": {
     "src": "fixture"
@@ -194,6 +255,20 @@
    "pinyin": "gè",
    "pos": "CLF",
    "senses": [],
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 個 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "general"
+    ]
+   },
    "role": "the general measure word",
    "ref": {
     "src": "fixture"

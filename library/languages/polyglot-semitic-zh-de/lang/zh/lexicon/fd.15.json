@@ -9,7 +9,20 @@
    "senses": [
     "time.january"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "in dates 一 keeps yī (一月 yī yuè)"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -109,7 +122,20 @@
    "senses": [
     "time.february"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -203,7 +229,20 @@
    "senses": [
     "time.march"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -297,7 +336,20 @@
    "senses": [
     "time.april"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -391,7 +443,20 @@
    "senses": [
     "time.may"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -485,7 +550,20 @@
    "senses": [
     "time.june"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -579,7 +657,20 @@
    "senses": [
     "time.july"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -673,7 +764,20 @@
    "senses": [
     "time.august"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -767,7 +871,20 @@
    "senses": [
     "time.september"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -861,7 +978,20 @@
    "senses": [
     "time.october"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -955,7 +1085,20 @@
    "senses": [
     "time.november"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "in dates 一 keeps yī (十一月 shí yī yuè)"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1049,7 +1192,20 @@
    "senses": [
     "time.december"
    ],
-   "measureNone": "a month name is not counted; ‘three months’ is 三个月 (with 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a month name is not counted; ‘three months’ is 三个月 (with 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1143,9 +1299,20 @@
    "senses": [
     "time.spring"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1172,7 +1339,8 @@
       "def": "(figurative) hope, a new beginning",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1261,9 +1429,20 @@
    "senses": [
     "time.summer"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1363,9 +1542,20 @@
    "senses": [
     "time.autumn"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1473,9 +1663,20 @@
    "senses": [
     "time.winter"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1573,9 +1774,43 @@
    "pinyin": "zhōu",
    "pos": "NOUN",
    "senses": [
-    "time.week"
+    "time.week",
+    "abstract.circuit",
+    "pol.zhoudynasty"
    ],
-   "measureNone": "周 counts by itself: 两周 ‘two weeks’ (no 个)",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": [
+     {
+      "trad": "週",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "trad": "周",
+      "senses": [
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "周 counts by itself: 两周 ‘two weeks’ (no 个)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.week",
+     "axis": "register and counting",
+     "value": "week — counts by itself (三周), written"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1602,14 +1837,16 @@
       "def": "circle, circuit; all around",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.circuit"
      },
      {
       "id": "s3",
       "def": "the Zhou dynasty (a name)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pol.zhoudynasty"
      }
     ],
     "examples": [
@@ -1636,6 +1873,22 @@
       "register": "neutral",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "房子四周都是树。",
+      "py": "Fángzi sìzhōu dōu shì shù.",
+      "tr": "There are trees all around the house.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s2"
+     },
+     {
+      "text": "周朝有八百年的历史。",
+      "py": "Zhōucháo yǒu bābǎi nián de lìshǐ.",
+      "tr": "The Zhou dynasty lasted eight hundred years.",
+      "register": "neutral",
+      "context": "history",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1691,11 +1944,23 @@
    "pinyin": "yuè",
    "pos": "NOUN",
    "senses": [
-    "time.month"
+    "time.month",
+    "nature.moon"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1722,7 +1987,8 @@
       "def": "moon (literary, in compounds: 月亮, 月饼)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "nature.moon"
      }
     ],
     "examples": [
@@ -1812,9 +2078,24 @@
    "pinyin": "nián",
    "pos": "NOUN",
    "senses": [
-    "time.year"
+    "time.year",
+    "time.newyear",
+    "abstract.age"
    ],
-   "measureNone": "年 is itself a counter: 两年 ‘two years’ (no 个)",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "年 is itself a counter: 两年 ‘two years’ (no 个)"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1841,14 +2122,16 @@
       "def": "the (Chinese) New Year: 过年",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.newyear"
      },
      {
       "id": "s3",
       "def": "age, years of life (年纪)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.age"
      }
     ],
     "examples": [
@@ -1875,6 +2158,14 @@
       "register": "neutral",
       "context": "festivals",
       "sense": "s2"
+     },
+     {
+      "text": "他年纪很大了。",
+      "py": "Tā niánjì hěn dà le.",
+      "tr": "He is very old now.",
+      "register": "neutral",
+      "context": "people",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1943,10 +2234,29 @@
    "pinyin": "xiǎo shí",
    "pos": "NOUN",
    "senses": [
-    "time.hour"
+    "time.hour",
+    "time.childhood"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 小時 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.hour",
+     "axis": "register",
+     "value": "hour — neutral"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1974,7 +2284,8 @@
       "def": "(literary) childhood (小时候)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.childhood"
      }
     ],
     "examples": [
@@ -2001,6 +2312,14 @@
       "register": "neutral",
       "context": "travel",
       "sense": "s1"
+     },
+     {
+      "text": "小时了了，大未必佳。",
+      "py": "Xiǎoshí liǎoliǎo, dà wèibì jiā.",
+      "tr": "Clever as a child does not mean good as a grown-up.",
+      "register": "literary",
+      "context": "saying",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2058,8 +2377,26 @@
    "senses": [
     "time.hour"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 鐘頭 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.hour",
+     "axis": "register",
+     "value": "hour — colloquial"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2155,7 +2492,27 @@
    "senses": [
     "time.minute"
    ],
-   "measureNone": "分钟 counts by itself: 五分钟 ‘five minutes’ (no 个)",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 分鐘 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "分钟 counts by itself: 五分钟 ‘five minutes’ (no 个)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.minute",
+     "axis": "point or length",
+     "value": "minutes as a length of time (五分钟)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2248,9 +2605,32 @@
    "pinyin": "fēn",
    "pos": "NOUN",
    "senses": [
-    "time.minute"
+    "time.minute",
+    "verb.divide",
+    "edu.mark",
+    "money.cent"
    ],
-   "measureNone": "on the clock 分 follows a number directly: 十分 ‘ten (minutes past)’",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "on the clock 分 follows a number directly: 十分 ‘ten (minutes past)’"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.minute",
+     "axis": "point or length",
+     "value": "minutes past, on the clock (八点十分)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2277,21 +2657,24 @@
       "def": "to divide, to separate",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.divide"
      },
      {
       "id": "s3",
       "def": "point, mark (in a test)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "edu.mark"
      },
      {
       "id": "s4",
       "def": "fen, a cent (1/100 yuan)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "money.cent"
      }
     ],
     "examples": [
@@ -2318,6 +2701,22 @@
       "register": "neutral",
       "context": "school",
       "sense": "s3"
+     },
+     {
+      "text": "我们把蛋糕分成四块。",
+      "py": "Wǒmen bǎ dàngāo fēn chéng sì kuài.",
+      "tr": "We cut the cake into four pieces.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s2"
+     },
+     {
+      "text": "以前一分钱能买一块糖。",
+      "py": "Yǐqián yì fēn qián néng mǎi yí kuài táng.",
+      "tr": "In the old days one fen could buy a sweet.",
+      "register": "neutral",
+      "context": "money",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -2368,9 +2767,36 @@
    "pinyin": "diǎn",
    "pos": "NOUN",
    "senses": [
-    "time.oclock"
+    "time.oclock",
+    "abstract.point",
+    "verb.order"
    ],
-   "measureNone": "点 follows the number directly: 三点 ‘three o’clock’",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 點 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "点 follows the number directly: 三点 ‘three o’clock’"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.order",
+     "axis": "what is ordered",
+     "value": "dishes from a menu, a song (点菜)"
+    },
+    {
+     "concept": "time.oclock",
+     "axis": "form",
+     "value": "o’clock after any number (三点)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2397,21 +2823,24 @@
       "def": "dot, point, spot",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.point"
      },
      {
       "id": "s3",
       "def": "a little (一点)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      },
      {
       "id": "s4",
       "def": "(verb) to order (dishes): 点菜",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.order"
      }
     ],
     "examples": [
@@ -2446,6 +2875,14 @@
       "register": "neutral",
       "context": "restaurant",
       "sense": "s4"
+     },
+     {
+      "text": "纸上有一个小黑点。",
+      "py": "Zhǐ shang yǒu yí ge xiǎo hēi diǎn.",
+      "tr": "There is a small black dot on the paper.",
+      "register": "neutral",
+      "context": "description",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2505,8 +2942,26 @@
    "senses": [
     "time.date"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.date",
+     "axis": "the date or the day number",
+     "value": "a date"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2605,9 +3060,31 @@
    "pinyin": "hào",
    "pos": "NOUN",
    "senses": [
-    "time.date"
+    "time.date",
+    "abstract.number",
+    "measure.size"
    ],
-   "measureNone": "号 follows the number directly: 五号 ‘the 5th’",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 號 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "号 follows the number directly: 五号 ‘the 5th’"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "time.date",
+     "axis": "the date or the day number",
+     "value": "the day of the month (五号)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2634,14 +3111,16 @@
       "def": "number (room, house, phone)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "abstract.number"
      },
      {
       "id": "s3",
       "def": "size (大号 ‘large’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "measure.size"
      }
     ],
     "examples": [
@@ -2668,6 +3147,14 @@
       "register": "neutral",
       "context": "address",
       "sense": "s2"
+     },
+     {
+      "text": "这件衣服有大号吗？",
+      "py": "Zhè jiàn yīfu yǒu dàhào ma?",
+      "tr": "Do you have this in a large size?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2726,9 +3213,20 @@
    "senses": [
     "time.birthday"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2833,8 +3331,26 @@
    "senses": [
     "time.holiday"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "noun or verb",
+     "value": "the holiday (a period)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2944,6 +3460,13 @@
    "senses": [
     "time.holiday"
    ],
+   "contrasts": [
+    {
+     "concept": "time.holiday",
+     "axis": "noun or verb",
+     "value": "to have time off"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3032,6 +3555,25 @@
     "subtleties": [
      "放假了！ is the cry when the holidays begin."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": [
+     {
+      "verb": "放",
+      "object": "假",
+      "example": "放了三天假"
+     }
+    ],
+    "neg": "bu+mei"
    }
   },
   {
@@ -3041,9 +3583,35 @@
    "pinyin": "yǐ qián",
    "pos": "NOUN",
    "senses": [
-    "prep.before"
+    "prep.before",
+    "adv.formerly"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.before",
+     "axis": "register",
+     "value": "before — neutral; also ‘formerly’"
+    },
+    {
+     "concept": "adv.formerly",
+     "axis": "register",
+     "value": "formerly, in the past (以前我住在北京) — neutral"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3070,7 +3638,8 @@
       "def": "before, formerly, in the past",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.formerly"
      }
     ],
     "examples": [
@@ -3149,9 +3718,35 @@
    "pinyin": "zhī qián",
    "pos": "NOUN",
    "senses": [
-    "prep.before"
+    "prep.before",
+    "adv.formerly"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.before",
+     "axis": "register",
+     "value": "before — more formal; also ‘ago’"
+    },
+    {
+     "concept": "adv.formerly",
+     "axis": "register",
+     "value": "previously; ago (三天之前) — more formal"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3178,7 +3773,8 @@
       "def": "before, previously; ago (三天之前)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.formerly"
      }
     ],
     "examples": [
@@ -3256,9 +3852,35 @@
    "pinyin": "zhī hòu",
    "pos": "NOUN",
    "senses": [
-    "prep.after"
+    "prep.after",
+    "adv.then"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 之後 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "prep.after",
+     "axis": "register",
+     "value": "after — more formal"
+    },
+    {
+     "concept": "adv.then",
+     "axis": "sequence or time after",
+     "value": "afterwards, after that time (more formal)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3285,7 +3907,8 @@
       "def": "afterwards, then; later (三天之后)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.then"
      }
     ],
     "examples": [
@@ -3309,6 +3932,14 @@
       "text": "之后他回家了。",
       "py": "Zhīhòu tā huí jiā le.",
       "tr": "Afterwards he went home.",
+      "register": "neutral",
+      "context": "story",
+      "sense": "s2"
+     },
+     {
+      "text": "三天之后，他回来了。",
+      "py": "Sān tiān zhīhòu, tā huílai le.",
+      "tr": "Three days later he came back.",
       "register": "neutral",
       "context": "story",
       "sense": "s2"
@@ -3369,6 +4000,13 @@
    "pos": "ADP",
    "senses": [
     "prep.until"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.until",
+     "axis": "construction",
+     "value": "opens the phrase: until, not until (直到六点)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3458,6 +4096,18 @@
     "subtleties": [
      "直到 stresses the long stretch up to the point; after a verb plain 到 is usual: 我睡到九点 ‘I slept until nine’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
@@ -3468,6 +4118,13 @@
    "pos": "ADP",
    "senses": [
     "prep.since"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.since",
+     "axis": "position",
+     "value": "opens the phrase (自从 + time), past only"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3557,6 +4214,18 @@
     "subtleties": [
      "自从 usually closes with 以后 or 以来: 自从他来了以后… — the frame marks the stretch of time."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 自從 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "before"
    }
   },
   {
@@ -3567,6 +4236,13 @@
    "pos": "ADP",
    "senses": [
     "prep.since"
+   ],
+   "contrasts": [
+    {
+     "concept": "prep.since",
+     "axis": "position",
+     "value": "closes the phrase (… 以来): since, for the past …"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3656,6 +4332,18 @@
     "subtleties": [
      "Like German seit + present (seit drei Jahren arbeitet er in Peking), 三年以来 + plain verb needs no special tense."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 以來 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": "after"
    }
   },
   {
@@ -3665,9 +4353,23 @@
    "pinyin": "qī jiān",
    "pos": "NOUN",
    "senses": [
-    "prep.during"
+    "prep.during",
+    "time.period"
    ],
-   "measureNone": "a time word: it is not counted with a measure word",
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 期間 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3697,7 +4399,8 @@
       "def": "period, time",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.period"
      }
     ],
     "examples": [
@@ -3724,6 +4427,14 @@
       "register": "formal",
       "context": "work",
       "sense": "s1"
+     },
+     {
+      "text": "这段期间我很忙。",
+      "py": "Zhè duàn qījiān wǒ hěn máng.",
+      "tr": "I’m very busy during this period.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -3780,10 +4491,31 @@
    "pinyin": "shí hou",
    "pos": "NOUN",
    "senses": [
-    "conj.when"
+    "conj.when",
+    "time.moment"
    ],
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 時候 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a time word: it is not counted with a measure word"
+    }
+   },
    "role": "time, moment — after a clause, …的时候 is ‘when, while …’ (S15 as a frame of time, S18 as the linking word for ‘when’: 我饿的时候 ‘when I’m hungry’); 什么时候 ‘when?’ (S10)",
-   "measureNone": "a time word: it is not counted with a measure word",
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "construction",
+     "value": "…的时候 after the clause: when, while"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -3805,7 +4537,8 @@
       "def": "time, moment, (point in) time",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.moment"
      },
      {
       "id": "s2",
@@ -3910,6 +4643,17 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    }
    }
   }
  ],

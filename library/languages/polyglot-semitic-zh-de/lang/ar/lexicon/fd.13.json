@@ -5,11 +5,45 @@
    "lemma": "ذَهَبَ",
    "pos": "VERB",
    "senses": [
-    "verb.go"
+    "verb.go",
+    "verb.holdview"
    ],
-   "root": "ذ ه ب",
-   "verbForm": "I",
-   "masdar": "ذَهَاب",
+   "features": {
+    "root": "ذ ه ب",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَذْهَبُ",
+    "masdar": [
+     "ذَهَاب"
+    ],
+    "participles": [
+     {
+      "form": "ذَاهِب",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the place (ذَهَبَ إِلَى الْمَدْرَسَةِ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "إِلَى",
+      "what": "أَنَّ + a view (ذَهَبَ إِلَى أَنَّ …)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "ḏahaba",
    "forms": {
     "V;PST;1;SG": "ذَهَبْتُ",
@@ -73,14 +107,16 @@
       "def": "to go away, to leave, to be gone",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "ذَهَبَ إِلَى أَنَّ … — to hold the view that … (formal)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.holdview"
      }
     ],
     "examples": [
@@ -111,6 +147,13 @@
       "register": "neutral",
       "context": "travel",
       "sense": "s2"
+     },
+     {
+      "text": "ذَهَبَ بَعْضُ الْعُلَمَاءِ إِلَى أَنَّ هٰذَا الرَّأْيَ خَطَأٌ.",
+      "tr": "Some scholars held that this view is wrong.",
+      "register": "formal",
+      "context": "scholarship",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -168,11 +211,60 @@
    "lemma": "جَاءَ",
    "pos": "VERB",
    "senses": [
-    "verb.come"
+    "verb.come",
+    "verb.bring"
    ],
-   "root": "ج ي ء",
-   "verbForm": "I",
-   "masdar": "مَجِيء",
+   "features": {
+    "root": "ج ي ء",
+    "rootClass": [
+     "hollow",
+     "hamzated"
+    ],
+    "verbForm": "I",
+    "present": "يَجِيءُ",
+    "masdar": [
+     "مَجِيء"
+    ],
+    "participles": [
+     {
+      "form": "جَاءٍ",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the place (or a direct object: جَاءَ الْبَيْتَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "بِـ",
+      "what": "the thing brought (جَاءَ بِالْكِتَابِ)",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "prep": "فِي",
+      "what": "the text (جَاءَ فِي الْكِتَابِ أَنَّ …)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.come",
+     "axis": "suppletion: the imperative",
+     "value": "to come (all forms but the imperative)"
+    }
+   ],
    "translit": "jāʾa",
    "forms": {
     "V;PST;1;SG": "جِئْتُ",
@@ -227,14 +319,16 @@
       "def": "جَاءَ بِـ … — to bring …",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.bring"
      },
      {
       "id": "s3",
       "def": "to occur, to be (in a text): جَاءَ فِي الْكِتَابِ … (it says in the book …)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -324,8 +418,41 @@
    "senses": [
     "verb.come"
    ],
-   "root": "ع ل و",
-   "verbForm": "VI",
+   "features": {
+    "root": "ع ل و",
+    "rootClass": [
+     "defective"
+    ],
+    "verbForm": "VI",
+    "present": {
+     "none": "an imperative only; the verb تَعَالَى (يَتَعَالَى) means “to be exalted”"
+    },
+    "masdar": {
+     "none": "an imperative only: no maṣdar of its own"
+    },
+    "participles": {
+     "none": "an imperative only: no participles"
+    },
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the place or the person (تَعَالَ إِلَيَّ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.come",
+     "axis": "suppletion: the imperative",
+     "value": "come! (the imperative)"
+    }
+   ],
    "translit": "taʿāla",
    "forms": {
     "V;IMP;2;SG;MASC": "تَعَالَ",
@@ -420,9 +547,35 @@
    "senses": [
     "verb.walk"
    ],
-   "root": "م ش ي",
-   "verbForm": "I",
-   "masdar": "مَشْي",
+   "features": {
+    "root": "م ش ي",
+    "rootClass": [
+     "defective"
+    ],
+    "verbForm": "I",
+    "present": "يَمْشِي",
+    "masdar": [
+     "مَشْي"
+    ],
+    "participles": [
+     {
+      "form": "مَاشٍ",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the place walked to (مَشَى إِلَى الْبَيْتِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "mašā",
    "forms": {
     "V;PST;1;SG": "مَشَيْتُ",
@@ -553,9 +706,35 @@
    "senses": [
     "verb.run"
    ],
-   "root": "ر ك ض",
-   "verbForm": "I",
-   "masdar": "رَكْض",
+   "features": {
+    "root": "ر ك ض",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَرْكُضُ",
+    "masdar": [
+     "رَكْض"
+    ],
+    "participles": [
+     {
+      "form": "رَاكِض",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the place run to (رَكَضَ إِلَى الْبَابِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "rakaḍa",
    "forms": {
     "V;PST;1;SG": "رَكَضْتُ",
@@ -671,11 +850,49 @@
    "lemma": "قَادَ",
    "pos": "VERB",
    "senses": [
-    "verb.drive"
+    "verb.drive",
+    "verb.lead"
    ],
-   "root": "ق و د",
-   "verbForm": "I",
-   "masdar": "قِيَادَة",
+   "features": {
+    "root": "ق و د",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "I",
+    "present": "يَقُودُ",
+    "masdar": [
+     "قِيَادَة"
+    ],
+    "participles": [
+     {
+      "form": "قَائِد",
+      "kind": "active"
+     },
+     {
+      "form": "مَقُود",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the vehicle (قَادَ السَّيَّارَةَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "case": "ACC",
+      "what": "people, an army, a team (قَادَ الْفَرِيقَ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "qāda",
    "forms": {
     "V;PST;1;SG": "قُدْتُ",
@@ -729,7 +946,8 @@
       "def": "to lead, to guide, to command",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.lead"
      }
     ],
     "examples": [
@@ -808,9 +1026,36 @@
    "senses": [
     "verb.travel"
    ],
-   "root": "س ف ر",
-   "verbForm": "III",
-   "masdar": "سَفَر",
+   "features": {
+    "root": "س ف ر",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "III",
+    "present": "يُسَافِرُ",
+    "masdar": [
+     "سَفَر",
+     "مُسَافَرَة"
+    ],
+    "participles": [
+     {
+      "form": "مُسَافِر",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the destination (سَافَرَ إِلَى مِصْرَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "sāfara",
    "forms": {
     "V;PST;1;SG": "سَافَرْتُ",
@@ -946,11 +1191,59 @@
    "lemma": "عَادَ",
    "pos": "VERB",
    "senses": [
-    "verb.return"
+    "verb.return",
+    "adv.nolonger",
+    "verb.visit"
    ],
-   "root": "ع و د",
-   "verbForm": "I",
-   "masdar": "عَوْدَة",
+   "features": {
+    "root": "ع و د",
+    "rootClass": [
+     "hollow"
+    ],
+    "verbForm": "I",
+    "present": "يَعُودُ",
+    "masdar": [
+     "عَوْدَة",
+     "عَوْد"
+    ],
+    "participles": [
+     {
+      "form": "عَائِد",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the place (عَادَ إِلَى الْبَيْتِ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "what": "a present verb after لَمْ: no longer (لَمْ يَعُدْ يَسْكُنُ هُنَا)",
+      "senses": [
+       "s2"
+      ]
+     },
+     {
+      "case": "ACC",
+      "what": "the sick person (عَادَ الْمَرِيضَ)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "عِيَادَة",
+      "what": "the maṣdar of this meaning (visiting the sick)",
+      "senses": [
+       "s3"
+      ]
+     }
+    ]
+   },
    "translit": "ʿāda",
    "forms": {
     "V;PST;1;SG": "عُدْتُ",
@@ -1004,14 +1297,16 @@
       "def": "to do again; لَمْ يَعُدْ … = no longer …",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.nolonger"
      },
      {
       "id": "s3",
       "def": "to visit (a sick person) — a separate word with the same letters",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.visit"
      }
     ],
     "examples": [
@@ -1042,6 +1337,13 @@
       "register": "formal",
       "context": "health",
       "sense": "s3"
+     },
+     {
+      "text": "لَمْ يَعُدْ يَسْكُنُ هُنَا.",
+      "tr": "He no longer lives here.",
+      "register": "neutral",
+      "context": "neighbours",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1093,9 +1395,46 @@
    "senses": [
     "verb.enter"
    ],
-   "root": "د خ ل",
-   "verbForm": "I",
-   "masdar": "دُخُول",
+   "features": {
+    "root": "د خ ل",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَدْخُلُ",
+    "masdar": [
+     "دُخُول"
+    ],
+    "participles": [
+     {
+      "form": "دَاخِل",
+      "kind": "active"
+     },
+     {
+      "form": "مَدْخُول",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the place (دَخَلَ الْغُرْفَةَ; also with إِلَى)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "case": "ACC",
+      "what": "a school, a profession (دَخَلَ الْجَامِعَةَ)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "daḫala",
    "forms": {
     "V;PST;1;SG": "دَخَلْتُ",
@@ -1149,7 +1488,8 @@
       "def": "to take up, to start (a school, a profession)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1233,9 +1573,43 @@
    "senses": [
     "verb.leave"
    ],
-   "root": "خ ر ج",
-   "verbForm": "I",
-   "masdar": "خُرُوج",
+   "features": {
+    "root": "خ ر ج",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "I",
+    "present": "يَخْرُجُ",
+    "masdar": [
+     "خُرُوج"
+    ],
+    "participles": [
+     {
+      "form": "خَارِج",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "مِنْ",
+      "what": "the place left (خَرَجَ مِنَ الْبَيْتِ)",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "valency and register",
+     "value": "to go out (intransitive, + مِنْ)"
+    }
+   ],
    "translit": "ḫaraja",
    "forms": {
     "V;PST;1;SG": "خَرَجْتُ",
@@ -1289,7 +1663,8 @@
       "def": "to come out, to emerge",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1378,9 +1753,46 @@
    "senses": [
     "verb.leave"
    ],
-   "root": "غ د ر",
-   "verbForm": "III",
-   "masdar": "مُغَادَرَة",
+   "features": {
+    "root": "غ د ر",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "III",
+    "present": "يُغَادِرُ",
+    "masdar": [
+     "مُغَادَرَة"
+    ],
+    "participles": [
+     {
+      "form": "مُغَادِر",
+      "kind": "active"
+     },
+     {
+      "form": "مُغَادَر",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the place left (غَادَرَ الْمَدِينَةَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "verb.leave",
+     "axis": "valency and register",
+     "value": "to depart from (transitive, formal)"
+    }
+   ],
    "translit": "ġādara",
    "forms": {
     "V;PST;1;SG": "غَادَرْتُ",
@@ -1507,11 +1919,56 @@
    "lemma": "وَصَلَ",
    "pos": "VERB",
    "senses": [
-    "verb.arrive"
+    "verb.arrive",
+    "verb.connect"
    ],
-   "root": "و ص ل",
-   "verbForm": "I",
-   "masdar": "وُصُول",
+   "features": {
+    "root": "و ص ل",
+    "rootClass": [
+     "assimilated"
+    ],
+    "verbForm": "I",
+    "present": "يَصِلُ",
+    "masdar": [
+     "وُصُول"
+    ],
+    "participles": [
+     {
+      "form": "وَاصِل",
+      "kind": "active"
+     },
+     {
+      "form": "مَوْصُول",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "إِلَى",
+      "what": "the place reached (also a direct object: وَصَلَ الْمَدِينَةَ)",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "case": "ACC",
+      "prep": "بِـ",
+      "what": "one thing to another (وَصَلَ الشَّيْءَ بِالشَّيْءِ); also بَيْنَ",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": [
+     {
+      "form": "وَصْل",
+      "what": "the maṣdar of this meaning (joining)",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "translit": "waṣala",
    "forms": {
     "V;PST;1;SG": "وَصَلْتُ",
@@ -1561,7 +2018,8 @@
       "def": "to join, to connect (a separate entry in Wiktionary)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.connect"
      }
     ],
     "examples": [
@@ -1585,6 +2043,13 @@
       "register": "neutral",
       "context": "family",
       "sense": "s1"
+     },
+     {
+      "text": "يَصِلُ هٰذَا الْجِسْرُ بَيْنَ ضِفَّتَيِ النَّهْرِ.",
+      "tr": "This bridge connects the two banks of the river.",
+      "register": "neutral",
+      "context": "city",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1638,9 +2103,35 @@
    "senses": [
     "verb.stay"
    ],
-   "root": "ب ق ي",
-   "verbForm": "I",
-   "masdar": "بَقَاء",
+   "features": {
+    "root": "ب ق ي",
+    "rootClass": [
+     "defective"
+    ],
+    "verbForm": "I",
+    "present": "يَبْقَى",
+    "masdar": [
+     "بَقَاء"
+    ],
+    "participles": [
+     {
+      "form": "بَاقٍ",
+      "kind": "active"
+     }
+    ],
+    "governs": [
+     {
+      "prep": "فِي",
+      "what": "the place (بَقِيَ فِي الْبَيْتِ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "translit": "baqiya",
    "forms": {
     "V;PST;1;SG": "بَقِيتُ",
@@ -1694,14 +2185,16 @@
       "def": "to last, to endure",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "to be left (over)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1797,9 +2290,39 @@
    "senses": [
     "verb.wait"
    ],
-   "root": "ن ظ ر",
-   "verbForm": "VIII",
-   "masdar": "اِنْتِظَار",
+   "features": {
+    "root": "ن ظ ر",
+    "rootClass": [
+     "sound"
+    ],
+    "verbForm": "VIII",
+    "present": "يَنْتَظِرُ",
+    "masdar": [
+     "اِنْتِظَار"
+    ],
+    "participles": [
+     {
+      "form": "مُنْتَظِر",
+      "kind": "active"
+     },
+     {
+      "form": "مُنْتَظَر",
+      "kind": "passive"
+     }
+    ],
+    "governs": [
+     {
+      "case": "ACC",
+      "what": "the person or thing waited for (اِنْتَظَرَ الْحَافِلَةَ)",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "intaẓara",
    "forms": {
     "V;PST;1;SG": "اِنْتَظَرْتُ",
@@ -1915,10 +2438,32 @@
    "lemma": "حَافِلَة",
    "pos": "NOUN",
    "senses": [
-    "tr.bus"
+    "tr.bus",
+    "tr.tram"
    ],
+   "features": {
+    "root": "ح ف ل",
+    "pattern": "فَاعِلَة",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "حَافِلَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "حَافِلَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ح ف ل",
    "translit": "ḥāfila",
    "forms": {
     "N;NOM;SG;INDF": "حَافِلَةٌ",
@@ -1966,7 +2511,8 @@
       "def": "tram, streetcar (Wiktionary)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "tr.tram"
      }
     ],
     "examples": [
@@ -1990,6 +2536,13 @@
       "register": "neutral",
       "context": "city",
       "sense": "s1"
+     },
+     {
+      "text": "قَدْ تَعْنِي الْحَافِلَةُ فِي الْمَعَاجِمِ التِّرَامَ أَيْضًا.",
+      "tr": "In dictionaries, ḥāfila can also mean a tram.",
+      "register": "neutral",
+      "context": "dictionary",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2041,10 +2594,49 @@
    "lemma": "قِطَار",
    "pos": "NOUN",
    "senses": [
-    "tr.train"
+    "tr.train",
+    "tr.caravan"
+   ],
+   "features": {
+    "root": "ق ط ر",
+    "pattern": "فِعَال",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قِطَارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "trains",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "قُطُر",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "note": "old: rows, lines of camels",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "dual": "قِطَارَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "no other form belongs to one meaning (the plurals do: see plurals)"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "tr.caravan",
+     "axis": "the old meaning",
+     "value": "a line of camels, one behind the other"
+    }
    ],
    "gender": "MASC",
-   "root": "ق ط ر",
    "translit": "qiṭār",
    "forms": {
     "N;NOM;SG;INDF": "قِطَارٌ",
@@ -2092,7 +2684,8 @@
       "def": "row; a line of camels (the old meaning)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "tr.caravan"
      }
     ],
     "examples": [
@@ -2155,10 +2748,38 @@
    "lemma": "طَائِرَة",
    "pos": "NOUN",
    "senses": [
-    "tr.plane"
+    "tr.plane",
+    "obj.kite"
    ],
+   "features": {
+    "root": "ط ي ر",
+    "pattern": "فَاعِلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "طَائِرَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "طَائِرَتَانِ",
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "طَائِرَةٌ وَرَقِيَّةٌ",
+      "what": "the phrase: a kite",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "gender": "FEM",
-   "root": "ط ي ر",
    "translit": "ṭāʾira",
    "forms": {
     "N;NOM;SG;INDF": "طَائِرَةٌ",
@@ -2209,7 +2830,8 @@
       "def": "طَائِرَةٌ وَرَقِيَّةٌ — a kite (a paper “plane”)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "obj.kite"
      }
     ],
     "examples": [
@@ -2279,6 +2901,32 @@
    "senses": [
     "tr.taxi"
    ],
+   "features": {
+    "root": {
+     "none": "a phrase: سَيَّارَة (س ي ر) + أُجْرَة (ء ج ر)"
+    },
+    "pattern": {
+     "none": "a phrase: each word has its own measure"
+    },
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَيَّارَات أُجْرَة",
+      "kind": "soundFem",
+      "declension": "sound",
+      "note": "the head noun takes the plural: سَيَّارَاتُ أُجْرَةٍ",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَيَّارَتَا أُجْرَةٍ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "gender": "FEM",
    "translit": "sayyārat ʾujra",
    "forms": {
@@ -2388,10 +3036,39 @@
    "lemma": "سَيَّارَة",
    "pos": "NOUN",
    "senses": [
-    "tr.car"
+    "tr.car",
+    "tr.caravan"
+   ],
+   "features": {
+    "root": "س ي ر",
+    "pattern": "فَعَّالَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سَيَّارَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "سَيَّارَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "tr.caravan",
+     "axis": "the old meaning",
+     "value": "a company of travellers"
+    }
    ],
    "gender": "FEM",
-   "root": "س ي ر",
    "translit": "sayyāra",
    "forms": {
     "N;NOM;SG;INDF": "سَيَّارَةٌ",
@@ -2439,7 +3116,8 @@
       "def": "caravan, travellers (the old meaning)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "tr.caravan"
      }
     ],
     "examples": [
@@ -2509,10 +3187,38 @@
    "lemma": "دَرَّاجَة",
    "pos": "NOUN",
    "senses": [
-    "tr.bicycle"
+    "tr.bicycle",
+    "tr.motorcycle"
    ],
+   "features": {
+    "root": "د ر ج",
+    "pattern": "فَعَّالَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "دَرَّاجَات",
+      "kind": "soundFem",
+      "declension": "sound",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "دَرَّاجَتَانِ",
+    "declension": "triptote",
+    "meaningForms": [
+     {
+      "form": "دَرَّاجَةٌ نَارِيَّةٌ",
+      "what": "the phrase: a motorcycle",
+      "senses": [
+       "s2"
+      ]
+     }
+    ]
+   },
    "gender": "FEM",
-   "root": "د ر ج",
    "translit": "darrāja",
    "forms": {
     "N;NOM;SG;INDF": "دَرَّاجَةٌ",
@@ -2560,7 +3266,8 @@
       "def": "دَرَّاجَةٌ نَارِيَّةٌ — motorcycle (lit. a fire bike)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "tr.motorcycle"
      }
     ],
     "examples": [
@@ -2637,8 +3344,46 @@
    "senses": [
     "tr.boat"
    ],
+   "features": {
+    "root": "س ف ن",
+    "pattern": "فَعِيلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "سُفُن",
+      "kind": "broken",
+      "pattern": "فُعُل",
+      "declension": "triptote",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "form": "سَفَائِن",
+      "kind": "broken",
+      "pattern": "فَعَائِل",
+      "declension": "diptote",
+      "note": "literary",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "سَفِينَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "tr.boat",
+     "axis": "size",
+     "value": "ship, vessel"
+    }
+   ],
    "gender": "FEM",
-   "root": "س ف ن",
    "translit": "safīna",
    "forms": {
     "N;NOM;SG;INDF": "سَفِينَةٌ",
@@ -2763,8 +3508,36 @@
    "senses": [
     "tr.boat"
    ],
+   "features": {
+    "root": "ق ر ب",
+    "pattern": "فَاعِل",
+    "sunLetter": false,
+    "human": false,
+    "plurals": [
+     {
+      "form": "قَوَارِب",
+      "kind": "broken",
+      "pattern": "فَوَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": "قَارِبَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
+   "contrasts": [
+    {
+     "concept": "tr.boat",
+     "axis": "size",
+     "value": "small boat"
+    }
+   ],
    "gender": "MASC",
-   "root": "ق ر ب",
    "translit": "qārib",
    "forms": {
     "N;NOM;SG;INDF": "قَارِبٌ",
@@ -2881,7 +3654,13 @@
    "senses": [
     "tr.onfoot"
    ],
-   "root": "م ش ي",
+   "features": {
+    "root": "م ش ي",
+    "derivedFrom": "مَشْي (walking), the maṣdar of مَشَى, in the accusative",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "translit": "mašyan",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2971,10 +3750,33 @@
    "lemma": "تَذْكِرَة",
    "pos": "NOUN",
    "senses": [
-    "tr.ticket"
+    "tr.ticket",
+    "comm.memo"
    ],
+   "features": {
+    "root": "ذ ك ر",
+    "pattern": "تَفْعِلَة",
+    "sunLetter": true,
+    "human": false,
+    "plurals": [
+     {
+      "form": "تَذَاكِر",
+      "kind": "broken",
+      "pattern": "تَفَاعِل",
+      "declension": "diptote",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": "تَذْكِرَتَانِ",
+    "declension": "triptote",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "gender": "FEM",
-   "root": "ذ ك ر",
    "translit": "taḏkira",
    "forms": {
     "N;NOM;SG;INDF": "تَذْكِرَةٌ",
@@ -3022,7 +3824,8 @@
       "def": "memorandum, reminder (older meaning)",
       "register": [
        "dated"
-      ]
+      ],
+      "concept": "comm.memo"
      }
     ],
     "examples": [
@@ -3046,6 +3849,13 @@
       "register": "neutral",
       "context": "shopping",
       "sense": "s1"
+     },
+     {
+      "text": "كَتَبْتُ تَذْكِرَةً صَغِيرَةً حَتَّى لَا أَنْسَى الْمَوْعِدَ.",
+      "tr": "I wrote a little note so as not to forget the appointment.",
+      "register": "dated",
+      "context": "memory",
+      "sense": "s2"
      }
     ],
     "collocations": [

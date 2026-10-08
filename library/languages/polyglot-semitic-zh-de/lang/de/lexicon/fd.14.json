@@ -8,6 +8,27 @@
     "time.monday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Montage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically Mond + Tag (“day of the moon”)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Montag",
     "N;ACC;SG": "Montag",
@@ -122,6 +143,27 @@
     "time.tuesday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Dienstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically “day of Thingsus” (a Germanic god), not Dienst + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Dienstag",
     "N;ACC;SG": "Dienstag",
@@ -223,6 +265,27 @@
     "time.wednesday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mittwoche",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically Mitte + Woche (“mid-week”), but masculine like the other days"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mittwoch",
     "N;ACC;SG": "Mittwoch",
@@ -324,6 +387,27 @@
     "time.thursday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Donnerstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically “day of Donar” (Thor, the thunder god): Donner + s + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Donnerstag",
     "N;ACC;SG": "Donnerstag",
@@ -425,6 +509,27 @@
     "time.friday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Freitage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically “day of Frija” (a Germanic goddess), not frei + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Freitag",
     "N;ACC;SG": "Freitag",
@@ -531,6 +636,27 @@
     "time.saturday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Samstage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; from Greek sábbaton (the Sabbath) + Tag"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Samstag",
     "N;ACC;SG": "Samstag",
@@ -644,6 +770,27 @@
     "time.sunday"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Sonntage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically Sonne + Tag (“day of the sun”)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Sonntag",
     "N;ACC;SG": "Sonntag",
@@ -750,6 +897,35 @@
     "time.weekend"
    ],
    "gender": "NEUT",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wochenenden",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Woche",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Ende",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wochenende",
     "N;ACC;SG": "Wochenende",
@@ -847,9 +1023,47 @@
    "lemma": "Tag",
    "pos": "NOUN",
    "senses": [
-    "time.day"
+    "time.day",
+    "time.daytime",
+    "pol.assembly"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Tage",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     },
+     {
+      "form": "Tage",
+      "pattern": "-e",
+      "senses": [
+       "s3"
+      ],
+      "note": "in the compounds: die Landtage, die Bundestage"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": [
+     {
+      "form": "-tag",
+      "senses": [
+       "s3"
+      ],
+      "note": "only in compounds: der Landtag, der Bundestag"
+     }
+    ]
+   },
    "forms": {
     "N;NOM;SG": "Tag",
     "N;ACC;SG": "Tag",
@@ -891,14 +1105,16 @@
       "def": "day, daytime (opposite of night)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.daytime"
      },
      {
       "id": "s3",
       "def": "day (of a meeting): Landtag, Reichstag – an assembly",
       "register": [
        "technical"
-      ]
+      ],
+      "concept": "pol.assembly"
      }
     ],
     "examples": [
@@ -929,6 +1145,13 @@
       "register": "neutral",
       "context": "weather",
       "sense": "s2"
+     },
+     {
+      "text": "Der Landtag tagt heute in Düsseldorf.",
+      "tr": "The state parliament is in session in Düsseldorf today.",
+      "register": "technical",
+      "context": "politics",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1013,6 +1236,27 @@
     "time.night"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Nächte",
+      "pattern": "umlaut + -e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Nacht",
     "N;ACC;SG": "Nacht",
@@ -1049,7 +1293,8 @@
       "def": "darkness (figurative)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1144,9 +1389,47 @@
    "lemma": "Morgen",
    "pos": "NOUN",
    "senses": [
-    "time.morning"
+    "time.morning",
+    "measure.morgen",
+    "time.future"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "kind of word",
+     "value": "the noun (der Morgen, am Morgen)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Morgen",
+      "pattern": "no ending",
+      "senses": [
+       "s1",
+       "s2"
+      ],
+      "note": "zehn Morgen Land (the measure)"
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Morgen: the future, tomorrow",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Morgen",
     "N;ACC;SG": "Morgen",
@@ -1183,14 +1466,16 @@
       "def": "morgen (an old land measure)",
       "register": [
        "dated"
-      ]
+      ],
+      "concept": "measure.morgen"
      },
      {
       "id": "s3",
       "def": "das Morgen: the future, tomorrow (as a noun)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "time.future"
      }
     ],
     "examples": [
@@ -1214,6 +1499,20 @@
       "register": "neutral",
       "context": "appointments",
       "sense": "s1"
+     },
+     {
+      "text": "Der Bauer besaß zehn Morgen Land.",
+      "tr": "The farmer owned ten morgen of land.",
+      "register": "dated",
+      "context": "history",
+      "sense": "s2"
+     },
+     {
+      "text": "Niemand weiß, was das Morgen bringt.",
+      "tr": "Nobody knows what tomorrow brings.",
+      "register": "literary",
+      "context": "the future",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -1286,6 +1585,30 @@
     "time.noon"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Mittage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "one word today; historically mitt- (“middle”) + Tag"
+    },
+    "homonyms": [
+     {
+      "gender": "NEUT",
+      "meaning": "das Mittag: lunch (informal, regional)"
+     }
+    ],
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Mittag",
     "N;ACC;SG": "Mittag",
@@ -1322,7 +1645,8 @@
       "def": "lunch, lunch break",
       "register": [
        "informal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1404,6 +1728,34 @@
     "time.afternoon"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Nachmittage",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "nach",
+      "role": "modifier"
+     },
+     {
+      "part": "Mittag",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Nachmittag",
     "N;ACC;SG": "Nachmittag",
@@ -1507,9 +1859,39 @@
    "lemma": "Abend",
    "pos": "NOUN",
    "senses": [
-    "time.evening"
+    "time.evening",
+    "art.soiree"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.evening",
+     "axis": "kind of word",
+     "value": "the noun (der Abend, am Abend)"
+    }
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Abende",
+      "pattern": "-e",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Abend",
     "N;ACC;SG": "Abend",
@@ -1546,7 +1928,8 @@
       "def": "evening event, party: ein bunter Abend",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "art.soiree"
      }
     ],
     "examples": [
@@ -1570,6 +1953,13 @@
       "register": "formal",
       "context": "events",
       "sense": "s1"
+     },
+     {
+      "text": "Der Verein lädt zu einem bunten Abend mit Musik ein.",
+      "tr": "The club invites everyone to an evening of entertainment with music.",
+      "register": "neutral",
+      "context": "events",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1634,7 +2024,8 @@
    "lemma": "heute",
    "pos": "ADV",
    "senses": [
-    "time.today"
+    "time.today",
+    "adv.nowadays"
    ],
    "ref": {
     "src": "kaikki",
@@ -1662,7 +2053,8 @@
       "def": "nowadays, today (in our time)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.nowadays"
      }
     ],
     "examples": [
@@ -1758,6 +2150,11 @@
     "subtleties": [
      "das Heute (noun) = the present: im Hier und Heute."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1859,6 +2256,11 @@
     "subtleties": [
      "übermorgen = the day after tomorrow, vorgestern = the day before yesterday."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -1894,7 +2296,8 @@
       "def": "in the past (figurative: nicht von gestern)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1974,6 +2377,11 @@
     "subtleties": [
      "gestern Abend, gestern Morgen: the part of the day keeps its capital letter."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -2009,7 +2417,8 @@
       "def": "now (adding emphasis): Was ist jetzt los?",
       "register": [
        "informal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2087,6 +2496,11 @@
     "subtleties": [
      "jetzt is also a filler word that adds urgency: Jetzt sag mal … (Come on, tell me …)."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -2122,7 +2536,8 @@
       "def": "later, in the future (in years)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2195,6 +2610,11 @@
     "subtleties": [
      "nachher is “later today”; später can be minutes or years away."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "itself the comparative of spät"
+    }
    }
   },
   {
@@ -2295,6 +2715,12 @@
     "subtleties": [
      "bald … bald … = now … now …: bald hier, bald dort."
     ]
+   },
+   "features": {
+    "comparison": [
+     "eher",
+     "am ehesten"
+    ]
    }
   },
   {
@@ -2302,7 +2728,15 @@
    "lemma": "früh",
    "pos": "ADV",
    "senses": [
-    "adv.early"
+    "adv.early",
+    "time.morning"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "kind of word",
+     "value": "after a day word: morgen früh, heute früh"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -2330,7 +2764,8 @@
       "def": "in the morning (morgen früh; regionally also heute früh)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.morning"
      }
     ],
     "examples": [
@@ -2354,6 +2789,13 @@
       "register": "informal",
       "context": "joking",
       "sense": "s1"
+     },
+     {
+      "text": "Ich rufe dich morgen früh an.",
+      "tr": "I’ll call you tomorrow morning.",
+      "register": "neutral",
+      "context": "phone calls",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -2415,6 +2857,12 @@
     ],
     "subtleties": [
      "morgen früh is the normal way to say tomorrow morning."
+    ]
+   },
+   "features": {
+    "comparison": [
+     "früher",
+     "am frühesten"
     ]
    }
   },
@@ -2529,6 +2977,12 @@
      "später is its comparative and also the adverb “later”.",
      "die Verspätung = the delay (of a train)."
     ]
+   },
+   "features": {
+    "comparison": [
+     "später",
+     "am spätesten"
+    ]
    }
   },
   {
@@ -2536,7 +2990,16 @@
    "lemma": "immer",
    "pos": "ADV",
    "senses": [
-    "adv.always"
+    "adv.always",
+    "adv.moreandmore",
+    "adv.still"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.still",
+     "axis": "alone or in a phrase",
+     "value": "only in immer noch / noch immer (stronger: still, even now)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -2564,14 +3027,16 @@
       "def": "more and more (with a comparative: immer mehr)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.moreandmore"
      },
      {
       "id": "s3",
       "def": "immer noch: still",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.still"
      }
     ],
     "examples": [
@@ -2663,6 +3128,11 @@
     "subtleties": [
      "immer wieder = again and again; immer mit der Ruhe = take it easy."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -2768,6 +3238,12 @@
     "subtleties": [
      "öfter alone also means “now and then, quite often”: Ich sehe ihn öfter."
     ]
+   },
+   "features": {
+    "comparison": [
+     "öfter",
+     "am öftesten"
+    ]
    }
   },
   {
@@ -2868,13 +3344,28 @@
     "subtleties": [
      "das Mal (time, occasion) builds einmal (once), zweimal (twice), jedes Mal (every time), manchmal (some times)."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
    "id": "de:morgens",
    "lemma": "morgens",
    "pos": "ADV",
-   "senses": [],
+   "senses": [
+    "time.morning",
+    "time.am"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.morning",
+     "axis": "kind of word",
+     "value": "the adverb: every morning, or a.m. (um sieben Uhr morgens)"
+    }
+   ],
    "role": "in the mornings, every morning (habit) – adverb from der Morgen; compare morgen = tomorrow",
    "ref": {
     "src": "kaikki",
@@ -2894,14 +3385,16 @@
       "def": "in the morning(s), every morning",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.morning"
      },
      {
       "id": "s2",
       "def": "a.m. (with a time: um sieben Uhr morgens)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.am"
      }
     ],
     "examples": [
@@ -2967,13 +3460,28 @@
     "subtleties": [
      "The same pattern: mittags, nachmittags, abends, nachts, montags, sonntags – all habitual, all lower case."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
    "id": "de:abends",
    "lemma": "abends",
    "pos": "ADV",
-   "senses": [],
+   "senses": [
+    "time.evening",
+    "time.pm"
+   ],
+   "contrasts": [
+    {
+     "concept": "time.evening",
+     "axis": "kind of word",
+     "value": "the adverb: every evening, or p.m."
+    }
+   ],
    "role": "in the evenings, every evening (habit) – adverb from der Abend",
    "ref": {
     "src": "kaikki",
@@ -2993,14 +3501,16 @@
       "def": "in the evening(s), every evening",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.evening"
      },
      {
       "id": "s2",
       "def": "p.m. (with a time: um acht Uhr abends)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "time.pm"
      }
     ],
     "examples": [
@@ -3066,6 +3576,11 @@
     "subtleties": [
      "German has no a.m./p.m.: it says morgens / abends or uses the 24-hour clock: um 20 Uhr."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   }
  ],

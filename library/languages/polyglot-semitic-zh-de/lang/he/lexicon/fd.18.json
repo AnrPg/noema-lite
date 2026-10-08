@@ -5,10 +5,22 @@
    "lemma": "אֲבָל",
    "pos": "CCONJ",
    "senses": [
-    "conj.but"
+    "conj.but",
+    "adv.truly"
    ],
+   "prefix": false,
    "translit": "aval",
+   "features": {
+    "spelling": "אבל"
+   },
    "note": "Joins two clauses without changing their word order; a comma usually stands before it, as before German aber.",
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "period",
+     "value": "Biblical: “truly, alas”"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -35,7 +47,8 @@
       "def": "truly, alas (Biblical)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "adv.truly"
      }
     ],
     "examples": [
@@ -116,10 +129,28 @@
    "lemma": "כִּי",
    "pos": "SCONJ",
    "senses": [
-    "conj.because"
+    "conj.because",
+    "conj.that",
+    "conj.when"
    ],
+   "prefix": false,
    "translit": "ki",
+   "features": {
+    "spelling": "כי"
+   },
    "note": "“Because” + a clause (כִּי קַר “because it is cold”); before a noun use בִּגְלַל “because of” (בִּגְלַל הַקֹּר). In formal style כִּי also means “that”.",
+   "contrasts": [
+    {
+     "concept": "conj.that",
+     "axis": "register",
+     "value": "formal, after verbs of saying and knowing"
+    },
+    {
+     "concept": "conj.when",
+     "axis": "period",
+     "value": "Biblical"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -146,14 +177,16 @@
       "def": "that (formal, after verbs of saying and knowing)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "conj.that"
      },
      {
       "id": "s3",
       "def": "when (Biblical)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "conj.when"
      }
     ],
     "examples": [
@@ -252,7 +285,21 @@
     "conj.so"
    ],
    "translit": "lachen",
+   "features": {
+    "spelling": "לכן",
+    "derivedFrom": "לָ + כֵן “so”",
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "note": "“Therefore, so”: opens the result clause after a comma (X, לָכֵן Y); the word order after it does not change.",
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register",
+     "value": "neutral to formal: “therefore”"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -353,10 +400,32 @@
    "pos": "ADV",
    "senses": [
     "adv.then",
-    "conj.so"
+    "conj.so",
+    "part.so"
    ],
    "translit": "az",
+   "features": {
+    "spelling": "אז",
+    "derivedFrom": {
+     "none": "a basic word"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "note": "“Then” (next in a story: וְאָז “and then”; at that time: אָז הָיִיתִי יֶלֶד) and, in speech, “so” (אֲנִי רָעֵב, אָז אֲנִי אוֹכֵל).",
+   "contrasts": [
+    {
+     "concept": "adv.then",
+     "axis": "use",
+     "value": "next in a story (וְאָז), or “at that time”"
+    },
+    {
+     "concept": "conj.so",
+     "axis": "register",
+     "value": "colloquial: “so”"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -391,7 +460,8 @@
       "def": "so, well (opening a question or a topic)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "part.so"
      }
     ],
     "examples": [
@@ -495,7 +565,17 @@
    ],
    "prefix": true,
    "translit": "kshe-",
+   "features": {
+    "spelling": "כש"
+   },
    "note": "Written onto the first word of its clause (כְּשֶׁאֲנִי, כְּשֶׁהוּא); like שֶׁ it doubles the next letter when it can (כְּשֶׁזֶּה), but not before א, ה, ח, ע, ר. The formal word is כַּאֲשֶׁר.",
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "period",
+     "value": "modern: the prefix כְּשֶׁ"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -580,9 +660,14 @@
    "lemma": "אִם",
    "pos": "SCONJ",
    "senses": [
-    "conj.if"
+    "conj.if",
+    "conj.whether"
    ],
+   "prefix": false,
    "translit": "im",
+   "features": {
+    "spelling": "אם"
+   },
    "note": "“If” + a clause; for a future event Hebrew puts the future after it (אִם יֵרֵד גֶּשֶׁם). Also “whether” in reported questions.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -610,7 +695,8 @@
       "def": "whether (in a reported question)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.whether"
      }
     ],
     "examples": [
@@ -700,11 +786,22 @@
    "lemma": "שֶׁ",
    "pos": "SCONJ",
    "senses": [
-    "conj.that"
+    "conj.that",
+    "pron.which"
    ],
    "prefix": true,
    "translit": "she-",
+   "features": {
+    "spelling": "ש"
+   },
    "note": "Written onto the first word of its clause (שֶׁאַתָּה, שֶׁהוּא). It doubles the next letter when it can (שֶׁזֶּה, שֶׁלֹּא), but not before א, ה, ח, ע, ר. Never left out, unlike English “that”. After a preposition it makes a conjunction: לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ.",
+   "contrasts": [
+    {
+     "concept": "conj.that",
+     "axis": "register",
+     "value": "everyday: the prefix שֶׁ"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -731,14 +828,16 @@
       "def": "who, which, that (relative)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.which"
      },
      {
       "id": "s3",
       "def": "after a preposition it makes a conjunction: לִפְנֵי שֶׁ “before”, אַחֲרֵי שֶׁ “after”",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -819,10 +918,25 @@
    "lemma": "לַמְרוֹת",
    "pos": "ADP",
    "senses": [
-    "conj.although"
+    "conj.although",
+    "prep.despite"
    ],
+   "prefix": false,
    "translit": "lamrot",
+   "features": {
+    "spelling": "למרות",
+    "pronForms": {
+     "none": "not used with personal endings (לַמְרוֹת זֹאת “despite this”)"
+    }
+   },
    "note": "“Despite” + a noun (לַמְרוֹת הַגֶּשֶׁם); “although” + a clause with שֶׁ: לַמְרוֹת שֶׁהוּא עָיֵף. In the sentence bank the שֶׁ is a separate word part, written onto the first word of the clause.",
+   "contrasts": [
+    {
+     "concept": "conj.although",
+     "axis": "register",
+     "value": "neutral (לַמְרוֹת שֶׁ…)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -852,7 +966,8 @@
       "def": "despite, in spite of (+ a noun)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "prep.despite"
      }
     ],
     "examples": [
@@ -942,8 +1057,19 @@
    "senses": [
     "conj.although"
    ],
+   "prefix": false,
    "translit": "af al pi",
+   "features": {
+    "spelling": "אף על פי"
+   },
    "note": "“Although” — with שֶׁ written onto the first word of the clause: אַף עַל פִּי שֶׁהוּא רָעֵב. More formal than לַמְרוֹת שֶׁ; often abbreviated אע״פ.",
+   "contrasts": [
+    {
+     "concept": "conj.although",
+     "axis": "register",
+     "value": "more formal (אַף עַל פִּי שֶׁ…)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

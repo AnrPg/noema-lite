@@ -1,0 +1,7467 @@
+{
+ "format": "noema.langphenomena/v1",
+ "lang": "ar",
+ "name": "Arabic (Modern Standard)",
+ "typology": "fusional",
+ "summary": "Modern Standard Arabic is a Semitic language written right to left in a cursive abjad: consonants and long vowels are letters, short vowels are optional marks, so reading depends on knowing the grammar. Its words are built by weaving consonantal roots into patterns, which gives derived verb forms I–X, broken plurals, verbal nouns and participles; nouns have two genders, three numbers (with a dual), three cases and a definite prefix, and agree in all four with adjectives — except that non-human plurals agree as feminine singular. There is no present 'to be' and no verb 'to have', numbers show gender polarity and govern the case and number of the noun, and negation, conditionals and 'that' each split into several words by tense or construction. The written standard sits above spoken dialects (diglossia), and everyday politeness is a system of fixed, gender-sensitive and often religious formulas.",
+ "sources": [
+  "Wiktionary via kaikki.org (the course's reference data: forms, plurals, senses, etymologies)",
+  "W. Wright, A Grammar of the Arabic Language (3rd ed.)",
+  "K. C. Ryding, A Reference Grammar of Modern Standard Arabic (Cambridge, 2005)",
+  "W. Fischer, A Grammar of Classical Arabic (Yale, 3rd ed.)",
+  "H. Wehr, A Dictionary of Modern Written Arabic (ed. J. M. Cowan)",
+  "K. Brustad, M. Al-Batal, A. Al-Tonsi, Al-Kitaab fii Taʿallum al-ʿArabiyya",
+  "DIN 31635 (transliteration)",
+  "The course itself: library/languages/polyglot-semitic-zh-de (lang/ar/language.json, lexicon, grammar, bank), engine/langcore.js, tools/validate_lang.py, docs/LANGUAGES.md"
+ ],
+ "phenomena": [
+  {
+   "id": "ar.script.direction",
+   "title": "Right-to-left writing, numbers left-to-right",
+   "area": "script",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Arabic is written and read from right to left; a book opens on what a European reader calls the back. Numbers inside the line, and embedded Latin words, still run left to right (bidirectional text), so cursor movement, punctuation and mixed text behave unexpectedly.",
+   "examples": [
+    {
+     "text": "أَنَا طَالِبٌ.",
+     "translit": "ʾana ṭālibun.",
+     "note": "I am a student — read from the right"
+    },
+    {
+     "text": "عِنْدِي ٣ كُتُبٍ.",
+     "translit": "ʿindī ṯalāṯatu kutubin.",
+     "note": "the digit ٣ (3) sits inside right-to-left text"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "language.json dir: \"rtl\"; §8 requires lang/dir on every foreign span; the RTL keyboard and script module are phase P4 (not built)."
+   },
+   "status": "partial",
+   "gap": "P4: on-screen keyboard and RTL input handling, a short page on bidirectional text (numbers, Latin inside Arabic).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.script.abjad",
+   "title": "An abjad: consonants and long vowels only",
+   "area": "script",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The 28 letters write consonants and the long vowels ā, ū, ī (with ا و ي); short vowels are optional marks. A normal text therefore leaves the reader to supply the vowels from grammar and context.",
+   "examples": [
+    {
+     "text": "كتب",
+     "translit": "kataba / kutub / kutiba",
+     "note": "one unvocalized spelling — كَتَبَ he wrote, كُتُبٌ books, كُتِبَ it was written"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "language.json vowelMarks: true; forms stored fully vocalized and the plain spelling derived with stripMarks (langcore); fn.overview peculiarities explain it."
+   },
+   "status": "partial",
+   "gap": "script/letters.json (§4.9) and the letter stage (§5.5) do not exist yet; nothing trains reading the bare consonant skeleton.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.script.joining",
+   "title": "Cursive joining and positional letter shapes",
+   "area": "script",
+   "pos": [],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "Letters are joined within a word and take up to four shapes: isolated, initial, medial and final. Six letters (ا د ذ ر ز و) never join the letter after them, which splits a word into pieces. Hebrew has only five special final forms; Greek has only final ς.",
+   "examples": [
+    {
+     "text": "ب · بـ · ـبـ · ـب",
+     "translit": "bāʾ",
+     "note": "isolated, initial, medial, final"
+    },
+    {
+     "text": "وَرْدَة",
+     "translit": "warda",
+     "note": "rose — every letter stays unjoined because و ر د do not connect forward"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Rendering is left to the font (Noto Naskh Arabic, §8); glyph_form and trace (§6.1) are listed but not implemented."
+   },
+   "status": "missing",
+   "gap": "letters.json with positional forms and connecting behaviour; glyph_form and trace exercises; letter-stage gating (§5.5).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.script.lamalif",
+   "title": "The obligatory lam-alif ligature",
+   "area": "script",
+   "pos": [],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "When ل is followed by ا (also أ إ آ) the two letters must be written as one ligature, لا. Learners who know the separate shapes often fail to recognise it.",
+   "examples": [
+    {
+     "text": "لَا",
+     "translit": "lā",
+     "note": "no / not — ل + ا"
+    },
+    {
+     "text": "سَلَام",
+     "translit": "salām",
+     "note": "peace — the ligature inside a word"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Produced automatically by the font; nothing teaches or tests it."
+   },
+   "status": "missing",
+   "gap": "A letter-module entry and a glyph_form item for لا.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.orth.harakat",
+   "title": "Short-vowel marks (ḥarakāt) and sukūn",
+   "area": "orthography",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "fatḥa (a), kasra (i), ḍamma (u) and sukūn (no vowel) are small marks above or below the letter. They are written in the Qurʾān, children's books and dictionaries, and left out almost everywhere else; the course writes all of them and must later take them away step by step.",
+   "examples": [
+    {
+     "text": "كَتَبَ",
+     "translit": "kataba",
+     "note": "with marks: he wrote"
+    },
+    {
+     "text": "كُتُبٌ",
+     "translit": "kutubun",
+     "note": "with marks: books"
+    }
+   ],
+   "level": "script",
+   "record": "Every stored form is fully vocalized (§4.5); the plain spelling is derived.",
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": "Every cell of every paradigm is vocalized; validate_lang.py rejects a form or lemma without marks; langcore.stripMarks / hasMarks; the tokenizer also reads unvocalized words (loose lookup)."
+   },
+   "status": "partial",
+   "gap": "The vowel-mark policy (fully → partially → unvocalized, §3.1, settings) is not implemented; no vowelize exercise.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.orth.shadda",
+   "title": "Šadda: the doubling mark",
+   "area": "orthography",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "A doubled consonant is written once with a šadda above it. It is meaningful: it distinguishes verb forms and words, and it appears after the article before sun letters.",
+   "examples": [
+    {
+     "text": "دَرَسَ / دَرَّسَ",
+     "translit": "darasa / darrasa",
+     "note": "he studied / he taught (form I / form II)"
+    },
+    {
+     "text": "الشَّقَّةُ",
+     "translit": "aš-šaqqatu",
+     "note": "the flat — šadda for the sun letter and for the root"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.definite",
+     "fn.root.pattern"
+    ],
+    "exercises": [],
+    "other": "Stored in every form (U+0651 is one of the marks stripMarks removes)."
+   },
+   "status": "partial",
+   "gap": "No exercise contrasts single and doubled consonants (vowelize, spell).",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.orth.tanwin_alif",
+   "title": "Tanwīn spelling and the extra alif of the accusative",
+   "area": "orthography",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "Indefinite endings are written as doubled vowel marks (ـٌ ـً ـٍ). The accusative -an adds a written alif (كِتَابًا), except after ة and after ـاء, and the same -an ending makes many adverbs and formulas (شُكْرًا).",
+   "examples": [
+    {
+     "text": "كِتَابًا",
+     "translit": "kitāban",
+     "note": "a book (accusative) — with alif"
+    },
+    {
+     "text": "قَهْوَةً",
+     "translit": "qahwatan",
+     "note": "coffee (accusative) — no alif after ة"
+    },
+    {
+     "text": "مَاءً",
+     "translit": "māʾan",
+     "note": "water (accusative) — no alif after ـاء"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "N;ACC;SG;INDF",
+     "ADJ;ACC;SG;MASC;INDF"
+    ],
+    "grammar": [
+     "fn.object",
+     "fn.definite"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.orth.ta_marbuta",
+   "title": "Tāʾ marbūṭa (ة)",
+   "area": "orthography",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "The feminine ending ة looks like h with two dots; it is said -a in pause and -at- whenever something follows: a case ending, a possessive suffix, or a second noun in a construct. Before suffixes it is written ت.",
+   "examples": [
+    {
+     "text": "غُرْفَة → غُرْفَتِي",
+     "translit": "ġurfa → ġurfatī",
+     "note": "room → my room"
+    },
+    {
+     "text": "غُرْفَةُ النَّوْمِ",
+     "translit": "ġurfatu n-nawmi",
+     "note": "the bedroom (construct: -at-)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "gender"
+    ],
+    "paradigm": [
+     "N;NOM;SG;POSS;PSS1S",
+     "N;NOM;SG;CONST"
+    ],
+    "grammar": [
+     "fn.noun.gender",
+     "fn.possessive"
+    ],
+    "exercises": [
+     "inflect",
+     "gender_article"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.orth.alif_maqsura",
+   "title": "Alif maqṣūra (ى) and final -ā",
+   "area": "orthography",
+   "pos": [
+    "NOUN",
+    "ADP",
+    "VERB"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "A final ā can be written ى (a dotless yāʾ). It turns into ي or ا when a suffix is added, and nouns in -an (مَقْهًى) keep the ى under their tanwīn.",
+   "examples": [
+    {
+     "text": "عَلَى → عَلَيْكَ",
+     "translit": "ʿalā → ʿalayka",
+     "note": "on → on you"
+    },
+    {
+     "text": "إِلَى → إِلَيْكَ",
+     "translit": "ʾilā → ʾilayka",
+     "note": "to → to you"
+    },
+    {
+     "text": "مُسْتَشْفًى / الْمُسْتَشْفَى",
+     "translit": "mustašfan / al-mustašfā",
+     "note": "a hospital / the hospital"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "ADP;2;SG;MASC",
+     "N;NOM;SG;DEF"
+    ],
+    "grammar": [
+     "fn.prep.core",
+     "fn.prep.place"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "No spelling rule page or spell exercise for ى ↔ ي/ا.",
+   "when": "fd.11"
+  },
+  {
+   "id": "ar.orth.hamza",
+   "title": "Hamza and its seats",
+   "area": "orthography",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADJ"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "The glottal stop ء is a full consonant, but it is written on a seat (أ إ ؤ ئ) or alone (ء) by rules that depend on the surrounding vowels; the same root letter therefore changes its spelling across a paradigm.",
+   "examples": [
+    {
+     "text": "أَكَلَ / يَأْكُلُ",
+     "translit": "ʾakala / yaʾkulu",
+     "note": "he ate / he eats"
+    },
+    {
+     "text": "سُؤَال",
+     "translit": "suʾāl",
+     "note": "question — hamza on wāw"
+    },
+    {
+     "text": "شَيْء → شَيْئًا",
+     "translit": "šayʾ → šayʾan",
+     "note": "thing → thing (accusative): the seat changes"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "root"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern",
+     "fn.object"
+    ],
+    "exercises": [],
+    "other": "Spelled in every form; roots write hamza as ء (\"ء ك ل\")."
+   },
+   "status": "partial",
+   "gap": "No rule page for the seats and no spell exercise with letter-level feedback on hamza (§6.1).",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.orth.hamzat_wasl",
+   "title": "Hamzat al-waṣl: the vanishing alif",
+   "area": "orthography",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "DET"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "Some words begin with an alif whose vowel is heard only at the start of speech (the article al-, اِبْن, اِسْم, اِمْرَأَة, imperatives and forms VII–X). After a vowel it is silent and the words run together.",
+   "examples": [
+    {
+     "text": "اِبْنٌ / مُحَمَّدُ بْنُ عَبْدِ اللّٰهِ",
+     "translit": "ibnun / Muḥammadu bnu ʿAbdi llāhi",
+     "note": "son / Muhammad son of Abdallah"
+    },
+    {
+     "text": "فِي الْبَيْتِ",
+     "translit": "fī l-bayti",
+     "note": "at home — the a of al- disappears"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.imperative"
+    ],
+    "exercises": [],
+    "other": "The course writes the alif as اِ / اُ (teaching convention); validate_lang.py accepts ٱ or bare ا for it inside a sentence."
+   },
+   "status": "partial",
+   "gap": "No explicit page or exercise; the transliteration of sentences (which shows the elision) is not generated.",
+   "when": "fd.13"
+  },
+  {
+   "id": "ar.orth.sun_letters",
+   "title": "Sun and moon letters",
+   "area": "orthography",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is not pronounced; the next consonant is doubled and carries šadda. Before the other 14 (moon) letters al- is said in full.",
+   "examples": [
+    {
+     "text": "الشَّمْسُ / الْقَمَرُ",
+     "translit": "aš-šamsu / al-qamaru",
+     "note": "the sun (sun letter) / the moon (moon letter)"
+    },
+    {
+     "text": "الطَّمَاطِمُ",
+     "translit": "aṭ-ṭamāṭimu",
+     "note": "the tomatoes"
+    }
+   ],
+   "level": "word",
+   "record": "sunLetter (bool) on every noun and adjective, read from the DEF cell (written with šadda).",
+   "model": {
+    "wordFields": [
+     "sunLetter"
+    ],
+    "paradigm": [
+     "N;NOM;SG;DEF"
+    ],
+    "grammar": [
+     "fn.definite"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "No sun/moon sorting drill and no transliteration of the DEF forms (translit is stored for the lemma only).",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.orth.dagger_alif",
+   "title": "Dagger alif and other historical spellings",
+   "area": "orthography",
+   "pos": [
+    "PRON",
+    "CCONJ",
+    "PROPN"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "A few very frequent words have a long ā that is not written with a full alif but with a small superscript alif (or nothing in plain text): هٰذَا, ذٰلِكَ, لٰكِنْ, اللّٰه. مِائَة (hundred) has an alif that is not pronounced.",
+   "examples": [
+    {
+     "text": "هٰذَا",
+     "translit": "hāḏā",
+     "note": "this — plain spelling هذا"
+    },
+    {
+     "text": "لٰكِنْ",
+     "translit": "lākin",
+     "note": "but"
+    },
+    {
+     "text": "مِائَة",
+     "translit": "miʾa",
+     "note": "hundred — the ا is silent (also spelled مِئَة)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "PRON;SG;MASC"
+    ],
+    "grammar": [],
+    "exercises": [],
+    "other": "U+0670 counts as a vowel mark in langcore.stripMarks."
+   },
+   "status": "partial",
+   "gap": "Spelling variants (مِئَة) are not recorded; no pitfall page on these spellings.",
+   "when": "fd.03"
+  },
+  {
+   "id": "ar.orth.punctuation",
+   "title": "Arabic punctuation",
+   "area": "orthography",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "The comma, semicolon and question mark are mirrored or turned: ، ؛ ؟. Older and many modern texts use far fewer full stops than European languages and join clauses with وَ.",
+   "examples": [
+    {
+     "text": "هَلْ تُحِبُّ الشَّايَ؟",
+     "translit": "hal tuḥibbu š-šāya?",
+     "note": "Do you like tea?"
+    },
+    {
+     "text": "لَا، شُكْرًا.",
+     "translit": "lā, šukran.",
+     "note": "No, thanks."
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.question.yesno"
+    ],
+    "exercises": [
+     "build_sentence"
+    ],
+    "other": "The tokenizer splits any Unicode punctuation; bank sentences use ؟ and ،."
+   },
+   "status": "partial",
+   "gap": "On-screen keyboard (P4) for ، ؟ ؛.",
+   "when": "fd.09"
+  },
+  {
+   "id": "ar.orth.unvocalized_homographs",
+   "title": "Reading without vowels: homographs",
+   "area": "orthography",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Without vowel marks many different words share one spelling; the reader decides by grammar and context. This is the central reading skill after the beginner stage.",
+   "examples": [
+    {
+     "text": "ذهب: ذَهَبَ / ذَهَبٌ",
+     "translit": "ḏahaba / ḏahabun",
+     "note": "he went / gold"
+    },
+    {
+     "text": "حمام: حَمَّامٌ / حَمَامٌ",
+     "translit": "ḥammāmun / ḥamāmun",
+     "note": "bathroom / pigeons"
+    },
+    {
+     "text": "رجل: رَجُلٌ / رِجْلٌ",
+     "translit": "rajulun / rijlun",
+     "note": "man / leg"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "langcore.lookup reads unvocalized words (loose) and returns every match; nothing uses this for teaching."
+   },
+   "status": "partial",
+   "gap": "A graded reader with reduced marks, a 'which reading?' exercise built from the form index, and the vowel-mark policy setting.",
+   "when": "later"
+  },
+  {
+   "id": "ar.orth.romanization",
+   "title": "Learner transliteration (DIN 31635)",
+   "area": "orthography",
+   "pos": [],
+   "rarity": "common",
+   "sharedWith": [
+    "he",
+    "zh"
+   ],
+   "what": "Until the script is learned every word is shown with a scientific transliteration: macrons for long vowels, dots for emphatics (ṣ ḍ ṭ ẓ ḥ), ʿ for ع and ʾ for hamza.",
+   "examples": [
+    {
+     "text": "مُعَلِّم",
+     "translit": "muʿallim",
+     "note": "teacher"
+    },
+    {
+     "text": "خُبْز",
+     "translit": "ḫubz",
+     "note": "bread — ḫ = خ"
+    }
+   ],
+   "level": "word",
+   "record": "translit on every lexeme: the pausal form without case or tanwīn ending (kitāb, šurṭī, muḥāmī, maqhā); adverbs and formulas in -an keep it, as it is part of the word (šukran, kaṯīran).",
+   "model": {
+    "wordFields": [
+     "translit"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "language.json romanization: din31635; principalParts shows the transliteration."
+   },
+   "status": "partial",
+   "gap": "Transliteration exists only for lemmas (not forms or sentences); no transliterate exercise.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.numbers.digits",
+   "title": "Arabic-Indic digits",
+   "area": "numbers",
+   "pos": [
+    "NUM"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "The Arab East writes the digits ٠١٢٣٤٥٦٧٨٩; the Maghreb uses the European digits (which are themselves called 'Arabic numerals'). Multi-digit numbers are written with the highest digit on the left, as in Europe.",
+   "examples": [
+    {
+     "text": "٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩",
+     "translit": "0 1 2 3 4 5 6 7 8 9",
+     "note": "the digits"
+    },
+    {
+     "text": "٢٠٢٦",
+     "translit": "2026",
+     "note": "read left to right inside right-to-left text"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [],
+    "other": "Shown in the numerals page; no lexeme or exercise uses the digits."
+   },
+   "status": "partial",
+   "gap": "number_words / clock / date exercises (§6.5) with digits ↔ words.",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.phon.emphatics",
+   "title": "Emphatic (pharyngealized) consonants",
+   "area": "phonology",
+   "pos": [],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "ص ض ط ظ are 'heavy' versions of s, d, t, ð, said with the tongue root pulled back; they also darken the vowels around them. They distinguish words, and Hebrew, Greek and the learner's other languages have nothing like them.",
+   "examples": [
+    {
+     "text": "سَيْف / صَيْف",
+     "translit": "sayf / ṣayf",
+     "note": "sword / summer"
+    },
+    {
+     "text": "تِين / طِين",
+     "translit": "tīn / ṭīn",
+     "note": "figs / clay"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "translit"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Visible in the transliteration of every word (ṣ ḍ ṭ ẓ); no word parameter of its own. Audio is phase P9."
+   },
+   "status": "partial",
+   "gap": "A sounds page with minimal pairs, and audio (P9).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.gutturals",
+   "title": "Pharyngeal and glottal consonants: ع ح ء ه",
+   "area": "phonology",
+   "pos": [],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Arabic keeps four throat sounds apart: ʿ (ع, a voiced squeeze in the throat), ḥ (ح, a strong breathy h), h (ه) and the glottal stop ʾ (ء). Hebrew writes the same letters but Modern Hebrew speech has mostly merged them.",
+   "examples": [
+    {
+     "text": "حَرَم / هَرَم",
+     "translit": "ḥaram / haram",
+     "note": "sanctuary / pyramid"
+    },
+    {
+     "text": "عَمَل",
+     "translit": "ʿamal",
+     "note": "work — starts with ع"
+    },
+    {
+     "text": "سَأَلَ",
+     "translit": "saʾala",
+     "note": "he asked — a glottal stop inside the word"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "translit"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Visible in the transliteration of every word (ʿ ḥ h ʾ); no word parameter of its own. Overview mentions ع ح ق as new sounds; audio P9."
+   },
+   "status": "partial",
+   "gap": "Sounds page with minimal pairs; audio (P9).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.uvulars",
+   "title": "Uvular and velar fricatives: ق خ غ",
+   "area": "phonology",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "de",
+    "ru",
+    "el"
+   ],
+   "what": "ق is a k made far back in the throat; خ is the German ach-Laut (Russian х, Greek χ before a o u); غ is its voiced partner, close to a gargled r or Greek γ before a o u.",
+   "examples": [
+    {
+     "text": "قَلْب / كَلْب",
+     "translit": "qalb / kalb",
+     "note": "heart / dog"
+    },
+    {
+     "text": "خُبْز",
+     "translit": "ḫubz",
+     "note": "bread"
+    },
+    {
+     "text": "غُرْفَة",
+     "translit": "ġurfa",
+     "note": "room"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "translit"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": "Visible in the transliteration of every word (q ḫ ġ); no word parameter of its own."
+   },
+   "status": "partial",
+   "gap": "Sounds page with minimal pairs and bridges to de/ru/el; audio (P9).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.interdentals",
+   "title": "Interdental consonants: ث ذ ظ",
+   "area": "phonology",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "el",
+    "en"
+   ],
+   "what": "ث is the θ of Greek θάλασσα (English thin), ذ the δ of Greek δέντρο (English this), ظ an emphatic ð. Most dialects replace them with t/s, d/z — another diglossia trap.",
+   "examples": [
+    {
+     "text": "ثَلَاثَة",
+     "translit": "ṯalāṯa",
+     "note": "three — θ twice"
+    },
+    {
+     "text": "ذٰلِكَ",
+     "translit": "ḏālika",
+     "note": "that — δ"
+    },
+    {
+     "text": "ظُهْر",
+     "translit": "ẓuhr",
+     "note": "noon — emphatic ð"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "translit"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Sounds page using the Greek bridge; audio (P9).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.vowel_length",
+   "title": "Phonemic vowel length",
+   "area": "phonology",
+   "pos": [],
+   "rarity": "common",
+   "sharedWith": [
+    "de"
+   ],
+   "what": "Short and long vowels are different sounds and different spellings (a mark versus a letter); length alone separates words and verb forms.",
+   "examples": [
+    {
+     "text": "كَتَبَ / كَاتَبَ",
+     "translit": "kataba / kātaba",
+     "note": "he wrote / he corresponded with (form I / form III)"
+    },
+    {
+     "text": "جَمَل / جَمَال",
+     "translit": "jamal / jamāl",
+     "note": "camel / beauty"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "translit"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "No listening or spelling drill on length.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.gemination",
+   "title": "Phonemic consonant length (gemination)",
+   "area": "phonology",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "A doubled consonant is held longer and changes the word; in pattern morphology doubling is a meaningful element (form II, the faʿʿāl profession pattern).",
+   "examples": [
+    {
+     "text": "حَمَام / حَمَّام",
+     "translit": "ḥamām / ḥammām",
+     "note": "pigeons / bathroom"
+    },
+    {
+     "text": "طَبَخَ / طَبَّاخ",
+     "translit": "ṭabaḫa / ṭabbāḫ",
+     "note": "he cooked / cook"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "No contrastive drill; audio (P9).",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.phon.stress",
+   "title": "Predictable stress by syllable weight",
+   "area": "phonology",
+   "pos": [],
+   "rarity": "common",
+   "sharedWith": [],
+   "what": "Stress is not written and not lexical: it falls on the last syllable if it is superheavy (long vowel + consonant, or two consonants), otherwise on the penult if it is heavy (long vowel, or vowel + consonant), otherwise on the antepenult. Greek and Russian learners expect free, memorised stress.",
+   "examples": [
+    {
+     "text": "مَدْرَسَة",
+     "translit": "MAD-ra-sa",
+     "note": "school"
+    },
+    {
+     "text": "كِتَاب",
+     "translit": "ki-TĀB",
+     "note": "book"
+    },
+    {
+     "text": "مُعَلِّم",
+     "translit": "mu-ʿAL-lim",
+     "note": "teacher"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "A short rule page; audio (P9).",
+   "when": "later"
+  },
+  {
+   "id": "ar.phon.pausal",
+   "title": "Pausal forms (waqf)",
+   "area": "phonology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "VERB"
+   ],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "At the end of a phrase final short vowels and tanwīn are not pronounced, -an becomes -ā and ة is said -ah. Everyday reading aloud uses pause forms almost everywhere, so the written case endings are often not heard.",
+   "examples": [
+    {
+     "text": "الْكِتَابُ",
+     "translit": "al-kitābu → al-kitāb",
+     "note": "the book, in pause"
+    },
+    {
+     "text": "مَدْرَسَةٌ",
+     "translit": "madrasatun → madrasah",
+     "note": "a school, in pause"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.case.basic"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Pause forms are only mentioned; no transliteration or audio of them.",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.phon.helping_vowel",
+   "title": "Helping vowels before a consonant cluster",
+   "area": "phonology",
+   "pos": [
+    "ADP",
+    "PART",
+    "PRON"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "A word ending in a consonant takes a short vowel before al- or another hamzat al-waṣl so that two consonants do not meet: مِنْ → مِنَ, عَنْ → عَنِ, هَلْ → هَلِ.",
+   "examples": [
+    {
+     "text": "مِنَ الْبَيْتِ",
+     "translit": "mina l-bayti",
+     "note": "from the house"
+    },
+    {
+     "text": "هَلِ الطِّفْلُ هُنَا؟",
+     "translit": "hali ṭ-ṭiflu hunā?",
+     "note": "is the child here?"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "alts"
+    ],
+    "paradigm": [
+     "ADP;ALT"
+    ],
+    "grammar": [
+     "fn.question.yesno",
+     "fn.prep.core"
+    ],
+    "exercises": [],
+    "other": "The variant is an extra cell (ADP;ALT) or in alts — paradigm data, not a word parameter: ar:min and ar:an have ADP;ALT cells; ar:hal, ar:aw, ar:am, ar:man, ar:liman have alts."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.09"
+  },
+  {
+   "id": "ar.morph.root",
+   "title": "Consonantal roots",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADJ",
+    "ADV"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Most words are built on a root of three (sometimes four) consonants that carries a field of meaning. Knowing the root links dozens of words and is how dictionaries are ordered.",
+   "examples": [
+    {
+     "text": "ك ت ب → كَتَبَ، كِتَاب، مَكْتَب، كَاتِب",
+     "translit": "k-t-b → kataba, kitāb, maktab, kātib",
+     "note": "he wrote, book, office/desk, writer"
+    },
+    {
+     "text": "ط ب خ → طَبَخَ، مَطْبَخ، طَبَّاخ",
+     "translit": "ṭ-b-ḫ → ṭabaḫa, maṭbaḫ, ṭabbāḫ",
+     "note": "he cooked, kitchen, cook"
+    }
+   ],
+   "level": "word",
+   "record": "root on every noun, adjective, verb, adverb, number and preposition: the radicals separated by spaces (\"ك ت ب\"), or {none: why} for a loanword, a phrase or a particle.",
+   "model": {
+    "wordFields": [
+     "root"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern"
+    ],
+    "exercises": [
+     "quiz"
+    ],
+    "other": "Every native word carries its root (the days of the week, the kin terms, مَدِينَة قَرْيَة بَلَد سُوق …); langcore.principalParts shows it."
+   },
+   "status": "partial",
+   "gap": "root_family / root_pattern exercises are not implemented (only a quiz).",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.root.weak",
+   "title": "Weak roots (hollow, defective, assimilated, doubled, hamzated)",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN"
+   ],
+   "rarity": "unique",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "When و or ي is a root letter it turns into a long vowel or disappears, a doubled root contracts under šadda, and a hamza changes its seat. The class of the root predicts the shape of the whole paradigm.",
+   "examples": [
+    {
+     "text": "قَادَ – قُدْتُ – يَقُودُ",
+     "translit": "qāda – qudtu – yaqūdu",
+     "note": "hollow root ق و د: he drove, I drove, he drives"
+    },
+    {
+     "text": "مَشَى – يَمْشِي",
+     "translit": "mašā – yamšī",
+     "note": "defective root م ش ي: he walked, he walks"
+    },
+    {
+     "text": "وَصَلَ – يَصِلُ",
+     "translit": "waṣala – yaṣilu",
+     "note": "assimilated root و ص ل: the و drops in the present"
+    },
+    {
+     "text": "أَحَبَّ – أَحْبَبْتُ",
+     "translit": "ʾaḥabba – ʾaḥbabtu",
+     "note": "doubled root ح ب ب: the pair separates before a consonant ending"
+    }
+   ],
+   "level": "word",
+   "record": "rootClass on every verb: sound | hollow | defective | assimilated | doubled | hamzated (one or more).",
+   "model": {
+    "wordFields": [
+     "root",
+     "rootClass"
+    ],
+    "paradigm": [
+     "V;PST;1;SG",
+     "V;PRS;IND;3;SG;MASC"
+    ],
+    "grammar": [
+     "fn.root.pattern",
+     "fn.direction"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "rootClass is stated for verbs only (nouns show the root); no weak-verb page with the paradigm patterns per class.",
+   "when": "fd.13"
+  },
+  {
+   "id": "ar.morph.pattern",
+   "title": "Patterns (awzān) for nouns and adjectives",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The vowels and extra letters around the root make a pattern with a meaning of its own: mafʿal (place), mifʿāl (tool), fāʿil (doer), faʿʿāl (trade), mafʿūl (thing done), fuʿla and others. Patterns are named with the model root ف ع ل.",
+   "examples": [
+    {
+     "text": "مَفْعَل: مَطْبَخ، مَكْتَب",
+     "translit": "mafʿal: maṭbaḫ, maktab",
+     "note": "place: kitchen, office"
+    },
+    {
+     "text": "مِفْعَال: مِفْتَاح، مِصْبَاح",
+     "translit": "mifʿāl: miftāḥ, miṣbāḥ",
+     "note": "tool: key, lamp"
+    },
+    {
+     "text": "فَعَّال: طَبَّاخ",
+     "translit": "faʿʿāl: ṭabbāḫ",
+     "note": "trade: cook"
+    }
+   ],
+   "level": "word",
+   "record": "pattern on every noun and adjective, in ف ع ل letters with the traditional measure (بَاب فَعَل، مَطَار مَفْعَل، مُسْتَشْفًى مُسْتَفْعَل), or {none: why} (loanword, phrase); the plural’s pattern in each plurals item.",
+   "model": {
+    "wordFields": [
+     "pattern",
+     "plurals"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern"
+    ],
+    "exercises": [
+     "quiz"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "root_pattern exercise (root × pattern → word, word → root + pattern).",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.verb.forms",
+   "title": "Derived verb forms I–X",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "From one root up to ten verb forms are built, each with typical meanings (II causative/intensive, III doing with someone, V reflexive of II, VII passive-like, VIII reflexive, X asking for or considering). Each form has a fixed present, participle and maṣdar pattern.",
+   "examples": [
+    {
+     "text": "عَلِمَ → عَلَّمَ → تَعَلَّمَ → اِسْتَعْلَمَ",
+     "translit": "ʿalima → ʿallama → taʿallama → istaʿlama",
+     "note": "to know (I) → to teach (II) → to learn (V) → to inquire (X)"
+    },
+    {
+     "text": "اِشْتَرَى",
+     "translit": "ištarā",
+     "note": "to buy — form VIII of ش ر ي"
+    }
+   ],
+   "level": "word",
+   "record": "verbForm: I … X (or none for laysa and other defective verbs).",
+   "model": {
+    "wordFields": [
+     "verbForm"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern"
+    ],
+    "exercises": [
+     "quiz"
+    ],
+    "other": "Every verb states verbForm; principalParts shows it."
+   },
+   "status": "partial",
+   "gap": "The analyze exercise (form → verb form) and a table of the ten forms with their present/participle/maṣdar patterns.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.verb.two_stems",
+   "title": "Perfect and imperfect: suffix and prefix conjugations",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Every verb has two finite stems: the perfect with person endings (past, completed) and the imperfect with person prefixes (present, and the base of the moods and the future).",
+   "examples": [
+    {
+     "text": "كَتَبْتُ / أَكْتُبُ",
+     "translit": "katabtu / ʾaktubu",
+     "note": "I wrote / I write"
+    },
+    {
+     "text": "أَكَلَتْ / تَأْكُلُ",
+     "translit": "ʾakalat / taʾkulu",
+     "note": "she ate / she eats"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "V;PST;*",
+     "V;PRS;IND;*"
+    ],
+    "grammar": [
+     "fn.present",
+     "fn.copula"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The past is stored but taught only as kāna (fd.01) until cr.01; no Tense transform beyond a few sentences.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.verb.stem_vowel",
+   "title": "The imperfect stem vowel of form I",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he",
+    "de"
+   ],
+   "what": "For form I verbs the vowel of the present stem (a, i or u) cannot be predicted from the past; it is learned with each verb, like German strong-verb ablaut.",
+   "examples": [
+    {
+     "text": "كَتَبَ – يَكْتُبُ",
+     "translit": "kataba – yaktubu",
+     "note": "u"
+    },
+    {
+     "text": "شَرِبَ – يَشْرَبُ",
+     "translit": "šariba – yašrabu",
+     "note": "a"
+    },
+    {
+     "text": "جَلَسَ – يَجْلِسُ",
+     "translit": "jalasa – yajlisu",
+     "note": "i"
+    }
+   ],
+   "level": "word",
+   "record": "present: the 3rd person singular imperfect (يَفْعَلُ) on every verb, shown in the facade section of the word card.",
+   "model": {
+    "wordFields": [
+     "present"
+    ],
+    "paradigm": [
+     "V;PRS;IND;3;SG;MASC"
+    ],
+    "grammar": [
+     "fn.present"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "langcore.principalParts still lists only root and verb form for an Arabic verb (the present appears in the facade section); no stem-vowel drill.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.verb.moods",
+   "title": "Moods of the imperfect: indicative, subjunctive, jussive",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "The imperfect has three moods shown by the ending: indicative -u, subjunctive -a (after أَنْ، لَنْ، لِـ 'in order to'), jussive with no vowel (after لَمْ, prohibitive لَا, and لِـ of command). An energetic mood exists in formal style.",
+   "examples": [
+    {
+     "text": "يَكْتُبُ",
+     "translit": "yaktubu",
+     "note": "he writes (indicative)"
+    },
+    {
+     "text": "أَنْ يَكْتُبَ",
+     "translit": "ʾan yaktuba",
+     "note": "that he write (subjunctive)"
+    },
+    {
+     "text": "لَمْ يَكْتُبْ",
+     "translit": "lam yaktub",
+     "note": "he did not write (jussive)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "V;SBJV;*"
+    ],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": "SBJV cells on 5 verbs only; no JUSS cells anywhere."
+   },
+   "status": "partial",
+   "gap": "V;JUSS cells in paradigmCells.VERB, SBJV for all verbs, a moods function; needed for لَمْ (cr.01), لَنْ (cr.02) and prohibitions (fn.imperative).",
+   "when": "cr.01"
+  },
+  {
+   "id": "ar.morph.verb.agreement",
+   "title": "Verb agreement: person, number (with dual) and gender",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The verb shows person, number and gender in the 2nd and 3rd persons, and has dual forms: 13 forms per tense. A pronoun subject is usually dropped.",
+   "examples": [
+    {
+     "text": "تَكْتُبِينَ",
+     "translit": "taktubīna",
+     "note": "you (one woman) write"
+    },
+    {
+     "text": "يَكْتُبْنَ",
+     "translit": "yaktubna",
+     "note": "they (women) write"
+    },
+    {
+     "text": "يَكْتُبَانِ",
+     "translit": "yaktubāni",
+     "note": "they two write"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "V;PRS;IND;2;SG;FEM",
+     "V;PRS;IND;3;PL;FEM"
+    ],
+    "grammar": [
+     "fn.present"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The dual (3 persons × 2 tenses) is not in paradigmCells.VERB and no verb stores it; dual pronouns أَنْتُمَا / هُمَا are not in the lexicon.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.verb.imperative",
+   "title": "The imperative and its helping alif",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "The imperative is cut from the jussive 'you' form; a helping alif (اِ / اُ) is added when it starts with two consonants. Four forms by addressee (plus a dual).",
+   "examples": [
+    {
+     "text": "اِذْهَبْ / اِذْهَبِي / اِذْهَبُوا / اِذْهَبْنَ",
+     "translit": "iḏhab / iḏhabī / iḏhabū / iḏhabna",
+     "note": "go! — to a man, a woman, men, women"
+    },
+    {
+     "text": "اُدْخُلْ",
+     "translit": "udḫul",
+     "note": "come in! — u-verbs take اُ"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "V;IMP;2;SG;MASC",
+     "V;IMP;2;SG;FEM",
+     "V;IMP;2;PL;MASC",
+     "V;IMP;2;PL;FEM"
+    ],
+    "grammar": [
+     "fn.imperative"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.13"
+  },
+  {
+   "id": "ar.morph.verb.suppletion",
+   "title": "Suppletive and defective verbs",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "de",
+    "el",
+    "ru",
+    "en"
+   ],
+   "what": "A few verbs borrow missing forms from another root: 'come!' is تَعَالَ, not a form of جَاءَ. لَيْسَ has only perfect-shaped forms with present meaning.",
+   "examples": [
+    {
+     "text": "جَاءَ – يَجِيءُ – تَعَالَ!",
+     "translit": "jāʾa – yajīʾu – taʿāla!",
+     "note": "he came – he comes – come!"
+    },
+    {
+     "text": "لَسْتُ مُتْعَبًا",
+     "translit": "lastu mutʿaban",
+     "note": "I am not tired — perfect-shaped, present meaning"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "class"
+    ],
+    "paradigm": [
+     "VERB.imp",
+     "VERB.defective"
+    ],
+    "grammar": [
+     "fn.imperative",
+     "fn.negation"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": "A separate lexeme with class imp / defective and the same concept (تَعَالَ beside جَاءَ; لَيْسَ); their present, maṣdar and participles are stated as none with the reason."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.08"
+  },
+  {
+   "id": "ar.morph.verb.passive",
+   "title": "The internal passive",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The passive is made by changing the vowels, not with an auxiliary: u–i in the perfect, u–a in the imperfect. Unvocalized it looks exactly like the active.",
+   "examples": [
+    {
+     "text": "كَتَبَ → كُتِبَ",
+     "translit": "kataba → kutiba",
+     "note": "he wrote → it was written"
+    },
+    {
+     "text": "يَكْتُبُ → يُكْتَبُ",
+     "translit": "yaktubu → yuktabu",
+     "note": "he writes → it is written"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Passive cells (V;PASS;…), a function and transforms.",
+   "when": "later"
+  },
+  {
+   "id": "ar.morph.verb.future",
+   "title": "Future with سَـ / سَوْفَ",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "AUX"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "el"
+   ],
+   "what": "The future is the imperfect with the prefix سَـ or the separate particle سَوْفَ, like Greek θα. It is negated with لَنْ + subjunctive, not with لَا.",
+   "examples": [
+    {
+     "text": "سَأَذْهَبُ",
+     "translit": "saʾaḏhabu",
+     "note": "I will go"
+    },
+    {
+     "text": "سَوْفَ أَذْهَبُ",
+     "translit": "sawfa ʾaḏhabu",
+     "note": "I will go (more distant or emphatic)"
+    },
+    {
+     "text": "لَنْ أَذْهَبَ",
+     "translit": "lan ʾaḏhaba",
+     "note": "I will not go"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "No lexeme for سَـ / سَوْفَ / لَنْ; the tokenizer would need سَـ as a prefix lexeme."
+   },
+   "status": "missing",
+   "gap": "Lexemes سَـ (prefix), سَوْفَ, لَنْ; Tense=FUT variants in the bank.",
+   "when": "cr.02"
+  },
+  {
+   "id": "ar.morph.verb.kana_aux",
+   "title": "كَانَ + imperfect: past habit and progress",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "AUX"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "كَانَ followed by an imperfect verb gives the past continuous or habitual ('was doing, used to do'); both verbs agree with the subject.",
+   "examples": [
+    {
+     "text": "كَانَ يَأْكُلُ",
+     "translit": "kāna yaʾkulu",
+     "note": "he was eating / he used to eat"
+    },
+    {
+     "text": "كُنْتُ أَسْكُنُ هُنَا",
+     "translit": "kuntu ʾaskunu hunā",
+     "note": "I used to live here"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.senses"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Only as sense s2 of ar:kana."
+   },
+   "status": "partial",
+   "gap": "A function in cr.01 with bank sentences.",
+   "when": "cr.01"
+  },
+  {
+   "id": "ar.morph.masdar",
+   "title": "The verbal noun (maṣdar)",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "VERB"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Each verb has a verbal noun that does the work of an infinitive or a gerund. For form I it is unpredictable and must be learned; for forms II–X it follows the form.",
+   "examples": [
+    {
+     "text": "ذَهَبَ → ذَهَاب",
+     "translit": "ḏahaba → ḏahāb",
+     "note": "to go → going"
+    },
+    {
+     "text": "دَخَلَ → دُخُول",
+     "translit": "daḫala → duḫūl",
+     "note": "to enter → entry"
+    },
+    {
+     "text": "اِنْتَظَرَ → اِنْتِظَار",
+     "translit": "intaẓara → intiẓār",
+     "note": "to wait → waiting (form VIII, regular)"
+    }
+   ],
+   "level": "word",
+   "record": "masdar (strings) on every verb, or none for لَيْسَ and تَعَالَ; a maṣdar that belongs to one meaning is in meaningForms (عَادَ “visit”: عِيَادَة).",
+   "model": {
+    "wordFields": [
+     "masdar"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The maṣdar is shown in the facade section, not as a principal part; no exercise.",
+   "when": "fd.13"
+  },
+  {
+   "id": "ar.morph.no_infinitive",
+   "title": "No infinitive: the 3rd-person past as citation form",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Arabic has no infinitive. Dictionaries cite a verb by its 'he did' form; 'to do' in a sentence is أَنْ + subjunctive or the maṣdar. Dictionaries are ordered by root.",
+   "examples": [
+    {
+     "text": "أَكَلَ",
+     "translit": "ʾakala",
+     "note": "lit. 'he ate' — the dictionary form of 'to eat'"
+    },
+    {
+     "text": "أُرِيدُ أَنْ آكُلَ",
+     "translit": "ʾurīdu ʾan ʾākula",
+     "note": "I want to eat"
+    },
+    {
+     "text": "أُحِبُّ الطَّبْخَ",
+     "translit": "ʾuḥibbu ṭ-ṭabḫa",
+     "note": "I like cooking (maṣdar)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "V;PST;3;SG;MASC"
+    ],
+    "grammar": [
+     "fn.present",
+     "fn.connectors"
+    ],
+    "exercises": [],
+    "other": "language.json citationCells.VERB = V;PST;3;SG;MASC (validated)."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.participles",
+   "title": "Active and passive participles",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "VERB"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Every verb form has an active and a passive participle by pattern (fāʿil / mafʿūl, mu-…-i- / mu-…-a- for derived forms). They serve as adjectives, nouns of agent and object, and as a present-progressive in many contexts.",
+   "examples": [
+    {
+     "text": "كَاتِب / مَكْتُوب",
+     "translit": "kātib / maktūb",
+     "note": "writing, writer / written, a letter"
+    },
+    {
+     "text": "مُعَلِّم / مُعَلَّم",
+     "translit": "muʿallim / muʿallam",
+     "note": "teaching, teacher (II) / taught"
+    }
+   ],
+   "level": "word",
+   "record": "participles on every verb: [{form, kind: active | passive}] — the passive only for verbs with an object.",
+   "model": {
+    "wordFields": [
+     "participles"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern"
+    ],
+    "exercises": [],
+    "other": "Many participles are lexemes of their own (طَالِب، سَائِق، مُعَلِّم) with no link to their verb."
+   },
+   "status": "partial",
+   "gap": "No derivation link from the verb to participle lexemes (طَالِب، سَائِق، مُعَلِّم); no exercise.",
+   "when": "later"
+  },
+  {
+   "id": "ar.morph.gender",
+   "title": "Two genders, with covert feminines",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "PRON",
+    "VERB",
+    "NUM"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "he",
+    "de",
+    "el",
+    "ru"
+   ],
+   "what": "Every noun is masculine or feminine; there is no neuter. Most feminines end in ة, but some are feminine without it (sun, earth, house دَار, paired body parts, كَأْس), and nouns for women are feminine whatever their form.",
+   "examples": [
+    {
+     "text": "غُرْفَة (f.) / بَاب (m.)",
+     "translit": "ġurfa / bāb",
+     "note": "room / door"
+    },
+    {
+     "text": "كَأْس (f.)",
+     "translit": "kaʾs",
+     "note": "glass — feminine without ة"
+    },
+    {
+     "text": "شَمْس (f.)",
+     "translit": "šams",
+     "note": "sun"
+    }
+   ],
+   "level": "word",
+   "record": "gender: MASC | FEM (both for a few nouns).",
+   "model": {
+    "wordFields": [
+     "gender"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.noun.gender",
+     "fn.agreement"
+    ],
+    "exercises": [
+     "gender_article",
+     "inflect"
+    ],
+    "other": "gender is declared at the top level for every noun (نَاس and أَجْدَاد are masculine plurals)."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.morph.number.dual",
+   "title": "The dual",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "PRON",
+    "VERB",
+    "DET"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Exactly two is a grammatical number of its own on nouns, adjectives, pronouns, demonstratives and verbs: -āni (nominative) / -ayni (accusative and genitive). With a noun the dual alone says 'two'. Hebrew keeps a dual only for some nouns.",
+   "examples": [
+    {
+     "text": "كِتَابَانِ / كِتَابَيْنِ",
+     "translit": "kitābāni / kitābayni",
+     "note": "two books (nom. / acc.-gen.)"
+    },
+    {
+     "text": "غُرْفَتَانِ",
+     "translit": "ġurfatāni",
+     "note": "two rooms"
+    },
+    {
+     "text": "أَنْتُمَا، هُمَا",
+     "translit": "ʾantumā, humā",
+     "note": "you two, they two"
+    }
+   ],
+   "level": "word",
+   "record": "dual on every noun (the nominative dual, also of phrases: مَكْتَبَا بَرِيدٍ), or {none: why} for mass nouns, names and plural-only words; DU cells in the paradigms.",
+   "model": {
+    "wordFields": [
+     "dual"
+    ],
+    "paradigm": [
+     "N;NOM;DU;INDF",
+     "ADJ;NOM;DU;MASC;INDF",
+     "NOUN.du"
+    ],
+    "grammar": [
+     "fn.plural.noun",
+     "fn.numerals"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": "110 of 248 nouns have DU cells; paradigmCells.NOUN does not require them."
+   },
+   "status": "partial",
+   "gap": "DU cells are not required for every countable noun; the dual pronouns (أَنْتُمَا، هُمَا) and demonstratives (هٰذَانِ، هَاتَانِ) and the dual verb cells are missing.",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.morph.plural.sound_masc",
+   "title": "Sound masculine plural -ūna / -īna",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Mostly for male human participles and adjectives: -ūna in the nominative, -īna otherwise; the final -na drops in a construct and before a suffix.",
+   "examples": [
+    {
+     "text": "مُعَلِّمُونَ / مُعَلِّمِينَ",
+     "translit": "muʿallimūna / muʿallimīna",
+     "note": "teachers (nom. / acc.-gen.)"
+    },
+    {
+     "text": "مُعَلِّمُو الْمَدْرَسَةِ",
+     "translit": "muʿallimū l-madrasati",
+     "note": "the teachers of the school"
+    }
+   ],
+   "level": "word",
+   "record": "Inside the plurals list of nouns and adjectives: kind soundMasc (the parameter is named after ar.morph.plural.broken / .multiple).",
+   "model": {
+    "wordFields": [
+     "plurals"
+    ],
+    "paradigm": [
+     "N;NOM;PL;MASC;INDF",
+     "ADJ;NOM;PL;MASC;INDF"
+    ],
+    "grammar": [
+     "fn.plural.noun"
+    ],
+    "exercises": [
+     "principal_parts",
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The construct form without -na (مُعَلِّمُو) is not stored (no CONST cells for these nouns).",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.morph.plural.sound_fem",
+   "title": "Sound feminine plural -āt",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "For female persons, many nouns in ة, loanwords and maṣdars of derived forms: -ātun, with -ātin in both accusative and genitive (no -an).",
+   "examples": [
+    {
+     "text": "طَالِبَة → طَالِبَات",
+     "translit": "ṭāliba → ṭālibāt",
+     "note": "female student → students"
+    },
+    {
+     "text": "أَشْتَرِي تُفَّاحَاتٍ",
+     "translit": "ʾaštarī tuffāḥātin",
+     "note": "I buy apples — accusative in -in"
+    }
+   ],
+   "level": "word",
+   "record": "Inside the plurals list: kind soundFem (the parameter is named after ar.morph.plural.broken).",
+   "model": {
+    "wordFields": [
+     "plurals"
+    ],
+    "paradigm": [
+     "N;NOM;PL;INDF",
+     "N;ACC;PL;INDF"
+    ],
+    "grammar": [
+     "fn.plural.noun",
+     "fn.object"
+    ],
+    "exercises": [
+     "principal_parts",
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.morph.plural.broken",
+   "title": "Broken (internal) plurals",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "Most nouns form the plural by a new pattern of the root (about thirty common patterns). The plural is not predictable from the singular with certainty and is learned with the word.",
+   "examples": [
+    {
+     "text": "كِتَاب → كُتُب",
+     "translit": "kitāb → kutub",
+     "note": "book → books"
+    },
+    {
+     "text": "قَلَم → أَقْلَام",
+     "translit": "qalam → ʾaqlām",
+     "note": "pen → pens"
+    },
+    {
+     "text": "رَجُل → رِجَال",
+     "translit": "rajul → rijāl",
+     "note": "man → men"
+    },
+    {
+     "text": "مِفْتَاح → مَفَاتِيح",
+     "translit": "miftāḥ → mafātīḥ",
+     "note": "key → keys"
+    }
+   ],
+   "level": "word",
+   "record": "plurals on every noun: [{form, kind, pattern, declension, note, senses}], or {none: why} for mass nouns, names and words used in the singular only.",
+   "model": {
+    "wordFields": [
+     "plurals"
+    ],
+    "paradigm": [
+     "N;NOM;PL;INDF"
+    ],
+    "grammar": [
+     "fn.plural.noun",
+     "fn.root.pattern"
+    ],
+    "exercises": [
+     "principal_parts",
+     "inflect"
+    ],
+    "other": "The paradigm’s PL cells hold the main plural; the plurals list states the kind, pattern and declension and adds the other plurals, each tied to its meanings."
+   },
+   "status": "partial",
+   "gap": "An exercise grouping plurals by pattern; the plural drills do not read the plurals list yet.",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.morph.plural.multiple",
+   "title": "Several plurals for one noun, sometimes by meaning",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "A noun can have two or more plurals: free variants, a plural of paucity (3–10) next to a plural of multitude, or different plurals for different meanings.",
+   "examples": [
+    {
+     "text": "بَيْت → بُيُوت / أَبْيَات",
+     "translit": "bayt → buyūt / ʾabyāt",
+     "note": "houses / verses of a poem"
+    },
+    {
+     "text": "عَامِل → عُمَّال / عَوَامِل",
+     "translit": "ʿāmil → ʿummāl / ʿawāmil",
+     "note": "workers / factors"
+    },
+    {
+     "text": "شَهْر → أَشْهُر / شُهُور",
+     "translit": "šahr → ʾašhur / šuhūr",
+     "note": "months (paucal / general)"
+    }
+   ],
+   "level": "word",
+   "record": "plurals: several items, each with senses (the profile sense ids): بُيُوت / أَبْيَات / بُيُوتَات, عُمَّال / عَوَامِل, كِبَار / كُبَرَاء, أَخْوَال / خِيلَان.",
+   "model": {
+    "wordFields": [
+     "plurals"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "formsAlt still holds some variant plurals for the paradigm; the per-meaning plurals are in plurals and the word card shows them with each meaning."
+   },
+   "status": "partial",
+   "gap": "Principal parts show only the paradigm’s plural; drills do not use the per-sense plurals yet.",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.morph.collective_unit",
+   "title": "Collective nouns and unit nouns",
+   "area": "morphology",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "ru"
+   ],
+   "what": "Many fruits, vegetables, animals and materials have a collective (the kind, the mass) and a unit noun in ة (one piece), which has its own dual and plural for counting. Russian has the same idea with -ина (горох → горошина).",
+   "examples": [
+    {
+     "text": "تُفَّاح → تُفَّاحَة → تُفَّاحَات",
+     "translit": "tuffāḥ → tuffāḥa → tuffāḥāt",
+     "note": "apples → one apple → (three) apples"
+    },
+    {
+     "text": "بَيْض → بَيْضَة",
+     "translit": "bayḍ → bayḍa",
+     "note": "eggs → one egg"
+    }
+   ],
+   "level": "word",
+   "record": "class collective + unit (the unit noun) on every collective.",
+   "model": {
+    "wordFields": [
+     "class",
+     "unit"
+    ],
+    "paradigm": [
+     "NOUN.collective",
+     "N;NOM;COLL;INDF"
+    ],
+    "grammar": [
+     "fn.plural.noun",
+     "fn.object"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": "principalParts shows collective, unit and counted plural."
+   },
+   "status": "partial",
+   "gap": "Collective agreement (fem. sg. or masc.) is not recorded.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.diptote",
+   "title": "Diptotes (no tanwīn, genitive in -a)",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "PROPN"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "Some nouns and adjectives (many broken plural patterns, أَفْعَل adjectives, many proper names, feminines in -āʾ) never take tanwīn and use -a for the genitive when indefinite. With al- or in a construct they decline normally.",
+   "examples": [
+    {
+     "text": "مَدَارِسُ – فِي مَدَارِسَ – فِي الْمَدَارِسِ",
+     "translit": "madārisu – fī madārisa – fī l-madārisi",
+     "note": "schools – in schools – in the schools"
+    },
+    {
+     "text": "أَحْمَرُ / حَمْرَاءُ",
+     "translit": "ʾaḥmaru / ḥamrāʾu",
+     "note": "red (m. / f.) — both diptote"
+    }
+   ],
+   "level": "word",
+   "record": "declension on every noun and adjective: the singular’s type (of the head noun in a phrase) — triptote | diptote | defective | invariable | dual — and a declension in every plurals item.",
+   "model": {
+    "wordFields": [
+     "declension",
+     "plurals"
+    ],
+    "paradigm": [
+     "N;GEN;PL;INDF"
+    ],
+    "grammar": [
+     "fn.case",
+     "fn.definite",
+     "fn.object"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": "Month names are diptotes, phrases included: كَانُونُ الثَّانِي — the head كَانُون takes no tanwīn and -a in the genitive; مَايُو، كُوسَا are invariable."
+   },
+   "status": "partial",
+   "gap": "A rule page with the diptote patterns; a contrast drill.",
+   "when": "fd.11"
+  },
+  {
+   "id": "ar.morph.case",
+   "title": "Three cases (iʿrāb)",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "NUM",
+    "PRON"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "de",
+    "el",
+    "ru",
+    "tr"
+   ],
+   "what": "Nominative -u, accusative -a, genitive -i, written as short vowel marks. Nouns are subject/predicate (nominative), object and adverbial (accusative), after prepositions and as second noun of a construct (genitive). Duals and sound plurals have long-vowel endings instead.",
+   "examples": [
+    {
+     "text": "قَرَأَ الطَّالِبُ الْكِتَابَ",
+     "translit": "qaraʾa ṭ-ṭālibu l-kitāba",
+     "note": "the student read the book (nom. … acc.)"
+    },
+    {
+     "text": "فِي الْكِتَابِ",
+     "translit": "fī l-kitābi",
+     "note": "in the book (gen.)"
+    }
+   ],
+   "level": "word",
+   "record": "kind on every preposition: ḥarf (a true preposition) | ẓarf (an accusative noun used as one) | phrase.",
+   "model": {
+    "wordFields": [
+     "kind"
+    ],
+    "paradigm": [
+     "N;NOM;*",
+     "N;ACC;*",
+     "N;GEN;*"
+    ],
+    "grammar": [
+     "fn.case.basic",
+     "fn.object",
+     "fn.case"
+    ],
+    "exercises": [
+     "inflect",
+     "build_sentence",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.morph.definiteness",
+   "title": "Definiteness: al- and tanwīn",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "'The' is the prefix al- written on the word; 'a' is the tanwīn ending. Definiteness is also given by a possessive suffix or a definite second noun of a construct, and is an agreement feature of the adjective.",
+   "examples": [
+    {
+     "text": "بَيْتٌ / الْبَيْتُ",
+     "translit": "baytun / al-baytu",
+     "note": "a house / the house"
+    },
+    {
+     "text": "أُحِبُّ الْقَهْوَةَ",
+     "translit": "ʾuḥibbu l-qahwata",
+     "note": "I like coffee — generic statements use al-, as in Greek"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "N;NOM;SG;INDF",
+     "N;NOM;SG;DEF"
+    ],
+    "grammar": [
+     "fn.definite"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": "det.def and det.indef are marked absent with the reason in fd.01."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.morph.construct",
+   "title": "The construct state (iḍāfa)",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "NUM"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "'X of Y' is two nouns side by side: the first loses al- and tanwīn and takes the case of its place, the second is genitive and decides definiteness for both. It replaces most compounds and genitive phrases.",
+   "examples": [
+    {
+     "text": "مَكْتَبُ الْبَرِيدِ",
+     "translit": "maktabu l-barīdi",
+     "note": "the post office"
+    },
+    {
+     "text": "بَابُ بَيْتٍ / بَابُ الْبَيْتِ",
+     "translit": "bābu baytin / bābu l-bayti",
+     "note": "a door of a house / the door of the house"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "N;NOM;SG;CONST",
+     "NOUN.quant",
+     "NOUN.kin"
+    ],
+    "grammar": [
+     "fn.case",
+     "fn.possessive"
+    ],
+    "exercises": [
+     "build_sentence"
+    ],
+    "other": "CONST cells exist only for kin, quant and number words; the dual of a phrase is stated in its construct form (مَكْتَبَا بَرِيدٍ); multiword lexemes (مَكْتَب بَرِيد) store construct forms. No construct parameter: the forms are paradigm data."
+   },
+   "status": "partial",
+   "gap": "CONST cells for all nouns (dual بَيْتَا, sound plural مُعَلِّمُو); a dedicated construct function and transform.",
+   "when": "fd.11"
+  },
+  {
+   "id": "ar.morph.five_nouns",
+   "title": "The five nouns (أَب، أَخ، حَم، فُو، ذُو)",
+   "area": "morphology",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "A small group shows case by a long vowel before a genitive or a suffix: -ū, -ā, -ī.",
+   "examples": [
+    {
+     "text": "أَبُوكَ / أَبَاكَ / أَبِيكَ",
+     "translit": "ʾabūka / ʾabāka / ʾabīka",
+     "note": "your father (nom. / acc. / gen.)"
+    },
+    {
+     "text": "أَبُو أَحْمَدَ",
+     "translit": "ʾabū ʾAḥmada",
+     "note": "Abu Ahmad, father of Ahmad"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "N;NOM;SG;CONST",
+     "N;NOM;SG;POSS;PSS2SM"
+    ],
+    "grammar": [
+     "fn.possessive"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": "Irregular construct and possessive cells in the kin paradigm (paradigm data, not a parameter); NOUN.kin has only nominative construct/possessive cells (and GEN 1sg)."
+   },
+   "status": "partial",
+   "gap": "ACC and GEN construct and possessive cells for أَب / أَخ (أَبَا، أَبِي; أَخَاكَ، أَخِيكَ).",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.morph.suffix_pronouns",
+   "title": "Attached pronouns on nouns, verbs and prepositions",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADP",
+    "SCONJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he",
+    "tr"
+   ],
+   "what": "Possessors, objects and prepositional objects are suffixes: -ī/-ya my, -ka/-ki your, -hu his, -hā her … On a verb 'me' is -nī, not -ī.",
+   "examples": [
+    {
+     "text": "كِتَابِي",
+     "translit": "kitābī",
+     "note": "my book"
+    },
+    {
+     "text": "عِنْدِي",
+     "translit": "ʿindī",
+     "note": "I have (at me)"
+    },
+    {
+     "text": "أُحِبُّكَ",
+     "translit": "ʾuḥibbuka",
+     "note": "I love you (to a man)"
+    },
+    {
+     "text": "يُحِبُّنِي",
+     "translit": "yuḥibbunī",
+     "note": "he loves me"
+    }
+   ],
+   "level": "word",
+   "record": "suffix on every personal pronoun (ـكَ، ـهُ، ـهَا …); the suffixed forms as cells (POSS;PSS…, ADP;person, PART;person).",
+   "model": {
+    "wordFields": [
+     "suffix"
+    ],
+    "paradigm": [
+     "N;NOM;SG;POSS;PSS1S",
+     "ADP;1;SG",
+     "PART;3;SG;MASC"
+    ],
+    "grammar": [
+     "fn.possessive",
+     "fn.have",
+     "fn.prep.core",
+     "fn.connectors"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Object suffixes on verbs (V;…;OBJ cells or a morph_build exercise); POSS cells exist mostly for kin nouns and in the nominative.",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.morph.prefix_clitics",
+   "title": "Attached prefix words: وَ فَ بِـ لِـ كَـ سَـ أَ and al-",
+   "area": "morphology",
+   "pos": [
+    "CCONJ",
+    "ADP",
+    "PART",
+    "DET"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "One-letter words are written together with the next word, and up to three can stack. لِـ + al- loses the alif: لِلْـ.",
+   "examples": [
+    {
+     "text": "وَبِالْقَلَمِ",
+     "translit": "wa-bi-l-qalami",
+     "note": "and with the pen"
+    },
+    {
+     "text": "لِلْبَيْتِ",
+     "translit": "li-l-bayti",
+     "note": "for the house (لِ + الْ)"
+    },
+    {
+     "text": "كَالْبَيْتِ",
+     "translit": "ka-l-bayti",
+     "note": "like the house"
+    }
+   ],
+   "level": "word",
+   "record": "prefix (true / false) on every preposition, coordinating conjunction and particle; the host keeps its own forms.",
+   "model": {
+    "wordFields": [
+     "prefix"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.core",
+     "fn.question.yesno",
+     "fn.connectors"
+    ],
+    "exercises": [
+     "build_sentence"
+    ],
+    "other": "Tokenizer strips up to two prefixes (langcore.lookup); prefix lexemes: وَ فَ بِ لِ أَ; bank tokens with parts."
+   },
+   "status": "partial",
+   "gap": "كَـ and سَـ are not lexemes; لِـ + al- (لِلْـ, لِلّٰهِ) is not handled by the tokenizer (the rest لْبَيْتِ matches no form) and no bank sentence uses it.",
+   "when": "fd.11"
+  },
+  {
+   "id": "ar.morph.pron.gender2",
+   "title": "Gender in 'you' and 'they'",
+   "area": "morphology",
+   "pos": [
+    "PRON",
+    "VERB"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Second-person pronouns, verb forms and suffixes differ for a man and a woman (and for groups of women); 3rd-person plural too. Speaking to someone requires knowing their gender.",
+   "examples": [
+    {
+     "text": "أَنْتَ / أَنْتِ",
+     "translit": "ʾanta / ʾanti",
+     "note": "you (to a man / to a woman)"
+    },
+    {
+     "text": "كَيْفَ حَالُكَ؟ / كَيْفَ حَالُكِ؟",
+     "translit": "kayfa ḥāluka? / kayfa ḥāluki?",
+     "note": "how are you? (m. / f.)"
+    }
+   ],
+   "level": "word",
+   "record": "person on every personal pronoun (person, number, gender).",
+   "model": {
+    "wordFields": [
+     "person"
+    ],
+    "paradigm": [
+     "PRON;NOM",
+     "V;PRS;IND;2;SG;FEM"
+    ],
+    "grammar": [
+     "fn.pronoun.subject",
+     "fn.greetings"
+    ],
+    "exercises": [
+     "transform",
+     "inflect"
+    ],
+    "other": "Separate lexemes per gender; transform variants Addressee / Gender."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.01"
+  },
+  {
+   "id": "ar.morph.adj.agreement",
+   "title": "Adjective agreement in four features",
+   "area": "morphology",
+   "pos": [
+    "ADJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The adjective follows the noun and agrees in gender, number, case and definiteness (al- is repeated on the adjective). Human plurals take plural adjectives, non-human plurals feminine singular.",
+   "examples": [
+    {
+     "text": "بَيْتٌ كَبِيرٌ",
+     "translit": "baytun kabīrun",
+     "note": "a big house"
+    },
+    {
+     "text": "الْغُرْفَةُ الْكَبِيرَةُ",
+     "translit": "al-ġurfatu l-kabīratu",
+     "note": "the big room"
+    },
+    {
+     "text": "فِي الْبَيْتِ الْكَبِيرِ",
+     "translit": "fī l-bayti l-kabīri",
+     "note": "in the big house"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "ADJ"
+    ],
+    "grammar": [
+     "fn.adjective",
+     "fn.agreement"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.16"
+  },
+  {
+   "id": "ar.morph.adj.elative",
+   "title": "The elative أَفْعَل (comparative and superlative)",
+   "area": "morphology",
+   "pos": [
+    "ADJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "One pattern serves as comparative (with مِنْ 'than') and superlative (with al- or before a genitive). The comparative does not inflect for gender; the definite superlative has a feminine fuʿlā.",
+   "examples": [
+    {
+     "text": "أَكْبَرُ مِنْ",
+     "translit": "ʾakbaru min",
+     "note": "bigger than"
+    },
+    {
+     "text": "أَكْبَرُ بَيْتٍ",
+     "translit": "ʾakbaru baytin",
+     "note": "the biggest house"
+    },
+    {
+     "text": "الْكُبْرَى",
+     "translit": "al-kubrā",
+     "note": "the biggest (feminine)"
+    }
+   ],
+   "level": "word",
+   "record": "elative on every adjective (أَكْبَر), or {none: why} with the way it is compared (أَشَدُّ بَيَاضًا، أَكْثَرُ تَعَبًا).",
+   "model": {
+    "wordFields": [
+     "elative"
+    ],
+    "paradigm": [
+     "ADJ;CMPR;NOM",
+     "ADJ;SPRL;NOM;DEF",
+     "ADJ.elative"
+    ],
+    "grammar": [
+     "fn.comparison"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The feminine superlative (فُعْلَى) and the plural (أَفَاعِل / أَفْعَلُونَ) are not stored.",
+   "when": "fd.17"
+  },
+  {
+   "id": "ar.morph.adj.colour",
+   "title": "Colour and defect adjectives أَفْعَل / فَعْلَاء / فُعْل",
+   "area": "morphology",
+   "pos": [
+    "ADJ"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "Basic colours (and bodily defects) have a pattern of their own: masculine أَفْعَل, feminine فَعْلَاء, plural فُعْل. They look like elatives but cannot be compared directly.",
+   "examples": [
+    {
+     "text": "أَحْمَرُ / حَمْرَاءُ / حُمْرٌ",
+     "translit": "ʾaḥmaru / ḥamrāʾu / ḥumrun",
+     "note": "red (m. / f. / pl.)"
+    },
+    {
+     "text": "أَبْيَضُ / بَيْضَاءُ / بِيضٌ",
+     "translit": "ʾabyaḍu / bayḍāʾu / bīḍun",
+     "note": "white"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "feminine",
+     "plurals",
+     "declension"
+    ],
+    "paradigm": [
+     "ADJ"
+    ],
+    "grammar": [
+     "fn.comparison"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.17"
+  },
+  {
+   "id": "ar.morph.nisba",
+   "title": "Relational adjectives (nisba) in -iyy",
+   "area": "morphology",
+   "pos": [
+    "ADJ",
+    "NOUN"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "he",
+    "tr"
+   ],
+   "what": "-iyy (fem. -iyya) makes adjectives of origin, material or relation from nouns, including colours from things. Turkish borrowed it as -î (millî).",
+   "examples": [
+    {
+     "text": "لُبْنَان → لُبْنَانِيّ",
+     "translit": "lubnān → lubnānī",
+     "note": "Lebanon → Lebanese"
+    },
+    {
+     "text": "بُنّ → بُنِّيّ",
+     "translit": "bunn → bunnī",
+     "note": "coffee beans → brown"
+    },
+    {
+     "text": "وَرْد → وَرْدِيّ",
+     "translit": "ward → wardī",
+     "note": "roses → pink"
+    }
+   ],
+   "level": "word",
+   "record": "derivedFrom on every adjective: the base noun of a nisba (بُنِّيّ ← بُنّ), the verb of a participle (بَارِد ← بَرَدَ), or none for a basic adjective.",
+   "model": {
+    "wordFields": [
+     "derivedFrom"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "The nouns in -iyy (شُرْطِيّ) show the measure فُعْلِيّ."
+   },
+   "status": "partial",
+   "gap": "A short rule page; useful for nationalities later.",
+   "when": "fd.17"
+  },
+  {
+   "id": "ar.morph.diminutive",
+   "title": "Diminutive pattern fuʿayl",
+   "area": "morphology",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "el",
+    "ru",
+    "de"
+   ],
+   "what": "A pattern with -ay- makes diminutives; it is mostly lexicalised and frequent in names.",
+   "examples": [
+    {
+     "text": "كِتَاب → كُتَيِّب",
+     "translit": "kitāb → kutayyib",
+     "note": "book → booklet"
+    },
+    {
+     "text": "نَهْر → نُهَيْر",
+     "translit": "nahr → nuhayr",
+     "note": "river → brook"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Later: a pattern note; low priority.",
+   "when": "later"
+  },
+  {
+   "id": "ar.numbers.polarity",
+   "title": "Gender polarity of 3–10",
+   "area": "numbers",
+   "pos": [
+    "NUM"
+   ],
+   "rarity": "unique",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The numbers 3–10 take the opposite gender of the counted noun's singular: with a masculine noun the number has ة, with a feminine noun it has none. Hebrew shows the same polarity.",
+   "examples": [
+    {
+     "text": "ثَلَاثَةُ كُتُبٍ",
+     "translit": "ṯalāṯatu kutubin",
+     "note": "three books (كِتَاب is masculine)"
+    },
+    {
+     "text": "ثَلَاثُ غُرَفٍ",
+     "translit": "ṯalāṯu ġurafin",
+     "note": "three rooms (غُرْفَة is feminine)"
+    }
+   ],
+   "level": "word",
+   "record": "polarity (bool) on every number; MASC/FEM cells of the number.",
+   "model": {
+    "wordFields": [
+     "polarity"
+    ],
+    "paradigm": [
+     "NUM.unit"
+    ],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [
+     "inflect",
+     "build_sentence"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.numbers.counted_noun",
+   "title": "Number and case of the counted noun",
+   "area": "numbers",
+   "pos": [
+    "NUM",
+    "NOUN"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "After 3–10 the noun is a genitive plural; after 11–99 an accusative singular; after 100 and 1000 a genitive singular. 1 and 2 are said by the noun alone (singular, dual).",
+   "examples": [
+    {
+     "text": "ثَلَاثَةُ كُتُبٍ",
+     "translit": "ṯalāṯatu kutubin",
+     "note": "3 books (gen. pl.)"
+    },
+    {
+     "text": "أَحَدَ عَشَرَ كِتَابًا",
+     "translit": "ʾaḥada ʿašara kitāban",
+     "note": "11 books (acc. sg.)"
+    },
+    {
+     "text": "مِائَةُ كِتَابٍ",
+     "translit": "miʾatu kitābin",
+     "note": "100 books (gen. sg.)"
+    }
+   ],
+   "level": "sentence",
+   "record": "countedNoun on every number (agrees / dual alone / GEN;PL / ACC;SG / GEN;SG).",
+   "model": {
+    "wordFields": [
+     "countedNoun"
+    ],
+    "paradigm": [
+     "NUM.unit",
+     "NUM.teen",
+     "NUM.ten",
+     "NUM.noun"
+    ],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [
+     "inflect",
+     "build_sentence",
+     "sentence_meaning"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "number_words exercise (§6.5) that builds number + noun from digits.",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.numbers.compound",
+   "title": "Compound numbers: 11–19 and units before tens",
+   "area": "numbers",
+   "pos": [
+    "NUM"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "de"
+   ],
+   "what": "11–19 are fixed two-part compounds ending in -a; from 21 the unit comes first and is joined with وَ, like German einundzwanzig.",
+   "examples": [
+    {
+     "text": "خَمْسَةَ عَشَرَ",
+     "translit": "ḫamsata ʿašara",
+     "note": "fifteen"
+    },
+    {
+     "text": "خَمْسَةٌ وَعِشْرُونَ",
+     "translit": "ḫamsatun wa-ʿišrūna",
+     "note": "twenty-five ('five and twenty')"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "class"
+    ],
+    "paradigm": [
+     "NUM.teen",
+     "NUM.ten"
+    ],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "21–99 compounds are not in the lexicon or the bank; number_words exercise.",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.numbers.ordinals",
+   "title": "Ordinal numbers and the clock",
+   "area": "numbers",
+   "pos": [
+    "ADJ",
+    "NUM"
+   ],
+   "rarity": "common",
+   "sharedWith": [],
+   "what": "Ordinals use the fāʿil pattern of the root (except 'first'); the hour is said with a feminine ordinal: 'the fifth hour'.",
+   "examples": [
+    {
+     "text": "الْأَوَّلُ / الثَّانِي / الْخَامِسُ",
+     "translit": "al-ʾawwalu / aṯ-ṯānī / al-ḫāmisu",
+     "note": "the first / second / fifth"
+    },
+    {
+     "text": "السَّاعَةُ الْخَامِسَةُ",
+     "translit": "as-sāʿatu l-ḫāmisatu",
+     "note": "five o'clock"
+    }
+   ],
+   "level": "word",
+   "record": "ordinal on every number (أَوَّل، ثَالِث، حَادِيَ عَشَرَ، الْعِشْرُونَ).",
+   "model": {
+    "wordFields": [
+     "ordinal"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.time"
+    ],
+    "exercises": [],
+    "other": "time.oclock is marked absent; the ordinals are stated on the numbers but are not lexemes of their own."
+   },
+   "status": "partial",
+   "gap": "Ordinal lexemes with their paradigms (feminine ثَالِثَة …) and a clock/date exercise (§6.5).",
+   "when": "later"
+  },
+  {
+   "id": "ar.syn.nominal_sentence",
+   "title": "Nominal sentences: no 'to be' in the present",
+   "area": "syntax",
+   "pos": [],
+   "rarity": "common",
+   "sharedWith": [
+    "he",
+    "ru"
+   ],
+   "what": "A subject and a predicate simply stand side by side, both in the nominative. كَانَ appears in the past and future and puts its predicate in the accusative.",
+   "examples": [
+    {
+     "text": "أَنَا طَالِبٌ",
+     "translit": "ʾana ṭālibun",
+     "note": "I (am) a student"
+    },
+    {
+     "text": "كُنْتُ طَالِبًا",
+     "translit": "kuntu ṭāliban",
+     "note": "I was a student (accusative)"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.copula"
+    ],
+    "exercises": [
+     "sentence_meaning",
+     "build_sentence",
+     "transform",
+     "inflect"
+    ],
+    "other": "Bank frames fr.be.person, fr.be.where."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.01"
+  },
+  {
+   "id": "ar.syn.def_phrase_vs_clause",
+   "title": "Article decides phrase or sentence",
+   "area": "syntax",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "With al- on both noun and adjective it is a phrase; with al- only on the noun it is a complete verbless sentence. The same holds for demonstratives.",
+   "examples": [
+    {
+     "text": "الْبَيْتُ الْكَبِيرُ",
+     "translit": "al-baytu l-kabīru",
+     "note": "the big house"
+    },
+    {
+     "text": "الْبَيْتُ كَبِيرٌ",
+     "translit": "al-baytu kabīrun",
+     "note": "the house is big"
+    },
+    {
+     "text": "هٰذَا الطَّالِبُ / هٰذَا طَالِبٌ",
+     "translit": "hāḏā ṭ-ṭālibu / hāḏā ṭālibun",
+     "note": "this student / this is a student"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.adjective",
+     "fn.demonstrative"
+    ],
+    "exercises": [
+     "transform",
+     "build_sentence"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.03"
+  },
+  {
+   "id": "ar.syn.word_order",
+   "title": "VSO and SVO with agreement asymmetry",
+   "area": "syntax",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Both verb-first and subject-first orders are normal. A verb before a noun subject stays singular (showing only gender); a verb after it agrees fully.",
+   "examples": [
+    {
+     "text": "يَأْكُلُ الْأَطْفَالُ",
+     "translit": "yaʾkulu l-ʾaṭfālu",
+     "note": "the children eat (verb singular)"
+    },
+    {
+     "text": "الْأَطْفَالُ يَأْكُلُونَ",
+     "translit": "al-ʾaṭfālu yaʾkulūna",
+     "note": "the children eat (verb plural)"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.present",
+     "fn.copula",
+     "fn.agreement"
+    ],
+    "exercises": [
+     "build_sentence"
+    ],
+    "other": "Explained in the 'ask yourself' procedure of fn.present; build_sentence accepts alts."
+   },
+   "status": "partial",
+   "gap": "A WordOrder transform variant and a contrast exercise (§6.4) for the agreement.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.syn.nonhuman_plural",
+   "title": "Non-human plurals agree as feminine singular",
+   "area": "syntax",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "VERB",
+    "PRON"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "Plurals of things, animals and ideas take feminine singular adjectives, verbs and pronouns; only plurals of people take plural agreement.",
+   "examples": [
+    {
+     "text": "هٰذِهِ الْكُتُبُ جَدِيدَةٌ",
+     "translit": "hāḏihi l-kutubu jadīdatun",
+     "note": "these books are new (feminine singular)"
+    },
+    {
+     "text": "هٰؤُلَاءِ طُلَّابٌ",
+     "translit": "hāʾulāʾi ṭullābun",
+     "note": "these are students (human: plural)"
+    }
+   ],
+   "level": "sentence",
+   "record": "human (bool) on every noun.",
+   "model": {
+    "wordFields": [
+     "human"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.agreement",
+     "fn.adjective",
+     "fn.demonstrative"
+    ],
+    "exercises": [
+     "transform",
+     "inflect",
+     "quiz"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The agree generator (§6.3) is not implemented.",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.syn.kana_laysa",
+   "title": "كَانَ and لَيْسَ put the predicate in the accusative",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "The 'sisters of kāna' (كَانَ, لَيْسَ, أَصْبَحَ, مَا زَالَ …) keep the subject nominative and make the predicate accusative.",
+   "examples": [
+    {
+     "text": "لَسْتُ مُعَلِّمًا",
+     "translit": "lastu muʿalliman",
+     "note": "I am not a teacher"
+    },
+    {
+     "text": "كَانَ الْجَوُّ بَارِدًا",
+     "translit": "kāna l-jawwu bāridan",
+     "note": "the weather was cold"
+    }
+   ],
+   "level": "sentence",
+   "record": "governs: predicate ACC (on كَانَ, لَيْسَ).",
+   "model": {
+    "wordFields": [
+     "governs"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.copula",
+     "fn.negation"
+    ],
+    "exercises": [
+     "inflect",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.08"
+  },
+  {
+   "id": "ar.syn.inna_sisters",
+   "title": "إِنَّ and its sisters: accusative subject",
+   "area": "syntax",
+   "pos": [
+    "SCONJ",
+    "CCONJ",
+    "PART"
+   ],
+   "rarity": "unique",
+   "sharedWith": [],
+   "what": "إِنَّ, أَنَّ, لٰكِنَّ, لِأَنَّ, كَأَنَّ, لَعَلَّ must be followed by a noun in the accusative or a pronoun suffix; the predicate stays nominative.",
+   "examples": [
+    {
+     "text": "لِأَنَّ الْجَوَّ بَارِدٌ",
+     "translit": "li-ʾanna l-jawwa bāridun",
+     "note": "because the weather is cold"
+    },
+    {
+     "text": "لِأَنَّهُ مُتْعَبٌ",
+     "translit": "li-ʾannahu mutʿabun",
+     "note": "because he is tired"
+    }
+   ],
+   "level": "sentence",
+   "record": "governs on every conjunction: ACC+suffix (أَنَّ، لِأَنَّ، لٰكِنَّ) | SBJV | PST | clause.",
+   "model": {
+    "wordFields": [
+     "governs"
+    ],
+    "paradigm": [
+     "SCONJ.pron",
+     "CCONJ.pron"
+    ],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [
+     "inflect"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "إِنَّ itself, كَأَنَّ and لَعَلَّ are not in the lexicon.",
+   "when": "fd.18"
+  },
+  {
+   "id": "ar.syn.negation",
+   "title": "Negators chosen by sentence type and tense",
+   "area": "syntax",
+   "pos": [
+    "PART",
+    "VERB"
+   ],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "لَا + present, لَمْ + jussive for the past, لَنْ + subjunctive for the future, لَيْسَ for verbless sentences, مَا + past in classical and dialectal style, and لَا + jussive for 'don't!'.",
+   "examples": [
+    {
+     "text": "لَا أَكْتُبُ",
+     "translit": "lā ʾaktubu",
+     "note": "I don't write"
+    },
+    {
+     "text": "لَمْ أَكْتُبْ",
+     "translit": "lam ʾaktub",
+     "note": "I didn't write"
+    },
+    {
+     "text": "لَنْ أَكْتُبَ",
+     "translit": "lan ʾaktuba",
+     "note": "I won't write"
+    },
+    {
+     "text": "لَيْسَ هُنَا",
+     "translit": "laysa hunā",
+     "note": "he is not here"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "VERB.defective"
+    ],
+    "grammar": [
+     "fn.negation"
+    ],
+    "exercises": [
+     "inflect",
+     "transform",
+     "build_sentence"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "لَمْ and لَنْ are not lexemes and jussive cells are missing; a contrast exercise (§6.4) over the negators.",
+   "when": "fd.08"
+  },
+  {
+   "id": "ar.syn.questions",
+   "title": "Questions: هَلْ, أَ, أَمْ and بَلَى",
+   "area": "syntax",
+   "pos": [
+    "PART",
+    "CCONJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he",
+    "de"
+   ],
+   "what": "A yes/no question puts هَلْ (or the prefix أَ) before the unchanged statement. In a choice question 'or' is أَمْ, not أَوْ. 'Yes' to a negative question is بَلَى, like German doch.",
+   "examples": [
+    {
+     "text": "هَلْ تُحِبُّ الشَّايَ؟",
+     "translit": "hal tuḥibbu š-šāya?",
+     "note": "do you like tea?"
+    },
+    {
+     "text": "أَتُرِيدُ شَايًا أَمْ قَهْوَةً؟",
+     "translit": "ʾaturīdu šāyan ʾam qahwatan?",
+     "note": "do you want tea or coffee?"
+    },
+    {
+     "text": "أَلَا تُحِبُّ الشَّايَ؟ بَلَى!",
+     "translit": "ʾa-lā tuḥibbu š-šāya? balā!",
+     "note": "don't you like tea? — yes, I do!"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.question.yesno",
+     "fn.question.wh"
+    ],
+    "exercises": [
+     "transform",
+     "build_sentence",
+     "sentence_meaning"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.09"
+  },
+  {
+   "id": "ar.syn.idafa_adjective",
+   "title": "An adjective after a construct: case shows which noun it describes",
+   "area": "syntax",
+   "pos": [
+    "ADJ",
+    "NOUN"
+   ],
+   "rarity": "rare",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Nothing may come between the two nouns of an iḍāfa, so every adjective follows the whole construct; its case and gender show which noun it belongs to.",
+   "examples": [
+    {
+     "text": "بَابُ الْبَيْتِ الْكَبِيرُ",
+     "translit": "bābu l-bayti l-kabīru",
+     "note": "the big door of the house (nominative, with بَاب)"
+    },
+    {
+     "text": "بَابُ الْبَيْتِ الْكَبِيرِ",
+     "translit": "bābu l-bayti l-kabīri",
+     "note": "the door of the big house (genitive, with الْبَيْت)"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "A point in a construct function; bank sentences with variants.",
+   "when": "later"
+  },
+  {
+   "id": "ar.syn.adverbial_accusative",
+   "title": "The adverbial accusative of time, place and manner",
+   "area": "syntax",
+   "pos": [
+    "NOUN",
+    "ADV"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "el"
+   ],
+   "what": "Time and manner are often said with a bare accusative instead of a preposition, as Greek says την Παρασκευή; most adverbs are frozen accusatives in -an.",
+   "examples": [
+    {
+     "text": "يَوْمَ الْجُمُعَةِ",
+     "translit": "yawma l-jumuʿati",
+     "note": "on Friday"
+    },
+    {
+     "text": "صَبَاحًا",
+     "translit": "ṣabāḥan",
+     "note": "in the morning"
+    },
+    {
+     "text": "مَشْيًا",
+     "translit": "mašyan",
+     "note": "on foot"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "derivedFrom"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.time.day",
+     "fn.direction",
+     "fn.prep.place"
+    ],
+    "exercises": [
+     "sentence_meaning",
+     "build_sentence",
+     "transform"
+    ],
+    "other": "derivedFrom on adverbs names the base word (كَثِيرًا ← كَثِير، الْيَوْمَ ← يَوْم)."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.14"
+  },
+  {
+   "id": "ar.syn.hal",
+   "title": "The circumstantial accusative (ḥāl)",
+   "area": "syntax",
+   "pos": [
+    "ADJ",
+    "NOUN"
+   ],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "An indefinite accusative describes the state of the subject or object during the action.",
+   "examples": [
+    {
+     "text": "جَاءَ الْوَلَدُ ضَاحِكًا",
+     "translit": "jāʾa l-waladu ḍāḥikan",
+     "note": "the boy came laughing"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "A function after the past (core grammar).",
+   "when": "later"
+  },
+  {
+   "id": "ar.syn.relative",
+   "title": "Relative clauses: الَّذِي only after definite heads, with a resumptive pronoun",
+   "area": "syntax",
+   "pos": [
+    "PRON"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The relative pronoun agrees with a definite head (الَّذِي، الَّتِي، الَّذِينَ …); after an indefinite head there is none. The clause repeats the head as a pronoun.",
+   "examples": [
+    {
+     "text": "الْكِتَابُ الَّذِي قَرَأْتُهُ",
+     "translit": "al-kitābu llaḏī qaraʾtuhu",
+     "note": "the book that I read (it)"
+    },
+    {
+     "text": "كِتَابٌ قَرَأْتُهُ",
+     "translit": "kitābun qaraʾtuhu",
+     "note": "a book (that) I read"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Relative pronoun lexemes (with dual and plural forms) and the cr.06 function.",
+   "when": "cr.06"
+  },
+  {
+   "id": "ar.syn.conditional",
+   "title": "Three 'if's: إِذَا, إِنْ, لَوْ",
+   "area": "syntax",
+   "pos": [
+    "SCONJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "إِذَا is a likely or expected condition, إِنْ an open possibility (with the jussive or past), لَوْ an unreal condition (with لَـ in the result). The past tense is used after إِذَا even for the future.",
+   "examples": [
+    {
+     "text": "إِذَا جَاءَ الصَّيْفُ نُسَافِرُ",
+     "translit": "ʾiḏā jāʾa ṣ-ṣayfu nusāfiru",
+     "note": "when summer comes, we travel"
+    },
+    {
+     "text": "لَوْ كُنْتُ غَنِيًّا لَسَافَرْتُ",
+     "translit": "law kuntu ġaniyyan la-sāfartu",
+     "note": "if I were rich, I would travel"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [],
+    "other": "Only إِذَا is a lexeme."
+   },
+   "status": "partial",
+   "gap": "إِنْ and لَوْ lexemes and the cr.05 function.",
+   "when": "cr.05"
+  },
+  {
+   "id": "ar.syn.existential",
+   "title": "'There is': fronted place, هُنَاكَ, يُوجَدُ",
+   "area": "syntax",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "An indefinite subject does not start a sentence: the place phrase comes first, or the sentence opens with هُنَاكَ or يُوجَدُ.",
+   "examples": [
+    {
+     "text": "فِي الْبَيْتِ كِتَابٌ",
+     "translit": "fī l-bayti kitābun",
+     "note": "there is a book in the house"
+    },
+    {
+     "text": "هُنَاكَ مَطْعَمٌ قَرِيبٌ",
+     "translit": "hunāka maṭʿamun qarībun",
+     "note": "there is a restaurant nearby"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.senses"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.place"
+    ],
+    "exercises": [
+     "build_sentence",
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "يُوجَدُ is not in the lexicon; 'there is' is only a sense of هُنَاكَ.",
+   "when": "fd.12"
+  },
+  {
+   "id": "ar.syn.possession",
+   "title": "Possession without 'to have'",
+   "area": "syntax",
+   "pos": [
+    "ADP"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "he",
+    "ru",
+    "tr"
+   ],
+   "what": "'To have' is a preposition with a suffix: عِنْدَ (have, own), لِـ (belongs to, kinship), مَعَ (have on me). The possessed thing is the grammatical subject; past with كَانَ, negation with لَيْسَ.",
+   "examples": [
+    {
+     "text": "عِنْدِي سَيَّارَةٌ",
+     "translit": "ʿindī sayyāratun",
+     "note": "I have a car"
+    },
+    {
+     "text": "لِي أَخٌ",
+     "translit": "lī ʾaḫun",
+     "note": "I have a brother"
+    },
+    {
+     "text": "مَعِي قَلَمٌ",
+     "translit": "maʿī qalamun",
+     "note": "I have a pen (on me)"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "ADP;1;SG"
+    ],
+    "grammar": [
+     "fn.have",
+     "fn.possessive"
+    ],
+    "exercises": [
+     "inflect",
+     "transform",
+     "build_sentence"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.syn.verb_government",
+   "title": "Verbs with fixed prepositions or a direct object",
+   "area": "syntax",
+   "pos": [
+    "VERB",
+    "ADJ"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "de",
+    "el",
+    "ru"
+   ],
+   "what": "Many verbs take a fixed preposition, and some take an object where European languages use a preposition (and vice versa). This must be learned per verb.",
+   "examples": [
+    {
+     "text": "ذَهَبَ إِلَى",
+     "translit": "ḏahaba ʾilā",
+     "note": "to go to"
+    },
+    {
+     "text": "فَكَّرَ فِي",
+     "translit": "fakkara fī",
+     "note": "to think about"
+    },
+    {
+     "text": "بَحَثَ عَنْ",
+     "translit": "baḥaṯa ʿan",
+     "note": "to look for"
+    },
+    {
+     "text": "اِنْتَظَرَ الْحَافِلَةَ",
+     "translit": "intaẓara l-ḥāfilata",
+     "note": "to wait for the bus (direct object)"
+    }
+   ],
+   "level": "word",
+   "record": "governs on every verb: [{case, prep, what, senses}], per meaning (ذَهَبَ إِلَى، اِنْتَظَرَ + ACC، عَادَ الْمَرِيضَ).",
+   "model": {
+    "wordFields": [
+     "governs"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.direction",
+     "fn.object"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The prepositions of adjectives (قَرِيبٌ مِنْ، بَعِيدٌ عَنْ) are not a parameter; no collocation exercise.",
+   "when": "fd.13"
+  },
+  {
+   "id": "ar.syn.vocative",
+   "title": "The vocative يَا",
+   "area": "syntax",
+   "pos": [
+    "PART"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "el"
+   ],
+   "what": "People are called with يَا before the name or title; a definite address noun loses al-.",
+   "examples": [
+    {
+     "text": "يَا أَخِي",
+     "translit": "yā ʾaḫī",
+     "note": "brother! (friendly address)"
+    },
+    {
+     "text": "يَا أَحْمَدُ",
+     "translit": "yā ʾAḥmadu",
+     "note": "Ahmad!"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.senses"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Appears only in profile senses (يَا عَمِّي، يَا أُخْتِي)."
+   },
+   "status": "missing",
+   "gap": "A يَا lexeme and a short pragmatics page.",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.lex.kinship_split",
+   "title": "Paternal and maternal relatives have different words",
+   "area": "lexicon",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "tr"
+   ],
+   "what": "Uncles and aunts are named by the side of the family: عَمّ / عَمَّة on the father's side, خَال / خَالَة on the mother's. There is no word for cousin, nephew or niece: they are 'son of my paternal uncle' and so on. Turkish makes the same split (amca, dayı, hala, teyze).",
+   "examples": [
+    {
+     "text": "عَمّ / خَال",
+     "translit": "ʿamm / ḫāl",
+     "note": "father's brother / mother's brother"
+    },
+    {
+     "text": "اِبْنُ عَمِّي",
+     "translit": "ibnu ʿammī",
+     "note": "my cousin (son of my father's brother)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Separate lexemes per side, told apart by contrasts (axis “side of the family”); family.cousin, family.nephew, family.niece are marked absent with the eight descriptive phrases."
+   },
+   "status": "partial",
+   "gap": "A sense_split exercise (§6.2) for the side of the family; the descriptive phrases are not lexemes.",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.prag.addressee_gender",
+   "title": "Formulas that change with the listener (and the speaker)",
+   "area": "pragmatics",
+   "pos": [
+    "INTJ",
+    "ADJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Every polite formula that contains 'you' has a form for a man, a woman and a group; formulas that describe the speaker (آسِف 'sorry') agree with the speaker.",
+   "examples": [
+    {
+     "text": "تُصْبِحُ عَلَى خَيْرٍ / تُصْبِحِينَ عَلَى خَيْرٍ",
+     "translit": "tuṣbiḥu ʿalā ḫayrin / tuṣbiḥīna ʿalā ḫayrin",
+     "note": "good night (to a man / to a woman)"
+    },
+    {
+     "text": "آسِفٌ / آسِفَةٌ",
+     "translit": "ʾāsifun / ʾāsifatun",
+     "note": "sorry (said by a man / a woman)"
+    }
+   ],
+   "level": "word",
+   "record": "addressee on every formula (INTJ): MASC | FEM | PL | any.",
+   "model": {
+    "wordFields": [
+     "addressee"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [
+     "transform"
+    ],
+    "other": "One lexeme per addressee; transform variant Addressee."
+   },
+   "status": "partial",
+   "gap": "The forms of one formula are not linked to each other; the plural forms (كَيْفَ حَالُكُمْ) are not lexemes.",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.prag.no_tv",
+   "title": "No polite 'you' (no T/V distinction)",
+   "area": "pragmatics",
+   "pos": [
+    "PRON"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "en"
+   ],
+   "what": "Arabic has no Sie/εσείς/Вы form: politeness comes from formulas (مِنْ فَضْلِكَ), titles (أُسْتَاذ، سَيِّد، دُكْتُور) and kin terms. A plural of respect exists only in high style.",
+   "examples": [
+    {
+     "text": "مِنْ فَضْلِكَ يَا أُسْتَاذُ",
+     "translit": "min faḍlika yā ʾustāḏu",
+     "note": "please, sir (to a teacher or professional)"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings",
+     "fn.imperative"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Titles (أُسْتَاذ، سَيِّد، سَيِّدَة) are not lexemes; a register / dialogue_turn exercise (§6.5).",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.prag.greeting_pairs",
+   "title": "Greetings with fixed answers",
+   "area": "pragmatics",
+   "pos": [
+    "INTJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "Many greetings require a set reply that echoes and outdoes them.",
+   "examples": [
+    {
+     "text": "السَّلَامُ عَلَيْكُمْ → وَعَلَيْكُمُ السَّلَامُ",
+     "translit": "as-salāmu ʿalaykum → wa-ʿalaykumu s-salām",
+     "note": "peace be upon you → and upon you be peace"
+    },
+    {
+     "text": "صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ",
+     "translit": "ṣabāḥu l-ḫayr → ṣabāḥu n-nūr",
+     "note": "morning of goodness → morning of light"
+    }
+   ],
+   "level": "discourse",
+   "record": "response on every formula (INTJ): the fixed answer, or none.",
+   "model": {
+    "wordFields": [
+     "response"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [
+     "sentence_meaning",
+     "quiz"
+    ],
+    "other": "The answers are lexemes with role and no concept."
+   },
+   "status": "partial",
+   "gap": "The answer is text, not a link to the answer lexeme; dialogue_turn exercise.",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.prag.religious_formulas",
+   "title": "Religious formulas in everyday speech",
+   "area": "pragmatics",
+   "pos": [
+    "INTJ"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "tr",
+    "el"
+   ],
+   "what": "Formulas naming God are used by Muslims and Christians alike as ordinary politeness: for the future, for good news, before starting, when praising.",
+   "examples": [
+    {
+     "text": "إِنْ شَاءَ اللّٰهُ",
+     "translit": "ʾin šāʾa llāhu",
+     "note": "God willing — said of anything in the future"
+    },
+    {
+     "text": "الْحَمْدُ لِلّٰهِ",
+     "translit": "al-ḥamdu li-llāhi",
+     "note": "praise be to God — 'fine, thank God'"
+    },
+    {
+     "text": "مَا شَاءَ اللّٰهُ",
+     "translit": "mā šāʾa llāhu",
+     "note": "what God has willed — admiration, against envy"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "role"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [],
+    "other": "Only الْحَمْدُ لِلّٰهِ is a lexeme."
+   },
+   "status": "partial",
+   "gap": "Lexemes for إِنْ شَاءَ اللّٰهُ، مَا شَاءَ اللّٰهُ، بِسْمِ اللّٰهِ with usage notes; bridges to Turkish inşallah, maşallah.",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.lex.diglossia",
+   "title": "Diglossia: Standard Arabic and the dialects",
+   "area": "lexicon",
+   "pos": [],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "Modern Standard Arabic is written and used formally; everyone speaks a regional dialect at home, with different words, pronouns and verb forms. The learner must know that everyday speech will differ.",
+   "examples": [
+    {
+     "text": "مَاذَا تُرِيدُ؟",
+     "translit": "māḏā turīdu?",
+     "note": "what do you want? (Standard)"
+    },
+    {
+     "text": "شو بدك؟",
+     "translit": "šū baddak?",
+     "note": "what do you want? (Levantine)"
+    },
+    {
+     "text": "عايز إيه؟",
+     "translit": "ʿāyiz ʾēh?",
+     "note": "what do you want? (Egyptian)"
+    }
+   ],
+   "level": "discourse",
+   "record": "variants: [{lemma, region}] on lexemes; register on senses.",
+   "model": {
+    "wordFields": [
+     "profile.register",
+     "profile.synonyms"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview",
+     "fn.greetings"
+    ],
+    "exercises": [],
+    "other": "Dialect words appear only as profile synonyms with region."
+   },
+   "status": "partial",
+   "gap": "The variants field (§4.5) is unused in ar; dialect layers are planned for later.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.lex.regional_standard",
+   "title": "Regional variation inside the Standard: month names",
+   "area": "lexicon",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "rare",
+   "sharedWith": [],
+   "what": "The Levant and Iraq use old Syriac-Babylonian month names, Egypt, the Gulf and the Maghreb Latin-based ones; both are standard and often written together.",
+   "examples": [
+    {
+     "text": "كَانُونُ الثَّانِي / يَنَايِرُ",
+     "translit": "kānūnu ṯ-ṯānī / yanāyiru",
+     "note": "January (Levant–Iraq / Egypt–Gulf)"
+    },
+    {
+     "text": "آذَار / مَارِس",
+     "translit": "ʾāḏār / māris",
+     "note": "March"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "One lexeme per region (the month names), told apart by contrasts on the axis “region”."
+   },
+   "status": "partial",
+   "gap": "A region field so the app can pick the learner's set and quiz the pairs.",
+   "when": "fd.15"
+  },
+  {
+   "id": "ar.lex.loans_bridges",
+   "title": "Loanwords in and out: bridges for the learner",
+   "area": "lexicon",
+   "pos": [],
+   "rarity": "common",
+   "sharedWith": [
+    "tr",
+    "el",
+    "en",
+    "de",
+    "ru"
+   ],
+   "what": "Arabic has old loans from Greek, Persian and Aramaic and new ones from Italian, French and English; it gave thousands of words to Turkish and many to European languages (sugar, coffee, algebra).",
+   "examples": [
+    {
+     "text": "قَلَم",
+     "translit": "qalam",
+     "note": "pen — from Greek κάλαμος"
+    },
+    {
+     "text": "طَاوِلَة",
+     "translit": "ṭāwila",
+     "note": "table — from Italian tavola"
+    },
+    {
+     "text": "كِتَاب",
+     "translit": "kitāb",
+     "note": "book — Turkish kitap"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.etymology"
+    ],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": "Etymologies are in profiles; bridges.json (§4.10) does not exist yet."
+   },
+   "status": "partial",
+   "gap": "bridges.json with cognates/loans and the cognate_bridge / etymology_link exercises (P6).",
+   "when": "later"
+  },
+  {
+   "id": "ar.lex.false_friends",
+   "title": "False friends through Turkish and English",
+   "area": "lexicon",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "tr",
+    "en"
+   ],
+   "what": "Loanwords often shifted meaning on the way: Turkish hala is the father's sister, but Arabic خَالَة is the mother's sister; English magazine comes from مَخَازِن 'storehouses'.",
+   "examples": [
+    {
+     "text": "خَالَة",
+     "translit": "ḫāla",
+     "note": "mother's sister — Turkish hala = father's sister"
+    },
+    {
+     "text": "مَخْزَن → مَخَازِن",
+     "translit": "maḫzan → maḫāzin",
+     "note": "storehouse(s) — source of 'magazine'"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.pitfalls"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "bridges.json entries with kind falseFriend.",
+   "when": "later"
+  },
+  {
+   "id": "ar.cult.calendar_week",
+   "title": "The week and the calendar",
+   "area": "culture",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "The week starts on Sunday; Friday (الْجُمُعَة, 'the gathering') is the day of congregational prayer and, with Saturday, the weekend in many Arab states. Religious life follows the lunar Hijri calendar (رَمَضَان …), which moves about eleven days a year against the solar calendar.",
+   "examples": [
+    {
+     "text": "الْجُمُعَة",
+     "translit": "al-jumuʿa",
+     "note": "Friday — 'the gathering'"
+    },
+    {
+     "text": "رَمَضَان",
+     "translit": "ramaḍān",
+     "note": "the month of fasting (9th Hijri month)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.time.day"
+    ],
+    "exercises": [],
+    "other": "Day names are lexemes; Hijri months are absent."
+   },
+   "status": "partial",
+   "gap": "Hijri month names and a culture note.",
+   "when": "fd.14"
+  },
+  {
+   "id": "ar.cult.days_numbers",
+   "title": "Days of the week named by numbers",
+   "area": "lexicon",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "he",
+    "el",
+    "ru"
+   ],
+   "what": "Sunday to Thursday are named after the numbers one to five: the root shows the number, as in Greek Δευτέρα–Πέμπτη and Hebrew יוֹם רִאשׁוֹן–חֲמִישִׁי.",
+   "examples": [
+    {
+     "text": "الِاثْنَيْن ← اِثْنَان",
+     "translit": "al-iṯnayn ← iṯnān",
+     "note": "Monday ← two"
+    },
+    {
+     "text": "الْخَمِيس ← خَمْسَة",
+     "translit": "al-ḫamīs ← ḫamsa",
+     "note": "Thursday ← five"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "The day names carry the roots of the numbers (ء ح د، ث ن ي، ث ل ث، ر ب ع، خ م س) and of ج م ع، س ب ت."
+   },
+   "status": "partial",
+   "gap": "A root_family item linking the days to the numbers.",
+   "when": "fd.14"
+  },
+  {
+   "id": "ar.cult.names_kunya",
+   "title": "Names: kunya (أَبُو / أُمُّ) and nasab (اِبْن)",
+   "area": "culture",
+   "pos": [
+    "NOUN",
+    "PROPN"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "Parents are respectfully called 'father/mother of' their (eldest) child; traditional names chain 'son of'.",
+   "examples": [
+    {
+     "text": "أَبُو أَحْمَدَ / أُمُّ أَحْمَدَ",
+     "translit": "ʾabū ʾAḥmada / ʾummu ʾAḥmada",
+     "note": "Ahmad's father / Ahmad's mother"
+    },
+    {
+     "text": "مُحَمَّدُ بْنُ عَبْدِ اللّٰهِ",
+     "translit": "Muḥammadu bnu ʿAbdi llāhi",
+     "note": "Muhammad son of Abdallah"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.senses"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Senses s3 of أَب and أُمّ, s2 of اِبْن."
+   },
+   "status": "partial",
+   "gap": "A culture note on names; bank sentences.",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.prag.fictive_kin",
+   "title": "Kin terms as polite address",
+   "area": "pragmatics",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [
+    "tr",
+    "ru"
+   ],
+   "what": "Strangers are addressed as relatives: an older man 'uncle', an older woman 'auntie', a peer 'brother' or 'sister'.",
+   "examples": [
+    {
+     "text": "يَا عَمِّي",
+     "translit": "yā ʿammī",
+     "note": "uncle! (to an older man)"
+    },
+    {
+     "text": "يَا أُخْتِي",
+     "translit": "yā ʾuḫtī",
+     "note": "sister! (to a woman)"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.senses"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "A pragmatics note and dialogue exercises (§6.5).",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.lex.multiword",
+   "title": "Concepts said with a construct instead of a compound",
+   "area": "lexicon",
+   "pos": [
+    "NOUN"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "Where German makes a compound, Arabic uses an iḍāfa or noun + adjective; the whole phrase inflects as a unit (the first noun takes the case, the second the article).",
+   "examples": [
+    {
+     "text": "غُرْفَةُ نَوْمٍ / غُرْفَةُ النَّوْمِ",
+     "translit": "ġurfatu nawmin / ġurfatu n-nawmi",
+     "note": "a bedroom / the bedroom (lit. room of sleep)"
+    },
+    {
+     "text": "سَيَّارَةُ أُجْرَةٍ",
+     "translit": "sayyāratu ʾujratin",
+     "note": "taxi (car of hire)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [
+     "N;NOM;SG;DEF"
+    ],
+    "grammar": [
+     "fn.case"
+    ],
+    "exercises": [],
+    "other": "Multiword lexemes with full forms; the tokenizer matches multi-word spans first."
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.11"
+  },
+  {
+   "id": "ar.lex.idioms",
+   "title": "Proverbs, Qurʾānic phrases and rhymed sayings",
+   "area": "lexicon",
+   "pos": [],
+   "rarity": "common",
+   "sharedWith": [
+    "el",
+    "tr",
+    "ru"
+   ],
+   "what": "Proverbs (أَمْثَال) and fixed classical phrases are frequent in speech and writing; many are rhymed or parallel.",
+   "examples": [
+    {
+     "text": "الْوَقْتُ كَالسَّيْفِ، إِنْ لَمْ تَقْطَعْهُ قَطَعَكَ",
+     "translit": "al-waqtu ka-s-sayfi, ʾin lam taqṭaʿhu qaṭaʿaka",
+     "note": "time is like a sword: if you do not cut it, it cuts you"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "profile.phrases"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "Profiles have phrases; idiom_meaning (§6.2) is not implemented."
+   },
+   "status": "partial",
+   "gap": "The idiom_meaning exercise.",
+   "when": "later"
+  },
+  {
+   "id": "ar.sem.polysemy_homonymy",
+   "title": "Polysemy and homonymy inside roots",
+   "area": "semantics",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADJ"
+   ],
+   "rarity": "common",
+   "sharedWith": [
+    "he"
+   ],
+   "what": "One word often covers concepts that other languages separate (house / verse, grandfather / luck, maternal uncle / mole), sometimes with a different plural per meaning; distinct roots also coincide in spelling.",
+   "examples": [
+    {
+     "text": "بَيْت",
+     "translit": "bayt",
+     "note": "house; verse of a poem (plural أَبْيَات)"
+    },
+    {
+     "text": "خَال",
+     "translit": "ḫāl",
+     "note": "mother's brother; beauty mark"
+    },
+    {
+     "text": "جَدّ",
+     "translit": "jadd",
+     "note": "grandfather; good fortune"
+    }
+   ],
+   "level": "word",
+   "record": "profile.senses: every meaning a concept or “of” another; per-meaning plurals (plurals.senses) and per-meaning forms (meaningForms: يَمِين “oath” is feminine, اللَّيْلَةَ tonight, عِيَادَة).",
+   "model": {
+    "wordFields": [
+     "profile.senses",
+     "plurals",
+     "meaningForms"
+    ],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": "The word card shows every meaning with its own forms."
+   },
+   "status": "partial",
+   "gap": "sense_pick exercise.",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.syn.quantifiers",
+   "title": "كُلّ and بَعْض are nouns in construct",
+   "area": "syntax",
+   "pos": [
+    "NOUN",
+    "DET"
+   ],
+   "rarity": "uncommon",
+   "sharedWith": [],
+   "what": "'All', 'every' and 'some' are nouns followed by a genitive: كُلّ + definite plural = all, كُلّ + indefinite singular = every.",
+   "examples": [
+    {
+     "text": "كُلُّ الطُّلَّابِ",
+     "translit": "kullu ṭ-ṭullābi",
+     "note": "all the students"
+    },
+    {
+     "text": "كُلَّ يَوْمٍ",
+     "translit": "kulla yawmin",
+     "note": "every day (adverbial accusative)"
+    },
+    {
+     "text": "بَعْضُ الطُّلَّابِ",
+     "translit": "baʿḍu ṭ-ṭullābi",
+     "note": "some of the students"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [
+     "class"
+    ],
+    "paradigm": [
+     "NOUN.quant"
+    ],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [
+     "inflect",
+     "build_sentence"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.05"
+  }
+ ],
+ "wordFeatures": {
+  "NOUN": [
+   {
+    "id": "gender",
+    "title": "gender",
+    "at": "top",
+    "type": "enum",
+    "values": [
+     "MASC",
+     "FEM"
+    ],
+    "phenomenon": "ar.morph.gender",
+    "why": "Drives the agreement of adjectives, verbs and pronouns and the polarity of the numbers 3–10."
+   },
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels and the sounds until the script is read fluently: the pausal form, without case or tanwīn ending (kitāb, muḥāmī, maqhā)."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "Links the word to its family and to the dictionary; “none” for loanwords and for phrases (their parts have their own roots)."
+   },
+   {
+    "id": "pattern",
+    "title": "pattern (wazn)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.pattern",
+    "why": "The measure in ف ع ل letters (mafʿal = place, mifʿāl = tool, fāʿil = doer …) lets the learner guess new words; “none” for loanwords, phrases and words that fit no measure."
+   },
+   {
+    "id": "sunLetter",
+    "title": "sun letter (al- assimilates)",
+    "type": "bool",
+    "phenomenon": "ar.orth.sun_letters",
+    "why": "With a sun letter the l of the article is not pronounced and the letter is doubled: الشَّمْسُ aš-šams; with a moon letter: الْقَمَرُ al-qamar."
+   },
+   {
+    "id": "human",
+    "title": "human (agreement class)",
+    "type": "bool",
+    "phenomenon": "ar.syn.nonhuman_plural",
+    "why": "Plurals of people agree in the plural; all other plurals agree as feminine singular (الْكُتُبُ جَدِيدَةٌ)."
+   },
+   {
+    "id": "plurals",
+    "title": "plurals",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "kind": "enum:broken|soundMasc|soundFem",
+     "pattern": "string?",
+     "declension": "enum:triptote|diptote|defective|invariable|sound",
+     "note": "string?",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.morph.plural.broken",
+    "why": "The plural is learned with the noun: its kind (broken, sound masculine -ūna, sound feminine -āt), its pattern and declension, and the meanings it belongs to (بُيُوت houses / أَبْيَات verses). “none” for mass nouns, names and words used only in the singular."
+   },
+   {
+    "id": "dual",
+    "title": "dual",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.number.dual",
+    "why": "Mostly regular (-āni), but ة becomes ت (سَنَتَانِ) and some duals are irregular (أَبَوَانِ); “none” for mass nouns, names and plural-only words."
+   },
+   {
+    "id": "declension",
+    "title": "declension (of the singular; of the head noun in a phrase)",
+    "type": "enum",
+    "values": [
+     "triptote",
+     "diptote",
+     "defective",
+     "invariable",
+     "dual"
+    ],
+    "phenomenon": "ar.morph.diptote",
+    "why": "Triptotes take tanwīn and -i in the genitive; diptotes (names, أَفْعَل, -ān, many broken plurals) take no tanwīn and -a; defective nouns end in -in (مُحَامٍ); invariable nouns never change (مَقْهًى، كُوسَا)."
+   },
+   {
+    "id": "unit",
+    "title": "unit noun",
+    "type": "string",
+    "classes": [
+     "NOUN.collective"
+    ],
+    "phenomenon": "ar.morph.collective_unit",
+    "why": "One piece of a collective (تُفَّاحَة from تُفَّاح); needed for counting."
+   },
+   {
+    "id": "meaningForms",
+    "title": "forms of one meaning only",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.sem.polysemy_homonymy",
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
+   }
+  ],
+  "ADJ": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels: the pausal masculine singular (kabīr, ġālī)."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "Links the adjective to the verb and the noun of the same family; “none” for adjectives made from loanwords."
+   },
+   {
+    "id": "pattern",
+    "title": "pattern (wazn)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.pattern",
+    "why": "faʿīl, fāʿil, faʿlān, afʿal (colours), nisba -ī …; “none” when no measure applies."
+   },
+   {
+    "id": "sunLetter",
+    "title": "sun letter (al- assimilates)",
+    "type": "bool",
+    "phenomenon": "ar.orth.sun_letters",
+    "why": "With a sun letter the l of the article is not pronounced and the letter is doubled: الشَّمْسُ aš-šams; with a moon letter: الْقَمَرُ al-qamar."
+   },
+   {
+    "id": "derivedFrom",
+    "title": "made from",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.nisba",
+    "why": "A participle of a verb (بَارِد ← بَرَدَ), a nisba in -ī (بُنِّيّ ← بُنّ) or an elative; “none” for a basic adjective."
+   },
+   {
+    "id": "feminine",
+    "title": "feminine form",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.adj.colour",
+    "why": "Regular -a (كَبِيرَة), but فَعْلَاء for colours (حَمْرَاء) and فَعْلَى for faʿlān (عَطْشَى)."
+   },
+   {
+    "id": "plurals",
+    "title": "masculine plural",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "kind": "enum:broken|soundMasc|soundFem",
+     "pattern": "string?",
+     "declension": "enum:triptote|diptote|defective|invariable|sound",
+     "note": "string?",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.morph.plural.multiple",
+    "why": "Broken or sound -ūna, for masculine plurals of people (non-human plurals usually take the feminine singular, though broken plurals also go with things: لَيَالٍ طِوَالٌ); some meanings have their own plural (كِبَار big / كُبَرَاء great men)."
+   },
+   {
+    "id": "declension",
+    "title": "declension (masculine singular)",
+    "type": "enum",
+    "values": [
+     "triptote",
+     "diptote",
+     "defective",
+     "invariable"
+    ],
+    "phenomenon": "ar.morph.diptote",
+    "why": "Colours (أَحْمَرُ) and faʿlān (عَطْشَانُ) are diptotes; غَالٍ is defective."
+   },
+   {
+    "id": "elative",
+    "title": "comparative / superlative (elative)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.adj.elative",
+    "why": "أَكْبَرُ from كَبِير; “none” when the comparison is made with أَكْثَرُ / أَشَدُّ + a maṣdar (colours, nisbas, participles)."
+   },
+   {
+    "id": "meaningForms",
+    "title": "forms of one meaning only",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.sem.polysemy_homonymy",
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
+   }
+  ],
+  "VERB": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels of the 3rd person singular past (the citation form)."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "phenomenon": "ar.morph.root",
+    "why": "The verb is the centre of its word family."
+   },
+   {
+    "id": "rootClass",
+    "title": "root class",
+    "type": "strings",
+    "values": [
+     "sound",
+     "hollow",
+     "defective",
+     "assimilated",
+     "doubled",
+     "hamzated"
+    ],
+    "phenomenon": "ar.morph.root.weak",
+    "why": "Weak radicals (و ي), a doubled radical or hamza change the conjugation: hollow قَالَ، defective مَشَى، assimilated وَصَلَ، doubled أَحَبَّ، hamzated أَكَلَ."
+   },
+   {
+    "id": "verbForm",
+    "title": "verb form",
+    "type": "enum",
+    "values": [
+     "I",
+     "II",
+     "III",
+     "IV",
+     "V",
+     "VI",
+     "VII",
+     "VIII",
+     "IX",
+     "X"
+    ],
+    "phenomenon": "ar.morph.verb.forms",
+    "why": "Form I … X gives the present, participle and maṣdar patterns and a typical meaning."
+   },
+   {
+    "id": "present",
+    "title": "present (imperfect) 3rd person singular",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.verb.stem_vowel",
+    "why": "The second principal part: the stem vowel of form I (يَكْتُبُ / يَشْرَبُ / يَجْلِسُ) cannot be predicted. “none” for a verb that has no present."
+   },
+   {
+    "id": "masdar",
+    "title": "verbal noun (maṣdar)",
+    "type": "strings",
+    "none": true,
+    "phenomenon": "ar.morph.masdar",
+    "why": "Arabic’s “infinitive” (to eat = أَكْل); unpredictable for form I. “none” for a verb that has none."
+   },
+   {
+    "id": "participles",
+    "title": "active / passive participle",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "kind": "enum:active|passive"
+    },
+    "phenomenon": "ar.morph.participles",
+    "why": "Very frequent as nouns and adjectives (كَاتِب writer, مَكْتُوب written); the passive participle only for verbs with an object."
+   },
+   {
+    "id": "governs",
+    "title": "object and preposition",
+    "type": "list",
+    "none": true,
+    "item": {
+     "case": "enum:ACC|GEN?",
+     "prep": "string?",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.syn.verb_government",
+    "why": "What the verb takes: a direct object (accusative) or a preposition (ذَهَبَ إِلَى، خَرَجَ مِنْ، اِنْتَظَرَ + acc.), per meaning. “none” for a verb used without an object."
+   },
+   {
+    "id": "meaningForms",
+    "title": "forms of one meaning only",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.sem.polysemy_homonymy",
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
+   }
+  ],
+  "ADV": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels; adverbs in -an keep the ending, which is part of the word."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "Links the adverb to its family; “none” for particles and phrases."
+   },
+   {
+    "id": "derivedFrom",
+    "title": "made from",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.syn.adverbial_accusative",
+    "why": "Most adverbs are accusatives of nouns or adjectives (كَثِيرًا ← كَثِير، صَبَاحًا ← صَبَاح) or a preposition + a word (بِخَيْرٍ); “none” for a basic particle (هُنَا، الْآنَ)."
+   },
+   {
+    "id": "meaningForms",
+    "title": "forms of one meaning only",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.sem.polysemy_homonymy",
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
+   }
+  ],
+  "ADP": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels of the preposition."
+   },
+   {
+    "id": "prefix",
+    "title": "written attached",
+    "at": "top",
+    "type": "bool",
+    "phenomenon": "ar.morph.prefix_clitics",
+    "why": "بِـ and لِـ are written together with the next word; the others stand alone."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "The prepositions that are nouns (ẓarf) have a root (قَبْلَ ← ق ب ل); the short particles (فِي، مِنْ) have none."
+   },
+   {
+    "id": "kind",
+    "title": "kind of preposition",
+    "type": "enum",
+    "values": [
+     "harf",
+     "zarf",
+     "phrase"
+    ],
+    "phenomenon": "ar.morph.case",
+    "why": "A true preposition (ḥarf: فِي، مِنْ، إِلَى), a noun in the accusative used as a preposition (ẓarf: قَبْلَ، عِنْدَ، أَمَامَ — it can itself follow مِنْ: مِنْ عِنْدِ), or a preposition + noun (phrase: بِدُونِ، بِجَانِبِ). All take the genitive."
+   },
+   {
+    "id": "meaningForms",
+    "title": "forms of one meaning only",
+    "type": "list",
+    "none": true,
+    "item": {
+     "form": "string",
+     "what": "string",
+     "senses": "senses"
+    },
+    "phenomenon": "ar.sem.polysemy_homonymy",
+    "why": "A form (a fixed phrase, another maṣdar, an adverbial accusative …) that belongs to one meaning of the word; “none” when every meaning has the same forms. Per-meaning plurals are in plurals."
+   }
+  ],
+  "PRON": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels."
+   },
+   {
+    "id": "person",
+    "title": "person, number, gender",
+    "type": "string",
+    "classes": [
+     "PRON"
+    ],
+    "phenomenon": "ar.morph.pron.gender2",
+    "why": "Gender in the 2nd and 3rd person (أَنْتَ / أَنْتِ، هُمْ / هُنَّ)."
+   },
+   {
+    "id": "suffix",
+    "title": "attached form",
+    "type": "string",
+    "classes": [
+     "PRON"
+    ],
+    "phenomenon": "ar.morph.suffix_pronouns",
+    "why": "The pronoun as an ending on nouns, verbs and prepositions (كِتَابُكَ، يَرَاهُ، لَهَا)."
+   }
+  ],
+  "DET": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels."
+   }
+  ],
+  "NUM": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels of the citation form."
+   },
+   {
+    "id": "root",
+    "title": "root (radicals)",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.morph.root",
+    "why": "The numbers are native words with roots (ث ل ث، ع ش ر); “none” for the compound numbers 11–19."
+   },
+   {
+    "id": "polarity",
+    "title": "gender polarity",
+    "type": "bool",
+    "phenomenon": "ar.numbers.polarity",
+    "why": "3–10 (and the units of 13–19) take the form of the opposite gender: ثَلَاثَةُ كُتُبٍ but ثَلَاثُ سَيَّارَاتٍ."
+   },
+   {
+    "id": "countedNoun",
+    "title": "the counted noun",
+    "type": "enum",
+    "values": [
+     "agrees (after the noun)",
+     "dual alone",
+     "GEN;PL",
+     "ACC;SG",
+     "GEN;SG"
+    ],
+    "none": true,
+    "phenomenon": "ar.numbers.counted_noun",
+    "why": "The case and number of the noun with the number."
+   },
+   {
+    "id": "ordinal",
+    "title": "ordinal",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.numbers.ordinals",
+    "why": "The ordinal (masculine): ثَالِث from ثَلَاثَة; “first” is suppletive (أَوَّل); “none” for zero."
+   }
+  ],
+  "CCONJ": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels."
+   },
+   {
+    "id": "prefix",
+    "title": "written attached",
+    "at": "top",
+    "type": "bool",
+    "phenomenon": "ar.morph.prefix_clitics",
+    "why": "وَ and فَ are written together with the next word."
+   },
+   {
+    "id": "governs",
+    "title": "what follows",
+    "type": "enum",
+    "values": [
+     "ACC+suffix",
+     "clause",
+     "words or clauses"
+    ],
+    "phenomenon": "ar.syn.inna_sisters",
+    "why": "لٰكِنَّ takes a noun in the accusative or a pronoun suffix; the others join words or whole clauses."
+   }
+  ],
+  "SCONJ": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels."
+   },
+   {
+    "id": "governs",
+    "title": "what follows",
+    "type": "enum",
+    "values": [
+     "ACC+suffix",
+     "SBJV",
+     "PST",
+     "clause"
+    ],
+    "phenomenon": "ar.syn.inna_sisters",
+    "why": "أَنَّ / لِأَنَّ + an accusative noun or a pronoun suffix; أَنْ + a subjunctive verb; إِذَا + a past verb; عِنْدَمَا + a clause."
+   }
+  ],
+  "PART": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels."
+   },
+   {
+    "id": "prefix",
+    "title": "written attached",
+    "at": "top",
+    "type": "bool",
+    "phenomenon": "ar.morph.prefix_clitics",
+    "why": "أَ is written together with the next word; the other particles stand alone."
+   }
+  ],
+  "INTJ": [
+   {
+    "id": "translit",
+    "title": "transliteration",
+    "at": "top",
+    "type": "string",
+    "phenomenon": "ar.orth.romanization",
+    "why": "Shows the vowels of the formula."
+   },
+   {
+    "id": "addressee",
+    "title": "said to",
+    "type": "enum",
+    "values": [
+     "MASC",
+     "FEM",
+     "PL",
+     "any"
+    ],
+    "phenomenon": "ar.prag.addressee_gender",
+    "why": "Many formulas change with the person addressed: a man, a woman, a group (كَيْفَ حَالُكَ / حَالُكِ / حَالُكُمْ)."
+   },
+   {
+    "id": "response",
+    "title": "fixed answer",
+    "type": "string",
+    "none": true,
+    "phenomenon": "ar.prag.greeting_pairs",
+    "why": "The answer this formula gets (صَبَاحُ الْخَيْرِ → صَبَاحُ النُّورِ); “none” when there is no fixed answer."
+   }
+  ]
+ },
+ "distinctions": [
+  {
+   "concept": "pron.you.sg",
+   "axis": "gender of the addressee",
+   "words": [
+    {
+     "lemma": "أَنْتَ",
+     "value": "to a man"
+    },
+    {
+     "lemma": "أَنْتِ",
+     "value": "to a woman"
+    }
+   ],
+   "note": "The verb and every suffix change too (تَكْتُبُ / تَكْتُبِينَ). Hebrew: אַתָּה / אַתְּ."
+  },
+  {
+   "concept": "pron.you.pl",
+   "axis": "gender of the addressees (and the dual)",
+   "words": [
+    {
+     "lemma": "أَنْتُمْ",
+     "value": "men or a mixed group"
+    },
+    {
+     "lemma": "أَنْتُنَّ",
+     "value": "women only"
+    },
+    {
+     "lemma": "أَنْتُمَا",
+     "value": "two people (not in the lexicon)"
+    }
+   ],
+   "note": "Dual pronoun missing from the course."
+  },
+  {
+   "concept": "pron.they",
+   "axis": "gender of the group (and the dual)",
+   "words": [
+    {
+     "lemma": "هُمْ",
+     "value": "men or mixed"
+    },
+    {
+     "lemma": "هُنَّ",
+     "value": "women only"
+    },
+    {
+     "lemma": "هُمَا",
+     "value": "two (not in the lexicon)"
+    },
+    {
+     "lemma": "هِيَ",
+     "value": "non-human plurals"
+    }
+   ],
+   "note": "Plurals of things are هِيَ, not هُمْ."
+  },
+  {
+   "concept": "family.uncle",
+   "axis": "side of the family",
+   "words": [
+    {
+     "lemma": "عَمّ",
+     "value": "father's brother"
+    },
+    {
+     "lemma": "خَال",
+     "value": "mother's brother"
+    }
+   ],
+   "note": "Turkish amca / dayı make the same split."
+  },
+  {
+   "concept": "family.aunt",
+   "axis": "side of the family",
+   "words": [
+    {
+     "lemma": "عَمَّة",
+     "value": "father's sister"
+    },
+    {
+     "lemma": "خَالَة",
+     "value": "mother's sister"
+    }
+   ],
+   "note": "Turkish hala / teyze — but Turkish hala comes from Arabic خَالَة with the other side."
+  },
+  {
+   "concept": "family.cousin",
+   "axis": "side of the family and sex of the linking parent's sibling",
+   "words": [
+    {
+     "lemma": "اِبْنُ عَمٍّ / بِنْتُ عَمٍّ",
+     "value": "child of the father's brother"
+    },
+    {
+     "lemma": "اِبْنُ عَمَّةٍ / بِنْتُ عَمَّةٍ",
+     "value": "child of the father's sister"
+    },
+    {
+     "lemma": "اِبْنُ خَالٍ / بِنْتُ خَالٍ",
+     "value": "child of the mother's brother"
+    },
+    {
+     "lemma": "اِبْنُ خَالَةٍ / بِنْتُ خَالَةٍ",
+     "value": "child of the mother's sister"
+    }
+   ],
+   "note": "No word for 'cousin' (absent entry)."
+  },
+  {
+   "concept": "family.daughter",
+   "axis": "register",
+   "words": [
+    {
+     "lemma": "بِنْت",
+     "value": "everyday (also 'girl')"
+    },
+    {
+     "lemma": "اِبْنَة",
+     "value": "formal, written"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "family.family",
+   "axis": "nuclear vs extended",
+   "words": [
+    {
+     "lemma": "أُسْرَة",
+     "value": "the household: parents and children"
+    },
+    {
+     "lemma": "عَائِلَة",
+     "value": "the family in general, often the wider family"
+    }
+   ],
+   "note": "Overlap in use; عَائِلَة also in اِسْمُ الْعَائِلَةِ (surname)."
+  },
+  {
+   "concept": "greet.hello",
+   "axis": "register and religious formula",
+   "words": [
+    {
+     "lemma": "مَرْحَبًا",
+     "value": "neutral hello"
+    },
+    {
+     "lemma": "أَهْلًا",
+     "value": "warm, informal; welcome"
+    },
+    {
+     "lemma": "السَّلَامُ عَلَيْكُمْ",
+     "value": "the greeting of peace, with a fixed answer"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "greet.goodnight / greet.seeyou / greet.howareyou / greet.please / greet.excuseme",
+   "axis": "gender of the addressee",
+   "words": [
+    {
+     "lemma": "تُصْبِحُ عَلَى خَيْرٍ / تُصْبِحِينَ عَلَى خَيْرٍ",
+     "value": "good night m./f."
+    },
+    {
+     "lemma": "أَرَاكَ / أَرَاكِ لَاحِقًا",
+     "value": "see you m./f."
+    },
+    {
+     "lemma": "كَيْفَ حَالُكَ / حَالُكِ",
+     "value": "how are you m./f."
+    },
+    {
+     "lemma": "مِنْ فَضْلِكَ / فَضْلِكِ",
+     "value": "please m./f."
+    },
+    {
+     "lemma": "لَوْ سَمَحْتَ / سَمَحْتِ",
+     "value": "excuse me m./f."
+    }
+   ],
+   "note": "One lexeme per addressee; the plural forms (حَالُكُمْ، فَضْلِكُمْ) are not in the lexicon."
+  },
+  {
+   "concept": "greet.goodbye",
+   "axis": "formula",
+   "words": [
+    {
+     "lemma": "مَعَ السَّلَامَةِ",
+     "value": "'with safety' — the everyday goodbye"
+    },
+    {
+     "lemma": "إِلَى اللِّقَاءِ",
+     "value": "'until the meeting' — see you again"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "greet.nicetomeet",
+   "axis": "formula / register",
+   "words": [
+    {
+     "lemma": "تَشَرَّفْنَا",
+     "value": "'we have been honoured'"
+    },
+    {
+     "lemma": "فُرْصَةٌ سَعِيدَةٌ",
+     "value": "'a happy opportunity'"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "greet.sorry",
+   "axis": "agreement with the speaker vs fixed formula",
+   "words": [
+    {
+     "lemma": "آسِف / آسِفَة",
+     "value": "adjective: agrees with the speaker's gender"
+    },
+    {
+     "lemma": "عُذْرًا",
+     "value": "invariable formula: pardon me"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "part.yes",
+   "axis": "answer to a positive vs a negative question",
+   "words": [
+    {
+     "lemma": "نَعَمْ",
+     "value": "yes to a positive question"
+    },
+    {
+     "lemma": "بَلَى",
+     "value": "yes contradicting a negative question (German doch)"
+    }
+   ],
+   "note": "بَلَى has no concept in the lexicon (role only)."
+  },
+  {
+   "concept": "part.not",
+   "axis": "sentence type and tense",
+   "words": [
+    {
+     "lemma": "لَا",
+     "value": "present verb; prohibition with jussive"
+    },
+    {
+     "lemma": "لَيْسَ",
+     "value": "verbless sentence"
+    },
+    {
+     "lemma": "لَمْ",
+     "value": "past (with jussive) — not in the lexicon"
+    },
+    {
+     "lemma": "لَنْ",
+     "value": "future (with subjunctive) — not in the lexicon"
+    },
+    {
+     "lemma": "مَا",
+     "value": "past, classical and dialectal"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "conj.or",
+   "axis": "statement / yes-no question vs choice question",
+   "words": [
+    {
+     "lemma": "أَوْ",
+     "value": "statements; 'any of them?'"
+    },
+    {
+     "lemma": "أَمْ",
+     "value": "which of the two? (choice questions)"
+    }
+   ],
+   "note": "Same axis as Chinese 或者 / 还是."
+  },
+  {
+   "concept": "q.what",
+   "axis": "what follows",
+   "words": [
+    {
+     "lemma": "مَاذَا",
+     "value": "before a verb"
+    },
+    {
+     "lemma": "مَا",
+     "value": "before a noun or pronoun"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "conj.that",
+   "axis": "what follows (finite clause vs verb)",
+   "words": [
+    {
+     "lemma": "أَنَّ",
+     "value": "+ accusative noun or pronoun suffix (a fact)"
+    },
+    {
+     "lemma": "أَنْ",
+     "value": "+ subjunctive verb ('to …')"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "conj.but",
+   "axis": "light vs heavy form (government)",
+   "words": [
+    {
+     "lemma": "لٰكِنْ",
+     "value": "+ any clause"
+    },
+    {
+     "lemma": "لٰكِنَّ",
+     "value": "+ accusative noun or pronoun suffix"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "conj.so",
+   "axis": "attached connective vs adverb",
+   "words": [
+    {
+     "lemma": "فَ",
+     "value": "and so, then — attached prefix; also opens the main clause after إِذَا"
+    },
+    {
+     "lemma": "لِذٰلِكَ",
+     "value": "therefore, that is why"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "conj.if",
+   "axis": "likelihood of the condition",
+   "words": [
+    {
+     "lemma": "إِذَا",
+     "value": "likely or expected (with the past)"
+    },
+    {
+     "lemma": "إِنْ",
+     "value": "open possibility — not in the lexicon"
+    },
+    {
+     "lemma": "لَوْ",
+     "value": "unreal — not in the lexicon"
+    }
+   ],
+   "note": "One English 'if', three Arabic words."
+  },
+  {
+   "concept": "poss.have",
+   "axis": "kind of possession",
+   "words": [
+    {
+     "lemma": "عِنْدَ",
+     "value": "own, have (general)"
+    },
+    {
+     "lemma": "لِ",
+     "value": "belongs to; kinship (لِي أَخٌ)"
+    },
+    {
+     "lemma": "مَعَ",
+     "value": "have on me, with me now"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "prep.at",
+   "axis": "a person's place vs a location",
+   "words": [
+    {
+     "lemma": "عِنْدَ",
+     "value": "at someone's (عِنْدَ الطَّبِيبِ), at a point"
+    },
+    {
+     "lemma": "فِي",
+     "value": "at/in a place (فِي الْمَدْرَسَةِ)"
+    }
+   ],
+   "note": "Like French chez vs à."
+  },
+  {
+   "concept": "prep.with",
+   "axis": "accompaniment vs instrument/ingredient",
+   "words": [
+    {
+     "lemma": "مَعَ",
+     "value": "together with a person or thing"
+    },
+    {
+     "lemma": "بِ",
+     "value": "with a tool or an ingredient; by (transport)"
+    }
+   ],
+   "note": "Greek με and German mit cover both."
+  },
+  {
+   "concept": "prep.until",
+   "axis": "pairing and range",
+   "words": [
+    {
+     "lemma": "إِلَى",
+     "value": "until, in مِنْ … إِلَى …"
+    },
+    {
+     "lemma": "حَتَّى",
+     "value": "until, as far as; also 'even'"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "prep.behind",
+   "axis": "physical vs extended/figurative",
+   "words": [
+    {
+     "lemma": "خَلْفَ",
+     "value": "behind (physically)"
+    },
+    {
+     "lemma": "وَرَاءَ",
+     "value": "behind; beyond; the reason behind"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "prep.during",
+   "axis": "span vs simultaneity",
+   "words": [
+    {
+     "lemma": "خِلَالَ",
+     "value": "during, within a period; مِنْ خِلَالِ 'through'"
+    },
+    {
+     "lemma": "أَثْنَاءَ",
+     "value": "while something happens"
+    }
+   ],
+   "note": "Close synonyms."
+  },
+  {
+   "concept": "verb.come",
+   "axis": "suppletion: imperative",
+   "words": [
+    {
+     "lemma": "جَاءَ",
+     "value": "to come (all forms but the imperative)"
+    },
+    {
+     "lemma": "تَعَالَ",
+     "value": "come! (the imperative)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "verb.leave",
+   "axis": "valency and meaning",
+   "words": [
+    {
+     "lemma": "خَرَجَ",
+     "value": "to go out (intransitive, + مِنْ)"
+    },
+    {
+     "lemma": "غَادَرَ",
+     "value": "to depart from (transitive, formal)"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "verb.like",
+   "axis": "who is the subject",
+   "words": [
+    {
+     "lemma": "أَحَبَّ",
+     "value": "to like / love — the person is the subject"
+    },
+    {
+     "lemma": "أَعْجَبَ",
+     "value": "to please — the thing is the subject: يُعْجِبُنِي (not in the lexicon)"
+    }
+   ],
+   "note": "أَعْجَبَ works like Greek μου αρέσει; أَحَبَّ also means 'love'."
+  },
+  {
+   "concept": "verb.drive",
+   "axis": "vehicle driving vs leading",
+   "words": [
+    {
+     "lemma": "قَادَ",
+     "value": "to drive; to lead"
+    },
+    {
+     "lemma": "سَاقَ",
+     "value": "to drive (a car, animals) — the root of سَائِق 'driver'; not in the lexicon"
+    }
+   ],
+   "note": "The course noun سَائِق (driver) does not come from the course verb قَادَ."
+  },
+  {
+   "concept": "job.farmer",
+   "axis": "connotation and modernity",
+   "words": [
+    {
+     "lemma": "مُزَارِع",
+     "value": "farmer (neutral, modern)"
+    },
+    {
+     "lemma": "فَلَّاح",
+     "value": "peasant, traditional farmer"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "tr.boat",
+   "axis": "size",
+   "words": [
+    {
+     "lemma": "سَفِينَة",
+     "value": "ship, vessel"
+    },
+    {
+     "lemma": "قَارِب",
+     "value": "small boat"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "time.night",
+   "axis": "uncountable time vs one night",
+   "words": [
+    {
+     "lemma": "لَيْل",
+     "value": "night-time (no plural use)"
+    },
+    {
+     "lemma": "لَيْلَة",
+     "value": "a (single) night; اللَّيْلَةَ tonight"
+    }
+   ],
+   "note": "Like a collective and its unit noun."
+  },
+  {
+   "concept": "time.year",
+   "axis": "register and use",
+   "words": [
+    {
+     "lemma": "سَنَة",
+     "value": "year (most common)"
+    },
+    {
+     "lemma": "عَام",
+     "value": "year (formal; in dates and 'this year' الْعَامَ)"
+    }
+   ],
+   "note": "Largely interchangeable in MSA."
+  },
+  {
+   "concept": "adv.often",
+   "axis": "frequency vs probability",
+   "words": [
+    {
+     "lemma": "كَثِيرًا",
+     "value": "often; a lot"
+    },
+    {
+     "lemma": "غَالِبًا",
+     "value": "usually, mostly; probably"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "concept": "adj.hot",
+   "axis": "weather/spice vs temperature to the touch",
+   "words": [
+    {
+     "lemma": "حَارّ",
+     "value": "hot weather, climate; spicy food"
+    },
+    {
+     "lemma": "سَاخِن",
+     "value": "hot to the touch: drinks, water, objects"
+    }
+   ],
+   "note": "Greek ζεστός / καυτερός, German heiß / scharf split differently."
+  },
+  {
+   "concept": "adj.old.thing / adj.old.person",
+   "axis": "things vs people",
+   "words": [
+    {
+     "lemma": "قَدِيم",
+     "value": "old (things), ancient"
+    },
+    {
+     "lemma": "مُسِنّ",
+     "value": "old, elderly (people)"
+    },
+    {
+     "lemma": "كَبِير",
+     "value": "'big' = grown-up, old (people, colloquial)"
+    }
+   ],
+   "note": "The course already has two concepts."
+  },
+  {
+   "concept": "time.january … time.december",
+   "axis": "region",
+   "words": [
+    {
+     "lemma": "كَانُون الثَّانِي … كَانُون الْأَوَّل",
+     "value": "Levant and Iraq"
+    },
+    {
+     "lemma": "يَنَايِر … دِيسِمْبِر",
+     "value": "Egypt, Sudan, the Arabian Peninsula (Maghreb: local forms)"
+    }
+   ],
+   "note": "Both sets are standard."
+  },
+  {
+   "concept": "dem.this / dem.these",
+   "axis": "gender and humanness",
+   "words": [
+    {
+     "lemma": "هٰذَا",
+     "value": "masculine singular"
+    },
+    {
+     "lemma": "هٰذِهِ",
+     "value": "feminine singular and non-human plural"
+    },
+    {
+     "lemma": "هٰؤُلَاءِ",
+     "value": "human plural"
+    }
+   ],
+   "note": "هٰذِهِ is a form of هٰذَا in the lexicon."
+  }
+ ],
+ "polysemy": [
+  {
+   "lexeme": "ar:bayt",
+   "lemma": "بَيْت",
+   "meanings": [
+    {
+     "gloss": "house",
+     "concept": "home.house"
+    },
+    {
+     "gloss": "home",
+     "concept": "place.home"
+    },
+    {
+     "gloss": "verse (of a poem)",
+     "concept": null
+    },
+    {
+     "gloss": "household, family",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural بُيُوت (houses) vs أَبْيَات (verses)"
+  },
+  {
+   "lexeme": "ar:bint",
+   "lemma": "بِنْت",
+   "meanings": [
+    {
+     "gloss": "girl",
+     "concept": "person.girl"
+    },
+    {
+     "gloss": "daughter",
+     "concept": "family.daughter"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:walad",
+   "lemma": "وَلَد",
+   "meanings": [
+    {
+     "gloss": "boy",
+     "concept": "person.boy"
+    },
+    {
+     "gloss": "child, offspring",
+     "concept": null
+    },
+    {
+     "gloss": "son",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:imraa",
+   "lemma": "اِمْرَأَة",
+   "meanings": [
+    {
+     "gloss": "woman",
+     "concept": "person.woman"
+    },
+    {
+     "gloss": "wife",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "suppletive plural نِسَاء"
+  },
+  {
+   "lexeme": "ar:inda",
+   "lemma": "عِنْدَ",
+   "meanings": [
+    {
+     "gloss": "to have (at me)",
+     "concept": "poss.have"
+    },
+    {
+     "gloss": "at someone's place",
+     "concept": "prep.at"
+    },
+    {
+     "gloss": "at (a time)",
+     "concept": "prep.attime"
+    },
+    {
+     "gloss": "in the opinion of",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:fi",
+   "lemma": "فِي",
+   "meanings": [
+    {
+     "gloss": "in",
+     "concept": "prep.in"
+    },
+    {
+     "gloss": "at (a place)",
+     "concept": "prep.at"
+    },
+    {
+     "gloss": "at (clock time)",
+     "concept": "prep.attime"
+    },
+    {
+     "gloss": "on (a day)",
+     "concept": "prep.onday"
+    },
+    {
+     "gloss": "in (a month, season)",
+     "concept": "prep.inmonth"
+    },
+    {
+     "gloss": "about (after some verbs)",
+     "concept": null
+    },
+    {
+     "gloss": "times (multiplied by)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:ila",
+   "lemma": "إِلَى",
+   "meanings": [
+    {
+     "gloss": "to, towards",
+     "concept": "prep.to"
+    },
+    {
+     "gloss": "until",
+     "concept": "prep.until"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:min",
+   "lemma": "مِنْ",
+   "meanings": [
+    {
+     "gloss": "from",
+     "concept": "prep.from"
+    },
+    {
+     "gloss": "than",
+     "concept": "conj.than"
+    },
+    {
+     "gloss": "of, some of (partitive)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:la",
+   "lemma": "لَا",
+   "meanings": [
+    {
+     "gloss": "not (present verb)",
+     "concept": "part.not"
+    },
+    {
+     "gloss": "no, not any (there is no …)",
+     "concept": "det.none"
+    },
+    {
+     "gloss": "don't! (prohibition)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "also the separate course lexeme ar:la_no 'no' (part.no): the same written word"
+  },
+  {
+   "lexeme": "ar:hadiqa",
+   "lemma": "حَدِيقَة",
+   "meanings": [
+    {
+     "gloss": "park",
+     "concept": "place.park"
+    },
+    {
+     "gloss": "garden",
+     "concept": "home.garden"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:tawil",
+   "lemma": "طَوِيل",
+   "meanings": [
+    {
+     "gloss": "long",
+     "concept": "adj.long"
+    },
+    {
+     "gloss": "tall",
+     "concept": "adj.tall"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:akthar",
+   "lemma": "أَكْثَر",
+   "meanings": [
+    {
+     "gloss": "more",
+     "concept": "adv.more"
+    },
+    {
+     "gloss": "most",
+     "concept": "adv.most"
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:hindiba",
+   "lemma": "هِنْدِبَاء",
+   "meanings": [
+    {
+     "gloss": "chicory",
+     "concept": "veg.chicory"
+    },
+    {
+     "gloss": "endive",
+     "concept": "veg.endive"
+    },
+    {
+     "gloss": "dandelion",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:kabir",
+   "lemma": "كَبِير",
+   "meanings": [
+    {
+     "gloss": "big",
+     "concept": "adj.big"
+    },
+    {
+     "gloss": "old, grown-up (person)",
+     "concept": null
+    },
+    {
+     "gloss": "great, important",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:saghir",
+   "lemma": "صَغِير",
+   "meanings": [
+    {
+     "gloss": "small",
+     "concept": "adj.small"
+    },
+    {
+     "gloss": "young (child)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:qarib",
+   "lemma": "قَرِيب",
+   "meanings": [
+    {
+     "gloss": "near",
+     "concept": "adv.near"
+    },
+    {
+     "gloss": "close (relationship)",
+     "concept": null
+    },
+    {
+     "gloss": "relative (noun)",
+     "concept": "family.relative"
+    }
+   ],
+   "formsDiffer": "as a noun 'relative' (separate lexeme ar:qarib_relative) the plural is أَقْرِبَاء / أَقَارِب; as an adjective قَرِيبُونَ"
+  },
+  {
+   "lexeme": "ar:jadd",
+   "lemma": "جَدّ",
+   "meanings": [
+    {
+     "gloss": "grandfather",
+     "concept": "family.grandfather"
+    },
+    {
+     "gloss": "ancestor",
+     "concept": null
+    },
+    {
+     "gloss": "good fortune, luck",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:khal",
+   "lemma": "خَال",
+   "meanings": [
+    {
+     "gloss": "mother's brother",
+     "concept": "family.uncle"
+    },
+    {
+     "gloss": "beauty mark, mole",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural أَخْوَال (uncles) vs خِيلَان (moles)"
+  },
+  {
+   "lexeme": "ar:amm",
+   "lemma": "عَمّ",
+   "meanings": [
+    {
+     "gloss": "father's brother",
+     "concept": "family.uncle"
+    },
+    {
+     "gloss": "'uncle' — polite address to an older man",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:umm",
+   "lemma": "أُمّ",
+   "meanings": [
+    {
+     "gloss": "mother",
+     "concept": "family.mother"
+    },
+    {
+     "gloss": "origin, source; the main one",
+     "concept": null
+    },
+    {
+     "gloss": "mother of (kunya)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:zawj",
+   "lemma": "زَوْج",
+   "meanings": [
+    {
+     "gloss": "husband, spouse",
+     "concept": "family.husband"
+    },
+    {
+     "gloss": "a pair; one of a pair",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:kitab",
+   "lemma": "كِتَاب",
+   "meanings": [
+    {
+     "gloss": "book",
+     "concept": "obj.book"
+    },
+    {
+     "gloss": "letter, written message",
+     "concept": null
+    },
+    {
+     "gloss": "the Scripture",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:bab",
+   "lemma": "بَاب",
+   "meanings": [
+    {
+     "gloss": "door, gate",
+     "concept": "home.door"
+    },
+    {
+     "gloss": "chapter, section",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:kursi",
+   "lemma": "كُرْسِيّ",
+   "meanings": [
+    {
+     "gloss": "chair",
+     "concept": "home.chair"
+    },
+    {
+     "gloss": "throne",
+     "concept": null
+    },
+    {
+     "gloss": "professorial chair",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:khizana",
+   "lemma": "خِزَانَة",
+   "meanings": [
+    {
+     "gloss": "cupboard, wardrobe",
+     "concept": "home.cupboard"
+    },
+    {
+     "gloss": "safe, vault",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:waraq",
+   "lemma": "وَرَق",
+   "meanings": [
+    {
+     "gloss": "paper",
+     "concept": "obj.paper"
+    },
+    {
+     "gloss": "leaves, foliage",
+     "concept": null
+    },
+    {
+     "gloss": "banknotes; playing cards",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "unit وَرَقَة = a sheet / a leaf"
+  },
+  {
+   "lexeme": "ar:hatif",
+   "lemma": "هَاتِف",
+   "meanings": [
+    {
+     "gloss": "telephone",
+     "concept": "obj.phone"
+    },
+    {
+     "gloss": "an unseen caller's voice",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:haqiba",
+   "lemma": "حَقِيبَة",
+   "meanings": [
+    {
+     "gloss": "bag, suitcase",
+     "concept": "obj.bag"
+    },
+    {
+     "gloss": "ministerial portfolio",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:kas",
+   "lemma": "كَأْس",
+   "meanings": [
+    {
+     "gloss": "drinking glass",
+     "concept": "obj.glass"
+    },
+    {
+     "gloss": "cup, trophy",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:sahn",
+   "lemma": "صَحْن",
+   "meanings": [
+    {
+     "gloss": "plate",
+     "concept": "obj.plate"
+    },
+    {
+     "gloss": "courtyard (of a mosque)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:ghurfa",
+   "lemma": "غُرْفَة",
+   "meanings": [
+    {
+     "gloss": "room",
+     "concept": "home.room"
+    },
+    {
+     "gloss": "chamber (of commerce …)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:tawila",
+   "lemma": "طَاوِلَة",
+   "meanings": [
+    {
+     "gloss": "table",
+     "concept": "home.table"
+    },
+    {
+     "gloss": "backgammon",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:usra",
+   "lemma": "أُسْرَة",
+   "meanings": [
+    {
+     "gloss": "family",
+     "concept": "family.family"
+    },
+    {
+     "gloss": "dynasty",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:shariba",
+   "lemma": "شَرِبَ",
+   "meanings": [
+    {
+     "gloss": "to drink",
+     "concept": "verb.drink"
+    },
+    {
+     "gloss": "to smoke (cigarettes, shisha)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:akala",
+   "lemma": "أَكَلَ",
+   "meanings": [
+    {
+     "gloss": "to eat",
+     "concept": "verb.eat"
+    },
+    {
+     "gloss": "to corrode, consume",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:ada",
+   "lemma": "عَادَ",
+   "meanings": [
+    {
+     "gloss": "to return",
+     "concept": "verb.return"
+    },
+    {
+     "gloss": "to visit (a sick person)",
+     "concept": null
+    },
+    {
+     "gloss": "no longer (لَمْ يَعُدْ)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "maṣdar عَوْدَة (return) vs عِيَادَة (visiting the sick)"
+  },
+  {
+   "lexeme": "ar:wasala",
+   "lemma": "وَصَلَ",
+   "meanings": [
+    {
+     "gloss": "to arrive, reach",
+     "concept": "verb.arrive"
+    },
+    {
+     "gloss": "to connect, join",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "maṣdar وُصُول (arrival) vs وَصْل (connection); 'connect' is transitive"
+  },
+  {
+   "lexeme": "ar:qada",
+   "lemma": "قَادَ",
+   "meanings": [
+    {
+     "gloss": "to drive (a vehicle)",
+     "concept": "verb.drive"
+    },
+    {
+     "gloss": "to lead, command",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:dhahaba",
+   "lemma": "ذَهَبَ",
+   "meanings": [
+    {
+     "gloss": "to go",
+     "concept": "verb.go"
+    },
+    {
+     "gloss": "to hold the view (ذَهَبَ إِلَى أَنَّ)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "unvocalized ذهب is also ذَهَب 'gold' (another word)"
+  },
+  {
+   "lexeme": "ar:jaa",
+   "lemma": "جَاءَ",
+   "meanings": [
+    {
+     "gloss": "to come",
+     "concept": "verb.come"
+    },
+    {
+     "gloss": "to bring (جَاءَ بِـ)",
+     "concept": null
+    },
+    {
+     "gloss": "to be stated (in a text)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:kana",
+   "lemma": "كَانَ",
+   "meanings": [
+    {
+     "gloss": "to be (past, future)",
+     "concept": "verb.be"
+    },
+    {
+     "gloss": "auxiliary of past habit / progress",
+     "concept": null
+    },
+    {
+     "gloss": "to exist",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:amal",
+   "lemma": "عَمَل",
+   "meanings": [
+    {
+     "gloss": "work, workplace",
+     "concept": "place.work"
+    },
+    {
+     "gloss": "deed, action",
+     "concept": null
+    },
+    {
+     "gloss": "business (pl.)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural أَعْمَال especially 'business' (رَجُلُ أَعْمَالٍ)"
+  },
+  {
+   "lexeme": "ar:amil",
+   "lemma": "عَامِل",
+   "meanings": [
+    {
+     "gloss": "worker",
+     "concept": "job.worker"
+    },
+    {
+     "gloss": "factor",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural عُمَّال (workers) vs عَوَامِل (factors)"
+  },
+  {
+   "lexeme": "ar:talib",
+   "lemma": "طَالِب",
+   "meanings": [
+    {
+     "gloss": "student",
+     "concept": "person.student"
+    },
+    {
+     "gloss": "seeker, applicant",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:muallim",
+   "lemma": "مُعَلِّم",
+   "meanings": [
+    {
+     "gloss": "teacher",
+     "concept": "person.teacher"
+    },
+    {
+     "gloss": "master craftsman, boss",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:maktab",
+   "lemma": "مَكْتَب",
+   "meanings": [
+    {
+     "gloss": "office",
+     "concept": "place.office"
+    },
+    {
+     "gloss": "desk",
+     "concept": null
+    },
+    {
+     "gloss": "bureau, agency",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:mahall",
+   "lemma": "مَحَلّ",
+   "meanings": [
+    {
+     "gloss": "shop",
+     "concept": "place.shop"
+    },
+    {
+     "gloss": "place, location",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:jamia",
+   "lemma": "جَامِعَة",
+   "meanings": [
+    {
+     "gloss": "university",
+     "concept": "place.university"
+    },
+    {
+     "gloss": "league (of states)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:maydan",
+   "lemma": "مَيْدَان",
+   "meanings": [
+    {
+     "gloss": "square",
+     "concept": "place.square"
+    },
+    {
+     "gloss": "field, sphere",
+     "concept": null
+    },
+    {
+     "gloss": "battlefield",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:suq",
+   "lemma": "سُوق",
+   "meanings": [
+    {
+     "gloss": "market, souk",
+     "concept": "place.market"
+    },
+    {
+     "gloss": "the market (economics)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:matbakh",
+   "lemma": "مَطْبَخ",
+   "meanings": [
+    {
+     "gloss": "kitchen",
+     "concept": "home.kitchen"
+    },
+    {
+     "gloss": "cuisine",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:hammam",
+   "lemma": "حَمَّام",
+   "meanings": [
+    {
+     "gloss": "bathroom, toilet",
+     "concept": "home.bathroom"
+    },
+    {
+     "gloss": "bathhouse (hammam)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "unvocalized حمام is also حَمَام 'pigeons'"
+  },
+  {
+   "lexeme": "ar:yamin",
+   "lemma": "يَمِين",
+   "meanings": [
+    {
+     "gloss": "right (side)",
+     "concept": "adv.right"
+    },
+    {
+     "gloss": "right hand",
+     "concept": null
+    },
+    {
+     "gloss": "oath",
+     "concept": null
+    },
+    {
+     "gloss": "the political right",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "'oath' is feminine with plural أَيْمَان"
+  },
+  {
+   "lexeme": "ar:kharij",
+   "lemma": "خَارِج",
+   "meanings": [
+    {
+     "gloss": "outside",
+     "concept": "adv.outside"
+    },
+    {
+     "gloss": "abroad (فِي الْخَارِجِ)",
+     "concept": null
+    },
+    {
+     "gloss": "quotient (math)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:saa",
+   "lemma": "سَاعَة",
+   "meanings": [
+    {
+     "gloss": "hour",
+     "concept": "time.hour"
+    },
+    {
+     "gloss": "clock, watch",
+     "concept": null
+    },
+    {
+     "gloss": "the time (o'clock)",
+     "concept": null
+    },
+    {
+     "gloss": "the Hour (Judgement)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:daqiqa",
+   "lemma": "دَقِيقَة",
+   "meanings": [
+    {
+     "gloss": "minute",
+     "concept": "time.minute"
+    },
+    {
+     "gloss": "detail, subtlety",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:tarikh",
+   "lemma": "تَارِيخ",
+   "meanings": [
+    {
+     "gloss": "date",
+     "concept": "time.date"
+    },
+    {
+     "gloss": "history",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:id_milad",
+   "lemma": "عِيد مِيلَاد",
+   "meanings": [
+    {
+     "gloss": "birthday",
+     "concept": "time.birthday"
+    },
+    {
+     "gloss": "Christmas (عِيدُ الْمِيلَادِ)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "only the definite phrase means Christmas"
+  },
+  {
+   "lexeme": "ar:sabt",
+   "lemma": "السَّبْت",
+   "meanings": [
+    {
+     "gloss": "Saturday",
+     "concept": "time.saturday"
+    },
+    {
+     "gloss": "the Sabbath",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:zuhr",
+   "lemma": "ظُهْر",
+   "meanings": [
+    {
+     "gloss": "noon",
+     "concept": "time.noon"
+    },
+    {
+     "gloss": "the noon prayer",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "unvocalized ظهر is also ظَهْر 'back' (body)"
+  },
+  {
+   "lexeme": "ar:shahr",
+   "lemma": "شَهْر",
+   "meanings": [
+    {
+     "gloss": "month",
+     "concept": "time.month"
+    },
+    {
+     "gloss": "new moon",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:rabi",
+   "lemma": "رَبِيع",
+   "meanings": [
+    {
+     "gloss": "spring",
+     "concept": "time.spring"
+    },
+    {
+     "gloss": "spring pasture",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:harr",
+   "lemma": "حَارّ",
+   "meanings": [
+    {
+     "gloss": "hot (weather)",
+     "concept": "adj.hot"
+    },
+    {
+     "gloss": "spicy",
+     "concept": null
+    },
+    {
+     "gloss": "warm, heartfelt",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:barid",
+   "lemma": "بَارِد",
+   "meanings": [
+    {
+     "gloss": "cold",
+     "concept": "adj.cold"
+    },
+    {
+     "gloss": "dull, unfunny",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:sahl",
+   "lemma": "سَهْل",
+   "meanings": [
+    {
+     "gloss": "easy",
+     "concept": "adj.easy"
+    },
+    {
+     "gloss": "plain, flat land (noun)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "the noun 'plain' has the plural سُهُول"
+  },
+  {
+   "lexeme": "ar:fatih",
+   "lemma": "فَاتِح",
+   "meanings": [
+    {
+     "gloss": "light (colour)",
+     "concept": "adj.light"
+    },
+    {
+     "gloss": "conqueror, opener",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:qadim",
+   "lemma": "قَدِيم",
+   "meanings": [
+    {
+     "gloss": "old (things)",
+     "concept": "adj.old.thing"
+    },
+    {
+     "gloss": "former, long-standing",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural قُدَمَاء (the ancients) vs قُدَامَى (former, veterans)"
+  },
+  {
+   "lexeme": "ar:said",
+   "lemma": "سَعِيد",
+   "meanings": [
+    {
+     "gloss": "happy",
+     "concept": "adj.happy"
+    },
+    {
+     "gloss": "lucky, fortunate",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:taira",
+   "lemma": "طَائِرَة",
+   "meanings": [
+    {
+     "gloss": "aeroplane",
+     "concept": "tr.plane"
+    },
+    {
+     "gloss": "kite (طَائِرَةٌ وَرَقِيَّةٌ)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:sayyara",
+   "lemma": "سَيَّارَة",
+   "meanings": [
+    {
+     "gloss": "car",
+     "concept": "tr.car"
+    },
+    {
+     "gloss": "caravan (old)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:kull",
+   "lemma": "كُلّ",
+   "meanings": [
+    {
+     "gloss": "all (+ definite)",
+     "concept": "quant.all"
+    },
+    {
+     "gloss": "every (+ indefinite singular)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:bad",
+   "lemma": "بَعْض",
+   "meanings": [
+    {
+     "gloss": "some",
+     "concept": "quant.some"
+    },
+    {
+     "gloss": "each other (بَعْضُهُمْ بَعْضًا)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:hatta",
+   "lemma": "حَتَّى",
+   "meanings": [
+    {
+     "gloss": "until",
+     "concept": "prep.until"
+    },
+    {
+     "gloss": "even",
+     "concept": null
+    },
+    {
+     "gloss": "so that",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:li",
+   "lemma": "لِ",
+   "meanings": [
+    {
+     "gloss": "for",
+     "concept": "prep.for"
+    },
+    {
+     "gloss": "belonging to",
+     "concept": null
+    },
+    {
+     "gloss": "in order to (+ subjunctive)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "لِلْـ before al-"
+  },
+  {
+   "lexeme": "ar:bi",
+   "lemma": "بِ",
+   "meanings": [
+    {
+     "gloss": "with (instrument, ingredient)",
+     "concept": "prep.with"
+    },
+    {
+     "gloss": "by (transport)",
+     "concept": null
+    },
+    {
+     "gloss": "for (a price)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:an",
+   "lemma": "عَنْ",
+   "meanings": [
+    {
+     "gloss": "about",
+     "concept": "prep.about"
+    },
+    {
+     "gloss": "away from",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:ma",
+   "lemma": "مَا",
+   "meanings": [
+    {
+     "gloss": "what? (before nouns)",
+     "concept": "q.what"
+    },
+    {
+     "gloss": "how …! (exclamation)",
+     "concept": null
+    },
+    {
+     "gloss": "not (+ past; classical/dialectal)",
+     "concept": null
+    },
+    {
+     "gloss": "that which (relative)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:man",
+   "lemma": "مَنْ",
+   "meanings": [
+    {
+     "gloss": "who?",
+     "concept": "q.who"
+    },
+    {
+     "gloss": "whoever, the one who",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:wa",
+   "lemma": "وَ",
+   "meanings": [
+    {
+     "gloss": "and",
+     "concept": "conj.and"
+    },
+    {
+     "gloss": "while (circumstantial)",
+     "concept": null
+    },
+    {
+     "gloss": "by … (oath)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:afwan",
+   "lemma": "عَفْوًا",
+   "meanings": [
+    {
+     "gloss": "you're welcome",
+     "concept": "greet.welcome"
+    },
+    {
+     "gloss": "pardon? excuse me",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:huna",
+   "lemma": "هُنَا",
+   "meanings": [
+    {
+     "gloss": "here",
+     "concept": "adv.here"
+    },
+    {
+     "gloss": "at this point",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:hunaka",
+   "lemma": "هُنَاكَ",
+   "meanings": [
+    {
+     "gloss": "there",
+     "concept": "adv.there"
+    },
+    {
+     "gloss": "there is / there are",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:kathiran",
+   "lemma": "كَثِيرًا",
+   "meanings": [
+    {
+     "gloss": "often",
+     "concept": "adv.often"
+    },
+    {
+     "gloss": "a lot, very much",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:ghaliban",
+   "lemma": "غَالِبًا",
+   "meanings": [
+    {
+     "gloss": "usually, often",
+     "concept": "adv.often"
+    },
+    {
+     "gloss": "probably",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:abadan",
+   "lemma": "أَبَدًا",
+   "meanings": [
+    {
+     "gloss": "never (with negation)",
+     "concept": "adv.never"
+    },
+    {
+     "gloss": "forever (without negation)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:qabla",
+   "lemma": "قَبْلَ",
+   "meanings": [
+    {
+     "gloss": "before",
+     "concept": "prep.before"
+    },
+    {
+     "gloss": "ago",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:bada",
+   "lemma": "بَعْدَ",
+   "meanings": [
+    {
+     "gloss": "after",
+     "concept": "prep.after"
+    },
+    {
+     "gloss": "in (time from now)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "بَعْدُ (with -u) = 'yet' after a negation"
+  },
+  {
+   "lexeme": "ar:idha",
+   "lemma": "إِذَا",
+   "meanings": [
+    {
+     "gloss": "if (likely)",
+     "concept": "conj.if"
+    },
+    {
+     "gloss": "when, whenever",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:qahwa",
+   "lemma": "قَهْوَة",
+   "meanings": [
+    {
+     "gloss": "coffee",
+     "concept": "drink.coffee"
+    },
+    {
+     "gloss": "café (dialectal)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:rashad",
+   "lemma": "رَشَاد",
+   "meanings": [
+    {
+     "gloss": "garden cress",
+     "concept": "veg.cress"
+    },
+    {
+     "gloss": "right guidance",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:ful",
+   "lemma": "فُول",
+   "meanings": [
+    {
+     "gloss": "broad beans",
+     "concept": "veg.broadbean"
+    },
+    {
+     "gloss": "the dish ful medames",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:dhura",
+   "lemma": "ذُرَة",
+   "meanings": [
+    {
+     "gloss": "maize, corn",
+     "concept": "veg.corn"
+    },
+    {
+     "gloss": "sorghum",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": "ar:luf",
+   "lemma": "لُوف",
+   "meanings": [
+    {
+     "gloss": "luffa",
+     "concept": "veg.luffa"
+    },
+    {
+     "gloss": "bath sponge",
+     "concept": null
+    }
+   ],
+   "formsDiffer": null
+  },
+  {
+   "lexeme": null,
+   "lemma": "عَيْن",
+   "meanings": [
+    {
+     "gloss": "eye",
+     "concept": null
+    },
+    {
+     "gloss": "spring (of water)",
+     "concept": null
+    },
+    {
+     "gloss": "spy",
+     "concept": null
+    },
+    {
+     "gloss": "notable person",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "plural أَعْيُن / عُيُون (eyes, springs) vs أَعْيَان (notables)"
+  },
+  {
+   "lexeme": "ar:rajul",
+   "lemma": "رَجُل",
+   "meanings": [
+    {
+     "gloss": "man",
+     "concept": "person.man"
+    },
+    {
+     "gloss": "a real man (praise)",
+     "concept": null
+    }
+   ],
+   "formsDiffer": "unvocalized رجل is also رِجْل 'leg, foot' (another word, plural أَرْجُل; رَجُل has رِجَال)"
+  }
+ ],
+ "conceptGaps": [
+  {
+   "concept": "det.indef",
+   "kind": "lacks",
+   "note": "No indefinite article: tanwīn (-un/-an/-in) on the noun; diptotes are indefinite without it."
+  },
+  {
+   "concept": "det.def",
+   "kind": "lacks",
+   "note": "No separate word: the prefix al- is part of the noun's DEF forms."
+  },
+  {
+   "concept": "pron.it",
+   "kind": "lacks",
+   "note": "No neuter: هُوَ / هِيَ by gender, هِيَ for any non-human plural."
+  },
+  {
+   "concept": "verb.be",
+   "kind": "lacks",
+   "note": "No present copula (nominal sentence); كَانَ for past and future, لَيْسَ for 'is not'."
+  },
+  {
+   "concept": "poss.have",
+   "kind": "lacks",
+   "note": "No verb 'to have': عِنْدَ / لِـ / مَعَ + suffix."
+  },
+  {
+   "concept": "poss.my … poss.their",
+   "kind": "lacks",
+   "note": "Possessives are suffixes on the noun (كِتَابِي), not words."
+  },
+  {
+   "concept": "family.cousin",
+   "kind": "splits",
+   "note": "No word: eight descriptive phrases by side and sex (اِبْنُ عَمٍّ …)."
+  },
+  {
+   "concept": "family.nephew / family.niece",
+   "kind": "splits",
+   "note": "No word: 'son/daughter of the brother / of the sister'."
+  },
+  {
+   "concept": "family.uncle / family.aunt",
+   "kind": "splits",
+   "note": "Paternal vs maternal words (عَمّ / خَال, عَمَّة / خَالَة)."
+  },
+  {
+   "concept": "time.oclock",
+   "kind": "lacks",
+   "note": "Said with السَّاعَةُ + feminine ordinal."
+  },
+  {
+   "concept": "part.no / part.not",
+   "kind": "merges",
+   "note": "One word لَا for the answer 'no' and the negation 'not' (two lexemes in the course)."
+  },
+  {
+   "concept": "adj.long / adj.tall",
+   "kind": "merges",
+   "note": "طَوِيل covers both."
+  },
+  {
+   "concept": "prep.from / conj.than",
+   "kind": "merges",
+   "note": "مِنْ, as Greek από."
+  },
+  {
+   "concept": "home.house / place.home",
+   "kind": "merges",
+   "note": "بَيْت, as Greek σπίτι."
+  },
+  {
+   "concept": "person.girl / family.daughter",
+   "kind": "merges",
+   "note": "بِنْت, as Greek κόρη."
+  },
+  {
+   "concept": "place.park / home.garden",
+   "kind": "merges",
+   "note": "حَدِيقَة."
+  },
+  {
+   "concept": "adv.more / adv.most",
+   "kind": "merges",
+   "note": "أَكْثَر."
+  },
+  {
+   "concept": "prep.in / prep.at / prep.attime / prep.onday / prep.inmonth",
+   "kind": "merges",
+   "note": "فِي for all; often no preposition (adverbial accusative)."
+  },
+  {
+   "concept": "verb.like",
+   "kind": "merges",
+   "note": "أَحَبَّ = like and love (أَعْجَبَ 'please' is the other construction)."
+  },
+  {
+   "concept": "conj.or",
+   "kind": "splits",
+   "note": "أَوْ vs أَمْ."
+  },
+  {
+   "concept": "conj.that",
+   "kind": "splits",
+   "note": "أَنَّ vs أَنْ."
+  },
+  {
+   "concept": "conj.if",
+   "kind": "splits",
+   "note": "إِذَا / إِنْ / لَوْ."
+  },
+  {
+   "concept": "pron.you.sg / pron.you.pl / pron.they",
+   "kind": "splits",
+   "note": "Gender of the addressees; plus dual pronouns."
+  },
+  {
+   "concept": "dual number",
+   "kind": "adds",
+   "note": "A grammatical number for exactly two on nouns, adjectives, pronouns and verbs."
+  },
+  {
+   "concept": "consonantal roots and patterns",
+   "kind": "adds",
+   "note": "Word families by root; no counterpart in el/en/de/ru/tr (Hebrew shares it)."
+  },
+  {
+   "concept": "collective / unit nouns",
+   "kind": "adds",
+   "note": "تُفَّاح (apples, kind) vs تُفَّاحَة (one apple)."
+  },
+  {
+   "concept": "broken plurals",
+   "kind": "adds",
+   "note": "Plural by an internal pattern."
+  },
+  {
+   "concept": "verb forms I–X",
+   "kind": "adds",
+   "note": "Derivational verb system (like Hebrew binyanim)."
+  },
+  {
+   "concept": "jussive and subjunctive moods",
+   "kind": "adds",
+   "note": "Mood endings after particles (لَمْ، لَنْ، أَنْ)."
+  },
+  {
+   "concept": "elative أَفْعَل",
+   "kind": "adds",
+   "note": "One pattern for comparative and superlative."
+  },
+  {
+   "concept": "maṣdar (verbal noun)",
+   "kind": "adds",
+   "note": "Replaces the infinitive."
+  },
+  {
+   "concept": "adverbial accusative",
+   "kind": "adds",
+   "note": "Time and manner without a preposition (صَبَاحًا، يَوْمَ الْجُمُعَةِ)."
+  },
+  {
+   "concept": "number gender polarity",
+   "kind": "adds",
+   "note": "3–10 take the opposite gender (shared with Hebrew)."
+  },
+  {
+   "concept": "part.yes (to a negative question)",
+   "kind": "adds",
+   "note": "بَلَى, like German doch."
+  },
+  {
+   "concept": "Hijri calendar months",
+   "kind": "adds",
+   "note": "Lunar months (مُحَرَّم … رَمَضَان … ذُو الْحِجَّة) used in religious life; not in the course."
+  }
+ ]
+}

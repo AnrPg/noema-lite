@@ -5,7 +5,15 @@
    "lemma": "nicht",
    "pos": "ADV",
    "senses": [
-    "part.not"
+    "part.not",
+    "part.tag"
+   ],
+   "contrasts": [
+    {
+     "concept": "part.tag",
+     "axis": "register",
+     "value": "nicht wahr? – more formal; nicht? – regional"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -33,7 +41,8 @@
       "def": "nicht? / nicht wahr? – tag question “isn't it?, right?”",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.tag"
      }
     ],
     "examples": [
@@ -132,6 +141,11 @@
      "The position of nicht can change what is negated: Ich esse nicht die Gurke (but something else) vs Ich esse die Gurke nicht (not at all).",
      "nicht before a word negates just that word: nicht hier (but there), nicht gut, nicht mein Bruder."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -142,6 +156,25 @@
    "senses": [
     "det.none"
    ],
+   "contrasts": [
+    {
+     "concept": "det.none",
+     "axis": "register",
+     "value": "the normal word (kein Geld)"
+    }
+   ],
+   "features": {
+    "adjAfter": "mixed",
+    "senseForms": [
+     {
+      "form": "keiner, keine, keins",
+      "senses": [
+       "s2"
+      ],
+      "note": "standing alone: Keiner hat mich gefragt."
+     }
+    ]
+   },
    "forms": {
     "DET;NOM;SG;MASC": "kein",
     "DET;NOM;SG;FEM": "keine",
@@ -186,7 +219,8 @@
       "def": "keiner / keine / keins (as a pronoun): nobody, none",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -299,6 +333,15 @@
    "senses": [
     "pron.nothing"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "things",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "PRON;NOM": "nichts",
     "PRON;ACC": "nichts",
@@ -441,6 +484,15 @@
    "senses": [
     "pron.nobody"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons",
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "PRON;NOM": "niemand",
     "PRON;ACC": "niemanden",
@@ -567,6 +619,13 @@
    "senses": [
     "adv.never"
    ],
+   "contrasts": [
+    {
+     "concept": "adv.never",
+     "axis": "emphasis",
+     "value": "never (neutral)"
+    }
+   ],
    "ref": {
     "src": "kaikki",
     "checked": "2026-10-08"
@@ -690,6 +749,11 @@
     "subtleties": [
      "noch nie = never so far: Ich war noch nie in Berlin. – je = ever: Warst du je in Berlin?"
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -698,6 +762,13 @@
    "pos": "ADV",
    "senses": [
     "adv.never"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.never",
+     "axis": "emphasis",
+     "value": "never ever (emphatic)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -799,6 +870,11 @@
     "subtleties": [
      "Niemals! can stand alone as a strong answer."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -807,6 +883,13 @@
    "pos": "CCONJ",
    "senses": [
     "conj.neithernor"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.neithernor",
+     "axis": "place in the pair",
+     "value": "the first part: weder …"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -900,13 +983,32 @@
     "subtleties": [
      "It can join objects (weder Tee noch Kaffee), subjects (Weder Anna noch Max …) and adjectives (weder gut noch schlecht)."
     ]
+   },
+   "features": {
+    "verbPosition": "takes the first place (inversion)"
    }
   },
   {
    "id": "de:noch",
    "lemma": "noch",
    "pos": "CCONJ",
-   "senses": [],
+   "senses": [
+    "conj.neithernor",
+    "adv.still",
+    "det.another"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.neithernor",
+     "axis": "place in the pair",
+     "value": "the second part: … noch"
+    },
+    {
+     "concept": "adv.still",
+     "axis": "alone or in a phrase",
+     "value": "alone (Er schläft noch)"
+    }
+   ],
    "role": "nor – the second half of weder … noch (the adverb noch, “still, yet”, comes later)",
    "ref": {
     "src": "kaikki",
@@ -926,14 +1028,24 @@
       "def": "nor (after weder)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.neithernor"
      },
      {
       "id": "s2",
-      "def": "still, yet; more, another (the adverb: noch ein Kaffee, noch nicht)",
+      "def": "still, yet (the adverb: noch nicht, immer noch)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.still"
+     },
+     {
+      "id": "s3",
+      "def": "another, one more (noch ein Kaffee, noch einmal)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "det.another"
      }
     ],
     "examples": [
@@ -956,6 +1068,27 @@
       "tr": "Would you like another coffee?",
       "register": "formal",
       "context": "café",
+      "sense": "s3"
+     },
+     {
+      "text": "Noch ein Bier, bitte!",
+      "tr": "Another beer, please!",
+      "register": "neutral",
+      "context": "in a pub",
+      "sense": "s3"
+     },
+     {
+      "text": "Ich bin noch müde.",
+      "tr": "I am still tired.",
+      "register": "neutral",
+      "context": "morning",
+      "sense": "s2"
+     },
+     {
+      "text": "Er ist noch nicht da.",
+      "tr": "He isn’t here yet.",
+      "register": "neutral",
+      "context": "waiting",
       "sense": "s2"
      }
     ],
@@ -987,6 +1120,9 @@
     "subtleties": [
      "Noch einen Kaffee, bitte! = Another coffee, please!"
     ]
+   },
+   "features": {
+    "verbPosition": "takes the first place (inversion)"
    }
   }
  ],

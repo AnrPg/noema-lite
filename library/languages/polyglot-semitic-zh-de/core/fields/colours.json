@@ -5,6 +5,10 @@
   {
    "id": "colour",
    "title": "Colours"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -101,6 +105,14 @@
    "subgroup": "colour",
    "tier": 1,
    "rank": 13
+  },
+  {
+   "id": "colour.gingeryellow",
+   "gloss": "ginger-yellow, turmeric-coloured",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

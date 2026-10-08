@@ -1,0 +1,86 @@
+{
+ "field": "body",
+ "title": "The body",
+ "sources": [
+  "the meanings of the course words (D15): every distinct meaning of a word is a concept"
+ ],
+ "concepts": [
+  {
+   "id": "body.ankle",
+   "gloss": "ankle",
+   "tier": 2,
+   "rank": 1,
+   "pending": true
+  },
+  {
+   "id": "body.chineseburn",
+   "gloss": "Chinese burn (twisting the skin of someone’s forearm)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true
+  },
+  {
+   "id": "body.flesh",
+   "gloss": "flesh (of the body)",
+   "tier": 2,
+   "rank": 3,
+   "pending": true
+  },
+  {
+   "id": "body.hairroot",
+   "gloss": "hair root, hair follicle",
+   "tier": 2,
+   "rank": 4,
+   "pending": true
+  },
+  {
+   "id": "body.heel",
+   "gloss": "heel",
+   "tier": 2,
+   "rank": 5,
+   "pending": true
+  },
+  {
+   "id": "body.hunger",
+   "gloss": "hunger, appetite",
+   "tier": 2,
+   "rank": 6,
+   "pending": true
+  },
+  {
+   "id": "body.mole",
+   "gloss": "mole, beauty spot",
+   "tier": 2,
+   "rank": 7,
+   "pending": true
+  },
+  {
+   "id": "body.nose",
+   "gloss": "(big) nose",
+   "tier": 2,
+   "rank": 8,
+   "pending": true
+  },
+  {
+   "id": "body.righthand",
+   "gloss": "right hand",
+   "tier": 2,
+   "rank": 9,
+   "pending": true
+  },
+  {
+   "id": "body.testicles",
+   "gloss": "testicles; (fig.) guts, “balls”",
+   "tier": 2,
+   "rank": 10,
+   "pending": true
+  },
+  {
+   "id": "body.thirst",
+   "gloss": "thirst",
+   "tier": 2,
+   "rank": 11,
+   "pending": true
+  }
+ ]
+}

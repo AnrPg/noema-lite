@@ -5,7 +5,20 @@
    "lemma": "aber",
    "pos": "CCONJ",
    "senses": [
-    "conj.but"
+    "conj.but",
+    "adv.truly"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.truly",
+     "axis": "kind of word",
+     "value": "a particle of surprise (Das ist aber nett!)"
+    },
+    {
+     "concept": "conj.but",
+     "axis": "register",
+     "value": "the everyday word"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -33,7 +46,8 @@
       "def": "really, indeed (particle of surprise: Das ist aber nett!)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "adv.truly"
      }
     ],
     "examples": [
@@ -128,6 +142,9 @@
      "aber can also stand inside the clause: Es ist aber teuer. (= But it is expensive.)",
      "A comma comes before aber."
     ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
    }
   },
   {
@@ -136,6 +153,13 @@
    "pos": "SCONJ",
    "senses": [
     "conj.because"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.because",
+     "axis": "word order and use",
+     "value": "verb at the end; the answer to warum?"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -225,6 +249,9 @@
      "A weil-clause can come first; then the main clause starts with its verb: Weil ich müde bin, gehe ich nach Hause.",
      "The answer to Warum? is a weil-clause on its own: Weil ich müde bin."
     ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
    }
   },
   {
@@ -232,7 +259,21 @@
    "lemma": "denn",
    "pos": "CCONJ",
    "senses": [
-    "conj.because"
+    "conj.because",
+    "part.then",
+    "conj.than"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.because",
+     "axis": "word order and use",
+     "value": "normal word order; never at the start"
+    },
+    {
+     "concept": "conj.than",
+     "axis": "register",
+     "value": "literary, or to avoid als als (mehr denn je)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -260,14 +301,16 @@
       "def": "then, so – particle in questions (Was ist denn los?)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "part.then"
      },
      {
       "id": "s3",
       "def": "than (old style: mehr denn je)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "conj.than"
      }
     ],
     "examples": [
@@ -297,6 +340,13 @@
       "tr": "Today that is more important than ever.",
       "register": "formal",
       "context": "news",
+      "sense": "s3"
+     },
+     {
+      "text": "Er ist als Lehrer bekannter denn als Maler.",
+      "tr": "He is better known as a teacher than as a painter.",
+      "register": "literary",
+      "context": "biography",
       "sense": "s3"
      }
     ],
@@ -349,6 +399,9 @@
     "subtleties": [
      "In questions denn is a softening particle, not “because”: Was machst du denn?"
     ]
+   },
+   "features": {
+    "verbPosition": "none (position zero)"
    }
   },
   {
@@ -357,6 +410,13 @@
    "pos": "ADV",
    "senses": [
     "conj.so"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register and use",
+     "value": "therefore (neutral)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -454,6 +514,11 @@
      "It can also stand after the verb: Ich esse deshalb ein Brot.",
      "A comma (or a full stop) comes before it."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -462,6 +527,13 @@
    "pos": "ADV",
    "senses": [
     "conj.so"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register and use",
+     "value": "therefore (more colloquial)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -549,6 +621,11 @@
     "subtleties": [
      "deswegen = des + wegen (“because of that”); wegen alone is the preposition “because of” (wegen des Wetters)."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -556,7 +633,15 @@
    "lemma": "also",
    "pos": "ADV",
    "senses": [
-    "conj.so"
+    "conj.so",
+    "intj.well"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.so",
+     "axis": "register and use",
+     "value": "so, then: drawing a conclusion"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -587,14 +672,16 @@
       "def": "well, so (starting or resuming: Also, …)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.well"
      },
      {
       "id": "s3",
       "def": "so? then? (in questions: Kommst du also?)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -689,6 +776,11 @@
     "subtleties": [
      "Also! alone, at the start: “Well …” / “Right, …”."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -696,7 +788,15 @@
    "lemma": "dann",
    "pos": "ADV",
    "senses": [
-    "adv.then"
+    "adv.then",
+    "adv.inthatcase"
+   ],
+   "contrasts": [
+    {
+     "concept": "adv.then",
+     "axis": "which “then”",
+     "value": "after that, next (the order of events)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -724,14 +824,16 @@
       "def": "then, in that case (Wenn …, dann …)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.inthatcase"
      },
      {
       "id": "s3",
       "def": "then (in Bis dann! = see you then)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -828,6 +930,11 @@
     "subtleties": [
      "In Wenn …, dann … the dann is optional: Wenn du Hunger hast, (dann) iss etwas."
     ]
+   },
+   "features": {
+    "comparison": {
+     "none": "not compared"
+    }
    }
   },
   {
@@ -836,7 +943,20 @@
    "pos": "SCONJ",
    "senses": [
     "conj.when",
-    "conj.if"
+    "conj.if",
+    "conj.ifonly"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.when",
+     "axis": "time and repetition",
+     "value": "present, future or repeated (whenever)"
+    },
+    {
+     "concept": "conj.if",
+     "axis": "condition or question",
+     "value": "a condition (if it rains)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -872,7 +992,8 @@
       "def": "if only (a wish: Wenn ich doch …!)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.ifonly"
      }
     ],
     "examples": [
@@ -980,6 +1101,9 @@
      "English if and when are both wenn in the present and future; context decides.",
      "If the wenn-clause comes first, the main clause starts with its verb: Wenn es kalt ist, trinken wir Tee."
     ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
    }
   },
   {
@@ -987,7 +1111,20 @@
    "lemma": "ob",
    "pos": "SCONJ",
    "senses": [
-    "conj.if"
+    "conj.if",
+    "conj.asif"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.asif",
+     "axis": "how it forms “as if”",
+     "value": "only after als: als ob …"
+    },
+    {
+     "concept": "conj.if",
+     "axis": "condition or question",
+     "value": "whether: an indirect yes/no question"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1015,7 +1152,8 @@
       "def": "as if (als ob)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "conj.asif"
      }
     ],
     "examples": [
@@ -1087,6 +1225,9 @@
     "subtleties": [
      "Ob …? alone is a wondering question: Ob er heute kommt? (I wonder if he’s coming today.)"
     ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
    }
   },
   {
@@ -1094,7 +1235,15 @@
    "lemma": "dass",
    "pos": "SCONJ",
    "senses": [
-    "conj.that"
+    "conj.that",
+    "conj.inorderto"
+   ],
+   "contrasts": [
+    {
+     "concept": "conj.inorderto",
+     "axis": "construction",
+     "value": "dass + clause, colloquial for damit (another subject)"
+    }
    ],
    "ref": {
     "src": "kaikki",
@@ -1122,7 +1271,8 @@
       "def": "so that (colloquial for damit)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "conj.inorderto"
      }
     ],
     "examples": [
@@ -1186,6 +1336,9 @@
     "subtleties": [
      "Speech often drops dass and keeps main-clause order: Ich glaube, er kommt = Ich glaube, dass er kommt."
     ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
    }
   },
   {
@@ -1282,6 +1435,9 @@
     "subtleties": [
      "Speech sometimes uses obwohl as a correction with main-clause order: Ich komme mit – obwohl, nein, ich bin zu müde."
     ]
+   },
+   "features": {
+    "verbPosition": "at the end of its clause"
    }
   }
  ]

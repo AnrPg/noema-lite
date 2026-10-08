@@ -5,9 +5,23 @@
    "lemma": "גָּדוֹל",
    "pos": "ADJ",
    "senses": [
-    "adj.big"
+    "adj.big",
+    "adj.great",
+    "adj.adult",
+    "adj.awesome"
    ],
    "translit": "gadol",
+   "features": {
+    "spelling": "גדול",
+    "root": "ג ד ל",
+    "pattern": "קָטוֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "גָּדוֹל",
     "ADJ;SG;FEM": "גְּדוֹלָה",
@@ -18,6 +32,13 @@
     "ADJ;PL;MASC;DEF": "הַגְּדוֹלִים",
     "ADJ;PL;FEM;DEF": "הַגְּדוֹלוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "adj.adult",
+     "axis": "register",
+     "value": "everyday, of and by children (כְּשֶׁאֶהְיֶה גָּדוֹל)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -44,21 +65,24 @@
       "def": "great, important",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.great"
      },
      {
       "id": "s3",
       "def": "grown-up, older (of children and siblings)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.adult"
      },
      {
       "id": "s4",
       "def": "great, awesome (of a person: אַתָּה גָּדוֹל!)",
       "register": [
        "slang"
-      ]
+      ],
+      "concept": "adj.awesome"
      }
     ],
     "examples": [
@@ -184,9 +208,21 @@
    "lemma": "קָטָן",
    "pos": "ADJ",
    "senses": [
-    "adj.small"
+    "adj.small",
+    "adj.young"
    ],
    "translit": "katan",
+   "features": {
+    "spelling": "קטן",
+    "root": "ק ט ן",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "קָטָן",
     "ADJ;SG;FEM": "קְטַנָּה",
@@ -197,6 +233,13 @@
     "ADJ;PL;MASC;DEF": "הַקְּטַנִּים",
     "ADJ;PL;FEM;DEF": "הַקְּטַנּוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "of whom",
+     "value": "little, younger: of children and siblings"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -223,14 +266,16 @@
       "def": "young, little; younger (of children and siblings)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.young"
      },
      {
       "id": "s3",
       "def": "little, unimportant",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -261,6 +306,13 @@
       "register": "neutral",
       "context": "conversation",
       "sense": "s3"
+     },
+     {
+      "text": "הִיא הַבַּת הַקְּטַנָּה בַּמִּשְׁפָּחָה.",
+      "tr": "She is the youngest daughter in the family.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -334,7 +386,18 @@
    "senses": [
     "adj.long"
    ],
-   "translit": "arokh",
+   "translit": "aroch",
+   "features": {
+    "spelling": "ארוך",
+    "root": "א ר ך",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "אָרֹךְ",
     "ADJ;SG;FEM": "אֲרֻכָּה",
@@ -381,7 +444,8 @@
       "def": "long (in time)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -474,6 +538,17 @@
     "adj.short"
    ],
    "translit": "katsar",
+   "features": {
+    "spelling": "קצר",
+    "root": "ק צ ר",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "קָצָר",
     "ADJ;SG;FEM": "קְצָרָה",
@@ -586,9 +661,21 @@
    "lemma": "גָּבֹהַּ",
    "pos": "ADJ",
    "senses": [
-    "adj.tall"
+    "adj.tall",
+    "adj.high"
    ],
    "translit": "gavoha",
+   "features": {
+    "spelling": "גבוה",
+    "root": "ג ב ה",
+    "pattern": "קָטֹל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "גָּבֹהַּ",
     "ADJ;SG;FEM": "גְּבֹהָה",
@@ -635,7 +722,8 @@
       "def": "high (a level, a price, a fever, a voice)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.high"
      }
     ],
     "examples": [
@@ -715,9 +803,25 @@
    "lemma": "טוֹב",
    "pos": "ADJ",
    "senses": [
-    "adj.good"
+    "adj.good",
+    "adj.kind",
+    "intj.ok",
+    "adv.well"
    ],
    "translit": "tov",
+   "features": {
+    "spelling": "טוב",
+    "root": "ט ו ב",
+    "pattern": {
+     "none": "a one-syllable adjective of a hollow root: no pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "טוֹב",
     "ADJ;SG;FEM": "טוֹבָה",
@@ -728,6 +832,18 @@
     "ADJ;PL;MASC;DEF": "הַטּוֹבִים",
     "ADJ;PL;FEM;DEF": "הַטּוֹבוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "intj.ok",
+     "axis": "what the reply does",
+     "value": "accepts and moves on: “well, OK then”"
+    },
+    {
+     "concept": "adv.well",
+     "axis": "nuance",
+     "value": "well, properly (colloquial)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -754,14 +870,24 @@
       "def": "kind, good-hearted",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.kind"
      },
      {
       "id": "s3",
       "def": "OK, fine, well (as a reply or an adverb)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "intj.ok"
+     },
+     {
+      "id": "s4",
+      "def": "well (adverb, colloquial: הִיא מְדַבֶּרֶת עִבְרִית טוֹב)",
+      "register": [
+       "colloquial"
+      ],
+      "concept": "adv.well"
      }
     ],
     "examples": [
@@ -792,6 +918,13 @@
       "register": "colloquial",
       "context": "conversation",
       "sense": "s3"
+     },
+     {
+      "text": "הִיא מְדַבֶּרֶת עִבְרִית טוֹב.",
+      "tr": "She speaks Hebrew well.",
+      "register": "colloquial",
+      "context": "languages",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -884,6 +1017,19 @@
     "adj.bad"
    ],
    "translit": "ra",
+   "features": {
+    "spelling": "רע",
+    "root": "ר ע ע",
+    "pattern": {
+     "none": "a one-syllable adjective of a doubled root: no pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "רַע",
     "ADJ;SG;FEM": "רָעָה",
@@ -920,7 +1066,8 @@
       "def": "evil, wicked",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1032,9 +1179,27 @@
    "lemma": "חָדָשׁ",
    "pos": "ADJ",
    "senses": [
-    "adj.new"
+    "adj.new",
+    "comm.news"
    ],
    "translit": "chadash",
+   "features": {
+    "spelling": "חדש",
+    "root": "ח ד שׁ",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": [
+     {
+      "form": "חֲדָשׁוֹת",
+      "senses": [
+       "s2"
+      ],
+      "note": "as a noun only in the feminine plural: הַחֲדָשׁוֹת “the news”"
+     }
+    ]
+   },
    "forms": {
     "ADJ;SG;MASC": "חָדָשׁ",
     "ADJ;SG;FEM": "חֲדָשָׁה",
@@ -1071,7 +1236,8 @@
       "def": "the news (feminine plural חֲדָשׁוֹת)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "comm.news"
      }
     ],
     "examples": [
@@ -1175,9 +1341,21 @@
    "lemma": "יָשָׁן",
    "pos": "ADJ",
    "senses": [
-    "adj.old.thing"
+    "adj.old.thing",
+    "adj.former"
    ],
    "translit": "yashan",
+   "features": {
+    "spelling": "ישן",
+    "root": "י שׁ ן",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "יָשָׁן",
     "ADJ;SG;FEM": "יְשָׁנָה",
@@ -1214,7 +1392,8 @@
       "def": "former, previous; long-standing",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.former"
      }
     ],
     "examples": [
@@ -1309,9 +1488,21 @@
    "lemma": "צָעִיר",
    "pos": "ADJ",
    "senses": [
-    "adj.young"
+    "adj.young",
+    "person.youngman"
    ],
-   "translit": "tsair",
+   "translit": "tsa'ir",
+   "features": {
+    "spelling": "צעיר",
+    "root": "צ ע ר",
+    "pattern": "קָטִיל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "צָעִיר",
     "ADJ;SG;FEM": "צְעִירָה",
@@ -1322,6 +1513,13 @@
     "ADJ;PL;MASC;DEF": "הַצְּעִירִים",
     "ADJ;PL;FEM;DEF": "הַצְּעִירוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "adj.young",
+     "axis": "of whom",
+     "value": "young: of people in general"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1348,7 +1546,8 @@
       "def": "a young man; (plural) young people",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.youngman"
      }
     ],
     "examples": [
@@ -1439,9 +1638,21 @@
    "lemma": "זָקֵן",
    "pos": "ADJ",
    "senses": [
-    "adj.old.person"
+    "adj.old.person",
+    "person.oldman"
    ],
    "translit": "zaken",
+   "features": {
+    "spelling": "זקן",
+    "root": "ז ק ן",
+    "pattern": "קָטֵל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "זָקֵן",
     "ADJ;SG;FEM": "זְקֵנָה",
@@ -1452,6 +1663,18 @@
     "ADJ;PL;MASC;DEF": "הַזְּקֵנִים",
     "ADJ;PL;FEM;DEF": "הַזְּקֵנוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "person.oldman",
+     "axis": "register",
+     "value": "everyday: an old man"
+    },
+    {
+     "concept": "adj.old.person",
+     "axis": "politeness",
+     "value": "plain “old”, can sound blunt"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1478,7 +1701,8 @@
       "def": "an old man; an elder (noun)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.oldman"
      }
     ],
     "examples": [
@@ -1502,6 +1726,13 @@
       "register": "neutral",
       "context": "transport",
       "sense": "s1"
+     },
+     {
+      "text": "זָקֵן אֶחָד יָשַׁב עַל הַסַּפְסָל.",
+      "tr": "An old man was sitting on the bench.",
+      "register": "neutral",
+      "context": "park",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -1572,9 +1803,26 @@
    "lemma": "מְבֻגָּר",
    "pos": "ADJ",
    "senses": [
-    "adj.old.person"
+    "adj.old.person",
+    "adj.adult"
    ],
    "translit": "mevugar",
+   "features": {
+    "spelling": "מבוגר",
+    "root": "ב ג ר",
+    "pattern": "מְקֻטָּל",
+    "governs": [
+     {
+      "prep": "mi",
+      "senses": [
+       "s3"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "מְבֻגָּר",
     "ADJ;SG;FEM": "מְבֻגֶּרֶת",
@@ -1595,6 +1843,18 @@
     "ADJ;PL;MASC;DEF": "המבוגרים",
     "ADJ;PL;FEM;DEF": "המבוגרות"
    },
+   "contrasts": [
+    {
+     "concept": "adj.adult",
+     "axis": "register",
+     "value": "neutral to formal: an adult"
+    },
+    {
+     "concept": "adj.old.person",
+     "axis": "politeness",
+     "value": "polite: “elderly, older”"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08",
@@ -1624,14 +1884,16 @@
       "def": "adult, grown-up",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.adult"
      },
      {
       "id": "s3",
       "def": "older (than): מְבֻגָּר מִ…",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1727,6 +1989,19 @@
     "adj.hot"
    ],
    "translit": "cham",
+   "features": {
+    "spelling": "חם",
+    "root": "ח מ ם",
+    "pattern": {
+     "none": "a one-syllable adjective of a doubled root: no pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "חַם",
     "ADJ;SG;FEM": "חַמָּה",
@@ -1763,7 +2038,8 @@
       "def": "warm, heated (of feelings, a debate)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1870,6 +2146,19 @@
     "adj.cold"
    ],
    "translit": "kar",
+   "features": {
+    "spelling": "קר",
+    "root": "ק ר ר",
+    "pattern": {
+     "none": "a one-syllable adjective of a doubled root: no pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "קַר",
     "ADJ;SG;FEM": "קָרָה",
@@ -1906,7 +2195,8 @@
       "def": "cold, distant (of a person)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2017,9 +2307,21 @@
    "lemma": "חָמִים",
    "pos": "ADJ",
    "senses": [
-    "adj.warm"
+    "adj.warm",
+    "adj.heartfelt"
    ],
    "translit": "chamim",
+   "features": {
+    "spelling": "חמים",
+    "root": "ח מ ם",
+    "pattern": "קָטִיל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "חָמִים",
     "ADJ;SG;FEM": "חֲמִימָה",
@@ -2056,7 +2358,8 @@
       "def": "warm, friendly (of people and atmosphere)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.heartfelt"
      }
     ],
     "examples": [
@@ -2136,9 +2439,21 @@
    "lemma": "יָפֶה",
    "pos": "ADJ",
    "senses": [
-    "adj.beautiful"
+    "adj.beautiful",
+    "adv.well"
    ],
    "translit": "yafe",
+   "features": {
+    "spelling": "יפה",
+    "root": "י פ ה",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "יָפֶה",
     "ADJ;SG;FEM": "יָפָה",
@@ -2149,6 +2464,13 @@
     "ADJ;PL;MASC;DEF": "הַיָּפִים",
     "ADJ;PL;FEM;DEF": "הַיָּפוֹת"
    },
+   "contrasts": [
+    {
+     "concept": "adv.well",
+     "axis": "nuance",
+     "value": "nicely, in a pleasing way (praise)"
+    }
+   ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2175,14 +2497,16 @@
       "def": "nice, good (of an act): well done!",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "nicely, well (adverb)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adv.well"
      }
     ],
     "examples": [
@@ -2294,7 +2618,18 @@
    "senses": [
     "adj.ugly"
    ],
-   "translit": "mechoar",
+   "translit": "mecho'ar",
+   "features": {
+    "spelling": "מכוער",
+    "root": "כ ע ר",
+    "pattern": "מְקֻטָּל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "מְכֹעָר",
     "ADJ;SG;FEM": "מְכֹעֶרֶת",
@@ -2341,7 +2676,8 @@
       "def": "ugly, nasty (of behaviour, a situation)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2421,9 +2757,23 @@
    "lemma": "קַל",
    "pos": "ADJ",
    "senses": [
-    "adj.easy"
+    "adj.easy",
+    "adj.light.weight"
    ],
    "translit": "kal",
+   "features": {
+    "spelling": "קל",
+    "root": "ק ל ל",
+    "pattern": {
+     "none": "a one-syllable adjective of a doubled root: no pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "קַל",
     "ADJ;SG;FEM": "קַלָּה",
@@ -2460,14 +2810,16 @@
       "def": "light (of little weight)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.light.weight"
      },
      {
       "id": "s3",
       "def": "light, minor (a meal, an illness)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s2"
      }
     ],
     "examples": [
@@ -2573,9 +2925,22 @@
    "lemma": "קָשֶׁה",
    "pos": "ADJ",
    "senses": [
-    "adj.difficult"
+    "adj.difficult",
+    "adj.hard",
+    "adj.serious"
    ],
    "translit": "kashe",
+   "features": {
+    "spelling": "קשה",
+    "root": "ק שׁ ה",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "קָשֶׁה",
     "ADJ;SG;FEM": "קָשָׁה",
@@ -2612,14 +2977,16 @@
       "def": "hard (not soft)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.hard"
      },
      {
       "id": "s3",
       "def": "hard, severe, serious",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.serious"
      }
     ],
     "examples": [
@@ -2650,6 +3017,13 @@
       "register": "neutral",
       "context": "food",
       "sense": "s2"
+     },
+     {
+      "text": "הָיְתָה לוֹ מַחֲלָה קָשָׁה.",
+      "tr": "He had a serious illness.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -2726,6 +3100,21 @@
     "adj.cheap"
    ],
    "translit": "zol",
+   "features": {
+    "spelling": "זול",
+    "root": {
+     "none": "dictionaries differ: ז־ל־ל (זִלְזֵל) or ז־ו־ל (הוֹזִיל “to cut the price”)"
+    },
+    "pattern": {
+     "none": "a one-syllable adjective: no pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "זוֹל",
     "ADJ;SG;FEM": "זוֹלָה",
@@ -2762,7 +3151,8 @@
       "def": "cheap, tacky",
       "register": [
        "pejorative"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2841,9 +3231,21 @@
    "lemma": "יָקָר",
    "pos": "ADJ",
    "senses": [
-    "adj.expensive"
+    "adj.expensive",
+    "adj.dear"
    ],
    "translit": "yakar",
+   "features": {
+    "spelling": "יקר",
+    "root": "י ק ר",
+    "pattern": "קָטָל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "יָקָר",
     "ADJ;SG;FEM": "יְקָרָה",
@@ -2880,7 +3282,8 @@
       "def": "dear, precious",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "adj.dear"
      }
     ],
     "examples": [
@@ -2978,6 +3381,17 @@
     "adj.happy"
    ],
    "translit": "sameach",
+   "features": {
+    "spelling": "שמח",
+    "root": "שׂ מ ח",
+    "pattern": "קָטֵל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "שָׂמֵחַ",
     "ADJ;SG;FEM": "שְׂמֵחָה",
@@ -3014,7 +3428,8 @@
       "def": "merry, joyful (of an occasion)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3111,6 +3526,17 @@
     "adj.sad"
    ],
    "translit": "atsuv",
+   "features": {
+    "spelling": "עצוב",
+    "root": "ע צ ב",
+    "pattern": "קָטוּל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "עָצוּב",
     "ADJ;SG;FEM": "עֲצוּבָה",
@@ -3147,7 +3573,8 @@
       "def": "sad (causing sadness: a sad film)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3235,6 +3662,22 @@
     "adj.tired"
    ],
    "translit": "ayef",
+   "features": {
+    "spelling": "עייף",
+    "root": "ע י ף",
+    "pattern": "קָטֵל",
+    "governs": [
+     {
+      "prep": "mi",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "עָיֵף",
     "ADJ;SG;FEM": "עֲיֵפָה",
@@ -3281,7 +3724,8 @@
       "def": "tired of, fed up with (עָיֵף מִ…)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3383,7 +3827,23 @@
    "senses": [
     "adj.hungry"
    ],
-   "translit": "raev",
+   "translit": "ra'ev",
+   "features": {
+    "spelling": "רעב",
+    "root": "ר ע ב",
+    "pattern": "קָטֵל",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "רָעֵב",
     "ADJ;SG;FEM": "רְעֵבָה",
@@ -3420,7 +3880,8 @@
       "def": "hungry for, eager (רָעֵב לְ…)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3511,6 +3972,22 @@
     "adj.thirsty"
    ],
    "translit": "tsame",
+   "features": {
+    "spelling": "צמא",
+    "root": "צ מ א",
+    "pattern": "קָטֵל",
+    "governs": [
+     {
+      "prep": "le",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "צָמֵא",
     "ADJ;SG;FEM": "צְמֵאָה",
@@ -3547,7 +4024,8 @@
       "def": "thirsty for, longing for",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3619,9 +4097,21 @@
    "lemma": "מָהִיר",
    "pos": "ADJ",
    "senses": [
-    "adj.fast"
+    "adj.fast",
+    "adj.skilled"
    ],
    "translit": "mahir",
+   "features": {
+    "spelling": "מהיר",
+    "root": "מ ה ר",
+    "pattern": "קָטִיל",
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "מָהִיר",
     "ADJ;SG;FEM": "מְהִירָה",
@@ -3658,7 +4148,8 @@
       "def": "skilled, expert (literary)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "adj.skilled"
      }
     ],
     "examples": [
@@ -3753,6 +4244,19 @@
     "adj.slow"
    ],
    "translit": "iti",
+   "features": {
+    "spelling": "איטי",
+    "root": "א ט ט",
+    "pattern": {
+     "none": "built from אַט “slowly” with the suffix ־ִי, not a pattern"
+    },
+    "governs": {
+     "none": "takes no complement of its own (“than” in comparisons is מִ)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "ADJ;SG;MASC": "אִטִּי",
     "ADJ;SG;FEM": "אִטִּית",

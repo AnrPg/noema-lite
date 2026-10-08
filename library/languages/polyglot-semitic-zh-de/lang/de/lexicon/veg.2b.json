@@ -8,6 +8,27 @@
     "veg.okra"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Okras",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Okra",
     "N;ACC;SG": "Okra",
@@ -117,6 +138,34 @@
     "veg.broadbean"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Ackerbohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Acker",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Ackerbohne",
     "N;ACC;SG": "Ackerbohne",
@@ -233,6 +282,34 @@
     "veg.bittermelon"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Bittermelonen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "bitter",
+      "role": "modifier"
+     },
+     {
+      "part": "Melone",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Bittermelone",
     "N;ACC;SG": "Bittermelone",
@@ -342,6 +419,35 @@
     "veg.bottlegourd"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Flaschenkürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Flasche",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Flaschenkürbis",
     "N;ACC;SG": "Flaschenkürbis",
@@ -446,6 +552,27 @@
     "veg.artichoke"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Artischocken",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Artischocke",
     "N;ACC;SG": "Artischocke",
@@ -545,6 +672,27 @@
     "veg.kohlrabi"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kohlrabis",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word (from Italian cavoli rape)"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kohlrabi",
     "N;ACC;SG": "Kohlrabi",
@@ -651,6 +799,29 @@
    ],
    "gender": "MASC",
    "class": "sgt",
+   "features": {
+    "plurals": {
+     "none": "a mass noun: used without a plural"
+    },
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Rose",
+      "role": "modifier",
+      "linker": "-n-"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Rosenkohl",
     "N;ACC;SG": "Rosenkohl",
@@ -758,6 +929,27 @@
     "veg.chayote"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Chayoten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Chayote",
     "N;ACC;SG": "Chayote",
@@ -862,6 +1054,34 @@
     "veg.wintermelon"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Wachskürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Wachs",
+      "role": "modifier"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Wachskürbis",
     "N;ACC;SG": "Wachskürbis",
@@ -966,6 +1186,34 @@
     "veg.luffa"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Schwammgurken",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Schwamm",
+      "role": "modifier"
+     },
+     {
+      "part": "Gurke",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Schwammgurke",
     "N;ACC;SG": "Schwammgurke",
@@ -1067,9 +1315,38 @@
    "lemma": "Grünkohl",
    "pos": "NOUN",
    "senses": [
-    "veg.kale"
+    "veg.kale",
+    "food.kalestew"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Grünkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "grün",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Grünkohl",
     "N;ACC;SG": "Grünkohl",
@@ -1110,7 +1387,8 @@
       "def": "kale stew, a winter dish of northern Germany",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "food.kalestew"
      }
     ],
     "examples": [
@@ -1198,6 +1476,27 @@
     "veg.bokchoy"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Pak Chois",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "two words (from Cantonese), not a German compound"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Pak Choi",
     "N;ACC;SG": "Pak Choi",
@@ -1307,6 +1606,34 @@
     "veg.napacabbage"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Chinakohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "China",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Chinakohl",
     "N;ACC;SG": "Chinakohl",
@@ -1411,6 +1738,27 @@
     "veg.jalapeno"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Jalapeños",
+      "pattern": "-s",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": {
+     "none": "a simple word"
+    },
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Jalapeño",
     "N;ACC;SG": "Jalapeño",
@@ -1510,6 +1858,34 @@
     "veg.redcabbage"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Rotkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "rot",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Rotkohl",
     "N;ACC;SG": "Rotkohl",
@@ -1636,6 +2012,34 @@
     "veg.runnerbean"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Feuerbohnen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Feuer",
+      "role": "modifier"
+     },
+     {
+      "part": "Bohne",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Feuerbohne",
     "N;ACC;SG": "Feuerbohne",
@@ -1752,6 +2156,34 @@
     "veg.collards"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Blattkohle",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Blatt",
+      "role": "modifier"
+     },
+     {
+      "part": "Kohl",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Blattkohl",
     "N;ACC;SG": "Blattkohl",
@@ -1852,6 +2284,35 @@
     "veg.cherrytomato"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Kirschtomaten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Kirsche",
+      "role": "modifier",
+      "linker": "−e"
+     },
+     {
+      "part": "Tomate",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Kirschtomate",
     "N;ACC;SG": "Kirschtomate",
@@ -1961,6 +2422,34 @@
     "veg.beansprout"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Sojasprossen",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Soja",
+      "role": "modifier"
+     },
+     {
+      "part": "Sprosse",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Sojasprosse",
     "N;ACC;SG": "Sojasprosse",
@@ -2070,6 +2559,34 @@
     "veg.butternut"
    ],
    "gender": "MASC",
+   "features": {
+    "plurals": [
+     {
+      "form": "Butternusskürbisse",
+      "pattern": "-e",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "strong",
+    "compound": [
+     {
+      "part": "Butternuss",
+      "role": "modifier"
+     },
+     {
+      "part": "Kürbis",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Butternusskürbis",
     "N;ACC;SG": "Butternusskürbis",
@@ -2175,6 +2692,34 @@
     "veg.snowpea"
    ],
    "gender": "FEM",
+   "features": {
+    "plurals": [
+     {
+      "form": "Zuckerschoten",
+      "pattern": "-n",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "declension": "feminine",
+    "compound": [
+     {
+      "part": "Zucker",
+      "role": "modifier"
+     },
+     {
+      "part": "Schote",
+      "role": "head"
+     }
+    ],
+    "homonyms": {
+     "none": "no other noun with this form"
+    },
+    "senseForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;NOM;SG": "Zuckerschote",
     "N;ACC;SG": "Zuckerschote",

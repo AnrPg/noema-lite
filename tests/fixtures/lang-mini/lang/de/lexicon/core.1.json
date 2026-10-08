@@ -7,6 +7,15 @@
    "senses": [
     "pron.he"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "er",
     "PRON;ACC": "ihn",
@@ -23,6 +32,15 @@
    "senses": [
     "pron.she"
    ],
+   "features": {
+    "address": {
+     "none": "not a pronoun of address"
+    },
+    "reference": "persons and things",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "PRON;NOM": "sie",
     "PRON;ACC": "sie",
@@ -39,6 +57,44 @@
    "senses": [
     "verb.eat"
    ],
+   "features": {
+    "principalParts": [
+     "essen",
+     "isst",
+     "aß",
+     "gegessen"
+    ],
+    "conjugation": "strong",
+    "presentChange": "e>i",
+    "aux": "haben",
+    "auxBySense": {
+     "none": "one auxiliary for every meaning"
+    },
+    "separable": {
+     "none": "not a separable verb"
+    },
+    "inseparable": {
+     "none": "no inseparable prefix"
+    },
+    "governs": [
+     {
+      "case": "ACC",
+      "senses": [
+       "s1"
+      ],
+      "note": "the object may be left out: Wir essen um sieben."
+     }
+    ],
+    "reflexive": {
+     "none": "no reflexive meaning"
+    },
+    "motion": {
+     "none": "not a verb of motion"
+    },
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "aux": "haben",
    "forms": {
     "V;NFIN": "essen",
@@ -74,7 +130,8 @@
       "def": "to have a meal, to dine (essen gehen = to eat out)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -208,6 +265,12 @@
    "senses": [
     "det.def"
    ],
+   "features": {
+    "adjAfter": "weak",
+    "senseForms": {
+     "none": "every meaning uses the same forms"
+    }
+   },
    "forms": {
     "DET;NOM;SG;MASC": "der",
     "DET;NOM;SG;FEM": "die",
@@ -238,6 +301,10 @@
    "senses": [
     "det.indef"
    ],
+   "features": {
+    "adjAfter": "mixed",
+    "senseForms": []
+   },
    "forms": {
     "DET;NOM;SG;MASC": "ein",
     "DET;NOM;SG;FEM": "eine",
@@ -263,6 +330,9 @@
    "senses": [
     "conj.and"
    ],
+   "features": {
+    "verbPosition": "none (position zero)"
+   },
    "ref": {
     "src": "fixture"
    }

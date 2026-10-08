@@ -49,6 +49,10 @@
   {
    "id": "link",
    "title": "Linking words"
+  },
+  {
+   "id": "more",
+   "title": "Other meanings (pending)"
   }
  ],
  "sources": [
@@ -705,6 +709,1046 @@
    "subgroup": "link",
    "tier": 1,
    "rank": 93
+  },
+  {
+   "id": "adv.afterall",
+   "gloss": "after all, in the end",
+   "tier": 2,
+   "rank": 1,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.again",
+   "gloss": "again, anew (مِنْ جَدِيدٍ)",
+   "tier": 2,
+   "rank": 2,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.ago",
+   "gloss": "ago",
+   "tier": 2,
+   "rank": 3,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.alittle",
+   "gloss": "a little, slightly, a bit",
+   "tier": 2,
+   "rank": 4,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.alot",
+   "gloss": "a lot, very much (adverb)",
+   "tier": 2,
+   "rank": 5,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.already",
+   "gloss": "already",
+   "tier": 2,
+   "rank": 6,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.altogether",
+   "gloss": "altogether, in all",
+   "tier": 2,
+   "rank": 7,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.anywhere",
+   "gloss": "wherever; anywhere",
+   "tier": 2,
+   "rank": 8,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.badly",
+   "gloss": "badly (adverb)",
+   "tier": 2,
+   "rank": 9,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.briefly",
+   "gloss": "briefly, for a moment",
+   "tier": 2,
+   "rank": 10,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.byprofession",
+   "gloss": "by profession, by trade",
+   "tier": 2,
+   "rank": 11,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.etc",
+   "gloss": "and so on, etc. (after a list)",
+   "tier": 2,
+   "rank": 12,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.even",
+   "gloss": "(not) even",
+   "tier": 2,
+   "rank": 13,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.ever",
+   "gloss": "ever (in a question: have you ever …?)",
+   "tier": 2,
+   "rank": 14,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.forever",
+   "gloss": "forever, always",
+   "tier": 2,
+   "rank": 15,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.formerly",
+   "gloss": "before, formerly, in the past",
+   "tier": 2,
+   "rank": 16,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.fortunately",
+   "gloss": "fortunately, luckily",
+   "tier": 2,
+   "rank": 17,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.gradually",
+   "gloss": "gradually; (it’s) about time",
+   "tier": 2,
+   "rank": 18,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.hadbetter",
+   "gloss": "had better",
+   "tier": 2,
+   "rank": 19,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.how.excl",
+   "gloss": "how …! (exclamation: how beautiful!)",
+   "tier": 2,
+   "rank": 20,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.insideout",
+   "gloss": "inside out (clothes)",
+   "tier": 2,
+   "rank": 21,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.inthatcase",
+   "gloss": "then, in that case, well then",
+   "tier": 2,
+   "rank": 22,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.invain",
+   "gloss": "in vain, for nothing; for free",
+   "tier": 2,
+   "rank": 23,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.little",
+   "gloss": "little, not much (adverb: he eats little)",
+   "tier": 2,
+   "rank": 24,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.moreandmore",
+   "gloss": "more and more, increasingly",
+   "tier": 2,
+   "rank": 25,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.moreorless",
+   "gloss": "more or less, somewhat",
+   "tier": 2,
+   "rank": 26,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.moreover",
+   "gloss": "moreover, furthermore",
+   "tier": 2,
+   "rank": 27,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.nolonger",
+   "gloss": "no longer, not any more (لَمْ يَعُدْ …)",
+   "tier": 2,
+   "rank": 28,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.nowadays",
+   "gloss": "nowadays, these days",
+   "tier": 2,
+   "rank": 29,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.off",
+   "gloss": "off (switched off: the light is off)",
+   "tier": 2,
+   "rank": 30,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.probably",
+   "gloss": "probably, most likely",
+   "tier": 2,
+   "rank": 31,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.quickly",
+   "gloss": "quickly (adverb)",
+   "tier": 2,
+   "rank": 32,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.recently",
+   "gloss": "recently, lately",
+   "tier": 2,
+   "rank": 33,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.simply",
+   "gloss": "just, simply (it’s simply great)",
+   "tier": 2,
+   "rank": 34,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.sincethen",
+   "gloss": "since then",
+   "tier": 2,
+   "rank": 35,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.slowly",
+   "gloss": "slowly (adverb)",
+   "tier": 2,
+   "rank": 36,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.sometime",
+   "gloss": "sometime, at some point",
+   "tier": 2,
+   "rank": 37,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.somewhere",
+   "gloss": "somewhere",
+   "tier": 2,
+   "rank": 38,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.still",
+   "gloss": "still; nevertheless",
+   "tier": 2,
+   "rank": 39,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.terribly",
+   "gloss": "terribly, awfully (after a verb or adjective: 饿坏了 starving)",
+   "tier": 2,
+   "rank": 40,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.thus",
+   "gloss": "so, thus, in this way",
+   "tier": 2,
+   "rank": 41,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.together",
+   "gloss": "together, with each other",
+   "tier": 2,
+   "rank": 42,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.too",
+   "gloss": "too (too big)",
+   "tier": 2,
+   "rank": 43,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.truly",
+   "gloss": "truly, really (emphasis)",
+   "tier": 2,
+   "rank": 44,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.up",
+   "gloss": "up (hands up!)",
+   "tier": 2,
+   "rank": 45,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.very",
+   "gloss": "very, quite",
+   "tier": 2,
+   "rank": 46,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.well",
+   "gloss": "well (adverb)",
+   "tier": 2,
+   "rank": 47,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "adv.yet",
+   "gloss": "yet (not yet)",
+   "tier": 2,
+   "rank": 48,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.asas",
+   "gloss": "as … as (A 跟 B 一样 + adjective)",
+   "tier": 2,
+   "rank": 49,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.asif",
+   "gloss": "as if",
+   "tier": 2,
+   "rank": 50,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.assoonas",
+   "gloss": "as soon as (一…就…)",
+   "tier": 2,
+   "rank": 51,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.butrather",
+   "gloss": "but rather (after a negation; German sondern)",
+   "tier": 2,
+   "rank": 52,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.eitheror",
+   "gloss": "either … or",
+   "tier": 2,
+   "rank": 53,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.ifonly",
+   "gloss": "if only (a wish)",
+   "tier": 2,
+   "rank": 54,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.inorderto",
+   "gloss": "in order to, so that",
+   "tier": 2,
+   "rank": 55,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.whether",
+   "gloss": "whether (in a reported question)",
+   "tier": 2,
+   "rank": 56,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "conj.while",
+   "gloss": "while, as (at the same time)",
+   "tier": 2,
+   "rank": 57,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "det.another",
+   "gloss": "another, one more (noch ein …)",
+   "tier": 2,
+   "rank": 58,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "det.any",
+   "gloss": "any (any thing, anyone)",
+   "tier": 2,
+   "rank": 59,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "det.some",
+   "gloss": "some (an unspecified one: some book or other; German irgendein)",
+   "tier": 2,
+   "rank": 60,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "det.whata",
+   "gloss": "what a …! (exclamation: what a beauty!)",
+   "tier": 2,
+   "rank": 61,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.afterall",
+   "gloss": "after all, as you know; (surprise) really (modal particle)",
+   "tier": 2,
+   "rank": 62,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.attributive",
+   "gloss": "(marker linking a description to a noun: 红色的车 a red car)",
+   "tier": 2,
+   "rank": 63,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.change",
+   "gloss": "(change-of-situation marker at the end of a sentence: 下雨了 it has started raining)",
+   "tier": 2,
+   "rank": 64,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.dont",
+   "gloss": "don't! (prohibition)",
+   "tier": 2,
+   "rank": 65,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.experiential",
+   "gloss": "have (ever) done (experience marker, after a verb)",
+   "tier": 2,
+   "rank": 66,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.infinitive",
+   "gloss": "to (before an infinitive)",
+   "tier": 2,
+   "rank": 67,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.lets",
+   "gloss": "let’s … (suggestion)",
+   "tier": 2,
+   "rank": 68,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.oath",
+   "gloss": "by …! (particle of swearing: by God!)",
+   "tier": 2,
+   "rank": 69,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.perfective",
+   "gloss": "(completed-action marker, after the verb: 买了 bought)",
+   "tier": 2,
+   "rank": 71,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.possessive",
+   "gloss": "’s, of (possessive marker: 我的 my, 老师的 the teacher’s)",
+   "tier": 2,
+   "rank": 72,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.progressive",
+   "gloss": "(progressive marker) be …ing, in the middle of doing",
+   "tier": 2,
+   "rank": 73,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.question",
+   "gloss": "yes/no question marker",
+   "tier": 2,
+   "rank": 74,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.so",
+   "gloss": "so …, well … (opening a question or a topic)",
+   "tier": 2,
+   "rank": 75,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.sure",
+   "gloss": "really, for sure (modal particle checking: did you really …?)",
+   "tier": 2,
+   "rank": 76,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.tag",
+   "gloss": "… I suppose; … right? (particle of a guess seeking confirmation)",
+   "tier": 2,
+   "rank": 77,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.then",
+   "gloss": "then, so (modal particle in questions: what’s the matter, then?)",
+   "tier": 2,
+   "rank": 78,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.urge",
+   "gloss": "do …!, why don’t you … (modal particle in requests)",
+   "tier": 2,
+   "rank": 79,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "part.yes.contra",
+   "gloss": "yes (contradicting a negative question; German doch)",
+   "tier": 2,
+   "rank": 80,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "poss.belongto",
+   "gloss": "belonging to (this is mine)",
+   "tier": 2,
+   "rank": 81,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "poss.its",
+   "gloss": "its",
+   "tier": 2,
+   "rank": 82,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.above",
+   "gloss": "over, above (position)",
+   "tier": 2,
+   "rank": 83,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.accordingto",
+   "gloss": "according to, in the opinion of",
+   "tier": 2,
+   "rank": 84,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.across",
+   "gloss": "over, across (movement)",
+   "tier": 2,
+   "rank": 85,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.after.follow",
+   "gloss": "after (following someone: run after)",
+   "tier": 2,
+   "rank": 86,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.among",
+   "gloss": "among",
+   "tier": 2,
+   "rank": 87,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.around",
+   "gloss": "around (round something)",
+   "tier": 2,
+   "rank": 88,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.as",
+   "gloss": "as (in the role of: work as a teacher)",
+   "tier": 2,
+   "rank": 89,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.awayfrom",
+   "gloss": "away from, off",
+   "tier": 2,
+   "rank": 90,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.becauseof",
+   "gloss": "because of",
+   "tier": 2,
+   "rank": 91,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.besides",
+   "gloss": "besides, in addition to",
+   "tier": 2,
+   "rank": 92,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.by",
+   "gloss": "by (means of transport: by car)",
+   "tier": 2,
+   "rank": 93,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.by.agent",
+   "gloss": "by (the doer, in the passive)",
+   "tier": 2,
+   "rank": 94,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.by.difference",
+   "gloss": "by (a difference: ten euros cheaper)",
+   "tier": 2,
+   "rank": 95,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.by.time",
+   "gloss": "by (a time, a deadline: not later than)",
+   "tier": 2,
+   "rank": 96,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.despite",
+   "gloss": "in spite of, despite",
+   "tier": 2,
+   "rank": 97,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.for.time",
+   "gloss": "for (a period up to now: for two years)",
+   "tier": 2,
+   "rank": 98,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.in.language",
+   "gloss": "in (a language: in German)",
+   "tier": 2,
+   "rank": 99,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.infromnow",
+   "gloss": "in (a time from now: in a week)",
+   "tier": 2,
+   "rank": 100,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.into",
+   "gloss": "into (movement to the inside)",
+   "tier": 2,
+   "rank": 101,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.like",
+   "gloss": "(just) like (像…一样)",
+   "tier": 2,
+   "rank": 102,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.madeof",
+   "gloss": "(made) of, out of (a material)",
+   "tier": 2,
+   "rank": 103,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.of",
+   "gloss": "of, some of (a part of a whole)",
+   "tier": 2,
+   "rank": 104,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.of.owner",
+   "gloss": "of (the owner: the book of my brother)",
+   "tier": 2,
+   "rank": 105,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.onto",
+   "gloss": "onto (movement onto a surface)",
+   "tier": 2,
+   "rank": 106,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.outof",
+   "gloss": "out of, for (a reason: out of love)",
+   "tier": 2,
+   "rank": 107,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.through",
+   "gloss": "through, by way of (مِنْ خِلَالِ)",
+   "tier": 2,
+   "rank": 108,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.to.person",
+   "gloss": "to (a person: give to, say to, thanks to)",
+   "tier": 2,
+   "rank": 109,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.to.score",
+   "gloss": "to (in scores and ratios: 三比二 3 to 2)",
+   "tier": 2,
+   "rank": 110,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.upto",
+   "gloss": "up to, as far as (a place, a number)",
+   "tier": 2,
+   "rank": 111,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.with.tool",
+   "gloss": "with, by means of (a tool: write with a pen)",
+   "tier": 2,
+   "rank": 112,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "prep.within",
+   "gloss": "within (a period)",
+   "tier": 2,
+   "rank": 113,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.anyone",
+   "gloss": "anyone, everyone (with 都 / 也); nobody (with a negation)",
+   "tier": 2,
+   "rank": 114,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.anything",
+   "gloss": "anything (after a negation or in a question)",
+   "tier": 2,
+   "rank": 115,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.eachother",
+   "gloss": "each other",
+   "tier": 2,
+   "rank": 116,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.everything",
+   "gloss": "everything, anything at all",
+   "tier": 2,
+   "rank": 117,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.someone",
+   "gloss": "someone, somebody",
+   "tier": 2,
+   "rank": 118,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.something",
+   "gloss": "something",
+   "tier": 2,
+   "rank": 119,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.theone",
+   "gloss": "the one(s) (that …): 我要大的 I want the big one",
+   "tier": 2,
+   "rank": 120,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.what",
+   "gloss": "what, that which (relative)",
+   "tier": 2,
+   "rank": 121,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.where",
+   "gloss": "where (relative: the town where I live)",
+   "tier": 2,
+   "rank": 122,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.which",
+   "gloss": "who, which, that (relative pronoun after a noun: the book that I read)",
+   "tier": 2,
+   "rank": 123,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "pron.who",
+   "gloss": "who, the one who; whoever (relative)",
+   "tier": 2,
+   "rank": 124,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "q.forwhom",
+   "gloss": "for whom? to whom?",
+   "tier": 2,
+   "rank": 125,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "q.wherefrom",
+   "gloss": "where from? (asking for origin)",
+   "tier": 2,
+   "rank": 126,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "q.whereto",
+   "gloss": "where to?",
+   "tier": 2,
+   "rank": 127,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "quant.afew",
+   "gloss": "a few, a couple of, several",
+   "tier": 2,
+   "rank": 128,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "quant.both",
+   "gloss": "both, either (of two)",
+   "tier": 2,
+   "rank": 129,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "quant.every",
+   "gloss": "every, each",
+   "tier": 2,
+   "rank": 130,
+   "pending": true,
+   "subgroup": "more"
+  },
+  {
+   "id": "quant.morethan",
+   "gloss": "over, more than, odd (after a round number: 一千多 over a thousand)",
+   "tier": 2,
+   "rank": 131,
+   "pending": true,
+   "subgroup": "more"
   }
  ]
 }

@@ -216,7 +216,8 @@ def _check(lang, lx, gloss, offline):
             trads = {e.get('word') for e in pool} | {f for f, t in forms if 'Traditional-Chinese' in t and 'nonstandard' not in t}
             if lx['trad'] in trads or lx['trad'] == lx['lemma']: res['checked'].append('trad')
             else: res['problems'].append(f'trad: traditional “{lx["trad"]}”, Wiktionary has {" / ".join(sorted(trads))}')
-        if lx.get('measure'):
+        ms = (lx.get('features') or {}).get('measure', lx.get('measure'))
+        if isinstance(ms, list) and ms:
             text = ' '.join(g for e in pool for s in e.get('senses', []) for g in s.get('glosses', []) + s.get('raw_glosses', []))
             cls = set()
             for m in re.finditer(r'Classifiers?:\s*([^)]*)', text):
@@ -226,7 +227,7 @@ def _check(lang, lx, gloss, offline):
                     chars, tags = parts[0], parts[1:]
                     if not tags or 'm' in tags: cls |= set(chars.split('／'))
             if cls:
-                miss = [c for c in lx['measure'] if c not in cls]
+                miss = [c for c in ms if c not in cls]
                 if miss: res['problems'].append(f'measure: measure word(s) {"、".join(miss)} not listed by Wiktionary for Mandarin ({"、".join(sorted(cls))})')
                 else: res['checked'].append('measure')
             else: res['unverified'].append('measure')

@@ -5,11 +5,32 @@
    "lemma": "אָכַל",
    "pos": "VERB",
    "senses": [
-    "verb.eat"
+    "verb.eat",
+    "verb.corrode"
    ],
-   "root": "א־כ־ל",
-   "binyan": "paal",
-   "translit": "akhal",
+   "translit": "achal",
+   "features": {
+    "spelling": "אכל",
+    "root": "א כ ל",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-alef"
+    ],
+    "future": "יֹאכַל",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "אֲכִילָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "אָכַל",
     "V;PRS;SG;MASC": "אוֹכֵל",
@@ -54,7 +75,8 @@
       "def": "to consume, eat up (figuratively: worry, jealousy)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.corrode"
      }
     ],
     "examples": [
@@ -147,9 +169,34 @@
    "senses": [
     "verb.drink"
    ],
-   "root": "ש־ת־ה",
-   "binyan": "paal",
    "translit": "shata",
+   "features": {
+    "spelling": "שתה",
+    "root": "שׁ ת ה",
+    "binyan": "paal",
+    "rootClass": [
+     "lamed-he"
+    ],
+    "future": "יִשְׁתֶּה",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1"
+      ]
+     },
+     {
+      "prep": "none",
+      "senses": [
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "שְׁתִיָּה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "שָׁתָה",
     "V;PRS;SG;MASC": "שׁוֹתֶה",
@@ -190,7 +237,8 @@
       "def": "to drink alcohol (without an object)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -260,11 +308,34 @@
    "lemma": "קָנָה",
    "pos": "VERB",
    "senses": [
-    "verb.buy"
+    "verb.buy",
+    "verb.acquire",
+    "verb.believe"
    ],
-   "root": "ק־נ־ה",
-   "binyan": "paal",
    "translit": "kana",
+   "features": {
+    "spelling": "קנה",
+    "root": "ק נ ה",
+    "binyan": "paal",
+    "rootClass": [
+     "lamed-he"
+    ],
+    "future": "יִקְנֶה",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2",
+       "s3"
+      ]
+     }
+    ],
+    "verbalNoun": "קְנִיָּה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "קָנָה",
     "V;PRS;SG;MASC": "קוֹנֶה",
@@ -305,14 +376,16 @@
       "def": "to acquire, to obtain (formal; wisdom, a friend)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "verb.acquire"
      },
      {
       "id": "s3",
       "def": "to accept as true, to “buy” (a story)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "verb.believe"
      }
     ],
     "examples": [
@@ -336,6 +409,13 @@
       "register": "colloquial",
       "context": "conversation",
       "sense": "s3"
+     },
+     {
+      "text": "עֲשֵׂה לְךָ רַב, וּקְנֵה לְךָ חָבֵר.",
+      "tr": "Make yourself a teacher, and acquire yourself a friend. (Pirkei Avot 1:6)",
+      "register": "literary",
+      "context": "Mishnah",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -394,11 +474,33 @@
    "lemma": "אָהַב",
    "pos": "VERB",
    "senses": [
-    "verb.like"
+    "verb.like",
+    "verb.love"
    ],
-   "root": "א־ה־ב",
-   "binyan": "paal",
    "translit": "ahav",
+   "features": {
+    "spelling": "אהב",
+    "root": "א ה ב",
+    "binyan": "paal",
+    "rootClass": [
+     "pe-alef",
+     "ayin-guttural"
+    ],
+    "future": "יֹאהַב",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "אַהֲבָה",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "אָהַב",
     "V;PRS;SG;MASC": "אוֹהֵב",
@@ -439,7 +541,8 @@
       "def": "to love (a person)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.love"
      }
     ],
     "examples": [
@@ -537,11 +640,34 @@
    "lemma": "רָצָה",
    "pos": "VERB",
    "senses": [
-    "verb.want"
+    "verb.want",
+    "verb.accept"
    ],
-   "root": "ר־צ־ה",
-   "binyan": "paal",
    "translit": "ratsa",
+   "features": {
+    "spelling": "רצה",
+    "root": "ר צ ה",
+    "binyan": "paal",
+    "rootClass": [
+     "lamed-he"
+    ],
+    "future": "יִרְצֶה",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": {
+     "none": "no verbal noun in use (the related noun is רָצוֹן “will, wish”)"
+    },
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "רָצָה",
     "V;PRS;SG;MASC": "רוֹצֶה",
@@ -576,7 +702,8 @@
       "def": "to accept, to be pleased with (Biblical)",
       "register": [
        "archaic"
-      ]
+      ],
+      "concept": "verb.accept"
      }
     ],
     "examples": [
@@ -600,6 +727,13 @@
       "register": "neutral",
       "context": "family",
       "sense": "s1"
+     },
+     {
+      "text": "רוֹצֶה ה׳ אֶת יְרֵאָיו, אֶת הַמְיַחֲלִים לְחַסְדּוֹ.",
+      "tr": "The LORD takes pleasure in those who fear him, in those who hope in his love. (Psalm 147:11)",
+      "register": "archaic",
+      "context": "Bible",
+      "sense": "s2"
      }
     ],
     "collocations": [
@@ -655,8 +789,54 @@
    "lemma": "אֶת",
    "pos": "ADP",
    "senses": [],
+   "prefix": false,
    "translit": "et",
    "role": "marks a definite direct object (no English equivalent): אֲנִי אוֹכֵל אֶת הַגֶּזֶר",
+   "features": {
+    "spelling": "את",
+    "pronForms": [
+     {
+      "cell": "ADP;1;SG",
+      "form": "אוֹתִי"
+     },
+     {
+      "cell": "ADP;2;SG;MASC",
+      "form": "אוֹתְךָ"
+     },
+     {
+      "cell": "ADP;2;SG;FEM",
+      "form": "אוֹתָךְ"
+     },
+     {
+      "cell": "ADP;3;SG;MASC",
+      "form": "אוֹתוֹ"
+     },
+     {
+      "cell": "ADP;3;SG;FEM",
+      "form": "אוֹתָהּ"
+     },
+     {
+      "cell": "ADP;1;PL",
+      "form": "אוֹתָנוּ"
+     },
+     {
+      "cell": "ADP;2;PL;MASC",
+      "form": "אֶתְכֶם"
+     },
+     {
+      "cell": "ADP;2;PL;FEM",
+      "form": "אֶתְכֶן"
+     },
+     {
+      "cell": "ADP;3;PL;MASC",
+      "form": "אוֹתָם"
+     },
+     {
+      "cell": "ADP;3;PL;FEM",
+      "form": "אוֹתָן"
+     }
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -667,11 +847,32 @@
    "lemma": "בִּשֵּׁל",
    "pos": "VERB",
    "senses": [
-    "verb.cook"
+    "verb.cook",
+    "verb.boil"
    ],
-   "root": "ב־שׁ־ל",
-   "binyan": "piel",
    "translit": "bishel",
+   "features": {
+    "spelling": "בישל",
+    "root": "ב שׁ ל",
+    "binyan": "piel",
+    "rootClass": [
+     "regular"
+    ],
+    "future": "יְבַשֵּׁל",
+    "governs": [
+     {
+      "prep": "et",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "verbalNoun": "בִּשּׁוּל",
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "V;PST;3;SG;MASC": "בִּשֵּׁל",
     "V;PRS;SG;MASC": "מְבַשֵּׁל",
@@ -709,7 +910,8 @@
       "def": "to boil, to stew (food in water — as opposed to frying or baking)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.boil"
      }
     ],
     "examples": [
@@ -801,16 +1003,49 @@
    "lemma": "לֶחֶם",
    "pos": "NOUN",
    "senses": [
-    "food.bread"
+    "food.bread",
+    "food.food"
    ],
    "gender": "MASC",
-   "root": "ל־ח־ם",
    "translit": "lechem",
+   "features": {
+    "spelling": "לחם",
+    "root": "ל ח ם",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "לְחָמִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ],
+      "note": "kinds or loaves of bread; “livelihood” has no plural"
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "לֶחֶם"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "לַחֲמֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "לֶחֶם",
     "N;SG;DEF": "הַלֶּחֶם",
     "N;PL;INDF": "לְחָמִים",
-    "N;PL;DEF": "הַלְּחָמִים"
+    "N;PL;DEF": "הַלְּחָמִים",
+    "N;SG;CONST": "לֶחֶם",
+    "N;PL;CONST": "לַחֲמֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -838,7 +1073,8 @@
       "def": "food, sustenance; one’s livelihood",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "food.food"
      }
     ],
     "examples": [
@@ -935,13 +1171,44 @@
     "food.cheese"
    ],
    "gender": "FEM",
-   "root": "ג־ב־ן",
    "translit": "gvina",
+   "features": {
+    "spelling": "גבינה",
+    "root": "ג ב ן",
+    "pattern": "קְטִילָה",
+    "plurals": [
+     {
+      "form": "גְּבִינוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "גְּבִינַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "גְּבִינוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "גְּבִינָה",
     "N;SG;DEF": "הַגְּבִינָה",
     "N;PL;INDF": "גְּבִינוֹת",
-    "N;PL;DEF": "הַגְּבִינוֹת"
+    "N;PL;DEF": "הַגְּבִינוֹת",
+    "N;SG;CONST": "גְּבִינַת",
+    "N;PL;CONST": "גְּבִינוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1031,11 +1298,43 @@
    ],
    "gender": "FEM",
    "translit": "beitsa",
+   "features": {
+    "spelling": "ביצה",
+    "root": "ב י ץ",
+    "pattern": "קַטְלָה",
+    "plurals": [
+     {
+      "form": "בֵּיצִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בֵּיצַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בֵּיצֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בֵּיצָה",
     "N;SG;DEF": "הַבֵּיצָה",
     "N;PL;INDF": "בֵּיצִים",
-    "N;PL;DEF": "הַבֵּיצִים"
+    "N;PL;DEF": "הַבֵּיצִים",
+    "N;SG;CONST": "בֵּיצַת",
+    "N;PL;CONST": "בֵּיצֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1129,18 +1428,39 @@
    "id": "he:basar",
    "lemma": "בָּשָׂר",
    "pos": "NOUN",
-   "senses": [
-    "food.meat"
-   ],
    "class": "mass",
+   "senses": [
+    "food.meat",
+    "body.flesh"
+   ],
    "gender": "MASC",
-   "root": "ב־שׂ־ר",
    "translit": "basar",
-   "note": "Used as a mass noun; the plural בְּשָׂרִים (kinds of meat) is rare.",
+   "features": {
+    "spelling": "בשר",
+    "root": "ב שׂ ר",
+    "pattern": "קָטָל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use (בְּשָׂרִים “kinds of meat” is rare)"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בְּשַׂר"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בָּשָׂר",
-    "N;SG;DEF": "הַבָּשָׂר"
+    "N;SG;DEF": "הַבָּשָׂר",
+    "N;SG;CONST": "בְּשַׂר"
    },
+   "note": "Used as a mass noun; the plural בְּשָׂרִים (kinds of meat) is rare.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1167,7 +1487,8 @@
       "def": "flesh, body; humankind (בָּשָׂר וָדָם “flesh and blood”)",
       "register": [
        "literary"
-      ]
+      ],
+      "concept": "body.flesh"
      }
     ],
     "examples": [
@@ -1255,15 +1576,53 @@
    "lemma": "דָּג",
    "pos": "NOUN",
    "senses": [
-    "food.fish"
+    "food.fish",
+    "animal.fish"
    ],
    "gender": "MASC",
    "translit": "dag",
+   "features": {
+    "spelling": "דג",
+    "root": {
+     "none": "a primary noun of unknown origin; the verb לָדוּג “to fish” and דַּיָּג “fisherman” were built on it"
+    },
+    "pattern": {
+     "none": "a one-syllable noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "דָּגִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "דַּג"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "דְּגֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "דָּג",
     "N;SG;DEF": "הַדָּג",
     "N;PL;INDF": "דָּגִים",
-    "N;PL;DEF": "הַדָּגִים"
+    "N;PL;DEF": "הַדָּגִים",
+    "N;SG;CONST": "דַּג",
+    "N;PL;CONST": "דְּגֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1291,7 +1650,8 @@
       "def": "fish (the animal)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "animal.fish"
      }
     ],
     "examples": [
@@ -1369,15 +1729,51 @@
    "lemma": "עוֹף",
    "pos": "NOUN",
    "senses": [
-    "food.chicken"
+    "food.chicken",
+    "animal.bird"
    ],
    "gender": "MASC",
    "translit": "of",
+   "features": {
+    "spelling": "עוף",
+    "root": "ע ו ף",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern (Wiktionary files it under the segolate type קֶטֶל)"
+    },
+    "plurals": [
+     {
+      "form": "עוֹפוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "עוֹף"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "עוֹפוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "עוֹף",
     "N;SG;DEF": "הָעוֹף",
     "N;PL;INDF": "עוֹפוֹת",
-    "N;PL;DEF": "הָעוֹפוֹת"
+    "N;PL;DEF": "הָעוֹפוֹת",
+    "N;SG;CONST": "עוֹף",
+    "N;PL;CONST": "עוֹפוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1405,7 +1801,8 @@
       "def": "bird, fowl (formal and zoological)",
       "register": [
        "formal"
-      ]
+      ],
+      "concept": "animal.bird"
      }
     ],
     "examples": [
@@ -1502,21 +1899,44 @@
    "id": "he:orez",
    "lemma": "אֹרֶז",
    "pos": "NOUN",
+   "class": "mass",
    "senses": [
     "food.rice"
    ],
-   "class": "mass",
    "gender": "MASC",
    "translit": "orez",
-   "note": "A mass noun with no everyday plural.",
+   "features": {
+    "spelling": "אורז",
+    "root": {
+     "none": "a loanword (Greek ὄρυζα): not from the root א־ר־ז “to pack”"
+    },
+    "pattern": "קֹטֶל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "אֹרֶז"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֹרֶז",
-    "N;SG;DEF": "הָאֹרֶז"
+    "N;SG;DEF": "הָאֹרֶז",
+    "N;SG;CONST": "אֹרֶז"
    },
    "plene": {
     "N;SG;INDF": "אורז",
     "N;SG;DEF": "האורז"
    },
+   "note": "A mass noun with no everyday plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1604,11 +2024,43 @@
    ],
    "gender": "MASC",
    "translit": "marak",
+   "features": {
+    "spelling": "מרק",
+    "root": "מ ר ק",
+    "pattern": "קָטָל",
+    "plurals": [
+     {
+      "form": "מְרָקִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מְרַק"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִרְקֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מָרָק",
     "N;SG;DEF": "הַמָּרָק",
     "N;PL;INDF": "מְרָקִים",
-    "N;PL;DEF": "הַמְּרָקִים"
+    "N;PL;DEF": "הַמְּרָקִים",
+    "N;SG;CONST": "מְרַק",
+    "N;PL;CONST": "מִרְקֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1703,15 +2155,53 @@
    "lemma": "סָלָט",
    "pos": "NOUN",
    "senses": [
-    "food.salad"
+    "food.salad",
+    "abstract.mess"
    ],
    "gender": "MASC",
    "translit": "salat",
+   "features": {
+    "spelling": "סלט",
+    "root": {
+     "none": "a loanword (ultimately from Latin sal): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "סָלָטִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סָלַט"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "סָלָטֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סָלָט",
     "N;SG;DEF": "הַסָּלָט",
     "N;PL;INDF": "סָלָטִים",
-    "N;PL;DEF": "הַסָּלָטִים"
+    "N;PL;DEF": "הַסָּלָטִים",
+    "N;SG;CONST": "סָלַט",
+    "N;PL;CONST": "סָלָטֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1739,7 +2229,8 @@
       "def": "a mess, a mix-up",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "abstract.mess"
      }
     ],
     "examples": [
@@ -1814,11 +2305,44 @@
    ],
    "gender": "MASC",
    "translit": "pri",
+   "features": {
+    "spelling": "פרי",
+    "root": "פ ר ה",
+    "pattern": "קְטִי",
+    "plurals": [
+     {
+      "form": "פֵּרוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "פְּרִי"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "פֵּרוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "פְּרִי",
     "N;SG;DEF": "הַפְּרִי",
     "N;PL;INDF": "פֵּרוֹת",
-    "N;PL;DEF": "הַפֵּרוֹת"
+    "N;PL;DEF": "הַפֵּרוֹת",
+    "N;SG;CONST": "פְּרִי",
+    "N;PL;CONST": "פֵּרוֹת"
    },
    "plene": {
     "N;PL;INDF": "פירות",
@@ -1850,7 +2374,8 @@
       "def": "fruit, result (of work or effort)",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1942,11 +2467,44 @@
    ],
    "gender": "MASC",
    "translit": "tapuach",
+   "features": {
+    "spelling": "תפוח",
+    "root": "ת פ ח",
+    "pattern": "קַטּוּל",
+    "plurals": [
+     {
+      "form": "תַּפּוּחִים",
+      "kind": "im",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תַּפּוּחַ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "תַּפּוּחֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תַּפּוּחַ",
     "N;SG;DEF": "הַתַּפּוּחַ",
     "N;PL;INDF": "תַּפּוּחִים",
-    "N;PL;DEF": "הַתַּפּוּחִים"
+    "N;PL;DEF": "הַתַּפּוּחִים",
+    "N;SG;CONST": "תַּפּוּחַ",
+    "N;PL;CONST": "תַּפּוּחֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1974,7 +2532,8 @@
       "def": "apple tree",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2052,21 +2611,44 @@
    "id": "he:sukar",
    "lemma": "סֻכָּר",
    "pos": "NOUN",
-   "senses": [
-    "food.sugar"
-   ],
    "class": "mass",
+   "senses": [
+    "food.sugar",
+    "health.diabetes"
+   ],
    "gender": "MASC",
    "translit": "sukar",
-   "note": "A mass noun with no everyday plural.",
+   "features": {
+    "spelling": "סוכר",
+    "root": "ס כ ר",
+    "pattern": "קֻטָּל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use (סֻכָּרִים are the chemists’ “sugars”)"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "סֻכַּר"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "סֻכָּר",
-    "N;SG;DEF": "הַסֻּכָּר"
+    "N;SG;DEF": "הַסֻּכָּר",
+    "N;SG;CONST": "סֻכַּר"
    },
    "plene": {
     "N;SG;INDF": "סוכר",
-    "N;SG;DEF": "הסוכר"
+    "N;SG;DEF": "הסוכר",
+    "N;SG;CONST": "סוכר"
    },
+   "note": "A mass noun with no everyday plural.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2093,7 +2675,8 @@
       "def": "diabetes (יֵשׁ לוֹ סֻכָּר “he has diabetes”)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "concept": "health.diabetes"
      }
     ],
     "examples": [
@@ -2157,17 +2740,38 @@
    "id": "he:melach",
    "lemma": "מֶלַח",
    "pos": "NOUN",
+   "class": "mass",
    "senses": [
     "food.salt"
    ],
-   "class": "mass",
    "gender": "MASC",
    "translit": "melach",
-   "note": "A mass noun; the plural מְלָחִים is the chemists’ “salts”.",
+   "features": {
+    "spelling": "מלח",
+    "root": "מ ל ח",
+    "pattern": "קֶטֶל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use (מְלָחִים are the chemists’ “salts”)"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מֶלַח"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מֶלַח",
-    "N;SG;DEF": "הַמֶּלַח"
+    "N;SG;DEF": "הַמֶּלַח",
+    "N;SG;CONST": "מֶלַח"
    },
+   "note": "A mass noun; the plural מְלָחִים is the chemists’ “salts”.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2194,7 +2798,8 @@
       "def": "permanence, continuity (בְּרִית מֶלַח “a covenant of salt”)",
       "register": [
        "literary"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2273,17 +2878,40 @@
    "id": "he:mayim",
    "lemma": "מַיִם",
    "pos": "NOUN",
+   "class": "plt",
    "senses": [
     "drink.water"
    ],
-   "class": "plt",
    "gender": "MASC",
    "translit": "mayim",
-   "note": "Used only in the plural (masculine): הַמַּיִם קָרִים.",
+   "features": {
+    "spelling": "מים",
+    "root": "מ י ם",
+    "pattern": {
+     "none": "a primary noun (*māy-) in a dual-like plural form"
+    },
+    "plurals": {
+     "none": "used only in the plural: מַיִם is itself plural"
+    },
+    "dual": {
+     "none": "it looks like a dual (־ַיִם) but is a plural with no singular"
+    },
+    "construct": [
+     {
+      "cell": "N;PL;CONST",
+      "form": "מֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;PL;INDF": "מַיִם",
-    "N;PL;DEF": "הַמַּיִם"
+    "N;PL;DEF": "הַמַּיִם",
+    "N;PL;CONST": "מֵי"
    },
+   "note": "Used only in the plural (masculine): הַמַּיִם קָרִים.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2384,15 +3012,40 @@
    "id": "he:te",
    "lemma": "תֵּה",
    "pos": "NOUN",
+   "class": "mass",
    "senses": [
     "drink.tea"
    ],
-   "class": "mass",
    "gender": "MASC",
    "translit": "te",
+   "features": {
+    "spelling": "תה",
+    "root": {
+     "none": "a loanword (from European languages, compare French thé): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "תֵּה"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "תֵּה",
-    "N;SG;DEF": "הַתֵּה"
+    "N;SG;DEF": "הַתֵּה",
+    "N;SG;CONST": "תֵּה"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2485,15 +3138,40 @@
    "id": "he:kafe",
    "lemma": "קָפֶה",
    "pos": "NOUN",
+   "class": "mass",
    "senses": [
     "drink.coffee"
    ],
-   "class": "mass",
    "gender": "MASC",
    "translit": "kafe",
+   "features": {
+    "spelling": "קפה",
+    "root": {
+     "none": "a loanword (French café, from Arabic قَهْوَة): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "קָפֶה"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "קָפֶה",
-    "N;SG;DEF": "הַקָּפֶה"
+    "N;SG;DEF": "הַקָּפֶה",
+    "N;SG;CONST": "קָפֶה"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2590,15 +3268,36 @@
    "id": "he:chalav",
    "lemma": "חָלָב",
    "pos": "NOUN",
+   "class": "mass",
    "senses": [
     "drink.milk"
    ],
-   "class": "mass",
    "gender": "MASC",
    "translit": "chalav",
+   "features": {
+    "spelling": "חלב",
+    "root": "ח ל ב",
+    "pattern": "קָטָל",
+    "plurals": {
+     "none": "a mass noun: no plural in everyday use"
+    },
+    "dual": {
+     "none": "a mass noun: no dual"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "חֲלֵב"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "חָלָב",
-    "N;SG;DEF": "הֶחָלָב"
+    "N;SG;DEF": "הֶחָלָב",
+    "N;SG;CONST": "חֲלֵב"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2697,11 +3396,45 @@
    ],
    "gender": "MASC",
    "translit": "mits",
+   "features": {
+    "spelling": "מיץ",
+    "root": "מ ו ץ",
+    "pattern": {
+     "none": "a one-syllable noun: no pattern"
+    },
+    "plurals": [
+     {
+      "form": "מִיצִים",
+      "kind": "im",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "מִיץ"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "מִיצֵי"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "מִיץ",
     "N;SG;DEF": "הַמִּיץ",
     "N;PL;INDF": "מִיצִים",
-    "N;PL;DEF": "הַמִּיצִים"
+    "N;PL;DEF": "הַמִּיצִים",
+    "N;SG;CONST": "מִיץ",
+    "N;PL;CONST": "מִיצֵי"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2803,15 +3536,50 @@
    ],
    "gender": "MASC",
    "translit": "yayin",
+   "features": {
+    "spelling": "יין",
+    "root": "י י ן",
+    "pattern": "קֶטֶל",
+    "plurals": [
+     {
+      "form": "יֵינוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "יֵין"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "יֵינוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "יַיִן",
     "N;SG;DEF": "הַיַּיִן",
     "N;PL;INDF": "יֵינוֹת",
-    "N;PL;DEF": "הַיֵּינוֹת"
+    "N;PL;DEF": "הַיֵּינוֹת",
+    "N;SG;CONST": "יֵין",
+    "N;PL;CONST": "יֵינוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
-    "checked": "2026-10-08"
+    "checked": "2026-10-08",
+    "override": {
+     "N;PL;CONST": "the plural is יֵינוֹת (Wiktionary too), so its construct is יֵינוֹת־ (יֵינוֹת הָעוֹלָם); Wiktionary’s יֵינֵי־ would belong to a plural יֵינִים that it does not give."
+    }
    },
    "profile": {
     "frequency": "A1",
@@ -2910,11 +3678,48 @@
    ],
    "gender": "FEM",
    "translit": "bira",
+   "features": {
+    "spelling": "בירה",
+    "root": {
+     "none": "a loanword (German Bier; not the root ב־ו־ר of בִּירָה “capital city”): no Hebrew root"
+    },
+    "pattern": {
+     "none": "a loanword: not built on a Hebrew pattern"
+    },
+    "plurals": [
+     {
+      "form": "בִּירוֹת",
+      "kind": "ot",
+      "senses": [
+       "s1",
+       "s2"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": [
+     {
+      "cell": "N;SG;CONST",
+      "form": "בִּירַת"
+     },
+     {
+      "cell": "N;PL;CONST",
+      "form": "בִּירוֹת"
+     }
+    ],
+    "meaningForms": {
+     "none": "the same forms in every meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "בִּירָה",
     "N;SG;DEF": "הַבִּירָה",
     "N;PL;INDF": "בִּירוֹת",
-    "N;PL;DEF": "הַבִּירוֹת"
+    "N;PL;DEF": "הַבִּירוֹת",
+    "N;SG;CONST": "בִּירַת",
+    "N;PL;CONST": "בִּירוֹת"
    },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2942,7 +3747,8 @@
       "def": "a glass, bottle or can of beer",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3010,7 +3816,33 @@
    ],
    "gender": "FEM",
    "translit": "aruchat boker",
-   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
+   "features": {
+    "spelling": "ארוחת בוקר",
+    "root": {
+     "none": "a compound of two words (אֲרוּחָה + בֹּקֶר): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "אֲרוּחוֹת בֹּקֶר",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֲרוּחַת בֹּקֶר",
     "N;SG;DEF": "אֲרוּחַת הַבֹּקֶר",
@@ -3023,6 +3855,7 @@
     "N;PL;INDF": "ארוחות בוקר",
     "N;PL;DEF": "ארוחות הבוקר"
    },
+   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3115,7 +3948,33 @@
    ],
    "gender": "FEM",
    "translit": "aruchat tsohorayim",
-   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
+   "features": {
+    "spelling": "ארוחת צהריים",
+    "root": {
+     "none": "a compound of two words (אֲרוּחָה + צָהֳרַיִם): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "אֲרוּחוֹת צָהֳרַיִם",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֲרוּחַת צָהֳרַיִם",
     "N;SG;DEF": "אֲרוּחַת הַצָּהֳרַיִם",
@@ -3128,6 +3987,7 @@
     "N;PL;INDF": "ארוחות צהריים",
     "N;PL;DEF": "ארוחות הצהריים"
    },
+   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -3216,7 +4076,33 @@
    ],
    "gender": "FEM",
    "translit": "aruchat erev",
-   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
+   "features": {
+    "spelling": "ארוחת ערב",
+    "root": {
+     "none": "a compound of two words (אֲרוּחָה + עֶרֶב): each part has its own root"
+    },
+    "pattern": {
+     "none": "a compound of two words, not one pattern"
+    },
+    "plurals": [
+     {
+      "form": "אֲרוּחוֹת עֶרֶב",
+      "kind": "ot",
+      "senses": [
+       "s1"
+      ]
+     }
+    ],
+    "dual": {
+     "none": "no dual in use: “two” is שְׁנֵי / שְׁתֵּי + the plural"
+    },
+    "construct": {
+     "none": "a compound of two words: it is not put into the construct again (“the … of …” is said with שֶׁל)"
+    },
+    "meaningForms": {
+     "none": "one meaning"
+    }
+   },
    "forms": {
     "N;SG;INDF": "אֲרוּחַת עֶרֶב",
     "N;SG;DEF": "אֲרוּחַת הָעֶרֶב",
@@ -3229,6 +4115,7 @@
     "N;PL;INDF": "ארוחות ערב",
     "N;PL;DEF": "ארוחות הערב"
    },
+   "note": "A two-word lexeme (construct phrase), tokenized as one word; the article goes on its second word.",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"

@@ -7,7 +7,9 @@
    "pinyin": "yǒu",
    "pos": "VERB",
    "senses": [
-    "poss.have"
+    "poss.have",
+    "verb.exist",
+    "adj.pregnant"
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -35,7 +37,8 @@
       "def": "there is / there are (existence)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "verb.exist"
      },
      {
       "id": "s3",
@@ -43,7 +46,8 @@
       "register": [
        "colloquial",
        "euphemistic"
-      ]
+      ],
+      "concept": "adj.pregnant"
      }
     ],
     "examples": [
@@ -152,6 +156,21 @@
      "When a place comes first, 有 means ‘there is’: 冰箱里有黄瓜 ‘there are cucumbers in the fridge’.",
      "有 + a noun can make an adjective: 有名 (famous), 有用 (useful), 有意思 (interesting)."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "separable": {
+     "none": "one syllable: nothing to split"
+    },
+    "neg": "mei"
    }
   },
   {
@@ -162,10 +181,29 @@
    "pos": "NOUN",
    "senses": [
     "family.family",
-    "place.home"
+    "place.home",
+    "person.expert"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.family",
+     "axis": "aspect of ‘family’",
+     "value": "home and family, the household (我家)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -197,18 +235,12 @@
       "concept": "place.home"
      },
      {
-      "id": "s3",
-      "def": "(measure word, S11) for businesses and households: 一家饭馆, 三家人 ‘three families’",
-      "register": [
-       "neutral"
-      ]
-     },
-     {
       "id": "s4",
       "def": "(suffix) -ist, specialist: 科学家 ‘scientist’",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "person.expert"
      }
     ],
     "examples": [
@@ -253,12 +285,12 @@
       "sense": "s2"
      },
      {
-      "text": "这家饭馆很好。",
-      "py": "Zhè jiā fànguǎn hěn hǎo.",
-      "tr": "This restaurant is very good.",
+      "text": "他想当科学家。",
+      "py": "Tā xiǎng dāng kēxuéjiā.",
+      "tr": "He wants to be a scientist.",
       "register": "neutral",
-      "context": "town",
-      "sense": "s3"
+      "context": "jobs",
+      "sense": "s4"
      }
     ],
     "collocations": [
@@ -320,7 +352,8 @@
      "‘At home’ is 在家 — no 里 needed (在家里 is also fine). ‘To go home’ is 回家 (not *去家); ‘to go to someone’s home’ is 去 + owner + 家: 去我家."
     ],
     "subtleties": [
-     "With 家 the 的 is normally dropped: 我家, 你们家; 我的家 sounds emotional, as in songs."
+     "With 家 the 的 is normally dropped: 我家, 你们家; 我的家 sounds emotional, as in songs.",
+     "As a measure word for shops, restaurants and companies (这家饭馆 ‘this restaurant’) 家 is learned as its own entry, the measure word 家 (S11)."
     ]
    }
   },
@@ -333,9 +366,27 @@
    "senses": [
     "family.family"
    ],
-   "measure": [
-    "个",
-    "户"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "户"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.family",
+     "axis": "aspect of ‘family’",
+     "value": "the family as a unit (formal)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -450,9 +501,27 @@
    "senses": [
     "family.family"
    ],
-   "measure": [
-    "位",
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "位",
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.family",
+     "axis": "aspect of ‘family’",
+     "value": "the family members, the people"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -553,7 +622,20 @@
    "senses": [
     "family.parents"
    ],
-   "measureNone": "a pair word that is not counted with a measure word: 我的父母, 他父母",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a pair word that is not counted with a measure word: 我的父母, 他父母"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -662,9 +744,27 @@
    "senses": [
     "family.mother"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 媽媽 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.mother",
+     "axis": "register",
+     "value": "everyday word and form of address"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -780,9 +880,27 @@
    "senses": [
     "family.mother"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 母親 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.mother",
+     "axis": "register",
+     "value": "formal, written"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -883,9 +1001,27 @@
    "senses": [
     "family.father"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.father",
+     "axis": "register",
+     "value": "everyday word and form of address"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -991,9 +1127,27 @@
    "senses": [
     "family.father"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 父親 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.father",
+     "axis": "register",
+     "value": "formal, written"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1095,9 +1249,20 @@
    "senses": [
     "family.son"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 兒子 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1210,9 +1375,20 @@
    "senses": [
     "family.daughter"
    ],
-   "measure": [
-    "个"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 女兒 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -1320,8 +1496,26 @@
    "senses": [
     "family.brother"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.brother",
+     "axis": "relative age",
+     "value": "elder brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1428,8 +1622,26 @@
    "senses": [
     "family.brother"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.brother",
+     "axis": "relative age",
+     "value": "younger brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1457,7 +1669,8 @@
       "def": "a friendly address for a boy or young man younger than you",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1537,8 +1750,26 @@
    "senses": [
     "family.brother"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.brother",
+     "axis": "relative age",
+     "value": "brothers as a group, any age"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1569,7 +1800,8 @@
       "def": "(colloquial) bro, mate — a close male friend",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1666,8 +1898,26 @@
    "senses": [
     "family.sister"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.sister",
+     "axis": "relative age",
+     "value": "elder sister"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1695,7 +1945,8 @@
       "def": "a friendly address for a young woman a little older than you",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1775,8 +2026,26 @@
    "senses": [
     "family.sister"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.sister",
+     "axis": "relative age",
+     "value": "younger sister"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1804,7 +2073,8 @@
       "def": "a friendly address for a girl younger than you (小妹妹)",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1884,8 +2154,26 @@
    "senses": [
     "family.sister"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.sister",
+     "axis": "relative age",
+     "value": "sisters as a group, any age"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -1913,7 +2201,8 @@
       "def": "(colloquial) girls, girlfriends — women addressing each other",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -1993,9 +2282,27 @@
    "senses": [
     "family.husband"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.husband",
+     "axis": "register",
+     "value": "neutral, formal"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2017,13 +2324,6 @@
        "neutral"
       ],
       "concept": "family.husband"
-     },
-     {
-      "id": "s2",
-      "def": "(zhàngfū, literary) man, a real man",
-      "register": [
-       "literary"
-      ]
      }
     ],
     "examples": [
@@ -2044,12 +2344,12 @@
       "sense": "s1"
      },
      {
-      "text": "男子汉大丈夫，说话要算数。",
-      "py": "Nánzǐhàn dà zhàngfū, shuōhuà yào suànshù.",
-      "tr": "A real man keeps his word.",
-      "register": "literary",
-      "context": "saying",
-      "sense": "s2"
+      "text": "她丈夫在银行工作。",
+      "py": "Tā zhàngfu zài yínháng gōngzuò.",
+      "tr": "Her husband works at a bank.",
+      "register": "neutral",
+      "context": "work",
+      "sense": "s1"
      }
     ],
     "collocations": [
@@ -2103,7 +2403,8 @@
      "zhàngfu with a toneless fu is ‘husband’; zhàngfū with a full tone is the literary ‘man’ in 大丈夫."
     ],
     "subtleties": [
-     "丈夫 is neutral and fine everywhere; with friends people say 老公, in polite company 我先生."
+     "丈夫 is neutral and fine everywhere; with friends people say 老公, in polite company 我先生.",
+     "The literary ‘man, a real man’ survives in sayings: 男子汉大丈夫，说话要算数 ‘a real man keeps his word’ — there the word is read zhàngfū."
     ]
    }
   },
@@ -2116,8 +2417,26 @@
    "senses": [
     "family.husband"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.husband",
+     "axis": "register",
+     "value": "colloquial, affectionate"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2223,9 +2542,27 @@
    "senses": [
     "family.wife"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "neutral, formal"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2337,8 +2674,26 @@
    "senses": [
     "family.wife"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.wife",
+     "axis": "register",
+     "value": "colloquial, affectionate"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2366,7 +2721,8 @@
       "def": "(internet slang) ‘waifu’, a fan’s favourite female character",
       "register": [
        "slang"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2452,8 +2808,26 @@
    "senses": [
     "family.baby"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 寶寶 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.baby",
+     "axis": "register",
+     "value": "affectionate"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2482,7 +2856,8 @@
       "def": "darling, sweetheart (to a child or a lover)",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2567,8 +2942,26 @@
    "senses": [
     "family.baby"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 嬰兒 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.baby",
+     "axis": "register",
+     "value": "neutral, technical (infant)"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2675,7 +3068,20 @@
    "senses": [
     "family.grandparents"
    ],
-   "measureNone": "a pair word that is not counted with a measure word: 我的祖父母",
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": {
+     "none": "a pair word that is not counted with a measure word: 我的祖父母"
+    }
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -2780,9 +3186,27 @@
    "senses": [
     "family.grandfather"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 爺爺 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.grandfather",
+     "axis": "side of the family",
+     "value": "father’s side"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2810,7 +3234,8 @@
       "def": "grandpa — a friendly address for an old man",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -2891,9 +3316,27 @@
    "senses": [
     "family.grandfather"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.grandfather",
+     "axis": "side of the family",
+     "value": "mother’s side"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -2994,9 +3437,27 @@
    "senses": [
     "family.grandmother"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.grandmother",
+     "axis": "side of the family",
+     "value": "father’s side"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3024,7 +3485,8 @@
       "def": "granny — a friendly address for an old woman",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3105,9 +3567,27 @@
    "senses": [
     "family.grandmother"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.grandmother",
+     "axis": "side of the family",
+     "value": "mother’s side"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3214,10 +3694,30 @@
    "pinyin": "sūn zi",
    "pos": "NOUN",
    "senses": [
-    "family.grandson"
+    "family.grandson",
+    "family.grandchild",
+    "person.bastard"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 孫子 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.grandson",
+     "axis": "side of the family",
+     "value": "son’s son"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3245,7 +3745,8 @@
       "def": "grandchild",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "family.grandchild"
      },
      {
       "id": "s3",
@@ -3253,7 +3754,8 @@
       "register": [
        "vulgar",
        "regional"
-      ]
+      ],
+      "concept": "person.bastard"
      }
     ],
     "examples": [
@@ -3280,6 +3782,22 @@
       "register": "neutral",
       "context": "daily life",
       "sense": "s1"
+     },
+     {
+      "text": "爷爷奶奶每个周末都去看孙子。",
+      "py": "Yéye nǎinai měi ge zhōumò dōu qù kàn sūnzi.",
+      "tr": "Grandpa and grandma visit their grandchildren every weekend.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s2"
+     },
+     {
+      "text": "他骂对方是孙子。",
+      "py": "Tā mà duìfāng shì sūnzi.",
+      "tr": "He called the other guy a bastard.",
+      "register": "vulgar",
+      "context": "insults",
+      "sense": "s3"
      }
     ],
     "collocations": [
@@ -3333,8 +3851,26 @@
    "senses": [
     "family.grandson"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 外孫 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.grandson",
+     "axis": "side of the family",
+     "value": "daughter’s son"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3426,8 +3962,26 @@
    "senses": [
     "family.granddaughter"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 孫女 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.granddaughter",
+     "axis": "side of the family",
+     "value": "son’s daughter"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3523,8 +4077,26 @@
    "senses": [
     "family.granddaughter"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 外孫女 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.granddaughter",
+     "axis": "side of the family",
+     "value": "daughter’s daughter"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3616,9 +4188,27 @@
    "senses": [
     "family.uncle"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side, relative age, blood or in-law",
+     "value": "father’s younger brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3646,7 +4236,8 @@
       "def": "‘uncle’ — how children address a man of their parents’ age",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3726,8 +4317,26 @@
    "senses": [
     "family.uncle"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side, relative age, blood or in-law",
+     "value": "father’s elder brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3755,7 +4364,8 @@
       "def": "a respectful address for a man older than one’s father",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -3835,9 +4445,27 @@
    "senses": [
     "family.uncle"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side, relative age, blood or in-law",
+     "value": "mother’s brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -3953,9 +4581,27 @@
    "senses": [
     "family.uncle"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side, relative age, blood or in-law",
+     "value": "husband of the father’s sister"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4052,9 +4698,27 @@
    "senses": [
     "family.uncle"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.uncle",
+     "axis": "side, relative age, blood or in-law",
+     "value": "husband of the mother’s sister"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4151,9 +4815,27 @@
    "senses": [
     "family.aunt"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side, blood or in-law",
+     "value": "father’s sister"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4252,11 +4934,35 @@
    "pinyin": "ā yí",
    "pos": "NOUN",
    "senses": [
-    "family.aunt"
+    "family.aunt",
+    "job.housekeeper"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side, blood or in-law",
+     "value": "mother’s sister"
+    },
+    {
+     "concept": "job.housekeeper",
+     "axis": "region",
+     "value": "Mainland: the nanny or cleaner, called ‘auntie’"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4284,14 +4990,16 @@
       "def": "‘auntie’ — how children address a woman of their parents’ age",
       "register": [
        "neutral"
-      ]
+      ],
+      "of": "s1"
      },
      {
       "id": "s3",
       "def": "nanny, cleaning lady, household help",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "job.housekeeper"
      }
     ],
     "examples": [
@@ -4379,9 +5087,27 @@
    "senses": [
     "family.aunt"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 舅媽 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side, blood or in-law",
+     "value": "wife of the mother’s brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4473,9 +5199,27 @@
    "senses": [
     "family.aunt"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "traditional 嬸嬸 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side, blood or in-law",
+     "value": "wife of the father’s younger brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4503,7 +5247,8 @@
       "def": "a friendly address for a married woman a little younger than one’s mother",
       "register": [
        "colloquial"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4579,9 +5324,27 @@
    "senses": [
     "family.aunt"
    ],
-   "measure": [
-    "个",
-    "位"
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.aunt",
+     "axis": "side, blood or in-law",
+     "value": "wife of the father’s elder brother"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4610,7 +5373,8 @@
       "def": "a polite address for a friend’s or colleague’s mother",
       "register": [
        "formal"
-      ]
+      ],
+      "of": "s1"
      }
     ],
     "examples": [
@@ -4686,8 +5450,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "father’s brother’s son, older than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4783,8 +5565,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "father’s brother’s daughter, older than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4880,8 +5680,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "father’s brother’s son, younger than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -4977,8 +5795,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "father’s brother’s daughter, younger than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5074,8 +5910,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "son of the mother’s siblings or of the father’s sister, older than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5171,8 +6025,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "daughter of the mother’s siblings or of the father’s sister, older than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5268,8 +6140,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "son of the mother’s siblings or of the father’s sister, younger than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5365,8 +6255,26 @@
    "senses": [
     "family.cousin"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.cousin",
+     "axis": "side, sex and relative age",
+     "value": "daughter of the mother’s siblings or of the father’s sister, younger than you"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5462,8 +6370,26 @@
    "senses": [
     "family.nephew"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 姪子 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.nephew",
+     "axis": "the sibling it comes through",
+     "value": "brother’s son"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5560,8 +6486,26 @@
    "senses": [
     "family.niece"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 姪女 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.niece",
+     "axis": "the sibling it comes through",
+     "value": "brother’s daughter"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5653,8 +6597,26 @@
    "senses": [
     "family.nephew"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.nephew",
+     "axis": "the sibling it comes through",
+     "value": "sister’s son"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5754,8 +6716,26 @@
    "senses": [
     "family.niece"
    ],
-   "measure": [
-    "个"
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个"
+    ]
+   },
+   "contrasts": [
+    {
+     "concept": "family.niece",
+     "axis": "the sibling it comes through",
+     "value": "sister’s daughter"
+    }
    ],
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5847,10 +6827,21 @@
    "senses": [
     "family.relative"
    ],
-   "measure": [
-    "个",
-    "位"
-   ],
+   "features": {
+    "readings": {
+     "none": "one meaning, one reading"
+    },
+    "tradPerSense": {
+     "none": "traditional 親戚 for every sense"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "measure": [
+     "个",
+     "位"
+    ]
+   },
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
@@ -5956,7 +6947,11 @@
    "trad": "的",
    "pinyin": "de",
    "pos": "PART",
-   "senses": [],
+   "senses": [
+    "part.possessive",
+    "part.attributive",
+    "pron.theone"
+   ],
    "role": "links a modifier to a noun; after a pronoun or a noun it marks the owner: 我的书 ‘my book’, 老师的钥匙 ‘the teacher’s key’ — with close family and one’s home it is usually left out: 我妈妈, 我家",
    "ref": {
     "src": "Wiktionary (kaikki.org)",
@@ -5976,21 +6971,24 @@
       "def": "possessive: ’s, of (我的 ‘my’, 老师的 ‘the teacher’s’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.possessive"
      },
      {
       "id": "s2",
       "def": "links a description to a noun (红色的车 ‘a red car’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "part.attributive"
      },
      {
       "id": "s3",
       "def": "the one(s) that … (我要大的 ‘I want the big one’)",
       "register": [
        "neutral"
-      ]
+      ],
+      "concept": "pron.theone"
      }
     ],
     "examples": [
@@ -6063,6 +7061,20 @@
     "subtleties": [
      "我的 alone means ‘mine’: 这本书是我的 ‘this book is mine’."
     ]
+   },
+   "features": {
+    "readings": {
+     "none": "one reading for all its senses"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "position": [
+     "afterModifier"
+    ]
    }
   },
   {
@@ -6076,6 +7088,20 @@
    "ref": {
     "src": "Wiktionary (kaikki.org)",
     "checked": "2026-10-08"
+   },
+   "features": {
+    "readings": {
+     "none": "one reading"
+    },
+    "tradPerSense": {
+     "none": "written the same in traditional characters"
+    },
+    "toneSandhi": {
+     "none": "no 一 or 不 in the word"
+    },
+    "kind": [
+     "sortal"
+    ]
    }
   }
  ],
