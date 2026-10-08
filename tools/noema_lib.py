@@ -63,7 +63,20 @@ def load_subject(sdir):
             c['pitfalls'].extend(p.get('appendPitfalls', []))
             c['debug'].extend(p.get('appendDebug', []))
             report.append(f'{os.path.basename(pf)} -> {p["chapter"]}/{p.get("section")}')
+    for c in chs.values(): fill_card_ids(c)
     return meta, SRC, [chs[k] for k in sorted(chs)], report
+
+def fill_card_ids(c):
+    """Give every flashcard of a merged chapter a stable id (chNN-fNNN). Cards without one get the id of their position
+    (card k → chNN-f{k+1:03d}, or the next free number if an author already used it), so packs written before cards
+    had ids keep their order — and the app moves old positional progress (chNN#k) to these ids once."""
+    used = {f['id'] for f in c.get('flashcards', []) if f.get('id')}
+    for k, f in enumerate(c.get('flashcards', [])):
+        if f.get('id'): continue
+        n = k + 1; cand = f"{c['id']}-f{n:03d}"
+        while cand in used: n += 1; cand = f"{c['id']}-f{n:03d}"
+        f['id'] = cand; used.add(cand)
+    return c
 
 def content_hash(obj):
     return hashlib.sha256(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode('utf-8')).hexdigest()[:16]

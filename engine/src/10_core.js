@@ -147,6 +147,18 @@ const S = (() => {
   return st;
 })();
 if (!S.settings.apiKey) S.settings.apiKey = DEFAULT_KEY;
+/* flashcards have ids now (chNN-fNNN); their progress used to be keyed by position (chNN#k), which shifted when a card
+   was inserted. Move positional progress to the card's id (idempotent: a moved key is gone; if both exist the id wins). */
+const CARD_KEYS_MOVED = (() => {
+  let n = 0;
+  COURSE.forEach(c => c.flashcards.forEach((f, k) => {
+    const old = c.id + '#' + k;
+    if (!f.id || !S.fc[old]) return;
+    if (!S.fc[f.id]) S.fc[f.id] = S.fc[old];
+    delete S.fc[old]; n++;
+  }));
+  return n;
+})();
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
@@ -156,6 +168,7 @@ function flushSave() {
   Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
+if (CARD_KEYS_MOVED) save();
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
 function touchStreak() { Noema.stats.touchStreak(); }

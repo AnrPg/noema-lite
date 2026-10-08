@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS sections(subject_id TEXT, id TEXT, chapter_id TEXT, o
 CREATE TABLE IF NOT EXISTS blocks(subject_id TEXT, section_id TEXT, ord INTEGER, type TEXT, src TEXT, text TEXT, json TEXT, PRIMARY KEY(subject_id, section_id, ord));
 CREATE TABLE IF NOT EXISTS exercises(subject_id TEXT, id TEXT, chapter_id TEXT, section_id TEXT, type TEXT, difficulty INTEGER, tags TEXT, quick INTEGER, src TEXT, q TEXT, json TEXT, PRIMARY KEY(subject_id, id));
 CREATE TABLE IF NOT EXISTS playbooks(subject_id TEXT, id TEXT, chapter_id TEXT, section_id TEXT, title TEXT, src TEXT, json TEXT, PRIMARY KEY(subject_id, id));
-CREATE TABLE IF NOT EXISTS flashcards(subject_id TEXT, chapter_id TEXT, ord INTEGER, section_id TEXT, q TEXT, a TEXT, src TEXT, PRIMARY KEY(subject_id, chapter_id, ord));
+CREATE TABLE IF NOT EXISTS flashcards(subject_id TEXT, chapter_id TEXT, ord INTEGER, section_id TEXT, q TEXT, a TEXT, src TEXT, id TEXT, PRIMARY KEY(subject_id, chapter_id, ord));
 CREATE TABLE IF NOT EXISTS pitfalls(subject_id TEXT, chapter_id TEXT, ord INTEGER, title TEXT, text TEXT, fix TEXT, src TEXT, PRIMARY KEY(subject_id, chapter_id, ord));
 CREATE TABLE IF NOT EXISTS accounts(id TEXT PRIMARY KEY, name TEXT, emoji TEXT, kind TEXT, email TEXT, json TEXT);
 CREATE TABLE IF NOT EXISTS backups(sha256 TEXT PRIMARY KEY, file TEXT, account_id TEXT, created_at TEXT, bytes INTEGER, json TEXT);
@@ -82,6 +82,7 @@ def main():
     work = os.path.join(tempfile.mkdtemp(prefix='noemadb-'), 'work.db')
     if os.path.exists(DB): shutil.copyfile(DB, work)
     con = sqlite3.connect(work); con.executescript(SCHEMA); cur = con.cursor(); ts = now_iso()
+    if 'id' not in [r[1] for r in cur.execute('PRAGMA table_info(flashcards)')]: cur.execute('ALTER TABLE flashcards ADD COLUMN id TEXT')   # databases made before cards had ids
     # 1) content-addressed copy of every source file (versioned)
     n_new = 0; cur.execute('DELETE FROM files')
     for rel, p in tracked_files():
@@ -108,7 +109,7 @@ def main():
                 for k, b in enumerate(s['blocks']): cur.execute('INSERT INTO blocks VALUES (?,?,?,?,?,?,?)', (sid, s['id'], k, b.get('t'), b.get('src') or c.get('src'), block_text(b), json.dumps(b, ensure_ascii=False)))
             for e in c['exercises']: cur.execute('INSERT OR REPLACE INTO exercises VALUES (?,?,?,?,?,?,?,?,?,?,?)', (sid, e['id'], c['id'], e.get('section'), e.get('type'), e.get('difficulty'), ','.join(e.get('tags', [])), 1 if e.get('quick') else 0, e.get('src') or c.get('src'), e.get('q'), json.dumps(e, ensure_ascii=False)))
             for d in c['debug']: cur.execute('INSERT OR REPLACE INTO playbooks VALUES (?,?,?,?,?,?,?)', (sid, d.get('id'), c['id'], d.get('section'), d.get('title'), d.get('src') or c.get('src'), json.dumps(d, ensure_ascii=False)))
-            for k, f in enumerate(c['flashcards']): cur.execute('INSERT INTO flashcards VALUES (?,?,?,?,?,?,?)', (sid, c['id'], k, f.get('section'), f.get('q'), f.get('a'), f.get('src') or c.get('src')))
+            for k, f in enumerate(c['flashcards']): cur.execute('INSERT INTO flashcards VALUES (?,?,?,?,?,?,?,?)', (sid, c['id'], k, f.get('section'), f.get('q'), f.get('a'), f.get('src') or c.get('src'), f.get('id')))
             for k, p in enumerate(c['pitfalls']): cur.execute('INSERT INTO pitfalls VALUES (?,?,?,?,?,?,?)', (sid, c['id'], k, p.get('title'), p.get('text'), p.get('fix'), p.get('src') or c.get('src')))
     # 3) accounts + backups (all backup files are kept; the newest per account feeds the state tables)
     for t in ('accounts', 'user_kv', 'progress'): cur.execute(f'DELETE FROM {t}')

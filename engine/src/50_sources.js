@@ -9,8 +9,12 @@ const FULL_COURSE = COURSE.slice();
 FULL_COURSE.forEach((c, i) => {
   c._ci = i;
   c.src = [SRCREG.chapters?.[c.id], c.src].find(id => id && SRC_BY_ID[id]) || SOURCES[0].id;   // only ids that exist
-  c.flashcards.forEach((f, k) => { f._key = f._key || c.id + '#' + k; });   // stable SRS keys, independent of filtering
+  c.flashcards.forEach((f, k) => { f._key = f.id || f._key || c.id + '#' + k; });   // SRS keys: the card's id (packs without ids: its position), independent of filtering
 });
+{ /* tell sibling apps (Meletee, a:caps) that card progress is keyed by card id; each feature merges only its own flag */
+  const k = Noema.kv.accountKey('caps'); let c = {}; try { c = JSON.parse(Noema.kv.get(k) || '{}') || {}; } catch (e) { }
+  if (!c.stableCardIds) Noema.kv.set(k, JSON.stringify({ ...c, stableCardIds: 1 }));
+}
 const srcOfItem = (it, c) => (it && it.src) || c.src;
 
 /* ---------- "new" = sources added AFTER the subject was first made (a later version), not yet marked as seen.

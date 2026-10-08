@@ -5,9 +5,9 @@ for _s in (sys.stdout, sys.stderr):   # UTF-8 output on Windows / macOS / Linux 
     except Exception: pass
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 FX = os.path.join(ROOT, 'tests', 'fixtures', 'demo-physics')
-ch = json.load(open(os.path.join(FX, 'chapters', 'ch01.json'), encoding='utf-8'))
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
-from noema_lib import image_size
+from noema_lib import image_size, fill_card_ids
+ch = fill_card_ids(json.load(open(os.path.join(FX, 'chapters', 'ch01.json'), encoding='utf-8')))   # as tools/build.py does (load_subject)
 media = {it['id']: dict(zip(('w', 'h'), image_size(os.path.join(FX, 'media', it['file']))), regions=it['regions']) for it in json.load(open(os.path.join(FX, 'media', 'media.json'), encoding='utf-8'))['items']}
 fails = 0
 def run(c, expect, why, minv=3):
@@ -30,6 +30,18 @@ run(mut(lambda c: ex(c, 'ch01-e108').update(answer=7)), 'bad answer index', 'rev
 run(mut(lambda c: ex(c, 'ch01-e106').update(targets=None, regions=[{'id': 'a', 'shape': 'circle', 'cx': 50, 'cy': 50, 'r': 20}, {'id': 'b', 'shape': 'circle', 'cx': 150, 'cy': 50, 'r': 20, 'label': 'B'}])), 'every target needs a label', 'select target without label')
 run(mut(lambda c: c.update(exercises=[e for e in c['exercises'] if not e['type'].startswith('img_')])), 'visual exercises (subject requires >= 3', 'chapter without visual exercises is rejected')
 run(mut(lambda c: c['sections'][0].update(blocks=[b for b in c['sections'][0]['blocks'] if b['t'] != 'figure'])), "no 'figure' block", 'chapter without a figure is rejected')
+
+# ---- flashcard ids (progress is keyed by them) ----
+run(mut(lambda c: c['flashcards'][0].pop('id')), 'flashcard needs an id like ch01-f001', 'flashcard without id is rejected')
+run(mut(lambda c: c['flashcards'].append(dict(c['flashcards'][0]))), 'duplicate flashcard id', 'duplicate flashcard id is rejected')
+run(mut(lambda c: c['flashcards'][0].update(id='ch02-f001')), 'flashcard needs an id like ch01-f001', "another chapter's card id is rejected")
+def ids_case(cards, expect, why):
+    global fails
+    got = [f['id'] for f in fill_card_ids({'id': 'ch03', 'flashcards': cards})['flashcards']]
+    print(('  ✅ ' if got == expect else '  ❌ ') + why + ('' if got == expect else f': {got}')); fails += got != expect
+ids_case([{}, {}, {}], ['ch03-f001', 'ch03-f002', 'ch03-f003'], 'cards without ids get the id of their position')
+ids_case([{}, {'id': 'ch03-f001'}, {}], ['ch03-f002', 'ch03-f001', 'ch03-f003'], 'a taken id moves the card to the next free one')
+ids_case([{'id': 'ch03-f710'}, {}], ['ch03-f710', 'ch03-f002'], 'existing ids are kept')
 
 # ---- media provenance & quality (tools/noema_lib.load_media) ----
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
