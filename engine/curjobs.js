@@ -205,6 +205,7 @@
     App.busy = true; let n = 0;
     try {
       const rows = (await CL.kvRows(IN)).sort((a, b) => a.key.localeCompare(b.key)); App.last = Date.now(); App.error = null;
+      if (rows.length && CL.pull) await CL.pull(acc).catch(() => { });   // apply the answers to the newest copy of each curriculum, not to an older one on this device
       const done = []; let steps = 0;
       for (const r of rows) {
         const cid = r.key.slice(IN.length).split(':')[0];

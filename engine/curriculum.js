@@ -468,7 +468,32 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   }
   /** The chapter planner's answer → the steps (a step already prepared keeps its chapters). */
   function applyPlans(c, data) {
-    for (const p of data.plans) { const n = c.nodes[p.nodeId]; if (!n || ['ready', 'generating'].includes(n.pack?.status)) continue; n.learningGoals = p.learningGoals; n.chapters = p.chapters.map(ch => ({ ref: ch.ref, title: ch.title, goals: ch.teachingGoals, coverage: ch.requiredCoverage, ...(ch.material && ch.material !== '—' ? { material: ch.material } : {}) })); delete n.replan; delete n.planWish; }
+    for (const p of data.plans) { const n = c.nodes[p.nodeId]; if (!n || ['ready', 'generating'].includes(n.pack?.status)) continue; n.learningGoals = p.learningGoals; n.chapters = p.chapters.map(ch => ({ ref: ch.ref, title: ch.title, goals: ch.teachingGoals, coverage: ch.requiredCoverage, ...(ch.material && ch.material !== '—' ? { material: ch.material } : {}) })); n.plannedAt = new Date().toISOString(); delete n.replan; delete n.planWish; }
+  }
+  /** Two copies of one curriculum (this device's and the cloud's, or two devices'): bring the chapter plans that are newer in
+      `other` into `c` (mutates c) → true when c changed. Whole records are synced last-write-wins, so without this an older
+      copy saved anywhere (another device, a background save) silently dropped plans accepted meanwhile. A plan is newer
+      when its plannedAt is later than this copy's plannedAt and replanAt; plans from before plannedAt existed only fill
+      steps that have no chapters here and are not waiting to be re-planned. */
+  function mergePlans(c, other) {
+    if (!c?.nodes || !other?.nodes || c.id !== other.id) return false;
+    const t = v => Date.parse(v || '') || 0; let changed = false;
+    for (const [id, o] of Object.entries(other.nodes)) {
+      const n = c.nodes[id]; if (!n || ['ready', 'generating'].includes(n.pack?.status)) continue;
+      if (o.replan && t(o.replanAt) > Math.max(t(n.plannedAt), t(n.replanAt))) {   // a re-plan asked for on the other copy
+        n.replan = true; n.replanAt = o.replanAt; if (o.planWish) n.planWish = o.planWish; else delete n.planWish;
+        if (c.stage === 'done') c.stage = 'plan'; changed = true; continue;
+      }
+      if (!o.chapters?.length) continue;
+      const newer = o.plannedAt ? t(o.plannedAt) > Math.max(t(n.plannedAt), t(n.replanAt)) : !n.chapters?.length && !n.replan && !n.plannedAt;
+      if (!newer) continue;
+      n.learningGoals = o.learningGoals; n.chapters = o.chapters;
+      if (o.plannedAt) n.plannedAt = o.plannedAt; else delete n.plannedAt;
+      if (!n.replanAt || t(o.plannedAt) > t(n.replanAt)) { delete n.replan; delete n.planWish; }
+      changed = true;
+    }
+    if (changed && c.provider === 'claudeapp' && c.stage === 'plan' && !Object.values(c.nodes).some(n => !['ready', 'generating'].includes(n.pack?.status) && (!n.chapters?.length || n.replan))) c.stage = 'done';
+    return changed;
   }
 
   /** Create (or resume) a curriculum; each stage is saved, so a closed tab continues where it stopped. */
@@ -576,7 +601,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   const curStore = cid => 'curfiles-' + cid;
   /** The file of a step's material entry (new: in the curriculum store; older ones: with the step's subject). */
   const materialFile = (acc, c, nid, f) => window.NoemaSrcFiles.get(acc, f.fileId ? curStore(c.id) : packId(c, nid), f.fileId || f.srcId);
-  return { materialCoverage, materialPages, applyDag, applyAudit, applyPlans, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
+  return { materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
     schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART };
 })();
 
@@ -845,7 +870,8 @@ window.NoemaCurriculum.Edit = (() => {
     const c = C.get(acc, cid); ids = ids.filter(id => c.nodes[id] && !generated(c.nodes[id]));
     if (!ids.length) return { ok: true };
     if (c.provider === 'claudeapp') {   // the learner chose the Claude app (their Claude plan) for this curriculum: it plans them (engine/curjobs.js), no API cost here
-      for (const id of ids) { c.nodes[id].replan = true; if (instruction) c.nodes[id].planWish = instruction; else delete c.nodes[id].planWish; }
+      const at = new Date().toISOString();
+      for (const id of ids) { c.nodes[id].replan = true; c.nodes[id].replanAt = at; if (instruction) c.nodes[id].planWish = instruction; else delete c.nodes[id].planWish; }
       if (c.stage === 'done') c.stage = 'plan'; C.save(acc, c); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
       return { ok: true, queued: true };
     }

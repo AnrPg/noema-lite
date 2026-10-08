@@ -109,6 +109,22 @@ c.save()`, path.join(TF, 'membranes.pdf')]);
   ok(/The map and all chapter plans are done/.test(r.text) || /Nothing is waiting/.test(r.text), `${batches} plan batches, then “all done”`);
   await p.click('.cm-appbar button:has-text("How?")'); await p.click('.cm-checknow'); await wait(800);
   ok(await until(() => p.evaluate(id => { const c = NoemaCurriculum.get(Noema.account.id, id); return Object.values(c.nodes).every(n => n.chapters.length) && c.stage === 'done'; }, cid), 8000), '⟳ Check now → every step has its chapters; stage “done”');
+  // an older copy of the curriculum (another device, a background save) must not drop the accepted chapter plans:
+  // the record is synced whole, last write wins — so plans are merged step by step on every pull and push
+  {
+    const ck = 'a:curriculum:' + cid, row = kvOf(uid)[ck], old = JSON.parse(row.value), strip = Object.keys(old.nodes).slice(0, 3);
+    for (const id of strip) { delete old.nodes[id].chapters; delete old.nodes[id].learningGoals; delete old.nodes[id].plannedAt; }
+    old.stage = 'plan'; srv.state.kv[uid][ck] = { value: JSON.stringify(old), updated_at: new Date(Date.now() + 864e5).toISOString() };
+    await p.evaluate(async () => { await NoemaCloud.pull(); await NoemaCloud.push(); });
+    const planned = c => strip.every(id => c.nodes[id].chapters?.length);
+    ok(await p.evaluate(([id, ids]) => ids.every(n => NoemaCurriculum.get(Noema.account.id, id).nodes[n].chapters?.length), [cid, strip]) && planned(JSON.parse(kvOf(uid)[ck].value)),
+      'an older copy pushed from another device does not wipe the plans: pulled, merged, pushed back with every plan');
+    await p.evaluate(([id, ids]) => { const c = NoemaCurriculum.get(Noema.account.id, id); for (const n of ids) { delete c.nodes[n].chapters; delete c.nodes[n].plannedAt; } NoemaCurriculum.save(Noema.account.id, c); }, [cid, strip.slice(0, 2)]);
+    await p.evaluate(() => NoemaCloud.push());
+    ok(planned(JSON.parse(kvOf(uid)[ck].value)) && await p.evaluate(([id, ids]) => ids.every(n => NoemaCurriculum.get(Noema.account.id, id).nodes[n].chapters?.length), [cid, strip]),
+      'an older copy saved on this device does not wipe them either: the cloud’s plans are merged in before the push');
+    r = await tool('noema_curricula'); ok(!/need their chapter plan/.test(r.text), 'the connector still sees every step planned');
+  }
   await p.screenshot({ path: SHOTS + '/ca1_panel.png' }); await p.keyboard.press('Escape'); await p.locator('.noema-ovbox:has(.cm-apppanel) button:has-text("Close")').click().catch(() => { }); await wait(300);
 
   /* ---------- B. a step prepared by the Claude app ---------- */
