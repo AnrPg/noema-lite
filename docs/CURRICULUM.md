@@ -43,7 +43,7 @@ the goal) and the number of applications. Then four agents run, one after the ot
 ## 2. The map
 
 Full screen, three coloured parts (**1 · Prerequisites · 2 · the goal · 3 · Applications**), layered
-left → right. Each step shows its state: **✅ mastered · 🔓 open · 🔒 locked**, and **⚡ prepared ·
+left → right. Each step shows its state: **✅ mastered · open (green open padlock) · 🔒 locked**, and **⚡ prepared ·
 ⏳ being prepared · ⚠️ failed**.
 
 * Click a step → panel (bottom sheet on phones): summary, role and disciplines, what it builds on and

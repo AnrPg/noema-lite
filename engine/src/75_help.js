@@ -54,7 +54,7 @@ const GUIDES = {
   curricula: { icon: '🧭', title: 'Curricula: from a goal to a map of steps', who: 'Everyone with a Claude API key or a Gemini key', steps: [
     'Subject picker → **🧭 Curricula** (or 🧭 in the top bar) → **➕ New curriculum**.',
     'Type what you want to master, your starting point and the depth. Four AI agents map it: **every prerequisite** (from several sciences), **the whole goal** (aspects, sub-topics, synthesis) and **applications**; then they plan the chapters of every step.',
-    'The map shows three parts. **🔓 open** steps can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.',
+    'The map shows three parts. **open** steps (green open padlock) can be studied; **🔒 locked** ones show their information and chapters but open only when their prerequisites are mastered.',
     'Every step becomes a full subject (theory, exercises, flashcards, drills, tutor), prepared in the background a few steps ahead while the app is open — with Claude from official sources found on the web, or with Gemini and Google Search.',
     'A step is **✅ mastered** when all its sections are read and 80 % of its exercises solved — or with **🎓 I already know this** (8 of 10 in a short test).'],
     notes: ['Curricula and prepared steps are saved in your account (cloud) like your subjects.', 'Claude costs a few dollars per prepared step (limit per step in ⚙️ of the map); Gemini’s free quota is limited.'] },
