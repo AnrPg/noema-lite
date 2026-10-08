@@ -846,11 +846,16 @@ kbd{font:600 12px var(--mono,monospace);padding:1px 6px;border-radius:6px;border
 .cm-holdbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;background:var(--warn-bg);border-bottom:1px solid var(--line);font-size:14px}
 .cm-holdbar:empty{padding:0;border:0}
 .cm-attachwarn{display:block;margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--warn-bg);font-size:14px;line-height:1.45}
+.cm-attachshared{margin-top:6px;font-weight:600}
 .cm-attachchips{max-height:42vh;overflow:auto;margin:8px 0}
 .cm-attachchip .o{opacity:.75;font-weight:500}
 .cm-attachlist{display:grid;gap:6px;margin:10px 0;padding-left:22px;max-height:48vh;overflow:auto}
 .cm-attachlist li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:8px;align-items:center}
 .cm-attachstep{font-weight:700;font-size:14px;overflow-wrap:anywhere}
+.cm-changes{display:flex;flex-direction:column;gap:6px;margin:10px 0;max-height:50vh;overflow:auto}
+.cm-change{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);line-height:1.4;font-size:14px;cursor:pointer;overflow-wrap:anywhere}
+.cm-change.own{background:var(--warn-bg)}
+.cm-change input{margin-top:3px;flex:none}
 .cm-replanning{background:var(--warn-bg)}
 .cm-flag{color:var(--ink2)}
 .pick-curs{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin:4px 0 12px}

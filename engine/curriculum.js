@@ -493,6 +493,11 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   /** A step whose plan can no longer change: its subject was generated from it (or is being generated). A step taught by a
       pack the learner attached (pack.assigned) is not: its plan describes that pack and is re-planned when the pack changes. */
   const planLocked = n => ['ready', 'generating'].includes(n?.pack?.status) && !n.pack.assigned;
+  /** 👥 A step's chapter plan. In a shared curriculum a step taught by the learner's own subject has its own plan; the
+      group's waits in n.groupPlan meanwhile (engine/curshare.js keeps the same keys). */
+  const PLAN_KEYS = ['chapters', 'learningGoals', 'plannedAt', 'replanAt'];
+  const planOf = n => { const r = {}; for (const k of PLAN_KEYS) if (n?.[k] !== undefined) r[k] = JSON.parse(JSON.stringify(n[k])); return r; };
+  const setPlan = (n, p) => { for (const k of PLAN_KEYS) if (p?.[k] !== undefined) n[k] = JSON.parse(JSON.stringify(p[k])); else delete n[k]; };
   /** The chapter planner's answer → the steps (a step already prepared keeps its chapters). */
   function applyPlans(c, data) {
     for (const p of data.plans) { const n = c.nodes[p.nodeId]; if (!n || planLocked(n)) continue; n.learningGoals = p.learningGoals; n.chapters = p.chapters.map(ch => ({ ref: ch.ref, title: ch.title, goals: ch.teachingGoals, coverage: ch.requiredCoverage, ...(ch.material && ch.material !== '—' ? { material: ch.material } : {}) })); n.plannedAt = new Date().toISOString(); delete n.replan; delete n.planWish; }
@@ -511,6 +516,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
       if (t(o.assignedAt) > t(n.assignedAt) && n.pack?.status !== 'generating') {
         n.assignedAt = o.assignedAt; n.pack = o.pack ? JSON.parse(JSON.stringify(o.pack)) : null;
         if (o.planFrom) n.planFrom = o.planFrom; else delete n.planFrom;
+        if (o.groupPlan || n.groupPlan) { setPlan(n, o); if (o.groupPlan) n.groupPlan = planOf(o.groupPlan); else delete n.groupPlan; }   // 👥 shared: the step's own plan (or the group's, back) comes with it
         if (o.replan) { n.replan = true; n.replanAt = o.replanAt; if (c.stage === 'done') c.stage = 'plan'; }   // its re-plan comes with it
         if (!o.reviewed) delete n.reviewed;
         changed = true;
@@ -650,7 +656,7 @@ Output: schemaVersion 1, stage "chapter_planner", plans — exactly one record p
   const curStore = cid => 'curfiles-' + cid;
   /** The file of a step's material entry (new: in the curriculum store; older ones: with the step's subject). */
   const materialFile = (acc, c, nid, f) => window.NoemaSrcFiles.get(acc, f.fileId ? curStore(c.id) : packId(c, nid), f.fileId || f.srcId);
-  return { packageText, outlineOf, planLocked, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
+  return { packageText, outlineOf, planLocked, PLAN_KEYS, planOf, setPlan, stepsOf, holding, materialCoverage, materialPages, applyDag, applyAudit, applyPlans, mergePlans, validatePlans, auditBase, expandLine, curStore, materialFile, build, blank, list, get, save, remove, onChange, statuses, nodeStatus, setMastered, summary, nextUp, layout, order, packId, nodeBrief, packMastery, topo, validateDag, validateAudit, validateExpand, applyExpansion,
     schemas: { S_DAG, S_AUDIT, S_EXPAND, S_PLAN }, prompts: { dagPrompt, auditPrompt, expandPrompt, PLANNER_SYSTEM, planPrompt, materialText, packageText }, ctx, LANG, PASS, kvGet, kvSet, snapshot, PART };
 })();
 
@@ -925,7 +931,6 @@ window.NoemaCurriculum.Edit = (() => {
   /** 📦 Can a subject be attached to this step? → null or why not. */
   function cannotAssign(c, n) {
     if (!n) return 'Step not found.';
-    if (c.shared && !c.shared.ended) return 'This curriculum is shared — attaching your own subjects to its steps is not possible yet.';
     if (n.pack?.status === 'generating') return 'This step is being prepared right now — wait until it is ready, or stop it first.';
     return null;
   }
@@ -934,6 +939,7 @@ window.NoemaCurriculum.Edit = (() => {
    * (no agent touches it) — and ONLY this step is re-planned to describe the pack (its chapters, goals); it stays closed
    * until its new plan is here. Steps that depend on it keep their plans. The subject keeps its id, so its progress, notes
    * and conversations stay; the same subject may teach several steps. A subject this step had prepared goes to 📚 the Shelf.
+   * In a shared curriculum all of this is the learner's own: the group keeps the step's shared plan (n.groupPlan meanwhile).
    * from: who chose it ('me' | 'import' | 'claude' | 'share'). → { ok, replan } | { error }
    */
   async function assign(acc, cid, nid, subjectId, { from = 'me' } = {}) {
@@ -951,6 +957,7 @@ window.NoemaCurriculum.Edit = (() => {
     n.pack = { id: subjectId, status: 'ready', assigned: { from, at }, title: meta.title || pack.subject?.title || subjectId, description: String(meta.description || pack.subject?.description || '').slice(0, 400),
       version: pack.version || meta.version || null, sections: chapters.flatMap(ch => (ch.sections || []).map(x => x.id)), exercises: chapters.reduce((a, ch) => a + (ch.exercises || []).length, 0), chapters: chapters.length, outline: C.outlineOf(pack) };
     n.assignedAt = at;
+    if (c.shared && !c.shared.ended && !n.groupPlan) n.groupPlan = C.planOf(n);   // 👥 shared: the new plan is mine only — the group keeps the step's shared plan
     const replan = !!n.chapters?.length || c.stage === 'done';   // while the map is being created, the plan stage plans it with the others
     if (replan) { n.replan = true; n.replanAt = at; n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan'; }   // only this step: its plan now follows the pack
     (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${n.title}” is now taught by “${n.pack.title}”${replan ? ' — re-planning this step' : ''}` });
@@ -959,17 +966,33 @@ window.NoemaCurriculum.Edit = (() => {
     window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
     return { ok: true, replan };
   }
+  /** 📦 A subject that teaches steps got a new version (an update from 🌍 Explore, a share accepted again, a new import):
+      each step it teaches follows it — only those steps are re-planned (the subject is never changed by a plan). → how many */
+  function refreshAssigned(acc, subjectId, pack) {
+    let k = 0; const chapters = pack?.chapters || []; if (!chapters.length) return 0;
+    for (const { c: c0, nid } of C.stepsOf(acc, subjectId)) {
+      const c = C.get(acc, c0.id), n = c?.nodes[nid]; if (!n?.pack?.assigned || n.pack.id !== subjectId || (n.pack.version || null) === (pack.version || null)) continue;
+      const at = new Date().toISOString();
+      n.pack = { ...n.pack, version: pack.version || null, sections: chapters.flatMap(ch => (ch.sections || []).map(x => x.id)), exercises: chapters.reduce((a, ch) => a + (ch.exercises || []).length, 0), chapters: chapters.length, outline: C.outlineOf(pack) };
+      n.replan = true; n.replanAt = at; n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan';
+      (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${n.pack.title}” has a new version — re-planning “${n.title}”` });
+      C.save(acc, c); k++;
+    }
+    if (k) window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
+    return k;
+  }
   /** 📦 Take an attached subject off a step: the subject stays (📚 on the Shelf when no other step uses it); the step is
-      planned and prepared again the usual way. */
+      planned and prepared again the usual way — in a shared curriculum it gets the group's plan and prepared step back. */
   function detach(acc, cid, nid) {
     const c = C.get(acc, cid); const n = c?.nodes[nid]; if (!n?.pack?.assigned) return { error: 'No subject is attached to this step.' };
     const title = n.pack.title; const at = new Date().toISOString();
     n.pack = null; n.assignedAt = at; delete n.planFrom; delete n.reviewed;
-    if (n.chapters?.length) { n.replan = true; n.replanAt = at; } else delete n.replan;
-    if (c.stage === 'done') c.stage = 'plan';
+    const group = !!n.groupPlan;
+    if (group) { C.setPlan(n, n.groupPlan); delete n.groupPlan; delete n.replan; }   // 👥 shared: back to the group's plan (and its prepared step)
+    else { if (n.chapters?.length) { n.replan = true; n.replanAt = at; } else delete n.replan; if (c.stage === 'done') c.stage = 'plan'; }
     (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${title}” taken off “${n.title}”` });
     C.save(acc, c); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
-    return { ok: true };
+    return { ok: true, group };
   }
   /** (Re)plan the chapters of some steps with the chapter planner — e.g. a step you added, or with your own instruction. */
   async function plan(acc, cid, ids, { instruction = '', onLog = () => { } } = {}) {
@@ -1070,5 +1093,5 @@ window.NoemaCurriculum.Edit = (() => {
     const info = c.files?.[f.fileId]; if (info) f.outline = (info.outline || []).filter(o => !f.range || !o.page || (o.page >= f.range[0] && o.page <= f.range[1])).slice(0, 80);
     C.save(acc, c); return { ok: true };
   }
-  return { update, add, remove, plan, replanAll, possibleParents, possibleChildren, generated, planLocked: C.planLocked, assign, detach, cannotAssign, toShelf, ROLES, addMaterial, removeMaterial, setMaterialRange, storeFile };
+  return { update, add, remove, plan, replanAll, possibleParents, possibleChildren, generated, planLocked: C.planLocked, assign, detach, refreshAssigned, cannotAssign, toShelf, ROLES, addMaterial, removeMaterial, setMaterialRange, storeFile };
 })();

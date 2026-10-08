@@ -55,6 +55,13 @@ function shareBanner() {
     const items = list.filter(x => !later.has(x.id)); bar.innerHTML = '';
     bar.classList.toggle('on', !!items.length); if (!items.length) return;
     const sh = items[0];
+    if (['curupdate', 'stepupdate', 'subjupdate'].includes(sh.kind)) {   // 🔔 an update that waits for me: take it or keep mine
+      const act = take => async e => { e.currentTarget.disabled = true; try { await Noema.notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toast(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } };
+      bar.append(h('span', { class: 'grow' }, ...Noema.updateText(sh), items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
+        h('button', { class: 'btn small primary', onclick: act(true) }, Noema.updateLabel(sh)), h('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'),
+        h('button', { class: 'btn small ghost', title: 'Decide later (it stays in 🔔)', onclick: () => { later.add(sh.id); draw(Noema.notes.pending); } }, 'Later'));
+      return;
+    }
     const cur = sh.kind === 'curriculum';   // 👥 an invitation to a shared curriculum
     bar.append(h('span', { class: 'grow' }, cur ? '👥 ' : '📬 ', h('b', {}, sh.from_name || sh.from_email || 'Someone'), cur ? ' invites you to the curriculum ' : ' wants to share ', h('b', {}, `“${sh.title}”`), cur ? '' : ' with you', items.length > 1 ? h('span', { class: 'tiny' }, `  (+${items.length - 1} more in 🔔)`) : ''),
       h('button', { class: 'btn small primary', onclick: async e => { e.target.disabled = true; try { const s = await Noema.notes.accept(sh); toast(cur ? `👥 You joined “${s.title}” — your progress is your own, the prepared steps are shared` : `✅ “${s.title}” added to your subjects`); confirmBox(`Open “${s.title}” now?`, () => cur ? Noema.curriculumMap(s.curriculum) : Noema.switchTo(ACCOUNT.id, s.id)); } catch (er) { toast('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, cur ? '✓ Join' : '✓ Accept'),

@@ -428,7 +428,7 @@
         const S = shelfChips(acc, { q, onPick: pick, onChange: async () => { subs = await shelf(acc); S.draw(subs); drawCurs(); sum.textContent = tr('pick.shelf', { n: subs.length }, acc); } });
         const imp = el('label', { class: 'btn small' }, tr('pick.import', null, acc), el('input', { type: 'file', accept: '.zip,.json,.noemapack', style: { display: 'none' }, onchange: async e => { try { const s = await importPackFile(acc, e.target.files[0]); landed(acc, s); pick(s); } catch (er) { toastL('⚠️ ' + er.message, 4000); } } }));
         const reqs = el('div', { class: 'nx-reqs' });
-        Notes.on(all => { const pending = all.filter(x => x.kind !== 'curriculum'); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
+        Notes.on(all => { const pending = all.filter(x => !x.kind); reqs.innerHTML = ''; if (!pending.length) return; reqs.append(el('div', { class: 'nx-lbl' }, tr('pick.shared', { n: pending.length }, acc)), ...pending.map(sh => shareRow(sh, { onAccepted: s => { landed(acc, s); pick(s); } }))); });
         // the way to study: a curriculum — a map of steps, each step a subject (the subjects on no map wait on 📚 the Shelf below)
         const modes = el('div', { class: 'cm-modes', role: 'tablist' },
           el('button', { class: 'cm-mode on', role: 'tab', 'aria-selected': 'true', onclick: () => CM()?.library(acc, { onStudy }) }, tr('pick.curricula', null, acc), el('small', {}, tr('pick.curriculaSub', null, acc))));
@@ -537,6 +537,7 @@
     await IDB.put('packs', acc + '|' + p.subject.id, p);
     KV.set(KV.accountKey('packmeta:' + p.subject.id, acc), JSON.stringify({ ...p.subject, counts: p.counts, version: p.version || null, ...extra }));
     if (isCloudAcc(acc)) await NoemaCloud.uploadPack(p).catch(e => console.warn(e));
+    window.NoemaCurriculum?.Edit?.refreshAssigned?.(acc, p.subject.id, p);   // 📦 a new version of a subject that teaches steps: those steps follow it
     return { ...p.subject, origin: 'imported', counts: p.counts, ...extra };
   }
 
@@ -620,7 +621,7 @@
       toastL('⬇️ Getting “' + s.title + '”…');
       const r = await fetch(NoemaCloud.publicPackUrl(s.owner, s.id)); if (!r.ok) throw new Error('Could not download it (' + r.status + ')');
       const p = await r.json(); if (REG.subjects.some(x => x.id === p.subject.id)) p.subject.id = p.subject.id + '-' + slugify(s.owner_name || 'shared');
-      const added = await importPack(acc, p, { publicFrom: s.owner, publicOwner: s.owner_name || '' });
+      const added = await importPack(acc, p, { publicFrom: s.owner, publicOwner: s.owner_name || '', publicId: s.id, publicAt: s.updated_at || null });
       await attachSharedFiles(acc, p, 'noema-public');
       toastL(`📥 “${p.subject.title}” added to your subjects`); choose(added);
     };
@@ -678,17 +679,49 @@
   }
 
   /* ---- 🔔 incoming shares: bell + banner (engine) and the picker ---- */
+  /* ---- 🔔 a new version of a subject taken from 🌍 Explore waits for the learner: ⬆️ Update or Keep mine ---- */
+  const SubjUpdates = {
+    list: [],
+    async check(acc) {
+      const metas = ls.keys(`${P}${acc}:a:packmeta:`).map(k => jget(k, null)).filter(m => m?.id && m.publicFrom);
+      if (!metas.length) return (this.list = []);
+      const rows = await NoemaCloud.publicRows([...new Set(metas.map(m => m.publicId || m.id))]).catch(() => null); if (!rows) return this.list;
+      const CU = window.NoemaCurriculum;
+      this.list = metas.map(m => {
+        const r = rows.find(x => x.owner === m.publicFrom && x.subject_id === (m.publicId || m.id)); if (!r) return null;
+        const v = r.meta?.version || null, mark = v || r.updated_at;
+        const newer = v ? v !== (m.version || null) : !!(m.publicAt && r.updated_at > m.publicAt);
+        if (!newer || m.publicSkip === mark) return null;
+        const steps = CU?.stepsOf ? CU.stepsOf(acc, m.id).filter(x => x.c.nodes[x.nid].pack?.assigned).length : 0;
+        return { id: 'subup:' + m.id, kind: 'subjupdate', subject: m.id, title: m.title, from_name: r.owner_name || m.publicOwner || '', owner: r.owner, publicId: r.subject_id, mark, at: r.updated_at, steps };
+      }).filter(Boolean);
+      return this.list;
+    },
+    /** ⬆️ Take the new version: the same subject id, so progress, notes and conversations stay; steps it teaches are re-planned. */
+    async apply(acc, u) {
+      const r = await fetch(NoemaCloud.publicPackUrl(u.owner, u.publicId)); if (!r.ok) throw new Error('Could not download it (' + r.status + ')');
+      const p = await r.json(); p.subject.id = u.subject;
+      const s = await importPack(acc, p, { publicFrom: u.owner, publicOwner: u.from_name || '', publicId: u.publicId, publicAt: u.at });
+      await attachSharedFiles(acc, p, 'noema-public');
+      this.list = this.list.filter(x => x.id !== u.id); return s;
+    },
+    keep(acc, u) { const k = KV.accountKey('packmeta:' + u.subject, acc), m = jget(k, null); if (m) KV.set(k, JSON.stringify({ ...m, publicSkip: u.mark })); this.list = this.list.filter(x => x.id !== u.id); },
+  };
+  const UPDATE_KINDS = ['curupdate', 'stepupdate', 'subjupdate'];
   const Notes = {
-    pending: [], listeners: [], timer: null, acc: null,
+    pending: [], remote: [], listeners: [], timer: null, acc: null,
     on(f) { this.listeners.push(f); f(this.pending); },
     emit() { this.listeners.forEach(f => { try { f(this.pending); } catch (e) { } }); },
+    /** 🔔 = shares and invitations (from the cloud) + updates that wait for the learner (shared curricula, their steps, Explore subjects). */
+    local() { this.pending = [...this.remote, ...(window.NoemaCurShare?.updates?.(this.acc) || []), ...SubjUpdates.list]; this.emit(); return this.pending; },
     async refresh() {
       if (!this.acc || !isCloudAcc(this.acc)) return this.pending;
       try {
         const subs = (await NoemaCloud.incomingShares()) || [];
         // 👥 invitations to curricula (engine/curshare.js) — in the same bell and banner
         const curs = window.NoemaCurShare ? ((await NoemaCurShare.invites().catch(e => { console.warn('[notes] curricula', e.message); return []; })) || []).map(i => ({ ...i, id: 'cur:' + i.curriculum, kind: 'curriculum', from_name: i.owner_name || '', meta: { ...(i.meta || {}), counts: i.meta?.counts || {} } })) : [];
-        this.pending = [...subs, ...curs]; this.emit();
+        await SubjUpdates.check(this.acc).catch(e => console.warn('[notes] updates', e.message));
+        this.remote = [...subs, ...curs]; this.local();
       } catch (e) { console.warn('[notes]', e.message); }
       return this.pending;
     },
@@ -696,6 +729,14 @@
       this.acc = acc; if (!isCloudAcc(acc)) return;
       this.refresh(); clearInterval(this.timer); this.timer = setInterval(() => this.refresh(), 120e3);
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') this.refresh(); });
+      if (!this.curOn && window.NoemaCurShare?.onChange) { this.curOn = true; NoemaCurShare.onChange(() => this.local()); }
+    },
+    /** An update: take it (true) or keep mine (false). A shared map's changes open their review (you tick what you take). */
+    async update(sh, take) {
+      const acc = this.acc, done = () => { this.local(); };
+      if (sh.kind === 'curupdate') { if (take) { await window.NoemaCurMap?.reviewChanges(acc, sh.curriculum, { onDone: done }); return; } await NoemaCurShare.takeChanges(acc, sh.curriculum, []); return done(); }
+      if (sh.kind === 'stepupdate') { if (take) await NoemaCurShare.download(acc, sh.curriculum, sh.node); else NoemaCurShare.keepStep(acc, sh.curriculum, sh.node); return done(); }
+      if (sh.kind === 'subjupdate') { if (take) await SubjUpdates.apply(acc, sh); else SubjUpdates.keep(acc, sh); return done(); }
     },
     async accept(sh) {
       if (sh.kind === 'curriculum') {   // 👥 join a shared curriculum: my own progress, the steps prepared together
@@ -715,6 +756,7 @@
   };
   /** One request as a row: who, what (info), Accept / Reject. */
   function shareRow(sh, { onAccepted } = {}) {
+    if (UPDATE_KINDS.includes(sh.kind)) return updateRow(sh);
     const row = el('div', { class: 'nx-req' },
       sh.kind === 'curriculum' ? el('div', { class: 'grow' }, el('b', {}, `${sh.from_name || 'Someone'}`), ' invites you to the curriculum ', el('b', {}, `“${sh.title}”`),
         el('div', { class: 'tiny' }, `👥 ${nOf(sh.meta?.counts?.steps, 'step')} — your own progress, the prepared steps are shared` + (sh.message ? ` · “${sh.message}”` : '')))
@@ -724,6 +766,19 @@
       el('button', { class: 'btn small primary', onclick: async e => { e.currentTarget.disabled = true; try { const s = await Notes.accept(sh); toastL(s.kind === 'curriculum' ? `👥 You joined “${s.title}” — find it in 🧭 Curricula` : `✅ “${s.title}” is now in your subjects`); onAccepted && onAccepted(s); } catch (er) { toastL('⚠️ ' + er.message, 5000); e.target.disabled = false; } } }, sh.kind === 'curriculum' ? '✓ Join' : '✓ Accept'),
       el('button', { class: 'btn small', onclick: async () => { await Notes.reject(sh).catch(er => toastL('⚠️ ' + er.message)); toastL('Rejected'); } }, '✕ Reject'));
     return row;
+  }
+
+  /** 🔔 An update as a row: what changed, and Take / Keep mine (it waits until the learner answers). */
+  function updateText(sh) {
+    if (sh.kind === 'curupdate') return [`🧭 ${sh.from_name || 'The owner'} changed the curriculum `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `${nOf(sh.count, 'change')}${sh.lines?.length ? ': ' + sh.lines.join(' · ') : ''} — nothing changes in your copy until you take it`)];
+    if (sh.kind === 'stepupdate') return [`⚡ ${sh.from_name || 'Its author'} made a new version of the step `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, `in “${sh.curTitle}” — yours stays until you take it`)];
+    return [`🌍 ${sh.from_name || 'Its author'} published a new version of `, el('b', {}, `“${sh.title}”`), el('div', { class: 'tiny' }, 'your progress stays (the same subject)' + (sh.steps ? ` · the ${nOf(sh.steps, 'curriculum step')} it teaches ${sh.steps === 1 ? 'is' : 'are'} re-planned to follow it` : ''))];
+  }
+  const updateLabel = sh => sh.kind === 'curupdate' ? '🔎 Review' : sh.kind === 'stepupdate' ? '⬇️ Get it' : '⬆️ Update';
+  function updateRow(sh) {
+    const act = take => async e => { const b = e.currentTarget; b.disabled = true; try { await Notes.update(sh, take); if (sh.kind !== 'curupdate' || !take) toastL(take ? `✅ “${sh.title}” is up to date` : `👍 You keep your version of “${sh.title}”`); } catch (er) { toastL('⚠️ ' + er.message, 5000); b.disabled = false; } };
+    return el('div', { class: 'nx-req nx-update' }, el('div', { class: 'grow' }, ...updateText(sh)),
+      el('button', { class: 'btn small primary', onclick: act(true) }, updateLabel(sh)), el('button', { class: 'btn small', onclick: act(false) }, sh.kind === 'curupdate' ? 'Keep my copy' : 'Keep mine'));
   }
 
   /* ---------------- Claude: two ways (docs/CLAUDE_CONNECTOR.md) ----------------
@@ -1140,7 +1195,7 @@
   const Noema = window.Noema = {
     version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
-    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
+    accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, shelf, loadSubject, openShelf: (acc, opts) => openShelf(acc || Noema.account?.id || KV.acc, opts || {}), pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow, updateText, updateLabel,
     share(s) { return shareDialog(Noema.account.id, s); },
     editSubject(s, o) { return editSubject(Noema.account.id, s, o); }, deleteSubject(s) { return deleteSubject(Noema.account.id, s); }, setHidden(id, h) { return setHidden(Noema.account.id, id, h); },
     toast: toastL, getPackById: (acc, id) => getPack(acc, { id, origin: 'imported' }),

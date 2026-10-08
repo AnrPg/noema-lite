@@ -31,7 +31,7 @@
   const member = c => c?.shared?.role === 'member' && !c.shared.ended;   // 👥 a curriculum someone shared with the learner: its map and plans are the owner's
   function work(c) {
     const graph = isApp(c) && !member(c) && GRAPH.includes(c.stage) ? c.stage : null;
-    const toPlan = isApp(c) && !member(c) && !graph && c.stage !== 'dag' && !C().holding(c) ? C().order(c).filter(id => needsPlan(c.nodes[id])) : [];   // holding: the learner attaches their own subjects first
+    const toPlan = isApp(c) && !graph && c.stage !== 'dag' && !C().holding(c) ? C().order(c).filter(id => needsPlan(c.nodes[id]) && (!member(c) || !!c.nodes[id].pack?.assigned)) : [];   // holding: the learner attaches their own subjects first · a member plans only the steps their own subjects teach
     const queued = Object.keys(c.nodes || {}).filter(id => c.nodes[id].pack?.status === 'app').sort((a, b) => String(c.nodes[a].pack.queuedAt || '').localeCompare(String(c.nodes[b].pack.queuedAt || '')) || a.localeCompare(b));
     const steps = queued.filter(id => !c.nodes[id].pack.claimedAt), claimed = queued.filter(id => c.nodes[id].pack.claimedAt);
     return { graph, toPlan, steps, claimed, done: !graph && !toPlan.length && !steps.length };
@@ -99,7 +99,7 @@
     if (step) {
       const s = String(step).trim().toLowerCase(); const nid = c.nodes[step] ? step : Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase() === s) || Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase().includes(s));
       if (!nid) return { error: `No step “${step}” in “${c.title}”.` };
-      if (c.nodes[nid].pack?.assigned) return needsPlan(c.nodes[nid]) && isApp(c) && !member(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” is taught by “${c.nodes[nid].pack.title || c.nodes[nid].pack.id}”, a subject the learner attached to it — it is not prepared.` };
+      if (c.nodes[nid].pack?.assigned) return needsPlan(c.nodes[nid]) && isApp(c) ? spec(c, 'plan', [nid]) : { error: `“${c.nodes[nid].title}” is taught by “${c.nodes[nid].pack.title || c.nodes[nid].pack.id}”, a subject the learner attached to it — it is not prepared.` };
       if (prepared(c.nodes[nid])) return { error: `“${c.nodes[nid].title}” is already prepared.` };
       if (c.nodes[nid].pack?.claimedAt && !force) return { error: `“${c.nodes[nid].title}” is being prepared by another run since ${c.nodes[nid].pack.claimedAt} — do not prepare it twice. If that run has stopped without saving it, call noema_curriculum_task again with step and force = true.` };
       if (c.shared && !c.shared.ended && c.remote?.[nid] && (c.remote[nid].status === 'ready' || !c.remote[nid].mine)) return { error: `“${c.nodes[nid].title}” ${c.remote[nid].status === 'ready' ? 'has been prepared' : 'is being prepared'} by ${c.remote[nid].by || 'another member'} of this shared curriculum — do not prepare it again (the learner gets it on the map).` };
@@ -157,7 +157,8 @@
   function attachTo(c, n, e) {
     const at = e.at || new Date().toISOString();
     n.pack = { id: e.packId, status: 'ready', assigned: { from: e.from || 'claude', at }, title: e.title || e.packId, description: e.description || '', outline: e.outline || [], ...(e.sections ? { sections: e.sections, exercises: e.exercises || 0, chapters: e.chapters || 0 } : {}) };
-    n.assignedAt = at; if (n.chapters?.length || c.stage === 'done') { n.replan = true; n.replanAt = at; n.planFrom = 'pack'; } delete n.reviewed;
+    n.assignedAt = at; if (c.shared && !c.shared.ended && !n.groupPlan) n.groupPlan = C().planOf(n);
+    if (n.chapters?.length || c.stage === 'done') { n.replan = true; n.replanAt = at; n.planFrom = 'pack'; } delete n.reviewed;
     if (c.stage === 'done') c.stage = 'plan';
   }
   const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;

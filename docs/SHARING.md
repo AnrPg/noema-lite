@@ -48,6 +48,17 @@ Icons on the subject chips: 🔒 only yours · 🤝 shared with you · 🌍 take
 - **Reject** → it disappears; the sender sees ✖.
 - **Later** hides the banner for now; the request stays under 🔔.
 
+## 4b. 🔔 New versions wait for you
+- **A subject you took from 🌍 Explore:** when its author publishes a newer version (🔄 *Publish the newest version*), the
+  🔔 and the banner say so: **⬆️ Update** (the same subject, so your progress, notes and conversations stay; the curriculum
+  steps it teaches are re-planned to follow it) or **Keep mine** (you are asked again only about a later version). Nothing
+  is downloaded until you choose. (`noema_public_packs` is checked with the other notifications; your copy remembers which
+  public version it is: `publicId`, `publicAt`, `version`.)
+- **A subject sent to you by a person:** when they send it again, it arrives as a new request — **Accept** takes the new
+  version into the same subject.
+- **Shared curricula** (docs/CURRICULUM.md §8): the owner's changes to the map and new versions of prepared steps wait in
+  🔔 too; you take the changes you want.
+
 ## 5. 🌍 Explore
 - Cards show only the emoji and the title. **Click / tap a card = choose it**: it is added to your subjects
   and opens.
@@ -67,8 +78,8 @@ Icons on the subject chips: 🔒 only yours · 🤝 shared with you · 🌍 take
 | Shared file | bucket `noema-shared/<share id>.json` | sender and recipient only |
 
 All rules are in `cloud/supabase.sql` §8–9 and are tested on a real PostgreSQL by `tests/sql_policies.py`.
-The whole flow (two people, accept, reject, Explore, a third person choosing a public subject) is tested by
-`tests/sharing.js`.
+The whole flow (two people, accept, reject, Explore, a third person choosing a public subject, then 🔔 its new versions:
+keep mine, update) is tested by `tests/sharing.js`.
 
 **Setup once:** run the newest `cloud/supabase.sql` in the Supabase SQL editor, then ⚙️ → Cloud →
 🩺 *Check the cloud connection* — the last three checks are *Public subjects*, *Sharing with a person* and *Shared curricula*.

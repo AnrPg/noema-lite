@@ -180,13 +180,13 @@ async function attachToStep(token, uid, sid, p, cidArg, stepArg) {
   const c = await curState(token, pc.c, uid), s = String(stepArg).trim().toLowerCase();
   const nid = c.nodes[stepArg] ? stepArg : Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase() === s) || Object.keys(c.nodes).find(id => c.nodes[id].title.toLowerCase().includes(s));
   if (!nid) return { error: `No step “${stepArg}” in “${c.title || c.goal}”. Its steps: ${Object.keys(c.nodes).slice(0, 60).map(id => `${id} (“${c.nodes[id].title}”)`).join(', ')}` };
-  const no = CUR().Edit?.cannotAssign?.(c, c.nodes[nid]) || (sharedOn(c) ? 'This curriculum is shared — attaching subjects to its steps is not possible yet.' : null);
+  const no = CUR().Edit?.cannotAssign?.(c, c.nodes[nid]);
   if (no) return { error: no };
   const n = c.nodes[nid]; if (n.pack?.assigned && n.pack.id === sid) return { line: `📦 It already teaches the step “${n.title}” of “${c.title || c.goal}”.` };
   const chs = p.chapters || [];
   await kvPut(token, uid, CJ().inboxKey(c.id), { v: 1, kind: 'assign', nid, packId: sid, from: 'claude', at: new Date().toISOString(), title: p.subject.title, description: String(p.subject.description || '').slice(0, 400), outline: CUR().outlineOf(p),
     sections: chs.flatMap(ch => (ch.sections || []).map(x => x.id)), exercises: chs.reduce((a, ch) => a + (ch.exercises || []).length, 0), chapters: chs.length });
-  return { line: `📦 Attached to the step “${n.title}” of “${c.title || c.goal}”: that step is taught by this subject from now on (it is never prepared), and only that step is re-planned to match it — the learner's app applies it when it is open or next opened${c.provider === 'claudeapp' ? '; then noema_curriculum_task hands you its new chapter plan' : ''}.` };
+  return { line: `📦 Attached to the step “${n.title}” of “${c.title || c.goal}”: that step is taught by this subject from now on (it is never prepared), and only that step is re-planned to match it${sharedOn(c) ? ' (for this learner only: the curriculum is shared, its other members keep the shared step)' : ''} — the learner's app applies it when it is open or next opened${c.provider === 'claudeapp' ? '; then noema_curriculum_task hands you its new chapter plan' : ''}.` };
 }
 async function findStep(token, sid) {
   const m = /^cur-([a-z0-9]{1,6})-/.exec(sid); if (!m) return null;
