@@ -2364,18 +2364,24 @@ function fromRec(r) {     // canonical record → in-memory shape used by the UI
     model: r.model?.name || '', title: r.title, titleSource: r.titleSource,
     titledLen: r.titleSource === 'user' ? 1e9 : (r.meta?.titledAtMessage ?? (r.title ? r.messages.length : 0)),
     msgs: r.messages.map(m => ({ id: m.id, role: m.role === 'assistant' ? 'model' : m.role, text: m.content, t: Date.parse(m.createdAt), ...(m.meta ? { meta: m.meta } : {}) })),
-    tutorState: r.tutorState || null };
+    tutorState: r.tutorState || null, provider: r.model?.provider || 'google', ...(r.meta ? { meta: r.meta } : {}) };   // meta: e.g. { app: 'meletee' } — kept when saved again
 }
 function toRec(cv) {      // in-memory shape → canonical record
   const sec = cv.ctx?.kind === 'section' ? cv.ctx.id : cv.ctx?.kind === 'exercise' ? (EX[cv.ctx.id]?.section || null) : cv.ctx?.kind === 'item' ? (cv.ctx.sec || null) : null;
   return Noema.convos.normalize({ id: cv.id, kind: cv.kind || 'tutor', mode: cv.mode, title: cv.title,
     titleSource: cv.titleSource || (cv.titledLen >= 1e9 ? 'user' : cv.title ? 'ai' : 'none'),
     context: cv.ctx ? { type: cv.ctx.kind, id: cv.ctx.id, label: cv.ctx.label, ...(sec ? { sectionId: sec, chapterId: sec.split('-')[0] } : {}) } : { type: 'course', id: null, label: null },
-    model: { provider: 'google', name: cv.model || S.settings.model || null },
+    model: { provider: cv.provider || 'google', name: cv.model || S.settings.model || null },
     createdAt: new Date(cv.created).toISOString(), updatedAt: new Date(cv.updated || Date.now()).toISOString(),
     messages: cv.msgs.filter(m => !m.hidden).map(m => ({ id: m.id, role: m.role, content: m.text, createdAt: new Date(m.t || cv.created).toISOString(), ...(m.meta ? { meta: m.meta } : {}) })),
     tutorState: cv.tutorState || undefined,
-    meta: cv.titledLen && cv.titledLen < 1e9 ? { titledAtMessage: cv.titledLen } : undefined }, { account: ACC_REF, subject: SUBJ_REF });
+    meta: recMeta(cv) }, { account: ACC_REF, subject: SUBJ_REF });
+}
+/** The record's meta: what it came with (e.g. { app: 'meletee' }) + where it was last titled. */
+function recMeta(cv) {
+  const m = { ...cv.meta }; delete m.titledAtMessage;
+  if (cv.titledLen && cv.titledLen < 1e9) m.titledAtMessage = cv.titledLen;
+  return Object.keys(m).length ? m : undefined;
 }
 CV.list = (Noema.preloadedConvos || []).map(fromRec);
 /** Persist one conversation now (IndexedDB → then folder + cloud in the background). Never blocks the UI. */
@@ -2396,7 +2402,7 @@ function persistConvo(key) {
     cv = { id: Noema.convos.newId(), kind: 'tutor', created: Date.now(), mode: T.mode, ctx: ctxRecord(), model: S.settings.model || '', title: null, msgs: hist };
     CV.byKey[key] = cv; CV.list.push(cv);
   }
-  cv.updated = Date.now(); cv.model = S.settings.model || cv.model;
+  cv.updated = Date.now(); cv.model = S.settings.model || cv.model; cv.provider = 'google';
   if (T.tstate[key]) cv.tutorState = T.tstate[key];
   saveConvos(cv);
 }
@@ -2414,7 +2420,8 @@ function currentConvo() {
 }
 
 /* ---------- titles: succinct, descriptive, canonical ---------- */
-const MODE_NAME = { socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };
+const MODE_NAME = { ...Noema.convos?.MODE_NAME, socratic: 'Socratic dialogue', explain: 'Explanation', quiz: 'Quiz', interview: 'Mock interview', debug: 'Debugging simulation' };   // + other apps' modes (engine/convos.js)
+const fromApp = cv => Noema.convos?.fromApp?.(cv) || null;
 function cleanTitle(t) {
   return String(t || '').split('\n')[0].replace(/^\s*(title\s*:\s*)/i, '').replace(/[*_#`"“”'‘’]/g, '')
     .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').replace(/\s+/g, ' ').replace(/[\s.:;,!-]+$/, '').trim().slice(0, 90);
@@ -2464,7 +2471,7 @@ function convoMarkdown(cv, level = 1) {
     `| **Last message** | ${fmtDate(cv.updated || cv.created)} |`,
     `| **Messages** | ${cv.msgs.length} |`,
     `| **Tutor** | ${TN} (Gemini${cv.model ? ' · ' + cv.model : ''}) |`,
-    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${APP_TITLE} (${Noema.config.appName}) |`, '', '---', ''];
+    `| **Subject** | ${SUBJ.title} |`, `| **Profile** | ${ACCOUNT.name} |`, `| **Source** | ${fromApp(cv) || `${APP_TITLE} (${Noema.config.appName})`} |`, '', '---', ''];
   const lessons = cv.tutorState?.lessons || [];
   if (lessons.length) lines.push(`${H}# 📌 Lessons learned`, '', ...lessons.map((l, i) => `${i + 1}. ${l.text}`), '', '---', '');
   cv.msgs.forEach(m => {
@@ -2520,7 +2527,7 @@ function openConvo(cv) {
     if (r.kind === 'exercise') { const e = findFull('exercise', r.id); ctx = e ? { kind: 'exercise', id: r.id, text: exerciseAsText(e) } : null; }
     else ctx = { kind: r.kind, id: r.id, label: r.label, ...(r.kind === 'item' ? { sec: r.sec || null, ch: r.ch || null, text: r.text || r.label } : {}) };
   }
-  T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor' ? 'explain' : 'socratic');
+  T.ctx = ctx; T.mode = MODES[cv.mode] ? cv.mode : (cv.kind && cv.kind !== 'tutor') || cv.mode ? 'explain' : 'socratic';   // another app's mode (e.g. Meletee's feynman) continues as a plain explanation; the record keeps its mode
   const key = tutorCtxKey();
   T.hist[key] = cv.msgs; CV.byKey[key] = cv;
   if (cv.tutorState) T.tstate[key] = cv.tutorState; else if (T.mode === 'socratic' && cv.msgs.some(m => m.meta?.noemaState)) T.tstate[key] = cv.tutorState = rebuildThreadState(cv.msgs); else delete T.tstate[key];
@@ -2551,7 +2558,7 @@ function renderConvoHistory(box) {
     const titleEl = h('b', { class: 'cvtitle' }, displayTitle(cv), !cv.title && CV.titling.has(cv.id) ? h('span', { class: 'tiny' }, ' · naming…') : null);
     const card = h('div', { class: 'cvcard', style: { animationDelay: Math.min(i, 12) * 25 + 'ms' } },
       h('button', { class: 'cvmain', onclick: () => openConvo(cv) }, titleEl,
-        h('small', {}, `${cv.kind && cv.kind !== 'tutor' ? KIND_BADGE[cv.kind] : (MODES[cv.mode]?.label || cv.mode)} · ${cv.ctx?.label || 'Whole course'}`),
+        h('small', {}, fromApp(cv) ? h('span', { class: 'cvfrom' }, 'from ' + fromApp(cv)) : null, `${cv.kind && cv.kind !== 'tutor' ? KIND_BADGE[cv.kind] : (MODES[cv.mode]?.label || MODE_NAME[cv.mode] || cv.mode)} · ${cv.ctx?.label || 'Whole course'}`),
         h('small', {}, `${fmtDate(cv.updated || cv.created)} · ${cv.msgs.length} messages`)),
       h('div', { class: 'cvactions' },
         h('button', { class: 'iconbtn', title: 'Rename', onclick: () => {
