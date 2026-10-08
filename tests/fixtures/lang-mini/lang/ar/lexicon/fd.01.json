@@ -1,0 +1,17 @@
+{
+ "lexemes": [
+  {
+   "id": "ar:marhaban",
+   "lemma": "مَرْحَبًا",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "translit": "marḥaban",
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-08"
+   }
+  }
+ ]
+}

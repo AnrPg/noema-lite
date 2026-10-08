@@ -31,6 +31,15 @@
     "N;PL;INDF"
    ],
    "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ],
+    "variant": "Number"
+   }
   }
  ]
 }

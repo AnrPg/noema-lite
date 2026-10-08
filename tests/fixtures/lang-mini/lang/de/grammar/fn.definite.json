@@ -31,6 +31,21 @@
    "type": "inflect",
    "pos": "DET",
    "count": 8
+  },
+  {
+   "type": "gender_article",
+   "pos": "NOUN"
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ]
+   }
+  },
+  {
+   "type": "sentence_meaning"
   }
  ]
 }

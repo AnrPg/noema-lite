@@ -37,7 +37,8 @@ w('core/fields/core.json', {"field": "core", "title": "Core words", "subgroups":
     {"id": "verb.eat", "gloss": "to eat", "subgroup": "verb", "tier": 1, "rank": 3},
     {"id": "det.def", "gloss": "the (definite article)", "subgroup": "func", "tier": 1, "rank": 4},
     {"id": "det.indef", "gloss": "a, an (indefinite article)", "subgroup": "func", "tier": 1, "rank": 5},
-    {"id": "conj.and", "gloss": "and", "subgroup": "func", "tier": 1, "rank": 6}]})
+    {"id": "conj.and", "gloss": "and", "subgroup": "func", "tier": 1, "rank": 6},
+    {"id": "greet.hello", "gloss": "hello", "subgroup": "func", "tier": 1, "rank": 7}]})
 w('core/fields/food.vegetables.json', {"field": "food.vegetables", "title": "Vegetables", "subgroups": [
     {"id": "root", "title": "Root vegetables and bulbs"}, {"id": "fruit", "title": "Fruit vegetables"}],
   "sources": ["Mini fixture: a hand-picked subset (the real field is exhaustive)"],
@@ -48,10 +49,16 @@ w('core/fields/food.vegetables.json', {"field": "food.vegetables", "title": "Veg
     {"id": "veg.eggplant", "gloss": "eggplant, aubergine", "subgroup": "fruit", "tier": 2, "rank": 1, "wikidata": "Q7540"},
     {"id": "veg.pumpkin", "gloss": "pumpkin", "subgroup": "fruit", "tier": 2, "rank": 2, "wikidata": "Q165308"}]})
 w('core/nodes.json', {"nodes": [
-  {"id": "core.1", "kind": "core", "title": "He, she, eat — and the little words", "concepts": ["pron.he", "pron.she", "verb.eat", "det.def", "det.indef", "conj.and"], "prereqs": []},
+  {"id": "fd.00", "kind": "lesson", "step": 0, "title": "The language and the types of languages", "concepts": [], "functions": {"*": ["fn.overview"]}, "prereqs": []},
+  {"id": "fd.01", "kind": "lesson", "step": 1, "title": "Hello — and how words are built", "concepts": ["greet.hello"], "functions": {"*": ["fn.definite"], "ar": ["fn.root.pattern"], "he": ["fn.root.pattern"]}, "prereqs": ["fd.00"]},
+  {"id": "fd.01x", "kind": "lesson", "step": 1, "langs": ["de"], "title": "An extra lesson for German only", "concepts": [], "functions": ["fn.plural.noun"], "prereqs": ["fd.01"]},
+  {"id": "core.1", "kind": "core", "title": "He, she, eat — and the little words", "concepts": ["pron.he", "pron.she", "verb.eat", "det.def", "det.indef", "conj.and"], "prereqs": ["fd.01x"]},
   {"id": "veg.1", "kind": "field", "field": "food.vegetables", "tier": 1, "title": "Vegetables I", "concepts": ["veg.carrot", "veg.onion", "veg.cucumber"], "prereqs": ["core.1"]},
   {"id": "veg.2", "kind": "field", "field": "food.vegetables", "tier": 2, "title": "Vegetables II", "concepts": ["veg.eggplant", "veg.pumpkin"], "prereqs": ["veg.1"]}]})
 w('core/functions/fn.definite.json', {"id": "fn.definite", "title": "The and a: definiteness", "category": "morphosyntax", "level": "A1", "after": [], "tags": ["Definiteness"]})
+w('core/functions/fn.overview.json', {"id": "fn.overview", "title": "The language at a glance — and the four types of languages", "category": "overview", "level": "A1", "after": [], "tags": []})
+w('core/functions/fn.root.pattern.json', {"id": "fn.root.pattern", "title": "Roots and patterns", "category": "morphology", "level": "A1", "after": [], "tags": []})
+w('core/typology.json', json.load(open(os.path.join(ROOT, 'tools', 'lang_sources', 'foundations', 'typology.json'), encoding='utf-8')))
 w('core/functions/fn.plural.noun.json', {"id": "fn.plural.noun", "title": "More than one: plural of nouns", "category": "morphology", "level": "A1", "after": ["fn.definite"], "tags": ["Number"]})
 w('core/frames.json', {"frames": [
   {"id": "fr.eat.def", "meaning": "PERSON eats the VEGETABLE (one, definite)"},
@@ -62,7 +69,7 @@ w('core/frames.json', {"frames": [
   {"id": "fr.eat.def2", "meaning": "PERSON eats the VEGETABLE (one, definite) — second tier"}]})
 
 # ---------- German ----------
-w('lang/de/language.json', {"code": "de", "name": "German", "nativeName": "Deutsch", "script": "Latn", "dir": "ltr",
+w('lang/de/language.json', {"code": "de", "typology": "fusional", "name": "German", "nativeName": "Deutsch", "script": "Latn", "dir": "ltr",
   "tokenJoin": "space", "capitalizeFirst": True, "vowelMarks": False, "romanization": None,
   "citationCells": {"NOUN": "N;NOM;SG", "VERB": "V;NFIN", "PRON": "PRON;NOM", "DET.def": "DET;NOM;SG;MASC", "DET.indef": "DET;NOM;SG;MASC"},
   "paradigmCells": {
@@ -96,7 +103,7 @@ w('lang/de/lexicon/veg.2.json', {"lexemes": [
   de_noun("de:Kürbis", "Kürbis", "veg.pumpkin", "MASC", "Kürbisses", "Kürbisse", "Kürbissen")], "absent": []})
 
 # ---------- Arabic ----------
-w('lang/ar/language.json', {"code": "ar", "name": "Arabic", "nativeName": "العربية", "script": "Arab", "dir": "rtl",
+w('lang/ar/language.json', {"code": "ar", "typology": "fusional", "name": "Arabic", "nativeName": "العربية", "script": "Arab", "dir": "rtl",
   "tokenJoin": "space", "capitalizeFirst": False, "vowelMarks": True, "romanization": "din31635",
   "citationCells": {"VERB": "V;PST;3;SG;MASC", "PRON": "PRON;NOM"},
   "paradigmCells": {
@@ -132,7 +139,7 @@ w('lang/ar/lexicon/veg.2.json', {"lexemes": [
   ar_coll("ar:qar", "قَرْع", "قَرْعَة", "veg.pumpkin", "qarʿ", "ق ر ع")], "absent": []})
 
 # ---------- Hebrew ----------
-w('lang/he/language.json', {"code": "he", "name": "Hebrew", "nativeName": "עברית", "script": "Hebr", "dir": "rtl",
+w('lang/he/language.json', {"code": "he", "typology": "fusional", "name": "Hebrew", "nativeName": "עברית", "script": "Hebr", "dir": "rtl",
   "tokenJoin": "space", "capitalizeFirst": False, "vowelMarks": True, "romanization": "simple",
   "citationCells": {"NOUN": "N;SG;INDF", "VERB": "V;PST;3;SG;MASC"},
   "paradigmCells": {
@@ -160,7 +167,7 @@ w('lang/he/lexicon/veg.2.json', {"lexemes": [
   he_noun("he:dlaat", "veg.pumpkin", "FEM", "דְּלַעַת", "הַדְּלַעַת", "דְּלוּעִים", "הַדְּלוּעִים", "dla'at")], "absent": []})
 
 # ---------- Chinese ----------
-w('lang/zh/language.json', {"code": "zh", "name": "Chinese (Mandarin)", "nativeName": "中文", "script": "Hani", "dir": "ltr",
+w('lang/zh/language.json', {"code": "zh", "typology": "isolating", "name": "Chinese (Mandarin)", "nativeName": "中文", "script": "Hani", "dir": "ltr",
   "tokenJoin": "none", "capitalizeFirst": False, "vowelMarks": False, "romanization": "pinyin", "variants": ["simplified", "traditional"],
   "paradigmCells": {}})
 def zh(lid, lemma, trad, pinyin, pos, senses, measure=None, **kw):
@@ -185,13 +192,23 @@ w('lang/zh/lexicon/veg.2.json', {"lexemes": [
   zh("zh:qiezi", "茄子", "茄子", "qié zi", "NOUN", ["veg.eggplant"], ["个", "根"]),
   zh("zh:nangua", "南瓜", "南瓜", "nán guā", "NOUN", ["veg.pumpkin"], ["个"])], "absent": []})
 
+# ---------- lesson 0: greetings ----------
+REF = {"src": "fixture", "checked": "2026-10-08"}
+w('lang/de/lexicon/fd.01.json', {"lexemes": [{"id": "de:hallo", "lemma": "hallo", "pos": "INTJ", "senses": ["greet.hello"], "ref": REF}]})
+w('lang/ar/lexicon/fd.01.json', {"lexemes": [{"id": "ar:marhaban", "lemma": "مَرْحَبًا", "pos": "INTJ", "senses": ["greet.hello"], "translit": "marḥaban", "ref": REF}]})
+w('lang/he/lexicon/fd.01.json', {"lexemes": [{"id": "he:shalom", "lemma": "שָׁלוֹם", "pos": "INTJ", "senses": ["greet.hello"], "translit": "shalom", "ref": REF}]})
+w('lang/zh/lexicon/fd.01.json', {"lexemes": [zh("zh:nihao", "你好", "你好", "nǐ hǎo", "INTJ", ["greet.hello"])]})
+from mkmini_overview import OVERVIEW, ROOTS
+for code, g in OVERVIEW.items(): w(f'lang/{code}/grammar/fn.overview.json', g)
+for code, g in ROOTS.items(): w(f'lang/{code}/grammar/fn.root.pattern.json', g)
+
 # ---------- grammar realizations ----------
 def gram(fn, status, summary, **kw):
     return {"function": fn, "status": status, "summary": summary, **kw}
 w('lang/de/grammar/fn.definite.json', gram("fn.definite", "realized", "German marks definiteness with articles: der/die/das (the) and ein/eine (a). The article also shows gender, number and case.",
   procedure={"askYourself": ["Is the thing known/specific (→ der/die/das) or new/any (→ ein/eine)?", "What is the gender of the noun?", "Which case does its role in the sentence need?"]},
   traps=["The article changes with the case: der Kürbis (subject) → den Kürbis (object).", "There is no plural of ein: “Gurken” alone means “cucumbers”."],
-  evidence={"lemmas": ["de:der", "de:ein"]}, paradigmCells=["DET;NOM;SG;MASC", "DET;ACC;SG;MASC"], needs={"NOUN": 3}, generators=[{"type": "inflect", "pos": "DET", "count": 8}]))
+  evidence={"lemmas": ["de:der", "de:ein"]}, paradigmCells=["DET;NOM;SG;MASC", "DET;ACC;SG;MASC"], needs={"NOUN": 3}, generators=[{"type": "inflect", "pos": "DET", "count": 8}, {"type": "gender_article", "pos": "NOUN"}, {"type": "build_sentence", "bank": {"functions": ["fn.definite"]}}, {"type": "sentence_meaning"}]))
 w('lang/ar/grammar/fn.definite.json', gram("fn.definite", "realized", "Arabic marks a definite noun with the prefix al- (الْ) and an indefinite noun with nunation (tanwīn).",
   procedure={"askYourself": ["Is the noun specific or generic (→ al-) or one of many (→ tanwīn)?", "Did I drop the tanwīn after adding al-?"]},
   traps=["Never al- and tanwīn together.", "Generic statements use al-: هِيَ تَأْكُلُ الْخِيَارَ = she eats cucumbers (in general)."],
@@ -213,7 +230,7 @@ w('lang/ar/grammar/fn.plural.noun.json', gram("fn.plural.noun", "realized", "Ara
 w('lang/he/grammar/fn.plural.noun.json', gram("fn.plural.noun", "realized", "Hebrew masculine nouns usually take -im (ים), feminine nouns -ot (וֹת); the vowels of the stem often change.",
   procedure={"askYourself": ["Masculine or feminine?", "Do the stem vowels shorten (גֶּזֶר → גְּזָרִים)?"]},
   traps=["The ending does not always follow the gender: דְּלַעַת (pumpkin) is feminine, yet its plural is דְּלוּעִים (-im).", "The stem vowels change in the plural: גֶּזֶר → גְּזָרִים, בָּצָל → בְּצָלִים."],
-  evidence={"tags": ["PL"]}, paradigmCells=["N;PL;INDF"], needs={"NOUN": 3}, generators=[{"type": "inflect", "pos": "NOUN", "cells": ["N;PL;INDF"], "count": 8}]))
+  evidence={"tags": ["PL"]}, paradigmCells=["N;PL;INDF"], needs={"NOUN": 3}, generators=[{"type": "inflect", "pos": "NOUN", "cells": ["N;PL;INDF"], "count": 8}, {"type": "transform", "bank": {"functions": ["fn.plural.noun"], "variant": "Number"}}]))
 w('lang/zh/grammar/fn.plural.noun.json', gram("fn.plural.noun", "absent", "Chinese nouns do not change for number. Quantity is shown by numerals with measure words (三个洋葱), by context, or with 们 for groups of people.",
   traps=["Never add 们 to things: *洋葱们."], needs={}, generators=[]))
 

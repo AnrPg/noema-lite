@@ -112,7 +112,7 @@ def build_lang_courses():
         J = lambda rel: rj(os.path.join(root, rel)) if os.path.exists(os.path.join(root, rel)) else None
         ls = lambda rel: sorted(f for f in os.listdir(os.path.join(root, rel)) if f.endswith('.json')) if os.path.isdir(os.path.join(root, rel)) else []
         course = J('course.json'); nodes = J('core/nodes.json')['nodes']
-        data = {'course': course, 'fields': [J('core/fields/' + f) for f in ls('core/fields')], 'nodes': nodes,
+        data = {'course': course, 'typology': J('core/typology.json'), 'fields': [J('core/fields/' + f) for f in ls('core/fields')], 'nodes': nodes,
                 'functions': [J('core/functions/' + f) for f in ls('core/functions')], 'frames': (J('core/frames.json') or {}).get('frames', []), 'langs': {}}
         for code in course['languages']:
             b = f'lang/{code}/'

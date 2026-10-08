@@ -1,0 +1,52 @@
+{
+ "function": "fn.root.pattern",
+ "status": "realized",
+ "summary": "Most Hebrew words are built on a root of three consonants with a basic meaning; patterns of vowels and extra letters (for verbs the seven binyanim) make the actual words. Recognizing the root helps to read without vowels and to remember word families.",
+ "procedure": {
+  "askYourself": [
+   "Which consonants remain when I remove ה ו ב ל מ ש in front and the endings?",
+   "Are ו and י here letters of the root or only vowel letters?",
+   "Do I know another word with the same root?"
+  ]
+ },
+ "traps": [
+  "In full spelling ו and י often only show a vowel: in כּוֹתֵב the ו is not part of the root כ-ת-ב."
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the root of כּוֹתֵב ‘writes’?",
+   "options": [
+    "כ-ת-ב",
+    "כ-ו-ת",
+    "ת-ב-כ"
+   ],
+   "answer": "כ-ת-ב",
+   "why": "The ו only shows the vowel o."
+  },
+  {
+   "q": "Which word shares a root with מִכְתָּב ‘letter’?",
+   "options": [
+    "כָּתַב ‘he wrote’",
+    "בַּיִת ‘house’",
+    "גֶּזֶר ‘carrot’"
+   ],
+   "answer": "כָּתַב ‘he wrote’",
+   "why": "Both are built on כ-ת-ב ‘writing’."
+  },
+  {
+   "q": "What is a binyan?",
+   "options": [
+    "a verb pattern",
+    "a kind of noun",
+    "a vowel point"
+   ],
+   "answer": "a verb pattern",
+   "why": "There are seven; each gives the root a different shade of meaning."
+  }
+ ]
+}

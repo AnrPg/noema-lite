@@ -30,7 +30,25 @@ for (const id of fs.existsSync(LIB) ? fs.readdirSync(LIB) : []) {
       if (gh) ok(N.wordCard(C, L, code, gh.id).parts[0][1] === 'der Gute Heinrich', 'de: der Gute Heinrich (the form after the article)');
     }
     const plan = N.planSession(C, L, { day: 0, minutes: 30, languages: [code] });
-    ok(plan.steps[0]?.kind === 'learn' && plan.steps[0].node === C.order[0], `${code}: a new learner starts with ${plan.steps[0]?.node} (${plan.steps[0]?.concepts.length} words)`);
+    const first = plan.steps[0], lessons = C.order.filter(n => C.nodes[n].kind === 'lesson' && X.applies[n]);
+    if (lessons.length) ok(first?.kind === 'lesson' && first.node === lessons[0], `${code}: a new learner starts with lesson ${first?.node}`);
+    else ok(first?.kind === 'learn' && first.node === C.order[0], `${code}: a new learner starts with ${first?.node} (${first?.concepts.length} words)`);
+    // every lesson exercise is made from stored data and uses only words of the lessons up to it (a learner who knows exactly those)
+    if (lessons.length) {
+      const T = N.newLearner(C), bad2 = []; let n = 0;
+      for (const nid of lessons) {
+        if (!X.prepared[nid]) break;
+        for (const id of X.byNode[nid] || []) N.review(C, T, code, id, 'r', true, 0);
+        N.recordCheck(C, T, code, nid, 1, 0);
+        const k = N.known(C, T, code);
+        for (const f of N.lessonFunctions(C, code, nid)) for (const it of N.exercises(C, T, code, f, { k, max: 200 })) {
+          n++;
+          if (it.type === 'choose' && !it.options.includes(it.answer)) bad2.push(`${nid} ${f}: answer not among the options`);
+          if (it.sentence && !X.sentenceById[it.sentence].req.every(l => k.R.has(l))) bad2.push(`${nid} ${f}: ${it.sentence} uses unknown words`);
+        }
+      }
+      ok(!bad2.length, `${code}: ${n} lesson exercises, all from stored data and known words` + (bad2.length ? ' — ' + bad2.slice(0, 5).join('; ') : ''));
+    }
   }
 }
 console.log(fails ? `\n${fails} FAILED` : '\nALL PASSED'); process.exit(fails ? 1 : 0);

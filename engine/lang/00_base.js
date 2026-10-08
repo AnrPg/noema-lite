@@ -47,7 +47,7 @@ function gloss(code, lid) {
   const x = LX(code).lex[lid], c = (x.senses || [])[0];
   return c ? UI.C.concepts[c]?.gloss || c : (x.role || '');
 }
-const STATE_LABEL = { locked: '🔒 locked', ready: '○ new', seen: '◔ seen', learning: '◑ learning', known_r: '◕ known (reading)', known_p: '● known', mastered: '★ mastered', absent: '— no word', unprepared: '⏳ not written yet', open: '○ open', known: '● known', skipped: '⤼ skipped' };
+const STATE_LABEL = { locked: '🔒 locked', ready: '○ new', seen: '◔ seen', learning: '◑ learning', known_r: '◕ known (reading)', known_p: '● known', mastered: '★ mastered', absent: '— no word', unprepared: '⏳ not written yet', open: '○ open', known: '● known', skipped: '⤼ skipped', passed: '✔ passed', na: '—' };
 
 /* ---------- learner state: one storage key per (language, node) and per (language, function) ---------- */
 const P = () => `noema1:${UI.acc}:s:lang:${UI.id}:`;

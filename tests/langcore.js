@@ -21,13 +21,55 @@ const read = rel => { const p = path.join(MINI, rel); return fs.existsSync(p) ? 
 const list = rel => { const p = path.join(MINI, rel); return fs.existsSync(p) ? fs.readdirSync(p).filter(f => f.endsWith('.json')).sort() : []; };
 const C = N.course(N.readCourse(read, list));
 const nLex = c => Object.keys(C.lang[c].lex).length;
-ok(same([nLex('de'), nLex('ar'), nLex('he'), nLex('zh')], [11, 9, 10, 11]) && same(C.order, ['core.1', 'veg.1', 'veg.2']), `course read: words de 11 · ar 9 · he 10 · zh 11, nodes in order ${C.order.join(' → ')}`);
+ok(same([nLex('de'), nLex('ar'), nLex('he'), nLex('zh')], [12, 10, 11, 12]) && same(C.order, ['fd.00', 'fd.01', 'fd.01x', 'core.1', 'veg.1', 'veg.2']), `course read: words de 12 · ar 10 · he 11 · zh 12, nodes in order ${C.order.join(' → ')}`);
 ok(!!C.lang.ar.absent['det.def'] && !!C.lang.zh.absent['det.indef'] && C.lang.de.byConcept['det.def'][0] === 'de:der', 'absent concepts and words per concept are indexed');
+
+// ---------- the foundations: parallel steps, grammar by language type (D9–D11) ----------
+ok(same(C.order.slice(0, 3), ['fd.00', 'fd.01', 'fd.01x']), 'lessons first, in their order');
+ok(same(N.pathGroups(C), [{ path: 'fusional', langs: ['ar', 'he', 'de'] }, { path: 'isolating', langs: ['zh'] }]), 'languages grouped by their type: ar he de · zh');
+ok(C.lang.de.applies['fd.01x'] && !C.lang.ar.applies['fd.01x'] && C.languages.every(c => C.lang[c].applies['fd.01']), 'applicability: a lesson for every language, an extra one for German only');
+ok(C.languages.every(c => C.lang[c].owner['greet.hello'] === 'fd.01'), 'the same words at the same step in every language');
+ok(same(N.lessonFunctions(C, 'ar', 'fd.01'), ['fn.definite', 'fn.root.pattern']) && same(N.lessonFunctions(C, 'zh', 'fd.01'), ['fn.definite']) && same(N.lessonFunctions(C, 'de', 'fd.01x'), ['fn.plural.noun']), 'the grammar of a step: "*" + the type + the language');
+/** pass every lesson in every language (word introduced + check 100 %) */
+const passFoundations = (L, day = 0, langs = C.languages) => { for (const c of langs) for (const nid of C.order) if (C.nodes[nid].kind === 'lesson' && C.lang[c].applies[nid]) { for (const id of C.lang[c].byNode[nid]) N.introduce(C, L, c, id, day); N.recordCheck(C, L, c, nid, 1, day); } };
+{ const T = N.newLearner(C), st = c => N.nodeStates(C, T, c);
+  const rest = { 'core.1': 'locked', 'veg.1': 'locked', 'veg.2': 'locked' };
+  ok(same(st('de'), { 'fd.00': 'open', 'fd.01': 'locked', 'fd.01x': 'locked', ...rest }) && same(st('zh'), { 'fd.00': 'open', 'fd.01': 'locked', 'fd.01x': 'na', ...rest }), 'a new learner: S00 open, everything after it locked; a lesson for other languages is na');
+  const p0 = N.planSession(C, T, { day: 0, minutes: 30 });
+  ok(same(p0.steps.map(x => [x.kind, x.node, x.langs.join()]), [['lesson', 'fd.00', 'ar,he,zh,de']]), 'the first session: S00 in all four languages together');
+  N.recordCheck(C, T, 'de', 'fd.00', 0.7, 0);
+  ok(st('de')['fd.00'] === 'learning' && st('de')['fd.01'] === 'locked', 'a check below 80 % does not pass the lesson');
+  N.recordCheck(C, T, 'de', 'fd.00', 0.9, 1); N.recordCheck(C, T, 'de', 'fd.00', 0.5, 2);
+  ok(st('de')['fd.00'] === 'passed' && st('de')['fd.01'] === 'open' && st('ar')['fd.01'] === 'locked', 'the best check counts: passed → German goes on, Arabic does not');
+  N.recordCheck(C, T, 'ar', 'fd.00', 1, 0); N.recordCheck(C, T, 'ar', 'fd.01', 1, 0);
+  ok(st('ar')['fd.01'] === 'learning', 'a lesson is passed only when its words have been introduced too');
+  N.introduce(C, T, 'ar', 'ar:marhaban', 0);
+  ok(st('ar')['fd.01'] === 'passed' && st('ar')['fd.01x'] === 'na' && st('ar')['core.1'] === 'open', 'Arabic: S01 passed → core.1 opens (the German-only lesson is passed through)');
+  N.introduce(C, T, 'de', 'de:hallo', 0); N.recordCheck(C, T, 'de', 'fd.01', 1, 0);
+  ok(st('de')['fd.01x'] === 'open' && st('de')['core.1'] === 'locked', 'German: core.1 waits for its extra lesson');
+  N.recordCheck(C, T, 'de', 'fd.01x', 0.8, 1);
+  ok(st('de')['fd.01x'] === 'passed' && st('de')['core.1'] === 'open', 'a grammar-only lesson passes on its check alone; then core.1 opens');
+  let threw = false; try { N.recordCheck(C, T, 'de', 'core.1', 1, 0); } catch (e) { threw = true; }
+  ok(threw, 'only lessons have checks');
+  const kv0 = N.toKV(C, T), back0 = N.fromKV(C, JSON.parse(JSON.stringify(kv0)));
+  ok(kv0['lang:de:node:fd.00'].check.best === 0.9 && same(N.nodeStates(C, back0, 'de'), st('de')), 'the check is stored in the key of its (language, node) and survives the round trip');
+  N.recordCheck(C, T, 'he', 'fd.00', 1, 0);
+  const p1 = N.planSession(C, T, { day: 2, minutes: 30 });
+  ok(same(p1.steps.filter(x => x.kind === 'lesson').map(x => [x.node, x.langs.join()]), [['fd.00', 'zh'], ['fd.01', 'he']]), 'the next session: each language at its own lesson, languages at the same lesson together'); }
+// overview and roots: quiz items from the realization
+{ const T = N.newLearner(C), q = N.exercises(C, T, 'he', 'fn.overview', { rng: () => 0.3 });
+  ok(q.length === 3 && q.every(x => x.type === 'choose' && x.kind === 'quiz' && x.options.includes(x.answer) && new Set(x.options).size === x.options.length), 'overview: 3 quiz items, each answer among its options');
+  ok(N.exercises(C, T, 'ar', 'fn.root.pattern').length === 3 && N.exercises(C, T, 'zh', 'fn.definite').length === 0, 'roots quiz in Arabic; nothing to drill for a function absent in Chinese');
+  N.introduce(C, T, 'he', 'he:shalom', 0); N.review(C, T, 'he', 'he:shalom', 'r', true, 0);
+  const chk = N.lessonCheck(C, T, 'he', 'fd.01', { rng: () => 0.5 });
+  ok(chk.length === 4 && chk.some(x => x.kind === 'word') && chk.filter(x => x.kind === 'quiz').length === 3, `the check of S01 in Hebrew mixes the word and the roots quiz (${chk.length} items)`); }
 
 // ---------- states and gating ----------
 let L = N.newLearner(C);
+passFoundations(L);
 const ns = c => N.nodeStates(C, L, c);
-ok(C.languages.every(c => same(ns(c), { 'core.1': 'open', 'veg.1': 'locked', 'veg.2': 'locked' })), 'a new learner: core.1 open, the rest locked — in every language');
+ok(same(ns('de'), { 'fd.00': 'passed', 'fd.01': 'passed', 'fd.01x': 'passed', 'core.1': 'open', 'veg.1': 'locked', 'veg.2': 'locked' })
+  && same(ns('zh'), { 'fd.00': 'passed', 'fd.01': 'passed', 'fd.01x': 'na', 'core.1': 'open', 'veg.1': 'locked', 'veg.2': 'locked' }), 'after the foundations: core.1 open, the rest locked — in every language');
 ok(N.itemState(C, L, 'de', 'de:essen', ns('de')) === 'ready' && N.itemState(C, L, 'de', 'de:Karotte', ns('de')) === 'locked', 'words of an open node are ready, of a locked node locked');
 const learn = (c, id, track, days) => days.forEach(d => N.review(C, L, c, id, track, true, d));
 const learnNode = (c, nid, upto = 'known_p') => { for (const id of C.lang[c].byNode[nid]) { learn(c, id, 'r', [0, 1]); if (upto !== 'known_r') learn(c, id, 'p', [0, 1]); } };
@@ -55,10 +97,10 @@ ok(ns('de')['core.1'] === 'learning' && ns('de')['veg.1'] === 'locked', 'the nod
 learn('de', core[0], 'p', [5, 6]); learn('de', core[1], 'r', [5, 6]);
 ok(ns('de')['core.1'] === 'known', 'relearned → known again');
 // mastered
-const M = N.newLearner(C);
+const M = N.newLearner(C); passFoundations(M);
 for (const id of C.lang.he.byNode['core.1']) { [0, 1, 4, 12, 32].forEach(d => N.review(C, M, 'he', id, 'r', true, d)); [0, 1, 4, 12, 32].forEach(d => N.review(C, M, 'he', id, 'p', true, d)); }
 ok(N.nodeStates(C, M, 'he')['core.1'] === 'mastered' && N.itemState(C, M, 'he', 'he:et', N.nodeStates(C, M, 'he')) === 'mastered', 'five correct reviews on both tracks → mastered (interval ≥ 21 days)');
-const D = N.newLearner(C, { depth: { de: 1 } });
+const D = N.newLearner(C, { depth: { de: 1 } }); passFoundations(D);
 ok(N.nodeStates(C, D, 'de')['veg.2'] === 'skipped' && N.nodeStates(C, D, 'he')['veg.2'] === 'locked', 'depth 1 in German skips the tier-2 node there only');
 ok(N.conceptState(C, L, 'ar', 'det.def') === 'absent' && N.conceptState(C, L, 'de', 'verb.eat') === 'known_p', 'concept state for the flag dot (absent / the best state of its words)');
 
@@ -86,15 +128,18 @@ let prop = true, gating = true;
 for (let seed = 1; seed <= 200; seed++) {
   let r = seed; const rnd = () => (r = (r * 16807) % 2147483647) / 2147483647;
   const T = N.newLearner(C);
+  for (const c of C.languages) for (const nid of C.order) if (C.nodes[nid].kind === 'lesson' && C.lang[c].applies[nid] && rnd() < 0.7) N.recordCheck(C, T, c, nid, rnd(), 0);
   for (const c of C.languages) for (const id of Object.keys(C.lang[c].lex)) if (rnd() < 0.5) { const n = 1 + Math.floor(rnd() * 3); for (let d = 0; d < n; d++) N.review(C, T, c, id, rnd() < 0.5 ? 'r' : 'p', rnd() < 0.8, d * 3); }
   for (const c of C.languages) {
     const kk = N.known(C, T, c);
     for (const s of N.selectSentences(C, c, { known: kk.R })) if (!s.req.every(l => kk.R.has(l))) prop = false;
-    for (const nid of C.order) if (kk.nodes[nid] !== 'locked' && kk.nodes[nid] !== 'skipped' && (C.nodes[nid].prereqs || []).some(p => !['known', 'mastered', 'skipped'].includes(kk.nodes[p]))) gating = false;
+    const done = {}; for (const nid of C.order) done[nid] = kk.nodes[nid] === 'na' ? (C.nodes[nid].prereqs || []).every(p => done[p]) : ['known', 'mastered', 'skipped', 'passed'].includes(kk.nodes[nid]);
+    for (const nid of C.order) if (!['locked', 'skipped', 'na', 'unprepared'].includes(kk.nodes[nid]) && (C.nodes[nid].prereqs || []).some(p => !done[p])) gating = false;
+    for (const nid of C.order) if (kk.nodes[nid] === 'passed' && !((T.langs[c].checks[nid]?.best || 0) >= 0.8)) gating = false;
   }
 }
 ok(prop, '200 random learners × 4 languages: every selected sentence uses only known words');
-ok(gating, '200 random learners × 4 languages: no node is open before its prerequisites are known');
+ok(gating, '200 random learners × 4 languages: no node is open before its prerequisites are done (na passed through), no lesson passed without a check ≥ 80 %');
 
 // ---------- function states ----------
 const F = N.newLearner(C);
@@ -141,7 +186,7 @@ let rt = []; for (const c of C.languages) for (const s of C.lang[c].sentences) {
 ok(!rt.length, `all ${C.languages.reduce((n, c) => n + C.lang[c].sentences.length, 0)} bank sentences tokenize back to their annotated words` + (rt.length ? ' — not: ' + rt : ''));
 
 // ---------- the daily session ----------
-const P0 = N.newLearner(C);
+const P0 = N.newLearner(C); passFoundations(P0);
 let plan = N.planSession(C, P0, { day: 0, minutes: 30 });
 const learnStep = plan.steps.find(s => s.kind === 'learn');
 ok(plan.steps.length === 1 && learnStep && learnStep.node === 'core.1', 'a new learner: one step — learn core.1');
@@ -165,6 +210,7 @@ ok(plan.steps.some(s => s.kind === 'grammar' && s.lang === 'de'), 'when a functi
 // ---------- an unfinished course ----------
 { const d = N.readCourse(rel => rel === 'lang/he/lexicon/veg.1.json' ? null : read(rel), list);
   const C3 = N.course(d), T = N.newLearner(C3);
+  for (const c of C3.languages) for (const nid of C3.order) if (C3.nodes[nid].kind === 'lesson' && C3.lang[c].applies[nid]) { for (const id of C3.lang[c].byNode[nid]) N.introduce(C3, T, c, id, 0); N.recordCheck(C3, T, c, nid, 1, 0); }
   for (const id of C3.lang.he.byNode['core.1']) { N.review(C3, T, 'he', id, 'r', true, 0); N.review(C3, T, 'he', id, 'r', true, 1); N.review(C3, T, 'he', id, 'p', true, 0); N.review(C3, T, 'he', id, 'p', true, 1); }
   const s3 = N.nodeStates(C3, T, 'he');
   ok(s3['core.1'] === 'known' && s3['veg.1'] === 'unprepared' && s3['veg.2'] === 'locked' && N.nodeStates(C3, T, 'de')['veg.1'] === 'locked', 'a node whose words are not written yet is “unprepared” and blocks what follows, in that language only'); }
@@ -184,6 +230,37 @@ ok(arCard.examples.every(e => !/[ً-ْ]/.test(e.plain)) && arCard.parts.some(p =
 ok(arCard.examples[0].unlearned.includes('الْجَزَرِ'.normalize('NFC')) || arCard.examples[0].unknown.length > 0, 'example words are checked against what the learner knows');
 const fnCard = N.wordCard(C, L, 'he', 'he:et');
 ok(!fnCard.hasProfile && fnCard.gloss.includes('definite direct object') && fnCard.flags.length === 1, 'a word without a concept: its role, one flag');
+
+// ---------- exercises from stored data (§6.7) ----------
+{ let r = 7; const rng = () => (r = (r * 16807) % 2147483647) / 2147483647;
+  const kd = N.known(C, L, 'de'), ex = N.exercises(C, L, 'de', 'fn.definite', { k: kd, rng, max: 40 });
+  const kinds = new Set(ex.map(x => x.kind));
+  ok(['inflect', 'gender', 'build', 'meaning'].every(x => kinds.has(x)), `German fn.definite: ${ex.length} items of kinds ${[...kinds].join(', ')}`);
+  ok(ex.filter(x => x.type === 'choose').every(x => x.options.includes(x.answer) && new Set(x.options).size === x.options.length), 'every choice has its answer among distinct options');
+  const g = ex.find(x => x.kind === 'gender' && x.lex === 'de:Karotte'); ok(!g || g.answer === 'die', 'gender from the lexeme: die Karotte');
+  const inf = ex.filter(x => x.kind === 'inflect');
+  ok(inf.every(x => C.lang.de.lex[x.lex].forms[Object.keys(C.lang.de.lex[x.lex].forms).find(c => N.canon(c) === x.cell)] === x.answer), 'inflect: the answer is the stored form of the asked cell');
+  const bs = ex.filter(x => x.kind === 'build');
+  ok(bs.length && bs.every(x => { const s = C.lang.de.sentenceById[x.sentence]; return N.checkBuilt(C, 'de', x, s.tokens.filter(t => !t.p).map(t => t.t)) && !N.checkBuilt(C, 'de', x, s.tokens.filter(t => !t.p).map(t => t.t).reverse()); }), 'build: the sentence in order is right, reversed is wrong');
+  ok(bs.every(x => x.tiles.length === x.size + 1), 'build: one wrong tile (another form of one of its words) among the tiles');
+  // Hebrew: plural transform from the bank pair
+  const kh = N.known(C, L, 'he');
+  for (const id of Object.keys(C.lang.he.lex)) { N.review(C, L, 'he', id, 'r', true, 0); }
+  const tr = N.exercises(C, L, 'he', 'fn.plural.noun', { rng, max: 40 }).filter(x => x.kind === 'transform');
+  ok(tr.length === 1 && tr[0].change === 'Make it plural' && N.checkBuilt(C, 'he', tr[0], C.lang.he.sentenceById[tr[0].sentence].tokens.filter(t => !t.p).map(t => t.t)), 'Hebrew: “make it plural” from the variant pair, checked against the stored sentence');
+  // property: every item uses only known words
+  let only = true;
+  for (let seed = 1; seed <= 60; seed++) {
+    let q = seed; const rr = () => (q = (q * 48271) % 2147483647) / 2147483647;
+    const T = N.newLearner(C); passFoundations(T);
+    for (const c of C.languages) for (const id of Object.keys(C.lang[c].lex)) if (rr() < 0.5) N.review(C, T, c, id, 'r', true, 0);
+    for (const c of C.languages) { const kk = N.known(C, T, c);
+      for (const f of Object.keys(C.functions)) for (const x of N.exercises(C, T, c, f, { k: kk, rng: rr, max: 50 })) {
+        if (x.lex && !kk.R.has(x.lex)) only = false;
+        if (x.sentence && !C.lang[c].sentenceById[x.sentence].req.every(l => kk.R.has(l))) only = false;
+      } }
+  }
+  ok(only, '60 random learners: every generated item uses only words the learner knows'); }
 
 // ---------- storage ----------
 const kv = N.toKV(C, L);

@@ -37,7 +37,7 @@ try:
     import jsonschema, glob
     if not hasattr(jsonschema, 'Draft202012Validator'): raise ImportError('jsonschema too old for draft 2020-12')
     sch = json.load(open(os.path.join(ROOT, 'tools', 'schemas', 'noema.lang.v1.schema.json'), encoding='utf-8'))
-    kinds = [('course.json', 'course'), ('core/fields/*.json', 'field'), ('core/nodes.json', 'nodes'), ('core/functions/*.json', 'function'), ('core/frames.json', 'frames'),
+    kinds = [('course.json', 'course'), ('core/fields/*.json', 'field'), ('core/nodes.json', 'nodes'), ('core/functions/*.json', 'function'), ('core/frames.json', 'frames'), ('core/typology.json', 'typology'),
              ('lang/*/language.json', 'language'), ('lang/*/lexicon/*.json', 'lexicon'), ('lang/*/grammar/*.json', 'grammar'), ('lang/*/bank/*.json', 'bank')]
     probs, n = [], 0
     for pat, k in kinds:
@@ -84,7 +84,25 @@ expect('function absent in the language', lambda J, d: J('lang/zh/bank/basic.jso
 expect('concept neither realized nor absent', lambda J, d: J('lang/ar/lexicon/core.1.json', lambda o: o['absent'].pop(0)), 'concept “det.def” has no word and is not marked absent')
 expect('text not in NFC', lambda J, d: J('lang/he/lexicon/veg.1.json', lambda o: Raw(json.dumps(o, ensure_ascii=False).replace(unicodedata.normalize('NFC', '\u05d1\u05bc\u05b8'), '\u05d1\u05bc\u05b8'))), 'not in Unicode NFC')
 expect('frame without a sentence in a language', lambda J, d: J('lang/he/bank/basic.json', lambda o: o.update(sentences=[s for s in o['sentences'] if s['frame'] != 'fr.eat.def2'])), 'frame “fr.eat.def2” has no sentence in he')
-expect('concept in two nodes', lambda J, d: J('core/nodes.json', lambda o: o['nodes'][2]['concepts'].append('veg.carrot')), 'is already in node')
+expect('concept in two nodes', lambda J, d: J('core/nodes.json', lambda o: o['nodes'][5]['concepts'].append('veg.carrot')), 'is taught twice in')
+# ---------- paths and lessons (D9–D11) ----------
+N_ = lambda i, **kw: (lambda J, d: J('core/nodes.json', lambda o: o['nodes'][i].update(**kw)))
+expect('lesson without functions', N_(0, functions={}), 'a lesson needs its grammar')
+expect('lesson with an unknown function', N_(1, functions={'*': ['fn.definite', 'fn.nothing']}), 'unknown function “fn.nothing”')
+expect('functions for an unknown key', N_(1, functions={'*': ['fn.definite'], 'tonal': ['fn.definite']}), '“tonal” is not "*", a language type or a course language')
+expect('unknown path', N_(2, path='tonal'), 'path must be one of')
+expect('functions on a field node', N_(4, functions=['fn.definite']), 'only lessons have functions')
+expect('two first lessons', N_(1, prereqs=[]), 'must form one chain')
+expect('first lesson is not the overview', lambda J, d: J('core/nodes.json', lambda o: (o['nodes'][0].update(functions={'*': ['fn.definite']}), o['nodes'][1].update(functions={'*': ['fn.overview']}))), 'is the overview')
+expect('field opens before the foundations', N_(3, prereqs=['fd.00']), 'the field opens before the foundations are done')
+expect('word file for a node that does not apply', lambda J, d: shutil.copy(J('lang/ar/lexicon/fd.01.json'), os.path.join(d, 'lang/ar/lexicon/fd.01x.json')), 'node fd.01x does not apply to ar')
+expect('language without its type', lambda J, d: J('lang/he/language.json', lambda o: o.pop('typology')), 'typology must be one of')
+expect('lesson function without realization', lambda J, d: os.remove(J('lang/he/grammar/fn.root.pattern.json')), 'lesson fd.01 needs this realization')
+expect('quiz answer not among the options', lambda J, d: J('lang/de/grammar/fn.overview.json', lambda o: o['quiz'][0].update(answer='tonal')), 'answer must be one of the options')
+expect('overview without peculiarities', lambda J, d: J('lang/zh/grammar/fn.overview.json', lambda o: o.update(peculiarities=o['peculiarities'][:1])), 'peculiarities: at least 3')
+expect('overview of the wrong type', lambda J, d: J('lang/zh/grammar/fn.overview.json', lambda o: o['typology'].update(type='fusional')), 'typology.type must be the language’s type')
+expect('step that is not a number', N_(1, step='one'), 'step must be a whole number')
+expect('typology text incomplete', lambda J, d: J('core/typology.json', lambda o: o['types'].pop()), 'types must be exactly')
 expect('lemma ≠ citation form', lambda J, d: J('lang/de/lexicon/core.1.json', lambda o: o['lexemes'][2].update(lemma='isst')), 'must be the V;NFIN form')
 expect('German noun without gender', lambda J, d: J('lang/de/lexicon/veg.2.json', lambda o: o['lexemes'][1].pop('gender')), 'gender is required')
 expect('Chinese noun without measure word', lambda J, d: J('lang/zh/lexicon/veg.2.json', lambda o: o['lexemes'][1].pop('measure')), 'needs its measure word')

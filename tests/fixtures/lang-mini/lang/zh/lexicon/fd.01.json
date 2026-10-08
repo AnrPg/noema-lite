@@ -1,0 +1,17 @@
+{
+ "lexemes": [
+  {
+   "id": "zh:nihao",
+   "lemma": "你好",
+   "trad": "你好",
+   "pinyin": "nǐ hǎo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "ref": {
+    "src": "fixture"
+   }
+  }
+ ]
+}

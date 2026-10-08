@@ -1,6 +1,58 @@
 {
  "nodes": [
   {
+   "id": "fd.00",
+   "kind": "lesson",
+   "step": 0,
+   "title": "The language and the types of languages",
+   "concepts": [],
+   "functions": {
+    "*": [
+     "fn.overview"
+    ]
+   },
+   "prereqs": []
+  },
+  {
+   "id": "fd.01",
+   "kind": "lesson",
+   "step": 1,
+   "title": "Hello — and how words are built",
+   "concepts": [
+    "greet.hello"
+   ],
+   "functions": {
+    "*": [
+     "fn.definite"
+    ],
+    "ar": [
+     "fn.root.pattern"
+    ],
+    "he": [
+     "fn.root.pattern"
+    ]
+   },
+   "prereqs": [
+    "fd.00"
+   ]
+  },
+  {
+   "id": "fd.01x",
+   "kind": "lesson",
+   "step": 1,
+   "langs": [
+    "de"
+   ],
+   "title": "An extra lesson for German only",
+   "concepts": [],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "prereqs": [
+    "fd.01"
+   ]
+  },
+  {
    "id": "core.1",
    "kind": "core",
    "title": "He, she, eat — and the little words",
@@ -12,7 +64,9 @@
     "det.indef",
     "conj.and"
    ],
-   "prereqs": []
+   "prereqs": [
+    "fd.01x"
+   ]
   },
   {
    "id": "veg.1",

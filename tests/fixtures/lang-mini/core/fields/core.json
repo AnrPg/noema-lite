@@ -60,6 +60,13 @@
    "subgroup": "func",
    "tier": 1,
    "rank": 6
+  },
+  {
+   "id": "greet.hello",
+   "gloss": "hello",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 7
   }
  ]
 }

@@ -100,7 +100,7 @@
   /** read(rel) → parsed JSON or null; list(relDir) → file names. Layout: docs/LANGUAGES.md §4.1. */
   function readCourse(read, list) {
     const course = read('course.json');
-    const data = { course, fields: list('core/fields').map(f => read('core/fields/' + f)), nodes: read('core/nodes.json').nodes,
+    const data = { course, typology: read('core/typology.json') || null, fields: list('core/fields').map(f => read('core/fields/' + f)), nodes: read('core/nodes.json').nodes,
       functions: list('core/functions').map(f => read('core/functions/' + f)), frames: (read('core/frames.json') || {}).frames || [], langs: {} };
     for (const code of course.languages) {
       const base = `lang/${code}/`, lexicon = {}, grammar = {};
@@ -112,10 +112,30 @@
     return data;
   }
 
+  /* ---------- paths by language type (D10): which nodes apply to which language ---------- */
+  const TYPES = ['isolating', 'agglutinating', 'fusional', 'polysynthetic'];
+  const applies = (n, code, typ) => (!n.path || n.path === typ) && (!n.langs || n.langs.includes(code));
+  /** The grammar a lesson teaches in one language: its list, or "*" + the type's + the language's (§4.4.1). */
+  function lessonFunctions(C, code, nid) {
+    const f = C.nodes[nid]?.functions || [];
+    if (Array.isArray(f)) return f.slice();
+    const out = []; for (const k of ['*', C.lang[code]?.typology, code]) for (const x of f[k] || []) if (!out.includes(x)) out.push(x);
+    return out;
+  }
+  /** The languages grouped by the path of their type, in course order: [{path, langs}] (D10: a polyglot course moves group by group). */
+  function pathGroups(C, langs) {
+    const out = [];
+    for (const c of (langs || C.languages)) {
+      const t = C.lang[c]?.typology || null, g = out.find(x => x.path === t);
+      if (g) g.langs.push(c); else out.push({ path: t, langs: [c] });
+    }
+    return out;
+  }
+
   /* ---------- the indexed course ---------- */
   function course(data) {
     const C = { data, id: data.course.id, explainLang: data.course.explainLang || 'en', languages: data.course.languages.slice(),
-      concepts: {}, nodes: {}, order: [], owner: {}, functions: {}, frames: {}, lang: {} };
+      concepts: {}, nodes: {}, order: [], owner: {}, functions: {}, frames: {}, lang: {}, typology: data.typology || null };
     for (const f of data.fields) for (const c of f.concepts) C.concepts[c.id] = { ...c, field: f.field };
     for (const n of data.nodes) { C.nodes[n.id] = n; for (const c of n.concepts) C.owner[c] = n.id; }
     // topological order (prerequisites first, stable by file order)
@@ -124,10 +144,13 @@
     for (const f of data.functions) C.functions[f.id] = f;
     for (const f of data.frames) C.frames[f.id] = f;
     for (const code of C.languages) {
-      const src = data.langs[code], X = { code, language: src.language || {}, lex: {}, byNode: {}, byConcept: {}, absent: {}, grammar: src.grammar || {}, prepared: {},
-        sentences: [], sentenceById: {}, forms: new Map(), prefixes: [], maxWord: 1, maxWords: 1 };
+      const src = data.langs[code], X = { code, language: src.language || {}, typology: (src.language || {}).typology || null, lex: {}, byNode: {}, byConcept: {}, absent: {}, grammar: src.grammar || {}, prepared: {},
+        applies: {}, owner: {}, sentences: [], sentenceById: {}, forms: new Map(), prefixes: [], maxWord: 1, maxWords: 1 };
       for (const nid of Object.keys(C.nodes)) {
-        X.prepared[nid] = !!src.lexicon[nid];
+        const n = C.nodes[nid];
+        X.applies[nid] = applies(n, code, X.typology);
+        if (X.applies[nid]) for (const c of n.concepts) if (!X.owner[c]) X.owner[c] = nid;
+        X.prepared[nid] = X.applies[nid] && (!!src.lexicon[nid] || !n.concepts.length);
         const file = src.lexicon[nid] || { lexemes: [], absent: [] };
         X.byNode[nid] = [];
         for (const x of file.lexemes || []) {
@@ -166,10 +189,18 @@
   function newLearner(C, settings = {}) {
     const L = { course: C.id, settings: { languages: settings.languages || C.languages.slice(), depth: { ...(C.data.course.defaults?.depth || {}), ...(settings.depth || {}) },
       batch: settings.batch || C.data.course.defaults?.batch || 12 }, langs: {} };
-    for (const code of C.languages) L.langs[code] = { items: {}, fns: {} };
+    for (const code of C.languages) L.langs[code] = { items: {}, fns: {}, checks: {} };
     return L;
   }
-  const ensureLang = (L, code) => (L.langs[code] = L.langs[code] || { items: {}, fns: {} });
+  const ensureLang = (L, code) => { const S = L.langs[code] = L.langs[code] || { items: {}, fns: {}, checks: {} }; S.checks = S.checks || {}; return S; };
+  /** The result of a lesson check (§6.7): score 0…1. The best result counts; ≥ 0.8 passes the lesson (§5.2). */
+  function recordCheck(C, L, code, nid, score, day) {
+    if (C.nodes[nid]?.kind !== 'lesson') throw new Error(`${nid} is not a lesson`);
+    const S = ensureLang(L, code), old = S.checks[nid] || {};
+    S.checks[nid] = { day, score: +score.toFixed(3), best: Math.max(old.best || 0, +score.toFixed(3)), tries: (old.tries || 0) + 1 };
+    return S.checks[nid];
+  }
+  const PASS = 0.8;
 
   /* ---------- spaced repetition (SM-2, day granularity), two tracks per item ---------- */
   const GRADE = { true: 4, false: 1, again: 1, hard: 3, good: 4, easy: 5 };
@@ -215,24 +246,29 @@
     if (!trackOk(it.p, 21, 1)) return 'known_p';
     return 'mastered';
   }
-  const NODE_DONE = new Set(['known', 'mastered', 'skipped']);
-  /** States of every node in one language: locked · open · learning · known · mastered · skipped (tier above the chosen depth)
-      · unprepared (its words are not written yet in this language — it blocks what follows, like a locked node). */
+  const NODE_DONE = new Set(['known', 'mastered', 'skipped', 'passed']);
+  /** States of every node in one language: locked · open · learning · passed (a lesson whose check is passed, §5.2) · known · mastered
+      · skipped (tier above the chosen depth) · unprepared (its words are not written yet in this language — it blocks what follows)
+      · na (the node does not apply to this language: another path or other languages, D10 — passed through: done when its prerequisites are). */
   function nodeStates(C, L, code) {
-    const X = C.lang[code], out = {}, depth = L.settings.depth?.[code] ?? 3;
+    const X = C.lang[code], out = {}, done = {}, depth = L.settings.depth?.[code] ?? 3, checks = L.langs[code]?.checks || {};
     for (const nid of C.order) {
-      const n = C.nodes[nid];
-      if (n.kind === 'field' && n.tier > depth) { out[nid] = 'skipped'; continue; }
-      if (!X.prepared[nid]) { out[nid] = 'unprepared'; continue; }
-      if ((n.prereqs || []).some(p => !NODE_DONE.has(out[p]))) { out[nid] = 'locked'; continue; }
-      const ids = X.byNode[nid] || [];
-      if (!ids.length) { out[nid] = 'known'; continue; }                     // everything absent in this language: nothing to learn
+      const n = C.nodes[nid], pre = (n.prereqs || []).filter(p => C.nodes[p]), ready = pre.every(p => done[p]);
+      if (!X.applies[nid]) { out[nid] = 'na'; done[nid] = ready; continue; }
+      if (n.kind === 'field' && n.tier > depth) { out[nid] = 'skipped'; done[nid] = true; continue; }
+      if (!X.prepared[nid]) { out[nid] = 'unprepared'; done[nid] = false; continue; }
+      if (!ready) { out[nid] = 'locked'; done[nid] = false; continue; }
+      const ids = X.byNode[nid] || [], lesson = n.kind === 'lesson';
       const st = ids.map(id => itemState(C, L, code, id, { [nid]: 'open' }));
       const share = s => st.filter(x => rank(x) >= rank(s)).length / st.length;
-      if (st.every(x => x === 'ready')) out[nid] = 'open';
-      else if (share('mastered') >= 0.9) out[nid] = 'mastered';
-      else if (share('known_r') >= 0.9 && share('known_p') >= 0.7) out[nid] = 'known';
+      const passed = lesson && (checks[nid]?.best || 0) >= PASS && st.every(x => rank(x) >= rank('seen'));
+      if (!ids.length) out[nid] = lesson ? (passed ? 'passed' : (checks[nid] ? 'learning' : 'open')) : 'known';   // nothing to learn (all absent) / a grammar-only lesson
+      else if (share('mastered') >= 0.9 && (!lesson || passed)) out[nid] = 'mastered';
+      else if (share('known_r') >= 0.9 && share('known_p') >= 0.7 && (!lesson || passed)) out[nid] = 'known';
+      else if (passed) out[nid] = 'passed';
+      else if (st.every(x => x === 'ready') && !checks[nid]) out[nid] = 'open';
       else out[nid] = 'learning';
+      done[nid] = NODE_DONE.has(out[nid]);
     }
     return out;
   }
@@ -439,9 +475,146 @@
       intensity: p.intensity ?? null, feeling: p.feeling || '', synonymsNone: p.synonymsNone || '', examples, sections, hasProfile: !!lx.profile };
   }
 
+  /* ---------- exercises made from stored data (§6.7 generators) — every answer comes from the course files ---------- */
+  const TAG_LABEL = { NOM: 'nominative', ACC: 'accusative', DAT: 'dative', GEN: 'genitive', SG: 'singular', PL: 'plural', DU: 'dual', COLL: 'collective',
+    MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter', DEF: 'definite (“the”)', INDF: 'indefinite', PRS: 'present', PST: 'past', FUT: 'future',
+    PFV: 'perfective', IPFV: 'imperfective', IND: 'indicative', SBJV: 'subjunctive', JUSS: 'jussive', IMP: 'imperative', NFIN: 'infinitive', CSTR: 'construct state',
+    '1': '1st person', '2': '2nd person', '3': '3rd person' };
+  /** A feature cell in words: V;PRS;3;SG → “present · 3rd person · singular” */
+  const cellLabel = cell => cellParts(canon(cell)).slice(1).map(t => TAG_LABEL[t] || t).join(' · ') || 'basic form';
+  const VARIANT_LABEL = { Polarity: { NEG: 'Make it negative' }, Mood: { INT: 'Make it a question' }, Number: { PL: 'Make it plural', SG: 'Make it singular' },
+    Definiteness: { DEF: 'Make it definite (“the”)', INDF: 'Make it indefinite' } };
+  const variantLabel = v => Object.entries(v || {}).map(([k, x]) => VARIANT_LABEL[k]?.[x] || `${k}: ${x}`).join(' · ');
+  const GENDER_WORD = { MASC: 'masculine', FEM: 'feminine', NEUT: 'neuter' };
+  function shuffled(a, rng) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  const uniqStr = a => [...new Set(a)];
+  /** The pieces of a sentence a learner puts in order: its written words (a word with attached prefixes stays one tile). */
+  const sentenceTiles = s => (s.tokens || []).filter(k => !k.p).map(k => k.t);
+  const endPunct = s => (s.tokens || []).filter(k => k.p === true).map(k => k.t).join('');
+  const cmpText = (code, t) => nfc(t).replace(/[\p{P}\s]+/gu, ' ').trim().toLowerCase();
+  /** A wrong tile for a sentence: another form of one of its inflected words (never a form that is in the sentence). */
+  function wrongTile(C, code, s, rng) {
+    const X = C.lang[code], used = new Set(sentenceTiles(s).map(nfc)), cands = [];
+    for (const k of s.tokens || []) {
+      if (k.p || !k.l || !k.f) continue;
+      const lx = X.lex[k.l]; if (!lx) continue;
+      for (const f of Object.values(lx.forms || {})) if (!used.has(nfc(f)) && stripMarks(code, f) !== stripMarks(code, k.t)) cands.push(f);
+    }
+    const u = uniqStr(cands); return u.length ? u[Math.floor(rng() * u.length)] : null;
+  }
+  /** Items for one grammar function in one language, from its generators. opts: {k (known), rng, max = 12}.
+      Item kinds: {type:'choose', kind, prompt, ask, options, answer, why} · {type:'build', kind, source?, change?, tiles, answers, punct, gloss}. */
+  function exercises(C, L, code, fid, opts = {}) {
+    const X = C.lang[code], g = X.grammar[fid], rng = opts.rng || Math.random, max = opts.max ?? 12;
+    if (!g || g.status === 'absent' && !(g.quiz || []).length) return [];
+    const k = opts.k || known(C, L, code), K = k.R;
+    const gens = (g.generators && g.generators.length) ? g.generators : [{ type: 'sentence_meaning' }, { type: 'build_sentence' }, { type: 'transform' }];
+    const fnsOf = gen => gen.bank?.functions || [fid];
+    // the sentences a generator draws on: by functions (default: this one) or by frames (for points no word shows, e.g. a verbless “to be”)
+    const bankFor = gen => gen.bank?.frames ? selectSentences(C, code, { known: K }).filter(s => gen.bank.frames.includes(s.frame)) : selectSentences(C, code, { known: K, functions: fnsOf(gen) });
+    const pools = [];
+    for (const gen of gens) {
+      const items = [];
+      if (['inflect', 'principal_parts', 'paradigm'].includes(gen.type)) {
+        for (const lx of Object.values(X.lex)) {
+          if (!K.has(lx.id) || (gen.pos && lx.pos !== gen.pos) || (gen.class && lx.class !== gen.class) || (gen.lemmas && !gen.lemmas.includes(lx.id))) continue;
+          const forms = lx.forms || {}, cells = (gen.cells || Object.keys(forms)).filter(c => Object.keys(forms).some(x => canon(x) === canon(c)));
+          for (const c of cells) {
+            const key = Object.keys(forms).find(x => canon(x) === canon(c)), ans = forms[key];
+            const wrong = uniqStr(Object.values(forms).filter(f => nfc(f) !== nfc(ans) && stripMarks(code, f) !== stripMarks(code, ans)));
+            if (!wrong.length || key === Object.keys(forms).find(x => forms[x] === lx.lemma) && cells.length > 1) continue;   // asking for the lemma itself teaches nothing
+            items.push({ type: 'choose', kind: 'inflect', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: cellLabel(c), cell: canon(c),
+              options: shuffled([ans, ...shuffled(wrong, rng).slice(0, 3)], rng), answer: ans, why: `${lx.lemma} — ${cellLabel(c)}: ${ans}` });
+          }
+        }
+      } else if (gen.type === 'gender_article') {
+        for (const lx of Object.values(X.lex)) {
+          if (!K.has(lx.id) || lx.pos !== 'NOUN' || !GENDER_WORD[lx.gender] || lx.class === 'plt') continue;
+          if (code === 'de') { const a = { MASC: 'der', FEM: 'die', NEUT: 'das' }[lx.gender]; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'Its article?', options: ['der', 'die', 'das'], answer: a, why: `${a} ${lx.lemma} (${GENDER_WORD[lx.gender]})` }); }
+          else { const opts2 = code === 'ar' || code === 'he' ? ['masculine', 'feminine'] : ['masculine', 'feminine', 'neuter']; items.push({ type: 'choose', kind: 'gender', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'Its gender?', options: opts2, answer: GENDER_WORD[lx.gender], why: `${lx.lemma}: ${GENDER_WORD[lx.gender]}` }); }
+        }
+      } else if (gen.type === 'measure_word') {
+        const clf = Object.values(X.lex).filter(x => x.pos === 'CLF'), knownClf = clf.filter(x => K.has(x.id)).map(x => x.lemma), allClf = clf.map(x => x.lemma);
+        for (const lx of Object.values(X.lex)) {
+          if (!K.has(lx.id) || lx.pos !== 'NOUN' || !(lx.measure || []).length) continue;
+          const ans = lx.measure[0], wrong = (knownClf.length >= 3 ? knownClf : allClf).filter(m => !lx.measure.includes(m) && m !== '个');   // 个 is never offered as wrong: it is often heard with anything
+          if (wrong.length < 1) continue;
+          items.push({ type: 'choose', kind: 'measure', fn: fid, lang: code, lex: lx.id, prompt: lx.lemma, ask: 'one … — which measure word?', options: shuffled([ans, ...shuffled(wrong, rng).slice(0, 3)], rng).map(m => '一' + m), answer: '一' + ans, why: `一${lx.measure.join(' / 一')}${lx.lemma}` });
+        }
+      } else if (gen.type === 'sentence_meaning') {
+        const ss = bankFor(gen);
+        const all = selectSentences(C, code, { known: K });
+        for (const s of ss) {
+          const reqKey = s.req.slice().sort().join('|');
+          const others = shuffled(all.filter(o => o.id !== s.id && o.gloss !== s.gloss && !(o.frame === s.frame && o.req.slice().sort().join('|') === reqKey)), rng);
+          const near = others.filter(o => o.req.some(l => s.req.includes(l))), wrong = uniqStr([...near, ...others].map(o => o.gloss)).slice(0, 3);
+          if (wrong.length < 2) continue;
+          items.push({ type: 'choose', kind: 'meaning', fn: fid, lang: code, sentence: s.id, prompt: s.text, ask: 'What does it mean?', options: shuffled([s.gloss, ...wrong], rng), answer: s.gloss, why: s.gloss });
+        }
+      } else if (gen.type === 'build_sentence' || gen.type === 'word_order') {
+        for (const s of bankFor(gen)) {
+          const tiles = sentenceTiles(s); if (tiles.length < 2) continue;
+          const wt = wrongTile(C, code, s, rng);
+          items.push({ type: 'build', kind: 'build', fn: fid, lang: code, sentence: s.id, gloss: s.gloss, tiles: shuffled(wt ? [...tiles, wt] : tiles, rng), size: tiles.length,
+            answers: [s.text, ...(s.alts || [])], punct: endPunct(s), why: s.text });
+        }
+      } else if (gen.type === 'transform') {
+        const want = gen.bank?.variant;
+        for (const s2 of selectSentences(C, code, { known: K, functions: gen.bank?.functions ? fnsOf(gen) : [] })) {
+          if (!s2.variantOf || (want && !(want in (s2.variant || {})))) continue;
+          const s1 = X.sentenceById[s2.variantOf]; if (!s1 || s1.req.some(l => !K.has(l))) continue;
+          if (!gen.bank?.functions && !(s2.functions || []).includes(fid) && !(s1.functions || []).includes(fid)) continue;
+          const tiles = sentenceTiles(s2), extra = sentenceTiles(s1).filter(t => !tiles.includes(t));
+          items.push({ type: 'build', kind: 'transform', fn: fid, lang: code, sentence: s2.id, source: s1.text, sourceGloss: s1.gloss, change: variantLabel(s2.variant), gloss: s2.gloss,
+            tiles: shuffled([...tiles, ...extra.slice(0, 1)], rng), size: tiles.length, answers: [s2.text, ...(s2.alts || [])], punct: endPunct(s2), why: s2.text });
+        }
+      } else if (gen.type === 'quiz') {
+        for (const q of g.quiz || []) items.push({ type: 'choose', kind: 'quiz', fn: fid, lang: code, prompt: q.q, ask: '', options: shuffled(q.options, rng), answer: q.answer, why: q.why });
+      }
+      if (items.length) pools.push(shuffled(items, rng));
+    }
+    // take from the generators in turn, so a short set still has every kind
+    const out = []; let i = 0;
+    while (out.length < max && pools.some(p => p.length)) { const p = pools[i++ % pools.length]; if (p.length) out.push(p.shift()); }
+    return out;
+  }
+  /** Is a built sentence right? (the tiles in order vs the sentence and its alternatives) */
+  function checkBuilt(C, code, item, tiles) {
+    const X = C.lang[code], text = joinTokens(tiles.map(t => ({ t })), X.language.tokenJoin);
+    return item.answers.some(a => cmpText(code, a) === cmpText(code, text));
+  }
+  /** Recognition items for words: the word → its meaning (distractors: other words of the same lesson/node first). */
+  function wordItems(C, L, code, lexIds, opts = {}) {
+    const X = C.lang[code], rng = opts.rng || Math.random, gl = id => { const c = (X.lex[id].senses || [])[0]; return c ? C.concepts[c].gloss : (X.lex[id].role || ''); };
+    return lexIds.filter(id => (X.lex[id].senses || []).length).map(id => {
+      const pool = uniqStr([...lexIds, ...Object.keys(X.lex)].filter(x => x !== id && (X.lex[x].senses || []).length && !(X.lex[x].senses || []).some(s => X.lex[id].senses.includes(s))).map(gl)).filter(g => g && g !== gl(id));
+      return { type: 'choose', kind: 'word', lang: code, lex: id, prompt: X.lex[id].lemma, ask: 'What does it mean?', options: shuffled([gl(id), ...pool.slice(0, 3)], rng), answer: gl(id), why: `${X.lex[id].lemma} — ${gl(id)}` };
+    });
+  }
+  /** The lesson check (§6.7): n items mixing the lesson's words and its functions, in one language. */
+  function lessonCheck(C, L, code, nid, opts = {}) {
+    const n = C.nodes[nid], rng = opts.rng || Math.random, size = opts.size || 10, k = opts.k || known(C, L, code);
+    const words = shuffled(wordItems(C, L, code, C.lang[code].byNode[nid] || [], { rng }), rng);
+    const fx = lessonFunctions(C, code, nid).map(f => exercises(C, L, code, f, { k, rng, max: size }));
+    const out = []; const pools = [words, ...fx].filter(p => p.length); let i = 0;
+    while (out.length < size && pools.some(p => p.length)) { const p = pools[i++ % pools.length]; if (p.length) out.push(p.shift()); }
+    return out;
+  }
+
   /* ---------- the daily session (§7.5) ---------- */
-  const SECONDS = { review: 8, learn: 40, grammar: 300, extra: 120 };
-  /** → {steps: [{kind:'review', items:[{lang, lex, track}]}, {kind:'learn', node, concepts:[{concept, langs:[{lang, lex}]}]}, {kind:'grammar', lang, fn}], seconds} */
+  const SECONDS = { review: 8, learn: 40, grammar: 300, extra: 120, lesson: 600 };
+  /** The next lesson of every language, languages at the same lesson together (D10: the steps are parallel): [{kind:'lesson', node, step, langs}] */
+  function nextLessons(C, L, langs, K) {
+    const out = [];
+    for (const c of langs) {
+      const nid = C.order.find(x => C.nodes[x].kind === 'lesson' && ['open', 'learning'].includes(K[c].nodes[x]));
+      if (!nid) continue;
+      const st = out.find(x => x.node === nid);
+      if (st) st.langs.push(c); else out.push({ kind: 'lesson', node: nid, step: C.nodes[nid].step ?? null, langs: [c] });
+    }
+    return out.sort((a, b) => C.order.indexOf(a.node) - C.order.indexOf(b.node));
+  }
+  /** → {steps: [{kind:'review', items:[{lang, lex, track}]}, {kind:'lesson', node, path, langs}, {kind:'learn', node, concepts:[{concept, langs:[{lang, lex}]}]}, {kind:'grammar', lang, fn}], seconds} */
   function planSession(C, L, { day, minutes = 30, languages } = {}) {
     const langs = (languages || L.settings.languages).filter(c => C.lang[c]);
     let budget = minutes * 60; const steps = [];
@@ -457,10 +630,14 @@
     const reviews = [];
     for (const cid of order) { const g = byConcept[cid]; if (budget < g.length * SECONDS.review) break; reviews.push(...g); budget -= g.length * SECONDS.review; }
     if (reviews.length) steps.push({ kind: 'review', items: reviews.map(({ lang, lex, track }) => ({ lang, lex, track })) });
-    // 2 · a new batch: the first node (prerequisites first) still to learn in some language; its concepts in every language where it is open
+    // 2 · the foundations (D9, D10): the next lesson of every path group
+    const lessons = nextLessons(C, L, langs, K);
+    for (const st of lessons) { steps.push(st); budget -= SECONDS.lesson; }
+    // 3 · a new batch: the first node (prerequisites first) still to learn in some language; its concepts in every language where it is open
     const batch = Math.max(1, L.settings.batch || 12);
     for (const nid of C.order) {
       if (budget < SECONDS.learn) break;
+      if (C.nodes[nid].kind === 'lesson') continue;   // lesson words are learned inside their lesson
       const open = langs.filter(c => ['open', 'learning'].includes(K[c].nodes[nid]));
       if (!open.length) continue;
       const concepts = [];
@@ -471,8 +648,8 @@
       for (const c of open) for (const id of C.lang[c].byNode[nid]) if (!(C.lang[c].lex[id].senses || []).length && K[c].state[id] === 'ready') pushConcept(id, [{ lang: c, lex: id }]);
       if (concepts.length) { steps.push({ kind: 'learn', node: nid, concepts }); break; }
     }
-    // 3 · one grammar function: the first (by "after") that is ready or thin in some language and not mastered there
-    if (budget >= SECONDS.grammar) {
+    // 4 · one grammar function: the first (by "after") that is ready or thin in some language and not mastered there
+    if (budget >= SECONDS.grammar && !lessons.length) {
       const fns = Object.keys(C.functions).sort((a, b) => (C.functions[a].after || []).length - (C.functions[b].after || []).length || a.localeCompare(b));
       outer: for (const fid of fns) for (const c of langs) {
         if (functionState(C, L, c, fid) === 'mastered') continue;
@@ -490,6 +667,7 @@
       const X = C.lang[code]; if (!X) continue;
       for (const [id, it] of Object.entries(S.items)) { const n = X.lex[id]?.node; if (!n) continue; const k = `lang:${code}:node:${n}`; (kv[k] = kv[k] || { items: {} }).items[id] = it; }
       for (const [fid, f] of Object.entries(S.fns)) kv[`lang:${code}:fn:${fid}`] = f;
+      for (const [nid, ch] of Object.entries(S.checks || {})) { const k = `lang:${code}:node:${nid}`; (kv[k] = kv[k] || { items: {} }).check = ch; }
     }
     return kv;
   }
@@ -497,7 +675,7 @@
     const L = newLearner(C, kv.settings || {});
     for (const [k, v] of Object.entries(kv)) {
       let m = k.match(/^lang:([^:]+):node:(.+)$/);
-      if (m && C.lang[m[1]]) { Object.assign(ensureLang(L, m[1]).items, v.items || {}); continue; }
+      if (m && C.lang[m[1]]) { Object.assign(ensureLang(L, m[1]).items, v.items || {}); if (v.check) ensureLang(L, m[1]).checks[m[2]] = v.check; continue; }
       m = k.match(/^lang:([^:]+):fn:(.+)$/);
       if (m && C.lang[m[1]]) ensureLang(L, m[1]).fns[m[2]] = v;
     }
@@ -509,7 +687,8 @@
   const API = { version: 1, nfc, canon, cellParts, cellHas, stripMarks, hasMarks, isHan, pinyinSplit, pinyinTone, pinyinSyllableErrors,
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
     readCourse, course, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
-    practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts };
+    practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
+    TYPES, applies, pathGroups, lessonFunctions, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
   root.NoemaLang = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

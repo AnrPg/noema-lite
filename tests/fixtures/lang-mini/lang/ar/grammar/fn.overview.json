@@ -1,0 +1,90 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "Arabic is a Semitic language. This course teaches Modern Standard Arabic, the shared written and formal language of the Arab world; everyday speech is in regional dialects. It is written from right to left, and words are built from consonant roots.",
+ "typology": {
+  "type": "fusional",
+  "why": "Words are built by weaving a consonant root into a vowel pattern (k-t-b: كَتَبَ kataba ‘he wrote’, كِتَاب kitāb ‘book’), and one ending carries person, number and gender at once.",
+  "alsoShows": "Small words are attached in front or behind like pieces: وَ wa- ‘and’, الْ al- ‘the’, possessive endings."
+ },
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Afro-Asiatic › Semitic"
+  },
+  {
+   "label": "Script",
+   "value": "Arabic script, right to left; letters join and change shape; short vowels are usually not written"
+  },
+  {
+   "label": "Where",
+   "value": "official language of more than 20 countries from Morocco to Iraq; the language of the Qur’an"
+  }
+ ],
+ "peculiarities": [
+  {
+   "title": "Roots and patterns",
+   "text": "Most words share a root of three consonants with their relatives; the vowels and extra letters around it give the meaning."
+  },
+  {
+   "title": "No ‘to be’ in the present",
+   "text": "أَنَا طَالِبٌ ʾana ṭālibun = ‘I (am) a student’: the present tense of ‘to be’ is not said."
+  },
+  {
+   "title": "Unwritten vowels",
+   "text": "Short vowels are marks above and below the letters; normal texts leave them out. This course shows them until you can read without them."
+  },
+  {
+   "title": "Gender everywhere",
+   "text": "Two genders, and ‘you’, verbs and adjectives change with them: أَنْتَ anta (to a man), أَنْتِ anti (to a woman)."
+  }
+ ],
+ "forYou": [
+  {
+   "lang": "tr",
+   "text": "Many Turkish words come from Arabic — kitap (كِتَاب), merhaba (مَرْحَبًا), kalem (قَلَم): use them as bridges."
+  },
+  {
+   "lang": "el",
+   "text": "Gender and agreement work as in Greek, but there are only two genders and a dual for pairs."
+  }
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is Arabic mainly?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "fusional",
+   "why": "Roots woven into patterns, and endings that carry several meanings at once."
+  },
+  {
+   "q": "How do you say ‘I am a student’?",
+   "options": [
+    "أَنَا طَالِبٌ — without a verb",
+    "with the verb كَانَ in the present",
+    "with a special particle"
+   ],
+   "answer": "أَنَا طَالِبٌ — without a verb",
+   "why": "The present of ‘to be’ is not said."
+  },
+  {
+   "q": "What do كِتَاب, كَاتِب and كَتَبَ have in common?",
+   "options": [
+    "the root k-t-b",
+    "the same ending",
+    "nothing"
+   ],
+   "answer": "the root k-t-b",
+   "why": "All three are built on the root of ‘writing’."
+  }
+ ]
+}

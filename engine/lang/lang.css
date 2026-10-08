@@ -82,3 +82,19 @@ body.lx main.lx-main{max-width:1000px}
   .lx-flagchip{padding:4px 7px;font-size:12px}.lx-hero h1{font-size:24px}.lx-prompt{font-size:32px}.lx-lemma{font-size:28px}
   .lx-cgrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
 }
+/* ---------- foundations: lessons, grammar pages (D9–D11) ---------- */
+.lx-step{display:inline-block;font-size:.6em;vertical-align:middle;padding:3px 9px;border-radius:999px;background:var(--violet-bg);color:var(--violet);font-weight:700;letter-spacing:.02em}
+.ns-passed{background:var(--ok-bg)}.ns-na{display:none}
+.lx-lessons{display:grid;gap:10px;margin:0 0 18px}
+.lx-lessonbtn{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;text-align:left}
+.lx-callout{margin:12px 0;padding:10px 14px;border-radius:12px;background:var(--bg2);border-left:4px solid var(--line)}
+.lx-callout.k-tip{border-color:var(--info);background:var(--info-bg)}.lx-callout.k-pitfall,.lx-callout.k-warn{border-color:var(--warn);background:var(--warn-bg)}.lx-callout.k-key{border-color:var(--violet);background:var(--violet-bg)}
+.lx-callout .lx-list{margin:6px 0 0}
+.lx-summary{font-size:16px;line-height:1.55}
+.lx-cmpblk{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0}.lx-cmpblk>div{padding:10px 12px;border-radius:12px;background:var(--bg2)}
+.lx-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0}.lx-arrow{color:var(--ink3)}
+.lx-across{margin-top:14px}.lx-across tr.on th,.lx-across tr.on td{background:var(--violet-bg)}
+.lx-gram h3,.lx-overview h3,.lx-typology h3{margin:0 0 8px}
+.lx-quizq{font-size:18px;font-weight:600}
+.lx-exbuild .lx-slot{min-height:2.2em}
+@media (max-width:600px){.lx-cmpblk{grid-template-columns:1fr}}

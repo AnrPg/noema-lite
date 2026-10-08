@@ -1,0 +1,16 @@
+{
+ "lexemes": [
+  {
+   "id": "de:hallo",
+   "lemma": "hallo",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-08"
+   }
+  }
+ ]
+}

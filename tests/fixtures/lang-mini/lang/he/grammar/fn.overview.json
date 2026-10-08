@@ -1,0 +1,90 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "Hebrew is a Semitic language, revived as an everyday spoken language from the late 19th century and now the main language of Israel. It is written from right to left, mostly without vowels, and words are built from consonant roots.",
+ "typology": {
+  "type": "fusional",
+  "why": "Words are built by putting a root into a pattern (verbs into one of seven binyanim), and one ending carries gender and number at once (אוֹכֶלֶת: present, feminine, singular).",
+  "alsoShows": "One-letter words are attached to the next word: הַ ‘the’, וְ ‘and’, בְּ ‘in’, לְ ‘to’, מִ ‘from’, שֶׁ ‘that’."
+ },
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Afro-Asiatic › Semitic"
+  },
+  {
+   "label": "Script",
+   "value": "Hebrew alphabet: 22 letters, 5 of them with a final form; right to left; vowel points (niqqud) only in teaching texts, poetry and the Bible"
+  },
+  {
+   "label": "Where",
+   "value": "Israel; Jewish communities worldwide"
+  }
+ ],
+ "peculiarities": [
+  {
+   "title": "No ‘to be’ in the present",
+   "text": "הוּא סְטוּדֶנְט = ‘he (is) a student’: in the present the verb ‘to be’ is not said."
+  },
+  {
+   "title": "Roots and binyanim",
+   "text": "A verb is a root of (mostly) three consonants in one of seven patterns; learn the root with the word."
+  },
+  {
+   "title": "Vowels are not written",
+   "text": "Everyday texts have no vowel points. This course shows them, and the full spelling, until you can read without them."
+  },
+  {
+   "title": "Gender in the present tense",
+   "text": "Present-tense verbs change for gender and number, not for person: אֲנִי / אַתָּה / הוּא אוֹכֵל (a man), אֲנִי / אַתְּ / הִיא אוֹכֶלֶת (a woman)."
+  }
+ ],
+ "forYou": [
+  {
+   "lang": "el",
+   "text": "Gender and agreement are familiar from Greek; the new part is the root system and the script."
+  },
+  {
+   "lang": "en",
+   "text": "Modern Hebrew has many international words (טֶלֶפוֹן, אוֹטוֹבּוּס) — good first anchors."
+  }
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is Hebrew mainly?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "fusional",
+   "why": "Roots in patterns, and endings that carry gender and number at once."
+  },
+  {
+   "q": "What changes in a present-tense verb?",
+   "options": [
+    "gender and number",
+    "person only",
+    "nothing"
+   ],
+   "answer": "gender and number",
+   "why": "אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת — the same form for I, you and he."
+  },
+  {
+   "q": "How is ‘the’ written?",
+   "options": [
+    "as the prefix הַ on the next word",
+    "as a separate word after the noun",
+    "it does not exist"
+   ],
+   "answer": "as the prefix הַ on the next word",
+   "why": "הַגֶּזֶר = the carrot."
+  }
+ ]
+}

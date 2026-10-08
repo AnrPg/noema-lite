@@ -1,6 +1,7 @@
 /* ---------- a node: its ideas, in the chosen language ---------- */
 VIEWS.node = (v, r) => {
   const n = UI.C.nodes[r.arg]; if (!n) return VIEWS.home(v);
+  if (n.kind === 'lesson') return VIEWS.lesson(v, r);
   const c = UI.lang, X = LX(c), k = N.known(UI.C, UI.L, c), ns = k.nodes[n.id];
   v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => go('#/') }, '← Map')),
     h('h1', {}, n.title),
@@ -29,7 +30,7 @@ function conceptTile(c, { cid, lex }, k) {
 /* ---------- a concept: the flag card (one language at a time) + compare ---------- */
 VIEWS.c = (v, r) => {
   const cid = r.arg, con = UI.C.concepts[cid]; if (!con) return VIEWS.home(v);
-  const node = UI.C.nodes[UI.C.owner[cid]];
+  const node = UI.C.nodes[LX(UI.lang).owner[cid] || UI.C.owner[cid]];
   const draw = () => {
     v.innerHTML = ''; topbar();
     v.append(h('div', { class: 'lx-back' }, h('button', { class: 'btn ghost small', onclick: () => history.length > 1 ? history.back() : go('#/node/' + node.id) }, '← ' + node.title)),

@@ -1,0 +1,52 @@
+{
+ "function": "fn.root.pattern",
+ "status": "realized",
+ "summary": "Most Arabic words are built on a root of three consonants that carries a basic meaning; patterns of vowels and extra letters around it make the actual words. Recognizing the root lets you guess and remember whole families of words.",
+ "procedure": {
+  "askYourself": [
+   "Which consonants are left when I remove the article, prefixes and endings?",
+   "Are the long vowels ا و ي part of the root or of the pattern?",
+   "Do I know another word with the same three consonants?"
+  ]
+ },
+ "traps": [
+  "The letters ا و ي can be part of the pattern, not of the root: in كَاتِب the ا belongs to the pattern."
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the root of كَاتِب ‘writer’?",
+   "options": [
+    "k-t-b",
+    "k-ʾ-t",
+    "t-b-k"
+   ],
+   "answer": "k-t-b",
+   "why": "The ā belongs to the pattern CāCiC (‘the one who does it’)."
+  },
+  {
+   "q": "Which word shares a root with كِتَاب ‘book’?",
+   "options": [
+    "مَكْتَب ‘office, desk’",
+    "بَيْت ‘house’",
+    "جَزَر ‘carrots’"
+   ],
+   "answer": "مَكْتَب ‘office, desk’",
+   "why": "مَ + k-t-b: maCCaC is a pattern for places."
+  },
+  {
+   "q": "How many consonants does a typical root have?",
+   "options": [
+    "three",
+    "one",
+    "five"
+   ],
+   "answer": "three",
+   "why": "Most roots are triliteral; some have four."
+  }
+ ]
+}

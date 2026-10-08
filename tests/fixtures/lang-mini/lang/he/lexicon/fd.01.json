@@ -1,0 +1,17 @@
+{
+ "lexemes": [
+  {
+   "id": "he:shalom",
+   "lemma": "שָׁלוֹם",
+   "pos": "INTJ",
+   "senses": [
+    "greet.hello"
+   ],
+   "translit": "shalom",
+   "ref": {
+    "src": "fixture",
+    "checked": "2026-10-08"
+   }
+  }
+ ]
+}

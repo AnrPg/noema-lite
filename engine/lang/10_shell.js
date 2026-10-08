@@ -52,7 +52,7 @@ function flagRail(cid, current, onPick) {
 VIEWS.home = (v) => {
   const plan = N.planSession(UI.C, UI.L, { day: today(), minutes: UI.L.settings.minutes || 20 });
   const nRev = plan.steps.filter(s => s.kind === 'review').reduce((a, s) => a + s.items.length, 0);
-  const learn = plan.steps.find(s => s.kind === 'learn');
+  const learn = plan.steps.find(s => s.kind === 'learn'), lessons = plan.steps.filter(s => s.kind === 'lesson');
   const nNew = learn ? learn.concepts.reduce((a, c) => a + c.langs.length, 0) : 0;
   v.append(h('div', { class: 'lx-hero' },
     h('h1', {}, UI.C.data.course.title),
@@ -60,14 +60,19 @@ VIEWS.home = (v) => {
     h('div', { class: 'row' },
       h('button', { class: 'btn primary lx-go', disabled: !(nRev || nNew), onclick: () => runSession(plan) }, nRev || nNew ? `▶ Today's session — ${nRev} review${nRev === 1 ? '' : 's'} · ${nNew} new` : '✅ Nothing due — come back tomorrow'),
       learn ? h('span', { class: 'tiny' }, `new words from “${UI.C.nodes[learn.node].title}”, the same ideas in every language`) : null)));
-  v.append(h('h2', { class: 'lx-h2' }, '🗺️ The vocabulary map'), nodeList());
+  if (lessons.length) v.append(h('h2', { class: 'lx-h2' }, '🧱 Foundations — your next lesson'), h('div', { class: 'lx-lessons' }, ...lessons.map(st => {
+    const n = UI.C.nodes[st.node];
+    return h('div', { class: 'lx-card lx-lessonbtn', 'data-node': st.node }, h('div', {}, h('span', { class: 'lx-step' }, stepLabel(n)), ' ', h('b', {}, n.title), h('div', { class: 'tiny' }, st.langs.map(c => info(c).flag + ' ' + info(c).name).join(' · '))),
+      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onclick: () => go('#/lesson/' + st.node) }, 'Open'), h('button', { class: 'btn primary', onclick: () => runLesson(st.node, st.langs) }, '▶ Learn')));
+  })));
+  v.append(h('h2', { class: 'lx-h2' }, '🗺️ The map'), nodeList());
 };
 function nodeList() {
   const st = Object.fromEntries(UI.C.languages.map(c => [c, N.nodeStates(UI.C, UI.L, c)]));
-  return h('div', { class: 'lx-nodes' }, ...UI.C.order.map(nid => {
+  return h('div', { class: 'lx-nodes' }, ...UI.C.order.filter(nid => UI.C.nodes[nid].kind !== 'lesson' || activeLangs().some(c => LX(c).applies[nid])).map(nid => {
     const n = UI.C.nodes[nid];
-    return h('button', { class: 'lx-node', onclick: () => go('#/node/' + nid) },
-      h('div', { class: 'lx-nodetitle' }, h('b', {}, n.title), h('span', { class: 'tiny' }, `${n.concepts.length} ideas` + (n.prereqs?.length ? ' · after ' + n.prereqs.map(p => UI.C.nodes[p].title.split(' — ')[0]).join(', ') : ''))),
+    return h('button', { class: 'lx-node' + (n.kind === 'lesson' ? ' lx-lessonnode' : ''), onclick: () => go((n.kind === 'lesson' ? '#/lesson/' : '#/node/') + nid) },
+      h('div', { class: 'lx-nodetitle' }, h('b', {}, n.kind === 'lesson' ? h('span', { class: 'lx-step' }, stepLabel(n)) : null, n.kind === 'lesson' ? ' ' : null, n.title), h('span', { class: 'tiny' }, `${n.concepts.length} ideas` + (n.prereqs?.length ? ' · after ' + n.prereqs.map(p => UI.C.nodes[p].title.split(' — ')[0]).join(', ') : ''))),
       h('div', { class: 'lx-nodestates' }, ...UI.C.languages.map(c => h('span', { class: 'lx-ns ns-' + st[c][nid], title: `${info(c).name}: ${STATE_LABEL[st[c][nid]] || st[c][nid]}` }, info(c).flag, ' ', (STATE_LABEL[st[c][nid]] || st[c][nid])))));
   }));
 }

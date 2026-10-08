@@ -188,7 +188,8 @@
        "kind": {
         "enum": [
          "core",
-         "field"
+         "field",
+         "lesson"
         ]
        },
        "field": {
@@ -208,14 +209,55 @@
         "type": "array",
         "items": {
          "type": "string"
-        },
-        "minItems": 1
+        }
        },
        "prereqs": {
         "type": "array",
         "items": {
          "type": "string"
         }
+       },
+       "path": {
+        "enum": [
+         "isolating",
+         "agglutinating",
+         "fusional",
+         "polysynthetic"
+        ],
+        "description": "lessons: the path of the language type they belong to (D10)"
+       },
+       "langs": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "only these languages of the path (e.g. roots and patterns: ar, he)"
+       },
+       "functions": {
+        "description": "lessons: the grammar they teach — a list (every language) or {\"*\": [...], \"<type>\": [...], \"<language>\": [...]}",
+        "oneOf": [
+         {
+          "type": "array",
+          "items": {
+           "type": "string"
+          },
+          "minItems": 1
+         },
+         {
+          "type": "object",
+          "additionalProperties": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        ]
+       },
+       "step": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "lessons: the step of the foundations spine (S00–S18), the same in every path"
        }
       }
      }
@@ -300,7 +342,8 @@
     "name",
     "script",
     "dir",
-    "tokenJoin"
+    "tokenJoin",
+    "typology"
    ],
    "properties": {
     "code": {
@@ -371,6 +414,15 @@
       "pattern": "^(N|V|ADJ|ADV|PRON|DET|ADP|NUM|PART|CLF|AUX)(;[A-Z0-9]+)*$"
      },
      "description": "the cell whose form is the lemma, per POS or POS.class"
+    },
+    "typology": {
+     "enum": [
+      "isolating",
+      "agglutinating",
+      "fusional",
+      "polysynthetic"
+     ],
+     "description": "the morphological type → the path of foundation lessons (D10)"
     }
    }
   },
@@ -635,6 +687,89 @@
         "type": "string"
        }
       }
+     }
+    },
+    "quiz": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "q",
+       "options",
+       "answer",
+       "why"
+      ],
+      "properties": {
+       "q": {
+        "type": "string"
+       },
+       "options": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "minItems": 2
+       },
+       "answer": {
+        "type": "string"
+       },
+       "why": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "typology": {
+     "type": "object",
+     "required": [
+      "type",
+      "why"
+     ],
+     "properties": {
+      "type": {
+       "enum": [
+        "isolating",
+        "agglutinating",
+        "fusional",
+        "polysynthetic"
+       ]
+      },
+      "why": {
+       "type": "string"
+      },
+      "alsoShows": {
+       "type": "string"
+      }
+     }
+    },
+    "facts": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "label",
+       "value"
+      ]
+     }
+    },
+    "peculiarities": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "title",
+       "text"
+      ]
+     }
+    },
+    "forYou": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "lang",
+       "text"
+      ]
      }
     }
    }
@@ -1279,6 +1414,67 @@
      "type": "array",
      "items": {
       "type": "string"
+     }
+    }
+   }
+  },
+  "typology": {
+   "type": "object",
+   "required": [
+    "intro",
+    "types"
+   ],
+   "properties": {
+    "intro": {
+     "type": "string"
+    },
+    "spectrum": {
+     "type": "string"
+    },
+    "types": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "id",
+       "name",
+       "summary",
+       "examples"
+      ],
+      "properties": {
+       "id": {
+        "enum": [
+         "isolating",
+         "agglutinating",
+         "fusional",
+         "polysynthetic"
+        ]
+       },
+       "name": {
+        "type": "string"
+       },
+       "summary": {
+        "type": "string"
+       },
+       "learnFirst": {
+        "type": "string"
+       },
+       "languages": {
+        "type": "string"
+       },
+       "examples": {
+        "type": "array",
+        "minItems": 2,
+        "items": {
+         "type": "object",
+         "required": [
+          "lang",
+          "text",
+          "analysis"
+         ]
+        }
+       }
+      }
      }
     }
    }

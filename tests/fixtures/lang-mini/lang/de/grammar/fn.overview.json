@@ -1,0 +1,90 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "German is a West Germanic language, a close relative of English and Dutch. It is written in the Latin alphabet, has three genders and four cases, and puts the conjugated verb in second place.",
+ "typology": {
+  "type": "fusional",
+  "why": "One ending carries several meanings at once: dem = dative + singular + masculine or neuter; articles and adjectives change with gender, number and case.",
+  "alsoShows": "Compounds are built the agglutinating way: Gemüse + Suppe → die Gemüsesuppe (the last part decides the gender)."
+ },
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Indo-European › Germanic › West Germanic"
+  },
+  {
+   "label": "Script",
+   "value": "Latin alphabet with ä, ö, ü and ß; left to right"
+  },
+  {
+   "label": "Where",
+   "value": "Germany, Austria, Switzerland, Liechtenstein, Luxembourg, South Tyrol"
+  }
+ ],
+ "peculiarities": [
+  {
+   "title": "Three genders",
+   "text": "Every noun is der, die or das. Learn it with the noun: the gender often does not follow from the meaning (das Mädchen, the girl, is neuter)."
+  },
+  {
+   "title": "Four cases",
+   "text": "Nominative, accusative, dative and genitive: articles and adjective endings change with the role of the noun in the sentence."
+  },
+  {
+   "title": "The verb comes second",
+   "text": "In a main clause the conjugated verb is the second element: Heute esse ich Brot. A yes/no question starts with the verb."
+  },
+  {
+   "title": "Capital letters",
+   "text": "Every noun starts with a capital letter: das Haus, die Gurke."
+  }
+ ],
+ "forYou": [
+  {
+   "lang": "el",
+   "text": "Genders and cases will feel familiar from Greek, but the genders rarely match (ο ήλιος — die Sonne)."
+  },
+  {
+   "lang": "en",
+   "text": "Much basic vocabulary is shared (Haus — house, Wasser — water); the endings and the word order are the new part."
+  }
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is German mainly?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "fusional",
+   "why": "One ending carries several meanings at once (dem = dative + singular + masculine or neuter)."
+  },
+  {
+   "q": "How do you learn a German noun?",
+   "options": [
+    "with its article and its plural",
+    "alone — the gender follows from the meaning",
+    "only the singular"
+   ],
+   "answer": "with its article and its plural",
+   "why": "The gender and the plural are not predictable enough to guess."
+  },
+  {
+   "q": "Where is the conjugated verb in a main clause?",
+   "options": [
+    "first",
+    "second",
+    "last"
+   ],
+   "answer": "second",
+   "why": "Verb second: Heute esse ich Brot."
+  }
+ ]
+}

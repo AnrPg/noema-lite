@@ -1,0 +1,90 @@
+{
+ "function": "fn.overview",
+ "status": "realized",
+ "summary": "Mandarin Chinese is the standard language of China and Taiwan and has more native speakers than any other language. Words never change their form; tones distinguish meanings; it is written in characters, and pinyin is the Latin spelling used for learning.",
+ "typology": {
+  "type": "isolating",
+  "why": "No endings at all: 我吃, 他吃, 我们吃 — 吃 never changes. Time, number and questions are shown by separate words (了, 三个, 吗) and by word order.",
+  "alsoShows": "New words are mostly compounds of old ones: 电 ‘electric’ + 脑 ‘brain’ = 电脑 ‘computer’."
+ },
+ "facts": [
+  {
+   "label": "Family",
+   "value": "Sino-Tibetan › Sinitic"
+  },
+  {
+   "label": "Script",
+   "value": "Chinese characters — simplified (mainland China, Singapore) or traditional (Taiwan, Hong Kong); pinyin for pronunciation"
+  },
+  {
+   "label": "Where",
+   "value": "China, Taiwan, Singapore and Chinese communities worldwide"
+  }
+ ],
+ "peculiarities": [
+  {
+   "title": "Tones",
+   "text": "Every syllable has a tone: mā (high), má (rising), mǎ (low), mà (falling), ma (neutral). 妈 mā ‘mother’ and 马 mǎ ‘horse’ differ only in tone."
+  },
+  {
+   "title": "Measure words",
+   "text": "Between a number (or 这/那) and a noun comes a measure word: 一个人, 三本书."
+  },
+  {
+   "title": "No tenses",
+   "text": "Verbs do not change; time words (昨天) and particles (了, 过) say when and whether something happened."
+  },
+  {
+   "title": "Characters",
+   "text": "Each character is a syllable with a meaning; you learn them through the words that contain them."
+  }
+ ],
+ "forYou": [
+  {
+   "lang": "en",
+   "text": "The basic word order is subject–verb–object, as in English: 我吃苹果 = I eat apples."
+  },
+  {
+   "lang": "el",
+   "text": "The opposite of Greek: no genders, no cases, no endings — but tones and measure words instead."
+  }
+ ],
+ "generators": [
+  {
+   "type": "quiz"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which type is Chinese?",
+   "options": [
+    "isolating",
+    "agglutinating",
+    "fusional",
+    "polysynthetic"
+   ],
+   "answer": "isolating",
+   "why": "Words never change; grammar is word order and small separate words."
+  },
+  {
+   "q": "What tells 妈 mā ‘mother’ from 马 mǎ ‘horse’?",
+   "options": [
+    "the tone",
+    "an ending",
+    "the article"
+   ],
+   "answer": "the tone",
+   "why": "Same syllable, different tone."
+  },
+  {
+   "q": "What comes between a number and a noun?",
+   "options": [
+    "a measure word",
+    "a plural ending",
+    "nothing"
+   ],
+   "answer": "a measure word",
+   "why": "三个人 — sān gè rén."
+  }
+ ]
+}
