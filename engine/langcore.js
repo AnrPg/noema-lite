@@ -689,7 +689,9 @@
     }
     // 4 · one grammar function: the first (by "after") that is ready or thin in some language and not mastered there
     if (budget >= SECONDS.grammar && !lessons.length) {
-      const fns = Object.keys(C.functions).sort((a, b) => (C.functions[a].after || []).length - (C.functions[b].after || []).length || a.localeCompare(b));
+      // in the common order of the course (D13): where the function is taught, then by "after"
+      const at = {}; C.order.forEach((nid, i) => { const f = C.nodes[nid].functions || []; for (const x of (Array.isArray(f) ? f : Object.values(f).flat())) if (!(x in at)) at[x] = i; });
+      const fns = Object.keys(C.functions).sort((a, b) => (at[a] ?? 1e9) - (at[b] ?? 1e9) || (C.functions[a].after || []).length - (C.functions[b].after || []).length || a.localeCompare(b));
       outer: for (const fid of fns) for (const c of langs) {
         if (functionState(C, L, c, fid) === 'mastered') continue;
         const f = feasibility(C, L, c, fid, { k: K[c], minSentences: 1 });

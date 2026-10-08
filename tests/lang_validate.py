@@ -143,4 +143,27 @@ dd = tempfile.mkdtemp(); dst = os.path.join(dd, 'c'); shutil.copytree(MINI, dst)
 vs, vl = validate(dst, strict=True), validate(dst, strict=False); shutil.rmtree(dd)
 ok(any('missing file' in e for e in vs.errors) and not any('veg.2.json' in e for e in vl.errors) and any('not prepared yet' in w for w in vl.warns), 'unfinished course: “not prepared yet” is a warning, an error only with --strict')
 
+# ---------- the parallel order (D13): every subject common to several paths keeps the same place in all of them ----------
+from validate_lang import order_conflicts
+P = lambda name, s: (name, [(x, {x}) for x in s.split()])
+EX = [P('lang1', 'A B C D E'), P('lang2', 'A C D'), P('lang3', 'K L C M N O D E'), P('lang4', 'A L B N E')]   # the user's example
+ok(not order_conflicts(EX), 'parallel order: paths with extra or missing steps in between agree (the example of D13)')
+c = order_conflicts(EX + [P('lang5', 'A C B')])
+ok(len(c) == 1 and '“B” comes before “C” in lang1' in c[0], f'parallel order: two subjects in opposite orders → “{c[0] if c else "nothing"}”')
+c = order_conflicts([P('a', 'x y'), P('b', 'y z'), P('c', 'z x')])
+ok(len(c) == 1 and 'no common order exists' in c[0], f'parallel order: a circle through three paths → “{c[0] if c else "nothing"}”')
+ok(not order_conflicts([('a', [('s1', {'x', 'y'})]), P('b', 'y x')]), 'parallel order: two subjects of one step may come in any order elsewhere')
+expect('a grammar point earlier in one language', lambda J, d: J('core/nodes.json', lambda o: o['nodes'][0]['functions'].update(he=['fn.plural.noun'])),
+       'parallel order (D13): “grammar fn.plural.noun” comes before “grammar fn.definite” in lang-mini/he')
+# across courses: a new course must agree with every language already in the app (the courses next to it)
+dd = tempfile.mkdtemp(); a_, b_ = os.path.join(dd, 'a'), os.path.join(dd, 'b'); shutil.copytree(MINI, a_); shutil.copytree(MINI, b_)
+cj = json.load(open(os.path.join(b_, 'course.json'), encoding='utf-8')); cj['id'] = 'lang-mini-b'; json.dump(cj, open(os.path.join(b_, 'course.json'), 'w', encoding='utf-8'))
+nj = json.load(open(os.path.join(b_, 'core/nodes.json'), encoding='utf-8'))
+for n in nj['nodes']: n['prereqs'] = {'veg.1': ['fd.01x'], 'core.1': ['veg.1'], 'veg.2': ['core.1']}.get(n['id'], n['prereqs'])
+nj['nodes'].sort(key=lambda n: ['fd.00', 'fd.01', 'fd.01x', 'veg.1', 'core.1', 'veg.2'].index(n['id']))
+json.dump(nj, open(os.path.join(b_, 'core/nodes.json'), 'w', encoding='utf-8'))
+ea, ealone = validate(a_, strict=True).errors, validate(a_, strict=True, peers=[]).errors; shutil.rmtree(dd)
+hit = [e for e in ea if 'parallel order' in e and 'lang-mini-b/' in e]
+ok(bool(hit) and not any('parallel order' in e for e in ealone), f'parallel order across courses → “{hit[0][:160] if hit else ea[:2]}”')
+
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

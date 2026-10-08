@@ -7,6 +7,10 @@ the frames of their sentences and core/typology.json. The vegetables (and later 
 
 Rerunning it rewrites those files (and moves nothing else); the words already written for a concept stay valid,
 because lexicon files refer to concepts — only the node a concept belongs to may change (then move the lexeme).
+
+HARD CONSTRAINT (D13, docs/LANGUAGES.md §4.4.3): every language path of the app keeps one common order of the subjects
+(nodes, grammar functions, concepts). A step, a word or a function moved here moves for ALL languages of all courses;
+analyse every path first. tools/validate_lang.py fails on any pair of subjects in opposite orders, across the courses.
 """
 import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))

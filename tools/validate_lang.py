@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Validate a language course (docs/LANGUAGES.md §4 and §11). No network, no dependencies.
 
-  python3 tools/validate_lang.py <course-dir> [--lang de] [--strict] [--json] [--batch fd.00,fd.01]
+  python3 tools/validate_lang.py <course-dir> [--lang de] [--strict] [--json] [--batch fd.00,fd.01] [--alone]
 
 Without --strict a course may be unfinished: a node without its lexicon file in a language is “not prepared yet”
 and a frame without a sentence is reported as a warning. --strict (the tests, a finished course) makes both errors.
 --lang checks one language only (the language-neutral core is always checked).
 --batch: while a content batch is written, only the listed nodes must have a word (or an absent entry) for every concept.
+The parallel order (D13, a hard constraint) is checked against every language of this course, the path of every
+language type, and every language of the other courses in the same folder (library/languages/*); --alone skips the others.
 
 Exit 0 when valid, 1 with the list of problems otherwise. Every check here has a negative test in tests/lang_validate.py.
 """
@@ -57,6 +59,93 @@ def topo_order(nodes):
 def applies(n, L, typ):
     """Does node n apply to language L (of morphological type typ)? (§4.4)"""
     return (not n.get('path') or n['path'] == typ) and (not n.get('langs') or L in n['langs'])
+
+
+# ---------- the parallel order (D13, §4.4.3) — a hard constraint across every language of every course ----------
+def course_paths(root, label=None):
+    """The teaching path of every language of the course at root, and the path of every language type (the path a
+    language still to come would walk): [(name, [(node id, {items})])]. An item is a subject — "node X", "grammar
+    fn.Y", "word Z" (a concept) — in the step where the path teaches it first."""
+    J = lambda rel: json.load(open(os.path.join(root, rel), encoding='utf-8'))
+    course = J('course.json'); nodes = {n['id']: n for n in J('core/nodes.json').get('nodes', []) if n.get('id')}
+    label = label or course.get('id') or os.path.basename(root)
+    holders = []
+    for L in course.get('languages') or []:
+        try: typ = J(f'lang/{L}/language.json').get('typology')
+        except (OSError, ValueError): continue
+        holders.append((f'{label}/{L}', L, typ))
+    holders += [(f'{label}/{t} type', None, t) for t in sorted(TYPOLOGIES)]
+    order = topo_order(nodes); out = []
+    for name, L, typ in holders:
+        seen, steps = set(), []
+        for nid in order:
+            n = nodes[nid]
+            if not applies(n, L, typ): continue
+            g = {'node ' + nid} | {'grammar ' + f for f in lesson_functions(n, L, typ)} | {'word ' + c for c in n.get('concepts') or []}
+            g -= seen; seen |= g
+            steps.append((nid, g))
+        out.append((name, steps))
+    return out
+
+
+def order_conflicts(paths, mine=None, limit=12):
+    """Pairs of subjects taught in opposite orders by two paths, then cycles through three or more paths (no common
+    order exists at all). mine: report only conflicts that involve a path whose name starts with it. → [message]"""
+    pos = []
+    for _, steps in paths:
+        p = {}
+        for i, (nid, g) in enumerate(steps):
+            for x in g: p[x] = (i, nid)
+        pos.append(p)
+    found = {}
+    for a in range(len(paths)):
+        for b in range(a + 1, len(paths)):
+            if mine and not (paths[a][0].startswith(mine) or paths[b][0].startswith(mine)): continue
+            A, B = pos[a], pos[b]
+            common = sorted((x for x in A if x in B), key=lambda x: (A[x][0], B[x][0]))
+            best, i = None, 0   # best: the item of an earlier step of A that comes latest in B
+            while i < len(common):
+                j = i
+                while j < len(common) and A[common[j]][0] == A[common[i]][0]: j += 1
+                for y in common[i:j]:
+                    if best and B[y][0] < B[best][0]:
+                        key = (best, y)
+                        if key not in found: found[key] = f'“{best}” comes before “{y}” in {paths[a][0]} ({A[best][1]} → {A[y][1]}) but after it in {paths[b][0]} ({B[y][1]} → {B[best][1]})'
+                for y in common[i:j]:
+                    if best is None or B[y][0] > B[best][0]: best = y
+                i = j
+    msgs = list(found.values())
+    if not msgs:   # no pair disagrees — but three paths can still go round in a circle (x < y, y < z, z < x)
+        succ = {}
+        for k, (name, steps) in enumerate(paths):
+            for i, (nid, g) in enumerate(steps):
+                sep = ('step', k, i)
+                for x in g: succ.setdefault(x, set()).add(sep)
+                if i + 1 < len(steps): succ.setdefault(sep, set()).update(steps[i + 1][1])
+        state = {}
+        for start in list(succ):
+            if state.get(start): continue
+            stack = [(start, iter(succ.get(start, ())))]; state[start] = 1; trail = [start]
+            while stack:
+                x, it = stack[-1]; nxt = next(it, None)
+                if nxt is None: state[x] = 2; stack.pop(); trail.pop(); continue
+                if state.get(nxt) == 1:
+                    cyc = [t for t in trail[trail.index(nxt):] if isinstance(t, str)]
+                    return [f'no common order exists: {" → ".join(cyc + [cyc[0]])} (each step of the circle comes from a different path)']
+                if not state.get(nxt): state[nxt] = 1; stack.append((nxt, iter(succ.get(nxt, ())))); trail.append(nxt)
+    return msgs[:limit] + ([f'… and {len(msgs) - limit} more'] if len(msgs) > limit else [])
+
+
+def peer_courses(root):
+    """The other language courses of the app: the course folders next to this one (library/languages/*)."""
+    up = os.path.dirname(os.path.abspath(root)); out = []
+    for d in sorted(os.listdir(up)) if os.path.isdir(up) else []:
+        p = os.path.join(up, d)
+        if os.path.abspath(p) == os.path.abspath(root) or not os.path.exists(os.path.join(p, 'course.json')): continue
+        try:
+            if json.load(open(os.path.join(p, 'course.json'), encoding='utf-8')).get('format') == 'noema.langcourse/v1': out.append(p)
+        except (OSError, ValueError): pass
+    return out
 CONTENT_POS = {'NOUN', 'VERB', 'ADJ', 'ADV'}   # words that get a full profile (§4.6)
 REGISTERS = {'neutral', 'formal', 'informal', 'colloquial', 'slang', 'vulgar', 'literary', 'poetic', 'technical', 'scientific', 'children',
              'regional', 'dialectal', 'archaic', 'obsolete', 'dated', 'euphemistic', 'humorous', 'pejorative', 'honorific', 'religious'}
@@ -181,7 +270,8 @@ def need_str(v, where, obj, key):
     if not (isinstance(obj.get(key), str) and obj[key].strip()): v.E(where, f'“{key}” is required (text)')
 
 
-def validate(root, only=None, strict=True, batch=None):
+def validate(root, only=None, strict=True, batch=None, peers=None):
+    """peers: the other courses whose language paths this one must agree with (D13); default: the course folders next to it."""
     v = V(root)
     course = v.load('course.json')
     if not course: return v
@@ -297,6 +387,17 @@ def validate(root, only=None, strict=True, batch=None):
                 if len(t.get('examples') or []) < 2: v.E(tw, 'at least 2 examples')
                 for e in t.get('examples') or []:
                     for k in ('lang', 'text', 'analysis'): need_str(v, tw + ' · example', e, k)
+
+    # ---------- the parallel order (D13): one common order of the subjects for every language of every course ----------
+    if nd:
+        try:
+            paths = course_paths(root, course.get('id'))
+            for p in (peer_courses(root) if peers is None else peers):
+                try: paths += course_paths(p)
+                except (OSError, ValueError, KeyError) as e: v.W(f'course {os.path.basename(p)}', f'not read for the parallel order: {e}')
+            for m in order_conflicts(paths, mine=(course.get('id') or '') + '/'):
+                v.E('parallel order (D13)', m + ' — a subject common to several paths keeps the same place in all of them; move it in every language (docs/LANGUAGES.md §4.4.3)')
+        except (OSError, ValueError, KeyError) as e: v.E('parallel order (D13)', f'cannot read the paths: {e}')
 
     # ---------- every language ----------
     for L in langs:
@@ -569,7 +670,8 @@ def validate(root, only=None, strict=True, batch=None):
 def main(a):
     if not a: print(__doc__); sys.exit(2)
     batch = set(a[a.index('--batch') + 1].split(',')) if '--batch' in a else None   # a content batch in progress: only these nodes must be complete
-    v = validate(a[0], a[a.index('--lang') + 1] if '--lang' in a else None, '--strict' in a, batch)
+    peers = [] if '--alone' in a else None   # --alone: skip the comparison with the other courses (D13)
+    v = validate(a[0], a[a.index('--lang') + 1] if '--lang' in a else None, '--strict' in a, batch, peers)
     if '--json' in a: print(json.dumps({'errors': v.errors, 'warnings': v.warns}, ensure_ascii=False, indent=1))
     else:
         for e in v.errors: print('❌', e)
