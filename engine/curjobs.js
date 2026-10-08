@@ -165,7 +165,7 @@
     const at = e.at || new Date().toISOString();
     n.pack = { id: e.packId, status: 'ready', assigned: { from: e.from || 'claude', at }, title: e.title || e.packId, description: e.description || '', outline: e.outline || [], ...(e.sections ? { sections: e.sections, exercises: e.exercises || 0, chapters: e.chapters || 0 } : {}) };
     n.assignedAt = at; if (c.shared && !c.shared.ended && !n.groupPlan) n.groupPlan = C().planOf(n);
-    if (n.chapters?.length || c.stage === 'done') { n.replan = true; n.replanAt = at; n.planFrom = 'pack'; } delete n.reviewed;
+    if (n.chapters?.length || c.stage === 'done') { n.replan = true; n.replanAt = C().stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; } delete n.reviewed;
     if (c.stage === 'done') c.stage = 'plan';
   }
   const inboxKey = (cid, seq) => `${IN}${cid}:${seq || Date.now().toString(36).padStart(9, '0') + '-' + Math.random().toString(36).slice(2, 6)}`;

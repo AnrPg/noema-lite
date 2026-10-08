@@ -962,7 +962,7 @@ window.NoemaCurriculum.Edit = (() => {
     n.assignedAt = at;
     if (c.shared && !c.shared.ended && !n.groupPlan) n.groupPlan = C.planOf(n);   // 👥 shared: the new plan is mine only — the group keeps the step's shared plan
     const replan = !!n.chapters?.length || c.stage === 'done';   // while the map is being created, the plan stage plans it with the others
-    if (replan) { n.replan = true; n.replanAt = at; n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan'; }   // only this step: its plan now follows the pack
+    if (replan) { n.replan = true; n.replanAt = C.stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan'; }   // only this step: its plan now follows the pack
     (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${n.title}” is now taught by “${n.pack.title}”${replan ? ' — re-planning this step' : ''}` });
     C.save(acc, c);
     if (old) toShelf(acc, cid, nid, old);
@@ -975,9 +975,8 @@ window.NoemaCurriculum.Edit = (() => {
     let k = 0; const chapters = pack?.chapters || []; if (!chapters.length) return 0;
     for (const { c: c0, nid } of C.stepsOf(acc, subjectId)) {
       const c = C.get(acc, c0.id), n = c?.nodes[nid]; if (!n?.pack?.assigned || n.pack.id !== subjectId || (n.pack.version || null) === (pack.version || null)) continue;
-      const at = new Date().toISOString();
       n.pack = { ...n.pack, version: pack.version || null, sections: chapters.flatMap(ch => (ch.sections || []).map(x => x.id)), exercises: chapters.reduce((a, ch) => a + (ch.exercises || []).length, 0), chapters: chapters.length, outline: C.outlineOf(pack) };
-      n.replan = true; n.replanAt = at; n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan';
+      n.replan = true; n.replanAt = C.stampAfter(n.plannedAt, n.replanAt); n.planFrom = 'pack'; delete n.reviewed; if (c.stage === 'done') c.stage = 'plan';
       (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${n.pack.title}” has a new version — re-planning “${n.title}”` });
       C.save(acc, c); k++;
     }
@@ -992,7 +991,7 @@ window.NoemaCurriculum.Edit = (() => {
     n.pack = null; n.assignedAt = at; delete n.planFrom; delete n.reviewed;
     const group = !!n.groupPlan;
     if (group) { C.setPlan(n, n.groupPlan); delete n.groupPlan; delete n.replan; }   // 👥 shared: back to the group's plan (and its prepared step)
-    else { if (n.chapters?.length) { n.replan = true; n.replanAt = at; } else delete n.replan; if (c.stage === 'done') c.stage = 'plan'; }
+    else { if (n.chapters?.length) { n.replan = true; n.replanAt = C.stampAfter(n.plannedAt, n.replanAt); } else delete n.replan; if (c.stage === 'done') c.stage = 'plan'; }
     (c.log = c.log || []).push({ t: Date.now(), m: `📦 “${title}” taken off “${n.title}”` });
     C.save(acc, c); window.NoemaCloud?.session?.() && window.NoemaCloud.push(acc).catch(() => { });
     return { ok: true, group };
