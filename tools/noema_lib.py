@@ -266,7 +266,7 @@ def package_sources(sdir, sources, chapters, base_ids=()):
                 if fn.startswith('.'): continue
                 p = os.path.normcase(os.path.abspath(os.path.join(root, fn)))
                 if p not in used_paths:
-                    errs.append(f'ERROR {os.path.relpath(os.path.join(root, fn), sdir)}: no source in sources.json points to this file — every file the learner gave (or each part of a split PDF) needs its own source with "file": "sources/{fn}"; remove files that are not sources (e.g. the unsplit original when you use its parts)')
+                    errs.append(f'ERROR {os.path.relpath(os.path.join(root, fn), sdir).replace(os.sep, "/")}: no source in sources.json points to this file — every file the learner gave (or each part of a split PDF) needs its own source with "file": "sources/{fn}"; remove files that are not sources (e.g. the unsplit original when you use its parts)')
     for ch, src in (out.get('chapters') or {}).items():
         if src not in ids: errs.append(f'ERROR sources.json: chapter {ch} → unknown source "{src}"')
     for c in chapters:
