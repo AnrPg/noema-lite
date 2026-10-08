@@ -1,0 +1,58 @@
+{
+ "function": "fn.negation",
+ "status": "realized",
+ "summary": "לֹא (lo) negates a verb, an adjective, an adverb or a whole predicate and stands directly before it: הוּא לֹא אוֹהֵב חֲצִילִים, הַבָּצָל לֹא פֹּה. In the present tense, “there isn’t / I don’t have” is אֵין (the opposite of יֵשׁ): אֵין לִי גֶּזֶר. Prohibitions use אַל + future (אַל תִּקְנֶה!). The answer “no” is also לֹא.",
+ "procedure": {
+  "askYourself": [
+   "Is it “there is no …” or “… doesn’t have …” in the present? → אֵין (never *לֹא יֵשׁ).",
+   "Is it a past or future possession/existence? → לֹא הָיָה / לֹא יִהְיֶה.",
+   "Otherwise: put לֹא immediately before the verb, adjective or predicate.",
+   "Is it a command not to do something? → אַל + future.",
+   "Is there a negative word like כְּלוּם (nothing)? → you still need לֹא."
+  ]
+ },
+ "traps": [
+  "*לֹא יֵשׁ is wrong — say אֵין: אֵין לִי זְמַן.",
+  "לֹא goes before the verb, not after it: הִיא לֹא אוֹכֶלֶת.",
+  "Double negation is normal: אֲנִי לֹא רוֹצֶה כְּלוּם.",
+  "The answer “no” and the negation “not” are the same word: לֹא, אֲנִי לֹא רוֹצֶה.",
+  "אֵין negates only the present; for the past use לֹא הָיָה / לֹא הָיְתָה."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:lo",
+   "he:ein"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "VERB": 2,
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "contrast",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  }
+ ]
+}

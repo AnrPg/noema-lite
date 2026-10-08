@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Validate a language course (docs/LANGUAGES.md §4 and §11). No network, no dependencies.
 
-  python3 tools/validate_lang.py <course-dir> [--json]
+  python3 tools/validate_lang.py <course-dir> [--lang de] [--strict] [--json]
+
+Without --strict a course may be unfinished: a node without its lexicon file in a language is “not prepared yet”
+and a frame without a sentence is reported as a warning. --strict (the tests, a finished course) makes both errors.
+--lang checks one language only (the language-neutral core is always checked).
 
 Exit 0 when valid, 1 with the list of problems otherwise. Every check here has a negative test in tests/lang_validate.py.
 """
@@ -145,7 +149,7 @@ def need_str(v, where, obj, key):
     if not (isinstance(obj.get(key), str) and obj[key].strip()): v.E(where, f'“{key}” is required (text)')
 
 
-def validate(root):
+def validate(root, only=None, strict=True):
     v = V(root)
     course = v.load('course.json')
     if not course: return v
@@ -234,6 +238,7 @@ def validate(root):
 
     # ---------- every language ----------
     for L in langs:
+        if only and L != only: continue
         lw = f'lang/{L}'
         lj = v.load(f'{lw}/language.json')
         if not lj: continue
@@ -250,6 +255,8 @@ def validate(root):
         lex = {}
         for nid, n in nodes.items():
             where = f'{lw}/lexicon/{nid}.json'
+            if not strict and not os.path.exists(os.path.join(root, where)):
+                v.W(where, 'not prepared yet'); continue
             d = v.load(where)
             if d is None: continue
             covered = set()
@@ -301,7 +308,8 @@ def validate(root):
                     if not x.get('trad') or len(x['trad']) != len(lemma): v.E(w, 'the traditional form (trad) is required, with as many characters as the lemma')
                     syl = pinyin_split(x.get('pinyin', ''))
                     if not syl: v.E(w, 'pinyin is required (syllables separated by spaces)')
-                    elif len(syl) != len(lemma): v.E(w, f'{len(syl)} pinyin syllables for {len(lemma)} characters')
+                    elif len(syl) != len(lemma) - (1 if lemma.endswith('儿') and syl[-1].endswith('r') and len(lemma) > 1 else 0):   # erhua: 哪儿 nǎr
+                        v.E(w, f'{len(syl)} pinyin syllables for {len(lemma)} characters')
                     for s in syl:
                         for e in pinyin_syllable_errors(s): v.E(w, e)
                     if x.get('pos') == 'NOUN' and not x.get('measure'): v.E(w, 'a noun needs its measure word(s) (measure)')
@@ -327,7 +335,7 @@ def validate(root):
                 for e in cell_errors(c, extra): v.E(where, f'{c}: {e}')
             if g.get('status') != 'absent':
                 ev = g.get('evidence') or {}
-                if not (ev.get('tags') or ev.get('lemmas')): v.E(where, 'evidence (tags or lemmas) is required: how a sentence shows this function')
+                if not (ev.get('tags') or ev.get('lemmas') or ev.get('punct')): v.E(where, 'evidence (tags, lemmas or punct) is required: how a sentence shows this function')
                 for l in ev.get('lemmas') or []:
                     if l not in lex: v.E(where, f'evidence lemma “{l}” is not in the lexicon')
                 if not (g.get('procedure') or {}).get('askYourself'): v.E(where, 'procedure.askYourself (the “ask yourself” checklist) is required')
@@ -348,6 +356,7 @@ def validate(root):
                 if forms: v.E(w, f'“{l}” is inflected: the cell (f) is required'); return [(l, None)]
                 want = x.get('lemma')
             got = k.get('t')
+            if not f and got in (x.get('alts') or []): return [(l, f)]   # another spelling of an invariant word (וּ for וְ)
             if got != want and not (first and lj.get('capitalizeFirst') and got == cap_first(want)):
                 v.E(w, f'“{got}” is not the {f or "lemma"} form of {l} (“{want}”)')
             return [(l, f)]
@@ -378,7 +387,8 @@ def validate(root):
                     g = grams.get(fid) or {}
                     if g.get('status') == 'absent': v.E(w, f'{fid} is absent in {L}; a sentence cannot show it'); continue
                     ev = g.get('evidence') or {}
-                    ok = any(l in (ev.get('lemmas') or []) for l, _ in used) or any(f and all(t in cell_parts(f) for t in ev.get('tags') or ['∅']) for _, f in used)
+                    ok = (any(l in (ev.get('lemmas') or []) for l, _ in used) or any(f and all(t in cell_parts(f) for t in ev.get('tags') or ['∅']) for _, f in used)
+                          or any(k.get('p') and k.get('t') in (ev.get('punct') or []) for k in toks))   # e.g. a question mark
                     if not ok: v.E(w, f'listed as {fid}, but no word shows it (evidence {ev})')
         for sid, s in sids.items():
             vo = s.get('variantOf')
@@ -387,7 +397,7 @@ def validate(root):
                 elif sids[vo].get('frame') != s.get('frame'): v.E(f'{lw}/bank · {sid}', 'a variant must have the frame of its original')
                 if not s.get('variant'): v.E(f'{lw}/bank · {sid}', 'a variant must say what changed (variant)')
         for fid, f in frames.items():
-            if fid not in realized and L not in (f.get('absent') or {}): v.E(f'{lw}/bank', f'frame “{fid}” has no sentence in {L}')
+            if fid not in realized and L not in (f.get('absent') or {}): (v.E if strict else v.W)(f'{lw}/bank', f'frame “{fid}” has no sentence in {L}')
     for x in os.listdir(os.path.join(root, 'lang')) if os.path.isdir(os.path.join(root, 'lang')) else []:
         if x not in langs: v.W(f'lang/{x}', 'not a course language (ignored)')
     return v
@@ -395,7 +405,7 @@ def validate(root):
 
 def main(a):
     if not a: print(__doc__); sys.exit(2)
-    v = validate(a[0])
+    v = validate(a[0], a[a.index('--lang') + 1] if '--lang' in a else None, '--strict' in a)
     if '--json' in a: print(json.dumps({'errors': v.errors, 'warnings': v.warns}, ensure_ascii=False, indent=1))
     else:
         for e in v.errors: print('❌', e)

@@ -1,0 +1,118 @@
+{
+ "code": "ar",
+ "name": "Arabic",
+ "nativeName": "العربية",
+ "script": "Arab",
+ "dir": "rtl",
+ "tokenJoin": "space",
+ "capitalizeFirst": false,
+ "vowelMarks": true,
+ "romanization": "din31635",
+ "citationCells": {
+  "VERB": "V;PST;3;SG;MASC",
+  "VERB.defective": "V;PFV;3;SG;MASC",
+  "PRON": "PRON;NOM",
+  "PRON.dem": "PRON;SG;MASC",
+  "ADP": "ADP"
+ },
+ "paradigmCells": {
+  "NOUN": [
+   "N;NOM;SG;INDF",
+   "N;NOM;SG;DEF",
+   "N;ACC;SG;INDF",
+   "N;ACC;SG;DEF",
+   "N;GEN;SG;INDF",
+   "N;GEN;SG;DEF",
+   "N;NOM;PL;INDF",
+   "N;NOM;PL;DEF",
+   "N;ACC;PL;INDF",
+   "N;ACC;PL;DEF",
+   "N;GEN;PL;INDF",
+   "N;GEN;PL;DEF"
+  ],
+  "NOUN.collective": [
+   "N;NOM;COLL;INDF",
+   "N;NOM;COLL;DEF",
+   "N;ACC;COLL;INDF",
+   "N;ACC;COLL;DEF",
+   "N;GEN;COLL;INDF",
+   "N;GEN;COLL;DEF",
+   "N;NOM;SG;INDF",
+   "N;NOM;SG;DEF",
+   "N;ACC;SG;INDF",
+   "N;ACC;SG;DEF",
+   "N;GEN;SG;INDF",
+   "N;GEN;SG;DEF",
+   "N;NOM;PL;INDF",
+   "N;NOM;PL;DEF",
+   "N;ACC;PL;INDF",
+   "N;ACC;PL;DEF",
+   "N;GEN;PL;INDF",
+   "N;GEN;PL;DEF"
+  ],
+  "NOUN.mass": [
+   "N;NOM;SG;INDF",
+   "N;NOM;SG;DEF",
+   "N;ACC;SG;INDF",
+   "N;ACC;SG;DEF",
+   "N;GEN;SG;INDF",
+   "N;GEN;SG;DEF"
+  ],
+  "VERB": [
+   "V;PST;1;SG",
+   "V;PST;2;SG;MASC",
+   "V;PST;2;SG;FEM",
+   "V;PST;3;SG;MASC",
+   "V;PST;3;SG;FEM",
+   "V;PST;1;PL",
+   "V;PST;2;PL;MASC",
+   "V;PST;2;PL;FEM",
+   "V;PST;3;PL;MASC",
+   "V;PST;3;PL;FEM",
+   "V;PRS;IND;1;SG",
+   "V;PRS;IND;2;SG;MASC",
+   "V;PRS;IND;2;SG;FEM",
+   "V;PRS;IND;3;SG;MASC",
+   "V;PRS;IND;3;SG;FEM",
+   "V;PRS;IND;1;PL",
+   "V;PRS;IND;2;PL;MASC",
+   "V;PRS;IND;2;PL;FEM",
+   "V;PRS;IND;3;PL;MASC",
+   "V;PRS;IND;3;PL;FEM"
+  ],
+  "VERB.defective": [
+   "V;PFV;1;SG",
+   "V;PFV;2;SG;MASC",
+   "V;PFV;2;SG;FEM",
+   "V;PFV;3;SG;MASC",
+   "V;PFV;3;SG;FEM",
+   "V;PFV;1;PL",
+   "V;PFV;2;PL;MASC",
+   "V;PFV;2;PL;FEM",
+   "V;PFV;3;PL;MASC",
+   "V;PFV;3;PL;FEM"
+  ],
+  "PRON": [
+   "PRON;NOM"
+  ],
+  "PRON.dem": [
+   "PRON;SG;MASC",
+   "PRON;SG;FEM",
+   "PRON;PL"
+  ],
+  "PRON.int": [],
+  "ADP": [
+   "ADP",
+   "ADP;1;SG",
+   "ADP;2;SG;MASC",
+   "ADP;2;SG;FEM",
+   "ADP;3;SG;MASC",
+   "ADP;3;SG;FEM",
+   "ADP;1;PL",
+   "ADP;2;PL;MASC",
+   "ADP;2;PL;FEM",
+   "ADP;3;PL;MASC",
+   "ADP;3;PL;FEM"
+  ]
+ }
+}

@@ -1,0 +1,2407 @@
+{
+ "sentences": [
+  {
+   "id": "he.s.001",
+   "frame": "fr.eat.def",
+   "text": "הוּא אוֹכֵל אֶת הָעַגְבָנִיָּה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָעַגְבָנִיָּה",
+     "l": "he:agvaniya",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the tomato.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.002",
+   "frame": "fr.eat.def",
+   "text": "הוּא אוֹכֵל אֶת הָעַגְבָנִיּוֹת.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הָעַגְבָנִיּוֹת",
+     "l": "he:agvaniya",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "He eats the tomatoes.",
+   "variantOf": "he.s.001",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.003",
+   "frame": "fr.eat.def",
+   "text": "אֲנִי אוֹכֶלֶת אֶת הַגֶּזֶר.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַגֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "I (f.) eat the carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.004",
+   "frame": "fr.eat.def",
+   "text": "הֵם אוֹכְלִים אֶת הַמְּלָפְפוֹן.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "אוֹכְלִים",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַמְּלָפְפוֹן",
+     "l": "he:melafefon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "They eat the cucumber.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.005",
+   "frame": "fr.eat.def",
+   "text": "אֲנַחְנוּ אוֹכְלוֹת אֶת הַחַסָּה.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אוֹכְלוֹת",
+     "l": "he:akhal",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַחַסָּה",
+     "l": "he:chasa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "We (f.) eat the lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.006",
+   "frame": "fr.eat.def",
+   "text": "הִיא אוֹכֶלֶת אֶת הֶחָצִיל וְאֶת הַבָּצָל.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הֶחָצִיל",
+     "l": "he:chatsil",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "וְאֶת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "אֶת",
+       "l": "he:et"
+      }
+     ]
+    },
+    {
+     "t": "הַבָּצָל",
+     "l": "he:batsal",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She eats the eggplant and the onion.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.007",
+   "frame": "fr.eat.def",
+   "text": "הִיא אוֹכֶלֶת אֶת הַצְּנוֹן.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַצְּנוֹן",
+     "l": "he:tsnon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She eats the radish.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.008",
+   "frame": "fr.eat.def",
+   "text": "הִיא לֹא אוֹכֶלֶת אֶת הַצְּנוֹן.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹכֶלֶת",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַצְּנוֹן",
+     "l": "he:tsnon",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "She doesn’t eat the radish.",
+   "variantOf": "he.s.007",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.009",
+   "frame": "fr.buy.indef",
+   "text": "אֲנִי קוֹנֶה כְּרוּב.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "כְּרוּב",
+     "l": "he:kruv",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I (m.) buy a cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.010",
+   "frame": "fr.buy.indef",
+   "text": "אֲנִי קוֹנֶה כְּרוּבִים.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "כְּרוּבִים",
+     "l": "he:kruv",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "I (m.) buy cabbages.",
+   "variantOf": "he.s.009",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.011",
+   "frame": "fr.buy.indef",
+   "text": "הִיא קוֹנָה חַסָּה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "חַסָּה",
+     "l": "he:chasa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She buys a lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.012",
+   "frame": "fr.buy.indef",
+   "text": "הִיא קוֹנָה אֶת הַחַסָּה.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "הַחַסָּה",
+     "l": "he:chasa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "She buys the lettuce.",
+   "variantOf": "he.s.011",
+   "variant": {
+    "Definiteness": "DEF"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.013",
+   "frame": "fr.buy.indef",
+   "text": "אֲנַחְנוּ קוֹנִים דְּלַעַת.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "קוֹנִים",
+     "l": "he:kana",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "דְּלַעַת",
+     "l": "he:dlaat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We buy a pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.014",
+   "frame": "fr.buy.indef",
+   "text": "הֵן קוֹנוֹת כְּרוּבִית.",
+   "tokens": [
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "קוֹנוֹת",
+     "l": "he:kana",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "כְּרוּבִית",
+     "l": "he:kruvit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They (f.) buy a cauliflower.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.015",
+   "frame": "fr.buy.indef",
+   "text": "הוּא קוֹנֶה פִּלְפֵּל וְעַגְבָנִיָּה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "קוֹנֶה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "פִּלְפֵּל",
+     "l": "he:pilpel",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְעַגְבָנִיָּה",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "עַגְבָנִיָּה",
+       "l": "he:agvaniya",
+       "f": "N;SG;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "He buys a pepper and a tomato.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.016",
+   "frame": "fr.buy.indef",
+   "text": "אַתְּ קוֹנָה בָּטָטוֹת.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "בָּטָטוֹת",
+     "l": "he:batata",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "You (f.) buy sweet potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.017",
+   "frame": "fr.like.generic",
+   "text": "אֲנִי אוֹהֵב מְלָפְפוֹנִים.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "מְלָפְפוֹנִים",
+     "l": "he:melafefon",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "I (m.) like cucumbers.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.018",
+   "frame": "fr.like.generic",
+   "text": "הִיא אוֹהֶבֶת חֲצִילִים.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "חֲצִילִים",
+     "l": "he:chatsil",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "She likes eggplants.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.019",
+   "frame": "fr.like.generic",
+   "text": "אֲנַחְנוּ אוֹהֲבִים בָּטָטוֹת.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "בָּטָטוֹת",
+     "l": "he:batata",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "We like sweet potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.020",
+   "frame": "fr.like.generic",
+   "text": "הֵן אוֹהֲבוֹת אֲפוּנָה.",
+   "tokens": [
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "אוֹהֲבוֹת",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "אֲפוּנָה",
+     "l": "he:afuna",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "They (f.) like peas.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.021",
+   "frame": "fr.like.generic",
+   "text": "כֵּן, אֲנִי אוֹהֵב סֶלֶק.",
+   "tokens": [
+    {
+     "t": "כֵּן",
+     "l": "he:ken"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "סֶלֶק",
+     "l": "he:selek",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "Yes, I (m.) like beetroot.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.022",
+   "frame": "fr.like.generic",
+   "text": "אַתָּה אוֹהֵב קִשּׁוּאִים.",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "קִשּׁוּאִים",
+     "l": "he:kishu",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "You (m.) like zucchini.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.023",
+   "frame": "fr.notlike.generic",
+   "text": "הוּא לֹא אוֹהֵב חֲצִילִים.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֵב",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "חֲצִילִים",
+     "l": "he:chatsil",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "gloss": "He doesn’t like eggplants.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.024",
+   "frame": "fr.notlike.generic",
+   "text": "אֲנִי לֹא אוֹהֶבֶת כְּרוּב.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "כְּרוּב",
+     "l": "he:kruv",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I (f.) don’t like cabbage.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.025",
+   "frame": "fr.notlike.generic",
+   "text": "הֵם לֹא אוֹהֲבִים צְנוֹנִים.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "צְנוֹנִים",
+     "l": "he:tsnon",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "gloss": "They don’t like radishes.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.026",
+   "frame": "fr.notlike.generic",
+   "text": "אֲנַחְנוּ לֹא אוֹהֲבוֹת כְּרֵשִׁים.",
+   "tokens": [
+    {
+     "t": "אֲנַחְנוּ",
+     "l": "he:anachnu"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֲבוֹת",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "כְּרֵשִׁים",
+     "l": "he:kresha",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation",
+    "fn.plural.noun"
+   ],
+   "gloss": "We (f.) don’t like leeks.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.027",
+   "frame": "fr.notlike.generic",
+   "text": "הִיא לֹא אוֹהֶבֶת שׁוּם וְלֹא בָּצָל.",
+   "tokens": [
+    {
+     "t": "הִיא",
+     "l": "he:hi"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "שׁוּם",
+     "l": "he:shum",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְלֹא",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "לֹא",
+       "l": "he:lo"
+      }
+     ]
+    },
+    {
+     "t": "בָּצָל",
+     "l": "he:batsal",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "She likes neither garlic nor onion.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.028",
+   "frame": "fr.notlike.generic",
+   "text": "לֹא, אֲנִי לֹא אוֹהֶבֶת תֶּרֶד.",
+   "tokens": [
+    {
+     "t": "לֹא",
+     "l": "he:lo-no"
+    },
+    {
+     "t": ",",
+     "p": true
+    },
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "תֶּרֶד",
+     "l": "he:tered",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "No, I (f.) don’t like spinach.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.029",
+   "frame": "fr.want.q",
+   "text": "הַאִם אַתָּה רוֹצֶה עַגְבָנִיָּה?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "עַגְבָנִיָּה",
+     "l": "he:agvaniya",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m.) want a tomato?",
+   "alts": [
+    "אַתָּה רוֹצֶה עַגְבָנִיָּה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.030",
+   "frame": "fr.want.q",
+   "text": "הַאִם אַתָּה רוֹצֶה עַגְבָנִיּוֹת?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "עַגְבָנִיּוֹת",
+     "l": "he:agvaniya",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno",
+    "fn.plural.noun"
+   ],
+   "gloss": "Do you (m.) want tomatoes?",
+   "variantOf": "he.s.029",
+   "variant": {
+    "Number": "PL"
+   },
+   "alts": [
+    "אַתָּה רוֹצֶה עַגְבָנִיּוֹת?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.031",
+   "frame": "fr.want.q",
+   "text": "אַתָּה רוֹצֶה עַגְבָנִיָּה?",
+   "tokens": [
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "עַגְבָנִיָּה",
+     "l": "he:agvaniya",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m.) want a tomato?",
+   "variantOf": "he.s.029",
+   "variant": {
+    "QuestionMarker": "intonation"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.032",
+   "frame": "fr.want.q",
+   "text": "הַאִם אַתְּ רוֹצָה גֶּזֶר?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "גֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f.) want a carrot?",
+   "alts": [
+    "אַתְּ רוֹצָה גֶּזֶר?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.033",
+   "frame": "fr.want.q",
+   "text": "אַתְּ רוֹצָה גֶּזֶר?",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "גֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f.) want a carrot?",
+   "variantOf": "he.s.032",
+   "variant": {
+    "QuestionMarker": "intonation"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.034",
+   "frame": "fr.want.q",
+   "text": "הַאִם אַתְּ רוֹצָה חַסָּה?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "רוֹצָה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "חַסָּה",
+     "l": "he:chasa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (f.) want lettuce?",
+   "alts": [
+    "אַתְּ רוֹצָה חַסָּה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.035",
+   "frame": "fr.want.q",
+   "text": "הַאִם אַתָּה רוֹצֶה תִּירָס?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "רוֹצֶה",
+     "l": "he:ratsa",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "תִּירָס",
+     "l": "he:tiras",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m.) want corn?",
+   "alts": [
+    "אַתָּה רוֹצֶה תִּירָס?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.036",
+   "frame": "fr.this.is",
+   "text": "זֶה גֶּזֶר.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "גֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.037",
+   "frame": "fr.this.is",
+   "text": "זֹאת עַגְבָנִיָּה.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "עַגְבָנִיָּה",
+     "l": "he:agvaniya",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a tomato.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.038",
+   "frame": "fr.this.is",
+   "text": "אֵלֶּה עַגְבָנִיּוֹת.",
+   "tokens": [
+    {
+     "t": "אֵלֶּה",
+     "l": "he:ze",
+     "f": "PRON;PL"
+    },
+    {
+     "t": "עַגְבָנִיּוֹת",
+     "l": "he:agvaniya",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "These are tomatoes.",
+   "variantOf": "he.s.037",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.039",
+   "frame": "fr.this.is",
+   "text": "זֶה חָצִיל.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "חָצִיל",
+     "l": "he:chatsil",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is an eggplant.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.040",
+   "frame": "fr.this.is",
+   "text": "זֶה לֹא חָצִיל.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "חָצִיל",
+     "l": "he:chatsil",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "This is not an eggplant.",
+   "variantOf": "he.s.039",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.041",
+   "frame": "fr.this.is",
+   "text": "זֹאת כְּרוּבִית.",
+   "tokens": [
+    {
+     "t": "זֹאת",
+     "l": "he:ze",
+     "f": "PRON;SG;FEM"
+    },
+    {
+     "t": "כְּרוּבִית",
+     "l": "he:kruvit",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a cauliflower.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.042",
+   "frame": "fr.this.is",
+   "text": "זֶה צְנוֹן.",
+   "tokens": [
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "צְנוֹן",
+     "l": "he:tsnon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "This is a radish.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.043",
+   "frame": "fr.this.is",
+   "text": "הַאִם זֶה צְנוֹן?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "זֶה",
+     "l": "he:ze",
+     "f": "PRON;SG;MASC"
+    },
+    {
+     "t": "צְנוֹן",
+     "l": "he:tsnon",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Is this a radish?",
+   "variantOf": "he.s.042",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "זֶה צְנוֹן?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.044",
+   "frame": "fr.where.def",
+   "text": "אֵיפֹה הַגֶּזֶר?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הַגֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the carrot?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.045",
+   "frame": "fr.where.def",
+   "text": "אֵיפֹה הָעַגְבָנִיָּה?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הָעַגְבָנִיָּה",
+     "l": "he:agvaniya",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the tomato?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.046",
+   "frame": "fr.where.def",
+   "text": "אֵיפֹה הָעַגְבָנִיּוֹת?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הָעַגְבָנִיּוֹת",
+     "l": "he:agvaniya",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "Where are the tomatoes?",
+   "variantOf": "he.s.045",
+   "variant": {
+    "Number": "PL"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.047",
+   "frame": "fr.where.def",
+   "text": "אֵיפֹה הַשּׁוּם?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הַשּׁוּם",
+     "l": "he:shum",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the garlic?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.048",
+   "frame": "fr.where.def",
+   "text": "אֵיפֹה הַפִּלְפְּלִים?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הַפִּלְפְּלִים",
+     "l": "he:pilpel",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "Where are the peppers?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.049",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לִי גֶּזֶר.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "גֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "I have a carrot.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.050",
+   "frame": "fr.have.indef",
+   "text": "אֵין לִי גֶּזֶר.",
+   "tokens": [
+    {
+     "t": "אֵין",
+     "l": "he:ein"
+    },
+    {
+     "t": "לִי",
+     "l": "he:le",
+     "f": "ADP;1;SG"
+    },
+    {
+     "t": "גֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "I don’t have a carrot.",
+   "variantOf": "he.s.049",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.051",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לָהּ חָצִיל.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהּ",
+     "l": "he:le",
+     "f": "ADP;3;SG;FEM"
+    },
+    {
+     "t": "חָצִיל",
+     "l": "he:chatsil",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "She has an eggplant.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.052",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לָנוּ בְּרוֹקוֹלִי.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "בְּרוֹקוֹלִי",
+     "l": "he:brokoli",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have broccoli.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.053",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לוֹ פִּלְפְּלִים.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לוֹ",
+     "l": "he:le",
+     "f": "ADP;3;SG;MASC"
+    },
+    {
+     "t": "פִּלְפְּלִים",
+     "l": "he:pilpel",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "He has peppers.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.054",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לְךָ חַסָּה.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לְךָ",
+     "l": "he:le",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "חַסָּה",
+     "l": "he:chasa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "You (m.) have lettuce.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.055",
+   "frame": "fr.have.indef",
+   "text": "הַאִם יֵשׁ לְךָ חַסָּה?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לְךָ",
+     "l": "he:le",
+     "f": "ADP;2;SG;MASC"
+    },
+    {
+     "t": "חַסָּה",
+     "l": "he:chasa",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.question.yesno"
+   ],
+   "gloss": "Do you (m.) have lettuce?",
+   "variantOf": "he.s.054",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "יֵשׁ לְךָ חַסָּה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.056",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לָהֶם תִּירָס וְעַגְבָנִיּוֹת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָהֶם",
+     "l": "he:le",
+     "f": "ADP;3;PL;MASC"
+    },
+    {
+     "t": "תִּירָס",
+     "l": "he:tiras",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": "וְעַגְבָנִיּוֹת",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "עַגְבָנִיּוֹת",
+       "l": "he:agvaniya",
+       "f": "N;PL;INDF"
+      }
+     ]
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "They have corn and tomatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.057",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לָךְ דְּלַעַת.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָךְ",
+     "l": "he:le",
+     "f": "ADP;2;SG;FEM"
+    },
+    {
+     "t": "דְּלַעַת",
+     "l": "he:dlaat",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "You (f.) have a pumpkin.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.058",
+   "frame": "fr.here.def",
+   "text": "הַגֶּזֶר פֹּה.",
+   "tokens": [
+    {
+     "t": "הַגֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The carrot is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.059",
+   "frame": "fr.here.def",
+   "text": "הַאִם הַגֶּזֶר פֹּה?",
+   "tokens": [
+    {
+     "t": "הַאִם",
+     "l": "he:haim"
+    },
+    {
+     "t": "הַגֶּזֶר",
+     "l": "he:gezer",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.question.yesno"
+   ],
+   "gloss": "Is the carrot here?",
+   "variantOf": "he.s.058",
+   "variant": {
+    "Mood": "INT"
+   },
+   "alts": [
+    "הַגֶּזֶר פֹּה?"
+   ],
+   "level": "A1"
+  },
+  {
+   "id": "he.s.060",
+   "frame": "fr.here.def",
+   "text": "הַחַסָּה כָּאן.",
+   "tokens": [
+    {
+     "t": "הַחַסָּה",
+     "l": "he:chasa",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "כָּאן",
+     "l": "he:kan"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The lettuce is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.061",
+   "frame": "fr.here.def",
+   "text": "הַחֲצִילִים פֹּה.",
+   "tokens": [
+    {
+     "t": "הַחֲצִילִים",
+     "l": "he:chatsil",
+     "f": "N;PL;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.plural.noun"
+   ],
+   "gloss": "The eggplants are here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.062",
+   "frame": "fr.here.def",
+   "text": "הַבָּצָל פֹּה.",
+   "tokens": [
+    {
+     "t": "הַבָּצָל",
+     "l": "he:batsal",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The onion is here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.063",
+   "frame": "fr.here.def",
+   "text": "הַבָּצָל לֹא פֹּה.",
+   "tokens": [
+    {
+     "t": "הַבָּצָל",
+     "l": "he:batsal",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite",
+    "fn.negation"
+   ],
+   "gloss": "The onion is not here.",
+   "variantOf": "he.s.062",
+   "variant": {
+    "Polarity": "NEG"
+   },
+   "level": "A1"
+  },
+  {
+   "id": "he.s.064",
+   "frame": "fr.here.def",
+   "text": "הַכְּרֵשָׁה וְהַסֶּלֶק פֹּה.",
+   "tokens": [
+    {
+     "t": "הַכְּרֵשָׁה",
+     "l": "he:kresha",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "וְהַסֶּלֶק",
+     "parts": [
+      {
+       "t": "וְ",
+       "l": "he:ve"
+      },
+      {
+       "t": "הַסֶּלֶק",
+       "l": "he:selek",
+       "f": "N;SG;DEF"
+      }
+     ]
+    },
+    {
+     "t": "פֹּה",
+     "l": "he:po"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "The leek and the beetroot are here.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.065",
+   "frame": "fr.buy.indef",
+   "text": "אֲנִי קוֹנָה תַּפּוּחֵי אֲדָמָה.",
+   "tokens": [
+    {
+     "t": "אֲנִי",
+     "l": "he:ani"
+    },
+    {
+     "t": "קוֹנָה",
+     "l": "he:kana",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "תַּפּוּחֵי אֲדָמָה",
+     "l": "he:tapuach-adama",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "I (f.) buy potatoes.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.066",
+   "frame": "fr.eat.def",
+   "text": "הוּא אוֹכֵל אֶת תַּפּוּחַ הָאֲדָמָה.",
+   "tokens": [
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "אוֹכֵל",
+     "l": "he:akhal",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "אֶת",
+     "l": "he:et"
+    },
+    {
+     "t": "תַּפּוּחַ הָאֲדָמָה",
+     "l": "he:tapuach-adama",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "He eats the potato.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.067",
+   "frame": "fr.like.generic",
+   "text": "הֵם אוֹהֲבִים פִּלְפְּלִים חֲרִיפִים.",
+   "tokens": [
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "אוֹהֲבִים",
+     "l": "he:ahav",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "פִּלְפְּלִים חֲרִיפִים",
+     "l": "he:pilpel-charif",
+     "f": "N;PL;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.plural.noun"
+   ],
+   "gloss": "They like chili peppers.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.068",
+   "frame": "fr.notlike.generic",
+   "text": "אַתְּ לֹא אוֹהֶבֶת שְׁעוּעִית יְרֻקָּה.",
+   "tokens": [
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "לֹא",
+     "l": "he:lo"
+    },
+    {
+     "t": "אוֹהֶבֶת",
+     "l": "he:ahav",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "שְׁעוּעִית יְרֻקָּה",
+     "l": "he:sheuit-yeruka",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.negation"
+   ],
+   "gloss": "You (f.) don’t like green beans.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.069",
+   "frame": "fr.have.indef",
+   "text": "יֵשׁ לָנוּ בָּצָל יָרֹק.",
+   "tokens": [
+    {
+     "t": "יֵשׁ",
+     "l": "he:yesh"
+    },
+    {
+     "t": "לָנוּ",
+     "l": "he:le",
+     "f": "ADP;1;PL"
+    },
+    {
+     "t": "בָּצָל יָרֹק",
+     "l": "he:batsal-yarok",
+     "f": "N;SG;INDF"
+    },
+    {
+     "t": ".",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "We have spring onion.",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.070",
+   "frame": "fr.where.def",
+   "text": "אֵיפֹה הַבָּצָל הַיָּרֹק?",
+   "tokens": [
+    {
+     "t": "אֵיפֹה",
+     "l": "he:eifo"
+    },
+    {
+     "t": "הַבָּצָל הַיָּרֹק",
+     "l": "he:batsal-yarok",
+     "f": "N;SG;DEF"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [
+    "fn.definite"
+   ],
+   "gloss": "Where is the spring onion?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.071",
+   "frame": "fr.drink.what",
+   "text": "מָה אַתָּה שׁוֹתֶה?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "אַתָּה",
+     "l": "he:ata"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What are you (m.) drinking?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.072",
+   "frame": "fr.drink.what",
+   "text": "מָה אַתְּ שׁוֹתָה?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "אַתְּ",
+     "l": "he:at"
+    },
+    {
+     "t": "שׁוֹתָה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What are you (f.) drinking?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.073",
+   "frame": "fr.drink.what",
+   "text": "מָה הֵם שׁוֹתִים?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "הֵם",
+     "l": "he:hem"
+    },
+    {
+     "t": "שׁוֹתִים",
+     "l": "he:shata",
+     "f": "V;PRS;PL;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What are they drinking?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.074",
+   "frame": "fr.drink.what",
+   "text": "מָה הֵן שׁוֹתוֹת?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "הֵן",
+     "l": "he:hen"
+    },
+    {
+     "t": "שׁוֹתוֹת",
+     "l": "he:shata",
+     "f": "V;PRS;PL;FEM"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What are they (f.) drinking?",
+   "level": "A1"
+  },
+  {
+   "id": "he.s.075",
+   "frame": "fr.drink.what",
+   "text": "מָה הוּא שׁוֹתֶה?",
+   "tokens": [
+    {
+     "t": "מָה",
+     "l": "he:ma"
+    },
+    {
+     "t": "הוּא",
+     "l": "he:hu"
+    },
+    {
+     "t": "שׁוֹתֶה",
+     "l": "he:shata",
+     "f": "V;PRS;SG;MASC"
+    },
+    {
+     "t": "?",
+     "p": true
+    }
+   ],
+   "functions": [],
+   "gloss": "What is he drinking?",
+   "level": "A1"
+  }
+ ]
+}

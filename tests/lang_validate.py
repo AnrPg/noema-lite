@@ -29,7 +29,7 @@ bad = [c for c in vec['join'] if langlib.join_tokens(c[0], c[1]) != c[2]]
 ok(not bad, f'join tokens: {len(vec["join"])} vectors' + (f' — wrong: {bad}' if bad else ''))
 
 # ---------- the mini course ----------
-v = validate(MINI)
+v = validate(MINI, strict=True)
 ok(not v.errors, 'the mini course is valid' + (f': {v.errors[:5]}' if v.errors else ''))
 
 # ---------- the JSON Schema agrees with the files (when the jsonschema package is installed) ----------
@@ -58,7 +58,7 @@ def mutated(change):
         r = fn(obj)
         with open(p, 'w', encoding='utf-8') as f: f.write(r if isinstance(r, Raw) else json.dumps(obj, ensure_ascii=False, indent=1))
     change(J, dst)
-    v = validate(dst); shutil.rmtree(d); return v.errors
+    v = validate(dst, strict=True); shutil.rmtree(d); return v.errors
 
 def expect(name, change, needle):
     errs = mutated(change)
@@ -95,6 +95,8 @@ expect('variant of a missing sentence', lambda J, d: J('lang/ar/bank/basic.json'
 expect('capital letter only allowed at the start', lambda J, d: J('lang/de/bank/basic.json', set_tok('de', 3, 4, t='Und')), '“Und” is not the lemma form of de:und')
 
 expect('plene spelling with vowel marks', lambda J, d: J('lang/he/lexicon/veg.1.json', lambda o: o['lexemes'][0].update(plene={'N;SG;INDF': 'גֶּזֶר'})), 'must be written without vowel marks')
+expect('question evidence by punctuation', lambda J, d: J('lang/de/grammar/fn.definite.json', lambda o: o.update(evidence={'punct': ['?']})), 'listed as fn.definite, but no word shows it (evidence {\'punct\'')
+
 # word profiles (§4.6)
 PR = lambda rel, i, fn: (lambda J, d: J(rel, lambda o: fn(o['lexemes'][i]['profile'])))
 expect('content word without a profile', lambda J, d: J('lang/de/lexicon/veg.1.json', lambda o: o['lexemes'][0].pop('profile')), 'a word profile is required')
@@ -113,5 +115,11 @@ expect('no subtlety', PR('lang/zh/lexicon/core.1.json', 2, lambda p: p.update(su
 expect('concept without a sense', PR('lang/he/lexicon/veg.2.json', 0, lambda p: p['senses'][0].pop('concept')), 'no sense explains the concept')
 expect('example of an unknown sense', PR('lang/zh/lexicon/veg.1.json', 0, lambda p: p['examples'][0].update(sense='s9')), 'unknown sense “s9”')
 expect('only one collocation', PR('lang/de/lexicon/veg.2.json', 0, lambda p: p.update(collocations=p['collocations'][:1])), 'at least 2 collocations')
+
+# an unfinished course: missing node content is a warning without --strict, an error with it
+def unfinished(J, d): os.remove(J('lang/zh/lexicon/veg.2.json'))
+dd = tempfile.mkdtemp(); dst = os.path.join(dd, 'c'); shutil.copytree(MINI, dst); os.remove(os.path.join(dst, 'lang/zh/lexicon/veg.2.json'))
+vs, vl = validate(dst, strict=True), validate(dst, strict=False); shutil.rmtree(dd)
+ok(any('missing file' in e for e in vs.errors) and not any('veg.2.json' in e for e in vl.errors) and any('not prepared yet' in w for w in vl.warns), 'unfinished course: “not prepared yet” is a warning, an error only with --strict')
 
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

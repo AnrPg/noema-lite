@@ -1,0 +1,69 @@
+{
+ "function": "fn.negation",
+ "status": "realized",
+ "summary": "German has two negators. kein (declined like ein, with a plural keine) negates a noun that would otherwise have ein or no article: eine Gurke → keine Gurke, Zwiebeln → keine Zwiebeln, Knoblauch → keinen Knoblauch. nicht negates everything else: verbs, adjectives, adverbs, places and nouns with der/die/das or dieser. nicht usually stands after the object, at the end of a simple main clause (Ich esse die Tomate nicht), but before adjectives, places and a second verb (nicht hier, nicht frisch). The answer word is nein; to contradict a negative question, the answer “yes” is doch.",
+ "procedure": {
+  "askYourself": [
+   "Am I negating a noun with ein or with no article? → kein (with the ending of ein).",
+   "Otherwise (verb, adjective, place, noun with der/die/das) → nicht.",
+   "Where does nicht go? After the object at the end of the clause, but before an adjective, a place or a second verb.",
+   "Answering a question? nein = no; doch = yes after a negative question."
+  ],
+  "steps": [
+   "Find what is negated.",
+   "Choose kein or nicht.",
+   "Give kein the case ending; place nicht."
+  ]
+ },
+ "traps": [
+  "*Ich habe nicht eine Gurke is not the normal negation → Ich habe keine Gurke.",
+  "kein has a plural: keine Tomaten (ein has none).",
+  "Both are possible for a general dislike: Ich mag keine Gurken = Ich mag Gurken nicht (kein is more usual).",
+  "nein is only an answer word, never inside the clause: Ich mag keine Zwiebeln (not *Ich mag nein Zwiebeln).",
+  "Magst du keinen Spinat? – Doch! means “Yes, I do” – ja would be confusing here."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:nicht",
+   "de:kein"
+  ]
+ },
+ "paradigmCells": [
+  "DET;NOM;SG;MASC",
+  "DET;ACC;SG;MASC",
+  "DET;ACC;SG;FEM",
+  "DET;ACC;PL"
+ ],
+ "needs": {
+  "NOUN": 4,
+  "VERB": 2
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ],
+    "variant": "Polarity"
+   }
+  },
+  {
+   "type": "contrast",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   },
+   "note": "kein vs nicht, with the reason"
+  },
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "lemmas": [
+    "de:kein"
+   ],
+   "count": 8
+  }
+ ]
+}

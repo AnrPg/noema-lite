@@ -1,0 +1,70 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "summary": "Arabic marks a definite noun with the prefix al- (الْ), written joined to the noun, and an indefinite noun with nunation (tanwīn: -un, -an, -in). There is no word for “a”. Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is assimilated: it carries no sukūn and the next letter gets a šadda — الثُّومُ = aṯ-ṯūmu. Diptotes (طَمَاطِم، بَطَاطِس، سَبَانِخ) never take tanwīn, and indeclinable words in -ā / -ī (كُوسَا، بْرُوكُلِي) show definiteness only by al-. General statements (“I like tomatoes”) use al-: أُحِبُّ الطَّمَاطِمَ.",
+ "procedure": {
+  "askYourself": [
+   "Is the noun specific (one we both know) or meant in general (“tomatoes”, “onions as food”)? → al-",
+   "Is it one of many, not identified (“a carrot”)? → tanwīn, no al-",
+   "Does the noun start with a sun letter? → no sukūn on the l, šadda on the letter (الطَّمَاطِمُ)",
+   "Is the noun a diptote or indeclinable? → no tanwīn even when it is indefinite",
+   "After adding al-, did I remove the tanwīn?"
+  ],
+  "steps": [
+   "Decide: specific/generic (al-) or indefinite (tanwīn).",
+   "Choose the case ending (-u nominative, -a accusative, -i genitive).",
+   "Write al- (sun or moon letter rule) or the tanwīn form."
+  ]
+ },
+ "traps": [
+  "Never al- and tanwīn together: *الْجَزَرَةٌ.",
+  "Generic = definite: هِيَ تُحِبُّ الْخِيَارَ = she likes cucumbers (in general), not only “the cucumbers”.",
+  "هٰذِهِ جَزَرَةٌ (“this is a carrot” — a sentence) vs هٰذِهِ الْجَزَرَةُ (“this carrot” — a phrase): the article changes the structure.",
+  "What you have with عِنْدَ is indefinite and nominative: عِنْدِي جَزَرَةٌ.",
+  "With a sun letter you hear no l: الطَّمَاطِمُ = aṭ-ṭamāṭimu."
+ ],
+ "evidence": {
+  "tags": [
+   "DEF"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;SG;INDF",
+  "N;NOM;SG;DEF",
+  "N;NOM;COLL;INDF",
+  "N;NOM;COLL;DEF"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;SG;DEF",
+    "N;NOM;SG;INDF",
+    "N;ACC;SG;DEF",
+    "N;ACC;SG;INDF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "analyze",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;SG;DEF",
+    "N;NOM;SG;INDF"
+   ],
+   "count": 8
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ]
+   }
+  }
+ ]
+}

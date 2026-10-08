@@ -1,0 +1,2398 @@
+{
+ "lexemes": [
+  {
+   "id": "he:agvaniya",
+   "lemma": "עַגְבָנִיָּה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.tomato"
+   ],
+   "gender": "FEM",
+   "translit": "agvaniya",
+   "forms": {
+    "N;SG;INDF": "עַגְבָנִיָּה",
+    "N;SG;DEF": "הָעַגְבָנִיָּה",
+    "N;PL;INDF": "עַגְבָנִיּוֹת",
+    "N;PL;DEF": "הָעַגְבָנִיּוֹת"
+   },
+   "plene": {
+    "N;SG;INDF": "עגבנייה",
+    "N;SG;DEF": "העגבנייה"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Summer, Israeli salad, the red of the market stalls.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tomato (the plant and its fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.tomato"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי חוֹתֵךְ עַגְבָנִיָּה לַסָּלָט.",
+      "tr": "I (m.) am cutting a tomato for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הָעַגְבָנִיּוֹת בַּשּׁוּק טְרִיּוֹת מְאֹד.",
+      "tr": "The tomatoes at the market are very fresh.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מְבַשֶּׁלֶת רֹטֶב עַגְבָנִיּוֹת לַפַּסְטָה.",
+      "tr": "She is cooking tomato sauce for the pasta.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "רֹטֶב עַגְבָנִיּוֹת",
+      "tr": "tomato sauce"
+     },
+     {
+      "text": "מִיץ עַגְבָנִיּוֹת",
+      "tr": "tomato juice"
+     },
+     {
+      "text": "עַגְבָנִיּוֹת שֶׁרִי",
+      "tr": "cherry tomatoes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use: the 1886 coinage won over its competitors.",
+    "etymology": {
+     "text": "Coined by early religious Zionist Yechiel Michel Pines in 1886, under the influence of German Liebesapfel (literally “love apple”), from the root ע־ג־ב relating to lust. The word’s sexual undertones made it initially controversial, but it outcompeted alternative suggestions by the 1940s.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The name was modelled on German Liebesapfel “love apple”: its root ע־ג־ב is the root of lust and desire."
+    ],
+    "pitfalls": [
+     "Feminine: עַגְבָנִיָּה טְעִימָה (not טָעִים); “one tomato” is עַגְבָנִיָּה אַחַת, with the number after the noun.",
+     "Everyday spelling without vowels has two yods: עגבנייה (עגבניה is the defective spelling)."
+    ],
+    "subtleties": [
+     "Before ע the article is הָ, because ע cannot take a dagesh: הָעַגְבָנִיָּה, הָעַגְבָנִיּוֹת."
+    ]
+   }
+  },
+  {
+   "id": "he:batsal",
+   "lemma": "בָּצָל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.onion"
+   ],
+   "gender": "MASC",
+   "mishkal": "קָטָל",
+   "translit": "batsal",
+   "forms": {
+    "N;SG;INDF": "בָּצָל",
+    "N;SG;DEF": "הַבָּצָל",
+    "N;PL;INDF": "בְּצָלִים",
+    "N;PL;DEF": "הַבְּצָלִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Kitchen tears, frying smells.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "onion",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.onion"
+     },
+     {
+      "id": "s2",
+      "def": "bulb (of a plant)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "gardening"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "צָרִיךְ לְטַגֵּן אֶת הַבָּצָל עַד שֶׁיַּזְהִיב.",
+      "tr": "You need to fry the onion until it turns golden.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "חִתּוּךְ בָּצָל מַדְמִיעַ לִי אֶת הָעֵינַיִם.",
+      "tr": "Cutting onion makes my eyes water.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּצָלִים שֶׁל צִבְעוֹנִים שׁוֹתְלִים בַּסְּתָו.",
+      "tr": "Tulip bulbs are planted in autumn.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק בָּצָל",
+      "tr": "onion soup"
+     },
+     {
+      "text": "בָּצָל מְטֻגָּן",
+      "tr": "fried onion"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וְאֶת הַבְּצָלִים וְאֶת הַשּׁוּמִים",
+      "tr": "and the onions and the garlic",
+      "kind": "quote",
+      "meaning": "the Egyptian foods the Israelites longed for in the desert",
+      "register": "literary",
+      "source": "Numbers 11:5"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Cognate with Arabic بَصَل (baṣal) and related to Aramaic בּוּצְלָא.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew בָּצָל and Arabic بَصَل are the same Semitic word.",
+     "Onions are among the foods the Israelites missed from Egypt (Numbers 11:5)."
+    ],
+    "pitfalls": [
+     "The plural בְּצָלִים shortens the first vowel.",
+     "בָּצָל יָרֹק (green onion) is the spring onion — a separate word in this course."
+    ],
+    "subtleties": [
+     "בָּצָל is also a plant bulb: בְּצָלִים שֶׁל צִבְעוֹנִים = tulip bulbs."
+    ]
+   }
+  },
+  {
+   "id": "he:tapuach-adama",
+   "lemma": "תַּפּוּחַ אֲדָמָה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.potato"
+   ],
+   "gender": "MASC",
+   "translit": "tapuach adama",
+   "forms": {
+    "N;SG;INDF": "תַּפּוּחַ אֲדָמָה",
+    "N;SG;DEF": "תַּפּוּחַ הָאֲדָמָה",
+    "N;PL;INDF": "תַּפּוּחֵי אֲדָמָה",
+    "N;PL;DEF": "תַּפּוּחֵי הָאֲדָמָה"
+   },
+   "note": "A two-word lexeme (construct phrase). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Chips, mash, Hanukkah latkes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "potato (the tuber)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.potato"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְקַלֵּף תַּפּוּחֵי אֲדָמָה.",
+      "tr": "I (m.) am peeling potatoes.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "קִילוֹ תַּפּוּחֵי אֲדָמָה, בְּבַקָּשָׁה.",
+      "tr": "A kilo of potatoes, please.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֲנֻכָּה אוֹכְלִים לְבִיבוֹת תַּפּוּחֵי אֲדָמָה.",
+      "tr": "At Hanukkah people eat potato latkes.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "לְבִיבוֹת תַּפּוּחֵי אֲדָמָה",
+      "tr": "potato pancakes, latkes"
+     },
+     {
+      "text": "קְלִפַּת תַּפּוּחַ אֲדָמָה",
+      "tr": "potato peel"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "תַּפּוּד",
+      "register": "colloquial",
+      "nuance": "the everyday short form (a blend of תַּפּוּחַ + אֲדָמָה), plural תַּפּוּדִים; often written תפו״ד"
+     }
+    ],
+    "etymology": {
+     "text": "Calque of French pomme de terre (literally “apple of [the] earth”), like Dutch aardappel and others.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The same image as French pomme de terre, Dutch aardappel and Austrian German Erdapfel: an “earth apple”."
+    ],
+    "pitfalls": [
+     "A construct phrase: the plural changes only the first word — תַּפּוּחֵי אֲדָמָה.",
+     "Normative Hebrew puts the article on the second word: תַּפּוּחַ הָאֲדָמָה; in speech הַתַּפּוּחַ אֲדָמָה is very common.",
+     "Never shorten it to תַּפּוּחַ — that is an apple."
+    ],
+    "subtleties": [
+     "The first noun is in the construct state (smikhut): all inflection happens on תַּפּוּחַ, the article goes on אֲדָמָה."
+    ]
+   }
+  },
+  {
+   "id": "he:shum",
+   "lemma": "שׁוּם",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.garlic"
+   ],
+   "gender": "MASC",
+   "translit": "shum",
+   "forms": {
+    "N;SG;INDF": "שׁוּם",
+    "N;SG;DEF": "הַשּׁוּם"
+   },
+   "note": "Used as a mass noun; no plural in everyday Modern Hebrew (Wiktionary lists none).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Strong smell, Mediterranean cooking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "garlic (the plant and its bulb, as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.garlic"
+     }
+    ],
+    "examples": [
+     {
+      "text": "צָרִיךְ שְׁתֵּי שִׁנֵּי שׁוּם.",
+      "tr": "You need two cloves of garlic.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי לֹא אוֹהֵב שׁוּם.",
+      "tr": "I (m.) don’t like garlic.",
+      "register": "neutral",
+      "context": "food preferences",
+      "sense": "s1"
+     },
+     {
+      "text": "יֵשׁ רֵיחַ שֶׁל שׁוּם בַּמִּטְבָּח.",
+      "tr": "There’s a smell of garlic in the kitchen.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שֵׁן שׁוּם",
+      "tr": "a clove of garlic"
+     },
+     {
+      "text": "רֹאשׁ שׁוּם",
+      "tr": "a head of garlic"
+     },
+     {
+      "text": "שׁוּם כָּתוּשׁ",
+      "tr": "crushed garlic"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "וְאֶת הַבְּצָלִים וְאֶת הַשּׁוּמִים",
+      "tr": "and the onions and the garlic",
+      "kind": "quote",
+      "meaning": "the Egyptian foods the Israelites longed for in the desert",
+      "register": "literary",
+      "source": "Numbers 11:5"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "From Proto-Semitic *ṯūm-; cognate with Akkadian 𒋧 (šūmū), Aramaic תּוּמָא (tūmā), Arabic ثُوم (ṯūm).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic ثُوم (ṯūm) is the same word — as in the Lebanese garlic sauce toum; Hebrew ש regularly matches Arabic ث and Aramaic ת.",
+     "The Bible has a plural, הַשּׁוּמִים (Numbers 11:5); Modern Hebrew uses the singular as a mass noun."
+    ],
+    "pitfalls": [
+     "A mass noun: “garlic” is singular — קָנִיתִי שׁוּם. Count cloves (שִׁנֵּי שׁוּם) or heads (רָאשֵׁי שׁוּם).",
+     "Same spelling and vowels: the determiner שׁוּם “any, no … at all” — אֵין לִי שׁוּם דָּבָר “I have nothing at all”."
+    ],
+    "subtleties": [
+     "The article doubles the ש: הַשּׁוּם."
+    ]
+   }
+  },
+  {
+   "id": "he:melafefon",
+   "lemma": "מְלָפְפוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cucumber"
+   ],
+   "gender": "MASC",
+   "translit": "melafefon",
+   "forms": {
+    "N;SG;INDF": "מְלָפְפוֹן",
+    "N;SG;DEF": "הַמְּלָפְפוֹן",
+    "N;PL;INDF": "מְלָפְפוֹנִים",
+    "N;PL;DEF": "הַמְּלָפְפוֹנִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Israeli salad, fresh and crunchy.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cucumber",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cucumber"
+     },
+     {
+      "id": "s2",
+      "def": "Armenian cucumber, vegetable melon",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מֵכִין סָלָט עִם עַגְבָנִיּוֹת וּמְלָפְפוֹנִים.",
+      "tr": "I’m making a salad with tomatoes and cucumbers.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים אוֹהֲבִים מְלָפְפוֹנִים חֲמוּצִים.",
+      "tr": "The kids love pickles.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "כַּמָּה עוֹלֶה קִילוֹ מְלָפְפוֹנִים?",
+      "tr": "How much is a kilo of cucumbers?",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְלָפְפוֹן חָמוּץ",
+      "tr": "pickled cucumber"
+     },
+     {
+      "text": "מְלָפְפוֹן קָלוּף",
+      "tr": "peeled cucumber"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "קִשּׁוּא",
+      "register": "literary",
+      "nuance": "the Biblical word (Numbers 11:5); in Modern Hebrew קִשּׁוּא means zucchini!"
+     }
+    ],
+    "etymology": {
+     "text": "From Ancient Greek μηλοπέπων (mēlopépōn, “melon”), from μῆλον (mêlon, “apple; tree fruit”) + πέπων (pépōn, “ripe”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "It is often wrongly linked to לָפַף (to wrap around) because of the twisting vines; it really comes from Greek μηλοπέπων — a word a Greek speaker will recognize."
+    ],
+    "pitfalls": [
+     "Two פ: מְלָפְפוֹן (m’laf’fon).",
+     "With the article the מ takes a dagesh: הַמְּלָפְפוֹן."
+    ],
+    "subtleties": [
+     "The Biblical cucumber word קִשּׁוּא now means zucchini — a classic ‘false friend’ inside Hebrew."
+    ]
+   }
+  },
+  {
+   "id": "he:chatsil",
+   "lemma": "חָצִיל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.eggplant"
+   ],
+   "gender": "MASC",
+   "mishkal": "קָטִיל",
+   "translit": "chatsil",
+   "forms": {
+    "N;SG;INDF": "חָצִיל",
+    "N;SG;DEF": "הֶחָצִיל",
+    "N;PL;INDF": "חֲצִילִים",
+    "N;PL;DEF": "הַחֲצִילִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "A beloved staple of Israeli cuisine.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "eggplant, aubergine",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.eggplant"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אָכַלְנוּ חָצִיל עַל הָאֵשׁ עִם טְחִינָה.",
+      "tr": "We ate fire-roasted eggplant with tahini.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "סָבְתָא מְטַגֶּנֶת חֲצִילִים.",
+      "tr": "Grandma is frying eggplants.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "הַחֲצִילִים בַּשּׁוּק הָיוּ זוֹלִים הַיּוֹם.",
+      "tr": "The eggplants at the market were cheap today.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "חָצִיל בַּטְּחִינָה",
+      "tr": "eggplant with tahini"
+     },
+     {
+      "text": "חֲצִילִים מְטֻגָּנִים",
+      "tr": "fried eggplants"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Coined by Abraham Lunz in 1831, adapted from Arabic حَيْصَل (ḥayṣal).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The word is young: it was coined in the 19th century from Arabic."
+    ],
+    "pitfalls": [
+     "Before חָ the article becomes הֶ: הֶחָצִיל — but הַחֲצִילִים in the plural."
+    ],
+    "subtleties": [
+     "חָצִיל עַל הָאֵשׁ is roasted directly over a flame — a dish, not just a cooking method."
+    ]
+   }
+  },
+  {
+   "id": "he:gezer",
+   "lemma": "גֶּזֶר",
+   "pos": "NOUN",
+   "senses": [
+    "veg.carrot"
+   ],
+   "gender": "MASC",
+   "mishkal": "קֶטֶל",
+   "translit": "gezer",
+   "forms": {
+    "N;SG;INDF": "גֶּזֶר",
+    "N;SG;DEF": "הַגֶּזֶר",
+    "N;PL;INDF": "גְּזָרִים",
+    "N;PL;DEF": "הַגְּזָרִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Healthy everyday food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "carrot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.carrot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא מְגָרֶרֶת גֶּזֶר לַסָּלָט.",
+      "tr": "Mom is grating carrot for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי קִילוֹ גֶּזֶר בַּשּׁוּק.",
+      "tr": "I bought a kilo of carrots at the market.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "מִיץ גֶּזֶר טִבְעִי, בְּבַקָּשָׁה.",
+      "tr": "Fresh carrot juice, please.",
+      "register": "neutral",
+      "context": "café",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִיץ גֶּזֶר",
+      "tr": "carrot juice"
+     },
+     {
+      "text": "גֶּזֶר מְגֻרָּר",
+      "tr": "grated carrot"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "שִׁיטַת הַמַּקֵּל וְהַגֶּזֶר",
+      "tr": "the method of the stick and the carrot",
+      "kind": "idiom",
+      "meaning": "a carrot-and-stick approach",
+      "register": "neutral"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "From Persian گزر (gazar, ‘carrot’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Arabic جَزَر (jazar) is the same Persian word."
+    ],
+    "pitfalls": [
+     "גֶּזֶר (carrot) and the verb גָּזַר (to cut; to decree) share the letters גזר — read the vowels or the context."
+    ],
+    "subtleties": [
+     "For food the singular is often used for the mass: קָנִיתִי גֶּזֶר = I bought carrots."
+    ]
+   }
+  },
+  {
+   "id": "he:batata",
+   "lemma": "בָּטָטָה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.sweetpotato"
+   ],
+   "gender": "FEM",
+   "translit": "batata",
+   "forms": {
+    "N;SG;INDF": "בָּטָטָה",
+    "N;SG;DEF": "הַבָּטָטָה",
+    "N;PL;INDF": "בָּטָטוֹת",
+    "N;PL;DEF": "הַבָּטָטוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Sweet, orange, comforting oven food.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sweet potato",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.sweetpotato"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הִיא אוֹפָה בָּטָטוֹת בַּתַּנּוּר.",
+      "tr": "She bakes sweet potatoes in the oven.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "מְרַק בָּטָטָה מַתְאִים לַחֹרֶף.",
+      "tr": "Sweet-potato soup is just right for winter.",
+      "register": "neutral",
+      "context": "seasons",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק יֵשׁ בָּטָטָה כְּתֻמָּה וּלְבָנָה.",
+      "tr": "At the market there is orange and white sweet potato.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק בָּטָטָה",
+      "tr": "sweet-potato soup"
+     },
+     {
+      "text": "בָּטָטָה אֲפוּיָה",
+      "tr": "baked sweet potato"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in use: the loanword is the standard name.",
+    "etymology": {
+     "text": "Ultimately from Spanish batata, itself borrowed from Taíno batata. May have entered Hebrew through Arabic بطاطا.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English “potato” comes from the same Taíno word batata — it first meant the sweet potato."
+    ],
+    "pitfalls": [
+     "Not the potato: the potato is תַּפּוּחַ אֲדָמָה, the sweet potato בָּטָטָה.",
+     "Feminine, plural with -וֹת: בָּטָטוֹת."
+    ],
+    "subtleties": [
+     "A false friend with Levantine Arabic: there بطاطا (baṭāṭā) is the ordinary potato."
+    ]
+   }
+  },
+  {
+   "id": "he:afuna",
+   "lemma": "אֲפוּנָה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pea"
+   ],
+   "gender": "FEM",
+   "translit": "afuna",
+   "forms": {
+    "N;SG;INDF": "אֲפוּנָה",
+    "N;SG;DEF": "הָאֲפוּנָה",
+    "N;PL;INDF": "אֲפוּנִים",
+    "N;PL;DEF": "הָאֲפוּנִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small green peas, children’s plates, the freezer.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pea; peas (usually as a mass noun)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pea"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְבַשֵּׁל אֹרֶז עִם אֲפוּנָה.",
+      "tr": "I (m.) am cooking rice with peas.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַתִּינוֹק אוֹהֵב אֲפוּנָה.",
+      "tr": "The baby loves peas.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי שַׂקִּית אֲפוּנָה קְפוּאָה.",
+      "tr": "I bought a bag of frozen peas.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "אֲפוּנָה קְפוּאָה",
+      "tr": "frozen peas"
+     },
+     {
+      "text": "אֲפוּנָה יְרֻקָּה",
+      "tr": "green peas"
+     },
+     {
+      "text": "תַּרְמִיל אֲפוּנָה",
+      "tr": "a pea pod"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Gregor Mendel discovered the laws of heredity by crossing pea plants."
+    ],
+    "pitfalls": [
+     "Used as a mass noun: אֲפוּנָה = peas. The plural אֲפוּנִים is rare in everyday speech.",
+     "Feminine, but the plural ends in -ים: אֲפוּנָה → אֲפוּנִים (like דְּלַעַת → דְּלוּעִים)."
+    ],
+    "subtleties": [
+     "Before א the article is הָ: הָאֲפוּנָה."
+    ]
+   }
+  },
+  {
+   "id": "he:tered",
+   "lemma": "תֶּרֶד",
+   "pos": "NOUN",
+   "senses": [
+    "veg.spinach"
+   ],
+   "gender": "MASC",
+   "mishkal": "קֶטֶל",
+   "translit": "tered",
+   "forms": {
+    "N;SG;INDF": "תֶּרֶד",
+    "N;SG;DEF": "הַתֶּרֶד",
+    "N;PL;INDF": "תְּרָדִים",
+    "N;PL;DEF": "הַתְּרָדִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Green, iron-rich, pastry fillings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spinach (the plant and its leaves)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.spinach"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מוֹסִיף תֶּרֶד לַחֲבִיתָה.",
+      "tr": "I (m.) add spinach to the omelette.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא אָפְתָה פַּשְׁטִידַת תֶּרֶד.",
+      "tr": "She baked a spinach pie.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק יֵשׁ תֶּרֶד טָרִי.",
+      "tr": "There’s fresh spinach at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי תֶּרֶד",
+      "tr": "spinach leaves"
+     },
+     {
+      "text": "פַּשְׁטִידַת תֶּרֶד",
+      "tr": "spinach pie / quiche"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Compare Aramaic תִּרְדָּא.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Like גֶּזֶר and סֶלֶק it is a “segolate” noun (pattern קֶטֶל): stress on the first syllable, TE-red."
+    ],
+    "pitfalls": [
+     "A mass noun in the kitchen: תֶּרֶד = spinach. The plural תְּרָדִים exists but is rare."
+    ],
+    "subtleties": [
+     "The article doubles the ת: הַתֶּרֶד."
+    ]
+   }
+  },
+  {
+   "id": "he:tsnon",
+   "lemma": "צְנוֹן",
+   "pos": "NOUN",
+   "senses": [
+    "veg.radish"
+   ],
+   "gender": "MASC",
+   "translit": "tsnon",
+   "forms": {
+    "N;SG;INDF": "צְנוֹן",
+    "N;SG;DEF": "הַצְּנוֹן",
+    "N;PL;INDF": "צְנוֹנִים",
+    "N;PL;DEF": "הַצְּנוֹנִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy and sharp, a salad garnish.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "radish",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.radish"
+     },
+     {
+      "id": "s2",
+      "def": "a wet blanket, a dull person",
+      "register": [
+       "slang"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי פּוֹרֵס צְנוֹן לַסָּלָט.",
+      "tr": "I (m.) am slicing a radish for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַצְּנוֹנִים בַּגִּנָּה כְּבָר גְּדוֹלִים.",
+      "tr": "The radishes in the garden are already big.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "הַצְּנוֹן הַזֶּה חָרִיף מְאֹד.",
+      "tr": "This radish is very sharp.",
+      "register": "neutral",
+      "context": "tasting",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "צְנוֹן חָרִיף",
+      "tr": "sharp radish"
+     },
+     {
+      "text": "צְנוֹן לָבָן",
+      "tr": "white radish"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "צְנוֹנִית",
+      "register": "neutral",
+      "nuance": "the small red radish — the usual name for it in Israeli shops"
+     }
+    ],
+    "etymology": {
+     "text": "Wiktionary (kaikki.org) gives no etymology for this word.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The plural keeps the o of the singular: צְנוֹן → צְנוֹנִים (tsnon → tsnonim)."
+    ],
+    "pitfalls": [
+     "The small red radish is usually called צְנוֹנִית; צְנוֹן is the general word and the larger radish."
+    ],
+    "subtleties": [
+     "The article doubles the צ: הַצְּנוֹן."
+    ]
+   }
+  },
+  {
+   "id": "he:dlaat",
+   "lemma": "דְּלַעַת",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pumpkin"
+   ],
+   "gender": "FEM",
+   "translit": "dla'at",
+   "forms": {
+    "N;SG;INDF": "דְּלַעַת",
+    "N;SG;DEF": "הַדְּלַעַת",
+    "N;PL;INDF": "דְּלוּעִים",
+    "N;PL;DEF": "הַדְּלוּעִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Autumn, soups.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pumpkin, gourd, squash",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pumpkin"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בְּסוֹף הַקַּיִץ קוֹטְפִים דְּלוּעִים.",
+      "tr": "Pumpkins are picked at the end of summer.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֹרֶף אֲנִי מֵכִין מְרַק דְּלַעַת.",
+      "tr": "In winter I make pumpkin soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים גִּלְּפוּ פַּרְצוּף בַּדְּלַעַת.",
+      "tr": "The children carved a face into the pumpkin.",
+      "register": "neutral",
+      "context": "festivities",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק דְּלַעַת",
+      "tr": "pumpkin soup"
+     },
+     {
+      "text": "גַּרְעִינֵי דְּלַעַת",
+      "tr": "pumpkin seeds"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "דַּלַּעַת",
+      "register": "neutral",
+      "nuance": "an alternative vocalization of the same word"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Arabic دَلَّاع (dallāʕ, ‘watermelon’).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Its Arabic relative دَلَّاع means ‘watermelon’."
+    ],
+    "pitfalls": [
+     "Feminine noun with a masculine-looking plural: דְּלַעַת → דְּלוּעִים."
+    ],
+    "subtleties": [
+     "One Hebrew word for what English splits into pumpkin, gourd and squash."
+    ]
+   }
+  },
+  {
+   "id": "he:chasa",
+   "lemma": "חַסָּה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.lettuce"
+   ],
+   "gender": "FEM",
+   "translit": "chasa",
+   "forms": {
+    "N;SG;INDF": "חַסָּה",
+    "N;SG;DEF": "הַחַסָּה",
+    "N;PL;INDF": "חַסּוֹת",
+    "N;PL;DEF": "הַחַסּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crisp green leaves, sandwiches, the Seder plate.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lettuce (the plant; its leaves as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.lettuce"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי שׁוֹטֵף אֶת הַחַסָּה.",
+      "tr": "I (m.) am washing the lettuce.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי שְׁתֵּי חַסּוֹת בַּשּׁוּק.",
+      "tr": "I bought two heads of lettuce at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "שַׂמְתִּי עֲלֵי חַסָּה בַּכָּרִיךְ.",
+      "tr": "I put lettuce leaves in the sandwich.",
+      "register": "neutral",
+      "context": "lunch",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי חַסָּה",
+      "tr": "lettuce leaves"
+     },
+     {
+      "text": "רֹאשׁ חַסָּה",
+      "tr": "a head of lettuce"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "From Aramaic חַסָּא (khassaʾ). Compare likely cognates Arabic خَسّ (ḵass) and Maltese ħassa, both with the same meaning.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Many families use lettuce as the bitter herb (מָרוֹר) at the Passover Seder."
+    ],
+    "pitfalls": [
+     "Homograph: חָסָה (with qamats) “took shelter”; the vegetable has patah and a dagesh: חַסָּה."
+    ],
+    "subtleties": [
+     "Countable as heads (חַסּוֹת), a mass noun as food: סָלָט עִם חַסָּה.",
+     "ח cannot take a dagesh, so the article stays הַ without doubling: הַחַסָּה."
+    ]
+   }
+  },
+  {
+   "id": "he:pilpel-charif",
+   "lemma": "פִּלְפֵּל חָרִיף",
+   "pos": "NOUN",
+   "senses": [
+    "veg.chili"
+   ],
+   "gender": "MASC",
+   "translit": "pilpel charif",
+   "forms": {
+    "N;SG;INDF": "פִּלְפֵּל חָרִיף",
+    "N;SG;DEF": "הַפִּלְפֵּל הֶחָרִיף",
+    "N;PL;INDF": "פִּלְפְּלִים חֲרִיפִים",
+    "N;PL;DEF": "הַפִּלְפְּלִים הַחֲרִיפִים"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Heat, tears, Yemenite and North-African kitchens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chili pepper, hot pepper",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chili"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא אוֹהֵב פִּלְפֵּל חָרִיף בַּפִּיתָה.",
+      "tr": "He likes chili pepper in his pita.",
+      "register": "neutral",
+      "context": "street food",
+      "sense": "s1"
+     },
+     {
+      "text": "אַל תִּגַּע בָּעֵינַיִם אַחֲרֵי שֶׁחָתַכְתָּ פִּלְפֵּל חָרִיף!",
+      "tr": "Don’t touch your eyes after cutting chili!",
+      "register": "neutral",
+      "context": "kitchen safety",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק מוֹכְרִים פִּלְפְּלִים חֲרִיפִים יְרֻקִּים וַאֲדֻמִּים.",
+      "tr": "At the market they sell green and red chili peppers.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פִּלְפֵּל חָרִיף יָרֹק",
+      "tr": "green chili"
+     },
+     {
+      "text": "פִּלְפֵּל חָרִיף מְיֻבָּשׁ",
+      "tr": "dried chili"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "צִ׳ילִי",
+      "register": "colloquial",
+      "nuance": "the international loanword, common in speech and on menus"
+     }
+    ],
+    "etymology": {
+     "text": "פִּלְפֵּל “pepper” (attested in Mishnaic Hebrew, from Classical Persian پلپل (pilpil), from Sanskrit पिप्पलि (pippali, “long pepper”), likely via Aramaic) + חָרִיף “spicy, sharp” (possibly a borrowing from Aramaic).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Yemenite-Israeli hot sauce סְחוּג (s’khug) is made of chili peppers and coriander."
+    ],
+    "pitfalls": [
+     "Both words agree and both take the article: הַפִּלְפֵּל הֶחָרִיף (the article is הֶ before חָ).",
+     "Plural on both words: פִּלְפְּלִים חֲרִיפִים — the qamats of חָרִיף shortens to a hataf patah, as in חָצִיל → חֲצִילִים."
+    ],
+    "subtleties": [
+     "חָרִיף alone also means “sharp, harsh”: בִּקֹּרֶת חֲרִיפָה “harsh criticism”."
+    ]
+   }
+  },
+  {
+   "id": "he:kruv",
+   "lemma": "כְּרוּב",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cabbage"
+   ],
+   "gender": "MASC",
+   "translit": "kruv",
+   "forms": {
+    "N;SG;INDF": "כְּרוּב",
+    "N;SG;DEF": "הַכְּרוּב",
+    "N;PL;INDF": "כְּרוּבִים",
+    "N;PL;DEF": "הַכְּרוּבִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Coleslaw, stuffed leaves, Eastern-European grandmothers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cabbage",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cabbage"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹצֵץ כְּרוּב לְסָלָט.",
+      "tr": "I (m.) am shredding cabbage for a salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "סָבְתָא מְבַשֶּׁלֶת כְּרוּב מְמֻלָּא.",
+      "tr": "Grandma is cooking stuffed cabbage.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק יֵשׁ כְּרוּב לָבָן וּכְרוּב סָגֹל.",
+      "tr": "At the market there is white cabbage and purple cabbage.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כְּרוּב מְמֻלָּא",
+      "tr": "stuffed cabbage"
+     },
+     {
+      "text": "כְּרוּב כָּבוּשׁ",
+      "tr": "pickled cabbage, sauerkraut"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "From Ancient Greek κράμβη (krámbē, “cabbage”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A Greek speaker will recognize κράμβη in כְּרוּב; Arabic قَرْنَبِيط (cauliflower) comes from the same Greek word."
+    ],
+    "pitfalls": [
+     "Homograph: כְּרוּב “cherub” (plural כְּרוּבִים) — the winged figures over the Ark.",
+     "After וּ the כ loses its dagesh: כְּרוּב לָבָן וּכְרוּב סָגֹל."
+    ],
+    "subtleties": [
+     "Cauliflower כְּרוּבִית is built on this word: “little cabbage”."
+    ]
+   }
+  },
+  {
+   "id": "he:kruvit",
+   "lemma": "כְּרוּבִית",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cauliflower"
+   ],
+   "gender": "FEM",
+   "translit": "kruvit",
+   "forms": {
+    "N;SG;INDF": "כְּרוּבִית",
+    "N;SG;DEF": "הַכְּרוּבִית",
+    "N;PL;INDF": "כְּרוּבִיּוֹת",
+    "N;PL;DEF": "הַכְּרוּבִיּוֹת"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Roasted whole in the oven — a modern Israeli favourite.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cauliflower",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cauliflower"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנַחְנוּ צוֹלִים כְּרוּבִית שְׁלֵמָה בַּתַּנּוּר.",
+      "tr": "We roast a whole cauliflower in the oven.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הַיְּלָדִים לֹא אוֹהֲבִים כְּרוּבִית.",
+      "tr": "The children don’t like cauliflower.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "כַּמָּה עוֹלָה הַכְּרוּבִית?",
+      "tr": "How much is the cauliflower?",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "כְּרוּבִית בַּתַּנּוּר",
+      "tr": "oven-roasted cauliflower"
+     },
+     {
+      "text": "כְּרוּבִית מְטֻגֶּנֶת",
+      "tr": "fried cauliflower"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Coined by Eliezer Ben-Yehuda from כרוב (“cabbage”) + ־ית, under influence of Arabic قَرْنَبِيط (qarnabīṭ), which itself was derived from Ancient Greek κράμβη (krámbē, “cabbage”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Ben-Yehuda, the reviver of spoken Hebrew, coined the word."
+    ],
+    "pitfalls": [
+     "Feminine (ending ־ִית): כְּרוּבִית טְעִימָה; plural כְּרוּבִיּוֹת."
+    ],
+    "subtleties": [
+     "The word is כְּרוּב “cabbage” + the ending ־ִית: a cabbage relative."
+    ]
+   }
+  },
+  {
+   "id": "he:brokoli",
+   "lemma": "בְּרוֹקוֹלִי",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.broccoli"
+   ],
+   "gender": "MASC",
+   "translit": "brokoli",
+   "forms": {
+    "N;SG;INDF": "בְּרוֹקוֹלִי",
+    "N;SG;DEF": "הַבְּרוֹקוֹלִי"
+   },
+   "note": "No plural forms (Wiktionary: “no plural forms”).",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Little green trees on a child’s plate.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "broccoli",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.broccoli"
+     }
+    ],
+    "examples": [
+     {
+      "text": "הוּא מְאַדֶּה בְּרוֹקוֹלִי.",
+      "tr": "He is steaming broccoli.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי בְּרוֹקוֹלִי קָפוּא.",
+      "tr": "I bought frozen broccoli.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מוֹסִיף פִּרְחֵי בְּרוֹקוֹלִי לַפַּסְטָה.",
+      "tr": "I (m.) add broccoli florets to the pasta.",
+      "register": "neutral",
+      "context": "dinner",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פִּרְחֵי בְּרוֹקוֹלִי",
+      "tr": "broccoli florets"
+     },
+     {
+      "text": "בְּרוֹקוֹלִי מְאֻדֶּה",
+      "tr": "steamed broccoli"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "From Italian broccoli (plural of broccolo, “cabbage sprout”); Wiktionary gives no separate Hebrew etymology.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Italian broccoli is already a plural (“little sprouts”); Hebrew treats the word as a singular mass noun."
+    ],
+    "pitfalls": [
+     "No plural: a mass noun, masculine — בְּרוֹקוֹלִי טָעִים. Count florets: פִּרְחֵי בְּרוֹקוֹלִי."
+    ],
+    "subtleties": [
+     "Stress on the first syllable: BRO-ko-li."
+    ]
+   }
+  },
+  {
+   "id": "he:kresha",
+   "lemma": "כְּרֵשָׁה",
+   "pos": "NOUN",
+   "senses": [
+    "veg.leek"
+   ],
+   "gender": "FEM",
+   "mishkal": "קְטֵלָה",
+   "translit": "kresha",
+   "forms": {
+    "N;SG;INDF": "כְּרֵשָׁה",
+    "N;SG;DEF": "הַכְּרֵשָׁה",
+    "N;PL;INDF": "כְּרֵשִׁים",
+    "N;PL;DEF": "הַכְּרֵשִׁים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Soups, patties, Rosh Hashanah blessings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "leek",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.leek"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אִמָּא מְבַשֶּׁלֶת מְרַק כְּרֵשָׁה.",
+      "tr": "Mum is cooking leek soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי שׁוֹטֵף אֶת הַכְּרֵשָׁה הֵיטֵב.",
+      "tr": "I (m.) wash the leek well.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּרֹאשׁ הַשָּׁנָה אוֹכְלִים לְבִיבוֹת כְּרֵשָׁה.",
+      "tr": "At Rosh Hashanah people eat leek patties.",
+      "register": "neutral",
+      "context": "holidays",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מְרַק כְּרֵשָׁה",
+      "tr": "leek soup"
+     },
+     {
+      "text": "לְבִיבוֹת כְּרֵשָׁה",
+      "tr": "leek patties"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in everyday use.",
+    "etymology": {
+     "text": "From Akkadian 𒂵𒆜𒊬 (GA.KASKAL^(SAR), GA.RAŠ^(SAR) /karašu/), from Sumerian 𒂵𒆜𒊬 (/garaš/). Also Aramaic כרתא / ܟܪܬܐ (karrāṯā), whence Arabic كَرَّاث (karrāṯ).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A 4000-year-old word: Sumerian garaš → Akkadian karašu → Hebrew כְּרֵשָׁה.",
+     "Among the symbolic foods of the Rosh Hashanah meal the leek appears under its Aramaic name, כַּרְתִּי."
+    ],
+    "pitfalls": [
+     "Feminine, but the plural ends in -ים: כְּרֵשִׁים.",
+     "Often spelled כרישה (with י) in everyday writing."
+    ],
+    "subtleties": [
+     "The Biblical leek is חָצִיר (Numbers 11:5) — a word that means “hay” in Modern Hebrew."
+    ]
+   }
+  },
+  {
+   "id": "he:pilpel",
+   "lemma": "פִּלְפֵּל",
+   "pos": "NOUN",
+   "senses": [
+    "veg.bellpepper"
+   ],
+   "gender": "MASC",
+   "translit": "pilpel",
+   "forms": {
+    "N;SG;INDF": "פִּלְפֵּל",
+    "N;SG;DEF": "הַפִּלְפֵּל",
+    "N;PL;INDF": "פִּלְפְּלִים",
+    "N;PL;DEF": "הַפִּלְפְּלִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Red, yellow and green — the colours of Israeli salad.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pepper, capsicum (the vegetable), especially the bell pepper",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.bellpepper"
+     },
+     {
+      "id": "s2",
+      "def": "pepper (the spice; black pepper)",
+      "register": [
+       "neutral"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי חוֹתֵךְ פִּלְפֵּל אָדֹם לַסָּלָט.",
+      "tr": "I (m.) am cutting a red pepper for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "סָבְתָא מְמַלֵּאת פִּלְפְּלִים בְּאֹרֶז.",
+      "tr": "Grandma stuffs peppers with rice.",
+      "register": "neutral",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "צָרִיךְ קְצָת פִּלְפֵּל שָׁחֹר.",
+      "tr": "It needs a little black pepper.",
+      "register": "neutral",
+      "context": "seasoning",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "פִּלְפֵּל מְמֻלָּא",
+      "tr": "stuffed pepper"
+     },
+     {
+      "text": "פִּלְפֵּל אָדֹם",
+      "tr": "red pepper"
+     },
+     {
+      "text": "פִּלְפֵּל שָׁחֹר",
+      "tr": "black pepper"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "גַּמְבָּה",
+      "register": "colloquial",
+      "nuance": "the everyday word for a (red) bell pepper"
+     },
+     {
+      "word": "פִּלְפֵּל מָתוֹק",
+      "register": "neutral",
+      "nuance": "“sweet pepper”, as opposed to פִּלְפֵּל חָרִיף (chili)"
+     }
+    ],
+    "etymology": {
+     "text": "Attested in Mishnaic Hebrew, from Classical Persian پلپل (pilpil), from Sanskrit पिप्पलि (pippali, “long pepper”), likely via Aramaic פלפל, פלפלא.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The verb פִּלְפֵּל means “to pepper” and also “to debate at length” — hence פִּלְפּוּל, sharp Talmudic hair-splitting.",
+     "English pepper and Hebrew פִּלְפֵּל both go back to Sanskrit pippali."
+    ],
+    "pitfalls": [
+     "One word for the vegetable and the spice: add a colour for the vegetable (פִּלְפֵּל אָדֹם) and שָׁחֹר for the spice."
+    ],
+    "subtleties": [
+     "גַּמְבָּה, the everyday name of the red bell pepper, is according to Wiktionary supposedly a back-formation from גַּמְבּוֹת, a plural of Italian gambo “stem, stalk”."
+    ]
+   }
+  },
+  {
+   "id": "he:selek",
+   "lemma": "סֶלֶק",
+   "pos": "NOUN",
+   "senses": [
+    "veg.beetroot"
+   ],
+   "gender": "MASC",
+   "mishkal": "קֶטֶל",
+   "translit": "selek",
+   "forms": {
+    "N;SG;INDF": "סֶלֶק",
+    "N;SG;DEF": "הַסֶּלֶק",
+    "N;PL;INDF": "סְלָקִים",
+    "N;PL;DEF": "הַסְּלָקִים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Deep red, stains everything.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beet, beetroot",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.beetroot"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְבַשֵּׁל סֶלֶק לַסָּלָט.",
+      "tr": "I (m.) am cooking beetroot for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא שׁוֹתָה מִיץ סֶלֶק כָּל בֹּקֶר.",
+      "tr": "She drinks beet juice every morning.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "הַסֶּלֶק צָבַע לִי אֶת הַיָּדַיִם.",
+      "tr": "The beetroot dyed my hands.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "מִיץ סֶלֶק",
+      "tr": "beet juice"
+     },
+     {
+      "text": "סֶלֶק אָדֹם",
+      "tr": "red beet"
+     },
+     {
+      "text": "סֶלֶק סֻכָּר",
+      "tr": "sugar beet"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "Compare Classical Syriac ܣܠܩܐ, Arabic سَلْق (salq).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Among the symbolic foods of the Rosh Hashanah meal is beet (Aramaic סִלְקָא), a pun on יִסְתַּלְּקוּ “may (our enemies) depart”."
+    ],
+    "pitfalls": [
+     "The plural shortens the first vowel: סְלָקִים.",
+     "Homograph without vowels: סִלֵּק “he removed; he paid off” (a verb)."
+    ],
+    "subtleties": [
+     "In the kitchen it is used as a mass noun: קָנִיתִי סֶלֶק = I bought beets."
+    ]
+   }
+  },
+  {
+   "id": "he:kishu",
+   "lemma": "קִשּׁוּא",
+   "pos": "NOUN",
+   "senses": [
+    "veg.zucchini"
+   ],
+   "gender": "MASC",
+   "translit": "kishu",
+   "forms": {
+    "N;SG;INDF": "קִשּׁוּא",
+    "N;SG;DEF": "הַקִּשּׁוּא",
+    "N;PL;INDF": "קִשּׁוּאִים",
+    "N;PL;DEF": "הַקִּשּׁוּאִים"
+   },
+   "plene": {
+    "N;SG;INDF": "קישוא",
+    "N;SG;DEF": "הקישוא",
+    "N;PL;INDF": "קישואים",
+    "N;PL;DEF": "הקישואים"
+   },
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Summer gardens, stuffed vegetables.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "zucchini, courgette (summer squash)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.zucchini"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְטַגֵּן קִשּׁוּאִים עִם בָּצָל.",
+      "tr": "I (m.) fry zucchini with onion.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּגִּנָּה גָּדֵל קִשּׁוּא עֲנָקִי.",
+      "tr": "A giant zucchini is growing in the garden.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּחֹרֶף הִיא מְבַשֶּׁלֶת מְרַק קִשּׁוּאִים.",
+      "tr": "In winter she cooks zucchini soup.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קִשּׁוּאִים מְמֻלָּאִים",
+      "tr": "stuffed zucchini"
+     },
+     {
+      "text": "פְּרַח קִשּׁוּא",
+      "tr": "zucchini flower"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "אֵת הַקִּשֻּׁאִים וְאֵת הָאֲבַטִּחִים",
+      "tr": "the cucumbers and the melons",
+      "kind": "quote",
+      "meaning": "the foods of Egypt the Israelites longed for",
+      "register": "literary",
+      "source": "Numbers 11:5"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym.",
+    "etymology": {
+     "text": "Compare Arabic كوسة.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In the Bible הַקִּשֻּׁאִים were cucumbers (Numbers 11:5); Modern Hebrew moved the word to the zucchini."
+    ],
+    "pitfalls": [
+     "Everyday spelling with י: קישוא, קישואים.",
+     "Plural קִשּׁוּאִים."
+    ],
+    "subtleties": [
+     "In Israel the usual קִשּׁוּא is the pale-green Middle-Eastern summer squash, not only the dark-green European zucchini."
+    ]
+   }
+  },
+  {
+   "id": "he:sheuit-yeruka",
+   "lemma": "שְׁעוּעִית יְרֻקָּה",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.greenbean"
+   ],
+   "gender": "FEM",
+   "translit": "she'u'it yeruka",
+   "forms": {
+    "N;SG;INDF": "שְׁעוּעִית יְרֻקָּה",
+    "N;SG;DEF": "הַשְּׁעוּעִית הַיְּרֻקָּה"
+   },
+   "plene": {
+    "N;SG;INDF": "שעועית ירוקה",
+    "N;SG;DEF": "השעועית הירוקה"
+   },
+   "note": "A two-word lexeme (noun + adjective), used as a mass noun. Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries שְׁעוּעִית and יָרֹק (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "A green side dish, often in tomato sauce.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "green beans (string beans)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.greenbean"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מְבַשֵּׁל שְׁעוּעִית יְרֻקָּה בְּרֹטֶב עַגְבָנִיּוֹת.",
+      "tr": "I (m.) cook green beans in tomato sauce.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי שְׁעוּעִית יְרֻקָּה טְרִיָּה.",
+      "tr": "I bought fresh green beans.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "הַשְּׁעוּעִית הַיְּרֻקָּה רַכָּה מִדַּי.",
+      "tr": "The green beans are too soft.",
+      "register": "neutral",
+      "context": "meal",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "שְׁעוּעִית יְרֻקָּה קְפוּאָה",
+      "tr": "frozen green beans"
+     },
+     {
+      "text": "שְׁעוּעִית לְבָנָה",
+      "tr": "white beans"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "שְׁעוּעִית",
+      "register": "neutral",
+      "nuance": "“beans” in general — without יְרֻקָּה it usually means the dried white beans"
+     }
+    ],
+    "etymology": {
+     "text": "שְׁעוּעִית “bean” (Wiktionary gives no etymology) + יְרֻקָּה, feminine of יָרֹק “green” (from Proto-Semitic *waruḳ-; compare Arabic وَرَق, “leaf”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Hebrew יָרֹק “green” and Arabic وَرَق “leaf” come from the same Semitic root."
+    ],
+    "pitfalls": [
+     "The adjective agrees with the feminine noun and takes the article too: שְׁעוּעִית יְרֻקָּה, הַשְּׁעוּעִית הַיְּרֻקָּה.",
+     "A mass noun: “green beans” is singular in Hebrew."
+    ],
+    "subtleties": [
+     "Everyday spelling: שעועית ירוקה (with ו for the kubutz)."
+    ]
+   }
+  },
+  {
+   "id": "he:batsal-yarok",
+   "lemma": "בָּצָל יָרֹק",
+   "pos": "NOUN",
+   "senses": [
+    "veg.springonion"
+   ],
+   "gender": "MASC",
+   "translit": "batsal yarok",
+   "forms": {
+    "N;SG;INDF": "בָּצָל יָרֹק",
+    "N;SG;DEF": "הַבָּצָל הַיָּרֹק",
+    "N;PL;INDF": "בְּצָלִים יְרֻקִּים",
+    "N;PL;DEF": "הַבְּצָלִים הַיְּרֻקִּים"
+   },
+   "plene": {
+    "N;SG;INDF": "בצל ירוק",
+    "N;SG;DEF": "הבצל הירוק",
+    "N;PL;INDF": "בצלים ירוקים",
+    "N;PL;DEF": "הבצלים הירוקים"
+   },
+   "note": "A two-word lexeme (noun + adjective). Tokenized as one word (the engine matches multi-word lexemes first).",
+   "ref": {
+    "src": "Composed from the Wiktionary (kaikki.org) entries בָּצָל and יָרֹק (no entry for the phrase)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh green rings on salads and omelettes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spring onion, scallion, green onion",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.springonion"
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי קוֹצֵץ בָּצָל יָרֹק לַחֲבִיתָה.",
+      "tr": "I (m.) am chopping spring onion for the omelette.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הִיא מוֹסִיפָה בָּצָל יָרֹק לַסָּלָט.",
+      "tr": "She adds spring onion to the salad.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בַּשּׁוּק מוֹכְרִים צְרוֹר בָּצָל יָרֹק.",
+      "tr": "At the market they sell a bunch of spring onions.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "צְרוֹר בָּצָל יָרֹק",
+      "tr": "a bunch of spring onions"
+     },
+     {
+      "text": "בָּצָל יָרֹק קָצוּץ",
+      "tr": "chopped spring onion"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No one-word synonym in everyday use.",
+    "etymology": {
+     "text": "בָּצָל “onion” (cognate with Arabic بَصَل, baṣal) + יָרֹק “green” (from Proto-Semitic *waruḳ-).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Exactly like English “green onion”: noun + colour adjective."
+    ],
+    "pitfalls": [
+     "The adjective agrees and takes the article too: הַבָּצָל הַיָּרֹק; plural on both words: בְּצָלִים יְרֻקִּים."
+    ],
+    "subtleties": [
+     "Usually a mass noun for the chopped herb; the plural is used for whole stalks.",
+     "Everyday spelling: בצל ירוק, בצלים ירוקים."
+    ]
+   }
+  },
+  {
+   "id": "he:karpas",
+   "lemma": "כַּרְפַּס",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.celery"
+   ],
+   "gender": "MASC",
+   "translit": "karpas",
+   "forms": {
+    "N;SG;INDF": "כַּרְפַּס",
+    "N;SG;DEF": "הַכַּרְפַּס"
+   },
+   "note": "Used as a mass noun; Wiktionary lists no plural.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Soup greens; the first dip of the Seder.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "celery",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.celery"
+     },
+     {
+      "id": "s2",
+      "def": "karpas — the vegetable dipped in salt water at the Passover Seder",
+      "register": [
+       "religious"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "אֲנִי מוֹסִיף כַּרְפַּס לַמָּרָק.",
+      "tr": "I (m.) add celery to the soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "הוּא קוֹצֵץ עֲלֵי כַּרְפַּס לַסָּלָט.",
+      "tr": "He chops celery leaves for the salad.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "בְּלֵיל הַסֵּדֶר טוֹבְלִים כַּרְפַּס בְּמֵי מֶלַח.",
+      "tr": "On Seder night one dips karpas in salt water.",
+      "register": "religious",
+      "context": "holidays",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "עֲלֵי כַּרְפַּס",
+      "tr": "celery leaves"
+     },
+     {
+      "text": "גִּבְעוֹלֵי כַּרְפַּס",
+      "tr": "celery stalks"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "סֶלֶרִי",
+      "register": "colloquial",
+      "nuance": "the everyday loanword, especially for stalk celery"
+     }
+    ],
+    "etymology": {
+     "text": "Compare Maltese karfus (“celery”), Classical Syriac ܟܪܦܣܐ (kerpəsā, “celery”), Arabic كَرَفْس (karafs, “celery”). The ultimate provenance of these terms is murky.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A different word with the same letters: in Esther 1:6 כַּרְפַּס is a fine cotton fabric, from Sanskrit karpāsa “cotton”."
+    ],
+    "pitfalls": [
+     "In everyday speech stalk celery is often called סֶלֶרִי; כַּרְפַּס is the standard word.",
+     "A mass noun: no plural in use."
+    ],
+    "subtleties": [
+     "The Seder’s כַּרְפַּס need not be celery: families use parsley, celery or even potato."
+    ]
+   }
+  },
+  {
+   "id": "he:tiras",
+   "lemma": "תִּירָס",
+   "pos": "NOUN",
+   "class": "mass",
+   "senses": [
+    "veg.corn"
+   ],
+   "gender": "MASC",
+   "translit": "tiras",
+   "forms": {
+    "N;SG;INDF": "תִּירָס",
+    "N;SG;DEF": "הַתִּירָס"
+   },
+   "note": "Used as a mass noun; Wiktionary lists no plural.",
+   "ref": {
+    "src": "Wiktionary (kaikki.org)",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "positive",
+    "feeling": "Summer beaches, corn on the cob.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "maize, (sweet) corn",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.corn"
+     }
+    ],
+    "examples": [
+     {
+      "text": "בַּקַּיִץ אוֹכְלִים קְלַח תִּירָס עַל הַחוֹף.",
+      "tr": "In summer people eat corn on the cob at the beach.",
+      "register": "neutral",
+      "context": "summer",
+      "sense": "s1"
+     },
+     {
+      "text": "אֲנִי מוֹסִיף תִּירָס לַסָּלָט.",
+      "tr": "I (m.) add corn to the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "קָנִיתִי שַׂקִּית תִּירָס קָפוּא.",
+      "tr": "I bought a bag of frozen corn.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "קְלַח תִּירָס",
+      "tr": "corn on the cob"
+     },
+     {
+      "text": "תִּירָס מָתוֹק",
+      "tr": "sweet corn"
+     },
+     {
+      "text": "קֶמַח תִּירָס",
+      "tr": "cornflour"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym.",
+    "etymology": {
+     "text": "After a son of Japheth (תִּירָס: Tiras) listed in Genesis 10 who was sometimes identified with the Turkish people, who have been traditionally considered as the main source of distribution of maize in Europe.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Many languages wrongly credited maize to the East: Hebrew “Tiras” (= the Turks), Italian granturco (“Turkish grain”) — while Turkish calls it mısır, “Egypt”."
+    ],
+    "pitfalls": [
+     "Normative stress is on the last syllable (tirás); in everyday speech many say TÍ-ras.",
+     "A mass noun: תִּירָס = corn. Count the cobs: קְלָחֵי תִּירָס."
+    ],
+    "subtleties": [
+     "Also the name of the Biblical Tiras, son of Japheth (Genesis 10:2)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

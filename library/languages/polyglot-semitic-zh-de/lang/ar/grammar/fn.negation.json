@@ -1,0 +1,83 @@
+{
+ "function": "fn.negation",
+ "status": "realized",
+ "summary": "Arabic chooses the negator by sentence type and tense. A present verb is negated with لَا: لَا أُحِبُّ الْبَصَلَ. A sentence without a verb (“is not”, “is not here”, “does not have”) is negated with لَيْسَ — a verb with past-tense endings but present meaning, which agrees with the subject (لَسْتُ، لَيْسَتْ …) and puts a noun or adjective predicate in the accusative: هٰذِهِ لَيْسَتْ جَزَرَةً; لَيْسَ عِنْدِي ثُومٌ. The past is negated with لَمْ + jussive (لَمْ آكُلْ), the future with لَنْ + subjunctive (لَنْ آكُلَ); مَا + past verb is classical and dialectal. The answer “no” is also لَا.",
+ "procedure": {
+  "askYourself": [
+   "Is there a present verb? → لَا directly before it; the verb stays indicative (-u).",
+   "Is it a sentence without a verb (X is Y / X is here / I have)? → لَيْسَ, agreeing with the subject.",
+   "After لَيْسَ, is the predicate a noun or an adjective? → accusative (جَزَرَةً، جَائِعًا).",
+   "Is it past or future? → لَمْ + jussive / لَنْ + subjunctive — not لَا.",
+   "Is it the answer “no”? → لَا on its own, then a comma."
+  ]
+ },
+ "traps": [
+  "*لَا هٰذِهِ جَزَرَةٌ is wrong: use لَيْسَ — هٰذِهِ لَيْسَتْ جَزَرَةً.",
+  "لَيْسَ looks like a past verb but means the present: لَسْتُ جَائِعًا = I am not hungry.",
+  "Do not negate a past verb with لَا: “I didn’t eat” = لَمْ آكُلْ.",
+  "لَا “no” and لَا “not” are written the same; the answer is followed by a pause or comma: لَا، شُكْرًا."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:la",
+   "ar:laysa"
+  ]
+ },
+ "paradigmCells": [
+  "V;PFV;1;SG",
+  "V;PFV;2;SG;MASC",
+  "V;PFV;2;SG;FEM",
+  "V;PFV;3;SG;MASC",
+  "V;PFV;3;SG;FEM",
+  "V;PFV;1;PL",
+  "V;PFV;2;PL;MASC",
+  "V;PFV;2;PL;FEM",
+  "V;PFV;3;PL;MASC",
+  "V;PFV;3;PL;FEM"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "paradigm",
+   "pos": "VERB",
+   "cells": [
+    "V;PFV;1;SG",
+    "V;PFV;2;SG;MASC",
+    "V;PFV;2;SG;FEM",
+    "V;PFV;3;SG;MASC",
+    "V;PFV;3;SG;FEM",
+    "V;PFV;1;PL",
+    "V;PFV;2;PL;MASC",
+    "V;PFV;2;PL;FEM",
+    "V;PFV;3;PL;MASC",
+    "V;PFV;3;PL;FEM"
+   ]
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "contrast",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  }
+ ]
+}

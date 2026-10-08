@@ -1,0 +1,136 @@
+{
+ "function": "fn.negation",
+ "status": "realized",
+ "summary": "Chinese has two everyday negators, placed directly before the verb (or before a place phrase with 在). 不 (bù) negates habits, likes, wishes, decisions, the present and the future, adjectives and 是. 没 (méi, often 没有) negates 有 and says that something did not happen or has not happened yet. There is no ‘do’ and no change of the verb.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "Meaning",
+    "Negator",
+    "Example"
+   ],
+   "rows": [
+    [
+     "habit / preference",
+     "不",
+     "我不喜欢洋葱。 I don’t like onions."
+    ],
+    [
+     "is not",
+     "不 (不是)",
+     "这不是西红柿。 This isn’t a tomato."
+    ],
+    [
+     "not here",
+     "不 (不在)",
+     "黄瓜不在这里。 The cucumber isn’t here."
+    ],
+    [
+     "not have / there isn’t",
+     "没 (没有)",
+     "我没有南瓜。 I don’t have a pumpkin."
+    ],
+    [
+     "did not happen",
+     "没",
+     "他没吃茄子。 He didn’t eat the eggplant."
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "bù or bú?",
+   "text": "不 is said bú before a 4th tone: 不是 bú shì, 不要 bú yào, 不在 bú zài; bù elsewhere: 不喜欢 bù xǐhuan."
+  },
+  {
+   "t": "compare",
+   "items": [
+    {
+     "title": "不 — will, habit, state",
+     "points": [
+      "他不吃茄子。 He doesn’t eat eggplant (never does / won’t).",
+      "Also with 是, 在 and adjectives."
+     ]
+    },
+    {
+     "title": "没 — fact, event",
+     "points": [
+      "他没吃茄子。 He didn’t eat the eggplant (it didn’t happen).",
+      "Always with 有: 没有."
+     ]
+    }
+   ]
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is the verb 有 (have / there is)? → 没有 — never 不有.",
+   "Is the verb 是 (is)? → 不是 — never 没是.",
+   "Am I saying that something did not happen, or has not happened yet? → 没 + verb, without 了.",
+   "Is it a habit, a preference, a wish, a decision or the future? → 不 + verb.",
+   "Is the syllable after 不 in the 4th tone? → say bú."
+  ],
+  "steps": [
+   "Find the verb (or the 在 + place phrase).",
+   "Choose 不 or 没 with the questions above.",
+   "Put the negator directly in front of it; nothing else changes.",
+   "With 没有, drop 一 + measure word: 我有一个南瓜 → 我没有南瓜."
+  ]
+ },
+ "traps": [
+  "*我不有南瓜 → 我没有南瓜.",
+  "*他没是老师 → 他不是老师.",
+  "*我没吃了 → 我没吃 (没 and 了 do not go together here).",
+  "不要 + verb is the command ‘don’t!’; ‘I don’t want to eat’ is 我不想吃.",
+  "Under 没有, 一个 normally disappears: 我没有南瓜, not 我没有一个南瓜."
+ ],
+ "evidence": {
+  "lemmas": [
+   "zh:bu",
+   "zh:mei"
+  ]
+ },
+ "needs": {
+  "VERB": 3,
+  "NOUN": 5
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "contrast",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "proofread",
+   "bank": {
+    "functions": [
+     "fn.negation"
+    ]
+   }
+  },
+  {
+   "type": "tone_mark"
+  }
+ ]
+}

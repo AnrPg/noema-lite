@@ -1,0 +1,71 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "summary": "German marks definiteness with articles: der/die/das (the) for something known or specific, ein/eine (a, an) for something new or any one of its kind. The article also carries the gender, number and case of the noun, so it changes with the noun's role in the sentence. There is no plural of ein: a plural noun without an article is indefinite (Tomaten = tomatoes).",
+ "procedure": {
+  "askYourself": [
+   "Is the thing known to the listener or a specific one (→ der/die/das) or new, any one (→ ein/eine)?",
+   "What is the gender of the noun (der Kohl, die Gurke, das Radieschen)?",
+   "Singular or plural? Plural definite is always die (dative den); plural indefinite has no article.",
+   "Which case does the noun's role need: subject (nominative), direct object (accusative), indirect object (dative)?"
+  ],
+  "steps": [
+   "Find the noun and its gender.",
+   "Decide definite or indefinite.",
+   "Decide the case from the verb or preposition.",
+   "Take the matching cell: e.g. masculine accusative → den / einen."
+  ]
+ },
+ "traps": [
+  "Only the masculine changes from nominative to accusative: der Kürbis → den Kürbis, ein Kürbis → einen Kürbis; die and das stay the same.",
+  "die is feminine singular AND every plural: die Gurke, die Gurken, die Kürbisse.",
+  "There is no plural of ein: Ich kaufe Zwiebeln (I buy onions), not *eine Zwiebeln.",
+  "Uncountable nouns usually take no article when they are indefinite: Ich mag Knoblauch.",
+  "In Das ist eine Gurke the word das is a pointing pronoun, not the article – it does not change with the noun."
+ ],
+ "evidence": {
+  "lemmas": [
+   "de:der",
+   "de:ein"
+  ]
+ },
+ "paradigmCells": [
+  "DET;NOM;SG;MASC",
+  "DET;NOM;SG;FEM",
+  "DET;NOM;SG;NEUT",
+  "DET;ACC;SG;MASC",
+  "DET;NOM;PL",
+  "DET;DAT;PL"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "gender_article",
+   "pos": "NOUN",
+   "count": 12
+  },
+  {
+   "type": "inflect",
+   "pos": "DET",
+   "count": 12
+  },
+  {
+   "type": "agree",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ]
+   }
+  }
+ ]
+}

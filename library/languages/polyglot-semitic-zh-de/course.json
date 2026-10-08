@@ -1,0 +1,30 @@
+{
+ "format": "noema.langcourse/v1",
+ "id": "polyglot-semitic-zh-de",
+ "title": "Arabic · Hebrew · Chinese · German",
+ "explainLang": "en",
+ "languages": [
+  "ar",
+  "he",
+  "zh",
+  "de"
+ ],
+ "profiles": "required",
+ "defaults": {
+  "depth": {
+   "ar": 3,
+   "he": 3,
+   "zh": 3,
+   "de": 3
+  },
+  "batch": 12,
+  "dailyMinutes": 30
+ },
+ "knownLanguages": [
+  "el",
+  "en",
+  "de",
+  "ru",
+  "tr"
+ ]
+}

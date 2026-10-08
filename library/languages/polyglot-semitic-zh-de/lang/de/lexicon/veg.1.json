@@ -1,0 +1,3113 @@
+{
+ "lexemes": [
+  {
+   "id": "de:Tomate",
+   "lemma": "Tomate",
+   "pos": "NOUN",
+   "senses": [
+    "veg.tomato"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Tomate",
+    "N;ACC;SG": "Tomate",
+    "N;DAT;SG": "Tomate",
+    "N;GEN;SG": "Tomate",
+    "N;NOM;PL": "Tomaten",
+    "N;ACC;PL": "Tomaten",
+    "N;DAT;PL": "Tomaten",
+    "N;GEN;PL": "Tomaten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Paradeiser",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Summer, salads, tomato sauce – and the stock character of the unreliable friend (treulose Tomate).",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "tomato (the plant and its fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.tomato",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Für die Soße brauche ich ein Kilo Tomaten.",
+      "tr": "I need a kilo of tomatoes for the sauce.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Tomaten im Garten sind endlich reif.",
+      "tr": "The tomatoes in the garden are finally ripe.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "Hast du Tomaten auf den Augen? Das Schild steht direkt vor dir!",
+      "tr": "Are you blind? (lit. Do you have tomatoes on your eyes?) The sign is right in front of you!",
+      "register": "colloquial",
+      "context": "everyday teasing",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "reife Tomaten",
+      "tr": "ripe tomatoes"
+     },
+     {
+      "text": "Tomaten schneiden",
+      "tr": "to cut tomatoes"
+     },
+     {
+      "text": "getrocknete Tomaten",
+      "tr": "sun-dried tomatoes"
+     },
+     {
+      "text": "die Tomatensoße",
+      "tr": "tomato sauce"
+     },
+     {
+      "text": "das Tomatenmark",
+      "tr": "tomato paste"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Tomaten auf den Augen haben",
+      "tr": "to have tomatoes on one's eyes",
+      "kind": "idiom",
+      "meaning": "to fail to notice something obvious",
+      "register": "colloquial"
+     },
+     {
+      "text": "eine treulose Tomate",
+      "tr": "a faithless tomato",
+      "kind": "colloquial",
+      "meaning": "an unreliable friend who does not turn up or keep in touch (said jokingly)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Paradeiser",
+      "register": "regional",
+      "nuance": "the usual word in Austria (der Paradeiser, plural Paradeiser)",
+      "region": "AT"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French tomate or Spanish tomate, from Classical Nahuatl tomatl (“tomatillo”), the tomato proper being xītomatl.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Austrian Paradeiser comes from Paradiesapfel, “apple of paradise”."
+    ],
+    "pitfalls": [
+     "Plural with -n: eine Tomate, zwei Tomaten.",
+     "das Tomatenmark is tomato paste – Mark here means “pulp”, not the currency."
+    ],
+    "subtleties": [
+     "Botanically a fruit (a berry), but in German cooking it counts as Gemüse (more precisely Fruchtgemüse, “fruit vegetable”)."
+    ]
+   }
+  },
+  {
+   "id": "de:Zwiebel",
+   "lemma": "Zwiebel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.onion"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Zwiebel",
+    "N;ACC;SG": "Zwiebel",
+    "N;DAT;SG": "Zwiebel",
+    "N;GEN;SG": "Zwiebel",
+    "N;NOM;PL": "Zwiebeln",
+    "N;ACC;PL": "Zwiebeln",
+    "N;DAT;PL": "Zwiebeln",
+    "N;GEN;PL": "Zwiebeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Kitchen tears; cosy cooking smells.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "onion",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.onion",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "bulb of a plant (tulip, lily …)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "gardening"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "(old) pocket watch",
+      "register": [
+       "slang",
+       "dated"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "hair root, hair follicle (Haarzwiebel)",
+      "register": [
+       "technical"
+      ],
+      "domains": [
+       "anatomy"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Beim Zwiebelschneiden muss ich immer weinen.",
+      "tr": "I always cry when I cut onions.",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Brate die Zwiebeln goldbraun an.",
+      "tr": "Fry the onions until golden brown.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Herbst pflanzt man Tulpenzwiebeln.",
+      "tr": "Tulip bulbs are planted in autumn.",
+      "register": "neutral",
+      "context": "gardening",
+      "sense": "s2"
+     },
+     {
+      "text": "Opa zog seine alte Zwiebel aus der Westentasche.",
+      "tr": "Grandpa pulled his old pocket watch out of his waistcoat pocket.",
+      "register": "colloquial",
+      "context": "humour",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Zwiebeln schneiden",
+      "tr": "to cut onions"
+     },
+     {
+      "text": "rote Zwiebel",
+      "tr": "red onion"
+     },
+     {
+      "text": "die Zwiebelsuppe",
+      "tr": "onion soup"
+     },
+     {
+      "text": "Zwiebeln anbraten",
+      "tr": "to fry onions lightly"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "sich nach dem Zwiebelprinzip anziehen",
+      "tr": "to dress following the onion principle",
+      "kind": "colloquial",
+      "meaning": "to dress in several layers",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Bolle",
+      "register": "regional",
+      "nuance": "Berlin and northern colloquial word for onion",
+      "region": "Berlin"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German zwibel, zwibolle, from Old High German zwibollo, from Late Latin cēpulla, diminutive of Latin cēpa.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The onion-shaped domes of Bavarian and Austrian churches are called Zwiebeltürme (“onion towers”)."
+    ],
+    "pitfalls": [
+     "die Zwiebel is feminine; plural die Zwiebeln.",
+     "Frühlingszwiebel = spring onion (scallion), not a small onion."
+    ],
+    "subtleties": [
+     "Zwiebel also means any plant bulb: Blumenzwiebel, Tulpenzwiebel."
+    ]
+   }
+  },
+  {
+   "id": "de:Kartoffel",
+   "lemma": "Kartoffel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.potato"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Kartoffel",
+    "N;ACC;SG": "Kartoffel",
+    "N;DAT;SG": "Kartoffel",
+    "N;GEN;SG": "Kartoffel",
+    "N;NOM;PL": "Kartoffeln",
+    "N;ACC;PL": "Kartoffeln",
+    "N;DAT;PL": "Kartoffeln",
+    "N;GEN;PL": "Kartoffeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Erdapfel",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "The heart of traditional German cooking: boiled, fried, mashed, in salads and dumplings.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "potato",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.potato",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "(slang) a German, “spud” – used mockingly, e.g. by young people from immigrant families",
+      "register": [
+       "slang",
+       "pejorative"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Schälst du bitte die Kartoffeln?",
+      "tr": "Could you peel the potatoes, please?",
+      "register": "informal",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Fisch gibt es Kartoffeln und Salat.",
+      "tr": "The fish comes with potatoes and salad.",
+      "register": "neutral",
+      "context": "restaurant",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kartoffeln lagern wir im Keller.",
+      "tr": "We store the potatoes in the cellar.",
+      "register": "neutral",
+      "context": "household",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Kartoffeln schälen",
+      "tr": "to peel potatoes"
+     },
+     {
+      "text": "die Bratkartoffeln",
+      "tr": "fried potatoes"
+     },
+     {
+      "text": "die Salzkartoffeln",
+      "tr": "boiled potatoes"
+     },
+     {
+      "text": "der Kartoffelsalat",
+      "tr": "potato salad"
+     },
+     {
+      "text": "festkochende / mehligkochende Kartoffeln",
+      "tr": "waxy / floury potatoes"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Die dümmsten Bauern haben die dicksten Kartoffeln.",
+      "tr": "The stupidest farmers have the fattest potatoes.",
+      "kind": "proverb",
+      "meaning": "luck often goes to those who do not deserve it",
+      "register": "colloquial"
+     },
+     {
+      "text": "jemanden fallen lassen wie eine heiße Kartoffel",
+      "tr": "to drop someone like a hot potato",
+      "kind": "idiom",
+      "meaning": "to abandon someone suddenly",
+      "register": "colloquial"
+     },
+     {
+      "text": "Rein in die Kartoffeln, raus aus den Kartoffeln.",
+      "tr": "Into the potatoes, out of the potatoes.",
+      "kind": "colloquial",
+      "meaning": "contradictory instructions given one after the other",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Erdapfel",
+      "register": "regional",
+      "nuance": "Austria and parts of southern Germany (der Erdapfel, plural Erdäpfel)",
+      "region": "AT, south"
+     },
+     {
+      "word": "Grumbeere",
+      "register": "dialectal",
+      "nuance": "south-western dialects (e.g. Palatinate, Saarland)",
+      "region": "south-west"
+     }
+    ],
+    "etymology": {
+     "text": "From older Tartuffel or Tartüffel (18th c.), from Italian tartufolo, diminutive of tartufo (“truffle”), from Medieval Latin *territūberum or Latin terrae tūber (“tuber of the earth”). The use as an ethnic nickname is due to the prominence of potatoes in German cuisine.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In 1756 Frederick the Great of Prussia ordered the cultivation of potatoes in the so-called Kartoffelbefehl (“potato order”).",
+     "The word comes from Italian tartufolo, “little truffle”."
+    ],
+    "pitfalls": [
+     "Plural Kartoffeln; potato crisps are Chips and French fries are Pommes (frites) – not *Kartoffeln."
+    ],
+    "subtleties": [
+     "In slang, Kartoffel can be a mocking name for a German; it is usually teasing, but it can hurt."
+    ]
+   }
+  },
+  {
+   "id": "de:Knoblauch",
+   "lemma": "Knoblauch",
+   "pos": "NOUN",
+   "senses": [
+    "veg.garlic"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "forms": {
+    "N;NOM;SG": "Knoblauch",
+    "N;ACC;SG": "Knoblauch",
+    "N;DAT;SG": "Knoblauch",
+    "N;GEN;SG": "Knoblauchs"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Strong smell, Mediterranean cooking, vampire jokes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "garlic (the plant and its bulb)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.garlic",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Hack den Knoblauch ganz fein.",
+      "tr": "Chop the garlic very finely.",
+      "register": "informal",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Wer viel Knoblauch isst, riecht am nächsten Tag noch danach.",
+      "tr": "Anyone who eats a lot of garlic still smells of it the next day.",
+      "register": "neutral",
+      "context": "everyday life",
+      "sense": "s1"
+     },
+     {
+      "text": "Im Volksglauben schützt Knoblauch vor Vampiren.",
+      "tr": "In folk belief, garlic protects against vampires.",
+      "register": "neutral",
+      "context": "folklore",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Knoblauchzehe",
+      "tr": "a clove of garlic"
+     },
+     {
+      "text": "die Knoblauchknolle",
+      "tr": "a head (bulb) of garlic"
+     },
+     {
+      "text": "Knoblauch pressen",
+      "tr": "to crush garlic"
+     },
+     {
+      "text": "das Knoblauchbrot",
+      "tr": "garlic bread"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Knobi",
+      "register": "colloquial",
+      "nuance": "short, friendly everyday form"
+     },
+     {
+      "word": "Knofel",
+      "register": "regional",
+      "nuance": "colloquial word in Austria and southern Germany",
+      "region": "AT, south"
+     }
+    ],
+    "etymology": {
+     "text": "From Early New High German Knobloch, from Middle High German knobelouch, with dissimilation from klobelouch, from Old High German chlobalouh (literally “clove-leek”), from Proto-West Germanic *klobulauk; from now dialectal klieben (“to cleave”) and Lauch (“leek”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The old form was Klobelauch; the kl- changed to kn- in line with words for knobbly things such as Knopf, Knoten, Knolle."
+    ],
+    "pitfalls": [
+     "No plural: to count, use eine Knoblauchzehe (a clove) or eine Knoblauchknolle (a bulb).",
+     "Masculine: der Knoblauch, like der Lauch."
+    ],
+    "subtleties": [
+     "The second half of Knoblauch is Lauch (leek) – garlic is literally the “cleft leek”."
+    ]
+   }
+  },
+  {
+   "id": "de:Gurke",
+   "lemma": "Gurke",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cucumber"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Gurke",
+    "N;ACC;SG": "Gurke",
+    "N;DAT;SG": "Gurke",
+    "N;GEN;SG": "Gurke",
+    "N;NOM;PL": "Gurken",
+    "N;ACC;PL": "Gurken",
+    "N;DAT;PL": "Gurken",
+    "N;GEN;PL": "Gurken"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh salads in summer; in slang, mocking.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cucumber (the plant and its fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cucumber",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "pickled gherkin (saure Gurke, Gewürzgurke)",
+      "register": [
+       "neutral"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "piece of junk – an old, poor car or device",
+      "register": [
+       "colloquial"
+      ]
+     },
+     {
+      "id": "s4",
+      "def": "big nose",
+      "register": [
+       "informal",
+       "humorous"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schneide eine Gurke für den Salat.",
+      "tr": "I'm slicing a cucumber for the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Gurken aus dem Garten sind dieses Jahr klein.",
+      "tr": "The cucumbers from the garden are small this year.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Abendbrot gibt es saure Gurken.",
+      "tr": "There are pickled gherkins with supper.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s2"
+     },
+     {
+      "text": "Mit der alten Gurke fährst du noch?",
+      "tr": "You're still driving that old banger?",
+      "register": "colloquial",
+      "context": "cars",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "saure Gurken",
+      "tr": "pickled gherkins"
+     },
+     {
+      "text": "der Gurkensalat",
+      "tr": "cucumber salad"
+     },
+     {
+      "text": "eine Gurke schälen",
+      "tr": "to peel a cucumber"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Sauregurkenzeit",
+      "tr": "the sour-gherkin season",
+      "kind": "colloquial",
+      "meaning": "the silly season: summer, when there is little news",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Salatgurke",
+      "register": "neutral",
+      "nuance": "the long fresh cucumber, as opposed to pickles"
+     },
+     {
+      "word": "Gewürzgurke",
+      "register": "neutral",
+      "nuance": "a small pickled gherkin"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Old Polish ogórek, from Byzantine Greek ἀγγούριον (angoúrion, “cucumber”). Cognate with Dutch augurk, English gherkin.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Gurke reached German through Polish from Byzantine Greek ἀγγούριον – the same word as Modern Greek αγγούρι."
+    ],
+    "pitfalls": [
+     "German Gurke covers both the fresh cucumber and the small pickle; English separates cucumber and gherkin."
+    ],
+    "subtleties": [
+     "In colloquial speech a Gurke is a lame old car or a useless device – context tells you which “cucumber” is meant."
+    ]
+   }
+  },
+  {
+   "id": "de:Aubergine",
+   "lemma": "Aubergine",
+   "pos": "NOUN",
+   "senses": [
+    "veg.eggplant"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Aubergine",
+    "N;ACC;SG": "Aubergine",
+    "N;DAT;SG": "Aubergine",
+    "N;GEN;SG": "Aubergine",
+    "N;NOM;PL": "Auberginen",
+    "N;ACC;PL": "Auberginen",
+    "N;DAT;PL": "Auberginen",
+    "N;GEN;PL": "Auberginen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Melanzani",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mediterranean and Middle Eastern dishes; glossy purple.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "aubergine, eggplant (the plant and its fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.eggplant",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schneide die Aubergine in Scheiben und grille sie.",
+      "tr": "I slice the aubergine and grill it.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Auberginen gibt es heute das ganze Jahr im Supermarkt.",
+      "tr": "Today aubergines are available in the supermarket all year round.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "In Wien sagt man Melanzani statt Aubergine.",
+      "tr": "In Vienna people say Melanzani instead of Aubergine.",
+      "register": "neutral",
+      "context": "regional language",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gefüllte Auberginen",
+      "tr": "stuffed aubergines"
+     },
+     {
+      "text": "gegrillte Aubergine",
+      "tr": "grilled aubergine"
+     },
+     {
+      "text": "die Aubergine in Scheiben schneiden",
+      "tr": "to slice the aubergine"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Melanzani",
+      "register": "regional",
+      "nuance": "the Austrian word (die Melanzani, plural Melanzani)",
+      "region": "AT"
+     }
+    ],
+    "etymology": {
+     "text": "Unadapted borrowing from French aubergine. Doublet of Melanzani.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Aubergine and Austrian Melanzani are doublets – two borrowings that go back to the same source."
+    ],
+    "pitfalls": [
+     "French spelling and pronunciation: Au- is said [o] and -g- like the s in “pleasure”: [obɛʁˈʒiːnə]."
+    ],
+    "subtleties": [
+     "aubergine is also a colour word: ein auberginefarbenes Kleid (an aubergine-coloured dress)."
+    ]
+   }
+  },
+  {
+   "id": "de:Karotte",
+   "lemma": "Karotte",
+   "pos": "NOUN",
+   "senses": [
+    "veg.carrot"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Karotte",
+    "N;ACC;SG": "Karotte",
+    "N;DAT;SG": "Karotte",
+    "N;GEN;SG": "Karotte",
+    "N;NOM;PL": "Karotten",
+    "N;ACC;PL": "Karotten",
+    "N;DAT;PL": "Karotten",
+    "N;GEN;PL": "Karotten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Möhre",
+     "region": "north"
+    },
+    {
+     "lemma": "Rüebli",
+     "region": "CH"
+    }
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Homely and healthy; children's food and rabbit jokes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "carrot, the orange root vegetable",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.carrot",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schäle die Karotten für die Suppe.",
+      "tr": "I'm peeling the carrots for the soup.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Kilo Karotten, bitte.",
+      "tr": "A kilo of carrots, please.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Karotten sind gut für die Augen, sagt meine Oma.",
+      "tr": "Carrots are good for your eyes, my grandma says.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Karotten schälen",
+      "tr": "to peel carrots"
+     },
+     {
+      "text": "geriebene Karotten",
+      "tr": "grated carrots"
+     },
+     {
+      "text": "der Karottensaft",
+      "tr": "carrot juice"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Möhre",
+      "register": "neutral",
+      "nuance": "the same vegetable; the usual word in northern and central Germany",
+      "region": "north"
+     },
+     {
+      "word": "Gelbe Rübe",
+      "register": "regional",
+      "nuance": "southern Germany (Bavaria, Swabia)",
+      "region": "south"
+     },
+     {
+      "word": "Rüebli",
+      "register": "regional",
+      "nuance": "Switzerland",
+      "region": "CH"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from French carotte, from Latin carōta, from Ancient Greek κᾰρωτόν (kărōtón).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The orange carrot is usually credited to Dutch growers of the 17th century; older carrots were mostly purple or yellow."
+    ],
+    "pitfalls": [
+     "Spelling: German Karotte has one r and two t's; English carrot has two r's and one t."
+    ],
+    "subtleties": [
+     "“Carrot and stick” is not said with Karotte in German: Zuckerbrot und Peitsche (“sweet bread and whip”).",
+     "Which word people use (Karotte, Möhre, Gelbe Rübe, Rüebli) tells you where they are from."
+    ]
+   }
+  },
+  {
+   "id": "de:Süßkartoffel",
+   "lemma": "Süßkartoffel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.sweetpotato"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Süßkartoffel",
+    "N;ACC;SG": "Süßkartoffel",
+    "N;DAT;SG": "Süßkartoffel",
+    "N;GEN;SG": "Süßkartoffel",
+    "N;NOM;PL": "Süßkartoffeln",
+    "N;ACC;PL": "Süßkartoffeln",
+    "N;DAT;PL": "Süßkartoffeln",
+    "N;GEN;PL": "Süßkartoffeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Süsskartoffel",
+     "region": "CH"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Trendy, colourful, healthy – a newcomer to German kitchens.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "sweet potato (the plant and its tuber)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.sweetpotato",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Süßkartoffeln schmecken auch als Pommes sehr gut.",
+      "tr": "Sweet potatoes also taste great as fries.",
+      "register": "neutral",
+      "context": "food",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich backe die Süßkartoffel im Ofen.",
+      "tr": "I'm baking the sweet potato in the oven.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Süßkartoffel ist mit der Kartoffel nicht näher verwandt.",
+      "tr": "The sweet potato is not closely related to the potato.",
+      "register": "neutral",
+      "context": "botany",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "Süßkartoffeln backen",
+      "tr": "to bake sweet potatoes"
+     },
+     {
+      "text": "die Süßkartoffelpommes",
+      "tr": "sweet potato fries"
+     },
+     {
+      "text": "das Süßkartoffelpüree",
+      "tr": "mashed sweet potato"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Batate",
+      "register": "neutral",
+      "nuance": "the older, less common name (from Spanish batata), found in botany and some recipes"
+     }
+    ],
+    "etymology": {
+     "text": "süß (“sweet”) + Kartoffel (“potato”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "English potato itself comes from batata, the Caribbean word for the sweet potato."
+    ],
+    "pitfalls": [
+     "In Switzerland ß is written ss: Süsskartoffel.",
+     "Plural Süßkartoffeln."
+    ],
+    "subtleties": [
+     "Despite the name, the sweet potato belongs to the bindweed family (Windengewächse), not to the nightshade family like the potato."
+    ]
+   }
+  },
+  {
+   "id": "de:Erbse",
+   "lemma": "Erbse",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pea"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Erbse",
+    "N;ACC;SG": "Erbse",
+    "N;DAT;SG": "Erbse",
+    "N;GEN;SG": "Erbse",
+    "N;NOM;PL": "Erbsen",
+    "N;ACC;PL": "Erbsen",
+    "N;DAT;PL": "Erbsen",
+    "N;GEN;PL": "Erbsen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Small, green, a little childish: peas and carrots, pea soup.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pea (the plant, the pod and the seed)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pea",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zum Mittagessen gibt es Erbsen und Möhren.",
+      "tr": "For lunch there are peas and carrots.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Erbsen aus der Dose sind schon gekocht.",
+      "tr": "The tinned peas are already cooked.",
+      "register": "neutral",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Prinzessin spürte die Erbse durch zwanzig Matratzen hindurch.",
+      "tr": "The princess felt the pea through twenty mattresses.",
+      "register": "literary",
+      "context": "fairy tale",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "grüne Erbsen",
+      "tr": "green peas"
+     },
+     {
+      "text": "die Erbsensuppe",
+      "tr": "pea soup"
+     },
+     {
+      "text": "tiefgekühlte Erbsen",
+      "tr": "frozen peas"
+     },
+     {
+      "text": "Erbsen pulen",
+      "tr": "to shell peas (northern German)"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "die Prinzessin auf der Erbse",
+      "tr": "the princess and the pea",
+      "kind": "idiom",
+      "meaning": "an over-sensitive, fussy person (after Andersen's fairy tale)",
+      "register": "colloquial"
+     },
+     {
+      "text": "der Erbsenzähler",
+      "tr": "pea counter",
+      "kind": "colloquial",
+      "meaning": "a pedant, nitpicker",
+      "register": "pejorative"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym: Zuckererbse (sugar pea) and Kichererbse (chickpea) are different plants or kinds.",
+    "etymology": {
+     "text": "From Middle High German erbīz, erwīz, arwīz, ar(e)weiz, from Old High German arawīz, araweiz, from Proto-West Germanic *arwīt, *arwait. Cognate with Dutch erwt, Swedish ärta.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Gregor Mendel discovered the laws of inheritance in the 19th century by crossing pea plants."
+    ],
+    "pitfalls": [
+     "die Kichererbse is the chickpea – a different plant, despite the name.",
+     "Plural Erbsen."
+    ],
+    "subtleties": [
+     "der Erbsenzähler (“pea counter”) is a pedant, a nitpicker – pejorative."
+    ]
+   }
+  },
+  {
+   "id": "de:Spinat",
+   "lemma": "Spinat",
+   "pos": "NOUN",
+   "senses": [
+    "veg.spinach"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Spinat",
+    "N;ACC;SG": "Spinat",
+    "N;DAT;SG": "Spinat",
+    "N;GEN;SG": "Spinats",
+    "N;NOM;PL": "Spinate",
+    "N;ACC;PL": "Spinate",
+    "N;DAT;PL": "Spinaten",
+    "N;GEN;PL": "Spinate"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Childhood memories – loved or hated – and the classic Spinat mit Spiegelei.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spinach (the plant and its leaves as food)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.spinach",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Spinat mit Spiegelei und Kartoffeln ist ein Klassiker.",
+      "tr": "Spinach with fried egg and potatoes is a classic.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Den frischen Spinat musst du gründlich waschen.",
+      "tr": "You have to wash the fresh spinach thoroughly.",
+      "register": "informal",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Als Kind mochte ich keinen Spinat.",
+      "tr": "As a child I didn't like spinach.",
+      "register": "neutral",
+      "context": "childhood",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "frischer Spinat",
+      "tr": "fresh spinach"
+     },
+     {
+      "text": "der Rahmspinat",
+      "tr": "creamed spinach"
+     },
+     {
+      "text": "der Blattspinat",
+      "tr": "leaf spinach"
+     },
+     {
+      "text": "Spinat dünsten",
+      "tr": "to steam spinach"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym; Blattspinat (leaf spinach) and Rahmspinat (creamed spinach) are forms in which it is sold.",
+    "etymology": {
+     "text": "Borrowed from Italian spinace.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Italian spinace, like English spinach, goes back to Arabic إِسْفَانَاخ (ʔisfānāḵ), from Classical Persian."
+    ],
+    "pitfalls": [
+     "Masculine: der Spinat. It is normally uncountable; the plural Spinate is only used for kinds of spinach."
+    ],
+    "subtleties": [
+     "In shops you choose between Blattspinat (whole leaves) and Rahmspinat (chopped, with cream) – often frozen."
+    ]
+   }
+  },
+  {
+   "id": "de:Radieschen",
+   "lemma": "Radieschen",
+   "pos": "NOUN",
+   "senses": [
+    "veg.radish"
+   ],
+   "gender": "NEUT",
+   "forms": {
+    "N;NOM;SG": "Radieschen",
+    "N;ACC;SG": "Radieschen",
+    "N;DAT;SG": "Radieschen",
+    "N;GEN;SG": "Radieschens",
+    "N;NOM;PL": "Radieschen",
+    "N;ACC;PL": "Radieschen",
+    "N;DAT;PL": "Radieschen",
+    "N;GEN;PL": "Radieschen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy, peppery, red-and-white; bread-and-butter suppers.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "(small red) radish",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.radish",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ein Bund Radieschen kostet einen Euro.",
+      "tr": "A bunch of radishes costs one euro.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Radieschen sind scharf und knackig.",
+      "tr": "The radishes are hot and crunchy.",
+      "register": "neutral",
+      "context": "eating",
+      "sense": "s1"
+     },
+     {
+      "text": "Der alte Pirat sieht sich die Radieschen jetzt von unten an.",
+      "tr": "The old pirate is pushing up daisies now (lit. looking at the radishes from below).",
+      "register": "colloquial",
+      "context": "humour",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Bund Radieschen",
+      "tr": "a bunch of radishes"
+     },
+     {
+      "text": "Radieschen in Scheiben schneiden",
+      "tr": "to slice radishes"
+     },
+     {
+      "text": "knackige Radieschen",
+      "tr": "crunchy radishes"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "sich die Radieschen von unten ansehen",
+      "tr": "to look at the radishes from below",
+      "kind": "idiom",
+      "meaning": "to be dead and buried (like English “to push up daisies”)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [],
+    "synonymsNone": "No everyday synonym; der Rettich is the large radish, a different form of the plant.",
+    "etymology": {
+     "text": "Diminutive of earlier Radies, borrowed from Dutch radijs, itself from Middle French radice, from Italian radice, from Latin rādīx.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Radieschen goes back to Latin rādīx “root” – the same word as English radish and radical."
+    ],
+    "pitfalls": [
+     "das Radieschen (small red radish) is not der Rettich (large, usually white radish).",
+     "Plural unchanged: ein Radieschen, zwei Radieschen."
+    ],
+    "subtleties": [
+     "Words in -chen are always neuter and do not change in the plural: das Radieschen, die Radieschen."
+    ]
+   }
+  },
+  {
+   "id": "de:Kürbis",
+   "lemma": "Kürbis",
+   "pos": "NOUN",
+   "senses": [
+    "veg.pumpkin"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Kürbis",
+    "N;ACC;SG": "Kürbis",
+    "N;DAT;SG": "Kürbis",
+    "N;GEN;SG": "Kürbisses",
+    "N;NOM;PL": "Kürbisse",
+    "N;ACC;PL": "Kürbisse",
+    "N;DAT;PL": "Kürbissen",
+    "N;GEN;PL": "Kürbisse"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Autumn: soups, Halloween lanterns, orange piles at farm stands.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "pumpkin, squash, gourd (any plant of the genus Cucurbita or its fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.pumpkin",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zu Halloween schnitzen die Kinder Gesichter in Kürbisse.",
+      "tr": "At Halloween the children carve faces into pumpkins.",
+      "register": "neutral",
+      "context": "festivals",
+      "sense": "s1"
+     },
+     {
+      "text": "Den Hokkaido-Kürbis muss man nicht schälen.",
+      "tr": "You don't need to peel the Hokkaido squash.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Auf dem Markt liegen riesige Kürbisse.",
+      "tr": "There are huge pumpkins at the market.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "die Kürbissuppe",
+      "tr": "pumpkin soup"
+     },
+     {
+      "text": "die Kürbiskerne",
+      "tr": "pumpkin seeds"
+     },
+     {
+      "text": "einen Kürbis aushöhlen",
+      "tr": "to hollow out a pumpkin"
+     },
+     {
+      "text": "das Kürbiskernöl",
+      "tr": "pumpkin-seed oil"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [],
+    "synonymsNone": "No synonym in standard German; kinds are named by compounds (Hokkaido-Kürbis, Butternusskürbis, Riesenkürbis).",
+    "etymology": {
+     "text": "From Middle High German kürbiȥ, from Old High German kurbiȥ, from Proto-West Germanic *kurbit (ultimately from Latin cucurbita). Cognate with Luxembourgish Kürbis, Yiddish קירבעס (kirbes).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Austrian region of Styria (Steiermark) is famous for its dark green Kürbiskernöl, pumpkin-seed oil."
+    ],
+    "pitfalls": [
+     "-is → -isse: der Kürbis, des Kürbisses, die Kürbisse, den Kürbissen."
+    ],
+    "subtleties": [
+     "Kürbis covers what English splits into pumpkin, squash and gourd; kinds are named with compounds: Hokkaido-Kürbis, Butternusskürbis."
+    ]
+   }
+  },
+  {
+   "id": "de:Salat",
+   "lemma": "Salat",
+   "pos": "NOUN",
+   "senses": [
+    "veg.lettuce"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Salat",
+    "N;ACC;SG": "Salat",
+    "N;DAT;SG": "Salat",
+    "N;GEN;SG": "Salats",
+    "N;NOM;PL": "Salate",
+    "N;ACC;PL": "Salate",
+    "N;DAT;PL": "Salaten",
+    "N;GEN;PL": "Salate"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh and light – both the leafy plant and the salad on the plate.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "lettuce and related leaf vegetables (the plant)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.lettuce",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "salad (a mixed, usually cold dish)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich kaufe einen Kopf Salat.",
+      "tr": "I'm buying a head of lettuce.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Der Salat im Garten schießt schon.",
+      "tr": "The lettuce in the garden is already bolting.",
+      "register": "neutral",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "Zum Grillen mache ich einen Kartoffelsalat.",
+      "tr": "I'm making a potato salad for the barbecue.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Kopf Salat",
+      "tr": "a head of lettuce"
+     },
+     {
+      "text": "grüner Salat",
+      "tr": "green salad, lettuce"
+     },
+     {
+      "text": "den Salat waschen",
+      "tr": "to wash the lettuce"
+     },
+     {
+      "text": "gemischter Salat",
+      "tr": "mixed salad"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Da haben wir den Salat!",
+      "tr": "There we have the salad!",
+      "kind": "idiom",
+      "meaning": "Now we're in a mess! (when something predicted goes wrong)",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kopfsalat",
+      "register": "neutral",
+      "nuance": "specifically round head lettuce (butterhead)"
+     },
+     {
+      "word": "Häuptelsalat",
+      "register": "regional",
+      "nuance": "Austrian and southern German word for head lettuce",
+      "region": "AT, south"
+     },
+     {
+      "word": "Blattsalat",
+      "register": "neutral",
+      "nuance": "leaf salads in general"
+     }
+    ],
+    "etymology": {
+     "text": "15th century, from earlier Italian salata, a variant of insalata (“salted [dish]”), likely reinforced by Middle French salade.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Salat goes back to salt (Latin sal): the first salads were salted greens."
+    ],
+    "pitfalls": [
+     "Salat means both “lettuce” and “salad” – Kartoffelsalat has no lettuce at all.",
+     "Plural Salate; dative plural Salaten."
+    ],
+    "subtleties": [
+     "For the plant it is often used without an article, like a mass noun: Salat waschen, Salat pflanzen."
+    ]
+   }
+  },
+  {
+   "id": "de:Chili",
+   "lemma": "Chili",
+   "pos": "NOUN",
+   "senses": [
+    "veg.chili"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Chili",
+    "N;ACC;SG": "Chili",
+    "N;DAT;SG": "Chili",
+    "N;GEN;SG": "Chilis",
+    "N;NOM;PL": "Chilis",
+    "N;ACC;PL": "Chilis",
+    "N;DAT;PL": "Chilis",
+    "N;GEN;PL": "Chilis"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Heat and fire – cooking with a kick.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "chili pepper (the fruit)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.chili",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "chili powder",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ]
+     },
+     {
+      "id": "s3",
+      "def": "chili (con carne), the dish",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Vorsicht, die Chilis sind sehr scharf!",
+      "tr": "Careful, the chilies are very hot!",
+      "register": "informal",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich schneide einen Chili klein und gebe ihn in die Soße.",
+      "tr": "I chop a chili finely and add it to the sauce.",
+      "register": "neutral",
+      "context": "recipe",
+      "sense": "s1"
+     },
+     {
+      "text": "Heute Abend gibt es Chili con Carne.",
+      "tr": "Tonight we're having chili con carne.",
+      "register": "neutral",
+      "context": "home",
+      "sense": "s3"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "scharfe Chilis",
+      "tr": "hot chilies"
+     },
+     {
+      "text": "getrocknete Chilis",
+      "tr": "dried chilies"
+     },
+     {
+      "text": "das Chilipulver",
+      "tr": "chili powder"
+     },
+     {
+      "text": "die Chilischote",
+      "tr": "chili pod"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Chilischote",
+      "register": "neutral",
+      "nuance": "the chili pod – unambiguous, never the powder or the dish"
+     },
+     {
+      "word": "Peperoni",
+      "register": "neutral",
+      "nuance": "in Germany a (often pickled) hot pepper; in Switzerland Peperoni means the bell pepper"
+     },
+     {
+      "word": "Pfefferoni",
+      "register": "regional",
+      "nuance": "the Austrian word for a hot pepper",
+      "region": "AT"
+     }
+    ],
+    "etymology": {
+     "text": "From Spanish chile, from Classical Nahuatl chīlli (etymology of the English cognate chili).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The heat of chilies comes from capsaicin (Capsaicin); birds do not feel it, mammals do."
+    ],
+    "pitfalls": [
+     "Gender varies: der Chili is the usual dictionary form, but die Chili is also heard, and Wiktionary lists masculine, feminine and neuter.",
+     "Peperoni is a pepper in German, not the sausage – that is a salami."
+    ],
+    "subtleties": [
+     "Chili can mean the fresh pod, the powder or the dish; context decides."
+    ]
+   }
+  },
+  {
+   "id": "de:Kohl",
+   "lemma": "Kohl",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cabbage"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Kohl",
+    "N;ACC;SG": "Kohl",
+    "N;DAT;SG": "Kohl",
+    "N;GEN;SG": "Kohls",
+    "N;NOM;PL": "Kohle",
+    "N;ACC;PL": "Kohle",
+    "N;DAT;PL": "Kohlen",
+    "N;GEN;PL": "Kohle"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Kraut",
+     "region": "AT, south"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hearty winter food – cabbage rolls, sauerkraut, red cabbage with roast.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cabbage (plants of the genus Brassica, especially the head cabbage)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cabbage",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "nonsense, idle talk (Kohl reden)",
+      "register": [
+       "colloquial",
+       "dated"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Im Winter essen wir oft Kohl mit Kartoffeln.",
+      "tr": "In winter we often eat cabbage with potatoes.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Aus Weißkohl macht man Sauerkraut.",
+      "tr": "Sauerkraut is made from white cabbage.",
+      "register": "neutral",
+      "context": "food culture",
+      "sense": "s1"
+     },
+     {
+      "text": "Red keinen Kohl!",
+      "tr": "Don't talk rubbish!",
+      "register": "colloquial",
+      "context": "argument",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Kohlkopf",
+      "tr": "head of cabbage"
+     },
+     {
+      "text": "die Kohlrouladen",
+      "tr": "stuffed cabbage rolls"
+     },
+     {
+      "text": "Rotkohl / Weißkohl / Grünkohl",
+      "tr": "red / white cabbage / kale"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "Das macht den Kohl auch nicht fett.",
+      "tr": "That doesn't make the cabbage fat either.",
+      "kind": "idiom",
+      "meaning": "that doesn't help much / makes no real difference",
+      "register": "colloquial"
+     },
+     {
+      "text": "aufgewärmter Kohl",
+      "tr": "reheated cabbage",
+      "kind": "idiom",
+      "meaning": "an old story or idea served up again",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "Kraut",
+      "register": "regional",
+      "nuance": "cabbage in Austria and southern Germany (Weißkraut, Blaukraut)",
+      "region": "AT, south"
+     },
+     {
+      "word": "Kappes",
+      "register": "regional",
+      "nuance": "western and central German word for cabbage; also “nonsense”",
+      "region": "west"
+     },
+     {
+      "word": "Weißkohl",
+      "register": "neutral",
+      "nuance": "specifically the white head cabbage"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German kōl, from Old High German kōl, kōlo, kōli, ultimately from Latin caulis.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The surname Kohl originally named a grower or seller of cabbages."
+    ],
+    "pitfalls": [
+     "der Kohl (cabbage) ≠ die Kohle (coal; colloquially also “money”) – and the rare plural of Kohl is also Kohle.",
+     "Usually uncountable: Kohl essen; for one head say ein Kohlkopf."
+    ],
+    "subtleties": [
+     "The kinds are compounds: Rotkohl (in the south Blaukraut or Rotkraut), Weißkohl, Grünkohl, Rosenkohl, Blumenkohl."
+    ]
+   }
+  },
+  {
+   "id": "de:Blumenkohl",
+   "lemma": "Blumenkohl",
+   "pos": "NOUN",
+   "senses": [
+    "veg.cauliflower"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Blumenkohl",
+    "N;ACC;SG": "Blumenkohl",
+    "N;DAT;SG": "Blumenkohl",
+    "N;GEN;SG": "Blumenkohls",
+    "N;NOM;PL": "Blumenkohle",
+    "N;ACC;PL": "Blumenkohle",
+    "N;DAT;PL": "Blumenkohlen",
+    "N;GEN;PL": "Blumenkohle"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Karfiol",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Mild and creamy-white; Sunday lunch with cheese sauce.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "cauliflower",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.cauliflower",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Der Blumenkohl wird mit Käse überbacken.",
+      "tr": "The cauliflower is baked with a cheese topping.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Kopf Blumenkohl reicht für vier Personen.",
+      "tr": "One head of cauliflower is enough for four people.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "In Österreich heißt der Blumenkohl Karfiol.",
+      "tr": "In Austria cauliflower is called Karfiol.",
+      "register": "neutral",
+      "context": "regional language",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Kopf Blumenkohl",
+      "tr": "a head of cauliflower"
+     },
+     {
+      "text": "die Blumenkohlröschen",
+      "tr": "cauliflower florets"
+     },
+     {
+      "text": "überbackener Blumenkohl",
+      "tr": "cauliflower gratin"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Karfiol",
+      "register": "regional",
+      "nuance": "the Austrian word (der Karfiol), from Italian cavolfiore",
+      "region": "AT"
+     }
+    ],
+    "etymology": {
+     "text": "Blume (“flower”) + -n- + Kohl (“cabbage”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "A boxer's swollen ear is a Blumenkohlohr, just like English “cauliflower ear”.",
+     "Both Blumenkohl and Austrian Karfiol (Italian cavolfiore) mean “flower cabbage”."
+    ],
+    "pitfalls": [
+     "Masculine like Kohl: der Blumenkohl. Compounds take the gender of their last part."
+    ],
+    "subtleties": [
+     "The florets are called Röschen, “little roses”."
+    ]
+   }
+  },
+  {
+   "id": "de:Brokkoli",
+   "lemma": "Brokkoli",
+   "pos": "NOUN",
+   "senses": [
+    "veg.broccoli"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Brokkoli",
+    "N;ACC;SG": "Brokkoli",
+    "N;DAT;SG": "Brokkoli",
+    "N;GEN;SG": "Brokkolis",
+    "N;NOM;PL": "Brokkoli",
+    "N;ACC;PL": "Brokkoli",
+    "N;DAT;PL": "Brokkoli",
+    "N;GEN;PL": "Brokkoli"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Healthy green trees on the plate – for some children a punishment.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "broccoli",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.broccoli",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "(slang, jokey) marijuana",
+      "register": [
+       "slang",
+       "humorous"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Brokkoli dämpfe ich nur ein paar Minuten.",
+      "tr": "I steam broccoli for just a few minutes.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Die Kinder essen den Brokkoli heute ohne zu meckern.",
+      "tr": "Today the children are eating the broccoli without moaning.",
+      "register": "informal",
+      "context": "family",
+      "sense": "s1"
+     },
+     {
+      "text": "Brokkoli enthält viel Vitamin C.",
+      "tr": "Broccoli contains a lot of vitamin C.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gedämpfter Brokkoli",
+      "tr": "steamed broccoli"
+     },
+     {
+      "text": "die Brokkoliröschen",
+      "tr": "broccoli florets"
+     },
+     {
+      "text": "Brokkoli blanchieren",
+      "tr": "to blanch broccoli"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Broccoli",
+      "register": "neutral",
+      "nuance": "the Italian spelling – still correct and seen on menus and packaging, but less common"
+     }
+    ],
+    "etymology": {
+     "text": "18th century, from Italian broccoli. The usual pronunciation with a long /oː/ is perhaps influenced by the French spelling brocoli, formerly also found in German texts. The sense “marijuana” comes from a widely mocked remark by the federal drug commissioner Daniela Ludwig at a press conference in 2020.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "In 2020 the German drug commissioner said at a press conference that cannabis was „kein Brokkoli“ (no broccoli); the much-mocked remark made Brokkoli jokey slang for marijuana."
+    ],
+    "pitfalls": [
+     "Plural unchanged: der Brokkoli, die Brokkoli.",
+     "Spelling with kk: Brokkoli (the Italian spelling Broccoli is also accepted)."
+    ],
+    "subtleties": [
+     "Most Germans say it with a long o, [ˈbroːkoli] – unlike Italian broccoli with a short o."
+    ]
+   }
+  },
+  {
+   "id": "de:Lauch",
+   "lemma": "Lauch",
+   "pos": "NOUN",
+   "senses": [
+    "veg.leek"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Lauch",
+    "N;ACC;SG": "Lauch",
+    "N;DAT;SG": "Lauch",
+    "N;GEN;SG": "Lauchs",
+    "N;NOM;PL": "Lauche",
+    "N;ACC;PL": "Lauche",
+    "N;DAT;PL": "Lauchen",
+    "N;GEN;PL": "Lauche"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Porree",
+     "region": "north"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Soups and quiches; in youth slang, a skinny weakling.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "leek",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.leek",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "weakling, thin unathletic person (youth slang)",
+      "register": [
+       "slang",
+       "pejorative"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Schneide den Lauch in feine Ringe.",
+      "tr": "Cut the leek into thin rings.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Für die Suppe brauchen wir zwei Stangen Lauch.",
+      "tr": "We need two leeks (lit. stalks of leek) for the soup.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     },
+     {
+      "text": "Du Lauch, nicht mal eine Kiste kannst du tragen!",
+      "tr": "You weakling, you can't even carry a crate!",
+      "register": "slang",
+      "context": "teasing among teenagers",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Stange Lauch",
+      "tr": "a leek (lit. a stalk of leek)"
+     },
+     {
+      "text": "Lauch in Ringe schneiden",
+      "tr": "to cut leek into rings"
+     },
+     {
+      "text": "die Lauchsuppe",
+      "tr": "leek soup"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Porree",
+      "register": "neutral",
+      "nuance": "the same vegetable; more common in northern Germany",
+      "region": "north"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German louch, from Old High German louh, from Proto-West Germanic *lauk, from Proto-Germanic *laukaz. Compare Low German Look, Dutch look, English leek, Danish løg, Swedish lök.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Lauch hides in Knoblauch (garlic), Schnittlauch (chives) and Bärlauch (wild garlic)."
+    ],
+    "pitfalls": [
+     "Lauch alone is the leek; Schnittlauch is chives and Knoblauch is garlic."
+    ],
+    "subtleties": [
+     "As slang (Du Lauch!) it is an insult for a skinny, weak person – common among young people."
+    ]
+   }
+  },
+  {
+   "id": "de:Paprika",
+   "lemma": "Paprika",
+   "pos": "NOUN",
+   "senses": [
+    "veg.bellpepper"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Paprika",
+    "N;ACC;SG": "Paprika",
+    "N;DAT;SG": "Paprika",
+    "N;GEN;SG": "Paprika",
+    "N;NOM;PL": "Paprika",
+    "N;ACC;PL": "Paprika",
+    "N;DAT;PL": "Paprika",
+    "N;GEN;PL": "Paprika"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Bright red, yellow and green – crunchy in salads, stuffed with rice; also the spice.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bell pepper, sweet pepper (the vegetable)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.bellpepper",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "paprika (the spice)",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schneide eine rote Paprika in Streifen.",
+      "tr": "I'm cutting a red pepper into strips.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Gefüllte Paprika mit Reis mag ich sehr.",
+      "tr": "I really like stuffed peppers with rice.",
+      "register": "informal",
+      "context": "home food",
+      "sense": "s1"
+     },
+     {
+      "text": "Das Gulasch braucht einen Löffel Paprika.",
+      "tr": "The goulash needs a spoonful of paprika.",
+      "register": "neutral",
+      "context": "recipe",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "rote / gelbe / grüne Paprika",
+      "tr": "red / yellow / green pepper"
+     },
+     {
+      "text": "gefüllte Paprika",
+      "tr": "stuffed peppers"
+     },
+     {
+      "text": "die Paprikaschote",
+      "tr": "pepper pod"
+     },
+     {
+      "text": "Paprika edelsüß",
+      "tr": "sweet paprika (spice)"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Paprikaschote",
+      "register": "neutral",
+      "nuance": "the vegetable, never the spice"
+     },
+     {
+      "word": "Peperoni",
+      "register": "regional",
+      "nuance": "in Switzerland the usual word for the bell pepper (in Germany Peperoni are hot peppers)",
+      "region": "CH"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Hungarian paprika, from Serbo-Croatian pàprika, from pȁpar, from Proto-Slavic *pьpьrь, from Latin piper, from Ancient Greek πέπερι (péperi, “pepper”), from Sanskrit पिप्पलि (pippali, “long pepper”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The Hungarian scientist Albert Szent-Györgyi isolated vitamin C in quantity from paprika peppers and won the 1937 Nobel Prize."
+    ],
+    "pitfalls": [
+     "Gender: Wiktionary gives both der and die Paprika. In Germany die Paprika is usual for the vegetable; der Paprika is the form used in Austria; for the spice both genders occur.",
+     "Plural: Paprika after an article or number (zwei Paprika), but often Paprikas when it stands alone (Ich kaufe Paprikas)."
+    ],
+    "subtleties": [
+     "Paprika is both the vegetable and the spice; Paprikaschote is unambiguous."
+    ]
+   }
+  },
+  {
+   "id": "de:Rote_Bete",
+   "lemma": "Rote Bete",
+   "pos": "NOUN",
+   "senses": [
+    "veg.beetroot"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Rote Bete",
+    "N;ACC;SG": "Rote Bete",
+    "N;DAT;SG": "Roten Bete",
+    "N;GEN;SG": "Roten Bete",
+    "N;NOM;PL": "Roten Beten",
+    "N;ACC;PL": "Roten Beten",
+    "N;DAT;PL": "Roten Beten",
+    "N;GEN;PL": "Roten Beten",
+    "N;NOM;PL;INDF": "Rote Beten",
+    "N;ACC;PL;INDF": "Rote Beten",
+    "N;DAT;PL;INDF": "Roten Beten",
+    "N;GEN;PL;INDF": "Roter Beten"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Rote Rübe",
+     "region": "AT, south"
+    },
+    {
+     "lemma": "Rande",
+     "region": "CH"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Earthy, sweet and blood-red – it stains everything it touches.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "beetroot, red beet",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.beetroot",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Rote Bete muss ungefähr eine Stunde kochen.",
+      "tr": "The beetroot has to boil for about an hour.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Rote Bete färbt die Hände rot.",
+      "tr": "Beetroot stains your hands red.",
+      "register": "informal",
+      "context": "kitchen",
+      "sense": "s1"
+     },
+     {
+      "text": "In der Schweiz sagt man Rande statt Rote Bete.",
+      "tr": "In Switzerland people say Rande instead of Rote Bete.",
+      "register": "neutral",
+      "context": "regional language",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Rote-Bete-Salat",
+      "tr": "beetroot salad"
+     },
+     {
+      "text": "eingelegte Rote Bete",
+      "tr": "pickled beetroot"
+     },
+     {
+      "text": "Rote Bete kochen",
+      "tr": "to boil beetroot"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Rote Rübe",
+      "register": "regional",
+      "nuance": "the usual word in Austria and southern Germany",
+      "region": "AT, south"
+     },
+     {
+      "word": "Rande",
+      "register": "regional",
+      "nuance": "the Swiss word (die Rande, plural Randen)",
+      "region": "CH"
+     },
+     {
+      "word": "Rote Beete",
+      "register": "neutral",
+      "nuance": "a very common spelling variant of the same word"
+     }
+    ],
+    "etymology": {
+     "text": "rot (“red”) + Bete (“beet”); Bete is borrowed from Middle Low German bête, from Old Saxon *bēta, from Proto-West Germanic *bētā (“beet”), ultimately from Latin bēta.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The red colour (betanin) is used as a natural food colouring, E 162 (beetroot red)."
+    ],
+    "pitfalls": [
+     "Rote is an adjective and is declined: die Rote Bete, der Roten Bete, mit Roter Bete (without article), die Roten Beten, but Rote Beten (plural without article).",
+     "Do not confuse Bete/Beete with das Beet (flower bed)."
+    ],
+    "subtleties": [
+     "It is often used as an uncountable noun even for several roots: Ich esse gern Rote Bete."
+    ]
+   }
+  },
+  {
+   "id": "de:Zucchini",
+   "lemma": "Zucchini",
+   "pos": "NOUN",
+   "senses": [
+    "veg.zucchini"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Zucchini",
+    "N;ACC;SG": "Zucchini",
+    "N;DAT;SG": "Zucchini",
+    "N;GEN;SG": "Zucchini",
+    "N;NOM;PL": "Zucchini",
+    "N;ACC;PL": "Zucchini",
+    "N;DAT;PL": "Zucchini",
+    "N;GEN;PL": "Zucchini"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Zucchetti",
+     "region": "CH"
+    }
+   ],
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Summer gardens that produce far too much.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "zucchini, courgette",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.zucchini",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Die Zucchini schneide ich in dünne Scheiben.",
+      "tr": "I cut the courgette into thin slices.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Im August wachsen im Garten mehr Zucchini, als wir essen können.",
+      "tr": "In August more courgettes grow in the garden than we can eat.",
+      "register": "informal",
+      "context": "garden",
+      "sense": "s1"
+     },
+     {
+      "text": "Gegrillte Zucchini passen gut zum Fleisch.",
+      "tr": "Grilled courgettes go well with meat.",
+      "register": "neutral",
+      "context": "barbecue",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "gefüllte Zucchini",
+      "tr": "stuffed courgettes"
+     },
+     {
+      "text": "Zucchini grillen",
+      "tr": "to grill courgettes"
+     },
+     {
+      "text": "Zucchini in Scheiben schneiden",
+      "tr": "to slice courgettes"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Zucchetti",
+      "register": "regional",
+      "nuance": "the Swiss word (die Zucchetti)",
+      "region": "CH"
+     }
+    ],
+    "etymology": {
+     "text": "Borrowed from Italian zucchini, plural of zucchino.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "zucchini means “little pumpkins”: Italian zucca = pumpkin, gourd."
+    ],
+    "pitfalls": [
+     "Singular and plural are the same: die Zucchini – die Zucchini (colloquially also Zucchinis)."
+    ],
+    "subtleties": [
+     "German uses the Italian plural zucchini as its singular; the “correct” Italian singular der Zucchino is rare."
+    ]
+   }
+  },
+  {
+   "id": "de:Bohne",
+   "lemma": "Bohne",
+   "pos": "NOUN",
+   "senses": [
+    "veg.greenbean"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Bohne",
+    "N;ACC;SG": "Bohne",
+    "N;DAT;SG": "Bohne",
+    "N;GEN;SG": "Bohne",
+    "N;NOM;PL": "Bohnen",
+    "N;ACC;PL": "Bohnen",
+    "N;DAT;PL": "Bohnen",
+    "N;GEN;PL": "Bohnen"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Fisole",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Hearty: green beans with bacon, bean stews, coffee beans.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "bean; as a vegetable especially the green bean (grüne Bohne)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.greenbean",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     },
+     {
+      "id": "s2",
+      "def": "coffee or cocoa bean",
+      "register": [
+       "neutral"
+      ],
+      "domains": [
+       "food"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Zum Braten gibt es grüne Bohnen.",
+      "tr": "There are green beans with the roast.",
+      "register": "neutral",
+      "context": "home cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Bohnen muss man gut durchkochen, roh sind sie giftig.",
+      "tr": "Beans must be cooked through; raw they are poisonous.",
+      "register": "neutral",
+      "context": "health",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich mahle die Bohnen für den Kaffee frisch.",
+      "tr": "I grind the beans for the coffee fresh.",
+      "register": "neutral",
+      "context": "coffee",
+      "sense": "s2"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "grüne Bohnen",
+      "tr": "green beans"
+     },
+     {
+      "text": "weiße Bohnen",
+      "tr": "white (haricot) beans"
+     },
+     {
+      "text": "Bohnen putzen",
+      "tr": "to top and tail beans"
+     },
+     {
+      "text": "der Bohneneintopf",
+      "tr": "bean stew"
+     }
+    ],
+    "phrases": [
+     {
+      "text": "nicht die Bohne",
+      "tr": "not the bean",
+      "kind": "colloquial",
+      "meaning": "not at all, not in the least",
+      "register": "colloquial"
+     },
+     {
+      "text": "Bohnen in den Ohren haben",
+      "tr": "to have beans in one's ears",
+      "kind": "idiom",
+      "meaning": "not to listen, to ignore what is said",
+      "register": "colloquial"
+     }
+    ],
+    "synonyms": [
+     {
+      "word": "grüne Bohne",
+      "register": "neutral",
+      "nuance": "unambiguous name of the fresh green pod"
+     },
+     {
+      "word": "Fisole",
+      "register": "regional",
+      "nuance": "the Austrian word for the green bean",
+      "region": "AT"
+     },
+     {
+      "word": "Stangenbohne",
+      "register": "neutral",
+      "nuance": "pole bean, a climbing kind of green bean"
+     },
+     {
+      "word": "Buschbohne",
+      "register": "neutral",
+      "nuance": "bush bean, a low-growing kind of green bean"
+     }
+    ],
+    "etymology": {
+     "text": "From Middle High German bone, from Old High German bōna, from Proto-West Germanic *baunu, from Proto-Germanic *baunō, from Proto-Indo-European *bʰabʰ- (“bean”). Compare Dutch boon, English bean, Danish bønne.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Bohnenkraut (savory) is a herb, not a bean – it got its name because it is cooked with beans."
+    ],
+    "pitfalls": [
+     "Bohne alone can be a green bean, a dried bean or a coffee bean – say grüne Bohnen for the vegetable."
+    ],
+    "subtleties": [
+     "eine Bohnenstange (“beanpole”) is a very tall, thin person."
+    ]
+   }
+  },
+  {
+   "id": "de:Frühlingszwiebel",
+   "lemma": "Frühlingszwiebel",
+   "pos": "NOUN",
+   "senses": [
+    "veg.springonion"
+   ],
+   "gender": "FEM",
+   "forms": {
+    "N;NOM;SG": "Frühlingszwiebel",
+    "N;ACC;SG": "Frühlingszwiebel",
+    "N;DAT;SG": "Frühlingszwiebel",
+    "N;GEN;SG": "Frühlingszwiebel",
+    "N;NOM;PL": "Frühlingszwiebeln",
+    "N;ACC;PL": "Frühlingszwiebeln",
+    "N;DAT;PL": "Frühlingszwiebeln",
+    "N;GEN;PL": "Frühlingszwiebeln"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B1",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Fresh green rings on salads and Asian dishes.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "spring onion, scallion",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.springonion",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Ich schneide die Frühlingszwiebeln in feine Ringe.",
+      "tr": "I cut the spring onions into thin rings.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Ein Bund Frühlingszwiebeln, bitte.",
+      "tr": "A bunch of spring onions, please.",
+      "register": "neutral",
+      "context": "market",
+      "sense": "s1"
+     },
+     {
+      "text": "Frühlingszwiebeln schmecken gut im Rührei.",
+      "tr": "Spring onions taste good in scrambled eggs.",
+      "register": "informal",
+      "context": "breakfast",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "ein Bund Frühlingszwiebeln",
+      "tr": "a bunch of spring onions"
+     },
+     {
+      "text": "Frühlingszwiebeln in Ringe schneiden",
+      "tr": "to cut spring onions into rings"
+     },
+     {
+      "text": "das Grün der Frühlingszwiebeln",
+      "tr": "the green part of the spring onions"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Lauchzwiebel",
+      "register": "neutral",
+      "nuance": "the same vegetable; a very common name in shops"
+     }
+    ],
+    "etymology": {
+     "text": "Frühling (“spring”) + Zwiebel (“onion”).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "The compound takes the gender of its last part: die Zwiebel → die Frühlingszwiebel."
+    ],
+    "pitfalls": [
+     "Note the linking -s-: Frühling-s-zwiebel.",
+     "It is not a small onion (Perlzwiebel) or a shallot (Schalotte)."
+    ],
+    "subtleties": [
+     "Both the white bulb and the green leaves are eaten."
+    ]
+   }
+  },
+  {
+   "id": "de:Staudensellerie",
+   "lemma": "Staudensellerie",
+   "pos": "NOUN",
+   "senses": [
+    "veg.celery"
+   ],
+   "gender": "MASC",
+   "forms": {
+    "N;NOM;SG": "Staudensellerie",
+    "N;ACC;SG": "Staudensellerie",
+    "N;DAT;SG": "Staudensellerie",
+    "N;GEN;SG": "Staudenselleries",
+    "N;NOM;PL": "Staudenselleries",
+    "N;ACC;PL": "Staudenselleries",
+    "N;DAT;PL": "Staudenselleries",
+    "N;GEN;PL": "Staudenselleries"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "profile": {
+    "frequency": "B2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Crunchy green stalks: soups, sauces and healthy snacks.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "celery (the stalks)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.celery",
+      "domains": [
+       "food",
+       "botany"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Staudensellerie mit Dip ist ein gesunder Snack.",
+      "tr": "Celery with a dip is a healthy snack.",
+      "register": "neutral",
+      "context": "snacks",
+      "sense": "s1"
+     },
+     {
+      "text": "Für die Bolognese brauche ich Karotten, Zwiebeln und Staudensellerie.",
+      "tr": "For the Bolognese I need carrots, onions and celery.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Den Staudensellerie gibt es im Supermarkt das ganze Jahr.",
+      "tr": "Celery is available in the supermarket all year round.",
+      "register": "neutral",
+      "context": "shopping",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "eine Stange Staudensellerie",
+      "tr": "a stick of celery"
+     },
+     {
+      "text": "Staudensellerie in Scheiben schneiden",
+      "tr": "to slice celery"
+     },
+     {
+      "text": "ein Bund Staudensellerie",
+      "tr": "a head (bunch) of celery"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Stangensellerie",
+      "register": "neutral",
+      "nuance": "the same vegetable, another common name"
+     },
+     {
+      "word": "Sellerie",
+      "register": "neutral",
+      "nuance": "the general word – but in Germany plain Sellerie often means the celeriac root (Knollensellerie)"
+     }
+    ],
+    "etymology": {
+     "text": "Staude (“perennial plant, shrub”) + -n- + Sellerie; Sellerie is borrowed from French céleri, from Lombard selleri, from Latin selīnum, from Ancient Greek σέλῑνον (sélīnon).",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "Sellerie goes back to Ancient Greek σέλινον – Modern Greek still calls celery σέλινο."
+    ],
+    "pitfalls": [
+     "In Germany plain Sellerie usually means the round celeriac root; for the stalks say Staudensellerie or Stangensellerie.",
+     "Gender varies: der or die Staudensellerie (Wiktionary lists both)."
+    ],
+    "subtleties": [
+     "Staude refers to the bushy, perennial plant – the stalks grow as a dense bunch."
+    ]
+   }
+  },
+  {
+   "id": "de:Mais",
+   "lemma": "Mais",
+   "pos": "NOUN",
+   "senses": [
+    "veg.corn"
+   ],
+   "gender": "MASC",
+   "class": "sgt",
+   "forms": {
+    "N;NOM;SG": "Mais",
+    "N;ACC;SG": "Mais",
+    "N;DAT;SG": "Mais",
+    "N;GEN;SG": "Maises"
+   },
+   "ref": {
+    "src": "kaikki",
+    "checked": "2026-10-08"
+   },
+   "variants": [
+    {
+     "lemma": "Kukuruz",
+     "region": "AT"
+    }
+   ],
+   "profile": {
+    "frequency": "A2",
+    "status": "current",
+    "register": [
+     "neutral"
+    ],
+    "connotation": "neutral",
+    "feeling": "Summer fields of tall plants; corn on the cob at barbecues; popcorn.",
+    "senses": [
+     {
+      "id": "s1",
+      "def": "maize, corn (the plant and its grains; also sweet corn as a vegetable)",
+      "register": [
+       "neutral"
+      ],
+      "concept": "veg.corn",
+      "domains": [
+       "food",
+       "agriculture"
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "text": "Auf dem Feld wächst Mais.",
+      "tr": "Maize is growing in the field.",
+      "register": "neutral",
+      "context": "agriculture",
+      "sense": "s1"
+     },
+     {
+      "text": "Ich gebe eine Dose Mais in den Salat.",
+      "tr": "I'm putting a tin of sweetcorn into the salad.",
+      "register": "neutral",
+      "context": "cooking",
+      "sense": "s1"
+     },
+     {
+      "text": "Den Mais grillen wir direkt am Kolben.",
+      "tr": "We grill the corn right on the cob.",
+      "register": "informal",
+      "context": "barbecue",
+      "sense": "s1"
+     }
+    ],
+    "collocations": [
+     {
+      "text": "der Maiskolben",
+      "tr": "corn cob"
+     },
+     {
+      "text": "Mais aus der Dose",
+      "tr": "tinned sweetcorn"
+     },
+     {
+      "text": "das Maisfeld",
+      "tr": "cornfield"
+     },
+     {
+      "text": "der Zuckermais",
+      "tr": "sweet corn"
+     }
+    ],
+    "phrases": [],
+    "synonyms": [
+     {
+      "word": "Kukuruz",
+      "register": "regional",
+      "nuance": "Austrian and Bavarian word for maize",
+      "region": "AT, Bavaria"
+     },
+     {
+      "word": "Zuckermais",
+      "register": "neutral",
+      "nuance": "specifically sweet corn, the vegetable"
+     }
+    ],
+    "etymology": {
+     "text": "From Spanish maíz, from Taíno *mahis, *mahisi.",
+     "src": "Wiktionary (kaikki.org)"
+    },
+    "funFacts": [
+     "des Mais can also be the genitive of der Mai (May) – the two words only look alike."
+    ],
+    "pitfalls": [
+     "False friend: German Korn is grain (or a grain spirit), not corn; corn is Mais.",
+     "Usually no plural: for one cob say ein Maiskolben."
+    ],
+    "subtleties": [
+     "Mais is both the farm crop (Futtermais, animal feed) and the vegetable (Zuckermais)."
+    ]
+   }
+  }
+ ],
+ "absent": []
+}

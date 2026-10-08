@@ -104,7 +104,7 @@
       functions: list('core/functions').map(f => read('core/functions/' + f)), frames: (read('core/frames.json') || {}).frames || [], langs: {} };
     for (const code of course.languages) {
       const base = `lang/${code}/`, lexicon = {}, grammar = {};
-      for (const n of data.nodes) lexicon[n.id] = read(`${base}lexicon/${n.id}.json`) || { lexemes: [], absent: [] };
+      for (const n of data.nodes) { const f = read(`${base}lexicon/${n.id}.json`); if (f) lexicon[n.id] = f; }   // a node without its file is not prepared yet
       for (const f of data.functions) { const g = read(`${base}grammar/${f.id}.json`); if (g) grammar[f.id] = g; }
       const bank = []; for (const f of list(`${base}bank`)) bank.push(...((read(`${base}bank/${f}`) || {}).sentences || []));
       data.langs[code] = { language: read(base + 'language.json'), lexicon, grammar, bank };
@@ -124,9 +124,10 @@
     for (const f of data.functions) C.functions[f.id] = f;
     for (const f of data.frames) C.frames[f.id] = f;
     for (const code of C.languages) {
-      const src = data.langs[code], X = { code, language: src.language || {}, lex: {}, byNode: {}, byConcept: {}, absent: {}, grammar: src.grammar || {},
-        sentences: [], sentenceById: {}, forms: new Map(), prefixes: [], maxWord: 1 };
+      const src = data.langs[code], X = { code, language: src.language || {}, lex: {}, byNode: {}, byConcept: {}, absent: {}, grammar: src.grammar || {}, prepared: {},
+        sentences: [], sentenceById: {}, forms: new Map(), prefixes: [], maxWord: 1, maxWords: 1 };
       for (const nid of Object.keys(C.nodes)) {
+        X.prepared[nid] = !!src.lexicon[nid];
         const file = src.lexicon[nid] || { lexemes: [], absent: [] };
         X.byNode[nid] = [];
         for (const x of file.lexemes || []) {
@@ -140,14 +141,14 @@
         for (const k of new Set([nfc(form), stripMarks(code, form)])) {
           if (!k) continue;
           const arr = X.forms.get(k) || []; if (!arr.some(m => m.l === l && m.f === f)) arr.push({ l, f }); X.forms.set(k, arr);
-          X.maxWord = Math.max(X.maxWord, [...k].length);
+          X.maxWord = Math.max(X.maxWord, [...k].length); X.maxWords = Math.max(X.maxWords, k.split(' ').length);
         }
       };
       for (const lx of Object.values(X.lex)) {
         const forms = lx.forms || {};
-        if (Object.keys(forms).length) for (const [c, f] of Object.entries(forms)) add(f, lx.id, c); else add(lx.lemma, lx.id, null);
+        if (Object.keys(forms).length) for (const [c, f] of Object.entries(forms)) add(f, lx.id, c); else { add(lx.lemma, lx.id, null); for (const a of lx.alts || []) add(a, lx.id, null); }
         for (const [c, f] of Object.entries(lx.plene || {})) add(f, lx.id, c);   // he: the full unvocalized spelling (ktiv male)
-        if (lx.prefix) X.prefixes.push({ t: nfc(lx.lemma), plain: stripMarks(code, lx.lemma), l: lx.id });
+        if (lx.prefix) for (const p of [lx.lemma, ...(lx.alts || [])]) X.prefixes.push({ t: nfc(p), plain: stripMarks(code, p), l: lx.id });   // וְ and its spellings וּ, וַ …
       }
       X.prefixes.sort((a, b) => b.t.length - a.t.length);
       for (const s of src.bank || []) {
@@ -215,12 +216,14 @@
     return 'mastered';
   }
   const NODE_DONE = new Set(['known', 'mastered', 'skipped']);
-  /** States of every node in one language: locked · open · learning · known · mastered · skipped (tier above the chosen depth). */
+  /** States of every node in one language: locked · open · learning · known · mastered · skipped (tier above the chosen depth)
+      · unprepared (its words are not written yet in this language — it blocks what follows, like a locked node). */
   function nodeStates(C, L, code) {
     const X = C.lang[code], out = {}, depth = L.settings.depth?.[code] ?? 3;
     for (const nid of C.order) {
       const n = C.nodes[nid];
       if (n.kind === 'field' && n.tier > depth) { out[nid] = 'skipped'; continue; }
+      if (!X.prepared[nid]) { out[nid] = 'unprepared'; continue; }
       if ((n.prereqs || []).some(p => !NODE_DONE.has(out[p]))) { out[nid] = 'locked'; continue; }
       const ids = X.byNode[nid] || [];
       if (!ids.length) { out[nid] = 'known'; continue; }                     // everything absent in this language: nothing to learn
@@ -309,7 +312,12 @@
   const PUNCT = /^[\p{P}\p{S}]+$/u;
   function lookup(C, code, w) {
     const X = C.lang[code], lj = X.language, out = [];
-    const tryWord = s => X.forms.get(s) || X.forms.get(stripMarks(code, s)) || (lj.capitalizeFirst ? X.forms.get(decapFirst(s)) : null) || null;
+    // every reading of the written word: as written, without vowel marks, and — at the start of a sentence — with a small first letter (Sie / sie)
+    const tryWord = s => {
+      const all = [];
+      for (const k of new Set([s, stripMarks(code, s), ...(lj.capitalizeFirst ? [decapFirst(s)] : [])])) for (const m of X.forms.get(k) || []) if (!all.some(x => x.l === m.l && x.f === m.f)) all.push(m);
+      return all.length ? all : null;
+    };
     const direct = tryWord(nfc(w));
     if (direct) return { matches: direct };
     // prefix clitics (ar wa-/bi-…, he ve-/ha-/be-…): up to two, longest first
@@ -317,7 +325,7 @@
       if (depth > 2) return null;
       for (const p of X.prefixes) for (const pre of [p.t, p.plain]) {
         if (pre && s.startsWith(pre) && s.length > pre.length) {
-          const rest = s.slice(pre.length), m = tryWord(rest);
+          const rest = s.slice(pre.length).replace(/^\p{M}+/u, ''), m = tryWord(rest);   // the plain prefix letter may carry vowel marks of its own
           if (m) return [{ t: pre, matches: [{ l: p.l, f: null }] }, { t: rest, matches: m }];
           const deeper = strip(rest, depth + 1);
           if (deeper) return [{ t: pre, matches: [{ l: p.l, f: null }] }, ...deeper];
@@ -345,12 +353,24 @@
       }
       return out;
     }
+    // words with their punctuation split off; multi-word words (Rote Bete, תַּפּוּחַ אֲדָמָה) are matched first, longest first
+    const items = [];
     for (const raw of nfc(text).split(/\s+/).filter(Boolean)) {
-      const m = raw.match(/^([\p{P}\p{S}]*)(.*?)([\p{P}\p{S}]*)$/u);
-      const [, lead, core, trail] = m;
-      for (const ch of lead) out.push({ t: ch, p: 'open', matches: [] });
-      if (core) pushWord(core);
-      for (const ch of trail) out.push({ t: ch, p: true, matches: [] });
+      const [, lead, core, trail] = raw.match(/^([\p{P}\p{S}]*)(.*?)([\p{P}\p{S}]*)$/u);
+      items.push({ lead, core, trail });
+    }
+    for (let i = 0; i < items.length; i++) {
+      for (const ch of items[i].lead) out.push({ t: ch, p: 'open', matches: [] });
+      let used = 1;
+      for (let n = Math.min(X.maxWords, items.length - i); n >= 2; n--) {
+        const span = items.slice(i, i + n);
+        if (span.slice(0, -1).some(x => x.trail) || span.slice(1).some(x => x.lead)) continue;   // punctuation inside: not one word
+        const w = span.map(x => x.core).join(' '), r = lookup(C, code, w);
+        if (r.matches.length) { out.push({ t: w, matches: r.matches }); used = n; break; }
+      }
+      if (used === 1 && items[i].core) pushWord(items[i].core);
+      for (const ch of items[i + used - 1].trail) out.push({ t: ch, p: true, matches: [] });
+      i += used - 1;
     }
     return out;
   }

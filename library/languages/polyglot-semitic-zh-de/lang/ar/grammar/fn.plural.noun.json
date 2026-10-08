@@ -1,0 +1,68 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "summary": "Arabic has singular, dual and plural. Plurals are sound (masculine -ūna/-īna, mostly for male humans; feminine -ātun) or broken (a new vowel pattern, كِتَاب → كُتُب). Most vegetables are collective nouns: the collective (جَزَر “carrots” as food or in general) is grammatically masculine singular; one piece is the unit noun in -a (جَزَرَة “a carrot”); counted pieces take the sound feminine plural -āt (جَزَرَات). Mass nouns without a unit noun (طَمَاطِم، سَبَانِخ، ذُرَة) are counted with حَبَّة “a piece” or رَأْس “a head”. Non-human plurals take feminine singular agreement: هٰذِهِ جَزَرَاتٌ (these are carrots).",
+ "procedure": {
+  "askYourself": [
+   "Do I mean the vegetable in general or as food (→ collective, no plural needed) or counted pieces (→ unit noun, then -āt)?",
+   "Is it a sound feminine plural in -āt? → accusative and genitive both end in -i (-ātin / -āti), never -a.",
+   "Is the plural non-human? → feminine singular agreement: هٰذِهِ (not هٰؤُلَاءِ), هِيَ (not هُمْ).",
+   "Is there a unit noun at all? If not, count with حَبَّةُ … or رَأْسُ …",
+   "Exactly two? → dual (-āni / -ayni), not plural."
+  ]
+ },
+ "traps": [
+  "Sound feminine plural: الْجَزَرَاتِ in the accusative (with -i), not *الْجَزَرَاتَ.",
+  "Non-human plurals are “she”: الْبَصَلَاتُ؟ هِيَ هُنَا.",
+  "A collective is singular: الْبَصَلُ رَخِيصٌ (onions are cheap).",
+  "From 3 to 10 the number takes the opposite gender and the counted noun is a genitive plural: ثَلَاثُ جَزَرَاتٍ."
+ ],
+ "evidence": {
+  "tags": [
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;PL;INDF",
+  "N;NOM;PL;DEF",
+  "N;ACC;PL;INDF",
+  "N;ACC;PL;DEF",
+  "N;GEN;PL;DEF"
+ ],
+ "needs": {
+  "NOUN": 5
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;PL;INDF",
+    "N;NOM;PL;DEF",
+    "N;ACC;PL;DEF"
+   ],
+   "count": 10
+  },
+  {
+   "type": "principal_parts",
+   "pos": "NOUN",
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ]
+   }
+  },
+  {
+   "type": "agree",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ]
+   }
+  }
+ ]
+}

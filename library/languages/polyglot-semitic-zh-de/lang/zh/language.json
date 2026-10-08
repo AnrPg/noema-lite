@@ -1,0 +1,16 @@
+{
+ "code": "zh",
+ "name": "Chinese (Mandarin)",
+ "nativeName": "中文",
+ "script": "Hani",
+ "dir": "ltr",
+ "tokenJoin": "none",
+ "capitalizeFirst": false,
+ "vowelMarks": false,
+ "romanization": "pinyin",
+ "variants": [
+  "simplified",
+  "traditional"
+ ],
+ "paradigmCells": {}
+}

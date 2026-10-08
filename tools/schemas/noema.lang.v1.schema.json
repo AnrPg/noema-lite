@@ -475,7 +475,11 @@
        "type": "string"
       },
       "override": {
-       "type": "string"
+       "type": "object",
+       "additionalProperties": {
+        "type": "string"
+       },
+       "description": "accepted differences from the reference data: {\"pos\"|\"meaning\"|\"gender\"|\"<cell>\"|\"pinyin\"|\"trad\"|\"measure\"|\"all\": \"reason\"}"
       }
      }
     },
@@ -487,6 +491,13 @@
      "additionalProperties": {
       "type": "string"
      }
+    },
+    "alts": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "other spellings of an invariant word, e.g. וּ and וַ for וְ"
     }
    }
   },
@@ -582,6 +593,12 @@
        }
       },
       "lemmas": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "punct": {
        "type": "array",
        "items": {
         "type": "string"

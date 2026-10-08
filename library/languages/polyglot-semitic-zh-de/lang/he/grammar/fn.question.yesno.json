@@ -1,0 +1,50 @@
+{
+ "function": "fn.question.yesno",
+ "status": "realized",
+ "summary": "A yes/no question has the same word order as the statement. In speech, rising intonation alone makes it a question (אַתָּה רוֹצֶה עַגְבָנִיָּה?); in writing and careful speech the particle הַאִם can open it (הַאִם אַתָּה רוֹצֶה עַגְבָנִיָּה?). There is no inversion and no auxiliary like English “do”. Answer with כֵּן or לֹא — or simply repeat the verb (— אַתָּה רוֹצֶה? — רוֹצֶה).",
+ "procedure": {
+  "askYourself": [
+   "Is it everyday speech? → keep the statement and raise your voice at the end (write “?”).",
+   "Is it formal or written? → put הַאִם at the very beginning.",
+   "Did I change the word order? → don’t: Hebrew questions keep the statement order.",
+   "Do I need a word for “do / does”? → no, Hebrew has none."
+  ]
+ },
+ "traps": [
+  "No inversion and no “do”: “Do you want a tomato?” = אַתָּה רוֹצֶה עַגְבָנִיָּה?",
+  "הַאִם is formal; in conversation it can sound stiff.",
+  "Do not confuse הַאִם (question particle) with אִם (“if”).",
+  "A question by intonation alone is shown in writing only by the question mark — don’t forget it."
+ ],
+ "evidence": {
+  "lemmas": [
+   "he:haim"
+  ],
+  "punct": [
+   "?"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "VERB": 1,
+  "NOUN": 3
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  }
+ ]
+}

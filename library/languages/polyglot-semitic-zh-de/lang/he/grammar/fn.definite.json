@@ -1,0 +1,78 @@
+{
+ "function": "fn.definite",
+ "status": "realized",
+ "summary": "Hebrew marks a definite noun with the prefix ha- (הַ), written attached to the noun and to every adjective that agrees with it (הַבָּצָל הַיָּרֹק). There is no indefinite article: a bare noun is indefinite (גֶּזֶר “a carrot / carrots”). A definite direct object is introduced by אֶת (הוּא אוֹכֵל אֶת הַגֶּזֶר). The article usually doubles the next consonant with a dagesh (הַשּׁוּם, הַכְּרוּב); before the gutturals, which cannot be doubled, its vowel changes: הָ before א, ע, ר (הָעַגְבָנִיָּה, הָאֲפוּנָה), הַ with no doubling before ה and ח (הַחַסָּה, הַחֲצִילִים), and הֶ before חָ (הֶחָצִיל, הֶחָרִיף).",
+ "procedure": {
+  "askYourself": [
+   "Is the thing specific — already known to the listener, or the only one? → add הַ.",
+   "What is the first letter of the noun? א / ע / ר → הָ; ה / ח → הַ without a dagesh; חָ → הֶ; any other letter → הַ + a dagesh in that letter.",
+   "Is there an adjective after the noun? It takes the article too: הַפִּלְפֵּל הֶחָרִיף.",
+   "Is the definite noun the direct object of the verb? → put אֶת before it.",
+   "Is it a construct phrase (two nouns, like תַּפּוּחַ אֲדָמָה)? → the article goes on the last noun: תַּפּוּחַ הָאֲדָמָה."
+  ],
+  "steps": [
+   "Decide definite or not.",
+   "Choose the form of the article from the first letter.",
+   "Repeat the article on agreeing adjectives.",
+   "Add אֶת if it is a definite direct object."
+  ]
+ },
+ "traps": [
+  "No indefinite article: “a tomato” is just עַגְבָנִיָּה — never *אַחַת עַגְבָנִיָּה as an article.",
+  "אֶת only before a definite object: הוּא אוֹכֵל בָּצָל (no אֶת), but הוּא אוֹכֵל אֶת הַבָּצָל.",
+  "The article changes before gutturals: הָעַגְבָנִיָּה, הֶחָצִיל — but the plural הַחֲצִילִים, because there the ח has a hataf patah, not a qamats.",
+  "In a noun–adjective phrase both words take the article: הַבָּצָל הַיָּרֹק, not *הַבָּצָל יָרֹק (that means “the onion is green”).",
+  "Names and nouns with a possessive suffix are already definite and take no הַ."
+ ],
+ "evidence": {
+  "tags": [
+   "DEF"
+  ]
+ },
+ "paradigmCells": [
+  "N;SG;INDF",
+  "N;SG;DEF",
+  "N;PL;INDF",
+  "N;PL;DEF"
+ ],
+ "needs": {
+  "NOUN": 6,
+  "VERB": 1
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;SG;DEF",
+    "N;PL;DEF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "analyze",
+   "pos": "NOUN",
+   "cells": [
+    "N;SG;DEF",
+    "N;SG;INDF"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.definite"
+    ]
+   }
+  }
+ ]
+}

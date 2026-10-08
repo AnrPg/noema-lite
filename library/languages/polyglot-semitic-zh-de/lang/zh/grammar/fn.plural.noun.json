@@ -1,0 +1,43 @@
+{
+ "function": "fn.plural.noun",
+ "status": "absent",
+ "summary": "Chinese nouns do not change for number: 一个西红柿, 三个西红柿. Quantity is shown by numbers with measure words (三个西红柿), by 些 (这些西红柿 ‘these tomatoes’), by words like 很多 (‘many’), or simply by context. The suffix 们 makes pronouns plural (我们, 他们) and can follow nouns for people (学生们), but never things.",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "English",
+    "Chinese"
+   ],
+   "rows": [
+    [
+     "a tomato / tomatoes",
+     "西红柿"
+    ],
+    [
+     "three tomatoes",
+     "三个西红柿"
+    ],
+    [
+     "these tomatoes",
+     "这些西红柿"
+    ],
+    [
+     "many tomatoes",
+     "很多西红柿"
+    ],
+    [
+     "we, they",
+     "我们, 他们 (们 only for people)"
+    ]
+   ]
+  }
+ ],
+ "traps": [
+  "Never add 们 to things: *西红柿们.",
+  "Never combine 们 with a number: 三个学生, not *三个学生们.",
+  "A number always needs a measure word: 三个西红柿, not *三西红柿."
+ ],
+ "needs": {},
+ "generators": []
+}

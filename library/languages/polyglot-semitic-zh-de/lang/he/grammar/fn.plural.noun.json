@@ -1,0 +1,70 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "summary": "Most masculine nouns take -ִים (-im) in the plural and most feminine nouns take -וֹת (-ot), replacing a feminine ending -ָה / -ִית / -ִיָּה (עַגְבָנִיָּה → עַגְבָנִיּוֹת, כְּרוּבִית → כְּרוּבִיּוֹת). The stem vowels often shorten (בָּצָל → בְּצָלִים, גֶּזֶר → גְּזָרִים, חָצִיל → חֲצִילִים). Some feminine nouns take -ִים (דְּלַעַת → דְּלוּעִים, כְּרֵשָׁה → כְּרֵשִׁים, אֲפוּנָה → אֲפוּנִים), so the plural has to be learnt with the word. Many food words are mass nouns used in the singular (שׁוּם, בְּרוֹקוֹלִי, תִּירָס). Adjectives agree in number (פִּלְפְּלִים חֲרִיפִים); in a construct phrase only the first noun changes (תַּפּוּחֵי אֲדָמָה).",
+ "procedure": {
+  "askYourself": [
+   "Is the noun masculine or feminine? (Masculine → usually -ִים; feminine → usually -וֹת.)",
+   "Does it end in -ָה, -ִית or -ִיָּה? → replace the ending with -וֹת / -ִיּוֹת.",
+   "Is it one of the feminine nouns with -ִים (דְּלַעַת, כְּרֵשָׁה, אֲפוּנָה)? → check the word card.",
+   "Do the stem vowels shorten (qamats or segol in the first syllable → shva or hataf)?",
+   "Is it a mass noun (garlic, broccoli, corn)? → keep the singular.",
+   "Is there an adjective or a second noun? → the adjective also becomes plural; in a construct phrase only the first noun changes."
+  ]
+ },
+ "traps": [
+  "The ending does not always follow the gender: דְּלַעַת (f) → דְּלוּעִים, כְּרֵשָׁה (f) → כְּרֵשִׁים.",
+  "The first vowel shortens: בָּצָל → בְּצָלִים, גֶּזֶר → גְּזָרִים, סֶלֶק → סְלָקִים; under a guttural it becomes a hataf: חָצִיל → חֲצִילִים.",
+  "-ִיָּה and -ִית become -ִיּוֹת: עַגְבָנִיָּה → עַגְבָנִיּוֹת, כְּרוּבִית → כְּרוּבִיּוֹת.",
+  "Food is often a mass noun: קָנִיתִי גֶּזֶר “I bought carrots”; שׁוּם, בְּרוֹקוֹלִי and תִּירָס have no plural in everyday use.",
+  "Construct phrase: תַּפּוּחַ אֲדָמָה → תַּפּוּחֵי אֲדָמָה (only the first noun)."
+ ],
+ "evidence": {
+  "tags": [
+   "N",
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;PL;INDF",
+  "N;PL;DEF"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;PL;INDF"
+   ],
+   "count": 12
+  },
+  {
+   "type": "principal_parts",
+   "pos": "NOUN",
+   "cells": [
+    "N;SG;INDF",
+    "N;PL;INDF"
+   ],
+   "count": 8
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ]
+   }
+  },
+  {
+   "type": "agree",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ]
+   }
+  }
+ ]
+}

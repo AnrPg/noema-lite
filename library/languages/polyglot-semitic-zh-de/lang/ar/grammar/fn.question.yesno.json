@@ -1,0 +1,49 @@
+{
+ "function": "fn.question.yesno",
+ "status": "realized",
+ "summary": "A yes/no question is the statement with هَلْ in front and the Arabic question mark ؟ at the end; the word order does not change and there is no auxiliary: تُحِبُّ الْجَزَرَ → هَلْ تُحِبُّ الْجَزَرَ؟. The prefix أَ is a more formal alternative and is required before a negation (أَلَا تُحِبُّ …؟ أَلَيْسَ …؟). Answers: نَعَمْ (yes), لَا (no); بَلَى is “yes (on the contrary)” to a negative question.",
+ "procedure": {
+  "askYourself": [
+   "Is it a yes/no question (not who/what/where)? → هَلْ + the unchanged statement + ؟",
+   "Does the next word start with al-? → هَلْ takes a helping vowel: هَلِ الْجَزَرَةُ هُنَا؟",
+   "Is the question negative? → use أَ, not هَلْ: أَلَيْسَ …؟",
+   "Did I write the Arabic question mark ؟ ?"
+  ]
+ },
+ "traps": [
+  "No inversion and no “do”: هَلْ تُرِيدُ جَزَرَةً؟ = do you want a carrot?",
+  "Do not combine هَلْ with a question word: *هَلْ أَيْنَ …؟",
+  "Spoken Arabic often drops هَلْ and relies on intonation; in writing keep it.",
+  "To a negative question, “yes, it is” is بَلَى, not نَعَمْ."
+ ],
+ "evidence": {
+  "lemmas": [
+   "ar:hal"
+  ],
+  "punct": [
+   "؟"
+  ]
+ },
+ "paradigmCells": [],
+ "needs": {
+  "VERB": 2
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  }
+ ]
+}

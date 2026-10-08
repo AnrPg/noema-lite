@@ -1,0 +1,65 @@
+{
+ "function": "fn.plural.noun",
+ "status": "realized",
+ "summary": "German nouns form the plural in five ways: -(e)n (most feminine nouns: Tomate → Tomaten, Zwiebel → Zwiebeln), -e (often masculine: Kohl → Kohle, Lauch → Lauche; sometimes with umlaut), -er (with umlaut where possible), -s (many loanwords: Chili → Chilis) and no ending (nouns in -chen, many in -el/-er/-en: Radieschen → Radieschen). Learn the plural together with the noun. The plural article is always die; in the dative plural the noun adds -n unless it already ends in -n or -s.",
+ "procedure": {
+  "askYourself": [
+   "Which plural did I learn with this noun (die Tomaten, die Kürbisse, die Radieschen)?",
+   "Is it feminine? Then -(e)n is very likely.",
+   "Does it end in -chen or -lein? Then the plural has no ending.",
+   "Is it a loanword ending in a vowel (Chili)? Then often -s.",
+   "Is it dative plural? Add -n if the plural does not already end in -n or -s.",
+   "Is the noun countable at all (Knoblauch, Mais, Spinat are normally used in the singular)?"
+  ],
+  "steps": [
+   "Recall the plural form.",
+   "Use die (nominative/accusative), den (dative) or der (genitive).",
+   "Check the dative -n."
+  ]
+ },
+ "traps": [
+  "Dative plural adds -n: den Kürbissen, den Salaten – but not after -n or -s: den Tomaten, den Chilis.",
+  "-is → -isse: der Kürbis, die Kürbisse.",
+  "Same form in singular and plural: das Radieschen – die Radieschen, die Zucchini – die Zucchini, der Brokkoli – die Brokkoli.",
+  "Some food nouns are normally uncountable: Knoblauch, Mais (count with eine Knoblauchzehe, ein Maiskolben).",
+  "der Kohl has the rare plural Kohle – the same spelling as die Kohle (coal).",
+  "Paprika: zwei Paprika (with a number or article), but standing alone often Paprikas."
+ ],
+ "evidence": {
+  "tags": [
+   "N",
+   "PL"
+  ]
+ },
+ "paradigmCells": [
+  "N;NOM;PL",
+  "N;DAT;PL"
+ ],
+ "needs": {
+  "NOUN": 6
+ },
+ "generators": [
+  {
+   "type": "inflect",
+   "pos": "NOUN",
+   "cells": [
+    "N;NOM;PL"
+   ],
+   "count": 12
+  },
+  {
+   "type": "principal_parts",
+   "pos": "NOUN",
+   "count": 10
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.plural.noun"
+    ],
+    "variant": "Number"
+   }
+  }
+ ]
+}

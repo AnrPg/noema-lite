@@ -1,0 +1,44 @@
+{
+ "frames": [
+  {
+   "id": "fr.eat.def",
+   "meaning": "PERSON eats the VEGETABLE (a specific one)"
+  },
+  {
+   "id": "fr.buy.indef",
+   "meaning": "PERSON buys a VEGETABLE (one, not specific)"
+  },
+  {
+   "id": "fr.like.generic",
+   "meaning": "PERSON likes VEGETABLES (in general)"
+  },
+  {
+   "id": "fr.notlike.generic",
+   "meaning": "PERSON does not like VEGETABLES (in general)"
+  },
+  {
+   "id": "fr.want.q",
+   "meaning": "Do you (one person) want VEGETABLE? (yes/no question)"
+  },
+  {
+   "id": "fr.this.is",
+   "meaning": "This is a VEGETABLE."
+  },
+  {
+   "id": "fr.where.def",
+   "meaning": "Where is the VEGETABLE?"
+  },
+  {
+   "id": "fr.have.indef",
+   "meaning": "PERSON has a VEGETABLE."
+  },
+  {
+   "id": "fr.here.def",
+   "meaning": "The VEGETABLE is here."
+  },
+  {
+   "id": "fr.drink.what",
+   "meaning": "What does PERSON drink?"
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "function": "fn.definite",
+ "status": "absent",
+ "summary": "Chinese has no articles. A bare noun is read as ‘the’ or ‘a’ from context and from its place in the sentence: a noun before the verb is usually known (西红柿在这里 ‘the tomatoes are here’), a noun after 有 is new (这里有西红柿 ‘there are tomatoes here’). 一 + measure word introduces one new thing (我买一个南瓜 ‘I buy a pumpkin’); 这/那 + measure word points at a known one (这个南瓜 ‘this pumpkin’).",
+ "blocks": [
+  {
+   "t": "table",
+   "head": [
+    "English",
+    "Chinese",
+    "How"
+   ],
+   "rows": [
+    [
+     "the tomato is here",
+     "西红柿在这里。",
+     "bare noun before the verb = known"
+    ],
+    [
+     "there is a tomato here",
+     "这里有西红柿。",
+     "new thing after 有"
+    ],
+    [
+     "I buy a pumpkin",
+     "我买一个南瓜。",
+     "一 + measure word = one new thing"
+    ],
+    [
+     "this pumpkin",
+     "这个南瓜",
+     "这 + measure word when you must point"
+    ],
+    [
+     "I like tomatoes",
+     "我喜欢西红柿。",
+     "bare noun = things in general"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "这 is not ‘the’",
+   "text": "这个 means ‘this one’. Most English ‘the’ is simply nothing in Chinese."
+  }
+ ],
+ "traps": [
+  "Do not translate ‘the’ word by word: 这 means ‘this’, not ‘the’.",
+  "Do not add 一个 for every English ‘a’: 这是西红柿 (‘this is a tomato’) and 我喜欢西红柿 (‘I like tomatoes’) need none.",
+  "A known thing goes before the verb: 西红柿在哪里？ ‘where is the tomato?’ — 哪里有西红柿？ asks ‘where can I find (any) tomatoes?’"
+ ],
+ "needs": {},
+ "generators": []
+}

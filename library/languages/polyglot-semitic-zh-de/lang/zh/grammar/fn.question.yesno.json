@@ -1,0 +1,116 @@
+{
+ "function": "fn.question.yesno",
+ "status": "realized",
+ "summary": "To ask a yes/no question, put 吗 (ma) at the end of the statement: 你要黄瓜。→ 你要黄瓜吗？ Nothing else moves. A second way repeats the verb with 不 in between (A-not-A): 你要不要黄瓜？ — then without 吗; with 有 it is 有没有. There is no all-purpose ‘yes’ or ‘no’: you answer by repeating the verb (要。/ 不要。, 有。/ 没有。, 是。/ 不是。).",
+ "blocks": [
+  {
+   "t": "flow",
+   "items": [
+    "你要黄瓜。",
+    "+ 吗",
+    "你要黄瓜吗？"
+   ],
+   "caption": "Statement + 吗 = yes/no question"
+  },
+  {
+   "t": "table",
+   "head": [
+    "Question",
+    "Yes",
+    "No"
+   ],
+   "rows": [
+    [
+     "你要黄瓜吗？",
+     "要。",
+     "不要。"
+    ],
+    [
+     "她有胡萝卜吗？",
+     "有。",
+     "没有。"
+    ],
+    [
+     "这是西红柿吗？",
+     "是。/ 是的。",
+     "不是。"
+    ],
+    [
+     "她喜欢土豆吗？",
+     "喜欢。",
+     "不喜欢。"
+    ]
+   ]
+  },
+  {
+   "t": "callout",
+   "kind": "pitfall",
+   "title": "Question words never take 吗",
+   "text": "你喝什么？ ‘What do you drink?’ — with 吗 (你喝什么吗？) it means ‘Do you drink anything?’."
+  }
+ ],
+ "procedure": {
+  "askYourself": [
+   "Is there already a question word (什么, 哪里 …)? → no 吗.",
+   "Is it a yes/no question? → statement + 吗, or verb-不-verb.",
+   "Did I use verb-不-verb (要不要, 是不是)? → then no 吗.",
+   "Is the verb 有? → the A-not-A form is 有没有.",
+   "How do I answer? → repeat the verb, or its negation (要 / 不要; 有 / 没有; 是 / 不是)."
+  ],
+  "steps": [
+   "Write the statement in normal word order.",
+   "Add 吗 before the question mark — or replace the verb by verb + 不 + verb.",
+   "Use a full-width question mark ？."
+  ]
+ },
+ "traps": [
+  "*你喝什么吗？ for ‘what do you drink?’ — 什么 + 吗 means ‘anything’.",
+  "*你要不要黄瓜吗？ — A-not-A and 吗 never combine.",
+  "Don’t imitate English inversion or ‘do’: 你要黄瓜吗？ keeps the statement order.",
+  "Answering 是 to every question sounds wrong: to 你要黄瓜吗？ answer 要。, not 是。"
+ ],
+ "evidence": {
+  "punct": [
+   "？",
+   "?"
+  ]
+ },
+ "needs": {
+  "VERB": 3,
+  "NOUN": 5
+ },
+ "generators": [
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "dialogue_turn",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "build_sentence",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "translate",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  }
+ ]
+}

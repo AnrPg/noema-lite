@@ -124,6 +124,14 @@ ok(same(zu.filter(t => t.unknown).map(t => t.t), ['苹', '果']), 'Chinese: char
 { const d = N.readCourse(read, list); d.langs.he.lexicon['veg.1'].lexemes[0].plene = { 'N;SG;INDF': 'גזר', 'N;SG;DEF': 'הגזר' };
   d.langs.he.lexicon['veg.1'].lexemes[1].plene = { 'N;SG;INDF': 'בצאל' };   // an invented full spelling, only to test the index
   const C2 = N.course(d); ok(N.lookup(C2, 'he', 'בצאל').matches[0]?.l === 'he:batsal', 'a full (plene) spelling given by the lexeme is found'); }
+{ const d = N.readCourse(read, list); d.langs.de.lexicon['veg.1'].lexemes.push({ id: 'de:Rote_Bete', lemma: 'Rote Bete', pos: 'NOUN', senses: [], role: 'test', forms: { 'N;NOM;SG': 'Rote Bete', 'N;ACC;SG': 'Rote Bete' } });
+  const C4 = N.course(d), t4 = N.tokenize(C4, 'de', 'Sie isst die Rote Bete.');
+  ok(same(t4.map(t => t.t), ['Sie', 'isst', 'die', 'Rote Bete', '.']) && t4[3].matches[0].l === 'de:Rote_Bete', 'a two-word word is one token (Rote Bete)'); }
+{ const d = N.readCourse(read, list); d.langs.he.lexicon['core.1'].lexemes.find(x => x.id === 'he:ve').alts = ['וּ'];
+  const C5 = N.course(d), t5 = N.tokenize(C5, 'he', 'הִיא אוֹכֶלֶת גֶּזֶר וּמְלָפְפוֹנִים.'.normalize('NFC'));
+  ok(t5[3].parts?.map(p => p.matches[0]?.l).join('+') === 'he:ve+he:melafefon', 'a prefix with another spelling (וּ) is split off correctly');
+  const t6 = N.tokenize(N.course(N.readCourse(read, list)), 'he', 'הִיא אוֹכֶלֶת וּמְלָפְפוֹנִים.'.normalize('NFC'));
+  ok(t6[2].parts?.map(p => p.matches[0]?.l).join('+') === 'he:ve+he:melafefon', '…and even without that spelling stored, the plain letter + its vowel mark is'); }
 // every bank sentence reads back to the words it is annotated with
 let rt = []; for (const c of C.languages) for (const s of C.lang[c].sentences) {
   const flat = []; const walk = ks => ks.forEach(t => t.parts ? walk(t.parts) : !t.p && flat.push(t.l)); walk(s.tokens);
@@ -153,6 +161,13 @@ ok(short.seconds <= 60 && short.steps.every(s => s.kind === 'review'), `a 1-minu
 // with vegetables known in German, a grammar block is planned
 plan = N.planSession(C, L, { day: 7, minutes: 30, languages: ['de'] });
 ok(plan.steps.some(s => s.kind === 'grammar' && s.lang === 'de'), 'when a function is trainable, the session has a grammar block');
+
+// ---------- an unfinished course ----------
+{ const d = N.readCourse(rel => rel === 'lang/he/lexicon/veg.1.json' ? null : read(rel), list);
+  const C3 = N.course(d), T = N.newLearner(C3);
+  for (const id of C3.lang.he.byNode['core.1']) { N.review(C3, T, 'he', id, 'r', true, 0); N.review(C3, T, 'he', id, 'r', true, 1); N.review(C3, T, 'he', id, 'p', true, 0); N.review(C3, T, 'he', id, 'p', true, 1); }
+  const s3 = N.nodeStates(C3, T, 'he');
+  ok(s3['core.1'] === 'known' && s3['veg.1'] === 'unprepared' && s3['veg.2'] === 'locked' && N.nodeStates(C3, T, 'de')['veg.1'] === 'locked', 'a node whose words are not written yet is “unprepared” and blocks what follows, in that language only'); }
 
 // ---------- the word card (§4.6) ----------
 const card = N.wordCard(C, L, 'de', 'de:Gurke');

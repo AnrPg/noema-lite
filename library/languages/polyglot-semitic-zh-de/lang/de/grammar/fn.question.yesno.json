@@ -1,0 +1,54 @@
+{
+ "function": "fn.question.yesno",
+ "status": "realized",
+ "summary": "A German yes/no question puts the finite verb first, before the subject: Du willst eine Tomate. → Willst du eine Tomate? There is no helper verb like English “do”: the main verb itself moves to the front (Magst du Spinat? – Do you like spinach?). In speech the voice usually rises at the end. Answers: ja, nein – or doch to contradict a negative question.",
+ "procedure": {
+  "askYourself": [
+   "Which verb carries the person ending? Put exactly that verb in first position.",
+   "Is the subject a pronoun? It comes straight after the verb (Willst du …?, Wollen Sie …?).",
+   "Did I add a “do”? German has none: Isst du …?, not *Tust du essen …?",
+   "Is the question negative? Then “yes” is doch."
+  ],
+  "steps": [
+   "Take the statement.",
+   "Move the finite verb to the front.",
+   "Keep everything else in place; end with a question mark."
+  ]
+ },
+ "traps": [
+  "No do-support: Do you eat meat? = Isst du Fleisch?",
+  "The verb form follows the subject that comes after it: Wollen Sie …? (3rd person plural for polite Sie), Willst du …?",
+  "Statement word order with rising intonation (Du willst eine Tomate?) exists in speech but expresses surprise or a check, not a neutral question."
+ ],
+ "evidence": {
+  "punct": [
+   "?"
+  ]
+ },
+ "paradigmCells": [
+  "V;PRS;2;SG",
+  "V;PRS;3;PL"
+ ],
+ "needs": {
+  "VERB": 3
+ },
+ "generators": [
+  {
+   "type": "word_order",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ]
+   }
+  },
+  {
+   "type": "transform",
+   "bank": {
+    "functions": [
+     "fn.question.yesno"
+    ],
+    "variant": "Mood"
+   }
+  }
+ ]
+}

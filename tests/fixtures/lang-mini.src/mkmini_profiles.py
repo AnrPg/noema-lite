@@ -233,7 +233,7 @@ P['he:batsal'] = {"frequency": "A2", "status": "current", "register": ["neutral"
             {"id": "s2", "def": "bulb (of a plant)", "register": ["neutral"], "domains": ["gardening"]}],
  "examples": [ex("צָרִיךְ לְטַגֵּן אֶת הַבָּצָל עַד שֶׁיַּזְהִיב.", "You need to fry the onion until it turns golden.", "neutral", "cooking"),
               ex("חִתּוּךְ בָּצָל מַדְמִיעַ לִי אֶת הָעֵינַיִם.", "Cutting onion makes my eyes water.", "neutral", "home"),
-              ex("בְּצָלִים שֶׁל צִבְעוֹנִים שׁוֹתְלִים בַּסְּתָיו.", "Tulip bulbs are planted in autumn.", "neutral", "gardening", "s2")],
+              ex("בְּצָלִים שֶׁל צִבְעוֹנִים שׁוֹתְלִים בַּסְּתָו.", "Tulip bulbs are planted in autumn.", "neutral", "gardening", "s2")],
  "collocations": [co("בָּצָל יָרֹק", "spring onion"), co("מְרַק בָּצָל", "onion soup")],
  "phrases": [],
  "synonyms": [], "synonymsNone": "No synonym.",

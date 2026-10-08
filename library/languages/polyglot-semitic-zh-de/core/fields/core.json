@@ -1,0 +1,184 @@
+{
+ "field": "core",
+ "title": "Core words",
+ "subgroups": [
+  {
+   "id": "pron",
+   "title": "Personal pronouns"
+  },
+  {
+   "id": "verb",
+   "title": "Basic verbs"
+  },
+  {
+   "id": "func",
+   "title": "Little words"
+  }
+ ],
+ "sources": [
+  "The core spine of the course (docs/LANGUAGES.md §4.4): the words every sentence needs; extended node by node"
+ ],
+ "concepts": [
+  {
+   "id": "pron.i",
+   "gloss": "I",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 1
+  },
+  {
+   "id": "pron.you.sg",
+   "gloss": "you (one person)",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 2
+  },
+  {
+   "id": "pron.he",
+   "gloss": "he",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 3
+  },
+  {
+   "id": "pron.she",
+   "gloss": "she",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 4
+  },
+  {
+   "id": "pron.we",
+   "gloss": "we",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 5
+  },
+  {
+   "id": "pron.they",
+   "gloss": "they",
+   "subgroup": "pron",
+   "tier": 1,
+   "rank": 6
+  },
+  {
+   "id": "verb.be",
+   "gloss": "to be",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 7
+  },
+  {
+   "id": "poss.have",
+   "gloss": "to have (possession)",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 8
+  },
+  {
+   "id": "verb.eat",
+   "gloss": "to eat",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 9
+  },
+  {
+   "id": "verb.drink",
+   "gloss": "to drink",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 10
+  },
+  {
+   "id": "verb.buy",
+   "gloss": "to buy",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 11
+  },
+  {
+   "id": "verb.like",
+   "gloss": "to like",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 12
+  },
+  {
+   "id": "verb.want",
+   "gloss": "to want",
+   "subgroup": "verb",
+   "tier": 1,
+   "rank": 13
+  },
+  {
+   "id": "part.yes",
+   "gloss": "yes",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 14
+  },
+  {
+   "id": "part.no",
+   "gloss": "no",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 15
+  },
+  {
+   "id": "part.not",
+   "gloss": "not (negation)",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 16
+  },
+  {
+   "id": "conj.and",
+   "gloss": "and",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 17
+  },
+  {
+   "id": "det.def",
+   "gloss": "the (definite article)",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 18
+  },
+  {
+   "id": "det.indef",
+   "gloss": "a, an (indefinite article)",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 19
+  },
+  {
+   "id": "dem.this",
+   "gloss": "this",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 20
+  },
+  {
+   "id": "q.what",
+   "gloss": "what?",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 21
+  },
+  {
+   "id": "q.where",
+   "gloss": "where?",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 22
+  },
+  {
+   "id": "adv.here",
+   "gloss": "here",
+   "subgroup": "func",
+   "tier": 1,
+   "rank": 23
+  }
+ ]
+}

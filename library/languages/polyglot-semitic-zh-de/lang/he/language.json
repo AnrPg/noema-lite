@@ -1,0 +1,66 @@
+{
+ "code": "he",
+ "name": "Hebrew",
+ "nativeName": "עברית",
+ "script": "Hebr",
+ "dir": "rtl",
+ "tokenJoin": "space",
+ "capitalizeFirst": false,
+ "vowelMarks": true,
+ "romanization": "simple",
+ "citationCells": {
+  "NOUN": "N;SG;INDF",
+  "VERB": "V;PST;3;SG;MASC",
+  "PRON.dem": "PRON;SG;MASC"
+ },
+ "paradigmCells": {
+  "NOUN": [
+   "N;SG;INDF",
+   "N;SG;DEF",
+   "N;PL;INDF",
+   "N;PL;DEF"
+  ],
+  "NOUN.mass": [
+   "N;SG;INDF",
+   "N;SG;DEF"
+  ],
+  "VERB": [
+   "V;PST;3;SG;MASC",
+   "V;PRS;SG;MASC",
+   "V;PRS;SG;FEM",
+   "V;PRS;PL;MASC",
+   "V;PRS;PL;FEM"
+  ],
+  "VERB.copula": [
+   "V;PST;3;SG;MASC",
+   "V;PST;3;SG;FEM",
+   "V;PST;3;PL",
+   "V;FUT;3;SG;MASC",
+   "V;FUT;3;SG;FEM",
+   "V;NFIN"
+  ],
+  "PRON.dem": [
+   "PRON;SG;MASC",
+   "PRON;SG;FEM",
+   "PRON;PL"
+  ],
+  "ADP.suffixed": [
+   "ADP;1;SG",
+   "ADP;2;SG;MASC",
+   "ADP;2;SG;FEM",
+   "ADP;3;SG;MASC",
+   "ADP;3;SG;FEM",
+   "ADP;1;PL",
+   "ADP;2;PL;MASC",
+   "ADP;2;PL;FEM",
+   "ADP;3;PL;MASC",
+   "ADP;3;PL;FEM"
+  ]
+ },
+ "classes": {
+  "NOUN.mass": "mass nouns used without a plural in everyday Hebrew (שׁוּם, בְּרוֹקוֹלִי, תִּירָס …)",
+  "VERB.copula": "הָיָה “to be”: no present tense in use, so past, future and infinitive cells",
+  "PRON.dem": "the demonstrative זֶה / זֹאת / אֵלֶּה",
+  "ADP.suffixed": "a prefix preposition (לְ) whose pronoun forms are separate words (לִי, לְךָ …)"
+ }
+}
