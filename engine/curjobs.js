@@ -63,12 +63,19 @@
   const TITLES = { dag: 'Agent 1 — the map: every prerequisite, the goal, its applications', audit: 'Agent 1b — are the prerequisites complete?', expand: 'Agent 2 — the whole goal, in depth' };
   const SYS = { audit: 'You are a rigorous curriculum reviewer. Answer only through the requested structure.', expand: 'You are a curriculum graph editor. Answer only through the requested structure.' };
   const wishes = (c, ids) => { const w = ids.filter(i => c.nodes[i]?.planWish).map(i => `- ${i} (“${c.nodes[i].title}”): ${c.nodes[i].planWish}`); return w.length ? `\n\nThe learner's own wishes for these steps (follow them):\n${w.join('\n')}` : ''; };
+  /** Which re-plan requests a plan task answers: a hash of the replanAt of each of its steps, in order ('' when none was asked
+      for). An answer written for an older request (the learner asked again for any of its steps) no longer matches. */
+  const planGen = (c, ids) => {
+    const v = ids.map(i => c.nodes[i]?.replanAt || ''); if (!v.some(Boolean)) return '';
+    let h = 5381; for (const ch of v.join('|')) h = (Math.imul(h, 33) ^ ch.charCodeAt(0)) >>> 0;
+    return '@' + h.toString(36);
+  };
   function spec(c, kind, ids) {
     const P = C().prompts, S = C().schemas, x = C().ctx(c);
     if (kind === 'dag') return { kind, id: 'dag', title: TITLES.dag, system: P.dagPrompt(x), prompt: `Build the curriculum DAG for the goal “${c.goal}”.`, schema: S.S_DAG };
     if (kind === 'audit') return { kind, id: 'audit', title: TITLES.audit, system: SYS.audit, prompt: P.auditPrompt(x, C().snapshot(c, { withSummaries: true })), schema: S.S_AUDIT };
     if (kind === 'expand') return { kind, id: 'expand', title: TITLES.expand, system: SYS.expand, prompt: P.expandPrompt(x, C().snapshot(c), c.nodes[c.goalId]), schema: S.S_EXPAND };
-    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(','), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
+    if (kind === 'plan') return { kind, id: 'plan:' + ids.join(',') + planGen(c, ids), ids, title: `Agent 3 — the chapters of ${ids.length} step${ids.length > 1 ? 's' : ''}: ${ids.map(i => c.nodes[i].title).join(' · ')}`, system: P.PLANNER_SYSTEM, prompt: P.planPrompt(x, C().snapshot(c, { withSummaries: true }), ids) + P.materialText(c, ids) + wishes(c, ids), schema: S.S_PLAN, downloads: downloadsOf(c, ids) };
     return null;
   }
   /** The learner's files of some steps, each file once (even when several steps or page ranges use it). */
@@ -115,9 +122,9 @@
   function byId(c, id) {
     const w = work(c);
     if (GRAPH.includes(id)) return w.graph === id ? spec(c, id) : null;
-    const m = /^plan:(.+)$/.exec(String(id || '')); if (!m) return null;
+    const m = /^plan:([^@]+)(@[0-9a-z]+)?$/.exec(String(id || '')); if (!m) return null;
     const ids = m[1].split(',').filter(Boolean);
-    return ids.length && ids.every(i => c.nodes[i] && needsPlan(c.nodes[i])) ? spec(c, 'plan', ids) : null;
+    return ids.length && ids.every(i => c.nodes[i] && needsPlan(c.nodes[i])) && (m[2] || '') === planGen(c, ids) ? spec(c, 'plan', ids) : null;
   }
   /** Problems of an answer (JSON Schema + the same semantic checks as the in-app agents) → [] when it is good. */
   function check(c, t, data) {
@@ -205,7 +212,7 @@
     App.busy = true; let n = 0;
     try {
       const rows = (await CL.kvRows(IN)).sort((a, b) => a.key.localeCompare(b.key)); App.last = Date.now(); App.error = null;
-      if (rows.length && CL.pull) await CL.pull(acc).catch(() => { });   // apply the answers to the newest copy of each curriculum, not to an older one on this device
+      if (rows.length && CL.pull) { try { await CL.pull(acc); } catch (x) { App.error = x.message; return 0; } }   // apply the answers to the newest copy of each curriculum, not to an older one on this device; no sync → they wait in the inbox for the next poll
       const done = []; let steps = 0;
       for (const r of rows) {
         const cid = r.key.slice(IN.length).split(':')[0];
@@ -286,5 +293,5 @@
     return { title: c.nodes[nid].title };
   };
 
-  root.NoemaCurJobs = { work, settle, savedSince, claimKey, CLAIM, LEASE, next, byId, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
+  root.NoemaCurJobs = { work, settle, savedSince, claimKey, CLAIM, LEASE, next, byId, planGen, check, apply, merged, spec, stepSpec, planBatch, downloadsOf, taskText, stepText, message, inboxKey, needsPlan, prepared, isApp, BATCH, BATCH_FILES, IN, App };
 })(typeof window !== 'undefined' ? window : globalThis);
