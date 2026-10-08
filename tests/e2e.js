@@ -71,6 +71,13 @@ async function mockGemini(ctx) {
     S.settings.chunk = true; return { fails, n, total: ALL_EX.length, vis: ALL_EX.filter(isVisual).length };
   });
   ok(!reg.fails.length && reg.n === reg.total && reg.n >= 1644 + 53 && reg.vis >= 53, `regression: ${reg.n} exercises (${reg.vis} visual) & all sections render`);
+  // a single exercise by id (#/ex/<id>, deep links from Meletee) → a one-exercise run; announced in a:caps
+  const exId = await page.evaluate(() => ALL_EX[7].id);
+  await page.evaluate(id => { location.hash = '#/ex/' + id; }, exId); await wait(700);
+  ok(await page.evaluate(id => location.hash === '#/run' && RUN.list.length === 1 && RUN.list[0].id === id && RUN.back === '#/s/' + EX[id].section, exId), '#/ex/<id> opens that one exercise, back to its section');
+  ok(await page.evaluate(() => JSON.parse(localStorage.getItem('noema1:anr:a:caps') || '{}').exerciseRoute === 1), 'a:caps announces exerciseRoute');
+  await page.evaluate(() => { location.hash = '#/ex/nope-e999'; }); await wait(400);
+  ok(await page.evaluate(() => location.hash === '#/ex/nope-e999' && !!$('main') && !RUN?.list.some(e => e.id === 'nope-e999')), 'an unknown exercise id falls back to home');
   await page.evaluate(() => { location.hash = '#/'; }); await wait(500);
   await page.screenshot({ path: SHOTS + '/a2_databricks.png' });
   // account menu tabs
