@@ -3,7 +3,7 @@
  "lang": "zh",
  "name": "Chinese (Mandarin)",
  "typology": "isolating",
- "summary": "Mandarin is the clearest isolating language of the course: no word ever changes its form, and grammar is carried by a fixed word order (subject – time – place – verb – object, every modifier before its head) and by small separate words — measure words between numbers and nouns, aspect particles (了, 过, 着) instead of tenses, sentence-final particles for mood, coverbs before the verb and place words after the noun instead of cases. Every syllable has a lexical tone, and the small syllable inventory makes homophony pervasive, which the logographic script (one character per syllable and morpheme, simplified and traditional) disambiguates. Its vocabulary splits concepts that Greek, German, English, Russian and Turkish keep whole — kinship by lineage and relative age, ‘or’ in questions vs statements, ‘two’ before measure words, ‘can’, ‘know’, ‘wear’, ‘play’ — and is rich in compounds, chengyu and culturally loaded homophones.",
+ "summary": "Mandarin is a clear isolating language: no word ever changes its form, and grammar is carried by a fixed word order (subject – time – place – verb – object, every modifier before its head) and by small separate words — measure words between numbers and nouns, aspect particles (了, 过, 着) with no tenses, sentence-final particles for mood, coverbs before the verb and place words after the noun with no cases. Every syllable has a lexical tone, and the small syllable inventory makes homophony pervasive, which the logographic script (one character per syllable and morpheme, simplified and traditional) disambiguates. It lacks articles, gender, case, agreement, tense and inflectional moods, and its vocabulary splits several concepts into separate words — kinship by lineage and relative age, ‘or’ in questions vs statements, ‘two’ before measure words, ‘can’, ‘know’, ‘wear’, ‘play’, ‘carry’, ‘cut’ — and is rich in compounds, chengyu and culturally loaded homophones.",
  "sources": [
   "Course data: library/languages/polyglot-semitic-zh-de/lang/zh (lexicon, grammar, bank), core/nodes.json, engine/langcore.js, tools/validate_lang.py, docs/LANGUAGES.md",
   "Wiktionary (kaikki.org extracts) and CC-CEDICT for readings, traditional forms and senses",
@@ -20,8 +20,17 @@
    "title": "Characters: one syllable, one morpheme",
    "area": "script",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "logographic"
+    },
+    {
+     "feature": "script.vowels",
+     "value": "not-phonographic"
+    }
+   ],
    "what": "Chinese is written with characters (汉字 hànzì), not letters: each character stands for one spoken syllable and, as a rule, one morpheme (a unit of meaning). A word is one or more characters (书 ‘book’, 学生 ‘student’). The sound is not spelled out, so every character is learned with its reading; about 3,500 common characters cover more than 99 % of everyday texts.",
    "examples": [
     {
@@ -54,8 +63,13 @@
    "title": "Components and radicals (phono-semantic characters)",
    "area": "script",
    "pos": [],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "logographic"
+    }
+   ],
    "what": "Most characters are built from a meaning part (the radical, e.g. 女 ‘woman’, 口 ‘mouth’, 氵 ‘water’) and a sound part that hints at the reading. Knowing the components makes characters memorable and is how paper dictionaries are ordered. The hint is often only approximate because sounds have changed over 3,000 years.",
    "examples": [
     {
@@ -89,8 +103,13 @@
    "title": "Strokes and stroke order",
    "area": "script",
    "pos": [],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "logographic"
+    }
+   ],
    "what": "Characters are written with a fixed set of strokes in a fixed order: top before bottom, left before right, horizontal before vertical, left-falling before right-falling, outside before inside, and a box is closed last. The order matters for handwriting, for handwriting input on phones and for counting strokes (dictionary order).",
    "examples": [
     {
@@ -122,8 +141,13 @@
    "title": "Simplified and traditional characters",
    "area": "orthography",
    "pos": [],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.multiple",
+     "value": "variants"
+    }
+   ],
    "what": "Since the 1950s mainland China and Singapore write simplified characters, Taiwan, Hong Kong and Macau traditional ones. Many common characters differ (书 / 書, 车 / 車, 学 / 學), many do not (人, 大, 好). The words and the grammar are the same; a learner reads one set and recognizes the other.",
    "examples": [
     {
@@ -168,8 +192,13 @@
     "ADP",
     "ADJ"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.multiple",
+     "value": "variants"
+    }
+   ],
    "what": "Simplification often merged two or more characters into one, so one simplified character can have different traditional spellings by meaning: 里 ‘inside’ is 裡 but 里 ‘li (half a kilometre)’ stays 里; 面 ‘face’ is 面 but 面 in 面包 ‘bread’ is 麵. A word with such a character may need a traditional form per sense.",
    "examples": [
     {
@@ -214,8 +243,13 @@
    "title": "No spaces between words",
    "area": "orthography",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.wordSpacing",
+     "value": "none"
+    }
+   ],
    "what": "Chinese text has no spaces: characters follow each other and the reader finds the word boundaries. Learners must segment (我 | 喜欢 | 吃 | 西红柿) and some strings can be cut in two ways. Pinyin, in contrast, writes words separately.",
    "examples": [
     {
@@ -246,8 +280,13 @@
    "title": "Full-width punctuation, the enumeration comma 、 and book-title marks",
    "area": "orthography",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.wordSpacing",
+     "value": "none"
+    }
+   ],
    "what": "Chinese uses full-width punctuation: the small circle 。 as full stop, ，for a comma between clauses, the enumeration comma 、 between items of a list, “ ” for quotes and 《 》 for titles of books and films. The question mark and the exclamation mark are full-width too (？！).",
    "examples": [
     {
@@ -279,8 +318,13 @@
    "title": "Horizontal and vertical writing",
    "area": "script",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.direction",
+     "value": "ltr-or-vertical"
+    }
+   ],
    "what": "Modern Chinese is written left to right in horizontal lines. Traditional books, and still some newspapers and novels in Taiwan and Hong Kong, are set in vertical columns read top to bottom, right to left.",
    "examples": [
     {
@@ -311,9 +355,16 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    },
+    {
+     "feature": "script.type",
+     "value": "logographic"
+    }
    ],
    "what": "Chinese writes numbers with Arabic digits (2026年) or with characters (二〇二六年); prices, dates and phone numbers are mostly in digits, while words like 十一月 or 第一 use characters. On cheques and invoices fraud-proof ‘financial’ characters replace the simple ones (壹 for 一, 贰 for 二, 叁 for 三).",
    "examples": [
@@ -353,9 +404,18 @@
    "title": "Pinyin: letters with their own values",
    "area": "orthography",
    "pos": [],
-   "rarity": "unique",
-   "sharedWith": [],
-   "what": "Hanyu Pinyin writes Mandarin in Latin letters with tone marks. Several letters have values unlike in European languages: q = [tɕʰ], x = [ɕ], j = [tɕ], zh/ch/sh/r are retroflex, c = [tsʰ], z = [ts]; ü is written u after j, q, x, y; iou, uei, uen shorten to iu, ui, un after a consonant; i, u, ü at the start of a syllable are written y-, w-, yu-.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.toneMarking",
+     "value": "characters"
+    },
+    {
+     "feature": "script.vowels",
+     "value": "not-phonographic"
+    }
+   ],
+   "what": "Hanyu Pinyin writes Mandarin in Latin letters with tone marks. Several letters have values of their own: q = [tɕʰ], x = [ɕ], j = [tɕ], zh / ch / sh / r are retroflex, c = [tsʰ], z = [ts]; ü is written u after j, q, x, y; iou, uei, uen shorten to iu, ui, un after a consonant; i, u, ü at the start of a syllable are written y-, w-, yu-.",
    "examples": [
     {
      "text": "去 · 女",
@@ -391,8 +451,13 @@
    "title": "Pinyin word spelling: joined words, apostrophe, capitals",
    "area": "orthography",
    "pos": [],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.wordSpacing",
+     "value": "none"
+    }
+   ],
    "what": "Pinyin orthography writes the syllables of one word together (wǒmen, xuésheng) and separates words. When a syllable starting with a, o or e follows another syllable inside a word, an apostrophe marks the boundary (Xī'ān, nǚ'ér), otherwise the reading is ambiguous. Proper names and the first word of a sentence are capitalized.",
    "examples": [
     {
@@ -426,8 +491,17 @@
    "title": "Homophones told apart only in writing",
    "area": "script",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "logographic"
+    },
+    {
+     "feature": "pron.gender",
+     "value": "written-only"
+    }
+   ],
    "what": "Because Mandarin has few distinct syllables, many words and morphemes sound the same and are distinguished only by their characters (and by context). 他, 她 and 它 are all tā; 是, 事, 市 and 试 are all shì. Reading and typing therefore mean choosing the right character for the sound.",
    "examples": [
     {
@@ -460,6 +534,72 @@
    "when": "fd.01; P4"
   },
   {
+   "id": "zh.script.nocase",
+   "title": "No capital letters",
+   "area": "script",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "script.letterCase",
+     "value": "none"
+    }
+   ],
+   "what": "Characters have no capital and small forms: proper names, the first word of a sentence and nouns look like every other word, and names are recognised from context. Only the pinyin romanization uses capitals (Wáng Xiǎomíng, Běijīng).",
+   "examples": [
+    {
+     "text": "王小明在北京工作。",
+     "translit": "Wáng Xiǎomíng zài Běijīng gōngzuò.",
+     "note": "Wang Xiaoming works in Beijing — nothing in the characters marks the two names"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said anywhere; for learners whose scripts have letter case, a line in the script part of the overview (fd.00): names are not marked in characters, only in pinyin.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.script.oneshape",
+   "title": "One shape per character, wherever it stands",
+   "area": "script",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "script.positionalForms",
+     "value": "none"
+    }
+   ],
+   "what": "A character has the same shape at the start, in the middle and at the end of a word or sentence, and printed characters are never joined: each fills its own square. Only handwriting (running and cursive script) links strokes within and between characters.",
+   "examples": [
+    {
+     "text": "学 · 学生 · 大学",
+     "translit": "xué · xuésheng · dàxué",
+     "note": "learn · student · university — the same 学 first or last in the word"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the script part of the overview for learners whose scripts change letter shapes by position.",
+   "when": "fd.00; P4"
+  },
+  {
    "id": "zh.script.polyphones",
    "title": "Characters with several readings (多音字)",
    "area": "orthography",
@@ -469,11 +609,14 @@
     "ADJ",
     "ADV"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "not-phonographic"
+    }
    ],
-   "what": "Many characters have two or more readings, each tied to a meaning or a word: 行 is xíng in 旅行 ‘travel’ but háng in 银行 ‘bank’; 长 is cháng ‘long’ but zhǎng ‘to grow; chief’. The reading belongs to the word, not to the character, so it must be learned per word and per sense. (Hebrew unvocalized spelling poses a similar reading choice.)",
+   "what": "Many characters have two or more readings, each tied to a meaning or a word: 行 is xíng in 旅行 ‘travel’ but háng in 银行 ‘bank’; 长 is cháng ‘long’ but zhǎng ‘to grow; chief’. The reading belongs to the word, not to the character, so it must be learned per word and per sense.",
    "examples": [
     {
      "text": "银行 · 旅行",
@@ -512,9 +655,18 @@
    "title": "Four lexical tones",
    "area": "phonology",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [],
-   "what": "Every Mandarin syllable carries a tone, a pitch contour that distinguishes words: high level (1), rising (2), low dipping (3), falling (4). The same syllable with another tone is another word. None of the learner's other languages uses pitch this way (Greek, German, English, Russian and Turkish have stress), so tones must be learned with every word from the first day.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "tone.lexical",
+     "value": "complex"
+    },
+    {
+     "feature": "script.toneMarking",
+     "value": "characters"
+    }
+   ],
+   "what": "Every Mandarin syllable carries a tone, a pitch contour that distinguishes words: high level (1), rising (2), low dipping (3), falling (4), plus a toneless neutral tone. The same syllable with another tone is another word (买 mǎi ‘buy’, 卖 mài ‘sell’). Because pitch belongs to each word, it is part of every word's dictionary form, and intonation (question, emotion) works on top of the tones without replacing them.",
    "examples": [
     {
      "text": "妈 · 麻 · 马 · 骂",
@@ -551,8 +703,17 @@
    "title": "Neutral (light) tone",
    "area": "phonology",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "tone.lexical",
+     "value": "complex"
+    },
+    {
+     "feature": "phon.vowelReduction",
+     "value": "some"
+    }
+   ],
    "what": "Some syllables lose their tone and are said short and light: grammatical particles (吗, 了, 们), the suffix 子 and the second syllable of many words. Sometimes the neutral tone alone separates two words. Taiwan Mandarin uses the neutral tone far less (學生 xuéshēng).",
    "examples": [
     {
@@ -588,8 +749,13 @@
    "title": "Third-tone sandhi",
    "area": "phonology",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "tone.lexical",
+     "value": "complex"
+    }
+   ],
    "what": "A third tone before another third tone is said as a second tone; dictionaries and pinyin keep the written third tone. Before tones 1, 2, 4 and the neutral tone only the low part of the third tone is said.",
    "examples": [
     {
@@ -630,8 +796,13 @@
     "NUM",
     "ADV"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "tone.lexical",
+     "value": "complex"
+    }
+   ],
    "what": "不 bù becomes bú before a fourth tone (不是 bú shì). 一 yī becomes yí before a fourth tone (一个 yí ge), yì before tones 1, 2 and 3 (一本 yì běn), and stays yī when counting, at the end and in ordinals (十一, 第一, 一月). Textbooks usually print these spoken tones; dictionaries print yī and bù.",
    "examples": [
     {
@@ -676,8 +847,13 @@
     "PRON",
     "ADV"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.affixation",
+     "value": "suffixing"
+    }
+   ],
    "what": "In northern Mandarin, and above all in Beijing, many words take a rhotic -r (written 儿) that merges with the syllable: 这儿 zhèr, 哪儿 nǎr, 一点儿 yìdiǎnr. Mostly it is a regional or colloquial variant; in some words it changes the meaning (头 tóu ‘head’, 头儿 tóur ‘boss’). Southern speakers and Taiwan mostly say 这里, 哪里, 一点.",
    "examples": [
     {
@@ -711,12 +887,21 @@
   },
   {
    "id": "zh.phon.aspiration",
-   "title": "Aspiration instead of voicing",
+   "title": "Aspirated and unaspirated stops",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Mandarin b, d, g, z, zh, j are voiceless and unaspirated; p, t, k, c, ch, q are the same sounds with a strong puff of air. Voicing (as in Greek μπ/ντ or German b/d) plays no role. Greek speakers have the unaspirated series already (π, τ, κ).",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.aspiration",
+     "value": "aspiration-contrast"
+    },
+    {
+     "feature": "phon.voicing",
+     "value": "fricatives-only"
+    }
+   ],
+   "what": "The stops and affricates come in pairs that differ only by aspiration: b, d, g, z, zh, j are voiceless and unaspirated; p, t, k, c, ch, q are the same sounds with a strong puff of air. Voicing does not distinguish them: b, d, g are not voiced. Voicing is distinctive only among the continuants (r [ʐ] vs sh [ʂ]).",
    "examples": [
     {
      "text": "爸 · 怕",
@@ -751,9 +936,14 @@
    "title": "Three series of sibilants: retroflex, alveolo-palatal, dental",
    "area": "phonology",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "Mandarin distinguishes zh ch sh r (tongue tip curled back), j q x (tongue blade at the palate) and z c s (tongue tip at the teeth). The three series together are rare; Russian ш / щ come closest. Mixing them changes the word.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.retroflex",
+     "value": "sibilants"
+    }
+   ],
+   "what": "Mandarin distinguishes zh ch sh r (tongue tip curled back, retroflex), j q x (tongue blade at the hard palate, alveolo-palatal) and z c s (tongue tip at the teeth, dental). Mixing them changes the word (知 zhī ‘know’, 鸡 jī ‘chicken’, 资 zī ‘capital’).",
    "examples": [
     {
      "text": "四是四，十是十。",
@@ -788,12 +978,14 @@
    "title": "Apical vowel, ü and the vowel e",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.frontRounded",
+     "value": "high-only"
+    }
    ],
-   "what": "The i after z c s and zh ch sh r is not [i] but a buzzing continuation of the consonant (字 zì, 是 shì, 日 rì). ü is the front rounded vowel of German ü and Turkish ü (女 nǚ, 绿 lǜ). Pinyin e alone is a back unrounded vowel [ɤ] (饿 è ‘hungry’).",
+   "what": "The i after z c s and zh ch sh r is not [i] but a buzzing continuation of the consonant (字 zì, 是 shì, 日 rì). ü is a high front rounded vowel [y] (女 nǚ, 绿 lǜ). Pinyin e alone is a back unrounded vowel [ɤ] (饿 è ‘hungry’).",
    "examples": [
     {
      "text": "是 · 西",
@@ -803,7 +995,7 @@
     {
      "text": "女 · 绿",
      "translit": "nǚ · lǜ",
-     "note": "woman · green — German ü"
+     "note": "woman · green — front rounded ü [y]"
     }
    ],
    "level": "word",
@@ -828,8 +1020,13 @@
    "title": "A small syllable inventory",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.syllableStructure",
+     "value": "moderately-complex"
+    }
+   ],
    "what": "A Mandarin syllable is (consonant) + (glide) + vowel + (n / ng): no consonant clusters and no other final consonants. There are only about 400 syllables (about 1,300 with tones). This explains the many homophones, the preference for two-syllable words, and how loanwords are adapted (final consonants dropped or given a vowel).",
    "examples": [
     {
@@ -861,6 +1058,494 @@
    "when": "fd.00"
   },
   {
+   "id": "zh.phon.nostress",
+   "title": "No lexical stress, nothing to mark",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.stress",
+     "value": "none"
+    },
+    {
+     "feature": "script.stressMarking",
+     "value": "not-applicable"
+    }
+   ],
+   "what": "Words have no distinctive lexical stress: what makes a syllable prominent or weak is its tone, and the weak syllables are the toneless neutral-tone ones (东西 dōngxi ‘thing’ vs 东西 dōngxī ‘east and west’). Neither characters nor pinyin have a stress mark, because there is no stress to mark; emphasis on a word in a sentence is given by a wider pitch range and more length.",
+   "examples": [
+    {
+     "text": "东西 · 东西",
+     "translit": "dōngxi · dōngxī",
+     "note": "‘thing’ · ‘east and west’ — told apart by the neutral tone, not by a stress"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.tones"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.tones contrasts tone with stress only for the course languages; the overview does not say that Mandarin has no lexical stress and no stress mark.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.novowellength",
+   "title": "No distinctive vowel length",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.vowelLength",
+     "value": "none"
+    }
+   ],
+   "what": "Vowel length never distinguishes words. A syllable sounds longer or shorter because of its tone (a full third tone is long, a neutral-tone syllable short) and its place in the phrase, not because of a long or short vowel.",
+   "examples": [
+    {
+     "text": "马 · 吗",
+     "translit": "mǎ · ma",
+     "note": "horse (long, low dipping tone) · question particle (short, toneless) — the tone, not a vowel length, makes the difference"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.tones"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the pronunciation block (S00 / fn.tones) for learners whose languages distinguish long and short vowels.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.noharmony",
+   "title": "No vowel harmony",
+   "area": "phonology",
+   "pos": [
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.vowelHarmony",
+     "value": "none"
+    }
+   ],
+   "what": "Vowels inside a word do not assimilate to each other: every syllable keeps its own vowel, and suffixes and particles have one form after any word (们, 了, 吗 never adapt to the vowels before them).",
+   "examples": [
+    {
+     "text": "我们 · 朋友们 · 老师们",
+     "translit": "wǒmen · péngyoumen · lǎoshīmen",
+     "note": "we · friends · teachers — 们 is the same after any vowel"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The overview says that words never change, but not that suffixes and particles never adapt to the vowels of the word (for learners whose languages have vowel harmony).",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nouvulars",
+   "title": "No uvular consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.uvulars",
+     "value": "none"
+    }
+   ],
+   "what": "No consonant is made at the uvula. h is a velar fricative [x], made at the soft palate, and pinyin q is not a uvular stop but the aspirated alveolo-palatal affricate [tɕʰ].",
+   "examples": [
+    {
+     "text": "好 · 去",
+     "translit": "hǎo [xɑʊ] · qù [tɕʰy]",
+     "note": "good · go — velar h, palatal q; nothing further back"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "A pronunciation table in S00 with the place of h and q, and audio (P9).",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nopharyngeals",
+   "title": "No pharyngeal or emphatic consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.pharyngeals",
+     "value": "none"
+    }
+   ],
+   "what": "No consonant is made by narrowing the throat, and there are no pharyngealised (‘emphatic’) consonants: consonants differ by place, aspiration and retroflexion only.",
+   "examples": [
+    {
+     "text": "喝 · 大 · 他",
+     "translit": "hē · dà · tā",
+     "note": "drink · big · he — no throat constriction anywhere"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the pronunciation table of S00.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.noejectives",
+   "title": "No ejectives or implosives",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.glottalized",
+     "value": "none"
+    }
+   ],
+   "what": "Stops differ only by aspiration (b / p, d / t, g / k), never by a closed glottis (ejectives) or by drawing air inwards (implosives).",
+   "examples": [
+    {
+     "text": "读 · 图",
+     "translit": "dú · tú",
+     "note": "read · picture — unaspirated vs aspirated is the only contrast between the two stops"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; the aspiration block in S00 could name the absence for learners with glottalized consonants.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.noclicks",
+   "title": "No click consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.clicks",
+     "value": "none"
+    }
+   ],
+   "what": "No word contains a click. Clicking noises exist only outside language (tutting in disapproval), and when written they are spelt with ordinary syllables.",
+   "examples": [
+    {
+     "text": "啧啧",
+     "translit": "zézé",
+     "note": "the written form of a tutting noise, read aloud with ordinary consonants"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the pronunciation table of S00.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nonasalvowels",
+   "title": "No nasal vowels: -n and -ng are consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.nasalVowels",
+     "value": "none"
+    }
+   ],
+   "what": "There are no nasal vowels. The syllable finals -n and -ng are full consonants that distinguish words (山 shān ‘mountain’ / 伤 shāng ‘wound’); the vowel before them is only slightly nasalised and the consonant itself must be said.",
+   "examples": [
+    {
+     "text": "山 · 伤",
+     "translit": "shān · shāng",
+     "note": "mountain · wound"
+    },
+    {
+     "text": "金 · 京",
+     "translit": "jīn · jīng",
+     "note": "gold · capital"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "A note on -n / -ng finals in the pronunciation block (S00) and audio minimal pairs (P9).",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nofinaldevoicing",
+   "title": "No final devoicing: only -n, -ng (and -r) end a syllable",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.finalDevoicing",
+     "value": "no-voicing-contrast"
+    }
+   ],
+   "what": "Final devoicing has nothing to act on: a syllable ends in a vowel, -n, -ng or the erhua -r, never in a stop or fricative, and stops do not contrast in voicing anywhere.",
+   "examples": [
+    {
+     "text": "难 · 忙 · 哪儿",
+     "translit": "nán · máng · nǎr",
+     "note": "difficult · busy · where — the only possible syllable ends"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; the syllable chart of S00 (zh.phon.syllable) could state the possible finals.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nogemination",
+   "title": "No long (double) consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.gemination",
+     "value": "none"
+    }
+   ],
+   "what": "Consonant length never distinguishes words. The only ‘double’ letters in pinyin arise where a syllable ending in -n meets one beginning with n- (安宁 ānníng ‘peaceful’); they belong to two syllables, and no pair of words differs by a single vs a long consonant.",
+   "examples": [
+    {
+     "text": "安宁",
+     "translit": "ānníng",
+     "note": "peaceful — -n ends one syllable, n- starts the next"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the pronunciation block of S00.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nointerdentals",
+   "title": "No ‘th’ sounds",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.interdentals",
+     "value": "none"
+    }
+   ],
+   "what": "There are no interdental fricatives [θ ð]: the dental series z c s is made with the tongue tip behind the upper teeth, not between them. Foreign names with such sounds are adapted, usually with s or t.",
+   "examples": [
+    {
+     "text": "三 · 撒切尔",
+     "translit": "sān · Sāqiè’ěr",
+     "note": "three (dental s) · Thatcher (th → s)"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the pronunciation table of S00.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.liquids",
+   "title": "l and r: two different sounds",
+   "area": "phonology",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.liquids",
+     "value": "r-and-l"
+    }
+   ],
+   "what": "l and r distinguish words. l is a lateral [l]; pinyin r at the start of a syllable is a retroflex continuant [ʐ ~ ɻ], made with the tongue tip curled back, not a trill or tap. At the end of a syllable r occurs only in 二 èr and as the erhua suffix (哪儿 nǎr).",
+   "examples": [
+    {
+     "text": "楼 · 柔",
+     "translit": "lóu · róu",
+     "note": "building · soft"
+    },
+    {
+     "text": "路 · 入",
+     "translit": "lù · rù",
+     "note": "road · enter"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.tones"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "A pronunciation table with l / r in S00 and audio minimal pairs (P9).",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nopalatalization",
+   "title": "No hard / soft consonant pairs",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.palatalization",
+     "value": "none"
+    }
+   ],
+   "what": "Consonants do not come in plain / palatalised pairs. The alveolo-palatal j q x are separate consonants that occur only before i and ü, where g k h, z c s and zh ch sh never stand with a real [i] or [y]; so no word changes by ‘softening’ a consonant.",
+   "examples": [
+    {
+     "text": "鸡 · 七 · 西",
+     "translit": "jī · qī · xī",
+     "note": "chicken · seven · west — j q x before i; *gī, *kī, *hī do not exist"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "The pinyin chart of S00 (initials × finals) would show the gaps; not said for learners whose languages have hard / soft pairs.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.phon.nomutation",
+   "title": "No consonant mutation",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.mutation",
+     "value": "none"
+    }
+   ],
+   "what": "Initial and final consonants never change with the grammatical context or the word before: a word keeps its consonants everywhere. The systematic sound changes are tonal (third-tone sandhi, 一 and 不) and the erhua -r.",
+   "examples": [
+    {
+     "text": "书 · 一本书 · 我的书",
+     "translit": "shū · yì běn shū · wǒ de shū",
+     "note": "book · a book · my book — sh- never changes; only the tone of 一 does"
+    }
+   ],
+   "level": "phonology",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.tones"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the overview next to the tone-sandhi rules (fn.tones).",
+   "when": "fd.00"
+  },
+  {
    "id": "zh.morph.isolating",
    "title": "No inflection at all",
    "area": "morphology",
@@ -870,9 +1555,22 @@
     "ADJ",
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Chinese words never change their form: no conjugation for person, number or tense, no plural endings, no cases, no gender, no agreement. 我 is both ‘I’ and ‘me’, 吃 is ‘eat, eats, ate’. Grammar lives in word order and in separate small words. English is partly analytic, but all the learner's other languages inflect.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.type",
+     "value": "isolating"
+    },
+    {
+     "feature": "morph.fusion",
+     "value": "isolating"
+    },
+    {
+     "feature": "morph.stemChange",
+     "value": "none"
+    }
+   ],
+   "what": "Chinese words never change their form: no conjugation for person, number or tense, no plural endings, no cases, no gender, no agreement, no stem changes. 我 is both ‘I’ and ‘me’, 吃 is ‘eat, eats, ate’. Grammar lives in word order and in separate small words.",
    "examples": [
     {
      "text": "我吃 · 他吃 · 他们吃",
@@ -915,14 +1613,14 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "en",
-    "el",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.compounding",
+     "value": "pervasive"
+    }
    ],
-   "what": "Most modern words are compounds of two (or more) morphemes, each written with a character: modifier + head (火车 ‘fire-vehicle’ = train), verb + object (开车 ‘drive-car’), two parallel members (父母 ‘father-mother’ = parents). Many single morphemes are bound and live only inside compounds (美 in 美食). Like German compounds, the parts give the meaning away.",
+   "what": "Most modern words are compounds of two (or more) morphemes, each written with a character: modifier + head (火车 ‘fire-vehicle’ = train), verb + object (开车 ‘drive-car’), verb + result (打破 ‘hit-break’), two parallel members (父母 ‘father-mother’ = parents). Many single morphemes are bound and live only inside compounds (美 in 美食). The parts usually give the meaning away.",
    "examples": [
     {
      "text": "火车 · 手机 · 冰箱",
@@ -960,11 +1658,14 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.objectCompounds",
+     "value": "present"
+    }
    ],
-   "what": "Many verbs are a verb + object word (吃饭 ‘eat-rice’, 放假 ‘release-holiday’, 见面 ‘see-face’). Aspect markers, numbers and measure words go between the two parts, and they cannot take a second direct object — the person goes before them with a coverb. German separable verbs also split, but by a different rule.",
+   "what": "Many verbs are a verb + object word (吃饭 ‘eat-rice’, 放假 ‘release-holiday’, 见面 ‘see-face’). Aspect markers, numbers and measure words go between the two parts (吃了饭, 见了一次面), and such a verb cannot take a second direct object — the person goes before it with a coverb (跟他见面 ‘meet him’).",
    "examples": [
     {
      "text": "放假 → 放了三天假",
@@ -999,8 +1700,13 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.affixation",
+     "value": "suffixing"
+    }
+   ],
    "what": "Many nouns end in a toneless suffix that adds no meaning but makes a one-syllable morpheme into a two-syllable word: 桌子 ‘table’, 椅子 ‘chair’, 孩子 ‘child’, 木头 ‘wood’, 芋头 ‘taro’. The suffix is dropped inside compounds (饭桌 ‘dining table’).",
    "examples": [
     {
@@ -1037,8 +1743,17 @@
     "PRON",
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "optional"
+    },
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "unmarked"
+    }
+   ],
    "what": "Nouns have no plural. The suffix 们 makes the plural of pronouns (我们, 你们, 他们) and can mark a definite group of people (孩子们 ‘the children’), but never things and never after a number or 很多.",
    "examples": [
     {
@@ -1085,9 +1800,12 @@
     "ADV",
     "CLF"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.reduplication",
+     "value": "partial-or-both"
+    }
    ],
    "what": "Doubling is productive: kinship words (妈妈, 哥哥), adverbs (常常 ‘often’), adjectives for vividness (慢慢 ‘slowly’, 高高兴兴 ‘happily’), verbs for ‘a little, briefly’ (看看 ‘have a look’), and nouns or measure words for ‘every’ (人人 ‘everyone’, 天天 ‘every day’). The second syllable of a doubled verb or kin word is toneless.",
    "examples": [
@@ -1131,13 +1849,12 @@
     "NOUN",
     "NUM"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "el",
-    "en",
-    "tr",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.affixation",
+     "value": "suffixing"
+    }
    ],
    "what": "A few productive affixes: 老 and 小 before a surname (老王 ‘old Wang’, 小王 ‘young Wang’), 第 before a number for ordinals (第一 ‘first’), 阿 in kin terms (阿姨); agent suffixes 家 (艺术家 ‘artist’), 员 (售货员 ‘shop assistant’), 师 (工程师 ‘engineer’), 者, 手; 们 for groups of people.",
    "examples": [
@@ -1177,11 +1894,14 @@
     "ADJ",
     "ADV"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "en"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.type",
+     "value": "isolating"
+    }
    ],
-   "what": "Without endings, the same word often serves as noun, verb or adjective, and only its place shows which: 工作 ‘work’ (noun) and ‘to work’ (verb), 旅行 ‘a trip’ and ‘to travel’, 可能 ‘maybe’, ‘possible’ and ‘possibility’. English does the same (a walk / to walk).",
+   "what": "Without endings, the same word often serves as noun, verb or adjective, and only its place shows which: 工作 ‘work’ (noun) and ‘to work’ (verb), 旅行 ‘a trip’ and ‘to travel’, 可能 ‘maybe’, ‘possible’ and ‘possibility’.",
    "examples": [
     {
      "text": "我在银行工作。",
@@ -1212,18 +1932,29 @@
   },
   {
    "id": "zh.morph.aspect",
-   "title": "Aspect instead of tense: 了, 过, 着, 在",
+   "title": "Aspect particles: 了, 过, 着, 在",
    "area": "morphology",
    "pos": [
     "PART",
     "ADV",
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "particle"
+    },
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    },
+    {
+     "feature": "verb.progressive",
+     "value": "optional"
+    }
    ],
-   "what": "Chinese marks how an action is viewed, not when: 了 after the verb for a completed action, 了 at the end for a new situation, 过 for experience (‘have ever’), 在 / 正在 before the verb for an action in progress, 着 for a continuing state. Time is given by time words. Russian aspect (perfective / imperfective) is a useful but imperfect parallel.",
+   "what": "Chinese marks how an action is viewed, not when: 了 after the verb for a completed action, 了 at the end for a new situation, 过 for experience (‘have ever’), 在 / 正在 before the verb for an action in progress, 着 for a continuing state. None of them is obligatory: the plain verb also covers ongoing and past events, and time is given by time words.",
    "examples": [
     {
      "text": "我买了两张票。",
@@ -1265,15 +1996,627 @@
    "when": "fd.14, cr.01"
   },
   {
+   "id": "zh.morph.noroots",
+   "title": "No root-and-pattern morphology",
+   "area": "morphology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "none"
+    }
+   ],
+   "what": "Words are not built from consonant roots filled with vowel patterns: a morpheme is a whole syllable with a fixed vowel and tone, and word families are built by putting such morphemes together.",
+   "examples": [
+    {
+     "text": "学 → 学生 · 学校 · 大学",
+     "translit": "xué → xuésheng · xuéxiào · dàxué",
+     "note": "learn → student · school · university — the family shares a whole syllable"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; for learners whose languages build words from roots, a line in the overview: word families come from compounding whole syllables (see zh.morph.compounding).",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.morph.noincorporation",
+   "title": "No noun incorporation",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "morph.incorporation",
+     "value": "none"
+    }
+   ],
+   "what": "Nouns are not absorbed into verbs as affixes. Verb + object words such as 吃饭 ‘eat-rice’ or 睡觉 ‘sleep-sleep’ look similar but stay two words: aspect markers, numbers and modifiers can stand between them (吃了饭, 睡了一个好觉).",
+   "examples": [
+    {
+     "text": "睡觉 · 睡了一个好觉",
+     "translit": "shuìjiào · shuìle yí ge hǎo jiào",
+     "note": "sleep · had a good sleep — the object part keeps its own measure word and adjective"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The facts are described under zh.morph.separable; the overview does not say that these are separable words, not incorporation.",
+   "when": "later"
+  },
+  {
+   "id": "zh.nom.nodual",
+   "title": "No dual",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "PRON",
+    "NUM"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.dual",
+     "value": "none"
+    }
+   ],
+   "what": "Nouns, pronouns and verbs have no dual. ‘Two’ is a numeral + measure word (两个人 ‘two people’), pairs are counted with 双 or 对 (一双鞋 ‘a pair of shoes’), and colloquial 俩 ‘the two of’ follows a pronoun (我们俩 ‘the two of us’).",
+   "examples": [
+    {
+     "text": "两个人 · 一双鞋 · 我们俩",
+     "translit": "liǎng ge rén · yì shuāng xié · wǒmen liǎ",
+     "note": "two people · a pair of shoes · the two of us"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "The concept gap ‘dual’ is noted, but 双, 对 (pair) and 俩 are not in the course and no grammar block says how two is expressed beyond 两.",
+   "when": "fd.05"
+  },
+  {
+   "id": "zh.nom.nosingulative",
+   "title": "No collective / singulative forms: measure words single out one",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "CLF"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.singulative",
+     "value": "none"
+    }
+   ],
+   "what": "A noun has no special form for ‘one piece of’ a mass or a group. One unit is picked out by a measure word, and the noun stays the same: 一粒米 ‘a grain of rice’, 一根头发 ‘a hair’, 一滴水 ‘a drop of water’.",
+   "examples": [
+    {
+     "text": "米 · 一粒米",
+     "translit": "mǐ · yí lì mǐ",
+     "note": "rice · a grain of rice"
+    },
+    {
+     "text": "头发 · 一根头发",
+     "translit": "tóufa · yì gēn tóufa",
+     "note": "hair · a (single) hair"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.measure.word"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Measure words are covered (zh.syntax.measure); unit measures such as 粒 and 滴 and the singling-out use are not taught.",
+   "when": "fd.05"
+  },
+  {
+   "id": "zh.nom.nogender",
+   "title": "No grammatical gender or noun classes",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "DET"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "none"
+    },
+    {
+     "feature": "nom.genderBasis",
+     "value": "none"
+    }
+   ],
+   "what": "Nouns have no grammatical gender and no noun classes, and nothing agrees with a noun. The sex of a person or animal is said with words: 男 / 女 for people (男老师 ‘male teacher’, 女学生 ‘female student’), 公 / 母 for animals (公鸡 ‘rooster’, 母鸡 ‘hen’), and in writing 他 / 她 / 它. The measure word, not a gender, is what every noun brings with it.",
+   "examples": [
+    {
+     "text": "这个男孩 · 这个女孩",
+     "translit": "zhège nánhái · zhège nǚhái",
+     "note": "this boy · this girl — 这个 is the same for both"
+    },
+    {
+     "text": "公鸡 · 母鸡",
+     "translit": "gōngjī · mǔjī",
+     "note": "rooster · hen"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.noun.gender"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04"
+  },
+  {
+   "id": "zh.nom.nocase",
+   "title": "No cases",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "PRON"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    },
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "no-case"
+    },
+    {
+     "feature": "nom.caseMarking",
+     "value": "none"
+    }
+   ],
+   "what": "Nouns and pronouns have no cases and no case particles: the same form is subject, object, possessor and the noun after a coverb (我 ‘I, me’; 我的 ‘my’ is 我 + the particle 的). Roles are shown by word order and by coverbs before the verb (给他 ‘to him’, 从北京 ‘from Beijing’).",
+   "examples": [
+    {
+     "text": "我爱他。· 他爱我。",
+     "translit": "Wǒ ài tā. · Tā ài wǒ.",
+     "note": "I love him. · He loves me. — 我 and 他 do not change; only their place does"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.object",
+     "fn.prep.core"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.07, fd.11"
+  },
+  {
+   "id": "zh.nom.nopossaffix",
+   "title": "No possessive affixes",
+   "area": "morphology",
+   "pos": [
+    "PRON",
+    "NOUN",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.possessiveAffixes",
+     "value": "none"
+    }
+   ],
+   "what": "Possession is never marked by an affix on the noun: the possessor is a separate word before it, joined by 的 (我的书 ‘my book’, 老师的书 ‘the teacher’s book’). There are no possessive words of their own; ‘my’ is ‘I’ + 的.",
+   "examples": [
+    {
+     "text": "我的书 · 他们的房子",
+     "translit": "wǒ de shū · tāmen de fángzi",
+     "note": "my book · their house"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.possessive"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.06"
+  },
+  {
+   "id": "zh.verb.noagreement",
+   "title": "No subject agreement on the verb",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "none"
+    }
+   ],
+   "what": "The verb never agrees with its subject: 我是, 你是, 他是, 我们是, 他们是 — one form for every person and number. Who acts is said by the subject, or understood from context when it is left out.",
+   "examples": [
+    {
+     "text": "我吃 · 你吃 · 他们吃",
+     "translit": "wǒ chī · nǐ chī · tāmen chī",
+     "note": "I eat · you eat · they eat — 吃 never changes"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.present",
+     "fn.pronoun.subject"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.07"
+  },
+  {
+   "id": "zh.verb.noobjectmarking",
+   "title": "No object marking on the verb",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.objectMarking",
+     "value": "none"
+    }
+   ],
+   "what": "The verb carries no sign of its object — no object agreement, no object pronouns attached to it, no separate conjugation for definite objects. The object is a separate word after the verb (我爱你 ‘I love you’), placed before it with 把 or as a topic, or left out when it is known.",
+   "examples": [
+    {
+     "text": "我爱你。",
+     "translit": "Wǒ ài nǐ.",
+     "note": "I love you. — 你 is a separate word; 爱 is unchanged"
+    },
+    {
+     "text": "我把书看完了。",
+     "translit": "Wǒ bǎ shū kànwán le.",
+     "note": "I finished reading the book. — the object moved before the verb with 把"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.object"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.07"
+  },
+  {
+   "id": "zh.verb.nopast",
+   "title": "No past tense",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.past",
+     "value": "none"
+    }
+   ],
+   "what": "There is no past tense: the verb is the same for past, present and future (我昨天去 / 我今天去 / 我明天去). A past event is placed in time by time words or by context; 了 and 过 mark completion and experience, not past time, and many past sentences have neither (我以前住在北京 ‘I used to live in Beijing’).",
+   "examples": [
+    {
+     "text": "我昨天去北京。",
+     "translit": "Wǒ zuótiān qù Běijīng.",
+     "note": "I went to Beijing yesterday. — the time word alone places it in the past"
+    },
+    {
+     "text": "我以前住在北京。",
+     "translit": "Wǒ yǐqián zhù zài Běijīng.",
+     "note": "I used to live in Beijing. — no 了"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.present",
+     "fn.aspect"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.14"
+  },
+  {
+   "id": "zh.verb.nofuture",
+   "title": "No future tense",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "AUX"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "none"
+    }
+   ],
+   "what": "There is no future tense: the plain verb with a time word is enough (我明天去北京 ‘I’ll go to Beijing tomorrow’). Optional words add intention or likelihood — 要 ‘be going to’, 会 ‘will (probably)’, 打算 ‘plan to’, formal 将 — but none of them is required.",
+   "examples": [
+    {
+     "text": "我明天去北京。",
+     "translit": "Wǒ míngtiān qù Běijīng.",
+     "note": "I’m going to Beijing tomorrow."
+    },
+    {
+     "text": "明天会下雨。",
+     "translit": "Míngtiān huì xià yǔ.",
+     "note": "It will (probably) rain tomorrow."
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.present"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.present says that time words show the future; 会 ‘will (likely)’, 打算 and 将 are not in the course and the optional future words are not taught as a set.",
+   "when": "fd.14"
+  },
+  {
+   "id": "zh.verb.noperfect",
+   "title": "The perfect from \"finish\": sentence-final 了",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "PART"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "finish-already"
+    }
+   ],
+   "what": "There is no perfect verb form (no auxiliary + participle). Current relevance is marked by sentence-final 了, a particle that grew out of 了 liǎo \"to finish\": a situation has come about and still holds (他来了 \"he has come / he is here now\"). 过 marks experience (\"have ever\") and 已经 \"already\" completion.",
+   "examples": [
+    {
+     "text": "他来了。",
+     "translit": "Tā lái le.",
+     "note": "He has come (and is here now)."
+    },
+    {
+     "text": "我去过北京。",
+     "translit": "Wǒ qùguo Běijīng.",
+     "note": "I have been to Beijing."
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.aspect"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.aspect teaches 了 and 过; 已经 is not in the course, and the overview does not relate sentence-final 了 to ‘current relevance’.",
+   "when": "fd.14"
+  },
+  {
+   "id": "zh.verb.nosubjunctive",
+   "title": "No subjunctive",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.subjunctive",
+     "value": "none"
+    }
+   ],
+   "what": "There is no subjunctive mood: the verb is the same in wishes, purposes, hypotheses and reported or doubted statements. These are marked by words: 希望 ‘hope’, 让 ‘let’, 如果 / 要是 ‘if’, 为了 ‘in order to’.",
+   "examples": [
+    {
+     "text": "我希望你来。",
+     "translit": "Wǒ xīwàng nǐ lái.",
+     "note": "I hope (that) you come. — 来 as in any other sentence"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the overview for learners whose languages have a subjunctive; 希望 and 为了 are not in the course.",
+   "when": "later"
+  },
+  {
+   "id": "zh.verb.noparticleverbs",
+   "title": "No particle verbs or preverbs",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.particleVerbs",
+     "value": "none"
+    }
+   ],
+   "what": "There is no class of particle verbs or prefixed verbs. Direction and result are added by full verbs after the main verb (进来 ‘come in’, 拿出来 ‘take out’, 吃完 ‘finish eating’); these are open, regular combinations rather than separate lexical verbs.",
+   "examples": [
+    {
+     "text": "拿 · 拿出来 · 拿回去",
+     "translit": "ná · ná chūlai · ná huíqu",
+     "note": "take · take out (towards here) · take back (away from here)"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.direction"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Directional and resultative complements are not taught yet (zh.syntax.complement.direction, zh.syntax.complement.result).",
+   "when": "later"
+  },
+  {
+   "id": "zh.adj.noagreement",
+   "title": "Adjectives never agree",
+   "area": "morphology",
+   "pos": [
+    "ADJ"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "none"
+    }
+   ],
+   "what": "An adjective has one form before every noun, singular or plural, in any role: 大房子 ‘a big house’, 很多大房子 ‘many big houses’, 大城市 ‘a big city’. Nothing in the adjective refers back to the noun.",
+   "examples": [
+    {
+     "text": "大房子 · 很多大房子",
+     "translit": "dà fángzi · hěn duō dà fángzi",
+     "note": "a big house · many big houses — 大 never changes"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.adjective"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.16"
+  },
+  {
    "id": "zh.syntax.svo",
    "title": "Fixed SVO order carries the grammar",
    "area": "syntax",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "en"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    },
+    {
+     "feature": "syn.alignment",
+     "value": "neutral"
+    }
    ],
-   "what": "With no cases, the order subject – verb – object decides who does what. 妈妈喜欢孩子 and 孩子喜欢妈妈 mean different things; the object never moves before the verb in a plain sentence (German or Greek freedom of order does not carry over).",
+   "what": "With no cases and no agreement, the order subject – verb – object decides who does what. 妈妈喜欢孩子 and 孩子喜欢妈妈 mean different things; the object does not move before the verb in a plain sentence (only with 把 or as a topic).",
    "examples": [
     {
      "text": "妈妈喜欢孩子。",
@@ -1314,11 +2657,14 @@
     "NOUN",
     "ADP"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
    ],
-   "what": "Everything that sets the scene — when and where — stands before the verb: subject – time – place – verb – object. ‘I eat at home tomorrow’ is 我明天在家吃饭, never with the place or time at the end as in English, German or Greek. (Turkish also puts them before the verb.)",
+   "what": "Everything that sets the scene — when and where — stands before the verb: subject – time – place – verb – object. ‘I eat at home tomorrow’ is 我明天在家吃饭; the place and the time never follow the verb in a plain sentence.",
    "examples": [
     {
      "text": "我明天在家吃饭。",
@@ -1360,8 +2706,13 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ],
    "what": "A point in time (at eight) comes before the verb, but how long something lasts (for eight hours) comes after it. The same time word changes its meaning with its place.",
    "examples": [
     {
@@ -1398,8 +2749,13 @@
    "title": "Topic–comment sentences",
    "area": "syntax",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.topicProminence",
+     "value": "topic-prominent"
+    }
+   ],
    "what": "A sentence may open with a topic — what it is about — and then say something about it, even when the topic is the object or has no grammatical role at all. Often the topic is something already known.",
    "examples": [
     {
@@ -1436,11 +2792,26 @@
    "pos": [
     "PART"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.relativeClauseOrder",
+     "value": "rel-noun"
+    },
+    {
+     "feature": "syn.relativizer",
+     "value": "invariant-particle"
+    },
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "adj-noun"
+    },
+    {
+     "feature": "syn.genitiveNoun",
+     "value": "gen-noun"
+    }
    ],
-   "what": "Everything that describes a noun comes before it, joined by 的: an owner (我的书), an adjective phrase (很大的房子), a whole clause (我昨天买的书 ‘the book I bought yesterday’). There is no relative pronoun; the head noun comes last. Turkish relative participles work the same way.",
+   "what": "Everything that describes a noun comes before it, joined by 的: an owner (我的书), an adjective phrase (很大的房子), a whole clause (我昨天买的书 ‘the book I bought yesterday’). There is no relative pronoun; the head noun comes last.",
    "examples": [
     {
      "text": "我昨天买的书",
@@ -1482,8 +2853,17 @@
    "pos": [
     "PART"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.genitive",
+     "value": "adposition-or-particle"
+    },
+    {
+     "feature": "syn.relativizer",
+     "value": "invariant-particle"
+    }
+   ],
    "what": "Three different particles all sound de and are told apart only in writing: 的 links a modifier to a noun (我的书), 地 links a manner phrase to a verb (慢慢地走 ‘walk slowly’), 得 links a verb to a comment on how it is done (跑得很快 ‘runs fast’). Native writers also mix them up.",
    "examples": [
     {
@@ -1528,9 +2908,22 @@
     "NOUN",
     "CLF"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "A number or 这 / 那 / 哪 / 几 cannot stand directly before a noun: a measure word comes between them, chosen by the kind or shape of the thing — 本 for books, 张 for flat things, 把 for things with a handle, 条 for long things, 位 politely for people, 个 as the general one. Every noun is learned with its measure word, as a German noun with its article.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    },
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "dem-noun"
+    }
+   ],
+   "what": "A number or 这 / 那 / 哪 / 几 cannot stand directly before a noun: a measure word comes between them, chosen by the kind or shape of the thing — 本 for books, 张 for flat things, 把 for things with a handle, 条 for long things, 位 politely for people, 个 as the general one. Every noun is learned with its measure word.",
    "examples": [
     {
      "text": "一本书 · 三张桌子 · 这把椅子",
@@ -1575,15 +2968,14 @@
     "CLF",
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "en",
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
    ],
-   "what": "Besides sortal classifiers that only count (一本书), Chinese uses containers and units as measures (一杯茶 ‘a cup of tea’, 一碗米饭 ‘a bowl of rice’, 一瓶水), which the learner's languages also have (eine Tasse Tee, ένα φλιτζάνι τσάι). Mass nouns take only these. A container word as a thing takes its own measure word: 一个杯子 ‘a cup’.",
+   "what": "Besides sortal classifiers that only count (一本书), containers and units serve as measures (一杯茶 ‘a cup of tea’, 一碗米饭 ‘a bowl of rice’, 一瓶水 ‘a bottle of water’). Mass nouns take only these. A container word as a thing takes its own measure word: 一个杯子 ‘a cup’.",
    "examples": [
     {
      "text": "一杯茶 · 一个杯子",
@@ -1624,8 +3016,13 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
+   ],
    "what": "Some time nouns are themselves measure words and take no 个: 三天 ‘three days’, 两年 ‘two years’, 五分钟 ‘five minutes’, 两周 ‘two weeks’. Others need 个: 三个月 ‘three months’, 两个星期 ‘two weeks’, 一个小时 ‘one hour’.",
    "examples": [
     {
@@ -1667,8 +3064,13 @@
    "pos": [
     "CLF"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
+   ],
    "what": "Actions are counted with their own measure words after the verb: 次 and 回 for occurrences, 遍 for times through from start to end, 下 for a quick action (一下 softens a request).",
    "examples": [
     {
@@ -1699,15 +3101,24 @@
   },
   {
    "id": "zh.syntax.coverbs",
-   "title": "Coverbs instead of prepositions",
+   "title": "Coverbs: verbs in the role of prepositions",
    "area": "syntax",
    "pos": [
     "ADP",
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "Words that translate prepositions (在 ‘at’, 从 ‘from’, 跟 ‘with’, 给 ‘for, to’, 离 ‘from (distance)’, 比 ‘than’) are, or were, verbs. With their noun they stand before the main verb, never after it: ‘I eat at home’ is literally ‘I be-at home eat’.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "mixed"
+    },
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ],
+   "what": "The words that introduce a place, a source, a companion, a recipient or a standard of comparison (在 ‘at’, 从 ‘from’, 跟 ‘with’, 给 ‘for, to’, 离 ‘from (distance)’, 比 ‘than’) are, or were, verbs. With their noun they stand before the main verb, never after it: ‘I eat at home’ is literally ‘I be-at home eat’ (我在家吃饭).",
    "examples": [
     {
      "text": "我在家吃饭。",
@@ -1758,11 +3169,14 @@
     "NOUN",
     "ADP"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "mixed"
+    }
    ],
-   "what": "Where something is inside, on or under is said with a place word after the noun: 桌子上 ‘on the table’, 冰箱里 ‘in the fridge’. An ordinary object noun needs such a place word to be a place (在冰箱里, not *在冰箱), while place names and institutions do not (在学校, 在北京). Turkish postpositions (masanın üstünde) are the closest parallel.",
+   "what": "Where something is inside, on or under is said with a place word after the noun: 桌子上 ‘on the table’, 冰箱里 ‘in the fridge’. An ordinary object noun needs such a place word to be a place (在冰箱里, not *在冰箱), while place names and institutions do not (在学校, 在北京). Together with the coverb 在 before the noun, the place is framed from both sides.",
    "examples": [
     {
      "text": "书在桌子上。",
@@ -1813,13 +3227,22 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar",
-    "he",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.beSplit",
+     "value": "different"
+    },
+    {
+     "feature": "syn.copula",
+     "value": "obligatory"
+    },
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
    ],
-   "what": "English ‘be’ splits: 是 links two nouns (我是老师), 在 says where someone or something is (老师在这里), 有 says that something exists somewhere (这里有很多人 ‘there are many people here’), and adjectives need no verb at all (我很好). Arabic, Hebrew and Russian also drop ‘be’ before adjectives in the present.",
+   "what": "Three different words cover being: 是 links two nouns (我是老师), 在 says where someone or something is (老师在这里), 有 says that something exists somewhere (这里有很多人 ‘there are many people here’), and adjectives need no verb at all (我很好).",
    "examples": [
     {
      "text": "我是老师。",
@@ -1867,13 +3290,18 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr",
-    "he",
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "topic"
+    },
+    {
+     "feature": "nom.definiteArticle",
+     "value": "none"
+    }
    ],
-   "what": "‘There is a book on the table’ starts with the place: 桌子上有一本书. A new, indefinite thing comes after 有; a known thing comes first with 在: 书在桌子上 ‘the book is on the table’. Word order thus does the work of the articles.",
+   "what": "‘There is a book on the table’ starts with the place: 桌子上有一本书. A new, indefinite thing comes after 有; a known thing comes first with 在: 书在桌子上 ‘the book is on the table’. Word order thus shows whether a thing is known or new.",
    "examples": [
     {
      "text": "桌子上有一本书。",
@@ -1915,8 +3343,13 @@
     "ADJ",
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
+   ],
    "what": "Adjectives are stative verbs: they are the predicate themselves, with no 是. A plain statement uses an unstressed 很 as a link (这个房子很大); a bare adjective sounds contrastive. Before a noun a one-syllable adjective attaches directly (新书), a longer or modified one takes 的 (很新的书).",
    "examples": [
     {
@@ -1960,11 +3393,18 @@
    "pos": [
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.negationPosition",
+     "value": "before-verb"
+    }
    ],
-   "what": "不 negates will, habits, the present and future, adjectives and 是; 没 (有) negates 有 and says that something did not happen or has not happened yet. ‘Don't!’ is 别 or 不要. The choice depends on aspect and on the verb, not on tense endings. (Arabic also picks its negator by tense: lā / lam / lan.)",
+   "what": "不 negates will, habits, the present and future, adjectives and 是; 没 (有) negates 有 and says that something did not happen or has not happened yet. ‘Don't!’ is 别 or 不要. The negator stands right before the verb (or before 在 + place), and the choice depends on aspect and on the verb, not on tense.",
    "examples": [
     {
      "text": "我不吃肉。",
@@ -2014,11 +3454,18 @@
    "pos": [
     "PART"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "final"
+    }
    ],
-   "what": "A yes/no question adds 吗 to the statement, or repeats the verb with 不 between (A-not-A: 你喝不喝茶？); nothing moves. 呢 asks ‘and …?’ (你呢？ ‘and you?’) or softens a question-word question. Turkish mi is a close parallel to 吗.",
+   "what": "A yes/no question adds the particle 吗 at the end of the statement, or repeats the verb with 不 between (A-not-A: 你喝不喝茶？); nothing moves and the voice need not rise. 呢 asks ‘and …?’ (你呢？ ‘and you?’) or softens a question-word question.",
    "examples": [
     {
      "text": "你喝茶吗？",
@@ -2066,9 +3513,12 @@
     "PRON",
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "in-situ"
+    }
    ],
    "what": "A question word stands exactly where the answer will stand; nothing is fronted and no 吗 is added. Write the answer, then replace the unknown part.",
    "examples": [
@@ -2110,9 +3560,12 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.negativeConcord",
+     "value": "concord"
+    }
    ],
    "what": "The question words double as indefinites: 什么 ‘something, anything’, 谁 ‘anyone’, 哪儿 ‘anywhere’. With 都 / 也 they mean ‘every-’ or, negated, ‘no-’: 我什么都不吃 ‘I eat nothing’, 谁都知道 ‘everybody knows’.",
    "examples": [
@@ -2156,8 +3609,13 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    }
+   ],
    "what": "Yes/no questions are answered by repeating the verb (or adjective), negated for ‘no’: 要。/ 不要。, 有。/ 没有。; 对 ‘right’ confirms a statement. 是 means ‘yes’ only for questions with 是.",
    "examples": [
     {
@@ -2198,9 +3656,14 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "A second verb or adjective after the verb says what the action achieved: 看懂 ‘read and understand’, 买到 ‘manage to buy’, 吃完 ‘finish eating’. With 得 / 不 inside, it says whether the result is possible: 听得懂 ‘can understand (by listening)’, 听不懂 ‘cannot understand’. Many English or Greek verbs correspond to a verb + result pair.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.causative",
+     "value": "compound"
+    }
+   ],
+   "what": "A second verb or adjective after the verb says what the action achieved: 看懂 ‘read and understand’, 买到 ‘manage to buy’, 吃完 ‘finish eating’. With 得 / 不 inside, it says whether the result is possible: 听得懂 ‘can understand (by listening)’, 听不懂 ‘cannot understand’. Causing a change is said the same way — 打破 ‘hit-break’ = break (something), 叫醒 ‘call-wake’ = wake (someone up) — or with 让 / 使 ‘make, let’ before a clause.",
    "examples": [
     {
      "text": "我听不懂。",
@@ -2240,9 +3703,14 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "Movement verbs take 来 (towards the speaker) or 去 (away) after them, often with 上, 下, 进, 出, 回, 过 in between: 进来 ‘come in’, 出去 ‘go out’, 拿回来 ‘bring back’. The deixis (here / there) is obligatory where English just says ‘in’ or ‘out’.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.motionFraming",
+     "value": "equipollent"
+    }
+   ],
+   "what": "Movement verbs take 来 (towards the speaker) or 去 (away from the speaker) after them, often with a path verb 上, 下, 进, 出, 回, 过 in between: 进来 ‘come in’, 出去 ‘go out’, 跑进来 ‘run in’, 拿回来 ‘bring back’. Manner, path and deixis are all verbs of equal rank, and the deixis (towards / away from here) is expressed whenever movement is described.",
    "examples": [
     {
      "text": "请进来！",
@@ -2287,8 +3755,13 @@
     "VERB",
     "PART"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.predicative",
+     "value": "verbal"
+    }
+   ],
    "what": "How well or how fast something is done follows the verb with 得: 他跑得很快 ‘he runs fast’. With an object the verb is repeated (or the object fronted): 他说中文说得很好 / 他中文说得很好 ‘he speaks Chinese well’.",
    "examples": [
     {
@@ -2324,8 +3797,17 @@
    "pos": [
     "ADP"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    },
+    {
+     "feature": "verb.objectMarking",
+     "value": "none"
+    }
+   ],
    "what": "With 把 the definite object moves before the verb, and the sentence says what is done to it and with what result: 我把书放在桌子上了 ‘I put the book on the table’. The verb must be followed by something (a place, a result, 了). It is required with verbs like 放 ‘put’ when the place follows.",
    "examples": [
     {
@@ -2359,15 +3841,12 @@
    "pos": [
     "ADP"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de",
-    "en",
-    "el",
-    "ru",
-    "ar",
-    "he",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.passive",
+     "value": "periphrastic"
+    }
    ],
    "what": "被 marks the passive: object – 被 – (agent) – verb – result. It is used mainly for unwelcome events (stolen, broken, criticised); for neutral events Chinese prefers an active sentence or a topic. Like 把, the verb needs something after it.",
    "examples": [
@@ -2402,8 +3881,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.serialVerbs",
+     "value": "productive"
+    }
+   ],
    "what": "Two or more verb phrases follow each other without a conjunction, in the order of events or purpose: 坐公共汽车去学校 ‘go to school by bus’ (sit-bus go-school), 去买菜 ‘go and buy vegetables’, 来一杯咖啡.",
    "examples": [
     {
@@ -2444,8 +3928,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.serialVerbs",
+     "value": "productive"
+    }
+   ],
    "what": "In 我请他吃饭 ‘I invite him to eat’ the person is the object of the first verb and the subject of the second. Verbs of asking, inviting, ordering and letting (请, 叫, 让) work this way.",
    "examples": [
     {
@@ -2482,8 +3971,17 @@
     "VERB",
     "PART"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    },
+    {
+     "feature": "syn.copula",
+     "value": "obligatory"
+    }
+   ],
    "what": "For a past event already known, 是……的 puts the focus on when, where, how or with whom it happened: 你是怎么来的？ ‘how did you come?’ — 我是坐飞机来的 ‘I came by plane’. It is the normal way to ask about the circumstances of a past event.",
    "examples": [
     {
@@ -2519,9 +4017,14 @@
    "pos": [
     "PART"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Small toneless particles at the end of a sentence add mood: 吗 (question), 吧 (suggestion, guess), 呢 (‘and …?’, ongoing), 了 (new situation), 啊 (warmth, emphasis). They do work that intonation does in Greek or German.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "final"
+    }
+   ],
+   "what": "Small toneless particles at the end of a sentence add mood: 吗 (question), 吧 (suggestion, guess), 呢 (‘and …?’, ongoing), 了 (new situation), 啊 (warmth, emphasis). Since pitch is taken by the lexical tones, much of the attitude of a sentence is carried by these particles.",
    "examples": [
     {
      "text": "我们走吧。",
@@ -2570,9 +4073,14 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Anything clear from context can be left out — the subject and also the object, with no verb ending to recover them: ‘Have you eaten?’ is just 吃了吗？, and the answer 吃了。 Greek, Russian or Turkish drop subjects thanks to verb endings; Chinese drops them without any.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.proDrop",
+     "value": "discourse"
+    }
+   ],
+   "what": "Anything clear from context can be left out — the subject and also the object — although the verb has no endings to recover them: ‘Have you eaten?’ is just 吃了吗？, and the answer 吃了。 What is left out is understood from the situation and the previous sentences.",
    "examples": [
     {
      "text": "——吃了吗？——吃了。",
@@ -2611,8 +4119,17 @@
     "ADP",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.comparison",
+     "value": "exceed"
+    },
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
+   ],
    "what": "The adjective never changes: A 比 B + adjective (我哥哥比我高), the difference after it (高一点, 大两岁), ‘not as … as’ A 没有 B + adjective, ‘as … as’ A 跟 B 一样 + adjective; 最 for ‘the most’. No 很 inside a comparison.",
    "examples": [
     {
@@ -2657,12 +4174,14 @@
     "CCONJ",
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
    ],
-   "what": "Clauses are often linked by pairs: 因为…所以 ‘because … so’, 虽然…但是 ‘although … but’, 如果…就 ‘if … then’. ‘When’ and ‘if’ can be marked at the end of their clause (…的时候, …的话), Turkish-style. ‘And’ (和) never joins clauses.",
+   "what": "Clauses are often linked by pairs: 因为…所以 ‘because … so’, 虽然…但是 ‘although … but’, 如果…就 ‘if … then’. ‘When’ and ‘if’ can be marked at the end of their clause (…的时候, …的话). ‘And’ (和) never joins clauses.",
    "examples": [
     {
      "text": "虽然很贵，但是很好。",
@@ -2705,9 +4224,14 @@
    "pos": [
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Adverbs stand right before the verb (or before 在 + place), never at the end or before the subject: 我们都喝茶. 都 sums up what stands before it (我们都 ‘we all’). 就 says ‘as early as / then’, 才 ‘only then, as late as’ — a pair with no direct Greek or German equivalent.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "XVO"
+    }
+   ],
+   "what": "Adverbs stand right before the verb (or before 在 + place), never at the end or before the subject: 我们都喝茶. 都 sums up what stands before it (我们都 ‘we all’). 就 says ‘as early as / then’, 才 ‘only then, as late as’: the pair shows whether something happens earlier or later than expected.",
    "examples": [
     {
      "text": "我们都不喝啤酒。",
@@ -2751,9 +4275,14 @@
     "AUX",
     "VERB"
    ],
-   "rarity": "common",
-   "sharedWith": [],
-   "what": "‘Can’ splits by its source: 会 a learned skill (我会说中文), 能 ability or circumstances (我今天不能来), 可以 permission (这里可以坐吗？). ‘Want’ splits into 要 (will, demand) and 想 (would like). Modals stand before the verb and never change.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.infinitive",
+     "value": "no-verb-forms"
+    }
+   ],
+   "what": "‘Can’ splits by its source: 会 a learned skill (我会说中文), 能 ability or circumstances (我今天不能来), 可以 permission (这里可以坐吗？). ‘Want’ splits into 要 (will, demand) and 想 (would like). Modals stand before the main verb, which is the same plain form as everywhere else (there is no infinitive), and neither changes.",
    "examples": [
     {
      "text": "我会说中文。",
@@ -2787,18 +4316,545 @@
    "when": "cr.04"
   },
   {
+   "id": "zh.nom.noarticle",
+   "title": "No definite article",
+   "area": "syntax",
+   "pos": [
+    "NOUN",
+    "DET"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "none"
+    }
+   ],
+   "what": "There is no definite article. Whether a noun is known is shown by its place (a bare noun before the verb is usually known: 书在桌子上 ‘the book is on the table’), by 这 / 那 + measure word, or by the context; a new thing usually stands after the verb (桌子上有一本书 ‘there is a book on the table’).",
+   "examples": [
+    {
+     "text": "书在桌子上。",
+     "translit": "Shū zài zhuōzi shang.",
+     "note": "The book is on the table. — known: a bare noun before the verb"
+    },
+    {
+     "text": "那本书很好。",
+     "translit": "Nà běn shū hěn hǎo.",
+     "note": "That / the book is good."
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.definite",
+     "fn.demonstrative"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04"
+  },
+  {
+   "id": "zh.nom.yi.indef",
+   "title": "一 + measure word as ‘a’",
+   "area": "syntax",
+   "pos": [
+    "NUM",
+    "CLF",
+    "DET"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "one"
+    }
+   ],
+   "what": "One newly introduced thing can be marked with the numeral 一 ‘one’ + measure word, which works as an indefinite ‘a’: 我买了一本书 ‘I bought a book’. After a verb 一 is often dropped in speech (买了本书), and with a non-specific noun, especially after 是, nothing is used (我是老师 ‘I am a teacher’).",
+   "examples": [
+    {
+     "text": "我买了一本书。",
+     "translit": "Wǒ mǎile yì běn shū.",
+     "note": "I bought a book."
+    },
+    {
+     "text": "我是老师。",
+     "translit": "Wǒ shì lǎoshī.",
+     "note": "I am a teacher. — no 一"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.definite",
+     "fn.measure.word"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04, fd.05"
+  },
+  {
+   "id": "zh.nom.noalienability",
+   "title": "No grammatical classes of possession",
+   "area": "syntax",
+   "pos": [
+    "NOUN",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.alienability",
+     "value": "none"
+    }
+   ],
+   "what": "Possession is not split into grammatical classes (alienable / inalienable, or by kind of possessed thing). Leaving out 的 with kin terms, one’s home and institutions (我妈妈 ‘my mother’, 我家 ‘my family, my home’, 我们公司 ‘our company’) is a tendency of closeness and style, not an obligatory class: 我的妈妈 is also correct.",
+   "examples": [
+    {
+     "text": "我妈妈 · 我的妈妈 · 我的书",
+     "translit": "wǒ māma · wǒ de māma · wǒ de shū",
+     "note": "my mother (both correct) · my book (的 needed)"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.possessive"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.possessive explains when 的 is dropped but not that this is optional style rather than a class of nouns.",
+   "when": "fd.06"
+  },
+  {
+   "id": "zh.nom.noconstruct",
+   "title": "The possessed noun never changes",
+   "area": "syntax",
+   "pos": [
+    "NOUN",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "none"
+    }
+   ],
+   "what": "The possessed or modified noun keeps its form, and there is no construct form, ezafe or linking suffix on it: the link 的 follows the possessor or modifier (老师的书 ‘the teacher’s book’), and the head noun comes last, unchanged.",
+   "examples": [
+    {
+     "text": "书 · 老师的书 · 很新的书",
+     "translit": "shū · lǎoshī de shū · hěn xīn de shū",
+     "note": "book · the teacher’s book · a very new book — 书 never changes"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.possessive"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.possessive covers 的; the absence of a construct form or linker on the head is not said.",
+   "when": "fd.06"
+  },
+  {
+   "id": "zh.verb.conditional",
+   "title": "Conditions by conjunctions only",
+   "area": "syntax",
+   "pos": [
+    "SCONJ",
+    "ADV"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.conditional",
+     "value": "conjunction-only"
+    }
+   ],
+   "what": "Conditions are marked only by conjunctions and adverbs, and the verb is unchanged: 如果 / 要是 ‘if’ opens the clause, …的话 can close it, and 就 introduces the result. Real and unreal (counterfactual) conditions look the same; the context, or words such as 早知道 ‘had I known’, show which is meant.",
+   "examples": [
+    {
+     "text": "如果明天下雨，我们就不去。",
+     "translit": "Rúguǒ míngtiān xià yǔ, wǒmen jiù bú qù.",
+     "note": "If it rains tomorrow, we won’t go."
+    },
+    {
+     "text": "早知道，我就不来了。",
+     "translit": "Zǎo zhīdao, wǒ jiù bù lái le.",
+     "note": "Had I known, I wouldn’t have come. — the same verb forms"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.18"
+  },
+  {
+   "id": "zh.verb.noevidentials",
+   "title": "No grammatical evidentials",
+   "area": "syntax",
+   "pos": [
+    "VERB",
+    "ADV"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.evidentiality",
+     "value": "none"
+    }
+   ],
+   "what": "The verb does not mark the source of information. When it matters, words say it: 听说 ‘I hear that’, 据说 ‘reportedly’, 好像 ‘it seems’, 看来 ‘it looks as if’.",
+   "examples": [
+    {
+     "text": "听说他病了。",
+     "translit": "Tīngshuō tā bìng le.",
+     "note": "I hear he is ill. — hearsay said with a verb"
+    },
+    {
+     "text": "他病了。",
+     "translit": "Tā bìng le.",
+     "note": "He is ill. — the same sentence without a source"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; 听说 and 好像 are not in the course. A line in the overview for learners whose languages mark evidentiality.",
+   "when": "later"
+  },
+  {
+   "id": "zh.verb.noantipassive",
+   "title": "No antipassive",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.antipassive",
+     "value": "none"
+    }
+   ],
+   "what": "There is no antipassive voice. When the object does not matter, the verb is used with a general object in a verb-object word (我在吃饭 ‘I’m eating’, 他在看书 ‘he’s reading’) or the object is simply left out; the verb never changes.",
+   "examples": [
+    {
+     "text": "我在吃饭。",
+     "translit": "Wǒ zài chīfàn.",
+     "note": "I’m eating. — a general object 饭 rather than a special verb form"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; the verb-object words of zh.morph.separable show the pattern.",
+   "when": "later"
+  },
+  {
+   "id": "zh.verb.noapplicative",
+   "title": "No applicative: coverbs add participants",
+   "area": "syntax",
+   "pos": [
+    "VERB",
+    "ADP"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.applicative",
+     "value": "none"
+    }
+   ],
+   "what": "No affix on the verb adds a beneficiary, recipient or companion. They are introduced by a coverb before the verb (给妈妈打电话 ‘phone Mum’, 为你高兴 ‘happy for you’, 跟朋友去 ‘go with friends’) or by 给 after a verb of giving (送给他 ‘give to him’).",
+   "examples": [
+    {
+     "text": "我给妈妈打电话。",
+     "translit": "Wǒ gěi māma dǎ diànhuà.",
+     "note": "I phone Mum. — 给 + person before the verb"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.core"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Coverbs are taught (fn.prep.core); verb + 给 (送给, 借给) is not.",
+   "when": "fd.11"
+  },
+  {
+   "id": "zh.verb.noconverbs",
+   "title": "No converbs: clauses chained by sequence",
+   "area": "syntax",
+   "pos": [
+    "VERB",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.converbs",
+     "value": "none"
+    }
+   ],
+   "what": "Verbs have no dependent forms meaning ‘while / after / by doing’. Actions are chained by placing verb phrases one after another (serial verbs), by 着 for an accompanying state (笑着说 ‘said smiling’), or by a time word after the clause (吃饭以后 ‘after eating’).",
+   "examples": [
+    {
+     "text": "他笑着说。",
+     "translit": "Tā xiàozhe shuō.",
+     "note": "He said smiling."
+    },
+    {
+     "text": "吃饭以后我们去公园。",
+     "translit": "Chīfàn yǐhòu wǒmen qù gōngyuán.",
+     "note": "After eating we go to the park."
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.time"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "以后 after a clause is taught (fn.prep.time); 着 and the general pattern are not.",
+   "when": "fd.15"
+  },
+  {
+   "id": "zh.verb.noparticiples",
+   "title": "No participles: a clause + 的 instead",
+   "area": "syntax",
+   "pos": [
+    "VERB",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.participles",
+     "value": "none"
+    }
+   ],
+   "what": "The verb has no adjectival forms. A verb phrase or clause before 的 does the work: 在跑的人 ‘the running man’, 昨天买的书 ‘the book bought yesterday’, 会说中文的人 ‘people who speak Chinese’.",
+   "examples": [
+    {
+     "text": "昨天买的书",
+     "translit": "zuótiān mǎi de shū",
+     "note": "the book bought yesterday"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.adjective"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Relative clauses with 的 (cr.06) are not written yet.",
+   "when": "fd.16, cr.06"
+  },
+  {
+   "id": "zh.syntax.nov2",
+   "title": "No verb-second rule",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "none"
+    }
+   ],
+   "what": "The verb has no fixed second position: a time word or adverb at the start does not move it (明天我去 and 我明天去 ‘tomorrow I go’ — the subject still comes before the verb), and main and subordinate clauses have the same order.",
+   "examples": [
+    {
+     "text": "明天我去北京。· 我明天去北京。",
+     "translit": "Míngtiān wǒ qù Běijīng. · Wǒ míngtiān qù Běijīng.",
+     "note": "Tomorrow I go to Beijing. — both orders keep subject before verb"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.word.order",
+     "fn.time.day"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.word.order and fn.time.day show both orders; the absence of a V2 rule is said only in the overview’s note for one learner language.",
+   "when": "fd.07, fd.14"
+  },
+  {
+   "id": "zh.syntax.you",
+   "title": "有: ‘have’ and ‘there is’ in one verb",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "topic"
+    }
+   ],
+   "what": "One verb 有 serves for both possession and existence. With a person first it is ‘have’ (我有一个哥哥 ‘I have an elder brother’); with a place or time first it is ‘there is’ (这里有很多人 ‘there are many people here’). The possessor is simply the first noun — the topic — of an existential sentence. 有 never changes and is negated only with 没 (没有).",
+   "examples": [
+    {
+     "text": "我有一个哥哥。",
+     "translit": "Wǒ yǒu yí ge gēge.",
+     "note": "I have an elder brother."
+    },
+    {
+     "text": "这里有很多人。",
+     "translit": "Zhèlǐ yǒu hěn duō rén.",
+     "note": "There are many people here."
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.have"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.06"
+  },
+  {
+   "id": "zh.syntax.noswitchref",
+   "title": "No switch-reference",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.switchReference",
+     "value": "none"
+    }
+   ],
+   "what": "Nothing on the verb shows whether the next clause has the same subject or a different one. The subject is repeated when it changes and left out when it stays the same.",
+   "examples": [
+    {
+     "text": "他吃完饭就走了。",
+     "translit": "Tā chīwán fàn jiù zǒu le.",
+     "note": "He finished eating and (he) left."
+    },
+    {
+     "text": "他吃完饭我就走了。",
+     "translit": "Tā chīwán fàn wǒ jiù zǒu le.",
+     "note": "He finished eating and then I left. — the new subject is simply named"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the connectors block (fn.connectors).",
+   "when": "fd.18"
+  },
+  {
    "id": "zh.lex.kinship",
    "title": "Kinship terms by lineage, age and sex",
    "area": "lexicon",
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr",
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.uncleTerms",
+     "value": "bifurcate-collateral"
+    }
    ],
-   "what": "Chinese has no general ‘uncle’, ‘aunt’, ‘cousin’ or ‘grandfather’: the word says whose side (father's or mother's), older or younger, and blood relative or in-law. 叔叔 is the father's younger brother, 伯伯 his elder brother, 舅舅 the mother's brother; 堂 cousins are the children of the father's brothers, all others are 表. Turkish (amca / dayı) and Arabic (ʿamm / khāl) share the paternal / maternal split.",
+   "what": "Chinese has no general ‘uncle’, ‘aunt’, ‘cousin’ or ‘grandfather’: the word says whose side (father's or mother's), older or younger, and blood relative or in-law. 叔叔 is the father's younger brother, 伯伯 his elder brother, 舅舅 the mother's brother; 堂 cousins are the children of the father's brothers, all others are 表.",
    "examples": [
     {
      "text": "叔叔 · 伯伯 · 舅舅",
@@ -2843,11 +4899,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.siblingAge",
+     "value": "elder-younger"
+    }
    ],
-   "what": "Everyday Chinese has no neutral word for ‘brother’ or ‘sister’: it is 哥哥 (elder) or 弟弟 (younger), 姐姐 or 妹妹. 兄弟 and 姐妹 mean ‘brothers’ / ‘sisters’ as a group. Turkish abi / abla (elder) vs kardeş is the closest parallel.",
+   "what": "Everyday Chinese has no neutral word for ‘brother’ or ‘sister’: it is 哥哥 (elder) or 弟弟 (younger), 姐姐 or 妹妹. 兄弟 and 姐妹 mean ‘brothers’ / ‘sisters’ as a group.",
    "examples": [
     {
      "text": "我有一个哥哥和两个妹妹。",
@@ -2883,13 +4942,18 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "tr",
-    "ru",
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.honorifics",
+     "value": "none"
+    },
+    {
+     "feature": "lex.siblingAge",
+     "value": "elder-younger"
+    }
    ],
-   "what": "Kin words are used to address people who are not relatives, by their age relative to the speaker: children call adults 叔叔 ‘uncle’ and 阿姨 ‘auntie’, young people call a slightly older woman 姐姐 or 大姐, an old man is 爷爷 or 大爷, a child is 小朋友 ‘little friend’. Turkish amca / teyze and Russian дядя / тётя are used in the same way.",
+   "what": "Kin words are used to address people who are not relatives, by their age relative to the speaker: children call adults 叔叔 ‘uncle’ and 阿姨 ‘auntie’, young people call a slightly older woman 姐姐 or 大姐, an old man is 爷爷 or 大爷, a child is 小朋友 ‘little friend’.",
    "examples": [
     {
      "text": "阿姨，这个多少钱？",
@@ -2927,8 +4991,13 @@
     "NOUN",
     "PROPN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.honorifics",
+     "value": "none"
+    }
+   ],
    "what": "People are addressed by surname + title or job (王老师 ‘Teacher Wang’, 李医生 ‘Dr Li’), or among acquaintances by 老 / 小 + surname (老王, 小李). Using the given name alone is intimate; using 你 to a teacher instead of the title sounds rude.",
    "examples": [
     {
@@ -2968,14 +5037,14 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "binary"
+    }
    ],
-   "what": "您 is the respectful ‘you’ for elders, teachers, customers and strangers to be honoured; 你 is used between equals and is far less rude than German du to a stranger. Unlike Sie or εσείς, 您 is singular only (the plural is 你们 or, very formally, 各位), and the verb never changes.",
+   "what": "您 is the respectful ‘you’ for elders, teachers, customers and strangers to be honoured; 你 is used between equals and towards strangers in everyday situations without sounding rude. 您 is singular only (the plural is 你们 or, very formally, 各位), and the verb never changes.",
    "examples": [
     {
      "text": "您好！ · 你好！",
@@ -3017,8 +5086,13 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "pron.inclusive",
+     "value": "present"
+    }
+   ],
    "what": "Beside 我们 ‘we’ there is 咱们 ‘we, you and I together’, which always includes the listener (northern, colloquial). 我们 can exclude the listener in the north but is used for both in the south.",
    "examples": [
     {
@@ -3058,9 +5132,14 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
-   "what": "‘He’, ‘she’ and ‘it’ are all tā in speech; only writing distinguishes 他, 她 and 它 (a 20th-century innovation). In speech gender is unmarked, like Turkish o.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "written-only"
+    }
+   ],
+   "what": "‘He’, ‘she’ and ‘it’ are all tā in speech; only writing distinguishes 他, 她 and 它 (a 20th-century innovation). In speech the third-person pronoun shows no gender.",
    "examples": [
     {
      "text": "他 · 她 · 它",
@@ -3100,9 +5179,14 @@
    "pos": [
     "CCONJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "In a question offering a choice, ‘or’ is 还是 (and no 吗); in statements it is 或者. Mixing them is a classic learner error.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    }
+   ],
+   "what": "In a question offering a choice, ‘or’ is 还是 (and no 吗); in statements it is 或者. The two are not interchangeable.",
    "examples": [
     {
      "text": "你喝茶还是咖啡？",
@@ -3143,8 +5227,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.carryVerbs",
+     "value": "manner-specific"
+    }
+   ],
    "what": "‘Go by’ a vehicle depends on how you sit: 坐 for vehicles you sit in as a passenger (bus, train, plane, taxi, boat), 骑 for what you straddle (bicycle, motorbike, horse); driving yourself is 开.",
    "examples": [
     {
@@ -3190,14 +5279,14 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "el",
-    "he",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.knowVerbs",
+     "value": "two"
+    }
    ],
-   "what": "‘To know’ splits three ways: 知道 a fact (wissen), 认识 a person or place (kennen; also ‘recognize’), 会 a skill learned (können). Greek ξέρω / γνωρίζω, Turkish bilmek / tanımak and Hebrew yodeaʿ / makir make the same first split.",
+   "what": "‘To know’ splits three ways: 知道 a fact, 认识 a person or place (also ‘recognize’), 会 a skill learned (‘know how to’).",
    "examples": [
     {
      "text": "我知道他的名字。",
@@ -3235,11 +5324,14 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.wearVerbs",
+     "value": "two"
+    }
    ],
-   "what": "穿 is for what you put your body into (clothes, shoes, socks), 戴 for what you put on or attach (hat, glasses, watch, gloves, jewellery, a mask). Turkish giymek / takmak splits similarly.",
+   "what": "穿 is for what you put your body into (clothes, shoes, socks), 戴 for what you put on or attach (hat, glasses, watch, gloves, jewellery, a mask).",
    "examples": [
     {
      "text": "穿衣服 · 穿鞋",
@@ -3272,11 +5364,14 @@
    "pos": [
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    }
    ],
-   "what": "‘Old’ splits, as in Greek γέρος / παλιός: 老 for people, animals and long-standing relations, 旧 for used things; ‘new’ is 新 for things, but ‘young’ for people is 年轻. Age comparison uses 大 / 小: 他比我大两岁 ‘he is two years older than me’.",
+   "what": "‘Old’ splits: 老 for people, animals and long-standing relations, 旧 for used things; ‘new’ is 新 for things, but ‘young’ for people is 年轻. Age comparison uses 大 / 小 with 比: 他比我大两岁 ‘he is two years older than me’.",
    "examples": [
     {
      "text": "老人 · 旧手机",
@@ -3317,11 +5412,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.compounding",
+     "value": "pervasive"
+    }
    ],
-   "what": "Raw rice grains are 米 (on the plant 稻子), cooked rice is 米饭 or 饭, and 饭 also means ‘a meal’ (吃饭 ‘to eat, have a meal’). Turkish pirinç (raw) vs pilav (cooked) is a parallel.",
+   "what": "Raw rice grains are 米 (on the plant 稻子), cooked rice is 米饭 or 饭, and 饭 also means ‘a meal’ (吃饭 ‘to eat, have a meal’).",
    "examples": [
     {
      "text": "一袋米 · 一碗米饭",
@@ -3359,12 +5457,14 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.serialVerbs",
+     "value": "productive"
+    }
    ],
-   "what": "借 means both ‘borrow’ and ‘lend’; the direction comes from the construction: 跟 / 向 someone 借 ‘borrow from’, 借给 someone ‘lend to’. German leihen and Russian одолжить also cover both.",
+   "what": "借 means both ‘borrow’ and ‘lend’; the direction comes from the construction: 跟 / 向 someone 借 ‘borrow from’, 借给 someone ‘lend to’.",
    "examples": [
     {
      "text": "我跟他借了一本书。",
@@ -3397,8 +5497,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.objectCompounds",
+     "value": "present"
+    }
+   ],
    "what": "There is no single ‘play’: 打 for ball games played with the hands and cards (打篮球, 打牌), 踢 for football (踢足球), 弹 for plucked or keyboard instruments (弹钢琴), 拉 for bowed ones (拉小提琴), 玩 for games and having fun (玩游戏).",
    "examples": [
     {
@@ -3432,8 +5537,17 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    },
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
+   ],
    "what": "Chinese separates points from amounts of time: 什么时候 ‘when (at what point)’ vs 时间 ‘time (an amount)’; 三点 ‘three o'clock’ vs 三个小时 ‘three hours’; 十分 ‘ten past’ (on the clock) vs 十分钟 ‘ten minutes’.",
    "examples": [
     {
@@ -3476,8 +5590,13 @@
    "pos": [
     "ADV"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "optional"
+    }
+   ],
    "what": "‘Again’ depends on whether the repetition is still to come (再: 明天再来 ‘come again tomorrow’, and 再见 ‘see you again’) or has already happened (又: 他又来了 ‘he came again’).",
    "examples": [
     {
@@ -3511,8 +5630,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "none"
+    }
+   ],
    "what": "要 + noun is ‘want, ask for’ and 要 + verb is a firm ‘want to, will’; 想 + verb is a softer ‘would like to’ (想 also means ‘think’ and ‘miss’). ‘I don't want to’ is 我不想; 不要 is a command ‘don't!’.",
    "examples": [
     {
@@ -3560,8 +5684,13 @@
    "pos": [
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.optative",
+     "value": "none"
+    }
+   ],
    "what": "高兴 and 开心 describe being glad or having fun; wishes use 快乐: 生日快乐 ‘happy birthday’, 新年快乐 ‘happy New Year’ (never *生日高兴).",
    "examples": [
     {
@@ -3604,15 +5733,12 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "el",
-    "en",
-    "ru",
-    "tr",
-    "ar",
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.compounding",
+     "value": "pervasive"
+    }
    ],
    "what": "Short, old words have many meanings, and compounds pick one: 天 ‘day’, ‘sky’, ‘weather’ (今天, 天空, 天气); 家 ‘home’, ‘family’, the measure word for businesses and the suffix ‘-ist’; 开 ‘open’, ‘drive’, ‘switch on’, ‘bloom’.",
    "examples": [
@@ -3644,23 +5770,137 @@
    "when": "every lesson; P5/P6 (sense_pick)"
   },
   {
+   "id": "zh.lex.cut",
+   "title": "‘Cut’ by instrument",
+   "area": "semantics",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.cutVerbs",
+     "value": "by-instrument"
+    }
+   ],
+   "what": "There is no all-purpose ‘cut’: the verb names the instrument or the movement — 切 slicing with a knife (切菜 ‘cut vegetables’), 剪 with scissors (剪头发 ‘cut hair’), 砍 chopping with an axe or heavy blade (砍树 ‘fell a tree’), 割 cutting along with a sickle or blade (割草 ‘mow grass’), 锯 sawing.",
+   "examples": [
+    {
+     "text": "切菜 · 剪头发 · 砍树",
+     "translit": "qiē cài · jiǎn tóufa · kǎn shù",
+     "note": "cut vegetables (knife) · cut hair (scissors) · chop down a tree (axe)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Concepts and lexemes are not in the course; a household / tools field with the verb per instrument and a choose exercise.",
+   "when": "later"
+  },
+  {
+   "id": "zh.lex.carry",
+   "title": "‘Carry’ by manner",
+   "area": "semantics",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.carryVerbs",
+     "value": "manner-specific"
+    }
+   ],
+   "what": "There is no general ‘carry’: the verb says how — 拿 in the hand, 提 hanging from the hand (a bag, a bucket), 抱 in both arms (a child), 背 on the back, 扛 on the shoulder, 端 held level in front (a bowl), 抬 lifted by two or more people, 带 have with one, take along.",
+   "examples": [
+    {
+     "text": "抱孩子 · 背包 · 端菜",
+     "translit": "bào háizi · bēi bāo · duān cài",
+     "note": "carry a child in the arms · carry a bag on the back · carry a dish (held level)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Concepts and lexemes are not in the course; a field with pictures and a choose exercise (how is it carried?).",
+   "when": "later"
+  },
+  {
+   "id": "zh.sem.position",
+   "title": "在: one verb for ‘be located’",
+   "area": "semantics",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.positionVerbs",
+     "value": "generic"
+    }
+   ],
+   "what": "‘Be somewhere’ is one general verb 在 for people and things alike (书在桌子上 ‘the book is on the table’, 他在家 ‘he is at home’); no posture has to be chosen. When the posture matters, a posture verb + 着 is used, often with the place first (墙上挂着一张画 ‘a picture hangs on the wall’, 门口站着一个人 ‘someone is standing at the door’).",
+   "examples": [
+    {
+     "text": "书在桌子上。",
+     "translit": "Shū zài zhuōzi shang.",
+     "note": "The book is on the table. — no ‘lie / stand’ needed"
+    },
+    {
+     "text": "墙上挂着一张画。",
+     "translit": "Qiáng shang guàzhe yì zhāng huà.",
+     "note": "A picture hangs on the wall."
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.copula",
+     "fn.prep.place"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "在 is covered (fn.copula, fn.prep.place); posture verbs with 着 are not in the course.",
+   "when": "fd.01, fd.12"
+  },
+  {
    "id": "zh.lex.loans",
    "title": "Loanwords: sound, meaning, or both",
    "area": "lexicon",
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "el",
-    "en",
-    "ru",
-    "tr",
-    "ar",
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "logographic"
+    },
+    {
+     "feature": "morph.compounding",
+     "value": "pervasive"
+    }
    ],
-   "what": "Foreign words are taken in three ways: by sound with characters chosen for their reading (咖啡 kāfēi, 沙发 shāfā), by translating the meaning (电脑 ‘electric brain’ = computer, 手机), or by both at once (啤酒 pí ‘beer’ + 酒 ‘alcoholic drink’; 冰淇淋 ‘ice’ + qílín). Chinese prefers meaning translations, so many international words are not recognizable.",
+   "what": "Foreign words are taken in three ways: by sound with characters chosen for their reading (咖啡 kāfēi, 沙发 shāfā), by translating the meaning (电脑 ‘electric brain’ = computer, 手机), or by both at once (啤酒 pí ‘beer’ + 酒 ‘alcoholic drink’; 冰淇淋 ‘ice’ + qílín). Meaning translations are preferred, so many internationally shared words appear as native-looking compounds.",
    "examples": [
     {
      "text": "咖啡 · 沙发 · 沙拉",
@@ -3696,11 +5936,12 @@
     "NOUN",
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de",
-    "en",
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.multiple",
+     "value": "variants"
+    }
    ],
    "what": "The standard varieties of the mainland (普通话) and Taiwan (國語) differ in a number of everyday words, and the same word can mean different things: 土豆 is ‘potato’ in Beijing but ‘peanut’ in Taiwan. North and south also differ (西红柿 / 番茄 ‘tomato’).",
    "examples": [
@@ -3746,12 +5987,12 @@
     "ADP",
     "ADV"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "el",
-    "de",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.diglossia",
+     "value": "none"
+    }
    ],
    "what": "Many concepts have a neutral or spoken word and a formal or written one, often a single classical morpheme or a 之- word: 妈妈 / 母亲, 爸爸 / 父亲, 老公 / 丈夫, 以后 / 之后, 以前 / 之前, 没有 / 无. The register must match the text.",
    "examples": [
@@ -3787,8 +6028,13 @@
    "title": "Four-character idioms (成语)",
    "area": "lexicon",
    "pos": [],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.diglossia",
+     "value": "none"
+    }
+   ],
    "what": "Chengyu are fixed four-character expressions, mostly from classical texts, often with a story behind them. They are frequent in writing and educated speech and cannot be understood word by word.",
    "examples": [
     {
@@ -3822,8 +6068,13 @@
    "title": "Two-part allegorical sayings (歇后语)",
    "area": "lexicon",
    "pos": [],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.syllableStructure",
+     "value": "moderately-complex"
+    }
+   ],
    "what": "A xiehouyu is a riddle-like saying in two parts; the speaker often says only the first part and the listener supplies the second, which frequently rests on a pun.",
    "examples": [
     {
@@ -3848,6 +6099,41 @@
    "when": "later"
   },
   {
+   "id": "zh.verb.lightverbs",
+   "title": "Few light-verb combinations",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.lightVerbs",
+     "value": "rare"
+    }
+   ],
+   "what": "Most actions have their own verb or verb-object word (游泳 ‘swim’, 跳舞 ‘dance’). Only a handful of general verbs combine with nouns: 打 (打电话 ‘make a phone call’, 打球 ‘play ball’), 做 (做饭 ‘cook’, 做作业 ‘do homework’), and in formal writing 进行 / 加以 + a verbal noun (进行讨论 ‘hold a discussion’).",
+   "examples": [
+    {
+     "text": "做饭 · 打电话 · 进行讨论",
+     "translit": "zuò fàn · dǎ diànhuà · jìnxíng tǎolùn",
+     "note": "cook · make a phone call · hold a discussion (formal)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "做饭 is in the course; 打电话, 进行 and the general pattern are not.",
+   "when": "later"
+  },
+  {
    "id": "zh.culture.homophony",
    "title": "Lucky and unlucky homophones",
    "area": "culture",
@@ -3855,8 +6141,17 @@
     "NUM",
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "tone.lexical",
+     "value": "complex"
+    },
+    {
+     "feature": "phon.syllableStructure",
+     "value": "moderately-complex"
+    }
+   ],
    "what": "Sound-alikes carry luck: 四 sì sounds like 死 sǐ ‘die’ (no 4th floor), 八 bā like 发 fā ‘get rich’, 鱼 yú like 余 yú ‘surplus’ (fish at New Year: 年年有余). A clock is never a gift (送钟 sòng zhōng sounds like 送终 ‘attend a deathbed’).",
    "examples": [
     {
@@ -3892,8 +6187,17 @@
    "pos": [
     "PROPN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.genitiveNoun",
+     "value": "gen-noun"
+    },
+    {
+     "feature": "verb.honorifics",
+     "value": "none"
+    }
+   ],
    "what": "The surname comes first and is usually one syllable (王, 李, 张), followed by a one- or two-syllable given name: 王小明. Titles follow the name (王老师). Asking politely for someone's surname is 您贵姓？",
    "examples": [
     {
@@ -3931,8 +6235,13 @@
    "pos": [
     "INTJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    }
+   ],
    "what": "Among acquaintances, a common greeting is a question about what the other is doing — 吃了吗？ ‘have you eaten?’, 去哪儿啊？ ‘where are you off to?’ — not a real inquiry; a short answer is enough. 你好 is more for strangers; 你好吗 is a real question about someone you have not seen for a while.",
    "examples": [
     {
@@ -3966,8 +6275,13 @@
    "title": "Modesty and declining compliments",
    "area": "pragmatics",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    }
+   ],
    "what": "A compliment is traditionally deflected rather than accepted with ‘thank you’: 哪里哪里 ‘not at all’ (literally ‘where, where?’), 过奖了 ‘you flatter me’. Younger speakers say 谢谢 more often.",
    "examples": [
     {
@@ -3998,8 +6312,13 @@
    "pos": [
     "INTJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    }
+   ],
    "what": "对不起 is a real apology; 不好意思 is a lighter ‘sorry, excuse me’ for small things and embarrassment; 打扰一下 and 劳驾 get attention or ask a favour. ‘That's all right’ after an apology is 没关系, after thanks 不客气.",
    "examples": [
     {
@@ -4035,14 +6354,173 @@
    "when": "fd.02"
   },
   {
+   "id": "zh.verb.nomirative",
+   "title": "No grammatical mirative",
+   "area": "pragmatics",
+   "pos": [
+    "ADV",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.mirativity",
+     "value": "none"
+    }
+   ],
+   "what": "Surprise or newly discovered information has no grammatical form; it is expressed with words — 原来 ‘so it turns out’, 竟然 / 居然 ‘unexpectedly, actually’ — and with the sentence-final particle 啊 and intonation.",
+   "examples": [
+    {
+     "text": "原来你是老师啊！",
+     "translit": "Yuánlái nǐ shì lǎoshī a!",
+     "note": "Oh, so you’re a teacher!"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; 原来, 竟然 and 啊 are not in the course.",
+   "when": "later"
+  },
+  {
+   "id": "zh.prag.nogenderedspeech",
+   "title": "No grammar of the speaker’s sex",
+   "area": "pragmatics",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "prag.genderedSpeech",
+     "value": "none"
+    }
+   ],
+   "what": "Grammar and vocabulary do not depend on the speaker’s sex: men and women use the same pronouns, verb forms and polite words. Some sentence-final particles and a coy, childlike style (撒娇 sājiāo) are heard more often from women, but this is style, not grammar.",
+   "examples": [
+    {
+     "text": "我很累。",
+     "translit": "Wǒ hěn lèi.",
+     "note": "I am tired. — the same sentence for any speaker"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not said; a line in the overview for learners whose languages mark the speaker’s sex.",
+   "when": "fd.00"
+  },
+  {
+   "id": "zh.prag.nospeechlevels",
+   "title": "No speech levels or honorific verb forms",
+   "area": "pragmatics",
+   "pos": [
+    "PRON",
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    },
+    {
+     "feature": "verb.honorifics",
+     "value": "none"
+    }
+   ],
+   "what": "There are no speech levels and no honorific forms of verbs: the grammar is the same towards a child and towards a minister. Respect is expressed by words — 您 ‘you (polite)’, titles (王老师), polite verbs and phrases (请 ‘please’, 贵姓 ‘your honourable surname’, 光临 ‘honour with a visit’) — and by modest words about oneself.",
+   "examples": [
+    {
+     "text": "请坐。· 您贵姓？",
+     "translit": "Qǐng zuò. · Nín guìxìng?",
+     "note": "Please sit down. · May I ask your surname? — politeness in the words, not in a verb form"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.greetings teaches 您 and 请; 贵姓 and the absence of speech levels are not said.",
+   "when": "fd.02"
+  },
+  {
+   "id": "zh.verb.nooptative",
+   "title": "No optative: wishes with 祝",
+   "area": "pragmatics",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.optative",
+     "value": "none"
+    }
+   ],
+   "what": "There is no optative mood. Wishes are said with the verb 祝 ‘wish’ (祝你生日快乐 ‘happy birthday’, 祝你好运 ‘good luck’), with 希望 ‘hope’ or 但愿 ‘if only’, or as fixed formulas (新年快乐 ‘happy New Year’).",
+   "examples": [
+    {
+     "text": "祝你生日快乐！",
+     "translit": "Zhù nǐ shēngrì kuàilè!",
+     "note": "(I) wish you a happy birthday!"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "祝 and 快乐 are not in the course; a wish formula block (with zh.sem.wishes).",
+   "when": "later"
+  },
+  {
    "id": "zh.num.regular",
    "title": "Fully regular number words",
    "area": "numbers",
    "pos": [
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    },
+    {
+     "feature": "num.order",
+     "value": "tens-first"
+    },
+    {
+     "feature": "num.agreement",
+     "value": "none"
+    }
+   ],
    "what": "Numbers are built like sums and products of 一 to 十, 百, 千: 十一 ‘ten-one’ = 11, 二十 ‘two-ten’ = 20, 九十九 = 99. There are no teens or tens words to learn, and no gender or case.",
    "examples": [
     {
@@ -4085,8 +6563,13 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
+   ],
    "what": "Before a measure word ‘two’ is 两 (两个人, 两点 ‘two o'clock’); when counting, inside larger numbers and in ordinals it is 二 (十二, 二十, 第二). 两 can also mean ‘a couple of’.",
    "examples": [
     {
@@ -4128,9 +6611,14 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Large numbers are grouped by four digits, not three: 万 = 10,000 and 亿 = 100,000,000. ‘A hundred thousand’ is 十万 (ten ten-thousands), ‘a million’ 一百万. Converting is a frequent source of errors with prices and populations.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.largeNumbers",
+     "value": "myriads"
+    }
+   ],
+   "what": "Large numbers are grouped by four digits: 万 = 10,000 and 亿 = 100,000,000 are the units. ‘A hundred thousand’ is 十万 (ten ten-thousands), ‘a million’ 一百万 (a hundred ten-thousands). Digits may still be written in groups of three, so reading a long number means regrouping it by four.",
    "examples": [
     {
      "text": "一万 · 十万 · 一百万",
@@ -4163,8 +6651,13 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    }
+   ],
    "what": "A missing place inside a number is said with 零 (once for any number of zeros): 一百零一 = 101, 一千零五 = 1005. 10 is 十, but 110 is 一百一十.",
    "examples": [
     {
@@ -4204,9 +6697,16 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    },
+    {
+     "feature": "time.monthNames",
+     "value": "numbered"
+    }
    ],
    "what": "Ordinals put 第 before the number (第一 ‘first’, 第二天 ‘the second day’). Floors, dates, days of the week and months use the bare number: 三楼 ‘third floor’, 五号 ‘the 5th’, 星期一 ‘Monday’, 一月 ‘January’.",
    "examples": [
@@ -4249,8 +6749,13 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    }
+   ],
    "what": "Approximation is built in: two neighbouring numbers together (三四个人 ‘three or four people’), 多 after a round number (一千多 ‘over a thousand’), 几 for ‘a few’ (十几个 ‘a dozen or so’, 几个朋友 ‘a few friends’).",
    "examples": [
     {
@@ -4286,8 +6791,17 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    },
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ],
    "what": "Fractions and percentages name the whole first: 三分之一 ‘one third’ (of three parts, one), 百分之五十 ‘50 %’ (of a hundred parts, fifty). 半 ‘half’ is special: 三点半 ‘half past three’, 半个小时 ‘half an hour’.",
    "examples": [
     {
@@ -4325,8 +6839,17 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.monthNames",
+     "value": "numbered"
+    },
+    {
+     "feature": "time.calendar",
+     "value": "gregorian-plus-traditional"
+    }
+   ],
    "what": "Dates and times go from the largest unit to the smallest: year – month – day – weekday – part of day – hour – minute. 2026年10月8日 星期四 上午九点 is ‘Thursday 8 October 2026, 9 a.m.’.",
    "examples": [
     {
@@ -4367,13 +6890,18 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el",
-    "he",
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    },
+    {
+     "feature": "time.monthNames",
+     "value": "numbered"
+    }
    ],
-   "what": "Weekdays are ‘week-one’ to ‘week-six’ from Monday (星期一 … 星期六), Sunday is 星期天 / 星期日; months are ‘one-month’ to ‘twelve-month’. Greek, Hebrew and Arabic also number the days, but from Sunday (Δευτέρα ‘second’ = Monday, Chinese 星期一 ‘one’). 周一 and 礼拜一 are common alternatives to 星期一.",
+   "what": "Weekdays are ‘week-one’ to ‘week-six’ from Monday (星期一 … 星期六), and Sunday is 星期天 / 星期日 (‘week-day (sun)’); months are ‘one-month’ to ‘twelve-month’ (一月 … 十二月). 周一 and 礼拜一 are common alternatives to 星期一.",
    "examples": [
     {
      "text": "星期一 · 星期天",
@@ -4415,12 +6943,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.calendar",
+     "value": "gregorian-plus-traditional"
+    }
    ],
-   "what": "Alongside the Gregorian calendar, the traditional lunisolar calendar (农历) fixes the festivals — 春节 Spring Festival, 中秋节 Mid-Autumn — and each year has one of twelve animals (生肖): 2026 is a Year of the Horse. Birthdays may be counted in either calendar. Arabic and Hebrew also live with a second, religious calendar.",
+   "what": "Alongside the Gregorian calendar, the traditional lunisolar calendar (农历) fixes the festivals — 春节 Spring Festival, 中秋节 Mid-Autumn — and each year has one of twelve animals (生肖): 2026 is a Year of the Horse. Birthdays may be counted in either calendar.",
    "examples": [
     {
      "text": "春节 · 中秋节",
@@ -4456,8 +6986,13 @@
     "CLF",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
+   ],
    "what": "Age is a number + 岁 without 是 (我二十岁). The question depends on whom you ask: 你几岁？ to a child, 你多大？ to a peer, 您多大年纪？ to an older person. Traditionally a newborn counted as one year old (虚岁).",
    "examples": [
     {
@@ -4500,8 +7035,13 @@
     "CLF",
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "obligatory"
+    }
+   ],
    "what": "The yuan is 元 in writing but 块 in speech; a tenth is 角 (written) or 毛 (spoken), a hundredth 分. Prices are said with 钱: 五块钱 ‘five yuan’, 三块五 ‘3.50’.",
    "examples": [
     {
@@ -4538,9 +7078,14 @@
     "ADJ",
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Basic colours have a short adjective (红 ‘red’) and a noun with 色 ‘colour’ (红色 ‘red (colour)’). Colours carry cultural meaning: red for luck and celebration, white for mourning, 黄色 also ‘pornographic’, and a ‘green hat’ (戴绿帽子) for a man whose partner cheats.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.greenBlue",
+     "value": "distinct"
+    }
+   ],
+   "what": "Basic colours have a short adjective (红 ‘red’) and a noun with 色 ‘colour’ (红色 ‘red (colour)’). Green 绿 lǜ and blue 蓝 lán are two basic colours; the older 青 covers green, blue and black shades in set words (青菜 ‘green vegetables’, 青天 ‘blue sky’). Colours carry cultural meaning: red for luck and celebration, white for mourning, 黄色 also ‘pornographic’, and a ‘green hat’ (戴绿帽子) for a man whose partner cheats.",
    "examples": [
     {
      "text": "红 · 红色",
@@ -4580,12 +7125,14 @@
    "title": "Mandarin among the Chinese languages",
    "area": "culture",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.diglossia",
+     "value": "none"
+    }
    ],
-   "what": "Mandarin (普通话 / 國語) is the standard, but Cantonese, Wu, Min and Hakka are separate Sinitic languages, mutually unintelligible though written with the same characters. Many Chinese speak a regional language at home. The learner will meet dialect words in the standard (regional senses in the lexicon).",
+   "what": "Mandarin (普通话 / 國語) is the standard, and its spoken and written forms are the same language, with no separate high variety. Cantonese, Wu, Min and Hakka, however, are separate Sinitic languages, mutually unintelligible with Mandarin though written with the same characters. Many Chinese speak a regional language at home, and dialect words appear in the standard (regional senses in the lexicon).",
    "examples": [
     {
      "text": "普通话 · 国语 · 华语",

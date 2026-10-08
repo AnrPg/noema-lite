@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """The catalogues of phenomena (docs/LANGUAGES.md D14, §4.11): coverage report and a check against the implementation.
 
-  python3 tools/lang_phenomena.py [--lang ar] [--gaps] [--json]
+  python3 tools/lang_phenomena.py [--lang ar] [--gaps] [--json] [--for el,tr,ja]
+
+--for: what is new / familiar in each catalogued language for a learner who knows those languages (D16: computed from the
+shared typological profiles in library/languages/_typology, never written from one point of view); without it, a table for
+learners of sample backgrounds of every family and type.
 
 For every language in library/languages/_phenomena: phenomena by status and area; then the claims of each entry are
 checked against what really exists — the word parameters it names are declared in the language's wordFeatures (in
@@ -60,9 +64,40 @@ def check(L, path, gens):
     return d, errs, warns
 
 
+def typology():
+    d = os.path.join(LANGS, '_typology')
+    fs = json.load(open(os.path.join(d, 'features.json'), encoding='utf-8'))['features']
+    ls = json.load(open(os.path.join(d, 'languages.json'), encoding='utf-8'))['languages']
+    errs = []
+    vals = {f['id']: {v['id'] for v in f['values']} for f in fs}
+    for l in ls:
+        for f in vals:
+            v = l['values'].get(f)
+            if v is None: errs.append(f'_typology: {l["code"]} has no value for {f}')
+            elif v != 'unknown' and v not in vals[f]: errs.append(f'_typology: {l["code"]}.{f} = “{v}” is not a value of the feature')
+    return {f['id']: f for f in fs}, {l['code']: l for l in ls}, errs
+
+
+def for_learner(ph, prof, knows):
+    """→ (new, familiar): phenomena whose every tagged value occurs in some known language are familiar."""
+    new, fam = [], []
+    for p in ph:
+        tags = p.get('typology') or []
+        if not tags: continue
+        ok = all(any(prof[k]['values'].get(t['feature']) == t['value'] for k in knows if k in prof) for t in tags)
+        (fam if ok else new).append(p)
+    return new, fam
+
+
+SAMPLE = ['el', 'en', 'ru', 'tr', 'fi', 'ja', 'ko', 'zh', 'vi', 'th', 'ar', 'he', 'hi', 'ta', 'sw', 'yo', 'id', 'ka', 'eu', 'iu', 'qu', 'nv']
+
+
 def main(a):
     only = a[a.index('--lang') + 1] if '--lang' in a else None
     gens = implemented_generators(); bad = 0; report = {}
+    feats, prof, terr = typology()
+    for e in terr: print('❌', e)
+    bad += len(terr)
     for path in sorted(glob.glob(os.path.join(LANGS, '_phenomena', '*.json'))):
         L = os.path.basename(path)[:-5]
         if only and L != only: continue
@@ -81,6 +116,21 @@ def main(a):
             for p in ph:
                 if p.get('status') != 'covered': print(f'   {"🟡" if p["status"] == "partial" else "⬜"} {p["id"]}: {p.get("gap", "")}')
         bad += len(errs)
+    cats = {os.path.basename(p)[:-5]: json.load(open(p, encoding='utf-8')).get('phenomena') or [] for p in sorted(glob.glob(os.path.join(LANGS, '_phenomena', '*.json')))}
+    if '--for' in a:
+        knows = a[a.index('--for') + 1].split(',')
+        for L, ph in cats.items():
+            if only and L != only: continue
+            new, fam = for_learner(ph, prof, [k for k in knows if k != L])
+            print(f'\n== {L} for a learner who knows {", ".join(prof[k]["name"] if k in prof else k + " (no profile)" for k in knows)}: {len(new)} new · {len(fam)} familiar')
+            for p in new: print(f'   ✨ {p["id"]}: {p.get("title")}')
+    elif '--json' not in a:
+        print('\n== new phenomena for a learner who knows only … (D16: the same language looks different from every background)')
+        print('   ' + 'learner'.ljust(22) + ''.join(L.rjust(6) for L in cats))
+        for k in SAMPLE:
+            if k not in prof: continue
+            row = [f'{len(for_learner(ph, prof, [k])[0]) if k != L else "—"}' for L, ph in cats.items()]
+            print('   ' + (prof[k]['name'][:20] + f' ({prof[k]["typology"][:3]})').ljust(22)[:22] + ''.join(x.rjust(6) for x in row))
     if '--json' in a: print(json.dumps(report, ensure_ascii=False, indent=1))
     sys.exit(1 if bad else 0)
 

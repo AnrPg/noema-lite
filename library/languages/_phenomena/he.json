@@ -3,7 +3,7 @@
  "lang": "he",
  "name": "Hebrew (Modern)",
  "typology": "fusional",
- "summary": "Modern Hebrew is a Semitic language revived as a spoken mother tongue in the late 19th and 20th centuries and written right to left in a 22-letter consonant alphabet whose vowels are optional points; everyday texts use a full spelling with ו and י and leave many words ambiguous. Its words grow from consonantal roots placed in patterns — seven verb binyanim and many noun mishkalim — and its grammar is built on gender: masculine and feminine in every noun, in “you”, in the present tense (which shows gender and number but not person) and even in the numbers, whose 3–10 forms look reversed. It has a prefixed definite article but no indefinite one, no cases, a construct state for “X of Y”, the object marker אֶת, no present-tense “to be” and no verb “to have”. Small words (and, the, in, to, from, that) are written onto the next word, and the language mixes an ancient literary layer with a direct, informal everyday style that has no polite “you”.",
+ "summary": "Modern Hebrew is a Semitic language revived as a spoken mother tongue in the late 19th and 20th centuries and written right to left in a 22-letter consonant alphabet whose vowels are optional points; everyday texts use a full spelling with ו and י and leave many words ambiguous. Its words grow from consonantal roots placed in patterns — seven verb binyanim and many noun mishkalim — and its grammar is built on gender: masculine and feminine in every noun, in “you”, in the present tense (which shows gender and number but not person) and even in the numbers, whose 3–10 forms look reversed. It has a prefixed definite article, and for “a” at most the numeral “one” (אֶחָד), no cases, a construct state for “X of Y”, the object marker אֶת, no present-tense “to be” and no verb “to have”. Small words (and, the, in, to, from, that) are written onto the next word, and the language mixes an ancient literary layer with a direct, informal everyday style that has no polite “you”.",
  "sources": [
   "Wiktionary (kaikki.org extracts) — as used for the course lexicon",
   "Academy of the Hebrew Language: rules of spelling without niqqud (כְּלָלֵי הַכְּתִיב חֲסַר הַנִּקּוּד, 2017)",
@@ -19,16 +19,23 @@
    "title": "An alphabet of 22 consonant letters",
    "area": "script",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "abjad"
+    },
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
    ],
-   "what": "Hebrew is written in the square Hebrew script, an abjad: its 22 letters are consonants, and vowels are either left out or added as optional points. Four letters (א ה ו י) also serve as vowel helpers (matres lectionis). The letters come from the same Phoenician source as the Greek alphabet, so names and order are familiar (alef–alpha, bet–beta, gimel–gamma, dalet–delta).",
+   "what": "Hebrew is written in the square Hebrew script, an abjad: its 22 letters are consonants, and vowels are either left out or added as optional points. Four letters (א ה ו י) also serve as vowel helpers (matres lectionis). The order and names of the letters (alef, bet, gimel, dalet …) go back to the Phoenician alphabet.",
    "examples": [
     {
      "text": "א ב ג ד",
      "translit": "alef, bet, gimel, dalet",
-     "note": "the first four letters — the same source as Greek α β γ δ"
+     "note": "the first four letters, in the order inherited from the Phoenician alphabet"
     },
     {
      "text": "ספר",
@@ -58,9 +65,12 @@
    "title": "Right to left, with numbers left to right",
    "area": "script",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.direction",
+     "value": "rtl"
+    }
    ],
    "what": "Hebrew runs from right to left, but numbers written in digits, and any Latin words inside a Hebrew line, run left to right. This mixed (bidirectional) text needs care in typing and in the app layout: punctuation and digits next to Hebrew easily end up on the wrong side.",
    "examples": [
@@ -90,12 +100,14 @@
    "title": "Five letters have a final form",
    "area": "script",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar",
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.positionalForms",
+     "value": "final-forms"
+    }
    ],
-   "what": "Five letters change shape at the end of a word: כ → ך, מ → ם, נ → ן, פ → ף, צ → ץ. When an ending is added the ordinary form comes back (שֻׁלְחָן → שֻׁלְחָנוֹת). Greek final ς is the same idea on a smaller scale; Arabic goes further, with positional forms for almost every letter.",
+   "what": "Five letters change shape at the end of a word: כ → ך, מ → ם, נ → ן, פ → ף, צ → ץ. When an ending is added the ordinary form comes back (שֻׁלְחָן → שֻׁלְחָנוֹת). All other letters have one shape in every position, and letters are not joined in print.",
    "examples": [
     {
      "text": "ך ם ן ף ץ / כ מ נ פ צ",
@@ -128,9 +140,12 @@
    "title": "Vowel points (niqqud) and dagesh",
    "area": "script",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
    ],
    "what": "Vowels are dots and dashes under, inside or above the letters: kamats ָ and patach ַ (a), tsere ֵ and segol ֶ (e), chirik ִ (i), cholam ֹ (o), kubuts ֻ and shuruk וּ (u), shva ְ, and the hataf vowels ֲ ֱ ֳ. The dagesh dot inside a letter doubles it or makes ב כ פ hard. Niqqud is used in teaching texts, poetry, children's books and the Bible; ordinary texts leave it out.",
    "examples": [
@@ -167,11 +182,14 @@
    "title": "A separate handwriting (cursive) script",
    "area": "script",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.multiple",
+     "value": "single"
+    }
    ],
-   "what": "Hebrew is handwritten in a cursive script whose letters often look quite different from print (א, ג, ה, ל, צ and others), and almost nobody handwrites the print letters. A learner who wants to read notes or write by hand must learn both — much as Russian cursive т and д differ from print.",
+   "what": "Hebrew has one script, but it is handwritten in a cursive form whose letters often look quite different from print (א, ג, ה, ל, צ and others), and almost nobody handwrites the print letters. A learner who wants to read notes or write by hand must learn both sets of shapes.",
    "examples": [
     {
      "text": "שָׁלוֹם",
@@ -197,10 +215,12 @@
    "title": "No capital letters",
    "area": "script",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "zh"
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "script.letterCase",
+     "value": "none"
+    }
    ],
    "what": "Hebrew has no upper and lower case: names, sentence starts and abbreviations look like any other word. Names are recognised from context (and in learner texts, from the transliteration).",
    "examples": [
@@ -234,8 +254,13 @@
     "ADV",
     "NUM"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
+   ],
    "what": "Ordinary texts use the full spelling of the Academy of the Hebrew Language: without niqqud, extra ו and י are written for o/u and for i (שולחן, כיסא), and a consonantal ו or י inside a word is doubled (הוורוד, סתיו). So the unvocalized word is not simply the vocalized one with the points removed. Learners must read and type this spelling, not the stripped one.",
    "examples": [
     {
@@ -280,9 +305,12 @@
    "title": "One unvocalized spelling, several words",
    "area": "orthography",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
    ],
    "what": "Without vowels many different words share one spelling, and the reader picks the right one from context: ספר can be a book, counted, told or a barber. Even the full spelling leaves many pairs: את is both the object marker and “you (f.)”, יפה is both יָפֶה and יָפָה.",
    "examples": [
@@ -331,9 +359,16 @@
     "SCONJ",
     "DET"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.wordSpacing",
+     "value": "words"
+    },
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    }
    ],
    "what": "Seven small words are single letters attached to the following word: וְ “and”, הַ “the”, בְּ “in”, לְ “to”, מִ “from”, כְּ “as, like” and שֶׁ “that”. Up to three can pile up, so a dictionary word is often hidden behind them: וּבַבַּיִת = and + in + the + house.",
    "examples": [
@@ -389,9 +424,12 @@
     "ADP",
     "CCONJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    }
    ],
    "what": "The prefixes take different vowels by what follows: וְ becomes וּ before a shva and before ב מ פ; בְּ לְ כְּ become בִּ לִ כִּ before a shva and take the article's vowel (בַּבַּיִת); מִ doubles the next letter and becomes מֵ before gutturals and the article. A learner who writes these words with niqqud has to choose the right vowel.",
    "examples": [
@@ -441,9 +479,14 @@
    "title": "Geresh, gershayim and maqaf",
    "area": "orthography",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "The geresh ׳ and the gershayim ״ mark abbreviations and acronyms (צה״ל, read as a word), letters used as numbers (ט״ו), and — on ג ז צ — the sounds j, zh and ch of loanwords (ג׳ ז׳ צ׳). The maqaf ־ is a high hyphen that joins words, above all the two nouns of a construct pair in vocalized texts. Otherwise Hebrew uses the Western punctuation marks.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "abjad"
+    }
+   ],
+   "what": "The geresh ׳ and the gershayim ״ mark abbreviations and acronyms (צה״ל, read as a word), letters used as numbers (ט״ו), and — on ג ז צ — the sounds [dʒ], [ʒ] and [tʃ] of loanwords (ג׳ ז׳ צ׳), for which the alphabet has no letter. The maqaf ־ is a high hyphen that joins words, above all the two nouns of a construct pair in vocalized texts. The other punctuation marks are the common Latin-script ones (. , ? ! : and quotation marks).",
    "examples": [
     {
      "text": "צה״ל",
@@ -479,11 +522,12 @@
    "title": "No single romanization",
    "area": "orthography",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "ru",
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.multiple",
+     "value": "single"
+    }
    ],
    "what": "Hebrew is romanized in several ways (ch / kh / h for ח and כ, ' or nothing for א and ע, e or ei for ֵי). A learner relying on transliteration must know that one sound can be spelled several ways and that the Latin spelling hides the difference between letters that sound alike.",
    "examples": [
@@ -513,12 +557,18 @@
    "title": "Letters as numbers (gematria)",
    "area": "numbers",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [
-    "el",
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    },
+    {
+     "feature": "time.calendar",
+     "value": "gregorian-plus-traditional"
+    }
    ],
-   "what": "Each letter has a number value (א 1 … י 10, כ 20 … ק 100 … ת 400). These numerals are used for Jewish calendar dates and years, for chapters and lists, and on official documents beside the digits. Greek has the same system (α΄ = 1, β΄ = 2), and Arabic once had one (abjad numerals).",
+   "what": "Each letter has a number value (א 1 … י 10, כ 20 … ק 100 … ת 400), added up within a decimal system. These numerals are used for Jewish calendar dates and years, for chapters and lists, and on official documents beside the digits.",
    "examples": [
     {
      "text": "תשפ״ז",
@@ -549,12 +599,14 @@
    "title": "Five vowels, no vowel length",
    "area": "phonology",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.vowelLength",
+     "value": "none"
+    }
    ],
-   "what": "Modern Hebrew has five vowels — a, e, i, o, u — with no difference of length. The many vowel signs are a legacy of older Hebrew: kamats and patach are both a, tsere and segol both e; the kamats katan (ׇ) is o. Learners from Greek have the same five vowels.",
+   "what": "Modern Hebrew has five vowels — a, e, i, o, u — and the length of a vowel never distinguishes words. The many vowel signs are a legacy of older Hebrew: kamats and patach are both a, tsere and segol both e; the kamats katan (ׇ) is o.",
    "examples": [
     {
      "text": "בַּ / בָּ",
@@ -585,20 +637,155 @@
    "when": "fd.00"
   },
   {
-   "id": "he.phon.consonants",
-   "title": "Consonants: [χ], uvular r, ts, and lost sounds",
+   "id": "he.phon.no-vowel-harmony",
+   "title": "No vowel harmony: endings keep their vowels",
+   "area": "phonology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.vowelHarmony",
+     "value": "none"
+    }
+   ],
+   "what": "Suffixes do not adapt their vowels to the vowels of the stem: the plural endings -ִים and -וֹת, the feminine -ָה and -ֶת and the person endings of the verb have the same vowels after any stem. Vowels change inside the stem instead (by pattern and when the stress moves), and the one-letter prefixes change their vowel by the consonant that follows (בְּ / בִּ / בַּ), which is a rule of the prefix, not harmony.",
+   "examples": [
+    {
+     "text": "סְפָרִים, שִׁירִים, סוּסִים",
+     "translit": "sfarim, shirim, susim",
+     "note": "books, songs, horses: -im after any stem vowel"
+    },
+    {
+     "text": "גְּדוֹלָה, קְטַנָּה",
+     "translit": "gdola, ktana",
+     "note": "big (f.), small (f.): the same -a after o and after a"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”) for learners whose languages have vowel harmony: each Hebrew ending has one form.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-front-rounded",
+   "title": "No front rounded vowels (ü, ö)",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de"
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.frontRounded",
+     "value": "none"
+    }
    ],
-   "what": "ח and soft כ are both [χ] as in German Bach; ר is a uvular r like the German or French r; צ is ts. Standard Israeli Hebrew has lost the old pharyngeals: ע is said like א (a glottal stop or nothing) and ח like כ — though many speakers of Mizrahi background still keep them. Geresh letters add j, zh and ch for loanwords.",
+   "what": "The five vowels a, e, i, o, u include no front rounded vowels: lip rounding goes only with the back vowels o and u. Names and loanwords with ü or ö are said and spelled with i or u, e or o.",
+   "examples": [
+    {
+     "text": "צִירִיךְ",
+     "translit": "tsirikh",
+     "note": "Zürich — ü is said as i"
+    },
+    {
+     "text": "גֶּתֶה",
+     "translit": "gete",
+     "note": "Goethe — ö is said as e"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”): five vowels, none of them front rounded.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-nasal-vowels",
+   "title": "No nasal vowels",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.nasalVowels",
+     "value": "none"
+    }
+   ],
+   "what": "Vowels are always oral: a vowel before n or m stays an oral vowel followed by a full consonant, and no word is distinguished by nasality. Loanwords with nasal vowels are said with a vowel + n or m.",
+   "examples": [
+    {
+     "text": "רֶסְטוֹרָן",
+     "translit": "restoran",
+     "note": "restaurant — the nasal vowel of the source becomes -an"
+    },
+    {
+     "text": "שַׁמְפַּנְיָה",
+     "translit": "shampanya",
+     "note": "champagne — a vowel + m"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”): the vowels are never nasal.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.consonants",
+   "title": "Consonants: [χ], uvular [ʁ], [ts], voiced and voiceless pairs",
+   "area": "phonology",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.uvulars",
+     "value": "continuants"
+    },
+    {
+     "feature": "phon.voicing",
+     "value": "both"
+    },
+    {
+     "feature": "phon.liquids",
+     "value": "r-and-l"
+    }
+   ],
+   "what": "ח and soft כ are both the uvular fricative [χ]; ר is a uvular [ʁ]; צ is the affricate [ts]. Voiced and voiceless consonants are distinct in stops and fricatives (b / p, d / t, g / k, v / f, z / s), and r and l are separate sounds. Standard Israeli Hebrew has lost the old pharyngeals: ע is said like א (a glottal stop or nothing) and ח like כ — though many speakers of Mizrahi background still keep them. Geresh letters add [dʒ], [ʒ] and [tʃ] for loanwords.",
    "examples": [
     {
      "text": "רְחוֹב",
      "translit": "rechov",
-     "note": "street: uvular r and [χ], as in German"
+     "note": "street: uvular [ʁ] and [χ]"
     },
     {
      "text": "צָהֹב",
@@ -624,13 +811,333 @@
    "when": "fd.00"
   },
   {
+   "id": "he.phon.no-glottalized",
+   "title": "No ejectives or implosives",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.glottalized",
+     "value": "none"
+    }
+   ],
+   "what": "All consonants are made with ordinary air from the lungs: there are no ejectives (p', t', k') and no implosives. The letters ט and ק, once 'emphatic' consonants, are now plain t and k, the same sounds as ת and כּ.",
+   "examples": [
+    {
+     "text": "טוֹב / תּוֹר",
+     "translit": "tov / tor",
+     "note": "good / queue: ט and ת are the same plain t"
+    },
+    {
+     "text": "קַר / כַּר",
+     "translit": "kar / kar",
+     "note": "cold / pillow: ק and כּ are the same plain k"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”): every consonant is a plain pulmonic one; ט and ק are not glottalized.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-clicks",
+   "title": "No click consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.clicks",
+     "value": "none"
+    }
+   ],
+   "what": "Clicks are not consonants of the language: no word contains one. Every consonant, including the affricate צ [ts], is made with air going out.",
+   "examples": [
+    {
+     "text": "צָהֹב",
+     "translit": "tsahov",
+     "note": "yellow: צ is the affricate [ts], made with outgoing air"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”) for learners whose languages have clicks.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-retroflex",
+   "title": "No retroflex consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.retroflex",
+     "value": "none"
+    }
+   ],
+   "what": "t, d, n, l, s, ts and sh are made with the tongue tip or blade at the teeth or the gum ridge; no consonant is made with the tip curled back, and no pair of words differs that way.",
+   "examples": [
+    {
+     "text": "שֵׁשׁ",
+     "translit": "shesh",
+     "note": "six: ש is [ʃ], said with the tongue blade, not curled back"
+    },
+    {
+     "text": "דָּג",
+     "translit": "dag",
+     "note": "fish: one d, at the teeth or gum ridge"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”) for learners whose languages have retroflex consonants.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-aspiration",
+   "title": "Aspiration does not distinguish words",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.aspiration",
+     "value": "none"
+    }
+   ],
+   "what": "p, t and k are said with little or no puff of air, and adding or dropping a puff never makes another word. Stops are kept apart by voicing instead: b / p, d / t, g / k.",
+   "examples": [
+    {
+     "text": "פֹּה / בּוֹ",
+     "translit": "po / bo",
+     "note": "here / in him: voicing, not aspiration, separates the words"
+    },
+    {
+     "text": "טַל / דַּל",
+     "translit": "tal / dal",
+     "note": "dew / poor"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”): p t k are unaspirated, and voicing (not aspiration) separates them from b d g.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-final-devoicing",
+   "title": "No final devoicing",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.finalDevoicing",
+     "value": "none"
+    }
+   ],
+   "what": "Voiced consonants keep their voicing at the end of a word, so a final g, d, z or v can distinguish words from their voiceless partners.",
+   "examples": [
+    {
+     "text": "דָּג / דַּק",
+     "translit": "dag / dak",
+     "note": "fish / thin: final g and k are different"
+    },
+    {
+     "text": "גַּז / גַּס",
+     "translit": "gaz / gas",
+     "note": "gas / rude: final z and s are different"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”): a final voiced consonant stays voiced.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-gemination",
+   "title": "No long consonants: the doubling dot is silent",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.gemination",
+     "value": "none"
+    }
+   ],
+   "what": "Consonant length does not distinguish words. Vocalized texts still show the old doubling with a dagesh dot (אִמָּא, הַסֵּפֶר), and some patterns (pi‘el, קַטָּל) are defined by it, but the consonant is said short; in ב כ פ the dot only shows the hard sound.",
+   "examples": [
+    {
+     "text": "אִמָּא",
+     "translit": "ima",
+     "note": "mum: written with a doubling dot, said with one m"
+    },
+    {
+     "text": "סִפֵּר / סָפַר",
+     "translit": "siper / safar",
+     "note": "told / counted: the dot changes f to p, not the length"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say in the niqqud part of the overview (and the P4 script module) that the dagesh never lengthens a consonant in Modern Hebrew.",
+   "when": "fd.00 (P4)"
+  },
+  {
+   "id": "he.phon.no-interdentals",
+   "title": "No “th” sounds (θ, ð)",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.interdentals",
+     "value": "none"
+    }
+   ],
+   "what": "There are no interdental fricatives: the soft ת and ד, which once had these sounds, are now said t and d. Loanwords with θ are said with t.",
+   "examples": [
+    {
+     "text": "תֵּאַטְרוֹן",
+     "translit": "teatron",
+     "note": "theatre — θ is said t"
+    },
+    {
+     "text": "מָתֵמָטִיקָה",
+     "translit": "matematika",
+     "note": "mathematics"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”) for learners whose languages have θ / ð: they are said t / d.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.phon.no-palatalization",
+   "title": "No hard and soft consonant pairs",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.palatalization",
+     "value": "none"
+    }
+   ],
+   "what": "Consonants do not come in plain and palatalised ('soft') pairs: a y-sound is a separate consonant (י), and a consonant before i or e is not softened in a way that changes words.",
+   "examples": [
+    {
+     "text": "לִי",
+     "translit": "li",
+     "note": "to me: an ordinary l before i"
+    },
+    {
+     "text": "נְיָר",
+     "translit": "nyar",
+     "note": "paper: n + y are two consonants, not a soft n"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”) for learners whose languages have soft consonants.",
+   "when": "fd.00"
+  },
+  {
    "id": "he.phon.merged-letters",
    "title": "Letters that sound the same",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Because old sound distinctions merged, several letters now share one sound: א and ע (glottal stop or silent), ב and ו (v), ח and כ (kh), ט and ת (t), כּ and ק (k), ס and שׂ (s). The spelling of every word must therefore be learned, as in English or French; Arabic, which keeps these sounds apart, often shows which letter is right.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.pharyngeals",
+     "value": "none"
+    }
+   ],
+   "what": "Because old sound distinctions merged, several letters now share one sound: א and ע (glottal stop or silent), ב and ו (v), ח and כ ([χ]), ט and ת (t), כּ and ק (k), ס and שׂ (s). The once pharyngeal ח and ע and the once 'emphatic' ט and ק are now plain consonants. The spelling of every word must therefore be learned with the word; related words in other Semitic languages, which often keep these sounds apart, can show which letter is right.",
    "examples": [
     {
      "text": "תֵּה / טוֹב",
@@ -670,8 +1177,13 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
+   ],
    "what": "ב כ פ have two sounds: hard (with dagesh) b k p, soft v kh f. The soft sound appears after a vowel, so the same root letter alternates inside one paradigm and after a prefix: כָּתַב / יִכְתֹּב, בַּיִת / בְּבַיִת. Loanwords usually keep their hard sound (בַּפַּארְק “in the park”), and colloquial speech levels some alternations.",
    "examples": [
     {
@@ -710,6 +1222,50 @@
    "when": "fd.00, fd.07"
   },
   {
+   "id": "he.phon.no-mutation",
+   "title": "No grammatical consonant mutation",
+   "area": "phonology",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADJ"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.mutation",
+     "value": "none"
+    }
+   ],
+   "what": "The first consonant of a word does not change to mark grammar such as possession, gender or case. The one regular alternation, b / v, k / χ, p / f (begadkefat), depends on the sound before the consonant (a vowel or not) and on the word's pattern, not on a grammatical trigger word, and loanwords keep their hard sound.",
+   "examples": [
+    {
+     "text": "הַבַּיִת שֶׁלִּי / הַבַּיִת שֶׁלָּהּ",
+     "translit": "habayit sheli / habayit shela",
+     "note": "my house / her house: the noun does not change for the possessor"
+    },
+    {
+     "text": "בַּיִת → בְּבַיִת",
+     "translit": "bayit → bevayit",
+     "note": "house → in a house: b becomes v after the vowel of the prefix — a sound rule"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say with the begadkefat note in the overview that the alternation is a sound rule, not a grammatical mutation.",
+   "when": "fd.00"
+  },
+  {
    "id": "he.phon.stress",
    "title": "Stress: mostly final, but distinctive",
    "area": "phonology",
@@ -719,10 +1275,16 @@
     "ADJ",
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.stress",
+     "value": "free"
+    },
+    {
+     "feature": "script.stressMarking",
+     "value": "unmarked"
+    }
    ],
    "what": "Most words are stressed on the last syllable (milra), but segolate nouns (יֶלֶד yéled, בֹּקֶר bóker), many loanwords and some suffixes take penultimate stress (mil'el). Stress can separate words spelled the same, and niqqud does not show it.",
    "examples": [
@@ -756,6 +1318,50 @@
    "when": "fd.00, then per word"
   },
   {
+   "id": "he.phon.no-tone",
+   "title": "No lexical tone: pitch never changes a word",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "tone.lexical",
+     "value": "none"
+    },
+    {
+     "feature": "script.toneMarking",
+     "value": "no-tones"
+    }
+   ],
+   "what": "Hebrew has no lexical tone and no pitch accent: a word keeps its meaning whatever the pitch of its syllables. Pitch belongs to the sentence — a final rise makes a yes/no question, a fall ends a statement — and to emotion and emphasis. A word is identified by its consonants, its vowels and its stressed syllable, and the script accordingly has no tone marks.",
+   "examples": [
+    {
+     "text": "אַתָּה רוֹצֶה קָפֶה.",
+     "translit": "ata rotse kafe.",
+     "note": "you want coffee — falling pitch: a statement"
+    },
+    {
+     "text": "אַתָּה רוֹצֶה קָפֶה?",
+     "translit": "ata rotse kafe?",
+     "note": "do you want coffee? — the same words with a final rise: pitch changes the sentence, never a word"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (fn.overview, “Sounds”) for learners whose languages have tones or a pitch accent: Hebrew pitch is intonation only.",
+   "when": "fd.00"
+  },
+  {
    "id": "he.phon.gutturals",
    "title": "Gutturals: א ה ח ע ר",
    "area": "phonology",
@@ -764,9 +1370,12 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
    ],
    "what": "The gutturals cannot be doubled and prefer a-vowels and hataf vowels. So the article becomes הָ or הֶ instead of doubling (הָאִשָּׁה, הֶחָבֵר), and verbs whose root has a guttural change their vowels (לֶאֱכֹל, אוֹהֲבִים). Many irregular-looking forms follow from this one rule.",
    "examples": [
@@ -812,8 +1421,13 @@
     "VERB",
     "ADV"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
+   ],
    "what": "After a long vowel, a word-final ח, ע (or ה with a dot) is preceded by a short a that is written under the last letter but pronounced before it: תַּפּוּחַ is tapúach, not tapuch. Many common words end like this (שָׁבוּעַ, מַפְתֵּחַ, שָׂמֵחַ, מַדּוּעַ).",
    "examples": [
     {
@@ -852,12 +1466,18 @@
    "title": "Shva and word-initial clusters",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ru",
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.syllableStructure",
+     "value": "complex"
+    },
+    {
+     "feature": "phon.vowelReduction",
+     "value": "some"
+    }
    ],
-   "what": "The shva ְ is usually silent in Modern Hebrew, so words can start with two consonants (גְּבִינָה gvina, כְּפָר kfar, סְפִינָה sfina), as in Russian or German. An e is heard in some cases — after the one-letter prefixes and often when the first consonant is מ, נ, ל, ר or י (מְנוֹרָה menora).",
+   "what": "The shva ְ is usually silent in Modern Hebrew, so words can start with two consonants (גְּבִינָה gvina, כְּפָר kfar, סְפִינָה sfina), and a vowel of the stem drops when an ending moves the stress (סֵפֶר → סְפָרִים). An e is heard in some cases — after the one-letter prefixes and often when the first consonant is מ, נ, ל, ר or י (מְנוֹרָה menora).",
    "examples": [
     {
      "text": "גְּבִינָה",
@@ -894,11 +1514,14 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "Most native words are built on a root of (usually) three consonants that carries a core meaning: א־כ־ל “eat” gives אָכַל “ate”, אוֹכֵל “eats”, אֹכֶל “food”, מַאֲכָל “dish”. Knowing the root lets the learner guess new words and find them in a dictionary. Arabic works the same way, often with the same roots. Loanwords (סָלָט, טֶלֶפוֹן) have no Semitic root.",
+   "what": "Most native words are built on a root of (usually) three consonants that carries a core meaning: א־כ־ל “eat” gives אָכַל “ate”, אוֹכֵל “eats”, אֹכֶל “food”, מַאֲכָל “dish”. Knowing the root lets the learner guess new words and find them in a dictionary, many of which are ordered by root. Loanwords (סָלָט, טֶלֶפוֹן) have no Semitic root.",
    "examples": [
     {
      "text": "א־כ־ל: אָכַל, אוֹכֵל, אֹכֶל, מַאֲכָל",
@@ -932,6 +1555,63 @@
    "when": "fd.07"
   },
   {
+   "id": "he.morph.type",
+   "title": "Fusional words: roots, patterns, mostly suffixes",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADJ"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.type",
+     "value": "fusional"
+    },
+    {
+     "feature": "morph.fusion",
+     "value": "fusional"
+    },
+    {
+     "feature": "morph.affixation",
+     "value": "mostly-suffixing"
+    }
+   ],
+   "what": "Grammatical meanings are packed together: one ending or pattern carries several at once (-וֹת = feminine + plural; the present form אוֹכֶלֶת = present + feminine + singular), and stems change inside by root and pattern. Inflection is mostly at the end of the word — the plural, the past-tense person endings, the possessive and prepositional endings — but some grammar comes first: the future marks person with prefixes (אֶ־, תִּ־, יִ־, נִ־), and the article and the one-letter prepositions are written at the front.",
+   "examples": [
+    {
+     "text": "אָכַלְנוּ",
+     "translit": "akhalnu",
+     "note": "we ate: one ending, -nu, says 1st person + plural"
+    },
+    {
+     "text": "נֹאכַל",
+     "translit": "nokhal",
+     "note": "we will eat: in the future the person is a prefix"
+    },
+    {
+     "text": "מְכוֹנִיּוֹת",
+     "translit": "mekhoniyot",
+     "note": "cars: -ot is feminine + plural in one piece"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.00"
+  },
+  {
    "id": "he.morph.quadriliteral",
    "title": "Roots of four consonants",
    "area": "morphology",
@@ -939,11 +1619,14 @@
     "VERB",
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "Some roots have four consonants, many of them made from loanwords: טֶלֶפוֹן “phone” → טִלְפֵּן “he phoned” (ט־ל־פ־נ). They are conjugated in the piel-type patterns (pi‘el, pu‘al, hitpa‘el). Arabic has the same class (tarjama “translate” ~ תִּרְגֵּם).",
+   "what": "Some roots have four consonants, many of them made from loanwords: טֶלֶפוֹן “phone” → טִלְפֵּן “he phoned” (ט־ל־פ־נ). They are conjugated in the piel-type patterns (pi‘el, pu‘al, hitpa‘el), which makes them the regular way to turn a borrowed noun into a verb.",
    "examples": [
     {
      "text": "טֶלֶפוֹן → טִלְפֵּן",
@@ -978,9 +1661,20 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    },
+    {
+     "feature": "verb.passive",
+     "value": "morphological"
+    },
+    {
+     "feature": "verb.causative",
+     "value": "affix"
+    }
    ],
    "what": "Every verb belongs to one of seven patterns: pa‘al, nif‘al, pi‘el, pu‘al, hif‘il, huf‘al, hitpa‘el. The binyan fixes all the forms of the verb (past, present, future, infinitive) and often its meaning in relation to the same root: active, passive, causative, reflexive or reciprocal. A verb is learned with its binyan.",
    "examples": [
@@ -1030,9 +1724,16 @@
     "VERB",
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    },
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
    ],
    "what": "Roots with a weak letter change shape in predictable ways: a final ה drops or becomes ת (שָׁתָה → לִשְׁתּוֹת), a middle ו/י leaves only two letters (בָּא, רָץ), a first נ is swallowed and doubles the next letter (נ־ג־ע → הִגִּיעַ), a first י shows up only in some forms (יָצָא → לָצֵאת), and gutturals change the vowels. The class (gizra) explains most “irregular” verbs.",
    "examples": [
@@ -1084,9 +1785,12 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
    "what": "Nouns and adjectives also follow patterns, and many patterns carry a meaning: מִקְטָל places (מִטְבָּח, מִשְׂרָד), קַטָּל professions (טַבָּח), מַקְטֵל tools (מַפְתֵּחַ), קֶטֶל segolates (יֶלֶד, סֵפֶר), קָטֹל colours (אָדֹם). The pattern also predicts the plural and the construct form.",
    "examples": [
@@ -1132,11 +1836,14 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "Dictionaries list a Hebrew verb by its past tense 3rd person masculine singular — the shortest form, closest to the root — not by an infinitive: אָכַל “he ate” stands for “to eat”. Hollow verbs look the same in the past and the present (בָּא “came / comes”). Arabic does the same; Greek, Russian and German list the 1st person or the infinitive.",
+   "what": "Dictionaries list a Hebrew verb by its past tense 3rd person masculine singular — the shortest form, closest to the root — not by an infinitive: אָכַל “he ate” stands for “to eat”. Hollow verbs look the same in the past and the present (בָּא “came / comes”).",
    "examples": [
     {
      "text": "אָכַל",
@@ -1177,12 +1884,16 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    },
+    {
+     "feature": "nom.genderBasis",
+     "value": "sex-based"
+    }
    ],
    "what": "Every noun is masculine or feminine (no neuter). Endings in stressed -ָה and in -ת usually mean feminine, but there are exceptions both ways: כּוֹס “glass” and עִיר “city” are feminine without an ending, לַיְלָה “night” is masculine despite its -ָה. Paired body parts are mostly feminine.",
    "examples": [
@@ -1220,14 +1931,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.genderBasis",
+     "value": "sex-based"
+    }
    ],
-   "what": "Nouns for people come in pairs: the feminine adds -ָה, -ֶת or -ִית to the masculine (מוֹרֶה / מוֹרָה, נֶהָג / נַהֶגֶת, סְטוּדֶנְט / סְטוּדֶנְטִית). The masculine plural is used for mixed groups. German -in and Greek -τρια work similarly, but Hebrew needs the pair for almost every job and person.",
+   "what": "Nouns for people come in pairs: the feminine adds -ָה, -ֶת or -ִית to the masculine (מוֹרֶה / מוֹרָה, נֶהָג / נַהֶגֶת, סְטוּדֶנְט / סְטוּדֶנְטִית). The pair exists for almost every job and person, and the masculine plural is used for mixed groups.",
    "examples": [
     {
      "text": "מוֹרֶה / מוֹרָה",
@@ -1273,9 +1984,16 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "obligatory"
+    },
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
    ],
    "what": "Masculine nouns usually take -ִים, feminine -וֹת, but the ending does not prove the gender: חַלּוֹן → חַלּוֹנוֹת is masculine, אִשָּׁה → נָשִׁים feminine. A few common nouns are irregular (בַּיִת → בָּתִּים, אָחוֹת → אֲחָיוֹת). Agreement always follows the gender of the singular.",
    "examples": [
@@ -1330,9 +2048,16 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    },
+    {
+     "feature": "phon.vowelReduction",
+     "value": "some"
+    }
    ],
    "what": "When an ending is added the stress moves and earlier vowels shorten or disappear: סֵפֶר → סְפָרִים, גָּדוֹל → גְּדוֹלָה. Segolate nouns (קֶטֶל) change their whole vowel pattern, and short adjectives double their last letter (קָטָן → קְטַנָּה).",
    "examples": [
@@ -1382,11 +2107,14 @@
     "NOUN",
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.dual",
+     "value": "limited"
+    }
    ],
-   "what": "A dual ending -ַיִם means “two” of a few units of time and of 100 and 1000 (יוֹמַיִם “two days”, מָאתַיִם “200”). For paired body parts the dual is simply the plural (יָדַיִם “hands”, also for more than two), and some nouns exist only in this form (מַיִם “water”, מִשְׁקָפַיִם “glasses”, אוֹפַנַּיִם “bicycle”). Unlike Arabic, it is not productive.",
+   "what": "A dual ending -ַיִם means “two” of a few units of time and of 100 and 1000 (יוֹמַיִם “two days”, מָאתַיִם “200”). For paired body parts the dual is simply the plural (יָדַיִם “hands”, also for more than two), and some nouns exist only in this form (מַיִם “water”, מִשְׁקָפַיִם “glasses”, אוֹפַנַּיִם “bicycle”). It is not productive: other nouns say “two” with the number and the plural (שְׁנֵי סְפָרִים).",
    "examples": [
     {
      "text": "יוֹם → יוֹמַיִם",
@@ -1435,22 +2163,67 @@
    "when": "fd.05, fd.15"
   },
   {
+   "id": "he.morph.no-classifiers",
+   "title": "No numeral classifiers: numbers count nouns directly",
+   "area": "morphology",
+   "pos": [
+    "NUM",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "none"
+    }
+   ],
+   "what": "A numeral stands directly before the noun it counts: שְׁלוֹשָׁה סְפָרִים “three books”. There are no measure words chosen by the shape or kind of the thing; a unit is needed only for a mass, and then it is an ordinary noun in a construct pair (שְׁתֵּי כּוֹסוֹת קָפֶה “two cups of coffee”).",
+   "examples": [
+    {
+     "text": "שְׁנֵי סְפָרִים",
+     "translit": "shney sfarim",
+     "note": "two books: the number + the plural noun"
+    },
+    {
+     "text": "שְׁתֵּי כּוֹסוֹת קָפֶה",
+     "translit": "shtey kosot kafe",
+     "note": "two cups of coffee: a unit only for a mass"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say in fn.numerals (and the overview) that Hebrew counts nouns directly, for learners whose languages use classifiers.",
+   "when": "fd.05"
+  },
+  {
    "id": "he.morph.number-classes",
    "title": "Plural-only, singular-only and mass nouns",
    "area": "morphology",
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "en",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "obligatory"
+    },
+    {
+     "feature": "nom.singulative",
+     "value": "marginal"
+    }
    ],
-   "what": "Some nouns have no singular (אֲנָשִׁים “people”, מַיִם “water”, הוֹרִים “parents”), some count nouns lack a plural and borrow it from another word (אָדָם → אֲנָשִׁים), and food words are often mass nouns used in the singular (קָנִיתִי גֶּזֶר “I bought carrots”).",
+   "what": "Some nouns have no singular (אֲנָשִׁים “people”, מַיִם “water”, הוֹרִים “parents”), some count nouns lack a plural and borrow it from another word (אָדָם → אֲנָשִׁים), and food words are often mass nouns used in the singular (קָנִיתִי גֶּזֶר “I bought carrots”). A few mass nouns have a feminine noun for one piece (שֵׂעָר “hair” → שַׂעֲרָה “a single hair”), but this is not a productive process.",
    "examples": [
     {
      "text": "אֲנָשִׁים",
@@ -1491,19 +2264,75 @@
    "when": "fd.04, fd.05"
   },
   {
+   "id": "he.morph.no-case",
+   "title": "No cases: a noun has one form in every role",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "ADJ",
+    "PRON"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "none"
+    },
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "no-case"
+    }
+   ],
+   "what": "Nouns, adjectives and pronouns do not change their ending for their role in the sentence: הַיֶּלֶד is the same as subject, as object and after a preposition. Roles are shown by word order (subject before the verb), by אֶת before a definite direct object, by prepositions (mostly one-letter prefixes) and by the agreement of the verb. A pronoun as object or after a preposition is the preposition with a personal ending (אוֹתִי, לִי).",
+   "examples": [
+    {
+     "text": "הַיֶּלֶד פֹּה / אֲנִי רוֹאֶה אֶת הַיֶּלֶד / אֲנִי עִם הַיֶּלֶד",
+     "translit": "hayeled po / ani ro'e et hayeled / ani im hayeled",
+     "note": "the boy is here / I see the boy / I am with the boy: one form in three roles"
+    },
+    {
+     "text": "בָּעִיר / לָעִיר / מֵהָעִיר",
+     "translit": "ba'ir / la'ir / meha'ir",
+     "note": "in / to / from the city: only the preposition changes"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.case.basic",
+     "fn.case"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.04 (fn.case.basic), fd.11 (fn.case)"
+  },
+  {
    "id": "he.morph.article",
-   "title": "The definite article הַ, no indefinite article",
+   "title": "The definite article הַ, and “one” for “a”",
    "area": "morphology",
    "pos": [
     "NOUN",
     "ADJ",
     "DET"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    },
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "one"
+    }
    ],
-   "what": "“The” is the prefix הַ, which doubles the next consonant and changes its vowel before gutturals (הָאִשָּׁה, הֶחָבֵר). There is no “a”: a bare noun is indefinite. Names, nouns with a possessive suffix and the first noun of a construct pair take no article.",
+   "what": "“The” is the prefix הַ, which doubles the next consonant and changes its vowel before gutturals (הָאִשָּׁה, הֶחָבֵר). A bare noun is indefinite, and there is no separate indefinite article; in speech the numeral “one”, אֶחָד / אַחַת after the noun, often serves as one (“a certain”: בָּחוּר אֶחָד). Names, nouns with a possessive suffix and the first noun of a construct pair take no article.",
    "examples": [
     {
      "text": "סֵפֶר → הַסֵּפֶר",
@@ -1546,11 +2375,18 @@
     "NOUN",
     "NUM"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    },
+    {
+     "feature": "syn.genitiveNoun",
+     "value": "noun-gen"
+    }
    ],
-   "what": "Two nouns are joined “X of Y” by putting the first in a short construct form and the second after it: בַּיִת → בֵּית סֵפֶר “school (house of book)”. Only the first noun changes (-ָה → -ַת, -ִים → -ֵי, vowels shorten); the article goes on the second noun (בֵּית הַסֵּפֶר “the school”); the plural goes on the first (בָּתֵּי סֵפֶר); an adjective comes at the end. Arabic iḍāfa is the same construction.",
+   "what": "Two nouns are joined “X of Y” by putting the first in a short construct form and the second after it: בַּיִת → בֵּית סֵפֶר “school (house of book)”. Only the first noun changes (-ָה → -ַת, -ִים → -ֵי, vowels shorten); the article goes on the second noun (בֵּית הַסֵּפֶר “the school”); the plural goes on the first (בָּתֵּי סֵפֶר); an adjective comes at the end.",
    "examples": [
     {
      "text": "בַּיִת → בֵּית סֵפֶר",
@@ -1600,16 +2436,67 @@
    "when": "fd.11 (ar/he extra) — the course uses construct compounds from fd.07"
   },
   {
+   "id": "he.syntax.shel",
+   "title": "“Of” as a separate word: שֶׁל",
+   "area": "syntax",
+   "pos": [
+    "ADP",
+    "NOUN"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.genitive",
+     "value": "adposition-or-particle"
+    },
+    {
+     "feature": "syn.genitiveNoun",
+     "value": "noun-gen"
+    }
+   ],
+   "what": "The everyday way to link a possessor to a noun is the word שֶׁל “of”, placed after the possessed noun: הַבַּיִת שֶׁל דָּנָה “Dana's house”. The possessed noun comes first and usually takes the article; שֶׁל takes personal endings for pronoun possessors (שֶׁלִּי, שֶׁלְּךָ, שֶׁלָּהּ …). Beside it stand the construct state (fixed pairs and formal style) and the possessive endings.",
+   "examples": [
+    {
+     "text": "הַבַּיִת שֶׁל דָּנָה",
+     "translit": "habayit shel Dana",
+     "note": "Dana's house"
+    },
+    {
+     "text": "הַסֵּפֶר שֶׁלִּי",
+     "translit": "hasefer sheli",
+     "note": "my book"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.possessive"
+    ],
+    "exercises": [
+     "transform"
+    ],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.06"
+  },
+  {
    "id": "he.morph.poss-suffix",
    "title": "Possessive endings on nouns",
    "area": "morphology",
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.possessiveAffixes",
+     "value": "suffixes"
+    }
    ],
    "what": "Besides the everyday הַבַּיִת שֶׁלִּי, a noun can take a possessive ending: אָחִי “my brother”, אִשְׁתִּי “my wife”. There are two sets: one for singular nouns (-ִי, -ְךָ, -וֹ …) and one for plural nouns (-ַי, -ֶיךָ, -ָיו …). In speech the endings live on a few family words; in writing they are common. A noun with an ending is definite.",
    "examples": [
@@ -1652,15 +2539,55 @@
    "when": "fd.06"
   },
   {
+   "id": "he.morph.no-alienability",
+   "title": "One kind of possession for every noun",
+   "area": "morphology",
+   "pos": [
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.alienability",
+     "value": "none"
+    }
+   ],
+   "what": "“My X” is built the same way for every kind of noun — body parts, relatives and objects alike: X שֶׁלִּי, or in formal style a possessive ending. In everyday speech the endings are commoner with a few relatives (אִשְׁתִּי, אָחִי), but this is a matter of style and vocabulary, not of grammar, and שֶׁל is always possible.",
+   "examples": [
+    {
+     "text": "הַיָּד שֶׁלִּי / הָאָח שֶׁלִּי / הַסֵּפֶר שֶׁלִּי",
+     "translit": "hayad sheli / ha'akh sheli / hasefer sheli",
+     "note": "my hand / my brother / my book: one construction"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.possessive"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.possessive teaches one construction for all nouns but does not say that body parts and relatives are not treated differently.",
+   "when": "fd.06"
+  },
+  {
    "id": "he.morph.prep-suffix",
    "title": "Prepositions with personal endings",
    "area": "morphology",
    "pos": [
     "ADP"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
    ],
    "what": "Prepositions take personal endings instead of a pronoun: לִי “to me”, בִּשְׁבִילִי “for me”. Some change their stem (עִם → אִתִּי “with me”, מִן → מִמֶּנִּי “from me, than me”, אֶת → אוֹתִי “me”), and some take the plural-noun endings (עַל → עָלַי, לִפְנֵי → לְפָנַי).",
    "examples": [
@@ -1719,11 +2646,18 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    },
+    {
+     "feature": "verb.participles",
+     "value": "rich"
+    }
    ],
-   "what": "The present tense is an old participle and changes like an adjective, for gender and number only: אוֹכֵל, אוֹכֶלֶת, אוֹכְלִים, אוֹכְלוֹת. אֲנִי, אַתָּה and הוּא share one form, so the subject pronoun is required. Russian shows the same principle in its past tense (ел / ела / ели).",
+   "what": "The present tense is an old participle and changes like an adjective, for gender and number only: אוֹכֵל, אוֹכֶלֶת, אוֹכְלִים, אוֹכְלוֹת. אֲנִי, אַתָּה and הוּא share one form, so the subject pronoun is required.",
    "examples": [
     {
      "text": "אוֹכֵל / אוֹכֶלֶת / אוֹכְלִים / אוֹכְלוֹת",
@@ -1763,13 +2697,16 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.past",
+     "value": "past"
+    },
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
    ],
    "what": "The past adds endings for person, number and (in the 2nd and 3rd person singular and 2nd plural) gender: אָכַלְתִּי, אָכַלְתָּ, אָכַלְתְּ, אָכַל, אָכְלָה … Because the ending shows the person, the pronoun is often left out in the 1st and 2nd person.",
    "examples": [
@@ -1802,15 +2739,65 @@
    "when": "cr.01"
   },
   {
+   "id": "he.morph.no-object-marking",
+   "title": "No object marking on the verb in speech",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "PRON"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.objectMarking",
+     "value": "none"
+    }
+   ],
+   "what": "The verb does not agree with its object: an object pronoun is a separate word, אֶת with a personal ending (רָאִיתִי אוֹתוֹ “I saw him”). Formal and literary writing can still attach an object ending to the verb (רְאִיתִיו “I saw him”), but this is a written style, never doubled with a noun.",
+   "examples": [
+    {
+     "text": "רָאִיתִי אוֹתוֹ",
+     "translit": "ra'iti oto",
+     "note": "I saw him: the pronoun is a separate word"
+    },
+    {
+     "text": "רְאִיתִיו",
+     "translit": "re'itiv",
+     "note": "I saw him: literary, with the old object ending"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.object"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.object teaches אוֹתוֹ; the literary object endings (רְאִיתִיו) are not taught.",
+   "when": "fd.07"
+  },
+  {
    "id": "he.morph.future",
    "title": "The future: prefixes and endings",
    "area": "morphology",
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "inflectional"
+    },
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
    ],
    "what": "The future marks the person with prefixes (א־, ת־, י־, נ־) and some endings. The same form serves “you (m.)” and “she” (תֹּאכַל). It is also the everyday form of commands and requests, it follows אַל in prohibitions, and it is used after כְּשֶׁ / אִם for future events. The feminine plural forms (תֵּלַכְנָה) are literary; speech uses the masculine plural.",
    "examples": [
@@ -1853,9 +2840,12 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "inflectional"
+    }
    ],
    "what": "The imperative is the future without its prefix (תֵּלֵךְ → לֵךְ!), with forms for a man, a woman and a group. In speech the future itself is often the command and sounds softer. A prohibition is אַל + future, never the imperative; signs use the infinitive (לֹא לְהִכָּנֵס “no entry”).",
    "examples": [
@@ -1909,14 +2899,12 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "en",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.infinitive",
+     "value": "infinitive"
+    }
    ],
    "what": "The infinitive carries the prefix לְ (לֶאֱכֹל, לִשְׁתּוֹת, לְבַשֵּׁל) and follows verbs such as רוֹצֶה “want”, אוֹהֵב “like”, the impersonal modals (צָרִיךְ, אֶפְשָׁר, אָסוּר), and is used in instructions. Its shape depends on the binyan and the root class.",
    "examples": [
@@ -1960,11 +2948,14 @@
     "VERB",
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "Every binyan has its own action-noun pattern (shem pe‘ula): pa‘al often קְטִילָה (אֲכִילָה “eating”), pi‘el קִטּוּל (בִּשּׁוּל “cooking”), hif‘il הַקְטָלָה (הַגָּעָה “arrival”), hitpa‘el הִתְקַטְּלוּת. Like the Arabic maṣdar, it is predictable from the binyan but must be checked word by word.",
+   "what": "Every binyan has its own action-noun pattern (shem pe‘ula): pa‘al often קְטִילָה (אֲכִילָה “eating”), pi‘el קִטּוּל (בִּשּׁוּל “cooking”), hif‘il הַקְטָלָה (הַגָּעָה “arrival”), hitpa‘el הִתְקַטְּלוּת. It is predictable from the binyan, but whether a verb has one, and what it means, must be checked word by word.",
    "examples": [
     {
      "text": "אָכַל → אֲכִילָה",
@@ -2005,9 +2996,12 @@
     "NOUN",
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.participles",
+     "value": "rich"
+    }
    ],
    "what": "Because the present is a participle, many agent nouns are simply present-tense forms: מוֹכֵר “sells” → “seller”, רוֹפֵא “doctor”, פּוֹעֵל “worker”, מוֹרֶה “teacher”, and in pi‘el מְקָרֵר “cooler” → “fridge”. Recognising the pattern links nouns to verbs.",
    "examples": [
@@ -2049,9 +3043,16 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.passive",
+     "value": "morphological"
+    },
+    {
+     "feature": "verb.causative",
+     "value": "affix"
+    }
    ],
    "what": "Voice and valency are expressed by changing the binyan, not by auxiliaries: hif‘il makes causatives (אָכַל → הֶאֱכִיל “fed”), nif‘al, pu‘al and huf‘al passives, hitpa‘el reflexives and reciprocals (הִתְלַבֵּשׁ “got dressed”, הִתְרָאוּ “saw each other”).",
    "examples": [
@@ -2088,18 +3089,221 @@
    "when": "cr.03, cr.07, later"
   },
   {
+   "id": "he.morph.no-antipassive",
+   "title": "No antipassive",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.antipassive",
+     "value": "none"
+    }
+   ],
+   "what": "There is no verb form that removes or demotes the object to make a transitive verb intransitive. A transitive verb is simply used without an object, and the binyanim that change valency (nif‘al, hitpa‘el) make passives, reflexives and reciprocals, not antipassives.",
+   "examples": [
+    {
+     "text": "הִיא קוֹרֵאת סֵפֶר / הִיא קוֹרֵאת",
+     "translit": "hi koret sefer / hi koret",
+     "note": "she is reading a book / she is reading: the object is just left out"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it with the binyanim (cr.03, cr.07) for learners whose languages have an antipassive.",
+   "when": "cr.03"
+  },
+  {
+   "id": "he.morph.no-applicative",
+   "title": "No applicative: beneficiaries and tools with prepositions",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "ADP"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.applicative",
+     "value": "none"
+    }
+   ],
+   "what": "No verb affix adds a beneficiary, place or instrument as a new object. They are introduced by prepositions — לְ “for, to”, בִּשְׁבִיל “for”, בְּ “with (a tool)” — and the verb stays the same.",
+   "examples": [
+    {
+     "text": "בִּשַּׁלְתִּי לְךָ מָרָק",
+     "translit": "bishalti lekha marak",
+     "note": "I cooked soup for you"
+    },
+    {
+     "text": "כָּתַבְתִּי בְּעֵט",
+     "translit": "katavti be'et",
+     "note": "I wrote with a pen"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.core"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say in fn.prep.core that beneficiaries and instruments are prepositional phrases, for learners whose languages have applicatives.",
+   "when": "fd.11"
+  },
+  {
+   "id": "he.morph.no-particle-verbs",
+   "title": "No particle verbs",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.particleVerbs",
+     "value": "none"
+    }
+   ],
+   "what": "Verb meanings are not changed by particles or detachable prefixes. A different meaning is a different root or binyan (יָצָא “went out”, הוֹצִיא “took out”, נִכְנַס “went in”), or a verb with its fixed preposition, which belongs to the complement and stays before its noun.",
+   "examples": [
+    {
+     "text": "יָצָא / נִכְנַס",
+     "translit": "yatsa / nikhnas",
+     "note": "went out / went in: two different verbs, no particle"
+    },
+    {
+     "text": "הוֹצִיא אֶת הַזֶּבֶל",
+     "translit": "hotsi et hazevel",
+     "note": "took out the rubbish: hif‘il of the root of יָצָא"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.direction"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say in fn.direction that direction is in the verb, for learners whose languages have particle or prefixed verbs.",
+   "when": "fd.13"
+  },
+  {
+   "id": "he.morph.light-verbs",
+   "title": "Few light-verb expressions",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.lightVerbs",
+     "value": "rare"
+    }
+   ],
+   "what": "New verbs are made from roots and patterns (טִלְפֵּן “phoned”, סִמֵּס “texted”), not by noun + “do”. Only a handful of colloquial expressions use עָשָׂה “did” or נָתַן “gave” with a noun.",
+   "examples": [
+    {
+     "text": "סִמֵּס",
+     "translit": "simes",
+     "note": "he texted (from SMS): a new verb in a pattern"
+    },
+    {
+     "text": "עָשָׂה מִקְלַחַת",
+     "translit": "asa miklakhat",
+     "note": "took a shower: one of the few light-verb expressions"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.root.pattern"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Mention in fn.root.pattern that new verbs come from patterns, not from noun + light verb.",
+   "when": "fd.07"
+  },
+  {
+   "id": "he.morph.no-object-compounds",
+   "title": "No separable verb-object compounds",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.objectCompounds",
+     "value": "none"
+    }
+   ],
+   "what": "A verb and its object never form one word that other words can split: they are two words, and modifiers go on the object noun in ordinary syntax.",
+   "examples": [
+    {
+     "text": "אָכַלְנוּ אֲרוּחַת בֹּקֶר",
+     "translit": "akhalnu arukhat boker",
+     "note": "we had breakfast: verb + object noun"
+    },
+    {
+     "text": "הוּא שָׁר שִׁיר יָפֶה",
+     "translit": "hu shar shir yafe",
+     "note": "he sang a nice song: the adjective goes with the noun"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview for learners whose languages have separable verb-object compounds.",
+   "when": "fd.00"
+  },
+  {
    "id": "he.morph.adjective",
    "title": "Adjectives: four forms and the article",
    "area": "morphology",
    "pos": [
     "ADJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number"
+    }
    ],
    "what": "An adjective has masculine and feminine, singular and plural forms (גָּדוֹל, גְּדוֹלָה, גְּדוֹלִים, גְּדוֹלוֹת) and takes the article when its noun is definite. The few invariable words (בְּסֵדֶר) are exceptions.",
    "examples": [
@@ -2144,11 +3348,14 @@
    "pos": [
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "Adjectives also have patterns: colours share קָטֹל (אָדֹם, כָּחֹל, יָרֹק → אֲדֻמָּה, כְּחֻלָּה), and the suffix -ִי makes adjectives from nouns and names (סִין → סִינִי “Chinese”), like the Arabic nisba.",
+   "what": "Adjectives also have patterns: colours share קָטֹל (אָדֹם, כָּחֹל, יָרֹק → אֲדֻמָּה, כְּחֻלָּה), and the suffix -ִי makes adjectives from nouns and names (סִין → סִינִי “Chinese”).",
    "examples": [
     {
      "text": "אָדֹם → אֲדֻמָּה",
@@ -2191,8 +3398,13 @@
     "ADJ",
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.reduplication",
+     "value": "partial-or-both"
+    }
+   ],
    "what": "Repeating the last two root letters makes diminutives and weakened adjectives: קָטָן → קְטַנְטַן “tiny”, אָדֹם → אֲדַמְדַּם “reddish”, בָּצָל → בְּצַלְצַל “shallot (little onion)”.",
    "examples": [
     {
@@ -2225,6 +3437,49 @@
    "when": "fd.17, later"
   },
   {
+   "id": "he.morph.no-incorporation",
+   "title": "No noun incorporation",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "morph.incorporation",
+     "value": "none"
+    }
+   ],
+   "what": "An object is never built into the verb word: it stays a separate noun phrase after the verb (with אֶת when definite). New verbs are formed from roots and patterns (טִלְפֵּן “phoned” from טֶלֶפוֹן), not by fusing a noun into a verb.",
+   "examples": [
+    {
+     "text": "הוּא קוֹרֵא עִתּוֹן",
+     "translit": "hu kore iton",
+     "note": "he is reading a newspaper: the object is a separate word"
+    },
+    {
+     "text": "שָׁתִינוּ קָפֶה",
+     "translit": "shatinu kafe",
+     "note": "we drank coffee"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview (or a Hebrew text for fn.incorporation, status absent) for learners whose languages incorporate objects.",
+   "when": "fd.00"
+  },
+  {
    "id": "he.morph.comparison",
    "title": "Comparison with words, not endings",
    "area": "morphology",
@@ -2232,12 +3487,18 @@
     "ADJ",
     "ADV"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "analytic"
+    },
+    {
+     "feature": "syn.comparison",
+     "value": "locational"
+    }
    ],
-   "what": "Hebrew adjectives have no comparative or superlative forms: “bigger” is גָּדוֹל יוֹתֵר (or יוֹתֵר גָּדוֹל), “than” is מִ / מֵאֲשֶׁר, “the most” is הֲכִי (everyday) or בְּיוֹתֵר after the adjective (formal). There are no irregular forms.",
+   "what": "Adjectives have no comparative or superlative forms: “bigger” is גָּדוֹל יוֹתֵר (or יוֹתֵר גָּדוֹל), the standard of comparison takes מִ “from” (or מֵאֲשֶׁר before a clause), and “the most” is הֲכִי (everyday) or בְּיוֹתֵר after the adjective (formal). There are no irregular forms.",
    "examples": [
     {
      "text": "גָּדוֹל יוֹתֵר מֵהַדִּירָה",
@@ -2278,9 +3539,12 @@
     "ADV",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    }
    ],
    "what": "Many adverbs are בְּ + a noun (בְּקָרוֹב “soon”, בֶּאֱמֶת “really”, בְּשִׂמְחָה “gladly”), and the masculine singular adjective serves as an adverb (הוּא מְדַבֵּר יָפֶה “he speaks nicely”). The formal pattern is בְּאֹפֶן + adjective.",
    "examples": [
@@ -2322,11 +3586,22 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    },
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "plural"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    }
    ],
-   "what": "Numbers 1–19 have a masculine and a feminine form, chosen by the counted noun — and for 3–10 the form in -ָה goes with masculine nouns (שְׁלוֹשָׁה סְפָרִים, שָׁלוֹשׁ מִטּוֹת), as in Arabic. Plain counting, prices and the clock use the feminine. One follows its noun; two and 3–10 have construct forms before a noun or a definite noun (שְׁנֵי, שְׁלוֹשֶׁת הַ…). Everyday speech increasingly uses the feminine forms with masculine nouns too, which the norm counts as an error.",
+   "what": "Numbers 1–19 have a masculine and a feminine form, chosen by the counted noun — and for 3–10 the form in -ָה goes with masculine nouns (שְׁלוֹשָׁה סְפָרִים, שָׁלוֹשׁ מִטּוֹת). Plain counting, prices and the clock use the feminine. One follows its noun; every other number precedes it, and the noun is plural. Two and 3–10 have construct forms before a noun or a definite noun (שְׁנֵי, שְׁלוֹשֶׁת הַ…). Everyday speech increasingly uses the feminine forms with masculine nouns too, which the norm counts as an error.",
    "examples": [
     {
      "text": "שְׁלוֹשָׁה סְפָרִים / שָׁלוֹשׁ מִטּוֹת",
@@ -2373,6 +3648,100 @@
    "when": "fd.05"
   },
   {
+   "id": "he.numbers.tens-units",
+   "title": "Twenty-one is “twenty and one”",
+   "area": "numbers",
+   "pos": [
+    "NUM"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.order",
+     "value": "tens-first"
+    }
+   ],
+   "what": "From 21 on, the tens come first and the units follow with וְ “and”: עֶשְׂרִים וְאַחַת. Hundreds and thousands also come first. The teens are unit + “ten” (אַחַת־עֶשְׂרֵה), with the gender of the counted noun.",
+   "examples": [
+    {
+     "text": "עֶשְׂרִים וְאַחַת",
+     "translit": "esrim ve'akhat",
+     "note": "21"
+    },
+    {
+     "text": "מֵאָה עֶשְׂרִים וְשָׁלוֹשׁ",
+     "translit": "me'a esrim veshalosh",
+     "note": "123"
+    },
+    {
+     "text": "אַחַת־עֶשְׂרֵה",
+     "translit": "akhat-esre",
+     "note": "11: in the teens the unit comes first"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.numerals teaches the numbers up to the course's needs; larger compound numbers come later (numbers II).",
+   "when": "fd.05, later"
+  },
+  {
+   "id": "he.numbers.large",
+   "title": "Large numbers by thousands",
+   "area": "numbers",
+   "pos": [
+    "NUM"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.largeNumbers",
+     "value": "thousands"
+    }
+   ],
+   "what": "Large numbers are grouped by thousands: אֶלֶף 1,000, מִילְיוֹן 1,000,000, מִילְיַארְד 10⁹. 2,000 is a dual (אַלְפַּיִם), 3,000–10,000 are the construct numeral + אֲלָפִים (שְׁלוֹשֶׁת אֲלָפִים), and above that the number + אֶלֶף (עֶשְׂרִים אֶלֶף). Digits are grouped in threes.",
+   "examples": [
+    {
+     "text": "אַלְפַּיִם",
+     "translit": "alpayim",
+     "note": "2,000 — a dual"
+    },
+    {
+     "text": "שְׁלוֹשֶׁת אֲלָפִים",
+     "translit": "shloshet alafim",
+     "note": "3,000"
+    },
+    {
+     "text": "עֶשְׂרִים אֶלֶף",
+     "translit": "esrim elef",
+     "note": "20,000"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not yet in the course (numbers II).",
+   "when": "later"
+  },
+  {
    "id": "he.numbers.ordinals",
    "title": "Ordinals only up to ten",
    "area": "numbers",
@@ -2380,8 +3749,13 @@
     "ADJ",
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
+   ],
    "what": "Ordinal numbers exist only from 1 to 10 (רִאשׁוֹן, שֵׁנִי, שְׁלִישִׁי … עֲשִׂירִי) and agree like adjectives. From 11 on, the cardinal number with the article follows the noun: הַיּוֹם הָעֶשְׂרִים “the twentieth day”. The weekday names are built on the ordinals.",
    "examples": [
     {
@@ -2416,9 +3790,12 @@
     "NUM",
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
    ],
    "what": "The clock uses feminine numbers because שָׁעָה is feminine (הַשָּׁעָה שָׁלוֹשׁ וָחֵצִי), the date is the day + בְּ + month (עֶשְׂרִים בְּמַאי), and age is “son / daughter of” + a feminine number, because שָׁנִים is feminine: הוּא בֶּן שָׁלוֹשׁ.",
    "examples": [
@@ -2469,12 +3846,22 @@
     "VERB",
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    },
+    {
+     "feature": "syn.beSplit",
+     "value": "same"
+    },
+    {
+     "feature": "adj.predicative",
+     "value": "nonverbal"
+    }
    ],
-   "what": "A present-tense sentence about what something is or where it is has no verb: אֲנִי סְטוּדֶנְט “I (am) a student”. Between two nouns a pronoun agreeing with the subject can stand in for “is” (יֶלֶד הוּא אָדָם). הָיָה appears in the past and future. Russian works the same way (я студент).",
+   "what": "A present-tense sentence about what something is, what it is like or where it is has no verb: אֲנִי סְטוּדֶנְט “I (am) a student”, הַבַּיִת גָּדוֹל “the house (is) big”, הוּא בַּבַּיִת “he (is) at home”. Identity, quality and location are built the same way, and adjectives do not conjugate. Between two nouns a pronoun agreeing with the subject can stand in for “is” (יֶלֶד הוּא אָדָם). הָיָה appears in the past and future.",
    "examples": [
     {
      "text": "אֲנִי סְטוּדֶנְט",
@@ -2522,13 +3909,14 @@
     "ADP",
     "PART"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
+    }
    ],
-   "what": "Hebrew has no verb “have”: יֵשׁ לִי אָח is “there is to me a brother”. The negative is אֵין. In the past and future הָיָה agrees with the thing owned, not with the owner (הָיְתָה לִי דִּירָה). Russian у меня есть and Turkish var work the same way.",
+   "what": "There is no verb “have”: יֵשׁ לִי אָח is “there is to me a brother”. The negative is אֵין. In the past and future הָיָה agrees with the thing owned, not with the owner (הָיְתָה לִי דִּירָה).",
    "examples": [
     {
      "text": "יֵשׁ לִי אָח",
@@ -2572,11 +3960,18 @@
    "pos": [
     "ADP"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "prepositional-clitics"
+    },
+    {
+     "feature": "syn.alignment",
+     "value": "accusative"
+    }
    ],
-   "what": "A definite direct object is introduced by אֶת, which has no translation: הוּא אוֹכֵל אֶת הַתַּפּוּחַ, but הוּא אוֹכֵל תַּפּוּחַ. With a pronoun it becomes אוֹתִי, אוֹתְךָ, אוֹתוֹ … It works like the Turkish accusative -(y)ı, which marks only definite objects.",
+   "what": "A definite direct object is introduced by אֶת, a word with no meaning of its own: הוּא אוֹכֵל אֶת הַתַּפּוּחַ, but הוּא אוֹכֵל תַּפּוּחַ. With a pronoun it becomes אוֹתִי, אוֹתְךָ, אוֹתוֹ … The subject of a transitive verb and of an intransitive verb are treated alike (no marker, verb agreement); only the definite object is marked.",
    "examples": [
     {
      "text": "הוּא אוֹכֵל תַּפּוּחַ / הוּא אוֹכֵל אֶת הַתַּפּוּחַ",
@@ -2616,13 +4011,30 @@
    "title": "Word order: SVO, modifiers after the noun",
    "area": "syntax",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "en",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "SVO"
+    },
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "noun-adj"
+    },
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "noun-dem"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    },
+    {
+     "feature": "syn.obliquePosition",
+     "value": "VOX"
+    }
    ],
-   "what": "The neutral order is subject – verb – object; adjectives, demonstratives and possessives follow the noun, numbers precede it (except אֶחָד). Questions and subordinate clauses keep the same order. Formal and narrative style may put the verb before the subject after an opening adverb or object.",
+   "what": "The neutral order is subject – verb – object, and phrases of place, time and manner usually follow the verb and the object. Adjectives, demonstratives and possessives follow the noun; numbers precede it (except אֶחָד). Questions and subordinate clauses keep the same order. Formal and narrative style may put the verb before the subject after an opening adverb or object.",
    "examples": [
     {
      "text": "הַיֶּלֶד הַקָּטָן אוֹכֵל אֶת הַלֶּחֶם",
@@ -2658,6 +4070,89 @@
    "when": "fd.07, fd.18, later"
   },
   {
+   "id": "he.syntax.no-verb-second",
+   "title": "No verb-second rule",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "none"
+    }
+   ],
+   "what": "The finite verb has no fixed second position. After a fronted time word or object the subject usually stays before the verb; in formal and narrative style the verb may come before the subject, but this is optional. Subordinate clauses keep the main-clause order.",
+   "examples": [
+    {
+     "text": "אֶתְמוֹל דָּנָה הָלְכָה לַיָּם",
+     "translit": "etmol Dana halkha layam",
+     "note": "yesterday Dana went to the sea: the subject before the verb"
+    },
+    {
+     "text": "אֶתְמוֹל הָלְכָה דָּנָה לַיָּם",
+     "translit": "etmol halkha Dana layam",
+     "note": "the same, in formal or narrative order"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say in fn.connectors / word order that the verb does not move after a fronted word or in a subordinate clause.",
+   "when": "fd.18"
+  },
+  {
+   "id": "he.syntax.topic",
+   "title": "Built around the subject; topics fronted with a pronoun",
+   "area": "syntax",
+   "pos": [
+    "PRON",
+    "NOUN"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.topicProminence",
+     "value": "subject-prominent"
+    }
+   ],
+   "what": "Sentences are organised around a grammatical subject, with which the verb agrees. A topic can still be put first and taken up again with a pronoun, which is very common in speech: הַסֵּפֶר הַזֶּה, קָרָאתִי אוֹתוֹ “this book, I've read it”.",
+   "examples": [
+    {
+     "text": "הַסֵּפֶר הַזֶּה, קָרָאתִי אוֹתוֹ",
+     "translit": "hasefer haze, karati oto",
+     "note": "this book, I've read it"
+    },
+    {
+     "text": "דָּנָה, אַבָּא שֶׁלָּהּ רוֹפֵא",
+     "translit": "Dana, aba shela rofe",
+     "note": "Dana, her father is a doctor"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Topic fronting with a resumptive pronoun is not taught yet.",
+   "when": "later"
+  },
+  {
    "id": "he.syntax.agreement",
    "title": "Agreement in gender and number",
    "area": "syntax",
@@ -2667,14 +4162,18 @@
     "PRON",
     "DET"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number"
+    },
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
    ],
-   "what": "Verbs, adjectives, demonstratives and pronouns agree with the noun's gender and number; a mixed group is masculine. Unlike Arabic, plural things take plural agreement (הַסְּפָרִים הָאֵלֶּה, הֵם).",
+   "what": "Verbs, adjectives, demonstratives and pronouns agree with the noun's gender and number; a mixed group is masculine. Plural nouns for things take plural agreement, like plural nouns for people (הַסְּפָרִים הָאֵלֶּה, הֵם).",
    "examples": [
     {
      "text": "הַמִּטָּה הָיְתָה שָׁם",
@@ -2723,12 +4222,22 @@
     "DET",
     "PRON"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar",
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    },
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "noun-adj"
+    },
+    {
+     "feature": "adj.predicative",
+     "value": "nonverbal"
+    }
    ],
-   "what": "An adjective or demonstrative after a definite noun takes the article too: הַבַּיִת הַגָּדוֹל “the big house”. Without it the same words form a sentence: הַבַּיִת גָּדוֹל “the house is big”. Greek has a similar repeated article (το σπίτι το μεγάλο), Arabic the same rule.",
+   "what": "An adjective or demonstrative after a definite noun takes the article too: הַבַּיִת הַגָּדוֹל “the big house”. Without it the same words form a sentence: הַבַּיִת גָּדוֹל “the house is big”.",
    "examples": [
     {
      "text": "הַבַּיִת הַגָּדוֹל / הַבַּיִת גָּדוֹל",
@@ -2771,8 +4280,13 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.proDrop",
+     "value": "partial"
+    }
+   ],
    "what": "Because the present tense shows no person, the pronoun is required (אֲנִי אוֹכֵל). In the past and future the 1st and 2nd person endings show the person and the pronoun is usually left out (אָכַלְתִּי); in the 3rd person it is normally kept.",
    "examples": [
     {
@@ -2808,12 +4322,14 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ru",
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.proDrop",
+     "value": "partial"
+    }
    ],
-   "what": "A masculine plural verb without subject means “people, one” (קוֹרְאִים לִי דָּנָה “my name is Dana”). Feelings and states take לְ + the person and an unchanging masculine singular adjective (קַר לִי “I'm cold”, קָשֶׁה לִי “it's hard for me”), like Russian мне холодно. Modals such as צָרִיךְ, אֶפְשָׁר, אָסוּר + infinitive are impersonal too.",
+   "what": "A masculine plural verb without subject means “people, one” (קוֹרְאִים לִי דָּנָה “my name is Dana”). Feelings and states take לְ + the person and an unchanging masculine singular adjective (קַר לִי “I'm cold”, קָשֶׁה לִי “it's hard for me”). Modals such as צָרִיךְ, אֶפְשָׁר, אָסוּר + infinitive are impersonal too.",
    "examples": [
     {
      "text": "קוֹרְאִים לִי דָּנָה",
@@ -2858,9 +4374,16 @@
    "pos": [
     "SCONJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.relativeClauseOrder",
+     "value": "noun-rel"
+    },
+    {
+     "feature": "syn.relativizer",
+     "value": "invariant-particle"
+    }
    ],
    "what": "Relative clauses start with the invariable שֶׁ (formal אֲשֶׁר). When the noun is not the subject or object, a pronoun points back to it inside the clause: הַבַּיִת שֶׁאֲנִי גָּר בּוֹ “the house I live in (it)”. Prepositions are never left at the end.",
    "examples": [
@@ -2891,6 +4414,86 @@
    "when": "cr.06"
   },
   {
+   "id": "he.syntax.no-serial-verbs",
+   "title": "No serial verbs",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.serialVerbs",
+     "value": "none"
+    }
+   ],
+   "what": "Bare verbs are not strung together in one clause to express direction, instrument, purpose or result: the second verb is an infinitive, the clauses are joined with וְ, or a preposition does the job.",
+   "examples": [
+    {
+     "text": "חָתַךְ אֶת הַלֶּחֶם בְּסַכִּין",
+     "translit": "khatakh et halekhem besakin",
+     "note": "he cut the bread with a knife: a preposition, not a second verb"
+    },
+    {
+     "text": "הָלַכְתִּי לִקְנוֹת לֶחֶם",
+     "translit": "halakhti liknot lekhem",
+     "note": "I went to buy bread: the second verb is an infinitive"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview for learners whose languages have serial verbs.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.syntax.no-switch-reference",
+   "title": "No switch reference",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.switchReference",
+     "value": "none"
+    }
+   ],
+   "what": "A dependent verb does not show whether its subject is the same as that of the main verb. The person endings or a pronoun say who does what, and with the same subject an infinitive is used where possible (בָּאתִי כְּדֵי לַעֲזֹר “I came to help”).",
+   "examples": [
+    {
+     "text": "כְּשֶׁהִגַּעְתִּי, אָכַלְתִּי",
+     "translit": "kshehigati, akhalti",
+     "note": "when I arrived, I ate"
+    },
+    {
+     "text": "כְּשֶׁהִיא הִגִּיעָה, הוּא יָצָא",
+     "translit": "kshehi higia, hu yatsa",
+     "note": "when she arrived, he left: the pronouns show the change of subject"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview for learners whose languages have switch reference.",
+   "when": "fd.00"
+  },
+  {
    "id": "he.syntax.subordination",
    "title": "Subordinate clauses: שֶׁ, no word-order change",
    "area": "syntax",
@@ -2898,9 +4501,14 @@
     "SCONJ",
     "ADP"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "A subordinate clause keeps main-clause order (no German verb-final). “That” (שֶׁ) is written onto the next word and is never left out; preposition + שֶׁ makes a conjunction (לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ). Reported speech keeps its tense, and future events after כְּשֶׁ / אִם are in the future.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
+   ],
+   "what": "Subordinate clauses are finite clauses introduced by a conjunction, and they keep main-clause order: the verb does not move. “That” (שֶׁ) is written onto the next word and is never left out; preposition + שֶׁ makes a conjunction (לִפְנֵי שֶׁ, אַחֲרֵי שֶׁ, לַמְרוֹת שֶׁ). Reported speech keeps its tense, and future events after כְּשֶׁ / אִם are in the future.",
    "examples": [
     {
      "text": "אֲנִי יוֹדֵעַ שֶׁהוּא פֹּה",
@@ -2935,6 +4543,49 @@
    "when": "fd.18"
   },
   {
+   "id": "he.syntax.no-converbs",
+   "title": "No converbs: clauses joined with conjunctions",
+   "area": "syntax",
+   "pos": [
+    "VERB",
+    "SCONJ"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.converbs",
+     "value": "none"
+    }
+   ],
+   "what": "There is no non-finite verb form meaning “having done” or “while doing” for chaining clauses. Every clause has its own finite verb, joined by וְ “and”, כְּשֶׁ “when”, אַחֲרֵי שֶׁ “after”, or a preposition + verbal noun (אַחֲרֵי הָאֲרוּחָה “after the meal”).",
+   "examples": [
+    {
+     "text": "קַמְתִּי, הִתְלַבַּשְׁתִּי וְיָצָאתִי",
+     "translit": "kamti, hitlabashti veyatsati",
+     "note": "I got up, got dressed and went out: three finite verbs"
+    },
+    {
+     "text": "כְּשֶׁהִגַּעְתִּי, הוּא כְּבָר יָצָא",
+     "translit": "kshehigati, hu kvar yatsa",
+     "note": "when I arrived, he had already left"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.connectors teaches the conjunctions; say that they replace converbs for learners whose languages chain clauses with converbs.",
+   "when": "fd.18"
+  },
+  {
    "id": "he.syntax.questions",
    "title": "Questions without inversion",
    "area": "syntax",
@@ -2943,14 +4594,22 @@
     "ADV",
     "PART"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle-optional"
+    },
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "initial"
+    },
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    }
    ],
-   "what": "Yes/no questions keep statement order and rise in intonation (formal writing may start with הַאִם). Question words go first; a preposition goes with the question word (עִם מִי?) and is never stranded. There is no “do”.",
+   "what": "Yes/no questions keep statement order and rise in intonation; formal writing may open them with the particle הַאִם. Question words go first; a preposition goes with the question word (עִם מִי?) and is never stranded. No auxiliary verb is added and the verb does not move.",
    "examples": [
     {
      "text": "אַתָּה רוֹצֶה קָפֶה?",
@@ -2994,13 +4653,22 @@
     "PART",
     "PRON"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.negationPosition",
+     "value": "before-verb"
+    },
+    {
+     "feature": "syn.negativeConcord",
+     "value": "concord"
+    }
    ],
-   "what": "לֹא negates verbs and predicates; אֵין negates existence and possession in the present (and formally the verbless sentence). Negative words need לֹא as well (אַף אֶחָד לֹא …), as in Greek and Russian. Commands are negated with אַל.",
+   "what": "לֹא, placed before the verb or predicate, negates it; אֵין negates existence and possession in the present (and formally the verbless sentence). Negative words need לֹא as well (אַף אֶחָד לֹא …). Commands are negated with אַל.",
    "examples": [
     {
      "text": "אֵין לִי זְמַן",
@@ -3041,15 +4709,14 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
    ],
-   "what": "Each verb takes a fixed preposition or אֶת, often different from English or Greek: חִכָּה לְ “wait for”, נִכְנַס לְ “go into”, יָצָא מִ “go out of”, עָזַב אֶת “leave”, עָזַר לְ “help”, פָּחַד מִ “be afraid of”; adjectives too: קָרוֹב לְ “close to”, רָחוֹק מִ “far from”.",
+   "what": "Each verb takes a fixed preposition or אֶת, which must be learned with it: חִכָּה לְ “wait for”, נִכְנַס לְ “go into”, יָצָא מִ “go out of”, עָזַב אֶת “leave”, עָזַר לְ “help”, פָּחַד מִ “be afraid of”; adjectives too: קָרוֹב לְ “close to”, רָחוֹק מִ “far from”. All of them are prepositions, standing before their noun.",
    "examples": [
     {
      "text": "מְחַכֶּה לָאוֹטוֹבּוּס",
@@ -3090,8 +4757,13 @@
     "ADV",
     "ADP"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
+   ],
    "what": "Place, goal and source are three prepositions (בְּ, לְ, מִ) and three question words (אֵיפֹה, לְאָן, מֵאֵיפֹה). A few words keep an old ending -ָה “towards”: הַבַּיְתָה “home(wards)”, הַחוּצָה “out”, שְׂמֹאלָה “to the left”.",
    "examples": [
     {
@@ -3130,15 +4802,119 @@
    "when": "fd.12, fd.13"
   },
   {
+   "id": "he.sem.motion-path",
+   "title": "Direction in the verb: נִכְנַס, יָצָא, עָלָה, יָרַד",
+   "area": "semantics",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.motionFraming",
+     "value": "verb-framed"
+    }
+   ],
+   "what": "Motion verbs usually name the path: נִכְנַס “go in”, יָצָא “go out”, עָלָה “go up”, יָרַד “go down”, עָבַר “cross”, חָזַר “go back”. The manner, if said at all, is added with a phrase (בְּרִיצָה “at a run”); verbs of manner (רָץ “run”) take a preposition for the goal.",
+   "examples": [
+    {
+     "text": "הוּא נִכְנַס לַבַּיִת",
+     "translit": "hu nikhnas labayit",
+     "note": "he went into the house"
+    },
+    {
+     "text": "הִיא יָצְאָה בְּרִיצָה",
+     "translit": "hi yats'a beritsa",
+     "note": "she ran out — “went out at a run”"
+    },
+    {
+     "text": "עָלִינוּ בַּמַּדְרֵגוֹת",
+     "translit": "alinu bamadregot",
+     "note": "we went up the stairs"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.direction"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.direction teaches the path verbs; say that the manner is an optional phrase, for learners whose languages put manner in the verb.",
+   "when": "fd.13"
+  },
+  {
+   "id": "he.sem.location",
+   "title": "Where things are: no posture verbs needed",
+   "area": "semantics",
+   "pos": [
+    "VERB",
+    "ADP"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.positionVerbs",
+     "value": "generic"
+    }
+   ],
+   "what": "The location of a thing is stated with no verb in the present (הַסֵּפֶר עַל הַשֻּׁלְחָן “the book is on the table”), with נִמְצָא “is located”, or with יֵשׁ “there is”; past and future use הָיָה. Posture verbs (עוֹמֵד “stands”, שׁוֹכֵב “lies”, יוֹשֵׁב “sits”) describe people and animals, and things only for emphasis.",
+   "examples": [
+    {
+     "text": "הַסֵּפֶר עַל הַשֻּׁלְחָן",
+     "translit": "hasefer al hashulkhan",
+     "note": "the book is on the table: no verb"
+    },
+    {
+     "text": "אֵיפֹה נִמְצָא הַבַּנְק?",
+     "translit": "eyfo nimtsa habank?",
+     "note": "where is the bank?"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.place",
+     "fn.copula"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The course has verbless locations (fn.prep.place, fn.copula) but does not say that things need no posture verb, and נִמְצָא is not yet taught.",
+   "when": "fd.12"
+  },
+  {
    "id": "he.syntax.tense-aspect",
-   "title": "Three tenses, no aspect; habitual with הָיָה",
+   "title": "Three tenses, no grammatical aspect; habitual with הָיָה",
    "area": "syntax",
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "Hebrew has a past, a present and a future, but no grammatical aspect and no progressive: אֲנִי אוֹכֵל is “I eat” and “I am eating”. A habitual or repeated past is הָיָה + the present form: הָיִיתִי הוֹלֵךְ “I used to go”. Russian and Greek learners have to drop their perfective/imperfective habit.",
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "obligatory"
+    },
+    {
+     "feature": "verb.perfective",
+     "value": "none"
+    },
+    {
+     "feature": "verb.progressive",
+     "value": "none"
+    }
+   ],
+   "what": "Every finite verb is in one of three tenses — past, present or future — and the tense must be chosen. There is no grammatical aspect: no perfective / imperfective pair and no progressive, so אֲנִי אוֹכֵל is “I eat” and “I am eating”, and one past form covers a finished event and an ongoing one. A habitual or repeated past is הָיָה + the present form: הָיִיתִי הוֹלֵךְ “I used to go”.",
    "examples": [
     {
      "text": "אֲנִי אוֹכֵל",
@@ -3168,6 +4944,215 @@
    "when": "fd.07, cr.01"
   },
   {
+   "id": "he.morph.no-perfect",
+   "title": "No perfect: the simple past does the job",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "none"
+    }
+   ],
+   "what": "There is no form for “has done”: the simple past serves both for a finished event and for a result that matters now, often with כְּבָר “already” or עוֹד לֹא “not yet”. A state lasting until now is in the present with a time phrase.",
+   "examples": [
+    {
+     "text": "כְּבָר אָכַלְתִּי",
+     "translit": "kvar akhalti",
+     "note": "I have already eaten: the simple past"
+    },
+    {
+     "text": "אֲנִי גָּר פֹּה כְּבָר שָׁנָה",
+     "translit": "ani gar po kvar shana",
+     "note": "I have lived here for a year: the present"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it with the past tense (cr.01) for learners whose languages have a perfect.",
+   "when": "cr.01"
+  },
+  {
+   "id": "he.morph.no-subjunctive",
+   "title": "No subjunctive: the future after שֶׁ",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "SCONJ"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.subjunctive",
+     "value": "none"
+    }
+   ],
+   "what": "There is no special mood for wishes, purposes or requests in subordinate clauses: they use the future after שֶׁ or כְּדֵי שֶׁ “so that”. With the same subject the infinitive is used.",
+   "examples": [
+    {
+     "text": "אֲנִי רוֹצֶה שֶׁתָּבוֹא",
+     "translit": "ani rotse shetavo",
+     "note": "I want you to come — “that you will come”"
+    },
+    {
+     "text": "אֲנִי רוֹצֶה לָבוֹא",
+     "translit": "ani rotse lavo",
+     "note": "I want to come — the same subject: the infinitive"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it with the future (cr.02) and the conditional (cr.05) for learners whose languages have a subjunctive.",
+   "when": "cr.02"
+  },
+  {
+   "id": "he.morph.no-optative",
+   "title": "No optative: wishes with הַלְוַאי or the future",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.optative",
+     "value": "none"
+    }
+   ],
+   "what": "No verb form is reserved for wishes. Wishes use הַלְוַאי (שֶׁ) “if only” + a verb, the ordinary future in blessings (תִּהְיֶה בָּרִיא, תִּתְחַדֵּשׁ), or a noun phrase (רְפוּאָה שְׁלֵמָה, מַזָּל טוֹב).",
+   "examples": [
+    {
+     "text": "הַלְוַאי שֶׁיֵּרֵד גֶּשֶׁם",
+     "translit": "halevay sheyered geshem",
+     "note": "if only it would rain"
+    },
+    {
+     "text": "תִּהְיֶה בָּרִיא",
+     "translit": "tihye bari",
+     "note": "be healthy (bless you) — the future as a wish"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say in fn.greetings that the wishes are ordinary futures or noun phrases, and add הַלְוַאי later.",
+   "when": "fd.02, later"
+  },
+  {
+   "id": "he.morph.no-evidentials",
+   "title": "No evidentials: the source is said in words",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "ADV"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.evidentiality",
+     "value": "none"
+    }
+   ],
+   "what": "The verb does not show whether the speaker saw the event, inferred it or heard about it. When the source matters it is said in words: כַּנִּרְאֶה “apparently”, שָׁמַעְתִּי שֶׁ… “I heard that”, לְפִי… “according to”, אוֹמְרִים שֶׁ… “they say that”.",
+   "examples": [
+    {
+     "text": "הוּא נָסַע לְאֵילַת",
+     "translit": "hu nasa le'Eylat",
+     "note": "he went to Eilat: the same form whether seen or heard"
+    },
+    {
+     "text": "שָׁמַעְתִּי שֶׁהוּא נָסַע לְאֵילַת",
+     "translit": "shamati shehu nasa le'Eylat",
+     "note": "I heard he went to Eilat"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview for learners whose languages have evidentials.",
+   "when": "fd.00"
+  },
+  {
+   "id": "he.morph.no-mirative",
+   "title": "No mirative: surprise by intonation and words",
+   "area": "morphology",
+   "pos": [
+    "INTJ"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.mirativity",
+     "value": "none"
+    }
+   ],
+   "what": "Nothing in the verb marks new or surprising information. Surprise is carried by intonation and by words such as וָאוּ, מָה?!, אֵיזֶה … ! “what a …!” or פִּתְאוֹם “suddenly”.",
+   "examples": [
+    {
+     "text": "הוּא פֹּה?!",
+     "translit": "hu po?!",
+     "note": "he's here?! — intonation only"
+    },
+    {
+     "text": "אֵיזֶה יֹפִי!",
+     "translit": "eyze yofi!",
+     "note": "how lovely!"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it in the overview for learners whose languages have a mirative.",
+   "when": "fd.00"
+  },
+  {
    "id": "he.syntax.conditional",
    "title": "Real and unreal conditions",
    "area": "syntax",
@@ -3175,12 +5160,12 @@
     "SCONJ",
     "VERB"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.conditional",
+     "value": "auxiliary-or-particle"
+    }
    ],
    "what": "Real conditions use אִם with the future (or present); unreal ones use לוּ / אִלּוּ with the past (or הָיָה + the present form), and הָיָה + the present form in the main clause: אִלּוּ הָיָה לִי כֶּסֶף, הָיִיתִי קוֹנֶה. There is no subjunctive mood.",
    "examples": [
@@ -3218,11 +5203,14 @@
     "NOUN",
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
    ],
-   "what": "With time words the article means “this”: הַיּוֹם “today” (the day), הַבֹּקֶר “this morning”, הַלַּיְלָה “tonight”, הַשָּׁנָה “this year”. Arabic اليوم “today” is the same.",
+   "what": "With time words the article means “this”: הַיּוֹם “today” (the day), הַבֹּקֶר “this morning”, הַלַּיְלָה “tonight”, הַשָּׁנָה “this year”.",
    "examples": [
     {
      "text": "הַיּוֹם / הַבֹּקֶר / הַלַּיְלָה",
@@ -3258,11 +5246,14 @@
     "DET",
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
    ],
-   "what": "כָּל before a definite noun means “all, the whole” and before an indefinite singular noun “every”: כָּל הַיּוֹם “the whole day”, כָּל יוֹם “every day”. Alone it takes personal endings: כֻּלָּם “everyone”, כֻּלָּנוּ “all of us”. Arabic kull behaves alike.",
+   "what": "כָּל before a definite noun means “all, the whole” and before an indefinite singular noun “every”: כָּל הַיּוֹם “the whole day”, כָּל יוֹם “every day”. Alone it takes personal endings: כֻּלָּם “everyone”, כֻּלָּנוּ “all of us”.",
    "examples": [
     {
      "text": "כָּל הַיּוֹם / כָּל יוֹם",
@@ -3297,7 +5288,7 @@
   },
   {
    "id": "he.lex.semantic-splits",
-   "title": "One English word, several Hebrew words",
+   "title": "Everyday concepts split by manner and object",
    "area": "lexicon",
    "pos": [
     "VERB",
@@ -3305,15 +5296,14 @@
     "ADJ",
     "ADP"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.wearVerbs",
+     "value": "several"
+    }
    ],
-   "what": "Hebrew splits several everyday concepts by an axis English does not mark: going on foot or by vehicle (הָלַךְ / נָסַע), leaving a place or leaving something behind (יָצָא / עָזַב), and above all “wearing”: clothes, shoes and hats each have their own verb (לָבַשׁ, נָעַל, חָבַשׁ). See “distinctions” for the full list.",
+   "what": "Several everyday concepts are split into separate words: going on foot or by vehicle (הָלַךְ / נָסַע), leaving a place or leaving something behind (יָצָא / עָזַב), and above all “wearing”: clothes, shoes and hats each have their own verb (לָבַשׁ, נָעַל, חָבַשׁ). See “distinctions” for the full list.",
    "examples": [
     {
      "text": "לָבַשׁ חֻלְצָה / נָעַל נַעֲלַיִם / חָבַשׁ כּוֹבַע",
@@ -3346,6 +5336,126 @@
    "when": "fd.13, later"
   },
   {
+   "id": "he.lex.know-verbs",
+   "title": "Two verbs of knowing: יָדַע and הִכִּיר",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.knowVerbs",
+     "value": "two"
+    }
+   ],
+   "what": "יָדַע “know” takes facts, clauses and skills (אֲנִי יוֹדֵעַ לִשְׂחוֹת “I can swim”); הִכִּיר “know, be acquainted with” takes people, places and things one is familiar with. See “distinctions”.",
+   "examples": [
+    {
+     "text": "אֲנִי יוֹדֵעַ אֵיפֹה הוּא גָּר",
+     "translit": "ani yode'a eyfo hu gar",
+     "note": "I know where he lives"
+    },
+    {
+     "text": "אֲנִי מַכִּיר אֶת דָּנָה",
+     "translit": "ani makir et Dana",
+     "note": "I know Dana"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not yet in the course: teach יָדַע / הִכִּיר as a pair.",
+   "when": "later"
+  },
+  {
+   "id": "he.lex.carry-verbs",
+   "title": "One general verb for carrying",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.carryVerbs",
+     "value": "general"
+    }
+   ],
+   "what": "Carrying is one verb whatever the manner — formal נָשָׂא, everyday סָחַב (also “lug, drag”) — in the hand, on the back or on the shoulder alike; the manner can be added with a phrase (עַל הַגַּב “on the back”). “Bring” (הֵבִיא) and “take” (לָקַח) are separate verbs of direction.",
+   "examples": [
+    {
+     "text": "הוּא סוֹחֵב תִּיק כָּבֵד",
+     "translit": "hu sokhev tik kaved",
+     "note": "he is carrying a heavy bag"
+    },
+    {
+     "text": "הִיא סוֹחֶבֶת אֶת הַיֶּלֶד עַל הַגַּב",
+     "translit": "hi sokhevet et hayeled al hagav",
+     "note": "she carries the child on her back: the same verb, the manner as a phrase"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not yet in the course.",
+   "when": "later"
+  },
+  {
+   "id": "he.lex.cut-verbs",
+   "title": "A general verb “cut”",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.cutVerbs",
+     "value": "general"
+    }
+   ],
+   "what": "חָתַךְ “cut” is used with a knife, scissors or anything else. More specific verbs exist for particular ways of cutting — גָּזַר “cut out (with scissors)”, קָצַץ “chop”, פָּרַס “slice” — but they are not required.",
+   "examples": [
+    {
+     "text": "חָתַכְתִּי אֶת הַלֶּחֶם",
+     "translit": "khatakhti et halekhem",
+     "note": "I cut the bread"
+    },
+    {
+     "text": "חָתַכְתִּי אֶת הַנְּיָר בְּמִסְפָּרַיִם",
+     "translit": "khatakhti et hanyar bemisparayim",
+     "note": "I cut the paper with scissors: the same verb"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Not yet in the course.",
+   "when": "later"
+  },
+  {
    "id": "he.sem.polysemy",
    "title": "One word, several meanings — and homographs",
    "area": "semantics",
@@ -3355,14 +5465,12 @@
     "ADJ",
     "ADP"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "en",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
    ],
    "what": "Many basic words cover several concepts: אָח is a brother and a male nurse, בַּעַל a husband and an owner, בְּבַקָּשָׁה both “please” and “you're welcome”. The unvocalized script adds homographs on top. See “polysemy” for the course words.",
    "examples": [
@@ -3404,14 +5512,14 @@
     "INTJ",
     "PRON"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.diglossia",
+     "value": "none"
+    }
    ],
-   "what": "Modern Hebrew keeps Biblical and Mishnaic words beside everyday ones, so many concepts have a formal and an everyday word: אִמָּא / אֵם, לָמָּה / מַדּוּעַ, פֹּה / כָּאן, קוֹרְאִים לִי / שְׁמִי, אֲנִי לֹא / אֵינֶנִּי. Writing, news and formal speech use the first layer much more than conversation.",
+   "what": "Modern Hebrew is one standard language — speech and writing share the same grammar — but it keeps Biblical and Mishnaic words beside everyday ones, so many concepts have a formal and an everyday word: אִמָּא / אֵם, לָמָּה / מַדּוּעַ, פֹּה / כָּאן, קוֹרְאִים לִי / שְׁמִי, אֲנִי לֹא / אֵינֶנִּי. Writing, news and formal speech use the formal layer much more than conversation.",
    "examples": [
     {
      "text": "אִמָּא / אֵם",
@@ -3457,14 +5565,12 @@
     "INTJ",
     "ADJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "en",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
    "what": "Everyday Hebrew is full of international loans (סְטוּדֶנְט, טֶלֶפוֹן, אוֹטוֹבּוּס) and slang from Arabic, Yiddish, English and Russian: יאללה “come on!” comes from Arabic. Loans keep their foreign sounds (no b/v alternation) and usually have no Semitic root.",
    "examples": [
@@ -3502,11 +5608,18 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.compounding",
+     "value": "restricted"
+    },
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
    ],
-   "what": "Many everyday nouns are construct pairs written as two words: בֵּית סֵפֶר “school”, בֵּית חוֹלִים “hospital”, עוֹרֵךְ דִּין “lawyer”, יוֹם הֻלֶּדֶת “birthday”. They inflect as a construct pair: the plural changes the first word, the article goes on the second.",
+   "what": "New concepts are rarely one compound word; many everyday nouns are construct pairs written as two words: בֵּית סֵפֶר “school”, בֵּית חוֹלִים “hospital”, עוֹרֵךְ דִּין “lawyer”, יוֹם הֻלֶּדֶת “birthday”. They inflect as a construct pair: the plural changes the first word, the article goes on the second. A few blends are written as one word (רַמְזוֹר “traffic light”, from רֶמֶז + אוֹר).",
    "examples": [
     {
      "text": "בֵּית חוֹלִים → בָּתֵּי חוֹלִים",
@@ -3546,11 +5659,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
    ],
-   "what": "בֶּן / בַּת “son / daughter of” and בַּעַל “owner of” form many words and expressions of belonging, age and quality: בֶּן אָדָם “person”, בֶּן זוּג “partner”, בֶּן שֵׁשׁ “six years old”, בַּעַל נִסָּיוֹן “experienced”. Arabic ibn / bint and ṣāḥib work alike.",
+   "what": "בֶּן / בַּת “son / daughter of” and בַּעַל “owner of”, in their construct forms, make many words and expressions of belonging, age and quality: בֶּן אָדָם “person”, בֶּן זוּג “partner”, בֶּן שֵׁשׁ “six years old”, בַּעַל נִסָּיוֹן “experienced”.",
    "examples": [
     {
      "text": "בֶּן אָדָם",
@@ -3597,12 +5713,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.uncleTerms",
+     "value": "lineal"
+    }
    ],
-   "what": "Hebrew does not split uncles and aunts by side (דּוֹד, דּוֹדָה; Arabic does), builds cousins from them (בֶּן דּוֹד “uncle's son”), and has a word for the parents of one's child's spouse, מְחֻתָּן / מְחֻתֶּנֶת — like Greek συμπέθερος and Russian сват. Everyday family words have a name-like form used without the article (אִמָּא, אַבָּא, סַבָּא, סָבְתָא).",
+   "what": "Uncles and aunts are not split by side of the family (דּוֹד, דּוֹדָה for both), cousins are built from them (בֶּן דּוֹד “uncle's son”), and there is a word for the parents of one's child's spouse, מְחֻתָּן / מְחֻתֶּנֶת. Everyday family words have a name-like form used without the article (אִמָּא, אַבָּא, סַבָּא, סָבְתָא).",
    "examples": [
     {
      "text": "דּוֹד",
@@ -3639,22 +5757,63 @@
    "when": "fd.06, later"
   },
   {
-   "id": "he.lex.false-friends",
-   "title": "False friends",
+   "id": "he.lex.no-sibling-age",
+   "title": "Brothers and sisters without relative age",
    "area": "lexicon",
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "en",
-    "ru",
-    "tr"
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "lex.siblingAge",
+     "value": "none"
+    }
    ],
-   "what": "Some Hebrew words look like words the learner knows but mean something else: קַנְיוֹן is a shopping mall (from קָנָה “buy”), not a canyon; פְּרוֹטֶקְצְיָה is pulling strings, as in Russian протекция, not “protection”.",
+   "what": "אָח “brother” and אָחוֹת “sister” do not say whether the sibling is older or younger; when it matters, an adjective is added: אָח גָּדוֹל “older (big) brother”, אָחוֹת קְטַנָּה “younger (little) sister”.",
+   "examples": [
+    {
+     "text": "אָח גָּדוֹל",
+     "translit": "akh gadol",
+     "note": "older brother — “big brother”"
+    },
+    {
+     "text": "אָחוֹת קְטַנָּה",
+     "translit": "akhot ktana",
+     "note": "younger sister — “little sister”"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.have",
+     "fn.possessive"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say it with the family words (fd.06) for learners whose languages split siblings by age.",
+   "when": "fd.06"
+  },
+  {
+   "id": "he.lex.false-friends",
+   "title": "Look-alike words with another meaning",
+   "area": "lexicon",
+   "pos": [
+    "NOUN"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ],
+   "what": "Some Hebrew words look like international words but are built from Hebrew roots or have taken another meaning: קַנְיוֹן is a shopping mall (from קָנָה “buy” + the noun ending -יוֹן), not a canyon; פְּרוֹטֶקְצְיָה is pulling strings, not “protection”. A word that sounds familiar must be checked.",
    "examples": [
     {
      "text": "קַנְיוֹן",
@@ -3682,18 +5841,21 @@
   },
   {
    "id": "he.lex.cognates",
-   "title": "Cognates with Arabic",
+   "title": "Roots shared with the other Semitic languages",
    "area": "lexicon",
    "pos": [
     "NOUN",
     "VERB",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "Hebrew and Arabic share thousands of roots, often with regular sound correspondences: שָׁלוֹם ~ سَلَام, בַּיִת ~ بَيْت, יוֹם ~ يَوْم, אָכַל ~ أَكَلَ. A learner of both can learn the pairs together (watch for the false friends).",
+   "what": "Hebrew shares thousands of roots with the other Semitic languages — Arabic, Aramaic, Amharic, Maltese and others — often with regular sound correspondences: שָׁלוֹם ~ Arabic سَلَام, בַּיִת ~ بَيْت, יוֹם ~ يَوْم, אָכַל ~ أَكَلَ. Many Semitic words also reached other languages through Arabic and Aramaic, so a root may be recognisable in borrowed words.",
    "examples": [
     {
      "text": "שָׁלוֹם ~ سَلَام",
@@ -3734,12 +5896,12 @@
    "title": "Idioms from the Bible and the Talmud",
    "area": "lexicon",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.diglossia",
+     "value": "none"
+    }
    ],
    "what": "Everyday Hebrew quotes its old texts: many idioms are Biblical or rabbinic phrases, used by secular and religious speakers alike.",
    "examples": [
@@ -3764,18 +5926,20 @@
   },
   {
    "id": "he.lex.colour-terms",
-   "title": "Blue and light blue",
+   "title": "Blue and light blue; green and blue",
    "area": "lexicon",
    "pos": [
     "ADJ",
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.greenBlue",
+     "value": "distinct"
+    }
    ],
-   "what": "Hebrew has a separate everyday word for light (sky) blue, תְּכֵלֶת, beside כָּחֹל “blue” — the colours of the flag are כָּחֹל־לָבָן, while the sky is תְּכֵלֶת. Russian (голубой / синий) and Greek (γαλάζιο / μπλε) split blue the same way.",
+   "what": "Green (יָרֹק) and blue (כָּחֹל) are separate basic colour words, and light (sky) blue has its own everyday word, תְּכֵלֶת: the colours of the flag are כָּחֹל־לָבָן, while the sky is תְּכֵלֶת.",
    "examples": [
     {
      "text": "כָּחֹל / תְּכֵלֶת",
@@ -3808,9 +5972,12 @@
     "INTJ",
     "ADP"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
    ],
    "what": "Talking to a man or a woman changes the pronoun (אַתָּה / אַתְּ), the verb, the possessive and many fixed phrases (מַה שְּׁלוֹמְךָ / מַה שְּׁלוֹמֵךְ, בּוֹא / בּוֹאִי). Mixed groups and generic texts use the masculine; modern writing often shows both with a slash.",
    "examples": [
@@ -3856,17 +6023,115 @@
    "when": "fd.01, fd.02"
   },
   {
+   "id": "he.prag.speaker-gender",
+   "title": "The speaker's own gender in “I” sentences",
+   "area": "pragmatics",
+   "pos": [
+    "VERB",
+    "ADJ"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.genderedSpeech",
+     "value": "grammatical"
+    }
+   ],
+   "what": "Speakers mark their own gender whenever a present-tense verb, an adjective or a participle refers to “I”: a man says אֲנִי עָיֵף, a woman אֲנִי עֲיֵפָה. The 1st person forms of the past and future verb are the same for both (אָכַלְתִּי, אֹכַל), but an adjective after הָיִיתִי still agrees.",
+   "examples": [
+    {
+     "text": "אֲנִי עָיֵף / אֲנִי עֲיֵפָה",
+     "translit": "ani ayef / ani ayefa",
+     "note": "I am tired (a man / a woman)"
+    },
+    {
+     "text": "אֲנִי לוֹמֵד / לוֹמֶדֶת עִבְרִית",
+     "translit": "ani lomed / lomedet ivrit",
+     "note": "I am learning Hebrew (a man / a woman)"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.present",
+     "fn.adjective"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "fn.present and fn.adjective teach the forms; production exercises do not yet use the learner's own gender for “I”.",
+   "when": "fd.07, fd.16"
+  },
+  {
+   "id": "he.morph.no-inclusive",
+   "title": "One “we”, inclusive or not",
+   "area": "morphology",
+   "pos": [
+    "PRON",
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "pron.inclusive",
+     "value": "none"
+    }
+   ],
+   "what": "אֲנַחְנוּ “we” is used whether or not the listener is included, with the same verb forms (-נוּ in the past, נ־ in the future); context shows who is meant.",
+   "examples": [
+    {
+     "text": "אֲנַחְנוּ הוֹלְכִים לַיָּם",
+     "translit": "anakhnu holkhim layam",
+     "note": "we are going to the sea — with or without the listener"
+    },
+    {
+     "text": "בּוֹא נֵלֵךְ",
+     "translit": "bo nelekh",
+     "note": "let's go (you and I) — the same “we” form"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.pronoun.subject"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Say in fn.pronoun.subject that אֲנַחְנוּ covers both, for learners whose languages have an inclusive “we”.",
+   "when": "fd.01"
+  },
+  {
    "id": "he.prag.no-tv",
-   "title": "No polite “you”, direct style",
+   "title": "No polite “you”, no speech levels, direct style",
    "area": "pragmatics",
    "pos": [
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "en"
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    },
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    },
+    {
+     "feature": "verb.honorifics",
+     "value": "none"
+    }
    ],
-   "what": "There is no T/V distinction: a friend, a teacher and a minister are all אַתָּה or אַתְּ, often with the first name. Politeness is carried by words (בְּבַקָּשָׁה, תּוֹדָה, סְלִיחָה) and tone; Israeli conversation is known for its directness.",
+   "what": "There is no T/V distinction: a friend, a teacher and a minister are all אַתָּה or אַתְּ, often with the first name. Verbs have no honorific or polite forms and no speech levels. Politeness is carried by words (בְּבַקָּשָׁה, תּוֹדָה, סְלִיחָה), by titles (אֲדוֹנִי “sir”, גְּבִרְתִּי “madam”) and by tone; Israeli conversation is known for its directness.",
    "examples": [
     {
      "text": "אַתָּה רוֹצֶה קָפֶה?",
@@ -3900,13 +6165,14 @@
    "pos": [
     "INTJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "ar",
-    "el",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.optative",
+     "value": "none"
+    }
    ],
-   "what": "Daily life is full of set phrases for occasions: שַׁבָּת שָׁלוֹם on Friday and Saturday, חַג שָׂמֵחַ for holidays, מַזָּל טוֹב “congratulations”, בְּתֵאָבוֹן “enjoy your meal”, לְחַיִּים “cheers”, רְפוּאָה שְׁלֵמָה “get well”, תִּתְחַדֵּשׁ / תִּתְחַדְּשִׁי for something new, and religious ones even in secular speech (בְּעֶזְרַת הַשֵּׁם, בָּרוּךְ הַשֵּׁם).",
+   "what": "Daily life is full of set phrases for occasions: שַׁבָּת שָׁלוֹם on Friday and Saturday, חַג שָׂמֵחַ for holidays, מַזָּל טוֹב “congratulations”, בְּתֵאָבוֹן “enjoy your meal”, לְחַיִּים “cheers”, רְפוּאָה שְׁלֵמָה “get well”, תִּתְחַדֵּשׁ / תִּתְחַדְּשִׁי for something new, and religious ones even in secular speech (בְּעֶזְרַת הַשֵּׁם, בָּרוּךְ הַשֵּׁם). Wishes are noun phrases or the ordinary future (תִּתְחַדֵּשׁ “may you renew yourself”), as there is no special wish form of the verb.",
    "examples": [
     {
      "text": "שַׁבָּת שָׁלוֹם",
@@ -3946,11 +6212,14 @@
    "pos": [
     "INTJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.optative",
+     "value": "none"
+    }
    ],
-   "what": "Some greetings have a set answer: בֹּקֶר טוֹב is answered בֹּקֶר אוֹר “morning of light”, as Arabic ṣabāḥ al-khayr is answered ṣabāḥ an-nūr. The reply is never used to open.",
+   "what": "Some greetings have a set answer: בֹּקֶר טוֹב “good morning” is answered בֹּקֶר אוֹר “morning of light”. The reply is never used to open. Greetings and their replies are noun phrases, not verb forms of wishing.",
    "examples": [
     {
      "text": "בֹּקֶר טוֹב — בֹּקֶר אוֹר",
@@ -3984,10 +6253,16 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "zh"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.calendar",
+     "value": "gregorian-plus-traditional"
+    },
+    {
+     "feature": "time.monthNames",
+     "value": "latin-derived"
+    }
    ],
    "what": "Daily life uses the Gregorian months (יָנוּאָר …), but the Hebrew lunisolar calendar fixes the holidays and is used for dates in religious and official contexts: twelve months (תִּשְׁרֵי … אֱלוּל) with a second Adar in leap years, and days that begin at sunset (עֶרֶב שַׁבָּת is Friday evening).",
    "examples": [
@@ -4029,13 +6304,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "ar",
-    "el",
-    "zh"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
    ],
-   "what": "The weekdays are numbered: יוֹם רִאשׁוֹן “first day” is Sunday, יוֹם שֵׁנִי Monday … יוֹם שִׁשִּׁי Friday; only שַׁבָּת has a name. The week starts on Sunday and the weekend is Friday–Saturday. Greek (Δευτέρα “second” = Monday, Τρίτη, Τετάρτη, Πέμπτη) and Arabic count the same way from Sunday; Chinese numbers its days from Monday (星期一).",
+   "what": "The weekdays are numbered: יוֹם רִאשׁוֹן “first day” is Sunday, יוֹם שֵׁנִי Monday … יוֹם שִׁשִּׁי Friday; only שַׁבָּת has a name. The week starts on Sunday and the weekend is Friday–Saturday.",
    "examples": [
     {
      "text": "יוֹם רִאשׁוֹן / יוֹם שֵׁנִי",
@@ -4100,7 +6376,7 @@
     "title": "root",
     "phenomenon": "he.morph.root",
     "type": "string",
-    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
+    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to cognates in the other Semitic languages. Loans, compounds and primary words say none, with the reason.",
     "none": true
    },
    {
@@ -4186,7 +6462,7 @@
     "title": "root",
     "phenomenon": "he.morph.root",
     "type": "string",
-    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason."
+    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to cognates in the other Semitic languages. Loans, compounds and primary words say none, with the reason."
    },
    {
     "id": "binyan",
@@ -4234,7 +6510,7 @@
      "prep": "enum:et|le|be|mi|al|im|el|none",
      "senses": "senses"
     },
-    "why": "Each verb takes its own preposition or אֶת (definite object), often unlike English or Greek: חִכָּה לְ, עָזַב אֶת, נָהַג בְּ; none = no complement or a bare complement."
+    "why": "Each verb takes its own preposition or אֶת (definite object), which must be learned with it: חִכָּה לְ, עָזַב אֶת, נָהַג בְּ; none = no complement or a bare complement."
    },
    {
     "id": "verbalNoun",
@@ -4279,7 +6555,7 @@
     "title": "root",
     "phenomenon": "he.morph.root",
     "type": "string",
-    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to Arabic cognates. Loans, compounds and primary words say none, with the reason.",
+    "why": "The root letters, separated by spaces (כ ת ב): the root links the word to its family and to cognates in the other Semitic languages. Loans, compounds and primary words say none, with the reason.",
     "none": true
    },
    {
@@ -4300,7 +6576,7 @@
      "prep": "enum:le|mi|be|al|im|el",
      "senses": "senses"
     },
-    "why": "Some adjectives take their own preposition: קָרוֹב לְ, רָחוֹק מִ, עָיֵף מִ, רָעֵב לְ."
+    "why": "Each verb takes its own preposition or אֶת (definite object), which must be learned with it: חִכָּה לְ, עָזַב אֶת, נָהַג בְּ; none = no complement or a bare complement."
    },
    {
     "id": "meaningForms",
@@ -4636,7 +6912,7 @@
      "value": "to a woman"
     }
    ],
-   "note": "Also the verb, the possessive and the imperative change; Arabic splits the same way."
+   "note": "Also the verb, the possessive and the imperative change with the addressee's gender."
   },
   {
    "concept": "verb.be",
@@ -4783,7 +7059,7 @@
      "value": "a university student, a woman"
     }
    ],
-   "note": "German Schüler / Student, Greek μαθητής / φοιτητής, Russian ученик / студент make the same split; Turkish öğrenci does not."
+   "note": "Split by where one studies (school or university) and by gender."
   },
   {
    "concept": "person.teacher",
@@ -4828,7 +7104,7 @@
      "value": "the reply to בֹּקֶר טוֹב"
     }
    ],
-   "note": "Arabic ṣabāḥ al-khayr / ṣabāḥ an-nūr."
+   "note": "בֹּקֶר אוֹר “morning of light” is only a reply, never an opening greeting."
   },
   {
    "concept": "greet.seeyou",
@@ -4982,7 +7258,7 @@
      "value": "a few things you count (כַּמָּה סְפָרִים)"
     }
    ],
-   "note": "Like English a few / a little, German ein paar / etwas."
+   "note": "קְצָת goes with things one does not count (an amount), כַּמָּה with plural count nouns (a number)."
   },
   {
    "concept": "quant.all",
@@ -5350,7 +7626,7 @@
      "value": "to what place? (direction)"
     }
    ],
-   "note": "German wo / wohin / woher, Russian где / куда / откуда, Turkish nerede / nereye / nereden."
+   "note": "A third word, מֵאֵיפֹה, asks “where from?”."
   },
   {
    "concept": "q.why",
@@ -5530,7 +7806,7 @@
      "value": "at someone’s (place): אֵצֶל סָבְתָא"
     }
    ],
-   "note": "Like German bei, French chez; Greek σε covers both."
+   "note": "אֵצֶל places something at a person: their home, their place of work."
   },
   {
    "concept": "prep.for",
@@ -5789,7 +8065,7 @@
      "value": "modern: the prefix כְּשֶׁ"
     }
    ],
-   "note": "Greek πότε / όταν, German wann / wenn, als; Russian когда and English when merge them."
+   "note": "Modern Hebrew uses כְּשֶׁ for the conjunction; the question “when?” is a separate word, מָתַי."
   },
   {
    "concept": "conj.so",
@@ -5849,7 +8125,7 @@
      "value": "old people and animals"
     }
    ],
-   "note": "Greek παλιός / ηλικιωμένος and Turkish eski / yaşlı split the same way; German alt and Russian старый do not."
+   "note": "The choice depends on whether the old thing is alive."
   },
   {
    "concept": "verb.go",
@@ -5864,7 +8140,7 @@
      "value": "by any vehicle, as driver or passenger"
     }
    ],
-   "note": "Like German gehen / fahren and Russian идти / ехать."
+   "note": "The choice is by means of movement, not by distance: a bus ride across town is נָסַע."
   },
   {
    "concept": "verb.drive",
@@ -5894,7 +8170,7 @@
      "value": "with a tool (בְּעֵט “with a pen”)"
     }
    ],
-   "note": "Greek με and English with cover both."
+   "note": "Company and instrument are different prepositions."
   },
   {
    "concept": "conj.because",
@@ -5913,7 +8189,7 @@
      "value": "a clause, formal"
     }
    ],
-   "note": "German weil / wegen, English because / because of."
+   "note": "The choice depends on whether a clause or a noun follows."
   },
   {
    "concept": "conj.but",
@@ -5928,7 +8204,7 @@
      "value": "but rather, after a negation"
     }
    ],
-   "note": "German aber / sondern."
+   "note": "אֶלָּא corrects a negated statement: לֹא X אֶלָּא Y “not X but Y”."
   },
   {
    "concept": "conj.than",
@@ -5973,7 +8249,7 @@
      "value": "light, sky blue"
     }
    ],
-   "note": "Russian синий / голубой, Greek μπλε / γαλάζιο."
+   "note": "Light blue is a basic colour word of its own, not a shade of כָּחֹל."
   },
   {
    "concept": "num.3",
@@ -6045,7 +8321,7 @@
      "value": "a musical instrument"
     }
    ],
-   "note": "German spielen, Greek παίζω and Russian играть cover both. Not yet in the course."
+   "note": "The choice is by what is played. Not yet in the course."
   },
   {
    "concept": "to know",
@@ -6060,7 +8336,7 @@
      "value": "know a person or a place, be familiar with"
     }
    ],
-   "note": "German wissen / kennen (Greek uses γνωρίζω for people). Not yet in the course."
+   "note": "The choice is by what is known: a fact or a skill, or a person or place. Not yet in the course."
   },
   {
    "concept": "to ask",
@@ -6075,7 +8351,7 @@
      "value": "ask for, request"
     }
    ],
-   "note": "German fragen / bitten, Russian спрашивать / просить. Not yet in the course."
+   "note": "The choice is by what is asked for: an answer or a thing / an action. Not yet in the course."
   },
   {
    "concept": "time",
@@ -6094,7 +8370,7 @@
      "value": "an hour; the time on the clock"
     }
    ],
-   "note": "German Mal / Zeit / Uhr, Greek φορά / χρόνος / ώρα."
+   "note": "Three words for three senses of “time”: an occasion, a duration, the clock."
   },
   {
    "concept": "conj.if",
@@ -8718,7 +10994,7 @@
   {
    "concept": "family.uncle",
    "kind": "merges",
-   "note": "דּוֹד is any uncle, father's or mother's side (Arabic splits ʿamm / khāl); the same for aunt דּוֹדָה."
+   "note": "דּוֹד is any uncle, father's or mother's side; the same for aunt דּוֹדָה."
   },
   {
    "concept": "family.cousin",
@@ -8743,7 +11019,7 @@
   {
    "concept": "verb.like",
    "kind": "merges",
-   "note": "אָהַב is both “like” and “love” (German mögen / lieben, Greek μου αρέσει / αγαπώ split them)."
+   "note": "אָהַב is both “like” and “love”."
   },
   {
    "concept": "greet.hello",
@@ -8753,7 +11029,7 @@
   {
    "concept": "greet.please",
    "kind": "merges",
-   "note": "בְּבַקָּשָׁה is please, you're welcome and here you are (like German bitte, Greek παρακαλώ)."
+   "note": "בְּבַקָּשָׁה is please, you're welcome and here you are."
   },
   {
    "concept": "greet.sorry",
@@ -8848,7 +11124,7 @@
   {
    "concept": "co-parents-in-law",
    "kind": "adds",
-   "note": "מְחֻתָּן / מְחֻתֶּנֶת: the parents of one's child's spouse (also Greek συμπέθερος, Russian сват)."
+   "note": "מְחֻתָּן / מְחֻתֶּנֶת: the parents of one's child's spouse."
   },
   {
    "concept": "Hebrew calendar",

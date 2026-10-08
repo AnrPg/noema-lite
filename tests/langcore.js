@@ -215,6 +215,16 @@ ok(plan.steps.some(s => s.kind === 'grammar' && s.lang === 'de'), 'when a functi
   const s3 = N.nodeStates(C3, T, 'he');
   ok(s3['core.1'] === 'known' && s3['veg.1'] === 'unprepared' && s3['veg.2'] === 'locked' && N.nodeStates(C3, T, 'de')['veg.1'] === 'locked', 'a node whose words are not written yet is “unprepared” and blocks what follows, in that language only'); }
 
+// ---------- D16: what is new for a learner is computed from the learner's languages, not written from one point of view ----------
+{ const J = rel => JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'library', 'languages', rel), 'utf8'));
+  const d = N.readCourse(read, list); d.world = { features: J('_typology/features.json').features, languages: J('_typology/languages.json').languages, phenomena: { de: J('_phenomena/de.json').phenomena } };
+  const CW = N.course(d), tr = N.forLearner(CW, 'de', ['tr']), el = N.forLearner(CW, 'de', ['el']), vi = N.forLearner(CW, 'de', ['vi']);
+  const about = (r, f) => r.some(x => x.p.typology.some(t => t.feature === f));
+  ok(tr.new.length > el.new.length, `German looks different from every background: ${tr.new.length} new things for a Turkish speaker, ${el.new.length} for a Greek one`);
+  ok(about(tr.new, 'nom.genderCount') && about(el.familiar, 'nom.genderCount'), 'grammatical gender: new for a Turkish speaker, familiar to a Greek one');
+  ok(vi.new.some(x => x.p.kind === 'lacks' && x.p.typology.some(t => t.feature === 'tone.lexical')), 'an absence counts too: “no lexical tone” is new for a Vietnamese speaker');
+  ok(N.forLearner(CW, 'de', ['xx']).unknownLangs[0] === 'xx' && N.forLearner(N.course(N.readCourse(read, list)), 'de', ['el']) === null, 'a language without a profile is “unknown”; without the world data there is no guess'); }
+
 // ---------- the word card (§4.6) ----------
 const card = N.wordCard(C, L, 'de', 'de:Gurke');
 ok(card.hasProfile && card.examples.length === 5 && new Set(card.examples.map(e => e.register)).size >= 2, `German Gurke: ${card.examples.length} examples in ${new Set(card.examples.map(e => e.register)).size} registers`);

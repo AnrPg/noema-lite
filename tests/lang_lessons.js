@@ -10,7 +10,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 // a light copy with the mini course as the only language course (the hand-made mini course is its own little app:
 // next to the real courses it would break their common order, D13); the catalogues of phenomena come along (D14)
 const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'noema-lessons-'));
-fs.cpSync(SRC, ROOT, { recursive: true, filter: p => !/[\\/](\.git|dist|data)([\\/]|$)/.test(path.relative(SRC, p) ? '/' + path.relative(SRC, p) : '') && !/[\\/]library[\\/](subjects[\\/]|languages[\\/](?!_phenomena))/.test(p) });
+fs.cpSync(SRC, ROOT, { recursive: true, filter: p => !/[\\/](\.git|dist|data)([\\/]|$)/.test(path.relative(SRC, p) ? '/' + path.relative(SRC, p) : '') && !/[\\/]library[\\/](subjects[\\/]|languages[\\/](?!_phenomena|_typology))/.test(p) });
 fs.cpSync(path.join(SRC, 'tests', 'fixtures', 'lang-mini'), path.join(ROOT, 'library', 'languages', 'lang-mini'), { recursive: true });
 execSync('python3 tools/build.py', { cwd: ROOT, stdio: 'pipe' });
 const SUBJ = 'lang:lang-mini';
@@ -72,6 +72,8 @@ async function runThrough(page, wrongIn = []) {
   ok(await page.locator('.lx-overview').count() === 1 && /special from the very beginning/.test(await page.locator('.lx-overview').innerText()), 'then the overview of the language with its peculiarities');
   await page.click('.lx-stage .lx-railbtn >> nth=2'); await wait(100);
   ok(/Tones/.test(await page.locator('.lx-overview').innerText()), 'the flags switch the overview to another language (Chinese: tones)');
+  { const t = await page.locator('.lx-forlearner').innerText().catch(() => '');
+    ok(/New for you/.test(t) && /Turkish/.test(t) && /familiar/i.test(t), 'D16: what is new and what is familiar is computed from the learner\'s languages (' + (t.match(/\d+ new · \d+ familiar/) || ['?'])[0] + ')'); }
   ok(await runThrough(page, ['he']), 'S00 runs to the end');
   const res = await page.locator('.lx-result').innerText();
   ok(/Arabic: 3\/3[\s\S]*passed/.test(res) && /Hebrew: 0\/3[\s\S]*not yet/.test(res), 'the check: Arabic passed, Hebrew not yet (answered wrongly)');

@@ -145,6 +145,7 @@ with `tools/validate_lang.py` and `tools/lang_refcheck.py`. The hard rules:
 3. **Several words for one concept** (还是 / 或者, gehen / fahren) each say what separates them (`contrasts`, §4.5.2).
 4. **Every distinct meaning of a word is its own concept** (D15) — pending until a node teaches it; nuances say `of` the sense.
 5. **One common order of subjects across all languages** (D13, §4.4.3): never teach a subject earlier or later in one language.
+6. **No built-in point of view** (D16): describe a language for a learner of ANY background — its typological profile (`_typology/languages.json`) and phenomena tagged with feature values, covering everything it has or lacks; never "unlike English…". What is new for a learner is computed from their languages.
 
 ## Updating an existing subject (additive only)
 Get the current pack (`noema_get_pack_url`, or the package / file the user gives you), then

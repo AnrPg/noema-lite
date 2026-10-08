@@ -268,11 +268,25 @@ def phenomena_path(root, L):
     return None
 
 
+def load_typology(path):
+    """The shared typological vocabulary and the language profiles next to a catalogue (D16): (features {id: {values}}, profiles {code: values})."""
+    d = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(path))), '_typology')
+    try:
+        fs = json.load(open(os.path.join(d, 'features.json'), encoding='utf-8'))['features']
+        ls = json.load(open(os.path.join(d, 'languages.json'), encoding='utf-8'))['languages']
+    except (OSError, ValueError, KeyError): return None, None
+    return {f['id']: {x['id'] for x in f.get('values') or []} for f in fs}, {x['code']: x.get('values') or {} for x in ls}
+
+
 def check_phenomena(v, L, path):
     """→ the phenomenon ids of the catalogue (errors for a broken catalogue)."""
     w = f'_phenomena/{L}.json'
     try: d = json.load(open(path, encoding='utf-8'))
     except (OSError, ValueError) as e: v.E(w, f'cannot read ({e})'); return set()
+    feats, profiles = load_typology(path)
+    if feats is None: v.E('_typology', 'missing: the shared typological vocabulary and language profiles (features.json, languages.json; D16, §4.11)')
+    elif L not in profiles: v.E('_typology/languages.json', f'no profile for “{L}”: every course language is described in the shared vocabulary (D16)')
+    mine = (profiles or {}).get(L) or {}; covered = set()
     if d.get('format') != 'noema.langphenomena/v1': v.E(w, 'format must be "noema.langphenomena/v1"')
     if d.get('lang') != L: v.E(w, f'lang must be “{L}”')
     ids = set()
@@ -285,7 +299,20 @@ def check_phenomena(v, L, path):
         if ph.get('status') not in PHEN_STATUS: v.E(pw, 'status must be covered, partial or missing')
         if ph.get('status') != 'covered' and not (ph.get('gap') or '').strip(): v.E(pw, 'say what is missing (gap)')
         if not ph.get('examples'): v.E(pw, 'at least one example')
+        if ph.get('kind', 'has') not in ('has', 'lacks'): v.E(pw, 'kind must be "has" or "lacks"')
+        if feats is not None:
+            tags = ph.get('typology')
+            if not isinstance(tags, list) or not tags: v.E(pw, 'tag it with the typological feature values it is about (typology: [{feature, value}], D16)'); tags = []
+            for t in tags:
+                fid, val = t.get('feature'), t.get('value')
+                if fid not in feats: v.E(pw, f'typology: unknown feature “{fid}”'); continue
+                if val not in feats[fid]: v.E(pw, f'typology: “{val}” is not a value of {fid}'); continue
+                if mine and mine.get(fid) not in (val, None) and mine.get(fid) != 'unknown': v.E(pw, f'typology: {fid} = “{val}”, but the profile of {L} says “{mine.get(fid)}”')
+                covered.add(fid)
     if len(ids) < 20: v.E(w, 'a catalogue of phenomena covers every area of the language (at least 20 phenomena)')
+    if feats is not None and mine:
+        miss = sorted(f for f in feats if f not in covered and mine.get(f) not in (None, 'unknown'))
+        if miss: v.E(w, f'{len(miss)} typological feature(s) not covered by any phenomenon — what the language has or lacks matters to learners of other backgrounds (D16): {", ".join(miss[:12])}{" …" if len(miss) > 12 else ""}')
     return ids
 
 

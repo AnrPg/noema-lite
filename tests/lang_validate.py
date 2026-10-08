@@ -190,4 +190,20 @@ vv = VV('.'); tmpp = tempfile.mktemp(suffix='.json'); json.dump({'format': 'noem
 check_phenomena(vv, 'xx', tmpp); os.remove(tmpp)
 ok(any('say what is missing (gap)' in e for e in vv.errors) and any('at least 20 phenomena' in e for e in vv.errors), 'a thin catalogue of phenomena is refused (gap, every area)')
 
+# ---------- D16: no built-in point of view — the catalogue is tagged with the shared typology and covers every feature ----------
+LL = os.path.join(ROOT, 'library', 'languages')
+def phen_errors(change):
+    d = tempfile.mkdtemp(); os.makedirs(os.path.join(d, '_phenomena')); shutil.copytree(os.path.join(LL, '_typology'), os.path.join(d, '_typology'))
+    c = json.load(open(os.path.join(LL, '_phenomena', 'de.json'), encoding='utf-8')); change(c)
+    pth = os.path.join(d, '_phenomena', 'de.json'); json.dump(c, open(pth, 'w', encoding='utf-8'), ensure_ascii=False)
+    vv = VV('.'); check_phenomena(vv, 'de', pth); shutil.rmtree(d); return vv.errors
+ok(not phen_errors(lambda c: None), 'the German catalogue: every phenomenon tagged, every typological feature covered')
+e = phen_errors(lambda c: c['phenomena'][0].pop('typology'))
+ok(any('tag it with the typological feature values' in x for x in e), 'a phenomenon without typology tags is refused')
+e = phen_errors(lambda c: c['phenomena'][0]['typology'][0].update(value='none' if c['phenomena'][0]['typology'][0]['value'] != 'none' else 'present'))
+ok(any('but the profile of de says' in x or 'is not a value of' in x for x in e), 'a tag that contradicts the language profile is refused')
+def drop_tone(c): c['phenomena'] = [p for p in c['phenomena'] if not any(t['feature'] == 'tone.lexical' for t in p.get('typology') or [])]
+e = phen_errors(drop_tone)
+ok(any('not covered by any phenomenon' in x and 'tone.lexical' in x for x in e), 'an uncovered feature — here an absence, “no lexical tone” — is refused')
+
 print(f'\n{fails} FAILED' if fails else '\nALL PASSED'); sys.exit(1 if fails else 0)

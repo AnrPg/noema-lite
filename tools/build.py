@@ -114,6 +114,12 @@ def build_lang_courses():
         course = J('course.json'); nodes = J('core/nodes.json')['nodes']
         data = {'course': course, 'typology': J('core/typology.json'), 'fields': [J('core/fields/' + f) for f in ls('core/fields')], 'nodes': nodes,
                 'functions': [J('core/functions/' + f) for f in ls('core/functions')], 'frames': (J('core/frames.json') or {}).get('frames', []), 'langs': {}}
+        # D16: the shared typological vocabulary, the world's language profiles, the catalogues of the course languages (trimmed)
+        tdir = os.path.join(LANGS, '_typology'); pdir = os.path.join(LANGS, '_phenomena')
+        if os.path.exists(os.path.join(tdir, 'features.json')) and os.path.exists(os.path.join(tdir, 'languages.json')):
+            trim = lambda p: {'id': p['id'], 'title': p.get('title'), 'area': p.get('area'), 'kind': p.get('kind', 'has'), 'typology': p.get('typology') or [], 'what': p.get('what'), 'examples': (p.get('examples') or [])[:2]}
+            data['world'] = {'features': rj(os.path.join(tdir, 'features.json'))['features'], 'languages': rj(os.path.join(tdir, 'languages.json'))['languages'],
+                             'phenomena': {c: [trim(p) for p in rj(os.path.join(pdir, c + '.json')).get('phenomena', [])] if os.path.exists(os.path.join(pdir, c + '.json')) else [] for c in course['languages']}}
         for code in course['languages']:
             b = f'lang/{code}/'
             data['langs'][code] = {'language': J(b + 'language.json'), 'lexicon': {n['id']: J(f'{b}lexicon/{n["id"]}.json') for n in nodes if J(f'{b}lexicon/{n["id"]}.json')},

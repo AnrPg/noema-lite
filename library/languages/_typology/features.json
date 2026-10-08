@@ -1,0 +1,3181 @@
+{
+ "format": "noema.langtypology/v1",
+ "sources": [
+  "WALS Online (Dryer & Haspelmath 2013), CC BY 4.0 — https://wals.info; CLDF dataset cldf-datasets/wals",
+  "Li & Thompson (1976), Subject and topic: a new typology of language (topic prominence)",
+  "Talmy (2000), Toward a Cognitive Semantics, vol. 2; Slobin (2004) on verb-framed, satellite-framed and equipollent motion encoding",
+  "Majid, Bowerman, van Staden & Boster (2007), The semantic categories of cutting and breaking events",
+  "Berlin & Kay (1969), Basic Color Terms; Kay, Berlin, Maffi, Merrifield & Cook (2009), The World Color Survey",
+  "Murdock (1949), Social Structure (kinship terminology types)",
+  "Haspelmath & König (eds.) (1995), Converbs in Cross-Linguistic Perspective",
+  "Corbett (1991) Gender; Corbett (2000) Number",
+  "Daniels & Bright (eds.) (1996), The World's Writing Systems",
+  "Reference grammars of the individual languages, listed in languages.json"
+ ],
+ "features": [
+  {
+   "id": "script.type",
+   "title": "Writing system type",
+   "area": "script",
+   "question": "What does one basic sign of the standard script stand for?",
+   "wals": "141A",
+   "values": [
+    {
+     "id": "alphabet",
+     "title": "alphabet: letters for consonants and vowels"
+    },
+    {
+     "id": "abjad",
+     "title": "abjad: letters for consonants, short vowels usually unwritten"
+    },
+    {
+     "id": "abugida",
+     "title": "abugida: consonant letters with vowel signs attached"
+    },
+    {
+     "id": "syllabary",
+     "title": "syllabary: one sign per syllable"
+    },
+    {
+     "id": "logographic",
+     "title": "logographic: one character per morpheme / syllable"
+    },
+    {
+     "id": "mixed",
+     "title": "mixed: logograms together with syllabic signs"
+    }
+   ],
+   "learnerNote": "A learner coming from a different script type must learn not only new shapes but a new idea of what a sign stands for, e.g. reading words without vowels or memorising characters that do not spell sounds."
+  },
+  {
+   "id": "script.direction",
+   "title": "Writing direction",
+   "area": "script",
+   "question": "In which direction is the standard script written?",
+   "wals": null,
+   "values": [
+    {
+     "id": "ltr",
+     "title": "left to right"
+    },
+    {
+     "id": "rtl",
+     "title": "right to left"
+    },
+    {
+     "id": "ltr-or-vertical",
+     "title": "left to right, or in vertical columns (top to bottom, right to left)"
+    }
+   ],
+   "learnerNote": "A learner used to the other direction must retrain eye movement and page layout, including where a book starts and how numbers and foreign words are embedded."
+  },
+  {
+   "id": "script.letterCase",
+   "title": "Letter case",
+   "area": "script",
+   "question": "Does the script have capital and small letters, and which words take a capital?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no letter case"
+    },
+    {
+     "id": "proper-nouns",
+     "title": "capitals for sentence starts and names"
+    },
+    {
+     "id": "all-nouns",
+     "title": "capitals for every noun"
+    }
+   ],
+   "learnerNote": "A learner from a script without case must learn two shapes per letter and the capitalisation rules; one from a case script must learn to recognise names without capitals."
+  },
+  {
+   "id": "script.vowels",
+   "title": "Vowels in writing",
+   "area": "script",
+   "question": "How are vowels shown in the ordinary written text?",
+   "wals": null,
+   "values": [
+    {
+     "id": "full",
+     "title": "every vowel is written as a letter"
+    },
+    {
+     "id": "inherent",
+     "title": "vowel signs attached to consonant letters (abugida), one vowel implied"
+    },
+    {
+     "id": "mostly-unwritten",
+     "title": "short vowels normally left out"
+    },
+    {
+     "id": "not-phonographic",
+     "title": "characters do not spell the sounds (vowels not shown)"
+    }
+   ],
+   "learnerNote": "A learner used to fully written vowels must learn to supply vowels from knowledge of the word (abjad) or to read vowel signs placed around a consonant (abugida); one from a logographic script must learn to spell out sounds."
+  },
+  {
+   "id": "script.positionalForms",
+   "title": "Letter shapes by position",
+   "area": "script",
+   "question": "Do letters change their shape depending on their position in the word?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "one shape per letter (per case)"
+    },
+    {
+     "id": "final-forms",
+     "title": "a few letters have a special word-final shape"
+    },
+    {
+     "id": "joining",
+     "title": "letters join and most change shape by position (initial, medial, final, isolated)"
+    }
+   ],
+   "learnerNote": "A learner from a script with fixed shapes must learn up to four forms of each letter and the joining rules; final forms must be learned as a spelling rule."
+  },
+  {
+   "id": "script.multiple",
+   "title": "Number of scripts",
+   "area": "script",
+   "question": "Is the language written in one script, or in several?",
+   "wals": null,
+   "values": [
+    {
+     "id": "single",
+     "title": "one script"
+    },
+    {
+     "id": "variants",
+     "title": "one script with two standard variants (e.g. simplified / traditional characters)"
+    },
+    {
+     "id": "alternatives",
+     "title": "two different scripts in standard use (by country or region)"
+    },
+    {
+     "id": "combined",
+     "title": "several scripts mixed in every text"
+    }
+   ],
+   "learnerNote": "A learner from a one-script language must expect to learn a second character set for full literacy, or to read several scripts side by side in one sentence."
+  },
+  {
+   "id": "script.wordSpacing",
+   "title": "Spaces between words",
+   "area": "script",
+   "question": "What does the writing separate with spaces or marks?",
+   "wals": null,
+   "values": [
+    {
+     "id": "words",
+     "title": "spaces between words"
+    },
+    {
+     "id": "syllables",
+     "title": "spaces or marks between syllables"
+    },
+    {
+     "id": "none",
+     "title": "no word separation (spaces only between phrases or sentences, if at all)"
+    }
+   ],
+   "learnerNote": "A learner used to word spaces must learn to find word boundaries by knowledge of the vocabulary; one used to unspaced text must learn where the spaces go when writing."
+  },
+  {
+   "id": "script.stressMarking",
+   "title": "Stress in writing",
+   "area": "script",
+   "question": "Is the place of word stress shown in the ordinary spelling?",
+   "wals": null,
+   "values": [
+    {
+     "id": "not-applicable",
+     "title": "stress is fixed, predictable or not distinctive"
+    },
+    {
+     "id": "unmarked",
+     "title": "stress is free but never written"
+    },
+    {
+     "id": "irregular-only",
+     "title": "an accent mark only where stress breaks the default rule"
+    },
+    {
+     "id": "always",
+     "title": "every word of two or more syllables carries a stress mark"
+    }
+   ],
+   "learnerNote": "A learner must learn the stress of each word with the word itself where it is unmarked, and must learn the accent-mark rules where it is marked."
+  },
+  {
+   "id": "script.toneMarking",
+   "title": "Tone in writing",
+   "area": "script",
+   "question": "If the language has tones or a pitch accent, how does the writing show them?",
+   "wals": null,
+   "values": [
+    {
+     "id": "no-tones",
+     "title": "no tones to write"
+    },
+    {
+     "id": "unwritten",
+     "title": "tones / pitch accent not written"
+    },
+    {
+     "id": "diacritics",
+     "title": "tone marks on vowels"
+    },
+    {
+     "id": "spelling-rules",
+     "title": "tone follows from letter classes and tone marks in the syllable spelling"
+    },
+    {
+     "id": "characters",
+     "title": "characters do not show tone (romanisations add marks)"
+    }
+   ],
+   "learnerNote": "A learner must learn the tone of each word separately where it is not written, or decode tone from the spelling rules where it is."
+  },
+  {
+   "id": "tone.lexical",
+   "title": "Lexical tone",
+   "area": "phonology",
+   "question": "Does the pitch of a syllable distinguish words?",
+   "wals": "13A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no lexical tone"
+    },
+    {
+     "id": "pitch-accent",
+     "title": "pitch accent: one pitch or accent pattern per word distinguishes some words"
+    },
+    {
+     "id": "simple",
+     "title": "two levels (high / low)"
+    },
+    {
+     "id": "complex",
+     "title": "three or more tones / contours"
+    }
+   ],
+   "learnerNote": "A learner without tones must hear and produce pitch as part of every word; a learner with tones must learn that here pitch carries only intonation and emotion, not word meaning."
+  },
+  {
+   "id": "phon.stress",
+   "title": "Word stress",
+   "area": "phonology",
+   "question": "Where does word stress fall?",
+   "wals": "14A",
+   "values": [
+    {
+     "id": "fixed-initial",
+     "title": "fixed on the first syllable"
+    },
+    {
+     "id": "fixed-penultimate",
+     "title": "fixed on the next-to-last syllable"
+    },
+    {
+     "id": "fixed-final",
+     "title": "fixed on the last syllable (with few exceptions)"
+    },
+    {
+     "id": "weight-sensitive",
+     "title": "predictable from syllable weight (long vowels, closed syllables)"
+    },
+    {
+     "id": "free",
+     "title": "free: the stressed syllable must be learned with each word"
+    },
+    {
+     "id": "none",
+     "title": "no distinctive word stress (prominence by tone, pitch or phrase)"
+    }
+   ],
+   "learnerNote": "A learner from a fixed-stress language must learn the stress of every word where it is free; a learner from a free-stress language must stop stressing syllables the target language does not."
+  },
+  {
+   "id": "phon.vowelLength",
+   "title": "Vowel length",
+   "area": "phonology",
+   "question": "Does the length of a vowel distinguish words?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no: length is not distinctive"
+    },
+    {
+     "id": "contrastive",
+     "title": "short vs long vowels"
+    },
+    {
+     "id": "three-way",
+     "title": "three degrees of length / quantity"
+    }
+   ],
+   "learnerNote": "A learner without vowel length must hear and hold long vowels, since a short vowel can make a different word."
+  },
+  {
+   "id": "phon.vowelHarmony",
+   "title": "Vowel harmony",
+   "area": "phonology",
+   "question": "Must the vowels of suffixes match the vowels of the stem?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no vowel harmony"
+    },
+    {
+     "id": "limited",
+     "title": "traces or limited harmony"
+    },
+    {
+     "id": "front-back",
+     "title": "front / back harmony"
+    },
+    {
+     "id": "front-back-rounding",
+     "title": "front / back and rounding harmony"
+    },
+    {
+     "id": "tongue-root",
+     "title": "tongue-root (ATR) harmony"
+    },
+    {
+     "id": "nasal",
+     "title": "nasal harmony: nasality spreads through the word"
+    }
+   ],
+   "learnerNote": "A learner without vowel harmony must learn two or four forms of every suffix and choose them from the stem's vowels."
+  },
+  {
+   "id": "phon.voicing",
+   "title": "Voicing contrast",
+   "area": "phonology",
+   "question": "Do voiced and voiceless obstruents (b / p, z / s) distinguish words?",
+   "wals": "4A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no voicing contrast"
+    },
+    {
+     "id": "plosives-only",
+     "title": "in plosives only (b / p)"
+    },
+    {
+     "id": "fricatives-only",
+     "title": "in fricatives only (z / s)"
+    },
+    {
+     "id": "both",
+     "title": "in plosives and fricatives"
+    }
+   ],
+   "learnerNote": "A learner whose language does not contrast voicing must learn to hear and produce b / p, d / t, z / s as different sounds; a learner with voicing must learn that here another feature (e.g. aspiration) does that job."
+  },
+  {
+   "id": "phon.uvulars",
+   "title": "Uvular consonants",
+   "area": "phonology",
+   "question": "Are there consonants made at the uvula (q, χ, ʁ)?",
+   "wals": "6A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "stops",
+     "title": "uvular stops only (q)"
+    },
+    {
+     "id": "continuants",
+     "title": "uvular continuants only (χ, ʁ)"
+    },
+    {
+     "id": "both",
+     "title": "uvular stops and continuants"
+    }
+   ],
+   "learnerNote": "A learner without uvulars must learn to produce sounds further back than k and to keep them apart from k and h."
+  },
+  {
+   "id": "phon.pharyngeals",
+   "title": "Pharyngeal and pharyngealised consonants",
+   "area": "phonology",
+   "question": "Are there pharyngeal consonants (ħ, ʕ) or pharyngealised 'emphatic' consonants (ṣ, ṭ, ḍ, ẓ)?",
+   "wals": "19A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "pharyngeals",
+     "title": "pharyngeal consonants ħ, ʕ"
+    },
+    {
+     "id": "pharyngeals-and-emphatics",
+     "title": "pharyngeals and a series of emphatic consonants"
+    }
+   ],
+   "learnerNote": "A learner without them must learn to produce sounds in the throat and to keep emphatic consonants (which also colour the vowels) apart from plain ones."
+  },
+  {
+   "id": "phon.glottalized",
+   "title": "Ejectives and implosives",
+   "area": "phonology",
+   "question": "Are there glottalised consonants: ejectives (p', t', k') or implosives (ɓ, ɗ)?",
+   "wals": "7A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "ejectives",
+     "title": "ejectives"
+    },
+    {
+     "id": "implosives",
+     "title": "implosives"
+    },
+    {
+     "id": "ejectives-and-implosives",
+     "title": "ejectives and implosives"
+    }
+   ],
+   "learnerNote": "A learner without them must learn to make consonants with the glottis closed (ejectives) or with an inward airstream (implosives) and to keep them apart from plain consonants."
+  },
+  {
+   "id": "phon.clicks",
+   "title": "Click consonants",
+   "area": "phonology",
+   "question": "Are clicks used as ordinary consonants?",
+   "wals": "19A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "phonemic",
+     "title": "yes: clicks are consonants of the language"
+    }
+   ],
+   "learnerNote": "A learner without clicks must learn to produce them inside words, at normal speed, and to distinguish their series."
+  },
+  {
+   "id": "phon.retroflex",
+   "title": "Retroflex consonants",
+   "area": "phonology",
+   "question": "Are there retroflex consonants (tongue tip curled back) that contrast with dental / alveolar ones?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "allophonic",
+     "title": "only as variants (e.g. from r + t)"
+    },
+    {
+     "id": "sibilants",
+     "title": "retroflex sibilants / affricates (ʂ, ʈʂ) contrasting with s-like sounds"
+    },
+    {
+     "id": "stops",
+     "title": "retroflex stops (ʈ, ɖ) contrasting with t, d"
+    }
+   ],
+   "learnerNote": "A learner without retroflexes must learn to hear and make a second t / d or s series with the tongue tip curled back."
+  },
+  {
+   "id": "phon.aspiration",
+   "title": "Aspiration contrast",
+   "area": "phonology",
+   "question": "Does aspiration (a puff of air: pʰ vs p) distinguish words?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no (aspiration, if any, is automatic)"
+    },
+    {
+     "id": "aspiration-contrast",
+     "title": "aspirated vs unaspirated stops"
+    },
+    {
+     "id": "four-way",
+     "title": "four series: voiceless, aspirated, voiced, breathy-voiced"
+    }
+   ],
+   "learnerNote": "A learner whose language does not contrast aspiration must learn that p and pʰ are different sounds that change the word."
+  },
+  {
+   "id": "phon.frontRounded",
+   "title": "Front rounded vowels",
+   "area": "phonology",
+   "question": "Are there front rounded vowels (ü / y, ö / ø)?",
+   "wals": "11A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "high-only",
+     "title": "high only (ü / y)"
+    },
+    {
+     "id": "mid-only",
+     "title": "mid only (ö / ø)"
+    },
+    {
+     "id": "high-and-mid",
+     "title": "high and mid"
+    }
+   ],
+   "learnerNote": "A learner without them must learn to round the lips while saying i or e, and to keep ü apart from u and i."
+  },
+  {
+   "id": "phon.nasalVowels",
+   "title": "Nasal vowels",
+   "area": "phonology",
+   "question": "Do nasal vowels contrast with oral vowels?",
+   "wals": "10A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner without nasal vowels must learn to let air through the nose on the vowel itself, without pronouncing a full n or m."
+  },
+  {
+   "id": "phon.syllableStructure",
+   "title": "Syllable structure",
+   "area": "phonology",
+   "question": "How complex can syllables be (consonant clusters at the start and end)?",
+   "wals": "12A",
+   "values": [
+    {
+     "id": "simple",
+     "title": "simple: (C)V"
+    },
+    {
+     "id": "moderately-complex",
+     "title": "moderately complex: CCVC with simple clusters"
+    },
+    {
+     "id": "complex",
+     "title": "complex: larger clusters (e.g. str-, -nkst)"
+    }
+   ],
+   "learnerNote": "A learner from a language with simple syllables must learn to pronounce clusters without inserting extra vowels; one from a cluster language must learn to keep open syllables open."
+  },
+  {
+   "id": "phon.finalDevoicing",
+   "title": "Final devoicing",
+   "area": "phonology",
+   "question": "Do voiced obstruents become voiceless at the end of a word (written d, said t)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    },
+    {
+     "id": "no-voicing-contrast",
+     "title": "not applicable: no voicing contrast in obstruents"
+    }
+   ],
+   "learnerNote": "A learner must learn to read a written final b / d / g as p / t / k where devoicing applies, or to keep final voicing where it does not."
+  },
+  {
+   "id": "phon.gemination",
+   "title": "Long (double) consonants",
+   "area": "phonology",
+   "question": "Does a long (geminate) consonant distinguish words (it. fato / fatto)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "contrastive",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner without geminates must learn to hold a consonant longer, because a short one can make a different word."
+  },
+  {
+   "id": "phon.interdentals",
+   "title": "'Th' sounds",
+   "area": "phonology",
+   "question": "Are there interdental fricatives (θ as in 'thin', ð as in 'this')?",
+   "wals": "19A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner without θ / ð must learn to put the tongue between the teeth and not replace these sounds with t, s, d or z."
+  },
+  {
+   "id": "phon.liquids",
+   "title": "r and l",
+   "area": "phonology",
+   "question": "Are r-sounds and l-sounds different phonemes, and are there several r-sounds?",
+   "wals": null,
+   "values": [
+    {
+     "id": "one-liquid",
+     "title": "one liquid: r and l are not distinguished"
+    },
+    {
+     "id": "r-and-l",
+     "title": "r and l distinguished"
+    },
+    {
+     "id": "several-rhotics",
+     "title": "r and l, and two or more contrasting r-sounds (tap / trill)"
+    }
+   ],
+   "learnerNote": "A learner with a single liquid must learn to keep r and l apart; one with a single r must learn to distinguish tap and trill."
+  },
+  {
+   "id": "phon.palatalization",
+   "title": "Hard and soft consonants",
+   "area": "phonology",
+   "question": "Do consonants come in plain and palatalised ('soft') pairs that distinguish words?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "some",
+     "title": "some pairs"
+    },
+    {
+     "id": "systematic",
+     "title": "a systematic hard / soft series"
+    }
+   ],
+   "learnerNote": "A learner without palatalisation must hear and produce soft consonants (with a y-like tongue position) as different sounds and learn how the spelling marks them."
+  },
+  {
+   "id": "phon.vowelReduction",
+   "title": "Unstressed vowel reduction",
+   "area": "phonology",
+   "question": "Do vowels change quality or disappear when unstressed?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no: vowels keep their quality"
+    },
+    {
+     "id": "some",
+     "title": "some reduction or deletion"
+    },
+    {
+     "id": "strong",
+     "title": "strong: many unstressed vowels merge into a few weak vowels"
+    }
+   ],
+   "learnerNote": "A learner whose vowels keep their quality must learn that spelling and pronunciation diverge in unstressed syllables and that the stress decides how a vowel sounds."
+  },
+  {
+   "id": "phon.mutation",
+   "title": "Consonant mutation and gradation",
+   "area": "phonology",
+   "question": "Do consonants at the start or inside a word change because of grammar?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no systematic mutation"
+    },
+    {
+     "id": "initial-mutation",
+     "title": "initial consonant mutation (the first consonant changes after certain words)"
+    },
+    {
+     "id": "consonant-gradation",
+     "title": "consonant gradation (stem consonants alternate between a strong and weak grade)"
+    }
+   ],
+   "learnerNote": "A learner must learn to recognise a word under several initial or internal consonants and to apply the triggering rules when speaking."
+  },
+  {
+   "id": "morph.type",
+   "title": "Morphological type",
+   "area": "morphology",
+   "question": "Which morphological type dominates the language?",
+   "wals": null,
+   "values": [
+    {
+     "id": "isolating",
+     "title": "isolating: words do not change; grammar by separate words and order"
+    },
+    {
+     "id": "agglutinating",
+     "title": "agglutinating: chains of affixes, one meaning per affix"
+    },
+    {
+     "id": "fusional",
+     "title": "fusional: endings that carry several meanings at once, stem changes"
+    },
+    {
+     "id": "polysynthetic",
+     "title": "polysynthetic: one long verb word can express a whole sentence"
+    }
+   ],
+   "learnerNote": "A learner from another type must change how they think of a word: isolating languages need word order and particles, agglutinating ones long suffix chains, fusional ones paradigm tables, polysynthetic ones whole sentences built inside the verb."
+  },
+  {
+   "id": "morph.fusion",
+   "title": "Degree of fusion",
+   "area": "morphology",
+   "question": "How tightly are grammatical meanings packed into words (the detail behind the morphological type)?",
+   "wals": "20A",
+   "values": [
+    {
+     "id": "isolating",
+     "title": "isolating: practically no inflection"
+    },
+    {
+     "id": "isolating-with-affixes",
+     "title": "mostly isolating, with some derivational or voice affixes but no inflection for case, person or tense"
+    },
+    {
+     "id": "agglutinating",
+     "title": "agglutinating: transparent affix chains"
+    },
+    {
+     "id": "agglutinating-with-fusion",
+     "title": "agglutinating, with notable fusion and stem alternations"
+    },
+    {
+     "id": "analytic-fusional",
+     "title": "fusional endings, but few of them; much grammar by word order and auxiliaries"
+    },
+    {
+     "id": "fusional",
+     "title": "fusional: rich paradigms of portmanteau endings"
+    },
+    {
+     "id": "polysynthetic",
+     "title": "polysynthetic: many morphemes per word, incorporation"
+    }
+   ],
+   "learnerNote": "A learner must adjust the size of the unit they memorise: whole inflected forms in fusional languages, affix by affix in agglutinating ones, separate words in isolating ones."
+  },
+  {
+   "id": "morph.affixation",
+   "title": "Prefixing vs suffixing",
+   "area": "morphology",
+   "question": "Is inflection mainly expressed by prefixes or by suffixes?",
+   "wals": "26A",
+   "values": [
+    {
+     "id": "little",
+     "title": "little inflectional affixation"
+    },
+    {
+     "id": "suffixing",
+     "title": "strongly suffixing"
+    },
+    {
+     "id": "mostly-suffixing",
+     "title": "weakly suffixing"
+    },
+    {
+     "id": "equal",
+     "title": "prefixes and suffixes equally"
+    },
+    {
+     "id": "mostly-prefixing",
+     "title": "weakly prefixing"
+    },
+    {
+     "id": "prefixing",
+     "title": "strongly prefixing"
+    }
+   ],
+   "learnerNote": "A learner from a suffixing language must learn to look at the beginning of the word for grammar (and vice versa), and to find the stem behind the affixes."
+  },
+  {
+   "id": "morph.rootPattern",
+   "title": "Root-and-pattern morphology",
+   "area": "morphology",
+   "question": "Are words built by putting vowel patterns into consonantal roots (k-t-b → kataba, kitāb, maktab)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes: consonantal roots and patterns"
+    }
+   ],
+   "learnerNote": "A learner must learn to see the consonantal root behind a word and to read meanings off its pattern, and to look words up by root."
+  },
+  {
+   "id": "morph.stemChange",
+   "title": "Stem changes",
+   "area": "morphology",
+   "question": "Do stems change inside (vowel alternation, ablaut, umlaut, consonant alternation) to mark grammar?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no or almost no"
+    },
+    {
+     "id": "some",
+     "title": "in part of the vocabulary (irregular verbs, some plurals)"
+    },
+    {
+     "id": "pervasive",
+     "title": "pervasive: a main way of inflecting"
+    }
+   ],
+   "learnerNote": "A learner from a language with invariable stems must learn several stems for one word and the rules or lists that govern them."
+  },
+  {
+   "id": "morph.reduplication",
+   "title": "Reduplication",
+   "area": "morphology",
+   "question": "Is (full or partial) repetition of a word or syllable a productive grammatical process?",
+   "wals": "27A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no productive reduplication"
+    },
+    {
+     "id": "full-only",
+     "title": "full reduplication only"
+    },
+    {
+     "id": "partial-or-both",
+     "title": "productive partial (and usually full) reduplication"
+    }
+   ],
+   "learnerNote": "A learner without reduplication must learn that repeating a word or its first syllable changes its meaning (plural, intensity, repetition, aspect)."
+  },
+  {
+   "id": "morph.compounding",
+   "title": "Compounding",
+   "area": "morphology",
+   "question": "How freely are words joined into compound words?",
+   "wals": null,
+   "values": [
+    {
+     "id": "restricted",
+     "title": "restricted: new concepts mostly by phrases (N of N) or derivation"
+    },
+    {
+     "id": "common",
+     "title": "common: noun + noun compounds are frequent"
+    },
+    {
+     "id": "pervasive",
+     "title": "pervasive: the main way of forming words; long compounds"
+    }
+   ],
+   "learnerNote": "A learner from a compounding language must learn to express concepts as phrases with prepositions, and one from a phrasal language must learn to build and take apart long compounds."
+  },
+  {
+   "id": "morph.incorporation",
+   "title": "Noun incorporation",
+   "area": "morphology",
+   "question": "Can a noun (usually the object) be built into the verb word?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "limited",
+     "title": "limited or lexicalised"
+    },
+    {
+     "id": "productive",
+     "title": "productive"
+    }
+   ],
+   "learnerNote": "A learner without incorporation must learn to recognise an object noun inside a verb word and to build such verbs."
+  },
+  {
+   "id": "nom.plural",
+   "title": "Plural marking on nouns",
+   "area": "morphology",
+   "question": "Is plurality marked on nouns, and is it obligatory?",
+   "wals": "34A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no nominal plural"
+    },
+    {
+     "id": "optional",
+     "title": "optional (used when plurality matters)"
+    },
+    {
+     "id": "obligatory-for-humans",
+     "title": "obligatory for human / animate nouns, optional otherwise"
+    },
+    {
+     "id": "obligatory",
+     "title": "obligatory for all nouns"
+    }
+   ],
+   "learnerNote": "A learner whose language marks plural optionally must learn to mark it every time; one with obligatory plural must learn to leave nouns unmarked and read number from context."
+  },
+  {
+   "id": "nom.pluralAfterNumeral",
+   "title": "Nouns after numerals",
+   "area": "morphology",
+   "question": "Which form does a noun take after a numeral ('two books')?",
+   "wals": null,
+   "values": [
+    {
+     "id": "plural",
+     "title": "the plural"
+    },
+    {
+     "id": "unmarked",
+     "title": "the basic (singular / unmarked) form"
+    },
+    {
+     "id": "special",
+     "title": "a special form or case depending on the numeral (e.g. genitive, partitive, dual)"
+    }
+   ],
+   "learnerNote": "A learner must learn the noun form each numeral demands: some languages drop the plural after numbers, others require a particular case."
+  },
+  {
+   "id": "nom.dual",
+   "title": "Dual number",
+   "area": "morphology",
+   "question": "Is there a grammatical dual (a form for exactly two)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "pronouns-or-verbs-only",
+     "title": "only in pronouns or verb forms"
+    },
+    {
+     "id": "limited",
+     "title": "on a limited set of nouns (pairs, units of time)"
+    },
+    {
+     "id": "productive",
+     "title": "productive on nouns"
+    }
+   ],
+   "learnerNote": "A learner without a dual must use a third number form for exactly two things and make other words agree with it."
+  },
+  {
+   "id": "nom.singulative",
+   "title": "Collective and singulative",
+   "area": "morphology",
+   "question": "Is there a basic collective noun from which a 'single unit' noun is derived (tree(s) → one tree)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "marginal",
+     "title": "a few nouns"
+    },
+    {
+     "id": "productive",
+     "title": "productive"
+    }
+   ],
+   "learnerNote": "A learner must learn that the basic noun can mean the whole mass or class, and that a single item needs a derived (often longer) form."
+  },
+  {
+   "id": "nom.genderCount",
+   "title": "Number of genders / noun classes",
+   "area": "morphology",
+   "question": "How many genders or noun classes control agreement?",
+   "wals": "30A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "two",
+     "title": "two"
+    },
+    {
+     "id": "three",
+     "title": "three"
+    },
+    {
+     "id": "four-plus",
+     "title": "four or more (noun classes)"
+    }
+   ],
+   "learnerNote": "A learner without gender must learn the gender of every noun as part of the word and make other words agree with it; one with gender must learn to stop marking it."
+  },
+  {
+   "id": "nom.genderBasis",
+   "title": "Basis of gender",
+   "area": "morphology",
+   "question": "On what basis are nouns sorted into genders or classes?",
+   "wals": "31A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no gender"
+    },
+    {
+     "id": "sex-based",
+     "title": "sex-based (masculine / feminine, plus neuter)"
+    },
+    {
+     "id": "non-sex-based",
+     "title": "not sex-based (e.g. human / non-human, shape, noun classes)"
+    }
+   ],
+   "learnerNote": "A learner must learn which nouns go into which class; in noun-class languages the class is marked by a prefix and changes in the plural."
+  },
+  {
+   "id": "nom.cases",
+   "title": "Number of cases",
+   "area": "morphology",
+   "question": "How many morphological cases do nouns have?",
+   "wals": "49A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "two",
+     "title": "2"
+    },
+    {
+     "id": "three",
+     "title": "3"
+    },
+    {
+     "id": "four",
+     "title": "4"
+    },
+    {
+     "id": "five",
+     "title": "5"
+    },
+    {
+     "id": "six-seven",
+     "title": "6-7"
+    },
+    {
+     "id": "eight-nine",
+     "title": "8-9"
+    },
+    {
+     "id": "ten-plus",
+     "title": "10 or more"
+    }
+   ],
+   "learnerNote": "A learner without cases must learn to change the noun's ending by its role in the sentence, often together with prepositions; a learner with cases must learn to carry those roles by word order and prepositions."
+  },
+  {
+   "id": "nom.caseSyncretism",
+   "title": "Case syncretism",
+   "area": "morphology",
+   "question": "Do different cases share the same form?",
+   "wals": "28A",
+   "values": [
+    {
+     "id": "no-case",
+     "title": "no case marking"
+    },
+    {
+     "id": "none",
+     "title": "no syncretism: each case has its own form"
+    },
+    {
+     "id": "core-only",
+     "title": "only between core cases (e.g. nominative = accusative)"
+    },
+    {
+     "id": "core-and-noncore",
+     "title": "also involving other cases (e.g. genitive = dative)"
+    }
+   ],
+   "learnerNote": "A learner must learn that one ending can stand for several cases and read the role from context, agreement or prepositions."
+  },
+  {
+   "id": "nom.caseMarking",
+   "title": "How case is marked",
+   "area": "morphology",
+   "question": "By what means are case relations marked on the noun phrase?",
+   "wals": "51A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no case affixes or case clitics"
+    },
+    {
+     "id": "suffixes",
+     "title": "case suffixes"
+    },
+    {
+     "id": "prefixes",
+     "title": "case prefixes"
+    },
+    {
+     "id": "postpositional-clitics",
+     "title": "postpositional case clitics / particles"
+    },
+    {
+     "id": "prepositional-clitics",
+     "title": "prepositional case clitics / particles"
+    },
+    {
+     "id": "mixed",
+     "title": "mixed"
+    }
+   ],
+   "learnerNote": "A learner must learn where case is shown: at the end of the noun, at its beginning, or in a small word attached to the whole phrase."
+  },
+  {
+   "id": "syn.alignment",
+   "title": "Alignment",
+   "area": "syntax",
+   "question": "Is the subject of an intransitive verb treated like the agent or like the object of a transitive verb?",
+   "wals": "98A",
+   "values": [
+    {
+     "id": "accusative",
+     "title": "accusative: intransitive subject = transitive subject"
+    },
+    {
+     "id": "ergative",
+     "title": "ergative: intransitive subject = transitive object; the agent is marked"
+    },
+    {
+     "id": "split",
+     "title": "split: ergative or active in some tenses / persons, accusative elsewhere"
+    },
+    {
+     "id": "active",
+     "title": "active: depends on whether the subject acts or undergoes"
+    },
+    {
+     "id": "symmetrical-voice",
+     "title": "symmetrical voice: a verb voice picks which argument is the pivot"
+    },
+    {
+     "id": "neutral",
+     "title": "neutral: no case or agreement distinguishes the roles"
+    }
+   ],
+   "learnerNote": "A learner from an accusative language must learn that the 'subject' case can depend on transitivity, tense or voice; ergative languages mark the doer of a transitive verb specially."
+  },
+  {
+   "id": "nom.definiteArticle",
+   "title": "Definite article",
+   "area": "morphology",
+   "question": "Is there a definite article ('the'), and where does it go?",
+   "wals": "37A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "word-before",
+     "title": "a separate word before the noun"
+    },
+    {
+     "id": "word-after",
+     "title": "a separate word after the noun"
+    },
+    {
+     "id": "prefix",
+     "title": "a prefix"
+    },
+    {
+     "id": "suffix",
+     "title": "a suffix"
+    }
+   ],
+   "learnerNote": "A learner without articles must learn to decide definiteness in every noun phrase; one with articles must learn to express it by context, word order or demonstratives."
+  },
+  {
+   "id": "nom.indefiniteArticle",
+   "title": "Indefinite article",
+   "area": "morphology",
+   "question": "Is there an indefinite article ('a'), and is it the word for 'one'?",
+   "wals": "38A",
+   "values": [
+    {
+     "id": "none",
+     "title": "none"
+    },
+    {
+     "id": "one",
+     "title": "yes, the same word as 'one'"
+    },
+    {
+     "id": "distinct-word",
+     "title": "yes, a word distinct from 'one'"
+    },
+    {
+     "id": "suffix",
+     "title": "an affix"
+    }
+   ],
+   "learnerNote": "A learner without an indefinite article must learn when 'a / one' is required; one with an article must learn to leave nouns bare."
+  },
+  {
+   "id": "nom.classifiers",
+   "title": "Numeral classifiers",
+   "area": "morphology",
+   "question": "Must a classifier (measure word) stand between a numeral and a noun ('three CL books')?",
+   "wals": "55A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "optional",
+     "title": "optional"
+    },
+    {
+     "id": "obligatory",
+     "title": "obligatory"
+    }
+   ],
+   "learnerNote": "A learner without classifiers must learn the right classifier with each noun; one with classifiers must learn to count nouns directly."
+  },
+  {
+   "id": "nom.possessiveAffixes",
+   "title": "Possessive affixes",
+   "area": "morphology",
+   "question": "Is the possessor ('my', 'your') marked by an affix on the noun?",
+   "wals": "57A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "prefixes",
+     "title": "prefixes"
+    },
+    {
+     "id": "suffixes",
+     "title": "suffixes"
+    },
+    {
+     "id": "both",
+     "title": "prefixes and suffixes"
+    }
+   ],
+   "learnerNote": "A learner without possessive affixes must learn a set of person endings for nouns ('house-my'); one with them must learn separate possessive words."
+  },
+  {
+   "id": "nom.alienability",
+   "title": "Alienable and inalienable possession",
+   "area": "morphology",
+   "question": "Does the way of saying 'my X' depend on the kind of thing or relation possessed?",
+   "wals": "59A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no possessive classification"
+    },
+    {
+     "id": "alienability",
+     "title": "inalienable (body parts, kin) vs alienable possession"
+    },
+    {
+     "id": "relational",
+     "title": "a / o classes chosen by the relation between possessor and possessed"
+    }
+   ],
+   "learnerNote": "A learner must learn which nouns or relations take which possessive construction, e.g. body parts and relatives vs ordinary objects."
+  },
+  {
+   "id": "nom.constructState",
+   "title": "Construct state and linkers",
+   "area": "morphology",
+   "question": "Does a noun take a special form or a linker when it is followed by a possessor or modifier?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "construct-state",
+     "title": "construct state: the head noun takes a special bound form ('house-of the-man')"
+    },
+    {
+     "id": "ezafe",
+     "title": "ezafe: a linking vowel after the head noun before its modifiers"
+    },
+    {
+     "id": "linker",
+     "title": "a linker particle between modifier and noun"
+    }
+   ],
+   "learnerNote": "A learner must learn to change or extend the first noun of a phrase rather than to mark the possessor alone."
+  },
+  {
+   "id": "nom.genitive",
+   "title": "Possessive noun phrase ('the man's house')",
+   "area": "syntax",
+   "question": "How is a possessor noun linked to the possessed noun?",
+   "wals": "24A",
+   "values": [
+    {
+     "id": "dependent-affix",
+     "title": "an ending or clitic on the possessor (genitive case, 's)"
+    },
+    {
+     "id": "adposition-or-particle",
+     "title": "a separate word ('of', 'de', 的, の)"
+    },
+    {
+     "id": "head-affix",
+     "title": "a marker on the possessed noun"
+    },
+    {
+     "id": "double",
+     "title": "markers on both"
+    },
+    {
+     "id": "construct",
+     "title": "the possessed noun takes a construct / bound form"
+    },
+    {
+     "id": "linker",
+     "title": "a linker attached to the possessed noun (ezafe type)"
+    },
+    {
+     "id": "juxtaposition",
+     "title": "the two nouns are simply placed side by side"
+    }
+   ],
+   "learnerNote": "A learner must learn which of the two nouns carries the marking and in which order they come."
+  },
+  {
+   "id": "verb.subjectAgreement",
+   "title": "Subject agreement on the verb",
+   "area": "morphology",
+   "question": "Does the verb change for the subject, and for what?",
+   "wals": "102A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no agreement"
+    },
+    {
+     "id": "person-number",
+     "title": "person and number"
+    },
+    {
+     "id": "person-number-gender",
+     "title": "person, number and (in some forms) gender"
+    },
+    {
+     "id": "noun-class",
+     "title": "person and noun class"
+    }
+   ],
+   "learnerNote": "A learner without agreement must learn conjugation tables; one with agreement must learn that here the verb stays the same and the subject must be said."
+  },
+  {
+   "id": "verb.objectMarking",
+   "title": "Object marking on the verb",
+   "area": "morphology",
+   "question": "Is the object (its person, number or definiteness) marked on the verb?",
+   "wals": "102A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "clitic-pronouns",
+     "title": "unstressed object pronouns attached to or fixed next to the verb"
+    },
+    {
+     "id": "agreement",
+     "title": "agreement: the verb marks the object even when a full object noun is present"
+    },
+    {
+     "id": "definiteness-conjugation",
+     "title": "the verb has a separate conjugation for definite objects"
+    }
+   ],
+   "learnerNote": "A learner must learn to mark the object inside the verb word, possibly twice (with a pronoun and a noun), or to stop doing so."
+  },
+  {
+   "id": "verb.tenseObligatory",
+   "title": "Obligatory tense",
+   "area": "morphology",
+   "question": "Must every finite verb (or clause) be marked for tense?",
+   "wals": null,
+   "values": [
+    {
+     "id": "obligatory",
+     "title": "yes: tense or a tense-aspect marker in every finite clause"
+    },
+    {
+     "id": "aspect-or-mood",
+     "title": "an aspect or mood marker is obligatory, but not tense"
+    },
+    {
+     "id": "optional",
+     "title": "no: time is shown by optional particles, adverbs or context"
+    }
+   ],
+   "learnerNote": "A learner from a tenseless language must mark time on every verb; a learner with tense must learn to leave time to adverbs and context."
+  },
+  {
+   "id": "verb.past",
+   "title": "Past tense",
+   "area": "morphology",
+   "question": "Is there a grammatical past tense, and does it distinguish degrees of remoteness?",
+   "wals": "66A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no grammatical past tense"
+    },
+    {
+     "id": "past",
+     "title": "one past (no remoteness distinctions)"
+    },
+    {
+     "id": "remoteness",
+     "title": "two or more pasts by remoteness (today / yesterday / long ago)"
+    }
+   ],
+   "learnerNote": "A learner without a past tense must mark every past event on the verb; one with a single past must learn to choose between near and remote pasts."
+  },
+  {
+   "id": "verb.future",
+   "title": "Future tense",
+   "area": "morphology",
+   "question": "How is future time expressed?",
+   "wals": "67A",
+   "values": [
+    {
+     "id": "inflectional",
+     "title": "an inflectional future"
+    },
+    {
+     "id": "periphrastic",
+     "title": "an auxiliary or particle"
+    },
+    {
+     "id": "none",
+     "title": "no grammatical future: the present / non-past or optional words"
+    }
+   ],
+   "learnerNote": "A learner must learn whether a future form is required, built with an auxiliary, or left to context."
+  },
+  {
+   "id": "verb.perfective",
+   "title": "Perfective / imperfective aspect",
+   "area": "morphology",
+   "question": "Does the grammar distinguish completed (perfective) from ongoing / habitual (imperfective) events?",
+   "wals": "65A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no grammatical aspect pair"
+    },
+    {
+     "id": "inflectional",
+     "title": "yes, by verb forms (e.g. aorist vs imperfect)"
+    },
+    {
+     "id": "aspect-pairs",
+     "title": "yes, by pairs of verbs (usually prefix or suffix derived)"
+    },
+    {
+     "id": "particle",
+     "title": "yes, by particles"
+    }
+   ],
+   "learnerNote": "A learner without aspect must decide for every past or future verb whether the event is seen as a whole or as ongoing; with verb pairs, every verb must be learned twice."
+  },
+  {
+   "id": "verb.progressive",
+   "title": "Progressive",
+   "area": "morphology",
+   "question": "Is there a progressive ('is doing') form, and must it be used for ongoing events?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no special progressive"
+    },
+    {
+     "id": "optional",
+     "title": "a progressive exists but the simple form also covers ongoing events"
+    },
+    {
+     "id": "obligatory",
+     "title": "ongoing events require the progressive"
+    }
+   ],
+   "learnerNote": "A learner must learn whether 'I eat' can mean 'I am eating', and when the progressive form is required."
+  },
+  {
+   "id": "verb.perfect",
+   "title": "Perfect",
+   "area": "morphology",
+   "question": "Is there a perfect ('has done', with present relevance), and what is it built from?",
+   "wals": "68A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no perfect"
+    },
+    {
+     "id": "possessive",
+     "title": "from a 'have' construction"
+    },
+    {
+     "id": "finish-already",
+     "title": "from 'finish' or 'already'"
+    },
+    {
+     "id": "other",
+     "title": "other (e.g. 'be' + participle, an affix)"
+    }
+   ],
+   "learnerNote": "A learner must learn when the perfect (rather than a simple past) is required, and how it is built."
+  },
+  {
+   "id": "verb.subjunctive",
+   "title": "Subjunctive",
+   "area": "morphology",
+   "question": "Is there a subjunctive (a verb form for wishes, purposes, possibilities in subordinate clauses)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "inflectional",
+     "title": "yes: dedicated verb forms"
+    },
+    {
+     "id": "particle",
+     "title": "yes: a particle (often with special forms), e.g. να, să, да, бы"
+    }
+   ],
+   "learnerNote": "A learner without a subjunctive must learn which conjunctions and verbs trigger it and its forms; one with it must learn to use ordinary forms."
+  },
+  {
+   "id": "verb.conditional",
+   "title": "Conditional",
+   "area": "morphology",
+   "question": "How is 'would / if' expressed?",
+   "wals": null,
+   "values": [
+    {
+     "id": "inflectional",
+     "title": "a conditional verb form or conditional suffix"
+    },
+    {
+     "id": "auxiliary-or-particle",
+     "title": "an auxiliary or particle (would, würde, бы, θα)"
+    },
+    {
+     "id": "conjunction-only",
+     "title": "only a conjunction 'if'; the verb is unchanged"
+    }
+   ],
+   "learnerNote": "A learner must learn whether 'if / would' is carried by a verb form, an auxiliary, or a conjunction alone."
+  },
+  {
+   "id": "verb.optative",
+   "title": "Optative",
+   "area": "morphology",
+   "question": "Is there a dedicated inflectional form for wishes ('may he live')?",
+   "wals": "73A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must learn a separate verb form for wishes and blessings, or to express them with 'let' / 'may' constructions."
+  },
+  {
+   "id": "verb.evidentiality",
+   "title": "Evidentiality",
+   "area": "morphology",
+   "question": "Must the verb show how the speaker knows the information (seen, inferred, heard)?",
+   "wals": "77A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no grammatical evidentials"
+    },
+    {
+     "id": "indirect-only",
+     "title": "indirect (reported / inferred) only"
+    },
+    {
+     "id": "direct-and-indirect",
+     "title": "direct and indirect"
+    }
+   ],
+   "learnerNote": "A learner without evidentials must choose a verb form according to whether they witnessed the event or know it from others or from traces."
+  },
+  {
+   "id": "verb.mirativity",
+   "title": "Mirativity",
+   "area": "morphology",
+   "question": "Is there a grammatical form for new or surprising information ('so he IS here!')?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "grammatical",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must learn the verb form or particle that signals surprise or newly discovered facts."
+  },
+  {
+   "id": "verb.passive",
+   "title": "Passive",
+   "area": "morphology",
+   "question": "Is there a passive, and how is it formed?",
+   "wals": "107A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no passive"
+    },
+    {
+     "id": "periphrastic",
+     "title": "with an auxiliary or particle (be + participle, 被)"
+    },
+    {
+     "id": "morphological",
+     "title": "with a verb affix or stem pattern"
+    },
+    {
+     "id": "symmetrical-voice",
+     "title": "a voice system: any of several arguments can be made the pivot"
+    }
+   ],
+   "learnerNote": "A learner must learn how (and how often) the language promotes the object to subject, or how it avoids doing so."
+  },
+  {
+   "id": "verb.antipassive",
+   "title": "Antipassive",
+   "area": "morphology",
+   "question": "Is there an antipassive (the object is demoted or dropped and the agent becomes an ordinary intransitive subject)?",
+   "wals": "108A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must learn a detransitivising verb form used when the patient is indefinite or unimportant, typical of ergative languages."
+  },
+  {
+   "id": "verb.causative",
+   "title": "Causative morphology",
+   "area": "morphology",
+   "question": "Can 'make someone do' be formed by changing the verb itself?",
+   "wals": "111A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no: only a separate verb ('make', 'let')"
+    },
+    {
+     "id": "affix",
+     "title": "a productive causative affix or pattern"
+    },
+    {
+     "id": "compound",
+     "title": "verb compounds (cause + result)"
+    },
+    {
+     "id": "both",
+     "title": "affix and compounds"
+    }
+   ],
+   "learnerNote": "A learner must learn the causative affix and how it changes the case of the person made to act, or to use a separate 'make / let' verb."
+  },
+  {
+   "id": "verb.applicative",
+   "title": "Applicative",
+   "area": "morphology",
+   "question": "Can a verb affix add a new object (beneficiary, place, instrument): 'cook-for someone'?",
+   "wals": "109A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must learn that a verb affix can turn a beneficiary or location into a direct object."
+  },
+  {
+   "id": "verb.particleVerbs",
+   "title": "Verb particles and preverbs",
+   "area": "morphology",
+   "question": "Are there verbs with particles or prefixes that change meaning, and do they separate from the verb?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no systematic class of particle verbs"
+    },
+    {
+     "id": "fixed-prefixes",
+     "title": "prefixed verbs whose prefix stays attached"
+    },
+    {
+     "id": "phrasal-particles",
+     "title": "phrasal verbs: a separate particle after the verb"
+    },
+    {
+     "id": "separable",
+     "title": "separable: the particle is attached in some forms and detached in others"
+    }
+   ],
+   "learnerNote": "A learner must learn the meaning of each particle verb as a unit and, for separable ones, where the particle goes in each clause type."
+  },
+  {
+   "id": "verb.lightVerbs",
+   "title": "Light-verb compounds",
+   "area": "morphology",
+   "question": "Are many verbs formed as noun + 'do / make / be' (kar kardan, 勉強する, 공부하다)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "rare",
+     "title": "rare"
+    },
+    {
+     "id": "common",
+     "title": "common"
+    },
+    {
+     "id": "dominant",
+     "title": "the main way of forming new verbs"
+    }
+   ],
+   "learnerNote": "A learner must learn verbs as noun + light verb units and which light verb each noun takes."
+  },
+  {
+   "id": "verb.objectCompounds",
+   "title": "Separable verb-object compounds",
+   "area": "morphology",
+   "question": "Are there verbs made of verb + object that split around other words (睡觉 → 睡了一个好觉)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must learn that such verbs already contain their object and how aspect markers and modifiers are inserted inside them."
+  },
+  {
+   "id": "verb.converbs",
+   "title": "Converbs and clause chaining",
+   "area": "morphology",
+   "question": "Are there non-finite adverbial verb forms ('having done', 'while doing') used to chain clauses?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    },
+    {
+     "id": "central",
+     "title": "yes, and chaining with converbs is the main way to link clauses"
+    }
+   ],
+   "learnerNote": "A learner must learn to link clauses with a non-finite verb form and leave only the last verb finite, or (the other way round) to use finite verbs joined by 'and'."
+  },
+  {
+   "id": "verb.infinitive",
+   "title": "Infinitive",
+   "area": "morphology",
+   "question": "Is there an infinitive ('to go'), and what replaces it if not?",
+   "wals": null,
+   "values": [
+    {
+     "id": "infinitive",
+     "title": "an infinitive"
+    },
+    {
+     "id": "verbal-noun",
+     "title": "a verbal noun (masdar) instead"
+    },
+    {
+     "id": "finite-clause",
+     "title": "a finite subordinate clause or subjunctive instead"
+    },
+    {
+     "id": "no-verb-forms",
+     "title": "not applicable: verbs do not change form"
+    }
+   ],
+   "learnerNote": "A learner must learn to say 'I want to go' as 'I want that I go' (or with a verbal noun) where there is no infinitive, and to master infinitive constructions where there is."
+  },
+  {
+   "id": "verb.participles",
+   "title": "Participles",
+   "area": "morphology",
+   "question": "Are there participles (adjectival verb forms), and how many?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "none (or not distinct from finite forms)"
+    },
+    {
+     "id": "few",
+     "title": "one or two, mostly in compound tenses"
+    },
+    {
+     "id": "rich",
+     "title": "several, by tense / voice, used like relative clauses"
+    }
+   ],
+   "learnerNote": "A learner must learn to turn a relative clause into a participle phrase ('the book read by me') or vice versa."
+  },
+  {
+   "id": "verb.honorifics",
+   "title": "Honorific forms",
+   "area": "morphology",
+   "question": "Do verbs or words change to show respect for the person spoken about or to?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no (respect only through pronouns or titles)"
+    },
+    {
+     "id": "lexical",
+     "title": "special honorific vocabulary (royal, religious or respectful words)"
+    },
+    {
+     "id": "morphological",
+     "title": "honorific verb morphology and speech levels"
+    }
+   ],
+   "learnerNote": "A learner must learn a second set of words or verb forms for respected people and when to use them."
+  },
+  {
+   "id": "adj.predicative",
+   "title": "Adjectives as verbs",
+   "area": "morphology",
+   "question": "Does a predicative adjective ('the house is big') behave like a verb?",
+   "wals": "118A",
+   "values": [
+    {
+     "id": "verbal",
+     "title": "verbal: adjectives inflect / predicate like verbs, no copula"
+    },
+    {
+     "id": "nonverbal",
+     "title": "nonverbal: adjectives need a copula ('is')"
+    },
+    {
+     "id": "mixed",
+     "title": "mixed"
+    }
+   ],
+   "learnerNote": "A learner must learn to use adjectives as verbs (with tense and negation, no 'to be'), or to add a copula."
+  },
+  {
+   "id": "adj.agreement",
+   "title": "Adjective agreement",
+   "area": "morphology",
+   "question": "Does an attributive adjective agree with its noun, and in what?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no agreement"
+    },
+    {
+     "id": "case",
+     "title": "case only (partial)"
+    },
+    {
+     "id": "number-case",
+     "title": "number and case"
+    },
+    {
+     "id": "gender-number",
+     "title": "gender and number"
+    },
+    {
+     "id": "gender-number-case",
+     "title": "gender, number and case"
+    },
+    {
+     "id": "noun-class",
+     "title": "noun class"
+    }
+   ],
+   "learnerNote": "A learner without agreement must learn the adjective's endings for each noun; one with agreement must learn to leave adjectives unchanged."
+  },
+  {
+   "id": "adj.comparativeForm",
+   "title": "Comparative of adjectives",
+   "area": "morphology",
+   "question": "Is 'bigger' formed with an affix or with a separate word ('more big')?",
+   "wals": null,
+   "values": [
+    {
+     "id": "affix",
+     "title": "an affix (big-ger)"
+    },
+    {
+     "id": "analytic",
+     "title": "a separate word (more big)"
+    },
+    {
+     "id": "both",
+     "title": "both, depending on the adjective"
+    }
+   ],
+   "learnerNote": "A learner must learn the comparative endings (and the irregular ones) or to build comparatives with a degree word."
+  },
+  {
+   "id": "syn.wordOrder",
+   "title": "Basic word order",
+   "area": "syntax",
+   "question": "What is the dominant order of subject, object and verb?",
+   "wals": "81A",
+   "values": [
+    {
+     "id": "SOV",
+     "title": "SOV"
+    },
+    {
+     "id": "SVO",
+     "title": "SVO"
+    },
+    {
+     "id": "VSO",
+     "title": "VSO"
+    },
+    {
+     "id": "VOS",
+     "title": "VOS"
+    },
+    {
+     "id": "OVS",
+     "title": "OVS"
+    },
+    {
+     "id": "OSV",
+     "title": "OSV"
+    },
+    {
+     "id": "free",
+     "title": "no dominant order"
+    }
+   ],
+   "learnerNote": "A learner must re-order the sentence around the verb (e.g. put it at the end or the beginning) and rely on case or particles where the order is free."
+  },
+  {
+   "id": "syn.verbSecond",
+   "title": "Verb-second",
+   "area": "syntax",
+   "question": "Must the finite verb be the second element of a main clause?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "v2",
+     "title": "yes, verb-second in main clauses"
+    },
+    {
+     "id": "v2-and-final",
+     "title": "verb-second in main clauses and verb-final in subordinate clauses"
+    }
+   ],
+   "learnerNote": "A learner must invert subject and verb after any fronted element and, where applicable, send the verb to the end of subordinate clauses."
+  },
+  {
+   "id": "syn.adpositions",
+   "title": "Prepositions or postpositions",
+   "area": "syntax",
+   "question": "Do adpositions come before or after their noun phrase?",
+   "wals": "85A",
+   "values": [
+    {
+     "id": "prepositions",
+     "title": "prepositions"
+    },
+    {
+     "id": "postpositions",
+     "title": "postpositions"
+    },
+    {
+     "id": "mixed",
+     "title": "no dominant type (both)"
+    },
+    {
+     "id": "none",
+     "title": "no adpositions"
+    }
+   ],
+   "learnerNote": "A learner must learn to put the relational word after the noun ('the house in') or before it."
+  },
+  {
+   "id": "syn.adjectiveNoun",
+   "title": "Adjective and noun",
+   "area": "syntax",
+   "question": "Does the adjective come before or after the noun?",
+   "wals": "87A",
+   "values": [
+    {
+     "id": "adj-noun",
+     "title": "adjective before noun"
+    },
+    {
+     "id": "noun-adj",
+     "title": "noun before adjective"
+    },
+    {
+     "id": "free",
+     "title": "no dominant order"
+    }
+   ],
+   "learnerNote": "A learner must reverse the usual order of adjective and noun, and learn any adjectives that keep a special position."
+  },
+  {
+   "id": "syn.genitiveNoun",
+   "title": "Possessor and noun",
+   "area": "syntax",
+   "question": "Does the possessor come before or after the possessed noun?",
+   "wals": "86A",
+   "values": [
+    {
+     "id": "gen-noun",
+     "title": "possessor first"
+    },
+    {
+     "id": "noun-gen",
+     "title": "possessed noun first"
+    },
+    {
+     "id": "free",
+     "title": "no dominant order"
+    }
+   ],
+   "learnerNote": "A learner must reverse the order of 'X's Y' / 'Y of X'."
+  },
+  {
+   "id": "syn.numeralNoun",
+   "title": "Numeral and noun",
+   "area": "syntax",
+   "question": "Does a numeral come before or after the noun?",
+   "wals": "89A",
+   "values": [
+    {
+     "id": "num-noun",
+     "title": "numeral first"
+    },
+    {
+     "id": "noun-num",
+     "title": "noun first"
+    }
+   ],
+   "learnerNote": "A learner must learn to put the number after the noun (often with a classifier) or before it."
+  },
+  {
+   "id": "syn.demonstrativeNoun",
+   "title": "Demonstrative and noun",
+   "area": "syntax",
+   "question": "Does 'this / that' come before or after the noun?",
+   "wals": "88A",
+   "values": [
+    {
+     "id": "dem-noun",
+     "title": "before the noun"
+    },
+    {
+     "id": "noun-dem",
+     "title": "after the noun (or as a suffix)"
+    },
+    {
+     "id": "both-sides",
+     "title": "on both sides of the noun"
+    },
+    {
+     "id": "mixed",
+     "title": "either, depending on construction"
+    }
+   ],
+   "learnerNote": "A learner must learn the position of demonstratives, which may differ from that of adjectives and articles."
+  },
+  {
+   "id": "syn.relativeClauseOrder",
+   "title": "Relative clause and noun",
+   "area": "syntax",
+   "question": "Does a relative clause follow or precede its noun?",
+   "wals": "90A",
+   "values": [
+    {
+     "id": "noun-rel",
+     "title": "after the noun"
+    },
+    {
+     "id": "rel-noun",
+     "title": "before the noun"
+    },
+    {
+     "id": "correlative",
+     "title": "correlative (relative clause + resumptive 'that one')"
+    },
+    {
+     "id": "internally-headed",
+     "title": "the noun stays inside the relative clause"
+    },
+    {
+     "id": "mixed",
+     "title": "mixed"
+    }
+   ],
+   "learnerNote": "A learner must build relative clauses before the noun (and wait for the noun at the end), or after it."
+  },
+  {
+   "id": "syn.relativizer",
+   "title": "How relative clauses are marked",
+   "area": "syntax",
+   "question": "What marks a relative clause?",
+   "wals": "122A",
+   "values": [
+    {
+     "id": "relative-pronoun",
+     "title": "a relative pronoun (who / which / der / который)"
+    },
+    {
+     "id": "invariant-particle",
+     "title": "an invariant particle or complementiser (που, que, she-, 的)"
+    },
+    {
+     "id": "verb-form",
+     "title": "a special verb form (participle, relative affix)"
+    },
+    {
+     "id": "juxtaposition",
+     "title": "nothing: the clause is simply placed next to the noun"
+    },
+    {
+     "id": "correlative",
+     "title": "a correlative pair (jo … vo)"
+    }
+   ],
+   "learnerNote": "A learner must learn the relative word (and its case / gender forms) or the participle forms that replace relative clauses."
+  },
+  {
+   "id": "syn.proDrop",
+   "title": "Subject pronouns",
+   "area": "syntax",
+   "question": "Can subject pronouns be left out?",
+   "wals": "101A",
+   "values": [
+    {
+     "id": "obligatory",
+     "title": "no: subject pronouns are required"
+    },
+    {
+     "id": "agreement",
+     "title": "yes: the verb shows the subject, pronouns are for emphasis"
+    },
+    {
+     "id": "discourse",
+     "title": "yes: pronouns are omitted when clear from context, without agreement"
+    },
+    {
+     "id": "partial",
+     "title": "only in some persons or tenses"
+    }
+   ],
+   "learnerNote": "A learner from a pro-drop language must always say the subject; one from a non-pro-drop language must learn to leave it out."
+  },
+  {
+   "id": "syn.copula",
+   "title": "Copula 'to be' in the present",
+   "area": "syntax",
+   "question": "Is 'to be' needed in present-tense sentences like 'he is a teacher'?",
+   "wals": "120A",
+   "values": [
+    {
+     "id": "obligatory",
+     "title": "yes"
+    },
+    {
+     "id": "optional",
+     "title": "optional / often left out"
+    },
+    {
+     "id": "absent-in-present",
+     "title": "no copula in the present (or at all): 'he teacher'"
+    },
+    {
+     "id": "absent-third-person",
+     "title": "absent in the 3rd person only; 1st / 2nd person take a copula or ending"
+    }
+   ],
+   "learnerNote": "A learner must learn to build sentences without 'is' (nominal sentences) or to always add it."
+  },
+  {
+   "id": "syn.beSplit",
+   "title": "'Is' (identity) vs 'is' (location)",
+   "area": "syntax",
+   "question": "Are 'X is a teacher' and 'X is at home' expressed with the same word?",
+   "wals": "119A",
+   "values": [
+    {
+     "id": "same",
+     "title": "the same construction"
+    },
+    {
+     "id": "different",
+     "title": "different words (e.g. ser / estar, 是 / 在)"
+    }
+   ],
+   "learnerNote": "A learner must choose between two 'to be' verbs (identity vs location / state) or learn that one covers both."
+  },
+  {
+   "id": "syn.have",
+   "title": "Predicative possession ('I have')",
+   "area": "syntax",
+   "question": "How is 'I have a book' expressed?",
+   "wals": "117A",
+   "values": [
+    {
+     "id": "have-verb",
+     "title": "a verb 'have'"
+    },
+    {
+     "id": "locational",
+     "title": "'at / to me is a book'"
+    },
+    {
+     "id": "genitive",
+     "title": "'my book exists'"
+    },
+    {
+     "id": "topic",
+     "title": "'(as for) me, there is a book' / existential with topic"
+    },
+    {
+     "id": "with",
+     "title": "'I am with a book'"
+    }
+   ],
+   "learnerNote": "A learner must learn to express possession with an existential and a case or preposition instead of a 'have' verb, or vice versa."
+  },
+  {
+   "id": "syn.polarQuestion",
+   "title": "Yes / no questions",
+   "area": "syntax",
+   "question": "How are yes / no questions marked?",
+   "wals": "116A",
+   "values": [
+    {
+     "id": "particle",
+     "title": "a question particle"
+    },
+    {
+     "id": "particle-optional",
+     "title": "a particle exists, but intonation alone is common"
+    },
+    {
+     "id": "verb-morphology",
+     "title": "interrogative verb forms"
+    },
+    {
+     "id": "word-order",
+     "title": "change of word order (inversion)"
+    },
+    {
+     "id": "intonation-only",
+     "title": "intonation only"
+    },
+    {
+     "id": "mixed",
+     "title": "particle and verb morphology"
+    }
+   ],
+   "learnerNote": "A learner must learn the question particle and its position, inversion, or that intonation alone suffices."
+  },
+  {
+   "id": "syn.questionParticlePosition",
+   "title": "Position of the question particle",
+   "area": "syntax",
+   "question": "Where does the yes / no question particle go?",
+   "wals": "92A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no question particle in common use"
+    },
+    {
+     "id": "initial",
+     "title": "at the beginning of the clause"
+    },
+    {
+     "id": "second",
+     "title": "after the first word or phrase"
+    },
+    {
+     "id": "final",
+     "title": "at the end of the clause"
+    },
+    {
+     "id": "after-focus",
+     "title": "right after the word being questioned"
+    },
+    {
+     "id": "other",
+     "title": "elsewhere (e.g. before the verb)"
+    }
+   ],
+   "learnerNote": "A learner must learn where to put the question particle, which may depend on what is being asked about."
+  },
+  {
+   "id": "syn.whPosition",
+   "title": "Question words",
+   "area": "syntax",
+   "question": "Are question words (who, what, where) moved to the front?",
+   "wals": "93A",
+   "values": [
+    {
+     "id": "fronted",
+     "title": "yes, to the start of the clause"
+    },
+    {
+     "id": "in-situ",
+     "title": "no: they stay in place (or go before the verb)"
+    },
+    {
+     "id": "mixed",
+     "title": "either"
+    }
+   ],
+   "learnerNote": "A learner must learn to leave the question word where the answer would stand, or to move it to the front."
+  },
+  {
+   "id": "syn.negation",
+   "title": "Negation",
+   "area": "syntax",
+   "question": "How is a sentence negated?",
+   "wals": "112A",
+   "values": [
+    {
+     "id": "particle",
+     "title": "a negative particle / word"
+    },
+    {
+     "id": "affix",
+     "title": "a negative affix on the verb"
+    },
+    {
+     "id": "auxiliary-verb",
+     "title": "a negative auxiliary verb (conjugated)"
+    },
+    {
+     "id": "double",
+     "title": "two-part negation"
+    }
+   ],
+   "learnerNote": "A learner must learn the negator's form and whether it is a separate word, an affix, a conjugated verb or two parts around the verb."
+  },
+  {
+   "id": "syn.negationPosition",
+   "title": "Position of negation",
+   "area": "syntax",
+   "question": "Where does the negator stand relative to the verb?",
+   "wals": "143A",
+   "values": [
+    {
+     "id": "before-verb",
+     "title": "before the verb"
+    },
+    {
+     "id": "after-verb",
+     "title": "after the verb (or as a suffix)"
+    },
+    {
+     "id": "double",
+     "title": "on both sides"
+    },
+    {
+     "id": "varies",
+     "title": "depends on clause type or verb position"
+    }
+   ],
+   "learnerNote": "A learner must learn where the negation goes, which can differ between main and subordinate clauses."
+  },
+  {
+   "id": "syn.negativeConcord",
+   "title": "Negative concord",
+   "area": "syntax",
+   "question": "With 'nobody / nothing', is the verb also negated ('nobody did not come')?",
+   "wals": "115A",
+   "values": [
+    {
+     "id": "concord",
+     "title": "yes: the verb is always negated too"
+    },
+    {
+     "id": "no-concord",
+     "title": "no: one negation only"
+    },
+    {
+     "id": "mixed",
+     "title": "depends on position or word"
+    }
+   ],
+   "learnerNote": "A learner must learn whether 'nobody' needs an extra 'not' on the verb, since doubling can be required or wrong."
+  },
+  {
+   "id": "syn.topicProminence",
+   "title": "Topic prominence",
+   "area": "syntax",
+   "question": "Is the sentence organised around a grammatical subject or around a topic ('as for X, …')?",
+   "wals": null,
+   "values": [
+    {
+     "id": "subject-prominent",
+     "title": "subject-prominent"
+    },
+    {
+     "id": "topic-prominent",
+     "title": "topic-prominent"
+    },
+    {
+     "id": "both",
+     "title": "both subject and topic are grammatically marked"
+    },
+    {
+     "id": "neither",
+     "title": "neither"
+    }
+   ],
+   "learnerNote": "A learner must learn to start with what the sentence is about and comment on it, or to build sentences around a grammatical subject that agrees with the verb."
+  },
+  {
+   "id": "syn.serialVerbs",
+   "title": "Serial verbs",
+   "area": "syntax",
+   "question": "Can several verbs be strung together in one clause without conjunctions ('take knife cut meat')?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "limited",
+     "title": "limited"
+    },
+    {
+     "id": "productive",
+     "title": "productive"
+    }
+   ],
+   "learnerNote": "A learner must learn to express direction, instrument, result or purpose by chaining bare verbs, or to replace such chains with prepositions and subordinate clauses."
+  },
+  {
+   "id": "syn.switchReference",
+   "title": "Switch reference",
+   "area": "syntax",
+   "question": "Does a dependent verb show whether its subject is the same as that of the main verb?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must choose the dependent verb form by whether the subject changes between clauses."
+  },
+  {
+   "id": "syn.subordination",
+   "title": "Subordinate clauses",
+   "area": "syntax",
+   "question": "Are subordinate clauses mainly finite clauses with conjunctions, or non-finite verb forms (participles, nominalisations, converbs)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "conjunctions",
+     "title": "finite clauses with conjunctions ('that', 'because', 'when')"
+    },
+    {
+     "id": "verb-forms",
+     "title": "non-finite verb forms with case endings or postpositions"
+    },
+    {
+     "id": "mixed",
+     "title": "both are common"
+    }
+   ],
+   "learnerNote": "A learner must learn to turn 'because he came' into a nominalised verb with a case ending, or the other way round."
+  },
+  {
+   "id": "syn.obliquePosition",
+   "title": "Position of obliques",
+   "area": "syntax",
+   "question": "Where do adverbial phrases (place, time, instrument) stand relative to verb and object?",
+   "wals": "84A",
+   "values": [
+    {
+     "id": "VOX",
+     "title": "after verb and object (V O X)"
+    },
+    {
+     "id": "XVO",
+     "title": "before the verb, object after (X V O)"
+    },
+    {
+     "id": "XOV",
+     "title": "before object and verb (X O V)"
+    },
+    {
+     "id": "OXV",
+     "title": "between object and verb (O X V)"
+    },
+    {
+     "id": "free",
+     "title": "no dominant order"
+    }
+   ],
+   "learnerNote": "A learner must move time, place and manner phrases before the verb (e.g. in Chinese) or after the object."
+  },
+  {
+   "id": "syn.comparison",
+   "title": "Comparative construction",
+   "area": "syntax",
+   "question": "How is 'X is bigger than Y' built?",
+   "wals": "121A",
+   "values": [
+    {
+     "id": "locational",
+     "title": "with 'from / at' (big from Y)"
+    },
+    {
+     "id": "exceed",
+     "title": "with a verb 'exceed / pass' (big pass Y)"
+    },
+    {
+     "id": "conjoined",
+     "title": "by two clauses (X is big, Y is small)"
+    },
+    {
+     "id": "particle",
+     "title": "with a particle 'than'"
+    }
+   ],
+   "learnerNote": "A learner must learn the case, preposition or verb that marks the standard of comparison."
+  },
+  {
+   "id": "pron.gender",
+   "title": "Gender in personal pronouns",
+   "area": "syntax",
+   "question": "Do personal pronouns distinguish masculine and feminine?",
+   "wals": "44A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no ('he' = 'she')"
+    },
+    {
+     "id": "written-only",
+     "title": "only in writing"
+    },
+    {
+     "id": "third-person",
+     "title": "in the 3rd person (he / she)"
+    },
+    {
+     "id": "second-and-third",
+     "title": "also in the 1st or 2nd person (e.g. 'you' masc. / fem.)"
+    }
+   ],
+   "learnerNote": "A learner must choose pronouns (and verb forms) by the sex of the person spoken about or to, or learn that one pronoun covers both."
+  },
+  {
+   "id": "pron.inclusive",
+   "title": "Inclusive and exclusive 'we'",
+   "area": "syntax",
+   "question": "Are there two words for 'we': including the listener and excluding them?",
+   "wals": "39A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "present",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must decide every time whether 'we' includes the person addressed."
+  },
+  {
+   "id": "prag.politePronouns",
+   "title": "Politeness in pronouns (T / V)",
+   "area": "pragmatics",
+   "question": "Does the choice of 'you' depend on politeness?",
+   "wals": "45A",
+   "values": [
+    {
+     "id": "none",
+     "title": "no distinction"
+    },
+    {
+     "id": "binary",
+     "title": "two forms (familiar / polite)"
+    },
+    {
+     "id": "multiple",
+     "title": "three or more levels"
+    },
+    {
+     "id": "avoidance",
+     "title": "pronouns are avoided; titles and kin terms used instead"
+    }
+   ],
+   "learnerNote": "A learner must choose the form of address (and the matching verb forms) by relationship and situation."
+  },
+  {
+   "id": "prag.speechLevels",
+   "title": "Speech levels",
+   "area": "pragmatics",
+   "question": "Do verb endings or sentence particles change with the formality of the situation?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "polite-particles",
+     "title": "polite particles added to sentences"
+    },
+    {
+     "id": "two-levels",
+     "title": "two levels of verb endings (plain / polite)"
+    },
+    {
+     "id": "several-levels",
+     "title": "several speech levels in the verb endings"
+    }
+   ],
+   "learnerNote": "A learner must mark the level of politeness in every sentence, choosing endings or particles by the addressee."
+  },
+  {
+   "id": "prag.diglossia",
+   "title": "Diglossia",
+   "area": "pragmatics",
+   "question": "Is the written / formal standard markedly different from the everyday spoken language?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no significant gap"
+    },
+    {
+     "id": "moderate",
+     "title": "a noticeable gap (forms and words differ)"
+    },
+    {
+     "id": "strong",
+     "title": "two distinct varieties for formal and everyday use"
+    }
+   ],
+   "learnerNote": "A learner must learn two varieties, or at least two sets of forms, and when each is used."
+  },
+  {
+   "id": "prag.genderedSpeech",
+   "title": "Speaker's gender in speech",
+   "area": "pragmatics",
+   "question": "Does what a speaker says about themselves change with the speaker's gender?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "grammatical",
+     "title": "yes, by agreement (e.g. 'I was tired' differs for a man and a woman)"
+    },
+    {
+     "id": "lexical",
+     "title": "yes, by gendered pronouns, particles or kin terms"
+    }
+   ],
+   "learnerNote": "A learner must mark their own gender in verb or adjective forms, or choose gendered particles and pronouns."
+  },
+  {
+   "id": "lex.uncleTerms",
+   "title": "Kinship: uncles",
+   "area": "lexicon",
+   "question": "How are the father's and the mother's brothers named?",
+   "wals": null,
+   "values": [
+    {
+     "id": "lineal",
+     "title": "one word for both uncles, distinct from 'father' (English type)"
+    },
+    {
+     "id": "bifurcate-collateral",
+     "title": "different words for father's brother and mother's brother"
+    },
+    {
+     "id": "bifurcate-merging",
+     "title": "father's brother called 'father' (big / small father), mother's brother distinct"
+    },
+    {
+     "id": "generational",
+     "title": "all uncles called 'father'"
+    }
+   ],
+   "learnerNote": "A learner must learn separate words by the side of the family (and sometimes by relative age), or learn that one word covers several relatives."
+  },
+  {
+   "id": "lex.siblingAge",
+   "title": "Kinship: older and younger siblings",
+   "area": "lexicon",
+   "question": "Do the basic words for siblings distinguish older and younger?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "elder-younger",
+     "title": "yes"
+    }
+   ],
+   "learnerNote": "A learner must always know (and say) whether a sibling is older or younger."
+  },
+  {
+   "id": "lex.knowVerbs",
+   "title": "Verbs of knowing",
+   "area": "lexicon",
+   "question": "Are 'know a fact' and 'know a person / be acquainted' different verbs?",
+   "wals": null,
+   "values": [
+    {
+     "id": "one",
+     "title": "one verb"
+    },
+    {
+     "id": "two",
+     "title": "two verbs (savoir / connaître, wissen / kennen)"
+    }
+   ],
+   "learnerNote": "A learner must choose the verb by what is known (a fact or a person / place), or learn that one verb covers both."
+  },
+  {
+   "id": "lex.wearVerbs",
+   "title": "Verbs of wearing",
+   "area": "lexicon",
+   "question": "Is there one verb for wearing / putting on everything, or several by body part or item?",
+   "wals": null,
+   "values": [
+    {
+     "id": "one",
+     "title": "one general verb"
+    },
+    {
+     "id": "two",
+     "title": "two (clothes vs accessories)"
+    },
+    {
+     "id": "several",
+     "title": "several by body part (body, feet, head, hands …)"
+    }
+   ],
+   "learnerNote": "A learner must choose the wearing verb by the item (shirt, shoes, hat, glasses, ring)."
+  },
+  {
+   "id": "lex.carryVerbs",
+   "title": "Verbs of carrying",
+   "area": "lexicon",
+   "question": "Is there one basic verb 'carry', or must the manner (in the hand, on the back, on the shoulder, in the arms) be chosen?",
+   "wals": null,
+   "values": [
+    {
+     "id": "general",
+     "title": "one general verb, manner optional"
+    },
+    {
+     "id": "manner-specific",
+     "title": "the manner must be chosen"
+    }
+   ],
+   "learnerNote": "A learner must choose the carrying verb by how the thing is carried."
+  },
+  {
+   "id": "lex.cutVerbs",
+   "title": "Verbs of cutting",
+   "area": "lexicon",
+   "question": "Is there a general 'cut', or must the instrument (knife vs scissors) be chosen?",
+   "wals": null,
+   "values": [
+    {
+     "id": "general",
+     "title": "a general verb 'cut'"
+    },
+    {
+     "id": "by-instrument",
+     "title": "different verbs by instrument (no general verb)"
+    }
+   ],
+   "learnerNote": "A learner must choose the cutting verb by instrument and manner."
+  },
+  {
+   "id": "sem.greenBlue",
+   "title": "Green and blue",
+   "area": "semantics",
+   "question": "Are green and blue named by different basic colour words?",
+   "wals": "134A",
+   "values": [
+    {
+     "id": "distinct",
+     "title": "yes, two basic words"
+    },
+    {
+     "id": "grue",
+     "title": "no, one basic word covers both"
+    },
+    {
+     "id": "other",
+     "title": "another division"
+    }
+   ],
+   "learnerNote": "A learner must split (or merge) the colour range, e.g. qualify a single 'grue' word as 'leaf-grue' / 'sky-grue'."
+  },
+  {
+   "id": "sem.motionFraming",
+   "title": "Motion verbs: manner vs path",
+   "area": "semantics",
+   "question": "Does the verb usually express the path of motion (enter, exit) or the manner (run, float) with the path in a particle?",
+   "wals": null,
+   "values": [
+    {
+     "id": "verb-framed",
+     "title": "path in the verb (entrar corriendo)"
+    },
+    {
+     "id": "satellite-framed",
+     "title": "manner in the verb, path in a particle or prefix (run in, hineinlaufen)"
+    },
+    {
+     "id": "equipollent",
+     "title": "both as equal verbs (跑进来: run-enter-come)"
+    }
+   ],
+   "learnerNote": "A learner must re-package motion events: put the direction in the verb and the manner in an adverbial, or the other way round."
+  },
+  {
+   "id": "sem.positionVerbs",
+   "title": "Position verbs",
+   "area": "semantics",
+   "question": "Is the location of objects normally expressed with posture verbs (the book lies, the glass stands)?",
+   "wals": null,
+   "values": [
+    {
+     "id": "generic",
+     "title": "a generic 'be / be located'"
+    },
+    {
+     "id": "posture",
+     "title": "posture verbs (stand, lie, sit, hang) are the normal way"
+    }
+   ],
+   "learnerNote": "A learner must choose 'stand', 'lie' or 'sit' by the shape and orientation of an object, or learn to use a generic 'be'."
+  },
+  {
+   "id": "num.base",
+   "title": "Numeral base",
+   "area": "numbers",
+   "question": "What is the base of the counting system?",
+   "wals": "131A",
+   "values": [
+    {
+     "id": "decimal",
+     "title": "decimal (tens)"
+    },
+    {
+     "id": "vigesimal-decimal",
+     "title": "mixed twenties and tens"
+    },
+    {
+     "id": "vigesimal",
+     "title": "vigesimal (twenties)"
+    },
+    {
+     "id": "other",
+     "title": "other (e.g. five-based for 6-9)"
+    }
+   ],
+   "learnerNote": "A learner must learn to count in twenties (four-twenty = 80) or with a five-based system for the lower numbers."
+  },
+  {
+   "id": "num.order",
+   "title": "Order of tens and units",
+   "area": "numbers",
+   "question": "Is 21 said as 'twenty-one' or 'one-and-twenty'?",
+   "wals": null,
+   "values": [
+    {
+     "id": "tens-first",
+     "title": "tens first"
+    },
+    {
+     "id": "units-first",
+     "title": "units first"
+    },
+    {
+     "id": "mixed",
+     "title": "both orders in use"
+    }
+   ],
+   "learnerNote": "A learner must reverse the order of tens and units when saying or hearing numbers."
+  },
+  {
+   "id": "num.agreement",
+   "title": "Numeral agreement",
+   "area": "numbers",
+   "question": "Do numerals change for gender, case or noun class?",
+   "wals": null,
+   "values": [
+    {
+     "id": "none",
+     "title": "no"
+    },
+    {
+     "id": "some",
+     "title": "some numerals (e.g. 'one', 'two')"
+    },
+    {
+     "id": "extensive",
+     "title": "most numerals agree or decline"
+    }
+   ],
+   "learnerNote": "A learner must inflect numerals with the noun (and, in Arabic, even reverse their gender), or learn that they are invariable."
+  },
+  {
+   "id": "num.largeNumbers",
+   "title": "Large numbers",
+   "area": "numbers",
+   "question": "How are large numbers grouped?",
+   "wals": null,
+   "values": [
+    {
+     "id": "thousands",
+     "title": "by thousands (thousand, million)"
+    },
+    {
+     "id": "myriads",
+     "title": "by ten-thousands (万)"
+    },
+    {
+     "id": "lakh-crore",
+     "title": "lakh (100,000) and crore (10,000,000)"
+    },
+    {
+     "id": "power-words",
+     "title": "a separate word for each power of ten up to a million"
+    }
+   ],
+   "learnerNote": "A learner must regroup digits when reading large numbers (10,000 = one myriad; 100,000 = one lakh)."
+  },
+  {
+   "id": "time.halfHour",
+   "title": "Telling the half hour",
+   "area": "numbers",
+   "question": "How is 2:30 said?",
+   "wals": null,
+   "values": [
+    {
+     "id": "half-past",
+     "title": "'half past two'"
+    },
+    {
+     "id": "half-to-next",
+     "title": "'half three' (half of the next hour)"
+    },
+    {
+     "id": "other-system",
+     "title": "another time-reckoning (e.g. hours counted from dawn)"
+    }
+   ],
+   "learnerNote": "A learner must shift the hour when telling the half hour, or learn a different starting point of the day."
+  },
+  {
+   "id": "time.dayNames",
+   "title": "Names of the weekdays",
+   "area": "numbers",
+   "question": "How are the days of the week named?",
+   "wals": null,
+   "values": [
+    {
+     "id": "numbered",
+     "title": "mostly by number (second day, third day …)"
+    },
+    {
+     "id": "planetary",
+     "title": "after planets / gods (Moon-day, Sun-day)"
+    },
+    {
+     "id": "other",
+     "title": "other or mixed origins"
+    }
+   ],
+   "learnerNote": "A learner must learn weekday names as vocabulary where they are not numbered, or use the numbering where they are."
+  },
+  {
+   "id": "time.monthNames",
+   "title": "Names of the months",
+   "area": "numbers",
+   "question": "How are the months named?",
+   "wals": null,
+   "values": [
+    {
+     "id": "latin-derived",
+     "title": "names from Latin (January …)"
+    },
+    {
+     "id": "native",
+     "title": "native names"
+    },
+    {
+     "id": "numbered",
+     "title": "by number (first month …)"
+    }
+   ],
+   "learnerNote": "A learner must learn twelve native month names where they are not Latin-derived or numbered."
+  },
+  {
+   "id": "time.calendar",
+   "title": "Calendar in use",
+   "area": "numbers",
+   "question": "Which calendar is used for dates in everyday life?",
+   "wals": null,
+   "values": [
+    {
+     "id": "gregorian",
+     "title": "the Gregorian calendar"
+    },
+    {
+     "id": "gregorian-plus-traditional",
+     "title": "Gregorian, with a traditional calendar for festivals / religious dates"
+    },
+    {
+     "id": "official-other",
+     "title": "an official non-Gregorian calendar or era count"
+    }
+   ],
+   "learnerNote": "A learner must learn to read dates in another calendar or era, and that festivals move against the Gregorian year."
+  }
+ ]
+}

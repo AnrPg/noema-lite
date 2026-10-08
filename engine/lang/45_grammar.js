@@ -85,7 +85,23 @@ function overviewCard(c, g) {
     h('ul', { class: 'lx-list' }, ...(g.peculiarities || []).map(p => h('li', {}, h('b', {}, p.title), ' — ', wordsIn(c, p.text)))),
     g.pathNote ? h('div', { class: 'lx-callout k-tip' }, h('b', {}, '🛤️ Its path through the steps '), wordsIn(c, g.pathNote)) : null,
     (g.forYou || []).length ? [h('h4', {}, '🧭 For you'), h('ul', { class: 'lx-list' }, ...g.forYou.map(f => h('li', {}, info(f.lang).flag, ' ', wordsIn(c, f.text))))] : null,
+    learnerView(c),
     others.length ? h('p', { class: 'tiny' }, 'The same overview for: ', ...others.map(x => h('button', { class: 'btn ghost small', onclick: () => go(`#/fn/fn.overview/${x}`) }, info(x).flag + ' ' + info(x).name))) : null);
+}
+/** D16 — computed, not written from one point of view: what is new and what is familiar for this learner, from the languages they know. */
+function learnerView(c) {
+  const knows = UI.C.data.course.knownLanguages || [], r = N.forLearner(UI.C, c, knows);
+  if (!r || !knows.length) return null;
+  const W = UI.C.data.world, name = k => (W.languages.find(l => l.code === k) || {}).name || k;
+  const item = (x, extra) => h('li', {}, h('b', {}, x.p.kind === 'lacks' ? '∅ ' + x.p.title : x.p.title), ' — ', wordsIn(c, x.p.what || ''), extra);
+  return h('div', { class: 'lx-forlearner' },
+    h('h4', {}, `🧭 New for you, familiar to you`),
+    h('p', { class: 'tiny' }, 'Computed from the languages you know: ', r.knownProfiles.map(name).join(', ') || '—',
+      r.unknownLangs.length ? ` (no profile yet for ${r.unknownLangs.join(', ')})` : '', ` · ${r.new.length} new · ${r.familiar.length} familiar`),
+    h('details', { class: 'lx-sec', open: true }, h('summary', {}, `✨ New for you (${r.new.length})`),
+      h('ul', { class: 'lx-list' }, ...r.new.map(x => item(x, x.notes.length ? h('div', { class: 'tiny' }, ...x.notes.map(n => h('div', {}, '↳ ', h('b', {}, n.title + ': '), n.value, n.note ? ' — ' + n.note : ''))) : null)))),
+    h('details', { class: 'lx-sec' }, h('summary', {}, `🤝 Familiar from your languages (${r.familiar.length})`),
+      h('ul', { class: 'lx-list' }, ...r.familiar.map(x => item(x, h('span', { class: 'tiny' }, ' (as in ', x.from.map(name).join(', '), ')'))))));
 }
 VIEWS.fn = (v, r) => {
   const fid = r.arg, c = r.arg2 && UI.C.lang[r.arg2] ? r.arg2 : UI.lang; if (!UI.C.functions[fid]) return VIEWS.home(v);

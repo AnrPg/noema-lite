@@ -109,7 +109,34 @@
       const bank = []; for (const f of list(`${base}bank`)) bank.push(...((read(`${base}bank/${f}`) || {}).sentences || []));
       data.langs[code] = { language: read(base + 'language.json'), lexicon, grammar, bank };
     }
+    // D16: the shared typological vocabulary, the profiles of the world's languages, the catalogues of the course languages
+    const tf = read('../_typology/features.json'), tl = read('../_typology/languages.json');
+    if (tf && tl) data.world = { features: tf.features, languages: tl.languages,
+      phenomena: Object.fromEntries(course.languages.map(c => [c, ((read(`../_phenomena/${c}.json`) || {}).phenomena || []).map(trimPhenomenon)])) };
     return data;
+  }
+
+  /** What the app needs of a phenomenon (the catalogue keeps more: model, gaps …). */
+  const trimPhenomenon = p => ({ id: p.id, title: p.title, area: p.area, kind: p.kind || 'has', typology: p.typology || [], what: p.what, examples: (p.examples || []).slice(0, 2) });
+  /** D16 — what is new and what is familiar in a language for a learner who knows `knows` (language codes), computed from the
+   *  shared typological profiles, never written from one point of view. → {knownProfiles, unknownLangs, new: [{p, notes}], familiar: [{p, from}]} */
+  function forLearner(C, code, knows) {
+    const W = C.data.world; if (!W) return null;
+    const prof = Object.fromEntries(W.languages.map(l => [l.code, l])), feat = Object.fromEntries(W.features.map(f => [f.id, f]));
+    const mine = (knows || []).filter(k => prof[k] && k !== code), unknownLangs = (knows || []).filter(k => !prof[k]);
+    const out = { knownProfiles: mine, unknownLangs, new: [], familiar: [] };
+    for (const p of (W.phenomena[code] || [])) {
+      const tags = (p.typology || []).filter(t => feat[t.feature]);
+      if (!tags.length) continue;
+      const from = new Set(), notes = []; let familiar = true;
+      for (const t of tags) {
+        const has = mine.filter(k => prof[k].values[t.feature] === t.value);
+        if (has.length) has.forEach(k => from.add(k));
+        else { familiar = false; const f = feat[t.feature]; notes.push({ feature: f.id, title: f.title, value: (f.values.find(v => v.id === t.value) || {}).title || t.value, note: f.learnerNote || '' }); }
+      }
+      if (familiar && mine.length) out.familiar.push({ p, from: [...from] }); else out.new.push({ p, notes });
+    }
+    return out;
   }
 
   /* ---------- paths by language type (D10): which nodes apply to which language ---------- */
@@ -773,7 +800,7 @@
 
   const API = { version: 1, nfc, canon, cellParts, cellHas, stripMarks, hasMarks, isHan, pinyinSplit, pinyinTone, pinyinSyllableErrors,
     pinyinNumbersToMarks, pinyinMarksToNumbers, joinTokens, capFirst,
-    readCourse, course, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
+    readCourse, course, forLearner, newLearner, introduce, review, sm2, itemState, nodeStates, nodeState, known, conceptState, ITEM_STATES,
     practiceFunction, functionState, selectSentences, feasibility, lookup, tokenize, analyze, planSession, toKV, fromKV, dayNumber, wordCard, principalParts,
     TYPES, applies, pathGroups, lessonFunctions, addProfiles, recordCheck, nextLessons, exercises, checkBuilt, wordItems, lessonCheck, cellLabel, variantLabel, shuffled, PASS };
   root.NoemaLang = API;

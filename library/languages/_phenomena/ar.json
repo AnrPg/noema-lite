@@ -20,11 +20,14 @@
    "title": "Right-to-left writing, numbers left-to-right",
    "area": "script",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.direction",
+     "value": "rtl"
+    }
    ],
-   "what": "Arabic is written and read from right to left; a book opens on what a European reader calls the back. Numbers inside the line, and embedded Latin words, still run left to right (bidirectional text), so cursor movement, punctuation and mixed text behave unexpectedly.",
+   "what": "Arabic is written and read from right to left, and books, pages, forms and tables start on the right. Numbers inside a line, and embedded words in left-to-right scripts, still run left to right (bidirectional text), which affects cursor movement, punctuation and mixed text.",
    "examples": [
     {
      "text": "أَنَا طَالِبٌ.",
@@ -55,9 +58,16 @@
    "title": "An abjad: consonants and long vowels only",
    "area": "script",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "abjad"
+    },
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
    ],
    "what": "The 28 letters write consonants and the long vowels ā, ū, ī (with ا و ي); short vowels are optional marks. A normal text therefore leaves the reader to supply the vowels from grammar and context.",
    "examples": [
@@ -85,9 +95,14 @@
    "title": "Cursive joining and positional letter shapes",
    "area": "script",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "Letters are joined within a word and take up to four shapes: isolated, initial, medial and final. Six letters (ا د ذ ر ز و) never join the letter after them, which splits a word into pieces. Hebrew has only five special final forms; Greek has only final ς.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.positionalForms",
+     "value": "joining"
+    }
+   ],
+   "what": "Letters are joined within a word and take up to four shapes: isolated, initial, medial and final. Six letters (ا د ذ ر ز و) never join the letter after them, which splits a word into pieces.",
    "examples": [
     {
      "text": "ب · بـ · ـبـ · ـب",
@@ -118,8 +133,13 @@
    "title": "The obligatory lam-alif ligature",
    "area": "script",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.positionalForms",
+     "value": "joining"
+    }
+   ],
    "what": "When ل is followed by ا (also أ إ آ) the two letters must be written as one ligature, لا. Learners who know the separate shapes often fail to recognise it.",
    "examples": [
     {
@@ -151,9 +171,12 @@
    "title": "Short-vowel marks (ḥarakāt) and sukūn",
    "area": "orthography",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
    ],
    "what": "fatḥa (a), kasra (i), ḍamma (u) and sukūn (no vowel) are small marks above or below the letter. They are written in the Qurʾān, children's books and dictionaries, and left out almost everywhere else; the course writes all of them and must later take them away step by step.",
    "examples": [
@@ -188,9 +211,12 @@
    "title": "Šadda: the doubling mark",
    "area": "orthography",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.gemination",
+     "value": "contrastive"
+    }
    ],
    "what": "A doubled consonant is written once with a šadda above it. It is meaningful: it distinguishes verb forms and words, and it appears after the article before sun letters.",
    "examples": [
@@ -229,8 +255,13 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "suffix"
+    }
+   ],
    "what": "Indefinite endings are written as doubled vowel marks (ـٌ ـً ـٍ). The accusative -an adds a written alif (كِتَابًا), except after ة and after ـاء, and the same -an ending makes many adverbs and formulas (شُكْرًا).",
    "examples": [
     {
@@ -278,8 +309,13 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.genderBasis",
+     "value": "sex-based"
+    }
+   ],
    "what": "The feminine ending ة looks like h with two dots; it is said -a in pause and -at- whenever something follows: a case ending, a possessive suffix, or a second noun in a construct. Before suffixes it is written ت.",
    "examples": [
     {
@@ -326,8 +362,13 @@
     "ADP",
     "VERB"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "abjad"
+    }
+   ],
    "what": "A final ā can be written ى (a dotless yāʾ). It turns into ي or ا when a suffix is added, and nouns in -an (مَقْهًى) keep the ى under their tanwīn.",
    "examples": [
     {
@@ -376,8 +417,13 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "abjad"
+    }
+   ],
    "what": "The glottal stop ء is a full consonant, but it is written on a seat (أ إ ؤ ئ) or alone (ء) by rules that depend on the surrounding vowels; the same root letter therefore changes its spelling across a paradigm.",
    "examples": [
     {
@@ -423,8 +469,13 @@
     "VERB",
     "DET"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.syllableStructure",
+     "value": "complex"
+    }
+   ],
    "what": "Some words begin with an alif whose vowel is heard only at the start of speech (the article al-, اِبْن, اِسْم, اِمْرَأَة, imperatives and forms VII–X). After a vowel it is silent and the words run together.",
    "examples": [
     {
@@ -461,8 +512,13 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
+   ],
    "what": "Before the 14 sun letters (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) the l of al- is not pronounced; the next consonant is doubled and carries šadda. Before the other 14 (moon) letters al- is said in full.",
    "examples": [
     {
@@ -506,8 +562,13 @@
     "CCONJ",
     "PROPN"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
+   ],
    "what": "A few very frequent words have a long ā that is not written with a full alif but with a small superscript alif (or nothing in plain text): هٰذَا, ذٰلِكَ, لٰكِنْ, اللّٰه. مِائَة (hundred) has an alif that is not pronounced.",
    "examples": [
     {
@@ -546,9 +607,14 @@
    "title": "Arabic punctuation",
    "area": "orthography",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "The comma, semicolon and question mark are mirrored or turned: ، ؛ ؟. Older and many modern texts use far fewer full stops than European languages and join clauses with وَ.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.direction",
+     "value": "rtl"
+    }
+   ],
+   "what": "The comma, semicolon and question mark are mirrored or turned (، ؛ ؟), and all marks follow the right-to-left direction. Traditional and much modern prose uses few full stops and links clauses with وَ 'and' and فَ 'so'.",
    "examples": [
     {
      "text": "هَلْ تُحِبُّ الشَّايَ؟",
@@ -583,9 +649,12 @@
    "title": "Reading without vowels: homographs",
    "area": "orthography",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.vowels",
+     "value": "mostly-unwritten"
+    }
    ],
    "what": "Without vowel marks many different words share one spelling; the reader decides by grammar and context. This is the central reading skill after the beginner stage.",
    "examples": [
@@ -623,10 +692,12 @@
    "title": "Learner transliteration (DIN 31635)",
    "area": "orthography",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "he",
-    "zh"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.type",
+     "value": "abjad"
+    }
    ],
    "what": "Until the script is learned every word is shown with a scientific transliteration: macrons for long vowels, dots for emphatics (ṣ ḍ ṭ ẓ ḥ), ʿ for ع and ʾ for hamza.",
    "examples": [
@@ -663,9 +734,18 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
-   "what": "The Arab East writes the digits ٠١٢٣٤٥٦٧٨٩; the Maghreb uses the European digits (which are themselves called 'Arabic numerals'). Multi-digit numbers are written with the highest digit on the left, as in Europe.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    },
+    {
+     "feature": "script.direction",
+     "value": "rtl"
+    }
+   ],
+   "what": "The Arab East writes the Arabic-Indic digits ٠١٢٣٤٥٦٧٨٩; the Maghreb uses the digits 0–9, which come from the same Indian system. Inside right-to-left text a multi-digit number is still written with its highest digit on the left, so numbers are read left to right.",
    "examples": [
     {
      "text": "٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩",
@@ -698,9 +778,14 @@
    "title": "Emphatic (pharyngealized) consonants",
    "area": "phonology",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [],
-   "what": "ص ض ط ظ are 'heavy' versions of s, d, t, ð, said with the tongue root pulled back; they also darken the vowels around them. They distinguish words, and Hebrew, Greek and the learner's other languages have nothing like them.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.pharyngeals",
+     "value": "pharyngeals-and-emphatics"
+    }
+   ],
+   "what": "ص ض ط ظ are 'emphatic' (pharyngealized) versions of s, d, t, ð: the root of the tongue is pulled back towards the pharynx, and the vowels around them sound darker. They distinguish words from their plain partners.",
    "examples": [
     {
      "text": "سَيْف / صَيْف",
@@ -733,11 +818,14 @@
    "title": "Pharyngeal and glottal consonants: ع ح ء ه",
    "area": "phonology",
    "pos": [],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.pharyngeals",
+     "value": "pharyngeals-and-emphatics"
+    }
    ],
-   "what": "Arabic keeps four throat sounds apart: ʿ (ع, a voiced squeeze in the throat), ḥ (ح, a strong breathy h), h (ه) and the glottal stop ʾ (ء). Hebrew writes the same letters but Modern Hebrew speech has mostly merged them.",
+   "what": "Four throat consonants are kept apart: ʿ (ع, a voiced pharyngeal [ʕ], a squeeze in the throat), ḥ (ح, a voiceless pharyngeal [ħ], a strong breathy h), h (ه, glottal [h]) and the glottal stop ʾ (ء, [ʔ]). Each distinguishes words and can stand anywhere in the word.",
    "examples": [
     {
      "text": "حَرَم / هَرَم",
@@ -775,13 +863,14 @@
    "title": "Uvular and velar fricatives: ق خ غ",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de",
-    "ru",
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.uvulars",
+     "value": "both"
+    }
    ],
-   "what": "ق is a k made far back in the throat; خ is the German ach-Laut (Russian х, Greek χ before a o u); غ is its voiced partner, close to a gargled r or Greek γ before a o u.",
+   "what": "ق is a voiceless uvular stop [q], made at the uvula, further back than k; خ is a voiceless uvular (or velar) fricative [χ ~ x]; غ is its voiced partner [ʁ ~ ɣ], a sound between a gargled r and a voiced fricative. Each distinguishes words from k, h and r.",
    "examples": [
     {
      "text": "قَلْب / كَلْب",
@@ -821,12 +910,14 @@
    "title": "Interdental consonants: ث ذ ظ",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el",
-    "en"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.interdentals",
+     "value": "present"
+    }
    ],
-   "what": "ث is the θ of Greek θάλασσα (English thin), ذ the δ of Greek δέντρο (English this), ظ an emphatic ð. Most dialects replace them with t/s, d/z — another diglossia trap.",
+   "what": "ث is the voiceless interdental fricative [θ], ذ the voiced one [ð], and ظ an emphatic [ðˤ]: the tongue tip is between the teeth. Most spoken dialects replace them with t/s, d/z (and ḍ/ẓ), so a speaker's dialect can show in their Standard pronunciation — another diglossia trap.",
    "examples": [
     {
      "text": "ثَلَاثَة",
@@ -836,7 +927,7 @@
     {
      "text": "ذٰلِكَ",
      "translit": "ḏālika",
-     "note": "that — δ"
+     "note": "that — ð"
     },
     {
      "text": "ظُهْر",
@@ -864,9 +955,12 @@
    "title": "Phonemic vowel length",
    "area": "phonology",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.vowelLength",
+     "value": "contrastive"
+    }
    ],
    "what": "Short and long vowels are different sounds and different spellings (a mark versus a letter); length alone separates words and verb forms.",
    "examples": [
@@ -903,8 +997,13 @@
    "title": "Phonemic consonant length (gemination)",
    "area": "phonology",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.gemination",
+     "value": "contrastive"
+    }
+   ],
    "what": "A doubled consonant is held longer and changes the word; in pattern morphology doubling is a meaningful element (form II, the faʿʿāl profession pattern).",
    "examples": [
     {
@@ -938,9 +1037,18 @@
    "title": "Predictable stress by syllable weight",
    "area": "phonology",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [],
-   "what": "Stress is not written and not lexical: it falls on the last syllable if it is superheavy (long vowel + consonant, or two consonants), otherwise on the penult if it is heavy (long vowel, or vowel + consonant), otherwise on the antepenult. Greek and Russian learners expect free, memorised stress.",
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.stress",
+     "value": "weight-sensitive"
+    },
+    {
+     "feature": "script.stressMarking",
+     "value": "not-applicable"
+    }
+   ],
+   "what": "Stress is not written and not lexical: it falls on the last syllable if it is superheavy (long vowel + consonant, or two consonants), otherwise on the penult if it is heavy (long vowel, or vowel + consonant), otherwise on the antepenult. It never distinguishes two words.",
    "examples": [
     {
      "text": "مَدْرَسَة",
@@ -980,8 +1088,13 @@
     "ADJ",
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "suffixes"
+    }
+   ],
    "what": "At the end of a phrase final short vowels and tanwīn are not pronounced, -an becomes -ā and ة is said -ah. Everyday reading aloud uses pause forms almost everywhere, so the written case endings are often not heard.",
    "examples": [
     {
@@ -1019,8 +1132,13 @@
     "PART",
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.syllableStructure",
+     "value": "complex"
+    }
+   ],
    "what": "A word ending in a consonant takes a short vowel before al- or another hamzat al-waṣl so that two consonants do not meet: مِنْ → مِنَ, عَنْ → عَنِ, هَلْ → هَلِ.",
    "examples": [
     {
@@ -1064,9 +1182,12 @@
     "ADJ",
     "ADV"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
    "what": "Most words are built on a root of three (sometimes four) consonants that carries a field of meaning. Knowing the root links dozens of words and is how dictionaries are ordered.",
    "examples": [
@@ -1108,9 +1229,16 @@
     "VERB",
     "NOUN"
    ],
-   "rarity": "unique",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    },
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
    ],
    "what": "When و or ي is a root letter it turns into a long vowel or disappears, a doubled root contracts under šadda, and a hamza changes its seat. The class of the root predicts the shape of the whole paradigm.",
    "examples": [
@@ -1167,9 +1295,12 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
    "what": "The vowels and extra letters around the root make a pattern with a meaning of its own: mafʿal (place), mifʿāl (tool), fāʿil (doer), faʿʿāl (trade), mafʿūl (thing done), fuʿla and others. Patterns are named with the model root ف ع ل.",
    "examples": [
@@ -1216,9 +1347,16 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    },
+    {
+     "feature": "verb.causative",
+     "value": "affix"
+    }
    ],
    "what": "From one root up to ten verb forms are built, each with typical meanings (II causative/intensive, III doing with someone, V reflexive of II, VII passive-like, VIII reflexive, X asking for or considering). Each form has a fixed present, participle and maṣdar pattern.",
    "examples": [
@@ -1259,9 +1397,20 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.perfective",
+     "value": "inflectional"
+    },
+    {
+     "feature": "verb.past",
+     "value": "past"
+    },
+    {
+     "feature": "verb.tenseObligatory",
+     "value": "obligatory"
+    }
    ],
    "what": "Every verb has two finite stems: the perfect with person endings (past, completed) and the imperfect with person prefixes (present, and the base of the moods and the future).",
    "examples": [
@@ -1305,12 +1454,14 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he",
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.stemChange",
+     "value": "pervasive"
+    }
    ],
-   "what": "For form I verbs the vowel of the present stem (a, i or u) cannot be predicted from the past; it is learned with each verb, like German strong-verb ablaut.",
+   "what": "For form I verbs the vowel of the present stem (a, i or u) cannot be predicted from the past; it is learned with each verb (dictionaries give it).",
    "examples": [
     {
      "text": "كَتَبَ – يَكْتُبُ",
@@ -1356,8 +1507,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.subjunctive",
+     "value": "inflectional"
+    }
+   ],
    "what": "The imperfect has three moods shown by the ending: indicative -u, subjunctive -a (after أَنْ، لَنْ، لِـ 'in order to'), jussive with no vowel (after لَمْ, prohibitive لَا, and لِـ of command). An energetic mood exists in formal style.",
    "examples": [
     {
@@ -1402,9 +1558,16 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    },
+    {
+     "feature": "syn.proDrop",
+     "value": "agreement"
+    }
    ],
    "what": "The verb shows person, number and gender in the 2nd and 3rd persons, and has dual forms: 13 forms per tense. A pronoun subject is usually dropped.",
    "examples": [
@@ -1452,8 +1615,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.subjunctive",
+     "value": "inflectional"
+    }
+   ],
    "what": "The imperative is cut from the jussive 'you' form; a helping alif (اِ / اُ) is added when it starts with two consonants. Four forms by addressee (plus a dual).",
    "examples": [
     {
@@ -1497,12 +1665,12 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de",
-    "el",
-    "ru",
-    "en"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.fusion",
+     "value": "fusional"
+    }
    ],
    "what": "A few verbs borrow missing forms from another root: 'come!' is تَعَالَ, not a form of جَاءَ. لَيْسَ has only perfect-shaped forms with present meaning.",
    "examples": [
@@ -1547,9 +1715,12 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.passive",
+     "value": "morphological"
+    }
    ],
    "what": "The passive is made by changing the vowels, not with an auxiliary: u–i in the perfect, u–a in the imperfect. Unvocalized it looks exactly like the active.",
    "examples": [
@@ -1585,11 +1756,14 @@
     "VERB",
     "AUX"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.future",
+     "value": "inflectional"
+    }
    ],
-   "what": "The future is the imperfect with the prefix سَـ or the separate particle سَوْفَ, like Greek θα. It is negated with لَنْ + subjunctive, not with لَا.",
+   "what": "The future is the imperfect with the prefix سَـ or the separate particle سَوْفَ before it. It is negated with لَنْ + subjunctive, not with لَا.",
    "examples": [
     {
      "text": "سَأَذْهَبُ",
@@ -1628,8 +1802,13 @@
     "VERB",
     "AUX"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.past",
+     "value": "past"
+    }
+   ],
    "what": "كَانَ followed by an imperfect verb gives the past continuous or habitual ('was doing, used to do'); both verbs agree with the subject.",
    "examples": [
     {
@@ -1666,9 +1845,16 @@
     "NOUN",
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    },
+    {
+     "feature": "verb.infinitive",
+     "value": "finite-clause"
+    }
    ],
    "what": "Each verb has a verbal noun that does the work of an infinitive or a gerund. For form I it is unpredictable and must be learned; for forms II–X it follows the form.",
    "examples": [
@@ -1710,9 +1896,12 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.infinitive",
+     "value": "finite-clause"
+    }
    ],
    "what": "Arabic has no infinitive. Dictionaries cite a verb by its 'he did' form; 'to do' in a sentence is أَنْ + subjunctive or the maṣdar. Dictionaries are ordered by root.",
    "examples": [
@@ -1759,9 +1948,12 @@
     "ADJ",
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.participles",
+     "value": "rich"
+    }
    ],
    "what": "Every verb form has an active and a passive participle by pattern (fāʿil / mafʿūl, mu-…-i- / mu-…-a- for derived forms). They serve as adjectives, nouns of agent and object, and as a present-progressive in many contexts.",
    "examples": [
@@ -1804,12 +1996,16 @@
     "VERB",
     "NUM"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "he",
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.genderCount",
+     "value": "two"
+    },
+    {
+     "feature": "nom.genderBasis",
+     "value": "sex-based"
+    }
    ],
    "what": "Every noun is masculine or feminine; there is no neuter. Most feminines end in ة, but some are feminine without it (sun, earth, house دَار, paired body parts, كَأْس), and nouns for women are feminine whatever their form.",
    "examples": [
@@ -1861,11 +2057,14 @@
     "VERB",
     "DET"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.dual",
+     "value": "productive"
+    }
    ],
-   "what": "Exactly two is a grammatical number of its own on nouns, adjectives, pronouns, demonstratives and verbs: -āni (nominative) / -ayni (accusative and genitive). With a noun the dual alone says 'two'. Hebrew keeps a dual only for some nouns.",
+   "what": "Exactly two is a grammatical number of its own on nouns, adjectives, pronouns, demonstratives and verbs: -āni (nominative) / -ayni (accusative and genitive). With a noun the dual alone says 'two'.",
    "examples": [
     {
      "text": "كِتَابَانِ / كِتَابَيْنِ",
@@ -1916,9 +2115,12 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "obligatory"
+    }
    ],
    "what": "Mostly for male human participles and adjectives: -ūna in the nominative, -īna otherwise; the final -na drops in a construct and before a suffix.",
    "examples": [
@@ -1964,9 +2166,12 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "obligatory"
+    }
    ],
    "what": "For female persons, many nouns in ة, loanwords and maṣdars of derived forms: -ātun, with -ātin in both accusative and genitive (no -an).",
    "examples": [
@@ -2013,8 +2218,17 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    },
+    {
+     "feature": "nom.plural",
+     "value": "obligatory"
+    }
+   ],
    "what": "Most nouns form the plural by a new pattern of the root (about thirty common patterns). The plural is not predictable from the singular with certainty and is learned with the word.",
    "examples": [
     {
@@ -2069,8 +2283,13 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.plural",
+     "value": "obligatory"
+    }
+   ],
    "what": "A noun can have two or more plurals: free variants, a plural of paucity (3–10) next to a plural of multitude, or different plurals for different meanings.",
    "examples": [
     {
@@ -2111,11 +2330,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.singulative",
+     "value": "productive"
+    }
    ],
-   "what": "Many fruits, vegetables, animals and materials have a collective (the kind, the mass) and a unit noun in ة (one piece), which has its own dual and plural for counting. Russian has the same idea with -ина (горох → горошина).",
+   "what": "Many fruits, vegetables, animals and materials have a collective (the kind, the mass) and a unit noun in ة (one piece, a singulative), which has its own dual and plural for counting.",
    "examples": [
     {
      "text": "تُفَّاح → تُفَّاحَة → تُفَّاحَات",
@@ -2161,8 +2383,17 @@
     "ADJ",
     "PROPN"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.caseSyncretism",
+     "value": "core-and-noncore"
+    },
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "suffix"
+    }
+   ],
    "what": "Some nouns and adjectives (many broken plural patterns, أَفْعَل adjectives, many proper names, feminines in -āʾ) never take tanwīn and use -a for the genitive when indefinite. With al- or in a construct they decline normally.",
    "examples": [
     {
@@ -2210,12 +2441,20 @@
     "NUM",
     "PRON"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "el",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "three"
+    },
+    {
+     "feature": "nom.caseMarking",
+     "value": "suffixes"
+    },
+    {
+     "feature": "syn.alignment",
+     "value": "accusative"
+    }
    ],
    "what": "Nominative -u, accusative -a, genitive -i, written as short vowel marks. Nouns are subject/predicate (nominative), object and adverbial (accusative), after prepositions and as second noun of a construct (genitive). Duals and sound plurals have long-vowel endings instead.",
    "examples": [
@@ -2265,9 +2504,16 @@
     "NOUN",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    },
+    {
+     "feature": "nom.indefiniteArticle",
+     "value": "suffix"
+    }
    ],
    "what": "'The' is the prefix al- written on the word; 'a' is the tanwīn ending. Definiteness is also given by a possessive suffix or a definite second noun of a construct, and is an agreement feature of the adjective.",
    "examples": [
@@ -2311,9 +2557,20 @@
     "NOUN",
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    },
+    {
+     "feature": "nom.genitive",
+     "value": "construct"
+    },
+    {
+     "feature": "syn.genitiveNoun",
+     "value": "noun-gen"
+    }
    ],
    "what": "'X of Y' is two nouns side by side: the first loses al- and tanwīn and takes the case of its place, the second is genitive and decides definiteness for both. It replaces most compounds and genitive phrases.",
    "examples": [
@@ -2357,8 +2614,17 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.caseMarking",
+     "value": "suffixes"
+    },
+    {
+     "feature": "morph.fusion",
+     "value": "fusional"
+    }
+   ],
    "what": "A small group shows case by a long vowel before a genitive or a suffix: -ū, -ā, -ī.",
    "examples": [
     {
@@ -2402,10 +2668,16 @@
     "ADP",
     "SCONJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.possessiveAffixes",
+     "value": "suffixes"
+    },
+    {
+     "feature": "verb.objectMarking",
+     "value": "clitic-pronouns"
+    }
    ],
    "what": "Possessors, objects and prepositional objects are suffixes: -ī/-ya my, -ka/-ki your, -hu his, -hā her … On a verb 'me' is -nī, not -ī.",
    "examples": [
@@ -2466,9 +2738,16 @@
     "PART",
     "DET"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    },
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
    ],
    "what": "One-letter words are written together with the next word, and up to three can stack. لِـ + al- loses the alif: لِلْـ.",
    "examples": [
@@ -2517,9 +2796,12 @@
     "PRON",
     "VERB"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
    ],
    "what": "Second-person pronouns, verb forms and suffixes differ for a man and a woman (and for groups of women); 3rd-person plural too. Speaking to someone requires knowing their gender.",
    "examples": [
@@ -2565,9 +2847,16 @@
    "pos": [
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    },
+    {
+     "feature": "syn.adjectiveNoun",
+     "value": "noun-adj"
+    }
    ],
    "what": "The adjective follows the noun and agrees in gender, number, case and definiteness (al- is repeated on the adjective). Human plurals take plural adjectives, non-human plurals feminine singular.",
    "examples": [
@@ -2615,8 +2904,17 @@
    "pos": [
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.comparativeForm",
+     "value": "both"
+    },
+    {
+     "feature": "syn.comparison",
+     "value": "locational"
+    }
+   ],
    "what": "One pattern serves as comparative (with مِنْ 'than') and superlative (with al- or before a genitive). The comparative does not inflect for gender; the definite superlative has a feminine fuʿlā.",
    "examples": [
     {
@@ -2666,8 +2964,13 @@
    "pos": [
     "ADJ"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
+   ],
    "what": "Basic colours (and bodily defects) have a pattern of their own: masculine أَفْعَل, feminine فَعْلَاء, plural فُعْل. They look like elatives but cannot be compared directly.",
    "examples": [
     {
@@ -2712,12 +3015,14 @@
     "ADJ",
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "he",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.affixation",
+     "value": "suffixing"
+    }
    ],
-   "what": "-iyy (fem. -iyya) makes adjectives of origin, material or relation from nouns, including colours from things. Turkish borrowed it as -î (millî).",
+   "what": "The suffix -iyy (fem. -iyya) makes adjectives of origin, material or relation from nouns, including colours from things; the same form serves as a noun for a person ('an Egyptian').",
    "examples": [
     {
      "text": "لُبْنَان → لُبْنَانِيّ",
@@ -2757,11 +3062,12 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el",
-    "ru",
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
    "what": "A pattern with -ay- makes diminutives; it is mostly lexicalised and frequent in names.",
    "examples": [
@@ -2796,11 +3102,14 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "unique",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
    ],
-   "what": "The numbers 3–10 take the opposite gender of the counted noun's singular: with a masculine noun the number has ة, with a feminine noun it has none. Hebrew shows the same polarity.",
+   "what": "The numbers 3–10 take the opposite gender of the counted noun's singular: with a masculine noun the number has ة, with a feminine noun it has none.",
    "examples": [
     {
      "text": "ثَلَاثَةُ كُتُبٍ",
@@ -2843,8 +3152,17 @@
     "NUM",
     "NOUN"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.pluralAfterNumeral",
+     "value": "special"
+    },
+    {
+     "feature": "syn.numeralNoun",
+     "value": "num-noun"
+    }
+   ],
    "what": "After 3–10 the noun is a genitive plural; after 11–99 an accusative singular; after 100 and 1000 a genitive singular. 1 and 2 are said by the noun alone (singular, dual).",
    "examples": [
     {
@@ -2896,11 +3214,18 @@
    "pos": [
     "NUM"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.order",
+     "value": "units-first"
+    },
+    {
+     "feature": "num.base",
+     "value": "decimal"
+    }
    ],
-   "what": "11–19 are fixed two-part compounds ending in -a; from 21 the unit comes first and is joined with وَ, like German einundzwanzig.",
+   "what": "11–19 are fixed two-part compounds ending in -a; from 21 the unit comes first and is joined to the ten with وَ 'and' (one-and-twenty).",
    "examples": [
     {
      "text": "خَمْسَةَ عَشَرَ",
@@ -2943,8 +3268,13 @@
     "ADJ",
     "NUM"
    ],
-   "rarity": "common",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.agreement",
+     "value": "extensive"
+    }
+   ],
    "what": "Ordinals use the fāʿil pattern of the root (except 'first'); the hour is said with a feminine ordinal: 'the fifth hour'.",
    "examples": [
     {
@@ -2980,10 +3310,20 @@
    "title": "Nominal sentences: no 'to be' in the present",
    "area": "syntax",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "he",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    },
+    {
+     "feature": "adj.predicative",
+     "value": "nonverbal"
+    },
+    {
+     "feature": "syn.beSplit",
+     "value": "same"
+    }
    ],
    "what": "A subject and a predicate simply stand side by side, both in the nominative. كَانَ appears in the past and future and puts its predicate in the accusative.",
    "examples": [
@@ -3023,9 +3363,12 @@
    "title": "Article decides phrase or sentence",
    "area": "syntax",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
    ],
    "what": "With al- on both noun and adjective it is a phrase; with al- only on the noun it is a complete verbless sentence. The same holds for demonstratives.",
    "examples": [
@@ -3069,9 +3412,12 @@
    "title": "VSO and SVO with agreement asymmetry",
    "area": "syntax",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.wordOrder",
+     "value": "VSO"
+    }
    ],
    "what": "Both verb-first and subject-first orders are normal. A verb before a noun subject stays singular (showing only gender); a verb after it agrees fully.",
    "examples": [
@@ -3115,8 +3461,17 @@
     "VERB",
     "PRON"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "adj.agreement",
+     "value": "gender-number-case"
+    },
+    {
+     "feature": "verb.subjectAgreement",
+     "value": "person-number-gender"
+    }
+   ],
    "what": "Plurals of things, animals and ideas take feminine singular adjectives, verbs and pronouns; only plurals of people take plural agreement.",
    "examples": [
     {
@@ -3160,8 +3515,13 @@
    "pos": [
     "VERB"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
+   ],
    "what": "The 'sisters of kāna' (كَانَ, لَيْسَ, أَصْبَحَ, مَا زَالَ …) keep the subject nominative and make the predicate accusative.",
    "examples": [
     {
@@ -3205,8 +3565,13 @@
     "CCONJ",
     "PART"
    ],
-   "rarity": "unique",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.subordination",
+     "value": "conjunctions"
+    }
+   ],
    "what": "إِنَّ, أَنَّ, لٰكِنَّ, لِأَنَّ, كَأَنَّ, لَعَلَّ must be followed by a noun in the accusative or a pronoun suffix; the predicate stays nominative.",
    "examples": [
     {
@@ -3250,8 +3615,17 @@
     "PART",
     "VERB"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.negation",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.negationPosition",
+     "value": "before-verb"
+    }
+   ],
    "what": "لَا + present, لَمْ + jussive for the past, لَنْ + subjunctive for the future, لَيْسَ for verbless sentences, مَا + past in classical and dialectal style, and لَا + jussive for 'don't!'.",
    "examples": [
     {
@@ -3304,12 +3678,18 @@
     "PART",
     "CCONJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he",
-    "de"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.polarQuestion",
+     "value": "particle"
+    },
+    {
+     "feature": "syn.questionParticlePosition",
+     "value": "initial"
+    }
    ],
-   "what": "A yes/no question puts هَلْ (or the prefix أَ) before the unchanged statement. In a choice question 'or' is أَمْ, not أَوْ. 'Yes' to a negative question is بَلَى, like German doch.",
+   "what": "A yes/no question puts هَلْ (or the prefix أَ) before the unchanged statement. In a choice question 'or' is أَمْ, not أَوْ. 'Yes' that contradicts a negative question is a word of its own, بَلَى.",
    "examples": [
     {
      "text": "هَلْ تُحِبُّ الشَّايَ؟",
@@ -3355,9 +3735,12 @@
     "ADJ",
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
    ],
    "what": "Nothing may come between the two nouns of an iḍāfa, so every adjective follows the whole construct; its case and gender show which noun it belongs to.",
    "examples": [
@@ -3393,11 +3776,14 @@
     "NOUN",
     "ADV"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "three"
+    }
    ],
-   "what": "Time and manner are often said with a bare accusative instead of a preposition, as Greek says την Παρασκευή; most adverbs are frozen accusatives in -an.",
+   "what": "Time and manner are often said with a bare accusative noun, without a preposition; most adverbs are frozen accusatives in -an.",
    "examples": [
     {
      "text": "يَوْمَ الْجُمُعَةِ",
@@ -3446,8 +3832,13 @@
     "ADJ",
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.cases",
+     "value": "three"
+    }
+   ],
    "what": "An indefinite accusative describes the state of the subject or object during the action.",
    "examples": [
     {
@@ -3476,9 +3867,16 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.relativizer",
+     "value": "relative-pronoun"
+    },
+    {
+     "feature": "syn.relativeClauseOrder",
+     "value": "noun-rel"
+    }
    ],
    "what": "The relative pronoun agrees with a definite head (الَّذِي، الَّتِي، الَّذِينَ …); after an indefinite head there is none. The clause repeats the head as a pronoun.",
    "examples": [
@@ -3513,8 +3911,13 @@
    "pos": [
     "SCONJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "verb.conditional",
+     "value": "conjunction-only"
+    }
+   ],
    "what": "إِذَا is a likely or expected condition, إِنْ an open possibility (with the jussive or past), لَوْ an unreal condition (with لَـ in the result). The past tense is used after إِذَا even for the future.",
    "examples": [
     {
@@ -3548,9 +3951,12 @@
    "title": "'There is': fronted place, هُنَاكَ, يُوجَدُ",
    "area": "syntax",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.copula",
+     "value": "absent-in-present"
+    }
    ],
    "what": "An indefinite subject does not start a sentence: the place phrase comes first, or the sentence opens with هُنَاكَ or يُوجَدُ.",
    "examples": [
@@ -3592,11 +3998,12 @@
    "pos": [
     "ADP"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "he",
-    "ru",
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.have",
+     "value": "locational"
+    }
    ],
    "what": "'To have' is a preposition with a suffix: عِنْدَ (have, own), لِـ (belongs to, kinship), مَعَ (have on me). The possessed thing is the grammatical subject; past with كَانَ, negation with لَيْسَ.",
    "examples": [
@@ -3646,13 +4053,14 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "de",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.adpositions",
+     "value": "prepositions"
+    }
    ],
-   "what": "Many verbs take a fixed preposition, and some take an object where European languages use a preposition (and vice versa). This must be learned per verb.",
+   "what": "Many verbs take a fixed preposition for their object, others a direct object; which one is a property of the verb (and sometimes of its meaning) and must be learned per verb.",
    "examples": [
     {
      "text": "ذَهَبَ إِلَى",
@@ -3700,9 +4108,12 @@
    "pos": [
     "PART"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.definiteArticle",
+     "value": "prefix"
+    }
    ],
    "what": "People are called with يَا before the name or title; a definite address noun loses al-.",
    "examples": [
@@ -3739,11 +4150,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.uncleTerms",
+     "value": "bifurcate-collateral"
+    }
    ],
-   "what": "Uncles and aunts are named by the side of the family: عَمّ / عَمَّة on the father's side, خَال / خَالَة on the mother's. There is no word for cousin, nephew or niece: they are 'son of my paternal uncle' and so on. Turkish makes the same split (amca, dayı, hala, teyze).",
+   "what": "Uncles and aunts are named by the side of the family: عَمّ / عَمَّة on the father's side, خَال / خَالَة on the mother's. There is no single word for cousin, nephew or niece: they are 'son of my paternal uncle' and so on.",
    "examples": [
     {
      "text": "عَمّ / خَال",
@@ -3777,9 +4191,16 @@
     "INTJ",
     "ADJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.genderedSpeech",
+     "value": "grammatical"
+    },
+    {
+     "feature": "pron.gender",
+     "value": "second-and-third"
+    }
    ],
    "what": "Every polite formula that contains 'you' has a form for a man, a woman and a group; formulas that describe the speaker (آسِف 'sorry') agree with the speaker.",
    "examples": [
@@ -3820,11 +4241,14 @@
    "pos": [
     "PRON"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "en"
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    }
    ],
-   "what": "Arabic has no Sie/εσείς/Вы form: politeness comes from formulas (مِنْ فَضْلِكَ), titles (أُسْتَاذ، سَيِّد، دُكْتُور) and kin terms. A plural of respect exists only in high style.",
+   "what": "There is no polite pronoun of address: أَنْتَ / أَنْتِ is said to everyone. Politeness comes from formulas (مِنْ فَضْلِكَ), titles (أُسْتَاذ، سَيِّد، دُكْتُور) and kin terms. A plural of respect exists only in high style.",
    "examples": [
     {
      "text": "مِنْ فَضْلِكَ يَا أُسْتَاذُ",
@@ -3855,8 +4279,13 @@
    "pos": [
     "INTJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    }
+   ],
    "what": "Many greetings require a set reply that echoes and outdoes them.",
    "examples": [
     {
@@ -3897,10 +4326,12 @@
    "pos": [
     "INTJ"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr",
-    "el"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.politePronouns",
+     "value": "none"
+    }
    ],
    "what": "Formulas naming God are used by Muslims and Christians alike as ordinary politeness: for the future, for good news, before starting, when praising.",
    "examples": [
@@ -3942,8 +4373,13 @@
    "title": "Diglossia: Standard Arabic and the dialects",
    "area": "lexicon",
    "pos": [],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.diglossia",
+     "value": "strong"
+    }
+   ],
    "what": "Modern Standard Arabic is written and used formally; everyone speaks a regional dialect at home, with different words, pronouns and verb forms. The learner must know that everyday speech will differ.",
    "examples": [
     {
@@ -3988,8 +4424,13 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "rare",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.monthNames",
+     "value": "latin-derived"
+    }
+   ],
    "what": "The Levant and Iraq use old Syriac-Babylonian month names, Egypt, the Gulf and the Maghreb Latin-based ones; both are standard and often written together.",
    "examples": [
     {
@@ -4021,15 +4462,14 @@
    "title": "Loanwords in and out: bridges for the learner",
    "area": "lexicon",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "tr",
-    "el",
-    "en",
-    "de",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "Arabic has old loans from Greek, Persian and Aramaic and new ones from Italian, French and English; it gave thousands of words to Turkish and many to European languages (sugar, coffee, algebra).",
+   "what": "Arabic has old loans from Greek, Persian and Aramaic and newer ones from Italian, French and English, usually fitted into Arabic patterns (often with a broken plural: فِيلْم → أَفْلَام). It has lent words to many languages — Persian, Turkish, Urdu, Swahili, Malay, Spanish and, through them, much of Europe (sugar, coffee, algebra); the app shows the bridges that matter for each learner's languages.",
    "examples": [
     {
      "text": "قَلَم",
@@ -4066,17 +4506,19 @@
   },
   {
    "id": "ar.lex.false_friends",
-   "title": "False friends through Turkish and English",
+   "title": "False friends",
    "area": "lexicon",
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "tr",
-    "en"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.uncleTerms",
+     "value": "bifurcate-collateral"
+    }
    ],
-   "what": "Loanwords often shifted meaning on the way: Turkish hala is the father's sister, but Arabic خَالَة is the mother's sister; English magazine comes from مَخَازِن 'storehouses'.",
+   "what": "Words that travelled between Arabic and other languages often changed meaning on the way, so a familiar-looking word can mislead. Which pairs are false friends depends on the learner's languages; the app derives them from the bridges (§4.10).",
    "examples": [
     {
      "text": "خَالَة",
@@ -4111,9 +4553,12 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.calendar",
+     "value": "gregorian-plus-traditional"
+    }
    ],
    "what": "The week starts on Sunday; Friday (الْجُمُعَة, 'the gathering') is the day of congregational prayer and, with Saturday, the weekend in many Arab states. Religious life follows the lunar Hijri calendar (رَمَضَان …), which moves about eleven days a year against the solar calendar.",
    "examples": [
@@ -4150,13 +4595,14 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "he",
-    "el",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.dayNames",
+     "value": "numbered"
+    }
    ],
-   "what": "Sunday to Thursday are named after the numbers one to five: the root shows the number, as in Greek Δευτέρα–Πέμπτη and Hebrew יוֹם רִאשׁוֹן–חֲמִישִׁי.",
+   "what": "Sunday to Thursday are named after the numbers one to five (the root of each name is the number); Friday is 'the gathering' and Saturday 'the sabbath'.",
    "examples": [
     {
      "text": "الِاثْنَيْن ← اِثْنَان",
@@ -4190,8 +4636,13 @@
     "NOUN",
     "PROPN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
+   ],
    "what": "Parents are respectfully called 'father/mother of' their (eldest) child; traditional names chain 'son of'.",
    "examples": [
     {
@@ -4227,10 +4678,12 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [
-    "tr",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.uncleTerms",
+     "value": "bifurcate-collateral"
+    }
    ],
    "what": "Strangers are addressed as relatives: an older man 'uncle', an older woman 'auntie', a peer 'brother' or 'sister'.",
    "examples": [
@@ -4267,11 +4720,18 @@
    "pos": [
     "NOUN"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.compounding",
+     "value": "restricted"
+    },
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
    ],
-   "what": "Where German makes a compound, Arabic uses an iḍāfa or noun + adjective; the whole phrase inflects as a unit (the first noun takes the case, the second the article).",
+   "what": "New concepts made of two nouns are mostly said as an iḍāfa (construct) or noun + adjective, not as one-word compounds; the whole phrase inflects as a unit (the first noun takes the case, the second the article).",
    "examples": [
     {
      "text": "غُرْفَةُ نَوْمٍ / غُرْفَةُ النَّوْمِ",
@@ -4306,11 +4766,12 @@
    "title": "Proverbs, Qurʾānic phrases and rhymed sayings",
    "area": "lexicon",
    "pos": [],
-   "rarity": "common",
-   "sharedWith": [
-    "el",
-    "tr",
-    "ru"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "prag.diglossia",
+     "value": "strong"
+    }
    ],
    "what": "Proverbs (أَمْثَال) and fixed classical phrases are frequent in speech and writing; many are rhymed or parallel.",
    "examples": [
@@ -4344,11 +4805,14 @@
     "VERB",
     "ADJ"
    ],
-   "rarity": "common",
-   "sharedWith": [
-    "he"
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.rootPattern",
+     "value": "present"
+    }
    ],
-   "what": "One word often covers concepts that other languages separate (house / verse, grandfather / luck, maternal uncle / mole), sometimes with a different plural per meaning; distinct roots also coincide in spelling.",
+   "what": "One word often covers concepts that many languages keep apart (house / verse, grandfather / luck, maternal uncle / mole), sometimes with a different plural per meaning; distinct roots also coincide in spelling.",
    "examples": [
     {
      "text": "بَيْت",
@@ -4391,8 +4855,13 @@
     "NOUN",
     "DET"
    ],
-   "rarity": "uncommon",
-   "sharedWith": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "nom.constructState",
+     "value": "construct-state"
+    }
+   ],
    "what": "'All', 'every' and 'some' are nouns followed by a genitive: كُلّ + definite plural = all, كُلّ + indefinite singular = every.",
    "examples": [
     {
@@ -4432,6 +4901,2206 @@
    "status": "covered",
    "gap": "",
    "when": "fd.05"
+  },
+  {
+   "id": "ar.script.no_case",
+   "title": "No capital letters",
+   "area": "script",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "script.letterCase",
+     "value": "none"
+    }
+   ],
+   "what": "The script has no upper and lower case: names, sentence beginnings and titles are written with the same letters as every other word, so a name is recognised from context (and from words like يَا or السَّيِّد before it).",
+   "examples": [
+    {
+     "text": "سَافَرَ مُحَمَّدٌ إِلَى الْقَاهِرَةِ.",
+     "translit": "sāfara Muḥammadun ʾilā l-qāhirati.",
+     "note": "Muhammad travelled to Cairo — the two names look like any other word"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have capital letters: no case, names are not marked.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.script.one_script",
+   "title": "One script for the language",
+   "area": "script",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.multiple",
+     "value": "single"
+    }
+   ],
+   "what": "Arabic is written in one script, the Arabic alphabet, in all countries and registers (calligraphic styles such as naskh and ruqʿa are styles of the same letters). Informal chat sometimes uses Latin letters with digits for missing sounds (3 = ع, 7 = ح), but this has no official status.",
+   "examples": [
+    {
+     "text": "عَرَبِيّ",
+     "translit": "ʿarabiyy",
+     "note": "Arabic — the same letters in print and handwriting"
+    },
+    {
+     "text": "3arabi",
+     "translit": "ʿarabī",
+     "note": "informal Latin chat spelling, 3 standing for ع"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The overview can say that there is one script (and that chat Latin exists); handwriting styles (ruqʿa) are not taught.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.script.word_spaces",
+   "title": "Spaces between words — with small words attached",
+   "area": "script",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "script.wordSpacing",
+     "value": "words"
+    }
+   ],
+   "what": "Words are separated by spaces. One-letter words (وَ فَ بِـ لِـ كَـ سَـ) and the article are written together with the next word, and pronoun suffixes with the word before, so one written word can be a whole phrase; the letter shapes also mark word ends (final forms).",
+   "examples": [
+    {
+     "text": "وَبِالْقَلَمِ",
+     "translit": "wa-bi-l-qalami",
+     "note": "and with the pen — four words, one written unit"
+    },
+    {
+     "text": "كَتَبْتُهَا",
+     "translit": "katabtuhā",
+     "note": "I wrote it — verb + subject + object in one word"
+    }
+   ],
+   "level": "script",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Segmenting a written word into its clitics is shown on words but not practised as a reading skill.",
+   "when": "fd.04"
+  },
+  {
+   "id": "ar.phon.no_tone",
+   "title": "No lexical tone",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "tone.lexical",
+     "value": "none"
+    },
+    {
+     "feature": "script.toneMarking",
+     "value": "no-tones"
+    }
+   ],
+   "what": "Pitch never changes a word's meaning: a word keeps its meaning whether said high, low, rising or falling, and the script has nothing to mark pitch. Pitch carries intonation only — a question can be marked by rising intonation as well as by هَلْ — and stress follows from syllable weight.",
+   "examples": [
+    {
+     "text": "كَتَبَ. / كَتَبَ؟",
+     "translit": "kataba. / kataba?",
+     "note": "he wrote. / he wrote? — the same word; only the sentence melody differs"
+    },
+    {
+     "text": "هَلْ كَتَبَ؟",
+     "translit": "hal kataba?",
+     "note": "did he write? — the question shown by a particle, not by pitch on the word"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have tones: pitch does not distinguish words.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.syllables",
+   "title": "Syllable structure: no initial clusters, at most two final consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.syllableStructure",
+     "value": "complex"
+    }
+   ],
+   "what": "Syllables are CV, CVC and CVV; at the end of a word in pause also CVVC and CVCC, and CVVC before a doubled consonant (دَابَّة). A syllable never begins with two consonants: words that would start with a cluster take a helping vowel (hamzat al-waṣl), and inside a word no more than two consonants meet. Final two-consonant clusters (كَلْب kalb) are frequent in pause.",
+   "examples": [
+    {
+     "text": "كَلْب",
+     "translit": "kalb",
+     "note": "dog — CVCC in pause"
+    },
+    {
+     "text": "اِسْم",
+     "translit": "ism",
+     "note": "name — a helping vowel instead of an initial cluster sm-"
+    },
+    {
+     "text": "دَابَّة",
+     "translit": "dābba",
+     "note": "animal — long vowel + doubled consonant"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Pause forms and helping vowels are described; no exercise trains syllable shapes or initial vowel insertion.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.voicing",
+   "title": "Voiced and voiceless consonants — with gaps",
+   "area": "phonology",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.voicing",
+     "value": "both"
+    }
+   ],
+   "what": "Voicing distinguishes words in stops and fricatives: t/d, s/z, θ/ð, ḫ/ġ, ṭ/ḍ. The system has gaps: b has no voiceless partner p, f has no voiced partner v, k has no voiced partner g (ج is [dʒ] in most Standard pronunciation), and ḥ, ʿ form a voiceless/voiced pharyngeal pair. Loanwords with p or v are written with ب / ف.",
+   "examples": [
+    {
+     "text": "سِرّ / زِرّ",
+     "translit": "sirr / zirr",
+     "note": "secret / button"
+    },
+    {
+     "text": "تِين / دِين",
+     "translit": "tīn / dīn",
+     "note": "figs / religion"
+    },
+    {
+     "text": "بَاص",
+     "translit": "bāṣ",
+     "note": "bus — p of the loanword said and written as b"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Minimal pairs are not drilled; the missing p / v / g is not stated.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_glottalized",
+   "title": "No ejective or implosive consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.glottalized",
+     "value": "none"
+    }
+   ],
+   "what": "No consonant is ejective or implosive. The 'heavy' consonants ص ض ط ظ are pharyngealized (tongue root pulled back), not glottalized, and the glottal stop ء is a consonant of its own, not a feature added to others.",
+   "examples": [
+    {
+     "text": "تَابَ / طَابَ",
+     "translit": "tāba / ṭāba",
+     "note": "he repented / it was good — plain t vs pharyngealized ṭ"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have ejectives or implosives: the emphatics are a different articulation.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_clicks",
+   "title": "No click consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.clicks",
+     "value": "none"
+    }
+   ],
+   "what": "All consonants are made with air from the lungs; there are no clicks. Sounds made far back in the mouth or throat (ق ع ح) are ordinary pulmonic consonants.",
+   "examples": [
+    {
+     "text": "قَلْب",
+     "translit": "qalb",
+     "note": "heart — q is a uvular stop, not a click"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have clicks.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_retroflex",
+   "title": "No retroflex consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.retroflex",
+     "value": "none"
+    }
+   ],
+   "what": "t, d, s, n, l are made with the tongue tip at the teeth or the ridge behind them, never curled back; the second, 'heavy' series ṭ ḍ ṣ ẓ is distinguished by a retracted tongue root (pharyngealization), not by retroflexion.",
+   "examples": [
+    {
+     "text": "تِين / طِين",
+     "translit": "tīn / ṭīn",
+     "note": "figs / clay — dental t vs emphatic ṭ"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have retroflex consonants: the emphatic series is not retroflex.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_aspiration",
+   "title": "Aspiration does not distinguish words",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.aspiration",
+     "value": "none"
+    }
+   ],
+   "what": "Whether t or k is said with a puff of breath never changes a word (it is lightly aspirated automatically). The contrasts that do matter in this place are voicing (t/d) and emphasis (t/ṭ).",
+   "examples": [
+    {
+     "text": "تِين / طِين / دِين",
+     "translit": "tīn / ṭīn / dīn",
+     "note": "figs / clay / religion — t, ṭ and d are the distinctions, not aspiration"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have aspiration contrasts.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_front_rounded",
+   "title": "Three vowel qualities, no front rounded vowels",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.frontRounded",
+     "value": "none"
+    }
+   ],
+   "what": "The vowel system has three qualities, a, i, u, each short or long, plus the diphthongs ay and aw. There are no front rounded vowels (ü, ö) and no separate e or o; emphatic and guttural consonants only colour a towards [ɑ] and i, u slightly.",
+   "examples": [
+    {
+     "text": "بَيْت / بُيُوت",
+     "translit": "bayt / buyūt",
+     "note": "house / houses — a, u, ū and the diphthong ay"
+    },
+    {
+     "text": "كُوب",
+     "translit": "kūb",
+     "note": "cup — long u"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have front rounded vowels or a five-vowel system: three qualities only.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_nasal_vowels",
+   "title": "No nasal vowels",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.nasalVowels",
+     "value": "none"
+    }
+   ],
+   "what": "Vowels are never nasal by themselves: an n after a vowel is always pronounced as a full consonant, as in the tanwīn ending -un, -an, -in.",
+   "examples": [
+    {
+     "text": "كِتَابٌ",
+     "translit": "kitābun",
+     "note": "a book — u followed by a full n"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have nasal vowels.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_vowel_harmony",
+   "title": "No vowel harmony",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.vowelHarmony",
+     "value": "none"
+    }
+   ],
+   "what": "Suffixes do not change their vowels to match the stem: -nā, -ka, -kum, -tu keep their vowels after any stem. The one small assimilation is the pronoun -hu / -hum, which becomes -hi / -him after i, ī or ay.",
+   "examples": [
+    {
+     "text": "كِتَابُنَا / كِتَابُكُمْ",
+     "translit": "kitābunā / kitābukum",
+     "note": "our book / your book — the suffix vowels never adapt"
+    },
+    {
+     "text": "كِتَابُهُ / فِي كِتَابِهِ",
+     "translit": "kitābuhu / fī kitābihi",
+     "note": "his book / in his book — the only assimilation: -hu → -hi after i"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have vowel harmony: suffixes keep their vowels (except -hu → -hi).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_final_devoicing",
+   "title": "No final devoicing",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.finalDevoicing",
+     "value": "none"
+    }
+   ],
+   "what": "Voiced consonants stay voiced at the end of a word and before voiceless ones: in pause وَلَد keeps its d and كَلْب its b.",
+   "examples": [
+    {
+     "text": "وَلَدٌ → وَلَد",
+     "translit": "waladun → walad",
+     "note": "a boy — the final d stays voiced in pause"
+    },
+    {
+     "text": "عَبْد",
+     "translit": "ʿabd",
+     "note": "servant — final bd both voiced"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have final devoicing.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.r_and_l",
+   "title": "Two liquids: r and l",
+   "area": "phonology",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "phon.liquids",
+     "value": "r-and-l"
+    }
+   ],
+   "what": "r (ر, a tapped or trilled tongue-tip r) and l (ل) are separate consonants that distinguish words. l is 'dark' only in the name اللّٰه (after a or u); r is often darkened next to a and u.",
+   "examples": [
+    {
+     "text": "كَلْب / كَرْب",
+     "translit": "kalb / karb",
+     "note": "dog / distress"
+    },
+    {
+     "text": "لَحْم / رَحْم",
+     "translit": "laḥm / raḥm",
+     "note": "meat / womb"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "No minimal-pair practice for r / l.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_palatalization",
+   "title": "No palatalized consonants",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.palatalization",
+     "value": "none"
+    }
+   ],
+   "what": "Consonants have no soft (palatalized) and hard series, and k, t, s, d keep their sound before i and y; consonant changes in Arabic come from emphasis and from the assimilation of al-, not from a following front vowel.",
+   "examples": [
+    {
+     "text": "كِتَاب",
+     "translit": "kitāb",
+     "note": "book — k and t unchanged before i"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have palatalization (soft / hard consonants).",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_vowel_reduction",
+   "title": "Unstressed vowels keep their quality",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.vowelReduction",
+     "value": "none"
+    }
+   ],
+   "what": "In the Standard every vowel keeps its quality and length whether stressed or not: each a, i, u is said as it is written. (Spoken dialects drop many short unstressed vowels, another difference between the two registers.)",
+   "examples": [
+    {
+     "text": "مَدْرَسَة",
+     "translit": "madrasa",
+     "note": "school — the stressed and the unstressed a sound the same"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have vowel reduction: no reduced vowels.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.phon.no_mutation",
+   "title": "No initial consonant mutation",
+   "area": "phonology",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "phon.mutation",
+     "value": "none"
+    }
+   ],
+   "what": "A word's first consonant never changes because of the word before it or its grammatical role; the sound changes Arabic has are the assimilation of the l of al- to sun letters and the vowel changes of patterns.",
+   "examples": [
+    {
+     "text": "بَيْت / فِي بَيْتِي / الْبَيْت",
+     "translit": "bayt / fī baytī / al-bayt",
+     "note": "house / in my house / the house — b never changes"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have initial mutation or consonant gradation.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.morph.fusional",
+   "title": "Fusional inflection: one ending, several meanings",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADJ"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.type",
+     "value": "fusional"
+    },
+    {
+     "feature": "morph.fusion",
+     "value": "fusional"
+    }
+   ],
+   "what": "One ending usually carries several grammatical meanings at once and cannot be split into a part per meaning: in كَتَبْتُ the -tu means 1st person + singular (and, with the stem, perfect); -āni means dual + nominative; -īna masculine + plural + accusative/genitive. With root-and-pattern stems this makes Arabic a fusional language with large paradigms.",
+   "examples": [
+    {
+     "text": "كَتَبْتُ / كَتَبْتَ / كَتَبْتِ",
+     "translit": "katabtu / katabta / katabti",
+     "note": "I wrote / you (m.) wrote / you (f.) wrote — one ending for person, number and gender"
+    },
+    {
+     "text": "مُعَلِّمَانِ / مُعَلِّمَيْنِ",
+     "translit": "muʿallimāni / muʿallimayni",
+     "note": "two teachers (nom.) / (acc.–gen.) — dual and case in one ending"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.overview"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.morph.affix_position",
+   "title": "Mostly suffixes, with prefixes on the imperfect and the article",
+   "area": "morphology",
+   "pos": [
+    "NOUN",
+    "VERB",
+    "ADJ",
+    "PRON"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.affixation",
+     "value": "suffixing"
+    }
+   ],
+   "what": "Inflection is mostly at the end of the word: case, number and gender endings, possessive and object pronouns, and the person endings of the perfect. Grammar is also at the start of the word in the person prefixes of the imperfect (يَـ تَـ أَ نَـ) and the article al-, and inside it in the root patterns.",
+   "examples": [
+    {
+     "text": "كَتَبْتُهَا",
+     "translit": "katab-tu-hā",
+     "note": "I wrote it — stem + subject suffix + object suffix"
+    },
+    {
+     "text": "يَكْتُبُونَ",
+     "translit": "ya-ktub-ūna",
+     "note": "they write — the imperfect has a prefix and a suffix"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.present",
+     "fn.possessive"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.morph.reduplication",
+   "title": "Reduplicated roots and repeated words",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN",
+    "ADV"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "morph.reduplication",
+     "value": "partial-or-both"
+    }
+   ],
+   "what": "Reduplication is not a grammatical inflection, but it builds words: four-consonant verbs repeat a two-consonant syllable (the faʿfaʿa type), mostly for repeated sounds and movements; and a repeated word expresses distribution or gradual progress.",
+   "examples": [
+    {
+     "text": "زَلْزَلَ / زِلْزَال",
+     "translit": "zalzala / zilzāl",
+     "note": "to shake / earthquake — z-l repeated"
+    },
+    {
+     "text": "وَسْوَسَ",
+     "translit": "waswasa",
+     "note": "to whisper (insinuate)"
+    },
+    {
+     "text": "دَخَلُوا وَاحِدًا وَاحِدًا",
+     "translit": "daḫalū wāḥidan wāḥidan",
+     "note": "they came in one by one"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Reduplicated quadriliteral roots and distributive repetition are not mentioned.",
+   "when": "later"
+  },
+  {
+   "id": "ar.morph.no_incorporation",
+   "title": "No noun incorporation",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "morph.incorporation",
+     "value": "none"
+    }
+   ],
+   "what": "An object noun is never built into the verb: it stays a separate word, or becomes an attached pronoun suffix, which is a pronoun and not a noun stem.",
+   "examples": [
+    {
+     "text": "يَأْكُلُ الْخُبْزَ / يَأْكُلُهُ",
+     "translit": "yaʾkulu l-ḫubza / yaʾkuluhu",
+     "note": "he eats the bread / he eats it"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have noun incorporation.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.pron.no_inclusive",
+   "title": "One 'we': no inclusive / exclusive",
+   "area": "morphology",
+   "pos": [
+    "PRON",
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "pron.inclusive",
+     "value": "none"
+    }
+   ],
+   "what": "نَحْنُ 'we' (and the verb forms and suffix -nā) covers both 'we including you' and 'we without you'; context tells which.",
+   "examples": [
+    {
+     "text": "نَحْنُ ذَاهِبُونَ إِلَى السُّوقِ",
+     "translit": "naḥnu ḏāhibūna ʾilā s-sūqi",
+     "note": "we are going to the market — with or without the listener"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.pronoun.subject"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have an inclusive / exclusive 'we'.",
+   "when": "fd.01"
+  },
+  {
+   "id": "ar.nom.no_classifiers",
+   "title": "No numeral classifiers",
+   "area": "numbers",
+   "pos": [
+    "NUM",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.classifiers",
+     "value": "none"
+    }
+   ],
+   "what": "A numeral combines directly with the noun, without a counting word; instead the number decides the noun's case and number (genitive plural after 3–10, accusative singular after 11–99). A mass or collective noun is counted through its unit noun in ة.",
+   "examples": [
+    {
+     "text": "ثَلَاثَةُ كُتُبٍ",
+     "translit": "ṯalāṯatu kutubin",
+     "note": "three books — numeral + noun, no classifier"
+    },
+    {
+     "text": "ثَلَاثُ تُفَّاحَاتٍ",
+     "translit": "ṯalāṯu tuffāḥātin",
+     "note": "three apples — via the unit noun تُفَّاحَة"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have classifiers (measure words).",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.nom.no_alienability",
+   "title": "One kind of possession",
+   "area": "morphology",
+   "pos": [
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "nom.alienability",
+     "value": "none"
+    }
+   ],
+   "what": "All nouns are possessed the same way: body parts, relatives and objects take the same suffixes and the same construct, with no separate 'inalienable' marking.",
+   "examples": [
+    {
+     "text": "يَدِي / أَخِي / سَيَّارَتِي",
+     "translit": "yadī / ʾaḫī / sayyāratī",
+     "note": "my hand / my brother / my car — the same suffix"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.possessive"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have alienable / inalienable possession.",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.verb.no_progressive",
+   "title": "No progressive form",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.progressive",
+     "value": "none"
+    }
+   ],
+   "what": "There is no special form for an action in progress: the imperfect يَكْتُبُ means both 'he writes' and 'he is writing'. An active participle (أَنَا ذَاهِبٌ 'I am going') or, in the past, كَانَ + imperfect can bring out the ongoing sense.",
+   "examples": [
+    {
+     "text": "يَكْتُبُ رِسَالَةً",
+     "translit": "yaktubu risālatan",
+     "note": "he writes / is writing a letter"
+    },
+    {
+     "text": "أَنَا ذَاهِبٌ إِلَى الْبَيْتِ",
+     "translit": "ʾana ḏāhibun ʾilā l-bayti",
+     "note": "I'm going home — participle"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.present",
+     "fn.aspect"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The present lesson (fd.07) uses the imperfect; that it covers 'is doing' is not stated.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.verb.no_perfect",
+   "title": "No separate perfect tense",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "PART"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.perfect",
+     "value": "none"
+    }
+   ],
+   "what": "There is no perfect ('has done') distinct from the past: the perfect stem covers both. The particle قَدْ before it stresses completion or present relevance ('has already'), and لَمْ … بَعْدُ says 'has not yet'.",
+   "examples": [
+    {
+     "text": "قَدْ وَصَلَ الْقِطَارُ",
+     "translit": "qad waṣala l-qiṭāru",
+     "note": "the train has (already) arrived"
+    },
+    {
+     "text": "لَمْ يَصِلْ بَعْدُ",
+     "translit": "lam yaṣil baʿdu",
+     "note": "it has not arrived yet"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.aspect"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "قَدْ and بَعْدُ 'yet' are not lexemes; say it in the overview (fd.00) for learners whose languages have a perfect tense.",
+   "when": "later"
+  },
+  {
+   "id": "ar.verb.no_optative",
+   "title": "No dedicated wish form",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.optative",
+     "value": "none"
+    }
+   ],
+   "what": "Wishes and blessings have no verb form of their own: the past (perfect) is used with wish meaning, لَا + past for a negative wish, and لِـ + jussive for 'let him …'.",
+   "examples": [
+    {
+     "text": "رَحِمَهُ اللّٰهُ",
+     "translit": "raḥimahu llāhu",
+     "note": "may God have mercy on him — a past form as a wish"
+    },
+    {
+     "text": "لَا سَمَحَ اللّٰهُ",
+     "translit": "lā samaḥa llāhu",
+     "note": "God forbid"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Wish formulas are not explained as perfect forms with wish meaning.",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.verb.no_evidentials",
+   "title": "No grammatical evidentiality",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.evidentiality",
+     "value": "none"
+    }
+   ],
+   "what": "The verb does not show how the speaker knows something (seen, heard, inferred); the source is given by words when needed.",
+   "examples": [
+    {
+     "text": "يُقَالُ إِنَّهُ سَافَرَ",
+     "translit": "yuqālu ʾinnahu sāfara",
+     "note": "it is said that he travelled"
+    },
+    {
+     "text": "عَلَى مَا يَبْدُو",
+     "translit": "ʿalā mā yabdū",
+     "note": "apparently"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have evidential verb forms.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.verb.no_mirative",
+   "title": "No mirative",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.mirativity",
+     "value": "none"
+    }
+   ],
+   "what": "Surprise is not a verb category; it is shown by intonation, interjections and the exclamative pattern مَا أَفْعَلَ + accusative ('how … !').",
+   "examples": [
+    {
+     "text": "مَا أَجْمَلَ السَّمَاءَ!",
+     "translit": "mā ʾajmala s-samāʾa!",
+     "note": "how beautiful the sky is!"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "The exclamative pattern is not in the course; say it in the overview (fd.00) for learners whose languages have mirative forms.",
+   "when": "later"
+  },
+  {
+   "id": "ar.verb.no_antipassive",
+   "title": "No antipassive",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.antipassive",
+     "value": "none"
+    }
+   ],
+   "what": "No verb form demotes the object; when the object does not matter it is simply left out.",
+   "examples": [
+    {
+     "text": "هُوَ يَأْكُلُ",
+     "translit": "huwa yaʾkulu",
+     "note": "he is eating — no object, the verb unchanged"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have an antipassive.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.verb.no_applicative",
+   "title": "No applicative",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.applicative",
+     "value": "none"
+    }
+   ],
+   "what": "No affix turns a beneficiary or an instrument into the verb's object; they stay prepositional phrases with لِـ or بِـ. (Some derived forms change what the object is, e.g. form III كَاتَبَ 'write to someone'.)",
+   "examples": [
+    {
+     "text": "كَتَبْتُ لَهُ رِسَالَةً",
+     "translit": "katabtu lahu risālatan",
+     "note": "I wrote him a letter — the beneficiary with لِـ"
+    },
+    {
+     "text": "كَتَبْتُ بِالْقَلَمِ",
+     "translit": "katabtu bi-l-qalami",
+     "note": "I wrote with the pen"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have applicatives.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.verb.no_particle_verbs",
+   "title": "No particle verbs",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "ADP"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.particleVerbs",
+     "value": "none"
+    }
+   ],
+   "what": "No separable prefixes or adverbial particles change a verb's meaning; new meanings come from the root and the derived forms I–X. A fixed preposition belongs to the object and stays before it.",
+   "examples": [
+    {
+     "text": "رَجَعَ / أَرْجَعَ",
+     "translit": "rajaʿa / ʾarjaʿa",
+     "note": "come back / bring back — a derived form, not a particle"
+    },
+    {
+     "text": "بَحَثَ عَنْ",
+     "translit": "baḥaṯa ʿan",
+     "note": "look for — preposition + object"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have particle or prefix verbs.",
+   "when": "fd.07"
+  },
+  {
+   "id": "ar.verb.few_light_verbs",
+   "title": "Few noun + 'do' verbs",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.lightVerbs",
+     "value": "rare"
+    }
+   ],
+   "what": "New verbs are made from roots and patterns, not as noun + 'do / make'. A few periphrases with قَامَ بِـ 'carry out' + verbal noun are frequent in news style.",
+   "examples": [
+    {
+     "text": "زَارَ",
+     "translit": "zāra",
+     "note": "he visited — one verb"
+    },
+    {
+     "text": "قَامَ بِزِيَارَةٍ",
+     "translit": "qāma bi-ziyāratin",
+     "note": "he paid a visit — news style"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have noun + light-verb compounds.",
+   "when": "later"
+  },
+  {
+   "id": "ar.verb.no_object_compounds",
+   "title": "No verb–object compounds",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.objectCompounds",
+     "value": "none"
+    }
+   ],
+   "what": "A verb and its object never fuse into one word; the activity is named with a verbal noun in a construct.",
+   "examples": [
+    {
+     "text": "تَنْظِيفُ الْبَيْتِ",
+     "translit": "tanẓīfu l-bayti",
+     "note": "house-cleaning — cleaning (of) the house"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have verb–object compounds.",
+   "when": "later"
+  },
+  {
+   "id": "ar.verb.no_converbs",
+   "title": "No converbs: ḥāl, conjunctions and وَ instead",
+   "area": "morphology",
+   "pos": [
+    "VERB",
+    "SCONJ"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.converbs",
+     "value": "none"
+    }
+   ],
+   "what": "There is no adverbial verb form ('having done', 'while doing'). Simultaneous action is a ḥāl (an accusative participle, or وَ + clause), a sequence is joined with فَ or ثُمَّ, and time clauses use conjunctions such as عِنْدَمَا and بَعْدَ أَنْ.",
+   "examples": [
+    {
+     "text": "جَاءَ ضَاحِكًا",
+     "translit": "jāʾa ḍāḥikan",
+     "note": "he came laughing"
+    },
+    {
+     "text": "بَعْدَ أَنْ أَكَلَ نَامَ",
+     "translit": "baʿda ʾan ʾakala nāma",
+     "note": "after eating, he slept"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have converbs (adverbial participles / gerunds).",
+   "when": "later"
+  },
+  {
+   "id": "ar.verb.no_honorifics",
+   "title": "No honorific verb forms",
+   "area": "morphology",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "verb.honorifics",
+     "value": "none"
+    }
+   ],
+   "what": "Verbs do not change for the rank of the subject or the listener; respect is shown by titles and formulas, and in high style by a plural of respect.",
+   "examples": [
+    {
+     "text": "تَفَضَّلْ يَا أُسْتَاذُ",
+     "translit": "tafaḍḍal yā ʾustāḏu",
+     "note": "please (come in / go ahead), sir — an ordinary imperative with a title"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have honorific verb forms.",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.syn.demonstrative",
+   "title": "Demonstratives before the noun",
+   "area": "syntax",
+   "pos": [
+    "DET",
+    "PRON"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.demonstrativeNoun",
+     "value": "dem-noun"
+    }
+   ],
+   "what": "هٰذَا / هٰذِهِ 'this' and ذٰلِكَ / تِلْكَ 'that' agree in gender and number and stand before a noun with al-. After a construct or a noun with a suffix they follow it. Without al- on the noun the same words make a sentence ('this is a …').",
+   "examples": [
+    {
+     "text": "هٰذَا الْكِتَابُ",
+     "translit": "hāḏā l-kitābu",
+     "note": "this book"
+    },
+    {
+     "text": "كِتَابُكَ هٰذَا",
+     "translit": "kitābuka hāḏā",
+     "note": "this book of yours"
+    },
+    {
+     "text": "هٰذَا كِتَابٌ",
+     "translit": "hāḏā kitābun",
+     "note": "this is a book"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.demonstrative"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "Order after constructs and suffixed nouns is not practised.",
+   "when": "fd.03"
+  },
+  {
+   "id": "ar.syn.wh_questions",
+   "title": "Question words at the start",
+   "area": "syntax",
+   "pos": [
+    "PRON",
+    "ADV"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.whPosition",
+     "value": "fronted"
+    }
+   ],
+   "what": "Question words (مَنْ who, مَا / مَاذَا what, أَيْنَ where, مَتَى when, كَيْفَ how, لِمَاذَا why, كَمْ how many) open the clause; the rest keeps statement order. مَا asks before a noun or in a verbless clause, مَاذَا before a verb; كَمْ takes an accusative singular noun.",
+   "examples": [
+    {
+     "text": "مَاذَا تَأْكُلُ؟",
+     "translit": "māḏā taʾkulu?",
+     "note": "what are you eating?"
+    },
+    {
+     "text": "كَمْ كِتَابًا عِنْدَكَ؟",
+     "translit": "kam kitāban ʿindaka?",
+     "note": "how many books do you have?"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.question.wh"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "مَا / مَاذَا and كَمْ + accusative singular are not contrasted in exercises.",
+   "when": "fd.10"
+  },
+  {
+   "id": "ar.syn.negative_concord",
+   "title": "Negative concord: 'nobody' needs a negated verb",
+   "area": "syntax",
+   "pos": [
+    "PART",
+    "PRON"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.negativeConcord",
+     "value": "concord"
+    }
+   ],
+   "what": "'Nobody', 'nothing' and 'never' are normally a negated verb + أَحَد 'anyone', شَيْء 'anything' or أَبَدًا 'ever'; these words are not negative by themselves. (With the negation of absence لَا + accusative, لَا أَحَدَ 'nobody' can also open a sentence on its own.)",
+   "examples": [
+    {
+     "text": "لَمْ يَأْتِ أَحَدٌ",
+     "translit": "lam yaʾti ʾaḥadun",
+     "note": "nobody came — not came anyone"
+    },
+    {
+     "text": "لَا أَعْرِفُ شَيْئًا",
+     "translit": "lā ʾaʿrifu šayʾan",
+     "note": "I know nothing"
+    },
+    {
+     "text": "لَا أُدَخِّنُ أَبَدًا",
+     "translit": "lā ʾudaḫḫinu ʾabadan",
+     "note": "I never smoke"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.negation"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The negation lesson teaches لَا … شَيْئًا and لَا … أَبَدًا; أَحَد 'anyone' is not a lexeme.",
+   "when": "fd.08"
+  },
+  {
+   "id": "ar.syn.subject_topic",
+   "title": "Subject-prominent, with fronted topics",
+   "area": "syntax",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.topicProminence",
+     "value": "subject-prominent"
+    }
+   ],
+   "what": "Sentences are built around a grammatical subject that the verb or the predicate agrees with. A topic can be put first and picked up by a pronoun in the rest of the sentence, but it then becomes the grammatical subject (mubtadaʾ) of a nominal sentence and is nominative.",
+   "examples": [
+    {
+     "text": "الْبَيْتُ بَابُهُ كَبِيرٌ",
+     "translit": "al-baytu bābuhu kabīrun",
+     "note": "the house — its door is big"
+    },
+    {
+     "text": "دَخَلَتِ الْبِنْتُ",
+     "translit": "daḫalati l-bintu",
+     "note": "the girl came in — the verb agrees with its subject"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.word.order",
+     "fn.agreement"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The topic + resumptive pronoun sentence is not taught.",
+   "when": "fd.16"
+  },
+  {
+   "id": "ar.syn.oblique_order",
+   "title": "Adverbials after verb and object",
+   "area": "syntax",
+   "pos": [],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "syn.obliquePosition",
+     "value": "VOX"
+    }
+   ],
+   "what": "Prepositional phrases and adverbs of place and time normally follow the verb and its object; they can be fronted for emphasis or to set the scene.",
+   "examples": [
+    {
+     "text": "قَرَأْتُ الْكِتَابَ فِي الْمَكْتَبَةِ أَمْسِ",
+     "translit": "qaraʾtu l-kitāba fī l-maktabati ʾamsi",
+     "note": "I read the book in the library yesterday"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.word.order",
+     "fn.prep.place"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.11"
+  },
+  {
+   "id": "ar.syn.no_v2",
+   "title": "No verb-second rule",
+   "area": "syntax",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.verbSecond",
+     "value": "none"
+    }
+   ],
+   "what": "The verb is not bound to second position: it can open the clause (VSO) or follow the subject (SVO), main and subordinate clauses have the same orders, and a fronted adverb does not move the verb.",
+   "examples": [
+    {
+     "text": "ذَهَبَ أَحْمَدُ أَمْسِ",
+     "translit": "ḏahaba ʾAḥmadu ʾamsi",
+     "note": "Ahmad went yesterday — verb first"
+    },
+    {
+     "text": "قَالَ إِنَّ أَحْمَدَ ذَهَبَ أَمْسِ",
+     "translit": "qāla ʾinna ʾAḥmada ḏahaba ʾamsi",
+     "note": "he said that Ahmad went yesterday — the same order in a subordinate clause"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have a verb-second rule.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.syn.no_serial_verbs",
+   "title": "No serial verbs",
+   "area": "syntax",
+   "pos": [
+    "VERB",
+    "CCONJ"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.serialVerbs",
+     "value": "none"
+    }
+   ],
+   "what": "Two verbs are not simply strung together for one event: a second action is joined with وَ, فَ or ثُمَّ, put in a ḥāl, or made a subordinate verb with لِـ / أَنْ. Only verbs of beginning (أَخَذَ، بَدَأَ) take a following imperfect directly.",
+   "examples": [
+    {
+     "text": "أَخَذَ الْكِتَابَ وَقَرَأَهُ",
+     "translit": "ʾaḫaḏa l-kitāba wa-qaraʾahu",
+     "note": "he took the book and read it"
+    },
+    {
+     "text": "ذَهَبَ لِيَشْتَرِيَ خُبْزًا",
+     "translit": "ḏahaba li-yaštariya ḫubzan",
+     "note": "he went to buy bread"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.connectors"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have serial verbs.",
+   "when": "fd.18"
+  },
+  {
+   "id": "ar.syn.no_switch_reference",
+   "title": "No switch-reference marking",
+   "area": "syntax",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "syn.switchReference",
+     "value": "none"
+    }
+   ],
+   "what": "Verbs do not mark whether the next clause has the same subject; the person, number and gender agreement of each verb shows who acts.",
+   "examples": [
+    {
+     "text": "دَخَلَ وَجَلَسَ",
+     "translit": "daḫala wa-jalasa",
+     "note": "he came in and (he) sat down"
+    },
+    {
+     "text": "دَخَلَ وَجَلَسَتْ",
+     "translit": "daḫala wa-jalasat",
+     "note": "he came in and she sat down — only agreement shows the change"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have switch-reference.",
+   "when": "fd.00"
+  },
+  {
+   "id": "ar.prag.no_speech_levels",
+   "title": "No grammatical speech levels",
+   "area": "pragmatics",
+   "pos": [],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "prag.speechLevels",
+     "value": "none"
+    }
+   ],
+   "what": "There are no polite verb endings or speech levels; the register difference that matters is Standard vs dialect (diglossia), and politeness lies in formulas, titles and indirect requests.",
+   "examples": [
+    {
+     "text": "لَوْ سَمَحْتَ",
+     "translit": "law samaḥta",
+     "note": "please — 'if you allow', an ordinary verb form"
+    }
+   ],
+   "level": "discourse",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.greetings"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "say it in the overview (fd.00) for learners whose languages have speech levels or polite verb forms.",
+   "when": "fd.02"
+  },
+  {
+   "id": "ar.lex.no_sibling_age",
+   "title": "Brother and sister without age",
+   "area": "lexicon",
+   "pos": [
+    "NOUN"
+   ],
+   "kind": "lacks",
+   "typology": [
+    {
+     "feature": "lex.siblingAge",
+     "value": "none"
+    }
+   ],
+   "what": "أَخ 'brother' and أُخْت 'sister' do not say who is older; age is added with the elative adjective when it matters.",
+   "examples": [
+    {
+     "text": "أَخِي الْأَكْبَرُ",
+     "translit": "ʾaḫī l-ʾakbaru",
+     "note": "my elder brother"
+    },
+    {
+     "text": "أُخْتِي الصُّغْرَى",
+     "translit": "ʾuḫtī ṣ-ṣuġrā",
+     "note": "my younger sister"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "أَخ / أُخْت are lexemes (fd.06); elder / younger is not taught.",
+   "when": "fd.06"
+  },
+  {
+   "id": "ar.lex.know",
+   "title": "Two verbs 'to know'",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.knowVerbs",
+     "value": "two"
+    }
+   ],
+   "what": "عَرَفَ (يَعْرِفُ) is 'know' by acquaintance — a person, a place, a language — and is also used for facts in everyday Standard; عَلِمَ (يَعْلَمُ) is 'know (that)', knowledge of a fact, in formal style. In the negative, لَا أَدْرِي 'I don't know' is also common.",
+   "examples": [
+    {
+     "text": "أَعْرِفُ أَحْمَدَ",
+     "translit": "ʾaʿrifu ʾAḥmada",
+     "note": "I know Ahmad"
+    },
+    {
+     "text": "أَعْلَمُ أَنَّهُ هُنَا",
+     "translit": "ʾaʿlamu ʾannahu hunā",
+     "note": "I know that he is here"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Neither عَرَفَ nor عَلِمَ is a lexeme yet.",
+   "when": "later"
+  },
+  {
+   "id": "ar.lex.wear",
+   "title": "One verb 'to wear'",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.wearVerbs",
+     "value": "one"
+    }
+   ],
+   "what": "لَبِسَ (يَلْبَسُ) is said of any clothing, shoes, a hat, glasses or a ring; 'take off' is خَلَعَ.",
+   "examples": [
+    {
+     "text": "لَبِسَ قَمِيصًا / حِذَاءً / نَظَّارَةً",
+     "translit": "labisa qamīṣan / ḥiḏāʾan / naẓẓāratan",
+     "note": "he put on a shirt / shoes / glasses"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "Clothing verbs are not in the course yet.",
+   "when": "later"
+  },
+  {
+   "id": "ar.lex.carry",
+   "title": "One general 'carry'",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.carryVerbs",
+     "value": "general"
+    }
+   ],
+   "what": "حَمَلَ 'carry' covers carrying in the hands, in the arms, on the back or on the head; the manner is added only when needed.",
+   "examples": [
+    {
+     "text": "حَمَلَ الطِّفْلَ",
+     "translit": "ḥamala ṭ-ṭifla",
+     "note": "he carried the child"
+    },
+    {
+     "text": "حَمَلَ الْحَقِيبَةَ عَلَى ظَهْرِهِ",
+     "translit": "ḥamala l-ḥaqībata ʿalā ẓahrihi",
+     "note": "he carried the bag on his back"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "حَمَلَ is not a lexeme yet.",
+   "when": "later"
+  },
+  {
+   "id": "ar.lex.cut",
+   "title": "One general 'cut'",
+   "area": "lexicon",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "lex.cutVerbs",
+     "value": "general"
+    }
+   ],
+   "what": "قَطَعَ 'cut' is the default for any cutting; more specific verbs exist (قَصَّ with scissors, ذَبَحَ slaughter, حَلَقَ shave) but are not required.",
+   "examples": [
+    {
+     "text": "قَطَعَ الْخُبْزَ",
+     "translit": "qaṭaʿa l-ḫubza",
+     "note": "he cut the bread"
+    },
+    {
+     "text": "قَصَّ الْوَرَقَ",
+     "translit": "qaṣṣa l-waraqa",
+     "note": "he cut the paper (with scissors)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "missing",
+   "gap": "قَطَعَ is not a lexeme yet.",
+   "when": "later"
+  },
+  {
+   "id": "ar.sem.green_blue",
+   "title": "Green and blue are two colours",
+   "area": "semantics",
+   "pos": [
+    "ADJ"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.greenBlue",
+     "value": "distinct"
+    }
+   ],
+   "what": "أَخْضَرُ 'green' and أَزْرَقُ 'blue' are separate basic colour words, both of the colour pattern أَفْعَل / فَعْلَاء / فُعْل.",
+   "examples": [
+    {
+     "text": "أَخْضَرُ / خَضْرَاءُ",
+     "translit": "ʾaḫḍaru / ḫaḍrāʾu",
+     "note": "green (m. / f.)"
+    },
+    {
+     "text": "أَزْرَقُ / زَرْقَاءُ",
+     "translit": "ʾazraqu / zarqāʾu",
+     "note": "blue (m. / f.)"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.adjective"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.17"
+  },
+  {
+   "id": "ar.sem.motion",
+   "title": "Direction in the verb, manner added",
+   "area": "semantics",
+   "pos": [
+    "VERB"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.motionFraming",
+     "value": "verb-framed"
+    }
+   ],
+   "what": "The direction of movement is in the verb (دَخَلَ go in, خَرَجَ go out, صَعِدَ go up, نَزَلَ go down, عَبَرَ cross, رَجَعَ come back); the manner, if said, is added as a ḥāl or a phrase.",
+   "examples": [
+    {
+     "text": "دَخَلَ رَاكِضًا",
+     "translit": "daḫala rākiḍan",
+     "note": "he ran in — entered running"
+    },
+    {
+     "text": "عَبَرَ الشَّارِعَ",
+     "translit": "ʿabara š-šāriʿa",
+     "note": "he crossed the street"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.direction"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "دَخَلَ / خَرَجَ are taught (fd.13); صَعِدَ, نَزَلَ, عَبَرَ are not lexemes, and adding the manner as a ḥāl is not taught.",
+   "when": "fd.13"
+  },
+  {
+   "id": "ar.sem.position",
+   "title": "Location without posture verbs",
+   "area": "semantics",
+   "pos": [
+    "ADP"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "sem.positionVerbs",
+     "value": "generic"
+    }
+   ],
+   "what": "Where something is located is said without a verb of posture: the nominal sentence (or كَانَ / يُوجَدُ when a verb is needed) is used for anything, lying, standing or hanging. جَلَسَ 'sit', وَقَفَ 'stand', اِسْتَلْقَى 'lie' describe what bodies do.",
+   "examples": [
+    {
+     "text": "الْكِتَابُ عَلَى الطَّاوِلَةِ",
+     "translit": "al-kitābu ʿalā ṭ-ṭāwilati",
+     "note": "the book is on the table"
+    },
+    {
+     "text": "الصُّورَةُ عَلَى الْجِدَارِ",
+     "translit": "aṣ-ṣūratu ʿalā l-jidāri",
+     "note": "the picture is (hangs) on the wall"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.prep.place"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "covered",
+   "gap": "",
+   "when": "fd.12"
+  },
+  {
+   "id": "ar.numbers.large",
+   "title": "Large numbers by thousands",
+   "area": "numbers",
+   "pos": [
+    "NUM"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "num.largeNumbers",
+     "value": "thousands"
+    }
+   ],
+   "what": "Large numbers group by thousands: أَلْف 1,000, مِلْيُون 1,000,000, مِلْيَار 10⁹. 'Thousand' has a dual أَلْفَانِ and a plural آلَاف, and is counted like any noun.",
+   "examples": [
+    {
+     "text": "مِائَةُ أَلْفٍ",
+     "translit": "miʾatu ʾalfin",
+     "note": "100,000 — a hundred thousand"
+    },
+    {
+     "text": "ثَلَاثَةُ آلَافٍ",
+     "translit": "ṯalāṯatu ʾālāfin",
+     "note": "3,000"
+    }
+   ],
+   "level": "word",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.numerals"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "أَلْف is taught; مِلْيُون and مِلْيَار are not lexemes, and numbers above 1000 are not practised.",
+   "when": "fd.05"
+  },
+  {
+   "id": "ar.time.half_hour",
+   "title": "The clock: 'and a half', 'less a quarter'",
+   "area": "numbers",
+   "pos": [
+    "NUM",
+    "NOUN"
+   ],
+   "kind": "has",
+   "typology": [
+    {
+     "feature": "time.halfHour",
+     "value": "half-past"
+    }
+   ],
+   "what": "The time is the hour as a feminine ordinal plus a fraction: وَالنِّصْفُ 'and the half', وَالرُّبْعُ 'and the quarter', إِلَّا رُبْعًا 'less a quarter'; 'half past two' counts from the hour just passed.",
+   "examples": [
+    {
+     "text": "السَّاعَةُ الثَّانِيَةُ وَالنِّصْفُ",
+     "translit": "as-sāʿatu ṯ-ṯāniyatu wa-n-niṣfu",
+     "note": "half past two"
+    },
+    {
+     "text": "الثَّالِثَةُ إِلَّا رُبْعًا",
+     "translit": "aṯ-ṯāliṯatu ʾillā rubʿan",
+     "note": "a quarter to three"
+    }
+   ],
+   "level": "sentence",
+   "record": null,
+   "model": {
+    "wordFields": [],
+    "paradigm": [],
+    "grammar": [
+     "fn.time.day"
+    ],
+    "exercises": [],
+    "other": ""
+   },
+   "status": "partial",
+   "gap": "The hour with a feminine ordinal is taught; نِصْف / رُبْع (half and quarter hours) are not lexemes.",
+   "when": "fd.14"
   }
  ],
  "wordFeatures": {
@@ -5048,7 +7717,7 @@
      "value": "to a woman"
     }
    ],
-   "note": "The verb and every suffix change too (تَكْتُبُ / تَكْتُبِينَ). Hebrew: אַתָּה / אַתְּ."
+   "note": "The verb and every suffix change too (تَكْتُبُ / تَكْتُبِينَ)."
   },
   {
    "concept": "pron.you.pl",
@@ -5105,7 +7774,7 @@
      "value": "mother's brother"
     }
    ],
-   "note": "Turkish amca / dayı make the same split."
+   "note": "The side of the family is always said."
   },
   {
    "concept": "family.aunt",
@@ -5120,7 +7789,7 @@
      "value": "mother's sister"
     }
    ],
-   "note": "Turkish hala / teyze — but Turkish hala comes from Arabic خَالَة with the other side."
+   "note": "The side of the family is always said."
   },
   {
    "concept": "family.cousin",
@@ -5276,7 +7945,7 @@
     },
     {
      "lemma": "بَلَى",
-     "value": "yes contradicting a negative question (German doch)"
+     "value": "yes contradicting a negative question"
     }
    ],
    "note": "بَلَى has no concept in the lexicon (role only)."
@@ -5321,7 +7990,7 @@
      "value": "which of the two? (choice questions)"
     }
    ],
-   "note": "Same axis as Chinese 或者 / 还是."
+   "note": "The axis is statement vs choice question, not inclusive vs exclusive 'or'."
   },
   {
    "concept": "q.what",
@@ -5400,7 +8069,7 @@
      "value": "unreal — not in the lexicon"
     }
    ],
-   "note": "One English 'if', three Arabic words."
+   "note": "Three words by how likely the condition is."
   },
   {
    "concept": "poss.have",
@@ -5434,7 +8103,7 @@
      "value": "at/in a place (فِي الْمَدْرَسَةِ)"
     }
    ],
-   "note": "Like French chez vs à."
+   "note": "عِنْدَ + a person is 'at someone's place'."
   },
   {
    "concept": "prep.with",
@@ -5449,7 +8118,7 @@
      "value": "with a tool or an ingredient; by (transport)"
     }
    ],
-   "note": "Greek με and German mit cover both."
+   "note": "Accompaniment and instrument are two different prepositions."
   },
   {
    "concept": "prep.until",
@@ -5539,7 +8208,7 @@
      "value": "to please — the thing is the subject: يُعْجِبُنِي (not in the lexicon)"
     }
    ],
-   "note": "أَعْجَبَ works like Greek μου αρέσει; أَحَبَّ also means 'love'."
+   "note": "With أَعْجَبَ the liked thing is the subject and the person who likes it is the object; أَحَبَّ also means 'love'."
   },
   {
    "concept": "verb.drive",
@@ -5644,7 +8313,7 @@
      "value": "hot to the touch: drinks, water, objects"
     }
    ],
-   "note": "Greek ζεστός / καυτερός, German heiß / scharf split differently."
+   "note": "The axis is weather / spice vs temperature to the touch."
   },
   {
    "concept": "adj.old.thing / adj.old.person",
@@ -7351,17 +10020,17 @@
   {
    "concept": "prep.from / conj.than",
    "kind": "merges",
-   "note": "مِنْ, as Greek από."
+   "note": "مِنْ for both ('from' and 'than')."
   },
   {
    "concept": "home.house / place.home",
    "kind": "merges",
-   "note": "بَيْت, as Greek σπίτι."
+   "note": "بَيْت for both."
   },
   {
    "concept": "person.girl / family.daughter",
    "kind": "merges",
-   "note": "بِنْت, as Greek κόρη."
+   "note": "بِنْت for both."
   },
   {
    "concept": "place.park / home.garden",
@@ -7411,7 +10080,7 @@
   {
    "concept": "consonantal roots and patterns",
    "kind": "adds",
-   "note": "Word families by root; no counterpart in el/en/de/ru/tr (Hebrew shares it)."
+   "note": "Word families by consonantal root and pattern."
   },
   {
    "concept": "collective / unit nouns",
@@ -7426,7 +10095,7 @@
   {
    "concept": "verb forms I–X",
    "kind": "adds",
-   "note": "Derivational verb system (like Hebrew binyanim)."
+   "note": "A derivational verb system: up to ten forms from one root."
   },
   {
    "concept": "jussive and subjunctive moods",
@@ -7451,12 +10120,12 @@
   {
    "concept": "number gender polarity",
    "kind": "adds",
-   "note": "3–10 take the opposite gender (shared with Hebrew)."
+   "note": "3–10 take the opposite gender."
   },
   {
    "concept": "part.yes (to a negative question)",
    "kind": "adds",
-   "note": "بَلَى, like German doch."
+   "note": "بَلَى: 'yes' that contradicts a negative question."
   },
   {
    "concept": "Hijri calendar months",
