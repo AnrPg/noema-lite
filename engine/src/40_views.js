@@ -29,9 +29,8 @@ function topbar() {
     h('button', { class: 'iconbtn srcbtn', title: 'Sources', onclick: () => toggleSourcesDeck() }, '📚'),
     h('button', { class: 'iconbtn hide-m', title: 'Theme', onclick: () => { S.settings.theme = isDark() ? 'light' : 'dark'; save(); applyTheme(); route(); } }, '🌓'),
     bellButton(),
-    h('button', { class: 'iconbtn', title: 'Settings', onclick: openSettings }, '⚙️'),
     h('button', { class: 'iconbtn tutor', title: 'Open tutor', onclick: () => openTutor() }, TUTOR.avatar, h('span', {}, 'Tutor')),
-    h('button', { class: 'acchip', title: `${ACCOUNT.name} — account, backup & sync`, onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
+    h('button', { class: 'acchip', title: `${ACCOUNT.name} — profile, ⚙️ settings, backup & sync, ❓ help`, onclick: () => openAccountMenu() }, h('span', {}, ACCOUNT.emoji || '🙂'), h('i', { class: 'syncdot', id: 'syncdot' })));
 }
 
 /* ---------- 🔔 notifications: subjects shared with me (bell + banner) ---------- */
