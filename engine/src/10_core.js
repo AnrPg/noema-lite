@@ -171,6 +171,24 @@ function flushSave() {
   delete cur.apiKey; Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
+/* another device's progress or settings arrived (engine/cloud.js): fold them into what this page holds, so the next save
+   can't write the older copy back over them. Progress only grows: answers, reviews and read sections of both are kept. */
+addEventListener('noema:remote', e => {
+  if (e.detail?.acc !== ACCOUNT.id || !window.NoemaCloud?.mergeState) return;
+  const keys = e.detail.keys || [];
+  if (keys.includes(STATE_KEY) && Noema.kv.get(STATE_KEY) == null) {   // deleted on another device (e.g. a restore without this subject): start empty, don't upload the old copy again
+    for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
+    Object.assign(S, { xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null });
+  } else if (keys.includes(STATE_KEY)) {
+    let st = {}; try { st = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (x) { }
+    const { settings, ...mine } = S; const merged = NoemaCloud.mergeState(mine, st); delete merged.settings;
+    for (const k of Object.keys(S)) if (k !== 'settings') delete S[k];
+    Object.assign(S, { read: {}, res: {}, pb: {}, fc: {}, boss: {} }, merged); delete S.srcOn;
+    if (st.srcOn !== undefined) S.settings.srcOn = st.srcOn;
+  }
+  if (keys.includes(SETTINGS_KEY)) { try { const g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); delete g.apiKey; Object.assign(S.settings, g); } catch (x) { } }
+  if (keys.includes(STATE_KEY) || keys.includes(SETTINGS_KEY)) { if (Noema.kv.get(STATE_KEY) != null) flushSave(); try { renderTopStats(); route(); } catch (x) { } }
+});
 if (CARD_KEYS_MOVED) save();
 addEventListener('pagehide', flushSave);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });

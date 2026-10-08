@@ -246,11 +246,20 @@ async function mockGemini(ctx) {
   ok(Object.keys(srv.state.files).some(k => k.endsWith('packs/demo-imported.json')), 'imported pack stored in private cloud storage');
   // an older version had synced the key in a:settings: the next device keeps it locally and clears it from the cloud
   kvA['a:settings'] = { value: JSON.stringify({ ...JSON.parse(kvA['a:settings'].value), apiKey: 'OLDKEY' }), updated_at: new Date().toISOString() };
+  await pA.keyboard.press('Shift'); await wait(600);   // the learner is using device A right now
   // device B
   const devB = await browser.newContext({ viewport: { width: 390, height: 844 } }); const pB = await devB.newPage(); const EB = []; errs(pB, EB);
   await pB.goto('http://localhost:54329/'); await wait(800);
   await pB.click('text=Sign in / create a cloud account'); await wait(300);
   await pB.fill('input[type=email]', 'anr@example.com'); await pB.fill('input[type=password]', 'secret123'); await pB.click('button:has-text("Sign in")'); await wait(1200);
+  // one device at a time: A is in use right now → B asks first, and saves nothing until "Use here"
+  ok(await pB.isVisible('.noema-inuse') && /Noema is open on/.test(await pB.textContent('.noema-inuse')), 'device B shows "Noema is open on …" while device A is in use');
+  await pB.screenshot({ path: SHOTS + '/b2b_in_use.png' });
+  ok(await pB.evaluate(() => Noema.kv.set(Noema.kv.accountKey('probe'), '1') === false), 'nothing is saved on the waiting device');
+  await pB.click('.noema-inuse button:has-text("Use here")'); await wait(1200);
+  ok(!(await pB.isVisible('.noema-inuse')) && await pB.evaluate(() => NoemaCloud.lease.state === 'mine'), '"Use here" continues on device B');
+  ok(await pA.evaluate(() => NoemaCloud.lease.check()) === 'other' && await pA.isVisible('.noema-inuse') && await pA.evaluate(() => !Noema.kv.set(STATE_KEY, '{}')), 'device A pauses with the same card and saves nothing');
+  ok(await pA.evaluate(() => [...document.body.children].filter(x => !x.classList.contains('noema-inuse-ov')).every(x => x.inert) && document.activeElement?.closest('.noema-inuse')), '… the app underneath is inert and the focus is on “Use here”');
   const chipsB = await pB.$$eval('.noema-chip', c => c.map(x => x.textContent));
   ok(chipsB.some(c => c.includes('Imported Demo')), 'device B sees the pack imported on device A');
   await pB.click('.noema-chip:has-text("Databricks")'); await wait(1600);
@@ -261,6 +270,24 @@ async function mockGemini(ctx) {
   await wait(3500); ok(!srv.state.kv[uidA]['a:settings'].value.includes('OLDKEY') && JSON.parse(srv.state.kv[uidA]['a:settings'].value).goal === 150, '… and removed from the cloud row');
   await pB.evaluate(() => Noema.switchTo(ACCOUNT.id, 'demo-imported')); await wait(1800);
   ok(await pB.evaluate(() => SUBJ.id === 'demo-imported'), 'device B downloads the private pack from cloud storage');
+  // compare-and-swap: a copy changed elsewhere meanwhile (an offline device with a wrong clock, the connector) is combined, never overwritten
+  { const ids = await pB.evaluate(() => ALL_EX.slice(0, 3).map(e => e.id)); const sk = 's:demo-imported:state';
+    await pB.evaluate(async id => { record(EX[id], true); flushSave(); await NoemaCloud.push(ACCOUNT.id); }, ids[0]);
+    const row = srv.state.kv[uidA][sk]; const other = JSON.parse(row.value); other.res[ids[1]] = { n: 3, ok: 2, last: true, t: Date.now() };
+    srv.state.kv[uidA][sk] = { value: JSON.stringify(other), updated_at: '2020-01-01T00:00:00.000Z' };   // written by a device whose clock is years behind
+    await pB.evaluate(async id => { record(EX[id], true); flushSave(); await NoemaCloud.push(ACCOUNT.id); }, ids[2]);
+    const got = JSON.parse(srv.state.kv[uidA][sk].value).res;
+    ok(got[ids[0]] && got[ids[1]]?.n === 3 && got[ids[2]], 'a push never overwrites a newer copy: both devices’ answers are kept (whatever the clocks say)');
+    ok(await pB.evaluate(id => S.res[id]?.n === 3, ids[1]), '… and the open page takes in the other device’s answers, so its next save keeps them');
+    ok(await pB.evaluate(() => !Object.keys(JSON.parse(localStorage.getItem('noema1:' + ACCOUNT.id + ':meta:unsynced') || '{}')).length), 'nothing left waiting to sync');
+    ok(await pB.evaluate(() => { const m = (a, b) => JSON.parse(NoemaCloud.mergeValue('s:x:state', JSON.stringify(a), JSON.stringify(b), false).value);
+      const reset = m({ resetAt: 100, res: {} }, { res: { a: { n: 4, t: 50 }, b: { n: 1, t: 150 } } });
+      const st = JSON.parse(NoemaCloud.mergeValue('a:stats', JSON.stringify({ xp: 30, xpDay: { d1: 10, d2: 20 }, streak: 2, lastDay: 'd2' }), JSON.stringify({ xp: 25, xpDay: { d1: 10, d3: 15 }, streak: 3, lastDay: 'd3' }), false).value);
+      return !reset.res.a && reset.res.b && st.xp === 45 && st.streak === 3 && st.lastDay === 'd3'; }), 'a reset on one device wins over older progress; XP of both devices adds up');
+  }
+  // device A comes back: one tap, and it carries on with what B did
+  await pA.click('.noema-inuse button:has-text("Use here")'); await wait(1200);
+  ok(await pA.evaluate(() => NoemaCloud.lease.state === 'mine') && await pB.evaluate(() => NoemaCloud.lease.check()) === 'other', 'device A takes over again, device B pauses');
   // isolation: a second user sees nothing of the first
   const devC = await browser.newContext(); const pC = await devC.newPage();
   await pC.goto('http://localhost:54329/'); await wait(700); await pC.click('text=Sign in / create a cloud account'); await pC.click('text=No account yet? Create one');
