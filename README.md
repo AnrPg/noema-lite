@@ -42,9 +42,9 @@ python3 tools/db_sync.py                # refresh the SQLite backup database (ve
 python3 tools/db_restore.py list        # what the database holds; restore files/subjects/packs/backups into a NEW folder
 ```
 
-## Two ways to study
-* **📚 Subjects** — ready-made courses made from sources (below).
-* **🧭 Curricula** — type a goal; four AI agents map every prerequisite, the whole goal and its applications as a graph of steps; each step becomes a full subject, prepared on demand from official sources and kept for good. Steps open when their prerequisites are mastered; you review (and may change) each step before it is generated, and can edit, add or remove steps. Or import your own map (with your files per step). **💬 With the Claude app** your own Claude builds, plans and prepares it with your Claude plan instead of API credit — usually the cheapest way for a curriculum. See docs/CURRICULUM.md.
+## How you study
+* **🧭 Curricula** — the way to study. Type a goal; four AI agents map every prerequisite, the whole goal and its applications as a graph of steps; each step becomes a full subject, prepared on demand from official sources and kept for good. Steps open when their prerequisites are mastered; you review (and may change) each step before it is generated, and can edit, add or remove steps. Or import your own map (with your files per step). **💬 With the Claude app** your own Claude builds, plans and prepares it with your Claude plan instead of API credit — usually the cheapest way for a curriculum. See docs/CURRICULUM.md.
+* **📦 Subjects** — courses made from sources (below). A subject you already have can teach a step of a curriculum (📦 *Use a subject I have*: only that step is re-planned to follow it). Subjects on no step wait on the **📚 Shelf** — still studyable, folded away in the subject picker. See docs/CURRICULUM.md §9.
 
 Every chapter shows the sources it comes from; the original files (PDFs, slides, documents, e-books, spreadsheets, videos…) open inside the app at the cited page — see docs/SOURCES.md. Any subject can be renamed, described, hidden or deleted (✏️ on its chip).
 

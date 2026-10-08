@@ -1,12 +1,9 @@
 # 🧭 Curricula — from a goal to a map of steps
 
-noema-lite has two ways to study:
-
-| | 📚 **Subjects** | 🧭 **Curricula** |
-|---|---|---|
-| What | ready-made subject packs (your sources → a course) | a goal → a directed acyclic graph (DAG) of steps |
-| Material | fixed, made once | **generated on demand**, one subject per step, then kept for good |
-| Order | free | prerequisites → the goal → applications; a step opens when its prerequisites are mastered |
+The way to study in noema-lite is a **curriculum**: a goal → a directed acyclic graph (DAG) of steps (prerequisites → the
+goal → applications; a step opens when its prerequisites are mastered). Each step is taught by a **subject pack** —
+generated on demand for that step and then kept for good, or **📦 a subject you already have**, attached to the step (§9).
+Subjects that teach no step wait on the **📚 Shelf** (§9): they stay studyable, but the subject picker leads with 🧭 Curricula.
 
 Every step of a curriculum **is a normal subject pack**: the same home page, theory, exercises (all
 types, picture exercises), flashcards, debug drills, mistakes gym, Socratic tutor, sources, sync and
@@ -261,6 +258,40 @@ steps others have (prepared or reserved), a step handed out is reserved in the s
 publishes it at once (*👥 Shared: every member … sees this step*) and its source files follow from the learner's app; a member
 gets signed links to the owner's material files. Members are never given map / plan tasks.
 
+## 9. 📦 Subjects you already have, on steps · 📚 the Shelf
+A subject you already have — your own, imported, made with Claude, shared with you, from 🌍 Explore or the library — can
+**teach a step** of one of your curricula. That step is then studied from that subject: it is **never generated** and no agent
+touches it (not the background preparer, not the Claude app's queue). Only **that step is re-planned**: its chapters and
+learning goals are redesigned to describe the subject (the planner gets the subject's outline — its chapters, their sections,
+how many exercises — and follows its chapters in order; what the step's role needs and the subject lacks is listed as
+*Not in the pack: …*). Until its new plan is here the step is **closed** (🔄 on the map, no 📖 Study). The **subject never
+changes**: the plan adapts to it. The steps after it keep their plans; their panel says *⚑ … is now taught by your own
+subject — check that this step still fits*.
+* **Where:** on any step — **📦 Use a subject I have** (the warning says exactly what happens) · while creating a map —
+  *Use subjects you already have* (➕ New curriculum and 📥 Import a map): the map is built, then it waits (📦 *Attach subjects*,
+  with ✨ *Suggest matches* by title) before its steps are planned (▶ *Plan the steps now*) · from the Shelf —
+  **🧭 Put on a map…** (choose the curriculum; the matching step is suggested) · by Claude — `noema_save_pack` /
+  `noema_finish_upload` with `curriculum_id` + `step` (the connector writes `{kind: 'assign'}` to the inbox; the app applies it).
+* **By reference:** the subject keeps its id, so its progress, notes and conversations stay — progress in it **is** the step's
+  progress (mastery: every section read + 80 % solved). One subject may teach several steps (the same progress everywhere).
+* **Replacing:** a subject that was prepared for the step goes to the Shelf (nothing is deleted). **↩ Take it off this step**:
+  the subject stays (on the Shelf when no step uses it); the step is planned and prepared the usual way again.
+* **Re-planning:** with an API key / Gemini right away (or **↻ Re-plan now**); with the Claude app, the step's plan task waits
+  in the 💬 bar like any other (it carries the subject's outline). Its plan stays editable (✏️ Edit step) because the
+  subject is never rebuilt.
+* **Sync:** the attachment travels with the curriculum (`n.pack = { id, status: 'ready', assigned: { from, at }, title,
+  description, sections, exercises, outline }`, `n.assignedAt`); `mergePlans` keeps the newer attachment, so an older copy
+  on another device never drops it.
+* **For now:** not in shared curricula (§8) — their steps are prepared for everybody. Language courses are studied on their
+  own and are never attached to steps or shown on the Shelf (docs/SHELF_AND_LANGUAGES.md).
+
+**📚 The Shelf** is every subject that teaches no step of any of your curricula. It is the folded section at the bottom of
+the subject picker (open while you have no curriculum yet; it remembers per device whether you left it open), **📚 Shelf (N)**
+in 🧭 Curricula, and **📚 Open the Shelf** in ⚙️ → Subjects (where every subject says *🧭 on N curriculum steps* or *📚 on the
+Shelf*). Nothing was moved or deleted to make it: subjects that were not on a map simply appear there. A subject that just
+arrived (imported, from Explore, shared with you, made by Claude without a step) lands on the Shelf, with a hint to put it
+on a map.
+
 ## 6. Tests
 `tests/curriculum.js` (scripted Claude + Gemini APIs, Supabase emulator): the four agents incl. a
 repaired graph, 25-node map in three parts, locked/open, chapter details, background preparation of the
@@ -276,6 +307,11 @@ go with it), the invitation in the banner, join, a step fetched ahead and studie
 Claude app (the owner cannot take it, ⏳ on her map) and published on saving, nobody overwrites anybody (app, connector, API,
 files), public → 🌍 Explore curricula → join → prepare, the owner's renamed step reaches the members, removing a version,
 leaving, stopping, phone. `tests/sql_policies.py` checks every rule of §8 on PostgreSQL.
+`tests/shelf.js`: §9 — the picker (🧭 first, the Shelf folded once there is a map), attaching a subject to a step (the warning,
+only that step re-planned from the subject's outline, closed meanwhile, the next step flagged not re-planned, progress shared,
+studying it), taking it off, a prepared subject going to the Shelf, sync of an attachment, the creation hold (Claude app and
+API key, ✨ suggest matches), the connector (`curriculum_id` + `step` → the step; without → the Shelf; where each subject is),
+🧭 Put on a map… from the Shelf, phone.
 `tests/curriculum_import.js`: the parser (tree art, nesting + independent, Mermaid, ⇄, JSON, Greek outline, loops, file
 matching), then in the browser: a pasted tree with two files → only the planner runs (with the files' pages, outline and
 first lines) → a step with a PDF built by Claude from the uploaded file (no web_fetch, packaged back as its source) → a

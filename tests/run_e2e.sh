@@ -22,5 +22,6 @@ node "$ROOT/tests/curriculum.js" "$T"
 node "$ROOT/tests/curriculum_import.js" "$T"
 node "$ROOT/tests/curriculum_app.js" "$T"
 node "$ROOT/tests/curriculum_share.js" "$T"
+node "$ROOT/tests/shelf.js" "$T"
 node "$ROOT/tests/sources.js" "$T"
 python3 "$ROOT/tests/sql_policies.py"   # skips itself when no PostgreSQL is installed

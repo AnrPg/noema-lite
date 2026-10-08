@@ -97,7 +97,7 @@ const cur = p => p.evaluate(() => NoemaCurriculum.list(Noema.account?.id || Obje
 
   console.log('— build a curriculum with Claude (4 agents)');
   const U = await signUp(browser, 'eva@example.com', 'Eva'); const p = U.p;
-  ok(await p.locator('.cm-mode').count() === 2, 'the subject picker offers two modes: 📚 Subjects and 🧭 Curricula');
+  ok(await p.locator('.cm-mode').count() === 1 && await p.locator('details.pick-shelf').count() === 1, 'the subject picker leads with 🧭 Curricula; the other subjects wait on the 📚 Shelf');
   await p.click('.cm-mode:has-text("Curricula")'); await wait(300);
   ok(/No curriculum yet/.test(await p.locator('.noema-ovbox').last().innerText()), 'the library starts empty');
   await p.click('button:has-text("New curriculum")'); await wait(300);
