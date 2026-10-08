@@ -43,6 +43,8 @@
   const uid = () => session()?.user.id;
   const accId = () => 'u_' + uid();
   const enc = s => encodeURIComponent(s);
+  // safety net: the Gemini key stays on the device (loader.js GeminiKey), so a:settings is never pushed with it
+  const noSecrets = (k, v) => { if (k !== 'a:settings' || v == null) return v; try { const o = JSON.parse(v); if (o && typeof o === 'object' && 'apiKey' in o) { delete o.apiKey; return JSON.stringify(o); } } catch (e) { } return v; };
 
   const NoemaCloud = window.NoemaCloud = {
     session, status, onStatus(f) { st.listeners.push(f); },
@@ -87,7 +89,7 @@
       const pre = 'noema1:' + acc + ':'; const mt = jget(pre + 'meta:mtime', {});
       const keys = [...st.pending]; st.pending.clear();
       const rows = [], dels = [];
-      keys.forEach(k => { const v = localStorage.getItem(pre + k); if (v == null) dels.push(k); else rows.push({ user_id: uid(), key: k, value: v, updated_at: new Date(mt[k] || Date.now()).toISOString() }); });
+      keys.forEach(k => { const v = noSecrets(k, localStorage.getItem(pre + k)); if (v == null) dels.push(k); else rows.push({ user_id: uid(), key: k, value: v, updated_at: new Date(mt[k] || Date.now()).toISOString() }); });
       st.syncing = true; emit();
       try {
         for (let i = 0; i < rows.length; i += 50) await call('/rest/v1/noema_kv?on_conflict=user_id,key', { method: 'POST', body: rows.slice(i, i + 50), headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, keepalive });

@@ -136,16 +136,18 @@ function mdLite(s) {
 
 /* ---------- state ---------- */
 /* State is namespaced: per-subject progress  → noema1:<account>:s:<subject>:state
-                        per-account settings  → noema1:<account>:a:settings   (API key, model, theme, goal…)
+                        per-account settings  → noema1:<account>:a:settings   (model, theme, goal…)
+                        the Gemini key        → noema-device:geminiKey:<account>  (this device only, Noema.geminiKey)
                         XP / streak across all subjects → Noema.stats (noema1:<account>:a:stats)            */
 const STATE_KEY = Noema.kv.subjectKey('state'), SETTINGS_KEY = Noema.kv.accountKey('settings');
 const SETTINGS_DEFAULT = { apiKey: DEFAULT_KEY, model: '', models: [], theme: 'auto', sound: true, goal: 120, chunk: true };
+Noema.geminiKey.migrate(ACCOUNT.id);   // the Gemini key lives on this device only (never in a:settings → never synced)
 const S = (() => {
   let s = {}, g = {};
   try { s = JSON.parse(Noema.kv.get(STATE_KEY) || '{}'); } catch (e) { s = {}; }
   try { g = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { g = {}; }
   const st = Object.assign({ xp: 0, read: {}, res: {}, pb: {}, fc: {}, boss: {}, last: null }, s);
-  st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null });
+  delete g.apiKey; st.settings = Object.assign({}, SETTINGS_DEFAULT, g, { srcOn: s.srcOn ?? null }, Noema.geminiKey.get(ACCOUNT.id) ? { apiKey: Noema.geminiKey.get(ACCOUNT.id) } : {});
   delete st.srcOn; delete st.xpDay; delete st.streak; delete st.lastDay;
   return st;
 })();
@@ -165,10 +167,11 @@ const CARD_KEYS_MOVED = (() => {
 let saveT;
 function flushSave() {
   clearTimeout(saveT);
-  const { settings, ...rest } = S; const { srcOn, ...glob } = settings;
+  const { settings, ...rest } = S; const { srcOn, apiKey, ...glob } = settings;
   Noema.kv.set(STATE_KEY, JSON.stringify({ ...rest, srcOn }));
+  Noema.geminiKey.set(ACCOUNT.id, apiKey);   // this device only; the default key is not stored
   let cur = {}; try { cur = JSON.parse(Noema.kv.get(SETTINGS_KEY) || '{}'); } catch (e) { }
-  Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
+  delete cur.apiKey; Noema.kv.set(SETTINGS_KEY, JSON.stringify(Object.assign(cur, glob)));
 }
 function save() { clearTimeout(saveT); saveT = setTimeout(flushSave, 150); }
 if (CARD_KEYS_MOVED) save();
@@ -2765,7 +2768,7 @@ const ACC_VIEWS = {
     const gstat = h('div', { class: 'tiny' }, S.settings.model ? 'Current model: ' + S.settings.model : 'The model is detected on first use.');
     const geminiBox = h('div', {},
       !S.settings.apiKey ? h('div', { class: 'callout warn' }, h('span', { class: 'ci' }, '🔑'), h('b', { class: 't' }, 'No Gemini key yet — the AI tutor is off'), h('div', {}, 'It is free and takes 2 minutes. ', h('button', { class: 'linkish', onclick: () => openGuide('gemini') }, 'Show me how'))) : null,
-      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Saved to your account and synced privately to your devices.' : 'Stored only in this browser, for this profile.')),
+      h('div', { class: 'field' }, h('label', {}, 'Gemini API key ', tip('Your personal key from Google AI Studio (free). Used only for calls from this app straight to Google. Never shared with other profiles or users.')), key, h('div', { class: 'tiny' }, ACCOUNT.kind === 'cloud' ? 'Stored only in this browser. Add it once on each device.' : 'Stored only in this browser, for this profile.')),
       h('div', { class: 'field' }, h('label', {}, 'Gemini model'), sel,
         h('div', { class: 'row' },
           h('button', { class: 'btn small', onclick: async () => { S.settings.apiKey = key.value.trim(); gstat.textContent = 'Detecting…'; try { const ms = await detectModels(); sel.innerHTML = ''; ms.forEach(m => sel.append(h('option', { value: m, selected: m === S.settings.model }, m))); gstat.textContent = `Found ${ms.length} models · picked ${S.settings.model}`; } catch (e) { gstat.textContent = '⚠️ ' + e.message; } } }, '🔍 Detect models'),
@@ -3053,7 +3056,7 @@ const GUIDES = {
   cloudUser: { icon: '☁️', title: 'Use a cloud account (study from anywhere)', who: 'You and your friends', steps: [
     `Open the website${SITE_URL ? ' (' + SITE_URL + ')' : ''} on any device → **☁️ Sign in / create a cloud account**.`,
     'Create the account (email + password). If asked, confirm the email from your inbox, then sign in.',
-    'Add your Gemini key once (⚙️ Settings). Progress, flashcards, conversations and settings now sync automatically.',
+    'Add your Gemini key (⚙️ Settings) once on each device: it stays in that browser. Progress, flashcards, conversations and settings sync automatically.',
     'Already studied locally? In the local app: account menu → ☁️ Cloud → sign in → **⬆️ Copy this profile into my cloud account**.'],
     notes: ['Your data is private to your account (row-level security). A daily snapshot is kept for 30 days.'] },
   cloudOwner: { icon: '🛠️', title: 'Set up the cloud (owner, once)', who: 'Only the owner of this installation', steps: [

@@ -106,6 +106,21 @@
     },
   };
 
+  /* ---------------- the Gemini key: on THIS device only, like the Claude key (engine/claude.js Key) ----------------
+     Never in a:settings, so never synced and never in a backup without secrets. Older versions kept it in a:settings
+     (synced) → migrate() moves it here once and rewrites a:settings without it, which also clears the cloud row. */
+  const GeminiKey = {
+    k: acc => 'noema-device:geminiKey:' + acc,
+    get(acc = KV.acc) { return ls.get(this.k(acc)) || ''; },
+    set(acc, key) { key = String(key || '').trim(); if (key && key !== (LOCAL.geminiKey || window.DEFAULT_GEMINI_KEY)) ls.set(this.k(acc), key); else ls.del(this.k(acc)); },
+    migrate(acc = KV.acc) {
+      const sk = KV.accountKey('settings', acc); const s = jget(sk, null);
+      if (!s || typeof s !== 'object' || !('apiKey' in s)) return;
+      if (s.apiKey && !this.get(acc)) this.set(acc, s.apiKey);
+      delete s.apiKey; KV.set(sk, JSON.stringify(s));
+    },
+  };
+
   /* ---------------- LEGACY: data written before the app was renamed noema-lite ----------------
      The ONLY place where the old names appear. Data is copied (never deleted) on first start. */
   const LEGACY = { kvPrefix: 'lq1:', idbName: 'learning-quest', backupFormats: ['learning-quest-backup'], packFormats: ['lq-pack'], schema: 'lq.conversation/v1' };
@@ -977,7 +992,7 @@
     async collect(acc, { includeSecrets = false } = {}) {
       const a = getAccount(acc) || { id: acc };
       const data = KV.accountData(acc);
-      if (!includeSecrets && data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; data['a:settings'] = JSON.stringify(s); } catch (e) { } }
+      if (data['a:settings']) { try { const s = JSON.parse(data['a:settings']); delete s.apiKey; if (includeSecrets && GeminiKey.get(acc)) s.apiKey = GeminiKey.get(acc); data['a:settings'] = JSON.stringify(s); } catch (e) { } }   // the Gemini key lives on the device (GeminiKey)
       const packs = (await importedPacks(acc)).map(p => ({ id: p.subject.id, pack: p }));
       const conversations = window.NoemaConvos ? await NoemaConvos.list(acc, { includeDeleted: true }).catch(() => []) : [];
       return { format: 'noema-lite-backup', version: 2, conversationSchema: window.NoemaConvos?.SCHEMA, conversations, app: CFG.appName, appVersion: VERSION, createdAt: new Date().toISOString(),
@@ -1005,7 +1020,7 @@
       if (mode === 'replace') ls.keys(pre).forEach(k => { if (!k.slice(pre.length).startsWith('meta:')) ls.del(k); });
       for (const [suf, val] of Object.entries(obj.data)) {
         let v = val;
-        if (suf === 'a:settings' && !obj.includesSecrets) { try { const cur = jget(pre + 'a:settings', {}); const nv = JSON.parse(val); if (cur.apiKey && !nv.apiKey) nv.apiKey = cur.apiKey; v = JSON.stringify(nv); } catch (e) { } }
+        if (suf === 'a:settings') { try { const nv = JSON.parse(val); if (obj.includesSecrets && nv.apiKey) GeminiKey.set(targetAcc, nv.apiKey); delete nv.apiKey; v = JSON.stringify(nv); } catch (e) { } }   // without secrets: this device's key stays
         KV.set(pre + suf, typeof v === 'string' ? v : JSON.stringify(v));
       }
       for (const p of obj.importedPacks || []) await IDB.put('packs', targetAcc + '|' + p.id, p.pack);
@@ -1059,7 +1074,7 @@
 
   /* ---------------- public API ---------------- */
   const Noema = window.Noema = {
-    version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
+    version: VERSION, config: CFG, local: LOCAL, registry: REG, kv: KV, geminiKey: GeminiKey, stats: Stats, idb: IDB, backup: Backup, autoBackup: AutoBackup,
     account: null, subject: null, pack: null, el, esc, jget, jset, convos: window.NoemaConvos || null, preloadedConvos: [],
     accounts: allAccounts, getAccount, saveLocalAccount, subjectsFor, pickSubject, pickAccount, importPackFile, importPack, exportPackage, overlay, claudeSetupView: (acc, opts) => claudeSetupView(acc, opts || {}), claudeGuide: opts => claudeGuide(Noema.account?.id || KV.acc, opts || {}), notes: Notes, shareRow,
     share(s) { return shareDialog(Noema.account.id, s); },
@@ -1086,6 +1101,7 @@
     const accs = allAccounts();
     if (!acc) acc = accs.length === 1 ? accs[0] : await pickAccount();
     KV.acc = acc.id; Noema.account = acc;
+    GeminiKey.migrate(acc.id);   // before the first pull, so a synced a:settings never replaces the only copy of the key
     if (acc.kind === 'cloud' && window.NoemaCloud) { try { await Promise.race([NoemaCloud.pull(acc.id), new Promise(r => setTimeout(r, 7000))]); } catch (e) { console.warn('[Noema] cloud pull failed — using local cache', e); } }
     if (window.NoemaCloud && acc.kind === 'cloud') NoemaCloud.startAutoSync(acc.id);   // already in the pickers: curricula and shares change keys there
     Notes.start(acc.id);
